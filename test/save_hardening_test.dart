@@ -85,6 +85,74 @@ void main() {
       expect(await first, isTrue);
       expect(fs.calls, 1, reason: 'only one write must reach disk');
     });
+
+    // #1952: een tweede Cmd/Ctrl+S tijdens een lopende opslag werd stilletjes
+    // genegeerd. Nu wordt hij onthouden en opnieuw uitgevoerd nadat de eerste
+    // klaar is — mits het tabblad nog vuil is (de gebruiker kan ondertussen
+    // hebben getypt, of de eerste opslag kan al schoon hebben gemaakt).
+    test(
+      'a second save during a save is queued and re-runs if still dirty (#1952)',
+      () async {
+        final md = MarkdownService();
+        final gate = Completer<void>();
+        final fs = _BlockingFileService(gate, md);
+        final n = DeckNotifier(md, fs);
+        n.loadDeck(_deck(), filePath: '/tmp/x.md');
+        n.addSlide(SlideType.bullets);
+
+        final first = n.save(); // acquires the lock, blocks on the gate
+        // De gebruiker typt door tijdens de opslag — het tabblad blijft vuil
+        // na de eerste opslag (userEdited-pad).
+        n.addSlide(SlideType.bullets);
+        final second = await n.save(); // lock held → queued, returns false
+        expect(second, isFalse);
+
+        gate.complete();
+        expect(await first, isTrue);
+
+        // De herhaling vuurt in de finally van de eerste save — unawaited,
+        // dus pompen tot hij landt. De gate is al compleet, dus de tweede
+        // schrijfbeurt is direct. Na de schrijfbeurt zelf volgt nog de
+        // state-update (isDirty = false), dus pompen tot het tabblad schoon is.
+        while (fs.calls < 2 || n.state.isDirty) {
+          await Future<void>.delayed(Duration.zero);
+        }
+        expect(fs.calls, 2, reason: 'queued save re-ran');
+        expect(n.state.isDirty, isFalse, reason: 'deck is clean after re-save');
+      },
+    );
+
+    test(
+      'a second save during a save is not re-run if the deck is already clean (#1952)',
+      () async {
+        final md = MarkdownService();
+        final gate = Completer<void>();
+        final fs = _BlockingFileService(gate, md);
+        final n = DeckNotifier(md, fs);
+        n.loadDeck(_deck(), filePath: '/tmp/x.md');
+        n.addSlide(SlideType.bullets);
+
+        final first = n.save(); // acquires the lock, blocks on the gate
+        final second = await n.save(); // lock held → queued, returns false
+        expect(second, isFalse);
+
+        gate.complete();
+        expect(await first, isTrue);
+        expect(fs.calls, 1, reason: 'first save wrote once');
+        expect(
+          n.state.isDirty,
+          isFalse,
+          reason: 'no edits during save → clean',
+        );
+
+        // De wachtrij staat, maar het tabblad is schoon — de herhaling slaat
+        // over. Pompen een paar keer om zeker te zijn dat er niets meer komt.
+        for (var i = 0; i < 5; i++) {
+          await Future<void>.delayed(Duration.zero);
+        }
+        expect(fs.calls, 1, reason: 'no re-save when deck is already clean');
+      },
+    );
   });
 
   group('transactional save (#1949)', () {
