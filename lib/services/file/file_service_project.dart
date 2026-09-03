@@ -111,8 +111,18 @@ extension _FileServiceProject on FileService {
       );
     }
 
-    final markdown = _md.generateDeck(updatedDeck);
-    await writeStringAtomic(File(filePath), markdown);
+    // De markdown wordt hier gegenereerd (en de zegelhash vastgelegd) vóór de
+    // sidecars worden geschreven: het zegel heeft de hash van de nieuwe `.md`
+    // nodig. De `.md` zelf wordt pas als laatste atomair weggeschreven — dat
+    // is het commit-punt. Faalt een sidecar, dan staat de oude `.md` nog op
+    // schijf met de oude sidecars — consistent (#1949).
+    final markdown = _md.generateDeck(
+      updatedDeck,
+      // #1950: kon een databestand niet geschreven worden, dan houdt de
+      // `.md` de cijfers inline — een `source:`-verwijzing naar een
+      // ontbrekend bestand is gegevensverlies.
+      inlineChartData: chartWarnings.isNotEmpty,
+    );
     updatedDeck = DocumentIntegrity.recordWrittenBytes(updatedDeck, markdown);
     // Annotaties, notities, de MIAUW-dispositie en het zegel leven in eigen
     // sidecars, zodat de `.md` pure, leesbare Marp blijft.
@@ -121,6 +131,7 @@ extension _FileServiceProject on FileService {
     await _writeMiauwSidecar(updatedDeck, filePath);
     await _writeSealSidecar(updatedDeck, filePath);
     await _writeDismissalsSidecar(updatedDeck, filePath);
+    await writeStringAtomic(File(filePath), markdown);
     return (deck: updatedDeck, chartWarnings: chartWarnings);
   }
 

@@ -75,6 +75,32 @@ void main() {
     expect(warning.whileSaving, isTrue);
   });
 
+  test('een opslag die de cijfers niet kwijt kan, houdt ze inline in de .md '
+      'en laat het tabblad vuil (#1950)', () async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final tab = container.read(tabsProvider).current!;
+    final project = Directory(p.join(temp.path, 'project'));
+    await project.create();
+    tab.deckNotifier
+      ..loadDeck(
+        deckWithUnwritableChart(),
+        filePath: p.join(project.path, 'deck.md'),
+      )
+      ..markDirty();
+
+    expect(await tab.deckNotifier.save(), isTrue);
+
+    // De cijfers staan nog in de .md — geen verwijzing naar een leeg bestand.
+    final md = await File(p.join(project.path, 'deck.md')).readAsString();
+    expect(md, contains('"data"'));
+    expect(md, contains('120'));
+    expect(md, contains('138'));
+
+    // Het tabblad is niet schoon: de opslag is niet compleet.
+    expect(tab.deckNotifier.state.isDirty, isTrue);
+  });
+
   test('een schone opslag zet geen signaal', () async {
     final container = ProviderContainer();
     addTearDown(container.dispose);

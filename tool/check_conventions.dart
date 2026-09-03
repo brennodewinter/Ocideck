@@ -404,7 +404,9 @@ const Map<String, int> classSizeBaseline = {
   // en die komt uit `_d()` — een instantiemethode, want de taalcode hangt aan
   // deze klasse. Een top-level variant zou de titel of de taal moeten
   // doorgeven en de andere kiezers uit de rij halen.
-  'lib/services/file_service.dart#FileService': 2848,
+  'lib/services/file_service.dart#FileService': 2849, // +1 (#1949): sidecars
+  // vóór de .md schrijven (commit-punt) — markdown + recordWrittenBytes
+  // gaan vooraf, zodat het zegel de juiste hash draagt.
   // Procesverbetering Phase 2/8/9: statistical chart painters (control,
   // histogram, Pareto, run, box, probability, DOE) live as an extension on
   // this State via chart_preview_improvement.dart. Raising rather than a
@@ -500,7 +502,7 @@ const Map<String, int> classSizeBaseline = {
   // `state` en is dus niet uit de klasse te tillen zonder een eigen laag te
   // bouwen die groter is dan de functie die hem vraagt.
   'lib/state/deck_provider.dart#DeckNotifier':
-      1376, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
+      1380, // +14 (#978 Blok C): applyProvenance; +15 (#1162): de dunne
   // setSlideJump-delegator (de berekening zelf zit in slidesWithJump,
   // slide_anchors.dart) — muteert via `currentState`/`_mutate` en hoort in de
   // klasse. +16 (#1162): de even dunne setMenuBlockTarget-delegator (berekening
@@ -515,6 +517,9 @@ const Map<String, int> classSizeBaseline = {
   // +8: idempotente dispose() (hardening #1478) — vangt een dubbele dispose
   // bij een teardown-race fail-safe af; een dispose-override kan niet uit de
   // klasse getild worden (roept super.dispose()).
+  // +4 (#1950): _reportChartWarnings retourneert of er grafiekdata-waarschuwingen
+  // waren, zodat _saveToPath/saveAs het tabblad vuil kunnen houden — de cijfers
+  // staan dan inline in de .md als vangnet. Twee var-declaraties + één return.
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen

@@ -228,19 +228,17 @@ void main() {
 
     // Untouched: a deck must not be able to write outside its own folder.
     expect(await outside.readAsString(), '{"x":["geheim"],"series":[]}');
-    // En de gebruiker hoort het: de markdown draagt na deze opslag alleen nog
-    // de verwijzing, dus die cijfers staan nergens meer op schijf.
+    // En de gebruiker hoort het: de opslag is niet compleet.
     expect(written.chartWarnings, ['../geheim.json']);
 
-    // De cijfers staan nergens meer: het blok draagt alleen de verwijzing.
-    // Toets dat op de velden die de cijfers dragen, niet op "er komt nergens
-    // een 1 voor" — dat laatste stond hier eerder en viel om zodra de front
-    // matter een `ocideck_format: 1` kreeg. Zo'n toets slaagt bovendien ook
-    // als het hele grafiekblok zou verdwijnen, en bewijst dus te weinig.
+    // #1950: kon het databestand niet geschreven worden, dan houdt de .md
+    // de cijfers inline als vangnet — een verwijzing naar een ontbrekend
+    // bestand is gegevensverlies. Het blok draagt dus zowel de verwijzing
+    // als de cijfers.
     final md = await File(p.join(project.path, 'deck.md')).readAsString();
     expect(md, contains('"source": "../geheim.json"'));
-    expect(md, isNot(contains('"x"')));
-    expect(md, isNot(contains('"series"')));
+    expect(md, contains('"x"'));
+    expect(md, contains('"series"'));
   });
 
   test('een extern gewijzigd databestand wordt niet overschreven', () async {
