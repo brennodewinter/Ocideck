@@ -1665,6 +1665,9 @@ const _dutchSourceAddMt = <String, String>{
   'Verwijder donker logo': 'Neħħi logo skur',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'L-isfond tal-islajd huwa skur, iżda l-logo m\'għandux variant skur. Il-logo huwa kważi inviżibbli fuq l-islajd. Issettja logo skur fl-issettjar tal-preżentazzjoni.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Ikklikkja b\'Ctrl/Cmd jew Shift biex tagħżel aktar minn fajl wieħed.',
+  'Presentaties openen': 'Iftaħ preżentazzjonijiet',
   'Aangeboden als download:': 'Offrut bħala tniżżil:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Il-browser ma aċċettax it-tniżżil. Ippermetti t-tniżżil għal dan is-sit u erġa\' pprova.',

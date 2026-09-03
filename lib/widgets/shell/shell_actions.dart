@@ -154,56 +154,80 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
   if (result == null || !context.mounted) return;
   // Bladeren… sluit het dialoog eerst; daarna pas de native kiezer — anders
   // blijft .md grijs onder een geneste Flutter-modal (macOS).
-  final String path;
+  final List<String> paths;
   final int? selectIndex;
   if (result.browseRequested) {
-    final picked = await ref
+    paths = await ref
         .read(fileServiceProvider)
-        .pickMarkdownFile(
+        .pickMarkdownFiles(
           initialDirectory: settings.libraries.isEmpty
               ? null
               : settings.libraries.first.path,
         );
-    if (picked == null || !context.mounted) return;
-    path = picked;
+    if (paths.isEmpty || !context.mounted) return;
     selectIndex = null;
   } else {
-    final chosen = result.path;
-    if (chosen == null) return;
-    path = chosen;
-    selectIndex = result.slideIndex;
+    if (result.paths.isEmpty) return;
+    paths = result.paths;
+    // De dia-index komt van een zoektreffer binnen één bestand; bij een stapel
+    // is er geen treffer om naartoe te springen.
+    selectIndex = paths.length == 1 ? result.slideIndex : null;
   }
+  await _openPickedPaths(context, ref, paths, selectIndex: selectIndex);
+}
+
+/// Open elk gekozen bestand in zijn eigen tabblad, in de gekozen volgorde; het
+/// laatste blijft het actieve. Eén onleesbaar bestand mag de rest niet
+/// afbreken — dezelfde afspraak als bij sleep-en-neerzetten.
+///
+/// De rijke weigering (met de importroute als uitweg) hoort bij één bestand:
+/// die biedt precies dát bestand ter import aan, en bij een stapel weet niemand
+/// welk. Bij meerdere blijft per bestand de gerichte, kale melding staan.
+Future<void> _openPickedPaths(
+  BuildContext context,
+  WidgetRef ref,
+  List<String> paths, {
+  int? selectIndex,
+}) async {
+  final single = paths.length == 1;
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
-  final openResult = await ref
-      .read(tabsProvider.notifier)
-      .openFileByPath(path, selectIndex: selectIndex);
+  final tabs = ref.read(tabsProvider.notifier);
   // Wacht op de geladen module-stand vóór de melding gekozen wordt: vlak na de
   // start leest de reveal anders nog de ladende default (#1209).
   final importModuleAvailable = await importModuleRevealedWhenReady(ref);
-  if (!context.mounted) return;
-  // openFileByPath routet een leesbaar niet-marp `.md` naar een documenttabblad.
-  // Alleen échte weigeringen (onleesbaar, of een Office-bestand zonder marp)
-  // komen hier als snackbar — met de importroute als uitweg waar die past.
-  _reportOpenFailure(
-    messenger,
-    l10n,
-    openResult,
-    reason: ref.read(openFailureProvider),
-    sourceName: path,
-    importModuleAvailable: importModuleAvailable,
-    // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
-    onImport: () async {
-      final bytes = await File(path).readAsBytes();
-      if (!context.mounted) return;
-      await importPresentation(
-        context,
-        ref,
-        fileOverride: (bytes: bytes, name: p.basename(path)),
-      );
-    },
-    onOpenSettings: () => SettingsDialog.show(context),
-  );
+  for (final path in paths) {
+    final openResult = await tabs.openFileByPath(
+      path,
+      selectIndex: single ? selectIndex : null,
+    );
+    if (!context.mounted) return;
+    // openFileByPath routet een leesbaar niet-marp `.md` naar een
+    // documenttabblad. Alleen échte weigeringen (onleesbaar, of een
+    // Office-bestand zonder marp) komen hier als snackbar — met de importroute
+    // als uitweg waar die past.
+    _reportOpenFailure(
+      messenger,
+      l10n,
+      openResult,
+      reason: ref.read(openFailureProvider),
+      sourceName: single ? path : null,
+      importModuleAvailable: importModuleAvailable,
+      // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
+      onImport: single
+          ? () async {
+              final bytes = await File(path).readAsBytes();
+              if (!context.mounted) return;
+              await importPresentation(
+                context,
+                ref,
+                fileOverride: (bytes: bytes, name: p.basename(path)),
+              );
+            }
+          : null,
+      onOpenSettings: () => SettingsDialog.show(context),
+    );
+  }
 }
 
 /// Open-pad voor web: de browser-picker levert de bestandsinhoud als bytes

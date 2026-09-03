@@ -1672,6 +1672,9 @@ const _dutchSourceAddEl = <String, String>{
   'Verwijder donker logo': 'Αφαίρεση σκοτεινού λογοτύπου',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Το φόντο της διαφάνειας είναι σκοτεινό, αλλά το λογότυπο δεν έχει σκοτεινή παραλλαγή. Το λογότυπο είναι σχεδόν αόρατο στη διαφάνεια. Ορίστε ένα σκοτεινό λογότυπο στις ρυθμίσεις παρουσίασης.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Κάντε κλικ με Ctrl/Cmd ή Shift για να επιλέξετε πολλά αρχεία.',
+  'Presentaties openen': 'Άνοιγμα παρουσιάσεων',
   'Aangeboden als download:': 'Προσφέρθηκε ως λήψη:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Το πρόγραμμα περιήγησης δεν δέχτηκε τη λήψη. Επιτρέψτε τις λήψεις για αυτόν τον ιστότοπο και δοκιμάστε ξανά.',

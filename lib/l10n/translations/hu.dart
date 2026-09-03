@@ -1649,6 +1649,9 @@ const _dutchSourceAddHu = <String, String>{
   'Verwijder donker logo': 'Sötét logo eltávolítása',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'A dia háttere sötét, de a logónak nincs sötét változata. A dia logója szinte láthatatlan. Állíts be sötét logót a prezentációs beállításokban.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Kattints Ctrl/Cmd vagy Shift billentyűvel több fájl kiválasztásához.',
+  'Presentaties openen': 'Prezentációk megnyitása',
   'Aangeboden als download:': 'Letöltésként felajánlva:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'A böngésző nem fogadta el a letöltést. Engedélyezze a letöltéseket ehhez az oldalhoz, és próbálja újra.',

@@ -1651,6 +1651,9 @@ const _dutchSourceAddHr = <String, String>{
   'Verwijder donker logo': 'Ukloni tamno logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Pozadina slajda je tamna, ali logo nema tamnu varijantu. Logo je na slajdu gotovo nevidljiv. Postavite tamni logo u postavkama prezentacije.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Kliknite uz Ctrl/Cmd ili Shift da odaberete više datoteka.',
+  'Presentaties openen': 'Otvori prezentacije',
   'Aangeboden als download:': 'Ponuđeno kao preuzimanje:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Preglednik nije prihvatio preuzimanje. Dopustite preuzimanja za ovo mjesto i pokušajte ponovno.',

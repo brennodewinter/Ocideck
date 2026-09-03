@@ -1653,6 +1653,9 @@ const _dutchSourceAddSk = <String, String>{
   'Verwijder donker logo': 'Odstrániť tmavé logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Pozadie snímky je tmavé, ale logo nemá tmavú variantu. Logo je na snímke takmer neviditeľné. Nastavte tmavé logo v nastaveniach prezentácie.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Kliknite s Ctrl/Cmd alebo Shift na výber viacerých súborov.',
+  'Presentaties openen': 'Otvoriť prezentácie',
   'Aangeboden als download:': 'Ponúknuté na stiahnutie:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Prehliadač stiahnutie neprijal. Povoľte sťahovanie pre túto stránku a skúste to znova.',

@@ -1645,6 +1645,9 @@ const _dutchSourceAddLv = <String, String>{
   'Verwijder donker logo': 'Noņemt tumšu logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Slaida fons ir tumšs, bet logotipam nav tumša varianta. Logotips uz slaida ir gandrīz neredzams. Iestatiet tumšu logotipu prezentācijas iestatījumos.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Noklikšķiniet ar Ctrl/Cmd vai Shift, lai izvēlētos vairākus failus.',
+  'Presentaties openen': 'Atvērt prezentācijas',
   'Aangeboden als download:': 'Piedāvāts kā lejupielāde:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Pārlūks lejupielādi nepieņēma. Atļaujiet lejupielādes šai vietnei un mēģiniet vēlreiz.',

@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:path/path.dart' as p;
 import '../../models/library_folder.dart';
@@ -15,23 +16,33 @@ import '../resizable_dialog_box.dart';
 import 'open_kind_chrome.dart';
 import 'open_preview_pane.dart';
 
-/// What the open dialog returns: a presentation path and, optionally, the
-/// index of a slide to jump to (when the user picked a search hit).
+/// What the open dialog returns: the chosen files and, optionally, the index of
+/// a slide to jump to (when the user picked a search hit).
+///
+/// [paths] draagt er meestal één, maar meerdere zodra de gebruiker er meerdere
+/// aanwees — elk bestand krijgt dan zijn eigen tabblad. Een dia-index hoort bij
+/// één bestand: bij een stapel is er geen treffer om naartoe te springen.
 ///
 /// [browseRequested] means the user chose "Bladeren…" — the dialog closes
 /// *before* the native file picker runs. Nesting an `NSOpenPanel` under a
 /// Flutter `AlertDialog` leaves `.md` greyed out on macOS even with a custom
 /// panel; the caller must open the picker after this result.
 class OpenSearchResult {
-  final String? path;
+  final List<String> paths;
   final int? slideIndex;
   final bool browseRequested;
 
-  const OpenSearchResult(this.path, {this.slideIndex})
-    : browseRequested = false;
+  OpenSearchResult(String path, {this.slideIndex})
+    : paths = [path],
+      browseRequested = false;
+
+  /// Meerdere bestanden tegelijk, in de volgorde waarin de lijst ze toonde.
+  OpenSearchResult.multiple(this.paths)
+    : slideIndex = null,
+      browseRequested = false;
 
   const OpenSearchResult.browse()
-    : path = null,
+    : paths = const [],
       slideIndex = null,
       browseRequested = true;
 }
@@ -105,6 +116,16 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
   /// aangewezen. Alleen in gebruik als [OpenPresentationDialog.showPreview].
   String? _previewPath;
 
+  /// De bestanden die met Ctrl/Cmd- of Shift-klik zijn aangewezen om
+  /// tegelijk te openen. Als pad bewaard en niet als rij-index: de zichtbare
+  /// lijst verschuift bij elke aanslag in het zoekveld en bij elke wissel van
+  /// het soortfilter, en een index zou dan een ander bestand aanwijzen.
+  final Set<String> _selected = {};
+
+  /// Waarvandaan Shift+klik zijn bereik meet: het laatst met Ctrl/Cmd
+  /// aangewezen bestand. Null zolang er niets is aangewezen.
+  String? _anchor;
+
   @override
   void initState() {
     super.initState();
@@ -166,6 +187,47 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       );
       await _scan();
     }
+  }
+
+  /// Klik met modifier: Shift = bereik, Ctrl/Cmd = toevoegen/verwijderen,
+  /// anders openen. Spiegelt de slidelijst, waar de gebruiker dezelfde
+  /// handgreep al kent — zie `SlideListPanel._onSlideTap`.
+  ///
+  /// Een kale klik opent meteen, ook wanneer er al iets is aangewezen: dat is
+  /// het gedrag dat deze lijst altijd had, en het is de handeling die de
+  /// gebruiker hier in negen van de tien gevallen wil. Wie meerdere bestanden
+  /// bedoelt, houdt een modificatietoets vast en drukt daarna op "Openen (n)".
+  void _onRowTap(List<String> visiblePaths, int index) {
+    final keys = HardwareKeyboard.instance;
+    final path = visiblePaths[index];
+    if (keys.isShiftPressed) {
+      // Zonder anker (Shift als eerste handeling) is het bereik die ene rij.
+      final anchorIndex = _anchor == null ? -1 : visiblePaths.indexOf(_anchor!);
+      final from = anchorIndex < 0 ? index : anchorIndex;
+      final lo = from < index ? from : index;
+      final hi = from < index ? index : from;
+      setState(() {
+        _selected.addAll(visiblePaths.sublist(lo, hi + 1));
+        _anchor ??= path;
+      });
+    } else if (keys.isControlPressed || keys.isMetaPressed) {
+      setState(() {
+        if (!_selected.remove(path)) _selected.add(path);
+        _anchor = path;
+      });
+    } else {
+      Navigator.pop(context, OpenSearchResult(path));
+    }
+  }
+
+  /// Open alles wat is aangewezen, in de volgorde waarin de lijst het toonde.
+  void _openSelection(List<String> visiblePaths) {
+    final chosen = [
+      for (final path in visiblePaths)
+        if (_selected.contains(path)) path,
+    ];
+    if (chosen.isEmpty) return;
+    Navigator.pop(context, OpenSearchResult.multiple(chosen));
   }
 
   Future<void> _browse() async {
@@ -339,7 +401,20 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
                 ),
               ),
             ),
-            Align(alignment: Alignment.centerRight, child: handle),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l10n.d(
+                      'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.',
+                    ),
+                    style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                handle,
+              ],
+            ),
           ],
         ),
       ),
@@ -353,6 +428,16 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           onPressed: () => Navigator.pop(context),
           child: Text(l10n.t('cancel')),
         ),
+        // Alleen zichtbaar zodra er meerdere aangewezen zijn: zonder selectie
+        // opent een klik op de rij al, en een knop die hetzelfde nog eens
+        // belooft maakt het scherm alleen drukker.
+        if (_selected.isNotEmpty)
+          FilledButton.icon(
+            onPressed: () =>
+                _openSelection([for (final e in visible) e.$1.primary.path]),
+            icon: const Icon(Icons.folder_open_outlined, size: 16),
+            label: Text('${l10n.d('Openen')} (${_selected.length})'),
+          ),
       ],
       // Knoppen uit elkaar: Bladeren links, Annuleren rechts. (Geen Spacer in
       // de actions — die gaan in een OverflowBar en accepteren geen Expanded.)
@@ -446,6 +531,7 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
       );
     }
 
+    final visiblePaths = [for (final e in visible) e.$1.primary.path];
     return ListView.separated(
       itemCount: visible.length,
       separatorBuilder: (_, _) => const Divider(height: 1),
@@ -460,6 +546,8 @@ class _OpenPresentationDialogState extends State<OpenPresentationDialog> {
           hits: hits,
           showKind: showKind,
           showPreview: previewShown,
+          selected: _selected.contains(info.primary.path),
+          onTap: () => _onRowTap(visiblePaths, i),
           onPreview: (path) => setState(() => _previewPath = path),
           onOpen: (path) => Navigator.pop(context, OpenSearchResult(path)),
           onOpenAt: (index) => Navigator.pop(
@@ -512,7 +600,17 @@ class _FileRow extends StatelessWidget {
   /// Of het soortlabel achter de titel staat; zie de aanroeper.
   final bool showKind;
   final bool showPreview;
+
+  /// Of dit bestand is aangewezen om samen met andere geopend te worden.
+  final bool selected;
+
+  /// Klik op de rij. De dialoog leest de modificatietoetsen: kaal openen,
+  /// met Ctrl/Cmd of Shift de selectie veranderen.
+  final VoidCallback onTap;
   final ValueChanged<String> onPreview;
+
+  /// Open dit ene bestand meteen, buiten de selectie om — de identieke-kopie-
+  /// chip en een trefferregel in een document wijzen elk één bestand aan.
   final ValueChanged<String> onOpen;
   final ValueChanged<int> onOpenAt;
 
@@ -523,6 +621,8 @@ class _FileRow extends StatelessWidget {
     required this.hits,
     required this.showKind,
     required this.showPreview,
+    required this.selected,
+    required this.onTap,
     required this.onPreview,
     required this.onOpen,
     required this.onOpenAt,
@@ -538,32 +638,54 @@ class _FileRow extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InkWell(
-            onTap: () => onOpen(file.path),
-            borderRadius: BorderRadius.circular(6),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-              child: Row(
-                children: [
-                  Icon(
-                    markdownKindIcon(file.kind),
-                    size: 18,
-                    color: AppTheme.brandFg,
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(child: _titleAndPlace(l10n)),
-                  if (showPreview) ...[
-                    const SizedBox(width: 4),
-                    IconButton(
-                      icon: const Icon(Icons.visibility_outlined, size: 16),
-                      tooltip: l10n.d('Voorbeeld tonen'),
-                      visualDensity: VisualDensity.compact,
-                      onPressed: () => onPreview(file.path),
+          Semantics(
+            selected: selected,
+            child: InkWell(
+              onTap: onTap,
+              borderRadius: BorderRadius.circular(6),
+              child: Container(
+                decoration: BoxDecoration(
+                  // Aangewezen rijen krijgen dezelfde blauwe tint die de app
+                  // elders voor een info-vlak gebruikt; die schakelt mee met
+                  // licht en donker.
+                  color: selected ? AppTheme.infoBg : null,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+                child: Row(
+                  children: [
+                    Icon(
+                      markdownKindIcon(file.kind),
+                      size: 18,
+                      color: AppTheme.brandFg,
                     ),
+                    const SizedBox(width: 10),
+                    Expanded(child: _titleAndPlace(l10n)),
+                    if (showPreview) ...[
+                      const SizedBox(width: 4),
+                      IconButton(
+                        icon: const Icon(Icons.visibility_outlined, size: 16),
+                        tooltip: l10n.d('Voorbeeld tonen'),
+                        visualDensity: VisualDensity.compact,
+                        onPressed: () => onPreview(file.path),
+                      ),
+                    ],
+                    const SizedBox(width: 8),
+                    // Het pijltje belooft "dit opent"; bij een aangewezen rij
+                    // is dat niet meer waar — die wacht op "Openen (n)".
+                    selected
+                        ? Icon(
+                            Icons.check_circle,
+                            size: 16,
+                            color: AppTheme.accentFg,
+                          )
+                        : Icon(
+                            Icons.north_east,
+                            size: 16,
+                            color: AppTheme.slate500,
+                          ),
                   ],
-                  const SizedBox(width: 8),
-                  Icon(Icons.north_east, size: 16, color: AppTheme.slate500),
-                ],
+                ),
               ),
             ),
           ),

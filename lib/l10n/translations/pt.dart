@@ -1675,6 +1675,9 @@ const _dutchSourceAddPt = <String, String>{
   'Verwijder donker logo': 'Remover logo escuro',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'O fundo do slide é escuro, mas o logo não tem uma variante escura. O logo é quase invisível no slide. Defina um logo escuro nas configurações de apresentação.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Clique com Ctrl/Cmd ou Shift para escolher vários ficheiros.',
+  'Presentaties openen': 'Abrir apresentações',
   'Aangeboden als download:': 'Oferecido como transferência:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'O navegador não aceitou a transferência. Permita transferências para este site e tente novamente.',

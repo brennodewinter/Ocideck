@@ -1663,6 +1663,9 @@ const _dutchSourceAddRo = <String, String>{
   'Verwijder donker logo': 'Șterge logo întunecat',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Fundalul slide-ului este întunecat, dar logo-ul nu are o variantă întunecată. Logo-ul este aproape invizibil pe slide. Setați un logo întunecat în setările prezentării.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Faceți clic cu Ctrl/Cmd sau Shift pentru a alege mai multe fișiere.',
+  'Presentaties openen': 'Deschide prezentările',
   'Aangeboden als download:': 'Oferit ca descărcare:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Browserul nu a acceptat descărcarea. Permiteți descărcările pentru acest site și încercați din nou.',

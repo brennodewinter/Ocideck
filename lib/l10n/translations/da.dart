@@ -1647,6 +1647,9 @@ const _dutchSourceAddDa = <String, String>{
   'Verwijder donker logo': 'Fjern mørkt logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Diasbaggrunden er mørk, men logoet har ingen mørk variant. Logoet er næsten usynligt på dias. Indstil et mørkt logo i præsentationsindstillingerne.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Klik med Ctrl/Cmd eller Shift for at vælge flere filer.',
+  'Presentaties openen': 'Åbn præsentationer',
   'Aangeboden als download:': 'Tilbudt som download:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Browseren tog ikke imod downloaden. Tillad downloads for dette websted, og prøv igen.',
