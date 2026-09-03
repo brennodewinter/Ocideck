@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
 import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/services/recovery_service.dart';
 
@@ -295,4 +296,54 @@ void main() {
       expect(second.existsSync(), isTrue);
     },
   );
+
+  // #1953: een schrijffout naar de herstelmap mag niet stil blijven. De eerste
+  // fout meldt zich via onWriteError; daarna niet herhalen. Een geslaagde
+  // schrijfbeurt reset de vlag, zodat een volgende fout wéér meldt.
+  group('write error callback (#1953)', () {
+    test(
+      'the first write failure fires onWriteError, the second does not',
+      () async {
+        // Plaats een bestand waar de herstelmap zou moeten zijn — _dir()
+        // faalt omdat er al een bestand staat, niet een map.
+        final blocked = Directory(p.join(tempDir.path, 'blocked'));
+        File(blocked.path).writeAsStringSync('not a dir');
+        final svc = RecoveryService(baseDir: blocked);
+        var calls = 0;
+        svc.onWriteError = (_) => calls++;
+
+        await svc.save(snap('a'));
+        expect(calls, 1, reason: 'first failure must fire callback');
+        await svc.save(snap('a'));
+        expect(calls, 1, reason: 'second failure must not repeat');
+      },
+    );
+
+    test(
+      'a successful write resets the flag so the next failure fires',
+      () async {
+        // Eerst een blokkade, dan weer schrijfbaar.
+        final blocked = Directory(p.join(tempDir.path, 'blocked2'));
+        File(blocked.path).writeAsStringSync('not a dir');
+        final svc = RecoveryService(baseDir: blocked);
+        var calls = 0;
+        svc.onWriteError = (_) => calls++;
+
+        await svc.save(snap('a'));
+        expect(calls, 1, reason: 'first failure fires');
+
+        // Haal de blokkade weg en maak de map aan.
+        File(blocked.path).deleteSync();
+        await blocked.create(recursive: true);
+        await svc.save(snap('a'));
+        expect(calls, 1, reason: 'successful write does not fire');
+
+        // Blokkeer opnieuw — nu moet de callback wéér vuren.
+        blocked.deleteSync(recursive: true);
+        File(blocked.path).writeAsStringSync('not a dir');
+        await svc.save(snap('a'));
+        expect(calls, 2, reason: 'failure after success fires again');
+      },
+    );
+  });
 }

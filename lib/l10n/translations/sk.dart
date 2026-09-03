@@ -1648,6 +1648,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Obnovenie po páde teraz nefunguje — priečinok obnovenia nie je zapisovateľný. Uložte svoju prácu ručne.',
   'Donker logo kiezen': 'Vybrať tmavé logo',
   'Geen donker logo ingesteld': 'Nie je nastavené tmavé logo',
   'Verwijder donker logo': 'Odstrániť tmavé logo',

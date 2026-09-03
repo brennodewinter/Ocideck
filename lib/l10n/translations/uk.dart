@@ -1657,6 +1657,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Відновлення після збою зараз не працює — папку відновлення не можна записати. Збережіть свою роботу вручну.',
   'Donker logo kiezen': 'Обрати темне лого',
   'Geen donker logo ingesteld': 'Темне лого не встановлено',
   'Verwijder donker logo': 'Видалити темне лого',

@@ -791,6 +791,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     _listenChartDataWarning(context, ref);
     _listenSidecarSkipped(context, ref);
     _listenSealTamper(context, ref);
+    _listenRecoveryWriteError(context, ref);
 
     _listenUnsavedWork(context, ref);
 

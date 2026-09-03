@@ -674,6 +674,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Rekuperashon di crash no ta funshoná awor — e map di rekuperashon no ta skribí. Warda bo trabou manualmente.',
   'Donker logo kiezen': 'Skoha logo skuru',
   'Geen donker logo ingesteld': 'Sin logo skuru establesí',
   'Verwijder donker logo': 'Kita logo skuru',

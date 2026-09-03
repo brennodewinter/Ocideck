@@ -121,6 +121,13 @@ class RecoveryService {
   RecoveryService({Directory? baseDir})
     : _resolveDir = baseDir != null ? (() async => baseDir) : _defaultDir;
 
+  /// #1953: een schrijffout naar de herstelmap mag niet stil blijven. De eerste
+  /// fout in een sessie (of de eerste ná een geslaagde schrijfbeurt) meldt zich
+  /// via deze callback aan de UI; daarna niet elke 25 s herhalen. Een geslaagde
+  /// schrijfbeurt reset de vlag, zodat een volgende fout wélt meldt.
+  void Function(Object error)? onWriteError;
+  bool _lastWriteFailed = false;
+
   static Future<Directory> _defaultDir() async {
     final support = await getApplicationSupportDirectory();
     return Directory(p.join(support.path, 'recovery'));
@@ -175,8 +182,15 @@ class RecoveryService {
           _file(dir, snapshot.id),
           jsonEncode(snapshot.toJson()),
         );
+        _lastWriteFailed = false;
       } catch (e) {
         logWarning('RecoveryService.save: write recovery snapshot', e);
+        // #1953: de eerste fout (of de eerste ná een geslaagde schrijfbeurt)
+        // meldt zich één keer aan de UI; daarna niet elke 25 s herhalen.
+        if (!_lastWriteFailed) {
+          _lastWriteFailed = true;
+          onWriteError?.call(e);
+        }
         // Autosave mag nooit de app verstoren.
       }
     });

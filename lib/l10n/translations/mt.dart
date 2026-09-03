@@ -1660,6 +1660,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Ir-rikupru wara crash mhu jaħdimx issa — il-folder ta\' rikupru mhuwiex jista\' jinkiteb. Salvax xogħol tiegħek manwalment.',
   'Donker logo kiezen': 'Agħżel logo skur',
   'Geen donker logo ingesteld': 'L-ebda logo skur mhux issettjat',
   'Verwijder donker logo': 'Neħħi logo skur',

@@ -1641,6 +1641,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Kraschåterställning fungerar inte just nu — återställningsmappen är inte skrivbar. Spara ditt arbete manuellt.',
   'Donker logo kiezen': 'Välj mörkt logo',
   'Geen donker logo ingesteld': 'Inget mörkt logo valt',
   'Verwijder donker logo': 'Ta bort mörkt logo',

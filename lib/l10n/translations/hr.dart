@@ -1646,6 +1646,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Oporavak nakon rušenja trenutno ne radi — mapa za oporavak nije zapisiva. Spremite svoj rad ručno.',
   'Donker logo kiezen': 'Odaberi tamno logo',
   'Geen donker logo ingesteld': 'Nema postavljenog tamnog loga',
   'Verwijder donker logo': 'Ukloni tamno logo',

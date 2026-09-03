@@ -165,6 +165,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Start with one empty tab
     final tab = _createTab();
     state = TabsState(tabs: [tab], selectedIndex: 0);
+    // #1953: een schrijffout naar de herstelmap mag niet stil blijven. De
+    // eerste fout in een sessie meldt zich één keer in de UI.
+    _recovery.onWriteError = (_) {
+      if (mounted) _ref.read(recoveryWriteErrorProvider.notifier).state = true;
+    };
     // Zonder bestandssysteem (web) is er geen herstelmap; de tick zou elke
     // 25s voor niets serialiseren, dus start hem daar helemaal niet.
     if (supportsLocalProjectFolders) {
@@ -1018,6 +1023,11 @@ final sealTamperWarningProvider = StateProvider<SealTamperWarning?>(
 final chartDataWarningProvider = StateProvider<ChartDataWarning?>(
   (ref) => null,
 );
+
+/// #1953: het crashherstel kon zijn snapshot niet naar schijf schrijven. Eén
+/// keer per sessie (of per herstel na een geslaagde schrijfbeurt) — niet elke
+/// 25 s herhalen. De schil luistert en toont een snackbar.
+final recoveryWriteErrorProvider = StateProvider<bool>((ref) => false);
 
 /// Zet wat het openen te melden had door naar de schil.
 ///

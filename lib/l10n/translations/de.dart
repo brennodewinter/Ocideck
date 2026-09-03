@@ -675,6 +675,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Absturzwiederherstellung funktioniert derzeit nicht — der Wiederherstellungsordner ist nicht beschreibbar. Speichere deine Arbeit manuell.',
   'Donker logo kiezen': 'Dunkles Logo wählen',
   'Geen donker logo ingesteld': 'Kein dunkles Logo eingestellt',
   'Verwijder donker logo': 'Dunkles Logo entfernen',

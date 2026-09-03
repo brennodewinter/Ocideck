@@ -1672,6 +1672,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Níl aisghabháil tuairteála ag obair faoi láthair — ní féidir scríobh chuig fillteán na haisghabhála. Sábháil do chuid oibre de láimh.',
   'Donker logo kiezen': 'Roghnaigh logo dorcha',
   'Geen donker logo ingesteld': 'Níl logo dorcha socraithe',
   'Verwijder donker logo': 'Bain logo dorcha',

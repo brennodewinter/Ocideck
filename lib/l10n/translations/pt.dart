@@ -1670,6 +1670,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'A recuperação de crash não está funcionando agora — a pasta de recuperação não é gravável. Salve seu trabalho manualmente.',
   'Donker logo kiezen': 'Escolher logo escuro',
   'Geen donker logo ingesteld': 'Sem logo escuro definido',
   'Verwijder donker logo': 'Remover logo escuro',

@@ -1654,6 +1654,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Odzyskiwanie po awarii teraz nie działa — folder odzyskiwania nie jest zapisywalny. Zapisz swoją pracę ręcznie.',
   'Donker logo kiezen': 'Wybierz ciemne logo',
   'Geen donker logo ingesteld': 'Brak ustawionego ciemnego logo',
   'Verwijder donker logo': 'Usuń ciemne logo',

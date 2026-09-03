@@ -1667,6 +1667,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Η ανάκτηση μετά από κατάρρευση δεν λειτουργεί τώρα — ο φάκελος ανάκτησης δεν είναι εγγράψιμος. Αποθηκεύστε τη δουλειά σας χειροκίνητα.',
   'Donker logo kiezen': 'Επιλογή σκοτεινού λογοτύπου',
   'Geen donker logo ingesteld': 'Δεν ορίστηκε σκοτεινό λογότυπο',
   'Verwijder donker logo': 'Αφαίρεση σκοτεινού λογοτύπου',

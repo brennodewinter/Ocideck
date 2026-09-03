@@ -675,6 +675,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'La récupération après crash ne fonctionne pas — le dossier de récupération n\'est pas inscriptible. Enregistrez votre travail manuellement.',
   'Donker logo kiezen': 'Choisir un logo sombre',
   'Geen donker logo ingesteld': 'Aucun logo sombre défini',
   'Verwijder donker logo': 'Supprimer le logo sombre',

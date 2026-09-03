@@ -1645,6 +1645,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Absturz-Widerherstellig funktioniere grad nöd — de Widerherstelligsordner isch nöd schribbar. Speichere dini Arbet vo Hand.',
   'Donker logo kiezen': 'Dunkels Logo wääle',
   'Geen donker logo ingesteld': 'Kei dunkels Logo gstellt',
   'Verwijder donker logo': 'Dunkels Logo entferne',

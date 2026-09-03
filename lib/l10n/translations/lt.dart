@@ -1649,6 +1649,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Crashherstel werkt nu niet — de herstelmap is niet beschrijfbaar. Sla je werk handmatig op.':
+      'Avarinis atstatymas dabar neveikia — atstatymo aplankas nėra įrašomas. Išsaugokite savo darbą rankiniu būdu.',
   'Donker logo kiezen': 'Pasirinkti tamsų logotipą',
   'Geen donker logo ingesteld': 'Tamsus logotipas nenustatytas',
   'Verwijder donker logo': 'Pašalinti tamsų logotipą',
