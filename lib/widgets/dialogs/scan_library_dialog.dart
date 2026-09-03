@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import '../../models/markdown_kind.dart';
 import '../../platform/platform_features.dart';
@@ -78,6 +79,11 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
   /// aangewezen. Alleen in gebruik als [ScanLibraryDialog.showPreview].
   String? _previewPath;
 
+  /// De met het toetsenbord aangewezen rij (null = niets gekozen).
+  int? _focusedIndex;
+
+  final _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -86,8 +92,8 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
 
   @override
   void dispose() {
-    // Stop the background walk if the dialog is closed mid-scan.
     _cancelled = true;
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -129,6 +135,70 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
     }).toList();
   }
 
+  /// Pijltje/Enter/Home/End op de dialoog — zie [OpenPresentationDialog].
+  KeyEventResult _onDialogKey(FocusNode node, KeyEvent event) {
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    final visible = _visibleList();
+    if (visible.isEmpty) return KeyEventResult.ignored;
+    switch (event.logicalKey) {
+      case LogicalKeyboardKey.arrowDown:
+      case LogicalKeyboardKey.arrowRight:
+        _focusIndex((_focusedIndex ?? -1) + 1, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.arrowUp:
+      case LogicalKeyboardKey.arrowLeft:
+        _focusIndex((_focusedIndex ?? visible.length) - 1, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.home:
+        _focusIndex(0, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.end:
+        _focusIndex(visible.length - 1, visible);
+        return KeyEventResult.handled;
+      case LogicalKeyboardKey.enter:
+        final i = _focusedIndex ?? 0;
+        if (i >= visible.length) return KeyEventResult.ignored;
+        Navigator.pop(context, visible[i].primary.path);
+        return KeyEventResult.handled;
+      default:
+        return KeyEventResult.ignored;
+    }
+  }
+
+  void _focusIndex(int i, List<DuplicateInfo<ScanHit>> visible) {
+    final clamped = i.clamp(0, visible.length - 1);
+    setState(() {
+      _focusedIndex = clamped;
+      if (widget.showPreview) {
+        _previewPath = visible[clamped].primary.path;
+      }
+    });
+    _scrollToIndex(clamped, visible.length);
+  }
+
+  List<DuplicateInfo<ScanHit>> _visibleList() {
+    final found = _matching();
+    return [
+      for (final info in found)
+        if (_kind.accepts(info.primary.kind)) info,
+    ];
+  }
+
+  void _scrollToIndex(int index, int total) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_scrollController.hasClients) return;
+      final position = _scrollController.position;
+      if (total <= 1) return;
+      final avgItem =
+          (position.maxScrollExtent + position.viewportDimension) / total;
+      _scrollController.animateTo(
+        (avgItem * index).clamp(0.0, position.maxScrollExtent),
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -151,41 +221,50 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       content: ResizableDialogBox(
         initialWidth: widget.showPreview ? 1020 : 760,
         height: 560,
-        builder: (context, handle) => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                isDense: true,
-                prefixIcon: const Icon(Icons.search, size: 18),
-                hintText: l10n.d('Zoek op titel, pad of thema…'),
+        builder: (context, handle) => Focus(
+          onKeyEvent: _onDialogKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextField(
+                autofocus: true,
+                decoration: InputDecoration(
+                  isDense: true,
+                  prefixIcon: const Icon(Icons.search, size: 18),
+                  hintText: l10n.d('Zoek op titel, pad of thema…'),
+                ),
+                onChanged: (v) => setState(() {
+                  _query = v;
+                  _focusedIndex = null;
+                }),
               ),
-              onChanged: (v) => setState(() => _query = v),
-            ),
-            const SizedBox(height: 8),
-            OpenKindFilterBar(
-              value: _kind,
-              onChanged: (v) => setState(() => _kind = v),
-              presentationCount: found.length - documents,
-              documentCount: documents,
-            ),
-            const SizedBox(height: 8),
-            _status(l10n),
-            const SizedBox(height: 8),
-            Expanded(
-              child: _withPreview(
-                // Zie [OpenPresentationDialog]: het soortlabel hoort bij een
-                // gemengde lijst, niet bij een lijst met één soort erin.
-                (previewShown) => _body(
-                  visible,
-                  previewShown,
-                  documents > 0 && documents < found.length,
+              const SizedBox(height: 8),
+              OpenKindFilterBar(
+                value: _kind,
+                onChanged: (v) => setState(() {
+                  _kind = v;
+                  _focusedIndex = null;
+                }),
+                presentationCount: found.length - documents,
+                documentCount: documents,
+              ),
+              const SizedBox(height: 8),
+              _status(l10n),
+              const SizedBox(height: 8),
+              Expanded(
+                child: _withPreview(
+                  // Zie [OpenPresentationDialog]: het soortlabel hoort bij een
+                  // gemengde lijst, niet bij een lijst met één soort erin.
+                  (previewShown) => _body(
+                    visible,
+                    previewShown,
+                    documents > 0 && documents < found.length,
+                  ),
                 ),
               ),
-            ),
-            Align(alignment: Alignment.centerRight, child: handle),
-          ],
+              Align(alignment: Alignment.centerRight, child: handle),
+            ],
+          ),
         ),
       ),
       actions: [
@@ -274,6 +353,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
       );
     }
     return ListView.separated(
+      controller: _scrollController,
       itemCount: visible.length,
       separatorBuilder: (_, _) => const Divider(height: 1),
       itemBuilder: (_, i) => _HitRow(
@@ -281,6 +361,7 @@ class _ScanLibraryDialogState extends State<ScanLibraryDialog> {
         homeDir: widget.homeDir,
         showKind: showKind,
         showPreview: previewShown,
+        focused: _focusedIndex == i,
         onPreview: (path) => setState(() => _previewPath = path),
         onOpen: (path) => Navigator.pop(context, path),
       ),
@@ -340,6 +421,10 @@ class _HitRow extends StatelessWidget {
   /// Of het soortlabel achter de titel staat; zie de aanroeper.
   final bool showKind;
   final bool showPreview;
+
+  /// Of deze rij de toetsenbordfocus draagt — de zichtbare focusrand.
+  final bool focused;
+
   final ValueChanged<String> onPreview;
   final ValueChanged<String> onOpen;
 
@@ -348,6 +433,7 @@ class _HitRow extends StatelessWidget {
     required this.homeDir,
     required this.showKind,
     required this.showPreview,
+    required this.focused,
     required this.onPreview,
     required this.onOpen,
   });
@@ -360,7 +446,13 @@ class _HitRow extends StatelessWidget {
     final row = InkWell(
       onTap: () => onOpen(hit.path),
       borderRadius: BorderRadius.circular(6),
-      child: Padding(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          border: focused
+              ? Border.all(color: AppTheme.accentFg, width: 1.6)
+              : null,
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
         child: Row(
           children: [
