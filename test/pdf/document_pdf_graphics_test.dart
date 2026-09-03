@@ -65,7 +65,7 @@ void main() {
     'assets/fonts/Roboto-Variable.ttf',
   ).readAsBytesSync().buffer.asByteData();
 
-  Future<Uint8List> exportBytes(
+  Future<DocumentPdfResult> exportResult(
     String document, {
     MermaidSvgResolver? renderMermaid,
     MathSvgResolver? renderMath,
@@ -87,8 +87,20 @@ void main() {
       renderMermaid: renderMermaid,
       renderMath: renderMath,
     );
-    return result.bytes;
+    return result;
   }
+
+  Future<Uint8List> exportBytes(
+    String document, {
+    MermaidSvgResolver? renderMermaid,
+    MathSvgResolver? renderMath,
+    bool withFallbackFont = true,
+  }) async => (await exportResult(
+    document,
+    renderMermaid: renderMermaid,
+    renderMath: renderMath,
+    withFallbackFont: withFallbackFont,
+  )).bytes;
 
   Future<String> exportText(
     String document, {
@@ -385,5 +397,32 @@ void main() {
         expect(pdfVisibleText(bytes), contains('Bevindingen per kwartaal'));
       },
     );
+
+    test('een teken dat ook het Unicode-font niet kent wordt gemeld', () async {
+      // De pijl staat niet in het gebundelde Roboto. Vóór deze reparatie brak
+      // hij de export af; nu wordt hij een leeg blokje in de tekening — en dan
+      // hoort de gebruiker dat te horen in plaats van het zelf te ontdekken.
+      // De melding zelf bestond al, maar hield op bij de rand van de tekening.
+      const chart = '''
+```chart
+{
+  "type": "bar",
+  "title": "Bevindingen",
+  "x": ["Q1"],
+  "series": [{"name": "Kritiek → hoog", "data": [3]}]
+}
+```
+''';
+      final result = await exportResult('# Rapport\n\n$chart');
+      expect(result.bytes, isNotEmpty);
+      expect(result.unsupportedCharacters, contains(0x2192));
+      expect(result.isComplete, isFalse);
+    });
+
+    test('een tekening met alleen zetbare tekens meldt niets', () async {
+      final result = await exportResult('# Rapport\n\n$_typographyChart');
+      expect(result.unsupportedCharacters, isEmpty);
+      expect(result.isComplete, isTrue);
+    });
   });
 }

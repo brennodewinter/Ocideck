@@ -163,3 +163,25 @@ final _dashArray = RegExp(
   r'''(\s|;)?stroke-dasharray\s*[:=]\s*(?:"([^"]*)"|'([^']*)'|([^;"']*))\s*;?''',
   caseSensitive: false,
 );
+
+/// De letterlijke tekst uit de `<text>`- en `<tspan>`-knopen van [svg].
+///
+/// Waarvoor: een tekening wordt met één snede gezet, en een teken dat die snede
+/// niet kent verdwijnt daar als leeg blokje — zonder foutmelding, en zonder dat
+/// de tekstlaag er iets van laat zien. De export meldt zulke tekens al voor de
+/// lopende tekst ([DocumentPdfFonts.unsupportedRunes]); zonder deze lezer stopt
+/// die belofte bij de rand van elke grafiek en elk diagram (#1942).
+///
+/// Bewust krap gelezen, en precies andersom dan
+/// [DocumentPdfFonts.svgTypesetting]: dáár is te ruim kiezen ongevaarlijk (een
+/// tekening komt onnodig op een ander font), maar hier is te ruim lezen dat
+/// niet. Een melding die een teken noemt dat wél gewoon in het bestand staat,
+/// leert de gebruiker de melding negeren. Wat deze regel niet ziet, blijft dus
+/// ongemeld — een teken minder gemeld is beter dan een teken ten onrechte.
+String svgTextContent(String svg) =>
+    _svgTextNode.allMatches(svg).map((match) => match.group(1)!).join(' ');
+
+final _svgTextNode = RegExp(
+  r'<(?:text|tspan)\b[^>]*>([^<]*)',
+  caseSensitive: false,
+);

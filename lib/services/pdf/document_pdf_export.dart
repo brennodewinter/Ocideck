@@ -233,7 +233,16 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
 
   return DocumentPdfResult(
     bytes,
-    unsupportedCharacters: fonts.unsupportedRunes(_textOf(blocks)),
+    // Ook de tekst ín de tekeningen: die wordt met één snede gezet, en wat die
+    // snede niet kent wordt er een leeg blokje — even stil als in de lopende
+    // tekst, en even goed verlies. Zie [svgTextContent].
+    unsupportedCharacters: fonts.unsupportedRunes(
+      [
+        _textOf(blocks),
+        for (final graphic in graphics.values)
+          if (graphic.svg case final svg?) svgTextContent(svg),
+      ].join(' '),
+    ),
     tablesTooWide: tablesTooWide,
     logo: logoResolutionOf(logo, boxSide: logoWidth),
   );

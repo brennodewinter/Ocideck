@@ -2403,7 +2403,12 @@ that before deciding whether this alpha fits what you are doing.
   blijft op de standaardsneden staan, want díe dragen een echte vette en
   cursieve snede. Is er geen Unicode-font, dan valt de tekening terug op haar
   bron in plaats van de export af te breken — dezelfde afweging die er voor een
-  onleesbare SVG al stond, alleen kon de `try` hem hier niet maken.
+  onleesbare SVG al stond, alleen kon de `try` hem hier niet maken. En omdat een
+  reparatie die een luide fout in stil verlies verandert geen reparatie is: de
+  melding over tekens waarvoor geen enkele snede een vorm had, hield op bij de
+  rand van elke tekening. Nu leest hij ook de tekst ín grafieken en diagrammen,
+  zodat een pijl die het gebundelde font niet kent gemeld wordt in plaats van
+  als leeg blokje op papier te belanden.
 - **`unhandled element <defs/>` in elke debug-run (#1942).** Onze eigen
   opschoning: `sanitizeMermaidSvg` haalt `<marker>` en `<style>` uit de `defs`
   van mermaid weg omdat flutter_svg ze toch niet leest, en de serializer
