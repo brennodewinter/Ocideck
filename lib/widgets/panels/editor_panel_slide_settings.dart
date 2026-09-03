@@ -783,7 +783,7 @@ class _SlideSettingsBody extends StatelessWidget {
             icon: Icons.privacy_tip_outlined,
             label: l10n.d('Persoonsgegevens'),
             help: l10n.d(
-              'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.',
+              'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.',
             ),
             control: _SettingDropdown<PrivacyDisposition?>(
               value: slide.privacy,

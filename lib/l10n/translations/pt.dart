@@ -1661,6 +1661,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Seguir a apresentação: este slide faz o que a apresentação como um todo faz. Apenas relatar: a descoberta é contada, mas o destinatário não vê nada — os dados estão simplesmente lá. Aceitar: os dados pertencem aqui e o aviso desaparece. Aceitar + avisar: o destinatário vê um selo de que há dados pessoais no slide. Omitir: os dados encontrados tornam-se ilegíveis na tela e na exportação — seu arquivo markdown mantém o texto original.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML abre em qualquer navegador sem internet e renderiza blocos de código, matemática e diagramas mermaid. LaTeX é código-fonte que você compila com pdflatex ou xelatex.',
   'Nu niet': 'Agora não',

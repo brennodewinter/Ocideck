@@ -1633,6 +1633,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Ikuti presentasi: slide ini melakukan apa yang dilakukan presentasi secara keseluruhan. Hanya laporkan: temuan dihitung, tetapi penerima tidak melihat apa pun — datanya memang ada di sana. Terima: datanya memang di sini dan peringatan hilang. Terima + peringatkan: penerima melihat badge bahwa ada data pribadi di slide. Redaksi: data yang ditemukan dibuat tidak terbaca di layar dan ekspor — file markdown Anda menyimpan teks asli.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML terbuka di browser apa pun tanpa internet dan merender blok kode, matematika, dan diagram mermaid. LaTeX adalah kode sumber yang Anda kompilasi dengan pdflatex atau xelatex.',
   'Nu niet': 'Sekarang tidak',

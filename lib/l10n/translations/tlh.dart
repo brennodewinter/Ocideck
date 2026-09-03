@@ -1610,6 +1610,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'nagh beQmey tlhab: mIvvam nagh beQ vIlo\'chugh nagh beQmey naQ vIlo\'. ja\' neH: Samlu\'bogh wIvlu\', \'ach Hevbe\' ghuHbe\' — De\' naQ bIH. lIj: De\' naQ tu\'lu\' \'ej warning narghbe\'. lIj + yIja\'qoq: Hevbe\' badge legh, nagh beQDaq De\' nav tu\'lu\'. nugh: Samlu\'bogh De\' lajbe\' moj nagh beQDaq \'ej ngeHmeH — markdown De\' nav mI\' nagh teqbe\'.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML browserDaq Internet pagh naQ vIlo\'chugh nagh Qavmey, mI\' nugh mermaid nagh beQmey je nargh. LaTeX mI\' \'oH, pdflatex pagh xelatex lo\' Dalo\'taHvIS.',
   'Nu niet': 'DaHbe\'',

@@ -1631,6 +1631,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Sekot prezentācijai: šis slaids dara to, ko prezentācija kopumā. Tikai ziņot: atklājums tiek skaitīts, bet saņēmējs neko neredz — dati vienkārši ir tur. Pieņemt: dati pieder šeit un brīdinājums izzūd. Pieņemt + brīdināt: saņēmējs redz nozīmi, ka slaidā ir personiskie dati. Izlaist: atrastie dati tiek padarīti nelasāmi ekrānā un eksportā — jūsu markdown fails saglabā oriģinālo tekstu.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML atveras jebkurā pārlūkā bez interneta un renderē koda blokus, matemātiku un mermaid diagrammas. LaTeX ir pirmkods, ko kompilējat ar pdflatex vai xelatex.',
   'Nu niet': 'Ne tagad',

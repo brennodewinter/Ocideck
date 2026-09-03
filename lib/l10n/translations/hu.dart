@@ -1635,6 +1635,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Kövesd a prezentációt: ez a dia azt teszi, amit a prezentáció egésze tesz. Csak jelentés: a megállapítás számítódik, de a címzett nem lát semmit — az adatok egyszerűen ott vannak. Elfogadás: az adatok ide tartoznak, és a figyelmeztetés eltűnik. Elfogadás + figyelmeztetés: a címzett egy jelvényt lát, hogy személyes adatok vannak a dián. Kihagyás: a talált adatok olvashatatlanná válnak a képernyőn és az exportban — a markdown fájlod megtartja az eredeti szöveget.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML bármely böngészőben megnyílik internet nélkül, és kódblokkokat, matematikát és mermaid-diagramokat jelenít meg. LaTeX forráskód, amelyet pdflatex vagy xelatex segítségével fordítasz.',
   'Nu niet': 'Most nem',

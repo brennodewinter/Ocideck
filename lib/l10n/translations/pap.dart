@@ -667,6 +667,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Sigue e presentashon: e slaidi aki ta hasi loke e presentashon kompletu ta hasi. Solo notifiká: e hallazgo ta wòrdu kontá, pero e resibí no ta wèrdu nada — e datanan ta ai mester. Aseptá: e datanan ta pertenesé aki i e advertensia ta disparsé. Aseptá + advertí: e resibí ta wèrdu un badge ku tin datonan personal riba e slaidi. Kita for di pantaya i eksportashon: e datanan hañá ta wòrdu hañá inleíbel riba e pantaya i den eksportashon — bo fail di markdown ta keda ku e teksto original.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML ta habri den kualkier browser sin internet i ta render bloki di kódigo, wiskunde i mermaid-diagram. LaTeX ta kódigo di fuente ku bo ta kompilá ku pdflatex of xelatex.',
   'Nu niet': 'Awor no',

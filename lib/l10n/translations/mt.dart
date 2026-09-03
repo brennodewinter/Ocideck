@@ -1651,6 +1651,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Segwi l-preżentazzjoni: din is-slajd tagħmel dak li tagħmel il-preżentazzjoni kollha. Irraporta biss: is-sejba tingħadd, iżda r-riċevitur ma jara xejn — id-data hemm biss. Aċċetta: id-data tappartjeni hawn u l-avvertiment jisparixxi. Aċċetta + avverti: ir-riċevitur jara badge li hemm data personali fuq is-slajd. Oħroġ: id-data misjuba ssir mhux qari fuq l-iskrin u fl-esportazzjoni — il-fajl markdown tiegħek iżomm it-test oriġinali.',
   'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
       'HTML jifta\' f\'kull browser bla internet u jirrenda blokki ta\' kodiċi, matematika u dijagrammi mermaid. LaTeX huwa kodiċi sors li tikkompila b\'pdflatex jew xelatex.',
   'Nu niet': 'Le issa',
