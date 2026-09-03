@@ -76,4 +76,60 @@ post_install do |installer|
       end
     end
   end
+
+  # Xcode 26 levert de Metal-shadercompiler niet meer uit Xcode zelf, maar uit
+  # een los gedownload toolchain-cryptex. Zodra dat geladen is wijst
+  # `TOOLCHAIN_DIR` tijdens het koppelen naar dát cryptex in plaats van naar
+  # XcodeDefault.xctoolchain, en daar staat alleen shadergereedschap — metal,
+  # metallib, air-* onder `usr/bin`, geen `usr/lib`. CocoaPods en Flutters eigen
+  # podhelper hangen daar wel het zoekpad naar de Swift-runtime aan op:
+  #
+  #   LIBRARY_SEARCH_PATHS    = ... "${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" ...
+  #   LD_RUNPATH_SEARCH_PATHS = ... "${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}"
+  #
+  # Dat kost twee dingen. De koppelaar waarschuwt bij elke build over een
+  # zoekpad dat niet bestaat:
+  #
+  #   ld: warning: search path '/var/run/com.apple.security.cryptexd/mnt/
+  #       com.apple.MobileAsset.MetalToolchain-v17.6.109.0.abPHna/
+  #       Metal.xctoolchain/usr/lib/swift/macosx' not found
+  #
+  # en het tweede pad belandt als dode LC_RPATH ín de gebouwde app, inclusief
+  # het koppelnummer van het cryptex — dat verschilt per Metal-asset en dus per
+  # machine en per Apple-update. De eerste kost aandacht bij elke build, de
+  # tweede kost reproduceerbaarheid van wat we uitbrengen.
+  #
+  # We halen het pad daarom uit die twee regels weg. Wat overblijft is genoeg:
+  # de Swift-runtime van macOS 12+ komt uit het systeem (`/usr/lib/swift`, ook
+  # al in de rpath-lijst) en bij het koppelen uit `$(SDKROOT)/usr/lib/swift`.
+  #
+  # Omleiden naar `DT_TOOLCHAIN_DIR` — dat wél altijd naar Xcodes eigen
+  # toolchain wijst — lijkt netter en is geprobeerd, maar Xcode verbiedt die
+  # variabele hier expliciet en breekt de build af:
+  #
+  #   error: DT_TOOLCHAIN_DIR cannot be used to evaluate LD_RUNPATH_SEARCH_PATHS,
+  #          use TOOLCHAIN_DIR instead (in target 'Runner' from project 'Runner')
+  #
+  # Beide schrijfwijzen komen voor — `"${...}"` van CocoaPods en `$(...)` uit de
+  # podhelper, in Pods-Runner.debug.xcconfig zelfs samen op één regel. Wie er
+  # één van pakt, laat de waarschuwing gewoon staan.
+  #
+  # `pod install` schrijft deze bestanden elke keer opnieuw, dus deze haak
+  # ruimt ze elke keer opnieuw op. De teller staat er omdat een haak die niets
+  # meer vindt er precies zo uitziet als een haak die zijn werk deed: schrijft
+  # CocoaPods deze regels ooit anders, dan is de nul het signaal.
+  swift_zoekpadregel = /^(LIBRARY_SEARCH_PATHS|LD_RUNPATH_SEARCH_PATHS) = .*$/
+  toolchainpad = %r{\s*"?\$[({]TOOLCHAIN_DIR[)}]/usr/lib/swift/\$[({]PLATFORM_NAME[)}]/?"?}
+  geraakte_bestanden = 0
+
+  Dir.glob(File.join(installer.sandbox.target_support_files_root, '**', '*.xcconfig')).sort.each do |pad|
+    was = File.read(pad)
+    wordt = was.gsub(swift_zoekpadregel) { |regel| regel.gsub(toolchainpad, '') }
+    next if wordt == was
+
+    File.write(pad, wordt)
+    geraakte_bestanden += 1
+  end
+
+  Pod::UI.puts "Metal-toolchainpad verwijderd uit #{geraakte_bestanden} xcconfig-bestand(en)"
 end
