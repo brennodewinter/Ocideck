@@ -25,17 +25,38 @@ Future<String?> pickUnfilteredMacFile({
   String? dialogTitle,
   String? initialDirectory,
 }) async {
-  if (kIsWeb || !Platform.isMacOS) return null;
+  final picked = await pickUnfilteredMacFiles(
+    dialogTitle: dialogTitle,
+    initialDirectory: initialDirectory,
+  );
+  return picked.isEmpty ? null : picked.first;
+}
+
+/// De meervoudige variant van [pickUnfilteredMacFile]: hetzelfde filterloze
+/// paneel, maar met `allowsMultipleSelection`, zodat de gebruiker een stapel
+/// bestanden in één keer kan aanwijzen. Levert de paden in de volgorde die het
+/// paneel teruggaf, of een lege lijst bij annuleren en op elk ander platform.
+///
+/// De native kant levert altijd een lijst — ook voor één bestand — zodat er
+/// maar één vorm over het kanaal reist.
+Future<List<String>> pickUnfilteredMacFiles({
+  String? dialogTitle,
+  String? initialDirectory,
+  bool allowsMultiple = false,
+}) async {
+  if (kIsWeb || !Platform.isMacOS) return const [];
   try {
-    return await kOpenFileChannel.invokeMethod<String>('pickFile', {
+    final paths = await kOpenFileChannel.invokeListMethod<String>('pickFile', {
       'dialogTitle': dialogTitle,
       'initialDirectory': initialDirectory,
+      'allowsMultiple': allowsMultiple,
     });
+    return paths ?? const [];
   } on MissingPluginException {
     rethrow;
   } catch (e) {
     logWarning('pickUnfilteredMacFile failed', e);
-    return null;
+    return const [];
   }
 }
 

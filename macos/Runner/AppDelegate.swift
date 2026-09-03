@@ -48,6 +48,7 @@ final class OpenFileHandler {
         self.pickFile(
           title: args?["dialogTitle"] as? String,
           initialDirectory: args?["initialDirectory"] as? String,
+          allowsMultiple: args?["allowsMultiple"] as? Bool ?? false,
           result: result)
       case "saveFile":
         // Eigen opslaan-kiezer, om dezelfde reden als pickFile hierboven:
@@ -71,16 +72,22 @@ final class OpenFileHandler {
 
   /// Systeemvenster "bestand openen" waarin elk bestand selecteerbaar is.
   /// Validatie (Marp of plat document) gebeurt aan de Dart-kant na de keuze.
+  ///
+  /// Levert altijd een LIJST van paden — ook bij één bestand — zodat er maar
+  /// één vorm over het kanaal reist. Met allowsMultiple mag de gebruiker een
+  /// stapel tegelijk aanwijzen; elk pad opent aan de Dart-kant in een eigen
+  /// tabblad.
   private func pickFile(
     title: String?,
     initialDirectory: String?,
+    allowsMultiple: Bool,
     result: @escaping FlutterResult
   ) {
     let dialog = NSOpenPanel()
     dialog.title = title ?? ""
     dialog.canChooseFiles = true
     dialog.canChooseDirectories = false
-    dialog.allowsMultipleSelection = false
+    dialog.allowsMultipleSelection = allowsMultiple
     dialog.allowsOtherFileTypes = true
     dialog.canSelectHiddenExtension = true
     // Lege allowedContentTypes = alle typen (Apple). De
@@ -99,10 +106,10 @@ final class OpenFileHandler {
     // Openen-dialoog vóór deze call, zodat er geen geneste modal is.
     let response = dialog.runModal()
     pickDelegate = nil
-    if response == .OK, let path = dialog.url?.path {
-      result(path)
+    if response == .OK {
+      result(dialog.urls.map { $0.path })
     } else {
-      result(nil)
+      result([String]())
     }
   }
 
