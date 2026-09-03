@@ -76,7 +76,13 @@ flowchart LR
   edit two out-of-sync copies. **Open** accepts both a flat Marp `.md` and a
   portable `.ocideck` package (a zip with the deck and its assets): pick either
   and OciDeck unpacks the package for you — dragging the file onto the window
-  does the same.
+  does the same. **More than one at a time**: hold `Ctrl/Cmd` (or `Shift` for a
+  run) while you click rows in the open dialog, then press *Open (n)* — each
+  file lands in its own tab, and the last one becomes the active tab. A plain
+  click still opens that one file straight away, as it always did. Behind
+  *Browse…* the system file picker takes a multiple selection too. *(Added
+  2026-09-02, #1928: dropping a stack of files on the window already worked, but
+  the open dialog made you walk through it once per file.)*
 - **The welcome screen** answers the question you have before you have any of the
   others. Under the logo, one line says what OciDeck makes (presentations that
   stay ordinary Markdown files). Under *New* sit the two ways to start, side by

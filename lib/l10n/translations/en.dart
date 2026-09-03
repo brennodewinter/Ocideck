@@ -843,6 +843,9 @@ const _dutchSourceAddEn = {
   'Verwijder donker logo': 'Remove dark logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'The slide background is dark, but the logo has no dark variant. The logo is nearly invisible on the slide. Set a dark logo in the presentation settings.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Ctrl/Cmd-click or Shift-click to choose more than one file.',
+  'Presentaties openen': 'Open presentations',
   'Aangeboden als download:': 'Offered as a download:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'The browser did not accept the download. Allow downloads for this site and try again.',

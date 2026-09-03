@@ -680,6 +680,9 @@ const _dutchSourceAddFy = {
   'Verwijder donker logo': 'Donker logo fuortsmite',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'De dia-eftersgrûn is donker, mar it logo hat gjin donkere fariant. It logo is op de dia hast ûnsichtber. Stel in donker logo yn de presintaasjeynstellingen.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Klik mei Ctrl/Cmd of Shift om mear bestannen te kiezen.',
+  'Presentaties openen': 'Presintaasjes iepenje',
   'Aangeboden als download:': 'Oanbean as download:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'De browser hat de download net oannommen. Tastean downloads foar dizze side en probearje it nochris.',

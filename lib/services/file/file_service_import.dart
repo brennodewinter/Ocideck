@@ -73,6 +73,22 @@ enum ImportFailure {
 }
 
 extension FileServiceImport on FileService {
+  /// De meervoudige variant van [FileService.pickMarkdownFile]: dezelfde
+  /// filterloze kiezer, maar de gebruiker mag een stapel bestanden tegelijk
+  /// aanwijzen; elk opent daarna in een eigen tabblad (#1928). Levert een lege
+  /// lijst bij annuleren en op web (zie [_pickPathsGated]).
+  ///
+  /// In deze extensie en niet in de klasse: [FileService] zit tegen zijn
+  /// plafond, en kiezen hoort bij dit bestand.
+  Future<List<String>> pickMarkdownFiles({String? initialDirectory}) {
+    return _pickPathsGated(
+      dialogTitle: _d('Presentaties openen'),
+      type: FileType.any,
+      initialDirectory: initialDirectory,
+      allowsMultiple: true,
+    );
+  }
+
   /// Probeer een versleuteld pakket met [password] te ontgrendelen zonder het
   /// helemaal uit te pakken: de central directory lezen valideert de MAC nog
   /// niet, dus we decoderen de inhoud van één lid. Een onjuist wachtwoord laat
@@ -559,7 +575,27 @@ Future<String?> _pickPathGated({
   List<String>? allowedExtensions,
   String? initialDirectory,
 }) async {
-  if (!supportsLocalProjectFolders) return null;
+  final picked = await _pickPathsGated(
+    dialogTitle: dialogTitle,
+    type: type,
+    allowedExtensions: allowedExtensions,
+    initialDirectory: initialDirectory,
+  );
+  return picked.isEmpty ? null : picked.first;
+}
+
+/// De meervoudige variant van [_pickPathGated]: dezelfde poort en dezelfde
+/// macOS-omweg, maar de gebruiker mag met [allowsMultiple] een stapel
+/// bestanden tegelijk aanwijzen. Levert een lege lijst bij annuleren en op elk
+/// platform zonder bestandssysteem.
+Future<List<String>> _pickPathsGated({
+  required String dialogTitle,
+  required FileType type,
+  List<String>? allowedExtensions,
+  String? initialDirectory,
+  bool allowsMultiple = false,
+}) async {
+  if (!supportsLocalProjectFolders) return const [];
   // macOS + geen extensiefilter: eigen NSOpenPanel die allowedContentTypes
   // expliciet leegzet. file_picker's FileType.any zet géén filter, en dan kan
   // macOS een onthouden filter laten staan waardoor .md grijs wordt (# openen).
@@ -569,23 +605,34 @@ Future<String?> _pickPathGated({
       type == FileType.any &&
       (allowedExtensions == null || allowedExtensions.isEmpty)) {
     try {
-      // null = gebruiker annuleerde — níet doorvallen naar file_picker, anders
+      // Leeg = gebruiker annuleerde — níet doorvallen naar file_picker, anders
       // opent er een tweede kiezer die .md wél weer grijst.
-      return await pickUnfilteredMacFile(
+      return await pickUnfilteredMacFiles(
         dialogTitle: dialogTitle,
         initialDirectory: initialDirectory,
+        allowsMultiple: allowsMultiple,
       );
     } on MissingPluginException {
       // Oude build zonder native handler: val terug op file_picker.
     }
   }
-  final file = await FilePicker.pickFile(
+  if (!allowsMultiple) {
+    final file = await FilePicker.pickFile(
+      dialogTitle: dialogTitle,
+      type: type,
+      allowedExtensions: allowedExtensions,
+      initialDirectory: initialDirectory,
+    );
+    final path = file?.path;
+    return path == null ? const [] : [path];
+  }
+  final files = await FilePicker.pickFiles(
     dialogTitle: dialogTitle,
     type: type,
     allowedExtensions: allowedExtensions,
     initialDirectory: initialDirectory,
   );
-  return file?.path;
+  return [for (final file in files) ?file.path];
 }
 
 /// Kies een bestand en lever NAAM + BYTES. Werkt overal, ook op web — dit is de

@@ -1647,6 +1647,9 @@ const _dutchSourceAddFi = <String, String>{
   'Verwijder donker logo': 'Poista tumma logo',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Dian tausta on tumma, mutta logolla ei ole tummaa varianttia. Logo on dialla lähes näkymätön. Aseta tumma logo esityksen asetuksissa.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Napsauta Ctrl/Cmd- tai Shift-näppäin pohjassa valitaksesi useita tiedostoja.',
+  'Presentaties openen': 'Avaa esitykset',
   'Aangeboden als download:': 'Tarjottu latauksena:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Selain ei hyväksynyt latausta. Salli lataukset tälle sivustolle ja yritä uudelleen.',

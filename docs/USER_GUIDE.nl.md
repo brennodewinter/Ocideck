@@ -81,7 +81,14 @@ flowchart LR
   **Openen** accepteert zowel een plat Marp-`.md`-bestand als een draagbaar
   `.ocideck`-pakket (een zip met het deck en de bijbehorende assets): kies er een
   en OciDeck pakt het pakket voor je uit — het bestand op het venster slepen doet
-  hetzelfde.
+  hetzelfde. **Meerdere tegelijk**: houd `Ctrl/Cmd` ingedrukt (of `Shift` voor
+  een reeks) terwijl je rijen in het openscherm aanklikt, en druk dan op
+  *Openen (n)* — elk bestand komt in zijn eigen tabblad, en het laatste wordt
+  het actieve. Een kale klik opent nog steeds meteen dat ene bestand, zoals
+  altijd. Achter *Bladeren…* neemt de systeemkiezer ook een meervoudige selectie
+  aan. *(Toegevoegd 2026-09-02, #1928: een stapel bestanden op het venster
+  slepen werkte al, maar het openscherm liet je er één per keer doorheen
+  lopen.)*
 - **Het welkomstscherm** beantwoordt de vraag die je hebt vóór je een van de
   andere hebt. Onder het logo zegt één regel wat OciDeck maakt (presentaties die
   gewone Markdown-bestanden blijven). Onder *Nieuw* staan de twee manieren om te

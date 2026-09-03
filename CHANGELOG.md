@@ -337,6 +337,23 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(openen): meerdere bestanden tegelijk aanwijzen en openen (#1928). Wie
+  drie presentaties wilde openen, liep de hele openen-dialoog drie keer door —
+  terwijl een stapel bestanden op het venster slepen al wél werkte. De lijst
+  kent nu dezelfde handgreep als de slidelijst, waar de gebruiker hem al kent:
+  `Shift` is een bereik, `Ctrl/Cmd` voegt er een toe of haalt er een af, en een
+  kale klik opent zoals altijd meteen dat ene bestand. Zodra er iets is
+  aangewezen verschijnt "Openen (n)"; de aangewezen rijen dragen een vinkje en
+  de info-tint van het actieve thema. Elk bestand landt in zijn eigen tabblad
+  en het laatste wordt het actieve; één onleesbaar bestand breekt de rest niet
+  af, dezelfde afspraak als bij sleep-en-neerzetten. Achter "Bladeren…" neemt
+  ook de systeemkiezer een meervoudige selectie aan — op macOS via het eigen
+  filterloze `NSOpenPanel`, dat voortaan altijd een lijst teruggeeft zodat er
+  maar één vorm over het kanaal reist. De dia-index van een zoektreffer blijft
+  aan één bestand hangen: bij een stapel is er geen treffer om naartoe te
+  springen. De selectie wordt op pad bewaard en niet op rij-index, want de
+  zichtbare lijst verschuift bij elke aanslag in het zoekveld.
+
 - feat(over): het dankwoord is te *vinden* — een tegel in Documentatie en een
   tegel naast het Vigilis-logo. De namen van iedereen die aan OciDeck heeft
   bijgedragen zaten achter één ingang: het hartje naast de merknaam in "Over

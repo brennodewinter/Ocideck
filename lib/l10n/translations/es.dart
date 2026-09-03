@@ -677,6 +677,9 @@ const _dutchSourceAddEs = {
   'Verwijder donker logo': 'Quitar logo oscuro',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'El fondo de la diapositiva es oscuro, pero el logo no tiene una variante oscura. El logo es casi invisible en la diapositiva. Configura un logo oscuro en los ajustes de presentación.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Haz clic con Ctrl/Cmd o Mayús para elegir varios archivos.',
+  'Presentaties openen': 'Abrir presentaciones',
   'Aangeboden als download:': 'Ofrecido como descarga:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'El navegador no ha aceptado la descarga. Permite las descargas para este sitio e inténtalo de nuevo.',

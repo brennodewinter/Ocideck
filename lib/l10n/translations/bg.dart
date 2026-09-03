@@ -1667,6 +1667,9 @@ const _dutchSourceAddBg = <String, String>{
   'Verwijder donker logo': 'Премахни тъмно лого',
   'De dia-achtergrond is donker, maar het logo heeft geen donkere variant. Het logo is op de dia vrijwel onzichtbaar. Stel een donker logo in de presentatie-instellingen.':
       'Фонът на слайда е тъмен, но логото няма тъмен вариант. Логото е почти невидимо на слайда. Задайте тъмно лого в настройките на презентацията.',
+  'Klik met Ctrl/Cmd of Shift om meerdere bestanden te kiezen.':
+      'Щракнете с Ctrl/Cmd или Shift, за да изберете няколко файла.',
+  'Presentaties openen': 'Отваряне на презентации',
   'Aangeboden als download:': 'Предложено за изтегляне:',
   'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.':
       'Браузърът не прие изтеглянето. Разрешете изтеглянията за този сайт и опитайте отново.',
