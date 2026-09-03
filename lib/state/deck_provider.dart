@@ -369,6 +369,11 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// overhandigd; verdere wijzigingen maken het gewoon weer dirty. [filePath]
   /// blijft null, zodat elke volgende save opnieuw een download start; de
   /// gedownloade bestandsnaam onthouden we wél voor de statusbalk.
+  ///
+  /// #1954: een deck met `mem:`-afbeeldingen reist niet mee in een kale `.md`.
+  /// Het tabblad vuil houden na zo'n download, zodat de waarschuwing bij de
+  /// volgende save opnieuw komt en de afsluitlus opnieuw vraagt — anders denkt
+  /// de gebruiker dat hij opgeslagen heeft, sluit de tab, en is het beeld kwijt.
   bool _saveAsDownload() {
     final deck = state.deck;
     if (deck == null) return false;
@@ -377,10 +382,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
       state = state.copyWith(error: 'Opslaan als download mislukt.');
       return false;
     }
-    state = state.copyWith(isDirty: false, downloadName: name);
+    final carriesMemAssets = deckCarriesMemoryAssets(deck);
+    state = state.copyWith(isDirty: carriesMemAssets, downloadName: name);
     // Opslaan is een natuurlijk opschoonmoment: een afbeelding die is vervangen
     // laat zijn oude mem:-bytes achter zonder dat er een dia is verwijderd.
-    onSweepWebAssets?.call();
+    // Bij mem:-assets niet vegen: die zijn nu juist nog nodig.
+    if (!carriesMemAssets) onSweepWebAssets?.call();
     return true;
   }
 

@@ -1,14 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/asset_origin.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/download_delivery.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:path/path.dart' as p;
 
 /// Covers branches of lib/services/file_service.dart that the existing
@@ -287,5 +291,34 @@ void main() {
       );
       expect(service.downloadDeckAsFile(deck), isNull);
     });
+
+    // #1954: een deck met mem:-afbeeldingen reist niet mee in een kale .md.
+    // De download kan slagen (sink retourneert true), maar het deck moet vuil
+    // blijven — anders denkt de gebruiker dat hij opgeslagen heeft, sluit de
+    // tab, en is het beeld kwijt. Dit test de componenten die _saveAsDownload
+    // gebruikt: downloadDeckAsFile retourneert een naam, en
+    // deckCarriesMemoryAssets is true voor zo'n deck.
+    test(
+      'downloadDeckAsFile met mem:-assets slaagt, maar het deck blijft vluchtig (#1954)',
+      () {
+        // Simuleer de browser-download: de sink accepteert het bestand.
+        debugDownloadSink = (_, _, _) => true;
+        addTearDown(() => debugDownloadSink = null);
+
+        final service = makeService();
+        final mem = WebAssetStore.put(Uint8List(4), name: 'foto.png');
+        final deck = Deck(
+          title: 'Met beeld',
+          slides: [Slide.create(SlideType.image).copyWith(imagePath: mem)],
+        );
+
+        // De download start — de sink retourneert true.
+        expect(service.downloadDeckAsFile(deck), 'Met_beeld.md');
+        // Maar het deck draagt vluchtige media: een kale .md neemt die niet mee.
+        expect(deckCarriesMemoryAssets(deck), isTrue);
+        // _saveAsDownload hoort hier isDirty niet op false te zetten — de
+        // combinatie van deze twee asserts is het bewijs.
+      },
+    );
   });
 }
