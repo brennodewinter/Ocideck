@@ -123,14 +123,14 @@ Future<void> _reportGitSaveResult(
   }
 }
 
-Future<void> _saveToGit(
+Future<bool> _saveToGit(
   BuildContext context,
   WidgetRef ref, {
   GitConnection? connectionOverride,
 }) async {
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
-  if (tab == null || deck == null) return;
+  if (tab == null || deck == null) return false;
   // De "niet alles gaat mee"-waarschuwing en de zegelweigering die hier
   // stonden zijn opgeheven (#541): álle lagen reizen mee, ook het zegel — git
   // is een bestandssysteem, geen enforcer. Wat een zegel betekent bewaakt de
@@ -149,25 +149,25 @@ Future<void> _saveToGit(
   } else {
     connection = await _pickGitConnection(context, ref);
   }
-  if (connection == null || !context.mounted) return;
+  if (connection == null || !context.mounted) return false;
   final forge = await ref.read(gitForgeProvider(connection.id).future);
-  if (!context.mounted) return;
+  if (!context.mounted) return false;
   if (forge == null) {
     _gitNotConfigured(context);
-    return;
+    return false;
   }
   final config = connection.repo;
 
   final defaultName = origin?.deckName ?? _safeDeckName(deck.title);
   final choice = await _showGitSaveDialog(context, defaultName: defaultName);
-  if (choice == null || !context.mounted) return;
+  if (choice == null || !context.mounted) return false;
   // Het dialoog valideert de naam al; dit is de vangnet-tak.
   final deckDir = GitRepoLayout.deckDir(choice.name);
-  if (deckDir == null) return;
+  if (deckDir == null) return false;
 
   // Native git als het er is: een echte lokale commit. Anders het REST-pad.
   final native = await ref.read(nativeGitMirrorProvider(connection.id).future);
-  if (!context.mounted) return;
+  if (!context.mounted) return false;
 
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
@@ -200,7 +200,7 @@ Future<void> _saveToGit(
               connectionId: gitConnection.id,
             ),
     );
-    if (!context.mounted) return;
+    if (!context.mounted) return false;
     await _reportGitSaveResult(
       context,
       ref,
@@ -214,11 +214,23 @@ Future<void> _saveToGit(
     if (result.status == GitSaveStatus.committed && context.mounted) {
       await _flushGitQueue(context, ref, config, connection.id, silent: true);
     }
+    // #1948: alleen een echte commit (of een lokaal gelande merge/queue) is
+    // "bewaard genoeg om herstel te wissen". pushFailed laat een lokale commit
+    // achter — dat is duurzaam, al moet publiceren nog. conflict en failed
+    // laten niets achter: venster open, herstel laten staan.
+    return switch (result.status) {
+      GitSaveStatus.committed ||
+      GitSaveStatus.merged ||
+      GitSaveStatus.queued ||
+      GitSaveStatus.pushFailed => true,
+      GitSaveStatus.conflict || GitSaveStatus.failed => false,
+    };
   } on GitForgeException catch (e) {
     // De ruwe tekst hoort in het log: dáár wil je "Onverwachte status 418"
     // lezen. De gebruiker krijgt de vertaalde melding per foutsoort.
     logWarning('shell_actions_git: opslaan mislukt', e);
     showErrorSnackBar(messenger, l10n, userFacingError(l10n, e));
+    return false;
   } on GitCliException catch (e) {
     // Het native plane faalt lokaal met git's stderr: een achtergebleven
     // index.lock, een volle schijf, een kapotte index, een blijven staan
@@ -231,6 +243,7 @@ Future<void> _saveToGit(
       l10n,
       '${l10n.d('Opslaan mislukt:')} ${userFacingError(l10n, e)}',
     );
+    return false;
   } catch (e, s) {
     // Vangnet: een niet-git-fout (een te groot pakket, een leesfout in een
     // lokaal asset) mag niet stil verdwijnen — de spinner stopt, maar de
@@ -241,6 +254,7 @@ Future<void> _saveToGit(
       l10n,
       '${l10n.d('Opslaan mislukt:')} ${userFacingError(l10n, e)}',
     );
+    return false;
   }
 }
 
