@@ -336,10 +336,13 @@ release](#cutting-a-release)). Artifacts land under `build/<platform>/`.
 
 ### macOS notes
 
-- **Swift Package Manager is disabled** for this project (`flutter:` →
-  `config: enable-swift-package-manager: false` in `pubspec.yaml`); CocoaPods is
-  used instead. The "plugin does not support Swift Package Manager" message
-  during a build is therefore expected and harmless.
+- **Swift Package Manager is enabled** for this project (since #1733); it is
+  Flutter's default and `pubspec.yaml` no longer turns it off. Most plugins are
+  resolved through SPM, and CocoaPods only handles the ones that have not
+  adopted it — today just `desktop_multi_window`, which is why the build prints
+  "The following plugins do not support Swift Package Manager for macos". That
+  message is expected and harmless. The `Podfile` still matters for those
+  leftovers.
 - **`video_player_avfoundation` is pinned** (see `dependency_overrides`) because a
   newer release ships a Swift module whose private Objective-C dependency isn't
   packaged correctly by CocoaPods on recent Xcode.
@@ -359,6 +362,29 @@ release](#cutting-a-release)). Artifacts land under `build/<platform>/`.
   `Runner` first among them, still reports its warnings in full. If you ever need
   to inspect that pod's own build, drop the settings temporarily rather than
   widening them to the project.
+- **The Metal toolchain path is stripped from the generated xcconfigs.**
+  Since Xcode 26 the Metal shader compiler ships as a separately downloaded
+  toolchain cryptex, and while that is loaded `TOOLCHAIN_DIR` resolves to the
+  cryptex instead of `XcodeDefault.xctoolchain`. It holds only shader tools
+  (`metal`, `metallib`, `air-*` under `usr/bin`) and no `usr/lib`, so the Swift
+  runtime search path that CocoaPods and Flutter's podhelper hang off it does
+  not exist. Every build printed `ld: warning: search path
+  '…/Metal.xctoolchain/usr/lib/swift/macosx' not found`, and the same path also
+  sat in `LD_RUNPATH_SEARCH_PATHS`, which baked a dead `LC_RPATH` — cryptex
+  asset id and all — into the built app. The `post_install` hook in
+  `macos/Podfile` removes that entry from the `LIBRARY_SEARCH_PATHS` and
+  `LD_RUNPATH_SEARCH_PATHS` lines of every generated `.xcconfig`, in both the
+  `${…}` and `$(…)` spellings — `Pods-Runner.debug.xcconfig` carries both on one
+  line. Nothing in the bundle links `@rpath/libswift*`, `/usr/lib/swift` stays on
+  both lines, and Xcode's own defaults still supply the SDK's Swift directory —
+  Debug and Release both link clean with the entry gone. Redirecting to
+  `DT_TOOLCHAIN_DIR` looks tidier but Xcode rejects it
+  outright (`error: DT_TOOLCHAIN_DIR cannot be used to evaluate
+  LD_RUNPATH_SEARCH_PATHS, use TOOLCHAIN_DIR instead`). The hook prints how many
+  files it touched, so a zero is visible the day CocoaPods writes those lines
+  differently. `SWIFT_STDLIB_PATH` in `Pods-Runner-frameworks.sh` keeps the old
+  spelling and is left alone: it sits behind an `XCODE_VERSION_MAJOR -lt 7`
+  guard and never runs.
 - **CocoaPods + Ruby locale**: on some setups `pod install` (run by
   `flutter build macos`) fails with `Encoding::CompatibilityError` /
   "Unicode Normalization not appropriate for ASCII-8BIT". This is a Ruby/CocoaPods

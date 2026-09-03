@@ -509,6 +509,12 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- docs(build): [`docs/BUILD.md`](docs/BUILD.md) beweerde dat Swift Package
+  Manager uitstaat en CocoaPods al het pluginwerk doet. Sinds #1733 staat SPM
+  juist aan, en houdt CocoaPods nog precies één plugin over
+  (`desktop_multi_window`). De alinea beschrijft nu wat er werkelijk gebeurt,
+  inclusief waarom de build meldt dat een plugin SPM niet ondersteunt.
+
 - docs: dank **Mieke van Oers** in [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
   Toegevoegd aan de danklijst, alfabetisch op achternaam tussen van Leeuwen en
   Oosenbrug. De app rendert dat bestand rechtstreeks, dus ze staat meteen in de
@@ -516,6 +522,16 @@ in Dutch, and it keeps growing on `main` between releases.
   regel.
 
 ### Fixed
+
+- macOS-build: het Metal-toolchainpad van Xcode 26 zit niet langer in de
+  gekoppelde app. Elke build opende met vier regels `ld: warning: search path
+  '…/Metal.xctoolchain/usr/lib/swift/macosx' not found`, en datzelfde pad —
+  inclusief het koppelnummer van het Metal-cryptex, dat per machine en per
+  Apple-update verschilt — belandde als dode `LC_RPATH` in de uitgebrachte
+  binary. Een `post_install`-haak in [`macos/Podfile`](macos/Podfile) haalt het
+  uit de gegenereerde xcconfigs. De app zelf verandert niet: niets in het
+  bundel hangt aan `@rpath/libswift*`, en de Swift-runtime werd al gevonden via
+  `/usr/lib/swift` en de SDK.
 
 - Cockpit: de waarde-uitlezing liep door de meter heen. Getal en eenheid
   stonden als één ongebonden regel ín de wijzerplaat, precies op de hoogte van
@@ -2416,6 +2432,39 @@ that before deciding whether this alpha fits what you are doing.
   `vector_graphics_compiler` niet af. Er ging niets verloren — de `defs` was al
   leeg — maar een melding die niets betekent leert je de meldingen negeren die
   wél iets betekenen. Een leeggelopen `defs` gaat er nu mee uit.
+- **Het Metal-toolchainpad van Xcode 26 uit de macOS-build.** Elke build opende
+  met vier regels `ld: warning: search path
+  '/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-…/Metal.xctoolchain/usr/lib/swift/macosx'
+  not found`. Sinds Xcode 26 komt de Metal-shadercompiler niet meer uit Xcode
+  zelf maar uit een los gedownload toolchain-cryptex, en zodra dat geladen is
+  wijst `TOOLCHAIN_DIR` tijdens het koppelen daarheen — naar een map met alleen
+  `metal`, `metallib` en `air-*` onder `usr/bin`, en zonder `usr/lib`. CocoaPods
+  en Flutters eigen podhelper hangen daar wél het zoekpad naar de Swift-runtime
+  aan op. Het koppelen ging goed, want de runtime zit ook in `/usr/lib/swift` en
+  in de SDK — maar de tweede plek waar datzelfde pad staat,
+  `LD_RUNPATH_SEARCH_PATHS`, bakt het *in* de app: `otool -l` op de gebouwde
+  binary liet een `LC_RPATH` zien naar `…MetalToolchain-v17.6.109.0.abPHna/…`.
+  Dat koppelnummer verschilt per Metal-asset, dus per machine en per
+  Apple-update, en hoort niet in iets dat we uitbrengen. Een
+  `post_install`-haak in `macos/Podfile` haalt het pad uit die twee regels weg;
+  wat overblijft is genoeg, want niets in het bundel hangt aan
+  `@rpath/libswift*`.
+
+  Twee dingen kostten een ronde. De eerste opzet leidde het pad om naar
+  `DT_TOOLCHAIN_DIR` — dat wijst wél altijd naar Xcodes eigen toolchain en leek
+  netter dan weglaten — maar Xcode verbiedt die variabele hier expliciet:
+  `error: DT_TOOLCHAIN_DIR cannot be used to evaluate LD_RUNPATH_SEARCH_PATHS,
+  use TOOLCHAIN_DIR instead`. Dat kwam pas boven water toen de build écht
+  koppelde; twee builds daarvóór stonden groen omdat er niets te koppelen viel
+  en het oude product bleef staan. En beide schrijfwijzen komen voor — `${…}`
+  van CocoaPods en `$(…)` uit de podhelper, in `Pods-Runner.debug.xcconfig`
+  zelfs samen op één regel — dus wie er één van pakt, laat de waarschuwing
+  gewoon staan. De haak zegt hardop hoeveel bestanden hij raakte (nu 30), zodat
+  de nul opvalt op de dag dat CocoaPods die regels anders gaat schrijven. De
+  derde vindplaats, `SWIFT_STDLIB_PATH` in `Pods-Runner-frameworks.sh`, blijft
+  met opzet staan: die regel zit achter `if [ "${XCODE_VERSION_MAJOR}" -lt 7 ]`
+  en wordt nooit uitgevoerd.
+
 - **Een webexport meldde "geëxporteerd" ook als er niets vertrok (#1902).** In
   de browser is elke uitgang een download, en de app las het uitblijven van een
   uitzondering als succes: `FilePicker.saveFile` geeft op web altijd `null`
