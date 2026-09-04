@@ -1626,6 +1626,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Presentaties op deze server': 'Esitlused sellel serveril',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Järgi esitlust: see slaid teeb seda, mida esitlus tervikuna teeb. Ainult teata: leid loetakse, kuid saaja ei näe midagi — andmed on lihtsalt olemas. Nõustu: andmed kuuluvad siia ja hoiatus kaob. Nõustu + hoiata: saaja näeb märki, et slaidil on isikuandmeid. Jäta välja: leitud andmed muudetakse ekraanil ja ekspordis loetamatuks — teie markdown-fail säilitab algse teksti.',
   'Nu niet': 'Mitte praegu',

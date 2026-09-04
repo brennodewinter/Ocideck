@@ -73,6 +73,7 @@ import '../services/git/version_diff.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
+import '../services/web_deck_index.dart';
 import '../state/collab_session_provider.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';

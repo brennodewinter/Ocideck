@@ -1648,6 +1648,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Presentaties op deze server': 'Presentationes in hoc servitore',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sequere praesentationem: haec lamina facit quod tota praesentatio facit. Solum nuntiare: inventum numeratur, sed accipiens nihil videt — data simpliciter ibi sunt. Acceptare: data hic pertinent et monitio disparet. Acceptare + monere: accipiens videt insigne quod data personalia in lamina sunt. Omitti: data inventa illegibilia fiunt in schermo et in exportatione — tuus markdown fasciculum textum originalem servat.',
   'Nu niet': 'Nunc non',

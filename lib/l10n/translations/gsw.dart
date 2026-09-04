@@ -1636,6 +1636,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Presentaties op deze server': 'Präsentatione uf däm Server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Der Präsentation folge: Die Folie macht, was d Präsentation als Ganzes macht. Nur melde: Der Fund wird zählt, aber der Empfänger gseht nüt — d Date stöhn einfach döt. Akzeptiere: D Date ghöre det und d Warnig verschwindet. Akzeptiere + warne: Der Empfänger gseht e Badge, dass persönlichi Date uf dr Folie stöhn. Weggla: Die gfundene Date wärde uf em Bildschirm und im Export unleserlich — dini Markdown-Datei bhaltet de Originaltext.',
   'Nu niet': 'Jetz nöd',

@@ -665,6 +665,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Presentaties op deze server': 'Presentaciones en este servidor',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Seguir la presentación: esta diapositiva hace lo que hace la presentación en su conjunto. Solo informar: el hallazgo se cuenta, pero el destinatario no ve nada — los datos simplemente están ahí. Aceptar: los datos pertenecen aquí y la advertencia desaparece. Aceptar + advertir: el destinatario ve una insignia de que hay datos personales en la diapositiva. Omitir: los datos encontrados se vuelven ilegibles en pantalla y en la exportación — tu archivo markdown conserva el texto original.',
   'Nu niet': 'Ahora no',

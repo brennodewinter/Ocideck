@@ -1645,6 +1645,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Presentaties op deze server': 'Prezentacje na tym serwerze',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Podążaj za prezentacją: ten slajd robi to, co cała prezentacja. Tylko zgłoś: ustalenie jest liczone, ale odbiorca nic nie widzi — dane po prostu tam są. Zaakceptuj: dane należą tutaj i ostrzeżenie znika. Zaakceptuj + ostrzeż: odbiorca widzi odznakę, że na slajdzie są dane osobowe. Pomiń: znalezione dane stają się nieczytelne na ekranie i w eksporcie — twój plik markdown zachowuje oryginalny tekst.',
   'Nu niet': 'Nie teraz',

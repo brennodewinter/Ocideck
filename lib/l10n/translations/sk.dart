@@ -1639,6 +1639,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Presentaties op deze server': 'Prezentácie na tomto serveri',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Nasleduj prezentáciu: tento snímok robí to, čo prezentácia ako celok. Iba nahlás: nález sa ráta, ale príjemca nič nevidí — údaje sú proste tam. Prijať: údaje sem patria a varovanie zmizne. Prijať + varovať: príjemca vidí odznak, že na snímke sú osobné údaje. Vynechať: nájdené údaje sa stanú nečitateľnými na obrazovke a pri exporte — váš markdown súbor zachováva pôvodný text.',
   'Nu niet': 'Teraz nie',

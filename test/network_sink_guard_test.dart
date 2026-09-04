@@ -407,6 +407,13 @@ void main() {
         // plus de fail-closed schema-assert). Bewust WebSocket.connect en niet
         // IOWebSocketChannel, zodat deze scan de socket wél ziet.
         'lib/xmpp/xmpp_frame_transport_io.dart',
+        // Server-side deck index (WEB-tak). Zelfde redenering als
+        // file_service_net.dart hierboven: op web bestaat de dart:io-pinning
+        // niet en kan ze er niet draaien — de browser (CORS, mixed content) en
+        // de pagina-CSP (`connect-src 'self'`) zijn de gate. Dit bestand haalt
+        // alleen same-origin op (config-bestand + autoindex), en op desktop
+        // returnt `kIsWeb` false vóór er een verbinding geopend wordt.
+        'lib/services/web_deck_index.dart',
       },
       guidance:
           'New network egress primitive (package:http, dio, or a raw socket). '

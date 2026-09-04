@@ -319,6 +319,11 @@ class _WelcomeScreen extends ConsumerWidget {
         label: Text(l10n.t('importUrl')),
         onPressed: () => _importFromUrl(context, ref),
       ),
+      // Op web: presentaties die al op de eigen webserver staan, via de
+      // autoindex. De beheerder configureert dit met een config-bestand op
+      // de server (zie HOSTING.md §7); zonder configuratie is de sectie
+      // onzichtbaar — nul impact op bestaande deployments.
+      ..._serverDecksSection(context, ref, l10n, scheme, secondaryStyle),
       if (supportsLocalProjectFolders) ...[
         const SizedBox(height: 10),
         _wideSecondaryButton(
@@ -370,6 +375,45 @@ class _WelcomeScreen extends ConsumerWidget {
       // heeft.
       ..._imageLibraryButton(context, ref, l10n),
       const SizedBox(height: 4),
+    ];
+  }
+
+  /// Presentaties die op de eigen webserver staan, opgehaald via de autoindex
+  /// van de webserver. Alleen op web, en alleen wanneer de beheerder een
+  /// config-bestand op de server heeft gezet (zie HOSTING.md §7). Zonder
+  /// configuratie of tijdens het laden is de sectie onzichtbaar.
+  List<Widget> _serverDecksSection(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    ColorScheme scheme,
+    ButtonStyle style,
+  ) {
+    if (!isWebPlatform) return const [];
+    final index = ref.watch(webDeckIndexProvider);
+    final decks = index.value;
+    if (decks == null || decks.isEmpty) return const [];
+    return [
+      const SizedBox(height: 10),
+      Divider(color: scheme.outlineVariant),
+      const SizedBox(height: 16),
+      Text(
+        l10n.d('Presentaties op deze server'),
+        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+          fontWeight: FontWeight.w600,
+          color: scheme.onSurfaceVariant,
+        ),
+      ),
+      const SizedBox(height: 10),
+      for (final deck in decks) ...[
+        _wideSecondaryButton(
+          style: style,
+          icon: Icons.description_outlined,
+          label: Text(deck.name),
+          onPressed: () => _importUrlWeb(context, ref, deck.url),
+        ),
+        const SizedBox(height: 10),
+      ],
     ];
   }
 
