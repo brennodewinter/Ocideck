@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.5.0+25",
-  "documentNamespace": "https://ocideck.app/spdx/0e68369b-c997-566b-8142-1a8ccb2bbcd5",
+  "documentNamespace": "https://ocideck.app/spdx/8073ca2b-b463-56c1-8c04-46df164f19c3",
   "creationInfo": {
-    "created": "2026-09-03T11:20:34.976955Z",
+    "created": "2026-09-04T05:21:37.792528Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4849,7 +4849,29 @@
       "comment": "Bundled font file assets/Lora-Variable.ttf."
     },
     {
-      "SPDXID": "SPDXRef-216-Roboto",
+      "SPDXID": "SPDXRef-216-Noto-Sans-Math",
+      "name": "Noto Sans Math",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "OFL-1.1",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1b43b60ccf6137da7624352d985c2c84a285c87158a83574268c53b4d67fed0c"
+        }
+      ],
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:generic/Noto%20Sans%20Math"
+        }
+      ],
+      "comment": "Bundled font file assets/NotoSansMath-subset.ttf."
+    },
+    {
+      "SPDXID": "SPDXRef-217-Roboto",
       "name": "Roboto",
       "supplier": "Organization: The Roboto Project Authors",
       "downloadLocation": "NOASSERTION",
@@ -4872,7 +4894,7 @@
       "comment": "Bundled font file assets/Roboto-Variable.ttf."
     },
     {
-      "SPDXID": "SPDXRef-217-Roboto-Mono",
+      "SPDXID": "SPDXRef-218-Roboto-Mono",
       "name": "Roboto Mono",
       "supplier": "Organization: The Roboto Mono Project Authors",
       "downloadLocation": "NOASSERTION",
@@ -4895,7 +4917,7 @@
       "comment": "Bundled font file assets/RobotoMono-Variable.ttf."
     },
     {
-      "SPDXID": "SPDXRef-218-dompurify",
+      "SPDXID": "SPDXRef-219-dompurify",
       "name": "dompurify",
       "versionInfo": "3.4.13",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/dompurify@3.4.13/dist/purify.min.js",
@@ -4918,7 +4940,7 @@
       "comment": "Vendored into purify.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-219-highlight.js",
+      "SPDXID": "SPDXRef-220-highlight.js",
       "name": "highlight.js",
       "versionInfo": "11.11.1",
       "downloadLocation": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js",
@@ -4941,7 +4963,7 @@
       "comment": "Vendored into highlight.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-220-marked",
+      "SPDXID": "SPDXRef-221-marked",
       "name": "marked",
       "versionInfo": "18.0.5",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js",
@@ -4964,7 +4986,7 @@
       "comment": "Vendored into marked.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-221-mathjax",
+      "SPDXID": "SPDXRef-222-mathjax",
       "name": "mathjax",
       "versionInfo": "3.2.2",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js",
@@ -4987,7 +5009,7 @@
       "comment": "Vendored into tex-svg.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-222-mermaid",
+      "SPDXID": "SPDXRef-223-mermaid",
       "name": "mermaid",
       "versionInfo": "11.16.1",
       "downloadLocation": "https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js",
@@ -5010,7 +5032,7 @@
       "comment": "Vendored into mermaid.min.js, inlined into the HTML export."
     },
     {
-      "SPDXID": "SPDXRef-223-dart",
+      "SPDXID": "SPDXRef-224-dart",
       "name": "dart",
       "versionInfo": "^3.12.0",
       "supplier": "Organization: dart-lang",
@@ -5021,7 +5043,7 @@
       "comment": "Dart SDK constraint from pubspec.yaml (environment.sdk)."
     },
     {
-      "SPDXID": "SPDXRef-224-flutter",
+      "SPDXID": "SPDXRef-225-flutter",
       "name": "flutter",
       "versionInfo": "3.47.1",
       "supplier": "Organization: flutter",
@@ -5032,7 +5054,7 @@
       "comment": "Pinned build SDK (.tool-versions)."
     },
     {
-      "SPDXID": "SPDXRef-225-desktop-multi-window",
+      "SPDXID": "SPDXRef-226-desktop-multi-window",
       "name": "desktop_multi_window",
       "versionInfo": "0.3.0",
       "supplier": "Organization: MixinNetwork",
@@ -5050,7 +5072,7 @@
       "comment": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
-      "SPDXID": "SPDXRef-226-markdown-quill",
+      "SPDXID": "SPDXRef-227-markdown-quill",
       "name": "markdown_quill",
       "versionInfo": "4.3.0",
       "supplier": "Organization: TarekkMA",
@@ -5102,22 +5124,27 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-216-Roboto"
+      "relatedSpdxElement": "SPDXRef-216-Noto-Sans-Math"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-217-Roboto-Mono"
+      "relatedSpdxElement": "SPDXRef-217-Roboto"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-225-desktop-multi-window"
+      "relatedSpdxElement": "SPDXRef-218-Roboto-Mono"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-226-markdown-quill"
+      "relatedSpdxElement": "SPDXRef-226-desktop-multi-window"
+    },
+    {
+      "spdxElementId": "SPDXRef-0-ocideck",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-227-markdown-quill"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5132,27 +5159,27 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-218-dompurify"
+      "relatedSpdxElement": "SPDXRef-219-dompurify"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-219-highlight.js"
+      "relatedSpdxElement": "SPDXRef-220-highlight.js"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-220-marked"
+      "relatedSpdxElement": "SPDXRef-221-marked"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-221-mathjax"
+      "relatedSpdxElement": "SPDXRef-222-mathjax"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-222-mermaid"
+      "relatedSpdxElement": "SPDXRef-223-mermaid"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5382,7 +5409,7 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-223-dart"
+      "relatedSpdxElement": "SPDXRef-224-dart"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -5392,7 +5419,7 @@
     {
       "spdxElementId": "SPDXRef-0-ocideck",
       "relationshipType": "DEPENDS_ON",
-      "relatedSpdxElement": "SPDXRef-224-flutter"
+      "relatedSpdxElement": "SPDXRef-225-flutter"
     },
     {
       "spdxElementId": "SPDXRef-0-ocideck",
@@ -9010,22 +9037,22 @@
       "relatedSpdxElement": "SPDXRef-163-string-scanner"
     },
     {
-      "spdxElementId": "SPDXRef-225-desktop-multi-window",
+      "spdxElementId": "SPDXRef-226-desktop-multi-window",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-52-flutter"
     },
     {
-      "spdxElementId": "SPDXRef-226-markdown-quill",
+      "spdxElementId": "SPDXRef-227-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-17-collection"
     },
     {
-      "spdxElementId": "SPDXRef-226-markdown-quill",
+      "spdxElementId": "SPDXRef-227-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-63-flutter-quill"
     },
     {
-      "spdxElementId": "SPDXRef-226-markdown-quill",
+      "spdxElementId": "SPDXRef-227-markdown-quill",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-100-markdown"
     }

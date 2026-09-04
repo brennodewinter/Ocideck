@@ -18,6 +18,10 @@ void main() {
     'assets/fonts/Roboto-Variable.ttf',
   ).readAsBytesSync().buffer.asByteData();
 
+  ByteData notoMath() => File(
+    'assets/fonts/NotoSansMath-subset.ttf',
+  ).readAsBytesSync().buffer.asByteData();
+
   group('DocumentPdfFonts', () {
     test('een schreefletter in het thema levert een schreefletter op', () {
       expect(
@@ -81,6 +85,39 @@ void main() {
       expect(missing.map(String.fromCharCode).join(), contains('本'));
     });
 
+    test('zonder symbolen-font is een pijl unsupported', () {
+      // Roboto dekt geen pijlen (U+2190–U+21FF) — het issue dat #1968 oplost.
+      final fonts = DocumentPdfFonts.forFamily('Arial', fallbackFont: roboto());
+      expect(fonts.unsupportedRunes('Kritiek → hoog'), contains(0x2192));
+    });
+
+    test('met symbolen-font komt een pijl er wél in', () {
+      final fonts = DocumentPdfFonts.forFamily(
+        'Arial',
+        fallbackFont: roboto(),
+        symbolFont: notoMath(),
+      );
+      expect(fonts.unsupportedRunes('Kritiek → hoog'), isEmpty);
+    });
+
+    test('met symbolen-font komen wiskundetekens er wél in', () {
+      final fonts = DocumentPdfFonts.forFamily(
+        'Arial',
+        fallbackFont: roboto(),
+        symbolFont: notoMath(),
+      );
+      expect(fonts.unsupportedRunes('x ≤ ∞, y ≥ 0, z ≠ 1'), isEmpty);
+    });
+
+    test('het symboolfont komt ná Roboto in de terugvallijst', () {
+      final fonts = DocumentPdfFonts.forFamily(
+        'Arial',
+        fallbackFont: roboto(),
+        symbolFont: notoMath(),
+      );
+      expect(fonts.fallback, hasLength(2));
+    });
+
     // De tekst in een ingesloten tekening gaat niet door het thema maar door de
     // SVG-lezer van `package:pdf`, en die kent alleen Latin-1 (#1942).
     group('de snede voor een ingesloten tekening', () {
@@ -112,6 +149,33 @@ void main() {
         final fonts = DocumentPdfFonts.forFamily('Arial');
         expect(fonts.svgTypesetting(typographic).settable, isFalse);
         expect(fonts.svgTypesetting(latin).settable, isTrue);
+      });
+
+      test('een pijl in een diagram kiest het symbolen-font', () {
+        // De SVG-lezer kiest één font voor alle tekst — Roboto dekt geen pijlen,
+        // dus het symbolen-font moet het worden (#1968).
+        const withArrow = '<svg><text>Kritiek → hoog</text></svg>';
+        final fonts = DocumentPdfFonts.forFamily(
+          'Arial',
+          fallbackFont: roboto(),
+          symbolFont: notoMath(),
+        );
+        final typesetting = fonts.svgTypesetting(withArrow);
+        expect(typesetting.settable, isTrue);
+        // Het symbolen-font is het tweede in de fallback-lijst.
+        expect(typesetting.font, same(fonts.fallback[1]));
+      });
+
+      test('een gedachtestreepje kiest nog steeds Roboto', () {
+        // Roboto dekt U+2014 — het symbolen-font is hier niet nodig.
+        final fonts = DocumentPdfFonts.forFamily(
+          'Arial',
+          fallbackFont: roboto(),
+          symbolFont: notoMath(),
+        );
+        final typesetting = fonts.svgTypesetting(typographic);
+        expect(typesetting.settable, isTrue);
+        expect(typesetting.font, same(fonts.unicode));
       });
     });
   });

@@ -35,6 +35,7 @@ class DocumentPdfFonts {
     required this.mono,
     this.fallback = const [],
     this.fallbackCoverage = const {},
+    this.primaryCoverage = const {},
   });
 
   final pw.Font base;
@@ -51,6 +52,12 @@ class DocumentPdfFonts {
   /// de tabel zelf.
   final Map<int, int> fallbackCoverage;
 
+  /// De dekking van alleen het primaire terugvalfont (Roboto). [svgTypesetting]
+  /// gebruikt dit om te beslissen of het symbolen-font nodig is — de SVG-lezer
+  /// kiest één font, en als het primaire font een teken niet kent, is het
+  /// symbolen-font de enige hoop (#1968).
+  final Map<int, int> primaryCoverage;
+
   /// Bouwt de sneden voor een document met een *schreefloze* of *schreef*-letter,
   /// afgeleid van [fontFamily] van het stijlprofiel.
   ///
@@ -62,16 +69,28 @@ class DocumentPdfFonts {
   /// [fallbackFont] zijn de bytes van een Unicode-rijk TTF-bestand (in OciDeck
   /// het gebundelde Roboto). Ontbreekt het, dan blijft de export bij Latin-1 —
   /// [unsupportedRunes] meldt dan navenant meer.
+  ///
+  /// [symbolFont] is een aanvullend terugvalfont voor tekens die [fallbackFont]
+  /// niet dekt — pijlen (U+2192), wiskundige operatoren (U+2264), en meer. De
+  /// `fallback`-lijst is al een lijst, dus dit font komt erachter te staan en
+  /// de `pdf`-bibliotheek probeert ze in volgorde (#1968).
   factory DocumentPdfFonts.forFamily(
     String fontFamily, {
     ByteData? fallbackFont,
+    ByteData? symbolFont,
   }) {
     final serif = _serifFamilies.contains(fontFamily.toLowerCase().trim());
     final fallbacks = <pw.Font>[];
     var coverage = const <int, int>{};
+    var primaryCov = const <int, int>{};
     if (fallbackFont != null) {
       fallbacks.add(pw.Font.ttf(fallbackFont));
-      coverage = TtfParser(fallbackFont).charToGlyphIndexMap;
+      primaryCov = TtfParser(fallbackFont).charToGlyphIndexMap;
+      coverage = primaryCov;
+    }
+    if (symbolFont != null) {
+      fallbacks.add(pw.Font.ttf(symbolFont));
+      coverage = {...coverage, ...TtfParser(symbolFont).charToGlyphIndexMap};
     }
     return DocumentPdfFonts(
       base: serif ? pw.Font.times() : pw.Font.helvetica(),
@@ -83,6 +102,7 @@ class DocumentPdfFonts {
       mono: pw.Font.courier(),
       fallback: fallbacks,
       fallbackCoverage: coverage,
+      primaryCoverage: primaryCov,
     );
   }
 
@@ -139,7 +159,17 @@ class DocumentPdfFonts {
     if (!svg.runes.any((rune) => rune > 0xFF)) {
       return const SvgTypesetting.standard();
     }
-    final font = unicode;
+    // De SVG-lezer van `package:pdf` kiest één font voor alle `<text>`-knopen,
+    // zonder terugvallijst. Roboto dekt Latijns, Grieks, Cyrillisch — maar geen
+    // pijlen of wiskundetekens. Bevat de SVG zulke tekens, dan kiest het
+    // symbolen-font: een pijl die er wél is maar in de verkeerde snede staat is
+    // beter dan een leeg blokje in de juiste snede (#1968).
+    final hasUncoveredByPrimary = svg.runes.any(
+      (rune) => rune > 0xFF && !primaryCoverage.containsKey(rune),
+    );
+    final font = hasUncoveredByPrimary && fallback.length > 1
+        ? fallback[1]
+        : unicode;
     return font == null
         ? const SvgTypesetting.unsettable()
         : SvgTypesetting.withFont(font);

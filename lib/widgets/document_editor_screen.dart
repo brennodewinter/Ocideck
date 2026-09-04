@@ -919,6 +919,9 @@ Future<String?> _writeDocumentExport(
     pdfFallbackFont: format == DocumentExportFormat.pdf
         ? await loadPdfFallbackFont()
         : null,
+    pdfSymbolFont: format == DocumentExportFormat.pdf
+        ? await loadPdfSymbolFont()
+        : null,
     onPdfUnsupportedCharacters: (runes) =>
         warnAboutUnsupportedCharacters(messenger, l10n, runes),
     onPdfCoarseLogo: (logo) => warnAboutCoarseLogo(messenger, l10n, logo),

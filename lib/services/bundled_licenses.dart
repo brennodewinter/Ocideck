@@ -80,6 +80,12 @@ abstract final class BundledLicenses {
       source: 'https://github.com/googlefonts/robotomono',
       licenseAsset: 'assets/fonts/RobotoMono-OFL.txt',
     ),
+    BundledLicense(
+      component: 'Noto Sans Math (font, subset)',
+      license: 'OFL-1.1',
+      source: 'https://github.com/notofonts/math',
+      licenseAsset: 'assets/fonts/NotoSansMath-OFL.txt',
+    ),
     // Same font, registered under the generic `monospace` alias in
     // pubspec.yaml so every `fontFamily: 'monospace'` reference resolves to
     // the bundled file on the CanvasKit web engine (#1784). Listed separately

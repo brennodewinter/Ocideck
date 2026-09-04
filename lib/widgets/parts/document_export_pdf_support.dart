@@ -31,6 +31,21 @@ Future<ByteData?> loadPdfFallbackFont() async {
   }
 }
 
+/// Aanvullend terugvalfont voor pijlen en wiskundige tekens die Roboto niet
+/// dekt (U+2192 →, U+2264 ≤, U+221E ∞, en meer). Een subset van Noto Sans
+/// Math, beperkt tot de Unicode-blocks die in diagrammen en formules voorkomen
+/// — ~250 KB in plaats van de volledige 1 MB (#1968).
+///
+/// Komt ná [loadPdfFallbackFont] in de terugvallijst te staan: de `pdf`-
+/// bibliotheek probeert ze in volgorde, dus Roboto krijgt eerst de kans.
+Future<ByteData?> loadPdfSymbolFont() async {
+  try {
+    return await rootBundle.load('assets/fonts/NotoSansMath-subset.ttf');
+  } on Exception {
+    return null;
+  }
+}
+
 /// De teksten die de PDF-lagen zelf niet kennen, in de taal van de interface.
 DocumentPdfLabels documentPdfLabels(AppLocalizations l10n) => DocumentPdfLabels(
   footnotesTitle: l10n.d('Noten'),
