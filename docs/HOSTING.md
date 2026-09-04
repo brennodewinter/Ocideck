@@ -343,6 +343,73 @@ than the file itself, since a checksum served from the same place proves nothing
 against whoever can replace both. →
 [BUILD.md](BUILD.md#verifying-a-bundle-you-downloaded)
 
+## 7. Optional: server-side deck library
+
+By default the web build asks each visitor to open a file from their own
+machine — there is no server-side storage. If you want to host a library of
+presentations on the same server and let visitors browse them, you can do so
+with **only static files and your web server's built-in directory listing** —
+no backend, no API, no application server.
+
+### How it works
+
+1. You put `.md` files in a directory on the server (e.g. `/var/www/decks/`).
+2. You enable directory listing for that directory (Apache `Options +Indexes`,
+   Nginx `autoindex on`).
+3. You place a small config file at the app's root that tells the web app where
+   to look.
+4. The web app fetches the directory listing, parses the `.md` links, and shows
+   them on the welcome screen under "Presentaties op deze server". When a
+   visitor picks one, the app fetches that `.md` over HTTPS (same origin) and
+   opens it in the browser tab — the same in-memory flow as URL import.
+
+### Configuration file
+
+Create `ocideck-web-config.json` at the root of the app (the same directory as
+`index.html`):
+
+```json
+{"decksPath": "/decks/"}
+```
+
+- `decksPath` is the URL path to the directory with your `.md` files. It can be
+  absolute (`/decks/`) or relative to the app (`decks/`).
+- If the file is absent or `decksPath` is missing, the feature is off — the
+  welcome screen shows no server-deck section. This is the default, so existing
+  deployments are unaffected.
+
+### Web server configuration
+
+**Apache** — enable autoindex for the decks directory:
+
+```apache
+<Directory /var/www/decks>
+  Options +Indexes
+  AllowOverride None
+  Require all granted
+</Directory>
+```
+
+**Nginx** — enable autoindex for the decks location:
+
+```nginx
+location /decks/ {
+  autoindex on;
+}
+```
+
+Both produce HTML pages with `<a href="file.md">` links that the web app
+parses. Subdirectories are not followed — the listing is flat.
+
+### Security notes
+
+- The decks directory is **public** — anyone who can reach the app can read the
+  listings and the `.md` files. Put only public presentations there.
+- Fetching is same-origin (`connect-src 'self'`), so the CSP does not need to
+  change.
+- The `.md` files pass through the same security gate as URL import: executable
+  content is refused at open time.
+
 ## Checklist
 
 Everything under "Release conditions" is a condition for a publicly reachable
@@ -374,3 +441,6 @@ serving a static bundle.
 - [ ] `/sbom/` reachable
 - [ ] Users told what the web build cannot do (§5) — the missing image privacy
       check in particular, if they present photographs of people
+- [ ] If hosting a server-side deck library (§7): `ocideck-web-config.json`
+      placed, autoindex enabled, and only public presentations in the decks
+      directory

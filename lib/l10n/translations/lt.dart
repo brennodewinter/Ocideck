@@ -1640,6 +1640,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Presentaties op deze server': 'Pristatymai šiame serveryje',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sekti pristatymą: šis skaidrė daro tai, ką daro pristatymas apskritai. Tik pranešti: išvada skaičiuojama, bet gavėjas nieko nemato — duomenys tiesiog ten yra. Priimti: duomenys priklauso čia ir įspėjimas dingsta. Priimti + įspėti: gavėjas mato ženklą, kad skaidrėje yra asmens duomenų. Praleisti: rasti duomenys padaromi neįskaitomais ekrane ir eksporte — jūsų markdown failas išlaiko originalų tekstą.',
   'Nu niet': 'Ne dabar',

@@ -1663,6 +1663,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Presentaties op deze server': 'Léirithe ar an bhfreastalaí seo',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Lean an cur i láthair: déanann an sleamhnán seo an rud a dhéanann an cur i láthair in iomlán. Tuairiscigh amháin: déantar an fhionnachtain a chomhaireamh, ach níl aon rud le feiceáil ag an bhfaighteoir — tá na sonraí ann simplí. Glac leis: leis na sonraí anseo agus imíonn an rabhadh. Glac leis + rabhadh: feiceann an faighteoir badge go bhfuil sonraí pearsanta ar an sleamhnán. Fág as: déantar na sonraí a aimsíodh do-léite ar an scáileán agus san onnmhairiú — coimeádann do chomhad markdown an téacs bunaidh.',
   'Nu niet': 'Ní anois',

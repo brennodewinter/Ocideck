@@ -1658,6 +1658,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Presentaties op deze server': 'Παρουσιάσεις σε αυτόν τον διακομιστή',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Ακολουθήστε την παρουσίαση: αυτή η διαφάνεια κάνει ό,τι κάνει η παρουσίαση συνολικά. Μόνο αναφορά: η διαπίστωση μετράται, αλλά ο παραλήπτης δεν βλέπει τίποτα — τα δεδομένα είναι απλά εκεί. Αποδοχή: τα δεδομένα ανήκουν εδώ και η προειδοποίηση εξαφανίζεται. Αποδοχή + προειδοποίηση: ο παραλήπτης βλέπει ένα σήμα ότι υπάρχουν προσωπικά δεδομένα στη διαφάνεια. Απόκρυψη: τα δεδομένα που βρέθηκαν γίνονται δυσανάγνωστα στην οθόνη και στην εξαγωγή — το αρχείο markdown διατηρεί το αρχικό κείμενο.',
   'Nu niet': 'Όχι τώρα',

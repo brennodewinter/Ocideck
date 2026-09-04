@@ -668,6 +668,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Presentaties op deze server': 'Presentaasjes op dizze server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Folgje de presintaasje: dizze dia docht wat de presintaasje as gehiel docht. Allinne melde: de befining wurdt teld, mar de ûntfanger sjocht neat — de gegevens steane der gewoan. Akseptearje: de gegevens hearre hjir en de warskôging ferdwynt. Akseptearje + warskôgje: de ûntfanger sjocht in badge dat der persoansgegevens op de dia steane. Weglitte: de fûne gegevens wurde ûnleesber makke op it skerm en yn de eksport — jo markdown-bestân hâldt de oarspronklike tekst.',
   'Nu niet': 'No net',

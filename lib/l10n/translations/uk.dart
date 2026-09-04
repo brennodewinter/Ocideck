@@ -1648,6 +1648,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Presentaties op deze server': 'Презентації на цьому сервері',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Дотримуватись презентації: цей слайд робить те, що робить презентація загалом. Лише повідомити: знахідка враховується, але одержувач нічого не бачить — дані просто там є. Прийняти: дані належать тут і попередження зникає. Прийняти + попередити: одержувач бачить позначку, що на слайді є персональні дані. Прибрати: знайдені дані стають нечитабельними на екрані та в експорті — ваш markdown-файл зберігає оригінальний текст.',
   'Nu niet': 'Не зараз',

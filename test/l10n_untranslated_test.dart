@@ -65,6 +65,9 @@ void main() {
     ),
     // Klingon heeft geen gangbare vertaling voor deze conflictmelding.
     ('tlh', 'The file has been modified by another program.'),
+    // Klingon heeft geen woord voor "presentaties" of "server" in deze
+    // context; de welkomstscherm-sectie staat er in het Engels (#1986).
+    ('tlh', 'Presentations on this server'),
     // Deense interfaceterm die letterlijk zo geleend is.
     ('da', 'Look and feel'),
 

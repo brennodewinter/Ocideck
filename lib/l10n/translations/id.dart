@@ -1633,6 +1633,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Presentaties op deze server': 'Presentasi di server ini',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Ikuti presentasi: slide ini melakukan apa yang dilakukan presentasi secara keseluruhan. Hanya laporkan: temuan dihitung, tetapi penerima tidak melihat apa pun — datanya memang ada di sana. Terima: datanya memang di sini dan peringatan hilang. Terima + peringatkan: penerima melihat badge bahwa ada data pribadi di slide. Redaksi: data yang ditemukan dibuat tidak terbaca di layar dan ekspor — file markdown Anda menyimpan teks asli.',
   'Nu niet': 'Sekarang tidak',

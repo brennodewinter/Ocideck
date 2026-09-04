@@ -1634,6 +1634,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Presentaties op deze server': 'Prezentace na tomto serveru',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Následovat prezentaci: tento snímek dělá to, co prezentace jako celek. Pouze nahlásit: nález se počítá, ale příjemce nic nevidí — data jsou prostě tam. Přijmout: data sem patří a varování zmizí. Přijmout + varovat: příjemce vidí odznak, že na snímku jsou osobní údaje. Vynechat: nalezená data se znepřístupní na obrazovce a v exportu — váš markdown soubor zachovává původní text.',
   'Nu niet': 'Teď ne',

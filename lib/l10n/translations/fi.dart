@@ -1633,6 +1633,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Presentaties op deze server': 'Esitykset tällä palvelimella',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Seuraa esitystä: tämä dia tekee sen, mitä esitys kokonaisuudessaan tekee. Vain ilmoita: löytö lasketaan, mutta vastaanottaja ei näe mitään — tiedot ovat vain siinä. Hyväksy: tiedot kuuluvat tänne ja varoitus katoaa. Hyväksy + varoita: vastaanottaja näkee merkin, että diassa on henkilötietoja. Poista: löydetyt tiedot tehdään lukukelvottomiksi näytöllä ja viennissä — markdown-tiedostosi säilyttää alkuperäisen tekstin.',
   'Nu niet': 'Ei nyt',

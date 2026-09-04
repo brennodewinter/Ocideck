@@ -831,6 +831,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Presentaties op deze server': 'Presentations on this server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Follow the presentation: this slide does what the presentation as a whole does. Report only: the finding is counted, but the recipient sees nothing — the data is just there. Accept: the data belongs here and the warning disappears. Accept + warn: the recipient sees a badge that there is personal data on the slide. Redact: the found data is made unreadable on screen and in the export — your markdown file keeps the original text.',
   'Nu niet': 'Not now',

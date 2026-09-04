@@ -1633,6 +1633,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Presentaties op deze server': 'Predstavitve na tem strežniku',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sledi predstavitvi: ta diapozitiv stori to, kar stori predstavitev kot celota. Samo poročaj: najdba se šteje, prejemnik pa ne vidi ničesar — podatki so preprosto tam. Sprejmi: podatki spadajo sem in opozorilo izgine. Sprejmi + opozori: prejemnik vidi značko, da so na diapozitivu osebni podatki. Izpusti: najdeni podatki postanejo neberljivi na zaslonu in pri izvozu — vaša markdown datoteka obdrži izvirno besedilo.',
   'Nu niet': 'Ne zdaj',

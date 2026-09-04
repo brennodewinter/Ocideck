@@ -667,6 +667,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Presentaties op deze server': 'Presentashonnan na e server aki',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sigue e presentashon: e slaidi aki ta hasi loke e presentashon kompletu ta hasi. Solo notifiká: e hallazgo ta wòrdu kontá, pero e resibí no ta wèrdu nada — e datanan ta ai mester. Aseptá: e datanan ta pertenesé aki i e advertensia ta disparsé. Aseptá + advertí: e resibí ta wèrdu un badge ku tin datonan personal riba e slaidi. Kita for di pantaya i eksportashon: e datanan hañá ta wòrdu hañá inleíbel riba e pantaya i den eksportashon — bo fail di markdown ta keda ku e teksto original.',
   'Nu niet': 'Awor no',
