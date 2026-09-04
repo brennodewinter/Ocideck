@@ -1695,9 +1695,12 @@ For focused work, run only the relevant slice instead of the whole suite:
   theme colours) without depending on glyph rendering. The PNGs are pixel- and
   **platform-specific**, so they are tagged `golden` and **excluded from the
   default suite** — run them on **one** platform. `make test-golden` compares;
-  `make test-golden UPDATE=1` accepts an intentional visual change. (To gate them
-  once a CI runner exists, add a single-platform job that runs `make test-golden`
-  and regenerate the PNGs on that platform.)
+  `make test-golden UPDATE=1` accepts an intentional visual change. (Gated in CI
+  since #1988: `macos-gate.yml` runs `make test-golden` on every push to `main`
+  on the Mac-runner — a post-merge vangnet that een sub-promille renderlaag-
+  verschuiving binnen minuten ziet in plaats van pas wanneer iemand lokaal `make
+  check` draait. Geen required PR-check, want de Mac-runner staat niet altijd
+  aan en de goldens zijn machine-specifiek.)
 
   *Corrected 2026-07-22 (#617): this said "each slide type" while the file
   covered **eight** of the 24 types there were then. Everything built after the
@@ -1711,7 +1714,9 @@ For focused work, run only the relevant slice instead of the whole suite:
   than raised — it would only rot again.) Two sentences to keep straight: they
   are still excluded from `make check`, deliberately — a pixel comparison in the default
   gate would fail on any machine but this one — and they are still only as good
-  as somebody typing `make test-golden`.*
+  as somebody typing `make test-golden`. Sinds #1988 draait `macos-gate.yml` ze
+  op `push: main` op de Mac-runner, dus een vergeten handmatige run is niet meer
+  de enige vangst.*
 
 - **`make clean-test-cache`** — deletes `build/test_cache` and nothing else.
   `flutter test` keeps an incremental kernel cache there

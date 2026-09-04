@@ -1,0 +1,59 @@
+# De golden-gate op de Mac-runner (mac-brenno, label macos, host-modus).
+#
+# **Waarom deze workflow bestaat.** De golden-tests (`make test-golden`) zijn
+# pixel-specifiek en draaien alleen op macOS — `static-gate.yml` draait op Linux
+# en kan ze niet meenemen. Zonder deze poort dreef `main` rood op 23 goldens
+# (#1988) zonder dat een CI-check het zag: de enige die de goldens draaide was
+# de committer lokaal, en een vergeten `make test-golden` is precies hoe een
+# sub-promille renderlaag-verschuiving onopgemerkt blijft tot iemand de poort
+# nodig heeft en dan aantreft dat ze "altijd al rood was".
+#
+# **Wat hij doet.** Eén job, één stap: `make test-golden`. Dat draait de 51
+# golden-tests (~2 minuten op de Mac-runner) en vergelijkt tegen de committed
+# PNGs. Faalt hij, dan staat de diff in `test/golden/failures/` — met eigen ogen
+# bevestigen vóór `UPDATE=1`, want blind regenereren maakt de poort groen en
+# blind.
+#
+# **Waarom host-modus en niet op de container.** Apple staat macOS alleen op
+# Apple-hardware toe, dus deze job draait direct op de Mac, met dezelfde
+# gepinde Flutter die `check-toolchain` bewaakt. Er wordt niets geïnstalleerd
+# en er valt niets te cachen — zelfde aanpak als `macos-build.yml`.
+#
+# **Waarom alleen op `push: main` en niet per PR.** De goldens zijn
+# machine-specifiek (Ahem-font op deze Mac), en de Mac-runner staat niet altijd
+# aan — een required PR-check die wacht tot de Mac opstart blokkeert de
+# review-wachtrij. Deze poort is een post-merge vangnet: vangt een regressie
+# binnen minuten na de merge in plaats van pas wanneer iemand lokaal `make
+# check` draait. Staat de Mac uit, dan wacht de run; een volgende merge
+# vervangt een wachtende run.
+#
+# **Waarom niet samengevoegd met `macos-build.yml`.** Die workflow draait alleen
+# wanneer native-buildpaden veranderen (`pubspec.yaml`, `macos/**`, …); een
+# golden-regressie komt uit élke code-wijziging, niet alleen uit native work.
+# De build is bovendien duur (minuten); de golden-suite is goedkoop (~2 min).
+# Gescheiden houden houdt beide triggers schoon.
+name: macos-gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+# Zelfde concurrency-gedrag als static-gate: een nieuwe push zet de lopende
+# run opzij, want de golden-suite bekijkt de hele boom op de nieuwste commit.
+concurrency:
+  group: macos-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  golden-gate:
+    runs-on: macos
+    steps:
+      - uses: actions/checkout@v4
+
+      # Host-modus: de toolchain staat al op de Mac, net als bij macos-build.
+      - name: Afhankelijkheden ophalen
+        run: flutter pub get
+
+      - name: Golden visual-regression suite
+        run: make test-golden
