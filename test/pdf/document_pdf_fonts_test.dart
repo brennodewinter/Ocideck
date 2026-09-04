@@ -18,6 +18,10 @@ void main() {
     'assets/fonts/Roboto-Variable.ttf',
   ).readAsBytesSync().buffer.asByteData();
 
+  ByteData inter() => File(
+    'assets/fonts/Inter-Variable.ttf',
+  ).readAsBytesSync().buffer.asByteData();
+
   ByteData notoMath() => File(
     'assets/fonts/NotoSansMath-subset.ttf',
   ).readAsBytesSync().buffer.asByteData();
@@ -74,12 +78,18 @@ void main() {
     test('met terugvalfont komen Pools, Grieks en Cyrillisch er wél in', () {
       // Niet aangenomen maar afgelezen: de dekking komt uit de cmap-tabel van
       // het bestand zelf.
-      final fonts = DocumentPdfFonts.forFamily('Arial', fallbackFont: roboto());
+      final fonts = DocumentPdfFonts.forFamily(
+        'Arial',
+        fallbackFonts: [roboto()],
+      );
       expect(fonts.unsupportedRunes('Łódź Ελλάδα Привет'), isEmpty);
     });
 
     test('wat ook het terugvalfont niet kent wordt gemeld', () {
-      final fonts = DocumentPdfFonts.forFamily('Arial', fallbackFont: roboto());
+      final fonts = DocumentPdfFonts.forFamily(
+        'Arial',
+        fallbackFonts: [roboto()],
+      );
       final missing = fonts.unsupportedRunes('日本語');
       expect(missing, isNotEmpty);
       expect(missing.map(String.fromCharCode).join(), contains('本'));
@@ -87,15 +97,17 @@ void main() {
 
     test('zonder symbolen-font is een pijl unsupported', () {
       // Roboto dekt geen pijlen (U+2190–U+21FF) — het issue dat #1968 oplost.
-      final fonts = DocumentPdfFonts.forFamily('Arial', fallbackFont: roboto());
+      final fonts = DocumentPdfFonts.forFamily(
+        'Arial',
+        fallbackFonts: [roboto()],
+      );
       expect(fonts.unsupportedRunes('Kritiek → hoog'), contains(0x2192));
     });
 
     test('met symbolen-font komt een pijl er wél in', () {
       final fonts = DocumentPdfFonts.forFamily(
         'Arial',
-        fallbackFont: roboto(),
-        symbolFont: notoMath(),
+        fallbackFonts: [roboto(), inter(), notoMath()],
       );
       expect(fonts.unsupportedRunes('Kritiek → hoog'), isEmpty);
     });
@@ -103,19 +115,26 @@ void main() {
     test('met symbolen-font komen wiskundetekens er wél in', () {
       final fonts = DocumentPdfFonts.forFamily(
         'Arial',
-        fallbackFont: roboto(),
-        symbolFont: notoMath(),
+        fallbackFonts: [roboto(), inter(), notoMath()],
       );
       expect(fonts.unsupportedRunes('x ≤ ∞, y ≥ 0, z ≠ 1'), isEmpty);
     });
 
-    test('het symboolfont komt ná Roboto in de terugvallijst', () {
+    test('de terugvallijst houdt de volgorde die de aanroeper gaf', () {
+      // De volgorde is de bedoeling: `fontFallback` ketent er per teken
+      // doorheen en pakt de eerste die het teken kent, en `svgTypesetting`
+      // gebruikt hem om gelijk scorende sneden te scheiden.
       final fonts = DocumentPdfFonts.forFamily(
         'Arial',
-        fallbackFont: roboto(),
-        symbolFont: notoMath(),
+        fallbackFonts: [roboto(), inter(), notoMath()],
       );
-      expect(fonts.fallback, hasLength(2));
+      expect(fonts.fallback, hasLength(3));
+      expect(fonts.fallbackCoverages, hasLength(3));
+      // Roboto kent geen pijl, Inter wel — dus de tweede dekking, niet de eerste.
+      expect(fonts.fallbackCoverages[0].containsKey(0x2192), isFalse);
+      expect(fonts.fallbackCoverages[1].containsKey(0x2192), isTrue);
+      // En de unie is wat voor de lopende tekst telt.
+      expect(fonts.fallbackCoverage.containsKey(0x2192), isTrue);
     });
 
     // De tekst in een ingesloten tekening gaat niet door het thema maar door de
@@ -127,7 +146,7 @@ void main() {
       test('Latin-1 laat de lezer zijn eigen standaardsneden kiezen', () {
         final fonts = DocumentPdfFonts.forFamily(
           'Arial',
-          fallbackFont: roboto(),
+          fallbackFonts: [roboto()],
         );
         final typesetting = fonts.svgTypesetting(latin);
         expect(typesetting.settable, isTrue);
@@ -137,7 +156,7 @@ void main() {
       test('een gedachtestreepje vraagt om het Unicode-font', () {
         final fonts = DocumentPdfFonts.forFamily(
           'Arial',
-          fallbackFont: roboto(),
+          fallbackFonts: [roboto()],
         );
         final typesetting = fonts.svgTypesetting(typographic);
         expect(typesetting.settable, isTrue);
@@ -151,27 +170,59 @@ void main() {
         expect(fonts.svgTypesetting(latin).settable, isTrue);
       });
 
-      test('een pijl in een diagram kiest het symbolen-font', () {
-        // De SVG-lezer kiest één font voor alle tekst — Roboto dekt geen pijlen,
-        // dus het symbolen-font moet het worden (#1968).
-        const withArrow = '<svg><text>Kritiek → hoog</text></svg>';
+      test('een pijl kiest de snede die het hele label aankan', () {
+        // Deze test toetste eerst wélk font uit de lijst gekozen werd (#1968) —
+        // en dat was de verkeerde vraag. Het gekozen wiskundefont had geen
+        // enkele letter en geen spatie, dus het label werd onzetbaar en de
+        // export brak af (#1987). De vraag is of de gekozen snede dit label
+        // kán zetten: Inter kan het, Roboto niet (geen pijl) en het
+        // wiskundefont niet (geen letters).
         final fonts = DocumentPdfFonts.forFamily(
           'Arial',
-          fallbackFont: roboto(),
-          symbolFont: notoMath(),
+          fallbackFonts: [roboto(), inter(), notoMath()],
         );
-        final typesetting = fonts.svgTypesetting(withArrow);
+        final typesetting = fonts.svgTypesetting(
+          '<svg><text>Kritiek → hoog</text></svg>',
+        );
         expect(typesetting.settable, isTrue);
-        // Het symbolen-font is het tweede in de fallback-lijst.
         expect(typesetting.font, same(fonts.fallback[1]));
+      });
+
+      test('een snede zonder letters wordt nooit gekozen', () {
+        // Het wiskundefont begint bij U+2190: geen ASCII, geen spatie. Als
+        // enige beschikbare snede kan het dus geen enkel echt label zetten, en
+        // dan is de bron meer waard dan een export die werpt (#1987).
+        final fonts = DocumentPdfFonts.forFamily(
+          'Arial',
+          fallbackFonts: [notoMath()],
+        );
+        expect(
+          fonts.svgTypesetting('<svg><text>laag → hoog</text></svg>').settable,
+          isFalse,
+        );
+      });
+
+      test('een tekening die geen énkele snede helemaal aankan valt terug', () {
+        // Ԁ (U+0500) staat alleen in Roboto, ⨁ alleen in het wiskundefont. De
+        // unie dekt ze allebei — maar een tekening krijgt één snede, en geen
+        // van de drie kan ze samen zetten. Dan is de bron meer waard dan een
+        // export die bij `save()` werpt (#1987).
+        final fonts = DocumentPdfFonts.forFamily(
+          'Arial',
+          fallbackFonts: [roboto(), inter(), notoMath()],
+        );
+        expect(fonts.unsupportedRunes('Ԁ ⨁'), isEmpty);
+        expect(
+          fonts.svgTypesetting('<svg><text>Ԁ ⨁</text></svg>').settable,
+          isFalse,
+        );
       });
 
       test('een gedachtestreepje kiest nog steeds Roboto', () {
         // Roboto dekt U+2014 — het symbolen-font is hier niet nodig.
         final fonts = DocumentPdfFonts.forFamily(
           'Arial',
-          fallbackFont: roboto(),
-          symbolFont: notoMath(),
+          fallbackFonts: [roboto(), inter(), notoMath()],
         );
         final typesetting = fonts.svgTypesetting(typographic);
         expect(typesetting.settable, isTrue);

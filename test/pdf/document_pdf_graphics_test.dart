@@ -61,9 +61,18 @@ const _typographyChart = '''
 ''';
 
 void main() {
-  ByteData fallbackFont() => File(
-    'assets/fonts/Roboto-Variable.ttf',
-  ).readAsBytesSync().buffer.asByteData();
+  ByteData font(String name) =>
+      File('assets/fonts/$name').readAsBytesSync().buffer.asByteData();
+
+  /// Dezelfde lijst en dezelfde volgorde als `loadPdfFallbackFonts` in de
+  /// schil. Deze tests draaiden op Roboto alléén, en dat is precies waarom de
+  /// afbreker uit #1987 er ongezien doorheen kwam: de app exporteert met drie
+  /// fonts, de test met één.
+  List<ByteData> fallbackFonts() => [
+    font('Roboto-Variable.ttf'),
+    font('Inter-Variable.ttf'),
+    font('NotoSansMath-subset.ttf'),
+  ];
 
   Future<DocumentPdfResult> exportResult(
     String document, {
@@ -83,7 +92,7 @@ void main() {
     final result = await buildDocumentExportPdf(
       bundle,
       labels: _labels,
-      fallbackFont: withFallbackFont ? fallbackFont() : null,
+      fallbackFonts: withFallbackFont ? fallbackFonts() : const [],
       renderMermaid: renderMermaid,
       renderMath: renderMath,
     );
@@ -221,7 +230,7 @@ void main() {
       await buildDocumentExportPdf(
         bundle,
         labels: _labels,
-        fallbackFont: fallbackFont(),
+        fallbackFonts: fallbackFonts(),
         renderMermaid: (_) async =>
             '<svg viewBox="0 0 10 10"><path fill="currentColor" d="M0 0"/></svg>',
       );
@@ -398,25 +407,65 @@ void main() {
       },
     );
 
-    test('een teken dat ook het Unicode-font niet kent wordt gemeld', () async {
-      // De pijl staat niet in het gebundelde Roboto. Vóór deze reparatie brak
-      // hij de export af; nu wordt hij een leeg blokje in de tekening — en dan
-      // hoort de gebruiker dat te horen in plaats van het zelf te ontdekken.
-      // De melding zelf bestond al, maar hield op bij de rand van de tekening.
+    test('een teken dat geen enkele snede kent wordt gemeld', () async {
+      // \u2611 staat in geen van de drie gebundelde fonts. De export gaat door
+      // \u2014 maar zwijgen zou stil verlies zijn.
       const chart = '''
 ```chart
 {
   "type": "bar",
   "title": "Bevindingen",
   "x": ["Q1"],
-  "series": [{"name": "Kritiek → hoog", "data": [3]}]
+  "series": [{"name": "Kritiek \u2611 hoog", "data": [3]}]
 }
 ```
 ''';
       final result = await exportResult('# Rapport\n\n$chart');
       expect(result.bytes, isNotEmpty);
-      expect(result.unsupportedCharacters, contains(0x2192));
+      expect(result.unsupportedCharacters, contains(0x2611));
       expect(result.isComplete, isFalse);
+    });
+
+    test('een pijl met een spatie in een diagramlabel breekt niets', () async {
+      const diagram = '```mermaid\ngraph TD;\n  A-->B;\n```\n';
+      final result = await exportResult(
+        '# Rapport\n\n$diagram',
+        renderMermaid: (_) async =>
+            '<svg viewBox="0 0 320 60" xmlns="http://www.w3.org/2000/svg">'
+            '<text x="10" y="38" font-size="18">laag → hoog</text></svg>',
+      );
+      expect(result.bytes, isNotEmpty);
+      // En de tekening staat er, niet haar bron.
+      expect(pdfVisibleText(result.bytes), isNot(contains('Diagram (bron)')));
+    });
+
+    test('de pijl wordt gezet en niet gemeld', () async {
+      // Inter zit al in de app en dekt pijlen én letters; er is dus een snede
+      // die dit hele label kan zetten.
+      const diagram = '```mermaid\ngraph TD;\n  A-->B;\n```\n';
+      final result = await exportResult(
+        '# Rapport\n\n$diagram',
+        renderMermaid: (_) async =>
+            '<svg viewBox="0 0 320 60" xmlns="http://www.w3.org/2000/svg">'
+            '<text x="10" y="38" font-size="18">laag → hoog ✓</text></svg>',
+      );
+      expect(result.unsupportedCharacters, isEmpty);
+    });
+
+    test('een tekening die geen snede aankan toont haar bron', () async {
+      // \u0500 staat alleen in Roboto, \u2A01 alleen in het wiskundefont: geen
+      // enkele snede kan deze tekening in haar geheel zetten. De export gaat
+      // door en laat de bron zien \u2014 leesbaar, en de worp die `save()` anders
+      // geeft kost het hele document (#1987).
+      const diagram = '```mermaid\ngraph TD;\n  A-->B;\n```\n';
+      final result = await exportResult(
+        '# Rapport\n\n$diagram',
+        renderMermaid: (_) async =>
+            '<svg viewBox="0 0 320 60" xmlns="http://www.w3.org/2000/svg">'
+            '<text x="10" y="38" font-size="18">\u0500 \u2A01</text></svg>',
+      );
+      expect(result.bytes, isNotEmpty);
+      expect(pdfVisibleText(result.bytes), contains('Diagram (bron)'));
     });
 
     test('een tekening met alleen zetbare tekens meldt niets', () async {

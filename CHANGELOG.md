@@ -2404,6 +2404,28 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **`laag → hoog` in een diagramlabel brak de PDF-export opnieuw (#1987).** De
+  reparatie van #1968 zette een symbolen-font achter Roboto en liet
+  `svgTypesetting` daarop overschakelen zodra Roboto één teken miste. Maar dat
+  font is een subset van Noto Sans Math die bij U+2190 begint: geen letters,
+  geen spatie. De SVG-lezer van `package:pdf` zet álle tekst van een tekening
+  met díe ene snede, en `TtfWriter.withChars` doet voor de spatie een
+  onvoorwaardelijke `charToGlyphIndexMap[32]!` — weg export. Ook zonder die
+  worp was de keuze verkeerd: elke letter van het label zou in een wiskundefont
+  gezet worden, dus als leeg blokje. Vóór #1968 stond er een leesbaar label met
+  één blokje op de plek van de pijl; erna was het hele document weg.
+  Er zijn drie dingen veranderd. **De terugvalfonts zijn nu één geordende
+  lijst** in plaats van twee rollen met een naam, want de vorige vorm gaf geen
+  plek aan de vraag wélke snede een tekening moet krijgen. **`Inter` staat erin**
+  — die zat al in de app als interfaceletter, dekt `→ ← ↔ ⇒ ✓ ✗ ★ ▪` én alle
+  letters, en kost dus geen byte extra. En **een tekening krijgt de eerste snede
+  die haar hélemaal kan zetten**, of anders haar bron. Dat laatste lijkt streng,
+  maar een ontbrekende glyph wordt in `TtfWriter.withChars` niet betrouwbaar een
+  blokje: `laag ⨁ ∮ hoog` levert blokjes op, `a ⨁ ∮` een uitzondering. Waar die
+  grens ligt hangt af van wat de glyph-subset verderop nog over heeft, en op zo'n
+  grens valt geen regel te bouwen. De exporttests draaiden bovendien op Roboto
+  alléén terwijl de app met drie fonts exporteert; daarom kwam dit er ongezien
+  doorheen. Ze gebruiken nu dezelfde lijst als de schil.
 - **Eén gedachtestreepje in een grafiektitel kostte de hele PDF-export
   (#1942).** De SVG-lezer van `package:pdf` kiest voor elke `<text>` in een
   ingesloten tekening hardgecodeerd een van de veertien standaardsneden, zonder

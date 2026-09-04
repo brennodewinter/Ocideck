@@ -34,9 +34,10 @@ class DocumentPdfFonts {
     required this.boldItalic,
     required this.mono,
     this.fallback = const [],
-    this.fallbackCoverage = const {},
-    this.primaryCoverage = const {},
-  });
+    this.fallbackCoverages = const [],
+  }) : fallbackCoverage = {
+         for (final coverage in fallbackCoverages) ...coverage,
+       };
 
   final pw.Font base;
   final pw.Font bold;
@@ -47,16 +48,20 @@ class DocumentPdfFonts {
   /// De fonts waar een teken op terugvalt dat de standaardsnede niet kent.
   final List<pw.Font> fallback;
 
-  /// Welke tekens die terugvalfonts dekken. Rechtstreeks uit de `cmap`-tabel
-  /// van het TTF-bestand: geen aanname over welke schriften erin zitten, maar
-  /// de tabel zelf.
-  final Map<int, int> fallbackCoverage;
+  /// Wat élk terugvalfont dekt, in dezelfde volgorde als [fallback].
+  /// Rechtstreeks uit de `cmap`-tabel van het TTF-bestand: geen aanname over
+  /// welke schriften erin zitten, maar de tabel zelf.
+  ///
+  /// Per font en niet als één hoop, want de twee vragen die deze klasse
+  /// beantwoordt hebben een ander antwoord nodig. Voor de lopende tekst telt de
+  /// unie — `fontFallback` ketent per teken en pakt het eerste font dat het
+  /// kent. Voor een ingesloten tekening telt één font tegelijk, want de
+  /// SVG-lezer ketent niet. Zie [svgTypesetting].
+  final List<Map<int, int>> fallbackCoverages;
 
-  /// De dekking van alleen het primaire terugvalfont (Roboto). [svgTypesetting]
-  /// gebruikt dit om te beslissen of het symbolen-font nodig is — de SVG-lezer
-  /// kiest één font, en als het primaire font een teken niet kent, is het
-  /// symbolen-font de enige hoop (#1968).
-  final Map<int, int> primaryCoverage;
+  /// Wat de terugvalfonts sámen dekken — de vraag die voor de lopende tekst
+  /// telt.
+  final Map<int, int> fallbackCoverage;
 
   /// Bouwt de sneden voor een document met een *schreefloze* of *schreef*-letter,
   /// afgeleid van [fontFamily] van het stijlprofiel.
@@ -66,32 +71,16 @@ class DocumentPdfFonts {
   /// een PDF met schreef; wie Arial of Inter koos, krijgt er een zonder. Dat
   /// kost niets en scheelt de lezer een document dat niet lijkt op wat hij zag.
   ///
-  /// [fallbackFont] zijn de bytes van een Unicode-rijk TTF-bestand (in OciDeck
-  /// het gebundelde Roboto). Ontbreekt het, dan blijft de export bij Latin-1 —
-  /// [unsupportedRunes] meldt dan navenant meer.
-  ///
-  /// [symbolFont] is een aanvullend terugvalfont voor tekens die [fallbackFont]
-  /// niet dekt — pijlen (U+2192), wiskundige operatoren (U+2264), en meer. De
-  /// `fallback`-lijst is al een lijst, dus dit font komt erachter te staan en
-  /// de `pdf`-bibliotheek probeert ze in volgorde (#1968).
+  /// [fallbackFonts] zijn de bytes van Unicode-rijke TTF-bestanden, in de
+  /// volgorde waarin ze geprobeerd worden. Voor de lopende tekst ketent
+  /// `fontFallback` er per teken doorheen; voor een ingesloten tekening kiest
+  /// [svgTypesetting] er één uit. Is de lijst leeg, dan blijft de export bij
+  /// Latin-1 — [unsupportedRunes] meldt dan navenant meer.
   factory DocumentPdfFonts.forFamily(
     String fontFamily, {
-    ByteData? fallbackFont,
-    ByteData? symbolFont,
+    List<ByteData> fallbackFonts = const [],
   }) {
     final serif = _serifFamilies.contains(fontFamily.toLowerCase().trim());
-    final fallbacks = <pw.Font>[];
-    var coverage = const <int, int>{};
-    var primaryCov = const <int, int>{};
-    if (fallbackFont != null) {
-      fallbacks.add(pw.Font.ttf(fallbackFont));
-      primaryCov = TtfParser(fallbackFont).charToGlyphIndexMap;
-      coverage = primaryCov;
-    }
-    if (symbolFont != null) {
-      fallbacks.add(pw.Font.ttf(symbolFont));
-      coverage = {...coverage, ...TtfParser(symbolFont).charToGlyphIndexMap};
-    }
     return DocumentPdfFonts(
       base: serif ? pw.Font.times() : pw.Font.helvetica(),
       bold: serif ? pw.Font.timesBold() : pw.Font.helveticaBold(),
@@ -100,9 +89,10 @@ class DocumentPdfFonts {
           ? pw.Font.timesBoldItalic()
           : pw.Font.helveticaBoldOblique(),
       mono: pw.Font.courier(),
-      fallback: fallbacks,
-      fallbackCoverage: coverage,
-      primaryCoverage: primaryCov,
+      fallback: [for (final bytes in fallbackFonts) pw.Font.ttf(bytes)],
+      fallbackCoverages: [
+        for (final bytes in fallbackFonts) TtfParser(bytes).charToGlyphIndexMap,
+      ],
     );
   }
 
@@ -141,38 +131,58 @@ class DocumentPdfFonts {
   /// Hoe de tekst in een *ingesloten tekening* gezet moet worden.
   ///
   /// Waarom een tekening een eigen antwoord krijgt: `pw.SvgImage` gaat niet
-  /// door het thema hierboven maar door de SVG-lezer van `package:pdf`, en die
-  /// kiest voor elke `<text>` hardgecodeerd een van de veertien
-  /// standaardsneden (`src/svg/painter.dart`) — zonder terugvallijst. Die
-  /// sneden reiken tot Latin-1, en `stringMetrics` *werpt* op alles daarboven,
-  /// vanuit `SvgImage.paint`. Dat is tijdens `document.save()`, dus buiten elke
-  /// `try` rond de tekening zelf: één gedachtestreepje in een grafiektitel
-  /// kostte zo het hele document (#1942).
+  /// door het thema hierboven maar door de SVG-lezer van `package:pdf`. Die
+  /// kiest voor elke `<text>` hardgecodeerd een van de veertien standaardsneden
+  /// (`src/svg/painter.dart`) — zonder terugvallijst. Die sneden reiken tot
+  /// Latin-1, en `stringMetrics` *werpt* op alles daarboven, vanuit
+  /// `SvgImage.paint`. Dat is tijdens `document.save()`, dus buiten elke `try`
+  /// rond de tekening zelf: één gedachtestreepje in een grafiektitel kostte zo
+  /// het hele document (#1942).
+  ///
+  /// **De gekozen snede moet de tekening hélemaal kunnen zetten, of hij wordt
+  /// niet getekend.** Dat lijkt streng — waarom niet de snede die het meeste
+  /// dekt, en de rest een leeg blokje? Omdat een ontbrekende glyph in
+  /// `TtfWriter.withChars` niet betrouwbaar een blokje wordt. Nagemeten met
+  /// Roboto:
+  ///
+  /// | tekst | uitkomst |
+  /// |---|---|
+  /// | `laag ⨁ ∮ hoog` | blokjes |
+  /// | `a ⨁ ∮` | **worp** |
+  /// | `Ԁ ∮` | blokje |
+  /// | `Ԁ ⨁ ∮` | **worp** |
+  ///
+  /// Of het een blokje wordt of een uitzondering hangt af van hoeveel glyphs de
+  /// subset verderop nog over heeft — een grens die niet na te bouwen is en die
+  /// bij de volgende versie van de bibliotheek anders kan liggen. Een regel die
+  /// op zo'n grens balanceert is geen regel. Alles-of-de-bron is wél te
+  /// beredeneren, en het is dezelfde afweging die er voor een onleesbare SVG al
+  /// stond: de bron tonen is vervelend, de export verliezen is erger (#1987).
   ///
   /// Er wordt naar de héle SVG gekeken en niet alleen naar de tekstknopen. Dat
   /// is met opzet ruimer dan nodig: een scan die één plek mist waar tekst kan
   /// staan (een `<text>` in een `<symbol>` die via `<use>` wordt aangeroepen,
-  /// bijvoorbeeld) zet de afbreker terug. De prijs is dat een tekening die zo'n
-  /// teken alleen buiten haar tekst draagt onnodig op het terugvalfont komt —
-  /// een tekening die dan nog steeds klopt.
+  /// bijvoorbeeld) zet de afbreker terug. De prijs is dat een tekening die een
+  /// bijzonder teken alleen buiten haar tekst draagt strenger beoordeeld wordt
+  /// dan nodig — en dan haar bron toont, wat leesbaar blijft.
+  ///
+  /// De volgorde van [fallback] is de voorkeur: de eerste snede die alles kan
+  /// zetten wint. Zo houdt een tekening zonder bijzondere tekens de letter die
+  /// de rest van het document ook heeft.
   SvgTypesetting svgTypesetting(String svg) {
-    if (!svg.runes.any((rune) => rune > 0xFF)) {
+    final runes = svg.runes.toSet();
+    if (!runes.any((rune) => rune > 0xFF)) {
       return const SvgTypesetting.standard();
     }
-    // De SVG-lezer van `package:pdf` kiest één font voor alle `<text>`-knopen,
-    // zonder terugvallijst. Roboto dekt Latijns, Grieks, Cyrillisch — maar geen
-    // pijlen of wiskundetekens. Bevat de SVG zulke tekens, dan kiest het
-    // symbolen-font: een pijl die er wél is maar in de verkeerde snede staat is
-    // beter dan een leeg blokje in de juiste snede (#1968).
-    final hasUncoveredByPrimary = svg.runes.any(
-      (rune) => rune > 0xFF && !primaryCoverage.containsKey(rune),
-    );
-    final font = hasUncoveredByPrimary && fallback.length > 1
-        ? fallback[1]
-        : unicode;
-    return font == null
-        ? const SvgTypesetting.unsettable()
-        : SvgTypesetting.withFont(font);
+    for (var index = 0; index < fallback.length; index++) {
+      final coverage = index < fallbackCoverages.length
+          ? fallbackCoverages[index]
+          : const <int, int>{};
+      if (runes.every(coverage.containsKey)) {
+        return SvgTypesetting.withFont(fallback[index]);
+      }
+    }
+    return const SvgTypesetting.unsettable();
   }
 
   /// Het gebundelde Unicode-rijke font, of `null` als de aanroeper er geen gaf.
@@ -212,7 +222,8 @@ class SvgTypesetting {
   /// De standaardsneden volstaan; de lezer kiest zelf.
   const SvgTypesetting.standard() : font = null, settable = true;
 
-  /// Deze snede moet het doen, want de standaardsneden kunnen het niet.
+  /// Deze snede moet het doen, want de standaardsneden kunnen het niet — en
+  /// deze kan de tekening helemaal zetten.
   const SvgTypesetting.withFont(pw.Font this.font) : settable = true;
 
   /// Geen enkele beschikbare snede kan deze tekening zetten.
@@ -222,8 +233,8 @@ class SvgTypesetting {
   /// de lezer zijn eigen keuze mag houden.
   final pw.Font? font;
 
-  /// Of de tekening überhaupt getekend kan worden. Is dit `false`, dan hoort de
-  /// aanroeper terug te vallen op de bron: `pw.SvgImage` zou pas bij `save()`
-  /// werpen, en dan is het hele document weg.
+  /// Of de tekening getekend kan worden. Is dit `false`, dan hoort de aanroeper
+  /// terug te vallen op de bron: `pw.SvgImage` zou pas bij `save()` werpen, en
+  /// dan is het hele document weg.
   final bool settable;
 }

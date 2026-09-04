@@ -916,12 +916,9 @@ Future<String?> _writeDocumentExport(
     // Alleen de PDF-tak gebruikt deze waarden; de andere formaten laten ze
     // ongemoeid liggen.
     pdfLabels: documentPdfLabels(l10n),
-    pdfFallbackFont: format == DocumentExportFormat.pdf
-        ? await loadPdfFallbackFont()
-        : null,
-    pdfSymbolFont: format == DocumentExportFormat.pdf
-        ? await loadPdfSymbolFont()
-        : null,
+    pdfFallbackFonts: format == DocumentExportFormat.pdf
+        ? await loadPdfFallbackFonts()
+        : const [],
     onPdfUnsupportedCharacters: (runes) =>
         warnAboutUnsupportedCharacters(messenger, l10n, runes),
     onPdfCoarseLogo: (logo) => warnAboutCoarseLogo(messenger, l10n, logo),

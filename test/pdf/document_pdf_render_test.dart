@@ -40,7 +40,7 @@ void main() {
     style: DocumentPdfStyle.fromTheme(theme),
     fonts: DocumentPdfFonts.forFamily(
       theme.fontFamily,
-      fallbackFont: fallbackFont(),
+      fallbackFonts: [fallbackFont()],
     ),
     verbatimLabel: (kind) => 'bron: ${kind.name}',
     chrome: chrome,
