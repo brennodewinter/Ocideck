@@ -1634,8 +1634,6 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Följ presentationen: denna slide gör vad presentationen som helhet gör. Rapportera endast: fyndet räknas, men mottagaren ser ingenting — uppgifterna finns bara där. Acceptera: uppgifterna hör hemma här och varningen försvinner. Acceptera + varna: mottagaren ser en badge att det finns personuppgifter på sliden. Uteslut: de funna uppgifterna görs oläsbara på skärmen och i exporten — din markdown-fil behåller originaltexten.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
-      'HTML öppnas i valfri webbläsare utan internet och renderar kodblock, matematik och mermaid-diagram. LaTeX är källkod som du kompilerar med pdflatex eller xelatex.',
   'Nu niet': 'Inte nu',
   'Herstelkopie weggooien': 'Kassera återställningskopia',
   'Openen en verder werken': 'Öppna och fortsätt',

@@ -1651,8 +1651,6 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Urmează prezentarea: acest slide face ce face prezentarea ca întreg. Doar raportează: constatarea este numărată, dar destinatarul nu vede nimic — datele sunt pur și simplu acolo. Acceptă: datele aparțin aici și avertizarea dispare. Acceptă + avertizează: destinatarul vede o insignă că există date personale pe slide. Omite: datele găsite devin ilizibile pe ecran și în export — fișierul markdown păstrează textul original.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
-      'HTML se deschide în orice browser fără internet și randează blocuri de cod, matematică și diagrame mermaid. LaTeX este cod sursă pe care îl compilați cu pdflatex sau xelatex.',
   'Nu niet': 'Nu acum',
   'Herstelkopie weggooien': 'Renunță la copia de recuperare',
   'Openen en verder werken': 'Deschide și continuă',

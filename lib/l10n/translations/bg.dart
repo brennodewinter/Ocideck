@@ -1655,8 +1655,6 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Следвай презентацията: този слайд прави това, което презентацията като цяло прави. Само докладвай: находката се отчита, но получателят не вижда нищо — данните са просто там. Приеми: данните принадлежат тук и предупреждението изчезва. Приеми + предупреди: получателят вижда значка, че на слайда има лични данни. Премахни: намерените данни стават нечетими на екрана и в експорта — вашият markdown файл запазва оригиналния текст.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
-      'HTML се отваря във всеки браузър без интернет и рендерира блокове код, математика и mermaid диаграми. LaTeX е изходен код, който компилирате с pdflatex или xelatex.',
   'Nu niet': 'Не сега',
   'Herstelkopie weggooien': 'Изхвърли копието за възстановяване',
   'Openen en verder werken': 'Отвори и продължи',
