@@ -15,7 +15,7 @@ void main() {
   DocumentPdfFonts fonts({bool withFallback = true}) =>
       DocumentPdfFonts.forFamily(
         'Arial',
-        fallbackFont: withFallback ? roboto() : null,
+        fallbackFonts: withFallback ? [roboto()] : const [],
       );
 
   test('een inline-formule zakt van de onderrand naar de tekstbaseline', () {

@@ -152,8 +152,7 @@ class DocumentPdfResult {
 Future<DocumentPdfResult> buildDocumentExportPdf(
   ExportBundle bundle, {
   required DocumentPdfLabels labels,
-  ByteData? fallbackFont,
-  ByteData? symbolFont,
+  List<ByteData> fallbackFonts = const [],
   HtmlImageResolver? embedImage,
   MermaidSvgResolver? renderMermaid,
   MathSvgResolver? renderMath,
@@ -174,8 +173,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
 
   final fonts = DocumentPdfFonts.forFamily(
     theme.fontFamily,
-    fallbackFont: fallbackFont,
-    symbolFont: symbolFont,
+    fallbackFonts: fallbackFonts,
   );
   final images = await _resolveImages(blocks, embedImage);
   final style = DocumentPdfStyle.fromTheme(theme);
@@ -235,9 +233,12 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
 
   return DocumentPdfResult(
     bytes,
-    // Ook de tekst ín de tekeningen: die wordt met één snede gezet, en wat die
-    // snede niet kent wordt er een leeg blokje — even stil als in de lopende
-    // tekst, en even goed verlies. Zie [svgTextContent].
+    // Ook de tekst ín de tekeningen. Een tekening die getekend wordt is
+    // helemaal zetbaar (zie [DocumentPdfFonts.svgTypesetting]), dus die voegt
+    // hier niets toe; een tekening die dat niet was, is door haar bron
+    // vervangen en die telt hierboven al mee. Toch meegewogen, want dit is de
+    // plek die belooft te melden wat er niet gezet kon worden — en die belofte
+    // hoort niet af te hangen van een regel die verderop staat.
     unsupportedCharacters: fonts.unsupportedRunes(
       [
         _textOf(blocks),

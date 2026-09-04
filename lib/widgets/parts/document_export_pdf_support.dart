@@ -22,28 +22,50 @@ import '../../services/pdf/document_pdf_export.dart';
 /// Grieks, Cyrillisch. Zie de kop van `document_pdf_fonts.dart`.
 ///
 /// Lukt het laden niet, dan gaat de export gewoon door: [DocumentPdfResult]
-/// meldt dan welke tekens ontbreken, en de schil zegt dat tegen de gebruiker.
-Future<ByteData?> loadPdfFallbackFont() async {
-  try {
-    return await rootBundle.load('assets/fonts/Roboto-Variable.ttf');
-  } on Exception {
-    return null;
-  }
-}
-
-/// Aanvullend terugvalfont voor pijlen en wiskundige tekens die Roboto niet
-/// dekt (U+2192 →, U+2264 ≤, U+221E ∞, en meer). Een subset van Noto Sans
-/// Math, beperkt tot de Unicode-blocks die in diagrammen en formules voorkomen
-/// — ~250 KB in plaats van de volledige 1 MB (#1968).
+/// De terugvalfonts voor de PDF-export, in de volgorde waarin ze geprobeerd
+/// worden.
 ///
-/// Komt ná [loadPdfFallbackFont] in de terugvallijst te staan: de `pdf`-
-/// bibliotheek probeert ze in volgorde, dus Roboto krijgt eerst de kans.
-Future<ByteData?> loadPdfSymbolFont() async {
-  try {
-    return await rootBundle.load('assets/fonts/NotoSansMath-subset.ttf');
-  } on Exception {
-    return null;
+/// De export zet de lopende tekst met de veertien standaardsneden van PDF —
+/// die dragen een echte vette en cursieve snede en kosten geen bytes, maar ze
+/// reiken niet verder dan Latin-1. Deze lijst vangt de rest op. Zie de kop van
+/// `document_pdf_fonts.dart`.
+///
+/// De volgorde is de bedoeling, niet toeval:
+///
+///  1. **Roboto** — Latijns uitgebreid, Grieks, Cyrillisch. Ook de
+///     interfaceletter, dus de PDF lijkt op wat de auteur zag.
+///  2. **Inter** — pijlen (`→ ← ↔ ⇒`), vinkjes (`✓ ✗`) en vormen (`★ ▪`) die
+///     Roboto níét dekt, mét alle letters erbij. Zat al in de app als
+///     interfaceletter, dus dit kost geen byte extra (#1987).
+///  3. **Noto Sans Math** — de diepere wiskunde (`∮ ⨁`) die de andere twee niet
+///     hebben. Een subset, beperkt tot de blokken die in diagrammen en formules
+///     voorkomen — ~250 KB in plaats van de volledige 1 MB (#1968).
+///
+/// Waarom Inter vóór het wiskundefont staat: een ingesloten tekening krijgt
+/// *één* snede voor al haar tekst, want de SVG-lezer ketent niet. Een font met
+/// pijlen maar zonder letters is daar de verkeerde keuze — en zonder spatie
+/// zelfs een afbreker (#1987).
+///
+/// Lukt het laden van een font niet, dan gaat de export gewoon door met wat er
+/// wél is: [DocumentPdfResult] meldt dan welke tekens ontbreken, en de schil
+/// zegt dat tegen de gebruiker.
+Future<List<ByteData>> loadPdfFallbackFonts() async {
+  const paths = [
+    'assets/fonts/Roboto-Variable.ttf',
+    'assets/fonts/Inter-Variable.ttf',
+    'assets/fonts/NotoSansMath-subset.ttf',
+  ];
+  final fonts = <ByteData>[];
+  for (final path in paths) {
+    try {
+      fonts.add(await rootBundle.load(path));
+    } on Exception {
+      // Eén font dat niet laadt mag de export niet kosten; de melding over
+      // ontbrekende tekens vertelt de gebruiker vanzelf wat er dan mist.
+      continue;
+    }
   }
+  return fonts;
 }
 
 /// De teksten die de PDF-lagen zelf niet kennen, in de taal van de interface.

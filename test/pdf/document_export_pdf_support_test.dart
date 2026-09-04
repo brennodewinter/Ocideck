@@ -42,13 +42,17 @@ void main() {
     expect(call, contains('renderMath: renderMathForPdf'));
   });
 
-  test('het gebundelde terugvalfont is te laden', () async {
-    // Zonder dit font blijft de PDF bij Latin-1 en verdwijnt elk Pools, Grieks
-    // of Cyrillisch teken uit de tekstlaag. Dat het bestand daadwerkelijk mee
-    // wordt gebundeld, is dus geen detail maar de voorwaarde.
-    final font = await loadPdfFallbackFont();
-    expect(font, isNotNull);
-    expect(font!.lengthInBytes, greaterThan(1000));
+  test('de gebundelde terugvalfonts zijn te laden', () async {
+    // Zonder deze fonts blijft de PDF bij Latin-1 en verdwijnt elk Pools,
+    // Grieks of Cyrillisch teken uit de tekstlaag. Dat de bestanden
+    // daadwerkelijk mee worden gebundeld, is dus geen detail maar de
+    // voorwaarde — en dat het er drie zijn evenmin: de tweede draagt de pijlen
+    // en de derde de wiskunde (#1987).
+    final fonts = await loadPdfFallbackFonts();
+    expect(fonts, hasLength(3));
+    for (final font in fonts) {
+      expect(font.lengthInBytes, greaterThan(1000));
+    }
   });
 
   test('elk soort letterlijk blok krijgt een eigen aanduiding', () {
