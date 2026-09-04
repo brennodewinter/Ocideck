@@ -153,6 +153,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   ExportBundle bundle, {
   required DocumentPdfLabels labels,
   ByteData? fallbackFont,
+  ByteData? symbolFont,
   HtmlImageResolver? embedImage,
   MermaidSvgResolver? renderMermaid,
   MathSvgResolver? renderMath,
@@ -174,6 +175,7 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
   final fonts = DocumentPdfFonts.forFamily(
     theme.fontFamily,
     fallbackFont: fallbackFont,
+    symbolFont: symbolFont,
   );
   final images = await _resolveImages(blocks, embedImage);
   final style = DocumentPdfStyle.fromTheme(theme);

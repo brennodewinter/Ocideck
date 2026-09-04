@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:dc365c08-e519-5d90-84ed-4eb9c5af40dc",
+  "serialNumber": "urn:uuid:199032f9-0b58-5013-8c57-eaf83678a12e",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-03T11:20:34.976955Z",
+    "timestamp": "2026-09-04T05:21:37.792528Z",
     "tools": {
       "components": [
         {
@@ -8968,6 +8968,35 @@
       ]
     },
     {
+      "bom-ref": "font:assets/fonts/NotoSansMath-subset.ttf",
+      "type": "file",
+      "name": "Noto Sans Math",
+      "purl": "pkg:generic/Noto%20Sans%20Math",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1b43b60ccf6137da7624352d985c2c84a285c87158a83574268c53b4d67fed0c"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "font"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Bundled font file assets/NotoSansMath-subset.ttf."
+        }
+      ]
+    },
+    {
       "bom-ref": "font:assets/fonts/Roboto-Variable.ttf",
       "type": "file",
       "supplier": {
@@ -9401,6 +9430,7 @@
         "font:assets/fonts/EBGaramond-Variable.ttf",
         "font:assets/fonts/Inter-Variable.ttf",
         "font:assets/fonts/Lora-Variable.ttf",
+        "font:assets/fonts/NotoSansMath-subset.ttf",
         "font:assets/fonts/Roboto-Variable.ttf",
         "font:assets/fonts/RobotoMono-Variable.ttf",
         "fork:desktop_multi_window@0.3.0",
@@ -11220,6 +11250,10 @@
     },
     {
       "ref": "font:assets/fonts/Lora-Variable.ttf",
+      "dependsOn": []
+    },
+    {
+      "ref": "font:assets/fonts/NotoSansMath-subset.ttf",
       "dependsOn": []
     },
     {

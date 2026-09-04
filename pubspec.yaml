@@ -163,6 +163,11 @@ flutter:
     - assets/fonts/Lora-OFL.txt
     - assets/fonts/Roboto-OFL.txt
     - assets/fonts/RobotoMono-OFL.txt
+    - assets/fonts/NotoSansMath-OFL.txt
+    # Aanvullend terugvalfont voor pijlen en wiskundige tekens in PDF-export
+    # (#1968). Een subset van Noto Sans Math — alleen Arrows en Mathematical
+    # Operators blocks, ~250 KB in plaats van de volledige 1 MB.
+    - assets/fonts/NotoSansMath-subset.ttf
     # Volledige licentieteksten van de gebundelde JavaScript/CSS uit
     # assets/web_export/. Die bestanden dragen hooguit een banner; MIT, BSD-3 en
     # Apache-2.0 vragen de hele tekst bij herdistributie, en de gebruiker die
@@ -285,3 +290,9 @@ flutter:
     - family: monospace
       fonts:
         - asset: assets/fonts/RobotoMono-Variable.ttf
+    # Aanvullend terugvalfont voor pijlen en wiskundige tekens in de PDF-export
+    # (U+2192 →, U+2264 ≤, U+221E ∞). Niet gebruikt als Flutter-textfont, maar
+    # als font family gedeclareerd zodat de SBOM-generator het meeneemt (#1968).
+    - family: Noto Sans Math
+      fonts:
+        - asset: assets/fonts/NotoSansMath-subset.ttf
