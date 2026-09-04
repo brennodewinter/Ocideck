@@ -1638,8 +1638,6 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Der Präsentation folge: Die Folie macht, was d Präsentation als Ganzes macht. Nur melde: Der Fund wird zählt, aber der Empfänger gseht nüt — d Date stöhn einfach döt. Akzeptiere: D Date ghöre det und d Warnig verschwindet. Akzeptiere + warne: Der Empfänger gseht e Badge, dass persönlichi Date uf dr Folie stöhn. Weggla: Die gfundene Date wärde uf em Bildschirm und im Export unleserlich — dini Markdown-Datei bhaltet de Originaltext.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
-      'HTML öffnet sich in jedem Browser ohni Internet und rendert Codeblöck, Mathe und Mermaid-Diagramm. LaTeX isch Quellcode, wo du mit pdflatex oder xelatex kompilierisch.',
   'Nu niet': 'Jetz nöd',
   'Herstelkopie weggooien': 'Widerherstelligskopii wegwerfe',
   'Openen en verder werken': 'Öffne und witer schaffe',

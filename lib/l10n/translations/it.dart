@@ -667,8 +667,6 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Segui la presentazione: questa diapositiva fa ciò che fa l\'intera presentazione. Solo segnalare: il risultato viene contato, ma il destinatario non vede nulla — i dati sono semplicemente lì. Accettare: i dati appartengono qui e l\'avviso scompare. Accettare + avvisare: il destinatario vede un badge che indica che ci sono dati personali sulla diapositiva. Omettere: i dati trovati vengono resi illeggibili sullo schermo e nell\'esportazione — il tuo file markdown mantiene il testo originale.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
-      'HTML si apre in qualsiasi browser senza internet e renderizza blocchi di codice, matematica e diagrammi mermaid. LaTeX è codice sorgente che compili con pdflatex o xelatex.',
   'Nu niet': 'Non ora',
   'Herstelkopie weggooien': 'Scarta la copia di ripristino',
   'Openen en verder werken': 'Apri e continua',

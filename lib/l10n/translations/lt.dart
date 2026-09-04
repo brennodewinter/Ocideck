@@ -1642,8 +1642,6 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sekti pristatymą: šis skaidrė daro tai, ką daro pristatymas apskritai. Tik pranešti: išvada skaičiuojama, bet gavėjas nieko nemato — duomenys tiesiog ten yra. Priimti: duomenys priklauso čia ir įspėjimas dingsta. Priimti + įspėti: gavėjas mato ženklą, kad skaidrėje yra asmens duomenų. Praleisti: rasti duomenys padaromi neįskaitomais ekrane ir eksporte — jūsų markdown failas išlaiko originalų tekstą.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
-      'HTML atsidaro bet kurioje naršyklėje be interneto ir renderuoja kodo blokus, matematiką ir mermaid diagramas. LaTeX yra pirminis kodas, kurį kompiliuojate su pdflatex arba xelatex.',
   'Nu niet': 'Ne dabar',
   'Herstelkopie weggooien': 'Šalinti atkūrimo kopiją',
   'Openen en verder werken': 'Atverti ir tęsti',

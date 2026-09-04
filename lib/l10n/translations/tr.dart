@@ -2552,8 +2552,6 @@ const _dutchSourceTr = {
 const _dutchSourceAddTr = <String, String>{
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sunumu izle: bu slayt, sunumun tamamının yaptığı şeyi yapar. Sadece bildir: bulgu sayılır, alıcı hiçbir şey görmez — veriler sadece oradadır. Kabul et: veriler buraya aittir ve uyarı kaybolur. Kabul et + uyar: alıcı, slaytta kişisel veri olduğunu gösteren bir rozet görür. Çıkar: bulunan veriler ekranda ve dışa aktarımda okunamaz hale gelir — markdown dosyanız orijinal metni korur.',
-  'HTML opent in elke browser zonder internet en rendert codeblokken, wiskunde en mermaid-diagrammen. LaTeX is broncode die je compileert met pdflatex of xelatex.':
-      'HTML internet olmadan herhangi bir tarayıcıda açılır ve kod bloklarını, matematik ve mermaid diyagramlarını işler. LaTeX, pdflatex veya xelatex ile derlediğiniz bir kaynak kodudur.',
   'Nu niet': 'Şimdi değil',
   'Herstelkopie weggooien': 'Kurtarma kopyasını at',
   'Openen en verder werken': 'Aç ve devam et',
