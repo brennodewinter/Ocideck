@@ -475,7 +475,8 @@ void main() {
       expect(
         back.fields[0].normalize,
         FillField.defaultNormalize,
-        reason: 'een ontbrekende sleutel is "de standaard", niet "niets"; '
+        reason:
+            'een ontbrekende sleutel is "de standaard", niet "niets"; '
             'anders verandert de antwoordsleutel bij het eerste opslaan',
       );
     });

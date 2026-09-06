@@ -98,11 +98,10 @@ class QuestionRoundBuilder {
   /// beoordeeld werd, was toeval. Komt de presenter-kant er, dan hoort de
   /// rechterkolom een eigen veld op [QuestionView] te krijgen, geen tweede
   /// betekenis van een bestaand veld.
-  QuestionView _matching(QuestionSpec spec, QuestionView base) =>
-      base.copyWith(
-        options: [for (final p in spec.pairs) p.left],
-        answerable: false,
-      );
+  QuestionView _matching(QuestionSpec spec, QuestionView base) => base.copyWith(
+    options: [for (final p in spec.pairs) p.left],
+    answerable: false,
+  );
 
   /// FillIn: toont de vraag; de invulvelden zelf kan de kijker nog niet vullen.
   ///

@@ -338,7 +338,6 @@ final Map<String, SlideType> slideTypeByMarpClass = {
     if (entry.value.marpClass.isNotEmpty) entry.value.marpClass: entry.key,
 };
 
-
 class Slide {
   final String id;
   final SlideType type;

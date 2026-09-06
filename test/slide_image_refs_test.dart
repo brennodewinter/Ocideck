@@ -115,14 +115,18 @@ void main() {
     // bij de antwoorden. Daardoor viel ze buiten slideImageRefs: de
     // asset-opruiming zag haar als wees en gooide haar weg, en de privacyscan
     // keek er nooit naar. Dezelfde foutklasse als #853, een blok hoger.
-    Slide hotspotSlide(String image) => Slide.create(SlideType.question)
-        .copyWith(
+    Slide hotspotSlide(String image) =>
+        Slide.create(SlideType.question).copyWith(
           customMarkdown: QuestionSpec(
             kind: QuestionKind.hotspot,
             prompt: 'Waar zit de router?',
             hotspotImage: image,
             regions: const [
-              HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.3, 0.3], correct: true),
+              HotspotRegion(
+                id: 'r',
+                coords: [0.1, 0.1, 0.3, 0.3],
+                correct: true,
+              ),
             ],
           ).toBlock(),
         );
@@ -132,7 +136,8 @@ void main() {
       expect(
         refs.map((r) => r.path),
         contains('images/schema.png'),
-        reason: 'zonder deze verwijzing wist de asset-opruiming de afbeelding '
+        reason:
+            'zonder deze verwijzing wist de asset-opruiming de afbeelding '
             'waar de vraag om draait',
       );
       expect(

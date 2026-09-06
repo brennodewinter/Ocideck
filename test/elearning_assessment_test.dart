@@ -95,7 +95,8 @@ void main() {
       expect(
         ElearningSidecar.parse(raw),
         isNull,
-        reason: 'een hogere versie draagt aantoonbaar iets dat deze build niet '
+        reason:
+            'een hogere versie draagt aantoonbaar iets dat deze build niet '
             'kent — die mag niet half ingelezen en teruggeschreven worden',
       );
     });
@@ -115,7 +116,9 @@ void main() {
       expect(back, isNotNull);
       final again = jsonDecode(back!.encode()) as Map<String, dynamic>;
       expect(again['source'], 'scorm');
-      expect(again['structure'], {'modules': [1]});
+      expect(again['structure'], {
+        'modules': [1],
+      });
     });
 
     test('accessibility round-trips extensions and warnings', () {

@@ -294,7 +294,8 @@ void main() {
       expect(
         view.answerable,
         isFalse,
-        reason: 'zonder koppelkolommen in de presenter blokkeert answerable '
+        reason:
+            'zonder koppelkolommen in de presenter blokkeert answerable '
             'het doorbladeren zonder dat er iets te kiezen valt',
       );
     });
@@ -340,7 +341,8 @@ void main() {
       expect(
         view.openText,
         isFalse,
-        reason: 'het invoerveld toetst tegen spec.correctAnswers, en die is '
+        reason:
+            'het invoerveld toetst tegen spec.correctAnswers, en die is '
             'voor fillIn leeg — elke poging werd zwijgend geslikt',
       );
     });
@@ -370,7 +372,8 @@ void main() {
       expect(
         view.answerable,
         isFalse,
-        reason: 'de regio\'s leveren geen aanklikbare options op; answerable '
+        reason:
+            'de regio\'s leveren geen aanklikbare options op; answerable '
             'zette de presentatie vast op een vraag zonder antwoordkant',
       );
     });

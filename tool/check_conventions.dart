@@ -482,9 +482,9 @@ const Map<String, int> classSizeBaseline = {
   // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
   // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
   'lib/services/markdown_service.dart#MarkdownService':
-      2425, // +5 (#1999): eLearning-slidetypes in de serialize-switch. Verlaagd
+      2428, // +5 (#1999): eLearning-slidetypes in de serialize-switch. Verlaagd
   // van 2460: `_parsedCustomMarkdown` is naar het hoogste niveau getild — het
-  // leest niets van de service, dus het hoorde nooit op de klasse.
+  // leest niets van de service, dus het hoorde nooit op de klasse. Meet 2428.
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
