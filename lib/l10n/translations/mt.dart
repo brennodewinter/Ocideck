@@ -4778,4 +4778,38 @@ const _dutchSourceAddMt = <String, String>{
   'bv. "de controller board met display"':
       'eż. "il-bord tal-kontroll b\'display"',
   'Afbeeldingsverwijzingen': 'Referenzi tal-immaġini',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Punteġġ, feedback u metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punti, strateġija ta\' punteġġ, feedback, pariri, tentattivi u kollegamenti għal għanijiet ta\' tagħlim.',
+  'Scoringstrategie': 'Strateġija ta\' punteġġ',
+  'Alles of niets': 'Kollox jew xejn',
+  'Deels': 'Parzjali',
+  'Per paar': 'Għal kull par',
+  'Per item': 'Għal kull element',
+  'Puntenaftrek per fout': 'Tnaqqis ta\' punti għal kull risposta żbaljuta',
+  'Maximum pogingen (0 = onbeperkt)': 'Tentattivi massimi (0 = bla limitu)',
+  'Feedback per uitkomst': 'Feedback għal kull riżultat',
+  'Bij goed antwoord': 'Ma\' risposta korretta',
+  'Bij fout antwoord': 'Ma\' risposta żbaljuta',
+  'Bij deels goed': 'Ma\' risposta parzjalment korretta',
+  'Bij timeout': 'Ma\' timeout',
+  'Hints (één per regel, progressief)':
+      'Pariri (wieħed għal kull linja, progressiv)',
+  'Eerste hint\nTweede hint': 'L-ewwel parir\\nIt-tieni parir',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — ankra tal-islajd għal islajd ta\' feedback',
+  'bijv. slide:3': 'eż. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Riferimenti għal għanijiet ta\' tagħlim (ankri tal-islajds, wieħed għal kull linja)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Materja/suġġett',
+  'Moeilijkheid': 'Diffikultà',
+  '— geen —': '— ebda —',
+  'Makkelijk': 'Faċli',
+  'Gemiddeld': 'Medju',
+  'Moeilijk': 'Diffiċli',
+  'Geschatte duur in seconden': 'Tul mistenni f\'sekondi',
+  'Tags (komma-gescheiden)': 'Tikketti (separati b\'virgola)',
 };

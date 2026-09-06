@@ -4739,4 +4739,38 @@ const _dutchSourceAddLa = <String, String>{
   'bv. "de controller board met display"':
       'ex. gr. "tabula moderatrix cum monitorio"',
   'Afbeeldingsverwijzingen': 'Imaginum referentiae',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Punctatio, responsio et metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puncta, ratio punctandi, responsio, indicia, conatus et nexus propositorum discendi.',
+  'Scoringstrategie': 'Ratio punctandi',
+  'Alles of niets': 'Omnia aut nihil',
+  'Deels': 'Partim',
+  'Per paar': 'Per par',
+  'Per item': 'Per singulum',
+  'Puntenaftrek per fout': 'Deductio punctorum pro responso falso',
+  'Maximum pogingen (0 = onbeperkt)': 'Conatus maximi (0 = infinitus)',
+  'Feedback per uitkomst': 'Responsio per exitum',
+  'Bij goed antwoord': 'Ad responsum rectum',
+  'Bij fout antwoord': 'Ad responsum falsum',
+  'Bij deels goed': 'Ad partim rectum',
+  'Bij timeout': 'Ad tempus excessum',
+  'Hints (één per regel, progressief)':
+      'Indicia (unum per lineam, progressiva)',
+  'Eerste hint\nTweede hint': 'Primum indicium\\nSecundum indicium',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — ancora paginae ad paginem responsionis',
+  'bijv. slide:3': 'ex. gr. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Nexus propositorum discendi (ancorae paginae, una per lineam)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Disciplina/argumentum',
+  'Moeilijkheid': 'Difficultas',
+  '— geen —': '— nullus —',
+  'Makkelijk': 'Facile',
+  'Gemiddeld': 'Medium',
+  'Moeilijk': 'Difficile',
+  'Geschatte duur in seconden': 'Durata aestimata in secundis',
+  'Tags (komma-gescheiden)': 'Notae (separatae virgula)',
 };

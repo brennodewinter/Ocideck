@@ -4667,4 +4667,37 @@ const _dutchSourceAddTlh = <String, String>{
   'bv. "de controller board met display"':
       'ghantoH "controller board display" je',
   'Afbeeldingsverwijzingen': 'mIllogh reference\'mey',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Qav, QapHa\' tlhobbeH je metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Qavmey, Qav chupmeH, QapHa\', nugh, nIDmey je ghuHmey nID.',
+  'Scoringstrategie': 'Qav chupmeH',
+  'Alles of niets': 'Hoch pagh netlh',
+  'Deels': 'bI\'res',
+  'Per paar': 'wa\' wa\'DIch',
+  'Per item': 'wa\' mutlhwI\'',
+  'Puntenaftrek per fout': 'Qavmey QavHa\' jawmey',
+  'Maximum pogingen (0 = onbeperkt)': 'nIDmey nIq (0 = tlhab)',
+  'Feedback per uitkomst': 'QapHa\' per mI\'Qo\'',
+  'Bij goed antwoord': 'jaw DIch Qap',
+  'Bij fout antwoord': 'jaw DIch QapHa\'',
+  'Bij deels goed': 'jaw bI\'res Qap',
+  'Bij timeout': 'poH HeghDI',
+  'Hints (één per regel, progressief)': 'nugh (wa\' per tlhIH, vIH)',
+  'Eerste hint\nTweede hint': 'wa\'DIch nugh\\ncha\'DIch nugh',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide-anchor QapHa\' slide-Daq',
+  'bijv. slide:3': 'mI\' slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'ghuH nIDmey (slide-anchors, wa\' per tlhIH)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'metadata',
+  'Vak/onderwerp': 'Suy\'/Hov',
+  'Moeilijkheid': 'Qatlhqu\'',
+  '— geen —': '— pagh —',
+  'Makkelijk': 'ngeb',
+  'Gemiddeld': 'mutlhwI\'',
+  'Moeilijk': 'Qatlh',
+  'Geschatte duur in seconden': 'poH nIb seconds',
+  'Tags (komma-gescheiden)': 'tags (vi\'mey tlhej)',
 };

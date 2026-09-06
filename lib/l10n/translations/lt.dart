@@ -4738,4 +4738,39 @@ const _dutchSourceAddLt = <String, String>{
   'Gebieden': 'Sritys',
   'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',
   'Afbeeldingsverwijzingen': 'Paveikslėlių nuorodos',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata':
+      'Vertinimas, grįžtamasis ryšys ir metaduomenys',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Taškai, vertinimo strategija, grįžtamasis ryšys, užuominos, bandymai ir mokymosi tikslų nuorodos.',
+  'Scoringstrategie': 'Vertinimo strategija',
+  'Alles of niets': 'Viskas arba nieko',
+  'Deels': 'Dalinis',
+  'Per paar': 'Už porą',
+  'Per item': 'Už elementą',
+  'Puntenaftrek per fout': 'Taškų atėmimas už neteisingą atsakymą',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimalūs bandymai (0 = neribotas)',
+  'Feedback per uitkomst': 'Grįžtamasis ryšys pagal rezultatą',
+  'Bij goed antwoord': 'Teisingam atsakymui',
+  'Bij fout antwoord': 'Neteisingam atsakymui',
+  'Bij deels goed': 'Dalinai teisingam',
+  'Bij timeout': 'Pasibaigus laikui',
+  'Hints (één per regel, progressief)':
+      'Užuominos (viena eilutėje, progresyvios)',
+  'Eerste hint\nTweede hint': 'Pirma užuomina\\nAntra užuomina',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slaido inkaras į grįžtamojo ryšio slaidą',
+  'bijv. slide:3': 'pvz. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Mokymosi tikslų nuorodos (slaido inkarai, vienas eilutėje)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metaduomenys',
+  'Vak/onderwerp': 'Dalykas/tema',
+  'Moeilijkheid': 'Sunkumas',
+  '— geen —': '— joks —',
+  'Makkelijk': 'Lengva',
+  'Gemiddeld': 'Vidutiniškai',
+  'Moeilijk': 'Sunku',
+  'Geschatte duur in seconden': 'Apskaičiuota trukmė sekundėmis',
+  'Tags (komma-gescheiden)': 'Žymos (atskirtos kableliu)',
 };

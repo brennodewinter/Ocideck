@@ -4748,4 +4748,38 @@ const _dutchSourceAddPl = <String, String>{
   'Gebieden': 'Obszary',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
   'Afbeeldingsverwijzingen': 'Odwołania do obrazów',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Punktacja, informacja zwrotna i metadane',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punkty, strategia punktacji, informacja zwrotna, podpowiedzi, próby i linki do celów edukacyjnych.',
+  'Scoringstrategie': 'Strategia punktacji',
+  'Alles of niets': 'Wszystko albo nic',
+  'Deels': 'Częściowo',
+  'Per paar': 'Za parę',
+  'Per item': 'Za element',
+  'Puntenaftrek per fout': 'Odjęcie punktów za błędną odpowiedź',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksymalne próby (0 = nielimitowane)',
+  'Feedback per uitkomst': 'Informacja zwrotna na wynik',
+  'Bij goed antwoord': 'Przy poprawnej odpowiedzi',
+  'Bij fout antwoord': 'Przy błędnej odpowiedzi',
+  'Bij deels goed': 'Przy częściowo poprawnej',
+  'Bij timeout': 'Prze limit czasu',
+  'Hints (één per regel, progressief)':
+      'Podpowiedzi (jedna na wiersz, progresywne)',
+  'Eerste hint\nTweede hint': 'Pierwsza podpowiedź\\nDruga podpowiedź',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — kotwica slajdu do slajdu z informacją zwrotną',
+  'bijv. slide:3': 'np. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Odnośniki celów edukacyjnych (kotwice slajdów, jedna na wiersz)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadane',
+  'Vak/onderwerp': 'Przedmiot/temat',
+  'Moeilijkheid': 'Trudność',
+  '— geen —': '— brak —',
+  'Makkelijk': 'Łatwy',
+  'Gemiddeld': 'Średni',
+  'Moeilijk': 'Trudny',
+  'Geschatte duur in seconden': 'Szacowany czas w sekundach',
+  'Tags (komma-gescheiden)': 'Tagi (oddzielone przecinkiem)',
 };

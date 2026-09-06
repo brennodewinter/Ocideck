@@ -4718,4 +4718,37 @@ const _dutchSourceAddEn = {
       'Document fields (header and footer) are not carried over.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Footnotes become plain text; a presentation has no notes.',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Scoring, feedback and metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Points, scoring strategy, feedback, hints, attempts and learning objective links.',
+  'Scoringstrategie': 'Scoring strategy',
+  'Alles of niets': 'All or nothing',
+  'Deels': 'Partial',
+  'Per paar': 'Per pair',
+  'Per item': 'Per item',
+  'Puntenaftrek per fout': 'Points deducted per wrong answer',
+  'Maximum pogingen (0 = onbeperkt)': 'Maximum attempts (0 = unlimited)',
+  'Feedback per uitkomst': 'Feedback per outcome',
+  'Bij goed antwoord': 'On correct answer',
+  'Bij fout antwoord': 'On wrong answer',
+  'Bij deels goed': 'On partially correct',
+  'Bij timeout': 'On timeout',
+  'Hints (één per regel, progressief)': 'Hints (one per line, progressive)',
+  'Eerste hint\nTweede hint': 'First hint\\nSecond hint',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide anchor to feedback slide',
+  'bijv. slide:3': 'e.g. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Learning objective references (slide anchors, one per line)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Subject',
+  'Moeilijkheid': 'Difficulty',
+  '— geen —': '— none —',
+  'Makkelijk': 'Easy',
+  'Gemiddeld': 'Medium',
+  'Moeilijk': 'Hard',
+  'Geschatte duur in seconden': 'Estimated duration in seconds',
+  'Tags (komma-gescheiden)': 'Tags (comma-separated)',
 };

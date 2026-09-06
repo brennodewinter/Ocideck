@@ -4719,4 +4719,38 @@ const _dutchSourceAddLv = <String, String>{
   'Gebieden': 'Apgabali',
   'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',
   'Afbeeldingsverwijzingen': 'Attēlu atsauces',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Vērtēšana, atsauksmes un metadati',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punkti, vērtēšanas stratēģija, atsauksmes, norādes, mēģinājumi un mācību mērķu saites.',
+  'Scoringstrategie': 'Vērtēšanas stratēģija',
+  'Alles of niets': 'Viss vai nekas',
+  'Deels': 'Daļēji',
+  'Per paar': 'Uz pāri',
+  'Per item': 'Uz vienību',
+  'Puntenaftrek per fout': 'Punktu atņemšana par nepareizu atbildi',
+  'Maximum pogingen (0 = onbeperkt)':
+      'Maksimālie mēģinājumi (0 = neierobežots)',
+  'Feedback per uitkomst': 'Atsauksmes par rezultātu',
+  'Bij goed antwoord': 'Pareizai atbildei',
+  'Bij fout antwoord': 'Nepareizai atbildei',
+  'Bij deels goed': 'Daļēji pareizai',
+  'Bij timeout': 'Pie noildzes',
+  'Hints (één per regel, progressief)': 'Norādes (viena rindā, progresīvi)',
+  'Eerste hint\nTweede hint': 'Pirmā norāde\\nOtrā norāde',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slaida enkurs uz atsauksmes slaidu',
+  'bijv. slide:3': 'piem. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Mācību mērķu atsauces (slaida enkuri, viens rindā)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadati',
+  'Vak/onderwerp': 'Priekšmets/tema',
+  'Moeilijkheid': 'Grūtības pakāpe',
+  '— geen —': '— nav —',
+  'Makkelijk': 'Viegli',
+  'Gemiddeld': 'Vidēji',
+  'Moeilijk': 'Grūti',
+  'Geschatte duur in seconden': 'Aptuvamais ilgums sekundēs',
+  'Tags (komma-gescheiden)': 'Tagi (atdalīti ar komatu)',
 };

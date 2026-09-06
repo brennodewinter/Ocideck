@@ -191,6 +191,18 @@ class QuestionFeedback {
 
   bool get isEmpty =>
       correct.isEmpty && wrong.isEmpty && partial.isEmpty && timeout.isEmpty;
+
+  QuestionFeedback copyWith({
+    String? correct,
+    String? wrong,
+    String? partial,
+    String? timeout,
+  }) => QuestionFeedback(
+    correct: correct ?? this.correct,
+    wrong: wrong ?? this.wrong,
+    partial: partial ?? this.partial,
+    timeout: timeout ?? this.timeout,
+  );
 }
 
 /// Leesbare metadata voor een vraag. Authoring content die de auteur met de
@@ -240,4 +252,21 @@ class QuestionMetadata {
       difficulty.isEmpty &&
       estimatedDurationSeconds == 0 &&
       tags.isEmpty;
+
+  QuestionMetadata copyWith({
+    String? title,
+    String? language,
+    String? subject,
+    String? difficulty,
+    int? estimatedDurationSeconds,
+    List<String>? tags,
+  }) => QuestionMetadata(
+    title: title ?? this.title,
+    language: language ?? this.language,
+    subject: subject ?? this.subject,
+    difficulty: difficulty ?? this.difficulty,
+    estimatedDurationSeconds:
+        estimatedDurationSeconds ?? this.estimatedDurationSeconds,
+    tags: tags ?? this.tags,
+  );
 }

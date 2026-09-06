@@ -4734,4 +4734,37 @@ const _dutchSourceAddId = <String, String>{
   'bv. "de controller board met display"':
       'mis. "papan pengendali dengan layar"',
   'Afbeeldingsverwijzingen': 'Referensi gambar',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Penilaian, umpan balik dan metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Poin, strategi penilaian, umpan balik, petunjuk, percobaan dan tautan tujuan pembelajaran.',
+  'Scoringstrategie': 'Strategi penilaian',
+  'Alles of niets': 'Semua atau tidak sama sekali',
+  'Deels': 'Sebagian',
+  'Per paar': 'Per pasangan',
+  'Per item': 'Per item',
+  'Puntenaftrek per fout': 'Pengurangan poin per jawaban salah',
+  'Maximum pogingen (0 = onbeperkt)': 'Percobaan maksimum (0 = tak terbatas)',
+  'Feedback per uitkomst': 'Umpan balik per hasil',
+  'Bij goed antwoord': 'Saat jawaban benar',
+  'Bij fout antwoord': 'Saat jawaban salah',
+  'Bij deels goed': 'Saat sebagian benar',
+  'Bij timeout': 'Saat habis waktu',
+  'Hints (één per regel, progressief)': 'Petunjuk (satu per baris, progresif)',
+  'Eerste hint\nTweede hint': 'Petunjuk pertama\\nPetunjuk kedua',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — jangkar slide ke slide umpan balik',
+  'bijv. slide:3': 'mis. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Referensi tujuan pembelajaran (jangkar slide, satu per baris)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Mata pelajaran/topik',
+  'Moeilijkheid': 'Kesulitan',
+  '— geen —': '— tidak ada —',
+  'Makkelijk': 'Mudah',
+  'Gemiddeld': 'Sedang',
+  'Moeilijk': 'Sulit',
+  'Geschatte duur in seconden': 'Estimasi durasi dalam detik',
+  'Tags (komma-gescheiden)': 'Tag (dipisahkan koma)',
 };

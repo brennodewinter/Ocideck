@@ -4720,4 +4720,37 @@ const _dutchSourceAddSv = <String, String>{
   'bv. "de controller board met display"':
       't.ex. "kontrollerkortet med display"',
   'Afbeeldingsverwijzingen': 'Bildreferenser',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Poäng, feedback och metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Poäng, poängstrategi, feedback, tips, försök och lärningsmålslänkar.',
+  'Scoringstrategie': 'Poängstrategi',
+  'Alles of niets': 'Allt eller inget',
+  'Deels': 'Delvis',
+  'Per paar': 'Per par',
+  'Per item': 'Per objekt',
+  'Puntenaftrek per fout': 'Poängavdrag per fel svar',
+  'Maximum pogingen (0 = onbeperkt)': 'Maximalt antal försök (0 = obegränsat)',
+  'Feedback per uitkomst': 'Feedback per utfall',
+  'Bij goed antwoord': 'Vid rätt svar',
+  'Bij fout antwoord': 'Vid fel svar',
+  'Bij deels goed': 'Vid delvis rätt',
+  'Bij timeout': 'Vid timeout',
+  'Hints (één per regel, progressief)': 'Tips (ett per rad, progressiv)',
+  'Eerste hint\nTweede hint': 'Första tips\\nAndra tips',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide-ankare till feedback-slide',
+  'bijv. slide:3': 't.ex. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Läringsmålsreferenser (slide-ankare, en per rad)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Ämne/område',
+  'Moeilijkheid': 'Svårighetsgrad',
+  '— geen —': '— ingen —',
+  'Makkelijk': 'Lätt',
+  'Gemiddeld': 'Medel',
+  'Moeilijk': 'Svår',
+  'Geschatte duur in seconden': 'Uppskattad varaktighet i sekunder',
+  'Tags (komma-gescheiden)': 'Taggar (kommaseparerade)',
 };

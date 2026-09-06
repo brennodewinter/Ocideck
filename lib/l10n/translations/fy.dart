@@ -4739,4 +4739,37 @@ const _dutchSourceAddFy = {
   'bv. "de controller board met display"':
       'byg. "de controller board mei display"',
   'Afbeeldingsverwijzingen': 'Ofbyldingsferwizingen',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Skoring, weromkeppeling en metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punten, scoringstrategy, weromkeppeling, hints, besuchen en leardoelkeppelingen.',
+  'Scoringstrategie': 'Scoringstrategy',
+  'Alles of niets': 'Al of neat',
+  'Deels': 'Diels',
+  'Per paar': 'Per pear',
+  'Per item': 'Per item',
+  'Puntenaftrek per fout': 'Puntenôflûk per ferkeard antwurd',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimum besuchen (0 = ûnbeheind)',
+  'Feedback per uitkomst': 'Weromkeppeling per útkomst',
+  'Bij goed antwoord': 'By goed antwurd',
+  'Bij fout antwoord': 'By ferkeard antwurd',
+  'Bij deels goed': 'By diels goed',
+  'Bij timeout': 'By timeout',
+  'Hints (één per regel, progressief)': 'Hints (ien per rigel, progressyf)',
+  'Eerste hint\nTweede hint': 'Earste hint\\nTwadde hint',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide-anker nei feedback-slide',
+  'bijv. slide:3': 'byg. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Leardoelferwizingen (slide-ankers, ien per rigel)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Fak/ûnderwerp',
+  'Moeilijkheid': 'Moeilikheid',
+  '— geen —': '— gjin —',
+  'Makkelijk': 'Maklik',
+  'Gemiddeld': 'Gemiddeld',
+  'Moeilijk': 'Moeilik',
+  'Geschatte duur in seconden': 'Skatte doer yn sekonden',
+  'Tags (komma-gescheiden)': 'Tags (kommaskieden)',
 };

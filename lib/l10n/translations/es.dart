@@ -4787,4 +4787,37 @@ const _dutchSourceAddEs = {
   'bv. "de controller board met display"':
       'p. ej. "la placa de control con pantalla"',
   'Afbeeldingsverwijzingen': 'Referencias de imagen',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Puntuación, retroalimentación y metadatos',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puntos, estrategia de puntuación, retroalimentación, pistas, intentos y enlaces a objetivos de aprendizaje.',
+  'Scoringstrategie': 'Estrategia de puntuación',
+  'Alles of niets': 'Todo o nada',
+  'Deels': 'Parcial',
+  'Per paar': 'Por par',
+  'Per item': 'Por elemento',
+  'Puntenaftrek per fout': 'Puntos descontados por respuesta incorrecta',
+  'Maximum pogingen (0 = onbeperkt)': 'Intentos máximos (0 = ilimitado)',
+  'Feedback per uitkomst': 'Retroalimentación por resultado',
+  'Bij goed antwoord': 'En respuesta correcta',
+  'Bij fout antwoord': 'En respuesta incorrecta',
+  'Bij deels goed': 'En respuesta parcialmente correcta',
+  'Bij timeout': 'En tiempo agotado',
+  'Hints (één per regel, progressief)': 'Pistas (una por línea, progresivas)',
+  'Eerste hint\nTweede hint': 'Primera pista\\nSegunda pista',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediación — ancla de slide a slide de retroalimentación',
+  'bijv. slide:3': 'p. ej. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Referencias de objetivos de aprendizaje (anclas de slide, una por línea)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadatos',
+  'Vak/onderwerp': 'Asignatura/tema',
+  'Moeilijkheid': 'Dificultad',
+  '— geen —': '— ninguno —',
+  'Makkelijk': 'Fácil',
+  'Gemiddeld': 'Medio',
+  'Moeilijk': 'Difícil',
+  'Geschatte duur in seconden': 'Duración estimada en segundos',
+  'Tags (komma-gescheiden)': 'Etiquetas (separadas por comas)',
 };

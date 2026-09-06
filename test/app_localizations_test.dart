@@ -236,6 +236,12 @@ const unchangedInEnglish = {
   'P {pitch}  B {bank}',
   'ACT {value}°',
   'TGT {heading}°',
+  // eLearning-editor: 'Metadata' is een leenwoord in het Engels, 'Per item'
+  // is Latijn dat in het Engels ongewijzigd blijft. Andere talen vertalen wél.
+  'Metadata',
+  'Per item',
+  // eLearning-editor: placeholder-voorbeeld voor slide-anchors, geen tekst.
+  'slide:0\nslide:5',
 };
 
 /// Idem, maar voor ALLE talen: termen die overal letterlijk gelijk blijven —
@@ -377,6 +383,8 @@ const unchangedInAllLanguages = {
   'slide',
   'Contrast',
   ':1).',
+  // eLearning-editor: placeholder-voorbeeld voor slide-anchors, geen tekst.
+  'slide:0\nslide:5',
 };
 
 void main() {

@@ -4810,4 +4810,37 @@ const _dutchSourceAddFr = {
   'bv. "de controller board met display"':
       'p. ex. « la carte de contrôle avec écran »',
   'Afbeeldingsverwijzingen': 'Références d\'image',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Score, retour et métadonnées',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Points, stratégie de score, retours, indices, tentatives et liens aux objectifs d\'apprentissage.',
+  'Scoringstrategie': 'Stratégie de score',
+  'Alles of niets': 'Tout ou rien',
+  'Deels': 'Partiel',
+  'Per paar': 'Par paire',
+  'Per item': 'Par élément',
+  'Puntenaftrek per fout': 'Points déduits par mauvaise réponse',
+  'Maximum pogingen (0 = onbeperkt)': 'Tentatives maximales (0 = illimité)',
+  'Feedback per uitkomst': 'Retour par résultat',
+  'Bij goed antwoord': 'En cas de bonne réponse',
+  'Bij fout antwoord': 'En cas de mauvaise réponse',
+  'Bij deels goed': 'En cas de réponse partielle',
+  'Bij timeout': 'En cas de dépassement de temps',
+  'Hints (één per regel, progressief)': 'Indices (un par ligne, progressif)',
+  'Eerste hint\nTweede hint': 'Premier indice\\nDeuxième indice',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remédiation — ancre de slide vers slide de retour',
+  'bijv. slide:3': 'p. ex. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Références d\'objectifs d\'apprentissage (ancres de slide, une par ligne)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Métadonnées',
+  'Vak/onderwerp': 'Matière/sujet',
+  'Moeilijkheid': 'Difficulté',
+  '— geen —': '— aucune —',
+  'Makkelijk': 'Facile',
+  'Gemiddeld': 'Moyen',
+  'Moeilijk': 'Difficile',
+  'Geschatte duur in seconden': 'Durée estimée en secondes',
+  'Tags (komma-gescheiden)': 'Tags (séparés par virgule)',
 };

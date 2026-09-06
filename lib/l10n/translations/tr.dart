@@ -4710,4 +4710,38 @@ const _dutchSourceAddTr = <String, String>{
   'Gebieden': 'Bölgeler',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
   'Afbeeldingsverwijzingen': 'Görsel referanslar',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Puanlama, geri bildirim ve meta veriler',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puanlar, puanlama stratejisi, geri bildirim, ipuçları, denemeler ve öğrenme hedefi bağlantıları.',
+  'Scoringstrategie': 'Puanlama stratejisi',
+  'Alles of niets': 'Ya hep ya hiç',
+  'Deels': 'Kısmi',
+  'Per paar': 'Çift başına',
+  'Per item': 'Öğe başına',
+  'Puntenaftrek per fout': 'Yanlış cevap başına puan kesintisi',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimum deneme (0 = sınırsız)',
+  'Feedback per uitkomst': 'Sonuç başına geri bildirim',
+  'Bij goed antwoord': 'Doğru cevapta',
+  'Bij fout antwoord': 'Yanlış cevapta',
+  'Bij deels goed': 'Kısmen doğru olduğunda',
+  'Bij timeout': 'Zaman aşımında',
+  'Hints (één per regel, progressief)':
+      'İpuçları (satır başına bir, ilerleyen)',
+  'Eerste hint\nTweede hint': 'İlk ipucu\\nİkinci ipucu',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slayt tutturucusu geri bildirim slaydına',
+  'bijv. slide:3': 'örn. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Öğrenme hedefi referansları (slayt tutturucuları, satır başına bir)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Meta veriler',
+  'Vak/onderwerp': 'Ders/konu',
+  'Moeilijkheid': 'Zorluk',
+  '— geen —': '— yok —',
+  'Makkelijk': 'Kolay',
+  'Gemiddeld': 'Orta',
+  'Moeilijk': 'Zor',
+  'Geschatte duur in seconden': 'Tahmini süre saniye cinsinden',
+  'Tags (komma-gescheiden)': 'Etiketler (virgülle ayrılmış)',
 };

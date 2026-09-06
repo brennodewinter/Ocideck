@@ -4709,4 +4709,38 @@ const _dutchSourceAddCs = <String, String>{
   'Gebieden': 'Oblasti',
   'bv. "de controller board met display"': 'např. "řídící deska s displejem"',
   'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Bodování, zpětná vazba a metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Body, strategie bodování, zpětná vazba, nápovědy, pokusy a odkazy na cíle učení.',
+  'Scoringstrategie': 'Strategie bodování',
+  'Alles of niets': 'Všechno nebo nic',
+  'Deels': 'Částečně',
+  'Per paar': 'Za pár',
+  'Per item': 'Za položku',
+  'Puntenaftrek per fout': 'Bodový odpočet za špatnou odpověď',
+  'Maximum pogingen (0 = onbeperkt)': 'Maximální pokusy (0 = neomezeně)',
+  'Feedback per uitkomst': 'Zpětná vazba na výsledek',
+  'Bij goed antwoord': 'Při správné odpovědi',
+  'Bij fout antwoord': 'Při špatné odpovědi',
+  'Bij deels goed': 'Při částečně správné',
+  'Bij timeout': 'Při vypršení času',
+  'Hints (één per regel, progressief)':
+      'Nápovědy (jedna na řádek, progresivní)',
+  'Eerste hint\nTweede hint': 'První nápověda\\nDruhá nápověda',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — kotva slidu na slid se zpětnou vazbou',
+  'bijv. slide:3': 'např. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Odkazy na cíle učení (kotvy slidů, jedna na řádek)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Předmět/téma',
+  'Moeilijkheid': 'Obtížnost',
+  '— geen —': '— žádné —',
+  'Makkelijk': 'Snadné',
+  'Gemiddeld': 'Střední',
+  'Moeilijk': 'Těžké',
+  'Geschatte duur in seconden': 'Odhadovaná doba v sekundách',
+  'Tags (komma-gescheiden)': 'Štítky (oddělené čárkou)',
 };

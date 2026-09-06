@@ -7,6 +7,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/elearning_assessment.dart';
 import '../utils/log.dart';
 
 /// Preference key. Renaming afterwards would silently turn the module off for
@@ -77,6 +78,10 @@ class ElearningNotifier extends Notifier<ElearningState> {
       logError('ElearningNotifier: prefs write failed', e, s);
     }
   }
+
+  /// Parse an eLearning sidecar (`<name>.elearning.json`) safely. Returns null
+  /// on invalid JSON or a version from a newer build (#2006).
+  ElearningSidecar? parseSidecar(String raw) => ElearningSidecar.parse(raw);
 
   Future<void> enable() => setEnabled(true);
 

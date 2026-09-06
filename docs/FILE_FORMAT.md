@@ -1337,6 +1337,30 @@ Fields:
   `0.85`). Written for that kind only; a value outside the range is clamped when
   the block is read.
 
+> **eLearning extension fields** (written only when non-default, see
+> `docs/design/ELEARNING_MODEL.md` §3.3):
+>
+> - `points` — max score for this question (default `1`).
+> - `scoring` — `allOrNothing` (default) | `partialPerCorrect` |
+>   `partialPerPair` (matching) | `partialPerAnswer` (fillIn).
+> - `penalty` — points deducted per wrong attempt, clamped at zero (default `0`).
+> - `maxAttempts` — maximum attempts, `0` = unlimited (default `1`). Builds on
+>   the existing `onWrong`: with `retry` and `maxAttempts > 1`, the learner gets
+>   extra attempts; with `lockAndContinue`, the answer is revealed after the last.
+> - `feedback` — per-outcome feedback as Markdown: `{correct, wrong, partial,
+>   timeout}`. Written only when filled.
+> - `hint` — a string or array of progressive hints. Written only when filled.
+> - `remediation` — slide-anchor to a `feedback` slide. Written only when filled.
+> - `objectiveRefs` — array of slide-anchors to `objective` slides. Written only
+>   when filled.
+> - `metadata` — readable metadata: `{title, language, subject, difficulty,
+>   estimatedDurationSeconds, tags}`. Written only when filled.
+>
+> The assessment test definition (sections, pass threshold, time limits,
+> navigation) is deck-bredde structuur and lives in the sidecar
+> `<name>.elearning.json`, not in the `.md`. See
+> `docs/design/ELEARNING_MODEL.md` §5.
+
 > The live answer state (which options were drawn, what the viewer picked, what
 > was typed, correct/wrong) is **session-only** and never written to the file. A
 > static export renders the question without interactivity; in the HTML export an

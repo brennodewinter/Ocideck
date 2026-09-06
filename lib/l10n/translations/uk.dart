@@ -4743,4 +4743,37 @@ const _dutchSourceAddUk = <String, String>{
   'bv. "de controller board met display"':
       'напр. "плата контролера з дисплеєм"',
   'Afbeeldingsverwijzingen': 'Посилання на зображення',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Оцінювання, зворотний зв\'язок і метадані',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Бали, стратегія оцінювання, зворотний зв\'язок, підказки, спроби та посилання на навчальні цілі.',
+  'Scoringstrategie': 'Стратегія оцінювання',
+  'Alles of niets': 'Усе або нічого',
+  'Deels': 'Частково',
+  'Per paar': 'За пару',
+  'Per item': 'За елемент',
+  'Puntenaftrek per fout': 'Зняття балів за неправильну відповідь',
+  'Maximum pogingen (0 = onbeperkt)': 'Максимум спроб (0 = необмежено)',
+  'Feedback per uitkomst': 'Зворотний зв\'язок за результатом',
+  'Bij goed antwoord': 'При правильній відповіді',
+  'Bij fout antwoord': 'При неправильній відповіді',
+  'Bij deels goed': 'При частково правильній',
+  'Bij timeout': 'При перевищенні часу',
+  'Hints (één per regel, progressief)': 'Підказки (одна на рядок, прогресивні)',
+  'Eerste hint\nTweede hint': 'Перша підказка\\nДруга підказка',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — прив\'язка слайда до слайда із зворотним зв\'язком',
+  'bijv. slide:3': 'напр. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Посилання на навчальні цілі (прив\'язки слайдів, одна на рядок)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Метадані',
+  'Vak/onderwerp': 'Предмет/тема',
+  'Moeilijkheid': 'Складність',
+  '— geen —': '— немає —',
+  'Makkelijk': 'Легко',
+  'Gemiddeld': 'Середньо',
+  'Moeilijk': 'Важко',
+  'Geschatte duur in seconden': 'Орієнтовна тривалість у секундах',
+  'Tags (komma-gescheiden)': 'Теги (розділені комою)',
 };

@@ -4790,4 +4790,39 @@ const _dutchSourceAddEl = <String, String>{
   'Gebieden': 'Περιοχές',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
   'Afbeeldingsverwijzingen': 'Αναφορές εικόνων',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata':
+      'Βαθμολογία, ανατροφοδότηση και μεταδεδομένα',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Πόντοι, στρατηγική βαθμολογίας, ανατροφοδότηση, υποδείξεις, προσπάθειες και σύνδεσμοι στόχων μάθησης.',
+  'Scoringstrategie': 'Στρατηγική βαθμολογίας',
+  'Alles of niets': 'Όλα ή τίποτα',
+  'Deels': 'Μερική',
+  'Per paar': 'Ανά ζευγάρι',
+  'Per item': 'Ανά στοιχείο',
+  'Puntenaftrek per fout': 'Αφαίρεση πόντων ανά λάθος απάντηση',
+  'Maximum pogingen (0 = onbeperkt)': 'Μέγιστες προσπάθειες (0 = απεριόριστο)',
+  'Feedback per uitkomst': 'Ανατροφοδότηση ανά αποτέλεσμα',
+  'Bij goed antwoord': 'Σε σωστή απάντηση',
+  'Bij fout antwoord': 'Σε λάθος απάντηση',
+  'Bij deels goed': 'Σε μερικά σωστή',
+  'Bij timeout': 'Σε υπερβολή χρόνου',
+  'Hints (één per regel, progressief)':
+      'Υποδείξεις (μία ανά γραμμή, προοδευτικές)',
+  'Eerste hint\nTweede hint': 'Πρώτη υπόδειξη\\nΔεύτερη υπόδειξη',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — άγκυρα διαφάνειας σε διαφάνεια ανατροφοδότησης',
+  'bijv. slide:3': 'π.χ. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Αναφορές στόχων μάθησης (άγκυρες διαφανειών, μία ανά γραμμή)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Μεταδεδομένα',
+  'Vak/onderwerp': 'Μάθημα/θέμα',
+  'Moeilijkheid': 'Δυσκολία',
+  '— geen —': '— κανένα —',
+  'Makkelijk': 'Εύκολο',
+  'Gemiddeld': 'Μεσαίο',
+  'Moeilijk': 'Δύσκολο',
+  'Geschatte duur in seconden': 'Εκτιμώμενη διάρκεια σε δευτερόλεπτα',
+  'Tags (komma-gescheiden)': 'Ετικέτες (διαχωρισμένες με κόμμα)',
 };

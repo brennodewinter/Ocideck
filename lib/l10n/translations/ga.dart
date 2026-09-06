@@ -4792,4 +4792,38 @@ const _dutchSourceAddGa = <String, String>{
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',
   'Afbeeldingsverwijzingen': 'Tagairtí íomhá',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Scóráil, aiseolas agus meiteashonraí',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Pointí, straitéis scórála, aiseolas, leideanna, iarrachtaí agus nascanna spriocanna foghlama.',
+  'Scoringstrategie': 'Straitéis scórála',
+  'Alles of niets': 'Uile nó faic',
+  'Deels': 'Páirteach',
+  'Per paar': 'In aghaidh an phéire',
+  'Per item': 'In aghaidh an míre',
+  'Puntenaftrek per fout': 'Pointí bainne in aghaidh freagra mícheart',
+  'Maximum pogingen (0 = onbeperkt)': 'Iarrachtaí uasta (0 = gan teorainn)',
+  'Feedback per uitkomst': 'Aiseolas in aghaidh an toraidh',
+  'Bij goed antwoord': 'Ar freagra ceart',
+  'Bij fout antwoord': 'Ar freagra mícheart',
+  'Bij deels goed': 'Ar freagra páirteach ceart',
+  'Bij timeout': 'Ar am istigh',
+  'Hints (één per regel, progressief)':
+      'Leideanna (ceann in aghaidh an líne, forásach)',
+  'Eerste hint\nTweede hint': 'Chéad leid\\nDara leid',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — ancair sleamhna go sleamhnán aiseolais',
+  'bijv. slide:3': 'm.sh. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Tagairtí spriocanna foghlama (ancairí sleamhna, ceann in aghaidh an líne)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Meiteashonraí',
+  'Vak/onderwerp': 'Ábhar/Topaic',
+  'Moeilijkheid': 'Deacracht',
+  '— geen —': '— dada —',
+  'Makkelijk': 'Éasca',
+  'Gemiddeld': 'Meánach',
+  'Moeilijk': 'Deacair',
+  'Geschatte duur in seconden': 'Fad measta i soicindí',
+  'Tags (komma-gescheiden)': 'Clibeanna (deighilte le camóg)',
 };

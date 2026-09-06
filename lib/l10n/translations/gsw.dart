@@ -4730,4 +4730,37 @@ const _dutchSourceAddGsw = <String, String>{
   'bv. "de controller board met display"':
       'z. B. "d Controller-Platine mit Display"',
   'Afbeeldingsverwijzingen': 'Bildreferänze',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Uswärtig, Feedback und Metadate',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Pünkt, Uswärtigsstrategii, Feedback, Hinwis, Versüech und Lernziilverchnüpfige.',
+  'Scoringstrategie': 'Uswärtigsstrategii',
+  'Alles of niets': 'Alls oder nüt',
+  'Deels': 'Teilwis',
+  'Per paar': 'Pro Paar',
+  'Per item': 'Pro Element',
+  'Puntenaftrek per fout': 'Pünktabzug pro falscher Antwort',
+  'Maximum pogingen (0 = onbeperkt)': 'Maximali Versüech (0 = unlimitiert)',
+  'Feedback per uitkomst': 'Feedback pro Ergebnis',
+  'Bij goed antwoord': 'Bi richtiger Antwort',
+  'Bij fout antwoord': 'Bi falscher Antwort',
+  'Bij deels goed': 'Bi teilwis richtig',
+  'Bij timeout': 'Bi Zeitüberschritig',
+  'Hints (één per regel, progressief)': 'Hinwis (ein pro Ziile, progressiv)',
+  'Eerste hint\nTweede hint': 'Erschte Hinwis\\nZwete Hinwis',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — Slide-Anker zu Feedback-Slide',
+  'bijv. slide:3': 'z. B. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Lernziilverwis (Slide-Anker, ein pro Ziile)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadate',
+  'Vak/onderwerp': 'Fach/Thema',
+  'Moeilijkheid': 'Schwierigkeit',
+  '— geen —': '— kei —',
+  'Makkelijk': 'Eifach',
+  'Gemiddeld': 'Mittel',
+  'Moeilijk': 'Schwierig',
+  'Geschatte duur in seconden': 'Gschätzti Duur in Sekunde',
+  'Tags (komma-gescheiden)': 'Tags (kommatrennt)',
 };

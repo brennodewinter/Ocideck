@@ -4725,4 +4725,38 @@ const _dutchSourceAddHr = <String, String>{
   'bv. "de controller board met display"':
       'npr. "upravljačka ploča s zaslonom"',
   'Afbeeldingsverwijzingen': 'Reference slika',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata':
+      'Bodovanje, povratna informacija i metapodaci',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Bodovi, strategija bodovanja, povratna informacija, savjeti, pokušaji i poveznice na ciljeve učenja.',
+  'Scoringstrategie': 'Strategija bodovanja',
+  'Alles of niets': 'Sve ili ništa',
+  'Deels': 'Djelomično',
+  'Per paar': 'Po paru',
+  'Per item': 'Po stavci',
+  'Puntenaftrek per fout': 'Odbitak bodova po pogrešnom odgovoru',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimalni pokušaji (0 = neograničeno)',
+  'Feedback per uitkomst': 'Povratna informacija po ishodu',
+  'Bij goed antwoord': 'Pri točnom odgovoru',
+  'Bij fout antwoord': 'Pri pogrešnom odgovoru',
+  'Bij deels goed': 'Pri djelomično točnom',
+  'Bij timeout': 'Pri isteku vremena',
+  'Hints (één per regel, progressief)': 'Savjeti (jedan po retku, progresivno)',
+  'Eerste hint\nTweede hint': 'Prvi savjet\\nDrugi savjet',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — sidro slajda na slajd s povratnom informacijom',
+  'bijv. slide:3': 'npr. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Reference ciljeva učenja (sidra slajdova, jedno po retku)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metapodaci',
+  'Vak/onderwerp': 'Predmet/tema',
+  'Moeilijkheid': 'Težina',
+  '— geen —': '— nema —',
+  'Makkelijk': 'Lako',
+  'Gemiddeld': 'Srednje',
+  'Moeilijk': 'Teško',
+  'Geschatte duur in seconden': 'Procijenjeno trajanje u sekundama',
+  'Tags (komma-gescheiden)': 'Oznake (odvojene zarezom)',
 };

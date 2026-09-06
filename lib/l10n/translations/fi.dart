@@ -4727,4 +4727,38 @@ const _dutchSourceAddFi = <String, String>{
   'Gebieden': 'Alueet',
   'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',
   'Afbeeldingsverwijzingen': 'Kuvaviitteet',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Pisteytys, palaute ja metatiedot',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Pisteet, pisteytysstrategia, palaute, vihjeet, yritykset ja oppimistavoitteen linkit.',
+  'Scoringstrategie': 'Pisteytysstrategia',
+  'Alles of niets': 'Kaikki tai ei mitään',
+  'Deels': 'Osittain',
+  'Per paar': 'Per pari',
+  'Per item': 'Per kohta',
+  'Puntenaftrek per fout': 'Pisteiden vähennys per väärä vastaus',
+  'Maximum pogingen (0 = onbeperkt)': 'Enimmäisyritykset (0 = rajaton)',
+  'Feedback per uitkomst': 'Palaute per tulos',
+  'Bij goed antwoord': 'Oikea vastaus',
+  'Bij fout antwoord': 'Väärä vastaus',
+  'Bij deels goed': 'Osittain oikein',
+  'Bij timeout': 'Aikakatkaisu',
+  'Hints (één per regel, progressief)':
+      'Vihjeet (yksi per rivi, progressiivinen)',
+  'Eerste hint\nTweede hint': 'Ensimmäinen vihje\\nToinen vihje',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Korjaus — slide-anrkuri palauteslideen',
+  'bijv. slide:3': 'esim. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Oppimistavoiteviittaukset (slide-anrkurit, yksi per rivi)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metatiedot',
+  'Vak/onderwerp': 'Aine/aihe',
+  'Moeilijkheid': 'Vaikeustaso',
+  '— geen —': '— ei mitään —',
+  'Makkelijk': 'Helppo',
+  'Gemiddeld': 'Keskitaso',
+  'Moeilijk': 'Vaikea',
+  'Geschatte duur in seconden': 'Arvioitu kesto sekunneissa',
+  'Tags (komma-gescheiden)': 'Tunnisteet (pilkuilla erotettuna)',
 };

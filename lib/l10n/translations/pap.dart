@@ -4760,4 +4760,37 @@ const _dutchSourceAddPap = {
   'bv. "de controller board met display"':
       'por ehèmpel "e bòrd di kontrol ku display"',
   'Afbeeldingsverwijzingen': 'Referensian di imágen',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Skor, feedback i metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puntunan, strategia di skor, feedback, suginanan, intentunan i link na meta di siña.',
+  'Scoringstrategie': 'Strategia di skor',
+  'Alles of niets': 'Tur of nada',
+  'Deels': 'Parcial',
+  'Per paar': 'Pa par',
+  'Per item': 'Pa kada item',
+  'Puntenaftrek per fout': 'Resta di punti pa respondi mishi',
+  'Maximum pogingen (0 = onbeperkt)': 'Intentu maksimo (0 = sin limit)',
+  'Feedback per uitkomst': 'Feedback pa resultado',
+  'Bij goed antwoord': 'Na respondi bon',
+  'Bij fout antwoord': 'Na respondi mishi',
+  'Bij deels goed': 'Na parcial bon',
+  'Bij timeout': 'Na timeout',
+  'Hints (één per regel, progressief)': 'Suginanan (un pa liña, progresivo)',
+  'Eerste hint\nTweede hint': 'Promé sugin\\nDi dos sugin',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — anchor di slide pa slide di feedback',
+  'bijv. slide:3': 'ehp. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Referensia di meta di siña (anchor di slide, un pa liña)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Materia/tema',
+  'Moeilijkheid': 'Difikutat',
+  '— geen —': '— ningun —',
+  'Makkelijk': 'Fasíl',
+  'Gemiddeld': 'Medio',
+  'Moeilijk': 'Dífísil',
+  'Geschatte duur in seconden': 'Durashon estimá na sekonde',
+  'Tags (komma-gescheiden)': 'Tags (separá pa koma)',
 };

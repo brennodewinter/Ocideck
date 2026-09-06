@@ -548,9 +548,10 @@ const Map<String, int> classSizeBaseline = {
   'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1219,
   // +21 (#1998): eLearning-kind state (pairs/distractors/regions/fields) +
   // init + _buildSpec + dropdown-items + build-branches. De editor-widgets
-  // zelf zijn geëxtraheerd naar question_elearning_editors.dart; dit is de
-  // state-plumbing die _QuestionEditorState moet vasthouden om te serialiseren.
-  'lib/widgets/editors/question_editor.dart#_QuestionEditorState': 1021,
+  // zelf zijn geëxtraheerd naar question_elearning_editors.dart en
+  // question_advanced_fields.dart; dit is de state-plumbing die
+  // _QuestionEditorState moet vasthouden om te serialiseren.
+  'lib/widgets/editors/question_editor.dart#_QuestionEditorState': 1113,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen
   // doorlopende tekst; de blokafbeeldingen zitten in de bullet-tekst, niet in
