@@ -675,6 +675,10 @@ De eerste klasse bepaalt (samen met de inhoud) het **slidetype**:
 | Fasepoort (procesverbetering) | `phase-gate` | Poortchecklist als opsomming |
 | Beheersmaatregelstatus (managementsysteem) | `control-status` | — (een gewone tabel valt terug op `table`) |
 | Gantt (procesverbetering) | `gantt` | — (een gewone tabel valt terug op `table`) |
+| Leerdoel (eLearning) | `objective` | — (gewone Markdown) |
+| Module (eLearning) | `module` | — (gewone Markdown, koptype) |
+| Feedback (eLearning) | `feedback` | — (gewone Markdown) |
+| Assessment-samenvatting (eLearning) | `assessment-summary` | — (gewone Markdown) |
 | Alleen opsomming | *(geen)* | opsomming aanwezig |
 | Twee afbeeldingen | *(geen)* | twee achtergrondafbeeldingen |
 | Grote afbeelding | *(geen)* | één afbeelding, geen opsomming |
@@ -711,6 +715,36 @@ De eerste klasse bepaalt (samen met de inhoud) het **slidetype**:
 > in een aparte tab *Managementsysteem* van de slide-toevoegen-kiezer. Het
 > `_class`-token is `control-status`; zonder dat token wordt een gewone tabel
 > als een gewone `table` teruggelezen, dus het token is wat het type over een rondgang heen bewaart.
+
+> **eLearning-klassen en de module.** `objective`, `module`, `feedback` en
+> `assessment-summary` zijn de slidetypes van de optionele module **eLearning**.
+> Net als bij de informatieveiligheidsklassen hierboven is het parsen
+> onvoorwaardelijk: de klasse wordt altijd herkend en het type altijd hersteld, of
+> de module aan staat of niet. De moduleschakelaar beheert alleen het opstellen.
+>
+> Alle vier bewaren hun body als gewone Markdown, en die overleeft de rondgang:
+> het schrijven en het inlezen beslissen op hetzelfde predicaat
+> (`SlideType.usesFreeMarkdownBody`), dus een `#`-kop, een opsomming en een gewone
+> alinea komen terug zoals bij een dia met vrije Markdown. *(Gecorrigeerd
+> 2026-09-06. Deze alinea beschreef eerst het omgekeerde, en terecht: de schrijver
+> zette een body neer terwijl de lezer er voor deze vier geen bewaarde, dus kwam
+> een kop terug als diatitel, een opsomming in een veld dat hun editor niet toont,
+> en viel een alinea weg — waarna de eerstvolgende opslag dat verlies naar het
+> bestand schreef. Gemeten door dezelfde body met en zonder het klassetoken te
+> schrijven en terug te lezen; de uitputtende rondgangtoets kijkt nu ook naar de
+> inhoud en niet alleen naar het type.)*
+>
+> Een vijfde token, `kennischeck`, heeft kort bestaan en is **opgeheven**: een
+> kennischeck ís een `question`-dia met een `question`-blok, dus een eigen type
+> zette hem alleen buiten alles wat op `SlideType.question` stuurt — inclusief de
+> route die het omheinde blok inleest, wat de vraag van de auteur kostte bij het
+> heropenen. Een bestand met dat token opent nog gewoon: de parser leest
+> `kennischeck` als `question`, en het blok eronder is al precies wat een vraag-dia
+> verwacht, dus er is geen conversiestap en die is ook niet nodig. De
+> syntaxcontrole blijft het token aanvaarden. Nieuwe decks schrijven `question`.
+> *(Vastgesteld 2026-09-06, en bewaakt door een rondgangtoets die een echte
+> vraag-dia schrijft, alleen het token verwisselt en de eigen vraag van de auteur
+> terugleest.)*
 
 Aanvullende gedragsklassen:
 
@@ -1034,6 +1068,13 @@ uiterlijk verandert.
 
 **Vrije Markdown** (geen class) — de inhoud wordt letterlijk geschreven.
 
+**Leerdoel, module, feedback, assessment-samenvatting** (`objective`, `module`,
+`feedback`, `assessment-summary`) — dezelfde vorm als vrije Markdown, met het
+klassetoken als enige verschil: de body wordt letterlijk geschreven en
+letterlijk teruggelezen, en het token is wat de dia laat heropenen als het type
+dat hij was. Er is geen omheind blok en geen gestructureerd veld.
+*(Toegevoegd 2026-09-06, #1999.)*
+
 **Broncode** (`code`) — een optionele kop plus een omheind codeblok; de info-
 string is de programmeertaal (highlight.js-id, leeg = platte tekst). De
 code zelf wordt letterlijk in het blok opgeslagen:
@@ -1257,7 +1298,7 @@ aanwezig is. Het blok is de heen-en-terug-bron van waarheid.
 ````markdown
 ```question
 {
-  "kind": "multipleChoice",      // see the six kinds below
+  "kind": "multipleChoice",      // see the nine kinds below
   "prompt": "What is the capital of the Netherlands?",
   "optionCount": 4,              // multipleChoice + ordering only
   "timeLimitSeconds": 0,         // 0 = no limit
@@ -1274,7 +1315,9 @@ aanwezig is. Het blok is de heen-en-terug-bron van waarheid.
 
 Velden:
 
-- `kind` — een van zes waarden, standaard `multipleChoice`:
+- `kind` — een van negen waarden, standaard `multipleChoice` (*aantal gecorrigeerd
+  2026-09-06: hier stond zes, van vóór de eLearning-module die de laatste drie
+  toevoegde*):
   - `multipleChoice` — één juist antwoord plus een willekeurige greep foute; kies er één.
   - `trueFalse` — de vraagstelling is een stelling; kies waar/onwaar.
   - `multipleCorrect` — meerdere kunnen juist zijn; kies alle. **Elk** ingevuld
@@ -1285,6 +1328,42 @@ Velden:
     links en welke rechts belandt, wordt elke ronde opnieuw getekend.
   - `openText` — de kijker typt het antwoord; het telt als juist wanneer het
     dicht genoeg bij een van de als `correct` gemarkeerde antwoorden ligt.
+  - `matching` — twee kolommen die aan elkaar gelegd moeten worden. **Alleen
+    geschreven en opgeslagen**: er is geen weergave waarin een kijker het
+    beantwoordt. Bij presenteren staat de linkerkolom er als leeslijst.
+  - `hotspot` — gebieden op een afbeelding die aangewezen moeten worden. Alleen
+    geschreven en opgeslagen; bij presenteren staat alleen de vraag er.
+  - `fillIn` — een of meer invulvelden. Alleen geschreven en opgeslagen; bij
+    presenteren staat alleen de vraag er.
+
+  Alle drie worden als **onbeantwoordbare** ronde getekend
+  (`QuestionView.answerable`), zodat een presentatie er niet op vastloopt.
+  *(Gecorrigeerd 2026-09-06: ze werden als beantwoordbaar getekend, en een
+  beantwoordbare vraag die niet te beantwoorden is zette de presentatie stil.)*
+
+  De laatste drie schrijven **geen** `answers`-lijst; elk houdt in plaats daarvan
+  zijn eigen lijst bij: `pairs` en `distractors` voor `matching` (de index ís de
+  antwoordsleutel: `pairs[i].left` hoort bij `pairs[i].right`), `image`, `regions`
+  (elk `{id, shape, coords, correct, label?}` met `coords` als `[x, y, w, h]`
+  **genormaliseerd naar 0–1**) en `multiSelect` voor `hotspot`, en `fields` voor
+  `fillIn`. Een invulveld draagt `{id, accepted, matchMode, caseSensitive?,
+  normalize, placeholder?, maxLength?, tolerance?, unit?}`. `matchMode` is `exact`,
+  `contains`, `similar` of `numericRange`, per veld vastgelegd in plaats van uit de
+  tekst afgeleid; `tolerance` (een getal) en `unit` (een tekst) horen bij
+  `numericRange` en noemen de toegestane afwijking en de eenheid waarin het
+  antwoord staat. `normalize` staat standaard op `["trim", "collapseWhitespace"]`:
+  géén sleutel betekent die standaard, een lege lijst betekent "niets
+  normaliseren", en die twee blijven onderscheiden omdat het twee verschillende
+  uitspraken zijn. *(`tolerance` en `unit` toegevoegd 2026-09-06: het model kende
+  ze niet, dus verloor een handgeschreven veld ze bij de eerste opslag, en een
+  ontbrekende `normalize` kwam terug als lege lijst — twee stille herschrijvingen
+  van andermans antwoordsleutel.)* Een build die deze waarden niet kent leest de
+  `kind` als `multipleChoice` en vindt geen antwoorden — en slaat die build daarna
+  op, dan zijn de soortspecifieke sleutels weg, omdat een geldig vraagblok bij elke
+  opslag opnieuw uit het ontlede model wordt geschreven in plaats van letterlijk
+  bewaard (de bewaar-de-bron-route bestaat alleen voor een blok dat over zijn
+  antwoordlimiet gaat). Een deck met deze soorten openen in een oudere build is
+  veilig; het daar opslaan niet. *(Vastgesteld 2026-09-06.)*
 - `prompt` — de vraag, of de stelling voor `trueFalse`.
 - `answers` — de volledige, begrensde pool; elk record heeft `text`, `correct` en
   optioneel `image`. `multipleChoice`, `ordering`, `imagePair` en `openText`
@@ -1295,7 +1374,11 @@ Velden:
   maar is ongeldig en wordt niet uitgevoerd: de editor, voorbeeldweergave, presentator en export
   bouwen er geen antwoordopties uit.
   Opslaghandelingen behouden nog steeds elk record, onbekend JSON-veld en verwezen
-  afbeelding; het herschrijven van een afbeeldingspad kan de JSON herformatteren. `answers` wordt genegeerd voor
+  afbeelding; het herschrijven van een afbeeldingspad kan de JSON herformatteren.
+  *(Bereik ingeperkt 2026-09-06: dat behouden geldt voor het geval boven de limiet,
+  waar het rauwe blok letterlijk bewaard blijft. Een **geldig** blok wordt bij elke
+  opslag opnieuw uit het ontlede model geschreven, dus een sleutel die deze build
+  niet kent gaat niet mee.)* `answers` wordt genegeerd voor
   `trueFalse`. Voor `multipleChoice` en `ordering` tekent de presentatie een willekeurige
   deelverzameling van `optionCount` eruit; `multipleCorrect` toont elk ingevuld antwoord,
   geschud. Voor `ordering` is de **lijstvolgorde de juiste volgorde** en worden de
@@ -1323,13 +1406,63 @@ Velden:
   `0.85`). Alleen voor die soort geschreven; een waarde buiten het bereik wordt geklemd wanneer
   het blok wordt gelezen.
 
+> **eLearning-uitbreidingsvelden**, geldig voor elke `kind` en alleen geschreven
+> wanneer ze van de standaard afwijken, zodat een bestaand vraagblok ongewijzigd
+> blijft tot een auteur ze aanraakt (zie `docs/design/ELEARNING_MODEL.md` §3.3).
+> **Deze sleutels worden opgeslagen en teruggelezen; niets in de app doet er nog
+> iets mee** — geen code telt punten, trekt een aftrek af, staat een extra poging
+> toe of rendert de feedbacktekst. `timeLimitSeconds` en `onWrong` hierboven
+> blijven de twee instellingen die tijdens presenteren wél effect hebben.
+>
+> - `points` — de maximumscore die voor deze vraag bedoeld is (standaard `1`, bij
+>   lezen geklemd op 0–1000).
+> - `scoring` — `allOrNothing` (standaard) | `partialPerCorrect` |
+>   `partialPerPair` (matching) | `partialPerAnswer` (fillIn). Een verklaring van
+>   hoe de score bedoeld is te worden berekend, niet een berekening.
+> - `penalty` — de punten die per foute poging afgetrokken zouden moeten worden
+>   (standaard `0`, bij lezen geklemd op 0–1000).
+> - `maxAttempts` — het bedoelde maximum aantal pogingen, `0` = onbeperkt
+>   (standaard `1`, bij lezen geklemd op 0–100). Het overrulet `onWrong` niet, en
+>   dat laatste bepaalt vandaag wat er na een fout antwoord gebeurt.
+> - `feedback` — feedback per uitkomst als Markdown: `{correct, wrong, partial,
+>   timeout}`. Alleen geschreven wanneer gevuld, en elk van de vier alleen wanneer
+>   er tekst in staat.
+> - `hint` — een of meer progressieve hints. Geschreven als **string** wanneer er
+>   precies één is en als **array** wanneer er meer zijn; beide vormen worden
+>   gelezen. Alleen geschreven wanneer gevuld.
+> - `remediation` — slide-anker naar een `feedback`-dia. Alleen geschreven wanneer
+>   gevuld. Er volgt nog niets dat anker.
+> - `objectiveRefs` — array van slide-ankers naar `objective`-dia's. Alleen
+>   geschreven wanneer gevuld. Ook deze ankers worden nog door niets gevolgd.
+> - `metadata` — leesbare metadata: `{title, language, subject, difficulty,
+>   estimatedDurationSeconds, tags}`. Alleen geschreven wanneer gevuld, en elk lid
+>   alleen wanneer het een waarde heeft.
+>
+> De assessment-testdefinitie (secties, slaaggrens, tijdslimieten, navigatiemodus,
+> voltooiingsregel) is deck-brede structuur en hoort daarom naast het `.md` in
+> plaats van erin, in de sidecar `<naam>.elearning.json`. Het model voor dat
+> bestand bestaat (`lib/models/elearning_assessment.dart`), gaat heen en terug en
+> houdt het gedeelde sidecar-versiecontract uit §6 aan: een bestand dat een hogere
+> versie declareert dan deze build ondersteunt wordt in zijn geheel geweigerd in
+> plaats van half gelezen, en sleutels op het hoogste niveau die deze build niet
+> kent gaan ongewijzigd mee naar buiten in plaats van te verdwijnen. **Geen enkele
+> opslag- of laadroute schrijft of leest het bestand**, dus zolang dat niet geland
+> is, is een `assessment-summary`-dia wat een auteur met de hand schrijft. Zie
+> `docs/design/ELEARNING_MODEL.md` §5 en §7. *(Vastgesteld 2026-09-06; de
+> versiecontrole en het bewaren van onbekende sleutels zijn diezelfde dag gebouwd,
+> nadat hier stond dat het contract beloofd maar niet gebouwd was.)*
+
 > De live antwoordstatus (welke opties werden getekend, wat de kijker koos, wat
 > er werd getypt, juist/fout) is **alleen-sessie** en wordt nooit naar het bestand geschreven. Een
 > statische export rendert de vraag zonder interactiviteit; in de HTML-export zendt een
 > `imagePair`-vraag zijn twee afbeeldingen uit als gewone Markdown-afbeeldingen na
 > de vraagkaart (zodat hun paden net als elke andere deck-afbeelding oplossen) en zendt een
 > `openText`-vraag helemaal geen opties uit, omdat zijn aanvaarde antwoorden de
-> antwoordsleutel zijn.
+> antwoordsleutel zijn. `matching`, `hotspot` en `fillIn` zenden alleen de vraag
+> uit, omdat ze geen `answers` bijhouden en er nog niets is dat hun eigen lijsten
+> rendert (*toegevoegd 2026-09-06*). De LaTeX/Beamer-export is voor élke soort de
+> uitzondering: die begrijpt het blok niet en zendt het als codeblok uit,
+> antwoordsleutel incluis.
 
 **Tijdlijn** (`timeline`) — een normale Markdown-lijst, optioneel voorafgegaan door een
 `# title`. Elk lijstitem is één gebeurtenis in de vorm
@@ -3091,7 +3224,7 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 | **Commentaar** | waarschuwing | Een kale Marp-richtlijn (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck modelleert die niet, dus de hele slide blijft vrije Markdown en krijgt geen slidetype (§8, §9). *(Toegevoegd 2026-08-27, #1815 — deze terugval gebeurde eerder zonder één woord uitleg.)* |
 | **Codeblokken** | fout | Oneven aantal ` ``` `-regels (niet gesloten). |
 | **`_class`** | fout | Misvormde `<!-- _class: ... -->`. |
-| **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; de optietokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens en liet er twaalf weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, de vier `timeline-…`-opties, `table-overdue` en `image-title-above`. Die laatste twee zijn diezelfde dag aan de woordenlijst toegevoegd; zie hieronder.)* |
+| **`_class`** | waarschuwing | Onbekend token in `_class`. Bekend zijn de typetokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (alleen-lezen, migreert naar `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`, `objective`, `module`, `feedback`, `assessment-summary`, `kennischeck` (alleen-lezen, leest als `question`); de optietokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; en de rendertokens `logo-safe`, `no-logo`, `no-footer`. *(Gecorrigeerd 2026-08-18: deze lijst noemde 28 tokens en liet er twaalf weg die de controle wél kent — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, de vier `timeline-…`-opties, `table-overdue` en `image-title-above`. Die laatste twee zijn diezelfde dag aan de woordenlijst toegevoegd; zie hieronder. Uitgebreid 2026-09-06 met de vier eLearning-tokens en het opgeheven `kennischeck`, die de controle allemaal aanvaardt.)* |
 | **Slide-metadata** | fout | Onbekende `<!-- tlp: ... -->`, niet-numerieke `<!-- advance: ... -->`, of ongeldige `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Twee kolommen** | fout | Ongeldige base64/JSON in een verouderd `ocideck_two_bullets_*`-commentaar (vervallen; §5). |
 | **Beelden** | fout | `![...](...` zonder afsluitende `)`. |

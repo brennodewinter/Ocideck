@@ -13,19 +13,20 @@ no application backend; all processing is local.
 **Deck** — a complete presentation: metadata, an ordered list of slides, a theme
 profile, and a TLP classification. Immutable model (`lib/models/deck.dart`).
 
-**Slide** — one immutable, strongly-typed slide. Its `SlideType` (37 values)
+**Slide** — one immutable, strongly-typed slide. Its `SlideType` (36 values)
 selects the layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
 `cockpit`, `question`, `timeline`, `scorecard`, `menu` (non-linear choice menu, #1162), the pentest layouts (`assets`,
 `discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
 `signOff`), the Procesverbetering layouts (`matrix`, `canvas`, `tree`,
 `flow`, `phaseGate`, `gantt`), the Managementsysteem layout (`controlStatus`), and the
-eLearning layouts (`objective`, `module`, `feedback`, `assessmentSummary`, `kennischeck`). The seven
+eLearning layouts (`objective`, `module`, `feedback`, `assessmentSummary`). The seven
 information-security layouts stay hidden until that module is enabled; `matrix`,
 `canvas`, `tree`, `flow`, `phaseGate` and `gantt` follow the same authoring gate for
-Procesverbetering, and `controlStatus` for the Managementsysteem module. *(Corrected
+Procesverbetering, `controlStatus` for the Managementsysteem module, and the four
+eLearning layouts for the eLearning module. *(Corrected
 2026-07-29: Phase 7 adds `phaseGate`; 2026-08-02: the Managementsysteem module
-adds `controlStatus`; 2026-08-05: `gantt` added for Procesverbetering; 2026-09-06: eLearning module adds `objective`, `module`, `feedback`, `assessmentSummary`, `kennischeck`; count held by `test/docs_enum_counts_test.dart`.)*
+adds `controlStatus`; 2026-08-05: `gantt` added for Procesverbetering; 2026-09-06: the eLearning module adds `objective`, `module`, `feedback` and `assessmentSummary`; a fifth, `kennischeck`, was withdrawn the same day because a knowledge check is a `question` slide, and its class token now reads as one; count held by `test/docs_enum_counts_test.dart`.)*
 
 **Marp** — the open Markdown-for-presentations format OciDeck reads and writes.
 Decks stay close to plain Marp Markdown, so they interoperate with other Marp
@@ -42,10 +43,14 @@ not the globally selected look or semantic colour scheme.
 **Presenter mode** — the dual-screen presentation view: presenter notes, timer,
 and controls on one screen; the full slide on the other (desktop).
 
-**Question kind** — which of the six shapes a `question` slide takes:
+**Question kind** — which of the nine shapes a `question` slide takes:
 multiple-choice, true/false, multiple-correct, ordering, image-pair (two pictures,
-pick one) or open-text (the viewer types). Stored as `kind` in the slide's fenced
-`question` block.
+pick one), open-text (the viewer types), and — since the eLearning module —
+matching (pair two columns), hotspot (point at a region of a picture) and fill-in
+(type into one or more blanks). Stored as `kind` in the slide's fenced
+`question` block. *(Count corrected 2026-09-06; it said six. The last three are
+authored and stored only: no surface lets a viewer answer them, and since they
+are drawn `answerable: false` they do not hold up a presentation either.)*
 
 **Jaro-Winkler** — the string-similarity measure (`lib/utils/jaro_winkler.dart`)
 behind the open-text question kind: it scores how close a typed answer is to an

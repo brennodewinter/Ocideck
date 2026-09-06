@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/models/elearning_assessment.dart';
 import 'package:ocideck/models/menu.dart';
 import 'package:ocideck/models/question.dart';
 import 'package:ocideck/models/slide.dart';
@@ -66,6 +67,15 @@ void main() {
       checkEnum('QuestionKind', QuestionKind.values);
       checkEnum('QuestionOnWrong', QuestionOnWrong.values);
       checkEnum('QuestionResult', QuestionResult.values);
+      // De eLearning-uitbreiding (#1998, #2006) schrijft nog vijf opsommingen
+      // uit. Ze stonden er eerst zónder telling, met als reden dat een getal
+      // dat niets nakijkt gaat rotten — dat gold, en de conclusie hoorde te
+      // zijn dat de poort meegroeit in plaats van dat het getal wegblijft.
+      checkEnum('FillMatchMode', FillMatchMode.values);
+      checkEnum('QuestionScoring', QuestionScoring.values);
+      checkEnum('AssessmentNavigation', AssessmentNavigation.values);
+      checkEnum('AssessmentCompletion', AssessmentCompletion.values);
+      checkEnum('AssessmentSelection', AssessmentSelection.values);
     });
 
     // De keuze-menu-indeling (#1162) schrijft zijn drie waarden ook uit. Zelfde

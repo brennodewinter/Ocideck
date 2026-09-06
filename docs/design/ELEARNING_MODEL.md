@@ -4,7 +4,7 @@
 leeractiviteiten — de inhoudelijke basis onder QTI/SCORM/OLX-import en de
 eLearning-slide-types.*
 
-> **Status:** ontwerp, nog niet geïmplementeerd · **Status last reviewed:** 2026-09-04 · **Published by:** Stichting LibreKAT
+> **Status:** ontwerp, gedeeltelijk gebouwd · **Status last reviewed:** 2026-09-06 · **Published by:** Stichting LibreKAT
 
 > **Dit is een ontwerpdocument, geen shipping-contract.** Het beschrijft het
 > data-model en de sidecargrens vóór de bouw. De on-disk specifics die hier
@@ -12,6 +12,20 @@ eLearning-slide-types.*
 > de code ze schrijft; tot die tijd is dit document de plaats waar de keuzes
 > staan en waar een latere bouwsessie ze aantreft. Waar shipping bewust
 > afwijkt, wint het later bijgewerkte `FILE_FORMAT.md`.
+
+> **Wat er inmiddels van gebouwd is (bijgewerkt 2026-09-06, tweemaal).** De status
+> zei tot vandaag "nog niet geïmplementeerd", en dat is achterhaald. Gebouwd: de
+> drie nieuwe `kind`-waarden met hun velden en de gedeelde velden uit §3.3, hun
+> editors, de vier structurele slide-types uit §6, de module-schakelaar uit §6, en
+> de importherkenning en -lezers uit §11. Het versiecontract van de sidecar uit §7
+> is er ook, en bewaart bovendien sleutels die deze build niet kent. Niet gebouwd:
+> elke presentatiekant — geen weergave waarin een kijker matching, hotspot of
+> fill-in beantwoordt, en geen laag die scoort, pogingen telt of feedback toont; de
+> modulehiërarchie uit §6; en het schrijven en lezen van het sidecarbestand zelf,
+> waarvan alleen het model bestaat. Eén punt wijkt nog bewust van dit ontwerp af en
+> staat bij §6 aangetekend; de twee andere afwijkingen die daar stonden zijn weg —
+> kennischeck volgt het ontwerp weer, en de body van de vier tekstsoorten komt
+> terug.
 
 > Sibling-ontwerpen: [`PROCESS_IMPROVEMENT.md`](PROCESS_IMPROVEMENT.md) (de
 > module-spiek voor een opt-in tab + slide-types),
@@ -230,6 +244,15 @@ het bestaande `statementIsTrue` dat alleen voor `trueFalse` wordt geschreven).
   vastgelegd, nooit impliciet afgeleid uit tekst (#2002 eis).
 - Validatie: lege `accepted` → niet-presenteerbaar; `numericRange` met
   onleesbare bereiken → dat veld valt terug op `exact` + waarschuwing.
+
+*(Aangetekend 2026-09-06: `FillField` draagt al deze sleutels, inclusief
+`tolerance` en `unit`, en bewaart ze bij een rondgang zonder ze uit te voeren — er
+is nog geen evaluatie van een fillIn-antwoord. `tolerance` en `unit` ontbraken
+eerst in het model, waardoor een blok dat dit ontwerp letterlijk volgde ze bij de
+eerste opslag verloor. Ontbreekt `normalize`, dan geldt de standaard
+`["trim", "collapseWhitespace"]`; een lege lijst betekent "niets normaliseren" en
+blijft daarvan onderscheiden. Van de genoemde normalisaties wordt er nog geen één
+toegepast, om dezelfde reden.)*
 
 ### 3.3 Velden die voor alle kinds gelden (uitbreiding op bestaand blok)
 
@@ -490,7 +513,22 @@ in de editor wordt de sidecar bijgewerkt en de slide herschreven.
 | Feedback/remediation | `feedback` | Uitleg als gewone Markdown + optionele verwijzing. | #2015 |
 | Assessment-samenvatting | `assessment-summary` | Leesbaar overzicht + spiegeling van sidecar. | #2016 |
 
+> **Eén afwijking in wat er gebouwd is (aangetekend 2026-09-06, bijgewerkt
+> diezelfde dag).** De eLearning-tab groepeert alléén de vier structurele types;
+> de drie nieuwe vraagsoorten staan in de vraagsoort-keuzelijst van élke vraag-dia
+> en zijn dus niet achter de module-schakelaar gezet.
+>
+> Hier stonden er eerst drie. Dat de code kennischeck een eigen `_class`-token gaf
+> in plaats van het `question` uit de tabel hierboven, geldt niet meer: dat type is
+> geschrapt en het token leest voortaan als `question`, dus de tabel klopt weer. En
+> dat de vier tekstgebaseerde types hun body wel schreven maar niet teruglazen was
+> geen ontwerpkeuze maar een gat; dat is gerepareerd. Zie de eLearning-alinea in
+> [`FILE_FORMAT.md`](../FILE_FORMAT.md) §4, *Slide Classes and Behavior*.
+
 ### Modulehiërarchie (#2010)
+
+*(Ontwerp; niet gebouwd — aangetekend 2026-09-06. Wat er is, is het
+`module`-diatype; er wordt geen `structure.modules` geschreven of gelezen.)*
 
 `module` slides vormen een boom. De nested structuur staat in de sidecar
 (`structure.modules`: parent/child-relaties via slide-anchors), zodat
@@ -562,6 +600,15 @@ authoring is achter een toggle).
 
 ### Wanneer de sidecar wordt geschreven
 
+*(Ontwerp; niet gebouwd — aangetekend 2026-09-06, bijgewerkt diezelfde dag.
+`ElearningSidecar` kan coderen en ontleden en houdt het versiecontract uit
+`sidecar_format.dart` aan: een hogere versie wordt geweigerd in plaats van half
+gelezen, en sleutels die deze build niet kent — waaronder `structure`, `source` en
+`scoring` uit dit hoofdstuk — blijven bewaard, zodat een toekomstige schrijver ze
+niet weggooit. Wat ontbreekt is de schrijver zelf: geen opslagroute schrijft of
+leest `<name>.elearning.json`. De alinea hieronder beschrijft dus wanneer het
+bestand geschreven zou moeten worden, niet wat er gebeurt.)*
+
 De sidecar wordt alleen geschreven wanneer er iets in staat: een
 assessment-definitie, module-relaties, bronmetadata, of complexe scoring.
 Een deck met alleen losse `question` slides en `objective` slides zonder
@@ -601,9 +648,18 @@ niets.
   nieuwer blok met onbekende `kind` of onbekende velden wordt bewaard en
   niet uitgevoerd (het bestaande `_preservedSource`-patroon uit
   `QuestionSpec`).
+
+  *(Gecorrigeerd 2026-09-06: die laatste zin beschrijft niet wat de code doet.
+  `_preservedSource` bewaart alleen een blok dat over zijn antwoordlimiet gaat; een
+  geldig blok wordt bij elke opslag opnieuw uit het ontlede model geschreven, dus
+  een sleutel die deze build niet kent gaat niet mee. Een deck met deze kinds
+  openen in een oudere build is veilig, het daar opslaan niet. Zie
+  [`FILE_FORMAT.md`](../FILE_FORMAT.md) §5, bij `answers`.)*
 - **Sidecar-versioning:** `<name>.elearning.json` declareert `version: 1`.
   Een hoger versie wordt niet ingelezen en niet overschreven
-  (`sidecar_format.dart`).
+  (`sidecar_format.dart`). *(Gebouwd 2026-09-06: `ElearningSidecar.parse` leest de
+  gedeclareerde versie via `sidecar_format.dart` en geeft null terug bij een
+  hogere; overschrijven is nog niet aan de orde omdat er geen schrijver is.)*
 - **Onbekende `kind`:** een `kind` die deze build niet kent → de vraag is
   niet-presenteerbaar maar het blok wordt verbatim bewaard
   (`_preservedSource`). De editor toont de ruwe JSON. Dit is het bestaande
