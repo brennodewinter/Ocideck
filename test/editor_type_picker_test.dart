@@ -6,9 +6,11 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/add_slide_dialog.dart';
 import 'package:ocideck/widgets/panels/editor_panel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // The editor's TYPE selector reuses the same visual picker as 'Slide toevoegen'
 // (AddSlideDialog), so both surfaces share one source and offer identical
@@ -16,7 +18,10 @@ import 'package:ocideck/widgets/panels/editor_panel.dart';
 // exactly like the add-slide picker — with one refinement: a slide that is
 // already a security type can still be re-typed among them with the module off.
 void main() {
-  setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+  setUp(() {
+    AppLocalizations.setActiveLanguageCode('nl');
+    SharedPreferences.setMockInitialValues({});
+  });
 
   Future<ProviderContainer> pump(
     WidgetTester tester, {
@@ -83,6 +88,29 @@ void main() {
       container.read(deckProvider).deck!.slides.single.type,
       SlideType.table,
     );
+  });
+
+  testWidgets('de STIJL-keuze blijft na een herstart geselecteerd', (
+    tester,
+  ) async {
+    final container = await pump(tester, reveal: false);
+
+    await tester.tap(find.byType(DropdownButton<String>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Security').last);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    expect(container.read(deckProvider).deck!.themeProfile.name, 'Security');
+    expect(
+      container.read(settingsProvider).selectedThemeProfileName,
+      'Security',
+    );
+
+    final restarted = SettingsNotifier();
+    addTearDown(restarted.dispose);
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(restarted.state.selectedThemeProfileName, 'Security');
   });
 
   testWidgets('module off: the picker hides the security types', (
