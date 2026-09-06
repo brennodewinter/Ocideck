@@ -686,6 +686,10 @@ The first class determines (together with the content) the **slide type**:
 | Phase gate (process improvement) | `phase-gate` | Gate checklist as bullets |
 | Control status (management system) | `control-status` | — (a plain table falls back to `table`) |
 | Gantt (process improvement) | `gantt` | — (a plain table falls back to `table`) |
+| Learning objective (eLearning) | `objective` | — (plain Markdown) |
+| Module (eLearning) | `module` | — (plain Markdown, heading slide) |
+| Feedback (eLearning) | `feedback` | — (plain Markdown) |
+| Assessment summary (eLearning) | `assessment-summary` | — (plain Markdown) |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |
@@ -707,6 +711,34 @@ The first class determines (together with the content) the **slide type**:
 > dialog, only while the module is enabled. A slide that is already one of these
 > types can still be re-typed among them with the module off, so an imported
 > report is never a dead-end.
+
+> **eLearning classes and the module.** `objective`, `module`, `feedback` and
+> `assessment-summary` are the slide types of the optional **eLearning** module.
+> Like the information-security classes above, parsing them is unconditional: the
+> class is always recognised and the type is always restored, whether or not the
+> module is enabled. The module toggle governs authoring only.
+>
+> All four keep their body as plain Markdown, and it survives a round trip:
+> serialisation and parsing both decide on `SlideType.usesFreeMarkdownBody`, so a
+> `#` heading, a bullet list and a plain paragraph come back the way a
+> free-Markdown slide's body does. *(Corrected 2026-09-06. This paragraph first
+> described the opposite, and rightly: the writer emitted a body while the parser
+> kept none for these four, so a heading returned as the slide title, bullets as a
+> bullet list their editor does not show, and a paragraph was dropped — after
+> which the next save wrote that loss to the file. Measured by writing and
+> re-reading the same body with and without the class token; the exhaustive
+> round-trip test now checks the body and not only the type.)*
+>
+> A fifth token, `kennischeck`, existed briefly and is **retired**: a knowledge
+> check is a `question` slide carrying a `question` block, so a separate type only
+> put it outside everything keyed on `SlideType.question` — including the fenced
+> read path, which cost the author's question on reopening. A file carrying the
+> token still opens: the parser reads `kennischeck` as `question` and the block
+> below it is already exactly what a question slide expects, so no conversion step
+> exists or is needed. The syntax checker keeps accepting the token. New decks
+> write `question`. *(Stated 2026-09-06, and held by a round-trip test that writes
+> a real question slide, swaps only the token and reads the author's own question
+> back.)*
 
 > **Process-improvement classes and the module.** `matrix`, `canvas`, `tree`,
 > `flow` and `phase-gate` are the slide types of the optional
@@ -1044,6 +1076,13 @@ appearance.
 
 **Free Markdown** (no class) — content is written verbatim.
 
+**Learning objective, module, feedback, assessment summary** (`objective`,
+`module`, `feedback`, `assessment-summary`) — the same shape as free Markdown,
+with the class token as the only difference: the body is written verbatim and
+read back verbatim, and the token is what makes the slide reopen as the type it
+was. There is no fenced block and no structured field. *(Added 2026-09-06,
+#1999.)*
+
 **Source code** (`code`) — an optional heading plus a fenced code block; the info
 string is the programming language (highlight.js id, empty = plain text). The
 code itself is stored verbatim in the block:
@@ -1266,7 +1305,7 @@ is present. The block is the round-trip source of truth.
 ````markdown
 ```question
 {
-  "kind": "multipleChoice",      // see the six kinds below
+  "kind": "multipleChoice",      // see the nine kinds below
   "prompt": "What is the capital of the Netherlands?",
   "optionCount": 4,              // multipleChoice + ordering only
   "timeLimitSeconds": 0,         // 0 = no limit
@@ -1283,7 +1322,8 @@ is present. The block is the round-trip source of truth.
 
 Fields:
 
-- `kind` — one of six values, defaulting to `multipleChoice`:
+- `kind` — one of nine values, defaulting to `multipleChoice` (*count corrected
+  2026-09-06: it said six, before the eLearning module added the last three*):
   - `multipleChoice` — one correct answer plus a random pick of wrong ones; pick one.
   - `trueFalse` — the prompt is a statement; pick true/false.
   - `multipleCorrect` — several may be correct; pick all. **Every** filled-in
@@ -1294,6 +1334,61 @@ Fields:
     lands left and which right is redrawn every round.
   - `openText` — the viewer types the answer; it counts as right when it is
     close enough to one of the answers marked `correct`.
+  - `matching` — two columns to be paired up. **Authored and stored only**: no
+    surface lets a viewer answer it. A presented `matching` question shows its
+    left column as a read-only list.
+  - `hotspot` — regions of a picture to be pointed at. Authored and stored only;
+    presenting shows the prompt alone.
+  - `fillIn` — one or more blanks to be typed into. Authored and stored only;
+    presenting shows the prompt alone.
+
+  All three are drawn as an **unanswerable** round (`QuestionView.answerable`),
+  so a presentation is not held up on them. *(Corrected 2026-09-06: they were
+  drawn answerable, and an answerable question that cannot be answered stopped
+  the presentation dead.)*
+
+  The last three write **no** `answers` list; each keeps its own list instead,
+  described below. A build that does not know these values reads the `kind` as
+  `multipleChoice` and finds no answers — and if that build then *saves*, the
+  kind-specific keys are gone, because a valid question block is re-serialised
+  from the parsed model on every save rather than preserved verbatim (the
+  preserve-the-source path exists only for a block that exceeds its answer
+  limit). Opening a deck with these kinds in an older build is safe; saving it
+  there is not. *(Stated 2026-09-06.)*
+
+- `pairs` — for `matching`: the authored pairs, each `{id, left, right}`. The
+  index *is* the answer key: `pairs[i].left` belongs with `pairs[i].right`.
+  Written for that kind only.
+- `distractors` — for `matching`: extra right-hand strings with no partner.
+  Written only when filled.
+- `image` — for `hotspot`: a deck-relative path to the picture. Written for that
+  kind only. (The key is `image`; the model calls the field `hotspotImage`
+  because `Slide` already has an `imagePath`.)
+- `regions` — for `hotspot`: the clickable areas, each
+  `{id, shape, coords, correct, label?}`. `shape` is `rect` and `coords` is
+  `[x, y, w, h]` **normalised to 0–1** against the picture, so a different render
+  size or an export does not move a region. `label` is written only when filled.
+  Written for that kind only.
+- `multiSelect` — for `hotspot`: whether more than one region may be chosen.
+  Written only when true.
+- `fields` — for `fillIn`: the blanks, each
+  `{id, accepted, matchMode, caseSensitive?, normalize, placeholder?, maxLength?,
+  tolerance?, unit?}`.
+  `matchMode` is `exact` (default) | `contains` | `similar` | `numericRange` and
+  is declared per field rather than derived from the text — the deliberate
+  difference from `openText`, which has one `similarityThreshold` for the whole
+  question. `tolerance` (a number) and `unit` (a string) belong to
+  `numericRange`: the accepted deviation and the unit the answer is written in.
+  `normalize` defaults to `["trim", "collapseWhitespace"]`; an **absent** key
+  means that default, an **empty list** means "normalise nothing", and the two
+  are kept apart because they are different statements. `caseSensitive`,
+  `placeholder`, `maxLength`, `tolerance` and `unit` are written only when set;
+  the editor currently exposes `accepted`, `matchMode` and `placeholder`, and the
+  remaining keys round-trip if a hand-edited file carries them. Written for that
+  kind only. *(`tolerance` and `unit` added 2026-09-06: the model did not know
+  them, so a hand-written field lost both on the first save, and an absent
+  `normalize` came back as an empty list — two silent rewrites of someone else's
+  answer key.)*
 - `prompt` — the question, or the statement for `trueFalse`.
 - `answers` — the full, bounded pool; each record has `text`, `correct` and
   optionally `image`. `multipleChoice`, `ordering`, `imagePair` and `openText`
@@ -1304,7 +1399,11 @@ Fields:
   but is invalid and is not executed: the editor, preview, presenter and export
   do not build answer options from it.
   Storage operations still retain every record, unknown JSON field and referenced
-  image; rewriting an image path may reformat the JSON. `answers` is ignored for
+  image; rewriting an image path may reformat the JSON. *(Scope narrowed
+  2026-09-06: that retention is the over-the-limit case, where the raw block is
+  kept verbatim. A **valid** block is re-serialised from the parsed model on
+  every save, so a key this build does not know is not carried over.)* `answers`
+  is ignored for
   `trueFalse`. For `multipleChoice` and `ordering` the presentation draws a random
   subset of `optionCount` from it; `multipleCorrect` shows every filled-in answer,
   shuffled. For `ordering` the **list order is the correct order** and the
@@ -1332,13 +1431,63 @@ Fields:
   `0.85`). Written for that kind only; a value outside the range is clamped when
   the block is read.
 
+> **eLearning extension fields**, valid for every `kind` and written only when
+> they differ from the default, so an existing question block is unchanged until
+> an author touches them (see `docs/design/ELEARNING_MODEL.md` §3.3). **These
+> keys are stored and read back; nothing in the app acts on them yet** — no code
+> counts points, subtracts a penalty, grants an extra attempt or renders the
+> feedback text. `timeLimitSeconds` and `onWrong` above remain the two settings
+> that do have an effect during a presentation. *(Corrected 2026-09-06: the
+> `maxAttempts` entry described an interaction with `onWrong` that is not
+> implemented, and `penalty` read as if a score were being reduced somewhere.)*
+>
+> - `points` — the maximum score intended for this question (default `1`, read
+>   clamped to 0–1000).
+> - `scoring` — `allOrNothing` (default) | `partialPerCorrect` |
+>   `partialPerPair` (matching) | `partialPerAnswer` (fillIn). A declaration of
+>   how the score is meant to be computed, not a computation.
+> - `penalty` — the points intended to be deducted per wrong attempt (default
+>   `0`, read clamped to 0–1000).
+> - `maxAttempts` — the intended maximum number of attempts, `0` = unlimited
+>   (default `1`, read clamped to 0–100). It does not override `onWrong`, which
+>   is what actually decides what happens after a wrong answer today.
+> - `feedback` — per-outcome feedback as Markdown: `{correct, wrong, partial,
+>   timeout}`. Written only when filled; each of the four only when it has text.
+> - `hint` — one or more progressive hints. Written as a **string** when there is
+>   exactly one and as an **array** when there are more; both forms are read.
+>   Written only when filled.
+> - `remediation` — slide-anchor to a `feedback` slide. Written only when filled.
+>   Nothing follows the anchor yet.
+> - `objectiveRefs` — array of slide-anchors to `objective` slides. Written only
+>   when filled. Nothing follows these anchors yet either.
+> - `metadata` — readable metadata: `{title, language, subject, difficulty,
+>   estimatedDurationSeconds, tags}`. Written only when filled, and each member
+>   only when it has a value.
+>
+> The assessment test definition (sections, pass threshold, time limits,
+> navigation mode, completion rule) is deck-wide structure and therefore belongs
+> beside the `.md` rather than in it, in the sidecar `<name>.elearning.json`. The
+> model for that file exists (`lib/models/elearning_assessment.dart`), round-trips
+> and keeps the shared sidecar version contract of § 6: a file declaring a higher
+> version than this build supports is refused whole rather than read in part, and
+> top-level keys this build does not know are carried through unchanged instead of
+> being dropped on the way out. **No save or load path writes or reads the file
+> yet**, so until that lands an `assessment-summary` slide is what an author
+> writes by hand. See `docs/design/ELEARNING_MODEL.md` §5 and §7.
+> *(Stated 2026-09-06; the version check and the key retention were added the same
+> day, after this paragraph noted the contract was promised and not built.)*
+
 > The live answer state (which options were drawn, what the viewer picked, what
 > was typed, correct/wrong) is **session-only** and never written to the file. A
 > static export renders the question without interactivity; in the HTML export an
 > `imagePair` question emits its two pictures as ordinary Markdown images after
 > the question card (so their paths resolve like any other deck image) and an
 > `openText` question emits no options at all, because its accepted answers are
-> the answer key.
+> the answer key. `matching`, `hotspot` and `fillIn` emit the prompt alone, since
+> they keep no `answers` and nothing renders their own lists yet
+> (*added 2026-09-06*). The LaTeX/Beamer export is the exception for every kind:
+> it does not understand the block and emits it as a code listing, answer key
+> included.
 
 **Timeline** (`timeline`) — a normal Markdown list, optionally preceded by a
 `# title`. Each list item is one event in the form
@@ -3084,7 +3233,7 @@ not model is not reported.
 | **Comment** | warning | A bare Marp directive (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck does not model it, so the whole slide stays free Markdown and gets no slide type (§8, §9). *(Added 2026-08-27, #1815 — this fallback used to happen without a word.)* |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`; the option tokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens and omitted twelve the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, the four `timeline-…` options, `table-overdue` and `image-title-above`. The last two were added to the vocabulary the same day; see below.)* |
+| **`_class`** | warning | Unknown token in `_class`. Known: the type tokens `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `cockpit`, `question`, `timeline`, `scorecard`, `actions` (read-only, migrates to `table`), `menu`, `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `matrix`, `canvas`, `tree`, `flow`, `phase-gate`, `control-status`, `gantt`, `objective`, `module`, `feedback`, `assessment-summary`, `kennischeck` (read-only, reads as `question`); the option tokens `menu-grid`, `menu-list`, `menu-circle`, `timeline-horizontal`, `timeline-vertical`, `timeline-steps`, `timeline-static`, `table-editable`, `table-overdue`, `image-title-above`; and the rendering tokens `logo-safe`, `no-logo`, `no-footer`. *(Corrected 2026-08-18: the list here named 28 tokens and omitted twelve the checker really knows — `cockpit`, `question`, `timeline`, `menu`, `control-status`, `gantt`, the four `timeline-…` options, `table-overdue` and `image-title-above`. The last two were added to the vocabulary the same day; see below. Extended 2026-09-06 with the four eLearning tokens and the retired `kennischeck`, all of which the checker accepts.)* |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in a legacy `ocideck_two_bullets_*` comment (retired; §5). |
 | **Images** | error | `![...](...` without closing `)`. |

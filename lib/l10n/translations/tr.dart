@@ -2550,6 +2550,65 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Starten': 'Başlat',
+  'Opleiding': 'Eğitim',
+  'Les': 'Ders',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'eLearning içeriği oluşturun: öğrenme hedefleri, modüller, geri bildirim ve değerlendirme özetleri. SCORM, QTI, xAPI, AICC ve OLX\'i yerel olarak içe aktarın. Varsayılan olarak kapalı; slayt türlerini kullanmak için uzantıyı açın.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Bir modül veya bölüm başlığı. Öğrenme hedefleri ile sorular arasında yapısal işaretleyici olarak kullanın.',
+  'Leerdoel': 'Öğrenme hedefi',
+  'Module': 'Modül',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Değerlendirme özeti',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Bir öğrenme hedefi veya yetkinlik. Öğrenenin ne yapabilmesi gerektiğini açıklayın; isteğe bağlı olarak modüllere veya sorulara bağlayın. Birinin hedefi elde ettiği iddiası yoktur.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Bir sorudan sonra geri bildirim veya düzeltme. Hangi cevabın doğru olduğunu ve nedenini açıklayın, veya ek materyale başvurun.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Değerlendirme özeti: soru sayısı, en yüksek puan, geçiş eşiği. Öğrenen sonuçları yok — sadece test tanımı.',
+  'Paren': 'Çiftler',
+  'Afleiders (optioneel)': 'Çeldiriciler (isteğe bağlı)',
+  'Invulvelden': 'Doldurma alanları',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'İzleyici soldan sağa bağlar. i çiftinin sağ[i] için doğru cevabı sol[i]\'dir. Sağ sütun sunum sırasında karıştırılır.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'İzleyici her alana cevabı yazar. Her alanın bir veya daha fazla kabul edilen cevabı ve bir değerlendirme stratejisi vardır.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'İzleyici görüntü üzerinde bir veya daha fazla bölgeye işaret eder. Koordinatlar normalize edilmiştir (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Doğru eşi olmayan ekstra sağ öğeler. Soruyu zorlaştırırlar.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Kabul edilen yanıtlar (virgülle ayrılmış)',
+  'Afleider': 'Distraktör',
+  'Afleider toevoegen': 'Distraktör ekle',
+  'Afleider verwijderen': 'Distraktörü kaldır',
+  'Bevat het antwoord': 'Yanıtı içerir',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinatlar (x, y, w, h — normalize 0–1)',
+  'Evaluatiestrategie': 'Değerlendirme stratejisi',
+  'Exacte overeenkomst': 'Tam eşleşme',
+  'Gebied': 'Bölge',
+  'Gebied toevoegen': 'Bölge ekle',
+  'Gebied verwijderen': 'Bölgeyi kaldır',
+  'Getal in bereik': 'Aralıkta sayı',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Bir görsel seçin ve en az bir doğru bölge işaretleyin.',
+  'Label (optioneel)': 'Etiket (isteğe bağlı)',
+  'Maak minstens twee gevulde paren.': 'En az iki dolu çift oluşturun.',
+  'Meerdere gebieden selecteerbaar': 'Birden fazla bölge seçilebilir',
+  'Paar toevoegen': 'Çift ekle',
+  'Paar verwijderen': 'Çifti kaldır',
+  'Tikfout toegestaan': 'Yazım hatasına izin verildi',
+  'Veld': 'Alan',
+  'Veld toevoegen': 'Alan ekle',
+  'Veld verwijderen': 'Alanı kaldır',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Kabul edilen bir yanıtla en az bir alan ekleyin.',
+  'Koppelen (matching)': 'Eşleştirme (matching)',
+  'Invulvraag': 'Boşluk doldurma sorusu',
+  'Hotspot (klik op afbeelding)': 'Hotspot (görseli tıkla)',
   'Presentaties op deze server': 'Bu sunucudaki sunumlar',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sunumu izle: bu slayt, sunumun tamamının yaptığı şeyi yapar. Sadece bildir: bulgu sayılır, alıcı hiçbir şey görmez — veriler sadece oradadır. Kabul et: veriler buraya aittir ve uyarı kaybolur. Kabul et + uyar: alıcı, slaytta kişisel veri olduğunu gösteren bir rozet görür. Çıkar: bulunan veriler ekranda ve dışa aktarımda okunamaz hale gelir — markdown dosyanız orijinal metni korur.',
@@ -4651,4 +4710,38 @@ const _dutchSourceAddTr = <String, String>{
   'Gebieden': 'Bölgeler',
   'bv. "de controller board met display"': 'örn. "ekranlı kontrol kartı"',
   'Afbeeldingsverwijzingen': 'Görsel referanslar',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Puanlama, geri bildirim ve meta veriler',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puanlar, puanlama stratejisi, geri bildirim, ipuçları, denemeler ve öğrenme hedefi bağlantıları.',
+  'Scoringstrategie': 'Puanlama stratejisi',
+  'Alles of niets': 'Ya hep ya hiç',
+  'Deels': 'Kısmi',
+  'Per paar': 'Çift başına',
+  'Per item': 'Öğe başına',
+  'Puntenaftrek per fout': 'Yanlış cevap başına puan kesintisi',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimum deneme (0 = sınırsız)',
+  'Feedback per uitkomst': 'Sonuç başına geri bildirim',
+  'Bij goed antwoord': 'Doğru cevapta',
+  'Bij fout antwoord': 'Yanlış cevapta',
+  'Bij deels goed': 'Kısmen doğru olduğunda',
+  'Bij timeout': 'Zaman aşımında',
+  'Hints (één per regel, progressief)':
+      'İpuçları (satır başına bir, ilerleyen)',
+  'Eerste hint\nTweede hint': 'İlk ipucu\\nİkinci ipucu',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slayt tutturucusu geri bildirim slaydına',
+  'bijv. slide:3': 'örn. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Öğrenme hedefi referansları (slayt tutturucuları, satır başına bir)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Meta veriler',
+  'Vak/onderwerp': 'Ders/konu',
+  'Moeilijkheid': 'Zorluk',
+  '— geen —': '— yok —',
+  'Makkelijk': 'Kolay',
+  'Gemiddeld': 'Orta',
+  'Moeilijk': 'Zor',
+  'Geschatte duur in seconden': 'Tahmini süre saniye cinsinden',
+  'Tags (komma-gescheiden)': 'Etiketler (virgülle ayrılmış)',
 };

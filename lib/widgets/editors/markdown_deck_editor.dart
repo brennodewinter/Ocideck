@@ -169,8 +169,16 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       // De balk blijft staan; alleen de gevonden plekken slaan nergens meer op.
       _find.clearMatches();
     }
+    // Een wissel van buiten (de diastrook, de navigatieknoppen) wijst de cursor
+    // de nieuwe dia aan. Maar de wissel kán ook een echo van onszelf zijn: de
+    // cursor stáát al in die dia en heeft het paneel zojuist bijgepraat. Dan is
+    // er niets aan te wijzen, en springen zou juist kapotmaken waar de gebruiker
+    // mee bezig is — klikken midden in een andere dia zette de cursor terug op
+    // de eerste regel, en een selectie die over de `---` heen liep werd
+    // platgeslagen tot een cursor op de diagrens.
     if (widget.scope == MarkdownScope.deck &&
-        widget.slideNumber != oldWidget.slideNumber) {
+        widget.slideNumber != oldWidget.slideNumber &&
+        widget.slideNumber != _lastReportedSlide) {
       MarkdownSourceBlock? target;
       for (final block in _sourceDocument.blocks) {
         if (block.slideNumber == widget.slideNumber) {

@@ -1640,6 +1640,65 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Starten': 'Pradėti',
+  'Opleiding': 'Kursas',
+  'Les': 'Pamoka',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Kurkite eLearning turinį: mokymosi tikslai, moduliai, grįžtamasis ryšys ir vertinimo santraukos. Importuokite SCORM, QTI, xAPI, AICC ir OLX vietoje. Pagal numatytuosius nustatymus išjungta; įjunkite plėtinį, kad galėtumėte naudoti slaidų tipus.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Modulio ar skyriaus pavadinimas. Naudokite kaip struktūrinį žymiklį tarp mokymosi tikslų ir klausimų.',
+  'Leerdoel': 'Mokymosi tikslas',
+  'Module': 'Modulis',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Vertinimo santrauka',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Mokymosi tikslas ar kompetencija. Aprašykite, ką mokinys turi mokėti; pasirinktinai susiekite su moduliais ar klausimais. Jokio teigimo, kad kas nors įvaldė tikslą.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Grįžtamasis ryšys ar remediacija po klausimo. Paaiškinkite, kuris atsakymas buvo teisingas ir kodėl, ar nukreipkite į papildomą medžiagą.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Vertinimo santrauka: klausimų skaičius, maksimalus balas, perėjimo riba. Be mokinio rezultatų — tik testo apibrėžimas.',
+  'Paren': 'Poros',
+  'Afleiders (optioneel)': 'Distraktoriai (neprivaloma)',
+  'Invulvelden': 'Užpildymo laukai',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Žiūrovas sujungia kairę su dešine. Porai i kairė[i] yra teisingas atsakymas dešinei[i]. Dešinysis stulpelis sumaišomas pateikimo metu.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Žiūrovas įveda atsakymą į kiekvieną lauką. Kiekvienas laukas turi vieną ar daugiau priimtų atsakymų ir vertinimo strategiją.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Žiūrovas rodo į vieną ar daugiau regionų vaizde. Koordinatės yra normalizuotos (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Papildomi dešinieji elementai be teisingo porininko. Jie padaro klausimą sunkesnį.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Priimtini atsakymai (atskirti kableliais)',
+  'Afleider': 'Distraktorius',
+  'Afleider toevoegen': 'Pridėti distraktorių',
+  'Afleider verwijderen': 'Pašalinti distraktorių',
+  'Bevat het antwoord': 'Turi atsakymą',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinatės (x, y, w, h — normalizuotos 0–1)',
+  'Evaluatiestrategie': 'Vertinimo strategija',
+  'Exacte overeenkomst': 'Tikslus atitikimas',
+  'Gebied': 'Regionas',
+  'Gebied toevoegen': 'Pridėti regioną',
+  'Gebied verwijderen': 'Pašalinti regioną',
+  'Getal in bereik': 'Skaičius intervale',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Pasirinkite paveikslėlį ir pažymėkite bent vieną teisingą regioną.',
+  'Label (optioneel)': 'Etiketė (neprivaloma)',
+  'Maak minstens twee gevulde paren.': 'Sukurkite bent du užpildytus poras.',
+  'Meerdere gebieden selecteerbaar': 'Galima pasirinkti kelis regionus',
+  'Paar toevoegen': 'Pridėti porą',
+  'Paar verwijderen': 'Pašalinti porą',
+  'Tikfout toegestaan': 'Rašybos klaida leidžiama',
+  'Veld': 'Laukas',
+  'Veld toevoegen': 'Pridėti lauką',
+  'Veld verwijderen': 'Pašalinti lauką',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Pridėkite bent vieną lauką su priimtinu atsakymu.',
+  'Koppelen (matching)': 'Sujungimas (matching)',
+  'Invulvraag': 'Klausimas su tarpu',
+  'Hotspot (klik op afbeelding)': 'Hotspot (spustelėkite paveikslėlį)',
   'Presentaties op deze server': 'Pristatymai šiame serveryje',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sekti pristatymą: šis skaidrė daro tai, ką daro pristatymas apskritai. Tik pranešti: išvada skaičiuojama, bet gavėjas nieko nemato — duomenys tiesiog ten yra. Priimti: duomenys priklauso čia ir įspėjimas dingsta. Priimti + įspėti: gavėjas mato ženklą, kad skaidrėje yra asmens duomenų. Praleisti: rasti duomenys padaromi neįskaitomais ekrane ir eksporte — jūsų markdown failas išlaiko originalų tekstą.',
@@ -4679,4 +4738,39 @@ const _dutchSourceAddLt = <String, String>{
   'Gebieden': 'Sritys',
   'bv. "de controller board met display"': 'pvz. "valdymo plokštė su ekranu"',
   'Afbeeldingsverwijzingen': 'Paveikslėlių nuorodos',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata':
+      'Vertinimas, grįžtamasis ryšys ir metaduomenys',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Taškai, vertinimo strategija, grįžtamasis ryšys, užuominos, bandymai ir mokymosi tikslų nuorodos.',
+  'Scoringstrategie': 'Vertinimo strategija',
+  'Alles of niets': 'Viskas arba nieko',
+  'Deels': 'Dalinis',
+  'Per paar': 'Už porą',
+  'Per item': 'Už elementą',
+  'Puntenaftrek per fout': 'Taškų atėmimas už neteisingą atsakymą',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimalūs bandymai (0 = neribotas)',
+  'Feedback per uitkomst': 'Grįžtamasis ryšys pagal rezultatą',
+  'Bij goed antwoord': 'Teisingam atsakymui',
+  'Bij fout antwoord': 'Neteisingam atsakymui',
+  'Bij deels goed': 'Dalinai teisingam',
+  'Bij timeout': 'Pasibaigus laikui',
+  'Hints (één per regel, progressief)':
+      'Užuominos (viena eilutėje, progresyvios)',
+  'Eerste hint\nTweede hint': 'Pirma užuomina\\nAntra užuomina',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slaido inkaras į grįžtamojo ryšio slaidą',
+  'bijv. slide:3': 'pvz. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Mokymosi tikslų nuorodos (slaido inkarai, vienas eilutėje)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metaduomenys',
+  'Vak/onderwerp': 'Dalykas/tema',
+  'Moeilijkheid': 'Sunkumas',
+  '— geen —': '— joks —',
+  'Makkelijk': 'Lengva',
+  'Gemiddeld': 'Vidutiniškai',
+  'Moeilijk': 'Sunku',
+  'Geschatte duur in seconden': 'Apskaičiuota trukmė sekundėmis',
+  'Tags (komma-gescheiden)': 'Žymos (atskirtos kableliu)',
 };

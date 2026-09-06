@@ -139,6 +139,22 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       return l10n.d(
         'Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met “Milestone:” begint is een nulduur-mijlpaal.',
       );
+    case SlideType.objective:
+      return l10n.d(
+        'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.',
+      );
+    case SlideType.module:
+      return l10n.d(
+        'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.',
+      );
+    case SlideType.feedback:
+      return l10n.d(
+        'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.',
+      );
+    case SlideType.assessmentSummary:
+      return l10n.d(
+        'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.',
+      );
   }
 }
 

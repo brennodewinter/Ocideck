@@ -1633,6 +1633,65 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Starten': 'Aloita',
+  'Opleiding': 'Kurssi',
+  'Les': 'Oppitunti',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Luo eLearning-sisältöä: oppimistavoitteet, moduulit, palaute ja arvioinnin yhteenvedot. Tuo SCORM, QTI, xAPI, AICC ja OLX paikallisesti. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi diatyyppejä.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Moduulin tai luvun otsikko. Käytä rakenteellisena merkkinä oppimistavoitteiden ja kysymysten välissä.',
+  'Leerdoel': 'Oppimistavoite',
+  'Module': 'Moduuli',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Arvioinnin yhteenveto',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Oppimistavoite tai kompetenssi. Kuvaile, mitä oppijan tulee osata; linkitä valinnaisesti moduuleihin tai kysymyksiin. Ei väitettä, että kukaan olisi saavuttanut tavoitteen.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Palaute tai korjaava ohje kysymyksen jälkeen. Selitä, mikä vastaus oli oikein ja miksi, tai ohjaa lisämateriaaliin.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Arvioinnin yhteenveto: kysymysten määrä, enimmäispisteet, läpipääsyn raja. Ei oppijan tuloksia — vain testin määritelmä.',
+  'Paren': 'Parit',
+  'Afleiders (optioneel)': 'Hämäykset (valinnainen)',
+  'Invulvelden': 'Täyttökentät',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Katsoja yhdistää vasemman oikeaan. Parilla i on vasen[i] oikeana vastauksena oikealle[i]. Oikea sarake sekoitetaan esityksen aikana.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Katsoja kirjoittaa vastauksen jokaiseen kenttään. Kullakin kentällä on yksi tai useampi hyväksytty vastaus ja arviointistrategia.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Katsoja osoittaa yhtä tai useampaa aluetta kuvassa. Koordinaatit on normalisoitu (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Ylimääräisiä oikeita kohteita ilman oikeaa paria. Ne tekevät kysymyksestä vaikeamman.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Hyväksytyt vastaukset (pilkulla erotettuna)',
+  'Afleider': 'Häiriötekijä',
+  'Afleider toevoegen': 'Lisää häiriötekijä',
+  'Afleider verwijderen': 'Poista häiriötekijä',
+  'Bevat het antwoord': 'Sisältää vastauksen',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinaatit (x, y, w, h — normalisoitu 0–1)',
+  'Evaluatiestrategie': 'Arviointistrategia',
+  'Exacte overeenkomst': 'Tarkka vastaavuus',
+  'Gebied': 'Alue',
+  'Gebied toevoegen': 'Lisää alue',
+  'Gebied verwijderen': 'Poista alue',
+  'Getal in bereik': 'Luku alueella',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Valitse kuva ja merkitse vähintään yksi oikea alue.',
+  'Label (optioneel)': 'Nimike (valinnainen)',
+  'Maak minstens twee gevulde paren.': 'Luo vähintään kaksi täytettyä paria.',
+  'Meerdere gebieden selecteerbaar': 'Useita alueita valittavissa',
+  'Paar toevoegen': 'Lisää pari',
+  'Paar verwijderen': 'Poista pari',
+  'Tikfout toegestaan': 'Kirjoitusvirhe sallittu',
+  'Veld': 'Kenttä',
+  'Veld toevoegen': 'Lisää kenttä',
+  'Veld verwijderen': 'Poista kenttä',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Lisää vähintään yksi kenttä, jossa on hyväksytty vastaus.',
+  'Koppelen (matching)': 'Täsmäytys (matching)',
+  'Invulvraag': 'Täyttökysymys',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klikkaa kuvaa)',
   'Presentaties op deze server': 'Esitykset tällä palvelimella',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Seuraa esitystä: tämä dia tekee sen, mitä esitys kokonaisuudessaan tekee. Vain ilmoita: löytö lasketaan, mutta vastaanottaja ei näe mitään — tiedot ovat vain siinä. Hyväksy: tiedot kuuluvat tänne ja varoitus katoaa. Hyväksy + varoita: vastaanottaja näkee merkin, että diassa on henkilötietoja. Poista: löydetyt tiedot tehdään lukukelvottomiksi näytöllä ja viennissä — markdown-tiedostosi säilyttää alkuperäisen tekstin.',
@@ -4668,4 +4727,38 @@ const _dutchSourceAddFi = <String, String>{
   'Gebieden': 'Alueet',
   'bv. "de controller board met display"': 'esim. "ohjauskortti näytön kanssa"',
   'Afbeeldingsverwijzingen': 'Kuvaviitteet',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Pisteytys, palaute ja metatiedot',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Pisteet, pisteytysstrategia, palaute, vihjeet, yritykset ja oppimistavoitteen linkit.',
+  'Scoringstrategie': 'Pisteytysstrategia',
+  'Alles of niets': 'Kaikki tai ei mitään',
+  'Deels': 'Osittain',
+  'Per paar': 'Per pari',
+  'Per item': 'Per kohta',
+  'Puntenaftrek per fout': 'Pisteiden vähennys per väärä vastaus',
+  'Maximum pogingen (0 = onbeperkt)': 'Enimmäisyritykset (0 = rajaton)',
+  'Feedback per uitkomst': 'Palaute per tulos',
+  'Bij goed antwoord': 'Oikea vastaus',
+  'Bij fout antwoord': 'Väärä vastaus',
+  'Bij deels goed': 'Osittain oikein',
+  'Bij timeout': 'Aikakatkaisu',
+  'Hints (één per regel, progressief)':
+      'Vihjeet (yksi per rivi, progressiivinen)',
+  'Eerste hint\nTweede hint': 'Ensimmäinen vihje\\nToinen vihje',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Korjaus — slide-anrkuri palauteslideen',
+  'bijv. slide:3': 'esim. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Oppimistavoiteviittaukset (slide-anrkurit, yksi per rivi)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metatiedot',
+  'Vak/onderwerp': 'Aine/aihe',
+  'Moeilijkheid': 'Vaikeustaso',
+  '— geen —': '— ei mitään —',
+  'Makkelijk': 'Helppo',
+  'Gemiddeld': 'Keskitaso',
+  'Moeilijk': 'Vaikea',
+  'Geschatte duur in seconden': 'Arvioitu kesto sekunneissa',
+  'Tags (komma-gescheiden)': 'Tunnisteet (pilkuilla erotettuna)',
 };

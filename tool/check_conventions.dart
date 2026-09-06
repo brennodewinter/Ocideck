@@ -222,13 +222,17 @@ const Map<String, int> fileSizeBaseline = {
   // en de import van models/menu.dart.
   // +27 (#1824): callouts, calloutPresentation, calloutReveal-velden + doc +
   // constructor/duplicate/copyWith-doorvoer voor image callouts.
-  'lib/models/slide.dart': 1115,
+  'lib/models/slide.dart':
+      1105, // Verlaagd van 1115: de eLearning-types (#1999) kwamen erbij (+26),
+  // maar `SlideTypeExtension` is naar het part-bestand slide_taxonomy.dart
+  // verhuisd (-55) — daar staan de enums waar die getters over gaan. Meet 1103.
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
   // `menu`-takken in de kiezer-switches.
   // Verlaagd van 1115 naar 1112: het bestand meet 1110.
-  'lib/widgets/dialogs/add_slide_dialog.dart': 1112,
+  'lib/widgets/dialogs/add_slide_dialog.dart':
+      1149, // +37 (#1999): eLearning-wireframes + categorie­label + curated­order + reveal­gate.
   // chart_preview_improvement part registration + improvement ChartType switch.
   // +Y-01-parameter; improvement cases in improvement_dispatch.dart (part).
   // +13 (#1164): het nieuwe publieke veld splitRunPosition met zijn dispatch en
@@ -256,7 +260,8 @@ const Map<String, int> fileSizeBaseline = {
   // part-bestand menu_preview_layouts.dart.
   // +8 (#1828): calloutRevealedBulletCount veld + doc + constructor-param +
   // doorgeven aan _BulletsImagePreview, en de image_callout import.
-  'lib/widgets/slides/slide_preview.dart': 1052,
+  'lib/widgets/slides/slide_preview.dart':
+      1072, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   // +3: `setShowOpenPreview` — de zetter van de instelling "Voorbeeld tonen bij
@@ -365,7 +370,7 @@ const Map<String, int> classSizeBaseline = {
       // (−3), exportkwaliteit verhuisd van Toegankelijkheid naar eigen kop
       // (+10), classificatie-handhaving verhuisd van Algemeen naar Privacy
       // (+3), cockpit verhuisd naar presentatie als AdvancedSection (+6).
-      6262,
+      6263, // +1 (#1999): eLearning-module­kaart in settings_dialog_modules.
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
@@ -476,7 +481,10 @@ const Map<String, int> classSizeBaseline = {
   // bestanden kleiner, maar de klasse niet.
   // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
   // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
-  'lib/services/markdown_service.dart#MarkdownService': 2455,
+  'lib/services/markdown_service.dart#MarkdownService':
+      2428, // +5 (#1999): eLearning-slidetypes in de serialize-switch. Verlaagd
+  // van 2460: `_parsedCustomMarkdown` is naar het hoogste niveau getild — het
+  // leest niets van de service, dus het hoorde nooit op de klasse. Meet 2428.
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
@@ -538,7 +546,16 @@ const Map<String, int> classSizeBaseline = {
   // +16 (#1952): _saveQueued-wachtrij in save() — een tweede Cmd/Ctrl+S tijdens
   // een lopende opslag wordt onthouden en opnieuw uitgevoerd als het tabblad nog
   // vuil is. Eén veld + vijf regels in save() + import dart:async.
-  'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
+  // +6 (#1998): drie nieuwe QuestionKind-cases (matching, hotspot, fillIn) in
+  // de exhaustive _authorDrawHint-switch — Dart vereist alle enum-waarden, en
+  // de eLearning-kinds zijn nog niet interactief presenteerbaar.
+  'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1219,
+  // +21 (#1998): eLearning-kind state (pairs/distractors/regions/fields) +
+  // init + _buildSpec + dropdown-items + build-branches. De editor-widgets
+  // zelf zijn geëxtraheerd naar question_elearning_editors.dart en
+  // question_advanced_fields.dart; dit is de state-plumbing die
+  // _QuestionEditorState moet vasthouden om te serialiseren.
+  'lib/widgets/editors/question_editor.dart#_QuestionEditorState': 1113,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen
   // doorlopende tekst; de blokafbeeldingen zitten in de bullet-tekst, niet in
@@ -563,7 +580,8 @@ const Map<String, int> classSizeBaseline = {
   // top-level `slideWithPresence` in slide_presence_dots.dart; only the per-item
   // read and the wrap call remain in the state class.
   // +1 (#1164): splitRunPosition-doorvoer naar de thumbnail voor de (2/3)-teller.
-  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState': 1025,
+  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState':
+      1028, // +3 (#1999): elearningRevealProvider doorgeven aan AddSlideDialog.
   // +9 (#1854): null-image guard (beeld toont altijd) + for-loop die alle
   // callouts doorloopt in _buildImageStack. Statische markeringen staan in
   // callout_marker_helpers.dart; de klasse houdt de loop en de guard.

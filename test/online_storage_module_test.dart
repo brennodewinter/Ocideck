@@ -124,6 +124,7 @@ void main() {
         ModuleId.assetRights,
         ModuleId.managementsysteem,
         ModuleId.libreplan,
+        ModuleId.elearning,
       ]);
     });
   });

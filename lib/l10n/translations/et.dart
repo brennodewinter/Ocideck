@@ -1626,6 +1626,65 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Starten': 'Alusta',
+  'Opleiding': 'Kursus',
+  'Les': 'Õppetund',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Loo eLearning sisu: õpieesmärgid, moodulid, tagasiside ja hindamise kokkuvõtted. Impordi SCORM, QTI, xAPI, AICC ja OLX lokaalselt. Vaikimisi väljas; lülita laiendus sisse, et kasutada slaiditüüpe.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Mooduli või peatüki pealkiri. Kasuta struktuurimärgina õpieesmärkide ja küsimuste vahel.',
+  'Leerdoel': 'Õpieesmärk',
+  'Module': 'Moodul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Hindamise kokkuvõte',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Õpieesmärk või kompetentsus. Kirjelda, mida õppija peab oskama; ühenda valikuliselt moodulite või küsimustega. Pole väidet, et keegi oleks eesmärgi omandanud.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Tagasiside või parandus pärast küsimust. Selgita, milline vastus oli õige ja miks, või viita lisamaterjalile.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Hindamise kokkuvõte: küsimuste arv, maksimaalne skoor, lävimäär. Õppija tulemusi pole — ainult testi definitsioon.',
+  'Paren': 'Paarid',
+  'Afleiders (optioneel)': 'Häirijad (valikuline)',
+  'Invulvelden': 'Täitmiskohad',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Vaataja ühendab vasaku paremaga. Paaril i on vasak[i] õige vastus paremale[i]. Parem veerg segatakse esituse ajal.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Vaataja sisestab vastuse igasse lahtrisse. Igal lahtril on üks või enam aktsepteeritud vastust ja hindamisstrateegia.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Vaataja osutab ühele või enamale piirkonnale pildil. Koordinaadid on normaliseeritud (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Lisa paremad üksused ilma õige paarita. Need muudavad küsimuse raskemaks.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Aktsepteeritud vastused (komaga eraldatud)',
+  'Afleider': 'Segaja',
+  'Afleider toevoegen': 'Lisa segaja',
+  'Afleider verwijderen': 'Eemalda segaja',
+  'Bevat het antwoord': 'Sisaldab vastust',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinaadid (x, y, w, h — normaliseeritud 0–1)',
+  'Evaluatiestrategie': 'Hindamisstrateegia',
+  'Exacte overeenkomst': 'Täpne vaste',
+  'Gebied': 'Piirkond',
+  'Gebied toevoegen': 'Lisa piirkond',
+  'Gebied verwijderen': 'Eemalda piirkond',
+  'Getal in bereik': 'Arv vahemikus',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Vali pilt ja märgi vähemalt üks õige piirkond.',
+  'Label (optioneel)': 'Silt (valikuline)',
+  'Maak minstens twee gevulde paren.': 'Loo vähemalt kaks täidetud paari.',
+  'Meerdere gebieden selecteerbaar': 'Mitme piirkonna valimine võimalik',
+  'Paar toevoegen': 'Lisa paar',
+  'Paar verwijderen': 'Eemalda paar',
+  'Tikfout toegestaan': 'Trükiviga lubatud',
+  'Veld': 'Väli',
+  'Veld toevoegen': 'Lisa väli',
+  'Veld verwijderen': 'Eemalda väli',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Lisa vähemalt üks väli aktsepteeritud vastusega.',
+  'Koppelen (matching)': 'Sobitamine (matching)',
+  'Invulvraag': 'Täidetav küsimus',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klõps pildil)',
   'Presentaties op deze server': 'Esitlused sellel serveril',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Järgi esitlust: see slaid teeb seda, mida esitlus tervikuna teeb. Ainult teata: leid loetakse, kuid saaja ei näe midagi — andmed on lihtsalt olemas. Nõustu: andmed kuuluvad siia ja hoiatus kaob. Nõustu + hoiata: saaja näeb märki, et slaidil on isikuandmeid. Jäta välja: leitud andmed muudetakse ekraanil ja ekspordis loetamatuks — teie markdown-fail säilitab algse teksti.',
@@ -4655,4 +4714,37 @@ const _dutchSourceAddEt = <String, String>{
   'Gebieden': 'Alad',
   'bv. "de controller board met display"': 'nt "juhtpaneel ekraaniga"',
   'Afbeeldingsverwijzingen': 'Pildiviited',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Hindamine, tagasiside ja metaandmed',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punktid, hindamisstrateegia, tagasiside, vihjed, katsed ja õpieesmärkide lingid.',
+  'Scoringstrategie': 'Hindamisstrateegia',
+  'Alles of niets': 'Kõik või mitte midagi',
+  'Deels': 'Osaline',
+  'Per paar': 'Paari kohta',
+  'Per item': 'Üksuse kohta',
+  'Puntenaftrek per fout': 'Punktide mahaarvamine vale vastuse eest',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimaalsed katsed (0 = piiramatu)',
+  'Feedback per uitkomst': 'Tagasiside tulemi kohta',
+  'Bij goed antwoord': 'Õige vastuse korral',
+  'Bij fout antwoord': 'Vale vastuse korral',
+  'Bij deels goed': 'Osaliselt õige korral',
+  'Bij timeout': 'Ajalõpu korral',
+  'Hints (één per regel, progressief)': 'Vihjed (üks rea kohta, progressiivne)',
+  'Eerste hint\nTweede hint': 'Esimene vihje\\nTeine vihje',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slaidi-ankur tagasisideslaidile',
+  'bijv. slide:3': 'nt. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Õpieesmärkide viited (slaidi-ankrud,üks rea kohta)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metaandmed',
+  'Vak/onderwerp': 'Aine/teema',
+  'Moeilijkheid': 'Raskusaste',
+  '— geen —': '— puudub —',
+  'Makkelijk': 'Lihtne',
+  'Gemiddeld': 'Keskmine',
+  'Moeilijk': 'Raske',
+  'Geschatte duur in seconden': 'Eeldatav kestus sekundites',
+  'Tags (komma-gescheiden)': 'Sildid (komaga eraldatud)',
 };

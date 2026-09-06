@@ -1633,6 +1633,66 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Starten': 'Mulai',
+  'Opleiding': 'Kursus',
+  'Les': 'Pelajaran',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Buat konten eLearning: tujuan pembelajaran, modul, umpan balik, dan ringkasan asesmen. Impor SCORM, QTI, xAPI, AICC, dan OLX secara lokal. Nonaktif secara default; aktifkan ekstensi untuk menggunakan tipe slide.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Judul modul atau bab. Gunakan sebagai penanda struktural antara tujuan pembelajaran dan pertanyaan.',
+  'Leerdoel': 'Tujuan pembelajaran',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Ringkasan asesmen',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Tujuan pembelajaran atau kompetensi. Deskripsikan apa yang pembelajar harus mampu lakukan; tautkan secara opsional ke modul atau pertanyaan. Tidak ada klaim bahwa seseorang telah menguasai tujuan tersebut.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Umpan balik atau remediasi setelah pertanyaan. Jelaskan jawaban mana yang benar dan mengapa, atau rujuk ke materi tambahan.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Ringkasan asesmen: jumlah pertanyaan, skor maksimum, ambang batas lulus. Tidak ada hasil pembelajar — hanya definisi tes.',
+  'Paren': 'Pasangan',
+  'Afleiders (optioneel)': 'Penjebak (opsional)',
+  'Invulvelden': 'Bidang isian',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Penonton menghubungkan kiri ke kanan. Pasangan i memiliki kiri[i] sebagai jawaban yang benar untuk kanan[i]. Kolom kanan diacak saat presentasi.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Penonton mengetik jawaban di setiap bidang. Setiap bidang memiliki satu atau lebih jawaban yang diterima dan strategi evaluasi.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Penonton menunjuk satu atau lebih wilayah pada gambar. Koordinat dinormalisasi (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Item kanan tambahan tanpa pasangan yang benar. Mereka membuat soal lebih sulit.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Jawaban yang diterima (dipisahkan koma)',
+  'Afleider': 'Pengganggu',
+  'Afleider toevoegen': 'Tambah pengganggu',
+  'Afleider verwijderen': 'Hapus pengganggu',
+  'Bevat het antwoord': 'Memuat jawaban',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinat (x, y, w, h — ternormalisasi 0–1)',
+  'Evaluatiestrategie': 'Strategi evaluasi',
+  'Exacte overeenkomst': 'Cocok persis',
+  'Gebied': 'Wilayah',
+  'Gebied toevoegen': 'Tambah wilayah',
+  'Gebied verwijderen': 'Hapus wilayah',
+  'Getal in bereik': 'Angka dalam rentang',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Pilih gambar dan tandai setidaknya satu wilayah yang benar.',
+  'Label (optioneel)': 'Label (opsional)',
+  'Maak minstens twee gevulde paren.':
+      'Buat setidaknya dua pasangan yang terisi.',
+  'Meerdere gebieden selecteerbaar': 'Beberapa wilayah dapat dipilih',
+  'Paar toevoegen': 'Tambah pasangan',
+  'Paar verwijderen': 'Hapus pasangan',
+  'Tikfout toegestaan': 'Kesalahan ketik diperbolehkan',
+  'Veld': 'Bidang',
+  'Veld toevoegen': 'Tambah bidang',
+  'Veld verwijderen': 'Hapus bidang',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Tambahkan setidaknya satu bidang dengan jawaban yang diterima.',
+  'Koppelen (matching)': 'Mencocokkan (matching)',
+  'Invulvraag': 'Pertanyaan isian',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik pada gambar)',
   'Presentaties op deze server': 'Presentasi di server ini',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Ikuti presentasi: slide ini melakukan apa yang dilakukan presentasi secara keseluruhan. Hanya laporkan: temuan dihitung, tetapi penerima tidak melihat apa pun — datanya memang ada di sana. Terima: datanya memang di sini dan peringatan hilang. Terima + peringatkan: penerima melihat badge bahwa ada data pribadi di slide. Redaksi: data yang ditemukan dibuat tidak terbaca di layar dan ekspor — file markdown Anda menyimpan teks asli.',
@@ -4674,4 +4734,37 @@ const _dutchSourceAddId = <String, String>{
   'bv. "de controller board met display"':
       'mis. "papan pengendali dengan layar"',
   'Afbeeldingsverwijzingen': 'Referensi gambar',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Penilaian, umpan balik dan metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Poin, strategi penilaian, umpan balik, petunjuk, percobaan dan tautan tujuan pembelajaran.',
+  'Scoringstrategie': 'Strategi penilaian',
+  'Alles of niets': 'Semua atau tidak sama sekali',
+  'Deels': 'Sebagian',
+  'Per paar': 'Per pasangan',
+  'Per item': 'Per item',
+  'Puntenaftrek per fout': 'Pengurangan poin per jawaban salah',
+  'Maximum pogingen (0 = onbeperkt)': 'Percobaan maksimum (0 = tak terbatas)',
+  'Feedback per uitkomst': 'Umpan balik per hasil',
+  'Bij goed antwoord': 'Saat jawaban benar',
+  'Bij fout antwoord': 'Saat jawaban salah',
+  'Bij deels goed': 'Saat sebagian benar',
+  'Bij timeout': 'Saat habis waktu',
+  'Hints (één per regel, progressief)': 'Petunjuk (satu per baris, progresif)',
+  'Eerste hint\nTweede hint': 'Petunjuk pertama\\nPetunjuk kedua',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — jangkar slide ke slide umpan balik',
+  'bijv. slide:3': 'mis. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Referensi tujuan pembelajaran (jangkar slide, satu per baris)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Mata pelajaran/topik',
+  'Moeilijkheid': 'Kesulitan',
+  '— geen —': '— tidak ada —',
+  'Makkelijk': 'Mudah',
+  'Gemiddeld': 'Sedang',
+  'Moeilijk': 'Sulit',
+  'Geschatte duur in seconden': 'Estimasi durasi dalam detik',
+  'Tags (komma-gescheiden)': 'Tag (dipisahkan koma)',
 };

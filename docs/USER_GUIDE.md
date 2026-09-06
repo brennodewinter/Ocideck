@@ -29,13 +29,14 @@
 - [Accessibility](#accessibility)
 - [Information security module (pentest reports)](#information-security-module-pentest-reports)
 - [Management-system module (ISO progress reporting)](#management-system-module-iso-progress-reporting)
+- [eLearning module (course material)](#elearning-module-course-material)
 - [LibrePlan connector (optional)](#libreplan-connector-optional)
 - [Documents](#documents)
 - [Markdown mode](#markdown-mode)
 - [What the browser version cannot do](#what-the-browser-version-cannot-do)
 - [Theming and language](#theming-and-language)
 
-*(Added 2026-07-22: this document is around 5,300 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. Figure corrected 2026-07-24, 2026-07-30 and 2026-08-30; it said 2,992, then 3,350, then 3,800, each true when written.)*
+*(Added 2026-07-22: this document is around 5,500 lines and had no way in other than scrolling. In the app the documentation reader has full search; on the repository page it did not. Figure corrected 2026-07-24, 2026-07-30, 2026-08-30 and 2026-09-06; it said 2,992, then 3,350, then 3,800, then 5,300, each true when written.)*
 
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
@@ -709,7 +710,9 @@ eight statistical types when the Procesverbetering module is on; *corrected
 2026-08-30, this said six while `chartTypeRequiresProcesverbetering` named eight,
 and the module's own section further down says eight*), **cockpit** (a
 dashboard of aviation-style instrument gauges),
-**question** (an interactive quiz slide, in six kinds), **timeline** (an animated timeline of
+**question** (a quiz slide, in nine kinds — six of which are interactive while
+presenting; *corrected 2026-09-06, this said six kinds before the eLearning
+module added `matching`, `hotspot` and `fillIn`*), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
 the previous report), **choice menu** (blocks that each jump to another
 slide, as a grid, a list or a ring, #1162), and
@@ -725,7 +728,8 @@ chooser, so adding and re-typing a slide always offer exactly the same set of
 types. (Both pickers are category-filtered: the seven Informatieveiligheid types
 — asset overview, discoveries, finding, findings-summary, checklist, scope matrix
 and sign-off — appear only once the security module is enabled; see the
-pentest-reporting section below.)
+pentest-reporting section below. The same holds for the Procesverbetering,
+Managementsysteem and eLearning types, each behind its own module switch.)
 
 Not sure what a slide type is for? The chooser already tells you before you pick
 (above), and afterwards the small **"What can I do here?"**
@@ -1263,6 +1267,48 @@ the chooser, then choose the **kind** in the editor:
   answers, the correction is against the **closest** one, not the first in the
   list.
 
+Three further kinds arrived with the eLearning module (#1998, #2000–#2002 and
+#2012–#2014, *added 2026-09-06*). They are **authoring only for now**: you can
+write them, save them and reopen them, but there is no surface on which a viewer
+answers them. Read the paragraph after them before you build a lesson on one.
+
+- **Matching (koppelen)** — two columns the viewer is meant to pair up. You fill
+  in the pairs left and right; pair *i* is the answer key, so the left item on
+  row 3 belongs with the right item on row 3. You may add **distractors**: extra
+  right-hand items with no partner. At least two filled pairs are needed before
+  the question counts as complete, and the editor says so until they are there.
+- **Fill-in (invulvraag)** — one or more blanks the viewer types into. Per field
+  you list the **accepted answers**, comma-separated, and choose how they are
+  judged: *exact match*, *contains the answer*, *typo allowed* or *number within a
+  range*. You can also give the field a placeholder. Unlike **typed answer**,
+  which derives its leniency from a single similarity percentage, the strategy
+  here is written down per field rather than inferred.
+- **Hotspot** — the viewer is meant to point at a region of a picture. Pick the
+  image, then add regions; each carries an optional label and a **Juist**
+  (correct) / **Afleider** (distractor) switch, and a slide-level switch decides
+  whether more than one region may be chosen. The region's rectangle is **typed
+  in as four numbers** — `x, y, w, h`, normalised between 0 and 1 — because
+  dragging a box on the picture is not built yet. Normalised means the regions
+  stay put whatever size the slide is rendered at.
+
+> **What these three do not do yet.** The editor is finished; the presentation is
+> not. Nothing draws two matching columns, a clickable picture or a second
+> fill-in field, so presenting one of these questions gives you no workable answer
+> area: a *matching* question shows its prompt with the left column beneath it as
+> a plain list, *fill-in* and *hotspot* show the prompt alone. What they do **not**
+> do is stop you: they are drawn as questions that cannot be answered, which is
+> what keeps the presentation moving — a question OciDeck considers answerable and
+> unanswered holds the deck until it is answered right, and for a while these
+> three did exactly that, leaving quitting as the only way out. Tapping an item of
+> a matching list can only be scored wrong, so treat the list as something to read
+> and not to click. The grey author hint under the question card stays silent for
+> these kinds on purpose, rather than promising a shuffle nobody will see. The
+> static exports behave the same way: the HTML export prints the prompt only (see
+> below). If you need a quiz that is actually answered in the room, use one of the
+> six older kinds. *(Stated 2026-09-06, corrected the same day; the presentation
+> side is the next step, see
+> [`docs/design/ELEARNING_MODEL.md`](design/ELEARNING_MODEL.md).)*
+
 Common options for every kind:
 
 - **Answer limits** — the number shown in one round remains at most eight.
@@ -1276,6 +1322,9 @@ Common options for every kind:
   unknown JSON field instead of silently dropping them. Saving may normalise the
   surrounding fence, whitespace or JSON formatting; storage operations that
   rewrite image paths preserve the fields but may likewise reformat the JSON.
+  *(Added 2026-09-06:)* `matching`, `hotspot` and `fillIn` keep no answer
+  records at all — their pairs, regions and fields are separate lists — and the
+  add buttons for those stop at the same 32.
 
 - **Answer time** (optional) — a countdown starts the moment the slide appears;
   running out counts as a wrong answer. A question that cannot be got right as it
@@ -1289,9 +1338,26 @@ Common options for every kind:
   hidden rather than shown doing nothing. The grey line at the foot of the slide
   preview spells out per kind what the presentation will randomise — "n of m
   options are shown at random" for those two, and something else for the rest.
+  For the three eLearning kinds that line stays empty, because there is nothing
+  yet whose randomisation could be described (*added 2026-09-06*).
 - **Image** (optional) — shown beside the question with a split bar, with a
   magnifier button that opens a **pan-and-zoom** detail view of the photo. Not
   offered for *two images*, which already has its own two.
+- **Scoring, feedback and metadata** (optional, collapsed) — a section at the
+  foot of every question editor, folded shut because most questions never need
+  it. It holds **points** for the question, a **scoring strategy** (all-or-nothing,
+  partial, per pair, per item), a **penalty** per wrong attempt, a **maximum
+  number of attempts** (0 = unlimited), **feedback per outcome** (right, wrong,
+  partly right, timed out), **progressive hints** one per line, a **remediation**
+  reference to a feedback slide, references to **learning-objective slides**, and
+  readable **metadata** (title, subject, difficulty, estimated duration, tags).
+  Everything here is **recorded, not yet acted on**: OciDeck writes these fields
+  to the file and reads them back, but nothing counts points, subtracts a
+  penalty, allows a second attempt or puts your feedback text on screen. Answer
+  time and *on a wrong answer* (above) are the two settings that do work today,
+  and *maximum attempts* does not override them. Fields left at their default are
+  not written at all, so switching this section open and shut again leaves an
+  existing deck byte-identical. *(Added 2026-09-06, #2003–#2005 and #2008.)*
 
 While presenting, you **cannot advance** past a question until it is answered
 correctly (or answered and locked). A correct answer turns green and lets you
@@ -1315,9 +1381,19 @@ A **static export** shows the question without interactivity. In the **HTML**
 export that works out per kind: multiple choice, true/false, multiple correct and
 ordering print their options as a list; a *two images* question prints the two
 pictures as ordinary Markdown images after the question card, without saying
-which is the right one; and a *typed answer* prints the question alone, because
-there the accepted answers *are* the answer key. The right answer is never
-printed for any kind.
+which is the right one; a *typed answer* prints the question alone, because there
+the accepted answers *are* the answer key; and *matching*, *fill-in* and
+*hotspot* print the question alone as well, since none of their content has an
+HTML shape yet. In the **HTML** export the right answer is never printed for any
+kind.
+
+The **LaTeX/Beamer** export is the exception and has been all along: it does not
+understand the question block and falls back to printing it as a code listing,
+so the whole specification — including which answer is marked correct — ends up
+on the slide. Do not hand a Beamer export of a quiz to the people who are about
+to take it. *(Narrowed 2026-09-06: the sentence above claimed the right answer is
+never printed "for any kind", which was true of the HTML export it described and
+not of the Beamer one.)*
 
 ### Timeline slides
 
@@ -4307,6 +4383,133 @@ first.
 > [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
 > OciDeck reports progress — it makes no certification or conformance claim and is
 > not a substitute for an auditor.
+
+## eLearning module (course material)
+
+*(Added 2026-09-06, #1999.)*
+
+The eLearning module adds slide types for course material: a **learning
+objective**, a **module** heading, a **feedback** slide and an **assessment
+summary**. Together with the three question kinds described under
+[Question slides](#question-slides) they let you write a lesson in the same file
+as everything else — ordinary Marp Markdown and no separate authoring tool.
+
+Like the other optional modules it is **off by default**. Switch it on under
+**Settings → Uitbreidingen (Extensions) → eLearning**. The **Add slide** dialog
+then shows an **eLearning** tab with the four types; a deck that already carries
+one of them shows the tab even with the module off, so switching it off never
+strands existing work.
+
+> **Read this before you put work into it.** The module is young, and what is
+> missing is the playback side. Nothing scores an answer, counts attempts or puts
+> the feedback you typed on screen, and the three new question kinds have no
+> surface a viewer can answer on. What is written is written properly: the slide
+> types round-trip, body and all. A knowledge check is not a type of its own —
+> it is an ordinary **question** slide, with everything a question slide can do,
+> and the paragraphs below say per part what does and does not work. The design
+> behind the module, including what is deliberately out of scope, is
+> [`docs/design/ELEARNING_MODEL.md`](design/ELEARNING_MODEL.md).
+> *(Rewritten 2026-09-06: this warned that the body of these slides was lost on
+> reopening, and that a separate **kennischeck** slide type did not run as a quiz.
+> Both were true when written; the body loss has been repaired and the type has
+> been withdrawn in favour of the question slide it always was.)*
+
+### The four slide types
+
+- **Leerdoel (learning objective)** — what the learner should be able to do.
+  Ordinary Markdown; the editor is the free-Markdown editor.
+- **Module** — a chapter or module heading, to mark structure between objectives
+  and questions. It is a heading slide, so it renders like a section divider.
+  Parent/child relations between modules are part of the design but are not
+  built; a module slide today is a heading and nothing more.
+- **Feedback** — the explanation after a question: which answer was right and
+  why, or a pointer to further material. Ordinary Markdown.
+- **Assessment-samenvatting (assessment summary)** — a readable summary of a
+  test: how many questions, the maximum score, the pass mark. You write it
+  yourself as Markdown; it is deliberately a description of the test definition
+  and never a learner's result.
+
+Each of the four has its own `_class` token in the file (`objective`, `module`,
+`feedback`, `assessment-summary`), so the **type** reopens as what it was, in
+OciDeck and in any other Marp tool that leaves unknown classes alone. Their body
+is ordinary Markdown and comes back unchanged, exactly as a **free Markdown**
+slide's does; all four share the free-Markdown preview and export the same way.
+
+> **A knowledge check is a question slide.** There is no separate slide type for
+> one: put a **question** slide where the check belongs and pick the kind you
+> want. That is not a shortcut but the point — every feature that hangs on the
+> question type (the drawn round, the countdown, the *try again* rule, holding the
+> presentation until the answer is right) works then, and a type of its own had
+> none of them. A deck that a development build wrote with `_class: kennischeck`
+> still opens: the token is read as `question` and the block below it is unchanged.
+> *(Stated 2026-09-06; the type existed for part of that day.)*
+
+> **Their body is safe, and was not always.** While these four types were being
+> built their text was written to the file correctly and then not read back: a
+> heading returned as the slide's title, bullets landed in a field their editor
+> does not show, a plain paragraph was dropped, and the next save wrote that loss
+> to disk. Writing and reading now decide on one shared rule, so the body of a
+> learning objective survives like the body of a free Markdown slide. No released
+> version of OciDeck ever had these slide types, so no deck of yours can carry
+> that damage; the note stays because this guide said the opposite until the fix
+> landed. *(Corrected 2026-09-06.)*
+
+### No learner results, by design
+
+The OciDeck **file format** stores course content and test rules — the answer
+model, scoring, feedback, timing, attempt rules, pass mark and course structure.
+It stores **no learner results**: not who answered what, not attempts, not
+personal progress, not mastery, not suspend data. This is not a gap waiting to
+be filled in the existing fields: the
+format deliberately reserves no keys for it, because a key
+whose meaning is "results go here later" either changes meaning later — which the
+file-format contract forbids — or collides with whatever another build already
+wrote there. If a results layer is ever built it gets new keys in a new file.
+
+### Importing SCORM, QTI, xAPI/cmi5, AICC and OLX
+
+OciDeck can read the structure of an eLearning package: SCORM and IMS Content
+Packaging, QTI 2.x/3.x, cmi5 and xAPI activity metadata, AICC course structures
+and OLX (Open edX). Recognition is by what is **inside** the package rather than
+by its extension — an `imsmanifest.xml`, a QTI namespace, a `cmi5.xml`, a
+`course.xml` with the OLX namespace, or the AICC `.crs`/`.au`/`.cst`/`.des`
+files — and a loose xAPI JSON or QTI XML is recognised too. Everything happens on
+your machine; OciDeck is not an LRS and sends no xAPI statements anywhere.
+
+What comes across is **structure and titles**: the organizations and items of a
+manifest, the assessment items of a QTI file, the AUs of a cmi5 course, the
+lesson units of an `.au`, the sequentials of a `course.xml`. One slide per
+element, and for a QTI item also its identifier and the text of its prompt. What
+does **not** come across is the rest of the content — a SCORM item's HTML, an OLX
+unit's body, and for a question its **answer options and its answer key**. Those
+are not converted and they are not stored anywhere either, not even out of sight:
+the imported slide carries a visible placeholder line saying the content was not
+fully converted and asking you to add the question and its answers by hand. An
+imported QTI item is a text slide, not a question slide, and if you need the
+original later you have to keep the package. Better a slide that says it is
+unfinished than one that looks finished and is empty.
+
+> **There is no way to start this import from the interface yet.** The file
+> chooser behind **… → Presentaties importeren…** still offers only `.pptx`,
+> `.odp` and `.key`, and dragging a package onto the window goes by the same
+> list. The readers are in the build and tested, but they cannot be reached from
+> a menu, so this paragraph describes a capability rather than a workflow.
+> *(Stated 2026-09-06, #1992–#1997.)*
+
+### The assessment definition beside the file
+
+A test as a whole — its sections, pass mark, time limits, navigation mode,
+completion rule, plus accessibility metadata carried over from QTI — is not a
+property of any one slide, so it belongs beside the `.md` rather than in it, in a
+sidecar named `<name>.elearning.json` (the same arrangement as ink annotations
+and user notes). The model for that file exists, round-trips, and already keeps
+the rule every other sidecar keeps: a file from a newer OciDeck than yours is
+refused whole rather than read in part, and keys your build does not recognise are
+carried through untouched instead of being dropped. **The app does not write or
+read the file yet**. Until it does, an assessment summary slide is what you write
+by hand, and the sidecar is a shape waiting for the code that saves it.
+*(Stated 2026-09-06, #2006–#2007; the version rule was added the same day, after
+this paragraph noted it was promised and not built.)*
 
 ## LibrePlan connector (optional)
 

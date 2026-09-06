@@ -6,6 +6,8 @@ import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '_editor_field.dart';
 import 'markdown_editor_field.dart';
+import 'question_advanced_fields.dart';
+import 'question_elearning_editors.dart';
 import '../../theme/app_theme.dart';
 import 'editor_text_controller.dart';
 
@@ -58,6 +60,26 @@ class _QuestionEditorState extends State<QuestionEditor> {
   late final int _sourceAnswerCount;
   late final int _sourceAnswerLimit;
 
+  // ── eLearning-kinds state (matching, hotspot, fillIn) ──
+  late List<MatchPair> _pairs;
+  late List<String> _distractors;
+  late String _hotspotImage;
+  late List<HotspotRegion> _regions;
+  late bool _multiSelect;
+  late List<FillField> _fields;
+
+  // ── Gedeelde eLearning-velden (§3.3: scoring, feedback, attempts, metadata) ──
+  late int _points;
+  late QuestionScoring _scoring;
+  late int _penalty;
+  late int _maxAttempts;
+  late QuestionFeedback _feedback;
+  late List<String> _hints;
+  late String _remediation;
+  late List<String> _objectiveRefs;
+  late QuestionMetadata _metadata;
+  bool _showAdvanced = false;
+
   @override
   void initState() {
     super.initState();
@@ -88,6 +110,25 @@ class _QuestionEditorState extends State<QuestionEditor> {
     _answers = answers.map((a) => _makeCtrl(a.text)).toList();
     _correct = answers.map((a) => a.correct).toList();
     _images = answers.map((a) => a.image).toList();
+    // eLearning-kinds: lees de nieuwe velden uit de geparseerde spec.
+    _pairs = spec.pairs.isEmpty
+        ? [const MatchPair(), const MatchPair()]
+        : spec.pairs;
+    _distractors = spec.distractors;
+    _hotspotImage = spec.hotspotImage;
+    _regions = spec.regions.isEmpty ? [const HotspotRegion()] : spec.regions;
+    _multiSelect = spec.multiSelect;
+    _fields = spec.fields.isEmpty ? [const FillField()] : spec.fields;
+    // Gedeelde eLearning-velden (§3.3).
+    _points = spec.points;
+    _scoring = spec.scoring;
+    _penalty = spec.penalty;
+    _maxAttempts = spec.maxAttempts;
+    _feedback = spec.feedback;
+    _hints = spec.hints;
+    _remediation = spec.remediation;
+    _objectiveRefs = spec.objectiveRefs;
+    _metadata = spec.metadata;
   }
 
   /// Herbouw-hulp voor de `part`-uitbreiding hieronder: een extensie mag
@@ -117,6 +158,21 @@ class _QuestionEditorState extends State<QuestionEditor> {
     onWrong: _onWrong,
     statementIsTrue: _statementIsTrue,
     similarityThreshold: _similarity,
+    pairs: _pairs,
+    distractors: _distractors,
+    hotspotImage: _hotspotImage,
+    regions: _regions,
+    multiSelect: _multiSelect,
+    fields: _fields,
+    points: _points,
+    scoring: _scoring,
+    penalty: _penalty,
+    maxAttempts: _maxAttempts,
+    feedback: _feedback,
+    hints: _hints,
+    remediation: _remediation,
+    objectiveRefs: _objectiveRefs,
+    metadata: _metadata,
   );
 
   void _emit() {
@@ -191,6 +247,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
     final isOrdering = _kind == QuestionKind.ordering;
     final isImagePair = _kind == QuestionKind.imagePair;
     final isOpenText = _kind == QuestionKind.openText;
+    final isMatching = _kind == QuestionKind.matching;
+    final isFillIn = _kind == QuestionKind.fillIn;
+    final isHotspot = _kind == QuestionKind.hotspot;
     // Het aantal getoonde opties geldt alleen waar er iets uit een pool
     // getrokken wordt. Bij 'meerdere juiste' komen ze allemaal op het scherm,
     // en de andere soorten hebben helemaal geen optielijst.
@@ -227,6 +286,12 @@ class _QuestionEditorState extends State<QuestionEditor> {
           ..._imagePairSection(l10n)
         else if (isOpenText)
           ..._openTextSection(l10n)
+        else if (isMatching)
+          ..._matchingSection(l10n)
+        else if (isFillIn)
+          ..._fillInSection(l10n)
+        else if (isHotspot)
+          ..._hotspotSection(l10n)
         else
           ..._answersSection(
             l10n,
@@ -235,54 +300,62 @@ class _QuestionEditorState extends State<QuestionEditor> {
             filledWrong: filledWrong,
           ),
         const SizedBox(height: 20),
-        const SectionLabel('Weergave'),
-        if (drawsFromPool) ...[
-          _buildOptionCountRow(l10n),
-          const SizedBox(height: 12),
-        ],
-        EditorField(
-          label: l10n.d('Maximale antwoordtijd in seconden (0 = geen limiet)'),
-          controller: _timeLimit,
-          hint: '0',
-        ),
-        const SizedBox(height: 12),
-        Text(
-          l10n.d('Bij een fout antwoord'),
-          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-        ),
-        const SizedBox(height: 6),
-        SegmentedButton<QuestionOnWrong>(
-          segments: [
-            ButtonSegment(
-              value: QuestionOnWrong.retry,
-              icon: const Icon(Icons.replay, size: 16),
-              label: Text(l10n.d('Opnieuw proberen')),
-            ),
-            ButtonSegment(
-              value: QuestionOnWrong.lockAndContinue,
-              icon: const Icon(Icons.lock_open, size: 16),
-              label: Text(l10n.d('Doorgaan toestaan')),
-            ),
-          ],
-          selected: {_onWrong},
-          showSelectedIcon: false,
-          onSelectionChanged: (selection) {
-            setState(() => _onWrong = selection.first);
-            _emit();
-          },
-        ),
-        const SizedBox(height: 6),
-        Text(
-          _onWrong == QuestionOnWrong.retry
-              ? l10n.d('Fout = niet doorgaan; de vraag moet opnieuw.')
-              : l10n.d('Fout = wel doorgaan, maar niet opnieuw doen.'),
-          style: TextStyle(fontSize: 12, color: AppTheme.slate500),
-        ),
+        ..._displaySection(l10n, drawsFromPool: drawsFromPool),
         const SizedBox(height: 20),
         // Een beeldparen-vraag heeft haar afbeeldingen al; een derde,
         // decoratieve afbeelding erbij maakt alleen maar onduidelijk welke van
         // de drie het antwoord is.
         if (!isImagePair) ..._imageSection(),
+        const SizedBox(height: 20),
+        QuestionAdvancedFields(
+          points: _points,
+          scoring: _scoring,
+          penalty: _penalty,
+          maxAttempts: _maxAttempts,
+          feedback: _feedback,
+          hints: _hints,
+          remediation: _remediation,
+          objectiveRefs: _objectiveRefs,
+          metadata: _metadata,
+          initiallyExpanded: _showAdvanced,
+          onPointsChanged: (v) {
+            _rebuild(() => _points = v);
+            _emit();
+          },
+          onScoringChanged: (v) {
+            _rebuild(() => _scoring = v);
+            _emit();
+          },
+          onPenaltyChanged: (v) {
+            _rebuild(() => _penalty = v);
+            _emit();
+          },
+          onMaxAttemptsChanged: (v) {
+            _rebuild(() => _maxAttempts = v);
+            _emit();
+          },
+          onFeedbackChanged: (v) {
+            _rebuild(() => _feedback = v);
+            _emit();
+          },
+          onHintsChanged: (v) {
+            _rebuild(() => _hints = v);
+            _emit();
+          },
+          onRemediationChanged: (v) {
+            _rebuild(() => _remediation = v);
+            _emit();
+          },
+          onObjectiveRefsChanged: (v) {
+            _rebuild(() => _objectiveRefs = v);
+            _emit();
+          },
+          onMetadataChanged: (v) {
+            _rebuild(() => _metadata = v);
+            _emit();
+          },
+          onExpansionChanged: (v) => _rebuild(() => _showAdvanced = v),
+        ),
       ],
     );
   }
@@ -339,6 +412,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               questionAnswerCountLimit(QuestionKind.openText),
           child: Text(l10n.d('Getypt antwoord')),
         ),
+        ..._eLearningKindDropdownItems(l10n),
       ],
       onChanged: (value) {
         if (value == null) return;
@@ -349,6 +423,59 @@ class _QuestionEditorState extends State<QuestionEditor> {
         _emit();
       },
     );
+  }
+
+  /// De "Weergave"-sectie: tijdlimiet, foutafhandeling, optie-aantal.
+  /// Losgetrokken uit [build] om die methode onder de lengtegrens te houden.
+  List<Widget> _displaySection(
+    AppLocalizations l10n, {
+    required bool drawsFromPool,
+  }) {
+    return [
+      const SectionLabel('Weergave'),
+      if (drawsFromPool) ...[
+        _buildOptionCountRow(l10n),
+        const SizedBox(height: 12),
+      ],
+      EditorField(
+        label: l10n.d('Maximale antwoordtijd in seconden (0 = geen limiet)'),
+        controller: _timeLimit,
+        hint: '0',
+      ),
+      const SizedBox(height: 12),
+      Text(
+        l10n.d('Bij een fout antwoord'),
+        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+      ),
+      const SizedBox(height: 6),
+      SegmentedButton<QuestionOnWrong>(
+        segments: [
+          ButtonSegment(
+            value: QuestionOnWrong.retry,
+            icon: const Icon(Icons.replay, size: 16),
+            label: Text(l10n.d('Opnieuw proberen')),
+          ),
+          ButtonSegment(
+            value: QuestionOnWrong.lockAndContinue,
+            icon: const Icon(Icons.lock_open, size: 16),
+            label: Text(l10n.d('Doorgaan toestaan')),
+          ),
+        ],
+        selected: {_onWrong},
+        showSelectedIcon: false,
+        onSelectionChanged: (selection) {
+          setState(() => _onWrong = selection.first);
+          _emit();
+        },
+      ),
+      const SizedBox(height: 6),
+      Text(
+        _onWrong == QuestionOnWrong.retry
+            ? l10n.d('Fout = niet doorgaan; de vraag moet opnieuw.')
+            : l10n.d('Fout = wel doorgaan, maar niet opnieuw doen.'),
+        style: TextStyle(fontSize: 12, color: AppTheme.slate500),
+      ),
+    ];
   }
 
   Widget _invalidAnswerCountNotice(AppLocalizations l10n) => Center(

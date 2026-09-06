@@ -1648,6 +1648,65 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Starten': 'Incipere',
+  'Opleiding': 'Cursus',
+  'Les': 'Lectio',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Crea contentum eLearning: proposita discendi, modulos, responsa et summaria assessment. Importa SCORM, QTI, xAPI, AICC et OLX localiter. Praedefinite inactivum; extensionem activa ut genera paginarum adhibeas.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Titulus moduli vel capituli. Utere ut signum structurae inter proposita discendi et quaestiones.',
+  'Leerdoel': 'Discendi propositum',
+  'Module': 'Modulus',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Aestimationis summarius',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Propositum discendi vel peritia. Describe quid discentem facere posse oporteat; optionaliter cum modulis vel quaestionibus coniunge. Nulla affirmatio quemquam propositum perfecisse.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback vel remedium post quaestionem. Explica quae responsio recta fuerit et cur, aut ad materiam additionalem remitte.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Aestimationis summarius: numerus quaestionum, punctus maximus, limen transgressionis. Nulli resultatus discentis — solum definitio probationis.',
+  'Paren': 'Pares',
+  'Afleiders (optioneel)': 'Distractoribus (optionalibus)',
+  'Invulvelden': 'Campi complendi',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Spectator sinistrum cum dextro conectit. Par i habet sinistra[i] ut responsum rectum pro dextra[i]. Columna dextra durante praesentatione miscetur.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Spectator responsum in quoque campo typis. Quisque campus habet unam aut plures responsa acceptas et strategiam aestimationis.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Spectator unam aut plures regiones in imagine indicat. Coordinatae normalizatae sunt (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Item dextra extra sine socio correcto. Questionem difficiliorem reddunt.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Responsiones acceptae (virgulis separatae)',
+  'Afleider': 'Distractor',
+  'Afleider toevoegen': 'Distractorem adde',
+  'Afleider verwijderen': 'Distractorem remove',
+  'Bevat het antwoord': 'Responsionem continet',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Coordinatae (x, y, w, h — normalizatae 0–1)',
+  'Evaluatiestrategie': 'Strategia aestimationis',
+  'Exacte overeenkomst': 'Convenientia exacta',
+  'Gebied': 'Regio',
+  'Gebied toevoegen': 'Regionem adde',
+  'Gebied verwijderen': 'Regionem remove',
+  'Getal in bereik': 'Numerus in intervallo',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Imaginem elige et saltem unam regionem correctam marca.',
+  'Label (optioneel)': 'Titulus (optionalis)',
+  'Maak minstens twee gevulde paren.': 'Saltem duo paria completa crea.',
+  'Meerdere gebieden selecteerbaar': 'Plures regiones seligi possunt',
+  'Paar toevoegen': 'Pariem adde',
+  'Paar verwijderen': 'Pariem remove',
+  'Tikfout toegestaan': 'Error typographicus permissus',
+  'Veld': 'Campus',
+  'Veld toevoegen': 'Campum adde',
+  'Veld verwijderen': 'Campum remove',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Saltem unum campum cum responsione accepta adde.',
+  'Koppelen (matching)': 'Coniunctio (matching)',
+  'Invulvraag': 'Quaestio complenda',
+  'Hotspot (klik op afbeelding)': 'Hotspot (in imaginem clicke)',
   'Presentaties op deze server': 'Presentationes in hoc servitore',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sequere praesentationem: haec lamina facit quod tota praesentatio facit. Solum nuntiare: inventum numeratur, sed accipiens nihil videt — data simpliciter ibi sunt. Acceptare: data hic pertinent et monitio disparet. Acceptare + monere: accipiens videt insigne quod data personalia in lamina sunt. Omitti: data inventa illegibilia fiunt in schermo et in exportatione — tuus markdown fasciculum textum originalem servat.',
@@ -4680,4 +4739,38 @@ const _dutchSourceAddLa = <String, String>{
   'bv. "de controller board met display"':
       'ex. gr. "tabula moderatrix cum monitorio"',
   'Afbeeldingsverwijzingen': 'Imaginum referentiae',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Punctatio, responsio et metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puncta, ratio punctandi, responsio, indicia, conatus et nexus propositorum discendi.',
+  'Scoringstrategie': 'Ratio punctandi',
+  'Alles of niets': 'Omnia aut nihil',
+  'Deels': 'Partim',
+  'Per paar': 'Per par',
+  'Per item': 'Per singulum',
+  'Puntenaftrek per fout': 'Deductio punctorum pro responso falso',
+  'Maximum pogingen (0 = onbeperkt)': 'Conatus maximi (0 = infinitus)',
+  'Feedback per uitkomst': 'Responsio per exitum',
+  'Bij goed antwoord': 'Ad responsum rectum',
+  'Bij fout antwoord': 'Ad responsum falsum',
+  'Bij deels goed': 'Ad partim rectum',
+  'Bij timeout': 'Ad tempus excessum',
+  'Hints (één per regel, progressief)':
+      'Indicia (unum per lineam, progressiva)',
+  'Eerste hint\nTweede hint': 'Primum indicium\\nSecundum indicium',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — ancora paginae ad paginem responsionis',
+  'bijv. slide:3': 'ex. gr. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Nexus propositorum discendi (ancorae paginae, una per lineam)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Disciplina/argumentum',
+  'Moeilijkheid': 'Difficultas',
+  '— geen —': '— nullus —',
+  'Makkelijk': 'Facile',
+  'Gemiddeld': 'Medium',
+  'Moeilijk': 'Difficile',
+  'Geschatte duur in seconden': 'Durata aestimata in secundis',
+  'Tags (komma-gescheiden)': 'Notae (separatae virgula)',
 };

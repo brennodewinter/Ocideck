@@ -115,6 +115,12 @@ String _slideBody(Slide slide) {
     case SlideType.flow:
     case SlideType.phaseGate:
       return _treeFlowSlide(slide);
+    // eLearning: de tekstgebaseerde types renderen als freeMarkdown.
+    case SlideType.objective:
+    case SlideType.module:
+    case SlideType.feedback:
+    case SlideType.assessmentSummary:
+      return _freeMarkdownSlide(slide);
   }
 }
 

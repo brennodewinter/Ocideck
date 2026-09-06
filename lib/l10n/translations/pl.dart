@@ -1645,6 +1645,66 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Starten': 'Rozpocznij',
+  'Opleiding': 'Kurs',
+  'Les': 'Lekcja',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Twórz treści eLearning: cele kształcenia, moduły, opinie i podsumowania ocen. Importuj SCORM, QTI, xAPI, AICC i OLX lokalnie. Domyślnie wyłączone; włącz rozszerzenie, aby używać typów slajdów.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Tytuł modułu lub rozdziału. Użyj jako znacznika strukturalnego między celami kształcenia a pytaniami.',
+  'Leerdoel': 'Cel kształcenia',
+  'Module': 'Moduł',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Podsumowanie oceny',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Cel kształcenia lub kompetencja. Opisz, co uczący się powinien umieć; opcjonalnie połącz z modułami lub pytaniami. Bez twierdzenia, że ktoś opanował cel.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Informacja zwrotna lub remediacja po pytaniu. Wyjaśnij, która odpowiedź była poprawna i dlaczego, lub odsyłaj do dodatkowego materiału.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Podsumowanie oceny: liczba pytań, maksymalny wynik, próg zaliczenia. Bez wyników ucznia — tylko definicja testu.',
+  'Paren': 'Pary',
+  'Afleiders (optioneel)': 'Dystraktory (opcjonalne)',
+  'Invulvelden': 'Pola do wypełnienia',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Widz łączy lewo z prawo. Para i ma lewo[i] jako poprawną odpowiedź dla prawo[i]. Prawa kolumna jest tasowana podczas prezentacji.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Widz wpisuje odpowiedź w każdym polu. Każde pole ma jedną lub więcej akceptowanych odpowiedzi i strategię oceny.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Widz wskazuje jeden lub więcej obszarów na obrazie. Współrzędne są znormalizowane (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Dodatkowe prawe elementy bez poprawnego partnera. Czynią pytanie trudniejszym.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Akceptowane odpowiedzi (oddzielone przecinkami)',
+  'Afleider': 'Dystraktor',
+  'Afleider toevoegen': 'Dodaj dystraktor',
+  'Afleider verwijderen': 'Usuń dystraktor',
+  'Bevat het antwoord': 'Zawiera odpowiedź',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Współrzędne (x, y, w, h — znormalizowane 0–1)',
+  'Evaluatiestrategie': 'Strategia oceny',
+  'Exacte overeenkomst': 'Dokładne dopasowanie',
+  'Gebied': 'Obszar',
+  'Gebied toevoegen': 'Dodaj obszar',
+  'Gebied verwijderen': 'Usuń obszar',
+  'Getal in bereik': 'Liczba w zakresie',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Wybierz obraz i oznacz co najmniej jeden poprawny obszar.',
+  'Label (optioneel)': 'Etykieta (opcjonalne)',
+  'Maak minstens twee gevulde paren.':
+      'Utwórz co najmniej dwie wypełnione pary.',
+  'Meerdere gebieden selecteerbaar': 'Wiele obszarów do wyboru',
+  'Paar toevoegen': 'Dodaj parę',
+  'Paar verwijderen': 'Usuń parę',
+  'Tikfout toegestaan': 'Literówka dozwolona',
+  'Veld': 'Pole',
+  'Veld toevoegen': 'Dodaj pole',
+  'Veld verwijderen': 'Usuń pole',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Dodaj co najmniej jedno pole z akceptowaną odpowiedzią.',
+  'Koppelen (matching)': 'Dopasowywanie (matching)',
+  'Invulvraag': 'Pytanie z luką',
+  'Hotspot (klik op afbeelding)': 'Hotspot (kliknij na obraz)',
   'Presentaties op deze server': 'Prezentacje na tym serwerze',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Podążaj za prezentacją: ten slajd robi to, co cała prezentacja. Tylko zgłoś: ustalenie jest liczone, ale odbiorca nic nie widzi — dane po prostu tam są. Zaakceptuj: dane należą tutaj i ostrzeżenie znika. Zaakceptuj + ostrzeż: odbiorca widzi odznakę, że na slajdzie są dane osobowe. Pomiń: znalezione dane stają się nieczytelne na ekranie i w eksporcie — twój plik markdown zachowuje oryginalny tekst.',
@@ -4688,4 +4748,38 @@ const _dutchSourceAddPl = <String, String>{
   'Gebieden': 'Obszary',
   'bv. "de controller board met display"': 'np. "płytka sterująca z ekranem"',
   'Afbeeldingsverwijzingen': 'Odwołania do obrazów',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Punktacja, informacja zwrotna i metadane',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punkty, strategia punktacji, informacja zwrotna, podpowiedzi, próby i linki do celów edukacyjnych.',
+  'Scoringstrategie': 'Strategia punktacji',
+  'Alles of niets': 'Wszystko albo nic',
+  'Deels': 'Częściowo',
+  'Per paar': 'Za parę',
+  'Per item': 'Za element',
+  'Puntenaftrek per fout': 'Odjęcie punktów za błędną odpowiedź',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksymalne próby (0 = nielimitowane)',
+  'Feedback per uitkomst': 'Informacja zwrotna na wynik',
+  'Bij goed antwoord': 'Przy poprawnej odpowiedzi',
+  'Bij fout antwoord': 'Przy błędnej odpowiedzi',
+  'Bij deels goed': 'Przy częściowo poprawnej',
+  'Bij timeout': 'Prze limit czasu',
+  'Hints (één per regel, progressief)':
+      'Podpowiedzi (jedna na wiersz, progresywne)',
+  'Eerste hint\nTweede hint': 'Pierwsza podpowiedź\\nDruga podpowiedź',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — kotwica slajdu do slajdu z informacją zwrotną',
+  'bijv. slide:3': 'np. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Odnośniki celów edukacyjnych (kotwice slajdów, jedna na wiersz)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadane',
+  'Vak/onderwerp': 'Przedmiot/temat',
+  'Moeilijkheid': 'Trudność',
+  '— geen —': '— brak —',
+  'Makkelijk': 'Łatwy',
+  'Gemiddeld': 'Średni',
+  'Moeilijk': 'Trudny',
+  'Geschatte duur in seconden': 'Szacowany czas w sekundach',
+  'Tags (komma-gescheiden)': 'Tagi (oddzielone przecinkiem)',
 };

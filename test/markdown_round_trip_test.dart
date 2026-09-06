@@ -2196,6 +2196,57 @@ void main() {
     });
   });
 
+  group('een oude kennischeck-dia migreert naar een gewone vraag', () {
+    // Het 'kennischeck'-type is opgeheven (#1998): het droeg zijn vraag al in
+    // hetzelfde ```question```-blok, alleen onder een eigen token. Een bestaand
+    // bestand hoeft dus niet geconverteerd te worden — maar het moet wél de
+    // vraag van de auteur teruggeven, en niet de fabrieksvraag. Dat laatste was
+    // precies de bug: de fenced-dispatch kende alleen `question`, dus een
+    // kennischeck kwam leeg terug en de volgende opslag schreef er
+    // "Wat is de juiste keuze?" overheen.
+    test('het kennischeck-token leest als vraag, mét de eigen vraag erin', () {
+      final service = MarkdownService();
+      const spec = QuestionSpec(
+        kind: QuestionKind.trueFalse,
+        prompt: 'De aarde is rond',
+        answers: [
+          QuestionAnswer(text: 'Waar', correct: true),
+          QuestionAnswer(text: 'Niet waar', correct: false),
+        ],
+      );
+      // Genereer een echte vraag-dia en verwissel alleen het token, zodat de
+      // test niet op een met de hand nagebouwd bestandsformaat leunt.
+      final markdown = service
+          .generateDeck(
+            Deck(
+              title: 'Demo',
+              slides: [
+                Slide.create(SlideType.question).copyWith(
+                  title: 'Tussentoets',
+                  customMarkdown: spec.toBlock(),
+                ),
+              ],
+            ),
+          )
+          .replaceFirst(
+            '<!-- _class: question -->',
+            '<!-- _class: kennischeck -->',
+          );
+
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.type, SlideType.question);
+      expect(out.title, 'Tussentoets');
+      final back = QuestionSpec.parse(out.customMarkdown);
+      expect(
+        back.prompt,
+        'De aarde is rond',
+        reason: 'de vraag van de auteur moet terugkomen, niet de fabrieksvraag',
+      );
+      expect(back.answers.map((a) => a.text), ['Waar', 'Niet waar']);
+      expect(back.answers.map((a) => a.correct), [true, false]);
+    });
+  });
+
   group('assets slide round-trip', () {
     Slide assets(List<AssetGroup> groups) {
       const title = 'Ons aanvalsoppervlak';
@@ -2444,7 +2495,8 @@ void main() {
     // ook. Elke tak is één regel in [_metInhoud], niet een nieuwe test.
     for (final type in SlideType.values) {
       test(type.name, () {
-        final out = _roundTrip(slideMetInhoud(type));
+        final input = slideMetInhoud(type);
+        final out = _roundTrip(input);
         expect(
           out.type,
           type,
@@ -2452,6 +2504,23 @@ void main() {
               'een ${type.name}-dia kwam terug als ${out.type.name}; '
               'kent de lezer het `_class`-token "${type.marpClass}"?',
         );
+        // Het type alleen is niet genoeg. De eLearning-types kwamen als
+        // zichzelf terug én waren leeg: de schrijver zette een body neer, de
+        // lezer kende het type niet en gaf '' terug, en de eerstvolgende opslag
+        // wiste de tekst van de auteur (#1999). Dat bleef groen zolang deze
+        // test alleen `out.type` bekeek. Draagt de fixture een body, dan moet
+        // die de rondgang overleven — de exacte vorm mag verschillen (een
+        // vraag-blok wordt opnieuw geserialiseerd), leeg worden mag niet.
+        if (input.customMarkdown.trim().isNotEmpty) {
+          expect(
+            out.customMarkdown.trim(),
+            isNotEmpty,
+            reason:
+                'een ${type.name}-dia ging met een body de rondgang in en kwam '
+                'er leeg uit; schrijft de serialisatie een body die het inlezen '
+                'niet terugleest? Zie SlideType.usesFreeMarkdownBody.',
+          );
+        }
       });
     }
   });

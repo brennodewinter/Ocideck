@@ -1663,6 +1663,66 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Starten': 'Tosaigh',
+  'Opleiding': 'Cúrsa',
+  'Les': 'Ceacht',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Cruthaigh ábhar eLearning: cuspóirí foghlama, modúil, aiseolas agus achoimrí meastóireachta. Iompórtáil SCORM, QTI, xAPI, AICC agus OLX go háitiúil. Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na cineálacha sleamhnán a úsáid.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Teideal modúil nó caibidil. Úsáid mar mharcóir struchtúrach idir cuspóirí foghlama agus ceisteanna.',
+  'Leerdoel': 'Cuspóir foghlama',
+  'Module': 'Modúl',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Achoimre mheastóireachta',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Cuspóir foghlama nó inniúlacht. Déan cur síos ar a bhfuil an foghlaimeoir in ann a dhéanamh; nasc go roghnach le modúil nó ceisteanna. Níl aon twiste go bhfuil an cuspóir bainte amach ag duine ar bith.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Aiseolas nó remediation i ndiaidh ceiste. Mínigh cén freagra a bhí ceart agus cén fáth, nó tagairt do ábhar breise.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Achoimre mheastóireachta: líon na gceisteanna, scór uasta, tairseach pasála. Níl aon torthaí foghlaimeora — ach amháin sainmhíniú an tástáil.',
+  'Paren': 'Péirí',
+  'Afleiders (optioneel)': 'Distractorí (roghnach)',
+  'Invulvelden': 'Réimsí líonta',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Ceanglaíonn an féachadóir clé le deas. Tá clé[i] mar an freagra ceart ag péire i do dheas[i]. Cuirtear an colún deas ina mheascadh le linn na láithreoideachta.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Clóscríobhann an féachadóir an freagra i ngach réimse. Tá freagra amháin nó níos mó glactha ag gach réimse agus straitéis luachála.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Déanann an féachadóir tagairt do réigiún amháin nó níos mó ar an íomhá. Tá na comhordanáidí normalaithe (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Míreanna deise breise gan páirtí ceart. Déanann siad an cheist níos deacra.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Freagraí glactha (scartha le camóg)',
+  'Afleider': 'Dístraktóir',
+  'Afleider toevoegen': 'Cuir dístraktóir leis',
+  'Afleider verwijderen': 'Bain dístraktóir',
+  'Bevat het antwoord': 'Tá an freagra ann',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Comhordanáidí (x, y, w, h — normalaithe 0–1)',
+  'Evaluatiestrategie': 'Straiséas meastóireachta',
+  'Exacte overeenkomst': 'Meaitseáil beacht',
+  'Gebied': 'Réigiún',
+  'Gebied toevoegen': 'Cuir réigiún leis',
+  'Gebied verwijderen': 'Bain réigiún',
+  'Getal in bereik': 'Uimhir sa réimse',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Roghnaigh íomhá agus marcáil ar a laghad réigiún amháin ceart.',
+  'Label (optioneel)': 'Lipéad (roghnach)',
+  'Maak minstens twee gevulde paren.':
+      'Cruthaigh ar a laghad dá bheirt líonta.',
+  'Meerdere gebieden selecteerbaar': 'Is féidir réigiúin iomadúla a roghnú',
+  'Paar toevoegen': 'Cuir beirt leis',
+  'Paar verwijderen': 'Bain beirt',
+  'Tikfout toegestaan': 'Earráid cló ceadaithe',
+  'Veld': 'Réimse',
+  'Veld toevoegen': 'Cuir réimse leis',
+  'Veld verwijderen': 'Bain réimse',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Cuir ar a laghad réimse amháin leis le freagra glactha.',
+  'Koppelen (matching)': 'Meaitseáil (matching)',
+  'Invulvraag': 'Ceist líonta',
+  'Hotspot (klik op afbeelding)': 'Hotspot (cliceáil ar íomhá)',
   'Presentaties op deze server': 'Léirithe ar an bhfreastalaí seo',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Lean an cur i láthair: déanann an sleamhnán seo an rud a dhéanann an cur i láthair in iomlán. Tuairiscigh amháin: déantar an fhionnachtain a chomhaireamh, ach níl aon rud le feiceáil ag an bhfaighteoir — tá na sonraí ann simplí. Glac leis: leis na sonraí anseo agus imíonn an rabhadh. Glac leis + rabhadh: feiceann an faighteoir badge go bhfuil sonraí pearsanta ar an sleamhnán. Fág as: déantar na sonraí a aimsíodh do-léite ar an scáileán agus san onnmhairiú — coimeádann do chomhad markdown an téacs bunaidh.',
@@ -4732,4 +4792,38 @@ const _dutchSourceAddGa = <String, String>{
   'bv. "de controller board met display"':
       'm.sh. "an bord rialaithe le scáileán"',
   'Afbeeldingsverwijzingen': 'Tagairtí íomhá',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Scóráil, aiseolas agus meiteashonraí',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Pointí, straitéis scórála, aiseolas, leideanna, iarrachtaí agus nascanna spriocanna foghlama.',
+  'Scoringstrategie': 'Straitéis scórála',
+  'Alles of niets': 'Uile nó faic',
+  'Deels': 'Páirteach',
+  'Per paar': 'In aghaidh an phéire',
+  'Per item': 'In aghaidh an míre',
+  'Puntenaftrek per fout': 'Pointí bainne in aghaidh freagra mícheart',
+  'Maximum pogingen (0 = onbeperkt)': 'Iarrachtaí uasta (0 = gan teorainn)',
+  'Feedback per uitkomst': 'Aiseolas in aghaidh an toraidh',
+  'Bij goed antwoord': 'Ar freagra ceart',
+  'Bij fout antwoord': 'Ar freagra mícheart',
+  'Bij deels goed': 'Ar freagra páirteach ceart',
+  'Bij timeout': 'Ar am istigh',
+  'Hints (één per regel, progressief)':
+      'Leideanna (ceann in aghaidh an líne, forásach)',
+  'Eerste hint\nTweede hint': 'Chéad leid\\nDara leid',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — ancair sleamhna go sleamhnán aiseolais',
+  'bijv. slide:3': 'm.sh. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Tagairtí spriocanna foghlama (ancairí sleamhna, ceann in aghaidh an líne)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Meiteashonraí',
+  'Vak/onderwerp': 'Ábhar/Topaic',
+  'Moeilijkheid': 'Deacracht',
+  '— geen —': '— dada —',
+  'Makkelijk': 'Éasca',
+  'Gemiddeld': 'Meánach',
+  'Moeilijk': 'Deacair',
+  'Geschatte duur in seconden': 'Fad measta i soicindí',
+  'Tags (komma-gescheiden)': 'Clibeanna (deighilte le camóg)',
 };

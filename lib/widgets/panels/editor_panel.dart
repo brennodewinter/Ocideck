@@ -21,6 +21,7 @@ import '../../models/chart.dart';
 import '../../services/display_window_service.dart';
 import '../../state/info_safety_provider.dart';
 import '../../state/managementsysteem_provider.dart';
+import '../../state/elearning_provider.dart';
 import '../../state/procesverbetering_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
@@ -71,6 +72,7 @@ class EditorPanel extends ConsumerWidget {
     final revealed = ref.watch(infoSafetyRevealProvider);
     final revealProcesverbetering = ref.watch(procesverbeteringRevealProvider);
     final revealManagementsysteem = ref.watch(managementsysteemRevealProvider);
+    final revealElearning = ref.watch(elearningRevealProvider);
 
     // Zoekpaden voor de afbeeldingencarousel: projectmap eerst, dan alle
     // bibliotheken als (recursief gescande) zoekwortels.
@@ -101,6 +103,7 @@ class EditorPanel extends ConsumerWidget {
             revealInfoSafety: revealed,
             revealProcesverbetering: revealProcesverbetering,
             revealManagementsysteem: revealManagementsysteem,
+            revealElearning: revealElearning,
             onTypeChanged: (newType) {
               if (newType == slide.type) return;
               update(_convertSlideType(slide, newType));
@@ -438,4 +441,9 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.controlStatus: Icons.fact_check_outlined,
   SlideType.gantt: Icons.view_timeline_outlined,
   SlideType.menu: Icons.list_alt_outlined,
+  // eLearning-module (#1999).
+  SlideType.objective: Icons.flag_outlined,
+  SlideType.module: Icons.book_outlined,
+  SlideType.feedback: Icons.feedback_outlined,
+  SlideType.assessmentSummary: Icons.assignment_outlined,
 };

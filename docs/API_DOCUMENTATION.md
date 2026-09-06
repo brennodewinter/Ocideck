@@ -62,20 +62,33 @@ Two of those fields exist **only while rendering** and never reach a saved file:
 rich-text body a copy draws. Neither is read back by the parser and neither is
 carried over by `Slide.duplicate`; see ARCHITECTURE § *Render-time pagination*.
 
-`SlideType` (32 values): `title, section, bullets, twoBullets, bulletsImage,
+`SlideType` (36 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
 question, timeline, scorecard, menu, assets, discoveries, finding, findingsSummary,
 checklist, scopeMatrix, signOff, matrix, canvas, tree, flow, phaseGate, gantt,
-controlStatus`. *(Was 29 until 2026-08-02, when `controlStatus` was added for the
-Managementsysteem module; `gantt` for the Procesverbetering module.)*
+controlStatus, objective, module, feedback, assessmentSummary`. *(Was 29 until 2026-08-02, when `controlStatus` was added for the
+Managementsysteem module; `gantt` for the Procesverbetering module. Was 32 until 2026-09-06, when `objective`, `module`, `feedback` and `assessmentSummary` were added for the eLearning module. A fifth eLearning type, `kennischeck`, was added and withdrawn again the same day: a knowledge check is a `question` slide and nothing else, so it fell outside every `case SlideType.question` in the codebase. Its `_class` token stays readable and now parses as `question` — see `_retiredSlideTypeClasses` and [FILE_FORMAT.md](FILE_FORMAT.md) § 4.)*
 The informatieveiligheid (pentest-reporting) layouts run from `assets` through
 `signOff`, hidden until that module is enabled. `matrix`, `canvas`, `tree`,
 `flow` and `phaseGate`
 belong to the optional Procesverbetering module (same authoring gate).
 `controlStatus` carries a per-control ISO implementation status
-(`SlideCategory.managementsysteem`); unlike the other two modules it is **not**
-behind an authoring toggle — it is always offered in a dedicated
-*Managementsysteem* tab of the add-slide picker. Note the
+(`SlideCategory.managementsysteem`) and follows the same authoring gate as the
+other modules: `_availableTypes` in `add_slide_dialog.dart` filters it out while
+`revealManagementsysteem` is false, and `managementsysteemEnabledProvider`
+defaults to off. Its own tab in the add-slide picker appears once it is revealed.
+*(Corrected 2026-09-06: this said the type was **not** behind an authoring toggle
+and always offered.)* `objective`, `module`,
+`feedback` and `assessmentSummary` belong to the optional eLearning module
+(`SlideCategory.eLearning`, added 2026-09-06) and follow the usual authoring
+gate. All four reuse the free-Markdown editor and preview, and their body
+round-trips through `Slide.customMarkdown` the way `freeMarkdown`'s does:
+serialisation and parsing both ask `SlideType.usesFreeMarkdownBody`, one
+predicate over the category rather than two lists of names that can drift apart.
+*(Corrected 2026-09-06: this said the parser keeps no body for them, which was
+true of the code as first written — `usesScaffoldMarkdownBody` covers only the
+information-security category — and cost the author's text on reopening. See
+[FILE_FORMAT.md](FILE_FORMAT.md) § 4.)* Note the
 Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
 `split` class maps to `SlideType.bulletsImage`, and `controlStatus` serialises as
 `control-status`).
@@ -84,19 +97,59 @@ Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
 `lib/models/question.dart` — the payload of a `question` slide, carried as JSON in
 `Slide.customMarkdown` (see [FILE_FORMAT.md](FILE_FORMAT.md) for the block).
 
-`QuestionKind` (6 values): `multipleChoice, trueFalse, multipleCorrect, ordering,
-imagePair, openText`. `QuestionOnWrong` (2 values): `retry, lockAndContinue`.
-`QuestionResult` (3 values): `none, correct, wrong`.
+`QuestionKind` (9 values): `multipleChoice, trueFalse, multipleCorrect, ordering,
+imagePair, openText, matching, hotspot, fillIn`. `QuestionOnWrong` (2 values):
+`retry, lockAndContinue`. `QuestionResult` (3 values): `none, correct, wrong`.
+*(The last three kinds were added 2026-09-06 for the eLearning module. They are
+authored and serialised; nothing renders an answer surface for them yet, so
+`QuestionRoundBuilder` draws their round with `answerable: false` — a `matching`
+round carries the left column as a read-only option list, `fillIn` and `hotspot`
+carry the prompt alone. Corrected 2026-09-06: the three were drawn `answerable:
+true`, which made `_questionBlocksAdvance` refuse to page past a question that
+could not be answered at all.)*
+
+The eLearning half of the model lives in the `question_elearning.dart` part:
+`MatchPair`, `HotspotRegion` (normalised `[x, y, w, h]` coordinates) and
+`FillField` with its `FillMatchMode` (4 values): `exact, contains, similar,
+numericRange` — the last of which may carry a `tolerance` and a `unit`, stored
+and returned without anything computing over them. Then the shared
+`QuestionScoring` (4 values): `allOrNothing, partialPerCorrect, partialPerPair,
+partialPerAnswer`, plus `QuestionFeedback` and `QuestionMetadata`. The scoring,
+penalty, attempt, feedback, hint, remediation and objective-reference fields on
+`QuestionSpec` are **stored and read back only** — no runtime code consumes them.
+*(Counts added 2026-09-06; they were left out at first because nothing checked
+them, and `test/docs_enum_counts_test.dart` now does.)*
+
+`lib/models/elearning_assessment.dart` holds the sidecar model:
+`ElearningAssessment`, `AssessmentSection`, `ElearningAccessibility` and
+`ElearningSidecar`, with `AssessmentNavigation` (2 values): `linear, free`;
+`AssessmentCompletion` (3 values): `allAnswered, allCorrect, manual`; and
+`AssessmentSelection` (2 values): `fixed, random`. It encodes and parses
+`<name>.elearning.json` and keeps the version contract the other sidecars keep:
+`parse` reads the declared version through `sidecar_format.dart` and returns
+`null` for a file from a newer build instead of reading half of it, and top-level
+keys this build does not know are held in `ElearningSidecar.unknown` and written
+back out. *(Corrected 2026-09-06: the `version` key was written and then
+ignored.)* No save or load path touches the file yet — the model is there, the
+file is not.
 
 Two classes, deliberately separate:
 
 - **`QuestionSpec`** — what the author wrote: `kind`, `prompt`,
   `List<QuestionAnswer> answers` (each `text`, `correct`, and for `imagePair` an
   `image` path), `optionCount`, `timeLimitSeconds`, `onWrong`, `statementIsTrue`
-  and `similarityThreshold`. It round-trips through `toBlock()` / `parse()`;
-  `isPresentable` says whether it can be shown at all, and the rule differs per
-  kind (`trueFalse` always can, `ordering` needs two answers, `openText` needs
-  only a correct one, the rest need a correct *and* a wrong one).
+  and `similarityThreshold`, plus the eLearning fields: `pairs`/`distractors`
+  (matching), `hotspotImage`/`regions`/`multiSelect` (hotspot), `fields`
+  (fill-in), and the shared `points`, `scoring`, `penalty`, `maxAttempts`,
+  `feedback`, `hints`, `remediation`, `objectiveRefs` and `metadata`. It
+  round-trips through `toBlock()` / `parse()` — but only for the keys it knows: a
+  valid block is re-serialised from the model on every save, so unknown keys do
+  not survive (the raw source is preserved only for a block over its answer
+  limit). `isPresentable` says whether it can be shown at all, and the rule
+  differs per kind (`trueFalse` always can, `ordering` needs two answers,
+  `openText` needs only a correct one, `matching` two filled pairs, `hotspot` an
+  image plus a correct region with coordinates, `fillIn` one field with an
+  accepted answer, the rest a correct *and* a wrong one).
 - **`QuestionView`** — the drawn round, **session-only**: the options actually
   shown, `optionImages`, the pick, `openText`/`typedAnswer`, `result`, `revealed`,
   `locked`, `matchScore` and the countdown. It crosses the window channel to the

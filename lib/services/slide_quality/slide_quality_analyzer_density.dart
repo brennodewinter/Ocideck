@@ -124,6 +124,12 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       // dichtheids-/fit-scale-heuristieken van bullets slaan er niet op.
       case SlideType.menu:
       case SlideType.gantt:
+      // eLearning-types zijn tekstgebaseerd; de dichtheidsheuristieken van
+      // bullets/code/tekst slaan er niet op.
+      case SlideType.objective:
+      case SlideType.module:
+      case SlideType.feedback:
+      case SlideType.assessmentSummary:
         break;
     }
   }

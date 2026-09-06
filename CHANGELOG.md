@@ -2404,6 +2404,264 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De eLearning-sidecar komt het versiecontract na dat hij beloofde (#2006).** De
+  doc-comment op `ElearningSidecar.parse` zei: null bij onleesbare JSON óf bij een
+  versie uit een nieuwere build. Het eerste klopte, het tweede was niet gebouwd —
+  `version` werd ingelezen en verder genegeerd. Een bestand uit een latere OciDeck
+  werd dus half gelezen, en zou bij de eerstvolgende opslag teruggeschreven zijn
+  als wat deze build ervan begreep; dat is niet meer terug te halen. De mechaniek
+  bestond al en de andere sidecars leunen erop: `sidecar_format.dart` bestaat
+  precies omdat elke codec wel een `version` schreef maar er iets anders mee deed.
+  Deze doet nu hetzelfde als user-notes en de seal.
+
+  Daarbij bewaart de sidecar voortaan sleutels die deze build niet kent. Het
+  ontwerp rekent `structure`, `source` en `scoring` tot versie 1 en die leest hij
+  nog niet: gelijke versie, dus de versiepoort grijpt niet in, en tóch zou een
+  schrijver ze weggooien. Er ís nog geen schrijver van `<naam>.elearning.json` —
+  dit staat er zodat er ook nooit een komt die wist.
+
+- **Een invulveld verandert niet meer van betekenis bij opslaan (#2002).** Twee
+  stille herschrijvingen van andermans antwoordsleutel. De eerste: het ontwerp
+  geeft `numericRange` een optionele `tolerance` en `unit`, maar `FillField` kende
+  die velden niet, dus kwam een blok dat het ontwerp letterlijk volgde na één
+  lees-schrijfronde zonder terug. Ze dragen nu mee zonder dat er al iets mee
+  rekent — de evaluatie van een invulvraag bestaat nog niet, en dát is juist de
+  reden: een veld dat nog niemand gebruikt, mag OciDeck niet uit het bestand van de
+  auteur poetsen. De tweede: een ontbrekende `normalize` werd een lege lijst,
+  terwijl de gedocumenteerde standaard `["trim","collapseWhitespace"]` is. "Geen
+  sleutel" en "expliciet niets normaliseren" zijn niet hetzelfde; ze worden nu
+  onderscheiden, met de standaard als gedeelde constante zodat de constructor en de
+  lezer niet uiteen kunnen lopen.
+
+- **De afbeelding van een hotspot-vraag telt weer mee als asset van de dia
+  (#2001).** Het assetregister liep voor een vraag-dia alleen de
+  antwoord-afbeeldingen af, en de afbeelding waarop een hotspot zijn gebieden
+  aanwijst staat daar niet: die hangt als `image` aan het blok zelf. Daarmee viel
+  ze buiten alles wat aan dat register hangt, met precies de gevolgen die er sinds
+  #853 boven staan opgesomd: de asset-opruiming zag het bestand als wees en gooide
+  het weg, de `mem:`-opruiming op web gooide de bytes weg, en de privacyscan keek
+  nooit naar de afbeelding — een gezicht erop werd dus niet geredigeerd. Ook een
+  verhuizing sloeg haar over, zodat de afbeelding achterbleef. Beide kanten zijn nu
+  gedekt, en het herschrijven werkt ook voor een blok zónder antwoorden.
+
+- **Koppelen, invullen en hotspot zetten de presentatie niet meer vast
+  (#2000–#2002).** De rondebouwer gaf deze drie soorten een ronde die als
+  beantwoordbaar was aangemerkt, terwijl de presentator er geen antwoordkant voor
+  heeft. Een vraag die beantwoordbaar én onbeantwoord is houdt het doorbladeren
+  tegen, dus liep de presentatie op zo'n dia vast en hielp alleen nog afsluiten.
+  Per soort: hotspot leverde juiste antwoorden zonder ooit aanklikbare tegels;
+  koppelen zette de linkerkolom als opties neer maar rekende de juiste posities uit
+  in de geschudde réchterkolom — twee lijsten, één indexruimte, dus elk oordeel
+  daarover was toeval; en invullen zette het getypte-antwoordveld aan terwijl het
+  tegen een lege antwoordsleutel toetste, waardoor het invoerveld elke poging
+  slikte zonder één reactie. Alle drie staan nu op onbeantwoordbaar: de vraag is te
+  schrijven, op te slaan en te tonen, maar blokkeert niets. De verzonnen koppeling
+  van *koppelen* is weg in plaats van meegedragen — een verkeerde antwoordsleutel
+  bewaren is erger dan er geen hebben.
+
+- **De tekstgebaseerde eLearning-types verliezen hun inhoud niet meer (#1999).**
+  Een leerdoel-, module-, feedback- of assessment-samenvattingsdia werd wél als
+  vrije Markdown weggeschreven, maar bij het inlezen kende het parsen deze types
+  niet: die tak dekte vrije Markdown, `canvas` en de
+  informatieveiligheids-stellagetypes. De body kwam dus terug als lege string. Dat
+  was geen leesfout die je ziet — de dia opende gewoon, alleen leeg, en omdat hun
+  editor op datzelfde veld leest was de tekst ook uit de editor verdwenen. De
+  eerstvolgende opslag schreef die leegte naar het bestand: typen, opslaan,
+  sluiten, openen, opslaan, en alles was weg zonder melding.
+
+  De reparatie is niet vier regels erbij maar één gedeelde bron
+  (`SlideType.usesFreeMarkdownBody`), waar de schrijver en de lezer nu allebei naar
+  wijzen, zodat ze niet opnieuw kunnen verschillen. Het predicaat gaat op de
+  categorie in plaats van op een lijst namen, zodat een volgend tekstgedragen
+  eLearning-type meteen goed staat. De uitputtende rondgangtoets keek alleen naar
+  het type en bleef daarom groen terwijl vier types leeg terugkwamen; hij meet nu
+  ook de inhoud.
+
+- **Het diatype kennischeck is geschrapt — een vraag is een vraag (#2011).** De
+  kennischeck was een eigen slidetype voor iets dat al een vraag-dia wás:
+  hetzelfde vraagblok, dezelfde editor, dezelfde weergave, alleen een ander
+  `_class`-token. Daarmee viel het buiten élke plek die op het vraag-type stuurt,
+  en dat zijn er ruim dertig. Wat dat kostte, gemeten: de vraag van de auteur
+  verdween, omdat het inlezen van het omheinde blok alleen het vraag-type kent —
+  het bestand was correct, het heropenen gaf een lege dia, en de eerstvolgende
+  opslag schreef de fabrieksvraag terug, waarna het bestand er volkomen plausibel
+  uitzag. En het juiste antwoord kwam op de beamer: de presentator trekt geen ronde
+  voor een type dat hij niet kent, dus viel de kaart terug op de auteursweergave,
+  en die zet een vinkje bij het goede antwoord.
+
+  Het ontwerp schreef ook nooit een eigen token voor: de eLearning-tab is een
+  groepering in de editor, geen begrip in het bestandsformaat. Bestaande decks
+  breken niet — `kennischeck` gaat als opgeheven token de lijst in en leest
+  voortaan als `question`, precies wat het blok eronder al is, dus zonder
+  dataconversie. De syntaxcontrole blijft het token aanvaarden. Dezelfde route als
+  het eerder opgeheven `actions`-token. Wie een kennischeck wil, zet er een
+  vraag-dia neer.
+
+  Een rondgangtoets legt die migratie vast: hij schrijft een echte vraag-dia,
+  verwisselt alleen het token en leest de eigen vraag van de auteur terug — de
+  belofte stond eerst alleen in een commit-tekst, en dat is geen bewaking. De
+  labels en helpteksten van het type zijn uit alle 31 talen weg, en de
+  omschrijving van de module op **Instellingen → Uitbreidingen** belooft nu vier
+  diatypes in plaats van vijf.
+
+- **Een dia-wissel die van onszelf komt verplaatst de cursor niet meer.** Het
+  bron-paneel en de diastrook praten elkaar bij: zet je de cursor in een andere
+  dia, dan meldt het paneel dat, en het nieuwe dianummer komt als gewijzigde
+  widget terug. Die echo was niet te onderscheiden van een échte wissel van buiten
+  (de diastrook, de navigatieknoppen), dus wees het paneel de cursor de nieuwe dia
+  aan terwijl de cursor daar al stond. Twee dingen sneuvelden daardoor midden in
+  het werk: klikken in een andere dia zette de cursor terug op de eerste regel van
+  die dia in plaats van waar je klikte, en een selectie die over een `---` heen
+  liep werd platgeslagen tot een cursor op de diagrens. Het paneel houdt al bij
+  welke dia het zelf gemeld heeft; die vergelijking erbij laat de echo passeren en
+  de wissel van buiten door.
+
+- **`macos/Podfile.lock` draagt weer de checksum van de Podfile ernaast.** Een
+  eerdere commit voegde een `post_install`-haak aan de Podfile toe maar legde een
+  lock vast die van een eerdere staat van dat bestand was geschreven. CocoaPods
+  gebruikt die checksum om te zien of de Podfile veranderd is sinds de lock; stond
+  hij verkeerd, dan besloot elke verse checkout dat er opnieuw geresolveerd moest
+  worden — werk dat niets oplevert, en dat de lock stilzwijgend onder de bouwer
+  vandaan herschrijft in plaats van hem te volgen. Aan de opgeloste pods en hun
+  versies verandert niets; alleen de checksum komt overeen met wat ernaast ligt.
+
+- **eLearning-pakketten inlezen: SCORM, QTI, xAPI/cmi5, AICC en OLX
+  (#1992–#1997).** `SourceFormat` kreeg vijf waarden erbij, en de
+  formaatherkenning kijkt daarvoor niet naar de extensie maar naar de markering
+  in het pakket: `imsmanifest.xml` voor SCORM en IMS Content Packaging (#1993),
+  een QTI-namespace in een XML voor QTI 2.x en 3.x (#1994), `cmi5.xml` voor cmi5
+  (#1995), een `.crs`-, `.au`-, `.cst`- of `.des`-bestand voor AICC (#1996) en
+  `course.xml` met de OLX-namespace voor Open edX (#1997). Wie geen ZIP
+  aanlevert komt er ook door: een losse xAPI-JSON of QTI-XML wordt aan zijn
+  eerste kilobytes herkend. Per formaat staat er een lezer die de structuur uit
+  de bron haalt —
+  de organizations en items uit een manifest, de assessment items uit QTI, de
+  AU's uit `cmi5.xml`, de les-elementen uit een `.au`, de sequentials uit
+  `course.xml` — en daar één dia per element van maakt.
+
+  Wat er níet gebeurt hoort er even hard bij. De lezers halen titels en
+  identificatoren op; de inhoud van een SCORM-item, een QTI-vraag of een
+  OLX-unit wordt niet omgezet, en een geïmporteerde QTI-vraag wordt dus geen
+  vraag-dia. Elke dia die de import aflevert draagt daarom een blokcitaat dat
+  zegt dat de inhoud niet volledig geconverteerd is en dat er met de hand nog
+  werk aan zit. Een pakket dat er af uitziet en het niet is, is het ergste dat
+  een import kan opleveren. De weg erheen is ook nog niet open: de
+  bestandskiezer achter *Presentaties importeren…* biedt nog steeds alleen
+  `.pptx`, `.odp` en `.key` aan (`presentationImportExtensions`), dus de
+  importeurs zijn geregistreerd en getoetst, maar vanuit de interface niet te
+  bereiken. En OciDeck wordt geen LRS: er gaat geen enkel xAPI-statement de deur
+  uit.
+
+- **Scoring, feedback, pogingen en metadata bij een vraag (#2003–#2008).** Onder
+  elke vraag-editor staat een ingeklapte sectie *Scoring, feedback en metadata*
+  met de velden die het eLearning-ontwerp voor álle vraagsoorten afspreekt:
+  punten en een scoringstrategie — alles-of-niets, deels, per paar, per item —
+  met puntenaftrek per fout (#2003), een maximum aantal pogingen (#2005),
+  feedback per uitkomst voor goed, fout, deels en timeout (#2004), progressieve
+  hints, een verwijzing naar een feedback-dia, verwijzingen naar leerdoel-dia's
+  en leesbare metadata: titel, vak, moeilijkheid, geschatte duur en tags
+  (#2008). Ingeklapt, want de meeste vragen laten het bij de standaardwaarden,
+  en die worden ook niet weggeschreven: het `question`-blok van een
+  bestaande vraag verandert niet zolang de auteur er niets aan draait.
+
+  Deze velden worden vastgelegd en teruggelezen, en verder nog niets. Er is nog
+  geen laag die punten telt, aftrek toepast, pogingen bijhoudt of de feedback op
+  het scherm zet. Het formaat en de editor staan er dus vóór de laag die ze
+  gebruikt, in plaats van andersom; wie *maximum pogingen* op drie zet, krijgt
+  vandaag nog steeds het gedrag dat *bij een fout antwoord* al bepaalde.
+
+  Het assessmentmodel (#2006) kreeg zijn eigen bestand:
+  `lib/models/elearning_assessment.dart` beschrijft een toets met secties,
+  slaaggrens, tijdslimieten, navigatiemodus en voltooiingsregel, plus een blok
+  voor QTI-AfA-toegankelijkheidsextensies die we niet uitvoeren maar wel bewaren
+  (#2007). Dat is deck-brede structuur en hoort dus in geen enkele dia; het
+  model schrijft en leest de sidecar `<name>.elearning.json`. Ook hier is het
+  model er wel en het bestand nog niet: geen opslagroute schrijft die sidecar op
+  schijf of leest hem terug. Het versiecontract eromheen is er inmiddels wel; zie
+  de reparatie bovenaan deze lijst.
+
+- **Vier eLearning-diatypes achter een eigen schakelaar (#1999, #2009, #2010, #2015, #2016).**
+  Leerdoel (#2009), module (#2010), feedback (#2015) en
+  assessment-samenvatting (#2016) zijn echte `SlideType`-waarden met een eigen
+  `_class`-token, zodat ze uit een `.md` terugkomen als wat ze zijn. Alle vier zijn
+  tekst en lenen de vrije-Markdown-editor en -weergave: er valt niets aan te
+  structureren wat Markdown niet al kan. De hele ketting is meegelopen — enum,
+  metadata, categorie, editor-register, werkbalkpictogram, helptekst, weergave,
+  kiezer-wireframe, kwaliteitsanalyse, managementsamenvatting,
+  LaTeX/Beamer-export, Markdown-serialisatie en de tokenlijst van de
+  syntaxcontrole — plus een golden-afbeelding per type. De kennischeck uit #2011
+  is er géén vijfde bij geworden; zie de reparatie bovenaan deze lijst.
+
+  De categorie zit achter een schakelaar op **Instellingen → Uitbreidingen →
+  eLearning**, standaard uit, met hetzelfde contract als Managementsysteem en
+  Procesverbetering: het tabblad verschijnt zodra de schakelaar aan staat óf het
+  open deck al zo'n dia draagt, zodat uitzetten nooit werk laat stranden. Eén ding
+  wijkt bewust af van het ontwerp en staat daar aangetekend: de drie nieuwe
+  vraagsoorten staan in de keuzelijst van élke vraag-dia in plaats van achter de
+  schakelaar. De modulehiërarchie uit #2010 — de ouder-kindrelaties tussen
+  modules, in de sidecar — is niet gebouwd; wat er is, is de dia.
+
+- **De editor voor koppelen, invullen en hotspot (#2000–#2002, #2012–#2014).**
+  De drie nieuwe vraagsoorten uit #1998 kregen hun invulkant. *Koppelen* toont
+  paren als twee kolommen met een pijl ertussen en daaronder een lijst afleiders:
+  extra rechteritems zonder partner (#2000, #2012). *Invulvraag* zet per veld de
+  aanvaarde antwoorden komma-gescheiden neer plus een keuzelijst voor de
+  evaluatiestrategie — exacte overeenkomst, bevat, tikfout toegestaan of getal in
+  bereik — en een placeholder (#2002, #2013). *Hotspot* kiest een afbeelding en
+  daarnaast een rij gebieden, elk met een label en de knop *Juist* of *Afleider*,
+  plus een schakelaar of meerdere gebieden aangewezen mogen worden (#2001, #2014).
+  Elke soort waarschuwt zodra er te weinig staat: twee paren, één veld
+  met een antwoord, een afbeelding met een juist gebied.
+
+  Twee dingen zijn eerlijker dan het ontwerp beloofde. De coördinaten van een
+  hotspot-gebied tik je in als vier getallen (`x, y, w, h`, genormaliseerd 0–1);
+  slepen op de afbeelding zit er niet in. En er is nog geen weergave die twee
+  kolommen, een klikbare afbeelding of meer dan één invulveld tekent. Wie een van
+  de drie vandaag presenteert, ziet de vraagtekst en verder niets bruikbaars, en de
+  auteurshint onder de vraagkaart houdt daarom bewust zijn mond in plaats van te
+  vertellen wat er geschud wordt. De editorkant staat er dus vóór de
+  presentatiekant; dat is de volgorde die is gekozen, niet een vergeten stap. Wat
+  de rondebouwer voor deze drie doet, staat bij de reparatie bovenaan deze lijst.
+
+  De drie editors staan in een eigen bestand met losse widgets in plaats van in
+  de `part`-verdeling van `_QuestionEditorState`: die klasse zat te dicht bij het
+  plafond van 1000 regels om er nog drie vraagsoorten in te hangen.
+
+- **Het datamodel voor eLearning-vragen (#1998).** `QuestionKind` kreeg drie
+  waarden — `matching`, `hotspot` en `fillIn` — en `QuestionSpec` de velden die
+  ze nodig hebben, in een `part`-bestand naast `question.dart`. Een koppelvraag
+  draagt `pairs` (het antwoord is de index: `left[i]` hoort bij `right[i]`) en
+  `distractors`. Een hotspot draagt een afbeelding en `regions` met
+  genormaliseerde coördinaten, zodat een andere maat of een export de gebieden
+  niet verschuift, plus de vraag of er meer dan één gekozen mag worden. Een
+  invulvraag draagt `fields`, elk met zijn aanvaarde antwoorden en een
+  *expliciete* evaluatiestrategie: `exact`, `contains`, `similar` of
+  `numericRange`. Dat laatste met opzet — de bestaande `openText` leidt zijn
+  toegeeflijkheid af uit één drempelwaarde, en dat schaalt niet naar een veld dat
+  een getal in een bereik moet accepteren.
+
+  De drie nieuwe soorten schrijven géén `answers`-lijst; ze hebben hun eigen
+  velden, en de leesbaarheidsgrens (`isPresentable`) is er per soort op
+  aangepast: twee gevulde paren, een afbeelding met minstens één juist gebied,
+  of één veld met een aanvaard antwoord. De gedeelde velden uit #2003–#2008
+  staan in hetzelfde bestand en worden alleen weggeschreven als ze van de
+  standaard afwijken, zodat een bestaand deck er geen byte van merkt. `hint`
+  leest zowel een enkele tekst als een lijst en schrijft terug in de vorm die
+  past bij het aantal.
+
+- **Ontwerp: het eLearning-vraag- en assessmentmodel (#1998).**
+  [`docs/design/ELEARNING_MODEL.md`](docs/design/ELEARNING_MODEL.md) legt vóór de
+  bouw het gedeelde datamodel vast en trekt twee grenzen. De eerste is de
+  sidecargrens: leesbare inhoud staat in het `.md`, en deck-brede structuur,
+  bronmetadata en importrapportage ernaast in `<name>.elearning.json` — dezelfde
+  scheiding als bij de andere sidecars, en om dezelfde reden. De tweede is
+  harder: historische leerresultaten vallen buiten scope, en het formaat
+  reserveert er ook geen sleutels voor. Een sleutel met een
+  "hier-komt-later"-betekenis krijgt namelijk of later een andere betekenis, wat
+  het formaatcontract verbiedt, of een betekenis die botst met wat een andere
+  build er al in schreef. Wie ooit resultaten wil opslaan, krijgt nieuwe
+  sleutels in een nieuw bestand.
+
 - **`laag → hoog` in een diagramlabel brak de PDF-export opnieuw (#1987).** De
   reparatie van #1968 zette een symbolen-font achter Roboto en liet
   `svgTypesetting` daarop overschakelen zodra Roboto één teken miste. Maar dat

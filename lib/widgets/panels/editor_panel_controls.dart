@@ -22,6 +22,9 @@ class _EditorToolbar extends StatelessWidget {
   /// Of de Managementsysteem-module onthuld is.
   final bool revealManagementsysteem;
 
+  /// Of de eLearning-module onthuld is (#1999).
+  final bool revealElearning;
+
   /// Extra items rechts in de kopregel (bijv. de hulp-toggle en de
   /// kwaliteits-samenvatting), zodat die op dezelfde regel als TYPE/STIJL staan.
   final List<Widget> trailing;
@@ -37,6 +40,7 @@ class _EditorToolbar extends StatelessWidget {
     required this.revealInfoSafety,
     this.revealProcesverbetering = false,
     this.revealManagementsysteem = false,
+    this.revealElearning = false,
     this.trailing = const [],
   });
 
@@ -56,11 +60,14 @@ class _EditorToolbar extends StatelessWidget {
     final revealMgmt =
         revealManagementsysteem ||
         slide.type.category == SlideCategory.managementsysteem;
+    final revealElearn =
+        revealElearning || slide.type.category == SlideCategory.eLearning;
     final picked = await AddSlideDialog.show(
       context,
       revealInfoSafety: revealSec,
       revealProcesverbetering: revealImp,
       revealManagementsysteem: revealMgmt,
+      revealElearning: revealElearn,
     );
     if (picked != null && picked != slide.type) onTypeChanged(picked);
   }
@@ -201,6 +208,7 @@ class _EditorHeaderBar extends StatefulWidget {
   final bool revealInfoSafety;
   final bool revealProcesverbetering;
   final bool revealManagementsysteem;
+  final bool revealElearning;
 
   const _EditorHeaderBar({
     required this.slide,
@@ -214,6 +222,7 @@ class _EditorHeaderBar extends StatefulWidget {
     required this.revealInfoSafety,
     this.revealProcesverbetering = false,
     this.revealManagementsysteem = false,
+    this.revealElearning = false,
   });
 
   @override
@@ -240,6 +249,7 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
           revealInfoSafety: widget.revealInfoSafety,
           revealProcesverbetering: widget.revealProcesverbetering,
           revealManagementsysteem: widget.revealManagementsysteem,
+          revealElearning: widget.revealElearning,
           trailing: [
             const SizedBox(width: 8),
             SlideTypeHelpToggle(

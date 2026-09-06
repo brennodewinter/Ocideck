@@ -34,11 +34,14 @@ enum SlideImageSlot {
   /// Een `![…](…)` in de vrije tekst ([Slide.customMarkdown]).
   inline,
 
-  /// Een antwoord-afbeelding van een imagePair-vraag, in het `question`-blok
-  /// ([Slide.customMarkdown]). Daar is de afbeelding *het antwoord*, niet een
-  /// illustratie — en ze zat tot #853 in geen enkele verwijzing, waardoor de
-  /// privacyscan een gezicht oversloeg, de asset-opruiming ze als wees zag en
-  /// de `mem:`-sweep op web de bytes weggooide.
+  /// Een afbeelding in het `question`-blok ([Slide.customMarkdown]): het
+  /// antwoord van een imagePair-vraag, of de afbeelding waarop een
+  /// hotspot-vraag zijn gebieden aanwijst. In beide gevallen is de afbeelding
+  /// *de vraag zelf*, geen illustratie — en ze zat tot #853 in geen enkele
+  /// verwijzing, waardoor de privacyscan een gezicht oversloeg, de
+  /// asset-opruiming ze als wees zag en de `mem:`-sweep op web de bytes
+  /// weggooide. De hotspot-afbeelding viel er bij #1998 opnieuw buiten: die
+  /// staat niet bij de antwoorden maar als `image` op het blok zelf.
   questionImage,
 }
 
@@ -103,6 +106,20 @@ List<SlideImageRef> slideImageRefs(Slide slide) {
   // ruwe records, niet QuestionSpec.answers: een te grote vraag wordt bewust
   // niet uitvoerbaar gemaakt, maar opslag moet ook dan alle assets behouden.
   if (slide.type == SlideType.question) {
+    // De hotspot-afbeelding staat op het blok zelf (`image`), niet bij de
+    // antwoorden — dezelfde sleutel die QuestionSpec als `hotspotImage` leest.
+    final blockImage = (_questionJson(slide.customMarkdown)?['image'] ?? '')
+        .toString()
+        .trim();
+    if (blockImage.isNotEmpty) {
+      refs.add(
+        SlideImageRef(
+          path: blockImage,
+          slot: SlideImageSlot.questionImage,
+          alt: '',
+        ),
+      );
+    }
     for (final answer in _questionAnswerMaps(slide.customMarkdown)) {
       final image = (answer['image'] ?? '').toString().trim();
       if (image.isEmpty) continue;
@@ -173,9 +190,23 @@ String _rewriteQuestionAnswerImages(
 ) {
   final decoded = _questionJson(markdown);
   if (decoded == null) return markdown;
-  final answers = decoded['answers'];
-  if (answers is! List<dynamic>) return markdown;
   var changed = false;
+  // Ook hier eerst het blok zelf: de hotspot-afbeelding moet bij een verhuizing
+  // net zo goed meeverhuizen als een antwoord-afbeelding.
+  final blockImage = (decoded['image'] ?? '').toString().trim();
+  if (blockImage.isNotEmpty) {
+    final replacement = map(blockImage);
+    if (replacement != null && replacement != blockImage) {
+      decoded['image'] = replacement;
+      changed = true;
+    }
+  }
+  final answers = decoded['answers'];
+  if (answers is! List<dynamic>) {
+    return changed
+        ? const JsonEncoder.withIndent('  ').convert(decoded)
+        : markdown;
+  }
   for (final answer in answers) {
     if (answer is! Map<String, dynamic>) continue;
     final image = (answer['image'] ?? '').toString().trim();

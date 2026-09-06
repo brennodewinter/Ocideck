@@ -13,6 +13,7 @@ void main() {
     bool reveal = false,
     bool revealProcesverbetering = false,
     bool revealManagementsysteem = false,
+    bool revealElearning = false,
     Size? surfaceSize,
   }) {
     SlideType? picked;
@@ -35,6 +36,7 @@ void main() {
                   revealInfoSafety: reveal,
                   revealProcesverbetering: revealProcesverbetering,
                   revealManagementsysteem: revealManagementsysteem,
+                  revealElearning: revealElearning,
                 ),
                 child: const Text('open'),
               ),
@@ -63,6 +65,7 @@ void main() {
       reveal: true,
       revealProcesverbetering: true,
       revealManagementsysteem: true,
+      revealElearning: true,
       surfaceSize: const Size(800, 900),
     )();
     await tester.tap(find.text('Alle'));
@@ -80,6 +83,7 @@ void main() {
       reveal: true,
       revealProcesverbetering: true,
       revealManagementsysteem: true,
+      revealElearning: true,
       surfaceSize: const Size(800, 900),
     )();
     await tester.tap(find.text('Alle'));

@@ -1633,6 +1633,65 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Starten': 'Start',
+  'Opleiding': 'Kursus',
+  'Les': 'Lektion',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Opret eLearning-indhold: læringsmål, moduler, feedback og evalueringsresuméer. Importér SCORM, QTI, xAPI, AICC og OLX lokalt. Slukket som standard; tænd udvidelsen for at bruge dias-typerne.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'En modul- eller kapiteltitel. Brug som strukturmærke mellem læringsmål og spørgsmål.',
+  'Leerdoel': 'Læringsmål',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Evalueringsresumé',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Et læringsmål eller kompetence. Beskriv hvad den lærende skal kunne; kobl valgfrit til moduler eller spørgsmål. Intet krav om at nogen har opnået målet.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback eller remediering efter et spørgsmål. Forklar hvilket svar der var korrekt og hvorfor, eller henvis til ekstra materiale.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Evalueringsresumé: antal spørgsmål, maksimumscore, beståelsesgrænse. Ingen elevresultater — kun testdefinitionen.',
+  'Paren': 'Par',
+  'Afleiders (optioneel)': 'Distraktorer (valgfri)',
+  'Invulvelden': 'Udfyldningsfelter',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Seeren forbinder venstre med højre. Par i har venstre[i] som det korrekte svar til højre[i]. Den højre kolonne blandes under præsentationen.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Seeren taster svaret i hvert felt. Hvert felt har et eller flere accepterede svar og en evalueringsstrategi.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Seeren peger på en eller flere regioner på billedet. Koordinater er normaliserede (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Ekstra højre elementer uden korrekt partner. De gør spørgsmålet sværere.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Accepterede svar (kommaseparerede)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Tilføj distraktor',
+  'Afleider verwijderen': 'Fjern distraktor',
+  'Bevat het antwoord': 'Indeholder svaret',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinater (x, y, w, h — normaliserede 0–1)',
+  'Evaluatiestrategie': 'Evalueringsstrategi',
+  'Exacte overeenkomst': 'Nøjagtig match',
+  'Gebied': 'Område',
+  'Gebied toevoegen': 'Tilføj område',
+  'Gebied verwijderen': 'Fjern område',
+  'Getal in bereik': 'Tal i interval',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Vælg et billede og markér mindst ét korrekt område.',
+  'Label (optioneel)': 'Etiket (valgfrit)',
+  'Maak minstens twee gevulde paren.': 'Opret mindst to udfyldte par.',
+  'Meerdere gebieden selecteerbaar': 'Flere områder kan vælges',
+  'Paar toevoegen': 'Tilføj par',
+  'Paar verwijderen': 'Fjern par',
+  'Tikfout toegestaan': 'Skrivefejl tilladt',
+  'Veld': 'Felt',
+  'Veld toevoegen': 'Tilføj felt',
+  'Veld verwijderen': 'Fjern felt',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Tilføj mindst ét felt med et accepteret svar.',
+  'Koppelen (matching)': 'Matching',
+  'Invulvraag': 'Udfyldningsspørgsmål',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik på billede)',
   'Presentaties op deze server': 'Præsentationer på denne server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Følg præsentationen: dette slide gør, hvad præsentationen som helhed gør. Kun rapportér: fundet tælles, men modtageren ser intet — dataene er bare der. Acceptér: dataene hører her, og advarslen forsvinder. Acceptér + advar: modtageren ser et badge, at der er persondata på slidet. Udelad: de fundne data gøres ulæselige på skærmen og i eksporten — din markdown-fil bevarer den originale tekst.',
@@ -4662,4 +4721,37 @@ const _dutchSourceAddDa = <String, String>{
   'bv. "de controller board met display"':
       'f.eks. "controller board med display"',
   'Afbeeldingsverwijzingen': 'Billedreferencer',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Scoring, feedback og metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Point, scoringstrategi, feedback, hints, forsøg og læringsmålhenvisninger.',
+  'Scoringstrategie': 'Scoringstrategi',
+  'Alles of niets': 'Alt eller intet',
+  'Deels': 'Delvis',
+  'Per paar': 'Per par',
+  'Per item': 'Per element',
+  'Puntenaftrek per fout': 'Pointfradrag per forkert svar',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimale forsøg (0 = ubegrænset)',
+  'Feedback per uitkomst': 'Feedback per udfald',
+  'Bij goed antwoord': 'Ved korrekt svar',
+  'Bij fout antwoord': 'Ved forkert svar',
+  'Bij deels goed': 'Ved delvist korrekt',
+  'Bij timeout': 'Ved timeout',
+  'Hints (één per regel, progressief)': 'Hints (én per linje, progressiv)',
+  'Eerste hint\nTweede hint': 'Første hint\\nAndet hint',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide-anker til feedback-slide',
+  'bijv. slide:3': 'f.eks. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Læringsmålhenvisninger (slide-ankere, én per linje)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Fag/emne',
+  'Moeilijkheid': 'Sværhedsgrad',
+  '— geen —': '— ingen —',
+  'Makkelijk': 'Let',
+  'Gemiddeld': 'Middel',
+  'Moeilijk': 'Svær',
+  'Geschatte duur in seconden': 'Anslået varighed i sekunder',
+  'Tags (komma-gescheiden)': 'Tags (kommasepareret)',
 };

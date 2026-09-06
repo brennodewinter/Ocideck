@@ -668,6 +668,66 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Starten': 'Starte',
+  'Opleiding': 'Oplieding',
+  'Les': 'Les',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Meitsje eLearning-ynhâld: learndoelen, modules, feedback en assessment-gearfettings. Ymportearje SCORM, QTI, xAPI, AICC en OLX lokaal. Standert út; set de utwreiding oan om de slidetypen te brûken.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'In module- of haadstiktitel. Brûk as struktuermarkering tusken leardoelen en fragen.',
+  'Leerdoel': 'Leardoel',
+  'Module': 'Module',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Assessment-gearfetting',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'In leardoel of kompetinsje. Beskriuw wat de learling kinne moat; keppelje opsjoneel oan modules of fragen. Gjin bewearing dat ien it doel behearsket.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback of remediaasje nei in fraach. Lis út hokker antwurd just wie en wêrom, of ferwiis troch nei ekstra materiaal.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Beoardielingssamenvatting: oantal fragen, maksimumscore, slagingsgrins. Gjin learlingresultaten — allinne de toetsdefinysje.',
+  'Paren': 'Pearren',
+  'Afleiders (optioneel)': 'Oflieders (opsjoneel)',
+  'Invulvelden': 'Ynfoljende fjilden',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'De sjogger ferbynt lofts mei rjochts. Pear i hat lofts[i] as it juste antwurd by rjochts[i]. De rjochterkolom wurdt by presintaasje trochinoar helle.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'De sjogger typt it antwurd yn elk fjild. Elk fjild hat ien of mear akseptearre antwurden en in evaluaasjestrategy.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'De sjogger wiist ien of mear gebieten op de ofbylding oan. Koördinaten binne normalisearre (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Ekstra rjochteritems sûnder juste partner. Se meitsje de fraach swierder.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Akseptearre antwurden (komma-skieden)',
+  'Afleider': 'Ôflieder',
+  'Afleider toevoegen': 'Ôflieder tafoegje',
+  'Afleider verwijderen': 'Ôflieder fuortsmite',
+  'Bevat het antwoord': 'Befettet it antwurd',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koördinaten (x, y, w, h — normaalre 0–1)',
+  'Evaluatiestrategie': 'Evalsuaasjestrategy',
+  'Exacte overeenkomst': 'Eksakte oerienkomst',
+  'Gebied': 'Gebiet',
+  'Gebied toevoegen': 'Gebiet tafoegje',
+  'Gebied verwijderen': 'Gebiet fuortsmite',
+  'Getal in bereik': 'Getal yn berik',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Kies in ôfbylding en markearje op syn minst ien just gebiet.',
+  'Label (optioneel)': 'Label (opsjoneel)',
+  'Maak minstens twee gevulde paren.':
+      'Meitsje op syn minst twa folle pearren.',
+  'Meerdere gebieden selecteerbaar': 'Meardere gebieten selektearber',
+  'Paar toevoegen': 'Pear tafoegje',
+  'Paar verwijderen': 'Pear fuortsmite',
+  'Tikfout toegestaan': 'Typflater tastien',
+  'Veld': 'Fjild',
+  'Veld toevoegen': 'Fjild tafoegje',
+  'Veld verwijderen': 'Fjild fuortsmite',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Foegje op syn minst ien fjild ta mei in akseptearre antwurd.',
+  'Koppelen (matching)': 'Koppelje (matching)',
+  'Invulvraag': 'Ynfolfraach',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik op ôfbylding)',
   'Presentaties op deze server': 'Presentaasjes op dizze server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Folgje de presintaasje: dizze dia docht wat de presintaasje as gehiel docht. Allinne melde: de befining wurdt teld, mar de ûntfanger sjocht neat — de gegevens steane der gewoan. Akseptearje: de gegevens hearre hjir en de warskôging ferdwynt. Akseptearje + warskôgje: de ûntfanger sjocht in badge dat der persoansgegevens op de dia steane. Weglitte: de fûne gegevens wurde ûnleesber makke op it skerm en yn de eksport — jo markdown-bestân hâldt de oarspronklike tekst.',
@@ -4679,4 +4739,37 @@ const _dutchSourceAddFy = {
   'bv. "de controller board met display"':
       'byg. "de controller board mei display"',
   'Afbeeldingsverwijzingen': 'Ofbyldingsferwizingen',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Skoring, weromkeppeling en metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punten, scoringstrategy, weromkeppeling, hints, besuchen en leardoelkeppelingen.',
+  'Scoringstrategie': 'Scoringstrategy',
+  'Alles of niets': 'Al of neat',
+  'Deels': 'Diels',
+  'Per paar': 'Per pear',
+  'Per item': 'Per item',
+  'Puntenaftrek per fout': 'Puntenôflûk per ferkeard antwurd',
+  'Maximum pogingen (0 = onbeperkt)': 'Maksimum besuchen (0 = ûnbeheind)',
+  'Feedback per uitkomst': 'Weromkeppeling per útkomst',
+  'Bij goed antwoord': 'By goed antwurd',
+  'Bij fout antwoord': 'By ferkeard antwurd',
+  'Bij deels goed': 'By diels goed',
+  'Bij timeout': 'By timeout',
+  'Hints (één per regel, progressief)': 'Hints (ien per rigel, progressyf)',
+  'Eerste hint\nTweede hint': 'Earste hint\\nTwadde hint',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide-anker nei feedback-slide',
+  'bijv. slide:3': 'byg. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Leardoelferwizingen (slide-ankers, ien per rigel)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Fak/ûnderwerp',
+  'Moeilijkheid': 'Moeilikheid',
+  '— geen —': '— gjin —',
+  'Makkelijk': 'Maklik',
+  'Gemiddeld': 'Gemiddeld',
+  'Moeilijk': 'Moeilik',
+  'Geschatte duur in seconden': 'Skatte doer yn sekonden',
+  'Tags (komma-gescheiden)': 'Tags (kommaskieden)',
 };

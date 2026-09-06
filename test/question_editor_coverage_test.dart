@@ -463,4 +463,133 @@ void main() {
 
     expect(QuestionSpec.parse(updated.customMarkdown).prompt, 'Nieuwe vraag');
   });
+
+  // ── eLearning-kinds: matching, fillIn, hotspot ─────────────────────────────
+
+  testWidgets('matching kind shows pair editor and switches kind', (
+    tester,
+  ) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.matching,
+        pairs: [
+          MatchPair(id: 'a', left: 'TCP', right: 'Transport'),
+          MatchPair(id: 'b', left: 'IP', right: 'Netwerk'),
+        ],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    expect(find.text('Paren'), findsOneWidget);
+    expect(find.text('TCP'), findsOneWidget);
+    expect(find.text('Transport'), findsOneWidget);
+    expect(find.text('IP'), findsOneWidget);
+    expect(find.text('Netwerk'), findsOneWidget);
+    expect(
+      QuestionSpec.parse(updated.customMarkdown).kind,
+      QuestionKind.matching,
+    );
+  });
+
+  testWidgets('matching kind adds a pair via the button', (tester) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.matching,
+        pairs: [
+          MatchPair(id: 'a', left: 'A', right: 'B'),
+          MatchPair(id: 'b', left: 'C', right: 'D'),
+        ],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    await tester.tap(find.text('Paar toevoegen'));
+    await tester.pumpAndSettle();
+
+    final spec = QuestionSpec.parse(updated.customMarkdown);
+    expect(spec.pairs, hasLength(3));
+  });
+
+  testWidgets('fillIn kind shows field editor', (tester) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.fillIn,
+        fields: [
+          FillField(id: 'f', accepted: ['7', 'zeven']),
+        ],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    expect(find.text('Invulvelden'), findsOneWidget);
+    expect(find.text('7, zeven'), findsOneWidget);
+    expect(
+      QuestionSpec.parse(updated.customMarkdown).kind,
+      QuestionKind.fillIn,
+    );
+  });
+
+  testWidgets('fillIn kind adds a field via the button', (tester) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.fillIn,
+        fields: [
+          FillField(id: 'f', accepted: ['42']),
+        ],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    await tester.tap(find.text('Veld toevoegen'));
+    await tester.pumpAndSettle();
+
+    final spec = QuestionSpec.parse(updated.customMarkdown);
+    expect(spec.fields, hasLength(2));
+  });
+
+  testWidgets('hotspot kind shows image picker and region editor', (
+    tester,
+  ) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.hotspot,
+        hotspotImage: 'schema.png',
+        regions: [
+          HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.3, 0.3], correct: true),
+        ],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    expect(find.text('Gebieden'), findsOneWidget);
+    expect(find.text('schema.png'), findsOneWidget);
+    expect(
+      QuestionSpec.parse(updated.customMarkdown).kind,
+      QuestionKind.hotspot,
+    );
+  });
+
+  testWidgets('hotspot kind toggles multiSelect', (tester) async {
+    var updated = _questionSlide(
+      const QuestionSpec(
+        kind: QuestionKind.hotspot,
+        hotspotImage: 'schema.png',
+        regions: [
+          HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.3, 0.3], correct: true),
+        ],
+      ),
+    );
+
+    await _pump(tester, _host(updated, (s) => updated = s));
+
+    await tester.tap(find.text('Meerdere gebieden selecteerbaar'));
+    await tester.pumpAndSettle();
+
+    expect(QuestionSpec.parse(updated.customMarkdown).multiSelect, isTrue);
+  });
 }

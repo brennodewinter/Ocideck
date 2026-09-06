@@ -17,18 +17,25 @@ applicatie-backend; alle verwerking gebeurt lokaal.
 **Deck** — een volledige presentatie: metadata, een geordende lijst van slides, een
 themaprofiel en een TLP-classificatie. Onveranderlijk model (`lib/models/deck.dart`).
 
-**Slide** — één onveranderlijke, sterk getypeerde slide. Zijn `SlideType` (32 waarden)
+**Slide** — één onveranderlijke, sterk getypeerde slide. Zijn `SlideType` (36 waarden)
 kiest de layout: `title`, `section`, `bullets`, `twoBullets`, `bulletsImage`,
 `twoImages`, `image`, `video`, `quote`, `table`, `freeMarkdown`, `code`, `chart`,
 `cockpit`, `question`, `timeline`, `scorecard`, `menu` (niet-lineair keuzemenu, #1162), de pentest-layouts (`assets`,
 `discoveries`, `finding`, `findingsSummary`, `checklist`, `scopeMatrix`,
 `signOff`), de Procesverbetering-layouts (`matrix`, `canvas`, `tree`,
-`flow`, `phaseGate`, `gantt`) en de Managementsysteem-layout (`controlStatus`). De zeven
+`flow`, `phaseGate`, `gantt`), de Managementsysteem-layout (`controlStatus`) en de
+eLearning-layouts (`objective`, `module`, `feedback`, `assessmentSummary`). De zeven
 informatiebeveiligings-layouts blijven verborgen totdat die module is ingeschakeld; `matrix`,
 `canvas`, `tree`, `flow`, `phaseGate` en `gantt` volgen dezelfde auteurspoort voor
-Procesverbetering, en `controlStatus` voor de Managementsysteem-module. *(Gecorrigeerd
+Procesverbetering, `controlStatus` voor de Managementsysteem-module en de vier
+eLearning-layouts voor de eLearning-module. *(Gecorrigeerd
 2026-07-29: Fase 7 voegt `phaseGate` toe; 2026-08-02: de Managementsysteem-module
-voegt `controlStatus` toe; 2026-08-05: `gantt` toegevoegd voor Procesverbetering; aantal bewaakt door `test/docs_enum_counts_test.dart`.)*
+voegt `controlStatus` toe; 2026-08-05: `gantt` toegevoegd voor Procesverbetering;
+2026-09-06: de eLearning-module voegt `objective`, `module`, `feedback` en
+`assessmentSummary` toe — het aantal stond hier nog op 32. Een vijfde,
+`kennischeck`, is diezelfde dag weer geschrapt: een kennischeck ís een
+`question`-dia, en het token leest voortaan als zo een. De poort
+`test/docs_enum_counts_test.dart` bewaakt alleen de Engelse variant.)*
 
 **Marp** — het open Markdown-voor-presentaties-formaat dat OciDeck leest en schrijft.
 Decks blijven dicht bij gewone Marp-Markdown, zodat ze samenwerken met andere Marp-
@@ -45,10 +52,15 @@ niet het globaal gekozen uiterlijk of het semantische kleurenschema.
 **Presentatormodus** — de presentatieweergave met twee schermen: presentatornotities, timer
 en bediening op het ene scherm; de volledige slide op het andere (desktop).
 
-**Vraagsoort** — welke van de zes vormen een `question`-slide aanneemt:
+**Vraagsoort** — welke van de negen vormen een `question`-slide aanneemt:
 meerkeuze, waar/onwaar, meerdere-juist, ordenen, beeldpaar (twee afbeeldingen,
-kies er één) of open tekst (de kijker typt). Opgeslagen als `kind` in het `question`-
-blok van de slide binnen de hekken.
+kies er één), open tekst (de kijker typt), en — sinds de eLearning-module —
+koppelen (twee kolommen aan elkaar leggen), hotspot (een gebied op een afbeelding
+aanwijzen) en invulvraag (in een of meer velden typen). Opgeslagen als `kind` in
+het `question`-blok van de slide binnen de hekken. *(Aantal gecorrigeerd
+2026-09-06; hier stond zes. De laatste drie zijn alleen te schrijven en op te
+slaan: er is geen weergave waarin een kijker ze beantwoordt, en omdat ze als
+`answerable: false` worden getekend houden ze een presentatie ook niet op.)*
 
 **Jaro-Winkler** — de maat voor tekstovereenkomst (`lib/utils/jaro_winkler.dart`)
 achter de open-tekst-vraagsoort: hij scoort hoe dicht een getypt antwoord bij een

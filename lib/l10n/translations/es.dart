@@ -665,6 +665,65 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Starten': 'Iniciar',
+  'Opleiding': 'Formación',
+  'Les': 'Lección',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Crea contenido eLearning: objetivos de aprendizaje, módulos, comentarios y resúmenes de evaluación. Importa SCORM, QTI, xAPI, AICC y OLX localmente. Desactivado por defecto; activa la extensión para usar los tipos de diapositiva.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Un título de módulo o capítulo. Úsalo como marcador estructural entre objetivos de aprendizaje y preguntas.',
+  'Leerdoel': 'Objetivo de aprendizaje',
+  'Module': 'Módulo',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Resumen de la evaluación',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Un objetivo de aprendizaje o competencia. Describe lo que el aprendiz debe poder hacer; enlaza opcionalmente con módulos o preguntas. No se afirma que alguien domine el objetivo.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback o remediación después de una pregunta. Explica qué respuesta fue correcta y por qué, o remite a material adicional.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Resumen de la evaluación: número de preguntas, puntuación máxima, umbral de aprobación. Sin resultados del aprendiz — solo la definición de la prueba.',
+  'Paren': 'Parejas',
+  'Afleiders (optioneel)': 'Distractores (opcional)',
+  'Invulvelden': 'Campos de relleno',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'El espectador conecta izquierda con derecha. El par i tiene izquierda[i] como respuesta correcta para derecha[i]. La columna derecha se mezcla durante la presentación.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'El espectador escribe la respuesta en cada campo. Cada campo tiene una o más respuestas aceptadas y una estrategia de evaluación.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'El espectador señala una o más regiones en la imagen. Las coordenadas están normalizadas (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Elementos derechos adicionales sin pareja correcta. Hacen la pregunta más difícil.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Respuestas aceptadas (separadas por comas)',
+  'Afleider': 'Distractor',
+  'Afleider toevoegen': 'Añadir distractor',
+  'Afleider verwijderen': 'Eliminar distractor',
+  'Bevat het antwoord': 'Contiene la respuesta',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Coordenadas (x, y, w, h — normalizadas 0–1)',
+  'Evaluatiestrategie': 'Estrategia de evaluación',
+  'Exacte overeenkomst': 'Coincidencia exacta',
+  'Gebied': 'Región',
+  'Gebied toevoegen': 'Añadir región',
+  'Gebied verwijderen': 'Eliminar región',
+  'Getal in bereik': 'Número en rango',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Elige una imagen y marca al menos una región correcta.',
+  'Label (optioneel)': 'Etiqueta (opcional)',
+  'Maak minstens twee gevulde paren.': 'Crea al menos dos parejas rellenas.',
+  'Meerdere gebieden selecteerbaar': 'Múltiples regiones seleccionables',
+  'Paar toevoegen': 'Añadir pareja',
+  'Paar verwijderen': 'Eliminar pareja',
+  'Tikfout toegestaan': 'Error tipográfico permitido',
+  'Veld': 'Campo',
+  'Veld toevoegen': 'Añadir campo',
+  'Veld verwijderen': 'Eliminar campo',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Añade al menos un campo con una respuesta aceptada.',
+  'Koppelen (matching)': 'Emparejamiento (matching)',
+  'Invulvraag': 'Pregunta de rellenar',
+  'Hotspot (klik op afbeelding)': 'Hotspot (clic en la imagen)',
   'Presentaties op deze server': 'Presentaciones en este servidor',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Seguir la presentación: esta diapositiva hace lo que hace la presentación en su conjunto. Solo informar: el hallazgo se cuenta, pero el destinatario no ve nada — los datos simplemente están ahí. Aceptar: los datos pertenecen aquí y la advertencia desaparece. Aceptar + advertir: el destinatario ve una insignia de que hay datos personales en la diapositiva. Omitir: los datos encontrados se vuelven ilegibles en pantalla y en la exportación — tu archivo markdown conserva el texto original.',
@@ -4728,4 +4787,37 @@ const _dutchSourceAddEs = {
   'bv. "de controller board met display"':
       'p. ej. "la placa de control con pantalla"',
   'Afbeeldingsverwijzingen': 'Referencias de imagen',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Puntuación, retroalimentación y metadatos',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puntos, estrategia de puntuación, retroalimentación, pistas, intentos y enlaces a objetivos de aprendizaje.',
+  'Scoringstrategie': 'Estrategia de puntuación',
+  'Alles of niets': 'Todo o nada',
+  'Deels': 'Parcial',
+  'Per paar': 'Por par',
+  'Per item': 'Por elemento',
+  'Puntenaftrek per fout': 'Puntos descontados por respuesta incorrecta',
+  'Maximum pogingen (0 = onbeperkt)': 'Intentos máximos (0 = ilimitado)',
+  'Feedback per uitkomst': 'Retroalimentación por resultado',
+  'Bij goed antwoord': 'En respuesta correcta',
+  'Bij fout antwoord': 'En respuesta incorrecta',
+  'Bij deels goed': 'En respuesta parcialmente correcta',
+  'Bij timeout': 'En tiempo agotado',
+  'Hints (één per regel, progressief)': 'Pistas (una por línea, progresivas)',
+  'Eerste hint\nTweede hint': 'Primera pista\\nSegunda pista',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediación — ancla de slide a slide de retroalimentación',
+  'bijv. slide:3': 'p. ej. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Referencias de objetivos de aprendizaje (anclas de slide, una por línea)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadatos',
+  'Vak/onderwerp': 'Asignatura/tema',
+  'Moeilijkheid': 'Dificultad',
+  '— geen —': '— ninguno —',
+  'Makkelijk': 'Fácil',
+  'Gemiddeld': 'Medio',
+  'Moeilijk': 'Difícil',
+  'Geschatte duur in seconden': 'Duración estimada en segundos',
+  'Tags (komma-gescheiden)': 'Etiquetas (separadas por comas)',
 };

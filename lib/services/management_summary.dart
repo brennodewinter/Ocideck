@@ -68,7 +68,12 @@ List<String> deckStandardsUsed(Deck deck) {
           // controlStatus draagt de ISO-norm in de front matter, niet als
           // pentest-toetsnorm; de ISO-voortgang heeft een eigen analyzer.
           SlideType.controlStatus ||
-          SlideType.gantt:
+          SlideType.gantt ||
+          // eLearning-types dragen geen toetsnorm.
+          SlideType.objective ||
+          SlideType.module ||
+          SlideType.feedback ||
+          SlideType.assessmentSummary:
         break;
     }
   }

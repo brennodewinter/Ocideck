@@ -1634,6 +1634,65 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Starten': 'Spustit',
+  'Opleiding': 'Kurz',
+  'Les': 'Lekce',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Vytvářejte eLearning obsah: cíle učení, moduly, zpětnou vazbu a shrnutí hodnocení. Importujte SCORM, QTI, xAPI, AICC a OLX lokálně. Ve výchozím nastavení vypnuto; zapněte rozšíření pro použití typů snímků.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Název modulu nebo kapitoly. Použijte jako strukturální značku mezi vzdělávacími cíli a otázkami.',
+  'Leerdoel': 'Vzdělávací cíl',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Shrnutí hodnocení',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Vzdělávací cíl nebo kompetence. Popište, co by měl student umět; volitelně propojte s moduly nebo otázkami. Žádné tvrzení, že někdo cíl zvládl.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Zpětná vazba nebo remediaci po otázce. Vysvětlete, která odpověď byla správná a proč, nebo odkazujte na doplňující materiál.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Shrnutí hodnocení: počet otázek, maximální skóre, hranice prospěšnosti. Žádné výsledky studenta — pouze definice testu.',
+  'Paren': 'Páry',
+  'Afleiders (optioneel)': 'Distraktory (volitelné)',
+  'Invulvelden': 'Vyplňovací pole',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Divák spojuje levé s pravým. Pár i má levo[i] jako správnou odpověď pro pravo[i]. Pravý sloupec se při prezentaci zamíchá.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Divák píše odpověď do každého pole. Každé pole má jednu nebo více přijatých odpovědí a strategii hodnocení.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Divák ukazuje na jednu nebo více oblastí na obrázku. Souřadnice jsou normalizovány (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Extra pravé položky bez správného partnera. Otázku činí těžší.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Přijímané odpovědi (oddělené čárkou)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Přidat distraktor',
+  'Afleider verwijderen': 'Odebrat distraktor',
+  'Bevat het antwoord': 'Obsahuje odpověď',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Souřadnice (x, y, w, h — normalizované 0–1)',
+  'Evaluatiestrategie': 'Strategie hodnocení',
+  'Exacte overeenkomst': 'Přesná shoda',
+  'Gebied': 'Oblast',
+  'Gebied toevoegen': 'Přidat oblast',
+  'Gebied verwijderen': 'Odebrat oblast',
+  'Getal in bereik': 'Číslo v rozsahu',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Vyberte obrázek a označte alespoň jednu správnou oblast.',
+  'Label (optioneel)': 'Štítek (volitelné)',
+  'Maak minstens twee gevulde paren.': 'Vytvořte alespoň dva vyplněné páry.',
+  'Meerdere gebieden selecteerbaar': 'Lze vybrat více oblastí',
+  'Paar toevoegen': 'Přidat pár',
+  'Paar verwijderen': 'Odebrat pár',
+  'Tikfout toegestaan': 'Překlep povolen',
+  'Veld': 'Pole',
+  'Veld toevoegen': 'Přidat pole',
+  'Veld verwijderen': 'Odebrat pole',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Přidejte alespoň jedno pole s přijímanou odpovědí.',
+  'Koppelen (matching)': 'Párování (matching)',
+  'Invulvraag': 'Doplňovací otázka',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik na obrázek)',
   'Presentaties op deze server': 'Prezentace na tomto serveru',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Následovat prezentaci: tento snímek dělá to, co prezentace jako celek. Pouze nahlásit: nález se počítá, ale příjemce nic nevidí — data jsou prostě tam. Přijmout: data sem patří a varování zmizí. Přijmout + varovat: příjemce vidí odznak, že na snímku jsou osobní údaje. Vynechat: nalezená data se znepřístupní na obrazovce a v exportu — váš markdown soubor zachovává původní text.',
@@ -4650,4 +4709,38 @@ const _dutchSourceAddCs = <String, String>{
   'Gebieden': 'Oblasti',
   'bv. "de controller board met display"': 'např. "řídící deska s displejem"',
   'Afbeeldingsverwijzingen': 'Odkazy na obrázky',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Bodování, zpětná vazba a metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Body, strategie bodování, zpětná vazba, nápovědy, pokusy a odkazy na cíle učení.',
+  'Scoringstrategie': 'Strategie bodování',
+  'Alles of niets': 'Všechno nebo nic',
+  'Deels': 'Částečně',
+  'Per paar': 'Za pár',
+  'Per item': 'Za položku',
+  'Puntenaftrek per fout': 'Bodový odpočet za špatnou odpověď',
+  'Maximum pogingen (0 = onbeperkt)': 'Maximální pokusy (0 = neomezeně)',
+  'Feedback per uitkomst': 'Zpětná vazba na výsledek',
+  'Bij goed antwoord': 'Při správné odpovědi',
+  'Bij fout antwoord': 'Při špatné odpovědi',
+  'Bij deels goed': 'Při částečně správné',
+  'Bij timeout': 'Při vypršení času',
+  'Hints (één per regel, progressief)':
+      'Nápovědy (jedna na řádek, progresivní)',
+  'Eerste hint\nTweede hint': 'První nápověda\\nDruhá nápověda',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — kotva slidu na slid se zpětnou vazbou',
+  'bijv. slide:3': 'např. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Odkazy na cíle učení (kotvy slidů, jedna na řádek)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Předmět/téma',
+  'Moeilijkheid': 'Obtížnost',
+  '— geen —': '— žádné —',
+  'Makkelijk': 'Snadné',
+  'Gemiddeld': 'Střední',
+  'Moeilijk': 'Těžké',
+  'Geschatte duur in seconden': 'Odhadovaná doba v sekundách',
+  'Tags (komma-gescheiden)': 'Štítky (oddělené čárkou)',
 };

@@ -27,6 +27,7 @@ import 'procesverbetering_provider.dart';
 import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
 import 'libreplan_provider.dart';
+import 'elearning_provider.dart';
 
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
@@ -41,6 +42,7 @@ enum ModuleId {
   assetRights,
   managementsysteem,
   libreplan,
+  elearning,
 }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
@@ -140,5 +142,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.libreplan,
     enabled: libreplanEnabledProvider,
     revealed: libreplanRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.elearning,
+    enabled: elearningEnabledProvider,
+    revealed: elearningRevealProvider,
   ),
 ];

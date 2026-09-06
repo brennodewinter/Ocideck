@@ -1631,6 +1631,66 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Starten': 'Sākt',
+  'Opleiding': 'Kurss',
+  'Les': 'Nodarbība',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Izveidojiet eLearning saturu: mācību mērķi, moduļi, atsauksmes un vērtēšanas kopsavilkumi. Importējiet SCORM, QTI, xAPI, AICC un OLX lokāli. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaidu tipus.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Moduļa vai nodaļas nosaukums. Izmantojiet kā struktūras marķieri starp mācību mērķiem un jautājumiem.',
+  'Leerdoel': 'Mācību mērķis',
+  'Module': 'Modulis',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Novērtējuma kopsavilkums',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Mācību mērķis vai kompetence. Aprakstiet, ko skolēnam jāprot; pēc izvēles sasaistiet ar moduļiem vai jautājumiem. Nav apgalvojuma, ka kāds ir apguvis mērķi.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Atgriezeniskā saite vai remediācija pēc jautājuma. Izskaidrojiet, kura atbilde bija pareiza un kāpēc, vai atsaucieties uz papildu materiālu.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Novērtējuma kopsavilkums: jautājumu skaits, maksimālais vērtējums, caurlaides slieksnis. Bez skolēna rezultātiem — tikai testa definīcija.',
+  'Paren': 'Pāri',
+  'Afleiders (optioneel)': 'Distraktori (neobligāti)',
+  'Invulvelden': 'Aizpildīšanas lauki',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Skatītājs savieno kreiso ar labo. Pārim i ir kreisais[i] kā pareizā atbilde labajam[i]. Labā kolonna tiek sajaukta prezentācijas laikā.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Skatītājs ievada atbildi katrā laukā. Katram laukam ir viena vai vairākas pieņemtas atbildes un novērtēšanas stratēģija.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Skatītājs norāda uz vienu vai vairākiem reģioniem uz attēla. Koordinātes ir normalizētas (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Papildu labās vienības bez pareiza pāra. Tās padara jautājumu grūtāku.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Pieņemtās atbildes (atdalītas ar komatu)',
+  'Afleider': 'Distraktors',
+  'Afleider toevoegen': 'Pievienot distraktoru',
+  'Afleider verwijderen': 'Noņemt distraktoru',
+  'Bevat het antwoord': 'Satur atbildi',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinātes (x, y, w, h — normalizētas 0–1)',
+  'Evaluatiestrategie': 'Novērtēšanas stratēģija',
+  'Exacte overeenkomst': 'Precīza atbilstība',
+  'Gebied': 'Reģions',
+  'Gebied toevoegen': 'Pievienot reģionu',
+  'Gebied verwijderen': 'Noņemt reģionu',
+  'Getal in bereik': 'Skaitlis diapazonā',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Izvēlies attēlu un atzīmē vismaz vienu pareizo reģionu.',
+  'Label (optioneel)': 'Etiķete (neobligāti)',
+  'Maak minstens twee gevulde paren.':
+      'Izveido vismaz divus aizpildītus pārus.',
+  'Meerdere gebieden selecteerbaar': 'Var atlasīt vairākus reģionus',
+  'Paar toevoegen': 'Pievienot pāri',
+  'Paar verwijderen': 'Noņemt pāri',
+  'Tikfout toegestaan': 'Drukas kļūda atļauta',
+  'Veld': 'Lauks',
+  'Veld toevoegen': 'Pievienot lauku',
+  'Veld verwijderen': 'Noņemt lauku',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Pievieno vismaz vienu lauku ar pieņemtu atbildi.',
+  'Koppelen (matching)': 'Savietošana (matching)',
+  'Invulvraag': 'Aizpildāmais jautājums',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klikšķis uz attēla)',
   'Presentaties op deze server': 'Prezentācijas šajā serverī',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sekot prezentācijai: šis slaids dara to, ko prezentācija kopumā. Tikai ziņot: atklājums tiek skaitīts, bet saņēmējs neko neredz — dati vienkārši ir tur. Pieņemt: dati pieder šeit un brīdinājums izzūd. Pieņemt + brīdināt: saņēmējs redz nozīmi, ka slaidā ir personiskie dati. Izlaist: atrastie dati tiek padarīti nelasāmi ekrānā un eksportā — jūsu markdown fails saglabā oriģinālo tekstu.',
@@ -4659,4 +4719,38 @@ const _dutchSourceAddLv = <String, String>{
   'Gebieden': 'Apgabali',
   'bv. "de controller board met display"': 'piem. "vadības plate ar displeju"',
   'Afbeeldingsverwijzingen': 'Attēlu atsauces',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Vērtēšana, atsauksmes un metadati',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Punkti, vērtēšanas stratēģija, atsauksmes, norādes, mēģinājumi un mācību mērķu saites.',
+  'Scoringstrategie': 'Vērtēšanas stratēģija',
+  'Alles of niets': 'Viss vai nekas',
+  'Deels': 'Daļēji',
+  'Per paar': 'Uz pāri',
+  'Per item': 'Uz vienību',
+  'Puntenaftrek per fout': 'Punktu atņemšana par nepareizu atbildi',
+  'Maximum pogingen (0 = onbeperkt)':
+      'Maksimālie mēģinājumi (0 = neierobežots)',
+  'Feedback per uitkomst': 'Atsauksmes par rezultātu',
+  'Bij goed antwoord': 'Pareizai atbildei',
+  'Bij fout antwoord': 'Nepareizai atbildei',
+  'Bij deels goed': 'Daļēji pareizai',
+  'Bij timeout': 'Pie noildzes',
+  'Hints (één per regel, progressief)': 'Norādes (viena rindā, progresīvi)',
+  'Eerste hint\nTweede hint': 'Pirmā norāde\\nOtrā norāde',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slaida enkurs uz atsauksmes slaidu',
+  'bijv. slide:3': 'piem. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Mācību mērķu atsauces (slaida enkuri, viens rindā)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadati',
+  'Vak/onderwerp': 'Priekšmets/tema',
+  'Moeilijkheid': 'Grūtības pakāpe',
+  '— geen —': '— nav —',
+  'Makkelijk': 'Viegli',
+  'Gemiddeld': 'Vidēji',
+  'Moeilijk': 'Grūti',
+  'Geschatte duur in seconden': 'Aptuvamais ilgums sekundēs',
+  'Tags (komma-gescheiden)': 'Tagi (atdalīti ar komatu)',
 };

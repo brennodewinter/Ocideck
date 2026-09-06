@@ -351,6 +351,14 @@ class MarkdownService {
       case SlideType.flow:
       case SlideType.phaseGate:
         _writeBulletsSlide(buf, slide, themeProfile, forExport);
+      // eLearning: de tekstgebaseerde types schrijven als freeMarkdown. Deze
+      // vier zijn precies [SlideType.usesFreeMarkdownBody]; het inlezen stuurt
+      // op datzelfde predicaat, zodat de twee kanten niet kunnen verschillen.
+      case SlideType.objective:
+      case SlideType.module:
+      case SlideType.feedback:
+      case SlideType.assessmentSummary:
+        _writeFreeMarkdownSlide(buf, slide);
     }
 
     if (slide.audioPath.isNotEmpty) {

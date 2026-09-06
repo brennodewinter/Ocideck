@@ -1610,6 +1610,68 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Starten': 'tagh',
+  'Opleiding': 'ghojmoH',
+  'Les': 'ghojmoH',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'eLearning De\' yIchenmoH: ghojmoH janmey, yotlhmey, Feedback, loHmI\' wa\'DIchmey je. naDev SCORM, QTI, xAPI, AICC, OLX je yISuq. lurDech: chu\'be\'; \'echletHom Seghmey yIlo\'meH chelwI\' yIchu\'.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'yotlh pagh pa\' tetlh. ghojmoH jan ghelmey je joj Degh. (A module or chapter title. Use as a structural marker between learning objectives and questions.)',
+  'Leerdoel': 'ghojmoH jan (learning objective)',
+  'Module': 'yotlh (module)',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'loHmI\' wa\'DIch (assessment summary)',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'ghojmoH jan qab \'e\' Sov. ghojwI\' laH Dujang; yotlh ghel je. pagh ja\' tlhIH ghojmoH jan. (A learning objective or competency. Describe what the learner should be able to do; optionally link to modules or questions. No claim that anyone has mastered the objective.)',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'jang \'ogh pagh DIvI\' tlhIH ghel. jangwI\' lugh \'e\' jang, pagh latlh yIqel. (Feedback or remediation after a question. Explain which answer was correct and why, or refer to additional material.)',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'loHmI\' wa\'DIch: ghel mI\', nIb nIb, lugh Degh. pagh ghojwI\' — neH loHmI\' tetlh. (Assessment summary: number of questions, maximum score, pass threshold. No learner results — only the test definition.)',
+  'Paren': '\'aqro',
+  'Afleiders (optioneel)': 'veqlargh (optional)',
+  'Invulvelden': 'yIghun mIw',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'bejwI\' poS nIq nIqpu\' (The viewer connects left to right. Pair i has left[i] as the correct answer for right[i]. The right column is shuffled during presentation.)',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'bejwI\' jav nIq mIw (The viewer types the answer in each field. Each field has one or more accepted answers and an evaluation strategy.)',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'bejwI\' mIllogh yotlh nIq (The viewer points to one or more regions on the image. Coordinates are normalized 0–1.)',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'nIq nIq \'aqro lugh (Extra right items without a correct partner. They make the question harder.)',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'lIjlaHbogh jangwI\' (wav \'et) (accepted answers, comma-separated)',
+  'Afleider': 'moHta\'bogh (distractor)',
+  'Afleider toevoegen': 'moHta\'bogh chel (add distractor)',
+  'Afleider verwijderen': 'moHta\'bogh teq (remove distractor)',
+  'Bevat het antwoord': 'jangwI\' ngI\'lu\' (contains the answer)',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'mI\' (x, y, w, h — normal 0–1) (coordinates, normalized 0–1)',
+  'Evaluatiestrategie': 'loHmI\' nger (evaluation strategy)',
+  'Exacte overeenkomst': 'nIb rap (exact match)',
+  'Gebied': 'Sep (region)',
+  'Gebied toevoegen': 'Sep chel (add region)',
+  'Gebied verwijderen': 'Sep teq (remove region)',
+  'Getal in bereik': 'mI\' chu\' Degh (number in range)',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'nagh be\' luSuvqoqu\' \'ej nIb Sep wa\' nIb. (choose an image and mark at least one correct region)',
+  'Label (optioneel)': 'tlhoy (optional) (label, optional)',
+  'Maak minstens twee gevulde paren.':
+      'cha\' nIb nIb ngeH. (create at least two filled pairs)',
+  'Meerdere gebieden selecteerbaar':
+      'Sep law\' rap (multiple regions selectable)',
+  'Paar toevoegen': 'nIb chel (add pair)',
+  'Paar verwijderen': 'nIb teq (remove pair)',
+  'Tikfout toegestaan': 'mIS chel pIH (typo allowed)',
+  'Veld': 'yotlh (field)',
+  'Veld toevoegen': 'yotlh chel (add field)',
+  'Veld verwijderen': 'yotlh teq (remove field)',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'yotlh wa\' chel \'ej jangwI\' lIj. (add at least one field with an accepted answer)',
+  'Koppelen (matching)': 'nIb (matching)',
+  'Invulvraag': 'teqlu\' ghel (fill-in question)',
+  'Hotspot (klik op afbeelding)':
+      'Hotspot (nagh lay\') (hotspot, click on image)',
   'Presentaties op deze server': 'Presentations on this server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'nagh beQmey tlhab: mIvvam nagh beQ vIlo\'chugh nagh beQmey naQ vIlo\'. ja\' neH: Samlu\'bogh wIvlu\', \'ach Hevbe\' ghuHbe\' — De\' naQ bIH. lIj: De\' naQ tu\'lu\' \'ej warning narghbe\'. lIj + yIja\'qoq: Hevbe\' badge legh, nagh beQDaq De\' nav tu\'lu\'. nugh: Samlu\'bogh De\' lajbe\' moj nagh beQDaq \'ej ngeHmeH — markdown De\' nav mI\' nagh teqbe\'.',
@@ -4605,4 +4667,37 @@ const _dutchSourceAddTlh = <String, String>{
   'bv. "de controller board met display"':
       'ghantoH "controller board display" je',
   'Afbeeldingsverwijzingen': 'mIllogh reference\'mey',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Qav, QapHa\' tlhobbeH je metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Qavmey, Qav chupmeH, QapHa\', nugh, nIDmey je ghuHmey nID.',
+  'Scoringstrategie': 'Qav chupmeH',
+  'Alles of niets': 'Hoch pagh netlh',
+  'Deels': 'bI\'res',
+  'Per paar': 'wa\' wa\'DIch',
+  'Per item': 'wa\' mutlhwI\'',
+  'Puntenaftrek per fout': 'Qavmey QavHa\' jawmey',
+  'Maximum pogingen (0 = onbeperkt)': 'nIDmey nIq (0 = tlhab)',
+  'Feedback per uitkomst': 'QapHa\' per mI\'Qo\'',
+  'Bij goed antwoord': 'jaw DIch Qap',
+  'Bij fout antwoord': 'jaw DIch QapHa\'',
+  'Bij deels goed': 'jaw bI\'res Qap',
+  'Bij timeout': 'poH HeghDI',
+  'Hints (één per regel, progressief)': 'nugh (wa\' per tlhIH, vIH)',
+  'Eerste hint\nTweede hint': 'wa\'DIch nugh\\ncha\'DIch nugh',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide-anchor QapHa\' slide-Daq',
+  'bijv. slide:3': 'mI\' slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'ghuH nIDmey (slide-anchors, wa\' per tlhIH)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'metadata',
+  'Vak/onderwerp': 'Suy\'/Hov',
+  'Moeilijkheid': 'Qatlhqu\'',
+  '— geen —': '— pagh —',
+  'Makkelijk': 'ngeb',
+  'Gemiddeld': 'mutlhwI\'',
+  'Moeilijk': 'Qatlh',
+  'Geschatte duur in seconden': 'poH nIb seconds',
+  'Tags (komma-gescheiden)': 'tags (vi\'mey tlhej)',
 };

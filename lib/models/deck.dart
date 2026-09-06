@@ -589,4 +589,14 @@ class Deck {
   /// True when this deck carries any Managementsysteem slide type; slides always
   /// render regardless of any module switch (MODUS-REGEL).
   bool get hasManagementSystemSlides => firstManagementSystemSlideIndex >= 0;
+
+  /// Index of the first eLearning slide ([SlideCategory.eLearning]), or -1
+  /// when there is none. Drives the picker's eLearning tab — which appears
+  /// once a deck already carries such a slide (#1999).
+  int get firstElearningSlideIndex =>
+      slides.indexWhere((s) => s.type.category == SlideCategory.eLearning);
+
+  /// True when this deck carries any eLearning slide type; slides always
+  /// render regardless of any module switch (MODUS-REGEL).
+  bool get hasElearningSlides => firstElearningSlideIndex >= 0;
 }

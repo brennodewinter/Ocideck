@@ -1653,6 +1653,65 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Starten': 'Стартиране',
+  'Opleiding': 'Обучение',
+  'Les': 'Урок',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Създавайте eLearning съдържание: цели за обучение, модули, обратна връзка и обобщения на оценяването. Импортирайте SCORM, QTI, xAPI, AICC и OLX локално. Изключено по подразбиране; включете разширението, за да използвате типовете слайдове.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Заглавие на модул или глава. Използвайте като структурен маркер между учебните цели и въпросите.',
+  'Leerdoel': 'Учебна цел',
+  'Module': 'Модул',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Обобщение на оценяването',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Учебна цел или компетентност. Опишете какво трябва да може учащият; по желание свържете с модули или въпроси. Без твърдение, че някой е овладял целта.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Обратна връзка или ремедиация след въпрос. Обяснете кой отговор е бил правилен и защо, или препратете към допълнителен материал.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Обобщение на оценяването: брой въпроси, максимален резултат, праг за преминаване. Без резултати на учащия — само определението на теста.',
+  'Paren': 'Двойки',
+  'Afleiders (optioneel)': 'Дистрактори (по избор)',
+  'Invulvelden': 'Полета за попълване',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Зрителят свързва ляво с дясно. Двойка i има ляво[i] като правилен отговор за дясно[i]. Дясната колона се разбърква по време на презентацията.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Зрителят въвежда отговора във всяко поле. Всяко поле има един или повече приети отговора и стратегия за оценяване.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Зрителят посочва един или повече региона върху изображението. Координатите са нормализирани (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Допълнителни десни елементи без правилен партньор. Те правят въпроса по-труден.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Приети отговори (разделени със запетая)',
+  'Afleider': 'Дистрактор',
+  'Afleider toevoegen': 'Добави дистрактор',
+  'Afleider verwijderen': 'Премахни дистрактор',
+  'Bevat het antwoord': 'Съдържа отговора',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Координати (x, y, w, h — нормализирани 0–1)',
+  'Evaluatiestrategie': 'Стратегия за оценяване',
+  'Exacte overeenkomst': 'Точно съвпадение',
+  'Gebied': 'Регион',
+  'Gebied toevoegen': 'Добави регион',
+  'Gebied verwijderen': 'Премахни регион',
+  'Getal in bereik': 'Число в диапазон',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Изберете изображение и маркирайте поне един правилен регион.',
+  'Label (optioneel)': 'Етикет (по избор)',
+  'Maak minstens twee gevulde paren.': 'Създайте поне две попълнени двойки.',
+  'Meerdere gebieden selecteerbaar': 'Възможен избор на няколко региона',
+  'Paar toevoegen': 'Добави двойка',
+  'Paar verwijderen': 'Премахни двойка',
+  'Tikfout toegestaan': 'Печатна грешка разрешена',
+  'Veld': 'Поле',
+  'Veld toevoegen': 'Добави поле',
+  'Veld verwijderen': 'Премахни поле',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Добавете поне едно поле с приет отговор.',
+  'Koppelen (matching)': 'Съгласуване (matching)',
+  'Invulvraag': 'Въпрос за попълване',
+  'Hotspot (klik op afbeelding)': 'Hotspot (клик върху изображение)',
   'Presentaties op deze server': 'Презентации на този сървър',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Следвай презентацията: този слайд прави това, което презентацията като цяло прави. Само докладвай: находката се отчита, но получателят не вижда нищо — данните са просто там. Приеми: данните принадлежат тук и предупреждението изчезва. Приеми + предупреди: получателят вижда значка, че на слайда има лични данни. Премахни: намерените данни стават нечетими на екрана и в експорта — вашият markdown файл запазва оригиналния текст.',
@@ -4705,4 +4764,37 @@ const _dutchSourceAddBg = <String, String>{
   'Gebieden': 'Области',
   'bv. "de controller board met display"': 'напр. "контролерът с дисплей"',
   'Afbeeldingsverwijzingen': 'Справки към изображения',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Оценяване, обратна връзка и метаданни',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Точки, стратегия за оценяване, обратна връзка, подсказки, опити и връзки към учебни цели.',
+  'Scoringstrategie': 'Стратегия за оценяване',
+  'Alles of niets': 'Всичко или нищо',
+  'Deels': 'Частично',
+  'Per paar': 'На двойка',
+  'Per item': 'На елемент',
+  'Puntenaftrek per fout': 'Отнемане на точки за грешен отговор',
+  'Maximum pogingen (0 = onbeperkt)': 'Максимални опити (0 = неограничено)',
+  'Feedback per uitkomst': 'Обратна връзка на резултат',
+  'Bij goed antwoord': 'При правилен отговор',
+  'Bij fout antwoord': 'При грешен отговор',
+  'Bij deels goed': 'При частично правилен',
+  'Bij timeout': 'При изтичане на време',
+  'Hints (één per regel, progressief)': 'Подсказки (една на ред, прогресивни)',
+  'Eerste hint\nTweede hint': 'Първа подсказка\\nВтора подсказка',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — котва на слайд към слайд с обратна връзка',
+  'bijv. slide:3': 'напр. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Препратки към учебни цели (котви на слайдове, една на ред)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Метаданни',
+  'Vak/onderwerp': 'Предмет/тема',
+  'Moeilijkheid': 'Трудност',
+  '— geen —': '— няма —',
+  'Makkelijk': 'Лесно',
+  'Gemiddeld': 'Средно',
+  'Moeilijk': 'Трудно',
+  'Geschatte duur in seconden': 'Предполагаема продължителност в секунди',
+  'Tags (komma-gescheiden)': 'Етикети (разделени със запетая)',
 };

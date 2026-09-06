@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import '../utils/log.dart';
 
+part 'question_elearning.dart';
+
 /// Limits keep a question slide sane and the random pick meaningful.
 const int questionMinOptionCount = 2;
 const int questionMaxOptionCount = 8;
@@ -40,6 +42,16 @@ const int questionImagePairCount = 2;
 ///   ronde willekeurig.
 /// - [openText]: de kijker typt het antwoord; het telt als goed wanneer het
 ///   genoeg lijkt op een van de juiste antwoorden (zie [QuestionSpec.similarityThreshold]).
+/// - [matching]: twee kolommen — de kijker koppelt left- aan right-items. De
+///   answer key is per index in [QuestionSpec.pairs]; de presentatie shuffelt
+///   de rechterkolom. Zie `docs/design/ELEARNING_MODEL.md` §3.2.
+/// - [hotspot]: de kijker wijst één of meerdere gebieden op een afbeelding aan.
+///   Gebieden hebben genormaliseerde coördinaten (0–1) zodat resize/export niet
+///   van pixels afhangt. Zie §3.2.
+/// - [fillIn]: één of meerdere invulvelden met een expliciete
+///   evaluatiestrategie ([FillField.matchMode]). Het rijkere broertje van
+///   [openText], dat zijn eigen [QuestionSpec.similarityThreshold]-semantiek
+///   behoudt. Zie §3.2.
 enum QuestionKind {
   multipleChoice,
   trueFalse,
@@ -47,6 +59,9 @@ enum QuestionKind {
   ordering,
   imagePair,
   openText,
+  matching,
+  hotspot,
+  fillIn,
 }
 
 /// How many authored answer records are safe and meaningful for [kind].
@@ -61,6 +76,12 @@ int questionAnswerCountLimit(QuestionKind kind) => switch (kind) {
   QuestionKind.ordering ||
   QuestionKind.imagePair ||
   QuestionKind.openText => questionMaxAnswerPoolCount,
+  // De eLearning-kinds gebruiken niet de `answers`-lijst maar hun eigen
+  // `pairs`/`regions`/`fields`. De answer-count-grens is hier dus een
+  // veilige default — de echte validatie zit in [QuestionSpec.isPresentable].
+  QuestionKind.matching ||
+  QuestionKind.hotspot ||
+  QuestionKind.fillIn => questionMaxAnswerPoolCount,
 };
 
 QuestionKind _kindFromName(String? name) => QuestionKind.values.firstWhere(
@@ -146,6 +167,57 @@ class QuestionSpec {
   /// juiste antwoorden moet lijken (Jaro-Winkler, 0..1) om goed te zijn.
   final double similarityThreshold;
 
+  // ── eLearning-uitbreiding (docs/design/ELEARNING_MODEL.md §3.2–§3.3) ──
+
+  /// [QuestionKind.matching]: de authored paren. De answer key is per index
+  /// (pair *i* koppelt `left[i]` aan `right[i]`); de presentatie shuffelt de
+  /// rechterkolom zonder de key te wijzigen.
+  final List<MatchPair> pairs;
+
+  /// [QuestionKind.matching]: extra right-items zonder correcte partner.
+  final List<String> distractors;
+
+  /// [QuestionKind.hotspot]: deck-relatief pad naar de afbeelding.
+  final String hotspotImage;
+
+  /// [QuestionKind.hotspot]: de klikbare gebieden met genormaliseerde coords.
+  final List<HotspotRegion> regions;
+
+  /// [QuestionKind.hotspot]: of meerdere gebieden mogen worden gekozen.
+  final bool multiSelect;
+
+  /// [QuestionKind.fillIn]: de invulvelden met hun evaluatiestrategie.
+  final List<FillField> fields;
+
+  // ── Gedeelde velden (geldigen voor alle kinds, §3.3) ──
+
+  /// Maximaal te halen punten voor deze vraag.
+  final int points;
+
+  /// Hoe de score wordt berekend over de deelitems.
+  final QuestionScoring scoring;
+
+  /// Punten afgetrokken per fout poging (niet onder nul).
+  final int penalty;
+
+  /// Maximum pogingen (0 = onbeperkt). Bouwt voort op [onWrong].
+  final int maxAttempts;
+
+  /// Feedback per uitkomst (correct/wrong/partial/timeout).
+  final QuestionFeedback feedback;
+
+  /// Hint(s) vóór het antwoord. String of array van progressieve hints.
+  final List<String> hints;
+
+  /// Verwijzing naar een `feedback` slide (slide-anchor).
+  final String remediation;
+
+  /// Verwijzingen naar `objective` slides (slide-anchors).
+  final List<String> objectiveRefs;
+
+  /// Leesbare metadata (title, language, subject, difficulty, …).
+  final QuestionMetadata metadata;
+
   const QuestionSpec({
     this.kind = QuestionKind.multipleChoice,
     this.prompt = '',
@@ -155,6 +227,21 @@ class QuestionSpec {
     this.onWrong = QuestionOnWrong.retry,
     this.statementIsTrue = true,
     this.similarityThreshold = questionDefaultSimilarity,
+    this.pairs = const [],
+    this.distractors = const [],
+    this.hotspotImage = '',
+    this.regions = const [],
+    this.multiSelect = false,
+    this.fields = const [],
+    this.points = 1,
+    this.scoring = QuestionScoring.allOrNothing,
+    this.penalty = 0,
+    this.maxAttempts = 1,
+    this.feedback = const QuestionFeedback(),
+    this.hints = const [],
+    this.remediation = '',
+    this.objectiveRefs = const [],
+    this.metadata = const QuestionMetadata(),
   }) : _parsedAnswerCount = null,
        _preservedSource = null;
 
@@ -167,6 +254,21 @@ class QuestionSpec {
     required this.onWrong,
     required this.statementIsTrue,
     required this.similarityThreshold,
+    required this.pairs,
+    required this.distractors,
+    required this.hotspotImage,
+    required this.regions,
+    required this.multiSelect,
+    required this.fields,
+    required this.points,
+    required this.scoring,
+    required this.penalty,
+    required this.maxAttempts,
+    required this.feedback,
+    required this.hints,
+    required this.remediation,
+    required this.objectiveRefs,
+    required this.metadata,
     required this._parsedAnswerCount,
     required this._preservedSource,
   });
@@ -205,6 +307,50 @@ class QuestionSpec {
         onWrong: _onWrongFromName(data['onWrong']?.toString()),
         statementIsTrue: data['statementIsTrue'] != false,
         similarityThreshold: _clampSimilarity(data['similarityThreshold']),
+        pairs: [
+          for (final p in (data['pairs'] as List? ?? const []))
+            if (p is Map) MatchPair.fromJson(Map<String, dynamic>.from(p)),
+        ],
+        distractors: [
+          for (final d in (data['distractors'] as List? ?? const [])) '$d',
+        ],
+        hotspotImage: (data['image'] ?? '').toString(),
+        regions: [
+          for (final r in (data['regions'] as List? ?? const []))
+            if (r is Map) HotspotRegion.fromJson(Map<String, dynamic>.from(r)),
+        ],
+        multiSelect: data['multiSelect'] == true,
+        fields: [
+          for (final f in (data['fields'] as List? ?? const []))
+            if (f is Map) FillField.fromJson(Map<String, dynamic>.from(f)),
+        ],
+        points: _asInt(data['points'], 1).clamp(0, 1000),
+        scoring: _scoringFromName(data['scoring']?.toString()),
+        penalty: _asInt(data['penalty'], 0).clamp(0, 1000),
+        maxAttempts: _asInt(data['maxAttempts'], 1).clamp(0, 100),
+        feedback: data['feedback'] is Map
+            ? QuestionFeedback.fromJson(
+                Map<String, dynamic>.from(data['feedback'] as Map),
+              )
+            : const QuestionFeedback(),
+        hints: [
+          for (final h
+              in (data['hint'] is List
+                  ? data['hint'] as List
+                  : data['hint'] != null
+                  ? [data['hint']]
+                  : const []))
+            '$h',
+        ],
+        remediation: (data['remediation'] ?? '').toString(),
+        objectiveRefs: [
+          for (final r in (data['objectiveRefs'] as List? ?? const [])) '$r',
+        ],
+        metadata: data['metadata'] is Map
+            ? QuestionMetadata.fromJson(
+                Map<String, dynamic>.from(data['metadata'] as Map),
+              )
+            : const QuestionMetadata(),
         parsedAnswerCount: answerItems.length,
         preservedSource: oversized ? raw.trim() : null,
       ).normalized();
@@ -223,6 +369,21 @@ class QuestionSpec {
     QuestionOnWrong? onWrong,
     bool? statementIsTrue,
     double? similarityThreshold,
+    List<MatchPair>? pairs,
+    List<String>? distractors,
+    String? hotspotImage,
+    List<HotspotRegion>? regions,
+    bool? multiSelect,
+    List<FillField>? fields,
+    int? points,
+    QuestionScoring? scoring,
+    int? penalty,
+    int? maxAttempts,
+    QuestionFeedback? feedback,
+    List<String>? hints,
+    String? remediation,
+    List<String>? objectiveRefs,
+    QuestionMetadata? metadata,
   }) {
     final nextKind = kind ?? this.kind;
     final nextPrompt = prompt ?? this.prompt;
@@ -245,6 +406,21 @@ class QuestionSpec {
         onWrong: nextOnWrong,
         statementIsTrue: nextStatement,
         similarityThreshold: nextSimilarity,
+        pairs: pairs ?? this.pairs,
+        distractors: distractors ?? this.distractors,
+        hotspotImage: hotspotImage ?? this.hotspotImage,
+        regions: regions ?? this.regions,
+        multiSelect: multiSelect ?? this.multiSelect,
+        fields: fields ?? this.fields,
+        points: points ?? this.points,
+        scoring: scoring ?? this.scoring,
+        penalty: penalty ?? this.penalty,
+        maxAttempts: maxAttempts ?? this.maxAttempts,
+        feedback: feedback ?? this.feedback,
+        hints: hints ?? this.hints,
+        remediation: remediation ?? this.remediation,
+        objectiveRefs: objectiveRefs ?? this.objectiveRefs,
+        metadata: metadata ?? this.metadata,
         parsedAnswerCount: sourceAnswerCount,
         preservedSource: _preservedSource,
       );
@@ -258,6 +434,21 @@ class QuestionSpec {
       onWrong: nextOnWrong,
       statementIsTrue: nextStatement,
       similarityThreshold: nextSimilarity,
+      pairs: pairs ?? this.pairs,
+      distractors: distractors ?? this.distractors,
+      hotspotImage: hotspotImage ?? this.hotspotImage,
+      regions: regions ?? this.regions,
+      multiSelect: multiSelect ?? this.multiSelect,
+      fields: fields ?? this.fields,
+      points: points ?? this.points,
+      scoring: scoring ?? this.scoring,
+      penalty: penalty ?? this.penalty,
+      maxAttempts: maxAttempts ?? this.maxAttempts,
+      feedback: feedback ?? this.feedback,
+      hints: hints ?? this.hints,
+      remediation: remediation ?? this.remediation,
+      objectiveRefs: objectiveRefs ?? this.objectiveRefs,
+      metadata: metadata ?? this.metadata,
     );
   }
 
@@ -295,6 +486,16 @@ class QuestionSpec {
           correctAnswers.isNotEmpty &&
           wrongAnswers.isNotEmpty;
     }
+    if (kind == QuestionKind.matching) {
+      return pairs.where((p) => p.isFilled).length >= 2;
+    }
+    if (kind == QuestionKind.hotspot) {
+      return hotspotImage.isNotEmpty &&
+          regions.any((r) => r.correct && r.coords.isNotEmpty);
+    }
+    if (kind == QuestionKind.fillIn) {
+      return fields.any((f) => f.accepted.isNotEmpty);
+    }
     return correctAnswers.isNotEmpty && wrongAnswers.isNotEmpty;
   }
 
@@ -309,6 +510,21 @@ class QuestionSpec {
         onWrong: onWrong,
         statementIsTrue: statementIsTrue,
         similarityThreshold: _clampSimilarity(similarityThreshold),
+        pairs: pairs,
+        distractors: distractors,
+        hotspotImage: hotspotImage,
+        regions: regions,
+        multiSelect: multiSelect,
+        fields: fields,
+        points: points,
+        scoring: scoring,
+        penalty: penalty,
+        maxAttempts: maxAttempts,
+        feedback: feedback,
+        hints: hints,
+        remediation: remediation,
+        objectiveRefs: objectiveRefs,
+        metadata: metadata,
         parsedAnswerCount: sourceAnswerCount,
         preservedSource: _preservedSource,
       );
@@ -322,6 +538,21 @@ class QuestionSpec {
       onWrong: onWrong,
       statementIsTrue: statementIsTrue,
       similarityThreshold: _clampSimilarity(similarityThreshold),
+      pairs: pairs,
+      distractors: distractors,
+      hotspotImage: hotspotImage,
+      regions: regions,
+      multiSelect: multiSelect,
+      fields: fields,
+      points: points,
+      scoring: scoring,
+      penalty: penalty,
+      maxAttempts: maxAttempts,
+      feedback: feedback,
+      hints: hints,
+      remediation: remediation,
+      objectiveRefs: objectiveRefs,
+      metadata: metadata,
     );
   }
 
@@ -338,7 +569,36 @@ class QuestionSpec {
       if (kind == QuestionKind.trueFalse) 'statementIsTrue': statementIsTrue,
       if (kind == QuestionKind.openText)
         'similarityThreshold': similarityThreshold,
-      'answers': [for (final a in answers) a.toJson()],
+      // De eLearning-kinds gebruiken niet de `answers`-lijst; ze hebben hun
+      // eigen kind-specifieke velden. De bestaande zes kinds wel.
+      if (kind != QuestionKind.matching &&
+          kind != QuestionKind.hotspot &&
+          kind != QuestionKind.fillIn)
+        'answers': [for (final a in answers) a.toJson()],
+      // ── matching ──
+      if (kind == QuestionKind.matching) ...{
+        'pairs': [for (final p in pairs) p.toJson()],
+        if (distractors.isNotEmpty) 'distractors': distractors,
+      },
+      // ── hotspot ──
+      if (kind == QuestionKind.hotspot) ...{
+        'image': hotspotImage,
+        'regions': [for (final r in regions) r.toJson()],
+        if (multiSelect) 'multiSelect': multiSelect,
+      },
+      // ── fillIn ──
+      if (kind == QuestionKind.fillIn)
+        'fields': [for (final f in fields) f.toJson()],
+      // ── gedeelde velden (alleen wanneer niet-default, §3.3) ──
+      if (points != 1) 'points': points,
+      if (scoring != QuestionScoring.allOrNothing) 'scoring': scoring.name,
+      if (penalty > 0) 'penalty': penalty,
+      if (maxAttempts != 1) 'maxAttempts': maxAttempts,
+      if (!feedback.isEmpty) 'feedback': feedback.toJson(),
+      if (hints.isNotEmpty) 'hint': hints.length == 1 ? hints.first : hints,
+      if (remediation.isNotEmpty) 'remediation': remediation,
+      if (objectiveRefs.isNotEmpty) 'objectiveRefs': objectiveRefs,
+      if (!metadata.isEmpty) 'metadata': metadata.toJson(),
     };
     return const JsonEncoder.withIndent('  ').convert(map);
   }

@@ -1633,6 +1633,65 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Starten': 'Začni',
+  'Opleiding': 'Tečaj',
+  'Les': 'Lekcija',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Ustvarjajte eLearning vsebino: učne cilje, module, povratne informacije in povzetke ocenjevanja. Uvozite SCORM, QTI, xAPI, AICC in OLX lokalno. Privzeto izklopljeno; vklopite razširitev za uporabo vrst diapozitivov.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Naslov modula ali poglavja. Uporabite kot strukturni označevalnik med cilji učenja in vprašanji.',
+  'Leerdoel': 'Cilj učenja',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Povzetek ocenjevanja',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Cilj učenja ali kompetenca. Opišite, kaj mora učenec znati; po želji povežite z moduli ali vprašanji. Brez trditve, da je kdo dosegel cilj.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Povratna informacija ali remediacija po vprašanju. Pojasnite, kateri odgovor je bil pravilen in zakaj, ali napotite na dodatno gradivo.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Povzetek ocenjevanja: število vprašanj, najvišja ocena, prag za uspeh. Brez rezultatov učenca — samo definicija testa.',
+  'Paren': 'Pari',
+  'Afleiders (optioneel)': 'Distraktorji (neobvezno)',
+  'Invulvelden': 'Polja za izpolnjevanje',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Gledalec povezuje levo z desnim. Par i ima levo[i] kot pravilen odgovor za desno[i]. Desni stolpec se med predstavitvijo premeša.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Gledalec vnese odgovor v vsako polje. Vsako polje ima enega ali več sprejetih odgovorov in strategijo ocenjevanja.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Gledalec kaže na eno ali več regij na sliki. Koordinate so normalizirane (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Dodatni desni elementi brez pravega partnerja. Težjo naredijo vprašanje.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Sprejeti odgovori (ločeni z vejico)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Dodaj distraktor',
+  'Afleider verwijderen': 'Odstrani distraktor',
+  'Bevat het antwoord': 'Vsebuje odgovor',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinate (x, y, w, h — normalizirane 0–1)',
+  'Evaluatiestrategie': 'Strategija ocenjevanja',
+  'Exacte overeenkomst': 'Točno ujemanje',
+  'Gebied': 'Območje',
+  'Gebied toevoegen': 'Dodaj območje',
+  'Gebied verwijderen': 'Odstrani območje',
+  'Getal in bereik': 'Število v obsegu',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Izberite sliko in označite vsaj eno pravilno območje.',
+  'Label (optioneel)': 'Oznaka (neobvezno)',
+  'Maak minstens twee gevulde paren.': 'Ustvari vsaj dva izpolnjena para.',
+  'Meerdere gebieden selecteerbaar': 'Več območij izberljivih',
+  'Paar toevoegen': 'Dodaj par',
+  'Paar verwijderen': 'Odstrani par',
+  'Tikfout toegestaan': 'Tipkarska napaka dovoljena',
+  'Veld': 'Polje',
+  'Veld toevoegen': 'Dodaj polje',
+  'Veld verwijderen': 'Odstrani polje',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Dodaj vsaj eno polje s sprejetim odgovorom.',
+  'Koppelen (matching)': 'Ujemanje (matching)',
+  'Invulvraag': 'Vprašanje za izpolnjevanje',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik na sliko)',
   'Presentaties op deze server': 'Predstavitve na tem strežniku',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sledi predstavitvi: ta diapozitiv stori to, kar stori predstavitev kot celota. Samo poročaj: najdba se šteje, prejemnik pa ne vidi ničesar — podatki so preprosto tam. Sprejmi: podatki spadajo sem in opozorilo izgine. Sprejmi + opozori: prejemnik vidi značko, da so na diapozitivu osebni podatki. Izpusti: najdeni podatki postanejo neberljivi na zaslonu in pri izvozu — vaša markdown datoteka obdrži izvirno besedilo.',
@@ -4663,4 +4722,38 @@ const _dutchSourceAddSl = <String, String>{
   'Gebieden': 'Območja',
   'bv. "de controller board met display"': 'npr. "krmilna plošča z zaslonom"',
   'Afbeeldingsverwijzingen': 'Sklice na slike',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata':
+      'Točkovanje, povratna informacija in metapodatki',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Točke, strategija točkovanja, povratna informacija, namigi, poskusi in povezave do učnih ciljev.',
+  'Scoringstrategie': 'Strategija točkovanja',
+  'Alles of niets': 'Vse ali nič',
+  'Deels': 'Delno',
+  'Per paar': 'Na par',
+  'Per item': 'Na element',
+  'Puntenaftrek per fout': 'Odteg točk za napačen odgovor',
+  'Maximum pogingen (0 = onbeperkt)': 'Največ poskusov (0 = neomejeno)',
+  'Feedback per uitkomst': 'Povratna informacija na izid',
+  'Bij goed antwoord': 'Pri pravilnem odgovoru',
+  'Bij fout antwoord': 'Pri napačnem odgovoru',
+  'Bij deels goed': 'Pri delno pravilnem',
+  'Bij timeout': 'Pri časovni omejitvi',
+  'Hints (één per regel, progressief)': 'Namigi (en na vrstico, progresivno)',
+  'Eerste hint\nTweede hint': 'Prvi namig\\nDrugi namig',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — sidro slajda na slajd s povratno informacijo',
+  'bijv. slide:3': 'npr. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Sklici učnih ciljev (sidra slajdov, en na vrstico)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metapodatki',
+  'Vak/onderwerp': 'Predmet/tema',
+  'Moeilijkheid': 'Težavnost',
+  '— geen —': '— brez —',
+  'Makkelijk': 'Lahko',
+  'Gemiddeld': 'Srednje',
+  'Moeilijk': 'Težko',
+  'Geschatte duur in seconden': 'Ocenjen trajanje v sekundah',
+  'Tags (komma-gescheiden)': 'Oznake (ločene z vejico)',
 };

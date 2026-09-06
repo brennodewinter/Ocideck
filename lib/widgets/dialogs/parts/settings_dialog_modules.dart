@@ -36,6 +36,7 @@ extension _SettingsModules on _SettingsDialogState {
             ModuleId.videoCalls => const VideoCallsModuleCard(),
             ModuleId.assetRights => const AssetRightsModuleCard(),
             ModuleId.managementsysteem => const ManagementsysteemModuleCard(),
+            ModuleId.elearning => const ElearningModuleCard(),
             ModuleId.libreplan => LibreplanModuleCard(
               enabled: _libreplanEnabled,
               onChanged: (v) => _rebuild(() => _libreplanEnabled = v),

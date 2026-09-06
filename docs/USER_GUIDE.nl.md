@@ -33,13 +33,14 @@
 - [Toegankelijkheid](#toegankelijkheid)
 - [Informatiebeveiligingsmodule (pentestrapporten)](#informatiebeveiligingsmodule-pentestrapporten)
 - [Managementsysteemmodule (ISO-voortgangsrapportage)](#managementsysteemmodule-iso-voortgangsrapportage)
+- [eLearning-module (lesmateriaal)](#elearning-module-lesmateriaal)
 - [LibrePlan-connector (optioneel)](#libreplan-connector-optioneel)
 - [Documenten](#documenten)
 - [Markdown-modus](#markdown-modus)
 - [Wat de browserversie niet kan](#wat-de-browserversie-niet-kan)
 - [Thema's en taal](#themas-en-taal)
 
-*(Toegevoegd 2026-07-22: dit document telt zo'n 5.300 regels en had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repositorypagina niet. Getal gecorrigeerd 2026-07-24, 2026-07-30 en 2026-08-30; er stond 2.992, daarna 3.350, daarna 3.800, elk kloppend op het moment van schrijven.)*
+*(Toegevoegd 2026-07-22: dit document telt zo'n 5.500 regels en had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repositorypagina niet. Getal gecorrigeerd 2026-07-24, 2026-07-30, 2026-08-30 en 2026-09-06; er stond 2.992, daarna 3.350, daarna 3.800, daarna 5.300, elk kloppend op het moment van schrijven.)*
 
 OciDeck bouwt [Marp](https://marp.app/)-presentaties via een gestructureerde,
 slide-voor-slide-editor. Je stelt getypeerde slides samen, bekijkt ze live,
@@ -753,7 +754,9 @@ acht statistische types wanneer de module Procesverbetering aanstaat; *gecorrige
 2026-08-30, hier stond zes terwijl `chartTypeRequiresProcesverbetering` er acht noemt,
 en de sectie over de module zelf verderop zegt acht*), **cockpit** (een
 dashboard van vliegtuigachtige instrumentmeters),
-**vraag** (een interactieve quizslide, in zes soorten), **tijdlijn** (een geanimeerde tijdlijn van
+**vraag** (een quizslide, in negen soorten — waarvan zes interactief tijdens
+presenteren; *gecorrigeerd 2026-09-06, hier stond zes soorten, van vóór de
+eLearning-module die `matching`, `hotspot` en `fillIn` toevoegde*), **tijdlijn** (een geanimeerde tijdlijn van
 gedateerde gebeurtenissen), **scorekaart** (een paar kerncijfers, elk naast het cijfer uit
 het vorige rapport), **keuzemenu** (blokken die elk naar een andere slide
 springen, als raster, lijst of ring, #1162), en
@@ -769,7 +772,9 @@ kiezer, zodat het toevoegen en het omtypen van een slide altijd precies dezelfde
 types bieden. (Beide kiezers zijn op categorie gefilterd: de zeven Informatieveiligheid-types
 — assetoverzicht, ontdekkingen, bevinding, bevindingensamenvatting, checklist, scopematrix
 en aftekening — verschijnen pas zodra de beveiligingsmodule is ingeschakeld; zie het
-onderdeel over pentestrapportage hieronder.)
+onderdeel over pentestrapportage hieronder. Datzelfde geldt voor de types van
+Procesverbetering, Managementsysteem en eLearning, elk achter zijn eigen
+module-schakelaar.)
 
 Weet je niet zeker waar een slidetype voor dient? De kiezer vertelt het je al voordat je kiest
 (hierboven), en achteraf herhaalt de kleine **"Wat kan ik hier?"**-
@@ -1311,6 +1316,50 @@ de kiezer, en kies dan de **soort** in de editor:
   antwoorden is de correctie tegen het **dichtstbijzijnde**, niet het eerste in de
   lijst.
 
+Met de eLearning-module kwamen er drie soorten bij (#1998, #2000–#2002 en
+#2012–#2014, *toegevoegd 2026-09-06*). Ze zijn **voorlopig alleen te schrijven**:
+je kunt ze invullen, opslaan en heropenen, maar er is geen weergave waarin een
+kijker ze beantwoordt. Lees de alinea eronder voordat je er een les op bouwt.
+
+- **Koppelen (matching)** — twee kolommen die de kijker aan elkaar moet leggen. Je
+  vult de paren links en rechts in; paar *i* is de antwoordsleutel, dus het
+  linkeritem op regel 3 hoort bij het rechteritem op regel 3. Je mag
+  **afleiders** toevoegen: extra rechteritems zonder partner. Er zijn minstens
+  twee gevulde paren nodig voordat de vraag compleet is, en de editor zegt dat
+  tot ze er staan.
+- **Invulvraag (fill-in)** — een of meer invulvelden waar de kijker in typt. Per
+  veld noem je de **aanvaarde antwoorden**, komma-gescheiden, en kies je hoe ze
+  worden beoordeeld: *exacte overeenkomst*, *bevat het antwoord*, *tikfout
+  toegestaan* of *getal in bereik*. Je kunt het veld ook een placeholder geven.
+  Anders dan bij **getypt antwoord**, dat zijn soepelheid uit één
+  overeenkomstpercentage haalt, staat de strategie hier per veld opgeschreven in
+  plaats van afgeleid.
+- **Hotspot** — de kijker moet een gebied op een afbeelding aanwijzen. Kies de
+  afbeelding en voeg daarna gebieden toe; elk heeft een optioneel label en een
+  knop **Juist** / **Afleider**, en een schakelaar op de dia bepaalt of er meer
+  dan één gebied gekozen mag worden. De rechthoek van een gebied **tik je in als
+  vier getallen** — `x, y, w, h`, genormaliseerd tussen 0 en 1 — want slepen op de
+  afbeelding is nog niet gebouwd. Genormaliseerd betekent dat de gebieden blijven
+  staan bij welke rendermaat dan ook.
+
+> **Wat deze drie nog niet doen.** De editor is af, de presentatie niet. Niets
+> tekent twee koppelkolommen, een klikbare afbeelding of een tweede invulveld, dus
+> wie zo'n vraag presenteert heeft geen bruikbaar antwoordgebied: bij *koppelen*
+> staat de vraagtekst met de linkerkolom eronder als gewone lijst, bij
+> *invulvraag* en *hotspot* staat alleen de vraag er. Wat ze wél niet meer doen is
+> je ophouden: ze worden getekend als vragen die niet te beantwoorden zijn, en dat
+> is precies wat de presentatie doorlaat — een vraag die OciDeck als beantwoordbaar
+> én onbeantwoord ziet houdt het deck vast tot hij goed is, en dat deden deze drie
+> een tijd lang, waarna alleen afsluiten nog hielp. Een tik op een item van een
+> koppellijst kan alleen als fout gelden, dus beschouw die lijst als iets om te
+> lezen en niet om aan te klikken. De grijze auteurshint onder de vraagkaart zwijgt
+> met opzet voor deze soorten, in plaats van een schudbeweging te beloven die
+> niemand ziet. De statische exports doen hetzelfde: de HTML-export print alleen de
+> vraag (zie hieronder). Wil je een quiz die in de zaal echt beantwoord wordt,
+> gebruik dan een van de zes oudere soorten. *(Vastgesteld 2026-09-06 en diezelfde
+> dag gecorrigeerd; de presentatiekant is de volgende stap, zie
+> [`docs/design/ELEARNING_MODEL.md`](design/ELEARNING_MODEL.md).)*
+
 Gemeenschappelijke opties voor elke soort:
 
 - **Antwoordlimieten** — het aantal dat in één ronde wordt getoond blijft ten hoogste acht.
@@ -1324,6 +1373,9 @@ Gemeenschappelijke opties voor elke soort:
   onbekend JSON-veld in plaats van ze stil te laten vallen. Opslaan kan de
   omringende afbakening, witruimte of JSON-opmaak normaliseren; opslagbewerkingen die
   afbeeldingspaden herschrijven behouden de velden maar kunnen de JSON eveneens herformatteren.
+  *(Toegevoegd 2026-09-06:)* `matching`, `hotspot` en `fillIn` houden helemaal geen
+  antwoordrecords — hun paren, gebieden en velden zijn eigen lijsten — en de
+  toevoegknoppen daarvoor stoppen bij dezelfde 32.
 
 - **Antwoordtijd** (optioneel) — een aftelling begint op het moment dat de slide verschijnt;
   opraken telt als een fout antwoord. Een vraag die zoals hij staat niet goed kan worden
@@ -1337,9 +1389,27 @@ Gemeenschappelijke opties voor elke soort:
   verborgen in plaats van nutteloos getoond. De grijze regel onderaan het slide-
   voorbeeld spelt per soort uit wat de presentatie zal randomiseren — "n van m
   opties worden willekeurig getoond" voor die twee, en iets anders voor de rest.
+  Voor de drie eLearning-soorten blijft die regel leeg, omdat er nog niets is
+  waarvan de willekeur beschreven kan worden (*toegevoegd 2026-09-06*).
 - **Afbeelding** (optioneel) — getoond naast de vraag met een splitsbalk, met een
   vergrootknop die een **pan-en-zoom**-detailweergave van de foto opent. Niet
   aangeboden voor *twee afbeeldingen*, dat al zijn eigen twee heeft.
+- **Scoring, feedback en metadata** (optioneel, ingeklapt) — een sectie onderaan
+  elke vraag-editor, dichtgevouwen omdat de meeste vragen hem nooit nodig hebben.
+  Er staan **punten** voor de vraag, een **scoringstrategie** (alles of niets,
+  deels, per paar, per item), een **puntenaftrek** per fout, een **maximum aantal
+  pogingen** (0 = onbeperkt), **feedback per uitkomst** (goed, fout, deels goed,
+  tijd op), **progressieve hints** één per regel, een **remediation**-verwijzing
+  naar een feedback-dia, verwijzingen naar **leerdoel-dia's** en leesbare
+  **metadata** (titel, vak, moeilijkheid, geschatte duur, tags). Alles hier wordt
+  **vastgelegd en nog niet uitgevoerd**: OciDeck schrijft deze velden naar het
+  bestand en leest ze terug, maar niets telt punten, trekt een aftrek af, staat een
+  tweede poging toe of zet jouw feedbacktekst op het scherm. Antwoordtijd en *bij
+  een fout antwoord* (hierboven) zijn de twee instellingen die vandaag wél werken,
+  en *maximum pogingen* overrulet ze niet. Velden die op hun standaard blijven
+  staan worden helemaal niet weggeschreven, dus deze sectie open- en dichtklappen
+  laat een bestaand deck byte-identiek. *(Toegevoegd 2026-09-06, #2003–#2005 en
+  #2008.)*
 
 Tijdens het presenteren kun je **niet verder** voorbij een vraag totdat hij juist is
 beantwoord (of beantwoord en vergrendeld). Een juist antwoord wordt groen en laat je
@@ -1364,8 +1434,18 @@ export werkt dat per soort uit: meerkeuze, juist/onjuist, meerdere juiste en
 ordenen printen hun opties als een lijst; een *twee afbeeldingen*-vraag print de twee
 afbeeldingen als gewone Markdown-afbeeldingen na de vraagkaart, zonder te zeggen
 welke de juiste is; en een *getypt antwoord* print de vraag alleen, omdat
-daar de geaccepteerde antwoorden *de* antwoordsleutel zijn. Het juiste antwoord wordt nooit
-voor enige soort geprint.
+daar de geaccepteerde antwoorden *de* antwoordsleutel zijn; en *koppelen*,
+*invulvraag* en *hotspot* printen eveneens alleen de vraag, omdat van hun inhoud
+nog niets een HTML-vorm heeft. In de **HTML**-export wordt het juiste antwoord
+nooit voor enige soort geprint.
+
+De **LaTeX/Beamer**-export is de uitzondering, en dat is hij altijd geweest: die
+begrijpt het vraagblok niet en print het als codeblok, dus de hele specificatie —
+inclusief welk antwoord als juist is aangemerkt — komt op de dia terecht. Geef een
+Beamer-export van een quiz niet aan de mensen die hem gaan maken. *(Ingeperkt
+2026-09-06: hierboven stond dat het juiste antwoord nooit "voor enige soort"
+geprint wordt, wat gold voor de HTML-export die de zin beschreef en niet voor de
+Beamer-export.)*
 
 ### Tijdlijn-slides
 
@@ -4393,6 +4473,140 @@ overschrijven. Als je een vers sjabloon wilt, verwijder dan eerst de bestaande r
 > [`docs/design/ISO_MANAGEMENTSYSTEEM.md`](design/ISO_MANAGEMENTSYSTEEM.md).
 > OciDeck rapporteert voortgang — het doet geen enkele claim over certificering of conformiteit en is
 > geen vervanging voor een auditor.
+
+## eLearning-module (lesmateriaal)
+
+*(Toegevoegd 2026-09-06, #1999.)*
+
+De eLearning-module voegt diatypes voor lesmateriaal toe: een **leerdoel**, een
+**module**-kop, een **feedback**-dia en een **assessment-samenvatting**. Samen met
+de drie vraagsoorten die onder [Vraag-slides](#vraag-slides) staan beschreven, kun
+je een les in hetzelfde bestand schrijven als al het andere — gewone Marp-Markdown
+en geen apart auteursprogramma.
+
+Zoals de andere optionele modules staat hij **standaard uit**. Zet hem aan onder
+**Instellingen → Uitbreidingen → eLearning**. De dialoog **Dia toevoegen** toont
+dan een tabblad **eLearning** met de vier types; een deck dat er al een van draagt
+toont het tabblad ook met de module uit, zodat uitzetten nooit bestaand werk laat
+stranden.
+
+> **Lees dit voordat je er werk in stopt.** De module is jong, en wat er ontbreekt
+> is de afspeelkant. Niets scoort een antwoord, telt pogingen of zet de feedback
+> die je hebt getypt op het scherm, en de drie nieuwe vraagsoorten hebben geen
+> weergave waarin een kijker ze beantwoordt. Wat je schrijft wordt wél goed
+> bewaard: de diatypes gaan heen en terug, body en al. Een kennischeck is geen
+> eigen diatype — het is een gewone **vraag**-dia, met alles wat een vraag-dia kan,
+> en de alinea's hieronder zeggen per onderwerp wat wel en niet werkt. Het ontwerp
+> achter de module, inclusief wat er bewust buiten valt, staat in
+> [`docs/design/ELEARNING_MODEL.md`](design/ELEARNING_MODEL.md).
+> *(Herschreven 2026-09-06: hier stond dat de body van deze dia's bij het
+> heropenen verloren ging, en dat een apart diatype **kennischeck** tijdens
+> presenteren niet als quiz liep. Beide klopten toen ze werden opgeschreven; het
+> bodyverlies is gerepareerd en het type is opgeheven ten gunste van de vraag-dia
+> die het altijd al was.)*
+
+### De vier diatypes
+
+- **Leerdoel** — wat de lerende moet kunnen. Gewone Markdown; de editor is de
+  vrije-Markdown-editor.
+- **Module** — een hoofdstuk- of moduletitel, om structuur te markeren tussen
+  leerdoelen en vragen. Het is een koptype, dus hij rendert als een
+  sectiescheiding. Ouder-kindrelaties tussen modules horen bij het ontwerp maar
+  zijn niet gebouwd; een moduledia is vandaag een kop en niets meer.
+- **Feedback** — de uitleg na een vraag: welk antwoord juist was en waarom, of een
+  verwijzing naar verder materiaal. Gewone Markdown.
+- **Assessment-samenvatting** — een leesbare samenvatting van een toets: hoeveel
+  vragen, de maximumscore, de slaaggrens. Je schrijft hem zelf als Markdown; hij
+  is met opzet een beschrijving van de toetsdefinitie en nooit het resultaat van
+  een lerende.
+
+Elk van de vier heeft zijn eigen `_class`-token in het bestand (`objective`,
+`module`, `feedback`, `assessment-summary`), dus het **type** komt terug als wat
+het was, in OciDeck en in elk ander Marp-programma dat onbekende klassen laat
+staan. Hun body is gewone Markdown en komt ongewijzigd terug, net als bij een dia
+met **vrije Markdown**; alle vier delen de vrije-Markdown-weergave en exporteren
+op dezelfde manier.
+
+> **Een kennischeck is een vraag-dia.** Er is geen apart diatype voor: zet een
+> **vraag**-dia op de plek waar de check hoort en kies de soort die je wilt. Dat is
+> geen omweg maar de bedoeling — alles wat aan het vraag-type hangt werkt dan (de
+> getrokken ronde, de aftelling, de regel *bij een fout antwoord*, het ophouden van
+> de presentatie tot het antwoord goed is), en een eigen type had daar niets van.
+> Een deck dat een ontwikkelbuild met `_class: kennischeck` heeft geschreven opent
+> nog gewoon: het token wordt als `question` gelezen en het blok eronder is
+> onveranderd. *(Vastgesteld 2026-09-06; het type heeft een deel van die dag
+> bestaan.)*
+
+> **Hun body is veilig, en dat was hij niet altijd.** Tijdens de bouw van deze vier
+> types werd hun tekst goed naar het bestand geschreven en daarna niet
+> teruggelezen: een kop kwam terug als diatitel, een opsomming belandde in een veld
+> dat hun editor niet toont, een gewone alinea viel weg, en de eerstvolgende opslag
+> schreef dat verlies naar schijf. Het schrijven en het inlezen beslissen nu op
+> dezelfde regel, dus de body van een leerdoel overleeft net zo goed als die van een
+> dia met vrije Markdown. Geen uitgebrachte versie van OciDeck heeft deze diatypes
+> ooit gehad, dus geen deck van jou kan die schade dragen; de aantekening blijft
+> staan omdat deze gids het omgekeerde zei tot de reparatie er was.
+> *(Gecorrigeerd 2026-09-06.)*
+
+### Geen resultaten van lerenden, met opzet
+
+Het **OciDeck-bestandsformaat** bewaart lesinhoud en toetsregels — het
+antwoordmodel, scoring, feedback, tijd, pogingsregels, slaaggrens en
+cursusstructuur. Het bewaart **geen resultaten van lerenden**: niet wie wat
+antwoordde, geen pogingen, geen persoonlijke voortgang, geen mastery, geen
+suspend data. Dat is geen gat dat in
+de bestaande velden nog opgevuld wordt: het formaat reserveert er met opzet geen
+sleutels voor, want een sleutel die "hier komen later resultaten" betekent krijgt
+of later een andere betekenis — wat het formaatcontract verbiedt — of een betekenis
+die botst met wat een andere build er al in schreef. Komt er ooit een
+resultatenlaag, dan krijgt die nieuwe sleutels in een nieuw bestand.
+
+### SCORM, QTI, xAPI/cmi5, AICC en OLX importeren
+
+OciDeck kan de structuur van een eLearning-pakket lezen: SCORM en IMS Content
+Packaging, QTI 2.x/3.x, cmi5 en xAPI activity metadata, AICC-cursusstructuren en
+OLX (Open edX). De herkenning gaat op wat er **in** het pakket zit en niet op de
+extensie — een `imsmanifest.xml`, een QTI-namespace, een `cmi5.xml`, een
+`course.xml` met de OLX-namespace, of de AICC-bestanden
+`.crs`/`.au`/`.cst`/`.des` — en een losse xAPI-JSON of QTI-XML wordt ook herkend.
+Alles gebeurt op je eigen machine; OciDeck is geen LRS en stuurt nergens
+xAPI-statements naartoe.
+
+Wat overkomt is **structuur en titels**: de organizations en items van een
+manifest, de assessment items van een QTI-bestand, de AU's van een cmi5-cursus, de
+les-elementen van een `.au`, de sequentials van een `course.xml`. Eén dia per
+element, en bij een QTI-item ook zijn identifier en de tekst van de vraagstelling.
+Wat **niet** overkomt is de rest van de inhoud — de HTML van een SCORM-item, de
+body van een OLX-unit, en bij een vraag de **keuzemogelijkheden en de
+antwoordsleutel**. Die worden niet omgezet en ook niet ergens bewaard, ook niet
+buiten het zicht: de geïmporteerde dia draagt een zichtbare placeholderregel die
+zegt dat de inhoud niet volledig is omgezet en die je vraagt de vraag en de
+antwoorden zelf toe te voegen. Een geïmporteerd QTI-item is dus een tekstdia en
+geen vraag-dia, en wie de bron later nodig heeft moet het pakket bewaren. Liever
+een dia die zegt dat hij niet af is dan een die af lijkt en leeg is.
+
+> **Er is nog geen manier om deze import vanuit de interface te starten.** De
+> bestandskiezer achter **… → Presentaties importeren…** biedt nog steeds alleen
+> `.pptx`, `.odp` en `.key`, en een pakket op het venster slepen gaat langs
+> dezelfde lijst. De lezers zitten in de build en zijn getoetst, maar zijn niet via
+> een menu te bereiken; deze alinea beschrijft dus een mogelijkheid en geen
+> werkwijze. *(Vastgesteld 2026-09-06, #1992–#1997.)*
+
+### De assessmentdefinitie naast het bestand
+
+Een toets als geheel — zijn secties, slaaggrens, tijdslimieten, navigatiemodus,
+voltooiingsregel, plus toegankelijkheidsmetadata die uit QTI meekwam — is geen
+eigenschap van één dia en hoort dus naast het `.md` in plaats van erin, in een
+sidecar met de naam `<naam>.elearning.json` (dezelfde opzet als bij
+inkt-aantekeningen en gebruikersnotities). Het model voor dat bestand bestaat, gaat
+heen en terug en houdt zich al aan de regel die elke andere sidecar aanhoudt: een
+bestand uit een nieuwere OciDeck dan de jouwe wordt in zijn geheel geweigerd in
+plaats van half gelezen, en sleutels die jouw build niet kent gaan onaangeroerd
+mee. **De app schrijft en leest het bestand nog niet.** Zolang dat zo is, is een
+assessment-samenvattingsdia wat je met de hand schrijft, en is de sidecar een vorm
+die op de code wacht die hem opslaat. *(Vastgesteld 2026-09-06, #2006–#2007; de
+versieregel is diezelfde dag gebouwd, nadat hier stond dat hij beloofd maar niet
+gebouwd was.)*
 
 ## LibrePlan-connector (optioneel)
 

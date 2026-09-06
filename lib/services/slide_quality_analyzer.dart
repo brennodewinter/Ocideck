@@ -425,7 +425,11 @@ class SlideQualityAnalyzer {
           SlideType.tree ||
           SlideType.flow ||
           SlideType.phaseGate ||
-          SlideType.gantt:
+          SlideType.gantt ||
+          SlideType.objective ||
+          SlideType.module ||
+          SlideType.feedback ||
+          SlideType.assessmentSummary:
         break;
     }
   }
@@ -485,6 +489,10 @@ class SlideQualityAnalyzer {
       case SlideType.flow:
       case SlideType.phaseGate:
       case SlideType.gantt:
+      case SlideType.objective:
+      case SlideType.module:
+      case SlideType.feedback:
+      case SlideType.assessmentSummary:
         break;
     }
   }
@@ -672,6 +680,10 @@ class SlideQualityAnalyzer {
       case SlideType.flow:
       case SlideType.phaseGate:
       case SlideType.gantt:
+      case SlideType.objective:
+      case SlideType.module:
+      case SlideType.feedback:
+      case SlideType.assessmentSummary:
         break;
     }
   }

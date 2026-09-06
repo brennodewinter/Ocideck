@@ -667,6 +667,65 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Starten': 'Kuminsá',
+  'Opleiding': 'Curso',
+  'Les': 'Les',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Krea konteniúdo di eLearning: meta di aprendizage, módulo, feedback i resumen di evaluashon. Importa SCORM, QTI, xAPI, AICC i OLX lokál. Pa defekto apagá; sende e ekstenshon pa usa e tiponan di diapositiva.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Un título di módulo of kapítulo. Uza es komo un markador struktural entre metanan di aprendizaje i preguntanan.',
+  'Leerdoel': 'Meta di aprendizaje',
+  'Module': 'Módulo',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Resumen di evaluashon',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Un meta di aprendizaje of kompetensia. Deskribí loke e aprendedor mester por hasí; konekta opsionalmente ku módulo of pregunta. No ta pretendé ku un hende a dominá e meta.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback of remediation despues di un pregunta. Splica kua respuesta tabata korekto i pakiko, of referí pa material adicional.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Resumen di evaluashon: cantidad di pregunta, skor maksimo, límite di aprobashon. Sin resultadonan di aprendedor — solamente e definishon di e toets.',
+  'Paren': 'Par',
+  'Afleiders (optioneel)': 'Distraktornan (opsyonal)',
+  'Invulvelden': 'Veldnan di yen',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'E mira ta konekta na man robes ku man drechi. Par i tin robes[i] como e respuesta corekto pa drechi[i]. E kolom drechi ta wordu mescla durante presentacion.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'E mira ta type e respuesta den cada veld. Cada veld tin un of mas respuesta aksepta y un strategia di evaluacion.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'E mira ta indica un of mas regionnan riba e imagen. Coordinadonan ta normalisa (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Itemnan drechi extra sin partner corekto. Nan ta haci e pregunta mas dificil.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Respuesta akseptá (separá pa komma)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Añadí distraktor',
+  'Afleider verwijderen': 'Kita distraktor',
+  'Bevat het antwoord': 'Kontené e respuesta',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordiná (x, y, w, h — normalisá 0–1)',
+  'Evaluatiestrategie': 'Estrategia di evaluashon',
+  'Exacte overeenkomst': 'Korespondensia eksakto',
+  'Gebied': 'Región',
+  'Gebied toevoegen': 'Añadí región',
+  'Gebied verwijderen': 'Kita región',
+  'Getal in bereik': 'Number den rango',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Skoge un imágen i marka por lo menos un región korekto.',
+  'Label (optioneel)': 'Label (opsjonal)',
+  'Maak minstens twee gevulde paren.': 'Krea por lo menos dos par yena.',
+  'Meerdere gebieden selecteerbaar': 'Múltiple región selekshonabel',
+  'Paar toevoegen': 'Añadí par',
+  'Paar verwijderen': 'Kita par',
+  'Tikfout toegestaan': 'Error di mashin permití',
+  'Veld': 'Kampo',
+  'Veld toevoegen': 'Añadí kampo',
+  'Veld verwijderen': 'Kita kampo',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Añadí por lo menos un kampo ku un respuesta akseptá.',
+  'Koppelen (matching)': 'Konektá (matching)',
+  'Invulvraag': 'Pregunta di yena',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik riba imágen)',
   'Presentaties op deze server': 'Presentashonnan na e server aki',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sigue e presentashon: e slaidi aki ta hasi loke e presentashon kompletu ta hasi. Solo notifiká: e hallazgo ta wòrdu kontá, pero e resibí no ta wèrdu nada — e datanan ta ai mester. Aseptá: e datanan ta pertenesé aki i e advertensia ta disparsé. Aseptá + advertí: e resibí ta wèrdu un badge ku tin datonan personal riba e slaidi. Kita for di pantaya i eksportashon: e datanan hañá ta wòrdu hañá inleíbel riba e pantaya i den eksportashon — bo fail di markdown ta keda ku e teksto original.',
@@ -4701,4 +4760,37 @@ const _dutchSourceAddPap = {
   'bv. "de controller board met display"':
       'por ehèmpel "e bòrd di kontrol ku display"',
   'Afbeeldingsverwijzingen': 'Referensian di imágen',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Skor, feedback i metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Puntunan, strategia di skor, feedback, suginanan, intentunan i link na meta di siña.',
+  'Scoringstrategie': 'Strategia di skor',
+  'Alles of niets': 'Tur of nada',
+  'Deels': 'Parcial',
+  'Per paar': 'Pa par',
+  'Per item': 'Pa kada item',
+  'Puntenaftrek per fout': 'Resta di punti pa respondi mishi',
+  'Maximum pogingen (0 = onbeperkt)': 'Intentu maksimo (0 = sin limit)',
+  'Feedback per uitkomst': 'Feedback pa resultado',
+  'Bij goed antwoord': 'Na respondi bon',
+  'Bij fout antwoord': 'Na respondi mishi',
+  'Bij deels goed': 'Na parcial bon',
+  'Bij timeout': 'Na timeout',
+  'Hints (één per regel, progressief)': 'Suginanan (un pa liña, progresivo)',
+  'Eerste hint\nTweede hint': 'Promé sugin\\nDi dos sugin',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — anchor di slide pa slide di feedback',
+  'bijv. slide:3': 'ehp. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Referensia di meta di siña (anchor di slide, un pa liña)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Materia/tema',
+  'Moeilijkheid': 'Difikutat',
+  '— geen —': '— ningun —',
+  'Makkelijk': 'Fasíl',
+  'Gemiddeld': 'Medio',
+  'Moeilijk': 'Dífísil',
+  'Geschatte duur in seconden': 'Durashon estimá na sekonde',
+  'Tags (komma-gescheiden)': 'Tags (separá pa koma)',
 };

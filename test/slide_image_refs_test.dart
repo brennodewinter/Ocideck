@@ -108,6 +108,53 @@ void main() {
     });
   });
 
+  group('hotspot-vraag (#1998)', () {
+    tearDown(WebAssetStore.clear);
+
+    // De hotspot-afbeelding staat als `image` op het question-blok zelf, niet
+    // bij de antwoorden. Daardoor viel ze buiten slideImageRefs: de
+    // asset-opruiming zag haar als wees en gooide haar weg, en de privacyscan
+    // keek er nooit naar. Dezelfde foutklasse als #853, een blok hoger.
+    Slide hotspotSlide(String image) =>
+        Slide.create(SlideType.question).copyWith(
+          customMarkdown: QuestionSpec(
+            kind: QuestionKind.hotspot,
+            prompt: 'Waar zit de router?',
+            hotspotImage: image,
+            regions: const [
+              HotspotRegion(
+                id: 'r',
+                coords: [0.1, 0.1, 0.3, 0.3],
+                correct: true,
+              ),
+            ],
+          ).toBlock(),
+        );
+
+    test('slideImageRefs kent de hotspot-afbeelding', () {
+      final refs = slideImageRefs(hotspotSlide('images/schema.png'));
+      expect(
+        refs.map((r) => r.path),
+        contains('images/schema.png'),
+        reason:
+            'zonder deze verwijzing wist de asset-opruiming de afbeelding '
+            'waar de vraag om draait',
+      );
+      expect(
+        refs.firstWhere((r) => r.path == 'images/schema.png').slot,
+        SlideImageSlot.questionImage,
+      );
+    });
+
+    test('rewriteSlideImagePaths verlegt de hotspot-afbeelding', () {
+      final out = rewriteSlideImagePaths(
+        hotspotSlide('images/schema.png'),
+        (p) => p == 'images/schema.png' ? 'mem:xyz' : null,
+      );
+      expect(QuestionSpec.parse(out.customMarkdown).hotspotImage, 'mem:xyz');
+    });
+  });
+
   group('imagePair-vraag (#853)', () {
     tearDown(WebAssetStore.clear);
 

@@ -831,6 +831,65 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Starten': 'Start',
+  'Opleiding': 'Course',
+  'Les': 'Lesson',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Create eLearning content: learning objectives, modules, feedback and assessment summaries. Import SCORM, QTI, xAPI, AICC and OLX locally. Off by default; turn on the extension to use the slide types.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'A module or chapter title. Use as a structural marker between learning objectives and questions.',
+  'Leerdoel': 'Learning objective',
+  'Module': 'Module',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Assessment summary',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'A learning objective or competency. Describe what the learner should be able to do; optionally link to modules or questions. No claim that anyone has mastered the objective.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback or remediation after a question. Explain which answer was correct and why, or refer to additional material.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Assessment summary: number of questions, maximum score, pass threshold. No learner results — only the test definition.',
+  'Paren': 'Pairs',
+  'Afleiders (optioneel)': 'Distractors (optional)',
+  'Invulvelden': 'Fill-in fields',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'The viewer connects left to right. Pair i has left[i] as the correct answer for right[i]. The right column is shuffled during presentation.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'The viewer types the answer in each field. Each field has one or more accepted answers and an evaluation strategy.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'The viewer points to one or more regions on the image. Coordinates are normalized (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Extra right items without a correct partner. They make the question harder.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Accepted answers (comma-separated)',
+  'Afleider': 'Distractor',
+  'Afleider toevoegen': 'Add distractor',
+  'Afleider verwijderen': 'Remove distractor',
+  'Bevat het antwoord': 'Contains the answer',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Coordinates (x, y, w, h — normalized 0–1)',
+  'Evaluatiestrategie': 'Evaluation strategy',
+  'Exacte overeenkomst': 'Exact match',
+  'Gebied': 'Region',
+  'Gebied toevoegen': 'Add region',
+  'Gebied verwijderen': 'Remove region',
+  'Getal in bereik': 'Number in range',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Choose an image and mark at least one correct region.',
+  'Label (optioneel)': 'Label (optional)',
+  'Maak minstens twee gevulde paren.': 'Create at least two filled pairs.',
+  'Meerdere gebieden selecteerbaar': 'Multiple regions selectable',
+  'Paar toevoegen': 'Add pair',
+  'Paar verwijderen': 'Remove pair',
+  'Tikfout toegestaan': 'Typo allowed',
+  'Veld': 'Field',
+  'Veld toevoegen': 'Add field',
+  'Veld verwijderen': 'Remove field',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Add at least one field with an accepted answer.',
+  'Koppelen (matching)': 'Matching',
+  'Invulvraag': 'Fill-in question',
+  'Hotspot (klik op afbeelding)': 'Hotspot (click on image)',
   'Presentaties op deze server': 'Presentations on this server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Follow the presentation: this slide does what the presentation as a whole does. Report only: the finding is counted, but the recipient sees nothing — the data is just there. Accept: the data belongs here and the warning disappears. Accept + warn: the recipient sees a badge that there is personal data on the slide. Redact: the found data is made unreadable on screen and in the export — your markdown file keeps the original text.',
@@ -4659,4 +4718,37 @@ const _dutchSourceAddEn = {
       'Document fields (header and footer) are not carried over.',
   'Voetnoten worden platte tekst; een presentatie kent geen noten.':
       'Footnotes become plain text; a presentation has no notes.',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata': 'Scoring, feedback and metadata',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Points, scoring strategy, feedback, hints, attempts and learning objective links.',
+  'Scoringstrategie': 'Scoring strategy',
+  'Alles of niets': 'All or nothing',
+  'Deels': 'Partial',
+  'Per paar': 'Per pair',
+  'Per item': 'Per item',
+  'Puntenaftrek per fout': 'Points deducted per wrong answer',
+  'Maximum pogingen (0 = onbeperkt)': 'Maximum attempts (0 = unlimited)',
+  'Feedback per uitkomst': 'Feedback per outcome',
+  'Bij goed antwoord': 'On correct answer',
+  'Bij fout antwoord': 'On wrong answer',
+  'Bij deels goed': 'On partially correct',
+  'Bij timeout': 'On timeout',
+  'Hints (één per regel, progressief)': 'Hints (one per line, progressive)',
+  'Eerste hint\nTweede hint': 'First hint\\nSecond hint',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — slide anchor to feedback slide',
+  'bijv. slide:3': 'e.g. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Learning objective references (slide anchors, one per line)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Metadata',
+  'Vak/onderwerp': 'Subject',
+  'Moeilijkheid': 'Difficulty',
+  '— geen —': '— none —',
+  'Makkelijk': 'Easy',
+  'Gemiddeld': 'Medium',
+  'Moeilijk': 'Hard',
+  'Geschatte duur in seconden': 'Estimated duration in seconds',
+  'Tags (komma-gescheiden)': 'Tags (comma-separated)',
 };

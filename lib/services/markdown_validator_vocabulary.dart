@@ -39,6 +39,14 @@ const _knownClassTokens = {
   // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4).
   'control-status',
   'gantt',
+  // eLearning-module (#1999).
+  'objective',
+  'module',
+  'feedback',
+  'assessment-summary',
+  // Opgeheven types waarvan het token leesbaar blijft, zodat een bestaand deck
+  // niet ineens een waarschuwing krijgt: zie _retiredSlideTypeClasses.
+  'kennischeck',
   'menu-grid',
   'menu-list',
   'menu-circle',

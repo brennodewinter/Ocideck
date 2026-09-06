@@ -1658,6 +1658,66 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Starten': 'Έναρξη',
+  'Opleiding': 'Εκπαίδευση',
+  'Les': 'Μάθημα',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Δημιουργήστε περιεχόμενο eLearning: στόχοι μάθησης, ενότητες, ανατροφοδότηση και περιλήψεις αξιολόγησης. Εισαγάγετε SCORM, QTI, xAPI, AICC και OLX τοπικά. Ανενεργό από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τους τύπους διαφανειών.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Τίτλος ενότητας ή κεφαλαίου. Χρησιμοποιήστε ως δομικό δείκτη μεταξύ στόχων μάθησης και ερωτήσεων.',
+  'Leerdoel': 'Στόχος μάθησης',
+  'Module': 'Ενότητα',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Σύνοψη αξιολόγησης',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Ένας στόχος μάθησης ή ικανότητα. Περιγράψτε τι πρέπει να μπορεί να κάνει ο εκπαιδευόμενος· συνδέστε προαιρετικά με ενότητες ή ερωτήσεις. Καμία διεκδίκηση ότι κάποιος έχει κατακτήσει τον στόχο.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Σχόλια ή αναπλήρωση μετά από μια ερώτηση. Εξηγήστε ποια απάντηση ήταν σωστή και γιατί, ή παραπέμψτε σε πρόσθετο υλικό.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Σύνοψη αξιολόγησης: αριθμός ερωτήσεων, μέγιστη βαθμολογία, όριο επιτυχίας. Χωρίς αποτελέσματα εκπαιδευόμενου — μόνο ο ορισμός του τεστ.',
+  'Paren': 'Ζευγάρια',
+  'Afleiders (optioneel)': 'Παραπλανητικά (προαιρετικά)',
+  'Invulvelden': 'Πεδία συμπλήρωσης',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Ο θεατής συνδέει τα αριστερά με τα δεξιά. Το ζευγάρι i έχει αριστερά[i] ως σωστή απάντηση για δεξιά[i]. Η δεξιά στήλη ανακατεύεται κατά την παρουσίαση.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Ο θεατής πληκτρολογεί την απάντηση σε κάθε πεδίο. Κάθε πεδίο έχει μία ή περισσότερες αποδεκτές απαντήσεις και μια στρατηγική αξιολόγησης.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Ο θεατής δείχνει μία ή περισσότερες περιοχές στην εικόνα. Οι συντεταγμένες είναι κανονικοποιημένες (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Επιπλέον δεξιά στοιχεία χωρίς σωστό ζευγάρι. Κάνουν την ερώτηση πιο δύσκολη.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Αποδεκτές απαντήσεις (διαχωρισμένες με κόμμα)',
+  'Afleider': 'Αντικείμενο παραπλάνησης',
+  'Afleider toevoegen': 'Προσθήκη αντικειμένου παραπλάνησης',
+  'Afleider verwijderen': 'Αφαίρεση αντικειμένου παραπλάνησης',
+  'Bevat het antwoord': 'Περιέχει την απάντηση',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Συντεταγμένες (x, y, w, h — κανονικοποιημένες 0–1)',
+  'Evaluatiestrategie': 'Στρατηγική αξιολόγησης',
+  'Exacte overeenkomst': 'Ακριβής αντιστοιχία',
+  'Gebied': 'Περιοχή',
+  'Gebied toevoegen': 'Προσθήκη περιοχής',
+  'Gebied verwijderen': 'Αφαίρεση περιοχής',
+  'Getal in bereik': 'Αριθμός σε εύρος',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Επιλέξτε μια εικόνα και σημειώστε τουλάχιστον μία σωστή περιοχή.',
+  'Label (optioneel)': 'Ετικέτα (προαιρετικό)',
+  'Maak minstens twee gevulde paren.':
+      'Δημιουργήστε τουλάχιστον δύο συμπληρωμένα ζεύγη.',
+  'Meerdere gebieden selecteerbaar': 'Επιλέξιμες πολλαπλές περιοχές',
+  'Paar toevoegen': 'Προσθήκη ζεύγους',
+  'Paar verwijderen': 'Αφαίρεση ζεύγους',
+  'Tikfout toegestaan': 'Τυπογραφικό σφάλμα επιτρέπεται',
+  'Veld': 'Πεδίο',
+  'Veld toevoegen': 'Προσθήκη πεδίου',
+  'Veld verwijderen': 'Αφαίρεση πεδίου',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Προσθέστε τουλάχιστον ένα πεδίο με μια αποδεκτή απάντηση.',
+  'Koppelen (matching)': 'Αντιστοίχιση (matching)',
+  'Invulvraag': 'Ερώτηση συμπλήρωσης',
+  'Hotspot (klik op afbeelding)': 'Hotspot (κλικ στην εικόνα)',
   'Presentaties op deze server': 'Παρουσιάσεις σε αυτόν τον διακομιστή',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Ακολουθήστε την παρουσίαση: αυτή η διαφάνεια κάνει ό,τι κάνει η παρουσίαση συνολικά. Μόνο αναφορά: η διαπίστωση μετράται, αλλά ο παραλήπτης δεν βλέπει τίποτα — τα δεδομένα είναι απλά εκεί. Αποδοχή: τα δεδομένα ανήκουν εδώ και η προειδοποίηση εξαφανίζεται. Αποδοχή + προειδοποίηση: ο παραλήπτης βλέπει ένα σήμα ότι υπάρχουν προσωπικά δεδομένα στη διαφάνεια. Απόκρυψη: τα δεδομένα που βρέθηκαν γίνονται δυσανάγνωστα στην οθόνη και στην εξαγωγή — το αρχείο markdown διατηρεί το αρχικό κείμενο.',
@@ -4730,4 +4790,39 @@ const _dutchSourceAddEl = <String, String>{
   'Gebieden': 'Περιοχές',
   'bv. "de controller board met display"': 'π.χ. "η πλακέτα ελέγχου με οθόνη"',
   'Afbeeldingsverwijzingen': 'Αναφορές εικόνων',
+  // Scoring, feedback en metadata sectie.
+  'Scoring, feedback en metadata':
+      'Βαθμολογία, ανατροφοδότηση και μεταδεδομένα',
+  'Punten, scoringstrategie, feedback, hints, pogingen en leerdoelkoppelingen.':
+      'Πόντοι, στρατηγική βαθμολογίας, ανατροφοδότηση, υποδείξεις, προσπάθειες και σύνδεσμοι στόχων μάθησης.',
+  'Scoringstrategie': 'Στρατηγική βαθμολογίας',
+  'Alles of niets': 'Όλα ή τίποτα',
+  'Deels': 'Μερική',
+  'Per paar': 'Ανά ζευγάρι',
+  'Per item': 'Ανά στοιχείο',
+  'Puntenaftrek per fout': 'Αφαίρεση πόντων ανά λάθος απάντηση',
+  'Maximum pogingen (0 = onbeperkt)': 'Μέγιστες προσπάθειες (0 = απεριόριστο)',
+  'Feedback per uitkomst': 'Ανατροφοδότηση ανά αποτέλεσμα',
+  'Bij goed antwoord': 'Σε σωστή απάντηση',
+  'Bij fout antwoord': 'Σε λάθος απάντηση',
+  'Bij deels goed': 'Σε μερικά σωστή',
+  'Bij timeout': 'Σε υπερβολή χρόνου',
+  'Hints (één per regel, progressief)':
+      'Υποδείξεις (μία ανά γραμμή, προοδευτικές)',
+  'Eerste hint\nTweede hint': 'Πρώτη υπόδειξη\\nΔεύτερη υπόδειξη',
+  'Remediation — slide-anchor naar feedback-slide':
+      'Remediation — άγκυρα διαφάνειας σε διαφάνεια ανατροφοδότησης',
+  'bijv. slide:3': 'π.χ. slide:3',
+  'Leerdoelverwijzingen (slide-anchors, één per regel)':
+      'Αναφορές στόχων μάθησης (άγκυρες διαφανειών, μία ανά γραμμή)',
+  'slide:0\nslide:5': 'slide:0\nslide:5',
+  'Metadata': 'Μεταδεδομένα',
+  'Vak/onderwerp': 'Μάθημα/θέμα',
+  'Moeilijkheid': 'Δυσκολία',
+  '— geen —': '— κανένα —',
+  'Makkelijk': 'Εύκολο',
+  'Gemiddeld': 'Μεσαίο',
+  'Moeilijk': 'Δύσκολο',
+  'Geschatte duur in seconden': 'Εκτιμώμενη διάρκεια σε δευτερόλεπτα',
+  'Tags (komma-gescheiden)': 'Ετικέτες (διαχωρισμένες με κόμμα)',
 };

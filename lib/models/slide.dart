@@ -84,6 +84,13 @@ enum SlideType {
   // gewone Markdown-tabel (dus [backedByTable]); de render leidt er Mermaid
   // gantt-DSL uit af via `ganttTableToMermaid` — de DSL wordt nooit opgeslagen.
   gantt,
+  // eLearning-module (#1999). Structurele slides die geïmporteerde én
+  // handmatig gemaakte leerinhoud begrijpelijk tonen. Inhoud is gewone
+  // Markdown; sidecars bewaren bronrelaties en ondoorzichtige importmetadata.
+  objective,
+  module,
+  feedback,
+  assessmentSummary,
 }
 
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
@@ -291,6 +298,30 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     category: SlideCategory.procesverbetering,
     backedByTable: true,
   ),
+  // eLearning-module (#1999). Structurele slides voor leerinhoud.
+  // Inhoud is gewone Markdown; de _class-tokens zijn domeinspecifiek
+  // zodat importers ze herkennen, maar de render is plain Markdown.
+  SlideType.objective: SlideTypeMeta(
+    label: 'Leerdoel',
+    marpClass: 'objective',
+    category: SlideCategory.eLearning,
+  ),
+  SlideType.module: SlideTypeMeta(
+    label: 'Module',
+    marpClass: 'module',
+    category: SlideCategory.eLearning,
+    isHeading: true,
+  ),
+  SlideType.feedback: SlideTypeMeta(
+    label: 'Feedback',
+    marpClass: 'feedback',
+    category: SlideCategory.eLearning,
+  ),
+  SlideType.assessmentSummary: SlideTypeMeta(
+    label: 'Assessment-samenvatting',
+    marpClass: 'assessment-summary',
+    category: SlideCategory.eLearning,
+  ),
 };
 
 /// De registry andersom: `_class`-token → slidetype.
@@ -306,43 +337,6 @@ final Map<String, SlideType> slideTypeByMarpClass = {
   for (final entry in slideTypeMeta.entries)
     if (entry.value.marpClass.isNotEmpty) entry.value.marpClass: entry.key,
 };
-
-extension SlideTypeExtension on SlideType {
-  String get label => slideTypeMeta[this]!.label;
-  String get marpClass => slideTypeMeta[this]!.marpClass;
-
-  /// True for the bulletsImage split layout (body beside an inline image).
-  bool get splitWithImage => slideTypeMeta[this]!.splitWithImage;
-
-  /// True for a title/section heading slide.
-  bool get isHeading => slideTypeMeta[this]!.isHeading;
-
-  /// The picker category this type belongs to.
-  SlideCategory get category => slideTypeMeta[this]!.category;
-
-  /// Hoeveel kolommen doorlopende bullettekst dit type toont.
-  BulletColumns get bulletColumns => slideTypeMeta[this]!.bulletColumns;
-
-  /// True when the type's content lives in [Slide.tableRows] and round-trips
-  /// through the shared table writer/reader. See [SlideTypeMeta.backedByTable].
-  bool get backedByTable => slideTypeMeta[this]!.backedByTable;
-
-  /// Informatieveiligheid scaffold types (P1-S) whose body is still stored as
-  /// free Markdown in [Slide.customMarkdown] and round-trips like a free-Markdown
-  /// slide until each type's structured serialiser lands. `checklist` (P1-CHK),
-  /// `scopeMatrix` (P1-SCOPE) and `findingsSummary` (P1-SUM) graduated to real
-  /// Markdown tables in [Slide.tableRows]; `signOff` (P1-SIGN) stores only an
-  /// optional heading (its attestation is deck-level), so all four are excluded
-  /// here. Only `finding` (P1-FIND) still uses the scaffold body.
-  ///
-  /// De drie afgestudeerde types worden aan [backedByTable] herkend in plaats
-  /// van bij naam: een nieuw tabelgedragen module-type is dan meteen goed
-  /// ingedeeld, in plaats van stil als scaffold-Markdown te worden gelezen.
-  bool get usesScaffoldMarkdownBody =>
-      category == SlideCategory.informationSecurity &&
-      !backedByTable &&
-      this != SlideType.signOff;
-}
 
 class Slide {
   final String id;
