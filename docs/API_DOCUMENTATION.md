@@ -84,9 +84,9 @@ Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
 `lib/models/question.dart` — the payload of a `question` slide, carried as JSON in
 `Slide.customMarkdown` (see [FILE_FORMAT.md](FILE_FORMAT.md) for the block).
 
-`QuestionKind` (6 values): `multipleChoice, trueFalse, multipleCorrect, ordering,
-imagePair, openText`. `QuestionOnWrong` (2 values): `retry, lockAndContinue`.
-`QuestionResult` (3 values): `none, correct, wrong`.
+`QuestionKind` (9 values): `multipleChoice, trueFalse, multipleCorrect, ordering,
+imagePair, openText, matching, hotspot, fillIn`. `QuestionOnWrong` (2 values):
+`retry, lockAndContinue`. `QuestionResult` (3 values): `none, correct, wrong`.
 
 Two classes, deliberately separate:
 

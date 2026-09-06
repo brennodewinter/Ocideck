@@ -538,7 +538,10 @@ const Map<String, int> classSizeBaseline = {
   // +16 (#1952): _saveQueued-wachtrij in save() — een tweede Cmd/Ctrl+S tijdens
   // een lopende opslag wordt onthouden en opnieuw uitgevoerd als het tabblad nog
   // vuil is. Eén veld + vijf regels in save() + import dart:async.
-  'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1213,
+  // +6 (#1998): drie nieuwe QuestionKind-cases (matching, hotspot, fillIn) in
+  // de exhaustive _authorDrawHint-switch — Dart vereist alle enum-waarden, en
+  // de eLearning-kinds zijn nog niet interactief presenteerbaar.
+  'lib/widgets/slides/slide_preview.dart#_QuestionPreview': 1219,
   // +10 (#1162): de `menu`-tak in de drie kwaliteitsswitches (contrast, alt-tekst,
   // ontbrekend bestand) + de dichtheidsswitch — menublokken zijn een raster, geen
   // doorlopende tekst; de blokafbeeldingen zitten in de bullet-tekst, niet in

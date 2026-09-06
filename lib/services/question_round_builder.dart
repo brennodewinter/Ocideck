@@ -68,6 +68,15 @@ class QuestionRoundBuilder {
         return _openText(spec, base);
       case QuestionKind.multipleChoice:
         return _singleChoice(spec, base);
+      // De eLearning-kinds (matching, hotspot, fillIn) hebben een eigen
+      // presentatiemodel dat in #1999 wordt gebouwd. Tot die tijd zijn ze
+      // niet interactief presenteerbaar: de rondebouwer geeft een
+      // niet-te-beantwoorden weergave terug, zodat de vraag wel op het
+      // scherm verschijnt maar het doorbladeren niet blokkeert.
+      case QuestionKind.matching:
+      case QuestionKind.hotspot:
+      case QuestionKind.fillIn:
+        return base.copyWith(answerable: false);
     }
   }
 

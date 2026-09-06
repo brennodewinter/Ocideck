@@ -284,6 +284,269 @@ void main() {
     });
   });
 
+  // ── eLearning-uitbreiding: matching, hotspot, fillIn + gedeelde velden ──
+
+  group('QuestionSpec — matching', () {
+    const spec = QuestionSpec(
+      kind: QuestionKind.matching,
+      prompt: 'Koppel term aan definitie',
+      pairs: [
+        MatchPair(id: 't1', left: 'TCP', right: 'Transportlaag'),
+        MatchPair(id: 't2', left: 'IP', right: 'Netwerklaag'),
+      ],
+      distractors: ['Sessielaag'],
+      points: 2,
+      scoring: QuestionScoring.partialPerPair,
+    );
+
+    test('round-trips through toBlock → parse', () {
+      final back = QuestionSpec.parse(spec.toBlock());
+      expect(back.kind, QuestionKind.matching);
+      expect(back.prompt, 'Koppel term aan definitie');
+      expect(back.pairs, hasLength(2));
+      expect(back.pairs[0].id, 't1');
+      expect(back.pairs[0].left, 'TCP');
+      expect(back.pairs[0].right, 'Transportlaag');
+      expect(back.pairs[1].left, 'IP');
+      expect(back.distractors, ['Sessielaag']);
+      expect(back.points, 2);
+      expect(back.scoring, QuestionScoring.partialPerPair);
+    });
+
+    test('does not write the answers key for matching', () {
+      final decoded = jsonDecode(spec.toBlock());
+      expect(decoded.containsKey('answers'), isFalse);
+      expect(decoded.containsKey('pairs'), isTrue);
+    });
+
+    test('isPresentable needs at least two filled pairs', () {
+      expect(spec.isPresentable, isTrue);
+      const one = QuestionSpec(
+        kind: QuestionKind.matching,
+        pairs: [MatchPair(id: 'a', left: 'x', right: 'y')],
+      );
+      expect(one.isPresentable, isFalse);
+      const emptyRight = QuestionSpec(
+        kind: QuestionKind.matching,
+        pairs: [
+          MatchPair(id: 'a', left: 'x', right: ''),
+          MatchPair(id: 'b', left: 'y', right: 'z'),
+        ],
+      );
+      expect(emptyRight.isPresentable, isFalse);
+    });
+  });
+
+  group('QuestionSpec — hotspot', () {
+    const spec = QuestionSpec(
+      kind: QuestionKind.hotspot,
+      prompt: 'Klik op de firewall',
+      hotspotImage: 'images/schema.png',
+      regions: [
+        HotspotRegion(
+          id: 'r1',
+          shape: 'rect',
+          coords: [0.1, 0.2, 0.3, 0.4],
+          correct: true,
+          label: 'Firewall',
+        ),
+        HotspotRegion(
+          id: 'r2',
+          shape: 'rect',
+          coords: [0.5, 0.5, 0.7, 0.7],
+          label: 'Database',
+        ),
+      ],
+      multiSelect: false,
+    );
+
+    test('round-trips through toBlock → parse', () {
+      final back = QuestionSpec.parse(spec.toBlock());
+      expect(back.kind, QuestionKind.hotspot);
+      expect(back.hotspotImage, 'images/schema.png');
+      expect(back.regions, hasLength(2));
+      expect(back.regions[0].id, 'r1');
+      expect(back.regions[0].shape, 'rect');
+      expect(back.regions[0].coords, [0.1, 0.2, 0.3, 0.4]);
+      expect(back.regions[0].correct, isTrue);
+      expect(back.regions[0].label, 'Firewall');
+      expect(back.regions[1].correct, isFalse);
+      expect(back.multiSelect, isFalse);
+    });
+
+    test('does not write the answers key for hotspot', () {
+      final decoded = jsonDecode(spec.toBlock());
+      expect(decoded.containsKey('answers'), isFalse);
+      expect(decoded.containsKey('regions'), isTrue);
+      expect(decoded['image'], 'images/schema.png');
+    });
+
+    test('isPresentable needs an image and at least one correct region', () {
+      expect(spec.isPresentable, isTrue);
+      const noImage = QuestionSpec(
+        kind: QuestionKind.hotspot,
+        regions: [
+          HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.2, 0.2], correct: true),
+        ],
+      );
+      expect(noImage.isPresentable, isFalse);
+      const noCorrect = QuestionSpec(
+        kind: QuestionKind.hotspot,
+        hotspotImage: 'x.png',
+        regions: [
+          HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.2, 0.2]),
+        ],
+      );
+      expect(noCorrect.isPresentable, isFalse);
+    });
+  });
+
+  group('QuestionSpec — fillIn', () {
+    const spec = QuestionSpec(
+      kind: QuestionKind.fillIn,
+      prompt: 'Hoeveel lagen heeft het OSI-model?',
+      fields: [
+        FillField(
+          id: 'f1',
+          accepted: ['7', 'zeven'],
+          matchMode: FillMatchMode.exact,
+          placeholder: 'aantal',
+          maxLength: 20,
+        ),
+      ],
+      points: 1,
+    );
+
+    test('round-trips through toBlock → parse', () {
+      final back = QuestionSpec.parse(spec.toBlock());
+      expect(back.kind, QuestionKind.fillIn);
+      expect(back.fields, hasLength(1));
+      expect(back.fields[0].id, 'f1');
+      expect(back.fields[0].accepted, ['7', 'zeven']);
+      expect(back.fields[0].matchMode, FillMatchMode.exact);
+      expect(back.fields[0].placeholder, 'aantal');
+      expect(back.fields[0].maxLength, 20);
+    });
+
+    test('does not write the answers key for fillIn', () {
+      final decoded = jsonDecode(spec.toBlock());
+      expect(decoded.containsKey('answers'), isFalse);
+      expect(decoded.containsKey('fields'), isTrue);
+    });
+
+    test('isPresentable needs at least one field with accepted answers', () {
+      expect(spec.isPresentable, isTrue);
+      const empty = QuestionSpec(
+        kind: QuestionKind.fillIn,
+        fields: [FillField(id: 'f', accepted: [])],
+      );
+      expect(empty.isPresentable, isFalse);
+    });
+
+    test('matchMode defaults to exact for an unknown name', () {
+      final back = QuestionSpec.parse(
+        '{"kind":"fillIn","fields":[{"id":"f","accepted":["x"],"matchMode":"bogus"}]}',
+      );
+      expect(back.fields[0].matchMode, FillMatchMode.exact);
+    });
+  });
+
+  group('QuestionSpec — gedeelde velden', () {
+    test('defaults: points=1, scoring=allOrNothing, maxAttempts=1', () {
+      const spec = QuestionSpec();
+      expect(spec.points, 1);
+      expect(spec.scoring, QuestionScoring.allOrNothing);
+      expect(spec.penalty, 0);
+      expect(spec.maxAttempts, 1);
+      expect(spec.feedback.isEmpty, isTrue);
+      expect(spec.hints, isEmpty);
+      expect(spec.remediation, isEmpty);
+      expect(spec.objectiveRefs, isEmpty);
+      expect(spec.metadata.isEmpty, isTrue);
+    });
+
+    test('shared fields round-trip and only write when non-default', () {
+      const spec = QuestionSpec(
+        prompt: 'Test',
+        points: 3,
+        scoring: QuestionScoring.partialPerCorrect,
+        penalty: 1,
+        maxAttempts: 2,
+        feedback: QuestionFeedback(
+          correct: 'Goed gedaan',
+          wrong: 'Probeer nog eens',
+        ),
+        hints: ['Denk aan de lagen'],
+        remediation: 'slide:5',
+        objectiveRefs: ['slide:0', 'slide:1'],
+        metadata: QuestionMetadata(
+          title: 'OSI vraag',
+          language: 'nl',
+          difficulty: 'medium',
+          tags: ['netwerken', 'osi'],
+        ),
+      );
+      final block = spec.toBlock();
+      final decoded = jsonDecode(block);
+      expect(decoded['points'], 3);
+      expect(decoded['scoring'], 'partialPerCorrect');
+      expect(decoded['penalty'], 1);
+      expect(decoded['maxAttempts'], 2);
+      expect(decoded['feedback']['correct'], 'Goed gedaan');
+      expect(decoded['hint'], 'Denk aan de lagen'); // single hint → string
+      expect(decoded['remediation'], 'slide:5');
+      expect(decoded['objectiveRefs'], ['slide:0', 'slide:1']);
+      expect(decoded['metadata']['title'], 'OSI vraag');
+      expect(decoded['metadata']['tags'], ['netwerken', 'osi']);
+
+      final back = QuestionSpec.parse(block);
+      expect(back.points, 3);
+      expect(back.scoring, QuestionScoring.partialPerCorrect);
+      expect(back.penalty, 1);
+      expect(back.maxAttempts, 2);
+      expect(back.feedback.correct, 'Goed gedaan');
+      expect(back.feedback.wrong, 'Probeer nog eens');
+      expect(back.hints, ['Denk aan de lagen']);
+      expect(back.remediation, 'slide:5');
+      expect(back.objectiveRefs, ['slide:0', 'slide:1']);
+      expect(back.metadata.title, 'OSI vraag');
+      expect(back.metadata.tags, ['netwerken', 'osi']);
+    });
+
+    test('default shared fields are not written to the block', () {
+      const spec = QuestionSpec(prompt: 'Minimaal');
+      final decoded = jsonDecode(spec.toBlock());
+      expect(decoded.containsKey('points'), isFalse);
+      expect(decoded.containsKey('scoring'), isFalse);
+      expect(decoded.containsKey('penalty'), isFalse);
+      expect(decoded.containsKey('maxAttempts'), isFalse);
+      expect(decoded.containsKey('feedback'), isFalse);
+      expect(decoded.containsKey('hint'), isFalse);
+      expect(decoded.containsKey('remediation'), isFalse);
+      expect(decoded.containsKey('objectiveRefs'), isFalse);
+      expect(decoded.containsKey('metadata'), isFalse);
+    });
+
+    test('multiple hints round-trip as an array', () {
+      const spec = QuestionSpec(
+        prompt: 'Test',
+        hints: ['Eerste hint', 'Tweede hint'],
+      );
+      final decoded = jsonDecode(spec.toBlock());
+      expect(decoded['hint'], ['Eerste hint', 'Tweede hint']);
+      final back = QuestionSpec.parse(spec.toBlock());
+      expect(back.hints, ['Eerste hint', 'Tweede hint']);
+    });
+  });
+
+  group('QuestionSpec — unknown kind preservation', () {
+    test('an unknown kind falls back to multipleChoice', () {
+      final spec = QuestionSpec.parse('{"kind":"futureKind","prompt":"x"}');
+      expect(spec.kind, QuestionKind.multipleChoice);
+      expect(spec.prompt, 'x');
+    });
+  });
+
   group('QuestionView', () {
     const view = QuestionView(
       options: ['a', 'b', 'c'],

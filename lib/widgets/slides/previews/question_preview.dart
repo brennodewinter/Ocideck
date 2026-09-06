@@ -873,6 +873,12 @@ class _QuestionPreview extends StatelessWidget {
       case QuestionKind.multipleChoice:
       case QuestionKind.ordering:
         return '${spec.optionCount} ${l10n.d('van')} $filled ${l10n.d('opties worden willekeurig getoond')}';
+      // De eLearning-kinds krijgen hun eigen hint in #1999; tot die tijd
+      // geen trek-hint (de vraag is nog niet interactief presenteerbaar).
+      case QuestionKind.matching:
+      case QuestionKind.hotspot:
+      case QuestionKind.fillIn:
+        return null;
     }
   }
 
