@@ -449,6 +449,47 @@ void main() {
       );
       expect(back.fields[0].matchMode, FillMatchMode.exact);
     });
+
+    // Een handgeschreven veld mag niet van betekenis veranderen doordat het
+    // door OciDeck heen ging. Dit is precies het blok dat het ontwerp bij
+    // numericRange voorschrijft (ELEARNING_MODEL.md §3.2).
+    test('numericRange houdt tolerance en unit vast door de rondgang', () {
+      const raw =
+          '{"kind":"fillIn","fields":[{"id":"f","accepted":["6..8"],'
+          '"matchMode":"numericRange","tolerance":0.5,"unit":"cm"}]}';
+      final back = QuestionSpec.parse(raw);
+      expect(back.fields[0].matchMode, FillMatchMode.numericRange);
+      expect(back.fields[0].tolerance, 0.5);
+      expect(back.fields[0].unit, 'cm');
+
+      // En ook nog na opnieuw wegschrijven — daar gingen ze verloren.
+      final again = QuestionSpec.parse(back.toBlock());
+      expect(again.fields[0].tolerance, 0.5);
+      expect(again.fields[0].unit, 'cm');
+    });
+
+    test('een veld zonder normalize krijgt de gedocumenteerde standaard', () {
+      final back = QuestionSpec.parse(
+        '{"kind":"fillIn","fields":[{"id":"f","accepted":["x"]}]}',
+      );
+      expect(
+        back.fields[0].normalize,
+        FillField.defaultNormalize,
+        reason: 'een ontbrekende sleutel is "de standaard", niet "niets"; '
+            'anders verandert de antwoordsleutel bij het eerste opslaan',
+      );
+    });
+
+    test('een expliciet lege normalize blijft leeg', () {
+      final back = QuestionSpec.parse(
+        '{"kind":"fillIn","fields":[{"id":"f","accepted":["x"],"normalize":[]}]}',
+      );
+      expect(
+        back.fields[0].normalize,
+        isEmpty,
+        reason: 'wie expliciet niets normaliseert, moet dat houden',
+      );
+    });
   });
 
   group('QuestionSpec — gedeelde velden', () {

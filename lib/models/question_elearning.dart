@@ -89,6 +89,11 @@ FillMatchMode _fillMatchModeFromName(String? name) => FillMatchMode.values
 /// ([matchMode], [normalize]) wordt expliciet vastgelegd, nooit impliciet
 /// afgeleid uit tekst.
 class FillField {
+  /// De normalisaties die gelden wanneer het veld er geen noemt. Staat hier als
+  /// constante omdat zowel de constructor als [FillField.fromJson] hem nodig
+  /// heeft, en die twee niet mogen verschillen.
+  static const defaultNormalize = ['trim', 'collapseWhitespace'];
+
   final String id;
   final List<String> accepted;
   final FillMatchMode matchMode;
@@ -97,14 +102,26 @@ class FillField {
   final String placeholder;
   final int maxLength;
 
+  /// Toegestane afwijking bij [FillMatchMode.numericRange], en de eenheid
+  /// waarin het antwoord staat (ontwerp §3.2, allebei optioneel).
+  ///
+  /// Ze dragen mee zonder dat er al iets mee rekent: de evaluatie van fillIn
+  /// bestaat nog niet. Dat is precies waarom ze hier staan — zonder deze velden
+  /// gooide één lees-schrijfronde in OciDeck de tolerantie en de eenheid uit het
+  /// bestand van de auteur, en dat is andermans antwoordsleutel.
+  final double tolerance;
+  final String unit;
+
   const FillField({
     this.id = '',
     this.accepted = const [],
     this.matchMode = FillMatchMode.exact,
     this.caseSensitive = false,
-    this.normalize = const ['trim', 'collapseWhitespace'],
+    this.normalize = defaultNormalize,
     this.placeholder = '',
     this.maxLength = 0,
+    this.tolerance = 0,
+    this.unit = '',
   });
 
   factory FillField.fromJson(Map<String, dynamic> json) => FillField(
@@ -112,9 +129,16 @@ class FillField {
     accepted: [for (final a in (json['accepted'] as List? ?? const [])) '$a'],
     matchMode: _fillMatchModeFromName(json['matchMode']?.toString()),
     caseSensitive: json['caseSensitive'] == true,
-    normalize: [for (final n in (json['normalize'] as List? ?? const [])) '$n'],
+    // Géén sleutel betekent "de standaard", een lege lijst betekent "expliciet
+    // niets normaliseren". Die twee gelijktrekken op [] veranderde de betekenis
+    // van een handgeschreven veld zodra het door OciDeck heen ging.
+    normalize: json.containsKey('normalize')
+        ? [for (final n in (json['normalize'] as List? ?? const [])) '$n']
+        : defaultNormalize,
     placeholder: (json['placeholder'] ?? '').toString(),
     maxLength: (json['maxLength'] as num?)?.toInt() ?? 0,
+    tolerance: (json['tolerance'] as num?)?.toDouble() ?? 0,
+    unit: (json['unit'] ?? '').toString(),
   );
 
   FillField copyWith({
@@ -125,6 +149,8 @@ class FillField {
     List<String>? normalize,
     String? placeholder,
     int? maxLength,
+    double? tolerance,
+    String? unit,
   }) => FillField(
     id: id ?? this.id,
     accepted: accepted ?? this.accepted,
@@ -133,6 +159,8 @@ class FillField {
     normalize: normalize ?? this.normalize,
     placeholder: placeholder ?? this.placeholder,
     maxLength: maxLength ?? this.maxLength,
+    tolerance: tolerance ?? this.tolerance,
+    unit: unit ?? this.unit,
   );
 
   Map<String, dynamic> toJson() => {
@@ -143,6 +171,8 @@ class FillField {
     'normalize': normalize,
     if (placeholder.isNotEmpty) 'placeholder': placeholder,
     if (maxLength > 0) 'maxLength': maxLength,
+    if (tolerance != 0) 'tolerance': tolerance,
+    if (unit.isNotEmpty) 'unit': unit,
   };
 }
 
