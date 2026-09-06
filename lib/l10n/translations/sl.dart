@@ -1633,10 +1633,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Starten': 'Začni',
+  'Opleiding': 'Tečaj',
+  'Les': 'Lekcija',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Ustvarjajte eLearning vsebino: učne cilje, module, povratne informacije in povzetke ocenjevanja. Uvozite SCORM, QTI, xAPI, AICC in OLX lokalno. Privzeto izklopljeno; vklopite razširitev za uporabo vrst diapozitivov.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Naslov modula ali poglavja. Uporabite kot strukturni označevalnik med cilji učenja in vprašanji.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Ustvarjajte eLearning vsebino: učne cilje, module, preverjanja znanja, povratne informacije in povzetke ocenjevanja. Uvozite SCORM, QTI, xAPI, AICC in OLX lokalno. Privzeto izklopljeno; vklopite razširitev za uporabo vrst diapozitivov.',
   'Leerdoel': 'Cilj učenja',
   'Module': 'Modul',
   'Feedback': 'Feedback',

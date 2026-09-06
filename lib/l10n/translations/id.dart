@@ -1633,10 +1633,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Starten': 'Mulai',
+  'Opleiding': 'Kursus',
+  'Les': 'Pelajaran',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Buat konten eLearning: tujuan pembelajaran, modul, umpan balik, dan ringkasan asesmen. Impor SCORM, QTI, xAPI, AICC, dan OLX secara lokal. Nonaktif secara default; aktifkan ekstensi untuk menggunakan tipe slide.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Judul modul atau bab. Gunakan sebagai penanda struktural antara tujuan pembelajaran dan pertanyaan.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Buat konten eLearning: tujuan pembelajaran, modul, pemeriksaan pengetahuan, umpan balik, dan ringkasan asesmen. Impor SCORM, QTI, xAPI, AICC, dan OLX secara lokal. Nonaktif secara default; aktifkan ekstensi untuk menggunakan tipe slide.',
   'Leerdoel': 'Tujuan pembelajaran',
   'Module': 'Modul',
   'Feedback': 'Feedback',

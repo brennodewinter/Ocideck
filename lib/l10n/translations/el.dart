@@ -1658,10 +1658,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Starten': 'Έναρξη',
+  'Opleiding': 'Εκπαίδευση',
+  'Les': 'Μάθημα',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Δημιουργήστε περιεχόμενο eLearning: στόχοι μάθησης, ενότητες, ανατροφοδότηση και περιλήψεις αξιολόγησης. Εισαγάγετε SCORM, QTI, xAPI, AICC και OLX τοπικά. Ανενεργό από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τους τύπους διαφανειών.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Τίτλος ενότητας ή κεφαλαίου. Χρησιμοποιήστε ως δομικό δείκτη μεταξύ στόχων μάθησης και ερωτήσεων.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Δημιουργήστε περιεχόμενο eLearning: στόχοι μάθησης, ενότητες, έλεγχοι γνώσεων, ανατροφοδότηση και περιλήψεις αξιολόγησης. Εισαγάγετε SCORM, QTI, xAPI, AICC και OLX τοπικά. Ανενεργό από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τους τύπους διαφανειών.',
   'Leerdoel': 'Στόχος μάθησης',
   'Module': 'Ενότητα',
   'Feedback': 'Feedback',

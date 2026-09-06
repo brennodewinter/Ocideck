@@ -668,14 +668,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Starten': 'Starte',
+  'Opleiding': 'Oplieding',
+  'Les': 'Les',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Meitsje eLearning-ynhâld: learndoelen, modules, feedback en assessment-gearfettings. Ymportearje SCORM, QTI, xAPI, AICC en OLX lokaal. Standert út; set de utwreiding oan om de slidetypen te brûken.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'In module- of haadstiktitel. Brûk as struktuermarkering tusken leardoelen en fragen.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Meitsje eLearning-ynhâld: learndoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Ymportearje SCORM, QTI, xAPI, AICC en OLX lokaal. Standert út; set de útbouwing oan om de dia-types te brûken.',
   'Leerdoel': 'Leardoel',
   'Module': 'Module',
   'Feedback': 'Feedback',
-  'Assessment-samenvatting': 'Beoardelingssummary',
+  'Assessment-samenvatting': 'Assessment-gearfetting',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'In leardoel of kompetinsje. Beskriuw wat de learling kinne moat; keppelje opsjoneel oan modules of fragen. Gjin bewearing dat ien it doel behearsket.',

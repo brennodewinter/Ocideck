@@ -1649,10 +1649,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Starten': 'Începe',
+  'Opleiding': 'Curs',
+  'Les': 'Lecție',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Creați conținut eLearning: obiective de învățare, module, feedback și rezumate de evaluare. Importați SCORM, QTI, xAPI, AICC și OLX local. Dezactivat implicit; activați extensia pentru a folosi tipurile de diapozitive.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Titlu de modul sau capitol. Folosiți ca marcator structural între obiectivele de învățare și întrebări.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Creați conținut eLearning: obiective de învățare, module, verificări ale cunoștințelor, feedback și rezumate de evaluare. Importați SCORM, QTI, xAPI, AICC și OLX local. Dezactivat implicit; activați extensia pentru a folosi tipurile de diapozitive.',
   'Leerdoel': 'Obiectiv de învățare',
   'Module': 'Modul',
   'Feedback': 'Feedback',

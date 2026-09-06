@@ -831,10 +831,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Starten': 'Start',
+  'Opleiding': 'Course',
+  'Les': 'Lesson',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Create eLearning content: learning objectives, modules, feedback and assessment summaries. Import SCORM, QTI, xAPI, AICC and OLX locally. Off by default; turn on the extension to use the slide types.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'A module or chapter title. Use as a structural marker between learning objectives and questions.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Create eLearning content: learning objectives, modules, knowledge checks, feedback and assessment summaries. Import SCORM, QTI, xAPI, AICC and OLX locally. Off by default; turn on the extension to use the slide types.',
   'Leerdoel': 'Learning objective',
   'Module': 'Module',
   'Feedback': 'Feedback',

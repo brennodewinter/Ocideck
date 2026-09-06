@@ -1651,10 +1651,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Starten': 'Ibda',
+  'Opleiding': 'Kors',
+  'Les': 'Lezzjoni',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Oħloq kontenut eLearning: għanijiet ta\' tagħlim, moduli, feedback u sommarji ta\' evalwazzjoni. Importa SCORM, QTI, xAPI, AICC u OLX lokalment. Mitfi awtomatikament; ixġħel l-estensjoni biex tuża t-tipi ta\' slides.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Titolu ta\' modulu jew kapitlu. Uża bħala markatur strutturali bejn l-għanijiet tat-tagħlim u l-mistoqsijiet.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Oħloq kontenut eLearning: għanijiet ta\' tagħlim, moduli, kontrolli ta\' għarfien, feedback u sommarji ta\' evalwazzjoni. Importa SCORM, QTI, xAPI, AICC u OLX lokalment. Mitfi awtomatikament; ixgħel l-estensjoni biex tuża t-tipi ta\' slides.',
   'Leerdoel': 'Għan ta\' tagħlim',
   'Module': 'Modulu',
   'Feedback': 'Feedback',

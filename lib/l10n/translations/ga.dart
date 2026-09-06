@@ -1663,10 +1663,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Starten': 'Tosaigh',
+  'Opleiding': 'Cúrsa',
+  'Les': 'Ceacht',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Cruthaigh ábhar eLearning: cuspóirí foghlama, modúil, aiseolas agus achoimrí meastóireachta. Iompórtáil SCORM, QTI, xAPI, AICC agus OLX go háitiúil. Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na cineálacha sleamhnán a úsáid.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Teideal modúil nó caibidil. Úsáid mar mharcóir struchtúrach idir cuspóirí foghlama agus ceisteanna.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Cruthaigh ábhar eLearning: cuspóirí foghlama, modúil, seiceálacha eolais, aiseolas agus achoimrí meastóireachta. Iompórtáil SCORM, QTI, xAPI, AICC agus OLX go háitiúil. Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na cineálacha sleamhnán a úsáid.',
   'Leerdoel': 'Cuspóir foghlama',
   'Module': 'Modúl',
   'Feedback': 'Feedback',

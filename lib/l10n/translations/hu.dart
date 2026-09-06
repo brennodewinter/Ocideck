@@ -1635,10 +1635,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Starten': 'Indítás',
+  'Opleiding': 'Képzés',
+  'Les': 'Lecke',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Hozzon létre eLearning tartalmat: tanulási célok, modulok, visszajelzések és értékelési összefoglalók. Importálja a SCORM, QTI, xAPI, AICC és OLX fájlokat helyileg. Alapértelmezetten kikapcsolva; kapcsolja be a kiterjesztést a diatípusok használatához.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Modul- vagy fejezetcím. Használd strukturális jelölésként a tanulási célok és a kérdések között.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Hozzon létre eLearning tartalmat: tanulási célok, modulok, tudásellenőrzések, visszajelzések és értékelési összefoglalók. Importálja a SCORM, QTI, xAPI, AICC és OLX fájlokat helyileg. Alapértelmezetten kikapcsolva; kapcsolja be a kiterjesztést a diatípusok használatához.',
   'Leerdoel': 'Tanulási cél',
   'Module': 'Modul',
   'Feedback': 'Feedback',

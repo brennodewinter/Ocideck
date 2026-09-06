@@ -1636,10 +1636,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Starten': 'Starte',
+  'Opleiding': 'Kurs',
+  'Les': 'Lektion',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Erstell eLearning-Inhalt: Lernziil, Modul, Feedback und Bewertigs-Zämmefassige. Importier SCORM, QTI, xAPI, AICC und OLX lokal. Standardmässig us; schalt d Erwiiterig ii zum d Folietype z bruche.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Es Modul- oder Kapiteltitel. Bruch als Strukturmarkierig zwüsched Lärnziel und Froge.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Erstell eLearning-Inhalt: Lernziil, Modul, Wüssetstest, Feedback und Bewertigs-Zämmefassige. Importier SCORM, QTI, xAPI, AICC und OLX lokal. Standardmässig us; schalt d Erwiiterig ii zum d Folietype z bruche.',
   'Leerdoel': 'Lärnziel',
   'Module': 'Modul',
   'Feedback': 'Feedback',

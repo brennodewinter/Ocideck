@@ -1640,10 +1640,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Starten': 'Pradėti',
+  'Opleiding': 'Kursas',
+  'Les': 'Pamoka',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Kurkite eLearning turinį: mokymosi tikslai, moduliai, grįžtamasis ryšys ir vertinimo santraukos. Importuokite SCORM, QTI, xAPI, AICC ir OLX vietoje. Pagal numatytuosius nustatymus išjungta; įjunkite plėtinį, kad galėtumėte naudoti slaidų tipus.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Modulio ar skyriaus pavadinimas. Naudokite kaip struktūrinį žymiklį tarp mokymosi tikslų ir klausimų.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Kurkite eLearning turinį: mokymosi tikslai, moduliai, žinių patikrinimai, grįžtamasis ryšys ir vertinimo santraukos. Importuokite SCORM, QTI, xAPI, AICC ir OLX vietoje. Pagal numatytuosius nustatymus išjungta; įjunkite plėtinį, kad galėtumėte naudoti slaidų tipus.',
   'Leerdoel': 'Mokymosi tikslas',
   'Module': 'Modulis',
   'Feedback': 'Feedback',

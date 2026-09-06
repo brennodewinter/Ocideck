@@ -2550,10 +2550,13 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Starten': 'Başlat',
+  'Opleiding': 'Eğitim',
+  'Les': 'Ders',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'eLearning içeriği oluşturun: öğrenme hedefleri, modüller, geri bildirim ve değerlendirme özetleri. SCORM, QTI, xAPI, AICC ve OLX\'i yerel olarak içe aktarın. Varsayılan olarak kapalı; slayt türlerini kullanmak için uzantıyı açın.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Bir modül veya bölüm başlığı. Öğrenme hedefleri ile sorular arasında yapısal işaretleyici olarak kullanın.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'eLearning içeriği oluşturun: öğrenme hedefleri, modüller, bilgi kontrolleri, geri bildirim ve değerlendirme özetleri. SCORM, QTI, xAPI, AICC ve OLX\'i yerel olarak içe aktarın. Varsayılan olarak kapalı; slayt türlerini kullanmak için uzantıyı açın.',
   'Leerdoel': 'Öğrenme hedefi',
   'Module': 'Modül',
   'Feedback': 'Feedback',

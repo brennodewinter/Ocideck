@@ -1610,10 +1610,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Starten': 'tagh',
+  'Opleiding': 'ghojmoH',
+  'Les': 'ghojmoH',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'eLearning De\' yIchenmoH: ghojmoH janmey, yotlhmey, Feedback, loHmI\' wa\'DIchmey je. naDev SCORM, QTI, xAPI, AICC, OLX je yISuq. lurDech: chu\'be\'; \'echletHom Seghmey yIlo\'meH chelwI\' yIchu\'.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'yotlh pagh pa\' tetlh. ghojmoH jan ghelmey je joj Degh. (A module or chapter title. Use as a structural marker between learning objectives and questions.)',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'chenmoH eLearning ngIH: ghojmeH mey, DIch ngermey, Sov Qap, \'ej tlhobbeH. loSlaH SCORM, QTI, xAPI, AICC \'ej OLX local. chenbe\'chuq \'e\' (Off by default); yIchuQo\' extension DIch DIch DIch DIch (turn on the extension to use the slide types).',
   'Leerdoel': 'ghojmoH jan (learning objective)',
   'Module': 'yotlh (module)',
   'Feedback': 'Feedback',

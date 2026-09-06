@@ -1633,10 +1633,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Starten': 'Aloita',
+  'Opleiding': 'Kurssi',
+  'Les': 'Oppitunti',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Luo eLearning-sisältöä: oppimistavoitteet, moduulit, palaute ja arvioinnin yhteenvedot. Tuo SCORM, QTI, xAPI, AICC ja OLX paikallisesti. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi diatyyppejä.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Moduulin tai luvun otsikko. Käytä rakenteellisena merkkinä oppimistavoitteiden ja kysymysten välissä.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Luo eLearning-sisältöä: oppimistavoitteet, moduulit, tiedon tarkistukset, palaute ja arvioinnin yhteenvedot. Tuo SCORM, QTI, xAPI, AICC ja OLX paikallisesti. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi dityyppejä.',
   'Leerdoel': 'Oppimistavoite',
   'Module': 'Moduuli',
   'Feedback': 'Feedback',

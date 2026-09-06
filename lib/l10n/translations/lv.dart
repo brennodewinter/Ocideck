@@ -1631,10 +1631,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Starten': 'Sākt',
+  'Opleiding': 'Kurss',
+  'Les': 'Nodarbība',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Izveidojiet eLearning saturu: mācību mērķi, moduļi, atsauksmes un vērtēšanas kopsavilkumi. Importējiet SCORM, QTI, xAPI, AICC un OLX lokāli. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaidu tipus.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Moduļa vai nodaļas nosaukums. Izmantojiet kā struktūras marķieri starp mācību mērķiem un jautājumiem.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Izveidojiet eLearning saturu: mācību mērķi, moduļi, zināšanu pārbaudes, atsauksmes un vērtēšanas kopsavilkumi. Importējiet SCORM, QTI, xAPI, AICC un OLX lokāli. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaidu tipus.',
   'Leerdoel': 'Mācību mērķis',
   'Module': 'Modulis',
   'Feedback': 'Feedback',

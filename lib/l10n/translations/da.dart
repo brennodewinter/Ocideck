@@ -1633,10 +1633,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Starten': 'Start',
+  'Opleiding': 'Kursus',
+  'Les': 'Lektion',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Opret eLearning-indhold: læringsmål, moduler, feedback og evalueringsresuméer. Importér SCORM, QTI, xAPI, AICC og OLX lokalt. Slukket som standard; tænd udvidelsen for at bruge dias-typerne.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'En modul- eller kapiteltitel. Brug som strukturmærke mellem læringsmål og spørgsmål.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Opret eLearning-indhold: læringsmål, moduler, videnschecks, feedback og evalueringsresuméer. Importér SCORM, QTI, xAPI, AICC og OLX lokalt. Slukket som standard; tænd udvidelsen for at bruge dias-typerne.',
   'Leerdoel': 'Læringsmål',
   'Module': 'Modul',
   'Feedback': 'Feedback',

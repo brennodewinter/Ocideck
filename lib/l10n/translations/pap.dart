@@ -667,10 +667,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Starten': 'Kuminsá',
+  'Opleiding': 'Curso',
+  'Les': 'Les',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Krea konteniúdo di eLearning: meta di aprendizage, módulo, feedback i resumen di evaluashon. Importa SCORM, QTI, xAPI, AICC i OLX lokál. Pa defekto apagá; sende e ekstenshon pa usa e tiponan di diapositiva.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Un título di módulo of kapítulo. Uza es komo un markador struktural entre metanan di aprendizaje i preguntanan.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Krea konteniúdo di eLearning: meta di aprendizage, módulo, kontrol di konosementu, feedback i resumen di evaluashon. Importa SCORM, QTI, xAPI, AICC i OLX lokál. Apagá pa default; bai e extensión pa usa e tipo di diapositiva.',
   'Leerdoel': 'Meta di aprendizaje',
   'Module': 'Módulo',
   'Feedback': 'Feedback',

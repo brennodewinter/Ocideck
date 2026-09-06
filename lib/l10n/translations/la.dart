@@ -1648,10 +1648,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Starten': 'Incipere',
+  'Opleiding': 'Cursus',
+  'Les': 'Lectio',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Crea contentum eLearning: proposita discendi, modulos, responsa et summaria assessment. Importa SCORM, QTI, xAPI, AICC et OLX localiter. Praedefinite inactivum; extensionem activa ut genera paginarum adhibeas.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Titulus moduli vel capituli. Utere ut signum structurae inter proposita discendi et quaestiones.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Crea contentum eLearning: proposita discendi, modulos, probationes scientiae, responsa et summaria assessment. Importa SCORM, QTI, xAPI, AICC et OLX localiter. Default exstinctum; activa extensionem ut utaris typis diapositorum.',
   'Leerdoel': 'Discendi propositum',
   'Module': 'Modulus',
   'Feedback': 'Feedback',

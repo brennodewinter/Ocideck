@@ -1653,10 +1653,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Starten': 'Стартиране',
+  'Opleiding': 'Обучение',
+  'Les': 'Урок',
+  'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Създавайте eLearning съдържание: цели за обучение, модули, обратна връзка и обобщения на оценяването. Импортирайте SCORM, QTI, xAPI, AICC и OLX локално. Изключено по подразбиране; включете разширението, за да използвате типовете слайдове.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
       'Заглавие на модул или глава. Използвайте като структурен маркер между учебните цели и въпросите.',
-  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
-      'Създавайте eLearning съдържание: цели за обучение, модули, проверки на знанията, обратна връзка и обобщения на оценяването. Импортирайте SCORM, QTI, xAPI, AICC и OLX локално. Изключено по подразбиране; включете разширението, за да използвате типовете слайдове.',
   'Leerdoel': 'Учебна цел',
   'Module': 'Модул',
   'Feedback': 'Feedback',
