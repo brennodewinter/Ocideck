@@ -2444,7 +2444,8 @@ void main() {
     // ook. Elke tak is één regel in [_metInhoud], niet een nieuwe test.
     for (final type in SlideType.values) {
       test(type.name, () {
-        final out = _roundTrip(slideMetInhoud(type));
+        final input = slideMetInhoud(type);
+        final out = _roundTrip(input);
         expect(
           out.type,
           type,
@@ -2452,6 +2453,23 @@ void main() {
               'een ${type.name}-dia kwam terug als ${out.type.name}; '
               'kent de lezer het `_class`-token "${type.marpClass}"?',
         );
+        // Het type alleen is niet genoeg. De eLearning-types kwamen als
+        // zichzelf terug én waren leeg: de schrijver zette een body neer, de
+        // lezer kende het type niet en gaf '' terug, en de eerstvolgende opslag
+        // wiste de tekst van de auteur (#1999). Dat bleef groen zolang deze
+        // test alleen `out.type` bekeek. Draagt de fixture een body, dan moet
+        // die de rondgang overleven — de exacte vorm mag verschillen (een
+        // vraag-blok wordt opnieuw geserialiseerd), leeg worden mag niet.
+        if (input.customMarkdown.trim().isNotEmpty) {
+          expect(
+            out.customMarkdown.trim(),
+            isNotEmpty,
+            reason:
+                'een ${type.name}-dia ging met een body de rondgang in en kwam '
+                'er leeg uit; schrijft de serialisatie een body die het inlezen '
+                'niet terugleest? Zie SlideType.usesFreeMarkdownBody.',
+          );
+        }
       });
     }
   });

@@ -318,10 +318,15 @@ extension _MarkdownParse on MarkdownService {
     return (alt: alt, alt2: alt2, block: cleaned);
   }
 
-  /// The stored body for a parsed slide: free-Markdown and the Informatieveiligheid
-  /// scaffold types keep the whole remaining block; a richText bullet slide keeps
-  /// its rich-text lines; every other type stores nothing (its own fields hold
-  /// the content).
+  /// The stored body for a parsed slide: free-Markdown, the Informatieveiligheid
+  /// scaffold types and the eLearning text types keep the whole remaining block;
+  /// a richText bullet slide keeps its rich-text lines; every other type stores
+  /// nothing (its own fields hold the content).
+  ///
+  /// De verzameling die hier een body houdt, moet gelijk zijn aan wat de
+  /// serialisatie er één schrijft. Voor de eLearning-types staat dat in
+  /// [SlideType.usesFreeMarkdownBody]; liepen ze uiteen, dan las een dia leeg in
+  /// en wiste de eerstvolgende opslag de tekst van de auteur.
   String _parsedCustomMarkdown(
     SlideType type,
     String remaining,
@@ -330,7 +335,8 @@ extension _MarkdownParse on MarkdownService {
   ) {
     if (type == SlideType.freeMarkdown ||
         type == SlideType.canvas ||
-        type.usesScaffoldMarkdownBody) {
+        type.usesScaffoldMarkdownBody ||
+        type.usesFreeMarkdownBody) {
       var body = normalizeRichTextMarkdownForStorage(
         unescapeDeckMarkdownDashLines(remaining),
       );

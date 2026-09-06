@@ -373,6 +373,25 @@ extension SlideTypeExtension on SlideType {
       category == SlideCategory.informationSecurity &&
       !backedByTable &&
       this != SlideType.signOff;
+
+  /// eLearning types whose body is plain Markdown in [Slide.customMarkdown],
+  /// written by `_writeFreeMarkdownSlide` and read back by
+  /// `_parsedCustomMarkdown`.
+  ///
+  /// Dit predicaat bestaat omdat schrijver en lezer hier uit elkaar liepen
+  /// (#1999): er wérd een body geschreven, maar het inlezen kende de
+  /// eLearning-types niet en gaf een lege `customMarkdown` terug. De dia leek
+  /// daardoor gewoon te openen, en de eerstvolgende opslag schreef de tekst van
+  /// de auteur weg — zonder melding. Eén gedeelde bron voorkomt dat de twee
+  /// kanten opnieuw kunnen verschillen.
+  ///
+  /// De regel is de categorie, niet een lijst namen, zodat een nieuw
+  /// tekstgedragen eLearning-type meteen goed staat. Komt er ooit een
+  /// eLearning-type dat zijn inhoud níet als vrije Markdown bewaart — een
+  /// tabelgedragen of gestructureerd type — dan hoort het hier expliciet
+  /// uitgezonderd te worden, net als bij [usesScaffoldMarkdownBody].
+  bool get usesFreeMarkdownBody =>
+      category == SlideCategory.eLearning && !backedByTable;
 }
 
 class Slide {
