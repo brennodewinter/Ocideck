@@ -72,6 +72,10 @@ FormatValidation validateFormatFromBytes(
       bytes[1] != 0x4B ||
       bytes[2] != 0x03 ||
       bytes[3] != 0x04) {
+    // Geen ZIP — misschien een los eLearning-bestand (QTI XML, xAPI JSON,
+    // AICC .crs). Probeer herkenning op bestandsnaam en content (#1992).
+    final nonZip = _detectNonZipFormat(bytes, basename: basename);
+    if (nonZip != null) return nonZip;
     return FormatValidation(
       _byExtension(basename),
       isValid: false,
@@ -130,6 +134,38 @@ FormatValidation validateFormatFromArchive(
     return const FormatValidation(SourceFormat.key);
   }
 
+  // ── eLearning-formaten (#1992–#1997) ──
+  // SCORM / IMS Content Packaging: imsmanifest.xml aan de root (#1993).
+  if (names.contains('imsmanifest.xml')) {
+    return const FormatValidation(SourceFormat.scorm);
+  }
+  // QTI: imsqti.xml of een XML met QTI-namespace (#1994).
+  if (names.contains('imsqti.xml') ||
+      names.any(
+        (n) => n.endsWith('.xml') && _looksLikeQti(_archiveContent(archive, n)),
+      )) {
+    return const FormatValidation(SourceFormat.qti);
+  }
+  // cmi5: cmi5.xml (#1995).
+  if (names.contains('cmi5.xml')) {
+    return const FormatValidation(SourceFormat.xapiCmi5);
+  }
+  // OLX: course.xml met OLX-namespace (#1997).
+  if (names.contains('course.xml') &&
+      _looksLikeOlx(_archiveContent(archive, 'course.xml'))) {
+    return const FormatValidation(SourceFormat.olx);
+  }
+  // AICC: .crs/.au/.cst/.des bestanden in de ZIP (#1996).
+  if (names.any((n) {
+    final l = n.toLowerCase();
+    return l.endsWith('.crs') ||
+        l.endsWith('.au') ||
+        l.endsWith('.cst') ||
+        l.endsWith('.des');
+  })) {
+    return const FormatValidation(SourceFormat.aicc);
+  }
+
   final fallback = _byExtension(basename);
   if (fallback != SourceFormat.unknown) {
     return FormatValidation(
@@ -153,12 +189,77 @@ SourceFormat _byExtension(String path) {
   if (lower.endsWith('.pptx')) return SourceFormat.pptx;
   if (lower.endsWith('.odp')) return SourceFormat.odp;
   if (lower.endsWith('.key')) return SourceFormat.key;
+  // eLearning-formaten op extensie (fallback binnen ZIP).
+  if (lower.endsWith('.crs') ||
+      lower.endsWith('.au') ||
+      lower.endsWith('.cst') ||
+      lower.endsWith('.des')) {
+    return SourceFormat.aicc;
+  }
   return SourceFormat.unknown;
 }
 
 ArchiveFile? _archiveFile(Archive archive, String name) {
   for (final f in archive) {
     if (f.name == name) return f;
+  }
+  return null;
+}
+
+/// Lees de eerste ~4 KB van een archiefbestand als string, voor namespace-
+/// detectie. Houdt het klein: we zoeken alleen naar een marker in de header.
+String _archiveContent(Archive archive, String name) {
+  final file = _archiveFile(archive, name);
+  if (file == null) return '';
+  final content = file.content as List<int>;
+  final slice = content.length > 4096 ? content.sublist(0, 4096) : content;
+  return String.fromCharCodes(slice);
+}
+
+/// QTI-herkenning: een XML met een QTI-namespace (imsqti_v2 of imsqti_v3).
+bool _looksLikeQti(String xml) {
+  return xml.contains('imsqti_v2') ||
+      xml.contains('imsqti_v3') ||
+      xml.contains('http://www.imsglobal.org/xsd/imsqti');
+}
+
+/// OLX-herkenning: course.xml met de OLX-namespace.
+bool _looksLikeOlx(String xml) {
+  return xml.contains('olx') ||
+      xml.contains('course.xml') ||
+      xml.contains('xmlns="http://open.edx.org');
+}
+
+/// Herken losse (niet-ZIP) eLearning-bestanden op content en extensie.
+FormatValidation? _detectNonZipFormat(List<int> bytes, {String basename = ''}) {
+  final lower = basename.toLowerCase();
+  // AICC: .crs, .au, .cst, .des (#1996).
+  if (lower.endsWith('.crs') ||
+      lower.endsWith('.au') ||
+      lower.endsWith('.cst') ||
+      lower.endsWith('.des')) {
+    return const FormatValidation(SourceFormat.aicc);
+  }
+  // xAPI: .json met statement/activity/profile markers (#1995).
+  if (lower.endsWith('.json')) {
+    final head = String.fromCharCodes(
+      bytes.length > 4096 ? bytes.sublist(0, 4096) : bytes,
+    );
+    if (head.contains('"verb"') &&
+        (head.contains('"xapi"') || head.contains('"actor"'))) {
+      return const FormatValidation(SourceFormat.xapiCmi5);
+    }
+  }
+  // QTI: .xml met QTI-namespace (#1994).
+  if (lower.endsWith('.xml')) {
+    final head = String.fromCharCodes(
+      bytes.length > 4096 ? bytes.sublist(0, 4096) : bytes,
+    );
+    if (_looksLikeQti(head)) return const FormatValidation(SourceFormat.qti);
+    // cmi5: cmi5.xml (#1995).
+    if (head.contains('cmi5') || lower.endsWith('cmi5.xml')) {
+      return const FormatValidation(SourceFormat.xapiCmi5);
+    }
   }
   return null;
 }

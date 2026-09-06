@@ -1,3 +1,4 @@
+import '../importers/elearning/elearning_importer.dart';
 import '../importers/importer.dart';
 import '../importers/keynote/key_importer.dart';
 import '../importers/odp/odp_importer.dart';
@@ -7,11 +8,23 @@ import '../models/source_format.dart';
 /// Maps a detected [SourceFormat] to the [Importer] that handles it.
 ///
 /// PowerPoint (`.pptx`), LibreOffice Impress (`.odp`) en Apple Keynote
-/// (`.key`) staan erin — de drie formaten die de import kent.
+/// (`.key`) staan erin — de drie presentatieformaten die de import kent.
+/// De eLearning-formaten (#1992–#1997) staan er ook in: SCORM/IMS, QTI,
+/// xAPI/cmi5, AICC en OLX.
 class ImporterRegistry {
   ImporterRegistry({List<Importer>? importers}) {
     for (final i
-        in importers ?? [PptxImporter(), OdpImporter(), KeyImporter()]) {
+        in importers ??
+            [
+              PptxImporter(),
+              OdpImporter(),
+              KeyImporter(),
+              ElearningImporter(SourceFormat.scorm),
+              ElearningImporter(SourceFormat.qti),
+              ElearningImporter(SourceFormat.xapiCmi5),
+              ElearningImporter(SourceFormat.aicc),
+              ElearningImporter(SourceFormat.olx),
+            ]) {
       _byFormat[i.format] = i;
     }
   }
