@@ -108,8 +108,12 @@ class EditorPanel extends ConsumerWidget {
               if (newType == slide.type) return;
               update(_convertSlideType(slide, newType));
             },
-            onProfileChanged: (profile) =>
-                deckNotifier.updateThemeProfile(profile),
+            onProfileChanged: (profile) async {
+              deckNotifier.updateThemeProfile(profile);
+              await ref
+                  .read(settingsProvider.notifier)
+                  .selectThemeProfile(profile.name);
+            },
             onDefaultProfileRequested: () =>
                 deckNotifier.updateThemeProfile(settings.themeProfile),
             // Rechtstreeks naar de rauwe markdown van déze dia: dezelfde
