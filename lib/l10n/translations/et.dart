@@ -1626,24 +1626,21 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Mooduli või peatüki pealkiri. Kasuta struktuurimärgina õpieesmärkide ja küsimuste vahel.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Loo eLearning sisu: õpieesmärgid, moodulid, teadmiskontrollid, tagasiside ja hindamise kokkuvõtted. Impordi SCORM, QTI, xAPI, AICC ja OLX lokaalselt. Vaikimisi väljas; lisa laiendus sisse, et kasutada slaiditüüpe.',
   'Leerdoel': 'Õpieesmärk',
   'Module': 'Moodul',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Hindamise kokkuvõte',
-  'Kennischeck': 'Teadmiste kontroll',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Õpieesmärk või kompetentsus. Kirjelda, mida õppija peab oskama; ühenda valikuliselt moodulite või küsimustega. Pole väidet, et keegi oleks eesmärgi omandanud.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Mooduli või peatüki pealkiri. Kasuta struktuurimärgina õpieesmärkide ja teadmiste kontrollide vahel.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Tagasiside või parandus pärast küsimust. Selgita, milline vastus oli õige ja miks, või viita lisamaterjalile.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Hindamise kokkuvõte: küsimuste arv, maksimaalne skoor, lävimäär. Õppija tulemusi pole — ainult testi definitsioon.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Teadmiste kontrolli küsimus. Vali küsimuse tüüp, täida vastused ja märgi õige vastus.',
   'Paren': 'Paarid',
   'Afleiders (optioneel)': 'Häirijad (valikuline)',
   'Invulvelden': 'Täitmiskohad',

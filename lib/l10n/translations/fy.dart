@@ -668,24 +668,21 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'In module- of haadstiktitel. Brûk as struktuermarkering tusken leardoelen en fragen.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Meitsje eLearning-ynhâld: learndoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Ymportearje SCORM, QTI, xAPI, AICC en OLX lokaal. Standert út; set de útbouwing oan om de dia-types te brûken.',
   'Leerdoel': 'Leardoel',
   'Module': 'Module',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Beoardelingssummary',
-  'Kennischeck': 'Kennischeck',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'In leardoel of kompetinsje. Beskriuw wat de learling kinne moat; keppelje opsjoneel oan modules of fragen. Gjin bewearing dat ien it doel behearsket.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'In module- of haadstiktitel. Brûk as struktuermarkering tusken leardoelen en kennischecks.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Feedback of remediaasje nei in fraach. Lis út hokker antwurd just wie en wêrom, of ferwiis troch nei ekstra materiaal.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Beoardielingssamenvatting: oantal fragen, maksimumscore, slagingsgrins. Gjin learlingresultaten — allinne de toetsdefinysje.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'In kennistoetsfraach. Kies it fraachtype, folje antwurden yn en markearje it juste antwurd.',
   'Paren': 'Pearren',
   'Afleiders (optioneel)': 'Oflieders (opsjoneel)',
   'Invulvelden': 'Ynfoljende fjilden',

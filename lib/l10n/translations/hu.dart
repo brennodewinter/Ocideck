@@ -1635,24 +1635,21 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Modul- vagy fejezetcím. Használd strukturális jelölésként a tanulási célok és a kérdések között.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Hozzon létre eLearning tartalmat: tanulási célok, modulok, tudásellenőrzések, visszajelzések és értékelési összefoglalók. Importálja a SCORM, QTI, xAPI, AICC és OLX fájlokat helyileg. Alapértelmezetten kikapcsolva; kapcsolja be a kiterjesztést a diatípusok használatához.',
   'Leerdoel': 'Tanulási cél',
   'Module': 'Modul',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Értékelés összegzése',
-  'Kennischeck': 'Tudásellenőrzés',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Tanulási cél vagy kompetencia. Írd le, mit kell tudnia a tanulónak; opcionálisan csatolj modulokhoz vagy kérdésekhez. Nincs állítás, hogy valaki elsajátította a célt.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Modul- vagy fejezetcím. Használd strukturális jelölésként a tanulási célok és a tudásellenőrzések között.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Visszajelzés vagy remediation egy kérdés után. Magyarázd el, melyik válasz volt helyes és miért, vagy hivatkozz további anyagra.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Értékelés összegzése: kérdések száma, maximális pontszám, átmeneti küszöb. Nincs tanulói eredmény — csak a teszt definíciója.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Tudásellenőrzési kérdés. Válaszd a kérdés típust, töltsd ki a válaszokat és jelöld meg a helyes választ.',
   'Paren': 'Párok',
   'Afleiders (optioneel)': 'Zavarók (opcionális)',
   'Invulvelden': 'Kitöltő mezők',

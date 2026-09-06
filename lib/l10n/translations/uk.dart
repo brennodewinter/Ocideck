@@ -1648,24 +1648,21 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Назва модуля або розділу. Використовуйте як структурний маркер між навчальними цілями та запитаннями.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Створюйте eLearning-контент: цілі навчання, модулі, перевірки знань, зворотний зв\'язок та підсумки оцінювання. Імпортуйте SCORM, QTI, xAPI, AICC та OLX локально. Вимкнено за замовчуванням; увімкніть розширення, щоб використовувати типи слайдів.',
   'Leerdoel': 'Навчальна ціль',
   'Module': 'Модуль',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Підсумок оцінювання',
-  'Kennischeck': 'Перевірка знань',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Навчальна ціль або компетентність. Опишіть, що повинен уміти учень; за бажанням пов\'яжіть з модулями або питаннями. Без твердження, що хтось опанував ціль.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Назва модуля або розділу. Використовуйте як структурний маркер між навчальними цілями та перевірками знань.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Зворотний зв\'язок або ремедіація після запитання. Поясніть, яка відповідь була правильною і чому, або посилайтеся на додатковий матеріал.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Підсумок оцінювання: кількість запитань, максимальний бал, поріг складання. Без результатів учня — лише визначення тесту.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Запитання для перевірки знань. Виберіть тип запитання, заповніть відповіді та позначте правильну відповідь.',
   'Paren': 'Пари',
   'Afleiders (optioneel)': 'Дистрактори (необов\'язково)',
   'Invulvelden': 'Поля для заповнення',

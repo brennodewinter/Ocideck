@@ -1631,24 +1631,21 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Moduļa vai nodaļas nosaukums. Izmantojiet kā struktūras marķieri starp mācību mērķiem un jautājumiem.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Izveidojiet eLearning saturu: mācību mērķi, moduļi, zināšanu pārbaudes, atsauksmes un vērtēšanas kopsavilkumi. Importējiet SCORM, QTI, xAPI, AICC un OLX lokāli. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaidu tipus.',
   'Leerdoel': 'Mācību mērķis',
   'Module': 'Modulis',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Novērtējuma kopsavilkums',
-  'Kennischeck': 'Zināšanu pārbaude',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Mācību mērķis vai kompetence. Aprakstiet, ko skolēnam jāprot; pēc izvēles sasaistiet ar moduļiem vai jautājumiem. Nav apgalvojuma, ka kāds ir apguvis mērķi.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Moduļa vai nodaļas nosaukums. Izmantojiet kā struktūras marķieri starp mācību mērķiem un zināšanu pārbaudēm.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Atgriezeniskā saite vai remediācija pēc jautājuma. Izskaidrojiet, kura atbilde bija pareiza un kāpēc, vai atsaucieties uz papildu materiālu.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Novērtējuma kopsavilkums: jautājumu skaits, maksimālais vērtējums, caurlaides slieksnis. Bez skolēna rezultātiem — tikai testa definīcija.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Zināšanu pārbaudes jautājums. Izvēlies jautājuma tipu, aizpildi atbildes un atzīmē pareizo atbildi.',
   'Paren': 'Pāri',
   'Afleiders (optioneel)': 'Distraktori (neobligāti)',
   'Invulvelden': 'Aizpildīšanas lauki',

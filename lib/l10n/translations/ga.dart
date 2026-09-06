@@ -1663,24 +1663,21 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Teideal modúil nó caibidil. Úsáid mar mharcóir struchtúrach idir cuspóirí foghlama agus ceisteanna.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Cruthaigh ábhar eLearning: cuspóirí foghlama, modúil, seiceálacha eolais, aiseolas agus achoimrí meastóireachta. Iompórtáil SCORM, QTI, xAPI, AICC agus OLX go háitiúil. Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na cineálacha sleamhnán a úsáid.',
   'Leerdoel': 'Cuspóir foghlama',
   'Module': 'Modúl',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Achoimre mheastóireachta',
-  'Kennischeck': 'Seiceáil eolais',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Cuspóir foghlama nó inniúlacht. Déan cur síos ar a bhfuil an foghlaimeoir in ann a dhéanamh; nasc go roghnach le modúil nó ceisteanna. Níl aon twiste go bhfuil an cuspóir bainte amach ag duine ar bith.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Teideal modúil nó caibidil. Úsáid mar mharcóir struchtúrach idir cuspóirí foghlama agus seiceálacha eolais.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Aiseolas nó remediation i ndiaidh ceiste. Mínigh cén freagra a bhí ceart agus cén fáth, nó tagairt do ábhar breise.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Achoimre mheastóireachta: líon na gceisteanna, scór uasta, tairseach pasála. Níl aon torthaí foghlaimeora — ach amháin sainmhíniú an tástáil.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Ceist seiceála eolais. Roghnaigh an cineál ceiste, líon isteach na freagraí agus marcáil an freagra ceart.',
   'Paren': 'Péirí',
   'Afleiders (optioneel)': 'Distractorí (roghnach)',
   'Invulvelden': 'Réimsí líonta',

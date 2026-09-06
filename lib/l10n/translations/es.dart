@@ -665,24 +665,21 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Un título de módulo o capítulo. Úsalo como marcador estructural entre objetivos de aprendizaje y preguntas.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Crea contenido eLearning: objetivos de aprendizaje, módulos, comprobaciones de conocimiento, comentarios y resúmenes de evaluación. Importa SCORM, QTI, xAPI, AICC y OLX localmente. Desactivado por defecto; activa la extensión para usar los tipos de diapositiva.',
   'Leerdoel': 'Objetivo de aprendizaje',
   'Module': 'Módulo',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Resumen de la evaluación',
-  'Kennischeck': 'Comprobación de conocimientos',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Un objetivo de aprendizaje o competencia. Describe lo que el aprendiz debe poder hacer; enlaza opcionalmente con módulos o preguntas. No se afirma que alguien domine el objetivo.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Un título de módulo o capítulo. Úsalo como marcador estructural entre objetivos de aprendizaje y comprobaciones de conocimientos.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Feedback o remediación después de una pregunta. Explica qué respuesta fue correcta y por qué, o remite a material adicional.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Resumen de la evaluación: número de preguntas, puntuación máxima, umbral de aprobación. Sin resultados del aprendiz — solo la definición de la prueba.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Una pregunta de comprobación de conocimientos. Elige el tipo de pregunta, rellena las respuestas y marca la respuesta correcta.',
   'Paren': 'Parejas',
   'Afleiders (optioneel)': 'Distractores (opcional)',
   'Invulvelden': 'Campos de relleno',

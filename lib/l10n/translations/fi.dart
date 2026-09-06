@@ -1633,24 +1633,21 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Moduulin tai luvun otsikko. Käytä rakenteellisena merkkinä oppimistavoitteiden ja kysymysten välissä.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Luo eLearning-sisältöä: oppimistavoitteet, moduulit, tiedon tarkistukset, palaute ja arvioinnin yhteenvedot. Tuo SCORM, QTI, xAPI, AICC ja OLX paikallisesti. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi dityyppejä.',
   'Leerdoel': 'Oppimistavoite',
   'Module': 'Moduuli',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Arvioinnin yhteenveto',
-  'Kennischeck': 'Tiedon tarkistus',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Oppimistavoite tai kompetenssi. Kuvaile, mitä oppijan tulee osata; linkitä valinnaisesti moduuleihin tai kysymyksiin. Ei väitettä, että kukaan olisi saavuttanut tavoitteen.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Moduulin tai luvun otsikko. Käytä rakenteellisena merkkinä oppimistavoitteiden ja tiedon tarkistusten välissä.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Palaute tai korjaava ohje kysymyksen jälkeen. Selitä, mikä vastaus oli oikein ja miksi, tai ohjaa lisämateriaaliin.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Arvioinnin yhteenveto: kysymysten määrä, enimmäispisteet, läpipääsyn raja. Ei oppijan tuloksia — vain testin määritelmä.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Tiedon tarkistuskysymys. Valitse kysymystyyppi, täytä vastaukset ja merkitse oikea vastaus.',
   'Paren': 'Parit',
   'Afleiders (optioneel)': 'Hämäykset (valinnainen)',
   'Invulvelden': 'Täyttökentät',

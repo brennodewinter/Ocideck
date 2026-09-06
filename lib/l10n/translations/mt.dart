@@ -1651,24 +1651,21 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Titolu ta\' modulu jew kapitlu. Uża bħala markatur strutturali bejn l-għanijiet tat-tagħlim u l-mistoqsijiet.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Oħloq kontenut eLearning: għanijiet ta\' tagħlim, moduli, kontrolli ta\' għarfien, feedback u sommarji ta\' evalwazzjoni. Importa SCORM, QTI, xAPI, AICC u OLX lokalment. Mitfi awtomatikament; ixgħel l-estensjoni biex tuża t-tipi ta\' slides.',
   'Leerdoel': 'Għan ta\' tagħlim',
   'Module': 'Modulu',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Sommarju ta\' evalwazzjoni',
-  'Kennischeck': 'Kontroll tal-għarfien',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Għan ta\' tagħlim jew kompetenza. Iddeskrivi x\'it-taghlim għandu jkun kapaċi jagħmel; kollega b\'mod opzjonali ma\' moduli jew mistoqsijiet. L-ebda dikjarazzjoni li xi ħadd ikun ħakkiem il-għan.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Titolu ta\' modulu jew kapitlu. Uża bħala markatur strutturali bejn l-għanijiet tat-tagħlim u l-kontroll tal-għarfien.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Feedback jew rimedjazzjoni wara mistoqsija. Spjega liema tweġiba kienet korretta u għaliex, jew irreferi għal materjal addizzjonali.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Sommarju ta\' evalwazzjoni: numru ta\' mistoqsijiet, skor massimu, limitu ta\' passar. Ebda riżultati ta\' tagħlim — biss id-definizzjoni tat-test.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Mistoqsija għall-kontroll tal-għarfien. Agħżel it-tip ta\' mistoqsija, imla t-tweġibiet u marka t-tweġiba korretta.',
   'Paren': 'Parijiet',
   'Afleiders (optioneel)': 'Distratturi (opsjonali)',
   'Invulvelden': 'Oqsma tal-imtieħen',

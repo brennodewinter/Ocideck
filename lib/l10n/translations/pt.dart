@@ -1661,24 +1661,21 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Título de módulo ou capítulo. Use como marcador estrutural entre objetivos de aprendizagem e perguntas.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Crie conteúdo eLearning: objetivos de aprendizagem, módulos, verificações de conhecimento, feedback e resumos de avaliação. Importe SCORM, QTI, xAPI, AICC e OLX localmente. Desativado por padrão; ative a extensão para usar os tipos de slide.',
   'Leerdoel': 'Objetivo de aprendizagem',
   'Module': 'Módulo',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Resumo da avaliação',
-  'Kennischeck': 'Verificação de conhecimentos',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Objetivo de aprendizagem ou competência. Descreva o que o aprendiz deve ser capaz de fazer; vincule opcionalmente a módulos ou perguntas. Sem alegação de que alguém dominou o objetivo.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Título de módulo ou capítulo. Use como marcador estrutural entre objetivos de aprendizagem e verificações de conhecimentos.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Feedback ou remediação após uma pergunta. Explique qual resposta estava correta e por quê, ou remeta a material adicional.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Resumo da avaliação: número de perguntas, pontuação máxima, limite de aprovação. Sem resultados do aprendiz — apenas a definição do teste.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Uma pergunta de verificação de conhecimentos. Escolha o tipo de pergunta, preencha as respostas e marque a resposta correta.',
   'Paren': 'Pares',
   'Afleiders (optioneel)': 'Distractores (opcional)',
   'Invulvelden': 'Campos de preenchimento',

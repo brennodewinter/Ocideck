@@ -1634,24 +1634,21 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Název modulu nebo kapitoly. Použijte jako strukturální značku mezi vzdělávacími cíli a otázkami.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Vytvářejte eLearning obsah: cíle učení, moduly, prověrky znalostí, zpětnou vazbu a shrnutí hodnocení. Importujte SCORM, QTI, xAPI, AICC a OLX lokálně. Ve výchozím nastavení vypnuto; zapněte rozšíření pro použití typů snímků.',
   'Leerdoel': 'Vzdělávací cíl',
   'Module': 'Modul',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Shrnutí hodnocení',
-  'Kennischeck': 'Ověření znalostí',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Vzdělávací cíl nebo kompetence. Popište, co by měl student umět; volitelně propojte s moduly nebo otázkami. Žádné tvrzení, že někdo cíl zvládl.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Název modulu nebo kapitoly. Použijte jako strukturální značku mezi vzdělávacími cíli a ověřeními znalostí.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Zpětná vazba nebo remediaci po otázce. Vysvětlete, která odpověď byla správná a proč, nebo odkazujte na doplňující materiál.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Shrnutí hodnocení: počet otázek, maximální skóre, hranice prospěšnosti. Žádné výsledky studenta — pouze definice testu.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Otázka pro ověření znalostí. Vyberte typ otázky, vyplňte odpovědi a označte správnou odpověď.',
   'Paren': 'Páry',
   'Afleiders (optioneel)': 'Distraktory (volitelné)',
   'Invulvelden': 'Vyplňovací pole',

@@ -1649,24 +1649,21 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Titlu de modul sau capitol. Folosiți ca marcator structural între obiectivele de învățare și întrebări.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Creați conținut eLearning: obiective de învățare, module, verificări ale cunoștințelor, feedback și rezumate de evaluare. Importați SCORM, QTI, xAPI, AICC și OLX local. Dezactivat implicit; activați extensia pentru a folosi tipurile de diapozitive.',
   'Leerdoel': 'Obiectiv de învățare',
   'Module': 'Modul',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Rezumatul evaluării',
-  'Kennischeck': 'Verificare a cunoștințelor',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Obiectiv de învățare sau competență. Descrieți ce trebuie să poată face cursantul; legați opțional de module sau întrebări. Fără pretenția că cineva a stăpânit obiectivul.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Titlu de modul sau capitol. Folosiți ca marcator structural între obiectivele de învățare și verificările cunoștințelor.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Feedback sau remediere după o întrebare. Explicați ce răspuns a fost corect și de ce, sau trimiteți la material suplimentar.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Rezumatul evaluării: număr de întrebări, scor maxim, prag de promovare. Fără rezultatele cursantului — doar definiția testului.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'O întrebare de verificare a cunoștințelor. Alegeți tipul de întrebare, completați răspunsurile și marcați răspunsul corect.',
   'Paren': 'Perechi',
   'Afleiders (optioneel)': 'Distractori (opțional)',
   'Invulvelden': 'Câmpuri de completare',

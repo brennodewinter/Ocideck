@@ -1640,24 +1640,21 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Modulio ar skyriaus pavadinimas. Naudokite kaip struktūrinį žymiklį tarp mokymosi tikslų ir klausimų.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Kurkite eLearning turinį: mokymosi tikslai, moduliai, žinių patikrinimai, grįžtamasis ryšys ir vertinimo santraukos. Importuokite SCORM, QTI, xAPI, AICC ir OLX vietoje. Pagal numatytuosius nustatymus išjungta; įjunkite plėtinį, kad galėtumėte naudoti slaidų tipus.',
   'Leerdoel': 'Mokymosi tikslas',
   'Module': 'Modulis',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Vertinimo santrauka',
-  'Kennischeck': 'Žinių patikra',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Mokymosi tikslas ar kompetencija. Aprašykite, ką mokinys turi mokėti; pasirinktinai susiekite su moduliais ar klausimais. Jokio teigimo, kad kas nors įvaldė tikslą.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Modulio ar skyriaus pavadinimas. Naudokite kaip struktūrinį žymiklį tarp mokymosi tikslų ir žinių patikrų.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Grįžtamasis ryšys ar remediacija po klausimo. Paaiškinkite, kuris atsakymas buvo teisingas ir kodėl, ar nukreipkite į papildomą medžiagą.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Vertinimo santrauka: klausimų skaičius, maksimalus balas, perėjimo riba. Be mokinio rezultatų — tik testo apibrėžimas.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Žinių patikros klausimas. Pasirinkite klausimo tipą, užpildykite atsakymus ir pažymėkite teisingą atsakymą.',
   'Paren': 'Poros',
   'Afleiders (optioneel)': 'Distraktoriai (neprivaloma)',
   'Invulvelden': 'Užpildymo laukai',

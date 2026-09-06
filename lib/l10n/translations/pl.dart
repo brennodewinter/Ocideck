@@ -1645,24 +1645,21 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Tytuł modułu lub rozdziału. Użyj jako znacznika strukturalnego między celami kształcenia a pytaniami.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Twórz treści eLearning: cele kształcenia, moduły, sprawdziany wiedzy, opinie i podsumowania ocen. Importuj SCORM, QTI, xAPI, AICC i OLX lokalnie. Domyślnie wyłączone; włącz rozszerzenie, aby używać typów slajdów.',
   'Leerdoel': 'Cel kształcenia',
   'Module': 'Moduł',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Podsumowanie oceny',
-  'Kennischeck': 'Sprawdzenie wiedzy',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Cel kształcenia lub kompetencja. Opisz, co uczący się powinien umieć; opcjonalnie połącz z modułami lub pytaniami. Bez twierdzenia, że ktoś opanował cel.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Tytuł modułu lub rozdziału. Użyj jako znacznika strukturalnego między celami kształcenia a sprawdzaniem wiedzy.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Informacja zwrotna lub remediacja po pytaniu. Wyjaśnij, która odpowiedź była poprawna i dlaczego, lub odsyłaj do dodatkowego materiału.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Podsumowanie oceny: liczba pytań, maksymalny wynik, próg zaliczenia. Bez wyników ucznia — tylko definicja testu.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Pytanie sprawdzające wiedzę. Wybierz typ pytania, wypełnij odpowiedzi i oznacz poprawną odpowiedź.',
   'Paren': 'Pary',
   'Afleiders (optioneel)': 'Dystraktory (opcjonalne)',
   'Invulvelden': 'Pola do wypełnienia',

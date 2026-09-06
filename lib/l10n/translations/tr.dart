@@ -2550,24 +2550,21 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
+      'Bir modül veya bölüm başlığı. Öğrenme hedefleri ile sorular arasında yapısal işaretleyici olarak kullanın.',
   'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'eLearning içeriği oluşturun: öğrenme hedefleri, modüller, bilgi kontrolleri, geri bildirim ve değerlendirme özetleri. SCORM, QTI, xAPI, AICC ve OLX\'i yerel olarak içe aktarın. Varsayılan olarak kapalı; slayt türlerini kullanmak için uzantıyı açın.',
   'Leerdoel': 'Öğrenme hedefi',
   'Module': 'Modül',
   'Feedback': 'Feedback',
   'Assessment-samenvatting': 'Değerlendirme özeti',
-  'Kennischeck': 'Bilgi kontrolü',
   'eLearning': 'eLearning',
   'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
       'Bir öğrenme hedefi veya yetkinlik. Öğrenenin ne yapabilmesi gerektiğini açıklayın; isteğe bağlı olarak modüllere veya sorulara bağlayın. Birinin hedefi elde ettiği iddiası yoktur.',
-  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
-      'Bir modül veya bölüm başlığı. Öğrenme hedefleri ile bilgi kontrolleri arasında yapısal işaretleyici olarak kullanın.',
   'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
       'Bir sorudan sonra geri bildirim veya düzeltme. Hangi cevabın doğru olduğunu ve nedenini açıklayın, veya ek materyale başvurun.',
   'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
       'Değerlendirme özeti: soru sayısı, en yüksek puan, geçiş eşiği. Öğrenen sonuçları yok — sadece test tanımı.',
-  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
-      'Bir bilgi kontrolü sorusu. Soru türünü seçin, cevapları doldurun ve doğru cevabı işaretleyin.',
   'Paren': 'Çiftler',
   'Afleiders (optioneel)': 'Çeldiriciler (isteğe bağlı)',
   'Invulvelden': 'Doldurma alanları',
