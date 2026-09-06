@@ -2196,6 +2196,57 @@ void main() {
     });
   });
 
+  group('een oude kennischeck-dia migreert naar een gewone vraag', () {
+    // Het 'kennischeck'-type is opgeheven (#1998): het droeg zijn vraag al in
+    // hetzelfde ```question```-blok, alleen onder een eigen token. Een bestaand
+    // bestand hoeft dus niet geconverteerd te worden — maar het moet wél de
+    // vraag van de auteur teruggeven, en niet de fabrieksvraag. Dat laatste was
+    // precies de bug: de fenced-dispatch kende alleen `question`, dus een
+    // kennischeck kwam leeg terug en de volgende opslag schreef er
+    // "Wat is de juiste keuze?" overheen.
+    test('het kennischeck-token leest als vraag, mét de eigen vraag erin', () {
+      final service = MarkdownService();
+      const spec = QuestionSpec(
+        kind: QuestionKind.trueFalse,
+        prompt: 'De aarde is rond',
+        answers: [
+          QuestionAnswer(text: 'Waar', correct: true),
+          QuestionAnswer(text: 'Niet waar', correct: false),
+        ],
+      );
+      // Genereer een echte vraag-dia en verwissel alleen het token, zodat de
+      // test niet op een met de hand nagebouwd bestandsformaat leunt.
+      final markdown = service
+          .generateDeck(
+            Deck(
+              title: 'Demo',
+              slides: [
+                Slide.create(SlideType.question).copyWith(
+                  title: 'Tussentoets',
+                  customMarkdown: spec.toBlock(),
+                ),
+              ],
+            ),
+          )
+          .replaceFirst(
+            '<!-- _class: question -->',
+            '<!-- _class: kennischeck -->',
+          );
+
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.type, SlideType.question);
+      expect(out.title, 'Tussentoets');
+      final back = QuestionSpec.parse(out.customMarkdown);
+      expect(
+        back.prompt,
+        'De aarde is rond',
+        reason: 'de vraag van de auteur moet terugkomen, niet de fabrieksvraag',
+      );
+      expect(back.answers.map((a) => a.text), ['Waar', 'Niet waar']);
+      expect(back.answers.map((a) => a.correct), [true, false]);
+    });
+  });
+
   group('assets slide round-trip', () {
     Slide assets(List<AssetGroup> groups) {
       const title = 'Ons aanvalsoppervlak';
