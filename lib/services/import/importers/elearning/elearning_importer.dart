@@ -18,9 +18,14 @@ import 'cmi5_reader.dart';
 /// Importer voor eLearning-pakketten (#1992–#1997).
 ///
 /// Herkent SCORM/IMS, QTI, cmi5, AICC en OLX, en mapt ze naar OciDeck-slides.
-/// De mapping is bewust beperkt: titels, beschrijvingen en structuur komen over;
-/// niet-ondersteunde content (scripts, scoring formulas, LMS-runtime) wordt als
-/// placeholder + waarschuwing bewaard, nooit stilzwijgend weggegooid.
+/// De mapping is bewust beperkt: titels, beschrijvingen en structuur komen over.
+///
+/// Wat níet meekomt — scripts, scoring formulas, LMS-runtime, en bij QTI ook de
+/// keuzemogelijkheden en de antwoordsleutel — komt als een zichtbare
+/// placeholderzin op de dia te staan die zegt dat de vraag met de hand
+/// aangevuld moet worden. Dat is dus geen *stille* verdwijning, maar het is ook
+/// geen bewaren: de gegevens zelf staan niet in het deck. Wie de bron nodig
+/// houdt, moet het pakket bewaren.
 ///
 /// Bronmetadata (source-id's, mapping report, warnings) hoort in de sidecar
 /// `<name>.elearning.json` — dit is de import die het deck bouwt.

@@ -7,8 +7,10 @@ import 'elearning_importer.dart';
 /// Leest QTI 2.x/3.x assessment items en tests (#1994).
 ///
 /// Herkent assessmentTest/assessmentItem structuur, haalt titels en prompts
-/// eruit, en mapt ze naar OciDeck question-slides. Niet-ondersteunde scoring
-/// (outcome declarations, response processing) wordt als placeholder bewaard.
+/// eruit, en zet ze op een dia. De keuzemogelijkheden, de antwoordsleutel en de
+/// scoring (outcome declarations, response processing) worden *niet*
+/// geconverteerd: de dia draagt in plaats daarvan een placeholderzin die de
+/// auteur vraagt de vraag met de hand aan te vullen.
 class QtiReader extends ElearningFormatReader {
   @override
   SourceDeck read(Archive archive, {required String basename}) {
