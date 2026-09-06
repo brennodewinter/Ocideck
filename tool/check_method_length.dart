@@ -52,7 +52,7 @@ const Map<String, int> methodLengthBaseline = {
   // +3 (#1405): missing-file check voor rechter kolomafbeelding in titel-
   // kolommodus. De methode stond al op de limiet.
   'lib/services/slide_quality_analyzer.dart::SlideQualityAnalyzer._checkMissingMedia':
-      153,
+      158, // +5 (#1999): eLearning-types in de missing-file switch.
   // +128 (#1405): layoutkeuze + beeldkolommen + kolombreedte in de titel-editor.
   'lib/widgets/editors/title_editor.dart::_TitleEditorState.build': 278,
   // -113 (#1859): build is opgeknipt in helpers _buildSlideSettings,
@@ -95,7 +95,7 @@ const Map<String, int> methodLengthBaseline = {
   // Procesverbetering engine thumbnails in the add-slide picker.
   // +2 (#1162): de `menu`-case (de wireframe zelf zit in `_paintMenuWireframe`).
   'lib/widgets/dialogs/add_slide_dialog.dart::SlideTypePreviewPainter.paint':
-      130,
+      144, // +14 (#1999): eLearning-wireframes (tekst + vraag hergebruikt).
   // Procesverbetering preview switch for matrix/canvas/tree/flow/phaseGate.
   // Verlaagd van 165: improvement-cases naar improvement_dispatch.dart.
   // +3 (#1164): splitRunPosition-doorgifte in de drie bullet-cases (bullets,
@@ -107,7 +107,9 @@ const Map<String, int> methodLengthBaseline = {
   // zijn terugroep, voor het wisselen tussen groepen blokken.
   // +1 (#1828): calloutRevealedBulletCount doorgeven aan _BulletsImagePreview.
   'lib/widgets/slides/slide_preview.dart::SlidePreviewWidget._buildContent':
-      161,
+      181, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
+  // +1 (#1999): eLearning-types in de serialize-switch (freeMarkdown + question hergebruikt).
+  'lib/services/markdown_service.dart::MarkdownService._generateSlideImpl': 151,
   // +2 (#1238): ganttScale/ganttSections in copyWith — pure plumbing.
   // +3: tableColumnAlignments-parameter voor GFM-uitlijning.
   // +2: tableNumberColumns-parameter.

@@ -8,6 +8,7 @@ void main() {
       'informationSecurity',
       'procesverbetering',
       'managementsysteem',
+      'eLearning',
     ]);
     expect(BulletColumns.values.map((value) => value.name), [
       'none',

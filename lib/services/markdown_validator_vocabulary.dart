@@ -39,6 +39,12 @@ const _knownClassTokens = {
   // Managementsysteem-module (ISO_MANAGEMENTSYSTEEM §4).
   'control-status',
   'gantt',
+  // eLearning-module (#1999).
+  'objective',
+  'module',
+  'feedback',
+  'assessment-summary',
+  'kennischeck',
   'menu-grid',
   'menu-list',
   'menu-circle',

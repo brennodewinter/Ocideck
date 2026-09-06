@@ -1632,6 +1632,24 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Skapa eLearning-innehåll: lärandemål, moduler, kunskapskontroller, feedback och bedömnings sammanfattningar. Importera SCORM, QTI, xAPI, AICC och OLX lokalt. Av som standard; slå på tillägget för att använda diatyperna.',
+  'Leerdoel': 'Lärandemål',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Utvärderingsöversikt',
+  'Kennischeck': 'Kunskapskontroll',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Ett lärandemål eller kompetens. Beskriv vad den lärande ska kunna; koppla valfritt till moduler eller frågor. Inget påstående om att någon har behärskat målet.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'En modul- eller kapiteltitel. Använd som strukturell markör mellan lärandemål och kunskapskontroller.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback eller remediering efter en fråga. Förklara vilket svar som var rätt och varför, eller hänvisa till extra material.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Utvärderingsöversikt: antal frågor, maxpoäng, godkändgräns. Inga elevresultat — endast testdefinitionen.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'En kunskapskontrollsfråga. Välj frågetyp, fyll i svar och markera det rätta svaret.',
   'Paren': 'Par',
   'Afleiders (optioneel)': 'Distraktorer (valfritt)',
   'Invulvelden': 'Ifyllnadsfält',

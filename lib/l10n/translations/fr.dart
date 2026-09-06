@@ -668,6 +668,24 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Créez du contenu eLearning : objectifs d\'apprentissage, modules, tests de connaissances, feedback et résumés d\'évaluation. Importez SCORM, QTI, xAPI, AICC et OLX localement. Désactivé par défaut ; activez l\'extension pour utiliser les types de diapositive.',
+  'Leerdoel': 'Objectif d\'apprentissage',
+  'Module': 'Module',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Résumé de l\'évaluation',
+  'Kennischeck': 'Vérification des connaissances',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Un objectif d\'apprentissage ou une compétence. Décrivez ce que l\'apprenant doit savoir faire ; reliez optionnellement à des modules ou des questions. Aucune prétention que quelqu\'un maîtrise l\'objectif.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Un titre de module ou de chapitre. Utilisez comme marqueur structurel entre les objectifs d\'apprentissage et les vérifications des connaissances.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback ou remédiation après une question. Expliquez quelle réponse était correcte et pourquoi, ou renvoyez à du matériel supplémentaire.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Résumé de l\'évaluation : nombre de questions, score maximum, seuil de réussite. Aucun résultat de l\'apprenant — uniquement la définition du test.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Une question de vérification des connaissances. Choisissez le type de question, remplissez les réponses et marquez la bonne réponse.',
   'Paren': 'Paires',
   'Afleiders (optioneel)': 'Distracteurs (optionnel)',
   'Invulvelden': 'Champs de saisie',

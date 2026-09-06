@@ -1653,6 +1653,24 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Създавайте eLearning съдържание: цели за обучение, модули, проверки на знанията, обратна връзка и обобщения на оценяването. Импортирайте SCORM, QTI, xAPI, AICC и OLX локално. Изключено по подразбиране; включете разширението, за да използвате типовете слайдове.',
+  'Leerdoel': 'Учебна цел',
+  'Module': 'Модул',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Обобщение на оценяването',
+  'Kennischeck': 'Проверка на знанията',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Учебна цел или компетентност. Опишете какво трябва да може учащият; по желание свържете с модули или въпроси. Без твърдение, че някой е овладял целта.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Заглавие на модул или глава. Използвайте като структурен маркер между учебните цели и проверките на знанията.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Обратна връзка или ремедиация след въпрос. Обяснете кой отговор е бил правилен и защо, или препратете към допълнителен материал.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Обобщение на оценяването: брой въпроси, максимален резултат, праг за преминаване. Без резултати на учащия — само определението на теста.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Въпрос за проверка на знанията. Изберете типа въпрос, попълнете отговорите и маркирайте правилния отговор.',
   'Paren': 'Двойки',
   'Afleiders (optioneel)': 'Дистрактори (по избор)',
   'Invulvelden': 'Полета за попълване',

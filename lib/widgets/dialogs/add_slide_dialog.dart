@@ -25,11 +25,16 @@ class AddSlideDialog extends StatefulWidget {
   /// (ISO_MANAGEMENTSYSTEEM §5). Off by default; the caller passes the value.
   final bool revealManagementsysteem;
 
+  /// Whether the eLearning module is revealed. Gates eLearning slide types
+  /// and their picker tab (#1999). Off by default; the caller passes the value.
+  final bool revealElearning;
+
   const AddSlideDialog({
     super.key,
     this.revealInfoSafety = false,
     this.revealProcesverbetering = false,
     this.revealManagementsysteem = false,
+    this.revealElearning = false,
   });
 
   static Future<SlideType?> show(
@@ -37,6 +42,7 @@ class AddSlideDialog extends StatefulWidget {
     bool revealInfoSafety = false,
     bool revealProcesverbetering = false,
     bool revealManagementsysteem = false,
+    bool revealElearning = false,
   }) {
     return showDialog<SlideType>(
       context: context,
@@ -44,6 +50,7 @@ class AddSlideDialog extends StatefulWidget {
         revealInfoSafety: revealInfoSafety,
         revealProcesverbetering: revealProcesverbetering,
         revealManagementsysteem: revealManagementsysteem,
+        revealElearning: revealElearning,
       ),
     );
   }
@@ -91,6 +98,12 @@ class AddSlideDialog extends StatefulWidget {
     // Managementsysteem-module — eigen tabblad zodra de module de types
     // onthult (ISO_MANAGEMENTSYSTEEM §5).
     SlideType.controlStatus,
+    // eLearning-module — eigen tabblad zodra de module de types onthult (#1999).
+    SlideType.objective,
+    SlideType.module,
+    SlideType.kennischeck,
+    SlideType.feedback,
+    SlideType.assessmentSummary,
   ];
 
   @override
@@ -150,6 +163,9 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
         !widget.revealManagementsysteem) {
       return false;
     }
+    if (t.category == SlideCategory.eLearning && !widget.revealElearning) {
+      return false;
+    }
     return true;
   });
 
@@ -194,6 +210,8 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
         return l10n.d('Procesverbetering');
       case SlideCategory.managementsysteem:
         return l10n.d('Managementsysteem');
+      case SlideCategory.eLearning:
+        return l10n.d('eLearning');
     }
   }
 
@@ -749,6 +767,20 @@ class SlideTypePreviewPainter extends CustomPainter {
         _paintSecurityWireframe(canvas, SlideType.checklist);
       case SlideType.gantt:
         _paintGanttWireframe(canvas);
+      // eLearning: tekstgebaseerde types lenen de freeMarkdown-wireframe;
+      // kennischek leent de vraag-wireframe.
+      case SlideType.objective:
+      case SlideType.module:
+      case SlideType.feedback:
+      case SlideType.assessmentSummary:
+        _bar(canvas, 14, 12, 10, 9, _accent, radius: 2);
+        _bar(canvas, 28, 12, 62, 9, _ink);
+      case SlideType.kennischeck:
+        _bar(canvas, 14, 12, 96, 9, _ink);
+        for (var r = 0; r < 4; r++) {
+          final y = 30.0 + r * 13;
+          _bar(canvas, 14, y, 80, 7, r == 0 ? _accent : _soft, radius: 3);
+        }
     }
   }
 
@@ -1016,7 +1048,12 @@ class SlideTypePreviewPainter extends CustomPainter {
           SlideType.flow ||
           SlideType.phaseGate ||
           SlideType.controlStatus ||
-          SlideType.gantt:
+          SlideType.gantt ||
+          SlideType.objective ||
+          SlideType.module ||
+          SlideType.feedback ||
+          SlideType.assessmentSummary ||
+          SlideType.kennischeck:
         break;
     }
   }

@@ -1633,6 +1633,24 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Ustvarjajte eLearning vsebino: učne cilje, module, preverjanja znanja, povratne informacije in povzetke ocenjevanja. Uvozite SCORM, QTI, xAPI, AICC in OLX lokalno. Privzeto izklopljeno; vklopite razširitev za uporabo vrst diapozitivov.',
+  'Leerdoel': 'Cilj učenja',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Povzetek ocenjevanja',
+  'Kennischeck': 'Preverjanje znanja',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Cilj učenja ali kompetenca. Opišite, kaj mora učenec znati; po želji povežite z moduli ali vprašanji. Brez trditve, da je kdo dosegel cilj.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Naslov modula ali poglavja. Uporabite kot strukturni označevalnik med cilji učenja in preverjanji znanja.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Povratna informacija ali remediacija po vprašanju. Pojasnite, kateri odgovor je bil pravilen in zakaj, ali napotite na dodatno gradivo.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Povzetek ocenjevanja: število vprašanj, najvišja ocena, prag za uspeh. Brez rezultatov učenca — samo definicija testa.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Vprašanje za preverjanje znanja. Izberite vrsto vprašanja, izpolnite odgovore in označite pravilen odgovor.',
   'Paren': 'Pari',
   'Afleiders (optioneel)': 'Distraktorji (neobvezno)',
   'Invulvelden': 'Polja za izpolnjevanje',

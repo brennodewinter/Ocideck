@@ -1636,6 +1636,24 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Erstell eLearning-Inhalt: Lernziil, Modul, Wüssetstest, Feedback und Bewertigs-Zämmefassige. Importier SCORM, QTI, xAPI, AICC und OLX lokal. Standardmässig us; schalt d Erwiiterig ii zum d Folietype z bruche.',
+  'Leerdoel': 'Lärnziel',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Bewertigszämmefassig',
+  'Kennischeck': 'Wüssensprüefig',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Es Lärnziel oder e Kompetänz. Beschrib, was de Lärnend chönnt sölle; verchnüpft optional mit Modul oder Froge. Kei Bhauptig, dass öpper s Ziel beherrscht.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Es Modul- oder Kapiteltitel. Bruch als Strukturmarkierig zwüsched Lärnziel und Wüssensprüefige.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback oder Remediation nach ere Frog. Erchlär, weli Antwort richtig gsi isch und worom, oder verwyys uf extra Material.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Bewertigszämmefassig: Aazahl Froge, Maximalpunkt, Bestahensgränze. Kei Lärnenderesultat — nur d Testdefinizion.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Es Wüssensprüefigsfrog. Wähl de Frogtyp, fülle Antwortä us und markier die richtig Antwort.',
   'Paren': 'Pärli',
   'Afleiders (optioneel)': 'Distraktore (optional)',
   'Invulvelden': 'Ygabefälder',

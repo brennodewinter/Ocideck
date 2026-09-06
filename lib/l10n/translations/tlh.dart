@@ -1610,6 +1610,24 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'chenmoH eLearning ngIH: ghojmeH mey, DIch ngermey, Sov Qap, \'ej tlhobbeH. loSlaH SCORM, QTI, xAPI, AICC \'ej OLX local. chenbe\'chuq \'e\' (Off by default); yIchuQo\' extension DIch DIch DIch DIch (turn on the extension to use the slide types).',
+  'Leerdoel': 'ghojmoH jan (learning objective)',
+  'Module': 'yotlh (module)',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'loHmI\' wa\'DIch (assessment summary)',
+  'Kennischeck': 'Sov ghojmoH (knowledge check)',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'ghojmoH jan qab \'e\' Sov. ghojwI\' laH Dujang; yotlh ghel je. pagh ja\' tlhIH ghojmoH jan. (A learning objective or competency. Describe what the learner should be able to do; optionally link to modules or questions. No claim that anyone has mastered the objective.)',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'yotlh pagh pa\' tetlh. ghojmoH jan Sov ghojmoH tlhIH. (A module or chapter title. Use as a structural marker between learning objectives and knowledge checks.)',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'jang \'ogh pagh DIvI\' tlhIH ghel. jangwI\' lugh \'e\' jang, pagh latlh yIqel. (Feedback or remediation after a question. Explain which answer was correct and why, or refer to additional material.)',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'loHmI\' wa\'DIch: ghel mI\', nIb nIb, lugh Degh. pagh ghojwI\' — neH loHmI\' tetlh. (Assessment summary: number of questions, maximum score, pass threshold. No learner results — only the test definition.)',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Sov ghojmoH ghel. ghel Segh wIv, jangwI\' yIqel \'ej jangwI\' lugh yIjang. (A knowledge check question. Choose the question type, fill in answers and mark the correct answer.)',
   'Paren': '\'aqro',
   'Afleiders (optioneel)': 'veqlargh (optional)',
   'Invulvelden': 'yIghun mIw',

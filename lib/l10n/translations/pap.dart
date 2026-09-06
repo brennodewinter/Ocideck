@@ -667,6 +667,24 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Krea konteniúdo di eLearning: meta di aprendizage, módulo, kontrol di konosementu, feedback i resumen di evaluashon. Importa SCORM, QTI, xAPI, AICC i OLX lokál. Apagá pa default; bai e extensión pa usa e tipo di diapositiva.',
+  'Leerdoel': 'Meta di aprendizaje',
+  'Module': 'Módulo',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Resumen di evaluashon',
+  'Kennischeck': 'Kontrol di konosementu',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Un meta di aprendizaje of kompetensia. Deskribí loke e aprendedor mester por hasí; konekta opsionalmente ku módulo of pregunta. No ta pretendé ku un hende a dominá e meta.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Un título di módulo of kapítulo. Uza es komo un markador struktural entre metanan di aprendizaje i kontrol di konosementu.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback of remediation despues di un pregunta. Splica kua respuesta tabata korekto i pakiko, of referí pa material adicional.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Resumen di evaluashon: cantidad di pregunta, skor maksimo, límite di aprobashon. Sin resultadonan di aprendedor — solamente e definishon di e toets.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Un pregunta di kontrol di konosementu. Skoge e tipo di pregunta, yena e respuesta i marka e respuesta korekto.',
   'Paren': 'Par',
   'Afleiders (optioneel)': 'Distraktornan (opsyonal)',
   'Invulvelden': 'Veldnan di yen',

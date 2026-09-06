@@ -831,6 +831,24 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Create eLearning content: learning objectives, modules, knowledge checks, feedback and assessment summaries. Import SCORM, QTI, xAPI, AICC and OLX locally. Off by default; turn on the extension to use the slide types.',
+  'Leerdoel': 'Learning objective',
+  'Module': 'Module',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Assessment summary',
+  'Kennischeck': 'Knowledge check',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'A learning objective or competency. Describe what the learner should be able to do; optionally link to modules or questions. No claim that anyone has mastered the objective.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'A module or chapter title. Use as a structural marker between learning objectives and knowledge checks.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback or remediation after a question. Explain which answer was correct and why, or refer to additional material.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Assessment summary: number of questions, maximum score, pass threshold. No learner results — only the test definition.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'A knowledge check question. Choose the question type, fill in answers and mark the correct answer.',
   'Paren': 'Pairs',
   'Afleiders (optioneel)': 'Distractors (optional)',
   'Invulvelden': 'Fill-in fields',

@@ -84,6 +84,14 @@ enum SlideType {
   // gewone Markdown-tabel (dus [backedByTable]); de render leidt er Mermaid
   // gantt-DSL uit af via `ganttTableToMermaid` — de DSL wordt nooit opgeslagen.
   gantt,
+  // eLearning-module (#1999). Structurele slides die geïmporteerde én
+  // handmatig gemaakte leerinhoud begrijpelijk tonen. Inhoud is gewone
+  // Markdown; sidecars bewaren bronrelaties en ondoorzichtige importmetadata.
+  objective,
+  module,
+  feedback,
+  assessmentSummary,
+  kennischeck,
 }
 
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
@@ -290,6 +298,35 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     marpClass: 'gantt',
     category: SlideCategory.procesverbetering,
     backedByTable: true,
+  ),
+  // eLearning-module (#1999). Structurele slides voor leerinhoud.
+  // Inhoud is gewone Markdown; de _class-tokens zijn domeinspecifiek
+  // zodat importers ze herkennen, maar de render is plain Markdown.
+  SlideType.objective: SlideTypeMeta(
+    label: 'Leerdoel',
+    marpClass: 'objective',
+    category: SlideCategory.eLearning,
+  ),
+  SlideType.module: SlideTypeMeta(
+    label: 'Module',
+    marpClass: 'module',
+    category: SlideCategory.eLearning,
+    isHeading: true,
+  ),
+  SlideType.feedback: SlideTypeMeta(
+    label: 'Feedback',
+    marpClass: 'feedback',
+    category: SlideCategory.eLearning,
+  ),
+  SlideType.assessmentSummary: SlideTypeMeta(
+    label: 'Assessment-samenvatting',
+    marpClass: 'assessment-summary',
+    category: SlideCategory.eLearning,
+  ),
+  SlideType.kennischeck: SlideTypeMeta(
+    label: 'Kennischeck',
+    marpClass: 'kennischeck',
+    category: SlideCategory.eLearning,
   ),
 };
 

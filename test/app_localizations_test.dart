@@ -12,6 +12,8 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'eLearning',
+  'Feedback',
   'Placeholder',
   'LaTeX (.tex)',
   'HTML',
@@ -240,6 +242,8 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'eLearning',
+  'Feedback',
   'Placeholder',
   'LaTeX (.tex)',
   'HTML',

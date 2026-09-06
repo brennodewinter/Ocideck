@@ -668,6 +668,24 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Erstellen Sie eLearning-Inhalte: Lernziele, Module, Wissenstests, Feedback und Bewertungs Zusammenfassungen. Importieren Sie SCORM, QTI, xAPI, AICC und OLX lokal. Standardmäßig deaktiviert; aktivieren Sie die Erweiterung, um die Folientypen zu verwenden.',
+  'Leerdoel': 'Lernziel',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Bewertungssummary',
+  'Kennischeck': 'Wissensüberprüfung',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Ein Lernziel oder eine Kompetenz. Beschreibe, was der Lernende können sollte; verknüpfe optional mit Modulen oder Fragen. Keine Behauptung, dass jemand das Ziel beherrscht.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Ein Modul- oder Kapiteltitel. Verwende als Strukturmarkierung zwischen Lernzielen und Wissensüberprüfungen.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback oder Remediation nach einer Frage. Erkläre, welche Antwort richtig war und warum, oder verweise auf zusätzliches Material.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Bewertungszusammenfassung: Anzahl der Fragen, Maximalpunktzahl, Bestehensgrenze. Keine Lernendergebnisse — nur die Testdefinition.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Eine Wissensüberprüfungsfrage. Wähle den Fragentyp, fülle Antworten aus und markiere die richtige Antwort.',
   'Paren': 'Paare',
   'Afleiders (optioneel)': 'Distraktoren (optional)',
   'Invulvelden': 'Eingabefelder',

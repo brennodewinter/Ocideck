@@ -686,6 +686,11 @@ The first class determines (together with the content) the **slide type**:
 | Phase gate (process improvement) | `phase-gate` | Gate checklist as bullets |
 | Control status (management system) | `control-status` | — (a plain table falls back to `table`) |
 | Gantt (process improvement) | `gantt` | — (a plain table falls back to `table`) |
+| Learning objective (eLearning) | `objective` | — (plain Markdown) |
+| Module (eLearning) | `module` | — (plain Markdown, heading slide) |
+| Feedback (eLearning) | `feedback` | — (plain Markdown) |
+| Assessment summary (eLearning) | `assessment-summary` | — (plain Markdown) |
+| Knowledge check (eLearning) | `kennischeck` | — (question block, like `question`) |
 | Bullets only | *(none)* | bullets present |
 | Two images | *(none)* | two background images |
 | Large image | *(none)* | one image, no bullets |

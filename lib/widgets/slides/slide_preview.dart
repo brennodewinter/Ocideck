@@ -868,6 +868,26 @@ class SlidePreviewWidget extends StatelessWidget {
         return _controlStatusContent(slide, w);
       case SlideType.gantt:
         return _ganttContent(slide, w);
+      // eLearning: tekstgebaseerde types hergebruiken de freeMarkdown-preview;
+      // kennischeck hergebruikt de vraag-preview.
+      case SlideType.objective:
+      case SlideType.module:
+      case SlideType.feedback:
+      case SlideType.assessmentSummary:
+        return _freeMarkdownPreview(this, slide, w);
+      case SlideType.kennischeck:
+        return _QuestionPreview(
+          slide: slide,
+          w: w,
+          projectPath: projectPath,
+          font: fontFamily,
+          profile: themeProfile,
+          presentationMode: presentationMode,
+          view: questionView,
+          onAnswerSelected: onAnswerSelected,
+          onAnswerSubmit: onAnswerSubmit,
+          onAnswerTextChanged: onAnswerTextChanged,
+        );
     }
   }
 
@@ -1000,6 +1020,10 @@ double _contentLeftInset(Slide slide, double w) {
     case SlideType.phaseGate:
     case SlideType.freeMarkdown:
     case SlideType.gantt:
+    case SlideType.objective:
+    case SlideType.module:
+    case SlideType.feedback:
+    case SlideType.assessmentSummary:
       return w * 0.07;
     case SlideType.code:
       return w * 0.05;
@@ -1013,6 +1037,7 @@ double _contentLeftInset(Slide slide, double w) {
     case SlideType.bulletsImage:
       return w * 0.038;
     case SlideType.question:
+    case SlideType.kennischeck:
       return w * 0.06;
     case SlideType.timeline:
       return w * 0.06;

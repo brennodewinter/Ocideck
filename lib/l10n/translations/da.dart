@@ -1633,6 +1633,24 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Opret eLearning-indhold: læringsmål, moduler, videnschecks, feedback og evalueringsresuméer. Importér SCORM, QTI, xAPI, AICC og OLX lokalt. Slukket som standard; tænd udvidelsen for at bruge dias-typerne.',
+  'Leerdoel': 'Læringsmål',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Evalueringsresumé',
+  'Kennischeck': 'Videnscheck',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Et læringsmål eller kompetence. Beskriv hvad den lærende skal kunne; kobl valgfrit til moduler eller spørgsmål. Intet krav om at nogen har opnået målet.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'En modul- eller kapiteltitel. Brug som strukturmærke mellem læringsmål og videnschecks.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback eller remediering efter et spørgsmål. Forklar hvilket svar der var korrekt og hvorfor, eller henvis til ekstra materiale.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Evalueringsresumé: antal spørgsmål, maksimumscore, beståelsesgrænse. Ingen elevresultater — kun testdefinitionen.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Et videnscheckspørgsmål. Vælg spørgsmålstypen, udfyld svar og marker det korrekte svar.',
   'Paren': 'Par',
   'Afleiders (optioneel)': 'Distraktorer (valgfri)',
   'Invulvelden': 'Udfyldningsfelter',

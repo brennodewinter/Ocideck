@@ -1637,6 +1637,24 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Stvorite eLearning sadržaj: ciljevi učenja, moduli, provjere znanja, povratne informacije i sažetci ocjenjivanja. Uvezite SCORM, QTI, xAPI, AICC i OLX lokalno. Isključeno prema zadanim postavkama; uključite proširenje da biste koristili vrste slajdova.',
+  'Leerdoel': 'Cilj učenja',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Sažetak ocjenjivanja',
+  'Kennischeck': 'Provjera znanja',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Cilj učenja ili kompetencija. Opiši što učenik treba moći; opcionalno poveži s modulima ili pitanjima. Nema tvrdnje da je netko svladao cilj.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Naslov modula ili poglavlja. Koristi kao strukturni oznaku između ciljeva učenja i provjera znanja.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Povratna informacija ili remedijacija nakon pitanja. Objasni koji je odgovor bio točan i zašto, ili uputi na dodatni materijal.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Sažetak ocjenjivanja: broj pitanja, maksimalni bodovi, prag prolaska. Bez rezultata učenika — samo definicija testa.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Pitanje za provjeru znanja. Odaberi vrstu pitanja, ispuni odgovore i označi točan odgovor.',
   'Paren': 'Parovi',
   'Afleiders (optioneel)': 'Distraktori (neobavezno)',
   'Invulvelden': 'Polja za popunjavanje',

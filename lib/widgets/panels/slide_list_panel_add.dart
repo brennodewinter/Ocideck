@@ -17,6 +17,9 @@ extension _SlideListPanelAddSlide on _SlideListPanelState {
       revealManagementsysteem:
           ref.read(managementsysteemRevealProvider) ||
           (ref.read(deckProvider).deck?.hasManagementSystemSlides ?? false),
+      revealElearning:
+          ref.read(elearningRevealProvider) ||
+          (ref.read(deckProvider).deck?.hasElearningSlides ?? false),
     );
     if (type == null) return;
     final notifier = ref.read(deckProvider.notifier);

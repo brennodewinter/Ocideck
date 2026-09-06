@@ -56,6 +56,7 @@ void main() {
     expect(SlideType.values.where((t) => t.isHeading).toSet(), {
       SlideType.title,
       SlideType.section,
+      SlideType.module,
     });
     // bulletColumns verving drie kopieën van dezelfde splitsregel.
     expect(

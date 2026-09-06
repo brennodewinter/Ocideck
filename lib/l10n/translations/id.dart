@@ -1633,6 +1633,24 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Buat konten eLearning: tujuan pembelajaran, modul, pemeriksaan pengetahuan, umpan balik, dan ringkasan asesmen. Impor SCORM, QTI, xAPI, AICC, dan OLX secara lokal. Nonaktif secara default; aktifkan ekstensi untuk menggunakan tipe slide.',
+  'Leerdoel': 'Tujuan pembelajaran',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Ringkasan asesmen',
+  'Kennischeck': 'Pemeriksaan pengetahuan',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Tujuan pembelajaran atau kompetensi. Deskripsikan apa yang pembelajar harus mampu lakukan; tautkan secara opsional ke modul atau pertanyaan. Tidak ada klaim bahwa seseorang telah menguasai tujuan tersebut.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Judul modul atau bab. Gunakan sebagai penanda struktural antara tujuan pembelajaran dan pemeriksaan pengetahuan.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Umpan balik atau remediasi setelah pertanyaan. Jelaskan jawaban mana yang benar dan mengapa, atau rujuk ke materi tambahan.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Ringkasan asesmen: jumlah pertanyaan, skor maksimum, ambang batas lulus. Tidak ada hasil pembelajar — hanya definisi tes.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Sebuah pertanyaan pemeriksaan pengetahuan. Pilih jenis pertanyaan, isi jawaban dan tandai jawaban yang benar.',
   'Paren': 'Pasangan',
   'Afleiders (optioneel)': 'Penjebak (opsional)',
   'Invulvelden': 'Bidang isian',

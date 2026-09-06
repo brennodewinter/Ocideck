@@ -1639,6 +1639,24 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Tvorte eLearning obsah: učebné ciele, moduly, vedomostné kontroly, spätnú väzbu a zhrnutia hodnotenia. Importujte SCORM, QTI, xAPI, AICC a OLX lokálne. Predvolene vypnuté; zapnite rozšírenie, aby ste mohli používať typy snímok.',
+  'Leerdoel': 'Vzdelávací cieľ',
+  'Module': 'Modul',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Zhrnutie hodnotenia',
+  'Kennischeck': 'Skúška vedomostí',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Vzdelávací cieľ alebo kompetencia. Opíšte, čo by mal študent vedieť; voliteľne prepojte s modulmi alebo otázkami. Žiadne tvrdenie, že niekto cieľ zvládol.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Názov modulu alebo kapitoly. Použite ako štrukturálny značovač medzi vzdelávacími cieľmi a skúškami vedomostí.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Spätná väzba alebo remedácia po otázke. Vysvetlite, ktorá odpoveď bola správna a prečo, alebo odkazujte na doplnkový materiál.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Zhrnutie hodnotenia: počet otázok, maximálne skóre, hranica pre úspech. Bez výsledkov študenta — iba definícia testu.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Otázka na skúšku vedomostí. Vyberte typ otázky, vyplňte odpovede a označte správnu odpoveď.',
   'Paren': 'Páry',
   'Afleiders (optioneel)': 'Distraktory (voliteľné)',
   'Invulvelden': 'Vyplňovacie polia',

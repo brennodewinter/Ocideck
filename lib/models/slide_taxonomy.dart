@@ -8,6 +8,7 @@ enum SlideCategory {
   informationSecurity,
   procesverbetering,
   managementsysteem,
+  eLearning,
 }
 
 /// Hoeveel kolommen doorlopende bullettekst een [SlideType] toont.

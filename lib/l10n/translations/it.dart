@@ -665,6 +665,24 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Crea contenuti eLearning: obiettivi di apprendimento, moduli, verifiche delle conoscenze, feedback e riepiloghi delle valutazioni. Importa SCORM, QTI, xAPI, AICC e OLX localmente. Disattivato per impostazione predefinita; attiva l\'estensione per usare i tipi di diapositiva.',
+  'Leerdoel': 'Obiettivo di apprendimento',
+  'Module': 'Modulo',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Riepilogo della valutazione',
+  'Kennischeck': 'Verifica delle conoscenze',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Un obiettivo di apprendimento o competenza. Descrivi ciò che l\'apprendente deve saper fare; collega opzionalmente a moduli o domande. Nessuna pretesa che qualcuno abbia padroneggiato l\'obiettivo.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Un titolo di modulo o capitolo. Usalo come marcatore strutturale tra obiettivi di apprendimento e verifiche delle conoscenze.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback o rimedio dopo una domanda. Spiega quale risposta era corretta e perché, o rinvia a materiale aggiuntivo.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Riepilogo della valutazione: numero di domande, punteggio massimo, soglia di superamento. Nessun risultato dell\'apprendente — solo la definizione del test.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Una domanda di verifica delle conoscenze. Scegli il tipo di domanda, compila le risposte e contrassegna la risposta corretta.',
   'Paren': 'Coppie',
   'Afleiders (optioneel)': 'Distrattori (opzionale)',
   'Invulvelden': 'Campi di compilazione',

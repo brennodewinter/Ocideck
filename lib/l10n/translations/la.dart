@@ -1648,6 +1648,24 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Crea contentum eLearning: proposita discendi, modulos, probationes scientiae, responsa et summaria assessment. Importa SCORM, QTI, xAPI, AICC et OLX localiter. Default exstinctum; activa extensionem ut utaris typis diapositorum.',
+  'Leerdoel': 'Discendi propositum',
+  'Module': 'Modulus',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Aestimationis summarius',
+  'Kennischeck': 'Cognoscendi probatio',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Propositum discendi vel peritia. Describe quid discentem facere posse oporteat; optionaliter cum modulis vel quaestionibus coniunge. Nulla affirmatio quemquam propositum perfecisse.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Titulus moduli vel capituli. Utere ut signum structurae inter proposita discendi et probationes cognoscendi.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Feedback vel remedium post quaestionem. Explica quae responsio recta fuerit et cur, aut ad materiam additionalem remitte.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Aestimationis summarius: numerus quaestionum, punctus maximus, limen transgressionis. Nulli resultatus discentis — solum definitio probationis.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Quaestio probationis cognoscendi. Elige typum quaestionis, responde et responsionem rectam marca.',
   'Paren': 'Pares',
   'Afleiders (optioneel)': 'Distractoribus (optionalibus)',
   'Invulvelden': 'Campi complendi',

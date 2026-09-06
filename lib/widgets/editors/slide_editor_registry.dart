@@ -336,4 +336,39 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         onUpdate: c.onUpdate,
         nestedInScrollView: c.nestedInScrollView,
       ),
+      // eLearning: tekstgebaseerde types hergebruiken FreeMarkdownEditor;
+      // kennischeck hergebruikt QuestionEditor.
+      SlideType.objective: (c) => FreeMarkdownEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.module: (c) => FreeMarkdownEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.feedback: (c) => FreeMarkdownEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.assessmentSummary: (c) => FreeMarkdownEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.kennischeck: (c) => QuestionEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        imageService: c.imageService,
+        searchPaths: c.searchPaths,
+        captionBasePath: c.captionBasePath,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
     };

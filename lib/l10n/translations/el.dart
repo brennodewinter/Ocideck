@@ -1658,6 +1658,24 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
+      'Δημιουργήστε περιεχόμενο eLearning: στόχοι μάθησης, ενότητες, έλεγχοι γνώσεων, ανατροφοδότηση και περιλήψεις αξιολόγησης. Εισαγάγετε SCORM, QTI, xAPI, AICC και OLX τοπικά. Ανενεργό από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τους τύπους διαφανειών.',
+  'Leerdoel': 'Στόχος μάθησης',
+  'Module': 'Ενότητα',
+  'Feedback': 'Feedback',
+  'Assessment-samenvatting': 'Σύνοψη αξιολόγησης',
+  'Kennischeck': 'Έλεγχος γνώσεων',
+  'eLearning': 'eLearning',
+  'Een leerdoel of competentie. Beschrijf wat de lerende moet kunnen; koppel optioneel aan modules of vragen. Geen claim dat iemand het doel beheerst.':
+      'Ένας στόχος μάθησης ή ικανότητα. Περιγράψτε τι πρέπει να μπορεί να κάνει ο εκπαιδευόμενος· συνδέστε προαιρετικά με ενότητες ή ερωτήσεις. Καμία διεκδίκηση ότι κάποιος έχει κατακτήσει τον στόχο.',
+  'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.':
+      'Τίτλος ενότητας ή κεφαλαίου. Χρησιμοποιήστε ως δομικό δείκτη μεταξύ στόχων μάθησης και ελέγχων γνώσεων.',
+  'Feedback of remediation na een vraag. Leg uit welk antwoord juist was en waarom, of verwijs door naar extra materiaal.':
+      'Σχόλια ή αναπλήρωση μετά από μια ερώτηση. Εξηγήστε ποια απάντηση ήταν σωστή και γιατί, ή παραπέμψτε σε πρόσθετο υλικό.',
+  'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.':
+      'Σύνοψη αξιολόγησης: αριθμός ερωτήσεων, μέγιστη βαθμολογία, όριο επιτυχίας. Χωρίς αποτελέσματα εκπαιδευόμενου — μόνο ο ορισμός του τεστ.',
+  'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.':
+      'Μια ερώτηση ελέγχου γνώσεων. Επιλέξτε τον τύπο ερώτησης, συμπληρώστε τις απαντήσεις και σημειώστε τη σωστή απάντηση.',
   'Paren': 'Ζευγάρια',
   'Afleiders (optioneel)': 'Παραπλανητικά (προαιρετικά)',
   'Invulvelden': 'Πεδία συμπλήρωσης',
