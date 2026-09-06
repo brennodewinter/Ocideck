@@ -91,7 +91,6 @@ enum SlideType {
   module,
   feedback,
   assessmentSummary,
-  kennischeck,
 }
 
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
@@ -321,11 +320,6 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.assessmentSummary: SlideTypeMeta(
     label: 'Assessment-samenvatting',
     marpClass: 'assessment-summary',
-    category: SlideCategory.eLearning,
-  ),
-  SlideType.kennischeck: SlideTypeMeta(
-    label: 'Kennischeck',
-    marpClass: 'kennischeck',
     category: SlideCategory.eLearning,
   ),
 };

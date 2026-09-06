@@ -45,19 +45,17 @@ Slide slideMetInhoud(SlideType type) {
     ),
     SlideType.title ||
     SlideType.section => basis.copyWith(title: 'T', subtitle: 'S'),
-    // eLearning-types zijn tekstgebaseerd en hebben customMarkdown nodig om
-    // iets te tonen; module is een heading-slide die met alleen een titel volstaat.
+    // De eLearning-types zijn tekstgebaseerd en hebben customMarkdown nodig om
+    // iets te tonen. Ze delen bewust één body: alle vier renderen via
+    // `_freeMarkdownPreview`, dus hun goldens zijn identiek — dat is wat er te
+    // zien valt, niet een tekortkoming van de fixture. Wat de types wél
+    // onderscheidt (token, editor, categorie) toetst slide_type_meta_test.
     SlideType.objective ||
     SlideType.module ||
     SlideType.feedback ||
     SlideType.assessmentSummary => basis.copyWith(
       title: 'T',
       customMarkdown: 'Leerinhoud met **uitleg**.',
-    ),
-    SlideType.kennischeck => basis.copyWith(
-      title: 'T',
-      customMarkdown:
-          '```question\n{"kind":"trueFalse","prompt":"Juist?","correctAnswer":true}\n```',
     ),
     // Menu (#1162): de blokken leven als link-bullets in [Slide.bullets], niet
     // in de body uit Slide.create. Eén blok `[label](#anker)` maakt de dia

@@ -101,7 +101,6 @@ class AddSlideDialog extends StatefulWidget {
     // eLearning-module — eigen tabblad zodra de module de types onthult (#1999).
     SlideType.objective,
     SlideType.module,
-    SlideType.kennischeck,
     SlideType.feedback,
     SlideType.assessmentSummary,
   ];
@@ -775,12 +774,6 @@ class SlideTypePreviewPainter extends CustomPainter {
       case SlideType.assessmentSummary:
         _bar(canvas, 14, 12, 10, 9, _accent, radius: 2);
         _bar(canvas, 28, 12, 62, 9, _ink);
-      case SlideType.kennischeck:
-        _bar(canvas, 14, 12, 96, 9, _ink);
-        for (var r = 0; r < 4; r++) {
-          final y = 30.0 + r * 13;
-          _bar(canvas, 14, y, 80, 7, r == 0 ? _accent : _soft, radius: 3);
-        }
     }
   }
 
@@ -1052,8 +1045,7 @@ class SlideTypePreviewPainter extends CustomPainter {
           SlideType.objective ||
           SlideType.module ||
           SlideType.feedback ||
-          SlideType.assessmentSummary ||
-          SlideType.kennischeck:
+          SlideType.assessmentSummary:
         break;
     }
   }

@@ -223,7 +223,7 @@ const Map<String, int> fileSizeBaseline = {
   // +27 (#1824): callouts, calloutPresentation, calloutReveal-velden + doc +
   // constructor/duplicate/copyWith-doorvoer voor image callouts.
   'lib/models/slide.dart':
-      1145, // +30 (#1999): eLearning-slide­types (objective, module, feedback, assessmentSummary, kennischeck) — enum + slideTypeMeta.
+      1141, // +26 (#1999): eLearning-slide­types (objective, module, feedback, assessmentSummary) — enum + slideTypeMeta.
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de

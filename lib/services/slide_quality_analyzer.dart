@@ -429,8 +429,7 @@ class SlideQualityAnalyzer {
           SlideType.objective ||
           SlideType.module ||
           SlideType.feedback ||
-          SlideType.assessmentSummary ||
-          SlideType.kennischeck:
+          SlideType.assessmentSummary:
         break;
     }
   }
@@ -494,7 +493,6 @@ class SlideQualityAnalyzer {
       case SlideType.module:
       case SlideType.feedback:
       case SlideType.assessmentSummary:
-      case SlideType.kennischeck:
         break;
     }
   }
@@ -686,7 +684,6 @@ class SlideQualityAnalyzer {
       case SlideType.module:
       case SlideType.feedback:
       case SlideType.assessmentSummary:
-      case SlideType.kennischeck:
         break;
     }
   }

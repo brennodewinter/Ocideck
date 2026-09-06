@@ -446,5 +446,4 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.module: Icons.book_outlined,
   SlideType.feedback: Icons.feedback_outlined,
   SlideType.assessmentSummary: Icons.assignment_outlined,
-  SlideType.kennischeck: Icons.quiz_outlined,
 };

@@ -39,8 +39,19 @@ final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 /// een getypeerde editor eroverheen. De rijen stonden al als gewone
 /// Markdown-tabel op schijf, dus een bestaand deck migreert door het token als
 /// `table` te lezen — geen dataconversie nodig.
+///
+/// 'kennischeck' is opgeheven om dezelfde reden andersom: het was een eigen
+/// slidetype voor iets dat al een `question`-slide wás. Het droeg zijn vraag in
+/// hetzelfde ```question```-blok, maar viel buiten elke `case SlideType.question`
+/// — inlezen, presenteren en het assetregister — waardoor de vraag van de auteur
+/// bij het heropenen door de fabrieksvraag werd vervangen. Het ontwerp
+/// (docs/design/ELEARNING_MODEL.md §2.3 en §6) schreef ook nooit een eigen token
+/// voor: de eLearning-tab is een groepering in de editor, geen begrip in het
+/// bestandsformaat. Een bestaand deck migreert door het token als `question` te
+/// lezen — het blok eronder is al precies wat een vraag-slide verwacht.
 const Map<String, SlideType> _retiredSlideTypeClasses = {
   'actions': SlideType.table,
+  'kennischeck': SlideType.question,
 };
 
 /// Het slidetype dat één `_class`-token aanwijst, of null als het token geen

@@ -44,6 +44,8 @@ const _knownClassTokens = {
   'module',
   'feedback',
   'assessment-summary',
+  // Opgeheven types waarvan het token leesbaar blijft, zodat een bestaand deck
+  // niet ineens een waarschuwing krijgt: zie _retiredSlideTypeClasses.
   'kennischeck',
   'menu-grid',
   'menu-list',

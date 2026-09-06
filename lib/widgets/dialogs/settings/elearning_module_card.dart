@@ -8,7 +8,7 @@ import '../../../theme/app_theme.dart';
 /// Module card for eLearning on Settings → Uitbreidingen (#1999).
 ///
 /// Off by default. Switching it on reveals the eLearning slide types
-/// (leerdoel, module, feedback, assessment-samenvatting, kennischeck) and
+/// (leerdoel, module, feedback, assessment-samenvatting) and
 /// their picker tab; a deck that already carries such a slide reveals it
 /// regardless (the shared module contract).
 class ElearningModuleCard extends ConsumerWidget {

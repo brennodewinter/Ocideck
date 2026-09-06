@@ -130,7 +130,6 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       case SlideType.module:
       case SlideType.feedback:
       case SlideType.assessmentSummary:
-      case SlideType.kennischeck:
         break;
     }
   }

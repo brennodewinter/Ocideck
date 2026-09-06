@@ -73,8 +73,7 @@ List<String> deckStandardsUsed(Deck deck) {
           SlideType.objective ||
           SlideType.module ||
           SlideType.feedback ||
-          SlideType.assessmentSummary ||
-          SlideType.kennischeck:
+          SlideType.assessmentSummary:
         break;
     }
   }

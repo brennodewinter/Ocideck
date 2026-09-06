@@ -145,7 +145,7 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       );
     case SlideType.module:
       return l10n.d(
-        'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en kennischecks.',
+        'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.',
       );
     case SlideType.feedback:
       return l10n.d(
@@ -154,10 +154,6 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
     case SlideType.assessmentSummary:
       return l10n.d(
         'Samenvatting van een assessment: aantal vragen, maximumscore, slagingsgrens. Geen leerlingresultaten — alleen de toetsdefinitie.',
-      );
-    case SlideType.kennischeck:
-      return l10n.d(
-        'Een kennistoetsvraag. Kies het vraagtype, vul antwoorden in en markeer het juiste antwoord.',
       );
   }
 }
