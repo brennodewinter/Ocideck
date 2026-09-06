@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/elearning_assessment.dart';
 import 'package:ocideck/models/question.dart';
@@ -84,6 +85,37 @@ void main() {
 
     test('parse returns null on non-map', () {
       expect(ElearningSidecar.parse('[1,2,3]'), isNull);
+    });
+
+    // De doc-comment beloofde dit contract al; gebouwd was het niet. Half
+    // inlezen is hier het gevaarlijke geval: wat deze build niet begrijpt,
+    // verdwijnt bij de eerstvolgende opslag.
+    test('parse weigert een sidecar van een nieuwere build', () {
+      final raw = '{"version": ${kElearningSidecarVersion + 1}}';
+      expect(
+        ElearningSidecar.parse(raw),
+        isNull,
+        reason: 'een hogere versie draagt aantoonbaar iets dat deze build niet '
+            'kent — die mag niet half ingelezen en teruggeschreven worden',
+      );
+    });
+
+    test('parse leest een sidecar zonder versiesleutel als de oudste', () {
+      expect(ElearningSidecar.parse('{}'), isNotNull);
+    });
+
+    test('onbekende sleutels overleven een lees-schrijfronde', () {
+      // §7 rekent structure/source/scoring tot versie 1; deze build leest ze
+      // niet. Dezelfde versie, dus de versiepoort grijpt niet in — zonder
+      // bewaren zou het bestand armer terugkomen dan het inging.
+      final back = ElearningSidecar.parse(
+        '{"version":$kElearningSidecarVersion,"structure":{"modules":[1]},'
+        '"source":"scorm"}',
+      );
+      expect(back, isNotNull);
+      final again = jsonDecode(back!.encode()) as Map<String, dynamic>;
+      expect(again['source'], 'scorm');
+      expect(again['structure'], {'modules': [1]});
     });
 
     test('accessibility round-trips extensions and warnings', () {

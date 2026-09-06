@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../services/sidecar_format.dart';
 import '../utils/log.dart';
 
 /// Het versienummer van de eLearning-sidecar die deze build ondersteunt.
@@ -153,18 +154,36 @@ class ElearningAccessibility {
 
 /// De volledige eLearning-sidecar (#2006, #2007, #2008).
 class ElearningSidecar {
+  /// De sleutels die deze build zelf schrijft. Al het andere op het hoogste
+  /// niveau gaat ongemoeid mee in [unknown].
+  static const _knownKeys = {'version', 'assessment', 'accessibility'};
+
   final int version;
   final ElearningAssessment? assessment;
   final ElearningAccessibility? accessibility;
+
+  /// Sleutels uit het bestand die deze build niet kent, ongewijzigd bewaard.
+  ///
+  /// Het ontwerp (§7) rekent `structure`, `source` en `scoring` tot versie 1,
+  /// en die leest deze build nog niet. Zonder dit veld zou de eerstvolgende
+  /// schrijver ze weggooien: dezelfde versie, dus de versiepoort hierboven grijpt
+  /// niet in, en toch een bestand dat armer terugkomt dan het inging. Er ís nog
+  /// geen schrijver — dit staat er zodat er ook nooit een komt die wist.
+  final Map<String, dynamic> unknown;
 
   const ElearningSidecar({
     this.version = kElearningSidecarVersion,
     this.assessment,
     this.accessibility,
+    this.unknown = const {},
   });
 
   factory ElearningSidecar.fromJson(Map<String, dynamic> json) =>
       ElearningSidecar(
+        unknown: {
+          for (final e in json.entries)
+            if (!_knownKeys.contains(e.key)) e.key: e.value,
+        },
         version: (json['version'] as num?)?.toInt() ?? kElearningSidecarVersion,
         assessment: json['assessment'] is Map
             ? ElearningAssessment.fromJson(
@@ -183,14 +202,31 @@ class ElearningSidecar {
     if (assessment != null) 'assessment': assessment!.toJson(),
     if (accessibility != null && !accessibility!.isEmpty)
       'accessibility': accessibility!.toJson(),
+    ...unknown,
   };
 
   String encode() => const JsonEncoder.withIndent('  ').convert(toJson());
 
+  /// Leest een sidecar, of null bij onleesbare JSON óf een versie die deze
+  /// build niet kent.
+  ///
+  /// Die tweede voorwaarde stond in de doc-comment maar was niet gebouwd. Half
+  /// inlezen is hier het gevaarlijke geval: wat deze build niet begrijpt zou bij
+  /// de eerstvolgende opslag verdwijnen, en dat is niet meer terug te halen.
+  /// Het gedeelde contract in `sidecar_format.dart` bestaat precies daarvoor —
+  /// zie [sidecarIsFromNewerBuild] en de andere codecs die erop leunen.
   static ElearningSidecar? parse(String raw) {
     try {
       final data = jsonDecode(raw.trim());
       if (data is! Map) return null;
+      final fileVersion = declaredSidecarVersion(data);
+      if (fileVersion > kElearningSidecarVersion) {
+        logWarning(
+          'ElearningSidecar.parse: sidecar is version $fileVersion, this build '
+          'reads $kElearningSidecarVersion — not loading it',
+        );
+        return null;
+      }
       return ElearningSidecar.fromJson(Map<String, dynamic>.from(data));
     } catch (e, s) {
       logError('ElearningSidecar.parse', e, s);
