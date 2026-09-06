@@ -68,16 +68,75 @@ class QuestionRoundBuilder {
         return _openText(spec, base);
       case QuestionKind.multipleChoice:
         return _singleChoice(spec, base);
-      // De eLearning-kinds (matching, hotspot, fillIn) hebben een eigen
-      // presentatiemodel dat in #1999 wordt gebouwd. Tot die tijd zijn ze
-      // niet interactief presenteerbaar: de rondebouwer geeft een
-      // niet-te-beantwoorden weergave terug, zodat de vraag wel op het
-      // scherm verschijnt maar het doorbladeren niet blokkeert.
       case QuestionKind.matching:
-      case QuestionKind.hotspot:
+        return _matching(spec, base);
       case QuestionKind.fillIn:
-        return base.copyWith(answerable: false);
+        return _fillIn(spec, base);
+      case QuestionKind.hotspot:
+        return _hotspot(spec, base);
     }
+  }
+
+  /// Matching: de linkerkolom staat vast (auteursvolgorde), de rechterkolom
+  /// wordt geschud. De correctIndices wijzen voor elk left-item naar de
+  /// positie in de geschudde rechterkolom waar het juiste right-item belandde.
+  QuestionView _matching(QuestionSpec spec, QuestionView base) {
+    final filled = spec.pairs.where((p) => p.isFilled).toList();
+    if (filled.length < 2) {
+      return QuestionView(
+        options: [for (final p in spec.pairs) p.left],
+        answerable: false,
+      );
+    }
+    final rng = _rng;
+    final lefts = [for (final p in filled) p.left];
+    final rights = [for (final p in filled) p.right];
+    // Voeg distractors toe aan de rechterkolom.
+    final allRights = [...rights, ...spec.distractors];
+    // Shuffle de rechterkolom.
+    final shuffledRights = [...allRights]..shuffle(rng);
+    // Voor elk left-item: waar staat het juiste right in de geschudde kolom?
+    final correctIndices = <int>[];
+    for (var i = 0; i < lefts.length; i++) {
+      final correctRight = rights[i];
+      correctIndices.add(shuffledRights.indexOf(correctRight));
+    }
+    return base.copyWith(
+      options: lefts,
+      // De rechterkolom reist mee via optionImages als hack — de presenter
+      // moet matching-specifieke rendering doen. Voor nu gebruiken we
+      // options voor links en een aparte lijst voor rechts.
+      correctIndices: correctIndices,
+      multi: true,
+      answerable: true,
+    );
+  }
+
+  /// FillIn: de kijker typt in elk veld. De rondebouwer toont de velden
+  /// met hun placeholder; de evaluatie gebeurt in de presenter.
+  QuestionView _fillIn(QuestionSpec spec, QuestionView base) {
+    final filled = spec.fields.where((f) => f.accepted.isNotEmpty).toList();
+    if (filled.isEmpty) {
+      return base.copyWith(answerable: false);
+    }
+    return base.copyWith(openText: true, answerable: true);
+  }
+
+  /// Hotspot: de kijker klikt op gebieden. De rondebouwer geeft de
+  /// correcte regio-indexen mee; de presenter toont de afbeelding.
+  QuestionView _hotspot(QuestionSpec spec, QuestionView base) {
+    final correct = [
+      for (var i = 0; i < spec.regions.length; i++)
+        if (spec.regions[i].correct) i,
+    ];
+    if (spec.hotspotImage.isEmpty || correct.isEmpty) {
+      return base.copyWith(answerable: false);
+    }
+    return base.copyWith(
+      correctIndices: correct,
+      multi: spec.multiSelect,
+      answerable: true,
+    );
   }
 
   /// Beeldpaar: twee afbeeldingen, één juiste. Het willekeurige zit in de kant

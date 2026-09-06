@@ -668,6 +668,47 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Paren': 'Paires',
+  'Afleiders (optioneel)': 'Distracteurs (optionnel)',
+  'Invulvelden': 'Champs de saisie',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Le spectateur relie la gauche à la droite. La paire i a gauche[i] comme réponse correcte pour droite[i]. La colonne de droite est mélangée lors de la présentation.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Le spectateur tape la réponse dans chaque champ. Chaque champ a une ou plusieurs réponses acceptées et une stratégie d\'évaluation.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Le spectateur pointe une ou plusieurs régions sur l\'image. Les coordonnées sont normalisées (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Éléments droits supplémentaires sans partenaire correct. Ils rendent la question plus difficile.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Réponses acceptées (séparées par des virgules)',
+  'Afleider': 'Distracteur',
+  'Afleider toevoegen': 'Ajouter un distracteur',
+  'Afleider verwijderen': 'Supprimer le distracteur',
+  'Bevat het antwoord': 'Contient la réponse',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Coordonnées (x, y, w, h — normalisées 0–1)',
+  'Evaluatiestrategie': 'Stratégie d\'évaluation',
+  'Exacte overeenkomst': 'Correspondance exacte',
+  'Gebied': 'Région',
+  'Gebied toevoegen': 'Ajouter une région',
+  'Gebied verwijderen': 'Supprimer la région',
+  'Getal in bereik': 'Nombre dans l\'intervalle',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Choisissez une image et marquez au moins une région correcte.',
+  'Label (optioneel)': 'Étiquette (facultatif)',
+  'Maak minstens twee gevulde paren.': 'Créez au moins deux paires remplies.',
+  'Meerdere gebieden selecteerbaar': 'Plusieurs régions sélectionnables',
+  'Paar toevoegen': 'Ajouter une paire',
+  'Paar verwijderen': 'Supprimer la paire',
+  'Tikfout toegestaan': 'Faute de frappe autorisée',
+  'Veld': 'Champ',
+  'Veld toevoegen': 'Ajouter un champ',
+  'Veld verwijderen': 'Supprimer le champ',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Ajoutez au moins un champ avec une réponse acceptée.',
+  'Koppelen (matching)': 'Association (matching)',
+  'Invulvraag': 'Question à remplir',
+  'Hotspot (klik op afbeelding)': 'Hotspot (clicquer sur l\'image)',
   'Presentaties op deze server': 'Présentations sur ce serveur',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Suivre la présentation : cette diapositive fait ce que la présentation dans son ensemble fait. Signaler seulement : la constatation est comptée, mais le destinataire ne voit rien — les données sont simplement là. Accepter : les données ont leur place ici et l\'avertissement disparaît. Accepter + avertir : le destinataire voit un badge indiquant qu\'il y a des données personnelles sur la diapositive. Omettre : les données trouvées sont rendues illisibles à l\'écran et dans l\'export — votre fichier markdown conserve le texte original.',

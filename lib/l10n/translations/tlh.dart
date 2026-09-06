@@ -1610,6 +1610,50 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Paren': '\'aqro',
+  'Afleiders (optioneel)': 'veqlargh (optional)',
+  'Invulvelden': 'yIghun mIw',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'bejwI\' poS nIq nIqpu\' (The viewer connects left to right. Pair i has left[i] as the correct answer for right[i]. The right column is shuffled during presentation.)',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'bejwI\' jav nIq mIw (The viewer types the answer in each field. Each field has one or more accepted answers and an evaluation strategy.)',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'bejwI\' mIllogh yotlh nIq (The viewer points to one or more regions on the image. Coordinates are normalized 0–1.)',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'nIq nIq \'aqro lugh (Extra right items without a correct partner. They make the question harder.)',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'lIjlaHbogh jangwI\' (wav \'et) (accepted answers, comma-separated)',
+  'Afleider': 'moHta\'bogh (distractor)',
+  'Afleider toevoegen': 'moHta\'bogh chel (add distractor)',
+  'Afleider verwijderen': 'moHta\'bogh teq (remove distractor)',
+  'Bevat het antwoord': 'jangwI\' ngI\'lu\' (contains the answer)',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'mI\' (x, y, w, h — normal 0–1) (coordinates, normalized 0–1)',
+  'Evaluatiestrategie': 'loHmI\' nger (evaluation strategy)',
+  'Exacte overeenkomst': 'nIb rap (exact match)',
+  'Gebied': 'Sep (region)',
+  'Gebied toevoegen': 'Sep chel (add region)',
+  'Gebied verwijderen': 'Sep teq (remove region)',
+  'Getal in bereik': 'mI\' chu\' Degh (number in range)',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'nagh be\' luSuvqoqu\' \'ej nIb Sep wa\' nIb. (choose an image and mark at least one correct region)',
+  'Label (optioneel)': 'tlhoy (optional) (label, optional)',
+  'Maak minstens twee gevulde paren.':
+      'cha\' nIb nIb ngeH. (create at least two filled pairs)',
+  'Meerdere gebieden selecteerbaar':
+      'Sep law\' rap (multiple regions selectable)',
+  'Paar toevoegen': 'nIb chel (add pair)',
+  'Paar verwijderen': 'nIb teq (remove pair)',
+  'Tikfout toegestaan': 'mIS chel pIH (typo allowed)',
+  'Veld': 'yotlh (field)',
+  'Veld toevoegen': 'yotlh chel (add field)',
+  'Veld verwijderen': 'yotlh teq (remove field)',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'yotlh wa\' chel \'ej jangwI\' lIj. (add at least one field with an accepted answer)',
+  'Koppelen (matching)': 'nIb (matching)',
+  'Invulvraag': 'teqlu\' ghel (fill-in question)',
+  'Hotspot (klik op afbeelding)':
+      'Hotspot (nagh lay\') (hotspot, click on image)',
   'Presentaties op deze server': 'Presentations on this server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'nagh beQmey tlhab: mIvvam nagh beQ vIlo\'chugh nagh beQmey naQ vIlo\'. ja\' neH: Samlu\'bogh wIvlu\', \'ach Hevbe\' ghuHbe\' — De\' naQ bIH. lIj: De\' naQ tu\'lu\' \'ej warning narghbe\'. lIj + yIja\'qoq: Hevbe\' badge legh, nagh beQDaq De\' nav tu\'lu\'. nugh: Samlu\'bogh De\' lajbe\' moj nagh beQDaq \'ej ngeHmeH — markdown De\' nav mI\' nagh teqbe\'.',

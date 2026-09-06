@@ -1633,6 +1633,47 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Paren': 'Pari',
+  'Afleiders (optioneel)': 'Distraktorji (neobvezno)',
+  'Invulvelden': 'Polja za izpolnjevanje',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Gledalec povezuje levo z desnim. Par i ima levo[i] kot pravilen odgovor za desno[i]. Desni stolpec se med predstavitvijo premeša.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Gledalec vnese odgovor v vsako polje. Vsako polje ima enega ali več sprejetih odgovorov in strategijo ocenjevanja.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Gledalec kaže na eno ali več regij na sliki. Koordinate so normalizirane (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Dodatni desni elementi brez pravega partnerja. Težjo naredijo vprašanje.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Sprejeti odgovori (ločeni z vejico)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Dodaj distraktor',
+  'Afleider verwijderen': 'Odstrani distraktor',
+  'Bevat het antwoord': 'Vsebuje odgovor',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinate (x, y, w, h — normalizirane 0–1)',
+  'Evaluatiestrategie': 'Strategija ocenjevanja',
+  'Exacte overeenkomst': 'Točno ujemanje',
+  'Gebied': 'Območje',
+  'Gebied toevoegen': 'Dodaj območje',
+  'Gebied verwijderen': 'Odstrani območje',
+  'Getal in bereik': 'Število v obsegu',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Izberite sliko in označite vsaj eno pravilno območje.',
+  'Label (optioneel)': 'Oznaka (neobvezno)',
+  'Maak minstens twee gevulde paren.': 'Ustvari vsaj dva izpolnjena para.',
+  'Meerdere gebieden selecteerbaar': 'Več območij izberljivih',
+  'Paar toevoegen': 'Dodaj par',
+  'Paar verwijderen': 'Odstrani par',
+  'Tikfout toegestaan': 'Tipkarska napaka dovoljena',
+  'Veld': 'Polje',
+  'Veld toevoegen': 'Dodaj polje',
+  'Veld verwijderen': 'Odstrani polje',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Dodaj vsaj eno polje s sprejetim odgovorom.',
+  'Koppelen (matching)': 'Ujemanje (matching)',
+  'Invulvraag': 'Vprašanje za izpolnjevanje',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik na sliko)',
   'Presentaties op deze server': 'Predstavitve na tem strežniku',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sledi predstavitvi: ta diapozitiv stori to, kar stori predstavitev kot celota. Samo poročaj: najdba se šteje, prejemnik pa ne vidi ničesar — podatki so preprosto tam. Sprejmi: podatki spadajo sem in opozorilo izgine. Sprejmi + opozori: prejemnik vidi značko, da so na diapozitivu osebni podatki. Izpusti: najdeni podatki postanejo neberljivi na zaslonu in pri izvozu — vaša markdown datoteka obdrži izvirno besedilo.',

@@ -831,6 +831,47 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Paren': 'Pairs',
+  'Afleiders (optioneel)': 'Distractors (optional)',
+  'Invulvelden': 'Fill-in fields',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'The viewer connects left to right. Pair i has left[i] as the correct answer for right[i]. The right column is shuffled during presentation.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'The viewer types the answer in each field. Each field has one or more accepted answers and an evaluation strategy.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'The viewer points to one or more regions on the image. Coordinates are normalized (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Extra right items without a correct partner. They make the question harder.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Accepted answers (comma-separated)',
+  'Afleider': 'Distractor',
+  'Afleider toevoegen': 'Add distractor',
+  'Afleider verwijderen': 'Remove distractor',
+  'Bevat het antwoord': 'Contains the answer',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Coordinates (x, y, w, h — normalized 0–1)',
+  'Evaluatiestrategie': 'Evaluation strategy',
+  'Exacte overeenkomst': 'Exact match',
+  'Gebied': 'Region',
+  'Gebied toevoegen': 'Add region',
+  'Gebied verwijderen': 'Remove region',
+  'Getal in bereik': 'Number in range',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Choose an image and mark at least one correct region.',
+  'Label (optioneel)': 'Label (optional)',
+  'Maak minstens twee gevulde paren.': 'Create at least two filled pairs.',
+  'Meerdere gebieden selecteerbaar': 'Multiple regions selectable',
+  'Paar toevoegen': 'Add pair',
+  'Paar verwijderen': 'Remove pair',
+  'Tikfout toegestaan': 'Typo allowed',
+  'Veld': 'Field',
+  'Veld toevoegen': 'Add field',
+  'Veld verwijderen': 'Remove field',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Add at least one field with an accepted answer.',
+  'Koppelen (matching)': 'Matching',
+  'Invulvraag': 'Fill-in question',
+  'Hotspot (klik op afbeelding)': 'Hotspot (click on image)',
   'Presentaties op deze server': 'Presentations on this server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Follow the presentation: this slide does what the presentation as a whole does. Report only: the finding is counted, but the recipient sees nothing — the data is just there. Accept: the data belongs here and the warning disappears. Accept + warn: the recipient sees a badge that there is personal data on the slide. Redact: the found data is made unreadable on screen and in the export — your markdown file keeps the original text.',

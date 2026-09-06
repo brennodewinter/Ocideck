@@ -1663,6 +1663,48 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Paren': 'Péirí',
+  'Afleiders (optioneel)': 'Distractorí (roghnach)',
+  'Invulvelden': 'Réimsí líonta',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Ceanglaíonn an féachadóir clé le deas. Tá clé[i] mar an freagra ceart ag péire i do dheas[i]. Cuirtear an colún deas ina mheascadh le linn na láithreoideachta.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Clóscríobhann an féachadóir an freagra i ngach réimse. Tá freagra amháin nó níos mó glactha ag gach réimse agus straitéis luachála.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Déanann an féachadóir tagairt do réigiún amháin nó níos mó ar an íomhá. Tá na comhordanáidí normalaithe (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Míreanna deise breise gan páirtí ceart. Déanann siad an cheist níos deacra.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Freagraí glactha (scartha le camóg)',
+  'Afleider': 'Dístraktóir',
+  'Afleider toevoegen': 'Cuir dístraktóir leis',
+  'Afleider verwijderen': 'Bain dístraktóir',
+  'Bevat het antwoord': 'Tá an freagra ann',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Comhordanáidí (x, y, w, h — normalaithe 0–1)',
+  'Evaluatiestrategie': 'Straiséas meastóireachta',
+  'Exacte overeenkomst': 'Meaitseáil beacht',
+  'Gebied': 'Réigiún',
+  'Gebied toevoegen': 'Cuir réigiún leis',
+  'Gebied verwijderen': 'Bain réigiún',
+  'Getal in bereik': 'Uimhir sa réimse',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Roghnaigh íomhá agus marcáil ar a laghad réigiún amháin ceart.',
+  'Label (optioneel)': 'Lipéad (roghnach)',
+  'Maak minstens twee gevulde paren.':
+      'Cruthaigh ar a laghad dá bheirt líonta.',
+  'Meerdere gebieden selecteerbaar': 'Is féidir réigiúin iomadúla a roghnú',
+  'Paar toevoegen': 'Cuir beirt leis',
+  'Paar verwijderen': 'Bain beirt',
+  'Tikfout toegestaan': 'Earráid cló ceadaithe',
+  'Veld': 'Réimse',
+  'Veld toevoegen': 'Cuir réimse leis',
+  'Veld verwijderen': 'Bain réimse',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Cuir ar a laghad réimse amháin leis le freagra glactha.',
+  'Koppelen (matching)': 'Meaitseáil (matching)',
+  'Invulvraag': 'Ceist líonta',
+  'Hotspot (klik op afbeelding)': 'Hotspot (cliceáil ar íomhá)',
   'Presentaties op deze server': 'Léirithe ar an bhfreastalaí seo',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Lean an cur i láthair: déanann an sleamhnán seo an rud a dhéanann an cur i láthair in iomlán. Tuairiscigh amháin: déantar an fhionnachtain a chomhaireamh, ach níl aon rud le feiceáil ag an bhfaighteoir — tá na sonraí ann simplí. Glac leis: leis na sonraí anseo agus imíonn an rabhadh. Glac leis + rabhadh: feiceann an faighteoir badge go bhfuil sonraí pearsanta ar an sleamhnán. Fág as: déantar na sonraí a aimsíodh do-léite ar an scáileán agus san onnmhairiú — coimeádann do chomhad markdown an téacs bunaidh.',

@@ -267,4 +267,138 @@ void main() {
       expect(view.options[view.correctIndices.single], 'Goed');
     }
   });
+
+  // ── eLearning-kinds: matching, fillIn, hotspot ─────────────────────────────
+
+  group('matching', () {
+    test('toont de linkerkolom en is answerable met twee paren', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.matching,
+          pairs: [
+            MatchPair(id: 'a', left: 'TCP', right: 'Transport'),
+            MatchPair(id: 'b', left: 'IP', right: 'Netwerk'),
+          ],
+        ),
+      );
+      expect(view.options, ['TCP', 'IP']);
+      expect(view.answerable, isTrue);
+      expect(view.correctIndices, hasLength(2));
+    });
+
+    test('met minder dan twee gevulde paren niet answerable', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.matching,
+          pairs: [MatchPair(id: 'a', left: 'TCP', right: 'Transport')],
+        ),
+      );
+      expect(view.answerable, isFalse);
+    });
+
+    test('distractors komen niet in de linkerkolom', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.matching,
+          pairs: [
+            MatchPair(id: 'a', left: 'TCP', right: 'Transport'),
+            MatchPair(id: 'b', left: 'IP', right: 'Netwerk'),
+          ],
+          distractors: ['Sessie'],
+        ),
+      );
+      expect(view.options, ['TCP', 'IP']);
+      expect(view.options, isNot(contains('Sessie')));
+    });
+  });
+
+  group('fillIn', () {
+    test('is answerable met een veld met accepted answers', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.fillIn,
+          fields: [
+            FillField(id: 'f', accepted: ['7', 'zeven']),
+          ],
+        ),
+      );
+      expect(view.openText, isTrue);
+      expect(view.answerable, isTrue);
+    });
+
+    test('zonder accepted answers niet answerable', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.fillIn,
+          fields: [FillField(id: 'f', accepted: [])],
+        ),
+      );
+      expect(view.answerable, isFalse);
+    });
+  });
+
+  group('hotspot', () {
+    test('is answerable met een afbeelding en een correct gebied', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.hotspot,
+          hotspotImage: 'schema.png',
+          regions: [
+            HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.3, 0.3], correct: true),
+          ],
+        ),
+      );
+      expect(view.answerable, isTrue);
+      expect(view.correctIndices, [0]);
+    });
+
+    test('zonder afbeelding niet answerable', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.hotspot,
+          regions: [
+            HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.3, 0.3], correct: true),
+          ],
+        ),
+      );
+      expect(view.answerable, isFalse);
+    });
+
+    test('zonder correct gebied niet answerable', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.hotspot,
+          hotspotImage: 'schema.png',
+          regions: [
+            HotspotRegion(id: 'r', coords: [0.1, 0.1, 0.3, 0.3]),
+          ],
+        ),
+      );
+      expect(view.answerable, isFalse);
+    });
+
+    test('multiSelect geeft multi=true', () {
+      final view = draw(
+        const QuestionSpec(
+          kind: QuestionKind.hotspot,
+          hotspotImage: 'schema.png',
+          regions: [
+            HotspotRegion(
+              id: 'r1',
+              coords: [0.1, 0.1, 0.2, 0.2],
+              correct: true,
+            ),
+            HotspotRegion(
+              id: 'r2',
+              coords: [0.5, 0.5, 0.2, 0.2],
+              correct: true,
+            ),
+          ],
+          multiSelect: true,
+        ),
+      );
+      expect(view.multi, isTrue);
+      expect(view.correctIndices, hasLength(2));
+    });
+  });
 }

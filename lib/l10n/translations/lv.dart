@@ -1631,6 +1631,48 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Paren': 'Pāri',
+  'Afleiders (optioneel)': 'Distraktori (neobligāti)',
+  'Invulvelden': 'Aizpildīšanas lauki',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Skatītājs savieno kreiso ar labo. Pārim i ir kreisais[i] kā pareizā atbilde labajam[i]. Labā kolonna tiek sajaukta prezentācijas laikā.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Skatītājs ievada atbildi katrā laukā. Katram laukam ir viena vai vairākas pieņemtas atbildes un novērtēšanas stratēģija.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Skatītājs norāda uz vienu vai vairākiem reģioniem uz attēla. Koordinātes ir normalizētas (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Papildu labās vienības bez pareiza pāra. Tās padara jautājumu grūtāku.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Pieņemtās atbildes (atdalītas ar komatu)',
+  'Afleider': 'Distraktors',
+  'Afleider toevoegen': 'Pievienot distraktoru',
+  'Afleider verwijderen': 'Noņemt distraktoru',
+  'Bevat het antwoord': 'Satur atbildi',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinātes (x, y, w, h — normalizētas 0–1)',
+  'Evaluatiestrategie': 'Novērtēšanas stratēģija',
+  'Exacte overeenkomst': 'Precīza atbilstība',
+  'Gebied': 'Reģions',
+  'Gebied toevoegen': 'Pievienot reģionu',
+  'Gebied verwijderen': 'Noņemt reģionu',
+  'Getal in bereik': 'Skaitlis diapazonā',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Izvēlies attēlu un atzīmē vismaz vienu pareizo reģionu.',
+  'Label (optioneel)': 'Etiķete (neobligāti)',
+  'Maak minstens twee gevulde paren.':
+      'Izveido vismaz divus aizpildītus pārus.',
+  'Meerdere gebieden selecteerbaar': 'Var atlasīt vairākus reģionus',
+  'Paar toevoegen': 'Pievienot pāri',
+  'Paar verwijderen': 'Noņemt pāri',
+  'Tikfout toegestaan': 'Drukas kļūda atļauta',
+  'Veld': 'Lauks',
+  'Veld toevoegen': 'Pievienot lauku',
+  'Veld verwijderen': 'Noņemt lauku',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Pievieno vismaz vienu lauku ar pieņemtu atbildi.',
+  'Koppelen (matching)': 'Savietošana (matching)',
+  'Invulvraag': 'Aizpildāmais jautājums',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klikšķis uz attēla)',
   'Presentaties op deze server': 'Prezentācijas šajā serverī',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sekot prezentācijai: šis slaids dara to, ko prezentācija kopumā. Tikai ziņot: atklājums tiek skaitīts, bet saņēmējs neko neredz — dati vienkārši ir tur. Pieņemt: dati pieder šeit un brīdinājums izzūd. Pieņemt + brīdināt: saņēmējs redz nozīmi, ka slaidā ir personiskie dati. Izlaist: atrastie dati tiek padarīti nelasāmi ekrānā un eksportā — jūsu markdown fails saglabā oriģinālo tekstu.',

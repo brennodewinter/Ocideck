@@ -668,6 +668,48 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Paren': 'Pearren',
+  'Afleiders (optioneel)': 'Oflieders (opsjoneel)',
+  'Invulvelden': 'Ynfoljende fjilden',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'De sjogger ferbynt lofts mei rjochts. Pear i hat lofts[i] as it juste antwurd by rjochts[i]. De rjochterkolom wurdt by presintaasje trochinoar helle.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'De sjogger typt it antwurd yn elk fjild. Elk fjild hat ien of mear akseptearre antwurden en in evaluaasjestrategy.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'De sjogger wiist ien of mear gebieten op de ofbylding oan. Koördinaten binne normalisearre (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Ekstra rjochteritems sûnder juste partner. Se meitsje de fraach swierder.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Akseptearre antwurden (komma-skieden)',
+  'Afleider': 'Ôflieder',
+  'Afleider toevoegen': 'Ôflieder tafoegje',
+  'Afleider verwijderen': 'Ôflieder fuortsmite',
+  'Bevat het antwoord': 'Befettet it antwurd',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koördinaten (x, y, w, h — normaalre 0–1)',
+  'Evaluatiestrategie': 'Evalsuaasjestrategy',
+  'Exacte overeenkomst': 'Eksakte oerienkomst',
+  'Gebied': 'Gebiet',
+  'Gebied toevoegen': 'Gebiet tafoegje',
+  'Gebied verwijderen': 'Gebiet fuortsmite',
+  'Getal in bereik': 'Getal yn berik',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Kies in ôfbylding en markearje op syn minst ien just gebiet.',
+  'Label (optioneel)': 'Label (opsjoneel)',
+  'Maak minstens twee gevulde paren.':
+      'Meitsje op syn minst twa folle pearren.',
+  'Meerdere gebieden selecteerbaar': 'Meardere gebieten selektearber',
+  'Paar toevoegen': 'Pear tafoegje',
+  'Paar verwijderen': 'Pear fuortsmite',
+  'Tikfout toegestaan': 'Typflater tastien',
+  'Veld': 'Fjild',
+  'Veld toevoegen': 'Fjild tafoegje',
+  'Veld verwijderen': 'Fjild fuortsmite',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Foegje op syn minst ien fjild ta mei in akseptearre antwurd.',
+  'Koppelen (matching)': 'Koppelje (matching)',
+  'Invulvraag': 'Ynfolfraach',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik op ôfbylding)',
   'Presentaties op deze server': 'Presentaasjes op dizze server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Folgje de presintaasje: dizze dia docht wat de presintaasje as gehiel docht. Allinne melde: de befining wurdt teld, mar de ûntfanger sjocht neat — de gegevens steane der gewoan. Akseptearje: de gegevens hearre hjir en de warskôging ferdwynt. Akseptearje + warskôgje: de ûntfanger sjocht in badge dat der persoansgegevens op de dia steane. Weglitte: de fûne gegevens wurde ûnleesber makke op it skerm en yn de eksport — jo markdown-bestân hâldt de oarspronklike tekst.',

@@ -1639,6 +1639,47 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Paren': 'Páry',
+  'Afleiders (optioneel)': 'Distraktory (voliteľné)',
+  'Invulvelden': 'Vyplňovacie polia',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Divák spája ľavé s pravým. Pár i má ľavo[i] ako správnu odpoveď pre pravo[i]. Pravý stĺpec sa počas prezentácie zamieša.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Divák zadáva odpoveď do každého poľa. Každé pole má jednu alebo viac prijatých odpovedí a stratégiu hodnotenia.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Divák ukazuje na jednu alebo viac oblastí na obrázku. Súradnice sú normalizované (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Extra pravé položky bez správneho partnera. Otázku robia ťažšou.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Akceptované odpovede (oddelené čiarkou)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Pridať distraktor',
+  'Afleider verwijderen': 'Odstrániť distraktor',
+  'Bevat het antwoord': 'Obsahuje odpoveď',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Súradnice (x, y, w, h — normalizované 0–1)',
+  'Evaluatiestrategie': 'Stratégia hodnotenia',
+  'Exacte overeenkomst': 'Presná zhoda',
+  'Gebied': 'Oblasť',
+  'Gebied toevoegen': 'Pridať oblasť',
+  'Gebied verwijderen': 'Odstrániť oblasť',
+  'Getal in bereik': 'Číslo v rozsahu',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Vyberte obrázok a označte aspoň jednu správnu oblasť.',
+  'Label (optioneel)': 'Štítok (voliteľné)',
+  'Maak minstens twee gevulde paren.': 'Vytvorte aspoň dva vyplnené páry.',
+  'Meerdere gebieden selecteerbaar': 'Viac oblastí voliteľných',
+  'Paar toevoegen': 'Pridať pár',
+  'Paar verwijderen': 'Odstrániť pár',
+  'Tikfout toegestaan': 'Preklep povolený',
+  'Veld': 'Pole',
+  'Veld toevoegen': 'Pridať pole',
+  'Veld verwijderen': 'Odstrániť pole',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Pridajte aspoň jedno pole s akceptovanou odpoveďou.',
+  'Koppelen (matching)': 'Priraďovanie (matching)',
+  'Invulvraag': 'Dopĺňacia otázka',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik na obrázok)',
   'Presentaties op deze server': 'Prezentácie na tomto serveri',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Nasleduj prezentáciu: tento snímok robí to, čo prezentácia ako celok. Iba nahlás: nález sa ráta, ale príjemca nič nevidí — údaje sú proste tam. Prijať: údaje sem patria a varovanie zmizne. Prijať + varovať: príjemca vidí odznak, že na snímke sú osobné údaje. Vynechať: nájdené údaje sa stanú nečitateľnými na obrazovke a pri exporte — váš markdown súbor zachováva pôvodný text.',

@@ -1635,6 +1635,48 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Paren': 'Párok',
+  'Afleiders (optioneel)': 'Zavarók (opcionális)',
+  'Invulvelden': 'Kitöltő mezők',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'A néző baloldalt jobboldallal köti össze. Az i pár bal[i] mint helyes válasz tartozik jobb[i]-hez. A jobb oszlop bemutatáskor megkeveredik.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'A néző beírja a választ minden mezőbe. Minden mezőhöz egy vagy több elfogadott válasz és értékelési stratégia tartozik.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'A néző egy vagy több területre mutat a képen. A koordináták normalizáltak (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Extra jobb oldali elemek megfelelő pár nélkül. Nehezítik a kérdést.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Elfogadott válaszok (vesszővel elválasztva)',
+  'Afleider': 'Zavaróelem',
+  'Afleider toevoegen': 'Zavaróelem hozzáadása',
+  'Afleider verwijderen': 'Zavaróelem eltávolítása',
+  'Bevat het antwoord': 'Tartalmazza a választ',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordináták (x, y, w, h — normalizált 0–1)',
+  'Evaluatiestrategie': 'Értékelési stratégia',
+  'Exacte overeenkomst': 'Pontos egyezés',
+  'Gebied': 'Terület',
+  'Gebied toevoegen': 'Terület hozzáadása',
+  'Gebied verwijderen': 'Terület eltávolítása',
+  'Getal in bereik': 'Szám tartományban',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Válassz egy képet, és jelölj meg legalább egy helyes területet.',
+  'Label (optioneel)': 'Címke (opcionális)',
+  'Maak minstens twee gevulde paren.':
+      'Hozz létre legalább két kitöltött párt.',
+  'Meerdere gebieden selecteerbaar': 'Több terület kiválasztható',
+  'Paar toevoegen': 'Pár hozzáadása',
+  'Paar verwijderen': 'Pár eltávolítása',
+  'Tikfout toegestaan': 'Elírás engedélyezett',
+  'Veld': 'Mező',
+  'Veld toevoegen': 'Mező hozzáadása',
+  'Veld verwijderen': 'Mező eltávolítása',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Adj hozzá legalább egy mezőt elfogadott válasszal.',
+  'Koppelen (matching)': 'Párosítás (matching)',
+  'Invulvraag': 'Kitöltős kérdés',
+  'Hotspot (klik op afbeelding)': 'Hotspot (kattintás a képre)',
   'Presentaties op deze server': 'Prezentációk ezen a szerveren',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Kövesd a prezentációt: ez a dia azt teszi, amit a prezentáció egésze tesz. Csak jelentés: a megállapítás számítódik, de a címzett nem lát semmit — az adatok egyszerűen ott vannak. Elfogadás: az adatok ide tartoznak, és a figyelmeztetés eltűnik. Elfogadás + figyelmeztetés: a címzett egy jelvényt lát, hogy személyes adatok vannak a dián. Kihagyás: a talált adatok olvashatatlanná válnak a képernyőn és az exportban — a markdown fájlod megtartja az eredeti szöveget.',

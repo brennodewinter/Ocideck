@@ -667,6 +667,47 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Paren': 'Par',
+  'Afleiders (optioneel)': 'Distraktornan (opsyonal)',
+  'Invulvelden': 'Veldnan di yen',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'E mira ta konekta na man robes ku man drechi. Par i tin robes[i] como e respuesta corekto pa drechi[i]. E kolom drechi ta wordu mescla durante presentacion.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'E mira ta type e respuesta den cada veld. Cada veld tin un of mas respuesta aksepta y un strategia di evaluacion.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'E mira ta indica un of mas regionnan riba e imagen. Coordinadonan ta normalisa (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Itemnan drechi extra sin partner corekto. Nan ta haci e pregunta mas dificil.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Respuesta akseptá (separá pa komma)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Añadí distraktor',
+  'Afleider verwijderen': 'Kita distraktor',
+  'Bevat het antwoord': 'Kontené e respuesta',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordiná (x, y, w, h — normalisá 0–1)',
+  'Evaluatiestrategie': 'Estrategia di evaluashon',
+  'Exacte overeenkomst': 'Korespondensia eksakto',
+  'Gebied': 'Región',
+  'Gebied toevoegen': 'Añadí región',
+  'Gebied verwijderen': 'Kita región',
+  'Getal in bereik': 'Number den rango',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Skoge un imágen i marka por lo menos un región korekto.',
+  'Label (optioneel)': 'Label (opsjonal)',
+  'Maak minstens twee gevulde paren.': 'Krea por lo menos dos par yena.',
+  'Meerdere gebieden selecteerbaar': 'Múltiple región selekshonabel',
+  'Paar toevoegen': 'Añadí par',
+  'Paar verwijderen': 'Kita par',
+  'Tikfout toegestaan': 'Error di mashin permití',
+  'Veld': 'Kampo',
+  'Veld toevoegen': 'Añadí kampo',
+  'Veld verwijderen': 'Kita kampo',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Añadí por lo menos un kampo ku un respuesta akseptá.',
+  'Koppelen (matching)': 'Konektá (matching)',
+  'Invulvraag': 'Pregunta di yena',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik riba imágen)',
   'Presentaties op deze server': 'Presentashonnan na e server aki',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sigue e presentashon: e slaidi aki ta hasi loke e presentashon kompletu ta hasi. Solo notifiká: e hallazgo ta wòrdu kontá, pero e resibí no ta wèrdu nada — e datanan ta ai mester. Aseptá: e datanan ta pertenesé aki i e advertensia ta disparsé. Aseptá + advertí: e resibí ta wèrdu un badge ku tin datonan personal riba e slaidi. Kita for di pantaya i eksportashon: e datanan hañá ta wòrdu hañá inleíbel riba e pantaya i den eksportashon — bo fail di markdown ta keda ku e teksto original.',

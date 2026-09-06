@@ -1632,6 +1632,47 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Paren': 'Par',
+  'Afleiders (optioneel)': 'Distraktorer (valfritt)',
+  'Invulvelden': 'Ifyllnadsfält',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Tittaren kopplar vänster till höger. Par i har vänster[i] som rätt svar för höger[i]. Den högra kolumnen blandas vid presentation.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Tittaren skriver in svaret i varje fält. Varje fält har ett eller flera accepterade svar och en utvärderingsstrategi.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Tittaren pekar på en eller flera regioner på bilden. Koordinater är normaliserade (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Extra högra objekt utan korrekt partner. De gör frågan svårare.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Accepterade svar (kommaseparerade)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Lägg till distraktor',
+  'Afleider verwijderen': 'Ta bort distraktor',
+  'Bevat het antwoord': 'Innehåller svaret',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinater (x, y, w, h — normaliserade 0–1)',
+  'Evaluatiestrategie': 'Utvärderingsstrategi',
+  'Exacte overeenkomst': 'Exakt matchning',
+  'Gebied': 'Område',
+  'Gebied toevoegen': 'Lägg till område',
+  'Gebied verwijderen': 'Ta bort område',
+  'Getal in bereik': 'Tal i intervall',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Välj en bild och markera minst ett korrekt område.',
+  'Label (optioneel)': 'Etikett (valfritt)',
+  'Maak minstens twee gevulde paren.': 'Skapa minst två ifyllda par.',
+  'Meerdere gebieden selecteerbaar': 'Flera områden valbara',
+  'Paar toevoegen': 'Lägg till par',
+  'Paar verwijderen': 'Ta bort par',
+  'Tikfout toegestaan': 'Typfel tillåtet',
+  'Veld': 'Fält',
+  'Veld toevoegen': 'Lägg till fält',
+  'Veld verwijderen': 'Ta bort fält',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Lägg till minst ett fält med ett accepterat svar.',
+  'Koppelen (matching)': 'Matchning',
+  'Invulvraag': 'Ifyllningsfråga',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klicka på bild)',
   'Presentaties op deze server': 'Presentationer på denna server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Följ presentationen: denna slide gör vad presentationen som helhet gör. Rapportera endast: fyndet räknas, men mottagaren ser ingenting — uppgifterna finns bara där. Acceptera: uppgifterna hör hemma här och varningen försvinner. Acceptera + varna: mottagaren ser en badge att det finns personuppgifter på sliden. Uteslut: de funna uppgifterna görs oläsbara på skärmen och i exporten — din markdown-fil behåller originaltexten.',

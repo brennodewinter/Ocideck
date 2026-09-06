@@ -2550,6 +2550,47 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Paren': 'Çiftler',
+  'Afleiders (optioneel)': 'Çeldiriciler (isteğe bağlı)',
+  'Invulvelden': 'Doldurma alanları',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'İzleyici soldan sağa bağlar. i çiftinin sağ[i] için doğru cevabı sol[i]\'dir. Sağ sütun sunum sırasında karıştırılır.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'İzleyici her alana cevabı yazar. Her alanın bir veya daha fazla kabul edilen cevabı ve bir değerlendirme stratejisi vardır.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'İzleyici görüntü üzerinde bir veya daha fazla bölgeye işaret eder. Koordinatlar normalize edilmiştir (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Doğru eşi olmayan ekstra sağ öğeler. Soruyu zorlaştırırlar.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Kabul edilen yanıtlar (virgülle ayrılmış)',
+  'Afleider': 'Distraktör',
+  'Afleider toevoegen': 'Distraktör ekle',
+  'Afleider verwijderen': 'Distraktörü kaldır',
+  'Bevat het antwoord': 'Yanıtı içerir',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinatlar (x, y, w, h — normalize 0–1)',
+  'Evaluatiestrategie': 'Değerlendirme stratejisi',
+  'Exacte overeenkomst': 'Tam eşleşme',
+  'Gebied': 'Bölge',
+  'Gebied toevoegen': 'Bölge ekle',
+  'Gebied verwijderen': 'Bölgeyi kaldır',
+  'Getal in bereik': 'Aralıkta sayı',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Bir görsel seçin ve en az bir doğru bölge işaretleyin.',
+  'Label (optioneel)': 'Etiket (isteğe bağlı)',
+  'Maak minstens twee gevulde paren.': 'En az iki dolu çift oluşturun.',
+  'Meerdere gebieden selecteerbaar': 'Birden fazla bölge seçilebilir',
+  'Paar toevoegen': 'Çift ekle',
+  'Paar verwijderen': 'Çifti kaldır',
+  'Tikfout toegestaan': 'Yazım hatasına izin verildi',
+  'Veld': 'Alan',
+  'Veld toevoegen': 'Alan ekle',
+  'Veld verwijderen': 'Alanı kaldır',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Kabul edilen bir yanıtla en az bir alan ekleyin.',
+  'Koppelen (matching)': 'Eşleştirme (matching)',
+  'Invulvraag': 'Boşluk doldurma sorusu',
+  'Hotspot (klik op afbeelding)': 'Hotspot (görseli tıkla)',
   'Presentaties op deze server': 'Bu sunucudaki sunumlar',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sunumu izle: bu slayt, sunumun tamamının yaptığı şeyi yapar. Sadece bildir: bulgu sayılır, alıcı hiçbir şey görmez — veriler sadece oradadır. Kabul et: veriler buraya aittir ve uyarı kaybolur. Kabul et + uyar: alıcı, slaytta kişisel veri olduğunu gösteren bir rozet görür. Çıkar: bulunan veriler ekranda ve dışa aktarımda okunamaz hale gelir — markdown dosyanız orijinal metni korur.',

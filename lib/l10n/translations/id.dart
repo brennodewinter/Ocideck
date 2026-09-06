@@ -1633,6 +1633,48 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Paren': 'Pasangan',
+  'Afleiders (optioneel)': 'Penjebak (opsional)',
+  'Invulvelden': 'Bidang isian',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Penonton menghubungkan kiri ke kanan. Pasangan i memiliki kiri[i] sebagai jawaban yang benar untuk kanan[i]. Kolom kanan diacak saat presentasi.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Penonton mengetik jawaban di setiap bidang. Setiap bidang memiliki satu atau lebih jawaban yang diterima dan strategi evaluasi.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Penonton menunjuk satu atau lebih wilayah pada gambar. Koordinat dinormalisasi (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Item kanan tambahan tanpa pasangan yang benar. Mereka membuat soal lebih sulit.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Jawaban yang diterima (dipisahkan koma)',
+  'Afleider': 'Pengganggu',
+  'Afleider toevoegen': 'Tambah pengganggu',
+  'Afleider verwijderen': 'Hapus pengganggu',
+  'Bevat het antwoord': 'Memuat jawaban',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinat (x, y, w, h — ternormalisasi 0–1)',
+  'Evaluatiestrategie': 'Strategi evaluasi',
+  'Exacte overeenkomst': 'Cocok persis',
+  'Gebied': 'Wilayah',
+  'Gebied toevoegen': 'Tambah wilayah',
+  'Gebied verwijderen': 'Hapus wilayah',
+  'Getal in bereik': 'Angka dalam rentang',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Pilih gambar dan tandai setidaknya satu wilayah yang benar.',
+  'Label (optioneel)': 'Label (opsional)',
+  'Maak minstens twee gevulde paren.':
+      'Buat setidaknya dua pasangan yang terisi.',
+  'Meerdere gebieden selecteerbaar': 'Beberapa wilayah dapat dipilih',
+  'Paar toevoegen': 'Tambah pasangan',
+  'Paar verwijderen': 'Hapus pasangan',
+  'Tikfout toegestaan': 'Kesalahan ketik diperbolehkan',
+  'Veld': 'Bidang',
+  'Veld toevoegen': 'Tambah bidang',
+  'Veld verwijderen': 'Hapus bidang',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Tambahkan setidaknya satu bidang dengan jawaban yang diterima.',
+  'Koppelen (matching)': 'Mencocokkan (matching)',
+  'Invulvraag': 'Pertanyaan isian',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klik pada gambar)',
   'Presentaties op deze server': 'Presentasi di server ini',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Ikuti presentasi: slide ini melakukan apa yang dilakukan presentasi secara keseluruhan. Hanya laporkan: temuan dihitung, tetapi penerima tidak melihat apa pun — datanya memang ada di sana. Terima: datanya memang di sini dan peringatan hilang. Terima + peringatkan: penerima melihat badge bahwa ada data pribadi di slide. Redaksi: data yang ditemukan dibuat tidak terbaca di layar dan ekspor — file markdown Anda menyimpan teks asli.',

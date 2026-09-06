@@ -1653,6 +1653,47 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Paren': 'Двойки',
+  'Afleiders (optioneel)': 'Дистрактори (по избор)',
+  'Invulvelden': 'Полета за попълване',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Зрителят свързва ляво с дясно. Двойка i има ляво[i] като правилен отговор за дясно[i]. Дясната колона се разбърква по време на презентацията.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Зрителят въвежда отговора във всяко поле. Всяко поле има един или повече приети отговора и стратегия за оценяване.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Зрителят посочва един или повече региона върху изображението. Координатите са нормализирани (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Допълнителни десни елементи без правилен партньор. Те правят въпроса по-труден.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Приети отговори (разделени със запетая)',
+  'Afleider': 'Дистрактор',
+  'Afleider toevoegen': 'Добави дистрактор',
+  'Afleider verwijderen': 'Премахни дистрактор',
+  'Bevat het antwoord': 'Съдържа отговора',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Координати (x, y, w, h — нормализирани 0–1)',
+  'Evaluatiestrategie': 'Стратегия за оценяване',
+  'Exacte overeenkomst': 'Точно съвпадение',
+  'Gebied': 'Регион',
+  'Gebied toevoegen': 'Добави регион',
+  'Gebied verwijderen': 'Премахни регион',
+  'Getal in bereik': 'Число в диапазон',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Изберете изображение и маркирайте поне един правилен регион.',
+  'Label (optioneel)': 'Етикет (по избор)',
+  'Maak minstens twee gevulde paren.': 'Създайте поне две попълнени двойки.',
+  'Meerdere gebieden selecteerbaar': 'Възможен избор на няколко региона',
+  'Paar toevoegen': 'Добави двойка',
+  'Paar verwijderen': 'Премахни двойка',
+  'Tikfout toegestaan': 'Печатна грешка разрешена',
+  'Veld': 'Поле',
+  'Veld toevoegen': 'Добави поле',
+  'Veld verwijderen': 'Премахни поле',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Добавете поне едно поле с приет отговор.',
+  'Koppelen (matching)': 'Съгласуване (matching)',
+  'Invulvraag': 'Въпрос за попълване',
+  'Hotspot (klik op afbeelding)': 'Hotspot (клик върху изображение)',
   'Presentaties op deze server': 'Презентации на този сървър',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Следвай презентацията: този слайд прави това, което презентацията като цяло прави. Само докладвай: находката се отчита, но получателят не вижда нищо — данните са просто там. Приеми: данните принадлежат тук и предупреждението изчезва. Приеми + предупреди: получателят вижда значка, че на слайда има лични данни. Премахни: намерените данни стават нечетими на екрана и в експорта — вашият markdown файл запазва оригиналния текст.',

@@ -6,6 +6,7 @@ import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '_editor_field.dart';
 import 'markdown_editor_field.dart';
+import 'question_elearning_editors.dart';
 import '../../theme/app_theme.dart';
 import 'editor_text_controller.dart';
 
@@ -58,6 +59,14 @@ class _QuestionEditorState extends State<QuestionEditor> {
   late final int _sourceAnswerCount;
   late final int _sourceAnswerLimit;
 
+  // ── eLearning-kinds state (matching, hotspot, fillIn) ──
+  late List<MatchPair> _pairs;
+  late List<String> _distractors;
+  late String _hotspotImage;
+  late List<HotspotRegion> _regions;
+  late bool _multiSelect;
+  late List<FillField> _fields;
+
   @override
   void initState() {
     super.initState();
@@ -88,6 +97,15 @@ class _QuestionEditorState extends State<QuestionEditor> {
     _answers = answers.map((a) => _makeCtrl(a.text)).toList();
     _correct = answers.map((a) => a.correct).toList();
     _images = answers.map((a) => a.image).toList();
+    // eLearning-kinds: lees de nieuwe velden uit de geparseerde spec.
+    _pairs = spec.pairs.isEmpty
+        ? [const MatchPair(), const MatchPair()]
+        : spec.pairs;
+    _distractors = spec.distractors;
+    _hotspotImage = spec.hotspotImage;
+    _regions = spec.regions.isEmpty ? [const HotspotRegion()] : spec.regions;
+    _multiSelect = spec.multiSelect;
+    _fields = spec.fields.isEmpty ? [const FillField()] : spec.fields;
   }
 
   /// Herbouw-hulp voor de `part`-uitbreiding hieronder: een extensie mag
@@ -117,6 +135,12 @@ class _QuestionEditorState extends State<QuestionEditor> {
     onWrong: _onWrong,
     statementIsTrue: _statementIsTrue,
     similarityThreshold: _similarity,
+    pairs: _pairs,
+    distractors: _distractors,
+    hotspotImage: _hotspotImage,
+    regions: _regions,
+    multiSelect: _multiSelect,
+    fields: _fields,
   );
 
   void _emit() {
@@ -191,6 +215,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
     final isOrdering = _kind == QuestionKind.ordering;
     final isImagePair = _kind == QuestionKind.imagePair;
     final isOpenText = _kind == QuestionKind.openText;
+    final isMatching = _kind == QuestionKind.matching;
+    final isFillIn = _kind == QuestionKind.fillIn;
+    final isHotspot = _kind == QuestionKind.hotspot;
     // Het aantal getoonde opties geldt alleen waar er iets uit een pool
     // getrokken wordt. Bij 'meerdere juiste' komen ze allemaal op het scherm,
     // en de andere soorten hebben helemaal geen optielijst.
@@ -227,6 +254,12 @@ class _QuestionEditorState extends State<QuestionEditor> {
           ..._imagePairSection(l10n)
         else if (isOpenText)
           ..._openTextSection(l10n)
+        else if (isMatching)
+          ..._matchingSection(l10n)
+        else if (isFillIn)
+          ..._fillInSection(l10n)
+        else if (isHotspot)
+          ..._hotspotSection(l10n)
         else
           ..._answersSection(
             l10n,
@@ -339,6 +372,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
               questionAnswerCountLimit(QuestionKind.openText),
           child: Text(l10n.d('Getypt antwoord')),
         ),
+        ..._eLearningKindDropdownItems(l10n),
       ],
       onChanged: (value) {
         if (value == null) return;

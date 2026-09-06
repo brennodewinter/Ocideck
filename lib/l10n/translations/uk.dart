@@ -1648,6 +1648,47 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Paren': 'Пари',
+  'Afleiders (optioneel)': 'Дистрактори (необов\'язково)',
+  'Invulvelden': 'Поля для заповнення',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Глядач з\'єднує ліве з правим. Пара i має ліво[i] як правильну відповідь для право[i]. Правий стовпець перемішується під час презентації.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Глядач вводить відповідь у кожне поле. Кожне поле має одну або більше прийнятних відповідей і стратегію оцінювання.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Глядач вказує на одну або більше областей на зображенні. Координати нормалізовані (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Додаткові праві елементи без правильного партнера. Вони роблять питання складнішим.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Прийнятні відповіді (розділені комами)',
+  'Afleider': 'Дистрактор',
+  'Afleider toevoegen': 'Додати дистрактор',
+  'Afleider verwijderen': 'Видалити дистрактор',
+  'Bevat het antwoord': 'Містить відповідь',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Координати (x, y, w, h — нормалізовані 0–1)',
+  'Evaluatiestrategie': 'Стратегія оцінювання',
+  'Exacte overeenkomst': 'Точний збіг',
+  'Gebied': 'Область',
+  'Gebied toevoegen': 'Додати область',
+  'Gebied verwijderen': 'Видалити область',
+  'Getal in bereik': 'Число в діапазоні',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Виберіть зображення та позначте принаймні одну правильну область.',
+  'Label (optioneel)': 'Мітка (необов\'язково)',
+  'Maak minstens twee gevulde paren.': 'Створіть принаймні дві заповнені пари.',
+  'Meerdere gebieden selecteerbaar': 'Можна вибрати кілька областей',
+  'Paar toevoegen': 'Додати пару',
+  'Paar verwijderen': 'Видалити пару',
+  'Tikfout toegestaan': 'Опечатка дозволена',
+  'Veld': 'Поле',
+  'Veld toevoegen': 'Додати поле',
+  'Veld verwijderen': 'Видалити поле',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Додайте принаймні одне поле з прийнятною відповіддю.',
+  'Koppelen (matching)': 'Зіставлення (matching)',
+  'Invulvraag': 'Запитання з заповненням',
+  'Hotspot (klik op afbeelding)': 'Гаряча точка (клік на зображення)',
   'Presentaties op deze server': 'Презентації на цьому сервері',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Дотримуватись презентації: цей слайд робить те, що робить презентація загалом. Лише повідомити: знахідка враховується, але одержувач нічого не бачить — дані просто там є. Прийняти: дані належать тут і попередження зникає. Прийняти + попередити: одержувач бачить позначку, що на слайді є персональні дані. Прибрати: знайдені дані стають нечитабельними на екрані та в експорті — ваш markdown-файл зберігає оригінальний текст.',

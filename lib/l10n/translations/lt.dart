@@ -1640,6 +1640,47 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Paren': 'Poros',
+  'Afleiders (optioneel)': 'Distraktoriai (neprivaloma)',
+  'Invulvelden': 'Užpildymo laukai',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Žiūrovas sujungia kairę su dešine. Porai i kairė[i] yra teisingas atsakymas dešinei[i]. Dešinysis stulpelis sumaišomas pateikimo metu.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Žiūrovas įveda atsakymą į kiekvieną lauką. Kiekvienas laukas turi vieną ar daugiau priimtų atsakymų ir vertinimo strategiją.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Žiūrovas rodo į vieną ar daugiau regionų vaizde. Koordinatės yra normalizuotos (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Papildomi dešinieji elementai be teisingo porininko. Jie padaro klausimą sunkesnį.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Priimtini atsakymai (atskirti kableliais)',
+  'Afleider': 'Distraktorius',
+  'Afleider toevoegen': 'Pridėti distraktorių',
+  'Afleider verwijderen': 'Pašalinti distraktorių',
+  'Bevat het antwoord': 'Turi atsakymą',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinatės (x, y, w, h — normalizuotos 0–1)',
+  'Evaluatiestrategie': 'Vertinimo strategija',
+  'Exacte overeenkomst': 'Tikslus atitikimas',
+  'Gebied': 'Regionas',
+  'Gebied toevoegen': 'Pridėti regioną',
+  'Gebied verwijderen': 'Pašalinti regioną',
+  'Getal in bereik': 'Skaičius intervale',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Pasirinkite paveikslėlį ir pažymėkite bent vieną teisingą regioną.',
+  'Label (optioneel)': 'Etiketė (neprivaloma)',
+  'Maak minstens twee gevulde paren.': 'Sukurkite bent du užpildytus poras.',
+  'Meerdere gebieden selecteerbaar': 'Galima pasirinkti kelis regionus',
+  'Paar toevoegen': 'Pridėti porą',
+  'Paar verwijderen': 'Pašalinti porą',
+  'Tikfout toegestaan': 'Rašybos klaida leidžiama',
+  'Veld': 'Laukas',
+  'Veld toevoegen': 'Pridėti lauką',
+  'Veld verwijderen': 'Pašalinti lauką',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Pridėkite bent vieną lauką su priimtinu atsakymu.',
+  'Koppelen (matching)': 'Sujungimas (matching)',
+  'Invulvraag': 'Klausimas su tarpu',
+  'Hotspot (klik op afbeelding)': 'Hotspot (spustelėkite paveikslėlį)',
   'Presentaties op deze server': 'Pristatymai šiame serveryje',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Sekti pristatymą: šis skaidrė daro tai, ką daro pristatymas apskritai. Tik pranešti: išvada skaičiuojama, bet gavėjas nieko nemato — duomenys tiesiog ten yra. Priimti: duomenys priklauso čia ir įspėjimas dingsta. Priimti + įspėti: gavėjas mato ženklą, kad skaidrėje yra asmens duomenų. Praleisti: rasti duomenys padaromi neįskaitomais ekrane ir eksporte — jūsų markdown failas išlaiko originalų tekstą.',

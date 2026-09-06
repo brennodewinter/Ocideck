@@ -1651,6 +1651,49 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Paren': 'Parijiet',
+  'Afleiders (optioneel)': 'Distratturi (opsjonali)',
+  'Invulvelden': 'Oqsma tal-imtieħen',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'L-ispettatur jgħaqqad xellug ma\' lemin. Il-pari i għandu xellug[i] bħala t-tweġiba korretta għal lemin[i]. Il-kolonna tal-lemin tiġi mħallta waqt il-preżentazzjoni.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'L-ispettatur iktib it-tweġiba f\'kull qasam. Kull qasam għandu waħda jew aktar tweġibiet aċċettati u strateġija ta\' evalwazzjoni.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'L-ispettatur jipponta għal reġjun wieħed jew aktar fuq l-istampa. Il-koordinati huma normalizzati (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Elementi tal-lemin żejda mingħajr parti korretta. Huma jagħmlu l-mistoqsija aktar diffiċli.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Tweġibiet aċċettati (separati b\'virgola)',
+  'Afleider': 'Distrattur',
+  'Afleider toevoegen': 'Żid distrattur',
+  'Afleider verwijderen': 'Neħħi distrattur',
+  'Bevat het antwoord': 'Jikteb it-tweġiba',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinati (x, y, w, h — normalizzati 0–1)',
+  'Evaluatiestrategie': 'Strateġija ta\' evalwazzjoni',
+  'Exacte overeenkomst': 'Tqabbil eżatt',
+  'Gebied': 'Reġjun',
+  'Gebied toevoegen': 'Żid reġjun',
+  'Gebied verwijderen': 'Neħħi reġjun',
+  'Getal in bereik': 'Numru f\'firxa',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Agħżel immaġni u marka mill-inqas reġjun wieħed korrett.',
+  'Label (optioneel)': 'Tikketta (opsjonali)',
+  'Maak minstens twee gevulde paren.':
+      'Oħloq mill-inqas żewġ parijiet mimlija.',
+  'Meerdere gebieden selecteerbaar':
+      'Aktar minn reġjun wieħed jista\' jiġi magħżul',
+  'Paar toevoegen': 'Żid par',
+  'Paar verwijderen': 'Neħħi par',
+  'Tikfout toegestaan': 'Żball tat-tajpjar permess',
+  'Veld': 'Qasam',
+  'Veld toevoegen': 'Żid qasam',
+  'Veld verwijderen': 'Neħħi qasam',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Żid mill-inqas qasam wieħed b\'tweġiba aċċettata.',
+  'Koppelen (matching)': 'Tqabbil (matching)',
+  'Invulvraag': 'Mistoqsija biex timla',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klikk fuq l-immaġni)',
   'Presentaties op deze server': 'Preżentazzjonijiet fuq dan is-server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Segwi l-preżentazzjoni: din is-slajd tagħmel dak li tagħmel il-preżentazzjoni kollha. Irraporta biss: is-sejba tingħadd, iżda r-riċevitur ma jara xejn — id-data hemm biss. Aċċetta: id-data tappartjeni hawn u l-avvertiment jisparixxi. Aċċetta + avverti: ir-riċevitur jara badge li hemm data personali fuq is-slajd. Oħroġ: id-data misjuba ssir mhux qari fuq l-iskrin u fl-esportazzjoni — il-fajl markdown tiegħek iżomm it-test oriġinali.',

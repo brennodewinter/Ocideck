@@ -1636,6 +1636,48 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Paren': 'Pärli',
+  'Afleiders (optioneel)': 'Distraktore (optional)',
+  'Invulvelden': 'Ygabefälder',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Dr Zueschauer verbindet links mit rechts. Pärli i het links[i] als di richtig Antwort für rechts[i]. Di rächti Spalte wird bim Präsentiere gmischlet.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Dr Zueschauer tippt d Antwort in jedes Fäld. Jedes Fäld het ein oder meh akzeptierti Antworte und en Uswertigsstrategii.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Dr Zueschauer zeigt uf ein oder meh Beriiche ufem Bild. Koordinate sind normalisiert (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Zuesätzlichi rächti Element ohni richtige Partner. Si mached d Frag schwiriger.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Akzeptierti Antwortä (dur Komma trännt)',
+  'Afleider': 'Distraktor',
+  'Afleider toevoegen': 'Distraktor derzuefüäge',
+  'Afleider verwijderen': 'Distraktor ewägfähre',
+  'Bevat het antwoord': 'Enthält d Antwort',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinate (x, y, w, h — normalisiert 0–1)',
+  'Evaluatiestrategie': 'Uswärtigsstrategii',
+  'Exacte overeenkomst': 'Gnau Übereinstimmig',
+  'Gebied': 'Beriich',
+  'Gebied toevoegen': 'Beriich derzuefüäge',
+  'Gebied verwijderen': 'Beriich ewägfähre',
+  'Getal in bereik': 'Zahl im Beriich',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Wähl es Bild und markier mindeschtens e korrekt Beriich.',
+  'Label (optioneel)': 'Etikett (optional)',
+  'Maak minstens twee gevulde paren.':
+      'Erstell mindeschtens zwöi uusgfüllti Paar.',
+  'Meerdere gebieden selecteerbaar': 'Mehrfach Beriich uuswählbar',
+  'Paar toevoegen': 'Paar derzuefüäge',
+  'Paar verwijderen': 'Paar ewägfähre',
+  'Tikfout toegestaan': 'Tippfähler erloubt',
+  'Veld': 'Fäld',
+  'Veld toevoegen': 'Fäld derzuefüäge',
+  'Veld verwijderen': 'Fäld ewägfähre',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Füeg mindeschtens es Fäld mit ere akzeptierte Antwort derzue.',
+  'Koppelen (matching)': 'Zueordnig (matching)',
+  'Invulvraag': 'Lückentext-Froog',
+  'Hotspot (klik op afbeelding)': 'Hotspot (ufs Bild klicke)',
   'Presentaties op deze server': 'Präsentatione uf däm Server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Der Präsentation folge: Die Folie macht, was d Präsentation als Ganzes macht. Nur melde: Der Fund wird zählt, aber der Empfänger gseht nüt — d Date stöhn einfach döt. Akzeptiere: D Date ghöre det und d Warnig verschwindet. Akzeptiere + warne: Der Empfänger gseht e Badge, dass persönlichi Date uf dr Folie stöhn. Weggla: Die gfundene Date wärde uf em Bildschirm und im Export unleserlich — dini Markdown-Datei bhaltet de Originaltext.',

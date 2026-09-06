@@ -220,4 +220,84 @@ extension _QuestionEditorKinds on _QuestionEditorState {
       ],
     ),
   );
+
+  // ── eLearning-kinds: matching, fillIn, hotspot ─────────────────────────────
+  // Deze sections delegeren naar aparte widgets in
+  // question_elearning_editors.dart, zodat _QuestionEditorState onder het
+  // klasseplafond van 1000 regels blijft.
+
+  /// Dropdown-items voor de drie eLearning-kinds. Aparte methode om de
+  /// build-methode van _QuestionEditorState kort te houden.
+  List<DropdownMenuItem<QuestionKind>> _eLearningKindDropdownItems(
+    AppLocalizations l10n,
+  ) => [
+    DropdownMenuItem(
+      value: QuestionKind.matching,
+      enabled:
+          _answers.length <= questionAnswerCountLimit(QuestionKind.matching),
+      child: Text(l10n.d('Koppelen (matching)')),
+    ),
+    DropdownMenuItem(
+      value: QuestionKind.fillIn,
+      enabled: _answers.length <= questionAnswerCountLimit(QuestionKind.fillIn),
+      child: Text(l10n.d('Invulvraag')),
+    ),
+    DropdownMenuItem(
+      value: QuestionKind.hotspot,
+      enabled:
+          _answers.length <= questionAnswerCountLimit(QuestionKind.hotspot),
+      child: Text(l10n.d('Hotspot (klik op afbeelding)')),
+    ),
+  ];
+
+  List<Widget> _matchingSection(AppLocalizations l10n) => [
+    MatchingKindEditor(
+      pairs: _pairs,
+      distractors: _distractors,
+      answerLimit: _answerLimit,
+      onPairsChanged: (next) {
+        _rebuild(() => _pairs = next);
+        _emit();
+      },
+      onDistractorsChanged: (next) {
+        _rebuild(() => _distractors = next);
+        _emit();
+      },
+    ),
+  ];
+
+  List<Widget> _fillInSection(AppLocalizations l10n) => [
+    FillInKindEditor(
+      fields: _fields,
+      answerLimit: _answerLimit,
+      onFieldsChanged: (next) {
+        _rebuild(() => _fields = next);
+        _emit();
+      },
+    ),
+  ];
+
+  List<Widget> _hotspotSection(AppLocalizations l10n) => [
+    HotspotKindEditor(
+      hotspotImage: _hotspotImage,
+      regions: _regions,
+      multiSelect: _multiSelect,
+      answerLimit: _answerLimit,
+      searchPaths: widget.searchPaths,
+      captionBasePath: widget.captionBasePath,
+      imageService: widget.imageService,
+      onImageChanged: (path) {
+        _rebuild(() => _hotspotImage = path);
+        _emit();
+      },
+      onRegionsChanged: (next) {
+        _rebuild(() => _regions = next);
+        _emit();
+      },
+      onMultiSelectChanged: (value) {
+        _rebuild(() => _multiSelect = value);
+        _emit();
+      },
+    ),
+  ];
 }

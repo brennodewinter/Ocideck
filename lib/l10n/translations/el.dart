@@ -1658,6 +1658,48 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Paren': 'Ζευγάρια',
+  'Afleiders (optioneel)': 'Παραπλανητικά (προαιρετικά)',
+  'Invulvelden': 'Πεδία συμπλήρωσης',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Ο θεατής συνδέει τα αριστερά με τα δεξιά. Το ζευγάρι i έχει αριστερά[i] ως σωστή απάντηση για δεξιά[i]. Η δεξιά στήλη ανακατεύεται κατά την παρουσίαση.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Ο θεατής πληκτρολογεί την απάντηση σε κάθε πεδίο. Κάθε πεδίο έχει μία ή περισσότερες αποδεκτές απαντήσεις και μια στρατηγική αξιολόγησης.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Ο θεατής δείχνει μία ή περισσότερες περιοχές στην εικόνα. Οι συντεταγμένες είναι κανονικοποιημένες (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Επιπλέον δεξιά στοιχεία χωρίς σωστό ζευγάρι. Κάνουν την ερώτηση πιο δύσκολη.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Αποδεκτές απαντήσεις (διαχωρισμένες με κόμμα)',
+  'Afleider': 'Αντικείμενο παραπλάνησης',
+  'Afleider toevoegen': 'Προσθήκη αντικειμένου παραπλάνησης',
+  'Afleider verwijderen': 'Αφαίρεση αντικειμένου παραπλάνησης',
+  'Bevat het antwoord': 'Περιέχει την απάντηση',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Συντεταγμένες (x, y, w, h — κανονικοποιημένες 0–1)',
+  'Evaluatiestrategie': 'Στρατηγική αξιολόγησης',
+  'Exacte overeenkomst': 'Ακριβής αντιστοιχία',
+  'Gebied': 'Περιοχή',
+  'Gebied toevoegen': 'Προσθήκη περιοχής',
+  'Gebied verwijderen': 'Αφαίρεση περιοχής',
+  'Getal in bereik': 'Αριθμός σε εύρος',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Επιλέξτε μια εικόνα και σημειώστε τουλάχιστον μία σωστή περιοχή.',
+  'Label (optioneel)': 'Ετικέτα (προαιρετικό)',
+  'Maak minstens twee gevulde paren.':
+      'Δημιουργήστε τουλάχιστον δύο συμπληρωμένα ζεύγη.',
+  'Meerdere gebieden selecteerbaar': 'Επιλέξιμες πολλαπλές περιοχές',
+  'Paar toevoegen': 'Προσθήκη ζεύγους',
+  'Paar verwijderen': 'Αφαίρεση ζεύγους',
+  'Tikfout toegestaan': 'Τυπογραφικό σφάλμα επιτρέπεται',
+  'Veld': 'Πεδίο',
+  'Veld toevoegen': 'Προσθήκη πεδίου',
+  'Veld verwijderen': 'Αφαίρεση πεδίου',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Προσθέστε τουλάχιστον ένα πεδίο με μια αποδεκτή απάντηση.',
+  'Koppelen (matching)': 'Αντιστοίχιση (matching)',
+  'Invulvraag': 'Ερώτηση συμπλήρωσης',
+  'Hotspot (klik op afbeelding)': 'Hotspot (κλικ στην εικόνα)',
   'Presentaties op deze server': 'Παρουσιάσεις σε αυτόν τον διακομιστή',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Ακολουθήστε την παρουσίαση: αυτή η διαφάνεια κάνει ό,τι κάνει η παρουσίαση συνολικά. Μόνο αναφορά: η διαπίστωση μετράται, αλλά ο παραλήπτης δεν βλέπει τίποτα — τα δεδομένα είναι απλά εκεί. Αποδοχή: τα δεδομένα ανήκουν εδώ και η προειδοποίηση εξαφανίζεται. Αποδοχή + προειδοποίηση: ο παραλήπτης βλέπει ένα σήμα ότι υπάρχουν προσωπικά δεδομένα στη διαφάνεια. Απόκρυψη: τα δεδομένα που βρέθηκαν γίνονται δυσανάγνωστα στην οθόνη και στην εξαγωγή — το αρχείο markdown διατηρεί το αρχικό κείμενο.',

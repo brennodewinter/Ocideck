@@ -1626,6 +1626,47 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Paren': 'Paarid',
+  'Afleiders (optioneel)': 'Häirijad (valikuline)',
+  'Invulvelden': 'Täitmiskohad',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Vaataja ühendab vasaku paremaga. Paaril i on vasak[i] õige vastus paremale[i]. Parem veerg segatakse esituse ajal.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Vaataja sisestab vastuse igasse lahtrisse. Igal lahtril on üks või enam aktsepteeritud vastust ja hindamisstrateegia.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Vaataja osutab ühele või enamale piirkonnale pildil. Koordinaadid on normaliseeritud (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Lisa paremad üksused ilma õige paarita. Need muudavad küsimuse raskemaks.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Aktsepteeritud vastused (komaga eraldatud)',
+  'Afleider': 'Segaja',
+  'Afleider toevoegen': 'Lisa segaja',
+  'Afleider verwijderen': 'Eemalda segaja',
+  'Bevat het antwoord': 'Sisaldab vastust',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinaadid (x, y, w, h — normaliseeritud 0–1)',
+  'Evaluatiestrategie': 'Hindamisstrateegia',
+  'Exacte overeenkomst': 'Täpne vaste',
+  'Gebied': 'Piirkond',
+  'Gebied toevoegen': 'Lisa piirkond',
+  'Gebied verwijderen': 'Eemalda piirkond',
+  'Getal in bereik': 'Arv vahemikus',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Vali pilt ja märgi vähemalt üks õige piirkond.',
+  'Label (optioneel)': 'Silt (valikuline)',
+  'Maak minstens twee gevulde paren.': 'Loo vähemalt kaks täidetud paari.',
+  'Meerdere gebieden selecteerbaar': 'Mitme piirkonna valimine võimalik',
+  'Paar toevoegen': 'Lisa paar',
+  'Paar verwijderen': 'Eemalda paar',
+  'Tikfout toegestaan': 'Trükiviga lubatud',
+  'Veld': 'Väli',
+  'Veld toevoegen': 'Lisa väli',
+  'Veld verwijderen': 'Eemalda väli',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Lisa vähemalt üks väli aktsepteeritud vastusega.',
+  'Koppelen (matching)': 'Sobitamine (matching)',
+  'Invulvraag': 'Täidetav küsimus',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klõps pildil)',
   'Presentaties op deze server': 'Esitlused sellel serveril',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Järgi esitlust: see slaid teeb seda, mida esitlus tervikuna teeb. Ainult teata: leid loetakse, kuid saaja ei näe midagi — andmed on lihtsalt olemas. Nõustu: andmed kuuluvad siia ja hoiatus kaob. Nõustu + hoiata: saaja näeb märki, et slaidil on isikuandmeid. Jäta välja: leitud andmed muudetakse ekraanil ja ekspordis loetamatuks — teie markdown-fail säilitab algse teksti.',

@@ -1633,6 +1633,47 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Paren': 'Parit',
+  'Afleiders (optioneel)': 'Hämäykset (valinnainen)',
+  'Invulvelden': 'Täyttökentät',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Katsoja yhdistää vasemman oikeaan. Parilla i on vasen[i] oikeana vastauksena oikealle[i]. Oikea sarake sekoitetaan esityksen aikana.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Katsoja kirjoittaa vastauksen jokaiseen kenttään. Kullakin kentällä on yksi tai useampi hyväksytty vastaus ja arviointistrategia.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Katsoja osoittaa yhtä tai useampaa aluetta kuvassa. Koordinaatit on normalisoitu (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Ylimääräisiä oikeita kohteita ilman oikeaa paria. Ne tekevät kysymyksestä vaikeamman.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Hyväksytyt vastaukset (pilkulla erotettuna)',
+  'Afleider': 'Häiriötekijä',
+  'Afleider toevoegen': 'Lisää häiriötekijä',
+  'Afleider verwijderen': 'Poista häiriötekijä',
+  'Bevat het antwoord': 'Sisältää vastauksen',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Koordinaatit (x, y, w, h — normalisoitu 0–1)',
+  'Evaluatiestrategie': 'Arviointistrategia',
+  'Exacte overeenkomst': 'Tarkka vastaavuus',
+  'Gebied': 'Alue',
+  'Gebied toevoegen': 'Lisää alue',
+  'Gebied verwijderen': 'Poista alue',
+  'Getal in bereik': 'Luku alueella',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Valitse kuva ja merkitse vähintään yksi oikea alue.',
+  'Label (optioneel)': 'Nimike (valinnainen)',
+  'Maak minstens twee gevulde paren.': 'Luo vähintään kaksi täytettyä paria.',
+  'Meerdere gebieden selecteerbaar': 'Useita alueita valittavissa',
+  'Paar toevoegen': 'Lisää pari',
+  'Paar verwijderen': 'Poista pari',
+  'Tikfout toegestaan': 'Kirjoitusvirhe sallittu',
+  'Veld': 'Kenttä',
+  'Veld toevoegen': 'Lisää kenttä',
+  'Veld verwijderen': 'Poista kenttä',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Lisää vähintään yksi kenttä, jossa on hyväksytty vastaus.',
+  'Koppelen (matching)': 'Täsmäytys (matching)',
+  'Invulvraag': 'Täyttökysymys',
+  'Hotspot (klik op afbeelding)': 'Hotspot (klikkaa kuvaa)',
   'Presentaties op deze server': 'Esitykset tällä palvelimella',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Seuraa esitystä: tämä dia tekee sen, mitä esitys kokonaisuudessaan tekee. Vain ilmoita: löytö lasketaan, mutta vastaanottaja ei näe mitään — tiedot ovat vain siinä. Hyväksy: tiedot kuuluvat tänne ja varoitus katoaa. Hyväksy + varoita: vastaanottaja näkee merkin, että diassa on henkilötietoja. Poista: löydetyt tiedot tehdään lukukelvottomiksi näytöllä ja viennissä — markdown-tiedostosi säilyttää alkuperäisen tekstin.',

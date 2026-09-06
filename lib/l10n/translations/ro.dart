@@ -1649,6 +1649,48 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Paren': 'Perechi',
+  'Afleiders (optioneel)': 'Distractori (opțional)',
+  'Invulvelden': 'Câmpuri de completare',
+  'De kijker koppelt links aan rechts. Paar i heeft links[i] als juiste antwoord bij rechts[i]. De rechterkolom wordt geschud bij presenteren.':
+      'Spectatorul conectează stânga cu dreapta. Perechea i are stânga[i] ca răspuns corect pentru dreapta[i]. Coloana din dreapta este amestecată la prezentare.',
+  'De kijker typt het antwoord in elk veld. Elk veld heeft een of meer aanvaarde antwoorden en een evaluatiestrategie.':
+      'Spectatorul tastează răspunsul în fiecare câmp. Fiecare câmp are unul sau mai multe răspunsuri acceptate și o strategie de evaluare.',
+  'De kijker wijst één of meerdere gebieden op de afbeelding aan. Coördinaten zijn genormaliseerd (0–1).':
+      'Spectatorul indică una sau mai multe regiuni pe imagine. Coordonatele sunt normalizate (0–1).',
+  'Extra rechteritems zonder correcte partner. Ze maken de vraag moeilijker.':
+      'Elemente drepte suplimentare fără partener corect. Ele fac întrebarea mai dificilă.',
+  'Aanvaarde antwoorden (komma-gescheiden)':
+      'Răspunsuri acceptate (separate prin virgulă)',
+  'Afleider': 'Distractor',
+  'Afleider toevoegen': 'Adaugă distractor',
+  'Afleider verwijderen': 'Elimină distractor',
+  'Bevat het antwoord': 'Conține răspunsul',
+  'Coördinaten (x, y, w, h — genormaliseerd 0–1)':
+      'Coordonate (x, y, w, h — normalizate 0–1)',
+  'Evaluatiestrategie': 'Strategie de evaluare',
+  'Exacte overeenkomst': 'Potrivire exactă',
+  'Gebied': 'Regiune',
+  'Gebied toevoegen': 'Adaugă regiune',
+  'Gebied verwijderen': 'Elimină regiune',
+  'Getal in bereik': 'Număr în interval',
+  'Kies een afbeelding en markeer minstens één juist gebied.':
+      'Alegeți o imagine și marcați cel puțin o regiune corectă.',
+  'Label (optioneel)': 'Etichetă (opțional)',
+  'Maak minstens twee gevulde paren.':
+      'Creați cel puțin două perechi completate.',
+  'Meerdere gebieden selecteerbaar': 'Mai multe regiuni selectabile',
+  'Paar toevoegen': 'Adaugă pereche',
+  'Paar verwijderen': 'Elimină pereche',
+  'Tikfout toegestaan': 'Greșeală de tastare permisă',
+  'Veld': 'Câmp',
+  'Veld toevoegen': 'Adaugă câmp',
+  'Veld verwijderen': 'Elimină câmp',
+  'Voeg minstens één veld toe met een aanvaard antwoord.':
+      'Adăugați cel puțin un câmp cu un răspuns acceptat.',
+  'Koppelen (matching)': 'Potrivire (matching)',
+  'Invulvraag': 'Întrebare de completare',
+  'Hotspot (klik op afbeelding)': 'Hotspot (clic pe imagine)',
   'Presentaties op deze server': 'Prezentări pe acest server',
   'Volg de presentatie: deze slide doet wat de presentatie als geheel doet. Alleen melden: de bevinding wordt geteld, maar de ontvanger ziet niets — de gegevens staan er gewoon. Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
       'Urmează prezentarea: acest slide face ce face prezentarea ca întreg. Doar raportează: constatarea este numărată, dar destinatarul nu vede nimic — datele sunt pur și simplu acolo. Acceptă: datele aparțin aici și avertizarea dispare. Acceptă + avertizează: destinatarul vede o insignă că există date personale pe slide. Omite: datele găsite devin ilizibile pe ecran și în export — fișierul markdown păstrează textul original.',
