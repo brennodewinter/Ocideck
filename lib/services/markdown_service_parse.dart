@@ -156,6 +156,46 @@ class _BodyParse {
   );
 }
 
+/// The stored body for a parsed slide: free-Markdown, the Informatieveiligheid
+/// scaffold types and the eLearning text types keep the whole remaining block;
+/// a richText bullet slide keeps its rich-text lines; every other type stores
+/// nothing (its own fields hold the content).
+///
+/// De verzameling die hier een body houdt, moet gelijk zijn aan wat de
+/// serialisatie er één schrijft. Voor de eLearning-types staat dat in
+/// [SlideType.usesFreeMarkdownBody]; liepen ze uiteen, dan las een dia leeg in
+/// en wiste de eerstvolgende opslag de tekst van de auteur.
+///
+/// Staat bewust op het hoogste niveau en niet op [MarkdownService]: de functie
+/// leest niets van de service en rekent alleen op wat ze binnenkrijgt.
+String _parsedCustomMarkdown(
+  SlideType type,
+  String remaining,
+  ListStyle listStyle,
+  List<String> richTextLines,
+) {
+  if (type == SlideType.freeMarkdown ||
+      type == SlideType.canvas ||
+      type.usesScaffoldMarkdownBody ||
+      type.usesFreeMarkdownBody) {
+    var body = normalizeRichTextMarkdownForStorage(
+      unescapeDeckMarkdownDashLines(remaining),
+    );
+    // Canvas writes `#` title separately from `##` regions; strip a leading
+    // heading so it does not round-trip twice into customMarkdown.
+    if (type == SlideType.canvas) {
+      body = body.replaceFirst(RegExp(r'^#\s+[^\n]*\n*'), '');
+    }
+    return body;
+  }
+  if (listStyle == ListStyle.richText) {
+    return normalizeRichTextMarkdownForStorage(
+      unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim()),
+    );
+  }
+  return '';
+}
+
 extension _MarkdownParse on MarkdownService {
   Deck _doParse(String markdown, {String? filePath, String fileHash = ''}) {
     final fm = _parseFrontMatter(markdown);
@@ -316,43 +356,6 @@ extension _MarkdownParse on MarkdownService {
       return m.group(0)!;
     });
     return (alt: alt, alt2: alt2, block: cleaned);
-  }
-
-  /// The stored body for a parsed slide: free-Markdown, the Informatieveiligheid
-  /// scaffold types and the eLearning text types keep the whole remaining block;
-  /// a richText bullet slide keeps its rich-text lines; every other type stores
-  /// nothing (its own fields hold the content).
-  ///
-  /// De verzameling die hier een body houdt, moet gelijk zijn aan wat de
-  /// serialisatie er één schrijft. Voor de eLearning-types staat dat in
-  /// [SlideType.usesFreeMarkdownBody]; liepen ze uiteen, dan las een dia leeg in
-  /// en wiste de eerstvolgende opslag de tekst van de auteur.
-  String _parsedCustomMarkdown(
-    SlideType type,
-    String remaining,
-    ListStyle listStyle,
-    List<String> richTextLines,
-  ) {
-    if (type == SlideType.freeMarkdown ||
-        type == SlideType.canvas ||
-        type.usesScaffoldMarkdownBody ||
-        type.usesFreeMarkdownBody) {
-      var body = normalizeRichTextMarkdownForStorage(
-        unescapeDeckMarkdownDashLines(remaining),
-      );
-      // Canvas writes `#` title separately from `##` regions; strip a leading
-      // heading so it does not round-trip twice into customMarkdown.
-      if (type == SlideType.canvas) {
-        body = body.replaceFirst(RegExp(r'^#\s+[^\n]*\n*'), '');
-      }
-      return body;
-    }
-    if (listStyle == ListStyle.richText) {
-      return normalizeRichTextMarkdownForStorage(
-        unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim()),
-      );
-    }
-    return '';
   }
 
   /// The image size (`![bg N%]`) to store: the body value, or the `_style`

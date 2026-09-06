@@ -223,7 +223,9 @@ const Map<String, int> fileSizeBaseline = {
   // +27 (#1824): callouts, calloutPresentation, calloutReveal-velden + doc +
   // constructor/duplicate/copyWith-doorvoer voor image callouts.
   'lib/models/slide.dart':
-      1141, // +26 (#1999): eLearning-slide­types (objective, module, feedback, assessmentSummary) — enum + slideTypeMeta.
+      1105, // Verlaagd van 1115: de eLearning-types (#1999) kwamen erbij (+26),
+  // maar `SlideTypeExtension` is naar het part-bestand slide_taxonomy.dart
+  // verhuisd (-55) — daar staan de enums waar die getters over gaan. Meet 1103.
   // Procesverbetering category tab + engine types in the add-slide picker.
   // +18 (#1162): de menu-wireframe (2×2 raster van keuzeblokken) als eigen helper
   // `_paintMenuWireframe` (uit `paint` getild voor de methode-ratchet) plus de
@@ -480,7 +482,9 @@ const Map<String, int> classSizeBaseline = {
   // +29 (#1824): callout front-matter block schrijven + callout-anchor koppeling
   // in parse (ocideck_callouts: block inlesen en per-slide callouts invullen).
   'lib/services/markdown_service.dart#MarkdownService':
-      2460, // +5 (#1999): eLearning-slide­types in de serialize-switch (freeMarkdown + question hergebruikt).
+      2425, // +5 (#1999): eLearning-slidetypes in de serialize-switch. Verlaagd
+  // van 2460: `_parsedCustomMarkdown` is naar het hoogste niveau getild — het
+  // leest niets van de service, dus het hoorde nooit op de klasse.
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
       2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie

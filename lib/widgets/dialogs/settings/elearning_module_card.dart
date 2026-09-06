@@ -38,7 +38,7 @@ class ElearningModuleCard extends ConsumerWidget {
             ),
             subtitle: Text(
               l10n.d(
-                'Maak eLearning-inhoud: leerdoelen, modules, kennistoetsen, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.',
+                'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
