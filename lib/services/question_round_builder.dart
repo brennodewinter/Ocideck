@@ -77,67 +77,48 @@ class QuestionRoundBuilder {
     }
   }
 
-  /// Matching: de linkerkolom staat vast (auteursvolgorde), de rechterkolom
-  /// wordt geschud. De correctIndices wijzen voor elk left-item naar de
-  /// positie in de geschudde rechterkolom waar het juiste right-item belandde.
-  QuestionView _matching(QuestionSpec spec, QuestionView base) {
-    final filled = spec.pairs.where((p) => p.isFilled).toList();
-    if (filled.length < 2) {
-      return QuestionView(
+  // De drie eLearning-vraagsoorten hieronder zijn wél te schrijven en op te
+  // slaan, maar nog níet te beantwoorden: de presenter heeft geen
+  // koppelkolommen, geen invulvelden en geen aanklikbare regio's. Ze leveren
+  // daarom bewust `answerable: false`.
+  //
+  // Dat is geen voorzichtigheid maar een noodzaak. `_questionBlocksAdvance`
+  // houdt het doorbladeren tegen zolang een vraag `answerable` is en nog niet
+  // beantwoord is. Met `answerable: true` en geen bruikbare antwoordkant kwam de
+  // presentatie muurvast te zitten — alleen afsluiten hielp nog; precies de
+  // storing die dat commentaar als eerder opgelost beschrijft. Zet dit pas op
+  // `true` samen met de presenter-kant, niet ervoor.
+
+  /// Matching: toont de linkerkolom als leeslijst. De koppeling zelf kan de
+  /// kijker nog niet leggen.
+  ///
+  /// De geschudde rechterkolom is hier bewust weg. Die reisde mee terwijl
+  /// `correctIndices` in díe lijst wees en `options` de linkerkolom was — twee
+  /// verschillende lijsten met één indexruimte. Elk antwoord dat daarop
+  /// beoordeeld werd, was toeval. Komt de presenter-kant er, dan hoort de
+  /// rechterkolom een eigen veld op [QuestionView] te krijgen, geen tweede
+  /// betekenis van een bestaand veld.
+  QuestionView _matching(QuestionSpec spec, QuestionView base) =>
+      base.copyWith(
         options: [for (final p in spec.pairs) p.left],
         answerable: false,
       );
-    }
-    final rng = _rng;
-    final lefts = [for (final p in filled) p.left];
-    final rights = [for (final p in filled) p.right];
-    // Voeg distractors toe aan de rechterkolom.
-    final allRights = [...rights, ...spec.distractors];
-    // Shuffle de rechterkolom.
-    final shuffledRights = [...allRights]..shuffle(rng);
-    // Voor elk left-item: waar staat het juiste right in de geschudde kolom?
-    final correctIndices = <int>[];
-    for (var i = 0; i < lefts.length; i++) {
-      final correctRight = rights[i];
-      correctIndices.add(shuffledRights.indexOf(correctRight));
-    }
-    return base.copyWith(
-      options: lefts,
-      // De rechterkolom reist mee via optionImages als hack — de presenter
-      // moet matching-specifieke rendering doen. Voor nu gebruiken we
-      // options voor links en een aparte lijst voor rechts.
-      correctIndices: correctIndices,
-      multi: true,
-      answerable: true,
-    );
-  }
 
-  /// FillIn: de kijker typt in elk veld. De rondebouwer toont de velden
-  /// met hun placeholder; de evaluatie gebeurt in de presenter.
-  QuestionView _fillIn(QuestionSpec spec, QuestionView base) {
-    final filled = spec.fields.where((f) => f.accepted.isNotEmpty).toList();
-    if (filled.isEmpty) {
-      return base.copyWith(answerable: false);
-    }
-    return base.copyWith(openText: true, answerable: true);
-  }
+  /// FillIn: toont de vraag; de invulvelden zelf kan de kijker nog niet vullen.
+  ///
+  /// `openText` stond hier aan, maar `_submitTypedAnswer` toetst tegen
+  /// `spec.correctAnswers` en die is voor fillIn leeg — het invoerveld slikte
+  /// elke poging zonder één reactie.
+  QuestionView _fillIn(QuestionSpec spec, QuestionView base) =>
+      base.copyWith(answerable: false);
 
-  /// Hotspot: de kijker klikt op gebieden. De rondebouwer geeft de
-  /// correcte regio-indexen mee; de presenter toont de afbeelding.
-  QuestionView _hotspot(QuestionSpec spec, QuestionView base) {
-    final correct = [
-      for (var i = 0; i < spec.regions.length; i++)
-        if (spec.regions[i].correct) i,
-    ];
-    if (spec.hotspotImage.isEmpty || correct.isEmpty) {
-      return base.copyWith(answerable: false);
-    }
-    return base.copyWith(
-      correctIndices: correct,
-      multi: spec.multiSelect,
-      answerable: true,
-    );
-  }
+  /// Hotspot: toont de vraag; de regio's zijn nog niet aanklikbaar.
+  ///
+  /// De regio's kwamen hier als `correctIndices` binnen zonder dat er ooit
+  /// `options` bij stonden — nul aanklikbare tegels, dus een vraag die per
+  /// definitie onbeantwoordbaar was en tóch het doorbladeren blokkeerde.
+  QuestionView _hotspot(QuestionSpec spec, QuestionView base) =>
+      base.copyWith(answerable: false);
 
   /// Beeldpaar: twee afbeeldingen, één juiste. Het willekeurige zit in de kant
   /// waarop de juiste belandt, zodat de kijker de vorige ronde niet kan

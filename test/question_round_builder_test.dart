@@ -269,9 +269,18 @@ void main() {
   });
 
   // ── eLearning-kinds: matching, fillIn, hotspot ─────────────────────────────
+  //
+  // Deze drie zijn te schrijven en op te slaan, maar de presenter kan ze nog
+  // niet láten beantwoorden. Ze moeten daarom `answerable: false` opleveren.
+  // Dat is geen detail: `_questionBlocksAdvance` blokkeert het doorbladeren
+  // zolang een vraag answerable en onbeantwoord is, dus een `true` hier zet de
+  // hele presentatie vast op zo'n dia — alleen afsluiten hielp dan nog.
+  //
+  // Zodra de presenter-kant er is, horen deze verwachtingen mee te draaien —
+  // samen met een toets die een échte beantwoording naspeelt.
 
   group('matching', () {
-    test('toont de linkerkolom en is answerable met twee paren', () {
+    test('toont de linkerkolom, maar is niet te beantwoorden', () {
       final view = draw(
         const QuestionSpec(
           kind: QuestionKind.matching,
@@ -282,21 +291,19 @@ void main() {
         ),
       );
       expect(view.options, ['TCP', 'IP']);
-      expect(view.answerable, isTrue);
-      expect(view.correctIndices, hasLength(2));
-    });
-
-    test('met minder dan twee gevulde paren niet answerable', () {
-      final view = draw(
-        const QuestionSpec(
-          kind: QuestionKind.matching,
-          pairs: [MatchPair(id: 'a', left: 'TCP', right: 'Transport')],
-        ),
+      expect(
+        view.answerable,
+        isFalse,
+        reason: 'zonder koppelkolommen in de presenter blokkeert answerable '
+            'het doorbladeren zonder dat er iets te kiezen valt',
       );
-      expect(view.answerable, isFalse);
     });
 
-    test('distractors komen niet in de linkerkolom', () {
+    test('laat geen indexen achter die in een andere lijst wijzen', () {
+      // De oude bouwer schudde de rechterkolom en zette de posities dáárin in
+      // correctIndices, terwijl options de linkerkolom was. Twee lijsten, één
+      // indexruimte: elk oordeel daarover was toeval. Met een distractor erbij
+      // wees index 2 zelfs buiten options.
       final view = draw(
         const QuestionSpec(
           kind: QuestionKind.matching,
@@ -309,11 +316,18 @@ void main() {
       );
       expect(view.options, ['TCP', 'IP']);
       expect(view.options, isNot(contains('Sessie')));
+      for (final i in view.correctIndices) {
+        expect(
+          i,
+          lessThan(view.options.length),
+          reason: 'correctIndices moet in options wijzen, nergens anders',
+        );
+      }
     });
   });
 
   group('fillIn', () {
-    test('is answerable met een veld met accepted answers', () {
+    test('is niet te beantwoorden, ook met accepted answers', () {
       final view = draw(
         const QuestionSpec(
           kind: QuestionKind.fillIn,
@@ -322,8 +336,13 @@ void main() {
           ],
         ),
       );
-      expect(view.openText, isTrue);
-      expect(view.answerable, isTrue);
+      expect(view.answerable, isFalse);
+      expect(
+        view.openText,
+        isFalse,
+        reason: 'het invoerveld toetst tegen spec.correctAnswers, en die is '
+            'voor fillIn leeg — elke poging werd zwijgend geslikt',
+      );
     });
 
     test('zonder accepted answers niet answerable', () {
@@ -338,7 +357,7 @@ void main() {
   });
 
   group('hotspot', () {
-    test('is answerable met een afbeelding en een correct gebied', () {
+    test('is niet te beantwoorden, ook met afbeelding en correct gebied', () {
       final view = draw(
         const QuestionSpec(
           kind: QuestionKind.hotspot,
@@ -348,8 +367,12 @@ void main() {
           ],
         ),
       );
-      expect(view.answerable, isTrue);
-      expect(view.correctIndices, [0]);
+      expect(
+        view.answerable,
+        isFalse,
+        reason: 'de regio\'s leveren geen aanklikbare options op; answerable '
+            'zette de presentatie vast op een vraag zonder antwoordkant',
+      );
     });
 
     test('zonder afbeelding niet answerable', () {
@@ -375,30 +398,6 @@ void main() {
         ),
       );
       expect(view.answerable, isFalse);
-    });
-
-    test('multiSelect geeft multi=true', () {
-      final view = draw(
-        const QuestionSpec(
-          kind: QuestionKind.hotspot,
-          hotspotImage: 'schema.png',
-          regions: [
-            HotspotRegion(
-              id: 'r1',
-              coords: [0.1, 0.1, 0.2, 0.2],
-              correct: true,
-            ),
-            HotspotRegion(
-              id: 'r2',
-              coords: [0.5, 0.5, 0.2, 0.2],
-              correct: true,
-            ),
-          ],
-          multiSelect: true,
-        ),
-      );
-      expect(view.multi, isTrue);
-      expect(view.correctIndices, hasLength(2));
     });
   });
 }
