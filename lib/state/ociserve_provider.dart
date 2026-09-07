@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -455,6 +456,19 @@ class OciServeNotifier extends Notifier<OciServeState> {
       organizationId: organizationId,
       versionId: lesson.versionId,
       lessonId: lesson.lessonId,
+    );
+  }
+
+  Future<Uint8List> courseImage({
+    required String organizationId,
+    required String imageHash,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).courseImage(
+      accessToken: access,
+      organizationId: organizationId,
+      imageHash: imageHash,
     );
   }
 

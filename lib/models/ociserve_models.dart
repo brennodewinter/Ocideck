@@ -152,6 +152,7 @@ class OciServeFeedItem {
     this.courseTitle = '',
     this.courseId = '',
     this.courseSlug = '',
+    this.courseImageHash = '',
     this.version = '',
     this.lessonOrder = 0,
     this.enrolledAt,
@@ -164,6 +165,7 @@ class OciServeFeedItem {
   final String courseTitle;
   final String courseId;
   final String courseSlug;
+  final String courseImageHash;
   final String version;
   final int lessonOrder;
   final DateTime? enrolledAt;
@@ -186,6 +188,7 @@ class OciServeFeedItem {
       courseTitle: (json['course_title'] as String? ?? '').trim(),
       courseId: (json['course_id'] as String? ?? '').trim(),
       courseSlug: (json['course_slug'] as String? ?? '').trim(),
+      courseImageHash: (json['image_hash'] as String? ?? '').trim(),
       version: '${json['version'] ?? ''}'.trim(),
       lessonOrder: json['order'] is num ? (json['order'] as num).toInt() : 0,
       enrolledAt: DateTime.tryParse(json['enrolled_at'] as String? ?? ''),

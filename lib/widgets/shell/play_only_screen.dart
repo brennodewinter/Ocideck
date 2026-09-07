@@ -81,6 +81,10 @@ class _PlayOnlyScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 8),
                         ],
+                        if (previewSlide != null) ...[
+                          _slidePosition(l10n, palette, previewIndex, slides),
+                          const SizedBox(height: 8),
+                        ],
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -162,6 +166,17 @@ class _PlayOnlyScreen extends ConsumerWidget {
       ),
     );
   }
+
+  Widget _slidePosition(
+    AppLocalizations l10n,
+    AppPalette palette,
+    int previewIndex,
+    List<Slide> slides,
+  ) => Text(
+    '${l10n.d('Dia')} ${previewIndex + 1} / ${slides.length}',
+    key: const Key('learning-slide-position'),
+    style: TextStyle(color: palette.mutedText, fontWeight: FontWeight.w600),
+  );
 
   /// Toont de eerste slide als statische hero (16:9, met slagschaduw). Bewust
   /// niet-interactief: geen media, geen links — enkel een voorproefje.

@@ -70,6 +70,7 @@ class _FixedOciServeNotifier extends OciServeNotifier {
     this.progress = _progress,
     this.package,
     this.loginSucceeds = true,
+    this.courseImages = const {},
   });
 
   final OciServeState initial;
@@ -77,6 +78,7 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   final OciServeLearningState progress;
   final OciServePackage? package;
   final bool loginSucceeds;
+  final Map<String, Uint8List> courseImages;
   PlaybackReport? reportedPlayback;
   bool loginCalled = false;
 
@@ -96,6 +98,12 @@ class _FixedOciServeNotifier extends OciServeNotifier {
     required String organizationId,
     required OciServeFeedItem lesson,
   }) async => package!;
+
+  @override
+  Future<Uint8List> courseImage({
+    required String organizationId,
+    required String imageHash,
+  }) async => courseImages[imageHash]!;
 
   @override
   Future<void> reportPlayback({
@@ -449,6 +457,7 @@ void main() {
         findsOneWidget,
       );
       expect(find.text('Bekeken: 1:30'), findsOneWidget);
+      expect(find.text('Les 2 / 2 · Praktijk'), findsOneWidget);
       expect(find.text('2 cursussen'), findsOneWidget);
 
       final heroContainer = tester.widget<Container>(hero);
@@ -459,6 +468,8 @@ void main() {
         reason: 'het uitgelichte vlak hoort de actieve themapaletten te volgen',
       );
 
+      await tester.ensureVisible(find.text('Privacybasis'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Privacybasis'));
       await tester.pumpAndSettle();
 
@@ -494,6 +505,51 @@ void main() {
     expect(tab.learningSession?.lessonId, 'one');
     expect(tab.editorNotifier.currentState.selectedIndex, 1);
     expect(tab.deckNotifier.currentState.deck?.slides[1].title, 'Einde');
+    expect(find.text('Dia 2 / 2'), findsOneWidget);
+  });
+
+  testWidgets('Mijn cursussen toont de juiste cursusafbeelding', (
+    tester,
+  ) async {
+    const hash =
+        'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+    final png = Uint8List.fromList(
+      base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9ZlOQAAAAASUVORK5CYII=',
+      ),
+    );
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        feed: const [
+          OciServeFeedItem(
+            versionId: 'pictured',
+            lessonId: 'one',
+            title: 'Kennismaken',
+            courseTitle: 'Cursus met beeld',
+            courseImageHash: hash,
+          ),
+        ],
+        progress: const OciServeLearningState([]),
+        courseImages: {hash: png},
+      ),
+    );
+
+    await _openCourses(tester);
+
+    expect(find.byKey(const Key('ociserve-featured-image')), findsOneWidget);
+    expect(
+      find.byKey(const Key('ociserve-course-image-pictured')),
+      findsOneWidget,
+    );
+    expect(
+      find.descendant(
+        of: find.byKey(const Key('ociserve-featured-image')),
+        matching: find.byIcon(Icons.shield_outlined),
+      ),
+      findsNothing,
+    );
   });
 
   testWidgets('afgeronde cursus start opnieuw zonder oud eindanker', (

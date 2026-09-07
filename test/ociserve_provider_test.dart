@@ -130,6 +130,13 @@ class _FakeApi implements OciServeApi {
     if (failReports) throw StateError('offline');
     await reportCompleter?.future;
   }
+
+  @override
+  Future<Uint8List> courseImage({
+    required String accessToken,
+    required String organizationId,
+    required String imageHash,
+  }) async => Uint8List(0);
 }
 
 ProviderContainer _container(

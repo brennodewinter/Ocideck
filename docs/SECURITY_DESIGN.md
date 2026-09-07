@@ -53,6 +53,13 @@ bound to an external tab session so identity and progress can never be saved or
 exported with the deck. “Play only” is an application policy, not DRM; a user
 controlling their computer can still capture displayed content.
 
+Course images are fetched only for hashes named by that participant's learning
+feed, through the same authenticated and pinned transport. OciDeck caps the
+encoded response at 64 MiB, accepts PNG, JPEG and WebP only when MIME and magic
+bytes agree, verifies the content-addressed SHA-256 hash, and uses the shared
+4096-pixel decode cap. A refused image falls back to the course icon without
+making the course itself unavailable.
+
 On presenter exit OciDeck sends one idempotent absolute snapshot containing the
 immutable course-version and lesson identifiers, stable slide anchors, completion
 and displayed milliseconds per slide. Answers, scores, notes and slide content
