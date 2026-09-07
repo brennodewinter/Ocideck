@@ -308,16 +308,21 @@ class _WelcomeScreen extends ConsumerWidget {
       const SizedBox(height: 16),
       // Wie via OciServe binnenkomt, komt terug voor de eigen opleiding. Zet
       // die persoonlijke ingang vóór de algemene open- en importacties.
-      if (ref.watch(ociServeAuthenticatedProvider)) ...[
+      if (ref.watch(ociServeProvider).settings.enabled) ...[
         _wideSecondaryButton(
           style: secondaryStyle,
           icon: Icons.school_outlined,
-          label: Text(l10n.d('Mijn cursussen')),
-          onPressed: () => OciServeCoursesDialog.show(context),
+          label: Text(
+            ref.watch(ociServeAuthenticatedProvider)
+                ? l10n.d('Mijn cursussen')
+                : l10n.d('Inloggen'),
+          ),
+          onPressed: () => _openOciServe(context, ref),
         ),
         const SizedBox(height: 10),
-      ] else if (ref.watch(ociServeProvider).settings.enabled &&
-          ref.watch(ociServeProvider).errorCode == 'restore_failed') ...[
+      ],
+      if (ref.watch(ociServeProvider).settings.enabled &&
+          ref.watch(ociServeProvider).errorCode != null) ...[
         Text(
           l10n.d(
             'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.',
@@ -397,6 +402,17 @@ class _WelcomeScreen extends ConsumerWidget {
       ..._imageLibraryButton(context, ref, l10n),
       const SizedBox(height: 4),
     ];
+  }
+
+  Future<void> _openOciServe(BuildContext context, WidgetRef ref) async {
+    if (ref.read(ociServeProvider).status == OciServeStatus.authenticating) {
+      return;
+    }
+    if (!ref.read(ociServeAuthenticatedProvider)) {
+      final loggedIn = await ref.read(ociServeProvider.notifier).login();
+      if (!loggedIn || !context.mounted) return;
+    }
+    await OciServeCoursesDialog.show(context);
   }
 
   /// Presentaties die op de eigen webserver staan, opgehaald via de autoindex
