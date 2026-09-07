@@ -1649,9 +1649,81 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bekeken: {tijd}': 'Vizualizat: {tijd}',
+  'Doorgaan in de les': 'Continuă în lecție',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Serverul nu a fost modificat, deoarece progresul încă așteaptă să fie trimis.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Acest server OciServe folosește {host} pentru autentificare. Datele sunt schimbate cu acel furnizor de identitate numai după ce permiteți acest lucru.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Această lecție de curs este disponibilă numai pentru redare și nu este stocată local.',
+  'Deze identiteitsprovider toestaan': 'Permite acest furnizor de identitate',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Această organizație conține prea multe lecții pentru a fi afișate în siguranță.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Progresul încă așteaptă sincronizarea.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Cu această alegere, jetonul de reîmprospătare este păstrat în breloc. O coadă criptată pentru progresul încă netrimis este păstrată separat.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Progresul care nu a fost încă trimis a fost salvat pe acest dispozitiv.',
+  'Cursist': 'Cursant',
+  'Les afgerond': 'Lecție finalizată',
+  'Cursussen voor u': 'Cursuri pentru dumneavoastră',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Continuați de unde ați rămas sau alegeți un alt curs pregătit pentru dumneavoastră.',
+  'Klaar om te beginnen': 'Gata să începeți',
+  'Mijn cursussen': 'Cursurile mele',
+  'Mijn leeromgeving': 'Mediul meu de învățare',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Bravo! Progresul dumneavoastră a fost salvat.',
+  'Nu bezig': 'În desfășurare',
+  'Opnieuw starten': 'Începeți din nou',
+  'Terug naar mijn cursussen': 'Înapoi la cursurile mele',
+  'U kunt deze cursus opnieuw bekijken.': 'Puteți parcurge din nou acest curs.',
+  'Volgende: {les}': 'Următorul: {les}',
+  'Welkom, {naam}': 'Bun venit, {naam}',
+  '{aantal} cursussen': '{aantal} cursuri',
+  '{aantal} lessen': '{aantal} lecții',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Introduceți o adresă OciServe validă.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} raport/rapoarte de progres așteaptă sincronizarea.',
+  '{afgerond} van {totaal} lessen afgerond':
+      '{afgerond} din {totaal} lecții finalizate',
+  'Uitloggen': 'Deconectare',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Contul dumneavoastră nu aparține unei organizații active.',
+  'Verdergaan': 'Continuă',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Urmați cursuri din mediul dumneavoastră OciServe. Fișierele de curs se deschid numai în modul de redare; progresul este sincronizat numai după autentificare.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Permiteți un server HTTPS într-o rețea internă. Jetoanele nu sunt trimise niciodată prin HTTP obișnuit.',
   'Starten': 'Începe',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'În timpul redării, OciDeck sincronizează cu această organizație ultimul diapozitiv, finalizarea și timpul afișat pentru fiecare diapozitiv. Aceasta nu este o dovadă a atenției sau a timpului de învățare activă.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Autentificarea în OciServe este disponibilă doar în aplicația pentru desktop, deoarece versiunea web nu are un breloc securizat.',
+  'OciServe-organisatie': 'Organizație OciServe',
+  'OciServe-server': 'Server OciServe',
   'Opleiding': 'Curs',
+  'Ingelogd blijven op dit apparaat':
+      'Rămâneți autentificat pe acest dispozitiv',
+  'Inloggen': 'Autentificare',
   'Les': 'Lecție',
+  'Er staan geen opleidingen voor u klaar.':
+      'Nu există cursuri disponibile pentru dumneavoastră.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Folosiți o adresă HTTPS pentru OciServe.',
+  'Ingelogd als {naam}': 'Autentificat ca {naam}',
+  'Ingelogd bij OciServe': 'Autentificat în OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Când urmați un curs, OciDeck trimite organizației OciServe alese ultimul diapozitiv, finalizarea și timpul afișat pentru fiecare diapozitiv. Răspunsurile, notițele și conținutul cursului nu sunt trimise ca progres.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Autentificarea locală nu a putut fi ștearsă complet. Încercați din nou.',
+  'De opleidingen konden niet worden opgehaald.':
+      'Cursurile nu au putut fi preluate.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Autentificarea în OciServe a eșuat. Verificați serverul și încercați din nou.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Creați conținut eLearning: obiective de învățare, module, feedback și rezumate de evaluare. Importați SCORM, QTI, xAPI, AICC și OLX local. Dezactivat implicit; activați extensia pentru a folosi tipurile de diapozitive.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

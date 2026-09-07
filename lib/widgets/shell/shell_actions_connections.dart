@@ -78,6 +78,10 @@ Future<bool> saveTabWithDestination(
   WidgetRef ref,
   TabInfo tab,
 ) {
+  if (tab.learningSession != null) {
+    _showLearningSaveBlocked(context);
+    return Future.value(false);
+  }
   final document = tab.documentNotifier;
   return document != null
       ? saveDocumentWithDestination(context, ref, document)
@@ -98,6 +102,12 @@ Future<bool> saveDeckWithDestination(
   WidgetRef ref,
   DeckNotifier deckNotifier,
 ) async {
+  final current = ref.read(tabsProvider).current;
+  if (current?.learningSession != null &&
+      identical(current?.deckNotifierOrNull, deckNotifier)) {
+    _showLearningSaveBlocked(context);
+    return false;
+  }
   // In een gedeelde samenwerksessie bewaart alleen de eigenaar het deck naar de
   // bron (COLLABORATION.md §5.3). Een gast — ook als die tijdelijk de autoriteit
   // is — houdt zijn wijzigingen in de sessie; ze worden pas bewaard als de
@@ -191,6 +201,18 @@ Future<bool> saveDeckWithDestination(
     ref,
     SaveTarget.local,
     () => deckNotifier.save(initialDirectory: choice.directory),
+  );
+}
+
+void _showLearningSaveBlocked(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        context.l10n.d(
+          'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.',
+        ),
+      ),
+    ),
   );
 }
 

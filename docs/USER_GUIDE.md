@@ -166,7 +166,10 @@ flowchart LR
   no badge.
 - **Save**: `Ctrl/Cmd + S`. Saving lays out a tidy project folder next to your
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
-  [`FILE_FORMAT.md`](FILE_FORMAT.md).
+  [`FILE_FORMAT.md`](FILE_FORMAT.md). Later saves materialise only newly added
+  in-memory images; changing text does not reread and hash the existing image
+  archive. Unchanged generated theme, configuration and sidecar files are left
+  untouched.
 - **While a save is running** the save chip on the left of the status bar turns
   into a spinner that names the destination — *Saving…*, *Uploading to WebDAV…*,
   *Uploading to S3…*, *Committing to git…* — and the save button in the toolbar
@@ -4393,6 +4396,8 @@ objective**, a **module** heading, a **feedback** slide and an **assessment
 summary**. Together with the three question kinds described under
 [Question slides](#question-slides) they let you write a lesson in the same file
 as everything else — ordinary Marp Markdown and no separate authoring tool.
+Authoring remains local; the optional OciServe connection described below is the
+separate playback and progress channel.
 
 Like the other optional modules it is **off by default**. Switch it on under
 **Settings → Uitbreidingen (Extensions) → eLearning**. The **Add slide** dialog
@@ -4459,12 +4464,48 @@ slide's does; all four share the free-Markdown preview and export the same way.
 The OciDeck **file format** stores course content and test rules — the answer
 model, scoring, feedback, timing, attempt rules, pass mark and course structure.
 It stores **no learner results**: not who answered what, not attempts, not
-personal progress, not mastery, not suspend data. This is not a gap waiting to
-be filled in the existing fields: the
+personal progress, not mastery, not suspend data. The optional OciServe session
+below remains outside the file and sends only its explicitly listed progress
+fields. This is not a gap waiting to be filled in the existing fields: the
 format deliberately reserves no keys for it, because a key
 whose meaning is "results go here later" either changes meaning later — which the
 file-format contract forbids — or collides with whatever another build already
 wrote there. If a results layer is ever built it gets new keys in a new file.
+
+### Following a course from OciServe
+
+The OciServe extension is separate from the authoring module and is off by
+default. On the desktop app, open **Settings → Uitbreidingen → OciServe**, enable
+it, enter the HTTPS address supplied by your organisation and sign in in the
+system browser. OciDeck can remember the login with a rotating refresh token in
+the operating-system keychain; switching that option off keeps the token only for
+the current app session. The browser build cannot store this credential safely
+and therefore does not offer OciServe login.
+
+Only after `/me` has confirmed your account and active organisation membership
+does **Mijn cursussen** appear at the bottom of **New tab**. It opens your
+learning environment, where you can select a course and see its lesson count,
+completion status, progress and total displayed time. The selected course shows
+the next lesson: **Start** begins it, **Continue** resumes it at the last stable
+slide anchor, and a completed course can be started again from its first lesson.
+After completing a lesson, the completion screen can take you back to **Mijn
+cursussen**. These packages can only be played in OciDeck: editing and saving
+are unavailable. This is a usability policy, not copy protection; screen capture
+remains possible.
+
+A lesson may be a selection from a larger presentation. OciDeck uses the same
+durable **Skip** marks as ordinary presenting: skipped slides remain in the
+authored Markdown, but are not shown and are not valid course-progress
+positions. The remaining slides, in their presentation order, are the lesson.
+
+When you leave or finish playback, OciDeck sends one snapshot with the last
+slide, completion and displayed milliseconds per slide. It sends no answers,
+scores, notes or course content as progress. “Displayed” means wall-clock time
+on screen and is not proof of attention or learning. If the server is temporarily
+unavailable, at most 100 pending snapshots stay in the OS keychain and are
+retried after the next authenticated connection. Logout removes the refresh
+token but preserves pending progress. Changing server is refused while progress
+still waits; only the full local-data reset deliberately removes the queue.
 
 ### Importing SCORM, QTI, xAPI/cmi5, AICC and OLX
 

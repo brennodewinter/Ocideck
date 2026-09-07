@@ -12,6 +12,7 @@ import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/improvement_y01.dart';
+import '../models/learning_session.dart';
 import '../models/markdown_document.dart';
 import '../models/settings.dart';
 import '../models/seal_record.dart';
@@ -255,6 +256,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // Zelf-beperkend op een uur; zie [RecoveryService.pruneIfDue].
     unawaited(_recovery.pruneIfDue());
     for (final tab in state.tabs) {
+      // Een OciServe-les blijft uitsluitend in dit afspeeltabblad. Ook als een
+      // presenterwidget ooit per ongeluk een mutatie doorgeeft, schrijft de
+      // herstelroutine de cursusinhoud niet buiten de sessie weg.
+      if (tab.learningSession != null) continue;
       // Een documenttabblad bewaart zijn eigen momentopname (byte-getrouwe bron,
       // geen deck-sidecars), zodat een crash óók niet-opgeslagen documenten
       // teruggeeft — net als een presentatie.
@@ -487,7 +492,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (!mounted) return OpenResult.unreadable;
     _reportOpenOutcome(_ref, outcome);
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
-    _placeDeckInTab(deck, filePath: path, index: index);
+    _placeDeckInTab(this, deck, filePath: path, index: index);
     await _settings.addRecentFile(
       path,
       slideCount: deck.slides.length,
@@ -595,43 +600,19 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
   }
 
-  /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
-  /// wordt hergebruikt, anders komt er een nieuw tabblad naast. Gedeelde
-  /// staart van pad-, bytes- en URL-opens.
-  void _placeDeckInTab(
-    Deck deck, {
-    String? filePath,
-    int index = 0,
-    String? remoteOrigin,
-  }) {
-    final current = state.current;
-    // Hergebruik alleen een leeg *presentatie*-tabblad; een leeg documenttabblad
-    // (mogelijk zodra nieuw-document bestaat) is een andere soort en zou op de
-    // compat-getter gooien.
-    if (current != null &&
-        !current.isOpen &&
-        current.deckNotifierOrNull != null) {
-      current.deckNotifier.loadDeck(
-        deck,
-        filePath: filePath,
-        remoteOrigin: remoteOrigin,
-      );
-      current.editorNotifier.select(index);
-      state = state.copyWith(tabs: List.from(state.tabs));
-    } else {
-      final tab = _createTab();
-      tab.deckNotifier.loadDeck(
-        deck,
-        filePath: filePath,
-        remoteOrigin: remoteOrigin,
-      );
-      tab.editorNotifier.select(index);
-      final newTabs = [...state.tabs, tab];
-      state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
-    }
-    _maybePromptSecurityModule(deck);
-    _maybePromptImprovementModule(deck);
-  }
+  /// Opent een onveranderlijke OciServe-les in een afspeeltabblad.
+  Future<OpenResult> openLearningPackage(
+    Uint8List bytes,
+    String name,
+    LearningSessionRef learningSession, {
+    String? initialAnchor,
+  }) => _openLearningPackage(
+    this,
+    bytes,
+    name,
+    learningSession,
+    initialAnchor: initialAnchor,
+  );
 
   /// A just-opened deck carrying Informatieveiligheid slide types is worth a
   /// one-time "enable the module" nudge. Signalled here — the single chokepoint
@@ -711,7 +692,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     if (!mounted) return OpenResult.unreadable;
     _warnUnfilledChartData(deck);
-    _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
+    _placeDeckInTab(this, deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
   }
 

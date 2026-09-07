@@ -667,9 +667,77 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bekeken: {tijd}': 'Mirá: {tijd}',
+  'Doorgaan in de les': 'Sigui den e les',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'E server no a wordo cambia, pasobra ainda tin progreso warda pa ser manda.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'E server OciServe aki ta usa {host} pa drenta. Datos lo wordo intercambia cu e proveedor di identidat solamente despues cu bo permití esaki.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'E les di e curso aki ta disponibel solamente pa reproduci y no ta wordo warda localmente.',
+  'Deze identiteitsprovider toestaan': 'Permití e proveedor di identidat aki',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'E organisashon aki tin demasiá les pa mustra di un manera sigur.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Ainda tin progreso warda pa sincronisashon.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Cu e eskoho aki e token di renovashon ta wordo warda den e keychain. Un fila cifrá pa progreso ku ainda no a wordo manda ta wordo warda separá di dje.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Progreso ku ainda no a wordo manda ta warda riba e aparato aki.',
+  'Cursist': 'Kursista',
+  'Les afgerond': 'Les kompletá',
+  'Cursussen voor u': 'Kursunan pa bo',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Sigui kaminda bo a keda, òf skohe un otro kurso ku ta kla pa bo.',
+  'Klaar om te beginnen': 'Kla pa kuminsá',
+  'Mijn cursussen': 'Mi kursunan',
+  'Mijn leeromgeving': 'Mi ambiente di siña',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Bon hasi! Bo progreso a wòrdu warda.',
+  'Nu bezig': 'Aktualmente',
+  'Opnieuw starten': 'Kuminsá atrobe',
+  'Terug naar mijn cursussen': 'Bai bek na mi kursunan',
+  'U kunt deze cursus opnieuw bekijken.': 'Bo por wak e kurso aki atrobe.',
+  'Volgende: {les}': 'Siguiente: {les}',
+  'Welkom, {naam}': 'Bon biní, {naam}',
+  '{aantal} cursussen': '{aantal} kursunan',
+  '{aantal} lessen': '{aantal} lesnan',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Yena un adrès OciServe válido.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} informe(s) di progreso ta warda sinkronisashon.',
+  '{afgerond} van {totaal} lessen afgerond':
+      '{afgerond} di {totaal} lesnan kompletá',
+  'Uitloggen': 'Sali',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Bo kuenta no ta pertenesé na un organisashon aktivo.',
+  'Verdergaan': 'Kontinuá',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Siguí cursonan for di bo ambiente OciServe. Archivo di curso ta habri solamente den modo di reprodukshon; progreso ta sinkronisá solamente despues di login.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Permití un servidor HTTPS riba un red interno. Token nunca ta wòrdu mandá via HTTP normal.',
   'Starten': 'Kuminsá',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Durante reprodukshon, OciDeck ta sinkronisá e último diapositiva, kompletashon i tempu mustrá pa diapositiva ku e organisashon aki. Esaki no ta prueba atenshon òf tempu aktivo di siña.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Login di OciServe ta disponibel solamente den e app di desktop, pasobra e versión web no tin un keychain sigur.',
+  'OciServe-organisatie': 'Organisashon OciServe',
+  'OciServe-server': 'Servidor OciServe',
   'Opleiding': 'Curso',
+  'Ingelogd blijven op dit apparaat': 'Keda drenta riba e aparato aki',
+  'Inloggen': 'Drenta',
   'Les': 'Les',
+  'Er staan geen opleidingen voor u klaar.': 'No tin curso kla pa bo.',
+  'Gebruik een HTTPS-adres voor OciServe.': 'Usa un adrès HTTPS pa OciServe.',
+  'Ingelogd als {naam}': 'Drenta komo {naam}',
+  'Ingelogd bij OciServe': 'Drenta na OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Ora bo sigui un curso, OciDeck ta manda bo último diapositiva, kompletashon i tempu mustrá pa diapositiva na e organisashon OciServe skohe. Respuestanan, notanan i contenido di curso no ta wòrdu mandá komo progreso.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'No por kita e login lokal kompletamente. Purba atrobe.',
+  'De opleidingen konden niet worden opgehaald.': 'No por haña e cursonan.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'No por drenta na OciServe. Wak e server i purba atrobe.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Krea konteniúdo di eLearning: meta di aprendizage, módulo, feedback i resumen di evaluashon. Importa SCORM, QTI, xAPI, AICC i OLX lokál. Pa defekto apagá; sende e ekstenshon pa usa e tiponan di diapositiva.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

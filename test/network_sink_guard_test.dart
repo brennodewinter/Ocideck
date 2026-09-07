@@ -146,7 +146,9 @@ void main() {
 
   test('raw HttpClient use stays where the host is resolved and pinned', () {
     scan(
-      sink: RegExp(r'HttpClient\('),
+      // De woordgrens voorkomt dat adapters zoals `_PinnedPackageHttpClient`
+      // ten onrechte als een constructie van dart:io HttpClient tellen.
+      sink: RegExp(r'\bHttpClient\('),
       allowedFiles: {
         'lib/utils/net_guard.dart',
         // De gedeelde pinning-helper die de transports delen. De resolve
@@ -208,7 +210,7 @@ void main() {
   });
 
   test('an allowlisted file does not quietly gain an extra HttpClient', () {
-    final sink = RegExp(r'HttpClient\(');
+    final sink = RegExp(r'\bHttpClient\(');
     final actual = <String, int>{};
     for (final file in dartFiles()) {
       var count = 0;
@@ -378,6 +380,11 @@ void main() {
       allowedFiles: {
         // Houdt de `package:http`-import voor de part-bibliotheek eronder.
         'lib/services/file_service.dart',
+        // openid_client verwacht een package:http BaseClient. Deze adapter
+        // opent zelf geen socket: elk verzoek gaat naar OciServeHttpTransport,
+        // dat per verzoek schema, safeResolve(Trusted), socket-pin, redirects,
+        // timeout en bytecap afdwingt.
+        'lib/services/ociserve/ociserve_auth.dart',
         // fetchUrlBytes: de WEB-tak van de URL-import, en alleen bereikbaar via
         // `if (isWebPlatform)` in widgets/shell/shell_actions.dart. Op web
         // bestaat de dart:io-pinning van importFromUrl niet en kan ze ook niet

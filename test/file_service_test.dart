@@ -493,6 +493,51 @@ void main() {
     expect(reopened.userNotes.values.single, 'Cursist notitie');
   });
 
+  test(
+    'saveDeck laat ongewijzigde gegenereerde hulpbestanden met rust',
+    () async {
+      final temp = await Directory.systemTemp.createTemp('ocideck_unchanged_');
+      addTearDown(() async {
+        if (await temp.exists()) await temp.delete(recursive: true);
+      });
+      final service = FileService(
+        MarkdownService(),
+        ImageService(),
+        () => const ThemeProfile(),
+      );
+      final slide = Slide.create(SlideType.bullets).copyWith(title: 'Slide');
+      final deck = Deck(
+        title: 'Ongewijzigd',
+        slides: [slide],
+        userNotes: {slide.id: 'Notitie'},
+      );
+      final mdPath = p.join(temp.path, 'deck.md');
+      await service.saveDeck(deck, mdPath);
+      final generated = [
+        File(p.join(temp.path, 'themes', 'ocideck.css')),
+        File(p.join(temp.path, '.marprc.yml')),
+        File(p.setExtension(mdPath, '.user-notes.json')),
+      ];
+      final marker = DateTime.utc(2001);
+      final markedAt = <String, DateTime>{};
+      for (final file in generated) {
+        expect(await file.exists(), isTrue, reason: file.path);
+        await file.setLastModified(marker);
+        markedAt[file.path] = await file.lastModified();
+      }
+
+      await service.saveDeck(deck, mdPath);
+
+      for (final file in generated) {
+        expect(
+          await file.lastModified(),
+          markedAt[file.path],
+          reason: file.path,
+        );
+      }
+    },
+  );
+
   test('saveDeck removes empty user-notes sidecar', () async {
     final temp = await Directory.systemTemp.createTemp(
       'ocideck_user_notes_empty_',

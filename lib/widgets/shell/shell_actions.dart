@@ -904,5 +904,13 @@ Future<void> requestCloseTab(
         if (!saved) return;
     }
   }
+  if (tab.learningSession != null) {
+    unawaited(
+      ref
+          .read(ociServeProvider.notifier)
+          .flushPendingReports()
+          .catchError((_) {}),
+    );
+  }
   ref.read(tabsProvider.notifier).closeTab(index);
 }

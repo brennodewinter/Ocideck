@@ -159,23 +159,17 @@ extension _FileServiceProject on FileService {
   }
 
   Future<void> _writeImageCaptions(Deck deck) async {
+    final captions = <String, String>{};
     for (final slide in deck.slides) {
       if (slide.imagePath.isNotEmpty && slide.imageCaption.trim().isNotEmpty) {
-        await _captions.saveCaption(
-          slide.imagePath,
-          slide.imageCaption,
-          basePath: deck.projectPath,
-        );
+        captions[slide.imagePath] = slide.imageCaption;
       }
       if (slide.imagePath2.isNotEmpty &&
           slide.imageCaption2.trim().isNotEmpty) {
-        await _captions.saveCaption(
-          slide.imagePath2,
-          slide.imageCaption2,
-          basePath: deck.projectPath,
-        );
+        captions[slide.imagePath2] = slide.imageCaption2;
       }
     }
+    await _captions.saveCaptions(captions, basePath: deck.projectPath);
   }
 
   /// Schrijft de gegenereerde thema-CSS en geeft de veilige themanaam terug
@@ -193,7 +187,10 @@ extension _FileServiceProject on FileService {
       final base = (await rootBundle.loadString(
         'assets/themes/ocideck.css',
       )).replaceFirst('@theme ocideck', '@theme $safeThemeName');
-      await writeStringAtomic(dest, _buildThemeCss(base, profile, logoUrl));
+      await writeStringAtomicIfChanged(
+        dest,
+        _buildThemeCss(base, profile, logoUrl),
+      );
       return safeThemeName;
     } catch (e) {
       // Asset not bundled in this build context; skip
@@ -207,7 +204,7 @@ extension _FileServiceProject on FileService {
   /// thema-CSS laadt. Het pad is relatief, dus verhuizen van de projectmap
   /// blijft werken. Zie #1804.
   Future<void> _writeMarpConfig(String projectDir, String themeName) async {
-    await writeStringAtomic(
+    await writeStringAtomicIfChanged(
       File(p.join(projectDir, '.marprc.yml')),
       '# OciDeck Marp CLI configuration.\n'
       '# Registers the generated theme so a plain `marp deck.md -o out.html`\n'

@@ -5,6 +5,48 @@
 // bij elkaar en nergens anders.
 part of 'tabs_provider.dart';
 
+/// Zet een geopend deck in het lege huidige tabblad of in een nieuw tabblad.
+void _placeDeckInTab(
+  TabsNotifier notifier,
+  Deck deck, {
+  String? filePath,
+  int index = 0,
+  String? remoteOrigin,
+  LearningSessionRef? learningSession,
+}) {
+  final state = notifier.currentState;
+  final current = state.current;
+  final TabInfo tab;
+  if (current != null &&
+      !current.isOpen &&
+      current.deckNotifierOrNull != null) {
+    tab = current;
+  } else {
+    tab = notifier._createTab();
+  }
+  tab.deckNotifier.loadDeck(
+    deck,
+    filePath: filePath,
+    remoteOrigin: remoteOrigin,
+    // Het serverpakket bevat de bij publicatie bevroren huisstijl; de gewone
+    // openroute blijft de actieve gebruikersinstelling volgen.
+    preserveThemeProfile: learningSession != null,
+  );
+  tab.learningSession = learningSession;
+  tab.editorNotifier.select(index);
+  if (identical(tab, current)) {
+    notifier._replacementState = state.copyWith(tabs: List.from(state.tabs));
+  } else {
+    final tabs = [...state.tabs, tab];
+    notifier._replacementState = state.copyWith(
+      tabs: tabs,
+      selectedIndex: tabs.length - 1,
+    );
+  }
+  notifier._maybePromptSecurityModule(deck);
+  notifier._maybePromptImprovementModule(deck);
+}
+
 // ── Per-tab data ──────────────────────────────────────────────────────────────
 
 /// De inhoud van een tabblad: óf een presentatie (deck) óf een document.
@@ -108,11 +150,16 @@ class TabInfo {
   /// [origin]: na het starten ingevuld, bij het einde weer op `null`.
   CollabSession? collabSession;
 
+  /// Immutable learning-session identity for an OciServe playback tab.
+  /// Credentials and learner profile data never live here.
+  LearningSessionRef? learningSession;
+
   TabInfo({
     required this.id,
     required this.recoveryId,
     required this.content,
     this.origin,
+    this.learningSession,
   });
 
   /// Presentatie of document.

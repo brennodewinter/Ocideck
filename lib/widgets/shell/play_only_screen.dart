@@ -8,7 +8,12 @@ part of '../app_shell.dart';
 /// De presentatie start in volledig scherm (via [presentDeck]); sluiten van het
 /// tabblad geeft de normale werking terug.
 class _PlayOnlyScreen extends ConsumerWidget {
-  const _PlayOnlyScreen();
+  const _PlayOnlyScreen({this.resumeFromSelection = false});
+
+  /// Een gewone vergrendelde presentatie begint vooraan. Bij een cursus heeft
+  /// het geopende tabblad juist de door OciServe teruggegeven hervatdia als
+  /// selectie; die selectie mag de afspeelknop niet opnieuw naar dia één wissen.
+  final bool resumeFromSelection;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,12 +23,28 @@ class _PlayOnlyScreen extends ConsumerWidget {
     final deck = ref.watch(deckProvider.select((s) => s.deck));
     if (deck == null) return const SizedBox.shrink();
 
-    // Dezelfde slide-set als bij het presenteren, zodat de getoonde eerste slide
-    // exact overeenkomt met wat afgespeeld wordt.
-    final slides = _slidesForPresentationOrExport(deck);
-    final firstSlide = slides.isNotEmpty
-        ? slides.first
-        : (deck.slides.isNotEmpty ? deck.slides.first : null);
+    // Ook de voorvertoning is een publieksoppervlak. Projecteer dus vóór het
+    // renderen en toon bij hervatten dezelfde geselecteerde dia als de speler.
+    final settings = ref.watch(settingsProvider);
+    final audience = PrivacyProjection.forAudience(
+      deck,
+      disabledRules: settings.privacyDisabledRules,
+      regions: settings.privacyRegions,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+    );
+    final slides = audience.slides;
+    final selectedIndex = ref.watch(
+      editorProvider.select((state) => state.selectedIndex),
+    );
+    final selectedId = selectedIndex >= 0 && selectedIndex < deck.slides.length
+        ? deck.slides[selectedIndex].id
+        : null;
+    final projectedIndex = resumeFromSelection && selectedId != null
+        ? slides.indexWhere((slide) => slide.id == selectedId)
+        : 0;
+    final previewIndex = projectedIndex < 0 ? 0 : projectedIndex;
+    final previewSlide = slides.isEmpty ? null : slides[previewIndex];
+    final isResume = resumeFromSelection && previewIndex > 0;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -41,8 +62,14 @@ class _PlayOnlyScreen extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        if (firstSlide != null)
-                          _firstSlideHero(deck, firstSlide, slides.length, ref)
+                        if (previewSlide != null)
+                          _firstSlideHero(
+                            audience.deck,
+                            previewSlide,
+                            previewIndex,
+                            slides.length,
+                            settings,
+                          )
                         else
                           _emptyHero(l10n, palette, deck),
                         const SizedBox(height: 28),
@@ -85,15 +112,17 @@ class _PlayOnlyScreen extends ConsumerWidget {
                           alignment: WrapAlignment.center,
                           children: [
                             FilledButton.icon(
-                              onPressed: firstSlide == null
+                              onPressed: previewSlide == null
                                   ? null
                                   : () => presentDeck(
                                       context,
                                       ref,
-                                      fromStart: true,
+                                      fromStart: !resumeFromSelection,
                                     ),
                               icon: const Icon(Icons.play_arrow),
-                              label: Text(l10n.d('Afspelen')),
+                              label: Text(
+                                l10n.d(isResume ? 'Verdergaan' : 'Afspelen'),
+                              ),
                               style: FilledButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 28,
@@ -139,10 +168,10 @@ class _PlayOnlyScreen extends ConsumerWidget {
   Widget _firstSlideHero(
     Deck deck,
     Slide slide,
+    int slideIndex,
     int slideCount,
-    WidgetRef ref,
+    AppSettings settings,
   ) {
-    final settings = ref.watch(settingsProvider);
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -162,7 +191,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
           cockpitColorScheme: settings.cockpitColorScheme,
           allowRemoteMedia: settings.allowRemoteMedia,
           onLinkTap: openExternalUrl,
-          slideNumber: 1,
+          slideNumber: slideIndex + 1,
           slideCount: slideCount,
           scopeCia: deckScopeCiaIndex(deck.slides),
           reportLanguage: deck.language,

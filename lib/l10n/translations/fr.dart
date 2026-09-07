@@ -668,9 +668,80 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bekeken: {tijd}': 'Consulté : {tijd}',
+  'Doorgaan in de les': 'Continuer dans la leçon',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Le serveur n’a pas été modifié, car une progression attend encore d’être envoyée.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Ce serveur OciServe utilise {host} pour la connexion. Les données ne sont échangées avec ce fournisseur d’identité qu’après votre autorisation.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Cette leçon de cours est disponible uniquement en lecture et n’est pas enregistrée localement.',
+  'Deze identiteitsprovider toestaan': 'Autoriser ce fournisseur d’identité',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Cette organisation contient trop de leçons pour être affichée en toute sécurité.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Une progression attend encore d’être synchronisée.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Avec ce choix, le jeton d’actualisation est conservé dans le trousseau. Une file d’attente chiffrée pour la progression non encore envoyée est conservée séparément.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'La progression non encore envoyée a été enregistrée sur cet appareil.',
+  'Cursist': 'Apprenant',
+  'Les afgerond': 'Leçon terminée',
+  'Cursussen voor u': 'Cours pour vous',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Reprenez là où vous vous étiez arrêté, ou choisissez un autre cours qui vous attend.',
+  'Klaar om te beginnen': 'Prêt à commencer',
+  'Mijn cursussen': 'Mes cours',
+  'Mijn leeromgeving': 'Mon environnement d’apprentissage',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Bravo ! Votre progression a été enregistrée.',
+  'Nu bezig': 'En cours',
+  'Opnieuw starten': 'Recommencer',
+  'Terug naar mijn cursussen': 'Retour à mes cours',
+  'U kunt deze cursus opnieuw bekijken.': 'Vous pouvez revoir ce cours.',
+  'Volgende: {les}': 'Suivant : {les}',
+  'Welkom, {naam}': 'Bienvenue, {naam}',
+  '{aantal} cursussen': '{aantal} cours',
+  '{aantal} lessen': '{aantal} leçons',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Saisissez une adresse OciServe valide.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} rapport(s) de progression en attente de synchronisation.',
+  '{afgerond} van {totaal} lessen afgerond':
+      '{afgerond} leçons sur {totaal} terminées',
+  'Uitloggen': 'Se déconnecter',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Votre compte n\'appartient à aucune organisation active.',
+  'Verdergaan': 'Continuer',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Suivez des formations de votre environnement OciServe. Les fichiers de cours ne s\'ouvrent qu\'en mode lecture ; la progression n\'est synchronisée qu\'après connexion.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Autorisez un serveur HTTPS sur un réseau interne. Les jetons ne sont jamais envoyés via HTTP ordinaire.',
   'Starten': 'Démarrer',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Pendant la lecture, OciDeck synchronise avec cette organisation la dernière diapositive, la réalisation et le temps affiché par diapositive. Ce n\'est pas une preuve d\'attention ou de temps d\'apprentissage actif.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'La connexion à OciServe n\'est disponible que dans l\'application de bureau, car la version web ne dispose pas d\'un trousseau sécurisé.',
+  'OciServe-organisatie': 'Organisation OciServe',
+  'OciServe-server': 'Serveur OciServe',
   'Opleiding': 'Formation',
+  'Ingelogd blijven op dit apparaat': 'Rester connecté sur cet appareil',
+  'Inloggen': 'Se connecter',
   'Les': 'Leçon',
+  'Er staan geen opleidingen voor u klaar.':
+      'Aucune formation n\'est disponible pour vous.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Utilisez une adresse HTTPS pour OciServe.',
+  'Ingelogd als {naam}': 'Connecté en tant que {naam}',
+  'Ingelogd bij OciServe': 'Connecté à OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Lors du suivi d\'un cours, OciDeck envoie à l\'organisation OciServe choisie votre dernière diapositive, la réalisation et le temps affiché par diapositive. Les réponses, notes et contenus du cours ne sont pas envoyés comme progression.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'La connexion locale n\'a pas pu être entièrement effacée. Réessayez.',
+  'De opleidingen konden niet worden opgehaald.':
+      'Les formations n\'ont pas pu être récupérées.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'La connexion à OciServe a échoué. Vérifiez le serveur et réessayez.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Créez du contenu eLearning : objectifs d\'apprentissage, modules, feedback et résumés d\'évaluation. Importez SCORM, QTI, xAPI, AICC et OLX localement. Désactivé par défaut ; activez l\'extension pour utiliser les types de diapositive.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

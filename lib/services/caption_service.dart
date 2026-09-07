@@ -29,6 +29,19 @@ class CaptionService {
     await _store.write(resolvedPath, caption);
   }
 
+  /// Slaat een verzameling bijschriften met één sidecar-write per map op.
+  Future<void> saveCaptions(
+    Map<String, String> captions, {
+    String? basePath,
+  }) async {
+    final resolved = <String, String>{};
+    for (final entry in captions.entries) {
+      final path = _resolvePath(entry.key, basePath);
+      if (path != null) resolved[path] = entry.value;
+    }
+    await _store.writeAll(resolved);
+  }
+
   Future<void> copyCaption(
     String sourceImagePath,
     String destinationImagePath, {

@@ -1658,9 +1658,83 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bekeken: {tijd}': 'Προβλήθηκε: {tijd}',
+  'Doorgaan in de les': 'Συνέχεια στο μάθημα',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Ο διακομιστής δεν άλλαξε, επειδή η πρόοδος ακόμη αναμένει αποστολή.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Αυτός ο διακομιστής OciServe χρησιμοποιεί το {host} για σύνδεση. Δεδομένα ανταλλάσσονται με αυτόν τον πάροχο ταυτότητας μόνο αφού το επιτρέψετε.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Αυτό το μάθημα είναι διαθέσιμο μόνο για αναπαραγωγή και δεν αποθηκεύεται τοπικά.',
+  'Deze identiteitsprovider toestaan':
+      'Να επιτραπεί αυτός ο πάροχος ταυτότητας',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Αυτός ο οργανισμός περιέχει πάρα πολλά μαθήματα για ασφαλή εμφάνιση.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Η πρόοδος εξακολουθεί να αναμένει συγχρονισμό.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Με αυτή την επιλογή, το ανανεωτικό διακριτικό αποθηκεύεται στην κλειδοθήκη. Μια κρυπτογραφημένη ουρά για πρόοδο που δεν έχει ακόμη σταλεί αποθηκεύεται ξεχωριστά.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Η πρόοδος που δεν έχει ακόμη σταλεί αποθηκεύτηκε σε αυτή τη συσκευή.',
+  'Cursist': 'Εκπαιδευόμενος',
+  'Les afgerond': 'Το μάθημα ολοκληρώθηκε',
+  'Cursussen voor u': 'Μαθήματα για εσάς',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Συνεχίστε από εκεί που σταματήσατε ή επιλέξτε ένα άλλο μάθημα που είναι έτοιμο για εσάς.',
+  'Klaar om te beginnen': 'Έτοιμοι να ξεκινήσετε',
+  'Mijn cursussen': 'Τα μαθήματά μου',
+  'Mijn leeromgeving': 'Το μαθησιακό μου περιβάλλον',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Μπράβο! Η πρόοδός σας αποθηκεύτηκε.',
+  'Nu bezig': 'Σε εξέλιξη',
+  'Opnieuw starten': 'Ξεκινήστε ξανά',
+  'Terug naar mijn cursussen': 'Πίσω στα μαθήματά μου',
+  'U kunt deze cursus opnieuw bekijken.':
+      'Μπορείτε να παρακολουθήσετε αυτό το μάθημα ξανά.',
+  'Volgende: {les}': 'Επόμενο: {les}',
+  'Welkom, {naam}': 'Καλώς ήρθατε, {naam}',
+  '{aantal} cursussen': '{aantal} μαθήματα',
+  '{aantal} lessen': '{aantal} μαθήματα',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Εισαγάγετε έγκυρη διεύθυνση OciServe.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} αναφορά/ές προόδου αναμένει/ουν συγχρονισμό.',
+  '{afgerond} van {totaal} lessen afgerond':
+      'Ολοκληρώθηκαν {afgerond} από {totaal} μαθήματα',
+  'Uitloggen': 'Αποσύνδεση',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Ο λογαριασμός σας δεν ανήκει σε ενεργό οργανισμό.',
+  'Verdergaan': 'Συνέχεια',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Παρακολουθήστε μαθήματα από το περιβάλλον OciServe σας. Τα αρχεία μαθημάτων ανοίγουν μόνο σε λειτουργία αναπαραγωγής· η πρόοδος συγχρονίζεται μόνο μετά τη σύνδεση.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Να επιτρέπεται διακομιστής HTTPS σε εσωτερικό δίκτυο. Τα διακριτικά δεν αποστέλλονται ποτέ μέσω συνηθισμένου HTTP.',
   'Starten': 'Έναρξη',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Κατά την αναπαραγωγή, το OciDeck συγχρονίζει με αυτόν τον οργανισμό την τελευταία διαφάνεια, την ολοκλήρωση και τον χρόνο εμφάνισης ανά διαφάνεια. Αυτό δεν αποτελεί απόδειξη προσοχής ή ενεργού χρόνου μάθησης.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Η σύνδεση στο OciServe είναι διαθέσιμη μόνο στην εφαρμογή υπολογιστή, επειδή η έκδοση ιστού δεν διαθέτει ασφαλή κλειδοθήκη.',
+  'OciServe-organisatie': 'Οργανισμός OciServe',
+  'OciServe-server': 'Διακομιστής OciServe',
   'Opleiding': 'Εκπαίδευση',
+  'Ingelogd blijven op dit apparaat':
+      'Παραμείνετε συνδεδεμένοι σε αυτή τη συσκευή',
+  'Inloggen': 'Σύνδεση',
   'Les': 'Μάθημα',
+  'Er staan geen opleidingen voor u klaar.':
+      'Δεν υπάρχουν διαθέσιμα μαθήματα για εσάς.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Χρησιμοποιήστε μια διεύθυνση HTTPS για το OciServe.',
+  'Ingelogd als {naam}': 'Συνδεδεμένοι ως {naam}',
+  'Ingelogd bij OciServe': 'Συνδεδεμένοι στο OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Κατά την παρακολούθηση ενός μαθήματος, το OciDeck στέλνει στον επιλεγμένο οργανισμό OciServe την τελευταία διαφάνεια, την ολοκλήρωση και τον χρόνο εμφάνισης ανά διαφάνεια. Απαντήσεις, σημειώσεις και περιεχόμενο μαθήματος δεν αποστέλλονται ως πρόοδος.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Δεν ήταν δυνατή η πλήρης εκκαθάριση της τοπικής σύνδεσης. Δοκιμάστε ξανά.',
+  'De opleidingen konden niet worden opgehaald.':
+      'Δεν ήταν δυνατή η ανάκτηση των μαθημάτων.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Η σύνδεση στο OciServe απέτυχε. Ελέγξτε τον διακομιστή και δοκιμάστε ξανά.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Δημιουργήστε περιεχόμενο eLearning: στόχοι μάθησης, ενότητες, ανατροφοδότηση και περιλήψεις αξιολόγησης. Εισαγάγετε SCORM, QTI, xAPI, AICC και OLX τοπικά. Ανενεργό από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τους τύπους διαφανειών.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

@@ -1626,9 +1626,79 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bekeken: {tijd}': 'Vaadatud: {tijd}',
+  'Doorgaan in de les': 'Jätka õppetunnis',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Serverit ei muudetud, sest edenemine ootab veel saatmist.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'See OciServe’i server kasutab sisselogimiseks teenust {host}. Andmeid vahetatakse selle identiteedipakkujaga alles pärast teie luba.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'See kursusetund on saadaval ainult esitamiseks ja seda ei salvestata kohalikult.',
+  'Deze identiteitsprovider toestaan': 'Luba see identiteedipakkuja',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Selles organisatsioonis on turvaliseks kuvamiseks liiga palju tunde.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Edenemine ootab veel sünkroonimist.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Selle valikuga salvestatakse värskendustõend võtmeahelasse. Saatmata edenemise krüptitud järjekord salvestatakse sellest eraldi.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Veel saatmata edenemine on sellesse seadmesse salvestatud.',
+  'Cursist': 'Kursusel osaleja',
+  'Les afgerond': 'Õppetund lõpetatud',
+  'Cursussen voor u': 'Kursused teile',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Jätkake sealt, kus pooleli jäite, või valige mõni teine teile valmis kursus.',
+  'Klaar om te beginnen': 'Valmis alustama',
+  'Mijn cursussen': 'Minu kursused',
+  'Mijn leeromgeving': 'Minu õpikeskkond',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Tubli! Teie edenemine on salvestatud.',
+  'Nu bezig': 'Pooleli',
+  'Opnieuw starten': 'Alusta uuesti',
+  'Terug naar mijn cursussen': 'Tagasi minu kursuste juurde',
+  'U kunt deze cursus opnieuw bekijken.':
+      'Saate selle kursuse uuesti läbi vaadata.',
+  'Volgende: {les}': 'Järgmine: {les}',
+  'Welkom, {naam}': 'Tere tulemast, {naam}',
+  '{aantal} cursussen': '{aantal} kursust',
+  '{aantal} lessen': '{aantal} õppetundi',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Sisestage kehtiv OciServe\'i aadress.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} edenemisaruannet ootab sünkroonimist.',
+  '{afgerond} van {totaal} lessen afgerond':
+      'Lõpetatud {afgerond} / {totaal} õppetundi',
+  'Uitloggen': 'Logi välja',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Teie konto ei kuulu aktiivsesse organisatsiooni.',
+  'Verdergaan': 'Jätka',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Läbi kursusi oma OciServe keskkonnast. Kursusefailid avanevad ainult esitusrežiimis; edenemine sünkroonitakse ainult pärast sisselogimist.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Luba HTTPS-server sisevõrgus. Tõendeid ei saadeta kunagi tavalise HTTP kaudu.',
   'Starten': 'Alusta',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Esituse ajal sünkroonib OciDeck selle organisatsiooniga viimase slaidi, lõpetamise ja slaidi kohta kuvatud aja. See ei tõenda tähelepanu ega aktiivset õppimisaega.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'OciServesse sisselogimine on saadaval ainult töölauarakenduses, sest veebiversioonil puudub turvaline võtmehoidla.',
+  'OciServe-organisatie': 'OciServe organisatsioon',
+  'OciServe-server': 'OciServe’i server',
   'Opleiding': 'Kursus',
+  'Ingelogd blijven op dit apparaat': 'Jää sellel seadmel sisselogituks',
+  'Inloggen': 'Logi sisse',
   'Les': 'Õppetund',
+  'Er staan geen opleidingen voor u klaar.': 'Teile pole kursusi saadaval.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Kasutage OciServe\'i jaoks HTTPS-aadressi.',
+  'Ingelogd als {naam}': 'Sisse logitud kasutajana {naam}',
+  'Ingelogd bij OciServe': 'OciServesse sisse logitud',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Kursuse läbimisel saadab OciDeck valitud OciServe organisatsioonile teie viimase slaidi, lõpetamise ja slaidi kohta kuvatud aja. Vastuseid, märkmeid ja kursuse sisu ei saadeta edenemisena.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Kohalikku sisselogimist ei saanud täielikult kustutada. Proovige uuesti.',
+  'De opleidingen konden niet worden opgehaald.': 'Kursusi ei saanud tuua.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'OciServesse sisselogimine ebaõnnestus. Kontrollige serverit ja proovige uuesti.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Loo eLearning sisu: õpieesmärgid, moodulid, tagasiside ja hindamise kokkuvõtted. Impordi SCORM, QTI, xAPI, AICC ja OLX lokaalselt. Vaikimisi väljas; lülita laiendus sisse, et kasutada slaiditüüpe.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

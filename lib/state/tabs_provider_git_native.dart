@@ -73,7 +73,7 @@ extension TabsNotifierGitNative on TabsNotifier {
     if (!mounted) return OpenResult.unreadable;
     _reportMissingChartData(_ref, sidecars.missingChartData);
 
-    _placeDeckInTab(sidecars.deck, remoteOrigin: label);
+    _placeDeckInTab(this, sidecars.deck, remoteOrigin: label);
     currentState.current?.gitOrigin = GitOrigin(
       config: config,
       branch: branch,

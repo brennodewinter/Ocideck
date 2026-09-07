@@ -17,6 +17,18 @@
 // tak in [_connectionPanel] — geen tweede lijst, geen tabblad.
 part of '../settings_dialog.dart';
 
+/// Kies een map, of niets op een platform zonder lokale projectmappen.
+Future<String?> _pickDirectoryGated({
+  required String dialogTitle,
+  String? initialDirectory,
+}) async {
+  if (!supportsLocalProjectFolders) return null;
+  return FilePicker.getDirectoryPath(
+    dialogTitle: dialogTitle,
+    initialDirectory: initialDirectory,
+  );
+}
+
 /// Presentatie-eigenschappen per soort verbinding: het pictogram in de rij en
 /// de teksten in het "toevoegen"-menu. De configuratie zelf zit in het model
 /// ([StorageConnection]); dit is puur wat het scherm ervan laat zien.

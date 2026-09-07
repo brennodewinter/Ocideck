@@ -288,6 +288,7 @@ Widget _tabScope(TabInfo tab) {
       collabSessionProvider.overrideWith(
         (ref) => CollabSessionNotifier(ref, tab),
       ),
+      learningSessionProvider.overrideWithValue(tab.learningSession),
       deckQualityRawProvider.overrideWith(computeDeckQualityRaw),
       deckQualityProvider.overrideWith(computeDeckQuality),
       imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),
@@ -302,12 +303,14 @@ Widget _tabScope(TabInfo tab) {
       ),
       privacyExportSummaryProvider.overrideWith(computePrivacyExportSummary),
     ],
-    child: const _TabContent(),
+    child: _TabContent(isLearningSession: tab.learningSession != null),
   );
 }
 
 class _TabContent extends ConsumerWidget {
-  const _TabContent();
+  const _TabContent({required this.isLearningSession});
+
+  final bool isLearningSession;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -323,7 +326,9 @@ class _TabContent extends ConsumerWidget {
     final playOnly = ref.watch(
       deckProvider.select((s) => s.deck?.playOnly ?? false),
     );
-    if (playOnly) return const _PlayOnlyScreen();
+    if (playOnly || isLearningSession) {
+      return _PlayOnlyScreen(resumeFromSelection: isLearningSession);
+    }
     return _MainLayout(exportService: ExportService());
   }
 }

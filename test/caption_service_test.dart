@@ -37,6 +37,42 @@ void main() {
     expect(await service.getCaption(b), 'Onderschrift B');
   });
 
+  test('slaat meerdere bijschriften per map in één bundel op', () async {
+    final images = Directory(p.join(tmp.path, 'images'))..createSync();
+    final elsewhere = Directory(p.join(tmp.path, 'elsewhere'))..createSync();
+    final existing = p.join(images.path, 'existing.png');
+    await service.saveCaption(existing, 'Blijft staan');
+
+    await service.saveCaptions({
+      p.join(images.path, 'a.png'): 'Onderschrift A',
+      p.join(images.path, 'b.png'): 'Onderschrift B',
+      p.join(elsewhere.path, 'c.png'): 'Onderschrift C',
+    });
+
+    expect(await service.getCaption(existing), 'Blijft staan');
+    expect(
+      await service.getCaption(p.join(images.path, 'a.png')),
+      'Onderschrift A',
+    );
+    expect(
+      await service.getCaption(p.join(images.path, 'b.png')),
+      'Onderschrift B',
+    );
+    expect(
+      await service.getCaption(p.join(elsewhere.path, 'c.png')),
+      'Onderschrift C',
+    );
+
+    final sidecar = File(p.join(images.path, '.ocideck_captions.json'));
+    await sidecar.setLastModified(DateTime.utc(2001));
+    final markedAt = await sidecar.lastModified();
+    await service.saveCaptions({
+      p.join(images.path, 'a.png'): 'Onderschrift A',
+      p.join(images.path, 'b.png'): 'Onderschrift B',
+    });
+    expect(await sidecar.lastModified(), markedAt);
+  });
+
   test('copyCaption duplicates a caption to another image', () async {
     final a = p.join(tmp.path, 'a.png');
     final b = p.join(tmp.path, 'b.png');

@@ -1634,9 +1634,77 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bekeken: {tijd}': 'Zhlédnuto: {tijd}',
+  'Doorgaan in de les': 'Pokračovat v lekci',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Server nebyl změněn, protože postup stále čeká na odeslání.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Tento server OciServe používá {host} k přihlášení. Data se s tímto poskytovatelem identity vyměňují až poté, co to povolíte.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Tato lekce kurzu je k dispozici pouze k přehrání a neukládá se místně.',
+  'Deze identiteitsprovider toestaan': 'Povolit tohoto poskytovatele identity',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Tato organizace obsahuje příliš mnoho lekcí, aby je bylo možné bezpečně zobrazit.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Postup stále čeká na synchronizaci.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Touto volbou se obnovovací token uloží do klíčenky. Šifrovaná fronta dosud neodeslaného postupu se ukládá odděleně.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Dosud neodeslaný postup byl uložen v tomto zařízení.',
+  'Cursist': 'Účastník kurzu',
+  'Les afgerond': 'Lekce dokončena',
+  'Cursussen voor u': 'Kurzy pro vás',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Pokračujte tam, kde jste skončili, nebo si vyberte jiný kurz, který je pro vás připraven.',
+  'Klaar om te beginnen': 'Připraveni začít',
+  'Mijn cursussen': 'Moje kurzy',
+  'Mijn leeromgeving': 'Moje vzdělávací prostředí',
+  'Mooi gedaan! Uw voortgang is bewaard.': 'Výborně! Váš postup byl uložen.',
+  'Nu bezig': 'Probíhá',
+  'Opnieuw starten': 'Začít znovu',
+  'Terug naar mijn cursussen': 'Zpět na moje kurzy',
+  'U kunt deze cursus opnieuw bekijken.': 'Tento kurz si můžete znovu projít.',
+  'Volgende: {les}': 'Další: {les}',
+  'Welkom, {naam}': 'Vítejte, {naam}',
+  '{aantal} cursussen': '{aantal} kurzů',
+  '{aantal} lessen': '{aantal} lekcí',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Zadejte platnou adresu OciServe.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} zpráva/zpráv o postupu čeká na synchronizaci.',
+  '{afgerond} van {totaal} lessen afgerond':
+      'Dokončeno {afgerond} z {totaal} lekcí',
+  'Uitloggen': 'Odhlásit se',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Váš účet nepatří do aktivní organizace.',
+  'Verdergaan': 'Pokračovat',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Absolvujte kurzy ze svého prostředí OciServe. Soubory kurzů se otevírají jen v režimu přehrávání; postup se synchronizuje až po přihlášení.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Povolte server HTTPS ve vnitřní síti. Tokeny se nikdy neposílají přes běžné HTTP.',
   'Starten': 'Spustit',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Během přehrávání OciDeck synchronizuje s touto organizací poslední snímek, dokončení a zobrazený čas na snímek. Nejde o důkaz pozornosti ani aktivního času učení.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Přihlášení do OciServe je dostupné jen v desktopové aplikaci, protože webová verze nemá bezpečnou klíčenku.',
+  'OciServe-organisatie': 'Organizace OciServe',
+  'OciServe-server': 'Server OciServe',
   'Opleiding': 'Kurz',
+  'Ingelogd blijven op dit apparaat': 'Zůstat přihlášen na tomto zařízení',
+  'Inloggen': 'Přihlásit se',
   'Les': 'Lekce',
+  'Er staan geen opleidingen voor u klaar.': 'Nemáte k dispozici žádné kurzy.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Pro OciServe použijte adresu HTTPS.',
+  'Ingelogd als {naam}': 'Přihlášen jako {naam}',
+  'Ingelogd bij OciServe': 'Přihlášen do OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Při absolvování kurzu OciDeck odesílá vybrané organizaci OciServe váš poslední snímek, dokončení a zobrazený čas na snímek. Odpovědi, poznámky a obsah kurzu se jako postup neodesílají.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Místní přihlášení se nepodařilo zcela vymazat. Zkuste to znovu.',
+  'De opleidingen konden niet worden opgehaald.': 'Kurzy se nepodařilo načíst.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Přihlášení do OciServe se nezdařilo. Zkontrolujte server a zkuste to znovu.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Vytvářejte eLearning obsah: cíle učení, moduly, zpětnou vazbu a shrnutí hodnocení. Importujte SCORM, QTI, xAPI, AICC a OLX lokálně. Ve výchozím nastavení vypnuto; zapněte rozšíření pro použití typů snímků.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

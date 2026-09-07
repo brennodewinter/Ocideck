@@ -5,6 +5,121 @@
 // buildPackageMembers worden buiten de library aangeroepen (tabs_provider).
 part of '../file_service.dart';
 
+List<PackageEntry>? _decodePackageEntries(
+  List<int> zipBytes, {
+  required int maxBytes,
+  String? password,
+  bool strictIntegrity = false,
+}) {
+  if (zipBytes.length > maxBytes) return null;
+
+  // AES-ontsleuteling muteert de invoerbuffer. Een kopie houdt de bytes van de
+  // aanroeper intact voor een eventuele nieuwe poging.
+  final input = password != null ? Uint8List.fromList(zipBytes) : zipBytes;
+  final Archive archive;
+  try {
+    archive = ZipDecoder().decodeBytes(input, password: password);
+  } catch (e, s) {
+    logError('FileService.decodePackageEntries: ZIP decode failed', e, s);
+    return null;
+  }
+
+  if (archive.files.length > FileService.maxPackageEntries) {
+    logWarning(
+      'FileService.decodePackageEntries: too many archive entries '
+      '(${archive.files.length})',
+    );
+    return null;
+  }
+
+  final entries = <PackageEntry>[];
+  final names = <String>{};
+  var extracted = 0;
+  for (final file in archive.files) {
+    if (!file.isFile) continue;
+    final normalizedName = p.posix.normalize(file.name);
+    final invalidName =
+        file.name.length > FileService.maxZipEntryPathLength ||
+        p.posix.isAbsolute(file.name) ||
+        normalizedName == '..' ||
+        normalizedName.startsWith('../') ||
+        !names.add(normalizedName);
+    if (invalidName) {
+      if (strictIntegrity) {
+        logWarning(
+          'FileService.decodePackageEntries: invalid or duplicate member',
+        );
+        return null;
+      }
+      continue;
+    }
+    // De gedeclareerde grootte is alleen een snelle eerste begrenzing; de
+    // writer hieronder stopt ook een lid dat tijdens uitpakken groter blijkt.
+    if (file.size < 0 || extracted + file.size > maxBytes) {
+      logWarning(
+        'FileService.decodePackageEntries: decompressed size exceeds limit',
+      );
+      return null;
+    }
+    final Uint8List content;
+    if (password != null) {
+      // WinZip-AES ontsleutelt via de content-getter en toetst daar de HMAC.
+      final List<int> raw;
+      try {
+        raw = file.content;
+      } catch (e) {
+        // Een half pakket na een mislukte integriteitstoets is gevaarlijker dan
+        // een duidelijke weigering, dus één beschadigd lid weigert alles.
+        logError(
+          'FileService.decodePackageEntries: encrypted entry failed its '
+          'integrity check, refusing the package (${file.name})',
+          e,
+        );
+        return null;
+      }
+      if (extracted + raw.length > maxBytes) {
+        logWarning(
+          'FileService.decodePackageEntries: decrypted size exceeds limit',
+        );
+        return null;
+      }
+      content = raw is Uint8List ? raw : Uint8List.fromList(raw);
+    } else {
+      final capped = _CappedOutputStream(maxBytes - extracted);
+      try {
+        file.writeContent(capped);
+        // De stream geeft al een zicht op zijn buffer; kopiëren verdubbelt de
+        // geheugenpiek bij een groot uitgepakt lid.
+        content = capped.getBytes();
+      } on ExtractionLimitException {
+        logWarning(
+          'FileService.decodePackageEntries: entry exceeds decompression '
+          'limit (possible zip bomb): ${file.name}',
+        );
+        return null;
+      } catch (e) {
+        if (strictIntegrity) {
+          logWarning(
+            'FileService.decodePackageEntries: unreadable entry in strict '
+            'package, refusing all members',
+            e,
+          );
+          return null;
+        }
+        logWarning(
+          'FileService.decodePackageEntries: unreadable entry skipped '
+          '(${file.name})',
+          e,
+        );
+        continue;
+      }
+    }
+    extracted += content.length;
+    entries.add((name: file.name, bytes: content));
+  }
+  return entries;
+}
+
 extension FileServicePackage on FileService {
   /// Schrijf een zelfstandig pakket (zip): de markdown + álle gebruikte assets
   /// (afbeeldingen, media, logo) en de thema-CSS, met onderling relatieve

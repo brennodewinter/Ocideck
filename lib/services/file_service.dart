@@ -838,108 +838,13 @@ class FileService {
     List<int> zipBytes, {
     int maxBytes = maxPackageBytes,
     String? password,
-  }) {
-    if (zipBytes.length > maxBytes) return null;
-
-    // AES-ontsleuteling muteert de invoerbuffer; werk op een kopie zodat de
-    // bytes van de aanroeper (die deze soms opnieuw gebruikt) intact blijven.
-    final input = password != null ? Uint8List.fromList(zipBytes) : zipBytes;
-    final Archive archive;
-    try {
-      archive = ZipDecoder().decodeBytes(input, password: password);
-    } catch (e, s) {
-      logError('FileService.decodePackageEntries: ZIP decode failed', e, s);
-      return null;
-    }
-
-    if (archive.files.length > maxPackageEntries) {
-      logWarning(
-        'FileService.decodePackageEntries: too many archive entries '
-        '(${archive.files.length})',
-      );
-      return null;
-    }
-
-    final entries = <PackageEntry>[];
-    var extracted = 0;
-    for (final f in archive.files) {
-      if (!f.isFile) continue;
-      if (f.name.length > maxZipEntryPathLength) continue;
-      // Cheap early reject on the *declared* uncompressed size (a zip bomb can
-      // understate this, so it is only a fast path, not the real guard).
-      if (f.size < 0 || extracted + f.size > maxBytes) {
-        logWarning(
-          'FileService.decodePackageEntries: decompressed size exceeds limit',
-        );
-        return null;
-      }
-      final Uint8List content;
-      if (password != null) {
-        // Versleutelde leden: WinZip-AES wordt alleen door de content-getter
-        // ontsleuteld — de streaming `writeContent` inflate-weg past de
-        // AES-laag niet toe en zou onleesbare bytes opleveren. De begrenzing
-        // valt hier terug op de gedeclareerde grootte (hierboven gecheckt) plus
-        // de lopende totaalsom; de streaming-cap vervalt, wat aanvaardbaar is
-        // voor pakketten die de gebruiker zelf versleutelde en ontgrendelde.
-        final List<int> raw;
-        try {
-          raw = f.content;
-        } catch (e) {
-          // **Fail-closed.** WinZip-AES toetst per lid een HMAC; `archive`
-          // gooit hier ("macs don't match") zodra die niet klopt. Dat is geen
-          // leesfout maar een bewijs van wijziging ná het versleutelen.
-          //
-          // Dit lid overslaan en doorgaan leverde stil een pakket op waar één
-          // bestand uit verdwenen was — precies het lid dat een aanvaller
-          // eruit wilde hebben. Wie een pakket versleutelt, doet dat om te
-          // kunnen vertrouwen wat eruit komt; dan is een half pakket zonder
-          // melding de verkeerde uitkomst. Het hele pakket wordt geweigerd.
-          logError(
-            'FileService.decodePackageEntries: encrypted entry failed its '
-            'integrity check, refusing the package (${f.name})',
-            e,
-          );
-          return null;
-        }
-        if (extracted + raw.length > maxBytes) {
-          logWarning(
-            'FileService.decodePackageEntries: decrypted size exceeds limit',
-          );
-          return null;
-        }
-        content = raw is Uint8List ? raw : Uint8List.fromList(raw);
-      } else {
-        // Inflate into a capped stream that aborts the moment the entry exceeds
-        // the remaining budget. This bounds peak memory per entry: unlike
-        // `f.content` (which decodes the whole entry into memory before we can
-        // check its size), the underlying inflater writes incrementally, so a
-        // deflate bomb that understated its header size is stopped mid-inflation.
-        final remaining = maxBytes - extracted;
-        final capped = _CappedOutputStream(remaining);
-        try {
-          f.writeContent(capped);
-          content = Uint8List.fromList(capped.getBytes());
-        } on ExtractionLimitException {
-          logWarning(
-            'FileService.decodePackageEntries: entry exceeds decompression '
-            'limit (possible zip bomb): ${f.name}',
-          );
-          return null;
-        } catch (e) {
-          // Decompressing a corrupt entry can throw; skip it instead of aborting.
-          logWarning(
-            'FileService.decodePackageEntries: unreadable entry skipped '
-            '(${f.name})',
-            e,
-          );
-          continue;
-        }
-      }
-      extracted += content.length;
-      entries.add((name: f.name, bytes: content));
-    }
-    return entries;
-  }
+    bool strictIntegrity = false,
+  }) => _decodePackageEntries(
+    zipBytes,
+    maxBytes: maxBytes,
+    password: password,
+    strictIntegrity: strictIntegrity,
+  );
 
   /// De hoofd-markdown van een pakket: het `.md`-lid met het ondiepste pad.
   static PackageEntry? mainMarkdownEntry(List<PackageEntry> entries) {

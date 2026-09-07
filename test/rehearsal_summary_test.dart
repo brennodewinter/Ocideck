@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/question.dart';
+import 'package:ocideck/models/playback.dart';
 import 'package:ocideck/models/rehearsal.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -159,7 +160,10 @@ void main() {
 
   // ── 'Alleen afspelen' ──────────────────────────────────────────────────────
 
-  Widget presenterOverLauncher({required bool playOnly}) => _wrap(
+  Widget presenterOverLauncher({
+    required bool playOnly,
+    Future<void> Function(PlaybackReport)? onPlaybackFinished,
+  }) => _wrap(
     Scaffold(
       body: Builder(
         builder: (context) => TextButton(
@@ -169,6 +173,7 @@ void main() {
                 slides: [
                   Slide(
                     id: 'q',
+                    anchor: 'lesson-1-slide-1',
                     type: SlideType.question,
                     customMarkdown: const QuestionSpec(
                       kind: QuestionKind.trueFalse,
@@ -181,6 +186,7 @@ void main() {
                 initialIndex: 0,
                 showRehearsalSummary: true,
                 playOnly: playOnly,
+                onPlaybackFinished: onPlaybackFinished,
               ),
             ),
           ),
@@ -203,6 +209,28 @@ void main() {
 
     expect(find.text('Oefenrun'), findsNothing);
     expect(find.text('open'), findsOneWidget); // presentatie is gewoon gesloten
+  });
+
+  testWidgets('een vergrendelde afspeelrun rapporteert precies eenmaal', (
+    tester,
+  ) async {
+    final reports = <PlaybackReport>[];
+    await tester.pumpWidget(
+      presenterOverLauncher(
+        playOnly: true,
+        onPlaybackFinished: (run) async => reports.add(run),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+
+    expect(reports, hasLength(1));
+    expect(reports.single.run.perSlide, hasLength(1));
+    expect(reports.single.lastSlideId, 'lesson-1-slide-1');
+    expect(reports.single.completed, isFalse);
   });
 
   testWidgets('zonder vergrendeling verschijnt het overzicht wél', (

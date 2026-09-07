@@ -9,9 +9,12 @@ technical mechanisms behind these guarantees, see
 
 ## The short version
 
-- **Your presentations stay on your device.** There is no OciDeck account, no
-  server that holds your decks, and no telemetry. Nothing is uploaded in the
-  background. *(Corrected 2026-07-22: this said "no OciDeck server", full stop.
+- **Your own presentations stay on your device.** There is no mandatory OciDeck
+  account and no general telemetry. The optional OciServe extension is the
+  explicit exception: after you enable it and sign in, it downloads assigned
+  courses and reports your last slide, completion and displayed milliseconds per
+  slide to the OciServe organisation you selected. *(Corrected 2026-07-22: this
+  said "no OciDeck server", full stop.
   That is not true — the publisher runs one, `cveapi.librekat.nl`, for CVE
   lookups. It never sees a deck, it is off by default, and you can point the app
   somewhere else or use the offline database instead — but "no server" was an
@@ -126,7 +129,16 @@ machine (desktop) or in your browser tab (web). This includes:
   statement about what you are working on and for whom, so Settings → Security
   can clear the whole list in one action.
 
-There is **no analytics, tracking, or usage reporting of any kind.**
+There is **no general analytics or hidden usage reporting**. OciServe course
+progress is deliberate, visible usage reporting: it is off by default and only
+starts after the user enables the extension and signs in. OciDeck sends stable
+slide anchors, displayed milliseconds and completion; it does not send answers,
+scores, notes or presentation contents as progress. Displayed time is wall-clock
+exposure and is not proof of attention, presence or learning. The rotating
+refresh token and unsent progress outbox live only in the operating-system
+keychain. Logout removes the token but preserves unsent progress for a later
+authenticated retry; *Reset everything to its initial state* removes both.
+Access tokens remain in memory.
 
 ### Face detection in slide images
 
@@ -183,13 +195,17 @@ against accessing internal/private network addresses.
 | **Save/Open — S3** | Your deck files (objects) | Your configured endpoint (AWS S3, MinIO, or any S3-compatible service) |
 | **Save/Open — Git** | Your deck files (commits) | Your configured forge (Gitea/Forgejo/GitLab/GitHub) |
 | **AI assistant** (off by default) | The specific text/image you request help with | The endpoint you configured |
+| **OciServe sign-in** (off by default, desktop only) | Installation status and, after login, the access token needed for `/me` | Your configured OciServe server |
+| **OciServe identity provider** | OIDC discovery, browser login and token exchange; the host is shown and requires explicit acceptance when it differs from OciServe | The identity-provider host announced by your OciServe server |
+| **OciServe courses/progress** | Assigned course packages; last slide, completion and displayed milliseconds per slide | Your configured OciServe server and selected organisation |
 | **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
 | **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
 | **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
 | **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |
 
-Everything in the first six rows goes to servers **you** point it at — not to
-OciDeck. The last four rows are the exceptions, and they are listed because
+The storage, AI and OciServe rows go to servers **you or your organisation**
+configured — not to OciDeck. The CVE and embedded-media rows are exceptions,
+and they are listed because
 naming them is the only honest way to keep the sentence above true:
 
 - The **fetch-proxy** exists because most servers send no CORS headers, so a

@@ -3,6 +3,27 @@
 // knop-/labelwidgets); all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+Future<void> _reportPlayback(
+  Future<void> Function(PlaybackReport report)? callback,
+  RehearsalRun run, {
+  required bool completed,
+}) async {
+  if (callback == null) return;
+  try {
+    await callback(
+      PlaybackReport(
+        run: run,
+        lastSlideId: run.perSlide.isEmpty ? null : run.perSlide.last.slideId,
+        completed: completed,
+      ),
+    ).timeout(const Duration(seconds: 2));
+  } on TimeoutException {
+    logWarning(
+      'FullscreenPresenter: voortgangsrapport duurt te lang; sluiten gaat door',
+    );
+  }
+}
+
 @visibleForTesting
 bool shouldUseDualScreen({
   required bool isDesktopNative,

@@ -173,7 +173,11 @@ flowchart LR
   eigen schijf opent, dragen geen badge.
 - **Opslaan**: `Ctrl/Cmd + S`. Bij het opslaan wordt een nette projectmap naast je
   `.md` neergezet (`images/`, `data/`, `logos/`, `themes/`) en worden assets erin
-  gekopieerd. Zie [`FILE_FORMAT.md`](FILE_FORMAT.md).
+  gekopieerd. Zie [`FILE_FORMAT.md`](FILE_FORMAT.md). Bij volgende opslagbeurten
+  worden alleen nieuw toegevoegde geheugenafbeeldingen gematerialiseerd; een
+  tekstwijziging leest en hasht het bestaande beeldarchief niet opnieuw.
+  Ongewijzigde gegenereerde thema-, configuratie- en sidecarbestanden blijven
+  ongemoeid.
 - **Terwijl een opslag loopt** verandert de opslagchip links in de statusbalk in
   een draaiend pictogram dat de bestemming noemt — *Opslaan…*, *Uploaden naar
   WebDAV…*, *Uploaden naar S3…*, *Committen naar git…* — en de opslagknop in de
@@ -4482,7 +4486,9 @@ De eLearning-module voegt diatypes voor lesmateriaal toe: een **leerdoel**, een
 **module**-kop, een **feedback**-dia en een **assessment-samenvatting**. Samen met
 de drie vraagsoorten die onder [Vraag-slides](#vraag-slides) staan beschreven, kun
 je een les in hetzelfde bestand schrijven als al het andere — gewone Marp-Markdown
-en geen apart auteursprogramma.
+en geen apart auteursprogramma. Het maken blijft lokaal; de optionele
+OciServe-koppeling hieronder is het afzonderlijke kanaal voor afspelen en
+voortgang.
 
 Zoals de andere optionele modules staat hij **standaard uit**. Zet hem aan onder
 **Instellingen → Uitbreidingen → eLearning**. De dialoog **Dia toevoegen** toont
@@ -4554,12 +4560,50 @@ Het **OciDeck-bestandsformaat** bewaart lesinhoud en toetsregels — het
 antwoordmodel, scoring, feedback, tijd, pogingsregels, slaaggrens en
 cursusstructuur. Het bewaart **geen resultaten van lerenden**: niet wie wat
 antwoordde, geen pogingen, geen persoonlijke voortgang, geen mastery, geen
-suspend data. Dat is geen gat dat in
+suspend data. De optionele OciServe-sessie hieronder blijft buiten het bestand en
+stuurt alleen de daar expliciet genoemde voortgangsvelden. Dat is geen gat dat in
 de bestaande velden nog opgevuld wordt: het formaat reserveert er met opzet geen
 sleutels voor, want een sleutel die "hier komen later resultaten" betekent krijgt
 of later een andere betekenis — wat het formaatcontract verbiedt — of een betekenis
 die botst met wat een andere build er al in schreef. Komt er ooit een
 resultatenlaag, dan krijgt die nieuwe sleutels in een nieuw bestand.
+
+### Een cursus uit OciServe volgen
+
+De OciServe-uitbreiding staat los van de auteursmodule en staat standaard uit.
+Open in de desktop-app **Instellingen → Uitbreidingen → OciServe**, zet haar aan,
+vul het HTTPS-adres van je organisatie in en meld je via de systeembrowser aan.
+OciDeck kan de aanmelding onthouden met een roterend vernieuwtoken in de
+sleutelbos van het besturingssysteem; schakel je dat uit, dan blijft het token
+alleen tijdens deze appsessie bestaan. De browserversie kan dit geheim niet
+veilig bewaren en biedt aanmelden bij OciServe daarom niet aan.
+
+Pas nadat `/me` je account en actieve organisatielidmaatschap heeft bevestigd,
+verschijnt onderaan **Nieuw tabblad** de knop **Mijn cursussen**. Die opent je
+leeromgeving: kies er een cursus en zie het aantal lessen, de status, voortgang
+en totale getoonde tijd. De gekozen cursus toont de volgende les: **Starten**
+begint die, **Verdergaan** opent haar bij het laatst bekende stabiele dia-anker,
+en een afgeronde cursus kun je opnieuw vanaf de eerste les starten. Na het
+afronden van een les kun je via het afrondscherm terug naar **Mijn cursussen**.
+Zo'n pakket kan in OciDeck alleen worden afgespeeld: bewerken en opslaan zijn
+niet beschikbaar. Dit is gebruiksbeleid en geen kopieerbeveiliging; een
+schermafbeelding blijft mogelijk.
+
+Een les kan een selectie uit een grotere presentatie zijn. OciDeck gebruikt
+daarvoor dezelfde duurzame markeringen **Overslaan** als bij gewoon
+presenteren: overgeslagen dia's blijven in de Markdown van de auteur staan, maar
+worden niet getoond en zijn geen geldige voortgangsposities. De overige dia's,
+in hun presentatievolgorde, vormen de les.
+
+Bij verlaten of afronden stuurt OciDeck één momentopname met de laatste dia,
+voltooiing en getoonde milliseconden per dia. Antwoorden, scores, notities en
+lesinhoud gaan niet als voortgang mee. “Getoond” is wandkloktijd op het scherm,
+geen bewijs van aandacht of leren. Is de server tijdelijk onbereikbaar, dan
+blijven maximaal 100 wachtende momentopnamen in de sleutelbos staan voor een
+nieuwe poging na de volgende geldige aanmelding. Uitloggen wist het
+vernieuwtoken, maar bewaart wachtende voortgang. Van server wisselen wordt
+geweigerd zolang die voortgang nog wacht; alleen het volledig terugzetten van
+lokale gegevens verwijdert de wachtrij bewust.
 
 ### SCORM, QTI, xAPI/cmi5, AICC en OLX importeren
 

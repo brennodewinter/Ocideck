@@ -165,4 +165,29 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     _rebuild(() => _advanceOnMediaEnd = !_advanceOnMediaEnd);
     _scheduleAdvance();
   }
+
+  Future<void> _exit({bool completed = false}) async {
+    if (_exiting) return;
+    _exiting = true;
+    _advanceTimer?.cancel();
+    final run = _rehearsal.finish();
+    await _reportPlayback(widget.onPlaybackFinished, run, completed: completed);
+    await _maybeShowRehearsalSummary(run);
+    final audience = widget.audience;
+    if (audience != null) {
+      // Dubbel sluiten laat de Linux-embedder crashen; de vlag hierboven maakt
+      // dit daarom bewust een eenmalige opruimactie.
+      await audience.close();
+    } else {
+      await setPresenterFullscreen(false);
+    }
+    if (mounted) Navigator.pop(context, _exitSlideId(widget.slides, _index));
+  }
+
+  /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan
+  /// staat. Sessie-only: niets wordt opgeslagen.
+  Future<void> _maybeShowRehearsalSummary(RehearsalRun run) async {
+    if (widget.playOnly || !widget.showRehearsalSummary || !mounted) return;
+    await showRehearsalSummary(context, run: run, slides: widget.slides);
+  }
 }

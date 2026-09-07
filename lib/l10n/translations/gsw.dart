@@ -1636,9 +1636,79 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bekeken: {tijd}': 'Agschaut: {tijd}',
+  'Doorgaan in de les': 'I dr Lektion wytermache',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Dr Server isch nöd gänderet worde, wil no Fortschritt uf s’Versände wartet.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Dä OciServe-Server bruucht {host} zum Aamälde. Date wärde ersch mit däm Identitätsanbieter uuschtuuscht, wenn Si das erlaubed.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Die Kurslektion isch nume zum Abspiele verfüegbar und wird nöd lokal gspeicheret.',
+  'Deze identiteitsprovider toestaan': 'Dä Identitätsanbieter erlaube',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Die Organisation het z’vill Lektione, zum si sicher azzeige.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Fortschritt wartet no uf Synchronisation.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Mit däre Uuswahl wird s’Aktualisierigstoken im Schlüsselbund gspeicheret. E verschlüssleti Warteschlange für no nöd gsendete Fortschritt wird devo getrennt gspeicheret.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'No nöd gsendete Fortschritt isch uf däm Grät gspeicheret worde.',
+  'Cursist': 'Kursteilnehmendi',
+  'Les afgerond': 'Lektion abgeschlossen',
+  'Cursussen voor u': 'Kurs für Si',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Mach det wiiter, wo Si ufg\'hört hend, oder wähled en andere Kurs, wo für Si parat isch.',
+  'Klaar om te beginnen': 'Parat zum Afange',
+  'Mijn cursussen': 'Mini Kurs',
+  'Mijn leeromgeving': 'Mini Lernumgebig',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Guet gmacht! Ihre Fortschritt isch gspeicheret.',
+  'Nu bezig': 'Am laufe',
+  'Opnieuw starten': 'No einisch starte',
+  'Terug naar mijn cursussen': 'Zrugg zu mine Kurs',
+  'U kunt deze cursus opnieuw bekijken.': 'Si chönd dä Kurs no einisch aluege.',
+  'Volgende: {les}': 'Nächsti: {les}',
+  'Welkom, {naam}': 'Willkomme, {naam}',
+  '{aantal} cursussen': '{aantal} Kurs',
+  '{aantal} lessen': '{aantal} Lektione',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Gib e gültigi OciServe-Adräss ii.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} Fortschrittsbricht warted uf Synchronisation.',
+  '{afgerond} van {totaal} lessen afgerond':
+      '{afgerond} vo {totaal} Lektione abgschlosse',
+  'Uitloggen': 'Abmälde',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Dis Konto ghört zu keiner aktive Organisation.',
+  'Verdergaan': 'Wiiterfahre',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Folg Kurs us dinere OciServe-Umgebig. Kursdateie gönd nur im Abspielmodus uf; Fortschritt wird erst nach em Aamälde synchronisiert.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Erlaub e HTTPS-Server im interne Netzwerk. Tokens werde nie über normali HTTP gschickt.',
   'Starten': 'Starte',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Während em Abspiele synchronisiert OciDeck d letschti Folie, dr Abschluss und d azeigt Zyt pro Folie mit dere Organisation. Das isch kein Bewiis für Uufmerksamkeit oder aktivi Lernzyt.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'D OciServe-Aamäldig isch nume i de Desktop-App verfüegbar, wil d Webversion kein sichere Schlüsselbund het.',
+  'OciServe-organisatie': 'OciServe-Organisation',
+  'OciServe-server': 'OciServe-Server',
   'Opleiding': 'Kurs',
+  'Ingelogd blijven op dit apparaat': 'Uf däm Grät aagmäld bliibe',
+  'Inloggen': 'Aamälde',
   'Les': 'Lektion',
+  'Er staan geen opleidingen voor u klaar.': 'Für di stöhnd kei Kurs bereit.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Bruuch e HTTPS-Adräss für OciServe.',
+  'Ingelogd als {naam}': 'Aagmäld als {naam}',
+  'Ingelogd bij OciServe': 'Bi OciServe aagmäld',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Biim Folge vo me Kurs schickt OciDeck dini letschti Folie, dr Abschluss und d azeigt Zyt pro Folie a d usgwählti OciServe-Organisation. Antworte, Notize und Kursinhalt werde nöd als Fortschritt gschickt.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'D lokali Aamäldig het nöd vollständig glöscht werde chönne. Versuechs nomal.',
+  'De opleidingen konden niet worden opgehaald.':
+      'D Kurs händ nöd abgruefe werde chönne.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'D Aamäldig bi OciServe isch fehlgschlage. Prüef de Server und versuechs nomal.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Erstell eLearning-Inhalt: Lernziil, Modul, Feedback und Bewertigs-Zämmefassige. Importier SCORM, QTI, xAPI, AICC und OLX lokal. Standardmässig us; schalt d Erwiiterig ii zum d Folietype z bruche.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

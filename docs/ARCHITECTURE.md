@@ -43,15 +43,19 @@ flowchart TB
 subprocess is the one path `net_guard` cannot hook, so the same outcome is
 imposed on `git` by configuration instead.*
 
-OciDeck is a **client-side app with no application backend**. On every platform —
+OciDeck is a **client-side editor with no required application backend**. On every platform —
 desktop and web alike — the editor, live preview, the on-device privacy scan
 (OciWacht), export to PDF/PPTX/HTML, and the CVSS/MIAUW engines run **in the
 process the user is looking at**: the native app on desktop, and on web the
 browser tab, into which the whole Dart-compiled bundle is downloaded and then
 run. Deck content is never shipped to a server to be processed.
 
-There is **no telemetry, analytics, or tracking** of any kind. The only HTTP
-client dependency is `http` (see `pubspec.yaml`) — no Firebase/Sentry/GA/PostHog.
+There is **no general telemetry or analytics**. The optional, default-off
+OciServe extension is an explicit, user-configured learning connection: it uses
+OIDC Authorization Code with PKCE, downloads immutable play-only `.ocideck`
+packages and sends course position, completion and displayed time per slide.
+Its network client uses `http` plus `openid_client` for the protocol model — no
+Firebase/Sentry/GA/PostHog.
 `video_player` and `webview_flutter` also reach the network, for remote media
 behind the Online-media gate. The optional, default-off *Videovergaderingen*
 module (`docs/design/NATIVE_CALLS.md`) adds a **second outbound stack**: an
@@ -76,7 +80,8 @@ until the user turns it on, and if signalling fails no media channel opens. Medi
 E2EE is off on iOS/macOS (a known `flutter_webrtc` crash) and OciDeck says so rather
 than claim it. And
 `web/index.html` ships a strict CSP (`default-src 'self'`; `connect-src 'self'
-https:`) with no third-party scripts. The app never phones home. (The only
+https:`) with no third-party scripts. The app never contacts an OciServe server
+until the user configures, enables and uses that extension. (The only
 `tracking` strings in `lib/` belong to the *privacy detector*, which flags
 trackers found in the user's own slides — not tracking of the user.)
 

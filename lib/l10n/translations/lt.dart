@@ -1640,9 +1640,77 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bekeken: {tijd}': 'Peržiūrėta: {tijd}',
+  'Doorgaan in de les': 'Tęsti pamokoje',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Serveris nebuvo pakeistas, nes pažanga vis dar laukia išsiuntimo.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Šis OciServe serveris prisijungimui naudoja {host}. Duomenimis su tuo tapatybės teikėju keičiamasi tik jums leidus.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Ši kursų pamoka prieinama tik atkūrimui ir nėra saugoma vietoje.',
+  'Deze identiteitsprovider toestaan': 'Leisti šį tapatybės teikėją',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Šioje organizacijoje yra per daug pamokų, kad jas būtų galima saugiai rodyti.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Pažanga vis dar laukia sinchronizavimo.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Pasirinkus šią parinktį, atnaujinimo prieigos raktas saugomas raktinėje. Užšifruota dar neišsiųstos pažangos eilė saugoma atskirai.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Dar neišsiųsta pažanga išsaugota šiame įrenginyje.',
+  'Cursist': 'Kurso dalyvis',
+  'Les afgerond': 'Pamoka baigta',
+  'Cursussen voor u': 'Kursai jums',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Tęskite nuo vietos, kur sustojote, arba pasirinkite kitą jums paruoštą kursą.',
+  'Klaar om te beginnen': 'Pasiruošę pradėti',
+  'Mijn cursussen': 'Mano kursai',
+  'Mijn leeromgeving': 'Mano mokymosi aplinka',
+  'Mooi gedaan! Uw voortgang is bewaard.': 'Puikiai! Jūsų pažanga išsaugota.',
+  'Nu bezig': 'Vyksta',
+  'Opnieuw starten': 'Pradėti iš naujo',
+  'Terug naar mijn cursussen': 'Grįžti į mano kursus',
+  'U kunt deze cursus opnieuw bekijken.':
+      'Šį kursą galite peržiūrėti dar kartą.',
+  'Volgende: {les}': 'Kitas: {les}',
+  'Welkom, {naam}': 'Sveiki, {naam}',
+  '{aantal} cursussen': '{aantal} kursų',
+  '{aantal} lessen': '{aantal} pamokų',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Įveskite galiojantį OciServe adresą.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} pažangos ataskaita/os laukia sinchronizavimo.',
+  '{afgerond} van {totaal} lessen afgerond':
+      'Baigta {afgerond} iš {totaal} pamokų',
+  'Uitloggen': 'Atsijungti',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Jūsų paskyra nepriklauso aktyviai organizacijai.',
+  'Verdergaan': 'Tęsti',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Lankykite kursus iš savo OciServe aplinkos. Kursų failai atidaromi tik atkūrimo režimu; pažanga sinchronizuojama tik prisijungus.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Leiskite HTTPS serverį vidiniame tinkle. Prieigos raktai niekada nesiunčiami paprastu HTTP.',
   'Starten': 'Pradėti',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Atkūrimo metu OciDeck sinchronizuoja su šia organizacija paskutinę skaidrę, užbaigimą ir rodomą laiką kiekvienai skaidrei. Tai nėra dėmesio ar aktyvaus mokymosi laiko įrodymas.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Prisijungti prie OciServe galima tik darbalaukio programoje, nes žiniatinklio versija neturi saugios raktinės.',
+  'OciServe-organisatie': 'OciServe organizacija',
+  'OciServe-server': 'OciServe serveris',
   'Opleiding': 'Kursas',
+  'Ingelogd blijven op dit apparaat': 'Likti prisijungus šiame įrenginyje',
+  'Inloggen': 'Prisijungti',
   'Les': 'Pamoka',
+  'Er staan geen opleidingen voor u klaar.': 'Jums nėra paruoštų kursų.',
+  'Gebruik een HTTPS-adres voor OciServe.': 'OciServe naudokite HTTPS adresą.',
+  'Ingelogd als {naam}': 'Prisijungta kaip {naam}',
+  'Ingelogd bij OciServe': 'Prisijungta prie OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Lankant kursą, OciDeck pasirinktai OciServe organizacijai siunčia paskutinę skaidrę, užbaigimą ir rodomą laiką kiekvienai skaidrei. Atsakymai, pastabos ir kurso turinys nesiunčiami kaip pažanga.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Nepavyko visiškai išvalyti vietinio prisijungimo. Bandykite dar kartą.',
+  'De opleidingen konden niet worden opgehaald.': 'Nepavyko gauti kursų.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Prisijungti prie OciServe nepavyko. Patikrinkite serverį ir bandykite dar kartą.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Kurkite eLearning turinį: mokymosi tikslai, moduliai, grįžtamasis ryšys ir vertinimo santraukos. Importuokite SCORM, QTI, xAPI, AICC ir OLX vietoje. Pagal numatytuosius nustatymus išjungta; įjunkite plėtinį, kad galėtumėte naudoti slaidų tipus.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

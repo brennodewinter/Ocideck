@@ -1610,9 +1610,76 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bekeken: {tijd}': 'leghlu\': {tijd}',
+  'Doorgaan in de les': 'ghojmoHghachDaq yIghoS',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'choHbe’ server, ‘ach latlh ghojmoHmeH ghojmoHta’lu’ ‘ej ngeHlu’meH loS.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'OciServe servervamvaD {host} lo’lu’ ‘elmeH. lujatlhDI’ qawHaq, identity providervamvaD De’ ngevlu’.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'ghojmoHmeH paqvam playbackvaD neH tu’lu’; DaqvamDaq polbe’lu’.',
+  'Deze identiteitsprovider toestaan': 'identity providervam chaw’',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'ghojmoHmeH paqmey law’qu’ ghaj tổvam; ‘ej motlhHa’ ‘anglu’laHbe’.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'ghojmoHta’lu’bogh ngevmeH loSlu’.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'chaw’lu’DI’ refresh token keychainDaq pollu’. ngeHlu’be’pu’bogh ghojmoHta’lu’boghvaD DoDmey ghajbogh chon pollu’, ‘ach pIm.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'DaqvamDaq pollu’pu’ ngeHlu’be’pu’bogh ghojmoHta’lu’bogh.',
+  'Cursist': 'ghojwI\'',
+  'Les afgerond': 'ghojmoH rIn',
+  'Cursussen voor u': 'SoHvaD ghojmoHmey',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'bImejpu\'Daq yIghojmeH, pagh SoHvaD rInbogh latlh ghojmoH yIwIv.',
+  'Klaar om te beginnen': 'taghmeH bIratlh\'a\'',
+  'Mijn cursussen': 'ghojmoHmeywIj',
+  'Mijn leeromgeving': 'ghojta\'wIj yuQ',
+  'Mooi gedaan! Uw voortgang is bewaard.': 'maj! polwI\'lIj leghlu\'pu\'.',
+  'Nu bezig': 'qaStaH',
+  'Opnieuw starten': 'qa\'ran yItagh',
+  'Terug naar mijn cursussen': 'ghojmoHmeywIjDaq yIchegh',
+  'U kunt deze cursus opnieuw bekijken.': 'ghojmoHvam bIleghqa\'laH.',
+  'Volgende: {les}': 'qaSpu\'Daq: {les}',
+  'Welkom, {naam}': 'bI\'el, {naam}',
+  '{aantal} cursussen': '{aantal} ghojmoHmey',
+  '{aantal} lessen': '{aantal} ghojmoHmey',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'OciServe address lugh yIghItlh.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} progress report sync wI\'loS.',
+  '{afgerond} van {totaal} lessen afgerond':
+      '{totaal} lessonvo\' {afgerond} rIn',
+  'Uitloggen': 'log out',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'accountlIj active organizationDaq botlhbe\'.',
+  'Verdergaan': 'yIjatlhqa\'',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'OciServe environmentlIjDaq course yIghoS. course file playback modeDaq neH poSlu\'; log inDI\' neH progress synclu\'.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'internal networkDaq HTTPS De\'wI\' yIchaw\'. ordinary HTTPDaq token ngeHlu\'be\'.',
   'Starten': 'tagh',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'playbackDaq OciDeck last slide, rIn, slide Hoch cha\'bogh poH je organizationvamDaq sync. attention pagh active learning time \'angbe\'.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'desktop appDaq neH OciServe log in tu\'lu\', web versionDaq secure keychain tu\'lu\'be\'mo\'.',
+  'OciServe-organisatie': 'OciServe DIvI\'',
+  'OciServe-server': 'OciServe De\'wI\'',
   'Opleiding': 'ghojmoH',
+  'Ingelogd blijven op dit apparaat': 'devicevamDaq log in yImejQo\'',
+  'Inloggen': 'log in',
   'Les': 'ghojmoH',
+  'Er staan geen opleidingen voor u klaar.': 'SoHvaD course tu\'lu\'be\'.',
+  'Gebruik een HTTPS-adres voor OciServe.': 'OciServevaD HTTPS address yIlo\'.',
+  'Ingelogd als {naam}': '{naam} pong log in',
+  'Ingelogd bij OciServe': 'OciServeDaq log in',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'courseDaq ghoSmeH, OciDeckDaq last slide, rIn, slide Hoch cha\'bogh poH je wI\'be\' OciServe organizationDaq ngeH. jangmeH, note, course De\' je progress mojmeH ngeHbe\'.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'local log in Hoch Qaw\'laHbe\'. yIqIlqa\'.',
+  'De opleidingen konden niet worden opgehaald.': 'coursepu\' wI\'laHbe\'.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'OciServeDaq log in Qapbe\'. De\'wI\' yIlegh; yIqIlqa\'.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'eLearning De\' yIchenmoH: ghojmoH janmey, yotlhmey, Feedback, loHmI\' wa\'DIchmey je. naDev SCORM, QTI, xAPI, AICC, OLX je yISuq. lurDech: chu\'be\'; \'echletHom Seghmey yIlo\'meH chelwI\' yIchu\'.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

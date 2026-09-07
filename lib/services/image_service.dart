@@ -531,11 +531,16 @@ class ImageService {
     final imagesDir = Directory(p.join(projectPath, 'images'));
     await imagesDir.create(recursive: true);
 
-    // Bouw een SHA-256 → projectrelatief-pad index van bestaande afbeeldingen,
-    // zodat een herimport of aanverwante presentatie geen duplicaten maakt: een
-    // afbeelding met dezelfde inhoud maar een andere bestandsnaam wordt
-    // hergebruikt in plaats van opnieuw weggeschreven.
-    final existingByHash = await _indexExistingImages(imagesDir, projectPath);
+    // Alleen mem:-afbeeldingen gebruiken de inhoudsindex voor deduplicatie.
+    // Een gewoon lokaal deck draagt na de eerste opslag uitsluitend relatieve
+    // paden; de hele images/-map bij élke tekstwijziging opnieuw hashen maakte
+    // Ctrl/Cmd+S lineair in alle afbeeldingsbytes zonder enig resultaat.
+    final needsContentIndex = slides.any(
+      (slide) => slideImagePaths(slide).any(WebAssetStore.isMemPath),
+    );
+    final existingByHash = needsContentIndex
+        ? await _indexExistingImages(imagesDir)
+        : null;
 
     final updated = <Slide>[];
     for (final slide in slides) {
@@ -556,10 +561,7 @@ class ImageService {
   /// Scan [imagesDir] en geef een kaart van SHA-256 → `images/<naam>` terug.
   /// Eén scan per opslaan, niet per afbeelding — de lineaire kosten worden zo
   /// één keer gemaakt, niet per `mem:`-pad opnieuw.
-  Future<Map<String, String>> _indexExistingImages(
-    Directory imagesDir,
-    String projectPath,
-  ) async {
+  Future<Map<String, String>> _indexExistingImages(Directory imagesDir) async {
     final map = <String, String>{};
     if (!imagesDir.existsSync()) return map;
     try {

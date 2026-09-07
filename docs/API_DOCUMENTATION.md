@@ -644,6 +644,29 @@ disabled privacy check yields an empty scan result, which is indistinguishable
 from a clean one: callers must pass `privacyChecksEnabled` so "we found nothing"
 is not rendered on top of "we did not look".
 
+## OciServe learner API
+
+`lib/services/ociserve/ociserve_gateway.dart` is the typed client boundary for
+the optional OciServe extension. After installation bootstrap and OIDC discovery,
+the authenticated client uses only self-scoped organisation routes:
+
+- `GET /api/v1/organizations/{organization_id}/me/learning-feed`
+- `GET /api/v1/organizations/{organization_id}/me/course-versions/{version_id}/lessons/{lesson_id}/package`
+- `GET /api/v1/organizations/{organization_id}/me/learning-state`
+- `POST /api/v1/organizations/{organization_id}/me/playback-sessions`
+
+The package endpoint returns binary `.ocideck` bytes and must include a matching
+SHA-256 `Digest`, an `ETag`, and `X-OciServe-Playback-Policy: play-only`. The
+non-skipped slides in the package, in presentation order, form the lesson;
+standalone `<!-- skip -->` slides are neither rendered nor accepted as progress
+anchors. The
+playback POST is an idempotent absolute snapshot identified by
+`client_session_id`; it carries stable slide anchors and
+`displayed_milliseconds`, never question answers, scores, notes or slide content.
+The participant identity is derived from the bearer token, not accepted from a
+client field. The authoritative schemas and authorization responses live in the
+OciServe repository's `docs/openapi.yaml`.
+
 ## Extending OciDeck
 
 ### Adding a slide type

@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/learning_session.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/services/user_notes_codec.dart';
@@ -55,6 +56,275 @@ void main() {
   tearDown(WebAssetStore.clear);
 
   group('TabsNotifier._openPackageFromBytes (via openDeckFromBytes)', () {
+    test('bindt een leerpakket atomair aan het ontvangende tabblad', () async {
+      final container = _container();
+      final markdown = container
+          .read(markdownServiceProvider)
+          .generateDeck(
+            Deck(
+              title: 'Les',
+              slides: [
+                Slide.create(
+                  SlideType.title,
+                ).copyWith(title: 'Les', anchor: 'les'),
+              ],
+            ),
+          );
+      final zip = _zipOf({'les.md': utf8.encode(markdown)});
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 6),
+      );
+
+      final result = await container
+          .read(tabsProvider.notifier)
+          .openLearningPackage(zip, 'les.ocideck', session);
+
+      expect(result, OpenResult.opened);
+      expect(
+        container.read(tabsProvider).current?.learningSession,
+        same(session),
+      );
+      expect(
+        container
+            .read(tabsProvider)
+            .current
+            ?.deckNotifier
+            .currentState
+            .filePath,
+        isNull,
+      );
+    });
+
+    test('past de bij publicatie bevroren OciServe-huisstijl toe', () async {
+      final container = _container();
+      final markdown = container
+          .read(markdownServiceProvider)
+          .generateDeck(
+            Deck(
+              title: 'Les',
+              slides: [
+                Slide.create(
+                  SlideType.title,
+                ).copyWith(title: 'Les', anchor: 'les'),
+              ],
+            ),
+          );
+      final zip = _zipOf({
+        'deck.md': utf8.encode(markdown),
+        'theme.json': utf8.encode(
+          jsonEncode({
+            'name': 'Bevroren',
+            'revision': 3,
+            'definition': {'accentColor': '#123456'},
+          }),
+        ),
+      });
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 7),
+      );
+
+      expect(
+        await container
+            .read(tabsProvider.notifier)
+            .openLearningPackage(zip, 'les.ocideck', session),
+        OpenResult.opened,
+      );
+      final theme = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!
+          .themeProfile;
+      expect(theme.name, 'Bevroren');
+      expect(theme.accentColor, '#123456');
+    });
+
+    test('weigert een leerpakket met een onleesbaar server-thema', () async {
+      final container = _container();
+      const source =
+          '---\nmarp: true\n---\n<!-- ocideck_slide_anchor: slide-1 -->\n# Les\n';
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 7),
+      );
+
+      final result = await container
+          .read(tabsProvider.notifier)
+          .openLearningPackage(
+            _zipOf({
+              'deck.md': utf8.encode(source),
+              'theme.json': utf8.encode('{"definition":false}'),
+            }),
+            'les.ocideck',
+            session,
+          );
+
+      expect(result, OpenResult.unreadable);
+      expect(container.read(tabsProvider).current?.learningSession, isNull);
+    });
+
+    test(
+      'begrensd leerpakket laat de ruimere lokale pakketroute intact',
+      () async {
+        final learningContainer = _container();
+        const source =
+            '---\nmarp: true\n---\n<!-- ocideck_slide_anchor: slide-1 -->\n# Les\n';
+        final zip = _zipOf({
+          'deck.md': utf8.encode(source),
+          // Nulbytes comprimeren klein, maar moeten tijdens uitpakken wel tegen
+          // het 32 MiB-budget van het servercontract lopen.
+          'assets/large.bin': Uint8List(33 * 1024 * 1024),
+        });
+        final session = LearningSessionRef(
+          serverUrl: 'https://leren.example',
+          accountId: 'account',
+          organizationId: 'org',
+          enrollmentId: 'enrollment',
+          courseVersionId: 'version',
+          lessonId: 'lesson',
+          packageHash: 'sha256:test',
+          startedAt: DateTime.utc(2026, 9, 7),
+        );
+
+        expect(
+          await learningContainer
+              .read(tabsProvider.notifier)
+              .openLearningPackage(zip, 'les.ocideck', session),
+          OpenResult.unreadable,
+        );
+
+        final localContainer = _container();
+        expect(
+          await localContainer
+              .read(tabsProvider.notifier)
+              .openDeckFromBytes(zip, 'lokaal.ocideck'),
+          OpenResult.opened,
+        );
+      },
+    );
+
+    test('weigert een leerpakket zonder stabiele dia-ankers', () async {
+      final container = _container();
+      const source = '---\nmarp: true\n---\n# Les\n';
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 6),
+      );
+
+      final result = await container
+          .read(tabsProvider.notifier)
+          .openLearningPackage(
+            _zipOf({'les.md': utf8.encode(source)}),
+            'les.ocideck',
+            session,
+          );
+
+      expect(result, OpenResult.unreadable);
+      expect(container.read(tabsProvider).current?.learningSession, isNull);
+    });
+
+    test('hervat een leerpakket op het stabiele dia-anker', () async {
+      final container = _container();
+      final markdown = container
+          .read(markdownServiceProvider)
+          .generateDeck(
+            Deck(
+              title: 'Les',
+              slides: [
+                Slide.create(
+                  SlideType.title,
+                ).copyWith(title: 'Begin', anchor: 'begin'),
+                Slide.create(
+                  SlideType.title,
+                ).copyWith(title: 'Verder', anchor: 'verder'),
+              ],
+            ),
+          );
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 6),
+      );
+
+      final result = await container
+          .read(tabsProvider.notifier)
+          .openLearningPackage(
+            _zipOf({'les.md': utf8.encode(markdown)}),
+            'les.ocideck',
+            session,
+            initialAnchor: 'verder',
+          );
+
+      expect(result, OpenResult.opened);
+      expect(
+        container
+            .read(tabsProvider)
+            .current!
+            .editorNotifier
+            .currentState
+            .selectedIndex,
+        1,
+      );
+    });
+
+    test('weigert een leerpakket met een ontsnappend lid volledig', () async {
+      final container = _container();
+      const source = '---\nmarp: true\n---\n# Les\n';
+      final archive = Archive()
+        ..add(ArchiveFile.bytes('les.md', utf8.encode(source)))
+        ..add(ArchiveFile.bytes('../verborgen.txt', utf8.encode('nee')));
+      final zip = ZipEncoder().encodeBytes(archive);
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 6),
+      );
+
+      final result = await container
+          .read(tabsProvider.notifier)
+          .openLearningPackage(zip, 'les.ocideck', session);
+
+      expect(result, isNot(OpenResult.opened));
+      expect(container.read(tabsProvider).current?.learningSession, isNull);
+    });
+
     test(
       'opent een pakket in het geheugen: afbeeldingen en notities mee',
       () async {

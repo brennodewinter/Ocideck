@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:path/path.dart' as p;
 
 import 'support/fastest_of.dart';
 
@@ -44,6 +50,17 @@ Deck buildLargeDeck(int slideCount) {
     organization: 'OciDeck',
     slides: slides,
   );
+}
+
+Future<Duration> _fastestAsync(int runs, Future<void> Function() action) async {
+  var best = const Duration(days: 1);
+  for (var run = 0; run < runs; run++) {
+    final stopwatch = Stopwatch()..start();
+    await action();
+    stopwatch.stop();
+    if (stopwatch.elapsed < best) best = stopwatch.elapsed;
+  }
+  return best;
 }
 
 /// Eén slide per index, cyclisch over de gangbare types. De inhoud is bewust
@@ -111,6 +128,7 @@ Slide _slideForIndex(int i) {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   final service = MarkdownService();
 
   group('Grote decks (>100 slides)', () {
@@ -196,5 +214,58 @@ void main() {
             'dat wijst op superlineair gedrag',
       );
     });
+
+    test(
+      'lokaal opslaan schaalt niet met reeds opgeslagen afbeeldingsbytes',
+      () async {
+        final temp = await Directory.systemTemp.createTemp(
+          'ocideck_save_perf_',
+        );
+        addTearDown(() => temp.delete(recursive: true));
+        final small = Directory(p.join(temp.path, 'small'))..createSync();
+        final large = Directory(p.join(temp.path, 'large'))..createSync();
+        final storedImage = File(p.join(large.path, 'images', 'bestaand.png'))
+          ..createSync(recursive: true);
+        final handle = storedImage.openSync(mode: FileMode.write);
+        handle.setPositionSync(ImageService.maxImageBytes - 1);
+        handle.writeByteSync(0);
+        handle.closeSync();
+
+        final slides = List.generate(
+          150,
+          (i) => Slide.create(SlideType.image).copyWith(
+            title: 'Afbeelding $i',
+            imagePath: 'images/image-$i.png',
+            imageCaption: 'Bronvermelding $i',
+          ),
+        );
+        final deck = Deck(title: 'Opslagmeting', slides: slides);
+        final files = FileService(
+          MarkdownService(),
+          ImageService(),
+          () => const ThemeProfile(),
+        );
+        final smallPath = p.join(small.path, 'deck.md');
+        final largePath = p.join(large.path, 'deck.md');
+        await files.saveDeck(deck, smallPath);
+        await files.saveDeck(deck, largePath);
+
+        final smallSave = await _fastestAsync(3, () async {
+          await files.saveDeck(deck, smallPath);
+        });
+        final largeSave = await _fastestAsync(3, () async {
+          await files.saveDeck(deck, largePath);
+        });
+
+        expect(
+          largeSave.inMicroseconds,
+          lessThan(smallSave.inMicroseconds * 3 + 100000),
+          reason:
+              'opslaan ging van $smallSave zonder beeldarchief naar $largeSave '
+              'met 64 MiB reeds opgeslagen beeld; bestaande bytes horen bij een '
+              'tekstwijziging niet opnieuw gelezen en gehasht te worden',
+        );
+      },
+    );
   });
 }
