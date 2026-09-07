@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.": {
+      "en": "Create eLearning content: learning objectives, modules, feedback and assessment summaries. Import SCORM, QTI, xAPI, AICC and OLX locally. Off by default; turn on the extension to use the slide types.",
+      "it": "Crea contenuti eLearning: obiettivi di apprendimento, moduli, feedback e riepiloghi delle valutazioni. Importa SCORM, QTI, xAPI, AICC e OLX localmente. Disattivato per impostazione predefinita; attiva l'estensione per usare i tipi di diapositiva.",
+      "de": "Erstellen Sie eLearning-Inhalte: Lernziele, Module, Feedback und Bewertungszusammenfassungen. Importieren Sie SCORM, QTI, xAPI, AICC und OLX lokal. Standardmäßig deaktiviert; aktivieren Sie die Erweiterung, um die Folientypen zu verwenden.",
+      "fr": "Créez du contenu eLearning : objectifs d'apprentissage, modules, feedback et résumés d'évaluation. Importez SCORM, QTI, xAPI, AICC et OLX localement. Désactivé par défaut ; activez l'extension pour utiliser les types de diapositive.",
+      "es": "Crea contenido eLearning: objetivos de aprendizaje, módulos, comentarios y resúmenes de evaluación. Importa SCORM, QTI, xAPI, AICC y OLX localmente. Desactivado por defecto; activa la extensión para usar los tipos de diapositiva.",
+      "fy": "Meitsje eLearning-ynhâld: learndoelen, modules, feedback en assessment-gearfettings. Ymportearje SCORM, QTI, xAPI, AICC en OLX lokaal. Standert út; set de utwreiding oan om de slidetypen te brûken.",
+      "pap": "Krea konteniúdo di eLearning: meta di aprendizage, módulo, feedback i resumen di evaluashon. Importa SCORM, QTI, xAPI, AICC i OLX lokál. Pa defekto apagá; sende e ekstenshon pa usa e tiponan di diapositiva.",
+      "la": "Crea contentum eLearning: proposita discendi, modulos, responsa et summaria assessment. Importa SCORM, QTI, xAPI, AICC et OLX localiter. Praedefinite inactivum; extensionem activa ut genera paginarum adhibeas.",
+      "id": "Buat konten eLearning: tujuan pembelajaran, modul, umpan balik, dan ringkasan asesmen. Impor SCORM, QTI, xAPI, AICC, dan OLX secara lokal. Nonaktif secara default; aktifkan ekstensi untuk menggunakan tipe slide.",
+      "pl": "Twórz treści eLearning: cele kształcenia, moduły, opinie i podsumowania ocen. Importuj SCORM, QTI, xAPI, AICC i OLX lokalnie. Domyślnie wyłączone; włącz rozszerzenie, aby używać typów slajdów.",
+      "uk": "Створюйте eLearning-контент: цілі навчання, модулі, зворотний зв'язок та підсумки оцінювання. Імпортуйте SCORM, QTI, xAPI, AICC та OLX локально. Вимкнено за замовчуванням; увімкніть розширення, щоб використовувати типи слайдів.",
+      "gsw": "Erstell eLearning-Inhalt: Lernziil, Modul, Feedback und Bewertigs-Zämmefassige. Importier SCORM, QTI, xAPI, AICC und OLX lokal. Standardmässig us; schalt d Erwiiterig ii zum d Folietype z bruche.",
+      "el": "Δημιουργήστε περιεχόμενο eLearning: στόχοι μάθησης, ενότητες, ανατροφοδότηση και περιλήψεις αξιολόγησης. Εισαγάγετε SCORM, QTI, xAPI, AICC και OLX τοπικά. Ανενεργό από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τους τύπους διαφανειών.",
+      "da": "Opret eLearning-indhold: læringsmål, moduler, feedback og evalueringsresuméer. Importér SCORM, QTI, xAPI, AICC og OLX lokalt. Slukket som standard; tænd udvidelsen for at bruge dias-typerne.",
+      "sv": "Skapa eLearning-innehåll: lärandemål, moduler, feedback och bedömningssammanfattningar. Importera SCORM, QTI, xAPI, AICC och OLX lokalt. Av som standard; slå på tillägget för att använda diatyperna.",
+      "hr": "Stvorite eLearning sadržaj: ciljevi učenja, moduli, povratne informacije i sažetci ocjenjivanja. Uvezite SCORM, QTI, xAPI, AICC i OLX lokalno. Isključeno prema zadanim postavkama; uključite proširenje da biste koristili vrste slajdova.",
+      "cs": "Vytvářejte eLearning obsah: cíle učení, moduly, zpětnou vazbu a shrnutí hodnocení. Importujte SCORM, QTI, xAPI, AICC a OLX lokálně. Ve výchozím nastavení vypnuto; zapněte rozšíření pro použití typů snímků.",
+      "fi": "Luo eLearning-sisältöä: oppimistavoitteet, moduulit, palaute ja arvioinnin yhteenvedot. Tuo SCORM, QTI, xAPI, AICC ja OLX paikallisesti. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi diatyyppejä.",
+      "bg": "Създавайте eLearning съдържание: цели за обучение, модули, обратна връзка и обобщения на оценяването. Импортирайте SCORM, QTI, xAPI, AICC и OLX локално. Изключено по подразбиране; включете разширението, за да използвате типовете слайдове.",
+      "lv": "Izveidojiet eLearning saturu: mācību mērķi, moduļi, atsauksmes un vērtēšanas kopsavilkumi. Importējiet SCORM, QTI, xAPI, AICC un OLX lokāli. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaidu tipus.",
+      "lt": "Kurkite eLearning turinį: mokymosi tikslai, moduliai, grįžtamasis ryšys ir vertinimo santraukos. Importuokite SCORM, QTI, xAPI, AICC ir OLX vietoje. Pagal numatytuosius nustatymus išjungta; įjunkite plėtinį, kad galėtumėte naudoti slaidų tipus.",
+      "mt": "Oħloq kontenut eLearning: għanijiet ta' tagħlim, moduli, feedback u sommarji ta' evalwazzjoni. Importa SCORM, QTI, xAPI, AICC u OLX lokalment. Mitfi awtomatikament; ixġħel l-estensjoni biex tuża t-tipi ta' slides.",
+      "et": "Loo eLearning sisu: õpieesmärgid, moodulid, tagasiside ja hindamise kokkuvõtted. Impordi SCORM, QTI, xAPI, AICC ja OLX lokaalselt. Vaikimisi väljas; lülita laiendus sisse, et kasutada slaiditüüpe.",
+      "hu": "Hozzon létre eLearning tartalmat: tanulási célok, modulok, visszajelzések és értékelési összefoglalók. Importálja a SCORM, QTI, xAPI, AICC és OLX fájlokat helyileg. Alapértelmezetten kikapcsolva; kapcsolja be a kiterjesztést a diatípusok használatához.",
+      "ga": "Cruthaigh ábhar eLearning: cuspóirí foghlama, modúil, aiseolas agus achoimrí meastóireachta. Iompórtáil SCORM, QTI, xAPI, AICC agus OLX go háitiúil. Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na cineálacha sleamhnán a úsáid.",
+      "pt": "Crie conteúdo eLearning: objetivos de aprendizagem, módulos, feedback e resumos de avaliação. Importe SCORM, QTI, xAPI, AICC e OLX localmente. Desativado por padrão; ative a extensão para usar os tipos de slide.",
+      "ro": "Creați conținut eLearning: obiective de învățare, module, feedback și rezumate de evaluare. Importați SCORM, QTI, xAPI, AICC și OLX local. Dezactivat implicit; activați extensia pentru a folosi tipurile de diapozitive.",
+      "sl": "Ustvarjajte eLearning vsebino: učne cilje, module, povratne informacije in povzetke ocenjevanja. Uvozite SCORM, QTI, xAPI, AICC in OLX lokalno. Privzeto izklopljeno; vklopite razširitev za uporabo vrst diapozitivov.",
+      "sk": "Tvorte eLearning obsah: učebné ciele, moduly, spätnú väzbu a zhrnutia hodnotenia. Importujte SCORM, QTI, xAPI, AICC a OLX lokálne. Predvolene vypnuté; zapnite rozšírenie, aby ste mohli používať typy snímok.",
+      "tlh": "eLearning De' yIchenmoH: ghojmoH janmey, yotlhmey, Feedback, loHmI' wa'DIchmey je. naDev SCORM, QTI, xAPI, AICC, OLX je yISuq. lurDech: chu'be'; 'echletHom Seghmey yIlo'meH chelwI' yIchu'.",
+      "tr": "eLearning içeriği oluşturun: öğrenme hedefleri, modüller, geri bildirim ve değerlendirme özetleri. SCORM, QTI, xAPI, AICC ve OLX'i yerel olarak içe aktarın. Varsayılan olarak kapalı; slayt türlerini kullanmak için uzantıyı açın."
+    }
+  }
+}
