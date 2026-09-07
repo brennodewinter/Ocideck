@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 
 const kOciServeSettingsKey = 'ociserveSettingsV1';
 
+/// Common OciServe ports, in the order used by the local development stack.
+const kKnownOciServePorts = [8443, 1428, 8080];
+
 /// Non-secret configuration for the optional OciServe learning connector.
 /// OAuth credentials belong in [SecretStore], never in preferences or decks.
 @immutable
@@ -66,6 +69,23 @@ String normalizeOciServeBaseUrl(String raw) {
     value = value.substring(0, value.length - 1);
   }
   return value;
+}
+
+/// Returns the entered address first, followed by the same host on known
+/// OciServe ports. Authentication remains HTTPS-only on every candidate.
+List<OciServeSettings> ociServeConnectionCandidates(OciServeSettings settings) {
+  final baseUrl = settings.normalizedBaseUrl;
+  final uri = Uri.tryParse(baseUrl);
+  if (uri == null || !uri.hasAuthority) return [settings];
+
+  final urls = <String>[baseUrl];
+  for (final port in kKnownOciServePorts) {
+    final candidate = normalizeOciServeBaseUrl(
+      uri.replace(port: port).toString(),
+    );
+    if (!urls.contains(candidate)) urls.add(candidate);
+  }
+  return [for (final url in urls) settings.copyWith(baseUrl: url)];
 }
 
 /// Returns a stable machine-readable refusal reason, or null when usable.
