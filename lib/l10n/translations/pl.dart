@@ -1645,9 +1645,79 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bekeken: {tijd}': 'Obejrzano: {tijd}',
+  'Doorgaan in de les': 'Kontynuuj lekcję',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Serwer nie został zmieniony, ponieważ postęp nadal czeka na wysłanie.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Ten serwer OciServe używa {host} do logowania. Dane są wymieniane z tym dostawcą tożsamości dopiero po wyrażeniu zgody.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Ta lekcja kursu jest dostępna tylko do odtworzenia i nie jest zapisywana lokalnie.',
+  'Deze identiteitsprovider toestaan': 'Zezwól na tego dostawcę tożsamości',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Ta organizacja zawiera zbyt wiele lekcji, aby można je było bezpiecznie wyświetlić.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Postęp nadal czeka na synchronizację.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Przy tym wyborze token odświeżania jest przechowywany w pęku kluczy. Zaszyfrowana kolejka postępu, który nie został jeszcze wysłany, jest przechowywana oddzielnie.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Postęp, który nie został jeszcze wysłany, zapisano na tym urządzeniu.',
+  'Cursist': 'Uczący się',
+  'Les afgerond': 'Lekcja ukończona',
+  'Cursussen voor u': 'Kursy dla Ciebie',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Kontynuuj od miejsca, w którym skończyłeś(-aś), lub wybierz inny kurs przygotowany dla Ciebie.',
+  'Klaar om te beginnen': 'Gotowy, aby zacząć',
+  'Mijn cursussen': 'Moje kursy',
+  'Mijn leeromgeving': 'Moje środowisko nauki',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Dobra robota! Twoje postępy zostały zapisane.',
+  'Nu bezig': 'W toku',
+  'Opnieuw starten': 'Rozpocznij ponownie',
+  'Terug naar mijn cursussen': 'Wróć do moich kursów',
+  'U kunt deze cursus opnieuw bekijken.': 'Możesz ponownie przejrzeć ten kurs.',
+  'Volgende: {les}': 'Dalej: {les}',
+  'Welkom, {naam}': 'Witamy, {naam}',
+  '{aantal} cursussen': '{aantal} kursów',
+  '{aantal} lessen': '{aantal} lekcji',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Wprowadź prawidłowy adres OciServe.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} raport(y) postępu oczekuje/oczekują na synchronizację.',
+  '{afgerond} van {totaal} lessen afgerond':
+      'Ukończono {afgerond} z {totaal} lekcji',
+  'Uitloggen': 'Wyloguj się',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Twoje konto nie należy do aktywnej organizacji.',
+  'Verdergaan': 'Kontynuuj',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Realizuj kursy ze swojego środowiska OciServe. Pliki kursów otwierają się tylko w trybie odtwarzania; postęp jest synchronizowany dopiero po zalogowaniu.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Zezwól na serwer HTTPS w sieci wewnętrznej. Tokeny nigdy nie są wysyłane przez zwykłe HTTP.',
   'Starten': 'Rozpocznij',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Podczas odtwarzania OciDeck synchronizuje z tą organizacją ostatni slajd, ukończenie oraz czas wyświetlania każdego slajdu. Nie jest to dowód uwagi ani aktywnego czasu nauki.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Logowanie do OciServe jest dostępne tylko w aplikacji komputerowej, ponieważ wersja internetowa nie ma bezpiecznego pęku kluczy.',
+  'OciServe-organisatie': 'Organizacja OciServe',
+  'OciServe-server': 'Serwer OciServe',
   'Opleiding': 'Kurs',
+  'Ingelogd blijven op dit apparaat': 'Pozostań zalogowany na tym urządzeniu',
+  'Inloggen': 'Zaloguj się',
   'Les': 'Lekcja',
+  'Er staan geen opleidingen voor u klaar.':
+      'Nie ma dla Ciebie dostępnych kursów.',
+  'Gebruik een HTTPS-adres voor OciServe.': 'Użyj adresu HTTPS dla OciServe.',
+  'Ingelogd als {naam}': 'Zalogowano jako {naam}',
+  'Ingelogd bij OciServe': 'Zalogowano do OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Podczas realizacji kursu OciDeck wysyła do wybranej organizacji OciServe ostatni slajd, ukończenie oraz czas wyświetlania każdego slajdu. Odpowiedzi, notatki i treść kursu nie są wysyłane jako postęp.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Nie można było całkowicie usunąć lokalnego logowania. Spróbuj ponownie.',
+  'De opleidingen konden niet worden opgehaald.':
+      'Nie można było pobrać kursów.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Logowanie do OciServe nie powiodło się. Sprawdź serwer i spróbuj ponownie.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Twórz treści eLearning: cele kształcenia, moduły, opinie i podsumowania ocen. Importuj SCORM, QTI, xAPI, AICC i OLX lokalnie. Domyślnie wyłączone; włącz rozszerzenie, aby używać typów slajdów.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

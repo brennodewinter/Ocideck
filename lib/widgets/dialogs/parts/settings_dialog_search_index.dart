@@ -508,6 +508,12 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     section: 'Uitbreidingen',
     keywords: ['webdav', 's3', 'git', 'server', 'online', 'module', 'opslag'],
   ),
+  SettingsSearchEntry(
+    tab: SettingsSection.modules,
+    label: 'OciServe',
+    section: 'Uitbreidingen',
+    keywords: ['ociserve', 'cursus', 'opleiding', 'leren', 'training'],
+  ),
   // Wie "openkat" zoekt terwijl de module uit staat, moet uitkomen waar hij
   // hem aanzet — precies zoals bij Online opslag hierboven. Deze ingang wijst
   // daarom naar Uitbreidingen en niet naar Integraties, want dat tabblad

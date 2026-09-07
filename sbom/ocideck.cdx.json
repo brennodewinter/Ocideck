@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:199032f9-0b58-5013-8c57-eaf83678a12e",
+  "serialNumber": "urn:uuid:245f3446-2e28-5e55-82ef-460f083fac47",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-04T05:21:37.792528Z",
+    "timestamp": "2026-09-06T17:00:00.018153Z",
     "tools": {
       "components": [
         {
@@ -259,6 +259,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/args/versions/2.7.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/asn1lib@1.6.5",
+      "type": "library",
+      "supplier": {
+        "name": "wstrange",
+        "url": [
+          "https://github.com/wstrange"
+        ]
+      },
+      "name": "asn1lib",
+      "version": "1.6.5",
+      "purl": "pkg:pub/asn1lib@1.6.5",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9a8f69025044eb466b9b60ef3bc3ac99b4dc6c158ae9c56d25eeccf5bc56d024"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/asn1lib/versions/1.6.5"
         }
       ],
       "properties": [
@@ -932,6 +974,48 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/crypto_keys@0.3.1",
+      "type": "library",
+      "supplier": {
+        "name": "appsup-dart",
+        "url": [
+          "https://github.com/appsup-dart"
+        ]
+      },
+      "name": "crypto_keys",
+      "version": "0.3.1",
+      "purl": "pkg:pub/crypto_keys@0.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6e473fff865ec757174dcc585d6eaa7f5f40bf3cb58f444ec5ab4a01e9083cf9"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/crypto_keys/versions/0.3.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
         }
       ]
     },
@@ -3813,6 +3897,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/jose@0.3.5+2",
+      "type": "library",
+      "supplier": {
+        "name": "appsup-dart",
+        "url": [
+          "https://github.com/appsup-dart"
+        ]
+      },
+      "name": "jose",
+      "version": "0.3.5+2",
+      "purl": "pkg:pub/jose@0.3.5+2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a0a339d0a0652dc1bd89f8b92d38479e07e16db83858fb55fa57212479f323f7"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/jose/versions/0.3.5+2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/js@0.7.2",
       "type": "library",
       "supplier": {
@@ -4602,6 +4728,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/openid_client@0.4.10+1",
+      "type": "library",
+      "supplier": {
+        "name": "appsup-dart",
+        "url": [
+          "https://github.com/appsup-dart"
+        ]
+      },
+      "name": "openid_client",
+      "version": "0.4.10+1",
+      "purl": "pkg:pub/openid_client@0.4.10+1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "07dba3e19a503b055a0b69e569bfba0ddd78687dae767fdc84e5c76814b76ed5"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/openid_client/versions/0.4.10+1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/package_config@2.2.0",
       "type": "library",
       "supplier": {
@@ -5270,6 +5438,48 @@
         {
           "name": "cdx:pub:scope",
           "value": "direct dev"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pointycastle@4.0.0",
+      "type": "library",
+      "supplier": {
+        "name": "bcgit",
+        "url": [
+          "https://github.com/bcgit"
+        ]
+      },
+      "name": "pointycastle",
+      "version": "4.0.0",
+      "purl": "pkg:pub/pointycastle@4.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "92aa3841d083cc4b0f4709b5c74fd6409a3e6ba833ffc7dc6a8fee096366acf5"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pointycastle/versions/4.0.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
         }
       ]
     },
@@ -8667,6 +8877,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/x509@0.2.4+3",
+      "type": "library",
+      "supplier": {
+        "name": "appsup-dart",
+        "url": [
+          "https://github.com/appsup-dart"
+        ]
+      },
+      "name": "x509",
+      "version": "0.2.4+3",
+      "purl": "pkg:pub/x509@0.2.4+3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cbd1a63846884afd273cda247b0365284c8d85a365ca98e110413f93d105b935"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/x509/versions/0.2.4+3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/xdg_directories@1.1.0",
       "type": "library",
       "supplier": {
@@ -9465,8 +9717,10 @@
         "pkg:pub/http@1.6.0",
         "pkg:pub/image@4.9.2",
         "pkg:pub/intl@0.20.3",
+        "pkg:pub/jose@0.3.5+2",
         "pkg:pub/markdown@7.3.1",
         "pkg:pub/material_ui@1.0.1",
+        "pkg:pub/openid_client@0.4.10+1",
         "pkg:pub/pasteboard@0.5.0",
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
@@ -9536,6 +9790,10 @@
     },
     {
       "ref": "pkg:pub/args@2.7.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:pub/asn1lib@1.6.5",
       "dependsOn": []
     },
     {
@@ -9639,6 +9897,15 @@
       "ref": "pkg:pub/crypto@3.0.7",
       "dependsOn": [
         "pkg:pub/typed_data@1.4.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/crypto_keys@0.3.1",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/meta@1.19.0",
+        "pkg:pub/pointycastle@4.0.0",
+        "pkg:pub/quiver@3.2.2"
       ]
     },
     {
@@ -10260,6 +10527,20 @@
       ]
     },
     {
+      "ref": "pkg:pub/jose@0.3.5+2",
+      "dependsOn": [
+        "pkg:pub/archive@4.0.9",
+        "pkg:pub/asn1lib@1.6.5",
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/crypto_keys@0.3.1",
+        "pkg:pub/http@1.6.0",
+        "pkg:pub/http_parser@4.1.2",
+        "pkg:pub/meta@1.19.0",
+        "pkg:pub/typed_data@1.4.0",
+        "pkg:pub/x509@0.2.4+3"
+      ]
+    },
+    {
       "ref": "pkg:pub/js@0.7.2",
       "dependsOn": []
     },
@@ -10401,6 +10682,19 @@
       ]
     },
     {
+      "ref": "pkg:pub/openid_client@0.4.10+1",
+      "dependsOn": [
+        "pkg:pub/args@2.7.0",
+        "pkg:pub/clock@1.1.2",
+        "pkg:pub/http@1.6.0",
+        "pkg:pub/jose@0.3.5+2",
+        "pkg:pub/logging@1.3.0",
+        "pkg:pub/meta@1.19.0",
+        "pkg:pub/pointycastle@4.0.0",
+        "pkg:pub/web@1.1.1"
+      ]
+    },
+    {
       "ref": "pkg:pub/package_config@2.2.0",
       "dependsOn": [
         "pkg:pub/path@1.9.1"
@@ -10535,6 +10829,13 @@
       "ref": "pkg:pub/plugin_platform_interface@2.1.8",
       "dependsOn": [
         "pkg:pub/meta@1.19.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/pointycastle@4.0.0",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/convert@3.1.2"
       ]
     },
     {
@@ -11211,6 +11512,14 @@
         "pkg:pub/path@1.9.1",
         "pkg:pub/win32@6.4.0",
         "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/x509@0.2.4+3",
+      "dependsOn": [
+        "pkg:pub/asn1lib@1.6.5",
+        "pkg:pub/crypto_keys@0.3.1",
+        "pkg:pub/quiver@3.2.2"
       ]
     },
     {

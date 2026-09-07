@@ -179,6 +179,12 @@ const Set<String> uncoveredBaseline = {
   'lib/platform/presenter_fullscreen_web.dart',
   'lib/services/cve_transport_factory.dart',
   'lib/services/cve_transport_web.dart',
+  // PLATFORM: de twee OciServe-fabrieken zijn kale conditional-importnaden;
+  // hun io-helften worden rechtstreeks gedekt door ociserve_platform_io_test.
+  // De webhelften weigeren alleen fail-closed en worden rechtstreeks geladen
+  // door ociserve_web_stubs_test.
+  'lib/services/ociserve/ociserve_auth_platform.dart',
+  'lib/services/ociserve/ociserve_http_factory.dart',
   // NO EXECUTABLE LINES: `mermaid_config.dart` is één bron van waarheid voor de
   // mermaid-instellingen — alleen const-declaraties, lcov schrijft er geen
   // record voor. PLATFORM: `mermaid_web_renderer.dart` is de web-helft die

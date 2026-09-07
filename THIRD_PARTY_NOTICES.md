@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-> **Status:** current-state notices, maintained by hand; the SBOM is the machine-readable authority · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state notices, maintained by hand; the SBOM is the machine-readable authority · **Status last reviewed:** 2026-09-07 · **Published by:** Stichting LibreKAT
 
 OciDeck is licensed under the EUPL-1.2 (see [`LICENSE.md`](LICENSE.md)). It
 builds on, and bundles, third-party components that remain under their own
@@ -104,6 +104,8 @@ same answer `make licenses` and the SBOM give.
 | `markdown` | Markdown parsing outside the Marp path | BSD-3-Clause |
 | `xml` | PPTX (OOXML) writing and SVG handling | MIT |
 | `http` | WebDAV/Nextcloud and Git-over-HTTPS transport (through NetGuard) | BSD-3-Clause |
+| `openid_client` | OpenID Connect Authorization Code + PKCE protocol handling for the optional OciServe connector; all requests use OciDeck's pinned transport | BSD-3-Clause |
+| `jose` | Verifies OciServe ID-token signatures against JWKS fetched through OciDeck's pinned transport | BSD-3-Clause |
 | `html` | Parses clipboard HTML into Markdown (never rendered) | MIT |
 | `webview_flutter`, `webview_flutter_web` | The HTML/Mermaid preview surface | BSD-3-Clause |
 | `web` | Browser interop in the web build | BSD-3-Clause |
@@ -156,4 +158,3 @@ Other names that appear in the interface or the documentation — operating
 systems, browsers, standards bodies, the reference catalogues listed in
 [`docs/LICENSE_COMPLIANCE.md`](docs/LICENSE_COMPLIANCE.md) — belong to their
 respective owners and are likewise used only to identify the thing they name.
-

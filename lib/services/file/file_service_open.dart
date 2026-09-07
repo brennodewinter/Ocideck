@@ -713,7 +713,7 @@ Future<void> _writeSidecarNextTo(
   if (json == null) {
     if (await sidecar.exists()) await sidecar.delete();
   } else {
-    await writeStringAtomic(sidecar, json);
+    await writeStringAtomicIfChanged(sidecar, json);
   }
 }
 

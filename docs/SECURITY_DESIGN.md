@@ -17,17 +17,53 @@ for a GitHub mirror and do not execute there.)
 
 ## Overview
 
-OciDeck has a strong client-side security model with **no application backend**.
+OciDeck has a strong client-side security model with **no required application backend**.
 The app runs locally on the user's machine (desktop) or in a browser tab (web);
 presentation content never leaves the device during editing, previewing,
 presenting, or exporting. The only network traffic is explicit and
 user-initiated (URL import, WebDAV/Nextcloud, S3, git storage, optional AI), and
-each path is individually gated.
+each path is individually gated. The optional OciServe learning extension adds
+an authenticated backend chosen by the user; it is disabled by default and
+unavailable in the web build because that build has no safe token store.
+
+### OciServe trust boundary
+
+OciServe login uses the system browser, Authorization Code with PKCE and a
+loopback callback. Discovery, token and API endpoints must be HTTPS. Native
+requests resolve through `NetGuard`, pin the connection to the validated address,
+refuse redirects and bound response sizes; private targets require the explicit
+trusted-internal-server switch. Access tokens stay in memory. A rotating refresh
+token and at most 100 pending playback snapshots are held in the OS keychain and
+are handled separately: logout deletes the token but preserves unsent progress;
+a server change is refused while progress still waits. The full local-data reset
+is the explicit action that deletes both.
+
+The installation may delegate login to an identity provider on another host.
+OciDeck shows that host and waits for explicit acceptance before it requests
+discovery metadata from the additional party. Refresh tokens are bound to the
+issuer, client and token endpoint that issued them and are never sent to newly
+discovered endpoints after a server configuration change.
+
+Authentication is accepted only after the access token succeeds against `/me`
+and the returned account has an active membership. Learner routes derive the
+participant from that token and OciDeck only permits organisation identifiers
+returned by `/me`. Course downloads require the server's play-only header and a
+matching SHA-256 Digest, are decoded with strict duplicate/path checks, and are
+bound to an external tab session so identity and progress can never be saved or
+exported with the deck. “Play only” is an application policy, not DRM; a user
+controlling their computer can still capture displayed content.
+
+On presenter exit OciDeck sends one idempotent absolute snapshot containing the
+immutable course-version and lesson identifiers, stable slide anchors, completion
+and displayed milliseconds per slide. Answers, scores, notes and slide content
+are excluded. Failed snapshots stay encrypted for retry. Displayed time is not
+treated as evidence of attention, presence or learning.
 
 ## Core principles
 
-1. **File = truth.** Storage stays as close to plain Markdown as possible; there
-   is no opaque database and no server that could retain user data.
+1. **File = truth.** Authoring storage stays as close to plain Markdown as
+   possible; OciDeck has no opaque editor database. The optional OciServe
+   learning service separately retains account, enrolment and playback data.
 2. **Zero implicit trust in inputs.** Every deck, asset, and network response is
    treated as untrusted and validated before use.
 3. **No egress without consent.** Nothing leaves the machine unless the user

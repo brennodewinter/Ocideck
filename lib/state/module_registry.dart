@@ -28,6 +28,7 @@ import 'settings_provider.dart';
 import 'asset_rights_module_provider.dart';
 import 'libreplan_provider.dart';
 import 'elearning_provider.dart';
+import 'ociserve_provider.dart';
 
 /// De optionele modules, in de volgorde waarin het Uitbreidingen-tabblad ze
 /// toont.
@@ -43,6 +44,7 @@ enum ModuleId {
   managementsysteem,
   libreplan,
   elearning,
+  ociServe,
 }
 
 /// Eén module in het register: wie hij is en waar zijn poorten staan.
@@ -147,5 +149,10 @@ final List<ModuleEntry> moduleRegistry = [
     id: ModuleId.elearning,
     enabled: elearningEnabledProvider,
     revealed: elearningRevealProvider,
+  ),
+  ModuleEntry(
+    id: ModuleId.ociServe,
+    enabled: ociServeEnabledProvider,
+    revealed: ociServeEnabledProvider,
   ),
 ];

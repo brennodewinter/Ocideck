@@ -188,7 +188,6 @@ extension SettingsTraces on SettingsNotifier {
     // terug" heeft gekozen, is precies het spoor dat hij dacht te wissen.
     await _secrets.deleteSecretsOf(currentState.connections);
     await _secrets.deletePrivacyOwnIdentity();
-
     await _diskTraces.clearAllGitWorkingCopies();
     await _diskTraces.clearStyleLogos();
     await _diskTraces.clearGitSandbox();

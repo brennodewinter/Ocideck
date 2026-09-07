@@ -63,8 +63,30 @@ class ImageSidecarStore {
 
   /// Zet — of verwijder, bij lege [value] — de tekst voor [resolvedImagePath].
   /// De sidecar zelf wordt verwijderd zodra de laatste entry verdwijnt.
-  Future<void> write(String resolvedImagePath, String value) async {
-    final file = fileFor(resolvedImagePath);
+  Future<void> write(String resolvedImagePath, String value) => _writeEntries(
+    fileFor(resolvedImagePath),
+    {p.basename(resolvedImagePath): value},
+  );
+
+  /// Zet meerdere waarden met hoogstens één lees- en schrijfbeurt per map.
+  /// Deck-opslag biedt alle bijschriften tegelijk aan; ze één voor één verwerken
+  /// las, parseerde en flushte dezelfde groeiende JSON-sidecar voor elke dia.
+  Future<void> writeAll(Map<String, String> valuesByResolvedPath) async {
+    final entriesByFile = <String, Map<String, String>>{};
+    for (final entry in valuesByResolvedPath.entries) {
+      final file = fileFor(entry.key);
+      entriesByFile.putIfAbsent(file.path, () => {})[p.basename(entry.key)] =
+          entry.value;
+    }
+    for (final entry in entriesByFile.entries) {
+      await _writeEntries(File(entry.key), entry.value);
+    }
+  }
+
+  Future<void> _writeEntries(
+    File file,
+    Map<String, String> replacements,
+  ) async {
     Map<String, dynamic> data = {};
     if (file.existsSync()) {
       try {
@@ -87,16 +109,17 @@ class ImageSidecarStore {
         throw SidecarUnreadable(file.path, e);
       }
     }
-    final key = p.basename(resolvedImagePath);
-    if (value.trim().isEmpty) {
-      data.remove(key);
-    } else {
-      data[key] = value.trim();
+    for (final entry in replacements.entries) {
+      if (entry.value.trim().isEmpty) {
+        data.remove(entry.key);
+      } else {
+        data[entry.key] = entry.value.trim();
+      }
     }
     if (data.isEmpty) {
       if (file.existsSync()) await file.delete();
     } else {
-      await writeStringAtomic(
+      await writeStringAtomicIfChanged(
         file,
         const JsonEncoder.withIndent('  ').convert(data),
       );

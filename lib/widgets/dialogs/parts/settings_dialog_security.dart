@@ -4,6 +4,9 @@
 // _SettingsDialogState — same library, same members, no behaviour change.
 part of '../settings_dialog.dart';
 
+Future<bool> _resetOciServeData(WidgetRef ref) =>
+    ref.read(ociServeProvider.notifier).resetLocalData();
+
 extension _SettingsSecurity on _SettingsDialogState {
   Widget _securityTab() {
     final l10n = context.l10n;
@@ -268,10 +271,7 @@ extension _SettingsSecurity on _SettingsDialogState {
 
   /// Terug naar de begintoestand — met twee drempels, niet één.
   ///
-  /// De eerste is de gewone bevestiging. De tweede is wachtend git-werk: dat
-  /// bestaat nergens anders, en een knop die "alles terugzetten" heet mag daar
-  /// niet stilzwijgend overheen. Wie dat niet wil kwijtraken, sluit eerst zijn
-  /// werk af en komt terug.
+  /// Eerst bevestigen; wachtend git-werk vraagt een tweede, expliciete keuze.
   Future<void> _resetEverything() async {
     final l10n = context.l10n;
     final notifier = ref.read(settingsProvider.notifier);
@@ -279,6 +279,8 @@ extension _SettingsSecurity on _SettingsDialogState {
     if (!mounted) return;
     final confirmed = await _confirmReset(l10n, pending);
     if (!confirmed || !mounted) return;
+    if (!await _resetOciServeData(ref)) return;
+    if (!mounted) return;
     final done = await notifier.resetToInitialState(discardPendingWork: true);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(

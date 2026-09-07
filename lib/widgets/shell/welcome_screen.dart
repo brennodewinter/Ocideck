@@ -306,6 +306,27 @@ class _WelcomeScreen extends ConsumerWidget {
       const SizedBox(height: 24),
       Divider(color: scheme.outlineVariant),
       const SizedBox(height: 16),
+      // Wie via OciServe binnenkomt, komt terug voor de eigen opleiding. Zet
+      // die persoonlijke ingang vóór de algemene open- en importacties.
+      if (ref.watch(ociServeAuthenticatedProvider)) ...[
+        _wideSecondaryButton(
+          style: secondaryStyle,
+          icon: Icons.school_outlined,
+          label: Text(l10n.d('Mijn cursussen')),
+          onPressed: () => OciServeCoursesDialog.show(context),
+        ),
+        const SizedBox(height: 10),
+      ] else if (ref.watch(ociServeProvider).settings.enabled &&
+          ref.watch(ociServeProvider).errorCode == 'restore_failed') ...[
+        Text(
+          l10n.d(
+            'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.',
+          ),
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 12, color: scheme.error),
+        ),
+        const SizedBox(height: 10),
+      ],
       _wideSecondaryButton(
         style: secondaryStyle,
         icon: Icons.folder_open_outlined,

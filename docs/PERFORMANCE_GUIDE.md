@@ -1,13 +1,13 @@
 # OciDeck — Performance Guide
 
-> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-09-06 · **Published by:** Stichting LibreKAT
 
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
 few measured figures. Where a number is a hard cap in code, it is authoritative;
 where it is a measured size or timing, it is labelled as such. OciDeck ships no
-formal timing/benchmark suite, so there are deliberately no invented latency
-budgets here.
+general latency benchmark suite, so there are deliberately no invented user-facing
+timing promises here. One relative regression test does guard the local save path.
 
 ## Memory Management
 
@@ -43,6 +43,26 @@ optimisation.
   new unique asset is refused atomically before this total would be exceeded.
   This app-wide budget is enforced only in the browser; desktop imports can use
   the same temporary `mem:` paths but are not subject to the browser cap.
+
+## Local save
+
+- A repeat local save does **not** read or hash the existing `images/` directory.
+  The SHA-256 content index is built only while a deck still carries a `mem:`
+  image that must be materialised and deduplicated. After that first save, its
+  project-relative path makes the index unnecessary (`ImageService.copyImagesToProject`).
+- Image captions are collected for the whole deck and written with at most one
+  read/parse/atomic-write cycle per image directory. The cost therefore grows
+  with the caption data once, rather than repeatedly rewriting a growing JSON
+  sidecar for every slide (`CaptionService.saveCaptions`,
+  `ImageSidecarStore.writeAll`).
+- Generated theme CSS, `.marprc.yml`, deck sidecars and image-metadata sidecars
+  are byte-compared and left untouched when unchanged. This avoids redundant
+  durable flushes while keeping atomic replacement for real changes
+  (`writeStringAtomicIfChanged`).
+- `test/large_deck_performance_test.dart` exercises the full `FileService.saveDeck`
+  route with 150 image slides, 150 captions and 64 MiB of already stored image
+  data. The image-heavy save must remain within `3 ×` the empty-project save plus
+  100 ms; this relative guard is deliberately not a product latency promise.
 
 ## Rendering
 
@@ -203,11 +223,10 @@ tests themselves.
 
 **Still missing, and worth saying so:** there is no measured wall-clock for a
 PDF export of a large deck, which is the figure a user actually feels.
-`test/large_deck_performance_test.dart` covers serialise and parse only (150
-slides, confirming the behaviour is not quadratic) — not the scan, not the
-export, not the UI. There are **no** automated wall-clock or throughput
-benchmarks in CI; profile a specific slowdown with Flutter DevTools rather than
-relying on fixed budgets.
+`test/large_deck_performance_test.dart` covers serialise/parse and the relative
+local-save regression above — not export or UI latency. There is no broad
+automated throughput suite in CI; profile a specific slowdown with Flutter
+DevTools rather than treating the relative guard as a fixed budget.
 
 ## Best practices for users
 

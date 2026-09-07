@@ -668,9 +668,80 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bekeken: {tijd}': 'Besjoen: {tijd}',
+  'Doorgaan in de les': 'Trochgean yn de les',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'De server is net wizige, om’t der noch fuortgong wachtet om ferstjoerd te wurden.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Dizze OciServe-server brûkt {host} om oan te melden. Gegevens wurde pas mei dy identiteitsprovider útwiksele neidat jo dat tastien hawwe.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Dizze kursusles is allinne beskikber om ôf te spyljen en wurdt net lokaal bewarre.',
+  'Deze identiteitsprovider toestaan': 'Dizze identiteitsprovider tastean',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Dizze organisaasje befettet te folle lessen om feilich te toanen.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Der wachtet noch fuortgong op syngronisaasje.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Mei dizze kar wurdt it fernijingstoken yn de kaairing bewarre. In fersifere wachtrige foar noch net ferstjoerde fuortgong wurdt dêrfan apart bewarre.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Noch net ferstjoerde fuortgong is op dit apparaat bewarre.',
+  'Cursist': 'Kursist',
+  'Les afgerond': 'Les ôfmakke',
+  'Cursussen voor u': 'Kursussen foar jo',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Gean fierder dêr\'t jo bleaun wiene, of kies in oare kursus dy\'t foar jo klearstiet.',
+  'Klaar om te beginnen': 'Klear om te begjinnen',
+  'Mijn cursussen': 'Myn kursussen',
+  'Mijn leeromgeving': 'Myn learomjouwing',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Moai dien! Jo fuortgong is bewarre.',
+  'Nu bezig': 'No dwaande',
+  'Opnieuw starten': 'Opnij begjinne',
+  'Terug naar mijn cursussen': 'Werom nei myn kursussen',
+  'U kunt deze cursus opnieuw bekijken.': 'Jo kinne dizze kursus opnij besjen.',
+  'Volgende: {les}': 'Folgjende: {les}',
+  'Welkom, {naam}': 'Wolkom, {naam}',
+  '{aantal} cursussen': '{aantal} kursussen',
+  '{aantal} lessen': '{aantal} lessen',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Folje in jildich OciServe-adres yn.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} fuortgongsrapport(en) wachtet/wachtsje op syngronisaasje.',
+  '{afgerond} van {totaal} lessen afgerond':
+      '{afgerond} fan {totaal} lessen ôfrûne',
+  'Uitloggen': 'Ofmelde',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Jo account heart net by in aktive organisaasje.',
+  'Verdergaan': 'Trochgean',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Folgje opliedingen út jo OciServe-omjouwing. Kursusbestannen iepenje allinnich yn ôfspylmodus; fuortgong wurdt allinnich nei oanmelden syngronisearre.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Stean in HTTPS-server op in yntern netwurk ta. Tokens wurde nea fia gewoane HTTP ferstjoerd.',
   'Starten': 'Starte',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Tidens it ôfspyljen syngronisearret OciDeck de lêste dia, foltôging en toande tiid per dia mei dizze organisaasje. Dit is gjin bewiis fan oandacht of aktive leartiid.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'OciServe-oanmelding is allinnich beskikber yn de desktop-app, omdat de webferzje gjin feilige kaairing hat.',
+  'OciServe-organisatie': 'OciServe-organisaasje',
+  'OciServe-server': 'OciServe-server',
   'Opleiding': 'Oplieding',
+  'Ingelogd blijven op dit apparaat': 'Oanmeld bliuwe op dit apparaat',
+  'Inloggen': 'Oanmelde',
   'Les': 'Les',
+  'Er staan geen opleidingen voor u klaar.':
+      'Der steane gjin opliedingen foar jo klear.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Brûk in HTTPS-adres foar OciServe.',
+  'Ingelogd als {naam}': 'Oanmeld as {naam}',
+  'Ingelogd bij OciServe': 'Oanmeld by OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'By it folgjen fan in kursus stjoert OciDeck jo lêste dia, foltôging en toande tiid per dia nei de keazen OciServe-organisaasje. Antwurden, notysjes en kursusynhâld wurde net as fuortgong ferstjoerd.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'De lokale oanmelding koe net hielendal wiske wurde. Besykje it opnij.',
+  'De opleidingen konden niet worden opgehaald.':
+      'De opliedingen koene net ophelle wurde.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Oanmelden by OciServe is mislearre. Kontrolearje de server en besykje it opnij.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Meitsje eLearning-ynhâld: learndoelen, modules, feedback en assessment-gearfettings. Ymportearje SCORM, QTI, xAPI, AICC en OLX lokaal. Standert út; set de utwreiding oan om de slidetypen te brûken.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

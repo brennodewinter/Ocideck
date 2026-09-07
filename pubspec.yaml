@@ -70,6 +70,13 @@ dependencies:
   # hierheen; server-URL/gebruikersnaam blijven in het prefs-domein.
   flutter_secure_storage: ^11.0.0
   http: ^1.6.0
+  # Authorization Code + PKCE state/token machinery for the optional OciServe
+  # connector. OciDeck keeps its own loopback listener and pinned transport;
+  # the package Authenticator is deliberately not used.
+  openid_client: ^0.4.10+1
+  # Parse a JWKS fetched through OciDeck's pinned transport before asking the
+  # OIDC library to verify an ID-token signature (never let jose fetch itself).
+  jose: ^0.3.5+2
   # HTML-parser; zat al transief in de lockfile (o.a. via Quill). Directe dep
   # omdat we klembord-HTML naar Markdown omzetten (#1595), nooit renderen.
   html: ^0.15.6

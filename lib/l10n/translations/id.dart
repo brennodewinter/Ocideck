@@ -1633,9 +1633,80 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bekeken: {tijd}': 'Dilihat: {tijd}',
+  'Doorgaan in de les': 'Lanjutkan dalam pelajaran',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Server tidak diubah karena kemajuan masih menunggu untuk dikirim.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Server OciServe ini menggunakan {host} untuk masuk. Data hanya dipertukarkan dengan penyedia identitas tersebut setelah Anda mengizinkannya.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Pelajaran kursus ini hanya tersedia untuk diputar dan tidak disimpan secara lokal.',
+  'Deze identiteitsprovider toestaan': 'Izinkan penyedia identitas ini',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Organisasi ini berisi terlalu banyak pelajaran untuk ditampilkan dengan aman.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Kemajuan masih menunggu untuk disinkronkan.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Dengan pilihan ini, token penyegaran disimpan di keychain. Antrean terenkripsi untuk kemajuan yang belum dikirim disimpan terpisah darinya.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Kemajuan yang belum dikirim telah disimpan di perangkat ini.',
+  'Cursist': 'Peserta didik',
+  'Les afgerond': 'Pelajaran selesai',
+  'Cursussen voor u': 'Kursus untuk Anda',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Lanjutkan dari tempat Anda berhenti, atau pilih kursus lain yang siap untuk Anda.',
+  'Klaar om te beginnen': 'Siap untuk memulai',
+  'Mijn cursussen': 'Kursus saya',
+  'Mijn leeromgeving': 'Lingkungan belajar saya',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Bagus! Kemajuan Anda telah disimpan.',
+  'Nu bezig': 'Sedang berlangsung',
+  'Opnieuw starten': 'Mulai lagi',
+  'Terug naar mijn cursussen': 'Kembali ke kursus saya',
+  'U kunt deze cursus opnieuw bekijken.':
+      'Anda dapat meninjau kursus ini lagi.',
+  'Volgende: {les}': 'Berikutnya: {les}',
+  'Welkom, {naam}': 'Selamat datang, {naam}',
+  '{aantal} cursussen': '{aantal} kursus',
+  '{aantal} lessen': '{aantal} pelajaran',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Masukkan alamat OciServe yang valid.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} laporan kemajuan menunggu sinkronisasi.',
+  '{afgerond} van {totaal} lessen afgerond':
+      '{afgerond} dari {totaal} pelajaran selesai',
+  'Uitloggen': 'Keluar',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Akun Anda tidak termasuk dalam organisasi aktif.',
+  'Verdergaan': 'Lanjutkan',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Ikuti kursus dari lingkungan OciServe Anda. Berkas kursus hanya terbuka dalam mode pemutaran; kemajuan hanya disinkronkan setelah masuk.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Izinkan server HTTPS pada jaringan internal. Token tidak pernah dikirim melalui HTTP biasa.',
   'Starten': 'Mulai',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Selama pemutaran, OciDeck menyinkronkan slide terakhir, penyelesaian, dan waktu tampil per slide dengan organisasi ini. Ini bukan bukti perhatian atau waktu belajar aktif.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Masuk OciServe hanya tersedia di aplikasi desktop karena versi web tidak memiliki rantai kunci yang aman.',
+  'OciServe-organisatie': 'Organisasi OciServe',
+  'OciServe-server': 'Server OciServe',
   'Opleiding': 'Kursus',
+  'Ingelogd blijven op dit apparaat': 'Tetap masuk di perangkat ini',
+  'Inloggen': 'Masuk',
   'Les': 'Pelajaran',
+  'Er staan geen opleidingen voor u klaar.':
+      'Tidak ada kursus yang tersedia untuk Anda.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Gunakan alamat HTTPS untuk OciServe.',
+  'Ingelogd als {naam}': 'Masuk sebagai {naam}',
+  'Ingelogd bij OciServe': 'Masuk ke OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Saat mengikuti kursus, OciDeck mengirim slide terakhir, penyelesaian, dan waktu tampil per slide Anda ke organisasi OciServe yang dipilih. Jawaban, catatan, dan konten kursus tidak dikirim sebagai kemajuan.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Masuk lokal tidak dapat dihapus sepenuhnya. Coba lagi.',
+  'De opleidingen konden niet worden opgehaald.': 'Kursus tidak dapat diambil.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Masuk ke OciServe gagal. Periksa server dan coba lagi.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Buat konten eLearning: tujuan pembelajaran, modul, umpan balik, dan ringkasan asesmen. Impor SCORM, QTI, xAPI, AICC, dan OLX secara lokal. Nonaktif secara default; aktifkan ekstensi untuk menggunakan tipe slide.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

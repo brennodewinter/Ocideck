@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:archive/archive.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,7 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/finding_spec.dart';
+import 'package:ocideck/models/learning_session.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -93,6 +95,7 @@ void main() {
   /// zou openen.
   Future<void> present(
     WidgetTester tester, {
+    Finder? trigger,
     bool Function()? until,
     String reason = 'de presentatie kwam niet op',
   }) async {
@@ -100,7 +103,7 @@ void main() {
         until ?? () => find.byType(FullscreenPresenter).evaluate().isNotEmpty;
     var reached = false;
     await tester.runAsync(() async {
-      await tester.tap(appBarIcon(Icons.play_circle_outline));
+      await tester.tap(trigger ?? appBarIcon(Icons.play_circle_outline));
       for (var i = 0; i < 400; i++) {
         if (done()) {
           reached = true;
@@ -361,6 +364,66 @@ void main() {
     expect(shown.initialIndex, 1);
     expect(find.text('Overgeslagen'), findsNothing);
   });
+
+  testWidgets(
+    'bij een cursus vormt de zichtbare selectie de les en hervat die',
+    (tester) async {
+      await pumpShell(tester, deckOf([bullets('Tijdelijk')]));
+      final markdown = container
+          .read(markdownServiceProvider)
+          .generateDeck(
+            Deck(
+              title: 'Cursusles',
+              slides: [
+                bullets('Begin').copyWith(anchor: 'begin'),
+                bullets(
+                  'Auteursmateriaal',
+                  skipped: true,
+                ).copyWith(anchor: 'auteursmateriaal'),
+                bullets('Verder').copyWith(anchor: 'verder'),
+              ],
+            ),
+          );
+      final archive = Archive()
+        ..add(ArchiveFile.bytes('deck.md', utf8.encode(markdown)));
+      final package = Uint8List.fromList(ZipEncoder().encodeBytes(archive));
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 6),
+      );
+
+      final result = await container
+          .read(tabsProvider.notifier)
+          .openLearningPackage(
+            package,
+            'les.ocideck',
+            session,
+            initialAnchor: 'verder',
+          );
+      expect(result, OpenResult.opened);
+      await tester.pumpAndSettle();
+
+      // De vergrendelde hero volgt dezelfde hervatdia als de presentatie.
+      expect(find.text('Verder'), findsWidgets);
+      expect(find.text('Verdergaan'), findsOneWidget);
+
+      await present(
+        tester,
+        trigger: find.widgetWithText(FilledButton, 'Verdergaan'),
+      );
+
+      final shown = presenter(tester);
+      expect(shown.slides.map((slide) => slide.title), ['Begin', 'Verder']);
+      expect(shown.initialIndex, 1);
+      expect(find.text('Auteursmateriaal'), findsNothing);
+    },
+  );
 
   testWidgets('een dia met een strengere TLP dan de presentatie blijft weg', (
     tester,

@@ -1,0 +1,11 @@
+{
+  "additions": {
+    "Bekeken: {tijd}": {
+      "en": "Viewed: {tijd}", "it": "Visualizzato: {tijd}", "de": "Angesehen: {tijd}", "fr": "Consulté : {tijd}", "es": "Visto: {tijd}", "fy": "Besjoen: {tijd}", "pap": "Mirá: {tijd}", "la": "Visum: {tijd}", "id": "Dilihat: {tijd}", "pl": "Obejrzano: {tijd}", "uk": "Переглянуто: {tijd}", "gsw": "Agschaut: {tijd}", "el": "Προβλήθηκε: {tijd}", "da": "Set: {tijd}", "sv": "Visad: {tijd}", "hr": "Pregledano: {tijd}", "cs": "Zhlédnuto: {tijd}", "fi": "Katsottu: {tijd}", "bg": "Прегледано: {tijd}", "lv": "Skatīts: {tijd}", "lt": "Peržiūrėta: {tijd}", "mt": "Meqjus: {tijd}", "et": "Vaadatud: {tijd}", "hu": "Megtekintve: {tijd}", "ga": "Breathnaithe: {tijd}", "pt": "Visto: {tijd}", "ro": "Vizualizat: {tijd}", "sl": "Ogledano: {tijd}", "sk": "Pozreté: {tijd}", "tlh": "leghlu': {tijd}", "tr": "İzlendi: {tijd}"
+    },
+    "Doorgaan in de les": {
+      "en": "Continue in the lesson", "it": "Continua nella lezione", "de": "In der Lektion fortfahren", "fr": "Continuer dans la leçon", "es": "Continuar en la lección", "fy": "Trochgean yn de les", "pap": "Sigui den e les", "la": "Perge in lectione", "id": "Lanjutkan dalam pelajaran", "pl": "Kontynuuj lekcję", "uk": "Продовжити урок", "gsw": "I dr Lektion wytermache", "el": "Συνέχεια στο μάθημα", "da": "Fortsæt i lektionen", "sv": "Fortsätt i lektionen", "hr": "Nastavi u lekciji", "cs": "Pokračovat v lekci", "fi": "Jatka oppitunnissa", "bg": "Продължете в урока", "lv": "Turpināt nodarbībā", "lt": "Tęsti pamokoje", "mt": "Kompli fil-lezzjoni", "et": "Jätka õppetunnis", "hu": "Folytatás a leckében", "ga": "Lean ar aghaidh sa cheacht", "pt": "Continuar na lição", "ro": "Continuă în lecție", "sl": "Nadaljuj v lekciji", "sk": "Pokračovať v lekcii", "tlh": "ghojmoHghachDaq yIghoS", "tr": "Derste devam et"
+    }
+  },
+  "unchanged": ["https://leren.example.org"]
+}

@@ -1631,9 +1631,79 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bekeken: {tijd}': 'Skatīts: {tijd}',
+  'Doorgaan in de les': 'Turpināt nodarbībā',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Serveris netika mainīts, jo progress vēl gaida nosūtīšanu.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Šis OciServe serveris izmanto {host} pierakstīšanai. Dati ar šo identitātes nodrošinātāju tiek apmainīti tikai pēc jūsu atļaujas.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Šī kursa nodarbība ir pieejama tikai atskaņošanai un netiek saglabāta lokāli.',
+  'Deze identiteitsprovider toestaan': 'Atļaut šo identitātes nodrošinātāju',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Šajā organizācijā ir pārāk daudz nodarbību, lai tās droši parādītu.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Progress vēl gaida sinhronizēšanu.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'Ar šo izvēli atsvaidzināšanas marķieris tiek saglabāts atslēgu saišķī. Šifrēta rinda vēl nenosūtītam progresam tiek glabāta atsevišķi.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Vēl nenosūtītais progress ir saglabāts šajā ierīcē.',
+  'Cursist': 'Kursa dalībnieks',
+  'Les afgerond': 'Nodarbība pabeigta',
+  'Cursussen voor u': 'Kursi jums',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Turpiniet no vietas, kur apstājāties, vai izvēlieties citu kursu, kas jums ir gatavs.',
+  'Klaar om te beginnen': 'Gatavs sākt',
+  'Mijn cursussen': 'Mani kursi',
+  'Mijn leeromgeving': 'Mana mācību vide',
+  'Mooi gedaan! Uw voortgang is bewaard.':
+      'Lieliski! Jūsu progress ir saglabāts.',
+  'Nu bezig': 'Notiek',
+  'Opnieuw starten': 'Sākt no jauna',
+  'Terug naar mijn cursussen': 'Atpakaļ uz maniem kursiem',
+  'U kunt deze cursus opnieuw bekijken.':
+      'Jūs varat vēlreiz pārskatīt šo kursu.',
+  'Volgende: {les}': 'Nākamais: {les}',
+  'Welkom, {naam}': 'Laipni lūdzam, {naam}',
+  '{aantal} cursussen': '{aantal} kursi',
+  '{aantal} lessen': '{aantal} nodarbības',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Ievadiet derīgu OciServe adresi.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} progresa ziņojums/i gaida sinhronizāciju.',
+  '{afgerond} van {totaal} lessen afgerond':
+      'Pabeigtas {afgerond} no {totaal} nodarbībām',
+  'Uitloggen': 'Izrakstīties',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Jūsu konts nepieder aktīvai organizācijai.',
+  'Verdergaan': 'Turpināt',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Apgūstiet kursus no savas OciServe vides. Kursu faili tiek atvērti tikai atskaņošanas režīmā; progress tiek sinhronizēts tikai pēc pieteikšanās.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Atļaujiet HTTPS serveri iekšējā tīklā. Marķieri nekad netiek sūtīti pa parastu HTTP.',
   'Starten': 'Sākt',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'Atskaņošanas laikā OciDeck sinhronizē ar šo organizāciju pēdējo slaidu, pabeigšanu un rādīto laiku par slaidu. Tas nav uzmanības vai aktīva mācību laika pierādījums.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Pieteikšanās OciServe ir pieejama tikai darbvirsmas lietotnē, jo tīmekļa versijai nav droša atslēgu saišķa.',
+  'OciServe-organisatie': 'OciServe organizācija',
+  'OciServe-server': 'OciServe serveris',
   'Opleiding': 'Kurss',
+  'Ingelogd blijven op dit apparaat': 'Palikt pieteiktam šajā ierīcē',
+  'Inloggen': 'Pieteikties',
   'Les': 'Nodarbība',
+  'Er staan geen opleidingen voor u klaar.': 'Jums nav pieejamu kursu.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'OciServe izmantojiet HTTPS adresi.',
+  'Ingelogd als {naam}': 'Pieteicies kā {naam}',
+  'Ingelogd bij OciServe': 'Pieteicies OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Apgūstot kursu, OciDeck nosūta izvēlētajai OciServe organizācijai jūsu pēdējo slaidu, pabeigšanu un rādīto laiku par slaidu. Atbildes, piezīmes un kursa saturs netiek nosūtīti kā progress.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Vietējo pieteikšanos nevarēja pilnībā notīrīt. Mēģiniet vēlreiz.',
+  'De opleidingen konden niet worden opgehaald.': 'Kursus nevarēja izgūt.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Pieteikšanās OciServe neizdevās. Pārbaudiet serveri un mēģiniet vēlreiz.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Izveidojiet eLearning saturu: mācību mērķi, moduļi, atsauksmes un vērtēšanas kopsavilkumi. Importējiet SCORM, QTI, xAPI, AICC un OLX lokāli. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaidu tipus.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

@@ -1653,9 +1653,80 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bekeken: {tijd}': 'Прегледано: {tijd}',
+  'Doorgaan in de les': 'Продължете в урока',
+  'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
+      'Сървърът не е променен, защото напредъкът все още чака да бъде изпратен.',
+  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Този сървър OciServe използва {host} за влизане. Данни се обменят с този доставчик на самоличност едва след като разрешите това.',
+  'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
+      'Този урок от курса е наличен само за възпроизвеждане и не се съхранява локално.',
+  'Deze identiteitsprovider toestaan':
+      'Разрешаване на този доставчик на самоличност',
+  'Deze organisatie bevat te veel lessen om veilig te tonen.':
+      'Тази организация съдържа твърде много уроци, за да бъдат показани безопасно.',
+  'Er wacht nog voortgang op synchronisatie.':
+      'Напредъкът все още чака синхронизация.',
+  'Met deze keuze wordt het vernieuwtoken in de sleutelbos bewaard. Een versleutelde wachtrij voor nog niet verstuurde voortgang wordt daar los van bewaard.':
+      'С този избор токенът за обновяване се съхранява в ключодържателя. Шифрована опашка за все още неизпратен напредък се съхранява отделно.',
+  'Nog niet verstuurde voortgang is op dit apparaat bewaard.':
+      'Все още неизпратеният напредък е запазен на това устройство.',
+  'Cursist': 'Курсист',
+  'Les afgerond': 'Урокът е завършен',
+  'Cursussen voor u': 'Курсове за вас',
+  'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.':
+      'Продължете оттам, откъдето сте спрели, или изберете друг курс, който е готов за вас.',
+  'Klaar om te beginnen': 'Готови да започнете',
+  'Mijn cursussen': 'Моите курсове',
+  'Mijn leeromgeving': 'Моята учебна среда',
+  'Mooi gedaan! Uw voortgang is bewaard.': 'Браво! Напредъкът ви е запазен.',
+  'Nu bezig': 'В процес',
+  'Opnieuw starten': 'Започнете отново',
+  'Terug naar mijn cursussen': 'Обратно към моите курсове',
+  'U kunt deze cursus opnieuw bekijken.':
+      'Можете да прегледате този курс отново.',
+  'Volgende: {les}': 'Следващо: {les}',
+  'Welkom, {naam}': 'Добре дошли, {naam}',
+  '{aantal} cursussen': '{aantal} курса',
+  '{aantal} lessen': '{aantal} урока',
+  'OciServe': 'OciServe',
+  'Vul een geldig OciServe-adres in.': 'Въведете валиден адрес на OciServe.',
+  '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
+      '{aantal} отчет(а) за напредъка чака(т) синхронизация.',
+  '{afgerond} van {totaal} lessen afgerond':
+      'Завършени {afgerond} от {totaal} урока',
+  'Uitloggen': 'Изход',
+  'Uw account hoort niet bij een actieve organisatie.':
+      'Вашият акаунт не принадлежи към активна организация.',
+  'Verdergaan': 'Продължи',
+  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Преминавайте курсове от вашата среда OciServe. Файловете на курсовете се отварят само в режим на възпроизвеждане; напредъкът се синхронизира само след влизане.',
+  'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
+      'Разрешете HTTPS сървър във вътрешна мрежа. Токените никога не се изпращат по обикновен HTTP.',
   'Starten': 'Стартиране',
+  'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
+      'По време на възпроизвеждане OciDeck синхронизира с тази организация последния слайд, завършването и показаното време за слайд. Това не е доказателство за внимание или активно време за учене.',
+  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Влизането в OciServe е налично само в настолното приложение, защото уеб версията няма защитен ключодържател.',
+  'OciServe-organisatie': 'Организация OciServe',
+  'OciServe-server': 'OciServe сървър',
   'Opleiding': 'Обучение',
+  'Ingelogd blijven op dit apparaat': 'Останете влезли на това устройство',
+  'Inloggen': 'Вход',
   'Les': 'Урок',
+  'Er staan geen opleidingen voor u klaar.': 'Няма налични курсове за вас.',
+  'Gebruik een HTTPS-adres voor OciServe.':
+      'Използвайте HTTPS адрес за OciServe.',
+  'Ingelogd als {naam}': 'Влезли сте като {naam}',
+  'Ingelogd bij OciServe': 'Влезли сте в OciServe',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'При преминаване на курс OciDeck изпраща до избраната организация OciServe последния ви слайд, завършването и показаното време за слайд. Отговори, бележки и съдържание на курса не се изпращат като напредък.',
+  'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
+      'Локалното влизане не можа да бъде изчистено напълно. Опитайте отново.',
+  'De opleidingen konden niet worden opgehaald.':
+      'Курсовете не можаха да бъдат извлечени.',
+  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Влизането в OciServe е неуспешно. Проверете сървъра и опитайте отново.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Създавайте eLearning съдържание: цели за обучение, модули, обратна връзка и обобщения на оценяването. Импортирайте SCORM, QTI, xAPI, AICC и OLX локално. Изключено по подразбиране; включете разширението, за да използвате типовете слайдове.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

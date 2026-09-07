@@ -1,5 +1,44 @@
 part of 'tabs_provider.dart';
 
+Deck _attachLearningTheme(Deck deck, List<PackageEntry> entries) {
+  final matches = entries.where(
+    (entry) => p.posix.normalize(entry.name) == 'theme.json',
+  );
+  if (matches.isEmpty) return deck;
+  final decoded = jsonDecode(utf8.decode(matches.single.bytes));
+  if (decoded is! Map || decoded['definition'] is! Map) {
+    throw const FormatException('ongeldige OciServe-themadefinitie');
+  }
+  final definition = Map<String, Object?>.from(decoded['definition'] as Map);
+  if (decoded['name'] case final String name) definition['name'] = name;
+  return deck.copyWith(themeProfile: ThemeProfile.fromJson(definition));
+}
+
+/// Opent een onveranderlijke OciServe-les en bindt de sessie aan het tabblad.
+Future<OpenResult> _openLearningPackage(
+  TabsNotifier notifier,
+  Uint8List bytes,
+  String name,
+  LearningSessionRef learningSession, {
+  String? initialAnchor,
+}) {
+  _clearOpenFailure(notifier._ref, notifier.mounted);
+  if (!FileService.looksLikeZipBytes(bytes) ||
+      FileService.isEncryptedPackage(bytes)) {
+    return Future.value(
+      _failOpen(notifier._ref, notifier.mounted, OpenFailure.unreadable),
+    );
+  }
+  return _openPackageFromBytes(
+    notifier,
+    bytes,
+    name,
+    learningSession: learningSession,
+    initialAnchor: initialAnchor,
+    strictIntegrity: true,
+  );
+}
+
 /// Het uitpak-pad van een `.ocideck`-pakket dat in het geheugen is geopend
 /// (web, of een import zonder projectmap): de leden naast de hoofd-markdown
 /// worden teruggezet in het deck. Apart bestand omdat `tabs_provider` tegen de
@@ -188,6 +227,9 @@ Future<OpenResult> _openPackageFromBytes(
   Uint8List bytes,
   String name, {
   String? remoteOrigin,
+  LearningSessionRef? learningSession,
+  String? initialAnchor,
+  bool strictIntegrity = false,
 }) async {
   // Versleuteld pakket: vraag (met retry) het wachtwoord vóór het decoderen.
   String? password;
@@ -207,7 +249,13 @@ Future<OpenResult> _openPackageFromBytes(
   }
   final entries = notifier._file.decodePackageEntries(
     bytes,
+    // Het servercontract begrenst zowel download als uitgepakt pakket op
+    // 32 MiB. De algemene lokale pakketroute blijft ruimer.
+    maxBytes: learningSession == null
+        ? FileService.maxPackageBytes
+        : 32 * 1024 * 1024,
     password: password,
+    strictIntegrity: strictIntegrity,
   );
   if (entries == null) return OpenResult.unreadable;
   final mdEntry = FileService.mainMarkdownEntry(entries);
@@ -225,6 +273,23 @@ Future<OpenResult> _openPackageFromBytes(
   );
   var deck = gated.deck;
   if (deck == null) return gated.failure;
+  if (learningSession != null) {
+    final anchors = deck.slides.map((slide) => slide.anchor.trim()).toList();
+    if (anchors.isEmpty ||
+        anchors.any((anchor) => anchor.isEmpty) ||
+        anchors.toSet().length != anchors.length) {
+      return OpenResult.unreadable;
+    }
+    try {
+      deck = _attachLearningTheme(deck, entries);
+    } catch (error) {
+      logWarning(
+        'TabsNotifier._openPackageFromBytes: OciServe-thema onleesbaar',
+        error,
+      );
+      return OpenResult.unreadable;
+    }
+  }
 
   try {
     deck = notifier._attachPackageAssets(deck, entries, mdEntry.name);
@@ -242,6 +307,15 @@ Future<OpenResult> _openPackageFromBytes(
   // Ná het aanhaken: wat het pakket wél meebracht is nu ingevuld, dus wat
   // hier nog leeg is, ontbrak echt.
   notifier._warnUnfilledChartData(deck);
-  notifier._placeDeckInTab(deck, remoteOrigin: remoteOrigin);
+  final initialIndex = initialAnchor == null
+      ? 0
+      : deck.slides.indexWhere((slide) => slide.anchor == initialAnchor);
+  _placeDeckInTab(
+    notifier,
+    deck,
+    remoteOrigin: remoteOrigin,
+    learningSession: learningSession,
+    index: initialIndex < 0 ? 0 : initialIndex,
+  );
   return OpenResult.opened;
 }

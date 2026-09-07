@@ -163,7 +163,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       // er na de laatste slide gewoon "doorheen" loopt i.p.v. vast te lopen en
       // Esc te moeten zoeken. Alleen handmatige navigatie komt hier langs; de
       // auto-play loopt via [_autoAdvance] en blijft op de laatste slide staan.
-      _exit();
+      _exit(completed: true);
     }
   }
 

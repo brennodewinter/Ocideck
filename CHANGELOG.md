@@ -16,6 +16,8 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(ociserve): optioneel aanmelden, eigen cursusoverzicht, vergrendeld
+  `.ocideck`-afspelen, hervatten en idempotente voortgang met getoonde tijd per dia
 - feat(ci): web-gate bouwt de webbundel op een PR die hem kan breken (#1888-staart) (#1905)
 - feat(over): het dankwoord is te vinden — tegel in Documentatie en naast het Vigilis-logo (#1904)
 - feat(ux): Cmd+W sluit tabblad, kopieerbare snackbars, afbeelding passen/vullen (#1879, #1880, #1882) (#1897)
@@ -47,6 +49,9 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(performance): Ctrl/Cmd+S scant het bestaande beeldarchief niet meer bij
+  een tekstwijziging; bijschriften schrijven per map gebundeld en ongewijzigde
+  gegenereerde hulpbestanden blijven ongemoeid
 - fix(document): visuele weergave toont dezelfde puntmaat als de PDF (#1947)
 - fix(export): één download per webexport, en alleen melden wat we weten (#1902) (#1906)
 - fix(release): de webbundel raakte .htaccess en security.txt kwijt (#1888) (#1903)
@@ -337,6 +342,12 @@ in Dutch, and it keeps growing on `main` between releases.
 ## [Unreleased]
 
 ### Added
+
+- feat(ociserve): vernieuwde themagestuurde leeromgeving **Mijn cursussen**.
+  De cursist kiest een cursus en ziet lessen, status en voortgang; een les kan
+  worden gestart of hervat, en een afgeronde cursus start opnieuw bij de eerste
+  les. Na afloop biedt een vriendelijk afrondscherm de terugweg naar het
+  cursusoverzicht.
 
 - feat(openen): meerdere bestanden tegelijk aanwijzen en openen (#1928). Wie
   drie presentaties wilde openen, liep de hele openen-dialoog drie keer door —

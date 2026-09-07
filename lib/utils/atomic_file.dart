@@ -92,6 +92,27 @@ Future<void> writeStringAtomic(File target, String contents) {
   return writeBytesAtomic(target, utf8.encode(contents));
 }
 
+/// Schrijft [contents] atomair, tenzij [target] al exact dezelfde bytes bevat.
+/// Gegenereerde thema's en sidecars veranderen meestal niet bij een tekstedit;
+/// opnieuw schrijven zou dan alleen een dure schijfflush en bestandssync
+/// veroorzaken. Geeft terug of er daadwerkelijk is geschreven.
+Future<bool> writeStringAtomicIfChanged(File target, String contents) async {
+  final bytes = utf8.encode(contents);
+  try {
+    if (await target.exists() &&
+        await target.length() == bytes.length &&
+        listEquals(await target.readAsBytes(), bytes)) {
+      return false;
+    }
+  } on FileSystemException catch (e) {
+    // Een mislukte vergelijking mag de bestaande schrijfroute niet blokkeren:
+    // die kan bijvoorbeeld na een kortstondige leesvergrendeling nog slagen.
+    logWarning('writeStringAtomicIfChanged: comparison failed', e);
+  }
+  await writeBytesAtomic(target, bytes);
+  return true;
+}
+
 /// [writeBytesAtomicSync] with a bounded retry, for a target another process
 /// may be holding open for a moment.
 ///

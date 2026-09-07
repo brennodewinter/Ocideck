@@ -41,6 +41,7 @@ import '../../state/info_safety_provider.dart';
 import '../../state/module_registry.dart';
 import '../../state/collaboration_provider.dart';
 import '../../state/online_storage_provider.dart';
+import '../../state/ociserve_provider.dart';
 import '../../state/integration_registry.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/brand_logo.dart';
@@ -72,6 +73,7 @@ import 'settings/asset_rights_module_card.dart';
 import 'settings/video_calls_module_card.dart';
 import 'settings/managementsysteem_module_card.dart';
 import 'settings/elearning_module_card.dart';
+import 'settings/ociserve_module_card.dart';
 import 'settings/libreplan_module_card.dart';
 import 'libreplan_import_dialog.dart';
 import 'settings/appearance_legibility.dart';
@@ -1022,24 +1024,4 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       color: AppTheme.paper,
     );
   }
-}
-
-/// Kies een map — of null wanneer dit platform er geen heeft.
-///
-/// Buiten de klasse, en niet alleen omdat `_SettingsDialogState` tegen zijn
-/// plafond aan zit: de poort hoort één keer te staan in plaats van bij elke
-/// kiezer opnieuw. `getDirectoryPath` bestaat op web niet en geeft daar stil
-/// null terug, en dan doet de knop niets zonder één woord uitleg — dat was #150
-/// en daarna #506. De secties eromheen zijn óók gepoort
-/// (settings_dialog_storage.dart); dit is de helft die dit bestand zelf kan
-/// bewijzen.
-Future<String?> _pickDirectoryGated({
-  required String dialogTitle,
-  String? initialDirectory,
-}) async {
-  if (!supportsLocalProjectFolders) return null;
-  return FilePicker.getDirectoryPath(
-    dialogTitle: dialogTitle,
-    initialDirectory: initialDirectory,
-  );
 }

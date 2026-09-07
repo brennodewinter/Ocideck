@@ -17,8 +17,10 @@ import '../../models/deck.dart';
 import '../../models/improvement_y01.dart';
 import '../../models/marp_style.dart';
 import '../../models/question.dart';
+import '../../models/rehearsal.dart';
 import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
+import '../../models/playback.dart';
 import '../../models/slide.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
@@ -182,6 +184,12 @@ class FullscreenPresenter extends StatefulWidget {
   /// wijzigingen als losse `.md` te bewaren en het deck schoon te houden.
   final ValueChanged<Slide>? onSessionEdit;
 
+  /// Algemeen afspeelrapport dat eenmaal bij het sluiten wordt aangeboden.
+  ///
+  /// De presentator kent OciServe bewust niet. Een cursus kan dit rapport in
+  /// een wachtrij bewaren; een gewone presentatie laat de callback leeg.
+  final Future<void> Function(PlaybackReport report)? onPlaybackFinished;
+
   /// Recipient/course notes keyed by [Slide.id]; never shown on the audience
   /// display unless the presenter toggles the local notes panel (Ctrl+N).
   final Map<String, String> initialUserNotes;
@@ -212,6 +220,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.onSlideChanged,
     this.onSlideSplit,
     this.onSessionEdit,
+    this.onPlaybackFinished,
     this.initialUserNotes = const {},
     this.onUserNotesChanged,
     this.improvementY01 = ImprovementY01Metric.empty,
@@ -239,6 +248,7 @@ class FullscreenPresenter extends StatefulWidget {
     ValueChanged<Slide>? onSlideChanged,
     ValueChanged<String>? onSlideSplit,
     ValueChanged<Slide>? onSessionEdit,
+    Future<void> Function(PlaybackReport report)? onPlaybackFinished,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
@@ -288,6 +298,7 @@ class FullscreenPresenter extends StatefulWidget {
         onSlideChanged: onSlideChanged,
         onSlideSplit: onSlideSplit,
         onSessionEdit: onSessionEdit,
+        onPlaybackFinished: onPlaybackFinished,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
@@ -314,6 +325,7 @@ class FullscreenPresenter extends StatefulWidget {
         onSlideChanged: onSlideChanged,
         onSlideSplit: onSlideSplit,
         onSessionEdit: onSessionEdit,
+        onPlaybackFinished: onPlaybackFinished,
         initialUserNotes: initialUserNotes,
         onUserNotesChanged: onUserNotesChanged,
         improvementY01: deck.improvementY01Metric,
@@ -342,6 +354,7 @@ class FullscreenPresenter extends StatefulWidget {
     ValueChanged<Slide>? onSlideChanged,
     ValueChanged<String>? onSlideSplit,
     ValueChanged<Slide>? onSessionEdit,
+    Future<void> Function(PlaybackReport report)? onPlaybackFinished,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
@@ -378,6 +391,7 @@ class FullscreenPresenter extends StatefulWidget {
               onSlideChanged: onSlideChanged,
               onSlideSplit: onSlideSplit,
               onSessionEdit: onSessionEdit,
+              onPlaybackFinished: onPlaybackFinished,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
               improvementY01: improvementY01,
@@ -398,6 +412,20 @@ class FullscreenPresenter extends StatefulWidget {
   /// the slide, and run the presenter view (current/next/notes/timer) in the
   /// main window on the laptop. The two windows stay in sync over method
   /// channels. Falls back to [show] if the second window can't be created.
+  static Map<String, dynamic> _annotationsBySlideIndex(
+    List<Slide> slides,
+    Map<String, List<InkStroke>> annotations,
+  ) {
+    final inkByIndex = <String, dynamic>{};
+    for (var i = 0; i < slides.length; i++) {
+      final strokes = annotations[slides[i].id];
+      if (strokes != null && strokes.isNotEmpty) {
+        inkByIndex['$i'] = encodeStrokes(strokes);
+      }
+    }
+    return inkByIndex;
+  }
+
   static Future<String?> showDualScreen(
     BuildContext context, {
     required List<Slide> slides,
@@ -419,6 +447,7 @@ class FullscreenPresenter extends StatefulWidget {
     ValueChanged<Slide>? onSlideChanged,
     ValueChanged<String>? onSlideSplit,
     ValueChanged<Slide>? onSessionEdit,
+    Future<void> Function(PlaybackReport report)? onPlaybackFinished,
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
@@ -433,13 +462,7 @@ class FullscreenPresenter extends StatefulWidget {
     );
     // Pre-existing annotations re-keyed by index so the beamer shows them
     // immediately (the audience window has no stable slide ids of its own).
-    final inkByIndex = <String, dynamic>{};
-    for (var i = 0; i < slides.length; i++) {
-      final strokes = annotations[slides[i].id];
-      if (strokes != null && strokes.isNotEmpty) {
-        inkByIndex['$i'] = encodeStrokes(strokes);
-      }
-    }
+    final inkByIndex = _annotationsBySlideIndex(slides, annotations);
     final argument = _audienceWindowArguments(
       markdown: markdown,
       projectPath: projectPath,
@@ -495,6 +518,7 @@ class FullscreenPresenter extends StatefulWidget {
           onSlideChanged: onSlideChanged,
           onSlideSplit: onSlideSplit,
           onSessionEdit: onSessionEdit,
+          onPlaybackFinished: onPlaybackFinished,
           initialUserNotes: initialUserNotes,
           onUserNotesChanged: onUserNotesChanged,
           improvementY01: improvementY01,
@@ -531,6 +555,7 @@ class FullscreenPresenter extends StatefulWidget {
               onSlideChanged: onSlideChanged,
               onSlideSplit: onSlideSplit,
               onSessionEdit: onSessionEdit,
+              onPlaybackFinished: onPlaybackFinished,
               initialUserNotes: initialUserNotes,
               onUserNotesChanged: onUserNotesChanged,
               improvementY01: improvementY01,
@@ -933,39 +958,6 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// makkelijkste gewoon doorklikken voorbij de laatste dia is.
   bool _exiting = false;
 
-  Future<void> _exit() async {
-    if (_exiting) return;
-    _exiting = true;
-    _advanceTimer?.cancel();
-    await _maybeShowRehearsalSummary();
-    final aw = widget.audience;
-    if (aw != null) {
-      // Dual mode: the main window was never put in full screen; just tear down
-      // the audience window (once — double-close crashes the Linux embedder).
-      await aw.close();
-    } else {
-      await setPresenterFullscreen(false);
-    }
-    if (mounted) Navigator.pop(context, _exitSlideId(widget.slides, _index));
-  }
-
-  /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan
-  /// staat. Sessie-only: niets wordt opgeslagen.
-  Future<void> _maybeShowRehearsalSummary() async {
-    // Een vergrendeld deck ('alleen afspelen') toont het overzicht nooit. Dat
-    // is geen instelling die de afspeler kan aanzetten: het deck is bedoeld om
-    // af te spelen, en wie het afspeelt hoort achteraf geen meetrapport over
-    // zichzelf te krijgen. Dus vóór de schakelaar, niet erin verweven.
-    if (widget.playOnly) return;
-    // Tijd wordt altijd gemeten; deze schakelaar bepaalt enkel of het
-    // eindscherm verschijnt (uit = stille modus, bv. bij een echte presentatie).
-    // Staat de schakelaar aan, dan verschijnt het altijd — ook een korte run
-    // toont dan het overzicht (leeg = "Geen slides gemeten.").
-    if (!widget.showRehearsalSummary || !mounted) return;
-    final run = _rehearsal.finish();
-    await showRehearsalSummary(context, run: run, slides: widget.slides);
-  }
-
   // ── Formatters ─────────────────────────────────────────────────────────────
 
   @override
@@ -982,7 +974,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     // Per-slide-timing: registreer de huidige slide. Idempotent en goedkoop,
     // dus veilig om elke build aan te roepen — vangt álle navigatiepaden.
     final clampedIndex = _index.clamp(0, total - 1);
-    _rehearsal.observe(widget.slides[clampedIndex].id, clampedIndex);
+    final shown = widget.slides[clampedIndex];
+    _rehearsal.observe(
+      shown.anchor.isNotEmpty ? shown.anchor : shown.id,
+      clampedIndex,
+    );
 
     return Focus(
       focusNode: _focusNode,

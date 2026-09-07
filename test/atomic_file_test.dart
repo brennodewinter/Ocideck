@@ -30,6 +30,19 @@ void main() {
     expect(await File('${target.path}.tmp').exists(), isFalse);
   });
 
+  test('writeStringAtomicIfChanged slaat gelijke inhoud over', () async {
+    final temp = await Directory.systemTemp.createTemp('ocideck_atomic_');
+    addTearDown(() => temp.delete(recursive: true));
+    final target = File(p.join(temp.path, 'out.txt'));
+
+    expect(await writeStringAtomicIfChanged(target, 'zelfde'), isTrue);
+    final modified = await target.lastModified();
+    expect(await writeStringAtomicIfChanged(target, 'zelfde'), isFalse);
+    expect(await target.lastModified(), modified);
+    expect(await writeStringAtomicIfChanged(target, 'anders'), isTrue);
+    expect(await target.readAsString(), 'anders');
+  });
+
   group('writeBytesAtomicSync', () {
     // De sync-variant draagt dezelfde belofte als de async: hij overschrijft
     // een bestaand doel. Op POSIX doet `rename` dat zelf; op Windows faalt hij

@@ -46,6 +46,7 @@ part 'deck_provider_miauw.dart';
 part 'deck_provider_checklist.dart';
 part 'deck_provider_managementsysteem.dart';
 part 'deck_provider_auto.dart';
+part 'deck_provider_load.dart';
 part 'deck_provider_slides.dart';
 
 // ── Service providers ────────────────────────────────────────────────────────
@@ -220,6 +221,8 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   DeckState get currentState => state;
 
+  set _replacementState(DeckState value) => state = value;
+
   bool get canUndo => _undoStack.isNotEmpty;
   bool get canRedo => _redoStack.isNotEmpty;
 
@@ -315,25 +318,15 @@ class DeckNotifier extends StateNotifier<DeckState> {
     String? filePath,
     String? remoteOrigin,
     bool isDirty = false,
-  }) {
-    final resolvedDeck = deck.copyWith(
-      themeProfile: _file.activeProfileFor(projectPath: deck.projectPath),
-    );
-    _clearHistory();
-    state = DeckState(
-      deck: resolvedDeck,
-      filePath: filePath,
-      remoteOrigin: remoteOrigin,
-      isDirty: isDirty,
-    );
-    // #1951: onthoud de mtime van het bestand bij openen. Fire-and-forget:
-    // de mtime is pas nodig bij de volgende opslaan, niet bij het openen.
-    if (filePath != null) {
-      unawaited(_recordFileMtime());
-    } else {
-      _fileMtime = null;
-    }
-  }
+    bool preserveThemeProfile = false,
+  }) => _loadDeck(
+    this,
+    deck,
+    filePath: filePath,
+    remoteOrigin: remoteOrigin,
+    isDirty: isDirty,
+    preserveThemeProfile: preserveThemeProfile,
+  );
 
   Future<void> openDeck({String? initialDirectory}) async {
     final path = await _file.pickMarkdownFile(

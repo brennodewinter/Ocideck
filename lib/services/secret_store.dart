@@ -552,6 +552,90 @@ class SecretStore {
     }
   }
 
+  /// Stable key for OciServe's OAuth refresh credential. Access and ID tokens
+  /// are intentionally memory-only and never pass through this class.
+  static String ociServeRefreshTokenKey(String baseUrl) {
+    final normalized = baseUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'ociserve_refresh::$normalized';
+  }
+
+  Future<void> writeOciServeRefreshToken(
+    String baseUrl,
+    String refreshToken,
+  ) async {
+    _requireStorage('writeOciServeRefreshToken');
+    try {
+      await _storage.write(
+        key: ociServeRefreshTokenKey(baseUrl),
+        value: refreshToken,
+      );
+    } catch (e) {
+      logError(
+        'SecretStore.writeOciServeRefreshToken: keychain write failed',
+        e,
+      );
+      rethrow;
+    }
+  }
+
+  Future<String?> readOciServeRefreshToken(String baseUrl) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: ociServeRefreshTokenKey(baseUrl));
+    } catch (e) {
+      logError('SecretStore.readOciServeRefreshToken: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteOciServeRefreshToken(String baseUrl) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: ociServeRefreshTokenKey(baseUrl));
+    } catch (e) {
+      logWarning(
+        'SecretStore.deleteOciServeRefreshToken: keychain delete failed',
+        e,
+      );
+      rethrow;
+    }
+  }
+
+  static String ociServeOutboxKey(String baseUrl) {
+    final normalized = baseUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'ociserve_outbox::$normalized';
+  }
+
+  Future<void> writeOciServeOutbox(String baseUrl, String encoded) async {
+    _requireStorage('writeOciServeOutbox');
+    try {
+      await _storage.write(key: ociServeOutboxKey(baseUrl), value: encoded);
+    } catch (e) {
+      logError('SecretStore.writeOciServeOutbox: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readOciServeOutbox(String baseUrl) async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: ociServeOutboxKey(baseUrl));
+    } catch (e) {
+      logError('SecretStore.readOciServeOutbox: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteOciServeOutbox(String baseUrl) async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: ociServeOutboxKey(baseUrl));
+    } catch (e) {
+      logWarning('SecretStore.deleteOciServeOutbox: keychain delete failed', e);
+      rethrow;
+    }
+  }
+
   /// Keychain-sleutel voor "je eigen gegevens" van de privacycontrole.
   ///
   /// Eén entry, want het gaat over de gebruiker van deze installatie en niet
