@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/learning_session.dart';
@@ -79,6 +80,7 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   final OciServePackage? package;
   final bool loginSucceeds;
   final Map<String, Uint8List> courseImages;
+  Uint8List? accountAvatarBytes;
   PlaybackReport? reportedPlayback;
   bool loginCalled = false;
 
@@ -104,6 +106,16 @@ class _FixedOciServeNotifier extends OciServeNotifier {
     required String organizationId,
     required String imageHash,
   }) async => courseImages[imageHash]!;
+
+  @override
+  Future<Uint8List> accountAvatar(String avatarHash) async =>
+      accountAvatarBytes!;
+
+  @override
+  Future<void> recordLessonOpened({
+    required String organizationId,
+    required OciServeFeedItem lesson,
+  }) async {}
 
   @override
   Future<void> reportPlayback({
@@ -470,8 +482,18 @@ void main() {
 
       await tester.ensureVisible(find.text('Privacybasis'));
       await tester.pumpAndSettle();
+      final courseScroll = find.descendant(
+        of: find.byType(CustomScrollView),
+        matching: find.byType(Scrollable),
+      );
+      expect(
+        tester.state<ScrollableState>(courseScroll).position.pixels,
+        greaterThan(0),
+      );
       await tester.tap(find.text('Privacybasis'));
       await tester.pumpAndSettle();
+
+      expect(tester.state<ScrollableState>(courseScroll).position.pixels, 0);
 
       expect(
         find.descendant(of: hero, matching: find.text('Privacybasis')),
@@ -552,6 +574,204 @@ void main() {
     );
   });
 
+  testWidgets('Mijn cursussen toont de profielfoto van het account', (
+    tester,
+  ) async {
+    final png = Uint8List.fromList(
+      base64Decode(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9ZlOQAAAAASUVORK5CYII=',
+      ),
+    );
+    final notifier = _FixedOciServeNotifier(
+      const OciServeState(
+        settings: OciServeSettings(enabled: true),
+        status: OciServeStatus.authenticated,
+        account: OciServeAccount(
+          id: 'learner',
+          displayName: 'Lerende',
+          avatarHash:
+              'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+          memberships: [
+            OciServeMembership(organizationId: 'org', name: 'Organisatie'),
+          ],
+        ),
+      ),
+    )..accountAvatarBytes = png;
+    await _pumpApp(tester, notifier);
+    await _openCourses(tester);
+
+    expect(find.byKey(const Key('ociserve-account-avatar')), findsOneWidget);
+  });
+
+  testWidgets('de cursist opent een rijk persoonlijk voortgangsoverzicht', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        OciServeState(
+          settings: const OciServeSettings(enabled: true),
+          status: OciServeStatus.authenticated,
+          account: OciServeAccount.fromJson(const {
+            'account': {
+              'id': 'learner',
+              'display_name': 'Lerende',
+              'email': 'lerende@example.nl',
+            },
+            'memberships': [
+              {'organization_id': 'org', 'organization_name': 'Organisatie'},
+            ],
+          }),
+        ),
+        feed: const [
+          ..._feed,
+          OciServeFeedItem(
+            versionId: 'privacy',
+            lessonId: 'privacy-one',
+            title: 'Persoonsgegevens',
+            enrollmentId: 'privacy-enrollment',
+            courseTitle: 'Privacybasis',
+            lessonOrder: 1,
+          ),
+        ],
+        progress: OciServeLearningState([
+          OciServeLessonState(
+            courseVersionId: 'version',
+            lessonId: 'one',
+            completed: true,
+            displayedMilliseconds: 90000,
+            lastPlayedAt: DateTime.utc(2026, 9, 6),
+          ),
+          OciServeLessonState(
+            courseVersionId: 'version',
+            lessonId: 'two',
+            completed: true,
+            displayedMilliseconds: 120000,
+            lastPlayedAt: DateTime.utc(2026, 9, 7),
+          ),
+        ]),
+      ),
+    );
+    await _openCourses(tester);
+
+    await tester.tap(find.text('Lerende'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Mijn voortgang'), findsWidgets);
+    expect(find.textContaining('lerende@example.nl'), findsOneWidget);
+    expect(find.textContaining('Organisatie'), findsOneWidget);
+    expect(find.text('1 van 2'), findsOneWidget);
+    expect(find.text('Cursussen afgerond'), findsOneWidget);
+    expect(find.text('2 van 3'), findsOneWidget);
+    expect(find.text('Lessen afgerond'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Recente activiteit'),
+      260,
+      scrollable: find.descendant(
+        of: find.byKey(const Key('ociserve-learning-profile')),
+        matching: find.byType(Scrollable),
+      ),
+    );
+    expect(find.text('Recente activiteit'), findsOneWidget);
+    expect(find.byType(BarChart), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('learning-profile-course-version')),
+      260,
+      scrollable: find.descendant(
+        of: find.byKey(const Key('ociserve-learning-profile')),
+        matching: find.byType(Scrollable),
+      ),
+    );
+    expect(
+      find.byKey(const Key('learning-profile-course-version')),
+      findsOneWidget,
+    );
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('learning-profile-course-privacy')),
+      260,
+      scrollable: find.descendant(
+        of: find.byKey(const Key('ociserve-learning-profile')),
+        matching: find.byType(Scrollable),
+      ),
+    );
+    expect(
+      find.byKey(const Key('learning-profile-course-privacy')),
+      findsOneWidget,
+    );
+
+    await tester.tap(find.byKey(const Key('learning-profile-course-privacy')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Cursussen voor u'), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.byKey(const Key('ociserve-featured-course')),
+        matching: find.text('Privacybasis'),
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('Mijn voortgang houdt geen mislukte pakketfout vast', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        package: OciServePackage(
+          bytes: Uint8List(0),
+          sha256: '',
+          playbackPolicy: 'play-only',
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Verdergaan'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Kon dit bestand niet openen.'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('ociserve-learning-profile-button')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Kon dit bestand niet openen.'), findsNothing);
+    expect(find.byKey(const Key('ociserve-learning-profile')), findsOneWidget);
+  });
+
+  testWidgets('accountgegevens blijven zichtbaar zonder cursussen', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        OciServeState(
+          settings: const OciServeSettings(enabled: true),
+          status: OciServeStatus.authenticated,
+          account: OciServeAccount.fromJson(const {
+            'account': {
+              'id': 'learner',
+              'display_name': 'Lerende',
+              'email': 'lerende@example.nl',
+            },
+            'memberships': [
+              {'organization_id': 'org', 'organization_name': 'Organisatie'},
+            ],
+          }),
+        ),
+        feed: const [],
+        progress: const OciServeLearningState([]),
+      ),
+    );
+    await _openCourses(tester);
+
+    await tester.tap(find.text('Lerende'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('lerende@example.nl'), findsOneWidget);
+    expect(find.textContaining('Organisatie'), findsOneWidget);
+  });
+
   testWidgets('afgeronde cursus start opnieuw zonder oud eindanker', (
     tester,
   ) async {
@@ -608,17 +828,42 @@ void main() {
     expect(notifier.reportedPlayback?.completed, isTrue);
     expect(find.text('Mooi gedaan! Uw voortgang is bewaard.'), findsOneWidget);
     expect(find.text('Doorgaan in de les'), findsOneWidget);
-    expect(find.text('Terug naar mijn cursussen'), findsOneWidget);
+    expect(
+      find.widgetWithText(FilledButton, 'Terug naar mijn cursussen'),
+      findsOneWidget,
+    );
 
     await _actUntil(
       tester,
-      () => tester.tap(find.text('Terug naar mijn cursussen')),
+      () => tester.tap(
+        find.widgetWithText(FilledButton, 'Terug naar mijn cursussen'),
+      ),
       () => find
           .byKey(const Key('ociserve-featured-course'))
           .evaluate()
           .isNotEmpty,
       'het cursusoverzicht verscheen niet opnieuw',
     );
+
+    expect(container.read(tabsProvider).current?.isOpen, isFalse);
+    expect(find.byKey(const Key('ociserve-featured-course')), findsOneWidget);
+  });
+
+  testWidgets('een cursusles kan direct terug naar het cursusoverzicht', (
+    tester,
+  ) async {
+    final container = await _pumpApp(tester, _lessonNotifier());
+    await _openCourses(tester);
+    await tester.tap(find.text('Starten'));
+    await tester.pumpAndSettle();
+
+    final back = find.widgetWithText(
+      OutlinedButton,
+      'Terug naar mijn cursussen',
+    );
+    expect(back, findsOneWidget);
+    await tester.tap(back);
+    await tester.pumpAndSettle();
 
     expect(container.read(tabsProvider).current?.isOpen, isFalse);
     expect(find.byKey(const Key('ociserve-featured-course')), findsOneWidget);

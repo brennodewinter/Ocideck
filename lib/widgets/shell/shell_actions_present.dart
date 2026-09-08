@@ -303,6 +303,10 @@ Future<void> _showCourseCompletion(BuildContext context, WidgetRef ref) async {
   );
   if (returnToCourses != true || !context.mounted) return;
 
+  await _returnToCourses(context, ref);
+}
+
+Future<void> _returnToCourses(BuildContext context, WidgetRef ref) async {
   final navigatorContext = Navigator.of(context, rootNavigator: true).context;
   final tabs = ref.read(tabsProvider);
   final index = tabs.clampedIndex;
