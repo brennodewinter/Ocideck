@@ -1653,12 +1653,26 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Преминавайте курсове от вашата среда eLearning. Файловете на курсовете се отварят само в режим на възпроизвеждане; напредъкът се синхронизира само след влизане.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Влизането в eLearning е налично само в настолното приложение, защото уеб версията няма защитен ключодържател.',
+  'eLearning-server': 'eLearning сървър',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'При преминаване на курс OciDeck изпраща до избраната организация eLearning последния ви слайд, завършването и показаното време за слайд. Отговори, бележки и съдържание на курса не се изпращат като напредък.',
+  'Ingelogd bij eLearning': 'Влезли сте в eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Този сървър eLearning използва {host} за влизане. Данни се обменят с този доставчик на самоличност едва след като разрешите това.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Използвайте HTTPS адрес за eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Въведете валиден адрес на eLearning.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Влизането в eLearning е неуспешно. Проверете сървъра и опитайте отново.',
+  'eLearning-organisatie': 'Организация eLearning',
   'Bekeken: {tijd}': 'Прегледано: {tijd}',
   'Doorgaan in de les': 'Продължете в урока',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Сървърът не е променен, защото напредъкът все още чака да бъде изпратен.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Този сървър OciServe използва {host} за влизане. Данни се обменят с този доставчик на самоличност едва след като разрешите това.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Този урок от курса е наличен само за възпроизвеждане и не се съхранява локално.',
   'Deze identiteitsprovider toestaan':
@@ -1690,7 +1704,6 @@ const _dutchSourceAddBg = <String, String>{
   '{aantal} cursussen': '{aantal} курса',
   '{aantal} lessen': '{aantal} урока',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Въведете валиден адрес на OciServe.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} отчет(а) за напредъка чака(т) синхронизация.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1699,34 +1712,21 @@ const _dutchSourceAddBg = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Вашият акаунт не принадлежи към активна организация.',
   'Verdergaan': 'Продължи',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Преминавайте курсове от вашата среда OciServe. Файловете на курсовете се отварят само в режим на възпроизвеждане; напредъкът се синхронизира само след влизане.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Разрешете HTTPS сървър във вътрешна мрежа. Токените никога не се изпращат по обикновен HTTP.',
   'Starten': 'Стартиране',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'По време на възпроизвеждане OciDeck синхронизира с тази организация последния слайд, завършването и показаното време за слайд. Това не е доказателство за внимание или активно време за учене.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Влизането в OciServe е налично само в настолното приложение, защото уеб версията няма защитен ключодържател.',
-  'OciServe-organisatie': 'Организация OciServe',
-  'OciServe-server': 'OciServe сървър',
   'Opleiding': 'Обучение',
   'Ingelogd blijven op dit apparaat': 'Останете влезли на това устройство',
   'Inloggen': 'Вход',
   'Les': 'Урок',
   'Er staan geen opleidingen voor u klaar.': 'Няма налични курсове за вас.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Използвайте HTTPS адрес за OciServe.',
   'Ingelogd als {naam}': 'Влезли сте като {naam}',
-  'Ingelogd bij OciServe': 'Влезли сте в OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'При преминаване на курс OciDeck изпраща до избраната организация OciServe последния ви слайд, завършването и показаното време за слайд. Отговори, бележки и съдържание на курса не се изпращат като напредък.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Локалното влизане не можа да бъде изчистено напълно. Опитайте отново.',
   'De opleidingen konden niet worden opgehaald.':
       'Курсовете не можаха да бъдат извлечени.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Влизането в OciServe е неуспешно. Проверете сървъра и опитайте отново.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Създавайте eLearning съдържание: цели за обучение, модули, обратна връзка и обобщения на оценяването. Импортирайте SCORM, QTI, xAPI, AICC и OLX локално. Изключено по подразбиране; включете разширението, за да използвате типовете слайдове.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

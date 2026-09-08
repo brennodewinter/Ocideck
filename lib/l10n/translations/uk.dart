@@ -1648,12 +1648,26 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Проходьте курси зі свого середовища eLearning. Файли курсів відкриваються лише в режимі відтворення; прогрес синхронізується лише після входу.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Вхід до eLearning доступний лише в настільній програмі, оскільки вебверсія не має безпечної зв’язки ключів.',
+  'eLearning-server': 'Сервер eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Під час проходження курсу OciDeck надсилає вибраній організації eLearning ваш останній слайд, завершення та показаний час для кожного слайда. Відповіді, нотатки й вміст курсу не надсилаються як прогрес.',
+  'Ingelogd bij eLearning': 'Ви ввійшли до eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Цей сервер eLearning використовує {host} для входу. Дані з цим постачальником ідентифікації обмінюються лише після вашого дозволу.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Використовуйте адресу HTTPS для eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Введіть дійсну адресу eLearning.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Не вдалося увійти до eLearning. Перевірте сервер і спробуйте ще раз.',
+  'eLearning-organisatie': 'Організація eLearning',
   'Bekeken: {tijd}': 'Переглянуто: {tijd}',
   'Doorgaan in de les': 'Продовжити урок',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Сервер не змінено, оскільки поступ ще очікує надсилання.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Цей сервер OciServe використовує {host} для входу. Дані з цим постачальником ідентифікації обмінюються лише після вашого дозволу.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Цей урок курсу доступний лише для відтворення й не зберігається локально.',
   'Deze identiteitsprovider toestaan':
@@ -1685,7 +1699,6 @@ const _dutchSourceAddUk = <String, String>{
   '{aantal} cursussen': '{aantal} курсів',
   '{aantal} lessen': '{aantal} уроків',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Введіть дійсну адресу OciServe.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} звіт(ів) про прогрес очікує синхронізації.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1694,33 +1707,20 @@ const _dutchSourceAddUk = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Ваш обліковий запис не належить до активної організації.',
   'Verdergaan': 'Продовжити',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Проходьте курси зі свого середовища OciServe. Файли курсів відкриваються лише в режимі відтворення; прогрес синхронізується лише після входу.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Дозвольте HTTPS-сервер у внутрішній мережі. Токени ніколи не надсилаються через звичайний HTTP.',
   'Starten': 'Почати',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Під час відтворення OciDeck синхронізує з цією організацією останній слайд, завершення та показаний час для кожного слайда. Це не є доказом уваги чи активного часу навчання.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Вхід до OciServe доступний лише в настільній програмі, оскільки вебверсія не має безпечної зв’язки ключів.',
-  'OciServe-organisatie': 'Організація OciServe',
-  'OciServe-server': 'Сервер OciServe',
   'Opleiding': 'Курс',
   'Ingelogd blijven op dit apparaat': 'Залишатися в системі на цьому пристрої',
   'Inloggen': 'Увійти',
   'Les': 'Урок',
   'Er staan geen opleidingen voor u klaar.': 'Для вас немає доступних курсів.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Використовуйте адресу HTTPS для OciServe.',
   'Ingelogd als {naam}': 'Ви ввійшли як {naam}',
-  'Ingelogd bij OciServe': 'Ви ввійшли до OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Під час проходження курсу OciDeck надсилає вибраній організації OciServe ваш останній слайд, завершення та показаний час для кожного слайда. Відповіді, нотатки й вміст курсу не надсилаються як прогрес.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Не вдалося повністю очистити локальний вхід. Спробуйте ще раз.',
   'De opleidingen konden niet worden opgehaald.': 'Не вдалося отримати курси.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Не вдалося увійти до OciServe. Перевірте сервер і спробуйте ще раз.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Створюйте eLearning-контент: цілі навчання, модулі, зворотний зв\'язок та підсумки оцінювання. Імпортуйте SCORM, QTI, xAPI, AICC та OLX локально. Вимкнено за замовчуванням; увімкніть розширення, щоб використовувати типи слайдів.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

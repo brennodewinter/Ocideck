@@ -1635,12 +1635,26 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Kövesse az eLearning-környezetében elérhető kurzusokat. A kurzusfájlok csak lejátszási módban nyílnak meg; a haladás csak bejelentkezés után szinkronizálódik.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Az eLearning-be való bejelentkezés csak az asztali alkalmazásban érhető el, mert a webes verziónak nincs biztonságos kulcstartója.',
+  'eLearning-server': 'eLearning-kiszolgáló',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Kurzus követésekor az OciDeck elküldi a kiválasztott eLearning-szervezetnek az utolsó diát, a befejezést és a diánként megjelenített időt. A válaszok, jegyzetek és kurzustartalom nem haladásként kerülnek elküldésre.',
+  'Ingelogd bij eLearning': 'Bejelentkezve az eLearning-be',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Ez az eLearning-kiszolgáló a(z) {host} szolgáltatást használja bejelentkezéshez. Az adatok csak az engedélye után cserélődnek ezzel az identitásszolgáltatóval.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Használjon HTTPS-címet az eLearning-hez.',
+  'Vul een geldig eLearning-adres in.': 'Adjon meg érvényes eLearning-címet.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Az eLearning-be való bejelentkezés sikertelen. Ellenőrizze a kiszolgálót, majd próbálja újra.',
+  'eLearning-organisatie': 'eLearning-szervezet',
   'Bekeken: {tijd}': 'Megtekintve: {tijd}',
   'Doorgaan in de les': 'Folytatás a leckében',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'A kiszolgáló nem változott, mert a haladás még elküldésre vár.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Ez az OciServe-kiszolgáló a(z) {host} szolgáltatást használja bejelentkezéshez. Az adatok csak az engedélye után cserélődnek ezzel az identitásszolgáltatóval.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Ez a kurzuslecke csak lejátszásra érhető el, és nem tárolódik helyben.',
   'Deze identiteitsprovider toestaan': 'Identitásszolgáltató engedélyezése',
@@ -1671,7 +1685,6 @@ const _dutchSourceAddHu = <String, String>{
   '{aantal} cursussen': '{aantal} kurzus',
   '{aantal} lessen': '{aantal} lecke',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Adjon meg érvényes OciServe-címet.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} előrehaladási jelentés vár szinkronizálásra.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1680,35 +1693,22 @@ const _dutchSourceAddHu = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Az Ön fiókja nem tartozik aktív szervezethez.',
   'Verdergaan': 'Folytatás',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Kövesse az OciServe-környezetében elérhető kurzusokat. A kurzusfájlok csak lejátszási módban nyílnak meg; a haladás csak bejelentkezés után szinkronizálódik.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Engedélyezzen HTTPS-kiszolgálót belső hálózaton. A jogkivonatok soha nem kerülnek normál HTTP-n keresztül elküldésre.',
   'Starten': 'Indítás',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Lejátszás közben az OciDeck ezzel a szervezettel szinkronizálja az utolsó diát, a befejezést és a diánként megjelenített időt. Ez nem bizonyítja a figyelmet vagy az aktív tanulási időt.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Az OciServe-be való bejelentkezés csak az asztali alkalmazásban érhető el, mert a webes verziónak nincs biztonságos kulcstartója.',
-  'OciServe-organisatie': 'OciServe-szervezet',
-  'OciServe-server': 'OciServe-kiszolgáló',
   'Opleiding': 'Képzés',
   'Ingelogd blijven op dit apparaat': 'Maradjon bejelentkezve ezen az eszközön',
   'Inloggen': 'Bejelentkezés',
   'Les': 'Lecke',
   'Er staan geen opleidingen voor u klaar.':
       'Nincs elérhető kurzus az Ön számára.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Használjon HTTPS-címet az OciServe-hez.',
   'Ingelogd als {naam}': 'Bejelentkezve mint {naam}',
-  'Ingelogd bij OciServe': 'Bejelentkezve az OciServe-be',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Kurzus követésekor az OciDeck elküldi a kiválasztott OciServe-szervezetnek az utolsó diát, a befejezést és a diánként megjelenített időt. A válaszok, jegyzetek és kurzustartalom nem haladásként kerülnek elküldésre.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'A helyi bejelentkezést nem sikerült teljesen törölni. Próbálja újra.',
   'De opleidingen konden niet worden opgehaald.':
       'A kurzusokat nem sikerült lekérni.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Az OciServe-be való bejelentkezés sikertelen. Ellenőrizze a kiszolgálót, majd próbálja újra.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Hozzon létre eLearning tartalmat: tanulási célok, modulok, visszajelzések és értékelési összefoglalók. Importálja a SCORM, QTI, xAPI, AICC és OLX fájlokat helyileg. Alapértelmezetten kikapcsolva; kapcsolja be a kiterjesztést a diatípusok használatához.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

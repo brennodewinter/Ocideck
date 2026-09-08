@@ -2415,6 +2415,10 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De OciServe-koppeling staat voortaan herkenbaar als eLearning onder Integraties.**
+  De server, aanmelding en voortgangssynchronisatie staan niet langer tussen de
+  optionele uitbreidingen; de losse eLearning-auteursmodule blijft daar wel staan.
+
 - **De eLearning-sidecar komt het versiecontract na dat hij beloofde (#2006).** De
   doc-comment op `ElearningSidecar.parse` zei: null bij onleesbare JSON óf bij een
   versie uit een nieuwere build. Het eerste klopte, het tweede was niet gebouwd —

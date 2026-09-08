@@ -12,10 +12,13 @@ import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
+import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/dialogs/settings/ociserve_module_card.dart';
+import 'package:ocideck/widgets/dialogs/settings/integrations_panel.dart';
+import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -237,21 +240,113 @@ void main() {
             AppLocalizations.delegate,
             ...GlobalMaterialLocalizations.delegates,
           ],
-          home: const Scaffold(body: OciServeModuleCard()),
+          home: const Scaffold(body: OciServeIntegrationBody()),
         ),
       ),
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('OciServe-server'), findsOneWidget);
+    expect(find.text('eLearning-server'), findsOneWidget);
     expect(find.text('Ingelogd blijven op dit apparaat'), findsOneWidget);
     expect(find.text('Vertrouwde interne server'), findsOneWidget);
-    expect(find.text('Vul een geldig OciServe-adres in.'), findsOneWidget);
+    expect(find.text('Vul een geldig eLearning-adres in.'), findsOneWidget);
     expect(find.text('Inloggen'), findsOneWidget);
     expect(find.textContaining('aanmelden.example.org'), findsOneWidget);
     expect(
       find.text('Nog niet verstuurde voortgang is op dit apparaat bewaard.'),
       findsOneWidget,
+    );
+  });
+
+  testWidgets('eLearning-configuratie staat alleen onder Integraties', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1500, 1100));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          ociServeProvider.overrideWith(
+            () => _FixedOciServeNotifier(
+              const OciServeState(status: OciServeStatus.signedOut),
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => SettingsDialog.show(
+                  context,
+                  initialSection: SettingsSection.modules,
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(OciServeIntegrationBody), findsNothing);
+    final integrationsTab = find.text('Integraties');
+    await tester.ensureVisible(integrationsTab);
+    await tester.pumpAndSettle();
+    await tester.tap(integrationsTab);
+    await tester.pumpAndSettle();
+
+    expect(find.text('eLearning'), findsWidgets);
+    expect(find.text('OciServe'), findsNothing);
+    expect(find.byType(OciServeIntegrationBody), findsNothing);
+
+    final eLearningCard = find.ancestor(
+      of: find.descendant(
+        of: find.byType(IntegrationsPanel),
+        matching: find.text('eLearning'),
+      ),
+      matching: find.byType(SwitchListTile),
+    );
+    await tester.ensureVisible(eLearningCard);
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(of: eLearningCard, matching: find.byType(Switch)),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(OciServeIntegrationBody), findsOneWidget);
+    expect(find.text('eLearning-server'), findsOneWidget);
+  });
+
+  testWidgets('eLearning blijft tijdens het laden niet schakelbaar', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          openKatAvailableProvider.overrideWithValue(false),
+          ociServeProvider.overrideWith(
+            () => _FixedOciServeNotifier(const OciServeState()),
+          ),
+        ],
+        child: const MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(child: IntegrationsPanel()),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(tester.widget<Switch>(find.byType(Switch)).onChanged, isNull);
+    expect(
+      tester
+          .widget<TextButton>(
+            find.widgetWithText(TextButton, 'Alles inschakelen'),
+          )
+          .onPressed,
+      isNull,
     );
   });
 
@@ -269,7 +364,7 @@ void main() {
 
     expect(find.text('Inloggen'), findsOneWidget);
     expect(
-      find.textContaining('Aanmelden bij OciServe is niet gelukt'),
+      find.textContaining('Aanmelden bij eLearning is niet gelukt'),
       findsOneWidget,
     );
     await tester.tap(find.text('Inloggen'));

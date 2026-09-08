@@ -1649,12 +1649,27 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Urmați cursuri din mediul dumneavoastră eLearning. Fișierele de curs se deschid numai în modul de redare; progresul este sincronizat numai după autentificare.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Autentificarea în eLearning este disponibilă doar în aplicația pentru desktop, deoarece versiunea web nu are un breloc securizat.',
+  'eLearning-server': 'Server eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Când urmați un curs, OciDeck trimite organizației eLearning alese ultimul diapozitiv, finalizarea și timpul afișat pentru fiecare diapozitiv. Răspunsurile, notițele și conținutul cursului nu sunt trimise ca progres.',
+  'Ingelogd bij eLearning': 'Autentificat în eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Acest server eLearning folosește {host} pentru autentificare. Datele sunt schimbate cu acel furnizor de identitate numai după ce permiteți acest lucru.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Folosiți o adresă HTTPS pentru eLearning.',
+  'Vul een geldig eLearning-adres in.':
+      'Introduceți o adresă eLearning validă.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Autentificarea în eLearning a eșuat. Verificați serverul și încercați din nou.',
+  'eLearning-organisatie': 'Organizație eLearning',
   'Bekeken: {tijd}': 'Vizualizat: {tijd}',
   'Doorgaan in de les': 'Continuă în lecție',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Serverul nu a fost modificat, deoarece progresul încă așteaptă să fie trimis.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Acest server OciServe folosește {host} pentru autentificare. Datele sunt schimbate cu acel furnizor de identitate numai după ce permiteți acest lucru.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Această lecție de curs este disponibilă numai pentru redare și nu este stocată local.',
   'Deze identiteitsprovider toestaan': 'Permite acest furnizor de identitate',
@@ -1685,7 +1700,6 @@ const _dutchSourceAddRo = <String, String>{
   '{aantal} cursussen': '{aantal} cursuri',
   '{aantal} lessen': '{aantal} lecții',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Introduceți o adresă OciServe validă.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} raport/rapoarte de progres așteaptă sincronizarea.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1694,17 +1708,11 @@ const _dutchSourceAddRo = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Contul dumneavoastră nu aparține unei organizații active.',
   'Verdergaan': 'Continuă',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Urmați cursuri din mediul dumneavoastră OciServe. Fișierele de curs se deschid numai în modul de redare; progresul este sincronizat numai după autentificare.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Permiteți un server HTTPS într-o rețea internă. Jetoanele nu sunt trimise niciodată prin HTTP obișnuit.',
   'Starten': 'Începe',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'În timpul redării, OciDeck sincronizează cu această organizație ultimul diapozitiv, finalizarea și timpul afișat pentru fiecare diapozitiv. Aceasta nu este o dovadă a atenției sau a timpului de învățare activă.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Autentificarea în OciServe este disponibilă doar în aplicația pentru desktop, deoarece versiunea web nu are un breloc securizat.',
-  'OciServe-organisatie': 'Organizație OciServe',
-  'OciServe-server': 'Server OciServe',
   'Opleiding': 'Curs',
   'Ingelogd blijven op dit apparaat':
       'Rămâneți autentificat pe acest dispozitiv',
@@ -1712,18 +1720,11 @@ const _dutchSourceAddRo = <String, String>{
   'Les': 'Lecție',
   'Er staan geen opleidingen voor u klaar.':
       'Nu există cursuri disponibile pentru dumneavoastră.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Folosiți o adresă HTTPS pentru OciServe.',
   'Ingelogd als {naam}': 'Autentificat ca {naam}',
-  'Ingelogd bij OciServe': 'Autentificat în OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Când urmați un curs, OciDeck trimite organizației OciServe alese ultimul diapozitiv, finalizarea și timpul afișat pentru fiecare diapozitiv. Răspunsurile, notițele și conținutul cursului nu sunt trimise ca progres.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Autentificarea locală nu a putut fi ștearsă complet. Încercați din nou.',
   'De opleidingen konden niet worden opgehaald.':
       'Cursurile nu au putut fi preluate.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Autentificarea în OciServe a eșuat. Verificați serverul și încercați din nou.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Creați conținut eLearning: obiective de învățare, module, feedback și rezumate de evaluare. Importați SCORM, QTI, xAPI, AICC și OLX local. Dezactivat implicit; activați extensia pentru a folosi tipurile de diapozitive.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

@@ -1,6 +1,6 @@
 # OciDeck — Privacy & Data Handling
 
-> **Status:** current-state description of what stays local and what leaves · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of what stays local and what leaves · **Status last reviewed:** 2026-09-08 · **Published by:** Stichting LibreKAT
 
 A plain-language guide to what happens to your data in OciDeck: what stays on your
 device, what leaves it and only when you ask, and the controls you have. For the
@@ -10,7 +10,8 @@ technical mechanisms behind these guarantees, see
 ## The short version
 
 - **Your own presentations stay on your device.** There is no mandatory OciDeck
-  account and no general telemetry. The optional OciServe extension is the
+  account and no general telemetry. The optional **eLearning integration**
+  (technically OciServe) is the
   explicit exception: after you enable it and sign in, it downloads assigned
   courses and reports your last slide, completion and displayed milliseconds per
   slide to the OciServe organisation you selected. *(Corrected 2026-07-22: this
@@ -129,7 +130,8 @@ machine (desktop) or in your browser tab (web). This includes:
   statement about what you are working on and for whom, so Settings → Security
   can clear the whole list in one action.
 
-There is **no general analytics or hidden usage reporting**. OciServe course
+There is **no general analytics or hidden usage reporting**. The eLearning
+integration's OciServe course
 progress is deliberate, visible usage reporting: it is off by default and only
 starts after the user enables the extension and signs in. OciDeck sends stable
 slide anchors, displayed milliseconds and completion; it does not send answers,
@@ -195,15 +197,15 @@ against accessing internal/private network addresses.
 | **Save/Open — S3** | Your deck files (objects) | Your configured endpoint (AWS S3, MinIO, or any S3-compatible service) |
 | **Save/Open — Git** | Your deck files (commits) | Your configured forge (Gitea/Forgejo/GitLab/GitHub) |
 | **AI assistant** (off by default) | The specific text/image you request help with | The endpoint you configured |
-| **OciServe sign-in** (off by default, desktop only) | Installation status and, after login, the access token needed for `/me` | Your configured OciServe server |
-| **OciServe identity provider** | OIDC discovery, browser login and token exchange; the host is shown and requires explicit acceptance when it differs from OciServe | The identity-provider host announced by your OciServe server |
-| **OciServe courses/progress** | Assigned course packages; last slide, completion and displayed milliseconds per slide | Your configured OciServe server and selected organisation |
+| **eLearning sign-in (OciServe)** (off by default, desktop only) | Installation status and, after login, the access token needed for `/me` | Your configured OciServe server |
+| **eLearning identity provider (OciServe)** | OIDC discovery, browser login and token exchange; the host is shown and requires explicit acceptance when it differs from OciServe | The identity-provider host announced by your OciServe server |
+| **eLearning courses/progress (OciServe)** | Assigned course packages; last slide, completion and displayed milliseconds per slide | Your configured OciServe server and selected organisation |
 | **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
 | **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
 | **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
 | **Embedded Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `vimeo.com` |
 
-The storage, AI and OciServe rows go to servers **you or your organisation**
+The storage, AI and eLearning/OciServe rows go to servers **you or your organisation**
 configured — not to OciDeck. The CVE and embedded-media rows are exceptions,
 and they are listed because
 naming them is the only honest way to keep the sentence above true:

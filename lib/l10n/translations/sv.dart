@@ -1632,12 +1632,26 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Gå kurser från din eLearning-miljö. Kursfiler öppnas endast i uppspelningsläge; framsteg synkroniseras endast efter inloggning.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Inloggning till eLearning är bara tillgänglig i skrivbordsappen eftersom webbversionen saknar en säker nyckelring.',
+  'eLearning-server': 'eLearning-server',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'När du går en kurs skickar OciDeck din senaste bild, slutförande och visad tid per bild till den valda eLearning-organisationen. Svar, anteckningar och kursinnehåll skickas inte som framsteg.',
+  'Ingelogd bij eLearning': 'Inloggad på eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Den här eLearning-servern använder {host} för inloggning. Data utbyts med den identitetsleverantören först när du tillåter det.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Använd en HTTPS-adress för eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Ange en giltig eLearning-adress.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Inloggningen på eLearning misslyckades. Kontrollera servern och försök igen.',
+  'eLearning-organisatie': 'eLearning-organisation',
   'Bekeken: {tijd}': 'Visad: {tijd}',
   'Doorgaan in de les': 'Fortsätt i lektionen',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Servern ändrades inte eftersom framsteg fortfarande väntar på att skickas.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Den här OciServe-servern använder {host} för inloggning. Data utbyts med den identitetsleverantören först när du tillåter det.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Den här kurslektionen är endast tillgänglig för uppspelning och sparas inte lokalt.',
   'Deze identiteitsprovider toestaan': 'Tillåt denna identitetsleverantör',
@@ -1669,7 +1683,6 @@ const _dutchSourceAddSv = <String, String>{
   '{aantal} cursussen': '{aantal} kurser',
   '{aantal} lessen': '{aantal} lektioner',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Ange en giltig OciServe-adress.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} lägesrapport(er) väntar på synkronisering.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1678,17 +1691,11 @@ const _dutchSourceAddSv = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Ditt konto tillhör inte en aktiv organisation.',
   'Verdergaan': 'Fortsätt',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Gå kurser från din OciServe-miljö. Kursfiler öppnas endast i uppspelningsläge; framsteg synkroniseras endast efter inloggning.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Tillåt en HTTPS-server på ett internt nätverk. Token skickas aldrig via vanlig HTTP.',
   'Starten': 'Starta',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Under uppspelning synkroniserar OciDeck den senaste bilden, slutförandet och visad tid per bild med denna organisation. Detta är inte bevis på uppmärksamhet eller aktiv inlärningstid.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Inloggning till OciServe är bara tillgänglig i skrivbordsappen eftersom webbversionen saknar en säker nyckelring.',
-  'OciServe-organisatie': 'OciServe-organisation',
-  'OciServe-server': 'OciServe-server',
   'Opleiding': 'Kurs',
   'Ingelogd blijven op dit apparaat':
       'Fortsätt vara inloggad på den här enheten',
@@ -1696,17 +1703,10 @@ const _dutchSourceAddSv = <String, String>{
   'Les': 'Lektion',
   'Er staan geen opleidingen voor u klaar.':
       'Det finns inga kurser tillgängliga för dig.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Använd en HTTPS-adress för OciServe.',
   'Ingelogd als {naam}': 'Inloggad som {naam}',
-  'Ingelogd bij OciServe': 'Inloggad på OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'När du går en kurs skickar OciDeck din senaste bild, slutförande och visad tid per bild till den valda OciServe-organisationen. Svar, anteckningar och kursinnehåll skickas inte som framsteg.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Den lokala inloggningen kunde inte rensas helt. Försök igen.',
   'De opleidingen konden niet worden opgehaald.': 'Kurserna kunde inte hämtas.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Inloggningen på OciServe misslyckades. Kontrollera servern och försök igen.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Skapa eLearning-innehåll: lärandemål, moduler, feedback och bedömningssammanfattningar. Importera SCORM, QTI, xAPI, AICC och OLX lokalt. Av som standard; slå på tillägget för att använda diatyperna.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

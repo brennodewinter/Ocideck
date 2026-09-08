@@ -1651,12 +1651,26 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Segwi korsijiet mill-ambjent eLearning tiegħek. Il-fajls tal-kors jinfetħu biss fil-modalità ta\' plejbek; il-progress jiġi sinkronizzat biss wara l-login.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Il-login f\'eLearning huwa disponibbli biss fl-app tad-desktop, għax il-verżjoni web m\'għandhiex keychain sigur.',
+  'eLearning-server': 'Server eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Meta ssegwi kors, OciDeck jibgħat lill-organizzazzjoni eLearning magħżula l-aħħar slide tiegħek, it-tlestija u l-ħin muri għal kull slide. It-tweġibiet, in-noti u l-kontenut tal-kors ma jintbagħtux bħala progress.',
+  'Ingelogd bij eLearning': 'Illoggjat f\'eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Dan is-server eLearning juża {host} biex tidħol. Id-data tiġi skambjata ma’ dak il-fornitur tal-identità biss wara li tippermetti dan.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Uża indirizz HTTPS għal eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Daħħal indirizz eLearning validu.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Il-login f\'eLearning falla. Iċċekkja s-server u erġa\' pprova.',
+  'eLearning-organisatie': 'Organizzazzjoni eLearning',
   'Bekeken: {tijd}': 'Meqjus: {tijd}',
   'Doorgaan in de les': 'Kompli fil-lezzjoni',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Is-server ma nbidilx għax il-progress għadu qed jistenna biex jintbagħat.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Dan is-server OciServe juża {host} biex tidħol. Id-data tiġi skambjata ma’ dak il-fornitur tal-identità biss wara li tippermetti dan.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Din il-lezzjoni tal-kors hija disponibbli biss għad-daqq u ma tinħażinx lokalment.',
   'Deze identiteitsprovider toestaan': 'Ħalli lil dan il-fornitur tal-identità',
@@ -1688,7 +1702,6 @@ const _dutchSourceAddMt = <String, String>{
   '{aantal} cursussen': '{aantal} korsijiet',
   '{aantal} lessen': '{aantal} lezzjonijiet',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Daħħal indirizz OciServe validu.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} rapport(i) tal-progress qed jistennew is-sinkronizzazzjoni.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1697,34 +1710,22 @@ const _dutchSourceAddMt = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Il-kont tiegħek ma jappartjenix għal organizzazzjoni attiva.',
   'Verdergaan': 'Kompli',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Segwi korsijiet mill-ambjent OciServe tiegħek. Il-fajls tal-kors jinfetħu biss fil-modalità ta\' plejbek; il-progress jiġi sinkronizzat biss wara l-login.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Ħalli server HTTPS fuq netwerk intern. It-tokens qatt ma jintbagħtu permezz ta\' HTTP ordinarju.',
   'Starten': 'Ibda',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Waqt il-plejbek, OciDeck jissinkronizza ma\' din l-organizzazzjoni l-aħħar slide, it-tlestija u l-ħin muri għal kull slide. Dan mhuwiex prova ta\' attenzjoni jew ħin ta\' tagħlim attiv.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Il-login f\'OciServe huwa disponibbli biss fl-app tad-desktop, għax il-verżjoni web m\'għandhiex keychain sigur.',
-  'OciServe-organisatie': 'Organizzazzjoni OciServe',
-  'OciServe-server': 'Server OciServe',
   'Opleiding': 'Kors',
   'Ingelogd blijven op dit apparaat': 'Ibqa\' illoggjat fuq dan l-apparat',
   'Inloggen': 'Idħol',
   'Les': 'Lezzjoni',
   'Er staan geen opleidingen voor u klaar.':
       'M\'hemm l-ebda korsijiet lesti għalik.',
-  'Gebruik een HTTPS-adres voor OciServe.': 'Uża indirizz HTTPS għal OciServe.',
   'Ingelogd als {naam}': 'Illoggjat bħala {naam}',
-  'Ingelogd bij OciServe': 'Illoggjat f\'OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Meta ssegwi kors, OciDeck jibgħat lill-organizzazzjoni OciServe magħżula l-aħħar slide tiegħek, it-tlestija u l-ħin muri għal kull slide. It-tweġibiet, in-noti u l-kontenut tal-kors ma jintbagħtux bħala progress.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Il-login lokali ma setax jitnaddaf kompletament. Erġa\' pprova.',
   'De opleidingen konden niet worden opgehaald.':
       'Il-korsijiet ma setgħux jinġabu.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Il-login f\'OciServe falla. Iċċekkja s-server u erġa\' pprova.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Oħloq kontenut eLearning: għanijiet ta\' tagħlim, moduli, feedback u sommarji ta\' evalwazzjoni. Importa SCORM, QTI, xAPI, AICC u OLX lokalment. Mitfi awtomatikament; ixġħel l-estensjoni biex tuża t-tipi ta\' slides.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

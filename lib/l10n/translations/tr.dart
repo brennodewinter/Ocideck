@@ -2550,12 +2550,26 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'eLearning ortamınızdaki kursları takip edin. Kurs dosyaları yalnızca oynatma modunda açılır; ilerleme yalnızca oturum açıldıktan sonra eşitlenir.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'eLearning oturumu yalnızca masaüstü uygulamasında kullanılabilir; web sürümünde güvenli anahtarlık yoktur.',
+  'eLearning-server': 'eLearning sunucusu',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Bir kursu takip ederken OciDeck, son slaydınızı, tamamlanmayı ve slayt başına gösterilen süreyi seçilen eLearning kuruluşuna gönderir. Yanıtlar, notlar ve kurs içeriği ilerleme olarak gönderilmez.',
+  'Ingelogd bij eLearning': 'eLearning\'de oturum açıldı',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Bu eLearning sunucusu oturum açmak için {host} kullanır. Veriler, bu kimlik sağlayıcıyla yalnızca izin verdikten sonra paylaşılır.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'eLearning için bir HTTPS adresi kullanın.',
+  'Vul een geldig eLearning-adres in.': 'Geçerli bir eLearning adresi girin.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'eLearning oturumu açılamadı. Sunucuyu kontrol edin ve yeniden deneyin.',
+  'eLearning-organisatie': 'eLearning kuruluşu',
   'Bekeken: {tijd}': 'İzlendi: {tijd}',
   'Doorgaan in de les': 'Derste devam et',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Sunucu değiştirilmedi; çünkü ilerleme hâlâ gönderilmeyi bekliyor.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Bu OciServe sunucusu oturum açmak için {host} kullanır. Veriler, bu kimlik sağlayıcıyla yalnızca izin verdikten sonra paylaşılır.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Bu ders yalnızca oynatmak için kullanılabilir ve yerel olarak saklanmaz.',
   'Deze identiteitsprovider toestaan': 'Bu kimlik sağlayıcıya izin ver',
@@ -2585,7 +2599,6 @@ const _dutchSourceAddTr = <String, String>{
   '{aantal} cursussen': '{aantal} kurs',
   '{aantal} lessen': '{aantal} ders',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Geçerli bir OciServe adresi girin.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} ilerleme raporu senkronizasyon bekliyor.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -2594,33 +2607,20 @@ const _dutchSourceAddTr = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Hesabınız etkin bir kuruluşa ait değil.',
   'Verdergaan': 'Devam et',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'OciServe ortamınızdaki kursları takip edin. Kurs dosyaları yalnızca oynatma modunda açılır; ilerleme yalnızca oturum açıldıktan sonra eşitlenir.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Dahili ağda bir HTTPS sunucusuna izin verin. Belirteçler hiçbir zaman normal HTTP üzerinden gönderilmez.',
   'Starten': 'Başlat',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Oynatma sırasında OciDeck son slaytı, tamamlanmayı ve slayt başına gösterilen süreyi bu kuruluşla eşitler. Bu, dikkat veya etkin öğrenme süresinin kanıtı değildir.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'OciServe oturumu yalnızca masaüstü uygulamasında kullanılabilir; web sürümünde güvenli anahtarlık yoktur.',
-  'OciServe-organisatie': 'OciServe kuruluşu',
-  'OciServe-server': 'OciServe sunucusu',
   'Opleiding': 'Eğitim',
   'Ingelogd blijven op dit apparaat': 'Bu cihazda oturum açık kalsın',
   'Inloggen': 'Oturum aç',
   'Les': 'Ders',
   'Er staan geen opleidingen voor u klaar.': 'Sizin için hazır kurs yok.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'OciServe için bir HTTPS adresi kullanın.',
   'Ingelogd als {naam}': '{naam} olarak oturum açıldı',
-  'Ingelogd bij OciServe': 'OciServe\'de oturum açıldı',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Bir kursu takip ederken OciDeck, son slaydınızı, tamamlanmayı ve slayt başına gösterilen süreyi seçilen OciServe kuruluşuna gönderir. Yanıtlar, notlar ve kurs içeriği ilerleme olarak gönderilmez.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Yerel oturum açma tamamen temizlenemedi. Yeniden deneyin.',
   'De opleidingen konden niet worden opgehaald.': 'Kurslar alınamadı.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'OciServe oturumu açılamadı. Sunucuyu kontrol edin ve yeniden deneyin.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'eLearning içeriği oluşturun: öğrenme hedefleri, modüller, geri bildirim ve değerlendirme özetleri. SCORM, QTI, xAPI, AICC ve OLX\'i yerel olarak içe aktarın. Varsayılan olarak kapalı; slayt türlerini kullanmak için uzantıyı açın.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

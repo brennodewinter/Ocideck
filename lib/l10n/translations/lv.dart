@@ -1631,12 +1631,26 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Apgūstiet kursus no savas eLearning vides. Kursu faili tiek atvērti tikai atskaņošanas režīmā; progress tiek sinhronizēts tikai pēc pieteikšanās.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Pieteikšanās eLearning ir pieejama tikai darbvirsmas lietotnē, jo tīmekļa versijai nav droša atslēgu saišķa.',
+  'eLearning-server': 'eLearning serveris',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Apgūstot kursu, OciDeck nosūta izvēlētajai eLearning organizācijai jūsu pēdējo slaidu, pabeigšanu un rādīto laiku par slaidu. Atbildes, piezīmes un kursa saturs netiek nosūtīti kā progress.',
+  'Ingelogd bij eLearning': 'Pieteicies eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Šis eLearning serveris izmanto {host} pierakstīšanai. Dati ar šo identitātes nodrošinātāju tiek apmainīti tikai pēc jūsu atļaujas.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'eLearning izmantojiet HTTPS adresi.',
+  'Vul een geldig eLearning-adres in.': 'Ievadiet derīgu eLearning adresi.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Pieteikšanās eLearning neizdevās. Pārbaudiet serveri un mēģiniet vēlreiz.',
+  'eLearning-organisatie': 'eLearning organizācija',
   'Bekeken: {tijd}': 'Skatīts: {tijd}',
   'Doorgaan in de les': 'Turpināt nodarbībā',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Serveris netika mainīts, jo progress vēl gaida nosūtīšanu.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Šis OciServe serveris izmanto {host} pierakstīšanai. Dati ar šo identitātes nodrošinātāju tiek apmainīti tikai pēc jūsu atļaujas.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Šī kursa nodarbība ir pieejama tikai atskaņošanai un netiek saglabāta lokāli.',
   'Deze identiteitsprovider toestaan': 'Atļaut šo identitātes nodrošinātāju',
@@ -1668,7 +1682,6 @@ const _dutchSourceAddLv = <String, String>{
   '{aantal} cursussen': '{aantal} kursi',
   '{aantal} lessen': '{aantal} nodarbības',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Ievadiet derīgu OciServe adresi.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} progresa ziņojums/i gaida sinhronizāciju.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1677,33 +1690,20 @@ const _dutchSourceAddLv = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Jūsu konts nepieder aktīvai organizācijai.',
   'Verdergaan': 'Turpināt',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Apgūstiet kursus no savas OciServe vides. Kursu faili tiek atvērti tikai atskaņošanas režīmā; progress tiek sinhronizēts tikai pēc pieteikšanās.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Atļaujiet HTTPS serveri iekšējā tīklā. Marķieri nekad netiek sūtīti pa parastu HTTP.',
   'Starten': 'Sākt',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Atskaņošanas laikā OciDeck sinhronizē ar šo organizāciju pēdējo slaidu, pabeigšanu un rādīto laiku par slaidu. Tas nav uzmanības vai aktīva mācību laika pierādījums.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Pieteikšanās OciServe ir pieejama tikai darbvirsmas lietotnē, jo tīmekļa versijai nav droša atslēgu saišķa.',
-  'OciServe-organisatie': 'OciServe organizācija',
-  'OciServe-server': 'OciServe serveris',
   'Opleiding': 'Kurss',
   'Ingelogd blijven op dit apparaat': 'Palikt pieteiktam šajā ierīcē',
   'Inloggen': 'Pieteikties',
   'Les': 'Nodarbība',
   'Er staan geen opleidingen voor u klaar.': 'Jums nav pieejamu kursu.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'OciServe izmantojiet HTTPS adresi.',
   'Ingelogd als {naam}': 'Pieteicies kā {naam}',
-  'Ingelogd bij OciServe': 'Pieteicies OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Apgūstot kursu, OciDeck nosūta izvēlētajai OciServe organizācijai jūsu pēdējo slaidu, pabeigšanu un rādīto laiku par slaidu. Atbildes, piezīmes un kursa saturs netiek nosūtīti kā progress.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Vietējo pieteikšanos nevarēja pilnībā notīrīt. Mēģiniet vēlreiz.',
   'De opleidingen konden niet worden opgehaald.': 'Kursus nevarēja izgūt.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Pieteikšanās OciServe neizdevās. Pārbaudiet serveri un mēģiniet vēlreiz.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Izveidojiet eLearning saturu: mācību mērķi, moduļi, atsauksmes un vērtēšanas kopsavilkumi. Importējiet SCORM, QTI, xAPI, AICC un OLX lokāli. Pēc noklusējuma izslēgts; ieslēdziet paplašinājumu, lai izmantotu slaidu tipus.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

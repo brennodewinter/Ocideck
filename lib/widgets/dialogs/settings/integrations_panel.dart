@@ -4,8 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../platform/platform_features.dart';
 import '../../../state/integration_registry.dart';
+import '../../../state/ociserve_provider.dart';
 import '../../../state/openkat_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'ociserve_module_card.dart';
 import 'openkat_integration_panel.dart';
 import 'settings_section_title.dart';
 
@@ -65,6 +67,10 @@ class _BulkControls extends ConsumerWidget {
     final integrations = ref.watch(availableIntegrationsProvider);
     final allOn = ref.watch(allIntegrationsEnabledProvider);
     final anyOn = ref.watch(anyIntegrationEnabledProvider);
+    final eLearningLoading = ref.watch(
+      ociServeProvider.select((state) => state.loading),
+    );
+    final web = isWebPlatform;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
@@ -90,11 +96,15 @@ class _BulkControls extends ConsumerWidget {
           ),
           const SizedBox(width: 4),
           TextButton(
-            onPressed: allOn ? null : () => _setAll(ref, integrations, true),
+            onPressed: web || eLearningLoading || allOn
+                ? null
+                : () => _setAll(ref, integrations, true),
             child: Text(l10n.d('Alles inschakelen')),
           ),
           TextButton(
-            onPressed: anyOn ? () => _setAll(ref, integrations, false) : null,
+            onPressed: !web && !eLearningLoading && anyOn
+                ? () => _setAll(ref, integrations, false)
+                : null,
             child: Text(l10n.d('Alles uitschakelen')),
           ),
         ],
@@ -121,6 +131,9 @@ class _IntegrationCard extends ConsumerWidget {
     final l10n = context.l10n;
     final enabled = ref.watch(entry.enabled);
     final revealed = ref.watch(entry.revealed);
+    final loading =
+        entry.id == IntegrationId.ociServe &&
+        ref.watch(ociServeProvider.select((state) => state.loading));
     final web = isWebPlatform;
     return Material(
       color: AppTheme.paper,
@@ -134,13 +147,13 @@ class _IntegrationCard extends ConsumerWidget {
         children: [
           SwitchListTile(
             value: !web && enabled,
-            onChanged: web ? null : (v) => entry.setEnabled(ref, v),
+            onChanged: web || loading ? null : (v) => entry.setEnabled(ref, v),
             title: Text(
               _title(l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(
-              _subtitle(l10n),
+              _subtitle(l10n, web: web),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
             secondary: _logo(),
@@ -166,21 +179,31 @@ class _IntegrationCard extends ConsumerWidget {
 
   bool _hasContent(WidgetRef ref) => switch (entry.id) {
     IntegrationId.openKat => ref.watch(openKatHasContentProvider),
+    IntegrationId.ociServe => false,
   };
 
   String _title(AppLocalizations l10n) => switch (entry.id) {
     IntegrationId.openKat => l10n.d('OpenKAT'),
+    IntegrationId.ociServe => l10n.d('eLearning'),
   };
 
-  String _subtitle(AppLocalizations l10n) {
-    if (isWebPlatform) {
-      return l10n.d(
-        'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.',
-      );
+  String _subtitle(AppLocalizations l10n, {required bool web}) {
+    if (web) {
+      return switch (entry.id) {
+        IntegrationId.openKat => l10n.d(
+          'De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.',
+        ),
+        IntegrationId.ociServe => l10n.d(
+          'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.',
+        ),
+      };
     }
     return switch (entry.id) {
       IntegrationId.openKat => l10n.d(
         'Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.',
+      ),
+      IntegrationId.ociServe => l10n.d(
+        'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.',
       ),
     };
   }
@@ -189,12 +212,10 @@ class _IntegrationCard extends ConsumerWidget {
     IntegrationId.openKat => l10n.d(
       'Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.',
     ),
+    IntegrationId.ociServe => '',
   };
 
   Widget _logo() => switch (entry.id) {
-    // Keiko, het logo van OpenKAT: in één oogopslag duidelijk over welk systeem
-    // deze sectie gaat. `contain` en niet `cover`: dit is lijnwerk met witruimte
-    // eromheen, en bijsnijden zou er oren af halen.
     IntegrationId.openKat => Image.asset(
       'assets/images/openkat-logo.png',
       width: 40,
@@ -202,9 +223,11 @@ class _IntegrationCard extends ConsumerWidget {
       fit: BoxFit.contain,
       excludeFromSemantics: true,
     ),
+    IntegrationId.ociServe => const Icon(Icons.school_outlined),
   };
 
   Widget _body() => switch (entry.id) {
     IntegrationId.openKat => const OpenKatIntegrationBody(),
+    IntegrationId.ociServe => const OciServeIntegrationBody(),
   };
 }
