@@ -166,6 +166,64 @@ void main() {
   );
 
   test(
+    'downloads the authenticated account avatar with a strict cap',
+    () async {
+      final bytes = Uint8List.fromList([
+        0x89,
+        0x50,
+        0x4e,
+        0x47,
+        0x0d,
+        0x0a,
+        0x1a,
+        0x0a,
+        1,
+      ]);
+      final hash = sha256.convert(bytes).toString();
+      transport.responses.add(
+        OciServeHttpResponse(
+          statusCode: 200,
+          body: bytes,
+          headers: {'content-type': 'image/png'},
+        ),
+      );
+
+      expect(
+        await gateway.accountAvatar(accessToken: 'access', avatarHash: hash),
+        bytes,
+      );
+      expect(transport.requests.single.url.path, '/api/v1/me/avatar');
+      expect(transport.caps.single, 5 * 1024 * 1024);
+    },
+  );
+
+  test('records native login and a locally opened lesson', () async {
+    transport.responses.addAll([
+      OciServeHttpResponse(statusCode: 204, body: Uint8List(0)),
+      OciServeHttpResponse(statusCode: 204, body: Uint8List(0)),
+    ]);
+    await gateway.recordOciDeckLogin(
+      accessToken: 'access',
+      idempotencyKey: 'login-event',
+    );
+    await gateway.recordLessonOpened(
+      accessToken: 'access',
+      organizationId: 'org',
+      versionId: 'version',
+      lessonId: 'lesson',
+      idempotencyKey: 'open-event',
+    );
+
+    expect(transport.requests.first.url.path, '/api/v1/auth/ocideck-login');
+    expect(
+      transport.requests.last.url.path,
+      '/api/v1/organizations/org/me/course-versions/version/lessons/lesson/opened',
+    );
+    expect(transport.requests.first.headers['idempotency-key'], 'login-event');
+    expect(transport.requests.last.headers['idempotency-key'], 'open-event');
+  });
+
+  test(
     'refuses a course image whose bytes do not match the feed hash',
     () async {
       final bytes = Uint8List.fromList([

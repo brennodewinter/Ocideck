@@ -75,11 +75,15 @@ class OciServeAccount {
   const OciServeAccount({
     required this.id,
     this.displayName = '',
+    this.email = '',
+    this.avatarHash = '',
     this.memberships = const [],
   });
 
   final String id;
   final String displayName;
+  final String email;
+  final String avatarHash;
   final List<OciServeMembership> memberships;
 
   List<OciServeMembership> get activeMemberships => memberships
@@ -106,6 +110,8 @@ class OciServeAccount {
                   rawAccount['name'] as String? ??
                   '')
               .trim(),
+      email: (rawAccount['email'] as String? ?? '').trim(),
+      avatarHash: (rawAccount['avatar_hash'] as String? ?? '').trim(),
       memberships: rawMemberships
           .map(
             (item) => OciServeMembership.fromJson(

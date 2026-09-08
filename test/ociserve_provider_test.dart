@@ -78,6 +78,7 @@ class _FakeApi implements OciServeApi {
   bool failReports = false;
   int reports = 0;
   int discoveries = 0;
+  int loginEvents = 0;
   OciServePlaybackSnapshot? lastSnapshot;
 
   @override
@@ -94,6 +95,23 @@ class _FakeApi implements OciServeApi {
   @override
   Future<OciServeAccount> me(String accessToken) =>
       meCompleter?.future ?? Future.value(account);
+
+  @override
+  Future<void> recordOciDeckLogin({
+    required String accessToken,
+    required String idempotencyKey,
+  }) async {
+    loginEvents++;
+  }
+
+  @override
+  Future<void> recordLessonOpened({
+    required String accessToken,
+    required String organizationId,
+    required String versionId,
+    required String lessonId,
+    required String idempotencyKey,
+  }) async {}
 
   @override
   Future<List<OciServeFeedItem>> learningFeed({
@@ -136,6 +154,12 @@ class _FakeApi implements OciServeApi {
     required String accessToken,
     required String organizationId,
     required String imageHash,
+  }) async => Uint8List(0);
+
+  @override
+  Future<Uint8List> accountAvatar({
+    required String accessToken,
+    required String avatarHash,
   }) async => Uint8List(0);
 }
 
@@ -214,6 +238,7 @@ void main() {
     final state = container.read(ociServeProvider);
     expect(state.authenticated, isTrue);
     expect(state.memberships.single.organizationId, 'org');
+    expect(api.loginEvents, 1);
     expect(
       await secrets.readOciServeRefreshToken(_settings.baseUrl),
       contains('"refresh_token":"refresh"'),
@@ -347,6 +372,47 @@ void main() {
     expect(const OciServeSettings().rememberLogin, isFalse);
     expect(OciServeSettings.fromJson(const {}).rememberLogin, isFalse);
   });
+
+  test(
+    'cached login can recover after the server was offline at startup',
+    () async {
+      SharedPreferences.setMockInitialValues({
+        kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+      });
+      await secrets.writeOciServeRefreshToken(
+        _settings.baseUrl,
+        jsonEncode({
+          'version': 1,
+          'refresh_token': 'refresh',
+          'issuer': _oidc.issuer.toString(),
+          'client_id': _installation.clientId,
+          'token_endpoint': _oidc.tokenEndpoint.toString(),
+        }),
+      );
+      var online = false;
+      final auth = _FakeAuth();
+      final container = _container(
+        api,
+        secrets,
+        auth: auth,
+        gatewayFactory: (_) {
+          if (!online) throw const OciServeException('connection_failed');
+          return api;
+        },
+      );
+      addTearDown(container.dispose);
+      container.read(ociServeProvider);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      expect(container.read(ociServeProvider).errorCode, 'restore_failed');
+      online = true;
+
+      expect(await container.read(ociServeProvider.notifier).login(), isTrue);
+      expect(auth.refreshes, 1);
+      expect(api.loginEvents, 0);
+      expect(container.read(ociServeProvider).authenticated, isTrue);
+    },
+  );
 
   test(
     'a cross-host identity provider is disclosed before discovery',

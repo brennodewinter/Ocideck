@@ -261,7 +261,24 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<void> setEnabled(bool enabled) =>
       saveSettings(state.settings.copyWith(enabled: enabled));
 
+  Future<bool> _restoreCachedLogin() async {
+    if (state.authenticated) return true;
+    final settings = state.settings;
+    if (!settings.enabled || !settings.isConfigured || !_secrets.canStore) {
+      return false;
+    }
+    final stored = await _secrets.readOciServeRefreshToken(
+      settings.normalizedBaseUrl,
+    );
+    if (stored == null || stored.isEmpty) return false;
+    await _initialize(++_generation);
+    return state.authenticated;
+  }
+
   Future<bool> login() async {
+    if (state.settings.rememberLogin && await _restoreCachedLogin()) {
+      return true;
+    }
     final generation = ++_generation;
     final settings = state.settings;
     if (!settings.enabled || !_secrets.canStore) {
@@ -295,6 +312,10 @@ class OciServeNotifier extends Notifier<OciServeState> {
       if (account.activeMemberships.isEmpty) {
         throw const OciServeException('no_active_membership');
       }
+      await gateway.recordOciDeckLogin(
+        accessToken: tokens.accessToken,
+        idempotencyKey: _uuid.v4(),
+      );
       if (generation != _generation) return false;
       _installation = installation;
       _configuration = configuration;
@@ -459,6 +480,21 @@ class OciServeNotifier extends Notifier<OciServeState> {
     );
   }
 
+  Future<void> recordLessonOpened({
+    required String organizationId,
+    required OciServeFeedItem lesson,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    await _gatewayFactory(state.settings).recordLessonOpened(
+      accessToken: access,
+      organizationId: organizationId,
+      versionId: lesson.versionId,
+      lessonId: lesson.lessonId,
+      idempotencyKey: _uuid.v4(),
+    );
+  }
+
   Future<Uint8List> courseImage({
     required String organizationId,
     required String imageHash,
@@ -470,6 +506,13 @@ class OciServeNotifier extends Notifier<OciServeState> {
       organizationId: organizationId,
       imageHash: imageHash,
     );
+  }
+
+  Future<Uint8List> accountAvatar(String avatarHash) async {
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).accountAvatar(accessToken: access, avatarHash: avatarHash);
   }
 
   Future<void> reportPlayback({

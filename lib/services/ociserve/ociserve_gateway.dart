@@ -16,6 +16,10 @@ abstract class OciServeApi {
     OciServeInstallation installation,
   );
   Future<OciServeAccount> me(String accessToken);
+  Future<void> recordOciDeckLogin({
+    required String accessToken,
+    required String idempotencyKey,
+  });
   Future<List<OciServeFeedItem>> learningFeed({
     required String accessToken,
     required String organizationId,
@@ -26,10 +30,21 @@ abstract class OciServeApi {
     required String versionId,
     required String lessonId,
   });
+  Future<void> recordLessonOpened({
+    required String accessToken,
+    required String organizationId,
+    required String versionId,
+    required String lessonId,
+    required String idempotencyKey,
+  });
   Future<Uint8List> courseImage({
     required String accessToken,
     required String organizationId,
     required String imageHash,
+  });
+  Future<Uint8List> accountAvatar({
+    required String accessToken,
+    required String avatarHash,
   });
   Future<OciServeLearningState> learningState({
     required String accessToken,
@@ -51,6 +66,7 @@ class OciServeGateway implements OciServeApi {
   // stopped client-side before it can consume more memory than the contract.
   static const int _packageCap = 32 * 1024 * 1024;
   static const int _imageCap = 64 * 1024 * 1024;
+  static const int _avatarCap = 5 * 1024 * 1024;
 
   final OciServeSettings settings;
   final OciServeHttpTransport _transport;
@@ -191,6 +207,19 @@ class OciServeGateway implements OciServeApi {
   }
 
   @override
+  Future<void> recordOciDeckLogin({
+    required String accessToken,
+    required String idempotencyKey,
+  }) async {
+    await _send(
+      method: 'POST',
+      url: _api(['auth', 'ocideck-login']),
+      accessToken: accessToken,
+      headers: {'idempotency-key': idempotencyKey},
+    );
+  }
+
+  @override
   Future<List<OciServeFeedItem>> learningFeed({
     required String accessToken,
     required String organizationId,
@@ -271,6 +300,31 @@ class OciServeGateway implements OciServeApi {
   }
 
   @override
+  Future<void> recordLessonOpened({
+    required String accessToken,
+    required String organizationId,
+    required String versionId,
+    required String lessonId,
+    required String idempotencyKey,
+  }) async {
+    await _send(
+      method: 'POST',
+      url: _api([
+        'organizations',
+        organizationId,
+        'me',
+        'course-versions',
+        versionId,
+        'lessons',
+        lessonId,
+        'opened',
+      ]),
+      accessToken: accessToken,
+      headers: {'idempotency-key': idempotencyKey},
+    );
+  }
+
+  @override
   Future<Uint8List> courseImage({
     required String accessToken,
     required String organizationId,
@@ -297,6 +351,36 @@ class OciServeGateway implements OciServeApi {
     }
     if (sha256.convert(response.body).toString() != normalizedHash) {
       throw const OciServeException('image_digest_mismatch');
+    }
+    return Uint8List.fromList(response.body);
+  }
+
+  @override
+  Future<Uint8List> accountAvatar({
+    required String accessToken,
+    required String avatarHash,
+  }) async {
+    final normalizedHash = avatarHash.trim().toLowerCase();
+    if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(normalizedHash)) {
+      throw const OciServeException('invalid_avatar_hash');
+    }
+    final response = await _send(
+      method: 'GET',
+      url: _api(['me', 'avatar']),
+      accessToken: accessToken,
+      headers: const {'accept': 'image/png, image/jpeg, image/webp'},
+      cap: _avatarCap,
+    );
+    final contentType = (response.headers['content-type'] ?? '')
+        .split(';')
+        .first
+        .trim()
+        .toLowerCase();
+    if (!_hasMatchingImageSignature(response.body, contentType)) {
+      throw const OciServeException('invalid_avatar_image');
+    }
+    if (sha256.convert(response.body).toString() != normalizedHash) {
+      throw const OciServeException('avatar_digest_mismatch');
     }
     return Uint8List.fromList(response.body);
   }
