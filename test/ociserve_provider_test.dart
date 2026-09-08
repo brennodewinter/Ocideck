@@ -78,7 +78,6 @@ class _FakeApi implements OciServeApi {
   bool failReports = false;
   int reports = 0;
   int discoveries = 0;
-  int loginEvents = 0;
   OciServePlaybackSnapshot? lastSnapshot;
 
   @override
@@ -95,23 +94,6 @@ class _FakeApi implements OciServeApi {
   @override
   Future<OciServeAccount> me(String accessToken) =>
       meCompleter?.future ?? Future.value(account);
-
-  @override
-  Future<void> recordOciDeckLogin({
-    required String accessToken,
-    required String idempotencyKey,
-  }) async {
-    loginEvents++;
-  }
-
-  @override
-  Future<void> recordLessonOpened({
-    required String accessToken,
-    required String organizationId,
-    required String versionId,
-    required String lessonId,
-    required String idempotencyKey,
-  }) async {}
 
   @override
   Future<List<OciServeFeedItem>> learningFeed({
@@ -238,7 +220,6 @@ void main() {
     final state = container.read(ociServeProvider);
     expect(state.authenticated, isTrue);
     expect(state.memberships.single.organizationId, 'org');
-    expect(api.loginEvents, 1);
     expect(
       await secrets.readOciServeRefreshToken(_settings.baseUrl),
       contains('"refresh_token":"refresh"'),
@@ -409,7 +390,6 @@ void main() {
 
       expect(await container.read(ociServeProvider.notifier).login(), isTrue);
       expect(auth.refreshes, 1);
-      expect(api.loginEvents, 0);
       expect(container.read(ociServeProvider).authenticated, isTrue);
     },
   );

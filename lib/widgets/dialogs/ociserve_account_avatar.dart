@@ -29,14 +29,13 @@ class OciServeAccountAvatar extends ConsumerWidget {
       child: Text(_initials(name)),
     );
     if (account.avatarHash.isEmpty) return fallback();
-    final server = ref.read(ociServeProvider).settings.normalizedBaseUrl;
     return SizedBox.square(
       dimension: size,
       child: ClipOval(
         child: Image(
           key: const Key('ociserve-account-avatar'),
           image: CappedImage(
-            '$server|avatar|${account.avatarHash}',
+            'ociserve-avatar:${account.avatarHash}',
             () => ref
                 .read(ociServeProvider.notifier)
                 .accountAvatar(account.avatarHash),

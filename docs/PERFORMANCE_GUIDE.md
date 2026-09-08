@@ -113,8 +113,13 @@ timeouts live at the call sites:
 | Style profile / logo | **16 MiB / 8 MiB** | `file_service.dart`, `maxStyleProfileBytes` / `maxStyleProfileLogoBytes` |
 | CVE search fetch | **2 MiB** | `lib/services/cve_transport_io.dart:17` |
 | OciServe course image | **64 MiB encoded / 4096 px per decoded axis** | `ociserve_gateway.dart`, `image_limits.dart` |
+| OciServe account avatar | **5 MiB encoded / 4096 px per decoded axis** | `ociserve_gateway.dart`, `image_limits.dart` |
 | Default fetch timeout | **30 s** | `lib/services/file/file_service_net.dart:63` |
 | Proxy/fallback timeout | **120 s** | `lib/services/file/file_service_net.dart:49` |
+
+The OciServe learning environment refuses feeds above **500 lessons** before it
+builds course cards, charts or activity lists (`ociserve_courses_dialog.dart`,
+`_maxLessons`).
 
 ## Large presentations & directory scans
 

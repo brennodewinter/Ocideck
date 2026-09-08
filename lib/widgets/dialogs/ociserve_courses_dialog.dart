@@ -707,9 +707,8 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
         child: fallback(),
       );
     }
-    final server = ref.read(ociServeProvider).settings.normalizedBaseUrl;
     final provider = CappedImage(
-      '$server|$org|${course.imageHash}',
+      'ociserve-course:${course.imageHash}',
       () => ref
           .read(ociServeProvider.notifier)
           .courseImage(organizationId: org, imageHash: course.imageHash),
@@ -897,14 +896,6 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
           );
       if (!mounted) return;
       if (result == OpenResult.opened) {
-        try {
-          await ref
-              .read(ociServeProvider.notifier)
-              .recordLessonOpened(organizationId: org, lesson: lesson);
-        } catch (error, stack) {
-          logError('OciServe: geopende les registreren', error, stack);
-        }
-        if (!mounted) return;
         Navigator.pop(context);
       } else {
         setState(() {

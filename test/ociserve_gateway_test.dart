@@ -197,32 +197,6 @@ void main() {
     },
   );
 
-  test('records native login and a locally opened lesson', () async {
-    transport.responses.addAll([
-      OciServeHttpResponse(statusCode: 204, body: Uint8List(0)),
-      OciServeHttpResponse(statusCode: 204, body: Uint8List(0)),
-    ]);
-    await gateway.recordOciDeckLogin(
-      accessToken: 'access',
-      idempotencyKey: 'login-event',
-    );
-    await gateway.recordLessonOpened(
-      accessToken: 'access',
-      organizationId: 'org',
-      versionId: 'version',
-      lessonId: 'lesson',
-      idempotencyKey: 'open-event',
-    );
-
-    expect(transport.requests.first.url.path, '/api/v1/auth/ocideck-login');
-    expect(
-      transport.requests.last.url.path,
-      '/api/v1/organizations/org/me/course-versions/version/lessons/lesson/opened',
-    );
-    expect(transport.requests.first.headers['idempotency-key'], 'login-event');
-    expect(transport.requests.last.headers['idempotency-key'], 'open-event');
-  });
-
   test(
     'refuses a course image whose bytes do not match the feed hash',
     () async {

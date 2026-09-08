@@ -16,10 +16,6 @@ abstract class OciServeApi {
     OciServeInstallation installation,
   );
   Future<OciServeAccount> me(String accessToken);
-  Future<void> recordOciDeckLogin({
-    required String accessToken,
-    required String idempotencyKey,
-  });
   Future<List<OciServeFeedItem>> learningFeed({
     required String accessToken,
     required String organizationId,
@@ -29,13 +25,6 @@ abstract class OciServeApi {
     required String organizationId,
     required String versionId,
     required String lessonId,
-  });
-  Future<void> recordLessonOpened({
-    required String accessToken,
-    required String organizationId,
-    required String versionId,
-    required String lessonId,
-    required String idempotencyKey,
   });
   Future<Uint8List> courseImage({
     required String accessToken,
@@ -207,19 +196,6 @@ class OciServeGateway implements OciServeApi {
   }
 
   @override
-  Future<void> recordOciDeckLogin({
-    required String accessToken,
-    required String idempotencyKey,
-  }) async {
-    await _send(
-      method: 'POST',
-      url: _api(['auth', 'ocideck-login']),
-      accessToken: accessToken,
-      headers: {'idempotency-key': idempotencyKey},
-    );
-  }
-
-  @override
   Future<List<OciServeFeedItem>> learningFeed({
     required String accessToken,
     required String organizationId,
@@ -296,31 +272,6 @@ class OciServeGateway implements OciServeApi {
       sha256: actual.toString(),
       playbackPolicy: policy,
       etag: response.headers['etag'],
-    );
-  }
-
-  @override
-  Future<void> recordLessonOpened({
-    required String accessToken,
-    required String organizationId,
-    required String versionId,
-    required String lessonId,
-    required String idempotencyKey,
-  }) async {
-    await _send(
-      method: 'POST',
-      url: _api([
-        'organizations',
-        organizationId,
-        'me',
-        'course-versions',
-        versionId,
-        'lessons',
-        lessonId,
-        'opened',
-      ]),
-      accessToken: accessToken,
-      headers: {'idempotency-key': idempotencyKey},
     );
   }
 

@@ -112,12 +112,6 @@ class _FixedOciServeNotifier extends OciServeNotifier {
       accountAvatarBytes!;
 
   @override
-  Future<void> recordLessonOpened({
-    required String organizationId,
-    required OciServeFeedItem lesson,
-  }) async {}
-
-  @override
   Future<void> reportPlayback({
     required LearningSessionRef session,
     required PlaybackReport report,

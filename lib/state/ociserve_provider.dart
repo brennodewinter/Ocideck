@@ -312,10 +312,6 @@ class OciServeNotifier extends Notifier<OciServeState> {
       if (account.activeMemberships.isEmpty) {
         throw const OciServeException('no_active_membership');
       }
-      await gateway.recordOciDeckLogin(
-        accessToken: tokens.accessToken,
-        idempotencyKey: _uuid.v4(),
-      );
       if (generation != _generation) return false;
       _installation = installation;
       _configuration = configuration;
@@ -477,21 +473,6 @@ class OciServeNotifier extends Notifier<OciServeState> {
       organizationId: organizationId,
       versionId: lesson.versionId,
       lessonId: lesson.lessonId,
-    );
-  }
-
-  Future<void> recordLessonOpened({
-    required String organizationId,
-    required OciServeFeedItem lesson,
-  }) async {
-    _requireMembership(organizationId);
-    final access = await _accessToken();
-    await _gatewayFactory(state.settings).recordLessonOpened(
-      accessToken: access,
-      organizationId: organizationId,
-      versionId: lesson.versionId,
-      lessonId: lesson.lessonId,
-      idempotencyKey: _uuid.v4(),
     );
   }
 
