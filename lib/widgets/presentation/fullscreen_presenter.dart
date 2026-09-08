@@ -777,6 +777,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       // come back over this channel.
       presenterChannel.setMethodCallHandler((call) async {
         switch (call.method) {
+          case 'ready':
+            // Het gereedsignaal wint van een mislukte, al onthouden beginupdate.
+            _syncAudience(force: true);
+            return true;
           case 'next':
             _next();
           case 'prev':
@@ -884,11 +888,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _blank == _Blank.white ? 2 : (_blank == _Blank.black ? 1 : 0);
 
   /// Mirror the current index/blank state to the audience window when it changed.
-  void _syncAudience() {
+  void _syncAudience({bool force = false}) {
     final aw = widget.audience?.controller;
     if (aw == null) return;
     final blank = _blankCode;
-    if (_index == _lastSentIndex &&
+    if (!force &&
+        _index == _lastSentIndex &&
         blank == _lastSentBlank &&
         _richTextPage == _lastSentRichTextPage &&
         _stepIndex == _lastSentStepIndex &&

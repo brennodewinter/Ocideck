@@ -183,6 +183,81 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('audience readiness retries the current slide after startup', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final updates = <Map<String, dynamic>>[];
+    var audienceReady = false;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method != 'invokeMethod') return null;
+      final args = Map<String, dynamic>.from(call.arguments as Map);
+      if (args['method'] != 'update') return null;
+      updates.add(Map<String, dynamic>.from(args['arguments'] as Map));
+      if (!audienceReady) {
+        throw PlatformException(
+          code: 'CHANNEL_UNREGISTERED',
+          message: 'audience handler is still starting',
+        );
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: slides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(updates, hasLength(1));
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pump();
+    expect(updates, hasLength(2));
+    expect(updates.last['index'], 1);
+
+    audienceReady = true;
+    await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
+      bridge.name,
+      bridge.codec.encodeMethodCall(
+        const MethodCall('methodCall', {
+          'channel': 'ocideck/presenter',
+          'method': 'ready',
+          'arguments': null,
+        }),
+      ),
+      (_) {},
+    );
+    await tester.pump();
+
+    expect(updates, hasLength(3));
+    expect(updates.last['index'], 1);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('chart hover mirrors both ways with the audience window', (
     tester,
   ) async {
