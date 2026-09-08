@@ -4493,6 +4493,25 @@ cursussen**. These packages can only be played in OciDeck: editing and saving
 are unavailable. This is a usability policy, not copy protection; screen capture
 remains possible.
 
+### Your personal learning progress
+
+From **Mijn cursussen**, select **Mijn voortgang** in the sidebar or click your
+profile. On a narrow window, your profile image in the header opens the same
+view. Your profile shows your name, email address and active organisations,
+including when no courses are available yet. It also shows four personal
+indicators: completed courses, completed lessons, the total time slides were
+displayed, and the date of your most recent activity. Below them, a bar chart
+shows the completion percentage for up to the first eight courses, followed by
+at most five recently viewed lessons, newest first.
+
+Each course card shows its status, percentage and completed-lessons count. Its
+lesson list shows whether each lesson is new, in progress or complete, together
+with its displayed time. Select a course card to return to **Mijn cursussen**
+with that course selected.
+
+Displayed time is simply the wall-clock time that a slide was on screen. It is
+not evidence of attention, active study time, learning or mastery.
+
 A lesson may be a selection from a larger presentation. OciDeck uses the same
 durable **Skip** marks as ordinary presenting: skipped slides remain in the
 authored Markdown, but are not shown and are not valid course-progress

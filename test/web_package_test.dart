@@ -250,6 +250,55 @@ void main() {
       expect(container.read(tabsProvider).current?.learningSession, isNull);
     });
 
+    test('behoudt het stabiele anker van een vraagdia', () async {
+      final container = _container();
+      const source = '''
+---
+marp: true
+---
+<!-- ocideck_slide_anchor: slide-15 -->
+<!-- _class: question -->
+# Even oefenen
+
+```question
+{"kind":"trueFalse","prompt":"Klopt dit?","statementIsTrue":true,"answers":[]}
+```
+''';
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 7),
+      );
+
+      expect(
+        await container
+            .read(tabsProvider.notifier)
+            .openLearningPackage(
+              _zipOf({'deck.md': utf8.encode(source)}),
+              'les.ocideck',
+              session,
+            ),
+        OpenResult.opened,
+      );
+      expect(
+        container
+            .read(tabsProvider)
+            .current!
+            .deckNotifier
+            .currentState
+            .deck!
+            .slides
+            .single
+            .anchor,
+        'slide-15',
+      );
+    });
+
     test('hervat een leerpakket op het stabiele dia-anker', () async {
       final container = _container();
       final markdown = container

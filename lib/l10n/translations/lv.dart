@@ -1647,6 +1647,33 @@ const _dutchSourceAddLv = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Pieteikšanās eLearning neizdevās. Pārbaudiet serveri un mēģiniet vēlreiz.',
   'eLearning-organisatie': 'eLearning organizācija',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Visas nodarbības, progress un kopā skatītais laiks.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Skatītais laiks nozīmē, ka ekrānā bija slaids. Tas nav uzmanības vai aktīva studiju laika mērīšana.',
+  'Bekijk mijn voortgang': 'Pārbaudiet manu progresu',
+  'Bekijk uw resultaten': 'Skatiet savus rezultātus',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Skatiet savus rezultātus, aktivitātes un progresu katrā kursā.',
+  'Cursussen afgerond': 'Kursi pabeigti',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Pilnīgs pārskats par jūsu pabeigtajām nodarbībām.',
+  'Laatste activiteit': 'Pēdējā darbība',
+  'Lessen afgerond': 'Nodarbības pabeigtas',
+  'Mijn voortgang': 'Mans progress',
+  'Nog geen lessen bekeken.': 'Vēl neviena nodarbība nav skatīta.',
+  'Nog niet gestart': 'Vēl nav sācies',
+  'Persoonlijk overzicht': 'Personīgais pārskats',
+  'Recente activiteit': 'Pēdējā darbība',
+  'Tijd in beeld': 'Laiks attēlā',
+  'Uw cursussen': 'Jūsu kursi',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Jūsu pēdējās skatītās nodarbības, jaunākās augšpusē.',
+  'Uw persoonlijke leerresultaten': 'Jūsu personīgie mācību rezultāti',
+  'Voortgang per cursus': 'Progress katrā kursā',
+  '{afgerond} van {totaal}': '{afgerond} no {totaal}',
+  '{percentage}% van de cursussen afgerond': '{percentage}% pabeigto kursu',
+  '{uren} u {minuten} min': '{uren} st. {minuten} min',
   'Bekeken: {tijd}': 'Skatīts: {tijd}',
   'Doorgaan in de les': 'Turpināt nodarbībā',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

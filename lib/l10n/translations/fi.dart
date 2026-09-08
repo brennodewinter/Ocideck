@@ -1649,6 +1649,34 @@ const _dutchSourceAddFi = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Kirjautuminen eLearningen epäonnistui. Tarkista palvelin ja yritä uudelleen.',
   'eLearning-organisatie': 'eLearning-organisaatio',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Kaikki oppitunnit, edistyminen ja katsottu aika yhdessä.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Katseluaika tarkoittaa, että dia oli näytöllä. Se ei ole huomion tai aktiivisen opiskeluajan mitta.',
+  'Bekijk mijn voortgang': 'Katso edistymistäni',
+  'Bekijk uw resultaten': 'Tarkastele tuloksiasi',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Tarkastele tuloksiasi, aktiivisuuttasi ja edistymistäsi kurssikohtaisesti.',
+  'Cursussen afgerond': 'Kurssit suoritettu',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Täydellinen yleiskatsaus suoritetuista oppitunneistasi.',
+  'Laatste activiteit': 'Viimeisin toiminta',
+  'Lessen afgerond': 'Oppitunnit suoritettu',
+  'Mijn voortgang': 'Minun edistykseni',
+  'Nog geen lessen bekeken.': 'Oppitunteja ei ole vielä katsottu.',
+  'Nog niet gestart': 'Ei vielä alkanut',
+  'Persoonlijk overzicht': 'Henkilökohtainen yleiskatsaus',
+  'Recente activiteit': 'Viimeaikainen toiminta',
+  'Tijd in beeld': 'Aika kuvassa',
+  'Uw cursussen': 'Omat kurssit',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Viimeksi katsomasi oppitunnit, viimeisimmät yläreunassa.',
+  'Uw persoonlijke leerresultaten': 'Omat oppimistulokset',
+  'Voortgang per cursus': 'Edistyminen kurssin mukaan',
+  '{afgerond} van {totaal}': '{afgerond} / {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage} % suoritetuista kursseista',
+  '{uren} u {minuten} min': '{uren} tuntia {minuten} min',
   'Bekeken: {tijd}': 'Katsottu: {tijd}',
   'Doorgaan in de les': 'Jatka oppitunnissa',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

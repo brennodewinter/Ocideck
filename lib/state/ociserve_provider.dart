@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -260,7 +261,24 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<void> setEnabled(bool enabled) =>
       saveSettings(state.settings.copyWith(enabled: enabled));
 
+  Future<bool> _restoreCachedLogin() async {
+    if (state.authenticated) return true;
+    final settings = state.settings;
+    if (!settings.enabled || !settings.isConfigured || !_secrets.canStore) {
+      return false;
+    }
+    final stored = await _secrets.readOciServeRefreshToken(
+      settings.normalizedBaseUrl,
+    );
+    if (stored == null || stored.isEmpty) return false;
+    await _initialize(++_generation);
+    return state.authenticated;
+  }
+
   Future<bool> login() async {
+    if (state.settings.rememberLogin && await _restoreCachedLogin()) {
+      return true;
+    }
     final generation = ++_generation;
     final settings = state.settings;
     if (!settings.enabled || !_secrets.canStore) {
@@ -456,6 +474,26 @@ class OciServeNotifier extends Notifier<OciServeState> {
       versionId: lesson.versionId,
       lessonId: lesson.lessonId,
     );
+  }
+
+  Future<Uint8List> courseImage({
+    required String organizationId,
+    required String imageHash,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).courseImage(
+      accessToken: access,
+      organizationId: organizationId,
+      imageHash: imageHash,
+    );
+  }
+
+  Future<Uint8List> accountAvatar(String avatarHash) async {
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).accountAvatar(accessToken: access, avatarHash: avatarHash);
   }
 
   Future<void> reportPlayback({

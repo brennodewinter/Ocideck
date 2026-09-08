@@ -7,7 +7,12 @@ import '../../models/ociserve_models.dart';
 import '../../state/ociserve_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
+import 'ociserve_account_avatar.dart';
+import 'ociserve_course_summary.dart';
+import 'ociserve_courses_sidebar.dart';
+import 'ociserve_learning_profile.dart';
 
 class OciServeCoursesDialog extends ConsumerStatefulWidget {
   const OciServeCoursesDialog({super.key});
@@ -24,6 +29,7 @@ class OciServeCoursesDialog extends ConsumerStatefulWidget {
 
 class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
   static const _maxLessons = 500;
+  final _scrollController = ScrollController();
 
   String? _organizationId;
   bool _loading = true;
@@ -33,6 +39,13 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
   String? _openingLessonId;
   OciServeFeedItem? _failedLesson;
   String? _selectedCourseVersionId;
+  bool _showProgress = false;
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -115,7 +128,13 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (!compact) _sidebar(theme, palette, account.displayName),
+            if (!compact)
+              OciServeCoursesSidebar(
+                account: account,
+                showProgress: _showProgress,
+                onCourses: () => _showSection(progress: false),
+                onProgress: () => _showSection(progress: true),
+              ),
             Expanded(
               child: ColoredBox(
                 color: theme.scaffoldBackgroundColor,
@@ -129,122 +148,6 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _sidebar(ThemeData theme, AppPalette palette, String displayName) {
-    final l10n = context.l10n;
-    final name = displayName.trim().isEmpty ? l10n.d('Cursist') : displayName;
-    return SizedBox(
-      width: 190,
-      child: ColoredBox(
-        color: palette.panel,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(18, 24, 18, 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.secondary,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    child: Icon(
-                      Icons.school_outlined,
-                      color: AppTheme.labelOn(theme.colorScheme.secondary),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      l10n.d('eLearning'),
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        color: palette.panelText,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 28),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: palette.panelText.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(9),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 11,
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.school_outlined,
-                        size: 19,
-                        color: palette.panelText,
-                      ),
-                      const SizedBox(width: 9),
-                      Expanded(
-                        child: Text(
-                          l10n.d('Mijn cursussen'),
-                          style: TextStyle(
-                            color: palette.panelText,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const Spacer(),
-              Divider(color: palette.panelText.withValues(alpha: 0.18)),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: theme.colorScheme.secondary,
-                    foregroundColor: AppTheme.labelOn(
-                      theme.colorScheme.secondary,
-                    ),
-                    child: Text(_initials(name)),
-                  ),
-                  const SizedBox(width: 9),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: palette.panelText,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          l10n.d('Cursist'),
-                          style: TextStyle(
-                            color: palette.panelText.withValues(alpha: 0.72),
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -264,12 +167,33 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (_showProgress)
+            IconButton(
+              tooltip: l10n.d('Terug naar mijn cursussen'),
+              onPressed: () => _showSection(progress: false),
+              icon: const Icon(Icons.arrow_back),
+            )
+          else if (compact) ...[
+            Semantics(
+              button: true,
+              label: l10n.d('Bekijk mijn voortgang'),
+              child: InkWell(
+                key: const Key('ociserve-compact-profile-button'),
+                onTap: () => _showSection(progress: true),
+                customBorder: const CircleBorder(),
+                child: OciServeAccountAvatar(account: account, name: name),
+              ),
+            ),
+            const SizedBox(width: 12),
+          ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  l10n.d('Mijn leeromgeving'),
+                  _showProgress
+                      ? l10n.d('Persoonlijk overzicht')
+                      : l10n.d('Mijn leeromgeving'),
                   style: theme.textTheme.labelSmall?.copyWith(
                     color: palette.accentInk,
                     fontWeight: FontWeight.w700,
@@ -278,7 +202,9 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  name.isEmpty
+                  _showProgress
+                      ? l10n.d('Mijn voortgang')
+                      : name.isEmpty
                       ? l10n.d('Mijn cursussen')
                       : l10n.d('Welkom, {naam}').replaceAll('{naam}', name),
                   style: theme.textTheme.headlineSmall?.copyWith(
@@ -287,9 +213,13 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  l10n.d(
-                    'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.',
-                  ),
+                  _showProgress
+                      ? l10n.d(
+                          'Bekijk uw resultaten, activiteit en voortgang per cursus.',
+                        )
+                      : l10n.d(
+                          'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.',
+                        ),
                   style: TextStyle(color: palette.mutedText),
                 ),
               ],
@@ -307,6 +237,16 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
         ],
       ),
     );
+  }
+
+  void _showSection({required bool progress}) {
+    setState(() {
+      _showProgress = progress;
+      if (_error == 'package_failed') {
+        _error = null;
+        _failedLesson = null;
+      }
+    });
   }
 
   Widget _organizationPicker(List<OciServeMembership> memberships) =>
@@ -340,6 +280,19 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       return const Center(child: CircularProgressIndicator());
     }
     if (_error != null) return _errorView(l10n, theme, palette);
+    final courses = _courses(l10n);
+    if (_showProgress) {
+      return OciServeLearningProfile(
+        account: ref.read(ociServeProvider).account!,
+        courses: courses,
+        onOpenCourse: (versionId) {
+          setState(() {
+            _selectedCourseVersionId = versionId;
+            _showProgress = false;
+          });
+        },
+      );
+    }
     if (_lessons.isEmpty) {
       return _emptyView(
         l10n,
@@ -349,62 +302,67 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
         l10n.d('Er staan geen opleidingen voor u klaar.'),
       );
     }
-
-    final courses = _courses(l10n);
     final selected = courses.firstWhere(
       (course) => course.versionId == _selectedCourseVersionId,
       orElse: () => courses.first,
     );
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(30, 0, 30, 28),
-      children: [
-        if (ref.watch(ociServeProvider).memberships.length > 1 &&
-            MediaQuery.sizeOf(context).width < 760) ...[
-          const SizedBox(height: 8),
-          _organizationPicker(ref.watch(ociServeProvider).memberships),
-          const SizedBox(height: 14),
-        ],
-        _featuredCourse(l10n, theme, palette, selected),
-        const SizedBox(height: 24),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                l10n.d('Cursussen voor u'),
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-            Text(
-              l10n
-                  .d('{aantal} cursussen')
-                  .replaceAll('{aantal}', '${courses.length}'),
-              style: TextStyle(color: palette.mutedText, fontSize: 12),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final cardWidth = constraints.maxWidth < 620
-                ? constraints.maxWidth
-                : (constraints.maxWidth - 12) / 2;
-            return Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                for (final course in courses)
-                  SizedBox(
-                    width: cardWidth,
-                    child: _courseCard(l10n, theme, palette, course),
-                  ),
+    final oneColumn = MediaQuery.sizeOf(context).width < 760;
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(30, 0, 30, 12),
+          sliver: SliverList.list(
+            children: [
+              if (ref.watch(ociServeProvider).memberships.length > 1 &&
+                  oneColumn) ...[
+                const SizedBox(height: 8),
+                _organizationPicker(ref.watch(ociServeProvider).memberships),
+                const SizedBox(height: 14),
               ],
-            );
-          },
+              _featuredCourse(l10n, theme, palette, selected),
+              const SizedBox(height: 24),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.d('Cursussen voor u'),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    l10n
+                        .d('{aantal} cursussen')
+                        .replaceAll('{aantal}', '${courses.length}'),
+                    style: TextStyle(color: palette.mutedText, fontSize: 12),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 16),
-        _privacyNotice(l10n, theme, palette),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          sliver: SliverGrid.builder(
+            itemCount: courses.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: oneColumn ? 1 : 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              mainAxisExtent: 200,
+            ),
+            itemBuilder: (context, index) =>
+                _courseCard(l10n, theme, palette, courses[index]),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(30, 16, 30, 28),
+          sliver: SliverToBoxAdapter(
+            child: _privacyNotice(l10n, theme, palette),
+          ),
+        ),
       ],
     );
   }
@@ -413,7 +371,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     AppLocalizations l10n,
     ThemeData theme,
     AppPalette palette,
-    _Course course,
+    OciServeCourseSummary course,
   ) {
     final next = course.nextLesson;
     final progress = course.fraction;
@@ -475,21 +433,45 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
             ),
           ),
           const SizedBox(height: 15),
-          Text(
-            course.title,
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: palette.panelText,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            course.completed
-                ? l10n.d('U kunt deze cursus opnieuw bekijken.')
-                : course.started
-                ? '${l10n.d('Verdergaan')}: ${next.title}'
-                : l10n.d('Volgende: {les}').replaceAll('{les}', next.title),
-            style: TextStyle(color: palette.panelText.withValues(alpha: 0.78)),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      course.title,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: palette.panelText,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      course.completed
+                          ? l10n.d('U kunt deze cursus opnieuw bekijken.')
+                          : course.started
+                          ? '${l10n.d('Les')} ${course.nextLessonNumber} / ${course.lessons.length} · ${next.title}'
+                          : '${l10n.d('Volgende: {les}').replaceAll('{les}', next.title)} · ${l10n.d('Les')} 1 / ${course.lessons.length}',
+                      style: TextStyle(
+                        color: palette.panelText.withValues(alpha: 0.78),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (course.imageHash.isNotEmpty) ...[
+                const SizedBox(width: 18),
+                _courseArtwork(
+                  theme,
+                  course,
+                  width: 160,
+                  height: 90,
+                  key: const Key('ociserve-featured-image'),
+                ),
+              ],
+            ],
           ),
           const SizedBox(height: 20),
           Row(
@@ -521,34 +503,42 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
             ),
           ),
           const SizedBox(height: 18),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              onPressed: _openingLessonId == null ? () => _open(next) : null,
-              icon: opening
-                  ? const SizedBox.square(
-                      dimension: 17,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.play_arrow),
-              label: Text(buttonLabel),
-              style: FilledButton.styleFrom(
-                backgroundColor: theme.colorScheme.secondary,
-                foregroundColor: AppTheme.labelOn(theme.colorScheme.secondary),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-            ),
-          ),
+          _openCourseButton(l10n, theme, next, opening, buttonLabel),
         ],
       ),
     );
   }
 
+  Widget _openCourseButton(
+    AppLocalizations l10n,
+    ThemeData theme,
+    OciServeFeedItem next,
+    bool opening,
+    String buttonLabel,
+  ) => SizedBox(
+    width: double.infinity,
+    child: FilledButton.icon(
+      onPressed: _openingLessonId == null ? () => _open(next) : null,
+      icon: opening
+          ? const SizedBox.square(
+              dimension: 17,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            )
+          : const Icon(Icons.play_arrow),
+      label: Text(opening ? l10n.d('Binnenhalen…') : buttonLabel),
+      style: FilledButton.styleFrom(
+        backgroundColor: theme.colorScheme.secondary,
+        foregroundColor: AppTheme.labelOn(theme.colorScheme.secondary),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+      ),
+    ),
+  );
+
   Widget _courseCard(
     AppLocalizations l10n,
     ThemeData theme,
     AppPalette palette,
-    _Course course,
+    OciServeCourseSummary course,
   ) {
     final selected = course.versionId == _selectedCourseVersionId;
     return Semantics(
@@ -556,8 +546,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       selected: selected,
       label: '${course.title}. ${_completedLabel(l10n, course)}',
       child: InkWell(
-        onTap: () =>
-            setState(() => _selectedCourseVersionId = course.versionId),
+        onTap: () => _selectCourse(course.versionId),
         borderRadius: BorderRadius.circular(14),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
@@ -579,19 +568,12 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 38,
-                    height: 38,
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      course.completed
-                          ? Icons.workspace_premium_outlined
-                          : Icons.shield_outlined,
-                      color: theme.colorScheme.onPrimaryContainer,
-                    ),
+                  _courseArtwork(
+                    theme,
+                    course,
+                    width: 74,
+                    height: 48,
+                    key: Key('ociserve-course-image-${course.versionId}'),
                   ),
                   const Spacer(),
                   _statusChip(l10n, theme, course),
@@ -638,7 +620,9 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
               Row(
                 children: [
                   Text(
-                    l10n.d('Voortgang'),
+                    course.completed
+                        ? l10n.d('Voortgang')
+                        : '${l10n.d('Les')} ${course.nextLessonNumber} / ${course.lessons.length}',
                     style: const TextStyle(fontSize: 12),
                   ),
                   const Spacer(),
@@ -665,7 +649,11 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     );
   }
 
-  Widget _statusChip(AppLocalizations l10n, ThemeData theme, _Course course) {
+  Widget _statusChip(
+    AppLocalizations l10n,
+    ThemeData theme,
+    OciServeCourseSummary course,
+  ) {
     final label = course.completed
         ? l10n.d('Afgerond')
         : course.started
@@ -690,6 +678,69 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
         ),
       ),
     );
+  }
+
+  Widget _courseArtwork(
+    ThemeData theme,
+    OciServeCourseSummary course, {
+    required double width,
+    required double height,
+    required Key key,
+  }) {
+    Widget fallback() => ColoredBox(
+      color: theme.colorScheme.primaryContainer,
+      child: Center(
+        child: Icon(
+          course.completed
+              ? Icons.workspace_premium_outlined
+              : Icons.shield_outlined,
+          color: theme.colorScheme.onPrimaryContainer,
+        ),
+      ),
+    );
+    final org = _organizationId;
+    if (org == null || course.imageHash.isEmpty) {
+      return SizedBox(
+        key: key,
+        width: width,
+        height: height,
+        child: fallback(),
+      );
+    }
+    final provider = CappedImage(
+      'ociserve-course:${course.imageHash}',
+      () => ref
+          .read(ociServeProvider.notifier)
+          .courseImage(organizationId: org, imageHash: course.imageHash),
+    );
+    return SizedBox(
+      key: key,
+      width: width,
+      height: height,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image(
+          image: provider,
+          fit: BoxFit.cover,
+          semanticLabel: course.title,
+          errorBuilder: (context, error, stack) {
+            logWarning('OciServe: cursusafbeelding tonen mislukt', error);
+            return fallback();
+          },
+        ),
+      ),
+    );
+  }
+
+  void _selectCourse(String versionId) {
+    setState(() => _selectedCourseVersionId = versionId);
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   Widget _privacyNotice(
@@ -766,14 +817,14 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     ),
   );
 
-  List<_Course> _courses(AppLocalizations l10n) {
+  List<OciServeCourseSummary> _courses(AppLocalizations l10n) {
     final groups = <String, List<OciServeFeedItem>>{};
     for (final lesson in _lessons) {
       groups.putIfAbsent(lesson.versionId, () => []).add(lesson);
     }
     return [
       for (final entry in groups.entries)
-        _Course.from(
+        OciServeCourseSummary.from(
           entry.key,
           entry.value,
           _progressByLesson,
@@ -795,10 +846,11 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     return _lessons.firstOrNull?.versionId;
   }
 
-  String _completedLabel(AppLocalizations l10n, _Course course) => l10n
-      .d('{afgerond} van {totaal} lessen afgerond')
-      .replaceAll('{afgerond}', '${course.done}')
-      .replaceAll('{totaal}', '${course.lessons.length}');
+  String _completedLabel(AppLocalizations l10n, OciServeCourseSummary course) =>
+      l10n
+          .d('{afgerond} van {totaal} lessen afgerond')
+          .replaceAll('{afgerond}', '${course.done}')
+          .replaceAll('{totaal}', '${course.lessons.length}');
 
   OciServeLessonState? _stateFor(OciServeFeedItem lesson) =>
       _progressByLesson[_progressKey(lesson.versionId, lesson.lessonId)];
@@ -864,82 +916,9 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     }
   }
 
-  static String _initials(String name) {
-    final words = name.trim().split(RegExp(r'\s+'));
-    return words
-        .take(2)
-        .map((word) => word.characters.first)
-        .join()
-        .toUpperCase();
-  }
-
   static String _duration(Duration duration) {
     final minutes = duration.inMinutes;
     final seconds = duration.inSeconds.remainder(60);
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
-}
-
-class _Course {
-  const _Course({
-    required this.versionId,
-    required this.title,
-    required this.lessons,
-    required this.states,
-  });
-
-  final String versionId;
-  final String title;
-  final List<OciServeFeedItem> lessons;
-  final Map<String, OciServeLessonState> states;
-
-  factory _Course.from(
-    String versionId,
-    List<OciServeFeedItem> source,
-    Map<String, OciServeLessonState> progressByLesson, {
-    required String fallbackTitle,
-  }) {
-    final lessons = [...source]
-      ..sort((a, b) => a.lessonOrder.compareTo(b.lessonOrder));
-    return _Course(
-      versionId: versionId,
-      title: lessons.first.courseTitle.isEmpty
-          ? fallbackTitle
-          : lessons.first.courseTitle,
-      lessons: lessons,
-      states: {
-        for (final lesson in lessons)
-          lesson.lessonId:
-              ?progressByLesson[_progressKey(versionId, lesson.lessonId)],
-      },
-    );
-  }
-
-  int get done => lessons
-      .where((lesson) => states[lesson.lessonId]?.completed == true)
-      .length;
-  bool get completed => done == lessons.length;
-  bool get started => lessons.any((lesson) => states[lesson.lessonId] != null);
-  double get fraction => lessons.isEmpty ? 0 : done / lessons.length;
-  Duration get displayed => Duration(
-    milliseconds: states.values.fold(
-      0,
-      (total, state) => total + state.displayedMilliseconds,
-    ),
-  );
-  OciServeFeedItem get nextLesson {
-    if (completed) return lessons.first;
-    return lessons.firstWhere(
-      (lesson) {
-        final state = states[lesson.lessonId];
-        return state?.lastSlideAnchor != null && state?.completed != true;
-      },
-      orElse: () => lessons.firstWhere(
-        (lesson) => states[lesson.lessonId]?.completed != true,
-      ),
-    );
-  }
-
-  static String _progressKey(String versionId, String lessonId) =>
-      '$versionId\u0000$lessonId';
 }

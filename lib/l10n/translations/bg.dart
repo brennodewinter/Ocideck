@@ -1669,6 +1669,34 @@ const _dutchSourceAddBg = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Влизането в eLearning е неуспешно. Проверете сървъра и опитайте отново.',
   'eLearning-organisatie': 'Организация eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Всички уроци, напредък и гледано време заедно.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Прегледано време означава, че слайдът е бил на екрана. Това не е измерване на вниманието или времето за активно учене.',
+  'Bekijk mijn voortgang': 'Вижте напредъка ми',
+  'Bekijk uw resultaten': 'Вижте вашите резултати',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Вижте вашите резултати, активност и напредък за курс.',
+  'Cursussen afgerond': 'Завършени курсове',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Пълен преглед на вашите завършени уроци.',
+  'Laatste activiteit': 'Последна активност',
+  'Lessen afgerond': 'Уроците са завършени',
+  'Mijn voortgang': 'Моят напредък',
+  'Nog geen lessen bekeken.': 'Все още няма прегледани уроци.',
+  'Nog niet gestart': 'Още не е започнало',
+  'Persoonlijk overzicht': 'Личен преглед',
+  'Recente activiteit': 'Скорошна дейност',
+  'Tijd in beeld': 'Времето на снимката',
+  'Uw cursussen': 'Вашите курсове',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Вашите последни прегледани уроци, най-новите в горната част.',
+  'Uw persoonlijke leerresultaten': 'Вашите лични резултати от обучението',
+  'Voortgang per cursus': 'Напредък на курс',
+  '{afgerond} van {totaal}': '{afgerond} от {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% от завършените курсове',
+  '{uren} u {minuten} min': '{uren} ч {minuten} мин',
   'Bekeken: {tijd}': 'Прегледано: {tijd}',
   'Doorgaan in de les': 'Продължете в урока',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

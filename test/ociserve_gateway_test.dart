@@ -19,6 +19,7 @@ class _Request {
 class _FakeTransport implements OciServeHttpTransport {
   final responses = <OciServeHttpResponse>[];
   final requests = <_Request>[];
+  final caps = <int>[];
 
   @override
   Future<OciServeHttpResponse> send({
@@ -31,6 +32,7 @@ class _FakeTransport implements OciServeHttpTransport {
     Duration timeout = Duration.zero,
   }) async {
     requests.add(_Request(method, url, headers, body));
+    caps.add(maxResponseBytes);
     return responses.removeAt(0);
   }
 }
@@ -94,6 +96,7 @@ void main() {
             'course_id': 'c1',
             'course_slug': 'intro',
             'title': 'Intro course',
+            'image_hash': 'a' * 64,
             'version': 3,
             'enrolled_at': '2026-09-06T10:00:00Z',
             'lessons': [
@@ -112,12 +115,126 @@ void main() {
     expect(feed.single.versionId, 'v1');
     expect(feed.single.lessonId, 'l1');
     expect(feed.single.courseTitle, 'Intro course');
+    expect(feed.single.courseImageHash, 'a' * 64);
     expect(feed.single.lessonOrder, 1);
     expect(
       transport.requests.single.url.path,
       '/api/v1/organizations/org/me/learning-feed',
     );
   });
+
+  test(
+    'downloads only the feed-named course image and verifies its hash',
+    () async {
+      final bytes = Uint8List.fromList([
+        0x89,
+        0x50,
+        0x4e,
+        0x47,
+        0x0d,
+        0x0a,
+        0x1a,
+        0x0a,
+        1,
+      ]);
+      final hash = sha256.convert(bytes).toString();
+      transport.responses.add(
+        OciServeHttpResponse(
+          statusCode: 200,
+          body: bytes,
+          headers: {'content-type': 'image/png'},
+        ),
+      );
+
+      final image = await gateway.courseImage(
+        accessToken: 'access',
+        organizationId: 'org',
+        imageHash: hash,
+      );
+
+      expect(image, bytes);
+      expect(
+        transport.requests.single.url.path,
+        '/api/v1/organizations/org/assets/$hash',
+      );
+      expect(
+        transport.requests.single.headers['authorization'],
+        'Bearer access',
+      );
+      expect(transport.caps.single, 64 * 1024 * 1024);
+    },
+  );
+
+  test(
+    'downloads the authenticated account avatar with a strict cap',
+    () async {
+      final bytes = Uint8List.fromList([
+        0x89,
+        0x50,
+        0x4e,
+        0x47,
+        0x0d,
+        0x0a,
+        0x1a,
+        0x0a,
+        1,
+      ]);
+      final hash = sha256.convert(bytes).toString();
+      transport.responses.add(
+        OciServeHttpResponse(
+          statusCode: 200,
+          body: bytes,
+          headers: {'content-type': 'image/png'},
+        ),
+      );
+
+      expect(
+        await gateway.accountAvatar(accessToken: 'access', avatarHash: hash),
+        bytes,
+      );
+      expect(transport.requests.single.url.path, '/api/v1/me/avatar');
+      expect(transport.caps.single, 5 * 1024 * 1024);
+    },
+  );
+
+  test(
+    'refuses a course image whose bytes do not match the feed hash',
+    () async {
+      final bytes = Uint8List.fromList([
+        0x89,
+        0x50,
+        0x4e,
+        0x47,
+        0x0d,
+        0x0a,
+        0x1a,
+        0x0a,
+        1,
+      ]);
+      transport.responses.add(
+        OciServeHttpResponse(
+          statusCode: 200,
+          body: bytes,
+          headers: {'content-type': 'image/png'},
+        ),
+      );
+
+      await expectLater(
+        gateway.courseImage(
+          accessToken: 'access',
+          organizationId: 'org',
+          imageHash: 'b' * 64,
+        ),
+        throwsA(
+          isA<OciServeException>().having(
+            (error) => error.code,
+            'code',
+            'image_digest_mismatch',
+          ),
+        ),
+      );
+    },
+  );
 
   test(
     'package requires play-only policy and matching sha-256 Digest',

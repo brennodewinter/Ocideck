@@ -4589,6 +4589,25 @@ Zo'n pakket kan in OciDeck alleen worden afgespeeld: bewerken en opslaan zijn
 niet beschikbaar. Dit is gebruiksbeleid en geen kopieerbeveiliging; een
 schermafbeelding blijft mogelijk.
 
+### Je persoonlijke leervoortgang
+
+Kies vanuit **Mijn cursussen** in de zijbalk **Mijn voortgang**, of selecteer je
+profiel. In een smal venster opent je profielfoto bovenaan hetzelfde overzicht.
+Je profiel toont je naam, e-mailadres en actieve organisaties, ook wanneer er
+nog geen cursussen klaarstaan. Daarnaast zie je vier persoonlijke indicatoren:
+afgeronde cursussen, afgeronde lessen, de totale tijd dat dia's in beeld stonden
+en de datum van je laatste activiteit. Daaronder toont een staafdiagram voor
+maximaal de eerste acht cursussen het voltooide percentage, gevolgd door ten
+hoogste vijf onlangs bekeken lessen, met de nieuwste bovenaan.
+
+Elke cursuskaart toont de status, het percentage en het aantal afgeronde lessen.
+In de lessenlijst staat per les of die nieuw, bezig of afgerond is, samen met de
+getoonde tijd. Selecteer een cursuskaart om terug te gaan naar **Mijn cursussen**
+met die cursus gekozen.
+
+Getoonde tijd is alleen de wandkloktijd waarin een dia op het scherm stond. Het
+is geen bewijs van aandacht, actieve studietijd, leren of beheersing.
+
 Een les kan een selectie uit een grotere presentatie zijn. OciDeck gebruikt
 daarvoor dezelfde duurzame markeringen **Overslaan** als bij gewoon
 presenteren: overgeslagen dia's blijven in de Markdown van de auteur staan, maar

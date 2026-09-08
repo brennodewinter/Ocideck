@@ -1626,6 +1626,34 @@ const _dutchSourceAddTlh = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'eLearningDaq log in Qapbe\'. De\'wI\' yIlegh; yIqIlqa\'.',
   'eLearning-organisatie': 'eLearning DIvI\'',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Tüm dersler, ilerlemeler ve izlenen süreler bir arada.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Görüntülenen süre, bir slaydın ekranda olduğu anlamına gelir. Dikkatin veya aktif çalışma süresinin bir ölçümü değildir.',
+  'Bekijk mijn voortgang': 'İlerlememi kontrol et',
+  'Bekijk uw resultaten': 'Sonuçlarınızı görüntüleyin',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Kurs başına sonuçlarınızı, etkinliğinizi ve ilerlemenizi görüntüleyin.',
+  'Cursussen afgerond': 'Tamamlanan kurslar',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Tamamlanan derslerinize eksiksiz bir genel bakış.',
+  'Laatste activiteit': 'En son etkinlik',
+  'Lessen afgerond': 'Tamamlanan dersler',
+  'Mijn voortgang': 'İlerlemem',
+  'Nog geen lessen bekeken.': 'Henüz hiçbir ders görüntülenmedi.',
+  'Nog niet gestart': 'Henüz başlamadı',
+  'Persoonlijk overzicht': 'Kişisel genel bakış',
+  'Recente activiteit': 'Son etkinlik',
+  'Tijd in beeld': 'Resimdeki zaman',
+  'Uw cursussen': 'Kurslarınız',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'En son görüntülenen dersleriniz en üstte.',
+  'Uw persoonlijke leerresultaten': 'Kişisel öğrenme sonuçlarınız',
+  'Voortgang per cursus': 'Kurs başına ilerleme',
+  '{afgerond} van {totaal}': '{afgerond} arasında {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      'Tamamlanan kursların %{percentage}\'i',
+  '{uren} u {minuten} min': '{uren} rep {minuten} tup',
   'Bekeken: {tijd}': 'leghlu\': {tijd}',
   'Doorgaan in de les': 'ghojmoHghachDaq yIghoS',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

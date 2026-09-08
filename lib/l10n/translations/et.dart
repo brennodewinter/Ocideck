@@ -1643,6 +1643,34 @@ const _dutchSourceAddEt = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'eLearningsse sisselogimine ebaõnnestus. Kontrollige serverit ja proovige uuesti.',
   'eLearning-organisatie': 'eLearning organisatsioon',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Kõik õppetunnid, edusammud ja koos vaadatud aeg.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Vaadatud aeg tähendab, et ekraanil oli slaid. See ei ole tähelepanu või aktiivse õppimise aja mõõtmine.',
+  'Bekijk mijn voortgang': 'Vaadake minu edusamme',
+  'Bekijk uw resultaten': 'Vaadake oma tulemusi',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Vaadake oma tulemusi, tegevust ja edusamme kursuse kohta.',
+  'Cursussen afgerond': 'Kursused läbitud',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Täielik ülevaade teie lõpetatud õppetundidest.',
+  'Laatste activiteit': 'Viimane tegevus',
+  'Lessen afgerond': 'Õppetunnid lõpetatud',
+  'Mijn voortgang': 'Minu edusammud',
+  'Nog geen lessen bekeken.': 'Ühtegi tundi pole veel vaadatud.',
+  'Nog niet gestart': 'Pole veel alanud',
+  'Persoonlijk overzicht': 'Isiklik ülevaade',
+  'Recente activiteit': 'Hiljutine tegevus',
+  'Tijd in beeld': 'Aeg pildil',
+  'Uw cursussen': 'Teie kursused',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Teie viimati vaadatud õppetunnid, viimased ülaosas.',
+  'Uw persoonlijke leerresultaten': 'Teie isiklikud õpitulemused',
+  'Voortgang per cursus': 'Edusammud kursuse kohta',
+  '{afgerond} van {totaal}': '{afgerond}/{totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% lõpetatud kursustest',
+  '{uren} u {minuten} min': '{uren} tundi {minuten} min',
   'Bekeken: {tijd}': 'Vaadatud: {tijd}',
   'Doorgaan in de les': 'Jätka õppetunnis',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

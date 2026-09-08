@@ -1666,6 +1666,34 @@ const _dutchSourceAddRo = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Autentificarea în eLearning a eșuat. Verificați serverul și încercați din nou.',
   'eLearning-organisatie': 'Organizație eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Toate lecțiile, progresul și timpul văzut împreună.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Ora vizualizată înseamnă că un diapozitiv a fost pe ecran. Nu este o măsură a atenției sau a timpului de studiu activ.',
+  'Bekijk mijn voortgang': 'Vezi progresul meu',
+  'Bekijk uw resultaten': 'Vedeți rezultatele dvs',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Vedeți rezultatele, activitatea și progresul pe curs.',
+  'Cursussen afgerond': 'Cursuri finalizate',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'O prezentare completă a lecțiilor finalizate.',
+  'Laatste activiteit': 'Ultima activitate',
+  'Lessen afgerond': 'Lecții finalizate',
+  'Mijn voortgang': 'Progresul meu',
+  'Nog geen lessen bekeken.': 'Nu s-au văzut încă lecții.',
+  'Nog niet gestart': 'Nu a început încă',
+  'Persoonlijk overzicht': 'Privire de ansamblu personală',
+  'Recente activiteit': 'Activitate recentă',
+  'Tijd in beeld': 'Timpul din imagine',
+  'Uw cursussen': 'Cursurile tale',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Ultimele tale lecții vizualizate, cele mai recente în partea de sus.',
+  'Uw persoonlijke leerresultaten': 'Rezultatele tale personale ale învățării',
+  'Voortgang per cursus': 'Progres pe curs',
+  '{afgerond} van {totaal}': '{afgerond} din {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% din cursuri finalizate',
+  '{uren} u {minuten} min': '{uren} ore {minuten} min',
   'Bekeken: {tijd}': 'Vizualizat: {tijd}',
   'Doorgaan in de les': 'Continuă în lecție',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

@@ -1649,6 +1649,34 @@ const _dutchSourceAddId = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Masuk ke eLearning gagal. Periksa server dan coba lagi.',
   'eLearning-organisatie': 'Organisasi eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Semua pelajaran, kemajuan dan melihat waktu bersama.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Waktu yang dilihat berarti slide ada di layar. Ini bukan ukuran perhatian atau waktu aktif belajar.',
+  'Bekijk mijn voortgang': 'Lihat kemajuan saya',
+  'Bekijk uw resultaten': 'Lihat hasil Anda',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Lihat hasil, aktivitas, dan kemajuan Anda per kursus.',
+  'Cursussen afgerond': 'Kursus selesai',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Ikhtisar lengkap pelajaran Anda yang telah selesai.',
+  'Laatste activiteit': 'Aktivitas terbaru',
+  'Lessen afgerond': 'Pelajaran selesai',
+  'Mijn voortgang': 'Kemajuan saya',
+  'Nog geen lessen bekeken.': 'Belum ada pelajaran yang dilihat.',
+  'Nog niet gestart': 'Belum dimulai',
+  'Persoonlijk overzicht': 'Tinjauan pribadi',
+  'Recente activiteit': 'Aktivitas terkini',
+  'Tijd in beeld': 'Waktu dalam gambar',
+  'Uw cursussen': 'Kursus Anda',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Pelajaran yang terakhir Anda lihat, yang terbaru di atas.',
+  'Uw persoonlijke leerresultaten': 'Hasil pembelajaran pribadi Anda',
+  'Voortgang per cursus': 'Kemajuan per kursus',
+  '{afgerond} van {totaal}': '{afgerond} dari {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% kursus yang diselesaikan',
+  '{uren} u {minuten} min': '{uren} jam {minuten} menit',
   'Bekeken: {tijd}': 'Dilihat: {tijd}',
   'Doorgaan in de les': 'Lanjutkan dalam pelajaran',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

@@ -1651,6 +1651,34 @@ const _dutchSourceAddHu = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Az eLearning-be való bejelentkezés sikertelen. Ellenőrizze a kiszolgálót, majd próbálja újra.',
   'eLearning-organisatie': 'eLearning-szervezet',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Minden lecke, haladás és együtt töltött idő.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'A megtekintési idő azt jelenti, hogy a dia a képernyőn volt. Ez nem a figyelem vagy az aktív tanulási idő mérése.',
+  'Bekijk mijn voortgang': 'Nézd meg a fejlődésemet',
+  'Bekijk uw resultaten': 'Tekintse meg az eredményeket',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Tekintse meg eredményeit, tevékenységeit és fejlődését tanfolyamonként.',
+  'Cursussen afgerond': 'Elvégzett tanfolyamok',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Teljes áttekintés az elvégzett leckékről.',
+  'Laatste activiteit': 'Legújabb tevékenység',
+  'Lessen afgerond': 'A leckék befejezve',
+  'Mijn voortgang': 'A haladásom',
+  'Nog geen lessen bekeken.': 'Még nincsenek megtekintett órák.',
+  'Nog niet gestart': 'Még nem kezdődött el',
+  'Persoonlijk overzicht': 'Személyes áttekintés',
+  'Recente activiteit': 'Legutóbbi tevékenység',
+  'Tijd in beeld': 'Idő a képen',
+  'Uw cursussen': 'A tanfolyamaid',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Az utoljára megtekintett leckék, a legutóbbiak felül.',
+  'Uw persoonlijke leerresultaten': 'Az Ön személyes tanulási eredményei',
+  'Voortgang per cursus': 'Haladás tanfolyamonként',
+  '{afgerond} van {totaal}': '{afgerond}/{totaal}',
+  '{percentage}% van de cursussen afgerond':
+      'A befejezett kurzusok {percentage}%-a',
+  '{uren} u {minuten} min': '{uren} óra {minuten} perc',
   'Bekeken: {tijd}': 'Megtekintve: {tijd}',
   'Doorgaan in de les': 'Folytatás a leckében',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

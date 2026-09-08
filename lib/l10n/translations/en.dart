@@ -847,6 +847,34 @@ const _dutchSourceAddEn = {
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Sign-in to eLearning failed. Check the server and try again.',
   'eLearning-organisatie': 'eLearning organization',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'All lessons, progress and viewed time together.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Viewed time means a slide was on screen. It is not a measurement of attention or active study time.',
+  'Bekijk mijn voortgang': 'View my progress',
+  'Bekijk uw resultaten': 'View your results',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'View your results, activity and progress per course.',
+  'Cursussen afgerond': 'Courses completed',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'A complete overview of your completed lessons.',
+  'Laatste activiteit': 'Latest activity',
+  'Lessen afgerond': 'Lessons completed',
+  'Mijn voortgang': 'My progress',
+  'Nog geen lessen bekeken.': 'No lessons viewed yet.',
+  'Nog niet gestart': 'Not started yet',
+  'Persoonlijk overzicht': 'Personal overview',
+  'Recente activiteit': 'Recent activity',
+  'Tijd in beeld': 'Time displayed',
+  'Uw cursussen': 'Your courses',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Your last viewed lessons, most recent at the top.',
+  'Uw persoonlijke leerresultaten': 'Your personal learning progress',
+  'Voortgang per cursus': 'Progress per course',
+  '{afgerond} van {totaal}': '{afgerond} of {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% of courses completed',
+  '{uren} u {minuten} min': '{uren} h {minuten} min',
   'Bekeken: {tijd}': 'Viewed: {tijd}',
   'Doorgaan in de les': 'Continue in the lesson',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

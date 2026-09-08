@@ -685,6 +685,34 @@ const _dutchSourceAddDe = {
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Die Anmeldung bei eLearning ist fehlgeschlagen. Prüfen Sie den Server und versuchen Sie es erneut.',
   'eLearning-organisatie': 'eLearning-Organisation',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Alle Lektionen, Fortschritte und gemeinsam angesehene Zeit.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Die angezeigte Zeit bedeutet, dass eine Folie auf dem Bildschirm angezeigt wurde. Es ist kein Maß für die Aufmerksamkeit oder die aktive Lernzeit.',
+  'Bekijk mijn voortgang': 'Schauen Sie sich meine Fortschritte an',
+  'Bekijk uw resultaten': 'Sehen Sie sich Ihre Ergebnisse an',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Sehen Sie sich Ihre Ergebnisse, Aktivitäten und Fortschritte pro Kurs an.',
+  'Cursussen afgerond': 'Kurse abgeschlossen',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Eine vollständige Übersicht über Ihre abgeschlossenen Lektionen.',
+  'Laatste activiteit': 'Letzte Aktivität',
+  'Lessen afgerond': 'Lektionen abgeschlossen',
+  'Mijn voortgang': 'Mein Fortschritt',
+  'Nog geen lessen bekeken.': 'Noch keine Lektionen angesehen.',
+  'Nog niet gestart': 'Noch nicht begonnen',
+  'Persoonlijk overzicht': 'Persönlicher Überblick',
+  'Recente activiteit': 'Aktuelle Aktivität',
+  'Tijd in beeld': 'Zeit im Bild',
+  'Uw cursussen': 'Ihre Kurse',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Ihre zuletzt angesehenen Lektionen, die aktuellsten oben.',
+  'Uw persoonlijke leerresultaten': 'Ihre persönlichen Lernergebnisse',
+  'Voortgang per cursus': 'Fortschritt pro Kurs',
+  '{afgerond} van {totaal}': '{afgerond} von {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% der abgeschlossenen Kurse',
+  '{uren} u {minuten} min': '{uren} Stunden {minuten} Minuten',
   'Bekeken: {tijd}': 'Angesehen: {tijd}',
   'Doorgaan in de les': 'In der Lektion fortfahren',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

@@ -1656,6 +1656,33 @@ const _dutchSourceAddLt = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Prisijungti prie eLearning nepavyko. Patikrinkite serverį ir bandykite dar kartą.',
   'eLearning-organisatie': 'eLearning organizacija',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Visos pamokos, pažanga ir žiūrėtas laikas kartu.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Peržiūrėtas laikas reiškia, kad skaidrė buvo ekrane. Tai nėra dėmesio ar aktyvaus studijų laiko matavimas.',
+  'Bekijk mijn voortgang': 'Patikrinkite mano pažangą',
+  'Bekijk uw resultaten': 'Peržiūrėkite savo rezultatus',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Peržiūrėkite kiekvieno kurso rezultatus, veiklą ir pažangą.',
+  'Cursussen afgerond': 'Baigti kursai',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Išsami jūsų baigtų pamokų apžvalga.',
+  'Laatste activiteit': 'Naujausia veikla',
+  'Lessen afgerond': 'Pamokos baigtos',
+  'Mijn voortgang': 'Mano progresas',
+  'Nog geen lessen bekeken.': 'Dar nežiūrėtų pamokų.',
+  'Nog niet gestart': 'Dar neprasidėjo',
+  'Persoonlijk overzicht': 'Asmeninė apžvalga',
+  'Recente activiteit': 'Naujausia veikla',
+  'Tijd in beeld': 'Laikas nuotraukoje',
+  'Uw cursussen': 'Jūsų kursai',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Paskutinės žiūrėtos pamokos, naujausios viršuje.',
+  'Uw persoonlijke leerresultaten': 'Jūsų asmeniniai mokymosi rezultatai',
+  'Voortgang per cursus': 'Pažanga per kursą',
+  '{afgerond} van {totaal}': '{afgerond} iš {totaal}',
+  '{percentage}% van de cursussen afgerond': '{percentage} % baigtų kursų',
+  '{uren} u {minuten} min': '{uren} val. {minuten} min',
   'Bekeken: {tijd}': 'Peržiūrėta: {tijd}',
   'Doorgaan in de les': 'Tęsti pamokoje',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

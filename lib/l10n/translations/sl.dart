@@ -1649,6 +1649,34 @@ const _dutchSourceAddSl = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Prijava v eLearning ni uspela. Preverite strežnik in poskusite znova.',
   'eLearning-organisatie': 'Organizacija eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Vse lekcije, napredek in čas ogleda skupaj.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Čas ogleda pomeni, da je bil diapozitiv na zaslonu. Ne gre za merjenje pozornosti ali časa aktivnega učenja.',
+  'Bekijk mijn voortgang': 'Preverite moj napredek',
+  'Bekijk uw resultaten': 'Oglejte si svoje rezultate',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Oglejte si svoje rezultate, aktivnost in napredek na tečaj.',
+  'Cursussen afgerond': 'Opravljeni tečaji',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Popoln pregled vaših opravljenih lekcij.',
+  'Laatste activiteit': 'Zadnja dejavnost',
+  'Lessen afgerond': 'Lekcije končane',
+  'Mijn voortgang': 'Moj napredek',
+  'Nog geen lessen bekeken.': 'Ogledanih še ni bilo nobenih lekcij.',
+  'Nog niet gestart': 'Še ni začelo',
+  'Persoonlijk overzicht': 'Osebni pregled',
+  'Recente activiteit': 'Nedavna dejavnost',
+  'Tijd in beeld': 'Čas na sliki',
+  'Uw cursussen': 'Vaši tečaji',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Vaše zadnje ogledane lekcije, najnovejše na vrhu.',
+  'Uw persoonlijke leerresultaten': 'Vaši osebni učni rezultati',
+  'Voortgang per cursus': 'Napredek na tečaj',
+  '{afgerond} van {totaal}': '{afgerond} od {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage} % opravljenih tečajev',
+  '{uren} u {minuten} min': '{uren} ur {minuten} min',
   'Bekeken: {tijd}': 'Ogledano: {tijd}',
   'Doorgaan in de les': 'Nadaljuj v lekciji',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

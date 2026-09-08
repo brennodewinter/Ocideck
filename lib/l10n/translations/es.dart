@@ -682,6 +682,34 @@ const _dutchSourceAddEs = {
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'No se pudo iniciar sesión en eLearning. Compruebe el servidor e inténtelo de nuevo.',
   'eLearning-organisatie': 'Organización eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Todas las lecciones, el progreso y el tiempo visto juntos.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'El tiempo visto significa que había una diapositiva en la pantalla. No es una medida de atención o tiempo de estudio activo.',
+  'Bekijk mijn voortgang': 'Mira mi progreso',
+  'Bekijk uw resultaten': 'Ver tus resultados',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Visualiza tus resultados, actividad y progreso por curso.',
+  'Cursussen afgerond': 'Cursos completados',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Una descripción completa de sus lecciones completadas.',
+  'Laatste activiteit': 'Última actividad',
+  'Lessen afgerond': 'Lecciones completadas',
+  'Mijn voortgang': 'mi progreso',
+  'Nog geen lessen bekeken.': 'Aún no se han visto lecciones.',
+  'Nog niet gestart': 'Aún no iniciado',
+  'Persoonlijk overzicht': 'Resumen personal',
+  'Recente activiteit': 'Actividad reciente',
+  'Tijd in beeld': 'tiempo en la imagen',
+  'Uw cursussen': 'Tus cursos',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Tus últimas lecciones vistas, las más recientes en la parte superior.',
+  'Uw persoonlijke leerresultaten': 'Tus resultados personales de aprendizaje',
+  'Voortgang per cursus': 'Progreso por curso',
+  '{afgerond} van {totaal}': '{afgerond} de {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% de cursos completados',
+  '{uren} u {minuten} min': '{uren} horas {minuten} min',
   'Bekeken: {tijd}': 'Visto: {tijd}',
   'Doorgaan in de les': 'Continuar en la lección',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

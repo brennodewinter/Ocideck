@@ -1667,6 +1667,35 @@ const _dutchSourceAddMt = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Il-login f\'eLearning falla. Iċċekkja s-server u erġa\' pprova.',
   'eLearning-organisatie': 'Organizzazzjoni eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Il-lezzjonijiet kollha, il-progress u l-ħin meqjus flimkien.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Il-ħin meqjus ifisser slide kien fuq l-iskrin. Mhuwiex kejl ta \'attenzjoni jew ħin ta\' studju attiv.',
+  'Bekijk mijn voortgang': 'Iċċekkja l-progress tiegħi',
+  'Bekijk uw resultaten': 'Ara r-riżultati tiegħek',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Ara r-riżultati, l-attività u l-progress tiegħek għal kull kors.',
+  'Cursussen afgerond': 'Korsijiet mitmuma',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Ħarsa ġenerali sħiħa tal-lezzjonijiet lesti tiegħek.',
+  'Laatste activiteit': 'L-aħħar attività',
+  'Lessen afgerond': 'Lezzjonijiet mitmuma',
+  'Mijn voortgang': 'Il-progress tiegħi',
+  'Nog geen lessen bekeken.': 'S\'issa ma dehrux lezzjonijiet.',
+  'Nog niet gestart': 'Għadu mhux beda',
+  'Persoonlijk overzicht': 'Ħarsa ġenerali personali',
+  'Recente activiteit': 'Attività riċenti',
+  'Tijd in beeld': 'Ħin fl-istampa',
+  'Uw cursussen': 'Il-korsijiet tiegħek',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'L-aħħar lezzjonijiet li rajt, l-aktar reċenti fil-quċċata.',
+  'Uw persoonlijke leerresultaten':
+      'Ir-riżultati tat-tagħlim personali tiegħek',
+  'Voortgang per cursus': 'Progress għal kull kors',
+  '{afgerond} van {totaal}': '{afgerond} minn {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% tal-korsijiet mitmuma',
+  '{uren} u {minuten} min': '{uren} siegħa {minuten} min',
   'Bekeken: {tijd}': 'Meqjus: {tijd}',
   'Doorgaan in de les': 'Kompli fil-lezzjoni',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

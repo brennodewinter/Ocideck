@@ -75,11 +75,15 @@ class OciServeAccount {
   const OciServeAccount({
     required this.id,
     this.displayName = '',
+    this.email = '',
+    this.avatarHash = '',
     this.memberships = const [],
   });
 
   final String id;
   final String displayName;
+  final String email;
+  final String avatarHash;
   final List<OciServeMembership> memberships;
 
   List<OciServeMembership> get activeMemberships => memberships
@@ -106,6 +110,8 @@ class OciServeAccount {
                   rawAccount['name'] as String? ??
                   '')
               .trim(),
+      email: (rawAccount['email'] as String? ?? '').trim(),
+      avatarHash: (rawAccount['avatar_hash'] as String? ?? '').trim(),
       memberships: rawMemberships
           .map(
             (item) => OciServeMembership.fromJson(
@@ -152,6 +158,7 @@ class OciServeFeedItem {
     this.courseTitle = '',
     this.courseId = '',
     this.courseSlug = '',
+    this.courseImageHash = '',
     this.version = '',
     this.lessonOrder = 0,
     this.enrolledAt,
@@ -164,6 +171,7 @@ class OciServeFeedItem {
   final String courseTitle;
   final String courseId;
   final String courseSlug;
+  final String courseImageHash;
   final String version;
   final int lessonOrder;
   final DateTime? enrolledAt;
@@ -186,6 +194,7 @@ class OciServeFeedItem {
       courseTitle: (json['course_title'] as String? ?? '').trim(),
       courseId: (json['course_id'] as String? ?? '').trim(),
       courseSlug: (json['course_slug'] as String? ?? '').trim(),
+      courseImageHash: (json['image_hash'] as String? ?? '').trim(),
       version: '${json['version'] ?? ''}'.trim(),
       lessonOrder: json['order'] is num ? (json['order'] as num).toInt() : 0,
       enrolledAt: DateTime.tryParse(json['enrolled_at'] as String? ?? ''),
