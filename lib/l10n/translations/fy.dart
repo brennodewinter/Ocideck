@@ -708,7 +708,7 @@ const _dutchSourceAddFy = {
       'Jou laas gekykte lesse, mees onlangse bo-aan.',
   'Uw persoonlijke leerresultaten': 'Jou persoonlike leeruitkomste',
   'Voortgang per cursus': 'Vordering per kursus',
-  '{afgerond} van {totaal}': '{afgerond} van {totaal}',
+  '{afgerond} van {totaal}': '{afgerond} fan {totaal}',
   '{percentage}% van de cursussen afgerond':
       '{percentage}% van kursusse voltooi',
   '{uren} u {minuten} min': '{uren} oeren {minuten} min',
