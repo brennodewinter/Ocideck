@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/state/integration_registry.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
@@ -166,18 +167,18 @@ void main() {
     expect(settingsScrollFadeExtents(at(393)).bottom, 7);
   });
 
-  test('de duim haalt 3:1 op het hele zijbalkverloop (WCAG 1.4.11)', () {
-    // De zijbalk is een verloop van navySoft naar navy; de duim moet op beide
-    // uiteinden leesbaar zijn, anders is de affordance er alleen in theorie.
-    for (final achtergrond in [AppTheme.navy, AppTheme.navySoft]) {
+  test('de duim haalt 3:1 op elk ingebouwd app-paneel (WCAG 1.4.11)', () {
+    for (final profiel in AppAppearanceProfile.builtIns) {
+      final theme = AppTheme.fromProfile(profiel);
+      final achtergrond = AppPalette.of(theme).panel;
       final zichtbaar = Color.alphaBlend(
-        settingsSidebarThumbColor,
+        settingsSidebarThumbColor(theme),
         achtergrond,
       );
       expect(
         contrastRatio(zichtbaar, achtergrond),
         greaterThanOrEqualTo(3.0),
-        reason: 'niet-tekstcontrast op $achtergrond',
+        reason: 'niet-tekstcontrast op ${profiel.name}',
       );
     }
   });

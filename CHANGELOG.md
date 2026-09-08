@@ -32,6 +32,8 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- De schil van het instellingenvenster volgt voortaan de kleuren van het
+  gekozen app-profiel in plaats van een vast blauw-wit palet.
 - ci: scanner-pins bijwerken naar de laatste upstream
 - docs: dank Mieke van Oers in de CHANGELOG (#1907)
 - docs(CHECKS): looptijdclaim, ontbrekend tweede ding, poortenmatrix (#1895) (#1901)
