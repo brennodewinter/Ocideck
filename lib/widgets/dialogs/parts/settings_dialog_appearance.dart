@@ -373,7 +373,7 @@ extension _SettingsAppearanceTab on _SettingsDialogState {
   /// Lettertype-keuze — hoort bij de stijl (themeProfile), niet bij de app.
   Widget _fontSection() {
     return Container(
-      decoration: _boxDecoration(),
+      decoration: _boxDecoration(context),
       child: Column(
         children: AppSettings.availableFonts.map((font) {
           final selected = font == _themeProfile.fontFamily;
