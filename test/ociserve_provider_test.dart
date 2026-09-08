@@ -213,6 +213,32 @@ void main() {
     );
   });
 
+  test('restores a remembered login from the keychain', () async {
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+    });
+    await secrets.writeOciServeRefreshToken(
+      _settings.baseUrl,
+      jsonEncode({
+        'version': 1,
+        'refresh_token': 'refresh',
+        'issuer': _oidc.issuer.toString(),
+        'client_id': _installation.clientId,
+        'token_endpoint': _oidc.tokenEndpoint.toString(),
+      }),
+    );
+    final auth = _FakeAuth();
+    final container = _container(api, secrets, auth: auth);
+    addTearDown(container.dispose);
+
+    container.read(ociServeProvider);
+    await Future<void>.delayed(const Duration(milliseconds: 20));
+
+    expect(container.read(ociServeProvider).authenticated, isTrue);
+    expect(auth.refreshes, 1);
+    expect(api.discoveries, 1);
+  });
+
   test('login tries known ports and stores the working address', () async {
     final attempts = <String>[];
     api.installationValue = OciServeInstallation(
