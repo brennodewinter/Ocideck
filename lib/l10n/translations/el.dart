@@ -1675,6 +1675,34 @@ const _dutchSourceAddEl = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Η σύνδεση στο eLearning απέτυχε. Ελέγξτε τον διακομιστή και δοκιμάστε ξανά.',
   'eLearning-organisatie': 'Οργανισμός eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Όλα τα μαθήματα, η πρόοδος και ο προβλεπόμενος χρόνος μαζί.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Ο χρόνος προβολής σημαίνει ότι μια διαφάνεια ήταν στην οθόνη. Δεν είναι μέτρηση της προσοχής ή του ενεργού χρόνου μελέτης.',
+  'Bekijk mijn voortgang': 'Ελέγξτε την πρόοδό μου',
+  'Bekijk uw resultaten': 'Δείτε τα αποτελέσματά σας',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Δείτε τα αποτελέσματα, τη δραστηριότητα και την πρόοδό σας ανά μάθημα.',
+  'Cursussen afgerond': 'Ολοκληρώθηκαν τα μαθήματα',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Μια πλήρης επισκόπηση των ολοκληρωμένων μαθημάτων σας.',
+  'Laatste activiteit': 'Τελευταία δραστηριότητα',
+  'Lessen afgerond': 'Τα μαθήματα ολοκληρώθηκαν',
+  'Mijn voortgang': 'Η πρόοδός μου',
+  'Nog geen lessen bekeken.': 'Δεν έχουν προβληθεί ακόμη μαθήματα.',
+  'Nog niet gestart': 'Δεν έχει ξεκινήσει ακόμα',
+  'Persoonlijk overzicht': 'Προσωπική επισκόπηση',
+  'Recente activiteit': 'Πρόσφατη δραστηριότητα',
+  'Tijd in beeld': 'Ο χρόνος στην εικόνα',
+  'Uw cursussen': 'Τα μαθήματά σας',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Τα τελευταία σας μαθήματα που είδατε, τα πιο πρόσφατα στο επάνω μέρος.',
+  'Uw persoonlijke leerresultaten': 'Τα προσωπικά σας μαθησιακά αποτελέσματα',
+  'Voortgang per cursus': 'Πρόοδος ανά μάθημα',
+  '{afgerond} van {totaal}': '{afgerond} από {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% των μαθημάτων που ολοκληρώθηκαν',
+  '{uren} u {minuten} min': '{uren} ώρ. {minuten} λεπ.',
   'Bekeken: {tijd}': 'Προβλήθηκε: {tijd}',
   'Doorgaan in de les': 'Συνέχεια στο μάθημα',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

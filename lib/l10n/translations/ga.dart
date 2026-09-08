@@ -1679,6 +1679,35 @@ const _dutchSourceAddGa = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Theip ar shíniú isteach in eLearning. Seiceáil an freastalaí agus bain triail eile as.',
   'eLearning-organisatie': 'Eagraíocht eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Gach ceacht, dul chun cinn agus amharc ar am le chéile.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Ciallaíonn an t-am a breathnaíodh go raibh sleamhnán ar an scáileán. Ní tomhas aird nó am gníomhach staidéir é.',
+  'Bekijk mijn voortgang': 'Seiceáil mo dhul chun cinn',
+  'Bekijk uw resultaten': 'Féach ar do thorthaí',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Féach ar do thorthaí, gníomhaíocht agus dul chun cinn in aghaidh an chúrsa.',
+  'Cursussen afgerond': 'Cúrsaí críochnaithe',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Forbhreathnú iomlán ar do cheachtanna críochnaithe.',
+  'Laatste activiteit': 'An ghníomhaíocht is déanaí',
+  'Lessen afgerond': 'Ceachtanna críochnaithe',
+  'Mijn voortgang': 'Mo dhul chun cinn',
+  'Nog geen lessen bekeken.':
+      'Níor breathnaíodh ar cheachtanna ar bith go fóill.',
+  'Nog niet gestart': 'Gan tosaithe fós',
+  'Persoonlijk overzicht': 'Forbhreathnú pearsanta',
+  'Recente activiteit': 'Gníomhaíocht le déanaí',
+  'Tijd in beeld': 'Am sa phictiúr',
+  'Uw cursussen': 'Do chúrsaí',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Na ceachtanna is déanaí ar breathnaíodh orthu, na ceachtanna is déanaí ag an mbarr.',
+  'Uw persoonlijke leerresultaten': 'Do thorthaí foghlama pearsanta',
+  'Voortgang per cursus': 'Dul chun cinn in aghaidh an chúrsa',
+  '{afgerond} van {totaal}': '{afgerond} de {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% de na cúrsaí críochnaithe',
+  '{uren} u {minuten} min': '{uren} uair {minuten} nóim',
   'Bekeken: {tijd}': 'Breathnaithe: {tijd}',
   'Doorgaan in de les': 'Lean ar aghaidh sa cheacht',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

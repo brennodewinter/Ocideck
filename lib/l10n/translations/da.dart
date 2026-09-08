@@ -1649,6 +1649,34 @@ const _dutchSourceAddDa = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Log ind på eLearning mislykkedes. Kontrollér serveren, og prøv igen.',
   'eLearning-organisatie': 'eLearning-organisation',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Alle lektioner, fremskridt og set tid sammen.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Vist tid betyder, at et dias var på skærmen. Det er ikke en måling af opmærksomhed eller aktiv studietid.',
+  'Bekijk mijn voortgang': 'Tjek mine fremskridt',
+  'Bekijk uw resultaten': 'Se dine resultater',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Se dine resultater, aktivitet og fremskridt pr. kursus.',
+  'Cursussen afgerond': 'Kurser gennemført',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Et komplet overblik over dine gennemførte lektioner.',
+  'Laatste activiteit': 'Seneste aktivitet',
+  'Lessen afgerond': 'Lektioner afsluttet',
+  'Mijn voortgang': 'Mine fremskridt',
+  'Nog geen lessen bekeken.': 'Ingen lektioner set endnu.',
+  'Nog niet gestart': 'Ikke startet endnu',
+  'Persoonlijk overzicht': 'Personligt overblik',
+  'Recente activiteit': 'Seneste aktivitet',
+  'Tijd in beeld': 'Tid i billedet',
+  'Uw cursussen': 'Dine kurser',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Dine sidst sete lektioner, senest øverst.',
+  'Uw persoonlijke leerresultaten': 'Dit personlige læringsudbytte',
+  'Voortgang per cursus': 'Fremskridt pr. kursus',
+  '{afgerond} van {totaal}': '{afgerond} af {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage} % af gennemførte kurser',
+  '{uren} u {minuten} min': '{uren} timer {minuten} min',
   'Bekeken: {tijd}': 'Set: {tijd}',
   'Doorgaan in de les': 'Fortsæt i lektionen',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

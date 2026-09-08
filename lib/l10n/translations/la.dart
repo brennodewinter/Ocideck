@@ -1665,6 +1665,35 @@ const _dutchSourceAddLa = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Accessus ad eLearning defecit. Servum inspice et iterum tenta.',
   'eLearning-organisatie': 'Ordinatio eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Tutte le lezioni, i progressi e il tempo visualizzato insieme.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Il tempo di visualizzazione indica che una diapositiva era sullo schermo. Non è una misurazione dell’attenzione o del tempo di studio attivo.',
+  'Bekijk mijn voortgang': 'Controlla i miei progressi',
+  'Bekijk uw resultaten': 'Visualizza i tuoi risultati',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Visualizza i risultati, l\'attività e i progressi per corso.',
+  'Cursussen afgerond': 'Corsi completati',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Una panoramica completa delle lezioni completate.',
+  'Laatste activiteit': 'Ultima attività',
+  'Lessen afgerond': 'Lezioni completate',
+  'Mijn voortgang': 'I miei progressi',
+  'Nog geen lessen bekeken.': 'Nessuna lezione ancora vista.',
+  'Nog niet gestart': 'Non ancora iniziato',
+  'Persoonlijk overzicht': 'Panoramica personale',
+  'Recente activiteit': 'Attività recente',
+  'Tijd in beeld': 'Il tempo nella foto',
+  'Uw cursussen': 'I tuoi corsi',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Le tue ultime lezioni visualizzate, le più recenti in alto.',
+  'Uw persoonlijke leerresultaten':
+      'I tuoi risultati di apprendimento personali',
+  'Voortgang per cursus': 'Progressi per corso',
+  '{afgerond} van {totaal}': '{afgerond} di {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% dei corsi completati',
+  '{uren} u {minuten} min': '{uren} horae {minuten} min',
   'Bekeken: {tijd}': 'Visum: {tijd}',
   'Doorgaan in de les': 'Perge in lectione',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

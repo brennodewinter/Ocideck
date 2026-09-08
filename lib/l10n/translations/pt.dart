@@ -1678,6 +1678,34 @@ const _dutchSourceAddPt = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Não foi possível iniciar sessão no eLearning. Verifique o servidor e tente novamente.',
   'eLearning-organisatie': 'Organização eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Todas as lições, progresso e tempo visualizado juntos.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'O tempo visualizado significa que um slide estava na tela. Não é uma medida de atenção ou tempo de estudo ativo.',
+  'Bekijk mijn voortgang': 'Confira meu progresso',
+  'Bekijk uw resultaten': 'Veja seus resultados',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Veja seus resultados, atividades e progresso por curso.',
+  'Cursussen afgerond': 'Cursos concluídos',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Uma visão geral completa de suas lições concluídas.',
+  'Laatste activiteit': 'Última atividade',
+  'Lessen afgerond': 'Lições concluídas',
+  'Mijn voortgang': 'Meu progresso',
+  'Nog geen lessen bekeken.': 'Nenhuma lição visualizada ainda.',
+  'Nog niet gestart': 'Ainda não começou',
+  'Persoonlijk overzicht': 'Visão geral pessoal',
+  'Recente activiteit': 'Atividade recente',
+  'Tijd in beeld': 'Tempo na foto',
+  'Uw cursussen': 'Seus cursos',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Suas últimas lições visualizadas, as mais recentes no topo.',
+  'Uw persoonlijke leerresultaten': 'Seus resultados de aprendizagem pessoal',
+  'Voortgang per cursus': 'Progresso por curso',
+  '{afgerond} van {totaal}': '{afgerond} de {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% de cursos concluídos',
+  '{uren} u {minuten} min': '{uren} horas {minuten} min',
   'Bekeken: {tijd}': 'Visto: {tijd}',
   'Doorgaan in de les': 'Continuar na lição',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

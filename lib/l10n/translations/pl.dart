@@ -1660,6 +1660,33 @@ const _dutchSourceAddPl = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Logowanie do eLearning nie powiodło się. Sprawdź serwer i spróbuj ponownie.',
   'eLearning-organisatie': 'Organizacja eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Wszystkie lekcje, postępy i oglądany czas razem.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Czas oglądania oznacza, że ​​slajd był na ekranie. Nie jest to pomiar uwagi ani aktywnego czasu nauki.',
+  'Bekijk mijn voortgang': 'Sprawdź moje postępy',
+  'Bekijk uw resultaten': 'Zobacz swoje wyniki',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Przeglądaj swoje wyniki, aktywność i postępy w każdym kursie.',
+  'Cursussen afgerond': 'Kursy ukończone',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Pełny przegląd ukończonych lekcji.',
+  'Laatste activiteit': 'Najnowsza aktywność',
+  'Lessen afgerond': 'Lekcje zakończone',
+  'Mijn voortgang': 'Mój postęp',
+  'Nog geen lessen bekeken.': 'Nie obejrzano jeszcze żadnych lekcji.',
+  'Nog niet gestart': 'Jeszcze nie rozpoczęte',
+  'Persoonlijk overzicht': 'Przegląd osobisty',
+  'Recente activiteit': 'Ostatnia aktywność',
+  'Tijd in beeld': 'Czas na zdjęciu',
+  'Uw cursussen': 'Twoje kursy',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Twoje ostatnio oglądane lekcje, najnowsze na górze.',
+  'Uw persoonlijke leerresultaten': 'Twoje osobiste efekty uczenia się',
+  'Voortgang per cursus': 'Postęp na kurs',
+  '{afgerond} van {totaal}': '{afgerond} z {totaal}',
+  '{percentage}% van de cursussen afgerond': '{percentage}% ukończonych kursów',
+  '{uren} u {minuten} min': '{uren} godz. {minuten} min',
   'Bekeken: {tijd}': 'Obejrzano: {tijd}',
   'Doorgaan in de les': 'Kontynuuj lekcję',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

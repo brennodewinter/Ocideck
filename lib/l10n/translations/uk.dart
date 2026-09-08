@@ -1664,6 +1664,33 @@ const _dutchSourceAddUk = <String, String>{
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Не вдалося увійти до eLearning. Перевірте сервер і спробуйте ще раз.',
   'eLearning-organisatie': 'Організація eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Усі уроки, прогрес і час перегляду разом.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Час перегляду означає, що слайд був на екрані. Це не вимірювання уваги чи активного навчального часу.',
+  'Bekijk mijn voortgang': 'Перевірте мій прогрес',
+  'Bekijk uw resultaten': 'Перегляньте свої результати',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Переглядайте свої результати, активність і прогрес за курс.',
+  'Cursussen afgerond': 'Пройшли курси',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Повний огляд пройдених вами уроків.',
+  'Laatste activiteit': 'Остання активність',
+  'Lessen afgerond': 'Уроки завершено',
+  'Mijn voortgang': 'Мій прогрес',
+  'Nog geen lessen bekeken.': 'Уроки ще не переглянуто.',
+  'Nog niet gestart': 'Ще не розпочато',
+  'Persoonlijk overzicht': 'Особистий огляд',
+  'Recente activiteit': 'Остання діяльність',
+  'Tijd in beeld': 'Час на картинці',
+  'Uw cursussen': 'Ваші курси',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Ваші останні переглянуті уроки, останні вгорі.',
+  'Uw persoonlijke leerresultaten': 'Ваші особисті результати навчання',
+  'Voortgang per cursus': 'Прогрес за курс',
+  '{afgerond} van {totaal}': '{afgerond} із {totaal}',
+  '{percentage}% van de cursussen afgerond': '{percentage}% пройдених курсів',
+  '{uren} u {minuten} min': '{uren} год {minuten} хв',
   'Bekeken: {tijd}': 'Переглянуто: {tijd}',
   'Doorgaan in de les': 'Продовжити урок',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':

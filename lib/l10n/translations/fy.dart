@@ -684,6 +684,34 @@ const _dutchSourceAddFy = {
   'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
       'Oanmelden by eLearning is mislearre. Kontrolearje de server en besykje it opnij.',
   'eLearning-organisatie': 'eLearning-organisaasje',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Alles, vordering en gekykte tyd saam.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Gekykte tyd beteken dat \'n skyfie op die skerm was. Dit is nie \'n meting van aandag of aktiewe studietyd nie.',
+  'Bekijk mijn voortgang': 'Kyk na my vordering',
+  'Bekijk uw resultaten': 'Bekyk jou resultate',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Bekyk jou resultate, aktiwiteit en vordering per kursus.',
+  'Cursussen afgerond': 'Kursusse voltooi',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      '\'n Volledige oorsig van jou voltooide lesse.',
+  'Laatste activiteit': 'Jongste aktiwiteit',
+  'Lessen afgerond': 'Lesse voltooi',
+  'Mijn voortgang': 'My vordering',
+  'Nog geen lessen bekeken.': 'Geen lesse is nog bekyk nie.',
+  'Nog niet gestart': 'Nog nie begin nie',
+  'Persoonlijk overzicht': 'Persoonlike oorsig',
+  'Recente activiteit': 'Onlangse aktiwiteit',
+  'Tijd in beeld': 'Tyd in die prentjie',
+  'Uw cursussen': 'Jou kursusse',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Jou laas gekykte lesse, mees onlangse bo-aan.',
+  'Uw persoonlijke leerresultaten': 'Jou persoonlike leeruitkomste',
+  'Voortgang per cursus': 'Vordering per kursus',
+  '{afgerond} van {totaal}': '{afgerond} van {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% van kursusse voltooi',
+  '{uren} u {minuten} min': '{uren} oeren {minuten} min',
   'Bekeken: {tijd}': 'Besjoen: {tijd}',
   'Doorgaan in de les': 'Trochgean yn de les',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
