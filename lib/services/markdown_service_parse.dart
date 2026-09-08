@@ -368,8 +368,7 @@ extension _MarkdownParse on MarkdownService {
     return size > 400 ? 400 : size;
   }
 
-  /// De projectmap van een deck: de map waarin het `.md`-bestand staat. Assets
-  /// (afbeeldingen, thema's) worden daar relatief aan opgelost.
+  /// De projectmap waarin de Markdown en zijn relatieve assets staan.
   static String? _projectPathFor(String? filePath) {
     if (filePath == null) return null;
     final sep = filePath.contains('/') ? '/' : '\\';
@@ -405,8 +404,7 @@ extension _MarkdownParse on MarkdownService {
       findingRole: link.findingRole,
     );
     if (structured == null) return null;
-    // De dispositie hangt aan de slide, niet aan het slidetype. Hier zetten in
-    // plaats van door elke fenced-parser rijgen: één plek, geen gaten.
+    // De dispositie hangt hier aan elke slide, zonder alle parsers te verlengen.
     return structured.copyWith(
       aiAssistedFields: link.aiAssistedFields,
       privacy: d.privacy,
