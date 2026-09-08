@@ -66,13 +66,16 @@ class _FixedOciServeNotifier extends OciServeNotifier {
     this.feed = _feed,
     this.progress = _progress,
     this.package,
+    this.loginSucceeds = true,
   });
 
   final OciServeState initial;
   final List<OciServeFeedItem> feed;
   final OciServeLearningState progress;
   final OciServePackage? package;
+  final bool loginSucceeds;
   PlaybackReport? reportedPlayback;
+  bool loginCalled = false;
 
   @override
   OciServeState build() => initial;
@@ -102,6 +105,25 @@ class _FixedOciServeNotifier extends OciServeNotifier {
 
   @override
   Future<void> flushPendingReports() async {}
+
+  @override
+  Future<bool> login() async {
+    loginCalled = true;
+    if (!loginSucceeds) {
+      state = const OciServeState(
+        settings: OciServeSettings(enabled: true),
+        status: OciServeStatus.signedOut,
+        errorCode: 'login_failed',
+      );
+      return false;
+    }
+    state = const OciServeState(
+      settings: OciServeSettings(enabled: true),
+      status: OciServeStatus.authenticated,
+      account: _account,
+    );
+    return true;
+  }
 }
 
 Uint8List _lessonPackage() {
@@ -233,25 +255,51 @@ void main() {
     );
   });
 
-  testWidgets('Mijn cursussen blijft verborgen zonder geldige aanmelding', (
+  testWidgets('welkomstscherm meldt aan en opent daarna Mijn cursussen', (
     tester,
   ) async {
-    await _pumpApp(
-      tester,
-      _FixedOciServeNotifier(
-        const OciServeState(
-          settings: OciServeSettings(enabled: true),
-          status: OciServeStatus.signedOut,
-          errorCode: 'restore_failed',
-        ),
+    final notifier = _FixedOciServeNotifier(
+      const OciServeState(
+        settings: OciServeSettings(enabled: true),
+        status: OciServeStatus.signedOut,
+        errorCode: 'restore_failed',
       ),
     );
+    await _pumpApp(tester, notifier);
 
-    expect(find.text('Mijn cursussen'), findsNothing);
+    expect(find.text('Inloggen'), findsOneWidget);
     expect(
       find.textContaining('Aanmelden bij OciServe is niet gelukt'),
       findsOneWidget,
     );
+    await tester.tap(find.text('Inloggen'));
+    await tester.pumpAndSettle();
+    expect(notifier.loginCalled, isTrue);
+    expect(find.text('Mijn leeromgeving'), findsOneWidget);
+  });
+
+  testWidgets('mislukte login houdt een concrete herstelactie zichtbaar', (
+    tester,
+  ) async {
+    final notifier = _FixedOciServeNotifier(
+      const OciServeState(
+        settings: OciServeSettings(enabled: true),
+        status: OciServeStatus.signedOut,
+      ),
+      loginSucceeds: false,
+    );
+    await _pumpApp(tester, notifier);
+
+    await tester.tap(find.text('Inloggen'));
+    await tester.pumpAndSettle();
+
+    expect(notifier.loginCalled, isTrue);
+    expect(find.text('Inloggen'), findsOneWidget);
+    expect(
+      find.textContaining('Controleer de server en probeer opnieuw'),
+      findsOneWidget,
+    );
+    expect(find.text('Mijn leeromgeving'), findsNothing);
   });
 
   testWidgets(

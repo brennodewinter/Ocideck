@@ -56,7 +56,16 @@ class SecretStoreUnsupported implements Exception {
 /// deze laag is het vangnet, niet de melding.
 class SecretStore {
   SecretStore({FlutterSecureStorage? storage, bool? canStore})
-    : _storage = storage ?? const FlutterSecureStorage(),
+    : _storage =
+          storage ??
+          const FlutterSecureStorage(
+            // OciDeck is deliberately not sandboxed and release artefacts are
+            // signed only after Flutter builds them. The data-protection
+            // keychain requires a provisioning entitlement at build time and
+            // otherwise fails with errSecMissingEntitlement (-34018). The
+            // login keychain still encrypts and access-controls these items.
+            mOptions: MacOsOptions(usesDataProtectionKeychain: false),
+          ),
       _canStore = canStore ?? platformCanStoreSecrets;
 
   final FlutterSecureStorage _storage;

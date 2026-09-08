@@ -136,10 +136,13 @@ ProviderContainer _container(
   _FakeApi api,
   SecretStore secrets, {
   _FakeAuth? auth,
+  OciServeGatewayFactory? gatewayFactory,
 }) => ProviderContainer(
   overrides: [
     secretStoreProvider.overrideWithValue(secrets),
-    ociServeGatewayFactoryProvider.overrideWithValue((_) => api),
+    ociServeGatewayFactoryProvider.overrideWithValue(
+      gatewayFactory ?? (_) => api,
+    ),
     ociServeAuthenticatorFactoryProvider.overrideWithValue(
       (_) => auth ?? _FakeAuth(),
     ),
@@ -207,6 +210,76 @@ void main() {
     expect(
       await secrets.readOciServeRefreshToken(_settings.baseUrl),
       contains('"refresh_token":"refresh"'),
+    );
+  });
+
+  test('restores a remembered login from the keychain', () async {
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+    });
+    await secrets.writeOciServeRefreshToken(
+      _settings.baseUrl,
+      jsonEncode({
+        'version': 1,
+        'refresh_token': 'refresh',
+        'issuer': _oidc.issuer.toString(),
+        'client_id': _installation.clientId,
+        'token_endpoint': _oidc.tokenEndpoint.toString(),
+      }),
+    );
+    final auth = _FakeAuth();
+    final container = _container(api, secrets, auth: auth);
+    addTearDown(container.dispose);
+
+    container.read(ociServeProvider);
+    await Future<void>.delayed(const Duration(milliseconds: 20));
+
+    expect(container.read(ociServeProvider).authenticated, isTrue);
+    expect(auth.refreshes, 1);
+    expect(api.discoveries, 1);
+  });
+
+  test('login tries known ports and stores the working address', () async {
+    final attempts = <String>[];
+    api.installationValue = OciServeInstallation(
+      clientId: 'desktop',
+      issuer: Uri.parse('https://localhost:8444'),
+    );
+    api.oidcValue = OciServeOidcConfiguration(
+      issuer: Uri.parse('https://localhost:8444'),
+      authorizationEndpoint: Uri.parse('https://localhost:8444/authorize'),
+      tokenEndpoint: Uri.parse('https://localhost:8444/token'),
+      jwksUri: Uri.parse('https://localhost:8444/jwks'),
+      metadata: const {},
+      signingAlgorithms: const ['RS256'],
+    );
+    final container = _container(
+      api,
+      secrets,
+      gatewayFactory: (settings) {
+        attempts.add(settings.normalizedBaseUrl);
+        if (settings.normalizedBaseUrl != 'https://localhost:8443') {
+          throw const OciServeException('connection_failed');
+        }
+        return api;
+      },
+    );
+    addTearDown(container.dispose);
+    final notifier = container.read(ociServeProvider.notifier);
+    await notifier.saveSettings(
+      _settings.copyWith(baseUrl: 'https://localhost:9999'),
+    );
+
+    expect(await notifier.login(), isTrue);
+    expect(attempts, ['https://localhost:9999', 'https://localhost:8443']);
+    expect(
+      container.read(ociServeProvider).settings.normalizedBaseUrl,
+      'https://localhost:8443',
+    );
+    final prefs = await SharedPreferences.getInstance();
+    expect(
+      jsonDecode(prefs.getString(kOciServeSettingsKey)!)['baseUrl'],
+      'https://localhost:8443',
     );
   });
 

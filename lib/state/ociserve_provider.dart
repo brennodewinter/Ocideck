@@ -163,9 +163,12 @@ class OciServeNotifier extends Notifier<OciServeState> {
     }
     try {
       state = state.copyWith(status: OciServeStatus.authenticating);
-      final gateway = _gatewayFactory(settings);
-      final installation = await gateway.installation();
+      final connection = await _connect(settings);
+      settings = connection.settings;
+      final gateway = connection.gateway;
+      final installation = connection.installation;
       if (generation != _generation) return;
+      await _storeResolvedSettings(settings);
       _requireAcceptedIdentityProvider(settings, installation);
       final configuration = await gateway.discoverOidc(installation);
       if (generation != _generation) return;
@@ -271,14 +274,17 @@ class OciServeNotifier extends Notifier<OciServeState> {
       clearError: true,
     );
     try {
-      final gateway = _gatewayFactory(settings);
-      final installation = await gateway.installation();
+      final connection = await _connect(settings);
+      final resolvedSettings = connection.settings;
+      final gateway = connection.gateway;
+      final installation = connection.installation;
       if (generation != _generation) return false;
-      _requireAcceptedIdentityProvider(settings, installation);
+      await _storeResolvedSettings(resolvedSettings);
+      _requireAcceptedIdentityProvider(resolvedSettings, installation);
       final configuration = await gateway.discoverOidc(installation);
       if (generation != _generation) return false;
       final tokens = await _authFactory(
-        settings,
+        resolvedSettings,
       ).login(installation, configuration);
       final account = await gateway.me(tokens.accessToken);
       if (account.activeMemberships.isEmpty) {
@@ -288,8 +294,8 @@ class OciServeNotifier extends Notifier<OciServeState> {
       _installation = installation;
       _configuration = configuration;
       _tokens = tokens;
-      if (settings.rememberLogin) {
-        await _persistRefreshToken(settings, tokens);
+      if (resolvedSettings.rememberLogin) {
+        await _persistRefreshToken(resolvedSettings, tokens);
         if (generation != _generation) return false;
       }
       state = state.copyWith(
@@ -298,7 +304,8 @@ class OciServeNotifier extends Notifier<OciServeState> {
       );
       _flushInBackground();
       return true;
-    } catch (error) {
+    } catch (error, stack) {
+      logError('OciServe: aanmelden afronden', error, stack);
       if (generation != _generation) return false;
       _tokens = null;
       state = state.copyWith(
@@ -308,6 +315,42 @@ class OciServeNotifier extends Notifier<OciServeState> {
       );
       return false;
     }
+  }
+
+  Future<
+    ({
+      OciServeSettings settings,
+      OciServeApi gateway,
+      OciServeInstallation installation,
+    })
+  >
+  _connect(OciServeSettings settings) async {
+    Object? firstError;
+    StackTrace? firstStack;
+    for (final candidate in ociServeConnectionCandidates(settings)) {
+      try {
+        final gateway = _gatewayFactory(candidate);
+        final installation = await gateway.installation().timeout(
+          const Duration(seconds: 3),
+        );
+        return (
+          settings: candidate,
+          gateway: gateway,
+          installation: installation,
+        );
+      } catch (error, stack) {
+        firstError ??= error;
+        firstStack ??= stack;
+      }
+    }
+    Error.throwWithStackTrace(firstError!, firstStack!);
+  }
+
+  Future<void> _storeResolvedSettings(OciServeSettings settings) async {
+    if (state.settings.normalizedBaseUrl == settings.normalizedBaseUrl) return;
+    state = state.copyWith(settings: settings);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(kOciServeSettingsKey, jsonEncode(settings.toJson()));
   }
 
   Future<bool> logout() async {
