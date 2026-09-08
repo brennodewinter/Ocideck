@@ -668,12 +668,27 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Suivez des formations de votre environnement eLearning. Les fichiers de cours ne s\'ouvrent qu\'en mode lecture ; la progression n\'est synchronisée qu\'après connexion.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'La connexion à eLearning n\'est disponible que dans l\'application de bureau, car la version web ne dispose pas d\'un trousseau sécurisé.',
+  'eLearning-server': 'Serveur eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Lors du suivi d\'un cours, OciDeck envoie à l\'organisation eLearning choisie votre dernière diapositive, la réalisation et le temps affiché par diapositive. Les réponses, notes et contenus du cours ne sont pas envoyés comme progression.',
+  'Ingelogd bij eLearning': 'Connecté à eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Ce serveur eLearning utilise {host} pour la connexion. Les données ne sont échangées avec ce fournisseur d’identité qu’après votre autorisation.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Utilisez une adresse HTTPS pour eLearning.',
+  'Vul een geldig eLearning-adres in.':
+      'Saisissez une adresse eLearning valide.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'La connexion à eLearning a échoué. Vérifiez le serveur et réessayez.',
+  'eLearning-organisatie': 'Organisation eLearning',
   'Bekeken: {tijd}': 'Consulté : {tijd}',
   'Doorgaan in de les': 'Continuer dans la leçon',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Le serveur n’a pas été modifié, car une progression attend encore d’être envoyée.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Ce serveur OciServe utilise {host} pour la connexion. Les données ne sont échangées avec ce fournisseur d’identité qu’après votre autorisation.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Cette leçon de cours est disponible uniquement en lecture et n’est pas enregistrée localement.',
   'Deze identiteitsprovider toestaan': 'Autoriser ce fournisseur d’identité',
@@ -704,7 +719,6 @@ const _dutchSourceAddFr = {
   '{aantal} cursussen': '{aantal} cours',
   '{aantal} lessen': '{aantal} leçons',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Saisissez une adresse OciServe valide.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} rapport(s) de progression en attente de synchronisation.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -713,35 +727,22 @@ const _dutchSourceAddFr = {
   'Uw account hoort niet bij een actieve organisatie.':
       'Votre compte n\'appartient à aucune organisation active.',
   'Verdergaan': 'Continuer',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Suivez des formations de votre environnement OciServe. Les fichiers de cours ne s\'ouvrent qu\'en mode lecture ; la progression n\'est synchronisée qu\'après connexion.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Autorisez un serveur HTTPS sur un réseau interne. Les jetons ne sont jamais envoyés via HTTP ordinaire.',
   'Starten': 'Démarrer',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Pendant la lecture, OciDeck synchronise avec cette organisation la dernière diapositive, la réalisation et le temps affiché par diapositive. Ce n\'est pas une preuve d\'attention ou de temps d\'apprentissage actif.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'La connexion à OciServe n\'est disponible que dans l\'application de bureau, car la version web ne dispose pas d\'un trousseau sécurisé.',
-  'OciServe-organisatie': 'Organisation OciServe',
-  'OciServe-server': 'Serveur OciServe',
   'Opleiding': 'Formation',
   'Ingelogd blijven op dit apparaat': 'Rester connecté sur cet appareil',
   'Inloggen': 'Se connecter',
   'Les': 'Leçon',
   'Er staan geen opleidingen voor u klaar.':
       'Aucune formation n\'est disponible pour vous.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Utilisez une adresse HTTPS pour OciServe.',
   'Ingelogd als {naam}': 'Connecté en tant que {naam}',
-  'Ingelogd bij OciServe': 'Connecté à OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Lors du suivi d\'un cours, OciDeck envoie à l\'organisation OciServe choisie votre dernière diapositive, la réalisation et le temps affiché par diapositive. Les réponses, notes et contenus du cours ne sont pas envoyés comme progression.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'La connexion locale n\'a pas pu être entièrement effacée. Réessayez.',
   'De opleidingen konden niet worden opgehaald.':
       'Les formations n\'ont pas pu être récupérées.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'La connexion à OciServe a échoué. Vérifiez le serveur et réessayez.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Créez du contenu eLearning : objectifs d\'apprentissage, modules, feedback et résumés d\'évaluation. Importez SCORM, QTI, xAPI, AICC et OLX localement. Désactivé par défaut ; activez l\'extension pour utiliser les types de diapositive.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

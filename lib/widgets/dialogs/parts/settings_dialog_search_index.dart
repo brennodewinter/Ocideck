@@ -510,9 +510,18 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.modules,
-    label: 'OciServe',
+    label: 'eLearning',
     section: 'Uitbreidingen',
-    keywords: ['ociserve', 'cursus', 'opleiding', 'leren', 'training'],
+    keywords: [
+      'lesmateriaal',
+      'auteursmodule',
+      'dia',
+      'scorm',
+      'qti',
+      'xapi',
+      'aicc',
+      'olx',
+    ],
   ),
   // Wie "openkat" zoekt terwijl de module uit staat, moet uitkomen waar hij
   // hem aanzet — precies zoals bij Online opslag hierboven. Deze ingang wijst
@@ -577,6 +586,22 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
       'server',
       'installatie',
       'token',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.integrations,
+    label: 'eLearning',
+    section: 'Integraties',
+    integrationsOnly: true,
+    keywords: [
+      'ociserve',
+      'elearning',
+      'integratie',
+      'cursus',
+      'opleiding',
+      'leren',
+      'training',
+      'server',
     ],
   ),
 

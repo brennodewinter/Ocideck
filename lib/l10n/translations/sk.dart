@@ -1639,12 +1639,26 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Absolvujte kurzy zo svojho prostredia eLearning. Súbory kurzov sa otvárajú len v režime prehrávania; postup sa synchronizuje až po prihlásení.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Prihlásenie do eLearning je dostupné len v desktopovej aplikácii, pretože webová verzia nemá bezpečnú kľúčenku.',
+  'eLearning-server': 'Server eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Pri absolvovaní kurzu OciDeck odošle vybranej organizácii eLearning vašu poslednú snímku, dokončenie a zobrazený čas na snímku. Odpovede, poznámky a obsah kurzu sa ako postup neodosielajú.',
+  'Ingelogd bij eLearning': 'Prihlásený do eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Tento server eLearning používa {host} na prihlásenie. Údaje sa s týmto poskytovateľom identity vymieňajú až po vašom povolení.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Pre eLearning použite adresu HTTPS.',
+  'Vul een geldig eLearning-adres in.': 'Zadajte platnú adresu eLearning.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Prihlásenie do eLearning zlyhalo. Skontrolujte server a skúste to znova.',
+  'eLearning-organisatie': 'Organizácia eLearning',
   'Bekeken: {tijd}': 'Pozreté: {tijd}',
   'Doorgaan in de les': 'Pokračovať v lekcii',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Server nebol zmenený, pretože postup stále čaká na odoslanie.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Tento server OciServe používa {host} na prihlásenie. Údaje sa s týmto poskytovateľom identity vymieňajú až po vašom povolení.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Táto lekcia kurzu je dostupná iba na prehrávanie a neukladá sa lokálne.',
   'Deze identiteitsprovider toestaan': 'Povoliť tohto poskytovateľa identity',
@@ -1674,7 +1688,6 @@ const _dutchSourceAddSk = <String, String>{
   '{aantal} cursussen': '{aantal} kurzov',
   '{aantal} lessen': '{aantal} lekcií',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Zadajte platnú adresu OciServe.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} správa/správ o postupe čaká na synchronizáciu.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1683,35 +1696,22 @@ const _dutchSourceAddSk = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Váš účet nepatrí do aktívnej organizácie.',
   'Verdergaan': 'Pokračovať',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Absolvujte kurzy zo svojho prostredia OciServe. Súbory kurzov sa otvárajú len v režime prehrávania; postup sa synchronizuje až po prihlásení.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Povoľte server HTTPS vo vnútornej sieti. Tokeny sa nikdy neposielajú cez obyčajné HTTP.',
   'Starten': 'Spustiť',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Počas prehrávania OciDeck synchronizuje s touto organizáciou poslednú snímku, dokončenie a zobrazený čas na snímku. Nie je to dôkaz pozornosti ani aktívneho času učenia.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Prihlásenie do OciServe je dostupné len v desktopovej aplikácii, pretože webová verzia nemá bezpečnú kľúčenku.',
-  'OciServe-organisatie': 'Organizácia OciServe',
-  'OciServe-server': 'Server OciServe',
   'Opleiding': 'Kurz',
   'Ingelogd blijven op dit apparaat': 'Zostať prihlásený na tomto zariadení',
   'Inloggen': 'Prihlásiť sa',
   'Les': 'Lekcia',
   'Er staan geen opleidingen voor u klaar.':
       'Nemáte k dispozícii žiadne kurzy.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Pre OciServe použite adresu HTTPS.',
   'Ingelogd als {naam}': 'Prihlásený ako {naam}',
-  'Ingelogd bij OciServe': 'Prihlásený do OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Pri absolvovaní kurzu OciDeck odošle vybranej organizácii OciServe vašu poslednú snímku, dokončenie a zobrazený čas na snímku. Odpovede, poznámky a obsah kurzu sa ako postup neodosielajú.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Lokálne prihlásenie sa nepodarilo úplne vymazať. Skúste to znova.',
   'De opleidingen konden niet worden opgehaald.':
       'Kurzy sa nepodarilo načítať.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Prihlásenie do OciServe zlyhalo. Skontrolujte server a skúste to znova.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Tvorte eLearning obsah: učebné ciele, moduly, spätnú väzbu a zhrnutia hodnotenia. Importujte SCORM, QTI, xAPI, AICC a OLX lokálne. Predvolene vypnuté; zapnite rozšírenie, aby ste mohli používať typy snímok.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

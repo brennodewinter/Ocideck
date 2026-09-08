@@ -7,15 +7,18 @@ import '../../../services/secret_store.dart';
 import '../../../state/ociserve_provider.dart';
 import '../../../theme/app_theme.dart';
 
-/// Configuration and sign-in surface for the optional OciServe connector.
-class OciServeModuleCard extends ConsumerStatefulWidget {
-  const OciServeModuleCard({super.key});
+/// Configuration and sign-in body for the optional eLearning integration.
+/// The surrounding card and switch live in the integrations panel.
+class OciServeIntegrationBody extends ConsumerStatefulWidget {
+  const OciServeIntegrationBody({super.key});
 
   @override
-  ConsumerState<OciServeModuleCard> createState() => _OciServeModuleCardState();
+  ConsumerState<OciServeIntegrationBody> createState() =>
+      _OciServeIntegrationBodyState();
 }
 
-class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
+class _OciServeIntegrationBodyState
+    extends ConsumerState<OciServeIntegrationBody> {
   late final TextEditingController _server;
   late final FocusNode _serverFocus;
   bool _saving = false;
@@ -39,7 +42,6 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final colors = Theme.of(context).colorScheme;
     final state = ref.watch(ociServeProvider);
     final settings = state.settings;
     if (!_serverFocus.hasFocus && _server.text != settings.baseUrl) {
@@ -48,42 +50,7 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
         selection: TextSelection.collapsed(offset: settings.baseUrl.length),
       );
     }
-    return Material(
-      color: colors.surfaceContainerLow,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: colors.outlineVariant),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SwitchListTile(
-            value: settings.enabled,
-            onChanged: state.status == OciServeStatus.loading
-                ? null
-                : (value) =>
-                      ref.read(ociServeProvider.notifier).setEnabled(value),
-            title: Text(
-              l10n.d('OciServe'),
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-            ),
-            subtitle: Text(
-              l10n.d(
-                'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.',
-              ),
-              style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
-            ),
-            secondary: const Icon(Icons.school_outlined),
-          ),
-          if (settings.enabled)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              child: _details(context, l10n, state),
-            ),
-        ],
-      ),
-    );
+    return _details(context, l10n, state);
   }
 
   Widget _details(
@@ -96,7 +63,7 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
     if (!platformCanStoreSecrets) {
       return Text(
         l10n.d(
-          'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.',
+          'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.',
         ),
         style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
       );
@@ -112,7 +79,7 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
           keyboardType: TextInputType.url,
           autocorrect: false,
           decoration: InputDecoration(
-            labelText: l10n.d('OciServe-server'),
+            labelText: l10n.d('eLearning-server'),
             hintText: l10n.d('https://leren.example.org'),
           ),
         ),
@@ -156,7 +123,7 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
           ),
           child: Text(
             l10n.d(
-              'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.',
+              'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.',
             ),
             style: TextStyle(fontSize: 11.5, color: colors.onSurfaceVariant),
           ),
@@ -190,7 +157,7 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
               Expanded(
                 child: Text(
                   state.account!.displayName.isEmpty
-                      ? l10n.d('Ingelogd bij OciServe')
+                      ? l10n.d('Ingelogd bij eLearning')
                       : l10n
                             .d('Ingelogd als {naam}')
                             .replaceAll('{naam}', state.account!.displayName),
@@ -255,7 +222,7 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
       Text(
         l10n
             .d(
-              'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.',
+              'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.',
             )
             .replaceAll('{host}', host),
         style: TextStyle(fontSize: 12, color: colors.onSurfaceVariant),
@@ -278,8 +245,8 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
   }
 
   String _errorText(AppLocalizations l10n, String code) => switch (code) {
-    'https_required' => l10n.d('Gebruik een HTTPS-adres voor OciServe.'),
-    'invalid_url' => l10n.d('Vul een geldig OciServe-adres in.'),
+    'https_required' => l10n.d('Gebruik een HTTPS-adres voor eLearning.'),
+    'invalid_url' => l10n.d('Vul een geldig eLearning-adres in.'),
     'no_active_membership' => l10n.d(
       'Uw account hoort niet bij een actieve organisatie.',
     ),
@@ -287,7 +254,7 @@ class _OciServeModuleCardState extends ConsumerState<OciServeModuleCard> {
       'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.',
     ),
     _ => l10n.d(
-      'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.',
+      'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.',
     ),
   };
 

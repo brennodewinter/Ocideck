@@ -325,7 +325,7 @@ class _WelcomeScreen extends ConsumerWidget {
           ref.watch(ociServeProvider).errorCode != null) ...[
         Text(
           l10n.d(
-            'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.',
+            'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.',
           ),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 12, color: scheme.error),

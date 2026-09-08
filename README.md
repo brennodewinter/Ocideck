@@ -49,7 +49,8 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 
 > **Runs on your device, not on a server.** No application backend for editing,
 > no general telemetry or analytics; the privacy scan runs on your device too.
-> The optional OciServe extension is an explicit exception: after you enable it
+> The optional **eLearning integration** (technically OciServe) is an explicit
+> exception: after you enable it
 > and sign in, OciDeck exchanges course files and your displayed time/progress
 > with the OciServe installation you chose. Most other outbound calls are ones
 > you start and point where you choose,

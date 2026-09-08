@@ -668,12 +668,26 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Folgje opliedingen út jo eLearning-omjouwing. Kursusbestannen iepenje allinnich yn ôfspylmodus; fuortgong wurdt allinnich nei oanmelden syngronisearre.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'eLearning-oanmelding is allinnich beskikber yn de desktop-app, omdat de webferzje gjin feilige kaairing hat.',
+  'eLearning-server': 'eLearning-server',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'By it folgjen fan in kursus stjoert OciDeck jo lêste dia, foltôging en toande tiid per dia nei de keazen eLearning-organisaasje. Antwurden, notysjes en kursusynhâld wurde net as fuortgong ferstjoerd.',
+  'Ingelogd bij eLearning': 'Oanmeld by eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Dizze eLearning-server brûkt {host} om oan te melden. Gegevens wurde pas mei dy identiteitsprovider útwiksele neidat jo dat tastien hawwe.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Brûk in HTTPS-adres foar eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Folje in jildich eLearning-adres yn.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Oanmelden by eLearning is mislearre. Kontrolearje de server en besykje it opnij.',
+  'eLearning-organisatie': 'eLearning-organisaasje',
   'Bekeken: {tijd}': 'Besjoen: {tijd}',
   'Doorgaan in de les': 'Trochgean yn de les',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'De server is net wizige, om’t der noch fuortgong wachtet om ferstjoerd te wurden.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Dizze OciServe-server brûkt {host} om oan te melden. Gegevens wurde pas mei dy identiteitsprovider útwiksele neidat jo dat tastien hawwe.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Dizze kursusles is allinne beskikber om ôf te spyljen en wurdt net lokaal bewarre.',
   'Deze identiteitsprovider toestaan': 'Dizze identiteitsprovider tastean',
@@ -704,7 +718,6 @@ const _dutchSourceAddFy = {
   '{aantal} cursussen': '{aantal} kursussen',
   '{aantal} lessen': '{aantal} lessen',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Folje in jildich OciServe-adres yn.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} fuortgongsrapport(en) wachtet/wachtsje op syngronisaasje.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -713,35 +726,22 @@ const _dutchSourceAddFy = {
   'Uw account hoort niet bij een actieve organisatie.':
       'Jo account heart net by in aktive organisaasje.',
   'Verdergaan': 'Trochgean',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Folgje opliedingen út jo OciServe-omjouwing. Kursusbestannen iepenje allinnich yn ôfspylmodus; fuortgong wurdt allinnich nei oanmelden syngronisearre.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Stean in HTTPS-server op in yntern netwurk ta. Tokens wurde nea fia gewoane HTTP ferstjoerd.',
   'Starten': 'Starte',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Tidens it ôfspyljen syngronisearret OciDeck de lêste dia, foltôging en toande tiid per dia mei dizze organisaasje. Dit is gjin bewiis fan oandacht of aktive leartiid.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'OciServe-oanmelding is allinnich beskikber yn de desktop-app, omdat de webferzje gjin feilige kaairing hat.',
-  'OciServe-organisatie': 'OciServe-organisaasje',
-  'OciServe-server': 'OciServe-server',
   'Opleiding': 'Oplieding',
   'Ingelogd blijven op dit apparaat': 'Oanmeld bliuwe op dit apparaat',
   'Inloggen': 'Oanmelde',
   'Les': 'Les',
   'Er staan geen opleidingen voor u klaar.':
       'Der steane gjin opliedingen foar jo klear.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Brûk in HTTPS-adres foar OciServe.',
   'Ingelogd als {naam}': 'Oanmeld as {naam}',
-  'Ingelogd bij OciServe': 'Oanmeld by OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'By it folgjen fan in kursus stjoert OciDeck jo lêste dia, foltôging en toande tiid per dia nei de keazen OciServe-organisaasje. Antwurden, notysjes en kursusynhâld wurde net as fuortgong ferstjoerd.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'De lokale oanmelding koe net hielendal wiske wurde. Besykje it opnij.',
   'De opleidingen konden niet worden opgehaald.':
       'De opliedingen koene net ophelle wurde.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Oanmelden by OciServe is mislearre. Kontrolearje de server en besykje it opnij.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Meitsje eLearning-ynhâld: learndoelen, modules, feedback en assessment-gearfettings. Ymportearje SCORM, QTI, xAPI, AICC en OLX lokaal. Standert út; set de utwreiding oan om de slidetypen te brûken.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

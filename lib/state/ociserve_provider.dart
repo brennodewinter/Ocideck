@@ -43,6 +43,10 @@ final ociServeEnabledProvider = Provider<bool>(
       ref.watch(ociServeProvider.select((state) => state.settings.enabled)),
 );
 
+/// De eLearning-koppeling is op elk platform zichtbaar. Op web legt de kaart
+/// uit waarom aanmelden zonder veilige sleutelbos niet beschikbaar is.
+final ociServeAvailableProvider = Provider<bool>((ref) => true);
+
 /// True only after a restored or fresh token has successfully called `/me`.
 final ociServeAuthenticatedProvider = Provider<bool>(
   (ref) => ref.watch(ociServeProvider.select((state) => state.authenticated)),

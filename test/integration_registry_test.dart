@@ -4,6 +4,7 @@ library;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/state/integration_registry.dart';
+import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 
 /// Het integratieregister (#1158): de laag waarop het tabblad Integraties en de
@@ -11,54 +12,72 @@ import 'package:ocideck/state/openkat_provider.dart';
 /// providers; deze test pint ze, zodat een tweede integratie erbij ze niet stil
 /// kan verschuiven.
 void main() {
-  ProviderContainer maak({required bool available, bool enabled = false}) {
+  ProviderContainer maak({
+    required bool openKatAvailable,
+    bool openKatEnabled = false,
+    bool ociServeAvailable = true,
+    bool ociServeEnabled = false,
+  }) {
     final c = ProviderContainer(
       overrides: [
-        openKatAvailableProvider.overrideWithValue(available),
-        openKatIntegrationEnabledProvider.overrideWithValue(enabled),
+        openKatAvailableProvider.overrideWithValue(openKatAvailable),
+        openKatIntegrationEnabledProvider.overrideWithValue(openKatEnabled),
+        ociServeAvailableProvider.overrideWithValue(ociServeAvailable),
+        ociServeEnabledProvider.overrideWithValue(ociServeEnabled),
       ],
     );
     addTearDown(c.dispose);
     return c;
   }
 
-  test('OpenKAT staat als eerste integratie in het register', () {
-    expect(integrationRegistry, hasLength(1));
-    expect(integrationRegistry.single.id, IntegrationId.openKat);
+  test('het register kent beide integraties in kaartvolgorde', () {
+    expect(integrationRegistry.map((entry) => entry.id), [
+      IntegrationId.openKat,
+      IntegrationId.ociServe,
+    ]);
   });
 
   group('beschikbaarheid', () {
     test('een beschikbare integratie telt mee', () {
-      final c = maak(available: true);
-      expect(c.read(availableIntegrationsProvider), hasLength(1));
+      final c = maak(openKatAvailable: true);
+      expect(c.read(availableIntegrationsProvider), hasLength(2));
       expect(c.read(anyIntegrationAvailableProvider), isTrue);
     });
 
     test('zonder beschikbare integratie is de lijst leeg', () {
       // Op web valt OpenKAT weg; dan hoort het tabblad er niet te zijn.
-      final c = maak(available: false);
+      final c = maak(openKatAvailable: false, ociServeAvailable: false);
       expect(c.read(availableIntegrationsProvider), isEmpty);
       expect(c.read(anyIntegrationAvailableProvider), isFalse);
     });
   });
 
   group('alles aan/uit leest de stand', () {
-    test('alles aan met de enige integratie aan', () {
-      final c = maak(available: true, enabled: true);
+    test('alles aan wanneer beide integraties aan staan', () {
+      final c = maak(
+        openKatAvailable: true,
+        openKatEnabled: true,
+        ociServeEnabled: true,
+      );
       expect(c.read(allIntegrationsEnabledProvider), isTrue);
       expect(c.read(anyIntegrationEnabledProvider), isTrue);
     });
 
-    test('alles uit met de enige integratie uit', () {
-      final c = maak(available: true, enabled: false);
+    test('één actieve integratie is niet alles, maar wel minstens één', () {
+      final c = maak(openKatAvailable: true, ociServeEnabled: true);
       expect(c.read(allIntegrationsEnabledProvider), isFalse);
-      expect(c.read(anyIntegrationEnabledProvider), isFalse);
+      expect(c.read(anyIntegrationEnabledProvider), isTrue);
     });
 
     test('een lege lijst telt niet als "alles aan"', () {
       // Niets beschikbaar is niet hetzelfde als alles ingeschakeld: dan valt er
       // niets aan te zetten, en "Alles inschakelen" hoort bruikbaar te blijven.
-      final c = maak(available: false, enabled: true);
+      final c = maak(
+        openKatAvailable: false,
+        openKatEnabled: true,
+        ociServeAvailable: false,
+        ociServeEnabled: true,
+      );
       expect(c.read(allIntegrationsEnabledProvider), isFalse);
       expect(c.read(anyIntegrationEnabledProvider), isFalse);
     });

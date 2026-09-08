@@ -163,7 +163,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      l10n.d('OciServe'),
+                      l10n.d('eLearning'),
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: palette.panelText,
                         fontWeight: FontWeight.w700,
@@ -314,7 +314,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
         initialValue: _organizationId,
         isExpanded: true,
         decoration: InputDecoration(
-          labelText: context.l10n.d('OciServe-organisatie'),
+          labelText: context.l10n.d('eLearning-organisatie'),
           isDense: true,
         ),
         items: [

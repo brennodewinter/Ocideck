@@ -4396,7 +4396,7 @@ objective**, a **module** heading, a **feedback** slide and an **assessment
 summary**. Together with the three question kinds described under
 [Question slides](#question-slides) they let you write a lesson in the same file
 as everything else — ordinary Marp Markdown and no separate authoring tool.
-Authoring remains local; the optional OciServe connection described below is the
+Authoring remains local; the optional eLearning integration described below is the
 separate playback and progress channel.
 
 Like the other optional modules it is **off by default**. Switch it on under
@@ -4464,7 +4464,7 @@ slide's does; all four share the free-Markdown preview and export the same way.
 The OciDeck **file format** stores course content and test rules — the answer
 model, scoring, feedback, timing, attempt rules, pass mark and course structure.
 It stores **no learner results**: not who answered what, not attempts, not
-personal progress, not mastery, not suspend data. The optional OciServe session
+personal progress, not mastery, not suspend data. The optional eLearning session
 below remains outside the file and sends only its explicitly listed progress
 fields. This is not a gap waiting to be filled in the existing fields: the
 format deliberately reserves no keys for it, because a key
@@ -4472,15 +4472,15 @@ whose meaning is "results go here later" either changes meaning later — which 
 file-format contract forbids — or collides with whatever another build already
 wrote there. If a results layer is ever built it gets new keys in a new file.
 
-### Following a course from OciServe
+### Following a course through eLearning
 
-The OciServe extension is separate from the authoring module and is off by
-default. On the desktop app, open **Settings → Uitbreidingen → OciServe**, enable
+The eLearning integration is separate from the authoring module and is off by
+default. On the desktop app, open **Settings → Integraties → eLearning**, enable
 it, enter the HTTPS address supplied by your organisation and sign in in the
 system browser. OciDeck can remember the login with a rotating refresh token in
 the operating-system keychain; switching that option off keeps the token only for
 the current app session. The browser build cannot store this credential safely
-and therefore does not offer OciServe login.
+and therefore does not offer eLearning login.
 
 Only after `/me` has confirmed your account and active organisation membership
 does **Mijn cursussen** appear at the bottom of **New tab**. It opens your
