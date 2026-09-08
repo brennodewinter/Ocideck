@@ -1633,12 +1633,54 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Suorita kursseja eLearning-ympäristöstäsi. Kurssitiedostot avautuvat vain toistotilassa; edistyminen synkronoidaan vasta kirjautumisen jälkeen.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'eLearning-kirjautuminen on käytettävissä vain työpöytäsovelluksessa, koska verkkoversiossa ei ole suojattua avainnippua.',
+  'eLearning-server': 'eLearning-palvelin',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Kurssia suoritettaessa OciDeck lähettää valitulle eLearning-organisaatiolle viimeisen dian, suorittamisen ja näytetyn ajan diaa kohden. Vastauksia, muistiinpanoja ja kurssin sisältöä ei lähetetä edistymistietoina.',
+  'Ingelogd bij eLearning': 'Kirjautunut eLearningen',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Tämä eLearning-palvelin käyttää palvelua {host} kirjautumiseen. Tietoja vaihdetaan tämän identiteetintarjoajan kanssa vasta, kun sallit sen.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Käytä eLearningen HTTPS-osoitetta.',
+  'Vul een geldig eLearning-adres in.': 'Anna kelvollinen eLearning-osoite.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Kirjautuminen eLearningen epäonnistui. Tarkista palvelin ja yritä uudelleen.',
+  'eLearning-organisatie': 'eLearning-organisaatio',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Kaikki oppitunnit, edistyminen ja katsottu aika yhdessä.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Katseluaika tarkoittaa, että dia oli näytöllä. Se ei ole huomion tai aktiivisen opiskeluajan mitta.',
+  'Bekijk mijn voortgang': 'Katso edistymistäni',
+  'Bekijk uw resultaten': 'Tarkastele tuloksiasi',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Tarkastele tuloksiasi, aktiivisuuttasi ja edistymistäsi kurssikohtaisesti.',
+  'Cursussen afgerond': 'Kurssit suoritettu',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Täydellinen yleiskatsaus suoritetuista oppitunneistasi.',
+  'Laatste activiteit': 'Viimeisin toiminta',
+  'Lessen afgerond': 'Oppitunnit suoritettu',
+  'Mijn voortgang': 'Minun edistykseni',
+  'Nog geen lessen bekeken.': 'Oppitunteja ei ole vielä katsottu.',
+  'Nog niet gestart': 'Ei vielä alkanut',
+  'Persoonlijk overzicht': 'Henkilökohtainen yleiskatsaus',
+  'Recente activiteit': 'Viimeaikainen toiminta',
+  'Tijd in beeld': 'Aika kuvassa',
+  'Uw cursussen': 'Omat kurssit',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Viimeksi katsomasi oppitunnit, viimeisimmät yläreunassa.',
+  'Uw persoonlijke leerresultaten': 'Omat oppimistulokset',
+  'Voortgang per cursus': 'Edistyminen kurssin mukaan',
+  '{afgerond} van {totaal}': '{afgerond} / {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage} % suoritetuista kursseista',
+  '{uren} u {minuten} min': '{uren} tuntia {minuten} min',
   'Bekeken: {tijd}': 'Katsottu: {tijd}',
   'Doorgaan in de les': 'Jatka oppitunnissa',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Palvelinta ei muutettu, koska edistyminen odottaa yhä lähettämistä.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Tämä OciServe-palvelin käyttää palvelua {host} kirjautumiseen. Tietoja vaihdetaan tämän identiteetintarjoajan kanssa vasta, kun sallit sen.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Tämä kurssitunti on käytettävissä vain toistoa varten eikä sitä tallenneta paikallisesti.',
   'Deze identiteitsprovider toestaan': 'Salli tämä identiteetintarjoaja',
@@ -1670,7 +1712,6 @@ const _dutchSourceAddFi = <String, String>{
   '{aantal} cursussen': '{aantal} kurssia',
   '{aantal} lessen': '{aantal} oppituntia',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Anna kelvollinen OciServe-osoite.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} edistymisraporttia odottaa synkronointia.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1679,33 +1720,21 @@ const _dutchSourceAddFi = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Tilisi ei kuulu aktiiviseen organisaatioon.',
   'Verdergaan': 'Jatka',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Suorita kursseja OciServe-ympäristöstäsi. Kurssitiedostot avautuvat vain toistotilassa; edistyminen synkronoidaan vasta kirjautumisen jälkeen.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Salli HTTPS-palvelin sisäverkossa. Tunnuksia ei koskaan lähetetä tavallisen HTTP:n kautta.',
   'Starten': 'Aloita',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Toiston aikana OciDeck synkronoi viimeisen dian, suorittamisen ja diaa kohden näytetyn ajan tämän organisaation kanssa. Tämä ei ole todiste tarkkaavaisuudesta tai aktiivisesta oppimisajasta.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'OciServe-kirjautuminen on käytettävissä vain työpöytäsovelluksessa, koska verkkoversiossa ei ole suojattua avainnippua.',
-  'OciServe-organisatie': 'OciServe-organisaatio',
-  'OciServe-server': 'OciServe-palvelin',
   'Opleiding': 'Kurssi',
   'Ingelogd blijven op dit apparaat': 'Pysy kirjautuneena tällä laitteella',
   'Inloggen': 'Kirjaudu sisään',
   'Les': 'Oppitunti',
   'Er staan geen opleidingen voor u klaar.':
       'Sinulle ei ole tarjolla kursseja.',
-  'Gebruik een HTTPS-adres voor OciServe.': 'Käytä OciServeen HTTPS-osoitetta.',
   'Ingelogd als {naam}': 'Kirjautunut käyttäjänä {naam}',
-  'Ingelogd bij OciServe': 'Kirjautunut OciServeen',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Kurssia suoritettaessa OciDeck lähettää valitulle OciServe-organisaatiolle viimeisen dian, suorittamisen ja näytetyn ajan diaa kohden. Vastauksia, muistiinpanoja ja kurssin sisältöä ei lähetetä edistymistietoina.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Paikallista kirjautumista ei voitu tyhjentää kokonaan. Yritä uudelleen.',
   'De opleidingen konden niet worden opgehaald.': 'Kursseja ei voitu hakea.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Kirjautuminen OciServeen epäonnistui. Tarkista palvelin ja yritä uudelleen.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Luo eLearning-sisältöä: oppimistavoitteet, moduulit, palaute ja arvioinnin yhteenvedot. Tuo SCORM, QTI, xAPI, AICC ja OLX paikallisesti. Oletuksena pois päältä; ota laajennus käyttöön käyttääksesi diatyyppejä.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

@@ -14,12 +14,12 @@
 // is protected — vandaar dat de klasse die helper heeft.
 part of '../settings_dialog.dart';
 
-/// De duim van de zijbalk-scrollbalk: wit met doorschijnendheid, zodat het
-/// marineblauwe verloop erdoorheen blijft schemeren. De alpha is gekozen op
-/// WCAG 1.4.11 (niet-tekstcontrast ≥ 3:1) tegen *beide* uiteinden van het
-/// verloop — geborgd in `settings_sidebar_scroll_affordance_test.dart`.
+/// De duim van de zijbalk-scrollbalk volgt de tekstkleur van het actieve
+/// app-paneel. De alpha is gekozen op WCAG 1.4.11 (niet-tekstcontrast ≥ 3:1)
+/// voor alle ingebouwde app-profielen.
 @visibleForTesting
-final Color settingsSidebarThumbColor = Colors.white.withValues(alpha: 0.45);
+Color settingsSidebarThumbColor(ThemeData theme) =>
+    AppPalette.of(theme).panelText.withValues(alpha: 0.65);
 
 /// Een instellingsregel met een bijschrift links en zijn bediening rechts — maar
 /// die de bediening ónder het bijschrift laat vallen zodra de interface-tekst
@@ -97,9 +97,9 @@ const double _kScrollFadeExtent = 24;
 /// een aanwijzing dat "Integraties" en "Documentatie" onder de vouw lagen.
 ///
 /// Een [RawScrollbar] en geen [Scrollbar], want die laatste delegeert op macOS
-/// naar een Cupertino-duim met een vaste grijze kleur — vrijwel onzichtbaar op
-/// de marineblauwe zijbalk, en per platform anders. Deze duim is op alle vier
-/// de platformen dezelfde.
+/// naar een Cupertino-duim met een vaste grijze kleur — niet betrouwbaar
+/// zichtbaar op elk gekozen paneel, en per platform anders. Deze duim volgt op
+/// alle vier de platformen de paneeltekstkleur van het actieve profiel.
 class _OverflowHints extends StatefulWidget {
   const _OverflowHints({
     required this.thumbColor,
@@ -233,6 +233,7 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final panelText = AppPalette.of(Theme.of(context)).panelText;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       child: Material(
@@ -247,7 +248,7 @@ class _NavItem extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),
               decoration: BoxDecoration(
                 color: selected
-                    ? Colors.white.withValues(alpha: 0.13)
+                    ? panelText.withValues(alpha: 0.13)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(11),
               ),
@@ -259,7 +260,7 @@ class _NavItem extends StatelessWidget {
                     height: 18,
                     margin: const EdgeInsets.only(right: 11),
                     decoration: BoxDecoration(
-                      color: selected ? AppTheme.blue400 : Colors.transparent,
+                      color: selected ? panelText : Colors.transparent,
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
@@ -267,8 +268,8 @@ class _NavItem extends StatelessWidget {
                     section.icon,
                     size: 19,
                     color: selected
-                        ? Colors.white
-                        : Colors.white.withValues(alpha: 0.62),
+                        ? panelText
+                        : panelText.withValues(alpha: 0.62),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -285,8 +286,8 @@ class _NavItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: selected
-                            ? Colors.white
-                            : Colors.white.withValues(alpha: 0.72),
+                            ? panelText
+                            : panelText.withValues(alpha: 0.72),
                         fontSize: 13.5,
                         fontWeight: selected
                             ? FontWeight.w600
@@ -380,6 +381,8 @@ Widget _buildLayout(
 /// merkvoet, die in deze layout ontbreekt, dus zonder deze toevoeging zou het
 /// tabblad onbereikbaar zijn.
 Widget _compactSectionBar(_SettingsDialogState state, AppLocalizations l10n) {
+  final theme = Theme.of(state.context);
+  final palette = AppPalette.of(theme);
   final sections = [
     ..._visibleNavSections(state),
     if (!_visibleNavSections(state).contains(SettingsSection.about))
@@ -393,18 +396,12 @@ Widget _compactSectionBar(_SettingsDialogState state, AppLocalizations l10n) {
       : sections.first;
   return Container(
     padding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-        colors: [AppTheme.navySoft, AppTheme.navy],
-      ),
-    ),
+    decoration: BoxDecoration(color: palette.panel),
     child: Row(
       children: [
-        const Icon(
+        Icon(
           Icons.settings_suggest_outlined,
-          color: Colors.white,
+          color: palette.panelText,
           size: 22,
         ),
         const SizedBox(width: 12),
@@ -414,11 +411,11 @@ Widget _compactSectionBar(_SettingsDialogState state, AppLocalizations l10n) {
               key: const Key('settings-section-picker'),
               isExpanded: true,
               value: value,
-              dropdownColor: AppTheme.navy,
-              iconEnabledColor: Colors.white,
+              dropdownColor: palette.panel,
+              iconEnabledColor: palette.panelText,
               borderRadius: BorderRadius.circular(10),
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: palette.panelText,
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
@@ -450,11 +447,13 @@ Widget _compactSectionBar(_SettingsDialogState state, AppLocalizations l10n) {
 /// presentatiebedrading die de klasse-plafond-ratchet niet hoort te belasten;
 /// het gedrag is ongewijzigd en de staat komt binnen als parameter.
 Widget _footerBar(_SettingsDialogState state, AppLocalizations l10n) {
+  final scheme = Theme.of(state.context).colorScheme;
   return Container(
+    key: const Key('settings-footer'),
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
     decoration: BoxDecoration(
-      color: AppTheme.paper,
-      border: const Border(top: BorderSide(color: AppTheme.iceBlue)),
+      color: scheme.surface,
+      border: Border(top: BorderSide(color: scheme.outlineVariant)),
     ),
     // Wrap in plaats van Row: bij 200% tekstschaal passen "Abbrechen" en
     // "Einstellungen speichern" niet meer naast elkaar en liep deze balk 261
@@ -484,18 +483,14 @@ extension _SettingsChrome on _SettingsDialogState {
   Widget _sidebar(AppLocalizations l10n) {
     // Bij schaal 1.0 exact 234, zodat er voor wie niets instelt niets verandert.
     final scale = MediaQuery.textScalerOf(context).scale(1);
+    final theme = Theme.of(context);
+    final palette = AppPalette.of(theme);
     return Container(
       // Benoemd zodat een test de zijbalk kan aanwijzen zonder op een breedte
       // of een kleurverloop te moeten raden — die veranderen, de rol niet.
       key: const Key('settings-sidebar'),
       width: _sidebarWidth * scale.clamp(1.0, _sidebarMaxGrowth),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [AppTheme.navySoft, AppTheme.navy],
-        ),
-      ),
+      decoration: BoxDecoration(color: palette.panel),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -507,23 +502,21 @@ extension _SettingsChrome on _SettingsDialogState {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [AppTheme.blue500, AppTheme.accent],
-                    ),
+                    color: theme.colorScheme.secondary,
                     borderRadius: BorderRadius.circular(11),
                     boxShadow: [
                       BoxShadow(
-                        color: AppTheme.accent.withValues(alpha: 0.45),
+                        color: theme.colorScheme.secondary.withValues(
+                          alpha: 0.35,
+                        ),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
                     ],
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.settings_suggest_outlined,
-                    color: Colors.white,
+                    color: AppTheme.labelOn(theme.colorScheme.secondary),
                     size: 23,
                   ),
                 ),
@@ -535,8 +528,8 @@ extension _SettingsChrome on _SettingsDialogState {
                     // 17px al niet naast het logo op één regel.
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: palette.panelText,
                       fontSize: 17,
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.2,
@@ -554,7 +547,7 @@ extension _SettingsChrome on _SettingsDialogState {
           // tabbladen onzichtbaar onder de vouw lagen.
           Expanded(
             child: _OverflowHints(
-              thumbColor: settingsSidebarThumbColor,
+              thumbColor: settingsSidebarThumbColor(theme),
               fadeEdges: true,
               builder: (context, controller) => SingleChildScrollView(
                 controller: controller,
@@ -584,6 +577,7 @@ extension _SettingsChrome on _SettingsDialogState {
   /// footer lights up like a selected nav item.
   Widget _aboutFooter(String aboutLabel) {
     final selected = _selectedTab == SettingsSection.about;
+    final panelText = AppPalette.of(Theme.of(context)).panelText;
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 12, 12, 14),
       child: Material(
@@ -598,7 +592,7 @@ extension _SettingsChrome on _SettingsDialogState {
               padding: const EdgeInsets.fromLTRB(10, 10, 12, 10),
               decoration: BoxDecoration(
                 color: selected
-                    ? Colors.white.withValues(alpha: 0.13)
+                    ? panelText.withValues(alpha: 0.13)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(11),
               ),
@@ -623,9 +617,9 @@ extension _SettingsChrome on _SettingsDialogState {
                     child: Text(
                       context.l10n.d('OciDeck'),
                       style: TextStyle(
-                        // EU-vlaggeel: leesbaar op de donkere/EU-blauwe
-                        // zijbalk, passend bij het geel-hertinte logo ernaast.
-                        color: AppTheme.amberVivid,
+                        // De merknaam volgt de paneeltekstkleur; zo blijft hij
+                        // naast het logo leesbaar in elk app-profiel.
+                        color: panelText,
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 2.5,
@@ -636,8 +630,8 @@ extension _SettingsChrome on _SettingsDialogState {
                     Icons.info_outline,
                     size: 16,
                     color: selected
-                        ? Colors.white
-                        : Colors.white.withValues(alpha: 0.5),
+                        ? panelText
+                        : panelText.withValues(alpha: 0.5),
                   ),
                 ],
               ),
@@ -649,11 +643,16 @@ extension _SettingsChrome on _SettingsDialogState {
   }
 
   Widget _contentHeader(String title) {
+    final theme = Theme.of(context);
+    final palette = AppPalette.of(theme);
     return Container(
+      key: const Key('settings-header'),
       padding: const EdgeInsets.fromLTRB(28, 18, 14, 16),
       decoration: BoxDecoration(
-        color: AppTheme.paper,
-        border: const Border(bottom: BorderSide(color: AppTheme.iceBlue)),
+        color: theme.colorScheme.surface,
+        border: Border(
+          bottom: BorderSide(color: theme.colorScheme.outlineVariant),
+        ),
       ),
       child: Row(
         children: [
@@ -668,7 +667,7 @@ extension _SettingsChrome on _SettingsDialogState {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: AppTheme.slate800,
+                color: theme.colorScheme.onSurface,
                 letterSpacing: 0.1,
               ),
             ),
@@ -678,7 +677,7 @@ extension _SettingsChrome on _SettingsDialogState {
             tooltip: context.l10n.t('cancel'),
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close, size: 20),
-            color: AppTheme.slate400,
+            color: palette.mutedText,
             splashRadius: 20,
           ),
         ],
@@ -690,10 +689,10 @@ extension _SettingsChrome on _SettingsDialogState {
     // Zonder randvervaging: sectiekoppen en doorlopende tekst verraden hier
     // zelf al dat er meer is, en de voetbalk met Opslaan is een bewuste vaste
     // grens. Alleen de duim, zodat een lang tabblad als Beveiliging zijn
-    // overloop toont. Slate500 leest in beide thema's op slate50 (≥ 4,5:1) —
-    // ditzelfde paar draagt elders in dit venster al lopende tekst.
+    // overloop toont. De gedempte tekstkleur komt uit hetzelfde actieve
+    // app-profiel als het inhoudsoppervlak.
     return _OverflowHints(
-      thumbColor: AppTheme.slate500,
+      thumbColor: AppPalette.of(Theme.of(context)).mutedText,
       builder: (context, controller) => SingleChildScrollView(
         controller: controller,
         padding: const EdgeInsets.fromLTRB(28, 22, 24, 22),

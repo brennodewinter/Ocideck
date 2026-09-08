@@ -665,12 +665,56 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Segui corsi dal tuo ambiente eLearning. I file dei corsi si aprono solo in modalità riproduzione; l\'avanzamento viene sincronizzato solo dopo l\'accesso.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'L\'accesso a eLearning è disponibile solo nell\'app desktop, perché la versione web non ha un portachiavi sicuro.',
+  'eLearning-server': 'Server eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Durante un corso, OciDeck invia all\'organizzazione eLearning selezionata l\'ultima diapositiva, il completamento e il tempo visualizzato per diapositiva. Risposte, note e contenuto del corso non vengono inviati come avanzamento.',
+  'Ingelogd bij eLearning': 'Accesso effettuato a eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Questo server eLearning usa {host} per l’accesso. I dati vengono scambiati con quel provider di identità solo dopo la sua autorizzazione.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Usa un indirizzo HTTPS per eLearning.',
+  'Vul een geldig eLearning-adres in.':
+      'Inserisci un indirizzo eLearning valido.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Accesso a eLearning non riuscito. Controlla il server e riprova.',
+  'eLearning-organisatie': 'Organizzazione eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Tutte le lezioni, i progressi e il tempo visualizzato insieme.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Il tempo di visualizzazione indica che una diapositiva era sullo schermo. Non è una misurazione dell’attenzione o del tempo di studio attivo.',
+  'Bekijk mijn voortgang': 'Controlla i miei progressi',
+  'Bekijk uw resultaten': 'Visualizza i tuoi risultati',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Visualizza i risultati, l\'attività e i progressi per corso.',
+  'Cursussen afgerond': 'Corsi completati',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Una panoramica completa delle lezioni completate.',
+  'Laatste activiteit': 'Ultima attività',
+  'Lessen afgerond': 'Lezioni completate',
+  'Mijn voortgang': 'I miei progressi',
+  'Nog geen lessen bekeken.': 'Nessuna lezione ancora vista.',
+  'Nog niet gestart': 'Non ancora iniziato',
+  'Persoonlijk overzicht': 'Panoramica personale',
+  'Recente activiteit': 'Attività recente',
+  'Tijd in beeld': 'Il tempo nella foto',
+  'Uw cursussen': 'I tuoi corsi',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Le tue ultime lezioni visualizzate, le più recenti in alto.',
+  'Uw persoonlijke leerresultaten':
+      'I tuoi risultati di apprendimento personali',
+  'Voortgang per cursus': 'Progressi per corso',
+  '{afgerond} van {totaal}': '{afgerond} di {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% dei corsi completati',
+  '{uren} u {minuten} min': '{uren} ore {minuten} min',
   'Bekeken: {tijd}': 'Visualizzato: {tijd}',
   'Doorgaan in de les': 'Continua nella lezione',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Il server non è stato modificato perché alcuni progressi sono ancora in attesa di invio.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Questo server OciServe usa {host} per l’accesso. I dati vengono scambiati con quel provider di identità solo dopo la sua autorizzazione.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Questa lezione del corso è disponibile solo per la riproduzione e non viene salvata localmente.',
   'Deze identiteitsprovider toestaan': 'Consenti questo provider di identità',
@@ -701,8 +745,6 @@ const _dutchSourceAddIt = {
   '{aantal} cursussen': '{aantal} corsi',
   '{aantal} lessen': '{aantal} lezioni',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.':
-      'Inserisci un indirizzo OciServe valido.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} rapporto/i sullo stato in attesa di sincronizzazione.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -711,35 +753,22 @@ const _dutchSourceAddIt = {
   'Uw account hoort niet bij een actieve organisatie.':
       'Il tuo account non appartiene a un\'organizzazione attiva.',
   'Verdergaan': 'Continua',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Segui corsi dal tuo ambiente OciServe. I file dei corsi si aprono solo in modalità riproduzione; l\'avanzamento viene sincronizzato solo dopo l\'accesso.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Consenti un server HTTPS su una rete interna. I token non vengono mai inviati tramite normale HTTP.',
   'Starten': 'Avvia',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Durante la riproduzione, OciDeck sincronizza con questa organizzazione l\'ultima diapositiva, il completamento e il tempo visualizzato per diapositiva. Non è una prova di attenzione o tempo di apprendimento attivo.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'L\'accesso a OciServe è disponibile solo nell\'app desktop, perché la versione web non ha un portachiavi sicuro.',
-  'OciServe-organisatie': 'Organizzazione OciServe',
-  'OciServe-server': 'Server OciServe',
   'Opleiding': 'Corso',
   'Ingelogd blijven op dit apparaat': 'Resta connesso su questo dispositivo',
   'Inloggen': 'Accedi',
   'Les': 'Lezione',
   'Er staan geen opleidingen voor u klaar.':
       'Non ci sono corsi disponibili per te.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Usa un indirizzo HTTPS per OciServe.',
   'Ingelogd als {naam}': 'Accesso effettuato come {naam}',
-  'Ingelogd bij OciServe': 'Accesso effettuato a OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Durante un corso, OciDeck invia all\'organizzazione OciServe selezionata l\'ultima diapositiva, il completamento e il tempo visualizzato per diapositiva. Risposte, note e contenuto del corso non vengono inviati come avanzamento.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Non è stato possibile eliminare completamente l\'accesso locale. Riprova.',
   'De opleidingen konden niet worden opgehaald.':
       'Non è stato possibile recuperare i corsi.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Accesso a OciServe non riuscito. Controlla il server e riprova.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Crea contenuti eLearning: obiettivi di apprendimento, moduli, feedback e riepiloghi delle valutazioni. Importa SCORM, QTI, xAPI, AICC e OLX localmente. Disattivato per impostazione predefinita; attiva l\'estensione per usare i tipi di diapositiva.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

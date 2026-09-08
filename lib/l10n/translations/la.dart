@@ -1648,12 +1648,56 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Cursos ex ambitu tuo eLearning sequere. Fasciculi cursus solum modo agendi aperiuntur; progressus solum post accessum synchronizatur.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Accessus eLearning solum in applicatione escritorio praesto est, quod versio interretialis claviarium securum non habet.',
+  'eLearning-server': 'Servus eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Cum cursum sequeris, OciDeck ultimam paginam, perfectionem et tempus ostensum pro pagina ad electam ordinationem eLearning mittit. Responsa, adnotationes et cursus contentum ut progressus non mittuntur.',
+  'Ingelogd bij eLearning': 'Ad eLearning accessit',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Hic servus eLearning {host} ad accessum utitur. Data cum illo identitatis provisore non commutantur nisi postquam id permiseris.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Inscriptione HTTPS pro eLearning utere.',
+  'Vul een geldig eLearning-adres in.':
+      'Inscriptionem eLearning validam insere.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Accessus ad eLearning defecit. Servum inspice et iterum tenta.',
+  'eLearning-organisatie': 'Ordinatio eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Tutte le lezioni, i progressi e il tempo visualizzato insieme.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Il tempo di visualizzazione indica che una diapositiva era sullo schermo. Non è una misurazione dell’attenzione o del tempo di studio attivo.',
+  'Bekijk mijn voortgang': 'Controlla i miei progressi',
+  'Bekijk uw resultaten': 'Visualizza i tuoi risultati',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Visualizza i risultati, l\'attività e i progressi per corso.',
+  'Cursussen afgerond': 'Corsi completati',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Una panoramica completa delle lezioni completate.',
+  'Laatste activiteit': 'Ultima attività',
+  'Lessen afgerond': 'Lezioni completate',
+  'Mijn voortgang': 'I miei progressi',
+  'Nog geen lessen bekeken.': 'Nessuna lezione ancora vista.',
+  'Nog niet gestart': 'Non ancora iniziato',
+  'Persoonlijk overzicht': 'Panoramica personale',
+  'Recente activiteit': 'Attività recente',
+  'Tijd in beeld': 'Il tempo nella foto',
+  'Uw cursussen': 'I tuoi corsi',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Le tue ultime lezioni visualizzate, le più recenti in alto.',
+  'Uw persoonlijke leerresultaten':
+      'I tuoi risultati di apprendimento personali',
+  'Voortgang per cursus': 'Progressi per corso',
+  '{afgerond} van {totaal}': '{afgerond} di {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% dei corsi completati',
+  '{uren} u {minuten} min': '{uren} horae {minuten} min',
   'Bekeken: {tijd}': 'Visum: {tijd}',
   'Doorgaan in de les': 'Perge in lectione',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Servus mutatus non est, quod progressus adhuc exspectat ut mittatur.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Hic servus OciServe {host} ad accessum utitur. Data cum illo identitatis provisore non commutantur nisi postquam id permiseris.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Haec lectio cursus tantum ad agendum praesto est nec localiter servatur.',
   'Deze identiteitsprovider toestaan': 'Hunc identitatis provisorem permitte',
@@ -1684,7 +1728,6 @@ const _dutchSourceAddLa = <String, String>{
   '{aantal} cursussen': '{aantal} cursus',
   '{aantal} lessen': '{aantal} lectiones',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Inscriptionem OciServe validam insere.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} relatio(nes) progressus synchronizationem exspectat/exspectant.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1693,34 +1736,21 @@ const _dutchSourceAddLa = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Rationarium tuum ad ordinationem activam non pertinet.',
   'Verdergaan': 'Pergere',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Cursos ex ambitu tuo OciServe sequere. Fasciculi cursus solum modo agendi aperiuntur; progressus solum post accessum synchronizatur.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Servum HTTPS in rete interna permitte. Signa numquam per HTTP vulgare mittuntur.',
   'Starten': 'Incipere',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Dum agitur, OciDeck ultimam paginam, perfectionem et tempus ostensum pro pagina cum hac ordinatione synchronizat. Hoc non est testimonium attentionis vel temporis discendi activi.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Accessus OciServe solum in applicatione escritorio praesto est, quod versio interretialis claviarium securum non habet.',
-  'OciServe-organisatie': 'Ordinatio OciServe',
-  'OciServe-server': 'Servus OciServe',
   'Opleiding': 'Cursus',
   'Ingelogd blijven op dit apparaat': 'In hoc instrumento manere accessum',
   'Inloggen': 'Accedere',
   'Les': 'Lectio',
   'Er staan geen opleidingen voor u klaar.': 'Nulli cursus tibi parati sunt.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Inscriptione HTTPS pro OciServe utere.',
   'Ingelogd als {naam}': 'Accessit ut {naam}',
-  'Ingelogd bij OciServe': 'Ad OciServe accessit',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Cum cursum sequeris, OciDeck ultimam paginam, perfectionem et tempus ostensum pro pagina ad electam ordinationem OciServe mittit. Responsa, adnotationes et cursus contentum ut progressus non mittuntur.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Accessus localis omnino deleri non potuit. Iterum tenta.',
   'De opleidingen konden niet worden opgehaald.':
       'Cursus accipi non potuerunt.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Accessus ad OciServe defecit. Servum inspice et iterum tenta.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Crea contentum eLearning: proposita discendi, modulos, responsa et summaria assessment. Importa SCORM, QTI, xAPI, AICC et OLX localiter. Praedefinite inactivum; extensionem activa ut genera paginarum adhibeas.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

@@ -45,6 +45,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
     final previewIndex = projectedIndex < 0 ? 0 : projectedIndex;
     final previewSlide = slides.isEmpty ? null : slides[previewIndex];
     final isResume = resumeFromSelection && previewIndex > 0;
+    final learningSession = ref.watch(learningSessionProvider);
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -79,6 +80,10 @@ class _PlayOnlyScreen extends ConsumerWidget {
                             textAlign: TextAlign.center,
                             style: theme.textTheme.headlineSmall,
                           ),
+                          const SizedBox(height: 8),
+                        ],
+                        if (previewSlide != null) ...[
+                          _slidePosition(l10n, palette, previewIndex, slides),
                           const SizedBox(height: 8),
                         ],
                         Row(
@@ -134,21 +139,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            OutlinedButton.icon(
-                              onPressed: () => requestCloseTab(
-                                context,
-                                ref,
-                                ref.read(tabsProvider).clampedIndex,
-                              ),
-                              icon: const Icon(Icons.close),
-                              label: Text(l10n.d('Sluiten')),
-                              style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 18,
-                                ),
-                              ),
-                            ),
+                            _exitButton(context, ref, learningSession),
                           ],
                         ),
                       ],
@@ -162,6 +153,36 @@ class _PlayOnlyScreen extends ConsumerWidget {
       ),
     );
   }
+
+  Widget _exitButton(
+    BuildContext context,
+    WidgetRef ref,
+    LearningSessionRef? learningSession,
+  ) => OutlinedButton.icon(
+    onPressed: () => learningSession == null
+        ? requestCloseTab(context, ref, ref.read(tabsProvider).clampedIndex)
+        : _returnToCourses(context, ref),
+    icon: Icon(learningSession == null ? Icons.close : Icons.arrow_back),
+    label: Text(
+      context.l10n.d(
+        learningSession == null ? 'Sluiten' : 'Terug naar mijn cursussen',
+      ),
+    ),
+    style: OutlinedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+    ),
+  );
+
+  Widget _slidePosition(
+    AppLocalizations l10n,
+    AppPalette palette,
+    int previewIndex,
+    List<Slide> slides,
+  ) => Text(
+    '${l10n.d('Dia')} ${previewIndex + 1} / ${slides.length}',
+    key: const Key('learning-slide-position'),
+    style: TextStyle(color: palette.mutedText, fontWeight: FontWeight.w600),
+  );
 
   /// Toont de eerste slide als statische hero (16:9, met slagschaduw). Bewust
   /// niet-interactief: geen media, geen links — enkel een voorproefje.

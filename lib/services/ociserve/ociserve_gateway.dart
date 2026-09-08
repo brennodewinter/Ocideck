@@ -26,6 +26,15 @@ abstract class OciServeApi {
     required String versionId,
     required String lessonId,
   });
+  Future<Uint8List> courseImage({
+    required String accessToken,
+    required String organizationId,
+    required String imageHash,
+  });
+  Future<Uint8List> accountAvatar({
+    required String accessToken,
+    required String avatarHash,
+  });
   Future<OciServeLearningState> learningState({
     required String accessToken,
     required String organizationId,
@@ -45,6 +54,8 @@ class OciServeGateway implements OciServeApi {
   // Mirrors OciServe's published package limit so an oversized response is
   // stopped client-side before it can consume more memory than the contract.
   static const int _packageCap = 32 * 1024 * 1024;
+  static const int _imageCap = 64 * 1024 * 1024;
+  static const int _avatarCap = 5 * 1024 * 1024;
 
   final OciServeSettings settings;
   final OciServeHttpTransport _transport;
@@ -265,6 +276,67 @@ class OciServeGateway implements OciServeApi {
   }
 
   @override
+  Future<Uint8List> courseImage({
+    required String accessToken,
+    required String organizationId,
+    required String imageHash,
+  }) async {
+    final normalizedHash = imageHash.trim().toLowerCase();
+    if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(normalizedHash)) {
+      throw const OciServeException('invalid_image_hash');
+    }
+    final response = await _send(
+      method: 'GET',
+      url: _api(['organizations', organizationId, 'assets', normalizedHash]),
+      accessToken: accessToken,
+      headers: const {'accept': 'image/png, image/jpeg, image/webp'},
+      cap: _imageCap,
+    );
+    final contentType = (response.headers['content-type'] ?? '')
+        .split(';')
+        .first
+        .trim()
+        .toLowerCase();
+    if (!_hasMatchingImageSignature(response.body, contentType)) {
+      throw const OciServeException('invalid_course_image');
+    }
+    if (sha256.convert(response.body).toString() != normalizedHash) {
+      throw const OciServeException('image_digest_mismatch');
+    }
+    return Uint8List.fromList(response.body);
+  }
+
+  @override
+  Future<Uint8List> accountAvatar({
+    required String accessToken,
+    required String avatarHash,
+  }) async {
+    final normalizedHash = avatarHash.trim().toLowerCase();
+    if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(normalizedHash)) {
+      throw const OciServeException('invalid_avatar_hash');
+    }
+    final response = await _send(
+      method: 'GET',
+      url: _api(['me', 'avatar']),
+      accessToken: accessToken,
+      headers: const {'accept': 'image/png, image/jpeg, image/webp'},
+      cap: _avatarCap,
+    );
+    final contentType = (response.headers['content-type'] ?? '')
+        .split(';')
+        .first
+        .trim()
+        .toLowerCase();
+    if (!_hasMatchingImageSignature(response.body, contentType)) {
+      throw const OciServeException('invalid_avatar_image');
+    }
+    if (sha256.convert(response.body).toString() != normalizedHash) {
+      throw const OciServeException('avatar_digest_mismatch');
+    }
+    return Uint8List.fromList(response.body);
+  }
+
+  @override
   Future<OciServeLearningState> learningState({
     required String accessToken,
     required String organizationId,
@@ -332,5 +404,32 @@ class OciServeGateway implements OciServeApi {
       difference |= left[i] ^ right[i];
     }
     return difference == 0;
+  }
+
+  static bool _hasMatchingImageSignature(List<int> bytes, String contentType) {
+    bool startsWith(List<int> signature) =>
+        bytes.length >= signature.length &&
+        List.generate(
+          signature.length,
+          (i) => bytes[i] == signature[i],
+        ).every((matches) => matches);
+    return switch (contentType) {
+      'image/png' => startsWith(const [
+        0x89,
+        0x50,
+        0x4e,
+        0x47,
+        0x0d,
+        0x0a,
+        0x1a,
+        0x0a,
+      ]),
+      'image/jpeg' => startsWith(const [0xff, 0xd8, 0xff]),
+      'image/webp' =>
+        bytes.length >= 12 &&
+            ascii.decode(bytes.sublist(0, 4), allowInvalid: true) == 'RIFF' &&
+            ascii.decode(bytes.sublist(8, 12), allowInvalid: true) == 'WEBP',
+      _ => false,
+    };
   }
 }

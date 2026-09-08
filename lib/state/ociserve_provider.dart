@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,6 +43,10 @@ final ociServeEnabledProvider = Provider<bool>(
   (ref) =>
       ref.watch(ociServeProvider.select((state) => state.settings.enabled)),
 );
+
+/// De eLearning-koppeling is op elk platform zichtbaar. Op web legt de kaart
+/// uit waarom aanmelden zonder veilige sleutelbos niet beschikbaar is.
+final ociServeAvailableProvider = Provider<bool>((ref) => true);
 
 /// True only after a restored or fresh token has successfully called `/me`.
 final ociServeAuthenticatedProvider = Provider<bool>(
@@ -163,9 +168,12 @@ class OciServeNotifier extends Notifier<OciServeState> {
     }
     try {
       state = state.copyWith(status: OciServeStatus.authenticating);
-      final gateway = _gatewayFactory(settings);
-      final installation = await gateway.installation();
+      final connection = await _connect(settings);
+      settings = connection.settings;
+      final gateway = connection.gateway;
+      final installation = connection.installation;
       if (generation != _generation) return;
+      await _storeResolvedSettings(settings);
       _requireAcceptedIdentityProvider(settings, installation);
       final configuration = await gateway.discoverOidc(installation);
       if (generation != _generation) return;
@@ -253,7 +261,24 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<void> setEnabled(bool enabled) =>
       saveSettings(state.settings.copyWith(enabled: enabled));
 
+  Future<bool> _restoreCachedLogin() async {
+    if (state.authenticated) return true;
+    final settings = state.settings;
+    if (!settings.enabled || !settings.isConfigured || !_secrets.canStore) {
+      return false;
+    }
+    final stored = await _secrets.readOciServeRefreshToken(
+      settings.normalizedBaseUrl,
+    );
+    if (stored == null || stored.isEmpty) return false;
+    await _initialize(++_generation);
+    return state.authenticated;
+  }
+
   Future<bool> login() async {
+    if (state.settings.rememberLogin && await _restoreCachedLogin()) {
+      return true;
+    }
     final generation = ++_generation;
     final settings = state.settings;
     if (!settings.enabled || !_secrets.canStore) {
@@ -271,14 +296,17 @@ class OciServeNotifier extends Notifier<OciServeState> {
       clearError: true,
     );
     try {
-      final gateway = _gatewayFactory(settings);
-      final installation = await gateway.installation();
+      final connection = await _connect(settings);
+      final resolvedSettings = connection.settings;
+      final gateway = connection.gateway;
+      final installation = connection.installation;
       if (generation != _generation) return false;
-      _requireAcceptedIdentityProvider(settings, installation);
+      await _storeResolvedSettings(resolvedSettings);
+      _requireAcceptedIdentityProvider(resolvedSettings, installation);
       final configuration = await gateway.discoverOidc(installation);
       if (generation != _generation) return false;
       final tokens = await _authFactory(
-        settings,
+        resolvedSettings,
       ).login(installation, configuration);
       final account = await gateway.me(tokens.accessToken);
       if (account.activeMemberships.isEmpty) {
@@ -288,8 +316,8 @@ class OciServeNotifier extends Notifier<OciServeState> {
       _installation = installation;
       _configuration = configuration;
       _tokens = tokens;
-      if (settings.rememberLogin) {
-        await _persistRefreshToken(settings, tokens);
+      if (resolvedSettings.rememberLogin) {
+        await _persistRefreshToken(resolvedSettings, tokens);
         if (generation != _generation) return false;
       }
       state = state.copyWith(
@@ -298,7 +326,8 @@ class OciServeNotifier extends Notifier<OciServeState> {
       );
       _flushInBackground();
       return true;
-    } catch (error) {
+    } catch (error, stack) {
+      logError('OciServe: aanmelden afronden', error, stack);
       if (generation != _generation) return false;
       _tokens = null;
       state = state.copyWith(
@@ -308,6 +337,42 @@ class OciServeNotifier extends Notifier<OciServeState> {
       );
       return false;
     }
+  }
+
+  Future<
+    ({
+      OciServeSettings settings,
+      OciServeApi gateway,
+      OciServeInstallation installation,
+    })
+  >
+  _connect(OciServeSettings settings) async {
+    Object? firstError;
+    StackTrace? firstStack;
+    for (final candidate in ociServeConnectionCandidates(settings)) {
+      try {
+        final gateway = _gatewayFactory(candidate);
+        final installation = await gateway.installation().timeout(
+          const Duration(seconds: 3),
+        );
+        return (
+          settings: candidate,
+          gateway: gateway,
+          installation: installation,
+        );
+      } catch (error, stack) {
+        firstError ??= error;
+        firstStack ??= stack;
+      }
+    }
+    Error.throwWithStackTrace(firstError!, firstStack!);
+  }
+
+  Future<void> _storeResolvedSettings(OciServeSettings settings) async {
+    if (state.settings.normalizedBaseUrl == settings.normalizedBaseUrl) return;
+    state = state.copyWith(settings: settings);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(kOciServeSettingsKey, jsonEncode(settings.toJson()));
   }
 
   Future<bool> logout() async {
@@ -409,6 +474,26 @@ class OciServeNotifier extends Notifier<OciServeState> {
       versionId: lesson.versionId,
       lessonId: lesson.lessonId,
     );
+  }
+
+  Future<Uint8List> courseImage({
+    required String organizationId,
+    required String imageHash,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).courseImage(
+      accessToken: access,
+      organizationId: organizationId,
+      imageHash: imageHash,
+    );
+  }
+
+  Future<Uint8List> accountAvatar(String avatarHash) async {
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).accountAvatar(accessToken: access, avatarHash: avatarHash);
   }
 
   Future<void> reportPlayback({

@@ -68,6 +68,23 @@ void main() {
     expect(find.textContaining('› Toegankelijkheid'), findsOneWidget);
   });
 
+  testWidgets('OciServe zoekt de eLearning-integratie op haar nieuwe plek', (
+    tester,
+  ) async {
+    await openSettings(tester);
+    await search(tester, 'ociserve');
+
+    expect(find.text('eLearning'), findsWidgets);
+    expect(find.text('Integraties › Integraties'), findsOneWidget);
+
+    await tester.tap(find.text('Integraties › Integraties'));
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 4));
+
+    expect(find.text('Integraties › Integraties'), findsNothing);
+    expect(find.text('eLearning'), findsWidgets);
+  });
+
   testWidgets('een stijlprofiel delen is vindbaar zonder de term te kennen', (
     tester,
   ) async {

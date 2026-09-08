@@ -4487,7 +4487,7 @@ De eLearning-module voegt diatypes voor lesmateriaal toe: een **leerdoel**, een
 de drie vraagsoorten die onder [Vraag-slides](#vraag-slides) staan beschreven, kun
 je een les in hetzelfde bestand schrijven als al het andere — gewone Marp-Markdown
 en geen apart auteursprogramma. Het maken blijft lokaal; de optionele
-OciServe-koppeling hieronder is het afzonderlijke kanaal voor afspelen en
+eLearning-integratie hieronder is het afzonderlijke kanaal voor afspelen en
 voortgang.
 
 Zoals de andere optionele modules staat hij **standaard uit**. Zet hem aan onder
@@ -4560,7 +4560,7 @@ Het **OciDeck-bestandsformaat** bewaart lesinhoud en toetsregels — het
 antwoordmodel, scoring, feedback, tijd, pogingsregels, slaaggrens en
 cursusstructuur. Het bewaart **geen resultaten van lerenden**: niet wie wat
 antwoordde, geen pogingen, geen persoonlijke voortgang, geen mastery, geen
-suspend data. De optionele OciServe-sessie hieronder blijft buiten het bestand en
+suspend data. De optionele eLearning-sessie hieronder blijft buiten het bestand en
 stuurt alleen de daar expliciet genoemde voortgangsvelden. Dat is geen gat dat in
 de bestaande velden nog opgevuld wordt: het formaat reserveert er met opzet geen
 sleutels voor, want een sleutel die "hier komen later resultaten" betekent krijgt
@@ -4568,15 +4568,15 @@ of later een andere betekenis — wat het formaatcontract verbiedt — of een be
 die botst met wat een andere build er al in schreef. Komt er ooit een
 resultatenlaag, dan krijgt die nieuwe sleutels in een nieuw bestand.
 
-### Een cursus uit OciServe volgen
+### Een cursus via eLearning volgen
 
-De OciServe-uitbreiding staat los van de auteursmodule en staat standaard uit.
-Open in de desktop-app **Instellingen → Uitbreidingen → OciServe**, zet haar aan,
+De eLearning-integratie staat los van de auteursmodule en staat standaard uit.
+Open in de desktop-app **Instellingen → Integraties → eLearning**, zet haar aan,
 vul het HTTPS-adres van je organisatie in en meld je via de systeembrowser aan.
 OciDeck kan de aanmelding onthouden met een roterend vernieuwtoken in de
 sleutelbos van het besturingssysteem; schakel je dat uit, dan blijft het token
 alleen tijdens deze appsessie bestaan. De browserversie kan dit geheim niet
-veilig bewaren en biedt aanmelden bij OciServe daarom niet aan.
+veilig bewaren en biedt aanmelden bij eLearning daarom niet aan.
 
 Pas nadat `/me` je account en actieve organisatielidmaatschap heeft bevestigd,
 verschijnt onderaan **Nieuw tabblad** de knop **Mijn cursussen**. Die opent je
@@ -4588,6 +4588,25 @@ afronden van een les kun je via het afrondscherm terug naar **Mijn cursussen**.
 Zo'n pakket kan in OciDeck alleen worden afgespeeld: bewerken en opslaan zijn
 niet beschikbaar. Dit is gebruiksbeleid en geen kopieerbeveiliging; een
 schermafbeelding blijft mogelijk.
+
+### Je persoonlijke leervoortgang
+
+Kies vanuit **Mijn cursussen** in de zijbalk **Mijn voortgang**, of selecteer je
+profiel. In een smal venster opent je profielfoto bovenaan hetzelfde overzicht.
+Je profiel toont je naam, e-mailadres en actieve organisaties, ook wanneer er
+nog geen cursussen klaarstaan. Daarnaast zie je vier persoonlijke indicatoren:
+afgeronde cursussen, afgeronde lessen, de totale tijd dat dia's in beeld stonden
+en de datum van je laatste activiteit. Daaronder toont een staafdiagram voor
+maximaal de eerste acht cursussen het voltooide percentage, gevolgd door ten
+hoogste vijf onlangs bekeken lessen, met de nieuwste bovenaan.
+
+Elke cursuskaart toont de status, het percentage en het aantal afgeronde lessen.
+In de lessenlijst staat per les of die nieuw, bezig of afgerond is, samen met de
+getoonde tijd. Selecteer een cursuskaart om terug te gaan naar **Mijn cursussen**
+met die cursus gekozen.
+
+Getoonde tijd is alleen de wandkloktijd waarin een dia op het scherm stond. Het
+is geen bewijs van aandacht, actieve studietijd, leren of beheersing.
 
 Een les kan een selectie uit een grotere presentatie zijn. OciDeck gebruikt
 daarvoor dezelfde duurzame markeringen **Overslaan** als bij gewoon

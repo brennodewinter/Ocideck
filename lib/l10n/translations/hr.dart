@@ -1637,12 +1637,53 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Pohađajte tečajeve iz svojeg eLearning okruženja. Datoteke tečaja otvaraju se samo u načinu reprodukcije; napredak se sinkronizira tek nakon prijave.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Prijava u eLearning dostupna je samo u stolnoj aplikaciji jer web-verzija nema sigurni privjesak ključeva.',
+  'eLearning-server': 'eLearning poslužitelj',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Tijekom pohađanja tečaja OciDeck odabranoj eLearning organizaciji šalje vaš zadnji slajd, dovršenost i prikazano vrijeme po slajdu. Odgovori, bilješke i sadržaj tečaja ne šalju se kao napredak.',
+  'Ingelogd bij eLearning': 'Prijavljeni u eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Ovaj eLearning poslužitelj koristi {host} za prijavu. Podaci se s tim pružateljem identiteta razmjenjuju tek nakon što to dopustite.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Upotrijebite HTTPS adresu za eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Unesite valjanu eLearning adresu.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Prijava u eLearning nije uspjela. Provjerite poslužitelj i pokušajte ponovno.',
+  'eLearning-organisatie': 'eLearning organizacija',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Sve lekcije, napredak i vrijeme gledanja zajedno.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Vrijeme gledanja znači da je slajd bio na ekranu. To nije mjerenje pažnje ili vremena aktivnog učenja.',
+  'Bekijk mijn voortgang': 'Provjerite moj napredak',
+  'Bekijk uw resultaten': 'Pogledajte svoje rezultate',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Pogledajte svoje rezultate, aktivnost i napredak po tečaju.',
+  'Cursussen afgerond': 'Završeni tečajevi',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Kompletan pregled vaših završenih lekcija.',
+  'Laatste activiteit': 'Najnovija aktivnost',
+  'Lessen afgerond': 'Lekcije završene',
+  'Mijn voortgang': 'Moj napredak',
+  'Nog geen lessen bekeken.': 'Još nema pregledanih lekcija.',
+  'Nog niet gestart': 'Još nije počelo',
+  'Persoonlijk overzicht': 'Osobni pregled',
+  'Recente activiteit': 'Nedavna aktivnost',
+  'Tijd in beeld': 'Vrijeme na slici',
+  'Uw cursussen': 'Vaši tečajevi',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Vaše zadnje pregledane lekcije, najnovije na vrhu.',
+  'Uw persoonlijke leerresultaten': 'Vaši osobni ishodi učenja',
+  'Voortgang per cursus': 'Napredak po tečaju',
+  '{afgerond} van {totaal}': '{afgerond} od {totaal}',
+  '{percentage}% van de cursussen afgerond': '{percentage}% završenih tečajeva',
+  '{uren} u {minuten} min': '{uren} sati {minuten} min',
   'Bekeken: {tijd}': 'Pregledano: {tijd}',
   'Doorgaan in de les': 'Nastavi u lekciji',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Poslužitelj nije promijenjen jer napredak još čeka slanje.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Ovaj OciServe poslužitelj koristi {host} za prijavu. Podaci se s tim pružateljem identiteta razmjenjuju tek nakon što to dopustite.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Ova lekcija tečaja dostupna je samo za reprodukciju i ne pohranjuje se lokalno.',
   'Deze identiteitsprovider toestaan': 'Dopusti ovog pružatelja identiteta',
@@ -1674,7 +1715,6 @@ const _dutchSourceAddHr = <String, String>{
   '{aantal} cursussen': '{aantal} tečajeva',
   '{aantal} lessen': '{aantal} lekcija',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Unesite valjanu OciServe adresu.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} izvještaj/a o napretku čeka/čekaju sinkronizaciju.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1683,34 +1723,21 @@ const _dutchSourceAddHr = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Vaš račun ne pripada aktivnoj organizaciji.',
   'Verdergaan': 'Nastavi',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Pohađajte tečajeve iz svojeg OciServe okruženja. Datoteke tečaja otvaraju se samo u načinu reprodukcije; napredak se sinkronizira tek nakon prijave.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Dopustite HTTPS poslužitelj na internoj mreži. Tokeni se nikada ne šalju običnim HTTP-om.',
   'Starten': 'Pokreni',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Tijekom reprodukcije OciDeck s ovom organizacijom sinkronizira zadnji slajd, dovršenost i prikazano vrijeme po slajdu. To nije dokaz pažnje ni aktivnog vremena učenja.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Prijava u OciServe dostupna je samo u stolnoj aplikaciji jer web-verzija nema sigurni privjesak ključeva.',
-  'OciServe-organisatie': 'OciServe organizacija',
-  'OciServe-server': 'OciServe poslužitelj',
   'Opleiding': 'Tečaj',
   'Ingelogd blijven op dit apparaat': 'Ostanite prijavljeni na ovom uređaju',
   'Inloggen': 'Prijavi se',
   'Les': 'Lekcija',
   'Er staan geen opleidingen voor u klaar.': 'Za vas nema dostupnih tečajeva.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Upotrijebite HTTPS adresu za OciServe.',
   'Ingelogd als {naam}': 'Prijavljeni kao {naam}',
-  'Ingelogd bij OciServe': 'Prijavljeni u OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Tijekom pohađanja tečaja OciDeck odabranoj OciServe organizaciji šalje vaš zadnji slajd, dovršenost i prikazano vrijeme po slajdu. Odgovori, bilješke i sadržaj tečaja ne šalju se kao napredak.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Lokalna prijava nije se mogla potpuno izbrisati. Pokušajte ponovno.',
   'De opleidingen konden niet worden opgehaald.':
       'Tečajevi se nisu mogli dohvatiti.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Prijava u OciServe nije uspjela. Provjerite poslužitelj i pokušajte ponovno.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Stvorite eLearning sadržaj: ciljevi učenja, moduli, povratne informacije i sažetci ocjenjivanja. Uvezite SCORM, QTI, xAPI, AICC i OLX lokalno. Isključeno prema zadanim postavkama; uključite proširenje da biste koristili vrste slajdova.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

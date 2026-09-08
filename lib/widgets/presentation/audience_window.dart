@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +15,7 @@ import '../../services/markdown_service.dart';
 import '../mermaid_render_host.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
+import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
 import '../slides/mermaid_diagram.dart';
 import '../slides/chart_hover.dart';
@@ -47,6 +50,14 @@ const presenterChannel = WindowMethodChannel(
 /// worden altijd verwerkt.
 bool isStaleUpdateSeq(int? seq, int lastSeq) => seq != null && seq <= lastSeq;
 
+bool _permanentChannelFailure(Object error) =>
+    error is WindowChannelException &&
+    const {
+      'CHANNEL_LIMIT_REACHED',
+      'CHANNEL_MODE_CONFLICT',
+      'INVALID_MODE',
+    }.contains(error.code);
+
 /// The app that runs inside the secondary (beamer) window. It only renders the
 /// current slide fullscreen; the presenter window drives it via [audienceChannel].
 class AudienceWindowApp extends StatefulWidget {
@@ -59,6 +70,7 @@ class AudienceWindowApp extends StatefulWidget {
 }
 
 class _AudienceWindowAppState extends State<AudienceWindowApp> {
+  final Completer<bool> _presenterReady = Completer<bool>();
   List<Slide> _slides = const [];
   String _reportLanguage = '';
   ThemeProfile _theme = const ThemeProfile();
@@ -144,12 +156,47 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         if (i != null && v is List) _ink[i] = decodeStrokes(v);
       });
     }
-    audienceChannel.setMethodCallHandler(_onPresenterCall);
+    unawaited(_connectChannels());
     _chartHover.addListener(_broadcastChartHover);
+  }
+
+  /// De tweede engine kan starten voordat zijn native vensterkanaal bestaat.
+  /// Blijf daarom registreren tot de brug klaar is en laat de presenter daarna
+  /// zijn volledige toestand opnieuw sturen. Zonder deze handdruk liet een
+  /// mislukte eerste update de beamer blijvend op de openingsdia staan.
+  Future<void> _connectChannels() async {
+    while (mounted) {
+      try {
+        await audienceChannel.setMethodCallHandler(_onPresenterCall);
+        break;
+      } catch (e) {
+        if (_permanentChannelFailure(e)) {
+          logWarning('AudienceWindowApp: channel registration failed', e);
+          if (!_presenterReady.isCompleted) _presenterReady.complete(false);
+          return;
+        }
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+      }
+    }
+    while (mounted) {
+      try {
+        await presenterChannel.invokeMethod<void>('ready');
+        if (!_presenterReady.isCompleted) _presenterReady.complete(true);
+        return;
+      } catch (e) {
+        if (_permanentChannelFailure(e)) {
+          logWarning('AudienceWindowApp: presenter connection failed', e);
+          if (!_presenterReady.isCompleted) _presenterReady.complete(false);
+          return;
+        }
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+      }
+    }
   }
 
   @override
   void dispose() {
+    if (!_presenterReady.isCompleted) _presenterReady.complete(false);
     audienceChannel.setMethodCallHandler(null);
     _mermaidView.dispose();
     _chartHover.removeListener(_broadcastChartHover);
@@ -309,8 +356,16 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   }
 
   void _send(String method, [Object? arguments]) {
-    // Best-effort: the presenter may already be gone.
-    presenterChannel.invokeMethod(method, arguments).catchError((_) => null);
+    unawaited(_sendWhenReady(method, arguments));
+  }
+
+  Future<void> _sendWhenReady(String method, Object? arguments) async {
+    if (!await _presenterReady.future || !mounted) return;
+    // De presenter kan intussen gesloten zijn; invoer naar een verdwenen
+    // venster mag het beamerscherm niet laten vastlopen.
+    await presenterChannel
+        .invokeMethod<void>(method, arguments)
+        .catchError((_) => null);
   }
 
   /// Reveal count for a timeline in step mode, mirroring the presenter so the

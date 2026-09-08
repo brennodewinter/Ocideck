@@ -52,6 +52,8 @@ class SettingsSectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final anchors = SettingsSectionAnchors.maybeOf(context);
     final highlighted = anchors?.highlighted == text;
+    final theme = Theme.of(context);
+    final palette = AppPalette.of(theme);
     return KeyedSubtree(
       key: anchors?.keys.putIfAbsent(text, GlobalKey.new),
       child: AnimatedContainer(
@@ -62,8 +64,8 @@ class SettingsSectionTitle extends StatelessWidget {
         decoration: highlighted
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppTheme.accentFg, width: 2),
-                color: AppTheme.accent.withValues(alpha: 0.06),
+                border: Border.all(color: palette.accentInk, width: 2),
+                color: theme.colorScheme.secondary.withValues(alpha: 0.08),
               )
             : null,
         child: Text(
@@ -71,7 +73,7 @@ class SettingsSectionTitle extends StatelessWidget {
           style: TextStyle(
             fontSize: 10,
             fontWeight: FontWeight.w700,
-            color: AppTheme.slate500,
+            color: palette.mutedText,
             letterSpacing: 1.2,
           ),
         ),

@@ -73,7 +73,6 @@ import 'settings/asset_rights_module_card.dart';
 import 'settings/video_calls_module_card.dart';
 import 'settings/managementsysteem_module_card.dart';
 import 'settings/elearning_module_card.dart';
-import 'settings/ociserve_module_card.dart';
 import 'settings/libreplan_module_card.dart';
 import 'libreplan_import_dialog.dart';
 import 'settings/appearance_legibility.dart';
@@ -610,7 +609,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                           '•  ${commit.deckDir}  ·  ${commit.branch}  ·  ${commit.message}',
                           style: TextStyle(
                             fontSize: 12.5,
-                            color: AppTheme.slate600,
+                            color: Theme.of(ctx).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ),
@@ -828,6 +827,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final theme = Theme.of(context);
     final profiles = _profiles;
     final screen = MediaQuery.sizeOf(context);
     // Het venster groeit mee met de tekstschaal, want kop, voet en zijbalk doen
@@ -901,7 +901,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         highlighted: _highlightedSection,
         child: Dialog(
           clipBehavior: Clip.antiAlias,
-          backgroundColor: Colors.white,
+          backgroundColor: theme.colorScheme.surface,
           insetPadding: dialogInset,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
@@ -925,7 +925,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                 // paint their ink/selected state onto this surface instead of a
                 // hidden ancestor behind an opaque box.
                 content: Material(
-                  color: AppTheme.slate50,
+                  key: const Key('settings-content'),
+                  color: theme.scaffoldBackgroundColor,
                   child: Column(
                     children: [
                       _contentHeader(_selectedTab.label(l10n)),
@@ -984,6 +985,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   Widget _themeColorAnchor(String field, Widget child) {
     final highlighted = _highlightedThemeField == field;
+    final theme = Theme.of(context);
+    final palette = AppPalette.of(theme);
     return KeyedSubtree(
       key: _themeFieldKey(field),
       child: AnimatedContainer(
@@ -993,8 +996,8 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         decoration: highlighted
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppTheme.accentFg, width: 2),
-                color: AppTheme.accent.withValues(alpha: 0.06),
+                border: Border.all(color: palette.accentInk, width: 2),
+                color: theme.colorScheme.secondary.withValues(alpha: 0.08),
               )
             : null,
         child: child,
@@ -1003,25 +1006,28 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   Widget _pathBox(String text, {bool muted = false}) {
+    final theme = Theme.of(context);
+    final palette = AppPalette.of(theme);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: _boxDecoration(),
+      decoration: _boxDecoration(context),
       child: Text(
         text,
         style: TextStyle(
           fontSize: 12,
-          color: muted ? AppTheme.slate400 : AppTheme.slate700,
+          color: muted ? palette.mutedText : theme.colorScheme.onSurface,
         ),
         overflow: TextOverflow.ellipsis,
       ),
     );
   }
+}
 
-  BoxDecoration _boxDecoration() {
-    return BoxDecoration(
-      border: Border.all(color: AppTheme.slate300),
-      borderRadius: BorderRadius.circular(6),
-      color: AppTheme.paper,
-    );
-  }
+BoxDecoration _boxDecoration(BuildContext context) {
+  final scheme = Theme.of(context).colorScheme;
+  return BoxDecoration(
+    border: Border.all(color: scheme.outlineVariant),
+    borderRadius: BorderRadius.circular(6),
+    color: scheme.surface,
+  );
 }

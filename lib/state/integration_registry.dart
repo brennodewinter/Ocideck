@@ -17,10 +17,11 @@
 // het tabblad, het register en de bulkbediening lopen dan vanzelf mee.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'ociserve_provider.dart';
 import 'openkat_provider.dart';
 
 /// De integraties, in de volgorde waarin het tabblad Integraties ze toont.
-enum IntegrationId { openKat }
+enum IntegrationId { openKat, ociServe }
 
 /// Eén integratie in het register: wie ze is, waar haar poorten staan, en hoe je
 /// haar schakelaar omzet.
@@ -66,6 +67,14 @@ final List<IntegrationEntry> integrationRegistry = [
     revealed: openKatIntegrationRevealProvider,
     setEnabled: (WidgetRef ref, value) =>
         ref.read(openKatProvider.notifier).setEnabled(value),
+  ),
+  IntegrationEntry(
+    id: IntegrationId.ociServe,
+    available: ociServeAvailableProvider,
+    enabled: ociServeEnabledProvider,
+    revealed: ociServeEnabledProvider,
+    setEnabled: (WidgetRef ref, value) =>
+        ref.read(ociServeProvider.notifier).setEnabled(value),
   ),
 ];
 

@@ -1633,12 +1633,54 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Følg kurser fra dit eLearning-miljø. Kursusfiler åbnes kun i afspilningstilstand; fremskridt synkroniseres kun efter login.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'eLearning-login er kun tilgængeligt i skrivebordsappen, fordi webversionen ikke har en sikker nøglering.',
+  'eLearning-server': 'eLearning-server',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Når du følger et kursus, sender OciDeck dit seneste dias, gennemførelse og vist tid pr. dias til den valgte eLearning-organisation. Svar, noter og kursusindhold sendes ikke som fremskridt.',
+  'Ingelogd bij eLearning': 'Logget ind på eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Denne eLearning-server bruger {host} til login. Data udveksles først med den identitetsudbyder, når du tillader det.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Brug en HTTPS-adresse til eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Indtast en gyldig eLearning-adresse.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Log ind på eLearning mislykkedes. Kontrollér serveren, og prøv igen.',
+  'eLearning-organisatie': 'eLearning-organisation',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Alle lektioner, fremskridt og set tid sammen.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Vist tid betyder, at et dias var på skærmen. Det er ikke en måling af opmærksomhed eller aktiv studietid.',
+  'Bekijk mijn voortgang': 'Tjek mine fremskridt',
+  'Bekijk uw resultaten': 'Se dine resultater',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Se dine resultater, aktivitet og fremskridt pr. kursus.',
+  'Cursussen afgerond': 'Kurser gennemført',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Et komplet overblik over dine gennemførte lektioner.',
+  'Laatste activiteit': 'Seneste aktivitet',
+  'Lessen afgerond': 'Lektioner afsluttet',
+  'Mijn voortgang': 'Mine fremskridt',
+  'Nog geen lessen bekeken.': 'Ingen lektioner set endnu.',
+  'Nog niet gestart': 'Ikke startet endnu',
+  'Persoonlijk overzicht': 'Personligt overblik',
+  'Recente activiteit': 'Seneste aktivitet',
+  'Tijd in beeld': 'Tid i billedet',
+  'Uw cursussen': 'Dine kurser',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Dine sidst sete lektioner, senest øverst.',
+  'Uw persoonlijke leerresultaten': 'Dit personlige læringsudbytte',
+  'Voortgang per cursus': 'Fremskridt pr. kursus',
+  '{afgerond} van {totaal}': '{afgerond} af {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage} % af gennemførte kurser',
+  '{uren} u {minuten} min': '{uren} timer {minuten} min',
   'Bekeken: {tijd}': 'Set: {tijd}',
   'Doorgaan in de les': 'Fortsæt i lektionen',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Serveren blev ikke ændret, fordi fremskridt stadig venter på at blive sendt.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Denne OciServe-server bruger {host} til login. Data udveksles først med den identitetsudbyder, når du tillader det.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Denne kursuslektion er kun tilgængelig til afspilning og gemmes ikke lokalt.',
   'Deze identiteitsprovider toestaan': 'Tillad denne identitetsudbyder',
@@ -1669,7 +1711,6 @@ const _dutchSourceAddDa = <String, String>{
   '{aantal} cursussen': '{aantal} kurser',
   '{aantal} lessen': '{aantal} lektioner',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Indtast en gyldig OciServe-adresse.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} statusrapport(er) venter på synkronisering.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1678,34 +1719,21 @@ const _dutchSourceAddDa = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Din konto tilhører ikke en aktiv organisation.',
   'Verdergaan': 'Fortsæt',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Følg kurser fra dit OciServe-miljø. Kursusfiler åbnes kun i afspilningstilstand; fremskridt synkroniseres kun efter login.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Tillad en HTTPS-server på et internt netværk. Tokens sendes aldrig via almindelig HTTP.',
   'Starten': 'Start',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Under afspilning synkroniserer OciDeck det seneste dias, gennemførelse og vist tid pr. dias med denne organisation. Det er ikke bevis på opmærksomhed eller aktiv læringstid.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'OciServe-login er kun tilgængeligt i skrivebordsappen, fordi webversionen ikke har en sikker nøglering.',
-  'OciServe-organisatie': 'OciServe-organisation',
-  'OciServe-server': 'OciServe-server',
   'Opleiding': 'Kursus',
   'Ingelogd blijven op dit apparaat': 'Forbliv logget ind på denne enhed',
   'Inloggen': 'Log ind',
   'Les': 'Lektion',
   'Er staan geen opleidingen voor u klaar.':
       'Der er ingen kurser klar til dig.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Brug en HTTPS-adresse til OciServe.',
   'Ingelogd als {naam}': 'Logget ind som {naam}',
-  'Ingelogd bij OciServe': 'Logget ind på OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Når du følger et kursus, sender OciDeck dit seneste dias, gennemførelse og vist tid pr. dias til den valgte OciServe-organisation. Svar, noter og kursusindhold sendes ikke som fremskridt.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Det lokale login kunne ikke ryddes helt. Prøv igen.',
   'De opleidingen konden niet worden opgehaald.': 'Kurserne kunne ikke hentes.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Log ind på OciServe mislykkedes. Kontrollér serveren, og prøv igen.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Opret eLearning-indhold: læringsmål, moduler, feedback og evalueringsresuméer. Importér SCORM, QTI, xAPI, AICC og OLX lokalt. Slukket som standard; tænd udvidelsen for at bruge dias-typerne.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

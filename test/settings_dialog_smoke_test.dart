@@ -1,9 +1,11 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/privacy_badge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +15,69 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// then exercises the tab-selection path.
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  testWidgets('het instellingenvenster volgt het actieve app-palet', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1500, 1100));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    const appearance = AppAppearanceProfile(
+      name: 'Test',
+      primaryColor: '#512DA8',
+      accentColor: '#FF8F00',
+      backgroundColor: '#FFF3E0',
+      surfaceColor: '#FFFDF8',
+      textColor: '#301B00',
+      mutedTextColor: '#765B35',
+      panelColor: '#3E2723',
+      panelTextColor: '#FFF8E1',
+    );
+    final theme = AppTheme.fromProfile(appearance);
+    final palette = AppPalette.of(theme);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          theme: theme,
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => SettingsDialog.show(context),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    expect(
+      tester.widget<Dialog>(find.byType(Dialog)).backgroundColor,
+      theme.colorScheme.surface,
+    );
+    expect(
+      (tester
+                  .widget<Container>(find.byKey(const Key('settings-sidebar')))
+                  .decoration!
+              as BoxDecoration)
+          .color,
+      palette.panel,
+    );
+    expect(
+      tester.widget<Material>(find.byKey(const Key('settings-content'))).color,
+      theme.scaffoldBackgroundColor,
+    );
+    for (final key in const ['settings-header', 'settings-footer']) {
+      expect(
+        (tester.widget<Container>(find.byKey(Key(key))).decoration!
+                as BoxDecoration)
+            .color,
+        theme.colorScheme.surface,
+      );
+    }
+  });
 
   testWidgets('SettingsDialog renders and switches tabs', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1500, 1100));

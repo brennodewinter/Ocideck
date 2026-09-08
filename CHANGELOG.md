@@ -32,6 +32,8 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- De schil van het instellingenvenster volgt voortaan de kleuren van het
+  gekozen app-profiel in plaats van een vast blauw-wit palet.
 - ci: scanner-pins bijwerken naar de laatste upstream
 - docs: dank Mieke van Oers in de CHANGELOG (#1907)
 - docs(CHECKS): looptijdclaim, ontbrekend tweede ding, poortenmatrix (#1895) (#1901)
@@ -2414,6 +2416,16 @@ that before deciding whether this alpha fits what you are doing.
 ---
 
 ## Development log
+
+- **De OciServe-koppeling staat voortaan herkenbaar als eLearning onder Integraties.**
+  De server, aanmelding en voortgangssynchronisatie staan niet langer tussen de
+  optionele uitbreidingen; de losse eLearning-auteursmodule blijft daar wel staan.
+- **OciServe laat cursisten hun persoonlijke leervoortgang zien.** Vanuit het
+  cursusoverzicht opent een eigen profielweergave met afgeronde cursussen en
+  lessen, bestede tijd en recente activiteit. Profielfoto's en cursusbeelden
+  worden begrensd, op type en inhoud gecontroleerd en tegen hun hash geverifieerd;
+  mislukte beelden vallen terug op initialen. De weergave gebruikt uitsluitend de
+  bestaande voortgangssynchronisatie en voegt geen login- of kijktelemetrie toe.
 
 - **De eLearning-sidecar komt het versiecontract na dat hij beloofde (#2006).** De
   doc-comment op `ElearningSidecar.parse` zei: null bij onleesbare JSON óf bij een

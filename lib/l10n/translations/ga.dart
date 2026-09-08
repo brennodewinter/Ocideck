@@ -1663,12 +1663,55 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Déan cúrsaí ó do thimpeallacht eLearning. Ní osclaítear comhaid chúrsa ach i mód athsheinm; ní shioncronaítear dul chun cinn ach tar éis sínithe isteach.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'Níl síniú isteach eLearning ar fáil ach san aip deisce, toisc nach bhfuil fáinne eochracha slán ag an leagan gréasáin.',
+  'eLearning-server': 'Freastalaí eLearning',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'Agus cúrsa á leanúint, seolann OciDeck do shleamhnán deireanach, críochnú agus an t-am taispeánta in aghaidh an tsleamhnáin chuig an eagraíocht eLearning roghnaithe. Ní sheoltar freagraí, nótaí ná ábhar an chúrsa mar dhul chun cinn.',
+  'Ingelogd bij eLearning': 'Sínithe isteach in eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'Úsáideann an freastalaí eLearning seo {host} le síniú isteach. Ní mhalartaítear sonraí leis an soláthraí aitheantais sin go dtí go gceadaíonn tú é.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Bain úsáid as seoladh HTTPS le haghaidh eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Iontráil seoladh bailí eLearning.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Theip ar shíniú isteach in eLearning. Seiceáil an freastalaí agus bain triail eile as.',
+  'eLearning-organisatie': 'Eagraíocht eLearning',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'Gach ceacht, dul chun cinn agus amharc ar am le chéile.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Ciallaíonn an t-am a breathnaíodh go raibh sleamhnán ar an scáileán. Ní tomhas aird nó am gníomhach staidéir é.',
+  'Bekijk mijn voortgang': 'Seiceáil mo dhul chun cinn',
+  'Bekijk uw resultaten': 'Féach ar do thorthaí',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'Féach ar do thorthaí, gníomhaíocht agus dul chun cinn in aghaidh an chúrsa.',
+  'Cursussen afgerond': 'Cúrsaí críochnaithe',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'Forbhreathnú iomlán ar do cheachtanna críochnaithe.',
+  'Laatste activiteit': 'An ghníomhaíocht is déanaí',
+  'Lessen afgerond': 'Ceachtanna críochnaithe',
+  'Mijn voortgang': 'Mo dhul chun cinn',
+  'Nog geen lessen bekeken.':
+      'Níor breathnaíodh ar cheachtanna ar bith go fóill.',
+  'Nog niet gestart': 'Gan tosaithe fós',
+  'Persoonlijk overzicht': 'Forbhreathnú pearsanta',
+  'Recente activiteit': 'Gníomhaíocht le déanaí',
+  'Tijd in beeld': 'Am sa phictiúr',
+  'Uw cursussen': 'Do chúrsaí',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Na ceachtanna is déanaí ar breathnaíodh orthu, na ceachtanna is déanaí ag an mbarr.',
+  'Uw persoonlijke leerresultaten': 'Do thorthaí foghlama pearsanta',
+  'Voortgang per cursus': 'Dul chun cinn in aghaidh an chúrsa',
+  '{afgerond} van {totaal}': '{afgerond} de {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% de na cúrsaí críochnaithe',
+  '{uren} u {minuten} min': '{uren} uair {minuten} nóim',
   'Bekeken: {tijd}': 'Breathnaithe: {tijd}',
   'Doorgaan in de les': 'Lean ar aghaidh sa cheacht',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'Níor athraíodh an freastalaí toisc go bhfuil dul chun cinn fós ag fanacht le seoladh.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'Úsáideann an freastalaí OciServe seo {host} le síniú isteach. Ní mhalartaítear sonraí leis an soláthraí aitheantais sin go dtí go gceadaíonn tú é.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'Níl an ceacht cúrsa seo ar fáil ach le haghaidh seinm agus ní shábháiltear go háitiúil é.',
   'Deze identiteitsprovider toestaan': 'Ceadaigh an soláthraí aitheantais seo',
@@ -1700,7 +1743,6 @@ const _dutchSourceAddGa = <String, String>{
   '{aantal} cursussen': '{aantal} cúrsa',
   '{aantal} lessen': '{aantal} ceacht',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Iontráil seoladh bailí OciServe.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       'Tá {aantal} tuairisc dul chun cinn ag fanacht le sioncrónú.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -1709,34 +1751,21 @@ const _dutchSourceAddGa = <String, String>{
   'Uw account hoort niet bij een actieve organisatie.':
       'Ní bhaineann do chuntas le heagraíocht ghníomhach.',
   'Verdergaan': 'Lean ar aghaidh',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Déan cúrsaí ó do thimpeallacht OciServe. Ní osclaítear comhaid chúrsa ach i mód athsheinm; ní shioncronaítear dul chun cinn ach tar éis sínithe isteach.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Ceadaigh freastalaí HTTPS ar líonra inmheánach. Ní sheoltar comharthaí riamh trí ghnáth-HTTP.',
   'Starten': 'Tosaigh',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'Le linn athsheinm, sioncronaíonn OciDeck an sleamhnán deireanach, críochnú agus an t-am taispeánta in aghaidh an tsleamhnáin leis an eagraíocht seo. Ní fianaise é seo ar aire ná ar am foghlama gníomhaí.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'Níl síniú isteach OciServe ar fáil ach san aip deisce, toisc nach bhfuil fáinne eochracha slán ag an leagan gréasáin.',
-  'OciServe-organisatie': 'Eagraíocht OciServe',
-  'OciServe-server': 'Freastalaí OciServe',
   'Opleiding': 'Cúrsa',
   'Ingelogd blijven op dit apparaat': 'Fan sínithe isteach ar an ngléas seo',
   'Inloggen': 'Sínigh isteach',
   'Les': 'Ceacht',
   'Er staan geen opleidingen voor u klaar.': 'Níl aon chúrsaí ar fáil duit.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Bain úsáid as seoladh HTTPS le haghaidh OciServe.',
   'Ingelogd als {naam}': 'Sínithe isteach mar {naam}',
-  'Ingelogd bij OciServe': 'Sínithe isteach in OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'Agus cúrsa á leanúint, seolann OciDeck do shleamhnán deireanach, críochnú agus an t-am taispeánta in aghaidh an tsleamhnáin chuig an eagraíocht OciServe roghnaithe. Ní sheoltar freagraí, nótaí ná ábhar an chúrsa mar dhul chun cinn.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'Níorbh fhéidir an síniú isteach áitiúil a ghlanadh go hiomlán. Bain triail eile as.',
   'De opleidingen konden niet worden opgehaald.':
       'Níorbh fhéidir na cúrsaí a aisghabháil.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Theip ar shíniú isteach in OciServe. Seiceáil an freastalaí agus bain triail eile as.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Cruthaigh ábhar eLearning: cuspóirí foghlama, modúil, aiseolas agus achoimrí meastóireachta. Iompórtáil SCORM, QTI, xAPI, AICC agus OLX go háitiúil. Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na cineálacha sleamhnán a úsáid.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':

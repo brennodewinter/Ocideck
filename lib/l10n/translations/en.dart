@@ -831,12 +831,54 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
+      'Take courses from your eLearning environment. Course files open only in playback mode; progress is synchronized only after signing in.',
+  'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
+      'eLearning sign-in is only available in the desktop app because the web version has no secure keychain.',
+  'eLearning-server': 'eLearning server',
+  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
+      'When taking a course, OciDeck sends your last slide, completion, and displayed time per slide to the selected eLearning organization. Answers, notes, and course content are not sent as progress.',
+  'Ingelogd bij eLearning': 'Signed in to eLearning',
+  'Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
+      'This eLearning server uses {host} for sign-in. Data is exchanged with that identity provider only after you allow it.',
+  'Gebruik een HTTPS-adres voor eLearning.':
+      'Use an HTTPS address for eLearning.',
+  'Vul een geldig eLearning-adres in.': 'Enter a valid eLearning address.',
+  'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.':
+      'Sign-in to eLearning failed. Check the server and try again.',
+  'eLearning-organisatie': 'eLearning organization',
+  'Alle lessen, voortgang en bekeken tijd bij elkaar.':
+      'All lessons, progress and viewed time together.',
+  'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
+      'Viewed time means a slide was on screen. It is not a measurement of attention or active study time.',
+  'Bekijk mijn voortgang': 'View my progress',
+  'Bekijk uw resultaten': 'View your results',
+  'Bekijk uw resultaten, activiteit en voortgang per cursus.':
+      'View your results, activity and progress per course.',
+  'Cursussen afgerond': 'Courses completed',
+  'Een volledig overzicht van uw afgeronde lessen.':
+      'A complete overview of your completed lessons.',
+  'Laatste activiteit': 'Latest activity',
+  'Lessen afgerond': 'Lessons completed',
+  'Mijn voortgang': 'My progress',
+  'Nog geen lessen bekeken.': 'No lessons viewed yet.',
+  'Nog niet gestart': 'Not started yet',
+  'Persoonlijk overzicht': 'Personal overview',
+  'Recente activiteit': 'Recent activity',
+  'Tijd in beeld': 'Time displayed',
+  'Uw cursussen': 'Your courses',
+  'Uw laatst bekeken lessen, meest recent bovenaan.':
+      'Your last viewed lessons, most recent at the top.',
+  'Uw persoonlijke leerresultaten': 'Your personal learning progress',
+  'Voortgang per cursus': 'Progress per course',
+  '{afgerond} van {totaal}': '{afgerond} of {totaal}',
+  '{percentage}% van de cursussen afgerond':
+      '{percentage}% of courses completed',
+  '{uren} u {minuten} min': '{uren} h {minuten} min',
   'Bekeken: {tijd}': 'Viewed: {tijd}',
   'Doorgaan in de les': 'Continue in the lesson',
   'De server is niet gewijzigd, omdat nog voortgang op verzending wacht.':
       'The server was not changed because progress is still waiting to be sent.',
-  'Deze OciServe-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.':
-      'This OciServe server uses {host} for sign-in. Data is exchanged with that identity provider only after you allow it.',
   'Deze cursusles is alleen beschikbaar om af te spelen en wordt niet lokaal opgeslagen.':
       'This course lesson is available only for playback and is not stored locally.',
   'Deze identiteitsprovider toestaan': 'Allow this identity provider',
@@ -867,7 +909,6 @@ const _dutchSourceAddEn = {
   '{aantal} cursussen': '{aantal} courses',
   '{aantal} lessen': '{aantal} lessons',
   'OciServe': 'OciServe',
-  'Vul een geldig OciServe-adres in.': 'Enter a valid OciServe address.',
   '{aantal} voortgangsrapport(en) wacht(en) op synchronisatie.':
       '{aantal} progress report(s) waiting for synchronization.',
   '{afgerond} van {totaal} lessen afgerond':
@@ -876,35 +917,22 @@ const _dutchSourceAddEn = {
   'Uw account hoort niet bij een actieve organisatie.':
       'Your account does not belong to an active organization.',
   'Verdergaan': 'Continue',
-  'Volg opleidingen uit uw OciServe-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
-      'Take courses from your OciServe environment. Course files open only in playback mode; progress is synchronized only after signing in.',
   'Sta een HTTPS-server op een intern netwerk toe. Tokens worden nooit via gewone HTTP verzonden.':
       'Allow an HTTPS server on an internal network. Tokens are never sent over ordinary HTTP.',
   'Starten': 'Start',
   'Tijdens het afspelen synchroniseert OciDeck de laatste dia, voltooiing en getoonde tijd per dia met deze organisatie. Dit is geen bewijs van aandacht of actieve leertijd.':
       'During playback, OciDeck synchronizes the last slide, completion, and displayed time per slide with this organization. This is not evidence of attention or active learning time.',
-  'OciServe-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
-      'OciServe sign-in is only available in the desktop app because the web version has no secure keychain.',
-  'OciServe-organisatie': 'OciServe organization',
-  'OciServe-server': 'OciServe server',
   'Opleiding': 'Course',
   'Ingelogd blijven op dit apparaat': 'Stay signed in on this device',
   'Inloggen': 'Sign in',
   'Les': 'Lesson',
   'Er staan geen opleidingen voor u klaar.':
       'There are no courses available for you.',
-  'Gebruik een HTTPS-adres voor OciServe.':
-      'Use an HTTPS address for OciServe.',
   'Ingelogd als {naam}': 'Signed in as {naam}',
-  'Ingelogd bij OciServe': 'Signed in to OciServe',
-  'Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen OciServe-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.':
-      'When taking a course, OciDeck sends your last slide, completion, and displayed time per slide to the selected OciServe organization. Answers, notes, and course content are not sent as progress.',
   'De lokale aanmelding kon niet volledig worden gewist. Probeer opnieuw.':
       'The local sign-in could not be completely cleared. Try again.',
   'De opleidingen konden niet worden opgehaald.':
       'The courses could not be retrieved.',
-  'Aanmelden bij OciServe is niet gelukt. Controleer de server en probeer opnieuw.':
-      'Sign-in to OciServe failed. Check the server and try again.',
   'Maak eLearning-inhoud: leerdoelen, modules, feedback en assessment-samenvattingen. Importeer SCORM, QTI, xAPI, AICC en OLX lokaal. Standaard uit; zet de uitbreiding aan om de dia-types te gebruiken.':
       'Create eLearning content: learning objectives, modules, feedback and assessment summaries. Import SCORM, QTI, xAPI, AICC and OLX locally. Off by default; turn on the extension to use the slide types.',
   'Een module- of hoofdstuktitel. Gebruik als structuurmarkering tussen leerdoelen en vragen.':
