@@ -104,6 +104,99 @@ void main() {
     },
   );
 
+  testWidgets('announces when the audience channel is ready', (tester) async {
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final sent = <String>[];
+    var registrations = 0;
+    var readyAttempts = 0;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'registerMethodHandler') {
+        registrations++;
+        if (registrations == 1) {
+          throw MissingPluginException('secondary engine is still starting');
+        }
+      }
+      if (call.method == 'invokeMethod') {
+        final args = Map<String, dynamic>.from(call.arguments as Map);
+        final method = args['method'];
+        if (method is String) sent.add(method);
+        if (method == 'ready' && ++readyAttempts == 1) {
+          throw PlatformException(
+            code: 'CHANNEL_UNREGISTERED',
+            message: 'presenter handler is still starting',
+          );
+        }
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _twoSlideMarkdown,
+      'index': 0,
+    });
+    await tester.pump(const Duration(milliseconds: 60));
+
+    await tester.tap(find.text('Welkom'));
+    await tester.pump();
+    expect(sent, isNot(contains('next')));
+
+    await tester.pump(const Duration(milliseconds: 60));
+
+    expect(registrations, 2);
+    expect(readyAttempts, 2);
+    expect(sent, contains('next'));
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a permanent channel failure stops retrying and drops input', (
+    tester,
+  ) async {
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    var registrations = 0;
+    var invocations = 0;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'registerMethodHandler') {
+        registrations++;
+        throw PlatformException(
+          code: 'CHANNEL_MODE_CONFLICT',
+          message: 'channel has an incompatible owner',
+        );
+      }
+      if (call.method == 'invokeMethod') invocations++;
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _twoSlideMarkdown,
+      'index': 0,
+    });
+    await tester.pump(const Duration(milliseconds: 120));
+    await tester.tap(find.text('Welkom'));
+    await tester.pump();
+
+    expect(registrations, 1);
+    expect(invocations, 0);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('honours the starting index from the args', (tester) async {
     await _pumpAudience(tester, <String, dynamic>{
       'markdown': _deckMarkdown,
