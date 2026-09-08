@@ -413,6 +413,8 @@ extension _MarkdownParse on MarkdownService {
       quality: d.quality,
       preservedMarpLines: d.preservedMarpLines,
       marpStyle: d.marpStyle,
+      anchor: d.anchor,
+      nextAnchor: d.nextAnchor,
     );
   }
 
