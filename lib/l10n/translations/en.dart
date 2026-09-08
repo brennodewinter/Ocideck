@@ -851,7 +851,7 @@ const _dutchSourceAddEn = {
       'All lessons, progress and viewed time together.',
   'Bekeken tijd betekent dat een dia in beeld stond. Het is geen meting van aandacht of actieve studietijd.':
       'Viewed time means a slide was on screen. It is not a measurement of attention or active study time.',
-  'Bekijk mijn voortgang': 'Check out my progress',
+  'Bekijk mijn voortgang': 'View my progress',
   'Bekijk uw resultaten': 'View your results',
   'Bekijk uw resultaten, activiteit en voortgang per cursus.':
       'View your results, activity and progress per course.',
@@ -865,11 +865,11 @@ const _dutchSourceAddEn = {
   'Nog niet gestart': 'Not started yet',
   'Persoonlijk overzicht': 'Personal overview',
   'Recente activiteit': 'Recent activity',
-  'Tijd in beeld': 'Time in the picture',
+  'Tijd in beeld': 'Time displayed',
   'Uw cursussen': 'Your courses',
   'Uw laatst bekeken lessen, meest recent bovenaan.':
       'Your last viewed lessons, most recent at the top.',
-  'Uw persoonlijke leerresultaten': 'Your personal learning outcomes',
+  'Uw persoonlijke leerresultaten': 'Your personal learning progress',
   'Voortgang per cursus': 'Progress per course',
   '{afgerond} van {totaal}': '{afgerond} of {totaal}',
   '{percentage}% van de cursussen afgerond':
