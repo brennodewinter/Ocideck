@@ -345,6 +345,21 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(ociserve): **Mijn gegevens** geeft de ingelogde cursist live inzage in
+  alle categorieën en velden die de gekozen eLearning-organisatie aanlevert.
+  De algemene weergave blijft werken bij onbekende toekomstige categorieën,
+  opent ze pas op verzoek en toont lange lijsten per 50 registraties. De respons
+  is begrensd op 32 MiB en blijft alleen in de open dialoog; OciDeck slaat haar
+  niet automatisch op en zet haar niet op het klembord.
+
+- feat(ociserve): **Mijn gegevens** toont ook het volledige, vanaf invoering
+  opgebouwde spoor van wie cursistgegevens bekeek of wijzigde: tijd, onderdeel,
+  doel, actorsoort, organisatorische rol en bewaareinde. OciServe koppelt dit
+  spoor rechtstreeks aan de cursist, ook zonder account, en laat de beschermde
+  handeling mislukken als de auditregel niet atomair kan worden opgeslagen.
+  Medewerkeraccounts blijven intern herleidbaar, maar namen en technische
+  identificatoren worden niet standaard aan de cursist bekendgemaakt.
+
 - feat(ociserve): vernieuwde themagestuurde leeromgeving **Mijn cursussen**.
   De cursist kiest een cursus en ziet lessen, status en voortgang; een les kan
   worden gestart of hervat, en een afgeronde cursus start opnieuw bij de eerste
@@ -2458,6 +2473,14 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Cursisten kunnen hun bij eLearning geregistreerde gegevens inzien.**
+  **Mijn gegevens** haalt voor de gekozen organisatie alle door OciServe
+  aangeleverde categorieën en velden live op. Ook onbekende toekomstige
+  categorieën blijven zichtbaar; lange lijsten verschijnen per 50 registraties
+  en de respons stopt bij 32 MiB. De gegevens leven alleen in de open dialoog en
+  worden niet automatisch opgeslagen of naar het klembord geschreven. Doelen,
+  ontvangers, herkomst, bewaartermijnen en overige privacyrechten blijven bij de
+  organisatie; deze weergave is op zichzelf geen volledige AVG-nalevingsclaim.
 - **De OciServe-koppeling staat voortaan herkenbaar als eLearning onder Integraties.**
   De server, aanmelding en voortgangssynchronisatie staan niet langer tussen de
   optionele uitbreidingen; de losse eLearning-auteursmodule blijft daar wel staan.

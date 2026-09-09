@@ -39,6 +39,10 @@ abstract class OciServeApi {
     required String accessToken,
     required String organizationId,
   });
+  Future<OciServePrivacyData> privacyData({
+    required String accessToken,
+    required String organizationId,
+  });
   Future<void> reportPlayback({
     required String accessToken,
     required String organizationId,
@@ -56,6 +60,7 @@ class OciServeGateway implements OciServeApi {
   static const int _packageCap = 32 * 1024 * 1024;
   static const int _imageCap = 64 * 1024 * 1024;
   static const int _avatarCap = 5 * 1024 * 1024;
+  static const int _privacyDataCap = 32 * 1024 * 1024;
 
   final OciServeSettings settings;
   final OciServeHttpTransport _transport;
@@ -350,6 +355,25 @@ class OciServeGateway implements OciServeApi {
       return OciServeLearningState.fromJson(_jsonObject(response));
     } catch (error, stack) {
       logError('OciServe: voortgangsantwoord lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<OciServePrivacyData> privacyData({
+    required String accessToken,
+    required String organizationId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api(['organizations', organizationId, 'me', 'privacy-data']),
+      accessToken: accessToken,
+      cap: _privacyDataCap,
+    );
+    try {
+      return OciServePrivacyData.fromJson(_jsonObject(response));
+    } catch (error, stack) {
+      logError('OciServe: gegevensinzage lezen', error.runtimeType, stack);
       throw const OciServeException('invalid_response');
     }
   }

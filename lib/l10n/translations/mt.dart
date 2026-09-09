@@ -1651,6 +1651,61 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Aanwezigheid': 'Attendenza',
+  'Lidmaatschap': 'Sħubija',
+  'Inzage en wijzigingen': 'Aċċess u bidliet',
+  'Beschikbaarheid van het inzagespoor':
+      'Disponibbiltà tar-reġistru tal-aċċess',
+  'Beschikbaar vanaf': 'Disponibbli minn',
+  'Historie vóór deze datum': 'Storja qabel din id-data',
+  'Tijdstip': 'Data u ħin',
+  'Handeling': 'Azzjoni',
+  'Gegevensonderdeel': 'Kategorija tad-data',
+  'Handelde als': 'Aġixxa bħala',
+  'Organisatorische rol': 'Rwol organizzattiv',
+  'Bekeken': 'Ara',
+  'Gewijzigd': 'Mibdul',
+  'Uzelf': 'Inti',
+  'Medewerker': 'Membru tal-persunal',
+  'Systeem': 'Sistema',
+  'Onbekend': 'Mhux magħruf',
+  'Docent': 'Għalliem',
+  'Beoordelaar': 'Evalwatur',
+  'Organisatiebeheerder': 'Amministratur ta\' l-organizzazzjoni',
+  'Niet beschikbaar': 'Mhux disponibbli',
+  'Uitoefening van privacyrechten':
+      'Eżerċizzju ta\' drittijiet ta\' privatezza',
+  'Beoordeling en certificering': 'Valutazzjoni u ċertifikazzjoni',
+  'Uitvoering van het leertraject': 'Twassil tal-programm ta\' tagħlim',
+  'Cursistenadministratie': 'Amministrazzjoni tal-istudent',
+  'Cursistprofiel': 'Profil tal-istudent',
+  'Leerstatistieken': 'Statistika tat-tagħlim',
+  'Inschrijving': 'Iskrizzjoni',
+  'Toetspoging': 'Attentat ta\' valutazzjoni',
+  'Beoordeling': 'Valutazzjoni',
+  'Bewijsstuk': 'Evidenza',
+  'Kwalificatie': 'Kwalifika',
+  'Deelname': 'Parteċipazzjoni',
+  'PE-punten': 'Punti ta\' edukazzjoni kontinwa',
+  'Certificaat': 'Ċertifikat',
+  'Privacyverzoek': 'Talba għall-privatezza',
+  'Bewaard tot': 'Miżmum sa',
+  'Bekijk mijn gegevens': 'Ara d-data tiegħi',
+  'Bekijk welke gegevens eLearning voor u heeft geregistreerd.':
+      'Ara liema data rreġistra eLearning dwarek.',
+  'Dit overzicht is op {datum} rechtstreeks opgehaald bij eLearning en wordt niet door OciDeck bewaard.':
+      'Din il-ħarsa ġenerali nġabret direttament minn eLearning fi {datum} u ma tinħażinx minn OciDeck.',
+  'Geen gegevens geregistreerd': 'Ma ġiet irreġistrata ebda data',
+  'Het bevat alle categorieën die de server voor deze organisatie heeft aangeleverd. Voor informatie over doelen, ontvangers, herkomst, bewaartermijnen of uw andere privacyrechten kunt u terecht bij {organisatie}.':
+      'Fiha l-kategoriji kollha li s-server ipprovda għal din l-organizzazzjoni. Għal informazzjoni dwar l-għanijiet, ir-riċevituri, l-oriġini, il-perjodi taż-żamma jew drittijiet oħra tal-privatezza tiegħek, ikkuntattja lil {organisatie}.',
+  'Kon uw gegevens niet laden. Probeer het opnieuw.':
+      'Ma setgħetx tittella’ d-data tiegħek. Erġa’ pprova.',
+  'Meer tonen ({aantal} resterend)': 'Uri aktar (fadal {aantal})',
+  'Mijn gegevens': 'Id-data tiegħi',
+  'Privacy-inzage': 'Aċċess għad-data personali',
+  'Uw geregistreerde gegevens': 'Id-data rreġistrata tiegħek',
+  'uw organisatie': 'l-organizzazzjoni tiegħek',
+  '{aantal} registraties': '{aantal} reġistrazzjonijiet',
   'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
       'Segwi korsijiet mill-ambjent eLearning tiegħek. Il-fajls tal-kors jinfetħu biss fil-modalità ta\' plejbek; il-progress jiġi sinkronizzat biss wara l-login.',
   'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':

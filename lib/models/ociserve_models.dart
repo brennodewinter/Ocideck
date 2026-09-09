@@ -235,6 +235,39 @@ class OciServeLearningState {
       );
 }
 
+/// A completed, self-scoped copy of the personal data OciServe has registered
+/// for the learner in one organization. The payload deliberately stays
+/// generic so a newly added server category is visible without a client
+/// release instead of being silently discarded by a typed projection.
+@immutable
+class OciServePrivacyData {
+  const OciServePrivacyData({
+    required this.participantId,
+    required this.generatedAt,
+    required this.data,
+  });
+
+  final String participantId;
+  final DateTime generatedAt;
+  final Map<String, Object?> data;
+
+  factory OciServePrivacyData.fromJson(Map<String, Object?> json) {
+    final participantId = (json['participant_id'] as String? ?? '').trim();
+    final generatedAt = DateTime.tryParse(
+      json['generated_at'] as String? ?? '',
+    );
+    final data = json['data'];
+    if (participantId.isEmpty || generatedAt == null || data is! Map) {
+      throw const FormatException('incomplete OciServe privacy data');
+    }
+    return OciServePrivacyData(
+      participantId: participantId,
+      generatedAt: generatedAt,
+      data: Map.unmodifiable(Map<String, Object?>.from(data)),
+    );
+  }
+}
+
 @immutable
 class OciServeLessonState {
   const OciServeLessonState({

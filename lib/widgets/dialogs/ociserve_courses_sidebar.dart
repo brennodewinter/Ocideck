@@ -10,14 +10,18 @@ class OciServeCoursesSidebar extends StatelessWidget {
     super.key,
     required this.account,
     required this.showProgress,
+    required this.showData,
     required this.onCourses,
     required this.onProgress,
+    required this.onData,
   });
 
   final OciServeAccount account;
   final bool showProgress;
+  final bool showData;
   final VoidCallback onCourses;
   final VoidCallback onProgress;
+  final VoidCallback onData;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +71,7 @@ class OciServeCoursesSidebar extends StatelessWidget {
                 context,
                 icon: Icons.school_outlined,
                 label: l10n.d('Mijn cursussen'),
-                selected: !showProgress,
+                selected: !showProgress && !showData,
                 onTap: onCourses,
               ),
               const SizedBox(height: 8),
@@ -77,6 +81,14 @@ class OciServeCoursesSidebar extends StatelessWidget {
                 label: l10n.d('Mijn voortgang'),
                 selected: showProgress,
                 onTap: onProgress,
+              ),
+              const SizedBox(height: 8),
+              _destination(
+                context,
+                icon: Icons.manage_search_outlined,
+                label: l10n.d('Mijn gegevens'),
+                selected: showData,
+                onTap: onData,
               ),
               const Spacer(),
               Divider(color: palette.panelText.withValues(alpha: 0.18)),

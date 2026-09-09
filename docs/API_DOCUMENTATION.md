@@ -653,6 +653,7 @@ the authenticated client uses only self-scoped organisation routes:
 - `GET /api/v1/organizations/{organization_id}/me/learning-feed`
 - `GET /api/v1/organizations/{organization_id}/me/course-versions/{version_id}/lessons/{lesson_id}/package`
 - `GET /api/v1/organizations/{organization_id}/me/learning-state`
+- `GET /api/v1/organizations/{organization_id}/me/privacy-data`
 - `POST /api/v1/organizations/{organization_id}/me/playback-sessions`
 
 The package endpoint returns binary `.ocideck` bytes and must include a matching
@@ -666,6 +667,22 @@ playback POST is an idempotent absolute snapshot identified by
 The participant identity is derived from the bearer token, not accepted from a
 client field. The authoritative schemas and authorization responses live in the
 OciServe repository's `docs/openapi.yaml`.
+
+The privacy-data GET follows the same self-scoped identity rule: the server
+derives the participant from the authenticated user. `OciServePrivacyData`
+requires `participant_id`, `generated_at` and a `data` object, but deliberately
+keeps the contents of `data` generic so categories and fields added by OciServe
+remain visible without a matching OciDeck release. The client caps this response
+at 32 MiB. The dialog expands categories lazily and reveals list records in
+batches of 50; it holds the parsed response only in dialog state and does not
+automatically persist or copy it.
+
+Two server-defined categories form the learner-facing audit view.
+`participant_data_access_history_metadata` states when complete recording
+started; `participant_data_access_history` contains newest-first, flat records
+with the localised time, view/change, data category, purpose, actor type, role
+snapshot and retention end. OciDeck deliberately receives no staff account ID,
+request ID or employee display name in this view.
 
 ## Extending OciDeck
 
