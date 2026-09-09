@@ -96,6 +96,47 @@ const gatewayRoutes = <GatewayRoute>[
     path: '/api/v1/organizations/{}/me/playback-sessions',
     // Fire-and-forget POST — no response fields to check.
   ),
+  // — Evidence & badges —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/evidence',
+    responseSchema: 'EvidenceList',
+    responseFields: ['uploads'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/participants/{}/qualifications',
+    responseSchema: 'QualificationList',
+    responseFields: ['qualifications'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/evidence-uploads',
+    responseSchema: 'EvidenceResponse',
+    responseFields: ['id', 'status'],
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/organizations/{}/evidence-uploads/{}/content',
+    responseSchema: 'EvidenceResponse',
+    responseFields: ['id', 'status'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/evidence-uploads/{}/content',
+    // Binary download — no JSON fields to check.
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/evidence-uploads/{}',
+    responseSchema: 'EvidenceResponse',
+    responseFields: ['id', 'status'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/badges',
+    // Returns an external URL — minimal schema check.
+  ),
 ];
 
 /// Normalise a path so {param_name} becomes {} for comparison.
@@ -262,8 +303,8 @@ void main() {
     // forgets to add it here, the test count won't match. We can't
     // automatically count _api() calls in a Dart test, but we can at least
     // verify the list is non-empty and covers the known routes.
-    expect(gatewayRoutes.length, greaterThanOrEqualTo(9),
-        reason: 'The gateway calls at least 9 routes; the list must cover them');
+    expect(gatewayRoutes.length, greaterThanOrEqualTo(16),
+        reason: 'The gateway calls at least 16 routes; the list must cover them');
   });
 }
 

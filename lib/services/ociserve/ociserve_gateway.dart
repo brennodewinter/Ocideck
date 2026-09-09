@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_models.dart';
 import '../../models/ociserve_settings.dart';
 import '../../utils/log.dart';
@@ -48,11 +50,65 @@ abstract class OciServeApi {
     required String organizationId,
     required OciServePlaybackSnapshot snapshot,
   });
+
+  // — Evidence & badges (bewijs bij badges) —
+
+  /// Lists all evidence uploads for a participant.
+  Future<List<EvidenceUpload>> listEvidence({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+  });
+
+  /// Lists all qualifications (badges) for a participant.
+  Future<List<OciServeQualification>> listQualifications({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+  });
+
+  /// Reserves an evidence upload slot (step 1 of the quarantine protocol).
+  Future<EvidenceUpload> requestEvidenceSlot({
+    required String accessToken,
+    required String organizationId,
+    required EvidenceUploadRequest request,
+  });
+
+  /// Uploads evidence bytes to a reserved slot (step 2).
+  Future<EvidenceUpload> uploadEvidenceContent({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+    required Uint8List bytes,
+    required String contentType,
+  });
+
+  /// Returns the current state of an evidence upload slot.
+  Future<EvidenceUpload> evidenceDetail({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+  });
+
+  /// Downloads the verified evidence bytes (slot must be `clean`).
+  Future<Uint8List> downloadEvidence({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+  });
+
+  /// Returns the external Open Badges administration URL.
+  Future<Uri> badgeAdministrationUrl({
+    required String accessToken,
+    required String organizationId,
+  });
 }
 
 class OciServeGateway implements OciServeApi {
   OciServeGateway({required this.settings, OciServeHttpTransport? transport})
     : _transport = transport ?? createOciServeHttpTransport();
+
+  static const _uuid = Uuid();
 
   static const int _jsonCap = 2 * 1024 * 1024;
   // Mirrors OciServe's published package limit so an oversized response is
@@ -61,6 +117,7 @@ class OciServeGateway implements OciServeApi {
   static const int _imageCap = 64 * 1024 * 1024;
   static const int _avatarCap = 5 * 1024 * 1024;
   static const int _privacyDataCap = 32 * 1024 * 1024;
+  static const int _evidenceCap = 64 * 1024 * 1024;
 
   final OciServeSettings settings;
   final OciServeHttpTransport _transport;
@@ -397,6 +454,200 @@ class OciServeGateway implements OciServeApi {
       },
       body: utf8.encode(snapshot.encode()),
     );
+  }
+
+  // — Evidence & badges —
+
+  @override
+  Future<List<EvidenceUpload>> listEvidence({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api([
+        'organizations',
+        organizationId,
+        'participants',
+        participantId,
+        'evidence',
+      ]),
+      accessToken: accessToken,
+    );
+    try {
+      final decoded = jsonDecode(utf8.decode(response.body));
+      final raw = decoded is Map && decoded['uploads'] is List
+          ? decoded['uploads']! as List
+          : throw const FormatException();
+      return raw
+          .map((item) => EvidenceUpload.fromJson(
+                Map<String, Object?>.from(item as Map),
+              ))
+          .toList(growable: false);
+    } catch (error, stack) {
+      logError('OciServe: bewijsstukken lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<List<OciServeQualification>> listQualifications({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api([
+        'organizations',
+        organizationId,
+        'participants',
+        participantId,
+        'qualifications',
+      ]),
+      accessToken: accessToken,
+    );
+    try {
+      final decoded = jsonDecode(utf8.decode(response.body));
+      final raw = decoded is Map && decoded['qualifications'] is List
+          ? decoded['qualifications']! as List
+          : throw const FormatException();
+      return raw
+          .map((item) => OciServeQualification.fromJson(
+                Map<String, Object?>.from(item as Map),
+              ))
+          .toList(growable: false);
+    } catch (error, stack) {
+      logError('OciServe: badges lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<EvidenceUpload> requestEvidenceSlot({
+    required String accessToken,
+    required String organizationId,
+    required EvidenceUploadRequest request,
+  }) async {
+    final idempotencyKey = _uuid.v4();
+    final response = await _send(
+      method: 'POST',
+      url: _api(['organizations', organizationId, 'evidence-uploads']),
+      accessToken: accessToken,
+      headers: {
+        'content-type': 'application/json',
+        'idempotency-key': idempotencyKey,
+      },
+      body: utf8.encode(jsonEncode(request.toJson())),
+    );
+    try {
+      return EvidenceUpload.fromJson(_jsonObject(response));
+    } catch (error, stack) {
+      logError('OciServe: bewijsslot aanvragen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<EvidenceUpload> uploadEvidenceContent({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+    required Uint8List bytes,
+    required String contentType,
+  }) async {
+    final response = await _send(
+      method: 'PUT',
+      url: _api([
+        'organizations',
+        organizationId,
+        'evidence-uploads',
+        evidenceId,
+        'content',
+      ]),
+      accessToken: accessToken,
+      headers: {'content-type': contentType},
+      body: bytes,
+      cap: _evidenceCap,
+    );
+    try {
+      return EvidenceUpload.fromJson(_jsonObject(response));
+    } catch (error, stack) {
+      logError('OciServe: bewijs uploaden', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<EvidenceUpload> evidenceDetail({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api([
+        'organizations',
+        organizationId,
+        'evidence-uploads',
+        evidenceId,
+      ]),
+      accessToken: accessToken,
+    );
+    try {
+      return EvidenceUpload.fromJson(_jsonObject(response));
+    } catch (error, stack) {
+      logError('OciServe: bewijsdetail lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<Uint8List> downloadEvidence({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api([
+        'organizations',
+        organizationId,
+        'evidence-uploads',
+        evidenceId,
+        'content',
+      ]),
+      accessToken: accessToken,
+      headers: const {'accept': 'application/octet-stream'},
+      cap: _evidenceCap,
+    );
+    return Uint8List.fromList(response.body);
+  }
+
+  @override
+  Future<Uri> badgeAdministrationUrl({
+    required String accessToken,
+    required String organizationId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api(['organizations', organizationId, 'badges']),
+      accessToken: accessToken,
+    );
+    try {
+      final json = _jsonObject(response);
+      final url = (json['url'] as String? ?? '').trim();
+      final uri = Uri.tryParse(url);
+      if (uri == null || !uri.hasAuthority) {
+        throw const OciServeException('invalid_response');
+      }
+      _requireHttps(uri);
+      return uri;
+    } catch (e) {
+      if (e is OciServeException) rethrow;
+      throw const OciServeException('invalid_response');
+    }
   }
 
   static void _requireHttps(Uri uri) {
