@@ -246,45 +246,117 @@ class OciServeEvidence extends StatelessWidget {
   ) {
     final palette = AppPalette.of(theme);
     final (statusLabel, statusColor) = _uploadStatusDisplay(l10n, theme, upload);
+    final statusMessage = _uploadStatusMessage(l10n, locale, upload);
+    final nextStep = _uploadNextStep(l10n, upload);
     return Card(
       margin: EdgeInsets.zero,
-      child: ListTile(
-        leading: Icon(
-          upload.declaredType.startsWith('application/pdf')
-              ? Icons.picture_as_pdf_outlined
-              : Icons.image_outlined,
-          color: palette.accentInk.withValues(alpha: 0.6),
-        ),
-        title: Text(
-          upload.filename,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.bodyMedium,
-        ),
-        subtitle: Text(
-          l10n
-              .d('Aangeleverd op {datum}')
-              .replaceAll('{datum}', locale.formatFullDate(upload.createdAt.toLocal())),
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: palette.accentInk.withValues(alpha: 0.6),
-          ),
-        ),
-        trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(
-            color: statusColor.withValues(alpha: 0.12),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            statusLabel,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: statusColor,
-              fontWeight: FontWeight.w600,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  upload.declaredType.startsWith('application/pdf')
+                      ? Icons.picture_as_pdf_outlined
+                      : Icons.image_outlined,
+                  color: palette.accentInk.withValues(alpha: 0.6),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    upload.filename,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: statusColor.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    statusLabel,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: statusColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
+            const SizedBox(height: 10),
+            Text(
+              l10n
+                  .d('Aangeleverd op {datum}')
+                  .replaceAll('{datum}', locale.formatFullDate(upload.createdAt.toLocal())),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: palette.accentInk.withValues(alpha: 0.6),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(statusMessage, style: theme.textTheme.bodyMedium),
+            if (nextStep != null) ...[
+              const SizedBox(height: 6),
+              Text(
+                nextStep,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: statusColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ],
         ),
       ),
     );
+  }
+
+  /// Human-readable status message in mensentaal.
+  /// Each status tells the learner what is happening, not just a label.
+  String _uploadStatusMessage(
+    AppLocalizations l10n,
+    MaterialLocalizations locale,
+    EvidenceUpload upload,
+  ) {
+    final dateStr = locale.formatFullDate(upload.createdAt.toLocal());
+    return switch (upload.status) {
+      EvidenceUploadStatus.pending => l10n
+          .d('In behandeling sinds {datum}. Meestal binnen twee werkdagen.')
+          .replaceAll('{datum}', dateStr),
+      EvidenceUploadStatus.uploaded => l10n
+          .d('In behandeling sinds {datum}. Meestal binnen twee werkdagen.')
+          .replaceAll('{datum}', dateStr),
+      EvidenceUploadStatus.clean =>
+        l10n.d('Geaccepteerd. Het bewijsstuk is goedgekeurd.'),
+      EvidenceUploadStatus.rejected => upload.rejectionReason != null &&
+          upload.rejectionReason!.isNotEmpty
+        ? l10n
+            .d('Afgekeurd: {reden}')
+            .replaceAll('{reden}', upload.rejectionReason!)
+        : l10n.d('Afgekeurd. De beoordelaar heeft geen reden opgegeven.'),
+      EvidenceUploadStatus.failed =>
+        l10n.d('Het uploaden is mislukt. Probeer het opnieuw.'),
+    };
+  }
+
+  /// The concrete next step for each status.
+  /// A rejection without a next step is a bug, not a text — every
+  /// negative outcome says what the learner can do now.
+  String? _uploadNextStep(AppLocalizations l10n, EvidenceUpload upload) {
+    return switch (upload.status) {
+      EvidenceUploadStatus.pending =>
+        l10n.d('Wordt verzonden zodra je online bent.'),
+      EvidenceUploadStatus.uploaded => null,
+      EvidenceUploadStatus.clean => null,
+      EvidenceUploadStatus.rejected =>
+        l10n.d('Lever een nieuw of gecorrigeerd bestand aan.'),
+      EvidenceUploadStatus.failed =>
+        l10n.d('Lever het bestand opnieuw aan.'),
+    };
   }
 
   (String, Color) _uploadStatusDisplay(
@@ -298,11 +370,11 @@ class OciServeEvidence extends StatelessWidget {
         theme.colorScheme.primary,
       ),
       EvidenceUploadStatus.pending => (
-        l10n.d('In wachtrij'),
+        l10n.d('Opgegeven'),
         theme.colorScheme.tertiary,
       ),
       EvidenceUploadStatus.uploaded => (
-        l10n.d('Wordt gecontroleerd'),
+        l10n.d('In behandeling'),
         theme.colorScheme.tertiary,
       ),
       EvidenceUploadStatus.rejected => (
