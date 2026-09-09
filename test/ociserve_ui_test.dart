@@ -551,7 +551,7 @@ void main() {
     },
   );
 
-  testWidgets('Mijn cursussen sorteert op voortgang en daarna alfabetisch', (
+  testWidgets('Mijn cursussen zet de actuele cursus altijd links vooraan', (
     tester,
   ) async {
     const feed = [
@@ -591,6 +591,7 @@ void main() {
         courseVersionId: 'active-z',
         lessonId: 'lesson',
         completed: false,
+        lastSlideAnchor: 'hervatten',
         displayedMilliseconds: 1,
       ),
       OciServeLessonState(
@@ -614,7 +615,7 @@ void main() {
     final activeA = position('active-a');
     final activeZ = position('active-z');
     expect(activeA.dy, closeTo(activeZ.dy, 1));
-    expect(activeA.dx, lessThan(activeZ.dx));
+    expect(activeZ.dx, lessThan(activeA.dx));
 
     await tester.drag(find.byType(CustomScrollView), const Offset(0, -250));
     await tester.pumpAndSettle();
