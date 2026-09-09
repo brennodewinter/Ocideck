@@ -1386,12 +1386,13 @@ REGISTRATION_TESTS := \
 	test/docs_registration_test.dart \
 	test/sbom_test.dart \
 	test/l10n_untranslated_test.dart \
-	test/windows_packaging_test.dart
+	test/windows_packaging_test.dart \
+	test/ociserve_api_drift_test.dart
 
 check-registrations:
 	@echo "== OciDeck registration invariants =="
 	@echo "Command: flutter test $(REGISTRATION_TESTS)"
-	@echo "Covers: new lib file in SOURCE_MAP, new docs registered, SBOM fresh vs pubspec, new l10n.d string translated, Windows installer in step with what it packages."
+	@echo "Covers: new lib file in SOURCE_MAP, new docs registered, SBOM fresh vs pubspec, new l10n.d string translated, Windows installer in step with what it packages, OciServe routes match pinned OpenAPI spec."
 	@echo "Failure means: something new landed without its registration — the class of drift that is a *test*, not a static gate."
 	flutter test $(REGISTRATION_TESTS) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
