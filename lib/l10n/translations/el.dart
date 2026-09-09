@@ -1658,6 +1658,61 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Aanwezigheid': 'Παρουσία',
+  'Lidmaatschap': 'Ιδιότητα μέλους',
+  'Inzage en wijzigingen': 'Πρόσβαση και αλλαγές',
+  'Beschikbaarheid van het inzagespoor':
+      'Διαθεσιμότητα του αρχείου καταγραφής πρόσβασης',
+  'Beschikbaar vanaf': 'Διαθέσιμο από',
+  'Historie vóór deze datum': 'Ιστορία πριν από αυτή την ημερομηνία',
+  'Tijdstip': 'Ημερομηνία και ώρα',
+  'Handeling': 'Δράση',
+  'Gegevensonderdeel': 'Κατηγορία δεδομένων',
+  'Handelde als': 'Ενήργησε ως',
+  'Organisatorische rol': 'Οργανωτικός ρόλος',
+  'Bekeken': 'Προβλήθηκε',
+  'Gewijzigd': 'Άλλαξε',
+  'Uzelf': 'Εσύ',
+  'Medewerker': 'Μέλος του προσωπικού',
+  'Systeem': 'Σύστημα',
+  'Onbekend': 'Άγνωστο',
+  'Docent': 'Εκπαιδευτής',
+  'Beoordelaar': 'Αξιολογητής',
+  'Organisatiebeheerder': 'Διαχειριστής οργανισμού',
+  'Niet beschikbaar': 'Μη διαθέσιμο',
+  'Uitoefening van privacyrechten': 'Άσκηση των δικαιωμάτων απορρήτου',
+  'Beoordeling en certificering': 'Αξιολόγηση και πιστοποίηση',
+  'Uitvoering van het leertraject': 'Παράδοση του εκπαιδευτικού προγράμματος',
+  'Cursistenadministratie': 'Διοίκηση εκπαιδευομένων',
+  'Cursistprofiel': 'Προφίλ μαθητή',
+  'Leerstatistieken': 'Εκμάθηση στατιστικών',
+  'Inschrijving': 'Εγγραφή',
+  'Toetspoging': 'Προσπάθεια αξιολόγησης',
+  'Beoordeling': 'Αξιολόγηση',
+  'Bewijsstuk': 'Στοιχεία',
+  'Kwalificatie': 'Προσόντα',
+  'Deelname': 'Συμμετοχή',
+  'PE-punten': 'Βαθμοί συνεχιζόμενης εκπαίδευσης',
+  'Certificaat': 'Πιστοποιητικό',
+  'Privacyverzoek': 'Αίτημα απορρήτου',
+  'Bewaard tot': 'Διατηρήθηκε μέχρι',
+  'Bekijk mijn gegevens': 'Προβολή των δεδομένων μου',
+  'Bekijk welke gegevens eLearning voor u heeft geregistreerd.':
+      'Δείτε ποια δεδομένα έχει καταγράψει το eLearning για εσάς.',
+  'Dit overzicht is op {datum} rechtstreeks opgehaald bij eLearning en wordt niet door OciDeck bewaard.':
+      'Αυτή η επισκόπηση ανακτήθηκε απευθείας από το eLearning στις {datum} και δεν αποθηκεύεται από το OciDeck.',
+  'Geen gegevens geregistreerd': 'Δεν έχουν καταγραφεί δεδομένα',
+  'Het bevat alle categorieën die de server voor deze organisatie heeft aangeleverd. Voor informatie over doelen, ontvangers, herkomst, bewaartermijnen of uw andere privacyrechten kunt u terecht bij {organisatie}.':
+      'Περιέχει όλες τις κατηγορίες που παρείχε ο διακομιστής για αυτόν τον οργανισμό. Για πληροφορίες σχετικά με σκοπούς, αποδέκτες, προέλευση, περιόδους διατήρησης ή άλλα δικαιώματά σας για την προστασία δεδομένων, επικοινωνήστε με τον οργανισμό {organisatie}.',
+  'Kon uw gegevens niet laden. Probeer het opnieuw.':
+      'Δεν ήταν δυνατή η φόρτωση των δεδομένων σας. Δοκιμάστε ξανά.',
+  'Meer tonen ({aantal} resterend)':
+      'Εμφάνιση περισσότερων ({aantal} απομένουν)',
+  'Mijn gegevens': 'Τα δεδομένα μου',
+  'Privacy-inzage': 'Πρόσβαση σε προσωπικά δεδομένα',
+  'Uw geregistreerde gegevens': 'Τα καταγεγραμμένα δεδομένα σας',
+  'uw organisatie': 'ο οργανισμός σας',
+  '{aantal} registraties': '{aantal} καταχωρίσεις',
   'Volg opleidingen uit uw eLearning-omgeving. Cursusbestanden openen alleen in afspeelmodus; voortgang wordt alleen na aanmelden gesynchroniseerd.':
       'Παρακολουθήστε μαθήματα από το περιβάλλον eLearning σας. Τα αρχεία μαθημάτων ανοίγουν μόνο σε λειτουργία αναπαραγωγής· η πρόοδος συγχρονίζεται μόνο μετά τη σύνδεση.',
   'eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.':
