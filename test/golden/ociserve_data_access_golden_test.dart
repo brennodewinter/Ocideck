@@ -90,7 +90,10 @@ Future<void> _match(
   );
   await tester.pump(const Duration(milliseconds: 50));
   if (expandCategory != null) {
-    await tester.tap(find.byKey(Key('data-category-$expandCategory')));
+    final category = find.byKey(Key('data-category-$expandCategory'));
+    await tester.ensureVisible(category);
+    await tester.pumpAndSettle();
+    await tester.tap(category);
     await tester.pumpAndSettle();
   }
   await expectLater(
