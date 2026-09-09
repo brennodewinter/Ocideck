@@ -2,8 +2,10 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_evidence.dart';
+import '../../models/ociserve_portfolio.dart';
 import '../../theme/app_theme.dart';
 import 'ociserve_evidence_submit.dart';
+import 'ociserve_portfolio_link.dart';
 
 /// Het bewijsscherm — de vierde bestemming in de eLearning-zijbalk.
 ///
@@ -40,6 +42,8 @@ class OciServeEvidence extends StatelessWidget {
               _badgesSection(context, l10n, theme),
               const SizedBox(height: 24),
               _uploadsSection(context, l10n, theme),
+              const SizedBox(height: 24),
+              _portfolioSection(context, l10n, theme),
             ],
           ),
         ),
@@ -416,6 +420,39 @@ class OciServeEvidence extends StatelessWidget {
         theme.colorScheme.error,
       ),
     };
+  }
+
+  Widget _portfolioSection(
+    BuildContext context,
+    AppLocalizations l10n,
+    ThemeData theme,
+  ) {
+    // Until OciServe#524 lands, the portfolio connection is unavailable.
+    // The UI shows the feature exists but is not yet active.
+    const connection = PortfolioConnection(
+      providerId: '',
+      providerName: '',
+      state: PortfolioConnectionState.unavailable,
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Externe portefeuille'),
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Card(
+          margin: EdgeInsets.zero,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: OciServePortfolioLink(connection: connection),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _emptySection(
