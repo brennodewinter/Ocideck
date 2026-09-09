@@ -12,7 +12,10 @@ import '../../utils/log.dart';
 import 'ociserve_account_avatar.dart';
 import 'ociserve_course_summary.dart';
 import 'ociserve_courses_sidebar.dart';
+import 'ociserve_data_access.dart';
 import 'ociserve_learning_profile.dart';
+
+part 'parts/ociserve_courses_dialog_privacy.dart';
 
 class OciServeCoursesDialog extends ConsumerStatefulWidget {
   const OciServeCoursesDialog({super.key});
@@ -40,6 +43,12 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
   OciServeFeedItem? _failedLesson;
   String? _selectedCourseVersionId;
   bool _showProgress = false;
+  bool _showData = false;
+  bool _privacyLoading = false;
+  String? _privacyError;
+  OciServePrivacyData? _privacyData;
+
+  void _changePrivacy(VoidCallback change) => setState(change);
 
   @override
   void dispose() {
@@ -132,8 +141,10 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
               OciServeCoursesSidebar(
                 account: account,
                 showProgress: _showProgress,
-                onCourses: () => _showSection(progress: false),
+                showData: _showData,
+                onCourses: () => _showSection(),
                 onProgress: () => _showSection(progress: true),
+                onData: () => _showSection(data: true),
               ),
             Expanded(
               child: ColoredBox(
@@ -167,10 +178,10 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (_showProgress)
+          if (_showProgress || _showData)
             IconButton(
               tooltip: l10n.d('Terug naar mijn cursussen'),
-              onPressed: () => _showSection(progress: false),
+              onPressed: () => _showSection(),
               icon: const Icon(Icons.arrow_back),
             )
           else if (compact) ...[
@@ -191,7 +202,9 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _showProgress
+                  _showData
+                      ? l10n.d('Privacy-inzage')
+                      : _showProgress
                       ? l10n.d('Persoonlijk overzicht')
                       : l10n.d('Mijn leeromgeving'),
                   style: theme.textTheme.labelSmall?.copyWith(
@@ -202,7 +215,9 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  _showProgress
+                  _showData
+                      ? l10n.d('Mijn gegevens')
+                      : _showProgress
                       ? l10n.d('Mijn voortgang')
                       : name.isEmpty
                       ? l10n.d('Mijn cursussen')
@@ -213,7 +228,11 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  _showProgress
+                  _showData
+                      ? l10n.d(
+                          'Bekijk welke gegevens eLearning voor u heeft geregistreerd.',
+                        )
+                      : _showProgress
                       ? l10n.d(
                           'Bekijk uw resultaten, activiteit en voortgang per cursus.',
                         )
@@ -239,14 +258,18 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     );
   }
 
-  void _showSection({required bool progress}) {
+  void _showSection({bool progress = false, bool data = false}) {
     setState(() {
       _showProgress = progress;
+      _showData = data;
       if (_error == 'package_failed') {
         _error = null;
         _failedLesson = null;
       }
     });
+    if (data && _privacyData == null && !_privacyLoading) {
+      _loadPrivacyData();
+    }
   }
 
   Widget _organizationPicker(List<OciServeMembership> memberships) =>
@@ -271,7 +294,10 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
         ],
         onChanged: (value) {
           _organizationId = value;
+          _privacyData = null;
+          _privacyError = null;
           _load();
+          if (_showData) _loadPrivacyData();
         },
       );
 
@@ -279,12 +305,14 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
+    if (_showData) return _privacyBody(l10n, theme, palette);
     if (_error != null) return _errorView(l10n, theme, palette);
     final courses = _courses(l10n);
     if (_showProgress) {
       return OciServeLearningProfile(
         account: ref.read(ociServeProvider).account!,
         courses: courses,
+        onShowData: () => _showSection(data: true),
         onOpenCourse: (versionId) {
           setState(() {
             _selectedCourseVersionId = versionId;

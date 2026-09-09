@@ -462,6 +462,14 @@ class OciServeNotifier extends Notifier<OciServeState> {
     ).learningState(accessToken: access, organizationId: organizationId);
   }
 
+  Future<OciServePrivacyData> privacyData(String organizationId) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).privacyData(accessToken: access, organizationId: organizationId);
+  }
+
   Future<OciServePackage> lessonPackage({
     required String organizationId,
     required OciServeFeedItem lesson,
