@@ -72,7 +72,18 @@ class _FixedOciServeNotifier extends OciServeNotifier {
     this.package,
     this.loginSucceeds = true,
     this.courseImages = const {},
-  });
+    int privacyFailures = 0,
+    OciServePrivacyData? privacyData,
+  }) : _privacyFailuresRemaining = privacyFailures,
+       privacyDataValue =
+           privacyData ??
+           OciServePrivacyData(
+             participantId: 'participant',
+             generatedAt: DateTime.utc(2026, 9, 9),
+             data: const {
+               'participant': {'display_name': 'Lerende'},
+             },
+           );
 
   final OciServeState initial;
   final List<OciServeFeedItem> feed;
@@ -80,6 +91,9 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   final OciServePackage? package;
   final bool loginSucceeds;
   final Map<String, Uint8List> courseImages;
+  final OciServePrivacyData privacyDataValue;
+  int _privacyFailuresRemaining;
+  int privacyDataCalls = 0;
   Uint8List? accountAvatarBytes;
   PlaybackReport? reportedPlayback;
   bool loginCalled = false;
@@ -94,6 +108,16 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   @override
   Future<OciServeLearningState> learningState(String organizationId) async =>
       progress;
+
+  @override
+  Future<OciServePrivacyData> privacyData(String organizationId) async {
+    privacyDataCalls++;
+    if (_privacyFailuresRemaining > 0) {
+      _privacyFailuresRemaining--;
+      throw StateError('test failure');
+    }
+    return privacyDataValue;
+  }
 
   @override
   Future<OciServePackage> lessonPackage({
@@ -731,6 +755,163 @@ void main() {
 
     expect(find.text('Kon dit bestand niet openen.'), findsNothing);
     expect(find.byKey(const Key('ociserve-learning-profile')), findsOneWidget);
+  });
+
+  testWidgets('Mijn gegevens toont ook lege en onbekende servercategorieën', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          participantId: 'participant-privacy',
+          generatedAt: DateTime.utc(2026, 9, 9),
+          data: const {
+            'participant': {
+              'display_name': 'Lerende',
+              'future_field': 'blijft zichtbaar',
+            },
+            'future_category': [],
+          },
+        ),
+      ),
+    );
+    await _openCourses(tester);
+
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('ociserve-data-access')), findsOneWidget);
+    expect(find.text('Uw geregistreerde gegevens'), findsOneWidget);
+    expect(find.text('Future category'), findsOneWidget);
+    expect(find.text('Geen gegevens geregistreerd'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('data-category-participant')));
+    await tester.pumpAndSettle();
+    expect(find.text('blijft zichtbaar'), findsOneWidget);
+    expect(find.textContaining('future_field'), findsOneWidget);
+  });
+
+  testWidgets('Mijn gegevens herstelt van een laadfout', (tester) async {
+    final notifier = _FixedOciServeNotifier(_authenticated, privacyFailures: 1);
+    await _pumpApp(tester, notifier);
+    await _openCourses(tester);
+
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+    expect(
+      find.text('Kon uw gegevens niet laden. Probeer het opnieuw.'),
+      findsOneWidget,
+    );
+
+    await tester.tap(find.text('Opnieuw proberen'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('ociserve-data-access')), findsOneWidget);
+    expect(notifier.privacyDataCalls, 2);
+  });
+
+  testWidgets('Mijn gegevens maakt het inzagespoor begrijpelijk', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          participantId: 'participant-audit',
+          generatedAt: DateTime.utc(2026, 9, 9),
+          data: const {
+            'participant_data_access_history_metadata': {
+              'available_from': '2026-09-01T08:30:00Z',
+              'earlier_history': 'not_available',
+            },
+            'participant_data_access_history': [
+              {
+                'time': '2026-09-09T10:15:00Z',
+                'retain_until': '2027-09-09T10:15:00Z',
+                'operation': 'viewed',
+                'data_category': 'learning_statistics',
+                'purpose': 'assessment_and_certification',
+                'actor_type': 'staff',
+                'actor_role': 'assessor',
+              },
+            ],
+          },
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Beschikbaarheid van het inzagespoor'), findsOneWidget);
+    expect(find.text('Inzage en wijzigingen'), findsOneWidget);
+    await tester.tap(
+      find.byKey(const Key('data-category-participant_data_access_history')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Bekeken'), findsOneWidget);
+    expect(find.text('Leerstatistieken'), findsOneWidget);
+    expect(find.text('Beoordeling en certificering'), findsOneWidget);
+    expect(find.text('Medewerker'), findsOneWidget);
+    expect(find.text('Beoordelaar'), findsOneWidget);
+    expect(find.textContaining('actor_account_id'), findsNothing);
+    expect(find.textContaining('request_id'), findsNothing);
+  });
+
+  testWidgets('Mijn gegevens toont grote categorieën per vijftig', (
+    tester,
+  ) async {
+    final records = List<Object?>.generate(
+      51,
+      (index) => {'marker': 'registratie-${index + 1}'},
+    );
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          participantId: 'participant-pagination',
+          generatedAt: DateTime.utc(2026, 9, 9),
+          data: {'large_category': records},
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('data-category-large_category')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('registratie-51'), findsNothing);
+    final more = find.text('Meer tonen (1 resterend)');
+    tester
+        .widget<TextButton>(
+          find.ancestor(of: more, matching: find.byType(TextButton)),
+        )
+        .onPressed!();
+    await tester.pumpAndSettle();
+    expect(find.text('registratie-51'), findsOneWidget);
+  });
+
+  testWidgets('Mijn gegevens wordt na sluiten opnieuw live opgehaald', (
+    tester,
+  ) async {
+    final notifier = _FixedOciServeNotifier(_authenticated);
+    await _pumpApp(tester, notifier);
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+    expect(notifier.privacyDataCalls, 1);
+
+    await tester.tap(find.byIcon(Icons.close).last);
+    await tester.pumpAndSettle();
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+    expect(notifier.privacyDataCalls, 2);
   });
 
   testWidgets('accountgegevens blijven zichtbaar zonder cursussen', (

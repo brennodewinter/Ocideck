@@ -13,11 +13,13 @@ class OciServeLearningProfile extends StatelessWidget {
     required this.account,
     required this.courses,
     required this.onOpenCourse,
+    required this.onShowData,
   });
 
   final OciServeAccount account;
   final List<OciServeCourseSummary> courses;
   final ValueChanged<String> onOpenCourse;
+  final VoidCallback onShowData;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,16 @@ class OciServeLearningProfile extends StatelessWidget {
           sliver: SliverList.list(
             children: [
               _hero(context, completedCourses),
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: OutlinedButton.icon(
+                  key: const Key('ociserve-show-data-button'),
+                  onPressed: onShowData,
+                  icon: const Icon(Icons.manage_search_outlined),
+                  label: Text(l10n.d('Bekijk mijn gegevens')),
+                ),
+              ),
               const SizedBox(height: 18),
               LayoutBuilder(
                 builder: (context, constraints) {

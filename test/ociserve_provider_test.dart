@@ -120,6 +120,16 @@ class _FakeApi implements OciServeApi {
   }) async => const OciServeLearningState([]);
 
   @override
+  Future<OciServePrivacyData> privacyData({
+    required String accessToken,
+    required String organizationId,
+  }) async => OciServePrivacyData(
+    participantId: 'participant',
+    generatedAt: DateTime.utc(2026, 9, 9),
+    data: const {},
+  );
+
+  @override
   Future<void> reportPlayback({
     required String accessToken,
     required String organizationId,

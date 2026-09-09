@@ -200,6 +200,7 @@ against accessing internal/private network addresses.
 | **eLearning sign-in (OciServe)** (off by default, desktop only) | Installation status and, after login, the access token needed for `/me` | Your configured OciServe server |
 | **eLearning identity provider (OciServe)** | OIDC discovery, browser login and token exchange; the host is shown and requires explicit acceptance when it differs from OciServe | The identity-provider host announced by your OciServe server |
 | **eLearning courses/progress (OciServe)** | Assigned course packages; last slide, completion and displayed milliseconds per slide | Your configured OciServe server and selected organisation |
+| **eLearning personal-data view (OciServe)** | A live request for every personal-data category and field the server supplies for the signed-in learner in the selected organisation | Your configured OciServe server and selected organisation |
 | **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
 | **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
 | **Embedded YouTube video** | A request for the player page and the video itself; the service can see that the video is being played | `youtube-nocookie.com` (and its media/thumbnail hosts) — **not** `youtube.com` |
@@ -573,6 +574,28 @@ OciDeck is a **local tool**, not a service that processes your data on your
 behalf, so there is no OciDeck-held copy of your decks to request or erase —
 your files are yours, on your disk. When you use it with your own Nextcloud or
 git server, the privacy terms of *those* services apply to what you store there.
+
+The optional eLearning integration can show **Mijn gegevens** for the selected
+organisation. OciDeck fetches that overview live, keeps it only in the open
+dialog's state, and releases it when the dialog closes; it does not automatically
+write the response to disk or to the clipboard. The eLearning server derives the
+learner from the authenticated account. The selected organisation remains the
+place to ask about purposes, recipients, sources, retention periods and other
+rights: the in-app value overview does not by itself guarantee a complete GDPR
+access response.
+
+That live overview also includes the eLearning server's participant-directed
+access history from the moment that facility was enabled: time, view or change,
+data category, purpose, and the actor type and organisational role. Successful
+staff access is written in the same database transaction as the read or change;
+the audit record contains no copied field values, answer content or evidence.
+The underlying staff account remains available to the organisation for an
+individual investigation, but OciDeck does not disclose an employee name by
+default. The Court of Justice's Pankki S judgment requires dates and reasons of
+consultation to be available under the right of access; it does not create an
+unconditional right to every employee's identity. The organisation must make
+that concrete balancing decision when identity is necessary to exercise the
+learner's rights.
 
 **Two exceptions, and both are the publisher's.** If you switched on the CVE
 lookup and left it pointed at the default mirror, then `cveapi.librekat.nl`

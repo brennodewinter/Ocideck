@@ -4512,6 +4512,34 @@ with that course selected.
 Displayed time is simply the wall-clock time that a slide was on screen. It is
 not evidence of attention, active study time, learning or mastery.
 
+### Viewing the personal data registered by eLearning
+
+From **Mijn cursussen**, select **Mijn gegevens** in the sidebar. In a narrow
+window, first open **Mijn voortgang** and then select **Bekijk mijn gegevens**.
+OciDeck retrieves a current overview for the selected organisation and shows
+every category and field supplied by its eLearning server. Categories are
+collapsed until you open them, and long lists appear in batches of 50 records.
+The generic viewer also shows categories and fields introduced by a newer
+server instead of silently omitting them.
+
+This overview is held only while the **Mijn cursussen** dialog is open. OciDeck
+does not save it automatically or place it on the clipboard. Closing the dialog
+releases the retrieved copy; opening **Mijn gegevens** later retrieves it again.
+
+The **Inzage en wijzigingen** category shows when data from your
+learner record was viewed or changed, which part and purpose were involved, and
+which organisational role acted. The server keeps the underlying account
+internally traceable for investigation, but does not automatically disclose an
+employee's name: the organisation must first balance both people's rights. Your
+own access is clearly distinguished from staff access. The overview also states
+since when this recording is available; earlier access cannot be reconstructed
+after the fact.
+
+The overview is a way to inspect the registered values, not by itself a complete
+response to every GDPR access requirement. Ask the selected organisation about
+processing purposes, recipients, sources, retention periods, any further review
+of the person who acted, and your other privacy rights.
+
 A lesson may be a selection from a larger presentation. OciDeck uses the same
 durable **Skip** marks as ordinary presenting: skipped slides remain in the
 authored Markdown, but are not shown and are not valid course-progress

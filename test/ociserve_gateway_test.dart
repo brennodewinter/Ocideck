@@ -299,6 +299,52 @@ void main() {
     },
   );
 
+  test('requests and preserves every personal-data category', () async {
+    transport.responses.add(
+      _json({
+        'participant_id': 'participant-1',
+        'generated_at': '2026-09-09T10:00:00Z',
+        'data': {
+          'participant': {'display_name': 'Lerende'},
+          'future_category': [
+            {'future_field': true},
+          ],
+        },
+      }),
+    );
+
+    final value = await gateway.privacyData(
+      accessToken: 'access',
+      organizationId: 'org',
+    );
+
+    expect(value.participantId, 'participant-1');
+    expect(value.data, contains('future_category'));
+    expect(
+      transport.requests.single.url.path,
+      '/api/v1/organizations/org/me/privacy-data',
+    );
+    expect(transport.requests.single.method, 'GET');
+    expect(transport.caps.single, 32 * 1024 * 1024);
+  });
+
+  test('refuses personal data without a generation timestamp', () async {
+    transport.responses.add(
+      _json({'participant_id': 'participant-1', 'data': <String, Object?>{}}),
+    );
+
+    await expectLater(
+      gateway.privacyData(accessToken: 'access', organizationId: 'org'),
+      throwsA(
+        isA<OciServeException>().having(
+          (error) => error.code,
+          'code',
+          'invalid_response',
+        ),
+      ),
+    );
+  });
+
   test('HTTP base URLs fail before transport is touched', () async {
     final insecure = OciServeGateway(
       settings: const OciServeSettings(

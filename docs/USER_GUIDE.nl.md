@@ -4608,6 +4608,35 @@ met die cursus gekozen.
 Getoonde tijd is alleen de wandkloktijd waarin een dia op het scherm stond. Het
 is geen bewijs van aandacht, actieve studietijd, leren of beheersing.
 
+### Je geregistreerde eLearning-gegevens bekijken
+
+Kies vanuit **Mijn cursussen** in de zijbalk **Mijn gegevens**. Open in een smal
+venster eerst **Mijn voortgang** en kies daarna **Bekijk mijn gegevens**. OciDeck
+haalt voor de gekozen organisatie een actueel overzicht op en toont elke
+categorie en elk veld dat haar eLearning-server aanlevert. Categorieën blijven
+dicht totdat je ze opent; lange lijsten verschijnen per 50 registraties. De
+algemene weergave toont ook categorieën en velden die een nieuwere server heeft
+toegevoegd, in plaats van ze stil weg te laten.
+
+Dit overzicht blijft alleen in het geheugen zolang **Mijn cursussen** open is.
+OciDeck slaat het niet automatisch op en zet het niet op het klembord. Na het
+sluiten laat OciDeck de opgehaalde kopie los; als je **Mijn gegevens** later
+opnieuw opent, wordt het overzicht opnieuw opgehaald.
+
+De categorie **Inzage en wijzigingen** laat zien wanneer gegevens uit
+je cursistendossier zijn bekeken of gewijzigd, om welk onderdeel en doel het
+ging en vanuit welke organisatorische rol dat gebeurde. De server bewaart het
+onderliggende account intern voor onderzoek, maar toont een medewerkersnaam niet
+automatisch: daarvoor moet de organisatie eerst de rechten van beide personen
+afwegen. Eigen inzage staat herkenbaar los van inzage door een medewerker. Het
+overzicht vermeldt ook sinds wanneer deze registratie beschikbaar is; oudere
+toegang kan niet achteraf worden gereconstrueerd.
+
+Het overzicht helpt je de geregistreerde waarden in te zien, maar is op zichzelf
+geen volledig antwoord op alle AVG-eisen aan inzage. Vraag de gekozen organisatie
+naar verwerkingsdoelen, ontvangers, herkomst, bewaartermijnen, een eventuele
+nadere beoordeling van de handelende persoon en je overige privacyrechten.
+
 Een les kan een selectie uit een grotere presentatie zijn. OciDeck gebruikt
 daarvoor dezelfde duurzame markeringen **Overslaan** als bij gewoon
 presenteren: overgeslagen dia's blijven in de Markdown van de auteur staan, maar

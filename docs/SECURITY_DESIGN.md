@@ -61,6 +61,15 @@ bytes agree, verifies the content-addressed SHA-256 hash, and uses the shared
 4096-pixel decode cap. A refused image falls back to the course icon or account
 initials without making the course itself unavailable.
 
+OciServe keeps its own append-only, tenant-scoped participant access audit.
+Successful staff reads and changes carry the authenticated actor, target
+participant, action category, purpose, role snapshot and timestamp, without
+copying learner field values into the audit row. A required audit write shares
+the transaction with the protected operation, so an unrecorded read is not
+returned and an unrecorded mutation is rolled back. The learner-facing export
+omits internal account and request identifiers and exposes the role rather than
+an employee name by default.
+
 On presenter exit OciDeck sends one idempotent absolute snapshot containing the
 immutable course-version and lesson identifiers, stable slide anchors, completion
 and displayed milliseconds per slide. Answers, scores, notes and slide content
