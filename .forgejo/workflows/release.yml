@@ -67,7 +67,7 @@ jobs:
     # afdrijft. De web-engine-artefacten zijn niet voorgebakken (`--no-web` in het
     # image) en worden bij `flutter build web` opgehaald — een kleine download.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.2
     steps:
       - uses: actions/checkout@v4
 
@@ -252,7 +252,7 @@ jobs:
     # hieronder aan. De rest (clang/cmake/ninja/pkg-config/libgtk-3-dev/
     # build-essential/node) is ingebakken.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.2
     steps:
       # liblzma-dev + libsecret-1-dev + libayatana-appindicator3-dev: nodig voor
       # `make build-linux` (flutter_secure_storage linkt libsecret; lzma voor
@@ -416,7 +416,7 @@ jobs:
     # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
     # (4-6 min apt) vervalt. #11 van het releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.2
     steps:
       # Waarom een release-asset en niet het build-artifact van die run: een
       # GitHub-*artifact* vraagt een token, óók bij een publieke repo, en
@@ -569,7 +569,7 @@ jobs:
     # image staat door de bouw-jobs al warm op de runner. #11 van het
     # releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.2
     steps:
       - uses: actions/checkout@v4
 

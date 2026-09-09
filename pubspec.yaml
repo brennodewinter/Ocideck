@@ -38,7 +38,7 @@ dependencies:
   desktop_drop: ^0.8.0
   image: ^4.9.1
   # dartcv4 is de opvolger van het teruggetrokken opencv_core: dat pakket is
-  # retired voor Flutter >= 3.38 (wij draaien 3.47.1). De prebuilt OpenCV-pack
+  # retired voor Flutter >= 3.38 (wij draaien 3.47.2). De prebuilt OpenCV-pack
   # van opencv_core -> dartcv4 1.1.8 paste niet meer bij de Windows-toolchain,
   # waardoor `flutter build windows` afbrak op find_package(OpenCV). Alleen
   # gebruikt in lib/services/privacy/image_face_scan_io.dart (YuNet-detectie).
@@ -125,7 +125,7 @@ dev_dependencies:
   # Drives tool/check_method_length.dart — a syntactic AST measures method
   # bodies accurately (closures, multi-line signatures, getters) instead of a
   # brittle brace heuristic. Pinned to the version Flutter already resolves.
-  analyzer: ^13.3.0
+  analyzer: ^14.3.0
   # Deterministic Timer/Future control for the autosave/recovery timer tests.
   fake_async: ^1.3.3
   # A fake VideoPlayerPlatform drives the media-lifecycle tests without real

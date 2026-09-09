@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.5.0+25",
-  "documentNamespace": "https://ocideck.app/spdx/ec02e6bb-1947-59d8-81b8-780a0c4aa004",
+  "documentNamespace": "https://ocideck.app/spdx/5f1e616c-976f-5f9f-8a06-3a3674d3550f",
   "creationInfo": {
-    "created": "2026-09-09T09:59:21.946689Z",
+    "created": "2026-09-09T11:21:49.963359Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -33,46 +33,46 @@
     {
       "SPDXID": "SPDXRef-1--fe-analyzer-shared",
       "name": "_fe_analyzer_shared",
-      "versionInfo": "103.0.0",
+      "versionInfo": "107.0.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/_fe_analyzer_shared/versions/103.0.0",
+      "downloadLocation": "https://pub.dev/packages/_fe_analyzer_shared/versions/107.0.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "1b0e6a07425a3e460666e88bf1c949ccc7bb0116ad562ce94a1eca60fe820725"
+          "checksumValue": "fe18c7e37d5acb3b43224fa255281dec007970d6fd01f6d76fcd88ed3777a117"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/_fe_analyzer_shared@103.0.0"
+          "referenceLocator": "pkg:pub/_fe_analyzer_shared@107.0.0"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-2-analyzer",
       "name": "analyzer",
-      "versionInfo": "13.3.0",
+      "versionInfo": "14.3.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/analyzer/versions/13.3.0",
+      "downloadLocation": "https://pub.dev/packages/analyzer/versions/14.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "61c04d0c1bfed555c681ea079519933f071a5a026578ff73c4ff0df2d3462e5e"
+          "checksumValue": "f2dde9e50c23fc95b846b4ef334e98c3ae8c0effd5d2453b02fc9fb3f8939791"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/analyzer@13.3.0"
+          "referenceLocator": "pkg:pub/analyzer@14.3.0"
         }
       ]
     },
@@ -4723,7 +4723,7 @@
     {
       "SPDXID": "SPDXRef-211-flutter",
       "name": "flutter",
-      "versionInfo": "3.47.1",
+      "versionInfo": "3.47.2",
       "supplier": "Organization: flutter",
       "downloadLocation": "https://flutter.dev",
       "filesAnalyzed": false,

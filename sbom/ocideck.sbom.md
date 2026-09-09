@@ -23,8 +23,8 @@ The JSON documents carry **735 dependency relations** between these components: 
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
-| _fe_analyzer_shared _(transitive)_ | 103.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@103.0.0` |
-| analyzer _(direct dev)_ | 13.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@13.3.0` |
+| _fe_analyzer_shared _(transitive)_ | 107.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@107.0.0` |
+| analyzer _(direct dev)_ | 14.3.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@14.3.0` |
 | android_file_picker _(transitive)_ | 1.1.0 | MIT | vicajilau | `pkg:pub/android_file_picker@1.1.0` |
 | archive _(direct main)_ | 4.0.9 | MIT | brendan-duncan | `pkg:pub/archive@4.0.9` |
 | args _(transitive)_ | 2.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/args@2.7.0` |
@@ -260,4 +260,4 @@ The JSON documents carry **735 dependency relations** between these components: 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | dart | ^3.12.0 | BSD-3-Clause | dart-lang | https://github.com/dart-lang/sdk |
-| flutter | 3.47.1 | BSD-3-Clause | flutter | https://github.com/flutter/flutter |
+| flutter | 3.47.2 | BSD-3-Clause | flutter | https://github.com/flutter/flutter |
