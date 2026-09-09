@@ -4519,8 +4519,27 @@ window, first open **Mijn voortgang** and then select **Bekijk mijn gegevens**.
 OciDeck retrieves a current overview for the selected organisation and shows
 every category and field supplied by its eLearning server. Categories are
 collapsed until you open them, and long lists appear in batches of 50 records.
-The generic viewer also shows categories and fields introduced by a newer
-server instead of silently omitting them.
+Known categories have a plain-language name and a short description of the
+kind of information they contain. Common field names, dates, yes/no values and
+audit terms are translated into readable labels and values. Open **Begrippen
+uitgelegd** for the meaning of a category, a registration and an ID, and for an
+explanation of the displayed dates and technical names.
+
+Nested objects and lists are shown as labelled fields and numbered parts rather
+than as a JSON block. The generic viewer still shows categories and fields
+introduced by a newer server instead of silently omitting them. For an unknown
+field it shows both a readable label and the original technical name, so that
+the value remains understandable enough to discuss with the organisation even
+before OciDeck knows that server field.
+
+Use **Zoeken in uw gegevens** to filter the overview. Search matches readable
+labels, original technical names and values, including values nested inside an
+object or list. A match in a category name or description keeps that whole
+category; a match within a record keeps the matching records. Matching
+categories open automatically so that the result is immediately visible. The result count
+reports categories, not individual fields or records. Clear the search field to
+restore the full overview. Filtering happens locally over the already retrieved
+copy: OciDeck does not send the search text to the eLearning server.
 
 This overview is held only while the **Mijn cursussen** dialog is open. OciDeck
 does not save it automatically or place it on the clipboard. Closing the dialog

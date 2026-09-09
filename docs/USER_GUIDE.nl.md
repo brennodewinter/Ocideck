@@ -4615,8 +4615,29 @@ venster eerst **Mijn voortgang** en kies daarna **Bekijk mijn gegevens**. OciDec
 haalt voor de gekozen organisatie een actueel overzicht op en toont elke
 categorie en elk veld dat haar eLearning-server aanlevert. Categorieën blijven
 dicht totdat je ze opent; lange lijsten verschijnen per 50 registraties. De
-algemene weergave toont ook categorieën en velden die een nieuwere server heeft
-toegevoegd, in plaats van ze stil weg te laten.
+bekende categorieën hebben een begrijpelijke naam en een korte toelichting op
+het soort gegevens dat erin staat. Veelgebruikte veldnamen, datums, ja/nee-
+waarden en termen uit het inzagelogboek verschijnen als leesbare labels en
+waarden. Open **Begrippen uitgelegd** voor de betekenis van een categorie, een
+registratie en een ID, en voor uitleg over de getoonde datums en technische
+namen.
+
+Geneste objecten en lijsten worden als gelabelde velden en genummerde onderdelen
+getoond, niet als een JSON-blok. De algemene weergave toont ook categorieën en
+velden die een nieuwere server heeft toegevoegd, in plaats van ze stil weg te
+laten. Bij een onbekend veld zie je zowel een leesbaar gemaakt label als de
+oorspronkelijke technische naam. Daardoor blijft het gegeven beschikbaar voor
+navraag bij de organisatie, ook voordat OciDeck dat serverveld kent.
+
+Gebruik **Zoeken in uw gegevens** om het overzicht te filteren. De zoekfunctie
+vindt begrijpelijke labels, oorspronkelijke technische namen en waarden, ook
+wanneer een waarde in een genest object of een lijst staat. Een treffer in de
+categorienaam of -toelichting laat de hele categorie staan; bij een treffer in
+een registratie blijven de passende registraties staan. Passende categorieën
+openen automatisch, zodat de treffer direct zichtbaar is. Het resultaataantal
+telt categorieën, niet afzonderlijke velden of registraties. Wis het zoekveld om
+het volledige overzicht te herstellen. Het filteren gebeurt lokaal in de al
+opgehaalde kopie: OciDeck stuurt de zoektekst niet naar de eLearning-server.
 
 Dit overzicht blijft alleen in het geheugen zolang **Mijn cursussen** open is.
 OciDeck slaat het niet automatisch op en zet het niet op het klembord. Na het
