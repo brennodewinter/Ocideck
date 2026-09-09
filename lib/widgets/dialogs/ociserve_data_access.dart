@@ -69,6 +69,24 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
                         'Datums en tijden worden in uw lokale tijd getoond. Technische namen blijven zichtbaar wanneer de server een nog onbekend veld aanlevert.',
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.d(
+                        'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.',
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.d(
+                        'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.',
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.d(
+                        'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.',
+                      ),
+                    ),
                   ],
                 ),
               ),
