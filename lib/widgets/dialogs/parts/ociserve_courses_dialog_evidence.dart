@@ -81,6 +81,7 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
     return OciServeEvidence(
       qualifications: _qualifications,
       evidenceUploads: _evidenceUploads,
+      organizationId: _organizationId ?? '',
       onRefresh: _loadEvidence,
     );
   }

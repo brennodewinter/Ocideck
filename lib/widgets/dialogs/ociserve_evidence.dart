@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../theme/app_theme.dart';
+import 'ociserve_evidence_submit.dart';
 
 /// Het bewijsscherm — de vierde bestemming in de eLearning-zijbalk.
 ///
@@ -16,11 +17,13 @@ class OciServeEvidence extends StatelessWidget {
     super.key,
     required this.qualifications,
     required this.evidenceUploads,
+    required this.organizationId,
     required this.onRefresh,
   });
 
   final List<OciServeQualification> qualifications;
   final List<EvidenceUpload> evidenceUploads;
+  final String organizationId;
   final VoidCallback onRefresh;
 
   @override
@@ -216,17 +219,32 @@ class OciServeEvidence extends StatelessWidget {
         l10n.d(
           'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.',
         ),
+        action: FilledButton.icon(
+          onPressed: () => _openSubmit(context),
+          icon: const Icon(Icons.upload_outlined),
+          label: Text(l10n.d('Bewijs aanleveren')),
+        ),
       );
     }
     final locale = MaterialLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          l10n.d('Mijn bewijsstukken'),
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
+        Row(
+          children: [
+            Text(
+              l10n.d('Mijn bewijsstukken'),
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const Spacer(),
+            FilledButton.tonalIcon(
+              onPressed: () => _openSubmit(context),
+              icon: const Icon(Icons.upload_outlined),
+              label: Text(l10n.d('Aanleveren')),
+            ),
+          ],
         ),
         const SizedBox(height: 12),
         for (final upload in evidenceUploads) ...[
@@ -235,6 +253,18 @@ class OciServeEvidence extends StatelessWidget {
         ],
       ],
     );
+  }
+
+  Future<void> _openSubmit(BuildContext context) async {
+    final badgeTitle = qualifications.isNotEmpty
+        ? qualifications.first.skillTitle
+        : '';
+    final refreshed = await OciServeEvidenceSubmit.show(
+      context,
+      organizationId: organizationId,
+      badgeTitle: badgeTitle,
+    );
+    if (refreshed && context.mounted) onRefresh();
   }
 
   Widget _uploadCard(
@@ -394,8 +424,9 @@ class OciServeEvidence extends StatelessWidget {
     ThemeData theme,
     IconData icon,
     String title,
-    String subtitle,
-  ) {
+    String subtitle, {
+    Widget? action,
+  }) {
     final palette = AppPalette.of(theme);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
@@ -417,6 +448,10 @@ class OciServeEvidence extends StatelessWidget {
               color: palette.accentInk.withValues(alpha: 0.6),
             ),
           ),
+          if (action != null) ...[
+            const SizedBox(height: 16),
+            action,
+          ],
         ],
       ),
     );
