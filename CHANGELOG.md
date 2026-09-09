@@ -523,6 +523,47 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
+- chore(toolchain): **Flutter 3.47.1 → 3.47.2 (stable)**, met de meegeleverde
+  Dart 3.13.1 → 3.13.2. De pin volgt de installatie op de ontwikkelmachine, niet
+  andersom (#598), dus schoof hij mee met alle zestien versie-eisen in elf
+  bestanden die `make check-toolchain` bewaakt: `.tool-versions`, de drie
+  GitHub-workflows, de acht Forgejo-workflows die het voorgebakken CI-image bij
+  zijn tag noemen (`ocideck-ci:flutter-3.47.2`), en de documentatie die de
+  bouwvoorwaarde uitspreekt. Het CI-image is met de nieuwe toolchain herbouwd en
+  gepubliceerd vóór de workflows ernaar wijzen — een tag die nog niet bestaat is
+  een rode poort die niets over deze repo zegt.
+
+- chore(deps): **analyzer 13.3.0 → 14.3.0** (dev-afhankelijkheid). Hij draagt de
+  AST achter acht poorten — methodelengte, conventies, publiekgrens,
+  commentaartaal, hardgecodeerde tekst en de drie l10n-controles — en die zijn
+  alle acht groen op de nieuwe major. De rest van de boom stond al op de laatste
+  versie die deze resolutie toelaat; wat vaststaat en waarom staat hieronder.
+
+- chore(ci): scanner-pins bijgewerkt naar de laatste upstream — **trufflehog
+  3.97.1 → 3.97.4** en **semgrep 1.175.0 → 1.176.1** — in het pin-manifest, in
+  elke workflow die de `*_VERSION`-env draagt, en in het tag van het
+  voorgebakken scan-image (`gl8.30.1-th3.97.4-sg1.176.1`). Een scanner die
+  stilstaat blijft groen melden terwijl hij de vormen mist die ná zijn release
+  zijn bedacht (#802). De SBOM is opnieuw gegenereerd (214 componenten).
+
+- chore(deps): **wat níet mee kon, en waardoor.** Geen van deze tien is een
+  keuze van ons: `flutter pub upgrade --major-versions` laat de resolutie
+  ongemoeid, dus onze eigen constraints zijn niet wat tegenhoudt.
+  - `archive` 4.0.9 → 4.2.0 en `qr` 3.0.2 → 4.0.0 hangen aan de pdf-familie:
+    `pdf` 3.13.0 eist `archive >=3.4.0 <4.1.0`, en `barcode` 2.2.9 eist
+    `qr ^3.0.0`. Beide bewegen pas als DavBfr die grenzen verruimt.
+  - `material_color_utilities` 0.13.0 → 0.13.1 en `test_api` 0.7.12 → 0.7.14
+    zijn door de Flutter-SDK *exact* vastgezet (`material_color_utilities:
+    0.13.0` in `packages/flutter`, `test_api: 0.7.12` in `packages/flutter_test`).
+    Die schuiven mee met een volgende Flutter-release en met niets anders.
+  - `objective_c` 9.5.0 → 9.6.0 en `code_assets` 1.2.1 → 2.0.0 zitten aan
+    elkaar vast: de nieuwe `objective_c` wil `code_assets ^2.0.0`, terwijl
+    `dartcv4` 2.3.0 op `code_assets ^1.0.0` staat. `dartcv4` draagt de native
+    OpenCV-laag, dus dit wacht op die kant.
+  - de vier `flutter_keyboard_visibility_*`-pakketten (1.0.0/2.0.0 → 2.0.0/3.0.0)
+    lopen via `flutter_keyboard_visibility_temp_fork`, de fork die `flutter_quill`
+    meebrengt en die zijn platformpakketten op `^1.0.0`/`^2.0.0` houdt.
+
 - docs(build): [`docs/BUILD.md`](docs/BUILD.md) beweerde dat Swift Package
   Manager uitstaat en CocoaPods al het pluginwerk doet. Sinds #1733 staat SPM
   juist aan, en houdt CocoaPods nog precies één plugin over
