@@ -65,6 +65,20 @@ class OciServeCourseSummary {
 
   int get nextLessonNumber => lessons.indexOf(nextLesson) + 1;
 
+  static int compareForStudentOverview(
+    OciServeCourseSummary a,
+    OciServeCourseSummary b,
+  ) {
+    final status = _statusOrder(a).compareTo(_statusOrder(b));
+    if (status != 0) return status;
+    return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+  }
+
+  static int _statusOrder(OciServeCourseSummary course) {
+    if (course.completed) return 2;
+    return course.started ? 0 : 1;
+  }
+
   static String _progressKey(String versionId, String lessonId) =>
       '$versionId\u0000$lessonId';
 }
