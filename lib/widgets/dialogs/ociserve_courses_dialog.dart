@@ -850,7 +850,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     for (final lesson in _lessons) {
       groups.putIfAbsent(lesson.versionId, () => []).add(lesson);
     }
-    return [
+    return <OciServeCourseSummary>[
       for (final entry in groups.entries)
         OciServeCourseSummary.from(
           entry.key,
@@ -858,7 +858,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
           _progressByLesson,
           fallbackTitle: l10n.d('Opleiding'),
         ),
-    ];
+    ]..sort(OciServeCourseSummary.compareForStudentOverview);
   }
 
   String? _preferredCourseVersion() {

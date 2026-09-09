@@ -532,6 +532,80 @@ void main() {
     },
   );
 
+  testWidgets('Mijn cursussen sorteert op voortgang en daarna alfabetisch', (
+    tester,
+  ) async {
+    const feed = [
+      OciServeFeedItem(
+        versionId: 'done',
+        lessonId: 'lesson',
+        title: 'Les',
+        courseTitle: 'Afgerond',
+      ),
+      OciServeFeedItem(
+        versionId: 'new',
+        lessonId: 'lesson',
+        title: 'Les',
+        courseTitle: 'Nieuw',
+      ),
+      OciServeFeedItem(
+        versionId: 'active-z',
+        lessonId: 'lesson',
+        title: 'Les',
+        courseTitle: 'Zakelijk mailen',
+      ),
+      OciServeFeedItem(
+        versionId: 'active-a',
+        lessonId: 'lesson',
+        title: 'Les',
+        courseTitle: 'Authenticatie',
+      ),
+    ];
+    const progress = OciServeLearningState([
+      OciServeLessonState(
+        courseVersionId: 'done',
+        lessonId: 'lesson',
+        completed: true,
+        displayedMilliseconds: 1,
+      ),
+      OciServeLessonState(
+        courseVersionId: 'active-z',
+        lessonId: 'lesson',
+        completed: false,
+        displayedMilliseconds: 1,
+      ),
+      OciServeLessonState(
+        courseVersionId: 'active-a',
+        lessonId: 'lesson',
+        completed: false,
+        displayedMilliseconds: 1,
+      ),
+    ]);
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(_authenticated, feed: feed, progress: progress),
+    );
+    await tester.binding.setSurfaceSize(const Size(1200, 1400));
+    await tester.pumpAndSettle();
+    await _openCourses(tester);
+
+    Offset position(String versionId) =>
+        tester.getTopLeft(find.byKey(Key('ociserve-course-image-$versionId')));
+
+    final activeA = position('active-a');
+    final activeZ = position('active-z');
+    expect(activeA.dy, closeTo(activeZ.dy, 1));
+    expect(activeA.dx, lessThan(activeZ.dx));
+
+    await tester.drag(find.byType(CustomScrollView), const Offset(0, -250));
+    await tester.pumpAndSettle();
+
+    final fresh = position('new');
+    final done = position('done');
+    expect(fresh.dy, closeTo(done.dy, 1));
+    expect(fresh.dx, lessThan(done.dx));
+  });
+
   testWidgets('Verdergaan opent de volgende les op het bewaarde anker', (
     tester,
   ) async {
