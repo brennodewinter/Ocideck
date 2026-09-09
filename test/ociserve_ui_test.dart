@@ -235,6 +235,25 @@ Future<void> _openCourses(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+Future<Finder> _scrollToDataCategory(
+  WidgetTester tester,
+  String sourceKey,
+) async {
+  final finder = find.byKey(Key('data-category-$sourceKey'));
+  await tester.scrollUntilVisible(
+    finder,
+    250,
+    scrollable: find
+        .descendant(
+          of: find.byKey(const Key('ociserve-data-access')),
+          matching: find.byType(Scrollable),
+        )
+        .first,
+  );
+  await tester.pumpAndSettle();
+  return finder;
+}
+
 Future<void> _actUntil(
   WidgetTester tester,
   Future<void> Function() action,
@@ -858,10 +877,11 @@ void main() {
 
     expect(find.byKey(const Key('ociserve-data-access')), findsOneWidget);
     expect(find.text('Uw geregistreerde gegevens'), findsOneWidget);
+    await _scrollToDataCategory(tester, 'future_category');
     expect(find.text('Future category'), findsOneWidget);
     expect(find.text('Geen gegevens geregistreerd'), findsOneWidget);
 
-    await tester.tap(find.byKey(const Key('data-category-participant')));
+    await tester.tap(await _scrollToDataCategory(tester, 'participant'));
     await tester.pumpAndSettle();
     expect(find.text('blijft zichtbaar'), findsOneWidget);
     expect(find.textContaining('future_field'), findsOneWidget);
@@ -919,10 +939,15 @@ void main() {
     await tester.tap(find.text('Mijn gegevens'));
     await tester.pumpAndSettle();
 
+    await _scrollToDataCategory(
+      tester,
+      'participant_data_access_history_metadata',
+    );
     expect(find.text('Beschikbaarheid van het inzagespoor'), findsOneWidget);
+    await _scrollToDataCategory(tester, 'participant_data_access_history');
     expect(find.text('Inzage en wijzigingen'), findsOneWidget);
     await tester.tap(
-      find.byKey(const Key('data-category-participant_data_access_history')),
+      await _scrollToDataCategory(tester, 'participant_data_access_history'),
     );
     await tester.pumpAndSettle();
 
@@ -933,6 +958,128 @@ void main() {
     expect(find.text('Beoordelaar'), findsOneWidget);
     expect(find.textContaining('actor_account_id'), findsNothing);
     expect(find.textContaining('request_id'), findsNothing);
+  });
+
+  testWidgets('Mijn gegevens zoekt lokaal door labels en waarden', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          participantId: 'participant-search',
+          generatedAt: DateTime.utc(2026, 9, 9),
+          data: const {
+            'participant': {
+              'display_name': 'Ada Lovelace',
+              'email': 'ada@example.test',
+            },
+            'lesson_progress': [
+              {'lesson_id': 'les-over-privacy', 'completed': true},
+            ],
+            'enrollments': [
+              {'status': 'active'},
+            ],
+          },
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(
+      find.byKey(const Key('privacy-data-search')),
+      'Lovelace',
+    );
+    await tester.pumpAndSettle();
+
+    await _scrollToDataCategory(tester, 'participant');
+    expect(find.byKey(const Key('data-category-participant')), findsOneWidget);
+    expect(
+      find.byKey(const Key('data-category-lesson_progress')),
+      findsNothing,
+    );
+    expect(find.text('1 categorie gevonden'), findsOneWidget);
+    expect(find.text('Ada Lovelace'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('privacy-data-search-clear')));
+    await tester.pumpAndSettle();
+    await _scrollToDataCategory(tester, 'lesson_progress');
+    expect(
+      find.byKey(const Key('data-category-lesson_progress')),
+      findsOneWidget,
+    );
+
+    await tester.enterText(
+      find.byKey(const Key('privacy-data-search')),
+      'Actief',
+    );
+    await tester.pumpAndSettle();
+    await _scrollToDataCategory(tester, 'enrollments');
+    final enrollmentCategory = find.byKey(
+      const Key('data-category-enrollments'),
+    );
+    expect(enrollmentCategory, findsOneWidget);
+    expect(
+      find.descendant(of: enrollmentCategory, matching: find.text('Actief')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('Mijn gegevens legt termen uit en toont geen JSON-blokken', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          participantId: 'participant-readable',
+          generatedAt: DateTime.utc(2026, 9, 9),
+          data: const {
+            'answers': [
+              {
+                'account_id': 'account-123',
+                'answer_data': {
+                  'selected_options': ['Eerste keuze', 'Tweede keuze'],
+                  'confidence': 4,
+                },
+              },
+            ],
+          },
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Antwoorden'), findsOneWidget);
+    expect(
+      find.text('De antwoorden die u bij toetsvragen heeft gegeven.'),
+      findsOneWidget,
+    );
+    expect(find.text('Begrippen uitgelegd'), findsOneWidget);
+    await tester.tap(find.text('Begrippen uitgelegd'));
+    await tester.pumpAndSettle();
+    expect(
+      find.textContaining('Een ID is een uniek technisch nummer'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Begrippen uitgelegd'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(await _scrollToDataCategory(tester, 'answers'));
+    await tester.pumpAndSettle();
+    expect(find.text('Antwoordgegevens'), findsOneWidget);
+    expect(find.text('Accountnummer'), findsOneWidget);
+    expect(find.textContaining('account_id'), findsNothing);
+    expect(find.text('Eerste keuze'), findsOneWidget);
+    expect(find.text('Tweede keuze'), findsOneWidget);
+    expect(find.textContaining('{'), findsNothing);
+    expect(find.textContaining('['), findsNothing);
   });
 
   testWidgets('Mijn gegevens toont grote categorieën per vijftig', (
@@ -956,7 +1103,7 @@ void main() {
     await _openCourses(tester);
     await tester.tap(find.text('Mijn gegevens'));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('data-category-large_category')));
+    await tester.tap(await _scrollToDataCategory(tester, 'large_category'));
     await tester.pumpAndSettle();
 
     expect(find.text('registratie-51'), findsNothing);
