@@ -12,6 +12,72 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.0] — 2026-09-09
+
+### Added
+
+- feat(ociserve): geef cursisten volledige gegevensinzage
+- feat(ociserve): voeg persoonlijk voortgangsoverzicht toe
+- feat: voeg veilige OciServe-cursusafspeler toe
+- feat(pdf): aanvullend symbolen-font voor pijlen en wiskundetekens (#1968)
+- feat(privacy): helptekst persoonsgegevens noemt alle vijf keuzes (#1958)
+- feat(export): formaatknoppen in gewone taal, niet Marp/Beamer/ODP (#1964)
+- feat(open): lege trefferlijst wijst naar Bladeren en andere map (#1962)
+- feat(welcome): ondertitel bij Nieuwe presentatie en Nieuw document (#1961)
+- feat(openen): meerdere bestanden tegelijk aanwijzen en openen (#1928) (#1935)
+- feat(docx): export naar .docx met Mermaid-diagrammen als hoogwaardige afbeeldingen (#1918)
+
+### Changed
+
+- Zet de actuele cursus links vooraan
+- Maak gegevensinzage begrijpelijk en doorzoekbaar
+- chore(toolchain): Flutter 3.47.2, analyzer 14 en de scanner-pins bij
+- Sorteer cursussen op voortgang voor studenten
+- chore(deps): veilige minor/patch upgrades + SBOM-verversing (#2030)
+- chore(l10n): de twee eLearning-vertaalspecs in tool/
+- Laat instellingen het actieve app-palet volgen
+- Verplaats eLearning-koppeling naar Integraties
+- Bewaar gekozen presentatiestijl na herstart
+- eLearning-blok (#1992-#2016) + acht bevindingen van de bewaker (#2017)
+- Ververs 23 rood staande goldens + macos-gate.yml CI-poort (#1988) (#1991)
+- Server-side presentatiebibliotheek voor ocideck-web (#1986) (#1990)
+- Een pijl in een diagramlabel breekt de PDF-export niet meer (#1987) (#1989)
+- Aanvullend symbolen-font voor pijlen en wiskundetekens in PDF-export (#1968)
+- Export: statusbalk-chip springt naar bevindingen + labels in gewone taal (#1963, #1964)
+- Hersteldialoog: Nu niet knop en duidelijkere knoplabels (#1960)
+- Instellingen-herindeling (#1955, #1956, #1957, #1959)
+- docs: sneltoetsenpagina NL nagekeken, banner verwijderd (#1965)
+- Visuele documentweergave toont dezelfde puntmaat als de PDF (#1967)
+- Een gedachtestreepje in een grafiektitel kostte de hele PDF-export (#1942) (#1966)
+- De linux-gate: één nachtrun, de claims rechtgezet, en een poort die de volgende ziet verrotten (#1944)
+- test(pdf): de tabelmelding wordt door de hele keten bewaakt (#1939)
+- Toetsenbordbediering van de openen- en scan-dialoog (#1934) (#1940)
+- Donkere logo-variant + L-vormige hoek-reserve (#1931, #1932) (#1937)
+- docs(formaat): de mermaid-fence vastgelegd in FILE_FORMAT en KNOWN_LIMITATIONS (#1923)
+- Wachtpuntpoort over de AST, en de laatste bewezen rode tests om (#1911) (#1915)
+- De linux-gate viel elf keer om op een wachttijd, en de poort ertegen mat bijna niets (#1911) (#1912)
+
+### Fixed
+
+- fix(presentatie): houd tweeschermnavigatie synchroon
+- fix: begeleid OciServe-aanmelding vanuit OciDeck (#2023)
+- fix(save): waarschuwing bij conflicterende opslag van hetzelfde bestand (#1974)
+- fix(save): web-opslaan pas schoon markeren na bevestigde download (#1973)
+- fix(save): afsluiten na git-opslag niet als geslaagd tellen bij annuleren/falen (#1972)
+- fix(recovery): mislukt crashherstel melden aan de gebruiker (#1971)
+- fix(save): tweede Cmd/Ctrl+S tijdens opslag niet meer stilletjes negeren (#1970)
+- fix(save): sidecars vóór de .md + grafiekcijfers inline bij falend databestand (#1969)
+- fix(macos): haal het Metal-toolchainpad uit de koppelvlaggen (#1946)
+- fix(import): bestandskiezer opent in de thuismap (#1943) (#1945)
+- fix(codec): blokinhoud in een lijstitem reist verliesvrij door de visuele modus (#1925) (#1938)
+- fix(shell): app-brede sneltoets vuurt niet meer door een dialoog heen (#1927) (#1933)
+- fix(cockpit): tekst van het glas af — uitleesvenster in de flank, label eronder (#1929)
+- fix(document): mermaid-fence als gerenderde kaart in de visuele editor (#1920)
+- fix(mermaid): dark-theme merge en schalen in Pagina's-weergave (#1921, #1922)
+- fix(odt): alinea- en hoofdstukruimte in de export (#1917) (#1919)
+- fix(presentatie): publieksvenster op het scherm tegenover de presentator (#1913) (#1914)
+- fix(opslaan): front matter zonder body is een lege presentatie, geen kapotte (#1909) (#1910)
+
 ## [0.5.0] — 2026-09-01
 
 ### Added
