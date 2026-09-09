@@ -71,7 +71,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.47.1
+          flutter-version: 3.47.2
           cache: true
 
       - name: Flutter version
@@ -183,7 +183,7 @@ jobs:
       # `haal`: zie de toelichting bij de gitleaks-stap hierboven.
       - name: trufflehog volgens de pin
         env:
-          TRUFFLEHOG_VERSION: 3.97.1
+          TRUFFLEHOG_VERSION: 3.97.4
         run: |
           set -euo pipefail
           haal() {
@@ -212,7 +212,7 @@ jobs:
       # plaats van stil gelaten.
       - name: semgrep volgens de pin
         env:
-          SEMGREP_VERSION: 1.175.0
+          SEMGREP_VERSION: 1.176.1
         run: |
           set -euo pipefail
           python3 -m venv /opt/semgrep-venv
@@ -316,7 +316,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.47.1
+          flutter-version: 3.47.2
           cache: true
 
       - name: Install dependencies
@@ -365,7 +365,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: 3.47.1
+          flutter-version: 3.47.2
           cache: true
 
       - name: Install dependencies

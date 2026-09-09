@@ -106,7 +106,7 @@ jobs:
     # `make check-no-coverage`) om — fail-closed. Alleen de repo-gekoppelde dingen
     # (pub + dartcv OpenCV-build) blijven op `actions/cache`.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.1
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.2
     steps:
       - uses: actions/checkout@v4
 
