@@ -427,6 +427,28 @@ void main() {
     },
   );
 
+  testWidgets('slide overview stays usable at 200 percent text', (
+    tester,
+  ) async {
+    tester.platformDispatcher.textScaleFactorTestValue = 2;
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    final container = _deckWith([
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Een bewust uitzonderlijk lange vertaalde slidenaam'),
+      Slide.create(SlideType.quote),
+    ]);
+    addTearDown(container.dispose);
+    await _pumpOverview(tester, container, size: const Size(520, 800));
+
+    final title = tester.widget<Text>(find.textContaining('Slide-overzicht'));
+    expect(title.maxLines, 1);
+    expect(title.overflow, TextOverflow.ellipsis);
+    expect(find.byIcon(Icons.drag_indicator), findsWidgets);
+    expect(find.byKey(const Key('overview-undo')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('finalized slide overview is visibly read-only', (tester) async {
     final container = _deckWith([Slide.create(SlideType.bullets)]);
     addTearDown(container.dispose);

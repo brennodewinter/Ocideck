@@ -145,6 +145,8 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
             widget.editable
                 ? '${deck.title} — ${l10n.d('Slide-overzicht')}'
                 : '${deck.title} — ${l10n.d('volledig deck')}',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           backgroundColor: AppTheme.navy,
           leading: IconButton(
