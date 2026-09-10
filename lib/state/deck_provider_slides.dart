@@ -288,27 +288,29 @@ extension DeckNotifierSlides on DeckNotifier {
     );
   }
 
-  /// Zet de dia's met een id in [originalsById] in één ongedaan-stap terug naar
-  /// hun oorspronkelijke versie — voor het terugdraaien van session-data-edits
-  /// (checklist/tabel) na een presentatie (#1235). Eén `_mutate`, dus één
-  /// Ctrl+Z, ongeacht het aantal dia's. Een id die inmiddels verdwenen is
-  /// (verwijderde dia) wordt stil genegeerd. bumpRevision dwingt de editor de
-  /// teruggedraaide inhoud te tonen.
-  void revertSlidesById(Map<String, Slide> originalsById) {
+  /// Vervang dia's op id in één state-mutatie en één ongedaan-stap.
+  ///
+  /// Een id die inmiddels verdwenen is, wordt stil genegeerd. De revisiestap
+  /// dwingt geopende editors de gewijzigde inhoud meteen te tonen.
+  void replaceSlidesById(Map<String, Slide> replacementsById) {
     final deck = currentState.deck;
-    if (deck == null || originalsById.isEmpty) return;
+    if (deck == null || replacementsById.isEmpty) return;
     final slides = List<Slide>.from(deck.slides);
     var changed = false;
     for (var i = 0; i < slides.length; i++) {
-      final orig = originalsById[slides[i].id];
-      if (orig != null && slides[i] != orig) {
-        slides[i] = orig;
+      final replacement = replacementsById[slides[i].id];
+      if (replacement != null && slides[i] != replacement) {
+        slides[i] = replacement;
         changed = true;
       }
     }
     if (!changed) return;
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
+
+  /// Zet dia's na een presentatie terug naar hun oorspronkelijke versie.
+  void revertSlidesById(Map<String, Slide> originalsById) =>
+      replaceSlidesById(originalsById);
 
   /// Zet (of wist) de sprong-uit van dia [index] (#1162): naar welke dia de
   /// presentatie na deze springt in plaats van de volgende in bronvolgorde.

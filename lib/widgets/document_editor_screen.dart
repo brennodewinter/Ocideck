@@ -40,6 +40,7 @@ import '../services/privacy/privacy_own_identity.dart';
 import '../state/deck_provider.dart'
     show fileServiceProvider, imageServiceProvider, markdownServiceProvider;
 import '../state/document_provider.dart';
+import '../state/open_tab_image_usage.dart';
 import '../state/settings_provider.dart'
     show
         kDocumentEditorZoomMax,

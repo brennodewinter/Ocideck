@@ -177,9 +177,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                 });
               }
 
-              // The chat rail rides alongside the editor while a realtime Matrix
-              // session runs and the user has opened it (§6); non-modal, so
-              // editing continues. `collabChatRail` is empty otherwise.
+              // Chat stays beside the editor during Matrix (§6), so editing
+              // continues; `collabChatRail` is empty otherwise.
               final workspace = Row(
                 children: [
                   if (showRail) ...[
@@ -189,6 +188,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                         railWidth: railWidth,
                         onPresentFromHere: (i) =>
                             _presentFromSlide(context, ref, i),
+                        onOpenOverview: _openFullDeckPreview,
                       ),
                     ),
                     _ResizableDivider(
@@ -593,10 +593,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       descriptionService: ref.read(descriptionServiceProvider),
       usageOf: (absolutePath) => _imageUsages(ref, absolutePath),
       onReplaceUsages: (from, to) => _replaceImageUsages(ref, from, to),
-      openDeckFiles: [
-        for (final tab in ref.read(tabsProvider).tabs)
-          ?tab.deckNotifierOrNull?.currentState.filePath,
-      ],
+      openMarkdownFiles: openTabMarkdownFiles(ref.read(tabsProvider).tabs),
     );
     if (result == null) return;
     // De bibliotheek doorzoekt ook mappen buiten de presentatie; zo'n keuze

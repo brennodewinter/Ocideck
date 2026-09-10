@@ -1685,6 +1685,19 @@ local files, online files and YouTube/Vimeo embeds.
 
 The rail on the left lists every slide as a thumbnail.
 
+- **Open the full-screen overview** with the grid button beside **SLIDES**. It
+  shows the authored slides in a responsive grid, so a continuation page that
+  OciDeck creates only for presenting or exporting never appears as an extra
+  slide to reorder. Click a slide to select it, double-click to return to that
+  slide, or drag its handle to a new position. **Shift-click** selects a range
+  and **Ctrl/Cmd-click** adds or removes one slide; a multi-selection moves as
+  one block. **Undo** and **Redo** are available in the overview itself.
+- **Use the overview without a pointer** with the arrow keys, `Home` and `End`.
+  Hold **Shift** with an arrow key to extend a range; **Ctrl/Cmd+A** selects all
+  slides. **Ctrl/Cmd + arrow key** moves the selected slide or block (up/down
+  moves one grid row), `Ctrl/Cmd+Z` undoes and
+  `Ctrl/Cmd+Shift+Z` redoes. `Esc` closes the overview. Finalised and play-only
+  decks can still be inspected there, but the order is read-only.
 - **Select** a slide by clicking it. Hold **Shift** to select a range, or
   **Ctrl/Cmd** to add/remove individual slides; **Ctrl/Cmd+A** selects them all.
 - **Reorder** by dragging a thumbnail's drag handle. With several slides
@@ -1775,10 +1788,12 @@ native resolution. PDF/PPTX export captures one still frame.
 - **Clean up duplicates** — the button in the footer finds byte-identical
   images by md5 checksum. Per group one file is kept (preferring the one used
   in slides, then the oldest), tags and captions of the copies are merged onto
-  it, slides that referenced a copy are repointed to the kept file, and the
+  it, every slide that referenced a copy is repointed to the kept file, and the
   copies are deleted — after a confirmation that lists exactly what will
-  happen. References are updated in the open decks *and* in `.md`
-  presentations found on disk in the search directories, so presentations
+  happen. References are updated in **every open presentation and document
+  tab**, including unsaved changes in those tabs, and in `.md` presentations
+  found on disk in the search directories. Thus the clean-up does not leave a
+  second open tab pointing at the copy that was removed, while presentations
   that are not currently open keep working too.
 - **Deleting an image** warns when it is still in use — in open decks (per
   slide) and in presentations on disk that are not currently open (per file,

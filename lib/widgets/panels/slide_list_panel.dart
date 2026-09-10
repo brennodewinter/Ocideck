@@ -26,6 +26,7 @@ import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
+import '../../state/slide_reorder.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
@@ -38,6 +39,7 @@ import '../../services/slide_layout_metrics.dart';
 import '../slides/slide_preview.dart';
 import '../../state/collab_session_provider.dart';
 import '../slides/slide_thumbnail.dart';
+import 'slide_overview_button.dart';
 import 'slide_presence_dots.dart';
 
 part 'slide_list_panel_bars.dart';
@@ -51,13 +53,16 @@ class SlideListPanel extends ConsumerStatefulWidget {
   /// LayoutBuilder: rebuilding a ReorderableListView during layout trips its
   /// overlay bookkeeping ("_RenderLayoutBuilder was mutated…").
   final double? railWidth;
+  const SlideListPanel({
+    super.key,
+    this.railWidth,
+    this.onPresentFromHere,
+    this.onOpenOverview,
+  });
 
-  const SlideListPanel({super.key, this.railWidth, this.onPresentFromHere});
-
-  /// Start de presentatie vanaf een gekozen dia (#607). De shell levert dit,
-  /// want `presentDeck` woont in de app_shell-library en niet hier.
+  /// Start via de shell vanaf een gekozen dia (#607).
   final void Function(int index)? onPresentFromHere;
-
+  final VoidCallback? onOpenOverview;
   @override
   ConsumerState<SlideListPanel> createState() => _SlideListPanelState();
 }
@@ -69,7 +74,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   final _focusNode = FocusNode(debugLabel: 'SlideListPanel');
   final Map<String, GlobalKey> _slideKeys = {};
   Timer? _resizeSettleTimer;
-
   @override
   void dispose() {
     _resizeSettleTimer?.cancel();
@@ -79,8 +83,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     super.dispose();
   }
 
-  /// A rail resize changes thumbnail heights; once it settles, bring the
-  /// selected slide back to the top of the list.
+  /// After rail resize settles, bring the selected slide back to the top.
   @override
   void didUpdateWidget(covariant SlideListPanel oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -793,6 +796,8 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                 ),
               ),
               const Spacer(),
+              if (widget.onOpenOverview case final open?)
+                SlideOverviewButton(open),
               Text(
                 searching
                     ? '$matchCount / ${deck.slides.length}'

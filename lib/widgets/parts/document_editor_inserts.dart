@@ -170,10 +170,9 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
       searchPaths: searchPaths,
       captionService: ref.read(captionServiceProvider),
       descriptionService: ref.read(descriptionServiceProvider),
-      // Alleen deck-tabs: documenttabs hebben geen deckNotifier (gooit anders).
-      openDeckFiles: [
-        for (final tab in tabs) ?tab.deckNotifierOrNull?.currentState.filePath,
-      ],
+      usageOf: (path) => openTabImageUsages(tabs, path),
+      onReplaceUsages: (from, to) => replaceOpenTabImageUsages(tabs, from, to),
+      openMarkdownFiles: openTabMarkdownFiles(tabs),
     );
     if (picked == null || !mounted) return;
     final reference = await ref

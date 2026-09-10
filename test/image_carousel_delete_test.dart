@@ -91,7 +91,7 @@ void main() {
   Future<void> pumpPicker(
     WidgetTester tester, {
     List<String> Function(String)? usageOf,
-    List<String> openDeckFiles = const [],
+    List<String> openMarkdownFiles = const [],
   }) async {
     await tester.binding.setSurfaceSize(const Size(1400, 900));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -105,7 +105,7 @@ void main() {
               captionService: CaptionService(),
               descriptionService: DescriptionService(),
               usageOf: usageOf,
-              openDeckFiles: openDeckFiles,
+              openMarkdownFiles: openMarkdownFiles,
             ),
           ),
         ),
@@ -252,7 +252,7 @@ void main() {
     await pumpPicker(
       tester,
       usageOf: (path) => path == alpha ? const ['rapport · dia 1'] : const [],
-      openDeckFiles: [open],
+      openMarkdownFiles: [open],
     );
     await openDeleteDialog(tester);
 

@@ -56,6 +56,38 @@ void main() {
     expect(thumbAt(1).numberStart, 4);
   });
 
+  testWidgets('the rail exposes one direct slide-overview button', (
+    tester,
+  ) async {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    container.read(deckProvider.notifier).newDeck('Test');
+    var opened = 0;
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: Scaffold(
+            body: SizedBox(
+              width: 320,
+              child: SlideListPanel(
+                railWidth: 320,
+                onOpenOverview: () => opened++,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byKey(const Key('slide-overview-button')), findsOneWidget);
+    expect(find.byTooltip('Slide-overzicht'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('slide-overview-button')));
+    expect(opened, 1);
+  });
+
   testWidgets('resizing the rail brings the edited slide back into view', (
     tester,
   ) async {

@@ -698,24 +698,7 @@ String? _resolveImagePath(String path, String? projectPath) {
 }
 
 List<String> _imageUsages(WidgetRef ref, String absolutePath) {
-  final target = p.normalize(absolutePath);
-  final usages = <String>[];
-  for (final tab in ref.read(tabsProvider).tabs) {
-    final deck = tab.deckNotifier.currentState.deck;
-    if (deck == null) continue;
-    // De insluitingswacht doet hier het oplossen: een pad dat buiten de
-    // presentatie zou wijzen levert geen treffer op in plaats van er een te
-    // verzinnen.
-    String? resolve(String candidate) {
-      final resolved = resolveSlideAssetPath(candidate, deck.projectPath);
-      return resolved == null ? null : p.normalize(resolved);
-    }
-
-    for (final i in slideIndexesUsingImage(deck, target, resolve)) {
-      usages.add('${tab.label} · slide ${i + 1}');
-    }
-  }
-  return usages;
+  return openTabImageUsages(ref.read(tabsProvider).tabs, absolutePath);
 }
 
 /// Wijs in alle open decks elke slideverwijzing naar [fromAbsolute] om naar
@@ -726,38 +709,11 @@ Future<void> _replaceImageUsages(
   String fromAbsolute,
   String toAbsolute,
 ) async {
-  final target = p.normalize(fromAbsolute);
-  for (final tab in ref.read(tabsProvider).tabs) {
-    final notifier = tab.deckNotifier;
-    final deck = notifier.currentState.deck;
-    if (deck == null) continue;
-    final projectPath = deck.projectPath ?? '';
-
-    String? resolve(String candidate) {
-      final resolved = resolveSlideAssetPath(candidate, deck.projectPath);
-      return resolved == null ? null : p.normalize(resolved);
-    }
-
-    // Blijf relatief opslaan als de slide dat al deed en het nieuwe pad
-    // binnen het project ligt; anders absoluut.
-    String replacement(String candidate) {
-      if (p.isAbsolute(candidate) || projectPath.isEmpty) return toAbsolute;
-      return p.isWithin(projectPath, toAbsolute)
-          ? p.relative(toAbsolute, from: projectPath)
-          : toAbsolute;
-    }
-
-    for (var i = 0; i < deck.slides.length; i++) {
-      final slide = deck.slides[i];
-      final updated = slideWithImageReplaced(
-        slide,
-        target,
-        resolve,
-        replacement,
-      );
-      if (!identical(updated, slide)) notifier.updateSlide(i, updated);
-    }
-  }
+  await replaceOpenTabImageUsages(
+    ref.read(tabsProvider).tabs,
+    fromAbsolute,
+    toAbsolute,
+  );
 }
 
 List<Slide> _slidesForPresentationOrExport(
