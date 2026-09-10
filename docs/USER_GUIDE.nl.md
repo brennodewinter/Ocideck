@@ -1737,6 +1737,21 @@ lokale bestanden, online bestanden en YouTube/Vimeo-insluitingen.
 
 De rail aan de linkerkant somt elke slide op als een miniatuur.
 
+- **Open het schermvullende overzicht** met de rasterknop naast **SLIDES**. Het
+  toont in een meeschalend raster de slides zoals ze in het deck zijn geschreven,
+  zodat een vervolgpagina die OciDeck alleen voor presenteren of exporteren
+  maakt, nooit als extra slide tussen de te sorteren slides verschijnt. Klik om
+  een slide te selecteren, dubbelklik om naar die slide terug te keren, of sleep het handvat
+  naar een nieuwe plek. **Shift-klik** selecteert een reeks en **Ctrl/Cmd-klik**
+  voegt één slide toe of haalt die weg; een meervoudige selectie beweegt als één blok.
+  **Ongedaan maken** en **Opnieuw** zijn in het overzicht zelf beschikbaar.
+- **Gebruik het overzicht zonder aanwijzer** met de pijltjestoetsen, `Home` en
+  `End`. Houd **Shift** met een pijltjestoets ingedrukt om een reeks uit te
+  breiden; **Ctrl/Cmd+A** selecteert alles.
+  **Ctrl/Cmd + pijltjestoets** verplaatst de geselecteerde slide of het blok
+  (omhoog/omlaag is één rasterrij), `Ctrl/Cmd+Z` maakt ongedaan en
+  `Ctrl/Cmd+Shift+Z` voert opnieuw uit. `Esc` sluit het overzicht. Afgeronde en
+  alleen-afspelen-decks kun je er wel bekijken, maar niet herschikken.
 - **Selecteer** een slide door erop te klikken. Houd **Shift** ingedrukt om een bereik te selecteren, of
   **Ctrl/Cmd** om individuele slides toe te voegen/verwijderen; **Ctrl/Cmd+A** selecteert ze allemaal.
 - **Herorden** door de sleepgreep van een miniatuur te slepen. Met meerdere slides
@@ -1827,11 +1842,13 @@ native resolutie. PDF/PPTX-export legt één stilstaand beeld vast.
 - **Duplicaten opschonen** — de knop in de voettekst vindt byte-identieke
   afbeeldingen via md5-controlesom. Per groep wordt één bestand behouden (met voorkeur voor het bestand dat wordt gebruikt
   in slides, dan het oudste), tags en bijschriften van de kopieën worden erop
-  samengevoegd, slides die naar een kopie verwezen worden naar het behouden bestand gericht, en de
+  samengevoegd, alle slides die naar een kopie verwezen worden naar het behouden bestand gericht, en de
   kopieën worden verwijderd — na een bevestiging die precies opsomt wat er zal
-  gebeuren. Verwijzingen worden bijgewerkt in de open decks *en* in `.md`-
-  presentaties die op schijf in de zoekmappen worden gevonden, zodat presentaties
-  die op dit moment niet open zijn ook blijven werken.
+  gebeuren. Verwijzingen worden bijgewerkt in **alle open presentatie- en
+  documenttabbladen**, inclusief onopgeslagen wijzigingen in die tabbladen, en in
+  `.md`-presentaties die op schijf in de zoekmappen worden gevonden. Zo blijft
+  geen tweede open tabblad verwijzen naar de verwijderde kopie, terwijl
+  presentaties die op dit moment niet open zijn ook blijven werken.
 - **Een afbeelding verwijderen** waarschuwt wanneer hij nog in gebruik is — in open decks (per
   slide) en in presentaties op schijf die op dit moment niet open zijn (per bestand,
   gemarkeerd "niet open").

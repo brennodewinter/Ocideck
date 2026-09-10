@@ -16,6 +16,7 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Added
 
+- feat(slides): schermvullend overzicht om slides te sorteren (#2045)
 - feat(ociserve): geef cursisten volledige gegevensinzage
 - feat(ociserve): voeg persoonlijk voortgangsoverzicht toe
 - feat: voeg veilige OciServe-cursusafspeler toe
@@ -59,6 +60,7 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(afbeeldingen): deduplicatie werkt alle open tabs bij (#2044)
 - fix(presentatie): houd tweeschermnavigatie synchroon
 - fix: begeleid OciServe-aanmelding vanuit OciDeck (#2023)
 - fix(save): waarschuwing bij conflicterende opslag van hetzelfde bestand (#1974)
@@ -2539,6 +2541,19 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een schermvullend slide-overzicht maakt een heel deck in één keer
+  sorteerbaar (#2045).** De rasterknop naast **SLIDES** opent een meeschalend
+  overzicht van de geschreven slides — afgeleide vervolgpagina's uit presentatie
+  en export tellen niet als losse slides. Slepen, meervoudige selectie,
+  toetsenbordbediening en schermlezeracties gebruiken dezelfde volgorderegel;
+  ongedaan maken en opnieuw staan in het overzicht zelf. Afgeronde en
+  alleen-afspelen-decks blijven zichtbaar maar zijn daar alleen-lezen.
+- **Afbeeldingsdeduplicatie laat geen ander open tabblad naar de verwijderde
+  kopie wijzen (#2044).** De opschoning herschrijft voortaan alle slides in elk
+  open presentatietabblad én inline-afbeeldingen in ieder open documenttabblad,
+  ook wanneer daar nog onopgeslagen werk in staat. Open Markdownbestanden worden
+  uit de schijfpassage gehouden; gesloten presentaties in de zoekmappen blijven
+  via die bestaande passage bijgewerkt.
 - **De gebruikersgids noemt de Word-export die er sinds #1918 in zit.** De
   documentexportlijst in de gids (Engelse bron én Nederlandse variant) en de
   twee formaatopsommingen in de README stopten bij ODT, terwijl de
