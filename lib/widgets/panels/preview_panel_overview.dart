@@ -342,6 +342,77 @@ class _OverviewSlideCard extends StatelessWidget {
     return actions;
   }
 
+  Widget _footer(BuildContext context, String title, ColorScheme colorScheme) =>
+      Container(
+        height: 42,
+        padding: const EdgeInsets.only(left: 12, right: 4),
+        decoration: BoxDecoration(
+          color: selected
+              ? colorScheme.primaryContainer
+              : colorScheme.surfaceContainerHighest,
+          border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
+        ),
+        child: Row(
+          children: [
+            if (selected) ...[
+              Icon(Icons.check_circle, size: 17, color: colorScheme.primary),
+              const SizedBox(width: 7),
+            ],
+            Expanded(
+              child: Text(
+                '${index + 1}. $title',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+            if (!readOnly)
+              Tooltip(
+                message: context.l10n.d('Sorteren'),
+                child: Draggable<int>(
+                  data: index,
+                  feedback: Material(
+                    color: Colors.transparent,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: AppTheme.navy,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(color: Colors.black38, blurRadius: 10),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 8,
+                        ),
+                        child: Text(
+                          '${index + 1}. $title',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  childWhenDragging: const Opacity(
+                    opacity: 0.35,
+                    child: Icon(Icons.drag_indicator),
+                  ),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.grab,
+                    child: Icon(
+                      Icons.drag_indicator,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     final slide = deck.slides[index];
@@ -426,84 +497,7 @@ class _OverviewSlideCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 42,
-                    padding: const EdgeInsets.only(left: 12, right: 4),
-                    decoration: BoxDecoration(
-                      color: selected
-                          ? colorScheme.primaryContainer
-                          : colorScheme.surfaceContainerHighest,
-                      border: Border(
-                        top: BorderSide(color: colorScheme.outlineVariant),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        if (selected) ...[
-                          Icon(
-                            Icons.check_circle,
-                            size: 17,
-                            color: colorScheme.primary,
-                          ),
-                          const SizedBox(width: 7),
-                        ],
-                        Expanded(
-                          child: Text(
-                            '${index + 1}. $title',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        if (!readOnly)
-                          Tooltip(
-                            message: l10n.d('Sorteren'),
-                            child: Draggable<int>(
-                              data: index,
-                              feedback: Material(
-                                color: Colors.transparent,
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    color: AppTheme.navy,
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.black38,
-                                        blurRadius: 10,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 14,
-                                      vertical: 8,
-                                    ),
-                                    child: Text(
-                                      '${index + 1}. $title',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              childWhenDragging: const Opacity(
-                                opacity: 0.35,
-                                child: Icon(Icons.drag_indicator),
-                              ),
-                              child: MouseRegion(
-                                cursor: SystemMouseCursors.grab,
-                                child: Icon(
-                                  Icons.drag_indicator,
-                                  color: colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
+                  _footer(context, title, colorScheme),
                 ],
               ),
             ),
