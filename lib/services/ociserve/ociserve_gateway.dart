@@ -481,9 +481,10 @@ class OciServeGateway implements OciServeApi {
           ? decoded['uploads']! as List
           : throw const FormatException();
       return raw
-          .map((item) => EvidenceUpload.fromJson(
-                Map<String, Object?>.from(item as Map),
-              ))
+          .map(
+            (item) =>
+                EvidenceUpload.fromJson(Map<String, Object?>.from(item as Map)),
+          )
           .toList(growable: false);
     } catch (error, stack) {
       logError('OciServe: bewijsstukken lezen', error.runtimeType, stack);
@@ -514,9 +515,11 @@ class OciServeGateway implements OciServeApi {
           ? decoded['qualifications']! as List
           : throw const FormatException();
       return raw
-          .map((item) => OciServeQualification.fromJson(
-                Map<String, Object?>.from(item as Map),
-              ))
+          .map(
+            (item) => OciServeQualification.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
           .toList(growable: false);
     } catch (error, stack) {
       logError('OciServe: badges lezen', error.runtimeType, stack);

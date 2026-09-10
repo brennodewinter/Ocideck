@@ -831,6 +831,102 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'You will no longer share credentials from this portfolio. ',
+  'U hebt nog geen badges.': 'You do not have any badges yet.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'You can use evidence from an external portfolio (such as EduBadges) ',
+  'U levert bewijs aan voor: {badge}':
+      'You are submitting evidence for: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'You are submitting this evidence file for assessment. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'You will be redirected to the portfolio provider to log in. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Your file will be marked as "submitted, not yet checked" ',
+  'Verbinding maken…': 'Connecting…',
+  'Verbinding verbreken': 'Disconnect',
+  'Verbinding verbreken?': 'Disconnect?',
+  'Verbonden met {provider}': 'Connected to {provider}',
+  'Verbreken': 'Disconnect',
+  'Verlopen': 'Expired',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'If you request deletion, your evidence files and the associated assessments will disappear. Retention rules in the deletion register show whether a remainder stays for an ongoing retention obligation.',
+  'Wordt verzonden zodra je online bent.':
+      'Will be sent as soon as you are online.',
+  'portefeuille': 'portfolio',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} credential(s) selected to share',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Pending since {datum}. Usually within two working days.',
+  'Kies een bestand om aan te leveren.': 'Choose a file to submit.',
+  'Kies wat u deelt': 'Choose what you share',
+  'Kies welke credentials u deelt als bewijs:':
+      'Choose which credentials you share as evidence:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Could not load your evidence. Please try again.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Connect an external portfolio to use your existing badges and ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Leave empty if the evidence is valid indefinitely. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Submit a new or corrected file.',
+  'Lever het bestand opnieuw aan.': 'Resubmit the file.',
+  'Mijn badges': 'My badges',
+  'Mijn bewijs': 'My evidence',
+  'Mijn bewijsstukken': 'My evidence files',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'After logging in, you choose in the next step which credentials you share. ',
+  'Nog geen bewijsstukken aangeleverd.': 'No evidence files submitted yet.',
+  'Opgegeven': 'Submitted',
+  'Opnieuw verbinden': 'Reconnect',
+  'Portefeuille koppelen': 'Connect portfolio',
+  'Portefeuille verbinden': 'Connect portfolio',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Select the credentials you want to share as evidence. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Close the portfolio provider window to continue.',
+  'Toegekend op {datum}': 'Awarded on {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Allowed formats: PNG, JPEG, WebP and PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Until when is this evidence valid?',
+  'Aangeleverd op {datum}': 'Submitted on {datum}',
+  'Aanleveren': 'Submit',
+  'Afgekeurd': 'Rejected',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Rejected. The assessor did not provide a reason.',
+  'Afgekeurd: {reden}': 'Rejected: {reden}',
+  'Ander bestand': 'Different file',
+  'Badge': 'Badge',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Badges appear here once they have been awarded.',
+  'Bewijs aanleveren': 'Submit evidence',
+  'Bewijsstuk kiezen': 'Choose evidence file',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Evidence files appear here once you submit something for a badge.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Evidence files are documents you submit for a badge. The overview shows the filename, checksum, status and who assessed it. The files themselves are not in this overview; an assessor can view them.',
+  'Bezig met versturen…': 'Sending…',
+  'Datum kiezen': 'Choose date',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'The connection has been broken. You can reconnect.',
+  'Deze functie is nog niet beschikbaar. ':
+      'This feature is not yet available. ',
+  'Externe portefeuille': 'External portfolio',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Accepted. The evidence file has been approved.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'No credentials found in this portfolio.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'No participant profile found for this organisation.',
+  'Geldig tot {datum}': 'Valid until {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Submission failed. Please try again.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'The technical access log shows who viewed or modified your data, when, and for what purpose.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Upload failed. Please try again.',
   'Registratie {nummer}': 'Registration {nummer}',
   '1 categorie gevonden': '1 category found',
   '1 registratie': '1 registration',

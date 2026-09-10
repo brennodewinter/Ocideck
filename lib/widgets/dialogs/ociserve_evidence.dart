@@ -101,9 +101,7 @@ class OciServeEvidence extends StatelessWidget {
     OciServeQualification qual,
   ) {
     final palette = AppPalette.of(theme);
-    final title = qual.skillTitle.isEmpty
-        ? l10n.d('Badge')
-        : qual.skillTitle;
+    final title = qual.skillTitle.isEmpty ? l10n.d('Badge') : qual.skillTitle;
     final locale = MaterialLocalizations.of(context);
     final issuedStr = locale.formatFullDate(qual.issuedAt.toLocal());
     final expiresStr = qual.expiresAt != null
@@ -143,7 +141,9 @@ class OciServeEvidence extends StatelessWidget {
               runSpacing: 4,
               children: [
                 Text(
-                  l10n.d('Toegekend op {datum}').replaceAll('{datum}', issuedStr),
+                  l10n
+                      .d('Toegekend op {datum}')
+                      .replaceAll('{datum}', issuedStr),
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: palette.accentInk.withValues(alpha: 0.7),
                   ),
@@ -279,7 +279,11 @@ class OciServeEvidence extends StatelessWidget {
     EvidenceUpload upload,
   ) {
     final palette = AppPalette.of(theme);
-    final (statusLabel, statusColor) = _uploadStatusDisplay(l10n, theme, upload);
+    final (statusLabel, statusColor) = _uploadStatusDisplay(
+      l10n,
+      theme,
+      upload,
+    );
     final statusMessage = _uploadStatusMessage(l10n, locale, upload);
     final nextStep = _uploadNextStep(l10n, upload);
     return Card(
@@ -307,7 +311,10 @@ class OciServeEvidence extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: statusColor.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(20),
@@ -326,7 +333,10 @@ class OciServeEvidence extends StatelessWidget {
             Text(
               l10n
                   .d('Aangeleverd op {datum}')
-                  .replaceAll('{datum}', locale.formatFullDate(upload.createdAt.toLocal())),
+                  .replaceAll(
+                    '{datum}',
+                    locale.formatFullDate(upload.createdAt.toLocal()),
+                  ),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: palette.accentInk.withValues(alpha: 0.6),
               ),
@@ -358,22 +368,26 @@ class OciServeEvidence extends StatelessWidget {
   ) {
     final dateStr = locale.formatFullDate(upload.createdAt.toLocal());
     return switch (upload.status) {
-      EvidenceUploadStatus.pending => l10n
-          .d('In behandeling sinds {datum}. Meestal binnen twee werkdagen.')
-          .replaceAll('{datum}', dateStr),
-      EvidenceUploadStatus.uploaded => l10n
-          .d('In behandeling sinds {datum}. Meestal binnen twee werkdagen.')
-          .replaceAll('{datum}', dateStr),
-      EvidenceUploadStatus.clean =>
-        l10n.d('Geaccepteerd. Het bewijsstuk is goedgekeurd.'),
-      EvidenceUploadStatus.rejected => upload.rejectionReason != null &&
-          upload.rejectionReason!.isNotEmpty
-        ? l10n
-            .d('Afgekeurd: {reden}')
-            .replaceAll('{reden}', upload.rejectionReason!)
-        : l10n.d('Afgekeurd. De beoordelaar heeft geen reden opgegeven.'),
-      EvidenceUploadStatus.failed =>
-        l10n.d('Het uploaden is mislukt. Probeer het opnieuw.'),
+      EvidenceUploadStatus.pending =>
+        l10n
+            .d('In behandeling sinds {datum}. Meestal binnen twee werkdagen.')
+            .replaceAll('{datum}', dateStr),
+      EvidenceUploadStatus.uploaded =>
+        l10n
+            .d('In behandeling sinds {datum}. Meestal binnen twee werkdagen.')
+            .replaceAll('{datum}', dateStr),
+      EvidenceUploadStatus.clean => l10n.d(
+        'Geaccepteerd. Het bewijsstuk is goedgekeurd.',
+      ),
+      EvidenceUploadStatus.rejected =>
+        upload.rejectionReason != null && upload.rejectionReason!.isNotEmpty
+            ? l10n
+                  .d('Afgekeurd: {reden}')
+                  .replaceAll('{reden}', upload.rejectionReason!)
+            : l10n.d('Afgekeurd. De beoordelaar heeft geen reden opgegeven.'),
+      EvidenceUploadStatus.failed => l10n.d(
+        'Het uploaden is mislukt. Probeer het opnieuw.',
+      ),
     };
   }
 
@@ -382,14 +396,15 @@ class OciServeEvidence extends StatelessWidget {
   /// negative outcome says what the learner can do now.
   String? _uploadNextStep(AppLocalizations l10n, EvidenceUpload upload) {
     return switch (upload.status) {
-      EvidenceUploadStatus.pending =>
-        l10n.d('Wordt verzonden zodra je online bent.'),
+      EvidenceUploadStatus.pending => l10n.d(
+        'Wordt verzonden zodra je online bent.',
+      ),
       EvidenceUploadStatus.uploaded => null,
       EvidenceUploadStatus.clean => null,
-      EvidenceUploadStatus.rejected =>
-        l10n.d('Lever een nieuw of gecorrigeerd bestand aan.'),
-      EvidenceUploadStatus.failed =>
-        l10n.d('Lever het bestand opnieuw aan.'),
+      EvidenceUploadStatus.rejected => l10n.d(
+        'Lever een nieuw of gecorrigeerd bestand aan.',
+      ),
+      EvidenceUploadStatus.failed => l10n.d('Lever het bestand opnieuw aan.'),
     };
   }
 
@@ -485,10 +500,7 @@ class OciServeEvidence extends StatelessWidget {
               color: palette.accentInk.withValues(alpha: 0.6),
             ),
           ),
-          if (action != null) ...[
-            const SizedBox(height: 16),
-            action,
-          ],
+          if (action != null) ...[const SizedBox(height: 16), action],
         ],
       ),
     );

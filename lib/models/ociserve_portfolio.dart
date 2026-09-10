@@ -8,14 +8,18 @@ import 'package:flutter/foundation.dart';
 enum PortfolioConnectionState {
   /// The server has not enabled portfolio import yet.
   unavailable,
+
   /// The learner has not connected a portfolio.
   disconnected,
+
   /// The learner started the OAuth flow but has not finished it.
   connecting,
+
   /// The learner has a connected portfolio with available credentials.
   connected,
+
   /// The connection was revoked by the learner or the provider.
-  revoked;
+  revoked,
 }
 
 /// A credential retrieved from a connected portfolio.
@@ -43,18 +47,17 @@ class PortfolioCredential {
   final bool selected;
 
   /// Whether the credential is currently valid (not expired).
-  bool get isActive =>
-      expiresAt == null || expiresAt!.isAfter(DateTime.now());
+  bool get isActive => expiresAt == null || expiresAt!.isAfter(DateTime.now());
 
   PortfolioCredential copyWith({bool? selected}) => PortfolioCredential(
-        id: id,
-        title: title,
-        issuer: issuer,
-        issuedAt: issuedAt,
-        expiresAt: expiresAt,
-        credentialType: credentialType,
-        selected: selected ?? this.selected,
-      );
+    id: id,
+    title: title,
+    issuer: issuer,
+    issuedAt: issuedAt,
+    expiresAt: expiresAt,
+    credentialType: credentialType,
+    selected: selected ?? this.selected,
+  );
 
   factory PortfolioCredential.fromJson(Map<String, Object?> json) {
     final id = (json['id'] as String? ?? '').trim();
@@ -108,13 +111,13 @@ class PortfolioConnection {
         'revoked' => PortfolioConnectionState.revoked,
         _ => PortfolioConnectionState.unavailable,
       },
-      connectedAt: DateTime.tryParse(
-        json['connected_at'] as String? ?? '',
-      ),
+      connectedAt: DateTime.tryParse(json['connected_at'] as String? ?? ''),
       credentials: credentialsRaw
-          .map((item) => PortfolioCredential.fromJson(
-                Map<String, Object?>.from(item as Map),
-              ))
+          .map(
+            (item) => PortfolioCredential.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
           .toList(growable: false),
     );
   }

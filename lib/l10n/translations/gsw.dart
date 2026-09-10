@@ -1636,6 +1636,104 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Dann teilen Sie keine Nachweise mehr aus dieser Brieftasche. ',
+  'U hebt nog geen badges.': 'Sie haben noch keine Abzeichen.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Sie können Nachweise aus einer externen Brieftasche (wie EduBadges) ',
+  'U levert bewijs aan voor: {badge}':
+      'Sie reichen einen Nachweis ein für: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Sie reichen diese Nachweisdatei zur Prüfung ein. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Sie werden zur Anmeldung an den Brieftaschenanbieter weitergeleitet. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Ihre Datei wird als "eingereicht, noch nicht geprüft" markiert ',
+  'Verbinding maken…': 'Verbindung wird hergestellt…',
+  'Verbinding verbreken': 'Verbindung trennen',
+  'Verbinding verbreken?': 'Verbindung trennen?',
+  'Verbonden met {provider}': 'Verbunden mit {provider}',
+  'Verbreken': 'Trennen',
+  'Verlopen': 'Abgelaufen',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Wenn Sie die Löschung beantragen, verschwinden Ihre Nachweisdateien und die zugehörigen Bewertungen. Aufbewahrungsregeln im Löschregister zeigen, ob wegen einer laufenden Aufbewahrungspflicht ein Rest erhalten bleibt.',
+  'Wordt verzonden zodra je online bent.':
+      'Wird gesendet, sobald Sie online sind.',
+  'portefeuille': 'Brieftasche',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} Nachweis(e) zum Teilen ausgewählt',
+  '{bytes} bytes': '{bytes} Bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'In Bearbeitung seit {datum}. In der Regel innerhalb von zwei Arbeitstagen.',
+  'Kies een bestand om aan te leveren.':
+      'Wählen Sie eine einzureichende Datei aus.',
+  'Kies wat u deelt': 'Wählen Sie, was Sie teilen',
+  'Kies welke credentials u deelt als bewijs:':
+      'Wählen Sie, welche Nachweise Sie als Beleg teilen:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Ihr Nachweis konnte nicht geladen werden. Bitte versuchen Sie es erneut.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Verbinden Sie eine externe Brieftasche, um Ihre vorhandenen Abzeichen und ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Leer lassen, wenn der Nachweis unbegrenzt gültig ist. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Reichen Sie eine neue oder korrigierte Datei ein.',
+  'Lever het bestand opnieuw aan.': 'Reichen Sie die Datei erneut ein.',
+  'Mijn badges': 'Meine Abzeichen',
+  'Mijn bewijs': 'Mein Nachweis',
+  'Mijn bewijsstukken': 'Meine Nachweisdateien',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Nach der Anmeldung wählen Sie im nächsten Schritt, welche Nachweise Sie teilen. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Noch keine Nachweisdateien eingereicht.',
+  'Opgegeven': 'Eingereicht',
+  'Opnieuw verbinden': 'Erneut verbinden',
+  'Portefeuille koppelen': 'Brieftasche verbinden',
+  'Portefeuille verbinden': 'Brieftasche verbinden',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Wählen Sie die Nachweise aus, die Sie als Beleg teilen möchten. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Schließen Sie das Fenster des Brieftaschenanbieters, um fortzufahren.',
+  'Toegekend op {datum}': 'Vergeben am {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Zulässige Formate: PNG, JPEG, WebP und PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Wie lange ist dieser Nachweis gültig?',
+  'Aangeleverd op {datum}': 'Übermittelt am {datum}',
+  'Aanleveren': 'Einreichen',
+  'Afgekeurd': 'Abgelehnt',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Abgelehnt. Die prüfende Person hat keinen Grund angegeben.',
+  'Afgekeurd: {reden}': 'Abgelehnt: {reden}',
+  'Ander bestand': 'Andere Datei',
+  'Badge': 'Abzeichen',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Abzeichen erscheinen hier, sobald sie vergeben wurden.',
+  'Bewijs aanleveren': 'Nachweis einreichen',
+  'Bewijsstuk kiezen': 'Nachweisdatei auswählen',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Nachweisdateien erscheinen hier, sobald Sie etwas für ein Abzeichen einreichen.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Nachweisdateien sind Dateien, die Sie für ein Abzeichen einreichen. Die Übersicht zeigt Dateiname, Prüfsumme, Status und wer sie geprüft hat. Die Dateien selbst sind nicht in dieser Übersicht; eine prüfende Person kann sie einsehen.',
+  'Bezig met versturen…': 'Wird gesendet…',
+  'Datum kiezen': 'Datum auswählen',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Die Verbindung wurde getrennt. Sie können sich erneut verbinden.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Diese Funktion ist noch nicht verfügbar. ',
+  'Externe portefeuille': 'Externe Brieftasche',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Akzeptiert. Die Nachweisdatei wurde genehmigt.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Keine Nachweise in dieser Brieftasche gefunden.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Kein Teilnehmendenprofil für diese Organisation gefunden.',
+  'Geldig tot {datum}': 'Gültig bis {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Das Einreichen ist fehlgeschlagen. Bitte versuchen Sie es erneut.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Das technische Zugriffsprotokoll zeigt, wer Ihre Daten wann und zu welchem Zweck angesehen oder geändert hat.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Das Hochladen ist fehlgeschlagen. Bitte versuchen Sie es erneut.',
   'Registratie {nummer}': 'Registrierung {nummer}',
   '1 categorie gevonden': '1 Kategorie gefunden',
   '1 registratie': '1 Anmeldung',

@@ -1631,6 +1631,103 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Jūs vairs nekopīgosiet apliecinājumus no šī digitālā maka. ',
+  'U hebt nog geen badges.': 'Jums vēl nav nozīmīšu.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Varat izmantot pierādījumus no ārēja digitālā maka (piemēram, EduBadges) ',
+  'U levert bewijs aan voor: {badge}':
+      'Jūs iesniedzat pierādījumu nozīmītei: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Jūs iesniedzat šo apliecinošo dokumentu izvērtēšanai. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Lai pieteiktos, jūs novirzīs pie digitālā maka nodrošinātāja. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Jūsu fails tiks atzīmēts kā “iesniegts, vēl nav pārbaudīts” ',
+  'Verbinding maken…': 'Savienojas…',
+  'Verbinding verbreken': 'Atvienot',
+  'Verbinding verbreken?': 'Atvienot?',
+  'Verbonden met {provider}': 'Savienots ar {provider}',
+  'Verbreken': 'Atvienot',
+  'Verlopen': 'Derīguma termiņš beidzies',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Ja pieprasāt dzēšanu, jūsu apliecinošie dokumenti un ar tiem saistītie vērtējumi tiks dzēsti. Dzēšanas reģistra glabāšanas noteikumi parāda, vai spēkā esoša glabāšanas pienākuma dēļ kaut kas vēl tiks saglabāts.',
+  'Wordt verzonden zodra je online bent.':
+      'Tiks nosūtīts, tiklīdz atkal būsiet tiešsaistē.',
+  'portefeuille': 'digitālais maks',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Kopīgošanai atlasīto apliecinājumu skaits: {aantal}',
+  '{bytes} bytes': '{bytes} baiti',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Tiek izskatīts kopš {datum}. Parasti divu darbdienu laikā.',
+  'Kies een bestand om aan te leveren.': 'Izvēlieties iesniedzamo failu.',
+  'Kies wat u deelt': 'Izvēlieties, ko kopīgot',
+  'Kies welke credentials u deelt als bewijs:':
+      'Izvēlieties apliecinājumus, kurus kopīgosiet kā pierādījumu:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Neizdevās ielādēt jūsu pierādījumu. Mēģiniet vēlreiz.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Pievienojiet ārēju digitālo maku, lai izmantotu savas esošās nozīmītes un ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Atstājiet tukšu, ja pierādījumam nav derīguma termiņa. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Iesniedziet jaunu vai labotu failu.',
+  'Lever het bestand opnieuw aan.': 'Iesniedziet failu atkārtoti.',
+  'Mijn badges': 'Manas nozīmītes',
+  'Mijn bewijs': 'Mans pierādījums',
+  'Mijn bewijsstukken': 'Mani apliecinošie dokumenti',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Pēc pieteikšanās nākamajā darbībā izvēlēsieties, kurus apliecinājumus kopīgot. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Vēl nav iesniegts neviens apliecinošs dokuments.',
+  'Opgegeven': 'Iesniegts',
+  'Opnieuw verbinden': 'Savienot atkārtoti',
+  'Portefeuille koppelen': 'Pievienot digitālo maku',
+  'Portefeuille verbinden': 'Savienot digitālo maku',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Atlasiet apliecinājumus, kurus vēlaties kopīgot kā pierādījumu. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Lai turpinātu, aizveriet digitālā maka nodrošinātāja logu.',
+  'Toegekend op {datum}': 'Piešķirta {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Atļautie formāti: PNG, JPEG, WebP un PDF. ',
+  'Tot wanneer is dit bewijs geldig?':
+      'Līdz kuram datumam šis pierādījums ir derīgs?',
+  'Aangeleverd op {datum}': 'Iesniegts {datum}',
+  'Aanleveren': 'Iesniegt',
+  'Afgekeurd': 'Noraidīts',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Noraidīts. Vērtētājs nav norādījis iemeslu.',
+  'Afgekeurd: {reden}': 'Noraidīts: {reden}',
+  'Ander bestand': 'Cits fails',
+  'Badge': 'Nozīmīte',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Nozīmītes šeit parādīsies pēc to piešķiršanas.',
+  'Bewijs aanleveren': 'Iesniegt pierādījumu',
+  'Bewijsstuk kiezen': 'Izvēlēties apliecinošo dokumentu',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Apliecinošie dokumenti šeit parādīsies, tiklīdz nozīmītes saņemšanai būs kaut kas iesniegts.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Apliecinošie dokumenti ir faili, kurus iesniedzat nozīmītes saņemšanai. Pārskatā redzams faila nosaukums, kontrolsumma, statuss un vērtētājs. Pašu failu šajā pārskatā nav, taču vērtētājs var tos apskatīt.',
+  'Bezig met versturen…': 'Notiek sūtīšana…',
+  'Datum kiezen': 'Izvēlēties datumu',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Savienojums ir pārtraukts. Varat izveidot savienojumu atkārtoti.',
+  'Deze functie is nog niet beschikbaar. ': 'Šī funkcija vēl nav pieejama. ',
+  'Externe portefeuille': 'Ārējs digitālais maks',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Pieņemts. Apliecinošais dokuments ir apstiprināts.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Šajā digitālajā makā nav atrasts neviens apliecinājums.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Šai organizācijai nav atrasts dalībnieka profils.',
+  'Geldig tot {datum}': 'Derīgs līdz {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Iesniegšana neizdevās. Mēģiniet vēlreiz.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Tehniskajā piekļuves žurnālā redzams, kurš skatīja vai mainīja jūsu datus, kad un kādā nolūkā.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Augšupielāde neizdevās. Mēģiniet vēlreiz.',
   'Registratie {nummer}': 'Reģistrācija {nummer}',
   '1 categorie gevonden': 'Atrasta 1 kategorija',
   '1 registratie': '1 reģistrācija',

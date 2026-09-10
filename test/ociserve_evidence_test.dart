@@ -129,10 +129,7 @@ void main() {
         'issued_by': 'admin-1',
         'issued_at': '2026-01-15T10:00:00Z',
         'expires_at': '2028-01-15T10:00:00Z',
-        'snapshot': {
-          'title': 'Bedrijfshulpverlener',
-          'validity_months': 24,
-        },
+        'snapshot': {'title': 'Bedrijfshulpverlener', 'validity_months': 24},
         'created_at': '2026-01-15T10:00:00Z',
       });
       expect(qual.id, 'qual-1');
@@ -227,31 +224,51 @@ void main() {
 
   group('EvidenceUploadStatus', () {
     test('all statuses parse correctly', () {
-      expect(EvidenceUploadStatus.fromString('pending'),
-          EvidenceUploadStatus.pending);
-      expect(EvidenceUploadStatus.fromString('uploaded'),
-          EvidenceUploadStatus.uploaded);
-      expect(EvidenceUploadStatus.fromString('clean'),
-          EvidenceUploadStatus.clean);
-      expect(EvidenceUploadStatus.fromString('rejected'),
-          EvidenceUploadStatus.rejected);
-      expect(EvidenceUploadStatus.fromString('failed'),
-          EvidenceUploadStatus.failed);
+      expect(
+        EvidenceUploadStatus.fromString('pending'),
+        EvidenceUploadStatus.pending,
+      );
+      expect(
+        EvidenceUploadStatus.fromString('uploaded'),
+        EvidenceUploadStatus.uploaded,
+      );
+      expect(
+        EvidenceUploadStatus.fromString('clean'),
+        EvidenceUploadStatus.clean,
+      );
+      expect(
+        EvidenceUploadStatus.fromString('rejected'),
+        EvidenceUploadStatus.rejected,
+      );
+      expect(
+        EvidenceUploadStatus.fromString('failed'),
+        EvidenceUploadStatus.failed,
+      );
     });
   });
 
   group('QualificationStatus', () {
     test('all statuses parse correctly', () {
-      expect(QualificationStatus.fromString('pending'),
-          QualificationStatus.pending);
-      expect(QualificationStatus.fromString('approved'),
-          QualificationStatus.approved);
-      expect(QualificationStatus.fromString('rejected'),
-          QualificationStatus.rejected);
-      expect(QualificationStatus.fromString('revoked'),
-          QualificationStatus.revoked);
-      expect(QualificationStatus.fromString('expired'),
-          QualificationStatus.expired);
+      expect(
+        QualificationStatus.fromString('pending'),
+        QualificationStatus.pending,
+      );
+      expect(
+        QualificationStatus.fromString('approved'),
+        QualificationStatus.approved,
+      );
+      expect(
+        QualificationStatus.fromString('rejected'),
+        QualificationStatus.rejected,
+      );
+      expect(
+        QualificationStatus.fromString('revoked'),
+        QualificationStatus.revoked,
+      );
+      expect(
+        QualificationStatus.fromString('expired'),
+        QualificationStatus.expired,
+      );
     });
   });
 }

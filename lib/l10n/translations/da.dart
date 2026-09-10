@@ -1633,6 +1633,101 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Du deler derefter ikke længere legitimationsoplysninger fra denne tegnebog. ',
+  'U hebt nog geen badges.': 'Du har endnu ingen badges.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Du kan bruge bevis fra en ekstern tegnebog (såsom EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Du indsender bevis for: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Du indsender dette bevismateriale til vurdering. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Du viderestilles til tegnebogsudbyderen for at logge ind. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Din fil markeres som "indsendt, endnu ikke kontrolleret" ',
+  'Verbinding maken…': 'Opretter forbindelse…',
+  'Verbinding verbreken': 'Afbryd forbindelsen',
+  'Verbinding verbreken?': 'Afbryd forbindelsen?',
+  'Verbonden met {provider}': 'Forbundet med {provider}',
+  'Verbreken': 'Afbryd',
+  'Verlopen': 'Udløbet',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Hvis du anmoder om sletning, forsvinder dit bevismateriale og de tilhørende vurderinger. Opbevaringsregler i sletningsregistret viser, om noget resterer på grund af en løbende opbevaringspligt.',
+  'Wordt verzonden zodra je online bent.': 'Sendes, så snart du er online.',
+  'portefeuille': 'portefølje',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} legitimationsoplysning(er) valgt til deling',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Under behandling siden {datum}. Normalt inden for to arbejdsdage.',
+  'Kies een bestand om aan te leveren.': 'Vælg en fil, der skal indsendes.',
+  'Kies wat u deelt': 'Vælg, hvad du deler',
+  'Kies welke credentials u deelt als bewijs:':
+      'Vælg, hvilke legitimationsoplysninger du deler som bevis:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Kunne ikke indlæse dit bevis. Prøv igen.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Forbind en ekstern tegnebog for at bruge dine eksisterende badges og ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Lad feltet stå tomt, hvis beviset er gyldigt uden tidsbegrænsning. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Indsend en ny eller rettet fil.',
+  'Lever het bestand opnieuw aan.': 'Indsend filen igen.',
+  'Mijn badges': 'Mine badges',
+  'Mijn bewijs': 'Mit bevis',
+  'Mijn bewijsstukken': 'Mine bevisfiler',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Efter login vælger du i næste trin, hvilke legitimationsoplysninger du deler. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Der er endnu ikke indsendt bevismateriale.',
+  'Opgegeven': 'Indsendt',
+  'Opnieuw verbinden': 'Opret forbindelse igen',
+  'Portefeuille koppelen': 'Tilknyt portefølje',
+  'Portefeuille verbinden': 'Opret forbindelse til portefølje',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Vælg de legitimationsoplysninger, du vil dele som bevis. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Luk tegnebogsudbyderens vindue for at fortsætte.',
+  'Toegekend op {datum}': 'Tildelt den {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Tilladte formater: PNG, JPEG, WebP og PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Hvor længe er dette bevis gyldigt?',
+  'Aangeleverd op {datum}': 'Indsendt den {datum}',
+  'Aanleveren': 'Indsend',
+  'Afgekeurd': 'Afvist',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Afvist. Bedømmeren angav ingen årsag.',
+  'Afgekeurd: {reden}': 'Afvist: {reden}',
+  'Ander bestand': 'Anden fil',
+  'Badge': 'Badge',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Badges vises her, så snart de er tildelt.',
+  'Bewijs aanleveren': 'Indsend bevis',
+  'Bewijsstuk kiezen': 'Vælg bevisfil',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Beviser vises her, så snart du indsender noget til et badge.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Beviser er dokumenter, du indsender til et badge. Oversigten viser filnavn, kontrolsum, status og hvem der har bedømt det. Selve filerne er ikke i denne oversigt; en bedømmer kan se dem.',
+  'Bezig met versturen…': 'Sender…',
+  'Datum kiezen': 'Vælg dato',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Forbindelsen er afbrudt. Du kan forbinde igen.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Denne funktion er endnu ikke tilgængelig. ',
+  'Externe portefeuille': 'Ekstern portefølje',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Accepteret. Beviset er godkendt.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Ingen legitimationsoplysninger fundet i denne portefølje.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Ingen deltagerprofil fundet for denne organisation.',
+  'Geldig tot {datum}': 'Gyldig indtil {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Indsendelse mislykkedes. Prøv igen.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Den tekniske adgangslog viser, hvem der har set eller ændret dine data, hvornår og til hvilket formål.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Upload mislykkedes. Prøv igen.',
   'Registratie {nummer}': 'Registrering {nummer}',
   '1 categorie gevonden': '1 kategori fundet',
   '1 registratie': '1 tilmelding',

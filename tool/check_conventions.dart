@@ -587,6 +587,14 @@ const Map<String, int> classSizeBaseline = {
   // callout_marker_helpers.dart; de klasse houdt de loop en de guard.
   // +161 (#1860): click-to-place, _renumberReferences, hint tekst.
   'lib/widgets/editors/callout_editor.dart#_CalloutEditorDialogState': 1180,
+  // +90 (#2037–#2041): bewijs bij badges — vierde bestemming in de zijbalk,
+  // evidence-loading en evidence-body in een part-bestand. De logica hoort
+  // bij de dialog-state (dezelfde organisatie-selectie en loading-cyclus als
+  // de bestaande privacy-sectie), en verhuizen naar een eigen widget zou de
+  // state-fragmentatie tussen cursussen, voortgang, gegevens en bewijs
+  // inconsistent maken.
+  'lib/widgets/dialogs/ociserve_courses_dialog.dart#_OciServeCoursesDialogState':
+      1090,
 };
 
 final _print = RegExp(r'(?<![\w.])print\(');

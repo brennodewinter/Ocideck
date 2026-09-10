@@ -145,15 +145,17 @@ class _OciServePortfolioLinkState extends State<OciServePortfolioLink> {
       children: [
         Row(
           children: [
-            Icon(Icons.link_outlined, color: theme.colorScheme.primary),
+            Icon(Icons.link_outlined, color: palette.accentInk),
             const SizedBox(width: 8),
             Text(
-              l10n.d('Verbonden met {provider}').replaceAll(
-                '{provider}',
-                widget.connection.providerName.isEmpty
-                    ? l10n.d('portefeuille')
-                    : widget.connection.providerName,
-              ),
+              l10n
+                  .d('Verbonden met {provider}')
+                  .replaceAll(
+                    '{provider}',
+                    widget.connection.providerName.isEmpty
+                        ? l10n.d('portefeuille')
+                        : widget.connection.providerName,
+                  ),
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -187,12 +189,11 @@ class _OciServePortfolioLinkState extends State<OciServePortfolioLink> {
           if (selected.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
-              l10n.d('{aantal} credential(s) geselecteerd om te delen').replaceAll(
-                '{aantal}',
-                selected.length.toString(),
-              ),
+              l10n
+                  .d('{aantal} credential(s) geselecteerd om te delen')
+                  .replaceAll('{aantal}', selected.length.toString()),
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.primary,
+                color: palette.accentInk,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -228,7 +229,10 @@ class _OciServePortfolioLinkState extends State<OciServePortfolioLink> {
               Text(
                 l10n
                     .d('Geldig tot {datum}')
-                    .replaceAll('{datum}', locale.formatFullDate(cred.expiresAt!)),
+                    .replaceAll(
+                      '{datum}',
+                      locale.formatFullDate(cred.expiresAt!),
+                    ),
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: cred.isActive
                       ? palette.accentInk.withValues(alpha: 0.6)
@@ -238,7 +242,9 @@ class _OciServePortfolioLinkState extends State<OciServePortfolioLink> {
           ],
         ),
         secondary: Icon(
-          cred.isActive ? Icons.verified_outlined : Icons.warning_amber_outlined,
+          cred.isActive
+              ? Icons.verified_outlined
+              : Icons.warning_amber_outlined,
           color: cred.isActive
               ? theme.colorScheme.primary
               : theme.colorScheme.error,

@@ -1649,6 +1649,103 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Nu mai partajați credențiale din acest portofoliu. ',
+  'U hebt nog geen badges.': 'Nu aveți încă insigne.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Puteți partaja dovezi dintr-un portofoliu extern (cum ar fi EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Trimiteți dovezi pentru: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Trimiteți această dovadă pentru evaluare. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Veți fi redirecționat către furnizorul portofoliului pentru autentificare. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Fișierul dvs. va fi marcat „declarat, încă neverificat” ',
+  'Verbinding maken…': 'Se conectează…',
+  'Verbinding verbreken': 'Deconectare',
+  'Verbinding verbreken?': 'Deconectați?',
+  'Verbonden met {provider}': 'Conectat la {provider}',
+  'Verbreken': 'Deconectare',
+  'Verlopen': 'Expirat',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Dacă solicitați ștergerea, dovezile dvs. și evaluările aferente dispar. Regulile de păstrare din registrul ștergerilor arată dacă rămâne ceva pentru o obligație de păstrare în curs.',
+  'Wordt verzonden zodra je online bent.':
+      'Va fi trimis imediat ce sunteți online.',
+  'portefeuille': 'portofoliu',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} credențiale selectate pentru partajare',
+  '{bytes} bytes': '{bytes} octeți',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'În curs de procesare din {datum}. De obicei, în două zile lucrătoare.',
+  'Kies een bestand om aan te leveren.': 'Alegeți un fișier de trimis.',
+  'Kies wat u deelt': 'Alegeți ce partajați',
+  'Kies welke credentials u deelt als bewijs:':
+      'Alegeți credențialele pe care le partajați ca dovadă:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Dovada dvs. nu a putut fi încărcată. Încercați din nou.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Conectați un portofoliu extern pentru a partaja insignele existente și ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Lăsați gol dacă dovada este valabilă nelimitat. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Trimiteți un fișier nou sau corectat.',
+  'Lever het bestand opnieuw aan.': 'Trimiteți din nou fișierul.',
+  'Mijn badges': 'Insignele mele',
+  'Mijn bewijs': 'Dovezile mele',
+  'Mijn bewijsstukken': 'Documentele mele justificative',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'După autentificare, la pasul următor alegeți credențialele pe care le partajați. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Nu au fost trimise încă documente justificative.',
+  'Opgegeven': 'Declarat',
+  'Opnieuw verbinden': 'Reconectare',
+  'Portefeuille koppelen': 'Asociați portofoliul',
+  'Portefeuille verbinden': 'Conectați portofoliul',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Selectați credențialele pe care doriți să le partajați ca dovadă. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Închideți fereastra furnizorului portofoliului pentru a continua.',
+  'Toegekend op {datum}': 'Acordat la {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Formate permise: PNG, JPEG, WebP și PDF. ',
+  'Tot wanneer is dit bewijs geldig?':
+      'Până când este valabilă această dovadă?',
+  'Aangeleverd op {datum}': 'Trimis la {datum}',
+  'Aanleveren': 'Trimiteți',
+  'Afgekeurd': 'Respins',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Respins. Evaluatorul nu a indicat un motiv.',
+  'Afgekeurd: {reden}': 'Respins: {reden}',
+  'Ander bestand': 'Alt fișier',
+  'Badge': 'Insignă',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Insignele apar aici imediat ce sunt acordate.',
+  'Bewijs aanleveren': 'Trimiteți dovada',
+  'Bewijsstuk kiezen': 'Alegeți documentul justificativ',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Documentele justificative apar aici de îndată ce trimiteți ceva pentru o insignă.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Documentele justificative sunt fișiere pe care le trimiteți pentru o insignă. Prezentarea arată numele fișierului, codul de verificare, starea și cine l-a evaluat. Fișierele nu se află în această prezentare; un evaluator le poate consulta.',
+  'Bezig met versturen…': 'Se trimite…',
+  'Datum kiezen': 'Alegeți data',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Conexiunea a fost întreruptă. Vă puteți reconecta.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Această funcție nu este încă disponibilă. ',
+  'Externe portefeuille': 'Portofoliu extern',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Acceptat. Documentul justificativ a fost aprobat.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Nu s-au găsit credențiale în acest portofoliu.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Nu s-a găsit un profil de participant pentru această organizație.',
+  'Geldig tot {datum}': 'Valabil până la {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Trimiterea a eșuat. Încercați din nou.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Jurnalul tehnic de acces arată cine v-a consultat sau modificat datele, când și în ce scop.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Încărcarea a eșuat. Încercați din nou.',
   'Registratie {nummer}': 'Înregistrare {nummer}',
   '1 categorie gevonden': '1 categorie găsită',
   '1 registratie': '1 înregistrare',

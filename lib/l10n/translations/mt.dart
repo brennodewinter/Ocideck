@@ -1651,6 +1651,103 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Ma tibqax taqsam kredenzjali minn dan il-portafoll. ',
+  'U hebt nog geen badges.': 'Għad m’għandek l-ebda badge.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Tista’ tuża evidenza minn portafoll estern (bħal EduBadges) ',
+  'U levert bewijs aan voor: {badge}':
+      'Qed tissottometti evidenza għal: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Qed tissottometti dan il-fajl ta’ evidenza għall-valutazzjoni. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Se tiġi ridirett lejn il-fornitur tal-portafoll biex tilloggja. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Il-fajl tiegħek se jiġi mmarkat bħala “sottomess, għadu mhux ivverifikat” ',
+  'Verbinding maken…': 'Qed issir il-konnessjoni…',
+  'Verbinding verbreken': 'Skonnettja',
+  'Verbinding verbreken?': 'Skonnettja?',
+  'Verbonden met {provider}': 'Konness ma’ {provider}',
+  'Verbreken': 'Skonnettja',
+  'Verlopen': 'Skadut',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Jekk titlob it-tħassir, il-fajls ta’ evidenza tiegħek u l-valutazzjonijiet assoċjati jitħassru. Ir-regoli taż-żamma fir-reġistru tat-tħassir juru jekk jibqax xi fdal minħabba obbligu taż-żamma li għadu fis-seħħ.',
+  'Wordt verzonden zodra je online bent.':
+      'Jintbagħat malli terġa’ tkun online.',
+  'portefeuille': 'portafoll',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} kredenzjali magħżula għall-kondiviżjoni',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Pendenti minn {datum}. Normalment fi żmien jumejn tax-xogħol.',
+  'Kies een bestand om aan te leveren.': 'Agħżel fajl biex tissottomettih.',
+  'Kies wat u deelt': 'Agħżel x’taqsam',
+  'Kies welke credentials u deelt als bewijs:':
+      'Agħżel liema kredenzjali taqsam bħala evidenza:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Ma setgħetx titgħabba l-evidenza tiegħek. Erġa’ pprova.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Qabbad portafoll estern biex tuża l-badges eżistenti tiegħek u ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Ħallih vojt jekk l-evidenza tibqa’ valida għal dejjem. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Issottometti fajl ġdid jew ikkoreġut.',
+  'Lever het bestand opnieuw aan.': 'Erġa’ ssottometti l-fajl.',
+  'Mijn badges': 'Il-badges tiegħi',
+  'Mijn bewijs': 'L-evidenza tiegħi',
+  'Mijn bewijsstukken': 'Il-fajls ta’ evidenza tiegħi',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Wara li tilloggja, fil-pass li jmiss tagħżel liema kredenzjali taqsam. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Għadhom ma ġew sottomessi l-ebda fajls ta’ evidenza.',
+  'Opgegeven': 'Sottomess',
+  'Opnieuw verbinden': 'Erġa’ qabbad',
+  'Portefeuille koppelen': 'Qabbad portafoll',
+  'Portefeuille verbinden': 'Qabbad portafoll',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Agħżel il-kredenzjali li tixtieq taqsam bħala evidenza. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Agħlaq it-tieqa tal-fornitur tal-portafoll biex tkompli.',
+  'Toegekend op {datum}': 'Mogħti nhar {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Formati permessi: PNG, JPEG, WebP u PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Sa meta hija valida din l-evidenza?',
+  'Aangeleverd op {datum}': 'Sottomess nhar {datum}',
+  'Aanleveren': 'Issottometti',
+  'Afgekeurd': 'Miċħud',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Miċħud. L-evalwatur ma tax raġuni.',
+  'Afgekeurd: {reden}': 'Miċħud: {reden}',
+  'Ander bestand': 'Fajl ieħor',
+  'Badge': 'Badge',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Il-badges jidhru hawn malli jingħataw.',
+  'Bewijs aanleveren': 'Issottometti evidenza',
+  'Bewijsstuk kiezen': 'Agħżel fajl ta’ evidenza',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Il-fajls ta’ evidenza jidhru hawn malli tissottometti xi ħaġa għal badge.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Il-fajls ta’ evidenza huma dokumenti li tissottometti għal badge. Il-ħarsa ġenerali turi l-isem tal-fajl, il-kodiċi tal-kontroll, l-istatus u min evalwah. Il-fajls infushom mhumiex f’din il-ħarsa ġenerali; evalwatur jista’ jarahom.',
+  'Bezig met versturen…': 'Qed jintbagħat…',
+  'Datum kiezen': 'Agħżel data',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Il-konnessjoni nqatgħet. Tista’ terġa’ tqabbad.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Din il-funzjoni għadha mhix disponibbli. ',
+  'Externe portefeuille': 'Portafoll estern',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Aċċettat. Il-fajl ta’ evidenza ġie approvat.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Ma nstabu l-ebda kredenzjali f’dan il-portafoll.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Ma nstab l-ebda profil ta’ parteċipant għal din l-organizzazzjoni.',
+  'Geldig tot {datum}': 'Validu sa {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Is-sottomissjoni falliet. Erġa’ pprova.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Ir-reġistru tekniku tal-aċċess juri min ra jew biddel id-data tiegħek, meta u għal liema skop.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Il-fajl ma setax jittella’. Erġa’ pprova.',
   'Registratie {nummer}': 'Reġistrazzjoni {nummer}',
   '1 categorie gevonden': 'kategorija 1 misjuba',
   '1 registratie': '1 reġistrazzjoni',

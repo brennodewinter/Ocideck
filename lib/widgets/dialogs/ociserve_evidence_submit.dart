@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
@@ -53,7 +52,7 @@ class OciServeEvidenceSubmit extends ConsumerStatefulWidget {
 class _OciServeEvidenceSubmitState
     extends ConsumerState<OciServeEvidenceSubmit> {
   int _step = 0;
-  File? _file;
+  String _fileName = '';
   Uint8List? _fileBytes;
   String? _fileError;
   DateTime? _validUntil;
@@ -96,7 +95,7 @@ class _OciServeEvidenceSubmitState
         return;
       }
       setState(() {
-        _file = File(file.path ?? '');
+        _fileName = file.name;
         _fileBytes = Uint8List.fromList(bytes);
         _fileError = null;
       });
@@ -108,19 +107,19 @@ class _OciServeEvidenceSubmitState
 
   Future<void> _submit() async {
     final bytes = _fileBytes;
-    if (bytes == null || _file == null) return;
+    if (bytes == null || _fileName.isEmpty) return;
     setState(() {
       _submitting = true;
       _submitError = null;
     });
     try {
       final notifier = ref.read(ociServeProvider.notifier);
-      final mimeType = _detectMimeType(_file!.path.split('/').last);
+      final mimeType = _detectMimeType(_fileName);
       final hash = sha256.convert(bytes).toString();
       final slot = await notifier.requestEvidenceSlot(
         organizationId: widget.organizationId,
         request: EvidenceUploadRequest(
-          filename: _file!.path.split('/').last,
+          filename: _fileName,
           declaredType: mimeType,
           declaredSize: bytes.length,
           declaredHash: hash,
@@ -158,7 +157,7 @@ class _OciServeEvidenceSubmitState
           currentStep: _step,
           onStepContinue: () {
             if (_step < 3) {
-              if (_step == 1 && _file == null) {
+              if (_step == 1 && _fileName.isEmpty) {
                 setState(() => _fileError = 'no_file');
                 return;
               }
@@ -186,7 +185,7 @@ class _OciServeEvidenceSubmitState
               title: Text(l10n.d('Bestand')),
               content: _stepFile(l10n, theme),
               isActive: _step >= 1,
-              state: _file != null && _step > 1
+              state: _fileName.isNotEmpty && _step > 1
                   ? StepState.complete
                   : _step == 1
                   ? StepState.indexed
@@ -210,10 +209,7 @@ class _OciServeEvidenceSubmitState
     );
   }
 
-  Widget _stepControls(
-    BuildContext context,
-    ControlsDetails details,
-  ) {
+  Widget _stepControls(BuildContext context, ControlsDetails details) {
     final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.only(top: 16),
@@ -224,8 +220,8 @@ class _OciServeEvidenceSubmitState
             child: Text(
               _step == 3
                   ? (_submitting
-                      ? l10n.d('Bezig met versturen…')
-                      : l10n.d('Aanleveren'))
+                        ? l10n.d('Bezig met versturen…')
+                        : l10n.d('Aanleveren'))
                   : l10n.d('Volgende'),
             ),
           ),
@@ -244,10 +240,9 @@ class _OciServeEvidenceSubmitState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.d('U levert bewijs aan voor: {badge}').replaceAll(
-            '{badge}',
-            widget.badgeTitle,
-          ),
+          l10n
+              .d('U levert bewijs aan voor: {badge}')
+              .replaceAll('{badge}', widget.badgeTitle),
           style: theme.textTheme.bodyMedium,
         ),
         const SizedBox(height: 12),
@@ -279,7 +274,7 @@ class _OciServeEvidenceSubmitState
         ],
       );
     }
-    if (_file == null) {
+    if (_fileName.isEmpty) {
       return OutlinedButton.icon(
         onPressed: _pickFile,
         icon: const Icon(Icons.upload_file_outlined),
@@ -292,14 +287,14 @@ class _OciServeEvidenceSubmitState
         Row(
           children: [
             Icon(
-              _file!.path.endsWith('.pdf')
+              _fileName.endsWith('.pdf')
                   ? Icons.picture_as_pdf_outlined
                   : Icons.image_outlined,
             ),
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                _file!.path.split('/').last,
+                _fileName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -339,21 +334,20 @@ class _OciServeEvidenceSubmitState
               onPressed: () async {
                 final picked = await showDatePicker(
                   context: context,
-                  initialDate: _validUntil ?? DateTime.now().add(
-                    const Duration(days: 365 * 2),
-                  ),
+                  initialDate:
+                      _validUntil ??
+                      DateTime.now().add(const Duration(days: 365 * 2)),
                   firstDate: DateTime.now(),
-                  lastDate: DateTime.now().add(
-                    const Duration(days: 365 * 20),
-                  ),
+                  lastDate: DateTime.now().add(const Duration(days: 365 * 20)),
                 );
                 if (picked != null) setState(() => _validUntil = picked);
               },
               icon: const Icon(Icons.event_outlined),
               label: Text(
                 _validUntil != null
-                    ? MaterialLocalizations.of(context)
-                        .formatFullDate(_validUntil!)
+                    ? MaterialLocalizations.of(
+                        context,
+                      ).formatFullDate(_validUntil!)
                     : l10n.d('Datum kiezen'),
               ),
             ),

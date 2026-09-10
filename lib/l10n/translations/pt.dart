@@ -1661,6 +1661,102 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Deixa então de partilhar credenciais deste portefólio. ',
+  'U hebt nog geen badges.': 'Ainda não tem crachás.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Pode partilhar provas de um portefólio externo (como o EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Está a enviar prova para: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Está a enviar esta prova para avaliação. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Será encaminhado para o fornecedor do portefólio para iniciar sessão. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'O seu ficheiro será marcado como «declarado, ainda não verificado» ',
+  'Verbinding maken…': 'A ligar…',
+  'Verbinding verbreken': 'Desligar',
+  'Verbinding verbreken?': 'Desligar?',
+  'Verbonden met {provider}': 'Ligado a {provider}',
+  'Verbreken': 'Desligar',
+  'Verlopen': 'Expirado',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Se pedir a eliminação, as suas provas e as avaliações associadas desaparecem. As regras de conservação no registo de eliminação indicam se permanece algum dado devido a uma obrigação de conservação em curso.',
+  'Wordt verzonden zodra je online bent.':
+      'Será enviado assim que estiver online.',
+  'portefeuille': 'portefólio',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} credencial(is) selecionada(s) para partilhar',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Em análise desde {datum}. Normalmente demora até dois dias úteis.',
+  'Kies een bestand om aan te leveren.': 'Escolha um ficheiro para enviar.',
+  'Kies wat u deelt': 'Escolha o que partilha',
+  'Kies welke credentials u deelt als bewijs:':
+      'Escolha as credenciais que partilha como prova:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Não foi possível carregar a sua prova. Tente novamente.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Ligue um portefólio externo para partilhar os seus crachás existentes e ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Deixe em branco se a prova tiver validade ilimitada. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Envie um ficheiro novo ou corrigido.',
+  'Lever het bestand opnieuw aan.': 'Envie o ficheiro novamente.',
+  'Mijn badges': 'Os meus crachás',
+  'Mijn bewijs': 'As minhas provas',
+  'Mijn bewijsstukken': 'Os meus documentos comprovativos',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Depois de iniciar sessão, escolherá no passo seguinte as credenciais que partilha. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Ainda não foram enviados documentos comprovativos.',
+  'Opgegeven': 'Declarado',
+  'Opnieuw verbinden': 'Ligar novamente',
+  'Portefeuille koppelen': 'Associar portefólio',
+  'Portefeuille verbinden': 'Ligar portefólio',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Selecione as credenciais que pretende partilhar como prova. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Feche a janela do fornecedor do portefólio para continuar.',
+  'Toegekend op {datum}': 'Atribuído em {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Formatos permitidos: PNG, JPEG, WebP e PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Até quando esta prova é válida?',
+  'Aangeleverd op {datum}': 'Enviado em {datum}',
+  'Aanleveren': 'Enviar',
+  'Afgekeurd': 'Rejeitado',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Rejeitado. O avaliador não forneceu uma razão.',
+  'Afgekeurd: {reden}': 'Rejeitado: {reden}',
+  'Ander bestand': 'Outro ficheiro',
+  'Badge': 'Crachá',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Os crachás aparecem aqui assim que são atribuídos.',
+  'Bewijs aanleveren': 'Enviar prova',
+  'Bewijsstuk kiezen': 'Escolher ficheiro de prova',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'As provas aparecem aqui quando envia algo para um crachá.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'As provas são documentos que envia para um crachá. A visão geral mostra o nome do ficheiro, a soma de verificação, o estado e quem o avaliou. Os ficheiros em si não estão nesta visão geral; um avaliador pode consultá-los.',
+  'Bezig met versturen…': 'A enviar…',
+  'Datum kiezen': 'Escolher data',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'A ligação foi interrompida. Pode voltar a ligar.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Esta função ainda não está disponível. ',
+  'Externe portefeuille': 'Portefólio externo',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Aceite. A prova foi aprovada.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Nenhuma credencial encontrada neste portefólio.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Nenhum perfil de participante encontrado para esta organização.',
+  'Geldig tot {datum}': 'Válido até {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'O envio falhou. Tente novamente.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'O registo de acesso técnico mostra quem visualizou ou modificou os seus dados, quando e com que finalidade.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'O carregamento falhou. Tente novamente.',
   'Registratie {nummer}': 'Registro {nummer}',
   '1 categorie gevonden': '1 categoria encontrada',
   '1 registratie': '1 inscrição',

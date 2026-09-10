@@ -1626,6 +1626,101 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Te ei jaga sellest portfellist enam mandaate. ',
+  'U hebt nog geen badges.': 'Teil ei ole veel märke.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Võite jagada tõendeid välisest portfellist (näiteks EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Esitate tõendi märgi kohta: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Esitate selle tõendi hindamiseks. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Sisselogimiseks suunatakse teid portfellipakkuja juurde. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Teie fail märgitakse kui „esitatud, veel kontrollimata” ',
+  'Verbinding maken…': 'Ühendamine…',
+  'Verbinding verbreken': 'Katkesta ühendus',
+  'Verbinding verbreken?': 'Kas katkestada ühendus?',
+  'Verbonden met {provider}': 'Ühendatud teenusega {provider}',
+  'Verbreken': 'Katkesta',
+  'Verlopen': 'Aegunud',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Kui taotlete kustutamist, kaovad teie tõendid ja seotud hinnangud. Kustutamisregistri säilitamisreeglid näitavad, kas kehtiva säilitamiskohustuse tõttu jääb midagi alles.',
+  'Wordt verzonden zodra je online bent.': 'Saadetakse kohe, kui olete võrgus.',
+  'portefeuille': 'portfell',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Jagamiseks valiti {aantal} mandaati',
+  '{bytes} bytes': '{bytes} baiti',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Töötlemisel alates {datum}. Tavaliselt kahe tööpäeva jooksul.',
+  'Kies een bestand om aan te leveren.': 'Valige esitamiseks fail.',
+  'Kies wat u deelt': 'Valige, mida jagate',
+  'Kies welke credentials u deelt als bewijs:':
+      'Valige mandaadid, mida jagate tõendina:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Teie tõendit ei õnnestunud laadida. Proovige uuesti.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Ühendage väline portfell, et jagada olemasolevaid märke ja ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Jätke tühjaks, kui tõend kehtib piiramatult. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Esitage uus või parandatud fail.',
+  'Lever het bestand opnieuw aan.': 'Esitage fail uuesti.',
+  'Mijn badges': 'Minu märgid',
+  'Mijn bewijs': 'Minu tõendid',
+  'Mijn bewijsstukken': 'Minu tõendavad dokumendid',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Pärast sisselogimist valite järgmises etapis, milliseid mandaate jagate. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Tõendavaid dokumente pole veel esitatud.',
+  'Opgegeven': 'Esitatud',
+  'Opnieuw verbinden': 'Ühenda uuesti',
+  'Portefeuille koppelen': 'Seo portfell',
+  'Portefeuille verbinden': 'Ühenda portfell',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Valige mandaadid, mida soovite tõendina jagada. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Jätkamiseks sulgege portfellipakkuja aken.',
+  'Toegekend op {datum}': 'Antud {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Lubatud vormingud: PNG, JPEG, WebP ja PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Mis kuupäevani see tõend kehtib?',
+  'Aangeleverd op {datum}': 'Esitatud {datum}',
+  'Aanleveren': 'Esita',
+  'Afgekeurd': 'Tagasi lükatud',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Tagasi lükatud. Hindaja ei esitanud põhjust.',
+  'Afgekeurd: {reden}': 'Tagasi lükatud: {reden}',
+  'Ander bestand': 'Muu fail',
+  'Badge': 'Märk',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Märgid ilmuvad siia kohe pärast nende andmist.',
+  'Bewijs aanleveren': 'Esita tõend',
+  'Bewijsstuk kiezen': 'Vali tõend',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Tõendavad dokumendid ilmuvad siia, kui esitate midagi märgi jaoks.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Tõendavad dokumendid on failid, mille esitate märgi jaoks. Ülevaade näitab faili nime, kontrollkoodi, olekut ja seda, kes faili hindas. Failid ise selles ülevaates ei ole; hindaja saab neid siiski vaadata.',
+  'Bezig met versturen…': 'Saatmine…',
+  'Datum kiezen': 'Vali kuupäev',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Ühendus katkes. Saate uuesti ühenduda.',
+  'Deze functie is nog niet beschikbaar. ':
+      'See funktsioon ei ole veel saadaval. ',
+  'Externe portefeuille': 'Väline portfell',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Vastu võetud. Tõend kiideti heaks.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Selles portfellis ei leitud mandaate.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Selle organisatsiooni jaoks ei leitud osaleja profiili.',
+  'Geldig tot {datum}': 'Kehtib kuni {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Esitamine ebaõnnestus. Proovige uuesti.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Tehniline juurdepääsulogi näitab, kes teie andmeid vaatas või muutis, millal ja mis eesmärgil.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Üleslaadimine ebaõnnestus. Proovige uuesti.',
   'Registratie {nummer}': 'Registreerimine {nummer}',
   '1 categorie gevonden': 'Leiti 1 kategooria',
   '1 registratie': '1 registreerimine',

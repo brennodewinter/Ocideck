@@ -65,8 +65,7 @@ const gatewayRoutes = <GatewayRoute>[
   ),
   GatewayRoute(
     method: 'GET',
-    path:
-        '/api/v1/organizations/{}/me/course-versions/{}/lessons/{}/package',
+    path: '/api/v1/organizations/{}/me/course-versions/{}/lessons/{}/package',
     // Binary download — no JSON fields to check.
   ),
   GatewayRoute(
@@ -140,7 +139,8 @@ const gatewayRoutes = <GatewayRoute>[
 ];
 
 /// Normalise a path so {param_name} becomes {} for comparison.
-String normalisePath(String path) => path.replaceAll(RegExp(r'\{[^}]+\}'), '{}');
+String normalisePath(String path) =>
+    path.replaceAll(RegExp(r'\{[^}]+\}'), '{}');
 
 /// Resolve a $ref like '#/components/schemas/Foo' to the actual node.
 dynamic resolveRef(dynamic node, String ref) {
@@ -218,7 +218,8 @@ bool schemaHasField(Map<String, dynamic>? schema, String dotPath) {
 
 void main() {
   late final Map<String, dynamic> spec;
-  late final Map<String, Map<String, dynamic>> specPaths; // normalised path → {method: operation}
+  late final Map<String, Map<String, dynamic>>
+  specPaths; // normalised path → {method: operation}
 
   setUpAll(() {
     final file = File('test/fixtures/ociserve_openapi.yaml');
@@ -242,15 +243,24 @@ void main() {
   });
 
   test('pinned OpenAPI spec exists and is non-empty', () {
-    expect(spec['openapi'], isNotNull,
-        reason: 'test/fixtures/ociserve_openapi.yaml is not a valid OpenAPI doc');
-    expect((spec['paths'] as Map).isNotEmpty, true,
-        reason: 'pinned spec has no paths');
+    expect(
+      spec['openapi'],
+      isNotNull,
+      reason: 'test/fixtures/ociserve_openapi.yaml is not a valid OpenAPI doc',
+    );
+    expect(
+      (spec['paths'] as Map).isNotEmpty,
+      true,
+      reason: 'pinned spec has no paths',
+    );
   });
 
   test('pinned OciServe commit SHA is recorded', () {
-    expect(pinnedOciServeCommit, hasLength(40),
-        reason: 'The OciServe commit SHA must be a full 40-char git SHA');
+    expect(
+      pinnedOciServeCommit,
+      hasLength(40),
+      reason: 'The OciServe commit SHA must be a full 40-char git SHA',
+    );
     expect(pinnedOciServeCommit, matches(RegExp(r'^[0-9a-f]{40}$')));
   });
 
@@ -259,12 +269,18 @@ void main() {
       test('${route.method} ${route.path}', () {
         final normalised = normalisePath(route.path);
         final methods = specPaths[normalised];
-        expect(methods, isNotNull,
-            reason:
-                'Path $normalised not found in pinned spec — route removed or renamed in OciServe');
-        expect(methods!.containsKey(route.method), true,
-            reason:
-                'Method ${route.method} not found on $normalised in pinned spec');
+        expect(
+          methods,
+          isNotNull,
+          reason:
+              'Path $normalised not found in pinned spec — route removed or renamed in OciServe',
+        );
+        expect(
+          methods!.containsKey(route.method),
+          true,
+          reason:
+              'Method ${route.method} not found on $normalised in pinned spec',
+        );
       });
     }
   });
@@ -275,15 +291,21 @@ void main() {
 
       test('${route.method} ${route.path}', () {
         final normalised = normalisePath(route.path);
-        final operation = specPaths[normalised]?[route.method]
-            as Map<String, dynamic>?;
-        expect(operation, isNotNull,
-            reason: 'Operation not found for $normalised ${route.method}');
+        final operation =
+            specPaths[normalised]?[route.method] as Map<String, dynamic>?;
+        expect(
+          operation,
+          isNotNull,
+          reason: 'Operation not found for $normalised ${route.method}',
+        );
 
         final schema = responseSchemaFor(operation!, spec);
-        expect(schema, isNotNull,
-            reason:
-                'No JSON response schema found for $normalised ${route.method}');
+        expect(
+          schema,
+          isNotNull,
+          reason:
+              'No JSON response schema found for $normalised ${route.method}',
+        );
 
         for (final field in route.responseFields) {
           expect(
@@ -303,8 +325,11 @@ void main() {
     // forgets to add it here, the test count won't match. We can't
     // automatically count _api() calls in a Dart test, but we can at least
     // verify the list is non-empty and covers the known routes.
-    expect(gatewayRoutes.length, greaterThanOrEqualTo(16),
-        reason: 'The gateway calls at least 16 routes; the list must cover them');
+    expect(
+      gatewayRoutes.length,
+      greaterThanOrEqualTo(16),
+      reason: 'The gateway calls at least 16 routes; the list must cover them',
+    );
   });
 }
 

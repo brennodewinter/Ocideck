@@ -15,15 +15,14 @@ enum EvidenceUploadStatus {
   rejected,
   failed;
 
-  static EvidenceUploadStatus fromString(String value) =>
-      switch (value) {
-        'pending' => EvidenceUploadStatus.pending,
-        'uploaded' => EvidenceUploadStatus.uploaded,
-        'clean' => EvidenceUploadStatus.clean,
-        'rejected' => EvidenceUploadStatus.rejected,
-        'failed' => EvidenceUploadStatus.failed,
-        _ => EvidenceUploadStatus.pending,
-      };
+  static EvidenceUploadStatus fromString(String value) => switch (value) {
+    'pending' => EvidenceUploadStatus.pending,
+    'uploaded' => EvidenceUploadStatus.uploaded,
+    'clean' => EvidenceUploadStatus.clean,
+    'rejected' => EvidenceUploadStatus.rejected,
+    'failed' => EvidenceUploadStatus.failed,
+    _ => EvidenceUploadStatus.pending,
+  };
 }
 
 /// One evidence upload slot in the quarantine protocol.
@@ -91,12 +90,8 @@ class EvidenceUpload {
       createdAt:
           DateTime.tryParse(json['created_at'] as String? ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
-      completedAt: DateTime.tryParse(
-        json['completed_at'] as String? ?? '',
-      ),
-      verifiedAt: DateTime.tryParse(
-        json['verified_at'] as String? ?? '',
-      ),
+      completedAt: DateTime.tryParse(json['completed_at'] as String? ?? ''),
+      verifiedAt: DateTime.tryParse(json['verified_at'] as String? ?? ''),
     );
   }
 }
@@ -147,15 +142,14 @@ enum QualificationStatus {
   revoked,
   expired;
 
-  static QualificationStatus fromString(String value) =>
-      switch (value) {
-        'pending' => QualificationStatus.pending,
-        'approved' => QualificationStatus.approved,
-        'rejected' => QualificationStatus.rejected,
-        'revoked' => QualificationStatus.revoked,
-        'expired' => QualificationStatus.expired,
-        _ => QualificationStatus.pending,
-      };
+  static QualificationStatus fromString(String value) => switch (value) {
+    'pending' => QualificationStatus.pending,
+    'approved' => QualificationStatus.approved,
+    'rejected' => QualificationStatus.rejected,
+    'revoked' => QualificationStatus.revoked,
+    'expired' => QualificationStatus.expired,
+    _ => QualificationStatus.pending,
+  };
 }
 
 /// An issued qualification (badge) for a participant.
@@ -193,12 +187,10 @@ class OciServeQualification {
       (expiresAt == null || expiresAt!.isAfter(DateTime.now()));
 
   /// The skill title from the immutable snapshot, if present.
-  String get skillTitle =>
-      (snapshot['title'] as String? ?? '').trim();
+  String get skillTitle => (snapshot['title'] as String? ?? '').trim();
 
   /// The validity months from the snapshot, if present.
-  int get validityMonths =>
-      (snapshot['validity_months'] as num?)?.toInt() ?? 0;
+  int get validityMonths => (snapshot['validity_months'] as num?)?.toInt() ?? 0;
 
   factory OciServeQualification.fromJson(Map<String, Object?> json) {
     final id = (json['id'] as String? ?? '').trim();
@@ -214,9 +206,7 @@ class OciServeQualification {
       issuedAt:
           DateTime.tryParse(json['issued_at'] as String? ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0, isUtc: true),
-      expiresAt: DateTime.tryParse(
-        json['expires_at'] as String? ?? '',
-      ),
+      expiresAt: DateTime.tryParse(json['expires_at'] as String? ?? ''),
       snapshot: json['snapshot'] is Map
           ? Map<String, Object?>.from(json['snapshot']! as Map)
           : const {},
@@ -232,10 +222,7 @@ class OciServeQualification {
 /// Maps to the items in `SkillDefinition.requirements`.
 @immutable
 class OciServeSkillRequirement {
-  const OciServeSkillRequirement({
-    required this.courseId,
-    required this.title,
-  });
+  const OciServeSkillRequirement({required this.courseId, required this.title});
 
   final String courseId;
   final String title;
@@ -279,16 +266,14 @@ class OciServeSkillDefinition {
       ),
       validityMonths: (json['validity_months'] as num?)?.toInt() ?? 0,
       requirements: requirementsRaw
-          .map((item) => OciServeSkillRequirement.fromJson(
-                Map<String, Object?>.from(item as Map),
-              ))
+          .map(
+            (item) => OciServeSkillRequirement.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
           .toList(growable: false),
-      publishedAt: DateTime.tryParse(
-        json['published_at'] as String? ?? '',
-      ),
-      createdAt: DateTime.tryParse(
-        json['created_at'] as String? ?? '',
-      ),
+      publishedAt: DateTime.tryParse(json['published_at'] as String? ?? ''),
+      createdAt: DateTime.tryParse(json['created_at'] as String? ?? ''),
     );
   }
 }

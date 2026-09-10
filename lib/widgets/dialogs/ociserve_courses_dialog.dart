@@ -272,7 +272,11 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     );
   }
 
-  void _showSection({bool progress = false, bool data = false, bool evidence = false}) {
+  void _showSection({
+    bool progress = false,
+    bool data = false,
+    bool evidence = false,
+  }) {
     setState(() {
       _showProgress = progress;
       _showData = data;

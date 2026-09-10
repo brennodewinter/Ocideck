@@ -1648,6 +1648,100 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Після цього ви більше не надаватимете цифрові посвідчення з цього гаманця. ',
+  'U hebt nog geen badges.': 'У вас ще немає бейджів.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Ви можете використати підтвердження із зовнішнього гаманця (наприклад EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Ви подаєте підтвердження для: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Ви подаєте цей підтвердний документ на оцінювання. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Вас буде переспрямовано до постачальника гаманця для входу. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Ваш файл буде позначено як «подано, ще не перевірено» ',
+  'Verbinding maken…': 'Підключення…',
+  'Verbinding verbreken': 'Від’єднати',
+  'Verbinding verbreken?': 'Від’єднати?',
+  'Verbonden met {provider}': 'Підключено до {provider}',
+  'Verbreken': 'Від’єднати',
+  'Verlopen': 'Термін дії минув',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Якщо ви подасте запит на видалення, ваші підтвердні документи та пов’язані з ними оцінки зникнуть. Правила зберігання в реєстрі видалень показують, чи залишаться будь-які дані через чинний обов’язок щодо зберігання.',
+  'Wordt verzonden zodra je online bent.':
+      'Буде надіслано, щойно ви знову будете онлайн.',
+  'portefeuille': 'гаманець',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} цифрових посвідчень вибрано для надання',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'На розгляді з {datum}. Зазвичай до двох робочих днів.',
+  'Kies een bestand om aan te leveren.': 'Виберіть файл для подання.',
+  'Kies wat u deelt': 'Виберіть, чим поділитися',
+  'Kies welke credentials u deelt als bewijs:':
+      'Виберіть цифрові посвідчення, якими ви поділитеся як підтвердженням:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Не вдалося завантажити ваше підтвердження. Спробуйте ще раз.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Підключіть зовнішній гаманець, щоб використовувати наявні бейджі та ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Залиште порожнім, якщо підтвердження діє безстроково. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Подайте новий або виправлений файл.',
+  'Lever het bestand opnieuw aan.': 'Подайте файл повторно.',
+  'Mijn badges': 'Мої бейджі',
+  'Mijn bewijs': 'Моє підтвердження',
+  'Mijn bewijsstukken': 'Мої підтвердні документи',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Після входу на наступному кроці ви виберете, якими цифровими посвідченнями поділитися. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Підтвердних документів ще не подано.',
+  'Opgegeven': 'Подано',
+  'Opnieuw verbinden': 'Підключити повторно',
+  'Portefeuille koppelen': 'Прив’язати гаманець',
+  'Portefeuille verbinden': 'Підключити гаманець',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Виберіть цифрові посвідчення, якими хочете поділитися як підтвердженням. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Закрийте вікно постачальника гаманця, щоб продовжити.',
+  'Toegekend op {datum}': 'Присвоєно {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Дозволені формати: PNG, JPEG, WebP і PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'До якої дати дійсне це підтвердження?',
+  'Aangeleverd op {datum}': 'Подано {datum}',
+  'Aanleveren': 'Подати',
+  'Afgekeurd': 'Відхилено',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Відхилено. Оцінювач не вказав причини.',
+  'Afgekeurd: {reden}': 'Відхилено: {reden}',
+  'Ander bestand': 'Інший файл',
+  'Badge': 'Бейдж',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Бейджі з’являться тут після присвоєння.',
+  'Bewijs aanleveren': 'Подати підтвердження',
+  'Bewijsstuk kiezen': 'Вибрати підтвердний документ',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Підтвердні документи з’являться тут, щойно ви щось подасте для бейджа.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Підтвердні документи — це файли, які ви подаєте для бейджа. В огляді показано ім’я файлу, контрольну суму, статус і особу, яка його оцінила. Самих файлів у цьому огляді немає; оцінювач може їх переглянути.',
+  'Bezig met versturen…': 'Надсилання…',
+  'Datum kiezen': 'Вибрати дату',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'З’єднання розірвано. Ви можете підключитися знову.',
+  'Deze functie is nog niet beschikbaar. ': 'Ця функція ще недоступна. ',
+  'Externe portefeuille': 'Зовнішній гаманець',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Прийнято. Підтвердний документ схвалено.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'У цьому гаманці не знайдено цифрових посвідчень.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Для цієї організації не знайдено профілю учасника.',
+  'Geldig tot {datum}': 'Дійсне до {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Не вдалося подати. Спробуйте ще раз.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'У технічному журналі доступу видно, хто, коли й з якою метою переглядав або змінював ваші дані.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Не вдалося завантажити файл. Спробуйте ще раз.',
   'Registratie {nummer}': 'Реєстрація {nummer}',
   '1 categorie gevonden': 'Знайдено 1 категорію',
   '1 registratie': '1 реєстрація',

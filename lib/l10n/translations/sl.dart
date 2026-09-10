@@ -1633,6 +1633,101 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Iz tega portfelja ne delite več poverilnic. ',
+  'U hebt nog geen badges.': 'Značk še nimate.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Dokazila iz zunanjega portfelja (na primer EduBadges) lahko delite ',
+  'U levert bewijs aan voor: {badge}': 'Predložite dokazilo za: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'To dokazilo predložite v presojo. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Za prijavo boste preusmerjeni k ponudniku portfelja. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Vaša datoteka bo označena kot »prijavljena, še nepreverjena« ',
+  'Verbinding maken…': 'Povezovanje…',
+  'Verbinding verbreken': 'Prekini povezavo',
+  'Verbinding verbreken?': 'Prekinem povezavo?',
+  'Verbonden met {provider}': 'Povezano s {provider}',
+  'Verbreken': 'Prekini',
+  'Verlopen': 'Poteklo',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Če zahtevate izbris, bodo vaša dokazila in povezane ocene izginile. Pravila hrambe v registru izbrisov pokažejo, ali zaradi veljavne obveznosti hrambe ostane še kak podatek.',
+  'Wordt verzonden zodra je online bent.':
+      'Poslano bo, takoj ko boste povezani v splet.',
+  'portefeuille': 'portfelj',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Za skupno rabo je izbranih {aantal} poverilnic',
+  '{bytes} bytes': '{bytes} bajtov',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'V obravnavi od {datum}. Navadno v dveh delovnih dneh.',
+  'Kies een bestand om aan te leveren.': 'Izberite datoteko za predložitev.',
+  'Kies wat u deelt': 'Izberite, kaj delite',
+  'Kies welke credentials u deelt als bewijs:':
+      'Izberite poverilnice, ki jih delite kot dokazilo:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Vašega dokazila ni bilo mogoče naložiti. Poskusite znova.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Povežite zunanji portfelj, da delite obstoječe značke in ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Pustite prazno, če dokazilo velja neomejeno. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Predložite novo ali popravljeno datoteko.',
+  'Lever het bestand opnieuw aan.': 'Datoteko predložite znova.',
+  'Mijn badges': 'Moje značke',
+  'Mijn bewijs': 'Moja dokazila',
+  'Mijn bewijsstukken': 'Moji dokazni dokumenti',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Po prijavi boste v naslednjem koraku izbrali poverilnice, ki jih delite. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Dokazni dokumenti še niso bili predloženi.',
+  'Opgegeven': 'Prijavljeno',
+  'Opnieuw verbinden': 'Znova poveži',
+  'Portefeuille koppelen': 'Poveži portfelj',
+  'Portefeuille verbinden': 'Priključi portfelj',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Izberite poverilnice, ki jih želite deliti kot dokazilo. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Za nadaljevanje zaprite okno ponudnika portfelja.',
+  'Toegekend op {datum}': 'Podeljeno {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Dovoljeni formati: PNG, JPEG, WebP in PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Do kdaj je to dokazilo veljavno?',
+  'Aangeleverd op {datum}': 'Predloženo {datum}',
+  'Aanleveren': 'Predloži',
+  'Afgekeurd': 'Zavrnjeno',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Zavrnjeno. Ocenjevalec ni navedel razloga.',
+  'Afgekeurd: {reden}': 'Zavrnjeno: {reden}',
+  'Ander bestand': 'Druga datoteka',
+  'Badge': 'Značka',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Značke se prikažejo tukaj, takoj ko so podeljene.',
+  'Bewijs aanleveren': 'Predloži dokazilo',
+  'Bewijsstuk kiezen': 'Izberi dokazilo',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Dokazni dokumenti se pojavijo tukaj, ko predložite nekaj za značko.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Dokazni dokumenti so datoteke, ki jih predložite za značko. Pregled prikazuje ime datoteke, kontrolno kodo, stanje in kdo jo je ocenil. Datoteke same niso v tem pregledu; ocenjevalec si jih lahko ogleda.',
+  'Bezig met versturen…': 'Pošiljanje…',
+  'Datum kiezen': 'Izberi datum',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Povezava je bila prekinjena. Znova se lahko povežete.',
+  'Deze functie is nog niet beschikbaar. ': 'Ta funkcija še ni na voljo. ',
+  'Externe portefeuille': 'Zunanji portfelj',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Sprejeto. Dokazilo je odobreno.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'V tem portfelju ni bilo najdenih poverilnic.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Za to organizacijo ni bilo najdenega profila udeleženca.',
+  'Geldig tot {datum}': 'Velja do {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Predložitev ni uspela. Poskusite znova.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Tehnični dnevnik dostopa pokaže, kdo si je ogledal ali spremenil vaše podatke, kdaj in za kakšen namen.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Nalaganje ni uspelo. Poskusite znova.',
   'Registratie {nummer}': 'Registracija {nummer}',
   '1 categorie gevonden': 'Najdena je 1 kategorija',
   '1 registratie': '1 registracija',

@@ -1639,6 +1639,101 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Z tohto portfólia už nezdieľate žiadne poverenia. ',
+  'U hebt nog geen badges.': 'Zatiaľ nemáte žiadne odznaky.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Môžete zdieľať dôkazy z externého portfólia (napríklad EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Odovzdávate dôkaz pre: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Tento doklad odovzdávate na posúdenie. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Budete presmerovaní k poskytovateľovi portfólia, aby ste sa prihlásili. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Váš súbor bude označený ako „nahlásený, ešte neoverený“ ',
+  'Verbinding maken…': 'Pripája sa…',
+  'Verbinding verbreken': 'Odpojiť',
+  'Verbinding verbreken?': 'Odpojiť?',
+  'Verbonden met {provider}': 'Pripojené k {provider}',
+  'Verbreken': 'Odpojiť',
+  'Verlopen': 'Platnosť vypršala',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Ak požiadate o vymazanie, vaše doklady a súvisiace hodnotenia zmiznú. Pravidlá uchovávania v registri vymazaní ukazujú, či pre prebiehajúcu povinnosť uchovávania zostane nejaký zvyšok.',
+  'Wordt verzonden zodra je online bent.': 'Odošle sa hneď, ako budete online.',
+  'portefeuille': 'portfólio',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Na zdieľanie bolo vybraných {aantal} poverení',
+  '{bytes} bytes': '{bytes} bajtov',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'V spracovaní od {datum}. Zvyčajne do dvoch pracovných dní.',
+  'Kies een bestand om aan te leveren.': 'Vyberte súbor na odovzdanie.',
+  'Kies wat u deelt': 'Vyberte, čo zdieľate',
+  'Kies welke credentials u deelt als bewijs:':
+      'Vyberte poverenia, ktoré zdieľate ako dôkaz:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Váš dôkaz sa nepodarilo načítať. Skúste to znova.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Pripojte externé portfólio a zdieľajte existujúce odznaky a ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Nechajte prázdne, ak je dôkaz platný neobmedzene. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Odovzdajte nový alebo opravený súbor.',
+  'Lever het bestand opnieuw aan.': 'Odovzdajte súbor znova.',
+  'Mijn badges': 'Moje odznaky',
+  'Mijn bewijs': 'Moje dôkazy',
+  'Mijn bewijsstukken': 'Moje doklady',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Po prihlásení v ďalšom kroku vyberiete poverenia, ktoré zdieľate. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Zatiaľ neboli odovzdané žiadne doklady.',
+  'Opgegeven': 'Nahlásené',
+  'Opnieuw verbinden': 'Pripojiť znova',
+  'Portefeuille koppelen': 'Prepojiť portfólio',
+  'Portefeuille verbinden': 'Pripojiť portfólio',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Vyberte poverenia, ktoré chcete zdieľať ako dôkaz. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Pokračujte zatvorením okna poskytovateľa portfólia.',
+  'Toegekend op {datum}': 'Udelené {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Povolené formáty: PNG, JPEG, WebP a PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Dokedy je tento dôkaz platný?',
+  'Aangeleverd op {datum}': 'Odovzdané {datum}',
+  'Aanleveren': 'Odovzdať',
+  'Afgekeurd': 'Zamietnuté',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Zamietnuté. Posudzovateľ neuviedol dôvod.',
+  'Afgekeurd: {reden}': 'Zamietnuté: {reden}',
+  'Ander bestand': 'Iný súbor',
+  'Badge': 'Odznak',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Odznaky sa tu zobrazia hneď po udelení.',
+  'Bewijs aanleveren': 'Odovzdať dôkaz',
+  'Bewijsstuk kiezen': 'Vybrať doklad',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Doklady sa tu objavia, hneď ako niečo odovzdáte pre odznak.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Doklady sú súbory, ktoré odovzdávate pre odznak. Prehľad ukazuje názov súboru, kontrolný kód, stav a kto ho posúdil. Samotné súbory v tomto prehľade nie sú; posudzovateľ ich však môže zobraziť.',
+  'Bezig met versturen…': 'Odosiela sa…',
+  'Datum kiezen': 'Vybrať dátum',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Pripojenie bolo prerušené. Môžete sa pripojiť znova.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Táto funkcia ešte nie je dostupná. ',
+  'Externe portefeuille': 'Externé portfólio',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Prijaté. Doklad bol schválený.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'V tomto portfóliu sa nenašli žiadne poverenia.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Pre túto organizáciu sa nenašiel profil účastníka.',
+  'Geldig tot {datum}': 'Platné do {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Odovzdanie zlyhalo. Skúste to znova.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Technický denník prístupu ukazuje, kto vaše údaje zobrazil alebo zmenil, kedy a na aký účel.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Nahratie zlyhalo. Skúste to znova.',
   'Registratie {nummer}': 'Registrácia {nummer}',
   '1 categorie gevonden': 'Našla sa 1 kategória',
   '1 registratie': '1 registrácia',

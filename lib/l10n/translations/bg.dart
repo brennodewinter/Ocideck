@@ -1653,6 +1653,101 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Вече няма да споделяте идентификационни данни от този портфейл. ',
+  'U hebt nog geen badges.': 'Все още нямате значки.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Можете да използвате доказателства от външен портфейл (като EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Подавате доказателства за: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Подавате този доказателствен документ за оценка. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Ще бъдете пренасочени към доставчика на портфейла, за да влезете. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Файлът ви ще бъде отбелязан като "подаден, все още непроверен" ',
+  'Verbinding maken…': 'Свързване…',
+  'Verbinding verbreken': 'Прекъсване на връзката',
+  'Verbinding verbreken?': 'Да се прекъсне ли връзката?',
+  'Verbonden met {provider}': 'Свързано с {provider}',
+  'Verbreken': 'Прекъсване',
+  'Verlopen': 'Изтекъл',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Ако поискате изтриване, вашите доказателства и свързаните оценки ще изчезнат. Правилата за съхранение в регистъра за изтриване показват дали остава остатък по текущо задължение за съхранение.',
+  'Wordt verzonden zodra je online bent.': 'Ще бъде изпратено, щом сте онлайн.',
+  'portefeuille': 'портфейл',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} идентификационни данни са избрани за споделяне',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'В обработка от {datum}. Обикновено в рамките на два работни дни.',
+  'Kies een bestand om aan te leveren.': 'Изберете файл за подаване.',
+  'Kies wat u deelt': 'Изберете какво споделяте',
+  'Kies welke credentials u deelt als bewijs:':
+      'Изберете кои идентификационни данни споделяте като доказателство:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Неуспешно зареждане на доказателствата. Опитайте отново.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Свържете външен портфейл, за да използвате съществуващите си значки и ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Оставете празно, ако доказателството е валидно безсрочно. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Подайте нов или коригиран файл.',
+  'Lever het bestand opnieuw aan.': 'Подайте файла отново.',
+  'Mijn badges': 'Моите значки',
+  'Mijn bewijs': 'Моите доказателства',
+  'Mijn bewijsstukken': 'Моите доказателствени документи',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'След влизане в следващата стъпка избирате кои идентификационни данни да споделите. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Все още няма подадени доказателствени документи.',
+  'Opgegeven': 'Подаден',
+  'Opnieuw verbinden': 'Свържете отново',
+  'Portefeuille koppelen': 'Свържете портфейл',
+  'Portefeuille verbinden': 'Свържете портфейл',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Изберете идентификационните данни, които искате да споделите като доказателство. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Затворете прозореца на доставчика на портфейла, за да продължите.',
+  'Toegekend op {datum}': 'Присъдено на {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Разрешени формати: PNG, JPEG, WebP и PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'До кога е валидно това доказателство?',
+  'Aangeleverd op {datum}': 'Подадено на {datum}',
+  'Aanleveren': 'Подаване',
+  'Afgekeurd': 'Отхвърлен',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Отхвърлено. Оценителят не е посочил причина.',
+  'Afgekeurd: {reden}': 'Отхвърлено: {reden}',
+  'Ander bestand': 'Друг файл',
+  'Badge': 'Значка',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Значките ще се покажат тук, щом бъдат присъдени.',
+  'Bewijs aanleveren': 'Подайте доказателство',
+  'Bewijsstuk kiezen': 'Изберете доказателство',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Доказателствата ще се покажат тук, щом подадете нещо за значка.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Доказателствата са файлове, които подавате за значка. Прегледът показва името на файла, кода за проверка, състоянието и кой го е оценил. Самите файлове не са в този преглед; оценител може да ги прегледа.',
+  'Bezig met versturen…': 'Изпращане…',
+  'Datum kiezen': 'Изберете дата',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Връзката е прекъсната. Можете да се свържете отново.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Тази функция все още не е налична. ',
+  'Externe portefeuille': 'Външен портфейл',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Прието. Доказателството е одобрено.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'В този портфейл няма намерени идентификационни данни.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Не е намерен профил на участник за тази организация.',
+  'Geldig tot {datum}': 'Валидно до {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Подаването е неуспешно. Опитайте отново.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Техническият дневник за достъп показва кой е преглеждал или променял данните ви, кога и с каква цел.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Качването е неуспешно. Опитайте отново.',
   'Registratie {nummer}': 'Регистрация {nummer}',
   '1 categorie gevonden': 'Намерена е 1 категория',
   '1 registratie': '1 регистрация',
