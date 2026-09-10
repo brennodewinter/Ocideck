@@ -1,10 +1,12 @@
 import 'package:path/path.dart' as p;
 
+import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/image_usage.dart';
 import '../services/slide_image_refs.dart';
 import '../utils/project_path.dart';
 import 'deck_provider.dart';
+import 'settings_provider.dart';
 import 'tabs_provider.dart';
 
 /// Alle geopende Markdownbestanden, zodat de afbeeldingsbibliotheek hun
@@ -42,6 +44,16 @@ List<String> openTabImageUsages(Iterable<TabInfo> tabs, String absolutePath) {
   }
   return usages;
 }
+
+/// Waar [absolutePath] in alle levende appstaat wordt gebruikt.
+List<String> liveImageUsages(
+  Iterable<TabInfo> tabs,
+  SettingsNotifier settings,
+  String absolutePath,
+) => [
+  ...openTabImageUsages(tabs, absolutePath),
+  ..._themeLogoUsages(settings, absolutePath),
+];
 
 /// Vervang [fromAbsolute] in iedere geopende tab door [toAbsolute].
 ///
@@ -93,6 +105,79 @@ Future<void> replaceOpenTabImageUsages(
         }
     }
   }
+}
+
+/// Vervang [fromAbsolute] in alle geopende inhoud en opgeslagen stijlprofielen.
+Future<void> replaceLiveImageUsages(
+  Iterable<TabInfo> tabs,
+  SettingsNotifier settings,
+  String fromAbsolute,
+  String toAbsolute,
+) async {
+  await replaceOpenTabImageUsages(tabs, fromAbsolute, toAbsolute);
+  await _replaceThemeLogoUsages(settings, fromAbsolute, toAbsolute);
+}
+
+List<String> _themeLogoUsages(SettingsNotifier settings, String absolutePath) {
+  final usages = <String>[];
+  for (final profile in settings.currentState.themeProfiles) {
+    for (final path in [
+      profile.logoPath,
+      profile.logoDarkPath,
+      profile.documentLogoPath,
+    ]) {
+      if (_sameLocalLogo(path, absolutePath)) usages.add(profile.name);
+    }
+  }
+  return usages;
+}
+
+Future<void> _replaceThemeLogoUsages(
+  SettingsNotifier settings,
+  String fromAbsolute,
+  String toAbsolute,
+) async {
+  var changed = false;
+  final profiles = [
+    for (final profile in settings.currentState.themeProfiles)
+      if (_profileUsesLocalLogo(profile, fromAbsolute))
+        () {
+          changed = true;
+          return profile.copyWith(
+            logoPath: _sameLocalLogo(profile.logoPath, fromAbsolute)
+                ? toAbsolute
+                : profile.logoPath,
+            logoDarkPath: _sameLocalLogo(profile.logoDarkPath, fromAbsolute)
+                ? toAbsolute
+                : profile.logoDarkPath,
+            documentLogoPath:
+                _sameLocalLogo(profile.documentLogoPath, fromAbsolute)
+                ? toAbsolute
+                : profile.documentLogoPath,
+          );
+        }()
+      else
+        profile,
+  ];
+  if (!changed) return;
+  settings.currentState = settings.currentState.copyWith(
+    themeProfiles: profiles,
+  );
+  await settings.persistThemeProfiles();
+}
+
+bool _profileUsesLocalLogo(ThemeProfile profile, String absolutePath) => [
+  profile.logoPath,
+  profile.logoDarkPath,
+  profile.documentLogoPath,
+].any((path) => _sameLocalLogo(path, absolutePath));
+
+bool _sameLocalLogo(String? candidate, String absolutePath) {
+  final path = candidate?.trim();
+  return path != null &&
+      path.isNotEmpty &&
+      p.isAbsolute(path) &&
+      p.equals(p.normalize(path), p.normalize(absolutePath));
 }
 
 String? _documentBasePath(String? projectPath, String? filePath) =>

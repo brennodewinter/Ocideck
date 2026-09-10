@@ -7,6 +7,7 @@ import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../state/deck_provider.dart';
 import '../../state/open_tab_image_usage.dart';
+import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import 'alt_text_field.dart';
 import '../../l10n/slide_quality_localization.dart';
@@ -491,8 +492,9 @@ class ImagePickerBar extends ConsumerWidget {
     String fromAbsolute,
     String toAbsolute,
   ) async {
-    await replaceOpenTabImageUsages(
+    await replaceLiveImageUsages(
       ref.read(tabsProvider).tabs,
+      ref.read(settingsProvider.notifier),
       fromAbsolute,
       toAbsolute,
     );
@@ -501,7 +503,11 @@ class ImagePickerBar extends ConsumerWidget {
   /// Find every open-deck slide that references [absolutePath], so we can warn
   /// before deleting an image that is still in use.
   List<String> _imageUsages(WidgetRef ref, String absolutePath) {
-    return openTabImageUsages(ref.read(tabsProvider).tabs, absolutePath);
+    return liveImageUsages(
+      ref.read(tabsProvider).tabs,
+      ref.read(settingsProvider.notifier),
+      absolutePath,
+    );
   }
 
   // Permissive: shows user-picked images from anywhere (e.g. before they're

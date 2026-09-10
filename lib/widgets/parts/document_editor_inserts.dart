@@ -170,8 +170,14 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
       searchPaths: searchPaths,
       captionService: ref.read(captionServiceProvider),
       descriptionService: ref.read(descriptionServiceProvider),
-      usageOf: (path) => openTabImageUsages(tabs, path),
-      onReplaceUsages: (from, to) => replaceOpenTabImageUsages(tabs, from, to),
+      usageOf: (path) =>
+          liveImageUsages(tabs, ref.read(settingsProvider.notifier), path),
+      onReplaceUsages: (from, to) => replaceLiveImageUsages(
+        tabs,
+        ref.read(settingsProvider.notifier),
+        from,
+        to,
+      ),
       openMarkdownFiles: openTabMarkdownFiles(tabs),
     );
     if (picked == null || !mounted) return;

@@ -1845,10 +1845,11 @@ native resolutie. PDF/PPTX-export legt één stilstaand beeld vast.
   samengevoegd, alle slides die naar een kopie verwezen worden naar het behouden bestand gericht, en de
   kopieën worden verwijderd — na een bevestiging die precies opsomt wat er zal
   gebeuren. Verwijzingen worden bijgewerkt in **alle open presentatie- en
-  documenttabbladen**, inclusief onopgeslagen wijzigingen in die tabbladen, en in
-  `.md`-presentaties die op schijf in de zoekmappen worden gevonden. Zo blijft
-  geen tweede open tabblad verwijzen naar de verwijderde kopie, terwijl
-  presentaties die op dit moment niet open zijn ook blijven werken.
+  documenttabbladen**, inclusief onopgeslagen wijzigingen in die tabbladen, in
+  opgeslagen lokale themalogo's en in `.md`-presentaties die op schijf in de
+  zoekmappen worden gevonden. Zo blijft geen tabblad of stijlprofiel verwijzen
+  naar de verwijderde kopie, terwijl presentaties die op dit moment niet open
+  zijn ook blijven werken.
 - **Een afbeelding verwijderen** waarschuwt wanneer hij nog in gebruik is — in open decks (per
   slide) en in presentaties op schijf die op dit moment niet open zijn (per bestand,
   gemarkeerd "niet open").

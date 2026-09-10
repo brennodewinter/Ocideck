@@ -118,8 +118,10 @@ void main() {
 
       final container = ProviderContainer();
       container.read(settingsProvider);
-      await tester.runAsync(
-        () => Future<void>.delayed(const Duration(milliseconds: 50)),
+      await pumpUntil(
+        tester,
+        () => container.read(settingsProvider).themeProfile.name == profileName,
+        reason: 'het opgeslagen stijlprofiel werd niet geladen',
       );
       expect(container.read(settingsProvider).themeProfile.name, profileName);
       final files = container.read(fileServiceProvider);
@@ -139,6 +141,14 @@ void main() {
         );
       });
       final tabsBefore = container.read(tabsProvider).tabs;
+      expect(
+        liveImageUsages(
+          tabsBefore,
+          container.read(settingsProvider.notifier),
+          copy.path,
+        ),
+        hasLength(8),
+      );
       final activeDocument = tabsBefore.last.documentNotifier!;
 
       await tester.pumpWidget(
