@@ -731,7 +731,7 @@ extension _CarouselActions on _ImageCarouselPickerState {
   /// Filter de deckbestanden op schijf die niet in een tab geopend zijn
   /// (open decks zijn al gedekt door [ImageCarouselPicker.usageOf]).
   List<String> _withoutOpenDecks(List<String> deckFiles) {
-    final open = {for (final f in widget.openDeckFiles) p.normalize(f)};
+    final open = {for (final f in widget.openMarkdownFiles) p.normalize(f)};
     return [
       for (final f in deckFiles)
         if (!open.contains(p.normalize(f))) f,

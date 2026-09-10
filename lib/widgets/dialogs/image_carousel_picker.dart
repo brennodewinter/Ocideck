@@ -77,10 +77,10 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
   final ImageUsageLookup? usageOf;
   final ImageUsageReplace? onReplaceUsages;
 
-  /// Bestandspaden van de presentaties die nu in tabs geopend zijn. Die zijn
+  /// Bestandspaden van de Markdownbestanden die nu in tabs geopend zijn. Die zijn
   /// al gedekt door [usageOf]; bij het scannen van decks op schijf worden ze
   /// overgeslagen om dubbeltellingen te voorkomen.
-  final List<String> openDeckFiles;
+  final List<String> openMarkdownFiles;
 
   /// Beheer-/onderhoudsmodus: de bibliotheek staat op zichzelf, zonder open
   /// presentatie om een afbeelding voor te kiezen. Dan vervalt het kiezen
@@ -96,7 +96,7 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
     this.initialPath,
     this.usageOf,
     this.onReplaceUsages,
-    this.openDeckFiles = const [],
+    this.openMarkdownFiles = const [],
     this.manageOnly = false,
   });
 
@@ -108,7 +108,7 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
     DescriptionService? descriptionService,
     ImageUsageLookup? usageOf,
     ImageUsageReplace? onReplaceUsages,
-    List<String> openDeckFiles = const [],
+    List<String> openMarkdownFiles = const [],
     bool manageOnly = false,
   }) {
     return showDialog<ImagePickResult>(
@@ -121,7 +121,7 @@ class ImageCarouselPicker extends ConsumerStatefulWidget {
         descriptionService: descriptionService ?? DescriptionService(),
         usageOf: usageOf,
         onReplaceUsages: onReplaceUsages,
-        openDeckFiles: openDeckFiles,
+        openMarkdownFiles: openMarkdownFiles,
         manageOnly: manageOnly,
       ),
     );

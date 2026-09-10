@@ -1,13 +1,12 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart' as p;
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
 import '../../models/asset_origin.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
-import '../../services/image_usage.dart';
 import '../../state/deck_provider.dart';
+import '../../state/open_tab_image_usage.dart';
 import '../../state/tabs_provider.dart';
 import 'alt_text_field.dart';
 import '../../l10n/slide_quality_localization.dart';
@@ -473,10 +472,7 @@ class ImagePickerBar extends ConsumerWidget {
       descriptionService: ref.read(descriptionServiceProvider),
       usageOf: (absolutePath) => _imageUsages(ref, absolutePath),
       onReplaceUsages: (from, to) => _replaceImageUsages(ref, from, to),
-      openDeckFiles: [
-        for (final tab in ref.read(tabsProvider).tabs)
-          ?tab.deckNotifierOrNull?.currentState.filePath,
-      ],
+      openMarkdownFiles: openTabMarkdownFiles(ref.read(tabsProvider).tabs),
     );
     if (result == null) return;
     // De bibliotheek doorzoekt ook mappen buiten de presentatie; zo'n keuze
@@ -495,57 +491,17 @@ class ImagePickerBar extends ConsumerWidget {
     String fromAbsolute,
     String toAbsolute,
   ) async {
-    final target = p.normalize(fromAbsolute);
-    for (final tab in ref.read(tabsProvider).tabs) {
-      final notifier = tab.deckNotifier;
-      final deck = notifier.currentState.deck;
-      if (deck == null) continue;
-      final projectPath = deck.projectPath ?? '';
-
-      String? resolve(String candidate) => p.normalize(
-        p.isAbsolute(candidate) ? candidate : p.join(projectPath, candidate),
-      );
-      // Blijf relatief opslaan als de slide dat al deed en het nieuwe pad
-      // binnen het project ligt; anders absoluut.
-      String replacement(String candidate) {
-        if (p.isAbsolute(candidate) || projectPath.isEmpty) return toAbsolute;
-        return p.isWithin(projectPath, toAbsolute)
-            ? p.relative(toAbsolute, from: projectPath)
-            : toAbsolute;
-      }
-
-      for (var i = 0; i < deck.slides.length; i++) {
-        final slide = deck.slides[i];
-        final updated = slideWithImageReplaced(
-          slide,
-          target,
-          resolve,
-          replacement,
-        );
-        if (!identical(updated, slide)) notifier.updateSlide(i, updated);
-      }
-    }
+    await replaceOpenTabImageUsages(
+      ref.read(tabsProvider).tabs,
+      fromAbsolute,
+      toAbsolute,
+    );
   }
 
   /// Find every open-deck slide that references [absolutePath], so we can warn
   /// before deleting an image that is still in use.
   List<String> _imageUsages(WidgetRef ref, String absolutePath) {
-    final target = p.normalize(absolutePath);
-    final usages = <String>[];
-    for (final tab in ref.read(tabsProvider).tabs) {
-      final deck = tab.deckNotifier.currentState.deck;
-      if (deck == null) continue;
-      String? resolve(String candidate) => p.normalize(
-        p.isAbsolute(candidate)
-            ? candidate
-            : p.join(deck.projectPath ?? '', candidate),
-      );
-
-      for (final i in slideIndexesUsingImage(deck, target, resolve)) {
-        usages.add('${tab.label} · slide ${i + 1}');
-      }
-    }
-    return usages;
+    return openTabImageUsages(ref.read(tabsProvider).tabs, absolutePath);
   }
 
   // Permissive: shows user-picked images from anywhere (e.g. before they're

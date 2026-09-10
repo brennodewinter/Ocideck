@@ -790,6 +790,44 @@ void main() {
   );
 
   testWidgets(
+    'documenteditor bedraadt de carrousel voor veilige deduplicatie',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1200, 800));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final project = Directory.systemTemp.createTempSync('doc-image-dedupe');
+      addTearDown(() => project.deleteSync(recursive: true));
+      final oldPath = p.join(project.path, 'images', 'kopie.png');
+      final keeper = p.join(project.path, 'images', 'behouden.png');
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse('![Foto](images/kopie.png)'),
+          projectPath: project.path,
+        );
+      await tester.pumpWidget(harness(n));
+      await tester.pump();
+
+      await tester.tap(find.text('Invoegen'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      await tester.tap(find.text('Afbeelding'));
+      await pumpUntil(
+        tester,
+        () => find.byType(ImageCarouselPicker).evaluate().isNotEmpty,
+        reason: 'de afbeeldingkiezer kwam niet op',
+      );
+      while (tester.takeException() != null) {}
+
+      final picker = tester.widget<ImageCarouselPicker>(
+        find.byType(ImageCarouselPicker),
+      );
+      expect(picker.usageOf, isNotNull);
+      expect(picker.onReplaceUsages, isNotNull);
+      expect(oldPath, isNot(keeper));
+    },
+  );
+
+  testWidgets(
     'opmaakknop Afbeelding opent de carrousel, dumpt geen placeholder',
     (tester) async {
       await tester.binding.setSurfaceSize(const Size(1200, 800));
