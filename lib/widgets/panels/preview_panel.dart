@@ -1,12 +1,15 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../../models/deck.dart';
+import '../../models/cvss_builder.dart' show CiaRating;
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/slide_reorder.dart';
 import '../../state/settings_provider.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/privacy/privacy_own_identity.dart';
@@ -19,6 +22,8 @@ import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../dialogs/settings_dialog.dart';
 import '../slides/slide_preview.dart';
+
+part 'preview_panel_overview.dart';
 
 /// Of het preview-paneel ingeklapt is (UI-voorkeur, app-breed).
 final previewCollapsedProvider = StateProvider<bool>((_) => false);
@@ -591,108 +596,6 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             ),
           ],
         ],
-      ),
-    );
-  }
-}
-
-// ── Full-deck preview overlay ─────────────────────────────────────────────────
-
-class FullDeckPreview extends ConsumerWidget {
-  final Deck deck;
-  final ThemeProfile themeProfile;
-
-  const FullDeckPreview({
-    super.key,
-    required this.deck,
-    required this.themeProfile,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = context.l10n;
-    final showWatermark = ref
-        .watch(settingsProvider)
-        .classificationWatermarkEnabled;
-    // Render-time pagination: a long finding presents across several full-size
-    // slides (see [expandFindingsForRender]). The full-deck preview is a
-    // what-you-present view, so it must expand findings exactly like the
-    // presenter and the export — otherwise an overflowing finding renders here
-    // as one slide scaled down to a fraction of the width, while it actually
-    // presents full-width across several pages. Number over the expanded list,
-    // matching the presenter's slide counter.
-    final renderSlides = expandFindingsForRender(
-      deck.slides,
-      profile: themeProfile,
-    );
-    // The scope→CIA index keys on the finding id (page 1 keeps it), so it is
-    // derived once from the source slides and shared across every page — it was
-    // rebuilt per item before, an O(n²) walk of the deck on each build.
-    final scopeCia = deckScopeCiaIndex(deck.slides);
-    return Scaffold(
-      backgroundColor: AppTheme.panelBg,
-      appBar: AppBar(
-        title: Text('${deck.title} — ${l10n.d('volledig deck')}'),
-        backgroundColor: AppTheme.navy,
-        leading: IconButton(
-          tooltip: l10n.d('Sluiten'),
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 40),
-        itemCount: renderSlides.length,
-        itemBuilder: (_, i) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${l10n.d('Slide')} ${i + 1}',
-                  style: TextStyle(color: AppTheme.slate500, fontSize: 11),
-                ),
-                const SizedBox(height: 4),
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black38,
-                        blurRadius: 12,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: SlidePreviewWidget(
-                    slide: renderSlides[i],
-                    projectPath: deck.projectPath,
-                    themeProfile: themeProfile,
-                    deckMarpStyle: deck.marpStyle,
-                    cockpitColorScheme: ref
-                        .watch(settingsProvider)
-                        .cockpitColorScheme,
-                    allowRemoteMedia: ref
-                        .watch(settingsProvider)
-                        .allowRemoteMedia,
-                    onLinkTap: openExternalUrl,
-                    slideNumber: i + 1,
-                    slideCount: renderSlides.length,
-                    splitRunPosition: splitRunPositionFor(renderSlides, i),
-                    scopeCia: scopeCia,
-                    reportLanguage: deck.language,
-                    improvementY01: deck.improvementY01Metric,
-                    tlp: deck.tlp,
-                    organization: deck.organization,
-                    deckSignature: deck.signature,
-                    sealedAt: deck.finalized ? deck.sealAt : '',
-                    showClassificationWatermark: showWatermark,
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
       ),
     );
   }

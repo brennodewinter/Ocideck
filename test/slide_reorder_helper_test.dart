@@ -7,7 +7,7 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/editor_provider.dart';
-import 'package:ocideck/widgets/panels/slide_list_panel.dart';
+import 'package:ocideck/state/slide_reorder.dart';
 
 DeckNotifier _deckWith(int extraSlides) {
   final md = MarkdownService();

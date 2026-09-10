@@ -36,11 +36,18 @@ Future<void> convertDeckToDocument(BuildContext context, WidgetRef ref) async {
 /// via parameters, en de klasse zit tegen haar plafond ([classSizeBaseline]).
 void openFullDeckPreview(BuildContext context, WidgetRef ref) {
   final deck = ref.read(deckProvider).deck!;
+  final container = ProviderScope.containerOf(context);
   Navigator.push(
     context,
     MaterialPageRoute<void>(
-      builder: (_) =>
-          FullDeckPreview(deck: deck, themeProfile: deck.themeProfile),
+      builder: (_) => UncontrolledProviderScope(
+        container: container,
+        child: FullDeckPreview(
+          deck: deck,
+          themeProfile: deck.themeProfile,
+          editable: true,
+        ),
+      ),
     ),
   );
 }

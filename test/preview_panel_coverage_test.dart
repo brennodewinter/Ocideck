@@ -53,6 +53,31 @@ Future<void> _pumpPanel(
   await tester.pump(const Duration(milliseconds: 100));
 }
 
+Future<void> _pumpOverview(
+  WidgetTester tester,
+  ProviderContainer container, {
+  Size size = const Size(1100, 800),
+}) async {
+  await tester.binding.setSurfaceSize(size);
+  addTearDown(() => tester.binding.setSurfaceSize(null));
+  final deck = container.read(deckProvider).deck!;
+  await tester.pumpWidget(
+    UncontrolledProviderScope(
+      container: container,
+      child: MaterialApp(
+        theme: AppTheme.light,
+        home: FullDeckPreview(
+          deck: deck,
+          themeProfile: deck.themeProfile,
+          editable: true,
+        ),
+      ),
+    ),
+  );
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 150));
+}
+
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -275,6 +300,106 @@ void main() {
     expect(find.textContaining('Slide 4'), findsNothing);
     expect(find.textContaining('(1/2)'), findsOneWidget);
     expect(find.textContaining('(2/2)'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('slide overview reorders with the keyboard and can undo', (
+    tester,
+  ) async {
+    final container = _deckWith([
+      Slide.create(SlideType.bullets).copyWith(title: 'Alpha'),
+      Slide.create(SlideType.quote).copyWith(title: 'Beta'),
+      Slide.create(SlideType.table).copyWith(title: 'Gamma'),
+    ]);
+    addTearDown(container.dispose);
+    final before = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    await _pumpOverview(tester, container);
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    await tester.pump();
+
+    final moved = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    expect(moved[1], before[0]);
+    expect(container.read(editorProvider).selectedIndex, 1);
+
+    await tester.tap(find.byKey(const Key('overview-undo')));
+    await tester.pump();
+    expect(
+      container.read(deckProvider).deck!.slides.map((slide) => slide.id),
+      before,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+    'slide overview shows authored slides once in a responsive grid',
+    (tester) async {
+      final body = List.filled(8, 'lorem ipsum dolor sit amet').join(' ');
+      final finding = Slide.create(SlideType.finding).copyWith(
+        customMarkdown: FindingSpec(
+          heading: 'F-03 · SQL-injectie',
+          scopeObject: 'https://app.voorbeeld/login',
+          cvssVector:
+              'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
+          description: body,
+          confirmation: body,
+          impact: body,
+          recommendation: body,
+        ).toMarkdown(),
+      );
+      final container = _deckWith([finding, Slide.create(SlideType.quote)]);
+      addTearDown(container.dispose);
+      await _pumpOverview(tester, container);
+
+      expect(
+        find.byType(DragTarget<int>),
+        findsNWidgets(container.read(deckProvider).deck!.slides.length),
+      );
+      final first = tester.getTopLeft(find.byType(DragTarget<int>).at(0));
+      final second = tester.getTopLeft(find.byType(DragTarget<int>).at(1));
+      expect(second.dy, first.dy);
+
+      await tester.binding.setSurfaceSize(const Size(500, 800));
+      await tester.pump();
+      final narrowFirst = tester.getTopLeft(find.byType(DragTarget<int>).at(0));
+      final narrowSecond = tester.getTopLeft(
+        find.byType(DragTarget<int>).at(1),
+      );
+      expect(narrowSecond.dy, greaterThan(narrowFirst.dy));
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('finalized slide overview is visibly read-only', (tester) async {
+    final container = _deckWith([Slide.create(SlideType.bullets)]);
+    addTearDown(container.dispose);
+    final notifier = container.read(deckProvider.notifier);
+    notifier.loadDeck(
+      container.read(deckProvider).deck!.copyWith(finalized: true),
+      preserveThemeProfile: true,
+    );
+    await _pumpOverview(tester, container);
+
+    expect(find.byIcon(Icons.lock_outline), findsOneWidget);
+    expect(find.byIcon(Icons.drag_indicator), findsNothing);
+    expect(
+      tester
+          .widget<IconButton>(find.byKey(const Key('overview-undo')))
+          .onPressed,
+      isNull,
+    );
     expect(tester.takeException(), isNull);
   });
 

@@ -26,6 +26,7 @@ import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
+import '../../state/slide_reorder.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
@@ -52,11 +53,19 @@ class SlideListPanel extends ConsumerStatefulWidget {
   /// overlay bookkeeping ("_RenderLayoutBuilder was mutated…").
   final double? railWidth;
 
-  const SlideListPanel({super.key, this.railWidth, this.onPresentFromHere});
+  const SlideListPanel({
+    super.key,
+    this.railWidth,
+    this.onPresentFromHere,
+    this.onOpenOverview,
+  });
 
   /// Start de presentatie vanaf een gekozen dia (#607). De shell levert dit,
   /// want `presentDeck` woont in de app_shell-library en niet hier.
   final void Function(int index)? onPresentFromHere;
+
+  /// Opent het schermvullende overzicht waarin de slidevolgorde te wijzigen is.
+  final VoidCallback? onOpenOverview;
 
   @override
   ConsumerState<SlideListPanel> createState() => _SlideListPanelState();
@@ -793,6 +802,19 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                 ),
               ),
               const Spacer(),
+              if (widget.onOpenOverview != null)
+                IconButton(
+                  key: const Key('slide-overview-button'),
+                  tooltip: l10n.d('Slide-overzicht'),
+                  onPressed: widget.onOpenOverview,
+                  icon: const Icon(Icons.grid_view_rounded, size: 17),
+                  color: AppTheme.slate300,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(
+                    minWidth: 28,
+                    minHeight: 28,
+                  ),
+                ),
               Text(
                 searching
                     ? '$matchCount / ${deck.slides.length}'

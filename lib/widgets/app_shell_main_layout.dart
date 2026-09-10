@@ -189,6 +189,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
                         railWidth: railWidth,
                         onPresentFromHere: (i) =>
                             _presentFromSlide(context, ref, i),
+                        onOpenOverview: _openFullDeckPreview,
                       ),
                     ),
                     _ResizableDivider(
