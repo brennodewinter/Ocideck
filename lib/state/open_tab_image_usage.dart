@@ -1,5 +1,6 @@
 import 'package:path/path.dart' as p;
 
+import '../models/slide.dart';
 import '../services/image_usage.dart';
 import '../services/slide_image_refs.dart';
 import '../utils/project_path.dart';
@@ -44,7 +45,7 @@ List<String> openTabImageUsages(Iterable<TabInfo> tabs, String absolutePath) {
 
 /// Vervang [fromAbsolute] in iedere geopende tab door [toAbsolute].
 ///
-/// Elke tab krijgt één ongedaan-stap. Document-frontmatter blijft letterlijk
+/// Elke tab krijgt één state-mutatie. Document-frontmatter blijft letterlijk
 /// staan; alleen afbeeldingspaden in de body worden herschreven.
 Future<void> replaceOpenTabImageUsages(
   Iterable<TabInfo> tabs,
@@ -60,8 +61,8 @@ Future<void> replaceOpenTabImageUsages(
         final basePath = deck.projectPath;
         String? resolve(String candidate) =>
             resolveEditorAssetPath(candidate, basePath);
-        for (var index = 0; index < deck.slides.length; index++) {
-          final slide = deck.slides[index];
+        final replacements = <String, Slide>{};
+        for (final slide in deck.slides) {
           final updated = slideWithImageReplaced(
             slide,
             target,
@@ -69,9 +70,10 @@ Future<void> replaceOpenTabImageUsages(
             (path) => _replacementPath(path, basePath, toAbsolute),
           );
           if (!identical(updated, slide)) {
-            deckNotifier.updateSlide(index, updated);
+            replacements[slide.id] = updated;
           }
         }
+        deckNotifier.replaceSlidesById(replacements);
       case DocumentTabContent(:final documentNotifier):
         final state = documentNotifier.currentState;
         final document = state.document;
