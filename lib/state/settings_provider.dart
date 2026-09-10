@@ -745,7 +745,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       themeProfiles: profiles,
       selectedThemeProfileName: profileName,
     );
-    await _saveProfiles();
+    await persistThemeProfiles();
   }
 
   Future<void> selectThemeProfile(String name) async {
@@ -767,7 +767,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       themeProfiles: [...state.themeProfiles, created],
       selectedThemeProfileName: name,
     );
-    await _saveProfiles();
+    await persistThemeProfiles();
     return created;
   }
 
@@ -778,7 +778,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       themeProfiles: profiles,
       selectedThemeProfileName: profiles.first.name,
     );
-    await _saveProfiles();
+    await persistThemeProfiles();
   }
 
   /// Vervangt de eigen app-thema's en de selectie in één keer — de landing
@@ -968,14 +968,14 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   ///
   /// Een eigen veld en niet "de staat van vóór het opslaan": de aanroepers
   /// werken de staat bij en persisteren daarná, dus op het moment dat
-  /// [_saveProfiles] draait is het verschil al vervlogen. Een extensie in een
+  /// [persistThemeProfiles] draait is het verschil al vervlogen. Een extensie in een
   /// `part` kan geen veld dragen, dus dit blijft hier; het gedrag eromheen staat
   /// in `parts/settings_provider_traces.dart`.
   Set<String> _persistedLogoPaths = const {};
 
-  Future<void> _saveProfiles() async {
+  Future<void> persistThemeProfiles() async {
     state = state.copyWith(themeProfiles: _uniqueProfiles(state.themeProfiles));
-    await _persist('_saveProfiles', (prefs) async {
+    await _persist('persistThemeProfiles', (prefs) async {
       await prefs.setString(
         'themeProfiles',
         jsonEncode(state.themeProfiles.map((p) => p.toJson()).toList()),

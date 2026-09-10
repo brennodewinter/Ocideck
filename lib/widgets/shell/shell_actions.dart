@@ -698,7 +698,11 @@ String? _resolveImagePath(String path, String? projectPath) {
 }
 
 List<String> _imageUsages(WidgetRef ref, String absolutePath) {
-  return openTabImageUsages(ref.read(tabsProvider).tabs, absolutePath);
+  return liveImageUsages(
+    ref.read(tabsProvider).tabs,
+    ref.read(settingsProvider.notifier),
+    absolutePath,
+  );
 }
 
 /// Wijs in alle open decks elke slideverwijzing naar [fromAbsolute] om naar
@@ -709,8 +713,9 @@ Future<void> _replaceImageUsages(
   String fromAbsolute,
   String toAbsolute,
 ) async {
-  await replaceOpenTabImageUsages(
+  await replaceLiveImageUsages(
     ref.read(tabsProvider).tabs,
+    ref.read(settingsProvider.notifier),
     fromAbsolute,
     toAbsolute,
   );

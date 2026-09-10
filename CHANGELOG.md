@@ -60,6 +60,7 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Fixed
 
+- fix(afbeeldingen): deduplicatie behoudt lokale themalogo's (#2047)
 - fix(afbeeldingen): deduplicatie werkt alle open tabs bij (#2044)
 - fix(presentatie): houd tweeschermnavigatie synchroon
 - fix: begeleid OciServe-aanmelding vanuit OciDeck (#2023)

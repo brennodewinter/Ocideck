@@ -12,11 +12,9 @@ part of '../settings_provider.dart';
 /// app op een gedeelde of ingeleverde machine gebruikt, hoort dat te kunnen
 /// wissen zonder een prefs-bestand te hoeven zoeken.
 extension SettingsTraces on SettingsNotifier {
-  /// De `logoPath`-waarden die de bewaarde stijlprofielen nu aanhalen.
-  Set<String> get _referencedLogoPaths => {
-    for (final profile in currentState.themeProfiles)
-      if ((profile.logoPath ?? '').trim().isNotEmpty) profile.logoPath!.trim(),
-  };
+  /// De logopaden die de bewaarde stijlprofielen nu aanhalen.
+  Set<String> get _referencedLogoPaths =>
+      _referencedThemeLogoPaths(currentState.themeProfiles);
 
   /// Ruim verweesde logo's op zodra de profielenlijst verandert.
   ///
@@ -199,6 +197,16 @@ extension SettingsTraces on SettingsNotifier {
     return true;
   }
 }
+
+Set<String> _referencedThemeLogoPaths(List<ThemeProfile> profiles) => {
+  for (final profile in profiles)
+    for (final path in [
+      profile.logoPath,
+      profile.logoDarkPath,
+      profile.documentLogoPath,
+    ])
+      if ((path ?? '').trim().isNotEmpty) path!.trim(),
+};
 
 /// Zet [entry] vooraan de recente lijst (nieuwste eerst), zonder een dubbel pad,
 /// en kap op tien. Top-level en puur, los van de notifier — zodat de recente-

@@ -1791,10 +1791,10 @@ native resolution. PDF/PPTX export captures one still frame.
   it, every slide that referenced a copy is repointed to the kept file, and the
   copies are deleted — after a confirmation that lists exactly what will
   happen. References are updated in **every open presentation and document
-  tab**, including unsaved changes in those tabs, and in `.md` presentations
-  found on disk in the search directories. Thus the clean-up does not leave a
-  second open tab pointing at the copy that was removed, while presentations
-  that are not currently open keep working too.
+  tab**, including unsaved changes in those tabs, in saved local theme logos,
+  and in `.md` presentations found on disk in the search directories. Thus the
+  clean-up does not leave a tab or style profile pointing at the copy that was
+  removed, while presentations that are not currently open keep working too.
 - **Deleting an image** warns when it is still in use — in open decks (per
   slide) and in presentations on disk that are not currently open (per file,
   marked "not open").

@@ -7,12 +7,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/slide_image_refs.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/state/open_tab_image_usage.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
@@ -53,6 +55,19 @@ void main() {
         ..writeAsBytesSync(_onePixelPng);
       final copyRef = 'images/${p.basename(copy.path)}';
       final keeperRef = 'images/${p.basename(keeper.path)}';
+      const profileName = 'Klantstijl';
+      SharedPreferences.setMockInitialValues({
+        'themeProfiles': jsonEncode([
+          const ThemeProfile(name: profileName)
+              .copyWith(
+                logoPath: copy.path,
+                logoDarkPath: copy.path,
+                documentLogoPath: copy.path,
+              )
+              .toJson(),
+        ]),
+        'selectedThemeProfileName': profileName,
+      });
 
       final deckPath = p.join(project.path, 'presentatie.md');
       final documentAPath = p.join(project.path, 'rapport-a.md');
@@ -86,6 +101,12 @@ void main() {
           Slide.create(
             SlideType.image,
           ).copyWith(title: 'Keeper', imagePath: keeperRef),
+          // Het themalogo telt drie keer mee. Drie extra dia's houden de
+          // keeperkeuze toch deterministisch op het expliciete keeperbestand.
+          for (var i = 1; i <= 3; i++)
+            Slide.create(
+              SlideType.image,
+            ).copyWith(title: 'Keeper $i', imagePath: keeperRef),
         ],
       );
       File(documentAPath).writeAsStringSync(
@@ -96,6 +117,13 @@ void main() {
       );
 
       final container = ProviderContainer();
+      container.read(settingsProvider);
+      await pumpUntil(
+        tester,
+        () => container.read(settingsProvider).themeProfile.name == profileName,
+        reason: 'het opgeslagen stijlprofiel werd niet geladen',
+      );
+      expect(container.read(settingsProvider).themeProfile.name, profileName);
       final files = container.read(fileServiceProvider);
       File(deckPath).writeAsStringSync(
         container.read(markdownServiceProvider).generateDeck(deck),
@@ -113,6 +141,14 @@ void main() {
         );
       });
       final tabsBefore = container.read(tabsProvider).tabs;
+      expect(
+        liveImageUsages(
+          tabsBefore,
+          container.read(settingsProvider.notifier),
+          copy.path,
+        ),
+        hasLength(8),
+      );
       final activeDocument = tabsBefore.last.documentNotifier!;
 
       await tester.pumpWidget(
@@ -194,12 +230,16 @@ void main() {
         );
       }
       final usages = openTabImageUsages(tabsAfter, keeper.path);
-      expect(usages, hasLength(6));
+      expect(usages, hasLength(9));
       expect(usages.toSet(), hasLength(usages.length));
       expect(liveDeck.slides.first.imagePath, keeperRef);
       expect(liveDeck.slides.first.imagePath2, keeperRef);
       expect(slideImagePaths(liveDeck.slides[1]), everyElement(keeperRef));
       expect(slideImagePaths(liveDeck.slides[2]), everyElement(keeperRef));
+      final liveProfile = container.read(settingsProvider).themeProfile;
+      expect(liveProfile.logoPath, keeper.path);
+      expect(liveProfile.logoDarkPath, keeper.path);
+      expect(liveProfile.documentLogoPath, keeper.path);
 
       await tester.runAsync(() async {
         expect(await tabsAfter.first.deckNotifier.save(), isTrue);
@@ -222,6 +262,19 @@ void main() {
       expect(File(documentAPath).readAsStringSync(), isNot(contains(copyRef)));
       expect(File(documentBPath).readAsStringSync(), isNot(contains(copyRef)));
       expect(keeper.existsSync(), isTrue);
+      final persisted =
+          jsonDecode(
+                (await SharedPreferences.getInstance()).getString(
+                  'themeProfiles',
+                )!,
+              )
+              as List;
+      final persistedProfile = ThemeProfile.fromJson(
+        Map<String, Object?>.from(persisted.single as Map),
+      );
+      expect(persistedProfile.logoPath, keeper.path);
+      expect(persistedProfile.logoDarkPath, keeper.path);
+      expect(persistedProfile.documentLogoPath, keeper.path);
 
       await tester.pumpWidget(const SizedBox.shrink());
       container.dispose();
