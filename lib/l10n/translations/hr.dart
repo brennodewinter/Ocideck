@@ -1637,6 +1637,100 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Više nećete dijeliti vjerodajnice iz ovog novčanika. ',
+  'U hebt nog geen badges.': 'Još nemate znački.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Možete koristiti dokaze iz vanjskog novčanika (kao što je EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Predajete dokaz za: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Predajete ovu datoteku dokaza na ocjenjivanje. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Bit ćete preusmjereni pružatelju novčanika radi prijave. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Vaša će datoteka biti označena kao "predano, još nije provjereno" ',
+  'Verbinding maken…': 'Povezivanje…',
+  'Verbinding verbreken': 'Prekini vezu',
+  'Verbinding verbreken?': 'Prekinuti vezu?',
+  'Verbonden met {provider}': 'Povezano s {provider}',
+  'Verbreken': 'Prekini',
+  'Verlopen': 'Isteklo',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Ako zatražite brisanje, nestat će vaši dokazi i povezane ocjene. Pravila čuvanja u registru brisanja pokazuju ostaje li dio podataka zbog tekuće obveze čuvanja.',
+  'Wordt verzonden zodra je online bent.':
+      'Bit će poslano čim budete na mreži.',
+  'portefeuille': 'novčanik',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} vjerodajnica odabrano za dijeljenje',
+  '{bytes} bytes': '{bytes} bajtova',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'U obradi od {datum}. Obično u roku od dva radna dana.',
+  'Kies een bestand om aan te leveren.': 'Odaberite datoteku za predaju.',
+  'Kies wat u deelt': 'Odaberite što dijelite',
+  'Kies welke credentials u deelt als bewijs:':
+      'Odaberite koje vjerodajnice dijelite kao dokaz:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Nije bilo moguće učitati vaš dokaz. Pokušajte ponovno.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Povežite vanjski novčanik kako biste svoje postojeće značke i ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Ostavite prazno ako dokaz vrijedi neograničeno. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Predajte novu ili ispravljenu datoteku.',
+  'Lever het bestand opnieuw aan.': 'Ponovno predajte datoteku.',
+  'Mijn badges': 'Moje značke',
+  'Mijn bewijs': 'Moj dokaz',
+  'Mijn bewijsstukken': 'Moje datoteke dokaza',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Nakon prijave u sljedećem koraku odabirete koje vjerodajnice dijelite. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Još nisu predane datoteke dokaza.',
+  'Opgegeven': 'Predano',
+  'Opnieuw verbinden': 'Ponovno poveži',
+  'Portefeuille koppelen': 'Poveži novčanik',
+  'Portefeuille verbinden': 'Poveži novčanik',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Odaberite vjerodajnice koje želite dijeliti kao dokaz. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Zatvorite prozor pružatelja novčanika za nastavak.',
+  'Toegekend op {datum}': 'Dodijeljeno {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Dopušteni formati: PNG, JPEG, WebP i PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Do kada ovaj dokaz vrijedi?',
+  'Aangeleverd op {datum}': 'Predano {datum}',
+  'Aanleveren': 'Predaj',
+  'Afgekeurd': 'Odbijeno',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Odbijeno. Ocjenjivač nije naveo razlog.',
+  'Afgekeurd: {reden}': 'Odbijeno: {reden}',
+  'Ander bestand': 'Druga datoteka',
+  'Badge': 'Značka',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Značke će se ovdje pojaviti čim budu dodijeljene.',
+  'Bewijs aanleveren': 'Predaj dokaz',
+  'Bewijsstuk kiezen': 'Odaberi datoteku dokaza',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Datoteke dokaza pojavljuju se ovdje čim nešto predate za značku.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Datoteke dokaza su datoteke koje predajete za značku. Pregled prikazuje naziv datoteke, kontrolni kod, status i osobu koja ju je ocijenila. Same datoteke nisu u ovom pregledu; ocjenjivač ih može pregledati.',
+  'Bezig met versturen…': 'Slanje…',
+  'Datum kiezen': 'Odaberi datum',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Veza je prekinuta. Možete se ponovno povezati.',
+  'Deze functie is nog niet beschikbaar. ': 'Ova funkcija još nije dostupna. ',
+  'Externe portefeuille': 'Vanjski novčanik',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Prihvaćeno. Datoteka dokaza je odobrena.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'U ovom novčaniku nisu pronađene vjerodajnice.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Za ovu organizaciju nije pronađen profil sudionika.',
+  'Geldig tot {datum}': 'Vrijedi do {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Predaja nije uspjela. Pokušajte ponovno.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Tehnički zapisnik pristupa pokazuje tko je pregledao ili izmijenio vaše podatke, kada i u koju svrhu.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Prijenos nije uspio. Pokušajte ponovno.',
   'Registratie {nummer}': 'Registracija {nummer}',
   '1 categorie gevonden': 'Pronađena je 1 kategorija',
   '1 registratie': '1 registracija',

@@ -1648,6 +1648,101 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Tum nulla credentialia ex hac porta amplius communicabis. ',
+  'U hebt nog geen badges.': 'Nondum ulla insignia habes.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Probationem ex porta externa (ut EduBadges) adhibere potes ',
+  'U levert bewijs aan voor: {badge}': 'Probationem mittis pro: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Hanc probationem iudicandam mittis. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Ad provisorem portae mitteris ut rationem tuam ineas. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Fasciculus tuus ut "missus, nondum examinatus" notabitur ',
+  'Verbinding maken…': 'Conectens…',
+  'Verbinding verbreken': 'Disiungere',
+  'Verbinding verbreken?': 'Conexio disiungenda?',
+  'Verbonden met {provider}': 'Conexio cum {provider} facta',
+  'Verbreken': 'Disiungere',
+  'Verlopen': 'Exspiratum',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Si deletionem petis, probationes tuae atque aestimationes iis adiunctae delebuntur. Regulae servandi in registro deletionum indicant num aliquid propter obligationem servandi adhuc maneat.',
+  'Wordt verzonden zodra je online bent.':
+      'Mittetur simul ac nexum interretialem habueris.',
+  'portefeuille': 'porta',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Numerus documentorum credentialium communicandorum: {aantal}',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Ex die {datum} tractatur. Plerumque intra duos dies operarios.',
+  'Kies een bestand om aan te leveren.': 'Elige fasciculum mittendum.',
+  'Kies wat u deelt': 'Elige quid communices',
+  'Kies welke credentials u deelt als bewijs:':
+      'Elige quae credentialia pro probatione communices:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Probatio tua legi non potuit. Rursus conare.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Portam externam coniunge ut insignibus tuis iam exstantibus et ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Vacuum relinque si probatio sine termino valet. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Fasciculum novum vel correctum mitte.',
+  'Lever het bestand opnieuw aan.': 'Fasciculum rursus mitte.',
+  'Mijn badges': 'Insignia mea',
+  'Mijn bewijs': 'Probatio mea',
+  'Mijn bewijsstukken': 'Probationes meae',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Postquam rationem inieris, proximo gradu eliges quae credentialia communices. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Nullae probationes adhuc missae.',
+  'Opgegeven': 'Missum',
+  'Opnieuw verbinden': 'Rursus conectere',
+  'Portefeuille koppelen': 'Portam adiungere',
+  'Portefeuille verbinden': 'Portam conectere',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Elige credentialia quae pro probatione communicare vis. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Fenestram provisoris portae claude ut pergas.',
+  'Toegekend op {datum}': 'Attributum die {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Formae admissae: PNG, JPEG, WebP et PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Quousque haec probatio valet?',
+  'Aangeleverd op {datum}': 'Latum die {datum}',
+  'Aanleveren': 'Mittere',
+  'Afgekeurd': 'Repudiatus',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Repudiatus. Iudex nullam rationem dedit.',
+  'Afgekeurd: {reden}': 'Repudiatus: {reden}',
+  'Ander bestand': 'Alius fasciculus',
+  'Badge': 'Insigne',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Insignia hic apparent simul ac attributa sunt.',
+  'Bewijs aanleveren': 'Probationem mittere',
+  'Bewijsstuk kiezen': 'Eligere probationem',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Probationes hic apparent simul ac aliquid pro insigne mittis.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Probationes sunt documenta quae pro insigne mittis. Summarium ostendit nomen fasciculi, summa verificationis, status et quis iudicavit. Ipsa fasciculi non sunt in hoc summarium; iudex ea videre potest.',
+  'Bezig met versturen…': 'Mittendo…',
+  'Datum kiezen': 'Eligere diem',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Conexio interrupta est. Rursus conectere potes.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Haec functio adhuc non disponibilis. ',
+  'Externe portefeuille': 'Porta externa',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Acceptus. Probatio approbata est.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Nullae credentiales in hac porta inventae.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Nullum proficulum participis pro hac organizatione inventum.',
+  'Geldig tot {datum}': 'Validus usque ad {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Missio defecit. Rursus conare.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Liber accessus technicus ostendit quis tua data vidit vel mutavit, quando, et quo fine.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Oneratio defecit. Rursus conare.',
   'Registratie {nummer}': 'Registratio {nummer}',
   '1 categorie gevonden': 'Genus I found',
   '1 registratie': '1 registratio',

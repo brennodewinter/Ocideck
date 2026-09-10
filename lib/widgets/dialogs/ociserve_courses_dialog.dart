@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/learning_session.dart';
+import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_models.dart';
 import '../../state/ociserve_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -13,9 +14,11 @@ import 'ociserve_account_avatar.dart';
 import 'ociserve_course_summary.dart';
 import 'ociserve_courses_sidebar.dart';
 import 'ociserve_data_access.dart';
+import 'ociserve_evidence.dart';
 import 'ociserve_learning_profile.dart';
 
 part 'parts/ociserve_courses_dialog_privacy.dart';
+part 'parts/ociserve_courses_dialog_evidence.dart';
 
 class OciServeCoursesDialog extends ConsumerStatefulWidget {
   const OciServeCoursesDialog({super.key});
@@ -44,9 +47,14 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
   String? _selectedCourseVersionId;
   bool _showProgress = false;
   bool _showData = false;
+  bool _showEvidence = false;
   bool _privacyLoading = false;
   String? _privacyError;
   OciServePrivacyData? _privacyData;
+  bool _evidenceLoading = false;
+  String? _evidenceError;
+  List<EvidenceUpload> _evidenceUploads = const [];
+  List<OciServeQualification> _qualifications = const [];
 
   void _changePrivacy(VoidCallback change) => setState(change);
 
@@ -142,9 +150,11 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                 account: account,
                 showProgress: _showProgress,
                 showData: _showData,
+                showEvidence: _showEvidence,
                 onCourses: () => _showSection(),
                 onProgress: () => _showSection(progress: true),
                 onData: () => _showSection(data: true),
+                onEvidence: () => _showSection(evidence: true),
               ),
             Expanded(
               child: ColoredBox(
@@ -178,7 +188,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (_showProgress || _showData)
+          if (_showProgress || _showData || _showEvidence)
             IconButton(
               tooltip: l10n.d('Terug naar mijn cursussen'),
               onPressed: () => _showSection(),
@@ -204,6 +214,8 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                 Text(
                   _showData
                       ? l10n.d('Privacy-inzage')
+                      : _showEvidence
+                      ? l10n.d('Mijn bewijs')
                       : _showProgress
                       ? l10n.d('Persoonlijk overzicht')
                       : l10n.d('Mijn leeromgeving'),
@@ -217,6 +229,8 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                 Text(
                   _showData
                       ? l10n.d('Mijn gegevens')
+                      : _showEvidence
+                      ? l10n.d('Mijn bewijs')
                       : _showProgress
                       ? l10n.d('Mijn voortgang')
                       : name.isEmpty
@@ -258,10 +272,15 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     );
   }
 
-  void _showSection({bool progress = false, bool data = false}) {
+  void _showSection({
+    bool progress = false,
+    bool data = false,
+    bool evidence = false,
+  }) {
     setState(() {
       _showProgress = progress;
       _showData = data;
+      _showEvidence = evidence;
       if (_error == 'package_failed') {
         _error = null;
         _failedLesson = null;
@@ -269,6 +288,9 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
     });
     if (data && _privacyData == null && !_privacyLoading) {
       _loadPrivacyData();
+    }
+    if (evidence && _evidenceUploads.isEmpty && !_evidenceLoading) {
+      _loadEvidence();
     }
   }
 
@@ -306,6 +328,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       return const Center(child: CircularProgressIndicator());
     }
     if (_showData) return _privacyBody(l10n, theme, palette);
+    if (_showEvidence) return _evidenceBody(l10n, theme, palette);
     if (_error != null) return _errorView(l10n, theme, palette);
     final courses = _courses(l10n);
     if (_showProgress) {

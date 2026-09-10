@@ -665,6 +665,102 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Entonces ya no compartirá credenciales desde esta cartera. ',
+  'U hebt nog geen badges.': 'Aún no tiene insignias.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Puede utilizar pruebas de una cartera externa (como EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Está enviando pruebas para: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Está enviando este documento de prueba para su evaluación. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Será redirigido al proveedor de la cartera para iniciar sesión. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Su archivo se marcará como "enviado, aún no comprobado" ',
+  'Verbinding maken…': 'Conectando…',
+  'Verbinding verbreken': 'Desconectar',
+  'Verbinding verbreken?': '¿Desconectar?',
+  'Verbonden met {provider}': 'Conectado con {provider}',
+  'Verbreken': 'Desconectar',
+  'Verlopen': 'Caducado',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Si solicita la eliminación, sus documentos de prueba y las evaluaciones asociadas desaparecerán. Las reglas de conservación del registro de eliminaciones muestran si queda algún remanente por una obligación de conservación en curso.',
+  'Wordt verzonden zodra je online bent.':
+      'Se enviará en cuanto esté en línea.',
+  'portefeuille': 'cartera',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} credencial(es) seleccionada(s) para compartir',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'En trámite desde {datum}. Normalmente en un plazo de dos días laborables.',
+  'Kies een bestand om aan te leveren.': 'Elija un archivo para enviar.',
+  'Kies wat u deelt': 'Elija qué comparte',
+  'Kies welke credentials u deelt als bewijs:':
+      'Elija qué credenciales comparte como prueba:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'No se pudieron cargar sus pruebas. Inténtelo de nuevo.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Conecte una cartera externa para usar sus insignias existentes y ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Déjelo vacío si la prueba tiene validez indefinida. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Envíe un archivo nuevo o corregido.',
+  'Lever het bestand opnieuw aan.': 'Vuelva a enviar el archivo.',
+  'Mijn badges': 'Mis insignias',
+  'Mijn bewijs': 'Mis pruebas',
+  'Mijn bewijsstukken': 'Mis documentos de prueba',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Después de iniciar sesión, en el siguiente paso elige qué credenciales comparte. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Aún no se han enviado documentos de prueba.',
+  'Opgegeven': 'Enviado',
+  'Opnieuw verbinden': 'Volver a conectar',
+  'Portefeuille koppelen': 'Vincular cartera',
+  'Portefeuille verbinden': 'Conectar cartera',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Seleccione las credenciales que desea compartir como prueba. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Cierre la ventana del proveedor de la cartera para continuar.',
+  'Toegekend op {datum}': 'Concedido el {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Formatos permitidos: PNG, JPEG, WebP y PDF. ',
+  'Tot wanneer is dit bewijs geldig?': '¿Hasta cuándo es válida esta prueba?',
+  'Aangeleverd op {datum}': 'Enviado el {datum}',
+  'Aanleveren': 'Enviar',
+  'Afgekeurd': 'Rechazado',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Rechazado. El evaluador no proporcionó una razón.',
+  'Afgekeurd: {reden}': 'Rechazado: {reden}',
+  'Ander bestand': 'Otro archivo',
+  'Badge': 'Insignia',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Las insignias aparecen aquí una vez otorgadas.',
+  'Bewijs aanleveren': 'Enviar evidencia',
+  'Bewijsstuk kiezen': 'Elegir archivo de evidencia',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Las evidencias aparecen aquí cuando envías algo para una insignia.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Las evidencias son documentos que envías para una insignia. El resumen muestra el nombre del archivo, la suma de comprobación, el estado y quién lo evaluó. Los archivos mismos no están en este resumen; un evaluador puede verlos.',
+  'Bezig met versturen…': 'Enviando…',
+  'Datum kiezen': 'Elegir fecha',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'La conexión se ha interrumpido. Puede reconectar.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Esta función aún no está disponible. ',
+  'Externe portefeuille': 'Cartera externa',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Aceptado. La evidencia ha sido aprobada.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'No se encontraron credenciales en esta cartera.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'No se encontró perfil de participante para esta organización.',
+  'Geldig tot {datum}': 'Válido hasta {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'El envío ha fallado. Inténtelo de nuevo.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'El registro de acceso técnico muestra quién vio o modificó sus datos, cuándo y con qué propósito.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'La subida ha fallado. Inténtelo de nuevo.',
   'Registratie {nummer}': 'Registro {nummer}',
   '1 categorie gevonden': '1 categoría encontrada',
   '1 registratie': '1 registro',

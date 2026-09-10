@@ -667,6 +667,101 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'E ora ei bo no ta kompartí kredensialnan mas for di e portafolio aki. ',
+  'U hebt nog geen badges.': 'Bo ainda no tin ningun badge.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Bo por usa prueba for di un portafolio eksterno (manera EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Bo ta entregá prueba pa: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Bo ta entregá e prueba aki pa evaluashon. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Bo ta wòrdu redirigí pa e proveedó di portafolio pa hasi login. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Bo file ta wòrdu marká komo "deklará, ainda no kontrolá" ',
+  'Verbinding maken…': 'Ta konektando…',
+  'Verbinding verbreken': 'Deskonektá',
+  'Verbinding verbreken?': 'Deskonektá?',
+  'Verbonden met {provider}': 'Konektá ku {provider}',
+  'Verbreken': 'Deskonektá',
+  'Verlopen': 'Kaduká',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Si bo pidi pa eliminá bo datonan, bo pruebanan i e evaluashonnan korespondiente ta desaparesé. E reglanan di retenshon den e registro di eliminashon ta mustra si un resto ta keda pa un obligashon vigente pa retené dato.',
+  'Wordt verzonden zodra je online bent.':
+      'E lo wòrdu mandá asina ku bo ta online.',
+  'portefeuille': 'portafolio',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} kredensial selektá pa kompartí',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Den proseso for di {datum}. Normalmente denter di dos dia di trabou.',
+  'Kies een bestand om aan te leveren.': 'Skohe un file pa entregá.',
+  'Kies wat u deelt': 'Skohe loke bo ta kompartí',
+  'Kies welke credentials u deelt als bewijs:':
+      'Skohe kua kredensialnan bo ta kompartí komo prueba:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'No por a karga bo prueba. Purba atrobe.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Konektá un portafolio eksterno pa bo badgenan i ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Laga bashí si e prueba ta bálido sin límite. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Entregá un file nobo òf koregí.',
+  'Lever het bestand opnieuw aan.': 'Entregá e file atrobe.',
+  'Mijn badges': 'Mi badgenan',
+  'Mijn bewijs': 'Mi prueba',
+  'Mijn bewijsstukken': 'Mi pruebanan',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Despues di login, den e siguiente paso bo ta skohe kua kredensialnan bo ta kompartí. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Ainda no a entregá ningun prueba.',
+  'Opgegeven': 'Deklará',
+  'Opnieuw verbinden': 'Konektá atrobe',
+  'Portefeuille koppelen': 'Enlasá portafolio',
+  'Portefeuille verbinden': 'Konektá portafolio',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Selektá e kredensialnan ku bo ke kompartí komo prueba. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Sera e bentana di e proveedó di portafolio pa sigui.',
+  'Toegekend op {datum}': 'Otorgá riba {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Formatonan permití: PNG, JPEG, WebP i PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Te ki dia e prueba aki ta bálido?',
+  'Aangeleverd op {datum}': 'Entregá riba {datum}',
+  'Aanleveren': 'Entregá',
+  'Afgekeurd': 'Rechazá',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Rechazá. E evaluadó no a duna ningun motibu.',
+  'Afgekeurd: {reden}': 'Rechazá: {reden}',
+  'Ander bestand': 'Otro file',
+  'Badge': 'Badge',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Badgenan ta aparesé aki asina ku nan a wòrdu otorgá.',
+  'Bewijs aanleveren': 'Entregá prueba',
+  'Bewijsstuk kiezen': 'Skohe un file di prueba',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Pruebanan ta aparesé aki asina ku bo entregá algu pa un badge.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Pruebanan ta filenan ku bo ta entregá pa un badge. E resumen ta mustra nòmber di file, kódigo di kòntròl, status i ken a evaluá e. E filenan mes no ta den e resumen aki; un evaluadó sí por wak nan.',
+  'Bezig met versturen…': 'Ta mandando…',
+  'Datum kiezen': 'Skohe fecha',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'E konekshon a wòrdu deskonektá. Bo por konektá atrobe.',
+  'Deze functie is nog niet beschikbaar. ':
+      'E funshon aki ainda no ta disponibel. ',
+  'Externe portefeuille': 'Portafolio eksterno',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Aseptá. E prueba a wòrdu aprobá.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'No a haña ningun kredensial den e portafolio aki.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'No a haña perfil di partisipante pa e organisashon aki.',
+  'Geldig tot {datum}': 'Bálido te {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'E entrega a faya. Por fabor purba atrobe.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'E log tékniko di akseso ta mustra ken a wak òf kambia bo datonan, ki ora, i ku kua propósito.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Upload a faya. Por fabor purba atrobe.',
   'Registratie {nummer}': 'Registrashon {nummer}',
   '1 categorie gevonden': '1 kategoria hañá',
   '1 registratie': '1 inskripshon',

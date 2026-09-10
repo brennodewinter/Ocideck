@@ -1640,6 +1640,100 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Tuomet nebesidalysite šios dėklės kredencialais. ',
+  'U hebt nog geen badges.': 'Kol kas neturite jokių ženklelių.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Galite naudoti įrodymus iš išorinės dėklės (pvz., „EduBadges“) ',
+  'U levert bewijs aan voor: {badge}': 'Pateikiate įrodymą ženkleliui: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Pateikiate šį įrodymo failą vertinti. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Būsite nukreipti į dėklės teikėjo svetainę prisijungti. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Jūsų failas bus pažymėtas kaip „pateikta, dar nepatikrinta“ ',
+  'Verbinding maken…': 'Jungiamasi…',
+  'Verbinding verbreken': 'Atsieti',
+  'Verbinding verbreken?': 'Atsieti?',
+  'Verbonden met {provider}': 'Susieta: {provider}',
+  'Verbreken': 'Atsieti',
+  'Verlopen': 'Nebegalioja',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Jei pateiksite prašymą ištrinti, jūsų įrodymų failai ir su jais susiję vertinimai bus ištrinti. Ištrynimo registre pateiktos saugojimo taisyklės parodo, ar dėl tebegaliojančios prievolės saugoti duomenis liks jų dalis.',
+  'Wordt verzonden zodra je online bent.':
+      'Bus išsiųsta, kai tik prisijungsite prie interneto.',
+  'portefeuille': 'dėklė',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Bendrinti pasirinkta kredencialų: {aantal}',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Nagrinėjama nuo {datum}. Paprastai užtrunka iki dviejų darbo dienų.',
+  'Kies een bestand om aan te leveren.': 'Pasirinkite pateiktiną failą.',
+  'Kies wat u deelt': 'Pasirinkite, kuo dalysitės',
+  'Kies welke credentials u deelt als bewijs:':
+      'Pasirinkite kredencialus, kuriais dalysitės kaip įrodymais:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Nepavyko įkelti jūsų įrodymų. Bandykite dar kartą.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Susiekite išorinę dėklę, kad galėtumėte naudoti turimus ženklelius ir ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Palikite tuščią, jei įrodymas galioja neribotai. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Pateikite naują arba pataisytą failą.',
+  'Lever het bestand opnieuw aan.': 'Pateikite failą dar kartą.',
+  'Mijn badges': 'Mano ženkleliai',
+  'Mijn bewijs': 'Mano įrodymai',
+  'Mijn bewijsstukken': 'Mano įrodymų failai',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Prisijungę kitame žingsnyje pasirinksite, kuriais kredencialais dalysitės. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Įrodymų failų dar nepateikta.',
+  'Opgegeven': 'Pateikta',
+  'Opnieuw verbinden': 'Susieti iš naujo',
+  'Portefeuille koppelen': 'Susieti dėklę',
+  'Portefeuille verbinden': 'Susieti dėklę',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Pasirinkite kredencialus, kuriais norite dalytis kaip įrodymais. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Norėdami tęsti, uždarykite dėklės teikėjo langą.',
+  'Toegekend op {datum}': 'Suteikta {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Leidžiami formatai: PNG, JPEG, WebP ir PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Iki kada galioja šis įrodymas?',
+  'Aangeleverd op {datum}': 'Pateikta {datum}',
+  'Aanleveren': 'Pateikti',
+  'Afgekeurd': 'Atmesta',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Atmesta. Vertintojas nenurodė priežasties.',
+  'Afgekeurd: {reden}': 'Atmesta: {reden}',
+  'Ander bestand': 'Kitas failas',
+  'Badge': 'Ženklelis',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Suteikti ženkleliai bus rodomi čia.',
+  'Bewijs aanleveren': 'Pateikti įrodymą',
+  'Bewijsstuk kiezen': 'Pasirinkti įrodymo failą',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Ženkleliui pateikti įrodymų failai bus rodomi čia.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Įrodymų failai – tai dokumentai, kuriuos pateikiate ženkleliui gauti. Apžvalgoje rodomas failo pavadinimas, kontrolinė suma, būsena ir jį įvertinęs asmuo. Pačių failų šioje apžvalgoje nėra, tačiau vertintojas gali juos peržiūrėti.',
+  'Bezig met versturen…': 'Siunčiama…',
+  'Datum kiezen': 'Pasirinkti datą',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Ryšys nutrauktas. Galite susieti iš naujo.',
+  'Deze functie is nog niet beschikbaar. ': 'Ši funkcija dar nepasiekiama. ',
+  'Externe portefeuille': 'Išorinė dėklė',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Priimta. Įrodymo failas patvirtintas.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Šioje dėklėje kredencialų nerasta.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Nerasta šios organizacijos dalyvio profilio.',
+  'Geldig tot {datum}': 'Galioja iki {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Nepavyko pateikti. Bandykite dar kartą.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Techniniame prieigos žurnale nurodyta, kas, kada ir kokiu tikslu peržiūrėjo ar pakeitė jūsų duomenis.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Nepavyko įkelti failo. Bandykite dar kartą.',
   'Registratie {nummer}': 'Registracija {nummer}',
   '1 categorie gevonden': 'Rasta 1 kategorija',
   '1 registratie': '1 registracija',

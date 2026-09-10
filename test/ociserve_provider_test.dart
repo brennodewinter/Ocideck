@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/learning_session.dart';
+import 'package:ocideck/models/ociserve_evidence.dart';
 import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
@@ -153,6 +154,80 @@ class _FakeApi implements OciServeApi {
     required String accessToken,
     required String avatarHash,
   }) async => Uint8List(0);
+
+  @override
+  Future<List<EvidenceUpload>> listEvidence({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+  }) async => const [];
+
+  @override
+  Future<List<OciServeQualification>> listQualifications({
+    required String accessToken,
+    required String organizationId,
+    required String participantId,
+  }) async => const [];
+
+  @override
+  Future<EvidenceUpload> requestEvidenceSlot({
+    required String accessToken,
+    required String organizationId,
+    required EvidenceUploadRequest request,
+  }) async => EvidenceUpload(
+    id: 'slot-id',
+    filename: request.filename,
+    declaredType: request.declaredType,
+    declaredSize: request.declaredSize,
+    declaredHash: request.declaredHash,
+    status: EvidenceUploadStatus.pending,
+    createdAt: DateTime.utc(2026, 9, 9),
+  );
+
+  @override
+  Future<EvidenceUpload> uploadEvidenceContent({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+    required Uint8List bytes,
+    required String contentType,
+  }) async => EvidenceUpload(
+    id: evidenceId,
+    filename: '',
+    declaredType: contentType,
+    declaredSize: bytes.length,
+    declaredHash: '',
+    status: EvidenceUploadStatus.uploaded,
+    createdAt: DateTime.utc(2026, 9, 9),
+  );
+
+  @override
+  Future<EvidenceUpload> evidenceDetail({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+  }) async => EvidenceUpload(
+    id: evidenceId,
+    filename: '',
+    declaredType: '',
+    declaredSize: 0,
+    declaredHash: '',
+    status: EvidenceUploadStatus.pending,
+    createdAt: DateTime.utc(2026, 9, 9),
+  );
+
+  @override
+  Future<Uint8List> downloadEvidence({
+    required String accessToken,
+    required String organizationId,
+    required String evidenceId,
+  }) async => Uint8List(0);
+
+  @override
+  Future<Uri> badgeAdministrationUrl({
+    required String accessToken,
+    required String organizationId,
+  }) async => Uri.parse('https://badges.example.org');
 }
 
 ProviderContainer _container(

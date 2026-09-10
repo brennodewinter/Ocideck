@@ -1633,6 +1633,100 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Setelah itu, Anda tidak lagi membagikan kredensial dari dompet ini. ',
+  'U hebt nog geen badges.': 'Anda belum memiliki lencana.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Anda dapat menggunakan bukti dari dompet eksternal (seperti EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Anda mengirimkan bukti untuk: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Anda mengirimkan bukti ini untuk dinilai. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Anda akan diarahkan ke penyedia dompet untuk masuk. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Berkas Anda akan ditandai sebagai "dikirim, belum diperiksa" ',
+  'Verbinding maken…': 'Menghubungkan…',
+  'Verbinding verbreken': 'Putuskan koneksi',
+  'Verbinding verbreken?': 'Putuskan koneksi?',
+  'Verbonden met {provider}': 'Terhubung ke {provider}',
+  'Verbreken': 'Putuskan',
+  'Verlopen': 'Kedaluwarsa',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Jika Anda meminta penghapusan, bukti dan penilaian terkait akan dihapus. Aturan retensi dalam register penghapusan menunjukkan apakah masih ada data yang disimpan karena kewajiban retensi yang sedang berlaku.',
+  'Wordt verzonden zodra je online bent.':
+      'Akan dikirim setelah Anda kembali online.',
+  'portefeuille': 'dompet',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} kredensial dipilih untuk dibagikan',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Diproses sejak {datum}. Biasanya selesai dalam dua hari kerja.',
+  'Kies een bestand om aan te leveren.': 'Pilih berkas untuk dikirim.',
+  'Kies wat u deelt': 'Pilih yang ingin Anda bagikan',
+  'Kies welke credentials u deelt als bewijs:':
+      'Pilih kredensial yang ingin Anda bagikan sebagai bukti:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Bukti Anda tidak dapat dimuat. Silakan coba lagi.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Hubungkan dompet eksternal untuk menggunakan lencana dan ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Biarkan kosong jika bukti berlaku tanpa batas waktu. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Kirim berkas baru atau yang telah diperbaiki.',
+  'Lever het bestand opnieuw aan.': 'Kirim ulang berkas.',
+  'Mijn badges': 'Lencana saya',
+  'Mijn bewijs': 'Bukti saya',
+  'Mijn bewijsstukken': 'Dokumen bukti saya',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Setelah masuk, pada langkah berikutnya Anda memilih kredensial yang akan dibagikan. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Belum ada bukti yang dikirim.',
+  'Opgegeven': 'Dikirim',
+  'Opnieuw verbinden': 'Hubungkan kembali',
+  'Portefeuille koppelen': 'Hubungkan dompet',
+  'Portefeuille verbinden': 'Hubungkan dompet',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Pilih kredensial yang ingin Anda bagikan sebagai bukti. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Tutup jendela penyedia dompet untuk melanjutkan.',
+  'Toegekend op {datum}': 'Diberikan pada {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Format yang diizinkan: PNG, JPEG, WebP, dan PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Sampai kapan bukti ini berlaku?',
+  'Aangeleverd op {datum}': 'Dikirim pada {datum}',
+  'Aanleveren': 'Kirim',
+  'Afgekeurd': 'Ditolak',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Ditolak. Penilai tidak memberikan alasan.',
+  'Afgekeurd: {reden}': 'Ditolak: {reden}',
+  'Ander bestand': 'File lain',
+  'Badge': 'Lencana',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Lencana muncul di sini setelah diberikan.',
+  'Bewijs aanleveren': 'Kirim bukti',
+  'Bewijsstuk kiezen': 'Pilih file bukti',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Bukti muncul di sini setelah Anda mengirim sesuatu untuk lencana.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Bukti adalah dokumen yang Anda kirim untuk lencana. Ikhtisar menunjukkan nama file, checksum, status, dan siapa yang menilainya. File itu sendiri tidak ada dalam ikhtisar ini; penilai dapat melihatnya.',
+  'Bezig met versturen…': 'Mengirim…',
+  'Datum kiezen': 'Pilih tanggal',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Koneksi telah terputus. Anda dapat menyambung kembali.',
+  'Deze functie is nog niet beschikbaar. ': 'Fitur ini belum tersedia. ',
+  'Externe portefeuille': 'Portofolio eksternal',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Diterima. Bukti telah disetujui.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Tidak ada kredensial ditemukan di portofolio ini.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Tidak ada profil peserta ditemukan untuk organisasi ini.',
+  'Geldig tot {datum}': 'Berlaku hingga {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Pengiriman gagal. Silakan coba lagi.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Log akses teknis menunjukkan siapa yang melihat atau mengubah data Anda, kapan, dan untuk tujuan apa.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Unggahan gagal. Silakan coba lagi.',
   'Registratie {nummer}': 'Registrasi {nummer}',
   '1 categorie gevonden': '1 kategori ditemukan',
   '1 registratie': '1 pendaftaran',

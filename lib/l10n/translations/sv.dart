@@ -1632,6 +1632,101 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Du delar då inte längre inloggningsuppgifter från denna portfölj. ',
+  'U hebt nog geen badges.': 'Du har inga märken ännu.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Du kan dela bevis från en extern portfölj (som EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Du lämnar in bevis för: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Du lämnar in detta bevis för bedömning. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Du skickas vidare till portföljleverantören för att logga in. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Din fil markeras som ”uppgiven, ännu inte kontrollerad” ',
+  'Verbinding maken…': 'Ansluter…',
+  'Verbinding verbreken': 'Koppla från',
+  'Verbinding verbreken?': 'Koppla från?',
+  'Verbonden met {provider}': 'Ansluten till {provider}',
+  'Verbreken': 'Koppla från',
+  'Verlopen': 'Utgånget',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Om du begär radering försvinner dina bevis och tillhörande bedömningar. Bevarandereglerna i raderingsregistret visar om något återstår på grund av en pågående bevarandeskyldighet.',
+  'Wordt verzonden zodra je online bent.': 'Skickas så snart du är ansluten.',
+  'portefeuille': 'portfölj',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} inloggningsuppgifter valda för delning',
+  '{bytes} bytes': '{bytes} byte',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Under behandling sedan {datum}. Vanligtvis inom två arbetsdagar.',
+  'Kies een bestand om aan te leveren.': 'Välj en fil att lämna in.',
+  'Kies wat u deelt': 'Välj vad du delar',
+  'Kies welke credentials u deelt als bewijs:':
+      'Välj vilka inloggningsuppgifter du delar som bevis:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Det gick inte att läsa in ditt bevis. Försök igen.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Anslut en extern portfölj för att dela dina befintliga märken och ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Lämna tomt om beviset gäller utan tidsgräns. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Lämna in en ny eller rättad fil.',
+  'Lever het bestand opnieuw aan.': 'Lämna in filen igen.',
+  'Mijn badges': 'Mina märken',
+  'Mijn bewijs': 'Mina bevis',
+  'Mijn bewijsstukken': 'Mina styrkande handlingar',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Efter inloggning väljer du i nästa steg vilka inloggningsuppgifter du delar. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Inga styrkande handlingar har lämnats in ännu.',
+  'Opgegeven': 'Uppgiven',
+  'Opnieuw verbinden': 'Anslut igen',
+  'Portefeuille koppelen': 'Koppla portfölj',
+  'Portefeuille verbinden': 'Anslut portfölj',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Välj de inloggningsuppgifter som du vill dela som bevis. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Stäng portföljleverantörens fönster för att fortsätta.',
+  'Toegekend op {datum}': 'Tilldelat {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Tillåtna format: PNG, JPEG, WebP och PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Hur länge är detta bevis giltigt?',
+  'Aangeleverd op {datum}': 'Inlämnad den {datum}',
+  'Aanleveren': 'Lämna in',
+  'Afgekeurd': 'Avvisad',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Avvisad. Bedömaren angav ingen anledning.',
+  'Afgekeurd: {reden}': 'Avvisad: {reden}',
+  'Ander bestand': 'Annan fil',
+  'Badge': 'Bricka',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Brickor visas här så snart de har tilldelats.',
+  'Bewijs aanleveren': 'Lämna in bevis',
+  'Bewijsstuk kiezen': 'Välj bevisfil',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Bevis visas här så snart du lämnar in något för en bricka.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Bevis är dokument du lämnar in för en bricka. Översikten visar filnamn, kontrollsumma, status och vem som har bedömt det. Själva filerna finns inte i denna översikt; en bedömare kan visa dem.',
+  'Bezig met versturen…': 'Skickar…',
+  'Datum kiezen': 'Välj datum',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Anslutningen har brutits. Du kan ansluta igen.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Denna funktion är ännu inte tillgänglig. ',
+  'Externe portefeuille': 'Extern portfölj',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Accepterad. Beviset har godkänts.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Inga inloggningsuppgifter hittades i denna portfölj.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Ingen deltagarprofil hittades för denna organisation.',
+  'Geldig tot {datum}': 'Giltig till {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Inlämning misslyckades. Försök igen.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Den tekniska åtkomstloggen visar vem som har visat eller ändrat dina data, när och till vilket syfte.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Uppladdning misslyckades. Försök igen.',
   'Registratie {nummer}': 'Registrering {nummer}',
   '1 categorie gevonden': '1 kategori hittades',
   '1 registratie': '1 registrering',

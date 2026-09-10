@@ -1663,6 +1663,103 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Ní roinneann tú dintiúir ón bpunann seo a thuilleadh. ',
+  'U hebt nog geen badges.': 'Níl aon suaitheantas agat fós.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Is féidir leat fianaise ó phunann sheachtrach (amhail EduBadges) a roinnt ',
+  'U levert bewijs aan voor: {badge}':
+      'Tá fianaise á cur isteach agat do: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Tá an fhianaise seo á cur isteach agat le measúnú. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Cuirfear ar aghaidh thú chuig soláthraí na punainne chun logáil isteach. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Marcálfar do chomhad mar „dearbhaithe, gan seiceáil fós” ',
+  'Verbinding maken…': 'Ag nascadh…',
+  'Verbinding verbreken': 'Dícheangail',
+  'Verbinding verbreken?': 'Dícheangail?',
+  'Verbonden met {provider}': 'Nasctha le {provider}',
+  'Verbreken': 'Dícheangail',
+  'Verlopen': 'Imithe in éag',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Má iarrann tú scriosadh, imíonn d’fhianaise agus na measúnuithe gaolmhara. Léiríonn rialacha coinneála sa chlár scriosta an bhfágtar aon chuid de mar gheall ar oibleagáid choinneála leanúnach.',
+  'Wordt verzonden zodra je online bent.':
+      'Seolfar é a luaithe a bheidh tú ar líne.',
+  'portefeuille': 'punann',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} ndintiúr roghnaithe le roinnt',
+  '{bytes} bytes': '{bytes} beart',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Á phróiseáil ó {datum}. De ghnáth laistigh de dhá lá oibre.',
+  'Kies een bestand om aan te leveren.': 'Roghnaigh comhad le cur isteach.',
+  'Kies wat u deelt': 'Roghnaigh an méid a roinneann tú',
+  'Kies welke credentials u deelt als bewijs:':
+      'Roghnaigh na dintiúir a roinneann tú mar fhianaise:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Níorbh fhéidir d’fhianaise a lódáil. Bain triail eile as.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Ceangail punann sheachtrach chun do shuaitheantais reatha agus ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Fág bán é má tá an fhianaise bailí gan teorainn. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Cuir isteach comhad nua nó ceartaithe.',
+  'Lever het bestand opnieuw aan.': 'Cuir isteach an comhad arís.',
+  'Mijn badges': 'Mo shuaitheantais',
+  'Mijn bewijs': 'Mo fhianaise',
+  'Mijn bewijsstukken': 'Mo dhoiciméid fhianaise',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Tar éis logáil isteach, roghnaíonn tú sa chéad chéim eile na dintiúir a roinneann tú. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Níl doiciméid fhianaise curtha isteach fós.',
+  'Opgegeven': 'Dearbhaithe',
+  'Opnieuw verbinden': 'Athnasc',
+  'Portefeuille koppelen': 'Nasc punann',
+  'Portefeuille verbinden': 'Ceangail punann',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Roghnaigh na dintiúir is mian leat a roinnt mar fhianaise. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Dún fuinneog sholáthraí na punainne chun leanúint ar aghaidh.',
+  'Toegekend op {datum}': 'Bronnadh ar {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Formáidí ceadaithe: PNG, JPEG, WebP agus PDF. ',
+  'Tot wanneer is dit bewijs geldig?':
+      'Go dtí cathain a bheidh an fhianaise seo bailí?',
+  'Aangeleverd op {datum}': 'Curtha isteach ar {datum}',
+  'Aanleveren': 'Cuir isteach',
+  'Afgekeurd': 'Diúltaithe',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Diúltaithe. Níor thug an measúnóir cúis.',
+  'Afgekeurd: {reden}': 'Diúltaithe: {reden}',
+  'Ander bestand': 'Comhad eile',
+  'Badge': 'Suaitheantas',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Taispeántar suaitheantais anseo a luaithe a bhronntar iad.',
+  'Bewijs aanleveren': 'Cuir fianaise isteach',
+  'Bewijsstuk kiezen': 'Roghnaigh fianaise',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Taispeántar doiciméid fhianaise anseo a luaithe a chuireann tú rud isteach do shuaitheantas.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Is comhaid iad doiciméid fhianaise a chuireann tú isteach do shuaitheantas. Taispeánann an forléargas ainm an chomhaid, cód seiceála, stádas agus cé a rinne é a mheas. Níl na comhaid féin sa bhforléargas seo; féadann measúnóir iad a fheiceáil.',
+  'Bezig met versturen…': 'Á sheoladh…',
+  'Datum kiezen': 'Roghnaigh dáta',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Tá an nasc briste. Is féidir leat nascadh arís.',
+  'Deze functie is nog niet beschikbaar. ': 'Níl an fheidhm seo ar fáil fós. ',
+  'Externe portefeuille': 'Punann sheachtrach',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Glactha. Tá an fhianaise ceadaithe.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Ní bhfuarthas aon dintiúir sa phunann seo.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Ní bhfuarthas próifíl rannpháirtí don eagraíocht seo.',
+  'Geldig tot {datum}': 'Bailí go dtí {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Theip ar an gcur isteach. Bain triail eile as.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Taispeánann an loga teicniúil rochtana cé a bhreathnaigh ar do shonraí nó a d’athraigh iad, cathain agus cén cuspóir a bhí leis.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Theip ar an uaslódáil. Bain triail eile as.',
   'Registratie {nummer}': 'Clárú {nummer}',
   '1 categorie gevonden': 'Aimsíodh 1 chatagóir',
   '1 registratie': '|\n1 chlárú',

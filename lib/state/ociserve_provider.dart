@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/learning_session.dart';
+import '../models/ociserve_evidence.dart';
 import '../models/ociserve_models.dart';
 import '../models/ociserve_settings.dart';
 import '../models/playback.dart';
@@ -468,6 +469,99 @@ class OciServeNotifier extends Notifier<OciServeState> {
     return _gatewayFactory(
       state.settings,
     ).privacyData(accessToken: access, organizationId: organizationId);
+  }
+
+  // — Evidence & badges —
+
+  Future<List<EvidenceUpload>> listEvidence({
+    required String organizationId,
+    required String participantId,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).listEvidence(
+      accessToken: access,
+      organizationId: organizationId,
+      participantId: participantId,
+    );
+  }
+
+  Future<List<OciServeQualification>> listQualifications({
+    required String organizationId,
+    required String participantId,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).listQualifications(
+      accessToken: access,
+      organizationId: organizationId,
+      participantId: participantId,
+    );
+  }
+
+  Future<EvidenceUpload> requestEvidenceSlot({
+    required String organizationId,
+    required EvidenceUploadRequest request,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).requestEvidenceSlot(
+      accessToken: access,
+      organizationId: organizationId,
+      request: request,
+    );
+  }
+
+  Future<EvidenceUpload> uploadEvidenceContent({
+    required String organizationId,
+    required String evidenceId,
+    required Uint8List bytes,
+    required String contentType,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).uploadEvidenceContent(
+      accessToken: access,
+      organizationId: organizationId,
+      evidenceId: evidenceId,
+      bytes: bytes,
+      contentType: contentType,
+    );
+  }
+
+  Future<EvidenceUpload> evidenceDetail({
+    required String organizationId,
+    required String evidenceId,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).evidenceDetail(
+      accessToken: access,
+      organizationId: organizationId,
+      evidenceId: evidenceId,
+    );
+  }
+
+  Future<Uint8List> downloadEvidence({
+    required String organizationId,
+    required String evidenceId,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).downloadEvidence(
+      accessToken: access,
+      organizationId: organizationId,
+      evidenceId: evidenceId,
+    );
+  }
+
+  Future<Uri> badgeAdministrationUrl(String organizationId) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).badgeAdministrationUrl(
+      accessToken: access,
+      organizationId: organizationId,
+    );
   }
 
   Future<OciServePackage> lessonPackage({

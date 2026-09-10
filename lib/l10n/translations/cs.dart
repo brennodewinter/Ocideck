@@ -1634,6 +1634,100 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Z tohoto portfolia již nebudete sdílet žádná digitální osvědčení. ',
+  'U hebt nog geen badges.': 'Zatím nemáte žádné odznaky.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Můžete použít doklady z externího portfolia (například EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Předkládáte doklad k odznaku: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Tento doklad předkládáte k posouzení. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Budete přesměrováni k poskytovateli portfolia, kde se přihlásíte. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Váš soubor bude označen jako „odeslaný, dosud nezkontrolovaný“ ',
+  'Verbinding maken…': 'Připojování…',
+  'Verbinding verbreken': 'Odpojit',
+  'Verbinding verbreken?': 'Odpojit?',
+  'Verbonden met {provider}': 'Připojeno: {provider}',
+  'Verbreken': 'Odpojit',
+  'Verlopen': 'Platnost skončila',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Pokud požádáte o výmaz, vaše doklady a související posouzení budou odstraněny. Pravidla uchovávání v registru výmazů ukazují, zda kvůli trvající povinnosti uchovávání zůstane zachována část údajů.',
+  'Wordt verzonden zodra je online bent.': 'Odešle se, jakmile budete online.',
+  'portefeuille': 'portfolio',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Vybraná digitální osvědčení ke sdílení: {aantal}',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Čeká na vyřízení od {datum}. Obvykle nejdéle dva pracovní dny.',
+  'Kies een bestand om aan te leveren.': 'Vyberte soubor k odeslání.',
+  'Kies wat u deelt': 'Vyberte, co budete sdílet',
+  'Kies welke credentials u deelt als bewijs:':
+      'Vyberte digitální osvědčení, která chcete sdílet jako doklad:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Vaše podklady se nepodařilo načíst. Zkuste to znovu.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Připojte externí portfolio a použijte své stávající odznaky a ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Ponechte prázdné, pokud má doklad neomezenou platnost. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Odešlete nový nebo opravený soubor.',
+  'Lever het bestand opnieuw aan.': 'Odešlete soubor znovu.',
+  'Mijn badges': 'Moje odznaky',
+  'Mijn bewijs': 'Moje podklady',
+  'Mijn bewijsstukken': 'Moje doklady',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Po přihlášení v dalším kroku vyberete digitální osvědčení, která chcete sdílet. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Dosud nebyly předloženy žádné doklady.',
+  'Opgegeven': 'Odesláno',
+  'Opnieuw verbinden': 'Znovu připojit',
+  'Portefeuille koppelen': 'Propojit portfolio',
+  'Portefeuille verbinden': 'Připojit portfolio',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Vyberte digitální osvědčení, která chcete sdílet jako doklad. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Chcete-li pokračovat, zavřete okno poskytovatele portfolia.',
+  'Toegekend op {datum}': 'Uděleno dne {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Povolené formáty: PNG, JPEG, WebP a PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Do kdy je tento doklad platný?',
+  'Aangeleverd op {datum}': 'Odesláno dne {datum}',
+  'Aanleveren': 'Odeslat',
+  'Afgekeurd': 'Zamítnuto',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Zamítnuto. Posuzovatel neuvedl důvod.',
+  'Afgekeurd: {reden}': 'Zamítnuto: {reden}',
+  'Ander bestand': 'Jiný soubor',
+  'Badge': 'Odznak',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Odznaky se zde zobrazí po udělení.',
+  'Bewijs aanleveren': 'Předložit doklad',
+  'Bewijsstuk kiezen': 'Vybrat doklad',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Doklady se zde zobrazí, jakmile něco předložíte k získání odznaku.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Doklady jsou soubory, které předkládáte k získání odznaku. Přehled uvádí název souboru, kontrolní součet, stav a osobu, která jej posoudila. Samotné soubory v tomto přehledu nejsou; posuzovatel si je však může zobrazit.',
+  'Bezig met versturen…': 'Odesílání…',
+  'Datum kiezen': 'Vybrat datum',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Připojení bylo přerušeno. Můžete se znovu připojit.',
+  'Deze functie is nog niet beschikbaar. ': 'Tato funkce zatím není dostupná. ',
+  'Externe portefeuille': 'Externí portfolio',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Přijato. Doklad byl schválen.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'V tomto portfoliu nebyla nalezena žádná digitální osvědčení.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Pro tuto organizaci nebyl nalezen profil účastníka.',
+  'Geldig tot {datum}': 'Platnost do {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Odeslání se nezdařilo. Zkuste to znovu.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Technický protokol přístupů uvádí, kdo, kdy a za jakým účelem vaše údaje zobrazil nebo změnil.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Nahrávání se nezdařilo. Zkuste to znovu.',
   'Registratie {nummer}': 'Registrace {nummer}',
   '1 categorie gevonden': 'Byla nalezena 1 kategorie',
   '1 registratie': '1 registrace',

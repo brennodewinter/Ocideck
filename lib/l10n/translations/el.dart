@@ -1658,6 +1658,102 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Τότε δεν κοινοποιείτε πλέον διαπιστευτήρια από αυτό το χαρτοφυλάκιο. ',
+  'U hebt nog geen badges.': 'Δεν έχετε ακόμη σήματα.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Μπορείτε να κοινοποιήσετε αποδεικτικά από εξωτερικό χαρτοφυλάκιο (όπως το EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Υποβάλλετε αποδεικτικό για: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Υποβάλλετε αυτό το αποδεικτικό για αξιολόγηση. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Θα ανακατευθυνθείτε στον πάροχο χαρτοφυλακίου για σύνδεση. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Το αρχείο σας θα επισημανθεί ως «δηλωμένο, δεν έχει ακόμη ελεγχθεί» ',
+  'Verbinding maken…': 'Σύνδεση…',
+  'Verbinding verbreken': 'Αποσύνδεση',
+  'Verbinding verbreken?': 'Αποσύνδεση;',
+  'Verbonden met {provider}': 'Συνδέθηκε με {provider}',
+  'Verbreken': 'Αποσύνδεση',
+  'Verlopen': 'Έληξε',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Αν ζητήσετε διαγραφή, τα αποδεικτικά σας και οι σχετικές αξιολογήσεις θα εξαφανιστούν. Οι κανόνες διατήρησης στο μητρώο διαγραφών δείχνουν αν απομένει κάτι λόγω ενεργής υποχρέωσης διατήρησης.',
+  'Wordt verzonden zodra je online bent.':
+      'Θα σταλεί μόλις συνδεθείτε στο διαδίκτυο.',
+  'portefeuille': 'χαρτοφυλάκιο',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Επιλέχθηκαν {aantal} διαπιστευτήρια για κοινοποίηση',
+  '{bytes} bytes': '{bytes} byte',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Υπό επεξεργασία από {datum}. Συνήθως εντός δύο εργάσιμων ημερών.',
+  'Kies een bestand om aan te leveren.': 'Επιλέξτε αρχείο για υποβολή.',
+  'Kies wat u deelt': 'Επιλέξτε τι κοινοποιείτε',
+  'Kies welke credentials u deelt als bewijs:':
+      'Επιλέξτε ποια διαπιστευτήρια κοινοποιείτε ως αποδεικτικά:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Δεν ήταν δυνατή η φόρτωση του αποδεικτικού σας. Δοκιμάστε ξανά.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Συνδέστε εξωτερικό χαρτοφυλάκιο για να κοινοποιήσετε τα υπάρχοντα σήματα και ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Αφήστε κενό αν το αποδεικτικό ισχύει απεριόριστα. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Υποβάλετε νέο ή διορθωμένο αρχείο.',
+  'Lever het bestand opnieuw aan.': 'Υποβάλετε ξανά το αρχείο.',
+  'Mijn badges': 'Τα σήματά μου',
+  'Mijn bewijs': 'Τα αποδεικτικά μου',
+  'Mijn bewijsstukken': 'Τα έγγραφα τεκμηρίωσής μου',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Μετά τη σύνδεση, στο επόμενο βήμα επιλέγετε ποια διαπιστευτήρια κοινοποιείτε. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Δεν έχουν υποβληθεί ακόμη έγγραφα τεκμηρίωσης.',
+  'Opgegeven': 'Δηλώθηκε',
+  'Opnieuw verbinden': 'Επανασύνδεση',
+  'Portefeuille koppelen': 'Σύνδεση χαρτοφυλακίου',
+  'Portefeuille verbinden': 'Συνδέστε χαρτοφυλάκιο',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Επιλέξτε τα διαπιστευτήρια που θέλετε να κοινοποιήσετε ως αποδεικτικά. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Κλείστε το παράθυρο του παρόχου χαρτοφυλακίου για να συνεχίσετε.',
+  'Toegekend op {datum}': 'Απονεμήθηκε στις {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Επιτρεπόμενες μορφές: PNG, JPEG, WebP και PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Μέχρι πότε ισχύει αυτό το αποδεικτικό;',
+  'Aangeleverd op {datum}': 'Υποβλήθηκε στις {datum}',
+  'Aanleveren': 'Υποβολή',
+  'Afgekeurd': 'Απορρίφθηκε',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Απορρίφθηκε. Ο αξιολογητής δεν έδωσε αιτιολογία.',
+  'Afgekeurd: {reden}': 'Απορρίφθηκε: {reden}',
+  'Ander bestand': 'Άλλο αρχείο',
+  'Badge': 'Σήμα',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Τα σήματα εμφανίζονται εδώ μόλις απονεμηθούν.',
+  'Bewijs aanleveren': 'Υποβολή αποδεικτικού',
+  'Bewijsstuk kiezen': 'Επιλογή αποδεικτικού',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Τα έγγραφα τεκμηρίωσης εμφανίζονται εδώ μόλις υποβάλετε κάτι για ένα σήμα.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Τα έγγραφα τεκμηρίωσης είναι αρχεία που υποβάλλετε για ένα σήμα. Η επισκόπηση δείχνει το όνομα αρχείου, τον κωδικό ελέγχου, την κατάσταση και ποιος το αξιολόγησε. Τα ίδια τα αρχεία δεν βρίσκονται σε αυτή την επισκόπηση· ένας αξιολογητής μπορεί όμως να τα δει.',
+  'Bezig met versturen…': 'Αποστολή…',
+  'Datum kiezen': 'Επιλογή ημερομηνίας',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Η σύνδεση διακόπηκε. Μπορείτε να συνδεθείτε ξανά.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Αυτή η λειτουργία δεν είναι ακόμη διαθέσιμη. ',
+  'Externe portefeuille': 'Εξωτερικό χαρτοφυλάκιο',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Έγινε αποδεκτό. Το αποδεικτικό εγκρίθηκε.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Δεν βρέθηκαν διαπιστευτήρια σε αυτό το χαρτοφυλάκιο.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Δεν βρέθηκε προφίλ συμμετέχοντα για αυτόν τον οργανισμό.',
+  'Geldig tot {datum}': 'Ισχύει έως {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Η υποβολή απέτυχε. Δοκιμάστε ξανά.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Το τεχνικό αρχείο καταγραφής πρόσβασης δείχνει ποιος είδε ή άλλαξε τα δεδομένα σας, πότε και για ποιον σκοπό.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Η μεταφόρτωση απέτυχε. Δοκιμάστε ξανά.',
   'Registratie {nummer}': 'Εγγραφή {nummer}',
   '1 categorie gevonden': 'Βρέθηκε 1 κατηγορία',
   '1 registratie': '1 εγγραφή',

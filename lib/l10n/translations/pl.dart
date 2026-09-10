@@ -1645,6 +1645,102 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Nie udostępniasz już poświadczeń z tego portfolio. ',
+  'U hebt nog geen badges.': 'Nie masz jeszcze odznak.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Możesz udostępniać dowody z zewnętrznego portfolio (np. EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Przesyłasz dowód dla: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Przesyłasz ten dowód do oceny. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Zostaniesz przekierowany do dostawcy portfolio, aby się zalogować. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Twój plik zostanie oznaczony jako „zgłoszony, jeszcze niezweryfikowany” ',
+  'Verbinding maken…': 'Łączenie…',
+  'Verbinding verbreken': 'Rozłącz',
+  'Verbinding verbreken?': 'Rozłączyć?',
+  'Verbonden met {provider}': 'Połączono z {provider}',
+  'Verbreken': 'Rozłącz',
+  'Verlopen': 'Wygasłe',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Jeśli złożysz wniosek o usunięcie, znikną Twoje dowody i powiązane oceny. Zasady przechowywania w rejestrze usunięć wskazują, czy pozostanie część danych z powodu trwającego obowiązku przechowywania.',
+  'Wordt verzonden zodra je online bent.':
+      'Zostanie wysłane, gdy tylko połączysz się z internetem.',
+  'portefeuille': 'portfolio',
+  '{aantal} credential(s) geselecteerd om te delen':
+      'Wybrano {aantal} poświadczeń do udostępnienia',
+  '{bytes} bytes': '{bytes} bajtów',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'W trakcie rozpatrywania od {datum}. Zwykle trwa to do dwóch dni roboczych.',
+  'Kies een bestand om aan te leveren.': 'Wybierz plik do przesłania.',
+  'Kies wat u deelt': 'Wybierz, co udostępniasz',
+  'Kies welke credentials u deelt als bewijs:':
+      'Wybierz poświadczenia, które udostępniasz jako dowód:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Nie można było wczytać Twojego dowodu. Spróbuj ponownie.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Połącz zewnętrzne portfolio, aby udostępnić istniejące odznaki i ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Pozostaw puste, jeśli dowód jest ważny bezterminowo. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Prześlij nowy lub poprawiony plik.',
+  'Lever het bestand opnieuw aan.': 'Prześlij plik ponownie.',
+  'Mijn badges': 'Moje odznaki',
+  'Mijn bewijs': 'Moje dowody',
+  'Mijn bewijsstukken': 'Moje materiały dowodowe',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Po zalogowaniu w następnym kroku wybierzesz udostępniane poświadczenia. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'Nie przesłano jeszcze materiałów dowodowych.',
+  'Opgegeven': 'Zgłoszono',
+  'Opnieuw verbinden': 'Połącz ponownie',
+  'Portefeuille koppelen': 'Połącz portfolio',
+  'Portefeuille verbinden': 'Połącz z portfolio',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Wybierz poświadczenia, które chcesz udostępnić jako dowód. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Zamknij okno dostawcy portfolio, aby kontynuować.',
+  'Toegekend op {datum}': 'Przyznano {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Dozwolone formaty: PNG, JPEG, WebP i PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Do kiedy ten dowód jest ważny?',
+  'Aangeleverd op {datum}': 'Złożono dnia {datum}',
+  'Aanleveren': 'Złóż',
+  'Afgekeurd': 'Odrzucono',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Odrzucono. Oceniający nie podał powodu.',
+  'Afgekeurd: {reden}': 'Odrzucono: {reden}',
+  'Ander bestand': 'Inny plik',
+  'Badge': 'Odznaka',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Odznaki pojawiają się tutaj, gdy tylko zostaną przyznane.',
+  'Bewijs aanleveren': 'Złóż dowód',
+  'Bewijsstuk kiezen': 'Wybierz plik dowodu',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Dowody pojawiają się tutaj, gdy złożysz coś dla odznaki.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Dowody to dokumenty, które składasz dla odznaki. Przegląd pokazuje nazwę pliku, sumę kontrolną, status i kto go ocenił. Same pliki nie są w tym przeglądzie; oceniający może je zobaczyć.',
+  'Bezig met versturen…': 'Wysyłanie…',
+  'Datum kiezen': 'Wybierz datę',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Połączenie zostało przerwane. Możesz połączyć się ponownie.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Ta funkcja nie jest jeszcze dostępna. ',
+  'Externe portefeuille': 'Zewnętrzne portfolio',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Zaakceptowano. Dowód został zatwierdzony.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Nie znaleziono poświadczeń w tym portfolio.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Nie znaleziono profilu uczestnika dla tej organizacji.',
+  'Geldig tot {datum}': 'Ważne do {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Złożenie nie powiodło się. Spróbuj ponownie.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Techniczny dziennik dostępu pokazuje, kto oglądał lub modyfikował Twoje dane, kiedy i w jakim celu.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Przesyłanie nie powiodło się. Spróbuj ponownie.',
   'Registratie {nummer}': 'Rejestracja {nummer}',
   '1 categorie gevonden': 'Znaleziono 1 kategorię',
   '1 registratie': '1 rejestracja',

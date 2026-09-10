@@ -2550,6 +2550,100 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Bu cüzdandaki kimlik bilgilerini artık paylaşmayacaksınız. ',
+  'U hebt nog geen badges.': 'Henüz rozetiniz yok.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Harici bir cüzdandaki (EduBadges gibi) kanıtları ',
+  'U levert bewijs aan voor: {badge}': '{badge} için kanıt gönderiyorsunuz',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Bu kanıt dosyasını değerlendirilmek üzere gönderiyorsunuz. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Oturum açmanız için cüzdan sağlayıcısına yönlendirileceksiniz. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Dosyanız "gönderildi, henüz kontrol edilmedi" olarak işaretlenecek ',
+  'Verbinding maken…': 'Bağlanıyor…',
+  'Verbinding verbreken': 'Bağlantıyı kes',
+  'Verbinding verbreken?': 'Bağlantı kesilsin mi?',
+  'Verbonden met {provider}': '{provider} ile bağlantı kuruldu',
+  'Verbreken': 'Bağlantıyı kes',
+  'Verlopen': 'Süresi doldu',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Silme talebinde bulunursanız kanıt dosyalarınız ve bunlarla ilişkili değerlendirmeler silinir. Silme kaydındaki saklama kuralları, devam eden bir saklama yükümlülüğü nedeniyle geride herhangi bir veri kalıp kalmayacağını gösterir.',
+  'Wordt verzonden zodra je online bent.':
+      'Çevrimiçi olduğunuzda gönderilecek.',
+  'portefeuille': 'cüzdan',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} kimlik bilgisi paylaşmak üzere seçildi',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      '{datum} tarihinden beri değerlendirme aşamasında. Genellikle iki iş günü içinde tamamlanır.',
+  'Kies een bestand om aan te leveren.': 'Göndermek için bir dosya seçin.',
+  'Kies wat u deelt': 'Ne paylaşacağınızı seçin',
+  'Kies welke credentials u deelt als bewijs:':
+      'Kanıt olarak paylaşacağınız kimlik bilgilerini seçin:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Kanıtınız yüklenemedi. Lütfen tekrar deneyin.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Harici bir cüzdan bağlayarak mevcut rozetlerinizi ve ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Kanıt süresiz geçerliyse boş bırakın. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Yeni veya düzeltilmiş bir dosya gönderin.',
+  'Lever het bestand opnieuw aan.': 'Dosyayı yeniden gönderin.',
+  'Mijn badges': 'Rozetlerim',
+  'Mijn bewijs': 'Kanıtlarım',
+  'Mijn bewijsstukken': 'Kanıt dosyalarım',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Oturum açtıktan sonra, sonraki adımda hangi kimlik bilgilerini paylaşacağınızı seçersiniz. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Henüz kanıt dosyası gönderilmedi.',
+  'Opgegeven': 'Gönderildi',
+  'Opnieuw verbinden': 'Yeniden bağlan',
+  'Portefeuille koppelen': 'Cüzdanı bağla',
+  'Portefeuille verbinden': 'Cüzdanı bağla',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Kanıt olarak paylaşmak istediğiniz kimlik bilgilerini seçin. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Devam etmek için cüzdan sağlayıcısının penceresini kapatın.',
+  'Toegekend op {datum}': '{datum} tarihinde verildi',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'İzin verilen biçimler: PNG, JPEG, WebP ve PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Bu kanıt ne zamana kadar geçerli?',
+  'Aangeleverd op {datum}': '{datum} tarihinde gönderildi',
+  'Aanleveren': 'Gönder',
+  'Afgekeurd': 'Reddedildi',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Reddedildi. Değerlendiren kişi bir neden belirtmedi.',
+  'Afgekeurd: {reden}': 'Reddedildi: {reden}',
+  'Ander bestand': 'Başka dosya',
+  'Badge': 'Rozet',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Rozetler verildikten sonra burada görünür.',
+  'Bewijs aanleveren': 'Kanıt gönder',
+  'Bewijsstuk kiezen': 'Kanıt dosyası seç',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Bir rozet için kanıt gönderdiğinizde kanıt dosyaları burada görünür.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Kanıt dosyaları, bir rozet için gönderdiğiniz belgelerdir. Genel bakışta dosya adı, sağlama toplamı, durum ve değerlendiren kişi gösterilir. Dosyaların kendileri bu genel bakışta yer almaz; ancak değerlendiren kişi onları görüntüleyebilir.',
+  'Bezig met versturen…': 'Gönderiliyor…',
+  'Datum kiezen': 'Tarih seç',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Bağlantı kesildi. Yeniden bağlanabilirsiniz.',
+  'Deze functie is nog niet beschikbaar. ': 'Bu özellik henüz kullanılamıyor. ',
+  'Externe portefeuille': 'Harici cüzdan',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Kabul edildi. Kanıt dosyası onaylandı.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Bu cüzdanda kimlik bilgisi bulunamadı.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Bu kuruluş için katılımcı profili bulunamadı.',
+  'Geldig tot {datum}': '{datum} tarihine kadar geçerli',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Gönderme işlemi başarısız oldu. Lütfen tekrar deneyin.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Teknik erişim günlüğü, verilerinizi kimin ne zaman ve hangi amaçla görüntülediğini veya değiştirdiğini gösterir.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Yükleme başarısız oldu. Lütfen tekrar deneyin.',
   'Registratie {nummer}': 'Kayıt {nummer}',
   '1 categorie gevonden': '1 kategori bulundu',
   '1 registratie': '1 kayıt',

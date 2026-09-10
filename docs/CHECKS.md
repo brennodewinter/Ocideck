@@ -994,6 +994,29 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** regenerate the SBOM and commit it — `make sbom` then
   `git add sbom/`.
 
+### OciServe contractpoort (`test/ociserve_api_drift_test.dart`)
+- **Runs:** `flutter test test/ociserve_api_drift_test.dart` (in
+  `make check-registrations`, dus in de per-PR `static-gate`).
+- **Covers:** dat elke route die `ociserve_gateway.dart` aanroept bestaat in
+  de gepinde OpenAPI-spec van OciServe, met de juiste methode en de
+  responsvelden die OciDeck uitleest. Een verwijderde, hernoemde of
+  hervormde route in OciServe laat deze poort rood worden — vóórdat een
+  gebruiker een kapotte endpoint raakt.
+- **Pinned spec:** `test/fixtures/ociserve_openapi.yaml`, gekopieerd van
+  `brenno/OciServe` op commit `8f73aefd5e4f2dfaf3060a4c819f68fe7edef266`.
+- **Pin bijwerken:**
+  1. Kopieer `docs/openapi.yaml` uit de OciServe-repo naar
+     `test/fixtures/ociserve_openapi.yaml`.
+  2. Noteer de OciServe commit-SHA in `pinnedOciServeCommit` bovenaan de
+     test.
+  3. Voeg nieuwe gateway-routes toe aan `gatewayRoutes` in de test als de
+     gateway er een heeft bijgekregen.
+  4. Draai `flutter test test/ociserve_api_drift_test.dart` — groen betekent
+     dat de client en de spec nog kloppen.
+- **Failure means:** OciServe heeft een route verwijderd, hernoemd of
+  hervormd die OciDeck aanroept. Werk de pin bij (hierboven) of pas de
+  gateway aan.
+
 ### `make check-collab-field-parity`
 - **Runs:** `dart run tool/check_collab_field_parity.dart`
 - **Covers:** that every `final` field declared on `class Slide` is in exactly
@@ -1990,10 +2013,11 @@ that reaches beyond `build/test_cache`.
 - **Why `check-registrations` too (#1123).** `check-static` catches the *static*
   drift (file/class/method size, formatting, hardcoded text) but the
   registration gates — new lib file in `SOURCE_MAP`, new docs registered, SBOM
-  fresh vs `pubspec`, new `l10n.d` string translated, and (since #1208) the
-  Windows installer still packaging what it claims to — **are tests**, so they
+  fresh vs `pubspec`, new `l10n.d` string translated, (since #1208) the
+  Windows installer still packaging what it claims to, and (since #2042) the
+  OciServe routes matching the pinned OpenAPI spec — **are tests**, so they
   ran nowhere before the merge and that class (e.g. `source_map_coverage_test`)
-  could still land red. These five are plain tests (no widget render), seconds
+  could still land red. These six are plain tests (no widget render), seconds
   each, in the same job — so the required-check context stays
   `static-gate / static-gate`.
   The list in `REGISTRATION_TESTS` is hand-maintained: a new invariant *test*

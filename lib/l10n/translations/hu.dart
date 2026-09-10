@@ -1635,6 +1635,100 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Ekkor többé nem oszt meg hitelesítő adatokat ebből a tárcából. ',
+  'U hebt nog geen badges.': 'Még nincsenek jelvényei.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Külső tárcából (például EduBadgesből) származó igazolásokat használhat ',
+  'U levert bewijs aan voor: {badge}': 'Igazolást nyújt be ehhez: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Ezt az igazoló fájlt értékelésre nyújtja be. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'A bejelentkezéshez átirányítjuk a tárcaszolgáltatóhoz. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'A fájl jelölése „benyújtva, még nincs ellenőrizve” lesz ',
+  'Verbinding maken…': 'Kapcsolódás…',
+  'Verbinding verbreken': 'Kapcsolat bontása',
+  'Verbinding verbreken?': 'Bontja a kapcsolatot?',
+  'Verbonden met {provider}': 'Kapcsolódva ehhez: {provider}',
+  'Verbreken': 'Bontás',
+  'Verlopen': 'Lejárt',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Ha törlést kér, az igazoló fájljai és a kapcsolódó értékelések eltűnnek. A törlési nyilvántartás megőrzési szabályai jelzik, marad-e vissza adat folyamatban lévő megőrzési kötelezettség miatt.',
+  'Wordt verzonden zodra je online bent.':
+      'A rendszer elküldi, amint online lesz.',
+  'portefeuille': 'tárca',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} hitelesítő adat kiválasztva megosztásra',
+  '{bytes} bytes': '{bytes} bájt',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Feldolgozás alatt {datum} óta. Általában két munkanapon belül.',
+  'Kies een bestand om aan te leveren.': 'Válasszon ki egy benyújtandó fájlt.',
+  'Kies wat u deelt': 'Válassza ki, mit oszt meg',
+  'Kies welke credentials u deelt als bewijs:':
+      'Válassza ki, mely hitelesítő adatokat osztja meg igazolásként:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Az igazolást nem sikerült betölteni. Próbálja újra.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Csatlakoztasson külső tárcát a meglévő jelvényei és ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Hagyja üresen, ha az igazolás korlátlan ideig érvényes. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Nyújtson be új vagy javított fájlt.',
+  'Lever het bestand opnieuw aan.': 'Nyújtsa be újra a fájlt.',
+  'Mijn badges': 'Jelvényeim',
+  'Mijn bewijs': 'Igazolásom',
+  'Mijn bewijsstukken': 'Igazoló fájljaim',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Bejelentkezés után a következő lépésben kiválasztja a megosztott hitelesítő adatokat. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Még nincs benyújtott igazoló fájl.',
+  'Opgegeven': 'Benyújtva',
+  'Opnieuw verbinden': 'Újracsatlakozás',
+  'Portefeuille koppelen': 'Tárca csatlakoztatása',
+  'Portefeuille verbinden': 'Tárca csatlakoztatása',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Válassza ki az igazolásként megosztani kívánt hitelesítő adatokat. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'A folytatáshoz zárja be a tárcaszolgáltató ablakát.',
+  'Toegekend op {datum}': 'Kiállítva: {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Engedélyezett formátumok: PNG, JPEG, WebP és PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Meddig érvényes ez az igazolás?',
+  'Aangeleverd op {datum}': 'Benyújtva: {datum}',
+  'Aanleveren': 'Benyújtás',
+  'Afgekeurd': 'Elutasítva',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Elutasítva. Az értékelő nem adott meg indokot.',
+  'Afgekeurd: {reden}': 'Elutasítva: {reden}',
+  'Ander bestand': 'Másik fájl',
+  'Badge': 'Jelvény',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'A jelvények itt jelennek meg, amint kiállították őket.',
+  'Bewijs aanleveren': 'Igazolás benyújtása',
+  'Bewijsstuk kiezen': 'Igazoló fájl kiválasztása',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Az igazoló fájlok itt jelennek meg, amikor valamit benyújt egy jelvényhez.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Az igazoló fájlok olyan fájlok, amelyeket egy jelvényhez nyújt be. Az áttekintés a fájlnevet, ellenőrzőkódot, állapotot és az értékelő személyét mutatja. Maguk a fájlok nem szerepelnek ebben az áttekintésben; az értékelő megtekintheti őket.',
+  'Bezig met versturen…': 'Küldés…',
+  'Datum kiezen': 'Dátum kiválasztása',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'A kapcsolat megszakadt. Újra csatlakozhat.',
+  'Deze functie is nog niet beschikbaar. ': 'Ez a funkció még nem érhető el. ',
+  'Externe portefeuille': 'Külső tárca',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Elfogadva. Az igazoló fájlt jóváhagyták.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Ebben a tárcában nem találhatók hitelesítő adatok.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Ehhez a szervezethez nem található résztvevői profil.',
+  'Geldig tot {datum}': 'Érvényes eddig: {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'A benyújtás sikertelen volt. Próbálja újra.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'A technikai hozzáférési napló megmutatja, ki, mikor és milyen célból tekintette meg vagy módosította az adatait.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'A feltöltés sikertelen volt. Próbálja újra.',
   'Registratie {nummer}': 'Regisztráció {nummer}',
   '1 categorie gevonden': '1 kategória található',
   '1 registratie': '1 regisztráció',

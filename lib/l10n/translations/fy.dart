@@ -668,6 +668,101 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Jo diele dan gjin oanmeldgegevens mear út dizze portefúlje. ',
+  'U hebt nog geen badges.': 'Jo hawwe noch gjin badges.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Jo kinne bewiis út in eksterne portefúlje diele (lykas EduBadges) ',
+  'U levert bewijs aan voor: {badge}': 'Jo leverje bewiis oan foar: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Jo leverje dit bewiisstik oan foar beoardieling. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Jo wurde trochstjoerd nei de portefúljeprovider om yn te loggen. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Jo bestân wurdt markearre as „opjûn, noch net kontrolearre” ',
+  'Verbinding maken…': 'Ferbining meitsje…',
+  'Verbinding verbreken': 'Ferbining ferbrekke',
+  'Verbinding verbreken?': 'Ferbining ferbrekke?',
+  'Verbonden met {provider}': 'Ferbûn mei {provider}',
+  'Verbreken': 'Ferbrekke',
+  'Verlopen': 'Ferrûn',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'As jo wiskjen oanfreegje, ferdwine jo bewiisstikken en de byhearrende beoardielingen. Bewarregels yn it wiskregister litte sjen oft der foar in rinnende bewarplicht noch wat oerbliuwt.',
+  'Wordt verzonden zodra je online bent.':
+      'Wurdt ferstjoerd sadree\'t jo online binne.',
+  'portefeuille': 'portefúlje',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} oanmeldgegevens selektearre om te dielen',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Yn behanneling sûnt {datum}. Meastentiids binnen twa wurkdagen.',
+  'Kies een bestand om aan te leveren.': 'Kies in bestân om oan te leverjen.',
+  'Kies wat u deelt': 'Kies wat jo diele',
+  'Kies welke credentials u deelt als bewijs:':
+      'Kies hokker oanmeldgegevens jo as bewiis diele:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Jo bewiis koe net laden wurde. Besykje it opnij.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Keppelje in eksterne portefúlje om jo besteande badges en ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Lit leech as it bewiis ûnbeheind jildich is. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Lever in nij of korrizjearre bestân oan.',
+  'Lever het bestand opnieuw aan.': 'Lever it bestân opnij oan.',
+  'Mijn badges': 'Myn badges',
+  'Mijn bewijs': 'Myn bewiis',
+  'Mijn bewijsstukken': 'Myn bewiisstikken',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Nei it ynloggen kieze jo yn de folgjende stap hokker oanmeldgegevens jo diele. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Noch gjin bewiisstikken oanlevere.',
+  'Opgegeven': 'Opjûn',
+  'Opnieuw verbinden': 'Opnij ferbine',
+  'Portefeuille koppelen': 'Portefúlje keppelje',
+  'Portefeuille verbinden': 'Portefúlje ferbine',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Selektearje de oanmeldgegevens dy’t jo as bewiis diele wolle. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Slút it finster fan de portefúljeprovider om fierder te gean.',
+  'Toegekend op {datum}': 'Tawiisd op {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Talitten formaten: PNG, JPEG, WebP en PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Oant wannear is dit bewiis jildich?',
+  'Aangeleverd op {datum}': 'Oanlevere op {datum}',
+  'Aanleveren': 'Oanleverje',
+  'Afgekeurd': 'Ofkard',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Ofkard. De beoardieler hat gjin reden opjûn.',
+  'Afgekeurd: {reden}': 'Ofkard: {reden}',
+  'Ander bestand': 'Oar bestân',
+  'Badge': 'Badge',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Badges ferskine hjir sadree\'t se tawiisd binne.',
+  'Bewijs aanleveren': 'Bewiis oanleverje',
+  'Bewijsstuk kiezen': 'Bewiisstik kieze',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Bewiisstikken ferskine hjir sadree\'t jo wat foar in badge oanleverje.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Bewiisstikken binne bestannen dy’t jo foar in badge oanleverje. It oersjoch toant de bestânsnamme, kontrôlekoade, status en wa\'t it beoardiele hat. De bestannen sels steane net yn dit oersjoch; in beoardieler kin se wol besjen.',
+  'Bezig met versturen…': 'Dwaande mei ferstjoeren…',
+  'Datum kiezen': 'Datum kieze',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'De ferbining is ferbrutsen. Jo kinne opnij ferbine.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Dizze funksje is noch net beskikber. ',
+  'Externe portefeuille': 'Eksterne portefúlje',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Akseptearre. It bewiisstik is goedkard.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Gjin oanmeldgegevens fûn yn dizze portefúlje.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Gjin dielnimmersprofyl fûn foar dizze organisaasje.',
+  'Geldig tot {datum}': 'Jildich oant {datum}',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'It oanleverjen is mislearre. Besykje it opnij.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'It technyske tagongslogboek lit sjen wa\'t jo gegevens besjoen of feroare hat, wannear en mei hokker doel.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'It opladen is mislearre. Besykje it opnij.',
   'Registratie {nummer}': 'Registraasje {nummer}',
   '1 categorie gevonden': '1 kategory fûn',
   '1 registratie': '1 registraasje',

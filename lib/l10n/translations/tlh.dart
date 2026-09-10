@@ -1610,6 +1610,101 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'ngugh De\' polwI\'vamvo\' chaw\' De\'mey DalI\'be\'. ',
+  'U hebt nog geen badges.': 'wej Deghmey Daghaj.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Hur De\' polwI\'vo\' (EduBadges rur) \'olmeH De\' Dalo\'laH ',
+  'U levert bewijs aan voor: {badge}': 'DochvamvaD \'olmeH De\' Danob: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'chovlu\'meH \'olmeH De\' ngaSwI\'vam Danob. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'bI\'elmeH De\' polwI\' nobwI\'Daq ngeHlu\'. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'De\' ngaSwI\'lIjvaD "noblu\'pu\', wej \'ollu\'" ghItlhlu\' ',
+  'Verbinding maken…': 'rarlu\'lI\'…',
+  'Verbinding verbreken': 'yIrarHa\'',
+  'Verbinding verbreken?': 'bIrarHa\'\'a\'?',
+  'Verbonden met {provider}': '{provider} rarlu\'',
+  'Verbreken': 'yIrarHa\'',
+  'Verlopen': 'ghenbe\'choHpu\'',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Qaw\'lu\'meH bItlhobchugh, \'olmeH De\' ngaSwI\'meylIj chovghachmey je Qaw\'lu\'. Qaw\'ghach tetlhDaq polmeH chutmeymo\' De\' \'ay\' poltaHlu\'nISchugh, \'anglu\'.',
+  'Wordt verzonden zodra je online bent.':
+      'De\'wI\' pat DararlaHDI\' SIbI\' ngeHlu\'.',
+  'portefeuille': 'De\' polwI\'',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} chaw\' De\' lI\'lu\'meH wIvlu\'pu\'',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      '{datum} tagh chovghach; wej rIn. motlh vummeH jaj cha\' poQ.',
+  'Kies een bestand om aan te leveren.': 'DanobmeH De\' ngaSwI\' yIwIv.',
+  'Kies wat u deelt': 'DalI\'bogh Doch yIwIv',
+  'Kies welke credentials u deelt als bewijs:':
+      '\'olmeH DalI\'bogh chaw\' De\'mey yIwIv:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      '\'olmeH De\'lIj SuqlaHbe\'lu\'. yInIDqa\'.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'DeghmeylIj tu\'lu\'bogh, latlh chaw\' De\'mey je Dalo\'meH Hur De\' polwI\' yIrar. ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'reH ghenchugh \'olmeH De\'vam, yIchImmoH. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'De\' ngaSwI\' chu\', De\' ngaSwI\' lughmoHlu\'pu\'bogh ghap yInob.',
+  'Lever het bestand opnieuw aan.': 'De\' ngaSwI\' yInobqa\'.',
+  'Mijn badges': 'DeghmeywIj',
+  'Mijn bewijs': '\'olmeH De\'wIj',
+  'Mijn bewijsstukken': '\'olmeH De\' ngaSwI\'meywIj',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'bI\'elpu\'DI\', mIw vebDaq DalI\'bogh chaw\' De\'mey DawIv. ',
+  'Nog geen bewijsstukken aangeleverd.':
+      'wej \'olmeH De\' ngaSwI\' noblu\'pu\'.',
+  'Opgegeven': 'noblu\'pu\'',
+  'Opnieuw verbinden': 'yIrarqa\'',
+  'Portefeuille koppelen': 'De\' polwI\' yIrar',
+  'Portefeuille verbinden': 'De\' polwI\' yIrar',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      '\'olmeH DalI\' DaneHbogh chaw\' De\'mey yIwIv. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'bItaHmeH De\' polwI\' nobwI\' Qorwagh yISoQmoH.',
+  'Toegekend op {datum}': '{datum} noblu\'pu\'',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'De\' Seghmey chaw\'lu\'bogh: PNG, JPEG, WebP, PDF je. ',
+  'Tot wanneer is dit bewijs geldig?': 'ghorgh ghenbe\'choH \'olmeH De\'vam?',
+  'Aangeleverd op {datum}': '{datum} noblu\'pu\'',
+  'Aanleveren': 'yInob',
+  'Afgekeurd': 'lajQo\'lu\'pu\'',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'lajQo\'lu\'pu\'. meq nobbe\' chovwI\'.',
+  'Afgekeurd: {reden}': 'lajQo\'lu\'pu\': {reden}',
+  'Ander bestand': 'latlh De\' ngaSwI\'',
+  'Badge': 'Degh',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'noblu\'pu\'DI\' Deghmey, naDev cha\'lu\'.',
+  'Bewijs aanleveren': '\'olmeH De\' yInob',
+  'Bewijsstuk kiezen': '\'olmeH De\' ngaSwI\' yIwIv',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'DeghvaD \'olmeH De\' DanobDI\', naDev De\' ngaSwI\'mey cha\'lu\'.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'DeghvaD De\' ngaSwI\'mey Danob; \'olmeH De\' ngaSwI\'mey bIH. De\' ngaSwI\' pong, \'olmeH mI\', Dotlh, chovwI\' je \'ang tetlhvam. De\' ngaSwI\'mey ngaSbe\' tetlhvam; \'ach bIH leghlaH chovwI\'.',
+  'Bezig met versturen…': 'ngeHlI\'…',
+  'Datum kiezen': 'jaj yIwIv',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'rarHa\'lu\'pu\'. bIrarqa\'laH.',
+  'Deze functie is nog niet beschikbaar. ': 'wej lo\'laHlu\' Qu\'vam. ',
+  'Externe portefeuille': 'Hur De\' polwI\'',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'lajlu\'pu\'. \'olmeH De\' ngaSwI\' naDlu\'pu\'.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'De\' polwI\'vamDaq chaw\' De\' tu\'lu\'be\'.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'DIvI\'vamvaD jeSwI\' Delbogh De\' tu\'lu\'be\'.',
+  'Geldig tot {datum}': '{datum} ghenbe\'choH \'olmeH De\'',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'nobmeH mIw luj. yInIDqa\'.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'De\'lIj leghpu\'bogh ghot, De\'lIj choHpu\'bogh ghot, qaSbogh poH, ngoQ je \'ang cham naw\' QonoS.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'De\' ngaSwI\' ngeHmeH mIw luj. yInIDqa\'.',
   'Registratie {nummer}': 'Registration {nummer} De\'',
   '1 categorie gevonden': '1 De\' ghom tu\'lu\'',
   '1 registratie': '1 ghItlh tu\'lu\'',

@@ -246,6 +246,10 @@ const unchangedInEnglish = {
   'Per item',
   // eLearning-editor: placeholder-voorbeeld voor slide-anchors, geen tekst.
   'slide:0\nslide:5',
+  // Bewijs bij badges: 'Badge' is een leenwoord in het Engels, '{bytes} bytes'
+  // is een technische eenheid die in beide talen gelijk blijft.
+  'Badge',
+  '{bytes} bytes',
 };
 
 /// Idem, maar voor ALLE talen: termen die overal letterlijk gelijk blijven —

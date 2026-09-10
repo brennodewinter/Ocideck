@@ -1633,6 +1633,102 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'U deelt dan geen credentials meer vanuit deze portefeuille. ':
+      'Et enää jaa tunnistetietoja tästä lompakosta. ',
+  'U hebt nog geen badges.': 'Sinulla ei ole vielä tunnuksia.',
+  'U kunt bewijs uit een externe portefeuille (zoals EduBadges) ':
+      'Voit käyttää todisteita ulkoisesta lompakosta (kuten EduBadges) ',
+  'U levert bewijs aan voor: {badge}':
+      'Toimitat todisteita tunnusta varten: {badge}',
+  'U levert dit bewijsstuk aan ter beoordeling. ':
+      'Toimitat tämän todisteen arvioitavaksi. ',
+  'U wordt doorgestuurd naar de portefeuilleprovider om in te loggen. ':
+      'Sinut ohjataan lompakkopalveluun kirjautumaan. ',
+  'Uw bestand wordt gemarkeerd als "opgegeven, nog niet gecontroleerd" ':
+      'Tiedostosi merkitään tilaan "toimitettu, ei vielä tarkistettu" ',
+  'Verbinding maken…': 'Yhdistetään…',
+  'Verbinding verbreken': 'Katkaise yhteys',
+  'Verbinding verbreken?': 'Katkaistaanko yhteys?',
+  'Verbonden met {provider}': 'Yhdistetty palveluun {provider}',
+  'Verbreken': 'Katkaise',
+  'Verlopen': 'Vanhentunut',
+  'Vraagt u verwijdering aan, dan verdwijnen uw bewijsstukken en de bijbehorende beoordelingen. Bewaarregels in het verwijderingsregister laten zien of er nog een restant achterblijft voor een lopende bewaarplicht.':
+      'Jos pyydät poistamista, todisteesi ja niihin liittyvät arvioinnit poistuvat. Poistorekisterin säilytyssäännöt osoittavat, jääkö jotakin jäljelle voimassa olevan säilytysvelvoitteen vuoksi.',
+  'Wordt verzonden zodra je online bent.':
+      'Lähetetään heti, kun olet verkossa.',
+  'portefeuille': 'lompakko',
+  '{aantal} credential(s) geselecteerd om te delen':
+      '{aantal} tunnistetieto(a) valittu jaettavaksi',
+  '{bytes} bytes': '{bytes} bytes',
+  'In behandeling sinds {datum}. Meestal binnen twee werkdagen.':
+      'Käsittelyssä alkaen {datum}. Tavallisesti kahden työpäivän kuluessa.',
+  'Kies een bestand om aan te leveren.': 'Valitse toimitettava tiedosto.',
+  'Kies wat u deelt': 'Valitse, mitä jaat',
+  'Kies welke credentials u deelt als bewijs:':
+      'Valitse, mitkä tunnistetiedot jaat todisteena:',
+  'Kon uw bewijs niet laden. Probeer het opnieuw.':
+      'Todisteiden lataaminen epäonnistui. Yritä uudelleen.',
+  'Koppel een externe portefeuille om uw bestaande badges en ':
+      'Yhdistä ulkoinen lompakko käyttääksesi nykyisiä tunnuksiasi ja ',
+  'Laat leeg als het bewijs onbeperkt geldig is. ':
+      'Jätä tyhjäksi, jos todiste on voimassa toistaiseksi. ',
+  'Lever een nieuw of gecorrigeerd bestand aan.':
+      'Toimita uusi tai korjattu tiedosto.',
+  'Lever het bestand opnieuw aan.': 'Toimita tiedosto uudelleen.',
+  'Mijn badges': 'Omat tunnukseni',
+  'Mijn bewijs': 'Omat todisteeni',
+  'Mijn bewijsstukken': 'Omat todisteasiakirjani',
+  'Na het inloggen kiest u in de volgende stap welke credentials u deelt. ':
+      'Kirjautumisen jälkeen valitset seuraavassa vaiheessa, mitkä tunnistetiedot jaat. ',
+  'Nog geen bewijsstukken aangeleverd.': 'Todisteita ei ole vielä toimitettu.',
+  'Opgegeven': 'Toimitettu',
+  'Opnieuw verbinden': 'Yhdistä uudelleen',
+  'Portefeuille koppelen': 'Yhdistä lompakko',
+  'Portefeuille verbinden': 'Yhdistä lompakko',
+  'Selecteer de credentials die u als bewijs wilt delen. ':
+      'Valitse tunnistetiedot, jotka haluat jakaa todisteena. ',
+  'Sluit het venster van de portefeuilleprovider af om verder te gaan.':
+      'Sulje lompakkopalvelun ikkuna jatkaaksesi.',
+  'Toegekend op {datum}': 'Myönnetty {datum}',
+  'Toegestane formaten: PNG, JPEG, WebP en PDF. ':
+      'Sallitut muodot: PNG, JPEG, WebP ja PDF. ',
+  'Tot wanneer is dit bewijs geldig?': 'Mihin asti tämä todiste on voimassa?',
+  'Aangeleverd op {datum}': 'Toimitettu {datum}',
+  'Aanleveren': 'Toimita',
+  'Afgekeurd': 'Hylätty',
+  'Afgekeurd. De beoordelaar heeft geen reden opgegeven.':
+      'Hylätty. Arvioija ei ilmoittanut syytä.',
+  'Afgekeurd: {reden}': 'Hylätty: {reden}',
+  'Ander bestand': 'Toinen tiedosto',
+  'Badge': 'Tunnus',
+  'Badges verschijnen hier zodra ze zijn toegekend.':
+      'Tunnukset näkyvät täällä, kun ne on myönnetty.',
+  'Bewijs aanleveren': 'Toimita todiste',
+  'Bewijsstuk kiezen': 'Valitse todiste',
+  'Bewijsstukken verschijnen hier zodra u iets aanlevert voor een badge.':
+      'Todisteet näkyvät täällä, kun toimitat jotain tunnusta varten.',
+  'Bewijsstukken zijn bestanden die u aanlevert voor een badge. Het overzicht toont de bestandsnaam, controlecode, status en wie het heeft beoordeeld. De bestanden zelf staan niet in dit overzicht; een beoordelaar kan ze wel inzien.':
+      'Todisteet ovat tunnusta varten toimitettavia tiedostoja. Yhteenveto näyttää tiedostonimen, tarkistuskoodin, tilan ja arvioijan. Tiedostoja ei näytetä tässä yhteenvedossa, mutta arvioija voi tarkastella niitä.',
+  'Bezig met versturen…': 'Lähetetään…',
+  'Datum kiezen': 'Valitse päivämäärä',
+  'De verbinding is verbroken. U kunt opnieuw verbinden.':
+      'Yhteys katkaistiin. Voit yhdistää uudelleen.',
+  'Deze functie is nog niet beschikbaar. ':
+      'Tämä toiminto ei ole vielä käytettävissä. ',
+  'Externe portefeuille': 'Ulkoinen lompakko',
+  'Geaccepteerd. Het bewijsstuk is goedgekeurd.':
+      'Hyväksytty. Todiste on hyväksytty.',
+  'Geen credentials gevonden in deze portefeuille.':
+      'Tästä lompakosta ei löytynyt tunnistetietoja.',
+  'Geen deelnemerprofiel gevonden voor deze organisatie.':
+      'Tälle organisaatiolle ei löytynyt osallistujaprofiilia.',
+  'Geldig tot {datum}': 'Voimassa {datum} asti',
+  'Het aanleveren is mislukt. Probeer het opnieuw.':
+      'Toimittaminen epäonnistui. Yritä uudelleen.',
+  'Het technische toegangslogboek laat zien wie uw gegevens heeft bekeken of gewijzigd, wanneer, en met welk doel.':
+      'Tekninen käyttöloki näyttää, kuka tarkasteli tai muutti tietojasi, milloin ja mihin tarkoitukseen.',
+  'Het uploaden is mislukt. Probeer het opnieuw.':
+      'Lataus epäonnistui. Yritä uudelleen.',
   'Registratie {nummer}': 'Rekisteröinti {nummer}',
   '1 categorie gevonden': '1 luokka löytyi',
   '1 registratie': '1 rekisteröinti',
