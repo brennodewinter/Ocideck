@@ -2539,6 +2539,14 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **De gebruikersgids noemt de Word-export die er sinds #1918 in zit.** De
+  documentexportlijst in de gids (Engelse bron én Nederlandse variant) en de
+  twee formaatopsommingen in de README stopten bij ODT, terwijl de
+  exportdialoog sindsdien zeven formaten aanbiedt — alleen de CHANGELOG droeg
+  `.docx`. Erbij staat nu ook wat er met een Mermaid-diagram of een formule
+  gebeurt: Word heeft geen plek voor hun bron, dus ze worden op 300 dpi als
+  afbeelding ingebed, en een render die faalt valt terug op de brontekst in
+  een codeblok.
 - **Cursisten kunnen hun bij eLearning geregistreerde gegevens inzien.**
   **Mijn gegevens** haalt voor de gekozen organisatie alle door OciServe
   aangeleverde categorieën en velden live op. Ook onbekende toekomstige

@@ -17,7 +17,8 @@ PPTX, OpenDocument (ODP), LaTeX/Beamer, offline HTML or a portable package.
 Alongside presentations it also edits a **flowing Markdown document** — a report,
 a memo, a note — in the same window: a plain `.md` that any Markdown reader
 opens, with a visual and a source view, exported to `.md`, HTML, PDF, LaTeX,
-ePub or ODT, and convertible either way between a document and a presentation
+ePub, ODT or Word (`.docx`), and convertible either way between a document and a
+presentation
 ([ARCHITECTURE.md](docs/ARCHITECTURE.md#document-mode)).
 
 > **Try it in your browser:** <https://ocideck.librekat.nl/> — the web build,
@@ -67,7 +68,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 ## What it does
 
 - **Structured slide editors** — a dedicated editor per slide type: title, bullets, images, quote, table, code, video, audio, and more.
-- **Document mode** — edits a plain, flowing `.md` document next to presentations, with a visual and a source view, an insert palette and a formatting toolbar; exports to `.md`, one continuous HTML file, a typeset PDF, LaTeX, ePub or ODT, and converts either way between a document and a presentation.
+- **Document mode** — edits a plain, flowing `.md` document next to presentations, with a visual and a source view, an insert palette and a formatting toolbar; exports to `.md`, one continuous HTML file, a typeset PDF, LaTeX, ePub, ODT or Word (`.docx`), and converts either way between a document and a presentation.
 - **Privacy check and redaction (OciWacht)** — every slide is read for personal data, and what you mark is left out of display and export, not painted over.
 - **Live preview and fullscreen presenter** — presenter view, dual screens, a rehearsal clock, an annotation layer, and live table editing.
 - **Charts, timelines and quiz slides** — fourteen chart types from CSV or an in-app grid (eight statistical ones join them with the process-improvement module on), animated timelines, and interactive question slides.

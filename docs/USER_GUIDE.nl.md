@@ -5201,11 +5201,22 @@ dingen:
   OpenDocument Text-bestand dat opent in LibreOffice of Word — bewerkbaar, met
   native voetnoten en koppen die outline-niveaus dragen. Het is de open
   tegenhanger van een Word-bestand. *(Toegevoegd 2026-08-24, #1768.)*
+  **Word (`.docx`)** is een WordprocessingML-document dat opent in Word, Pages
+  en LibreOffice — bewerkbaar, met native voetnoten en koppen die
+  outline-niveaus dragen, net als de ODT ernaast. Wat verschilt is wat er met
+  een Mermaid-diagram of een formule gebeurt: Word heeft geen plek voor hun
+  bron, dus ze worden als afbeelding in het bestand gerasterd, op 300 dpi op
+  kolombreedte. Lukt het renderen niet, dan belandt de brontekst in een
+  codeblok in plaats van een gat achter te laten — dezelfde afspraak als bij de
+  PDF-export. *(Toegevoegd 2026-09-10, #1918.)*
 
   *(Gecorrigeerd 2026-08-30: deze lijst noemde er vijf terwijl de exportdialoog
   er sinds 2026-08-24 zes aanbiedt. ePub stond bovendien alléén in deze
   Nederlandse variant, waar de eerstvolgende `make translate-docs` hem zou
-  hebben overschreven — een nieuw formaat hoort eerst in de Engelse bron.)*
+  hebben overschreven — een nieuw formaat hoort eerst in de Engelse bron.
+  Opnieuw gecorrigeerd 2026-09-10: de lijst zei daarna zes terwijl de dialoog er
+  sinds #1918 zeven aanbood — Word had geen van beide varianten gehaald, en
+  stond alleen in de CHANGELOG.)*
 
 #### De PDF
 

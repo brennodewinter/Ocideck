@@ -5141,12 +5141,21 @@ your source. The export dialog asks two things:
   *(Added 2026-08-24, #1761.)* **ODT (`.odt`)** is an OpenDocument Text file that
   opens in LibreOffice or Word — editable, with native footnotes and headings
   carrying outline levels. It is the open counterpart of a Word file.
-  *(Added 2026-08-24, #1768.)*
+  *(Added 2026-08-24, #1768.)* **Word (`.docx`)** is a WordprocessingML
+  document that opens in Word, Pages and LibreOffice — editable, with native
+  footnotes and headings carrying outline levels, like the ODT beside it. What
+  differs is the fate of a Mermaid diagram or a formula: Word has nowhere to put
+  their source, so they are rasterised into the file as images at 300 dpi on
+  column width. When one fails to render, its source text lands in a code block
+  rather than leaving a gap — the same arrangement as the PDF export.
+  *(Added 2026-09-10, #1918.)*
 
   *(Corrected 2026-08-30: this list named four formats while the export dialog
   has offered six since 2026-08-24. ePub had been written into the Dutch variant
   only, where the next `make translate-docs` run would have overwritten it — a
-  new format belongs in this English source first.)*
+  new format belongs in this English source first. Corrected again 2026-09-10:
+  the list then said six while the dialog had offered seven since #1918 — Word
+  had never reached either variant, and only the CHANGELOG carried it.)*
 
 #### The PDF
 
