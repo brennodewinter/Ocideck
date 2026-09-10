@@ -684,17 +684,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// True when this presenter drives a separate audience (beamer) window.
   bool get _dual => widget.audience != null;
 
-  /// Last (index, blank, richTextPage) pushed to the audience window.
-  int? _lastSentIndex;
-  int? _lastSentBlank;
-  int? _lastSentRichTextPage;
-  int? _lastSentStepIndex;
-  int? _lastSentMenuCategory;
-
-  /// Monotone teller op 'update'-berichten: method-channel-aanroepen zijn
-  /// fire-and-forget en niet gegarandeerd in volgorde, dus het publieksvenster
-  /// negeert berichten met een lager nummer dan het laatst verwerkte.
-  int _syncSeq = 0;
+  final _audienceSync = _AudienceSyncTracker();
 
   /// Toegang tot de annotatielaag om een streek-in-uitvoering te committen
   /// vóór een slide-/paginawissel.
@@ -873,6 +863,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _typedTimer?.cancel();
     _fixFlashTimer?.cancel();
     _questionTimer?.cancel();
+    _audienceSync.dispose();
     _gridScroll.dispose();
     _mermaidView.dispose();
     _chartHover.removeListener(_broadcastChartHover);
@@ -891,34 +882,30 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   void _syncAudience({bool force = false}) {
     final aw = widget.audience?.controller;
     if (aw == null) return;
-    final blank = _blankCode;
-    if (!force &&
-        _index == _lastSentIndex &&
-        blank == _lastSentBlank &&
-        _richTextPage == _lastSentRichTextPage &&
-        _stepIndex == _lastSentStepIndex &&
-        _menuCategory == _lastSentMenuCategory) {
-      return;
-    }
-    final indexChanged = _index != _lastSentIndex;
-    _lastSentIndex = _index;
-    _lastSentBlank = blank;
-    _lastSentRichTextPage = _richTextPage;
-    _lastSentStepIndex = _stepIndex;
-    _lastSentMenuCategory = _menuCategory;
+    final snapshot = (
+      index: _index,
+      blank: _blankCode,
+      richTextPage: _richTextPage,
+      stepIndex: _stepIndex,
+      menuCategory: _menuCategory,
+    );
+    final indexChanged = _audienceSync.indexChanged(snapshot);
+    if (!_audienceSync.begin(snapshot, force: force)) return;
     audienceChannel
         .invokeMethod('update', {
-          'seq': ++_syncSeq,
-          'index': _index,
-          'blank': blank,
-          'richTextPage': _richTextPage,
-          'stepIndex': _stepIndex,
-          'menuCategory': _menuCategory,
+          'seq': _audienceSync.nextSequence,
+          'index': snapshot.index,
+          'blank': snapshot.blank,
+          'richTextPage': snapshot.richTextPage,
+          'stepIndex': snapshot.stepIndex,
+          'menuCategory': snapshot.menuCategory,
         })
+        .then<void>((_) => _audienceSync.delivered())
         .catchError((Object e) {
-          // Audience-window sync is best-effort, but a fully silent failure
-          // left the beamer out of sync with no trace; make it observable.
           logWarning('FullscreenPresenter: audience window sync failed', e);
+          if (mounted) {
+            _audienceSync.failed(snapshot, e, () => _syncAudience());
+          }
           return null;
         });
     if (indexChanged) {

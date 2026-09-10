@@ -255,7 +255,7 @@ extension _PresenterContent on _FullscreenPresenterState {
     // te smal voor een gewijzigd aantal dia's, dus krijgt het de verse reeks.
     _rebuild(() => invalidateSplitRunLayout(widget.slides));
     if (_dual) {
-      _lastSentIndex = null; // dwing een verse positie-sync af na de herbouw
+      _audienceSync.invalidate(); // dwing een verse sync af na de herbouw
       sendDeckReplaceToAudience(
         widget.audience,
         slides: widget.slides,

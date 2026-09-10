@@ -2,6 +2,65 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+typedef _AudienceSyncSnapshot = ({
+  int index,
+  int blank,
+  int richTextPage,
+  int stepIndex,
+  int menuCategory,
+});
+
+/// Houdt verzendstatus en een begrensde snelle herkansing voor de beamer bij.
+///
+/// De presentator blijft hierdoor alleen verantwoordelijk voor zijn huidige
+/// toestand. Transportboekhouding hoort niet in die al grote widget state.
+class _AudienceSyncTracker {
+  _AudienceSyncSnapshot? _last;
+  Timer? _retry;
+  bool _retrying = false;
+  int _sequence = 0;
+
+  int get nextSequence => ++_sequence;
+
+  bool indexChanged(_AudienceSyncSnapshot snapshot) =>
+      snapshot.index != _last?.index;
+
+  bool begin(_AudienceSyncSnapshot snapshot, {required bool force}) {
+    if (!force && snapshot == _last) return false;
+    // Optimistisch onthouden voorkomt dubbel zenden bij twee builds terwijl
+    // dezelfde method-channel-aanroep nog onderweg is.
+    _last = snapshot;
+    return true;
+  }
+
+  void delivered() => _retrying = false;
+
+  void invalidate() => _last = null;
+
+  void failed(
+    _AudienceSyncSnapshot snapshot,
+    Object error,
+    VoidCallback retry,
+  ) {
+    // Trek alleen deze mislukte snapshot terug. Een nieuwere toestand kan
+    // intussen al onderweg of afgeleverd zijn.
+    if (_last != snapshot) return;
+    _last = null;
+    final retryable =
+        error is WindowChannelException &&
+        const {
+          'CHANNEL_UNREGISTERED',
+          'CHANNEL_NOT_FOUND',
+        }.contains(error.code);
+    if (!retryable || _retrying) return;
+    _retrying = true;
+    _retry?.cancel();
+    _retry = Timer(const Duration(milliseconds: 100), retry);
+  }
+
+  void dispose() => _retry?.cancel();
+}
+
 /// Guards teardown of the secondary audience window so native close is only
 /// invoked once (double-close on Linux can crash the embedder).
 @visibleForTesting
