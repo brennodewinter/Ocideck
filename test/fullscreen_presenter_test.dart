@@ -897,6 +897,29 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('presenter view exposes a button for the slide overview', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyP);
+    await tester.pump();
+
+    final overviewButton = find.byIcon(Icons.grid_view_rounded);
+    expect(overviewButton, findsOneWidget);
+
+    await tester.tap(overviewButton);
+    await tester.pump();
+    expect(find.text('Slide-overzicht'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('advancing updates the notes shown in presenter view', (
     tester,
   ) async {
