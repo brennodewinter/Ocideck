@@ -388,6 +388,11 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               ? _next
               : null,
         ),
+        const SizedBox(width: 8),
+        Tooltip(
+          message: labelWithShortcut(l10n, 'Slide-overzicht', 'G'),
+          child: _NavButton(icon: Icons.grid_view_rounded, onTap: _toggleGrid),
+        ),
         if (_displays.length > 1) ...[
           const SizedBox(width: 8),
           Tooltip(

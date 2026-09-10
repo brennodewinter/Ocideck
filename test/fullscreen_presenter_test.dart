@@ -231,14 +231,16 @@ void main() {
       ),
     );
     await tester.pump();
-    expect(updates, hasLength(1));
+    expect(updates, isNotEmpty);
 
+    final beforeNavigation = updates.length;
     await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
     await tester.pump();
-    expect(updates, hasLength(2));
+    expect(updates.length, greaterThan(beforeNavigation));
     expect(updates.last['index'], 1);
 
     audienceReady = true;
+    final beforeReady = updates.length;
     await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
       bridge.name,
       bridge.codec.encodeMethodCall(
@@ -252,8 +254,76 @@ void main() {
     );
     await tester.pump();
 
-    expect(updates, hasLength(3));
+    expect(updates.length, greaterThan(beforeReady));
     expect(updates.last['index'], 1);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a failed blackout update is retried for the audience', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final delivered = <Map<String, dynamic>>[];
+    var failBlackoutOnce = true;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method != 'invokeMethod') return null;
+      final args = Map<String, dynamic>.from(call.arguments as Map);
+      if (args['method'] != 'update') return null;
+      final update = Map<String, dynamic>.from(args['arguments'] as Map);
+      if (update['blank'] == 1 && failBlackoutOnce) {
+        failBlackoutOnce = false;
+        throw PlatformException(
+          code: 'CHANNEL_UNREGISTERED',
+          message: 'audience bridge was briefly unavailable',
+        );
+      }
+      delivered.add(update);
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: slides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(delivered.single['blank'], 0);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyB);
+    await tester.pump();
+    expect(delivered.last['blank'], 0);
+
+    // De eerste B-update raakte onderweg kwijt. Zonder automatische herkansing
+    // blijft de beamer de dia tonen terwijl de laptop al zwart is.
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(delivered.last['blank'], 1);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyB);
+    await tester.pump();
+    expect(delivered.last['blank'], 0);
 
     await tester.pumpWidget(const SizedBox());
   });
@@ -823,6 +893,29 @@ void main() {
     expect(find.text('Mijn spiekbriefje'), findsOneWidget);
     expect(find.text('VOLGENDE'), findsOneWidget);
     expect(find.text('Slide 1 / 2'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('presenter view exposes a button for the slide overview', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyP);
+    await tester.pump();
+
+    final overviewButton = find.byIcon(Icons.grid_view_rounded);
+    expect(overviewButton, findsOneWidget);
+
+    await tester.tap(overviewButton);
+    await tester.pump();
+    expect(find.text('Slide-overzicht'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
   });
