@@ -343,6 +343,51 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('pointer drag moves a multi-selection as one block', (
+    tester,
+  ) async {
+    final container = _deckWith([
+      Slide.create(SlideType.bullets).copyWith(title: 'Alpha'),
+      Slide.create(SlideType.quote).copyWith(title: 'Beta'),
+      Slide.create(SlideType.table).copyWith(title: 'Gamma'),
+    ]);
+    addTearDown(container.dispose);
+    final before = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    await _pumpOverview(tester, container);
+
+    await tester.tap(find.text('2. Alpha'));
+    await tester.pump(const Duration(milliseconds: 350));
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    await tester.tap(find.text('3. Beta'));
+    await tester.pump(const Duration(milliseconds: 350));
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
+    expect(container.read(editorProvider).selection, {1, 2});
+
+    final source = tester.getCenter(find.byIcon(Icons.drag_indicator).at(1));
+    final target = tester.getCenter(find.byType(DragTarget<int>).at(3));
+    final gesture = await tester.startGesture(source);
+    await gesture.moveTo(target);
+    await tester.pump();
+    await gesture.up();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    final after = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .map((slide) => slide.id)
+        .toList();
+    expect(after, [before[0], before[3], before[1], before[2]]);
+    expect(container.read(editorProvider).selection, {2, 3});
+    expect(container.read(editorProvider).selectedIndex, 3);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'slide overview shows authored slides once in a responsive grid',
     (tester) async {
