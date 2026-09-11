@@ -12,6 +12,22 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.1] — 2026-09-11
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Tabellen delen het document-rekenblad (#2051–#2056)
+- Herstel synchronisatie en slide-overzicht in presentatiemodus
+- Bewijs bij badges — eLearning-evidence in OciServe (#2049)
+- Merge pull request #2048: behoud lokale themalogo's bij deduplicatie
+- Merge pull request #2046: houd afbeeldingen synchroon en voeg slide-overzicht toe
+- docs: de Word-export staat in de gids en de README
+
+### Fixed
+
+- fix(linux): schakel Impeller uit om Wayland-crash te voorkomen (#2058) (#2059)
+
 ## [0.6.0] — 2026-09-09
 
 ### Added
