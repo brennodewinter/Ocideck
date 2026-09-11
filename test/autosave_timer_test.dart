@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:fake_async/fake_async.dart';
@@ -110,7 +111,7 @@ void main() {
       final tabs = _tabs(recovery);
       addTearDown(tabs.dispose);
 
-      tabs.newDocument();
+      unawaited(tabs.newDocument());
       tabs.state.current!.documentNotifier!.edit('# Memo\n\nNiet opgeslagen.');
 
       // De regressie: documenttabbladen werden overgeslagen bij autosave, dus een
@@ -139,7 +140,7 @@ void main() {
       final tabs = _tabs(recovery);
       addTearDown(tabs.dispose);
 
-      tabs.newDocument(); // leeg en schoon (isDirty:false)
+      unawaited(tabs.newDocument()); // leeg en schoon (isDirty:false)
 
       async.elapse(const Duration(seconds: 30));
       expect(recovery.saved, isEmpty);

@@ -9,11 +9,13 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/models/markdown_kind.dart';
 import 'package:ocideck/models/settings.dart' show ThemeProfile;
+import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart' show fileServiceProvider;
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:path/path.dart' as p;
@@ -58,17 +60,101 @@ void main() {
     });
   });
 
-  test('newDocument opent een leeg documenttabblad, geselecteerd', () {
+  // Een nieuwe container waarvan de instellingen al asynchroon uit prefs
+  // geladen zijn — de bibliotheek staat erin voor we newDocument aanroepen,
+  // dat de thuismap leest. Pollen in plaats van een vaste vertraging: de
+  // SettingsNotifier laadt op eigen snelheid, en een vaste wait is juist de
+  // vorm die op een trage gate willekeurig faalt.
+  Future<ProviderContainer> containerWithLibrary(Directory home) async {
+    SharedPreferences.setMockInitialValues({
+      'storageConnections': StorageConnection.encodeList([
+        LocalConnection(id: 'lok', name: 'Werkmap', path: home.path),
+      ]),
+    });
     final container = ProviderContainer();
     addTearDown(container.dispose);
+    for (
+      var i = 0;
+      i < 500 && container.read(settingsProvider).libraries.isEmpty;
+      i++
+    ) {
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
+    expect(
+      container.read(settingsProvider).libraries,
+      isNotEmpty,
+      reason: 'bibliotheek uit prefs niet geladen',
+    );
+    return container;
+  }
 
-    container.read(tabsProvider.notifier).newDocument();
+  group('newDocument op schijf', () {
+    late Directory home;
 
-    final current = container.read(tabsProvider).current!;
-    expect(current.kind, MarkdownKind.document);
-    expect(current.documentNotifier!.currentState.isOpen, isTrue);
-    expect(current.documentNotifier!.currentState.document!.toMarkdown(), '');
-    expect(current.documentNotifier!.currentState.filePath, isNull);
+    setUp(() {
+      AppLocalizations.setActiveLanguageCode('nl');
+      home = Directory.systemTemp.createTempSync('newdoc_on_disk');
+    });
+
+    tearDown(() {
+      if (home.existsSync()) home.deleteSync(recursive: true);
+    });
+
+    test(
+      'maakt meteen een bestand op schijf en opent het met een pad',
+      () async {
+        final container = await containerWithLibrary(home);
+        await container.read(tabsProvider.notifier).newDocument();
+
+        final tabs = container.read(tabsProvider).tabs;
+        expect(container.read(tabsProvider).selectedIndex, tabs.length - 1);
+        final current = container.read(tabsProvider).current!;
+        expect(current.kind, MarkdownKind.document);
+        expect(current.isOpen, isTrue);
+        expect(
+          current.documentNotifier!.currentState.document!.toMarkdown(),
+          '',
+        );
+        final path = current.documentNotifier!.currentState.filePath!;
+        expect(p.isWithin(home.path, path), isTrue);
+        expect(File(path).existsSync(), isTrue);
+        expect(File(path).readAsStringSync(), '');
+        // Schoon: het bestand staat op schijf, dus de tab is niet vuil en de
+        // eerste Cmd/Ctrl+S slaat in-place op in plaats van 'Opslaan als…'.
+        expect(current.documentNotifier!.currentState.isDirty, isFalse);
+      },
+    );
+
+    test('twee nieuwe documenten krijgen elk een eigen bestandsnaam', () async {
+      final container = await containerWithLibrary(home);
+      await container.read(tabsProvider.notifier).newDocument();
+      await container.read(tabsProvider.notifier).newDocument();
+
+      final tabs = container.read(tabsProvider).tabs;
+      final path1 =
+          tabs[tabs.length - 2].documentNotifier!.currentState.filePath!;
+      final path2 = tabs.last.documentNotifier!.currentState.filePath!;
+      expect(path1, isNot(path2));
+      expect(p.basename(path1), 'document.md');
+      expect(p.basename(path2), 'document 2.md');
+      expect(File(path1).existsSync(), isTrue);
+      expect(File(path2).existsSync(), isTrue);
+    });
+
+    test('het nieuwe bestand komt bovenaan de recente lijst', () async {
+      final container = await containerWithLibrary(home);
+      await container.read(tabsProvider.notifier).newDocument();
+      final path = container
+          .read(tabsProvider)
+          .current!
+          .documentNotifier!
+          .currentState
+          .filePath!;
+
+      final recents = container.read(settingsProvider).recentFiles;
+      expect(recents.first.path, path);
+      expect(recents.first.kind, MarkdownKind.document);
+    });
   });
 
   testWidgets('Cmd+S op een document zonder pad valt terug op Opslaan als…', (
