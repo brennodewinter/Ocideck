@@ -25,9 +25,19 @@ class TableEditController extends ChangeNotifier {
     required List<TableAlign> alignments,
     required this.onChanged,
     this.onCellFocused,
+    this.lockHeader = false,
+    this.lockColumns = false,
   }) : _alignments = List<TableAlign>.from(alignments) {
     _adopt(rows);
   }
+
+  /// De koprij is het contract (sjabloon, GFM-kop): niet overschrijven, niet
+  /// een rij erboven zetten. Body groeit wél.
+  final bool lockHeader;
+
+  /// Kolommen staan vast (sjabloon). Plakken knipt extra kolommen af in plaats
+  /// van het raster te verbreden.
+  final bool lockColumns;
 
   /// Aangeroepen bij elke inhoudelijke wijziging — één keer per toetsaanslag,
   /// met het volledige raster. De aanroeper serialiseert dat terug naar GFM.
@@ -191,7 +201,10 @@ class TableEditController extends ChangeNotifier {
     }
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
 
-    if (event.logicalKey == LogicalKeyboardKey.keyV && meta) {
+    final pasteCombo =
+        (event.logicalKey == LogicalKeyboardKey.keyV && meta) ||
+        (event.logicalKey == LogicalKeyboardKey.insert && keys.isShiftPressed);
+    if (pasteCombo) {
       Clipboard.getData(Clipboard.kTextPlain).then((data) {
         final text = data?.text;
         if (text == null || text.isEmpty) return;
@@ -290,7 +303,13 @@ class TableEditController extends ChangeNotifier {
   /// rekenbladselectie, CSV, een Markdown-tabel), dan groeit het raster mee en
   /// wordt hij cel voor cel gevuld; anders is het gewoon tekst in deze cel.
   void pasteAt(int r, int c, String text) {
-    final table = parseClipboardTable(text);
+    // Een vergrendelde kop niet overschrijven: tabelplak begint op de eerste
+    // body-rij, losse tekst in de kop blijft staan.
+    if (lockHeader && r == 0) {
+      if (parseClipboardTable(text) != null) pasteAt(1, c, text);
+      return;
+    }
+    var table = parseClipboardTable(text);
     if (table == null) {
       final ctrl = _cells[r][c];
       final value = ctrl.text;
@@ -303,14 +322,22 @@ class TableEditController extends ChangeNotifier {
       );
       return;
     }
-    while (colCount < c + table.first.length) {
-      insertColumnAt(colCount, silent: true);
+    // Klembord met een koprij van dezelfde breedte: die rij is het sjabloon,
+    // niet data. Zonder deze skip zou Plakken de Engelse contractkop ravotten.
+    if (lockHeader && table.length > 1 && table.first.length == colCount) {
+      table = table.sublist(1);
+    }
+    if (!lockColumns) {
+      while (colCount < c + table.first.length) {
+        insertColumnAt(colCount, silent: true);
+      }
     }
     while (rowCount < r + table.length) {
       insertRowAt(rowCount, silent: true);
     }
     for (var i = 0; i < table.length; i++) {
       for (var j = 0; j < table[i].length; j++) {
+        if (c + j >= colCount) break;
         final ctrl = _cells[r + i][c + j];
         // Zonder tussentijdse melding; één [_emitAndRebuild] sluit het af.
         ctrl.removeTextListener(_emit);
@@ -322,7 +349,8 @@ class TableEditController extends ChangeNotifier {
   }
 
   void insertRowAt(int at, {bool silent = false}) {
-    final index = at.clamp(0, rowCount);
+    var index = at.clamp(0, rowCount);
+    if (lockHeader && index == 0) index = 1;
     _cells.insert(index, [
       for (var c = 0; c < colCount; c++) _makeController(''),
     ]);
@@ -346,6 +374,7 @@ class TableEditController extends ChangeNotifier {
   }
 
   void insertColumnAt(int at, {bool silent = false}) {
+    if (lockColumns) return;
     final index = at.clamp(0, colCount);
     for (var r = 0; r < rowCount; r++) {
       _cells[r].insert(index, _makeController(''));
@@ -357,6 +386,7 @@ class TableEditController extends ChangeNotifier {
   }
 
   void removeColumnAt(int c) {
+    if (lockColumns) return;
     if (colCount <= 1 || c < 0 || c >= colCount) return;
     for (var r = 0; r < rowCount; r++) {
       _cells[r].removeAt(c)
@@ -379,6 +409,7 @@ class TableEditController extends ChangeNotifier {
   }
 
   void moveColumn(int c, int delta) {
+    if (lockColumns) return;
     final target = c + delta;
     if (c < 0 || target < 0 || target >= colCount) return;
     for (var r = 0; r < rowCount; r++) {
@@ -388,6 +419,16 @@ class TableEditController extends ChangeNotifier {
     if (c < _alignments.length && target < _alignments.length) {
       _alignments = [..._alignments]..insert(target, _alignments.removeAt(c));
     }
+    _emitAndRebuild();
+  }
+
+  /// Vervangt het hele raster, bijvoorbeeld na een kolomsort. De oude
+  /// celcontrollers gaan weg; de focus landt nergens — de aanroeper zet die
+  /// opnieuw als dat nodig is.
+  void replaceRows(List<List<String>> rows, List<TableAlign> alignments) {
+    _disposeInternals();
+    _alignments = List<TableAlign>.from(alignments);
+    _adopt(rows);
     _emitAndRebuild();
   }
 
@@ -401,8 +442,7 @@ class TableEditController extends ChangeNotifier {
     _emitAndRebuild();
   }
 
-  @override
-  void dispose() {
+  void _disposeInternals() {
     for (final row in _cells) {
       for (final cell in row) {
         cell
@@ -415,6 +455,11 @@ class TableEditController extends ChangeNotifier {
         node.dispose();
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _disposeInternals();
     super.dispose();
   }
 }

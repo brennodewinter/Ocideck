@@ -499,13 +499,9 @@ const _dutchSourceHu = {
   'Markdown inhoud': 'Markdown tartalom',
   '# Slide\n\nInhoud hier...': '# Dia\n\nTartalom ide...',
   'Rij toevoegen': 'Sor hozzáadása',
-  'Kolom toevoegen': 'Oszlop hozzáadása',
   'Kolom': 'Oszlop',
   'verwijderen': 'eltávolítás',
-  'Koprij verwijderen': 'Fejlécsor eltávolítása',
   'Rij verwijderen': 'Sor eltávolítása',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tipp: nyomjon Entert egy cellán belül új sorért.',
   'Presentatie openen': 'Prezentáció megnyitása',
   'Opslaan als': 'Mentés másként',
   'Pakket importeren': 'Csomag importálása',
@@ -1096,8 +1092,6 @@ const _dutchSourceHu = {
   'Breedte van het slidepaneel': 'A diapanel szélessége',
   'Pijltjestoetsen passen de breedte aan':
       'A nyílbillentyűk állítják a szélességet',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tipp: illesszen be egy táblázatot a táblázatkezelőből egy cellába a Cmd/Ctrl+V billentyűkkel az egész táblázat kitöltéséhez.',
   'Annuleren': 'Mégse',
   'Checklist': 'Feladatlista',
   'Voortgangsgrafiek tonen': 'Előrehaladási diagram megjelenítése',
@@ -5219,7 +5213,6 @@ const _dutchSourceAddHu = <String, String>{
   'Koprij': 'Fejlécsor',
   'Links uitlijnen': 'Balra igazítás',
   'Rechts uitlijnen': 'Jobbra igazítás',
-  'Rij onder invoegen': 'Sor beszúrása alá',
   'Splits tabel': 'Táblázat felosztása',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'A dokumentum stílusa (téma, oldalméret, margók) nem kerül át.',

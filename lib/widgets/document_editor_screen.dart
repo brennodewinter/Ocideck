@@ -78,9 +78,10 @@ import 'editors/embed_editor_dialog.dart';
 import 'editors/find_replace_session.dart';
 import 'editors/markdown_find_bar.dart';
 import 'editors/markdown_source_controller.dart';
-import 'editors/table_editor.dart';
 import 'markdown_editor/markdown_editor.dart';
+import 'markdown_editor/table_embed_builder.dart';
 import 'reader/document_markdown_view.dart';
+import 'reader/table_edit_controller.dart';
 import 'reader/paged_document_view.dart';
 import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
@@ -178,6 +179,10 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// Markdownbron en de presentatie-editor houden hun eigen sobere chrome.
   ThemeProfile? _styleProfile;
 
+  /// Celcontrollers van Bron-preview-tabellen: de weergave wordt bij elke
+  /// toetsaanslag opnieuw opgebouwd, de cursor mag dan niet de cel uit vallen.
+  final _sourceTables = TableEmbedControllerStore();
+
   /// Zoek-/vervangbalk. Deelt de stand ([FindReplaceSession]) en de balk
   /// ([MarkdownFindBar]) met de presentatie-broneditor. De treffers leven op de
   /// Markdown-bron ([_controller].text) — dat is in beide modi dezelfde tekst,
@@ -229,6 +234,7 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
     _controller.dispose();
     _editorFocus.dispose();
     _previewScroll.dispose();
+    _sourceTables.dispose();
     super.dispose();
   }
 
@@ -624,11 +630,6 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// zodat de weergave hem als callback kan meegeven.
   Future<void> _editChart(int chartOrdinal, String block) =>
       _editDocumentChart(context, ref, chartOrdinal, block);
-
-  /// Dubbelklik op een gerenderde tabel → de volwaardige [TableEditor] in een
-  /// dialoog. Zie [_editDocumentTable]; hier alleen de doorgeefluik-methode.
-  Future<void> _editTable(int tableOrdinal, List<String> rawRows) =>
-      _editDocumentTable(context, ref, tableOrdinal, rawRows);
 
   /// Voeg [block] als een verse alinea in op de cursorpositie (of achteraan als
   /// er geen selectie is). De pure [insertBlockIntoSource] regelt de lege regels

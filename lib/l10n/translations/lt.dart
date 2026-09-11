@@ -501,13 +501,9 @@ const _dutchSourceLt = {
   'Markdown inhoud': 'Markdown turinys',
   '# Slide\n\nInhoud hier...': '# Skaidrė\n\nTurinys čia...',
   'Rij toevoegen': 'Pridėti eilutę',
-  'Kolom toevoegen': 'Pridėti stulpelį',
   'Kolom': 'Stulpelis',
   'verwijderen': 'pašalinti',
-  'Koprij verwijderen': 'Pašalinti antraštės eilutę',
   'Rij verwijderen': 'Pašalinti eilutę',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Patarimas: langelyje paspauskite Enter, kad būtų nauja eilutė.',
   'Presentatie openen': 'Atidaryti pateiktį',
   'Opslaan als': 'Išsaugoti kaip',
   'Pakket importeren': 'Importuoti paketą',
@@ -1100,8 +1096,6 @@ const _dutchSourceLt = {
       'Padidina visą redaktoriaus tekstą iki 200 %. Pačios skaidrės nepasikeičia.',
   'Breedte van het slidepaneel': 'Skaidrių skydelio plotis',
   'Pijltjestoetsen passen de breedte aan': 'Rodyklių klavišai koreguoja plotį',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Patarimas: įklijuokite lentelę iš skaičiuoklės į langelį naudodami Cmd/Ctrl+V, kad užpildytumėte visą lentelę.',
   'Annuleren': 'Atšaukti',
   'Checklist': 'Užduočių kontrolinis sąrašas',
   'Voortgangsgrafiek tonen': 'Rodyti progreso diagramą',
@@ -5214,7 +5208,6 @@ const _dutchSourceAddLt = <String, String>{
   'Koprij': 'Antraštės eilutė',
   'Links uitlijnen': 'Lygiuoti kairėje',
   'Rechts uitlijnen': 'Lygiuoti dešinėje',
-  'Rij onder invoegen': 'Įterpti eilutę žemiau',
   'Splits tabel': 'Padalinti lentelę',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Dokumento stilius (tema, puslapio dydis, paraštės) neperkeliamas.',

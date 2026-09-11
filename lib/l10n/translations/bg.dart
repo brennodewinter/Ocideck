@@ -503,13 +503,9 @@ const _dutchSourceBg = {
   'Markdown inhoud': 'Markdown съдържание',
   '# Slide\n\nInhoud hier...': '# Слайд\n\nСъдържание тук...',
   'Rij toevoegen': 'Добавяне на ред',
-  'Kolom toevoegen': 'Добавяне на колона',
   'Kolom': 'Колона',
   'verwijderen': 'премахване',
-  'Koprij verwijderen': 'Премахване на заглавния ред',
   'Rij verwijderen': 'Премахване на ред',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Съвет: натиснете Enter в клетка за нов ред.',
   'Presentatie openen': 'Отваряне на презентация',
   'Opslaan als': 'Запазване като',
   'Pakket importeren': 'Импортиране на пакет',
@@ -1108,8 +1104,6 @@ const _dutchSourceBg = {
   'Breedte van het slidepaneel': 'Ширина на панела със слайдове',
   'Pijltjestoetsen passen de breedte aan':
       'Клавишите със стрелки регулират ширината',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Съвет: поставете таблица от електронната си таблица в клетка с Cmd/Ctrl+V, за да попълните цялата таблица.',
   'Annuleren': 'Отказ',
   'Checklist': 'Списък със задачи',
   'Voortgangsgrafiek tonen': 'Показвай диаграма на напредъка',
@@ -5247,7 +5241,6 @@ const _dutchSourceAddBg = <String, String>{
   'Koprij': 'Заглавен ред',
   'Links uitlijnen': 'Подравни наляво',
   'Rechts uitlijnen': 'Подравни надясно',
-  'Rij onder invoegen': 'Вмъкни ред отдолу',
   'Splits tabel': 'Раздели таблица',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Стилът на документа (тема, размер на страницата, полета) не се запазва.',

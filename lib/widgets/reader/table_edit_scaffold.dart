@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/slide.dart' show TableAlign;
+import '../../services/markdown_table_codec.dart';
+import '../markdown_editor/table_sort_actions.dart';
 import 'table_edit_controller.dart';
 
 enum TableSortIntent { ascending, descending, choose }
@@ -21,6 +25,9 @@ class TableEditScaffold extends StatelessWidget {
     required this.editor,
     required this.builder,
     this.onSort,
+    this.extraToolbarItems,
+    this.allowColumnEdits = true,
+    this.allowSort = true,
   });
 
   final TableEditController editor;
@@ -31,6 +38,19 @@ class TableEditScaffold extends StatelessWidget {
   /// blijven staan.
   final WidgetBuilder builder;
   final void Function(int column, TableSortIntent intent)? onSort;
+
+  /// Extra knoppen ná de uitlijning: dia-specifieke dingen (getalnotatie) die
+  /// niet in de GFM-tabel zelf zitten, maar wél bij de actieve kolom horen.
+  final List<Widget> Function(BuildContext context, ({int row, int col}) at)?
+  extraToolbarItems;
+
+  /// Kolommen bijmaken, weghalen, schuiven en uitlijnen. Uit op een sjabloon
+  /// waarvan de kolommen het opslagcontract zijn.
+  final bool allowColumnEdits;
+
+  /// Sorteerknoppen en -sneltoetsen. Staat dit aan zonder [onSort], dan sorteert
+  /// de scaffold het raster zelf via de gedeelde sorteerhandeling.
+  final bool allowSort;
 
   @override
   Widget build(BuildContext context) {
@@ -55,27 +75,36 @@ class TableEditScaffold extends StatelessWidget {
           final active = editor.activeCell;
           _restorePendingFocus();
           return CallbackShortcuts(
-            bindings: active == null || onSort == null
+            bindings: active == null || !allowSort
                 ? const {}
                 : {
                     SingleActivator(
                       LogicalKeyboardKey.arrowUp,
                       alt: true,
                       shift: true,
-                    ): () =>
-                        onSort!(active.col, TableSortIntent.ascending),
+                    ): () => _dispatchSort(
+                      context,
+                      active.col,
+                      TableSortIntent.ascending,
+                    ),
                     SingleActivator(
                       LogicalKeyboardKey.arrowDown,
                       alt: true,
                       shift: true,
-                    ): () =>
-                        onSort!(active.col, TableSortIntent.descending),
+                    ): () => _dispatchSort(
+                      context,
+                      active.col,
+                      TableSortIntent.descending,
+                    ),
                     SingleActivator(
                       LogicalKeyboardKey.keyS,
                       alt: true,
                       shift: true,
-                    ): () =>
-                        onSort!(active.col, TableSortIntent.choose),
+                    ): () => _dispatchSort(
+                      context,
+                      active.col,
+                      TableSortIntent.choose,
+                    ),
                   },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +156,9 @@ class TableEditScaffold extends StatelessWidget {
               context,
               Icons.keyboard_arrow_up,
               l10n.d('Rij erboven'),
-              () => editor.insertRowAt(at.row),
+              editor.lockHeader && at.row == 0
+                  ? null
+                  : () => editor.insertRowAt(at.row),
             ),
             _button(
               context,
@@ -165,86 +196,106 @@ class TableEditScaffold extends StatelessWidget {
               context,
               Icons.sort_by_alpha,
               l10n.d('Kolom oplopend sorteren'),
-              onSort == null
-                  ? null
-                  : () => onSort!(at.col, TableSortIntent.ascending),
+              allowSort
+                  ? () => _dispatchSort(
+                      context,
+                      at.col,
+                      TableSortIntent.ascending,
+                    )
+                  : null,
             ),
             _button(
               context,
               Icons.sort_by_alpha,
               l10n.d('Kolom aflopend sorteren'),
-              onSort == null
-                  ? null
-                  : () => onSort!(at.col, TableSortIntent.descending),
+              allowSort
+                  ? () => _dispatchSort(
+                      context,
+                      at.col,
+                      TableSortIntent.descending,
+                    )
+                  : null,
               descending: true,
             ),
             _button(
               context,
               Icons.tune,
               l10n.d('Sorteren als…'),
-              onSort == null
-                  ? null
-                  : () => onSort!(at.col, TableSortIntent.choose),
+              allowSort
+                  ? () => _dispatchSort(context, at.col, TableSortIntent.choose)
+                  : null,
             ),
-            _divider(theme),
-            _button(
-              context,
-              Icons.keyboard_arrow_left,
-              l10n.d('Kolom links'),
-              () => editor.insertColumnAt(at.col),
-            ),
-            _button(
-              context,
-              Icons.keyboard_arrow_right,
-              l10n.d('Kolom rechts'),
-              () => editor.insertColumnAt(at.col + 1),
-            ),
-            _button(
-              context,
-              Icons.remove,
-              l10n.d('Kolom weghalen'),
-              editor.colCount <= 1 ? null : () => editor.removeColumnAt(at.col),
-            ),
-            _button(
-              context,
-              Icons.arrow_back,
-              l10n.d('Kolom naar links'),
-              at.col == 0 ? null : () => editor.moveColumn(at.col, -1),
-            ),
-            _button(
-              context,
-              Icons.arrow_forward,
-              l10n.d('Kolom naar rechts'),
-              at.col >= editor.colCount - 1
-                  ? null
-                  : () => editor.moveColumn(at.col, 1),
-            ),
-            _divider(theme),
-            _alignButton(
-              context,
-              at.col,
-              TableAlign.left,
-              Icons.format_align_left,
-              l10n.d('Links uitlijnen'),
-            ),
-            _alignButton(
-              context,
-              at.col,
-              TableAlign.center,
-              Icons.format_align_center,
-              l10n.d('Centreren'),
-            ),
-            _alignButton(
-              context,
-              at.col,
-              TableAlign.right,
-              Icons.format_align_right,
-              l10n.d('Rechts uitlijnen'),
-            ),
+            if (allowColumnEdits) ..._columnButtons(context, at),
+            if (extraToolbarItems != null) ...[
+              _divider(theme),
+              ...extraToolbarItems!(context, at),
+            ],
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> _columnButtons(BuildContext context, ({int row, int col}) at) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return [
+      _divider(theme),
+      _button(
+        context,
+        Icons.keyboard_arrow_left,
+        l10n.d('Kolom links'),
+        () => editor.insertColumnAt(at.col),
+      ),
+      _button(
+        context,
+        Icons.keyboard_arrow_right,
+        l10n.d('Kolom rechts'),
+        () => editor.insertColumnAt(at.col + 1),
+      ),
+      _button(
+        context,
+        Icons.remove,
+        l10n.d('Kolom weghalen'),
+        editor.colCount <= 1 ? null : () => editor.removeColumnAt(at.col),
+      ),
+      _button(
+        context,
+        Icons.arrow_back,
+        l10n.d('Kolom naar links'),
+        at.col == 0 ? null : () => editor.moveColumn(at.col, -1),
+      ),
+      _button(
+        context,
+        Icons.arrow_forward,
+        l10n.d('Kolom naar rechts'),
+        at.col >= editor.colCount - 1
+            ? null
+            : () => editor.moveColumn(at.col, 1),
+      ),
+      _divider(theme),
+      _alignButton(
+        context,
+        at.col,
+        TableAlign.left,
+        Icons.format_align_left,
+        l10n.d('Links uitlijnen'),
+      ),
+      _alignButton(
+        context,
+        at.col,
+        TableAlign.center,
+        Icons.format_align_center,
+        l10n.d('Centreren'),
+      ),
+      _alignButton(
+        context,
+        at.col,
+        TableAlign.right,
+        Icons.format_align_right,
+        l10n.d('Rechts uitlijnen'),
+      ),
+    ];
   }
 
   Widget _divider(ThemeData theme) => Container(
@@ -289,4 +340,55 @@ class TableEditScaffold extends StatelessWidget {
     constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
     color: selected ? Theme.of(context).colorScheme.primary : null,
   );
+
+  /// [onSort] wint: de visuele embed moet Quill-atomair schrijven. Anders
+  /// sorteert het raster in zichzelf — Bron-preview en de dia-editor delen die
+  /// val.
+  void _dispatchSort(BuildContext context, int column, TableSortIntent intent) {
+    if (onSort != null) {
+      onSort!(column, intent);
+      return;
+    }
+    unawaited(_applyDefaultTableSort(context, editor, column, intent));
+  }
+}
+
+/// Sorteert [editor] met dezelfde dialogen als de visuele tabel. De aanroeper
+/// krijgt het resultaat via [TableEditController.replaceRows] → onChanged.
+Future<void> _applyDefaultTableSort(
+  BuildContext context,
+  TableEditController editor,
+  int column,
+  TableSortIntent intent,
+) async {
+  final gfm = encodeMarkdownTable(editor.rows, alignments: editor.alignments);
+  final String? sorted;
+  if (intent == TableSortIntent.choose) {
+    final choice = await chooseExplicitSort(context);
+    if (!context.mounted || choice == null) return;
+    sorted = await smartSortTable(
+      context,
+      gfm,
+      column: column,
+      ascending: choice.ascending,
+      kind: choice.kind,
+    );
+  } else if (intent == TableSortIntent.ascending) {
+    sorted = await smartSortTable(
+      context,
+      gfm,
+      column: column,
+      ascending: true,
+    );
+  } else {
+    sorted = await smartSortTable(
+      context,
+      gfm,
+      column: column,
+      ascending: false,
+    );
+  }
+  if (!context.mounted || sorted == null) return;
+  final decoded = decodeMarkdownTableWithAlignment(sorted.split('\n'));
+  editor.replaceRows(decoded.rows, decoded.alignments);
 }

@@ -18,6 +18,7 @@ extension _ChartEditorGrid on _ChartEditorState {
       availableWidth,
       labelWidth + cellWidth * cols + trailingWidth,
     );
+    _restoreChartFocus();
     return SizedBox(
       key: const ValueKey('chart-grid'),
       width: gridWidth,
@@ -93,6 +94,8 @@ extension _ChartEditorGrid on _ChartEditorState {
                         Expanded(
                           child: _cell(
                             key: ValueKey('s-$_rev-$c'),
+                            gridRow: 0,
+                            gridCol: c + 1,
                             value: _seriesNames[c],
                             enabled: enabled,
                             onChanged: (v) => _seriesNames[c] = v,
@@ -161,6 +164,8 @@ extension _ChartEditorGrid on _ChartEditorState {
                 Expanded(
                   child: _cell(
                     key: ValueKey('x-$_rev-$r'),
+                    gridRow: r + 1,
+                    gridCol: 0,
                     value: _xLabels[r],
                     enabled: enabled,
                     onChanged: (v) => _xLabels[r] = v,
@@ -189,6 +194,8 @@ extension _ChartEditorGrid on _ChartEditorState {
               color: _isPieLike && c >= 2 ? AppTheme.slate200 : null,
               child: _cell(
                 key: ValueKey('v-$_rev-$r-$c'),
+                gridRow: r + 1,
+                gridCol: c + 1,
                 value: c < _values[r].length ? _values[r][c] : '',
                 enabled: enabled,
                 number: true,
@@ -283,6 +290,8 @@ extension _ChartEditorGrid on _ChartEditorState {
 
   Widget _cell({
     required Key key,
+    required int gridRow,
+    required int gridCol,
     required String value,
     required bool enabled,
     required ValueChanged<String> onChanged,
@@ -290,40 +299,24 @@ extension _ChartEditorGrid on _ChartEditorState {
     bool bold = false,
     bool muted = false,
   }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2),
-      child: TextFormField(
-        key: key,
-        initialValue: value,
-        enabled: enabled,
-        onChanged: (v) {
-          onChanged(v);
-          _emit();
-        },
-        keyboardType: number
-            ? const TextInputType.numberWithOptions(decimal: true, signed: true)
-            : TextInputType.text,
-        inputFormatters: number
-            ? [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,\-]'))]
-            : null,
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: bold ? FontWeight.w600 : FontWeight.normal,
-          color: muted ? AppTheme.slate500 : null,
-        ),
-        decoration: InputDecoration(
-          isDense: true,
-          filled: muted,
-          fillColor: muted ? AppTheme.slate100 : null,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 8,
-            vertical: 8,
-          ),
-          border: const OutlineInputBorder(),
-        ),
-      ),
+    return _ChartGridCell(
+      key: key,
+      focusNode: _ChartGridKeys.focus(this, gridRow, gridCol),
+      value: value,
+      enabled: enabled,
+      number: number,
+      bold: bold,
+      muted: muted,
+      onChanged: (v) {
+        onChanged(v);
+        _emit();
+      },
+      onKey: (event, ctrl) =>
+          _ChartGridKeys.onKey(this, gridRow, gridCol, event, ctrl),
     );
   }
+
+  void _restoreChartFocus() => _ChartGridKeys.restore(this);
 
   Widget _iconBtn(
     IconData icon,
@@ -340,4 +333,333 @@ extension _ChartEditorGrid on _ChartEditorState {
     padding: EdgeInsets.zero,
     constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
   );
+}
+
+/// Toetsen van het grafiekdataraster, buiten [_ChartEditorState]: Tab, Enter,
+/// pijlen en plakken horen bij het raster, niet bij de rest van de editor.
+class _ChartGridKeys {
+  static int rows(_ChartEditorState s) => 1 + s._xLabels.length;
+  static int cols(_ChartEditorState s) => 1 + s._seriesNames.length;
+
+  static FocusNode focus(_ChartEditorState s, int row, int col) {
+    final id = row == 0
+        ? 'h-$col'
+        : (col == 0 ? 'x-${row - 1}' : 'v-${row - 1}-${col - 1}');
+    return s._gridFocus.putIfAbsent(id, FocusNode.new);
+  }
+
+  static void restore(_ChartEditorState s) {
+    final pending = s._pendingChartFocus;
+    if (pending == null) return;
+    s._pendingChartFocus = null;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!s.mounted) return;
+      focus(s, pending.row, pending.col).requestFocus();
+    });
+  }
+
+  static void _focusCell(_ChartEditorState s, int row, int col) {
+    if (row == 0 && col == 0) return;
+    if (row < 0 || col < 0 || row >= rows(s) || col >= cols(s)) return;
+    focus(s, row, col).requestFocus();
+  }
+
+  static KeyEventResult onKey(
+    _ChartEditorState s,
+    int row,
+    int col,
+    KeyEvent event,
+    TextEditingController ctrl,
+  ) {
+    final keys = HardwareKeyboard.instance;
+    final meta = keys.isControlPressed || keys.isMetaPressed;
+    final arrow = switch (event.logicalKey) {
+      LogicalKeyboardKey.arrowLeft => TableArrow.left,
+      LogicalKeyboardKey.arrowRight => TableArrow.right,
+      LogicalKeyboardKey.arrowUp => TableArrow.up,
+      LogicalKeyboardKey.arrowDown => TableArrow.down,
+      _ => null,
+    };
+    if (arrow != null &&
+        (event is KeyDownEvent || event is KeyRepeatEvent) &&
+        !keys.isShiftPressed &&
+        !meta) {
+      return _moveByArrow(s, row, col, arrow, ctrl);
+    }
+    if (event is! KeyDownEvent) return KeyEventResult.ignored;
+    return _onDown(s, row, col, event, ctrl, meta: meta, keys: keys);
+  }
+
+  static KeyEventResult _onDown(
+    _ChartEditorState s,
+    int row,
+    int col,
+    KeyDownEvent event,
+    TextEditingController ctrl, {
+    required bool meta,
+    required HardwareKeyboard keys,
+  }) {
+    final pasteCombo =
+        (event.logicalKey == LogicalKeyboardKey.keyV && meta) ||
+        (event.logicalKey == LogicalKeyboardKey.insert && keys.isShiftPressed);
+    if (pasteCombo) {
+      Clipboard.getData(Clipboard.kTextPlain).then((data) {
+        final text = data?.text;
+        if (text == null || text.isEmpty) return;
+        if (!_pasteAt(s, row, col, text)) {
+          _writeCell(s, row, col, text, ctrl);
+        }
+      });
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.tab) {
+      return _onTab(s, row, col, shift: keys.isShiftPressed);
+    }
+    if (event.logicalKey == LogicalKeyboardKey.enter && !keys.isShiftPressed) {
+      if (row + 1 >= rows(s)) {
+        s._pendingChartFocus = (row: s._xLabels.length + 1, col: col);
+        s._addRow();
+      } else {
+        _focusCell(s, row + 1, col);
+      }
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
+
+  static KeyEventResult _onTab(
+    _ChartEditorState s,
+    int row,
+    int col, {
+    required bool shift,
+  }) {
+    if (shift) {
+      final prev = prevTableCell(row, col, cols(s));
+      if (prev != null && !(prev.row == 0 && prev.col == 0)) {
+        _focusCell(s, prev.row, prev.col);
+      }
+      return KeyEventResult.handled;
+    }
+    final next = nextTableCell(row, col, rows(s), cols(s));
+    if (next == null) {
+      s._pendingChartFocus = (row: s._xLabels.length + 1, col: 0);
+      s._addRow();
+    } else if (!(next.row == 0 && next.col == 0)) {
+      _focusCell(s, next.row, next.col);
+    }
+    return KeyEventResult.handled;
+  }
+
+  static KeyEventResult _moveByArrow(
+    _ChartEditorState s,
+    int row,
+    int col,
+    TableArrow arrow,
+    TextEditingController ctrl,
+  ) {
+    final text = ctrl.text;
+    final selection = ctrl.selection;
+    if (!selection.isValid) return KeyEventResult.ignored;
+    final offset = selection.baseOffset.clamp(0, text.length);
+    final collapsed = selection.isCollapsed;
+    final target = tableArrowTarget(
+      arrow: arrow,
+      row: row,
+      col: col,
+      rowCount: rows(s),
+      colCount: cols(s),
+      atTextStart: collapsed && offset <= 0,
+      atTextEnd: collapsed && offset >= text.length,
+      onFirstLine: collapsed && !text.substring(0, offset).contains('\n'),
+      onLastLine: collapsed && !text.substring(offset).contains('\n'),
+    );
+    return switch (target.move) {
+      TableArrowMove.inCell => KeyEventResult.ignored,
+      TableArrowMove.toCell => () {
+        if (target.row == 0 && target.col == 0) {
+          return KeyEventResult.handled;
+        }
+        _focusCell(s, target.row, target.col);
+        return KeyEventResult.handled;
+      }(),
+      TableArrowMove.atEdge => KeyEventResult.handled,
+    };
+  }
+
+  /// `false` = geen tabel op het klembord; de aanroeper plakt in de cel.
+  static bool _pasteAt(_ChartEditorState s, int row, int col, String text) {
+    final table = parseClipboardTable(text);
+    if (table == null) return false;
+    var startRow = row;
+    var startCol = col;
+    if (startRow == 0 && startCol == 0) {
+      startRow = 1;
+      startCol = 0;
+    }
+    while (cols(s) < startCol + table.first.length) {
+      s._seriesNames.add('Reeks ${s._seriesNames.length + 1}');
+      s._seriesColors.add(null);
+      for (final values in s._values) {
+        values.add('');
+      }
+    }
+    while (rows(s) < startRow + table.length) {
+      s._xLabels.add('');
+      s._rowColors.add(null);
+      s._values.add(
+        List<String>.filled(s._seriesNames.length, '', growable: true),
+      );
+    }
+    for (var i = 0; i < table.length; i++) {
+      for (var j = 0; j < table[i].length; j++) {
+        _setValue(s, startRow + i, startCol + j, table[i][j]);
+      }
+    }
+    s._bump();
+    s._emit();
+    return true;
+  }
+
+  static void _writeCell(
+    _ChartEditorState s,
+    int row,
+    int col,
+    String text,
+    TextEditingController ctrl,
+  ) {
+    final value = ctrl.text;
+    final sel = ctrl.selection;
+    final start = sel.isValid ? sel.start : value.length;
+    final end = sel.isValid ? sel.end : value.length;
+    ctrl.value = TextEditingValue(
+      text: value.replaceRange(start, end, text),
+      selection: TextSelection.collapsed(offset: start + text.length),
+    );
+    _setValue(s, row, col, ctrl.text);
+    s._emit();
+  }
+
+  static void _setValue(_ChartEditorState s, int row, int col, String value) {
+    if (row == 0) {
+      if (col <= 0) return;
+      final i = col - 1;
+      if (i >= s._seriesNames.length) return;
+      s._seriesNames[i] = value;
+      return;
+    }
+    final r = row - 1;
+    if (r < 0 || r >= s._xLabels.length) return;
+    if (col == 0) {
+      s._xLabels[r] = value;
+      return;
+    }
+    final c = col - 1;
+    while (s._values[r].length <= c) {
+      s._values[r].add('');
+    }
+    if (c < s._values[r].length) s._values[r][c] = value;
+  }
+}
+
+/// Eén cel van het grafiekdataraster: zelfde chroomloze look als een
+/// documenttabelcel, met de toetsen van het rekenblad erop.
+class _ChartGridCell extends StatefulWidget {
+  const _ChartGridCell({
+    super.key,
+    required this.focusNode,
+    required this.value,
+    required this.enabled,
+    required this.onChanged,
+    required this.onKey,
+    this.number = false,
+    this.bold = false,
+    this.muted = false,
+  });
+
+  final FocusNode focusNode;
+  final String value;
+  final bool enabled;
+  final ValueChanged<String> onChanged;
+  final KeyEventResult Function(KeyEvent event, TextEditingController ctrl)
+  onKey;
+  final bool number;
+  final bool bold;
+  final bool muted;
+
+  @override
+  State<_ChartGridCell> createState() => _ChartGridCellState();
+}
+
+class _ChartGridCellState extends State<_ChartGridCell> {
+  late final TextEditingController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.value);
+  }
+
+  @override
+  void didUpdateWidget(covariant _ChartGridCell oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.value != widget.value && _ctrl.text != widget.value) {
+      _ctrl.text = widget.value;
+    }
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return ListenableBuilder(
+      listenable: widget.focusNode,
+      builder: (context, _) {
+        final focused = widget.focusNode.hasFocus;
+        return ColoredBox(
+          color: focused
+              ? theme.colorScheme.primary.withValues(alpha: 0.12)
+              : (widget.muted ? AppTheme.slate100 : Colors.transparent),
+          child: Focus(
+            onKeyEvent: (_, event) => widget.onKey(event, _ctrl),
+            child: TextField(
+              controller: _ctrl,
+              focusNode: widget.focusNode,
+              enabled: widget.enabled,
+              onChanged: widget.onChanged,
+              keyboardType: widget.number
+                  ? const TextInputType.numberWithOptions(
+                      decimal: true,
+                      signed: true,
+                    )
+                  : TextInputType.text,
+              inputFormatters: widget.number
+                  ? [FilteringTextInputFormatter.allow(RegExp(r'[0-9.,\-]'))]
+                  : null,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: widget.bold ? FontWeight.w600 : FontWeight.normal,
+                color: widget.muted ? AppTheme.slate500 : null,
+              ),
+              decoration: const InputDecoration(
+                isDense: true,
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                filled: false,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 8,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

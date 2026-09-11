@@ -498,13 +498,9 @@ const _dutchSourceEt = {
   'Markdown inhoud': 'Markdown-sisu',
   '# Slide\n\nInhoud hier...': '# Slaid\n\nSisu siia...',
   'Rij toevoegen': 'Lisa rida',
-  'Kolom toevoegen': 'Lisa veerg',
   'Kolom': 'Veerg',
   'verwijderen': 'eemalda',
-  'Koprij verwijderen': 'Eemalda päiserida',
   'Rij verwijderen': 'Eemalda rida',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Nõuanne: uue rea saamiseks vajuta lahtris Enter.',
   'Presentatie openen': 'Ava esitlus',
   'Opslaan als': 'Salvesta kui',
   'Pakket importeren': 'Impordi pakett',
@@ -1092,8 +1088,6 @@ const _dutchSourceEt = {
       'Suurendab kogu redaktori teksti kuni 200%. Slaidid ise ei muutu.',
   'Breedte van het slidepaneel': 'Slaidipaneeli laius',
   'Pijltjestoetsen passen de breedte aan': 'Nooleklahvid muudavad laiust',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Näpunäide: kleebi tabelit tabelarvutusest lahtrisse klahvidega Cmd/Ctrl+V, et täita kogu tabel.',
   'Annuleren': 'Tühista',
   'Checklist': 'Kontrollnimekiri',
   'Voortgangsgrafiek tonen': 'Näita edenemisgraafikut',
@@ -5192,7 +5186,6 @@ const _dutchSourceAddEt = <String, String>{
   'Koprij': 'Päiserida',
   'Links uitlijnen': 'Joonda vasakule',
   'Rechts uitlijnen': 'Joonda paremale',
-  'Rij onder invoegen': 'Lisa rida allapoole',
   'Splits tabel': 'Jaga tabel',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Dokumendi stiil (teema, lehe suurus, veerised) ei kandu üle.',

@@ -369,6 +369,25 @@ void main() {
       expect(editor.colCount, 2);
       expect(editor.rows[1][0], contains('losse tekst'));
     });
+
+    test('lockHeader bewaart de kop en knipt extra kolommen af', () {
+      final locked = TableEditController(
+        rows: const [
+          ['Supplier', 'Input', 'Process'],
+          ['', '', ''],
+        ],
+        alignments: const [TableAlign.left, TableAlign.left, TableAlign.left],
+        lockHeader: true,
+        lockColumns: true,
+        onChanged: (_, _) {},
+      );
+      addTearDown(() => locked.dispose());
+      locked.pasteAt(0, 0, 'A\tB\tC\tD\nE\tF\tG\tH');
+      expect(locked.rows.first, ['Supplier', 'Input', 'Process']);
+      expect(locked.colCount, 3);
+      expect(locked.rows[1], ['A', 'B', 'C']);
+      expect(locked.rows[2], ['E', 'F', 'G']);
+    });
   });
 
   group('onCellFocused', () {

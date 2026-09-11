@@ -14,6 +14,7 @@ import '../../state/procesverbetering_provider.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';
 import '../../utils/number_convention.dart';
+import '../../utils/table_cell_navigation.dart';
 import '../../utils/table_clipboard.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -127,6 +128,11 @@ class _ChartEditorState extends State<ChartEditor> {
   // Bumped on structural changes so cell fields rebuild with fresh values.
   int _rev = 0;
 
+  /// Focus van het dataraster, buiten de cellen: bij een Rij-erbij verdwijnt
+  /// het oude veld, maar de cursor hoort in de nieuwe rij te landen.
+  final Map<String, FocusNode> _gridFocus = {};
+  ({int row, int col})? _pendingChartFocus;
+
   static const _minLabelW = 238.0;
   static const _minCellW = 150.0;
 
@@ -237,6 +243,9 @@ class _ChartEditorState extends State<ChartEditor> {
     _lsl.dispose();
     _processTarget.dispose();
     _startAngle.dispose();
+    for (final node in _gridFocus.values) {
+      node.dispose();
+    }
     super.dispose();
   }
 

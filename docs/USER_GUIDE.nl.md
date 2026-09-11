@@ -1052,19 +1052,16 @@ codeblok in de Markdown.
 
 ### Tabellen
 
-De eerste rij is de kop. Druk op `Enter` binnen een cel voor een nieuwe regel binnen
-die cel. Om bestaande data binnen te halen, **plak een tabel in een willekeurige cel** met
+De eerste rij is de kop. `Tab` gaat naar de volgende cel — op de laatste cel
+groeit er een rij bij. `Enter` gaat naar de cel eronder (en groeit onderaan een
+rij bij); `Shift+Enter` zet een regeleinde binnen de cel (`<br>` in de
+Markdown). Om bestaande data binnen te halen, **plak een tabel in een willekeurige cel** met
 `Ctrl/Cmd+V` (of `Shift+Insert`): een selectie gekopieerd uit een spreadsheet (Excel,
 Numbers, LibreOffice Calc, Google Sheets), CSV-tekst (komma- of
 puntkomma-gescheiden), of een markdown-tabel vult het raster vanaf die cel,
 en voegt rijen en kolommen toe waar nodig. Gewone tekst — zelfs een zin met een komma
-erin — plakt nog steeds in slechts die ene cel.
-
-Zolang de tabel nog leeg is biedt de bewerker een **voorzet**: één klik legt de
-kolommen van een actielijst neer (Actie, Eigenaar, Deadline, Status) en zet de
-datummarkering hieronder aan. De knop verdwijnt zodra de tabel iets bevat, zodat hij
-nooit kan overschrijven wat je hebt getypt. Dit vervangt het aparte diatype *Acties en
-besluiten*, dat je die kolommen gaf ten koste van alles wat een tabel verder kan.
+erin — plakt nog steeds in slechts die ene cel. Zonder selectie in de cel kopieert
+`Ctrl/Cmd+C` het hele raster als TSV.
 
 Vink **Verlopen datums markeren** aan in *Opties per slide* om elke cel met een
 datum vóór vandaag rood te kleuren. OciDeck berekent dit tegen de dag waarop je presenteert, zodat een
@@ -1084,7 +1081,10 @@ presentatie te laten bewerken, vink je **Tabel bewerkbaar tijdens presenteren** 
 ### Grafieken
 
 Kies een type en een titel, en voer dan data in het raster in: de eerste kolom bevat de
-labels, elke verdere kolom is een genoemde reeks. Gebruik **Rij** en **Reeks** om
+labels, elke verdere kolom is een genoemde reeks. Het raster gebruikt dezelfde toetsen
+als een tabel: `Tab` loopt de cellen af en maakt op de laatste cel een rij bij,
+`Enter` gaat naar beneden, en `Ctrl/Cmd+V` of `Shift+Insert` in een cel plakt
+een spreadsheetselectie vanaf die cel. Gebruik **Rij** en **Reeks** om
 data toe te voegen; de kleine ✕ verwijdert een rij/kolom. Elke reeks en (voor taart/ring/radar)
 elk label kan een eigen kleur krijgen.
 
@@ -4924,7 +4924,9 @@ openen. *(Pagina-einde toegevoegd 2026-08-08 — zie
 
 ### Tabellen, sorteren en tijdlijnen
 
-Klik in **Visueel** op een tabelcel om de tabelknoppen tevoorschijn te halen. De
+Klik in **Visueel** op een tabelcel om de tabelknoppen tevoorschijn te halen.
+In **Bron** is de live weergave ernaast hetzelfde rekenblad: tik in een cel en
+typ; er is geen potlood-dialoog. De
 twee sorteerknoppen zetten de actieve kolom oplopend of aflopend. OciDeck herkent
 tekst, getallen, ISO-datums en tijden lokaal. Zijn de waarden gemengd, dan vraagt
 hij hoe hij ze moet lezen; waarden die hij niet herkent blijven bij elkaar
@@ -4938,7 +4940,9 @@ merkteken, de tweede de gebeurteniskaart en de eventuele derde een neutrale
 metadata-chip. Alle rijen blijven zichtbaar, zonder de itemlimiet of de
 statuskleuren van een presentatietijdlijn. **Als tabel weergeven** draait de
 weergave terug zonder één cel kwijt te raken. **Invoegen → Tijdlijn** zet dezelfde
-draagbare structuur er direct in.
+draagbare structuur er direct in — een lege gebeurtenisrij is geldig; je vult
+hem daarna in. **Invoegen → Tabel** zet een leeg 2×2-raster op de cursor, zonder
+dialoog.
 
 Begint een nieuwe pagina met het vervolg van een tijdlijn, dan herhaalt de
 bovenmarge naast **Tijdlijn · vervolg** ook het merkteken van de eerste zichtbare

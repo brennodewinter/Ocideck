@@ -503,13 +503,9 @@ const _dutchSourcePl = {
   'Markdown inhoud': 'Treść Markdown',
   '# Slide\n\nInhoud hier...': '# Slajd\n\nTreść tutaj...',
   'Rij toevoegen': 'Dodaj wiersz',
-  'Kolom toevoegen': 'Dodaj kolumnę',
   'Kolom': 'Kolumna',
   'verwijderen': 'usuń',
-  'Koprij verwijderen': 'Usuń wiersz nagłówka',
   'Rij verwijderen': 'Usuń wiersz',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Wskazówka: naciśnij Enter w komórce, aby dodać nowy wiersz.',
   'Presentatie openen': 'Otwórz prezentację',
   'Opslaan als': 'Zapisz jako',
   'Pakket importeren': 'Importuj pakiet',
@@ -1102,8 +1098,6 @@ const _dutchSourcePl = {
   'Breedte van het slidepaneel': 'Szerokość panelu slajdów',
   'Pijltjestoetsen passen de breedte aan':
       'Klawisze strzałek dostosowują szerokość',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Wskazówka: wklej tabelę z arkusza kalkulacyjnego do komórki za pomocą Cmd/Ctrl+V, aby wypełnić całą tabelę.',
   'Annuleren': 'Anuluj',
   'Checklist': 'Lista zadań',
   'Voortgangsgrafiek tonen': 'Pokaż wykres postępu',
@@ -5226,7 +5220,6 @@ const _dutchSourceAddPl = <String, String>{
   'Koprij': 'Wiersz nagłówka',
   'Links uitlijnen': 'Wyrównaj do lewej',
   'Rechts uitlijnen': 'Wyrównaj do prawej',
-  'Rij onder invoegen': 'Wstaw wiersz poniżej',
   'Splits tabel': 'Podziel tabelę',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Styl dokumentu (motyw, rozmiar strony, marginesy) nie jest zachowany.',

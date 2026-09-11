@@ -500,13 +500,9 @@ const _dutchSourceRo = {
   'Markdown inhoud': 'Conținut Markdown',
   '# Slide\n\nInhoud hier...': '# Slide\n\nConținut aici...',
   'Rij toevoegen': 'Adaugă rând',
-  'Kolom toevoegen': 'Adaugă coloană',
   'Kolom': 'Coloană',
   'verwijderen': 'elimină',
-  'Koprij verwijderen': 'Elimină rândul de antet',
   'Rij verwijderen': 'Elimină rândul',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Sfat: apasă Enter într-o celulă pentru un rând nou.',
   'Presentatie openen': 'Deschide prezentarea',
   'Opslaan als': 'Salvează ca',
   'Pakket importeren': 'Importă pachet',
@@ -1106,8 +1102,6 @@ const _dutchSourceRo = {
       'Mărește tot textul din editor până la maximum 200%. Slide-urile în sine nu se modifică.',
   'Breedte van het slidepaneel': 'Lățimea panoului de slide-uri',
   'Pijltjestoetsen passen de breedte aan': 'Tastele săgeți ajustează lățimea',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Sfat: lipește o tabelă din foaia ta de calcul într-o celulă cu Cmd/Ctrl+V pentru a umple întreaga tabelă.',
   'Annuleren': 'Anulează',
   'Checklist': 'Listă de sarcini',
   'Voortgangsgrafiek tonen': 'Afișează graficul de progres',
@@ -5256,7 +5250,6 @@ const _dutchSourceAddRo = <String, String>{
   'Koprij': 'Rând antet',
   'Links uitlijnen': 'Aliniază la stânga',
   'Rechts uitlijnen': 'Aliniază la dreapta',
-  'Rij onder invoegen': 'Inserează rând dedesubt',
   'Splits tabel': 'Împarte tabelul',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Stilul documentului (temă, dimensiune pagină, margini) nu este păstrat.',

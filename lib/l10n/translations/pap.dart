@@ -470,7 +470,6 @@ const _dutchSourcePap = {
   'Beschrijving (doorzoekbaar)': 'Deskripshon (buskabel)',
   'Markdown inhoud': 'Kontenido Markdown',
   'Rij toevoegen': 'Añadí rei',
-  'Kolom toevoegen': 'Añadí kolòm',
   'Kolom': 'Kolòm',
   'Presentatie openen': 'Habri presentashon',
   'Opslaan als': 'Warda komo',
@@ -4559,8 +4558,6 @@ const _dutchSourceAddPap = {
   'Breedte van het slidepaneel': 'Hanchura di e panel di slide',
   'Pijltjestoetsen passen de breedte aan':
       'Tekla di flecha ta atapta e hanchura',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tip: pega ku Cmd/Ctrl+V un tabel for di bo spreadsheet den un sèl pa yena henter e tabel.',
   'Annuleren': 'Kanselá',
   'Checklist': 'Lista di kontrol',
   'Voortgangsgrafiek tonen': 'Mustra gráfiko di progreso',
@@ -4689,7 +4686,6 @@ const _dutchSourceAddPap = {
   'Kopiëren mislukt.': 'Kopiamentu a faya.',
   'Kopiëren naar ander deck': 'Kopia pa otro deck',
   'Kopiëren naar klembord mislukt.': 'Kopiamentu pa klembord a faya.',
-  'Koprij verwijderen': 'Kita fila di enkabesamentu',
   'Laat los om toe te voegen': 'Laga lòs pa agregá',
   'Laatste slide': 'Último slide',
   'Let op: deze afbeelding wordt nog gebruikt in':
@@ -4745,8 +4741,6 @@ const _dutchSourceAddPap = {
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Restorá (henter imágen visibel)',
   'Tijd resetten (R)': 'Resetiá tempu (R)',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: primi Enter paden di un seld pa un liña nobo.',
   'Titelachtergrond': 'Fondo di título',
   'Titeltekst': 'Teksto di título',
   'Toepassen': 'Apliká',
@@ -5241,7 +5235,6 @@ const _dutchSourceAddPap = {
   'Koprij': 'Riba di tabla',
   'Links uitlijnen': 'Alinia pa na',
   'Rechts uitlijnen': 'Alinia pa drechi',
-  'Rij onder invoegen': 'Inserta riba abou',
   'Splits tabel': 'Parti tabla',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'E estilo di dokumentu (tema, tamán di págin, margen) no ta keda.',

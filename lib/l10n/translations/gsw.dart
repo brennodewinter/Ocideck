@@ -501,13 +501,9 @@ const _dutchSourceGsw = {
   'Markdown inhoud': 'Markdown-Inhalt',
   '# Slide\n\nInhoud hier...': '# Slide\n\nInhalt da...',
   'Rij toevoegen': 'Zile zuefüege',
-  'Kolom toevoegen': 'Spalte zuefüege',
   'Kolom': 'Spalte',
   'verwijderen': 'ewägnäh',
-  'Koprij verwijderen': 'Kopfzile ewägnäh',
   'Rij verwijderen': 'Zile ewägnäh',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tipp: druck Enter in ere Zälle für e nöi Zile.',
   'Presentatie openen': 'Presentation uufmache',
   'Opslaan als': 'Spichere als',
   'Pakket importeren': 'Paket importiere',
@@ -1099,8 +1095,6 @@ const _dutchSourceGsw = {
       'Vergrösseret alle Editortext bis uf 200%. D Slides sälber ändere sich nöd.',
   'Breedte van het slidepaneel': 'Breiti vom Slidepanel',
   'Pijltjestoetsen passen de breedte aan': 'Pfiiltaschte passe d Breiti a',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tipp: Kläb mit Cmd/Ctrl+V e Tabälle us dim Spreadsheet i e Zälle, zum d ganz Tabälle z fülle.',
   'Annuleren': 'Abbräche',
   'Checklist': 'Ufgabe-Checklischte',
   'Voortgangsgrafiek tonen': 'Fortschrittsgrafik zeige',
@@ -5213,7 +5207,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Koprij': 'Chopfzyle',
   'Links uitlijnen': 'Links uusrichte',
   'Rechts uitlijnen': 'Rechts uusrichte',
-  'Rij onder invoegen': 'Zile unten yfüege',
   'Splits tabel': 'Tabelle teile',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'De Dokumäntstil (Thema, Syteformat, Margine) wird nöd übernoh.',

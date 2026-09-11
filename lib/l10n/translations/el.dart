@@ -506,13 +506,9 @@ const _dutchSourceEl = {
   'Markdown inhoud': 'Περιεχόμενο Markdown',
   '# Slide\n\nInhoud hier...': '# Διαφάνεια\n\nΠεριεχόμενο εδώ...',
   'Rij toevoegen': 'Προσθήκη γραμμής',
-  'Kolom toevoegen': 'Προσθήκη στήλης',
   'Kolom': 'Στήλη',
   'verwijderen': 'αφαίρεση',
-  'Koprij verwijderen': 'Αφαίρεση γραμμής κεφαλίδας',
   'Rij verwijderen': 'Αφαίρεση γραμμής',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Συμβουλή: πατήστε Enter μέσα σε ένα κελί για νέα γραμμή.',
   'Presentatie openen': 'Άνοιγμα παρουσίασης',
   'Opslaan als': 'Αποθήκευση ως',
   'Pakket importeren': 'Εισαγωγή πακέτου',
@@ -1111,8 +1107,6 @@ const _dutchSourceEl = {
       'Μεγεθύνει όλο το κείμενο του επεξεργαστή έως 200%. Οι διαφάνειες δεν επηρεάζονται.',
   'Breedte van het slidepaneel': 'Πλάτος του πίνακα διαφανειών',
   'Pijltjestoetsen passen de breedte aan': 'Τα βελάκια προσαρμόζουν το πλάτος',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Συμβουλή: επικολλήστε έναν πίνακα από το υπολογιστικό σας φύλλο σε ένα κελί με Cmd/Ctrl+V για να γεμίσετε ολόκληρο τον πίνακα.',
   'Annuleren': 'Ακύρωση',
   'Checklist': 'Λίστα εργασιών',
   'Voortgangsgrafiek tonen': 'Εμφάνιση γραφήματος προόδου',
@@ -5278,7 +5272,6 @@ const _dutchSourceAddEl = <String, String>{
   'Koprij': 'Γραμμή κεφαλίδας',
   'Links uitlijnen': 'Στοίχιση αριστερά',
   'Rechts uitlijnen': 'Στοίχιση δεξιά',
-  'Rij onder invoegen': 'Εισαγωγή γραμμής κάτω',
   'Splits tabel': 'Διαίρεση πίνακα',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Το στυλ του εγγράφου (θέμα, μέγεθος σελίδας, περιθώρια) δεν διατηρείται.',

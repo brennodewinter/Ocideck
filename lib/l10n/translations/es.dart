@@ -475,7 +475,6 @@ const _dutchSourceEs = {
   'Beschrijving (doorzoekbaar)': 'Descripción (buscable)',
   'Markdown inhoud': 'Contenido Markdown',
   'Rij toevoegen': 'Añadir fila',
-  'Kolom toevoegen': 'Añadir columna',
   'Kolom': 'Columna',
   'Presentatie openen': 'Abrir presentación',
   'Opslaan als': 'Guardar como',
@@ -4579,8 +4578,6 @@ const _dutchSourceAddEs = {
   'Breedte van het slidepaneel': 'Ancho del panel de diapositivas',
   'Pijltjestoetsen passen de breedte aan':
       'Las teclas de flecha ajustan el ancho',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Consejo: pega con Cmd/Ctrl+V una tabla de tu hoja de cálculo en una celda para rellenar toda la tabla.',
   'Annuleren': 'Cancelar',
   'Checklist': 'Lista de verificación',
   'Voortgangsgrafiek tonen': 'Mostrar gráfico de progreso',
@@ -4718,7 +4715,6 @@ const _dutchSourceAddEs = {
   'Kopiëren mislukt.': 'Error al copiar.',
   'Kopiëren naar ander deck': 'Copiar a otra presentación',
   'Kopiëren naar klembord mislukt.': 'Error al copiar al portapapeles.',
-  'Koprij verwijderen': 'Quitar fila de encabezado',
   'Laat los om toe te voegen': 'Suelta para añadir',
   'Laatste slide': 'Diapositiva final',
   'Let op: deze afbeelding wordt nog gebruikt in':
@@ -4774,8 +4770,6 @@ const _dutchSourceAddEs = {
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Restablecer (imagen completa visible)',
   'Tijd resetten (R)': 'Restablecer tiempo (R)',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Consejo: pulsa Enter dentro de una celda para una nueva línea.',
   'Titelachtergrond': 'Fondo de título',
   'Titeltekst': 'Texto del título',
   'Toepassen': 'Aplicar',
@@ -5274,7 +5268,6 @@ const _dutchSourceAddEs = {
   'Koprij': 'Fila de encabezado',
   'Links uitlijnen': 'Alinear a la izquierda',
   'Rechts uitlijnen': 'Alinear a la derecha',
-  'Rij onder invoegen': 'Insertar fila debajo',
   'Splits tabel': 'Dividir tabla',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'El estilo del documento (tema, tamaño de página, márgenes) no se incluye.',

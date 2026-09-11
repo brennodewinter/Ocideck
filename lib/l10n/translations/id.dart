@@ -497,13 +497,9 @@ const _dutchSourceId = {
   'Markdown inhoud': 'Konten Markdown',
   '# Slide\n\nInhoud hier...': '# Slide\n\nKonten di sini...',
   'Rij toevoegen': 'Tambah baris',
-  'Kolom toevoegen': 'Tambah kolom',
   'Kolom': 'Kolom',
   'verwijderen': 'hapus',
-  'Koprij verwijderen': 'Hapus baris header',
   'Rij verwijderen': 'Hapus baris',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: tekan Enter di dalam sel untuk baris baru.',
   'Presentatie openen': 'Buka presentasi',
   'Opslaan als': 'Simpan sebagai',
   'Pakket importeren': 'Impor paket',
@@ -1095,8 +1091,6 @@ const _dutchSourceId = {
       'Memperbesar semua teks editor hingga 200%. Slide itu sendiri tidak terpengaruh.',
   'Breedte van het slidepaneel': 'Lebar panel slide',
   'Pijltjestoetsen passen de breedte aan': 'Tombol panah menyesuaikan lebarnya',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tip: tempelkan tabel dari spreadsheet Anda ke dalam sel dengan Cmd/Ctrl+V untuk mengisi seluruh tabel.',
   'Annuleren': 'Batal',
   'Checklist': 'Daftar tugas',
   'Voortgangsgrafiek tonen': 'Tampilkan grafik kemajuan',
@@ -5211,7 +5205,6 @@ const _dutchSourceAddId = <String, String>{
   'Koprij': 'Baris header',
   'Links uitlijnen': 'Rata kiri',
   'Rechts uitlijnen': 'Rata kanan',
-  'Rij onder invoegen': 'Sisipkan baris di bawah',
   'Splits tabel': 'Bagi tabel',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Gaya dokumen (tema, ukuran halaman, margin) tidak ikut.',

@@ -499,13 +499,9 @@ const _dutchSourceSk = {
   'Markdown inhoud': 'Obsah Markdown',
   '# Slide\n\nInhoud hier...': '# Snímka\n\nObsah sem...',
   'Rij toevoegen': 'Pridať riadok',
-  'Kolom toevoegen': 'Pridať stĺpec',
   'Kolom': 'Stĺpec',
   'verwijderen': 'odstrániť',
-  'Koprij verwijderen': 'Odstrániť riadok hlavičky',
   'Rij verwijderen': 'Odstrániť riadok',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: stlačením Enter v bunke vložíte nový riadok.',
   'Presentatie openen': 'Otvoriť prezentáciu',
   'Opslaan als': 'Uložiť ako',
   'Pakket importeren': 'Importovať balík',
@@ -1101,8 +1097,6 @@ const _dutchSourceSk = {
       'Zväčší všetok text editora až na 200 %. Samotné snímky sa nezmenia.',
   'Breedte van het slidepaneel': 'Šírka panela snímok',
   'Pijltjestoetsen passen de breedte aan': 'Šírku upravujú klávesy so šípkami',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tip: vložte tabuľku z tabuľkového procesora do bunky pomocou Cmd/Ctrl+V a vyplňte celú tabuľku.',
   'Annuleren': 'Zrušiť',
   'Checklist': 'Kontrolný zoznam',
   'Voortgangsgrafiek tonen': 'Zobraziť graf priebehu',
@@ -5200,7 +5194,6 @@ const _dutchSourceAddSk = <String, String>{
   'Koprij': 'Riadok hlavičky',
   'Links uitlijnen': 'Zarovnať vľavo',
   'Rechts uitlijnen': 'Zarovnať vpravo',
-  'Rij onder invoegen': 'Vložiť riadok pod',
   'Splits tabel': 'Rozdeliť tabuľku',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Štýl dokumentu (téma, veľkosť stránky, okraje) sa neprenáša.',

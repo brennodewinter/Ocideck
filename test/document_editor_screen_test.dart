@@ -13,7 +13,6 @@ import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
 import 'package:ocideck/widgets/editors/markdown_find_bar.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
-import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/markdown_editor/markdown_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/theme_profile_logo.dart';
@@ -599,7 +598,7 @@ void main() {
     }
   });
 
-  testWidgets('Invoegen → Tijdlijn opent eerst de gewone tabeleditor', (
+  testWidgets('Invoegen → Tijdlijn zet meteen een tijdlijntabel in de bron', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1200, 800));
@@ -613,28 +612,8 @@ void main() {
     await tester.tap(find.text('Tijdlijn'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Tabel'), findsOneWidget);
-    expect(find.widgetWithText(TextField, 'Tijd'), findsOneWidget);
-    expect(n.currentState.document!.source, 'Voor.');
-
-    await tester.tap(find.text('Toepassen'));
-    await tester.pumpAndSettle();
-    expect(n.currentState.document!.source, 'Voor.');
-    expect(
-      find.text(
-        'Voeg eerst minstens één gebeurtenis toe. Deze tabel blijft ongewijzigd.',
-      ),
-      findsOneWidget,
-    );
-
-    expect(find.byType(TableEditor), findsOneWidget);
-    final timelineFields = find.descendant(
-      of: find.byType(TableEditor),
-      matching: find.byType(TextField),
-    );
-    await tester.enterText(timelineFields.at(4), 'Eerste feit');
-    await tester.tap(find.text('Toepassen'));
-    await tester.pumpAndSettle();
+    // Geen dialoog, geen "eerst een gebeurtenis": een lege rij is geldig.
+    expect(find.text('Toepassen'), findsNothing);
     expect(
       n.currentState.document!.source,
       contains('<!-- timeline -->\n| Tijd | Gebeurtenis | Status |'),

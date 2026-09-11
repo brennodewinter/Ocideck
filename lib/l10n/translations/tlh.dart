@@ -489,13 +489,9 @@ const _dutchSourceTlh = {
   'Markdown inhoud': 'Markdown ngaSbogh',
   '# Slide\n\nInhoud hier...': '# \'echletHom\n\nngaSbogh naDev...',
   'Rij toevoegen': 'tlhoy\' yIchel',
-  'Kolom toevoegen': '\'och yIchel',
   'Kolom': '\'och',
   'verwijderen': 'yIteq',
-  'Koprij verwijderen': 'nachtlhoy\' yIteq',
   'Rij verwijderen': 'tlhoy\' yIteq',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'chID: yerDaq \'ay\' chu\'meH Enter yIvoq.',
   'Presentatie openen': 'cha\'nav yIpoSmoH',
   'Opslaan als': 'SaH je pong',
   'Pakket importeren': 'ngaSHa\' yIkII\'',
@@ -1078,8 +1074,6 @@ const _dutchSourceTlh = {
       'Hoch choHwI\' mu\' cha\' vatlhvI\'Daq boch. \'echletHommey choHbe\'.',
   'Breedte van het slidepaneel': '\'echletHom pel\'aQ \'ab',
   'Pijltjestoetsen passen de breedte aan': 'naHmey De\' \'ab luchoH',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'qawmoH: Cmd/Ctrl+V lo\'DI\' spreadsheetlIjvo\' raS naghDaq yIboch, raS naQ yIteb.',
   'Annuleren': 'yImev',
   'Checklist': 'Qu\' HutlhchoH',
   'Voortgangsgrafiek tonen': 'chavqu\' De\'wI\'ghom yI\'ang',
@@ -5148,7 +5142,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Koprij': 'Doch teywI',
   'Links uitlijnen': 'poS moH',
   'Rechts uitlijnen': 'nIH moH',
-  'Rij onder invoegen': 'bing chel',
   'Splits tabel': 'wa\' DIch DIv\'',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Docuy tlhIj (tema, nID nav, margIn) DIloHbe\'.',

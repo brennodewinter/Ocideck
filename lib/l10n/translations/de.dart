@@ -476,7 +476,6 @@ const _dutchSourceDe = {
   'Beschrijving (doorzoekbaar)': 'Beschreibung (durchsuchbar)',
   'Markdown inhoud': 'Markdown-Inhalt',
   'Rij toevoegen': 'Zeile hinzufügen',
-  'Kolom toevoegen': 'Spalte hinzufügen',
   'Kolom': 'Spalte',
   'Presentatie openen': 'Präsentation öffnen',
   'Opslaan als': 'Speichern unter',
@@ -4570,8 +4569,6 @@ const _dutchSourceAddDe = {
       'Vergrößert sämtlichen Text der Bearbeitungsumgebung auf bis zu 200 %. Die Folien selbst ändern sich nicht.',
   'Breedte van het slidepaneel': 'Breite des Folienbereichs',
   'Pijltjestoetsen passen de breedte aan': 'Pfeiltasten passen die Breite an',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tipp: Füge mit Cmd/Strg+V eine Tabelle aus deiner Tabellenkalkulation in eine Zelle ein, um die ganze Tabelle zu füllen.',
   'Annuleren': 'Abbrechen',
   'Checklist': 'Checkliste',
   'Voortgangsgrafiek tonen': 'Fortschrittsdiagramm anzeigen',
@@ -4710,7 +4707,6 @@ const _dutchSourceAddDe = {
   'Kopiëren naar ander deck': 'In anderes Deck kopieren',
   'Kopiëren naar klembord mislukt.':
       'Kopieren in die Zwischenablage fehlgeschlagen.',
-  'Koprij verwijderen': 'Kopfzeile entfernen',
   'Laat los om toe te voegen': 'Loslassen zum Hinzufügen',
   'Laatste slide': 'Letzte Folie',
   'Let op: deze afbeelding wordt nog gebruikt in':
@@ -4767,8 +4763,6 @@ const _dutchSourceAddDe = {
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Zurücksetzen (vollständiges Bild sichtbar)',
   'Tijd resetten (R)': 'Zeit zurücksetzen (R)',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tipp: Drücken Sie Enter in einer Zelle für eine neue Zeile.',
   'Titelachtergrond': 'Titelhintergrund',
   'Titeltekst': 'Titeltext',
   'Toepassen': 'Anwenden',
@@ -5262,7 +5256,6 @@ const _dutchSourceAddDe = {
   'Koprij': 'Kopfzeile',
   'Links uitlijnen': 'Links ausrichten',
   'Rechts uitlijnen': 'Rechts ausrichten',
-  'Rij onder invoegen': 'Zeile unten einfügen',
   'Splits tabel': 'Tabelle aufteilen',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Der Dokumentstil (Design, Seitenformat, Ränder) wird nicht übernommen.',

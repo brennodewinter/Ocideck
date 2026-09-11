@@ -215,8 +215,8 @@ void main() {
     expect(Focus.of(tester.element(firstCell)).hasFocus, isTrue);
   });
 
-  // "Rij onder invoegen" zet een lege rij ná de huidige, niet onderaan —
-  // essentieel om een rij halverwege toe te voegen zonder alles te verplaatsen.
+  // "Rij eronder" zet een lege rij ná de huidige, niet onderaan — essentieel
+  // om een rij halverwege toe te voegen zonder alles te verplaatsen.
   testWidgets('insert row below adds an empty row after the chosen one', (
     tester,
   ) async {
@@ -230,19 +230,14 @@ void main() {
         ),
       ),
     );
-    // Vul de koprij zodat de tabel 2×2 is.
     await tester.enterText(find.byType(TextField).at(1), 'A');
     await tester.pump();
-    // De per-rij-menu's staan ná de per-kolom-menu's: bij 2 kolommen is het
-    // rij-0-menu op index 2 van de more_vert-iconen.
-    await tester.tap(find.byIcon(Icons.more_vert).at(2));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Rij onder invoegen'));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Rij eronder'));
+    await tester.pump();
     expect(updated.tableRows.length, 3);
-    // De nieuwe rij staat op index 1 (ná de kop), niet onderaan op index 2.
     expect(updated.tableRows[1], ['', '']);
-    // De oorspronkelijke tweede rij schuift naar index 2.
     expect(updated.tableRows[2], ['', '']);
   });
 
@@ -262,11 +257,10 @@ void main() {
     );
     await tester.enterText(find.byType(TextField).at(1), 'A');
     await tester.pump();
-    // Het eerste per-kolom-menu hoort bij kolom 0.
-    await tester.tap(find.byIcon(Icons.more_vert).at(0));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Kolom rechts invoegen'));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Kolom rechts'));
+    await tester.pump();
     expect(updated.tableRows.first.length, 3);
     // De nieuwe kolom staat op index 1 (ná kolom 0), de oude tweede op index 2.
     expect(updated.tableRows[0][1], '');
@@ -294,11 +288,11 @@ void main() {
         ),
       ),
     );
-    // Rij 2 (B) omhoog: more_vert op index 2 kolommen + 2 rijen = at(4) is rij 2.
-    await tester.tap(find.byIcon(Icons.more_vert).at(4));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Rij omhoog'));
-    await tester.pumpAndSettle();
+    // Rij 2 (B): titel + kop(2) + A-rij(2) → eerste cel van B is veld 5.
+    await tester.tap(find.byType(TextField).at(5));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Rij omhoog'));
+    await tester.pump();
     expect(updated.tableRows[0], ['Kop', 'X']); // kop ongewijzigd
     expect(updated.tableRows[1], ['B', '2']); // B naar boven
     expect(updated.tableRows[2], ['A', '1']);
@@ -323,11 +317,10 @@ void main() {
         ),
       ),
     );
-    // Kolom 0 (A) naar rechts: more_vert at(0) is kolom 0.
-    await tester.tap(find.byIcon(Icons.more_vert).at(0));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Kolom naar rechts'));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Kolom naar rechts'));
+    await tester.pump();
     expect(updated.tableRows[0], ['B', 'A']);
     expect(updated.tableRows[1], ['2', '1']);
   });
@@ -397,10 +390,10 @@ void main() {
     );
     await tester.enterText(find.byType(TextField).at(1), 'A');
     await tester.pump();
-    await tester.tap(find.byIcon(Icons.more_vert).at(0));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Rechts uitlijnen'));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Rechts uitlijnen'));
+    await tester.pump();
     expect(updated.tableColumnAlignments, [TableAlign.right]);
   });
 
@@ -428,16 +421,43 @@ void main() {
     );
     await tester.enterText(find.byType(TextField).at(1), 'A');
     await tester.pump();
-    await tester.tap(find.byIcon(Icons.more_vert).at(0));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Getalnotatie'));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Getalnotatie'));
+    await tester.pump();
     expect(updated.tableNumberColumns, [true]);
-    // Nogmaals toggelen zet hem uit.
-    await tester.tap(find.byIcon(Icons.more_vert).at(0));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Getalnotatie'));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.tap(find.byTooltip('Getalnotatie'));
+    await tester.pump();
     expect(updated.tableNumberColumns, [false]);
+  });
+
+  // Enter springt een rij lager, zoals in het document-rekenblad. Onder de
+  // laatste rij groeit de tabel mee; Shift+Enter blijft een regeleinde in de cel.
+  testWidgets('Enter moves to the cell below and grows the table', (
+    tester,
+  ) async {
+    var updated = Slide.create(SlideType.table);
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Scaffold(
+            body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.byType(TextField).at(1));
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pump();
+    expect(
+      Focus.of(tester.element(find.byType(TextField).at(3))).hasFocus,
+      isTrue,
+    );
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    expect(updated.tableRows.length, 3);
   });
 }

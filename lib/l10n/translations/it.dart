@@ -473,7 +473,6 @@ const _dutchSourceIt = {
   'Beschrijving (doorzoekbaar)': 'Descrizione (ricercabile)',
   'Markdown inhoud': 'Contenuto Markdown',
   'Rij toevoegen': 'Aggiungi riga',
-  'Kolom toevoegen': 'Aggiungi colonna',
   'Kolom': 'Colonna',
   'Presentatie openen': 'Apri presentazione',
   'Opslaan als': 'Salva con nome',
@@ -4589,8 +4588,6 @@ const _dutchSourceAddIt = {
   'Breedte van het slidepaneel': 'Larghezza del pannello delle slide',
   'Pijltjestoetsen passen de breedte aan':
       'I tasti freccia regolano la larghezza',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Suggerimento: incolla con Cmd/Ctrl+V una tabella dal tuo foglio di calcolo in una cella per riempire l\'intera tabella.',
   'Annuleren': 'Annulla',
   'Checklist': 'Lista di controllo',
   'Voortgangsgrafiek tonen': 'Mostra grafico di avanzamento',
@@ -4728,7 +4725,6 @@ const _dutchSourceAddIt = {
   'Kopiëren mislukt.': 'Copia non riuscita.',
   'Kopiëren naar ander deck': 'Copia in un altro deck',
   'Kopiëren naar klembord mislukt.': 'Copia negli appunti non riuscita.',
-  'Koprij verwijderen': 'Rimuovi riga di intestazione',
   'Laat los om toe te voegen': 'Rilascia per aggiungere',
   'Laatste slide': 'Slide finale',
   'Let op: deze afbeelding wordt nog gebruikt in':
@@ -4785,8 +4781,6 @@ const _dutchSourceAddIt = {
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Ripristina (immagine intera visibile)',
   'Tijd resetten (R)': 'Reimposta tempo (R)',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Suggerimento: premi Invio all\'interno di una cella per andare a capo.',
   'Titelachtergrond': 'Sfondo del titolo',
   'Titeltekst': 'Testo del titolo',
   'Toepassen': 'Applica',
@@ -5281,7 +5275,6 @@ const _dutchSourceAddIt = {
   'Koprij': 'Riga di intestazione',
   'Links uitlijnen': 'Allinea a sinistra',
   'Rechts uitlijnen': 'Allinea a destra',
-  'Rij onder invoegen': 'Inserisci riga sotto',
   'Splits tabel': 'Dividi tabella',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Lo stile del documento (tema, formato pagina, margini) non viene mantenuto.',

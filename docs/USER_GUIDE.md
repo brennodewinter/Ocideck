@@ -1001,20 +1001,16 @@ code block in the Markdown.
 
 ### Tables
 
-The first row is the header. Press `Enter` inside a cell for a new line within
-that cell. To bring in existing data, **paste a table into any cell** with
+The first row is the header. Press `Tab` to move to the next cell — on the last
+cell it grows a new row. `Enter` moves to the cell below (and grows a row at the
+bottom); `Shift+Enter` inserts a line break inside the cell (`<br>` in the
+Markdown). To bring in existing data, **paste a table into any cell** with
 `Ctrl/Cmd+V` (or `Shift+Insert`): a selection copied from a spreadsheet (Excel,
 Numbers, LibreOffice Calc, Google Sheets), CSV text (comma- or
 semicolon-separated), or a markdown table fills the grid from that cell onward,
 adding rows and columns as needed. Ordinary text — even a sentence with a comma
-in it — still pastes into just the one cell.
-
-While the table is still empty the editor offers a **preset**: one click lays
-down the columns of an action list (Action, Owner, Deadline, Status) and switches
-on the date marking below. The button disappears as soon as the table carries
-anything, so it can never overwrite what you typed. This replaces the separate
-*Actions and decisions* slide type, which gave you those columns at the cost of
-everything else a table can do.
+in it — still pastes into just the one cell. With no text selected in the cell,
+`Ctrl/Cmd+C` copies the whole grid as TSV.
 
 Tick **Mark expired dates** in *Per-slide options* to colour any cell holding a
 date before today red. OciDeck works this out against the day you present, so a
@@ -1034,8 +1030,11 @@ live during a presentation, tick **Table editable while presenting** in
 ### Charts
 
 Pick a type and a title, then enter data in the grid: the first column is the
-labels, each further column is a named series. Use **Row** and **Series** to add
-data; the small ✕ removes a row/column. Each series and (for pie/donut/radar)
+labels, each further column is a named series. The grid uses the same keys as a
+table: `Tab` walks the cells and grows a row on the last cell, `Enter` moves
+down, and `Ctrl/Cmd+V` or `Shift+Insert` in a cell pastes a spreadsheet
+selection from that cell. Use **Row** and **Series** to add data; the small ✕
+removes a row/column. Each series and (for pie/donut/radar)
 each label can be given its own colour.
 
 The available types:
@@ -1576,8 +1575,9 @@ There is no separate slide type for this. There used to be, and it was a
 mistake: it was a table with fixed columns and a form bolted over it, so you
 edited a table without having a table's conveniences. Use a **table** slide.
 
-The *Actions and decisions* preset gives you the columns to start from, and a
-table can mark expired deadlines for you — see [Tables](#tables). What you gain
+The *Actions and decisions* work is a **table** slide: give it the columns you
+need (Action, Owner, Deadline, Status if that fits), and a table can mark
+expired deadlines for you — see [Tables](#tables). What you gain
 over the old type is everything the table already had: paste a block straight
 out of a spreadsheet, add and remove columns as the report needs them, and edit
 cells while presenting.
@@ -4879,7 +4879,9 @@ see [Footnotes](#footnotes).)*
 
 ### Tables, sorting and timelines
 
-In **Visual**, click a table cell to expose the table controls. The two sort
+In **Visual**, click a table cell to expose the table controls. In **Source**,
+the live preview is the same in-place grid: click a cell and type; there is no
+pencil dialog. The two sort
 buttons order the active column ascending or descending. **Sorteren als…** lets
 you select **Automatisch**, **Tekst**, **Getal**, **Datum** or **Tijd**, and then
 choose **Oplopend** or **Aflopend**. OciDeck recognises values locally. If a
@@ -4891,11 +4893,10 @@ does not rewrite their cell contents. With the caret in a cell, keyboard users
 can sort the active column with `Alt+Shift+↑` or `Alt+Shift+↓`, and open
 **Sorteren als…** with `Alt+Shift+S`.
 
-**Invoegen → Tijdlijn** opens the normal table editor with `Tijd`,
-`Gebeurtenis` and `Status`; nothing is inserted until you choose **Toepassen**.
-If every event cell is still empty, OciDeck leaves the document unchanged and
-returns to the same editor with the entered marker/status values intact, asking
-for at least one event instead of inserting an empty card.
+**Insert → Timeline** drops a marked table with `Tijd`, `Gebeurtenis` and
+`Status` on the cursor — an empty event row is valid; you fill it in afterwards,
+the same as a normal table. **Insert → Table** drops an empty 2×2 grid the same
+way: no dialog, and Undo takes the block away.
 A table with two or three columns also offers **Als tijdlijn weergeven**. This
 is an explicit choice: a table is never promoted because its headers happen to
 say “time” or “event”. Before creating it, OciDeck previews the first column as
