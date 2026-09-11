@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/chart.dart';
@@ -121,8 +122,11 @@ void main() {
       find.byKey(const ValueKey('chart-series-column-2')),
     );
     expect(column.color, const Color(0xFFE2E8F0));
-    final input = tester.widget<TextFormField>(
-      find.byKey(const ValueKey('v-0-0-2')),
+    final input = tester.widget<TextField>(
+      find.descendant(
+        of: find.byKey(const ValueKey('v-0-0-2')),
+        matching: find.byType(TextField),
+      ),
     );
     expect(input.enabled, isTrue);
     expect(tester.takeException(), isNull);
@@ -370,5 +374,28 @@ void main() {
     test('no ellipsis when everything fits', () {
       expect(csvUnreadableMessage(l10n, ['aa', 'bb']), endsWith('aa · bb'));
     });
+  });
+
+  testWidgets('Tab on the last data cell grows a row', (tester) async {
+    const spec = ChartSpec(
+      x: ['A', 'B'],
+      series: [
+        ChartSeries(name: 'Waarde', data: [10, 20]),
+      ],
+    );
+    var latest = Slide.create(
+      SlideType.chart,
+    ).copyWith(customMarkdown: spec.toBlock());
+    await tester.pumpWidget(_host(latest, (s) => latest = s));
+    await tester.pumpAndSettle();
+
+    final last = find.widgetWithText(TextField, '20');
+    expect(last, findsOneWidget);
+    await tester.showKeyboard(last);
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pumpAndSettle();
+
+    final next = ChartSpec.parse(latest.customMarkdown);
+    expect(next.x.length, 3, reason: 'Tab op de laatste cel maakt een rij bij');
   });
 }
