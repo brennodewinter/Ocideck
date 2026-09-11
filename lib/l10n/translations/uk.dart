@@ -504,13 +504,9 @@ const _dutchSourceUk = {
   'Markdown inhoud': 'Вміст Markdown',
   '# Slide\n\nInhoud hier...': '# Слайд\n\nВміст тут…',
   'Rij toevoegen': 'Додати рядок',
-  'Kolom toevoegen': 'Додати колонку',
   'Kolom': 'Колонка',
   'verwijderen': 'вилучити',
-  'Koprij verwijderen': 'Вилучити рядок заголовка',
   'Rij verwijderen': 'Вилучити рядок',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Порада: натисніть Enter у клітинці, щоб додати новий рядок.',
   'Presentatie openen': 'Відкрити презентацію',
   'Opslaan als': 'Зберегти як',
   'Pakket importeren': 'Імпортувати пакет',
@@ -1107,8 +1103,6 @@ const _dutchSourceUk = {
   'Breedte van het slidepaneel': 'Ширина панелі слайдів',
   'Pijltjestoetsen passen de breedte aan':
       'Клавіші зі стрілками регулюють ширину',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Порада: вставте таблицю з вашої електронної таблиці в клітинку за допомогою Cmd/Ctrl+V, щоб заповнити всю таблицю.',
   'Annuleren': 'Скасувати',
   'Checklist': 'Контрольний список завдань',
   'Voortgangsgrafiek tonen': 'Показати діаграму прогресу',
@@ -5221,7 +5215,6 @@ const _dutchSourceAddUk = <String, String>{
   'Koprij': 'Рядок заголовка',
   'Links uitlijnen': 'Вирівняти ліворуч',
   'Rechts uitlijnen': 'Вирівняти праворуч',
-  'Rij onder invoegen': 'Вставити рядок знизу',
   'Splits tabel': 'Розділити таблицю',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Стиль документа (тема, розмір сторінки, поля) не переноситься.',

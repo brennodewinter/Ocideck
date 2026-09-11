@@ -498,13 +498,9 @@ const _dutchSourceHr = {
   'Markdown inhoud': 'Markdown sadržaj',
   '# Slide\n\nInhoud hier...': '# Slajd\n\nSadržaj ovdje...',
   'Rij toevoegen': 'Dodaj redak',
-  'Kolom toevoegen': 'Dodaj stupac',
   'Kolom': 'Stupac',
   'verwijderen': 'ukloni',
-  'Koprij verwijderen': 'Ukloni redak zaglavlja',
   'Rij verwijderen': 'Ukloni redak',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Savjet: pritisnite Enter unutar ćelije za novi redak.',
   'Presentatie openen': 'Otvori prezentaciju',
   'Opslaan als': 'Spremi kao',
   'Pakket importeren': 'Uvezi paket',
@@ -1099,8 +1095,6 @@ const _dutchSourceHr = {
   'Breedte van het slidepaneel': 'Širina ploče slajdova',
   'Pijltjestoetsen passen de breedte aan':
       'Tipke sa strelicama prilagođavaju širinu',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Savjet: zalijepite tablicu iz proračunske tablice u ćeliju pomoću Cmd/Ctrl+V da biste popunili cijelu tablicu.',
   'Annuleren': 'Odustani',
   'Checklist': 'Popis zadataka',
   'Voortgangsgrafiek tonen': 'Prikaži grafikon napretka',
@@ -5199,7 +5193,6 @@ const _dutchSourceAddHr = <String, String>{
   'Koprij': 'Redak zaglavlja',
   'Links uitlijnen': 'Poravnaj lijevo',
   'Rechts uitlijnen': 'Poravnaj desno',
-  'Rij onder invoegen': 'Umetni redak ispod',
   'Splits tabel': 'Podijeli tablicu',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Stil dokumenta (tema, veličina stranice, margine) ne prati se.',

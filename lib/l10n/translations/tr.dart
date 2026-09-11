@@ -494,13 +494,9 @@ const _dutchSourceTr = {
   'Markdown inhoud': 'Markdown içeriği',
   '# Slide\n\nInhoud hier...': '# Slayt\n\nİçerik buraya...',
   'Rij toevoegen': 'Satır ekle',
-  'Kolom toevoegen': 'Sütun ekle',
   'Kolom': 'Sütun',
   'verwijderen': 'sil',
-  'Koprij verwijderen': 'Başlık satırını sil',
   'Rij verwijderen': 'Satırı sil',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'İpucu: hücre içinde yeni satır için Enter tuşuna basın.',
   'Presentatie openen': 'Sunum aç',
   'Opslaan als': 'Farklı kaydet',
   'Pakket importeren': 'Paketi içe aktar',
@@ -2065,8 +2061,6 @@ const _dutchSourceTr = {
       'Düzenleme ortamındaki tüm metni en fazla %200\'e kadar büyütür. Slaytların kendisi bundan etkilenmez.',
   'Breedte van het slidepaneel': 'Slayt panelinin genişliği',
   'Pijltjestoetsen passen de breedte aan': 'Ok tuşları genişliği ayarlar',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'İpucu: tablonun tamamını doldurmak için hesap tablonuzdaki bir tabloyu Cmd/Ctrl+V ile bir hücreye yapıştırın.',
   'Annuleren': 'İptal',
   'Checklist': 'Kontrol listesi',
   'Voortgangsgrafiek tonen': 'İlerleme grafiğini göster',
@@ -5183,7 +5177,6 @@ const _dutchSourceAddTr = <String, String>{
   'Koprij': 'Başlık satırı',
   'Links uitlijnen': 'Sola hizala',
   'Rechts uitlijnen': 'Sağa hizala',
-  'Rij onder invoegen': 'Altına satır ekle',
   'Splits tabel': 'Tabloyu böl',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Belge stili (tema, sayfa boyutu, kenar boşlukları) taşınmaz.',

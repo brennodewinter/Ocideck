@@ -496,13 +496,9 @@ const _dutchSourceEn = {
   'Markdown inhoud': 'Markdown content',
   '# Slide\n\nInhoud hier...': '# Slide\n\nContent here...',
   'Rij toevoegen': 'Add row',
-  'Kolom toevoegen': 'Add column',
   'Kolom': 'Column',
   'verwijderen': 'remove',
-  'Koprij verwijderen': 'Remove header row',
   'Rij verwijderen': 'Remove row',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: press Enter inside a cell for a new line.',
   'Presentatie openen': 'Open presentation',
   'Opslaan als': 'Save as',
   'Pakket importeren': 'Import package',
@@ -4685,8 +4681,6 @@ const _dutchSourceAddEn = {
       'Enlarges all editor text up to 200%. The slides themselves are not affected.',
   'Breedte van het slidepaneel': 'Width of the slide panel',
   'Pijltjestoetsen passen de breedte aan': 'Arrow keys adjust the width',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tip: paste a table from your spreadsheet into a cell with Cmd/Ctrl+V to fill the whole table.',
   'Annuleren': 'Cancel',
   'Checklist': 'Task checklist',
   'Voortgangsgrafiek tonen': 'Show progress chart',
@@ -5205,7 +5199,6 @@ const _dutchSourceAddEn = {
   'Koprij': 'Header row',
   'Links uitlijnen': 'Align left',
   'Rechts uitlijnen': 'Align right',
-  'Rij onder invoegen': 'Insert row below',
   'Splits tabel': 'Split table',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'The document style (theme, page size, margins) is not carried over.',

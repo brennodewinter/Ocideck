@@ -500,13 +500,9 @@ const _dutchSourceDa = {
   'Markdown inhoud': 'Markdown-indhold',
   '# Slide\n\nInhoud hier...': '# Slide\n\nIndhold her ...',
   'Rij toevoegen': 'Tilføj række',
-  'Kolom toevoegen': 'Tilføj kolonne',
   'Kolom': 'Kolonne',
   'verwijderen': 'fjern',
-  'Koprij verwijderen': 'Fjern overskriftsrække',
   'Rij verwijderen': 'Fjern række',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: Tryk på Enter i en celle for en ny linje.',
   'Presentatie openen': 'Åbn præsentation',
   'Opslaan als': 'Gem som',
   'Pakket importeren': 'Importer pakke',
@@ -1095,8 +1091,6 @@ const _dutchSourceDa = {
       'Forstørrer al editortekst op til 200 %. Selve slidesene påvirkes ikke.',
   'Breedte van het slidepaneel': 'Bredde på slidepanelet',
   'Pijltjestoetsen passen de breedte aan': 'Piletaster justerer bredden',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tip: indsæt en tabel fra dit regneark i en celle med Cmd/Ctrl+V for at udfylde hele tabellen.',
   'Annuleren': 'Annullér',
   'Checklist': 'Opgavetjekliste',
   'Voortgangsgrafiek tonen': 'Vis fremskridtsdiagram',
@@ -5197,7 +5191,6 @@ const _dutchSourceAddDa = <String, String>{
   'Koprij': 'Overskriftsrække',
   'Links uitlijnen': 'Venstrejuster',
   'Rechts uitlijnen': 'Højrejuster',
-  'Rij onder invoegen': 'Indsæt række under',
   'Splits tabel': 'Opdel tabel',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Dokumentstilen (tema, sidestørrelse, margener) følger ikke med.',

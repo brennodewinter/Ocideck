@@ -497,13 +497,9 @@ const _dutchSourceLv = {
   'Markdown inhoud': 'Markdown saturs',
   '# Slide\n\nInhoud hier...': '# Slaids\n\nSaturs šeit...',
   'Rij toevoegen': 'Pievienot rindu',
-  'Kolom toevoegen': 'Pievienot kolonnu',
   'Kolom': 'Kolonna',
   'verwijderen': 'noņemt',
-  'Koprij verwijderen': 'Noņemt galvenes rindu',
   'Rij verwijderen': 'Noņemt rindu',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Padoms: nospiediet Enter šūnā, lai izveidotu jaunu rindiņu.',
   'Presentatie openen': 'Atvērt prezentāciju',
   'Opslaan als': 'Saglabāt kā',
   'Pakket importeren': 'Importēt pakotni',
@@ -1095,8 +1091,6 @@ const _dutchSourceLv = {
       'Palielina visu redaktora tekstu līdz 200%. Paši slaidi netiek mainīti.',
   'Breedte van het slidepaneel': 'Slaidu paneļa platums',
   'Pijltjestoetsen passen de breedte aan': 'Bulttaustiņi pielāgo platumu',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Padoms: ar Cmd/Ctrl+V ielīmējiet tabulu no izklājlapas šūnā, lai aizpildītu visu tabulu.',
   'Annuleren': 'Atcelt',
   'Checklist': 'Kontrolsaraksts',
   'Voortgangsgrafiek tonen': 'Rādīt progresa diagrammu',
@@ -5200,7 +5194,6 @@ const _dutchSourceAddLv = <String, String>{
   'Koprij': 'Galvenes rinda',
   'Links uitlijnen': 'Līdzināt pa kreisi',
   'Rechts uitlijnen': 'Līdzināt pa labi',
-  'Rij onder invoegen': 'Ievietot rindu zemāk',
   'Splits tabel': 'Sadalīt tabulu',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Dokumenta stils (tēma, lapas izmērs, malas) netiek pārņemts.',

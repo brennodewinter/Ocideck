@@ -470,7 +470,6 @@ const _dutchSourceFy = {
   'Beschrijving (doorzoekbaar)': 'Beskriuwing (trochsykber)',
   'Markdown inhoud': 'Markdown-ynhâld',
   'Rij toevoegen': 'Rige tafoegje',
-  'Kolom toevoegen': 'Kolom tafoegje',
   'Kolom': 'Kolom',
   'Presentatie openen': 'Presintaasje iepenje',
   'Opslaan als': 'Bewarje as',
@@ -4540,8 +4539,6 @@ const _dutchSourceAddFy = {
       'Fergruttet alle tekst fan de bewurkomjouwing oant maksimaal 200%. De slides sels feroarje net.',
   'Breedte van het slidepaneel': 'Breedte fan it slidepaniel',
   'Pijltjestoetsen passen de breedte aan': 'Pylktoetsen passe de breedte oan',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tip: plak mei Cmd/Ctrl+V in tabel út dyn rekkenblêd yn in sel om de hiele tabel te foljen.',
   'Annuleren': 'Annulearje',
   'Checklist': 'Kontrôlelist',
   'Voortgangsgrafiek tonen': 'Fuortgongsgrafyk toane',
@@ -4670,7 +4667,6 @@ const _dutchSourceAddFy = {
   'Kopiëren mislukt.': 'Kopiearjen mislearre.',
   'Kopiëren naar ander deck': 'Kopiearje nei oar deck',
   'Kopiëren naar klembord mislukt.': 'Kopiearjen nei klamboerd mislearre.',
-  'Koprij verwijderen': 'Koprige fuortsmite',
   'Laat los om toe te voegen': 'Lit los om ta te foegjen',
   'Laatste slide': 'Lêste slide',
   'Let op: deze afbeelding wordt nog gebruikt in':
@@ -4726,8 +4722,6 @@ const _dutchSourceAddFy = {
   'Terugzetten (volledige afbeelding zichtbaar)':
       'Weromsette (folsleine ôfbylding sichtber)',
   'Tijd resetten (R)': 'Tiid resette (R)',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: druk op Enter binnen in sel foar in nije rigel.',
   'Titelachtergrond': 'Titeleftergrûn',
   'Titeltekst': 'Titeltekst',
   'Toepassen': 'Tapasse',
@@ -5218,7 +5212,6 @@ const _dutchSourceAddFy = {
   'Koprij': 'Koprigel',
   'Links uitlijnen': 'Links utlijnje',
   'Rechts uitlijnen': 'Rjochts utlijnje',
-  'Rij onder invoegen': 'Rigel ûnder ynfoegje',
   'Splits tabel': 'Tabel splitsje',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'De dokuminstyl (tema, sideformaat, marzjes) giet net mei.',

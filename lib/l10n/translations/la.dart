@@ -500,13 +500,9 @@ const _dutchSourceLa = {
   'Markdown inhoud': 'Markdown contentum',
   '# Slide\n\nInhoud hier...': '# Pagina\n\nContentum hic...',
   'Rij toevoegen': 'Ordinem addere',
-  'Kolom toevoegen': 'Columnam addere',
   'Kolom': 'Columna',
   'verwijderen': 'removere',
-  'Koprij verwijderen': 'Ordinem capitis removere',
   'Rij verwijderen': 'Ordinem removere',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Consilium: preme Enter intra cellulam pro nova linea.',
   'Presentatie openen': 'Praesentationem aperire',
   'Opslaan als': 'Servare ut',
   'Pakket importeren': 'Fasciculum importare',
@@ -1103,8 +1099,6 @@ const _dutchSourceLa = {
   'Breedte van het slidepaneel': 'Latitudo tabellae schematum',
   'Pijltjestoetsen passen de breedte aan':
       'Tasti sagittarum latitudinem adaptant',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Consilium: agglutina tabulam ex tabella tua computatoria in cellam tasto Cmd/Ctrl+V ut totam tabulam impleas.',
   'Annuleren': 'Abrogare',
   'Checklist': 'Index munerum',
   'Voortgangsgrafiek tonen': 'Diagramma progressus ostendere',
@@ -5219,7 +5213,6 @@ const _dutchSourceAddLa = <String, String>{
   'Koprij': 'Caput tabulae',
   'Links uitlijnen': 'Ad sinistram ordinare',
   'Rechts uitlijnen': 'Ad dextram ordinare',
-  'Rij onder invoegen': 'Row subter inserere',
   'Splits tabel': 'Tabulam dividere',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Documenti stylus (themae, paginae magnitudo, margines) non fertur.',

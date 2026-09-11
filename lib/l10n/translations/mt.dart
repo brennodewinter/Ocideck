@@ -502,13 +502,9 @@ const _dutchSourceMt = {
   'Markdown inhoud': 'Kontenut Markdown',
   '# Slide\n\nInhoud hier...': '# Slide\n\nKontenut hawn...',
   'Rij toevoegen': 'Żid ringiela',
-  'Kolom toevoegen': 'Żid kolonna',
   'Kolom': 'Kolonna',
   'verwijderen': 'neħħi',
-  'Koprij verwijderen': 'Neħħi r-ringiela tal-intestatura',
   'Rij verwijderen': 'Neħħi r-ringiela',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: agħfas Enter ġo ċella għal linja ġdida.',
   'Presentatie openen': 'Iftaħ preżentazzjoni',
   'Opslaan als': 'Ħażen bħala',
   'Pakket importeren': 'Importa pakkett',
@@ -1106,8 +1102,6 @@ const _dutchSourceMt = {
       'Ikabbar it-test kollu tal-editur sa 200%. L-islajds infushom ma jinbidlux.',
   'Breedte van het slidepaneel': 'Wisa\' tal-pannell tal-islajds',
   'Pijltjestoetsen passen de breedte aan': 'Il-vleġeġ jaġġustaw il-wisa\'',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Suġġeriment: waħħal tabella mill-ispreadsheet tiegħek f\'ċella b\'Cmd/Ctrl+V biex timla t-tabella kollha.',
   'Annuleren': 'Ikkanċella',
   'Checklist': 'Lista ta\' verifika',
   'Voortgangsgrafiek tonen': 'Uri l-grafika tal-progress',
@@ -5266,7 +5260,6 @@ const _dutchSourceAddMt = <String, String>{
   'Koprij': 'Riga ta\' l-intestatura',
   'Links uitlijnen': 'Allinea xellug',
   'Rechts uitlijnen': 'Allinea lemin',
-  'Rij onder invoegen': 'Daħħal riga taħt',
   'Splits tabel': 'Qasam it-tabella',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'L-istil tad-dokument (tema, daqs tal-paġna, marġini) ma jiġiux mkaxkar.',

@@ -497,13 +497,9 @@ const _dutchSourceFi = {
   'Markdown inhoud': 'Markdown-sisältö',
   '# Slide\n\nInhoud hier...': '# Dia\n\nSisältö tähän...',
   'Rij toevoegen': 'Lisää rivi',
-  'Kolom toevoegen': 'Lisää sarake',
   'Kolom': 'Sarake',
   'verwijderen': 'poista',
-  'Koprij verwijderen': 'Poista otsikkorivi',
   'Rij verwijderen': 'Poista rivi',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Vinkki: paina Enter solun sisällä uutta riviä varten.',
   'Presentatie openen': 'Avaa esitys',
   'Opslaan als': 'Tallenna nimellä',
   'Pakket importeren': 'Tuo paketti',
@@ -1097,8 +1093,6 @@ const _dutchSourceFi = {
       'Suurentaa kaiken editorin tekstin enintään 200 %:iin. Diat itsessään eivät muutu.',
   'Breedte van het slidepaneel': 'Diapaneelin leveys',
   'Pijltjestoetsen passen de breedte aan': 'Nuolinäppäimet säätävät leveyttä',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Vinkki: liitä taulukko taulukkolaskennastasi soluun näppäimillä Cmd/Ctrl+V täyttääksesi koko taulukon.',
   'Annuleren': 'Peruuta',
   'Checklist': 'Tehtävälista',
   'Voortgangsgrafiek tonen': 'Näytä edistymiskaavio',
@@ -5205,7 +5199,6 @@ const _dutchSourceAddFi = <String, String>{
   'Koprij': 'Otsikkorivi',
   'Links uitlijnen': 'Tasaa vasemmalle',
   'Rechts uitlijnen': 'Tasaa oikealle',
-  'Rij onder invoegen': 'Lisää rivi alle',
   'Splits tabel': 'Jaa taulukko',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Asiakirjan tyyli (teema, sivukoko, marginaalit) ei siirry.',

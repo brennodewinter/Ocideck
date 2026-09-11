@@ -498,13 +498,9 @@ const _dutchSourceSl = {
   'Markdown inhoud': 'Vsebina Markdown',
   '# Slide\n\nInhoud hier...': '# Diapozitiv\n\nVsebina tukaj ...',
   'Rij toevoegen': 'Dodaj vrstico',
-  'Kolom toevoegen': 'Dodaj stolpec',
   'Kolom': 'Stolpec',
   'verwijderen': 'odstrani',
-  'Koprij verwijderen': 'Odstrani glavo tabele',
   'Rij verwijderen': 'Odstrani vrstico',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Namig: za novo vrstico znotraj celice pritisnite Enter.',
   'Presentatie openen': 'Odpri predstavitev',
   'Opslaan als': 'Shrani kot',
   'Pakket importeren': 'Uvozi paket',
@@ -1095,8 +1091,6 @@ const _dutchSourceSl = {
       'Poveča vse besedilo urejevalnika do 200 %. Same prosojnice se ne spremenijo.',
   'Breedte van het slidepaneel': 'Širina plošče s prosojnicami',
   'Pijltjestoetsen passen de breedte aan': 'Puščične tipke prilagodijo širino',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Namig: z Cmd/Ctrl+V prilepite tabelo iz preglednice v celico, da zapolnite celo tabelo.',
   'Annuleren': 'Prekliči',
   'Checklist': 'Kontrolni seznam',
   'Voortgangsgrafiek tonen': 'Prikaži graf napredka',
@@ -5201,7 +5195,6 @@ const _dutchSourceAddSl = <String, String>{
   'Koprij': 'Vrstica glave',
   'Links uitlijnen': 'Poravnaj levo',
   'Rechts uitlijnen': 'Poravnaj desno',
-  'Rij onder invoegen': 'Vstavi vrstico spodaj',
   'Splits tabel': 'Razdeli tabelo',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Slog dokumenta (tema, velikost strani, robovi) se ne prenaša.',

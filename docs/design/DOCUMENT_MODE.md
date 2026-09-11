@@ -204,7 +204,7 @@ ladder"):
 
 | Construct | On disk | Degrades outside OciDeck to | Re-use |
 |---|---|---|---|
-| **Tables** | GFM pipe table | a real table | `TableEditor` via a text-in/text-out adapter, on the app-wide `markdown_table_codec` — so a document table is a full office table (per-column alignment, and multi-line cells via `<br>`), shared with the report slides / import / clipboard rather than a document-only copy |
+| **Tables** | GFM pipe table | a real table | `TableEditController` in the rendered table (Visual embeds and Source preview) on the app-wide `markdown_table_codec` — a document table is a full office table (per-column alignment, multi-line cells via `<br>`), shared with the report slides / import / clipboard. Insert drops an empty grid on the cursor; there is no Apply dialog. Slide `TableEditor` is the same controller, not a second form. |
 | **Images** | `![alt](images/x.png)` | a real image | shared block helper; asset copied into `images/` |
 | **Mermaid** | ` ```mermaid ` fence | rendered on GitHub/GitLab, else a labelled code block | `DocMermaidView` + `MermaidRenderService` (already works in the reader) |
 | **Gantt** | Markdown table (+ portable marker) | a readable table | `ganttTableToMermaid` (pure) → mermaid render |
@@ -474,7 +474,8 @@ deliverable and valuable.
   "Apply" wall). *Deliverable: one editor + one renderer, both modes.*
 - **Phase 3 — Insert like a word processor.** "+" button **and** `/`-slash on the
   command palette, extended with chart / gantt / mermaid / formula;
-  `TableEditor`/`ChartEditor` given a text/block callback; hybrid embed cards in
+  table and timeline insert as a GFM block on the cursor (filled in-place);
+  `ChartEditor` given a text/block callback; hybrid embed cards in
   visual mode with double-click-to-edit (§4.3); charts rendered pretty (§4.2).
   *Deliverable: rich insertion producing portable Markdown.*
 - **Phase 4 — Navigation & export.** Outline rail (`buildMarkdownOutline`),

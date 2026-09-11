@@ -497,13 +497,9 @@ const _dutchSourceSv = {
   'Markdown inhoud': 'Markdown-innehåll',
   '# Slide\n\nInhoud hier...': '# Bild\n\nInnehåll här...',
   'Rij toevoegen': 'Lägg till rad',
-  'Kolom toevoegen': 'Lägg till kolumn',
   'Kolom': 'Kolumn',
   'verwijderen': 'ta bort',
-  'Koprij verwijderen': 'Ta bort rubrikrad',
   'Rij verwijderen': 'Ta bort rad',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tips: tryck på Enter i en cell för en ny rad.',
   'Presentatie openen': 'Öppna presentation',
   'Opslaan als': 'Spara som',
   'Pakket importeren': 'Importera paket',
@@ -1094,8 +1090,6 @@ const _dutchSourceSv = {
       'Förstorar all redigerartext upp till 200 %. Bilderna själva påverkas inte.',
   'Breedte van het slidepaneel': 'Bildpanelens bredd',
   'Pijltjestoetsen passen de breedte aan': 'Piltangenterna justerar bredden',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tips: klistra in en tabell från ditt kalkylark i en cell med Cmd/Ctrl+V för att fylla hela tabellen.',
   'Annuleren': 'Avbryt',
   'Checklist': 'Uppgiftschecklista',
   'Voortgangsgrafiek tonen': 'Visa förloppsdiagram',
@@ -5199,7 +5193,6 @@ const _dutchSourceAddSv = <String, String>{
   'Koprij': 'Rubrikrad',
   'Links uitlijnen': 'Vänsterjustera',
   'Rechts uitlijnen': 'Högerjustera',
-  'Rij onder invoegen': 'Infoga rad under',
   'Splits tabel': 'Dela tabell',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Dokumentstilen (tema, sidstorlek, marginaler) följer inte med.',

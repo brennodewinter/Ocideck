@@ -2542,6 +2542,13 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Tabellen in document, dia, grafiek en matrix delen het rekenblad (#2051–#2056).**
+  Een slide-tabel is dezelfde ter-plekke-invulbare GFM-tabel als in het document.
+  Invoegen van tabel of tijdlijn zet een leeg blok op de cursor, zonder dialoog.
+  In Bron bewerk je een GFM-tabel in de preview, niet via een potlood-dialoog.
+  Het grafiekdataraster en de procesverbetering-matrix gebruiken dezelfde
+  Tab/Enter/plak-toetsen; de matrix houdt zijn sjabloonkop en afgeleide RPN.
+  `Enter` in een cel is de rij eronder, `Shift+Enter` een regeleinde.
 - **Een schermvullend slide-overzicht maakt een heel deck in één keer
   sorteerbaar (#2045).** De rasterknop naast **SLIDES** opent een meeschalend
   overzicht van de geschreven slides — afgeleide vervolgpagina's uit presentatie

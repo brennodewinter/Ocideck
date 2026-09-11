@@ -499,13 +499,9 @@ const _dutchSourceCs = {
   'Markdown inhoud': 'Obsah Markdown',
   '# Slide\n\nInhoud hier...': '# Snímek\n\nObsah zde...',
   'Rij toevoegen': 'Přidat řádek',
-  'Kolom toevoegen': 'Přidat sloupec',
   'Kolom': 'Sloupec',
   'verwijderen': 'odebrat',
-  'Koprij verwijderen': 'Odebrat řádek záhlaví',
   'Rij verwijderen': 'Odebrat řádek',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Tip: stiskněte Enter uvnitř buňky pro nový řádek.',
   'Presentatie openen': 'Otevřít prezentaci',
   'Opslaan als': 'Uložit jako',
   'Pakket importeren': 'Importovat balíček',
@@ -1097,8 +1093,6 @@ const _dutchSourceCs = {
       'Zvětší veškerý text editoru až na 200 %. Samotné snímky se nemění.',
   'Breedte van het slidepaneel': 'Šířka panelu snímků',
   'Pijltjestoetsen passen de breedte aan': 'Šipky upravují šířku',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Tip: vložte tabulku z tabulkového editoru do buňky pomocí Cmd/Ctrl+V a naplňte celou tabulku.',
   'Annuleren': 'Zrušit',
   'Checklist': 'Kontrolní seznam úkolů',
   'Voortgangsgrafiek tonen': 'Zobrazit graf průběhu',
@@ -5181,7 +5175,6 @@ const _dutchSourceAddCs = <String, String>{
   'Koprij': 'Řádek záhlaví',
   'Links uitlijnen': 'Zarovnat vlevo',
   'Rechts uitlijnen': 'Zarovnat vpravo',
-  'Rij onder invoegen': 'Vložit řádek pod',
   'Splits tabel': 'Rozdělit tabulku',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Styl dokumentu (téma, velikost stránky, okraje) není zachován.',

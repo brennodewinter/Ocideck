@@ -507,13 +507,9 @@ const _dutchSourceGa = {
   'Markdown inhoud': 'Ábhar Markdown',
   '# Slide\n\nInhoud hier...': '# Sleamhnán\n\nÁbhar anseo...',
   'Rij toevoegen': 'Cuir ró leis',
-  'Kolom toevoegen': 'Cuir colún leis',
   'Kolom': 'Colún',
   'verwijderen': 'bain',
-  'Koprij verwijderen': 'Bain an ró ceanntásca',
   'Rij verwijderen': 'Bain an ró',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Leid: brúigh Enter laistigh de chill le haghaidh líne nua.',
   'Presentatie openen': 'Oscail cur i láthair',
   'Opslaan als': 'Sábháil mar',
   'Pakket importeren': 'Iompórtáil pacáiste',
@@ -1116,8 +1112,6 @@ const _dutchSourceGa = {
   'Breedte van het slidepaneel': 'Leithead an phainéil sleamhnán',
   'Pijltjestoetsen passen de breedte aan':
       'Coigeartaíonn na saigheadeochracha an leithead',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Leid: greamaigh tábla ó do scarbhileog isteach i gcill le Cmd/Ctrl+V chun an tábla iomlán a líonadh.',
   'Annuleren': 'Cealaigh',
   'Checklist': 'Seicliosta tascanna',
   'Voortgangsgrafiek tonen': 'Taispeáin cairt dul chun cinn',
@@ -5277,7 +5271,6 @@ const _dutchSourceAddGa = <String, String>{
   'Koprij': 'Ró ceanntáisc',
   'Links uitlijnen': 'Ailínigh ar chlé',
   'Rechts uitlijnen': 'Ailínigh ar dheis',
-  'Rij onder invoegen': 'Ionsáigh ró faoi bhun',
   'Splits tabel': 'Roinn tábla',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'Ní thagann stíl an doiciméid (téama, méid an leathanaigh, corrlaigh) leis.',

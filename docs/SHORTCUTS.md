@@ -18,6 +18,9 @@
 | `Ctrl/Cmd + F` | Find (presentation: dialog in Visual, in-editor bar in Markdown; document: in-editor bar regardless of where the tab has focus) |
 | `Ctrl/Cmd + H` | Find & replace (presentation: dialog in Visual, in-editor bar in Markdown; document: in-editor bar regardless of where the tab has focus) |
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
+| `Ctrl/Cmd + C` (in a table cell, with no selection) | Copy the whole grid as TSV |
+| `Tab` / `Shift + Tab` (in a table cell) | Next / previous cell; `Tab` on the last cell grows a row |
+| `Enter` / `Shift + Enter` (in a table cell) | Cell below (grows the table at the bottom) / line break in the cell |
 | `Ctrl/Cmd + +` · `Ctrl/Cmd + -` (document mode) | Zoom the writing surface in · out |
 | `Ctrl/Cmd + 0` (document mode) | Back to actual size |
 | `←` `→` (in a table cell) | Move the cursor through the cell text; at its edge, jump to the neighbouring cell |

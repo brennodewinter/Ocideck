@@ -1444,7 +1444,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `bullets_image_editor.dart` — Edits a bullets-with-image slide.
 - `callout_editor.dart` — Dialog for editing image callouts on a bulletsImage slide: assign a reference letter to a bullet, click on the image to place a target, edit the description, delete (IMAGE_CALLOUTS.md §6).
 - `callout_marker_helpers.dart` — Pure widget builders and value types extracted from `callout_editor.dart` to keep it under the 1000-line ceiling: the clipped-target warning badge (#1853), the drag-preview rectangle, the `Handle` enum and `DragRegion` value type.
-- `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking). The grid is editable whether or not the data is linked to a file — a linked chart writes that file back on save. It was read-only while linked until that write-back existed.
+- `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking). The grid is editable whether or not the data is linked to a file — a linked chart writes that file back on save. It was read-only while linked until that write-back existed. Cells use the same Tab/Enter/paste keys as a document table; Tab on the last cell grows a data row.
 - `chart_type_toolbar.dart` — Chart type dropdown plus Gage R&R / DOE / paste / CSV actions, kept outside `_ChartEditorState` for the class-size ratchet.
 - `chart_histogram_limits.dart` — Y-01 deck-limit switch and local USL/LSL/process-target fields for histogram charts.
 - `chart_doe_design_dialog.dart` — Dialog that builds a Yates DOE design grid into the chart editor.
@@ -1475,7 +1475,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `quote_editor.dart` — Edits a quote slide (text, author, background image).
 - `scope_matrix_editor.dart` — Edits a scope-matrix slide (objects × type/standard × coverage status).
 - `control_status_editor.dart` — Edits a `controlStatus` slide (Managementsysteem module): a section heading plus per-control rows (id, control, status, optional maturity 0–5, owner, target, evidence, note). A one-click *Beheersmaatregelen laden…* appends a chosen ISO standard's index (optionally one section) from `ManagementSystemCatalog`, adding only ids not already present; *Genereer voortgangsoverzicht* triggers the deck-wide roll-up.
-- `matrix_editor.dart` — Edits a Procesverbetering `matrix` slide: template picker, clipboard paste, derived RPN column shown read-only.
+- `matrix_editor.dart` — Edits a Procesverbetering `matrix` slide: template picker, the document spreadsheet (`TableEditController`, locked header and columns), clipboard paste, derived RPN column shown read-only.
 - `canvas_editor.dart` — Edits a Procesverbetering `canvas` slide: template picker and one Markdown field per `##` region.
 - `tree_editor.dart` — Edits a Procesverbetering `tree` slide: template picker, tree/fishbone layout toggle, tab-indented bullet list.
 - `flow_editor.dart` — Edits a Procesverbetering `flow` slide: template picker and step list with `::` attributes (process map / swimlane / VSM).
@@ -1485,7 +1485,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `section_editor.dart` — Edits a section-divider slide (title, subtitle).
 - `signoff_editor.dart` — Edits the sign-off slide (truthfulness statement, signature, certification, seal).
 - `slide_type_help.dart` — Collapsible "what can I do here?" hint per slide type (and the TLP hint); exhaustive switch guarantees every type has one.
-- `table_editor.dart` — Edits a table slide (grid of cells, header row).
+- `table_editor.dart` — Edits a table slide by reusing the document spreadsheet (`TableEditController` + `DocumentMarkdownView`), so a slide table is the same in-place grid as a document table (Tab grows a row, Enter moves down, paste from a cell). Number formatting stays a slide-only toolbar extra.
 - `timeline_editor.dart` — Edits a timeline slide (reorderable events, layout).
 - `title_editor.dart` — Edits a title slide (title, subtitle, image, zoom).
 - `two_bullets_editor.dart` — Edits a two-column bullet slide (per-column titles).

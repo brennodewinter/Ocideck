@@ -507,13 +507,9 @@ const _dutchSourcePt = {
   'Markdown inhoud': 'Conteúdo Markdown',
   '# Slide\n\nInhoud hier...': '# Slide\n\nConteúdo aqui...',
   'Rij toevoegen': 'Adicionar linha',
-  'Kolom toevoegen': 'Adicionar coluna',
   'Kolom': 'Coluna',
   'verwijderen': 'remover',
-  'Koprij verwijderen': 'Remover linha de cabeçalho',
   'Rij verwijderen': 'Remover linha',
-  'Tip: druk op Enter binnen een cel voor een nieuwe regel.':
-      'Dica: prima Enter dentro de uma célula para uma nova linha.',
   'Presentatie openen': 'Abrir apresentação',
   'Opslaan als': 'Guardar como',
   'Pakket importeren': 'Importar pacote',
@@ -1115,8 +1111,6 @@ const _dutchSourcePt = {
   'Breedte van het slidepaneel': 'Largura do painel de diapositivos',
   'Pijltjestoetsen passen de breedte aan':
       'As teclas de seta ajustam a largura',
-  'Tip: plak met Cmd/Ctrl+V een tabel uit je spreadsheet in een cel om de hele tabel te vullen.':
-      'Sugestão: cole uma tabela da sua folha de cálculo numa célula com Cmd/Ctrl+V para preencher a tabela inteira.',
   'Annuleren': 'Cancelar',
   'Checklist': 'Lista de tarefas',
   'Voortgangsgrafiek tonen': 'Mostrar gráfico de progresso',
@@ -5262,7 +5256,6 @@ const _dutchSourceAddPt = <String, String>{
   'Koprij': 'Linha de cabeçalho',
   'Links uitlijnen': 'Alinhar à esquerda',
   'Rechts uitlijnen': 'Alinhar à direita',
-  'Rij onder invoegen': 'Inserir linha abaixo',
   'Splits tabel': 'Dividir tabela',
   'De documentstijl (thema, paginaformaat, marges) gaat niet mee.':
       'O estilo do documento (tema, tamanho da página, margens) não é mantido.',
