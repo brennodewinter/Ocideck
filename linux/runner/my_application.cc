@@ -173,6 +173,12 @@ static void my_application_activate(GApplication* application) {
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(
       project, self->dart_entrypoint_arguments);
+  // Impeller's EGL-context botst met GTK3's eigen GL-context op Wayland
+  // (Flutter #191775): eglMakeCurrent faalt tijdens een redraw en GDK
+  // segfaults in gdk_window_end_draw_frame met rdi=0x0. Skia deelt die
+  // context niet en heeft het probleem niet. Terug naar Skia tot het
+  // engine-team de EGL-pad oplost. Zie issue #2058.
+  fl_dart_project_set_enable_impeller(project, FALSE);
 
   FlView* view = fl_view_new(project);
   GdkRGBA background_color;
