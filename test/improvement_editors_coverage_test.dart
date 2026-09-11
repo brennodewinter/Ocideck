@@ -169,10 +169,18 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      final remove = find.byIcon(Icons.remove_circle_outline);
-      expect(remove, findsOneWidget);
-      await tester.tap(remove);
+      // Kop is vergrendeld; tik in een body-cel zodat de werkbalk verschijnt.
+      final cells = find.descendant(
+        of: find.byType(Table),
+        matching: find.byType(TextField),
+      );
+      expect(cells, findsWidgets);
+      await tester.tap(cells.at(5));
       await tester.pump();
+      await tester.tap(find.byTooltip('Rij weghalen'));
+      await tester.pump();
+      // Header + één body-rij: weghalen is een no-op.
+      expect(cells, findsWidgets);
     });
   });
 
