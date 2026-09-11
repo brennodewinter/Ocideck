@@ -626,7 +626,7 @@ void main() {
     );
 
     // Open een documenttabblad en laad een document met bestandspad erin.
-    container.read(tabsProvider.notifier).newDocument();
+    await container.read(tabsProvider.notifier).newDocument();
     await tester.pumpAndSettle();
     final tab = container.read(tabsProvider).current!;
     tab.documentNotifier!.loadDocument(
@@ -643,7 +643,7 @@ void main() {
     tester,
   ) async {
     await pumpShell(tester, deckOf([bullets('Eerste')]));
-    container.read(tabsProvider.notifier).newDocument();
+    await container.read(tabsProvider.notifier).newDocument();
     await tester.pumpAndSettle();
 
     const replace = SingleActivator(LogicalKeyboardKey.keyH, control: true);
@@ -726,7 +726,7 @@ void main() {
     await pumpShell(tester, deckOf([bullets('Eerste')]));
     // Open een documenttabblad erbij, zodat sluiten het aantal vermindert
     // in plaats van het ene tabblad te resetten.
-    container.read(tabsProvider.notifier).newDocument();
+    await container.read(tabsProvider.notifier).newDocument();
     await tester.pumpAndSettle();
     final initialCount = container.read(tabsProvider).tabs.length;
     expect(initialCount, 2);

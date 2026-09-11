@@ -211,7 +211,7 @@ void main() {
     final tabs = container.read(tabsProvider.notifier);
 
     // Open een documenttabblad (wordt de tweede tab, na het welkomstscherm).
-    tabs.newDocument();
+    await tabs.newDocument();
     await tester.pumpAndSettle();
     expect(container.read(tabsProvider).tabs.length, 2);
 
