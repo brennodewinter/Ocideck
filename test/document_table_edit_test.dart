@@ -6,15 +6,13 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/markdown_document.dart';
 import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/widgets/document_editor_screen.dart';
-import 'package:ocideck/widgets/editors/table_editor.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
 import 'package:ocideck/widgets/slides/inline_markdown.dart';
 
-/// Dubbelklik-bewerken van een tabel in de documentmodus (DOCUMENT_MODE.md
-/// §4.2): een gerenderde GFM-tabel dubbelklikken opent de volwaardige
-/// [TableEditor], en 'Toepassen' schrijft het bewerkte raster terug op zijn
-/// plek in de bron. De serialisatie- en telling-logica is puur en wordt hier
-/// los, uitputtend getoetst; de widgettest bewijst de bedrading.
+/// Tabellen in de documentmodus (DOCUMENT_MODE.md §4): Visueel en Bron
+/// vullen dezelfde GFM-tabel ter plekke in — geen dialoog, geen potlood.
+/// De serialisatie- en telling-logica is puur en wordt hier los getoetst;
+/// de widgettest bewijst de bedrading.
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -114,7 +112,7 @@ void main() {
     );
   });
 
-  testWidgets('dubbelklik op de tabel opent de editor en past het toe', (
+  testWidgets('Bron: tik in een cel schrijft terug, zonder dialoog', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1300, 900));
@@ -130,40 +128,29 @@ void main() {
     await tester.pump();
     await tester.tap(find.text('Bron'));
     await tester.pump();
-
-    // De tabel rendert in de weergave.
-    final table = find.byType(Table);
-    expect(table, findsOneWidget);
-
-    // Dubbelklik: twee tikken binnen de dubbelklik-tijd.
-    final center = tester.getCenter(table);
-    await tester.tapAt(center);
-    await tester.pump(const Duration(milliseconds: 50));
-    await tester.tapAt(center);
-    await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
 
-    // De volwaardige tabel-editor staat nu in een dialoog, met de cellen erin.
-    expect(find.byType(TableEditor), findsOneWidget);
-    final cellField = find.widgetWithText(TextField, 'Alfa');
-    expect(cellField, findsOneWidget);
+    expect(find.byType(Table), findsOneWidget);
+    expect(find.byIcon(Icons.edit_outlined), findsNothing);
+    expect(find.text('Toepassen'), findsNothing);
 
-    // Bewerk een cel en pas toe → het blok wordt teruggeschreven in de bron.
+    final cellField = find.descendant(
+      of: find.byType(Table),
+      matching: find.widgetWithText(TextField, 'Alfa'),
+    );
+    expect(cellField, findsOneWidget);
     await tester.enterText(cellField, 'Bravo');
-    await tester.pump();
-    await tester.tap(find.text('Toepassen'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
 
     final source = n.currentState.document!.source;
     expect(source, contains('Bravo'));
     expect(source, isNot(contains('Alfa')));
-    // Nog steeds precies één tabel, en de omringende tekst staat er nog.
     expect(DocumentMarkdownView.nthTableBlockRange(source, 1), isNull);
     expect(source, contains('# Rapport'));
   });
 
-  testWidgets('het potlood is zichtbaar en opent met één klik de editor', (
+  testWidgets('Bron: geen potlood op de tabel — de cel zelf is de editor', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1300, 900));
@@ -179,15 +166,13 @@ void main() {
     await tester.pump();
     await tester.tap(find.text('Bron'));
     await tester.pump();
-
-    // Het potlood-knopje is zichtbaar op de tabel en opent met één klik dezelfde
-    // volwaardige editor — ontdekbaar zonder de dubbelklik te hoeven raden.
-    final pencil = find.byIcon(Icons.edit_outlined);
-    expect(pencil, findsOneWidget);
-    await tester.tap(pencil);
-    await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
-    expect(find.byType(TableEditor), findsOneWidget);
+
+    expect(find.byIcon(Icons.edit_outlined), findsNothing);
+    expect(
+      find.descendant(of: find.byType(Table), matching: find.byType(TextField)),
+      findsWidgets,
+    );
   });
 
   testWidgets('Visueel: ter plekke invullen schrijft byte-getrouw terug', (
@@ -310,7 +295,42 @@ void main() {
     },
   );
 
-  testWidgets('Toepassen behoudt de uitlijning (geen stille strip, F3)', (
+  testWidgets(
+    'Bron: uitlijning overleeft een celwijziging (geen stille strip)',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1300, 900));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final n = DocumentNotifier()
+        ..loadDocument(
+          MarkdownDocument.parse(
+            '# R\n\n| A | B | C |\n| :--- | :---: | ---: |\n| 1 | 2 | 3 |\n',
+          ),
+        );
+      await tester.pumpWidget(editorApp(n));
+      await tester.pump();
+      await tester.tap(find.text('Bron'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+
+      final cellField = find.descendant(
+        of: find.byType(Table),
+        matching: find.widgetWithText(TextField, '1'),
+      );
+      await tester.enterText(cellField, '9');
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+
+      // De scheidingsrij mag NIET gestript zijn naar | --- | --- | --- |.
+      expect(
+        n.currentState.document!.source,
+        contains('| :--- | :---: | ---: |'),
+      );
+      expect(n.currentState.document!.source, contains('9'));
+    },
+  );
+
+  testWidgets('Bron: twee tabellen houden hun eigen ordinaal (#1662)', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1300, 900));
@@ -319,27 +339,24 @@ void main() {
     final n = DocumentNotifier()
       ..loadDocument(
         MarkdownDocument.parse(
-          '# R\n\n| A | B | C |\n| :--- | :---: | ---: |\n| 1 | 2 | 3 |\n',
+          '| A | B |\n| --- | --- |\n| een | 1 |\n\n'
+          '| C | D |\n| --- | --- |\n| twee | 2 |\n',
         ),
       );
     await tester.pumpWidget(editorApp(n));
     await tester.pump();
     await tester.tap(find.text('Bron'));
     await tester.pump();
-
-    // Open de tabel-editor en pas toe zónder iets te wijzigen.
-    await tester.tap(find.byIcon(Icons.edit_outlined));
-    await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
-    expect(find.byType(TableEditor), findsOneWidget);
-    await tester.tap(find.text('Toepassen'));
+
+    await tester.enterText(find.widgetWithText(TextField, 'een'), 'alpha');
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 350));
 
-    // De scheidingsrij mag NIET gestript zijn naar | --- | --- | --- |.
-    expect(
-      n.currentState.document!.source,
-      contains('| :--- | :---: | ---: |'),
-    );
+    final source = n.currentState.document!.source;
+    expect(source, contains('alpha'));
+    expect(source, isNot(contains('| een |')));
+    expect(source, contains('| twee | 2 |'));
+    expect(source, contains('| C | D |'));
   });
 }

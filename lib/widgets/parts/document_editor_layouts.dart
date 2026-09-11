@@ -347,7 +347,7 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     anchorBlockIndex: _anchorBlockIndex,
     anchorKey: _anchorKey,
     onEditChart: _editChart,
-    onEditTable: _editTable,
+    tableEditorFor: (ordinal) => _sourceTableFor(this, ordinal),
     onTapLink: _handleEditorLink,
   );
 }
@@ -367,7 +367,7 @@ Widget _documentLivePreview(
   required int anchorBlockIndex,
   required GlobalKey? anchorKey,
   required void Function(int, String) onEditChart,
-  required void Function(int, List<String>) onEditTable,
+  required TableEditController? Function(int ordinal)? tableEditorFor,
   required ValueChanged<String> onTapLink,
 }) => Container(
   color: theme.colorScheme.surface,
@@ -387,7 +387,7 @@ Widget _documentLivePreview(
         anchorBlockIndex: anchorBlockIndex,
         anchorKey: anchorKey,
         onEditChart: onEditChart,
-        onEditTable: onEditTable,
+        tableEditorFor: tableEditorFor,
         onTapLink: onTapLink,
       ),
       tlp: tlp,
@@ -395,6 +395,33 @@ Widget _documentLivePreview(
     ),
   ),
 );
+
+/// De GFM-tabel [ordinal] in de Bron-preview: zelfde rekenblad als Visueel.
+/// Undo coalescet per tabel zodat één zin typen geen tientallen stappen wordt.
+TableEditController? _sourceTableFor(
+  _DocumentEditorScreenState s,
+  int ordinal,
+) {
+  final body = s._controller.text;
+  final range = DocumentMarkdownView.nthTableBlockRange(body, ordinal);
+  if (range == null) return null;
+  final gfm = body.split('\n').sublist(range[0], range[1]).join('\n');
+  return s._sourceTables.obtain(
+    ordinal,
+    gfm,
+    onChanged: (rows, alignments) {
+      final next = replaceNthTableBlock(
+        s._controller.text,
+        ordinal,
+        encodeMarkdownTable(rows, alignments: alignments),
+      );
+      if (next != s._controller.text) {
+        _commitDocumentBody(s.ref, next, coalesceKey: 'source-table-$ordinal');
+      }
+    },
+    onCellFocused: null,
+  );
+}
 
 Future<void> _followEditorDocumentLink(
   String href, {

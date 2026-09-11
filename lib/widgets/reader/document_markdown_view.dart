@@ -80,6 +80,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.tableEditOrdinal = 0,
     this.onSortTableColumn,
     this.tableToolbarExtras,
+    this.tableEditorFor,
     this.hideRules = false,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
@@ -151,20 +152,13 @@ class DocumentMarkdownView extends StatelessWidget {
   /// de editor de juiste fence in de bron kan vervangen. `null` → geen bewerking.
   final void Function(int chartOrdinal, String chartBlock)? onEditChart;
 
-  /// Aangeroepen bij dubbelklik op een tabel — alleen in de editor gezet. Geeft
-  /// het volgnummer van de tabel (de hoeveelheidste GFM-tabel in het document,
-  /// vanaf 0) en de rauwe regels (koprij + body, zónder scheidingsrij) mee, zodat
-  /// de editor precies dat tabelblok in de bron kan vervangen. `null` → geen
-  /// bewerking.
+  /// Dubbelklik op een tabel. `null` op alleen-lezen oppervlakken; editor
+  /// gebruikt [tableEditorFor] / [tableEditController].
   final void Function(int tableOrdinal, List<String> tableRows)? onEditTable;
 
-  /// Maakt de tabel ter plekke invulbaar: elke cel wordt een tekstveld binnen
-  /// dezelfde gerenderde tabel, zodat je typt in de vorm die je krijgt — de
-  /// kolomverdeling, randen en huisstijl zijn per definitie die van de gelezen
-  /// tabel, want het is dezelfde tekenaar. `null` → de tabel is alleen-lezen.
-  ///
-  /// Geldt voor de tabel met volgnummer [tableEditOrdinal]; de overige tabellen
-  /// in hetzelfde document blijven gewoon gerenderd.
+  /// Ter plekke invulbaar in dezelfde gerenderde tabel. `null` = alleen-lezen.
+  /// Geldt voor [tableEditOrdinal]; andere tabellen in het document blijven
+  /// gerenderd.
   final TableEditController? tableEditController;
   final int tableEditOrdinal;
   final void Function(int column, TableSortIntent intent)? onSortTableColumn;
@@ -172,6 +166,10 @@ class DocumentMarkdownView extends StatelessWidget {
   /// Extra knoppen op de tabelwerkbalk (bijv. getalnotatie op een dia).
   final List<Widget> Function(BuildContext context, ({int row, int col}) at)?
   tableToolbarExtras;
+
+  /// Bron-weergave: elke GFM-tabel ter plekke invulbaar. Wint van
+  /// [tableEditController] / [tableEditOrdinal].
+  final TableEditController? Function(int ordinal)? tableEditorFor;
 
   /// Tekent een `---` niet als streep.
   ///

@@ -27,16 +27,12 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     List<TableAlign> sourceAligns,
     int tableOrdinal,
   ) {
-    // Wordt deze tabel ter plekke ingevuld, dan is de controller de bron van
-    // de waarheid: hij loopt voor op de Markdown-bron, want de bron wordt pas
-    // bijgewerkt nadat de cel is aangepast.
-    final editor = tableOrdinal == tableEditOrdinal
-        ? tableEditController
-        : null;
+    // Controller loopt voor op de bron: die volgt pas ná de celwijziging.
+    final editor =
+        tableEditorFor?.call(tableOrdinal) ??
+        (tableOrdinal == tableEditOrdinal ? tableEditController : null);
     if (editor != null) {
-      // Ter plekke invulbaar: geen potlood-omhulsel eromheen — je klikt gewoon
-      // in de cel die je wilt wijzigen. De tabel wordt bij elke wijziging
-      // opnieuw opgebouwd, zodat de kolombreedtes meebewegen met wat je typt.
+      // Geen potlood: je klikt in de cel. Hertekenen houdt de kolombreedtes bij.
       return TableEditScaffold(
         editor: editor,
         onSort: onSortTableColumn,

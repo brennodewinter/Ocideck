@@ -54,7 +54,8 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.text('oud'), findsOneWidget);
+      // Cel + opgemaakte overlay: dezelfde tekst twee keer, geen tweede veld.
+      expect(find.text('oud'), findsNWidgets(2));
 
       // Zoals de presenter het doet: het deck bijwerken zonder de editorvelden
       // aan te raken.
@@ -76,12 +77,12 @@ void main() {
         container.read(deckProvider).deck!.slides.first.tableRows[1][1],
         'nieuw',
       );
-      expect(find.text('oud'), findsOneWidget);
+      expect(find.text('oud'), findsNWidgets(2));
 
       notifier.refreshEditorFields();
       await tester.pumpAndSettle();
 
-      expect(find.text('nieuw'), findsOneWidget);
+      expect(find.text('nieuw'), findsNWidgets(2));
       expect(find.text('oud'), findsNothing);
     },
   );
