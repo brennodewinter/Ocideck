@@ -2542,6 +2542,16 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Linux-crash op Wayland opgelost: Impeller uitgeschakeld in de Linux-runner
+  (#2058).** Flutter 3.47 zet Impeller op Linux standaard aan, maar
+  Impeller's EGL-context botst met GTK3's eigen GL-context op Wayland
+  (Flutter #191775): `eglMakeCurrent` faalt tijdens een redraw en GDK
+  segfaults in `gdk_window_end_draw_frame` met `rdi=0x0`. De Linux-runner
+  schakelt Impeller nu uit via `fl_dart_project_set_enable_impeller(project,
+  FALSE)` en valt terug op Skia, die de tweede GL-context niet opent. Een
+  statische poort (`make check-linux-impeller`) bewaakt dat de regel blijft
+  staan — de crash reproduceert alleen op Linux/Wayland, dus de Dart-suite
+  vangt hem niet.
 - **Tabellen in document, dia, grafiek en matrix delen het rekenblad (#2051–#2056).**
   Een slide-tabel is dezelfde ter-plekke-invulbare GFM-tabel als in het document.
   Invoegen van tabel of tijdlijn zet een leeg blok op de cursor, zonder dialoog.
