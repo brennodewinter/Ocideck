@@ -107,6 +107,7 @@ class TableEditableCell extends StatelessWidget {
     textAlign: textAlign,
     cursorColor: caretColor,
     maxLines: null,
+    readOnly: editor.lockHeader && row == 0,
     // Enter navigeert (zie de controller); een regeleinde binnen de cel
     // maak je met Shift+Enter.
     keyboardType: TextInputType.multiline,

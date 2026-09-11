@@ -5,10 +5,8 @@ import '../../models/slide.dart';
 import '../../services/markdown_table_codec.dart';
 import '../../state/collab_session_provider.dart';
 import '../../theme/app_theme.dart';
-import '../markdown_editor/table_sort_actions.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
-import '../reader/table_edit_scaffold.dart';
 import '_editor_field.dart';
 import 'editor_text_controller.dart';
 
@@ -103,38 +101,6 @@ class _TableEditorState extends State<TableEditor> {
     widget.onUpdate(widget.slide.copyWith(tableNumberColumns: cols));
   }
 
-  Future<void> _sort(int column, TableSortIntent intent) async {
-    final gfm = encodeMarkdownTable(_grid.rows, alignments: _grid.alignments);
-    final sorted = switch (intent) {
-      TableSortIntent.choose => await () async {
-        final choice = await chooseExplicitSort(context);
-        if (!mounted || choice == null) return null;
-        return smartSortTable(
-          context,
-          gfm,
-          column: column,
-          ascending: choice.ascending,
-          kind: choice.kind,
-        );
-      }(),
-      TableSortIntent.ascending => await smartSortTable(
-        context,
-        gfm,
-        column: column,
-        ascending: true,
-      ),
-      TableSortIntent.descending => await smartSortTable(
-        context,
-        gfm,
-        column: column,
-        ascending: false,
-      ),
-    };
-    if (!mounted || sorted == null) return;
-    final decoded = decodeMarkdownTableWithAlignment(sorted.split('\n'));
-    _grid.replaceRows(decoded.rows, decoded.alignments);
-  }
-
   List<Widget> _numberToolbar(BuildContext context, ({int row, int col}) at) {
     if (widget.documentContext) return const [];
     final l10n = context.l10n;
@@ -207,7 +173,6 @@ class _TableEditorState extends State<TableEditor> {
           gfm,
           maxTextWidth: null,
           tableEditController: _grid,
-          onSortTableColumn: _sort,
           tableToolbarExtras: widget.documentContext ? null : _numberToolbar,
         ),
       ],
