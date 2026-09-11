@@ -79,6 +79,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.tableEditController,
     this.tableEditOrdinal = 0,
     this.onSortTableColumn,
+    this.tableToolbarExtras,
     this.hideRules = false,
     this.searchTerm,
     this.activeMatchBlockIndex = -1,
@@ -167,6 +168,10 @@ class DocumentMarkdownView extends StatelessWidget {
   final TableEditController? tableEditController;
   final int tableEditOrdinal;
   final void Function(int column, TableSortIntent intent)? onSortTableColumn;
+
+  /// Extra knoppen op de tabelwerkbalk (bijv. getalnotatie op een dia).
+  final List<Widget> Function(BuildContext context, ({int row, int col}) at)?
+  tableToolbarExtras;
 
   /// Tekent een `---` niet als streep.
   ///

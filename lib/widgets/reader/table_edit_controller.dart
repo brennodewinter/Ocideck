@@ -191,7 +191,10 @@ class TableEditController extends ChangeNotifier {
     }
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
 
-    if (event.logicalKey == LogicalKeyboardKey.keyV && meta) {
+    final pasteCombo =
+        (event.logicalKey == LogicalKeyboardKey.keyV && meta) ||
+        (event.logicalKey == LogicalKeyboardKey.insert && keys.isShiftPressed);
+    if (pasteCombo) {
       Clipboard.getData(Clipboard.kTextPlain).then((data) {
         final text = data?.text;
         if (text == null || text.isEmpty) return;
@@ -391,6 +394,16 @@ class TableEditController extends ChangeNotifier {
     _emitAndRebuild();
   }
 
+  /// Vervangt het hele raster, bijvoorbeeld na een kolomsort. De oude
+  /// celcontrollers gaan weg; de focus landt nergens — de aanroeper zet die
+  /// opnieuw als dat nodig is.
+  void replaceRows(List<List<String>> rows, List<TableAlign> alignments) {
+    _disposeInternals();
+    _alignments = List<TableAlign>.from(alignments);
+    _adopt(rows);
+    _emitAndRebuild();
+  }
+
   void setAlignment(int c, TableAlign align) {
     final next = [..._alignments];
     while (next.length <= c) {
@@ -401,8 +414,7 @@ class TableEditController extends ChangeNotifier {
     _emitAndRebuild();
   }
 
-  @override
-  void dispose() {
+  void _disposeInternals() {
     for (final row in _cells) {
       for (final cell in row) {
         cell
@@ -415,6 +427,11 @@ class TableEditController extends ChangeNotifier {
         node.dispose();
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _disposeInternals();
     super.dispose();
   }
 }

@@ -21,6 +21,7 @@ class TableEditScaffold extends StatelessWidget {
     required this.editor,
     required this.builder,
     this.onSort,
+    this.extraToolbarItems,
   });
 
   final TableEditController editor;
@@ -31,6 +32,11 @@ class TableEditScaffold extends StatelessWidget {
   /// blijven staan.
   final WidgetBuilder builder;
   final void Function(int column, TableSortIntent intent)? onSort;
+
+  /// Extra knoppen ná de uitlijning: dia-specifieke dingen (getalnotatie) die
+  /// niet in de GFM-tabel zelf zitten, maar wél bij de actieve kolom horen.
+  final List<Widget> Function(BuildContext context, ({int row, int col}) at)?
+  extraToolbarItems;
 
   @override
   Widget build(BuildContext context) {
@@ -241,6 +247,10 @@ class TableEditScaffold extends StatelessWidget {
               Icons.format_align_right,
               l10n.d('Rechts uitlijnen'),
             ),
+            if (extraToolbarItems != null) ...[
+              _divider(theme),
+              ...extraToolbarItems!(context, at),
+            ],
           ],
         ),
       ),

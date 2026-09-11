@@ -40,6 +40,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
       return TableEditScaffold(
         editor: editor,
         onSort: onSortTableColumn,
+        extraToolbarItems: tableToolbarExtras,
         builder: (_) => _tableBody(t, editor.rows, editor.alignments, editor),
       );
     }
