@@ -146,7 +146,7 @@ void _readFrames(
         feature: 'Afbeelding of media',
         description: 'kon niet worden gelezen en is overgeslagen',
         logOp: 'OdpImporter: dia ${index + 1} afbeelding',
-        body: () => _imageFromHref(ctx, img, frame),
+        body: () => _imageFromHref(ctx, img, frame, pageW, pageH),
       );
       if (source != null) {
         parts.images.add(source);
@@ -264,7 +264,13 @@ SourceChart? _chartFromObject(OdpContext ctx, XmlElement obj) {
   return parseOdpChartXml(xml);
 }
 
-SourceImage? _imageFromHref(OdpContext ctx, XmlElement img, XmlElement frame) {
+SourceImage? _imageFromHref(
+  OdpContext ctx,
+  XmlElement img,
+  XmlElement frame,
+  double pageWidth,
+  double pageHeight,
+) {
   final href = xlinkHref(img);
   if (href == null) return null;
   final path = ctx.resolveHref(href);
@@ -281,6 +287,24 @@ SourceImage? _imageFromHref(OdpContext ctx, XmlElement img, XmlElement frame) {
         : bakeImportGeometry(imageBytes, geometry, path),
     ext: _extFromPath(path),
     name: path.split('/').last,
+    placement: _imagePlacement(frame, pageWidth, pageHeight),
+  );
+}
+
+SourceImagePlacement? _imagePlacement(
+  XmlElement frame,
+  double pageWidth,
+  double pageHeight,
+) {
+  if (pageWidth <= 0 || pageHeight <= 0) return null;
+  final width = _cm(_attr(frame, 'width'));
+  final height = _cm(_attr(frame, 'height'));
+  if (width <= 0 || height <= 0) return null;
+  return SourceImagePlacement(
+    left: _cm(_attr(frame, 'x')) / pageWidth,
+    top: _cm(_attr(frame, 'y')) / pageHeight,
+    width: width / pageWidth,
+    height: height / pageHeight,
   );
 }
 

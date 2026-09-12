@@ -8,6 +8,7 @@ import 'deck_builder.dart';
 import 'importers/import_failure.dart';
 import 'models/source_deck.dart';
 import 'models/slide_failure_policy.dart';
+import 'logo_detection.dart';
 import 'pipeline/import_runner.dart';
 import 'pipeline/import_task.dart';
 import 'pipeline/importer_registry.dart';
@@ -81,6 +82,11 @@ class PreparedImport {
   final String _title;
   final DeckBuilder _builder;
 
+  List<ImportLogoCandidate> get logoCandidates =>
+      detectImportLogoCandidates(_sourceDeck);
+
+  SourceDeck get sourceDeck => _sourceDeck;
+
   /// Bouw het deck. [policies] is per bron-diaindex; wat er niet in staat
   /// krijgt best-effort.
   ///
@@ -88,18 +94,37 @@ class PreparedImport {
   /// [MarkdownSafetyScanner] — dezelfde poort die een vreemd `.md` bij het openen
   /// bewaakt (#876). De uitkomst reist mee in [BuiltDeck.safetyFindings]; is die
   /// niet leeg, dan hoort de aanroeper het deck te weigeren.
-  BuiltDeck build({Map<int, SlideFailurePolicy> policies = const {}}) {
+  BuiltDeck build({
+    Map<int, SlideFailurePolicy> policies = const {},
+    ImportLogoResolution? logo,
+  }) {
+    final sourceDeck = logo == null
+        ? _sourceDeck
+        : sourceDeckWithoutLogo(_sourceDeck, logo.candidate);
+    final classified = logo == null
+        ? _classified
+        : classifySourceSlides(sourceDeck.slides);
     final built = _builder.build(
-      _sourceDeck,
-      _classified,
+      sourceDeck,
+      classified,
       title: _title,
       policies: policies,
+      logoSlideIndexes: logo?.candidate.slideIndexes.toSet(),
     );
+    final deck = logo == null
+        ? built.deck
+        : built.deck.copyWith(themeProfile: logo.profile);
     return BuiltDeck(
-      deck: built.deck,
+      deck: deck,
       problemSlides: built.problemSlides,
-      safetyFindings: scanDeckForUnsafeContent(built.deck),
+      safetyFindings: scanDeckForUnsafeContent(deck),
     );
+  }
+
+  List<ProblemSlide> problemSlidesFor({ImportLogoCandidate? logo}) {
+    if (logo == null) return problemSlides;
+    final sourceDeck = sourceDeckWithoutLogo(_sourceDeck, logo);
+    return _builder.analyse(classifySourceSlides(sourceDeck.slides));
   }
 }
 

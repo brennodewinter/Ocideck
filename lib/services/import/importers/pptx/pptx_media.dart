@@ -101,8 +101,10 @@ String? _linkTarget(
 /// `a:blip` `r:embed` to the media part. Linked-only pictures (`r:link`)
 /// are dropped for now (M2) — the bytes are not in the package.
 ///
-/// Very small images (logos, footer icons) are ignored so they don't take
-/// over a slide layout.
+/// De plaatsing reist mee voor deckbrede logoherkenning. Kleine afbeeldingen
+/// worden hier bewust niet meer weggegooid: pas herhaling over meerdere dia's
+/// maakt een randafbeelding waarschijnlijk tot logo, en bij twijfel beslist de
+/// gebruiker.
 SourceImage? parsePic(
   XmlElement pic,
   PptxContext ctx,
@@ -114,13 +116,8 @@ SourceImage? parsePic(
   final rId = blip.getAttribute('embed', namespaceUri: relsNs);
   if (rId == null) return null;
 
-  // Skip small logos/footer icons.
   final spPr = descendantsLocal(pic, 'spPr').firstOrNull;
   final xfrm = spPr != null ? childLocal(spPr, 'xfrm') : null;
-  final ext = xfrm != null ? childLocal(xfrm, 'ext') : null;
-  if (ext != null && !_isSignificantImageSize(ext, ctx.slideSize)) {
-    return null;
-  }
 
   final bytes = ctx.readRelBytes(rels, rId, slidePath);
   if (bytes == null) return null;
@@ -138,6 +135,29 @@ SourceImage? parsePic(
     bytes: imageBytes,
     ext: _extFromPath(resolved),
     name: name ?? p.url.basename(resolved),
+    placement: _placement(xfrm, ctx.slideSize),
+  );
+}
+
+SourceImagePlacement? _placement(
+  XmlElement? xfrm,
+  ({int width, int height})? slideSize,
+) {
+  if (xfrm == null || slideSize == null) return null;
+  final off = childLocal(xfrm, 'off');
+  final ext = childLocal(xfrm, 'ext');
+  if (off == null || ext == null) return null;
+  final x = int.tryParse(off.getAttribute('x') ?? '');
+  final y = int.tryParse(off.getAttribute('y') ?? '');
+  final width = int.tryParse(ext.getAttribute('cx') ?? '');
+  final height = int.tryParse(ext.getAttribute('cy') ?? '');
+  if (x == null || y == null || width == null || height == null) return null;
+  if (slideSize.width <= 0 || slideSize.height <= 0) return null;
+  return SourceImagePlacement(
+    left: x / slideSize.width,
+    top: y / slideSize.height,
+    width: width / slideSize.width,
+    height: height / slideSize.height,
   );
 }
 
@@ -202,27 +222,6 @@ bool picReferencesMissingMedia(
   final rId = blip.getAttribute('embed', namespaceUri: relsNs);
   if (rId == null) return false;
   return ctx.readRelBytes(rels, rId, slidePath) == null;
-}
-
-/// Returns true when the picture occupies at least ~3% of the slide area or
-/// at least one side is 25% of the slide, to avoid logos being promoted to
-/// full slide images.
-bool _isSignificantImageSize(
-  XmlElement ext,
-  ({int width, int height})? slideSize,
-) {
-  if (slideSize == null) return true;
-  final cx = int.tryParse(ext.getAttribute('cx') ?? '') ?? 0;
-  final cy = int.tryParse(ext.getAttribute('cy') ?? '') ?? 0;
-  if (cx <= 0 || cy <= 0) return true;
-
-  final widthFraction = cx / slideSize.width;
-  final heightFraction = cy / slideSize.height;
-  final areaFraction = widthFraction * heightFraction;
-
-  return areaFraction >= 0.03 ||
-      widthFraction >= 0.25 ||
-      heightFraction >= 0.25;
 }
 
 String _extFromPath(String path) {

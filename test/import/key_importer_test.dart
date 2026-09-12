@@ -499,6 +499,86 @@ void main() {
   });
 
   test(
+    'ShowArchive-canvas normaliseert de plaatsing van een afbeelding',
+    () async {
+      const dataId = 42;
+      const fileName = 'logo.png';
+      const imageBytes = <int>[0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+      final showSize = fx.bytesField(4, [
+        ...fx.floatField(1, 1000),
+        ...fx.floatField(2, 500),
+      ]);
+      final recordBytes = [
+        fx.record(
+          100,
+          100,
+          fx.packageMetadataPayload(
+            dataInfos: [
+              fx.dataInfoPayload(
+                identifier: dataId,
+                preferredFileName: fileName,
+              ),
+            ],
+          ),
+        ),
+        // DocumentArchive → ShowArchive; de show bevat canvasmaat en SlideTree.
+        fx.recordWithRefs(1, 1, fx.varintField(2, 0), [2]),
+        fx.recordWithRefs(
+          2,
+          2,
+          [
+            ...showSize,
+            ...fx.bytesField(3, fx.slideTreePayload([0])),
+          ],
+          [10],
+        ),
+        fx.recordWithRefs(10, 4, fx.slideNodePayload(slideRefIndex: 0), [20]),
+        fx.recordWithRefs(
+          20,
+          5,
+          fx.slidePayload(
+            titleRefIndex: 0,
+            bodyRefIndex: 1,
+            drawableRefIndices: [2],
+          ),
+          [21, 22, 30],
+        ),
+        fx.recordWithRefs(21, 2, fx.shapeInfoPayload(0), [23]),
+        fx.record(23, 3, fx.storagePayload(['Logo-dia'])),
+        fx.recordWithRefs(22, 2, fx.shapeInfoPayload(0), [24]),
+        fx.record(24, 3, fx.storagePayload([''])),
+        fx.record(
+          30,
+          3005,
+          fx.geometryImagePayload(
+            dataId: dataId,
+            x: 800,
+            y: 440,
+            width: 120,
+            height: 40,
+          ),
+        ),
+      ].expand((record) => record).toList();
+      final bytes = fx.zip({
+        'Index/Document.iwa': fx.iwaStream(recordBytes),
+        'Data/$fileName': imageBytes,
+      });
+
+      final deck = (await KeyImporter().importBytes(
+        bytes,
+        path: 'canvas.key',
+      )).okValue!;
+
+      final placement = deck.slides.single.images.single.placement;
+      expect(placement, isNotNull);
+      expect(placement!.left, closeTo(.8, .0001));
+      expect(placement.top, closeTo(.88, .0001));
+      expect(placement.width, closeTo(.12, .0001));
+      expect(placement.height, closeTo(.08, .0001));
+    },
+  );
+
+  test(
     'skips Keynote thumbnail (field 12) and imports only the full image',
     () async {
       // Keynote stores both a full-resolution image (field 11) and a small

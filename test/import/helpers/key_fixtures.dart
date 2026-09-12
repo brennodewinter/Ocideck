@@ -212,6 +212,8 @@ List<int> geometryPayload({
 /// set", bit 4 mirrors horizontally and bit 8 vertically.
 List<int> geometryImagePayload({
   required int dataId,
+  double x = 0,
+  double y = 0,
   double degrees = 0,
   int flags = 3,
   double width = 0,
@@ -223,6 +225,8 @@ List<int> geometryImagePayload({
     bytesField(
       1,
       geometryPayload(
+        x: x,
+        y: y,
         width: width,
         height: height,
         flags: flags,
