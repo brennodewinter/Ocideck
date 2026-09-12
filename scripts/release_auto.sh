@@ -269,26 +269,27 @@ api() { # api METHOD PATH [curl-args…]
 # --resume en fase 3 gebruiken hem, zodat geen van die paden een nog schrijvende
 # release-run voor "klaar" kan aanzien.
 release_ci_snapshot() {
-  api GET '/actions/tasks?limit=25' 2>/dev/null \
+  api GET '/actions/tasks?limit=100' 2>/dev/null \
     | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
         | select(.head_branch==$ref) | "\(.status)|\(.name)"' 2>/dev/null \
     | sort -u
 }
 
 release_ci_task_ids() {
-  api GET '/actions/tasks?limit=25' 2>/dev/null \
+  api GET '/actions/tasks?limit=100' 2>/dev/null \
     | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
-        | select(.head_branch==$ref) | .id' 2>/dev/null \
+        | select(.head_branch==$ref) | (.id // empty)' 2>/dev/null \
     | sort -n
 }
 
 wait_for_redispatch_registration() {
-  local previous_ids="$1" current_ids="" _
+  local previous_ids="$1" current_ids="" id _
   for _ in $(seq 1 60); do
     current_ids="$(release_ci_task_ids || true)"
-    if [ -n "$current_ids" ] && [ "$current_ids" != "$previous_ids" ]; then
-      return 0
-    fi
+    while IFS= read -r id; do
+      [ -n "$id" ] || continue
+      if ! printf '%s\n' "$previous_ids" | grep -qxF "$id"; then return 0; fi
+    done <<<"$current_ids"
     sleep 5
   done
   die "de herdispatch voor $TAG is niet als nieuwe Forgejo-taak verschenen — teken niet op basis van de oude terminale taken."
@@ -843,7 +844,10 @@ phase3() {
     STEP="release-CI opnieuw dispatchen"
     section "Fase 3 — SHA256SUMS ontbreekt; release-CI éénmalig opnieuw dispatchen (#8)"
     local previous_task_ids
-    previous_task_ids="$(release_ci_task_ids || true)"
+    if ! previous_task_ids="$(release_ci_task_ids)" || [ -z "$previous_task_ids" ]; then
+      die "kon de bestaande taak-id's voor $TAG niet betrouwbaar vastleggen — dispatch niet zonder bewijs waarmee een nieuwe run herkenbaar is."
+      return 1
+    fi
     api POST "/actions/workflows/release.yml/dispatches" -H 'Content-Type: application/json' \
       -d "$(jq -n --arg r "$TAG" '{ref:$r}')" -o /dev/null \
       || die "kon release.yml niet opnieuw dispatchen — ga de release-CI na en hervat: scripts/release_auto.sh --resume $TAG"
