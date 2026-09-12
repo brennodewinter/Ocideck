@@ -86,7 +86,7 @@ class MasweCatalog {
 }
 
 /// De dag waarop deze momentopname van MASWE is genomen.
-const masweSnapshotDate = '2026-08-04';
+const masweSnapshotDate = '2026-09-12';
 
 /// Het etiket met de datum, want een versienummer heeft MASWE niet.
 const masweStandardLabel = 'OWASP MASWE ($masweSnapshotDate)';
