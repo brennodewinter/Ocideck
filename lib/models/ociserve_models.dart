@@ -244,6 +244,17 @@ class OciServeLessonSessionGrant {
   final String digestSha256;
 
   factory OciServeLessonSessionGrant.fromJson(Map<String, Object?> json) {
+    const fields = {
+      'id',
+      'package_password',
+      'package_profile',
+      'package_url',
+      'expires_at',
+      'digest',
+    };
+    if (json.keys.any((key) => !fields.contains(key))) {
+      throw const FormatException('unexpected lesson playback field');
+    }
     final id = (json['id'] as String? ?? '').trim();
     final password = (json['package_password'] as String? ?? '').trim();
     final profile = (json['package_profile'] as String? ?? '').trim();
@@ -255,7 +266,7 @@ class OciServeLessonSessionGrant {
     );
     final digest = (json['digest'] as String? ?? '').trim().toLowerCase();
     if (id.isEmpty ||
-        password.isEmpty ||
+        !RegExp(r'^[A-Za-z0-9_-]{43}$').hasMatch(password) ||
         profile.isEmpty ||
         packageUrl == null ||
         packageUrl.toString().isEmpty ||

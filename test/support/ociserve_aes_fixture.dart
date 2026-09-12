@@ -2,7 +2,8 @@ import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 
-const testOciServePackagePassword = 'test-only-32-byte-ascii-password';
+const testOciServePackagePassword =
+    'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 
 /// Maakt een decodeerbare AE-2-fixture met dezelfde wirevelden als OciServe.
 ///
