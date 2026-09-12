@@ -130,7 +130,7 @@ log() { :; }
 sleep() { :; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
 api() {
-  if [ "\$1" = GET ] && [ "\$2" = '/actions/tasks?limit=25' ]; then
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/tasks?limit=100' ]; then
     printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"running","name":"Publiceren"}]}'
     return 0
   fi
@@ -168,7 +168,7 @@ make() { return 0; }
 curl() { return 22; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
 api() {
-  if [ "\$1" = GET ] && [ "\$2" = '/actions/tasks?limit=25' ]; then
+  if [ "\$1" = GET ] && [ "\$2" = '/actions/tasks?limit=100' ]; then
     printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"running","name":"Publiceren"}]}'
     return 0
   fi
@@ -187,6 +187,74 @@ phase3
       reason: 'een actieve publiceren-job mag geen tweede schrijver krijgen.',
     );
     expect(result.exitCode, isNot(0));
+  }, skip: skipOnWindows);
+
+  test(
+    'verdwenen baseline-task is geen bewijs van een nieuwe herdispatch-run',
+    () {
+      final result = runReleaseHarness('''
+sleep() { :; }
+die() { printf '%s\\n' "\$1" >&2; exit 1; }
+release_ci_task_ids() { printf '%s\\n' 102; }
+wait_for_redispatch_registration "\$(printf '101\\n102')"
+''');
+
+      expect(
+        result.exitCode,
+        isNot(0),
+        reason:
+            'de overgang [101, 102] → [102] bevat geen nieuwe task-id. Een '
+            'simpele ongelijkheidscontrole ziet het verdwijnen van 101 ten '
+            'onrechte als registratie van de herstel-run.',
+      );
+    },
+    skip: skipOnWindows,
+  );
+
+  test('een lege baseline-opvraag stopt vóór de herstel-dispatch', () {
+    final state = Directory.systemTemp.createTempSync(
+      'ocideck-release-empty-baseline-',
+    );
+    addTearDown(() => state.deleteSync(recursive: true));
+    final calls = File('${state.path}/calls')..writeAsStringSync('0');
+    final mutations = File('${state.path}/mutations');
+
+    final result = runReleaseHarness('''
+CALLS=${calls.path}
+MUTATIONS=${mutations.path}
+section() { :; }
+log() { :; }
+sleep() { :; }
+make() { return 0; }
+curl() { return 22; }
+die() { printf '%s\\n' "\$1" >&2; exit 1; }
+api() {
+  local method="\$1" path="\$2" count
+  if [ "\$method \$path" = 'GET /actions/tasks?limit=100' ]; then
+    count=\$(( \$(cat "\$CALLS") + 1 ))
+    printf '%s' "\$count" >"\$CALLS"
+    if [ "\$count" -eq 1 ]; then
+      printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"}]}'
+      return 0
+    fi
+    return 1
+  fi
+  if [ "\$method" != GET ]; then
+    printf '%s %s\\n' "\$method" "\$path" >>"\$MUTATIONS"
+  fi
+  printf '%s\\n' '{}'
+}
+phase3
+''');
+
+    expect(result.exitCode, isNot(0));
+    expect(
+      mutations.existsSync() ? mutations.readAsStringSync() : '',
+      isEmpty,
+      reason:
+          'zonder betrouwbare baseline kan de keten na POST niet bewijzen '
+          'welke tasks nieuw zijn; zij moet daarom vóór POST stoppen.',
+    );
   }, skip: skipOnWindows);
 
   test('herstel wacht op een nieuwe terminale CI-run vóór het tekenen', () {
@@ -233,7 +301,7 @@ minisign() { return 0; }
 api() {
   local method="\$1" path="\$2" count
   case "\$method \$path" in
-    'GET /actions/tasks?limit=25')
+    'GET /actions/tasks?limit=100')
       count=\$(( \$(cat "\$CALLS") + 1 ))
       printf '%s' "\$count" >"\$CALLS"
       if [ "\$count" -le 3 ]; then
@@ -326,7 +394,7 @@ curl() {
 minisign() { printf 'verify\\n' >>"\$TRACE"; return 0; }
 api() {
   case "\$1 \$2" in
-    'GET /actions/tasks?limit=25')
+    'GET /actions/tasks?limit=100')
       printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Publiceren"}]}'
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
