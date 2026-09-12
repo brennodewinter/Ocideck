@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/learning_session.dart';
 import 'package:ocideck/models/ociserve_evidence.dart';
+import 'package:ocideck/models/ociserve_exam.dart';
 import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
@@ -79,6 +80,7 @@ class _FakeApi implements OciServeApi {
   bool failReports = false;
   int reports = 0;
   int discoveries = 0;
+  final lessonLifecycle = <String>[];
   OciServePlaybackSnapshot? lastSnapshot;
 
   @override
@@ -103,16 +105,78 @@ class _FakeApi implements OciServeApi {
   }) async => const [];
 
   @override
-  Future<OciServePackage> lessonPackage({
+  Future<OciServeLessonSessionGrant> startLessonSession({
     required String accessToken,
     required String organizationId,
     required String versionId,
     required String lessonId,
+  }) async => OciServeLessonSessionGrant(
+    id: 'lesson-session',
+    packagePassword: 'password',
+    packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+    packageUrl: Uri.parse(
+      '/api/v1/organizations/org/me/lesson-playback-sessions/lesson-session/package',
+    ),
+    expiresAt: DateTime.utc(2099),
+    digestSha256: '0' * 64,
+  );
+
+  @override
+  Future<OciServePackage> lessonSessionPackage({
+    required String accessToken,
+    required String organizationId,
+    required OciServeLessonSessionGrant grant,
   }) async => OciServePackage(
     bytes: Uint8List(0),
-    sha256: '',
+    sha256: '0' * 64,
     playbackPolicy: 'play-only',
+    packageProfile: 'ocideck-winzip-aes256-ae2-v1',
   );
+
+  @override
+  Future<void> closeLessonSession({
+    required String accessToken,
+    required String organizationId,
+    required String sessionId,
+  }) async => lessonLifecycle.add('server:$sessionId');
+
+  @override
+  Future<OciServeExamSessionList> examSessions({
+    required String accessToken,
+    required String organizationId,
+  }) async => OciServeExamSessionList(
+    sessions: const [],
+    serverTime: DateTime.utc(2026, 9, 12),
+  );
+
+  @override
+  Future<OciServeExamAttempt> startExamAttempt({
+    required String accessToken,
+    required String organizationId,
+    required String sessionId,
+    required String idempotencyKey,
+  }) => throw UnimplementedError();
+
+  @override
+  Future<OciServeCurrentExamItem?> currentExamItem({
+    required String accessToken,
+    required String organizationId,
+    required String attemptId,
+  }) => throw UnimplementedError();
+
+  @override
+  Future<OciServeAcceptedExamAnswer> answerExamItem({
+    required String accessToken,
+    required OciServeExamAnswerMutation mutation,
+  }) => throw UnimplementedError();
+
+  @override
+  Future<OciServeExamAttempt> submitExamAttempt({
+    required String accessToken,
+    required String organizationId,
+    required String attemptId,
+    required String idempotencyKey,
+  }) => throw UnimplementedError();
 
   @override
   Future<OciServeLearningState> learningState({
@@ -258,8 +322,10 @@ LearningSessionRef _session({
   enrollmentId: 'enrollment',
   courseVersionId: 'v1',
   lessonId: 'l1',
+  playbackSessionId: 'lesson-session',
   packageHash: 'hash',
   startedAt: DateTime.utc(2026, 9, 6),
+  expiresAt: DateTime.utc(2026, 9, 6, 1),
 );
 
 const _report = PlaybackReport(
@@ -610,6 +676,45 @@ void main() {
     expect(await login, isFalse);
     expect(container.read(ociServeProvider).authenticated, isFalse);
   });
+
+  test(
+    'logout deletes lesson tabs before closing their server sessions',
+    () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      await notifier.login();
+      notifier.closeLearningTabsLocally = () {
+        api.lessonLifecycle.add('local');
+        return [_session()];
+      };
+
+      await notifier.logout();
+
+      expect(api.lessonLifecycle, ['local', 'server:lesson-session']);
+      expect(container.read(ociServeProvider).authenticated, isFalse);
+    },
+  );
+
+  test(
+    'disabling OciServe closes lessons before account state is cleared',
+    () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      await notifier.login();
+      notifier.closeLearningTabsLocally = () {
+        api.lessonLifecycle.add('local');
+        return [_session()];
+      };
+
+      await notifier.setEnabled(false);
+
+      expect(api.lessonLifecycle, ['local', 'server:lesson-session']);
+    },
+  );
 
   test('server changes never silently discard pending playback', () async {
     final container = _container(api, secrets);

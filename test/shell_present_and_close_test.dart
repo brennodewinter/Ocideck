@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:archive/archive.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +22,7 @@ import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/temp_dir.dart';
+import 'support/ociserve_aes_fixture.dart';
 
 /// Twee gedeelde handelingen uit `lib/widgets/shell/shell_actions.dart` die
 /// allebei op nul uitgevoerde regels stonden: `presentDeck` (de knop, het
@@ -384,9 +384,7 @@ void main() {
               ],
             ),
           );
-      final archive = Archive()
-        ..add(ArchiveFile.bytes('deck.md', utf8.encode(markdown)));
-      final package = Uint8List.fromList(ZipEncoder().encodeBytes(archive));
+      final package = ociServeAesPackage({'deck.md': utf8.encode(markdown)});
       final session = LearningSessionRef(
         serverUrl: 'https://leren.example',
         accountId: 'account',
@@ -394,18 +392,21 @@ void main() {
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 6),
+        expiresAt: DateTime.utc(2099),
       );
 
-      final result = await container
-          .read(tabsProvider.notifier)
-          .openLearningPackage(
-            package,
-            'les.ocideck',
-            session,
-            initialAnchor: 'verder',
-          );
+      final result = await openLearningPackage(
+        container.read(tabsProvider.notifier),
+        package,
+        'les.ocideck',
+        session,
+        password: testOciServePackagePassword,
+        packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+        initialAnchor: 'verder',
+      );
       expect(result, OpenResult.opened);
       await tester.pumpAndSettle();
 

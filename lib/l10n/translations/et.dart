@@ -1620,6 +1620,26 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Mijn examens': 'Minu eksamid',
+  'Alle vragen zijn beantwoord.': 'Kõik küsimused on vastatud.',
+  'Examen inleveren': 'Esitage eksam',
+  'Uw examen is ingeleverd.': 'Teie eksam on esitatud.',
+  'De examenhandeling is niet gelukt.': 'Eksamiprotseduur ei olnud edukas.',
+  'Menselijk toezicht bij examens': 'Inimjärelevalve eksamite üle',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck ei määra, kes on klaviatuuri taga. Seetõttu korraldage eksami ajal inimese järelevalve.',
+  'Er zijn geen examens beschikbaar.': 'Saadaval pole ühtegi eksamit.',
+  'Examen': 'Eksam',
+  'Start examen': 'Alusta eksamit',
+  'Nog niet vrijgegeven': 'Pole veel välja antud',
+  'Gesloten': 'Suletud',
+  'Examen inleveren?': 'Kas esitada eksam?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Pärast esitamist ei saa te oma vastuseid muuta.',
+  'Definitief inleveren': 'Lõplik esitamine',
+  'Vraag {nummer}': 'Küsimus {number}',
+  'Uw antwoord': 'Sinu vastus',
+  'Antwoord indienen': 'Esitage vastus',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Te ei jaga sellest portfellist enam mandaate. ',
   'U hebt nog geen badges.': 'Teil ei ole veel märke.',

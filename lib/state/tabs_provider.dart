@@ -48,6 +48,7 @@ import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
+import '../utils/zip_encryption.dart';
 import 'deck_provider.dart';
 import 'document_provider.dart';
 import 'editor_provider.dart';
@@ -68,6 +69,7 @@ part 'tabs_provider_git_native.dart';
 part 'tabs_provider_git_review.dart';
 part 'tabs_provider_recovery.dart';
 part 'tabs_provider_new_document.dart';
+part 'tabs_provider_learning.dart';
 
 const _uuid = Uuid();
 
@@ -185,6 +187,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   @override
   void dispose() {
     _autosaveTimer?.cancel();
+    _cancelAllLearningExpiry(this);
     for (final sub in _subs.values) {
       sub.cancel();
     }
@@ -617,20 +620,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
   }
 
-  /// Opent een onveranderlijke OciServe-les in een afspeeltabblad.
-  Future<OpenResult> openLearningPackage(
-    Uint8List bytes,
-    String name,
-    LearningSessionRef learningSession, {
-    String? initialAnchor,
-  }) => _openLearningPackage(
-    this,
-    bytes,
-    name,
-    learningSession,
-    initialAnchor: initialAnchor,
-  );
-
   /// A just-opened deck carrying Informatieveiligheid slide types is worth a
   /// one-time "enable the module" nudge. Signalled here — the single chokepoint
   /// every real open funnels through — so it fires exactly once per open; an
@@ -773,8 +762,11 @@ void _selectTab(TabsNotifier notifier, int index) {
 
 void _closeTab(TabsNotifier notifier, int index) {
   final current = notifier.currentState;
+  final session = current.tabs[index].learningSession;
+  _cancelLearningExpiry(notifier, session);
   if (current.tabs.length == 1) {
     final tab = current.tabs.first;
+    tab.learningSession = null;
     notifier._recovery.discard(tab.recoveryId);
     // Het enige overblijvende tabblad wordt gereset (niet verwijderd), zodat de
     // app altijd één tabblad houdt. Een presentatie reset via closeDeck(); een
@@ -788,6 +780,8 @@ void _closeTab(TabsNotifier notifier, int index) {
     }
     notifier.refreshTabs();
     notifier.sweepWebAssets();
+    final closer = _learningSessionClosers[notifier];
+    if (session != null && closer != null) unawaited(closer(session));
     return;
   }
   final tab = current.tabs[index];
@@ -800,6 +794,8 @@ void _closeTab(TabsNotifier notifier, int index) {
     selectedIndex: newSelected,
   );
   notifier.sweepWebAssets();
+  final closer = _learningSessionClosers[notifier];
+  if (session != null && closer != null) unawaited(closer(session));
 }
 
 // ── Provider ──────────────────────────────────────────────────────────────────

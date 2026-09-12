@@ -5,9 +5,11 @@ import 'package:crypto/crypto.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/ociserve_evidence.dart';
+import '../../models/ociserve_exam.dart';
 import '../../models/ociserve_models.dart';
 import '../../models/ociserve_settings.dart';
 import '../../utils/log.dart';
+import '../../utils/zip_encryption.dart';
 import 'ociserve_http.dart';
 import 'ociserve_http_factory.dart';
 
@@ -22,11 +24,46 @@ abstract class OciServeApi {
     required String accessToken,
     required String organizationId,
   });
-  Future<OciServePackage> lessonPackage({
+  Future<OciServeLessonSessionGrant> startLessonSession({
     required String accessToken,
     required String organizationId,
     required String versionId,
     required String lessonId,
+  });
+  Future<OciServePackage> lessonSessionPackage({
+    required String accessToken,
+    required String organizationId,
+    required OciServeLessonSessionGrant grant,
+  });
+  Future<void> closeLessonSession({
+    required String accessToken,
+    required String organizationId,
+    required String sessionId,
+  });
+  Future<OciServeExamSessionList> examSessions({
+    required String accessToken,
+    required String organizationId,
+  });
+  Future<OciServeExamAttempt> startExamAttempt({
+    required String accessToken,
+    required String organizationId,
+    required String sessionId,
+    required String idempotencyKey,
+  });
+  Future<OciServeCurrentExamItem?> currentExamItem({
+    required String accessToken,
+    required String organizationId,
+    required String attemptId,
+  });
+  Future<OciServeAcceptedExamAnswer> answerExamItem({
+    required String accessToken,
+    required OciServeExamAnswerMutation mutation,
+  });
+  Future<OciServeExamAttempt> submitExamAttempt({
+    required String accessToken,
+    required String organizationId,
+    required String attemptId,
+    required String idempotencyKey,
   });
   Future<Uint8List> courseImage({
     required String accessToken,
@@ -298,14 +335,14 @@ class OciServeGateway implements OciServeApi {
   }
 
   @override
-  Future<OciServePackage> lessonPackage({
+  Future<OciServeLessonSessionGrant> startLessonSession({
     required String accessToken,
     required String organizationId,
     required String versionId,
     required String lessonId,
   }) async {
     final response = await _send(
-      method: 'GET',
+      method: 'POST',
       url: _api([
         'organizations',
         organizationId,
@@ -314,27 +351,257 @@ class OciServeGateway implements OciServeApi {
         versionId,
         'lessons',
         lessonId,
-        'package',
+        'playback-sessions',
       ]),
+      accessToken: accessToken,
+      headers: {'idempotency-key': _uuid.v4()},
+      body: const [],
+    );
+    try {
+      if (response.statusCode != 201) throw const FormatException();
+      final grant = OciServeLessonSessionGrant.fromJson(_jsonObject(response));
+      if (grant.packageProfile != ociServeAesPackageProfile ||
+          grant.expiresAt.isBefore(DateTime.now().toUtc())) {
+        throw const FormatException('unsupported or expired package grant');
+      }
+      final expected = _lessonSessionPackageUri(organizationId, grant.id);
+      final advertised = grant.packageUrl.isAbsolute
+          ? grant.packageUrl
+          : Uri.parse(settings.normalizedBaseUrl).resolveUri(grant.packageUrl);
+      if (advertised != expected) {
+        throw const FormatException('unexpected lesson package URL');
+      }
+      return grant;
+    } catch (error, stack) {
+      logError('OciServe: lessessieantwoord lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  Uri _lessonSessionPackageUri(String organizationId, String sessionId) =>
+      _api([
+        'organizations',
+        organizationId,
+        'me',
+        'lesson-playback-sessions',
+        sessionId,
+        'package',
+      ]);
+
+  @override
+  Future<OciServePackage> lessonSessionPackage({
+    required String accessToken,
+    required String organizationId,
+    required OciServeLessonSessionGrant grant,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _lessonSessionPackageUri(organizationId, grant.id),
       accessToken: accessToken,
       headers: const {'accept': 'application/octet-stream'},
       cap: _packageCap,
     );
-    final policy = response.headers['x-ociserve-playback-policy']?.trim() ?? '';
-    if (policy != 'play-only') {
+    final profile =
+        response.headers['x-ociserve-package-profile']?.trim() ?? '';
+    final cacheControl = response.headers['cache-control']?.toLowerCase() ?? '';
+    if (profile != grant.packageProfile ||
+        !cacheControl
+            .split(',')
+            .map((part) => part.trim())
+            .contains('no-store')) {
       throw const OciServeException('package_policy_refused');
     }
     final actual = sha256.convert(response.body);
-    final expected = _digestBytes(response.headers['digest']);
-    if (expected == null || !_constantTimeEquals(actual.bytes, expected)) {
+    final headerDigest = _digestBytes(response.headers['digest']);
+    final grantDigest = _hexBytes(grant.digestSha256);
+    if (headerDigest == null ||
+        grantDigest == null ||
+        !_constantTimeEquals(actual.bytes, headerDigest) ||
+        !_constantTimeEquals(actual.bytes, grantDigest)) {
       throw const OciServeException('package_digest_mismatch');
     }
+    final bytes = Uint8List.fromList(response.body);
+    if (!hasExactOciServeAesPackageProfile(bytes, profile: profile)) {
+      throw const OciServeException('package_profile_refused');
+    }
     return OciServePackage(
-      bytes: Uint8List.fromList(response.body),
+      bytes: bytes,
       sha256: actual.toString(),
-      playbackPolicy: policy,
+      playbackPolicy: 'play-only',
+      packageProfile: profile,
       etag: response.headers['etag'],
     );
+  }
+
+  @override
+  Future<void> closeLessonSession({
+    required String accessToken,
+    required String organizationId,
+    required String sessionId,
+  }) async {
+    final response = await _send(
+      method: 'POST',
+      url: _api([
+        'organizations',
+        organizationId,
+        'me',
+        'lesson-playback-sessions',
+        sessionId,
+        'close',
+      ]),
+      accessToken: accessToken,
+      headers: {'idempotency-key': _uuid.v4()},
+      body: const [],
+    );
+    if (response.statusCode != 204 || response.body.isNotEmpty) {
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  bool _isNoStore(OciServeHttpResponse response) =>
+      response.headers['cache-control']
+          ?.toLowerCase()
+          .split(',')
+          .map((part) => part.trim())
+          .contains('no-store') ??
+      false;
+
+  Map<String, Object?> _examJson(OciServeHttpResponse response) {
+    if (!_isNoStore(response)) {
+      throw const OciServeException('exam_cache_policy_refused');
+    }
+    return _jsonObject(response);
+  }
+
+  @override
+  Future<OciServeExamSessionList> examSessions({
+    required String accessToken,
+    required String organizationId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api(['organizations', organizationId, 'me', 'exam-sessions']),
+      accessToken: accessToken,
+    );
+    try {
+      return OciServeExamSessionList.fromJson(_examJson(response));
+    } catch (error, stack) {
+      if (error is OciServeException) rethrow;
+      logError('OciServe: examenlijst lezen', error.runtimeType, stack);
+      throw const OciServeException('invalid_response');
+    }
+  }
+
+  @override
+  Future<OciServeExamAttempt> startExamAttempt({
+    required String accessToken,
+    required String organizationId,
+    required String sessionId,
+    required String idempotencyKey,
+  }) async {
+    final response = await _send(
+      method: 'POST',
+      url: _api([
+        'organizations',
+        organizationId,
+        'me',
+        'exam-sessions',
+        sessionId,
+        'attempts',
+      ]),
+      accessToken: accessToken,
+      headers: {'idempotency-key': idempotencyKey},
+      body: const [],
+    );
+    if (response.statusCode != 201) {
+      throw const OciServeException('invalid_response');
+    }
+    return OciServeExamAttempt.fromJson(_examJson(response));
+  }
+
+  @override
+  Future<OciServeCurrentExamItem?> currentExamItem({
+    required String accessToken,
+    required String organizationId,
+    required String attemptId,
+  }) async {
+    final response = await _send(
+      method: 'GET',
+      url: _api([
+        'organizations',
+        organizationId,
+        'me',
+        'attempts',
+        attemptId,
+        'items',
+        'current',
+      ]),
+      accessToken: accessToken,
+    );
+    if (response.statusCode == 204) {
+      if (response.body.isNotEmpty || !_isNoStore(response)) {
+        throw const OciServeException('invalid_response');
+      }
+      return null;
+    }
+    return OciServeCurrentExamItem.fromJson(_examJson(response));
+  }
+
+  @override
+  Future<OciServeAcceptedExamAnswer> answerExamItem({
+    required String accessToken,
+    required OciServeExamAnswerMutation mutation,
+  }) async {
+    final response = await _send(
+      method: 'PUT',
+      url: _api([
+        'organizations',
+        mutation.organizationId,
+        'me',
+        'attempts',
+        mutation.attemptId,
+        'items',
+        mutation.attemptItemId,
+        'answer',
+      ]),
+      accessToken: accessToken,
+      headers: {
+        'content-type': 'application/json',
+        'idempotency-key': mutation.idempotencyKey,
+      },
+      body: utf8.encode(
+        jsonEncode({
+          'answer_data': mutation.answerData,
+          'challenge': mutation.challenge,
+          'revision': mutation.revision,
+        }),
+      ),
+    );
+    return OciServeAcceptedExamAnswer.fromJson(_examJson(response));
+  }
+
+  @override
+  Future<OciServeExamAttempt> submitExamAttempt({
+    required String accessToken,
+    required String organizationId,
+    required String attemptId,
+    required String idempotencyKey,
+  }) async {
+    final response = await _send(
+      method: 'POST',
+      url: _api([
+        'organizations',
+        organizationId,
+        'me',
+        'attempts',
+        attemptId,
+        'submit',
+      ]),
+      accessToken: accessToken,
+      headers: {'idempotency-key': idempotencyKey},
+      body: const [],
+    );
+    return OciServeExamAttempt.fromJson(_examJson(response));
   }
 
   @override
@@ -673,6 +940,14 @@ class OciServeGateway implements OciServeApi {
       logError('OciServe: Digest lezen', error.runtimeType, stack);
       return null;
     }
+  }
+
+  static List<int>? _hexBytes(String value) {
+    if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(value)) return null;
+    return [
+      for (var i = 0; i < value.length; i += 2)
+        int.parse(value.substring(i, i + 2), radix: 16),
+    ];
   }
 
   static bool _constantTimeEquals(List<int> left, List<int> right) {

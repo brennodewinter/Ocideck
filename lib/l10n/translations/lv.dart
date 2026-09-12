@@ -1625,6 +1625,26 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Mijn examens': 'Mani eksāmeni',
+  'Alle vragen zijn beantwoord.': 'Uz visiem jautājumiem ir atbildēts.',
+  'Examen inleveren': 'Iesniedz eksāmenu',
+  'Uw examen is ingeleverd.': 'Jūsu eksāmens ir iesniegts.',
+  'De examenhandeling is niet gelukt.': 'Eksāmena procedūra nebija veiksmīga.',
+  'Menselijk toezicht bij examens': 'Eksāmenu cilvēka uzraudzība',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck nenosaka, kurš atrodas aiz tastatūras. Tāpēc eksāmena laikā organizējiet cilvēka uzraudzību.',
+  'Er zijn geen examens beschikbaar.': 'Nav pieejami eksāmeni.',
+  'Examen': 'Eksāmens',
+  'Start examen': 'Sāciet eksāmenu',
+  'Nog niet vrijgegeven': 'Vēl nav izlaists',
+  'Gesloten': 'Slēgts',
+  'Examen inleveren?': 'Vai iesniegt eksāmenu?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Pēc iesniegšanas jūs nevarat mainīt savas atbildes.',
+  'Definitief inleveren': 'Galīgā iesniegšana',
+  'Vraag {nummer}': 'Jautājums {number}',
+  'Uw antwoord': 'Jūsu atbilde',
+  'Antwoord indienen': 'Iesniegt atbildi',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Jūs vairs nekopīgosiet apliecinājumus no šī digitālā maka. ',
   'U hebt nog geen badges.': 'Jums vēl nav nozīmīšu.',

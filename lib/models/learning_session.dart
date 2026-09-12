@@ -14,8 +14,10 @@ class LearningSessionRef {
     required this.enrollmentId,
     required this.courseVersionId,
     required this.lessonId,
+    required this.playbackSessionId,
     required this.packageHash,
     required this.startedAt,
+    required this.expiresAt,
   });
 
   final String serverUrl;
@@ -24,6 +26,8 @@ class LearningSessionRef {
   final String enrollmentId;
   final String courseVersionId;
   final String lessonId;
+  final String playbackSessionId;
   final String packageHash;
   final DateTime startedAt;
+  final DateTime expiresAt;
 }

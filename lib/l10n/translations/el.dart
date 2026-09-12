@@ -1652,6 +1652,27 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Mijn examens': 'οι εξετάσεις μου',
+  'Alle vragen zijn beantwoord.': 'Όλες οι ερωτήσεις έχουν απαντηθεί.',
+  'Examen inleveren': 'Υποβολή εξέτασης',
+  'Uw examen is ingeleverd.': 'Η εξέταση σας έχει υποβληθεί.',
+  'De examenhandeling is niet gelukt.':
+      'Η διαδικασία εξέτασης δεν ήταν επιτυχής.',
+  'Menselijk toezicht bij examens': 'Ανθρώπινη εποπτεία των εξετάσεων',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'Το OciDeck δεν καθορίζει ποιος βρίσκεται πίσω από το πληκτρολόγιο. Επομένως, οργανώστε την ανθρώπινη επίβλεψη κατά τη διάρκεια της εξέτασης.',
+  'Er zijn geen examens beschikbaar.': 'Δεν υπάρχουν διαθέσιμες εξετάσεις.',
+  'Examen': 'Εξεταστική',
+  'Start examen': 'Έναρξη εξέτασης',
+  'Nog niet vrijgegeven': 'Δεν έχει κυκλοφορήσει ακόμη',
+  'Gesloten': 'Κλειστό',
+  'Examen inleveren?': 'Υποβολή εξετάσεων;',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Μετά την υποβολή, δεν μπορείτε να αλλάξετε τις απαντήσεις σας.',
+  'Definitief inleveren': 'Τελική υποβολή',
+  'Vraag {nummer}': 'Ερώτηση {αριθμός}',
+  'Uw antwoord': 'Η απάντησή σας',
+  'Antwoord indienen': 'Υποβολή απάντησης',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Τότε δεν κοινοποιείτε πλέον διαπιστευτήρια από αυτό το χαρτοφυλάκιο. ',
   'U hebt nog geen badges.': 'Δεν έχετε ακόμη σήματα.',

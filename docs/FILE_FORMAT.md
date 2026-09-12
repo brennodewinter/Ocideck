@@ -3061,6 +3061,17 @@ When exporting a package you may protect it with a password. Encryption is
   wrap the package in a container with a modern KDF and hidden names (age, GPG,
   or 7-Zip `-mhe=on`).
 
+### 7.2 Temporary OciServe lesson profile
+
+An OciServe lesson is not the portable author exchange profile above. Each open
+creates a fresh server session and package using the protocol identifier
+`ocideck-winzip-aes256-ae2-v1`: WinZip AES-256 AE-2, every member encrypted,
+vendor ID `AE`, strength 3 and method 99 in matching local and central headers.
+OciDeck accepts no plaintext or mixed-member fallback for this route. The random
+ASCII password is returned only by the session-opening response, used to decode
+the verified package in memory and then forgotten. The portable export remains
+AE-1 for interoperability with the existing author workflow.
+
 ---
 
 ## 8. Special Per-Slide Comments (Overview)

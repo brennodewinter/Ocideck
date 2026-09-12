@@ -667,6 +667,27 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Mijn examens': 'Mes examens',
+  'Alle vragen zijn beantwoord.': 'Toutes les questions ont reçu une réponse.',
+  'Examen inleveren': 'Soumettre l\'examen',
+  'Uw examen is ingeleverd.': 'Votre examen a été soumis.',
+  'De examenhandeling is niet gelukt.':
+      'La procédure d\'examen n\'a pas abouti.',
+  'Menselijk toezicht bij examens': 'Supervision humaine des examens',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck ne détermine pas qui se trouve derrière le clavier. Organisez donc un encadrement humain pendant l’examen.',
+  'Er zijn geen examens beschikbaar.': 'Il n\'y a pas d\'examens disponibles.',
+  'Examen': 'Examen',
+  'Start examen': 'Commencer l\'examen',
+  'Nog niet vrijgegeven': 'Pas encore sorti',
+  'Gesloten': 'Fermé',
+  'Examen inleveren?': 'Soumettre un examen ?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Une fois soumis, vous ne pouvez pas modifier vos réponses.',
+  'Definitief inleveren': 'Soumission finale',
+  'Vraag {nummer}': 'Question {numéro}',
+  'Uw antwoord': 'Votre réponse',
+  'Antwoord indienen': 'Soumettre la réponse',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Vous ne partagerez alors plus d’identifiants depuis ce portefeuille. ',
   'U hebt nog geen badges.': 'Vous n’avez pas encore de badges.',

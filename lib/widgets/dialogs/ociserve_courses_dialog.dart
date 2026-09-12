@@ -2,7 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../models/learning_session.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_models.dart';
 import '../../state/ociserve_provider.dart';
@@ -15,6 +14,7 @@ import 'ociserve_course_summary.dart';
 import 'ociserve_courses_sidebar.dart';
 import 'ociserve_data_access.dart';
 import 'ociserve_evidence.dart';
+import 'ociserve_exam_button.dart';
 import 'ociserve_learning_profile.dart';
 
 part 'parts/ociserve_courses_dialog_privacy.dart';
@@ -262,6 +262,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
             const SizedBox(width: 16),
             SizedBox(width: 210, child: _organizationPicker(memberships)),
           ],
+          ...ociServeExamActions(_organizationId, compact),
           IconButton(
             tooltip: l10n.t('close'),
             onPressed: () => Navigator.pop(context),
@@ -923,35 +924,33 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
       _error = null;
     });
     try {
-      final package = await ref
+      final opened = await ref
           .read(ociServeProvider.notifier)
-          .lessonPackage(organizationId: org, lesson: lesson);
-      // De gebruiker kan de dialoog sluiten terwijl de download nog loopt.
-      // Open daarna niet alsnog buiten diens zicht een nieuw cursustabblad.
-      if (!mounted) return;
-      final result = await ref
-          .read(tabsProvider.notifier)
-          .openLearningPackage(
-            package.bytes,
-            '${lesson.title}.ocideck',
-            LearningSessionRef(
-              serverUrl: ref.read(ociServeProvider).settings.normalizedBaseUrl,
-              accountId: ref.read(ociServeProvider).account!.id,
-              organizationId: org,
-              enrollmentId: lesson.enrollmentId,
-              courseVersionId: lesson.versionId,
-              lessonId: lesson.lessonId,
-              packageHash: package.sha256,
-              startedAt: DateTime.now().toUtc(),
-            ),
-            // Een afgeronde les opnieuw starten betekent echt opnieuw: het
-            // laatst bewaarde anker is dan doorgaans juist de einddia.
-            initialAnchor: _stateFor(lesson)?.completed == true
-                ? null
-                : _stateFor(lesson)?.lastSlideAnchor,
+          .openLessonPackage(
+            organizationId: org,
+            lesson: lesson,
+            open: (bytes, password, packageProfile, session) async {
+              // De gebruiker kan de dialoog sluiten terwijl de download loopt.
+              // Open daarna niet alsnog buiten diens zicht een nieuw tabblad.
+              if (!mounted) return false;
+              final result = await openLearningPackage(
+                ref.read(tabsProvider.notifier),
+                bytes,
+                '${lesson.title}.ocideck',
+                session,
+                password: password,
+                packageProfile: packageProfile,
+                // Een afgeronde les opnieuw starten betekent echt opnieuw:
+                // het laatst bewaarde anker is dan juist de einddia.
+                initialAnchor: _stateFor(lesson)?.completed == true
+                    ? null
+                    : _stateFor(lesson)?.lastSlideAnchor,
+              );
+              return result == OpenResult.opened;
+            },
           );
       if (!mounted) return;
-      if (result == OpenResult.opened) {
+      if (opened) {
         Navigator.pop(context);
       } else {
         setState(() {

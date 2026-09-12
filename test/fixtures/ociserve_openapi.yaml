@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: OciServe API
   version: 0.1.0
-  x-capability-catalog-version: 8
+  x-capability-catalog-version: 9
   x-tenant-capabilities:
     - org:admin
     - org:delete
@@ -26,6 +26,10 @@ info:
     - training_session:manage
     - attendance:record
     - badges:manage
+    - exam_session:view
+    - exam_session:release
+    - exam_session:monitor
+    - exam_attempt:intervene
   description: |
     OciServe is a privacy-first learning and assessment platform.
     This is the initial API contract covering health endpoints and the
@@ -359,8 +363,8 @@ paths:
   /api/v1/organizations/{org_id}/me/course-versions/{version_id}/lessons/{lesson_id}/package:
     get:
       tags: [Learning]
-      summary: Download an immutable play-only OciDeck lesson
-      description: Requires an active or completed enrollment resolved from the bearer account. The embedded play-only flag is a client playback policy and does not provide DRM or prevent extracting ZIP content.
+      summary: Legacy plaintext package route (disabled)
+      description: Always returns 426. Clients must create a secure playback session; no plaintext fallback exists.
       parameters:
         - name: org_id
           in: path
@@ -379,18 +383,7 @@ paths:
           required: false
           schema: { type: string }
       responses:
-        "200":
-          description: ZIP-formatted `.ocideck` package containing `deck.md`, the optional immutable `theme.json`, and available private assets.
-          headers:
-            ETag: { schema: { type: string } }
-            Digest: { schema: { type: string }, description: Base64-encoded sha-256 representation digest. }
-            X-OciServe-Playback-Policy: { schema: { type: string, const: play-only } }
-            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
-          content:
-            application/vnd.ocisuite.ocideck+zip:
-              schema: { type: string, format: binary }
-        "304": { description: The immutable package matches If-None-Match. }
-        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "426": { $ref: '#/components/responses/ProblemResponse' }
 
   /api/v1/organizations/{org_id}/me/course-versions/{version_id}/lessons/{lesson_id}/opened:
     post:
@@ -3678,6 +3671,1069 @@ paths:
         "404":
           $ref: '#/components/responses/ProblemResponse'
 
+  /api/v1/organizations/{organization_id}/evidence-types:
+    get:
+      tags: [Evidence]
+      summary: List evidence types
+      description: |
+        Returns the bewijssoorten in the organization. The actor must hold
+        `content:view`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A list of evidence types.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceTypeList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+    post:
+      tags: [Evidence]
+      summary: Create an evidence type
+      description: |
+        Creates a new bewijssoort in `draft` status. The actor must hold
+        `content:create`. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceTypeCreateRequest'
+      responses:
+        "201":
+          description: Evidence type created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceTypeResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/evidence-types/{evidence_type_id}:
+    get:
+      tags: [Evidence]
+      summary: Evidence type detail
+      description: Returns a single bewijssoort. The actor must hold `content:view`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The evidence type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceTypeResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/evidence-types/{evidence_type_id}/draft:
+    get:
+      tags: [Evidence]
+      summary: Get the evidence type draft
+      description: |
+        Returns the editable draft definition with a strong ETag. The actor
+        must hold `content:view`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-None-Match
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The draft definition.
+          headers:
+            ETag:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceTypeDraftResponse'
+        "304":
+          description: Not modified.
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+    put:
+      tags: [Evidence]
+      summary: Save the evidence type draft
+      description: |
+        Replaces the draft definition. The actor must hold `content:create`.
+        `If-Match` with the current ETag, or `*` for any current representation,
+        is required; a mismatch returns 412.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [definition]
+              properties:
+                definition:
+                  $ref: '#/components/schemas/EvidenceTypeDefinition'
+      responses:
+        "200":
+          description: Draft saved.
+          headers:
+            ETag:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceTypeDraftResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "412":
+          description: ETag mismatch.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+
+  /api/v1/organizations/{organization_id}/evidence-types/{evidence_type_id}/publish:
+    post:
+      tags: [Evidence]
+      summary: Publish an evidence type version
+      description: |
+        Freezes the current draft into an immutable, published version. The
+        actor must hold `author:publish` and step-up authentication. An
+        `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Version published.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceTypeVersionResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/evidence-types/{evidence_type_id}/versions:
+    get:
+      tags: [Evidence]
+      summary: List evidence type versions
+      description: |
+        Returns all published versions of a bewijssoort. The actor must hold
+        `content:view`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A list of published versions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceTypeVersionList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items:
+    get:
+      tags: [Evidence]
+      summary: List evidence items
+      description: |
+        Returns the bewijsstukken of a participant. The actor must hold
+        `content:view`; a participant may read their own dossier.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A list of evidence items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+    post:
+      tags: [Evidence]
+      summary: Create an evidence item
+      description: |
+        Creates a new bewijsstuk in the content status `ingediend`. The actor
+        must hold `content:create`, or be the participant themselves submitting
+        to their own dossier (S4). An `Idempotency-Key` is required. The
+        evidence type must have a published version.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceItemCreateRequest'
+      responses:
+        "201":
+          description: Evidence item created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items/{evidence_item_id}:
+    get:
+      tags: [Evidence]
+      summary: Evidence item detail
+      description: |
+        Returns a single bewijsstuk. The actor must hold `content:view`; a
+        participant may read their own dossier.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The evidence item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items/{evidence_item_id}/withdraw:
+    post:
+      tags: [Evidence]
+      summary: Withdraw an evidence item
+      description: |
+        Withdraws an `ingediend` or `in_behandeling` bewijsstuk. Only the
+        participant themselves may withdraw. An `Idempotency-Key` is required.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Evidence item withdrawn.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items/{evidence_item_id}/events:
+    get:
+      tags: [Evidence]
+      summary: List evidence item events
+      description: |
+        Returns the append-only event log of a bewijsstuk. The actor must
+        hold `content:view`; a participant may read their own dossier.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The event log.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceEventList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/evidence-queue:
+    get:
+      tags: [Evidence]
+      summary: List evidence review queue
+      description: |
+        Returns bewijsstukken awaiting content review (status `ingediend`).
+        The actor must hold `assess:review`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The review queue.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items/{evidence_item_id}/review:
+    post:
+      tags: [Evidence]
+      summary: Review an evidence item
+      description: |
+        Records a content review decision on a bewijsstuk. The actor must hold
+        `assess:review` and step-up authentication. An `Idempotency-Key` is
+        required. The object_hash guards against substitution after
+        submission: a mismatch returns 409.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceItemReviewRequest'
+      responses:
+        "200":
+          description: Review recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/evidence-expiring:
+    get:
+      tags: [Evidence]
+      summary: List evidence expiring within a window
+      description: |
+        Returns geaccepteerde bewijsstukken waarvan de vastgestelde geldigheid
+        binnen `within_days` dagen afloopt. The actor must hold `content:create`
+        or `assess:review`.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: within_days
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 365
+            default: 90
+      responses:
+        "200":
+          description: The expiring evidence items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceExpiringList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items/{evidence_item_id}/source-check:
+    post:
+      tags: [Evidence]
+      summary: Record a manual source register check
+      description: |
+        Legt een handmatige bronregistercontrole vast (niveau 4, S7). De
+        beoordelaar heeft in het register van de uitgevende instantie gekeken
+        en bevestigt dat het bewijsstuk daar klopt. Vastgelegd worden:
+        register, methode, referentie, tijdstip, actor — niet de inhoud van
+        het register (EVIDENCE.md §6.1). Het zekerheidsniveau gaat naar
+        `bron_gecontroleerd`. Step-up en `Idempotency-Key` vereist.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceSourceCheckRequest'
+      responses:
+        "200":
+          description: Source check recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items/{evidence_item_id}/verify-credential:
+    post:
+      tags: [Evidence]
+      summary: Verify a signed credential (automatic level 4)
+      description: |
+        Voert de verificatieketen uit op een JWS-ondertekende credential
+        (S8, #523). De keten doorloopt vorm, handtekening, uitgever vertrouwd
+        en niet ingetrokken. Bij succes wordt het bewijsstuk automatisch op
+        niveau 4 (bron_gecontroleerd) gezet. Bij falen gaat het naar de
+        wachtrij — automatisch afwijzen gebeurt nooit (EVIDENCE.md §6.2).
+        Houderbinding (stap 5) is S10. Idempotency-Key vereist.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceVerifyCredentialRequest'
+      responses:
+        "200":
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialVerificationResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/trusted-issuers:
+    get:
+      tags: [Evidence]
+      summary: List trusted credential issuers
+      description: Returns the trust list of credential issuers. Requires assess:review.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The trusted issuers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustedIssuerList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+    post:
+      tags: [Evidence]
+      summary: Add a trusted credential issuer
+      description: Adds an issuer to the trust list. Requires assess:review.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTrustedIssuerRequest'
+      responses:
+        "201":
+          description: Issuer added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustedIssuerResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/trusted-issuers/{issuer_id}:
+    delete:
+      tags: [Evidence]
+      summary: Remove a trusted credential issuer
+      description: Removes an issuer from the trust list. Requires assess:review.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: issuer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Issuer removed.
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/portfolio-imports:
+    post:
+      tags: [Evidence]
+      summary: Import a portfolio (step 1, fetch)
+      description: |
+        Accepteert een lijst gevonden credentials en landt ze in een
+        tijdelijke import-sessie (S9, #524). Ophalen en delen zijn twee
+        stappen: het ophalen landt in het eigen beeld van de deelnemer.
+        Daarna kiest de deelnemer wat bewijsstuk wordt. Idempotency-Key
+        vereist.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortfolioImportCreateRequest'
+      responses:
+        "201":
+          description: Import session created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioImportCreateResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/portfolio-imports/{import_id}:
+    get:
+      tags: [Evidence]
+      summary: Get a portfolio import session
+      description: Returns the found items in an import session.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: import_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The import session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioImportResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/portfolio-imports/{import_id}/select:
+    post:
+      tags: [Evidence]
+      summary: Select items from a portfolio import (step 2, share)
+      description: |
+        De deelnemer kiest welke gevonden items bewijsstuk worden in het
+        dossier. Niet-gekozen items blijven ongedeeld en blijven van hem.
+        Idempotency-Key vereist.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: import_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortfolioImportSelectRequest'
+      responses:
+        "200":
+          description: Items selected and evidence items created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioImportSelectResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/evidence-items/{evidence_item_id}/holder-binding:
+    post:
+      tags: [Evidence]
+      summary: Verify holder binding (level 5)
+      description: |
+        Verifieert de houderbinding (S10, #525): de presentatie beantwoordt
+        een nonce die aan deze sessie en deze deelnemer is gebonden, en het
+        subject van de credential valt samen met de vastgestelde identiteit
+        (EVIDENCE.md §6.2, stap 5). Het zekerheidsniveau gaat naar
+        `bron_en_houder` (niveau 5). Step-up en Idempotency-Key vereist.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: evidence_item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceHolderBindingRequest'
+      responses:
+        "200":
+          description: Holder binding verified.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceItemResponse'
+        "400":
+          $ref: '#/components/responses/ProblemResponse'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+        "409":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/participants/{participant_id}/skills/{skill_id}/badge-readiness:
+    get:
+      tags: [Skill]
+      summary: Badge readiness read model
+      description: |
+        Het leesmodel voor een badge (S14, #529): wat een deelnemer nog nodig
+        heeft. Per eis staat of die al is voldaan, en of de badge klaar staat.
+        Een deelnemer mag zijn eigen leesmodel zien; anders content:view.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: participant_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: skill_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The badge readiness.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadgeReadiness'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+        "404":
+          $ref: '#/components/responses/ProblemResponse'
+
+  /api/v1/organizations/{organization_id}/skills/{skill_id}/qualifications:
+    get:
+      tags: [Skill]
+      summary: List qualifications for a skill
+      description: |
+        Lijst van kwalificaties per vaardigheid (#514). Vereist content:view.
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: skill_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The qualifications for this skill.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualificationList'
+        "401":
+          $ref: '#/components/responses/ProblemResponse'
+        "403":
+          $ref: '#/components/responses/ProblemResponse'
+
   /api/v1/organizations/{organization_id}/blueprints:
     get:
       tags: [Blueprints]
@@ -6122,8 +7178,400 @@ paths:
         "403": { $ref: '#/components/responses/ProblemResponse' }
         "404": { $ref: '#/components/responses/ProblemResponse' }
 
+  /api/v1/organizations/{org_id}/me/course-versions/{version_id}/lessons/{lesson_id}/playback-sessions:
+    post:
+      tags: [Learning]
+      summary: Create an ephemeral encrypted lesson playback session
+      description: Returns the random package password exactly once. A lost response requires a new session; it is never replayed from idempotency storage.
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: version_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: lesson_id, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses:
+        "201":
+          description: One-time playback grant. Never cache or log this response.
+          headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }
+          content: { application/json: { schema: { $ref: '#/components/schemas/SecurePlaybackGrant' } } }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "503": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/me/lesson-playback-sessions/{session_id}/package:
+    get:
+      tags: [Learning]
+      summary: Download the encrypted package for an active playback session
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: WinZip AES-256 AE-2 package; every member is encrypted.
+          headers:
+            Digest: { schema: { type: string }, description: RFC digest with the same SHA-256 bytes as the grant's hex digest. }
+            X-OciServe-Package-Profile: { schema: { type: string, const: ocideck-winzip-aes256-ae2-v1 } }
+            Cache-Control: { schema: { type: string, const: 'private, no-store' } }
+          content: { application/vnd.ocisuite.ocideck+zip: { schema: { type: string, format: binary } } }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/me/lesson-playback-sessions/{session_id}/close:
+    post:
+      tags: [Learning]
+      summary: Close playback and delete its derived ciphertext
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses:
+        "204": { description: Closed and server-managed ciphertext removed. }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/exam-sessions:
+    get:
+      tags: [Assessments]
+      summary: List managed or explicitly assigned exam sessions
+      parameters: [{ name: org_id, in: path, required: true, schema: { type: string, format: uuid } }]
+      responses:
+        "200": { description: Privacy-bounded session list., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamSessionList' } } } }
+    post:
+      tags: [Assessments]
+      summary: Create a scheduled group exam session
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ExamSessionCreate' } } } }
+      responses:
+        "201": { description: Created., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamSession' } } } }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}:
+    get:
+      tags: [Assessments]
+      summary: Read one managed or explicitly assigned exam session
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Session state using the database clock., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamSession' } } } }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/roster:
+    get:
+      tags: [Assessments]
+      summary: Monitor neutral candidate states
+      description: Never returns answers, correctness, scores, answer keys or future questions.
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Minimal roster., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamRoster' } } } }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/release-codes:
+    post:
+      tags: [Assessments]
+      summary: Issue and show a release code once
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses:
+        "201": { description: One-time code. Never replayed, cached or logged., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamReleaseCode' } } } }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/release-codes/current:
+    delete:
+      tags: [Assessments]
+      summary: Revoke the current unused release code
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses: { "204": { description: Revoked., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } } }, "404": { $ref: '#/components/responses/ProblemResponse' } }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/release:
+    post:
+      tags: [Assessments]
+      summary: Release now or arm a future database-clock release
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ExamReleaseRequest' } } } }
+      responses:
+        "200": { description: Released or armed., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamSession' } } } }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/close:
+    post:
+      tags: [Assessments]
+      summary: Close admission to an exam session
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses: { "204": { description: Closed., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } } }, "409": { $ref: '#/components/responses/ProblemResponse' } }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/cancel:
+    post:
+      tags: [Assessments]
+      summary: Cancel an exam session fail-closed
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses: { "204": { description: Cancelled., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } } }, "409": { $ref: '#/components/responses/ProblemResponse' } }
+
+  /api/v1/organizations/{org_id}/exam-sessions/{session_id}/attempts/{attempt_id}/interventions:
+    post:
+      tags: [Assessments]
+      summary: Apply a reasoned, audited proctor intervention
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: attempt_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ExamIntervention' } } } }
+      responses: { "204": { description: Applied and audited., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } } }, "400": { $ref: '#/components/responses/ProblemResponse' } }
+
+  /api/v1/organizations/{org_id}/me/exam-sessions:
+    get:
+      tags: [Assessments]
+      summary: List exam sessions admitted for the authenticated participant
+      parameters: [{ name: org_id, in: path, required: true, schema: { type: string, format: uuid } }]
+      responses: { "200": { description: Candidate session list containing no blueprint or staff identifiers., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/CandidateExamSessionList' } } } } }
+
+  /api/v1/organizations/{org_id}/me/exam-sessions/{session_id}/attempts:
+    post:
+      tags: [Assessments]
+      summary: Start the authenticated participant's individual randomized attempt
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses: { "201": { description: Personal attempt snapshot., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamAttempt' } } } }, "409": { $ref: '#/components/responses/ProblemResponse' } }
+
+  /api/v1/organizations/{org_id}/me/attempts/{attempt_id}/items/current:
+    get:
+      tags: [Assessments]
+      summary: Get only the current unanswered exam item and a one-time challenge
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: attempt_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses: { "200": { description: Presentation data without correctness or future items., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/CurrentExamItem' } } } }, "204": { description: All items have an accepted answer; the attempt may be submitted., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } } }, "409": { $ref: '#/components/responses/ProblemResponse' } }
+
+  /api/v1/organizations/{org_id}/me/attempts/{attempt_id}/items/{attempt_item_id}/answer:
+    put:
+      tags: [Assessments]
+      summary: Store one challenged, revision-bound answer
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: attempt_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: attempt_item_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/ExamAnswerRequest' } } } }
+      responses: { "200": { description: Accepted revision., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamAnswerReceipt' } } } }, "409": { $ref: '#/components/responses/ProblemResponse' } }
+
+  /api/v1/organizations/{org_id}/me/attempts/{attempt_id}/submit:
+    post:
+      tags: [Assessments]
+      summary: Submit the authenticated participant's attempt definitively
+      parameters:
+        - { name: org_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: attempt_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
+      responses: { "200": { description: Submitted attempt without score., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamAttempt' } } } }, "409": { $ref: '#/components/responses/ProblemResponse' } }
+
 components:
   schemas:
+    SecurePlaybackGrant:
+      type: object
+      additionalProperties: false
+      required: [id, package_password, package_url, package_profile, expires_at, digest]
+      properties:
+        id: { type: string, format: uuid }
+        package_password: { type: string, minLength: 43, maxLength: 43, pattern: '^[A-Za-z0-9_-]+$' }
+        package_url: { type: string, pattern: '^/api/v1/' }
+        package_profile: { type: string, const: ocideck-winzip-aes256-ae2-v1 }
+        expires_at: { type: string, format: date-time }
+        digest: { type: string, pattern: '^[0-9a-f]{64}$' }
+    ExamSessionCreate:
+      type: object
+      additionalProperties: false
+      required: [blueprint_version_id, scheduled_start, earliest_release_at, latest_admission_at, absolute_deadline_at, examiner_account_ids, participant_ids]
+      properties:
+        blueprint_version_id: { type: string, format: uuid }
+        course_offering_id: { type: string, format: uuid }
+        scheduled_start: { type: string, format: date-time }
+        earliest_release_at: { type: string, format: date-time }
+        latest_admission_at: { type: string, format: date-time }
+        absolute_deadline_at: { type: string, format: date-time }
+        examiner_account_ids: { type: array, minItems: 1, uniqueItems: true, items: { type: string, format: uuid } }
+        participant_ids: { type: array, minItems: 1, uniqueItems: true, items: { type: string, format: uuid } }
+    ExamSession:
+      type: object
+      additionalProperties: false
+      required: [id, organization_id, blueprint_version_id, status, scheduled_start, earliest_release_at, latest_admission_at, absolute_deadline_at, revision, server_time]
+      properties:
+        id: { type: string, format: uuid }
+        organization_id: { type: string, format: uuid }
+        blueprint_version_id: { type: string, format: uuid }
+        course_offering_id: { type: string, format: uuid }
+        status: { type: string, enum: [draft, scheduled, armed, released, release_missed, closed, cancelled] }
+        scheduled_start: { type: string, format: date-time }
+        earliest_release_at: { type: string, format: date-time }
+        latest_admission_at: { type: string, format: date-time }
+        absolute_deadline_at: { type: string, format: date-time }
+        release_at: { type: string, format: date-time }
+        released_at: { type: string, format: date-time }
+        released_by: { type: string, format: uuid }
+        revision: { type: integer, minimum: 1 }
+        server_time: { type: string, format: date-time }
+    ExamSessionList:
+      type: object
+      additionalProperties: false
+      required: [exam_sessions, server_time]
+      properties:
+        exam_sessions: { type: array, items: { $ref: '#/components/schemas/ExamSession' } }
+        server_time: { type: string, format: date-time }
+    CandidateExamSession:
+      type: object
+      additionalProperties: false
+      required: [id, status, scheduled_start, latest_admission_at, absolute_deadline_at]
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string, enum: [scheduled, armed, released] }
+        scheduled_start: { type: string, format: date-time }
+        latest_admission_at: { type: string, format: date-time }
+        absolute_deadline_at: { type: string, format: date-time }
+    CandidateExamSessionList:
+      type: object
+      additionalProperties: false
+      required: [exam_sessions, server_time]
+      properties:
+        exam_sessions: { type: array, items: { $ref: '#/components/schemas/CandidateExamSession' } }
+        server_time: { type: string, format: date-time }
+    ExamReleaseCode:
+      type: object
+      additionalProperties: false
+      required: [code, expires_at]
+      properties:
+        code: { type: string, minLength: 26, maxLength: 26, pattern: '^[A-Z2-7]+$' }
+        expires_at: { type: string, format: date-time }
+    ExamReleaseRequest:
+      type: object
+      additionalProperties: false
+      required: [code]
+      properties:
+        code: { type: string }
+        release_at: { type: string, format: date-time }
+    ExamRoster:
+      type: object
+      additionalProperties: false
+      required: [participants, server_time]
+      properties:
+        server_time: { type: string, format: date-time }
+        participants:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required: [participant_id, display_name, status]
+            properties:
+              participant_id: { type: string, format: uuid }
+              display_name: { type: string }
+              status: { type: string, enum: [waiting, admitted, started, offline, submitted, paused, invalidated] }
+              attempt_id: { type: string, format: uuid }
+              started_at: { type: string, format: date-time }
+              deadline_at: { type: string, format: date-time }
+              submitted_at: { type: string, format: date-time }
+              last_confirmed_at: { type: string, format: date-time }
+    ExamIntervention:
+      type: object
+      additionalProperties: false
+      required: [action, reason]
+      properties:
+        action: { type: string, enum: [pause, invalidate, grant_extra_time] }
+        reason: { type: string, minLength: 1, maxLength: 500 }
+        extra_minutes: { type: integer, minimum: 1, maximum: 120 }
+    ExamAttempt:
+      type: object
+      additionalProperties: false
+      required: [id, participant_id, blueprint_version_id, status, started_at]
+      properties:
+        id: { type: string, format: uuid }
+        participant_id: { type: string, format: uuid }
+        blueprint_version_id: { type: string, format: uuid }
+        status: { type: string, enum: [in_progress, paused, invalidated, submitted, scored, released] }
+        started_at: { type: string, format: date-time }
+        deadline_at: { type: string, format: date-time }
+        submitted_at: { type: string, format: date-time }
+        scored_at: { type: string, format: date-time }
+        released_at: { type: string, format: date-time }
+    CurrentExamItem:
+      type: object
+      additionalProperties: false
+      required: [attempt_id, attempt_item_id, position, content, option_order, revision, challenge, challenge_expires_at]
+      properties:
+        attempt_id: { type: string, format: uuid }
+        attempt_item_id: { type: string, format: uuid }
+        position: { type: integer, minimum: 0 }
+        content:
+          $ref: '#/components/schemas/ExamParticipantContent'
+        option_order:
+          type: array
+          items: { type: string }
+          description: For choice interactions, contains each content.options id exactly once in display order; empty for open-text interactions.
+        deadline_at: { type: string, format: date-time }
+        revision: { type: integer, minimum: 0 }
+        challenge: { type: string, pattern: '^[A-Za-z0-9_-]+$' }
+        challenge_expires_at: { type: string, format: date-time }
+    ExamParticipantContent:
+      type: object
+      additionalProperties: false
+      description: Closed participant presentation allowlist; unknown fields are rejected at authoring time.
+      properties:
+        question: { type: string }
+        prompt: { type: string }
+        instruction: { type: string }
+        instructions: { type: string }
+        stimulus: { type: string }
+        options:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              id: { type: string }
+              text: { type: string }
+              label: { type: string }
+              asset_hash: { type: string, pattern: '^[0-9a-f]{64}$' }
+              image_alt: { type: string }
+        media:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              asset_hash: { type: string, pattern: '^[0-9a-f]{64}$' }
+              alt: { type: string }
+              caption: { type: string }
+              type: { type: string }
+    ExamAnswerRequest:
+      type: object
+      additionalProperties: false
+      required: [answer_data, challenge, revision]
+      properties:
+        answer_data: {}
+        challenge: { type: string, pattern: '^[A-Za-z0-9_-]+$' }
+        revision: { type: integer, minimum: 0 }
+    ExamAnswerReceipt:
+      type: object
+      additionalProperties: false
+      required: [attempt_id, attempt_item_id, revision, accepted_at]
+      properties:
+        attempt_id: { type: string, format: uuid }
+        attempt_item_id: { type: string, format: uuid }
+        revision: { type: integer, minimum: 1 }
+        accepted_at: { type: string, format: date-time }
     CourseOfferingCreateRequest:
       type: object
       required: [name]
@@ -6855,20 +8303,32 @@ components:
     SkillDefinition:
       type: object
       properties:
+        schema_version:
+          type: integer
+          enum: [1]
+          description: |
+            Definitiecontract (S13, #528). Expliciete schemaversie voor de
+            skilldefinitie. Ontbreekt het veld, dan is het 0 — dat is geldig
+            voor bestaande definities die het contract nog niet kennen.
         description: { type: string }
         badge_class_url:
           type: string
           format: uri
           description: Optional public Open Badges BadgeClass URL associated with this skill.
         validity_months: { type: integer, minimum: 0, maximum: 1200 }
+        kwalificatiesoort:
+          type: string
+          enum: [bevoegdheid, bekvaamheid, geschiktheid]
+          description: |
+            Het soort kwalificatie (S11, #526). Bevoegdheid komt van een
+            gezag, bekvaamheid van een beoordeling, geschiktheid van een
+            keuring. De drie verlopen onafhankelijk. Ontbreekt het veld,
+            dan is er geen soort — dat is geldig voor definities die het
+            onderscheid niet maken.
         requirements:
           type: array
           items:
-            type: object
-            required: [course_id, title]
-            properties:
-              course_id: { type: string, format: uuid }
-              title: { type: string }
+            $ref: '#/components/schemas/SkillRequirement'
         renewal:
           type: object
           required: [activity_type, minimum_minutes, period_months]
@@ -6876,12 +8336,84 @@ components:
             activity_type: { type: string }
             minimum_minutes: { type: integer, minimum: 1 }
             period_months: { type: integer, minimum: 1 }
+        recency:
+          type: object
+          required: [window_months]
+          description: |
+            Schuivend venster met telbare gebeurtenissen, samenstellingsregels
+            en alternatieve routes (S12, #527). In tegenstelling tot renewal —
+            dat een vaste periode telt — schuift het venster mee.
+          properties:
+            window_months: { type: integer, minimum: 1 }
+            components:
+              type: array
+              description: Samenstellingsregels binnen het totaal.
+              items:
+                type: object
+                properties:
+                  activity_type: { type: string }
+                  min_minutes: { type: integer, minimum: 0 }
+                  max_minutes: { type: integer, minimum: 0 }
+                  min_count: { type: integer, minimum: 0 }
+                  max_count: { type: integer, minimum: 0 }
+            alternatives:
+              type: array
+              description: Alternatieve routes die elk afzonderlijk volstaan.
+              items:
+                type: object
+                properties:
+                  activity_type: { type: string }
+                  minimum_minutes: { type: integer, minimum: 0 }
+                  min_count: { type: integer, minimum: 0 }
         published_at:
           type: string
           format: date-time
         created_at:
           type: string
           format: date-time
+
+    SkillRequirement:
+      type: object
+      required: [title]
+      properties:
+        kind:
+          type: string
+          enum: [course, evidence]
+          description: |
+            Bepaalt het type eis. Ontbreekt kind (of "course"), dan is het een
+            cursuseis; bestaande definities lezen ongewijzigd terug.
+        course_id:
+          type: string
+          format: uuid
+          description: Vereist voor een cursuseis (kind=course of afwezig).
+        title:
+          type: string
+        evidence_type:
+          type: string
+          description: Slug van de bewijssoort. Vereist voor een bewijzeis.
+        min_assurance:
+          type: string
+          enum: [zelfverklaard, kopie_beoordeeld, origineel_gezien, bron_gecontroleerd, bron_en_houder]
+        min_remaining_days:
+          type: integer
+          minimum: 0
+          description: Minimum resterende geldigheidsdagen bij toekenning.
+        expiry_regime:
+          type: string
+          enum: [momentopname, volgt_bewijs]
+          description: |
+            momentopname: de kwalificatie loopt haar eigen termijn uit.
+            volgt_bewijs: de kwalificatie kan nooit langer gelden dan het
+            bewijs waarop zij steunt.
+        attributes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              in:
+                type: array
+                items:
+                  type: string
 
     SkillVersionList:
       type: object
@@ -6891,6 +8423,563 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SkillVersionResponse'
+
+    EvidenceTypeCreateRequest:
+      type: object
+      required: [slug, title]
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+
+    EvidenceTypeResponse:
+      type: object
+      required: [id, slug, title, status, created_at, updated_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        slug:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+          enum: [draft, published, archived]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    EvidenceTypeList:
+      type: object
+      required: [evidence_types]
+      properties:
+        evidence_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceTypeResponse'
+
+    EvidenceTypeDraftResponse:
+      type: object
+      required: [definition, etag, updated_at]
+      properties:
+        definition:
+          $ref: '#/components/schemas/EvidenceTypeDefinition'
+        etag:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+
+    EvidenceTypeVersionResponse:
+      type: object
+      required: [id, version, definition, created_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+        definition:
+          $ref: '#/components/schemas/EvidenceTypeDefinition'
+        published_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+
+    EvidenceTypeVersionList:
+      type: object
+      required: [versions]
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceTypeVersionResponse'
+
+    EvidenceTypeDefinition:
+      type: object
+      required: [schema_version, category, sensitivity, retention_mode, min_assurance]
+      properties:
+        schema_version:
+          type: integer
+        category:
+          type: string
+          enum: [gedragsverklaring, medische_geschiktheid, taalvaardigheid, diploma, beroepscertificaat, rijbewijs, overig]
+        land:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.
+        eu_framework:
+          type: string
+        sensitivity:
+          type: string
+          enum: [algemeen, gezondheid, strafrecht, identiteit]
+        retention_mode:
+          type: string
+          enum: [bewaren, bewaren_afgeschermd, alleen_vaststellen]
+        retention_months:
+          type: integer
+          minimum: 0
+          maximum: 1200
+        grondslag:
+          type: string
+        validity_required:
+          type: boolean
+        min_assurance:
+          type: string
+          enum: [zelfverklaard, kopie_beoordeeld, origineel_gezien, bron_gecontroleerd, bron_en_houder]
+        max_register_age_days:
+          type: integer
+          minimum: 0
+        attributes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              in:
+                type: array
+                items:
+                  type: string
+        instruction:
+          type: object
+          additionalProperties:
+            type: string
+          description: BCP-47 taalcode -> tekst voor de deelnemer.
+        checklist:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: BCP-47 taalcode -> controlepunten voor de beoordelaar.
+        examples:
+          type: array
+          items:
+            type: object
+            required: [soort]
+            properties:
+              land:
+                type: string
+              taal:
+                type: string
+              soort:
+                type: string
+                enum: [schets, verwijzing, eigen]
+              url:
+                type: string
+                format: uri
+              asset_id:
+                type: string
+
+    EvidenceItemCreateRequest:
+      type: object
+      required: [evidence_type_id]
+      properties:
+        evidence_type_id:
+          type: string
+          format: uuid
+        upload_id:
+          type: string
+          format: uuid
+        declared_issuer:
+          type: string
+        declared_issued_at:
+          type: string
+          format: date-time
+        declared_valid_until:
+          type: string
+          format: date-time
+        declared_attributes:
+          type: object
+          additionalProperties: true
+
+    EvidenceItemReviewRequest:
+      type: object
+      required: [decision]
+      properties:
+        decision:
+          type: string
+          enum: [geaccepteerd, afgewezen, aanvulling_gevraagd, in_behandeling]
+        assurance_level:
+          type: string
+          enum: [zelfverklaard, kopie_beoordeeld, origineel_gezien, bron_gecontroleerd, bron_en_houder]
+        object_hash:
+          type: string
+          description: Hash of the object the assessor saw; mismatch with stored hash returns 409.
+        assessed_issuer:
+          type: string
+        assessed_issued_at:
+          type: string
+          format: date-time
+        assessed_valid_until:
+          type: string
+          format: date-time
+        assessed_attributes:
+          type: object
+          additionalProperties: true
+        note:
+          type: string
+
+    EvidenceExpiringList:
+      type: object
+      properties:
+        within_days:
+          type: integer
+        evidence_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceExpiringItem'
+
+    EvidenceExpiringItem:
+      type: object
+      properties:
+        item_id:
+          type: string
+          format: uuid
+        participant_id:
+          type: string
+          format: uuid
+        evidence_type_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        valid_until:
+          type: string
+          format: date-time
+        content_status:
+          type: string
+
+    EvidenceSourceCheckRequest:
+      type: object
+      required: [register, method]
+      properties:
+        register:
+          type: string
+          description: Welk register is geraadpleegd, bv. "CBA-register".
+        method:
+          type: string
+          description: Hoe is gecontroleerd, bv. "portaal" of "telefoon".
+        reference:
+          type: string
+          description: Referentie in het register.
+        note:
+          type: string
+
+    EvidenceVerifyCredentialRequest:
+      type: object
+      required: [credential]
+      properties:
+        credential:
+          type: string
+          description: JWS-gecompactteerde credential.
+
+    CredentialVerificationResponse:
+      type: object
+      properties:
+        verification:
+          type: object
+          properties:
+            issuer_id:
+              type: string
+            credential_id:
+              type: string
+            cryptosuite:
+              type: string
+            canonical_hash:
+              type: string
+            status:
+              type: string
+              enum: [verified, failed, untrusted]
+            failure_step:
+              type: string
+            failure_reason:
+              type: string
+            verified_at:
+              type: string
+              format: date-time
+        item:
+          $ref: '#/components/schemas/EvidenceItemResponse'
+
+    TrustedIssuerList:
+      type: object
+      properties:
+        trusted_issuers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrustedIssuerResponse'
+
+    TrustedIssuerResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        issuer_id:
+          type: string
+        display_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    AddTrustedIssuerRequest:
+      type: object
+      required: [issuer_id, display_name]
+      properties:
+        issuer_id:
+          type: string
+          description: DID of issuer-URL.
+        display_name:
+          type: string
+
+    PortfolioImportCreateRequest:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required: [issuer_id, title]
+            properties:
+              issuer_id:
+                type: string
+              credential_id:
+                type: string
+              title:
+                type: string
+              issued_at:
+                type: string
+                format: date-time
+              valid_until:
+                type: string
+                format: date-time
+              raw_credential:
+                type: object
+                additionalProperties: true
+
+    PortfolioImportCreateResponse:
+      type: object
+      properties:
+        import_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        item_count:
+          type: integer
+
+    PortfolioImportResponse:
+      type: object
+      properties:
+        import_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortfolioImportItemResponse'
+
+    PortfolioImportItemResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        issuer_id:
+          type: string
+        credential_id:
+          type: string
+        title:
+          type: string
+        issued_at:
+          type: string
+          format: date-time
+        valid_until:
+          type: string
+          format: date-time
+        selected:
+          type: boolean
+
+    PortfolioImportSelectRequest:
+      type: object
+      required: [selected_item_ids, evidence_type_id, evidence_type_version_id]
+      properties:
+        selected_item_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        evidence_type_id:
+          type: string
+          format: uuid
+        evidence_type_version_id:
+          type: string
+          format: uuid
+
+    PortfolioImportSelectResponse:
+      type: object
+      properties:
+        created_item_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+
+    EvidenceHolderBindingRequest:
+      type: object
+      required: [subject_id, nonce]
+      properties:
+        subject_id:
+          type: string
+          description: Subject uit de credential.
+        nonce:
+          type: string
+          description: Nonce die aan de sessie is gebonden.
+
+    BadgeReadiness:
+      type: object
+      properties:
+        skill_id:
+          type: string
+          format: uuid
+        skill_title:
+          type: string
+        kwalificatiesoort:
+          type: string
+          enum: [bevoegdheid, bekvaamheid, geschiktheid]
+        validity_months:
+          type: integer
+        requirements:
+          type: array
+          items:
+            type: object
+            properties:
+              kind:
+                type: string
+              title:
+                type: string
+              evidence_type:
+                type: string
+              course_id:
+                type: string
+              min_assurance:
+                type: string
+              met:
+                type: boolean
+        ready:
+          type: boolean
+
+    EvidenceItemResponse:
+      type: object
+      required: [id, participant_id, evidence_type_id, evidence_type_version_id, content_status, created_by, created_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        participant_id:
+          type: string
+          format: uuid
+        evidence_type_id:
+          type: string
+          format: uuid
+        evidence_type_version_id:
+          type: string
+          format: uuid
+        upload_id:
+          type: string
+          format: uuid
+        declared_issuer:
+          type: string
+        declared_issued_at:
+          type: string
+          format: date-time
+        declared_valid_until:
+          type: string
+          format: date-time
+        declared_attributes:
+          type: object
+          additionalProperties: true
+        assessed_issuer:
+          type: string
+        assessed_issued_at:
+          type: string
+          format: date-time
+        assessed_valid_until:
+          type: string
+          format: date-time
+        assessed_attributes:
+          type: object
+          additionalProperties: true
+        content_status:
+          type: string
+          enum: [ingediend, in_behandeling, geaccepteerd, aanvulling_gevraagd, afgewezen, ingetrokken, verlopen]
+        assurance_level:
+          type: string
+          enum: [zelfverklaard, kopie_beoordeeld, origineel_gezien, bron_gecontroleerd, bron_en_houder]
+        object_hash:
+          type: string
+        review_note:
+          type: string
+        reviewed_by:
+          type: string
+          format: uuid
+        reviewed_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+
+    EvidenceItemList:
+      type: object
+      required: [evidence_items]
+      properties:
+        evidence_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceItemResponse'
+
+    EvidenceEventResponse:
+      type: object
+      required: [id, event_type, actor_id, metadata, created_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        event_type:
+          type: string
+        actor_id:
+          type: string
+          format: uuid
+        reason:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+
+    EvidenceEventList:
+      type: object
+      required: [events]
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvidenceEventResponse'
 
     BlueprintCreateRequest:
       type: object

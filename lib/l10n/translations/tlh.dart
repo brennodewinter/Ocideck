@@ -1604,6 +1604,26 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Mijn examens': 'wa\'meywIj',
+  'Alle vragen zijn beantwoord.': 'ghelmey Hoch janglu\'.',
+  'Examen inleveren': 'wa nob',
+  'Uw examen is ingeleverd.': 'wa lIj noblu\'.',
+  'De examenhandeling is niet gelukt.': 'wa ta\' Qapbe\'.',
+  'Menselijk toezicht bij examens': 'waDaq nuv qon',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeckDaq ghItlhwI\'Daq nuv "Iv" QublaHbe\'. waDaq nuv qon.',
+  'Er zijn geen examens beschikbaar.': 'wamey tu\'lu\'be\'.',
+  'Examen': 'wa\'',
+  'Start examen': 'wa tagh',
+  'Nog niet vrijgegeven': 'wej noblu\'.',
+  'Gesloten': 'So\'lu\'.',
+  'Examen inleveren?': 'wa nob\'a\'?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'wa DanobDI\' janglIj choHlaHbe\'.',
+  'Definitief inleveren': 'wa nobchu\'',
+  'Vraag {nummer}': 'ghel {nummer}',
+  'Uw antwoord': 'janglIj',
+  'Antwoord indienen': 'jang nob',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'ngugh De\' polwI\'vamvo\' chaw\' De\'mey DalI\'be\'. ',
   'U hebt nog geen badges.': 'wej Deghmey Daghaj.',

@@ -1631,6 +1631,26 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Mijn examens': 'Moji ispiti',
+  'Alle vragen zijn beantwoord.': 'Na sva pitanja je odgovoreno.',
+  'Examen inleveren': 'Predajte ispit',
+  'Uw examen is ingeleverd.': 'Vaš ispit je predan.',
+  'De examenhandeling is niet gelukt.': 'Ispitni postupak nije bio uspješan.',
+  'Menselijk toezicht bij examens': 'Ljudski nadzor ispita',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck ne određuje tko je iza tipkovnice. Stoga organizirajte ljudski nadzor tijekom ispita.',
+  'Er zijn geen examens beschikbaar.': 'Nema dostupnih ispita.',
+  'Examen': 'Ispit',
+  'Start examen': 'Započnite ispit',
+  'Nog niet vrijgegeven': 'Još nije objavljeno',
+  'Gesloten': 'Zatvoreno',
+  'Examen inleveren?': 'Položiti ispit?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Nakon predaje, ne možete promijeniti svoje odgovore.',
+  'Definitief inleveren': 'Konačna predaja',
+  'Vraag {nummer}': 'Pitanje {number}',
+  'Uw antwoord': 'Vaš odgovor',
+  'Antwoord indienen': 'Pošalji odgovor',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Više nećete dijeliti vjerodajnice iz ovog novčanika. ',
   'U hebt nog geen badges.': 'Još nemate znački.',

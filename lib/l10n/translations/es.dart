@@ -664,6 +664,27 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Mijn examens': 'mis exámenes',
+  'Alle vragen zijn beantwoord.': 'Todas las preguntas han sido respondidas.',
+  'Examen inleveren': 'Enviar examen',
+  'Uw examen is ingeleverd.': 'Su examen ha sido enviado.',
+  'De examenhandeling is niet gelukt.':
+      'El procedimiento de examen no fue exitoso.',
+  'Menselijk toezicht bij examens': 'Supervisión humana de los exámenes.',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck no determina quién está detrás del teclado. Por lo tanto, organice la supervisión humana durante el examen.',
+  'Er zijn geen examens beschikbaar.': 'No hay exámenes disponibles.',
+  'Examen': 'examen',
+  'Start examen': 'Iniciar examen',
+  'Nog niet vrijgegeven': 'Aún no publicado',
+  'Gesloten': 'Cerrado',
+  'Examen inleveren?': '¿Presentar un examen?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Una vez enviado, no puede cambiar sus respuestas.',
+  'Definitief inleveren': 'Presentación final',
+  'Vraag {nummer}': 'Pregunta {número}',
+  'Uw antwoord': 'tu respuesta',
+  'Antwoord indienen': 'Enviar respuesta',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Entonces ya no compartirá credenciales desde esta cartera. ',
   'U hebt nog geen badges.': 'Aún no tiene insignias.',

@@ -1627,6 +1627,27 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Mijn examens': 'Mine eksamener',
+  'Alle vragen zijn beantwoord.': 'Alle spørgsmål er blevet besvaret.',
+  'Examen inleveren': 'Aflever eksamen',
+  'Uw examen is ingeleverd.': 'Din eksamen er blevet afleveret.',
+  'De examenhandeling is niet gelukt.':
+      'Eksamensproceduren var ikke vellykket.',
+  'Menselijk toezicht bij examens': 'Menneskelig supervision af eksamener',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck afgør ikke, hvem der står bag tastaturet. Organiser derfor menneskelig supervision under eksamen.',
+  'Er zijn geen examens beschikbaar.': 'Der er ingen tilgængelige eksamener.',
+  'Examen': 'Eksamen',
+  'Start examen': 'Start eksamen',
+  'Nog niet vrijgegeven': 'Endnu ikke udgivet',
+  'Gesloten': 'Lukket',
+  'Examen inleveren?': 'Aflevere en eksamen?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Når du har indsendt, kan du ikke ændre dine svar.',
+  'Definitief inleveren': 'Endelig aflevering',
+  'Vraag {nummer}': 'Spørgsmål {nummer}',
+  'Uw antwoord': 'Dit svar',
+  'Antwoord indienen': 'Send svar',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Du deler derefter ikke længere legitimationsoplysninger fra denne tegnebog. ',
   'U hebt nog geen badges.': 'Du har endnu ingen badges.',

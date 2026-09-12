@@ -6,6 +6,13 @@
 
 All notable changes to OciDeck are documented in this file.
 
+## Unreleased
+
+### Added
+
+- OciServe-lessen worden per afspeelsessie met een nieuw AES-256-pakket en een tijdelijke sleutel geopend en bij het sluiten lokaal opgeruimd.
+- Een aparte formele examenclient toont alleen de huidige persoonlijke vraag, gebruikt challenge- en revisiegebonden antwoorden en benoemt de noodzaak van menselijk toezicht.
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project follows [Semantic Versioning](https://semver.org/). Tagging began
 with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,

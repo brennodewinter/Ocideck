@@ -2544,6 +2544,26 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Mijn examens': 'Sınavlarım',
+  'Alle vragen zijn beantwoord.': 'Tüm sorular cevaplandı.',
+  'Examen inleveren': 'Sınavı gönder',
+  'Uw examen is ingeleverd.': 'Sınavınız gönderildi.',
+  'De examenhandeling is niet gelukt.': 'Sınav prosedürü başarılı olmadı.',
+  'Menselijk toezicht bij examens': 'Sınavların insan gözetimi',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck klavyenin arkasında kimin olduğunu belirlemez. Bu nedenle sınav sırasında insan gözetimini düzenleyin.',
+  'Er zijn geen examens beschikbaar.': 'Herhangi bir sınav bulunmamaktadır.',
+  'Examen': 'Sınav',
+  'Start examen': 'Sınavı başlat',
+  'Nog niet vrijgegeven': 'Henüz yayınlanmadı',
+  'Gesloten': 'Kapalı',
+  'Examen inleveren?': 'Sınav mı gönderilsin?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Gönderildikten sonra yanıtlarınızı değiştiremezsiniz.',
+  'Definitief inleveren': 'Son gönderim',
+  'Vraag {nummer}': 'Soru {numarası}',
+  'Uw antwoord': 'Cevabınız',
+  'Antwoord indienen': 'Cevabı gönder',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Bu cüzdandaki kimlik bilgilerini artık paylaşmayacaksınız. ',
   'U hebt nog geen badges.': 'Henüz rozetiniz yok.',
