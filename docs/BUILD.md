@@ -767,8 +767,13 @@ mirror → poll the release CI until every job is done; **Phase 3** `make deploy
 *first* — the web
 demo depends only on the web bundle, so a signing or platform failure never leaves
 it on the old version — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
-(waiting up to a few minutes for `publiceren` to attach it rather than dying on a
-404), and watch the website-downloads job.
+(waiting quietly for `publiceren` to attach it rather than printing every expected
+404), read both public files back and verify them with `minisign`, and watch the
+website-downloads job. Phase 3 refuses to start while any job for the tag is still
+active. A timed-out CI wait stops the chain instead of falling through, and
+`--resume` follows the existing jobs before it signs. An absent manifest causes
+one automatic retry only after the previous run is terminal and has a failed job;
+it never introduces a second writer alongside a running or fully green release.
 
 The standalone `make bump-scanner-pins` does the same edit outside a release
 (manifest + every workflow's `*_VERSION` env + the pre-baked scans image tag, in
