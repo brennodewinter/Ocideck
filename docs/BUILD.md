@@ -767,8 +767,13 @@ mirror → poll the release CI until every job is done; **Phase 3** `make deploy
 *first* — the web
 demo depends only on the web bundle, so a signing or platform failure never leaves
 it on the old version — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
-(waiting up to a few minutes for `publiceren` to attach it rather than dying on a
-404), and watch the website-downloads job.
+(waiting quietly for `publiceren` to attach it rather than printing every expected
+404), read both public files back and verify them with `minisign`, and watch the
+website-downloads job. Phase 3 refuses to start while any job for the tag is still
+active. A timed-out CI wait stops the chain instead of falling through, and
+`--resume` follows the existing jobs before it signs. An absent manifest causes
+one automatic retry only after the previous run is terminal and has a failed job;
+it never introduces a second writer alongside a running or fully green release.
 
 The standalone `make bump-scanner-pins` does the same edit outside a release
 (manifest + every workflow's `*_VERSION` env + the pre-baked scans image tag, in
@@ -1150,11 +1155,21 @@ for it at signing time.
 
 Per release, after the workflow has published the tag:
 
-1. Download `SHA256SUMS` from the published release into a working directory.
-2. `make sign-release SHA256SUMS=path/to/SHA256SUMS` (or run it where
+1. Wait until **every** Forgejo Actions job for that tag is terminal. Do not use
+   the mere presence of `SHA256SUMS` as proof: a publishing job may still replace
+   it. `scripts/release_auto.sh --status vX.Y.Z` verifies the public signature,
+   but an active job must be checked in Actions before a manual repair.
+2. Download the then-current `SHA256SUMS` into a working directory.
+3. `make sign-release SHA256SUMS=path/to/SHA256SUMS` (or run it where
    `dist/SHA256SUMS` sits). The script signs and immediately verifies against
    `minisign.pub`, refusing to leave a signature it cannot verify.
-3. Attach the resulting `SHA256SUMS.minisig` to the release, beside `SHA256SUMS`.
+4. Upload under a temporary name first, remove the old canonical signature only
+   after that upload succeeds, and rename the new asset to
+   `SHA256SUMS.minisig`. If the rename fails, leave the temporary asset in place,
+   report the release as incomplete and repair the name on the release page.
+5. Download **both public files again**, confirm that the public `SHA256SUMS` is
+   byte-for-byte the one just signed, and run the recipient command below. Do not
+   call the release signed until this public verification succeeds.
 
 A recipient verifies with `minisign -Vm SHA256SUMS -p minisign.pub`.
 `OCIDECK_RELEASE_KEY` overrides the key path for a different signer.

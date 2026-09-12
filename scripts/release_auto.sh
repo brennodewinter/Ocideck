@@ -265,6 +265,51 @@ api() { # api METHOD PATH [curl-args…]
   return "$rc"
 }
 
+# Eén bron voor de actuele toestand van deze tag. Zowel de gewone route als
+# --resume en fase 3 gebruiken hem, zodat geen van die paden een nog schrijvende
+# release-run voor "klaar" kan aanzien.
+release_ci_snapshot() {
+  api GET '/actions/tasks?limit=100' 2>/dev/null \
+    | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
+        | select(.head_branch==$ref) | "\(.status)|\(.name)"' 2>/dev/null \
+    | sort -u
+}
+
+release_ci_task_ids() {
+  api GET '/actions/tasks?limit=100' 2>/dev/null \
+    | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
+        | select(.head_branch==$ref) | (.id // empty)' 2>/dev/null \
+    | sort -n
+}
+
+wait_for_redispatch_registration() {
+  local previous_ids="$1" current_ids="" id _
+  for _ in $(seq 1 60); do
+    current_ids="$(release_ci_task_ids || true)"
+    while IFS= read -r id; do
+      [ -n "$id" ] || continue
+      if ! printf '%s\n' "$previous_ids" | grep -qxF "$id"; then return 0; fi
+    done <<<"$current_ids"
+    sleep 5
+  done
+  die "de herdispatch voor $TAG is niet als nieuwe Forgejo-taak verschenen — teken niet op basis van de oude terminale taken."
+  return 1
+}
+
+assert_release_ci_terminal() {
+  snap="$(release_ci_snapshot || true)"
+  if [ -z "$snap" ]; then
+    die "geen release-CI-taken voor $TAG gevonden — teken niet zolang de publieke toestand niet bewezen is."
+    return 1
+  fi
+  local running
+  running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
+  if [ "$running" -ne 0 ]; then
+    die "release-CI voor $TAG is nog actief — wacht tot alle jobs terminaal zijn en hervat daarna met: scripts/release_auto.sh --resume $TAG"
+    return 1
+  fi
+}
+
 mark() { if [ "$1" -eq 1 ]; then printf '   [x] %s\n' "$2"; else printf '   [ ] %s\n' "$2"; fi; }
 
 # --status vX.Y.Z: read-only overzicht van waar een release staat — geen mutatie,
@@ -275,7 +320,7 @@ cmd_status() {
   read_token
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
-  local has_rel=0 has_sums=0 has_sig=0 prnum="" prstate="" pr rel assets
+  local has_rel=0 has_sums=0 has_sig=0 sig_valid=0 prnum="" prstate="" pr rel assets
 
   git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1 && has_branch=1
 
@@ -300,6 +345,17 @@ cmd_status() {
     assets="$(printf '%s' "$rel" | jq -r '.assets[]?.name' 2>/dev/null || true)"
     printf '%s\n' "$assets" | grep -qx 'SHA256SUMS' && has_sums=1
     printf '%s\n' "$assets" | grep -qx 'SHA256SUMS.minisig' && has_sig=1
+    if [ "$has_sums" -eq 1 ] && [ "$has_sig" -eq 1 ]; then
+      local verify_tmp
+      verify_tmp="$(mktemp -d)"
+      if curl -fsSL -o "$verify_tmp/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
+          && curl -fsSL -o "$verify_tmp/SHA256SUMS.minisig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
+          && minisign -Vm "$verify_tmp/SHA256SUMS" \
+            -x "$verify_tmp/SHA256SUMS.minisig" -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
+        sig_valid=1
+      fi
+      rm -rf "$verify_tmp"
+    fi
   fi
 
   local prdesc
@@ -313,10 +369,10 @@ cmd_status() {
   [ "$has_mirror" -eq 1 ] && mark "$has_tag_m" "tag $TAG op mirror (start de Windows-build)"
   mark "$has_rel" "release aangemaakt op de forge"
   mark "$has_sums" "SHA256SUMS aanwezig (van de publiceren-job)"
-  mark "$has_sig" "handtekening SHA256SUMS.minisig aangehangen"
+  mark "$sig_valid" "publieke SHA256SUMS.minisig cryptografisch geldig"
 
   section "Advies"
-  if [ "$has_tag_o" -eq 1 ] && [ "$has_sig" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
+  if [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
     log "De release lijkt compleet. Controleer nog de live web-versie en de downloadpagina."
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
   elif [ "$has_tag_o" -eq 1 ]; then
@@ -750,6 +806,11 @@ preflight() {
 
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
 phase3() {
+  # Verdediging in de diepte: de normale route heeft follow_ci al doorlopen en
+  # --resume doet dat eveneens. Toch weigert fase 3 zelf ook wanneer een job nog
+  # schrijft; precies die ontbrekende grens liet v0.6.2 tweemaal publiceren.
+  assert_release_ci_terminal || return $?
+
   # #10: eerst de webdemo. Die hangt alleen aan de web-bundel, niet aan de
   # platform-artefacten of de handtekening — dus een teken- of platformfout mag
   # de demo nooit op de oude versie laten staan.
@@ -764,7 +825,7 @@ phase3() {
   # `publiceren` kan nog nalopen; wacht begrensd i.p.v. meteen op 404 te sterven.
   local got=0 _
   for _ in $(seq 1 20); do
-    if curl -fsSLo "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS"; then got=1; break; fi
+    if curl -fsSL -o "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null; then got=1; break; fi
     sleep 15
   done
   # #8: verschijnt SHA256SUMS niet, dan faalde publiceren waarschijnlijk (vaak omdat
@@ -773,16 +834,31 @@ phase3() {
   # ruimer, want een volledige herbouw duurt langer dan de eerste propagatie. Pas als
   # dat óók niet lukt, escaleren we.
   if [ "$got" -eq 0 ]; then
+    # Alleen een terminale fout rechtvaardigt een herstel-run. Bij een volledig
+    # groene CI maar ontbrekend manifest is de toestand tegenstrijdig; opnieuw
+    # bouwen zou dan zonder bewezen oorzaak een tweede schrijver introduceren.
+    if ! printf '%s\n' "$snap" | grep -q '^failure|'; then
+      die "release-CI voor $TAG is terminaal en groen, maar SHA256SUMS ontbreekt — dispatch niet automatisch; onderzoek de publiceren-job en hervat daarna."
+      return 1
+    fi
     STEP="release-CI opnieuw dispatchen"
     section "Fase 3 — SHA256SUMS ontbreekt; release-CI éénmalig opnieuw dispatchen (#8)"
+    local previous_task_ids
+    if ! previous_task_ids="$(release_ci_task_ids)" || [ -z "$previous_task_ids" ]; then
+      die "kon de bestaande taak-id's voor $TAG niet betrouwbaar vastleggen — dispatch niet zonder bewijs waarmee een nieuwe run herkenbaar is."
+      return 1
+    fi
     api POST "/actions/workflows/release.yml/dispatches" -H 'Content-Type: application/json' \
       -d "$(jq -n --arg r "$TAG" '{ref:$r}')" -o /dev/null \
       || die "kon release.yml niet opnieuw dispatchen — ga de release-CI na en hervat: scripts/release_auto.sh --resume $TAG"
-    log "release.yml opnieuw gedispatcht op $TAG — wachten tot SHA256SUMS verschijnt (max ~30 min)…"
-    for _ in $(seq 1 60); do
-      if curl -fsSLo "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS"; then got=1; break; fi
-      sleep 30
-    done
+    log "release.yml opnieuw gedispatcht op $TAG — wachten tot de nieuwe taken zichtbaar en daarna terminaal zijn…"
+    wait_for_redispatch_registration "$previous_task_ids"
+    follow_ci
+    assert_release_ci_terminal
+    # Download pas ná de terminale herstel-run. Een eerder verschenen manifest
+    # kan nog door de publiceren-job worden vervangen en mag dus nooit al worden
+    # getekend.
+    if curl -fsSL -o "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null; then got=1; fi
   fi
   [ "$got" -eq 1 ] \
     || die "SHA256SUMS staat ook na een her-dispatch niet op de release voor $TAG — een upstream release-job blijft falen (bv. windows-ophalen kan de mirror niet bereiken). Ga de release-CI na en maak daarna DEZELFDE tag af: scripts/release_auto.sh --resume $TAG."
@@ -816,7 +892,27 @@ phase3() {
     -H 'Content-Type: application/json' \
     -d '{"name":"SHA256SUMS.minisig"}' -o /dev/null \
     || die "kon $tmp_name niet hernoemen naar SHA256SUMS.minisig — hernoem handmatig op de release-pagina."
-  log "SHA256SUMS.minisig aangehangen aan release $TAG."
+
+  # Vertrouw niet op een geslaagde uploadstatus. Lees precies wat ontvangers
+  # krijgen opnieuw terug en verifieer die combinatie. Zo kan finish() nooit een
+  # oude handtekening naast een later vervangen manifest als "getekend" melden.
+  local public_sums="$TMP/SHA256SUMS.public"
+  local public_sig="$TMP/SHA256SUMS.minisig.public"
+  local public_valid=0
+  for _ in $(seq 1 12); do
+    if curl -fsSL -o "$public_sums" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
+        && curl -fsSL -o "$public_sig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
+        && cmp -s "$TMP/SHA256SUMS" "$public_sums" \
+        && minisign -Vm "$public_sums" -x "$public_sig" \
+          -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
+      public_valid=1
+      break
+    fi
+    sleep 5
+  done
+  [ "$public_valid" -eq 1 ] \
+    || die "de publiek teruggelezen SHA256SUMS en handtekening verifiëren niet — meld de release niet als getekend en hervat pas nadat geen workflow meer schrijft."
+  log "SHA256SUMS.minisig aangehangen en publiek geverifieerd voor release $TAG."
 
   STEP="website bewaken"
   # In --resume is er geen fase-2-snapshot; haal er dan vers een op voor deze tag.
@@ -1032,14 +1128,20 @@ follow_ci() {
   local prev="" running _
   snap=""
   for _ in $(seq 1 120); do
-    snap="$(api GET '/actions/tasks?limit=25' 2>/dev/null \
-      | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
-          | select(.head_branch==$ref) | "\(.status)|\(.name)"' 2>/dev/null | sort -u || true)"
+    snap="$(release_ci_snapshot || true)"
     running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
     if [ "$snap" != "$prev" ] && [ -n "$snap" ]; then printf '%s\n' "$snap" | sed 's/^/   /'; prev="$snap"; fi
     { [ -n "$snap" ] && [ "$running" -eq 0 ]; } && break
     sleep 30
   done
+  if [ -z "$snap" ]; then
+    die "geen release-CI-taken voor $TAG gevonden binnen de wachttijd — fase 3 wordt niet gestart."
+    return 1
+  fi
+  if [ "$running" -ne 0 ]; then
+    die "release-CI voor $TAG is na 60 minuten nog actief — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"
+    return 1
+  fi
   if printf '%s\n' "$snap" | grep -q '^failure|'; then
     log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
     log "Herstel de upstream-job en maak DEZELFDE tag af met '--resume $TAG'; her-tag niet."
@@ -1058,6 +1160,7 @@ resume_release() {
     TAG_PUSHED=1
     log "Tag $TAG staat al op origin — mirror-tag borgen, dan fase 3 (deploy-web + tekenen)."
     ensure_mirror_tag
+    follow_ci
     phase3; finish; return 0
   fi
   local st num merged headsha mergesha
