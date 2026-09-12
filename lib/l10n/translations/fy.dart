@@ -667,6 +667,24 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Als afbeelding behouden': 'As ôfbylding behâlde',
+  'bovenaan': 'boppe-oan',
+  'onderaan': 'ûnderoan',
+  'Is dit een logo?': 'Is dit in logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Dizze ôfbylding stiet op {n} dia\'s {plaats}. OciDeck kin him as fêst logo brûke yn stee fan as dia-ôfbylding.',
+  'Mogelijk logo': 'Mooglik logo',
+  'Geen logo': 'Gjin logo',
+  'Ja, als logo gebruiken': 'Ja, as logo brûke',
+  'Ook als stijl toevoegen?': 'Ek as styl tafoegje?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Jo kinne de kleuren, it lettertype en dit logo bewarje foar folgjende presintaasjes.',
+  'Naam van de stijl': 'Namme fan de styl',
+  'Alleen in deze presentatie': 'Allinnich yn dizze presintaasje',
+  'Stijl toevoegen': 'Styl tafoegje',
+  'Stijl van {naam}': 'Styl fan {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'De styl koe net bliuwend bewarre wurde. It logo wurdt allinnich yn dizze presintaasje brûkt.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Jo diele dan gjin oanmeldgegevens mear út dizze portefúlje. ',
   'U hebt nog geen badges.': 'Jo hawwe noch gjin badges.',

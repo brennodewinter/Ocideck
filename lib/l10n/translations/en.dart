@@ -827,6 +827,24 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Als afbeelding behouden': 'Keep as image',
+  'bovenaan': 'at the top',
+  'onderaan': 'at the bottom',
+  'Is dit een logo?': 'Is this a logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'This image appears {plaats} on {n} slides. OciDeck can use it as a fixed logo instead of a slide image.',
+  'Mogelijk logo': 'Possible logo',
+  'Geen logo': 'Not a logo',
+  'Ja, als logo gebruiken': 'Yes, use as logo',
+  'Ook als stijl toevoegen?': 'Also add as a style?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'You can save the colours, font and this logo for future presentations.',
+  'Naam van de stijl': 'Style name',
+  'Alleen in deze presentatie': 'Only in this presentation',
+  'Stijl toevoegen': 'Add style',
+  'Stijl van {naam}': 'Style from {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'The style could not be saved permanently. The logo will only be used in this presentation.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'You will no longer share credentials from this portfolio. ',
   'U hebt nog geen badges.': 'You do not have any badges yet.',

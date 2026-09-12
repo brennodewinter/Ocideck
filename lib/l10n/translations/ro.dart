@@ -1643,6 +1643,24 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Als afbeelding behouden': 'Păstrează ca imagine',
+  'bovenaan': 'în partea de sus',
+  'onderaan': 'în partea de jos',
+  'Is dit een logo?': 'Aceasta este o siglă?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Această imagine apare {plaats} pe {n} diapozitive. OciDeck o poate folosi ca siglă fixă în locul unei imagini de diapozitiv.',
+  'Mogelijk logo': 'Posibilă siglă',
+  'Geen logo': 'Nu este o siglă',
+  'Ja, als logo gebruiken': 'Da, folosește ca siglă',
+  'Ook als stijl toevoegen?': 'Adăugați și ca stil?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Puteți salva culorile, fontul și această siglă pentru prezentări viitoare.',
+  'Naam van de stijl': 'Numele stilului',
+  'Alleen in deze presentatie': 'Doar în această prezentare',
+  'Stijl toevoegen': 'Adaugă stilul',
+  'Stijl van {naam}': 'Stil din {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stilul nu a putut fi salvat permanent. Sigla va fi folosită doar în această prezentare.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Nu mai partajați credențiale din acest portofoliu. ',
   'U hebt nog geen badges.': 'Nu aveți încă insigne.',

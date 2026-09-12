@@ -1604,6 +1604,24 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Als afbeelding behouden': 'mIllogh rur yIpol',
+  'bovenaan': 'DungDaq',
+  'onderaan': 'bIngDaq',
+  'Is dit een logo?': 'Degh \'oH\'a\' Dochvam\'e\'?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      '{n} HaStaDaq {plaats} nargh naghvam. HaSta nagh rurbe\' \'ej Degh ru\'Ha\' rur lo\'laH OciDeck.',
+  'Mogelijk logo': 'chaq Degh',
+  'Geen logo': 'Degh \'oHbe\'',
+  'Ja, als logo gebruiken': 'HIja\', Degh rur yIlo\'',
+  'Ook als stijl toevoegen?': 'motlhghach rur je chel\'a\'?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'wa\'leS muchmeyvaD rItlhmey, ghItlh Segh Deghvam je polmeH SoH.',
+  'Naam van de stijl': 'motlhghach pong',
+  'Alleen in deze presentatie': 'muchvamDaq neH',
+  'Stijl toevoegen': 'motlhghach chel',
+  'Stijl van {naam}': '{naam} motlhghach',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'motlhghach poltaHlaHbe\'. muchvamDaq neH Degh lo\'lu\'.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'ngugh De\' polwI\'vamvo\' chaw\' De\'mey DalI\'be\'. ',
   'U hebt nog geen badges.': 'wej Deghmey Daghaj.',

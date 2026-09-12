@@ -1645,6 +1645,24 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Als afbeelding behouden': 'Żomm bħala immaġni',
+  'bovenaan': 'fin-naħa ta\' fuq',
+  'onderaan': 'fin-naħa t\'isfel',
+  'Is dit een logo?': 'Dan logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Din l-immaġni tidher {plaats} fuq {n} slajds. OciDeck jista\' jużaha bħala logo fiss minflok bħala immaġni tas-slajd.',
+  'Mogelijk logo': 'Logo possibbli',
+  'Geen logo': 'Mhux logo',
+  'Ja, als logo gebruiken': 'Iva, uża bħala logo',
+  'Ook als stijl toevoegen?': 'Iżżid ukoll bħala stil?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Tista\' tissejvja l-kuluri, il-font u dan il-logo għal preżentazzjonijiet futuri.',
+  'Naam van de stijl': 'Isem l-istil',
+  'Alleen in deze presentatie': 'F\'din il-preżentazzjoni biss',
+  'Stijl toevoegen': 'Żid stil',
+  'Stijl van {naam}': 'Stil minn {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'L-istil ma setax jiġi ssejvjat b\'mod permanenti. Il-logo se jintuża f\'din il-preżentazzjoni biss.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ma tibqax taqsam kredenzjali minn dan il-portafoll. ',
   'U hebt nog geen badges.': 'Għad m’għandek l-ebda badge.',

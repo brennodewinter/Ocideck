@@ -1630,6 +1630,24 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Als afbeelding behouden': 'Als Bild bhalte',
+  'bovenaan': 'obe',
+  'onderaan': 'unde',
+  'Is dit een logo?': 'Isch das es Logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Das Bild chunnt uf {n} Folie {plaats} vor. OciDeck cha\'s als fescht Logo statt als Foliebild bruuche.',
+  'Mogelijk logo': 'Möglichs Logo',
+  'Geen logo': 'Keis Logo',
+  'Ja, als logo gebruiken': 'Ja, als Logo bruuche',
+  'Ook als stijl toevoegen?': 'Au als Stil dezue tue?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Du chasch d Farbe, d Schriftart und das Logo für zukünftigi Präsentatione speichere.',
+  'Naam van de stijl': 'Name vom Stil',
+  'Alleen in deze presentatie': 'Nur i dere Präsentation',
+  'Stijl toevoegen': 'Stil dezue tue',
+  'Stijl van {naam}': 'Stil vo {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'De Stil het nöd chönne dauerhaft gspeicheret werde. S Logo wird nur i dere Präsentation brucht.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Dann teilen Sie keine Nachweise mehr aus dieser Brieftasche. ',
   'U hebt nog geen badges.': 'Sie haben noch keine Abzeichen.',

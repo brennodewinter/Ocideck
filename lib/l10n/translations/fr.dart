@@ -667,6 +667,24 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Als afbeelding behouden': 'Conserver comme image',
+  'bovenaan': 'en haut',
+  'onderaan': 'en bas',
+  'Is dit een logo?': 'S\'agit-il d\'un logo ?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Cette image apparaît {plaats} sur {n} diapositives. OciDeck peut l\'utiliser comme logo fixe plutôt que comme image de diapositive.',
+  'Mogelijk logo': 'Logo possible',
+  'Geen logo': 'Ce n\'est pas un logo',
+  'Ja, als logo gebruiken': 'Oui, utiliser comme logo',
+  'Ook als stijl toevoegen?': 'Ajouter également comme style ?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Vous pouvez enregistrer les couleurs, la police et ce logo pour de futures présentations.',
+  'Naam van de stijl': 'Nom du style',
+  'Alleen in deze presentatie': 'Uniquement dans cette présentation',
+  'Stijl toevoegen': 'Ajouter le style',
+  'Stijl van {naam}': 'Style de {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Le style n\'a pas pu être enregistré de manière permanente. Le logo sera utilisé uniquement dans cette présentation.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Vous ne partagerez alors plus d’identifiants depuis ce portefeuille. ',
   'U hebt nog geen badges.': 'Vous n’avez pas encore de badges.',

@@ -1627,6 +1627,24 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Als afbeelding behouden': 'Säilytä kuvana',
+  'bovenaan': 'yläreunassa',
+  'onderaan': 'alareunassa',
+  'Is dit een logo?': 'Onko tämä logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Tämä kuva näkyy {plaats} {n} diassa. OciDeck voi käyttää sitä kiinteänä logona diakuvan sijaan.',
+  'Mogelijk logo': 'Mahdollinen logo',
+  'Geen logo': 'Ei logo',
+  'Ja, als logo gebruiken': 'Kyllä, käytä logona',
+  'Ook als stijl toevoegen?': 'Lisätäänkö myös tyyliksi?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Voit tallentaa värit, fontin ja tämän logon tulevia esityksiä varten.',
+  'Naam van de stijl': 'Tyylin nimi',
+  'Alleen in deze presentatie': 'Vain tässä esityksessä',
+  'Stijl toevoegen': 'Lisää tyyli',
+  'Stijl van {naam}': 'Tyyli lähteestä {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Tyyliä ei voitu tallentaa pysyvästi. Logoa käytetään vain tässä esityksessä.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Et enää jaa tunnistetietoja tästä lompakosta. ',
   'U hebt nog geen badges.': 'Sinulla ei ole vielä tunnuksia.',

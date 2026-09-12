@@ -1647,6 +1647,24 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Als afbeelding behouden': 'Запазване като изображение',
+  'bovenaan': 'в горната част',
+  'onderaan': 'в долната част',
+  'Is dit een logo?': 'Това лого ли е?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Това изображение се намира {plaats} на {n} слайда. OciDeck може да го използва като постоянно лого вместо като изображение в слайд.',
+  'Mogelijk logo': 'Възможно лого',
+  'Geen logo': 'Не е лого',
+  'Ja, als logo gebruiken': 'Да, използване като лого',
+  'Ook als stijl toevoegen?': 'Да се добави и като стил?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Можете да запазите цветовете, шрифта и това лого за бъдещи презентации.',
+  'Naam van de stijl': 'Име на стила',
+  'Alleen in deze presentatie': 'Само в тази презентация',
+  'Stijl toevoegen': 'Добавяне на стил',
+  'Stijl van {naam}': 'Стил от {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Стилът не можа да бъде запазен за постоянно. Логото ще се използва само в тази презентация.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Вече няма да споделяте идентификационни данни от този портфейл. ',
   'U hebt nog geen badges.': 'Все още нямате значки.',

@@ -1626,6 +1626,24 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Als afbeelding behouden': 'Behåll som bild',
+  'bovenaan': 'längst upp',
+  'onderaan': 'längst ned',
+  'Is dit een logo?': 'Är det här en logotyp?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Den här bilden visas {plaats} på {n} bilder. OciDeck kan använda den som en fast logotyp i stället för som en bild på sidan.',
+  'Mogelijk logo': 'Möjlig logotyp',
+  'Geen logo': 'Inte en logotyp',
+  'Ja, als logo gebruiken': 'Ja, använd som logotyp',
+  'Ook als stijl toevoegen?': 'Lägg även till som stil?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Du kan spara färgerna, teckensnittet och den här logotypen för framtida presentationer.',
+  'Naam van de stijl': 'Stilnamn',
+  'Alleen in deze presentatie': 'Endast i den här presentationen',
+  'Stijl toevoegen': 'Lägg till stil',
+  'Stijl van {naam}': 'Stil från {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stilen kunde inte sparas permanent. Logotypen används bara i den här presentationen.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Du delar då inte längre inloggningsuppgifter från denna portfölj. ',
   'U hebt nog geen badges.': 'Du har inga märken ännu.',

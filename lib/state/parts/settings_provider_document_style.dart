@@ -3,6 +3,19 @@
 // nullable-string-persist eronder; alle imports leven in het hoofdbestand.
 part of '../settings_provider.dart';
 
+/// Voeg een profiel toe zonder de app-brede selectie te veranderen.
+Future<ThemeProfile> addThemeProfileWithoutSelection(
+  SettingsNotifier notifier,
+  ThemeProfile profile,
+) async {
+  final added = profile.copyWith(name: notifier._uniqueName(profile.name));
+  notifier.currentState = notifier.currentState.copyWith(
+    themeProfiles: [...notifier.currentState.themeProfiles, added],
+  );
+  await notifier.persistThemeProfiles();
+  return added;
+}
+
 /// Schrijf óf wis een nullable string-pref: bij een waarde [prefs.setString],
 /// bij `null` [prefs.remove]. Gedeeld door de export-gate-plafonds en de
 /// standaard documentstijl — allemaal "kies een sleutel, of zet uit". De

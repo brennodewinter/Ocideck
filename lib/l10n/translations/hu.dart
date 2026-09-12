@@ -1629,6 +1629,24 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Als afbeelding behouden': 'Megtartás képként',
+  'bovenaan': 'felül',
+  'onderaan': 'alul',
+  'Is dit een logo?': 'Ez egy logó?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Ez a kép {n} dián jelenik meg {plaats}. Az OciDeck dia képe helyett állandó logóként használhatja.',
+  'Mogelijk logo': 'Lehetséges logó',
+  'Geen logo': 'Nem logó',
+  'Ja, als logo gebruiken': 'Igen, használja logóként',
+  'Ook als stijl toevoegen?': 'Hozzáadja stílusként is?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'A színeket, a betűtípust és ezt a logót elmentheti a későbbi bemutatókhoz.',
+  'Naam van de stijl': 'Stílus neve',
+  'Alleen in deze presentatie': 'Csak ebben a bemutatóban',
+  'Stijl toevoegen': 'Stílus hozzáadása',
+  'Stijl van {naam}': 'Stílus innen: {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'A stílust nem sikerült tartósan menteni. A logó csak ebben a bemutatóban lesz használva.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ekkor többé nem oszt meg hitelesítő adatokat ebből a tárcából. ',
   'U hebt nog geen badges.': 'Még nincsenek jelvényei.',

@@ -1625,6 +1625,24 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Als afbeelding behouden': 'Saglabāt kā attēlu',
+  'bovenaan': 'augšdaļā',
+  'onderaan': 'apakšdaļā',
+  'Is dit een logo?': 'Vai tas ir logotips?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Šis attēls atrodas {plaats} {n} slaidos. OciDeck var to izmantot kā nemainīgu logotipu, nevis kā slaida attēlu.',
+  'Mogelijk logo': 'Iespējams logotips',
+  'Geen logo': 'Nav logotips',
+  'Ja, als logo gebruiken': 'Jā, izmantot kā logotipu',
+  'Ook als stijl toevoegen?': 'Vai pievienot arī kā stilu?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Varat saglabāt krāsas, fontu un šo logotipu turpmākām prezentācijām.',
+  'Naam van de stijl': 'Stila nosaukums',
+  'Alleen in deze presentatie': 'Tikai šajā prezentācijā',
+  'Stijl toevoegen': 'Pievienot stilu',
+  'Stijl van {naam}': 'Stils no {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stilu neizdevās saglabāt pastāvīgi. Logotips tiks izmantots tikai šajā prezentācijā.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Jūs vairs nekopīgosiet apliecinājumus no šī digitālā maka. ',
   'U hebt nog geen badges.': 'Jums vēl nav nozīmīšu.',

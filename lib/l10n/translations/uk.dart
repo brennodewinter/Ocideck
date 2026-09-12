@@ -1642,6 +1642,24 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Als afbeelding behouden': 'Залишити як зображення',
+  'bovenaan': 'угорі',
+  'onderaan': 'унизу',
+  'Is dit een logo?': 'Це логотип?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Це зображення розташоване {plaats} на {n} слайдах. OciDeck може використовувати його як постійний логотип, а не як зображення слайда.',
+  'Mogelijk logo': 'Можливий логотип',
+  'Geen logo': 'Це не логотип',
+  'Ja, als logo gebruiken': 'Так, використовувати як логотип',
+  'Ook als stijl toevoegen?': 'Також додати як стиль?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Ви можете зберегти кольори, шрифт і цей логотип для майбутніх презентацій.',
+  'Naam van de stijl': 'Назва стилю',
+  'Alleen in deze presentatie': 'Лише в цій презентації',
+  'Stijl toevoegen': 'Додати стиль',
+  'Stijl van {naam}': 'Стиль із {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Не вдалося зберегти стиль назавжди. Логотип використовуватиметься лише в цій презентації.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Після цього ви більше не надаватимете цифрові посвідчення з цього гаманця. ',
   'U hebt nog geen badges.': 'У вас ще немає бейджів.',

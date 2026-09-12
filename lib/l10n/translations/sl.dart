@@ -1627,6 +1627,24 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Als afbeelding behouden': 'Ohrani kot sliko',
+  'bovenaan': 'na vrhu',
+  'onderaan': 'na dnu',
+  'Is dit een logo?': 'Ali je to logotip?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Ta slika je prikazana {plaats} na {n} diapozitivih. OciDeck jo lahko uporabi kot stalni logotip namesto kot sliko diapozitiva.',
+  'Mogelijk logo': 'Možen logotip',
+  'Geen logo': 'Ni logotip',
+  'Ja, als logo gebruiken': 'Da, uporabi kot logotip',
+  'Ook als stijl toevoegen?': 'Dodaj tudi kot slog?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Barve, pisavo in ta logotip lahko shranite za prihodnje predstavitve.',
+  'Naam van de stijl': 'Ime sloga',
+  'Alleen in deze presentatie': 'Samo v tej predstavitvi',
+  'Stijl toevoegen': 'Dodaj slog',
+  'Stijl van {naam}': 'Slog iz {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Sloga ni bilo mogoče trajno shraniti. Logotip bo uporabljen samo v tej predstavitvi.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Iz tega portfelja ne delite več poverilnic. ',
   'U hebt nog geen badges.': 'Značk še nimate.',

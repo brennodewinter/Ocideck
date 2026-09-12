@@ -1620,6 +1620,24 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Als afbeelding behouden': 'Säilita pildina',
+  'bovenaan': 'ülaosas',
+  'onderaan': 'alaosas',
+  'Is dit een logo?': 'Kas see on logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'See pilt asub {plaats} {n} slaidil. OciDeck saab kasutada seda slaidipildi asemel püsiva logona.',
+  'Mogelijk logo': 'Võimalik logo',
+  'Geen logo': 'Ei ole logo',
+  'Ja, als logo gebruiken': 'Jah, kasuta logona',
+  'Ook als stijl toevoegen?': 'Kas lisada ka stiilina?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Saate värvid, fondi ja selle logo tulevaste esitluste jaoks salvestada.',
+  'Naam van de stijl': 'Stiili nimi',
+  'Alleen in deze presentatie': 'Ainult selles esitluses',
+  'Stijl toevoegen': 'Lisa stiil',
+  'Stijl van {naam}': 'Esitluse {naam} stiil',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stiili ei saanud püsivalt salvestada. Logo kasutatakse ainult selles esitluses.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Te ei jaga sellest portfellist enam mandaate. ',
   'U hebt nog geen badges.': 'Teil ei ole veel märke.',

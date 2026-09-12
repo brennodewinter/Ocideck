@@ -1627,6 +1627,24 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Als afbeelding behouden': 'Pertahankan sebagai gambar',
+  'bovenaan': 'di bagian atas',
+  'onderaan': 'di bagian bawah',
+  'Is dit een logo?': 'Apakah ini logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Gambar ini muncul {plaats} pada {n} slide. OciDeck dapat menggunakannya sebagai logo tetap, bukan sebagai gambar slide.',
+  'Mogelijk logo': 'Kemungkinan logo',
+  'Geen logo': 'Bukan logo',
+  'Ja, als logo gebruiken': 'Ya, gunakan sebagai logo',
+  'Ook als stijl toevoegen?': 'Tambahkan juga sebagai gaya?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Anda dapat menyimpan warna, font, dan logo ini untuk presentasi berikutnya.',
+  'Naam van de stijl': 'Nama gaya',
+  'Alleen in deze presentatie': 'Hanya dalam presentasi ini',
+  'Stijl toevoegen': 'Tambahkan gaya',
+  'Stijl van {naam}': 'Gaya dari {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Gaya tidak dapat disimpan secara permanen. Logo hanya akan digunakan dalam presentasi ini.',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Setelah itu, Anda tidak lagi membagikan kredensial dari dompet ini. ',
   'U hebt nog geen badges.': 'Anda belum memiliki lencana.',
