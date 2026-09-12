@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/reference_standard.dart';
 import 'package:ocideck/services/mastg_catalog.dart';
 import 'package:ocideck/services/maswe_catalog.dart';
 import 'package:ocideck/services/reference_standards.dart';
@@ -112,9 +113,10 @@ void main() {
   });
 
   group('registratie', () {
-    test('MASWE staat in het register, op datum bevraagd', () {
+    test('MASWE staat in het register op de officiële release', () {
       final entry = referenceStandardById('maswe')!;
-      expect(entry.bundledVersion, masweSnapshotDate);
+      expect(entry.bundledVersion, masweVersion);
+      expect(entry.probe, UpstreamProbe.githubReleases);
       expect(entry.probeTarget, 'OWASP/maswe');
       expect(entry.licence, 'CC-BY-SA-4.0');
       // De formaatmigratie (#1156) is voltooid: niet langer adviserend.

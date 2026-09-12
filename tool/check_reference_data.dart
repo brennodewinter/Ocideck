@@ -330,7 +330,7 @@ String _knownExternalConst(String name, String _) {
   const files = {
     'wstgVersion': 'lib/services/wstg_catalog.dart',
     'mastgVersion': 'lib/services/mastg_catalog.dart',
-    'masweSnapshotDate': 'lib/services/maswe_catalog.dart',
+    'masweVersion': 'lib/services/maswe_catalog.dart',
   };
   final path = files[name];
   if (path == null) return '';
@@ -633,23 +633,38 @@ Future<String?> _latestGithubRelease(String repo) async {
   if (repo.isEmpty) return null;
   final client = HttpClient()..connectionTimeout = const Duration(seconds: 15);
   try {
+    // GitHub laat deze publieke route naar de nieuwste echte release
+    // doorverwijzen. De Location bevat de tag en verbruikt geen anoniem
+    // API-quotum. Dat quotum was tijdens een release al opgebruikt door andere
+    // bronprobes, waarna WSTG/MASTG/MASWE tegelijk ten onrechte "onbekend"
+    // werden. Drafts en pre-releases worden door GitHub zelf overgeslagen.
     final request = await client.getUrl(
-      Uri.parse('https://api.github.com/repos/$repo/releases/latest'),
+      Uri.parse('https://github.com/$repo/releases/latest'),
     );
-    request.headers.set('Accept', 'application/vnd.github+json');
+    request.followRedirects = false;
     request.headers.set('User-Agent', 'OciDeck-reference-data-check');
     final response = await request.close();
-    if (response.statusCode != 200) return null;
-    final body = await response.transform(utf8.decoder).join();
-    final json = jsonDecode(body) as Map<String, dynamic>;
-    final tag = json['tag_name'];
-    if (tag is! String || tag.isEmpty) return null;
-    return tag.startsWith('v') ? tag.substring(1) : tag;
+    await response.drain<void>();
+    return githubReleaseVersionFromLocation(
+      response.headers.value(HttpHeaders.locationHeader),
+    );
   } on Object {
     return null;
   } finally {
     client.close(force: true);
   }
+}
+
+/// Leest de tag uit GitHubs `/releases/latest`-doorverwijzing.
+String? githubReleaseVersionFromLocation(String? location) {
+  if (location == null || location.isEmpty) return null;
+  final uri = Uri.tryParse(location);
+  if (uri == null) return null;
+  final marker = uri.pathSegments.indexOf('tag');
+  if (marker < 0 || marker + 1 >= uri.pathSegments.length) return null;
+  final tag = uri.pathSegments[marker + 1];
+  if (tag.isEmpty) return null;
+  return tag.startsWith('v') ? tag.substring(1) : tag;
 }
 
 /// Haalt een URL op, of null bij welke fout dan ook.

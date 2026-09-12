@@ -2,7 +2,7 @@
 // constante in de catalogus zelf én de regel in docs/LICENSE_COMPLIANCE.md.
 //
 //   dart run tool/record_catalog_version.dart wstg 4.2
-//   dart run tool/record_catalog_version.dart maswe 2026-08-04
+//   dart run tool/record_catalog_version.dart maswe 1.0.0
 //
 // Dit was tot 18-08-2026 handwerk. De generatoren riepen "zet de versie nu ook
 // even daar en daar", en dat ging zoals dat gaat: de Makefile droeg
@@ -69,7 +69,7 @@ const catalogs = <String, CatalogRecord>{
   ),
   'maswe': CatalogRecord(
     constFile: 'lib/services/maswe_catalog.dart',
-    constName: 'masweSnapshotDate',
+    constName: 'masweVersion',
     dataFiles: ['lib/services/maswe_catalog_data.dart'],
     entryToken: 'MasweWeakness(',
     docMarker: 'lib/services/maswe_catalog.dart',

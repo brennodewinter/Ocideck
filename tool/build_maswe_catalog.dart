@@ -4,13 +4,11 @@
 // Invoer: de repo van github.com/OWASP/maswe, uitgepakt.
 //   curl -sL https://github.com/OWASP/maswe/archive/<sha>.tar.gz | tar xz
 // dan:
-//   dart run tool/build_maswe_catalog.dart maswe-<sha> 2026-08-03
+//   dart run tool/build_maswe_catalog.dart maswe-1.0.0 1.0.0
 //
-// De tweede parameter is een **datum**, geen versienummer, en dat is geen
-// slordigheid: MASWE heeft geen releases en geen tags. Er is alleen een
-// doorlopende branch, dus het enige eerlijke antwoord op "welke versie heb je
-// gebruikt" is de dag waarop je hem hebt overgenomen. De verouderingspoort
-// vergelijkt daarom met de datum van de laatste commit.
+// De tweede parameter is de officiële releaseversie. Gebruik voor onderzoek
+// naar de bewegende ontwikkelbranch altijd een exacte commit-SHA als identiteit;
+// een datum alleen onderscheidt twee commits op dezelfde dag niet.
 //
 // ── Het herbouwde formaat (medio 2026) ──────────────────────────────────────
 // OWASP heeft MASWE grondig herzien. Wat dat voor deze generator betekent:
@@ -50,7 +48,7 @@ const _manualBetaAliases = <String, String>{
 void main(List<String> args) {
   if (args.length < 2) {
     stderr.writeln(
-      'usage: dart run tool/build_maswe_catalog.dart <uitgepakte-repo> <datum>',
+      'usage: dart run tool/build_maswe_catalog.dart <uitgepakte-repo> <versie>',
     );
     exit(2);
   }
@@ -122,7 +120,7 @@ void main(List<String> args) {
     }
   }
   stdout.writeln(
-    'Draai je dit gereedschap los, leg de datum dan zelf vast: '
+    'Draai je dit gereedschap los, leg de versie dan zelf vast: '
     'dart run tool/record_catalog_version.dart maswe ${args[1]} '
     '(scripts/refresh_catalogs.sh doet dat al voor je).',
   );

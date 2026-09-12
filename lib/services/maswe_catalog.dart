@@ -3,8 +3,7 @@
 // The weakness list in this library (see the `maswe_catalog_data` part)
 // reproduces 78 verbatim weakness ids, titles, MASVS categories, requirement
 // summaries and CWE mappings of the **OWASP Mobile Application Security
-// Weakness Enumeration** (snapshot 2026-08-03 — the project publishes no
-// releases or tags).
+// Weakness Enumeration v1.0.0.
 // © the OWASP Foundation and its contributors, licensed under CC-BY-SA-4.0.
 //
 //   Licence: https://creativecommons.org/licenses/by-sa/4.0/
@@ -26,12 +25,10 @@ part 'maswe_catalog_data.dart';
 /// mobiele tegenhanger van MITRE's CWE, en de laag waar MASTG-tests naar
 /// verwijzen.
 ///
-/// **Vastgelegd op datum, niet op versie.** MASWE voert geen releases en geen
-/// tags: er is één doorlopende branch. Het enige eerlijke antwoord op "welke
-/// versie is gebruikt" is dus de dag waarop deze momentopname is genomen, en de
-/// verouderingspoort vergelijkt met de datum van de laatste commit. Dat is een
-/// zwakkere aanhaling dan `WSTG v4.2` of `MASTG v2.0.0`, en dat hoort zo te
-/// staan in plaats van weggepoetst te worden met een verzonnen versienummer.
+/// **Vastgelegd op de officiële uitgave.** Sinds 17 augustus 2026 publiceert
+/// MASWE releases. De gebundelde catalogus volgt daarom net als WSTG en MASTG
+/// een citeerbare tag; de bewegende `main`-branch wordt afzonderlijk als
+/// ontwikkelstand bewaakt en mag deze stabiele ondergrens niet stil vervangen.
 ///
 /// **Oude beta-nummering blijft aanhaalbaar.** OWASP heeft de lijst medio 2026
 /// herbouwd: van 117 (grotendeels concept) naar 78 uitgeschreven zwakheden,
@@ -48,8 +45,8 @@ class MasweCatalog {
 
   static final MasweCatalog instance = MasweCatalog._();
 
-  /// De datum van de momentopname (`JJJJ-MM-DD`).
-  String get snapshotDate => masweSnapshotDate;
+  /// De officiële MASWE-versie die deze catalogus weerspiegelt.
+  String get version => masweVersion;
 
   /// Het etiket dat de aanhaling draagt.
   String get standardLabel => masweStandardLabel;
@@ -85,8 +82,8 @@ class MasweCatalog {
       weaknesses.where((w) => w.cweIds.contains(cweId)).toList();
 }
 
-/// De dag waarop deze momentopname van MASWE is genomen.
-const masweSnapshotDate = '2026-09-12';
+/// De officiële MASWE-uitgave die hier gebundeld is.
+const masweVersion = '1.0.0';
 
-/// Het etiket met de datum, want een versienummer heeft MASWE niet.
-const masweStandardLabel = 'OWASP MASWE ($masweSnapshotDate)';
+/// Het versiedragende etiket voor rapporten en verwijzingen.
+const masweStandardLabel = 'OWASP MASWE v$masweVersion';
