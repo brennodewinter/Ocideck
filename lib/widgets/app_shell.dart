@@ -249,10 +249,13 @@ class _AppShellState extends ConsumerState<AppShell> {
       if (!mounted) return false;
       return ProxyFallbackDialog.show(context, host: host);
     };
-    ref.read(tabsProvider.notifier).learningSessionCloser = (session) =>
-        ref.read(ociServeProvider.notifier).closeLessonSession(session);
+    setLearningSessionCloser(
+      ref.read(tabsProvider.notifier),
+      (session) =>
+          ref.read(ociServeProvider.notifier).closeLessonSession(session),
+    );
     ref.read(ociServeProvider.notifier).closeLearningTabsLocally = () =>
-        ref.read(tabsProvider.notifier).closeLearningTabsLocally();
+        closeLearningTabsLocally(ref.read(tabsProvider.notifier));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _maybeRestore();
       // Open any file the app was launched with, and start listening for files
@@ -458,7 +461,7 @@ class _AppShellState extends ConsumerState<AppShell> {
         .discardEach(ref.read(tabsProvider).tabs.map((t) => t.recoveryId));
     // Wis lesinhoud en web-assets eerst lokaal. De servermelding is bewust
     // best-effort: ook zonder netwerk mag afsluiten geen materiaal achterlaten.
-    final sessions = ref.read(tabsProvider.notifier).closeLearningTabsLocally();
+    final sessions = closeLearningTabsLocally(ref.read(tabsProvider.notifier));
     for (final session in sessions) {
       await ref.read(ociServeProvider.notifier).closeLessonSession(session);
     }

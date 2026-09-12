@@ -398,16 +398,15 @@ void main() {
         expiresAt: DateTime.utc(2099),
       );
 
-      final result = await container
-          .read(tabsProvider.notifier)
-          .openLearningPackage(
-            package,
-            'les.ocideck',
-            session,
-            password: testOciServePackagePassword,
-            packageProfile: 'ocideck-winzip-aes256-ae2-v1',
-            initialAnchor: 'verder',
-          );
+      final result = await openLearningPackage(
+        container.read(tabsProvider.notifier),
+        package,
+        'les.ocideck',
+        session,
+        password: testOciServePackagePassword,
+        packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+        initialAnchor: 'verder',
+      );
       expect(result, OpenResult.opened);
       await tester.pumpAndSettle();
 

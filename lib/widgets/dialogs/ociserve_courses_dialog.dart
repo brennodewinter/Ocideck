@@ -14,7 +14,7 @@ import 'ociserve_course_summary.dart';
 import 'ociserve_courses_sidebar.dart';
 import 'ociserve_data_access.dart';
 import 'ociserve_evidence.dart';
-import 'ociserve_exam_dialog.dart';
+import 'ociserve_exam_button.dart';
 import 'ociserve_learning_profile.dart';
 
 part 'parts/ociserve_courses_dialog_privacy.dart';
@@ -262,28 +262,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
             const SizedBox(width: 16),
             SizedBox(width: 210, child: _organizationPicker(memberships)),
           ],
-          if (_organizationId != null && !compact) ...[
-            const SizedBox(width: 12),
-            OutlinedButton.icon(
-              key: const Key('ociserve-exams-button'),
-              onPressed: () => OciServeExamDialog.show(
-                context,
-                organizationId: _organizationId!,
-              ),
-              icon: const Icon(Icons.assignment_outlined),
-              label: Text(l10n.d('Mijn examens')),
-            ),
-          ],
-          if (_organizationId != null && compact)
-            IconButton(
-              key: const Key('ociserve-exams-button'),
-              tooltip: l10n.d('Mijn examens'),
-              onPressed: () => OciServeExamDialog.show(
-                context,
-                organizationId: _organizationId!,
-              ),
-              icon: const Icon(Icons.assignment_outlined),
-            ),
+          ...ociServeExamActions(_organizationId, compact),
           IconButton(
             tooltip: l10n.t('close'),
             onPressed: () => Navigator.pop(context),
@@ -954,20 +933,19 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
               // De gebruiker kan de dialoog sluiten terwijl de download loopt.
               // Open daarna niet alsnog buiten diens zicht een nieuw tabblad.
               if (!mounted) return false;
-              final result = await ref
-                  .read(tabsProvider.notifier)
-                  .openLearningPackage(
-                    bytes,
-                    '${lesson.title}.ocideck',
-                    session,
-                    password: password,
-                    packageProfile: packageProfile,
-                    // Een afgeronde les opnieuw starten betekent echt opnieuw:
-                    // het laatst bewaarde anker is dan juist de einddia.
-                    initialAnchor: _stateFor(lesson)?.completed == true
-                        ? null
-                        : _stateFor(lesson)?.lastSlideAnchor,
-                  );
+              final result = await openLearningPackage(
+                ref.read(tabsProvider.notifier),
+                bytes,
+                '${lesson.title}.ocideck',
+                session,
+                password: password,
+                packageProfile: packageProfile,
+                // Een afgeronde les opnieuw starten betekent echt opnieuw:
+                // het laatst bewaarde anker is dan juist de einddia.
+                initialAnchor: _stateFor(lesson)?.completed == true
+                    ? null
+                    : _stateFor(lesson)?.lastSlideAnchor,
+              );
               return result == OpenResult.opened;
             },
           );
