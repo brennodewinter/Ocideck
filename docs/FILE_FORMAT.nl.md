@@ -3042,6 +3042,19 @@ gewone zip zoals hierboven.
   vertrouwelijkheid van gevoelig materiaal verpak je het pakket in een container
   met een moderne KDF en verborgen namen (age, GPG of 7-Zip `-mhe=on`).
 
+### 7.2 Tijdelijk OciServe-lesprofiel
+
+Een OciServe-les gebruikt niet het draagbare uitwisselingsprofiel voor auteurs
+hierboven. Elke keer dat de les wordt geopend, maakt de server een nieuwe sessie
+en een nieuw pakket met protocolidentificatie
+`ocideck-winzip-aes256-ae2-v1`: WinZip AES-256 AE-2, elk lid versleuteld,
+leveranciers-id `AE`, sterkte 3 en methode 99 in overeenkomende lokale en centrale
+headers. OciDeck accepteert via deze route geen terugval naar platte tekst of een
+pakket met gemengde leden. Het willekeurige ASCII-wachtwoord komt alleen terug in
+het antwoord dat de sessie opent, wordt gebruikt om het gecontroleerde pakket in
+het geheugen te ontcijferen en wordt daarna vergeten. Voor de bestaande
+uitwisselbaarheid van auteurs blijft de draagbare export AE-1 gebruiken.
+
 ---
 
 ## 8. Bijzondere per-slide-commentaren (overzicht)

@@ -1656,6 +1656,26 @@ const _dutchSourceAddLt = <String, String>{
   'Stijl van {naam}': 'Stilius iš „{naam}“',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Nepavyko visam laikui išsaugoti stiliaus. Logotipas bus naudojamas tik šiame pristatyme.',
+  'Mijn examens': 'Mano egzaminai',
+  'Alle vragen zijn beantwoord.': 'Į visus klausimus buvo atsakyta.',
+  'Examen inleveren': 'Pateikti egzaminą',
+  'Uw examen is ingeleverd.': 'Jūsų egzaminas pateiktas.',
+  'De examenhandeling is niet gelukt.': 'Egzamino procedūra nebuvo sėkminga.',
+  'Menselijk toezicht bij examens': 'Žmogaus priežiūra atliekant egzaminus',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck nenustato, kas yra už klaviatūros. Todėl egzamino metu organizuokite žmogaus priežiūrą.',
+  'Er zijn geen examens beschikbaar.': 'Nėra galimų egzaminų.',
+  'Examen': 'Egzaminas',
+  'Start examen': 'Pradėti egzaminą',
+  'Nog niet vrijgegeven': 'Dar nepaleistas',
+  'Gesloten': 'Uždaryta',
+  'Examen inleveren?': 'Pateikti egzaminą?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Pateikę atsakymus negalite pakeisti.',
+  'Definitief inleveren': 'Galutinis pateikimas',
+  'Vraag {nummer}': 'Klausimas {number}',
+  'Uw antwoord': 'Jūsų atsakymas',
+  'Antwoord indienen': 'Pateikti atsakymą',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Tuomet nebesidalysite šios dėklės kredencialais. ',
   'U hebt nog geen badges.': 'Kol kas neturite jokių ženklelių.',

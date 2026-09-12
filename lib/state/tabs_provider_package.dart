@@ -20,11 +20,14 @@ Future<OpenResult> _openLearningPackage(
   Uint8List bytes,
   String name,
   LearningSessionRef learningSession, {
+  required String password,
+  required String packageProfile,
   String? initialAnchor,
 }) {
   _clearOpenFailure(notifier._ref, notifier.mounted);
   if (!FileService.looksLikeZipBytes(bytes) ||
-      FileService.isEncryptedPackage(bytes)) {
+      !hasExactOciServeAesPackageProfile(bytes, profile: packageProfile) ||
+      !notifier._file.canDecodePackage(bytes, password)) {
     return Future.value(
       _failOpen(notifier._ref, notifier.mounted, OpenFailure.unreadable),
     );
@@ -34,6 +37,7 @@ Future<OpenResult> _openLearningPackage(
     bytes,
     name,
     learningSession: learningSession,
+    suppliedPassword: password,
     initialAnchor: initialAnchor,
     strictIntegrity: true,
   );
@@ -230,10 +234,11 @@ Future<OpenResult> _openPackageFromBytes(
   LearningSessionRef? learningSession,
   String? initialAnchor,
   bool strictIntegrity = false,
+  String? suppliedPassword,
 }) async {
   // Versleuteld pakket: vraag (met retry) het wachtwoord vóór het decoderen.
-  String? password;
-  if (FileService.isEncryptedPackage(bytes)) {
+  String? password = suppliedPassword;
+  if (password == null && FileService.isEncryptedPackage(bytes)) {
     final resolver = notifier.packagePasswordResolver;
     if (resolver == null) return OpenResult.passwordCancelled;
     var retry = false;

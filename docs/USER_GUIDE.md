@@ -4523,6 +4523,21 @@ cursussen**. These packages can only be played in OciDeck: editing and saving
 are unavailable. This is a usability policy, not copy protection; screen capture
 remains possible.
 
+Every lesson open creates a new short-lived server session. OciServe encrypts
+that session's `.ocideck` package with AES-256; OciDeck verifies and decrypts it
+only in memory. Ending the lesson removes the deck and its in-memory assets
+before OciDeck closes the server session. To view the lesson again, open it
+again from the course system; that creates new ciphertext and a new key.
+
+**Mijn examens** opens the separate formal-exam client. An exam can start only
+after an examiner has released its server session. OciDeck shows one personal
+question at a time and never receives correctness or an answer key. Answers are
+bound to a short-lived server challenge and revision, and final submission asks
+for confirmation. OciDeck cannot establish who is behind the keyboard. The
+examining institution must organise human supervision when that assurance is
+required. Individual question selection and ordering reduce the value of
+looking at another participant's screen, but do not replace supervision.
+
 ### Your personal learning progress
 
 From **Mijn cursussen**, select **Mijn voortgang** in the sidebar or click your

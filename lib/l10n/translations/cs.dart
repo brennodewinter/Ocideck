@@ -1650,6 +1650,26 @@ const _dutchSourceAddCs = <String, String>{
   'Stijl van {naam}': 'Styl z {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Styl se nepodařilo trvale uložit. Logo se použije pouze v této prezentaci.',
+  'Mijn examens': 'Moje zkoušky',
+  'Alle vragen zijn beantwoord.': 'Všechny otázky byly zodpovězeny.',
+  'Examen inleveren': 'Odeslat zkoušku',
+  'Uw examen is ingeleverd.': 'Vaše zkouška byla odeslána.',
+  'De examenhandeling is niet gelukt.': 'Zkouškové řízení nebylo úspěšné.',
+  'Menselijk toezicht bij examens': 'Lidský dohled nad zkouškami',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck neurčuje, kdo je za klávesnicí. Zorganizujte proto při zkoušce lidský dohled.',
+  'Er zijn geen examens beschikbaar.': 'Nejsou k dispozici žádné zkoušky.',
+  'Examen': 'Zkouška',
+  'Start examen': 'Zahájit zkoušku',
+  'Nog niet vrijgegeven': 'Dosud nevydáno',
+  'Gesloten': 'Zavřeno',
+  'Examen inleveren?': 'Odeslat zkoušku?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Po odeslání již nemůžete své odpovědi měnit.',
+  'Definitief inleveren': 'Konečné podání',
+  'Vraag {nummer}': 'otázka {číslo}',
+  'Uw antwoord': 'Vaše odpověď',
+  'Antwoord indienen': 'Odeslat odpověď',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Z tohoto portfolia již nebudete sdílet žádná digitální osvědčení. ',
   'U hebt nog geen badges.': 'Zatím nemáte žádné odznaky.',

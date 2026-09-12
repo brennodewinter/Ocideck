@@ -1664,6 +1664,26 @@ const _dutchSourceAddUk = <String, String>{
   'Stijl van {naam}': 'Стиль із {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Не вдалося зберегти стиль назавжди. Логотип використовуватиметься лише в цій презентації.',
+  'Mijn examens': 'Мої іспити',
+  'Alle vragen zijn beantwoord.': 'На всі запитання надано відповіді.',
+  'Examen inleveren': 'Здати іспит',
+  'Uw examen is ingeleverd.': 'Ваш іспит здано.',
+  'De examenhandeling is niet gelukt.': 'Процедура іспиту не пройшла успішно.',
+  'Menselijk toezicht bij examens': 'Людський контроль іспитів',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck не визначає, хто стоїть за клавіатурою. Тому організуйте людський нагляд під час іспиту.',
+  'Er zijn geen examens beschikbaar.': 'Немає доступних іспитів.',
+  'Examen': 'екзамен',
+  'Start examen': 'Розпочати іспит',
+  'Nog niet vrijgegeven': 'Ще не випущений',
+  'Gesloten': 'Закрито',
+  'Examen inleveren?': 'Здати іспит?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Після надсилання ви не зможете змінити свої відповіді.',
+  'Definitief inleveren': 'Остаточне подання',
+  'Vraag {nummer}': 'Питання {номер}',
+  'Uw antwoord': 'Ваша відповідь',
+  'Antwoord indienen': 'Надішліть відповідь',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Після цього ви більше не надаватимете цифрові посвідчення з цього гаманця. ',
   'U hebt nog geen badges.': 'У вас ще немає бейджів.',

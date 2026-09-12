@@ -688,6 +688,27 @@ const _dutchSourceAddPap = {
   'Stijl van {naam}': 'Stilo di {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'No tabata posibel pa warda e stilo permanentemente. Lo usa e logo solamente den e presentashon aki.',
+  'Mijn examens': 'Mi èksamennan',
+  'Alle vragen zijn beantwoord.': 'Tur pregunta a wordo contesta.',
+  'Examen inleveren': 'Entregá èksamen',
+  'Uw examen is ingeleverd.': 'Bo èksamen a wòrdu entregá.',
+  'De examenhandeling is niet gelukt.':
+      'E prosedura di èksamen no tabata eksitoso.',
+  'Menselijk toezicht bij examens': 'Supervishon humano di èksamennan',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck no ta determiná ken ta tras di e klaviatura. P’esei, organisá supervishon humano durante e èksamen.',
+  'Er zijn geen examens beschikbaar.': 'No tin èksamen disponibel.',
+  'Examen': 'Eksamen',
+  'Start examen': 'Kuminsá èksamen',
+  'Nog niet vrijgegeven': 'No a sali ainda',
+  'Gesloten': 'Será',
+  'Examen inleveren?': 'Entregá un èksamen?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Unabes entregá, bo no por kambia bo kontesta.',
+  'Definitief inleveren': 'Entrega final',
+  'Vraag {nummer}': 'Pregunta {number}',
+  'Uw antwoord': 'Bo kontesta',
+  'Antwoord indienen': 'Entregá kontesta',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'E ora ei bo no ta kompartí kredensialnan mas for di e portafolio aki. ',
   'U hebt nog geen badges.': 'Bo ainda no tin ningun badge.',

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
+import 'learning_session.dart';
+
 @immutable
 class OciServeInstallation {
   const OciServeInstallation({required this.clientId, required this.issuer});
@@ -208,13 +210,79 @@ class OciServePackage {
     required this.bytes,
     required this.sha256,
     required this.playbackPolicy,
+    required this.packageProfile,
     this.etag,
   });
 
   final Uint8List bytes;
   final String sha256;
   final String playbackPolicy;
+  final String packageProfile;
   final String? etag;
+}
+
+/// Eenmalige, kort levende toestemming om één versleutelde les te openen.
+///
+/// [packagePassword] mag alleen binnen de atomaire openingsaanroep bestaan en
+/// wordt daarom nooit onderdeel van [LearningSessionRef] of duurzame opslag.
+@immutable
+class OciServeLessonSessionGrant {
+  const OciServeLessonSessionGrant({
+    required this.id,
+    required this.packagePassword,
+    required this.packageProfile,
+    required this.packageUrl,
+    required this.expiresAt,
+    required this.digestSha256,
+  });
+
+  final String id;
+  final String packagePassword;
+  final String packageProfile;
+  final Uri packageUrl;
+  final DateTime expiresAt;
+  final String digestSha256;
+
+  factory OciServeLessonSessionGrant.fromJson(Map<String, Object?> json) {
+    const fields = {
+      'id',
+      'package_password',
+      'package_profile',
+      'package_url',
+      'expires_at',
+      'digest',
+    };
+    if (json.keys.any((key) => !fields.contains(key))) {
+      throw const FormatException('unexpected lesson playback field');
+    }
+    final id = (json['id'] as String? ?? '').trim();
+    final password = (json['package_password'] as String? ?? '').trim();
+    final profile = (json['package_profile'] as String? ?? '').trim();
+    final packageUrl = Uri.tryParse(
+      (json['package_url'] as String? ?? '').trim(),
+    );
+    final expiresAt = DateTime.tryParse(
+      (json['expires_at'] as String? ?? '').trim(),
+    );
+    final digest = (json['digest'] as String? ?? '').trim().toLowerCase();
+    if (id.isEmpty ||
+        !RegExp(r'^[A-Za-z0-9_-]{43}$').hasMatch(password) ||
+        profile.isEmpty ||
+        packageUrl == null ||
+        packageUrl.toString().isEmpty ||
+        expiresAt == null ||
+        !RegExp(r'^[0-9a-f]{64}$').hasMatch(digest)) {
+      throw const FormatException('incomplete lesson playback session');
+    }
+    return OciServeLessonSessionGrant(
+      id: id,
+      packagePassword: password,
+      packageProfile: profile,
+      packageUrl: packageUrl,
+      expiresAt: expiresAt.toUtc(),
+      digestSha256: digest,
+    );
+  }
 }
 
 @immutable

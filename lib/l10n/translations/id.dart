@@ -1649,6 +1649,26 @@ const _dutchSourceAddId = <String, String>{
   'Stijl van {naam}': 'Gaya dari {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Gaya tidak dapat disimpan secara permanen. Logo hanya akan digunakan dalam presentasi ini.',
+  'Mijn examens': 'Ujian saya',
+  'Alle vragen zijn beantwoord.': 'Semua pertanyaan telah terjawab.',
+  'Examen inleveren': 'Kirim ujian',
+  'Uw examen is ingeleverd.': 'Ujian Anda telah diserahkan.',
+  'De examenhandeling is niet gelukt.': 'Prosedur ujian tidak berhasil.',
+  'Menselijk toezicht bij examens': 'Pengawasan manusia terhadap ujian',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck tidak menentukan siapa yang berada di belakang keyboard. Oleh karena itu, aturlah pengawasan manusia selama ujian.',
+  'Er zijn geen examens beschikbaar.': 'Tidak ada ujian yang tersedia.',
+  'Examen': 'Ujian',
+  'Start examen': 'Mulai ujian',
+  'Nog niet vrijgegeven': 'Belum dirilis',
+  'Gesloten': 'Tertutup',
+  'Examen inleveren?': 'Kirimkan ujian?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Setelah dikirimkan, Anda tidak dapat mengubah jawaban Anda.',
+  'Definitief inleveren': 'Penyerahan terakhir',
+  'Vraag {nummer}': 'Pertanyaan {angka}',
+  'Uw antwoord': 'Jawaban Anda',
+  'Antwoord indienen': 'Kirimkan jawaban',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Setelah itu, Anda tidak lagi membagikan kredensial dari dompet ini. ',
   'U hebt nog geen badges.': 'Anda belum memiliki lencana.',

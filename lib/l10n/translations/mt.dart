@@ -1667,6 +1667,26 @@ const _dutchSourceAddMt = <String, String>{
   'Stijl van {naam}': 'Stil minn {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'L-istil ma setax jiġi ssejvjat b\'mod permanenti. Il-logo se jintuża f\'din il-preżentazzjoni biss.',
+  'Mijn examens': 'L-eżamijiet tiegħi',
+  'Alle vragen zijn beantwoord.': 'Il-mistoqsijiet kollha ġew imwieġba.',
+  'Examen inleveren': 'Ibgħat eżami',
+  'Uw examen is ingeleverd.': 'L-eżami tiegħek ġie sottomess.',
+  'De examenhandeling is niet gelukt.': 'Il-proċedura tal-eżami ma rnexxietx.',
+  'Menselijk toezicht bij examens': 'Superviżjoni umana tal-eżamijiet',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck ma jiddeterminax min hu wara t-tastiera. Għalhekk, organizza sorveljanza umana waqt l-eżami.',
+  'Er zijn geen examens beschikbaar.': 'M\'hemmx eżamijiet disponibbli.',
+  'Examen': 'Eżami',
+  'Start examen': 'Ibda l-eżami',
+  'Nog niet vrijgegeven': 'Għadu mhux rilaxxat',
+  'Gesloten': 'Magħluq',
+  'Examen inleveren?': 'Tissottometti eżami?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Ladarba tiġi sottomessa, ma tistax tibdel it-tweġibiet tiegħek.',
+  'Definitief inleveren': 'Sottomissjoni finali',
+  'Vraag {nummer}': 'Mistoqsija {numru}',
+  'Uw antwoord': 'It-tweġiba tiegħek',
+  'Antwoord indienen': 'Ibgħat tweġiba',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ma tibqax taqsam kredenzjali minn dan il-portafoll. ',
   'U hebt nog geen badges.': 'Għad m’għandek l-ebda badge.',

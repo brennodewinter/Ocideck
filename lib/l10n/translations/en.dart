@@ -849,6 +849,26 @@ const _dutchSourceAddEn = {
   'Stijl van {naam}': 'Style from {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'The style could not be saved permanently. The logo will only be used in this presentation.',
+  'Mijn examens': 'My exams',
+  'Alle vragen zijn beantwoord.': 'All questions have been answered.',
+  'Examen inleveren': 'Submit exam',
+  'Uw examen is ingeleverd.': 'Your exam has been submitted.',
+  'De examenhandeling is niet gelukt.': 'The exam action failed.',
+  'Menselijk toezicht bij examens': 'Human supervision during exams',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck does not establish who is behind the keyboard. Therefore arrange human supervision during the exam.',
+  'Er zijn geen examens beschikbaar.': 'No exams are available.',
+  'Examen': 'Exam',
+  'Start examen': 'Start exam',
+  'Nog niet vrijgegeven': 'Not released yet',
+  'Gesloten': 'Closed',
+  'Examen inleveren?': 'Submit exam?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'After submission, you can no longer change your answers.',
+  'Definitief inleveren': 'Submit permanently',
+  'Vraag {nummer}': 'Question {nummer}',
+  'Uw antwoord': 'Your answer',
+  'Antwoord indienen': 'Submit answer',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'You will no longer share credentials from this portfolio. ',
   'U hebt nog geen badges.': 'You do not have any badges yet.',

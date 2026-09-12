@@ -689,6 +689,27 @@ const _dutchSourceAddDe = {
   'Stijl van {naam}': 'Stil von {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Der Stil konnte nicht dauerhaft gespeichert werden. Das Logo wird nur in dieser Präsentation verwendet.',
+  'Mijn examens': 'Meine Prüfungen',
+  'Alle vragen zijn beantwoord.': 'Alle Fragen wurden beantwortet.',
+  'Examen inleveren': 'Prüfung abgeben',
+  'Uw examen is ingeleverd.': 'Ihre Prüfung wurde eingereicht.',
+  'De examenhandeling is niet gelukt.':
+      'Das Prüfungsverfahren war nicht erfolgreich.',
+  'Menselijk toezicht bij examens': 'Menschliche Prüfungsaufsicht',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck ermittelt nicht, wer sich hinter der Tastatur befindet. Organisieren Sie daher während der Prüfung eine menschliche Aufsicht.',
+  'Er zijn geen examens beschikbaar.': 'Es sind keine Prüfungen verfügbar.',
+  'Examen': 'Prüfung',
+  'Start examen': 'Prüfung starten',
+  'Nog niet vrijgegeven': 'Noch nicht veröffentlicht',
+  'Gesloten': 'Geschlossen',
+  'Examen inleveren?': 'Eine Prüfung einreichen?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Nach dem Absenden können Sie Ihre Antworten nicht mehr ändern.',
+  'Definitief inleveren': 'Endgültige Einreichung',
+  'Vraag {nummer}': 'Frage {Nummer}',
+  'Uw antwoord': 'Ihre Antwort',
+  'Antwoord indienen': 'Antwort abschicken',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Sie geben dann keine Zugangsdaten mehr aus diesem Wallet weiter. ',
   'U hebt nog geen badges.': 'Sie haben noch keine Abzeichen.',

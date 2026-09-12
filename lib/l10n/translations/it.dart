@@ -686,6 +686,27 @@ const _dutchSourceAddIt = {
   'Stijl van {naam}': 'Stile di {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Non è stato possibile salvare lo stile in modo permanente. Il logo verrà usato solo in questa presentazione.',
+  'Mijn examens': 'I miei esami',
+  'Alle vragen zijn beantwoord.': 'A tutte le domande è stata data risposta.',
+  'Examen inleveren': 'Invia esame',
+  'Uw examen is ingeleverd.': 'Il tuo esame è stato inviato.',
+  'De examenhandeling is niet gelukt.':
+      'La procedura d\'esame non ha avuto esito positivo.',
+  'Menselijk toezicht bij examens': 'Supervisione umana degli esami',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck non determina chi c\'è dietro la tastiera. Pertanto, organizzare la supervisione umana durante l\'esame.',
+  'Er zijn geen examens beschikbaar.': 'Non ci sono esami disponibili.',
+  'Examen': 'Esame',
+  'Start examen': 'Inizia l\'esame',
+  'Nog niet vrijgegeven': 'Non ancora rilasciato',
+  'Gesloten': 'Chiuso',
+  'Examen inleveren?': 'Inviare un esame?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Una volta inviate, non è possibile modificare le risposte.',
+  'Definitief inleveren': 'Presentazione finale',
+  'Vraag {nummer}': 'Domanda {numero}',
+  'Uw antwoord': 'La tua risposta',
+  'Antwoord indienen': 'Invia la risposta',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Non condividerai più credenziali da questo portafoglio. ',
   'U hebt nog geen badges.': 'Non hai ancora badge.',

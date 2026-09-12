@@ -1661,6 +1661,28 @@ const _dutchSourceAddPl = <String, String>{
   'Stijl van {naam}': 'Styl z {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Nie udało się trwale zapisać stylu. Logo zostanie użyte tylko w tej prezentacji.',
+  'Mijn examens': 'Moje egzaminy',
+  'Alle vragen zijn beantwoord.':
+      'Odpowiedzi na wszystkie pytania zostały udzielone.',
+  'Examen inleveren': 'Prześlij egzamin',
+  'Uw examen is ingeleverd.': 'Twój egzamin został przesłany.',
+  'De examenhandeling is niet gelukt.':
+      'Procedura egzaminacyjna nie przebiegła pomyślnie.',
+  'Menselijk toezicht bij examens': 'Nadzór ludzki nad egzaminami',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck nie określa, kto stoi za klawiaturą. Dlatego podczas egzaminu należy zorganizować nadzór człowieka.',
+  'Er zijn geen examens beschikbaar.': 'Nie ma żadnych egzaminów.',
+  'Examen': 'Egzamin',
+  'Start examen': 'Rozpocznij egzamin',
+  'Nog niet vrijgegeven': 'Jeszcze nie wydany',
+  'Gesloten': 'Zamknięte',
+  'Examen inleveren?': 'Zdać egzamin?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Po przesłaniu nie można zmieniać odpowiedzi.',
+  'Definitief inleveren': 'Ostateczne złożenie',
+  'Vraag {nummer}': 'Pytanie {numer}',
+  'Uw antwoord': 'Twoja odpowiedź',
+  'Antwoord indienen': 'Prześlij odpowiedź',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Nie udostępniasz już poświadczeń z tego portfolio. ',
   'U hebt nog geen badges.': 'Nie masz jeszcze odznak.',

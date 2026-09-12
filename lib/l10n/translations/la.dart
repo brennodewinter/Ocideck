@@ -1664,6 +1664,26 @@ const _dutchSourceAddLa = <String, String>{
   'Stijl van {naam}': 'Stilus ex {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Stilus perpetuo servari non potuit. Insigne in hac tantum praesentatione adhibebitur.',
+  'Mijn examens': 'Meum scribendae',
+  'Alle vragen zijn beantwoord.': 'Omnes quaestiones sunt respondit.',
+  'Examen inleveren': 'Submit nito',
+  'Uw examen is ingeleverd.': 'Tuum est summitto nito.',
+  'De examenhandeling is niet gelukt.': 'Exem res succedit.',
+  'Menselijk toezicht bij examens': 'Humana vigilantia scribendae',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck non determinat quis tincidunt tincidunt. Ergo humana vigilantia in ipsum.',
+  'Er zijn geen examens beschikbaar.': 'Nulla volutpat consectetur.',
+  'Examen': 'Exam',
+  'Start examen': 'Satus exem',
+  'Nog niet vrijgegeven': 'Nondum dimisit',
+  'Gesloten': 'Clausa',
+  'Examen inleveren?': 'Submittere an nito?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Semel submissus, responsa tua mutare non potes.',
+  'Definitief inleveren': 'Final submission',
+  'Vraag {nummer}': 'Quaestione',
+  'Uw antwoord': 'Responsum tuum',
+  'Antwoord indienen': 'Submit responsum',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Tum nulla credentialia ex hac porta amplius communicabis. ',
   'U hebt nog geen badges.': 'Nondum ulla insignia habes.',

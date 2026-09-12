@@ -1679,6 +1679,27 @@ const _dutchSourceAddGa = <String, String>{
   'Stijl van {naam}': 'Stíl ó {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Níorbh fhéidir an stíl a shábháil go buan. Ní úsáidfear an lógó ach sa láithreoireacht seo.',
+  'Mijn examens': 'Mo scrúduithe',
+  'Alle vragen zijn beantwoord.': 'Freagraíodh na ceisteanna go léir.',
+  'Examen inleveren': 'Scrúdú a chur isteach',
+  'Uw examen is ingeleverd.': 'Tá do scrúdú curtha isteach.',
+  'De examenhandeling is niet gelukt.':
+      'Níor éirigh leis an nós imeachta scrúdaithe.',
+  'Menselijk toezicht bij examens': 'Maoirseacht dhaonna ar scrúduithe',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'Ní chinneann OciDeck cé atá taobh thiar den mhéarchlár. Dá bhrí sin, eagraigh maoirseacht dhaonna le linn an scrúdaithe.',
+  'Er zijn geen examens beschikbaar.': 'Níl aon scrúduithe ar fáil.',
+  'Examen': 'Scrúdú',
+  'Start examen': 'Tosaigh scrúdú',
+  'Nog niet vrijgegeven': 'Gan scaoileadh go fóill',
+  'Gesloten': 'Dúnta',
+  'Examen inleveren?': 'Scrúdú a chur isteach?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Nuair a bheidh tú curtha isteach, ní féidir leat do fhreagraí a athrú.',
+  'Definitief inleveren': 'Aighneacht deiridh',
+  'Vraag {nummer}': 'Ceist {uimhir}',
+  'Uw antwoord': 'Do fhreagra',
+  'Antwoord indienen': 'Cuir freagra isteach',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ní roinneann tú dintiúir ón bpunann seo a thuilleadh. ',
   'U hebt nog geen badges.': 'Níl aon suaitheantas agat fós.',

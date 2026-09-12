@@ -8,109 +8,19 @@ import 'package:uuid/uuid.dart';
 
 import '../models/learning_session.dart';
 import '../models/ociserve_evidence.dart';
+import '../models/ociserve_exam.dart';
 import '../models/ociserve_models.dart';
 import '../models/ociserve_settings.dart';
 import '../models/playback.dart';
 import '../services/ociserve/ociserve_auth.dart';
+import '../services/ociserve/ociserve_exam_outbox.dart';
 import '../services/ociserve/ociserve_gateway.dart';
 import '../services/ociserve/ociserve_http.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 import 'secret_store_provider.dart';
 
-const _uuid = Uuid();
-
-typedef OciServeGatewayFactory =
-    OciServeApi Function(OciServeSettings settings);
-typedef OciServeAuthenticatorFactory =
-    OciServeAuthenticator Function(OciServeSettings settings);
-
-final ociServeGatewayFactoryProvider = Provider<OciServeGatewayFactory>(
-  (ref) =>
-      (settings) => OciServeGateway(settings: settings),
-);
-
-final ociServeAuthenticatorFactoryProvider =
-    Provider<OciServeAuthenticatorFactory>(
-      (ref) =>
-          (settings) => OciServePkceAuthenticator(settings: settings),
-    );
-
-final ociServeProvider = NotifierProvider<OciServeNotifier, OciServeState>(
-  OciServeNotifier.new,
-);
-
-final ociServeEnabledProvider = Provider<bool>(
-  (ref) =>
-      ref.watch(ociServeProvider.select((state) => state.settings.enabled)),
-);
-
-/// De eLearning-koppeling is op elk platform zichtbaar. Op web legt de kaart
-/// uit waarom aanmelden zonder veilige sleutelbos niet beschikbaar is.
-final ociServeAvailableProvider = Provider<bool>((ref) => true);
-
-/// True only after a restored or fresh token has successfully called `/me`.
-final ociServeAuthenticatedProvider = Provider<bool>(
-  (ref) => ref.watch(ociServeProvider.select((state) => state.authenticated)),
-);
-
-enum OciServeStatus { loading, signedOut, authenticating, authenticated }
-
-class OciServeState {
-  const OciServeState({
-    this.settings = const OciServeSettings(),
-    this.status = OciServeStatus.loading,
-    this.account,
-    this.errorCode,
-    this.warningCode,
-    this.identityProviderHost,
-    this.pendingReports = 0,
-  });
-
-  final OciServeSettings settings;
-  final OciServeStatus status;
-  final OciServeAccount? account;
-  final String? errorCode;
-  final String? warningCode;
-  final String? identityProviderHost;
-  final int pendingReports;
-
-  bool get authenticated =>
-      settings.enabled &&
-      status == OciServeStatus.authenticated &&
-      account != null;
-
-  bool get loading => status == OciServeStatus.loading;
-  bool get authenticating => status == OciServeStatus.authenticating;
-  List<OciServeMembership> get memberships =>
-      account?.activeMemberships ?? const [];
-  String? get error => errorCode;
-  int get pendingSync => pendingReports;
-
-  OciServeState copyWith({
-    OciServeSettings? settings,
-    OciServeStatus? status,
-    OciServeAccount? account,
-    bool clearAccount = false,
-    String? errorCode,
-    bool clearError = false,
-    String? warningCode,
-    bool clearWarning = false,
-    String? identityProviderHost,
-    bool clearIdentityProviderHost = false,
-    int? pendingReports,
-  }) => OciServeState(
-    settings: settings ?? this.settings,
-    status: status ?? this.status,
-    account: clearAccount ? null : account ?? this.account,
-    errorCode: clearError ? null : errorCode ?? this.errorCode,
-    warningCode: clearWarning ? null : warningCode ?? this.warningCode,
-    identityProviderHost: clearIdentityProviderHost
-        ? null
-        : identityProviderHost ?? this.identityProviderHost,
-    pendingReports: pendingReports ?? this.pendingReports,
-  );
-}
+part 'ociserve_state.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
@@ -129,6 +39,10 @@ class OciServeNotifier extends Notifier<OciServeState> {
   int? _flushGeneration;
   Future<OciServeTokens>? _refreshInFlight;
   Future<void>? _secretWriteInFlight;
+  final Map<String, LearningSessionRef> _activeLessonSessions = {};
+
+  /// Lokale cleanup vóór logout en best-effort server-close.
+  List<LearningSessionRef> Function()? closeLearningTabsLocally;
 
   @override
   OciServeState build() {
@@ -225,6 +139,13 @@ class OciServeNotifier extends Notifier<OciServeState> {
     final old = state.settings;
     final serverChanged = old.normalizedBaseUrl != settings.normalizedBaseUrl;
     if (serverChanged) {
+      await _finishLearningSessions(
+        settings: old,
+        accountId: state.account?.id,
+        access: _tokens?.accessToken,
+      );
+    }
+    if (serverChanged) {
       final pending = old.normalizedBaseUrl.isEmpty
           ? const <Map<String, Object?>>[]
           : await _readOutbox(baseUrl: old.normalizedBaseUrl);
@@ -245,7 +166,9 @@ class OciServeNotifier extends Notifier<OciServeState> {
       status: settings.enabled && state.authenticated && !serverChanged
           ? OciServeStatus.authenticated
           : OciServeStatus.signedOut,
-      clearAccount: !settings.enabled || serverChanged,
+      // Uitschakelen loopt hieronder via logout. Tot die cleanup klaar is,
+      // blijft het account alleen intern beschikbaar om lessessies te sluiten.
+      clearAccount: serverChanged,
       clearError: true,
       clearWarning: true,
       clearIdentityProviderHost: true,
@@ -379,6 +302,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<bool> logout() async {
     ++_generation;
     final settings = state.settings;
+    await _finishLearningSessions(
+      settings: settings,
+      accountId: state.account?.id,
+      access: _tokens?.accessToken,
+    );
     _tokens = null;
     _installation = null;
     _configuration = null;
@@ -411,6 +339,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<bool> resetLocalData() async {
     ++_generation;
     var settings = state.settings;
+    await _finishLearningSessions(
+      settings: settings,
+      accountId: state.account?.id,
+      access: _tokens?.accessToken,
+    );
     _tokens = null;
     _installation = null;
     _configuration = null;
@@ -564,17 +497,170 @@ class OciServeNotifier extends Notifier<OciServeState> {
     );
   }
 
-  Future<OciServePackage> lessonPackage({
+  /// Opent een tijdelijke les zonder de sleutel in state of opslag te bewaren.
+  Future<bool> openLessonPackage({
     required String organizationId,
     required OciServeFeedItem lesson,
+    required Future<bool> Function(
+      Uint8List bytes,
+      String password,
+      String packageProfile,
+      LearningSessionRef session,
+    )
+    open,
   }) async {
     _requireMembership(organizationId);
     final access = await _accessToken();
-    return _gatewayFactory(state.settings).lessonPackage(
+    final gateway = _gatewayFactory(state.settings);
+    final grant = await gateway.startLessonSession(
       accessToken: access,
       organizationId: organizationId,
       versionId: lesson.versionId,
       lessonId: lesson.lessonId,
+    );
+    final session = LearningSessionRef(
+      serverUrl: state.settings.normalizedBaseUrl,
+      accountId: state.account!.id,
+      organizationId: organizationId,
+      enrollmentId: lesson.enrollmentId,
+      courseVersionId: lesson.versionId,
+      lessonId: lesson.lessonId,
+      playbackSessionId: grant.id,
+      packageHash: grant.digestSha256,
+      startedAt: DateTime.now().toUtc(),
+      expiresAt: grant.expiresAt,
+    );
+    var opened = false;
+    try {
+      final package = await gateway.lessonSessionPackage(
+        accessToken: access,
+        organizationId: organizationId,
+        grant: grant,
+      );
+      opened = await open(
+        package.bytes,
+        grant.packagePassword,
+        package.packageProfile,
+        session,
+      );
+      if (opened) _activeLessonSessions[session.playbackSessionId] = session;
+      return opened;
+    } finally {
+      if (!opened) await _closeLessonSessionBestEffort(session, access: access);
+    }
+  }
+
+  /// Sluit serverzijde pas nadat de tablaag lokaal inhoud en assets vergat.
+  Future<void> closeLessonSession(LearningSessionRef session) async {
+    _activeLessonSessions.remove(session.playbackSessionId);
+    await _closeLessonSessionBestEffort(session);
+  }
+
+  Future<void> _finishLearningSessions({
+    required OciServeSettings settings,
+    required String? accountId,
+    required String? access,
+  }) async {
+    final sessions =
+        closeLearningTabsLocally?.call() ??
+        _activeLessonSessions.values.toList(growable: false);
+    _activeLessonSessions.clear();
+    if (access == null || accountId == null) return;
+    for (final session in sessions) {
+      if (session.serverUrl != settings.normalizedBaseUrl ||
+          session.accountId != accountId) {
+        continue;
+      }
+      try {
+        await _gatewayFactory(settings).closeLessonSession(
+          accessToken: access,
+          organizationId: session.organizationId,
+          sessionId: session.playbackSessionId,
+        );
+      } catch (error, stack) {
+        logError('OciServe: lessessie sluiten', error.runtimeType, stack);
+      }
+    }
+  }
+
+  Future<void> _closeLessonSessionBestEffort(
+    LearningSessionRef session, {
+    String? access,
+  }) async {
+    if (session.serverUrl != state.settings.normalizedBaseUrl ||
+        session.accountId != state.account?.id) {
+      return;
+    }
+    try {
+      final token = access ?? await _accessToken();
+      await _gatewayFactory(state.settings).closeLessonSession(
+        accessToken: token,
+        organizationId: session.organizationId,
+        sessionId: session.playbackSessionId,
+      );
+    } catch (error, stack) {
+      logError('OciServe: lessessie sluiten', error.runtimeType, stack);
+    }
+  }
+
+  Future<OciServeExamSessionList> examSessions(String organizationId) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).examSessions(accessToken: access, organizationId: organizationId);
+  }
+
+  Future<OciServeExamAttempt> startExamAttempt({
+    required String organizationId,
+    required String sessionId,
+    required String idempotencyKey,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).startExamAttempt(
+      accessToken: access,
+      organizationId: organizationId,
+      sessionId: sessionId,
+      idempotencyKey: idempotencyKey,
+    );
+  }
+
+  Future<OciServeCurrentExamItem?> currentExamItem({
+    required String organizationId,
+    required String attemptId,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).currentExamItem(
+      accessToken: access,
+      organizationId: organizationId,
+      attemptId: attemptId,
+    );
+  }
+
+  Future<OciServeAcceptedExamAnswer> answerExamItem({
+    required OciServeExamAnswerMutation mutation,
+  }) async {
+    _requireMembership(mutation.organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).answerExamItem(accessToken: access, mutation: mutation);
+  }
+
+  Future<OciServeExamAttempt> submitExamAttempt({
+    required String organizationId,
+    required String attemptId,
+    required String idempotencyKey,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).submitExamAttempt(
+      accessToken: access,
+      organizationId: organizationId,
+      attemptId: attemptId,
+      idempotencyKey: idempotencyKey,
     );
   }
 
@@ -657,7 +743,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
     if (generation != _generation) return;
     state = state.copyWith(pendingReports: pending.length);
     final own = pending
-        .where((item) => item['account_id'] == accountId)
+        .where(
+          (item) =>
+              item['account_id'] == accountId &&
+              (item['kind'] == null || item['kind'] == 'playback_report_v1'),
+        )
         .take(5)
         .toList();
     if (own.isEmpty) return;
@@ -694,8 +784,15 @@ class OciServeNotifier extends Notifier<OciServeState> {
       }
     }
     if (generation != _generation) return;
-    final remaining = pending.where((item) => !sent.contains(item)).toList();
-    await _writeOutbox(remaining, baseUrl: baseUrl);
+    final sentEncoded = sent.map(jsonEncode).toSet();
+    final remaining = await OciServeOutboxMutex.serialized(baseUrl, () async {
+      final latest = await _readOutbox(baseUrl: baseUrl);
+      final kept = latest
+          .where((item) => !sentEncoded.contains(jsonEncode(item)))
+          .toList();
+      await _writeOutbox(kept, baseUrl: baseUrl);
+      return kept;
+    });
     if (generation != _generation) return;
     state = state.copyWith(pendingReports: remaining.length);
   }
@@ -803,20 +900,24 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<void> _enqueue(
     String organizationId,
     OciServePlaybackSnapshot snapshot,
-  ) async {
-    final pending = await _readOutbox();
-    if (pending.length >= 100) {
-      state = state.copyWith(warningCode: 'outbox_full');
-      throw const OciServeException('outbox_full');
-    }
-    pending.add({
-      'account_id': state.account!.id,
-      'organization_id': organizationId,
-      'snapshot': snapshot.toJson(),
-    });
-    await _writeOutbox(pending);
-    state = state.copyWith(pendingReports: pending.length);
-  }
+  ) => OciServeOutboxMutex.serialized(
+    state.settings.normalizedBaseUrl,
+    () async {
+      final pending = await _readOutbox();
+      if (pending.length >= 100) {
+        state = state.copyWith(warningCode: 'outbox_full');
+        throw const OciServeException('outbox_full');
+      }
+      pending.add({
+        'kind': 'playback_report_v1',
+        'account_id': state.account!.id,
+        'organization_id': organizationId,
+        'snapshot': snapshot.toJson(),
+      });
+      await _writeOutbox(pending);
+      state = state.copyWith(pendingReports: pending.length);
+    },
+  );
 
   Future<List<Map<String, Object?>>> _readOutbox({String? baseUrl}) async {
     final raw = await _secrets.readOciServeOutbox(

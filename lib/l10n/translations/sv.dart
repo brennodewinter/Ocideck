@@ -1648,6 +1648,26 @@ const _dutchSourceAddSv = <String, String>{
   'Stijl van {naam}': 'Stil från {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Stilen kunde inte sparas permanent. Logotypen används bara i den här presentationen.',
+  'Mijn examens': 'Mina tentor',
+  'Alle vragen zijn beantwoord.': 'Alla frågor har besvarats.',
+  'Examen inleveren': 'Lämna in tentamen',
+  'Uw examen is ingeleverd.': 'Ditt prov har skickats in.',
+  'De examenhandeling is niet gelukt.': 'Provproceduren lyckades inte.',
+  'Menselijk toezicht bij examens': 'Mänsklig övervakning av tentor',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck avgör inte vem som ligger bakom tangentbordet. Organisera därför mänsklig övervakning under provet.',
+  'Er zijn geen examens beschikbaar.': 'Det finns inga tillgängliga prov.',
+  'Examen': 'Examen',
+  'Start examen': 'Starta tentamen',
+  'Nog niet vrijgegeven': 'Inte släppt ännu',
+  'Gesloten': 'Stängt',
+  'Examen inleveren?': 'Lämna in en tentamen?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'När du väl har skickat in kan du inte ändra dina svar.',
+  'Definitief inleveren': 'Slutlig inlämning',
+  'Vraag {nummer}': 'Fråga {nummer}',
+  'Uw antwoord': 'Ditt svar',
+  'Antwoord indienen': 'Skicka svar',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Du delar då inte längre inloggningsuppgifter från denna portfölj. ',
   'U hebt nog geen badges.': 'Du har inga märken ännu.',

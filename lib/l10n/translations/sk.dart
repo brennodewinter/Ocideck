@@ -1655,6 +1655,26 @@ const _dutchSourceAddSk = <String, String>{
   'Stijl van {naam}': 'Štýl z {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Štýl sa nepodarilo natrvalo uložiť. Logo sa použije len v tejto prezentácii.',
+  'Mijn examens': 'Moje skúšky',
+  'Alle vragen zijn beantwoord.': 'Všetky otázky boli zodpovedané.',
+  'Examen inleveren': 'Odoslať skúšku',
+  'Uw examen is ingeleverd.': 'Vaša skúška bola odoslaná.',
+  'De examenhandeling is niet gelukt.': 'Skúšobný postup nebol úspešný.',
+  'Menselijk toezicht bij examens': 'Ľudský dohľad nad skúškami',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck neurčuje, kto je za klávesnicou. Zorganizujte preto pri skúške ľudský dohľad.',
+  'Er zijn geen examens beschikbaar.': 'Nie sú k dispozícii žiadne skúšky.',
+  'Examen': 'Skúška',
+  'Start examen': 'Začať skúšku',
+  'Nog niet vrijgegeven': 'Zatiaľ nevydané',
+  'Gesloten': 'Zatvorené',
+  'Examen inleveren?': 'Odoslať skúšku?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Po odoslaní už nemôžete svoje odpovede meniť.',
+  'Definitief inleveren': 'Záverečné podanie',
+  'Vraag {nummer}': 'otázka {number}',
+  'Uw antwoord': 'Vaša odpoveď',
+  'Antwoord indienen': 'Odoslať odpoveď',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Z tohto portfólia už nezdieľate žiadne poverenia. ',
   'U hebt nog geen badges.': 'Zatiaľ nemáte žiadne odznaky.',

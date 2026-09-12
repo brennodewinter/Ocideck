@@ -1665,6 +1665,26 @@ const _dutchSourceAddRo = <String, String>{
   'Stijl van {naam}': 'Stil din {naam}',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Stilul nu a putut fi salvat permanent. Sigla va fi folosită doar în această prezentare.',
+  'Mijn examens': 'Examenele mele',
+  'Alle vragen zijn beantwoord.': 'Toate întrebările au primit răspuns.',
+  'Examen inleveren': 'Trimite examen',
+  'Uw examen is ingeleverd.': 'Examenul dvs. a fost trimis.',
+  'De examenhandeling is niet gelukt.': 'Procedura de examen nu a avut succes.',
+  'Menselijk toezicht bij examens': 'Supravegherea umană a examenelor',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck nu stabilește cine se află în spatele tastaturii. Prin urmare, organizați supravegherea umană în timpul examenului.',
+  'Er zijn geen examens beschikbaar.': 'Nu există examene disponibile.',
+  'Examen': 'Examen',
+  'Start examen': 'Începe examenul',
+  'Nog niet vrijgegeven': 'Încă nu a fost lansat',
+  'Gesloten': 'Închis',
+  'Examen inleveren?': 'Trimiteți un examen?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Odată trimis, nu vă puteți modifica răspunsurile.',
+  'Definitief inleveren': 'Depunerea finală',
+  'Vraag {nummer}': 'Întrebare {număr}',
+  'Uw antwoord': 'Răspunsul tău',
+  'Antwoord indienen': 'Trimiteți răspunsul',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Nu mai partajați credențiale din acest portofoliu. ',
   'U hebt nog geen badges.': 'Nu aveți încă insigne.',

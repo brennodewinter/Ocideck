@@ -2566,6 +2566,26 @@ const _dutchSourceAddTr = <String, String>{
   'Stijl van {naam}': '{naam} stili',
   'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
       'Stil kalıcı olarak kaydedilemedi. Logo yalnızca bu sunumda kullanılacak.',
+  'Mijn examens': 'Sınavlarım',
+  'Alle vragen zijn beantwoord.': 'Tüm sorular cevaplandı.',
+  'Examen inleveren': 'Sınavı gönder',
+  'Uw examen is ingeleverd.': 'Sınavınız gönderildi.',
+  'De examenhandeling is niet gelukt.': 'Sınav prosedürü başarılı olmadı.',
+  'Menselijk toezicht bij examens': 'Sınavların insan gözetimi',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck klavyenin arkasında kimin olduğunu belirlemez. Bu nedenle sınav sırasında insan gözetimini düzenleyin.',
+  'Er zijn geen examens beschikbaar.': 'Herhangi bir sınav bulunmamaktadır.',
+  'Examen': 'Sınav',
+  'Start examen': 'Sınavı başlat',
+  'Nog niet vrijgegeven': 'Henüz yayınlanmadı',
+  'Gesloten': 'Kapalı',
+  'Examen inleveren?': 'Sınav mı gönderilsin?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Gönderildikten sonra yanıtlarınızı değiştiremezsiniz.',
+  'Definitief inleveren': 'Son gönderim',
+  'Vraag {nummer}': 'Soru {numarası}',
+  'Uw antwoord': 'Cevabınız',
+  'Antwoord indienen': 'Cevabı gönder',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Bu cüzdandaki kimlik bilgilerini artık paylaşmayacaksınız. ',
   'U hebt nog geen badges.': 'Henüz rozetiniz yok.',
