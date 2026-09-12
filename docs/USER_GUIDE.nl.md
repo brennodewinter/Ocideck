@@ -2643,6 +2643,21 @@ tweede thread, dus daar draait hetzelfde werk in de pagina, nog steeds met het
 voortgangsvenster en de *Stoppen*-knop en nog steeds begrensd door de eigen
 grootte- en tijdslimieten van de import.
 
+**Een herhaalde afbeelding boven- of onderaan kan het decklogo worden.** OciDeck
+vergelijkt de werkelijke beeldinhoud, dus de bestandsnaam hoeft niet gelijk te
+zijn, en twee vindplaatsen zijn genoeg — het logo hoeft niet op iedere dia te
+staan. Is die afbeelding al het logo van een van uw stijlprofielen, dan herkent
+OciDeck het zonder extra vraag en hergebruikt het duurzame logobestand; de andere
+stijlwaarden komen nog steeds uit de bronpresentatie. Anders ziet u de afbeelding
+en beslist u of het een logo is. Nee houdt iedere vindplaats als gewone
+dia-inhoud. Ja haalt
+het beeld uit de dia-indelingen en zet het in de deckstijl; daarna kiest u of die
+stijl alleen voor deze presentatie geldt of onder een door u gekozen naam aan
+OciDeck wordt toegevoegd. In de webversie blijft het logo bij deze presentatie:
+de browser kan het niet blijvend bij een stijl opslaan. De wachtrij onderbreekt
+een stapel niet voor deze vraag en houdt onbekende kandidaten daarom als gewone
+afbeeldingen.
+
 **Het is geen één-op-één-kopie, en het zegt dat voordat het begint.** Het
 diamodel van OciDeck is met opzet eenvoudiger dan dat van PowerPoint — vaste
 indelingen, één grafiek of één tabel per dia, geen vrije plaatsing — dus een
@@ -2709,7 +2724,7 @@ onderbreking.
 | Twee tekstkolommen, herkend aan hoe de tekstvakken naast elkaar staan. | Samengevoegde tabelcellen. GFM-tabellen hebben geen spans, dus de cellen worden afgevlakt en de samenvoeging wordt gemeld. |
 | Een of twee afbeeldingen per dia, met hun bijschriften, zoals de auteur ze plaatste: een plaatje dat in PowerPoint, Impress of Keynote is gedraaid, gespiegeld of bijgesneden komt zo binnen, omdat de bijsnede en de spiegeling in de pixels zijn gebakken in plaats van te vervallen. Identieke afbeeldingen worden één keer opgeslagen. | Audio. Er is geen audiodiatype om het op te zetten, dus de bestandsnaam belandt in de notitie. |
 | Tabellen, eerste rij als de kop. | Een tabel *én* een grafiek op dezelfde dia: één van de twee per dia, en de notitie zegt welke werd weggelaten. |
-| Grafieken — type, categorieën en numerieke reeksen. | De kleuren en lettertypen van de bron. Een geïmporteerd deck neemt OciDecks eigen styling. |
+| Grafieken — type, categorieën en numerieke reeksen. | De kleuren en lettertypen van de bron wanneer geen herhaald logo wordt bevestigd. Een bevestigd logo neemt de beschikbare bronkleuren en het lettertype mee in de geïmporteerde deckstijl. |
 | Video (PowerPoint en Keynote), citaten, en tijdlijnen waar de opsommingen lezen als `marker :: gebeurtenis`. | |
 | Sprekersnotities, en hyperlinks — toegevoegd als eigen items in plaats van teruggeweven in de zin waaruit ze kwamen. Een link met een uitvoerbaar schema (`javascript:`, `data:`, `vbscript:`, `file:`) wordt onschadelijk gemaakt in plaats van overgenomen. | |
 | Verborgen dia's, die verborgen blijven: ze komen aan als overgeslagen dia's in plaats van weggelaten of stilletjes getoond te worden. | |
