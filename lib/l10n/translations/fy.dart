@@ -667,6 +667,26 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Mijn examens': 'Myn eksamens',
+  'Alle vragen zijn beantwoord.': 'Alle fragen binne beäntwurde.',
+  'Examen inleveren': 'Yntsjinje eksamen',
+  'Uw examen is ingeleverd.': 'Jo eksamen is yntsjinne.',
+  'De examenhandeling is niet gelukt.': 'De eksamenproseduere wie net slagge.',
+  'Menselijk toezicht bij examens': 'Minsklike tafersjoch fan eksamens',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck bepaalt net wa\'t efter it toetseboerd sit. Organisearje dêrom minsklik tafersjoch tidens it eksamen.',
+  'Er zijn geen examens beschikbaar.': 'Der binne gjin eksamens beskikber.',
+  'Examen': 'Exam',
+  'Start examen': 'Begjin eksamen',
+  'Nog niet vrijgegeven': 'Noch net útbrocht',
+  'Gesloten': 'Closed',
+  'Examen inleveren?': 'In eksamen yntsjinje?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Ienris yntsjinne kinne jo jo antwurden net feroarje.',
+  'Definitief inleveren': 'Finale yntsjinjen',
+  'Vraag {nummer}': 'Fraach {nûmer}',
+  'Uw antwoord': 'Jo antwurd',
+  'Antwoord indienen': 'Antwurd yntsjinje',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Jo diele dan gjin oanmeldgegevens mear út dizze portefúlje. ',
   'U hebt nog geen badges.': 'Jo hawwe noch gjin badges.',

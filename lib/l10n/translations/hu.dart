@@ -1629,6 +1629,26 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Mijn examens': 'A vizsgáim',
+  'Alle vragen zijn beantwoord.': 'Minden kérdésre választ kaptunk.',
+  'Examen inleveren': 'Vizsga leadása',
+  'Uw examen is ingeleverd.': 'A vizsgád beküldve.',
+  'De examenhandeling is niet gelukt.': 'A vizsgaeljárás nem volt sikeres.',
+  'Menselijk toezicht bij examens': 'A vizsgák emberi felügyelete',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'Az OciDeck nem határozza meg, hogy ki van a billentyűzet mögött. Ezért szervezzen emberi felügyeletet a vizsga során.',
+  'Er zijn geen examens beschikbaar.': 'Nincsenek elérhető vizsgák.',
+  'Examen': 'Vizsga',
+  'Start examen': 'Indítsa el a vizsgát',
+  'Nog niet vrijgegeven': 'Még nem adták ki',
+  'Gesloten': 'Zárva',
+  'Examen inleveren?': 'Vizsgát leadni?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'A beküldés után nem módosíthatja a válaszait.',
+  'Definitief inleveren': 'Végső benyújtás',
+  'Vraag {nummer}': '{number}. kérdés',
+  'Uw antwoord': 'A válaszod',
+  'Antwoord indienen': 'Válasz elküldése',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ekkor többé nem oszt meg hitelesítő adatokat ebből a tárcából. ',
   'U hebt nog geen badges.': 'Még nincsenek jelvényei.',

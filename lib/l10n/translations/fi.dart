@@ -1627,6 +1627,26 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Mijn examens': 'Minun kokeeni',
+  'Alle vragen zijn beantwoord.': 'Kaikkiin kysymyksiin on vastattu.',
+  'Examen inleveren': 'Lähetä koe',
+  'Uw examen is ingeleverd.': 'Tenttisi on lähetetty.',
+  'De examenhandeling is niet gelukt.': 'Koemenettely ei onnistunut.',
+  'Menselijk toezicht bij examens': 'Kokeiden ihmisen valvonta',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck ei määritä, kuka on näppäimistön takana. Järjestä siksi ihmisen valvonta kokeen aikana.',
+  'Er zijn geen examens beschikbaar.': 'Kokeita ei ole saatavilla.',
+  'Examen': 'Tentti',
+  'Start examen': 'Aloita koe',
+  'Nog niet vrijgegeven': 'Ei vielä julkaistu',
+  'Gesloten': 'Suljettu',
+  'Examen inleveren?': 'Lähetä koe?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Kun olet lähettänyt, et voi muuttaa vastauksiasi.',
+  'Definitief inleveren': 'Lopullinen lähetys',
+  'Vraag {nummer}': 'Kysymys {number}',
+  'Uw antwoord': 'Sinun vastauksesi',
+  'Antwoord indienen': 'Lähetä vastaus',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Et enää jaa tunnistetietoja tästä lompakosta. ',
   'U hebt nog geen badges.': 'Sinulla ei ole vielä tunnuksia.',

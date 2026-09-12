@@ -1633,6 +1633,26 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Mijn examens': 'Moje skúšky',
+  'Alle vragen zijn beantwoord.': 'Všetky otázky boli zodpovedané.',
+  'Examen inleveren': 'Odoslať skúšku',
+  'Uw examen is ingeleverd.': 'Vaša skúška bola odoslaná.',
+  'De examenhandeling is niet gelukt.': 'Skúšobný postup nebol úspešný.',
+  'Menselijk toezicht bij examens': 'Ľudský dohľad nad skúškami',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck neurčuje, kto je za klávesnicou. Zorganizujte preto pri skúške ľudský dohľad.',
+  'Er zijn geen examens beschikbaar.': 'Nie sú k dispozícii žiadne skúšky.',
+  'Examen': 'Skúška',
+  'Start examen': 'Začať skúšku',
+  'Nog niet vrijgegeven': 'Zatiaľ nevydané',
+  'Gesloten': 'Zatvorené',
+  'Examen inleveren?': 'Odoslať skúšku?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Po odoslaní už nemôžete svoje odpovede meniť.',
+  'Definitief inleveren': 'Záverečné podanie',
+  'Vraag {nummer}': 'otázka {number}',
+  'Uw antwoord': 'Vaša odpoveď',
+  'Antwoord indienen': 'Odoslať odpoveď',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Z tohto portfólia už nezdieľate žiadne poverenia. ',
   'U hebt nog geen badges.': 'Zatiaľ nemáte žiadne odznaky.',

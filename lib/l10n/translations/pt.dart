@@ -1655,6 +1655,27 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Mijn examens': 'Meus exames',
+  'Alle vragen zijn beantwoord.': 'Todas as perguntas foram respondidas.',
+  'Examen inleveren': 'Enviar exame',
+  'Uw examen is ingeleverd.': 'Seu exame foi enviado.',
+  'De examenhandeling is niet gelukt.':
+      'O procedimento do exame não foi bem-sucedido.',
+  'Menselijk toezicht bij examens': 'Supervisão humana de exames',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck não determina quem está por trás do teclado. Portanto, organize a supervisão humana durante o exame.',
+  'Er zijn geen examens beschikbaar.': 'Não há exames disponíveis.',
+  'Examen': 'Exame',
+  'Start examen': 'Iniciar exame',
+  'Nog niet vrijgegeven': 'Ainda não lançado',
+  'Gesloten': 'Fechado',
+  'Examen inleveren?': 'Enviar um exame?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Depois de enviadas, você não poderá alterar suas respostas.',
+  'Definitief inleveren': 'Envio final',
+  'Vraag {nummer}': 'Pergunta {número}',
+  'Uw antwoord': 'Sua resposta',
+  'Antwoord indienen': 'Enviar resposta',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Deixa então de partilhar credenciais deste portefólio. ',
   'U hebt nog geen badges.': 'Ainda não tem crachás.',

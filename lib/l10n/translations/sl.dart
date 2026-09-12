@@ -1627,6 +1627,26 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Mijn examens': 'Moji izpiti',
+  'Alle vragen zijn beantwoord.': 'Na vsa vprašanja je bilo odgovoreno.',
+  'Examen inleveren': 'Oddaj izpit',
+  'Uw examen is ingeleverd.': 'Vaš izpit je bil oddan.',
+  'De examenhandeling is niet gelukt.': 'Izpitni postopek ni bil uspešen.',
+  'Menselijk toezicht bij examens': 'Človeški nadzor izpitov',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck ne določa, kdo je za tipkovnico. Zato med izpitom organizirajte človeški nadzor.',
+  'Er zijn geen examens beschikbaar.': 'Na voljo ni nobenih izpitov.',
+  'Examen': 'Izpit',
+  'Start examen': 'Začni izpit',
+  'Nog niet vrijgegeven': 'Še ni izdano',
+  'Gesloten': 'Zaprto',
+  'Examen inleveren?': 'Oddati izpit?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Po oddaji odgovorov ne morete spremeniti.',
+  'Definitief inleveren': 'Končna oddaja',
+  'Vraag {nummer}': 'Vprašanje {number}',
+  'Uw antwoord': 'Vaš odgovor',
+  'Antwoord indienen': 'Oddaj odgovor',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Iz tega portfelja ne delite več poverilnic. ',
   'U hebt nog geen badges.': 'Značk še nimate.',

@@ -1647,6 +1647,26 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Mijn examens': 'Моите изпити',
+  'Alle vragen zijn beantwoord.': 'На всички въпроси е отговорено.',
+  'Examen inleveren': 'Изпратете изпит',
+  'Uw examen is ingeleverd.': 'Вашият изпит е изпратен.',
+  'De examenhandeling is niet gelukt.': 'Изпитната процедура не беше успешна.',
+  'Menselijk toezicht bij examens': 'Човешко наблюдение на изпитите',
+  'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
+      'OciDeck не определя кой стои зад клавиатурата. Затова организирайте човешки надзор по време на изпита.',
+  'Er zijn geen examens beschikbaar.': 'Няма налични изпити.',
+  'Examen': 'Изпит',
+  'Start examen': 'Започнете изпит',
+  'Nog niet vrijgegeven': 'Все още не е пуснато',
+  'Gesloten': 'Затворено',
+  'Examen inleveren?': 'Изпратете изпит?',
+  'Na inleveren kunt u uw antwoorden niet meer wijzigen.':
+      'Веднъж изпратени, не можете да променяте отговорите си.',
+  'Definitief inleveren': 'Окончателно представяне',
+  'Vraag {nummer}': 'Въпрос {номер}',
+  'Uw antwoord': 'Вашият отговор',
+  'Antwoord indienen': 'Изпратете отговор',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Вече няма да споделяте идентификационни данни от този портфейл. ',
   'U hebt nog geen badges.': 'Все още нямате значки.',
