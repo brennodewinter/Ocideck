@@ -648,6 +648,13 @@ data local:
   re-pins the socket on every redirect hop (max 5, https-only). Live CVE lookups
   use the 2 MiB-capped `PinnedCveTransport`.
 
+The release tooling does contact the public OWASP Git repositories to validate
+and regenerate these bundled catalogues. That is a maintainer action, not an app
+runtime path: `check_owasp_catalog_sources.dart` resolves stable and development
+refs to immutable commit SHAs and checks their source layout and licence before
+a release. The shipped application still performs no OWASP catalogue download,
+background update or first-use fetch; its stable offline floor remains complete.
+
 ## 12. Cryptography in one table
 
 *Added 2026-07-22.* Every algorithm below was already documented somewhere — in

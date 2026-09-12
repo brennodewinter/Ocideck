@@ -448,6 +448,7 @@ now the only passing state.
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ | conditional (via `web-gate`, #1888-tail) |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — | advisory |
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — | advisory |
+| [`make check-owasp-catalog-sources`](#make-check-owasp-catalog-sources) | Stable and development OWASP source layout, schema, commit identity and licence | — | — | ✅ | local release gate |
 | [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ | required (via `scans`, #1891) |
 | [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ | required (via `scans`, #1891) |
 | [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — | local only (`check-full`) |
@@ -1351,6 +1352,14 @@ also declares them, but see the [CI note](#continuous-integration).)
   commit in andermans repository als veroudering — MASWE stond zo een release in
   de weg om een build-workflow die geen enkele zwakheid raakte.
   `reference_standards_test` dwingt het pad nu in beide richtingen af.
+- **Stable én development zijn verschillende feiten.** WSTG en MASTG blijven
+  op hun officiële, citeerbare release gebundeld; MASWE doet dat sinds v1.0.0
+  ook. `make check-owasp-catalog-sources` resolveert daarnaast hun bewegende
+  `master`/`main`-branches naar exacte commit-SHA's en valideert de paden,
+  minimale invoerschema's en CC-BY-SA-licentie. Daarmee wordt bleeding edge
+  zichtbaar zonder haar stil tot een release te promoveren. De controle draait
+  blokkerend vóór `make check-release`; in `make catalogs-outdated` is dezelfde
+  informatie adviserend.
 - **Twee soorten bron, twee soorten melding.** Een standaard die verouderd is,
   laat de poort in `deps-check` vallen. Een bron met `advisory: true` in
   `lib/services/reference_standards.dart` meldt zich wél maar blokkeert nooit —
@@ -1358,6 +1367,23 @@ also declares them, but see the [CI note](#continuous-integration).)
   lexicon *vuurt* elke term, dus een verversing kost een termdiff lezen en de
   vals-positievencorpus opnieuw wegen. Een poort die daarop rood wordt, staat
   binnen twee maanden permanent rood en gaat uit.
+
+### `make check-owasp-catalog-sources`
+
+- **Runs:** `dart run tool/check_owasp_catalog_sources.dart`.
+- **Covers:** de officiële release én de ontwikkelbranch van WSTG, MASTG en
+  MASWE. Iedere ref wordt via een minimale Git-fetch op een exacte commit-SHA
+  vastgezet. De poort controleert vervolgens de bronpaden, herkenbare records,
+  het WSTG-JSON-schema en de CC-BY-SA-4.0-licentie.
+- **Failure means:** upstream heeft een map, schema of licentie gewijzigd en de
+  lokale generator kan niet meer aantoonbaar dezelfde soort catalogus maken.
+  Werk het bronmanifest of de generator bij vóór de release.
+- **Development is geen release:** een nieuwe commit op `master` of `main` is
+  zichtbaar in de tabel, maar maakt de stabiele bundel niet verouderd. Zo blijft
+  de offline catalogus citeerbaar, terwijl veranderingen vóór de volgende
+  officiële versie wel vroeg worden gezien.
+- **In de keten:** blokkerend en vóór de lange `check-full` in
+  `make check-release`; adviserend als onderdeel van `make catalogs-outdated`.
 
 ### `make check-web`
 - **Runs:** `make build-web`, then `dart run tool/check_web_hardening.dart`,

@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -87,6 +87,7 @@ help:
 	@echo "  make l10n-export LANG_=ga OUT=ga.json  One language out as flat JSON (for translators)."
 	@echo "  make l10n-import LANG_=ga IN=ga.json   …and back in. Refuses unknown keys."
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
+	@echo "  make check-owasp-catalog-sources  Validate stable and development OWASP source layouts (in check-release)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
 	@echo "  make refresh-lexicon  Regenerate the bundled health lexicon from Orphanet (read the term diff)."
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, coverage, Dutch/English passthrough, and formatting."
@@ -658,6 +659,18 @@ catalogs-outdated:
 	@echo "        nieuwe upstreamversie is geen defect in wat je bouwt."
 	@echo "Daarna: 'make refresh-catalogs' om ze op te halen."
 	dart run tool/check_reference_data.dart --advisory
+	@echo ""
+	@echo "== OciDeck: OWASP stable + development (adviserend) =="
+	dart run tool/check_owasp_catalog_sources.dart --advisory
+
+check-owasp-catalog-sources:
+	@echo "== OciDeck check: OWASP-bronstructuur =="
+	@echo "Command: dart run tool/check_owasp_catalog_sources.dart"
+	@echo "Covers: WSTG, MASTG and MASWE at both the stable release and the"
+	@echo "        moving development branch, resolved to exact commit SHAs."
+	@echo "Failure means: a source directory, input schema or CC-BY-SA licence"
+	@echo "        moved — update the source manifest/generator before releasing."
+	dart run tool/check_owasp_catalog_sources.dart
 
 refresh-catalogs:
 	@echo "== OciDeck: refresh bundled reference catalogues =="
@@ -1434,7 +1447,7 @@ check-full-locked: check-locked check-l10n-orphans check-secrets sast shellcheck
 # before a tag and NOT automated here: `make linux-gate` (the Linux half of
 # the suite) and a look at open security/privacy issues on the tracker.
 DAST_LIVE_URL ?= https://ocideck.librekat.nl/
-check-release: check-full
+check-release: check-owasp-catalog-sources check-full
 	@echo "== OciDeck: DAST-kwaliteitsslag vóór de tag (adviserend, ready for tagging) =="
 	@echo "Command: make dast DAST_URL=$(DAST_LIVE_URL)"
 	@if ! docker info >/dev/null 2>&1 && command -v colima >/dev/null 2>&1; then \
