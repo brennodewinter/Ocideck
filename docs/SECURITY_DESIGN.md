@@ -47,11 +47,27 @@ discovered endpoints after a server configuration change.
 Authentication is accepted only after the access token succeeds against `/me`
 and the returned account has an active membership. Learner routes derive the
 participant from that token and OciDeck only permits organisation identifiers
-returned by `/me`. Course downloads require the server's play-only header and a
-matching SHA-256 Digest, are decoded with strict duplicate/path checks, and are
-bound to an external tab session so identity and progress can never be saved or
-exported with the deck. “Play only” is an application policy, not DRM; a user
-controlling their computer can still capture displayed content.
+returned by `/me`. Opening a course lesson first creates a short-lived playback
+session. OciServe returns its random package password only in that response and
+serves a per-session WinZip AES-256 AE-2 package with `private, no-store`.
+OciDeck checks the advertised profile, grant digest, HTTP Digest and every local
+and central ZIP member header before decrypting in memory. Plaintext, mixed
+encryption, ZipCrypto, weaker AES and unknown profiles fail closed. The password
+exists only as a local variable while the tab is opened; it never enters the tab
+model, keychain, outbox, recovery data or logs. Closing the lesson first removes
+its deck and in-memory assets and then asks OciServe to close the expiring
+session. The tab remains play-only, so identity and progress cannot be saved or
+exported with the deck. “Play only” and encryption limit casual copying; they
+are not DRM. A user controlling their computer can still capture displayed
+content.
+
+Formal exams use a separate participant client. It requests only the first
+unanswered item, displays the server-supplied option order and binds every answer
+to a short-lived challenge, revision and idempotency key. Participant DTOs are
+rejected if they contain future questions, correctness, answer models, scoring
+or randomisation context. OciDeck does no local scoring. It also does not claim
+to establish who is behind the keyboard: identity assurance during an exam
+requires human supervision organised by the examining institution.
 
 Course images are fetched only for hashes named by that participant's learning
 feed, and the account avatar only for the hash returned by `/me`, through the
@@ -637,6 +653,7 @@ lives so it stays checkable.
 | Algorithm | Size | Where | What it protects | What it does **not** protect | Rotation |
 | --- | --- | --- | --- | --- | --- |
 | **AES-256**, WinZip AE-1 | 256-bit key | `.ocideck` package export/import (`ZipEncoder(password:)`, `lib/utils/zip_encryption.dart`) | The **contents** of every file in the package | **File names and structure** — the central directory is not encrypted, so a chart's data file still names its chart. Nor does it authenticate the archive as a whole | Re-export with a new passphrase; there is no re-key of an existing package |
+| **AES-256**, WinZip AE-2 | 256-bit key | Short-lived OciServe lesson sessions (`lib/utils/zip_encryption.dart`, `ociserve_gateway.dart`) | Every lesson-package member in transit and until local in-memory decryption | File names remain visible; presentation, screenshots and a compromised endpoint remain outside this boundary | New random password and ciphertext for every playback session; the server session expires and is closed on tab end |
 | **PBKDF2-HMAC-SHA1** | 1000 iterations | Key derivation for the above, inside `package:archive` | Turns a passphrase into the AES key | Nothing, on its own. 1000 iterations is low by any modern standard, and it is **fixed by the WinZip AES specification** — not reachable from OciDeck at any price. A short passphrase is the weak link, which is why the export dialog shows an entropy meter and offers a generator | n/a |
 | **HMAC-SHA1, truncated to 80 bits** | 10 bytes | The AE-1 authentication tag, verified on decrypt | That the ciphertext was not altered | 80 bits is the format's choice, not ours; it is an integrity tag, not a document signature | n/a |
 | **SHA-512** | 512-bit | The document seal (`lib/services/document_integrity.dart`), and the imprint in an RFC 3161 request (`rfc3161_timestamp.dart`) | **Tamper-evidence**: a sealed deck that changed reports `changed` | Tamper-*proofing*. Anyone who edits the deck can recompute the seal — it proves change, not authorship. See §9 | Recomputed on every finalise |
