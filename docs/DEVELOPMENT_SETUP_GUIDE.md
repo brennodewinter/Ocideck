@@ -315,9 +315,9 @@ targets produce.
 
 OciDeck has no plugin or extension mechanism — nothing loads third-party code at
 runtime. What `third_party/` contains is something else: forks of two Flutter
-plugins (`screen_retriever_macos`, `desktop_multi_window`) pinned through
-`dependency_overrides` in `pubspec.yaml`. Change one and you rebuild the app;
-there is no separate package to publish.
+plugins (`desktop_multi_window`, `markdown_quill`) pinned as path dependencies
+in `pubspec.yaml`. Change one and you rebuild the app; there is no separate
+package to publish.
 
 ## Tooling and support
 

@@ -39,10 +39,10 @@ How to build OciDeck from source and produce distributable apps.
 make setup        # flutter pub get
 ```
 
-OciDeck uses two **vendored plugin forks** under `third_party/`, wired through
-`pubspec.yaml` (a path dependency for `desktop_multi_window`) and
-`dependency_overrides` (`screen_retriever_macos`, and a pin of
-`video_player_avfoundation`). `flutter pub get` resolves these automatically — no
+OciDeck uses two **vendored plugin forks** under `third_party/`, wired as path
+dependencies in `pubspec.yaml`: `desktop_multi_window` and `markdown_quill`.
+The separate `dependency_overrides` section keeps `cnativeapi` on the same
+pinned `nativeapi` fork. `flutter pub get` resolves these automatically — no
 extra steps. See [`ARCHITECTURE.md`](ARCHITECTURE.md#vendored-forks).
 
 ## Run
@@ -337,17 +337,19 @@ release](#cutting-a-release)). Artifacts land under `build/<platform>/`.
 ### macOS notes
 
 - **Swift Package Manager is enabled** for this project (since #1733); it is
-  Flutter's default and `pubspec.yaml` no longer turns it off. Most plugins are
-  resolved through SPM, and CocoaPods only handles the ones that have not
-  adopted it — today just `desktop_multi_window`, which is why the build prints
-  "The following plugins do not support Swift Package Manager for macos". That
-  message is expected and harmless. The `Podfile` still matters for those
-  leftovers.
-- **`video_player_avfoundation` is pinned** (see `dependency_overrides`) because a
-  newer release ships a Swift module whose private Objective-C dependency isn't
-  packaged correctly by CocoaPods on recent Xcode.
-- **The `DartCvMacOS` link is silenced on purpose.** That pod (pulled in by
-  `opencv_core`) vendors OpenCV as a quarter-gigabyte prebuilt universal
+  Flutter's default and `pubspec.yaml` no longer turns it off. The vendored
+  `desktop_multi_window` fork is based on upstream 0.3.1 and includes its
+  SwiftPM layout, so every current macOS plugin can be resolved as a Swift
+  package. The CocoaPods project remains for now because `macos/Podfile` has
+  project-specific fallback-build corrections; removing that integration is a
+  separate migration, not part of plugin adoption.
+- **The remaining `Podfile` corrections are fallback-only.** SwiftPM targets
+  are not modified by CocoaPods' `post_install` hook. If the CocoaPods
+  integration is removed later, remove these corrections and their
+  documentation in the same change.
+- **The `DartCvMacOS` link is silenced on purpose when CocoaPods supplies that
+  target.** That pod (pulled in by
+  `dartcv4`) vendors OpenCV as a quarter-gigabyte prebuilt universal
   `libopencv.a`. Most of its x86_64 half is Intel IPP object code assembled
   without a platform load command, and the pod adds a second `-lc++` on top of
   the one the toolchain already links, so linking that single target used to

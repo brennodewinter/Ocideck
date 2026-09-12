@@ -1054,15 +1054,16 @@ cloud rules, fail-closed on web); `utils/zip_encryption.dart` backs encrypted
 
 ## Vendored forks
 
-Two upstream plugins are forked into `third_party/` and wired via `pubspec.yaml`
-(path dependency / `dependency_overrides`):
+Two upstream plugins are forked into `third_party/` and wired as path
+dependencies via `pubspec.yaml`:
 
 - **`desktop_multi_window`** (MixinNetwork, **Apache-2.0**) — vendored fork with
   `window_setFrame`, `window_coverScreen` (borderless fill of a chosen screen),
   and `window_close` on **macOS, Windows, and Linux**. macOS additionally tracks
-  the mouse for non-key windows so chart hover works on the beamer.
-- **`screen_retriever_macos`** (leanflutter, MIT) — a Swift Package Manager
-  layout added for recent Xcode/CocoaPods; no upstream file edited.
+  the mouse for non-key windows so chart hover works on the beamer. It is based
+  on upstream 0.3.1 and retains that release's Swift Package Manager layout.
+- **`markdown_quill`** (TarekkMA, MIT) — vendored because the published package
+  is stale; its small local compatibility fixes are recorded beside the source.
 
 Each fork carries a `MODIFICATIONS.md` naming the upstream commit it descends
 from and every local change, and — for the Apache-2.0 one — each changed file
