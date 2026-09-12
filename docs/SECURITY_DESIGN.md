@@ -57,7 +57,9 @@ exists only as a local variable while the tab is opened; it never enters the tab
 model, keychain, outbox, recovery data or logs. Closing the lesson first removes
 its deck and in-memory assets and then asks OciServe to close the expiring
 session. The tab remains play-only, so identity and progress cannot be saved or
-exported with the deck. “Play only” and encryption limit casual copying; they
+exported with the deck. A local deadline timer closes the tab and wipes its
+in-memory deck and assets at `expires_at`, even when the server never sends
+another response. “Play only” and encryption limit casual copying; they
 are not DRM. A user controlling their computer can still capture displayed
 content.
 

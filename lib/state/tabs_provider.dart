@@ -187,6 +187,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   @override
   void dispose() {
     _autosaveTimer?.cancel();
+    _cancelAllLearningExpiry(this);
     for (final sub in _subs.values) {
       sub.cancel();
     }
@@ -762,6 +763,7 @@ void _selectTab(TabsNotifier notifier, int index) {
 void _closeTab(TabsNotifier notifier, int index) {
   final current = notifier.currentState;
   final session = current.tabs[index].learningSession;
+  _cancelLearningExpiry(notifier, session);
   if (current.tabs.length == 1) {
     final tab = current.tabs.first;
     tab.learningSession = null;

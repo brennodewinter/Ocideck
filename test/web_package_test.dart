@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'dart:async';
 
 import 'package:archive/archive.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
@@ -534,6 +535,74 @@ marp: true
       expect(container.read(tabsProvider).current?.learningSession, isNull);
       expect(container.read(tabsProvider).current?.isOpen, isFalse);
       expect(remoteCloseCalls, 0);
+    });
+
+    test('sluit en wist een geopende les hard bij lokale expiry', () {
+      fakeAsync((async) {
+        final container = _container();
+        final markdown = container
+            .read(markdownServiceProvider)
+            .generateDeck(
+              Deck(
+                title: 'Les',
+                slides: [
+                  Slide.create(SlideType.image).copyWith(
+                    title: 'Les',
+                    anchor: 'les',
+                    imagePath: 'images/les.png',
+                  ),
+                ],
+              ),
+            );
+        final session = LearningSessionRef(
+          serverUrl: 'https://leren.example',
+          accountId: 'account',
+          organizationId: 'org',
+          enrollmentId: 'enrollment',
+          courseVersionId: 'version',
+          lessonId: 'lesson',
+          playbackSessionId: 'expiring-session',
+          packageHash: 'sha256:test',
+          startedAt: DateTime.now().toUtc(),
+          expiresAt: DateTime.now().toUtc().add(const Duration(minutes: 1)),
+        );
+        final tabs = container.read(tabsProvider.notifier);
+        var remoteCloseCalls = 0;
+        setLearningSessionCloser(tabs, (_) async => remoteCloseCalls++);
+        OpenResult? result;
+        openLearningPackage(
+          tabs,
+          ociServeAesPackage({
+            'les.md': utf8.encode(markdown),
+            'images/les.png': _pngBytes,
+          }),
+          'les.ocideck',
+          session,
+          password: testOciServePackagePassword,
+          packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+        ).then((value) => result = value);
+        async.flushMicrotasks();
+
+        expect(result, OpenResult.opened);
+        expect(container.read(tabsProvider).current?.isOpen, isTrue);
+        final memoryPath = container
+            .read(tabsProvider)
+            .current!
+            .deckNotifier
+            .currentState
+            .deck!
+            .slides
+            .single
+            .imagePath;
+        expect(WebAssetStore.bytesFor(memoryPath), isNotNull);
+        async.elapse(const Duration(minutes: 2));
+        async.flushMicrotasks();
+
+        expect(container.read(tabsProvider).current?.isOpen, isFalse);
+        expect(container.read(tabsProvider).current?.learningSession, isNull);
+        expect(WebAssetStore.bytesFor(memoryPath), isNull);
+        expect(remoteCloseCalls, 1);
+      });
     });
 
     test(

@@ -2,6 +2,7 @@ part of 'tabs_provider.dart';
 
 final _learningSessionClosers =
     Expando<Future<void> Function(LearningSessionRef)>();
+final _learningExpiryTimers = Expando<Map<String, Timer>>();
 
 /// Registreert serverafmelding voor een lokaal al verwijderd OciServe-tabblad.
 void setLearningSessionCloser(
@@ -20,15 +21,54 @@ Future<OpenResult> openLearningPackage(
   required String password,
   required String packageProfile,
   String? initialAnchor,
-}) => _openLearningPackage(
-  notifier,
-  bytes,
-  name,
-  learningSession,
-  password: password,
-  packageProfile: packageProfile,
-  initialAnchor: initialAnchor,
-);
+}) async {
+  if (!learningSession.expiresAt.isAfter(DateTime.now().toUtc())) {
+    return OpenResult.unreadable;
+  }
+  final result = await _openLearningPackage(
+    notifier,
+    bytes,
+    name,
+    learningSession,
+    password: password,
+    packageProfile: packageProfile,
+    initialAnchor: initialAnchor,
+  );
+  if (result == OpenResult.opened) {
+    _scheduleLearningExpiry(notifier, learningSession);
+  }
+  return result;
+}
+
+void _scheduleLearningExpiry(
+  TabsNotifier notifier,
+  LearningSessionRef session,
+) {
+  final timers = _learningExpiryTimers[notifier] ??= {};
+  timers.remove(session.playbackSessionId)?.cancel();
+  final remaining = session.expiresAt.difference(DateTime.now().toUtc());
+  timers[session.playbackSessionId] = Timer(remaining, () {
+    timers.remove(session.playbackSessionId);
+    final index = notifier.currentState.tabs.indexWhere(
+      (tab) =>
+          tab.learningSession?.playbackSessionId == session.playbackSessionId,
+    );
+    if (index >= 0) notifier.closeTab(index);
+  });
+}
+
+void _cancelLearningExpiry(TabsNotifier notifier, LearningSessionRef? session) {
+  if (session == null) return;
+  _learningExpiryTimers[notifier]?.remove(session.playbackSessionId)?.cancel();
+}
+
+void _cancelAllLearningExpiry(TabsNotifier notifier) {
+  for (final timer
+      in _learningExpiryTimers[notifier]?.values ?? const <Timer>[]) {
+    timer.cancel();
+  }
+  _learningExpiryTimers[notifier]?.clear();
+}
 
 /// Verwijdert alle leertabbladen lokaal en geeft hun sessies terug.
 ///
