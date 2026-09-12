@@ -19,6 +19,16 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.2] — 2026-09-12
+
+### Changed
+
+- chore(referentiedata): momentopname bijwerken (maswe)
+- Toon verbindingsstatus voor eLearning
+- Herken logo's bij presentatie-import
+- Voeg beveiligde lessen en formele examens toe
+- Nieuw document staat meteen op schijf (#2061)
+
 ## [0.6.1] — 2026-09-11
 
 ### Changed
