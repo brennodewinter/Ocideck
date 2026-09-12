@@ -48,13 +48,14 @@ live in [`assets/web_export/MANIFEST.json`](assets/web_export/MANIFEST.json).
 
 ## Vendored (forked) plugins
 
-Kept in `third_party/` and wired in via `pubspec.yaml` (path dependency /
-`dependency_overrides`). Both are forks of upstream plugins with local native
-changes; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#vendored-forks).
+Kept in `third_party/` and wired in via path dependencies in `pubspec.yaml`.
+Both are forks of upstream plugins with local source changes; see
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#vendored-forks).
 
 | Component | Origin (exact commit) | Licence | Local changes |
 | --- | --- | --- | --- |
-| `desktop_multi_window` | [MixinNetwork/flutter-plugins@58a5868](https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window) | **Apache-2.0** | Native macOS/Windows/Linux window placement, borderless fullscreen and close for the dual-screen presenter, plus hover delivery to non-key windows. Six files changed, each carrying an Apache-2.0 §4(b) notice; see [`third_party/desktop_multi_window/MODIFICATIONS.md`](third_party/desktop_multi_window/MODIFICATIONS.md) |
+| `desktop_multi_window` | [MixinNetwork/flutter-plugins@0c9aa50](https://github.com/MixinNetwork/flutter-plugins/tree/0c9aa50455106503cacfdb54ef1acfd217af2614/packages/desktop_multi_window) | **Apache-2.0** | Fork of 0.3.1 with native macOS/Windows/Linux window placement, borderless fullscreen and close for the dual-screen presenter, plus hover delivery to non-key windows. Six files changed, each carrying an Apache-2.0 §4(b) notice; see [`third_party/desktop_multi_window/MODIFICATIONS.md`](third_party/desktop_multi_window/MODIFICATIONS.md) |
+| `markdown_quill` | [TarekkMA/markdown_quill@4964165](https://github.com/TarekkMA/markdown_quill/tree/49641654bd584c6f0fc398c2c91383cf13a3424b) | **MIT** | Fork of 4.3.0 with the obsolete `charcode` dependency removed and local compatibility fixes; see [`third_party/markdown_quill/MODIFICATIONS.md`](third_party/markdown_quill/MODIFICATIONS.md) |
 
 > `desktop_multi_window` was listed here (and in the SBOM) as **MIT** until
 > 2026-07-22. It is not: `third_party/desktop_multi_window/LICENSE` is the

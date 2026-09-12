@@ -224,7 +224,7 @@ The JSON documents carry **735 dependency relations** between these components: 
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
-| desktop_multi_window _(direct main)_ | 0.3.0 | Apache-2.0 | MixinNetwork | https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window |
+| desktop_multi_window _(direct main)_ | 0.3.1 | Apache-2.0 | MixinNetwork | https://github.com/MixinNetwork/flutter-plugins/tree/0c9aa50455106503cacfdb54ef1acfd217af2614/packages/desktop_multi_window |
 | markdown_quill _(direct main)_ | 4.3.0 | MIT | TarekkMA | https://github.com/TarekkMA/markdown_quill/tree/49641654bd584c6f0fc398c2c91383cf13a3424b |
 
 ### Vendored JavaScript bundles (HTML export) (5)

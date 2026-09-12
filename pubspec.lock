@@ -248,7 +248,7 @@ packages:
       path: "third_party/desktop_multi_window"
       relative: true
     source: path
-    version: "0.3.0"
+    version: "0.3.1"
   diff_match_patch:
     dependency: transitive
     description:

@@ -84,7 +84,7 @@ const _validSpdxIds = <String>{
 const _forkOrigins = <String, ({String vcs, String revision, String subdir})>{
   'desktop_multi_window': (
     vcs: 'https://github.com/MixinNetwork/flutter-plugins',
-    revision: '58a5868d1cb9031defa5db5868d6aaea0486d24a',
+    revision: '0c9aa50455106503cacfdb54ef1acfd217af2614',
     subdir: 'packages/desktop_multi_window',
   ),
   'markdown_quill': (

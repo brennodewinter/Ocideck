@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:1fcbafdb-9616-5bb3-843f-d797f14f6a24",
+  "serialNumber": "urn:uuid:40fbee4c-46ae-55ea-8111-55bd494a1724",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-12T16:16:37.690485Z",
+    "timestamp": "2026-09-12T20:11:10.955121Z",
     "tools": {
       "components": [
         {
@@ -8735,7 +8735,7 @@
       ]
     },
     {
-      "bom-ref": "fork:desktop_multi_window@0.3.0",
+      "bom-ref": "fork:desktop_multi_window@0.3.1",
       "type": "library",
       "supplier": {
         "name": "MixinNetwork",
@@ -8744,7 +8744,7 @@
         ]
       },
       "name": "desktop_multi_window",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "licenses": [
         {
           "license": {
@@ -8755,13 +8755,13 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a9d8891f9acd3100d63eb1dc4d51c304a8b6d8e1515f55b85c6dd5b9d73ff016"
+          "content": "e97b88491e4bc3d16977145ce138dab424b7a135422ebdb1bee397dcfa589303"
         }
       ],
       "externalReferences": [
         {
           "type": "vcs",
-          "url": "https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window"
+          "url": "https://github.com/MixinNetwork/flutter-plugins/tree/0c9aa50455106503cacfdb54ef1acfd217af2614/packages/desktop_multi_window"
         }
       ],
       "properties": [
@@ -8775,7 +8775,7 @@
         },
         {
           "name": "ocideck:upstream-revision",
-          "value": "58a5868d1cb9031defa5db5868d6aaea0486d24a"
+          "value": "0c9aa50455106503cacfdb54ef1acfd217af2614"
         },
         {
           "name": "ocideck:note",
@@ -8845,7 +8845,7 @@
         "font:assets/fonts/NotoSansMath-subset.ttf",
         "font:assets/fonts/Roboto-Variable.ttf",
         "font:assets/fonts/RobotoMono-Variable.ttf",
-        "fork:desktop_multi_window@0.3.0",
+        "fork:desktop_multi_window@0.3.1",
         "fork:markdown_quill@4.3.0",
         "git:cnativeapi@0.1.4",
         "git:nativeapi@0.1.4",
@@ -10553,7 +10553,7 @@
       "dependsOn": []
     },
     {
-      "ref": "fork:desktop_multi_window@0.3.0",
+      "ref": "fork:desktop_multi_window@0.3.1",
       "dependsOn": [
         "sdk:flutter@0.0.0"
       ]

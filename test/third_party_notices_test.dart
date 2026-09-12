@@ -115,6 +115,45 @@ void main() {
   });
 
   group('accuracy', () {
+    test('desktop_multi_window supports both macOS package managers', () {
+      const sourceRoot =
+          'third_party/desktop_multi_window/macos/desktop_multi_window/'
+          'Sources/desktop_multi_window';
+      final packageManifest = File(
+        'third_party/desktop_multi_window/macos/desktop_multi_window/'
+        'Package.swift',
+      );
+      final podspec = File(
+        'third_party/desktop_multi_window/macos/'
+        'desktop_multi_window.podspec',
+      ).readAsStringSync();
+
+      expect(
+        packageManifest.existsSync(),
+        isTrue,
+        reason:
+            'Without Package.swift Flutter falls back to CocoaPods and this '
+            'plugin will stop building when that fallback is removed.',
+      );
+      for (final source in const [
+        'FlutterMultiWindowPlugin.swift',
+        'FlutterWindow.swift',
+        'WindowChannel.swift',
+        'WindowConfiguration.swift',
+      ]) {
+        expect(
+          File('$sourceRoot/$source').existsSync(),
+          isTrue,
+          reason: 'Both SwiftPM and CocoaPods must compile the same sources.',
+        );
+      }
+      expect(
+        podspec,
+        contains('desktop_multi_window/Sources/desktop_multi_window/**/*'),
+        reason: 'The CocoaPods fallback must follow the SwiftPM source move.',
+      );
+    });
+
     test(
       'the licence stated for each direct dependency is the classified one',
       () {

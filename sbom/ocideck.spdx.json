@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.6.2+28",
-  "documentNamespace": "https://ocideck.app/spdx/c81c1c2f-7d59-5daa-884b-14d7cca473a0",
+  "documentNamespace": "https://ocideck.app/spdx/6ddce51a-3e3c-52ba-8115-61f0d0ffcbff",
   "creationInfo": {
-    "created": "2026-09-12T16:16:37.690485Z",
+    "created": "2026-09-12T20:11:10.955121Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4734,19 +4734,19 @@
     {
       "SPDXID": "SPDXRef-212-desktop-multi-window",
       "name": "desktop_multi_window",
-      "versionInfo": "0.3.0",
+      "versionInfo": "0.3.1",
       "supplier": "Organization: MixinNetwork",
-      "downloadLocation": "https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window",
+      "downloadLocation": "https://github.com/MixinNetwork/flutter-plugins/tree/0c9aa50455106503cacfdb54ef1acfd217af2614/packages/desktop_multi_window",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a9d8891f9acd3100d63eb1dc4d51c304a8b6d8e1515f55b85c6dd5b9d73ff016"
+          "checksumValue": "e97b88491e4bc3d16977145ce138dab424b7a135422ebdb1bee397dcfa589303"
         }
       ],
-      "sourceInfo": "Vendored from https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window at commit 58a5868d1cb9031defa5db5868d6aaea0486d24a.",
+      "sourceInfo": "Vendored from https://github.com/MixinNetwork/flutter-plugins/tree/0c9aa50455106503cacfdb54ef1acfd217af2614/packages/desktop_multi_window at commit 0c9aa50455106503cacfdb54ef1acfd217af2614.",
       "comment": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
     },
     {
