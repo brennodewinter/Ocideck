@@ -176,7 +176,6 @@ const Map<String, Map<String, int>> looptijdBasislijn = {
     '30 minutes': 2,
     '45 minute': 1,
     '75 min': 1,
-    'a few minutes': 1,
     'half an hour': 1,
   },
 };

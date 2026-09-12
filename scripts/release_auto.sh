@@ -275,6 +275,26 @@ release_ci_snapshot() {
     | sort -u
 }
 
+release_ci_task_ids() {
+  api GET '/actions/tasks?limit=25' 2>/dev/null \
+    | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
+        | select(.head_branch==$ref) | .id' 2>/dev/null \
+    | sort -n
+}
+
+wait_for_redispatch_registration() {
+  local previous_ids="$1" current_ids="" _
+  for _ in $(seq 1 60); do
+    current_ids="$(release_ci_task_ids || true)"
+    if [ -n "$current_ids" ] && [ "$current_ids" != "$previous_ids" ]; then
+      return 0
+    fi
+    sleep 5
+  done
+  die "de herdispatch voor $TAG is niet als nieuwe Forgejo-taak verschenen — teken niet op basis van de oude terminale taken."
+  return 1
+}
+
 assert_release_ci_terminal() {
   snap="$(release_ci_snapshot || true)"
   if [ -z "$snap" ]; then
@@ -822,10 +842,13 @@ phase3() {
     fi
     STEP="release-CI opnieuw dispatchen"
     section "Fase 3 — SHA256SUMS ontbreekt; release-CI éénmalig opnieuw dispatchen (#8)"
+    local previous_task_ids
+    previous_task_ids="$(release_ci_task_ids || true)"
     api POST "/actions/workflows/release.yml/dispatches" -H 'Content-Type: application/json' \
       -d "$(jq -n --arg r "$TAG" '{ref:$r}')" -o /dev/null \
       || die "kon release.yml niet opnieuw dispatchen — ga de release-CI na en hervat: scripts/release_auto.sh --resume $TAG"
-    log "release.yml opnieuw gedispatcht op $TAG — eerst wachten tot alle jobs terminaal zijn…"
+    log "release.yml opnieuw gedispatcht op $TAG — wachten tot de nieuwe taken zichtbaar en daarna terminaal zijn…"
+    wait_for_redispatch_registration "$previous_task_ids"
     follow_ci
     assert_release_ci_terminal
     # Download pas ná de terminale herstel-run. Een eerder verschenen manifest

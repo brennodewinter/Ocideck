@@ -1155,11 +1155,21 @@ for it at signing time.
 
 Per release, after the workflow has published the tag:
 
-1. Download `SHA256SUMS` from the published release into a working directory.
-2. `make sign-release SHA256SUMS=path/to/SHA256SUMS` (or run it where
+1. Wait until **every** Forgejo Actions job for that tag is terminal. Do not use
+   the mere presence of `SHA256SUMS` as proof: a publishing job may still replace
+   it. `scripts/release_auto.sh --status vX.Y.Z` verifies the public signature,
+   but an active job must be checked in Actions before a manual repair.
+2. Download the then-current `SHA256SUMS` into a working directory.
+3. `make sign-release SHA256SUMS=path/to/SHA256SUMS` (or run it where
    `dist/SHA256SUMS` sits). The script signs and immediately verifies against
    `minisign.pub`, refusing to leave a signature it cannot verify.
-3. Attach the resulting `SHA256SUMS.minisig` to the release, beside `SHA256SUMS`.
+4. Upload under a temporary name first, remove the old canonical signature only
+   after that upload succeeds, and rename the new asset to
+   `SHA256SUMS.minisig`. If the rename fails, leave the temporary asset in place,
+   report the release as incomplete and repair the name on the release page.
+5. Download **both public files again**, confirm that the public `SHA256SUMS` is
+   byte-for-byte the one just signed, and run the recipient command below. Do not
+   call the release signed until this public verification succeeds.
 
 A recipient verifies with `minisign -Vm SHA256SUMS -p minisign.pub`.
 `OCIDECK_RELEASE_KEY` overrides the key path for a different signer.
