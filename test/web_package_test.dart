@@ -486,6 +486,56 @@ marp: true
       },
     );
 
+    test('sluit leertabbladen lokaal zonder de server-callback', () async {
+      final container = _container();
+      final markdown = container
+          .read(markdownServiceProvider)
+          .generateDeck(
+            Deck(
+              title: 'Les',
+              slides: [
+                Slide.create(
+                  SlideType.title,
+                ).copyWith(title: 'Les', anchor: 'les'),
+              ],
+            ),
+          );
+      final session = LearningSessionRef(
+        serverUrl: 'https://leren.example',
+        accountId: 'account',
+        organizationId: 'org',
+        enrollmentId: 'enrollment',
+        courseVersionId: 'version',
+        lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
+        packageHash: 'sha256:test',
+        startedAt: DateTime.utc(2026, 9, 12),
+        expiresAt: DateTime.utc(2099),
+      );
+      final tabs = container.read(tabsProvider.notifier);
+      expect(
+        await openLearningPackage(
+          tabs,
+          ociServeAesPackage({'les.md': utf8.encode(markdown)}),
+          'les.ocideck',
+          session,
+          password: testOciServePackagePassword,
+          packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+        ),
+        OpenResult.opened,
+      );
+      var remoteCloseCalls = 0;
+      setLearningSessionCloser(tabs, (_) async => remoteCloseCalls++);
+
+      final closedSessions = closeLearningTabsLocally(tabs);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(closedSessions, [session]);
+      expect(container.read(tabsProvider).current?.learningSession, isNull);
+      expect(container.read(tabsProvider).current?.isOpen, isFalse);
+      expect(remoteCloseCalls, 0);
+    });
+
     test(
       'opent een pakket in het geheugen: afbeeldingen en notities mee',
       () async {
