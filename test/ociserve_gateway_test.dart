@@ -402,10 +402,12 @@ void main() {
 
       await gateway.answerExamItem(
         accessToken: 'access',
-        organizationId: 'org',
-        item: item,
-        answerData: const {'selected_option_id': 'a'},
-        idempotencyKey: 'answer-request-1',
+        mutation: OciServeExamAnswerMutation.fromItem(
+          organizationId: 'org',
+          item: item,
+          answerData: const {'selected_option_id': 'a'},
+          idempotencyKey: 'answer-request-1',
+        ),
       );
 
       final request = transport.requests.single;

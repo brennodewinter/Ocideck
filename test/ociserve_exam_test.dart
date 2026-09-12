@@ -93,4 +93,35 @@ void main() {
 
     expect(session.canStartAt(DateTime.utc(2026, 9, 12, 11, 5)), isFalse);
   });
+
+  test('stored answer mutation rejects secret or display fields', () {
+    final mutation = OciServeExamAnswerMutation.fromItem(
+      organizationId: 'org',
+      item: OciServeCurrentExamItem.fromJson(_itemJson()),
+      answerData: const {'selected_option_id': 'b'},
+      idempotencyKey: 'request-1',
+    ).toJson();
+
+    expect(mutation.keys, {
+      'kind',
+      'organization_id',
+      'attempt_id',
+      'attempt_item_id',
+      'answer_data',
+      'challenge',
+      'revision',
+      'idempotency_key',
+    });
+    expect(
+      () => OciServeExamAnswerMutation.fromJson({...mutation, 'score': 4}),
+      throwsFormatException,
+    );
+    expect(
+      () => OciServeExamAnswerMutation.fromJson({
+        ...mutation,
+        'content': {'question': 'verborgen'},
+      }),
+      throwsFormatException,
+    );
+  });
 }

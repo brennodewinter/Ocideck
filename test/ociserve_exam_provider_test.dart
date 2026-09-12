@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_exam.dart';
+import 'package:ocideck/services/ociserve/ociserve_exam_outbox.dart';
+import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/state/ociserve_exam_provider.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 
@@ -54,18 +59,15 @@ class _ExamApi extends OciServeNotifier {
 
   @override
   Future<OciServeAcceptedExamAnswer> answerExamItem({
-    required String organizationId,
-    required OciServeCurrentExamItem item,
-    required Map<String, Object?> answerData,
-    required String idempotencyKey,
+    required OciServeExamAnswerMutation mutation,
   }) async {
     answers++;
-    answerKeys.add(idempotencyKey);
+    answerKeys.add(mutation.idempotencyKey);
     if (failFirstAnswer && answers == 1) throw StateError('offline');
     return OciServeAcceptedExamAnswer(
-      attemptId: item.attemptId,
-      attemptItemId: item.attemptItemId,
-      revision: item.revision + 1,
+      attemptId: mutation.attemptId,
+      attemptItemId: mutation.attemptItemId,
+      revision: mutation.revision + 1,
       acceptedAt: DateTime.utc(2026, 9, 12),
     );
   }
@@ -85,10 +87,33 @@ class _ExamApi extends OciServeNotifier {
   );
 }
 
+OciServeExamOutbox _outbox(SecretStore secrets) => OciServeExamOutbox(
+  secrets: secrets,
+  scope: () => const OciServeExamOutboxScope(
+    baseUrl: 'https://learn.example',
+    accountId: 'participant-1',
+  ),
+);
+
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  late SecretStore secrets;
+  setUp(() {
+    FlutterSecureStorage.setMockInitialValues({});
+    secrets = SecretStore(
+      storage: const FlutterSecureStorage(),
+      canStore: true,
+    );
+  });
+
   test('never prefetches beyond the current unanswered item', () async {
     final api = _ExamApi();
-    final notifier = OciServeExamNotifier(organizationId: 'org', api: api);
+    final notifier = OciServeExamNotifier(
+      organizationId: 'org',
+      api: api,
+      outbox: _outbox(secrets),
+    );
     addTearDown(notifier.dispose);
 
     await notifier.load();
@@ -100,7 +125,11 @@ void main() {
 
   test('answer retry reuses challenge, revision and idempotency key', () async {
     final api = _ExamApi()..failFirstAnswer = true;
-    final notifier = OciServeExamNotifier(organizationId: 'org', api: api);
+    final notifier = OciServeExamNotifier(
+      organizationId: 'org',
+      api: api,
+      outbox: _outbox(secrets),
+    );
     addTearDown(notifier.dispose);
     await notifier.load();
     await notifier.start(notifier.state.sessions.single);
@@ -114,11 +143,54 @@ void main() {
     expect(api.answerKeys.first, api.answerKeys.last);
     expect(originalItem!.challenge, 'AAAAAAAAAAAAAAAAAAAAAA');
     expect(notifier.state.phase, OciServeExamPhase.readyToSubmit);
+    expect(await secrets.readOciServeOutbox('https://learn.example'), isNull);
+  });
+
+  test('encrypted answer mutation survives a notifier restart', () async {
+    final firstApi = _ExamApi()..failFirstAnswer = true;
+    final first = OciServeExamNotifier(
+      organizationId: 'org',
+      api: firstApi,
+      outbox: _outbox(secrets),
+    );
+    await first.load();
+    await first.start(first.state.sessions.single);
+    await first.answer('a');
+    final encoded = await secrets.readOciServeOutbox('https://learn.example');
+    first.dispose();
+
+    expect(encoded, isNotNull);
+    final stored = jsonDecode(encoded!) as List;
+    final mutation = stored.single as Map;
+    expect(mutation['kind'], 'exam_answer_v1');
+    expect(mutation, isNot(contains('question')));
+    expect(mutation, isNot(contains('options')));
+    expect(mutation, isNot(contains('score')));
+    expect(mutation, isNot(contains('correct')));
+
+    final resumedApi = _ExamApi()..currentCalls = 1;
+    final resumed = OciServeExamNotifier(
+      organizationId: 'org',
+      api: resumedApi,
+      outbox: _outbox(secrets),
+    );
+    addTearDown(resumed.dispose);
+    await resumed.load();
+    expect(resumed.state.errorCode, 'exam_answer_pending');
+    await resumed.retry();
+
+    expect(resumedApi.answerKeys, [mutation['idempotency_key']]);
+    expect(resumed.state.phase, OciServeExamPhase.readyToSubmit);
+    expect(await secrets.readOciServeOutbox('https://learn.example'), isNull);
   });
 
   test('submit response exposes status but no local score', () async {
     final api = _ExamApi();
-    final notifier = OciServeExamNotifier(organizationId: 'org', api: api);
+    final notifier = OciServeExamNotifier(
+      organizationId: 'org',
+      api: api,
+      outbox: _outbox(secrets),
+    );
     addTearDown(notifier.dispose);
     await notifier.load();
     await notifier.start(notifier.state.sessions.single);
@@ -131,7 +203,11 @@ void main() {
 
   test('a current-item conflict never unlocks definitive submit', () async {
     final api = _ExamApi()..failCurrent = true;
-    final notifier = OciServeExamNotifier(organizationId: 'org', api: api);
+    final notifier = OciServeExamNotifier(
+      organizationId: 'org',
+      api: api,
+      outbox: _outbox(secrets),
+    );
     addTearDown(notifier.dispose);
 
     await notifier.load();

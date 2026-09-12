@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:ocideck/app.dart';
@@ -199,13 +200,10 @@ class _FixedOciServeNotifier extends OciServeNotifier {
 
   @override
   Future<OciServeAcceptedExamAnswer> answerExamItem({
-    required String organizationId,
-    required OciServeCurrentExamItem item,
-    required Map<String, Object?> answerData,
-    required String idempotencyKey,
+    required OciServeExamAnswerMutation mutation,
   }) async => OciServeAcceptedExamAnswer(
-    attemptId: item.attemptId,
-    attemptItemId: item.attemptItemId,
+    attemptId: mutation.attemptId,
+    attemptItemId: mutation.attemptItemId,
     revision: 1,
     acceptedAt: DateTime.utc(2026, 9, 12),
   );
@@ -367,6 +365,7 @@ void main() {
 
   setUp(() {
     SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
+    FlutterSecureStorage.setMockInitialValues({});
   });
 
   testWidgets('de OciServe-instellingen tonen uitleg en veilige foutstatus', (

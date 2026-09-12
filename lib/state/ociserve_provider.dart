@@ -13,6 +13,7 @@ import '../models/ociserve_models.dart';
 import '../models/ociserve_settings.dart';
 import '../models/playback.dart';
 import '../services/ociserve/ociserve_auth.dart';
+import '../services/ociserve/ociserve_exam_outbox.dart';
 import '../services/ociserve/ociserve_gateway.dart';
 import '../services/ociserve/ociserve_http.dart';
 import '../services/secret_store.dart';
@@ -40,8 +41,7 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<void>? _secretWriteInFlight;
   final Map<String, LearningSessionRef> _activeLessonSessions = {};
 
-  /// Door de shell geleverde lokale cleanup, uitgevoerd vóór logout de
-  /// toegangstokens vergeet en vóór best-effort server-close.
+  /// Lokale cleanup vóór logout en best-effort server-close.
   List<LearningSessionRef> Function()? closeLearningTabsLocally;
 
   @override
@@ -497,9 +497,7 @@ class OciServeNotifier extends Notifier<OciServeState> {
     );
   }
 
-  /// Haalt een tijdelijke versleutelde les op en geeft de sleutel uitsluitend
-  /// aan de synchrone openingsketen door. De sleutel wordt niet opgeslagen in
-  /// state, sleutelbos, voortgangswachtrij of [LearningSessionRef].
+  /// Opent een tijdelijke les zonder de sleutel in state of opslag te bewaren.
   Future<bool> openLessonPackage({
     required String organizationId,
     required OciServeFeedItem lesson,
@@ -642,20 +640,13 @@ class OciServeNotifier extends Notifier<OciServeState> {
   }
 
   Future<OciServeAcceptedExamAnswer> answerExamItem({
-    required String organizationId,
-    required OciServeCurrentExamItem item,
-    required Map<String, Object?> answerData,
-    required String idempotencyKey,
+    required OciServeExamAnswerMutation mutation,
   }) async {
-    _requireMembership(organizationId);
+    _requireMembership(mutation.organizationId);
     final access = await _accessToken();
-    return _gatewayFactory(state.settings).answerExamItem(
-      accessToken: access,
-      organizationId: organizationId,
-      item: item,
-      answerData: answerData,
-      idempotencyKey: idempotencyKey,
-    );
+    return _gatewayFactory(
+      state.settings,
+    ).answerExamItem(accessToken: access, mutation: mutation);
   }
 
   Future<OciServeExamAttempt> submitExamAttempt({
@@ -752,7 +743,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
     if (generation != _generation) return;
     state = state.copyWith(pendingReports: pending.length);
     final own = pending
-        .where((item) => item['account_id'] == accountId)
+        .where(
+          (item) =>
+              item['account_id'] == accountId &&
+              (item['kind'] == null || item['kind'] == 'playback_report_v1'),
+        )
         .take(5)
         .toList();
     if (own.isEmpty) return;
@@ -789,8 +784,15 @@ class OciServeNotifier extends Notifier<OciServeState> {
       }
     }
     if (generation != _generation) return;
-    final remaining = pending.where((item) => !sent.contains(item)).toList();
-    await _writeOutbox(remaining, baseUrl: baseUrl);
+    final sentEncoded = sent.map(jsonEncode).toSet();
+    final remaining = await OciServeOutboxMutex.serialized(baseUrl, () async {
+      final latest = await _readOutbox(baseUrl: baseUrl);
+      final kept = latest
+          .where((item) => !sentEncoded.contains(jsonEncode(item)))
+          .toList();
+      await _writeOutbox(kept, baseUrl: baseUrl);
+      return kept;
+    });
     if (generation != _generation) return;
     state = state.copyWith(pendingReports: remaining.length);
   }
@@ -898,20 +900,24 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<void> _enqueue(
     String organizationId,
     OciServePlaybackSnapshot snapshot,
-  ) async {
-    final pending = await _readOutbox();
-    if (pending.length >= 100) {
-      state = state.copyWith(warningCode: 'outbox_full');
-      throw const OciServeException('outbox_full');
-    }
-    pending.add({
-      'account_id': state.account!.id,
-      'organization_id': organizationId,
-      'snapshot': snapshot.toJson(),
-    });
-    await _writeOutbox(pending);
-    state = state.copyWith(pendingReports: pending.length);
-  }
+  ) => OciServeOutboxMutex.serialized(
+    state.settings.normalizedBaseUrl,
+    () async {
+      final pending = await _readOutbox();
+      if (pending.length >= 100) {
+        state = state.copyWith(warningCode: 'outbox_full');
+        throw const OciServeException('outbox_full');
+      }
+      pending.add({
+        'kind': 'playback_report_v1',
+        'account_id': state.account!.id,
+        'organization_id': organizationId,
+        'snapshot': snapshot.toJson(),
+      });
+      await _writeOutbox(pending);
+      state = state.copyWith(pendingReports: pending.length);
+    },
+  );
 
   Future<List<Map<String, Object?>>> _readOutbox({String? baseUrl}) async {
     final raw = await _secrets.readOciServeOutbox(

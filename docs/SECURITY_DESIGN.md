@@ -65,7 +65,12 @@ Formal exams use a separate participant client. It requests only the first
 unanswered item, displays the server-supplied option order and binds every answer
 to a short-lived challenge, revision and idempotency key. Participant DTOs are
 rejected if they contain future questions, correctness, answer models, scoring
-or randomisation context. OciDeck does no local scoring. It also does not claim
+or randomisation context. Before transmission, OciDeck places only the answer
+mutation (attempt and item identifiers, answer data, challenge, revision and
+idempotency key) in the bounded OciServe outbox in the OS keychain. A restart or
+network loss therefore replays exactly the same request; acknowledgement removes
+it. Question and option text, participant metadata, scores and answer keys never
+enter that outbox. OciDeck does no local scoring. It also does not claim
 to establish who is behind the keyboard: identity assurance during an exam
 requires human supervision organised by the examining institution.
 

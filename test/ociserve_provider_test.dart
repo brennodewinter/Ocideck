@@ -167,10 +167,7 @@ class _FakeApi implements OciServeApi {
   @override
   Future<OciServeAcceptedExamAnswer> answerExamItem({
     required String accessToken,
-    required String organizationId,
-    required OciServeCurrentExamItem item,
-    required Map<String, Object?> answerData,
-    required String idempotencyKey,
+    required OciServeExamAnswerMutation mutation,
   }) => throw UnimplementedError();
 
   @override

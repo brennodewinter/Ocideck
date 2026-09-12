@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/ociserve_exam.dart';
+import '../services/ociserve/ociserve_exam_outbox.dart';
+import 'secret_store_provider.dart';
 import '../utils/log.dart';
 import 'ociserve_provider.dart';
 
@@ -9,9 +11,20 @@ const _examUuid = Uuid();
 
 final ociServeExamProvider = StateNotifierProvider.autoDispose
     .family<OciServeExamNotifier, OciServeExamState, String>((ref, orgId) {
+      final api = ref.read(ociServeProvider.notifier);
       return OciServeExamNotifier(
         organizationId: orgId,
-        api: ref.read(ociServeProvider.notifier),
+        api: api,
+        outbox: OciServeExamOutbox(
+          secrets: ref.read(secretStoreProvider),
+          scope: () {
+            final current = ref.read(ociServeProvider);
+            return OciServeExamOutboxScope(
+              baseUrl: current.settings.normalizedBaseUrl,
+              accountId: current.account?.id ?? '',
+            );
+          },
+        ),
       )..load();
     });
 
@@ -33,6 +46,7 @@ class OciServeExamState {
     this.sessions = const [],
     this.serverTime,
     this.attempt,
+    this.attemptId,
     this.item,
     this.errorCode,
   });
@@ -41,6 +55,7 @@ class OciServeExamState {
   final List<OciServeExamSession> sessions;
   final DateTime? serverTime;
   final OciServeExamAttempt? attempt;
+  final String? attemptId;
   final OciServeCurrentExamItem? item;
   final String? errorCode;
 
@@ -49,6 +64,7 @@ class OciServeExamState {
     List<OciServeExamSession>? sessions,
     DateTime? serverTime,
     OciServeExamAttempt? attempt,
+    String? attemptId,
     OciServeCurrentExamItem? item,
     bool clearItem = false,
     String? errorCode,
@@ -58,22 +74,37 @@ class OciServeExamState {
     sessions: sessions ?? this.sessions,
     serverTime: serverTime ?? this.serverTime,
     attempt: attempt ?? this.attempt,
+    attemptId: attemptId ?? this.attemptId,
     item: clearItem ? null : item ?? this.item,
     errorCode: clearError ? null : errorCode ?? this.errorCode,
   );
 }
 
 class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
-  OciServeExamNotifier({required this.organizationId, required this.api})
-    : super(const OciServeExamState());
+  OciServeExamNotifier({
+    required this.organizationId,
+    required this.api,
+    required this.outbox,
+  }) : super(const OciServeExamState());
 
   final String organizationId;
   final OciServeNotifier api;
+  final OciServeExamOutbox outbox;
   _PendingExamRequest? _pending;
 
   Future<void> load() async {
     state = state.copyWith(phase: OciServeExamPhase.loading, clearError: true);
     try {
+      final stored = await outbox.read(organizationId);
+      if (stored != null) {
+        _pending = _PendingExamAnswer(stored);
+        state = state.copyWith(
+          phase: OciServeExamPhase.failed,
+          attemptId: stored.attemptId,
+          errorCode: 'exam_answer_pending',
+        );
+        return;
+      }
       final result = await api.examSessions(organizationId);
       if (!mounted) return;
       state = state.copyWith(
@@ -104,7 +135,11 @@ class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
       );
       if (!mounted) return;
       _pending = null;
-      state = state.copyWith(attempt: attempt, clearError: true);
+      state = state.copyWith(
+        attempt: attempt,
+        attemptId: attempt.id,
+        clearError: true,
+      );
       await _loadCurrent(attempt.id);
     } catch (error, stack) {
       _fail('exam_start_failed', error, stack);
@@ -114,27 +149,31 @@ class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
   Future<void> answer(String value) async {
     final item = state.item;
     if (item == null || value.trim().isEmpty) return;
-    final request = _PendingExamAnswer(
-      item,
-      item.answerData(value.trim()),
-      _examUuid.v4(),
+    final mutation = OciServeExamAnswerMutation.fromItem(
+      organizationId: organizationId,
+      item: item,
+      answerData: item.answerData(value.trim()),
+      idempotencyKey: _examUuid.v4(),
     );
+    final request = _PendingExamAnswer(mutation);
     _pending = request;
     state = state.copyWith(phase: OciServeExamPhase.sending, clearError: true);
+    try {
+      await outbox.write(mutation);
+    } catch (error, stack) {
+      _fail('exam_answer_storage_failed', error, stack);
+      return;
+    }
     await _runAnswer(request);
   }
 
   Future<void> _runAnswer(_PendingExamAnswer request) async {
     try {
-      await api.answerExamItem(
-        organizationId: organizationId,
-        item: request.item,
-        answerData: request.answerData,
-        idempotencyKey: request.idempotencyKey,
-      );
+      await api.answerExamItem(mutation: request.mutation);
       if (!mounted) return;
+      await outbox.remove(request.mutation);
       _pending = null;
-      await _loadCurrent(request.item.attemptId);
+      await _loadCurrent(request.mutation.attemptId);
     } catch (error, stack) {
       _fail('exam_answer_failed', error, stack);
     }
@@ -166,11 +205,11 @@ class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
   }
 
   Future<void> submit() async {
-    final attempt = state.attempt;
-    if (attempt == null || state.phase != OciServeExamPhase.readyToSubmit) {
+    final attemptId = state.attempt?.id ?? state.attemptId;
+    if (attemptId == null || state.phase != OciServeExamPhase.readyToSubmit) {
       return;
     }
-    final request = _PendingExamSubmit(attempt.id, _examUuid.v4());
+    final request = _PendingExamSubmit(attemptId, _examUuid.v4());
     _pending = request;
     state = state.copyWith(
       phase: OciServeExamPhase.submitting,
@@ -230,10 +269,9 @@ class _PendingExamStart extends _PendingExamRequest {
 }
 
 class _PendingExamAnswer extends _PendingExamRequest {
-  const _PendingExamAnswer(this.item, this.answerData, super.idempotencyKey);
+  _PendingExamAnswer(this.mutation) : super(mutation.idempotencyKey);
 
-  final OciServeCurrentExamItem item;
-  final Map<String, Object?> answerData;
+  final OciServeExamAnswerMutation mutation;
 }
 
 class _PendingExamSubmit extends _PendingExamRequest {

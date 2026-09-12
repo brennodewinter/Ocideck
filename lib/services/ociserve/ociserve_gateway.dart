@@ -57,10 +57,7 @@ abstract class OciServeApi {
   });
   Future<OciServeAcceptedExamAnswer> answerExamItem({
     required String accessToken,
-    required String organizationId,
-    required OciServeCurrentExamItem item,
-    required Map<String, Object?> answerData,
-    required String idempotencyKey,
+    required OciServeExamAnswerMutation mutation,
   });
   Future<OciServeExamAttempt> submitExamAttempt({
     required String accessToken,
@@ -553,33 +550,30 @@ class OciServeGateway implements OciServeApi {
   @override
   Future<OciServeAcceptedExamAnswer> answerExamItem({
     required String accessToken,
-    required String organizationId,
-    required OciServeCurrentExamItem item,
-    required Map<String, Object?> answerData,
-    required String idempotencyKey,
+    required OciServeExamAnswerMutation mutation,
   }) async {
     final response = await _send(
       method: 'PUT',
       url: _api([
         'organizations',
-        organizationId,
+        mutation.organizationId,
         'me',
         'attempts',
-        item.attemptId,
+        mutation.attemptId,
         'items',
-        item.attemptItemId,
+        mutation.attemptItemId,
         'answer',
       ]),
       accessToken: accessToken,
       headers: {
         'content-type': 'application/json',
-        'idempotency-key': idempotencyKey,
+        'idempotency-key': mutation.idempotencyKey,
       },
       body: utf8.encode(
         jsonEncode({
-          'answer_data': answerData,
-          'challenge': item.challenge,
-          'revision': item.revision,
+          'answer_data': mutation.answerData,
+          'challenge': mutation.challenge,
+          'revision': mutation.revision,
         }),
       ),
     );

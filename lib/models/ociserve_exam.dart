@@ -271,6 +271,99 @@ class OciServeCurrentExamItem {
   }
 }
 
+/// Minimal, replayable answer mutation. It deliberately excludes question
+/// content, option text, scoring material and participant metadata.
+@immutable
+class OciServeExamAnswerMutation {
+  const OciServeExamAnswerMutation({
+    required this.organizationId,
+    required this.attemptId,
+    required this.attemptItemId,
+    required this.answerData,
+    required this.challenge,
+    required this.revision,
+    required this.idempotencyKey,
+  });
+
+  final String organizationId;
+  final String attemptId;
+  final String attemptItemId;
+  final Map<String, Object?> answerData;
+  final String challenge;
+  final int revision;
+  final String idempotencyKey;
+
+  factory OciServeExamAnswerMutation.fromItem({
+    required String organizationId,
+    required OciServeCurrentExamItem item,
+    required Map<String, Object?> answerData,
+    required String idempotencyKey,
+  }) => OciServeExamAnswerMutation(
+    organizationId: organizationId,
+    attemptId: item.attemptId,
+    attemptItemId: item.attemptItemId,
+    answerData: Map.unmodifiable(answerData),
+    challenge: item.challenge,
+    revision: item.revision,
+    idempotencyKey: idempotencyKey,
+  );
+
+  Map<String, Object?> toJson() => {
+    'kind': 'exam_answer_v1',
+    'organization_id': organizationId,
+    'attempt_id': attemptId,
+    'attempt_item_id': attemptItemId,
+    'answer_data': answerData,
+    'challenge': challenge,
+    'revision': revision,
+    'idempotency_key': idempotencyKey,
+  };
+
+  factory OciServeExamAnswerMutation.fromJson(Map<String, Object?> json) {
+    _requireOnlyKeys(json, const {
+      'kind',
+      'organization_id',
+      'attempt_id',
+      'attempt_item_id',
+      'answer_data',
+      'challenge',
+      'revision',
+      'idempotency_key',
+    });
+    final answer = json['answer_data'];
+    final revision = (json['revision'] as num?)?.toInt();
+    final challenge = (json['challenge'] as String? ?? '').trim();
+    final key = (json['idempotency_key'] as String? ?? '').trim();
+    if (json['kind'] != 'exam_answer_v1' ||
+        answer is! Map ||
+        !_validStoredAnswer(answer) ||
+        revision == null ||
+        revision < 0 ||
+        !RegExp(r'^[A-Za-z0-9_-]{22}$').hasMatch(challenge) ||
+        key.isEmpty ||
+        key.length > 128) {
+      throw const FormatException('invalid stored exam answer');
+    }
+    String requiredId(String field) {
+      final value = (json[field] as String? ?? '').trim();
+      if (value.isEmpty || value.length > 256) {
+        throw const FormatException('invalid stored exam answer id');
+      }
+      return value;
+    }
+
+    return OciServeExamAnswerMutation(
+      organizationId: requiredId('organization_id'),
+      attemptId: requiredId('attempt_id'),
+      attemptItemId: requiredId('attempt_item_id'),
+      answerData: Map.unmodifiable(Map<String, Object?>.from(answer)),
+      challenge: challenge,
+      revision: revision,
+      idempotencyKey: key,
+    );
+  }
+}
+
 @immutable
 class OciServeAcceptedExamAnswer {
   const OciServeAcceptedExamAnswer({
@@ -345,4 +438,12 @@ bool _containsForbiddenContent(Object? value) {
     }
   }
   return false;
+}
+
+bool _validStoredAnswer(Map<Object?, Object?> answer) {
+  if (answer.length != 1) return false;
+  final entry = answer.entries.single;
+  if (!const {'selected_option_id', 'text'}.contains(entry.key)) return false;
+  final value = entry.value;
+  return value is String && value.isNotEmpty && value.length <= 4096;
 }
