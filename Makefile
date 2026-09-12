@@ -89,10 +89,10 @@ help:
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
 	@echo "  make refresh-lexicon  Regenerate the bundled health lexicon from Orphanet (read the term diff)."
-	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
+	@echo "  make l10n-check      Fast l10n gate: duplicate keys, coverage, Dutch/English passthrough, and formatting."
 	@echo "  make check-l10n-orphans  Ratchet: translation keys nothing looks up any more (in check-full)."
 	@echo "  make check-l10n-parity   Every key present in one language table must exist in all (in check)."
-	@echo "  make check-l10n-passthrough  Ratchet: values that are the Dutch source verbatim (in check-full)."
+	@echo "  make check-l10n-passthrough  Ratchet: values that are the Dutch source verbatim (in check)."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make clean-test-cache  Gooi alleen de kernelcache van 'flutter test' weg (bij een laadfout op een test die los groen is)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
@@ -1032,17 +1032,14 @@ check-l10n-parity:
 # tlh.dart 44 zulke sleutels droeg — inclusief een compleet LibrePlan-blok van
 # hele zinnen — en dat blok staat onvertaald in dertig talen.
 #
-# WAAROM IN check-full EN NIET IN check, net als haar zusterpoort
-# check-l10n-orphans en anders dan check-l10n-parity. Twee redenen, en ze
-# horen bij elkaar. (1) Het oordeel is een TEKSTHEURISTIEK: gelijkheid vanaf
-# drie woorden. Dat is scherp genoeg om bruikbaar te zijn en te grof om
-# onfeilbaar te zijn — precies het soort weging dat niet thuishoort in de ronde
-# die élke commit tegenhoudt. (2) Bij invoering vindt hij er 394. Een poort die
-# meteen rood staat kan niet in `check` zonder basislijn, en een basislijn ís
-# hier het eerlijke antwoord: de opruimronde (#1526 e.v.) brengt hem naar nul
-# en dan pas kan hij verhuizen. Tot die tijd houdt de ratchet tegen dat er nóg
-# een taal of nóg een blok bijkomt — dat deel raakt wél elke commit, via
-# test/l10n_dutch_passthrough_test.dart, dat in de suite meedraait.
+# WAAROM NU IN check. Bij invoering vond deze tekstheuristiek 394 regels en kon
+# zij niet rood aan de gewone poort worden toegevoegd. De opruimronde (#1526
+# e.v.) bracht de basislijn naar nul. Vanaf dat moment is uitstel tot
+# `check-full` juist riskant: de per-PR static-gate kan een letterlijke
+# Nederlandse bron dan naar main laten gaan en pas tijdens een release stoppen.
+# De grens van drie woorden en de beargumenteerde [loanKeys] houden de bekende
+# valse positieven buiten; elke nieuwe treffer vraagt voortaan vóór samenvoegen
+# om een vertaling of een expliciete, gedocumenteerde uitzondering.
 check-l10n-passthrough:
 	@echo "== OciDeck check: doorgelaten Nederlandse bronzinnen =="
 	@echo "Command: dart run tool/check_l10n_dutch_passthrough.dart"
@@ -1072,8 +1069,9 @@ add-l10n:
 
 # Fast localisation gate — the subset of `make check` that touches l10n, so a
 # translation change can be validated without the full suite: no duplicate keys,
-# every d()/t() literal covered in every language, and the language files are
-# dart-format-clean (the exact failures that used to slip through by hand).
+# every d()/t() literal covered in every language, no English or Dutch source
+# passed through as a translation, and the language files are dart-format-clean
+# (the exact failures that used to slip through by hand).
 # Eén taal eruit en er weer in, via plat JSON — zodat een moedertaalspreker die
 # één zin wil verbeteren geen Dart hoeft aan te raken (#633). Voegt bewust geen
 # sleutels toe: nieuwe strings gaan via add-l10n, dat alle 31 talen afdwingt.
@@ -1119,10 +1117,10 @@ template-l10n-auto:
 	$(TRANSLATOR) en $(LANG_) $$POT $$OUT && \
 	dart run tool/template_l10n_po.dart import $(TEMPLATE) $(LANG_) $$OUT
 
-l10n-check:
+l10n-check: check-l10n-passthrough
 	@echo "== OciDeck check: l10n =="
-	@echo "Covers: duplicate keys, per-language d()/t() coverage, untranslated English, and l10n formatting."
-	@echo "Failure means: run 'make add-l10n' / 'dart format lib/l10n', fill the gap, or translate a string that is still English."
+	@echo "Covers: duplicate keys, per-language d()/t() coverage, untranslated English or Dutch source, and l10n formatting."
+	@echo "Failure means: run 'make add-l10n' / 'dart format lib/l10n', fill the gap, or translate a value that still carries its source."
 	dart format --output=none --set-exit-if-changed lib/l10n
 	flutter test test/l10n_duplicate_keys_test.dart test/app_localizations_test.dart test/l10n_untranslated_test.dart $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
@@ -1314,7 +1312,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-linux-impeller check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity translate-docs-check
+STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-linux-impeller check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus
@@ -1411,7 +1409,7 @@ check-registrations:
 check-full:
 	@scripts/gate_lock.sh $(MAKE) check-full-locked
 
-check-full-locked: check-locked check-l10n-orphans check-l10n-passthrough check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated check-marp
+check-full-locked: check-locked check-l10n-orphans check-secrets sast shellcheck licenses sbom-verify deps-check check-web deps-outdated check-marp
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, unused translation keys, untranslated Dutch source strings, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, shell scripts, dependency freshness, and real-Marp theme loading."
 

@@ -185,7 +185,7 @@ mean editing 31 files by hand. Two helpers remove that toil:
 
 ```sh
 make add-l10n SPEC=strings.json  # insert d('…') strings into every language
-make l10n-check                  # fast l10n gate: dup keys + coverage + format
+make l10n-check                  # fast l10n gate: dup keys + coverage + passthrough + format
 ```
 
 `make add-l10n` reads a JSON spec (Dutch source → per-language translations; the
@@ -193,7 +193,8 @@ format is documented in `tool/add_l10n.dart`), inserts each string into that
 language's additions overlay, `dart format`s the result, skips anything already
 present, and whitelists any `unchanged` loanwords. `make l10n-check` runs just
 the l10n parts of `make check` (the duplicate-key and per-language coverage
-guards plus formatting), handy while iterating on translations.
+guards, English and Dutch pass-through checks, plus formatting), handy while
+iterating on translations.
 
 ### `make check-l10n-orphans`
 - **Runs:** `dart run tool/check_l10n_orphans.dart` (`--list` prints every
@@ -303,13 +304,14 @@ guards plus formatting), handy while iterating on translations.
   exception per key says something about the *source sentence*, and that stays
   true. What that costs is stated too: a key listed there is silent for every
   language, including ones in another script that would transliterate it.
-- **Why `check-full` and not `check`,** like its sibling `check-l10n-orphans`
-  and unlike `check-l10n-parity`: the judgement is a textual heuristic, and at
-  introduction it finds 394 — a gate that is red on arrival cannot go into
-  `check` without a baseline. So: a `passthroughBaseline` ratchet that may fall
-  and never rise, with zero as the goal. The strictest part still touches every
-  commit, because the same ratchet is asserted in
-  `test/l10n_dutch_passthrough_test.dart`, which runs in the suite.
+- **Why it now runs in `check`, `check-static` and `l10n-check`:** at
+  introduction the heuristic found 394 rows, so it first lived in `check-full`
+  behind a shrink-only baseline. The cleanup reached the intended baseline of
+  zero. Leaving the command only in the late release pass after that could let a
+  Dutch source sentence reach `main` and stop only while cutting a release. The
+  three-word threshold and reasoned `loanKeys` exceptions remain the noise
+  filter; every new finding must now be translated or deliberately classified
+  before merge.
 - **Failure means:** another language or another block started passing the Dutch
   source through. Translate it. If there is genuinely nothing to translate, add
   the **key** to `loanKeys` with its reason — not the baseline.
@@ -439,7 +441,7 @@ now the only passing state.
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — | local only |
 | [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — | required (via `static-gate`) |
 | [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — | local only (`check-full`) |
-| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | — | ✅ | — | local only (`check-full`) |
+| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | ✅ | ✅ | — | required (via `static-gate`) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ | local only (`check-full`) |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ | local only (`check-full`) |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ | local only (`check-full`) |
