@@ -1630,6 +1630,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Logo niet importeren': 'Logo nöd importiere',
+  'Logo gevonden': 'Logo gfunde',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Das Logo chunnt au im Stil {naam} vor.',
   'Als afbeelding behouden': 'Als Bild bhalte',
   'bovenaan': 'obe',
   'onderaan': 'unde',

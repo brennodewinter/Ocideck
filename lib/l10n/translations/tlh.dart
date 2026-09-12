@@ -1604,6 +1604,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Logo niet importeren': 'Degh yIche\'Qo\'',
+  'Logo gevonden': 'Degh tu\'lu\'',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      '{naam} motlhghachDaq je nargh Deghvam.',
   'Als afbeelding behouden': 'mIllogh rur yIpol',
   'bovenaan': 'DungDaq',
   'onderaan': 'bIngDaq',

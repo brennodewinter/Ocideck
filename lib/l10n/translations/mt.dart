@@ -1645,6 +1645,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Logo niet importeren': 'Timportax il-logo',
+  'Logo gevonden': 'Instab logo',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Dan il-logo jidher ukoll fl-istil {naam}.',
   'Als afbeelding behouden': 'Żomm bħala immaġni',
   'bovenaan': 'fin-naħa ta\' fuq',
   'onderaan': 'fin-naħa t\'isfel',

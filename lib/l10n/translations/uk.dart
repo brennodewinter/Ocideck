@@ -1642,6 +1642,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Logo niet importeren': 'Не імпортувати логотип',
+  'Logo gevonden': 'Логотип знайдено',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Цей логотип також є у стилі {naam}.',
   'Als afbeelding behouden': 'Залишити як зображення',
   'bovenaan': 'угорі',
   'onderaan': 'унизу',

@@ -2544,6 +2544,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Logo niet importeren': 'Logoyu içe aktarma',
+  'Logo gevonden': 'Logo bulundu',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Bu logo {naam} stilinde de görünür.',
   'Als afbeelding behouden': 'Görsel olarak tut',
   'bovenaan': 'üstte',
   'onderaan': 'altta',

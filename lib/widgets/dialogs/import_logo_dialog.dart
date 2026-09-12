@@ -4,24 +4,35 @@ import '../../l10n/app_localizations.dart';
 import '../../services/import/logo_detection.dart';
 import '../../utils/image_limits.dart';
 
+enum ImportLogoDisposition { keepAsImage, ignore, useAsLogo }
+
 class ImportLogoChoice {
   const ImportLogoChoice.notLogo()
-    : isLogo = false,
+    : disposition = ImportLogoDisposition.keepAsImage,
+      addAsStyle = false,
+      styleName = '';
+
+  const ImportLogoChoice.ignored()
+    : disposition = ImportLogoDisposition.ignore,
       addAsStyle = false,
       styleName = '';
 
   const ImportLogoChoice.logo({required this.addAsStyle, this.styleName = ''})
-    : isLogo = true;
+    : disposition = ImportLogoDisposition.useAsLogo;
 
-  final bool isLogo;
+  final ImportLogoDisposition disposition;
   final bool addAsStyle;
   final String styleName;
+
+  bool get isLogo => disposition == ImportLogoDisposition.useAsLogo;
+  bool get isIgnored => disposition == ImportLogoDisposition.ignore;
 }
 
-/// Vraagt alleen bij een onbekende herhaalde randafbeelding of dit een logo is.
-/// Een exacte overeenkomst met een bestaand stijlprofiel wordt buiten deze
-/// dialoog afgehandeld: dan is er geen twijfel en voegt een vraag alleen werk
-/// toe.
+/// Laat de gebruiker beslissen wat er met een herhaalde randafbeelding gebeurt.
+///
+/// Ook een exacte overeenkomst met een bestaand stijlprofiel blijft een keuze:
+/// de match geeft extra bewijs, maar de importeur mag niet bepalen dat het logo
+/// in dit nieuwe deck gewenst is.
 class ImportLogoDialog {
   const ImportLogoDialog._();
 
@@ -30,8 +41,9 @@ class ImportLogoDialog {
     required ImportLogoCandidate candidate,
     required String suggestedStyleName,
     bool canAddAsStyle = true,
+    String? knownStyleName,
   }) async {
-    final isLogo = await showDialog<bool>(
+    final disposition = await showDialog<ImportLogoDisposition>(
       context: context,
       barrierDismissible: false,
       builder: (context) {
@@ -40,7 +52,11 @@ class ImportLogoDialog {
             ? l10n.d('bovenaan')
             : l10n.d('onderaan');
         return AlertDialog(
-          title: Text(l10n.d('Is dit een logo?')),
+          title: Text(
+            l10n.d(
+              knownStyleName == null ? 'Is dit een logo?' : 'Logo gevonden',
+            ),
+          ),
           content: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 440),
             child: Column(
@@ -55,6 +71,14 @@ class ImportLogoDialog {
                       .replaceAll('{n}', '${candidate.occurrenceCount}')
                       .replaceAll('{plaats}', location),
                 ),
+                if (knownStyleName != null) ...[
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n
+                        .d('Dit logo komt ook voor in de stijl {naam}.')
+                        .replaceAll('{naam}', knownStyleName),
+                  ),
+                ],
                 const SizedBox(height: 20),
                 Center(
                   child: Semantics(
@@ -77,21 +101,31 @@ class ImportLogoDialog {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context, false),
+              onPressed: () =>
+                  Navigator.pop(context, ImportLogoDisposition.keepAsImage),
               child: Text(l10n.d('Als afbeelding behouden')),
             ),
+            TextButton(
+              onPressed: () =>
+                  Navigator.pop(context, ImportLogoDisposition.ignore),
+              child: Text(l10n.d('Logo niet importeren')),
+            ),
             FilledButton(
-              onPressed: () => Navigator.pop(context, true),
+              onPressed: () =>
+                  Navigator.pop(context, ImportLogoDisposition.useAsLogo),
               child: Text(l10n.d('Ja, als logo gebruiken')),
             ),
           ],
         );
       },
     );
-    if (isLogo != true || !context.mounted) {
+    if (disposition == ImportLogoDisposition.ignore) {
+      return const ImportLogoChoice.ignored();
+    }
+    if (disposition != ImportLogoDisposition.useAsLogo || !context.mounted) {
       return const ImportLogoChoice.notLogo();
     }
-    if (!canAddAsStyle) {
+    if (!canAddAsStyle || knownStyleName != null) {
       return const ImportLogoChoice.logo(addAsStyle: false);
     }
     return _askToSaveStyle(context, suggestedStyleName);

@@ -1647,6 +1647,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Logo niet importeren': 'Да не се импортира логото',
+  'Logo gevonden': 'Намерено е лого',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Това лого се среща и в стила {naam}.',
   'Als afbeelding behouden': 'Запазване като изображение',
   'bovenaan': 'в горната част',
   'onderaan': 'в долната част',

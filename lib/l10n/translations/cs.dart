@@ -1628,6 +1628,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Logo niet importeren': 'Neimportovat logo',
+  'Logo gevonden': 'Logo nalezeno',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Toto logo se také objevuje ve stylu {naam}.',
   'Als afbeelding behouden': 'Ponechat jako obrázek',
   'bovenaan': 'nahoře',
   'onderaan': 'dole',

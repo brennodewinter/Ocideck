@@ -109,11 +109,13 @@ class PreparedImport {
       classified,
       title: _title,
       policies: policies,
-      logoSlideIndexes: logo?.candidate.slideIndexes.toSet(),
+      logoSlideIndexes: logo?.profile == null
+          ? null
+          : logo!.candidate.slideIndexes.toSet(),
     );
-    final deck = logo == null
+    final deck = logo?.profile == null
         ? built.deck
-        : built.deck.copyWith(themeProfile: logo.profile);
+        : built.deck.copyWith(themeProfile: logo!.profile!);
     return BuiltDeck(
       deck: deck,
       problemSlides: built.problemSlides,

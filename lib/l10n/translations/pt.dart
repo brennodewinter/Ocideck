@@ -1655,6 +1655,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Logo niet importeren': 'Não importar o logótipo',
+  'Logo gevonden': 'Logótipo encontrado',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Este logótipo também aparece no estilo {naam}.',
   'Als afbeelding behouden': 'Manter como imagem',
   'bovenaan': 'na parte superior',
   'onderaan': 'na parte inferior',

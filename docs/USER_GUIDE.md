@@ -2554,12 +2554,13 @@ bounded by the import's own size and time limits.
 compares images by their actual contents, so the file name does not have to be
 the same, and two occurrences are enough — the logo need not appear on every
 slide. If that image is already the logo of one of your style profiles, OciDeck
-recognises it without asking and reuses the durable logo file; the other style
-values still come from the source presentation. Otherwise you see the image and
-decide whether it is a logo. Saying no keeps every occurrence as ordinary slide
-content. Saying yes moves it out of the slide layouts and into the deck style;
-you then choose between using that style only in this presentation or adding it
-to OciDeck under a name for later use. In the web version the logo stays with
+shows that match as additional evidence and can reuse the durable logo file; the
+other style values still come from the source presentation. You always choose
+what happens to it: keep it as an ordinary slide image, omit it from the import
+altogether, or use it as the logo. Using it as the logo moves it out of the
+slide layouts and into the deck style; you then choose between using that
+style only in this presentation or adding it to OciDeck under a name for later
+use. In the web version the logo stays with
 this presentation: the browser cannot retain it as part of a reusable style.
 The queue does not interrupt a batch for this question and therefore keeps
 unknown candidates as ordinary images.

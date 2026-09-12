@@ -2646,11 +2646,11 @@ grootte- en tijdslimieten van de import.
 **Een herhaalde afbeelding boven- of onderaan kan het decklogo worden.** OciDeck
 vergelijkt de werkelijke beeldinhoud, dus de bestandsnaam hoeft niet gelijk te
 zijn, en twee vindplaatsen zijn genoeg — het logo hoeft niet op iedere dia te
-staan. Is die afbeelding al het logo van een van uw stijlprofielen, dan herkent
-OciDeck het zonder extra vraag en hergebruikt het duurzame logobestand; de andere
-stijlwaarden komen nog steeds uit de bronpresentatie. Anders ziet u de afbeelding
-en beslist u of het een logo is. Nee houdt iedere vindplaats als gewone
-dia-inhoud. Ja haalt
+staan. Is die afbeelding al het logo van een van uw stijlprofielen, dan toont
+OciDeck die overeenkomst als extra bewijs en kan het het duurzame logobestand
+hergebruiken; de andere stijlwaarden komen nog steeds uit de bronpresentatie. U
+kiest altijd wat ermee gebeurt: als gewone dia-afbeelding behouden, helemaal uit
+de import weglaten, of als logo gebruiken. Bij gebruik als logo haalt OciDeck
 het beeld uit de dia-indelingen en zet het in de deckstijl; daarna kiest u of die
 stijl alleen voor deze presentatie geldt of onder een door u gekozen naam aan
 OciDeck wordt toegevoegd. In de webversie blijft het logo bij deze presentatie:

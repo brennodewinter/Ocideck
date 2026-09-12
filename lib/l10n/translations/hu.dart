@@ -1629,6 +1629,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Logo niet importeren': 'Ne importálja a logót',
+  'Logo gevonden': 'Logó található',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Ez a logó a(z) {naam} stílusban is szerepel.',
   'Als afbeelding behouden': 'Megtartás képként',
   'bovenaan': 'felül',
   'onderaan': 'alul',

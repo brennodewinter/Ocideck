@@ -1634,6 +1634,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Logo niet importeren': 'Neimportuoti logotipo',
+  'Logo gevonden': 'Rastas logotipas',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Šis logotipas taip pat rodomas stiliuje {naam}.',
   'Als afbeelding behouden': 'Palikti kaip paveikslėlį',
   'bovenaan': 'viršuje',
   'onderaan': 'apačioje',

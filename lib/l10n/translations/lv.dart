@@ -1625,6 +1625,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Logo niet importeren': 'Neimportēt logotipu',
+  'Logo gevonden': 'Atrasts logotips',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Šis logotips ir arī stilā {naam}.',
   'Als afbeelding behouden': 'Saglabāt kā attēlu',
   'bovenaan': 'augšdaļā',
   'onderaan': 'apakšdaļā',

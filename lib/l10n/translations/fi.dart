@@ -1627,6 +1627,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Logo niet importeren': 'Älä tuo logoa',
+  'Logo gevonden': 'Logo löytyi',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Tämä logo näkyy myös tyylissä {naam}.',
   'Als afbeelding behouden': 'Säilytä kuvana',
   'bovenaan': 'yläreunassa',
   'onderaan': 'alareunassa',

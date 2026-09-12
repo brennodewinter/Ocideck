@@ -1631,6 +1631,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Logo niet importeren': 'Nemoj uvesti logotip',
+  'Logo gevonden': 'Logotip je pronađen',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Ovaj se logotip pojavljuje i u stilu {naam}.',
   'Als afbeelding behouden': 'Zadrži kao sliku',
   'bovenaan': 'pri vrhu',
   'onderaan': 'pri dnu',

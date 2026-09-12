@@ -1633,6 +1633,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Logo niet importeren': 'Neimportovať logo',
+  'Logo gevonden': 'Logo sa našlo',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Toto logo sa nachádza aj v štýle {naam}.',
   'Als afbeelding behouden': 'Ponechať ako obrázok',
   'bovenaan': 'v hornej časti',
   'onderaan': 'v dolnej časti',

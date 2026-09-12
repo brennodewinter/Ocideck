@@ -198,7 +198,7 @@ Future<void> importPresentation(
     problemCount: built.problemSlides.length,
     messenger: messenger,
     l10n: l10n,
-    preserveThemeProfile: logo != null,
+    preserveThemeProfile: logo?.profile != null,
   );
 }
 
@@ -227,10 +227,22 @@ Future<ImportLogoResolution?> _resolveImportLogo(
   final known = await _logoProfilesByHash(profiles);
   for (final candidate in candidates) {
     final matchingProfile = known[candidate.image.sha256];
+    if (!context.mounted) return null;
+    final choice = await ImportLogoDialog.ask(
+      context,
+      candidate: candidate,
+      suggestedStyleName: suggested,
+      canAddAsStyle: !kIsWeb,
+      knownStyleName: matchingProfile?.name,
+    );
+    if (choice.isIgnored) return ImportLogoResolution.ignored(candidate);
+    if (!choice.isLogo) continue;
+
     if (matchingProfile != null) {
       // De overeenkomst bewijst dat het beeld een bekend logo is, niet dat de
       // overige bronopmaak exact dat OciDeck-profiel volgt. Neem daarom alleen
-      // het duurzame logopad over en bouw de importstijl uit de bron zelf.
+      // het duurzame logopad over en bouw de importstijl uit de bron zelf. Het
+      // blijft een keuze: ook een bekend logo mag uit deze import verdwijnen.
       return ImportLogoResolution(
         candidate: candidate,
         profile: importedLogoProfile(
@@ -242,17 +254,6 @@ Future<ImportLogoResolution?> _resolveImportLogo(
         ),
       );
     }
-  }
-
-  for (final candidate in candidates) {
-    if (!context.mounted) return null;
-    final choice = await ImportLogoDialog.ask(
-      context,
-      candidate: candidate,
-      suggestedStyleName: suggested,
-      canAddAsStyle: !kIsWeb,
-    );
-    if (!choice.isLogo) continue;
 
     final profileName = choice.styleName.isEmpty ? suggested : choice.styleName;
     String? durablePath;

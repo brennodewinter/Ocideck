@@ -827,6 +827,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Logo niet importeren': 'Do not import logo',
+  'Logo gevonden': 'Logo found',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'This logo also appears in the {naam} style.',
   'Als afbeelding behouden': 'Keep as image',
   'bovenaan': 'at the top',
   'onderaan': 'at the bottom',

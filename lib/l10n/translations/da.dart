@@ -1627,6 +1627,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Logo niet importeren': 'Importér ikke logoet',
+  'Logo gevonden': 'Logo fundet',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Dette logo vises også i stilen {naam}.',
   'Als afbeelding behouden': 'Behold som billede',
   'bovenaan': 'øverst',
   'onderaan': 'nederst',

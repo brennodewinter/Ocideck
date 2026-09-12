@@ -1643,6 +1643,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Logo niet importeren': 'Nu importa sigla',
+  'Logo gevonden': 'Siglă găsită',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Această siglă apare și în stilul {naam}.',
   'Als afbeelding behouden': 'Păstrează ca imagine',
   'bovenaan': 'în partea de sus',
   'onderaan': 'în partea de jos',

@@ -1626,6 +1626,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Logo niet importeren': 'Importera inte logotypen',
+  'Logo gevonden': 'Logotyp hittad',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Den här logotypen visas också i stilen {naam}.',
   'Als afbeelding behouden': 'Behåll som bild',
   'bovenaan': 'längst upp',
   'onderaan': 'längst ned',

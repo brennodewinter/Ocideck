@@ -1627,6 +1627,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Logo niet importeren': 'Ne uvozi logotipa',
+  'Logo gevonden': 'Logotip je najden',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Ta logotip se pojavlja tudi v slogu {naam}.',
   'Als afbeelding behouden': 'Ohrani kot sliko',
   'bovenaan': 'na vrhu',
   'onderaan': 'na dnu',

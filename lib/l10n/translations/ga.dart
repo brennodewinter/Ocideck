@@ -1657,6 +1657,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Logo niet importeren': 'Ná iompórtáil an lógó',
+  'Logo gevonden': 'Aimsíodh lógó',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Tá an lógó seo le fáil sa stíl {naam} freisin.',
   'Als afbeelding behouden': 'Coinnigh mar íomhá',
   'bovenaan': 'ag an mbarr',
   'onderaan': 'ag an mbun',

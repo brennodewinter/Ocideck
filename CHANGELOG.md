@@ -16,7 +16,7 @@ in Dutch, and it keeps growing on `main` between releases.
 
 ### Changed
 
-- Presentatie-import herkent herhaalde randafbeeldingen als mogelijke logo's en kan de bijbehorende stijl bewaren
+- Presentatie-import herkent herhaalde randafbeeldingen als mogelijke logo's, kan ze negeren en kan de bijbehorende stijl bewaren
 - ci: scanner-pins bijwerken naar de laatste upstream
 - Tabellen delen het document-rekenblad (#2051–#2056)
 - Herstel synchronisatie en slide-overzicht in presentatiemodus

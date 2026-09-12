@@ -1642,6 +1642,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Logo niet importeren': 'Insigne ne importa',
+  'Logo gevonden': 'Insigne inventum',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Hoc insigne etiam in stilo {naam} apparet.',
   'Als afbeelding behouden': 'Ut imaginem retinere',
   'bovenaan': 'in summo',
   'onderaan': 'in imo',

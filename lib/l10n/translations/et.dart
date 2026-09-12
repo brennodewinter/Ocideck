@@ -1620,6 +1620,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Logo niet importeren': 'Ära impordi logo',
+  'Logo gevonden': 'Logo leitud',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'See logo esineb ka stiilis {naam}.',
   'Als afbeelding behouden': 'Säilita pildina',
   'bovenaan': 'ülaosas',
   'onderaan': 'alaosas',

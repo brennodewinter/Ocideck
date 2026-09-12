@@ -31,8 +31,13 @@ class ImportLogoCandidate {
 class ImportLogoResolution {
   const ImportLogoResolution({required this.candidate, required this.profile});
 
+  const ImportLogoResolution.ignored(this.candidate) : profile = null;
+
   final ImportLogoCandidate candidate;
-  final ThemeProfile profile;
+
+  /// Het toe te passen logoprofiel, of `null` wanneer de kandidaat bewust uit
+  /// de import wordt weggelaten.
+  final ThemeProfile? profile;
 }
 
 /// Vind herhaalde, kleine afbeeldingen in de boven- of onderrand.

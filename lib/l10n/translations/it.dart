@@ -664,6 +664,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Logo niet importeren': 'Non importare il logo',
+  'Logo gevonden': 'Logo trovato',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Questo logo compare anche nello stile {naam}.',
   'Als afbeelding behouden': 'Mantieni come immagine',
   'bovenaan': 'in alto',
   'onderaan': 'in basso',

@@ -666,6 +666,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Logo niet importeren': 'No importá e logo',
+  'Logo gevonden': 'Logo hañá',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'E logo aki tambe ta aparese den e estilo {naam}.',
   'Als afbeelding behouden': 'Mantené komo imagen',
   'bovenaan': 'na parti ariba',
   'onderaan': 'na parti abou',

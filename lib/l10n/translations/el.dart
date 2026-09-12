@@ -1652,6 +1652,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Logo niet importeren': 'Να μην εισαχθεί το λογότυπο',
+  'Logo gevonden': 'Βρέθηκε λογότυπο',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Αυτό το λογότυπο εμφανίζεται επίσης στο στιλ {naam}.',
   'Als afbeelding behouden': 'Διατήρηση ως εικόνα',
   'bovenaan': 'στο επάνω μέρος',
   'onderaan': 'στο κάτω μέρος',

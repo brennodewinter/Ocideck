@@ -37,6 +37,7 @@ void main() {
     WidgetTester tester,
     void Function(ImportLogoChoice choice) capture, {
     bool canAddAsStyle = true,
+    String? knownStyleName,
   }) async {
     await tester.binding.setSurfaceSize(const Size(1000, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -52,6 +53,7 @@ void main() {
                     candidate: candidate,
                     suggestedStyleName: 'Stijl van Voorbeeld',
                     canAddAsStyle: canAddAsStyle,
+                    knownStyleName: knownStyleName,
                   ),
                 );
               },
@@ -77,6 +79,66 @@ void main() {
 
     expect(captured?.isLogo, isFalse);
     expect(captured?.addAsStyle, isFalse);
+  });
+
+  testWidgets('negeren geeft een aparte uitkomst zonder stijlvraag', (
+    tester,
+  ) async {
+    ImportLogoChoice? captured;
+    await showDialogUnderTest(tester, (choice) => captured = choice);
+
+    await tester.tap(find.text('Logo niet importeren'));
+    await tester.pumpAndSettle();
+
+    expect(captured?.disposition, ImportLogoDisposition.ignore);
+    expect(captured?.isIgnored, isTrue);
+    expect(captured?.isLogo, isFalse);
+    expect(captured?.addAsStyle, isFalse);
+    expect(captured?.styleName, isEmpty);
+    expect(find.text('Ook als stijl toevoegen?'), findsNothing);
+    expect(find.byType(TextField), findsNothing);
+  });
+
+  testWidgets('bekende stijl toont extra bewijs en kan worden genegeerd', (
+    tester,
+  ) async {
+    ImportLogoChoice? captured;
+    await showDialogUnderTest(
+      tester,
+      (choice) => captured = choice,
+      knownStyleName: 'Gemeentehuis',
+    );
+
+    expect(find.text('Logo gevonden'), findsOneWidget);
+    expect(
+      find.text('Dit logo komt ook voor in de stijl Gemeentehuis.'),
+      findsOneWidget,
+    );
+    expect(find.text('Logo niet importeren'), findsOneWidget);
+    await tester.tap(find.text('Logo niet importeren'));
+    await tester.pumpAndSettle();
+
+    expect(captured?.disposition, ImportLogoDisposition.ignore);
+    expect(find.text('Ook als stijl toevoegen?'), findsNothing);
+  });
+
+  testWidgets('bekende stijl wordt bij ja direct als logo gebruikt', (
+    tester,
+  ) async {
+    ImportLogoChoice? captured;
+    await showDialogUnderTest(
+      tester,
+      (choice) => captured = choice,
+      knownStyleName: 'Gemeentehuis',
+    );
+
+    await tester.tap(find.text('Ja, als logo gebruiken'));
+    await tester.pumpAndSettle();
+
+    expect(captured?.disposition, ImportLogoDisposition.useAsLogo);
+    expect(captured?.addAsStyle, isFalse);
+    expect(find.text('Ook als stijl toevoegen?'), findsNothing);
+    expect(find.byType(TextField), findsNothing);
   });
 
   testWidgets('ja kan het logo alleen voor dit deck gebruiken', (tester) async {

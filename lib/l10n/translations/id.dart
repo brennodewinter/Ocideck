@@ -1627,6 +1627,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Logo niet importeren': 'Jangan impor logo',
+  'Logo gevonden': 'Logo ditemukan',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Logo ini juga muncul dalam gaya {naam}.',
   'Als afbeelding behouden': 'Pertahankan sebagai gambar',
   'bovenaan': 'di bagian atas',
   'onderaan': 'di bagian bawah',

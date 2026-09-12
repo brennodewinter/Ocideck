@@ -211,4 +211,91 @@ void main() {
       expect(built.deck.themeProfile.accentColor, '#123456');
     },
   );
+
+  test(
+    'genegeerd logo verdwijnt zonder profiel terwijl gewone foto\'s blijven',
+    () {
+      const logoBytes = [40, 41, 42];
+      SourceImage logo() =>
+          _image(logoBytes, left: .82, top: .86, width: .12, height: .08);
+      SourceImage photo(int marker) => _image(
+        [marker],
+        left: .1,
+        top: .2,
+        width: .6,
+        height: .6,
+        name: 'foto-$marker.png',
+      );
+      final slides = [
+        SourceSlide(
+          index: 0,
+          title: 'Eerste',
+          bodyBlocks: const [
+            BodyBlock(kind: BodyBlockKind.bullet, text: 'Inhoud'),
+          ],
+          images: [logo(), photo(51)],
+        ),
+        SourceSlide(
+          index: 1,
+          title: 'Tweede',
+          bodyBlocks: const [
+            BodyBlock(kind: BodyBlockKind.bullet, text: 'Meer inhoud'),
+          ],
+          images: [logo(), photo(52)],
+        ),
+        const SourceSlide(
+          index: 2,
+          title: 'Derde',
+          bodyBlocks: [
+            BodyBlock(kind: BodyBlockKind.bullet, text: 'Zonder logo'),
+          ],
+        ),
+      ];
+      final source = SourceDeck(
+        title: 'Brondeck',
+        theme: const SourceTheme(accentColor: '#123456', fontFamily: 'Arial'),
+        slides: slides,
+      );
+      final classified = classifySourceSlides(slides);
+      expect(
+        classified.where((slide) => slide.type == SlideType.image),
+        hasLength(2),
+        reason: 'vóór negeren leiden de extra logo-afbeeldingen tot overflow',
+      );
+      final prepared = PreparedImport(
+        const [],
+        source,
+        classified,
+        'Brondeck',
+        DeckBuilder(),
+      );
+      final candidate = prepared.logoCandidates.single;
+
+      final built = prepared.build(
+        logo: ImportLogoResolution.ignored(candidate),
+      );
+
+      expect(built.deck.slides, hasLength(3));
+      expect(
+        built.deck.slides.take(2).map((slide) => slide.type),
+        everyElement(SlideType.bulletsImage),
+        reason:
+            'na verwijderen worden de oorspronkelijke dia\'s opnieuw bepaald',
+      );
+      final photoPaths = built.deck.slides
+          .take(2)
+          .map((slide) => slide.imagePath)
+          .toList();
+      expect(photoPaths, everyElement(startsWith('mem:')));
+      expect(WebAssetStore.bytesFor(photoPaths[0]), Uint8List.fromList([51]));
+      expect(WebAssetStore.bytesFor(photoPaths[1]), Uint8List.fromList([52]));
+      expect(
+        WebAssetStore.totalBytes,
+        2,
+        reason: 'geen enkele kandidaatvoorkomst wordt als asset opgebouwd',
+      );
+      expect(built.deck.themeProfile.logoPath, isNull);
+      expect(built.deck.themeProfile.accentColor, isNot('#123456'));
+    },
+  );
 }
