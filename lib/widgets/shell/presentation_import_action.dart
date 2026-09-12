@@ -1,14 +1,20 @@
 import 'dart:typed_data';
 
+import 'package:crypto/crypto.dart' as crypto;
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
+import '../../models/settings.dart';
+import '../../services/file_service.dart' hide ImportFailure;
 import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
 import '../../services/import/importers/import_failure.dart';
+import '../../services/import/logo_detection.dart';
 import '../../services/import/presentation_import_service.dart';
 import '../../services/import/utils/import_budget.dart';
 import '../../services/web_asset_store.dart';
@@ -17,12 +23,14 @@ import '../../state/import_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../utils/error_snackbar.dart';
+import '../../utils/bundled_asset.dart';
 import '../../utils/log.dart';
 import '../../utils/user_facing_error.dart';
 import '../dialogs/settings_dialog.dart';
 import '../dialogs/import_presentation_warning_dialog.dart';
 import '../dialogs/oversized_import_warning_dialog.dart';
 import '../dialogs/import_decision_dialog.dart';
+import '../dialogs/import_logo_dialog.dart';
 import '../dialogs/import_security_alarm_dialog.dart';
 import '../dialogs/import_rename_dialog.dart';
 import '../dialogs/presentation_import_progress_dialog.dart';
@@ -140,16 +148,31 @@ Future<void> importPresentation(
   // geen vage snackbar meer achteraan te zetten.
   if (prepared == null) return;
 
+  final ImportLogoResolution? logo;
+  try {
+    logo = await _resolveImportLogo(
+      context,
+      ref,
+      prepared,
+      fallbackName: _stemOf(chosen.name),
+    );
+  } on WebAssetBudgetExceeded catch (e) {
+    logWarning('importPresentation: webgeheugen voor logo vol', e);
+    showErrorSnackBar(messenger, l10n, webAssetBudgetMessage(l10n));
+    return;
+  }
+  if (!context.mounted) return;
+
   final decisions = await ImportDecisionDialog.ask(
     context,
-    prepared.problemSlides,
+    prepared.problemSlidesFor(logo: logo?.candidate),
   );
   // `null` betekent: de gebruiker breekt de hele import af.
   if (decisions == null || !context.mounted) return;
 
   final BuiltDeck built;
   try {
-    built = prepared.build(policies: decisions);
+    built = prepared.build(policies: decisions, logo: logo);
   } on WebAssetBudgetExceeded catch (e) {
     logWarning('importPresentation: webgeheugen vol', e);
     showErrorSnackBar(messenger, l10n, webAssetBudgetMessage(l10n));
@@ -175,7 +198,138 @@ Future<void> importPresentation(
     problemCount: built.problemSlides.length,
     messenger: messenger,
     l10n: l10n,
+    preserveThemeProfile: logo?.profile != null,
   );
+}
+
+Future<ImportLogoResolution?> _resolveImportLogo(
+  BuildContext context,
+  WidgetRef ref,
+  PreparedImport prepared, {
+  required String fallbackName,
+}) async {
+  final candidates = prepared.logoCandidates;
+  if (candidates.isEmpty) return null;
+  final settings = ref.read(settingsProvider);
+  final profiles = [
+    settings.themeProfile,
+    for (final profile in settings.themeProfiles)
+      if (profile.name != settings.themeProfile.name) profile,
+  ];
+  final suggested = context.l10n
+      .d('Stijl van {naam}')
+      .replaceAll(
+        '{naam}',
+        prepared.sourceDeck.title.trim().isEmpty
+            ? fallbackName
+            : prepared.sourceDeck.title.trim(),
+      );
+  final known = await _logoProfilesByHash(profiles);
+  for (final candidate in candidates) {
+    final matchingProfile = known[candidate.image.sha256];
+    if (!context.mounted) return null;
+    final choice = await ImportLogoDialog.ask(
+      context,
+      candidate: candidate,
+      suggestedStyleName: suggested,
+      canAddAsStyle: !kIsWeb,
+      knownStyleName: matchingProfile?.name,
+    );
+    if (choice.isIgnored) return ImportLogoResolution.ignored(candidate);
+    if (!choice.isLogo) continue;
+
+    if (matchingProfile != null) {
+      // De overeenkomst bewijst dat het beeld een bekend logo is, niet dat de
+      // overige bronopmaak exact dat OciDeck-profiel volgt. Neem daarom alleen
+      // het duurzame logopad over en bouw de importstijl uit de bron zelf. Het
+      // blijft een keuze: ook een bekend logo mag uit deze import verdwijnen.
+      return ImportLogoResolution(
+        candidate: candidate,
+        profile: importedLogoProfile(
+          deck: prepared.sourceDeck,
+          candidate: candidate,
+          logoPath: matchingProfile.logoPath!,
+          name: suggested,
+          base: settings.themeProfile,
+        ),
+      );
+    }
+
+    final profileName = choice.styleName.isEmpty ? suggested : choice.styleName;
+    String? durablePath;
+    if (choice.addAsStyle) {
+      durablePath = await ref
+          .read(fileServiceProvider)
+          .materializeImportedStyleLogo(
+            candidate.image.bytes,
+            profileName: profileName,
+          );
+      if (durablePath == null && context.mounted) {
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          context.l10n,
+          context.l10n.d(
+            'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.',
+          ),
+        );
+      }
+    }
+    final logoPath =
+        durablePath ??
+        WebAssetStore.put(
+          candidate.image.bytes,
+          name: candidate.image.name ?? 'logo.${candidate.image.ext}',
+        );
+    var profile = importedLogoProfile(
+      deck: prepared.sourceDeck,
+      candidate: candidate,
+      logoPath: logoPath,
+      name: profileName,
+      base: settings.themeProfile,
+    );
+    if (choice.addAsStyle && durablePath != null) {
+      profile = await addThemeProfileWithoutSelection(
+        ref.read(settingsProvider.notifier),
+        profile,
+      );
+    }
+    return ImportLogoResolution(candidate: candidate, profile: profile);
+  }
+  return null;
+}
+
+Future<Map<String, ThemeProfile>> _logoProfilesByHash(
+  List<ThemeProfile> profiles,
+) async {
+  final result = <String, ThemeProfile>{};
+  for (final profile in profiles) {
+    final path = profile.logoPath?.trim();
+    if (path == null || path.isEmpty) continue;
+    try {
+      final Uint8List? bytes;
+      if (isBundledAssetPath(path)) {
+        final data = await rootBundle.load(bundledAssetKey(path));
+        bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      } else {
+        bytes = await readStyleLogoBytes(path);
+      }
+      if (bytes != null && bytes.isNotEmpty) {
+        result.putIfAbsent(
+          crypto.sha256.convert(bytes).toString(),
+          () => profile,
+        );
+      }
+    } on Exception catch (e, s) {
+      logError('importPresentation: stijlprofiellogo vergelijken', e, s);
+    }
+  }
+  return result;
+}
+
+String _stemOf(String filename) {
+  final base = filename.split(RegExp(r'[\\/]')).last;
+  final dot = base.lastIndexOf('.');
+  return dot > 0 ? base.substring(0, dot) : base;
 }
 
 /// Zet het geïmporteerde deck in een nieuw tabblad: vraagt de titel, markeert
@@ -188,6 +342,7 @@ Future<void> _openImportedDeck(
   required int problemCount,
   required ScaffoldMessengerState messenger,
   required AppLocalizations l10n,
+  required bool preserveThemeProfile,
 }) async {
   final slideCount = deck.slides.length;
   final confirmedTitle = await ImportRenameDialog.show(
@@ -205,7 +360,11 @@ Future<void> _openImportedDeck(
       .read(tabsProvider)
       .current!
       .deckNotifier
-      .loadDeck(finalDeck, isDirty: true);
+      .loadDeck(
+        finalDeck,
+        isDirty: true,
+        preserveThemeProfile: preserveThemeProfile,
+      );
 
   messenger.showSnackBar(
     SnackBar(

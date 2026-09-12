@@ -1627,6 +1627,28 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Logo niet importeren': 'Importér ikke logoet',
+  'Logo gevonden': 'Logo fundet',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Dette logo vises også i stilen {naam}.',
+  'Als afbeelding behouden': 'Behold som billede',
+  'bovenaan': 'øverst',
+  'onderaan': 'nederst',
+  'Is dit een logo?': 'Er dette et logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Dette billede vises {plaats} på {n} dias. OciDeck kan bruge det som et fast logo i stedet for som et diasbillede.',
+  'Mogelijk logo': 'Muligt logo',
+  'Geen logo': 'Ikke et logo',
+  'Ja, als logo gebruiken': 'Ja, brug som logo',
+  'Ook als stijl toevoegen?': 'Tilføj også som stil?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Du kan gemme farverne, skrifttypen og dette logo til fremtidige præsentationer.',
+  'Naam van de stijl': 'Navn på stil',
+  'Alleen in deze presentatie': 'Kun i denne præsentation',
+  'Stijl toevoegen': 'Tilføj stil',
+  'Stijl van {naam}': 'Stil fra {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stilen kunne ikke gemmes permanent. Logoet bruges kun i denne præsentation.',
   'Mijn examens': 'Mine eksamener',
   'Alle vragen zijn beantwoord.': 'Alle spørgsmål er blevet besvaret.',
   'Examen inleveren': 'Aflever eksamen',

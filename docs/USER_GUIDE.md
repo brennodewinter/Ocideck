@@ -2550,6 +2550,21 @@ disk. The browser version has no second thread, so there the same work runs in
 the page, still with the progress window and the *Stoppen* button and still
 bounded by the import's own size and time limits.
 
+**A repeated image at the top or bottom can become the deck logo.** OciDeck
+compares images by their actual contents, so the file name does not have to be
+the same, and two occurrences are enough — the logo need not appear on every
+slide. If that image is already the logo of one of your style profiles, OciDeck
+shows that match as additional evidence and can reuse the durable logo file; the
+other style values still come from the source presentation. You always choose
+what happens to it: keep it as an ordinary slide image, omit it from the import
+altogether, or use it as the logo. Using it as the logo moves it out of the
+slide layouts and into the deck style; you then choose between using that
+style only in this presentation or adding it to OciDeck under a name for later
+use. In the web version the logo stays with
+this presentation: the browser cannot retain it as part of a reusable style.
+The queue does not interrupt a batch for this question and therefore keeps
+unknown candidates as ordinary images.
+
 **It is not a one-to-one copy, and it says so before it starts.** OciDeck's
 slide model is deliberately simpler than PowerPoint's — fixed layouts, one
 chart or one table per slide, no free positioning — so a conversion always
@@ -2617,7 +2632,7 @@ without interruption.
 | Two text columns, recognised from how the text boxes sit side by side. | Merged table cells. GFM tables have no spans, so the cells are flattened and the merge is reported. |
 | One or two images per slide, with their captions, as the author placed them: a picture rotated, mirrored or cropped in PowerPoint, Impress or Keynote arrives that way, because the crop and the flip are baked into the pixels rather than dropped. Identical images are stored once. | Audio. There is no audio slide type to put it on, so the file name ends up in the note. |
 | Tables, first row as the header. | A table *and* a chart on the same slide: one of the two per slide, and the note says which one was dropped. |
-| Charts — type, categories and numeric series. | The source's colours and fonts. An imported deck takes OciDeck's own styling. |
+| Charts — type, categories and numeric series. | The source's colours and fonts when no repeated logo is confirmed. A confirmed logo makes the available source colours and font part of the imported deck style. |
 | Video (PowerPoint and Keynote), quotes, and timelines where the bullets read as `marker :: event`. | |
 | Speaker notes, and hyperlinks — added as items of their own rather than woven back into the sentence they came from. A link with an executable scheme (`javascript:`, `data:`, `vbscript:`, `file:`) is neutralised instead of carried over. | |
 | Hidden slides, which stay hidden: they arrive as skipped slides rather than being dropped or silently shown. | |

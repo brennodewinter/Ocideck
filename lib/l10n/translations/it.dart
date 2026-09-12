@@ -664,6 +664,28 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Logo niet importeren': 'Non importare il logo',
+  'Logo gevonden': 'Logo trovato',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Questo logo compare anche nello stile {naam}.',
+  'Als afbeelding behouden': 'Mantieni come immagine',
+  'bovenaan': 'in alto',
+  'onderaan': 'in basso',
+  'Is dit een logo?': 'È un logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Questa immagine compare {plaats} in {n} diapositive. OciDeck può usarla come logo fisso anziché come immagine della diapositiva.',
+  'Mogelijk logo': 'Possibile logo',
+  'Geen logo': 'Non è un logo',
+  'Ja, als logo gebruiken': 'Sì, usa come logo',
+  'Ook als stijl toevoegen?': 'Aggiungere anche come stile?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Puoi salvare i colori, il carattere e questo logo per le presentazioni future.',
+  'Naam van de stijl': 'Nome dello stile',
+  'Alleen in deze presentatie': 'Solo in questa presentazione',
+  'Stijl toevoegen': 'Aggiungi stile',
+  'Stijl van {naam}': 'Stile di {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Non è stato possibile salvare lo stile in modo permanente. Il logo verrà usato solo in questa presentazione.',
   'Mijn examens': 'I miei esami',
   'Alle vragen zijn beantwoord.': 'A tutte le domande è stata data risposta.',
   'Examen inleveren': 'Invia esame',

@@ -96,8 +96,15 @@ class DeckBuilder {
     List<ClassifiedSlide> classified, {
     required String title,
     Map<int, SlideFailurePolicy> policies = const {},
+    Set<int>? logoSlideIndexes,
   }) => WebAssetStore.atomic(
-    () => _build(sourceDeck, classified, title: title, policies: policies),
+    () => _build(
+      sourceDeck,
+      classified,
+      title: title,
+      policies: policies,
+      logoSlideIndexes: logoSlideIndexes,
+    ),
   );
 
   BuiltDeck _build(
@@ -105,6 +112,7 @@ class DeckBuilder {
     List<ClassifiedSlide> classified, {
     required String title,
     required Map<int, SlideFailurePolicy> policies,
+    required Set<int>? logoSlideIndexes,
   }) {
     final slides = <Slide>[];
     final problemSlides = <ProblemSlide>[];
@@ -129,10 +137,22 @@ class DeckBuilder {
       var slideAdded = false;
       switch (effective) {
         case SlideFailurePolicy.bestEffort:
-          slides.add(_factory.buildSlide(c));
+          slides.add(
+            _logoVisibility(
+              _factory.buildSlide(c),
+              c.source.index,
+              logoSlideIndexes,
+            ),
+          );
           slideAdded = true;
         case SlideFailurePolicy.imageOnly:
-          slides.add(_factory.imageOnlySlide(c.source));
+          slides.add(
+            _logoVisibility(
+              _factory.imageOnlySlide(c.source),
+              c.source.index,
+              logoSlideIndexes,
+            ),
+          );
           slideAdded = true;
         case SlideFailurePolicy.skip:
           break;
@@ -155,10 +175,14 @@ class DeckBuilder {
           // De dia werd overgeslagen — er is niets om aan vast te hangen, dus
           // behoud de aparte notitiedia.
           slides.add(
-            _factory.noteSlide(
-              c.source.index + 1,
-              issues,
-              heading: _factory.headingFor(effective, c.source.index + 1),
+            _logoVisibility(
+              _factory.noteSlide(
+                c.source.index + 1,
+                issues,
+                heading: _factory.headingFor(effective, c.source.index + 1),
+              ),
+              c.source.index,
+              logoSlideIndexes,
             ),
           );
         }
@@ -169,12 +193,23 @@ class DeckBuilder {
     }
 
     if (sourceDeck.issues.isNotEmpty) {
-      slides.add(_factory.deckNoteSlide(sourceDeck.issues));
+      final note = _factory.deckNoteSlide(sourceDeck.issues);
+      slides.add(
+        logoSlideIndexes == null ? note : note.copyWith(showLogo: false),
+      );
     }
 
     final deck = Deck(title: title, author: sourceDeck.author, slides: slides);
     return BuiltDeck(deck: deck, problemSlides: problemSlides);
   }
+
+  Slide _logoVisibility(
+    Slide slide,
+    int sourceIndex,
+    Set<int>? logoSlideIndexes,
+  ) => logoSlideIndexes == null
+      ? slide
+      : slide.copyWith(showLogo: logoSlideIndexes.contains(sourceIndex));
 
   /// De probleemdia's van [classified], zónder een deck te bouwen.
   ///

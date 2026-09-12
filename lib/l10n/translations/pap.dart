@@ -666,6 +666,28 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Logo niet importeren': 'No importá e logo',
+  'Logo gevonden': 'Logo hañá',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'E logo aki tambe ta aparese den e estilo {naam}.',
+  'Als afbeelding behouden': 'Mantené komo imagen',
+  'bovenaan': 'na parti ariba',
+  'onderaan': 'na parti abou',
+  'Is dit een logo?': 'Esaki ta un logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'E imagen aki ta aparesé {plaats} riba {n} diapositiva. OciDeck por us\'é komo logo fiho en bes di un imagen di diapositiva.',
+  'Mogelijk logo': 'Posibel logo',
+  'Geen logo': 'No ta un logo',
+  'Ja, als logo gebruiken': 'Si, usa komo logo',
+  'Ook als stijl toevoegen?': 'Agreg\'é tambe komo stilo?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Bo por warda e kolónan, tipo di lèter i e logo aki pa presentashonnan den futuro.',
+  'Naam van de stijl': 'Nòmber di e stilo',
+  'Alleen in deze presentatie': 'Solamente den e presentashon aki',
+  'Stijl toevoegen': 'Agregá stilo',
+  'Stijl van {naam}': 'Stilo di {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'No tabata posibel pa warda e stilo permanentemente. Lo usa e logo solamente den e presentashon aki.',
   'Mijn examens': 'Mi èksamennan',
   'Alle vragen zijn beantwoord.': 'Tur pregunta a wordo contesta.',
   'Examen inleveren': 'Entregá èksamen',

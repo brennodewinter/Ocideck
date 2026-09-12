@@ -1634,6 +1634,28 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Logo niet importeren': 'Neimportuoti logotipo',
+  'Logo gevonden': 'Rastas logotipas',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Šis logotipas taip pat rodomas stiliuje {naam}.',
+  'Als afbeelding behouden': 'Palikti kaip paveikslėlį',
+  'bovenaan': 'viršuje',
+  'onderaan': 'apačioje',
+  'Is dit een logo?': 'Ar tai logotipas?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Šis paveikslėlis rodomas {plaats} {n} skaidrėse. „OciDeck“ gali jį naudoti kaip nuolatinį logotipą, o ne kaip skaidrės paveikslėlį.',
+  'Mogelijk logo': 'Galimas logotipas',
+  'Geen logo': 'Tai ne logotipas',
+  'Ja, als logo gebruiken': 'Taip, naudoti kaip logotipą',
+  'Ook als stijl toevoegen?': 'Taip pat pridėti kaip stilių?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Galite išsaugoti spalvas, šriftą ir šį logotipą būsimoms pateiktims.',
+  'Naam van de stijl': 'Stiliaus pavadinimas',
+  'Alleen in deze presentatie': 'Tik šiame pristatyme',
+  'Stijl toevoegen': 'Pridėti stilių',
+  'Stijl van {naam}': 'Stilius iš „{naam}“',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Nepavyko visam laikui išsaugoti stiliaus. Logotipas bus naudojamas tik šiame pristatyme.',
   'Mijn examens': 'Mano egzaminai',
   'Alle vragen zijn beantwoord.': 'Į visus klausimus buvo atsakyta.',
   'Examen inleveren': 'Pateikti egzaminą',

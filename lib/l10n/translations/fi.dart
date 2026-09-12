@@ -1627,6 +1627,28 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Logo niet importeren': 'Älä tuo logoa',
+  'Logo gevonden': 'Logo löytyi',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Tämä logo näkyy myös tyylissä {naam}.',
+  'Als afbeelding behouden': 'Säilytä kuvana',
+  'bovenaan': 'yläreunassa',
+  'onderaan': 'alareunassa',
+  'Is dit een logo?': 'Onko tämä logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Tämä kuva näkyy {plaats} {n} diassa. OciDeck voi käyttää sitä kiinteänä logona diakuvan sijaan.',
+  'Mogelijk logo': 'Mahdollinen logo',
+  'Geen logo': 'Ei logo',
+  'Ja, als logo gebruiken': 'Kyllä, käytä logona',
+  'Ook als stijl toevoegen?': 'Lisätäänkö myös tyyliksi?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Voit tallentaa värit, fontin ja tämän logon tulevia esityksiä varten.',
+  'Naam van de stijl': 'Tyylin nimi',
+  'Alleen in deze presentatie': 'Vain tässä esityksessä',
+  'Stijl toevoegen': 'Lisää tyyli',
+  'Stijl van {naam}': 'Tyyli lähteestä {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Tyyliä ei voitu tallentaa pysyvästi. Logoa käytetään vain tässä esityksessä.',
   'Mijn examens': 'Minun kokeeni',
   'Alle vragen zijn beantwoord.': 'Kaikkiin kysymyksiin on vastattu.',
   'Examen inleveren': 'Lähetä koe',

@@ -214,6 +214,20 @@ extension FileServiceStyleProfile on FileService {
   String _safeProfileFileName(String name) =>
       sanitizeFilename(name, fallback: 'stijlprofiel');
 
+  /// Bewaar logo-bytes uit een presentatie via dezelfde duurzame route als
+  /// een geïmporteerd `.ocideckstyle`-bestand. Zo belandt op desktop geen
+  /// tijdelijk `mem:`-pad in de instellingen en blijft het profiel na een
+  /// herstart bruikbaar.
+  Future<String?> materializeImportedStyleLogo(
+    Uint8List bytes, {
+    required String profileName,
+  }) async {
+    if (!_withinLogoCap(bytes)) return null;
+    final mime = ImageService.imageMimeFromBytes(bytes);
+    if (mime == null) return null;
+    return _materializeStyleLogo(bytes, mime, profileName, null);
+  }
+
   /// Bouw de bytes van een `.ocideckstyle`-bestand: het profiel als JSON in een
   /// envelope met marker en versie.
   ///

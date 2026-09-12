@@ -1657,6 +1657,28 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Logo niet importeren': 'Ná iompórtáil an lógó',
+  'Logo gevonden': 'Aimsíodh lógó',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Tá an lógó seo le fáil sa stíl {naam} freisin.',
+  'Als afbeelding behouden': 'Coinnigh mar íomhá',
+  'bovenaan': 'ag an mbarr',
+  'onderaan': 'ag an mbun',
+  'Is dit een logo?': 'An lógó é seo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Tá an íomhá seo {plaats} ar {n} sleamhnán. Is féidir le OciDeck í a úsáid mar lógó seasta seachas mar íomhá sleamhnáin.',
+  'Mogelijk logo': 'Lógó féideartha',
+  'Geen logo': 'Ní lógó é',
+  'Ja, als logo gebruiken': 'Úsáid mar lógó',
+  'Ook als stijl toevoegen?': 'Cuir leis mar stíl freisin?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Is féidir leat na dathanna, an cló agus an lógó seo a shábháil do láithreoireachtaí amach anseo.',
+  'Naam van de stijl': 'Ainm an stíle',
+  'Alleen in deze presentatie': 'Sa láithreoireacht seo amháin',
+  'Stijl toevoegen': 'Cuir stíl leis',
+  'Stijl van {naam}': 'Stíl ó {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Níorbh fhéidir an stíl a shábháil go buan. Ní úsáidfear an lógó ach sa láithreoireacht seo.',
   'Mijn examens': 'Mo scrúduithe',
   'Alle vragen zijn beantwoord.': 'Freagraíodh na ceisteanna go léir.',
   'Examen inleveren': 'Scrúdú a chur isteach',

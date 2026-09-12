@@ -1625,6 +1625,28 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Logo niet importeren': 'Neimportēt logotipu',
+  'Logo gevonden': 'Atrasts logotips',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Šis logotips ir arī stilā {naam}.',
+  'Als afbeelding behouden': 'Saglabāt kā attēlu',
+  'bovenaan': 'augšdaļā',
+  'onderaan': 'apakšdaļā',
+  'Is dit een logo?': 'Vai tas ir logotips?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Šis attēls atrodas {plaats} {n} slaidos. OciDeck var to izmantot kā nemainīgu logotipu, nevis kā slaida attēlu.',
+  'Mogelijk logo': 'Iespējams logotips',
+  'Geen logo': 'Nav logotips',
+  'Ja, als logo gebruiken': 'Jā, izmantot kā logotipu',
+  'Ook als stijl toevoegen?': 'Vai pievienot arī kā stilu?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Varat saglabāt krāsas, fontu un šo logotipu turpmākām prezentācijām.',
+  'Naam van de stijl': 'Stila nosaukums',
+  'Alleen in deze presentatie': 'Tikai šajā prezentācijā',
+  'Stijl toevoegen': 'Pievienot stilu',
+  'Stijl van {naam}': 'Stils no {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stilu neizdevās saglabāt pastāvīgi. Logotips tiks izmantots tikai šajā prezentācijā.',
   'Mijn examens': 'Mani eksāmeni',
   'Alle vragen zijn beantwoord.': 'Uz visiem jautājumiem ir atbildēts.',
   'Examen inleveren': 'Iesniedz eksāmenu',

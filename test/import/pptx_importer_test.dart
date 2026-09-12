@@ -196,6 +196,46 @@ List<int> _zip(Map<String, Object> parts) {
 }
 
 void main() {
+  test('bewaart een kleine afbeelding met genormaliseerde plaatsing', () async {
+    const slideWidth = 1000;
+    const slideHeight = 500;
+    final slideXml =
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<p:sld xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r">'
+        '<p:cSld><p:spTree><p:pic>'
+        '<p:nvPicPr><p:cNvPr id="5" name="Logo"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr>'
+        '<p:blipFill><a:blip r:embed="rId3"/></p:blipFill>'
+        '<p:spPr><a:xfrm><a:off x="800" y="440"/>'
+        '<a:ext cx="120" cy="40"/></a:xfrm></p:spPr>'
+        '</p:pic></p:spTree></p:cSld></p:sld>';
+    final bytes = _zip({
+      'ppt/presentation.xml':
+          '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+          '<p:presentation xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r">'
+          '<p:sldSz cx="$slideWidth" cy="$slideHeight"/>'
+          '<p:sldIdLst><p:sldId id="256" r:id="rId1"/></p:sldIdLst>'
+          '</p:presentation>',
+      'ppt/_rels/presentation.xml.rels': _presRels(1),
+      'ppt/slides/slide1.xml': slideXml,
+      'ppt/slides/_rels/slide1.xml.rels': _slideRels(withImage: true),
+      'ppt/media/photo.png': _quadrantPng(8),
+    });
+
+    final result = await PptxImporter().importBytes(
+      bytes,
+      path: 'klein-logo.pptx',
+    );
+
+    expect(result.isOk, isTrue);
+    final imported = result.okValue!.slides.single.images.single;
+    expect(imported.bytes, isNotEmpty);
+    expect(imported.placement, isNotNull);
+    expect(imported.placement!.left, closeTo(.8, .0001));
+    expect(imported.placement!.top, closeTo(.88, .0001));
+    expect(imported.placement!.width, closeTo(.12, .0001));
+    expect(imported.placement!.height, closeTo(.08, .0001));
+  });
+
   test('parses title, bullets, notes and a hidden slide', () async {
     final bytes = _zip({
       'ppt/presentation.xml': _presentationXml(2),

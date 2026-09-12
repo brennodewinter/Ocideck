@@ -23,6 +23,25 @@ class IwaDocument {
   /// The object with [id], or `null`.
   IwaObject? operator [](int id) => _objects[id];
 
+  /// De canvasmaat uit `KN.ShowArchive.size` (field 4).
+  ///
+  /// Deze route volgt dezelfde DocumentArchive→ShowArchive-verwijzing als de
+  /// slidevolgorde. Zonder deze maat is een y-coördinaat slechts een getal en
+  /// kan de import niet betrouwbaar zeggen of een herhaald beeld boven- of
+  /// onderaan staat.
+  ({double width, double height})? get showSize {
+    for (final document in _objects.values.where((o) => o.typeId == 1)) {
+      final show = resolveReferences(document, 2).firstOrNull;
+      final size = show?.message.message(4);
+      final width = size?.float32(1);
+      final height = size?.float32(2);
+      if (width != null && height != null && width > 0 && height > 0) {
+        return (width: width, height: height);
+      }
+    }
+    return null;
+  }
+
   /// Resolve a `TSP.Reference` read from [from]'s payload.
   ///
   /// Modern iWork stores the referenced object id directly in the payload.

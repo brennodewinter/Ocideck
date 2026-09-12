@@ -1628,6 +1628,28 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Logo niet importeren': 'Neimportovat logo',
+  'Logo gevonden': 'Logo nalezeno',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Toto logo se také objevuje ve stylu {naam}.',
+  'Als afbeelding behouden': 'Ponechat jako obrázek',
+  'bovenaan': 'nahoře',
+  'onderaan': 'dole',
+  'Is dit een logo?': 'Je toto logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Tento obrázek se nachází {plaats} na {n} snímcích. OciDeck ho může použít jako pevné logo namísto obrázku snímku.',
+  'Mogelijk logo': 'Možné logo',
+  'Geen logo': 'Není to logo',
+  'Ja, als logo gebruiken': 'Ano, použít jako logo',
+  'Ook als stijl toevoegen?': 'Přidat také jako styl?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Barvy, písmo a toto logo můžete uložit pro budoucí prezentace.',
+  'Naam van de stijl': 'Název stylu',
+  'Alleen in deze presentatie': 'Pouze v této prezentaci',
+  'Stijl toevoegen': 'Přidat styl',
+  'Stijl van {naam}': 'Styl z {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Styl se nepodařilo trvale uložit. Logo se použije pouze v této prezentaci.',
   'Mijn examens': 'Moje zkoušky',
   'Alle vragen zijn beantwoord.': 'Všechny otázky byly zodpovězeny.',
   'Examen inleveren': 'Odeslat zkoušku',

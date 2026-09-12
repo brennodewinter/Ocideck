@@ -1652,6 +1652,28 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Logo niet importeren': 'Να μην εισαχθεί το λογότυπο',
+  'Logo gevonden': 'Βρέθηκε λογότυπο',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Αυτό το λογότυπο εμφανίζεται επίσης στο στιλ {naam}.',
+  'Als afbeelding behouden': 'Διατήρηση ως εικόνα',
+  'bovenaan': 'στο επάνω μέρος',
+  'onderaan': 'στο κάτω μέρος',
+  'Is dit een logo?': 'Είναι λογότυπο;',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Αυτή η εικόνα εμφανίζεται {plaats} σε {n} διαφάνειες. Το OciDeck μπορεί να τη χρησιμοποιήσει ως σταθερό λογότυπο αντί για εικόνα διαφάνειας.',
+  'Mogelijk logo': 'Πιθανό λογότυπο',
+  'Geen logo': 'Δεν είναι λογότυπο',
+  'Ja, als logo gebruiken': 'Ναι, χρήση ως λογότυπο',
+  'Ook als stijl toevoegen?': 'Να προστεθεί και ως στιλ;',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Μπορείτε να αποθηκεύσετε τα χρώματα, τη γραμματοσειρά και αυτό το λογότυπο για μελλοντικές παρουσιάσεις.',
+  'Naam van de stijl': 'Όνομα στιλ',
+  'Alleen in deze presentatie': 'Μόνο σε αυτή την παρουσίαση',
+  'Stijl toevoegen': 'Προσθήκη στιλ',
+  'Stijl van {naam}': 'Στιλ από {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Δεν ήταν δυνατή η μόνιμη αποθήκευση του στιλ. Το λογότυπο θα χρησιμοποιηθεί μόνο σε αυτή την παρουσίαση.',
   'Mijn examens': 'οι εξετάσεις μου',
   'Alle vragen zijn beantwoord.': 'Όλες οι ερωτήσεις έχουν απαντηθεί.',
   'Examen inleveren': 'Υποβολή εξέτασης',

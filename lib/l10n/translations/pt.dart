@@ -1655,6 +1655,28 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Logo niet importeren': 'Não importar o logótipo',
+  'Logo gevonden': 'Logótipo encontrado',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Este logótipo também aparece no estilo {naam}.',
+  'Als afbeelding behouden': 'Manter como imagem',
+  'bovenaan': 'na parte superior',
+  'onderaan': 'na parte inferior',
+  'Is dit een logo?': 'Isto é um logótipo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Esta imagem aparece {plaats} em {n} diapositivos. O OciDeck pode utilizá-la como logótipo fixo em vez de uma imagem de diapositivo.',
+  'Mogelijk logo': 'Possível logótipo',
+  'Geen logo': 'Não é um logótipo',
+  'Ja, als logo gebruiken': 'Sim, utilizar como logótipo',
+  'Ook als stijl toevoegen?': 'Adicionar também como estilo?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Pode guardar as cores, o tipo de letra e este logótipo para apresentações futuras.',
+  'Naam van de stijl': 'Nome do estilo',
+  'Alleen in deze presentatie': 'Apenas nesta apresentação',
+  'Stijl toevoegen': 'Adicionar estilo',
+  'Stijl van {naam}': 'Estilo de {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Não foi possível guardar o estilo de forma permanente. O logótipo será utilizado apenas nesta apresentação.',
   'Mijn examens': 'Meus exames',
   'Alle vragen zijn beantwoord.': 'Todas as perguntas foram respondidas.',
   'Examen inleveren': 'Enviar exame',

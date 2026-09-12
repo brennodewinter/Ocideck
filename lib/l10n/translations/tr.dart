@@ -2544,6 +2544,28 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Logo niet importeren': 'Logoyu içe aktarma',
+  'Logo gevonden': 'Logo bulundu',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Bu logo {naam} stilinde de görünür.',
+  'Als afbeelding behouden': 'Görsel olarak tut',
+  'bovenaan': 'üstte',
+  'onderaan': 'altta',
+  'Is dit een logo?': 'Bu bir logo mu?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Bu görsel {n} slaytta {plaats} görünüyor. OciDeck bunu slayt görseli yerine sabit bir logo olarak kullanabilir.',
+  'Mogelijk logo': 'Olası logo',
+  'Geen logo': 'Logo değil',
+  'Ja, als logo gebruiken': 'Evet, logo olarak kullan',
+  'Ook als stijl toevoegen?': 'Stil olarak da eklensin mi?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Renkleri, yazı tipini ve bu logoyu gelecekteki sunumlar için kaydedebilirsiniz.',
+  'Naam van de stijl': 'Stil adı',
+  'Alleen in deze presentatie': 'Yalnızca bu sunumda',
+  'Stijl toevoegen': 'Stil ekle',
+  'Stijl van {naam}': '{naam} stili',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stil kalıcı olarak kaydedilemedi. Logo yalnızca bu sunumda kullanılacak.',
   'Mijn examens': 'Sınavlarım',
   'Alle vragen zijn beantwoord.': 'Tüm sorular cevaplandı.',
   'Examen inleveren': 'Sınavı gönder',

@@ -1620,6 +1620,28 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Logo niet importeren': 'Ära impordi logo',
+  'Logo gevonden': 'Logo leitud',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'See logo esineb ka stiilis {naam}.',
+  'Als afbeelding behouden': 'Säilita pildina',
+  'bovenaan': 'ülaosas',
+  'onderaan': 'alaosas',
+  'Is dit een logo?': 'Kas see on logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'See pilt asub {plaats} {n} slaidil. OciDeck saab kasutada seda slaidipildi asemel püsiva logona.',
+  'Mogelijk logo': 'Võimalik logo',
+  'Geen logo': 'Ei ole logo',
+  'Ja, als logo gebruiken': 'Jah, kasuta logona',
+  'Ook als stijl toevoegen?': 'Kas lisada ka stiilina?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Saate värvid, fondi ja selle logo tulevaste esitluste jaoks salvestada.',
+  'Naam van de stijl': 'Stiili nimi',
+  'Alleen in deze presentatie': 'Ainult selles esitluses',
+  'Stijl toevoegen': 'Lisa stiil',
+  'Stijl van {naam}': 'Esitluse {naam} stiil',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stiili ei saanud püsivalt salvestada. Logo kasutatakse ainult selles esitluses.',
   'Mijn examens': 'Minu eksamid',
   'Alle vragen zijn beantwoord.': 'Kõik küsimused on vastatud.',
   'Examen inleveren': 'Esitage eksam',

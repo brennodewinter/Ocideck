@@ -131,6 +131,42 @@ ClassifiedSlide classifySlide(SourceSlide s) {
   );
 }
 
+/// Classificeer alle dia's, inclusief aparte dia's voor afbeeldingen die niet
+/// in het gekozen vaste beeldraster passen.
+///
+/// Dit staat publiek naast [classifySlide], omdat een herhaalde randafbeelding
+/// pas na de eerste parse als logo kan worden bevestigd. Na het verwijderen van
+/// zo'n logo moet exact dezelfde classificatie opnieuw lopen; anders blijft een
+/// tekst-dia ten onrechte een afbeeldingsdia door een beeld dat er niet meer is.
+List<ClassifiedSlide> classifySourceSlides(List<SourceSlide> slides) => [
+  for (final slide in slides) ..._classifyWithImageOverflow(slide),
+];
+
+int _imagesShownByType(SlideType type) => switch (type) {
+  SlideType.twoImages => 2,
+  SlideType.image || SlideType.bulletsImage || SlideType.title => 1,
+  _ => 0,
+};
+
+List<ClassifiedSlide> _classifyWithImageOverflow(SourceSlide slide) {
+  final main = classifySlide(slide);
+  final shown = _imagesShownByType(main.type);
+  if (shown == 0 || slide.images.length <= shown) return [main];
+
+  return [
+    main,
+    for (var i = shown; i < slide.images.length; i++)
+      ClassifiedSlide(
+        source: SourceSlide(
+          index: slide.index,
+          title: '',
+          images: [slide.images[i]],
+        ),
+        type: SlideType.image,
+      ),
+  ];
+}
+
 List<BodyBlock> _bullets(SourceSlide s) =>
     s.bodyBlocks.where((b) => b.kind == BodyBlockKind.bullet).toList();
 

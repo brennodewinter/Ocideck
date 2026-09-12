@@ -416,6 +416,7 @@ class DrawableReader {
     // niet in de afbeelding zelf; bak ze in de pixels, want OciDeck zet een
     // afbeelding zonder eigen geometrie op de dia.
     final geometry = _drawableGeometry(o);
+    final placement = _drawablePlacement(o);
     for (final dataId in dataIds) {
       final fileName = doc.dataFileName(dataId);
       if (fileName == null) continue;
@@ -429,11 +430,32 @@ class DrawableReader {
                 : bakeImportGeometry(raw, geometry, fileName),
             ext: _ext(fileName),
             name: fileName,
+            placement: placement,
           ),
         );
       }
     }
     return images;
+  }
+
+  SourceImagePlacement? _drawablePlacement(IwaObject image) {
+    final holder = _geometryHolder(image);
+    final geometry = holder == null ? null : _readGeometry(holder);
+    final canvas = doc.showSize;
+    if (geometry == null || canvas == null) return null;
+    final position = geometry.message(1);
+    final size = geometry.message(2);
+    final x = position?.float32(1);
+    final y = position?.float32(2);
+    final width = size?.float32(1);
+    final height = size?.float32(2);
+    if (x == null || y == null || width == null || height == null) return null;
+    return SourceImagePlacement(
+      left: x / canvas.width,
+      top: y / canvas.height,
+      width: width / canvas.width,
+      height: height / canvas.height,
+    );
   }
 
   /// De geometrie die Keynote op de afbeelding(en) van [o] legt.

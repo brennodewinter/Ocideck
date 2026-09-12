@@ -1639,6 +1639,28 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Logo niet importeren': 'Nie importuj logo',
+  'Logo gevonden': 'Znaleziono logo',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'To logo występuje również w stylu {naam}.',
+  'Als afbeelding behouden': 'Zachowaj jako obraz',
+  'bovenaan': 'u góry',
+  'onderaan': 'u dołu',
+  'Is dit een logo?': 'Czy to jest logo?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Ten obraz występuje {plaats} na {n} slajdach. OciDeck może użyć go jako stałego logo zamiast obrazu slajdu.',
+  'Mogelijk logo': 'Możliwe logo',
+  'Geen logo': 'To nie jest logo',
+  'Ja, als logo gebruiken': 'Tak, użyj jako logo',
+  'Ook als stijl toevoegen?': 'Dodać również jako styl?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Możesz zapisać kolory, krój pisma i to logo do przyszłych prezentacji.',
+  'Naam van de stijl': 'Nazwa stylu',
+  'Alleen in deze presentatie': 'Tylko w tej prezentacji',
+  'Stijl toevoegen': 'Dodaj styl',
+  'Stijl van {naam}': 'Styl z {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Nie udało się trwale zapisać stylu. Logo zostanie użyte tylko w tej prezentacji.',
   'Mijn examens': 'Moje egzaminy',
   'Alle vragen zijn beantwoord.':
       'Odpowiedzi na wszystkie pytania zostały udzielone.',

@@ -1642,6 +1642,28 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Logo niet importeren': 'Insigne ne importa',
+  'Logo gevonden': 'Insigne inventum',
+  'Dit logo komt ook voor in de stijl {naam}.':
+      'Hoc insigne etiam in stilo {naam} apparet.',
+  'Als afbeelding behouden': 'Ut imaginem retinere',
+  'bovenaan': 'in summo',
+  'onderaan': 'in imo',
+  'Is dit een logo?': 'Estne hoc insigne?',
+  'Deze afbeelding staat op {n} dia’s {plaats}. OciDeck kan hem als vast logo gebruiken in plaats van als dia-afbeelding.':
+      'Haec imago {plaats} in {n} paginis apparet. OciDeck ea ut insigni fixo pro imagine paginae uti potest.',
+  'Mogelijk logo': 'Insigne fortasse',
+  'Geen logo': 'Non est insigne',
+  'Ja, als logo gebruiken': 'Ita, ut insigni utere',
+  'Ook als stijl toevoegen?': 'Etiam ut stilum addere?',
+  'Je kunt de kleuren, het lettertype en dit logo bewaren voor volgende presentaties.':
+      'Colores, litterarum formam atque hoc insigne ad futuras praesentationes servare potes.',
+  'Naam van de stijl': 'Nomen stili',
+  'Alleen in deze presentatie': 'In hac tantum praesentatione',
+  'Stijl toevoegen': 'Stilum addere',
+  'Stijl van {naam}': 'Stilus ex {naam}',
+  'De stijl kon niet blijvend worden bewaard. Het logo wordt alleen in deze presentatie gebruikt.':
+      'Stilus perpetuo servari non potuit. Insigne in hac tantum praesentatione adhibebitur.',
   'Mijn examens': 'Meum scribendae',
   'Alle vragen zijn beantwoord.': 'Omnes quaestiones sunt respondit.',
   'Examen inleveren': 'Submit nito',
