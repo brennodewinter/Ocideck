@@ -55,7 +55,7 @@ class OciServeExamSession {
     final id = (json['id'] as String? ?? '').trim();
     final status = (json['status'] as String? ?? '').trim();
     if (id.isEmpty ||
-        !const {'scheduled', 'released', 'closed'}.contains(status)) {
+        !const {'scheduled', 'armed', 'released'}.contains(status)) {
       throw const FormatException('invalid participant exam session');
     }
     return OciServeExamSession(
@@ -143,6 +143,8 @@ class OciServeExamAttempt {
         startedAt == null ||
         !const {
           'in_progress',
+          'paused',
+          'invalidated',
           'submitted',
           'scored',
           'released',

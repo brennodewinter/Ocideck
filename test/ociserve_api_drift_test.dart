@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  8f73aefd5e4f2dfaf3060a4c819f68fe7edef266
+// OciServe commit:  b52fb4a641f9314275acac70745ff5891f2ed6a8
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -14,7 +14,7 @@ import 'package:yaml/yaml.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = '8f73aefd5e4f2dfaf3060a4c819f68fe7edef266';
+const pinnedOciServeCommit = 'b52fb4a641f9314275acac70745ff5891f2ed6a8';
 
 /// One route the gateway calls, with the response fields OciDeck reads.
 /// Fields are dot-paths into the JSON response (after $ref resolution).
@@ -64,9 +64,25 @@ const gatewayRoutes = <GatewayRoute>[
     responseFields: ['courses'],
   ),
   GatewayRoute(
+    method: 'POST',
+    path:
+        '/api/v1/organizations/{}/me/course-versions/{}/lessons/{}/playback-sessions',
+    responseFields: [
+      'id',
+      'package_password',
+      'package_url',
+      'package_profile',
+      'expires_at',
+      'digest',
+    ],
+  ),
+  GatewayRoute(
     method: 'GET',
-    path: '/api/v1/organizations/{}/me/course-versions/{}/lessons/{}/package',
-    // Binary download — no JSON fields to check.
+    path: '/api/v1/organizations/{}/me/lesson-playback-sessions/{}/package',
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/lesson-playback-sessions/{}/close',
   ),
   GatewayRoute(
     method: 'GET',
@@ -94,6 +110,44 @@ const gatewayRoutes = <GatewayRoute>[
     method: 'POST',
     path: '/api/v1/organizations/{}/me/playback-sessions',
     // Fire-and-forget POST — no response fields to check.
+  ),
+  // — Formele kandidaat-examens —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/me/exam-sessions',
+    responseFields: ['exam_sessions', 'server_time'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/exam-sessions/{}/attempts',
+    responseFields: ['id', 'participant_id', 'status', 'started_at'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/me/attempts/{}/items/current',
+    responseFields: [
+      'attempt_id',
+      'attempt_item_id',
+      'content',
+      'option_order',
+      'revision',
+      'challenge',
+    ],
+  ),
+  GatewayRoute(
+    method: 'PUT',
+    path: '/api/v1/organizations/{}/me/attempts/{}/items/{}/answer',
+    responseFields: [
+      'attempt_id',
+      'attempt_item_id',
+      'revision',
+      'accepted_at',
+    ],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/attempts/{}/submit',
+    responseFields: ['id', 'participant_id', 'status', 'submitted_at'],
   ),
   // — Evidence & badges —
   GatewayRoute(
@@ -262,6 +316,19 @@ void main() {
       reason: 'The OciServe commit SHA must be a full 40-char git SHA',
     );
     expect(pinnedOciServeCommit, matches(RegExp(r'^[0-9a-f]{40}$')));
+  });
+
+  test('current exam item distinguishes completion with no-content', () {
+    const path = '/api/v1/organizations/{}/me/attempts/{}/items/current';
+    final operation = specPaths[path]!['GET'] as Map<String, dynamic>;
+    final responses = operation['responses'] as Map<String, dynamic>;
+    final complete = responses['204'] as Map<String, dynamic>?;
+
+    expect(complete, isNotNull);
+    expect(
+      complete!['headers']['Cache-Control']['schema']['const'],
+      'private, no-store',
+    );
   });
 
   group('every gateway route exists in the pinned spec', () {

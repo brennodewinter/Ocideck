@@ -35,15 +35,19 @@ Future<OpenResult> openLearningPackage(
 /// Logout en app-afsluiting wachten daarna zelf op server-close. De callback
 /// staat hier tijdelijk uit om dubbele best-effort-aanroepen te voorkomen.
 List<LearningSessionRef> closeLearningTabsLocally(TabsNotifier notifier) {
-  final sessions = notifier.state.tabs
+  final sessions = notifier.currentState.tabs
       .map((tab) => tab.learningSession)
       .whereType<LearningSessionRef>()
       .toList(growable: false);
   final closer = _learningSessionClosers[notifier];
   _learningSessionClosers[notifier] = null;
   try {
-    for (var index = notifier.state.tabs.length - 1; index >= 0; index--) {
-      if (notifier.state.tabs[index].learningSession != null) {
+    for (
+      var index = notifier.currentState.tabs.length - 1;
+      index >= 0;
+      index--
+    ) {
+      if (notifier.currentState.tabs[index].learningSession != null) {
         notifier.closeTab(index);
       }
     }

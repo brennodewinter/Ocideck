@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/ociserve_exam.dart';
-import '../services/ociserve/ociserve_http.dart';
 import '../utils/log.dart';
 import 'ociserve_provider.dart';
 
@@ -148,16 +147,7 @@ class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
         attemptId: attemptId,
       );
       if (!mounted) return;
-      state = state.copyWith(
-        phase: OciServeExamPhase.question,
-        item: item,
-        clearError: true,
-      );
-    } on OciServeException catch (error, stack) {
-      // Het endpoint gebruikt 409 wanneer er geen onbeantwoorde vraag meer is.
-      // Er wordt geen inhoud of score uit afgeleid: alleen de submitknop komt
-      // beschikbaar. Elke andere fout blijft een zichtbare gesloten toestand.
-      if (error.statusCode == 409 && mounted) {
+      if (item == null) {
         state = state.copyWith(
           phase: OciServeExamPhase.readyToSubmit,
           clearItem: true,
@@ -165,7 +155,11 @@ class OciServeExamNotifier extends StateNotifier<OciServeExamState> {
         );
         return;
       }
-      _fail('exam_question_failed', error, stack);
+      state = state.copyWith(
+        phase: OciServeExamPhase.question,
+        item: item,
+        clearError: true,
+      );
     } catch (error, stack) {
       _fail('exam_question_failed', error, stack);
     }

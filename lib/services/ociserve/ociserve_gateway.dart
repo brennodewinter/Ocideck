@@ -50,7 +50,7 @@ abstract class OciServeApi {
     required String sessionId,
     required String idempotencyKey,
   });
-  Future<OciServeCurrentExamItem> currentExamItem({
+  Future<OciServeCurrentExamItem?> currentExamItem({
     required String accessToken,
     required String organizationId,
     required String attemptId,
@@ -523,7 +523,7 @@ class OciServeGateway implements OciServeApi {
   }
 
   @override
-  Future<OciServeCurrentExamItem> currentExamItem({
+  Future<OciServeCurrentExamItem?> currentExamItem({
     required String accessToken,
     required String organizationId,
     required String attemptId,
@@ -541,6 +541,12 @@ class OciServeGateway implements OciServeApi {
       ]),
       accessToken: accessToken,
     );
+    if (response.statusCode == 204) {
+      if (response.body.isNotEmpty || !_isNoStore(response)) {
+        throw const OciServeException('invalid_response');
+      }
+      return null;
+    }
     return OciServeCurrentExamItem.fromJson(_examJson(response));
   }
 

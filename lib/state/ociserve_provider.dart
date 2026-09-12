@@ -628,7 +628,7 @@ class OciServeNotifier extends Notifier<OciServeState> {
     );
   }
 
-  Future<OciServeCurrentExamItem> currentExamItem({
+  Future<OciServeCurrentExamItem?> currentExamItem({
     required String organizationId,
     required String attemptId,
   }) async {

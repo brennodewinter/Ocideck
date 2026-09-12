@@ -81,4 +81,16 @@ void main() {
 
     expect(() => OciServeExamAttempt.fromJson(json), throwsFormatException);
   });
+
+  test('an armed exam is visible but cannot start yet', () {
+    final session = OciServeExamSession.fromJson({
+      'id': 'session-1',
+      'status': 'armed',
+      'scheduled_start': '2026-09-12T11:00:00Z',
+      'latest_admission_at': '2026-09-12T11:15:00Z',
+      'absolute_deadline_at': '2026-09-12T12:00:00Z',
+    });
+
+    expect(session.canStartAt(DateTime.utc(2026, 9, 12, 11, 5)), isFalse);
+  });
 }

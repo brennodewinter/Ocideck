@@ -12,7 +12,6 @@ import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_exam.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
-import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
@@ -177,14 +176,12 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   );
 
   @override
-  Future<OciServeCurrentExamItem> currentExamItem({
+  Future<OciServeCurrentExamItem?> currentExamItem({
     required String organizationId,
     required String attemptId,
   }) async {
     examCurrentCalls++;
-    if (examCurrentCalls > 1) {
-      throw const OciServeException('http_error', statusCode: 409);
-    }
+    if (examCurrentCalls > 1) return null;
     return OciServeCurrentExamItem(
       attemptId: attemptId,
       attemptItemId: 'item',

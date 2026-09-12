@@ -191,6 +191,7 @@ class OciServeExamDialog extends StatelessWidget {
     return switch (session.status) {
       'released' => l10n.d('Vrijgegeven'),
       'scheduled' => l10n.d('Nog niet vrijgegeven'),
+      'armed' => l10n.d('Nog niet vrijgegeven'),
       _ => l10n.d('Gesloten'),
     };
   }

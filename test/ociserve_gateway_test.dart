@@ -438,6 +438,24 @@ void main() {
     );
   });
 
+  test('204 current item means only that all questions are answered', () async {
+    transport.responses.add(
+      OciServeHttpResponse(
+        statusCode: 204,
+        headers: const {'cache-control': 'private, no-store'},
+        body: Uint8List(0),
+      ),
+    );
+
+    final item = await gateway.currentExamItem(
+      accessToken: 'access',
+      organizationId: 'org',
+      attemptId: 'attempt-1',
+    );
+
+    expect(item, isNull);
+  });
+
   test('requests and preserves every personal-data category', () async {
     transport.responses.add(
       _json({

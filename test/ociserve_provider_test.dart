@@ -158,7 +158,7 @@ class _FakeApi implements OciServeApi {
   }) => throw UnimplementedError();
 
   @override
-  Future<OciServeCurrentExamItem> currentExamItem({
+  Future<OciServeCurrentExamItem?> currentExamItem({
     required String accessToken,
     required String organizationId,
     required String attemptId,

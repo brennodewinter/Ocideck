@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/ociserve_exam.dart';
-import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/state/ociserve_exam_provider.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 
@@ -8,6 +7,7 @@ class _ExamApi extends OciServeNotifier {
   int answers = 0;
   final answerKeys = <String>[];
   bool failFirstAnswer = false;
+  bool failCurrent = false;
   int currentCalls = 0;
 
   @override
@@ -33,14 +33,13 @@ class _ExamApi extends OciServeNotifier {
   );
 
   @override
-  Future<OciServeCurrentExamItem> currentExamItem({
+  Future<OciServeCurrentExamItem?> currentExamItem({
     required String organizationId,
     required String attemptId,
   }) async {
     currentCalls++;
-    if (currentCalls > 1) {
-      throw const OciServeException('http_error', statusCode: 409);
-    }
+    if (failCurrent) throw StateError('conflict');
+    if (currentCalls > 1) return null;
     return OciServeCurrentExamItem(
       attemptId: attemptId,
       attemptItemId: 'item-1',
@@ -128,5 +127,17 @@ void main() {
 
     expect(notifier.state.phase, OciServeExamPhase.submitted);
     expect(notifier.state.attempt!.status, 'submitted');
+  });
+
+  test('a current-item conflict never unlocks definitive submit', () async {
+    final api = _ExamApi()..failCurrent = true;
+    final notifier = OciServeExamNotifier(organizationId: 'org', api: api);
+    addTearDown(notifier.dispose);
+
+    await notifier.load();
+    await notifier.start(notifier.state.sessions.single);
+
+    expect(notifier.state.phase, OciServeExamPhase.failed);
+    expect(notifier.state.phase, isNot(OciServeExamPhase.readyToSubmit));
   });
 }
