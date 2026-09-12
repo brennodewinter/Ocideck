@@ -38,7 +38,7 @@
 # Gebruik:
 #   scripts/refresh_catalogs.sh                  # haal op wat upstream nu is
 #   WSTG_VERSION=5.0 scripts/refresh_catalogs.sh # een versie afdwingen
-#   MASTG_VERSION=… / MASWE_DATE=…               # idem voor de andere twee
+#   MASTG_VERSION=… / MASWE_VERSION=…            # idem voor de andere twee
 #
 # CWE hoort hier niet bij: die bron is een zip van tientallen MB achter een
 # gedateerde URL. Zie tool/build_cwe_catalog.dart.
@@ -77,13 +77,13 @@ bundled_const() { # bundled_const BESTAND CONSTANTE
 
 WSTG_NOW="$(bundled_const lib/services/wstg_catalog.dart wstgVersion)"
 MASTG_NOW="$(bundled_const lib/services/mastg_catalog.dart mastgVersion)"
-MASWE_NOW="$(bundled_const lib/services/maswe_catalog.dart masweSnapshotDate)"
+MASWE_NOW="$(bundled_const lib/services/maswe_catalog.dart masweVersion)"
 
 # Volgorde: een expliciete override wint, dan wat upstream meldt, en als de bron
 # onbereikbaar was blijft staan wat we hebben (dan regenereert dit script alleen).
 WSTG_TARGET="${WSTG_VERSION:-$(latest_for wstg)}"; WSTG_TARGET="${WSTG_TARGET:-$WSTG_NOW}"
 MASTG_TARGET="${MASTG_VERSION:-$(latest_for mastg)}"; MASTG_TARGET="${MASTG_TARGET:-$MASTG_NOW}"
-MASWE_TARGET="${MASWE_DATE:-$(latest_for maswe)}"; MASWE_TARGET="${MASWE_TARGET:-$MASWE_NOW}"
+MASWE_TARGET="${MASWE_VERSION:-$(latest_for maswe)}"; MASWE_TARGET="${MASWE_TARGET:-$MASWE_NOW}"
 
 for v in "$WSTG_TARGET" "$MASTG_TARGET" "$MASWE_TARGET"; do
   [ -n "$v" ] || die "kon geen doelversie bepalen — staat de catalogus-constante er nog?"
@@ -91,27 +91,46 @@ done
 
 log "WSTG   $WSTG_NOW  → $WSTG_TARGET"
 log "MASTG  $MASTG_NOW → $MASTG_TARGET"
-log "MASWE  $MASWE_NOW → $MASWE_TARGET (momentopname: commitdatum van weaknesses/)"
+log "MASWE  $MASWE_NOW → $MASWE_TARGET"
 
 # ── 2. Ophalen en regenereren ─────────────────────────────────────────────────
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
+# Resolveer een tag vóór het ophalen naar een commit die niet meer kan bewegen.
+# Een tagnaam in twee losse HTTP-verzoeken is een TOCTOU-grens: wordt de tag
+# ertussen verzet, dan schrijven we versie A bij inhoud B. Annotated tags hebben
+# een `^{}`-regel; bij een lightweight tag valt de tweede probe terug op de tag.
+resolve_tag() { # resolve_tag OWNER/REPO TAG
+  local repo="$1" tag="$2" sha
+  sha="$(git ls-remote "https://github.com/$repo.git" "refs/tags/$tag^{}" | awk 'NR==1 {print $1}')"
+  if [ -z "$sha" ]; then
+    sha="$(git ls-remote "https://github.com/$repo.git" "refs/tags/$tag" | awk 'NR==1 {print $1}')"
+  fi
+  [ -n "$sha" ] || die "$repo@$tag kon niet naar een commit worden opgelost."
+  printf '%s' "$sha"
+}
+
+WSTG_SHA="$(resolve_tag OWASP/wstg "v$WSTG_TARGET")"
+MASTG_SHA="$(resolve_tag OWASP/mastg "v$MASTG_TARGET")"
+MASWE_SHA="$(resolve_tag OWASP/maswe "v$MASWE_TARGET")"
+log "Vastgepind: WSTG ${WSTG_SHA:0:12}, MASTG ${MASTG_SHA:0:12}, MASWE ${MASWE_SHA:0:12}"
+
 head_ "WSTG v$WSTG_TARGET"
-curl -sfL "https://raw.githubusercontent.com/OWASP/wstg/v$WSTG_TARGET/checklist/checklist.json" \
+curl -sfL "https://raw.githubusercontent.com/OWASP/wstg/$WSTG_SHA/checklist/checklist.json" \
   -o "$TMP/wstg.json" \
   || die "WSTG v$WSTG_TARGET heeft geen checklist/checklist.json op die tag — controleer of de bron is verplaatst."
 dart run tool/build_wstg_catalog.dart "$TMP/wstg.json" "$WSTG_TARGET"
 
 head_ "MASTG v$MASTG_TARGET"
-curl -sfL "https://github.com/OWASP/mastg/archive/refs/tags/v$MASTG_TARGET.tar.gz" | tar xz -C "$TMP" \
+curl -sfL "https://github.com/OWASP/mastg/archive/$MASTG_SHA.tar.gz" | tar xz -C "$TMP" \
   || die "MASTG v$MASTG_TARGET is niet op te halen — bestaat die tag?"
-dart run tool/build_mastg_catalog.dart "$TMP/mastg-$MASTG_TARGET" "$MASTG_TARGET"
+dart run tool/build_mastg_catalog.dart "$TMP/mastg-$MASTG_SHA" "$MASTG_TARGET"
 
-head_ "MASWE $MASWE_TARGET"
-curl -sfL "https://github.com/OWASP/maswe/archive/refs/heads/main.tar.gz" | tar xz -C "$TMP" \
-  || die "de MASWE-branch is niet op te halen."
-dart run tool/build_maswe_catalog.dart "$TMP/maswe-main" "$MASWE_TARGET"
+head_ "MASWE v$MASWE_TARGET"
+curl -sfL "https://github.com/OWASP/maswe/archive/$MASWE_SHA.tar.gz" | tar xz -C "$TMP" \
+  || die "MASWE v$MASWE_TARGET is niet op te halen — bestaat die tag?"
+dart run tool/build_maswe_catalog.dart "$TMP/maswe-$MASWE_SHA" "$MASWE_TARGET"
 
 # ── 3. De boekhouding: de constanten en de licentietabel ──────────────────────
 # Dit was tot nu toe het handwerk waarvan de generatoren alleen zéíden dat het

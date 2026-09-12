@@ -801,13 +801,13 @@ void main() {
       Directory('${dir.path}/scripts').createSync(recursive: true);
       File(
         '${dir.path}/lib/services/maswe_catalog.dart',
-      ).writeAsStringSync("const masweSnapshotDate = '2026-08-04';\n");
+      ).writeAsStringSync("const masweVersion = '1.0.0';\n");
       File(
         '${dir.path}/lib/services/maswe_catalog_data.dart',
       ).writeAsStringSync('// gegenereerd\n');
       File(
         '${dir.path}/docs/LICENSE_COMPLIANCE.md',
-      ).writeAsStringSync('| snapshot **2026-08-04** |\n');
+      ).writeAsStringSync('| MASWE **v1.0.0** |\n');
       git(['add', '.']);
       git(['commit', '-qm', 'basis']);
 
@@ -852,9 +852,9 @@ void main() {
     // gegenereerde deel niet. Dat hoort door te lopen, als eigen commit.
     final boekhouding = play(
       stubBody:
-          "printf \"const masweSnapshotDate = '2026-09-01';\\n\" "
+          "printf \"const masweVersion = '1.0.1';\\n\" "
           '> lib/services/maswe_catalog.dart\n'
-          'printf "| snapshot **2026-09-01** |\\n" > docs/LICENSE_COMPLIANCE.md',
+          'printf "| MASWE **v1.0.1** |\\n" > docs/LICENSE_COMPLIANCE.md',
       stubExit: 0,
     );
     expect(boekhouding.code, 0, reason: boekhouding.out);
@@ -865,7 +865,7 @@ void main() {
     // Inhoud verschoven: hier stopt het, en de werkboom blijft schoon achter.
     final inhoud = play(
       stubBody:
-          "printf \"const masweSnapshotDate = '2026-09-01';\\n\" "
+          "printf \"const masweVersion = '1.0.1';\\n\" "
           '> lib/services/maswe_catalog.dart\n'
           'printf "// een zwakheid erbij\\n" >> '
           'lib/services/maswe_catalog_data.dart',
@@ -883,7 +883,7 @@ void main() {
     // De verversing zelf faalt halverwege: ook dan blijft er niets staan.
     final kapot = play(
       stubBody:
-          "printf \"const masweSnapshotDate = 'half';\\n\" "
+          "printf \"const masweVersion = 'half';\\n\" "
           '> lib/services/maswe_catalog.dart',
       stubExit: 3,
     );

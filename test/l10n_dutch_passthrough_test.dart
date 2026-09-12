@@ -148,6 +148,31 @@ void main() {
     });
   });
 
+  group('poortbedrading', () {
+    test('blokkeert gewone, statische en gerichte l10n-controles', () {
+      final makefile = File('Makefile').readAsStringSync();
+      final staticGates = RegExp(
+        r'^STATIC_GATES\s*:=\s*(.+)$',
+        multiLine: true,
+      ).firstMatch(makefile)?.group(1);
+
+      expect(
+        staticGates,
+        contains('check-l10n-passthrough'),
+        reason:
+            'de per-PR static-gate moet Nederlandse doorlaat vóór main stoppen, '
+            'niet pas tijdens make check-release',
+      );
+      expect(
+        makefile,
+        contains('l10n-check: check-l10n-passthrough'),
+        reason:
+            'de gerichte l10n-controle moet ook bewijzen dat vertalingen niet '
+            'letterlijk de Nederlandse bron doorlaten',
+      );
+    });
+  });
+
   group('op de echte boom', () {
     test('leest alle taalbestanden, niet alleen het eerste', () {
       // Een poort die per ongeluk maar één bestand inleest is óók leeg.

@@ -729,7 +729,7 @@ release; the expensive failures in this chain have all been knowable up front.
 The order is the three phases in one go: **Phase 1 (local)** an *outdatedness
 gate* over the bundled reference data, which now splits by *what* moved. If
 upstream moved but the generated catalogue comes out word-for-word identical, the
-drift is bookkeeping — a snapshot date in a constant and a row in
+drift is bookkeeping — a version or snapshot marker in a constant and a row in
 `LICENSE_COMPLIANCE.md` — and Phase 1 refreshes it itself, as its own commit on
 the release branch, exactly like the scanner pins. If the refresh touches a
 *generated* part (`*_data.dart`, `*_android.dart`, `*_ios.dart`) the chain stops:
@@ -738,7 +738,19 @@ counts out from under the catalogue tests. Sources without a generator (CWE,
 MIAUW) stop it right away, with the route that belongs to that source rather than
 a generic "run refresh-catalogs" that would do nothing there. Either way
 `make refresh-catalogs` is the one command that fetches and records the new
-version. Then it always runs `make bump-scanner-pins`
+version. The refresh resolves every release tag to an exact commit before it
+downloads anything, so a moved tag cannot combine the label from one source
+state with the contents of another.
+
+Before the expensive release checks, `make check-owasp-catalog-sources`
+validates both channels of WSTG, MASTG and MASWE: the official release and the
+moving development branch. Each ref is resolved to an exact commit SHA; the
+gate then checks the expected directories, WSTG JSON shape, recognisable source
+records and CC-BY-SA-4.0 licence. Development is therefore visible and
+machine-checked without silently becoming the stable bundle. A moved path or
+schema stops the release; a normal new development commit does not.
+
+Then it always runs `make bump-scanner-pins`
 (idempotent) so the CI scanners (gitleaks/trufflehog/semgrep) ride to their latest
 upstream automatically instead of blocking a release — a bump, if any, becomes its
 own commit on the release branch; then the four-place version bump, `make sbom`,

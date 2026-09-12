@@ -103,9 +103,13 @@
 // volgende fout in diezelfde taal; een sleutel-uitzondering zegt iets over de
 // bronzin zelf en blijft daarom houdbaar.
 //
-// ── Waarom een ratchet, en waarom in check-full ──────────────────────────────
+// ── Waarom een ratchet, en waarom in de gewone poort ─────────────────────────
 //
-// Zie [passthroughBaseline] en het Makefile-doel `check-l10n-passthrough`.
+// Zie [passthroughBaseline] en het Makefile-doel `check-l10n-passthrough`. Bij
+// invoering stond de basislijn nog op 394 en draaide deze toets daarom alleen in
+// check-full. Sinds de opruiming nul bereikte draait hij ook in check,
+// check-static en l10n-check: nieuwe doorlaat hoort vóór main te stoppen, niet
+// pas tijdens een release.
 //
 // Gebruik:
 //   dart run tool/check_l10n_dutch_passthrough.dart           # de poort

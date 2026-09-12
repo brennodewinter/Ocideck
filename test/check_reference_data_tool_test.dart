@@ -56,6 +56,31 @@ void main() {
     });
   });
 
+  group('GitHub-releases zonder API-quotum', () {
+    test('leest de versie uit de officiële latest-doorverwijzing', () {
+      expect(
+        githubReleaseVersionFromLocation(
+          'https://github.com/OWASP/maswe/releases/tag/v1.0.0',
+        ),
+        '1.0.0',
+      );
+      expect(
+        githubReleaseVersionFromLocation('/OWASP/wstg/releases/tag/v4.2'),
+        '4.2',
+      );
+    });
+
+    test('raadt niet bij een andere route', () {
+      expect(githubReleaseVersionFromLocation(null), isNull);
+      expect(
+        githubReleaseVersionFromLocation(
+          'https://github.com/OWASP/maswe/releases',
+        ),
+        isNull,
+      );
+    });
+  });
+
   group('het register', () {
     test('elke standaard is uitgelezen', () {
       expect(standards, hasLength(greaterThanOrEqualTo(7)));
