@@ -124,11 +124,7 @@ class OciServeNotifier extends Notifier<OciServeState> {
       state = state.copyWith(
         status: OciServeStatus.signedOut,
         clearAccount: true,
-        errorCode: switch (errorCode) {
-          'identity_provider_confirmation_required' => errorCode,
-          'connection_failed' || 'network' || 'timeout' => errorCode,
-          _ => 'restore_failed',
-        },
+        errorCode: _restoreErrorCode(errorCode),
       );
     }
   }

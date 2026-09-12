@@ -38,6 +38,12 @@ final ociServeAuthenticatedProvider = Provider<bool>(
 
 enum OciServeStatus { loading, signedOut, authenticating, authenticated }
 
+String _restoreErrorCode(String errorCode) => switch (errorCode) {
+  'identity_provider_confirmation_required' => errorCode,
+  'connection_failed' || 'network' || 'timeout' => errorCode,
+  _ => 'restore_failed',
+};
+
 class OciServeState {
   const OciServeState({
     this.settings = const OciServeSettings(),
