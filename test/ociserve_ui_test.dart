@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:archive/archive.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
@@ -10,8 +9,10 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/learning_session.dart';
 import 'package:ocideck/models/ociserve_models.dart';
+import 'package:ocideck/models/ociserve_exam.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
+import 'package:ocideck/services/ociserve/ociserve_http.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
@@ -23,6 +24,7 @@ import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/ociserve_aes_fixture.dart';
 import 'support/pump_until.dart';
 
 const _account = OciServeAccount(
@@ -97,6 +99,7 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   Uint8List? accountAvatarBytes;
   PlaybackReport? reportedPlayback;
   bool loginCalled = false;
+  int examCurrentCalls = 0;
 
   @override
   OciServeState build() => initial;
@@ -120,10 +123,109 @@ class _FixedOciServeNotifier extends OciServeNotifier {
   }
 
   @override
-  Future<OciServePackage> lessonPackage({
+  Future<bool> openLessonPackage({
     required String organizationId,
     required OciServeFeedItem lesson,
-  }) async => package!;
+    required Future<bool> Function(
+      Uint8List bytes,
+      String password,
+      String packageProfile,
+      LearningSessionRef session,
+    )
+    open,
+  }) async => open(
+    package!.bytes,
+    testOciServePackagePassword,
+    package!.packageProfile,
+    LearningSessionRef(
+      serverUrl: initial.settings.normalizedBaseUrl,
+      accountId: initial.account!.id,
+      organizationId: organizationId,
+      enrollmentId: lesson.enrollmentId,
+      courseVersionId: lesson.versionId,
+      lessonId: lesson.lessonId,
+      playbackSessionId: 'lesson-session',
+      packageHash: package!.sha256,
+      startedAt: DateTime.utc(2026, 9, 12),
+      expiresAt: DateTime.utc(2099),
+    ),
+  );
+
+  @override
+  Future<void> closeLessonSession(LearningSessionRef session) async {}
+
+  @override
+  Future<OciServeExamSessionList> examSessions(String organizationId) async =>
+      OciServeExamSessionList(
+        sessions: const [
+          OciServeExamSession(id: 'exam-session', status: 'released'),
+        ],
+        serverTime: DateTime.utc(2026, 9, 12),
+      );
+
+  @override
+  Future<OciServeExamAttempt> startExamAttempt({
+    required String organizationId,
+    required String sessionId,
+    required String idempotencyKey,
+  }) async => OciServeExamAttempt(
+    id: 'attempt',
+    participantId: 'participant',
+    blueprintVersionId: 'blueprint',
+    status: 'in_progress',
+    startedAt: DateTime.utc(2026, 9, 12),
+  );
+
+  @override
+  Future<OciServeCurrentExamItem> currentExamItem({
+    required String organizationId,
+    required String attemptId,
+  }) async {
+    examCurrentCalls++;
+    if (examCurrentCalls > 1) {
+      throw const OciServeException('http_error', statusCode: 409);
+    }
+    return OciServeCurrentExamItem(
+      attemptId: attemptId,
+      attemptItemId: 'item',
+      position: 0,
+      question: 'Welke letter?',
+      options: const [
+        OciServeExamOption(id: 'a', text: 'A'),
+        OciServeExamOption(id: 'b', text: 'B'),
+      ],
+      revision: 0,
+      challenge: 'AAAAAAAAAAAAAAAAAAAAAA',
+      challengeExpiresAt: DateTime.utc(2099),
+    );
+  }
+
+  @override
+  Future<OciServeAcceptedExamAnswer> answerExamItem({
+    required String organizationId,
+    required OciServeCurrentExamItem item,
+    required Map<String, Object?> answerData,
+    required String idempotencyKey,
+  }) async => OciServeAcceptedExamAnswer(
+    attemptId: item.attemptId,
+    attemptItemId: item.attemptItemId,
+    revision: 1,
+    acceptedAt: DateTime.utc(2026, 9, 12),
+  );
+
+  @override
+  Future<OciServeExamAttempt> submitExamAttempt({
+    required String organizationId,
+    required String attemptId,
+    required String idempotencyKey,
+  }) async => OciServeExamAttempt(
+    id: attemptId,
+    participantId: 'participant',
+    blueprintVersionId: 'blueprint',
+    status: 'submitted',
+    startedAt: DateTime.utc(2026, 9, 12),
+    submittedAt: DateTime.utc(2026, 9, 12, 1),
+  );
 
   @override
   Future<Uint8List> courseImage({
@@ -181,9 +283,7 @@ title: Cursusles
 <!-- ocideck_slide_anchor: einde -->
 # Einde
 ''';
-  final archive = Archive()
-    ..add(ArchiveFile.bytes('les.md', utf8.encode(markdown)));
-  return Uint8List.fromList(ZipEncoder().encodeBytes(archive));
+  return ociServeAesPackage({'les.md': utf8.encode(markdown)});
 }
 
 const _authenticated = OciServeState(
@@ -211,6 +311,7 @@ _FixedOciServeNotifier _lessonNotifier({bool? completed}) =>
         bytes: _lessonPackage(),
         sha256: 'test',
         playbackPolicy: 'play-only',
+        packageProfile: 'ocideck-winzip-aes256-ae2-v1',
       ),
     );
 
@@ -835,6 +936,7 @@ void main() {
           bytes: Uint8List(0),
           sha256: '',
           playbackPolicy: 'play-only',
+          packageProfile: 'ocideck-winzip-aes256-ae2-v1',
         ),
       ),
     );
@@ -1265,4 +1367,39 @@ void main() {
     expect(container.read(tabsProvider).current?.isOpen, isFalse);
     expect(find.byKey(const Key('ociserve-featured-course')), findsOneWidget);
   });
+
+  testWidgets(
+    'formeel examen toont alleen de huidige vraag en levert bewust in',
+    (tester) async {
+      await _pumpApp(tester, _lessonNotifier());
+      await _openCourses(tester);
+      await tester.tap(find.byKey(const Key('ociserve-exams-button')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Menselijk toezicht bij examens'), findsOneWidget);
+      expect(
+        find.textContaining('OciDeck stelt niet vast wie'),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Start examen'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Welke letter?'), findsOneWidget);
+      expect(find.text('Vraag 1'), findsOneWidget);
+      expect(find.textContaining('correct'), findsNothing);
+      await tester.tap(find.byType(RadioListTile<String>).first);
+      await tester.pump();
+      await tester.tap(find.text('Antwoord indienen'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Alle vragen zijn beantwoord.'), findsOneWidget);
+      await tester.tap(find.text('Examen inleveren'));
+      await tester.pumpAndSettle();
+      expect(find.text('Examen inleveren?'), findsOneWidget);
+      await tester.tap(find.text('Definitief inleveren'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Uw examen is ingeleverd.'), findsOneWidget);
+    },
+  );
 }

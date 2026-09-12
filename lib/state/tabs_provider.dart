@@ -48,6 +48,7 @@ import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
+import '../utils/zip_encryption.dart';
 import 'deck_provider.dart';
 import 'document_provider.dart';
 import 'editor_provider.dart';
@@ -158,6 +159,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// registratie is er geen toestemming en vervalt de terugval — dat is de
   /// bedoeling: die terugval geeft de volledige URL aan een derde partij.
   ProxyFallbackConfirm? proxyFallbackConfirm;
+
+  /// Serverafmelding voor een lokaal al verwijderd OciServe-tabblad.
+  /// De tablaag ruimt altijd eerst de inhoud en `mem:`-assets op.
+  Future<void> Function(LearningSessionRef session)? learningSessionCloser;
 
   /// Hoe vaak niet-opgeslagen tabbladen naar een herstelbestand worden bewaard.
   static const _autosaveInterval = Duration(seconds: 25);
@@ -622,14 +627,39 @@ class TabsNotifier extends StateNotifier<TabsState> {
     Uint8List bytes,
     String name,
     LearningSessionRef learningSession, {
+    required String password,
+    required String packageProfile,
     String? initialAnchor,
   }) => _openLearningPackage(
     this,
     bytes,
     name,
     learningSession,
+    password: password,
+    packageProfile: packageProfile,
     initialAnchor: initialAnchor,
   );
+
+  /// Verwijdert alle leertabbladen lokaal en geeft hun sessies terug.
+  ///
+  /// Logout en app-afsluiting wachten daarna zelf op server-close. De callback
+  /// staat hier tijdelijk uit om dubbele best-effort-aanroepen te voorkomen.
+  List<LearningSessionRef> closeLearningTabsLocally() {
+    final sessions = state.tabs
+        .map((tab) => tab.learningSession)
+        .whereType<LearningSessionRef>()
+        .toList(growable: false);
+    final closer = learningSessionCloser;
+    learningSessionCloser = null;
+    try {
+      for (var index = state.tabs.length - 1; index >= 0; index--) {
+        if (state.tabs[index].learningSession != null) closeTab(index);
+      }
+    } finally {
+      learningSessionCloser = closer;
+    }
+    return sessions;
+  }
 
   /// A just-opened deck carrying Informatieveiligheid slide types is worth a
   /// one-time "enable the module" nudge. Signalled here — the single chokepoint
@@ -773,8 +803,10 @@ void _selectTab(TabsNotifier notifier, int index) {
 
 void _closeTab(TabsNotifier notifier, int index) {
   final current = notifier.currentState;
+  final session = current.tabs[index].learningSession;
   if (current.tabs.length == 1) {
     final tab = current.tabs.first;
+    tab.learningSession = null;
     notifier._recovery.discard(tab.recoveryId);
     // Het enige overblijvende tabblad wordt gereset (niet verwijderd), zodat de
     // app altijd één tabblad houdt. Een presentatie reset via closeDeck(); een
@@ -788,6 +820,8 @@ void _closeTab(TabsNotifier notifier, int index) {
     }
     notifier.refreshTabs();
     notifier.sweepWebAssets();
+    final closer = notifier.learningSessionCloser;
+    if (session != null && closer != null) unawaited(closer(session));
     return;
   }
   final tab = current.tabs[index];
@@ -800,6 +834,8 @@ void _closeTab(TabsNotifier notifier, int index) {
     selectedIndex: newSelected,
   );
   notifier.sweepWebAssets();
+  final closer = notifier.learningSessionCloser;
+  if (session != null && closer != null) unawaited(closer(session));
 }
 
 // ── Provider ──────────────────────────────────────────────────────────────────

@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 
 import '../models/learning_session.dart';
 import '../models/ociserve_evidence.dart';
+import '../models/ociserve_exam.dart';
 import '../models/ociserve_models.dart';
 import '../models/ociserve_settings.dart';
 import '../models/playback.dart';
@@ -129,6 +130,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
   int? _flushGeneration;
   Future<OciServeTokens>? _refreshInFlight;
   Future<void>? _secretWriteInFlight;
+  final Map<String, LearningSessionRef> _activeLessonSessions = {};
+
+  /// Door de shell geleverde lokale cleanup, uitgevoerd vóór logout de
+  /// toegangstokens vergeet en vóór best-effort server-close.
+  List<LearningSessionRef> Function()? closeLearningTabsLocally;
 
   @override
   OciServeState build() {
@@ -225,6 +231,13 @@ class OciServeNotifier extends Notifier<OciServeState> {
     final old = state.settings;
     final serverChanged = old.normalizedBaseUrl != settings.normalizedBaseUrl;
     if (serverChanged) {
+      await _finishLearningSessions(
+        settings: old,
+        accountId: state.account?.id,
+        access: _tokens?.accessToken,
+      );
+    }
+    if (serverChanged) {
       final pending = old.normalizedBaseUrl.isEmpty
           ? const <Map<String, Object?>>[]
           : await _readOutbox(baseUrl: old.normalizedBaseUrl);
@@ -245,7 +258,9 @@ class OciServeNotifier extends Notifier<OciServeState> {
       status: settings.enabled && state.authenticated && !serverChanged
           ? OciServeStatus.authenticated
           : OciServeStatus.signedOut,
-      clearAccount: !settings.enabled || serverChanged,
+      // Uitschakelen loopt hieronder via logout. Tot die cleanup klaar is,
+      // blijft het account alleen intern beschikbaar om lessessies te sluiten.
+      clearAccount: serverChanged,
       clearError: true,
       clearWarning: true,
       clearIdentityProviderHost: true,
@@ -379,6 +394,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<bool> logout() async {
     ++_generation;
     final settings = state.settings;
+    await _finishLearningSessions(
+      settings: settings,
+      accountId: state.account?.id,
+      access: _tokens?.accessToken,
+    );
     _tokens = null;
     _installation = null;
     _configuration = null;
@@ -411,6 +431,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
   Future<bool> resetLocalData() async {
     ++_generation;
     var settings = state.settings;
+    await _finishLearningSessions(
+      settings: settings,
+      accountId: state.account?.id,
+      access: _tokens?.accessToken,
+    );
     _tokens = null;
     _installation = null;
     _configuration = null;
@@ -564,17 +589,179 @@ class OciServeNotifier extends Notifier<OciServeState> {
     );
   }
 
-  Future<OciServePackage> lessonPackage({
+  /// Haalt een tijdelijke versleutelde les op en geeft de sleutel uitsluitend
+  /// aan de synchrone openingsketen door. De sleutel wordt niet opgeslagen in
+  /// state, sleutelbos, voortgangswachtrij of [LearningSessionRef].
+  Future<bool> openLessonPackage({
     required String organizationId,
     required OciServeFeedItem lesson,
+    required Future<bool> Function(
+      Uint8List bytes,
+      String password,
+      String packageProfile,
+      LearningSessionRef session,
+    )
+    open,
   }) async {
     _requireMembership(organizationId);
     final access = await _accessToken();
-    return _gatewayFactory(state.settings).lessonPackage(
+    final gateway = _gatewayFactory(state.settings);
+    final grant = await gateway.startLessonSession(
       accessToken: access,
       organizationId: organizationId,
       versionId: lesson.versionId,
       lessonId: lesson.lessonId,
+    );
+    final session = LearningSessionRef(
+      serverUrl: state.settings.normalizedBaseUrl,
+      accountId: state.account!.id,
+      organizationId: organizationId,
+      enrollmentId: lesson.enrollmentId,
+      courseVersionId: lesson.versionId,
+      lessonId: lesson.lessonId,
+      playbackSessionId: grant.id,
+      packageHash: grant.digestSha256,
+      startedAt: DateTime.now().toUtc(),
+      expiresAt: grant.expiresAt,
+    );
+    var opened = false;
+    try {
+      final package = await gateway.lessonSessionPackage(
+        accessToken: access,
+        organizationId: organizationId,
+        grant: grant,
+      );
+      opened = await open(
+        package.bytes,
+        grant.packagePassword,
+        package.packageProfile,
+        session,
+      );
+      if (opened) _activeLessonSessions[session.playbackSessionId] = session;
+      return opened;
+    } finally {
+      if (!opened) await _closeLessonSessionBestEffort(session, access: access);
+    }
+  }
+
+  /// Sluit serverzijde pas nadat de tablaag lokaal inhoud en assets vergat.
+  Future<void> closeLessonSession(LearningSessionRef session) async {
+    _activeLessonSessions.remove(session.playbackSessionId);
+    await _closeLessonSessionBestEffort(session);
+  }
+
+  Future<void> _finishLearningSessions({
+    required OciServeSettings settings,
+    required String? accountId,
+    required String? access,
+  }) async {
+    final sessions =
+        closeLearningTabsLocally?.call() ??
+        _activeLessonSessions.values.toList(growable: false);
+    _activeLessonSessions.clear();
+    if (access == null || accountId == null) return;
+    for (final session in sessions) {
+      if (session.serverUrl != settings.normalizedBaseUrl ||
+          session.accountId != accountId) {
+        continue;
+      }
+      try {
+        await _gatewayFactory(settings).closeLessonSession(
+          accessToken: access,
+          organizationId: session.organizationId,
+          sessionId: session.playbackSessionId,
+        );
+      } catch (error, stack) {
+        logError('OciServe: lessessie sluiten', error.runtimeType, stack);
+      }
+    }
+  }
+
+  Future<void> _closeLessonSessionBestEffort(
+    LearningSessionRef session, {
+    String? access,
+  }) async {
+    if (session.serverUrl != state.settings.normalizedBaseUrl ||
+        session.accountId != state.account?.id) {
+      return;
+    }
+    try {
+      final token = access ?? await _accessToken();
+      await _gatewayFactory(state.settings).closeLessonSession(
+        accessToken: token,
+        organizationId: session.organizationId,
+        sessionId: session.playbackSessionId,
+      );
+    } catch (error, stack) {
+      logError('OciServe: lessessie sluiten', error.runtimeType, stack);
+    }
+  }
+
+  Future<OciServeExamSessionList> examSessions(String organizationId) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(
+      state.settings,
+    ).examSessions(accessToken: access, organizationId: organizationId);
+  }
+
+  Future<OciServeExamAttempt> startExamAttempt({
+    required String organizationId,
+    required String sessionId,
+    required String idempotencyKey,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).startExamAttempt(
+      accessToken: access,
+      organizationId: organizationId,
+      sessionId: sessionId,
+      idempotencyKey: idempotencyKey,
+    );
+  }
+
+  Future<OciServeCurrentExamItem> currentExamItem({
+    required String organizationId,
+    required String attemptId,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).currentExamItem(
+      accessToken: access,
+      organizationId: organizationId,
+      attemptId: attemptId,
+    );
+  }
+
+  Future<OciServeAcceptedExamAnswer> answerExamItem({
+    required String organizationId,
+    required OciServeCurrentExamItem item,
+    required Map<String, Object?> answerData,
+    required String idempotencyKey,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).answerExamItem(
+      accessToken: access,
+      organizationId: organizationId,
+      item: item,
+      answerData: answerData,
+      idempotencyKey: idempotencyKey,
+    );
+  }
+
+  Future<OciServeExamAttempt> submitExamAttempt({
+    required String organizationId,
+    required String attemptId,
+    required String idempotencyKey,
+  }) async {
+    _requireMembership(organizationId);
+    final access = await _accessToken();
+    return _gatewayFactory(state.settings).submitExamAttempt(
+      accessToken: access,
+      organizationId: organizationId,
+      attemptId: attemptId,
+      idempotencyKey: idempotencyKey,
     );
   }
 

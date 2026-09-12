@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:async';
 
 import 'package:archive/archive.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,8 @@ import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'support/ociserve_aes_fixture.dart';
 
 /// Bytes met een geldige PNG-kop — de import valideert op magic bytes, niet
 /// op decodeerbaarheid.
@@ -70,7 +73,7 @@ void main() {
               ],
             ),
           );
-      final zip = _zipOf({'les.md': utf8.encode(markdown)});
+      final zip = ociServeAesPackage({'les.md': utf8.encode(markdown)});
       final session = LearningSessionRef(
         serverUrl: 'https://leren.example',
         accountId: 'account',
@@ -78,13 +81,21 @@ void main() {
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 6),
+        expiresAt: DateTime.utc(2099),
       );
 
       final result = await container
           .read(tabsProvider.notifier)
-          .openLearningPackage(zip, 'les.ocideck', session);
+          .openLearningPackage(
+            zip,
+            'les.ocideck',
+            session,
+            password: testOciServePackagePassword,
+            packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+          );
 
       expect(result, OpenResult.opened);
       expect(
@@ -116,7 +127,7 @@ void main() {
               ],
             ),
           );
-      final zip = _zipOf({
+      final zip = ociServeAesPackage({
         'deck.md': utf8.encode(markdown),
         'theme.json': utf8.encode(
           jsonEncode({
@@ -133,14 +144,22 @@ void main() {
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 7),
+        expiresAt: DateTime.utc(2099),
       );
 
       expect(
         await container
             .read(tabsProvider.notifier)
-            .openLearningPackage(zip, 'les.ocideck', session),
+            .openLearningPackage(
+              zip,
+              'les.ocideck',
+              session,
+              password: testOciServePackagePassword,
+              packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+            ),
         OpenResult.opened,
       );
       final theme = container
@@ -165,19 +184,23 @@ void main() {
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 7),
+        expiresAt: DateTime.utc(2099),
       );
 
       final result = await container
           .read(tabsProvider.notifier)
           .openLearningPackage(
-            _zipOf({
+            ociServeAesPackage({
               'deck.md': utf8.encode(source),
               'theme.json': utf8.encode('{"definition":false}'),
             }),
             'les.ocideck',
             session,
+            password: testOciServePackagePassword,
+            packageProfile: 'ocideck-winzip-aes256-ae2-v1',
           );
 
       expect(result, OpenResult.unreadable);
@@ -203,14 +226,25 @@ void main() {
           enrollmentId: 'enrollment',
           courseVersionId: 'version',
           lessonId: 'lesson',
+          playbackSessionId: 'lesson-session',
           packageHash: 'sha256:test',
           startedAt: DateTime.utc(2026, 9, 7),
+          expiresAt: DateTime.utc(2099),
         );
 
         expect(
           await learningContainer
               .read(tabsProvider.notifier)
-              .openLearningPackage(zip, 'les.ocideck', session),
+              .openLearningPackage(
+                ociServeAesPackage({
+                  'deck.md': utf8.encode(source),
+                  'assets/large.bin': Uint8List(33 * 1024 * 1024),
+                }),
+                'les.ocideck',
+                session,
+                password: testOciServePackagePassword,
+                packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+              ),
           OpenResult.unreadable,
         );
 
@@ -234,16 +268,20 @@ void main() {
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 6),
+        expiresAt: DateTime.utc(2099),
       );
 
       final result = await container
           .read(tabsProvider.notifier)
           .openLearningPackage(
-            _zipOf({'les.md': utf8.encode(source)}),
+            ociServeAesPackage({'les.md': utf8.encode(source)}),
             'les.ocideck',
             session,
+            password: testOciServePackagePassword,
+            packageProfile: 'ocideck-winzip-aes256-ae2-v1',
           );
 
       expect(result, OpenResult.unreadable);
@@ -271,17 +309,21 @@ marp: true
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 7),
+        expiresAt: DateTime.utc(2099),
       );
 
       expect(
         await container
             .read(tabsProvider.notifier)
             .openLearningPackage(
-              _zipOf({'deck.md': utf8.encode(source)}),
+              ociServeAesPackage({'deck.md': utf8.encode(source)}),
               'les.ocideck',
               session,
+              password: testOciServePackagePassword,
+              packageProfile: 'ocideck-winzip-aes256-ae2-v1',
             ),
         OpenResult.opened,
       );
@@ -323,16 +365,20 @@ marp: true
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 6),
+        expiresAt: DateTime.utc(2099),
       );
 
       final result = await container
           .read(tabsProvider.notifier)
           .openLearningPackage(
-            _zipOf({'les.md': utf8.encode(markdown)}),
+            ociServeAesPackage({'les.md': utf8.encode(markdown)}),
             'les.ocideck',
             session,
+            password: testOciServePackagePassword,
+            packageProfile: 'ocideck-winzip-aes256-ae2-v1',
             initialAnchor: 'verder',
           );
 
@@ -351,10 +397,10 @@ marp: true
     test('weigert een leerpakket met een ontsnappend lid volledig', () async {
       final container = _container();
       const source = '---\nmarp: true\n---\n# Les\n';
-      final archive = Archive()
-        ..add(ArchiveFile.bytes('les.md', utf8.encode(source)))
-        ..add(ArchiveFile.bytes('../verborgen.txt', utf8.encode('nee')));
-      final zip = ZipEncoder().encodeBytes(archive);
+      final zip = ociServeAesPackage({
+        'les.md': utf8.encode(source),
+        '../verborgen.txt': utf8.encode('nee'),
+      });
       final session = LearningSessionRef(
         serverUrl: 'https://leren.example',
         accountId: 'account',
@@ -362,17 +408,90 @@ marp: true
         enrollmentId: 'enrollment',
         courseVersionId: 'version',
         lessonId: 'lesson',
+        playbackSessionId: 'lesson-session',
         packageHash: 'sha256:test',
         startedAt: DateTime.utc(2026, 9, 6),
+        expiresAt: DateTime.utc(2099),
       );
 
       final result = await container
           .read(tabsProvider.notifier)
-          .openLearningPackage(zip, 'les.ocideck', session);
+          .openLearningPackage(
+            zip,
+            'les.ocideck',
+            session,
+            password: testOciServePackagePassword,
+            packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+          );
 
       expect(result, isNot(OpenResult.opened));
       expect(container.read(tabsProvider).current?.learningSession, isNull);
     });
+
+    test(
+      'wist les en assets voordat de server-close wordt aangeroepen',
+      () async {
+        final container = _container();
+        final markdown = container
+            .read(markdownServiceProvider)
+            .generateDeck(
+              Deck(
+                title: 'Les',
+                slides: [
+                  Slide.create(SlideType.image).copyWith(
+                    title: 'Beeld',
+                    anchor: 'beeld',
+                    imagePath: 'images/les.png',
+                  ),
+                ],
+              ),
+            );
+        final session = LearningSessionRef(
+          serverUrl: 'https://leren.example',
+          accountId: 'account',
+          organizationId: 'org',
+          enrollmentId: 'enrollment',
+          courseVersionId: 'version',
+          lessonId: 'lesson',
+          playbackSessionId: 'lesson-session',
+          packageHash: 'sha256:test',
+          startedAt: DateTime.utc(2026, 9, 12),
+          expiresAt: DateTime.utc(2099),
+        );
+        final tabs = container.read(tabsProvider.notifier);
+        expect(
+          await tabs.openLearningPackage(
+            ociServeAesPackage({
+              'les.md': utf8.encode(markdown),
+              'images/les.png': _pngBytes,
+            }),
+            'les.ocideck',
+            session,
+            password: testOciServePackagePassword,
+            packageProfile: 'ocideck-winzip-aes256-ae2-v1',
+          ),
+          OpenResult.opened,
+        );
+        final memPath = container
+            .read(tabsProvider)
+            .current!
+            .deckNotifier
+            .currentState
+            .deck!
+            .slides
+            .single
+            .imagePath;
+        final closed = Completer<void>();
+        tabs.learningSessionCloser = (_) async {
+          expect(container.read(tabsProvider).current!.isOpen, isFalse);
+          expect(WebAssetStore.bytesFor(memPath), isNull);
+          closed.complete();
+        };
+
+        tabs.closeTab(0);
+        await closed.future;
+      },
+    );
 
     test(
       'opent een pakket in het geheugen: afbeeldingen en notities mee',
