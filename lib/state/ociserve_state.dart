@@ -38,6 +38,12 @@ final ociServeAuthenticatedProvider = Provider<bool>(
 
 enum OciServeStatus { loading, signedOut, authenticating, authenticated }
 
+String _restoreErrorCode(String errorCode) => switch (errorCode) {
+  'identity_provider_confirmation_required' => errorCode,
+  'connection_failed' || 'network' || 'timeout' => errorCode,
+  _ => 'restore_failed',
+};
+
 class OciServeState {
   const OciServeState({
     this.settings = const OciServeSettings(),
@@ -61,6 +67,12 @@ class OciServeState {
       settings.enabled &&
       status == OciServeStatus.authenticated &&
       account != null;
+
+  /// De server was bij de laatste expliciete verbindingspoging niet bereikbaar.
+  /// Andere aanmeldfouten krijgen geen netwerklabel: een geweigerd account is
+  /// iets anders dan een ontbrekende verbinding en vraagt een andere oplossing.
+  bool get serverUnavailable =>
+      const {'connection_failed', 'network', 'timeout'}.contains(errorCode);
 
   bool get loading => status == OciServeStatus.loading;
   bool get authenticating => status == OciServeStatus.authenticating;

@@ -709,6 +709,7 @@ const _dutchSourceAddFy = {
   'Vraag {nummer}': 'Fraach {nûmer}',
   'Uw antwoord': 'Jo antwurd',
   'Antwoord indienen': 'Antwurd yntsjinje',
+  'Geen verbinding': 'Gjin ferbining',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Jo diele dan gjin oanmeldgegevens mear út dizze portefúlje. ',
   'U hebt nog geen badges.': 'Jo hawwe noch gjin badges.',

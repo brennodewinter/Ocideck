@@ -1684,6 +1684,7 @@ const _dutchSourceAddLa = <String, String>{
   'Vraag {nummer}': 'Quaestione',
   'Uw antwoord': 'Responsum tuum',
   'Antwoord indienen': 'Submit responsum',
+  'Geen verbinding': 'Nullus nexus',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Tum nulla credentialia ex hac porta amplius communicabis. ',
   'U hebt nog geen badges.': 'Nondum ulla insignia habes.',

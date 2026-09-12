@@ -120,13 +120,11 @@ class OciServeNotifier extends Notifier<OciServeState> {
       logError('OciServe: sessie herstellen', error.runtimeType, stack);
       if (generation != _generation) return;
       _tokens = null;
+      final errorCode = _safeErrorCode(error);
       state = state.copyWith(
         status: OciServeStatus.signedOut,
         clearAccount: true,
-        errorCode:
-            _safeErrorCode(error) == 'identity_provider_confirmation_required'
-            ? 'identity_provider_confirmation_required'
-            : 'restore_failed',
+        errorCode: _restoreErrorCode(errorCode),
       );
     }
   }

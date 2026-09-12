@@ -1670,6 +1670,7 @@ const _dutchSourceAddCs = <String, String>{
   'Vraag {nummer}': 'otázka {číslo}',
   'Uw antwoord': 'Vaše odpověď',
   'Antwoord indienen': 'Odeslat odpověď',
+  'Geen verbinding': 'Bez připojení',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Z tohoto portfolia již nebudete sdílet žádná digitální osvědčení. ',
   'U hebt nog geen badges.': 'Zatím nemáte žádné odznaky.',

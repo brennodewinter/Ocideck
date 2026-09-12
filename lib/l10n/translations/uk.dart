@@ -1684,6 +1684,7 @@ const _dutchSourceAddUk = <String, String>{
   'Vraag {nummer}': 'Питання {номер}',
   'Uw antwoord': 'Ваша відповідь',
   'Antwoord indienen': 'Надішліть відповідь',
+  'Geen verbinding': 'Немає з’єднання',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Після цього ви більше не надаватимете цифрові посвідчення з цього гаманця. ',
   'U hebt nog geen badges.': 'У вас ще немає бейджів.',

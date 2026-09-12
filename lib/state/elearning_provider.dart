@@ -1,5 +1,5 @@
-// State for the "eLearning" module (#1999): question authoring, structural
-// slides, and local import of SCORM/QTI/xAPI/AICC/OLX packages.
+// State for the "eLearning" extension (#1999): one master switch for its
+// eLearning slide types, package import and configured course entry.
 //
 // Same contract as Managementsysteem / Procesverbetering: reveal when the
 // switch is on **or** the open deck already carries an eLearning slide, so

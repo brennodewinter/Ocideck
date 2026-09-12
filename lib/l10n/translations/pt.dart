@@ -1698,6 +1698,7 @@ const _dutchSourceAddPt = <String, String>{
   'Vraag {nummer}': 'Pergunta {número}',
   'Uw antwoord': 'Sua resposta',
   'Antwoord indienen': 'Enviar resposta',
+  'Geen verbinding': 'Sem ligação',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Deixa então de partilhar credenciais deste portefólio. ',
   'U hebt nog geen badges.': 'Ainda não tem crachás.',

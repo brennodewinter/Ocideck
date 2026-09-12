@@ -92,6 +92,37 @@ Widget _wideSecondaryButton({
   ),
 );
 
+/// Het OciServe-label houdt de herstelactie klikbaar, maar zet de laatst bekende
+/// verbindingsfout direct naast die actie. De badge is passief: een nieuwe
+/// netwerkpoging gebeurt pas wanneer de gebruiker opnieuw op de knop drukt.
+Widget _ociServeWelcomeLabel({
+  required String label,
+  required bool unavailable,
+  required String unavailableLabel,
+}) => Row(
+  children: [
+    Expanded(child: Text(label)),
+    if (unavailable) ...[
+      const SizedBox(width: 12),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        decoration: BoxDecoration(
+          color: AppTheme.dangerBg,
+          borderRadius: BorderRadius.circular(999),
+        ),
+        child: Text(
+          unavailableLabel,
+          style: TextStyle(
+            color: AppTheme.dangerFg,
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    ],
+  ],
+);
+
 /// De sponsorvermelding rechtsonder: 'Mogelijk gemaakt door' met het thema-
 /// bewuste Vigilis-merk. Klein en gedempt — het is een credit, geen actie.
 /// Begrensd op een bescheiden breedte zodat het label bij 200% tekst netjes

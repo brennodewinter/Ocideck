@@ -1671,6 +1671,7 @@ const _dutchSourceAddHu = <String, String>{
   'Vraag {nummer}': '{number}. kérdés',
   'Uw antwoord': 'A válaszod',
   'Antwoord indienen': 'Válasz elküldése',
+  'Geen verbinding': 'Nincs kapcsolat',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ekkor többé nem oszt meg hitelesítő adatokat ebből a tárcából. ',
   'U hebt nog geen badges.': 'Még nincsenek jelvényei.',

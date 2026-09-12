@@ -4603,13 +4603,25 @@ resultatenlaag, dan krijgt die nieuwe sleutels in een nieuw bestand.
 
 ### Een cursus via eLearning volgen
 
-De eLearning-integratie staat los van de auteursmodule en staat standaard uit.
-Open in de desktop-app **Instellingen → Integraties → eLearning**, zet haar aan,
-vul het HTTPS-adres van je organisatie in en meld je via de systeembrowser aan.
+De eLearning-uitbreiding staat standaard uit. Zet haar aan onder **Instellingen
+→ Uitbreidingen → eLearning** en configureer daarna onder **Integraties →
+eLearning** het HTTPS-adres van je organisatie. Als de uitbreiding uitstaat,
+verschijnen **Inloggen**, **Mijn cursussen** en een eventuele verbindingsmelding
+niet op het welkomstscherm; bewaarde serverinstellingen blijven wel behouden.
+Meld je via de systeembrowser aan.
 OciDeck kan de aanmelding onthouden met een roterend vernieuwtoken in de
 sleutelbos van het besturingssysteem; schakel je dat uit, dan blijft het token
 alleen tijdens deze appsessie bestaan. De browserversie kan dit geheim niet
 veilig bewaren en biedt aanmelden bij eLearning daarom niet aan.
+
+Bij een aanmeldpoging probeert OciDeck eerst het ingestelde adres en daarna
+dezelfde server op alle bekende OciServe-poorten: 8443, 1428, 8080 en de
+standaard HTTPS-poort 443. De werkende URL wordt bewaard. Pas wanneer geen van
+die adressen antwoordt, staat bij **Inloggen** of **Mijn cursussen** de badge
+**Geen verbinding**. De knop blijft beschikbaar om het opnieuw te proberen; de
+foutmelding eronder noemt ook de herstelactie. Een mislukte sessieherstelling
+terwijl de server wel bereikbaar is, krijgt deze badge niet. De badge zelf doet
+geen periodieke netwerkverzoeken.
 
 Pas nadat `/me` je account en actieve organisatielidmaatschap heeft bevestigd,
 verschijnt onderaan **Nieuw tabblad** de knop **Mijn cursussen**. Die opent je

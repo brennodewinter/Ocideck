@@ -1685,6 +1685,7 @@ const _dutchSourceAddRo = <String, String>{
   'Vraag {nummer}': 'Întrebare {număr}',
   'Uw antwoord': 'Răspunsul tău',
   'Antwoord indienen': 'Trimiteți răspunsul',
+  'Geen verbinding': 'Fără conexiune',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Nu mai partajați credențiale din acest portofoliu. ',
   'U hebt nog geen badges.': 'Nu aveți încă insigne.',

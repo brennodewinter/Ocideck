@@ -403,6 +403,63 @@ void main() {
     expect(api.discoveries, 1);
   });
 
+  test('remembered login checks known ports before showing offline', () async {
+    final settings = _settings.copyWith(baseUrl: 'https://localhost:9999');
+    final installation = OciServeInstallation(
+      clientId: 'desktop',
+      issuer: Uri.parse('https://localhost'),
+    );
+    final oidc = OciServeOidcConfiguration(
+      issuer: Uri.parse('https://localhost'),
+      authorizationEndpoint: Uri.parse('https://localhost/authorize'),
+      tokenEndpoint: Uri.parse('https://localhost/token'),
+      jwksUri: Uri.parse('https://localhost/jwks'),
+      metadata: const {},
+      signingAlgorithms: const ['RS256'],
+    );
+    api.installationValue = installation;
+    api.oidcValue = oidc;
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(settings.toJson()),
+    });
+    await secrets.writeOciServeRefreshToken(
+      settings.baseUrl,
+      jsonEncode({
+        'version': 1,
+        'refresh_token': 'refresh',
+        'issuer': oidc.issuer.toString(),
+        'client_id': installation.clientId,
+        'token_endpoint': oidc.tokenEndpoint.toString(),
+      }),
+    );
+    final attempts = <String>[];
+    final container = _container(
+      api,
+      secrets,
+      gatewayFactory: (candidate) {
+        attempts.add(candidate.normalizedBaseUrl);
+        if (candidate.normalizedBaseUrl != 'https://localhost') {
+          throw const OciServeException('connection_failed');
+        }
+        return api;
+      },
+    );
+    addTearDown(container.dispose);
+
+    container.read(ociServeProvider);
+    await Future<void>.delayed(const Duration(milliseconds: 30));
+
+    expect(attempts, [
+      'https://localhost:9999',
+      'https://localhost:8443',
+      'https://localhost:1428',
+      'https://localhost:8080',
+      'https://localhost',
+    ]);
+    expect(container.read(ociServeProvider).authenticated, isTrue);
+    expect(container.read(ociServeProvider).serverUnavailable, isFalse);
+  });
+
   test('login tries known ports and stores the working address', () async {
     final attempts = <String>[];
     api.installationValue = OciServeInstallation(
@@ -445,6 +502,69 @@ void main() {
       jsonDecode(prefs.getString(kOciServeSettingsKey)!)['baseUrl'],
       'https://localhost:8443',
     );
+  });
+
+  test('login tries every known port before reporting no connection', () async {
+    final attempts = <String>[];
+    final container = _container(
+      api,
+      secrets,
+      gatewayFactory: (settings) {
+        attempts.add(settings.normalizedBaseUrl);
+        throw const OciServeException('connection_failed');
+      },
+    );
+    addTearDown(container.dispose);
+    final notifier = container.read(ociServeProvider.notifier);
+    await notifier.saveSettings(
+      _settings.copyWith(baseUrl: 'https://localhost:9999'),
+    );
+
+    expect(await notifier.login(), isFalse);
+    expect(attempts, [
+      'https://localhost:9999',
+      'https://localhost:8443',
+      'https://localhost:1428',
+      'https://localhost:8080',
+      'https://localhost',
+    ]);
+    expect(container.read(ociServeProvider).serverUnavailable, isTrue);
+  });
+
+  test('the last known port can recover a wrong configured port', () async {
+    final attempts = <String>[];
+    api.installationValue = OciServeInstallation(
+      clientId: 'desktop',
+      issuer: Uri.parse('https://localhost'),
+    );
+    api.oidcValue = OciServeOidcConfiguration(
+      issuer: Uri.parse('https://localhost'),
+      authorizationEndpoint: Uri.parse('https://localhost/authorize'),
+      tokenEndpoint: Uri.parse('https://localhost/token'),
+      jwksUri: Uri.parse('https://localhost/jwks'),
+      metadata: const {},
+      signingAlgorithms: const ['RS256'],
+    );
+    final container = _container(
+      api,
+      secrets,
+      gatewayFactory: (settings) {
+        attempts.add(settings.normalizedBaseUrl);
+        if (settings.normalizedBaseUrl != 'https://localhost') {
+          throw const OciServeException('connection_failed');
+        }
+        return api;
+      },
+    );
+    addTearDown(container.dispose);
+    final notifier = container.read(ociServeProvider.notifier);
+    await notifier.saveSettings(
+      _settings.copyWith(baseUrl: 'https://localhost:9999'),
+    );
+
+    expect(await notifier.login(), isTrue);
+    expect(attempts.last, 'https://localhost');
+    expect(container.read(ociServeProvider).serverUnavailable, isFalse);
   });
 
   test(
@@ -536,7 +656,8 @@ void main() {
       container.read(ociServeProvider);
       await Future<void>.delayed(const Duration(milliseconds: 20));
 
-      expect(container.read(ociServeProvider).errorCode, 'restore_failed');
+      expect(container.read(ociServeProvider).errorCode, 'connection_failed');
+      expect(container.read(ociServeProvider).serverUnavailable, isTrue);
       online = true;
 
       expect(await container.read(ociServeProvider.notifier).login(), isTrue);
@@ -830,6 +951,7 @@ void main() {
 
     expect(auth.refreshes, 0);
     expect(container.read(ociServeProvider).errorCode, 'restore_failed');
+    expect(container.read(ociServeProvider).serverUnavailable, isFalse);
     expect(container.read(ociServeProvider).authenticated, isFalse);
   });
 

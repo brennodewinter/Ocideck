@@ -1668,6 +1668,7 @@ const _dutchSourceAddSv = <String, String>{
   'Vraag {nummer}': 'Fråga {nummer}',
   'Uw antwoord': 'Ditt svar',
   'Antwoord indienen': 'Skicka svar',
+  'Geen verbinding': 'Ingen anslutning',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Du delar då inte längre inloggningsuppgifter från denna portfölj. ',
   'U hebt nog geen badges.': 'Du har inga märken ännu.',

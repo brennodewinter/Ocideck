@@ -1676,6 +1676,7 @@ const _dutchSourceAddLt = <String, String>{
   'Vraag {nummer}': 'Klausimas {number}',
   'Uw antwoord': 'Jūsų atsakymas',
   'Antwoord indienen': 'Pateikti atsakymą',
+  'Geen verbinding': 'Nėra ryšio',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Tuomet nebesidalysite šios dėklės kredencialais. ',
   'U hebt nog geen badges.': 'Kol kas neturite jokių ženklelių.',

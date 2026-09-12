@@ -707,6 +707,7 @@ const _dutchSourceAddEs = {
   'Vraag {nummer}': 'Pregunta {número}',
   'Uw antwoord': 'tu respuesta',
   'Antwoord indienen': 'Enviar respuesta',
+  'Geen verbinding': 'Sin conexión',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Entonces ya no compartirá credenciales desde esta cartera. ',
   'U hebt nog geen badges.': 'Aún no tiene insignias.',

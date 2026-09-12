@@ -306,32 +306,7 @@ class _WelcomeScreen extends ConsumerWidget {
       const SizedBox(height: 24),
       Divider(color: scheme.outlineVariant),
       const SizedBox(height: 16),
-      // Wie via OciServe binnenkomt, komt terug voor de eigen opleiding. Zet
-      // die persoonlijke ingang vóór de algemene open- en importacties.
-      if (ref.watch(ociServeProvider).settings.enabled) ...[
-        _wideSecondaryButton(
-          style: secondaryStyle,
-          icon: Icons.school_outlined,
-          label: Text(
-            ref.watch(ociServeAuthenticatedProvider)
-                ? l10n.d('Mijn cursussen')
-                : l10n.d('Inloggen'),
-          ),
-          onPressed: () => _openOciServe(context, ref),
-        ),
-        const SizedBox(height: 10),
-      ],
-      if (ref.watch(ociServeProvider).settings.enabled &&
-          ref.watch(ociServeProvider).errorCode != null) ...[
-        Text(
-          l10n.d(
-            'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.',
-          ),
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 12, color: scheme.error),
-        ),
-        const SizedBox(height: 10),
-      ],
+      ..._elearningEntry(context, ref, l10n, scheme, secondaryStyle),
       _wideSecondaryButton(
         style: secondaryStyle,
         icon: Icons.folder_open_outlined,
@@ -401,6 +376,47 @@ class _WelcomeScreen extends ConsumerWidget {
       // heeft.
       ..._imageLibraryButton(context, ref, l10n),
       const SizedBox(height: 4),
+    ];
+  }
+
+  List<Widget> _elearningEntry(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    ColorScheme scheme,
+    ButtonStyle secondaryStyle,
+  ) {
+    final ociServeState = ref.watch(ociServeProvider);
+    // Bewaarde serverinstellingen mogen de hoofdschakelaar voor de uitbreiding
+    // niet omzeilen.
+    if (!ref.watch(elearningEnabledProvider) ||
+        !ociServeState.settings.enabled) {
+      return const [];
+    }
+    return [
+      _wideSecondaryButton(
+        style: secondaryStyle,
+        icon: Icons.school_outlined,
+        label: _ociServeWelcomeLabel(
+          label: ref.watch(ociServeAuthenticatedProvider)
+              ? l10n.d('Mijn cursussen')
+              : l10n.d('Inloggen'),
+          unavailable: ociServeState.serverUnavailable,
+          unavailableLabel: l10n.d('Geen verbinding'),
+        ),
+        onPressed: () => _openOciServe(context, ref),
+      ),
+      const SizedBox(height: 10),
+      if (ociServeState.errorCode != null) ...[
+        Text(
+          l10n.d(
+            'Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.',
+          ),
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 12, color: scheme.error),
+        ),
+        const SizedBox(height: 10),
+      ],
     ];
   }
 

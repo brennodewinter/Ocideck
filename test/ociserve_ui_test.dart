@@ -13,6 +13,7 @@ import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_exam.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/playback.dart';
+import 'package:ocideck/state/elearning_provider.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
@@ -312,13 +313,17 @@ _FixedOciServeNotifier _lessonNotifier({bool? completed}) =>
 
 Future<ProviderContainer> _pumpApp(
   WidgetTester tester,
-  _FixedOciServeNotifier notifier,
-) async {
+  _FixedOciServeNotifier notifier, {
+  bool elearningEnabled = true,
+}) async {
   await tester.binding.setSurfaceSize(const Size(1200, 900));
   addTearDown(() => tester.binding.setSurfaceSize(null));
   await tester.pumpWidget(
     ProviderScope(
-      overrides: [ociServeProvider.overrideWith(() => notifier)],
+      overrides: [
+        ociServeProvider.overrideWith(() => notifier),
+        elearningEnabledProvider.overrideWithValue(elearningEnabled),
+      ],
       child: const OciDeckApp(),
     ),
   );
@@ -511,12 +516,13 @@ void main() {
       const OciServeState(
         settings: OciServeSettings(enabled: true),
         status: OciServeStatus.signedOut,
-        errorCode: 'restore_failed',
+        errorCode: 'connection_failed',
       ),
     );
     await _pumpApp(tester, notifier);
 
     expect(find.text('Inloggen'), findsOneWidget);
+    expect(find.text('Geen verbinding'), findsOneWidget);
     expect(
       find.textContaining('Aanmelden bij eLearning is niet gelukt'),
       findsOneWidget,
@@ -524,7 +530,46 @@ void main() {
     await tester.tap(find.text('Inloggen'));
     await tester.pumpAndSettle();
     expect(notifier.loginCalled, isTrue);
+    expect(find.text('Geen verbinding'), findsNothing);
     expect(find.text('Mijn leeromgeving'), findsOneWidget);
+  });
+
+  testWidgets('welkomstscherm verbergt eLearning als de uitbreiding uitstaat', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated.copyWith(errorCode: 'connection_failed'),
+      ),
+      elearningEnabled: false,
+    );
+
+    expect(find.text('Inloggen'), findsNothing);
+    expect(find.text('Mijn cursussen'), findsNothing);
+    expect(find.text('Geen verbinding'), findsNothing);
+    expect(
+      find.textContaining('Aanmelden bij eLearning is niet gelukt'),
+      findsNothing,
+    );
+  });
+
+  testWidgets('een aanmeldfout wordt niet als verbindingsfout aangeduid', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        const OciServeState(
+          settings: OciServeSettings(enabled: true),
+          status: OciServeStatus.signedOut,
+          errorCode: 'no_active_membership',
+        ),
+      ),
+    );
+
+    expect(find.text('Inloggen'), findsOneWidget);
+    expect(find.text('Geen verbinding'), findsNothing);
   });
 
   testWidgets('mislukte login houdt een concrete herstelactie zichtbaar', (

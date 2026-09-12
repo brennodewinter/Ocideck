@@ -710,6 +710,7 @@ const _dutchSourceAddFr = {
   'Vraag {nummer}': 'Question {numéro}',
   'Uw antwoord': 'Votre réponse',
   'Antwoord indienen': 'Soumettre la réponse',
+  'Geen verbinding': 'Aucune connexion',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Vous ne partagerez alors plus d’identifiants depuis ce portefeuille. ',
   'U hebt nog geen badges.': 'Vous n’avez pas encore de badges.',

@@ -1695,6 +1695,7 @@ const _dutchSourceAddEl = <String, String>{
   'Vraag {nummer}': 'Ερώτηση {αριθμός}',
   'Uw antwoord': 'Η απάντησή σας',
   'Antwoord indienen': 'Υποβολή απάντησης',
+  'Geen verbinding': 'Χωρίς σύνδεση',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Τότε δεν κοινοποιείτε πλέον διαπιστευτήρια από αυτό το χαρτοφυλάκιο. ',
   'U hebt nog geen badges.': 'Δεν έχετε ακόμη σήματα.',

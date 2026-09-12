@@ -1667,6 +1667,7 @@ const _dutchSourceAddLv = <String, String>{
   'Vraag {nummer}': 'Jautājums {number}',
   'Uw antwoord': 'Jūsu atbilde',
   'Antwoord indienen': 'Iesniegt atbildi',
+  'Geen verbinding': 'Nav savienojuma',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Jūs vairs nekopīgosiet apliecinājumus no šī digitālā maka. ',
   'U hebt nog geen badges.': 'Jums vēl nav nozīmīšu.',

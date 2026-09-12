@@ -1669,6 +1669,7 @@ const _dutchSourceAddSl = <String, String>{
   'Vraag {nummer}': 'Vprašanje {number}',
   'Uw antwoord': 'Vaš odgovor',
   'Antwoord indienen': 'Oddaj odgovor',
+  'Geen verbinding': 'Ni povezave',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Iz tega portfelja ne delite več poverilnic. ',
   'U hebt nog geen badges.': 'Značk še nimate.',

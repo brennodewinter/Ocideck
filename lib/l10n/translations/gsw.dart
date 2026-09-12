@@ -1673,6 +1673,7 @@ const _dutchSourceAddGsw = <String, String>{
   'Vraag {nummer}': 'Frage {Nummer}',
   'Uw antwoord': 'Ihre Antwort',
   'Antwoord indienen': 'Antwort abschicken',
+  'Geen verbinding': 'Kei Verbindig',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Dann teilen Sie keine Nachweise mehr aus dieser Brieftasche. ',
   'U hebt nog geen badges.': 'Sie haben noch keine Abzeichen.',

@@ -2586,6 +2586,7 @@ const _dutchSourceAddTr = <String, String>{
   'Vraag {nummer}': 'Soru {numarası}',
   'Uw antwoord': 'Cevabınız',
   'Antwoord indienen': 'Cevabı gönder',
+  'Geen verbinding': 'Bağlantı yok',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Bu cüzdandaki kimlik bilgilerini artık paylaşmayacaksınız. ',
   'U hebt nog geen badges.': 'Henüz rozetiniz yok.',

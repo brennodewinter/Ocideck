@@ -1669,6 +1669,7 @@ const _dutchSourceAddFi = <String, String>{
   'Vraag {nummer}': 'Kysymys {number}',
   'Uw antwoord': 'Sinun vastauksesi',
   'Antwoord indienen': 'Lähetä vastaus',
+  'Geen verbinding': 'Ei yhteyttä',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Et enää jaa tunnistetietoja tästä lompakosta. ',
   'U hebt nog geen badges.': 'Sinulla ei ole vielä tunnuksia.',
