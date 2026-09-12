@@ -7404,7 +7404,7 @@ components:
         earliest_release_at: { type: string, format: date-time }
         latest_admission_at: { type: string, format: date-time }
         absolute_deadline_at: { type: string, format: date-time }
-        examiner_account_ids: { type: array, uniqueItems: true, items: { type: string, format: uuid } }
+        examiner_account_ids: { type: array, minItems: 1, uniqueItems: true, items: { type: string, format: uuid } }
         participant_ids: { type: array, minItems: 1, uniqueItems: true, items: { type: string, format: uuid } }
     ExamSession:
       type: object
@@ -7415,7 +7415,7 @@ components:
         organization_id: { type: string, format: uuid }
         blueprint_version_id: { type: string, format: uuid }
         course_offering_id: { type: string, format: uuid }
-        status: { type: string, enum: [draft, scheduled, armed, released, closed, cancelled] }
+        status: { type: string, enum: [draft, scheduled, armed, released, release_missed, closed, cancelled] }
         scheduled_start: { type: string, format: date-time }
         earliest_release_at: { type: string, format: date-time }
         latest_admission_at: { type: string, format: date-time }
@@ -7515,9 +7515,7 @@ components:
         attempt_item_id: { type: string, format: uuid }
         position: { type: integer, minimum: 0 }
         content:
-          type: object
-          additionalProperties: true
-          description: Participant-safe item presentation. For choice interactions, options contains objects with opaque id and display text; it never contains correctness or the answer model.
+          $ref: '#/components/schemas/ExamParticipantContent'
         option_order:
           type: array
           items: { type: string }
@@ -7526,6 +7524,37 @@ components:
         revision: { type: integer, minimum: 0 }
         challenge: { type: string, pattern: '^[A-Za-z0-9_-]+$' }
         challenge_expires_at: { type: string, format: date-time }
+    ExamParticipantContent:
+      type: object
+      additionalProperties: false
+      description: Closed participant presentation allowlist; unknown fields are rejected at authoring time.
+      properties:
+        question: { type: string }
+        prompt: { type: string }
+        instruction: { type: string }
+        instructions: { type: string }
+        stimulus: { type: string }
+        options:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              id: { type: string }
+              text: { type: string }
+              label: { type: string }
+              asset_hash: { type: string, pattern: '^[0-9a-f]{64}$' }
+              image_alt: { type: string }
+        media:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              asset_hash: { type: string, pattern: '^[0-9a-f]{64}$' }
+              alt: { type: string }
+              caption: { type: string }
+              type: { type: string }
     ExamAnswerRequest:
       type: object
       additionalProperties: false

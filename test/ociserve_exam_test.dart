@@ -30,6 +30,16 @@ void main() {
     expect(item.revision, 3);
   });
 
+  test('refuses an unknown answer-like field outside the closed allowlist', () {
+    final content = Map<String, Object?>.from(_itemJson()['content']! as Map)
+      ..['answerKey'] = 'a';
+
+    expect(
+      () => OciServeCurrentExamItem.fromJson(_itemJson(content: content)),
+      throwsFormatException,
+    );
+  });
+
   for (final forbidden in [
     'correct_option_id',
     'answer_model',

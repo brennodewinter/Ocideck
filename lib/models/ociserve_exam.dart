@@ -1,24 +1,14 @@
 import 'package:flutter/foundation.dart';
 
-const _forbiddenExamContentFields = {
-  'acceptedanswer',
-  'acceptedanswers',
-  'answer',
-  'answermodel',
-  'correct',
-  'correctanswer',
-  'correctanswers',
-  'correctoptionid',
-  'correctoptionids',
-  'correctorder',
-  'correctness',
-  'iscorrect',
-  'randomizationcontext',
-  'rubric',
-  'score',
-  'scoring',
-  'solution',
+const _examTextFields = {
+  'question',
+  'prompt',
+  'instruction',
+  'instructions',
+  'stimulus',
 };
+const _examOptionFields = {'id', 'text', 'label', 'asset_hash', 'image_alt'};
+const _examMediaFields = {'asset_hash', 'alt', 'caption', 'type'};
 
 @immutable
 class OciServeExamSession {
@@ -235,7 +225,7 @@ class OciServeCurrentExamItem {
         challengeExpiry == null ||
         rawContent is! Map ||
         rawOrder is! List ||
-        _containsForbiddenContent(rawContent)) {
+        !_validExamContent(rawContent)) {
       throw const FormatException('invalid current exam item');
     }
     final content = Map<String, Object?>.from(rawContent);
@@ -419,25 +409,32 @@ DateTime? _optionalDate(Map<String, Object?> json, String key) {
   return value.toUtc();
 }
 
-bool _containsForbiddenContent(Object? value) {
-  final pending = <Object?>[value];
-  while (pending.isNotEmpty) {
-    final current = pending.removeLast();
-    if (current is List) {
-      pending.addAll(current);
+bool _validExamContent(Map<Object?, Object?> content) {
+  for (final entry in content.entries) {
+    final key = entry.key;
+    if (key is! String) return false;
+    if (_examTextFields.contains(key)) {
+      if (entry.value is! String) return false;
       continue;
     }
-    if (current is Map) {
-      for (final entry in current.entries) {
-        final normalized = '${entry.key}'
-            .replaceAll(RegExp('[^a-zA-Z]'), '')
-            .toLowerCase();
-        if (_forbiddenExamContentFields.contains(normalized)) return true;
-        pending.add(entry.value);
+    final allowed = switch (key) {
+      'options' => _examOptionFields,
+      'media' => _examMediaFields,
+      _ => null,
+    };
+    if (allowed == null || entry.value is! List) return false;
+    for (final value in entry.value! as List) {
+      if (value is! Map) return false;
+      for (final field in value.entries) {
+        if (field.key is! String ||
+            !allowed.contains(field.key) ||
+            field.value is! String) {
+          return false;
+        }
       }
     }
   }
-  return false;
+  return true;
 }
 
 bool _validStoredAnswer(Map<Object?, Object?> answer) {
