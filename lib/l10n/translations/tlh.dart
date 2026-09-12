@@ -1611,7 +1611,7 @@ const _dutchSourceAddTlh = <String, String>{
   'De examenhandeling is niet gelukt.': 'wa ta\' Qapbe\'.',
   'Menselijk toezicht bij examens': 'waDaq nuv qon',
   'OciDeck stelt niet vast wie achter het toetsenbord zit. Organiseer daarom menselijk toezicht tijdens het examen.':
-      'OciDeckDaq ghItlhwI\'Daq nuv \"Iv\" QublaHbe\'. waDaq nuv qon.',
+      'OciDeckDaq ghItlhwI\'Daq nuv "Iv" QublaHbe\'. waDaq nuv qon.',
   'Er zijn geen examens beschikbaar.': 'wamey tu\'lu\'be\'.',
   'Examen': 'wa\'',
   'Start examen': 'wa tagh',
