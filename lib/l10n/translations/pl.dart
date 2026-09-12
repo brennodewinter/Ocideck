@@ -1683,6 +1683,7 @@ const _dutchSourceAddPl = <String, String>{
   'Vraag {nummer}': 'Pytanie {numer}',
   'Uw antwoord': 'Twoja odpowiedź',
   'Antwoord indienen': 'Prześlij odpowiedź',
+  'Geen verbinding': 'Brak połączenia',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Nie udostępniasz już poświadczeń z tego portfolio. ',
   'U hebt nog geen badges.': 'Nie masz jeszcze odznak.',

@@ -79,6 +79,7 @@ import '../state/collab_session_provider.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/document_provider.dart';
+import '../state/elearning_provider.dart';
 import 'document_editor_screen.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/image_privacy_provider.dart';

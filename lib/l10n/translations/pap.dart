@@ -709,6 +709,7 @@ const _dutchSourceAddPap = {
   'Vraag {nummer}': 'Pregunta {number}',
   'Uw antwoord': 'Bo kontesta',
   'Antwoord indienen': 'Entregá kontesta',
+  'Geen verbinding': 'Sin konekshon',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'E ora ei bo no ta kompartí kredensialnan mas for di e portafolio aki. ',
   'U hebt nog geen badges.': 'Bo ainda no tin ningun badge.',

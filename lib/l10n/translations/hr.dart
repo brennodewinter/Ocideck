@@ -1673,6 +1673,7 @@ const _dutchSourceAddHr = <String, String>{
   'Vraag {nummer}': 'Pitanje {number}',
   'Uw antwoord': 'Vaš odgovor',
   'Antwoord indienen': 'Pošalji odgovor',
+  'Geen verbinding': 'Nema veze',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Više nećete dijeliti vjerodajnice iz ovog novčanika. ',
   'U hebt nog geen badges.': 'Još nemate znački.',

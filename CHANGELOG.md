@@ -2566,6 +2566,15 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **eLearning toont een verbindingsstoring op de plek waar de cursist verder
+  wil.** Na een mislukte serverpoging staat **Geen verbinding** als passieve
+  badge naast **Inloggen** of **Mijn cursussen**. De bestaande knop blijft de
+  herstelactie en de badge veroorzaakt geen achtergrondverkeer. De melding
+  verschijnt pas nadat de ingestelde poort en alle bekende OciServe-poorten
+  (8443, 1428, 8080 en 443) zijn geprobeerd; de werkende URL wordt onthouden en
+  een losse fout bij sessieherstel wordt niet als ontbrekende verbinding getoond.
+  Staat de eLearning-uitbreiding uit, dan blijven de cursusknop, aanmeldknop en
+  verbindingsmelding verborgen, ook als een eerdere serverconfiguratie bewaard is.
 - **Linux-crash op Wayland opgelost: Impeller uitgeschakeld in de Linux-runner
   (#2058).** Flutter 3.47 zet Impeller op Linux standaard aan, maar
   Impeller's EGL-context botst met GTK3's eigen GL-context op Wayland

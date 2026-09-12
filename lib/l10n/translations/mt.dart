@@ -1687,6 +1687,7 @@ const _dutchSourceAddMt = <String, String>{
   'Vraag {nummer}': 'Mistoqsija {numru}',
   'Uw antwoord': 'It-tweġiba tiegħek',
   'Antwoord indienen': 'Ibgħat tweġiba',
+  'Geen verbinding': 'Ebda konnessjoni',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ma tibqax taqsam kredenzjali minn dan il-portafoll. ',
   'U hebt nog geen badges.': 'Għad m’għandek l-ebda badge.',

@@ -4504,13 +4504,24 @@ wrote there. If a results layer is ever built it gets new keys in a new file.
 
 ### Following a course through eLearning
 
-The eLearning integration is separate from the authoring module and is off by
-default. On the desktop app, open **Settings → Integraties → eLearning**, enable
-it, enter the HTTPS address supplied by your organisation and sign in in the
-system browser. OciDeck can remember the login with a rotating refresh token in
+The eLearning extension is off by default. Enable it under **Settings →
+Uitbreidingen → eLearning**, then configure the HTTPS address supplied by your
+organisation under **Integraties → eLearning**. When the extension is off,
+**Sign in**, **My courses** and any connection warning stay off the welcome
+screen; stored server settings are retained. Sign in in the system browser.
+OciDeck can remember the login with a rotating refresh token in
 the operating-system keychain; switching that option off keeps the token only for
 the current app session. The browser build cannot store this credential safely
 and therefore does not offer eLearning login.
+
+During a sign-in attempt, OciDeck tries the configured address first and then
+the same server on every known OciServe port: 8443, 1428, 8080 and the standard
+HTTPS port 443. It stores the working URL. A **No connection** badge appears
+beside **Sign in** or **My courses** only when none of those addresses responds.
+The button remains available for retrying, and the message below it also states
+the recovery action. A session-restore failure while the server is reachable
+does not receive this badge. The badge itself does not make periodic network
+requests.
 
 Only after `/me` has confirmed your account and active organisation membership
 does **Mijn cursussen** appear at the bottom of **New tab**. It opens your

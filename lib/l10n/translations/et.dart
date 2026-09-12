@@ -1662,6 +1662,7 @@ const _dutchSourceAddEt = <String, String>{
   'Vraag {nummer}': 'Küsimus {number}',
   'Uw antwoord': 'Sinu vastus',
   'Antwoord indienen': 'Esitage vastus',
+  'Geen verbinding': 'Ühendus puudub',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Te ei jaga sellest portfellist enam mandaate. ',
   'U hebt nog geen badges.': 'Teil ei ole veel märke.',

@@ -1670,6 +1670,7 @@ const _dutchSourceAddDa = <String, String>{
   'Vraag {nummer}': 'Spørgsmål {nummer}',
   'Uw antwoord': 'Dit svar',
   'Antwoord indienen': 'Send svar',
+  'Geen verbinding': 'Ingen forbindelse',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Du deler derefter ikke længere legitimationsoplysninger fra denne tegnebog. ',
   'U hebt nog geen badges.': 'Du har endnu ingen badges.',

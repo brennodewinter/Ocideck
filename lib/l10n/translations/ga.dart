@@ -1700,6 +1700,7 @@ const _dutchSourceAddGa = <String, String>{
   'Vraag {nummer}': 'Ceist {uimhir}',
   'Uw antwoord': 'Do fhreagra',
   'Antwoord indienen': 'Cuir freagra isteach',
+  'Geen verbinding': 'Gan nasc',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Ní roinneann tú dintiúir ón bpunann seo a thuilleadh. ',
   'U hebt nog geen badges.': 'Níl aon suaitheantas agat fós.',

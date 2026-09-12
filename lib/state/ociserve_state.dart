@@ -62,6 +62,12 @@ class OciServeState {
       status == OciServeStatus.authenticated &&
       account != null;
 
+  /// De server was bij de laatste expliciete verbindingspoging niet bereikbaar.
+  /// Andere aanmeldfouten krijgen geen netwerklabel: een geweigerd account is
+  /// iets anders dan een ontbrekende verbinding en vraagt een andere oplossing.
+  bool get serverUnavailable =>
+      const {'connection_failed', 'network', 'timeout'}.contains(errorCode);
+
   bool get loading => status == OciServeStatus.loading;
   bool get authenticating => status == OciServeStatus.authenticating;
   List<OciServeMembership> get memberships =>

@@ -1,0 +1,37 @@
+{
+  "additions": {
+    "Geen verbinding": {
+      "en": "No connection",
+      "it": "Nessuna connessione",
+      "de": "Keine Verbindung",
+      "fr": "Aucune connexion",
+      "es": "Sin conexión",
+      "fy": "Gjin ferbining",
+      "pap": "Sin konekshon",
+      "la": "Nullus nexus",
+      "id": "Tidak ada koneksi",
+      "pl": "Brak połączenia",
+      "uk": "Немає з’єднання",
+      "gsw": "Kei Verbindig",
+      "el": "Χωρίς σύνδεση",
+      "da": "Ingen forbindelse",
+      "sv": "Ingen anslutning",
+      "hr": "Nema veze",
+      "cs": "Bez připojení",
+      "fi": "Ei yhteyttä",
+      "bg": "Няма връзка",
+      "lv": "Nav savienojuma",
+      "lt": "Nėra ryšio",
+      "mt": "Ebda konnessjoni",
+      "et": "Ühendus puudub",
+      "hu": "Nincs kapcsolat",
+      "ga": "Gan nasc",
+      "pt": "Sem ligação",
+      "ro": "Fără conexiune",
+      "sl": "Ni povezave",
+      "sk": "Bez pripojenia",
+      "tlh": "rarbe'",
+      "tr": "Bağlantı yok"
+    }
+  }
+}

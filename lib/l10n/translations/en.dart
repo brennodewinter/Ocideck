@@ -869,6 +869,7 @@ const _dutchSourceAddEn = {
   'Vraag {nummer}': 'Question {nummer}',
   'Uw antwoord': 'Your answer',
   'Antwoord indienen': 'Submit answer',
+  'Geen verbinding': 'No connection',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'You will no longer share credentials from this portfolio. ',
   'U hebt nog geen badges.': 'You do not have any badges yet.',

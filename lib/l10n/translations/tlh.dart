@@ -1646,6 +1646,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Vraag {nummer}': 'ghel {nummer}',
   'Uw antwoord': 'janglIj',
   'Antwoord indienen': 'jang nob',
+  'Geen verbinding': 'rarbe\'',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'ngugh De\' polwI\'vamvo\' chaw\' De\'mey DalI\'be\'. ',
   'U hebt nog geen badges.': 'wej Deghmey Daghaj.',

@@ -1669,6 +1669,7 @@ const _dutchSourceAddId = <String, String>{
   'Vraag {nummer}': 'Pertanyaan {angka}',
   'Uw antwoord': 'Jawaban Anda',
   'Antwoord indienen': 'Kirimkan jawaban',
+  'Geen verbinding': 'Tidak ada koneksi',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Setelah itu, Anda tidak lagi membagikan kredensial dari dompet ini. ',
   'U hebt nog geen badges.': 'Anda belum memiliki lencana.',

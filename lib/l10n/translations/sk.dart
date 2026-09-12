@@ -1675,6 +1675,7 @@ const _dutchSourceAddSk = <String, String>{
   'Vraag {nummer}': 'otázka {number}',
   'Uw antwoord': 'Vaša odpoveď',
   'Antwoord indienen': 'Odoslať odpoveď',
+  'Geen verbinding': 'Bez pripojenia',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Z tohto portfólia už nezdieľate žiadne poverenia. ',
   'U hebt nog geen badges.': 'Zatiaľ nemáte žiadne odznaky.',

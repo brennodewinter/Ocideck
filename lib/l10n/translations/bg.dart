@@ -1689,6 +1689,7 @@ const _dutchSourceAddBg = <String, String>{
   'Vraag {nummer}': 'Въпрос {номер}',
   'Uw antwoord': 'Вашият отговор',
   'Antwoord indienen': 'Изпратете отговор',
+  'Geen verbinding': 'Няма връзка',
   'U deelt dan geen credentials meer vanuit deze portefeuille. ':
       'Вече няма да споделяте идентификационни данни от този портфейл. ',
   'U hebt nog geen badges.': 'Все още нямате значки.',

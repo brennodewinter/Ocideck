@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 
 const kOciServeSettingsKey = 'ociserveSettingsV1';
 
-/// Common OciServe ports, in the order used by the local development stack.
-const kKnownOciServePorts = [8443, 1428, 8080];
+/// Supported OciServe ports. The development stack uses 8443, 1428 and 8080;
+/// production HTTPS commonly uses the scheme-default port 443.
+const kKnownOciServePorts = [8443, 1428, 8080, 443];
 
 /// Non-secret configuration for the optional OciServe learning connector.
 /// OAuth credentials belong in [SecretStore], never in preferences or decks.
