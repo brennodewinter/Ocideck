@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  c274cbe82eb6ce35aaca5e41be1b86217244c13b
+// OciServe commit:  d6625dd74139cdcdecc051c74b16df57e65cab54
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -14,7 +14,7 @@ import 'package:yaml/yaml.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = 'c274cbe82eb6ce35aaca5e41be1b86217244c13b';
+const pinnedOciServeCommit = 'd6625dd74139cdcdecc051c74b16df57e65cab54';
 
 /// One route the gateway calls, with the response fields OciDeck reads.
 /// Fields are dot-paths into the JSON response (after $ref resolution).
