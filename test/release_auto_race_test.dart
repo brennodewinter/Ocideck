@@ -189,6 +189,97 @@ phase3
     expect(result.exitCode, isNot(0));
   }, skip: skipOnWindows);
 
+  test('herstel wacht op een nieuwe terminale CI-run vóór het tekenen', () {
+    final state = Directory.systemTemp.createTempSync(
+      'ocideck-release-redispatch-',
+    );
+    addTearDown(() => state.deleteSync(recursive: true));
+    final calls = File('${state.path}/calls')..writeAsStringSync('0');
+    final trace = File('${state.path}/trace');
+    final dispatched = File('${state.path}/dispatched');
+
+    final result = runReleaseHarness('''
+CALLS=${calls.path}
+TRACE=${trace.path}
+DISPATCHED=${dispatched.path}
+section() { :; }
+log() { :; }
+sleep() { :; }
+die() { printf '%s\\n' "\$1" >&2; exit 1; }
+make() {
+  [ "\${1:-}" = deploy-web ] && return 0
+  local arg sums=''
+  for arg in "\$@"; do
+    case "\$arg" in SHA256SUMS=*) sums="\${arg#SHA256SUMS=}" ;; esac
+  done
+  [ -n "\$sums" ] || return 1
+  printf 'sign-after-%s\\n' "\$(cat "\$CALLS")" >>"\$TRACE"
+  printf 'signature:manifest-A\\n' >"\$sums.minisig"
+}
+curl() {
+  local out='' url='' previous='' arg
+  for arg in "\$@"; do
+    if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
+    previous="\$arg"; url="\$arg"
+  done
+  [ -f "\$DISPATCHED" ] || return 22
+  case "\$url" in
+    */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;
+    */SHA256SUMS) printf 'manifest-A\\n' >"\$out" ;;
+    *) return 22 ;;
+  esac
+}
+minisign() { return 0; }
+api() {
+  local method="\$1" path="\$2" count
+  case "\$method \$path" in
+    'GET /actions/tasks?limit=25')
+      count=\$(( \$(cat "\$CALLS") + 1 ))
+      printf '%s' "\$count" >"\$CALLS"
+      if [ "\$count" -le 3 ]; then
+        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"}]}'
+      elif [ "\$count" -eq 4 ]; then
+        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"},{"id":202,"head_branch":"v9.9.9","status":"running","name":"Publiceren"}]}'
+      else
+        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"},{"id":202,"head_branch":"v9.9.9","status":"success","name":"Publiceren"}]}'
+      fi
+      ;;
+    'POST /actions/workflows/release.yml/dispatches')
+      printf 'dispatch\\n' >>"\$TRACE"
+      : >"\$DISPATCHED"
+      printf '%s\\n' '{}'
+      ;;
+    'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
+    'GET /releases/41/assets') printf '%s\\n' '[]' ;;
+    POST*) printf '%s\\n' '{"id":42}' ;;
+    *) printf '%s\\n' '{}' ;;
+  esac
+}
+phase3
+''');
+
+    final events = trace.existsSync() ? trace.readAsLinesSync() : <String>[];
+    expect(
+      events.where((event) => event == 'dispatch').length,
+      1,
+      reason: 'een terminale mislukking krijgt exact één herstel-dispatch.',
+    );
+    final signEvents = events
+        .where((event) => event.startsWith('sign-after-'))
+        .toList();
+    expect(signEvents, hasLength(1));
+    final pollsAtSigning = int.parse(signEvents.single.split('-').last);
+    expect(
+      pollsAtSigning,
+      greaterThanOrEqualTo(5),
+      reason:
+          'de oude terminale task 101 bewijst niet dat de herdispatch klaar '
+          'is. Fase 3 moet eerst task 202 zien en terminaal afwachten.\n'
+          'stdout: ${result.stdout}\nstderr: ${result.stderr}',
+    );
+    expect(result.exitCode, 0);
+  }, skip: skipOnWindows);
+
   test('fase 3 wijst een na tekenen vervangen publiek manifest af', () {
     final trace = File(
       '${Directory.systemTemp.path}/ocideck-release-verify-$pid.log',
