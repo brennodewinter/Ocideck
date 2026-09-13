@@ -21,6 +21,7 @@ All notable changes to OciDeck are documented in this file.
   presentatie-specifieke vensterbediening op te geven.
 ### Fixed
 
+- PowerPoint-import behoudt nu beelden uit dia-indelingen en diamodellen, zet tekstgerichte EMF-beelden zichtbaar om en herkent een compact hoeklogo in een brede merkstrook met de juiste grootte en bronstijl.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

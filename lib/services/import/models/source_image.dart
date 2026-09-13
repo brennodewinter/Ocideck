@@ -2,6 +2,8 @@ import 'dart:typed_data';
 
 import '../../../utils/content_hash.dart';
 
+enum SourceImageRole { content, background, decoration }
+
 /// A normalised image extracted from a source presentation.
 ///
 /// Identity is content-based: [sha256] lets the deck builder hand identical
@@ -15,6 +17,7 @@ class SourceImage {
     this.name,
     this.caption,
     this.placement,
+    this.role = SourceImageRole.content,
   });
 
   final Uint8List bytes;
@@ -36,6 +39,14 @@ class SourceImage {
   /// de brondiamaten niet betrouwbaar kennen laten dit veld leeg; onbekende
   /// geometrie mag nooit als bewijs voor een logo gelden.
   final SourceImagePlacement? placement;
+
+  /// De functie die het beeld in de bron had.
+  ///
+  /// Een PowerPoint-layout kan een echte dia-achtergrond dragen, terwijl een
+  /// diamodel een merkvoet op elke dia herhaalt. Dat onderscheid moet vóór de
+  /// classificatie bekend zijn: beide als gewone inhoud behandelen maakt van
+  /// één dia meerdere losse afbeeldingsdia's.
+  final SourceImageRole role;
 
   /// SHA-256 hex digest of [bytes]; the content-based identity for dedup.
   late final String sha256 = sha256Hex(bytes);
@@ -63,4 +74,13 @@ class SourceImagePlacement {
   }
 
   bool get isAtTop => top <= 0.20;
+
+  bool get isFullBleed =>
+      left <= 0.01 && top <= 0.01 && width >= 0.98 && height >= 0.98;
+
+  bool get isWideBrandStripAtVerticalEdge =>
+      width >= 0.50 &&
+      height > 0 &&
+      height <= 0.20 &&
+      (top <= 0.12 || bottom >= 0.88);
 }

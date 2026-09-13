@@ -10,6 +10,8 @@ import 'package:ocideck/services/import/models/source_chart.dart';
 import 'package:ocideck/services/import/models/source_video.dart';
 import 'package:ocideck/utils/image_resize.dart';
 
+import 'helpers/pptx_fixture.dart';
+
 const _a = 'http://schemas.openxmlformats.org/drawingml/2006/main';
 const _p = 'http://schemas.openxmlformats.org/presentationml/2006/main';
 const _r =
@@ -196,6 +198,37 @@ List<int> _zip(Map<String, Object> parts) {
 }
 
 void main() {
+  test(
+    'leest effectieve afbeeldingen uit dia, indeling en model zonder dubbelen',
+    () async {
+      final result = await PptxImporter().importBytes(
+        pptxBrandFixture(),
+        path: 'merkdeck.pptx',
+      );
+
+      expect(result.isOk, isTrue);
+      final deck = result.okValue!;
+      expect(deck.slides, hasLength(3));
+      expect(deck.slides.map((slide) => slide.images.length), [2, 2, 2]);
+      expect(deck.slides[0].images.map((image) => image.name), [
+        'Background',
+        'Brand footer',
+      ]);
+      expect(deck.slides[1].images.map((image) => image.name), [
+        'Content photo',
+        'Brand footer',
+      ]);
+      expect(deck.slides[2].images.map((image) => image.name), [
+        'Background',
+        'Brand footer',
+      ]);
+      expect(deck.theme?.accentColor, '#00A1DB');
+      expect(deck.theme?.textColor, '#000000');
+      expect(deck.theme?.fontFamily, 'Arial');
+      expect(deck.slides.expand((slide) => slide.parseIssues), isEmpty);
+    },
+  );
+
   test('bewaart een kleine afbeelding met genormaliseerde plaatsing', () async {
     const slideWidth = 1000;
     const slideHeight = 500;

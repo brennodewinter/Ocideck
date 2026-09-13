@@ -9,6 +9,7 @@ import '../../models/source_table.dart';
 import '../../pipeline/parse_guard.dart';
 import 'pptx_chart.dart';
 import 'pptx_context.dart';
+import 'pptx_inherited_media.dart';
 import 'pptx_media.dart';
 import 'pptx_shape.dart';
 import 'pptx_table.dart';
@@ -49,6 +50,15 @@ SourceSlide parseSlide(
       slideHeight,
     );
   }
+
+  appendInheritedPictures(
+    context: ctx,
+    slideDocument: doc,
+    slidePath: slidePath,
+    slideIndex: index,
+    images: parts.images,
+    issues: parts.parseIssues,
+  );
 
   // Title slides created without title/subtitle placeholders still carry the
   // title in the biggest, highest non-placeholder text box.

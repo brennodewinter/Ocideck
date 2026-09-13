@@ -1,8 +1,12 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/import/core/result.dart';
 import 'package:ocideck/services/import/deck_builder.dart';
+import 'package:ocideck/services/import/importers/pptx/pptx_importer.dart';
 import 'package:ocideck/services/import/logo_detection.dart';
 import 'package:ocideck/services/import/models/body_block.dart';
 import 'package:ocideck/services/import/models/source_deck.dart';
@@ -12,6 +16,8 @@ import 'package:ocideck/services/import/models/source_theme.dart';
 import 'package:ocideck/services/import/pipeline/slide_classifier.dart';
 import 'package:ocideck/services/import/presentation_import_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
+
+import 'helpers/pptx_fixture.dart';
 
 SourceImage _image(
   List<int> bytes, {
@@ -40,6 +46,96 @@ void main() {
   tearDown(WebAssetStore.clear);
 
   group('detectImportLogoCandidates', () {
+    test(
+      'haalt een compact hoeklogo uit een geerfde brede merkstrook',
+      () async {
+        final imported = await PptxImporter().importBytes(
+          pptxBrandFixture(),
+          path: 'merkdeck.pptx',
+        );
+        expect(imported.isOk, isTrue);
+
+        final candidates = detectImportLogoCandidates(imported.okValue!);
+
+        expect(candidates, hasLength(1));
+        final candidate = candidates.single;
+        expect(candidate.slideIndexes, [0, 1, 2]);
+        expect(candidate.edge, ImportLogoEdge.bottom);
+        expect(candidate.image.placement?.left, closeTo(1000 / 1280, .001));
+        expect(candidate.image.placement?.top, closeTo(630 / 720, .001));
+        expect(candidate.image.placement?.width, closeTo(180 / 1280, .001));
+        expect(candidate.image.placement?.height, closeTo(60 / 720, .001));
+        final decoded = img.decodeImage(candidate.image.bytes);
+        expect(decoded, isNotNull);
+        expect([decoded!.width, decoded.height], [180, 60]);
+
+        final profile = importedLogoProfile(
+          deck: imported.okValue!,
+          candidate: candidate,
+          logoPath: 'mem:merklogo',
+          name: 'Merkstijl',
+        );
+        expect(profile.logoPosition, 'bottom-right');
+        expect(profile.logoSize, 180);
+        expect(profile.logoSize, greaterThan(const ThemeProfile().logoSize));
+        expect(profile.accentColor, '#00A1DB');
+        expect(profile.textColor, '#000000');
+        expect(profile.fontFamily, 'Arial');
+      },
+    );
+
+    test('bouwt omslag, slotbeeld en bronstijl na logobevestiging', () async {
+      final imported = await PptxImporter().importBytes(
+        pptxBrandFixture(),
+        path: 'merkdeck.pptx',
+      );
+      final source = imported.okValue!;
+      final prepared = PreparedImport(
+        const [],
+        source,
+        classifySourceSlides(source.slides),
+        'Merkworkshop',
+        DeckBuilder(),
+      );
+      final candidate = prepared.logoCandidates.single;
+      final profile = importedLogoProfile(
+        deck: source,
+        candidate: candidate,
+        logoPath: 'mem:merklogo',
+        name: 'Merkstijl',
+      );
+
+      final built = prepared.build(
+        logo: ImportLogoResolution(candidate: candidate, profile: profile),
+      );
+
+      expect(built.problemSlides, isEmpty);
+      expect(built.deck.slides.map((slide) => slide.type), [
+        SlideType.title,
+        SlideType.image,
+        SlideType.title,
+      ]);
+      expect(built.deck.slides.first.subtitle, 'Samen aan de slag');
+      expect(
+        built.deck.slides.first.imagePath,
+        startsWith('mem:'),
+        reason: 'de geerfde omslagafbeelding blijft op de titeldia staan',
+      );
+      expect(
+        built.deck.slides.last.imagePath,
+        startsWith('mem:'),
+        reason: 'ook de geerfde slotachtergrond blijft behouden',
+      );
+      expect(built.deck.slides.map((slide) => slide.showLogo), [
+        true,
+        true,
+        true,
+      ]);
+      expect(built.deck.themeProfile.name, 'Merkstijl');
+      expect(built.deck.themeProfile.logoSize, 180);
+      expect(built.deck.themeProfile.logoPosition, 'bottom-right');
+    });
+
     test('vindt hetzelfde kleine randbeeld op twee van vier dia\'s', () {
       const logoBytes = [1, 2, 3, 4];
       final deck = SourceDeck(
