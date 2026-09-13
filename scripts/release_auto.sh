@@ -293,20 +293,17 @@ wait_for_redispatch_registration() {
     sleep 5
   done
   die "de herdispatch voor $TAG is niet als nieuwe Forgejo-taak verschenen — teken niet op basis van de oude terminale taken."
-  return 1
 }
 
 assert_release_ci_terminal() {
   snap="$(release_ci_snapshot || true)"
   if [ -z "$snap" ]; then
     die "geen release-CI-taken voor $TAG gevonden — teken niet zolang de publieke toestand niet bewezen is."
-    return 1
   fi
   local running
   running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
   if [ "$running" -ne 0 ]; then
     die "release-CI voor $TAG is nog actief — wacht tot alle jobs terminaal zijn en hervat daarna met: scripts/release_auto.sh --resume $TAG"
-    return 1
   fi
 }
 
@@ -839,14 +836,12 @@ phase3() {
     # bouwen zou dan zonder bewezen oorzaak een tweede schrijver introduceren.
     if ! printf '%s\n' "$snap" | grep -q '^failure|'; then
       die "release-CI voor $TAG is terminaal en groen, maar SHA256SUMS ontbreekt — dispatch niet automatisch; onderzoek de publiceren-job en hervat daarna."
-      return 1
     fi
     STEP="release-CI opnieuw dispatchen"
     section "Fase 3 — SHA256SUMS ontbreekt; release-CI éénmalig opnieuw dispatchen (#8)"
     local previous_task_ids
     if ! previous_task_ids="$(release_ci_task_ids)" || [ -z "$previous_task_ids" ]; then
       die "kon de bestaande taak-id's voor $TAG niet betrouwbaar vastleggen — dispatch niet zonder bewijs waarmee een nieuwe run herkenbaar is."
-      return 1
     fi
     api POST "/actions/workflows/release.yml/dispatches" -H 'Content-Type: application/json' \
       -d "$(jq -n --arg r "$TAG" '{ref:$r}')" -o /dev/null \
@@ -1136,11 +1131,9 @@ follow_ci() {
   done
   if [ -z "$snap" ]; then
     die "geen release-CI-taken voor $TAG gevonden binnen de wachttijd — fase 3 wordt niet gestart."
-    return 1
   fi
   if [ "$running" -ne 0 ]; then
     die "release-CI voor $TAG is na 60 minuten nog actief — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"
-    return 1
   fi
   if printf '%s\n' "$snap" | grep -q '^failure|'; then
     log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
