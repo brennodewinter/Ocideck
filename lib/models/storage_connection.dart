@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:uuid/uuid.dart';
 
-import '../utils/log.dart';
+import '../utils/json_list_codec.dart';
 import 'git_settings.dart';
 import 's3_settings.dart';
 import 'webdav_settings.dart';
@@ -73,29 +71,16 @@ sealed class StorageConnection {
 
   /// Serialiseer de hele lijst voor het prefs-domein.
   static String encodeList(List<StorageConnection> connections) =>
-      jsonEncode([for (final c in connections) c.toJson()]);
+      encodeJsonList(connections, (c) => c.toJson());
 
   /// Lees de lijst terug. Een onleesbare waarde levert een lege lijst op; losse
   /// onleesbare items vallen weg zonder de rest mee te nemen, want één kapotte
   /// verbinding mag niet alle andere onbereikbaar maken.
-  static List<StorageConnection> decodeList(String? json) {
-    if (json == null || json.isEmpty) return const [];
-    try {
-      final decoded = jsonDecode(json);
-      if (decoded is! List) return const [];
-      return [
-        for (final item in decoded)
-          if (item is Map)
-            ?StorageConnection.fromJson(Map<String, Object?>.from(item)),
-      ];
-    } catch (e) {
-      logWarning(
-        'StorageConnection.decodeList: onleesbare verbindingenlijst',
-        e,
+  static List<StorageConnection> decodeList(String? json) => decodeJsonList(
+        json,
+        StorageConnection.fromJson,
+        label: 'StorageConnection.decodeList',
       );
-      return const [];
-    }
-  }
 
   /// Bouw één verbinding uit JSON, of `null` bij een onbekende soort of een
   /// ontbrekende id — beide betekenen dat we het item niet betrouwbaar kunnen

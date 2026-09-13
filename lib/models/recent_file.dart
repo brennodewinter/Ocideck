@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'deck.dart';
 import 'markdown_kind.dart';
-import '../utils/log.dart';
+import '../utils/json_list_codec.dart';
 
 // [RecentFile.kind] is een [MarkdownKind]; wie een recent bestand leest, leest
 // die soort mee. Her-exporteer het type zodat het bij de klasse hoort (en de
@@ -95,24 +93,16 @@ class RecentFile {
 
   /// Serialiseer een lijst voor het prefs-domein.
   static String encodeList(List<RecentFile> files) =>
-      jsonEncode([for (final f in files) f.toJson()]);
+      encodeJsonList(files, (f) => f.toJson());
 
   /// Lees een lijst terug; een onleesbare waarde levert een lege lijst op
   /// (de recente lijst is comfort, geen data om op te breken).
-  static List<RecentFile> decodeList(String? json) {
-    if (json == null || json.isEmpty) return const [];
-    try {
-      final decoded = jsonDecode(json);
-      if (decoded is! List) return const [];
-      return [
-        for (final item in decoded)
-          if (item is Map) RecentFile.fromJson(Map<String, Object?>.from(item)),
-      ].where((f) => f.path.isNotEmpty).toList();
-    } catch (e) {
-      logWarning('RecentFile.decodeList: onleesbare recente-lijst', e);
-      return const [];
-    }
-  }
+  static List<RecentFile> decodeList(String? json) => decodeJsonList(
+        json,
+        RecentFile.fromJson,
+        keep: (f) => f.path.isNotEmpty,
+        label: 'RecentFile.decodeList',
+      );
 
   /// Migratie van de oude opslagvorm (alleen paden, geen metadata).
   static List<RecentFile> fromLegacyPaths(List<String> paths) => [

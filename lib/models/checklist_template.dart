@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import '../utils/log.dart';
+import '../utils/json_list_codec.dart';
 
 /// One test entry in a reusable [ChecklistTemplate]: a stable [id]
 /// (e.g. `WSTG-ATHN-07` or a custom code), the [title] shown in the checklist,
@@ -93,23 +91,14 @@ class ChecklistTemplate {
 
   /// Serialise a list for the prefs domain.
   static String encodeList(List<ChecklistTemplate> templates) =>
-      jsonEncode([for (final t in templates) t.toJson()]);
+      encodeJsonList(templates, (t) => t.toJson());
 
   /// Read a list back; an unreadable value yields an empty list, and templates
   /// without a name drop out (a nameless template cannot be selected).
-  static List<ChecklistTemplate> decodeList(String? json) {
-    if (json == null || json.isEmpty) return const [];
-    try {
-      final decoded = jsonDecode(json);
-      if (decoded is! List) return const [];
-      return [
-        for (final item in decoded)
-          if (item is Map)
-            ChecklistTemplate.fromJson(Map<String, Object?>.from(item)),
-      ].where((t) => t.name.isNotEmpty).toList();
-    } catch (e) {
-      logWarning('ChecklistTemplate.decodeList: onleesbare sjablonenlijst', e);
-      return const [];
-    }
-  }
+  static List<ChecklistTemplate> decodeList(String? json) => decodeJsonList(
+        json,
+        ChecklistTemplate.fromJson,
+        keep: (t) => t.name.isNotEmpty,
+        label: 'ChecklistTemplate.decodeList',
+      );
 }
