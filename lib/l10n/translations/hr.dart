@@ -1631,6 +1631,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'ugrađena slika stila nije se mogla vratiti',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profil stila izvezen — vlastita slika stila nije se mogla uključiti',
+  'Aanvullende informatie': 'Dodatne informacije',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Na primjer datum, mjesto ili verzija',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Stil se nije mogao trajno spremiti. Traka robne marke koristit će se samo u ovoj prezentaciji.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Dodajte snimke zaslona, videozapise ili PDF datoteke kao dokaze. Svaki dokaz dobiva vlastiti slajd odmah nakon nalaza i uključuje se u izvoz.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4785,8 +4794,6 @@ const _dutchSourceAddHr = <String, String>{
   'Profiel exporteren': 'Izvezi profil',
   'Profiel importeren': 'Uvezi profil',
   'Stijlprofiel geëxporteerd': 'Profil stila izvezen',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profil stila izvezen — vlastiti logotip nije se mogao uključiti',
   'Stijlprofiel exporteren mislukt': 'Izvoz profila stila nije uspio',
   'Stijlprofiel importeren mislukt': 'Uvoz profila stila nije uspio',
   'Stijlprofiel geïmporteerd': 'Profil stila uvezen',
@@ -4798,8 +4805,6 @@ const _dutchSourceAddHr = <String, String>{
       'Ovaj profil stila potječe iz novije verzije OciDecka',
   'die naam bestond al, bewaard als':
       'taj naziv već je postojao, spremljeno kao',
-  'het ingesloten logo kon niet worden teruggezet':
-      'ugrađeni logotip nije se mogao vratiti',
   'Maak een tussenkop': 'Stvori međunaslov',
   'Maak er weer een bullet van': 'Ponovno pretvori u grafičku oznaku',
   'Tussenkop (leeg = alleen een scheidingslijn)':

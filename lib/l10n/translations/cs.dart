@@ -1628,6 +1628,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'vložený obrázek stylu nebylo možné obnovit',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profil stylu byl exportován — vlastní obrázek stylu nebylo možné zahrnout',
+  'Aanvullende informatie': 'Doplňující informace',
+  'Bijvoorbeeld datum, locatie of versie': 'Například datum, místo nebo verze',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Styl se nepodařilo trvale uložit. Pruh značky se použije pouze v této prezentaci.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Přidejte snímky obrazovky, videa nebo soubory PDF jako důkazy. Každý důkaz dostane vlastní snímek hned za nálezem a zahrne se do exportu.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4772,8 +4780,6 @@ const _dutchSourceAddCs = <String, String>{
   'Profiel exporteren': 'Exportovat profil',
   'Profiel importeren': 'Importovat profil',
   'Stijlprofiel geëxporteerd': 'Profil stylu byl exportován',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profil stylu byl exportován — vlastní logo nebylo možné zahrnout',
   'Stijlprofiel exporteren mislukt': 'Export profilu stylu se nezdařil',
   'Stijlprofiel importeren mislukt': 'Import profilu stylu se nezdařil',
   'Stijlprofiel geïmporteerd': 'Profil stylu byl importován',
@@ -4784,8 +4790,6 @@ const _dutchSourceAddCs = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Tento profil stylu pochází z novější verze OciDeck',
   'die naam bestond al, bewaard als': 'tento název už existoval, uloženo jako',
-  'het ingesloten logo kon niet worden teruggezet':
-      'vložené logo nebylo možné obnovit',
   'Maak een tussenkop': 'Vytvořit mezititulek',
   'Maak er weer een bullet van': 'Změnit zpět na odrážku',
   'Tussenkop (leeg = alleen een scheidingslijn)':

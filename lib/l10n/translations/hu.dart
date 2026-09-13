@@ -1629,6 +1629,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'egy beágyazott stílusképet nem sikerült visszaállítani',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'A stílusprofil exportálva — egy saját stílusképet nem sikerült belefoglalni',
+  'Aanvullende informatie': 'További információk',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Például dátum, helyszín vagy verzió',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'A stílust nem lehetett tartósan menteni. A márkasáv csak ebben a bemutatóban lesz használva.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Adjon hozzá képernyőképeket, videókat vagy PDF-fájlokat bizonyítékként. Minden bizonyíték külön diát kap közvetlenül a megállapítás után, és bekerül az exportba.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4804,8 +4813,6 @@ const _dutchSourceAddHu = <String, String>{
   'Profiel exporteren': 'Profil exportálása',
   'Profiel importeren': 'Profil importálása',
   'Stijlprofiel geëxporteerd': 'A stílusprofil exportálva',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'A stílusprofil exportálva — a saját logót nem sikerült belefoglalni',
   'Stijlprofiel exporteren mislukt': 'A stílusprofil exportálása nem sikerült',
   'Stijlprofiel importeren mislukt': 'A stílusprofil importálása nem sikerült',
   'Stijlprofiel geïmporteerd': 'A stílusprofil importálva',
@@ -4816,8 +4823,6 @@ const _dutchSourceAddHu = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Ez a stílusprofil az OciDeck újabb verziójából származik',
   'die naam bestond al, bewaard als': 'ez a név már létezett, mentve így',
-  'het ingesloten logo kon niet worden teruggezet':
-      'a beágyazott logót nem sikerült visszaállítani',
   'Maak een tussenkop': 'Közcím létrehozása',
   'Maak er weer een bullet van': 'Visszaalakítás felsorolásjellé',
   'Tussenkop (leeg = alleen een scheidingslijn)':

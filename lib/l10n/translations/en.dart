@@ -827,6 +827,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'an embedded style image could not be restored',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Style profile exported — a custom style image could not be included',
+  'Aanvullende informatie': 'Additional information',
+  'Bijvoorbeeld datum, locatie of versie':
+      'For example, date, location or version',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'The style could not be saved permanently. The brand strip will only be used in this presentation.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Add screenshots, videos, or PDF files as evidence. Each item gets its own slide directly after the finding and is included in the export.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -3992,8 +4001,6 @@ const _dutchSourceAddEn = {
   'Profiel exporteren': 'Export profile',
   'Profiel importeren': 'Import profile',
   'Stijlprofiel geëxporteerd': 'Style profile exported',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Style profile exported — the custom logo could not be included',
   'Stijlprofiel exporteren mislukt': 'Exporting the style profile failed',
   'Stijlprofiel importeren mislukt': 'Importing the style profile failed',
   'Stijlprofiel geïmporteerd': 'Style profile imported',
@@ -4004,8 +4011,6 @@ const _dutchSourceAddEn = {
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'This style profile comes from a newer version of OciDeck',
   'die naam bestond al, bewaard als': 'that name already existed, saved as',
-  'het ingesloten logo kon niet worden teruggezet':
-      'the embedded logo could not be restored',
   'Maak een tussenkop': 'Make a group heading',
   'Maak er weer een bullet van': 'Turn it back into a bullet',
   'Tussenkop (leeg = alleen een scheidingslijn)':

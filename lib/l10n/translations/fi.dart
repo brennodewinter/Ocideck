@@ -1627,6 +1627,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'upotettua tyylikuvaa ei voitu palauttaa',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Tyyliprofiili viety — omaa tyylikuvaa ei voitu sisällyttää',
+  'Aanvullende informatie': 'Lisätiedot',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Esimerkiksi päivämäärä, paikka tai versio',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Tyyliä ei voitu tallentaa pysyvästi. Brändipalkkia käytetään vain tässä esityksessä.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Lisää kuvakaappauksia, videoita tai PDF-tiedostoja todisteiksi. Jokainen todiste saa oman dian heti havainnon jälkeen ja sisältyy vientiin.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4787,8 +4796,6 @@ const _dutchSourceAddFi = <String, String>{
   'Profiel exporteren': 'Vie profiili',
   'Profiel importeren': 'Tuo profiili',
   'Stijlprofiel geëxporteerd': 'Tyyliprofiili viety',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Tyyliprofiili viety — omaa logoa ei voitu sisällyttää',
   'Stijlprofiel exporteren mislukt': 'Tyyliprofiilin vienti epäonnistui',
   'Stijlprofiel importeren mislukt': 'Tyyliprofiilin tuonti epäonnistui',
   'Stijlprofiel geïmporteerd': 'Tyyliprofiili tuotu',
@@ -4800,8 +4807,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tämä tyyliprofiili on peräisin uudemmasta OciDeck-versiosta',
   'die naam bestond al, bewaard als':
       'nimi oli jo käytössä, tallennettu nimellä',
-  'het ingesloten logo kon niet worden teruggezet':
-      'upotettua logoa ei voitu palauttaa',
   'Maak een tussenkop': 'Luo väliotsikko',
   'Maak er weer een bullet van': 'Muuta takaisin luettelomerkiksi',
   'Tussenkop (leeg = alleen een scheidingslijn)':

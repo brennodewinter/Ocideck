@@ -1604,6 +1604,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'Segh nagh chellu\'bogh choqlu\'laHbe\'',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Segh nab ngeHlu\'pu\' — Segh nagh tlhoS chellaHbe\'',
+  'Aanvullende informatie': 'De\' chelbogh',
+  'Bijvoorbeeld datum, locatie of versie':
+      'ghantoH: poH, Daq pagh ghantoH mI\'',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'le\'Ha\'ghach poltaHlaHbe\'. muchvamDaq neH malja\' betleH lo\'lu\'.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Daq nagh, HaSta ta, PDF ta ghap yIchel \'ach Dochvam \'oSbogh. tu\'lu\'ghach tlha\' Hoch DochvaD latlh much \'ay\' tu\'lu\' \'ej ngeHlu\'DI chellu\'.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4746,8 +4755,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Profiel exporteren': 'nab DoQmeH yIngeH',
   'Profiel importeren': 'nab yIkII\'',
   'Stijlprofiel geëxporteerd': 'Segh nab ngeHlu\'pu\'',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Segh nab ngeHlu\'pu\' — Degh tlhoS chellaHbe\'',
   'Stijlprofiel exporteren mislukt': 'Segh nab ngeHlu\'laHbe\'',
   'Stijlprofiel importeren mislukt': 'Segh nab kII\'laHbe\'',
   'Stijlprofiel geïmporteerd': 'Segh nab kII\'lu\'pu\'',
@@ -4757,8 +4764,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'OciDeck chu\' law\' vo\' Segh nab ghaH',
   'die naam bestond al, bewaard als': 'pong tu\'lu\'pu\', polDI\'',
-  'het ingesloten logo kon niet worden teruggezet':
-      'Degh chellu\'bogh choqlu\'laHbe\'',
   'Maak een tussenkop': 'nach bIng yIchenmoH',
   'Maak er weer een bullet van': 'ghItlh yIchenmoHqa\'',
   'Tussenkop (leeg = alleen een scheidingslijn)': 'nach bIng (chIm = HeH neH)',

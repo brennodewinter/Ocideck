@@ -667,6 +667,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'in ynsletten stylôfbylding koe net weromset wurde',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Styleprofyl eksportearre — in eigen stylôfbylding koe net meinommen wurde',
+  'Aanvullende informatie': 'Oanfoljende ynformaasje',
+  'Bijvoorbeeld datum, locatie of versie': 'Bygelyks datum, lokaasje of ferzje',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'De styl koe net bliuwend bewarre wurde. De merkstrook wurdt allinnich yn dizze presintaasje brûkt.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Foeg skermôfbyldingen, fideo\'s of PDF-bestannen ta as bewiis. Elk bewiisstik krijt in eigen slide fuort nei de befining en giet mei yn de eksport.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -3847,8 +3855,6 @@ const _dutchSourceAddFy = {
   'Profiel exporteren': 'Profyl eksportearje',
   'Profiel importeren': 'Profyl ymportearje',
   'Stijlprofiel geëxporteerd': 'Styleprofyl eksportearre',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Styleprofyl eksportearre — it eigen logo koe net meinommen wurde',
   'Stijlprofiel exporteren mislukt':
       'Eksportearjen fan it styleprofyl mislearre',
   'Stijlprofiel importeren mislukt':
@@ -3861,8 +3867,6 @@ const _dutchSourceAddFy = {
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Dit styleprofyl komt út in nijere ferzje fan OciDeck',
   'die naam bestond al, bewaard als': 'dy namme bestie al, bewarre as',
-  'het ingesloten logo kon niet worden teruggezet':
-      'it ynsletten logo koe net weromset wurde',
   'Maak een tussenkop': 'Meitsje in tuskenkop',
   'Maak er weer een bullet van': 'Wer in bullet fan meitsje',
   'Tussenkop (leeg = alleen een scheidingslijn)':

@@ -666,6 +666,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'no por a restourá un imagen di estilo inkluí',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Perfil di estilo eksportá — no por a inkluí un imagen di estilo propio',
+  'Aanvullende informatie': 'Informashon adishonal',
+  'Bijvoorbeeld datum, locatie of versie': 'Por ehèmpel fecha, lugá òf vershon',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'No por a warda e estilo permanentemente. E faha di marka lo wordu usa solamente den e presentashon aki.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Añadí screenshot, video òf archivo PDF komo prueba. Kada piesa di prueba ta haña un slide propio djis despues di e hallazgo i ta bai den e eksportashon.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -3860,8 +3868,6 @@ const _dutchSourceAddPap = {
   'Profiel exporteren': 'Eksportá perfil',
   'Profiel importeren': 'Importá perfil',
   'Stijlprofiel geëxporteerd': 'Perfil di estilo eksportá',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Perfil di estilo eksportá — no por a inkluí e logo propio',
   'Stijlprofiel exporteren mislukt':
       'Eksportashon di e perfil di estilo a faya',
   'Stijlprofiel importeren mislukt': 'Importashon di e perfil di estilo a faya',
@@ -3874,8 +3880,6 @@ const _dutchSourceAddPap = {
       'E perfil di estilo aki ta bini for di un vershon mas nobo di OciDeck',
   'die naam bestond al, bewaard als':
       'e nòmber ei tabata eksistí kaba, warda komo',
-  'het ingesloten logo kon niet worden teruggezet':
-      'no por a restourá e logo inkluí',
   'Maak een tussenkop': 'Traha un subtítulo',
   'Maak er weer een bullet van': 'Kombertí bèk na un bullet',
   'Tussenkop (leeg = alleen een scheidingslijn)':

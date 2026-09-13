@@ -664,6 +664,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'no se pudo restaurar una imagen de estilo incrustada',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Perfil de estilo exportado — no se pudo incluir una imagen de estilo propia',
+  'Aanvullende informatie': 'Información adicional',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Por ejemplo, fecha, lugar o versión',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'No se pudo guardar el estilo de forma permanente. La franja de marca solo se usará en esta presentación.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Añade capturas de pantalla, vídeos o archivos PDF como prueba. Cada elemento tendrá su propia diapositiva justo después del hallazgo y se incluirá en la exportación.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -3875,8 +3884,6 @@ const _dutchSourceAddEs = {
   'Profiel exporteren': 'Exportar perfil',
   'Profiel importeren': 'Importar perfil',
   'Stijlprofiel geëxporteerd': 'Perfil de estilo exportado',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Perfil de estilo exportado — no se pudo incluir el logotipo propio',
   'Stijlprofiel exporteren mislukt': 'Error al exportar el perfil de estilo',
   'Stijlprofiel importeren mislukt': 'Error al importar el perfil de estilo',
   'Stijlprofiel geïmporteerd': 'Perfil de estilo importado',
@@ -3887,8 +3894,6 @@ const _dutchSourceAddEs = {
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Este perfil de estilo procede de una versión más reciente de OciDeck',
   'die naam bestond al, bewaard als': 'ese nombre ya existía, guardado como',
-  'het ingesloten logo kon niet worden teruggezet':
-      'no se pudo restaurar el logotipo incrustado',
   'Maak een tussenkop': 'Crear un subencabezado',
   'Maak er weer een bullet van': 'Convertir de nuevo en viñeta',
   'Tussenkop (leeg = alleen een scheidingslijn)':

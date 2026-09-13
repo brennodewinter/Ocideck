@@ -1647,6 +1647,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'вградено изображение на стила не можа да бъде възстановено',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Стиловият профил е експортиран — собствено изображение на стила не можа да бъде включено',
+  'Aanvullende informatie': 'Допълнителна информация',
+  'Bijvoorbeeld datum, locatie of versie': 'Например дата, място или версия',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Стилът не можа да бъде запазен за постоянно. Лентата на марката ще се използва само в тази презентация.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Добавете екранни снимки, видеоклипове или PDF файлове като доказателства. Всеки елемент получава собствен слайд непосредствено след находката и се включва в експортирането.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4830,8 +4838,6 @@ const _dutchSourceAddBg = <String, String>{
   'Profiel exporteren': 'Експортиране на профил',
   'Profiel importeren': 'Импортиране на профил',
   'Stijlprofiel geëxporteerd': 'Стиловият профил е експортиран',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Стиловият профил е експортиран — собственото лого не можа да бъде включено',
   'Stijlprofiel exporteren mislukt':
       'Експортирането на стиловия профил е неуспешно',
   'Stijlprofiel importeren mislukt':
@@ -4845,8 +4851,6 @@ const _dutchSourceAddBg = <String, String>{
       'Този стилов профил е от по-нова версия на OciDeck',
   'die naam bestond al, bewaard als':
       'това име вече съществуваше, запазено като',
-  'het ingesloten logo kon niet worden teruggezet':
-      'вграденото лого не можа да бъде възстановено',
   'Maak een tussenkop': 'Създаване на междинно заглавие',
   'Maak er weer een bullet van': 'Връщане обратно към водещ символ',
   'Tussenkop (leeg = alleen een scheidingslijn)':

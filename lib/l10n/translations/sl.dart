@@ -1627,6 +1627,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'vdelane slike sloga ni bilo mogoče obnoviti',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profil sloga je izvožen — lastne slike sloga ni bilo mogoče vključiti',
+  'Aanvullende informatie': 'Dodatne informacije',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Na primer datum, kraj ali različica',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Sloga ni bilo mogoče trajno shraniti. Trak blagovne znamke bo uporabljen samo v tej predstavitvi.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Dodajte posnetke zaslona, videoposnetke ali datoteke PDF kot dokaze. Vsak dokaz dobi svoj diapozitiv takoj za ugotovitvijo in je vključen v izvoz.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4791,8 +4800,6 @@ const _dutchSourceAddSl = <String, String>{
   'Profiel exporteren': 'Izvozi profil',
   'Profiel importeren': 'Uvozi profil',
   'Stijlprofiel geëxporteerd': 'Profil sloga je izvožen',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profil sloga je izvožen — lastnega logotipa ni bilo mogoče vključiti',
   'Stijlprofiel exporteren mislukt': 'Izvoz profila sloga ni uspel',
   'Stijlprofiel importeren mislukt': 'Uvoz profila sloga ni uspel',
   'Stijlprofiel geïmporteerd': 'Profil sloga je uvožen',
@@ -4803,8 +4810,6 @@ const _dutchSourceAddSl = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Ta profil sloga izvira iz novejše različice OciDecka',
   'die naam bestond al, bewaard als': 'to ime je že obstajalo, shranjeno kot',
-  'het ingesloten logo kon niet worden teruggezet':
-      'vdelanega logotipa ni bilo mogoče obnoviti',
   'Maak een tussenkop': 'Ustvari mednaslov',
   'Maak er weer een bullet van': 'Pretvori nazaj v oznako',
   'Tussenkop (leeg = alleen een scheidingslijn)':

@@ -1620,6 +1620,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'manustatud stiilipilti ei õnnestunud taastada',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stiiliprofiil eksporditud — oma stiilipilti ei saanud kaasa võtta',
+  'Aanvullende informatie': 'Lisateave',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Näiteks kuupäev, asukoht või versioon',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Stiili ei saanud püsivalt salvestada. Brändiriba kasutatakse ainult selles esitluses.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Lisage tõenditena ekraanipilte, videoid või PDF-faile. Iga tõend saab kohe leiu järel oma slaidi ja kaasatakse eksporti.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4781,8 +4790,6 @@ const _dutchSourceAddEt = <String, String>{
   'Profiel exporteren': 'Ekspordi profiil',
   'Profiel importeren': 'Impordi profiil',
   'Stijlprofiel geëxporteerd': 'Stiiliprofiil eksporditud',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stiiliprofiil eksporditud — oma logo ei saanud kaasa võtta',
   'Stijlprofiel exporteren mislukt': 'Stiiliprofiili eksportimine ebaõnnestus',
   'Stijlprofiel importeren mislukt': 'Stiiliprofiili importimine ebaõnnestus',
   'Stijlprofiel geïmporteerd': 'Stiiliprofiil imporditud',
@@ -4794,8 +4801,6 @@ const _dutchSourceAddEt = <String, String>{
       'See stiiliprofiil pärineb OciDecki uuemast versioonist',
   'die naam bestond al, bewaard als':
       'see nimi oli juba olemas, salvestatud nimega',
-  'het ingesloten logo kon niet worden teruggezet':
-      'manustatud logo ei õnnestunud taastada',
   'Maak een tussenkop': 'Loo vahepealkiri',
   'Maak er weer een bullet van': 'Muuda tagasi täpiks',
   'Tussenkop (leeg = alleen een scheidingslijn)':

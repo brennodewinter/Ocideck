@@ -667,6 +667,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'ein eingebettetes Stilbild konnte nicht wiederhergestellt werden',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stilprofil exportiert — ein eigenes Stilbild konnte nicht mitgenommen werden',
+  'Aanvullende informatie': 'Zusätzliche Informationen',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Zum Beispiel Datum, Ort oder Version',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Der Stil konnte nicht dauerhaft gespeichert werden. Der Markenstreifen wird nur in dieser Präsentation verwendet.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Füge Screenshots, Videos oder PDF-Dateien als Nachweis hinzu. Jeder Nachweis erhält direkt nach dem Befund eine eigene Folie und wird exportiert.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -3873,8 +3882,6 @@ const _dutchSourceAddDe = {
   'Profiel exporteren': 'Profil exportieren',
   'Profiel importeren': 'Profil importieren',
   'Stijlprofiel geëxporteerd': 'Stilprofil exportiert',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stilprofil exportiert — das eigene Logo konnte nicht mitgenommen werden',
   'Stijlprofiel exporteren mislukt': 'Export des Stilprofils fehlgeschlagen',
   'Stijlprofiel importeren mislukt': 'Import des Stilprofils fehlgeschlagen',
   'Stijlprofiel geïmporteerd': 'Stilprofil importiert',
@@ -3886,8 +3893,6 @@ const _dutchSourceAddDe = {
       'Dieses Stilprofil stammt aus einer neueren Version von OciDeck',
   'die naam bestond al, bewaard als':
       'dieser Name war schon vergeben, gespeichert als',
-  'het ingesloten logo kon niet worden teruggezet':
-      'das eingebettete Logo konnte nicht wiederhergestellt werden',
   'Maak een tussenkop': 'Zwischenüberschrift einfügen',
   'Maak er weer een bullet van': 'Wieder in einen Aufzählungspunkt umwandeln',
   'Tussenkop (leeg = alleen een scheidingslijn)':

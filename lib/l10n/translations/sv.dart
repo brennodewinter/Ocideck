@@ -1626,6 +1626,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'en inbäddad stilbild kunde inte återställas',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stilprofilen exporterades — en egen stilbild kunde inte tas med',
+  'Aanvullende informatie': 'Ytterligare information',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Till exempel datum, plats eller version',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Stilen kunde inte sparas permanent. Varumärkesremsan används bara i den här presentationen.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Lägg till skärmbilder, videor eller PDF-filer som bevis. Varje objekt får en egen bild direkt efter fyndet och tas med i exporten.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4790,8 +4799,6 @@ const _dutchSourceAddSv = <String, String>{
   'Profiel exporteren': 'Exportera profil',
   'Profiel importeren': 'Importera profil',
   'Stijlprofiel geëxporteerd': 'Stilprofilen exporterades',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stilprofilen exporterades — den egna logotypen kunde inte tas med',
   'Stijlprofiel exporteren mislukt': 'Det gick inte att exportera stilprofilen',
   'Stijlprofiel importeren mislukt': 'Det gick inte att importera stilprofilen',
   'Stijlprofiel geïmporteerd': 'Stilprofilen importerades',
@@ -4802,8 +4809,6 @@ const _dutchSourceAddSv = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Den här stilprofilen kommer från en nyare version av OciDeck',
   'die naam bestond al, bewaard als': 'det namnet fanns redan, sparades som',
-  'het ingesloten logo kon niet worden teruggezet':
-      'den inbäddade logotypen kunde inte återställas',
   'Maak een tussenkop': 'Skapa en mellanrubrik',
   'Maak er weer een bullet van': 'Gör om till en punkt igen',
   'Tussenkop (leeg = alleen een scheidingslijn)':

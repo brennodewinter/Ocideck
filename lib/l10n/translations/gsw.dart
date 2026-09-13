@@ -1630,6 +1630,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'es iibettets Stilbild het me nöd chönne zrugghole',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stilprofil exportiert — es eigets Stilbild het nöd chönne mitgnoh werde',
+  'Aanvullende informatie': 'Zuesätzlechi Informatione',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Zum Biispil Datum, Ort oder Version',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Dr Stil het nöd dauerhaft chönne gspeicheret werde. Dr Markestreife wird nume i dere Präsentation bruucht.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Füeg Bildschirmfotos, Videos oder PDF-Dateie als Nochwiis dezue. Jede Nochwiis chunnt uf e eigeti Folie direkt nach em Befund und wird mitexportiert.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4804,8 +4813,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Profiel exporteren': 'Profil exportiere',
   'Profiel importeren': 'Profil importiere',
   'Stijlprofiel geëxporteerd': 'Stilprofil exportiert',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stilprofil exportiert — s eigene Logo het nöd chönne mitgnoh werde',
   'Stijlprofiel exporteren mislukt': 'Export vom Stilprofil isch fehlgschlage',
   'Stijlprofiel importeren mislukt': 'Import vom Stilprofil isch fehlgschlage',
   'Stijlprofiel geïmporteerd': 'Stilprofil importiert',
@@ -4816,8 +4823,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Das Stilprofil chunnt vo ere neuere Version vo OciDeck',
   'die naam bestond al, bewaard als': 'de Name hets scho gee, gspeicheret als',
-  'het ingesloten logo kon niet worden teruggezet':
-      's iibettete Logo het me nöd chönne zrugghole',
   'Maak een tussenkop': 'E Zwüschetitel mache',
   'Maak er weer een bullet van': 'Wieder zu emene Punkt mache',
   'Tussenkop (leeg = alleen een scheidingslijn)':

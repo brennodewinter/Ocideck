@@ -1430,8 +1430,6 @@ const _dutchSourceTr = {
   'Profiel exporteren': 'Profili dışa aktar',
   'Profiel importeren': 'Profili içe aktar',
   'Stijlprofiel geëxporteerd': 'Stil profili dışa aktarıldı',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stil profili dışa aktarıldı — özel logo dahil edilemedi',
   'Stijlprofiel exporteren mislukt': 'Stil profilini dışa aktarma başarısız',
   'Stijlprofiel importeren mislukt': 'Stil profilini içe aktarma başarısız',
   'Stijlprofiel geïmporteerd': 'Stil profili içe aktarıldı',
@@ -1442,8 +1440,6 @@ const _dutchSourceTr = {
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Bu stil profili OciDeck\'in daha yeni bir sürümünden geliyor',
   'die naam bestond al, bewaard als': 'bu ad zaten vardı, şu adla kaydedildi',
-  'het ingesloten logo kon niet worden teruggezet':
-      'gömülü logo geri yüklenemedi',
   'Maak een tussenkop': 'Ara başlık yap',
   'Maak er weer een bullet van': 'Yeniden madde yap',
   'Tussenkop (leeg = alleen een scheidingslijn)':
@@ -2542,6 +2538,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'gömülü bir stil görseli geri yüklenemedi',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stil profili dışa aktarıldı — özel bir stil görseli dahil edilemedi',
+  'Aanvullende informatie': 'Ek bilgiler',
+  'Bijvoorbeeld datum, locatie of versie': 'Örneğin tarih, konum veya sürüm',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Stil kalıcı olarak kaydedilemedi. Marka şeridi yalnızca bu sunumda kullanılacak.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Kanıt olarak ekran görüntüleri, videolar veya PDF dosyaları ekleyin. Her kanıt, bulgunun hemen ardından kendi slaydında yer alır ve dışa aktarmaya dâhil edilir.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':

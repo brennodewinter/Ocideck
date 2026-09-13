@@ -1639,6 +1639,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'nie udało się przywrócić osadzonego obrazu stylu',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Wyeksportowano profil stylu — nie udało się dołączyć własnego obrazu stylu',
+  'Aanvullende informatie': 'Informacje dodatkowe',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Na przykład data, miejsce lub wersja',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Nie udało się trwale zapisać stylu. Pasek marki będzie używany tylko w tej prezentacji.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Dodaj zrzuty ekranu, filmy lub pliki PDF jako dowody. Każdy dowód otrzyma osobny slajd bezpośrednio po ustaleniu i zostanie uwzględniony w eksporcie.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4813,8 +4822,6 @@ const _dutchSourceAddPl = <String, String>{
   'Profiel exporteren': 'Eksportuj profil',
   'Profiel importeren': 'Importuj profil',
   'Stijlprofiel geëxporteerd': 'Wyeksportowano profil stylu',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Wyeksportowano profil stylu — nie udało się dołączyć własnego logo',
   'Stijlprofiel exporteren mislukt':
       'Nie udało się wyeksportować profilu stylu',
   'Stijlprofiel importeren mislukt': 'Nie udało się zaimportować profilu stylu',
@@ -4826,8 +4833,6 @@ const _dutchSourceAddPl = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Ten profil stylu pochodzi z nowszej wersji OciDeck',
   'die naam bestond al, bewaard als': 'ta nazwa już istniała, zapisano jako',
-  'het ingesloten logo kon niet worden teruggezet':
-      'nie udało się przywrócić osadzonego logo',
   'Maak een tussenkop': 'Utwórz śródtytuł',
   'Maak er weer een bullet van': 'Zmień z powrotem w punktor',
   'Tussenkop (leeg = alleen een scheidingslijn)':

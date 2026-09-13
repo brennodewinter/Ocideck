@@ -1645,6 +1645,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'immaġni tal-istil inkorporata ma setgħetx tiġi rrestawrata',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Il-profil tal-istil ġie esportat — immaġni tal-istil personalizzata ma setgħetx tiġi inkluża',
+  'Aanvullende informatie': 'Informazzjoni addizzjonali',
+  'Bijvoorbeeld datum, locatie of versie': 'Pereżempju data, post jew verżjoni',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'L-istil ma setax jinħażen b’mod permanenti. L-istrixxa tal-marka se tintuża biss f’din il-preżentazzjoni.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Żid screenshots, vidjows jew fajls PDF bħala evidenza. Kull biċċa evidenza jkollha slide tagħha eżatt wara s-sejba u tiġi inkluża fl-esportazzjoni.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4846,8 +4854,6 @@ const _dutchSourceAddMt = <String, String>{
   'Profiel exporteren': 'Esporta l-profil',
   'Profiel importeren': 'Importa l-profil',
   'Stijlprofiel geëxporteerd': 'Il-profil tal-istil ġie esportat',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Il-profil tal-istil ġie esportat — il-logo personalizzat ma setax jiġi inkluż',
   'Stijlprofiel exporteren mislukt':
       'L-esportazzjoni tal-profil tal-istil falliet',
   'Stijlprofiel importeren mislukt':
@@ -4861,8 +4867,6 @@ const _dutchSourceAddMt = <String, String>{
       'Dan il-profil tal-istil ġej minn verżjoni aktar ġdida ta\' OciDeck',
   'die naam bestond al, bewaard als':
       'dak l-isem kien diġà jeżisti, issejvjat bħala',
-  'het ingesloten logo kon niet worden teruggezet':
-      'il-logo inkorporat ma setax jiġi rrestawrat',
   'Maak een tussenkop': 'Oħloq intestatura tal-grupp',
   'Maak er weer een bullet van': 'Ibdel lura f\'bużżieqa',
   'Tussenkop (leeg = alleen een scheidingslijn)':

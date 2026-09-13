@@ -1643,6 +1643,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'o imagine de stil încorporată nu a putut fi restaurată',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profilul de stil a fost exportat — o imagine de stil proprie nu a putut fi inclusă',
+  'Aanvullende informatie': 'Informații suplimentare',
+  'Bijvoorbeeld datum, locatie of versie':
+      'De exemplu, dată, locație sau versiune',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Stilul nu a putut fi salvat permanent. Banda de marcă va fi folosită doar în această prezentare.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Adăugați capturi de ecran, videoclipuri sau fișiere PDF ca dovezi. Fiecare dovadă primește propriul diapozitiv imediat după constatare și este inclusă în export.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4842,8 +4851,6 @@ const _dutchSourceAddRo = <String, String>{
   'Profiel exporteren': 'Exportă profilul',
   'Profiel importeren': 'Importă profilul',
   'Stijlprofiel geëxporteerd': 'Profilul de stil a fost exportat',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profilul de stil a fost exportat — logoul propriu nu a putut fi inclus',
   'Stijlprofiel exporteren mislukt': 'Exportul profilului de stil a eșuat',
   'Stijlprofiel importeren mislukt': 'Importul profilului de stil a eșuat',
   'Stijlprofiel geïmporteerd': 'Profilul de stil a fost importat',
@@ -4854,8 +4861,6 @@ const _dutchSourceAddRo = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Acest profil de stil provine dintr-o versiune mai nouă a OciDeck',
   'die naam bestond al, bewaard als': 'acel nume exista deja, salvat ca',
-  'het ingesloten logo kon niet worden teruggezet':
-      'logoul încorporat nu a putut fi restaurat',
   'Maak een tussenkop': 'Creează un subtitlu',
   'Maak er weer een bullet van': 'Transformă înapoi în marcaj',
   'Tussenkop (leeg = alleen een scheidingslijn)':
