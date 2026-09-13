@@ -24,6 +24,7 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Gantt-dia's uit LibrePlan krijgen weer een werkbare tijdlijn: de verborgen Mermaid-tekenlaag gebruikt nu een vaste interne breedte, zodat balken en mijlpalen niet meer verdwijnen in een nulbrede SVG.
 - PowerPoint-import behoudt nu beelden uit dia-indelingen en diamodellen, zet tekstgerichte EMF-beelden zichtbaar om en herkent een compact hoeklogo in een brede merkstrook met de juiste grootte en bronstijl. De volledige strook blijft daarbij aan de oorspronkelijke boven- of onderrand staan, korte toelichtende tekst blijft zichtbaar en korte informatie op een openingsdia maakt er niet langer ten onrechte een bulletdia van. Vrij geplaatste beeldrasters blijven als één compositiedia bij elkaar in plaats van te worden opgesplitst en afgesneden.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
 

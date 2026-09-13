@@ -1003,7 +1003,7 @@ code block in the Markdown.
 
 The first row is the header. Press `Tab` to move to the next cell — on the last
 cell it grows a new row. `Enter` moves to the cell below (and grows a row at the
-bottom); `Shift+Enter` inserts a line break inside the cell (`<br>` in the
+bottom); `Shift+Enter` or `Cmd+Enter` inserts a line break inside the cell (`<br>` in the
 Markdown). To bring in existing data, **paste a table into any cell** with
 `Ctrl/Cmd+V` (or `Shift+Insert`): a selection copied from a spreadsheet (Excel,
 Numbers, LibreOffice Calc, Google Sheets), CSV text (comma- or

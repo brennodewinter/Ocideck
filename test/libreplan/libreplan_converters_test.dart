@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/improvement/gantt_dsl.dart';
 import 'package:ocideck/services/libreplan/libreplan_converters.dart';
 import 'package:ocideck/services/libreplan/libreplan_xml.dart';
 
@@ -93,6 +94,26 @@ void main() {
       final slide = libreplanOrderToGantt(_sampleOrder(), sections: false);
       final t2 = slide.tableRows.firstWhere((r) => r.first == 'Ontwerp');
       expect(t2[4], 'T1');
+    });
+
+    test('de gedocumenteerde grens van dertig taken wordt bewaakt', () {
+      final order = LibreplanOrder(
+        code: 'GROOT',
+        name: 'Groot project',
+        children: [
+          for (var i = 1; i <= ganttMaxTasks + 1; i++)
+            LibreplanOrderElement(
+              code: 'T$i',
+              name: 'Taak $i',
+              workingHours: 8,
+            ),
+        ],
+      );
+
+      final slide = libreplanOrderToGantt(order, sections: false);
+      expect(slide.tableRows, hasLength(ganttMaxTasks + 1));
+      expect(slide.tableRows.last.first, 'Taak $ganttMaxTasks');
+      expect(slide.tableRows.expand((row) => row), isNot(contains('Taak 31')));
     });
   });
 

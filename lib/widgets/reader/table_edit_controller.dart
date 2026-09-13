@@ -184,7 +184,8 @@ class TableEditController extends ChangeNotifier {
 
   /// Toetsafhandeling op cel ([r], [c]). Tab loopt door de cellen en maakt op de
   /// laatste cel een rij bij; Enter springt naar dezelfde kolom een rij lager;
-  /// de pijltjes lopen als in een rekenblad door de tabel (zie
+  /// Shift+Enter en Cmd+Enter zetten een regeleinde in de huidige cel; de
+  /// pijltjes lopen als in een rekenblad door de tabel (zie
   /// [tableArrowTarget]); plakken vult vanaf deze cel een heel raster.
   KeyEventResult handleCellKey(int r, int c, KeyEvent event) {
     final keys = HardwareKeyboard.instance;
@@ -238,10 +239,15 @@ class TableEditController extends ChangeNotifier {
       }
       return KeyEventResult.handled;
     }
-    if (event.logicalKey == LogicalKeyboardKey.enter && !keys.isShiftPressed) {
+    if (event.logicalKey == LogicalKeyboardKey.enter &&
+        (keys.isShiftPressed || keys.isMetaPressed)) {
+      _insertLineBreak(r, c);
+      return KeyEventResult.handled;
+    }
+    if (event.logicalKey == LogicalKeyboardKey.enter) {
       // Enter = een rij lager, zoals in een rekenblad; onderaan groeit de
-      // tabel mee. Een regeleinde binnen de cel maak je met Shift+Enter, dat
-      // hier bewust doorgelaten wordt.
+      // tabel mee. De combinaties voor een regeleinde zijn hierboven al
+      // afgehandeld, voordat de documenteditor de aanslag kan onderscheppen.
       if (r + 1 >= rowCount) {
         insertRowAt(rowCount);
         _focusAfterRebuild(rowCount - 1, c);
@@ -251,6 +257,18 @@ class TableEditController extends ChangeNotifier {
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
+  }
+
+  void _insertLineBreak(int r, int c) {
+    final controller = _cells[r][c];
+    final value = controller.value;
+    final selection = value.selection;
+    final start = selection.isValid ? selection.start : value.text.length;
+    final end = selection.isValid ? selection.end : value.text.length;
+    controller.value = TextEditingValue(
+      text: value.text.replaceRange(start, end, '\n'),
+      selection: TextSelection.collapsed(offset: start + 1),
+    );
   }
 
   static TableArrow? _arrowOf(LogicalKeyboardKey key) => switch (key) {

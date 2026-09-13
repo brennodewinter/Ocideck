@@ -20,7 +20,7 @@
 | `Ctrl/Cmd + V` (in een tabelcel) | Plak een selectie uit een spreadsheet/CSV/markdown als tabel (ook `Shift + Insert`) |
 | `Ctrl/Cmd + C` (in een tabelcel, zonder selectie) | Kopieer het hele raster als TSV |
 | `Tab` / `Shift + Tab` (in een tabelcel) | Volgende / vorige cel; `Tab` op de laatste cel maakt een rij bij |
-| `Enter` / `Shift + Enter` (in een tabelcel) | Cel eronder (onderaan groeit de tabel) / regeleinde in de cel |
+| `Enter` / `Shift + Enter` of `Cmd + Enter` (in een tabelcel) | Cel eronder (onderaan groeit de tabel) / regeleinde in de cel |
 | `Ctrl/Cmd + +` · `Ctrl/Cmd + -` (documentmodus) | Zoom het schrijfvlak in · uit |
 | `Ctrl/Cmd + 0` (documentmodus) | Terug naar ware grootte |
 | `←` `→` (in een tabelcel) | Verplaats de cursor door de celtekst; aan de rand naar de buurcel |
