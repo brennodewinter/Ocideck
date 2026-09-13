@@ -13,6 +13,7 @@
 library;
 
 import 'dart:typed_data';
+import 'byte_readers.dart';
 
 /// Little-endian handtekening van een lokaal ZIP-bestandshoofd (`PK\x03\x04`).
 const int _localFileHeaderSig = 0x04034b50;
@@ -48,8 +49,8 @@ bool isEncryptedZip(List<int> bytes) {
   final data = bytes is Uint8List ? bytes : Uint8List.fromList(bytes);
   // Snelle en gebruikelijke weg: het eerste lokale bestandshoofd staat bij
   // offset 0. Flag-veld staat 6 bytes na de handtekening (2 bytes, LE).
-  if (data.length >= 8 && _readUint32LE(data, 0) == _localFileHeaderSig) {
-    final flags = _readUint16LE(data, 6);
+  if (data.length >= 8 && readUint32LE(data, 0) == _localFileHeaderSig) {
+    final flags = readUint16LE(data, 6);
     if (flags & _encryptedFlagBit != 0) return true;
   }
   // Robuuste terugval: loop de central directory na (die bevat per lid dezelfde
@@ -72,15 +73,15 @@ bool hasExactOciServeAesPackageProfile(
   final data = bytes is Uint8List ? bytes : Uint8List.fromList(bytes);
   final eocd = _findEocd(data);
   if (eocd < 0 || eocd + 22 > data.length) return false;
-  if (_readUint16LE(data, eocd + 4) != 0 ||
-      _readUint16LE(data, eocd + 6) != 0 ||
-      eocd + 22 + _readUint16LE(data, eocd + 20) != data.length) {
+  if (readUint16LE(data, eocd + 4) != 0 ||
+      readUint16LE(data, eocd + 6) != 0 ||
+      eocd + 22 + readUint16LE(data, eocd + 20) != data.length) {
     return false;
   }
-  final diskEntryCount = _readUint16LE(data, eocd + 8);
-  final entryCount = _readUint16LE(data, eocd + 10);
-  final centralSize = _readUint32LE(data, eocd + 12);
-  final centralOffset = _readUint32LE(data, eocd + 16);
+  final diskEntryCount = readUint16LE(data, eocd + 8);
+  final entryCount = readUint16LE(data, eocd + 10);
+  final centralSize = readUint32LE(data, eocd + 12);
+  final centralOffset = readUint32LE(data, eocd + 16);
   if (entryCount == 0 ||
       diskEntryCount != entryCount ||
       entryCount == 0xffff ||
@@ -95,18 +96,18 @@ bool hasExactOciServeAesPackageProfile(
   var offset = centralOffset;
   for (var index = 0; index < entryCount; index++) {
     if (offset + 46 > eocd ||
-        _readUint32LE(data, offset) != _centralDirHeaderSig) {
+        readUint32LE(data, offset) != _centralDirHeaderSig) {
       return false;
     }
-    final flags = _readUint16LE(data, offset + 8);
-    final method = _readUint16LE(data, offset + 10);
-    final crc32 = _readUint32LE(data, offset + 16);
-    final compressedSize = _readUint32LE(data, offset + 20);
-    final uncompressedSize = _readUint32LE(data, offset + 24);
-    final nameLength = _readUint16LE(data, offset + 28);
-    final extraLength = _readUint16LE(data, offset + 30);
-    final commentLength = _readUint16LE(data, offset + 32);
-    final localOffset = _readUint32LE(data, offset + 42);
+    final flags = readUint16LE(data, offset + 8);
+    final method = readUint16LE(data, offset + 10);
+    final crc32 = readUint32LE(data, offset + 16);
+    final compressedSize = readUint32LE(data, offset + 20);
+    final uncompressedSize = readUint32LE(data, offset + 24);
+    final nameLength = readUint16LE(data, offset + 28);
+    final extraLength = readUint16LE(data, offset + 30);
+    final commentLength = readUint16LE(data, offset + 32);
+    final localOffset = readUint32LE(data, offset + 42);
     final end = offset + 46 + nameLength + extraLength + commentLength;
     if (!_hasAllowedAesFlags(flags) ||
         method != _aesCompressionMethod ||
@@ -156,17 +157,17 @@ bool _hasAllowedAesFlags(int flags) {
   ({int actualMethod})? aes;
   var offset = start;
   while (offset + 4 <= end) {
-    final id = _readUint16LE(data, offset);
-    final size = _readUint16LE(data, offset + 2);
+    final id = readUint16LE(data, offset);
+    final size = readUint16LE(data, offset + 2);
     offset += 4;
     if (offset + size > end) return null;
     if (id == _aesExtraFieldId) {
       if (aes != null || size != 7) return null;
-      final vendorVersion = _readUint16LE(data, offset);
+      final vendorVersion = readUint16LE(data, offset);
       final vendorA = data[offset + 2];
       final vendorE = data[offset + 3];
       final strength = data[offset + 4];
-      final actualMethod = _readUint16LE(data, offset + 5);
+      final actualMethod = readUint16LE(data, offset + 5);
       if (vendorVersion != _aesVendorVersionAe2 ||
           vendorA != 0x41 ||
           vendorE != 0x45 ||
@@ -194,16 +195,16 @@ bool _matchingLocalAesHeader(
 }) {
   if (localOffset < 0 ||
       localOffset + 30 > centralDirectoryOffset ||
-      _readUint32LE(data, localOffset) != _localFileHeaderSig ||
-      _readUint16LE(data, localOffset + 6) != flags ||
-      _readUint16LE(data, localOffset + 8) != _aesCompressionMethod ||
-      _readUint32LE(data, localOffset + 14) != 0) {
+      readUint32LE(data, localOffset) != _localFileHeaderSig ||
+      readUint16LE(data, localOffset + 6) != flags ||
+      readUint16LE(data, localOffset + 8) != _aesCompressionMethod ||
+      readUint32LE(data, localOffset + 14) != 0) {
     return false;
   }
-  final localNameLength = _readUint16LE(data, localOffset + 26);
-  final localExtraLength = _readUint16LE(data, localOffset + 28);
-  final localCompressedSize = _readUint32LE(data, localOffset + 18);
-  final localUncompressedSize = _readUint32LE(data, localOffset + 22);
+  final localNameLength = readUint16LE(data, localOffset + 26);
+  final localExtraLength = readUint16LE(data, localOffset + 28);
+  final localCompressedSize = readUint32LE(data, localOffset + 18);
+  final localUncompressedSize = readUint32LE(data, localOffset + 22);
   final dataOffset = localOffset + 30 + localNameLength + localExtraLength;
   if (localNameLength != nameLength ||
       !_matchingLocalSize(flags, localCompressedSize, compressedSize) ||
@@ -235,14 +236,14 @@ bool _centralDirectoryHasEncryptedEntry(Uint8List data) {
   if (eocd < 0) return false;
   // EOCD: central-directory-offset staat op +16 (4 bytes, LE).
   if (eocd + 20 > data.length) return false;
-  var offset = _readUint32LE(data, eocd + 16);
+  var offset = readUint32LE(data, eocd + 16);
   while (offset + 46 <= data.length &&
-      _readUint32LE(data, offset) == _centralDirHeaderSig) {
-    final flags = _readUint16LE(data, offset + 8);
+      readUint32LE(data, offset) == _centralDirHeaderSig) {
+    final flags = readUint16LE(data, offset + 8);
     if (flags & _encryptedFlagBit != 0) return true;
-    final nameLen = _readUint16LE(data, offset + 28);
-    final extraLen = _readUint16LE(data, offset + 30);
-    final commentLen = _readUint16LE(data, offset + 32);
+    final nameLen = readUint16LE(data, offset + 28);
+    final extraLen = readUint16LE(data, offset + 30);
+    final commentLen = readUint16LE(data, offset + 32);
     offset += 46 + nameLen + extraLen + commentLen;
   }
   return false;
@@ -255,12 +256,8 @@ int _findEocd(Uint8List data) {
   final earliest = data.length - 22 - 0xffff;
   final start = earliest < 0 ? 0 : earliest;
   for (var i = data.length - 22; i >= start; i--) {
-    if (_readUint32LE(data, i) == _eocdSig) return i;
+    if (readUint32LE(data, i) == _eocdSig) return i;
   }
   return -1;
 }
 
-int _readUint16LE(Uint8List d, int o) => d[o] | (d[o + 1] << 8);
-
-int _readUint32LE(Uint8List d, int o) =>
-    d[o] | (d[o + 1] << 8) | (d[o + 2] << 16) | (d[o + 3] << 24);

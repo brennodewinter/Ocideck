@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 
 import 'log.dart';
+import 'byte_readers.dart';
 
 /// Schaal [image] zodanig dat de langste zijde hoogstens [maxEdge] pixels wordt.
 /// Is het al klein genoeg, dan komt het ongewijzigd terug. Gebruikt
@@ -166,7 +167,7 @@ const double _defaultPixelsPerCm = 50;
   var offset = signature.length;
   // Chunk: lengte (4), type (4), data, CRC (4).
   while (offset + 12 <= bytes.length) {
-    final length = _uint32(bytes, offset);
+    final length = readUint32BE(bytes, offset);
     final isPhys =
         bytes[offset + 4] == 0x70 && // p
         bytes[offset + 5] == 0x48 && // H
@@ -176,8 +177,8 @@ const double _defaultPixelsPerCm = 50;
     if (isPhys && length >= 9) {
       final data = offset + 8;
       if (bytes[data + 8] != 1) return null; // eenheid onbekend
-      final x = _uint32(bytes, data) / 100;
-      final y = _uint32(bytes, data + 4) / 100;
+      final x = readUint32BE(bytes, data) / 100;
+      final y = readUint32BE(bytes, data + 4) / 100;
       return x > 0 && y > 0 ? (x, y) : null;
     }
     offset += 12 + length;
@@ -206,12 +207,6 @@ const double _defaultPixelsPerCm = 50;
   });
   return density;
 }
-
-int _uint32(Uint8List bytes, int offset) =>
-    (bytes[offset] << 24) |
-    (bytes[offset + 1] << 16) |
-    (bytes[offset + 2] << 8) |
-    bytes[offset + 3];
 
 /// De uitsnede die een presentatieprogramma op een bronafbeelding legt: per
 /// zijde de fractie (0..1) van de bron die wegvalt. Gemaakt met [importCrop].

@@ -15,3 +15,20 @@ String withExtension(String path, String ext) {
   }
   return '$path$normalized';
 }
+
+/// De bestandsnaam zonder map of extensie — de terugval voor een deck dat zelf
+/// geen titel meebrengt. Padscheiding-veilig zonder `dart:io`.
+String stemOfFileName(String filename) {
+  final base = filename.split(RegExp(r'[\\/]')).last;
+  final dot = base.lastIndexOf('.');
+  return dot > 0 ? base.substring(0, dot) : base;
+}
+
+/// De extensie van [path] in kleine letters, of [fallback] als er geen punt
+/// staat of de extensie leeg is.
+String extOfFileName(String path, {String fallback = 'png'}) {
+  final dot = path.lastIndexOf('.');
+  if (dot < 0) return fallback;
+  final ext = path.substring(dot + 1).toLowerCase();
+  return ext.isEmpty ? fallback : ext;
+}

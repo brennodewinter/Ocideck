@@ -7,6 +7,7 @@ import '../../../../utils/image_resize.dart';
 import '../../models/source_image.dart';
 import '../../models/source_video.dart';
 import 'pptx_context.dart';
+import '../../../../utils/file_extension.dart';
 
 const _videoExts = {
   'mp4',
@@ -39,7 +40,7 @@ Media scanMedia(PptxContext ctx, Map<String, String> rels, String slidePath) {
   for (final entry in rels.entries) {
     final resolved = ctx.resolveRel(rels, entry.key, slidePath);
     if (resolved == null) continue;
-    final ext = _extFromPath(resolved);
+    final ext = extOfFileName(resolved);
     if (video == null && _videoExts.contains(ext)) {
       video = _videoFor(ctx, entry.key, resolved, slidePath, rels);
     } else if (audio == null && _audioExts.contains(ext)) {
@@ -133,7 +134,7 @@ SourceImage? parsePic(
 
   return SourceImage(
     bytes: imageBytes,
-    ext: _extFromPath(resolved),
+    ext: extOfFileName(resolved),
     name: name ?? p.url.basename(resolved),
     placement: _placement(xfrm, ctx.slideSize),
   );
@@ -224,9 +225,4 @@ bool picReferencesMissingMedia(
   return ctx.readRelBytes(rels, rId, slidePath) == null;
 }
 
-String _extFromPath(String path) {
-  final dot = path.lastIndexOf('.');
-  if (dot < 0) return 'png';
-  final ext = path.substring(dot + 1).toLowerCase();
-  return ext.isEmpty ? 'png' : ext;
-}
+

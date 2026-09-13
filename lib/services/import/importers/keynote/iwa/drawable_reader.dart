@@ -12,6 +12,7 @@ import '../key_text_salvage.dart';
 import 'iwa_archive.dart';
 import 'iwa_document.dart';
 import 'proto_wire.dart';
+import '../../../../../utils/file_extension.dart';
 
 /// Reconstructs the text and drawable structure of a Keynote slide from an
 /// iWork object graph: placeholder and note text, the text of an arbitrary
@@ -610,10 +611,5 @@ class DrawableReader {
     return null;
   }
 
-  String _ext(String name) {
-    final dot = name.lastIndexOf('.');
-    if (dot < 0) return 'jpg';
-    final ext = name.substring(dot + 1).toLowerCase();
-    return ext.isEmpty ? 'jpg' : ext;
-  }
+  String _ext(String name) => extOfFileName(name, fallback: 'jpg');
 }

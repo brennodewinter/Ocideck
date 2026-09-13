@@ -15,6 +15,7 @@ import 'odp_chart.dart';
 import 'odp_context.dart';
 import 'odp_table.dart';
 import 'odp_text.dart';
+import '../../../../utils/file_extension.dart';
 
 /// Parse one `<draw:page>` into a [SourceSlide].
 ///
@@ -285,7 +286,7 @@ SourceImage? _imageFromHref(
     bytes: geometry.isIdentity
         ? imageBytes
         : bakeImportGeometry(imageBytes, geometry, path),
-    ext: _extFromPath(path),
+    ext: extOfFileName(path),
     name: path.split('/').last,
     placement: _imagePlacement(frame, pageWidth, pageHeight),
   );
@@ -438,12 +439,7 @@ double _cm(String? value) {
   return num;
 }
 
-String _extFromPath(String path) {
-  final dot = path.lastIndexOf('.');
-  if (dot < 0) return 'png';
-  final ext = path.substring(dot + 1).toLowerCase();
-  return ext.isEmpty ? 'png' : ext;
-}
+
 
 String? _attr(XmlElement el, String local) {
   for (final a in el.attributes) {
