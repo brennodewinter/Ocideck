@@ -2209,8 +2209,8 @@ const _dutchSourceAddEn = {
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Tools for process improvement (SIPOC, DMAIC, Kaizen and A3). Off by default; enable the extension to use the related templates and slide layouts.',
   'Videovergaderingen': 'Video meetings',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Join video meetings and present from OciDeck with a dedicated interface: participants beside your slide, not in another app\'s window. Bring-your-own-server (Jitsi or Matrix); OciDeck hosts nothing and keeps the conversation data out of AI. Connecting to a meeting service will follow in a future version.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Join video meetings and present from OciDeck with a dedicated interface: participants beside your slide, not in another app\'s window. Bring-your-own-server (Jitsi); OciDeck hosts nothing and keeps the conversation data out of AI. Connecting to a meeting service will follow in a future version.',
   'Videovergadering': 'Video meeting',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'No active meeting yet. Connecting to a meeting service will be added in a future version.',
@@ -2228,11 +2228,6 @@ const _dutchSourceAddEn = {
       'The images together are too large for a single HTML file (512 MB maximum). Use fewer or smaller images, or export as PDF or package.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'This export has too many slides at too high a resolution to render safely. Export in parts or use the compressed PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Finish and save the presentation first; then you can sign its provenance.',
-  'Herkomst ondertekend.': 'Provenance signed.',
-  'De herkomst kon niet worden ondertekend.':
-      'The provenance could not be signed.',
   'Herkomst ondertekenen': 'Sign provenance',
   'Herkomst bevestigd': 'Provenance confirmed',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -2249,32 +2244,9 @@ const _dutchSourceAddEn = {
   'Herkomst niet hier te controleren': 'Provenance can\'t be checked here',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'The signature is present but can\'t be recomputed here — check it against the original `.md` file.',
-  'Bestaande identiteit vervangen?': 'Replace existing identity?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'This device already has a collaboration identity. Restoring replaces it with the identity from the key. Did you save a recovery key for the current identity? Without a backup you will lose it.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'The web memory for presentation media is full (maximum 256 MB). First save your work as an .ocideck file to prevent data loss. Then use fewer or smaller images, videos, or audio files, close other decks, or reload without opening other decks.',
   'Ongeldige vraag': 'Invalid question',
-  'Herstelsleutel': 'Recovery key',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Keep this recovery key somewhere safe — for example in your password vault. It\'s the only way to restore the same identity on another device; without this key you start there as a new, not-yet-verified device. Don\'t share it with anyone.',
-  'Herstelsleutel gekopieerd.': 'Recovery key copied.',
-  'Identiteit herstellen': 'Restore identity',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Paste the recovery key you saved earlier. This device then takes over the same identity — co-authors who verified you earlier will recognise your fingerprint again.',
-  'Identiteit & herstelsleutel': 'Identity & recovery key',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Your device has its own collaboration identity — that\'s what co-authors verify. Save the recovery key to restore that same identity on another device later; without that key you start over there.',
-  'Herstelsleutel tonen': 'Show recovery key',
-  'De herstelsleutel kon niet worden gelezen.':
-      'The recovery key could not be read.',
-  'Identiteit hersteld.': 'Identity restored.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'This recovery key is not correct — check that you copied it completely and without errors.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'This doesn\'t look like a valid recovery key.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'This recovery key comes from a newer version of OciDeck.',
   'Afbeeldingsrechten': 'Image rights',
   'Afbeeldingsrechten controleren…': 'Check image rights…',
   'Afdoening': 'Settlement',
@@ -2298,95 +2270,22 @@ const _dutchSourceAddEn = {
       'files could not be safely reviewed',
   'nieuw gescand': 'newly scanned',
   'Realtime samenwerken': 'Real-time collaboration',
-  'Manieren van verbinden': 'Ways to connect',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Collaborate live on a presentation through an encrypted relay. Off by default. The content is end-to-end encrypted with OciDeck\'s own keys; the server only sees encrypted data.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Collaboration through a Matrix homeserver as a relay. Set up the account in the Collaboration tab. (Jitsi and XMPP are coming.)',
   'Chat': 'Chat',
-  'Chat openen': 'Open chat',
   'Chat sluiten': 'Close chat',
   'Bericht…': 'Message…',
   'Versturen': 'Send',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'No messages yet. Say something to your co-authors.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Compare each device\'s fingerprint over a trusted channel — read it out to each other, or send it by a route you trust. If it matches, mark the device as verified; it will then stay verified, including in a later session. If it differs, break off the collaboration.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'This device\'s identity differs from what you verified earlier — someone may be in the middle. Break off the collaboration, unless you are certain this device has been set up again.',
-  'Geverifieerd': 'Verified',
-  'Wijkt af': 'Differs',
-  'Niet geverifieerd': 'Not verified',
-  'Markeer als geverifieerd': 'Mark as verified',
-  'Verificatie intrekken': 'Revoke verification',
-  'Toch opnieuw vertrouwen': 'Trust again anyway',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Not every device in this collaboration is verified yet. Compare the fingerprints to be sure who you are working with.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Table cell edits are not synchronised to collaborators. The title and other fields are.',
   'Verifiëren': 'Verify',
-  'Deelnemers verifiëren': 'Verify participants',
-  '(dit apparaat)': '(this device)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'That is not a valid invitation link.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'The Matrix homeserver is unreachable.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'The host did not respond in time. Check the link and whether the host is still online.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Share this link with anyone you want to work with. Anyone who has the link can enter the session — so only share it with people you trust. The content stays end-to-end encrypted; the homeserver only sees encrypted data.',
   'Deelnemen': 'Join',
-  'Deelnemen via een link': 'Join via a link',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Your Matrix account is refused — check the access token in Settings.',
-  'Je doet nu live mee aan de samenwerking.': 'You are now collaborating live.',
-  'Nodig mede-auteurs uit': 'Invite co-authors',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Open a presentation first to collaborate.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Paste the invitation link the host sent you. This opens the same presentation and lets you collaborate live.',
-  'Realtime samenwerken is mislukt.': 'Real-time collaboration failed.',
-  'Realtime samenwerken starten': 'Start real-time collaboration',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Set up a Matrix account first, under Settings → Collaboration.',
-  'Uitnodigingslink': 'Invitation link',
-  'Uitnodigingslink gekopieerd.': 'Invitation link copied.',
-  'Uitnodigingslink kopiëren': 'Copy invitation link',
-  'Verbinden met de samenwerking…': 'Connecting to the collaboration…',
-  'Access-token': 'Access token',
-  'Apparaat-id': 'Device ID',
-  'Gebruikers-id': 'User ID',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'The homeserver returned an error. Try again later.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'The homeserver is unreachable, or the certificate is not trusted.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'The homeserver redirects to another address — this is not followed for security reasons. Enter the final address directly.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'The homeserver asks you to wait a moment. Try again shortly.',
-  'De homeserver weigert dit token.': 'The homeserver refuses this token.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'This address does not respond as a Matrix homeserver. Is the URL correct?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'A homeserver must be https: the access token travels with every request.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'The access token is refused — check that you copied it correctly and that it hasn\'t been revoked.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Create an access token in your Matrix client (for example in Element under All settings → Help & About), or on your homeserver. "Test connection" confirms the token and fills in your user ID and device ID.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Needed when the homeserver runs on a private or home network. Without this flag the security check refuses a private address.',
-  'Realtime samenwerken (Matrix)': 'Real-time collaboration (Matrix)',
   'Samenwerken': 'Collaboration',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Connected — user ID and device ID filled in',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Connected, but the homeserver returned no device ID — fill it in yourself, otherwise keys from co-authors won\'t arrive.',
-  'Vul een access-token in': 'Enter an access token',
-  'Vul een geldige homeserver-URL in': 'Enter a valid homeserver URL',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Collaborate live on a presentation through a Matrix homeserver as an encrypted relay. The content is end-to-end encrypted with OciDeck\'s own keys; the server only sees encrypted data. Enter a homeserver and an access token created elsewhere — OciDeck never asks for your password. The token is stored encrypted in the keychain, not alongside the other settings.',
-  'wordt door de test ingevuld': 'filled in by the test',
   'Meer documentatie op de repository': 'More documentation on the repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'The full documentation — including architecture, build, source code and design — is on the repository.',

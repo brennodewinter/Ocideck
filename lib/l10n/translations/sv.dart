@@ -3009,8 +3009,8 @@ const _dutchSourceAddSv = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Verktyg för processförbättring (SIPOC, DMAIC, Kaizen och A3). Avstängda som standard; aktivera tillägget för att använda tillhörande mallar och bildlayouter.',
   'Videovergaderingen': 'Videomöten',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Delta i videomöten och presentera från OciDeck med ett eget gränssnitt: deltagarna bredvid din slide, inte i ett annat programs fönster. Bring-your-own-server (Jitsi eller Matrix); OciDeck är inte värd för något och håller samtalsdatan borta från AI. Anslutningen till en mötestjänst kommer i en framtida version.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Delta i videomöten och presentera från OciDeck med ett eget gränssnitt: deltagarna bredvid din slide, inte i ett annat programs fönster. Bring-your-own-server (Jitsi); OciDeck är inte värd för något och håller samtalsdatan borta från AI. Anslutningen till en mötestjänst kommer i en framtida version.',
   'Videovergadering': 'Videomöte',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Inget aktivt möte ännu. Anslutningen till en mötestjänst läggs till i en framtida version.',
@@ -3028,10 +3028,6 @@ const _dutchSourceAddSv = <String, String>{
       'Bilderna är tillsammans för stora för en enda HTML-fil (högst 512 MB). Använd färre eller mindre bilder, eller exportera som PDF eller paket.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Den här exporten har för många bilder i för hög upplösning för att kunna renderas säkert. Exportera i delar eller använd den komprimerade PDF:en.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Slutför och spara presentationen först; sedan kan du signera dess ursprung.',
-  'Herkomst ondertekend.': 'Ursprung signerat.',
-  'De herkomst kon niet worden ondertekend.': 'Ursprunget kunde inte signeras.',
   'Herkomst ondertekenen': 'Signera ursprung',
   'Herkomst bevestigd': 'Ursprung bekräftat',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3048,32 +3044,9 @@ const _dutchSourceAddSv = <String, String>{
   'Herkomst niet hier te controleren': 'Ursprung kan inte kontrolleras här',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Signaturen finns men kan inte beräknas om här — kontrollera den mot den ursprungliga `.md`-filen.',
-  'Bestaande identiteit vervangen?': 'Ersätt befintlig identitet?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Den här enheten har redan en samarbetsidentitet. Återställning ersätter den med identiteten från nyckeln. Har du sparat en återställningsnyckel för den nuvarande identiteten? Utan säkerhetskopia förlorar du den.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Webbminnet för presentationsmedier är fullt (högst 256 MB). Spara först ditt arbete som en .ocideck-fil för att förhindra dataförlust. Använd sedan färre eller mindre bilder, videor eller ljudfiler, stäng andra bildspel eller läs in på nytt utan att öppna andra bildspel.',
   'Ongeldige vraag': 'Ogiltig fråga',
-  'Herstelsleutel': 'Återställningsnyckel',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Förvara den här återställningsnyckeln på ett säkert ställe — till exempel i ditt lösenordsvalv. Det är det enda sättet att återställa samma identitet på en annan enhet; utan den här nyckeln börjar du där som en ny, ännu inte verifierad enhet. Dela den inte med någon.',
-  'Herstelsleutel gekopieerd.': 'Återställningsnyckeln kopierad.',
-  'Identiteit herstellen': 'Återställ identitet',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Klistra in återställningsnyckeln du sparade tidigare. Den här enheten övertar då samma identitet — medförfattare som tidigare verifierade dig känner igen ditt fingeravtryck igen.',
-  'Identiteit & herstelsleutel': 'Identitet och återställningsnyckel',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Din enhet har en egen samarbetsidentitet — det är den som medförfattare verifierar. Spara återställningsnyckeln för att senare återställa samma identitet på en annan enhet; utan den nyckeln börjar du om där.',
-  'Herstelsleutel tonen': 'Visa återställningsnyckel',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Det gick inte att läsa återställningsnyckeln.',
-  'Identiteit hersteld.': 'Identitet återställd.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Den här återställningsnyckeln är inte korrekt — kontrollera att du kopierade den fullständigt och felfritt.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Detta ser inte ut som en giltig återställningsnyckel.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Den här återställningsnyckeln kommer från en nyare version av OciDeck.',
   'Afbeeldingsrechten': 'Bildrättigheter',
   'Afbeeldingsrechten controleren…': 'Kontrollera bildrättigheter...',
   'Afdoening': 'Lösning',
@@ -3097,95 +3070,22 @@ const _dutchSourceAddSv = <String, String>{
       'filer kunde inte granskas säkert',
   'nieuw gescand': 'nyskannade',
   'Realtime samenwerken': 'Samarbete i realtid',
-  'Manieren van verbinden': 'Anslutningssätt',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Samarbeta live på en presentation via ett krypterat relä. Av som standard. Innehållet krypteras änd-till-änd med OciDecks egna nycklar; servern ser bara krypterade data.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Samarbete via en Matrix-homeserver som relä. Ställ in kontot på fliken Samarbete. (Jitsi och XMPP kommer.)',
   'Chat': 'Chatt',
-  'Chat openen': 'Öppna chatten',
   'Chat sluiten': 'Stäng chatten',
   'Bericht…': 'Meddelande…',
   'Versturen': 'Skicka',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Inga meddelanden än. Säg något till dina medförfattare.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Jämför varje enhets fingeravtryck via en betrodd kanal — läs upp det för varandra, eller skicka det via en väg du litar på. Om det stämmer, markera enheten som verifierad; den förblir då verifierad, även i en senare session. Om det avviker, avbryt samarbetet.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Den här enhetens identitet avviker från den du verifierade tidigare — någon kan sitta i mitten. Avbryt samarbetet, om du inte är säker på att enheten har konfigurerats om.',
-  'Geverifieerd': 'Verifierad',
-  'Wijkt af': 'Avviker',
-  'Niet geverifieerd': 'Inte verifierad',
-  'Markeer als geverifieerd': 'Markera som verifierad',
-  'Verificatie intrekken': 'Återkalla verifiering',
-  'Toch opnieuw vertrouwen': 'Lita på den igen ändå',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Alla enheter i det här samarbetet är inte verifierade ännu. Jämför fingeravtrycken för att vara säker på vem du arbetar med.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Tabelcellsredigeringar synkroniseras inte till medförfattare. Titeln och andra fält gör det.',
   'Verifiëren': 'Verifiera',
-  'Deelnemers verifiëren': 'Verifiera deltagare',
-  '(dit apparaat)': '(den här enheten)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Det här är inte en giltig inbjudningslänk.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Matrix-homeservern går inte att nå.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Värden svarade inte i tid. Kontrollera länken och om värden fortfarande är online.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Dela den här länken med dem du vill samarbeta med. Alla som har länken kan gå in i sessionen — dela den därför bara med personer du litar på. Innehållet förblir änd-till-änd-krypterat; homeservern ser bara krypterade data.',
   'Deelnemen': 'Gå med',
-  'Deelnemen via een link': 'Gå med via en länk',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Ditt Matrix-konto avvisas — kontrollera åtkomsttoken i Inställningar.',
-  'Je doet nu live mee aan de samenwerking.': 'Du samarbetar nu live.',
-  'Nodig mede-auteurs uit': 'Bjud in medförfattare',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Öppna först en presentation för att samarbeta.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Klistra in inbjudningslänken som värden skickade till dig. Då öppnar du samma presentation och samarbetar live.',
-  'Realtime samenwerken is mislukt.': 'Samarbete i realtid misslyckades.',
-  'Realtime samenwerken starten': 'Starta samarbete i realtid',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Ställ först in ett Matrix-konto under Inställningar → Samarbete.',
-  'Uitnodigingslink': 'Inbjudningslänk',
-  'Uitnodigingslink gekopieerd.': 'Inbjudningslänk kopierad.',
-  'Uitnodigingslink kopiëren': 'Kopiera inbjudningslänk',
-  'Verbinden met de samenwerking…': 'Ansluter till samarbetet…',
-  'Access-token': 'Åtkomsttoken',
-  'Apparaat-id': 'Enhets-id',
-  'Gebruikers-id': 'Användar-id',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeservern returnerade ett fel. Försök igen senare.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeservern går inte att nå, eller så är certifikatet inte betrott.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeservern omdirigerar till en annan adress — av säkerhetsskäl följs det inte. Ange den slutliga adressen direkt.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeservern ber dig vänta ett ögonblick. Försök igen strax.',
-  'De homeserver weigert dit token.': 'Homeservern avvisar detta token.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Den här adressen svarar inte som en Matrix-homeserver. Stämmer URL:en?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'En homeserver måste vara https: åtkomsttoken följer med varje begäran.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Åtkomsttoken avvisas — kontrollera att du kopierat det rätt och att det inte återkallats.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Skapa en åtkomsttoken i din Matrix-klient (till exempel i Element under Alla inställningar → Hjälp och info) eller på din homeserver. "Testa anslutning" bekräftar token och fyller i ditt användar-id och enhets-id.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Behövs när homeservern körs på ett privat nätverk eller hemnätverk. Utan denna flagga avvisar säkerhetskontrollen en privat adress.',
-  'Realtime samenwerken (Matrix)': 'Samarbete i realtid (Matrix)',
   'Samenwerken': 'Samarbete',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Anslutning lyckades — användar-id och enhets-id ifyllda',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Anslutning lyckades, men homeservern returnerade inget enhets-id — fyll i det själv, annars kommer nycklar från medförfattare inte fram.',
-  'Vul een access-token in': 'Ange en åtkomsttoken',
-  'Vul een geldige homeserver-URL in': 'Ange en giltig homeserver-URL',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Samarbeta live på en presentation via en Matrix-homeserver som krypterat relä. Innehållet krypteras änd-till-änd med OciDecks egna nycklar; servern ser bara krypterade data. Ange en homeserver och en åtkomsttoken som skapats någon annanstans — OciDeck ber aldrig om ditt lösenord. Token lagras krypterad i nyckelringen, inte tillsammans med övriga inställningar.',
-  'wordt door de test ingevuld': 'fylls i av testet',
   'Meer documentatie op de repository': 'Mer dokumentation i repositoryt',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Den fullständiga dokumentationen — inklusive arkitektur, bygge, källkod och design — finns i repositoryt.',

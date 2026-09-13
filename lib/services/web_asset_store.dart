@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:uuid/uuid.dart';
+import '../utils/content_hash.dart';
 
 const _uuid = Uuid();
 
@@ -77,7 +77,7 @@ class WebAssetStore {
       );
     }
 
-    final hash = sha256.convert(bytes).toString();
+    final hash = sha256Hex(bytes);
     for (final candidate in _pathsForHash[hash] ?? const <String>[]) {
       final stored = _bytes[candidate];
       if (stored != null && _sameBytes(stored, bytes)) return candidate;
@@ -192,7 +192,7 @@ class WebAssetStore {
     _bytes[path] = bytes;
     _totalBytes += bytes.length - old.length;
     final oldHash = _hashForPath[path];
-    final newHash = sha256.convert(bytes).toString();
+    final newHash = sha256Hex(bytes);
     if (oldHash != newHash) {
       _hashForPath[path] = newHash;
       if (oldHash != null) {

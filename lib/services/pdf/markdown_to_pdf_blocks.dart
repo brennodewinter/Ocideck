@@ -15,7 +15,6 @@ import 'package:markdown/markdown.dart' as md;
 import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
-import '../markdown_table_codec.dart';
 import 'document_pdf_blocks.dart';
 
 /// Zet [markdown] (GFM) om in de blokken waaruit de PDF wordt opgebouwd.
@@ -189,8 +188,6 @@ final _footnoteSentinelPattern = RegExp(r'OCIDECKFOOTNOTE(\d+)END');
 
 /// De sentinel die een tijdlijn vervangt tijdens de parse. Zonder leestekens
 /// die Markdown zelf betekenis geeft, zodat er onderweg niets aan verandert.
-String _timelineSentinel(int index) => 'OCIDECKTIMELINE${index}END';
-
 final _timelineSentinelPattern = RegExp(r'OCIDECKTIMELINE(\d+)END');
 
 /// Haalt gemarkeerde tijdlijnen (marker + tabel) uit de bron en vervangt ze
@@ -202,41 +199,20 @@ final _timelineSentinelPattern = RegExp(r'OCIDECKTIMELINE(\d+)END');
 /// elkaar. Daardoor hoeft de renderer die betekenis niet uit een gewone lijst
 /// terug te raden en kan hij dezelfde visuele taal spreken als het scherm.
 ({String source, List<PdfBlock> blocks}) _protectTimelines(String source) {
-  final lines = source.replaceAll('\r\n', '\n').split('\n');
-  final output = <String>[];
-  final blocks = <PdfBlock>[];
-  var index = 0;
-  while (index < lines.length) {
-    if (lines[index].trim() != documentTimelineMarker ||
-        index + 2 >= lines.length ||
-        !isMarkdownTableLine(lines[index + 1]) ||
-        !isMarkdownTableDelimiterRow(lines[index + 2])) {
-      output.add(lines[index++]);
-      continue;
-    }
-    var end = index + 3;
-    while (end < lines.length && isMarkdownTableLine(lines[end])) {
-      end++;
-    }
-    final marked = lines.sublist(index, end).join('\n');
-    final timeline = analyzeMarkedTimeline(marked).timeline;
-    if (timeline == null) {
-      output.add(lines[index++]);
-      continue;
-    }
-    final events = <PdfTimelineEvent>[
-      for (final event in timeline.events)
-        PdfTimelineEvent(
-          _inlineOf(event.marker),
-          _inlineOf(event.event),
-          metadata: event.metadata == null ? null : _inlineOf(event.metadata!),
-        ),
-    ];
-    blocks.add(PdfTimelineBlock(timeline.headers, events));
-    output.add(_timelineSentinel(blocks.length - 1));
-    index = end;
-  }
-  return (source: output.join('\n'), blocks: blocks);
+  final r = protectTimelines(source, _renderTimelinePdf);
+  return (source: r.source, blocks: r.rendered);
+}
+
+PdfBlock _renderTimelinePdf(DocumentTimeline timeline) {
+  final events = <PdfTimelineEvent>[
+    for (final event in timeline.events)
+      PdfTimelineEvent(
+        _inlineOf(event.marker),
+        _inlineOf(event.event),
+        metadata: event.metadata == null ? null : _inlineOf(event.metadata!),
+      ),
+  ];
+  return PdfTimelineBlock(timeline.headers, events);
 }
 
 /// Vervangt sentinel-alinea's in [blocks] door de bijbehorende tijdlijn-blokken

@@ -3031,8 +3031,8 @@ const _dutchSourceAddLa = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumenta ad emendationem processuum (SIPOC, DMAIC, Kaizen et A3). Ex praedefinito inactiva; extensionem activa ut exemplaribus et dispositionibus diapositivarum adiunctis utaris.',
   'Videovergaderingen': 'Conventus visifici',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Conventibus visificis interesse potes et ex OciDeck interficie propria referre: participes iuxta paginam tuam, non in fenestra alterius programmatis. Bring-your-own-server (Jitsi vel Matrix); OciDeck nihil hospitatur et data colloquii extra IA servat. Coniunctio ad servitium conventuum in versione posteriore sequetur.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Conventibus visificis interesse potes et ex OciDeck interficie propria referre: participes iuxta paginam tuam, non in fenestra alterius programmatis. Bring-your-own-server (Jitsi); OciDeck nihil hospitatur et data colloquii extra IA servat. Coniunctio ad servitium conventuum in versione posteriore sequetur.',
   'Videovergadering': 'Conventus visificus',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Nullus conventus adhuc actuosus. Coniunctio ad servitium conventuum in versione posteriore addetur.',
@@ -3050,10 +3050,6 @@ const _dutchSourceAddLa = <String, String>{
       'Imagines simul nimis magnae sunt pro uno fasciculo HTML (ad summum 512 MB). Pauciores vel minores imagines adhibe, vel ut PDF vel fasciculum exporta.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Haec exportatio nimium multas paginas nimia resolutione habet quam ut tuto reddi possint. Per partes exporta vel PDF compresso utere.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Praesentationem prius perfice et serva; deinde originem subscribere potes.',
-  'Herkomst ondertekend.': 'Origo subscripta.',
-  'De herkomst kon niet worden ondertekend.': 'Origo subscribi non potuit.',
   'Herkomst ondertekenen': 'Originem subscribere',
   'Herkomst bevestigd': 'Origo confirmata',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3070,32 +3066,9 @@ const _dutchSourceAddLa = <String, String>{
   'Herkomst niet hier te controleren': 'Origo hic probari non potest',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Subscriptio adest, sed hic recomputari non potest — cum plica `.md` originali confer.',
-  'Bestaande identiteit vervangen?': 'Identitatem exsistentem substituere?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Hoc instrumentum iam identitatem cooperationis habet. Restitutio eam identitate ex clave substituit. Clavemne recuperationis identitatis praesentis servavisti? Sine exemplari eam amittes.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Memoria interretialis instrumentorum praesentationis plena est (summum 256 MB). Opus primum ut fasciculum .ocideck serva, ne data perdas. Deinde paucioribus minoribusve imaginibus, pelliculis aut fasciculis sonoris utere, alias collectiones claude, aut denuo onera sine aliis collectionibus apertis.',
   'Ongeldige vraag': 'Quaestio invalida',
-  'Herstelsleutel': 'Clavis restitutionis',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Hanc clavem restitutionis in loco tuto serva — exempli gratia in armario tesserarum tuo. Sola via est eandem identitatem in alio instrumento restituendi; sine hac clave illic incipis ut novum instrumentum nondum probatum. Cum nemine eam communica.',
-  'Herstelsleutel gekopieerd.': 'Clavis restitutionis exscripta.',
-  'Identiteit herstellen': 'Identitatem restituere',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Clavem restitutionis quam antea servavisti insere. Hoc instrumentum tunc eandem identitatem suscipit — coauctores qui te antea probaverunt digitorum vestigium tuum iterum agnoscent.',
-  'Identiteit & herstelsleutel': 'Identitas et clavis restitutionis',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Instrumentum tuum propriam identitatem cooperationis habet — hanc coauctores probant. Clavem restitutionis serva ut eandem identitatem postea in alio instrumento restituas; sine ea clave illic denuo incipis.',
-  'Herstelsleutel tonen': 'Clavem restitutionis monstrare',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Clavis restitutionis legi non potuit.',
-  'Identiteit hersteld.': 'Identitas restituta.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Haec clavis restitutionis non recta est — inspice num eam integram et sine erroribus transcripseris.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Haec clavis restitutionis valida esse non videtur.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Haec clavis restitutionis ex recentiore versione OciDeck orta est.',
   'Afbeeldingsrechten': 'Diritti di immagine',
   'Afbeeldingsrechten controleren…': 'Controlla i diritti dell\'immagine...',
   'Afdoening': 'Insediamento',
@@ -3120,95 +3093,22 @@ const _dutchSourceAddLa = <String, String>{
       'non è stato possibile rivedere i file in modo sicuro',
   'nieuw gescand': 'appena scansionato',
   'Realtime samenwerken': 'Collaboratio tempore reali',
-  'Manieren van verbinden': 'Modi coniungendi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'In praesentatione viva per relatorem cifratum collabora. Implicite inactivum. Contentus a fine ad finem clavibus propriis OciDeck cifratur; servitor tantum data cifrata videt.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Collaboratio per homeserver Matrix ut relatorem. Rationem in scheda Collaboratio instrue. (Jitsi et XMPP sequentur.)',
   'Chat': 'Colloquium',
-  'Chat openen': 'Aperi colloquium',
   'Chat sluiten': 'Claude colloquium',
   'Bericht…': 'Nuntius…',
   'Versturen': 'Mitte',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Nulla adhuc nuntia. Dic aliquid coauctoribus tuis.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Confer indicium digiti cuiusque machinae per canalem fidum — vobis invicem recitate, aut per viam cui confidis mittite. Si congruit, machinam ut probatam nota; probata manebit, etiam in sessione posteriore. Si discrepat, cooperationem rumpe.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Identitas huius machinae discrepat ab eo quod antea probavisti — fortasse aliquis interest. Cooperationem rumpe, nisi certus es hanc machinam denuo constitutam esse.',
-  'Geverifieerd': 'Probatum',
-  'Wijkt af': 'Discrepat',
-  'Niet geverifieerd': 'Non probatum',
-  'Markeer als geverifieerd': 'Ut probatum nota',
-  'Verificatie intrekken': 'Probationem revoca',
-  'Toch opnieuw vertrouwen': 'Nihilominus iterum confide',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Nondum omnis machina in hac cooperatione probata est. Indicia digitorum confer ut certo scias quocum labores.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Tabulae cellae editiones cum collaboratoribus non synchronizantur. Titulus et alia campi sic.',
   'Verifiëren': 'Proba',
-  'Deelnemers verifiëren': 'Participes probare',
-  '(dit apparaat)': '(hoc instrumentum)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Hic nexus invitationis validus non est.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Homeserver Matrix adiri non potest.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Hospes tempore non respondit. Nexum inspice et num hospes adhuc online sit.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Hunc nexum communica cum quibus collaborari vis. Quicumque nexum habet sessionem intrare potest — itaque eum tantum cum hominibus quibus confidis communica. Contentus a fine ad finem cifratus manet; homeserver tantum data cifrata videt.',
   'Deelnemen': 'Interesse',
-  'Deelnemen via een link': 'Per nexum interesse',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Ratio tua Matrix respuitur — tesseram accessus in Optionibus inspice.',
-  'Je doet nu live mee aan de samenwerking.': 'Nunc viva cooperationi interes.',
-  'Nodig mede-auteurs uit': 'Coauctores invita',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Praesentationem primum aperi ut collabores.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Nexum invitationis quem hospes tibi misit insere. Ita eandem praesentationem aperis et viva collaboraris.',
-  'Realtime samenwerken is mislukt.': 'Cooperatio tempore reali defecit.',
-  'Realtime samenwerken starten': 'Cooperationem tempore reali incipere',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Rationem Matrix primum in Optionibus → Collaboratio institue.',
-  'Uitnodigingslink': 'Nexus invitationis',
-  'Uitnodigingslink gekopieerd.': 'Nexus invitationis copiatus.',
-  'Uitnodigingslink kopiëren': 'Nexum invitationis copiare',
-  'Verbinden met de samenwerking…': 'Ad cooperationem conectens…',
-  'Access-token': 'Tessera accessus',
-  'Apparaat-id': 'ID instrumenti',
-  'Gebruikers-id': 'ID usoris',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver errorem reddidit. Postea itera.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver adiri non potest, vel testimonium non creditur.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver ad aliam inscriptionem redirigit — ob securitatem non sequitur. Inscriptionem ultimam directe insere.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver paulum exspectare petit. Mox itera.',
-  'De homeserver weigert dit token.': 'Homeserver hoc signum respuit.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Haec inscriptio non ut homeserver Matrix respondet. Estne URL recta?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver https esse debet: tessera accessus cum omni rogatione iter facit.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Tessera accessus respuitur — vide num recte transcripseris et num revocata non sit.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Tesseram accessus in cliente Matrix tuo crea (exempli gratia in Element sub Omnes optiones → Auxilium et informatio), vel in homeserver tuo. "Conexionem probare" signum confirmat et ID usoris tui et ID instrumenti implet.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Necessarium cum homeserver in rete privata vel domestica currit. Sine hoc signo custodia securitatis inscriptionem privatam respuit.',
-  'Realtime samenwerken (Matrix)': 'Collaboratio tempore reali (Matrix)',
   'Samenwerken': 'Collaboratio',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Nexus feliciter factus — ID usoris et ID instrumenti impleta',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Nexus factus, sed homeserver nullum ID instrumenti reddidit — ipse insere, alioquin claves coauctorum non advenient.',
-  'Vul een access-token in': 'Tesseram accessus insere',
-  'Vul een geldige homeserver-URL in': 'URL homeserver validam insere',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'In praesentatione viva per homeserver Matrix ut relatorem cifratum collabora. Contentus a fine ad finem clavibus propriis OciDeck cifratur; servitor tantum data cifrata videt. Homeserver et tesseram accessus alibi creatam insere — OciDeck numquam verbum secretum tuum petit. Signum in clavium anulo cifratum conditur, non apud ceteras optiones.',
-  'wordt door de test ingevuld': 'a probatione impletur',
   'Meer documentatie op de repository': 'Amplior documentatio in repositorio',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Documentatio plena — comprehensis architectura, compilatione, codice fontis et forma — in repositorio est.',

@@ -200,7 +200,7 @@ class XmppKeyExchange {
   /// gaat eerst. De directory's `ingest` weigert daarnaast een identiteits-
   /// wissel (SA-F3) en een onverifieerbare binding (§5.3).
   Future<void> handleDevicePresence(Stanza stanza) async {
-    final child = _childByNs(stanza, OciDeckNamespace.device);
+    final child = stanza.childByNs(OciDeckNamespace.device);
     if (child == null) return;
     final DevicePublicKeys keys;
     try {
@@ -251,7 +251,7 @@ class XmppKeyExchange {
   /// Een keyshare die niet voor dit device is, wordt stil gedropt — elke
   /// occupant trial-opent elke broadcast keyshare; falen is geen fout.
   Future<void> handleKeyshare(Stanza stanza) async {
-    final child = _childByNs(stanza, OciDeckNamespace.keyshare);
+    final child = stanza.childByNs(OciDeckNamespace.keyshare);
     if (child == null) return;
     final WrappedKey wrap;
     try {
@@ -303,15 +303,4 @@ class XmppKeyExchange {
   }
 
   // ── helpers ────────────────────────────────────────────────────────────────
-
-  /// Vind het eerste child-element met [namespace] — zowel de geserialiseerde
-  /// `xmlns`-attribuutvorm als de geparsede `namespaceUri`. Spiegelt
-  /// `XmppTransport._childByNs`.
-  static XmlElement? _childByNs(Stanza stanza, String namespace) {
-    for (final child in stanza.children) {
-      final ns = child.getAttribute('xmlns') ?? child.name.namespaceUri;
-      if (ns == namespace) return child;
-    }
-    return null;
-  }
 }

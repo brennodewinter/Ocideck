@@ -3018,8 +3018,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Hilfsmittel zur Prozessverbesserig (SIPOC, DMAIC, Kaizen und A3). Standardmässig us; aktivier d’Erweiterig, um d’zugehörige Vorlage und Folielayouts z’bruuche.',
   'Videovergaderingen': 'Videokonferänze',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Mach bi Videokonferänze mit und präsentier us OciDeck mit ere eigene Oberflächi: d Teilnehmer näbet dim Slide, nöd im Fäischter vo nere andere App. Bring-your-own-server (Jitsi oder Matrix); OciDeck hostet nüüt und haltet d Gsprächsdate vo de KI ewäg. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Mach bi Videokonferänze mit und präsentier us OciDeck mit ere eigene Oberflächi: d Teilnehmer näbet dim Slide, nöd im Fäischter vo nere andere App. Bring-your-own-server (Jitsi); OciDeck hostet nüüt und haltet d Gsprächsdate vo de KI ewäg. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version.',
   'Videovergadering': 'Videokonferänz',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Na kei aktivi Sitzig. D Aabindig an e Sitzigsdienscht chunt inere spöötere Version dezue.',
@@ -3037,11 +3037,6 @@ const _dutchSourceAddGsw = <String, String>{
       'D Bilder sind zäme z gross für ei einzeligi HTML-Datei (maximal 512 MB). Bruuch weniger oder chlyneri Bilder, oder exportier as PDF oder Paket.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Dä Export het z vil Folie mit z hocher Uflösig, zum sicher rendere. Exportier i Teil oder bruuch s komprimierte PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Mach d Präsentation zerscht fertig und speicher si; nachher chasch d Herkunft signiere.',
-  'Herkomst ondertekend.': 'Herkunft signiert.',
-  'De herkomst kon niet worden ondertekend.':
-      'D Herkunft het nöd chöne signiert werde.',
   'Herkomst ondertekenen': 'Herkunft signiere',
   'Herkomst bevestigd': 'Herkunft bestätigt',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3058,32 +3053,9 @@ const _dutchSourceAddGsw = <String, String>{
   'Herkomst niet hier te controleren': 'Herkunft cha do nöd prüeft werde',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'D Signatur isch da, cha aber do nöd nachgrächnet werde — prüef si gäge d ursprünglich `.md`-Datei.',
-  'Bestaande identiteit vervangen?': 'Bestehendi Identität ersetze?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Das Grät hät scho en Zämmenarbetsidentität. S Widerhärstelle ersetzt si dur d Identität us em Schlüssel. Hesch für di aktuelli Identität en Widerhärstellschlüssel gsicheret? Ohni Backup isch si wäg.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Dr Webspicher für Präsentationsmedie isch voll (maximal 256 MB). Speicher dini Arbet zerscht als .ocideck-Datei, damit kei Date verlore gönd. Bruuch denn weniger oder chlineri Bilder, Videos oder Audiodateie, schliess anderi Decks oder lad neu, ohni anderi Decks z öffne.',
   'Ongeldige vraag': 'Ungültigi Frag',
-  'Herstelsleutel': 'Wiederherstelligsschlüssel',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Bewahr dä Wiederherstelligsschlüssel an eme sichere Ort uf — zum Bischpil i dim Passwort-Tresor. Er isch di einzig Möglichkeit, di gliichi Identität uf eme andere Grät wiederherzstelle; ohni dä Schlüssel fangsch det als es nöis, no nöd verifiziärts Grät a. Teil en mit niemertem.',
-  'Herstelsleutel gekopieerd.': 'Wiederherstelligsschlüssel kopiärt.',
-  'Identiteit herstellen': 'Identität wiederherstelle',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Füeg dä Wiederherstelligsschlüssel i, wo du vorhär gspeicheret hesch. Das Grät übernimmt denn di gliichi Identität — Mitautore, wo di vorhär verifiziärt hei, erkenne dini Fingerprint wieder.',
-  'Identiteit & herstelsleutel': 'Identität & Wiederherstelligsschlüssel',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Dis Grät het e eigeni Zämmenarbeits-Identität — die verifiziäre d\'Mitautore. Speicher dä Wiederherstelligsschlüssel, zum die gliichi Identität spöter uf eme andere Grät wiederherzstelle; ohni dä Schlüssel fangsch det vo vorn a.',
-  'Herstelsleutel tonen': 'Wiederherstelligsschlüssel aazeige',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Dä Wiederherstelligsschlüssel het nöd chöne gläse werde.',
-  'Identiteit hersteld.': 'Identität wiederhergstellt.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Dä Wiederherstelligsschlüssel stimmt nöd — prüef, öb du en vollständig und fählerfrei übernoh hesch.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Das gseht nöd nach eme gültige Wiederherstelligsschlüssel us.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Dä Wiederherstelligsschlüssel chunnt vo ere nöiere Version vo OciDeck.',
   'Afbeeldingsrechten': 'Bildrechte',
   'Afbeeldingsrechten controleren…': 'Bildrechte prüfen…',
   'Afdoening': 'Siedlung',
@@ -3107,95 +3079,22 @@ const _dutchSourceAddGsw = <String, String>{
       'Dateien konnten nicht sicher überprüft werden',
   'nieuw gescand': 'neu gescannt',
   'Realtime samenwerken': 'Echtziit-Zämmenarbet',
-  'Manieren van verbinden': 'Verbindigsarte',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Schaff live zäme an ere Präsentation über es verschlüsslets Wiiterleitigsglid. Standardmässig us. Dr Inhalt wird Änd-zu-Änd mit OciDeck sine eigene Schlüssel verschlüsslet; dr Server gseht nu verschlüsselti Date.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Zämmenarbet über en Matrix-Homeserver als Wiiterleitigsglid. Richt s Konto im Reiter Zämmenarbet y. (Jitsi und XMPP chömed no.)',
   'Chat': 'Chat',
-  'Chat openen': 'Chat ufmache',
   'Chat sluiten': 'Chat zuemache',
   'Bericht…': 'Nachricht…',
   'Versturen': 'Schicke',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Na kei Nachrichte. Sag dine Mitautore öppis.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Vergliich de Fingerabdruck vo jedem Grät über en vertrouenswürdige Kanal — läset en enand vor oder schicket en über en Wäg, wo du vertrousch. Stimmt er überii, markier s Grät als verifiziert; es bliibt denn verifiziert, au i re spätere Sitzig. Wiicht er ab, denn brich d Zämmenarbet ab.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'D Identität vo däm Grät wiicht ab vo dem, wo du früener verifiziert häsch — villicht sitzt öpper dezwüsche. Brich d Zämmenarbet ab, usser du bisch sicher, ass das Grät nöi iigrichtet worde isch.',
-  'Geverifieerd': 'Verifiziert',
-  'Wijkt af': 'Wiicht ab',
-  'Niet geverifieerd': 'Nöd verifiziert',
-  'Markeer als geverifieerd': 'Als verifiziert markiere',
-  'Verificatie intrekken': 'Verifizierig zrugghole',
-  'Toch opnieuw vertrouwen': 'Trotzdäm wider vertroue',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Na nöd jedes Grät i dere Zämmenarbet isch verifiziert. Vergliich d Fingerabdrück, für sicher z sii, mit wem du schaffsch.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Tabälle-Zälle-Bearbeitige wärded nöd a Mitautore synchrongisiert. Titel und anderi Fälder scho.',
   'Verifiëren': 'Verifiziere',
-  'Deelnemers verifiëren': 'Teilnehmer verifiziere',
-  '(dit apparaat)': '(das Grät)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Das isch kei gültige Iiladigs-Link.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Dr Matrix-Homeserver isch nid erreichbar.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Dr Host het nid rächtziitig gantwortet. Prüef dr Link und öb dr Host no online isch.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Teil dä Link mit allne, wo mitschaffe sölle. Wär dr Link het, cha i d Sitzig cho — drum teil ne nu mit Lüt, wo du vertrousch. Dr Inhalt bliibt Änd-zu-Änd verschlüsslet; dr Homeserver gseht nu verschlüsselti Date.',
   'Deelnemen': 'Teilnäh',
-  'Deelnemen via een link': 'Über en Link teilnäh',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Dis Matrix-Konto wird abglehnt — prüef s Zuegriffstoken i de Istellige.',
-  'Je doet nu live mee aan de samenwerking.': 'Du schaffsch jetz live mit.',
-  'Nodig mede-auteurs uit': 'Mitautore iilade',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Mach zerscht e Präsentation uf, zum zämenarbeite.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Füeg dr Iiladigs-Link i, wo dr Host dir gschickt het. Damit machsch di gliichi Präsentation uf und schaffsch live mit.',
-  'Realtime samenwerken is mislukt.': 'Echtziit-Zämenarbet isch fehlgschlage.',
-  'Realtime samenwerken starten': 'Echtziit-Zämenarbet starte',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Richt zerscht es Matrix-Konto i under Istellige → Zämmenarbet.',
-  'Uitnodigingslink': 'Iiladigs-Link',
-  'Uitnodigingslink gekopieerd.': 'Iiladigs-Link kopiert.',
-  'Uitnodigingslink kopiëren': 'Iiladigs-Link kopiere',
-  'Verbinden met de samenwerking…': 'Verbindig zur Zämenarbet…',
-  'Access-token': 'Zuegriffstoken',
-  'Apparaat-id': 'Grät-ID',
-  'Gebruikers-id': 'Benutzer-ID',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Dr Homeserver het en Fähler zrugggäh. Probier\'s spöter nomol.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Dr Homeserver isch nid erreichbar, oder em Zertifikat wird nid vertrout.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Dr Homeserver leitet uf en anderi Adrässe um — us Sicherheitsgründ wird das nöd gfolget. Gib d ändgültigi Adrässe direkt y.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Dr Homeserver bittet um es bitzeli Geduld. Probier\'s grad nomol.',
-  'De homeserver weigert dit token.': 'Dr Homeserver wyst das Token ab.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Die Adrässe antwortet nöd als Matrix-Homeserver. Stimmt d URL?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'E Homeserver mues https sy: s Zuegriffstoken reist bi jedere Aafrog mit.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'S Zuegriffstoken wird abglehnt — prüef, öb du\'s rächt übernoh häsch und öb\'s nöd widerruefe worde isch.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Erstell es Zuegriffstoken i dym Matrix-Client (zum Byspil in Element under Alli Iistellige → Hilf & Info), oder uf dym Homeserver. "Verbindig teste" bestätigt s Token und füllt dyn Benutzer-ID und Grät-ID uus.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Bruucht\'s, wenn dr Homeserver im private oder Heimnetz lauft. Ohni dä Haken wyst d Sicherheitsprüefig e privati Adrässe ab.',
-  'Realtime samenwerken (Matrix)': 'Echtziit-Zämmenarbet (Matrix)',
   'Samenwerken': 'Zämmenarbet',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Verbindig glunge — Benutzer-ID und Grät-ID uusgfüllt',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Verbindig glunge, aber dr Homeserver het kei Grät-ID zrugggäh — trag si sälber y, susch chömed d Schlüssel vo de Mitautore nöd a.',
-  'Vul een access-token in': 'Gib es Zuegriffstoken y',
-  'Vul een geldige homeserver-URL in': 'Gib e gültigi Homeserver-URL y',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Schaff live zäme an ere Präsentation über en Matrix-Homeserver als verschlüsslets Wiiterleitigsglid. Dr Inhalt wird Änd-zu-Änd mit OciDeck sine eigene Schlüssel verschlüsslet; dr Server gseht nu verschlüsselti Date. Gib en Homeserver und es andersch erstellts Zuegriffstoken y — OciDeck fragt nie nach dym Passwort. S Token wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
-  'wordt door de test ingevuld': 'wird dur de Test uusgfüllt',
   'Meer documentatie op de repository': 'Meh Dokumentation im Repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Di ganz Dokumentation — au Architektur, Build, Quellcode und Design — isch im Repository.',

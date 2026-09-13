@@ -12,6 +12,7 @@ import '../../utils/log.dart';
 import '../../utils/zip_encryption.dart';
 import 'ociserve_http.dart';
 import 'ociserve_http_factory.dart';
+import '../../utils/content_hash.dart';
 
 /// Typed, bounded gateway for OciServe's learner-facing API.
 abstract class OciServeApi {
@@ -629,7 +630,7 @@ class OciServeGateway implements OciServeApi {
     if (!_hasMatchingImageSignature(response.body, contentType)) {
       throw const OciServeException('invalid_course_image');
     }
-    if (sha256.convert(response.body).toString() != normalizedHash) {
+    if (sha256Hex(response.body) != normalizedHash) {
       throw const OciServeException('image_digest_mismatch');
     }
     return Uint8List.fromList(response.body);
@@ -659,7 +660,7 @@ class OciServeGateway implements OciServeApi {
     if (!_hasMatchingImageSignature(response.body, contentType)) {
       throw const OciServeException('invalid_avatar_image');
     }
-    if (sha256.convert(response.body).toString() != normalizedHash) {
+    if (sha256Hex(response.body) != normalizedHash) {
       throw const OciServeException('avatar_digest_mismatch');
     }
     return Uint8List.fromList(response.body);

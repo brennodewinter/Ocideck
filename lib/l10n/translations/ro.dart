@@ -3040,8 +3040,8 @@ const _dutchSourceAddRo = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Instrumente pentru îmbunătățirea proceselor (SIPOC, DMAIC, Kaizen și A3). Dezactivate implicit; activați extensia pentru a utiliza șabloanele și aspectele de diapozitive asociate.',
   'Videovergaderingen': 'Întâlniri video',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Alătură-te întâlnirilor video și prezintă din OciDeck cu o interfață proprie: participanții lângă slide-ul tău, nu în fereastra altei aplicații. Bring-your-own-server (Jitsi sau Matrix); OciDeck nu găzduiește nimic și ține datele conversațiilor departe de IA. Conectarea la un serviciu de întâlniri va urma într-o versiune viitoare.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Alătură-te întâlnirilor video și prezintă din OciDeck cu o interfață proprie: participanții lângă slide-ul tău, nu în fereastra altei aplicații. Bring-your-own-server (Jitsi); OciDeck nu găzduiește nimic și ține datele conversațiilor departe de IA. Conectarea la un serviciu de întâlniri va urma într-o versiune viitoare.',
   'Videovergadering': 'Întâlnire video',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Încă nu există nicio întâlnire activă. Conectarea la un serviciu de întâlniri va fi adăugată într-o versiune viitoare.',
@@ -3059,11 +3059,6 @@ const _dutchSourceAddRo = <String, String>{
       'Imaginile împreună sunt prea mari pentru un singur fișier HTML (maximum 512 MB). Folosiți mai puține sau imagini mai mici ori exportați ca PDF sau pachet.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Acest export are prea multe diapozitive la o rezoluție prea mare pentru a fi randat în siguranță. Exportați pe părți sau utilizați PDF-ul comprimat.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Finalizează și salvează mai întâi prezentarea; apoi îi poți semna proveniența.',
-  'Herkomst ondertekend.': 'Proveniență semnată.',
-  'De herkomst kon niet worden ondertekend.':
-      'Proveniența nu a putut fi semnată.',
   'Herkomst ondertekenen': 'Semnează proveniența',
   'Herkomst bevestigd': 'Proveniență confirmată',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3081,32 +3076,9 @@ const _dutchSourceAddRo = <String, String>{
       'Proveniența nu poate fi verificată aici',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Semnătura este prezentă, dar nu poate fi recalculată aici — verific-o cu fișierul `.md` original.',
-  'Bestaande identiteit vervangen?': 'Înlocuiți identitatea existentă?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Acest dispozitiv are deja o identitate de colaborare. Restaurarea o înlocuiește cu identitatea din cheie. Ați salvat o cheie de recuperare pentru identitatea curentă? Fără o copie de rezervă o veți pierde.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Memoria web pentru conținutul media al prezentării este plină (maximum 256 MB). Salvați mai întâi lucrul ca fișier .ocideck pentru a preveni pierderea datelor. Apoi utilizați mai puține imagini, videoclipuri sau fișiere audio ori fișiere mai mici, închideți celelalte prezentări sau reîncărcați fără a deschide alte prezentări.',
   'Ongeldige vraag': 'Întrebare nevalidă',
-  'Herstelsleutel': 'Cheie de recuperare',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Păstrează această cheie de recuperare într-un loc sigur — de exemplu, în seiful tău de parole. Este singura modalitate de a restaura aceeași identitate pe alt dispozitiv; fără această cheie, acolo pornești ca un dispozitiv nou, încă neverificat. Nu o împărtăși nimănui.',
-  'Herstelsleutel gekopieerd.': 'Cheie de recuperare copiată.',
-  'Identiteit herstellen': 'Restaurează identitatea',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Lipește cheia de recuperare pe care ai salvat-o anterior. Acest dispozitiv preia atunci aceeași identitate — coautorii care te-au verificat anterior îți vor recunoaște din nou amprenta.',
-  'Identiteit & herstelsleutel': 'Identitate și cheie de recuperare',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Dispozitivul tău are propria identitate de colaborare — asta verifică coautorii. Salvează cheia de recuperare pentru a restaura mai târziu aceeași identitate pe alt dispozitiv; fără acea cheie, acolo o iei de la capăt.',
-  'Herstelsleutel tonen': 'Afișează cheia de recuperare',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Cheia de recuperare nu a putut fi citită.',
-  'Identiteit hersteld.': 'Identitate restaurată.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Această cheie de recuperare nu este corectă — verifică dacă ai copiat-o complet și fără erori.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Aceasta nu pare o cheie de recuperare validă.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Această cheie de recuperare provine dintr-o versiune mai nouă de OciDeck.',
   'Afbeeldingsrechten': 'Drepturi de imagine',
   'Afbeeldingsrechten controleren…': 'Verificați drepturile de imagine...',
   'Afdoening': 'Așezarea',
@@ -3131,95 +3103,22 @@ const _dutchSourceAddRo = <String, String>{
       'fișierele nu au putut fi examinate în siguranță',
   'nieuw gescand': 'nou scanat',
   'Realtime samenwerken': 'Colaborare în timp real',
-  'Manieren van verbinden': 'Moduri de conectare',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Colaborează în direct la o prezentare printr-un releu criptat. Dezactivat implicit. Conținutul este criptat cap la cap cu cheile proprii OciDeck; serverul vede doar date criptate.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Colaborare printr-un homeserver Matrix ca releu. Configurează contul în fila Colaborare. (Jitsi și XMPP urmează.)',
   'Chat': 'Chat',
-  'Chat openen': 'Deschide chatul',
   'Chat sluiten': 'Închide chatul',
   'Bericht…': 'Mesaj…',
   'Versturen': 'Trimite',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Încă nu există mesaje. Spune ceva coautorilor tăi.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Compară amprenta fiecărui dispozitiv printr-un canal de încredere — citiți-o unul altuia sau trimite-o pe o cale în care ai încredere. Dacă se potrivește, marchează dispozitivul ca verificat; va rămâne verificat, inclusiv într-o sesiune ulterioară. Dacă diferă, întrerupe colaborarea.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Identitatea acestui dispozitiv diferă de cea pe care ai verificat-o anterior — s-ar putea să fie cineva la mijloc. Întrerupe colaborarea, cu excepția cazului în care ești sigur că acest dispozitiv a fost configurat din nou.',
-  'Geverifieerd': 'Verificat',
-  'Wijkt af': 'Diferă',
-  'Niet geverifieerd': 'Neverificat',
-  'Markeer als geverifieerd': 'Marchează ca verificat',
-  'Verificatie intrekken': 'Revocă verificarea',
-  'Toch opnieuw vertrouwen': 'Totuși, ai încredere din nou',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Nu toate dispozitivele din această colaborare sunt încă verificate. Compară amprentele pentru a fi sigur cu cine lucrezi.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Editările celulelor tabelului nu se sincronizează cu colaboratorii. Titlul și alte câmpuri da.',
   'Verifiëren': 'Verifică',
-  'Deelnemers verifiëren': 'Verifică participanții',
-  '(dit apparaat)': '(acest dispozitiv)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Acesta nu este un link de invitație valid.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Homeserverul Matrix este inaccesibil.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Gazda nu a răspuns la timp. Verifică linkul și dacă gazda este încă online.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Distribuie acest link celor cu care vrei să colaborezi. Oricine are linkul poate intra în sesiune — așa că distribuie-l doar persoanelor în care ai încredere. Conținutul rămâne criptat cap la cap; homeserverul vede doar date criptate.',
   'Deelnemen': 'Alătură-te',
-  'Deelnemen via een link': 'Alătură-te printr-un link',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Contul tău Matrix este respins — verifică tokenul de acces în Setări.',
-  'Je doet nu live mee aan de samenwerking.': 'Acum colaborezi în direct.',
-  'Nodig mede-auteurs uit': 'Invită coautori',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Deschide mai întâi o prezentare pentru a colabora.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Lipește linkul de invitație pe care ți l-a trimis gazda. Astfel deschizi aceeași prezentare și colaborezi în direct.',
-  'Realtime samenwerken is mislukt.': 'Colaborarea în timp real a eșuat.',
-  'Realtime samenwerken starten': 'Începe colaborarea în timp real',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Configurează mai întâi un cont Matrix în Setări → Colaborare.',
-  'Uitnodigingslink': 'Link de invitație',
-  'Uitnodigingslink gekopieerd.': 'Link de invitație copiat.',
-  'Uitnodigingslink kopiëren': 'Copiază linkul de invitație',
-  'Verbinden met de samenwerking…': 'Se conectează la colaborare…',
-  'Access-token': 'Token de acces',
-  'Apparaat-id': 'ID dispozitiv',
-  'Gebruikers-id': 'ID utilizator',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserverul a returnat o eroare. Încearcă din nou mai târziu.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserverul este inaccesibil sau certificatul nu este de încredere.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserverul redirecționează către o altă adresă — din motive de securitate acest lucru nu este urmat. Introdu direct adresa finală.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserverul cere să aștepți puțin. Încearcă din nou în scurt timp.',
-  'De homeserver weigert dit token.': 'Homeserverul refuză acest token.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Această adresă nu răspunde ca un homeserver Matrix. URL-ul este corect?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Un homeserver trebuie să fie https: tokenul de acces călătorește cu fiecare cerere.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Tokenul de acces este refuzat — verifică dacă l-ai copiat corect și dacă nu a fost revocat.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Creează un token de acces în clientul tău Matrix (de exemplu, în Element la Toate setările → Ajutor și informații), sau pe homeserverul tău. "Testează conexiunea" confirmă tokenul și completează ID-ul tău de utilizator și ID-ul dispozitivului.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Necesar când homeserverul rulează într-o rețea privată sau de acasă. Fără această opțiune, verificarea de securitate refuză o adresă privată.',
-  'Realtime samenwerken (Matrix)': 'Colaborare în timp real (Matrix)',
   'Samenwerken': 'Colaborare',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Conectare reușită — ID utilizator și ID dispozitiv completate',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Conectare reușită, dar homeserverul nu a returnat niciun ID de dispozitiv — completează-l tu, altfel cheile coautorilor nu vor ajunge.',
-  'Vul een access-token in': 'Introdu un token de acces',
-  'Vul een geldige homeserver-URL in': 'Introdu un URL de homeserver valid',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Colaborează în direct la o prezentare printr-un homeserver Matrix ca releu criptat. Conținutul este criptat cap la cap cu cheile proprii OciDeck; serverul vede doar date criptate. Introdu un homeserver și un token de acces creat în altă parte — OciDeck nu îți cere niciodată parola. Jetonul este stocat criptat în inelul de chei, nu alături de celelalte setări.',
-  'wordt door de test ingevuld': 'completat de test',
   'Meer documentatie op de repository': 'Mai multă documentație în depozit',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Documentația completă — inclusiv arhitectura, compilarea, codul sursă și proiectarea — se află în depozit.',

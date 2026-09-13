@@ -57,6 +57,18 @@ class Stanza {
     return null;
   }
 
+  /// The first child element whose namespace is [namespace] — either the
+  /// serialised `xmlns` attribute or the parsed `namespaceUri`. Mirrors the
+  /// former per-file `_childByNs` helpers that were copied across five XMPP
+  /// modules.
+  XmlElement? childByNs(String namespace) {
+    for (final child in children) {
+      final ns = child.getAttribute('xmlns') ?? child.name.namespaceUri;
+      if (ns == namespace) return child;
+    }
+    return null;
+  }
+
   /// Serialise to an [XmlElement] named for the [kind]. In XMPP-over-WebSocket
   /// (RFC 7395) each frame is a standalone XML document — the `jabber:client`
   /// default namespace is NOT inherited from the stream (the `<open>` frame

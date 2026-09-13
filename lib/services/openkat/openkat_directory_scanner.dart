@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as p;
 
 import '../../models/openkat/openkat_models.dart';
 import 'openkat_export_adapters.dart';
 import 'openkat_json_adapter.dart';
+import '../../utils/content_hash.dart';
 
 /// Scans a directory for OpenKAT JSON exports, builds a manifest and groups
 /// recognised files by organisation and report date.
@@ -78,7 +78,7 @@ class OpenKatDirectoryScanner {
         continue;
       }
       final bytes = await entity.readAsBytes();
-      final hash = sha256.convert(bytes).toString();
+      final hash = sha256Hex(bytes);
 
       if (seenHashes.containsKey(hash)) {
         entries.add(

@@ -2051,8 +2051,8 @@ const _dutchSourceAddFy = {
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Helpmiddels foar prosesferbettering (SIPOC, DMAIC, Kaizen en A3). Standert út; skeakelje de útwreiding yn om de byhearrende sjabloanen en dia-yndielingen te brûken.',
   'Videovergaderingen': 'Fideofergaderingen',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Doch mei oan fideofergaderingen en presintearje fanút OciDeck mei in eigen ynterface: de dielnimmers njonken jo slide, net yn it finster fan in oare app. Bring-your-own-server (Jitsi of Matrix); OciDeck hostet neat en hâldt de peteargegevens bûten AI. De ferbining mei in gearkomstetsjinst folget yn in folgjende ferzje.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Doch mei oan fideofergaderingen en presintearje fanút OciDeck mei in eigen ynterface: de dielnimmers njonken jo slide, net yn it finster fan in oare app. Bring-your-own-server (Jitsi); OciDeck hostet neat en hâldt de peteargegevens bûten AI. De ferbining mei in gearkomstetsjinst folget yn in folgjende ferzje.',
   'Videovergadering': 'Fideofergadering',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Noch gjin aktive gearkomste. It ferbinen mei in gearkomstetsjinst wurdt yn in folgjende ferzje tafoege.',
@@ -2070,11 +2070,6 @@ const _dutchSourceAddFy = {
       'De ôfbyldings byinoar binne te grut foar ien HTML-bestân (maksimaal 512 MB). Brûk minder of lytsere ôfbyldings, of eksportearje as PDF of pakket.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Dizze eksport hat te folle dia’s op te hege resolúsje om feilich te renderjen. Eksportearje yn dielen of brûk de komprimearre PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Meitsje de presintaasje earst ôf en bewarje har; dêrnei kinst it komôf ûndertekenje.',
-  'Herkomst ondertekend.': 'Komôf ûndertekene.',
-  'De herkomst kon niet worden ondertekend.':
-      'It komôf koe net ûndertekene wurde.',
   'Herkomst ondertekenen': 'Komôf ûndertekenje',
   'Herkomst bevestigd': 'Komôf befêstige',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -2091,32 +2086,9 @@ const _dutchSourceAddFy = {
   'Herkomst niet hier te controleren': 'Komôf hjir net te kontrolearjen',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'De ûndertekening is oanwêzich, mar kin hjir net neirekkene wurde — kontrolearje tsjin it oarspronklike `.md`-bestân.',
-  'Bestaande identiteit vervangen?': 'Besteande identiteit ferfange?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Dit apparaat hat al in gearwurkingsidentiteit. Weromsette ferfangt dy troch de identiteit út de kaai. Hast fan de hjoeddeiske identiteit in herstelkaai bewarre? Sûnder reservekopy bist dy kwyt.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'It webûnthâld foar presintaasjemedia is fol (maksimaal 256 MB). Bewarje dyn wurk earst as in .ocideck-bestân om gegevensferlies foar te kommen. Brûk dêrnei minder of lytsere ôfbyldingen, fideo’s of audiobestannen, slút oare decks of laad opnij sûnder oare decks te iepenjen.',
   'Ongeldige vraag': 'Unjildige fraach',
-  'Herstelsleutel': 'Herstelkaai',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Bewarje dizze herstelkaai op in feilich plak — bygelyks yn dyn wachtwurdklús. It is de iennige manier om deselde identiteit op in oar apparaat werom te setten; sûnder dizze kaai begjinsto dêr as in nij, noch net ferifiearre apparaat. Diel him mei nimmen.',
-  'Herstelsleutel gekopieerd.': 'Herstelkaai kopiearre.',
-  'Identiteit herstellen': 'Identiteit weromsette',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Plak de herstelkaai dy\'tsto earder bewarre hast. Dit apparaat nimt dan deselde identiteit oer — mei-auteurs dy\'t dy earder ferifiearre ha, werkenne dyn fingerprint wer.',
-  'Identiteit & herstelsleutel': 'Identiteit & herstelkaai',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Dyn apparaat hat in eigen gearwurkingsidentiteit — dat is wat mei-auteurs ferifiearje. Bewarje de herstelkaai om deselde identiteit letter op in oar apparaat werom te setten; sûnder dy kaai begjinsto dêr opnij.',
-  'Herstelsleutel tonen': 'Herstelkaai toane',
-  'De herstelsleutel kon niet worden gelezen.':
-      'De herstelkaai koe net lêzen wurde.',
-  'Identiteit hersteld.': 'Identiteit weromset.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Dizze herstelkaai kloppet net — kontrolearje oftsto him folslein en flaterfrij oernommen hast.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Dit liket gjin jildige herstelkaai.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Dizze herstelkaai komt út in nijere ferzje fan OciDeck.',
   'Afbeeldingsrechten': 'Ôfbyldingsrjochten',
   'Afbeeldingsrechten controleren…': 'Ôfbyldingsrjochten kontrolearje…',
   'Afdoening': 'Ôfhanneling',
@@ -2141,96 +2113,22 @@ const _dutchSourceAddFy = {
       'bestannen koenen net feilich beoardiele wurde',
   'nieuw gescand': 'nij scand',
   'Realtime samenwerken': 'Realtime gearwurkje',
-  'Manieren van verbinden': 'Manieren om te ferbinen',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Wurkje live gear oan in presintaasje fia in fersifere trochjefte. Standert út. De ynhâld wurdt end-to-end fersifere mei OciDeck syn eigen kaaien; de server sjocht allinne fersifere gegevens.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Gearwurkje fia in Matrix-homeserver as trochjefte. Stel it account yn op it ljepblêd Gearwurking. (Jitsi en XMPP folgje.)',
   'Chat': 'Chat',
-  'Chat openen': 'Chat iepenje',
   'Chat sluiten': 'Chat slute',
   'Bericht…': 'Berjocht…',
   'Versturen': 'Ferstjoere',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Noch gjin berjochten. Sis wat tsjin dyn mei-auteurs.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Ferlykje de fingerprint fan elk apparaat fia in fertroud kanaal — lês him elkoar foar, of stjoer him fia in wei dy\'tsto fertrouwst. Komt er oerien, markearje it apparaat dan as ferifiearre; it bliuwt dan ferifiearre, ek yn in folgjende sesje. Wykt er ôf, ferbrek dan de gearwurking.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'De identiteit fan dit apparaat wykt ôf fan wat do earder ferifiearre hast — mooglik sit der ien tuskenyn. Ferbrek de gearwurking, útsein asto wis witst dat dit apparaat opnij ynsteld is.',
-  'Geverifieerd': 'Ferifiearre',
-  'Wijkt af': 'Wykt ôf',
-  'Niet geverifieerd': 'Net ferifiearre',
-  'Markeer als geverifieerd': 'Markearje as ferifiearre',
-  'Verificatie intrekken': 'Ferifikaasje ynlûke',
-  'Toch opnieuw vertrouwen': 'Dochs opnij fertrouwe',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Noch net elk apparaat yn dizze gearwurking is ferifiearre. Ferlykje de fingerprints om wis te wêzen mei wa\'tsto wurkest.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Tabelsel-bewurkingen wurde net syngronisearre nei meiwurkers. De titel en oare fjilden wol.',
   'Verifiëren': 'Ferifiearje',
-  'Deelnemers verifiëren': 'Dielnimmers ferifiearje',
-  '(dit apparaat)': '(dit apparaat)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Dat is gjin jildige útnûgingskeppeling.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'De Matrix-homeserver is net berikber.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'De gasthear reagearre net op \'e tiid. Kontrolearje de keppeling en oft de gasthear noch online is.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Diel dizze keppeling mei wa\'tst meiwurkje litte wolst. Wa\'t de keppeling hat, kin de sesje ynkomme — diel him dus allinne mei minsken dy\'tst fertrouwst. De ynhâld bliuwt end-to-end fersifere; de homeserver sjocht allinne fersifere gegevens.',
   'Deelnemen': 'Meidwaan',
-  'Deelnemen via een link': 'Meidwaan fia in keppeling',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Dyn Matrix-account wurdt wegere — kontrolearje it tagongstoken by Ynstellings.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Do dochst no live mei oan de gearwurking.',
-  'Nodig mede-auteurs uit': 'Mei-auteurs útnûgje',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Iepenje earst in presintaasje om gear te wurkjen.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Plak de útnûgingskeppeling dy\'t de gasthear dy stjoerd hat. Dêrmei iepenest deselde presintaasje en wurkest live mei.',
-  'Realtime samenwerken is mislukt.': 'Realtime gearwurkje is mislearre.',
-  'Realtime samenwerken starten': 'Realtime gearwurkje begjinne',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Stel earst in Matrix-account yn by Ynstellings → Gearwurking.',
-  'Uitnodigingslink': 'Útnûgingskeppeling',
-  'Uitnodigingslink gekopieerd.': 'Útnûgingskeppeling kopiearre.',
-  'Uitnodigingslink kopiëren': 'Útnûgingskeppeling kopiearje',
-  'Verbinden met de samenwerking…': 'Ferbine mei de gearwurking…',
-  'Access-token': 'Tagongstoken',
-  'Apparaat-id': 'Apparaat-id',
-  'Gebruikers-id': 'Brûkers-id',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'De homeserver joech in flater werom. Besykje it letter opnij.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'De homeserver is net berikber, of it sertifikaat wurdt net fertroud.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'De homeserver ferwiist troch nei in oar adres — dat wurdt om feiligensredenen net folge. Folje it definitive adres streekrjocht yn.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'De homeserver freget om even te wachtsjen. Besykje it aanst opnij.',
-  'De homeserver weigert dit token.': 'De homeserver wegeret dit token.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Dit adres antwurdet net as in Matrix-homeserver. Kloppet de URL?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'In homeserver moat https wêze: it tagongstoken reizget by elk fersyk mei.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'It tagongstoken wurdt wegere — kontrolearje oftst it goed oernaam hast en oft it net ynlutsen is.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Meitsje in tagongstoken oan yn dyn Matrix-client (bygelyks yn Element ûnder Alle ynstellingen → Help & ynfo), of op dyn homeserver. "Ferbining teste" befêstiget it token en follet dyn brûkers-id en apparaat-id yn.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Nedich as de homeserver op in privee- of thúsnetwurk draait. Sûnder dizze flagge wegeret de befeiliging in privee-adres.',
-  'Realtime samenwerken (Matrix)': 'Realtime gearwurkje (Matrix)',
   'Samenwerken': 'Gearwurking',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Ferbining slagge — brûkers-id en apparaat-id ynfolle',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Ferbining slagge, mar de homeserver joech gjin apparaat-id werom — folje dy sels yn, oars komme kaaien fan mei-auteurs net oan.',
-  'Vul een access-token in': 'Folje in tagongstoken yn',
-  'Vul een geldige homeserver-URL in': 'Folje in jildige homeserver-URL yn',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Wurkje live gear oan in presintaasje fia in Matrix-homeserver as fersifere trochjefte. De ynhâld wurdt end-to-end fersifere mei OciDeck syn eigen kaaien; de server sjocht allinne fersifere gegevens. Folje in homeserver en in earne oars oanmakke tagongstoken yn — OciDeck freget nea om dyn wachtwurd. It token wurdt fersifere yn de kaaiketting bewarre, net by de oare ynstellingen.',
-  'wordt door de test ingevuld': 'wurdt troch de test ynfolle',
   'Meer documentatie op de repository': 'Mear dokumintaasje yn it repository',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'De folsleine dokumintaasje — ek arsjitektuer, bou, boarnekoade en ûntwerp — stiet yn it repository.',

@@ -108,9 +108,6 @@ void main() {
     // hem door `_get` pinnen — één keer per redirect-hop.
     'lib/services/cve/local_cve_database_io.dart': 2,
     'lib/services/git/git_transport_io.dart': 0,
-    // Matrix relay egress (desktop): één gepinde client op de homeserver-origin,
-    // safeResolve(Trusted) + connectPinned + geen redirects + bytecap.
-    'lib/collab/matrix_http_transport_io.dart': 0,
     // XMPP-over-WebSocket egress (desktop): één gepinde client op de
     // wss-endpoint-origin, resolveConfigured + connectPinned + een fail-closed
     // schema-assert; WebSocket.connect gebruikt deze customClient.
@@ -182,11 +179,6 @@ void main() {
         // gelegd en hergebruikt; een URI buiten de geconfigureerde origin wordt
         // geweigerd, zodat de gepinde client nooit op een andere host uitkomt.
         'lib/services/git/git_transport_io.dart',
-        // Matrix relay egress (desktop): resolveConfigured met de
-        // trustedInternal-opt-in van de homeserver + socket-pin + geen redirects
-        // + bytecap. De pin ligt op de geconfigureerde origin; een URI buiten die
-        // origin wordt geweigerd vóór er verbonden wordt.
-        'lib/collab/matrix_http_transport_io.dart',
         // XMPP-over-WebSocket egress (desktop): resolveConfigured met de
         // trustedInternal-opt-in + socket-pin via connectPinned, plus een
         // fail-closed schema-assert die een ongepinde (niet-https) socket weigert
@@ -402,13 +394,6 @@ void main() {
         // gaat nooit door het same-origin fetch-hulppunt, zodat dat punt het
         // PAT nooit in handen krijgt.
         'lib/services/git/git_transport_web.dart',
-        // Matrix relay egress (WEB-tak). Zelfde redenering: op web bestaat de
-        // dart:io-pinning van matrix_http_transport_io.dart niet en kan ze niet
-        // draaien; de browser (CORS, mixed content) en de pagina-CSP
-        // (`connect-src`) zijn de gate. Dit bestand begrenst schema en omvang;
-        // de client die het token stuurt wordt lexicaal op https/loopback
-        // gecontroleerd in MatrixClient vóór dit transport wordt bereikt.
-        'lib/collab/matrix_http_transport_web.dart',
         // XMPP-over-WebSocket egress (desktop): ruwe WebSocket.connect met een
         // NetGuard-gepinde customClient (zie de raw-HttpClient-allowlist hierboven,
         // plus de fail-closed schema-assert). Bewust WebSocket.connect en niet

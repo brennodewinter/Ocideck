@@ -18,7 +18,7 @@ import 'package:markdown/markdown.dart' as md;
 import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
-import '../markdown_table_lines.dart';
+import '../../utils/xml_escape.dart';
 
 /// Zet [markdown] (GFM) om in een XHTML-fragment.
 ///
@@ -84,7 +84,7 @@ String markdownToXhtml(
 
   var out = visitor.output.toString().replaceAll(
     tocSentinel,
-    '<nav epub:type="toc" id="ocideck-toc"><h2>${_xmlEscape(footnotesTitle)}</h2></nav>',
+    '<nav epub:type="toc" id="ocideck-toc"><h2>${xmlEscape(footnotesTitle)}</h2></nav>',
   );
 
   // Tijdlijn-placeholders herstellen.
@@ -104,7 +104,7 @@ String markdownToXhtml(
 String _endnotesSection(List<Footnote> notes, String title) {
   final buf = StringBuffer()
     ..writeln('<section class="ocideck-footnotes" epub:type="endnotes">')
-    ..writeln('<h2>${_xmlEscape(title)}</h2>')
+    ..writeln('<h2>${xmlEscape(title)}</h2>')
     ..writeln('<ol>');
   for (final note in notes) {
     buf
@@ -133,51 +133,30 @@ String _inlineXhtml(String text) => md
 /// tijdlijn als een gewone tabel, wat voor ePub goed genoeg is — de
 /// tijdlijn-marker blijft als HTML-commentaar zichtbaar.
 ({String source, List<String> xhtml}) _protectDocumentTimelines(String source) {
-  final lines = source.replaceAll('\r\n', '\n').split('\n');
-  final output = <String>[];
-  final rendered = <String>[];
-  var index = 0;
-  while (index < lines.length) {
-    if (lines[index].trim() != documentTimelineMarker ||
-        index + 2 >= lines.length ||
-        !isMarkdownTableLine(lines[index + 1]) ||
-        !isMarkdownTableDelimiterRow(lines[index + 2])) {
-      output.add(lines[index++]);
-      continue;
-    }
-    var end = index + 3;
-    while (end < lines.length && isMarkdownTableLine(lines[end])) {
-      end++;
-    }
-    final marked = lines.sublist(index, end).join('\n');
-    final timeline = analyzeMarkedTimeline(marked).timeline;
-    if (timeline == null) {
-      output.add(lines[index++]);
-      continue;
-    }
-    // De tijdlijn wordt als gewone tabel gerenderd; de marker blijft als
-    // commentaar erboven staan voor wie de bron kent.
-    final buf = StringBuffer('<!-- timeline -->\n');
-    buf.writeln('<table class="ocideck-timeline">');
-    buf.writeln('<thead><tr>');
-    for (final header in timeline.headers) {
-      buf.write('<th>${_xmlEscape(header)}</th>');
-    }
-    buf.writeln('</tr></thead>');
-    buf.writeln('<tbody>');
-    for (final event in timeline.events) {
-      buf.write('<tr>');
-      buf.write('<td>${_inlineXhtml(event.marker)}</td>');
-      buf.write('<td>${_inlineXhtml(event.event)}</td>');
-      buf.write('<td>${_inlineXhtml(event.metadata ?? '')}</td>');
-      buf.writeln('</tr>');
-    }
-    buf.writeln('</tbody></table>');
-    output.add('OCIDECKTIMELINE${rendered.length}END');
-    rendered.add(buf.toString());
-    index = end;
+  final r = protectTimelines(source, _renderTimelineXhtml);
+  return (source: r.source, xhtml: r.rendered);
+}
+
+String _renderTimelineXhtml(DocumentTimeline timeline) {
+  // De tijdlijn wordt als gewone tabel gerenderd; de marker blijft als
+  // commentaar erboven staan voor wie de bron kent.
+  final buf = StringBuffer('<!-- timeline -->\n');
+  buf.writeln('<table class="ocideck-timeline">');
+  buf.writeln('<thead><tr>');
+  for (final header in timeline.headers) {
+    buf.write('<th>${xmlEscape(header)}</th>');
   }
-  return (source: output.join('\n'), xhtml: rendered);
+  buf.writeln('</tr></thead>');
+  buf.writeln('<tbody>');
+  for (final event in timeline.events) {
+    buf.write('<tr>');
+    buf.write('<td>${_inlineXhtml(event.marker)}</td>');
+    buf.write('<td>${_inlineXhtml(event.event)}</td>');
+    buf.write('<td>${_inlineXhtml(event.metadata ?? '')}</td>');
+    buf.writeln('</tr>');
+  }
+  buf.writeln('</tbody></table>');
+  return buf.toString();
 }
 
 class _XhtmlNodeVisitor implements md.NodeVisitor {
@@ -294,7 +273,7 @@ class _XhtmlNodeVisitor implements md.NodeVisitor {
         if (href == null) {
           _stack.add(_Ctx.passThrough);
         } else {
-          _buf.write('<a href="${_xmlAttr(href)}">');
+          _buf.write('<a href="${xmlAttr(href)}">');
           _stack.add(_Ctx.link);
         }
       case 'img':
@@ -379,7 +358,7 @@ class _XhtmlNodeVisitor implements md.NodeVisitor {
     // naar aparte bestanden geschreven en het src-attribuut wordt
     // gerebaseerd. Hier schrijven we het originele src; de EPUB-builder
     // vervangt het later.
-    _buf.write('<img src="${_xmlAttr(src)}" alt="${_xmlAttr(alt)}"/>');
+    _buf.write('<img src="${xmlAttr(src)}" alt="${xmlAttr(alt)}"/>');
   }
 
   @override
@@ -466,10 +445,3 @@ enum _Ctx {
 
 /// XML-escape voor tekstinhoud: & < >. De markdown-package met
 /// `encodeHtml: true` doet dit al voor de meeste tekst, maar tijdlijn-headers
-/// en noot-titels gaan er rechtstreeks doorheen.
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
-
-/// XML-escape voor attribuutwaarden: & < > " '.
-String _xmlAttr(String s) =>
-    _xmlEscape(s).replaceAll('"', '&quot;').replaceAll("'", '&apos;');

@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:crypto/crypto.dart';
-
 import 'log.dart';
+import '../utils/content_hash.dart';
 
 /// Waarom een hostcontrole geen adressen opleverde.
 ///
@@ -342,7 +341,7 @@ class NetGuard {
     final expected = pinnedSha256.trim().toLowerCase();
     if (expected.isEmpty) return null;
     return (cert) {
-      final actual = sha256.convert(cert.der).toString().toLowerCase();
+      final actual = sha256Hex(cert.der).toLowerCase();
       // Vergelijking in constante tijd is hier niet nodig: de vingerafdruk is
       // openbaar, er valt niets uit te lekken.
       final ok = actual == expected;
@@ -357,7 +356,7 @@ class NetGuard {
 
   /// De vingerafdruk van [cert], zoals hij wordt vastgelegd en getoond.
   static String certificateFingerprint(X509Certificate cert) =>
-      sha256.convert(cert.der).toString().toLowerCase();
+      sha256Hex(cert.der).toLowerCase();
 
   /// Haal het certificaat op dat [uri] aanbiedt, zónder het te vertrouwen.
   ///

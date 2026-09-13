@@ -22,6 +22,7 @@ import 'iwa/snappy.dart';
 import 'key_context.dart';
 import 'key_plist.dart';
 import 'key_text_salvage.dart';
+import '../../../../utils/file_extension.dart';
 
 /// Imports an Apple Keynote (`.key`) presentation.
 ///
@@ -299,12 +300,7 @@ class KeyImporter extends Importer {
     return iwa.length - 2;
   }
 
-  String _ext(String name) {
-    final dot = name.lastIndexOf('.');
-    if (dot < 0) return 'jpg';
-    final ext = name.substring(dot + 1).toLowerCase();
-    return ext.isEmpty ? 'jpg' : ext;
-  }
+  String _ext(String name) => extOfFileName(name, fallback: 'jpg');
 
   ConversionIssue _iwaIssue({
     required int slideCount,

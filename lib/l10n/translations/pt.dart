@@ -3046,8 +3046,8 @@ const _dutchSourceAddPt = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Ferramentas para melhoria de processos (SIPOC, DMAIC, Kaizen e A3). Desativadas por predefinição; ative a extensão para utilizar os modelos e esquemas de diapositivos associados.',
   'Videovergaderingen': 'Videoconferências',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Participe em videoconferências e apresente a partir do OciDeck com uma interface própria: os participantes ao lado do seu diapositivo, não na janela de outra aplicação. Bring-your-own-server (Jitsi ou Matrix); o OciDeck não aloja nada e mantém os dados das conversas fora da IA. A ligação a um serviço de reuniões chegará numa versão futura.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Participe em videoconferências e apresente a partir do OciDeck com uma interface própria: os participantes ao lado do seu diapositivo, não na janela de outra aplicação. Bring-your-own-server (Jitsi); o OciDeck não aloja nada e mantém os dados das conversas fora da IA. A ligação a um serviço de reuniões chegará numa versão futura.',
   'Videovergadering': 'Videoconferência',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Ainda não há nenhuma reunião ativa. A ligação a um serviço de reuniões será adicionada numa versão futura.',
@@ -3065,11 +3065,6 @@ const _dutchSourceAddPt = <String, String>{
       'As imagens em conjunto são grandes demais para um único ficheiro HTML (máximo 512 MB). Use menos imagens ou imagens mais pequenas, ou exporte como PDF ou pacote.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Esta exportação tem demasiados diapositivos com uma resolução demasiado elevada para ser renderizada com segurança. Exporte por partes ou utilize o PDF comprimido.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Conclua e guarde primeiro a apresentação; depois pode assinar a sua proveniência.',
-  'Herkomst ondertekend.': 'Proveniência assinada.',
-  'De herkomst kon niet worden ondertekend.':
-      'Não foi possível assinar a proveniência.',
   'Herkomst ondertekenen': 'Assinar proveniência',
   'Herkomst bevestigd': 'Proveniência confirmada',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3086,32 +3081,9 @@ const _dutchSourceAddPt = <String, String>{
   'Herkomst niet hier te controleren': 'Proveniência não verificável aqui',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'A assinatura está presente mas não pode ser recalculada aqui — verifique-a com o ficheiro `.md` original.',
-  'Bestaande identiteit vervangen?': 'Substituir a identidade existente?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Este dispositivo já tem uma identidade de colaboração. Restaurar substitui-a pela identidade da chave. Guardaste uma chave de recuperação da identidade atual? Sem uma cópia de segurança vais perdê-la.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'A memória web para multimédia da apresentação está cheia (máximo de 256 MB). Primeiro, guarde o seu trabalho como ficheiro .ocideck para evitar a perda de dados. Depois, use menos imagens, vídeos ou ficheiros de áudio, ou ficheiros menores, feche outros decks ou recarregue sem abrir outros decks.',
   'Ongeldige vraag': 'Pergunta inválida',
-  'Herstelsleutel': 'Chave de recuperação',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Guarde esta chave de recuperação num local seguro — por exemplo, no seu cofre de palavras-passe. É a única forma de restaurar a mesma identidade noutro dispositivo; sem esta chave, começa aí como um dispositivo novo, ainda não verificado. Não a partilhe com ninguém.',
-  'Herstelsleutel gekopieerd.': 'Chave de recuperação copiada.',
-  'Identiteit herstellen': 'Restaurar identidade',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Cole a chave de recuperação que guardou anteriormente. Este dispositivo assume então a mesma identidade — os coautores que o verificaram antes reconhecerão de novo a sua impressão digital.',
-  'Identiteit & herstelsleutel': 'Identidade e chave de recuperação',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'O seu dispositivo tem uma identidade de colaboração própria — é isso que os coautores verificam. Guarde a chave de recuperação para restaurar mais tarde essa mesma identidade noutro dispositivo; sem essa chave, começa aí do zero.',
-  'Herstelsleutel tonen': 'Mostrar chave de recuperação',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Não foi possível ler a chave de recuperação.',
-  'Identiteit hersteld.': 'Identidade restaurada.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Esta chave de recuperação não está correta — verifique se a copiou por completo e sem erros.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Isto não parece uma chave de recuperação válida.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Esta chave de recuperação vem de uma versão mais recente do OciDeck.',
   'Afbeeldingsrechten': 'Direitos de imagem',
   'Afbeeldingsrechten controleren…': 'Verifique os direitos da imagem…',
   'Afdoening': 'Povoado',
@@ -3136,96 +3108,22 @@ const _dutchSourceAddPt = <String, String>{
       'os arquivos não puderam ser revisados ​​com segurança',
   'nieuw gescand': 'recentemente digitalizado',
   'Realtime samenwerken': 'Colaboração em tempo real',
-  'Manieren van verbinden': 'Formas de ligação',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Colabora ao vivo numa apresentação através de um retransmissor cifrado. Desativado por predefinição. O conteúdo é cifrado ponta a ponta com as próprias chaves do OciDeck; o servidor só vê dados cifrados.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Colaboração através de um homeserver Matrix como retransmissor. Configura a conta no separador Colaboração. (Jitsi e XMPP em breve.)',
   'Chat': 'Conversa',
-  'Chat openen': 'Abrir conversa',
   'Chat sluiten': 'Fechar conversa',
   'Bericht…': 'Mensagem…',
   'Versturen': 'Enviar',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Ainda não há mensagens. Diz algo aos teus coautores.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Compara a impressão digital de cada dispositivo por um canal de confiança — leiam-na um ao outro ou envia-a por uma via em que confies. Se coincidir, marca o dispositivo como verificado; permanecerá verificado, inclusive numa sessão posterior. Se divergir, interrompe a colaboração.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'A identidade deste dispositivo difere da que verificaste antes — pode haver alguém no meio. Interrompe a colaboração, a menos que tenhas a certeza de que este dispositivo foi reconfigurado.',
-  'Geverifieerd': 'Verificado',
-  'Wijkt af': 'Diverge',
-  'Niet geverifieerd': 'Não verificado',
-  'Markeer als geverifieerd': 'Marcar como verificado',
-  'Verificatie intrekken': 'Revogar a verificação',
-  'Toch opnieuw vertrouwen': 'Confiar de novo mesmo assim',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ainda nem todos os dispositivos desta colaboração estão verificados. Compara as impressões digitais para teres a certeza de com quem estás a trabalhar.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'As edições de células da tabela não são sincronizadas com os colaboradores. O título e outros campos sim.',
   'Verifiëren': 'Verificar',
-  'Deelnemers verifiëren': 'Verificar participantes',
-  '(dit apparaat)': '(este dispositivo)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Esta não é uma ligação de convite válida.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'O homeserver Matrix está inacessível.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'O anfitrião não respondeu a tempo. Verifica a ligação e se o anfitrião ainda está online.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Partilha esta ligação com quem queres pôr a colaborar. Quem tiver a ligação pode entrar na sessão — por isso, partilha-a apenas com pessoas em quem confias. O conteúdo permanece cifrado ponta a ponta; o homeserver só vê dados cifrados.',
   'Deelnemen': 'Juntar-se',
-  'Deelnemen via een link': 'Juntar-se através de uma ligação',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'A tua conta Matrix é recusada — verifica o token de acesso nas Definições.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Estás agora a colaborar ao vivo.',
-  'Nodig mede-auteurs uit': 'Convidar coautores',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Abre primeiro uma apresentação para colaborar.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Cola a ligação de convite que o anfitrião te enviou. Assim abres a mesma apresentação e colaboras ao vivo.',
-  'Realtime samenwerken is mislukt.': 'A colaboração em tempo real falhou.',
-  'Realtime samenwerken starten': 'Iniciar colaboração em tempo real',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Configura primeiro uma conta Matrix em Definições → Colaboração.',
-  'Uitnodigingslink': 'Ligação de convite',
-  'Uitnodigingslink gekopieerd.': 'Ligação de convite copiada.',
-  'Uitnodigingslink kopiëren': 'Copiar ligação de convite',
-  'Verbinden met de samenwerking…': 'A ligar à colaboração…',
-  'Access-token': 'Token de acesso',
-  'Apparaat-id': 'ID do dispositivo',
-  'Gebruikers-id': 'ID de utilizador',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'O homeserver devolveu um erro. Tenta novamente mais tarde.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'O homeserver está inacessível, ou o certificado não é fidedigno.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'O homeserver redireciona para outro endereço — por motivos de segurança não é seguido. Introduz diretamente o endereço final.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'O homeserver pede para aguardar um momento. Tenta novamente em breve.',
-  'De homeserver weigert dit token.': 'O homeserver recusa este token.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Este endereço não responde como um homeserver Matrix. O URL está correto?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Um homeserver deve ser https: o token de acesso viaja com cada pedido.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'O token de acesso é recusado — verifica se o copiaste corretamente e se não foi revogado.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Cria um token de acesso no teu cliente Matrix (por exemplo, no Element em Todas as definições → Ajuda e informações), ou no teu homeserver. "Testar ligação" confirma o token e preenche o teu ID de utilizador e ID do dispositivo.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Necessário quando o homeserver corre numa rede privada ou doméstica. Sem esta opção, a verificação de segurança recusa um endereço privado.',
-  'Realtime samenwerken (Matrix)': 'Colaboração em tempo real (Matrix)',
   'Samenwerken': 'Colaboração',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Ligação bem-sucedida — ID de utilizador e ID do dispositivo preenchidos',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Ligação bem-sucedida, mas o homeserver não devolveu qualquer ID de dispositivo — preenche-o tu mesmo, caso contrário as chaves dos coautores não chegarão.',
-  'Vul een access-token in': 'Introduz um token de acesso',
-  'Vul een geldige homeserver-URL in': 'Introduz um URL de homeserver válido',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Colabora ao vivo numa apresentação através de um homeserver Matrix como retransmissor cifrado. O conteúdo é cifrado ponta a ponta com as próprias chaves do OciDeck; o servidor só vê dados cifrados. Introduz um homeserver e um token de acesso criado noutro lugar — o OciDeck nunca pede a tua palavra-passe. O token é guardado cifrado no porta-chaves, não junto às restantes definições.',
-  'wordt door de test ingevuld': 'preenchido pelo teste',
   'Meer documentatie op de repository': 'Mais documentação no repositório',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'A documentação completa — incluindo arquitetura, compilação, código-fonte e design — está no repositório.',

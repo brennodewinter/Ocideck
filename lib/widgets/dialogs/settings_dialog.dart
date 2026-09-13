@@ -7,7 +7,6 @@ import 'package:path/path.dart' as p;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../models/markdown_validation.dart';
-import '../../models/matrix_settings.dart';
 import '../../models/page_size.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -78,8 +77,6 @@ import 'libreplan_import_dialog.dart';
 import 'settings/appearance_legibility.dart';
 import 'settings/git_form.dart';
 import 'settings/git_panel.dart';
-import 'settings/matrix_form.dart';
-import 'settings/matrix_panel.dart';
 import 'settings/s3_form.dart';
 import 'settings/s3_panel.dart';
 import 'settings/settings_section_title.dart';
@@ -167,12 +164,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   /// Idem voor S3-verbindingen.
   final Map<String, S3Form> _s3Forms = {};
-
-  /// Het app-globale Matrix-samenwerkaccount. Eén formulier, geen lijst: het
-  /// account is app-globaal (§8), niet per verbinding. Zelfde contract als de
-  /// andere formulieren — geheim uit de sleutelhanger na, weggeschreven bij
-  /// Opslaan.
-  final MatrixForm _matrixForm = MatrixForm();
 
   late String? _exportDirectory;
   late ThemeProfile _themeProfile;
@@ -315,7 +306,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
     _initAiFields(settings.aiSettings);
     _initLibreplanFields(settings.libreplanSettings);
-    _adoptMatrixForm(settings.matrixAccount);
     _highlightedThemeField = widget.highlightThemeField;
     _selectedTab = widget.initialSection;
     if (widget.highlightThemeField != null) {
@@ -343,7 +333,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     for (final form in _s3Forms.values) {
       form.dispose();
     }
-    _matrixForm.dispose();
     _ai.dispose();
     _libreplanBaseUrl.dispose();
     _libreplanUsername.dispose();
@@ -808,17 +797,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       notifier.setLibreplanPassword(lpKey, lpPass);
     } else if (lp.hasBackend) {
       notifier.deleteLibreplanPassword(lpKey);
-    }
-
-    // Het app-globale Matrix-account: de configuratie via de notifier, het token
-    // apart in de sleutelhanger. Leeggemaakt terwijl er een account stond →
-    // wissen; onaangeroerd zonder account → niets doen.
-    final matrix = _matrixForm.config;
-    if (matrix.isConfigured) {
-      notifier.setMatrixAccount(matrix);
-      _matrixForm.saveSecret(notifier);
-    } else if (ref.read(settingsProvider).matrixAccount != null) {
-      notifier.setMatrixAccount(null);
     }
 
     Navigator.pop(context);

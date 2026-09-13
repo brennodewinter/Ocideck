@@ -4,20 +4,16 @@
 // configured an account is not stranded after an upgrade.
 //
 // Two levels, because more transports are coming (Jitsi, XMPP): the module is the
-// umbrella switch, and each transport has its own toggle under it. Today that is
-// just Matrix; its toggle defaults on, so enabling the module gives a working
-// setup, and it can be turned off on its own without leaving the module.
+// umbrella switch, and each transport has its own toggle under it.
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/log.dart';
-import 'matrix_client_provider.dart';
 
 /// Preference keys. Renaming afterwards would silently reset the choice for
 /// existing installs.
 const _moduleKey = 'collaborationModuleEnabled';
-const _matrixKey = 'matrixCollabEnabled';
 
 final collaborationProvider =
     NotifierProvider<CollaborationNotifier, CollaborationState>(
@@ -29,53 +25,25 @@ final collaborationEnabledProvider = Provider<bool>(
   (ref) => ref.watch(collaborationProvider.select((s) => s.enabled)),
 );
 
-/// Whether the Matrix transport is switched on within the module. One transport
-/// today; Jitsi/XMPP will get their own toggles beside it.
-final matrixCollabEnabledProvider = Provider<bool>(
-  (ref) => ref.watch(collaborationProvider.select((s) => s.matrixEnabled)),
-);
-
-/// Matrix is operative: the module is on **and** the Matrix toggle is on. This
-/// gates the Matrix host/join actions.
-final matrixCollabActiveProvider = Provider<bool>(
-  (ref) =>
-      ref.watch(collaborationEnabledProvider) &&
-      ref.watch(matrixCollabEnabledProvider),
-);
-
-/// The reveal gate for the *Samenwerken* tab and the Matrix features: operative,
-/// or a Matrix account is already configured (never strand an existing account).
+/// The reveal gate for the *Samenwerken* tab: operative.
 final collaborationRevealProvider = Provider<bool>((ref) {
-  if (ref.watch(matrixCollabActiveProvider)) return true;
-  return ref.watch(matrixAccountProvider)?.isConfigured ?? false;
+  return ref.watch(collaborationEnabledProvider);
 });
 
 class CollaborationState {
-  const CollaborationState({
-    this.enabled = false,
-    this.matrixEnabled = true,
-    this.loading = true,
-  });
+  const CollaborationState({this.enabled = false, this.loading = true});
 
   /// Module master switch. Default off.
   final bool enabled;
 
-  /// Matrix transport toggle within the module. Default on — the shipping
-  /// transport, so enabling the module works out of the box.
-  final bool matrixEnabled;
-
   /// Preferences still loading on first build.
   final bool loading;
 
-  CollaborationState copyWith({
-    bool? enabled,
-    bool? matrixEnabled,
-    bool? loading,
-  }) => CollaborationState(
-    enabled: enabled ?? this.enabled,
-    matrixEnabled: matrixEnabled ?? this.matrixEnabled,
-    loading: loading ?? this.loading,
-  );
+  CollaborationState copyWith({bool? enabled, bool? loading}) =>
+      CollaborationState(
+        enabled: enabled ?? this.enabled,
+        loading: loading ?? this.loading,
+      );
 }
 
 class CollaborationNotifier extends Notifier<CollaborationState> {
@@ -90,7 +58,6 @@ class CollaborationNotifier extends Notifier<CollaborationState> {
       final prefs = await SharedPreferences.getInstance();
       state = CollaborationState(
         enabled: prefs.getBool(_moduleKey) ?? false,
-        matrixEnabled: prefs.getBool(_matrixKey) ?? true,
         loading: false,
       );
     } catch (e, s) {
@@ -103,11 +70,6 @@ class CollaborationNotifier extends Notifier<CollaborationState> {
   Future<void> setEnabled(bool value) async {
     state = state.copyWith(enabled: value, loading: false);
     await _persist(_moduleKey, value);
-  }
-
-  Future<void> setMatrixEnabled(bool value) async {
-    state = state.copyWith(matrixEnabled: value, loading: false);
-    await _persist(_matrixKey, value);
   }
 
   Future<void> _persist(String key, bool value) async {

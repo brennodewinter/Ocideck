@@ -6,6 +6,7 @@ import '../../../state/meeting_session_provider.dart';
 import '../../../theme/app_theme.dart';
 import '../xmpp_test_connection_dialog.dart';
 import 'media_preflight_tile.dart';
+import 'module_card.dart';
 
 /// The Uitbreidingen-tab card for the optional video-calls module
 /// (`docs/design/NATIVE_CALLS.md` §7). Same toggle shape as the other module
@@ -21,13 +22,7 @@ class VideoCallsModuleCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final state = ref.watch(videoCallsModuleProvider);
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -42,7 +37,7 @@ class VideoCallsModuleCard extends ConsumerWidget {
             ),
             subtitle: Text(
               l10n.d(
-                'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.',
+                'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),

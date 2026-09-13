@@ -20,11 +20,10 @@ library;
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:crypto/crypto.dart';
-
 import '../../utils/json_depth_guard.dart';
 import '../../utils/log.dart';
 import '../sidecar_format.dart';
+import '../../utils/content_hash.dart';
 
 /// Eén terzijdelegging: welke regel, en over welke waarde.
 class PrivacyDismissal {
@@ -133,8 +132,7 @@ class DeckDismissals {
 ///     overleeft is precies wat dit product wil voorkomen.
 ///  2. Het zout is per deck, dus dezelfde naam in twee decks geeft twee
 ///     onvergelijkbare uitkomsten.
-String commitmentFor(String salt, String text) =>
-    sha256.convert(utf8.encode('$salt$text')).toString();
+String commitmentFor(String salt, String text) => sha256HexOfText('$salt$text');
 
 /// Een vers zout voor een deck dat er nog geen heeft.
 ///

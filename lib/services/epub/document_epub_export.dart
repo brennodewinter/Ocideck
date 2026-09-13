@@ -29,6 +29,7 @@ import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
 import '../document_export_service.dart' show projectedDocumentBody;
 import 'markdown_to_xhtml.dart';
+import '../../utils/xml_escape.dart';
 
 /// Bouwt de EPUB 3-bytes voor een document-export. Headless: geen IO.
 ///
@@ -228,15 +229,15 @@ String _buildNav(String xhtml, String title) {
       'lang="nl">',
     )
     ..writeln('<head><meta charset="utf-8"/>')
-    ..writeln('<title>${_xmlEscape(title)}</title>')
+    ..writeln('<title>${xmlEscape(title)}</title>')
     ..writeln('<link rel="stylesheet" type="text/css" href="style.css"/>')
     ..writeln('</head><body>')
     ..writeln('<nav epub:type="toc" id="toc">')
-    ..writeln('<h1>${_xmlEscape(title)}</h1><ol>');
+    ..writeln('<h1>${xmlEscape(title)}</h1><ol>');
 
   for (final h in headings) {
     buf.writeln(
-      '<li><a href="document.xhtml#${h.id}">${_xmlEscape(h.text)}</a></li>',
+      '<li><a href="document.xhtml#${h.id}">${xmlEscape(h.text)}</a></li>',
     );
   }
 
@@ -269,7 +270,7 @@ String _buildDocumentXhtml(
       'lang="$lang">',
     )
     ..writeln('<head><meta charset="utf-8"/>')
-    ..writeln('<title>${_xmlEscape(title)}</title>')
+    ..writeln('<title>${xmlEscape(title)}</title>')
     ..writeln('<link rel="stylesheet" type="text/css" href="style.css"/>')
     ..writeln('</head><body>')
     ..write(withIds)
@@ -293,24 +294,24 @@ String _buildOpf(
     ..writeln(
       '  <dc:identifier id="bookid">ocideck-${DateTime.now().millisecondsSinceEpoch}</dc:identifier>',
     )
-    ..writeln('  <dc:title>${_xmlEscape(title)}</dc:title>')
+    ..writeln('  <dc:title>${xmlEscape(title)}</dc:title>')
     ..writeln(
       '  <dc:language>${meta.language.isNotEmpty ? meta.language : "nl"}</dc:language>',
     )
-    ..writeln('  <dc:creator>${_xmlEscape(meta.documentAuthor)}</dc:creator>');
+    ..writeln('  <dc:creator>${xmlEscape(meta.documentAuthor)}</dc:creator>');
 
   if (meta.description.trim().isNotEmpty) {
     buf.writeln(
-      '  <dc:description>${_xmlEscape(meta.description.trim())}</dc:description>',
+      '  <dc:description>${xmlEscape(meta.description.trim())}</dc:description>',
     );
   }
   if (meta.keywords.trim().isNotEmpty) {
     buf.writeln(
-      '  <dc:subject>${_xmlEscape(meta.keywords.trim())}</dc:subject>',
+      '  <dc:subject>${xmlEscape(meta.keywords.trim())}</dc:subject>',
     );
   }
   if (meta.tlp.label.isNotEmpty) {
-    buf.writeln('  <dc:rights>TLP: ${_xmlEscape(meta.tlp.label)}</dc:rights>');
+    buf.writeln('  <dc:rights>TLP: ${xmlEscape(meta.tlp.label)}</dc:rights>');
   }
   if (meta.hasUnreviewedAi) {
     buf.writeln(
@@ -379,9 +380,6 @@ class _NavHeading {
 }
 
 String _stripTags(String s) => s.replaceAll(RegExp(r'<[^>]*>'), '');
-
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
 /// Voor tests: de EPUB-bytes bouwen met een vaste timestamp.
 @visibleForTesting

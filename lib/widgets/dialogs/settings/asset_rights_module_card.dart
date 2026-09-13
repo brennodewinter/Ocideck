@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../state/asset_rights_module_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'module_card.dart';
 
 class AssetRightsModuleCard extends ConsumerWidget {
   const AssetRightsModuleCard({super.key});
@@ -12,13 +13,7 @@ class AssetRightsModuleCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final state = ref.watch(assetRightsModuleProvider);
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: SwitchListTile(
         value: state.enabled,
         onChanged: state.loading

@@ -113,3 +113,42 @@ String unmarkTimeline(String source) {
   }
   return source.substring(newline + 1);
 }
+
+/// Loopt [source] regel voor regel, detecteert gemarkeerde tijdlijntabellen,
+/// en roept [render] aan voor elke gevonden tijdlijn. De teruggegeven bron
+/// bevat `OCIDECKTIMELINE{n}END`-sentinels op de plek van elke tabel; de
+/// gerenderde fragmenten staan in de teruggegeven lijst. De vijf
+/// formaat-converters (DOCX, ODT, EPUB, LaTeX, PDF) delen deze detectielus;
+/// alleen de render-callback verschilt per formaat.
+({String source, List<T> rendered}) protectTimelines<T>(
+  String source,
+  T Function(DocumentTimeline timeline) render,
+) {
+  final lines = source.replaceAll('\r\n', '\n').split('\n');
+  final output = <String>[];
+  final rendered = <T>[];
+  var index = 0;
+  while (index < lines.length) {
+    if (lines[index].trim() != documentTimelineMarker ||
+        index + 2 >= lines.length ||
+        !isMarkdownTableLine(lines[index + 1]) ||
+        !isMarkdownTableDelimiterRow(lines[index + 2])) {
+      output.add(lines[index++]);
+      continue;
+    }
+    var end = index + 3;
+    while (end < lines.length && isMarkdownTableLine(lines[end])) {
+      end++;
+    }
+    final marked = lines.sublist(index, end).join('\n');
+    final timeline = analyzeMarkedTimeline(marked).timeline;
+    if (timeline == null) {
+      output.add(lines[index++]);
+      continue;
+    }
+    output.add('OCIDECKTIMELINE${rendered.length}END');
+    rendered.add(render(timeline));
+    index = end;
+  }
+  return (source: output.join('\n'), rendered: rendered);
+}

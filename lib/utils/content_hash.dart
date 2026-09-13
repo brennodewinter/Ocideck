@@ -14,6 +14,13 @@ import 'package:crypto/crypto.dart';
 /// er nog iets aan zou kunnen doen.
 String sha512Hex(List<int> bytes) => sha512.convert(bytes).toString();
 
+/// De SHA-256 van [bytes], in kleine-letter-hex — precies de vorm die
+/// `sha256sum` afdrukt. Het mirrorbeeld van [sha512Hex] voor de kortere hash.
+String sha256Hex(List<int> bytes) => sha256.convert(bytes).toString();
+
+/// De SHA-256 van [text] als UTF-8, zonder normalisatie. Zie [sha512HexOfText].
+String sha256HexOfText(String text) => sha256Hex(utf8.encode(text));
+
 /// De SHA-512 van [text] als UTF-8, zonder enige normalisatie: geen
 /// regeleinde-omzetting, geen trimmen, geen BOM.
 ///

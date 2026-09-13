@@ -39,6 +39,7 @@ import '../pdf/document_pdf_export.dart'
     show MathSvgResolver, MermaidSvgResolver;
 import 'markdown_to_docx.dart';
 import 'svg_to_png.dart';
+import '../../utils/xml_escape.dart';
 
 /// Bouwt de DOCX-bytes voor een document-export. Headless: geen IO.
 ///
@@ -318,7 +319,7 @@ String _replaceGraphicSentinels(
     final png = pngFor(idx);
     if (png == null) {
       // Terugval op bron in een codeblok — dezelfde afspraak als de PDF.
-      final source = _xmlEscape(sourceFor(idx));
+      final source = xmlEscape(sourceFor(idx));
       out = out.replaceAll(
         sentinel,
         '<w:p><w:pPr><w:pStyle w:val="PreformattedText"/></w:pPr>'
@@ -475,7 +476,7 @@ String _drawingXml(
   int cy,
   String alt,
 ) {
-  final name = alt.isNotEmpty ? _xmlEscape(alt) : mediaName;
+  final name = alt.isNotEmpty ? xmlEscape(alt) : mediaName;
   return '<w:r><w:drawing>'
       '<wp:inline distT="0" distB="0" distL="0" distR="0">'
       '<wp:extent cx="$cx" cy="$cy"/>'
@@ -682,25 +683,25 @@ String _buildCoreXml(ExportDocumentMetadata meta, String title) {
       'xmlns:dcterms="http://purl.org/dc/terms/" '
       'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">',
     )
-    ..writeln('<dc:title>${_xmlEscape(title)}</dc:title>')
-    ..writeln('<dc:creator>${_xmlEscape(meta.documentAuthor)}</dc:creator>')
+    ..writeln('<dc:title>${xmlEscape(title)}</dc:title>')
+    ..writeln('<dc:creator>${xmlEscape(meta.documentAuthor)}</dc:creator>')
     ..writeln(
-      '<cp:lastModifiedBy>${_xmlEscape(meta.documentAuthor)}</cp:lastModifiedBy>',
+      '<cp:lastModifiedBy>${xmlEscape(meta.documentAuthor)}</cp:lastModifiedBy>',
     )
     ..writeln(
       '<dcterms:created xsi:type="dcterms:W3CDTF">${now.toIso8601String().split('.').first}Z</dcterms:created>',
     );
   if (meta.language.isNotEmpty) {
-    buf.writeln('<dc:language>${_xmlEscape(meta.language)}</dc:language>');
+    buf.writeln('<dc:language>${xmlEscape(meta.language)}</dc:language>');
   }
   if (meta.description.trim().isNotEmpty) {
     buf.writeln(
-      '<dc:description>${_xmlEscape(meta.description.trim())}</dc:description>',
+      '<dc:description>${xmlEscape(meta.description.trim())}</dc:description>',
     );
   }
   final kw = meta.exportKeywords();
   if (kw.isNotEmpty) {
-    buf.writeln('<cp:keywords>${_xmlEscape(kw)}</cp:keywords>');
+    buf.writeln('<cp:keywords>${xmlEscape(kw)}</cp:keywords>');
   }
   buf.writeln('</cp:coreProperties>');
   return buf.toString();
@@ -817,9 +818,6 @@ String _buildDocumentRelsXml(
   buf.writeln('</Relationships>');
   return buf.toString();
 }
-
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
 /// Voor tests: de DOCX-bytes bouwen met vaste parameters.
 @visibleForTesting

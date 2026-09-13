@@ -7,17 +7,16 @@
 // [Deck.hasImprovementSlides] (true once a `matrix` / later engine type is
 // present) with the enabled preference.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../utils/log.dart';
 import '../services/improvement/improvement_template_catalog.dart';
+import 'module_toggle.dart';
 
 /// Preference key. Renaming afterwards would silently turn the module off for
 /// existing installs.
-const _enabledKey = 'procesverbeteringModuleEnabled';
+const procesverbeteringEnabledKey = 'procesverbeteringModuleEnabled';
 
 final procesverbeteringProvider =
-    NotifierProvider<ProcesverbeteringNotifier, ProcesverbeteringState>(
+    NotifierProvider<ProcesverbeteringNotifier, ModuleToggleState>(
       ProcesverbeteringNotifier.new,
     );
 
@@ -34,67 +33,14 @@ final procesverbeteringRevealProvider = Provider<bool>((ref) {
   return ref.watch(procesverbeteringEnabledProvider);
 });
 
-class ProcesverbeteringState {
-  /// Whether the module is on. Default off.
-  final bool enabled;
+class ProcesverbeteringNotifier extends ModuleToggleNotifier {
+  ProcesverbeteringNotifier() : super(procesverbeteringEnabledKey);
 
-  /// Preferences still loading on first build.
-  final bool loading;
-
-  const ProcesverbeteringState({this.enabled = false, this.loading = true});
-
-  ProcesverbeteringState copyWith({bool? enabled, bool? loading}) =>
-      ProcesverbeteringState(
-        enabled: enabled ?? this.enabled,
-        loading: loading ?? this.loading,
-      );
-}
-
-class ProcesverbeteringNotifier extends Notifier<ProcesverbeteringState> {
+  /// Warm the artefact catalog when the module is switched on so editors
+  /// never open against an empty floor-only race with the asset load.
   @override
-  ProcesverbeteringState build() {
-    _initialize();
-    return const ProcesverbeteringState();
+  Future<void> onEnabled() async {
+    // ignore: unawaited_futures
+    ImprovementTemplateCatalog.instance.ensureLoaded();
   }
-
-  Future<void> _initialize() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final enabled = prefs.getBool(_enabledKey) ?? false;
-      state = ProcesverbeteringState(enabled: enabled, loading: false);
-      if (enabled) {
-        await ImprovementTemplateCatalog.instance.ensureLoaded();
-      }
-    } catch (e, s) {
-      // Unreadable prefs: stay off (safe side) but stop loading so the card
-      // does not hang.
-      logError(
-        'ProcesverbeteringNotifier._initialize: read module state',
-        e,
-        s,
-      );
-      state = state.copyWith(loading: false);
-    }
-  }
-
-  Future<void> setEnabled(bool value) async {
-    state = ProcesverbeteringState(enabled: value, loading: false);
-    if (value) {
-      // Warm the artefact catalog when the module is switched on so editors
-      // never open against an empty floor-only race with the asset load.
-      // ignore: unawaited_futures
-      ImprovementTemplateCatalog.instance.ensureLoaded();
-    }
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(_enabledKey, value);
-    } catch (e, s) {
-      // Session state already updated; only persistence failed.
-      logError('ProcesverbeteringNotifier: prefs write failed', e, s);
-    }
-  }
-
-  Future<void> enable() => setEnabled(true);
-
-  Future<void> disable() => setEnabled(false);
 }

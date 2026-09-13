@@ -175,7 +175,7 @@ class XmppSnapshotChannel {
   /// Verwerk een inbound `<snap>`-stanza (wire aan de demux). Buffert chunks en,
   /// zodra een hele snapshot aanwezig is, reassembleert, opent en emit hem.
   Future<void> handleSnapshot(Stanza stanza) async {
-    final child = _childByNs(stanza, snapshotType);
+    final child = stanza.childByNs(snapshotType);
     if (child == null) return;
     try {
       final decoded = jsonDecode(child.innerText);
@@ -307,17 +307,6 @@ class XmppSnapshotChannel {
   }
 
   // ── helpers ────────────────────────────────────────────────────────────────
-
-  /// Vind het eerste child-element met [namespace] — zowel de geserialiseerde
-  /// `xmlns`-attribuutvorm als de geparsede `namespaceUri`. Spiegelt
-  /// `XmppTransport._childByNs`.
-  static XmlElement? _childByNs(Stanza stanza, String namespace) {
-    for (final child in stanza.children) {
-      final ns = child.getAttribute('xmlns') ?? child.name.namespaceUri;
-      if (ns == namespace) return child;
-    }
-    return null;
-  }
 
   List<String> _split(String s, int size) {
     if (s.length <= size) return [s];

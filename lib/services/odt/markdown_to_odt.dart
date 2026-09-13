@@ -18,7 +18,7 @@ import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_footnote_setup.dart';
 import '../document_timeline.dart';
-import '../markdown_table_lines.dart';
+import '../../utils/xml_escape.dart';
 
 /// Zet [markdown] (GFM) om in een ODT body-fragment.
 ///
@@ -85,7 +85,7 @@ String markdownToOdtBody(
     '<text:table-of-content text:name="Inhoudsopgave" text:protected="true">'
     '<text:index-body>'
     '<text:index-title text:style-name="Sect1_Heading">'
-    '<text:p text:style-name="Heading_20_1">${_xmlEscape(footnotesTitle)}</text:p>'
+    '<text:p text:style-name="Heading_20_1">${xmlEscape(footnotesTitle)}</text:p>'
     '</text:index-title>'
     '</text:index-body>'
     '</text:table-of-content>',
@@ -148,85 +148,64 @@ String _htmlInlineToOdt(String html) {
   result = result.replaceAll('</code>', '</text:span>');
   result = result.replaceAllMapped(
     RegExp(r'<a href="([^"]*)">'),
-    (m) => '<text:a xlink:href="${_xmlAttr(m.group(1)!)}" xlink:type="simple">',
+    (m) => '<text:a xlink:href="${xmlAttr(m.group(1)!)}" xlink:type="simple">',
   );
   result = result.replaceAll('</a>', '</text:a>');
   result = result.replaceAll('<br>', '<text:line-break/>');
   result = result.replaceAll('<br/>', '<text:line-break/>');
   // Overgebleven HTML-tags strippen.
   result = result.replaceAll(RegExp(r'</?[^>]+>'), '');
-  return _xmlEscape(result);
+  return xmlEscape(result);
 }
 
 /// Bescherm tijdlijn-tabellen vóór de parse. De markdown-package rendert een
 /// tijdlijn als een gewone tabel — voor ODT volstaat dat, de marker blijft als
 /// commentaar zichtbaar voor wie de bron kent.
 ({String source, List<String> odt}) _protectDocumentTimelines(String source) {
-  final lines = source.replaceAll('\r\n', '\n').split('\n');
-  final output = <String>[];
-  final rendered = <String>[];
-  var index = 0;
-  while (index < lines.length) {
-    if (lines[index].trim() != documentTimelineMarker ||
-        index + 2 >= lines.length ||
-        !isMarkdownTableLine(lines[index + 1]) ||
-        !isMarkdownTableDelimiterRow(lines[index + 2])) {
-      output.add(lines[index++]);
-      continue;
-    }
-    var end = index + 3;
-    while (end < lines.length && isMarkdownTableLine(lines[end])) {
-      end++;
-    }
-    final marked = lines.sublist(index, end).join('\n');
-    final timeline = analyzeMarkedTimeline(marked).timeline;
-    if (timeline == null) {
-      output.add(lines[index++]);
-      continue;
-    }
-    // De tijdlijn wordt als ODT-tabel gerenderd; de marker blijft als
-    // commentaar erboven staan.
-    final buf = StringBuffer('<!-- timeline -->\n');
-    buf.writeln('<table:table table:name="Tijdlijn">');
-    buf.writeln(
-      '<table:table-column table:number-columns-repeated="${timeline.headers.length}"/>',
+  final r = protectTimelines(source, _renderTimelineOdt);
+  return (source: r.source, odt: r.rendered);
+}
+
+String _renderTimelineOdt(DocumentTimeline timeline) {
+  // De tijdlijn wordt als ODT-tabel gerenderd; de marker blijft als
+  // commentaar erboven staan.
+  final buf = StringBuffer('<!-- timeline -->\n');
+  buf.writeln('<table:table table:name="Tijdlijn">');
+  buf.writeln(
+    '<table:table-column table:number-columns-repeated="${timeline.headers.length}"/>',
+  );
+  buf.writeln('<table:table-header-rows>');
+  buf.writeln('<table:table-row>');
+  for (final header in timeline.headers) {
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p text:style-name="Table_20_Heading">${xmlEscape(header)}</text:p>'
+      '</table:table-cell>',
     );
-    buf.writeln('<table:table-header-rows>');
-    buf.writeln('<table:table-row>');
-    for (final header in timeline.headers) {
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p text:style-name="Table_20_Heading">${_xmlEscape(header)}</text:p>'
-        '</table:table-cell>',
-      );
-    }
-    buf.writeln('</table:table-row>');
-    buf.writeln('</table:table-header-rows>');
-    for (final event in timeline.events) {
-      buf.writeln('<table:table-row>');
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p>${_inlineOdt(event.marker)}</text:p>'
-        '</table:table-cell>',
-      );
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p>${_inlineOdt(event.event)}</text:p>'
-        '</table:table-cell>',
-      );
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p>${_inlineOdt(event.metadata ?? '')}</text:p>'
-        '</table:table-cell>',
-      );
-      buf.writeln('</table:table-row>');
-    }
-    buf.writeln('</table:table>');
-    output.add('OCIDECKTIMELINE${rendered.length}END');
-    rendered.add(buf.toString());
-    index = end;
   }
-  return (source: output.join('\n'), odt: rendered);
+  buf.writeln('</table:table-row>');
+  buf.writeln('</table:table-header-rows>');
+  for (final event in timeline.events) {
+    buf.writeln('<table:table-row>');
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p>${_inlineOdt(event.marker)}</text:p>'
+      '</table:table-cell>',
+    );
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p>${_inlineOdt(event.event)}</text:p>'
+      '</table:table-cell>',
+    );
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p>${_inlineOdt(event.metadata ?? '')}</text:p>'
+      '</table:table-cell>',
+    );
+    buf.writeln('</table:table-row>');
+  }
+  buf.writeln('</table:table>');
+  return buf.toString();
 }
 
 class _OdtNodeVisitor implements md.NodeVisitor {
@@ -330,7 +309,7 @@ class _OdtNodeVisitor implements md.NodeVisitor {
           _stack.add(_Ctx.passThrough);
         } else {
           _buf.write(
-            '<text:a xlink:href="${_xmlAttr(href)}" xlink:type="simple">',
+            '<text:a xlink:href="${xmlAttr(href)}" xlink:type="simple">',
           );
           _stack.add(_Ctx.link);
         }
@@ -434,7 +413,7 @@ class _OdtNodeVisitor implements md.NodeVisitor {
       final lines = codeText.split('\n');
       for (final line in lines) {
         output.write(
-          '<text:p text:style-name="Preformatted_Text">${_xmlEscape(line)}</text:p>',
+          '<text:p text:style-name="Preformatted_Text">${xmlEscape(line)}</text:p>',
         );
       }
       _stack.add(_Ctx.codeBlockBody);
@@ -457,7 +436,7 @@ class _OdtNodeVisitor implements md.NodeVisitor {
       '<draw:frame draw:style-name="Graphics" text:anchor-type="paragraph" '
       'svg:width="15cm" svg:height="auto" draw:z-index="0">'
       '<draw:image xlink:href="$src" xlink:type="simple">'
-      '<svg:title>${_xmlEscape(alt)}</svg:title>'
+      '<svg:title>${xmlEscape(alt)}</svg:title>'
       '</draw:image>'
       '</draw:frame>',
     );
@@ -544,11 +523,3 @@ enum _Ctx {
   tableRow,
   tableCell,
 }
-
-/// XML-escape voor tekstinhoud: & < >.
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
-
-/// XML-escape voor attribuutwaarden: & < > " '.
-String _xmlAttr(String s) =>
-    _xmlEscape(s).replaceAll('"', '&quot;').replaceAll("'", '&apos;');

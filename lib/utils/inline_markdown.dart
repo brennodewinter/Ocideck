@@ -141,7 +141,7 @@ bool _hasMarker(String s) {
 /// (`&#60;`) blijven staan — de sanitizer escaped `&` juist als eerste zodat een
 /// bron-`&#60;` `&amp;#60;` wordt en na deze decode niet als `<` terugkomt.
 /// `&amp;` gaat als laatste, anders wordt een letterlijke `&lt;` na twee stappen
-/// alsnog `<` (zelfde volgorde als `_unescapeHtml` in markdown_service_helpers).
+/// alsnog `<` (zelfde volgorde als de voormalige `_unescapeHtml` in markdown_service_helpers, die nu deze functie aanroept).
 ///
 /// Publiek voor plekken die platte `Text` tonen met geïmporteerde tekst (chart-
 /// labels, timeline-events) — die gaan niet door [parseInlineRuns] en moeten

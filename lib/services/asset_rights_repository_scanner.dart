@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as p;
 
 import '../models/asset_rights.dart';
@@ -9,6 +8,7 @@ import 'asset_rights_scanner.dart';
 import 'asset_rights_store.dart';
 import 'image_service.dart';
 import '../utils/log.dart';
+import '../utils/content_hash.dart';
 
 class AssetRightsRepositoryScanResult {
   final List<AssetRightsAssessment> assessments;
@@ -52,7 +52,7 @@ class AssetRightsRepositoryScanner {
         }
         final bytes = await entity.readAsBytes();
         if (!ImageService.looksLikeImage(bytes.take(16).toList())) continue;
-        final hash = sha256.convert(bytes).toString();
+        final hash = sha256Hex(bytes);
         final previous = await store.read(hash);
         if (previous != null &&
             previous.scannerVersion == AssetRightsScanner.version) {

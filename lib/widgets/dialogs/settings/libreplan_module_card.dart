@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../platform/platform_features.dart';
 import '../../../theme/app_theme.dart';
+import 'module_card.dart';
 
 /// De modulekaart voor de LibrePlan-connector op het tabblad Uitbreidingen
 /// (#1240). Spiegelt [AiModuleCard]: optioneel, standaard uit, met een
@@ -35,13 +36,7 @@ class LibreplanModuleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final web = isWebPlatform;
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

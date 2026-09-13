@@ -28,7 +28,7 @@ import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_footnote_setup.dart';
 import '../document_timeline.dart';
-import '../markdown_table_lines.dart';
+import '../../utils/xml_escape.dart';
 
 /// Het resultaat van de Markdown→WordprocessingML-conversie.
 class DocxConversion {
@@ -165,74 +165,53 @@ DocxConversion markdownToDocxBody(
 /// tijdlijn als een gewone tabel — voor docx volstaat dat, de marker blijft
 /// als commentaar zichtbaar voor wie de bron kent.
 ({String source, List<String> docx}) _protectDocumentTimelines(String source) {
-  final lines = source.replaceAll('\r\n', '\n').split('\n');
-  final output = <String>[];
-  final rendered = <String>[];
-  var index = 0;
-  while (index < lines.length) {
-    if (lines[index].trim() != documentTimelineMarker ||
-        index + 2 >= lines.length ||
-        !isMarkdownTableLine(lines[index + 1]) ||
-        !isMarkdownTableDelimiterRow(lines[index + 2])) {
-      output.add(lines[index++]);
-      continue;
-    }
-    var end = index + 3;
-    while (end < lines.length && isMarkdownTableLine(lines[end])) {
-      end++;
-    }
-    final marked = lines.sublist(index, end).join('\n');
-    final timeline = analyzeMarkedTimeline(marked).timeline;
-    if (timeline == null) {
-      output.add(lines[index++]);
-      continue;
-    }
-    // De tijdlijn wordt als Word-tabel gerenderd; de marker blijft als
-    // commentaar erboven staan.
-    final buf = StringBuffer('<!-- timeline -->\n');
-    buf.writeln('<w:tbl>');
-    buf.writeln(
-      '<w:tblPr><w:tblW w:w="0" w:type="auto"/>'
-      '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-      '</w:tblBorders></w:tblPr>',
-    );
-    buf.writeln('<w:tblGrid>');
-    for (final _ in timeline.headers) {
-      buf.writeln('<w:gridCol w:w="2880"/>');
-    }
-    buf.writeln('</w:tblGrid>');
-    // Koptekstrij.
-    buf.writeln('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
-    for (final header in timeline.headers) {
-      buf.write(_tableCell(header, bold: true));
-    }
-    buf.writeln('</w:tr>');
-    for (final event in timeline.events) {
-      buf.writeln('<w:tr>');
-      buf.write(_tableCell(event.marker));
-      buf.write(_tableCell(event.event));
-      buf.write(_tableCell(event.metadata ?? ''));
-      buf.writeln('</w:tr>');
-    }
-    buf.writeln('</w:tbl>');
-    // Een lege alinea na de tabel, anders plakt de volgende tekst vast.
-    buf.writeln('<w:p/>');
-    output.add('OCIDECKTIMELINE${rendered.length}END');
-    rendered.add(buf.toString());
-    index = end;
+  final r = protectTimelines(source, _renderTimelineDocx);
+  return (source: r.source, docx: r.rendered);
+}
+
+String _renderTimelineDocx(DocumentTimeline timeline) {
+  // De tijdlijn wordt als Word-tabel gerenderd; de marker blijft als
+  // commentaar erboven staan.
+  final buf = StringBuffer('<!-- timeline -->\n');
+  buf.writeln('<w:tbl>');
+  buf.writeln(
+    '<w:tblPr><w:tblW w:w="0" w:type="auto"/>'
+    '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '</w:tblBorders></w:tblPr>',
+  );
+  buf.writeln('<w:tblGrid>');
+  for (final _ in timeline.headers) {
+    buf.writeln('<w:gridCol w:w="2880"/>');
   }
-  return (source: output.join('\n'), docx: rendered);
+  buf.writeln('</w:tblGrid>');
+  // Koptekstrij.
+  buf.writeln('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
+  for (final header in timeline.headers) {
+    buf.write(_tableCell(header, bold: true));
+  }
+  buf.writeln('</w:tr>');
+  for (final event in timeline.events) {
+    buf.writeln('<w:tr>');
+    buf.write(_tableCell(event.marker));
+    buf.write(_tableCell(event.event));
+    buf.write(_tableCell(event.metadata ?? ''));
+    buf.writeln('</w:tr>');
+  }
+  buf.writeln('</w:tbl>');
+  // Een lege alinea na de tabel, anders plakt de volgende tekst vast.
+  buf.writeln('<w:p/>');
+  return buf.toString();
 }
 
 String _tableCell(String text, {bool bold = false}) {
   final rPr = bold ? '<w:rPr><w:b/></w:rPr>' : '';
   return '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/></w:tcPr>'
-      '<w:p><w:r>$rPr<w:t xml:space="preserve">${_xmlEscape(text)}</w:t></w:r>'
+      '<w:p><w:r>$rPr<w:t xml:space="preserve">${xmlEscape(text)}</w:t></w:r>'
       '</w:p></w:tc>';
 }
 
@@ -254,29 +233,29 @@ String _htmlInlineToDocx(String html) {
   result = result.replaceAllMapped(
     RegExp(r'<strong>(.*?)</strong>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<em>(.*?)</em>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:i/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:i/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<del>(.*?)</del>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:strike/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:strike/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<code>(.*?)</code>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:rStyle w:val="SourceText"/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:rStyle w:val="SourceText"/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<a href="([^"]*)">(.*?)</a>', dotAll: true),
     (m) =>
-        '<OCIDECKLINK href="${_xmlAttr(m.group(1)!)}">'
+        '<OCIDECKLINK href="${xmlAttr(m.group(1)!)}">'
         '<w:r><w:rPr><w:rStyle w:val="Hyperlink"/></w:rPr>'
-        '<w:t xml:space="preserve">${_xmlEscape(m.group(2)!)}</w:t></w:r>'
+        '<w:t xml:space="preserve">${xmlEscape(m.group(2)!)}</w:t></w:r>'
         '</OCIDECKLINK>',
   );
   result = result.replaceAll('<br>', '<w:r><w:br/></w:r>');
@@ -285,7 +264,7 @@ String _htmlInlineToDocx(String html) {
   result = result.replaceAllMapped(RegExp(r'(?<![>])[^<]+'), (m) {
     final t = m.group(0)!;
     if (t.trim().isEmpty) return t;
-    return '<w:r><w:t xml:space="preserve">${_xmlEscape(t)}</w:t></w:r>';
+    return '<w:r><w:t xml:space="preserve">${xmlEscape(t)}</w:t></w:r>';
   });
   return result;
 }
@@ -416,7 +395,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         if (href == null) {
           _stack.add(_Ctx.passThrough);
         } else {
-          output.write('<OCIDECKLINK href="${_xmlAttr(href)}">');
+          output.write('<OCIDECKLINK href="${xmlAttr(href)}">');
           linkTargets.add(href);
           _rPr.add('<w:rStyle w:val="Hyperlink"/>');
           _stack.add(_Ctx.link);
@@ -547,7 +526,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         output.write(
           '<w:p><w:pPr><w:pStyle w:val="PreformattedText"/></w:pPr>'
           '<w:r><w:rPr><w:rStyle w:val="SourceText"/></w:rPr>'
-          '<w:t xml:space="preserve">${_xmlEscape(line)}</w:t></w:r></w:p>',
+          '<w:t xml:space="preserve">${xmlEscape(line)}</w:t></w:r></w:p>',
         );
       }
       _stack.add(_Ctx.codeBlockBody);
@@ -566,7 +545,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     if (src.isEmpty) return;
     final idx = imageSources.length;
     imageSources.add(src);
-    output.write('<OCIDECKIMG w:idx="$idx" w:alt="${_xmlAttr(alt)}"/>');
+    output.write('<OCIDECKIMG w:idx="$idx" w:alt="${xmlAttr(alt)}"/>');
   }
 
   @override
@@ -657,11 +636,3 @@ enum _Ctx {
   tableRow,
   tableCell,
 }
-
-/// XML-escape voor tekstinhoud: & < >.
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
-
-/// XML-escape voor attribuutwaarden: & < > " '.
-String _xmlAttr(String s) =>
-    _xmlEscape(s).replaceAll('"', '&quot;').replaceAll("'", '&apos;');

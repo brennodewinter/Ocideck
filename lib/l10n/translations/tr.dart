@@ -3912,8 +3912,8 @@ const _dutchSourceAddTr = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Süreç iyileştirme araçları (SIPOC, DMAIC, Kaizen ve A3). Varsayılan olarak kapalıdır; ilgili şablonları ve slayt düzenlerini kullanmak için uzantıyı etkinleştirin.',
   'Videovergaderingen': 'Görüntülü toplantılar',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Görüntülü toplantılara katıl ve OciDeck\'ten kendi arayüzüyle sun: katılımcılar başka bir uygulamanın penceresinde değil, slaydının yanında. Bring-your-own-server (Jitsi veya Matrix); OciDeck hiçbir şey barındırmaz ve konuşma verilerini AI\'dan uzak tutar. Bir toplantı hizmetine bağlantı, ileriki bir sürümde gelecek.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Görüntülü toplantılara katıl ve OciDeck\'ten kendi arayüzüyle sun: katılımcılar başka bir uygulamanın penceresinde değil, slaydının yanında. Bring-your-own-server (Jitsi); OciDeck hiçbir şey barındırmaz ve konuşma verilerini AI\'dan uzak tutar. Bir toplantı hizmetine bağlantı, ileriki bir sürümde gelecek.',
   'Videovergadering': 'Görüntülü toplantı',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Henüz etkin bir toplantı yok. Bir toplantı hizmetine bağlanma özelliği ileriki bir sürümde eklenecek.',
@@ -3931,10 +3931,6 @@ const _dutchSourceAddTr = <String, String>{
       'Görseller birlikte tek bir HTML dosyası için çok büyük (en fazla 512 MB). Daha az veya daha küçük görsel kullanın ya da PDF veya paket olarak dışa aktarın.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Bu dışa aktarmada güvenli bir şekilde işlenemeyecek kadar çok ve çok yüksek çözünürlüklü slayt var. Parçalar hâlinde dışa aktarın ya da sıkıştırılmış PDF’i kullanın.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Önce sunuyu tamamlayıp kaydedin; ardından kökenini imzalayabilirsiniz.',
-  'Herkomst ondertekend.': 'Köken imzalandı.',
-  'De herkomst kon niet worden ondertekend.': 'Köken imzalanamadı.',
   'Herkomst ondertekenen': 'Kökeni imzala',
   'Herkomst bevestigd': 'Köken doğrulandı',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3951,31 +3947,9 @@ const _dutchSourceAddTr = <String, String>{
   'Herkomst niet hier te controleren': 'Köken burada denetlenemez',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'İmza mevcut ancak burada yeniden hesaplanamıyor — özgün `.md` dosyasıyla karşılaştırın.',
-  'Bestaande identiteit vervangen?': 'Mevcut kimlik değiştirilsin mi?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Bu cihazın zaten bir işbirliği kimliği var. Geri yükleme, onu anahtardaki kimlikle değiştirir. Mevcut kimlik için bir kurtarma anahtarı kaydettiniz mi? Yedek olmadan onu kaybedersiniz.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Sunum medyası için web belleği dolu (en fazla 256 MB). Veri kaybını önlemek için önce çalışmanızı bir .ocideck dosyası olarak kaydedin. Ardından daha az veya daha küçük görsel, video ya da ses dosyası kullanın, diğer sunumları kapatın veya başka sunumları açmadan yeniden yükleyin.',
   'Ongeldige vraag': 'Geçersiz soru',
-  'Herstelsleutel': 'Kurtarma anahtarı',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Bu kurtarma anahtarını güvenli bir yerde saklayın — örneğin parola kasanızda. Aynı kimliği başka bir cihazda geri yüklemenin tek yolu budur; bu anahtar olmadan orada yeni, henüz doğrulanmamış bir cihaz olarak başlarsınız. Kimseyle paylaşmayın.',
-  'Herstelsleutel gekopieerd.': 'Kurtarma anahtarı kopyalandı.',
-  'Identiteit herstellen': 'Kimliği geri yükle',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Daha önce kaydettiğiniz kurtarma anahtarını yapıştırın. Bu cihaz o zaman aynı kimliği devralır — sizi daha önce doğrulayan ortak yazarlar parmak izinizi yeniden tanır.',
-  'Identiteit & herstelsleutel': 'Kimlik ve kurtarma anahtarı',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Cihazınızın kendi iş birliği kimliği vardır — ortak yazarların doğruladığı budur. Aynı kimliği daha sonra başka bir cihazda geri yüklemek için kurtarma anahtarını kaydedin; o anahtar olmadan orada baştan başlarsınız.',
-  'Herstelsleutel tonen': 'Kurtarma anahtarını göster',
-  'De herstelsleutel kon niet worden gelezen.': 'Kurtarma anahtarı okunamadı.',
-  'Identiteit hersteld.': 'Kimlik geri yüklendi.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Bu kurtarma anahtarı doğru değil — tam ve hatasız kopyaladığınızdan emin olun.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Bu geçerli bir kurtarma anahtarına benzemiyor.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Bu kurtarma anahtarı OciDeck\'in daha yeni bir sürümünden geliyor.',
   'Afbeeldingsrechten': 'Resim hakları',
   'Afbeeldingsrechten controleren…': 'Resim haklarını kontrol edin…',
   'Afdoening': 'Yerleşim',
@@ -3999,97 +3973,22 @@ const _dutchSourceAddTr = <String, String>{
       'dosyalar güvenli bir şekilde incelenemedi',
   'nieuw gescand': 'yeni tarandı',
   'Realtime samenwerken': 'Gerçek zamanlı iş birliği',
-  'Manieren van verbinden': 'Bağlantı yöntemleri',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Bir sunumda şifreli bir aktarıcı aracılığıyla canlı iş birliği yapın. Varsayılan olarak kapalı. İçerik OciDeck\'in kendi anahtarlarıyla uçtan uca şifrelenir; sunucu yalnızca şifreli veriyi görür.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Matrix homeserver aracılığıyla aktarıcı olarak iş birliği. Hesabı İş birliği sekmesinde ayarlayın. (Jitsi ve XMPP yakında.)',
   'Chat': 'Sohbet',
-  'Chat openen': 'Sohbeti aç',
   'Chat sluiten': 'Sohbeti kapat',
   'Bericht…': 'Mesaj…',
   'Versturen': 'Gönder',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Henüz mesaj yok. Ortak yazarlarına bir şeyler söyle.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Her cihazın parmak izini güvenilir bir kanaldan karşılaştırın — birbirinize okuyun ya da güvendiğiniz bir yoldan gönderin. Eşleşiyorsa cihazı doğrulanmış olarak işaretleyin; sonraki bir oturumda da doğrulanmış kalır. Farklıysa iş birliğini kesin.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Bu cihazın kimliği daha önce doğruladığınızdan farklı — araya biri girmiş olabilir. Bu cihazın yeniden kurulduğundan emin değilseniz iş birliğini kesin.',
-  'Geverifieerd': 'Doğrulandı',
-  'Wijkt af': 'Farklı',
-  'Niet geverifieerd': 'Doğrulanmadı',
-  'Markeer als geverifieerd': 'Doğrulanmış olarak işaretle',
-  'Verificatie intrekken': 'Doğrulamayı geri al',
-  'Toch opnieuw vertrouwen': 'Yine de tekrar güven',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Bu iş birliğindeki her cihaz henüz doğrulanmadı. Kiminle çalıştığınızdan emin olmak için parmak izlerini karşılaştırın.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Tablo hücresi düzenlemeleri işbirlikçilere senkronize edilmez. Başlık ve diğer alanlar evet.',
   'Verifiëren': 'Doğrula',
-  'Deelnemers verifiëren': 'Katılımcıları doğrula',
-  '(dit apparaat)': '(bu cihaz)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Bu geçerli bir davet bağlantısı değil.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Matrix homeserver\'a ulaşılamıyor.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Oturum sahibi zamanında yanıt vermedi. Bağlantıyı ve oturum sahibinin hâlâ çevrimiçi olup olmadığını kontrol edin.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Bu bağlantıyı birlikte çalışmak istediğiniz kişilerle paylaşın. Bağlantıya sahip olan herkes oturuma girebilir — bu yüzden yalnızca güvendiğiniz kişilerle paylaşın. İçerik uçtan uca şifreli kalır; homeserver yalnızca şifreli veriyi görür.',
   'Deelnemen': 'Katıl',
-  'Deelnemen via een link': 'Bağlantı ile katıl',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Matrix hesabınız reddediliyor — Ayarlar\'daki erişim belirtecini kontrol edin.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Artık canlı olarak birlikte çalışıyorsunuz.',
-  'Nodig mede-auteurs uit': 'Ortak yazarları davet et',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Birlikte çalışmak için önce bir sunum açın.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Oturum sahibinin size gönderdiği davet bağlantısını yapıştırın. Böylece aynı sunumu açar ve canlı olarak birlikte çalışırsınız.',
-  'Realtime samenwerken is mislukt.':
-      'Gerçek zamanlı iş birliği başarısız oldu.',
-  'Realtime samenwerken starten': 'Gerçek zamanlı iş birliği başlat',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Önce Ayarlar → İş birliği bölümünde bir Matrix hesabı ayarlayın.',
-  'Uitnodigingslink': 'Davet bağlantısı',
-  'Uitnodigingslink gekopieerd.': 'Davet bağlantısı kopyalandı.',
-  'Uitnodigingslink kopiëren': 'Davet bağlantısını kopyala',
-  'Verbinden met de samenwerking…': 'İş birliğine bağlanılıyor…',
-  'Access-token': 'Erişim belirteci',
-  'Apparaat-id': 'Cihaz kimliği',
-  'Gebruikers-id': 'Kullanıcı kimliği',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver bir hata döndürdü. Daha sonra tekrar deneyin.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver\'a ulaşılamıyor veya sertifikaya güvenilmiyor.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver başka bir adrese yönlendiriyor — güvenlik nedeniyle bu izlenmez. Nihai adresi doğrudan girin.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver biraz beklemenizi istiyor. Birazdan tekrar deneyin.',
-  'De homeserver weigert dit token.': 'Homeserver bu belirteci reddediyor.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Bu adres bir Matrix homeserver\'ı gibi yanıt vermiyor. URL doğru mu?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Bir homeserver https olmalı: erişim belirteci her istekle birlikte gider.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Erişim belirteci reddediliyor — doğru kopyaladığınızı ve iptal edilmediğini denetleyin.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Matrix istemcinizde (örneğin Element\'te Tüm ayarlar → Yardım ve bilgi altında) veya homeserver\'ınızda bir erişim belirteci oluşturun. "Bağlantıyı test et" belirteci doğrular ve kullanıcı kimliğinizi ve cihaz kimliğinizi doldurur.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Homeserver özel bir ağda veya ev ağında çalışıyorsa gereklidir. Bu işaret olmadan güvenlik denetimi özel bir adresi reddeder.',
-  'Realtime samenwerken (Matrix)': 'Gerçek zamanlı iş birliği (Matrix)',
   'Samenwerken': 'İş birliği',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Bağlantı başarılı — kullanıcı kimliği ve cihaz kimliği dolduruldu',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Bağlantı başarılı, ancak homeserver bir cihaz kimliği döndürmedi — bunu kendiniz girin, yoksa ortak yazarların anahtarları ulaşmaz.',
-  'Vul een access-token in': 'Bir erişim belirteci girin',
-  'Vul een geldige homeserver-URL in': 'Geçerli bir homeserver URL\'si girin',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Bir sunumda Matrix homeserver aracılığıyla şifreli aktarıcı olarak canlı iş birliği yapın. İçerik OciDeck\'in kendi anahtarlarıyla uçtan uca şifrelenir; sunucu yalnızca şifreli veriyi görür. Bir homeserver ve başka bir yerde oluşturulmuş bir erişim belirteci girin — OciDeck asla parolanızı istemez. Token, diğer ayarların yanında değil, anahtar zincirinde şifrelenmiş olarak saklanır.',
-  'wordt door de test ingevuld': 'test tarafından doldurulur',
   'Meer documentatie op de repository': 'Depoda daha fazla belge',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Tüm belgeler — mimari, derleme, kaynak kodu ve tasarım dâhil — depoda bulunur.',

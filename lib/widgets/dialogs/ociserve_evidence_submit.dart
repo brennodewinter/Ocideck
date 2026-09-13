@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:crypto/crypto.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
@@ -9,6 +8,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../state/ociserve_provider.dart';
 import '../../utils/log.dart';
+import '../../utils/content_hash.dart';
 
 /// Het aanleverpad voor bewijs: vier stappen, met stap één al ingevuld.
 ///
@@ -115,7 +115,7 @@ class _OciServeEvidenceSubmitState
     try {
       final notifier = ref.read(ociServeProvider.notifier);
       final mimeType = _detectMimeType(_fileName);
-      final hash = sha256.convert(bytes).toString();
+      final hash = sha256Hex(bytes);
       final slot = await notifier.requestEvidenceSlot(
         organizationId: widget.organizationId,
         request: EvidenceUploadRequest(

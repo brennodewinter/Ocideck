@@ -11,6 +11,7 @@ import '../../slides/previews/scene_painter.dart';
 import '../improvement_inference_dialog.dart';
 import '../improvement_msa_dialog.dart';
 import '../improvement_regression_dialog.dart';
+import 'module_card.dart';
 
 /// Module card for Procesverbetering on Settings → Uitbreidingen
 /// (PROCESS_IMPROVEMENT.md Phase 0).
@@ -44,13 +45,7 @@ class ProcesverbeteringModuleCard extends ConsumerWidget {
       ImprovementRegressionDialog.show;
       return true;
     }());
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

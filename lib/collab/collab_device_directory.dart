@@ -1,12 +1,9 @@
 // The protocol-neutral device directory — verifies, pins and caches peer device
-// public keys. Shared by `MatrixKeyExchange` (which feeds it Matrix room state)
-// and the future `XmppKeyExchange` (which will feed it signed-rot presence).
+// public keys. Shared by the key exchange (which feeds it signed-rot presence).
 //
-// Extracted from `matrix_key_exchange.dart` as build step 1 of
-// `docs/design/XMPP_COLLAB_TRANSPORT.md` §11. The hardening below was demanded
-// by the three review rounds (§5 brick 8, §7, findings SA-F2/SA-F3/NEW-2/NEW-3)
-// and applies to the Matrix path too — the Matrix homeserver's admission was
-// the only thing that made the unbounded, last-write-wins directory tolerable.
+// Extracted as build step 1 of `docs/design/XMPP_COLLAB_TRANSPORT.md` §11. The
+// hardening below was demanded by the three review rounds (§5 brick 8, §7,
+// findings SA-F2/SA-F3/NEW-2/NEW-3).
 //
 // The crypto itself — binding verification — is `CollabCrypto`'s
 // (`DevicePublicKeys.verifyBinding`); this file only stores the result. The
@@ -20,10 +17,10 @@
 import '../utils/log.dart';
 import 'collab_crypto.dart';
 
-/// A peer's identity in a session: its protocol-neutral address (a Matrix user
-/// id `@user:hs`, an XMPP room/nick `room@conf/nick` — whatever the transport
-/// uses to address a peer) and its binding-verified public keys (needed to open
-/// its ops and verify its key-shares).
+/// A peer's identity in a session: its protocol-neutral address (an XMPP
+/// room/nick `room@conf/nick` — whatever the transport uses to address a peer)
+/// and its binding-verified public keys (needed to open its ops and verify its
+/// key-shares).
 class PeerDevice {
   const PeerDevice({required this.peerAddress, required this.keys});
 
@@ -36,8 +33,7 @@ class PeerDevice {
 }
 
 /// Verifies, pins and caches peer device public keys. Protocol-neutral: the
-/// peer address is an opaque string the transport supplies. Shared by both key
-/// exchanges (Matrix today, XMPP tomorrow).
+/// peer address is an opaque string the transport supplies..
 ///
 /// Hardening (XMPP_COLLAB_TRANSPORT.md §5 brick 8, §7):
 ///   • The pre-approval pin-store is capped at [pinStoreCap] (≥ the occupant
@@ -146,8 +142,8 @@ class CollabDeviceDirectory {
     }
   }
 
-  /// The protocol-neutral address that owns [deviceId] (a Matrix user id, an
-  /// XMPP room/nick), for addressing a key-share, or null if unknown.
+  /// The protocol-neutral address that owns [deviceId] (an XMPP room/nick),
+  /// for addressing a key-share, or null if unknown.
   String? addressOf(String deviceId) => _peers[deviceId]?.peerAddress;
 
   /// Every device id currently known — the authority walks this to key newcomers.
@@ -157,10 +153,10 @@ class CollabDeviceDirectory {
   Iterable<PeerDevice> get peers => _peers.values;
 
   /// The verified public keys of every device belonging to [peerAddress] — used
-  /// by the Matrix key exchange to resolve the sender of a blinded key-share
-  /// (the wrap carries no cleartext sender device-id, §5.1 N3; the to-device
-  /// event supplies the sender's Matrix user id, and the directory maps that to
-  /// candidate device keys for trial-install).
+  /// by the key exchange to resolve the sender of a blinded key-share (the wrap
+  /// carries no cleartext sender device-id, §5.1 N3; the event supplies the
+  /// sender's address, and the directory maps that to candidate device keys for
+  /// trial-install).
   Iterable<DevicePublicKeys> devicesForAddress(String peerAddress) => _peers
       .values
       .where((p) => p.peerAddress == peerAddress)

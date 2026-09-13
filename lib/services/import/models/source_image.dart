@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:crypto/crypto.dart' as crypto;
+import '../../../utils/content_hash.dart';
 
 /// A normalised image extracted from a source presentation.
 ///
@@ -38,7 +38,7 @@ class SourceImage {
   final SourceImagePlacement? placement;
 
   /// SHA-256 hex digest of [bytes]; the content-based identity for dedup.
-  late final String sha256 = crypto.sha256.convert(bytes).toString();
+  late final String sha256 = sha256Hex(bytes);
 }
 
 class SourceImagePlacement {

@@ -71,7 +71,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final l10n = context.l10n;
     final deckNotifier = ref.read(deckProvider.notifier);
     listenCollabAuthorityChange(ref, context, l10n); // handover melding (§5.3)
-    listenMatrixCollab(ref, context, l10n); // realtime uitkomst-melding (§6.5)
 
     final isMarkdownMode = editor.mode == EditorMode.markdown;
 
@@ -754,7 +753,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       context,
       // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
       // naam van het te downloaden bestand.
-      deckPath: deckState.filePath ?? '${_safeRemoteName(deck.title)}.md',
+      deckPath:
+          deckState.filePath ??
+          '${sanitizeFilename(deck.title, fallback: 'presentatie')}.md',
       bundleFor: bundleFor,
       hasPrivacyFindings: hasPrivacyFindings,
       hasDepthChoice: hasDepthChoice,

@@ -32,11 +32,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:crypto/crypto.dart';
 import 'package:xml/xml.dart';
 
 import '../collab/collab_crypto.dart';
 import '../collab/collab_device_directory.dart';
+import '../utils/content_hash.dart';
 import '../utils/log.dart';
 import 'companion_demux.dart';
 import 'xmpp_session.dart';
@@ -170,7 +170,7 @@ class XmppChat {
   /// Verwerk een inbound `<chat>`-stanza (wire aan de demux). Buffert de
   /// verzegeling en opent haar in [retryPending]; een eigen echo wordt gedropt.
   Future<void> handleChat(Stanza stanza) async {
-    final child = _childByNs(stanza, chatType);
+    final child = stanza.childByNs(chatType);
     if (child == null) return;
     try {
       final decoded = jsonDecode(child.innerText);
@@ -267,7 +267,7 @@ class XmppChat {
   /// dezelfde JSON — `toContent()` heeft een vaste sleutelvolgorde — dus dezelfde
   /// hash.
   String _sealedId(SealedEnvelope sealed) =>
-      sha256.convert(utf8.encode(jsonEncode(sealed.toContent()))).toString();
+      sha256HexOfText(jsonEncode(sealed.toContent()));
 
   /// Onthoud [id] in de begrensde dedup-set; verdrijf het oudste als de cap
   /// bereikt is (FIFO).
@@ -290,15 +290,4 @@ class XmppChat {
   }
 
   // ── helpers ────────────────────────────────────────────────────────────────
-
-  /// Vind het eerste child-element met [namespace] — zowel de geserialiseerde
-  /// `xmlns`-attribuutvorm als de geparsede `namespaceUri`. Spiegelt
-  /// `XmppTransport._childByNs`.
-  static XmlElement? _childByNs(Stanza stanza, String namespace) {
-    for (final child in stanza.children) {
-      final ns = child.getAttribute('xmlns') ?? child.name.namespaceUri;
-      if (ns == namespace) return child;
-    }
-    return null;
-  }
 }

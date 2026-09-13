@@ -136,7 +136,7 @@ class XmppPresenceBeacon {
   /// verzegeling per afzender (laatste wint) en probeert hem te openen; een
   /// nog-niet-openbare wordt gebufferd voor [retryPending].
   Future<void> handlePresence(Stanza stanza) async {
-    final child = _childByNs(stanza, presenceType);
+    final child = stanza.childByNs(presenceType);
     if (child == null) return;
     try {
       final decoded = jsonDecode(child.innerText);
@@ -205,15 +205,4 @@ class XmppPresenceBeacon {
   }
 
   // ── helpers ────────────────────────────────────────────────────────────────
-
-  /// Vind het eerste child-element met [namespace] — zowel de geserialiseerde
-  /// `xmlns`-attribuutvorm als de geparsede `namespaceUri`. Spiegelt
-  /// `XmppTransport._childByNs`.
-  static XmlElement? _childByNs(Stanza stanza, String namespace) {
-    for (final child in stanza.children) {
-      final ns = child.getAttribute('xmlns') ?? child.name.namespaceUri;
-      if (ns == namespace) return child;
-    }
-    return null;
-  }
 }

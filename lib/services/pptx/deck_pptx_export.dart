@@ -14,6 +14,7 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 
 import '../export_metadata.dart';
+import '../../utils/xml_escape.dart';
 
 // 16:9 widescreen slide size in EMU (English Metric Units): 13.333" x 7.5".
 const int _slideWidthEmu = 12192000;
@@ -94,25 +95,12 @@ Uint8List buildDeckExportPptx(
   return ZipEncoder().encodeBytes(archive);
 }
 
-/// XML-escape free text destined for an `<a:t>` run.
-String _xmlEscape(String s) {
-  return s
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;');
-}
-
-/// XML-escape free text destined for an attribute value. Adds the quote to
-/// what [_xmlEscape] does — an attribute has one more way to break than an
-/// element body.
-String _xmlAttr(String s) => _xmlEscape(s).replaceAll('"', '&quot;');
-
 /// A notesSlide whose body placeholder carries the speaker notes. Newlines in
 /// [note] become separate paragraphs.
 String _notesSlideXml(String note) {
   final paras = StringBuffer();
   for (final line in note.split('\n')) {
-    paras.write('<a:p><a:r><a:t>${_xmlEscape(line)}</a:t></a:r></a:p>');
+    paras.write('<a:p><a:r><a:t>${xmlEscape(line)}</a:t></a:r></a:p>');
   }
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       '<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
@@ -223,14 +211,14 @@ String _coreProps(
 }) {
   final now = DateTime.now().toUtc();
   String iso(DateTime t) => t.toIso8601String();
-  final title = _xmlEscape(metadata.displayTitle(fallbackTitle));
-  final subject = _xmlEscape(metadata.subject(fallbackTitle));
-  final creator = _xmlEscape(metadata.documentAuthor);
-  final keywords = _xmlEscape(metadata.exportKeywords());
+  final title = xmlEscape(metadata.displayTitle(fallbackTitle));
+  final subject = xmlEscape(metadata.subject(fallbackTitle));
+  final creator = xmlEscape(metadata.documentAuthor);
+  final keywords = xmlEscape(metadata.exportKeywords());
   final description = metadata.htmlDescription;
   final descXml = description == null
       ? ''
-      : '<dc:description>${_xmlEscape(description)}</dc:description>';
+      : '<dc:description>${xmlEscape(description)}</dc:description>';
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       '<cp:coreProperties '
       'xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '
@@ -242,7 +230,7 @@ String _coreProps(
       '<dc:creator>$creator</dc:creator>'
       '$descXml'
       '<cp:keywords>$keywords</cp:keywords>'
-      '<cp:lastModifiedBy>${_xmlEscape(metadata.producer)}</cp:lastModifiedBy>'
+      '<cp:lastModifiedBy>${xmlEscape(metadata.producer)}</cp:lastModifiedBy>'
       '<dcterms:created xsi:type="dcterms:W3CDTF">${iso(now)}</dcterms:created>'
       '<dcterms:modified xsi:type="dcterms:W3CDTF">${iso(now)}</dcterms:modified>'
       '</cp:coreProperties>';
@@ -252,11 +240,11 @@ String _appProps(ExportDocumentMetadata metadata) {
   final company = metadata.organization.trim();
   final companyXml = company.isEmpty
       ? ''
-      : '<Company>${_xmlEscape(company)}</Company>';
+      : '<Company>${xmlEscape(company)}</Company>';
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" '
       'xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">'
-      '<Application>${_xmlEscape(metadata.producer)}</Application>'
+      '<Application>${xmlEscape(metadata.producer)}</Application>'
       '$companyXml'
       '</Properties>';
 }
@@ -386,7 +374,7 @@ String _slideXml(String altText) {
   // `descr` is de alt-tekstsleuf van OOXML. Het gaat door de *attribuut*-escaper,
   // niet die van de tekstinhoud: een aanhalingsteken in een beschrijving zou het
   // attribuut anders openbreken.
-  final descr = altText.isEmpty ? '' : ' descr="${_xmlAttr(altText)}"';
+  final descr = altText.isEmpty ? '' : ' descr="${xmlAttr(altText)}"';
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       '<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
       'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" '

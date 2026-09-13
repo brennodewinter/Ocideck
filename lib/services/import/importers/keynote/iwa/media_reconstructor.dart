@@ -9,6 +9,7 @@ import '../key_context.dart';
 import 'iwa_archive.dart';
 import 'iwa_document.dart';
 import 'proto_wire.dart';
+import '../../../../../utils/file_extension.dart';
 
 /// Reconstruct media references from a Keynote IWA `TSD.MovieArchive` drawable.
 ///
@@ -201,10 +202,5 @@ class MediaReconstructor {
     return SourceImage(bytes: bytes, ext: _ext(posterFile), name: posterFile);
   }
 
-  String _ext(String name) {
-    final dot = name.lastIndexOf('.');
-    if (dot < 0) return 'jpg';
-    final ext = name.substring(dot + 1).toLowerCase();
-    return ext.isEmpty ? 'jpg' : ext;
-  }
+  String _ext(String name) => extOfFileName(name, fallback: 'jpg');
 }

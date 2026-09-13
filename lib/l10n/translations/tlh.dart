@@ -2976,8 +2976,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'mIw DubmeH janmey (SIPOC, DMAIC, Kaizen je A3). motlh chu\'Ha\'lu\'; template \'echletHom De\' patmey je lo\'laHmeH extension chu\'.',
   'Videovergaderingen': 'HaSta qepmey',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'HaSta qepmeyDaq yIjeS \'ej OciDeckvo\' yISoQmoH; SoQmoHwI\' Da\'armey Daghaj. HaSta cha\'wI\'pu\' \'echletHom retlhDaq, latlh ghItlh lojmItDaq ghobe\'. Bring-your-own-server (Jitsi Matrix je); pagh polHa\' OciDeck \'ej ja\'chuqmey De\' IAvo\' Hoch chel. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'HaSta qepmeyDaq yIjeS \'ej OciDeckvo\' yISoQmoH; SoQmoHwI\' Da\'armey Daghaj. HaSta cha\'wI\'pu\' \'echletHom retlhDaq, latlh ghItlh lojmItDaq ghobe\'. Bring-your-own-server (Jitsi); pagh polHa\' OciDeck \'ej ja\'chuqmey De\' IAvo\' Hoch chel. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
   'Videovergadering': 'HaSta qep',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'DaH qep vumtaHbogh tu\'lu\'be\'. qep lIchwI\' rarmeH \'ay\' chu\' chellu\' pIq.',
@@ -2995,11 +2995,6 @@ const _dutchSourceAddTlh = <String, String>{
       'wa\' HTML De\'wI\' nagh vaghlan (512 MB \'oH veH\'e\') tlhutlh mej HInob mej. puS pagh mach nagh yIlo\', ghap PDF ghap ngaSwI\' yIchenmoH.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       '’echletHommey law’qu’ ’ej jen law’qu’ ghaj export vam; vaj QaQ render laHbe’. HuvDaj export, pagh PDF Sun lo’.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'wa\'DIch nab ta\'laH \'ej yhraS; ghIq Daqbogh SovmeH ghItlh DalaHlaH.',
-  'Herkomst ondertekend.': 'Daqbogh SovmeH ghItlh rap.',
-  'De herkomst kon niet worden ondertekend.':
-      'Daqbogh SovmeH ghItlh laH ta\'be\'lu\'.',
   'Herkomst ondertekenen': 'Daqbogh SovmeH ghItlh yIqon',
   'Herkomst bevestigd': 'Daqbogh SovmeH ngoq lu\'ol',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3016,32 +3011,9 @@ const _dutchSourceAddTlh = <String, String>{
   'Herkomst niet hier te controleren': 'naDev SovmeH ngoq toblu\'laHbe\'',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'tu\'lu\' ghItlh \'ach naDev ngu\'qa\'laHbe\'lu\' — teywI\' `.md` Hemey tob.',
-  'Bestaande identiteit vervangen?': 'qonwI\' DaH tu\'lu\'bogh DanaghmoH\'a\'?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'naDev De\'wI\'vam qonwI\' tu\'lu\'. qonwI\' choHDI\', naghvo\' qonwI\' choH. DaH qonwI\'vetlh choHmeH naghvam Dapolpu\'\'a\'? naghvam Dapolbe\'chugh, qonwI\' Daghor.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'cha’nav De’ lIwvaD De’wI’ QulmeH qawHaq teblu’ (256 MB ’oH veH’e’). De’ Dachbe’meH, wa’DIch .ocideck De’ QaywI’ rur Qu’lIj pol. GhIq nagh, HaSta pagh wab De’ QaywI’ puS pagh mach lo’, latlh cha’navmey SoQmoH, pagh latlh cha’navmey poSmoHbe’taHvIS chu’qa’.',
   'Ongeldige vraag': 'yu\'vam lughbe\'',
-  'Herstelsleutel': 'cheghmoHwI\' ngoq',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'QaghHa\'ghach Daq Daqmey QanmoH cheghmoHwI\' ngoqvam — ghItlhwI\' mojaqmeywIj toghDaq. eb wa\'DIch neH \'oH, latlh jan Daq rap qup\'a\' choH; cheghmoHwI\' ngoq Hutlh, pa\' chu\' jan, ngeb qelHa\'lu\'bogh jan rur SoH. vay\' vebvaD yIʼangQo\'.',
-  'Herstelsleutel gekopieerd.': 'cheghmoHwI\' ngoq velqa\'lu\'pu\'.',
-  'Identiteit herstellen': 'qup\'a\' yIchegh',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'wa\'Hu\' DaqanmoHpu\'bogh cheghmoHwI\' ngoq yIlan. vaj janvam qup\'a\' rap Suq — nubelHa\'moHpu\'bogh qonwI\' latlh, DaʼangʼeghmeH nItlhDu\' cha\' tu\'qa\'.',
-  'Identiteit & herstelsleutel': 'qup\'a\' & cheghmoHwI\' ngoq',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'DIvI\' qup\'a\' ghaj janlIj — \'oH nubelHa\'moHpu\'bogh qonwI\' luqel. cheghmoHwI\' ngoq yIQan, latlh janDaq qup\'a\' rap DaqanmoHmeH tugh; ngoq Hutlh, pa\' Dataghqa\'.',
-  'Herstelsleutel tonen': 'cheghmoHwI\' ngoq yi\'ang',
-  'De herstelsleutel kon niet worden gelezen.':
-      'cheghmoHwI\' ngoq laDlaHbe\'lu\'.',
-  'Identiteit hersteld.': 'qup\'a\' cheghlu\'pu\'.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'lugh cheghmoHwI\' ngoqvam — yIlaD: naQ \'ej QaghHa\' Datermey\'\'a\'.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'cheghmoHwI\' ngoq lI\' rurbe\' lI\'.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'cheghmoHwI\' ngoqvam, OciDeck chu\'qu\' Ha\'DIbaHvo\' ghoS.',
   'Afbeeldingsrechten': 'Image rights — tlhIngan Hol',
   'Afbeeldingsrechten controleren…': 'Check image rights… — tlhIngan Hol',
   'Afdoening': 'Settlement — tlhIngan Hol',
@@ -3066,93 +3038,22 @@ const _dutchSourceAddTlh = <String, String>{
       'files could not be safely reviewed — tlhIngan Hol',
   'nieuw gescand': 'newly scanned — tlhIngan Hol',
   'Realtime samenwerken': 'SIbI\' vumchuq',
-  'Manieren van verbinden': 'rarmeH mIwmey',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'So\'wI\' \'echlet lo\'lu\'taHvIS SIbI\' cha\'navDaq bovumchuq. motlh chu\'be\'lu\'. OciDeck ngaQmoHwI\'mey lo\'lu\' \'ej pat Hoch So\'lu\'; De\' So\'lu\'pu\' neH legh Server.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Matrix homeserver \'echlet Da. vumchuqghach perDaq lo\'wI\' yIcher. (Jitsi XMPP je tugh.)',
   'Chat': 'ja\'chuq',
-  'Chat openen': 'ja\'chuq yIpoSmoH',
   'Chat sluiten': 'ja\'chuq yISoQmoH',
   'Bericht…': 'QIn…',
   'Versturen': 'yIngeH',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'QIn tu\'lu\'be\'. latlh ghItlhwI\'pu\'lI\' vay\' tIja\'.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Hoch jan nID DavItlh \'e\' yInob voqbogh Hef Dat — latlhvaD yIjatlh, pagh Hef voqbogh Hef DaDIchbogh yIngeH. rap chugh, jan yInob \'ej lulaj; lulaj taH, ghItlh qaStaHvIS latlh session je. pIm chugh, tlhInganpu\' vangbogh yImev.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'nIHvam jan nughmey pIm nughmey DavItlhpu\'bogh wa\'Hu\' — vaj wa\' nuv joj ratlh \'e\' DuH. tlhInganpu\' vangbogh yImev, \'ach jan vam chu\' cherlu\'pu\' \'e\' DaSovchugh vaj Qapla\'.',
-  'Geverifieerd': 'lulaj',
-  'Wijkt af': 'pIm',
-  'Niet geverifieerd': 'lujbe\'',
-  'Markeer als geverifieerd': 'lulaj \'e\' yICho\'',
-  'Verificatie intrekken': 'lulaj yIchID Ha\'',
-  'Toch opnieuw vertrouwen': '\'ach ghItlh voq',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'DaH tlhInganpu\' vangbogh Hoch jan lujpu\'be\'. jan nIDmey yIcompare, Du\' \'Iv vumtaH \'e\' yISovqu\'.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'naDev tetlhvam HovpoH buSbe\'lu\'. wa\'tlhDegh latlh yIloS.',
   'Verifiëren': 'yIlaj',
-  'Deelnemers verifiëren': 'tay\' vumwI\'pu\' tIngu\'',
-  '(dit apparaat)': '(jan vam)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.': 'rI\'ghach link ngeb \'oH.',
-  'De Matrix-homeserver is niet bereikbaar.': 'SIchlaHbe\' Matrix homeserver.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'poH lI\'Daq jangbe\' pIn. link yInuD, \'ej online SaHtaH pIn \'e\' yInuD.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'DawI\'chuqmeH DaneHbogh nuvpu\'vaD link yInob. link ghajbogh nuv \'el laH Qu\'Daq — vaj Davoqbogh nuvpu\'vaD neH yInob. pat Hoch So\'lu\'taH ngaQtaH De\'; homeserver De\' So\'lu\'pu\' neH legh.',
   'Deelnemen': 'yI\'el',
-  'Deelnemen via een link': 'link lo\'taHvIS yI\'el',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Dulajbe\' Matrix account — DuHmeyDaq \'elmeH token yInuD.',
-  'Je doet nu live mee aan de samenwerking.': 'DaH SIbI\' bItay\' vumtaH.',
-  'Nodig mede-auteurs uit': 'latlh ghItlhwI\'pu\' yIrI\'',
-  'Open eerst een presentatie om aan samen te werken.':
-      'bItay\' vummeH cha\'nav yIpoSmoH.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'pIn ngeHpu\'bogh rI\'ghach link yIghItlh. vaj cha\'nav rap DapoSmoH \'ej SIbI\' bItay\' vumtaH.',
-  'Realtime samenwerken is mislukt.': 'SIbI\' vumchuq lujpu\'.',
-  'Realtime samenwerken starten': 'SIbI\' vumchuq yItagh',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'wa\'DIch Matrix account yIcher: DuHmey → vumchuqghach.',
-  'Uitnodigingslink': 'rI\'ghach link',
-  'Uitnodigingslink gekopieerd.': 'rI\'ghach link vellu\'pu\'.',
-  'Uitnodigingslink kopiëren': 'rI\'ghach link yIvel',
-  'Verbinden met de samenwerking…': 'tay\' vum rarlu\'taH…',
-  'Access-token': '\'elmeH token',
-  'Apparaat-id': 'jan ID',
-  'Gebruikers-id': 'lo\'wI\' ID',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Qagh homeserver. tugh yInID.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'SIchlaHbe\' homeserver, ghap teywI\' voqlu\'be\'.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'latlh Sumo\' jula\' homeserver — Hung meqmey tlha\'lu\'be\'. Sum bertlham yIghItlh.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'loS homeserver \'e\' poQ. tugh yInID.',
-  'De homeserver weigert dit token.': 'token vam lajQo\' homeserver.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Matrix homeserver rur Sum vam jangbe\'. lugh\'a\' URL?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'https ghaH homeserver \'e\' poQlu\': Hoch tlhobmeH lengtaH \'elmeH token.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      '\'elmeH token luvoqHa\'lu\' — yIlaD: bIqonta\'\'a\' \'ej teqlu\'be\'\'a\'?',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Matrix client (Element: Hoch Iistellige → QaH & De\') ghap homeserverlIjDaq \'elmeH token yImoj. "rar yInoH" token \'ol \'ej lo\'wI\' ID jan ID je buhtaH.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'privé ghap juH Sammey homeserver vangDI\' poQlu\'. vam degh Hutlhchugh, Hung waw\' privé inscription lajQo\'.',
-  'Realtime samenwerken (Matrix)': 'SIbI\' vumchuq (Matrix)',
   'Samenwerken': 'vumchuqghach',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'rar — lo\'wI\' ID jan ID je buhta\'',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'rar, \'ach jan ID nobbe\' homeserver — SoH yIghItlh, HIchDaq latlh ghItlhwI\'pu\' ngaQHa\'ghachmey pawbe\'.',
-  'Vul een access-token in': '\'elmeH token yIghItlh',
-  'Vul een geldige homeserver-URL in': 'lugh homeserver URL yIghItlh',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Matrix homeserver So\'wI\' Da lo\'lu\'taHvIS \'echletDaq cha\'navDaq bovumchuq. OciDeck ngaQmoHwI\'mey lo\'lu\' \'ej pat Hoch So\'lu\'; De\' So\'lu\'pu\' neH legh Server. homeserver \'ej latlhDaq chenmoHlu\'pu\'bogh \'elmeH token yIghItlh — not mu\'wIj pegh Datlhob OciDeck. QulHom So\'lu\'pu\'bogh \'oH nuHmey qawHaqDaq polluvtaH, latlh chuqmey tlhejbe\'.',
-  'wordt door de test ingevuld': 'poj polmoH',
   'Meer documentatie op de repository': 'qawHaqDaq ghItlhmey law\'',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'qawHaqDaq ghItlhmey naQ tu\'lu\': qach nab, chenmoH, De\'wI\' ghItlh, \'ej nab.',

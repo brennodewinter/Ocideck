@@ -3016,8 +3016,8 @@ const _dutchSourceAddHu = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Eszközök folyamatfejlesztéshez (SIPOC, DMAIC, Kaizen és A3). Alapértelmezés szerint ki vannak kapcsolva; a kapcsolódó sablonok és diaelrendezések használatához engedélyezze a bővítményt.',
   'Videovergaderingen': 'Videokonferenciák',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Csatlakozzon videokonferenciákhoz, és tartson előadást az OciDeckből saját felülettel: a résztvevők a diája mellett, nem egy másik alkalmazás ablakában. Bring-your-own-server (Jitsi vagy Matrix); az OciDeck semmit sem tárol, és a beszélgetési adatokat távol tartja az AI-tól. A megbeszélési szolgáltatáshoz való csatlakozás egy későbbi verzióban következik.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Csatlakozzon videokonferenciákhoz, és tartson előadást az OciDeckből saját felülettel: a résztvevők a diája mellett, nem egy másik alkalmazás ablakában. Bring-your-own-server (Jitsi); az OciDeck semmit sem tárol, és a beszélgetési adatokat távol tartja az AI-tól. A megbeszélési szolgáltatáshoz való csatlakozás egy későbbi verzióban következik.',
   'Videovergadering': 'Videokonferencia',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Még nincs aktív megbeszélés. A megbeszélési szolgáltatáshoz való csatlakozás egy későbbi verzióban lesz elérhető.',
@@ -3035,11 +3035,6 @@ const _dutchSourceAddHu = <String, String>{
       'A képek együtt túl nagyok egyetlen HTML-fájlhoz (legfeljebb 512 MB). Használjon kevesebb vagy kisebb képet, vagy exportáljon PDF-ként vagy csomagként.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Ez az exportálás túl sok diát tartalmaz túl nagy felbontásban ahhoz, hogy biztonságosan megjeleníthető legyen. Exportáljon részletekben, vagy használja a tömörített PDF-et.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Előbb fejezd be és mentsd el a bemutatót; utána aláírhatod az eredetét.',
-  'Herkomst ondertekend.': 'Eredet aláírva.',
-  'De herkomst kon niet worden ondertekend.':
-      'Az eredetet nem sikerült aláírni.',
   'Herkomst ondertekenen': 'Eredet aláírása',
   'Herkomst bevestigd': 'Eredet megerősítve',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3056,32 +3051,9 @@ const _dutchSourceAddHu = <String, String>{
   'Herkomst niet hier te controleren': 'Az eredet itt nem ellenőrizhető',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Az aláírás jelen van, de itt nem számolható újra — ellenőrizd az eredeti `.md` fájllal.',
-  'Bestaande identiteit vervangen?': 'Lecseréli a meglévő identitást?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Ezen az eszközön már van együttműködési identitás. A visszaállítás lecseréli a kulcsban lévő identitásra. Mentetted a jelenlegi identitás helyreállítási kulcsát? Biztonsági másolat nélkül elveszíted.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'A prezentációs média webes memóriája megtelt (legfeljebb 256 MB). Az adatvesztés elkerüléséhez először mentse a munkáját .ocideck-fájlként. Ezután használjon kevesebb vagy kisebb képet, videót vagy hangfájlt, zárja be a többi bemutatót, vagy töltsön újra más bemutatók megnyitása nélkül.',
   'Ongeldige vraag': 'Érvénytelen kérdés',
-  'Herstelsleutel': 'Helyreállítási kulcs',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Tartsd ezt a helyreállítási kulcsot biztonságos helyen — például a jelszószéfedben. Ez az egyetlen módja annak, hogy egy másik eszközön visszaállítsd ugyanazt az identitást; e kulcs nélkül ott új, még nem ellenőrzött eszközként kezdesz. Ne oszd meg senkivel.',
-  'Herstelsleutel gekopieerd.': 'Helyreállítási kulcs másolva.',
-  'Identiteit herstellen': 'Identitás visszaállítása',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Illeszd be a korábban elmentett helyreállítási kulcsot. Ez az eszköz ekkor átveszi ugyanazt az identitást — a téged korábban ellenőrző társszerzők ismét felismerik az ujjlenyomatodat.',
-  'Identiteit & herstelsleutel': 'Identitás és helyreállítási kulcs',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Az eszközödnek saját együttműködési identitása van — ezt ellenőrzik a társszerzők. Mentsd el a helyreállítási kulcsot, hogy ugyanazt az identitást később egy másik eszközön visszaállíthasd; e kulcs nélkül ott elölről kezded.',
-  'Herstelsleutel tonen': 'Helyreállítási kulcs megjelenítése',
-  'De herstelsleutel kon niet worden gelezen.':
-      'A helyreállítási kulcsot nem sikerült beolvasni.',
-  'Identiteit hersteld.': 'Identitás visszaállítva.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Ez a helyreállítási kulcs nem helyes — ellenőrizd, hogy teljesen és hibátlanul másoltad-e át.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Ez nem tűnik érvényes helyreállítási kulcsnak.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Ez a helyreállítási kulcs az OciDeck egy újabb verziójából származik.',
   'Afbeeldingsrechten': 'Képjogok',
   'Afbeeldingsrechten controleren…': 'Ellenőrizze a képjogokat…',
   'Afdoening': 'Település',
@@ -3105,96 +3077,22 @@ const _dutchSourceAddHu = <String, String>{
       'a fájlokat nem lehetett biztonságosan áttekinteni',
   'nieuw gescand': 'újonnan szkennelve',
   'Realtime samenwerken': 'Valós idejű együttműködés',
-  'Manieren van verbinden': 'Csatlakozási módok',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Működj együtt élőben egy bemutatón egy titkosított továbbítón keresztül. Alapértelmezetten kikapcsolva. A tartalom végponttól végpontig titkosított OciDeck saját kulcsaival; a kiszolgáló csak titkosított adatokat lát.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Együttműködés egy Matrix-homeserveren keresztül továbbítóként. Állítsd be a fiókot az Együttműködés lapon. (Jitsi és XMPP hamarosan.)',
   'Chat': 'Csevegés',
-  'Chat openen': 'Csevegés megnyitása',
   'Chat sluiten': 'Csevegés bezárása',
   'Bericht…': 'Üzenet…',
   'Versturen': 'Küldés',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Még nincsenek üzenetek. Mondj valamit a társszerzőidnek.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Hasonlítsd össze minden eszköz ujjlenyomatát megbízható csatornán — olvassátok fel egymásnak, vagy küldd olyan úton, amelyben megbízol. Ha egyezik, jelöld az eszközt ellenőrzöttként; ezután ellenőrzött marad, egy későbbi munkamenetben is. Ha eltér, szakítsd meg az együttműködést.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Ennek az eszköznek az azonossága eltér attól, amit korábban ellenőriztél — lehet, hogy valaki közbeékelődött. Szakítsd meg az együttműködést, hacsak nem vagy biztos abban, hogy ezt az eszközt újra beállították.',
-  'Geverifieerd': 'Ellenőrizve',
-  'Wijkt af': 'Eltér',
-  'Niet geverifieerd': 'Nincs ellenőrizve',
-  'Markeer als geverifieerd': 'Megjelölés ellenőrzöttként',
-  'Verificatie intrekken': 'Ellenőrzés visszavonása',
-  'Toch opnieuw vertrouwen': 'Mégis bízz meg újra',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ebben az együttműködésben még nem minden eszköz ellenőrzött. Hasonlítsd össze az ujjlenyomatokat, hogy biztos legyél, kivel dolgozol.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'A táblázatcella-szerkesztések nem szinkronizálódnak a társszerzőkkel. A cím és más mezők igen.',
   'Verifiëren': 'Ellenőrzés',
-  'Deelnemers verifiëren': 'Résztvevők ellenőrzése',
-  '(dit apparaat)': '(ez az eszköz)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Ez nem érvényes meghívó hivatkozás.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'A Matrix-homeserver nem érhető el.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'A házigazda nem válaszolt időben. Ellenőrizd a hivatkozást, és hogy a házigazda még elérhető-e.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Oszd meg ezt a hivatkozást azokkal, akikkel együtt szeretnél dolgozni. Bárki, akinél megvan a hivatkozás, beléphet a munkamenetbe — ezért csak olyanokkal oszd meg, akikben megbízol. A tartalom végponttól végpontig titkosított marad; a homeserver csak titkosított adatokat lát.',
   'Deelnemen': 'Csatlakozás',
-  'Deelnemen via een link': 'Csatlakozás hivatkozással',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'A Matrix-fiókodat elutasítja — ellenőrizd a hozzáférési tokent a Beállításokban.',
-  'Je doet nu live mee aan de samenwerking.': 'Most élőben működsz együtt.',
-  'Nodig mede-auteurs uit': 'Társszerzők meghívása',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Először nyiss meg egy bemutatót az együttműködéshez.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Illeszd be a meghívó hivatkozást, amelyet a házigazda küldött. Ezzel ugyanazt a bemutatót nyitod meg, és élőben működsz együtt.',
-  'Realtime samenwerken is mislukt.':
-      'A valós idejű együttműködés nem sikerült.',
-  'Realtime samenwerken starten': 'Valós idejű együttműködés indítása',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Először állíts be egy Matrix-fiókot a Beállítások → Együttműködés menüben.',
-  'Uitnodigingslink': 'Meghívó hivatkozás',
-  'Uitnodigingslink gekopieerd.': 'Meghívó hivatkozás másolva.',
-  'Uitnodigingslink kopiëren': 'Meghívó hivatkozás másolása',
-  'Verbinden met de samenwerking…': 'Csatlakozás az együttműködéshez…',
-  'Access-token': 'Hozzáférési token',
-  'Apparaat-id': 'Eszközazonosító',
-  'Gebruikers-id': 'Felhasználói azonosító',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'A homeserver hibát adott vissza. Próbáld újra később.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'A homeserver nem érhető el, vagy a tanúsítvány nem megbízható.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'A homeserver átirányít egy másik címre — biztonsági okokból ezt nem követi a rendszer. Add meg közvetlenül a végleges címet.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'A homeserver arra kér, hogy várj egy pillanatot. Próbáld újra hamarosan.',
-  'De homeserver weigert dit token.': 'A homeserver elutasítja ezt a tokent.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Ez a cím nem Matrix-homeserverként válaszol. Helyes az URL?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'A homeservernek https-nek kell lennie: a hozzáférési token minden kéréssel utazik.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'A hozzáférési tokent elutasítja — ellenőrizd, hogy helyesen másoltad-e át, és hogy nem vonták-e vissza.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Hozz létre egy hozzáférési tokent a Matrix-kliensedben (például az Elementben a Minden beállítás → Súgó és információ alatt), vagy a homeservereden. A "Kapcsolat tesztelése" megerősíti a tokent, és kitölti a felhasználói azonosítódat és eszközazonosítódat.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Szükséges, ha a homeserver magán- vagy otthoni hálózaton fut. E jelölés nélkül a biztonsági ellenőrzés elutasít egy magáncímet.',
-  'Realtime samenwerken (Matrix)': 'Valós idejű együttműködés (Matrix)',
   'Samenwerken': 'Együttműködés',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Sikeres kapcsolódás — felhasználói azonosító és eszközazonosító kitöltve',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Sikeres kapcsolódás, de a homeserver nem adott vissza eszközazonosítót — töltsd ki magad, különben a társszerzők kulcsai nem érkeznek meg.',
-  'Vul een access-token in': 'Adj meg egy hozzáférési tokent',
-  'Vul een geldige homeserver-URL in': 'Adj meg egy érvényes homeserver-URL-t',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Működj együtt élőben egy bemutatón egy Matrix-homeserveren keresztül titkosított továbbítóként. A tartalom végponttól végpontig titkosított OciDeck saját kulcsaival; a kiszolgáló csak titkosított adatokat lát. Adj meg egy homeservert és egy máshol létrehozott hozzáférési tokent — az OciDeck soha nem kéri a jelszavadat. A tokent titkosítva a kulcstartó őrzi, nem a többi beállítás mellett.',
-  'wordt door de test ingevuld': 'a teszt tölti ki',
   'Meer documentatie op de repository': 'További dokumentáció a tárolóban',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'A teljes dokumentáció — beleértve az architektúrát, a fordítást, a forráskódot és a tervezést — a tárolóban található.',

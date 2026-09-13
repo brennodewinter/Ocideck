@@ -5,6 +5,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../platform/platform_features.dart';
 import '../../../state/online_storage_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'module_card.dart';
 
 /// De modulekaart voor Online opslag op het tabblad Uitbreidingen (#570).
 ///
@@ -32,13 +33,7 @@ class OnlineStorageModuleCard extends ConsumerWidget {
     final web = !supportsNetworkDeckSources;
     final enabled = !web && ref.watch(onlineStorageEnabledProvider);
     final revealed = ref.watch(onlineStorageRevealProvider);
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

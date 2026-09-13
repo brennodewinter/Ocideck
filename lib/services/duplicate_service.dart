@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as p;
 
 import '../utils/log.dart';
 import 'file_service.dart';
+import '../utils/content_hash.dart';
 
 /// Eén vermelding in een open-lijst, verrijkt met wat er elders op schijf van
 /// te vinden is: byte-identieke kopieën (zelfde presentatie, andere plek) en
@@ -39,8 +39,7 @@ class DuplicateInfo<T> {
 /// andere aantekeningen eroverheen.
 class DuplicateService {
   /// SHA-256 over [bytes], als hex-string.
-  static String contentHash(List<int> bytes) =>
-      sha256.convert(bytes).toString();
+  static String contentHash(List<int> bytes) => sha256Hex(bytes);
 
   /// Groepeer scan-treffers op identieke bestandsinhoud. Leest alléén
   /// bestanden waarvan de grootte meer dan eens voorkomt (alleen even grote

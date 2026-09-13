@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../state/import_module_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'module_card.dart';
 
 /// De modulekaart voor Importeren op het tabblad Uitbreidingen (#772, B1).
 ///
@@ -19,13 +20,7 @@ class ImportModuleCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final enabled = ref.watch(importModuleEnabledProvider);
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: SwitchListTile(
         value: enabled,
         onChanged: (v) => ref.read(importModuleProvider.notifier).setEnabled(v),

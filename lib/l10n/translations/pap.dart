@@ -2052,8 +2052,8 @@ const _dutchSourceAddPap = {
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Hulpmidinan pa mehoramentu di proseso (SIPOC, DMAIC, Kaizen i A3). Standardmente apagá; aktivá e ekstensión pa usa e plantianan i diseñonan di diapositiva relashoná.',
   'Videovergaderingen': 'Reunionnan di video',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Partisipá na reunionnan di video i presentá for di OciDeck ku un interfase propio: e partisipantenan banda di bo slide, no den e bentana di un otro app. Bring-your-own-server (Jitsi òf Matrix); OciDeck no ta hospedá nada i ta tene e datonan di konbersashon pafó di IA. E koneksion ku un servisio di reunion lo sigui den un versión futuro.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Partisipá na reunionnan di video i presentá for di OciDeck ku un interfase propio: e partisipantenan banda di bo slide, no den e bentana di un otro app. Bring-your-own-server (Jitsi); OciDeck no ta hospedá nada i ta tene e datonan di konbersashon pafó di IA. E koneksion ku un servisio di reunion lo sigui den un versión futuro.',
   'Videovergadering': 'Reunion di video',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Ainda no tin un reunion aktivo. E koneksion ku un servisio di reunion lo wòrdu añadí den un versión futuro.',
@@ -2071,10 +2071,6 @@ const _dutchSourceAddPap = {
       'E imagennan huntu ta muchu grandi pa un solo archivo HTML (máksimo 512 MB). Usa ménos òf mas chikí imagen, òf eksportá komo PDF òf paket.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'E eksportashon aki tin muchu diapositiva na un resolushon muchu haltu pa rendere di manera sigur. Eksportá na parti of usa e PDF komprimí.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Kaba i warda e presentashon promé; despues bo por firma su origen.',
-  'Herkomst ondertekend.': 'Origen firmá.',
-  'De herkomst kon niet worden ondertekend.': 'No por a firma e origen.',
   'Herkomst ondertekenen': 'Firma origen',
   'Herkomst bevestigd': 'Origen konfirmá',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -2091,32 +2087,9 @@ const _dutchSourceAddPap = {
   'Herkomst niet hier te controleren': 'Origen no por wòrdu chèk akinan',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'E firma ta presente, pero no por wòrdu kalkulá di nobo akinan — chèk kontra e archivo `.md` original.',
-  'Bestaande identiteit vervangen?': 'Reemplasá identidat eksistente?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'E aparato aki ya tin un identidat di kolaborashon. Restourashon ta reemplas\'é ku e identidat for di e yabi. Bo a warda un yabi di rekuperashon pa e identidat aktual? Sin un backup lo bo perd\'é.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'E memoria web pa media di presentashon ta yen (máksimo 256 MB). Warda bo trabou promé komo un archivo .ocideck pa evita pèrdida di dato. Despues usa ménos imágen, video òf archivo di audio, òf archivo mas chikí, sera otro decks òf karga di nobo sin habri otro decks.',
   'Ongeldige vraag': 'Pregunta inválido',
-  'Herstelsleutel': 'Yabi di rekuperashon',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Warda e yabi di rekuperashon aki na un lugá sigur — por ehèmpel den bo kluis di kontraseña. Ta e úniko manera pa restorá e mesun identidat riba un otro aparato; sin e yabi aki bo ta kuminsá einan komo un aparato nobo, ku ainda no a wòrdu verifiká. No kompartié kuné ku ningun hende.',
-  'Herstelsleutel gekopieerd.': 'Yabi di rekuperashon kopiá.',
-  'Identiteit herstellen': 'Restorá identidat',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Pega e yabi di rekuperashon ku bo a warda anteriormente. E aparato aki ta asumí e mesun identidat — ko-outornan ku a verifiká bo antes lo rekonosé bo fingerprint atrobe.',
-  'Identiteit & herstelsleutel': 'Identidat i yabi di rekuperashon',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Bo aparato tin su propio identidat di kolaborashon — esei ta loke ko-outornan ta verifiká. Warda e yabi di rekuperashon pa restorá e mesun identidat mas lat riba un otro aparato; sin e yabi ei bo ta kuminsá di nobo einan.',
-  'Herstelsleutel tonen': 'Mustra yabi di rekuperashon',
-  'De herstelsleutel kon niet worden gelezen.':
-      'No por a lesa e yabi di rekuperashon.',
-  'Identiteit hersteld.': 'Identidat restorá.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'E yabi di rekuperashon aki no ta korekto — chèk si bo a kopié kompletamente i sin fout.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Esaki no ta parse un yabi di rekuperashon válido.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'E yabi di rekuperashon aki ta bini di un vershon mas nobo di OciDeck.',
   'Afbeeldingsrechten': 'Derechos de imagen',
   'Afbeeldingsrechten controleren…': 'Consultar derechos de imagen…',
   'Afdoening': 'Asentamiento',
@@ -2141,96 +2114,22 @@ const _dutchSourceAddPap = {
       'Los archivos no se pudieron revisar de forma segura.',
   'nieuw gescand': 'recién escaneado',
   'Realtime samenwerken': 'Kolaborashon na tempu real',
-  'Manieren van verbinden': 'Manera di konektá',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Kolaborá na bibo riba un presentashon via un relè enkriptá. Apagá pa defekto. E kontenido ta wòrdu enkriptá end-to-end ku OciDeck su mes yabinan; e server ta mira solamente datos enkriptá.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Kolaborashon via un homeserver di Matrix komo relè. Konfigurá e kuenta na e tab Kolaborashon. (Jitsi i XMPP ta bin.)',
   'Chat': 'Chat',
-  'Chat openen': 'Habri chat',
   'Chat sluiten': 'Sera chat',
   'Bericht…': 'Mensahe…',
   'Versturen': 'Manda',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'No tin mensahe ainda. Bisa algu na bo ko-outornan.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Kompará e wela-di-dede di kada aparato via un kanal di konfiansa — lesa é otro na bos, òf mand\'é via un kaminda ku bo ta konfia. Si e ta koresponde, marká e aparato komo verifiká; e ta keda verifiká, tambe den un sesion despues. Si e ta diferente, kòrta e kolaborashon.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'E identidat di e aparato aki ta diferente for di loke bo a verifiká promé — kisas tin un hende meimei. Kòrta e kolaborashon, a menos ku bo ta sigur ku e aparato aki a wòrdu konfigurá di nobo.',
-  'Geverifieerd': 'Verifiká',
-  'Wijkt af': 'Ta diferente',
-  'Niet geverifieerd': 'No verifiká',
-  'Markeer als geverifieerd': 'Marká komo verifiká',
-  'Verificatie intrekken': 'Retirá e verifikashon',
-  'Toch opnieuw vertrouwen': 'Konfia atrobe tòg',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Ainda no tur aparato den e kolaborashon aki ta verifiká. Kompará e wela-di-dede pa bo ta sigur ku ken bo ta traha.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Edishon di selula di tabella no ta sinkronisá ku kolaboradónan. Títul i otro veld sí.',
   'Verifiëren': 'Verifiká',
-  'Deelnemers verifiëren': 'Verifiká partisipantenan',
-  '(dit apparaat)': '(e aparato aki)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Esaki no ta un link di invitashon válido.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'E homeserver di Matrix no ta alkansabel.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'E anfitrion no a reakshoná na tempu. Kontrolá e link i si e anfitrion ta ainda online.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Kompartí e link aki ku esnan ku bo ke laga kolaborá. Ken tin e link por drenta e seshon — p\'esei kompart\'é solamente ku hende ku bo ta konfia. E kontenido ta keda enkriptá end-to-end; e homeserver ta mira solamente datos enkriptá.',
   'Deelnemen': 'Partisipá',
-  'Deelnemen via een link': 'Partisipá via un link',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Bo kuenta Matrix ta wòrdu rechasá — kontrolá e token di akseso na Konfigurashon.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Awor bo ta partisipá na bibo den e kolaborashon.',
-  'Nodig mede-auteurs uit': 'Invitá ko-outornan',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Habri promé un presentashon pa kolaborá.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Pega e link di invitashon ku e anfitrion a mand\'é bo. Ku esaki bo ta habri e mesun presentashon i ta kolaborá na bibo.',
-  'Realtime samenwerken is mislukt.': 'Kolaborashon na tempu real a faya.',
-  'Realtime samenwerken starten': 'Kuminsá kolaborashon na tempu real',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Konfigurá promé un kuenta Matrix na Konfigurashon → Kolaborashon.',
-  'Uitnodigingslink': 'Link di invitashon',
-  'Uitnodigingslink gekopieerd.': 'Link di invitashon kopiá.',
-  'Uitnodigingslink kopiëren': 'Kopia link di invitashon',
-  'Verbinden met de samenwerking…': 'Konektando ku e kolaborashon…',
-  'Access-token': 'Token di akseso',
-  'Apparaat-id': 'ID di aparato',
-  'Gebruikers-id': 'ID di usuario',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'E homeserver a duna un eror. Purba atrobe despues.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'E homeserver no ta alkansabel, of e sertifikado no ta konfiá.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'E homeserver ta redirigí na un otro adrès — pa motibunan di siguridat esaki no ta wòrdu sigí. Yena e adrès final direktamente.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'E homeserver ta pidi pa warda un ratu. Purba atrobe pronto.',
-  'De homeserver weigert dit token.': 'E homeserver ta rechasá e token aki.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'E adrès aki no ta kontestá manera un homeserver di Matrix. E URL ta korekto?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Un homeserver mester ta https: e token di akseso ta biaha ku kada petishon.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'E token di akseso ta wòrdu rechasá — kontrolá si bo a kopié korektamente i si e no a wòrdu revoká.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Traha un token di akseso den bo kliente Matrix (por ehèmpel den Element bou di Tur konfigurashon → Yudansa & informashon), of riba bo homeserver. "Testa konekshon" ta konfirmá e token i ta yena bo ID di usuario i ID di aparato.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Nesesario ora e homeserver ta kore riba un red privá of di kas. Sin e bandera aki e kontrol di siguridat ta rechasá un adrès privá.',
-  'Realtime samenwerken (Matrix)': 'Kolaborashon na tempu real (Matrix)',
   'Samenwerken': 'Kolaborashon',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Konekshon a logra — ID di usuario i ID di aparato yená',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Konekshon a logra, pero e homeserver no a duna un ID di aparato bèk — yen\'é bo mes, sino e yabinan di ko-outornan lo no yega.',
-  'Vul een access-token in': 'Yena un token di akseso',
-  'Vul een geldige homeserver-URL in': 'Yena un URL di homeserver válido',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Kolaborá na bibo riba un presentashon via un homeserver di Matrix komo un relè enkriptá. E kontenido ta wòrdu enkriptá end-to-end ku OciDeck su mes yabinan; e server ta mira solamente datos enkriptá. Yena un homeserver i un token di akseso trahá na un otro lugá — OciDeck nunka ta pidi bo kontrasenja. E token ta wòrdu wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
-  'wordt door de test ingevuld': 'ta wòrdu yená pa e tèst',
   'Meer documentatie op de repository': 'Mas dokumentashon den e repositorio',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'E dokumentashon kompleto — inkluso arkitektura, konstrukshon, kódigo fuente i diseño — ta den e repositorio.',

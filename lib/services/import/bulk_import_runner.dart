@@ -6,6 +6,7 @@ import '../../models/deck.dart';
 import 'importers/import_failure.dart';
 import 'pipeline/import_task.dart';
 import 'presentation_import_service.dart';
+import '../../utils/file_extension.dart';
 
 /// Eén bestand in de importwachtrij: de bytes plus de naam waaronder de
 /// gebruiker het koos. Bewust dezelfde vorm als de enkelvoudige import — de
@@ -263,12 +264,4 @@ class BulkImportRunner {
     claimed.add(candidate.toLowerCase());
     return p.join(directory, '$candidate.md');
   }
-}
-
-/// De bestandsnaam zonder map of extensie — de terugval voor een deck dat zelf
-/// geen titel meebrengt. Padscheiding-veilig zonder `dart:io`.
-String stemOfFileName(String filename) {
-  final base = filename.split(RegExp(r'[\\/]')).last;
-  final dot = base.lastIndexOf('.');
-  return dot > 0 ? base.substring(0, dot) : base;
 }

@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/services/import/bulk_import_runner.dart';
 import 'package:ocideck/services/web_asset_store.dart';
+import 'package:ocideck/utils/file_extension.dart';
 import 'package:path/path.dart' as p;
 
 import 'helpers/pptx_fixture.dart';

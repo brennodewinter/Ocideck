@@ -3055,8 +3055,8 @@ const _dutchSourceAddGa = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Uirlisí le haghaidh feabhsú próiseas (SIPOC, DMAIC, Kaizen agus A3). Múchta de réir réamhshocraithe; cumasaigh an breiseán chun na teimpléid agus leaganacha amach sleamhnán gaolmhara a úsáid.',
   'Videovergaderingen': 'Físchruinnithe',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Glac páirt i gcruinnithe físe agus déan cur i láthair ó OciDeck le comhéadan dá chuid féin: na rannpháirtithe in aice le do sleamhnán, ní i bhfuinneog feidhmchláir eile. Bring-your-own-server (Jitsi nó Matrix); ní óstálann OciDeck aon rud agus coinníonn sé sonraí an chomhrá amach ón IS. Leanfaidh an nasc le seirbhís chruinnithe i leagan sa todhchaí.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Glac páirt i gcruinnithe físe agus déan cur i láthair ó OciDeck le comhéadan dá chuid féin: na rannpháirtithe in aice le do sleamhnán, ní i bhfuinneog feidhmchláir eile. Bring-your-own-server (Jitsi); ní óstálann OciDeck aon rud agus coinníonn sé sonraí an chomhrá amach ón IS. Leanfaidh an nasc le seirbhís chruinnithe i leagan sa todhchaí.',
   'Videovergadering': 'Físchruinniú',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Níl aon chruinniú gníomhach ann fós. Cuirfear an nasc le seirbhís chruinnithe leis i leagan sa todhchaí.',
@@ -3074,11 +3074,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tá na híomhánna le chéile rómhór do chomhad HTML amháin (512 MB ar a mhéad). Úsáid níos lú íomhánna nó íomhánna níos lú, nó easpórtáil mar PDF nó mar phacáiste.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Tá an iomarca sleamhnán ag an easpórtáil seo ar thaifeach ró-ard le rindreáil go sábháilte. Easpórtáil ina codanna nó úsáid an PDF comhbhrúite.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Críochnaigh agus sábháil an láithreoireacht ar dtús; ansin is féidir leat a bunús a shíniú.',
-  'Herkomst ondertekend.': 'Bunús sínithe.',
-  'De herkomst kon niet worden ondertekend.':
-      'Níorbh fhéidir an bunús a shíniú.',
   'Herkomst ondertekenen': 'Sínigh bunús',
   'Herkomst bevestigd': 'Bunús deimhnithe',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3095,32 +3090,9 @@ const _dutchSourceAddGa = <String, String>{
   'Herkomst niet hier te controleren': 'Ní féidir an bunús a sheiceáil anseo',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Tá an síniú i láthair ach ní féidir é a athríomh anseo — seiceáil in aghaidh an bhunchomhaid `.md` é.',
-  'Bestaande identiteit vervangen?': 'Cuir aitheantas atá ann in ionad?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Tá aitheantas comhoibrithe ag an ngléas seo cheana féin. Cuireann an t-athchóiriú an t-aitheantas ón eochair ina ionad. Ar shábháil tú eochair aisghabhála don aitheantas reatha? Gan chúltaca caillfidh tú é.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Tá cuimhne gréasáin na meán láithreoireachta lán (uasmhéid 256 MB). Sábháil do chuid oibre mar chomhad .ocideck ar dtús chun caillteanas sonraí a chosc. Ansin úsáid níos lú íomhánna, físeán nó comhad fuaime, nó cinn níos lú, dún deiceanna eile, nó athlódáil gan deiceanna eile a oscailt.',
   'Ongeldige vraag': 'Ceist neamhbhailí',
-  'Herstelsleutel': 'Eochair aisghabhála',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Coinnigh an eochair aisghabhála seo in áit shábháilte — mar shampla i do stóras pasfhocal. Is é an t-aon bhealach é chun an aitheantas céanna a aisghabháil ar ghléas eile; gan an eochair seo, tosaíonn tú ansin mar ghléas nua nár fíoraíodh fós. Ná roinn le duine ar bith é.',
-  'Herstelsleutel gekopieerd.': 'Cóipeáladh an eochair aisghabhála.',
-  'Identiteit herstellen': 'Aisghabh aitheantas',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Greamaigh an eochair aisghabhála a shábháil tú níos luaithe. Glacann an gléas seo an t-aitheantas céanna ansin — aithneoidh comhúdair a d\'fhíoraigh thú níos luaithe do mhéarlorg arís.',
-  'Identiteit & herstelsleutel': 'Aitheantas & eochair aisghabhála',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Tá a aitheantas comhoibrithe féin ag do ghléas — sin a fhíoraíonn comhúdair. Sábháil an eochair aisghabhála chun an t-aitheantas céanna a aisghabháil ar ghléas eile níos déanaí; gan an eochair sin, tosaíonn tú as an nua ansin.',
-  'Herstelsleutel tonen': 'Taispeáin an eochair aisghabhála',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Níorbh fhéidir an eochair aisghabhála a léamh.',
-  'Identiteit hersteld.': 'Aitheantas aisghafa.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Níl an eochair aisghabhála seo ceart — seiceáil gur chóipeáil tú go hiomlán agus gan earráidí í.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Ní cosúil gur eochair aisghabhála bhailí é seo.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Tagann an eochair aisghabhála seo ó leagan níos nuaí de OciDeck.',
   'Afbeeldingsrechten': 'Cearta íomhá',
   'Afbeeldingsrechten controleren…': 'Seiceáil cearta íomhá…',
   'Afdoening': 'Socrú',
@@ -3145,95 +3117,22 @@ const _dutchSourceAddGa = <String, String>{
       'níorbh fhéidir na comhaid a athbhreithniú go sábháilte',
   'nieuw gescand': 'nua-scagtha',
   'Realtime samenwerken': 'Comhoibriú fíor-ama',
-  'Manieren van verbinden': 'Bealaí ceangail',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Comhoibrigh beo ar láithreoireacht trí athsheachadán criptithe. Múchta de réir réamhshocraithe. Déantar an t-ábhar a chriptiú ó cheann go ceann le heochracha OciDeck féin; ní fheiceann an freastalaí ach sonraí criptithe.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Comhoibriú trí homeserver Matrix mar athsheachadán. Socraigh an cuntas sa chluaisín Comhoibriú. (Tá Jitsi agus XMPP le teacht.)',
   'Chat': 'Comhrá',
-  'Chat openen': 'Oscail an comhrá',
   'Chat sluiten': 'Dún an comhrá',
   'Bericht…': 'Teachtaireacht…',
   'Versturen': 'Seol',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Gan teachtaireachtaí go fóill. Abair rud éigin le do chomhúdair.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Cuir méarlorg gach gléis i gcomparáid trí bhealach iontaofa — léigí dá chéile é, nó seol é trí shlí a bhfuil muinín agat aisti. Má mheaitseálann sé, marcáil an gléas mar fhíoraithe; fanfaidh sé fíoraithe, i seisiún níos déanaí san áireamh. Má tá difríocht ann, bris an comhoibriú.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Tá aitheantas an ghléis seo difriúil ón méid a d\'fhíoraigh tú níos luaithe — b\'fhéidir go bhfuil duine éigin sa lár. Bris an comhoibriú, mura bhfuil tú cinnte gur socraíodh an gléas seo arís.',
-  'Geverifieerd': 'Fíoraithe',
-  'Wijkt af': 'Difriúil',
-  'Niet geverifieerd': 'Gan fíorú',
-  'Markeer als geverifieerd': 'Marcáil mar fhíoraithe',
-  'Verificatie intrekken': 'Cúlghair an fíorú',
-  'Toch opnieuw vertrouwen': 'Bíodh muinín agat arís mar sin féin',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Níl gach gléas sa chomhoibriú seo fíoraithe fós. Cuir na méarloirg i gcomparáid le bheith cinnte cé leis a bhfuil tú ag obair.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Ní shioncrónaítear eagaróga cealla tábla le comhúdair. An teideal agus réimsí eile, tá.',
   'Verifiëren': 'Fíoraigh',
-  'Deelnemers verifiëren': 'Fíoraigh na rannpháirtithe',
-  '(dit apparaat)': '(an gléas seo)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.': 'Ní nasc cuiridh bailí é sin.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Níl teacht ar an homeserver Matrix.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Níor fhreagair an t-óstach in am. Seiceáil an nasc agus an bhfuil an t-óstach fós ar líne.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Comhroinn an nasc seo le duine ar bith ar mhaith leat oibriú leis. Is féidir le duine ar bith a bhfuil an nasc aige dul isteach sa seisiún — mar sin ná comhroinn é ach le daoine a bhfuil muinín agat astu. Fanann an t-ábhar criptithe ó cheann go ceann; ní fheiceann an homeserver ach sonraí criptithe.',
   'Deelnemen': 'Glac páirt',
-  'Deelnemen via een link': 'Glac páirt trí nasc',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Diúltaítear do chuntas Matrix — seiceáil an comhartha rochtana i Socruithe.',
-  'Je doet nu live mee aan de samenwerking.': 'Tá tú ag comhoibriú beo anois.',
-  'Nodig mede-auteurs uit': 'Tabhair cuireadh do chomhúdair',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Oscail láithreoireacht ar dtús chun comhoibriú.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Greamaigh an nasc cuiridh a sheol an t-óstach chugat. Osclaíonn sé sin an láithreoireacht chéanna agus comhoibríonn tú beo.',
-  'Realtime samenwerken is mislukt.': 'Theip ar an gcomhoibriú fíor-ama.',
-  'Realtime samenwerken starten': 'Tosaigh comhoibriú fíor-ama',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Socraigh cuntas Matrix ar dtús faoi Socruithe → Comhoibriú.',
-  'Uitnodigingslink': 'Nasc cuiridh',
-  'Uitnodigingslink gekopieerd.': 'Nasc cuiridh cóipeáilte.',
-  'Uitnodigingslink kopiëren': 'Cóipeáil an nasc cuiridh',
-  'Verbinden met de samenwerking…': 'Ag nascadh leis an gcomhoibriú…',
-  'Access-token': 'Comhartha rochtana',
-  'Apparaat-id': 'Aitheantas an ghléis',
-  'Gebruikers-id': 'Aitheantas úsáideora',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Sheol an homeserver earráid ar ais. Bain triail eile as níos déanaí.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Níl teacht ar an homeserver, nó níl muinín as an teastas.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Atreoraíonn an homeserver chuig seoladh eile — ar chúiseanna slándála ní leantar é sin. Cuir isteach an seoladh deiridh go díreach.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Iarrann an homeserver ort fanacht nóiméad. Bain triail eile as ar ball.',
-  'De homeserver weigert dit token.':
-      'Diúltaíonn an homeserver an comhartha seo.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Ní fhreagraíonn an seoladh seo mar homeserver Matrix. An bhfuil an URL ceart?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Ní mór don homeserver a bheith https: taistealaíonn an comhartha rochtana le gach iarratas.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Diúltaítear an comhartha rochtana — deimhnigh gur chóipeáil tú i gceart é agus nár cúlghaireadh é.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Cruthaigh comhartha rochtana i do chliant Matrix (mar shampla in Element faoi Gach socrú → Cabhair agus eolas), nó ar do homeserver. Deimhníonn "Tástáil an nasc" an comhartha agus líonann sé isteach d\'aitheantas úsáideora agus d\'aitheantas gléis.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Ag teastáil nuair a ritheann an homeserver ar líonra príobháideach nó baile. Gan an bhratach seo diúltaíonn an tseiceáil slándála seoladh príobháideach.',
-  'Realtime samenwerken (Matrix)': 'Comhoibriú fíor-ama (Matrix)',
   'Samenwerken': 'Comhoibriú',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'D\'éirigh leis an nasc — aitheantas úsáideora agus aitheantas gléis líonta',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'D\'éirigh leis an nasc, ach níor sheol an homeserver aitheantas gléis ar ais — cuir isteach tú féin é, nó ní shroichfidh eochracha ó chomhúdair.',
-  'Vul een access-token in': 'Cuir isteach comhartha rochtana',
-  'Vul een geldige homeserver-URL in': 'Cuir isteach URL bailí homeserver',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Comhoibrigh beo ar láithreoireacht trí homeserver Matrix mar athsheachadán criptithe. Déantar an t-ábhar a chriptiú ó cheann go ceann le heochracha OciDeck féin; ní fheiceann an freastalaí ach sonraí criptithe. Cuir isteach homeserver agus comhartha rochtana a cruthaíodh in áit eile — ní iarrann OciDeck do phasfhocal riamh. Stóráiltear an ceadchomhartha criptithe san eochairslabhra, ní in aice leis na socruithe eile.',
-  'wordt door de test ingevuld': 'líonann an tástáil isteach é',
   'Meer documentatie op de repository': 'Tuilleadh doiciméadaithe sa stór',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Tá an doiciméadú iomlán — lena n-áirítear ailtireacht, tógáil, cód foinseach agus dearadh — sa stór.',

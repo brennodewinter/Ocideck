@@ -15,6 +15,7 @@ import 'pipeline/importer_registry.dart';
 import 'pipeline/problem_slide.dart';
 import 'pipeline/slide_classifier.dart';
 import 'utils/import_budget.dart';
+import '../../utils/file_extension.dart';
 
 /// The result of importing one presentation file.
 ///
@@ -310,14 +311,6 @@ class PresentationImportService {
         ? sourceDeck.slides.first.title
         : '';
     if (firstSlideTitle.isNotEmpty) return firstSlideTitle;
-    return _stemOf(filename);
-  }
-
-  /// The filename without its directory or extension — the deck-title fallback
-  /// when the source declares no title. Path-separator-safe without `dart:io`.
-  String _stemOf(String filename) {
-    final base = filename.split(RegExp(r'[\\/]')).last;
-    final dot = base.lastIndexOf('.');
-    return dot > 0 ? base.substring(0, dot) : base;
+    return stemOfFileName(filename);
   }
 }

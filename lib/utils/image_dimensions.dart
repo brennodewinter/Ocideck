@@ -9,6 +9,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'log.dart';
+import 'byte_readers.dart';
 
 class ImageDimensions {
   final int width;
@@ -40,8 +41,8 @@ ImageDimensions? imageDimensionsFromBytes(Uint8List bytes) {
       bytes[2] == 0x4E &&
       bytes[3] == 0x47) {
     if (bytes.length < 24) return null;
-    final w = _readUint32BE(bytes, 16);
-    final h = _readUint32BE(bytes, 20);
+    final w = readUint32BE(bytes, 16);
+    final h = readUint32BE(bytes, 20);
     if (w > 0 && h > 0) return ImageDimensions(w, h);
     return null;
   }
@@ -49,16 +50,16 @@ ImageDimensions? imageDimensionsFromBytes(Uint8List bytes) {
   if (bytes[0] == 0xFF && bytes[1] == 0xD8) return _jpegDimensions(bytes);
   // GIF: width at 6, height at 8 (little-endian uint16).
   if (bytes[0] == 0x47 && bytes[1] == 0x49 && bytes[2] == 0x46) {
-    final w = _readUint16LE(bytes, 6);
-    final h = _readUint16LE(bytes, 8);
+    final w = readUint16LE(bytes, 6);
+    final h = readUint16LE(bytes, 8);
     if (w > 0 && h > 0) return ImageDimensions(w, h);
     return null;
   }
   // BMP: width at 18, height at 22 (little-endian uint32).
   if (bytes[0] == 0x42 && bytes[1] == 0x4D) {
     if (bytes.length < 26) return null;
-    final w = _readUint32LE(bytes, 18);
-    final h = _readUint32LE(bytes, 22).abs(); // top-down bitmaps use negative
+    final w = readUint32LE(bytes, 18);
+    final h = readUint32LE(bytes, 22).abs(); // top-down bitmaps use negative
     if (w > 0 && h > 0) return ImageDimensions(w, h);
     return null;
   }
@@ -84,15 +85,15 @@ ImageDimensions? _jpegDimensions(Uint8List bytes) {
         marker != 0xC4 &&
         marker != 0xC8 &&
         marker != 0xCC) {
-      final h = _readUint16BE(bytes, i + 5);
-      final w = _readUint16BE(bytes, i + 7);
+      final h = readUint16BE(bytes, i + 5);
+      final w = readUint16BE(bytes, i + 7);
       if (w > 0 && h > 0) return ImageDimensions(w, h);
       return null;
     }
     // Skip padding / variable-length markers.
     if (marker == 0xD8 || marker == 0xD9) return null; // SOI/EOI without SOF
     if (i + 3 >= bytes.length) return null;
-    final len = _readUint16BE(bytes, i + 2);
+    final len = readUint16BE(bytes, i + 2);
     if (len < 2) return null;
     i += 2 + len;
   }
@@ -104,8 +105,8 @@ ImageDimensions? _webpDimensions(Uint8List bytes) {
   final fourcc = String.fromCharCodes(bytes.sublist(12, 16));
   switch (fourcc) {
     case 'VP8X':
-      final w = (_readUint32LE(bytes, 24) & 0xFFFFFF) + 1;
-      final h = (_readUint32LE(bytes, 27) & 0xFFFFFF) + 1;
+      final w = (readUint32LE(bytes, 24) & 0xFFFFFF) + 1;
+      final h = (readUint32LE(bytes, 27) & 0xFFFFFF) + 1;
       if (w > 0 && h > 0) return ImageDimensions(w, h);
     case 'VP8L':
       if (bytes.length < 25) return null;
@@ -114,16 +115,9 @@ ImageDimensions? _webpDimensions(Uint8List bytes) {
       final h = ((b >> 14) & 0x3FFF) + 1;
       if (w > 0 && h > 0) return ImageDimensions(w, h);
     case 'VP8 ':
-      final w = _readUint16LE(bytes, 26);
-      final h = _readUint16LE(bytes, 28);
+      final w = readUint16LE(bytes, 26);
+      final h = readUint16LE(bytes, 28);
       if (w > 0 && h > 0) return ImageDimensions(w, h);
   }
   return null;
 }
-
-int _readUint16BE(Uint8List b, int o) => (b[o] << 8) | b[o + 1];
-int _readUint16LE(Uint8List b, int o) => b[o] | (b[o + 1] << 8);
-int _readUint32BE(Uint8List b, int o) =>
-    (b[o] << 24) | (b[o + 1] << 16) | (b[o + 2] << 8) | b[o + 3];
-int _readUint32LE(Uint8List b, int o) =>
-    b[o] | (b[o + 1] << 8) | (b[o + 2] << 16) | (b[o + 3] << 24);

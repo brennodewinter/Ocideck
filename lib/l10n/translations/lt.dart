@@ -3011,8 +3011,8 @@ const _dutchSourceAddLt = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Procesų tobulinimo įrankiai (SIPOC, DMAIC, Kaizen ir A3). Pagal numatytuosius nustatymus išjungti; įjunkite plėtinį, kad galėtumėte naudoti susijusius šablonus ir skaidrių išdėstymus.',
   'Videovergaderingen': 'Vaizdo susitikimai',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Prisijunkite prie vaizdo susitikimų ir pristatykite iš OciDeck su sava sąsaja: dalyviai šalia jūsų skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi arba Matrix); OciDeck nieko nepriglobia ir pokalbių duomenis laiko atokiau nuo DI. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Prisijunkite prie vaizdo susitikimų ir pristatykite iš OciDeck su sava sąsaja: dalyviai šalia jūsų skaidrės, o ne kitos programos lange. Bring-your-own-server (Jitsi); OciDeck nieko nepriglobia ir pokalbių duomenis laiko atokiau nuo DI. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
   'Videovergadering': 'Vaizdo susitikimas',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Aktyvaus susitikimo dar nėra. Prisijungimas prie susitikimų paslaugos bus pridėtas būsimoje versijoje.',
@@ -3030,10 +3030,6 @@ const _dutchSourceAddLt = <String, String>{
       'Paveikslėliai kartu yra per dideli vienam HTML failui (ne daugiau kaip 512 MB). Naudokite mažiau arba mažesnių paveikslėlių arba eksportuokite kaip PDF ar paketą.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Šiame eksporte yra per daug skaidrių su per didele skiriamąja geba, kad būtų galima saugiai atvaizduoti. Eksportuokite dalimis arba naudokite suspaustą PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Pirmiausia užbaikite ir įrašykite pateiktį; tada galėsite pasirašyti jos kilmę.',
-  'Herkomst ondertekend.': 'Kilmė pasirašyta.',
-  'De herkomst kon niet worden ondertekend.': 'Kilmės pasirašyti nepavyko.',
   'Herkomst ondertekenen': 'Pasirašyti kilmę',
   'Herkomst bevestigd': 'Kilmė patvirtinta',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3050,32 +3046,9 @@ const _dutchSourceAddLt = <String, String>{
   'Herkomst niet hier te controleren': 'Kilmės čia patikrinti negalima',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Parašas yra, bet jo čia perskaičiuoti negalima — patikrinkite jį su pradiniu `.md` failu.',
-  'Bestaande identiteit vervangen?': 'Pakeisti esamą tapatybę?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Šis įrenginys jau turi bendradarbiavimo tapatybę. Atkūrimas ją pakeis tapatybe iš rakto. Ar išsaugojote dabartinės tapatybės atkūrimo raktą? Be atsarginės kopijos ją prarasite.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Pateikties medijai skirta žiniatinklio atmintis pilna (daugiausia 256 MB). Pirmiausia įrašykite darbą kaip .ocideck failą, kad neprarastumėte duomenų. Tada naudokite mažiau arba mažesnių vaizdų, vaizdo įrašų ar garso failų, užverkite kitas pateiktis arba įkelkite iš naujo neatverdami kitų pateikčių.',
   'Ongeldige vraag': 'Netinkamas klausimas',
-  'Herstelsleutel': 'Atkūrimo raktas',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Laikykite šį atkūrimo raktą saugioje vietoje — pavyzdžiui, savo slaptažodžių saugykloje. Tai vienintelis būdas atkurti tą pačią tapatybę kitame įrenginyje; be šio rakto ten pradedate kaip naujas, dar nepatvirtintas įrenginys. Su niekuo juo nesidalykite.',
-  'Herstelsleutel gekopieerd.': 'Atkūrimo raktas nukopijuotas.',
-  'Identiteit herstellen': 'Atkurti tapatybę',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Įklijuokite atkūrimo raktą, kurį anksčiau išsaugojote. Tada šis įrenginys perima tą pačią tapatybę — bendraautoriai, kurie jus anksčiau patvirtino, vėl atpažins jūsų atspaudą.',
-  'Identiteit & herstelsleutel': 'Tapatybė ir atkūrimo raktas',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Jūsų įrenginys turi savo bendradarbiavimo tapatybę — būtent ją tikrina bendraautoriai. Išsaugokite atkūrimo raktą, kad vėliau atkurtumėte tą pačią tapatybę kitame įrenginyje; be to rakto ten pradedate iš naujo.',
-  'Herstelsleutel tonen': 'Rodyti atkūrimo raktą',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Nepavyko nuskaityti atkūrimo rakto.',
-  'Identiteit hersteld.': 'Tapatybė atkurta.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Šis atkūrimo raktas neteisingas — patikrinkite, ar jį nukopijavote visą ir be klaidų.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Tai nepanašu į galiojantį atkūrimo raktą.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Šis atkūrimo raktas yra iš naujesnės OciDeck versijos.',
   'Afbeeldingsrechten': 'Vaizdo teisės',
   'Afbeeldingsrechten controleren…': 'Patikrinkite vaizdo teises…',
   'Afdoening': 'Atsiskaitymas',
@@ -3099,97 +3072,22 @@ const _dutchSourceAddLt = <String, String>{
       'failų nepavyko saugiai peržiūrėti',
   'nieuw gescand': 'naujai nuskaitytas',
   'Realtime samenwerken': 'Bendradarbiavimas tikruoju laiku',
-  'Manieren van verbinden': 'Prisijungimo būdai',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Bendradarbiaukite tiesiogiai rengdami pristatymą per šifruotą perdavimo tašką. Pagal numatytuosius nustatymus išjungta. Turinys šifruojamas nuo galo iki galo pačios OciDeck raktais; serveris mato tik šifruotus duomenis.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Bendradarbiavimas per Matrix homeserver kaip perdavimo taškas. Nustatykite paskyrą skirtuke Bendradarbiavimas. (Jitsi ir XMPP netrukus.)',
   'Chat': 'Pokalbis',
-  'Chat openen': 'Atverti pokalbį',
   'Chat sluiten': 'Užverti pokalbį',
   'Bericht…': 'Žinutė…',
   'Versturen': 'Siųsti',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Kol kas žinučių nėra. Parašyk ką nors savo bendraautoriams.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Palygink kiekvieno įrenginio kontrolinį kodą per patikimą kanalą — perskaitykite jį vienas kitam arba atsiųsk keliu, kuriuo pasitiki. Jei sutampa, pažymėk įrenginį kaip patvirtintą; jis liks patvirtintas ir vėlesniame seanse. Jei skiriasi, nutrauk bendradarbiavimą.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Šio įrenginio tapatybė skiriasi nuo tos, kurią patvirtinai anksčiau — galbūt kažkas yra viduryje. Nutrauk bendradarbiavimą, nebent esi tikras, kad šis įrenginys buvo sukonfigūruotas iš naujo.',
-  'Geverifieerd': 'Patvirtinta',
-  'Wijkt af': 'Skiriasi',
-  'Niet geverifieerd': 'Nepatvirtinta',
-  'Markeer als geverifieerd': 'Žymėti kaip patvirtintą',
-  'Verificatie intrekken': 'Atšaukti patvirtinimą',
-  'Toch opnieuw vertrouwen': 'Vis tiek pasitikėti vėl',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Dar ne kiekvienas įrenginys šioje bendradarbystėje patvirtintas. Palygink kontrolinius kodus, kad būtum tikras, su kuo dirbi.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Lentelės langelių redagavimai nesinchronizuojami su bendraautoriais. Pavadinimas ir kiti laukai — taip.',
   'Verifiëren': 'Patvirtinti',
-  'Deelnemers verifiëren': 'Patikrinti dalyvius',
-  '(dit apparaat)': '(šis įrenginys)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Tai nėra galiojanti pakvietimo nuoroda.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Matrix homeserver nepasiekiamas.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Šeimininkas neatsakė laiku. Patikrinkite nuorodą ir ar šeimininkas vis dar prisijungęs.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Bendrinkite šią nuorodą su tais, kuriuos norite įtraukti į darbą. Bet kas, turintis nuorodą, gali įeiti į sesiją — todėl bendrinkite ją tik su žmonėmis, kuriais pasitikite. Turinys lieka šifruotas nuo galo iki galo; homeserver mato tik šifruotus duomenis.',
   'Deelnemen': 'Prisijungti',
-  'Deelnemen via een link': 'Prisijungti naudojant nuorodą',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Jūsų Matrix paskyra atmesta — patikrinkite prieigos raktą skiltyje Nustatymai.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Dabar bendradarbiaujate tiesiogiai.',
-  'Nodig mede-auteurs uit': 'Pakviesti bendraautorius',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Pirmiausia atverkite pristatymą, kad galėtumėte bendradarbiauti.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Įklijuokite pakvietimo nuorodą, kurią jums atsiuntė šeimininkas. Taip atversite tą patį pristatymą ir bendradarbiausite tiesiogiai.',
-  'Realtime samenwerken is mislukt.':
-      'Bendradarbiavimas tikruoju laiku nepavyko.',
-  'Realtime samenwerken starten': 'Pradėti bendradarbiavimą tikruoju laiku',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Pirmiausia nustatykite Matrix paskyrą skiltyje Nustatymai → Bendradarbiavimas.',
-  'Uitnodigingslink': 'Pakvietimo nuoroda',
-  'Uitnodigingslink gekopieerd.': 'Pakvietimo nuoroda nukopijuota.',
-  'Uitnodigingslink kopiëren': 'Kopijuoti pakvietimo nuorodą',
-  'Verbinden met de samenwerking…': 'Jungiamasi prie bendradarbiavimo…',
-  'Access-token': 'Prieigos raktas',
-  'Apparaat-id': 'Įrenginio ID',
-  'Gebruikers-id': 'Naudotojo ID',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver grąžino klaidą. Bandykite vėliau dar kartą.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver nepasiekiamas arba sertifikatas nėra patikimas.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver nukreipia į kitą adresą — saugumo sumetimais tai nesekama. Įveskite galutinį adresą tiesiogiai.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver prašo šiek tiek palaukti. Netrukus bandykite dar kartą.',
-  'De homeserver weigert dit token.': 'Homeserver atmeta šį raktą.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Šis adresas neatsako kaip Matrix homeserver. Ar URL teisingas?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver turi būti https: prieigos raktas keliauja su kiekviena užklausa.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Prieigos raktas atmestas — patikrinkite, ar teisingai jį nukopijavote ir ar jis nebuvo atšauktas.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Sukurkite prieigos raktą savo Matrix kliente (pavyzdžiui, Element skiltyje Visi nustatymai → Pagalba ir informacija) arba savo homeserver. "Tikrinti ryšį" patvirtina raktą ir užpildo jūsų naudotojo ID ir įrenginio ID.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Reikalinga, kai homeserver veikia privačiame arba namų tinkle. Be šios žymos saugumo patikra atmeta privatų adresą.',
-  'Realtime samenwerken (Matrix)': 'Bendradarbiavimas tikruoju laiku (Matrix)',
   'Samenwerken': 'Bendradarbiavimas',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Prisijungta — naudotojo ID ir įrenginio ID užpildyti',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Prisijungta, bet homeserver negrąžino įrenginio ID — įveskite jį patys, kitaip bendraautorių raktai neatkeliaus.',
-  'Vul een access-token in': 'Įveskite prieigos raktą',
-  'Vul een geldige homeserver-URL in': 'Įveskite galiojantį homeserver URL',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Bendradarbiaukite tiesiogiai rengdami pristatymą per Matrix homeserver kaip šifruotą perdavimo tašką. Turinys šifruojamas nuo galo iki galo pačios OciDeck raktais; serveris mato tik šifruotus duomenis. Įveskite homeserver ir kitur sukurtą prieigos raktą — OciDeck niekada neprašo jūsų slaptažodžio. Prieigos raktas laikomas užšifruotas raktinėje, o ne kartu su kitais nustatymais.',
-  'wordt door de test ingevuld': 'užpildo testas',
   'Meer documentatie op de repository': 'Daugiau dokumentacijos saugykloje',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Visa dokumentacija — įskaitant architektūrą, kūrimą, pirminį kodą ir dizainą — yra saugykloje.',

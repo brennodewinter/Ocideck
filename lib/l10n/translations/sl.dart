@@ -3004,8 +3004,8 @@ const _dutchSourceAddSl = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Orodja za izboljševanje procesov (SIPOC, DMAIC, Kaizen in A3). Privzeto izklopljena; omogočite razširitev za uporabo povezanih predlog in postavitev diapozitivov.',
   'Videovergaderingen': 'Videosestanki',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Pridružite se videosestankom in predstavljajte iz OciDecka z lastnim vmesnikom: udeleženci ob vašem diapozitivu, ne v oknu druge aplikacije. Bring-your-own-server (Jitsi ali Matrix); OciDeck ničesar ne gosti in podatke pogovorov ohranja stran od UI. Povezava s storitvijo za sestanke bo dodana v prihodnji različici.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Pridružite se videosestankom in predstavljajte iz OciDecka z lastnim vmesnikom: udeleženci ob vašem diapozitivu, ne v oknu druge aplikacije. Bring-your-own-server (Jitsi); OciDeck ničesar ne gosti in podatke pogovorov ohranja stran od UI. Povezava s storitvijo za sestanke bo dodana v prihodnji različici.',
   'Videovergadering': 'Videosestanek',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Še ni aktivnega sestanka. Povezava s storitvijo za sestanke bo dodana v prihodnji različici.',
@@ -3023,11 +3023,6 @@ const _dutchSourceAddSl = <String, String>{
       'Slike so skupaj prevelike za eno datoteko HTML (največ 512 MB). Uporabite manj ali manjše slike ali pa izvozite kot PDF ali paket.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Ta izvoz ima preveč diapozitivov v previsoki ločljivosti, da bi jih bilo mogoče varno upodobiti. Izvozite po delih ali uporabite stisnjeni PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Najprej dokončajte in shranite predstavitev; nato lahko podpišete njen izvor.',
-  'Herkomst ondertekend.': 'Izvor podpisan.',
-  'De herkomst kon niet worden ondertekend.':
-      'Izvora ni bilo mogoče podpisati.',
   'Herkomst ondertekenen': 'Podpiši izvor',
   'Herkomst bevestigd': 'Izvor potrjen',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3044,32 +3039,9 @@ const _dutchSourceAddSl = <String, String>{
   'Herkomst niet hier te controleren': 'Izvora tukaj ni mogoče preveriti',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Podpis je prisoten, vendar ga tukaj ni mogoče znova izračunati — preverite ga z izvirno datoteko `.md`.',
-  'Bestaande identiteit vervangen?': 'Zamenjati obstoječo identiteto?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Ta naprava že ima identiteto za sodelovanje. Obnovitev jo nadomesti z identiteto iz ključa. Ali ste shranili obnovitveni ključ za trenutno identiteto? Brez varnostne kopije jo boste izgubili.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Spletni pomnilnik za predstavnostne medije je poln (največ 256 MB). Najprej shranite svoje delo kot datoteko .ocideck, da preprečite izgubo podatkov. Nato uporabite manj slik, videoposnetkov ali zvočnih datotek oziroma manjše datoteke, zaprite druge predstavitve ali znova naložite brez odpiranja drugih predstavitev.',
   'Ongeldige vraag': 'Neveljavno vprašanje',
-  'Herstelsleutel': 'Ključ za obnovitev',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Ta ključ za obnovitev shranite na varno mesto — na primer v svojo shrambo gesel. To je edini način, da isto identiteto obnovite v drugi napravi; brez tega ključa tam začnete kot nova, še nepreverjena naprava. Ne delite ga z nikomer.',
-  'Herstelsleutel gekopieerd.': 'Ključ za obnovitev je kopiran.',
-  'Identiteit herstellen': 'Obnovi identiteto',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Prilepite ključ za obnovitev, ki ste ga prej shranili. Ta naprava nato prevzame isto identiteto — soavtorji, ki so vas prej preverili, bodo znova prepoznali vaš prstni odtis.',
-  'Identiteit & herstelsleutel': 'Identiteta in ključ za obnovitev',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Vaša naprava ima svojo identiteto za sodelovanje — to preverjajo soavtorji. Shranite ključ za obnovitev, da boste isto identiteto pozneje obnovili v drugi napravi; brez tega ključa tam začnete znova.',
-  'Herstelsleutel tonen': 'Pokaži ključ za obnovitev',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Ključa za obnovitev ni bilo mogoče prebrati.',
-  'Identiteit hersteld.': 'Identiteta obnovljena.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Ta ključ za obnovitev ni pravilen — preverite, ali ste ga prepisali v celoti in brez napak.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'To ni videti kot veljaven ključ za obnovitev.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Ta ključ za obnovitev izvira iz novejše različice OciDecka.',
   'Afbeeldingsrechten': 'Pravice do slike',
   'Afbeeldingsrechten controleren…': 'Preverite pravice do slike ...',
   'Afdoening': 'Poravnava',
@@ -3093,94 +3065,22 @@ const _dutchSourceAddSl = <String, String>{
       'datotek ni bilo mogoče varno pregledati',
   'nieuw gescand': 'na novo skenirano',
   'Realtime samenwerken': 'Sodelovanje v realnem času',
-  'Manieren van verbinden': 'Načini povezovanja',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Sodelujte v živo pri predstavitvi prek šifriranega posrednika. Privzeto izklopljeno. Vsebina je šifrirana od konca do konca z lastnimi ključi OciDecka; strežnik vidi samo šifrirane podatke.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Sodelovanje prek homeserverja Matrix kot posrednik. Nastavite račun na zavihku Sodelovanje. (Jitsi in XMPP sledita.)',
   'Chat': 'Klepet',
-  'Chat openen': 'Odpri klepet',
   'Chat sluiten': 'Zapri klepet',
   'Bericht…': 'Sporočilo…',
   'Versturen': 'Pošlji',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Še ni sporočil. Povej kaj svojim soavtorjem.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Primerjaj prstni odtis vsake naprave prek zaupanja vrednega kanala — preberita si ga drug drugemu ali ga pošlji po poti, ki ji zaupaš. Če se ujema, označi napravo kot preverjeno; ostala bo preverjena tudi v naslednji seji. Če se razlikuje, prekini sodelovanje.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Istovetnost te naprave se razlikuje od tiste, ki si jo prej preveril — morda je nekdo vmes. Prekini sodelovanje, razen če si prepričan, da je bila ta naprava znova nastavljena.',
-  'Geverifieerd': 'Preverjeno',
-  'Wijkt af': 'Se razlikuje',
-  'Niet geverifieerd': 'Ni preverjeno',
-  'Markeer als geverifieerd': 'Označi kot preverjeno',
-  'Verificatie intrekken': 'Prekliči preverjanje',
-  'Toch opnieuw vertrouwen': 'Vseeno znova zaupaj',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'V tem sodelovanju še ni preverjena vsaka naprava. Primerjaj prstne odtise, da boš prepričan, s kom delaš.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Urejanje celic tabele se ne sinhronizira s soavtorji. Naslov in druga polja da.',
   'Verifiëren': 'Preveri',
-  'Deelnemers verifiëren': 'Preveri udeležence',
-  '(dit apparaat)': '(ta naprava)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'To ni veljavna povezava za povabilo.',
-  'De Matrix-homeserver is niet bereikbaar.': 'Homeserver Matrix ni dosegljiv.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Gostitelj ni odgovoril pravočasno. Preverite povezavo in ali je gostitelj še povezan.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Delite to povezavo s tistimi, ki jih želite vključiti v delo. Vsak, ki ima povezavo, lahko vstopi v sejo — zato jo delite le z ljudmi, ki jim zaupate. Vsebina ostaja šifrirana od konca do konca; homeserver vidi samo šifrirane podatke.',
   'Deelnemen': 'Pridruži se',
-  'Deelnemen via een link': 'Pridruži se prek povezave',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Vaš račun Matrix je zavrnjen — preverite dostopni žeton v Nastavitvah.',
-  'Je doet nu live mee aan de samenwerking.': 'Zdaj sodelujete v živo.',
-  'Nodig mede-auteurs uit': 'Povabi soavtorje',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Najprej odprite predstavitev za sodelovanje.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Prilepite povezavo za povabilo, ki vam jo je poslal gostitelj. Tako odprete isto predstavitev in sodelujete v živo.',
-  'Realtime samenwerken is mislukt.': 'Sodelovanje v realnem času ni uspelo.',
-  'Realtime samenwerken starten': 'Začni sodelovanje v realnem času',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Najprej nastavite račun Matrix v Nastavitve → Sodelovanje.',
-  'Uitnodigingslink': 'Povezava za povabilo',
-  'Uitnodigingslink gekopieerd.': 'Povezava za povabilo kopirana.',
-  'Uitnodigingslink kopiëren': 'Kopiraj povezavo za povabilo',
-  'Verbinden met de samenwerking…': 'Povezovanje s sodelovanjem…',
-  'Access-token': 'Dostopni žeton',
-  'Apparaat-id': 'ID naprave',
-  'Gebruikers-id': 'ID uporabnika',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver je vrnil napako. Poskusite znova pozneje.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver ni dosegljiv ali potrdilu ni zaupanja.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver preusmerja na drug naslov — iz varnostnih razlogov mu ne sledi. Neposredno vnesite končni naslov.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver prosi za trenutek potrpljenja. Kmalu poskusite znova.',
-  'De homeserver weigert dit token.': 'Homeserver zavrne ta žeton.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Ta naslov se ne odziva kot homeserver Matrix. Ali je URL pravilen?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver mora biti https: dostopni žeton potuje z vsako zahtevo.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Dostopni žeton je zavrnjen — preverite, ali ste ga pravilno prepisali in ali ni bil preklican.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Ustvarite dostopni žeton v svojem odjemalcu Matrix (na primer v Elementu pod Vse nastavitve → Pomoč in informacije) ali na svojem homeserverju. "Preizkusi povezavo" potrdi žeton in izpolni vaš ID uporabnika in ID naprave.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Potrebno, kadar homeserver teče v zasebnem ali domačem omrežju. Brez te oznake varnostno preverjanje zavrne zasebni naslov.',
-  'Realtime samenwerken (Matrix)': 'Sodelovanje v realnem času (Matrix)',
   'Samenwerken': 'Sodelovanje',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Povezava uspešna — ID uporabnika in ID naprave izpolnjena',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Povezava uspešna, a homeserver ni vrnil ID naprave — vnesite ga sami, sicer ključi soavtorjev ne bodo prispeli.',
-  'Vul een access-token in': 'Vnesite dostopni žeton',
-  'Vul een geldige homeserver-URL in': 'Vnesite veljaven URL homeserverja',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Sodelujte v živo pri predstavitvi prek homeserverja Matrix kot šifriranega posrednika. Vsebina je šifrirana od konca do konca z lastnimi ključi OciDecka; strežnik vidi samo šifrirane podatke. Vnesite homeserver in drugje ustvarjen dostopni žeton — OciDeck nikoli ne zahteva vašega gesla. Žeton je shranjen šifrirano v zbirki ključev, ne poleg drugih nastavitev.',
-  'wordt door de test ingevuld': 'izpolni preizkus',
   'Meer documentatie op de repository': 'Več dokumentacije v repozitoriju',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Celotna dokumentacija — vključno z arhitekturo, gradnjo, izvorno kodo in zasnovo — je v repozitoriju.',
