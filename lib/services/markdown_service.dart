@@ -30,6 +30,7 @@ import 'miauw_codec.dart';
 import '../utils/content_hash.dart';
 import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
+import '../utils/inline_markdown.dart';
 import '../utils/markdown_paste_cleanup.dart';
 
 part 'markdown_service_helpers.dart';

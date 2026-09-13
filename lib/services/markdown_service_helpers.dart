@@ -238,22 +238,6 @@ String _escapeHtml(String value) {
       .replaceAll('"', '&quot;');
 }
 
-/// De omkering van [_escapeHtml], en de reden dat de zichtbare `<li>` de inhoud
-/// mág dragen: een bullet die zelf HTML of een pipe bevat overleeft de rondgang
-/// omdat hij ontsnapt wordt geschreven en hier weer heel terugkomt. Het paar
-/// staat bewust naast elkaar — gaan ze uit de pas lopen, dan is dat hier te zien
-/// en niet pas in een deck waarin `&amp;lt;` in beeld staat.
-///
-/// `&amp;` gaat als laatste, anders wordt een letterlijk getypte `&lt;` na twee
-/// stappen alsnog een `<`.
-String _unescapeHtml(String value) {
-  return value
-      .replaceAll('&lt;', '<')
-      .replaceAll('&gt;', '>')
-      .replaceAll('&quot;', '"')
-      .replaceAll('&amp;', '&');
-}
-
 double _splitTextScale(Slide slide) {
   final bullets = slide.bullets
       .map((b) => b.trimLeft())

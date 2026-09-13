@@ -75,7 +75,7 @@ _TwoColumnBullets _parseTwoColumnBullets(String block) {
     }
     final title = m.namedGroup('title');
     if (title != null) {
-      pendingTitle = _unescapeHtml(title).trim();
+      pendingTitle = decodeNamedHtmlEntities(title).trim();
       continue;
     }
     // Een `<li>` zonder omhullende lijst hoort nog altijd ergens: zet hem in de
@@ -84,7 +84,7 @@ _TwoColumnBullets _parseTwoColumnBullets(String block) {
     if (target >= columns.length) continue;
     found = true;
     final attrs = m.namedGroup('attrs') ?? '';
-    final text = _unescapeHtml(m.namedGroup('item') ?? '').trim();
+    final text = decodeNamedHtmlEntities(m.namedGroup('item') ?? '').trim();
     if (_reListItemValue.hasMatch(attrs)) sawNumbered = true;
 
     if (_reListItemUnmarked.hasMatch(attrs)) {
