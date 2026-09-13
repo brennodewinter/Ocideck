@@ -45,7 +45,25 @@ class _GanttPreview extends StatelessWidget {
       profile: profile,
       horizontalPadding: pad,
       verticalPadding: pad,
-      children: [MermaidDiagram(source: dsl, width: w - pad * 2)],
+      children: [
+        if (slide.title.isNotEmpty) ...[
+          _md(
+            context,
+            slide.title,
+            _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.042,
+                fontWeight: FontWeight.bold,
+                color: AppTheme.parseHexColor(profile.textColor),
+              ),
+            ),
+            linkColor: AppTheme.parseHexColor(profile.accentColor),
+          ),
+          SizedBox(height: pad * 0.35),
+        ],
+        MermaidDiagram(source: dsl, width: w - pad * 2),
+      ],
     );
   }
 }

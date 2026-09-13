@@ -144,6 +144,11 @@ class MermaidRenderService {
 <html>
 <head><meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:">
+<!-- De host staat buiten beeld en krijgt daardoor op macOS geen bruikbare
+     vensterbreedte. Vooral Gantt rekent zijn balken uit die viewportbreedte uit:
+     nul pixels leverde een SVG met negatieve balkbreedtes op. Dit vaste interne
+     tekenvlak wordt na afloop via de viewBox gewoon passend geschaald. -->
+<style>html, body { margin: 0; width: 1024px; min-width: 1024px; }</style>
 </head>
 <body>
 <script>

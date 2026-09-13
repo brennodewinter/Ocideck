@@ -27,6 +27,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/services/document_export_service.dart';
+import 'package:ocideck/services/improvement/gantt_dsl.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/mermaid_render_service.dart';
 import 'package:ocideck/services/pdf/document_pdf_export.dart';
@@ -34,6 +35,7 @@ import 'package:ocideck/services/pdf/document_pdf_svg.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:ocideck/widgets/mermaid_render_host.dart';
+import 'package:xml/xml.dart';
 
 const _document = '''
 # Rapport met beeld
@@ -69,13 +71,31 @@ void main() {
     // komen niet binnen één pump. Pompen tot beide antwoorden, met een plafond.
     String? diagram;
     String? formule;
+    String? gantt;
     final klok = Stopwatch()..start();
-    while ((diagram == null || formule == null) &&
+    while ((diagram == null || formule == null || gantt == null) &&
         klok.elapsed < const Duration(seconds: 60)) {
       diagram ??= await MermaidRenderService.instance.render(
         'graph TD;\n  Aanvraag-->Beoordeling;',
       );
       formule ??= await MermaidRenderService.instance.renderMath('E = mc^2');
+      gantt ??= await MermaidRenderService.instance.render(
+        ganttTableToMermaid(
+          rows: const [
+            ['Zonnestralen in kaart brengen', '2026-09-11', '1d', 'done', ''],
+            [
+              'Plant strategisch omduwen',
+              '2026-09-12',
+              '2d',
+              'active',
+              'Zonnestralen in kaart brengen',
+            ],
+            ['Kussen claimen', '', '1d', 'crit', 'Plant strategisch omduwen'],
+            ['Milestone: eerste middagdut', '', '0d', '', 'Kussen claimen'],
+          ],
+          scale: 'day',
+        ),
+      );
       await tester.pump(const Duration(milliseconds: 100));
     }
 
@@ -83,6 +103,35 @@ void main() {
     expect(diagram, contains('<svg'));
     expect(formule, isNotNull, reason: 'de formulerenderer gaf niets terug');
     expect(formule, contains('<svg'));
+    expect(gantt, isNotNull, reason: 'de Gantt-renderer gaf niets terug');
+    expect(
+      gantt,
+      contains('Zonnestralen in kaart brengen'),
+      reason: 'een geldige Gantt mag niet als een leeg SVG-kader eindigen',
+    );
+    final ganttSvg = XmlDocument.parse(gantt!);
+    final viewBox = ganttSvg.rootElement
+        .getAttribute('viewBox')!
+        .split(RegExp(r'\s+'))
+        .map(double.parse)
+        .toList();
+    expect(
+      viewBox[2],
+      greaterThan(0),
+      reason: 'een nulbrede Gantt bevat wel tekst maar tekent niets',
+    );
+    final rechthoeken = ganttSvg.descendants.whereType<XmlElement>().where(
+      (element) =>
+          element.name.local == 'rect' && element.getAttribute('width') != null,
+    );
+    expect(rechthoeken, isNotEmpty);
+    expect(
+      rechthoeken.map(
+        (element) => double.parse(element.getAttribute('width')!),
+      ),
+      everyElement(greaterThanOrEqualTo(0)),
+      reason: 'negatieve Gantt-balken verdwijnen uit beeld',
+    );
 
     // En dan de hele weg: van document naar PDF, met die renderers aangesloten.
     final bundle = await buildDocumentExportBundle(

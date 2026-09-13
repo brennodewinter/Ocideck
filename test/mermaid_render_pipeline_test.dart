@@ -161,6 +161,11 @@ void main() {
     // bundel. Zonder deze regels zou een diagram een uitgang kunnen worden.
     expect(html, contains("default-src 'none'"));
     expect(html, contains('img-src data:'));
+    // De verborgen host heeft zelf geen zichtbare vensterbreedte. Gantt leidt
+    // daar zijn geometrie uit af en tekent anders negatieve balken in een SVG
+    // met viewBox-breedte nul. Het interne tekenvlak moet dus expliciet zijn.
+    expect(html, contains('width: 1024px'));
+    expect(html, contains('min-width: 1024px'));
     // En mermaid zelf op zijn strengste stand: de pagina wordt geïnitialiseerd
     // met de gedeelde config (mermaid_config.dart), als JSON in de pagina gezet,
     // zodat het web-pad en de WebView niet uiteen kunnen lopen. Dát die config
