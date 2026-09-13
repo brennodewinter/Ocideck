@@ -2,24 +2,24 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.6.2+28** (licence EUPL-1.2) and every third-party component it ships (213 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.6.2+28** (licence EUPL-1.2) and every third-party component it ships (219 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **735 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **775 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
 | Licence | Components |
 | --- | ---: |
-| BSD-3-Clause | 126 |
-| MIT | 59 |
-| Apache-2.0 | 18 |
+| BSD-3-Clause | 127 |
+| MIT | 63 |
+| Apache-2.0 | 19 |
 | OFL-1.1 | 7 |
 | BSD | 2 |
 | MPL-2.0 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (196)
+### Dart / Flutter packages (201)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -142,6 +142,10 @@ The JSON documents carry **735 dependency relations** between these components: 
 | path_provider_platform_interface _(transitive)_ | 2.1.3 | BSD-3-Clause | flutter | `pkg:pub/path_provider_platform_interface@2.1.3` |
 | path_provider_windows _(transitive)_ | 2.3.0 | BSD-3-Clause | flutter | `pkg:pub/path_provider_windows@2.3.0` |
 | pdf _(direct main)_ | 3.13.0 | Apache-2.0 | DavBfr | `pkg:pub/pdf@3.13.0` |
+| pdfium_dart _(transitive)_ | 0.3.0 | MIT | espresso3389 | `pkg:pub/pdfium_dart@0.3.0` |
+| pdfium_flutter _(transitive)_ | 0.3.0 | MIT | espresso3389 | `pkg:pub/pdfium_flutter@0.3.0` |
+| pdfrx _(direct main)_ | 2.6.1 | MIT | espresso3389 | `pkg:pub/pdfrx@2.6.1` |
+| pdfrx_engine _(transitive)_ | 0.6.0 | MIT | espresso3389 | `pkg:pub/pdfrx_engine@0.6.0` |
 | petitparser _(transitive)_ | 7.0.2 | MIT | petitparser | `pkg:pub/petitparser@7.0.2` |
 | platform _(transitive)_ | 3.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/platform@3.2.0` |
 | plugin_platform_interface _(direct dev)_ | 2.1.8 | BSD-3-Clause | flutter | `pkg:pub/plugin_platform_interface@2.1.8` |
@@ -163,6 +167,7 @@ The JSON documents carry **735 dependency relations** between these components: 
 | re_highlight _(direct main)_ | 0.0.3 | MIT | reqable | `pkg:pub/re_highlight@0.0.3` |
 | record_use _(transitive)_ | 1.1.1 | BSD-3-Clause | dart-lang | `pkg:pub/record_use@1.1.1` |
 | riverpod _(transitive)_ | 3.4.3 | MIT | rrousselGit | `pkg:pub/riverpod@3.4.3` |
+| rxdart _(transitive)_ | 0.28.0 | Apache-2.0 | ReactiveX | `pkg:pub/rxdart@0.28.0` |
 | shared_preferences _(direct main)_ | 2.5.5 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences@2.5.5` |
 | shared_preferences_android _(transitive)_ | 2.4.28 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_android@2.4.28` |
 | shared_preferences_foundation _(transitive)_ | 2.5.7 | BSD-3-Clause | flutter | `pkg:pub/shared_preferences_foundation@2.5.7` |
@@ -254,6 +259,12 @@ The JSON documents carry **735 dependency relations** between these components: 
 | Noto Sans Math | — | OFL-1.1 | — | `pkg:generic/Noto%20Sans%20Math` |
 | Roboto | — | OFL-1.1 | The Roboto Project Authors | `pkg:generic/Roboto` |
 | Roboto Mono | — | OFL-1.1 | The Roboto Mono Project Authors | `pkg:generic/Roboto%20Mono` |
+
+### Bundled native runtimes (1)
+
+| Component | Version | Licence | Supplier | Source |
+| --- | --- | --- | --- | --- |
+| PDFium | 144.0.7811.0 | BSD-3-Clause AND Apache-2.0 | The PDFium Authors | `pkg:generic/pdfium@144.0.7811.0` |
 
 ### Build SDKs (2)
 

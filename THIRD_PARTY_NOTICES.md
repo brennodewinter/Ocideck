@@ -40,6 +40,7 @@ Shipped inside the app and embedded into the **offline HTML export**
 | [Roboto Mono](https://github.com/googlefonts/robotomono) font | Bundled monospace font (registered under `monospace` and `Roboto Mono`; fixes web selection metrics, #1784) | SIL Open Font License 1.1 |
 | [Noto Sans Math](https://github.com/notofonts/math) font (subset) | Bundled fallback font for arrows and mathematical symbols in PDF export that Roboto does not cover (#1968) | SIL Open Font License 1.1 |
 | [YuNet](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet) (`face_detection_yunet_2023mar.onnx`) | Detects whether a recognisable face appears in a slide image. Runs entirely on this device; only the number of faces is kept, never a template or an identity | MIT |
+| [PDFium](https://pdfium.googlesource.com/pdfium/) (Chromium 7811) | Renders local PDF/PDF-A evidence on-device through `pdfrx`; includes incorporated Apache-2.0 code | BSD-3-Clause AND Apache-2.0 |
 
 The exact pinned version, source URL and SHA-256 of every vendored JS bundle
 live in [`assets/web_export/MANIFEST.json`](assets/web_export/MANIFEST.json).
@@ -87,6 +88,7 @@ same answer `make licenses` and the SBOM give.
 | `flutter_secure_storage` | The WebDAV/Nextcloud password in the OS keychain | BSD-3-Clause |
 | `pasteboard` | Paste images from the clipboard | Apache-2.0 |
 | `pdf` | PDF export | Apache-2.0 |
+| `pdfrx` | On-device PDF/PDF-A evidence viewer | MIT (the separately bundled PDFium runtime is listed above) |
 | `archive` | `.ocideck` bundles and PPTX export | MIT |
 | `crypto` | SHA-256/SHA-512 for the seal, evidence hashes and the SBOM generator | BSD-3-Clause |
 | `cryptography` | X25519/Ed25519/HKDF/XChaCha20-Poly1305 for the collaboration end-to-end encryption (self-encrypted relay, `docs/design/SELF_ENCRYPTED_RELAY.md`) | Apache-2.0 |

@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 /// Flutter already collects the licence of every resolved package — including
 /// the vendored forks under `third_party/` — into the `NOTICES` asset that
 /// `showLicensePage` reads. What it does not know about is everything we bundle
-/// by hand: the five font families, the YuNet face-detection model, and the
-/// five JavaScript/CSS bundles inlined into the offline HTML export.
+/// by hand: the fonts, YuNet face-detection model, PDFium native runtime and
+/// JavaScript/CSS bundles inlined into the offline HTML export.
 ///
 /// Those were shipping without their licence text. That is not a formality:
 /// SIL OFL-1.1 §2 lets you redistribute a font *only* if the copyright notice
@@ -103,6 +103,21 @@ abstract final class BundledLicenses {
       source:
           'https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet',
       licenseAsset: 'assets/models/YuNet-LICENSE.txt',
+    ),
+    BundledLicense(
+      component: 'PDFium rendering engine',
+      license: 'BSD-3-Clause',
+      source: 'https://pdfium.googlesource.com/pdfium/',
+      licenseAsset: 'assets/licenses/pdfium-BSD-LICENSE.txt',
+    ),
+    // PDFium's own LICENSE also covers incorporated code under Apache-2.0.
+    // Reuse the identical full Apache text already shipped for MathJax.
+    BundledLicense(
+      component: 'PDFium incorporated components',
+      license: 'Apache-2.0',
+      source:
+          'https://pdfium.googlesource.com/pdfium/+/refs/heads/main/LICENSE',
+      licenseAsset: 'assets/licenses/mathjax-LICENSE.txt',
     ),
     BundledLicense(
       component: 'marked',

@@ -43,6 +43,7 @@ const _groupLabels = <String, String>{
   'npm-bundle': 'Vendored JavaScript bundles (HTML export)',
   'export-asset': 'Vendored export assets',
   'font': 'Bundled fonts',
+  'native-runtime': 'Bundled native runtimes',
   'sdk': 'Build SDKs',
 };
 
@@ -325,6 +326,7 @@ Inventory buildInventory() {
     ..._dartPackages(),
     ..._npmBundles(),
     ..._fonts(pubspec),
+    ..._nativeRuntimes(),
     ..._sdks(pubspec),
   ];
 
@@ -441,7 +443,10 @@ List<SbomComponent> _dartPackages() {
         : 'NOASSERTION';
 
     final facts = _packageFacts(root);
-    final edges = resolveEdges(facts?.dependencies, refByName);
+    var edges = resolveEdges(facts?.dependencies, refByName);
+    if (name == 'pdfium_dart') {
+      edges = [...?edges, 'runtime:pdfium@chromium-7811'];
+    }
     final fork = _forkOrigins[name];
     // A fork's upstream URL is the stronger statement of origin than whatever
     // the vendored copy's own pubspec still says, so it wins where we have one;
@@ -638,6 +643,34 @@ List<SbomComponent> _fonts(YamlMap pubspec) {
   }
   return out;
 }
+
+/// Native code downloaded/bundled by resolved Flutter packages rather than
+/// represented as a package of its own. Keeping it separate prevents the MIT
+/// wrapper licence from hiding the runtime that actually parses untrusted PDFs.
+List<SbomComponent> _nativeRuntimes() => [
+  SbomComponent(
+    ref: 'runtime:pdfium@chromium-7811',
+    group: 'native-runtime',
+    type: 'library',
+    name: 'PDFium',
+    version: '144.0.7811.0',
+    purl: 'pkg:generic/pdfium@144.0.7811.0',
+    license: 'BSD-3-Clause AND Apache-2.0',
+    downloadUrl:
+        'https://github.com/bblanchon/pdfium-binaries/releases/tag/chromium%2F7811',
+    vcsUrl: 'https://pdfium.googlesource.com/pdfium/',
+    supplier: 'The PDFium Authors',
+    supplierUrl: 'https://pdfium.googlesource.com/pdfium/',
+    dependsOn: [],
+    note:
+        'Platform-specific runtime bundled by pdfium_dart/pdfium_flutter. '
+        'The web WASM in pdfrx 2.6.1 has SHA-256 '
+        '5b2cbb18e9dc361dae375e971c7e75f7306d39b7749ad4fced475579e6a549df; '
+        'the Darwin XCFramework archive is pinned upstream as '
+        '948d9257f53f01cbed74b81bb8adc8758e52ac9390751772de7889026d32d5a1. '
+        'Other native targets are release-pinned by the upstream build hook.',
+  ),
+];
 
 /// The copyright holder a bundled font's OFL text names, as
 /// `Copyright 2011 The Roboto Project Authors (https://…)`.

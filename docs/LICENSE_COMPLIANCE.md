@@ -16,6 +16,11 @@ Zlib, BSL-1.0, Unlicense, SIL OFL-1.1, CC0** (and EUPL-1.2 for OciDeck itself).
 Anything else — in particular GPL/AGPL/LGPL or a missing/unknown licence — is
 flagged for review before it can be added.
 
+The local evidence reader uses `pdfrx` (MIT), backed by PDFium (BSD-style),
+instead of a proprietary viewer SDK. Both are processed by the same resolved
+licence and SBOM checks as the rest of the runtime dependency graph; no hosted
+rendering service or per-seat/runtime licence is introduced.
+
 ## How to verify (repeatable)
 
 A script scans the resolved package graph (direct **and** transitive) and
@@ -44,17 +49,16 @@ disagree.
 
 ## Latest result
 
-Run on **2026-07-22** (`dart run tool/check_licenses.dart`). All **187** resolved
+Run on **2026-09-13** (`dart run tool/check_licenses.dart`). All **204** resolved
 Dart/Flutter packages use recognised open-source licences:
 
 | Count | Licence |
 | ---: | --- |
-| 123 | BSD-3-Clause |
-| 47 | MIT |
-| 13 | Apache-2.0 |
+| 122 | BSD-3-Clause |
+| 61 | MIT |
+| 17 | Apache-2.0 |
 | 1 | MPL-2.0 (`dbus`, Linux only) |
-| 1 | BSD |
-| 1 | BSL-1.0 |
+| 2 | BSD |
 | 1 | EUPL-1.2 (OciDeck itself) |
 
 > A count in prose goes stale the moment a dependency lands, and nothing fails
@@ -62,11 +66,10 @@ Dart/Flutter packages use recognised open-source licences:
 > [`../sbom/ocideck.sbom.md`](../sbom/ocideck.sbom.md), rebuilt by `make sbom`
 > and held current by `make sbom-verify` — read that one if the two disagree.
 
-Counting the whole SBOM (**226** components — packages plus the vendored JS
-bundles, bundled fonts, plugin forks and SDKs) adds 6 × OFL-1.1 (the bundled
-fonts — five families, of which EB Garamond ships two faces) and 1 ×
-`Apache-2.0 OR MPL-2.0` (DOMPurify, which the generated `sbom/ocideck.sbom.md`
-tallies under Apache-2.0), and lifts BSD-3-Clause to 141 and MIT to 59.
+The whole SBOM contains **220** components including OciDeck itself: the package
+graph plus vendored JavaScript, fonts, plugin forks, SDKs and the separately
+bundled PDFium native runtime. The generated licence table and component rows in
+`sbom/ocideck.sbom.md` are authoritative for the current breakdown.
 
 *(Corrected 2026-07-22: this section said 182 packages and 197 components with
 no date on either, so a reader could not tell that the dependency graph had
@@ -79,9 +82,10 @@ staleness the note above predicted — five weeks of dependency work, and nothin
 fails when the prose falls behind.)*
 
 Bundled assets: marked (MIT), highlight.js (BSD-3-Clause), Mermaid (MIT, bundling
-DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), five font families
-under SIL OFL-1.1 (EB Garamond, Roboto, Roboto Mono, Inter, Lora — licence texts
-in `assets/fonts/`) and the YuNet face-detection model (MIT).
+DOMPurify under Apache-2.0/MPL-2.0), MathJax (Apache-2.0), six font families
+under SIL OFL-1.1 (EB Garamond, Roboto, Roboto Mono, Inter, Lora and Noto Sans
+Math — licence texts in `assets/fonts/`), the YuNet face-detection model (MIT),
+and PDFium (BSD-3-Clause with incorporated Apache-2.0 code).
 *(Roboto Mono added 2026-08-25, #1784; until 2026-08-30 this sentence said "five
 fonts" while naming four.)* The OciDeck-owned brand images in
 `assets/images/` and the theme in `assets/themes/` are the project's own work.

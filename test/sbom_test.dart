@@ -61,6 +61,15 @@ void main() {
       }
     });
 
+    test('PDFium runtime is separate from its MIT wrapper packages', () {
+      final pdfium = cdxComponents.singleWhere(
+        (component) => component['bom-ref'] == 'runtime:pdfium@chromium-7811',
+      );
+      expect(pdfium['name'], 'PDFium');
+      expect(pdfium['licenses'].toString(), contains('Apache-2.0'));
+      expect(pdfium['licenses'].toString(), contains('BSD-3-Clause'));
+    });
+
     test('both SBOMs list the same number of components', () {
       final spdxPackages = (spdx['packages'] as List).length;
       // SPDX includes the root application package; CycloneDX carries it in
@@ -169,6 +178,13 @@ void main() {
         (r) => r.startsWith('pkg:pub/riverpod@'),
       );
       expect(graph[riverpod], isNotEmpty);
+    });
+
+    test('pdfium_dart points to the native PDFium runtime', () {
+      final wrapper = graph.keys.firstWhere(
+        (ref) => ref.startsWith('pkg:pub/pdfium_dart@'),
+      );
+      expect(graph[wrapper], contains('runtime:pdfium@chromium-7811'));
     });
 
     test('SPDX carries the same edges as CycloneDX', () {
