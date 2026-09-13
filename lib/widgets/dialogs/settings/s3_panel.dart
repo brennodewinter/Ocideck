@@ -13,6 +13,7 @@ import '../../../services/s3/s3_service.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/log.dart';
 import 'confirm_certificate.dart';
+import 'connection_test_section.dart';
 import 's3_form.dart';
 import 'settings_section_title.dart';
 import 'settings_text_field.dart';
@@ -162,87 +163,16 @@ class _S3PanelState extends State<S3Panel> {
             _form.testMessage = null;
           }),
         ),
-        _testSection(l10n),
+        ConnectionTestSection(
+          state: _form,
+          onTest: _testConnection,
+          onTrustCertificate: _trustCertificate,
+        ),
         const SizedBox(height: 8),
         Text(
           l10n.d('Wijzigingen worden bewaard wanneer je op Opslaan klikt.'),
           style: TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
-      ],
-    );
-  }
-
-  /// De verbindingstest: de knop, de uitslag, en — als het op het certificaat
-  /// strandde — de weg om dat te bekijken.
-  Widget _testSection(AppLocalizations l10n) {
-    final testMsg = _form.testMessage;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            ElevatedButton.icon(
-              onPressed: _form.testing ? null : _testConnection,
-              icon: _form.testing
-                  ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.wifi_tethering, size: 16),
-              label: Text(l10n.d('Verbinding testen')),
-            ),
-            const SizedBox(width: 12),
-            if (_form.testOk == true)
-              Row(
-                children: [
-                  Icon(Icons.check_circle, color: AppTheme.tealFg, size: 18),
-                  const SizedBox(width: 6),
-                  Text(
-                    l10n.d('Verbinding gelukt'),
-                    style: TextStyle(fontSize: 12, color: AppTheme.tealFg),
-                  ),
-                ],
-              ),
-          ],
-        ),
-        if (_form.testCertRejected)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                onPressed: _trustCertificate,
-                icon: const Icon(Icons.verified_user_outlined, size: 16),
-                label: Text(l10n.d('Certificaat bekijken')),
-              ),
-            ),
-          ),
-        if (_form.testOk == false && testMsg != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.error_outline,
-                  color: AppTheme.danger600,
-                  size: 18,
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    testMsg,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppTheme.danger600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
       ],
     );
   }

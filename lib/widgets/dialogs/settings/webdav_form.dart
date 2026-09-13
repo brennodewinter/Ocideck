@@ -14,9 +14,10 @@ import 'package:flutter/widgets.dart';
 import '../../../models/webdav_settings.dart';
 import '../../../state/settings_provider.dart';
 import 'keychain_secret.dart';
+import 'connection_test_section.dart';
 
 /// Wat het Nextcloud-paneel aan het bewerken is, tot Opslaan of Annuleren.
-class WebdavForm {
+class WebdavForm implements ConnectionTestState {
   final TextEditingController url = TextEditingController();
   final TextEditingController user = TextEditingController();
   final TextEditingController root = TextEditingController();
@@ -37,11 +38,15 @@ class WebdavForm {
 
   /// De laatste test strandde op het certificaat. Alleen dán heeft het zin de
   /// gebruiker te vragen of hij het wil vertrouwen.
+  @override
   bool testCertRejected = false;
 
   /// Uitslag van de verbindingstest: `null` = nog niet getest.
+  @override
   bool? testOk;
+  @override
   String? testMessage;
+  @override
   bool testing = false;
 
   /// De identiteit waaronder het wachtwoord in de sleutelhanger staat.

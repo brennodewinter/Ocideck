@@ -9,9 +9,10 @@ import 'package:flutter/widgets.dart';
 import '../../../models/s3_settings.dart';
 import '../../../state/settings_provider.dart';
 import 'keychain_secret.dart';
+import 'connection_test_section.dart';
 
 /// Wat het S3-paneel aan het bewerken is, tot Opslaan of Annuleren.
-class S3Form {
+class S3Form implements ConnectionTestState {
   final TextEditingController endpoint = TextEditingController();
   final TextEditingController region = TextEditingController();
   final TextEditingController bucket = TextEditingController();
@@ -34,11 +35,15 @@ class S3Form {
 
   /// De laatste test strandde op het certificaat. Alleen dán heeft het zin de
   /// gebruiker te vragen of hij het wil vertrouwen.
+  @override
   bool testCertRejected = false;
 
   /// Uitslag van de verbindingstest: `null` = nog niet getest.
+  @override
   bool? testOk;
+  @override
   String? testMessage;
+  @override
   bool testing = false;
 
   /// De identiteit waaronder de secret access key in de sleutelhanger staat.
