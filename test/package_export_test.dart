@@ -11,6 +11,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/pdf_evidence_service.dart';
 import 'package:path/path.dart' as p;
 
 void main() {
@@ -120,6 +121,58 @@ void main() {
         p.join(imported.projectPath!, 'images', 'tekstfoto.png'),
       ).readAsBytesSync(),
       [5, 6, 7, 8],
+    );
+  });
+
+  test('export then import preserves PDF evidence byte-for-byte', () async {
+    final project = Directory(p.join(tmp.path, 'pdf-project'))..createSync();
+    final src = File(p.join(project.path, 'evidence', 'bewijs.pdf'));
+    src.parent.createSync();
+    final original = Uint8List.fromList(
+      '%PDF-1.7\nsigned-pdf-fixture'.codeUnits,
+    );
+    src.writeAsBytesSync(original);
+    final deck = Deck(
+      title: 'Bewijsdeck',
+      projectPath: project.path,
+      slides: [
+        Slide.create(SlideType.freeMarkdown).copyWith(
+          customMarkdown: PdfEvidenceService.markdownFor('evidence/bewijs.pdf'),
+          findingId: 'F-01',
+          findingRole: FindingRole.evidence,
+        ),
+      ],
+    );
+
+    final zipPath = p.join(tmp.path, 'bewijs.ocideck');
+    await file.exportPackage(deck, zipPath);
+    final members = ZipDecoder().decodeBytes(File(zipPath).readAsBytesSync());
+    expect(
+      members.files.map((member) => member.name),
+      contains('evidence/bewijs.pdf'),
+    );
+    expect(
+      Uint8List.fromList(
+        members.files
+            .singleWhere((m) => m.name == 'evidence/bewijs.pdf')
+            .content,
+      ),
+      original,
+    );
+
+    final out = Directory(p.join(tmp.path, 'out_pdf'))..createSync();
+    final mdPath = await file.importPackageBytes(
+      File(zipPath).readAsBytesSync(),
+      out.path,
+    );
+    final imported = await file.openDeck(mdPath!);
+    final attachment = PdfEvidenceService.attachmentFromMarkdown(
+      imported!.slides.single.customMarkdown,
+    );
+    expect(attachment?.path, 'evidence/bewijs.pdf');
+    expect(
+      File(p.join(imported.projectPath!, attachment!.path)).readAsBytesSync(),
+      original,
     );
   });
 

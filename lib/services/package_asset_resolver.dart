@@ -4,6 +4,7 @@ import '../models/deck.dart';
 import '../models/slide.dart';
 import 'file_service.dart' show PackageEntry;
 import 'image_service.dart';
+import 'pdf_evidence_service.dart';
 import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 
@@ -89,12 +90,37 @@ Deck _attachPackageAssetsToMem(
     return out;
   }
 
+  Slide rewritePdfEvidence(Slide slide) {
+    final attachment = PdfEvidenceService.attachmentFromMarkdown(
+      slide.customMarkdown,
+    );
+    if (attachment == null) return slide;
+    final clean = attachment.path.split('#').first.trim();
+    if (clean.isEmpty) return slide;
+    final resolved = p.posix.normalize(
+      mdDir == '.' ? clean : p.posix.join(mdDir, clean),
+    );
+    if (resolved.startsWith('..')) return slide;
+    final bytes = byName[resolved];
+    if (bytes == null || !isSupportedPdfEvidence(bytes)) return slide;
+    final mem = memFor.putIfAbsent(
+      resolved,
+      () => WebAssetStore.put(bytes, name: p.posix.basename(resolved)),
+    );
+    return slide.copyWith(
+      customMarkdown: PdfEvidenceService.markdownFor(
+        mem,
+        label: attachment.label,
+      ),
+    );
+  }
+
   // Ook een `![…](…)` in de vrije tekst wijst naar een lid van het pakket, en
   // moet dus dezelfde weg naar het geheugen lopen — anders opent het deck met
   // een verwijzing naar een bestand dat alleen ín het archief bestaat.
   final slides = [
     for (final s in deck.slides)
-      rewriteMedia(rewriteSlideImagePaths(s, memPath)),
+      rewritePdfEvidence(rewriteMedia(rewriteSlideImagePaths(s, memPath))),
   ];
   return deck.copyWith(slides: slides);
 }

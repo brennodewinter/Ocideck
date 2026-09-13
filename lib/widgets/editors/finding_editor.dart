@@ -1,10 +1,7 @@
-import '../../utils/image_limits.dart' show boundedFileImage;
 import '../../models/deck.dart';
 import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../state/settings_provider.dart';
-import 'dart:io';
-
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,12 +14,13 @@ import '../../services/cvss/cvss4.dart';
 import '../../services/finding_ai_service.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
+import '../../services/pdf_evidence_service.dart';
 import '../../services/scope_coverage.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
-import '../../utils/project_path.dart';
+import '../../utils/error_snackbar.dart';
 import '../dialogs/cve_picker.dart';
 import '../dialogs/cvss_builder_dialog.dart';
 import '../dialogs/cwe_picker.dart';
@@ -32,6 +30,8 @@ import '_editor_field.dart';
 import 'markdown_editor_field.dart';
 import 'ai_suggest_field.dart';
 import '../../platform/platform_features.dart';
+import '../reader/pdf_evidence_viewer.dart';
+import 'finding_evidence_thumb.dart';
 
 /// Structured editor for a `finding` **header** slide (PENTEST_MIAUW §3.1). The
 /// fields map one-to-one onto [FindingSpec], which round-trips to plain,
@@ -48,6 +48,7 @@ class FindingEditor extends ConsumerStatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
   final ImageService imageService;
+  final PdfEvidenceService pdfEvidenceService;
   final String? projectPath;
   final bool nestedInScrollView;
 
@@ -56,6 +57,7 @@ class FindingEditor extends ConsumerStatefulWidget {
     required this.slide,
     required this.onUpdate,
     required this.imageService,
+    this.pdfEvidenceService = const PdfEvidenceService(),
     this.projectPath,
     this.nestedInScrollView = false,
   });
@@ -480,7 +482,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     );
   }
 
-  /// Evidence attached to this finding: screenshots and videos, each stored as
+  /// Evidence attached to this finding: screenshots, videos and PDF files.
   /// its own slide in the finding group (role `evidence`) right after the
   /// header — so evidence rides with the finding and round-trips as part of it.
   Widget _evidenceSection(AppLocalizations l10n) {
@@ -499,7 +501,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
         const SectionLabel('Bewijs'),
         Text(
           l10n.d(
-            'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.',
+            'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.',
           ),
           style: TextStyle(fontSize: 11, color: AppTheme.slate500),
         ),
@@ -523,6 +525,12 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
                 onPressed: _addVideo,
                 icon: const Icon(Icons.video_call_outlined, size: 16),
                 label: Text(l10n.d('Video toevoegen')),
+              ),
+            if (supportsLocalProjectFolders)
+              OutlinedButton.icon(
+                onPressed: widget.projectPath == null ? null : _addPdf,
+                icon: const Icon(Icons.picture_as_pdf_outlined, size: 16),
+                label: Text(l10n.d('Bestand kiezen')),
               ),
           ],
         ),
@@ -558,16 +566,31 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   /// One evidence slide: a small preview (screenshot thumbnail or a video icon)
   /// with its file name, plus jump-to-edit and remove actions.
   Widget _evidenceTile(AppLocalizations l10n, int index, Slide slide) {
+    final pdf = PdfEvidenceService.attachmentFromMarkdown(slide.customMarkdown);
+    final isPdf = slide.type == SlideType.freeMarkdown && pdf != null;
     final isVideo = slide.type == SlideType.video;
-    final path = isVideo ? slide.videoPath : slide.imagePath;
+    final path = isPdf
+        ? pdf.path
+        : isVideo
+        ? slide.videoPath
+        : slide.imagePath;
     final name = path.isEmpty
         ? l10n.d('(nog leeg)')
-        : path.split(Platform.pathSeparator).last.split('/').last;
+        : path.replaceAll(r'\', '/').split('/').last;
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          SizedBox(width: 44, height: 30, child: _evidenceThumb(isVideo, path)),
+          SizedBox(
+            width: 44,
+            height: 30,
+            child: findingEvidenceThumb(
+              isVideo: isVideo,
+              isPdf: isPdf,
+              path: path,
+              projectPath: widget.projectPath,
+            ),
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -577,13 +600,22 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
               style: TextStyle(fontSize: 12, color: AppTheme.slate700),
             ),
           ),
-          IconButton(
-            tooltip: l10n.d('Bewerk deze slide'),
-            icon: const Icon(Icons.edit_outlined, size: 16),
-            visualDensity: VisualDensity.compact,
-            color: AppTheme.slate500,
-            onPressed: () => ref.read(editorProvider.notifier).select(index),
-          ),
+          if (isPdf)
+            IconButton(
+              tooltip: l10n.d('Openen'),
+              icon: const Icon(Icons.visibility_outlined, size: 16),
+              visualDensity: VisualDensity.compact,
+              color: AppTheme.slate500,
+              onPressed: () => _openPdf(path),
+            )
+          else
+            IconButton(
+              tooltip: l10n.d('Bewerk deze slide'),
+              icon: const Icon(Icons.edit_outlined, size: 16),
+              visualDensity: VisualDensity.compact,
+              color: AppTheme.slate500,
+              onPressed: () => ref.read(editorProvider.notifier).select(index),
+            ),
           IconButton(
             tooltip: l10n.d('Bewijs verwijderen'),
             icon: const Icon(Icons.delete_outline, size: 16),
@@ -595,41 +627,6 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       ),
     );
   }
-
-  Widget _evidenceThumb(bool isVideo, String path) {
-    if (!isVideo && path.isNotEmpty) {
-      final resolved = resolveEditorAssetPath(path, widget.projectPath);
-      if (resolved != null) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: Image(
-            image: boundedFileImage(File(resolved), 176),
-            fit: BoxFit.cover,
-            // Bewijsmateriaal is vaak een schermafdruk van enkele duizenden
-            // pixels breed, terwijl deze duim 44 logische pixels meet. Zonder
-            // decodeerhint gaat de volledige bitmap naar het geheugen — bij een
-            // rapport met tientallen bewijsstukken loopt dat hard op. 176 is
-            // vier keer de weergavebreedte en dus ruim boven elke realistische
-            // pixelverhouding, zodat er niets zichtbaar verslechtert.
-            errorBuilder: (_, _, _) => _evidenceIcon(isVideo),
-          ),
-        );
-      }
-    }
-    return _evidenceIcon(isVideo);
-  }
-
-  Widget _evidenceIcon(bool isVideo) => Container(
-    decoration: BoxDecoration(
-      color: AppTheme.slate100,
-      borderRadius: BorderRadius.circular(4),
-    ),
-    child: Icon(
-      isVideo ? Icons.movie_outlined : Icons.image_outlined,
-      size: 16,
-      color: AppTheme.slate400,
-    ),
-  );
 
   /// Insert [evidence] right after this finding's group (its header plus any
   /// existing detail/evidence slides that share the id).
@@ -679,6 +676,52 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
         findingId: _ensureFindingId(),
         findingRole: FindingRole.evidence,
       ),
+    );
+  }
+
+  Future<void> _addPdf() async {
+    final result = await widget.pdfEvidenceService.pickAndImport(
+      assetService: widget.imageService,
+      projectPath: widget.projectPath,
+    );
+    final path = result.path;
+    if (path == null || !mounted) {
+      if (result.failure != PdfEvidenceImportFailure.cancelled && mounted) {
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          context.l10n,
+          context.l10n.d('Kon dit bestand niet openen.'),
+        );
+      }
+      return;
+    }
+    _insertEvidence(
+      Slide.create(SlideType.freeMarkdown).copyWith(
+        customMarkdown: PdfEvidenceService.markdownFor(path),
+        findingId: _ensureFindingId(),
+        findingRole: FindingRole.evidence,
+      ),
+    );
+  }
+
+  Future<void> _openPdf(String path) async {
+    final bytes = await widget.pdfEvidenceService.read(
+      path,
+      projectPath: widget.projectPath,
+    );
+    if (!mounted) return;
+    if (bytes == null) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        context.l10n.d('Kon dit bestand niet openen.'),
+      );
+      return;
+    }
+    await PdfEvidenceViewer.open(
+      context,
+      bytes: bytes,
+      fileName: path.split('/').last,
     );
   }
 

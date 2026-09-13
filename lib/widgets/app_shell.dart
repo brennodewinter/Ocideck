@@ -43,6 +43,7 @@ import '../services/finding_context_score.dart';
 import '../services/finding_pagination.dart';
 import '../services/markdown_service.dart';
 import '../services/evidence_hash_service.dart';
+import '../services/pdf_evidence_service.dart';
 import '../services/management_summary.dart';
 import '../services/scope_coverage.dart';
 import '../services/classification_policy.dart';
@@ -143,6 +144,7 @@ import 'dialogs/package_password_dialog.dart';
 import 'dialogs/proxy_fallback_dialog.dart';
 import 'dialogs/presentation_info_dialog.dart';
 import 'reader/document_reader_screen.dart';
+import 'reader/pdf_evidence_viewer.dart';
 import 'shell/app_menu_bar.dart';
 import 'shell/shell_deck_commands.dart';
 import 'dialogs/save_destination_dialog.dart';
@@ -588,7 +590,9 @@ class _AppShellState extends ConsumerState<AppShell> {
       // het "opent niet, geen melding"-gedrag. Eén kapot bestand mag de rest ook
       // niet afbreken.
       try {
-        if (ext == '.md') {
+        if (ext == '.pdf') {
+          await _openPdfPath(context, path);
+        } else if (ext == '.md') {
           final result = await tabs.openFileByPath(path);
           if (mounted) {
             _reportOpenFailure(

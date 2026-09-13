@@ -1,9 +1,14 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_evidence.dart';
 import '../../models/ociserve_portfolio.dart';
+import '../../services/pdf_evidence_service.dart';
+import '../../state/ociserve_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/error_snackbar.dart';
+import '../reader/pdf_evidence_viewer.dart';
 import 'ociserve_evidence_submit.dart';
 import 'ociserve_portfolio_link.dart';
 
@@ -353,6 +358,17 @@ class OciServeEvidence extends StatelessWidget {
                 ),
               ),
             ],
+            if (upload.isClean &&
+                upload.declaredType.startsWith('application/pdf')) ...[
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerRight,
+                child: _EvidenceOpenButton(
+                  upload: upload,
+                  organizationId: organizationId,
+                ),
+              ),
+            ],
           ],
         ),
       ),
@@ -505,4 +521,72 @@ class OciServeEvidence extends StatelessWidget {
       ),
     );
   }
+}
+
+class _EvidenceOpenButton extends ConsumerStatefulWidget {
+  const _EvidenceOpenButton({
+    required this.upload,
+    required this.organizationId,
+  });
+
+  final EvidenceUpload upload;
+  final String organizationId;
+
+  @override
+  ConsumerState<_EvidenceOpenButton> createState() =>
+      _EvidenceOpenButtonState();
+}
+
+class _EvidenceOpenButtonState extends ConsumerState<_EvidenceOpenButton> {
+  bool _loading = false;
+
+  Future<void> _open() async {
+    setState(() => _loading = true);
+    try {
+      final bytes = await ref
+          .read(ociServeProvider.notifier)
+          .downloadEvidence(
+            organizationId: widget.organizationId,
+            evidenceId: widget.upload.id,
+          );
+      if (!mounted) return;
+      if (!isSupportedPdfEvidence(bytes)) {
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          context.l10n,
+          bytes.length > maxPdfEvidenceBytes
+              ? context.l10n.d('Dit bestand is te groot om te openen.')
+              : context.l10n.d('Kon dit bestand niet openen.'),
+        );
+        return;
+      }
+      await PdfEvidenceViewer.open(
+        context,
+        bytes: bytes,
+        fileName: widget.upload.filename,
+      );
+    } on Object {
+      if (mounted) {
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          context.l10n,
+          context.l10n.d('Kon dit bestand niet openen.'),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => FilledButton.tonalIcon(
+    onPressed: _loading ? null : _open,
+    icon: _loading
+        ? const SizedBox.square(
+            dimension: 16,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          )
+        : const Icon(Icons.visibility_outlined),
+    label: Text(context.l10n.d('Openen')),
+  );
 }

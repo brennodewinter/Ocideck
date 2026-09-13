@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/package_asset_resolver.dart';
+import 'package:ocideck/services/pdf_evidence_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/utils/mem_asset_blob.dart';
 
@@ -70,6 +71,25 @@ void main() {
       'demo.md',
     );
     expect(out.slides[0].videoPath, 'media/ontbreekt.mp4');
+  });
+
+  test('PDF-bewijs gaat gevalideerd naar mem: voor de webviewer', () {
+    final pdf = Uint8List.fromList('%PDF-1.7\nfixture'.codeUnits);
+    final out = attachPackageAssetsToMem(
+      deckWith([
+        Slide.create(SlideType.freeMarkdown).copyWith(
+          customMarkdown: PdfEvidenceService.markdownFor('evidence/bewijs.pdf'),
+        ),
+      ]),
+      [(name: 'evidence/bewijs.pdf', bytes: pdf)],
+      'demo.md',
+    );
+    final attachment = PdfEvidenceService.attachmentFromMarkdown(
+      out.slides.single.customMarkdown,
+    );
+    expect(attachment, isNotNull);
+    expect(WebAssetStore.isMemPath(attachment!.path), isTrue);
+    expect(WebAssetStore.bytesFor(attachment.path), pdf);
   });
 
   test(

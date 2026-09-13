@@ -36,6 +36,7 @@ import 'download_delivery.dart';
 import 'net/transport_failure.dart';
 import 'annotation_codec.dart';
 import 'document_integrity.dart';
+import 'pdf_evidence_service.dart';
 import 'seal_codec.dart';
 import 'miauw_codec.dart';
 import 'privacy/dismissal_codec.dart';
