@@ -1643,6 +1643,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Adăugați capturi de ecran, videoclipuri sau fișiere PDF ca dovezi. Fiecare dovadă primește propriul diapozitiv imediat după constatare și este inclusă în export.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A și semnăturile digitale rămân vizibile. OciDeck nu validează semnătura.',
   'Logo niet importeren': 'Nu importa sigla',
   'Logo gevonden': 'Siglă găsită',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5243,8 +5247,6 @@ const _dutchSourceAddRo = <String, String>{
   'Bewerk deze slide': 'Editează acest slide',
   'Bewijs verwijderen': 'Elimină dovada',
   '(nog leeg)': '(încă gol)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Adaugă capturi de ecran sau videoclipuri ca dovezi. Fiecare dovadă devine un slide propriu imediat după constatare și este inclusă în export.',
   'Uitvoering testen conform standaard': 'Testare conform standardului',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contrast prea mic cu fundalul — poate fi ilizibil.',

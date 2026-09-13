@@ -176,6 +176,53 @@ Future<void> _openWithSearch(BuildContext context, WidgetRef ref) async {
   await _openPickedPaths(context, ref, paths, selectIndex: selectIndex);
 }
 
+/// Open a PDF from disk through the same exact-byte gate as Keiko evidence.
+Future<void> _openPdfPath(BuildContext context, String path) async {
+  final file = File(path);
+  try {
+    final length = await file.length();
+    if (!context.mounted) return;
+    if (length > maxPdfEvidenceBytes) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        context.l10n.d('Dit bestand is te groot om te openen.'),
+      );
+      return;
+    }
+    final bytes = Uint8List.fromList(await file.readAsBytes());
+    if (!context.mounted) return;
+    await _openPdfBytes(context, bytes, p.basename(path));
+  } on FileSystemException catch (error, stack) {
+    logError('_openPdfPath: PDF lezen', error.runtimeType, stack);
+    if (context.mounted) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        context.l10n.d('Kon dit bestand niet openen.'),
+      );
+    }
+  }
+}
+
+Future<void> _openPdfBytes(
+  BuildContext context,
+  Uint8List bytes,
+  String fileName,
+) async {
+  if (!isSupportedPdfEvidence(bytes)) {
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      context.l10n,
+      bytes.length > maxPdfEvidenceBytes
+          ? context.l10n.d('Dit bestand is te groot om te openen.')
+          : context.l10n.d('Kon dit bestand niet openen.'),
+    );
+    return;
+  }
+  await PdfEvidenceViewer.open(context, bytes: bytes, fileName: fileName);
+}
+
 /// Open elk gekozen bestand in zijn eigen tabblad, in de gekozen volgorde; het
 /// laatste blijft het actieve. Eén onleesbaar bestand mag de rest niet
 /// afbreken — dezelfde afspraak als bij sleep-en-neerzetten.
@@ -196,7 +243,13 @@ Future<void> _openPickedPaths(
   // Wacht op de geladen module-stand vóór de melding gekozen wordt: vlak na de
   // start leest de reveal anders nog de ladende default (#1209).
   final importModuleAvailable = await importModuleRevealedWhenReady(ref);
+  if (!context.mounted) return;
   for (final path in paths) {
+    if (p.extension(path).toLowerCase() == '.pdf') {
+      await _openPdfPath(context, path);
+      if (!context.mounted) return;
+      continue;
+    }
     final openResult = await tabs.openFileByPath(
       path,
       selectIndex: single ? selectIndex : null,
@@ -237,6 +290,11 @@ Future<void> _openPickedPaths(
 Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
   final picked = await ref.read(fileServiceProvider).pickDeckFileBytes();
   if (picked == null || !context.mounted) return;
+  if (p.extension(picked.name).toLowerCase() == '.pdf' ||
+      isSupportedPdfEvidence(picked.bytes)) {
+    await _openPdfBytes(context, picked.bytes, picked.name);
+    return;
+  }
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   // Geen extensie-check: de bytes-poort herkent pakketten aan hun zip-kop en

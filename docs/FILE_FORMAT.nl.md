@@ -1918,10 +1918,13 @@ Regels:
 
 Een bevinding wordt opgesteld als een **groep**: een kopkaart plus zijn detailslides
 (beschrijving, reproductie, impact, aanbeveling) en bewijsslides — een
-screenshot (`image`) of een video (`video`), toegevoegd vanuit de bewijssectie van de
-bevindingseditor. Elke slide in de groep draagt dezelfde id en zijn rol — een
-`finding`-getypte kop, plus gewone `bullets`/`image`/`video`-detail- en
-bewijsslides:
+screenshot (`image`), video (`video`) of PDF (`freeMarkdown`), toegevoegd vanuit
+de bewijssectie van de bevindingseditor. PDF-bewijs is bewust een gewone
+Markdown-link (`[rapport](<evidence/rapport.pdf>)`); de oorspronkelijke bytes
+reizen als zijbestand in het pakket en er komen geen PDF-bytes, PDF/A-claim of
+handtekeningstatus in de Markdown. Elke slide in de groep draagt dezelfde id en
+zijn rol — een `finding`-getypte kop, plus gewone
+`bullets`/`image`/`video`/`freeMarkdown`-detail- en bewijsslides:
 
 ```markdown
 <!-- ocideck_finding_id: F-03 -->

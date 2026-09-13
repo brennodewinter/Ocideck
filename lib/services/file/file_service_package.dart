@@ -271,26 +271,14 @@ extension FileServicePackage on FileService {
       return rel;
     }
 
-    final reaching = _packSlides(deck);
-    final slides = <Slide>[];
-    for (final s in reaching) {
-      // Élke afbeelding gaat het archief in, ook een `![…](…)` in de vrije
-      // tekst. Een pakket is bedoeld om weg te geven: wat er niet in zit, ziet
-      // de ontvanger niet. Inpakken is asynchroon en herschrijven niet, dus
-      // eerst elk pad naar zijn plek in het archief, dan de dia in haar geheel.
-      final packed = <String, String>{};
-      for (final path in slideImagePaths(s).toSet()) {
-        final rel = await addAsset(path, 'images');
-        if (rel != null) packed[path] = rel;
-      }
-      final withImages = rewriteSlideImagePaths(s, (path) => packed[path]);
-      slides.add(
-        withImages.copyWith(
-          videoPath: await addAsset(s.videoPath, 'media') ?? s.videoPath,
-          audioPath: await addAsset(s.audioPath, 'media') ?? s.audioPath,
-        ),
-      );
-    }
+    final slides = await _packSlideAssets(
+      deck: deck,
+      archive: archive,
+      added: added,
+      byAbsolutePath: byAbsolutePath,
+      reserve: reserve,
+      addAsset: addAsset,
+    );
 
     // Chart slides link their data through a path inside the JSON block; write
     // that data as its own member under data/ and point the path at it.
@@ -340,6 +328,82 @@ extension FileServicePackage on FileService {
     _assertArchiveWithinBudget(archive, budgetBytes);
 
     return archive;
+  }
+
+  /// Add exact evidence-PDF bytes after containment, size and magic checks.
+  Future<String?> _addPdfEvidenceTo({
+    required String path,
+    required Deck deck,
+    required Archive archive,
+    required Set<String> added,
+    required Map<String, String> byAbsolutePath,
+    required void Function(int) reserve,
+  }) async {
+    if (kIsWeb || deck.projectPath == null) return null;
+    final abs = resolveContainedRealPath(path, deck.projectPath);
+    if (abs == null) return null;
+    final existing = byAbsolutePath[abs];
+    if (existing != null) return existing;
+    final file = File(abs);
+    final size = await file.length();
+    if (size < 5 || size > maxPdfEvidenceBytes) return null;
+    final bytes = Uint8List.fromList(await file.readAsBytes());
+    if (!isSupportedPdfEvidence(bytes)) return null;
+    final rel = _freeArchivePath(added, 'evidence', abs);
+    reserve(bytes.length);
+    archive.add(ArchiveFile(rel, bytes.length, bytes));
+    added.add(rel);
+    byAbsolutePath[abs] = rel;
+    return rel;
+  }
+
+  Future<List<Slide>> _packSlideAssets({
+    required Deck deck,
+    required Archive archive,
+    required Set<String> added,
+    required Map<String, String> byAbsolutePath,
+    required void Function(int) reserve,
+    required Future<String?> Function(String path, String subdir) addAsset,
+  }) async {
+    final slides = <Slide>[];
+    for (final slide in _packSlides(deck)) {
+      final packed = <String, String>{};
+      for (final path in slideImagePaths(slide).toSet()) {
+        final rel = await addAsset(path, 'images');
+        if (rel != null) packed[path] = rel;
+      }
+      final withImages = rewriteSlideImagePaths(slide, (path) => packed[path]);
+      final pdf = PdfEvidenceService.attachmentFromMarkdown(
+        withImages.customMarkdown,
+      );
+      final pdfRel = pdf == null
+          ? null
+          : await _addPdfEvidenceTo(
+              path: pdf.path,
+              deck: deck,
+              archive: archive,
+              added: added,
+              byAbsolutePath: byAbsolutePath,
+              reserve: reserve,
+            );
+      final withEvidence = pdfRel == null
+          ? withImages
+          : withImages.copyWith(
+              customMarkdown: PdfEvidenceService.markdownFor(
+                pdfRel,
+                label: pdf?.label,
+              ),
+            );
+      slides.add(
+        withEvidence.copyWith(
+          videoPath:
+              await addAsset(slide.videoPath, 'media') ?? slide.videoPath,
+          audioPath:
+              await addAsset(slide.audioPath, 'media') ?? slide.audioPath,
+        ),
+      );
+    }
+    return slides;
   }
 
   /// Voeg de thema-CSS als lid `themes/<naam>.css` toe, zodat het pakket ook in

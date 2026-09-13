@@ -667,6 +667,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Foeg skermôfbyldingen, fideo\'s of PDF-bestannen ta as bewiis. Elk bewiisstik krijt in eigen slide fuort nei de befining en giet mei yn de eksport.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A en digitale hantekeningen bliuwe sichtber. OciDeck falidearret de hantekening net.',
   'Logo niet importeren': 'Logo net ymportearje',
   'Logo gevonden': 'Logo fûn',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -4246,8 +4250,6 @@ const _dutchSourceAddFy = {
   'Bewerk deze slide': 'Bewurkje dizze slide',
   'Bewijs verwijderen': 'Bewiis fuortsmite',
   '(nog leeg)': '(noch leech)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Foegje skermôfdrukken of fideo\'s ta as bewiis. Elk bewiis wurdt in eigen slide fuort nei de befining en giet mei yn de eksport.',
   'Uitvoering testen conform standaard': 'Testen neffens de standert',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Te min kontrast mei de eftergrûn — mooglik ûnlêsber.',

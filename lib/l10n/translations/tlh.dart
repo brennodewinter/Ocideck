@@ -1604,6 +1604,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Daq nagh, HaSta ta, PDF ta ghap yIchel \'ach Dochvam \'oSbogh. tu\'lu\'ghach tlha\' Hoch DochvaD latlh much \'ay\' tu\'lu\' \'ej ngeHlu\'DI chellu\'.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A mIw je De\'wI\' qI\'ghom je leghlu\'taH. qI\'ghom lugh \'olbe\' OciDeck.',
   'Logo niet importeren': 'Degh yIche\'Qo\'',
   'Logo gevonden': 'Degh tu\'lu\'',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5135,8 +5139,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Bewerk deze slide': '\'echletHomvam choH',
   'Bewijs verwijderen': '\'ol teq',
   '(nog leeg)': '(chIm)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      '\'ol \'e\' DachelmeH jIH mIlloghmey pagh HaStamey yIchel. finding tlha\' \'ol Hoch \'echletHom mojpu\' \'ej export-Daq chel.',
   'Uitvoering testen conform standaard': 'test poQlu\'bogh',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'rItlh puS — laDlaHbe\'lu\'.',

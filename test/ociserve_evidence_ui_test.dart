@@ -154,18 +154,23 @@ void main() {
       List<EvidenceUpload> evidenceUploads = const [],
     }) async {
       await tester.pumpWidget(
-        MaterialApp(
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            ...GlobalMaterialLocalizations.delegates,
+        ProviderScope(
+          overrides: [
+            ociServeProvider.overrideWith(() => _EvidenceTestNotifier()),
           ],
-          home: Scaffold(
-            body: OciServeEvidence(
-              qualifications: qualifications,
-              evidenceUploads: evidenceUploads,
-              organizationId: 'org',
-              onRefresh: () {},
+          child: MaterialApp(
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+            ],
+            home: Scaffold(
+              body: OciServeEvidence(
+                qualifications: qualifications,
+                evidenceUploads: evidenceUploads,
+                organizationId: 'org',
+                onRefresh: () {},
+              ),
             ),
           ),
         ),
@@ -214,6 +219,7 @@ void main() {
       expect(find.text('Mijn bewijsstukken'), findsOneWidget);
       expect(find.text('cert.pdf'), findsOneWidget);
       expect(find.text('Gecontroleerd'), findsOneWidget);
+      expect(find.text('Openen'), findsOneWidget);
     });
 
     testWidgets('shows rejected upload with reason and next step', (
@@ -239,6 +245,7 @@ void main() {
         find.text('Lever een nieuw of gecorrigeerd bestand aan.'),
         findsOneWidget,
       );
+      expect(find.text('Openen'), findsNothing);
     });
 
     testWidgets('shows portfolio section as unavailable', (tester) async {

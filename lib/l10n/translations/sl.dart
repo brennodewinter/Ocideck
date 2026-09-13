@@ -1627,6 +1627,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Dodajte posnetke zaslona, videoposnetke ali datoteke PDF kot dokaze. Vsak dokaz dobi svoj diapozitiv takoj za ugotovitvijo in je vključen v izvoz.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A in digitalni podpisi ostanejo vidni. OciDeck ne preverja veljavnosti podpisa.',
   'Logo niet importeren': 'Ne uvozi logotipa',
   'Logo gevonden': 'Logotip je najden',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5188,8 +5192,6 @@ const _dutchSourceAddSl = <String, String>{
   'Bewerk deze slide': 'Uredi ta diapozitiv',
   'Bewijs verwijderen': 'Odstrani dokaz',
   '(nog leeg)': '(še prazno)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Dodajte posnetke zaslona ali videoposnetke kot dokaz. Vsak dokaz postane svoj diapozitiv takoj za ugotovitvijo in je vključen v izvoz.',
   'Uitvoering testen conform standaard': 'Testiranje po standardu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Premalo kontrasta z ozadjem — morda neberljivo.',

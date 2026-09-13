@@ -1626,6 +1626,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Lägg till skärmbilder, videor eller PDF-filer som bevis. Varje objekt får en egen bild direkt efter fyndet och tas med i exporten.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A och digitala signaturer förblir synliga. OciDeck validerar inte signaturen.',
   'Logo niet importeren': 'Importera inte logotypen',
   'Logo gevonden': 'Logotyp hittad',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5187,8 +5191,6 @@ const _dutchSourceAddSv = <String, String>{
   'Bewerk deze slide': 'Redigera denna bild',
   'Bewijs verwijderen': 'Ta bort bevis',
   '(nog leeg)': '(fortfarande tom)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Lägg till skärmbilder eller videor som bevis. Varje bevis blir en egen bild direkt efter fyndet och kommer med i exporten.',
   'Uitvoering testen conform standaard': 'Tester enligt standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'För lite kontrast mot bakgrunden — kan bli oläsligt.',

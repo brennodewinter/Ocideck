@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:40fbee4c-46ae-55ea-8111-55bd494a1724",
+  "serialNumber": "urn:uuid:d841a8a6-639b-53ec-8e57-9d486b132852",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-12T20:11:10.955121Z",
+    "timestamp": "2026-09-13T08:28:06.582624Z",
     "tools": {
       "components": [
         {
@@ -4980,6 +4980,174 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/pdfium_dart@0.3.0",
+      "type": "library",
+      "supplier": {
+        "name": "espresso3389",
+        "url": [
+          "https://github.com/espresso3389"
+        ]
+      },
+      "name": "pdfium_dart",
+      "version": "0.3.0",
+      "purl": "pkg:pub/pdfium_dart@0.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ed25295fd2624bbf54b8e6bd3cd3d0fc644412d3d5e79ca2485cb36e65f20eb2"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pdfium_dart/versions/0.3.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pdfium_flutter@0.3.0",
+      "type": "library",
+      "supplier": {
+        "name": "espresso3389",
+        "url": [
+          "https://github.com/espresso3389"
+        ]
+      },
+      "name": "pdfium_flutter",
+      "version": "0.3.0",
+      "purl": "pkg:pub/pdfium_flutter@0.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2b1f27e30d29d0bb1d57a37c351b0cfa605cf5d2334aa565af370fa5b1eba8f4"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pdfium_flutter/versions/0.3.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pdfrx@2.6.1",
+      "type": "library",
+      "supplier": {
+        "name": "espresso3389",
+        "url": [
+          "https://github.com/espresso3389"
+        ]
+      },
+      "name": "pdfrx",
+      "version": "2.6.1",
+      "purl": "pkg:pub/pdfrx@2.6.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5eed06c4318157ea6791666c2ea4b01a35adac554b0aac7ca6b6d0cd80ba8e15"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pdfrx/versions/2.6.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/pdfrx_engine@0.6.0",
+      "type": "library",
+      "supplier": {
+        "name": "espresso3389",
+        "url": [
+          "https://github.com/espresso3389"
+        ]
+      },
+      "name": "pdfrx_engine",
+      "version": "0.6.0",
+      "purl": "pkg:pub/pdfrx_engine@0.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f7b80b9af7d72188cecc15b31a91558d216cb15f97980b24146fd0c36cd6d049"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/pdfrx_engine/versions/0.6.0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/petitparser@7.0.2",
       "type": "library",
       "supplier": {
@@ -5848,6 +6016,48 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/riverpod/versions/3.4.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/rxdart@0.28.0",
+      "type": "library",
+      "supplier": {
+        "name": "ReactiveX",
+        "url": [
+          "https://github.com/ReactiveX"
+        ]
+      },
+      "name": "rxdart",
+      "version": "0.28.0",
+      "purl": "pkg:pub/rxdart@0.28.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5c3004a4a8dbb94bd4bf5412a4def4acdaa12e12f269737a5751369e12d1a962"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/rxdart/versions/0.28.0"
         }
       ],
       "properties": [
@@ -8479,6 +8689,44 @@
       ]
     },
     {
+      "bom-ref": "runtime:pdfium@chromium-7811",
+      "type": "library",
+      "supplier": {
+        "name": "The PDFium Authors",
+        "url": [
+          "https://pdfium.googlesource.com/pdfium/"
+        ]
+      },
+      "name": "PDFium",
+      "version": "144.0.7811.0",
+      "purl": "pkg:generic/pdfium@144.0.7811.0",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause AND Apache-2.0"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://github.com/bblanchon/pdfium-binaries/releases/tag/chromium%2F7811"
+        },
+        {
+          "type": "vcs",
+          "url": "https://pdfium.googlesource.com/pdfium/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "native-runtime"
+        },
+        {
+          "name": "ocideck:note",
+          "value": "Platform-specific runtime bundled by pdfium_dart/pdfium_flutter. The web WASM in pdfrx 2.6.1 has SHA-256 5b2cbb18e9dc361dae375e971c7e75f7306d39b7749ad4fced475579e6a549df; the Darwin XCFramework archive is pinned upstream as 948d9257f53f01cbed74b81bb8adc8758e52ac9390751772de7889026d32d5a1. Other native targets are release-pinned by the upstream build hook."
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:npm/dompurify@3.4.13",
       "type": "library",
       "name": "dompurify",
@@ -8885,6 +9133,7 @@
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",
         "pkg:pub/pdf@3.13.0",
+        "pkg:pub/pdfrx@2.6.1",
         "pkg:pub/plugin_platform_interface@2.1.8",
         "pkg:pub/re_highlight@0.0.3",
         "pkg:pub/shared_preferences@2.5.5",
@@ -8901,6 +9150,7 @@
         "pkg:pub/webview_flutter_web@0.2.3+4",
         "pkg:pub/xml@7.0.1",
         "pkg:pub/yaml@3.1.4",
+        "runtime:pdfium@chromium-7811",
         "sdk:dart@^3.12.0",
         "sdk:flutter@0.0.0",
         "sdk:flutter@3.47.2",
@@ -9923,6 +10173,64 @@
       ]
     },
     {
+      "ref": "pkg:pub/pdfium_dart@0.3.0",
+      "dependsOn": [
+        "pkg:pub/archive@4.0.9",
+        "pkg:pub/code_assets@1.2.1",
+        "pkg:pub/ffi@2.2.0",
+        "pkg:pub/hooks@2.2.0",
+        "pkg:pub/http@1.6.0",
+        "runtime:pdfium@chromium-7811"
+      ]
+    },
+    {
+      "ref": "pkg:pub/pdfium_flutter@0.3.0",
+      "dependsOn": [
+        "pkg:pub/code_assets@1.2.1",
+        "pkg:pub/ffi@2.2.0",
+        "pkg:pub/hooks@2.2.0",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/pdfium_dart@0.3.0",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/pdfrx@2.6.1",
+      "dependsOn": [
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/material_ui@1.2.0",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/path_provider@2.1.6",
+        "pkg:pub/pdfium_flutter@0.3.0",
+        "pkg:pub/pdfrx_engine@0.6.0",
+        "pkg:pub/rxdart@0.28.0",
+        "pkg:pub/synchronized@3.4.1+2",
+        "pkg:pub/url_launcher@6.3.2",
+        "pkg:pub/vector_math@2.4.2",
+        "pkg:pub/web@1.1.1",
+        "pkg:pub/yaml@3.1.4",
+        "sdk:flutter@0.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:pub/pdfrx_engine@0.6.0",
+      "dependsOn": [
+        "pkg:pub/archive@4.0.9",
+        "pkg:pub/collection@1.19.1",
+        "pkg:pub/crypto@3.0.7",
+        "pkg:pub/ffi@2.2.0",
+        "pkg:pub/http@1.6.0",
+        "pkg:pub/image@4.9.2",
+        "pkg:pub/meta@1.19.0",
+        "pkg:pub/path@1.9.1",
+        "pkg:pub/pdfium_dart@0.3.0",
+        "pkg:pub/rxdart@0.28.0",
+        "pkg:pub/synchronized@3.4.1+2",
+        "pkg:pub/vector_math@2.4.2"
+      ]
+    },
+    {
       "ref": "pkg:pub/petitparser@7.0.2",
       "dependsOn": [
         "pkg:pub/collection@1.19.1",
@@ -10091,6 +10399,10 @@
         "pkg:pub/test_api@0.7.12",
         "pkg:pub/uuid@4.6.0"
       ]
+    },
+    {
+      "ref": "pkg:pub/rxdart@0.28.0",
+      "dependsOn": []
     },
     {
       "ref": "pkg:pub/shared_preferences@2.5.5",
@@ -10550,6 +10862,10 @@
     },
     {
       "ref": "font:assets/fonts/RobotoMono-Variable.ttf",
+      "dependsOn": []
+    },
+    {
+      "ref": "runtime:pdfium@chromium-7811",
       "dependsOn": []
     },
     {

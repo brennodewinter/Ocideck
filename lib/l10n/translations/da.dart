@@ -1627,6 +1627,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Tilføj skærmbilleder, videoer eller PDF-filer som dokumentation. Hvert element får sit eget dias umiddelbart efter fundet og medtages i eksporten.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A og digitale signaturer forbliver synlige. OciDeck validerer ikke signaturen.',
   'Logo niet importeren': 'Importér ikke logoet',
   'Logo gevonden': 'Logo fundet',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5186,8 +5190,6 @@ const _dutchSourceAddDa = <String, String>{
   'Bewerk deze slide': 'Rediger dette dias',
   'Bewijs verwijderen': 'Fjern bevis',
   '(nog leeg)': '(stadig tom)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Tilføj skærmbilleder eller videoer som bevis. Hvert bevis bliver sit eget dias lige efter fundet og kommer med i eksporten.',
   'Uitvoering testen conform standaard': 'Test i henhold til standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'For lidt kontrast til baggrunden — kan være ulæseligt.',

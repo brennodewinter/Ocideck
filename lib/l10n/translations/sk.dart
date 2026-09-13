@@ -1633,6 +1633,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Pridajte snímky obrazovky, videá alebo súbory PDF ako dôkazy. Každý dôkaz dostane vlastnú snímku hneď za zistením a zahrnie sa do exportu.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A a digitálne podpisy zostanú viditeľné. OciDeck neoveruje platnosť podpisu.',
   'Logo niet importeren': 'Neimportovať logo',
   'Logo gevonden': 'Logo sa našlo',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5187,8 +5191,6 @@ const _dutchSourceAddSk = <String, String>{
   'Bewerk deze slide': 'Upraviť túto snímku',
   'Bewijs verwijderen': 'Odstrániť dôkaz',
   '(nog leeg)': '(zatiaľ prázdne)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Pridajte snímky obrazovky alebo videá ako dôkaz. Každý dôkaz sa stane vlastnou snímkou hneď za zistením a je súčasťou exportu.',
   'Uitvoering testen conform standaard': 'Testovanie podľa štandardu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Príliš malý kontrast s pozadím — môže byť nečitateľné.',

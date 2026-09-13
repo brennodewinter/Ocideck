@@ -1652,6 +1652,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Προσθέστε στιγμιότυπα οθόνης, βίντεο ή αρχεία PDF ως αποδεικτικά στοιχεία. Κάθε στοιχείο αποκτά τη δική του διαφάνεια αμέσως μετά το εύρημα και περιλαμβάνεται στην εξαγωγή.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'Το PDF/A και οι ψηφιακές υπογραφές παραμένουν ορατά. Το OciDeck δεν επικυρώνει την υπογραφή.',
   'Logo niet importeren': 'Να μην εισαχθεί το λογότυπο',
   'Logo gevonden': 'Βρέθηκε λογότυπο',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5266,8 +5270,6 @@ const _dutchSourceAddEl = <String, String>{
   'Bewerk deze slide': 'Επεξεργασία διαφάνειας',
   'Bewijs verwijderen': 'Αφαίρεση απόδειξης',
   '(nog leeg)': '(ακόμα κενό)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Πρόσθεσε στιγμιότυπα ή βίντεο ως αποδείξεις. Κάθε απόδειξη γίνεται δική της διαφάνεια αμέσως μετά το εύρημα και περιλαμβάνεται στην εξαγωγή.',
   'Uitvoering testen conform standaard': 'Δοκιμές σύμφωνα με το πρότυπο',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',

@@ -664,6 +664,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Añade capturas de pantalla, vídeos o archivos PDF como prueba. Cada elemento tendrá su propia diapositiva justo después del hallazgo y se incluirá en la exportación.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'El PDF/A y las firmas digitales permanecen visibles. OciDeck no valida la firma.',
   'Logo niet importeren': 'No importar el logotipo',
   'Logo gevonden': 'Logotipo encontrado',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -4279,8 +4283,6 @@ const _dutchSourceAddEs = {
   'Bewerk deze slide': 'Editar esta diapositiva',
   'Bewijs verwijderen': 'Eliminar evidencia',
   '(nog leeg)': '(aún vacío)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Añade capturas de pantalla o vídeos como evidencia. Cada evidencia se convierte en su propia diapositiva justo después del hallazgo y se incluye en la exportación.',
   'Uitvoering testen conform standaard': 'Pruebas según el estándar',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contraste insuficiente con el fondo — puede ser ilegible.',

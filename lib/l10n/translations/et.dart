@@ -1620,6 +1620,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Lisage tõenditena ekraanipilte, videoid või PDF-faile. Iga tõend saab kohe leiu järel oma slaidi ja kaasatakse eksporti.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A ja digiallkirjad jäävad nähtavaks. OciDeck ei valideeri allkirja.',
   'Logo niet importeren': 'Ära impordi logo',
   'Logo gevonden': 'Logo leitud',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5179,8 +5183,6 @@ const _dutchSourceAddEt = <String, String>{
   'Bewerk deze slide': 'Muuda seda slaidi',
   'Bewijs verwijderen': 'Eemalda tõend',
   '(nog leeg)': '(veel tühi)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Lisa tõendiks ekraanipilte või videoid. Iga tõend saab kohe leiu järel oma slaidi ja kaasatakse eksporti.',
   'Uitvoering testen conform standaard': 'Testimine vastavalt standardile',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Liiga väike kontrast taustaga — võib olla loetamatu.',

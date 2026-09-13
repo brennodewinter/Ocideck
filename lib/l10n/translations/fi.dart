@@ -1627,6 +1627,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Lisää kuvakaappauksia, videoita tai PDF-tiedostoja todisteiksi. Jokainen todiste saa oman dian heti havainnon jälkeen ja sisältyy vientiin.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A ja digitaaliset allekirjoitukset pysyvät näkyvissä. OciDeck ei vahvista allekirjoitusta.',
   'Logo niet importeren': 'Älä tuo logoa',
   'Logo gevonden': 'Logo löytyi',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5192,8 +5196,6 @@ const _dutchSourceAddFi = <String, String>{
   'Bewerk deze slide': 'Muokkaa tätä diaa',
   'Bewijs verwijderen': 'Poista todiste',
   '(nog leeg)': '(vielä tyhjä)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Lisää kuvakaappauksia tai videoita todisteeksi. Jokainen todiste tulee omaksi diakseen heti löydöksen jälkeen ja on mukana viennissä.',
   'Uitvoering testen conform standaard': 'Testaus standardin mukaan',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',

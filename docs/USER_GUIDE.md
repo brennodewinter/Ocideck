@@ -4044,8 +4044,12 @@ else.
   checklist(s) covering its scope object; picking one shows the test id as a chip
   on the finding card and marks that checklist row as an anomaly linked to the
   finding (changing or clearing the choice moves or removes the link). The
-  finding editor also has an **Bewijs (Evidence)** section: **Screenshot
-  toevoegen** and **Video toevoegen** attach a screenshot or a video as evidence.
+  finding editor also has a **Bewijs (Evidence)** section: **Screenshot
+  toevoegen**, **Video toevoegen**, and the PDF file button attach a screenshot,
+  a video, or a PDF as evidence. A PDF remains an ordinary Markdown link to the
+  original file under `evidence/`; selecting its eye button opens the read-only
+  in-app viewer. PDF/A and visible digital-signature appearances are rendered,
+  but OciDeck does not validate the signature's certificate or trust chain.
   Each piece of evidence becomes its own slide right after the finding (part of
   the same finding group, so it moves and exports with the finding); the section
   lists them with a thumbnail and lets you jump to or remove each one. Give the

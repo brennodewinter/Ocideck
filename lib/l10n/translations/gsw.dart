@@ -1630,6 +1630,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Füeg Bildschirmfotos, Videos oder PDF-Dateie als Nochwiis dezue. Jede Nochwiis chunnt uf e eigeti Folie direkt nach em Befund und wird mitexportiert.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A und digitali Unterschrifte bliibed sichtbar. OciDeck prüeft d Unterschrift nöd.',
   'Logo niet importeren': 'Logo nöd importiere',
   'Logo gevonden': 'Logo gfunde',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5202,8 +5206,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Bewerk deze slide': 'Die Folie bearbeite',
   'Bewijs verwijderen': 'Beweis entferne',
   '(nog leeg)': '(no läär)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Füeg Screenshots oder Videos as Beweis zue. Jede Beweis wird e eigeni Folie grad nach em Befund und chunt im Export mit.',
   'Uitvoering testen conform standaard': 'Tests gmäss Standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',
