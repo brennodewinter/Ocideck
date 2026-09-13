@@ -1657,6 +1657,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Cuir gabhálacha scáileáin, físeáin nó comhaid PDF leis mar fhianaise. Faigheann gach píosa fianaise a shleamhnán féin díreach i ndiaidh an toraidh agus cuirtear san easpórtáil é.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'Fanann PDF/A agus sínithe digiteacha infheicthe. Ní bhailíochtaíonn OciDeck an síniú.',
   'Logo niet importeren': 'Ná iompórtáil an lógó',
   'Logo gevonden': 'Aimsíodh lógó',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5265,8 +5269,6 @@ const _dutchSourceAddGa = <String, String>{
   'Bewerk deze slide': 'Cuir an sleamhnán seo in eagar',
   'Bewijs verwijderen': 'Bain an fhianaise',
   '(nog leeg)': '(folamh fós)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Cuir gabhálacha scáileáin nó físeáin leis mar fhianaise. Éiríonn gach píosa fianaise ina sleamhnán féin díreach i ndiaidh na fionnachtana agus cuirtear san easpórtáil é.',
   'Uitvoering testen conform standaard': 'Tástáil de réir an chaighdeáin',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',

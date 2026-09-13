@@ -1733,8 +1733,6 @@ const _dutchSourceTr = {
   'Bewerk deze slide': 'Bu slaydı düzenle',
   'Bewijs verwijderen': 'Kanıtı kaldır',
   '(nog leeg)': '(henüz boş)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Kanıt olarak ekran görüntüleri veya videolar ekleyin. Her kanıt, bulgunun hemen ardından kendi slaydı olarak yer alır ve dışa aktarmaya dâhil edilir.',
   'Uitvoering testen conform standaard':
       'Testlerin standarda uygun yürütülmesi',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
@@ -2544,6 +2542,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Kanıt olarak ekran görüntüleri, videolar veya PDF dosyaları ekleyin. Her kanıt, bulgunun hemen ardından kendi slaydında yer alır ve dışa aktarmaya dâhil edilir.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A ve dijital imzalar görünür kalır. OciDeck imzayı doğrulamaz.',
   'Logo niet importeren': 'Logoyu içe aktarma',
   'Logo gevonden': 'Logo bulundu',
   'Dit logo komt ook voor in de stijl {naam}.':

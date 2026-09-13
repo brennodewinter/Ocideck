@@ -1642,6 +1642,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Adde imagines scrinii, pelliculas vel documenta PDF ut probationes. Quaeque probatio propriam paginam statim post inventum accipit atque exportatur.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A et subscriptiones digitales visibiles manent. OciDeck subscriptionem non comprobat.',
   'Logo niet importeren': 'Insigne ne importa',
   'Logo gevonden': 'Insigne inventum',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5206,8 +5210,6 @@ const _dutchSourceAddLa = <String, String>{
   'Bewerk deze slide': 'Hanc paginam recensere',
   'Bewijs verwijderen': 'Documentum removere',
   '(nog leeg)': '(adhuc vacuum)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Imagines screen aut pelliculas ut documenta adde. Quodque documentum fit pagina propria statim post inventum et in exportatione includitur.',
   'Uitvoering testen conform standaard': 'Probationes secundum normam',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',

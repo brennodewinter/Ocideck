@@ -1634,6 +1634,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Pridėkite ekrano kopijas, vaizdo įrašus arba PDF failus kaip įrodymus. Kiekvienam įrodymui skiriama atskira skaidrė iškart po radinio ir jis įtraukiamas į eksportą.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A ir skaitmeniniai parašai lieka matomi. OciDeck netikrina parašo galiojimo.',
   'Logo niet importeren': 'Neimportuoti logotipo',
   'Logo gevonden': 'Rastas logotipas',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5201,8 +5205,6 @@ const _dutchSourceAddLt = <String, String>{
   'Bewerk deze slide': 'Redaguoti šią skaidrę',
   'Bewijs verwijderen': 'Pašalinti įrodymą',
   '(nog leeg)': '(dar tuščia)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Pridėkite ekrano nuotraukų arba vaizdo įrašų kaip įrodymus. Kiekvienas įrodymas tampa atskira skaidre iškart po radinio ir įtraukiamas į eksportą.',
   'Uitvoering testen conform standaard': 'Testavimas pagal standartą',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Per mažas kontrastas su fonu — gali būti neįskaitoma.',

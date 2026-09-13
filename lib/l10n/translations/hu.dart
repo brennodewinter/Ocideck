@@ -1629,6 +1629,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Adjon hozzá képernyőképeket, videókat vagy PDF-fájlokat bizonyítékként. Minden bizonyíték külön diát kap közvetlenül a megállapítás után, és bekerül az exportba.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'A PDF/A és a digitális aláírások láthatók maradnak. Az OciDeck nem ellenőrzi az aláírást.',
   'Logo niet importeren': 'Ne importálja a logót',
   'Logo gevonden': 'Logó található',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5206,8 +5210,6 @@ const _dutchSourceAddHu = <String, String>{
   'Bewerk deze slide': 'Dia szerkesztése',
   'Bewijs verwijderen': 'Bizonyíték eltávolítása',
   '(nog leeg)': '(még üres)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Adj hozzá képernyőképeket vagy videókat bizonyítékként. Minden bizonyíték külön diává válik közvetlenül a megállapítás után, és bekerül az exportba.',
   'Uitvoering testen conform standaard': 'Tesztelés a szabvány szerint',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',

@@ -1107,6 +1107,13 @@ the existing rails rather than adding a parallel stack:
 - **Audit dossier** — `file/file_service_dossier.dart` reuses the AES-256
   package builder to bundle the sealed report, its evidence and the hash tables
   into one encrypted `.ocideck` archive plus an `AUDIT_DOSSIER.md` index.
+- **PDF evidence reader** — a PDF attached to a finding remains a standard
+  Markdown link on a `freeMarkdown` evidence slide. `PdfEvidenceService`
+  validates the magic bytes and 64 MiB ceiling, enforces project containment and
+  preserves the exact sidecar bytes in packages; `PdfEvidenceViewer` renders
+  those local bytes on-device through the open-source PDFium-based `pdfrx`
+  package. The reader displays PDF/A documents and visible signature appearances
+  but makes no conformance, certificate or trust-chain decision.
 - **Optional AI** — a shared, off-by-default backend (`services/ai_*`) drafts
   finding text and image alt-text behind the outbound-privacy consent; drafts are
   marked `ocideck_ai_assisted` and block sealing until a human reviews them. The

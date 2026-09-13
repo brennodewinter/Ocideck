@@ -1941,10 +1941,13 @@ Rules:
 
 A finding is authored as a **group**: a header card plus its detail slides
 (description, reproduction, impact, recommendation) and evidence slides — a
-screenshot (`image`) or a video (`video`), added from the finding editor's
-evidence section. Every slide in the group carries the same id and its role — a
-`finding`-typed header, plus ordinary `bullets`/`image`/`video` detail and
-evidence slides:
+screenshot (`image`), video (`video`) or PDF (`freeMarkdown`), added from the
+finding editor's evidence section. PDF evidence is deliberately just a standard
+Markdown link (`[report](<evidence/report.pdf>)`); the original bytes travel as
+a sidecar in the package and no PDF bytes, PDF/A claim or signature status enter
+the Markdown. Every slide in the group carries the same id and its role — a
+`finding`-typed header, plus ordinary `bullets`/`image`/`video`/`freeMarkdown`
+detail and evidence slides:
 
 ```markdown
 <!-- ocideck_finding_id: F-03 -->

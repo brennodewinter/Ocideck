@@ -666,6 +666,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Añadí screenshot, video òf archivo PDF komo prueba. Kada piesa di prueba ta haña un slide propio djis despues di e hallazgo i ta bai den e eksportashon.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A i firmannan digital ta keda visibel. OciDeck no ta validá e firma.',
   'Logo niet importeren': 'No importá e logo',
   'Logo gevonden': 'Logo hañá',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -4263,8 +4267,6 @@ const _dutchSourceAddPap = {
   'Bewerk deze slide': 'Editá e slide aki',
   'Bewijs verwijderen': 'Kita prueba',
   '(nog leeg)': '(ainda bashí)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Añadí screenshot òf video komo prueba. Kada prueba ta bira un slide propio djis despues di e finding i ta bai den e eksportashon.',
   'Uitvoering testen conform standaard': 'Testnan konforme standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Muy poko kontraste ku e fondo — kisas ilegibel.',

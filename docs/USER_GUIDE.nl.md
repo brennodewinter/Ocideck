@@ -4142,7 +4142,12 @@ ongewijzigd blijft.
   op de bevindingskaart en markeert die checklistrij als een afwijking gekoppeld aan de
   bevinding (de keuze wijzigen of wissen verplaatst of verwijdert de koppeling). De
   bevindingsbewerker heeft ook een sectie **Bewijs (Evidence)**: **Screenshot
-  toevoegen** en **Video toevoegen** hangen een screenshot of een video als bewijs aan.
+  toevoegen**, **Video toevoegen** en de PDF-bestandsknop hangen een screenshot,
+  video of PDF als bewijs aan. Een PDF blijft een gewone Markdown-link naar het
+  oorspronkelijke bestand onder `evidence/`; met de oogknop opent u de
+  alleen-lezen viewer in OciDeck. PDF/A en zichtbare digitale handtekeningen
+  worden weergegeven, maar OciDeck controleert het certificaat en de
+  vertrouwensketen van de handtekening niet.
   Elk bewijsstuk wordt een eigen slide direct na de bevinding (onderdeel van
   dezelfde bevindingsgroep, zodat het meebeweegt en exporteert met de bevinding); de sectie
   somt ze op met een miniatuur en laat je naar elk springen of het verwijderen. Geef

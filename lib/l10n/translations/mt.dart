@@ -1645,6 +1645,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Żid screenshots, vidjows jew fajls PDF bħala evidenza. Kull biċċa evidenza jkollha slide tagħha eżatt wara s-sejba u tiġi inkluża fl-esportazzjoni.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A u l-firem diġitali jibqgħu viżibbli. OciDeck ma jivvalidax il-firma.',
   'Logo niet importeren': 'Timportax il-logo',
   'Logo gevonden': 'Instab logo',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5253,8 +5257,6 @@ const _dutchSourceAddMt = <String, String>{
   'Bewerk deze slide': 'Editja din is-slide',
   'Bewijs verwijderen': 'Neħħi l-evidenza',
   '(nog leeg)': '(għadu vojt)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Żid screenshots jew vidjows bħala evidenza. Kull biċċa evidenza ssir slide għaliha eżatt wara s-sejba u tiddaħħal fl-esportazzjoni.',
   'Uitvoering testen conform standaard': 'Ittestjar skont l-istandard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',

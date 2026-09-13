@@ -10,6 +10,7 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- PDF-, PDF/A- en zichtbaar ondertekend bewijs kan lokaal in OciDeck worden bekeken en vanuit gecontroleerde OciServe-bewijskaarten worden geopend, met een open-source, lokale renderer en zonder een niet-uitgevoerde handtekeningcontrole te suggereren.
 - OciServe-lessen worden per afspeelsessie met een nieuw AES-256-pakket en een tijdelijke sleutel geopend en bij het sluiten lokaal opgeruimd.
 - Een aparte formele examenclient toont alleen de huidige persoonlijke vraag, gebruikt challenge- en revisiegebonden antwoorden en benoemt de noodzaak van menselijk toezicht.
 

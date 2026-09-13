@@ -1625,6 +1625,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Pievienojiet ekrānuzņēmumus, videoklipus vai PDF failus kā pierādījumus. Katrs pierādījums iegūst savu slaidu uzreiz pēc atraduma un tiek iekļauts eksportā.',
+  'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
+      'PDF/A un digitālie paraksti paliek redzami. OciDeck nepārbauda paraksta derīgumu.',
   'Logo niet importeren': 'Neimportēt logotipu',
   'Logo gevonden': 'Atrasts logotips',
   'Dit logo komt ook voor in de stijl {naam}.':
@@ -5187,8 +5191,6 @@ const _dutchSourceAddLv = <String, String>{
   'Bewerk deze slide': 'Rediģēt šo slaidu',
   'Bewijs verwijderen': 'Noņemt pierādījumu',
   '(nog leeg)': '(vēl tukšs)',
-  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
-      'Pievienojiet ekrānuzņēmumus vai videoklipus kā pierādījumus. Katrs pierādījums kļūst par atsevišķu slaidu tūlīt pēc konstatējuma un tiek iekļauts eksportā.',
   'Uitvoering testen conform standaard': 'Testēšana saskaņā ar standartu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',

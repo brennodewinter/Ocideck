@@ -730,6 +730,21 @@ platform signing API), or a format the user's own organisation verifies. Not
 because the cryptography got easier — it is easy already — but because the
 sovereignty cost is the reason, and only that cost changing changes the answer.
 
+### Viewing signed PDF/PDF-A evidence
+
+The evidence reader does not change that boundary. It accepts only a bounded
+local byte source (PDF magic bytes, at most 64 MiB), resolves project files with
+real-path/symlink containment and renders them on-device. A packaged PDF remains
+byte-identical. OciServe evidence is fetched only after the server reports the
+upload as `clean`; it is not written to the deck or a shared application cache.
+The native PDFium parser is nevertheless an untrusted-document boundary and
+must stay current through the dependency/SBOM process.
+
+A visible signature panel or appearance in a PDF is document content, not a
+successful verification. The interface therefore says explicitly that OciDeck
+does not validate PDF/A conformance, the CMS signature, certificate chain,
+revocation or signer identity, and it never shows a trusted/valid badge.
+
 ## 13. Key management
 
 *Added 2026-07-22.* Four kinds of secret exist. None of them is a key OciDeck
