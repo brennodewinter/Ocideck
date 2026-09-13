@@ -536,11 +536,10 @@ void _assertArchiveWithinBudget(Archive archive, int budgetBytes) {
   }
 }
 
-
-
 /// Maak van een deck-titel een veilige bestandsnaam-stam. Gedeelde
 /// sanitizer uit `lib/utils/safe_filename.dart`; valt terug op `presentatie`.
-String _safeName(String title) => sanitizeFilename(title, fallback: 'presentatie');
+String _safeName(String title) =>
+    sanitizeFilename(title, fallback: 'presentatie');
 
 /// Sanitize a deck-supplied theme name before it becomes a file name. The
 /// `theme:` front-matter value is attacker-controlled, so `../` and other

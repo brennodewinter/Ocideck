@@ -245,51 +245,6 @@ class SecretStore {
     }
   }
 
-  /// Keychain key for a Matrix access token, namespaced and keyed on the
-  /// homeserver + user id so two accounts (or a WebDAV/git entry on the same
-  /// host) never collide. The token authenticates the collaboration session
-  /// (`docs/design/SELF_ENCRYPTED_RELAY.md` §8).
-  static String matrixTokenKey(String homeserver, String userId) {
-    final normalized = homeserver.trim().replaceAll(RegExp(r'/+$'), '');
-    return 'matrix_token::$normalized::${userId.trim()}';
-  }
-
-  Future<void> writeMatrixToken(
-    String homeserver,
-    String userId,
-    String token,
-  ) async {
-    _requireStorage('writeMatrixToken');
-    try {
-      await _storage.write(
-        key: matrixTokenKey(homeserver, userId),
-        value: token,
-      );
-    } catch (e) {
-      logError('SecretStore.writeMatrixToken: keychain write failed', e);
-      rethrow;
-    }
-  }
-
-  Future<String?> readMatrixToken(String homeserver, String userId) async {
-    if (!_canStore) return null;
-    try {
-      return await _storage.read(key: matrixTokenKey(homeserver, userId));
-    } catch (e) {
-      logError('SecretStore.readMatrixToken: keychain read failed', e);
-      return null;
-    }
-  }
-
-  Future<void> deleteMatrixToken(String homeserver, String userId) async {
-    if (!_canStore) return;
-    try {
-      await _storage.delete(key: matrixTokenKey(homeserver, userId));
-    } catch (e) {
-      logWarning('SecretStore.deleteMatrixToken: keychain delete failed', e);
-    }
-  }
-
   /// Keychain key for an XMPP account password, keyed on the WebSocket endpoint +
   /// bare JID so two accounts/servers never collide (F2, `NATIVE_CALLS.md` §5).
   /// The password authenticates the XMPP stream (SASL); it never touches prefs.

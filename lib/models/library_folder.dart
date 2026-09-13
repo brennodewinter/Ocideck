@@ -29,9 +29,9 @@ class LibraryFolder {
   /// Lees een lijst terug; een onleesbare waarde levert een lege lijst op, en
   /// items zonder pad vallen weg (een bibliotheek zonder map is zinloos).
   static List<LibraryFolder> decodeList(String? json) => decodeJsonList(
-        json,
-        LibraryFolder.fromJson,
-        keep: (f) => f.path.isNotEmpty,
-        label: 'LibraryFolder.decodeList',
-      );
+    json,
+    LibraryFolder.fromJson,
+    keep: (f) => f.path.isNotEmpty,
+    label: 'LibraryFolder.decodeList',
+  );
 }

@@ -139,23 +139,23 @@ String _inlineXhtml(String text) => md
 
 String _renderTimelineXhtml(DocumentTimeline timeline) {
   // De tijdlijn wordt als gewone tabel gerenderd; de marker blijft als
-      // commentaar erboven staan voor wie de bron kent.
-      final buf = StringBuffer('<!-- timeline -->\n');
-      buf.writeln('<table class="ocideck-timeline">');
-      buf.writeln('<thead><tr>');
-      for (final header in timeline.headers) {
-        buf.write('<th>${xmlEscape(header)}</th>');
-      }
-      buf.writeln('</tr></thead>');
-      buf.writeln('<tbody>');
-      for (final event in timeline.events) {
-        buf.write('<tr>');
-        buf.write('<td>${_inlineXhtml(event.marker)}</td>');
-        buf.write('<td>${_inlineXhtml(event.event)}</td>');
-        buf.write('<td>${_inlineXhtml(event.metadata ?? '')}</td>');
-        buf.writeln('</tr>');
-      }
-      buf.writeln('</tbody></table>');
+  // commentaar erboven staan voor wie de bron kent.
+  final buf = StringBuffer('<!-- timeline -->\n');
+  buf.writeln('<table class="ocideck-timeline">');
+  buf.writeln('<thead><tr>');
+  for (final header in timeline.headers) {
+    buf.write('<th>${xmlEscape(header)}</th>');
+  }
+  buf.writeln('</tr></thead>');
+  buf.writeln('<tbody>');
+  for (final event in timeline.events) {
+    buf.write('<tr>');
+    buf.write('<td>${_inlineXhtml(event.marker)}</td>');
+    buf.write('<td>${_inlineXhtml(event.event)}</td>');
+    buf.write('<td>${_inlineXhtml(event.metadata ?? '')}</td>');
+    buf.writeln('</tr>');
+  }
+  buf.writeln('</tbody></table>');
   return buf.toString();
 }
 
@@ -445,4 +445,3 @@ enum _Ctx {
 
 /// XML-escape voor tekstinhoud: & < >. De markdown-package met
 /// `encodeHtml: true` doet dit al voor de meeste tekst, maar tijdlijn-headers
-

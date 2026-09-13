@@ -260,4 +260,3 @@ int _findEocd(Uint8List data) {
   }
   return -1;
 }
-

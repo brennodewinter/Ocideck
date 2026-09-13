@@ -98,11 +98,11 @@ class RecentFile {
   /// Lees een lijst terug; een onleesbare waarde levert een lege lijst op
   /// (de recente lijst is comfort, geen data om op te breken).
   static List<RecentFile> decodeList(String? json) => decodeJsonList(
-        json,
-        RecentFile.fromJson,
-        keep: (f) => f.path.isNotEmpty,
-        label: 'RecentFile.decodeList',
-      );
+    json,
+    RecentFile.fromJson,
+    keep: (f) => f.path.isNotEmpty,
+    label: 'RecentFile.decodeList',
+  );
 
   /// Migratie van de oude opslagvorm (alleen paden, geen metadata).
   static List<RecentFile> fromLegacyPaths(List<String> paths) => [

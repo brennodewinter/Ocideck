@@ -7,8 +7,7 @@ import 'log.dart';
 String encodeJsonList<T>(
   List<T> list,
   Map<String, Object?> Function(T) toJson,
-) =>
-    jsonEncode([for (final x in list) toJson(x)]);
+) => jsonEncode([for (final x in list) toJson(x)]);
 
 /// Lees een lijst terug die met [encodeJsonList] is geschreven. Een onleesbare
 /// waarde levert een lege lijst op; losse onleesbare items vallen weg via

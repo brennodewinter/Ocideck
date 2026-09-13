@@ -381,7 +381,6 @@ class _NavHeading {
 
 String _stripTags(String s) => s.replaceAll(RegExp(r'<[^>]*>'), '');
 
-
 /// Voor tests: de EPUB-bytes bouwen met een vaste timestamp.
 @visibleForTesting
 Future<Uint8List> buildDocumentExportEpubForTesting(

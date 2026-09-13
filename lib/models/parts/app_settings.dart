@@ -328,11 +328,6 @@ class AppSettings {
   /// een API-sleutel (die staat in de keychain).
   final AiSettings aiSettings;
 
-  /// Het app-globale Matrix-account voor realtime samenwerken, of `null` als er
-  /// geen is ingesteld. Bevat nooit het access-token (dat staat in de keychain,
-  /// zie `SecretStore`) — alleen de niet-geheime homeserver/user/device-gegevens.
-  final MatrixServer? matrixAccount;
-
   /// Instellingen voor de optionele LibrePlan-connector. Standaard uit; bevat
   /// nooit het wachtwoord (dat staat in de keychain).
   final LibreplanSettings libreplanSettings;
@@ -381,7 +376,6 @@ class AppSettings {
     this.allowCveLookup = false,
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
     this.aiSettings = const AiSettings(),
-    this.matrixAccount,
     this.libreplanSettings = const LibreplanSettings(),
   });
 
@@ -479,8 +473,6 @@ class AppSettings {
     bool? allowCveLookup,
     String? cveApiBaseUrl,
     AiSettings? aiSettings,
-    MatrixServer? matrixAccount,
-    bool clearMatrixAccount = false,
     LibreplanSettings? libreplanSettings,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
@@ -568,9 +560,6 @@ class AppSettings {
       allowCveLookup: allowCveLookup ?? this.allowCveLookup,
       cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,
       aiSettings: aiSettings ?? this.aiSettings,
-      matrixAccount: clearMatrixAccount
-          ? null
-          : (matrixAccount ?? this.matrixAccount),
       libreplanSettings: libreplanSettings ?? this.libreplanSettings,
     );
   }

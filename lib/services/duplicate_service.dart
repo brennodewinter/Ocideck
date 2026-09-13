@@ -39,8 +39,7 @@ class DuplicateInfo<T> {
 /// andere aantekeningen eroverheen.
 class DuplicateService {
   /// SHA-256 over [bytes], als hex-string.
-  static String contentHash(List<int> bytes) =>
-      sha256Hex(bytes);
+  static String contentHash(List<int> bytes) => sha256Hex(bytes);
 
   /// Groepeer scan-treffers op identieke bestandsinhoud. Leest alléén
   /// bestanden waarvan de grootte meer dan eens voorkomt (alleen even grote

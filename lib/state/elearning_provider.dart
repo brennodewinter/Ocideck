@@ -13,9 +13,10 @@ import 'module_toggle.dart';
 /// existing installs.
 const elearningEnabledKey = 'elearningModuleEnabled';
 
-final elearningProvider = NotifierProvider<ElearningNotifier, ModuleToggleState>(
-  ElearningNotifier.new,
-);
+final elearningProvider =
+    NotifierProvider<ElearningNotifier, ModuleToggleState>(
+      ElearningNotifier.new,
+    );
 
 /// Whether the switch is on.
 final elearningEnabledProvider = Provider<bool>((ref) {

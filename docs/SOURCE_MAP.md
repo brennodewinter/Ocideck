@@ -149,7 +149,6 @@ branches enriched the same line and the merge kept both copies.
 - `storage_connection.dart` — `StorageConnection` (sealed: `LocalConnection`/`WebdavConnection`/`S3Connection`/`GitConnection`) — the single notion of "a place decks live". One list, user-ordered, replacing the old split between a libraries list and one-of-each network source. Each carries a stable `id` so renaming a connection or fixing a typo in its URL never detaches an open deck from its origin; secrets stay in the keychain, keyed on server + user, so two connections to one account share one password.
 - `s3_settings.dart` — `S3Bucket` for S3 source configuration: endpoint, region, bucket, access key id, prefix and addressing style. The endpoint is a free field rather than a list of AWS regions because the self-hosted (MinIO) and European providers are the interesting case; `S3AddressingStyle` decides whether the bucket goes in the host name (AWS) or the path (most self-hosted endpoints). `uriForKey` encodes the path with the strict AWS rules instead of leaving it to `Uri` — S3 compares our signature against a canonical form derived from the path it received, so what goes over the wire must match what was signed byte for byte.
 - `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` (the origin carries the `etag` a save is checked against, plus the `connectionId` that sends a save back to the connection it came from) for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
-- `matrix_settings.dart` — `MatrixServer`: the non-secret config of a Matrix collaboration account (homeserver origin, user id, device id, `trustedInternal`/`pinnedCertSha256` — the same SSRF posture as WebDAV), persisted in prefs while the access token and device seeds go to `SecretStore` (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §8). `participantId` is `userId:deviceId`. Not a `StorageConnection` — a homeserver is a rendez-vous, not deck storage (P2).
 - `git_settings.dart` — `GitProvider`/`GitRepoConfig`/`GitRepoLayout`/`GitOrigin`: one git repository as a deck source. Deliberately mirrors `webdav_settings.dart` — the git backend *is* the WebDAV source with version control on top, so the same shape, the same SSRF opt-in, and the same split between configuration and secret (the token lives in the keychain, keyed on `baseUrl` + `owner`).
 - `xmpp_settings.dart` — `XmppSettings`: one XMPP account for the native-calls spine (`NATIVE_CALLS.md` §5), mirroring `MatrixServer` — the `wss://` endpoint, the JID, the `trustedInternal` SSRF opt-in and an optional pinned cert. Getters derive `endpoint`/`host`/`localpart`/`domain`/`isAnonymous`/`isConfigured`. Configuration only; the password lives in the keychain (`SecretStore.xmppPasswordKey`).
 - `library_folder.dart` — `LibraryFolder`: one storage location in the user's library, a free name plus a path on disk. The name lets the user tell two folders apart without reading the whole path; it doubles as the starting point for open/save and as the search root for the presentation and image libraries.
@@ -647,44 +646,8 @@ when the owner returns.
   `LoopbackTransport`. A dumb pipe: it carries formed events between participants
   and neither orders nor versions them (that is the session's job). `LockEvent`
   carries a `forced` flag for the authority's `ForceUnlock` (§5.4).
-- `matrix_client.dart` — the thin, pure-Dart Matrix client-server API client
-  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §7.1, phase P-B): login/register
-  (surfacing User-Interactive Auth typed via `MatrixUiaRequired`), `/sync` (reduced
-  to the timeline/state/to-device events the relay reads, with `since` resume),
-  send timeline/state/to-device events, room create/invite/join, logout. It knows
-  nothing of ops, crypto or authority — it is the carriage `MatrixRelayTransport`
-  (P-C) will ride on. Egress is an injected `MatrixHttpTransport` (mirroring the AI
-  backend's `AiHttpTransport`), so this file opens no socket — the pinned/browser
-  transport is built at the wiring seam (P-D) — which keeps it off
-  `network_sink_guard_test` and fully testable against an in-Dart fake homeserver.
-  It refuses to send its bearer token in cleartext to a non-loopback host and maps
-  every non-2xx (incl. a refused 3xx) to a typed `MatrixException`. Pure Dart, so
-  it runs under `flutter test` and on web.
-- `matrix_http_transport.dart` — the conditional-export façade that picks the
-  production `MatrixHttpTransport` for `MatrixClient`: `matrix_http_transport_io.dart`
-  on desktop (an SSRF-pinned `dart:io` client — https-only so the token never goes
-  cleartext, homeserver host resolved + refused if internal, socket pinned against a
-  DNS rebind, redirects blocked, body capped; the only raw `HttpClient` in the
-  collab layer, on the network-sink allowlist) and `matrix_http_transport_web.dart`
-  on web (a browser-fetch client where the browser sandbox + page CSP are the host
-  gate). `createMatrixHttpTransport(MatrixServer)` builds the right one (§11, P-D).
-- `matrix_relay_transport.dart` — the realtime `CollabTransport` over a Matrix room
-  used as an encrypted relay (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §7,
-  phase P-C). Composes `MatrixClient` (carriage, P-B) and `CollabCrypto` (seal/open,
-  P-A) behind the same seam `LoopbackTransport`/`WebdavAsyncTransport` implement, so
-  `CollabSession` drives it unchanged — only now events travel sealed through a
-  homeserver that sees ciphertext (P4). `sendOp`/`setLock` seal and PUT; `syncOnce`
-  pulls the next batch, drops own sends (by `sender_device`), opens the rest and
-  emits to the op/lock streams. Ordering is Matrix's canonical order (§6.2), so no
-  sequence bookkeeping. Fail-closed: a malformed/forged/un-openable event is logged
-  and dropped, never applied. `resolvePeer` maps a sender device to its keys
-  (backed by room device-state in P-D). Key establishment and presence handover are
-  P-D/P-E; this carries the op/lock data plane with keys the session already holds.
-  Two optional hooks (`onSystemEvent`, `onToDevice`) let the single sync loop feed
-  non-op/lock room state and to-device messages to the key exchange (P-D).
 - `collab_device_directory.dart` — the protocol-neutral device directory
-  (design: `docs/design/XMPP_COLLAB_TRANSPORT.md` §5 brick 8, §7), extracted from
-  `matrix_key_exchange.dart` so the Matrix and future XMPP key exchanges share one
+  (design: `docs/design/XMPP_COLLAB_TRANSPORT.md` §5 brick 8, §7), the
   verified, pinned and capped peer-key store. `CollabDeviceDirectory` ingests
   `DevicePublicKeys` (rejecting any whose identity→agreement binding does not
   verify — §5.3), pins on first use (a known deviceId's identity fingerprint may
@@ -696,77 +659,6 @@ when the owner returns.
   string the transport supplies (a Matrix user id, an XMPP room/nick).
   `devicesForAddress` resolves the candidate sender devices for a blinded
   key-share (§5.1 N3 — the wrap carries no cleartext sender).
-- `matrix_key_exchange.dart` — establishes the session's keys over the room
-  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §4.3, §8, phase P-D), turning the
-  relay from "keys pre-shared" into "keys established over the wire". Publishes this
-  device's public keys as `nl.ocideck.device` room state; `CollabDeviceDirectory`
-  ingests peers' device state (rejecting any whose identity→agreement binding does
-  not verify — the relay-key-substitution defence, §5.3) and backs the transport's
-  `resolvePeer`; the authority `distributeEpoch`s the epoch key to each member via
-  an encrypted to-device key-share (the wrap is recipient-blinded, §5.1 N3 — no
-  cleartext `to`/`from` on the wire), and a member installs the one addressed to
-  it — the sender is resolved from the to-device event via
-  `devicesForAddress`, and `installEpochKey` trial-verifies the signature against
-  each candidate. The crypto (wrap/sign/unwrap) is `CollabCrypto`'s; this is only
-  the Matrix plumbing. `handleSystemEvent`/`handleToDevice` wire to the transport
-  hooks.
-- `matrix_snapshot.dart` — delivers the session baseline over Matrix (design:
-  `docs/design/SELF_ENCRYPTED_RELAY.md` §6.3, phase P-D). A `CollabSnapshot` is
-  sealed once (its AEAD tag covers the whole baseline) and then chunked across
-  `nl.ocideck.snapshot.chunk` events, because a full-deck snapshot exceeds the
-  ~64 KiB event cap. `MatrixSnapshotChannel.sendSnapshot` (authority) seals + chunks;
-  `handleSystemEvent` (wired to the transport's `onSystemEvent`) reassembles by
-  chunk id, opens it (signature required — a snapshot is authoritative), and
-  completes `firstSnapshot` — what a joiner awaits before starting its session so it
-  adopts the authority's slide ids (§5.5). Fail-closed and bounded: a tampered
-  (AEAD-caught), missing, malformed or oversized snapshot yields nothing, and the
-  pending-chunk buffers are capped against a flooding server. `retryPending`
-  re-opens a baseline that reassembled before its epoch key arrived (a joiner sees
-  the chunks before its key-share).
-- `matrix_session_launch.dart` — assembles a live Matrix session from the bricks
-  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §6.5, phase P-D), the Matrix
-  mirror of `collab_session_launch.dart`. `hostMatrixSession` publishes device
-  keys, opens epoch 0, pushes the baseline and starts as authority;
-  `joinMatrixSession` publishes device keys and returns a `MatrixCollabLaunch`
-  whose `session` appears lazily once `syncNow` has received the key-share and
-  opened the baseline (the guest then adopts the authority's slide ids, §5.5).
-  `syncNow` drives one sync round plus its side effects — retry buffered presence,
-  the host keys any newcomer (`MatrixKeyExchange.ensureKeyed`), a guest retries a
-  buffered snapshot — handling the ordering hazard that a joiner sees the snapshot
-  (and a peer's presence) before its key. `announcePresence`/`presencePeers`/
-  `onPresenceChanged` expose the presence plane. `_wire` builds the directory, key
-  exchange, snapshot channel, presence and transport with the single sync loop
-  feeding them all.
-  `MatrixCollabLaunch.sessionReady` completes when the session starts, so a
-  provider can wire the deck controller without polling.
-- `matrix_collab_launch.dart` — the app-level orchestration a provider calls
-  (design: `docs/design/SELF_ENCRYPTED_RELAY.md` §6.5, phase P-D UX). `hostMatrixCollab`
-  loads (or generates) this device's keys from `SecretStore`, creates a fresh
-  private room, starts the session and returns a `MatrixCollabHost` with the
-  `matrix.to` invite link to share; `joinMatrixCollab` parses that link, joins the
-  room, and starts the guest session. The room model is "new room per session +
-  shareable link" (decided 2026-07-31): the room id in the link is the access
-  secret, content is E2EE by our own layer.
-- `matrix_invite.dart` — `buildMatrixInvite`/`parseMatrixInvite`: the shareable
-  `matrix.to` link a host shares and a guest pastes. Pure string work; the parser
-  refuses anything that is not a room id or alias rather than probing an unknown
-  link (bearer-like data, §7.1.3).
-- `matrix_chat.dart` — `MatrixChat` + `ChatMessage`: the session chat (§6). Messages
-  ride room timeline events (a conversation is history, so it accumulates), sealed
-  like the deck content **and signed** — every member holds the same epoch key, so
-  without a signature one member could forge a message attributed to another, and
-  chat is where "who said what" must be trustworthy. Own messages echo locally on
-  `send` and are skipped on receive; peers' messages that arrive before their key
-  or sender is known are buffered and re-opened in `retryPending` (driven from
-  `syncNow`), in arrival order.
-- `matrix_presence.dart` — `MatrixPresence` + `PeerPresence`: the presence plane
-  (§6, "iedereen ziet iedereen", decided 2026-08-01). `announce(slideId)` seals
-  this device's current slide into a room **state** event keyed by device id, so
-  its latest position replaces the previous one instead of piling up in the
-  timeline; the homeserver sees only ciphertext. `handleSystemEvent` ingests
-  peers', buffering any that arrive before their epoch key or sender is known and
-  re-opening them in `retryPending` (driven from `syncNow`), the same ordering
-  fix the snapshot channel uses. Not authoritative — sealed without a signature.
 - `collab_participant.dart` — `CollabParticipant` (a device in a session: user id,
   device id, raw identity key, fingerprint, is-self, and its `TrustState`) and
   `deviceFingerprint`, the readable uppercase-hex-in-groups-of-four rendering of an
@@ -995,6 +887,7 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `meeting_session_provider.dart` — the optional *Videovergaderingen* module (default-off toggle, key `videoCallsModuleEnabled`) **and** the root-scoped active `MeetingSession` (`meetingSessionProvider`), held app-global so a call survives a deck-tab switch (`NATIVE_CALLS.md` §9, unlike the per-tab `collabSessionProvider`). `videoCallsRevealProvider` = enabled **or** a call is live. No in-app join flow yet (F3); the panel it feeds renders a fake session under test.
 - `managementsysteem_provider.dart` — the *Managementsysteem* module state (ISO_MANAGEMENTSYSTEEM.md §5), off by default. Preference key `managementsysteemModuleEnabled`; `managementsysteemEnabledProvider` is the switch, `managementsysteemRevealProvider` the "module on" half that callers OR with `Deck.hasManagementSystemSlides` so a deck with a `controlStatus` slide reveals the type regardless. Simpler than the Procesverbetering notifier: the ISO index is bundled `const` data, so enabling only persists the preference — there is no catalog to warm.
 - `elearning_provider.dart` — the master state of the *eLearning* extension (#1999), off by default. Preference key `elearningModuleEnabled`; `elearningEnabledProvider` gates both its creation surfaces and the configured OciServe course entry on the welcome screen, while `elearningRevealProvider` is the "extension on" half that callers OR with `Deck.hasElearningSlides` so existing content remains readable regardless. `parseSidecar` is the one seam onto `ElearningSidecar.parse`; nothing calls it yet, because no route reads or writes `<name>.elearning.json`.
+- `module_toggle.dart` — `ModuleToggleNotifier`: the shared base for the three module-schakelaar notifiers (Managementsysteem, eLearning, Procesverbetering), extracted in #2070. Holds the `enabled`/`loading` state, async SharedPreferences init, fail-safe disabled on read error, and `setEnabled`/`enable`/`disable`; each subclass adds its own preference key, reveal logic and side effects (eLearning sidecar parsing, Procesverbetering catalog warming).
 - `improvement_provider.dart` — golden-thread quality issues from `improvement_quality_bridge.dart`, merged into the quality panel when the module is on or the deck carries improvement slides (Phase 7).
 - `improvement_ai_provider.dart` — `improvementAiAvailableProvider`: AI assist on improvement slides requires both AI and Procesverbetering modules plus a configured backend (Phase 10).
 - `import_module_provider.dart` — the *Importeren* module state (#772, decision B1): pulling material in from other systems as an extension, off by default. *(Updated 2026-08-03, #1158: since OpenKAT became its own integration, this module covers only presentation import — .pptx/.key/.odp — and `importerContentProviders` is empty.)* One module for every source, because "I bring something in from outside" is one thought to the user, not a list of products. **The extension point is `importerContentProviders`**: a new importer adds its own "do I already have content" provider there and inherits this project's fixed rule — reveal once the content is there, and switching off never strands existing work. Deliberately a list rather than an ever-longer `||`, so what counts as content lives in one place and no importer can silently fall outside it; today it is empty because the presentation import leaves nothing persistent behind. Unlike Online opslag the default is a hard off rather than a derived one: that module's content (connections) predated the module, this one's does not.
@@ -1023,7 +916,6 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin. Also hosts the one-shot open-time signals the shell listens on, including `securityModulePromptProvider` — set once per open when a deck carries Informatieveiligheid slide types, driving the "enable the module" discovery banner. The signal carries only the tab id; which slide the banner points at is read from the live deck on every click, because slides can be deleted or moved while it is up. The shell takes the banner away as soon as its claim stops holding — another tab in view, the deck closed, or the last security slide deleted. The autosave tick writes the ink layer into the snapshot alongside the user notes, and `restoreRecovered` decodes it back; an unreadable ink payload is logged and skipped rather than allowed to block the recovery of the text. The same tick now also snapshots a dirty **document** tab (`_autosaveDocument`, with the same per-tab de-duplication as a deck — a byte-faithful source, no deck sidecars), and `restoreRecovered` puts a document snapshot back as a document tab, byte-faithful and marked unsaved, reusing `_createDocumentTab` so the recovered snapshot's key is kept — so a crash no longer discards an unsaved document. `chartDataWarningProvider` is the same one-shot shape, now carrying a `whileSaving` flag: reading and writing need different words, because a failed read leaves a chart empty while a failed write leaves the numbers nowhere but the open window.
 - `webdav_provider.dart` — Providers for `WebdavService`, connection lookup and directory listings, all keyed on connection id. The listing key carries the connection too: two servers with the same folder name were otherwise served each other's contents from cache.
 - `s3_provider.dart` — The S3 counterparts: `s3ServiceProvider` (bucket config + secret access key from the keychain, `null` when the connection is gone, half-filled or keyless), `s3ConnectionsProvider`/`primaryS3ConnectionProvider` and `s3ListingProvider`. Keyed on connection id for the same reason as WebDAV — a corrected typo in the endpoint must not detach an open deck from its source.
-- `matrix_client_provider.dart` — the collaboration counterpart of `webdav_provider`/`s3_provider`: `matrixClientProvider` builds the app-global `MatrixClient` from the configured account plus the access token from the keychain, over the platform SSRF-pinned/browser transport, `null` when no account or no token. One client per app, shared across sessions and tabs (the CS calls are stateless on the client). `matrixAccountProvider` is a thin read of `settingsProvider.matrixAccount` — the one value the collab provider and a test depend on, rather than all of settings. `buildMatrixClient` is the transport-injectable, socket-free builder the provider calls (and tests call directly). Design: SELF_ENCRYPTED_RELAY.md §6.5, §11.
 - `secret_store_provider.dart` — `secretStoreProvider`: the app-wide `SecretStore` as a provider rather than a bare `SecretStore()` at each call site, so a test can substitute a fake keychain and the collab session provider can load its device seeds (`loadOrCreateDeviceKeys`) under test. Defaults to the real keychain.
 - `presentation_sources.dart` — Builds a `PresentationSource` per configured remote connection (git, WebDAV, S3) — the sources *Slide zoeken* sweeps beside the local libraries. The clients (with their keychain secret) are prepared here; the network traffic itself only happens in the finder, on the user's search.
 - `provider_retry.dart` — `noAutoRetry`: the retry policy for providers whose failure is *shown* to the user. Riverpod 3 retries a throwing provider by itself, endlessly, and a retrying provider reads as `AsyncLoading` — so every screen with a careful `when(error: …)` explanation sat spinning forever instead. For these sources retrying is pointless anyway (configuration, sign-in, a blocked host), so retry belongs on a button the user presses.
@@ -1037,7 +929,10 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `bullet_fixes.dart` — The deterministic one-click fixes behind the text-density quality reports: `splitSentenceBullets` cuts a multi-sentence bullet into one bullet per sentence (and copies the line as it was into the speaker notes, because the connection between those sentences lived in the full sentence), `trimBulletExplanations` moves the explanation behind a *label : explanation* bullet off the slide, and `splitBulletSlidePages` is the "split slide" page split itself — shared by the panel button, the fix-all engine and the live fix while presenting, so splitting means one thing everywhere. Next to an image the page target scales down with the narrower text column (`bulletsImageTextColumnFraction`, #1279), so the shared split-run font size fills the column instead of being pinned by an over-full page. Each fix has a `can…` twin so the panel offers an action only when it does something — and, for the sentence split, only while the result stays inside the readability threshold, since splitting adds bullets. Lines moved to the speaker notes are written with a `- ` in front (`_movedNoteLine`) so they read as a list there; a bare heading stays without one. `trimBulletExplanations` is gated on `visibleContentBulletCount(slide) <= kMoveToNotesMaxBulletCount`: above eight bullets a slide counts as *too many*, and there splitting is the only remedy offered, since moving text to the notes leaves the bullet count unchanged.
 - `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation, plus `tryParseHexColor`: the *strict* hex reader (six digits, always opaque, `null` when the input does not qualify) so a quality check can skip a pair instead of judging a colour it invented. The lenient counterpart, which always returns a colour, is `AppTheme.parseHexColor`.
-- `content_hash.dart` — `sha512Hex` / `sha512HexOfText`: the seal hash, in the form `sha512sum` prints. A loose function rather than a service, because the seal and the markdown parser both need it and a shared service between those two would be an import cycle — and because this *is* the whole recipe: SHA-512 over the bytes, nothing around it that could add a step.
+- `content_hash.dart` — `sha512Hex` / `sha512HexOfText`: the seal hash, in the form `sha512sum` prints. A loose function rather than a service, because the seal and the markdown parser both need it and a shared service between those two would be an import cycle — and because this *is* the whole recipe: SHA-512 over the bytes, nothing around it that could add a step. Also exports `sha256Hex` (centralised in #2076), used by the snapshot integrity check and the deck mirror.
+- `byte_readers.dart` — Shared byte-reading helpers (`readByteRange`, `readAllBytes`) extracted from repeated file/byte access patterns in the import and export services (#2079).
+- `json_list_codec.dart` — `encodeList`/`decodeList`: typed JSON list encode/decode helpers extracted from repeated boilerplate in the settings and model layers (#2073).
+- `xml_escape.dart` — `xmlEscape`/`xmlAttr`: centralised XML escaping and attribute escaping, extracted from duplicated private helpers in the DOCX, ODT and XHTML converters (#2074).
 - `marp_style_values.dart` — Shared, dependency-free validation for Marp colour values and the bounded view of image filters that Flutter and HTML actually render; the full authored filter list remains available for round-tripping.
 - `number_convention.dart` — Works out whether a file writes `1.234,56` or `1,234.56`, from evidence across all its values rather than per cell (`scanDecimalConvention`), and reads a value under a settled convention (`parseNumberUnder`). Deduces or refuses: what no value settles comes back as `undecided` for the chart import to ask about, never guessed from locale.
 - `csv.dart` — RFC 4180 quoting for the two readers of CSV *files*, in two framings: `parseCsvRows` reads a whole document (a quoted field may hold a line break — MITRE's CWE export needs that) and `parseCsvLine` reads one already-split line, so a stray quote stops there instead of swallowing the file. Used by `models/chart.dart` and `tool/build_cwe_catalog.dart`. Also the scan behind `table_clipboard.dart` (spreadsheet paste). A fourth hand-rolled quote scanner fails `check_conventions.dart` — three had accumulated unnoticed before this was one file.
@@ -1253,12 +1148,6 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `settings/media_preflight_tile.dart` — `MediaPreflightTile` (F3.4a): the module card's honest media disclosure — the media-E2EE status for this platform (`mediaE2eeFor`) and, on demand, whether the native WebRTC stack loads on this device (`WebrtcMediaCore.selfTest`, which reaches no network). The media core is injectable, so the widget test drives it without a real stack.
 - `hex_color_dialog.dart` — `HexColorDialog`: typing a custom colour as hex, with a swatch that follows the field. `normalize` is public because it is the whole rule: the hash may be omitted, case and spaces do not matter, but a half colour (`#33FF`) is not a colour and must not reach the theme profile. A dialog of its own for the same reason as `git_search_dialog.dart`.
 - `git_search_dialog.dart` — `GitSearchDialog`: the cross-deck search UI. A button rather than search-as-you-type, since each round reads N files over REST. Picking a hit returns its deck dir to `_searchDecks`, which opens it through the ordinary `_openFromGit` path. A dialog of its own rather than a `part` of the shell library, so it can be driven with a `DeckSearch` on its own.
-- `recovery_key_dialogs.dart` — `showRecoveryKeyDialog` (shows the identity's
-  recovery key to save, with a copy button and the plain warning that losing it
-  means losing the identity on a device switch) and `promptRecoveryKey` (takes a
-  key to restore). Decoupled from the settings panel so both are widget-testable
-  (COLLABORATION Phase 2 "Blok B").
-- `matrix_collab_dialogs.dart` — The dialogs of a realtime Matrix session (§6.5): `showMatrixInviteDialog` shows the host's shareable link with a one-tap copy; `promptMatrixInvite` asks a guest to paste one; `showMatrixParticipantsDialog` lists the session's devices with their identity-key fingerprints for out-of-band comparison (§4.3). The link is the room secret, so it carries session access — but not content access, which stays E2EE by our own keys.
 - `xmpp_test_connection_dialog.dart` — `XmppTestConnectionDialog` (F2/F3, `NATIVE_CALLS.md` §5): the first consumer of the XMPP client, opened from the *Videovergaderingen* module card. Server/JID/password fields and an optional conference-URL field; the test button opens a guarded `wss` stream, authenticates and binds a resource (`openXmppFrameTransport` + `XmppSession.connect`), and — if a conference URL is given — derives its companion room (`companionRoomJid` on `conference.<domain>`), joins that MUC (`XmppMuc`), reports which OciDeck users are present, and leaves; then closes the session. Shows the negotiated mechanism, the bound "Sessie actief als" JID, the derived companion room and its occupants, or a translated session/join failure. Stores nothing — it only proves the account (and optionally the companion pairing) works. The connection call is injectable, so the widget test drives the whole flow without a socket.
 - `package_encrypt_dialog.dart` — Optional password protection when exporting a package: strength meter, generator, copy.
 - `package_password_dialog.dart` — Prompts for the password when opening an encrypted package (with wrong-password retry).
@@ -1417,14 +1306,14 @@ OciDeck's own XMPP-over-WebSocket client (no fork — own code over a dependency
 - `settings/webdav_form.dart` — Editing state of a WebDAV connection (controllers, test result, password), owned by the dialog and handed to `WebdavPanel`.
 - `settings/s3_form.dart` — Idem for an S3 bucket: endpoint, region, addressing style and the secret access key.
 - `settings/git_form.dart` — Idem for a git repository: forge, owner, repo, branch and the token.
-- `settings/matrix_form.dart` — `MatrixForm`: editing state of the app-global Matrix collaboration account (homeserver, user id, device id, the SSRF posture) plus the access token via `KeychainSecret`. Keychain identity is `homeserver|user-id`, matching `SettingsNotifier.setMatrixToken`. One account, not a list (app-global, §8).
 - `settings/ai_form.dart` — Idem for the AI backend: mode, base URL, model, the explicit cloud confirmation, and the API key.
 - `settings/libreplan_module_card.dart` — `LibreplanModuleCard`: the module card for the LibrePlan-connector on the Uitbreidingen tab. Desktop-only; on web it shows a disabled notice.
 - `libreplan_import_dialog.dart` — `LibreplanImportDialog`: the import dialog with per-slide-type checkboxes and a progress indicator. Inserts the imported slides into the current deck via `DeckNotifier.insertSlides`.
 - `settings/webdav_panel.dart` — `WebdavPanel`: the WebDAV editing panel, including the offer to split a pasted Nextcloud DAV URL instead of silently dropping the subfolder it carries.
 - `settings/s3_panel.dart` — `S3Panel`: the S3 editing panel, including the addressing choice and the connection test.
 - `settings/git_panel.dart` — `GitPanel`: the git editing panel, the token-scope help per forge, and the native-git detection line.
-- `settings/matrix_panel.dart` — `MatrixPanel`: the Matrix account editing panel. The setup flow is deliberately password-free (2026-08-01): the user pastes a homeserver and an access token, and "Verbinding testen" confirms it via `whoami` and fills the user id and — importantly — the device id, because a wrong device id silently drops a co-author's key-share (SELF_ENCRYPTED_RELAY.md §4.3). The test client is injectable for widget tests.
+- `settings/connection_test_section.dart` — `ConnectionTestSection`: the shared connection-test UI (endpoint, test button, status line) extracted from S3Panel and WebdavPanel in #2072.
+- `settings/module_card.dart` — `ModuleCard`: the shared scaffold for the ten settings module cards (AI, Asset Rights, Collaboration, eLearning, Import, LibrePlan, Management System, Online Storage, Process Improvement, Video Calls), extracted in #2071. Preserves each card's provider, loading state, platform-specific disabling, subtitle, icon and extra explanatory content.
 - `settings/appearance_legibility.dart` — `AppearancePreview` and `AppearanceLegibility`: the miniature of the app in the profile being edited, and the contrast measurement under it (#750). The preview builds the profile's real `ThemeData` and renders inside it — it used to paint its own colours through a black-or-white-by-luminance helper, which showed a legible title bar over a profile the app renders illegibly, flattering exactly the profile that deserved a warning. It also shows a checkbox, a switch and a text button: the roles that broke in #744 and that the old preview left out. Both are plain widgets rather than methods on `_SettingsDialogState`, because they are pure functions of the profile — and because the class-size ratchet is the right kind of pressure here.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.

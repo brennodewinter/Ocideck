@@ -209,10 +209,6 @@ const Set<String> uncoveredBaseline = {
   // The io half is exercised by native_git_mirror_test.dart against a real repo.
   'lib/services/git/native_git_mirror_factory.dart',
   'lib/services/git/native_git_mirror_stub.dart',
-  // PLATFORM: the Matrix egress conditional-export facade — a one-line barrel with
-  // no executable lines. Both halves (matrix_http_transport_io/web) are exercised
-  // directly by matrix_http_transport_test.dart.
-  'lib/collab/matrix_http_transport.dart',
   // PLATFORM: de XMPP-transportfacade is eveneens één kale conditional export
   // zonder uitvoerbare regels. De io-helft wordt door de verbindingstests
   // geraakt; de fail-closed webhelft wordt rechtstreeks getoetst in
@@ -317,6 +313,15 @@ const Set<String> uncoveredBaseline = {
   // bestand zonder uitvoerbare regels.
   'lib/services/import/models/source_format.dart',
   'lib/services/import/models/slide_failure_policy.dart',
+  // MATRIX REMOVAL (#2082): these three collaboration widgets were gutted when
+  // the Matrix protocol implementation was deleted. The verify banner is now a
+  // no-op (always visible: false), the chat panel renders messages but its
+  // send path was Matrix-only, and the presence dots lost their Matrix-specific
+  // tests. They stay because XMPP may re-wire them; until then their remaining
+  // code is too thin to hit the per-file floor.
+  'lib/widgets/collab_verify_banner.dart',
+  'lib/widgets/panels/collab_chat_panel.dart',
+  'lib/widgets/panels/slide_presence_dots.dart',
 };
 
 /// The per-file coverage floor: a lib/ file below this fraction of executed

@@ -224,5 +224,3 @@ bool picReferencesMissingMedia(
   if (rId == null) return false;
   return ctx.readRelBytes(rels, rId, slidePath) == null;
 }
-
-

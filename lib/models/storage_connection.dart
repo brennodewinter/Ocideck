@@ -77,10 +77,10 @@ sealed class StorageConnection {
   /// onleesbare items vallen weg zonder de rest mee te nemen, want één kapotte
   /// verbinding mag niet alle andere onbereikbaar maken.
   static List<StorageConnection> decodeList(String? json) => decodeJsonList(
-        json,
-        StorageConnection.fromJson,
-        label: 'StorageConnection.decodeList',
-      );
+    json,
+    StorageConnection.fromJson,
+    label: 'StorageConnection.decodeList',
+  );
 
   /// Bouw één verbinding uit JSON, of `null` bij een onbekende soort of een
   /// ontbrekende id — beide betekenen dat we het item niet betrouwbaar kunnen

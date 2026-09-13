@@ -168,43 +168,43 @@ String _htmlInlineToOdt(String html) {
 
 String _renderTimelineOdt(DocumentTimeline timeline) {
   // De tijdlijn wordt als ODT-tabel gerenderd; de marker blijft als
-      // commentaar erboven staan.
-      final buf = StringBuffer('<!-- timeline -->\n');
-      buf.writeln('<table:table table:name="Tijdlijn">');
-      buf.writeln(
-        '<table:table-column table:number-columns-repeated="${timeline.headers.length}"/>',
-      );
-      buf.writeln('<table:table-header-rows>');
-      buf.writeln('<table:table-row>');
-      for (final header in timeline.headers) {
-        buf.write(
-          '<table:table-cell office:value-type="string">'
-          '<text:p text:style-name="Table_20_Heading">${xmlEscape(header)}</text:p>'
-          '</table:table-cell>',
-        );
-      }
-      buf.writeln('</table:table-row>');
-      buf.writeln('</table:table-header-rows>');
-      for (final event in timeline.events) {
-        buf.writeln('<table:table-row>');
-        buf.write(
-          '<table:table-cell office:value-type="string">'
-          '<text:p>${_inlineOdt(event.marker)}</text:p>'
-          '</table:table-cell>',
-        );
-        buf.write(
-          '<table:table-cell office:value-type="string">'
-          '<text:p>${_inlineOdt(event.event)}</text:p>'
-          '</table:table-cell>',
-        );
-        buf.write(
-          '<table:table-cell office:value-type="string">'
-          '<text:p>${_inlineOdt(event.metadata ?? '')}</text:p>'
-          '</table:table-cell>',
-        );
-        buf.writeln('</table:table-row>');
-      }
-      buf.writeln('</table:table>');
+  // commentaar erboven staan.
+  final buf = StringBuffer('<!-- timeline -->\n');
+  buf.writeln('<table:table table:name="Tijdlijn">');
+  buf.writeln(
+    '<table:table-column table:number-columns-repeated="${timeline.headers.length}"/>',
+  );
+  buf.writeln('<table:table-header-rows>');
+  buf.writeln('<table:table-row>');
+  for (final header in timeline.headers) {
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p text:style-name="Table_20_Heading">${xmlEscape(header)}</text:p>'
+      '</table:table-cell>',
+    );
+  }
+  buf.writeln('</table:table-row>');
+  buf.writeln('</table:table-header-rows>');
+  for (final event in timeline.events) {
+    buf.writeln('<table:table-row>');
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p>${_inlineOdt(event.marker)}</text:p>'
+      '</table:table-cell>',
+    );
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p>${_inlineOdt(event.event)}</text:p>'
+      '</table:table-cell>',
+    );
+    buf.write(
+      '<table:table-cell office:value-type="string">'
+      '<text:p>${_inlineOdt(event.metadata ?? '')}</text:p>'
+      '</table:table-cell>',
+    );
+    buf.writeln('</table:table-row>');
+  }
+  buf.writeln('</table:table>');
   return buf.toString();
 }
 
@@ -523,5 +523,3 @@ enum _Ctx {
   tableRow,
   tableCell,
 }
-
-

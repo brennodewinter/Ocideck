@@ -7,20 +7,19 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../collab/matrix_chat.dart';
+import '../../collab/collab.dart' show ChatMessage;
 import '../../l10n/app_localizations.dart';
 import '../../state/collab_session_provider.dart';
 import '../../theme/app_theme.dart';
 import 'slide_presence_dots.dart' show SlidePresenceDots;
 
-/// The chat rail for the workspace row: a divider plus the panel while a Matrix
+/// The chat rail for the workspace row: a divider plus the panel while a
 /// session runs and the user has it open, otherwise nothing. Lives here rather
 /// than inline in the shell so `app_shell_main_layout.dart` stays under its size
 /// ceiling — the shell just spreads the result into its row.
 List<Widget> collabChatRail(WidgetRef ref) {
   final session = ref.watch(collabSessionProvider);
-  final open =
-      ref.watch(collabChatOpenProvider) && session.isMatrix && session.isActive;
+  final open = ref.watch(collabChatOpenProvider) && session.isActive;
   if (!open) return const [];
   return const [
     VerticalDivider(width: 1),
@@ -49,7 +48,6 @@ class _CollabChatPanelState extends ConsumerState<CollabChatPanel> {
   void _send() {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
-    ref.read(collabSessionProvider.notifier).sendChatMessage(text);
     _controller.clear();
     _focus.requestFocus();
   }

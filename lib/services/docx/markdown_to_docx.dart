@@ -171,40 +171,40 @@ DocxConversion markdownToDocxBody(
 
 String _renderTimelineDocx(DocumentTimeline timeline) {
   // De tijdlijn wordt als Word-tabel gerenderd; de marker blijft als
-      // commentaar erboven staan.
-      final buf = StringBuffer('<!-- timeline -->\n');
-      buf.writeln('<w:tbl>');
-      buf.writeln(
-        '<w:tblPr><w:tblW w:w="0" w:type="auto"/>'
-        '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-        '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-        '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-        '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-        '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-        '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-        '</w:tblBorders></w:tblPr>',
-      );
-      buf.writeln('<w:tblGrid>');
-      for (final _ in timeline.headers) {
-        buf.writeln('<w:gridCol w:w="2880"/>');
-      }
-      buf.writeln('</w:tblGrid>');
-      // Koptekstrij.
-      buf.writeln('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
-      for (final header in timeline.headers) {
-        buf.write(_tableCell(header, bold: true));
-      }
-      buf.writeln('</w:tr>');
-      for (final event in timeline.events) {
-        buf.writeln('<w:tr>');
-        buf.write(_tableCell(event.marker));
-        buf.write(_tableCell(event.event));
-        buf.write(_tableCell(event.metadata ?? ''));
-        buf.writeln('</w:tr>');
-      }
-      buf.writeln('</w:tbl>');
-      // Een lege alinea na de tabel, anders plakt de volgende tekst vast.
-      buf.writeln('<w:p/>');
+  // commentaar erboven staan.
+  final buf = StringBuffer('<!-- timeline -->\n');
+  buf.writeln('<w:tbl>');
+  buf.writeln(
+    '<w:tblPr><w:tblW w:w="0" w:type="auto"/>'
+    '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+    '</w:tblBorders></w:tblPr>',
+  );
+  buf.writeln('<w:tblGrid>');
+  for (final _ in timeline.headers) {
+    buf.writeln('<w:gridCol w:w="2880"/>');
+  }
+  buf.writeln('</w:tblGrid>');
+  // Koptekstrij.
+  buf.writeln('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
+  for (final header in timeline.headers) {
+    buf.write(_tableCell(header, bold: true));
+  }
+  buf.writeln('</w:tr>');
+  for (final event in timeline.events) {
+    buf.writeln('<w:tr>');
+    buf.write(_tableCell(event.marker));
+    buf.write(_tableCell(event.event));
+    buf.write(_tableCell(event.metadata ?? ''));
+    buf.writeln('</w:tr>');
+  }
+  buf.writeln('</w:tbl>');
+  // Een lege alinea na de tabel, anders plakt de volgende tekst vast.
+  buf.writeln('<w:p/>');
   return buf.toString();
 }
 
@@ -636,5 +636,3 @@ enum _Ctx {
   tableRow,
   tableCell,
 }
-
-

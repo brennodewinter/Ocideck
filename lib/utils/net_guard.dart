@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'log.dart';
 import '../utils/content_hash.dart';
 

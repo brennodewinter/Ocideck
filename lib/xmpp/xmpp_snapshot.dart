@@ -308,7 +308,6 @@ class XmppSnapshotChannel {
 
   // ── helpers ────────────────────────────────────────────────────────────────
 
-
   List<String> _split(String s, int size) {
     if (s.length <= size) return [s];
     final out = <String>[];

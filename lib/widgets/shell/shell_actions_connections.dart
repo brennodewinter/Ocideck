@@ -544,7 +544,7 @@ Future<bool> _saveToNextcloud(
   final reuse = origin != null && origin.matchesServer(service.server);
   final defaultBase = reuse
       ? origin.remotePath.replaceAll(RegExp(r'\.(ocideck|zip|md)$'), '')
-      : _safeRemoteName(deck.title);
+      : sanitizeFilename(deck.title, fallback: 'presentatie');
   var choice = silent && reuse
       ? (format: _formatOfRemotePath(origin.remotePath), base: defaultBase)
       : await _showRemoteSaveDialog(

@@ -1,13 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
-import 'package:ocideck/models/matrix_settings.dart';
 import 'package:ocideck/models/page_size.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
-import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -972,110 +969,6 @@ void main() {
 
         await notifier.removeCustomChecklist(0);
         expect(notifier.state.customChecklists, isEmpty);
-      },
-    );
-  });
-
-  group('Matrix account (app-global)', () {
-    const account = MatrixServer(
-      homeserverUrl: 'https://hs.example',
-      userId: '@a:hs.example',
-      deviceId: 'DEV1',
-    );
-
-    test('persists to prefs and reloads on a fresh notifier', () async {
-      SharedPreferences.setMockInitialValues({});
-      final first = SettingsNotifier();
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-      await first.setMatrixAccount(account);
-      expect(first.state.matrixAccount, account);
-
-      final reloaded = SettingsNotifier();
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-      expect(reloaded.state.matrixAccount, account);
-    });
-
-    test('setting null clears it (and the prefs key)', () async {
-      SharedPreferences.setMockInitialValues({});
-      final notifier = SettingsNotifier();
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-      await notifier.setMatrixAccount(account);
-      await notifier.setMatrixAccount(null);
-      expect(notifier.state.matrixAccount, isNull);
-
-      final reloaded = SettingsNotifier();
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-      expect(reloaded.state.matrixAccount, isNull);
-    });
-
-    test(
-      'the access token writes to and reads back from the keychain',
-      () async {
-        SharedPreferences.setMockInitialValues({});
-        FlutterSecureStorage.setMockInitialValues({});
-        final notifier = SettingsNotifier(
-          secretStore: SecretStore(
-            storage: const FlutterSecureStorage(),
-            canStore: true,
-          ),
-        );
-        await Future<void>.delayed(const Duration(milliseconds: 50));
-        expect(
-          await notifier.setMatrixToken(
-            account.homeserverUrl,
-            account.userId,
-            'tok',
-          ),
-          isTrue,
-        );
-        expect(await notifier.matrixToken(account), 'tok');
-        await notifier.setMatrixToken(
-          account.homeserverUrl,
-          account.userId,
-          '',
-        );
-        expect(await notifier.matrixToken(account), isNull);
-      },
-    );
-
-    test(
-      'removing the account sweeps its collab secrets from the keychain',
-      () async {
-        SharedPreferences.setMockInitialValues({});
-        FlutterSecureStorage.setMockInitialValues({});
-        final secrets = SecretStore(
-          storage: const FlutterSecureStorage(),
-          canStore: true,
-        );
-        final notifier = SettingsNotifier(secretStore: secrets);
-        await Future<void>.delayed(const Duration(milliseconds: 50));
-
-        await notifier.setMatrixAccount(account);
-        // Seed some collaboration secrets for this account, as a session would.
-        await secrets.writeCollabDeviceSeeds(
-          account.homeserverUrl,
-          account.userId,
-          'seeds-blob',
-        );
-        await secrets.writeCollabTrust(
-          account.homeserverUrl,
-          account.userId,
-          '{"@peer DEV":"key"}',
-        );
-
-        await notifier.setMatrixAccount(null);
-
-        expect(
-          await secrets.readCollabDeviceSeeds(
-            account.homeserverUrl,
-            account.userId,
-          ),
-          isNull,
-        );
-        expect(
-          await secrets.readCollabTrust(account.homeserverUrl, account.userId),
-          isNull,
-        );
       },
     );
   });

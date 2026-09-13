@@ -3007,8 +3007,8 @@ const _dutchSourceAddLv = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Rīki procesu uzlabošanai (SIPOC, DMAIC, Kaizen un A3). Pēc noklusējuma izslēgti; iespējojiet paplašinājumu, lai izmantotu saistītās veidnes un slaidu izkārtojumus.',
   'Videovergaderingen': 'Videosanāksmes',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Pievienojieties videosanāksmēm un prezentējiet no OciDeck ar savu saskarni: dalībnieki blakus jūsu slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi vai Matrix); OciDeck neko nemitina un sarunu datus tur prom no MI. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Pievienojieties videosanāksmēm un prezentējiet no OciDeck ar savu saskarni: dalībnieki blakus jūsu slaidam, nevis citas lietotnes logā. Bring-your-own-server (Jitsi); OciDeck neko nemitina un sarunu datus tur prom no MI. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
   'Videovergadering': 'Videosanāksme',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Vēl nav aktīvas sanāksmes. Savienojums ar sanāksmju pakalpojumu tiks pievienots nākamajā versijā.',
@@ -3026,10 +3026,6 @@ const _dutchSourceAddLv = <String, String>{
       'Attēli kopā ir pārāk lieli vienam HTML failam (ne vairāk kā 512 MB). Izmantojiet mazāk vai mazākus attēlus vai eksportējiet kā PDF vai pakotni.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Šajā eksportā ir pārāk daudz slaidu ar pārāk augstu izšķirtspēju, lai to varētu droši renderēt. Eksportējiet pa daļām vai izmantojiet saspiesto PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Vispirms pabeidziet un saglabājiet prezentāciju; pēc tam varat parakstīt tās izcelsmi.',
-  'Herkomst ondertekend.': 'Izcelsme parakstīta.',
-  'De herkomst kon niet worden ondertekend.': 'Izcelsmi neizdevās parakstīt.',
   'Herkomst ondertekenen': 'Parakstīt izcelsmi',
   'Herkomst bevestigd': 'Izcelsme apstiprināta',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3046,32 +3042,9 @@ const _dutchSourceAddLv = <String, String>{
   'Herkomst niet hier te controleren': 'Izcelsmi šeit nevar pārbaudīt',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Paraksts ir klāt, taču to šeit nevar pārrēķināt — pārbaudiet to pret sākotnējo `.md` failu.',
-  'Bestaande identiteit vervangen?': 'Aizstāt esošo identitāti?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Šai ierīcei jau ir sadarbības identitāte. Atjaunošana to aizstāj ar atslēgā ietverto identitāti. Vai saglabājāt pašreizējās identitātes atkopšanas atslēgu? Bez dublējuma jūs to zaudēsiet.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Prezentāciju multivides tīmekļa atmiņa ir pilna (ne vairāk kā 256 MB). Vispirms saglabājiet darbu kā .ocideck failu, lai novērstu datu zudumu. Pēc tam izmantojiet mazāk vai mazākus attēlus, video vai audio failus, aizveriet citas prezentācijas vai pārlādējiet, neatverot citas prezentācijas.',
   'Ongeldige vraag': 'Nederīgs jautājums',
-  'Herstelsleutel': 'Atkopšanas atslēga',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Glabājiet šo atkopšanas atslēgu drošā vietā — piemēram, savā paroļu glabātavā. Tas ir vienīgais veids, kā atjaunot to pašu identitāti citā ierīcē; bez šīs atslēgas tur sāksiet kā jauna, vēl nepārbaudīta ierīce. Nedodiet to nevienam.',
-  'Herstelsleutel gekopieerd.': 'Atkopšanas atslēga nokopēta.',
-  'Identiteit herstellen': 'Atjaunot identitāti',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Ielīmējiet atkopšanas atslēgu, ko saglabājāt agrāk. Šī ierīce tad pārņem to pašu identitāti — līdzautori, kuri jūs agrāk pārbaudīja, atkal atpazīs jūsu nospiedumu.',
-  'Identiteit & herstelsleutel': 'Identitāte un atkopšanas atslēga',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Jūsu ierīcei ir sava sadarbības identitāte — tieši to pārbauda līdzautori. Saglabājiet atkopšanas atslēgu, lai vēlāk atjaunotu to pašu identitāti citā ierīcē; bez šīs atslēgas tur sākat no jauna.',
-  'Herstelsleutel tonen': 'Rādīt atkopšanas atslēgu',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Atkopšanas atslēgu nevarēja nolasīt.',
-  'Identiteit hersteld.': 'Identitāte atjaunota.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Šī atkopšanas atslēga nav pareiza — pārbaudiet, vai to pārrakstījāt pilnībā un bez kļūdām.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Šī neizskatās pēc derīgas atkopšanas atslēgas.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Šī atkopšanas atslēga ir no jaunākas OciDeck versijas.',
   'Afbeeldingsrechten': 'Attēla tiesības',
   'Afbeeldingsrechten controleren…': 'Pārbaudiet attēla tiesības…',
   'Afdoening': 'Norēķins',
@@ -3095,95 +3068,22 @@ const _dutchSourceAddLv = <String, String>{
       'failus nevarēja droši pārskatīt',
   'nieuw gescand': 'tikko skenēts',
   'Realtime samenwerken': 'Sadarbība reāllaikā',
-  'Manieren van verbinden': 'Savienojuma veidi',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Sadarbojieties tiešsaistē pie prezentācijas caur šifrētu retranslatoru. Pēc noklusējuma izslēgts. Saturs tiek pilnībā (end-to-end) šifrēts ar OciDeck paša atslēgām; serveris redz tikai šifrētus datus.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Sadarbība caur Matrix homeserver kā retranslatoru. Iestatiet kontu cilnē Sadarbība. (Jitsi un XMPP sekos.)',
   'Chat': 'Tērzēšana',
-  'Chat openen': 'Atvērt tērzēšanu',
   'Chat sluiten': 'Aizvērt tērzēšanu',
   'Bericht…': 'Ziņa…',
   'Versturen': 'Sūtīt',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Vēl nav ziņu. Pasaki kaut ko saviem līdzautoriem.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Salīdzini katras ierīces ciparnospiedumu pa uzticamu kanālu — nolasiet to viens otram vai nosūti to pa ceļu, kuram uzticies. Ja tas sakrīt, atzīmē ierīci kā pārbaudītu; tā paliks pārbaudīta arī nākamajā sesijā. Ja tas atšķiras, pārtrauc sadarbību.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Šīs ierīces identitāte atšķiras no tās, ko pārbaudīji agrāk — iespējams, kāds ir pa vidu. Pārtrauc sadarbību, ja vien neesi pārliecināts, ka šī ierīce ir iestatīta no jauna.',
-  'Geverifieerd': 'Pārbaudīts',
-  'Wijkt af': 'Atšķiras',
-  'Niet geverifieerd': 'Nav pārbaudīts',
-  'Markeer als geverifieerd': 'Atzīmēt kā pārbaudītu',
-  'Verificatie intrekken': 'Atsaukt pārbaudi',
-  'Toch opnieuw vertrouwen': 'Tomēr uzticēties atkal',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Šajā sadarbībā vēl nav pārbaudīta katra ierīce. Salīdzini ciparnospiedumus, lai zinātu droši, ar ko strādā.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Tabulas šūnu rediģējumi netiek sinhronizēti ar līdzautoriem. Virsraksts un citi lauki — jā.',
   'Verifiëren': 'Pārbaudīt',
-  'Deelnemers verifiëren': 'Pārbaudīt dalībniekus',
-  '(dit apparaat)': '(šī ierīce)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.': 'Šī nav derīga ielūguma saite.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Matrix homeserver nav sasniedzams.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Saimnieks neatbildēja laikā. Pārbaudiet saiti un to, vai saimnieks joprojām ir tiešsaistē.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Kopīgojiet šo saiti ar tiem, kurus vēlaties iesaistīt darbā. Ikviens, kam ir saite, var pievienoties sesijai — tāpēc kopīgojiet to tikai ar cilvēkiem, kuriem uzticaties. Saturs paliek pilnībā (end-to-end) šifrēts; homeserver redz tikai šifrētus datus.',
   'Deelnemen': 'Pievienoties',
-  'Deelnemen via een link': 'Pievienoties, izmantojot saiti',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Jūsu Matrix konts tiek noraidīts — pārbaudiet piekļuves pilnvaru sadaļā Iestatījumi.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Tagad jūs sadarbojaties tiešsaistē.',
-  'Nodig mede-auteurs uit': 'Uzaicināt līdzautorus',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Vispirms atveriet prezentāciju, lai sadarbotos.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Ielīmējiet ielūguma saiti, ko jums nosūtīja saimnieks. Tā jūs atverat to pašu prezentāciju un sadarbojaties tiešsaistē.',
-  'Realtime samenwerken is mislukt.': 'Sadarbība reāllaikā neizdevās.',
-  'Realtime samenwerken starten': 'Sākt sadarbību reāllaikā',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Vispirms iestatiet Matrix kontu sadaļā Iestatījumi → Sadarbība.',
-  'Uitnodigingslink': 'Ielūguma saite',
-  'Uitnodigingslink gekopieerd.': 'Ielūguma saite nokopēta.',
-  'Uitnodigingslink kopiëren': 'Kopēt ielūguma saiti',
-  'Verbinden met de samenwerking…': 'Notiek savienošana ar sadarbību…',
-  'Access-token': 'Piekļuves pilnvara',
-  'Apparaat-id': 'Ierīces ID',
-  'Gebruikers-id': 'Lietotāja ID',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver atgrieza kļūdu. Vēlāk mēģiniet vēlreiz.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver nav sasniedzams vai sertifikāts nav uzticams.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver novirza uz citu adresi — drošības apsvērumu dēļ tas netiek sekots. Ievadiet galīgo adresi tieši.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver lūdz mazliet pagaidīt. Drīz mēģiniet vēlreiz.',
-  'De homeserver weigert dit token.': 'Homeserver noraida šo pilnvaru.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Šī adrese neatbild kā Matrix homeserver. Vai URL ir pareizs?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver ir jābūt https: piekļuves pilnvara ceļo līdzi katram pieprasījumam.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Piekļuves pilnvara tiek noraidīta — pārbaudiet, vai to pareizi pārkopējāt un vai tā nav atsaukta.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Izveidojiet piekļuves pilnvaru savā Matrix klientā (piemēram, Element sadaļā Visi iestatījumi → Palīdzība un informācija) vai savā homeserver. "Pārbaudīt savienojumu" apstiprina pilnvaru un aizpilda jūsu lietotāja ID un ierīces ID.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Nepieciešams, kad homeserver darbojas privātā vai mājas tīklā. Bez šī karodziņa drošības pārbaude noraida privātu adresi.',
-  'Realtime samenwerken (Matrix)': 'Sadarbība reāllaikā (Matrix)',
   'Samenwerken': 'Sadarbība',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Savienojums izveidots — lietotāja ID un ierīces ID aizpildīts',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Savienojums izveidots, bet homeserver neatgrieza ierīces ID — ievadiet to pats, citādi līdzautoru atslēgas nepienāks.',
-  'Vul een access-token in': 'Ievadiet piekļuves pilnvaru',
-  'Vul een geldige homeserver-URL in': 'Ievadiet derīgu homeserver URL',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Sadarbojieties tiešsaistē pie prezentācijas caur Matrix homeserver kā šifrētu retranslatoru. Saturs tiek pilnībā (end-to-end) šifrēts ar OciDeck paša atslēgām; serveris redz tikai šifrētus datus. Ievadiet homeserver un citur izveidotu piekļuves pilnvaru — OciDeck nekad neprasa jūsu paroli. Pilnvara tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
-  'wordt door de test ingevuld': 'aizpilda tests',
   'Meer documentatie op de repository': 'Vairāk dokumentācijas repozitorijā',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Pilnā dokumentācija — tostarp arhitektūra, būvējums, pirmkods un dizains — atrodas repozitorijā.',

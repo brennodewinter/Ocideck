@@ -9,7 +9,6 @@ import '../l10n/app_localizations.dart' show AppLocalizations;
 import '../models/deck.dart' show TlpLevel;
 import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
-import '../models/matrix_settings.dart';
 import '../models/settings.dart';
 import '../models/page_size.dart';
 import '../models/storage_connection.dart';
@@ -23,7 +22,6 @@ part 'parts/settings_provider_classification.dart';
 part 'parts/settings_provider_connections.dart';
 part 'parts/settings_provider_document_style.dart';
 part 'parts/settings_provider_git.dart';
-part 'parts/settings_provider_matrix.dart';
 part 'parts/settings_provider_privacy.dart';
 part 'parts/settings_provider_traces.dart';
 
@@ -58,24 +56,6 @@ AiSettings _readAiSettings(SharedPreferences prefs) {
   } catch (e) {
     logWarning('SettingsNotifier: ongeldige aiSettings-prefs', e);
     return const AiSettings();
-  }
-}
-
-/// Lees het opgeslagen app-globale Matrix-account uit prefs, of null.
-///
-/// Top-level (geen methode) omdat [SettingsNotifier] aan haar regelplafond zit
-/// en dit puur laadwerk is, geen toestand. Een onleesbare of corrupte waarde
-/// degradeert naar "geen account" in plaats van een crash bij het opstarten.
-MatrixServer? _readMatrixAccount(SharedPreferences prefs) {
-  final matrixJson = prefs.getString('matrixAccount');
-  if (matrixJson == null) return null;
-  try {
-    return MatrixServer.fromJson(
-      Map<String, Object?>.from(jsonDecode(matrixJson) as Map),
-    );
-  } catch (e) {
-    logWarning('SettingsNotifier: ongeldige matrixAccount-prefs', e);
-    return null;
   }
 }
 
@@ -244,7 +224,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     final cockpit = _loadCockpitSettings(prefs, _mergeCockpitSchemes);
     final document = _readDocumentSettings(prefs);
     final ai = _readAiSettings(prefs);
-    final matrix = _readMatrixAccount(prefs);
     final libreplan = _readLibreplanSettings(prefs);
     // Het laden is asynchroon; een scope die in die tussentijd verdwijnt — een
     // venster dat sluit, een test die afloopt — mag geen "gebruikt na dispose"
@@ -332,7 +311,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       cveApiBaseUrl:
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       aiSettings: ai,
-      matrixAccount: matrix,
       libreplanSettings: libreplan,
     );
     _persistedLogoPaths = _referencedLogoPaths;

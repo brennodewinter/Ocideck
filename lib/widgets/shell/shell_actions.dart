@@ -541,8 +541,6 @@ Future<_RemoteConflict?> _showRemoteConflictDialog(BuildContext context) {
   );
 }
 
-
-
 /// Keuze uit het opslaan-dialoog: formaat plus doelpad (zonder extensie,
 /// relatief aan de wortelmap).
 typedef _RemoteSaveChoice = ({DeckSaveFormat format, String base});

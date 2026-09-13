@@ -3036,8 +3036,8 @@ const _dutchSourceAddBg = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Инструменти за подобряване на процесите (SIPOC, DMAIC, Kaizen и A3). Изключени по подразбиране; включете разширението, за да използвате свързаните шаблони и оформления на слайдове.',
   'Videovergaderingen': 'Видеосрещи',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Присъединявайте се към видеосрещи и презентирайте от OciDeck със собствен интерфейс: участниците до вашия слайд, а не в прозореца на друго приложение. Bring-your-own-server (Jitsi или Matrix); OciDeck не хоства нищо и държи данните от разговорите далеч от AI. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Присъединявайте се към видеосрещи и презентирайте от OciDeck със собствен интерфейс: участниците до вашия слайд, а не в прозореца на друго приложение. Bring-your-own-server (Jitsi); OciDeck не хоства нищо и държи данните от разговорите далеч от AI. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
   'Videovergadering': 'Видеосреща',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Все още няма активна среща. Свързването с услуга за срещи ще бъде добавено в бъдеща версия.',
@@ -3055,11 +3055,6 @@ const _dutchSourceAddBg = <String, String>{
       'Изображенията заедно са твърде големи за един HTML файл (максимум 512 MB). Използвайте по-малко или по-малки изображения или експортирайте като PDF или пакет.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Този експорт има твърде много слайдове с твърде висока разделителна способност, за да се изобрази безопасно. Експортирайте на части или използвайте компресирания PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Първо завършете и запазете презентацията; след това можете да подпишете произхода ѝ.',
-  'Herkomst ondertekend.': 'Произходът е подписан.',
-  'De herkomst kon niet worden ondertekend.':
-      'Произходът не можа да бъде подписан.',
   'Herkomst ondertekenen': 'Подпиши произхода',
   'Herkomst bevestigd': 'Произходът е потвърден',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3076,33 +3071,9 @@ const _dutchSourceAddBg = <String, String>{
   'Herkomst niet hier te controleren': 'Произходът не може да се провери тук',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Подписът е налице, но не може да се преизчисли тук — проверете го спрямо оригиналния `.md` файл.',
-  'Bestaande identiteit vervangen?':
-      'Да се замени ли съществуващата самоличност?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Това устройство вече има самоличност за съвместна работа. Възстановяването я заменя със самоличността от ключа. Запазихте ли ключ за възстановяване на текущата самоличност? Без резервно копие ще я загубите.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Уеб паметта за презентационни медии е пълна (максимум 256 MB). Първо запазете работата си като .ocideck файл, за да предотвратите загуба на данни. След това използвайте по-малко или по-малки изображения, видеоклипове или аудиофайлове, затворете другите презентации или презаредете, без да отваряте други презентации.',
   'Ongeldige vraag': 'Невалиден въпрос',
-  'Herstelsleutel': 'Ключ за възстановяване',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Съхранявайте този ключ за възстановяване на сигурно място — например в хранилището си за пароли. Това е единственият начин да възстановите същата самоличност на друго устройство; без този ключ там започвате като ново, все още непроверено устройство. Не го споделяйте с никого.',
-  'Herstelsleutel gekopieerd.': 'Ключът за възстановяване е копиран.',
-  'Identiteit herstellen': 'Възстановяване на самоличност',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Поставете ключа за възстановяване, който запазихте по-рано. Това устройство тогава поема същата самоличност — съавторите, които са ви проверили по-рано, отново ще разпознаят вашия отпечатък.',
-  'Identiteit & herstelsleutel': 'Самоличност и ключ за възстановяване',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Вашето устройство има собствена самоличност за сътрудничество — това е, което съавторите проверяват. Запазете ключа за възстановяване, за да възстановите същата самоличност по-късно на друго устройство; без този ключ там започвате отначало.',
-  'Herstelsleutel tonen': 'Показване на ключа за възстановяване',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Ключът за възстановяване не можа да бъде прочетен.',
-  'Identiteit hersteld.': 'Самоличността е възстановена.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Този ключ за възстановяване не е правилен — проверете дали сте го въвели изцяло и без грешки.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Това не изглежда като валиден ключ за възстановяване.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Този ключ за възстановяване е от по-нова версия на OciDeck.',
   'Afbeeldingsrechten': 'Права за изображения',
   'Afbeeldingsrechten controleren…': 'Проверете правата на изображението...',
   'Afdoening': 'Уреждане',
@@ -3126,95 +3097,22 @@ const _dutchSourceAddBg = <String, String>{
       'файлове не можаха да бъдат прегледани безопасно',
   'nieuw gescand': 'наскоро сканиран',
   'Realtime samenwerken': 'Съвместна работа в реално време',
-  'Manieren van verbinden': 'Начини на свързване',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Работете съвместно на живо върху презентация чрез криптиран препредавател. По подразбиране изключено. Съдържанието се криптира от край до край със собствените ключове на OciDeck; сървърът вижда само криптирани данни.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Съвместна работа чрез Matrix homeserver като препредавател. Настройте акаунта в раздела Сътрудничество. (Jitsi и XMPP предстоят.)',
   'Chat': 'Чат',
-  'Chat openen': 'Отвори чата',
   'Chat sluiten': 'Затвори чата',
   'Bericht…': 'Съобщение…',
   'Versturen': 'Изпрати',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Все още няма съобщения. Кажи нещо на съавторите си.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Сравни отпечатъка на всяко устройство през доверен канал — прочетете си го един на друг или го изпрати по път, на който имаш доверие. Ако съвпада, отбележи устройството като потвърдено; то ще остане потвърдено и в следваща сесия. Ако се различава, прекрати сътрудничеството.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Идентичността на това устройство се различава от онова, което потвърди по-рано — възможно е някой да е по средата. Прекрати сътрудничеството, освен ако не си сигурен, че това устройство е настроено наново.',
-  'Geverifieerd': 'Потвърдено',
-  'Wijkt af': 'Различава се',
-  'Niet geverifieerd': 'Непотвърдено',
-  'Markeer als geverifieerd': 'Отбележи като потвърдено',
-  'Verificatie intrekken': 'Отмени потвърждението',
-  'Toch opnieuw vertrouwen': 'Все пак се довери отново',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Все още не всяко устройство в това сътрудничество е потвърдено. Сравни отпечатъците, за да си сигурен с кого работиш.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Редакциите на клетки в таблицата не се синхронизират със съавторите. Заглавието и другите полета — да.',
   'Verifiëren': 'Потвърди',
-  'Deelnemers verifiëren': 'Провери участниците',
-  '(dit apparaat)': '(това устройство)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Това не е валидна връзка за покана.',
-  'De Matrix-homeserver is niet bereikbaar.': 'Matrix homeserver е недостъпен.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Домакинът не отговори навреме. Проверете връзката и дали домакинът е още онлайн.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Споделете тази връзка с онези, които искате да включите в работата. Всеки, който има връзката, може да влезе в сесията — затова я споделяйте само с хора, на които имате доверие. Съдържанието остава криптирано от край до край; homeserver вижда само криптирани данни.',
   'Deelnemen': 'Присъедини се',
-  'Deelnemen via een link': 'Присъедини се чрез връзка',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Вашият акаунт в Matrix е отхвърлен — проверете токена за достъп в Настройки.',
-  'Je doet nu live mee aan de samenwerking.': 'Сега си сътрудничите на живо.',
-  'Nodig mede-auteurs uit': 'Покани съавтори',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Първо отворете презентация, за да си сътрудничите.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Поставете връзката за покана, която домакинът ви изпрати. Така отваряте същата презентация и си сътрудничите на живо.',
-  'Realtime samenwerken is mislukt.':
-      'Съвместната работа в реално време е неуспешна.',
-  'Realtime samenwerken starten': 'Започни съвместна работа в реално време',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Първо настройте акаунт в Matrix в Настройки → Сътрудничество.',
-  'Uitnodigingslink': 'Връзка за покана',
-  'Uitnodigingslink gekopieerd.': 'Връзката за покана е копирана.',
-  'Uitnodigingslink kopiëren': 'Копирай връзката за покана',
-  'Verbinden met de samenwerking…': 'Свързване със сътрудничеството…',
-  'Access-token': 'Токен за достъп',
-  'Apparaat-id': 'ИД на устройството',
-  'Gebruikers-id': 'Потребителски ИД',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver върна грешка. Опитайте отново по-късно.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver е недостъпен или сертификатът не е доверен.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver пренасочва към друг адрес — от съображения за сигурност това не се следва. Въведете крайния адрес директно.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver моли да изчакате малко. Опитайте отново скоро.',
-  'De homeserver weigert dit token.': 'Homeserver отхвърля този токен.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Този адрес не отговаря като Matrix homeserver. Верен ли е URL адресът?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver трябва да е https: токенът за достъп пътува с всяка заявка.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Токенът за достъп е отхвърлен — проверете дали сте го копирали правилно и дали не е отменен.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Създайте токен за достъп във вашия Matrix клиент (например в Element под Всички настройки → Помощ и информация) или на вашия homeserver. "Тест на връзката" потвърждава токена и попълва вашия потребителски ИД и ИД на устройството.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Нужно е, когато homeserver работи в частна или домашна мрежа. Без този флаг проверката за сигурност отхвърля частен адрес.',
-  'Realtime samenwerken (Matrix)': 'Съвместна работа в реално време (Matrix)',
   'Samenwerken': 'Сътрудничество',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Връзката е успешна — потребителският ИД и ИД на устройството са попълнени',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Връзката е успешна, но homeserver не върна ИД на устройството — попълнете го сами, иначе ключовете от съавторите няма да пристигнат.',
-  'Vul een access-token in': 'Въведете токен за достъп',
-  'Vul een geldige homeserver-URL in': 'Въведете валиден URL на homeserver',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Работете съвместно на живо върху презентация чрез Matrix homeserver като криптиран препредавател. Съдържанието се криптира от край до край със собствените ключове на OciDeck; сървърът вижда само криптирани данни. Въведете homeserver и токен за достъп, създаден другаде — OciDeck никога не иска паролата ви. Токенът се пази криптиран в ключодържателя, а не при останалите настройки.',
-  'wordt door de test ingevuld': 'попълва се от теста',
   'Meer documentatie op de repository': 'Повече документация в хранилището',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Пълната документация — включително архитектура, компилиране, изходен код и дизайн — е в хранилището.',

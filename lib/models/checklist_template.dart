@@ -96,9 +96,9 @@ class ChecklistTemplate {
   /// Read a list back; an unreadable value yields an empty list, and templates
   /// without a name drop out (a nameless template cannot be selected).
   static List<ChecklistTemplate> decodeList(String? json) => decodeJsonList(
-        json,
-        ChecklistTemplate.fromJson,
-        keep: (t) => t.name.isNotEmpty,
-        label: 'ChecklistTemplate.decodeList',
-      );
+    json,
+    ChecklistTemplate.fromJson,
+    keep: (t) => t.name.isNotEmpty,
+    label: 'ChecklistTemplate.decodeList',
+  );
 }

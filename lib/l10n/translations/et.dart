@@ -3000,8 +3000,8 @@ const _dutchSourceAddEt = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Protsesside parendamise tööriistad (SIPOC, DMAIC, Kaizen ja A3). Vaikimisi välja lülitatud; seotud mallide ja slaidipaigutuste kasutamiseks lubage laiendus.',
   'Videovergaderingen': 'Videokoosolekud',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Liitu videokoosolekutega ja esitle OciDeckist oma liidesega: osalejad su slaidi kõrval, mitte teise rakenduse aknas. Bring-your-own-server (Jitsi või Matrix); OciDeck ei majuta midagi ja hoiab vestlusandmed AI-st eemal. Ühendus koosolekuteenusega lisandub tulevases versioonis.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Liitu videokoosolekutega ja esitle OciDeckist oma liidesega: osalejad su slaidi kõrval, mitte teise rakenduse aknas. Bring-your-own-server (Jitsi); OciDeck ei majuta midagi ja hoiab vestlusandmed AI-st eemal. Ühendus koosolekuteenusega lisandub tulevases versioonis.',
   'Videovergadering': 'Videokoosolek',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Aktiivset koosolekut veel pole. Ühendus koosolekuteenusega lisatakse tulevases versioonis.',
@@ -3019,11 +3019,6 @@ const _dutchSourceAddEt = <String, String>{
       'Pildid on koos liiga suured ühe HTML-faili jaoks (kuni 512 MB). Kasutage vähem või väiksemaid pilte või eksportige PDF-i või paketina.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Sellel ekspordil on liiga palju slaide liiga suure resolutsiooniga, et neid saaks turvaliselt renderdada. Ekspordi osade kaupa või kasuta pakitud PDF-i.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Lõpeta ja salvesta esitlus kõigepealt; seejärel saad selle päritolu allkirjastada.',
-  'Herkomst ondertekend.': 'Päritolu allkirjastatud.',
-  'De herkomst kon niet worden ondertekend.':
-      'Päritolu ei õnnestunud allkirjastada.',
   'Herkomst ondertekenen': 'Allkirjasta päritolu',
   'Herkomst bevestigd': 'Päritolu kinnitatud',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3040,32 +3035,9 @@ const _dutchSourceAddEt = <String, String>{
   'Herkomst niet hier te controleren': 'Päritolu ei saa siin kontrollida',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Allkiri on olemas, kuid seda ei saa siin uuesti arvutada — kontrolli seda algupärase `.md`-faili suhtes.',
-  'Bestaande identiteit vervangen?': 'Kas asendada olemasolev identiteet?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Sellel seadmel on juba koostööidentiteet. Taastamine asendab selle võtmes oleva identiteediga. Kas salvestasid praeguse identiteedi taasteklahvi? Ilma varukoopiata kaotad selle.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Esitlusmeedia veebimälu on täis (kuni 256 MB). Andmekao vältimiseks salvesta töö esmalt .ocideck-failina. Seejärel kasuta vähem või väiksemaid pilte, videoid või helifaile, sulge teised esitlused või laadi uuesti ilma teisi esitlusi avamata.',
   'Ongeldige vraag': 'Vigane küsimus',
-  'Herstelsleutel': 'Taastevõti',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Hoia see taastevõti turvalises kohas — näiteks oma paroolihoidlas. See on ainus viis sama identiteedi taastamiseks teises seadmes; ilma selle võtmeta alustad seal uue, veel kinnitamata seadmena. Ära jaga seda kellegagi.',
-  'Herstelsleutel gekopieerd.': 'Taastevõti kopeeritud.',
-  'Identiteit herstellen': 'Taasta identiteet',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Kleebi taastevõti, mille varem salvestasid. Seejärel võtab see seade üle sama identiteedi — kaasautorid, kes sind varem kinnitasid, tunnevad su sõrmejälje taas ära.',
-  'Identiteit & herstelsleutel': 'Identiteet ja taastevõti',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Sinu seadmel on oma koostööidentiteet — just seda kaasautorid kinnitavad. Salvesta taastevõti, et sama identiteet hiljem teises seadmes taastada; ilma selle võtmeta alustad seal otsast peale.',
-  'Herstelsleutel tonen': 'Näita taastevõtit',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Taastevõtit ei õnnestunud lugeda.',
-  'Identiteit hersteld.': 'Identiteet taastatud.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'See taastevõti pole õige — kontrolli, kas kopeerisid selle täielikult ja veatult.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'See ei tundu olevat kehtiv taastevõti.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'See taastevõti pärineb OciDecki uuemast versioonist.',
   'Afbeeldingsrechten': 'Pildi õigused',
   'Afbeeldingsrechten controleren…': 'Kontrolli pildi õigusi…',
   'Afdoening': 'Arveldamine',
@@ -3089,94 +3061,22 @@ const _dutchSourceAddEt = <String, String>{
       'faile ei saanud ohutult üle vaadata',
   'nieuw gescand': 'äsja skaneeritud',
   'Realtime samenwerken': 'Reaalajas koostöö',
-  'Manieren van verbinden': 'Ühendusviisid',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Tee esitluse kallal reaalajas koostööd krüpteeritud edastaja kaudu. Vaikimisi väljas. Sisu krüpteeritakse otsast otsani OciDecki enda võtmetega; server näeb ainult krüpteeritud andmeid.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Koostöö Matrixi homeserveri kaudu edastajana. Seadista konto vahekaardil Koostöö. (Jitsi ja XMPP on tulekul.)',
   'Chat': 'Vestlus',
-  'Chat openen': 'Ava vestlus',
   'Chat sluiten': 'Sulge vestlus',
   'Bericht…': 'Sõnum…',
   'Versturen': 'Saada',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Sõnumeid veel pole. Ütle oma kaasautoritele midagi.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Võrdle iga seadme sõrmejälge usaldusväärse kanali kaudu — lugege see teineteisele ette või saada see teed, mida usaldad. Kui see klapib, märgi seade kinnitatuks; see jääb kinnitatuks ka järgmises seansis. Kui see erineb, katkesta koostöö.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Selle seadme identiteet erineb sellest, mille varem kinnitasid — võib-olla on keegi vahel. Katkesta koostöö, kui sa pole kindel, et see seade on uuesti seadistatud.',
-  'Geverifieerd': 'Kinnitatud',
-  'Wijkt af': 'Erineb',
-  'Niet geverifieerd': 'Kinnitamata',
-  'Markeer als geverifieerd': 'Märgi kinnitatuks',
-  'Verificatie intrekken': 'Tühista kinnitus',
-  'Toch opnieuw vertrouwen': 'Usalda siiski uuesti',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Selles koostöös pole veel iga seade kinnitatud. Võrdle sõrmejälgi, et olla kindel, kellega töötad.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Tabelirakkude muudatused ei sünkrooni kaasautoritega. Pealkiri ja teised väljad küll.',
   'Verifiëren': 'Kinnita',
-  'Deelnemers verifiëren': 'Kinnita osalejad',
-  '(dit apparaat)': '(see seade)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.': 'See ei ole kehtiv kutselink.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Matrixi homeserver ei ole kättesaadav.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Võõrustaja ei vastanud õigel ajal. Kontrolli linki ja seda, kas võõrustaja on veel võrgus.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Jaga seda linki nendega, keda soovid kaasata. Igaüks, kellel on link, saab seansiga liituda — nii et jaga seda ainult inimestega, keda usaldad. Sisu jääb otsast otsani krüpteerituks; homeserver näeb ainult krüpteeritud andmeid.',
   'Deelnemen': 'Liitu',
-  'Deelnemen via een link': 'Liitu lingi kaudu',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Sinu Matrixi kontot ei aktsepteerita — kontrolli juurdepääsuluba jaotises Seaded.',
-  'Je doet nu live mee aan de samenwerking.': 'Teed nüüd reaalajas koostööd.',
-  'Nodig mede-auteurs uit': 'Kutsu kaasautoreid',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Ava esmalt esitlus, et koostööd teha.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Kleebi kutselink, mille võõrustaja sulle saatis. Nii avad sama esitluse ja teed reaalajas koostööd.',
-  'Realtime samenwerken is mislukt.': 'Reaalajas koostöö ebaõnnestus.',
-  'Realtime samenwerken starten': 'Alusta reaalajas koostööd',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Seadista esmalt Matrixi konto jaotises Seaded → Koostöö.',
-  'Uitnodigingslink': 'Kutselink',
-  'Uitnodigingslink gekopieerd.': 'Kutselink kopeeritud.',
-  'Uitnodigingslink kopiëren': 'Kopeeri kutselink',
-  'Verbinden met de samenwerking…': 'Ühendamine koostööga…',
-  'Access-token': 'Juurdepääsuluba',
-  'Apparaat-id': 'Seadme ID',
-  'Gebruikers-id': 'Kasutaja ID',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver tagastas vea. Proovi hiljem uuesti.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver ei ole kättesaadav või sertifikaati ei usaldata.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver suunab teisele aadressile — turvakaalutlustel seda ei järgita. Sisesta lõplik aadress otse.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver palub veidi oodata. Proovi varsti uuesti.',
-  'De homeserver weigert dit token.': 'Homeserver lükkab selle loa tagasi.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'See aadress ei vasta Matrixi homeserverina. Kas URL on õige?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver peab olema https: juurdepääsuluba liigub kaasa iga päringuga.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Juurdepääsuluba lükatakse tagasi — kontrolli, kas kopeerisid selle õigesti ja kas seda pole tühistatud.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Loo juurdepääsuluba oma Matrixi kliendis (näiteks Elementis jaotises Kõik seaded → Abi ja teave) või oma homeserveris. "Testi ühendust" kinnitab loa ning täidab sinu kasutaja ID ja seadme ID.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Vajalik, kui homeserver töötab privaat- või koduvõrgus. Ilma selle liputa keeldub turvakontroll privaataadressist.',
-  'Realtime samenwerken (Matrix)': 'Reaalajas koostöö (Matrix)',
   'Samenwerken': 'Koostöö',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Ühendus loodud — kasutaja ID ja seadme ID täidetud',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Ühendus loodud, kuid homeserver ei tagastanud seadme ID-d — sisesta see ise, muidu kaasautorite võtmed ei jõua kohale.',
-  'Vul een access-token in': 'Sisesta juurdepääsuluba',
-  'Vul een geldige homeserver-URL in': 'Sisesta kehtiv homeserveri URL',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Tee esitluse kallal reaalajas koostööd Matrixi homeserveri kaudu krüpteeritud edastajana. Sisu krüpteeritakse otsast otsani OciDecki enda võtmetega; server näeb ainult krüpteeritud andmeid. Sisesta homeserver ja mujal loodud juurdepääsuluba — OciDeck ei küsi kunagi sinu parooli. Luba hoitakse krüpteerituna võtmehoidjas, mitte koos muude seadetega.',
-  'wordt door de test ingevuld': 'täidetakse testiga',
   'Meer documentatie op de repository': 'Rohkem dokumentatsiooni hoidlas',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Täielik dokumentatsioon — sealhulgas arhitektuur, ehitus, lähtekood ja disain — asub hoidlas.',

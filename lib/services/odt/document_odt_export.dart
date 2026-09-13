@@ -381,7 +381,6 @@ const _odtStyles = '''
 </text:list-style>
 ''';
 
-
 /// Voor tests: de ODT-bytes bouwen met vaste parameters.
 @visibleForTesting
 Future<Uint8List> buildDocumentExportOdtForTesting(

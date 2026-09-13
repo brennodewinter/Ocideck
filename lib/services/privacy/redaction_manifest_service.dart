@@ -10,7 +10,6 @@
 import 'dart:convert';
 import 'dart:math';
 
-
 import '../../models/deck.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';

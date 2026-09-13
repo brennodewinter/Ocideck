@@ -121,4 +121,3 @@ ImageDimensions? _webpDimensions(Uint8List bytes) {
   }
   return null;
 }
-

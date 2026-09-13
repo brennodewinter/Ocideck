@@ -16,7 +16,6 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/collab/collab_crypto.dart';
 import 'package:ocideck/collab/deck_op.dart';
-import 'package:ocideck/collab/matrix_relay_transport.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/xmpp/xmpp_collab_launch.dart';
@@ -249,9 +248,7 @@ void main() {
         // De sessie rijdt op de XMPP-data-plane, niet op de Matrix-relay —
         // exclusiviteit als test (§1, §7). Een XMPP-sessie kent geen MatrixClient.
         expect(env.host.transport, isA<XmppTransport>());
-        expect(env.host.transport, isNot(isA<MatrixRelayTransport>()));
         expect(env.guest.transport, isA<XmppTransport>());
-        expect(env.guest.transport, isNot(isA<MatrixRelayTransport>()));
       },
     );
   });

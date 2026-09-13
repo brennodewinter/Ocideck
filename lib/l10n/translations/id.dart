@@ -3008,8 +3008,8 @@ const _dutchSourceAddId = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Perkakas untuk peningkatan proses (SIPOC, DMAIC, Kaizen, dan A3). Nonaktif secara default; aktifkan ekstensi untuk menggunakan templat dan tata letak slide terkait.',
   'Videovergaderingen': 'Rapat video',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka tersendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi atau Matrix); OciDeck tidak meng-host apa pun dan menjaga data percakapan tetap jauh dari AI. Koneksi ke layanan rapat akan menyusul pada versi mendatang.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Ikuti rapat video dan presentasikan dari OciDeck dengan antarmuka tersendiri: peserta di samping slide Anda, bukan di jendela aplikasi lain. Bring-your-own-server (Jitsi); OciDeck tidak meng-host apa pun dan menjaga data percakapan tetap jauh dari AI. Koneksi ke layanan rapat akan menyusul pada versi mendatang.',
   'Videovergadering': 'Rapat video',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Belum ada rapat aktif. Koneksi ke layanan rapat akan ditambahkan pada versi mendatang.',
@@ -3027,11 +3027,6 @@ const _dutchSourceAddId = <String, String>{
       'Gambar-gambar tersebut secara keseluruhan terlalu besar untuk satu berkas HTML (maksimum 512 MB). Gunakan lebih sedikit atau gambar yang lebih kecil, atau ekspor sebagai PDF atau paket.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Ekspor ini memiliki terlalu banyak slide dengan resolusi terlalu tinggi untuk dirender dengan aman. Ekspor secara bertahap atau gunakan PDF terkompresi.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Selesaikan dan simpan presentasi terlebih dahulu; setelah itu Anda dapat menandatangani asalnya.',
-  'Herkomst ondertekend.': 'Asal ditandatangani.',
-  'De herkomst kon niet worden ondertekend.':
-      'Asal tidak dapat ditandatangani.',
   'Herkomst ondertekenen': 'Tanda tangani asal',
   'Herkomst bevestigd': 'Asal dikonfirmasi',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3048,32 +3043,9 @@ const _dutchSourceAddId = <String, String>{
   'Herkomst niet hier te controleren': 'Asal tidak dapat diperiksa di sini',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Tanda tangan ada, tetapi tidak dapat dihitung ulang di sini — periksa terhadap berkas `.md` asli.',
-  'Bestaande identiteit vervangen?': 'Ganti identitas yang ada?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Perangkat ini sudah memiliki identitas kolaborasi. Memulihkan akan menggantinya dengan identitas dari kunci. Apakah Anda menyimpan kunci pemulihan untuk identitas saat ini? Tanpa cadangan, Anda akan kehilangannya.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Memori web untuk media presentasi penuh (maksimum 256 MB). Simpan pekerjaan Anda terlebih dahulu sebagai berkas .ocideck untuk mencegah kehilangan data. Setelah itu gunakan gambar, video, atau berkas audio yang lebih sedikit atau lebih kecil, tutup deck lain, atau muat ulang tanpa membuka deck lain.',
   'Ongeldige vraag': 'Pertanyaan tidak valid',
-  'Herstelsleutel': 'Kunci pemulihan',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Simpan kunci pemulihan ini di tempat yang aman — misalnya di brankas kata sandi Anda. Ini satu-satunya cara untuk memulihkan identitas yang sama di perangkat lain; tanpa kunci ini, di sana Anda mulai sebagai perangkat baru yang belum terverifikasi. Jangan bagikan kepada siapa pun.',
-  'Herstelsleutel gekopieerd.': 'Kunci pemulihan disalin.',
-  'Identiteit herstellen': 'Pulihkan identitas',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Tempel kunci pemulihan yang Anda simpan sebelumnya. Perangkat ini kemudian mengambil alih identitas yang sama — rekan penulis yang telah memverifikasi Anda akan mengenali sidik jari Anda lagi.',
-  'Identiteit & herstelsleutel': 'Identitas & kunci pemulihan',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Perangkat Anda memiliki identitas kolaborasi sendiri — itulah yang diverifikasi rekan penulis. Simpan kunci pemulihan untuk memulihkan identitas yang sama nanti di perangkat lain; tanpa kunci itu, di sana Anda mulai dari awal.',
-  'Herstelsleutel tonen': 'Tampilkan kunci pemulihan',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Kunci pemulihan tidak dapat dibaca.',
-  'Identiteit hersteld.': 'Identitas dipulihkan.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Kunci pemulihan ini tidak benar — periksa apakah Anda menyalinnya secara lengkap dan tanpa kesalahan.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Ini sepertinya bukan kunci pemulihan yang valid.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Kunci pemulihan ini berasal dari versi OciDeck yang lebih baru.',
   'Afbeeldingsrechten': 'Hak gambar',
   'Afbeeldingsrechten controleren…': 'Periksa hak gambar…',
   'Afdoening': 'Hunian',
@@ -3097,96 +3069,22 @@ const _dutchSourceAddId = <String, String>{
       'file tidak dapat ditinjau dengan aman',
   'nieuw gescand': 'baru dipindai',
   'Realtime samenwerken': 'Kolaborasi waktu nyata',
-  'Manieren van verbinden': 'Cara menyambung',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Berkolaborasi secara langsung pada presentasi melalui relai terenkripsi. Nonaktif secara bawaan. Kontennya dienkripsi ujung ke ujung dengan kunci milik OciDeck sendiri; server hanya melihat data terenkripsi.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Kolaborasi melalui homeserver Matrix sebagai relai. Siapkan akun di tab Kolaborasi. (Jitsi dan XMPP menyusul.)',
   'Chat': 'Obrolan',
-  'Chat openen': 'Buka obrolan',
   'Chat sluiten': 'Tutup obrolan',
   'Bericht…': 'Pesan…',
   'Versturen': 'Kirim',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Belum ada pesan. Katakan sesuatu kepada rekan penulismu.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Bandingkan sidik jari setiap perangkat melalui saluran tepercaya — bacakan satu sama lain, atau kirim lewat jalur yang kamu percaya. Jika cocok, tandai perangkat sebagai terverifikasi; perangkat akan tetap terverifikasi, termasuk pada sesi berikutnya. Jika berbeda, hentikan kolaborasi.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Identitas perangkat ini berbeda dari yang kamu verifikasi sebelumnya — mungkin ada seseorang di tengah. Hentikan kolaborasi, kecuali kamu yakin perangkat ini telah disiapkan ulang.',
-  'Geverifieerd': 'Terverifikasi',
-  'Wijkt af': 'Berbeda',
-  'Niet geverifieerd': 'Belum terverifikasi',
-  'Markeer als geverifieerd': 'Tandai sebagai terverifikasi',
-  'Verificatie intrekken': 'Cabut verifikasi',
-  'Toch opnieuw vertrouwen': 'Tetap percayai lagi',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Belum semua perangkat dalam kolaborasi ini terverifikasi. Bandingkan sidik jari untuk memastikan dengan siapa kamu bekerja.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Penyuntingan sel tabel tidak disinkronkan ke kolaborator. Judul dan bidang lain ya.',
   'Verifiëren': 'Verifikasi',
-  'Deelnemers verifiëren': 'Verifikasi peserta',
-  '(dit apparaat)': '(perangkat ini)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Ini bukan tautan undangan yang valid.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Homeserver Matrix tidak dapat dijangkau.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Host tidak merespons tepat waktu. Periksa tautan dan apakah host masih online.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Bagikan tautan ini dengan siapa pun yang ingin Anda ajak bekerja sama. Siapa pun yang memiliki tautan dapat masuk ke sesi — jadi bagikan hanya dengan orang yang Anda percayai. Kontennya tetap dienkripsi ujung ke ujung; homeserver hanya melihat data terenkripsi.',
   'Deelnemen': 'Gabung',
-  'Deelnemen via een link': 'Gabung melalui tautan',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Akun Matrix Anda ditolak — periksa token akses di Pengaturan.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Anda kini berkolaborasi secara langsung.',
-  'Nodig mede-auteurs uit': 'Undang rekan penulis',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Buka presentasi terlebih dahulu untuk berkolaborasi.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Tempel tautan undangan yang dikirim host kepada Anda. Ini membuka presentasi yang sama dan Anda berkolaborasi secara langsung.',
-  'Realtime samenwerken is mislukt.': 'Kolaborasi waktu nyata gagal.',
-  'Realtime samenwerken starten': 'Mulai kolaborasi waktu nyata',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Siapkan akun Matrix terlebih dahulu di Pengaturan → Kolaborasi.',
-  'Uitnodigingslink': 'Tautan undangan',
-  'Uitnodigingslink gekopieerd.': 'Tautan undangan disalin.',
-  'Uitnodigingslink kopiëren': 'Salin tautan undangan',
-  'Verbinden met de samenwerking…': 'Menghubungkan ke kolaborasi…',
-  'Access-token': 'Token akses',
-  'Apparaat-id': 'ID perangkat',
-  'Gebruikers-id': 'ID pengguna',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Homeserver mengembalikan kesalahan. Coba lagi nanti.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Homeserver tidak dapat dijangkau, atau sertifikat tidak tepercaya.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Homeserver mengalihkan ke alamat lain — demi keamanan hal ini tidak diikuti. Masukkan alamat akhir secara langsung.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Homeserver meminta menunggu sebentar. Coba lagi sebentar lagi.',
-  'De homeserver weigert dit token.': 'Homeserver menolak token ini.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Alamat ini tidak merespons sebagai homeserver Matrix. Apakah URL-nya benar?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver harus https: token akses ikut serta pada setiap permintaan.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Token akses ditolak — periksa apakah Anda menyalinnya dengan benar dan apakah tidak dicabut.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Buat token akses di klien Matrix Anda (misalnya di Element pada Semua pengaturan → Bantuan & info), atau di homeserver Anda. "Uji koneksi" mengonfirmasi token dan mengisi ID pengguna dan ID perangkat Anda.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Diperlukan ketika homeserver berjalan di jaringan privat atau rumah. Tanpa tanda ini, pemeriksaan keamanan menolak alamat privat.',
-  'Realtime samenwerken (Matrix)': 'Kolaborasi waktu nyata (Matrix)',
   'Samenwerken': 'Kolaborasi',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Terhubung — ID pengguna dan ID perangkat terisi',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Terhubung, tetapi homeserver tidak mengembalikan ID perangkat — isi sendiri, jika tidak kunci dari rekan penulis tidak akan sampai.',
-  'Vul een access-token in': 'Masukkan token akses',
-  'Vul een geldige homeserver-URL in': 'Masukkan URL homeserver yang valid',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Berkolaborasi secara langsung pada presentasi melalui homeserver Matrix sebagai relai terenkripsi. Kontennya dienkripsi ujung ke ujung dengan kunci milik OciDeck sendiri; server hanya melihat data terenkripsi. Masukkan homeserver dan token akses yang dibuat di tempat lain — OciDeck tidak pernah meminta kata sandi Anda. Token disimpan terenkripsi di gantungan kunci, bukan bersama pengaturan lain.',
-  'wordt door de test ingevuld': 'diisi oleh pengujian',
   'Meer documentatie op de repository':
       'Dokumentasi selengkapnya di repositori',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':

@@ -819,7 +819,6 @@ String _buildDocumentRelsXml(
   return buf.toString();
 }
 
-
 /// Voor tests: de DOCX-bytes bouwen met vaste parameters.
 @visibleForTesting
 Future<Uint8List> buildDocumentExportDocxForTesting(

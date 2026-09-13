@@ -41,13 +41,12 @@ void main() {
       expect(a, isNot(c));
     });
 
-    test('does not collide with matrix, webdav, git or ai keys', () {
+    test('does not collide with webdav, git or ai keys', () {
       const host = 'https://x.example';
       const wss = 'wss://x.example/ws';
       const who = 'alice';
       final xmpp = SecretStore.xmppPasswordKey(wss, who);
       for (final other in [
-        SecretStore.matrixTokenKey(host, who),
         SecretStore.webdavKey(host, who),
         SecretStore.gitTokenKey(host, who),
         SecretStore.aiApiKeyKey(host),

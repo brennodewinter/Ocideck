@@ -439,8 +439,6 @@ double _cm(String? value) {
   return num;
 }
 
-
-
 String? _attr(XmlElement el, String local) {
   for (final a in el.attributes) {
     if (a.name.local == local) return a.value;

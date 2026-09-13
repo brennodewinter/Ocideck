@@ -6,8 +6,7 @@
 //      (`asset_rights_module_provider.dart`): a prefs-backed on/off, default OFF.
 //   2. The active [MeetingSession], held **root-scoped** so a call survives a
 //      deck-tab switch (NATIVE_CALLS.md §9). This deliberately does NOT copy
-//      `collabSessionProvider`'s per-tab override — a meeting is app-global, like
-//      `matrixClientProvider`.
+//      `collabSessionProvider`'s per-tab override — a meeting is app-global.
 //
 // There is no in-app join flow yet: a real [MeetingProvider] adapter (Jitsi over
 // lib/xmpp/ + flutter_webrtc) arrives in F3. Until then [meetingSessionProvider]

@@ -3043,8 +3043,8 @@ const _dutchSourceAddMt = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Għodod għat-titjib tal-proċessi (SIPOC, DMAIC, Kaizen u A3). Mitfija b’mod awtomatiku; attiva l-estensjoni biex tuża l-mudelli u t-taqsimiet ta’ slides relatati.',
   'Videovergaderingen': 'Laqgħat bil-vidjo',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Ingħaqad ma\' laqgħat bil-vidjo u ppreżenta minn OciDeck b\'interfaċċja tiegħu stess: il-parteċipanti maġenb l-islajd tiegħek, mhux fit-tieqa ta\' app oħra. Bring-your-own-server (Jitsi jew Matrix); OciDeck ma jospita xejn u jżomm id-data tal-konverżazzjoni \'l bogħod mill-IA. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Ingħaqad ma\' laqgħat bil-vidjo u ppreżenta minn OciDeck b\'interfaċċja tiegħu stess: il-parteċipanti maġenb l-islajd tiegħek, mhux fit-tieqa ta\' app oħra. Bring-your-own-server (Jitsi); OciDeck ma jospita xejn u jżomm id-data tal-konverżazzjoni \'l bogħod mill-IA. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
   'Videovergadering': 'Laqgħa bil-vidjo',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Għad m\'hemm l-ebda laqgħa attiva. Il-konnessjoni ma\' servizz tal-laqgħat se tiżdied f\'verżjoni futura.',
@@ -3062,11 +3062,6 @@ const _dutchSourceAddMt = <String, String>{
       'L-immaġni flimkien huma kbar wisq għal fajl HTML wieħed (massimu 512 MB). Uża inqas immaġni jew immaġni iżgħar, jew esporta bħala PDF jew pakkett.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Din l-esportazzjoni għandha wisq slajds b’riżoluzzjoni għolja wisq biex tiġi renderjata b’mod sigur. Esporta f’partijiet jew uża l-PDF ikkompressat.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Temm u ħażen il-preżentazzjoni l-ewwel; imbagħad tista\' tiffirma l-oriġini tagħha.',
-  'Herkomst ondertekend.': 'L-oriġini ġiet iffirmata.',
-  'De herkomst kon niet worden ondertekend.':
-      'L-oriġini ma setgħetx tiġi ffirmata.',
   'Herkomst ondertekenen': 'Iffirma l-oriġini',
   'Herkomst bevestigd': 'Oriġini kkonfermata',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3084,32 +3079,9 @@ const _dutchSourceAddMt = <String, String>{
       'L-oriġini ma tistax tiġi ċċekkjata hawn',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Il-firma tinsab preżenti, imma ma tistax tiġi kkalkulata mill-ġdid hawn — iċċekkjaha mal-fajl `.md` oriġinali.',
-  'Bestaande identiteit vervangen?': 'Tibdel l-identità eżistenti?',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Dan l-apparat diġà għandu identità ta\' kollaborazzjoni. Ir-restawr jibdilha bl-identità mill-muftieħ. Ħżint ċavetta ta\' rkupru għall-identità attwali? Mingħajr backup titlifha.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Il-memorja tal-web għall-midja tal-preżentazzjoni hija mimlija (massimu ta’ 256 MB). L-ewwel issejvja x-xogħol tiegħek bħala fajl .ocideck biex tevita t-telf tad-data. Imbagħad uża inqas immaġnijiet, vidjows jew fajls tal-awdjo, jew fajls iżgħar, agħlaq decks oħra, jew erġa’ tella’ mingħajr ma tiftaħ decks oħra.',
   'Ongeldige vraag': 'Mistoqsija invalida',
-  'Herstelsleutel': 'Ċavetta ta\' rkupru',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Żomm din iċ-ċavetta ta\' rkupru f\'post sigur — pereżempju fil-kaxxaforti tal-passwords tiegħek. Hija l-uniku mod biex terġa\' tikseb l-istess identità fuq apparat ieħor; mingħajr din iċ-ċavetta hemmhekk tibda bħala apparat ġdid li għadu mhux verifikat. Taqsamha ma\' ħadd.',
-  'Herstelsleutel gekopieerd.': 'Iċ-ċavetta ta\' rkupru ġiet ikkupjata.',
-  'Identiteit herstellen': 'Irkupra l-identità',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Waħħal iċ-ċavetta ta\' rkupru li ħżint qabel. Dan l-apparat imbagħad jieħu l-istess identità — kittieba sħab li vverifikawk qabel jerġgħu jagħrfu l-marka tas-swaba\' tiegħek.',
-  'Identiteit & herstelsleutel': 'Identità u ċavetta ta\' rkupru',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'L-apparat tiegħek għandu identità ta\' kollaborazzjoni tiegħu stess — dik hi li jivverifikaw il-kittieba sħab. Ħżin iċ-ċavetta ta\' rkupru biex terġa\' tikseb l-istess identità aktar tard fuq apparat ieħor; mingħajr dik iċ-ċavetta hemmhekk tibda mill-ġdid.',
-  'Herstelsleutel tonen': 'Uri ċ-ċavetta ta\' rkupru',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Iċ-ċavetta ta\' rkupru ma setgħetx tinqara.',
-  'Identiteit hersteld.': 'L-identità ġiet irkuprata.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Din iċ-ċavetta ta\' rkupru mhijiex korretta — iċċekkja li kkupjajtha kollha u mingħajr żbalji.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Din ma tidhirx bħal ċavetta ta\' rkupru valida.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Din iċ-ċavetta ta\' rkupru ġejja minn verżjoni aktar ġdida ta\' OciDeck.',
   'Afbeeldingsrechten': 'Diritti di immagine',
   'Afbeeldingsrechten controleren…': 'Controlla i diritti dell\'immagine...',
   'Afdoening': 'Insediamento',
@@ -3134,97 +3106,22 @@ const _dutchSourceAddMt = <String, String>{
       'non è stato possibile rivedere i file in modo sicuro',
   'nieuw gescand': 'appena scansionato',
   'Realtime samenwerken': 'Kollaborazzjoni f\'ħin reali',
-  'Manieren van verbinden': 'Modi ta\' konnessjoni',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Ikkollabora fil-ħin reali fuq preżentazzjoni permezz ta\' relay ikkriptat. Mitfi b\'mod prestabilit. Il-kontenut jiġi kkriptat minn tarf sa tarf biċ-ċwievet ta\' OciDeck stess; is-server jara biss data kkriptata.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Kollaborazzjoni permezz ta\' homeserver Matrix bħala relay. Issettja l-kont fit-tab Kollaborazzjoni. (Jitsi u XMPP ġejjin.)',
   'Chat': 'Chat',
-  'Chat openen': 'Iftaħ iċ-chat',
   'Chat sluiten': 'Agħlaq iċ-chat',
   'Bericht…': 'Messaġġ…',
   'Versturen': 'Ibgħat',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Għad m\'hemm l-ebda messaġġ. Għid xi ħaġa lill-koawturi tiegħek.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Qabbel il-marka tas-swaba\' ta\' kull apparat permezz ta\' kanal fdat — aqrawha lil xulxin, jew ibgħatha minn triq li tafda. Jekk taqbel, immarka l-apparat bħala verifikat; jibqa\' verifikat, anke f\'sessjoni aktar tard. Jekk tvarja, aqta\' l-kollaborazzjoni.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'L-identità ta\' dan l-apparat tvarja minn dik li vverifikajt qabel — jista\' jkun hemm xi ħadd fin-nofs. Aqta\' l-kollaborazzjoni, sakemm ma tkunx ċert li dan l-apparat ġie ssettjat mill-ġdid.',
-  'Geverifieerd': 'Verifikat',
-  'Wijkt af': 'Tvarja',
-  'Niet geverifieerd': 'Mhux verifikat',
-  'Markeer als geverifieerd': 'Immarka bħala verifikat',
-  'Verificatie intrekken': 'Irrevoka l-verifika',
-  'Toch opnieuw vertrouwen': 'Xorta erġa\' afda',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Għadu mhux kull apparat f\'din il-kollaborazzjoni verifikat. Qabbel il-marki tas-swaba\' biex tkun ċert ma\' min qed taħdem.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       "Editjar ta' ċelloli tat-tabella ma jiġix sinkronizzat mal-kollaboraturi. It-titlu u oħrajn iva.",
   'Verifiëren': 'Ivverifika',
-  'Deelnemers verifiëren': 'Verifika l-parteċipanti',
-  '(dit apparaat)': '(dan l-apparat)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Din mhijiex link tal-istedina valida.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Il-homeserver Matrix ma jistax jintlaħaq.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'L-ospitanti ma weġibx fil-ħin. Iċċekkja l-link u jekk l-ospitanti għadux online.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Aqsam dan il-link ma\' min trid taħdem miegħu. Kull min għandu l-link jista\' jidħol fis-sessjoni — mela aqsmu biss ma\' nies li tafda. Il-kontenut jibqa\' kkriptat minn tarf sa tarf; il-homeserver jara biss data kkriptata.',
   'Deelnemen': 'Ingħaqad',
-  'Deelnemen via een link': 'Ingħaqad permezz ta\' link',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Il-kont Matrix tiegħek qed jiġi rrifjutat — iċċekkja t-token tal-aċċess fl-Issettjar.',
-  'Je doet nu live mee aan de samenwerking.':
-      'Issa qed tikkollabora fil-ħin reali.',
-  'Nodig mede-auteurs uit': 'Stieden koawturi',
-  'Open eerst een presentatie om aan samen te werken.':
-      'L-ewwel iftaħ preżentazzjoni biex tikkollabora.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Waħħal il-link tal-istedina li bagħatlek l-ospitanti. B\'hekk tiftaħ l-istess preżentazzjoni u tikkollabora fil-ħin reali.',
-  'Realtime samenwerken is mislukt.':
-      'Il-kollaborazzjoni fil-ħin reali falliet.',
-  'Realtime samenwerken starten': 'Ibda kollaborazzjoni fil-ħin reali',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'L-ewwel issettja kont Matrix fl-Issettjar → Kollaborazzjoni.',
-  'Uitnodigingslink': 'Link tal-istedina',
-  'Uitnodigingslink gekopieerd.': 'Il-link tal-istedina ġie kkupjat.',
-  'Uitnodigingslink kopiëren': 'Ikkopja l-link tal-istedina',
-  'Verbinden met de samenwerking…': 'Qed jgħaqqad mal-kollaborazzjoni…',
-  'Access-token': 'Token tal-aċċess',
-  'Apparaat-id': 'ID tal-apparat',
-  'Gebruikers-id': 'ID tal-utent',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Il-homeserver irritorna żball. Erġa\' pprova aktar tard.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Il-homeserver ma jistax jintlaħaq, jew iċ-ċertifikat mhuwiex fdat.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Il-homeserver jirridirezzjona lejn indirizz ieħor — għal raġunijiet ta\' sigurtà dan ma jiġix segwit. Daħħal l-indirizz finali direttament.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Il-homeserver jitlob li tistenna ftit. Erġa\' pprova dalwaqt.',
-  'De homeserver weigert dit token.': 'Il-homeserver jirrifjuta dan it-token.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Dan l-indirizz ma jweġibx bħala homeserver ta\' Matrix. L-URL huwa korrett?',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Homeserver irid ikun https: it-token tal-aċċess jivvjaġġa ma\' kull talba.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'It-token tal-aċċess qed jiġi rrifjutat — iċċekkja li kkopjajtu sew u li ma ġiex revokat.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Oħloq token tal-aċċess fil-klijent Matrix tiegħek (pereżempju f\'Element taħt Is-settings kollha → Għajnuna u info), jew fuq il-homeserver tiegħek. "Ittestja l-konnessjoni" jikkonferma t-token u jimla l-ID tal-utent u l-ID tal-apparat tiegħek.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Meħtieġ meta l-homeserver taħdem fuq netwerk privat jew tad-dar. Mingħajr din il-bandiera l-kontroll tas-sigurtà jirrifjuta indirizz privat.',
-  'Realtime samenwerken (Matrix)': 'Kollaborazzjoni f\'ħin reali (Matrix)',
   'Samenwerken': 'Kollaborazzjoni',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Konnessjoni rnexxiet — ID tal-utent u ID tal-apparat imtlew',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Konnessjoni rnexxiet, imma l-homeserver ma rritornax ID tal-apparat — daħħlu int stess, inkella ċ-ċwievet tal-koawturi mhux se jaslu.',
-  'Vul een access-token in': 'Daħħal token tal-aċċess',
-  'Vul een geldige homeserver-URL in': 'Daħħal URL validu tal-homeserver',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Ikkollabora fil-ħin reali fuq preżentazzjoni permezz ta\' homeserver Matrix bħala relay ikkriptat. Il-kontenut jiġi kkriptat minn tarf sa tarf biċ-ċwievet ta\' OciDeck stess; is-server jara biss data kkriptata. Daħħal homeserver u token tal-aċċess maħluq band\'oħra — OciDeck qatt ma jitlob il-password tiegħek. It-token jinħażen ikkriptat fiċ-ċavetta, mhux mal-issettjar l-ieħor.',
-  'wordt door de test ingevuld': 'jimtela mit-test',
   'Meer documentatie op de repository': 'Aktar dokumentazzjoni fir-repożitorju',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Id-dokumentazzjoni sħiħa — inklużi l-arkitettura, il-bini, il-kodiċi sors u d-disinn — tinsab fir-repożitorju.',

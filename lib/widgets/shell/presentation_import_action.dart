@@ -315,10 +315,7 @@ Future<Map<String, ThemeProfile>> _logoProfilesByHash(
         bytes = await readStyleLogoBytes(path);
       }
       if (bytes != null && bytes.isNotEmpty) {
-        result.putIfAbsent(
-          sha256Hex(bytes),
-          () => profile,
-        );
+        result.putIfAbsent(sha256Hex(bytes), () => profile);
       }
     } on Exception catch (e, s) {
       logError('importPresentation: stijlprofiellogo vergelijken', e, s);
@@ -326,7 +323,6 @@ Future<Map<String, ThemeProfile>> _logoProfilesByHash(
   }
   return result;
 }
-
 
 /// Zet het geïmporteerde deck in een nieuw tabblad: vraagt de titel, markeert
 /// als onopgeslagen, en toont de melding. Het deck staat nog nergens op schijf,

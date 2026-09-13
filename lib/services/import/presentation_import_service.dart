@@ -313,5 +313,4 @@ class PresentationImportService {
     if (firstSlideTitle.isNotEmpty) return firstSlideTitle;
     return stemOfFileName(filename);
   }
-
 }

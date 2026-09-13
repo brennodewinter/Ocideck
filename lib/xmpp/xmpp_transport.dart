@@ -556,7 +556,6 @@ class XmppTransport implements CollabTransport {
 
   // ── helpers ────────────────────────────────────────────────────────────────
 
-
   static String _stanzaKey(Stanza stanza, String namespace) =>
       // Gebruik niet toXmlString() als fallback — dat logt de volledige stanza
       // inclusief payload (#1431). Een safe samenvatting volstaat voor logging.

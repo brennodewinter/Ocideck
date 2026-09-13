@@ -3053,8 +3053,8 @@ const _dutchSourceAddEl = <String, String>{
   'Hulpmiddelen voor procesverbetering (SIPOC, DMAIC, Kaizen en A3). Standaard uit; zet de uitbreiding aan om de bijbehorende sjablonen en dia-indelingen te gebruiken.':
       'Εργαλεία για βελτίωση διαδικασιών (SIPOC, DMAIC, Kaizen και A3). Απενεργοποιημένα από προεπιλογή· ενεργοποιήστε την επέκταση για να χρησιμοποιήσετε τα σχετικά πρότυπα και τις διατάξεις διαφανειών.',
   'Videovergaderingen': 'Βιντεοσυσκέψεις',
-  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi of Matrix); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
-      'Συμμετέχετε σε βιντεοσυσκέψεις και παρουσιάζετε από το OciDeck με δικό του περιβάλλον: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο μιας άλλης εφαρμογής. Bring-your-own-server (Jitsi ή Matrix)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα της συνομιλίας μακριά από την AI. Η σύνδεση με μια υπηρεσία συσκέψεων θα ακολουθήσει σε μελλοντική έκδοση.',
+  'Neem deel aan videovergaderingen en presenteer vanuit OciDeck met een eigen interface: deelnemers naast uw slide, niet in het venster van een andere app. Bring-your-own-server (Jitsi); OciDeck host niets en houdt de gespreksgegevens buiten AI. De aansluiting op een vergaderdienst volgt in een volgende versie.':
+      'Συμμετέχετε σε βιντεοσυσκέψεις και παρουσιάζετε από το OciDeck με δικό του περιβάλλον: οι συμμετέχοντες δίπλα στη διαφάνειά σας, όχι στο παράθυρο μιας άλλης εφαρμογής. Bring-your-own-server (Jitsi)· το OciDeck δεν φιλοξενεί τίποτα και κρατά τα δεδομένα της συνομιλίας μακριά από την AI. Η σύνδεση με μια υπηρεσία συσκέψεων θα ακολουθήσει σε μελλοντική έκδοση.',
   'Videovergadering': 'Βιντεοσύσκεψη',
   'Nog geen actieve vergadering. Het aansluiten op een vergaderdienst wordt in een volgende versie toegevoegd.':
       'Δεν υπάρχει ακόμη ενεργή σύσκεψη. Η σύνδεση με μια υπηρεσία συσκέψεων θα προστεθεί σε μελλοντική έκδοση.',
@@ -3072,11 +3072,6 @@ const _dutchSourceAddEl = <String, String>{
       'Οι εικόνες μαζί είναι πολύ μεγάλες για ένα μόνο αρχείο HTML (έως 512 MB). Χρησιμοποιήστε λιγότερες ή μικρότερες εικόνες ή εξαγάγετε ως PDF ή πακέτο.',
   'Deze export heeft te veel dia’s op te hoge resolutie om veilig te renderen. Exporteer in delen of gebruik de gecomprimeerde PDF.':
       'Αυτή η εξαγωγή έχει πάρα πολλές διαφάνειες σε πολύ υψηλή ανάλυση για ασφαλή απόδοση. Εξαγάγετε τμηματικά ή χρησιμοποιήστε το συμπιεσμένο PDF.',
-  'Rond de presentatie eerst af en sla haar op; daarna kun je de herkomst ondertekenen.':
-      'Ολοκληρώστε και αποθηκεύστε πρώτα την παρουσίαση· έπειτα μπορείτε να υπογράψετε την προέλευσή της.',
-  'Herkomst ondertekend.': 'Η προέλευση υπογράφηκε.',
-  'De herkomst kon niet worden ondertekend.':
-      'Δεν ήταν δυνατή η υπογραφή της προέλευσης.',
   'Herkomst ondertekenen': 'Υπογραφή προέλευσης',
   'Herkomst bevestigd': 'Η προέλευση επιβεβαιώθηκε',
   'Ondertekend met een eerder bevestigde sleutel — dit deck komt van die eigenaar.':
@@ -3093,32 +3088,9 @@ const _dutchSourceAddEl = <String, String>{
   'Herkomst niet hier te controleren': 'Η προέλευση δεν ελέγχεται εδώ',
   'De ondertekening is aanwezig, maar kan hier niet worden nagerekend — controleer tegen het oorspronkelijke `.md`-bestand.':
       'Η υπογραφή υπάρχει αλλά δεν μπορεί να υπολογιστεί ξανά εδώ — ελέγξτε την με το αρχικό αρχείο `.md`.',
-  'Bestaande identiteit vervangen?': 'Αντικατάσταση της υπάρχουσας ταυτότητας;',
-  'Dit apparaat heeft al een samenwerkingsidentiteit. Herstellen vervangt die door de identiteit uit de sleutel. Heb je van de huidige identiteit een herstelsleutel bewaard? Zonder back-up ben je die kwijt.':
-      'Αυτή η συσκευή έχει ήδη ταυτότητα συνεργασίας. Η επαναφορά την αντικαθιστά με την ταυτότητα από το κλειδί. Αποθηκεύσατε κλειδί ανάκτησης για την τρέχουσα ταυτότητα; Χωρίς αντίγραφο ασφαλείας θα τη χάσετε.',
   'Het webgeheugen voor presentatiemedia is vol (maximaal 256 MB). Sla je werk eerst op als .ocideck om verlies te voorkomen. Gebruik daarna minder of kleinere afbeeldingen, video’s of audiobestanden, sluit andere decks of herlaad zonder andere decks te openen.':
       'Η μνήμη ιστού για πολυμέσα παρουσιάσεων είναι πλήρης (μέγιστο 256 MB). Αποθηκεύστε πρώτα την εργασία σας ως αρχείο .ocideck για να αποφύγετε την απώλεια δεδομένων. Έπειτα χρησιμοποιήστε λιγότερες ή μικρότερες εικόνες, βίντεο ή αρχεία ήχου, κλείστε άλλες παρουσιάσεις ή επαναφορτώστε χωρίς να ανοίξετε άλλες παρουσιάσεις.',
   'Ongeldige vraag': 'Μη έγκυρη ερώτηση',
-  'Herstelsleutel': 'Κλειδί ανάκτησης',
-  'Bewaar deze herstelsleutel op een veilige plek — bijvoorbeeld in je wachtwoordkluis. Het is de enige manier om dezelfde identiteit op een ander apparaat te herstellen; zonder deze sleutel begin je daar als een nieuw, nog niet geverifieerd apparaat. Deel hem met niemand.':
-      'Φυλάξτε αυτό το κλειδί ανάκτησης σε ασφαλές μέρος — για παράδειγμα στο θησαυροφυλάκιο κωδικών σας. Είναι ο μόνος τρόπος να επαναφέρετε την ίδια ταυτότητα σε άλλη συσκευή· χωρίς αυτό το κλειδί, εκεί ξεκινάτε ως νέα, μη επαληθευμένη ακόμη συσκευή. Μην το μοιραστείτε με κανέναν.',
-  'Herstelsleutel gekopieerd.': 'Το κλειδί ανάκτησης αντιγράφηκε.',
-  'Identiteit herstellen': 'Επαναφορά ταυτότητας',
-  'Plak de herstelsleutel die je eerder bewaarde. Dit apparaat neemt dan dezelfde identiteit over — mede-auteurs die je eerder verifieerden herkennen je vingerafdruk weer.':
-      'Επικολλήστε το κλειδί ανάκτησης που αποθηκεύσατε νωρίτερα. Αυτή η συσκευή αναλαμβάνει τότε την ίδια ταυτότητα — οι συν-συγγραφείς που σας είχαν επαληθεύσει θα αναγνωρίσουν ξανά το αποτύπωμά σας.',
-  'Identiteit & herstelsleutel': 'Ταυτότητα & κλειδί ανάκτησης',
-  'Je apparaat heeft een eigen samenwerkingsidentiteit — dat is wat mede-auteurs verifiëren. Bewaar de herstelsleutel om diezelfde identiteit later op een ander apparaat terug te zetten; zonder die sleutel begin je daar opnieuw.':
-      'Η συσκευή σας έχει τη δική της ταυτότητα συνεργασίας — αυτήν επαληθεύουν οι συν-συγγραφείς. Αποθηκεύστε το κλειδί ανάκτησης για να επαναφέρετε αργότερα την ίδια ταυτότητα σε άλλη συσκευή· χωρίς αυτό το κλειδί ξεκινάτε εκεί από την αρχή.',
-  'Herstelsleutel tonen': 'Εμφάνιση κλειδιού ανάκτησης',
-  'De herstelsleutel kon niet worden gelezen.':
-      'Δεν ήταν δυνατή η ανάγνωση του κλειδιού ανάκτησης.',
-  'Identiteit hersteld.': 'Η ταυτότητα επαναφέρθηκε.',
-  'Deze herstelsleutel klopt niet — controleer of je hem volledig en foutloos hebt overgenomen.':
-      'Αυτό το κλειδί ανάκτησης δεν είναι σωστό — ελέγξτε ότι το αντιγράψατε πλήρως και χωρίς σφάλματα.',
-  'Dit lijkt geen geldige herstelsleutel.':
-      'Αυτό δεν μοιάζει με έγκυρο κλειδί ανάκτησης.',
-  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
-      'Αυτό το κλειδί ανάκτησης προέρχεται από νεότερη έκδοση του OciDeck.',
   'Afbeeldingsrechten': 'Δικαιώματα εικόνας',
   'Afbeeldingsrechten controleren…': 'Ελέγξτε τα δικαιώματα εικόνας…',
   'Afdoening': 'Επίλυση',
@@ -3143,97 +3115,22 @@ const _dutchSourceAddEl = <String, String>{
       'Τα αρχεία δεν ήταν δυνατό να ελεγχθούν με ασφάλεια',
   'nieuw gescand': 'πρόσφατα σαρώθηκε',
   'Realtime samenwerken': 'Συνεργασία σε πραγματικό χρόνο',
-  'Manieren van verbinden': 'Τρόποι σύνδεσης',
   'Werk live samen aan een presentatie via een versleuteld doorgeefluik. Standaard uit. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens.':
       'Συνεργαστείτε ζωντανά σε μια παρουσίαση μέσω ενός κρυπτογραφημένου αναμεταδότη. Ανενεργό από προεπιλογή. Το περιεχόμενο κρυπτογραφείται από άκρο σε άκρο με τα δικά κλειδιά του OciDeck· ο διακομιστής βλέπει μόνο κρυπτογραφημένα δεδομένα.',
-  'Samenwerken via een Matrix-homeserver als doorgeefluik. Stel het account in bij het tabblad Samenwerken. (Jitsi en XMPP volgen.)':
-      'Συνεργασία μέσω ενός homeserver Matrix ως αναμεταδότη. Ρυθμίστε τον λογαριασμό στην καρτέλα Συνεργασία. (Jitsi και XMPP έρχονται.)',
   'Chat': 'Συνομιλία',
-  'Chat openen': 'Άνοιγμα συνομιλίας',
   'Chat sluiten': 'Κλείσιμο συνομιλίας',
   'Bericht…': 'Μήνυμα…',
   'Versturen': 'Αποστολή',
   'Nog geen berichten. Zeg iets tegen je mede-auteurs.':
       'Δεν υπάρχουν ακόμη μηνύματα. Πες κάτι στους συν-συντάκτες σου.',
-  'Vergelijk de vingerafdruk van elk apparaat via een vertrouwd kanaal — lees hem elkaar voor, of stuur hem langs een weg die je vertrouwt. Komt hij overeen, markeer het apparaat dan als geverifieerd; het blijft dan geverifieerd, ook in een volgende sessie. Wijkt hij af, verbreek dan de samenwerking.':
-      'Σύγκρινε το αποτύπωμα κάθε συσκευής μέσω ενός αξιόπιστου καναλιού — διαβάστε το ο ένας στον άλλον ή στείλ\' το από μια οδό που εμπιστεύεσαι. Αν ταιριάζει, σημείωσε τη συσκευή ως επαληθευμένη· θα παραμείνει επαληθευμένη, ακόμη και σε επόμενη συνεδρία. Αν διαφέρει, διέκοψε τη συνεργασία.',
-  'De identiteit van dit apparaat wijkt af van wat je eerder verifieerde — mogelijk zit er iemand tussen. Verbreek de samenwerking, tenzij je zeker weet dat dit apparaat opnieuw is ingesteld.':
-      'Η ταυτότητα αυτής της συσκευής διαφέρει από αυτήν που επαλήθευσες νωρίτερα — ίσως κάποιος να παρεμβαίνει. Διέκοψε τη συνεργασία, εκτός αν είσαι βέβαιος ότι αυτή η συσκευή ρυθμίστηκε ξανά.',
-  'Geverifieerd': 'Επαληθεύτηκε',
-  'Wijkt af': 'Διαφέρει',
-  'Niet geverifieerd': 'Μη επαληθευμένο',
-  'Markeer als geverifieerd': 'Σήμανση ως επαληθευμένο',
-  'Verificatie intrekken': 'Ανάκληση επαλήθευσης',
-  'Toch opnieuw vertrouwen': 'Εμπιστεύσου ξανά ούτως ή άλλως',
   'Nog niet elk apparaat in deze samenwerking is geverifieerd. Vergelijk de vingerafdrukken om zeker te weten met wie je werkt.':
       'Δεν έχει επαληθευτεί ακόμη κάθε συσκευή σε αυτή τη συνεργασία. Σύγκρινε τα αποτυπώματα για να είσαι σίγουρος με ποιον δουλεύεις.',
   'Tabelcel-bewerkingen worden niet gesynchroniseerd naar medebewerkers. De titel en andere velden wel.':
       'Οι επεξεργασίες κελιών πίνακα δεν συγχρονίζονται με τους συνσυγγραφείς. Ο τίτλος και τα άλλα πεδία ναι.',
   'Verifiëren': 'Επαλήθευση',
-  'Deelnemers verifiëren': 'Επαλήθευση συμμετεχόντων',
-  '(dit apparaat)': '(αυτή η συσκευή)',
   'CVSS': 'CVSS',
-  'Dat is geen geldige uitnodigingslink.':
-      'Αυτός δεν είναι έγκυρος σύνδεσμος πρόσκλησης.',
-  'De Matrix-homeserver is niet bereikbaar.':
-      'Ο homeserver Matrix δεν είναι προσβάσιμος.',
-  'De gastheer reageerde niet op tijd. Controleer de link en of de gastheer nog online is.':
-      'Ο οικοδεσπότης δεν απάντησε εγκαίρως. Ελέγξτε τον σύνδεσμο και αν ο οικοδεσπότης είναι ακόμη συνδεδεμένος.',
-  'Deel deze link met wie je mee wil laten werken. Wie de link heeft, kan de sessie binnenkomen — deel hem dus alleen met mensen die je vertrouwt. De inhoud blijft end-to-end versleuteld; de homeserver ziet alleen versleutelde gegevens.':
-      'Μοιραστείτε αυτόν τον σύνδεσμο με όσους θέλετε να συνεργαστούν. Όποιος έχει τον σύνδεσμο μπορεί να μπει στη συνεδρία — γι\' αυτό μοιραστείτε τον μόνο με ανθρώπους που εμπιστεύεστε. Το περιεχόμενο παραμένει κρυπτογραφημένο από άκρο σε άκρο· ο homeserver βλέπει μόνο κρυπτογραφημένα δεδομένα.',
   'Deelnemen': 'Συμμετοχή',
-  'Deelnemen via een link': 'Συμμετοχή μέσω συνδέσμου',
-  'Je Matrix-account wordt geweigerd — controleer het access-token bij Instellingen.':
-      'Ο λογαριασμός σας Matrix απορρίπτεται — ελέγξτε το διακριτικό πρόσβασης στις Ρυθμίσεις.',
-  'Je doet nu live mee aan de samenwerking.': 'Τώρα συνεργάζεστε ζωντανά.',
-  'Nodig mede-auteurs uit': 'Πρόσκληση συν-συντακτών',
-  'Open eerst een presentatie om aan samen te werken.':
-      'Ανοίξτε πρώτα μια παρουσίαση για να συνεργαστείτε.',
-  'Plak de uitnodigingslink die de gastheer je stuurde. Je opent daarmee dezelfde presentatie en werkt live mee.':
-      'Επικολλήστε τον σύνδεσμο πρόσκλησης που σας έστειλε ο οικοδεσπότης. Έτσι ανοίγετε την ίδια παρουσίαση και συνεργάζεστε ζωντανά.',
-  'Realtime samenwerken is mislukt.':
-      'Η συνεργασία σε πραγματικό χρόνο απέτυχε.',
-  'Realtime samenwerken starten': 'Έναρξη συνεργασίας σε πραγματικό χρόνο',
-  'Stel eerst een Matrix-account in bij Instellingen → Samenwerken.':
-      'Ρυθμίστε πρώτα έναν λογαριασμό Matrix στις Ρυθμίσεις → Συνεργασία.',
-  'Uitnodigingslink': 'Σύνδεσμος πρόσκλησης',
-  'Uitnodigingslink gekopieerd.': 'Ο σύνδεσμος πρόσκλησης αντιγράφηκε.',
-  'Uitnodigingslink kopiëren': 'Αντιγραφή συνδέσμου πρόσκλησης',
-  'Verbinden met de samenwerking…': 'Σύνδεση με τη συνεργασία…',
-  'Access-token': 'Διακριτικό πρόσβασης',
-  'Apparaat-id': 'Αναγνωριστικό συσκευής',
-  'Gebruikers-id': 'Αναγνωριστικό χρήστη',
-  'De homeserver gaf een fout. Probeer het later opnieuw.':
-      'Ο homeserver επέστρεψε σφάλμα. Δοκιμάστε ξανά αργότερα.',
-  'De homeserver is niet bereikbaar, of het certificaat wordt niet vertrouwd.':
-      'Ο homeserver δεν είναι προσβάσιμος ή το πιστοποιητικό δεν είναι έμπιστο.',
-  'De homeserver stuurt door naar een ander adres — dat wordt om veiligheidsredenen niet gevolgd. Vul het uiteindelijke adres rechtstreeks in.':
-      'Ο homeserver ανακατευθύνει σε άλλη διεύθυνση — για λόγους ασφαλείας δεν ακολουθείται. Καταχωρίστε απευθείας την τελική διεύθυνση.',
-  'De homeserver vraagt om even te wachten. Probeer het zo opnieuw.':
-      'Ο homeserver ζητά να περιμένετε λίγο. Δοκιμάστε ξανά σε λίγο.',
-  'De homeserver weigert dit token.':
-      'Ο homeserver απορρίπτει αυτό το διακριτικό.',
-  'Dit adres antwoordt niet als een Matrix-homeserver. Klopt de URL?':
-      'Αυτή η διεύθυνση δεν απαντά ως homeserver του Matrix. Είναι σωστό το URL;',
-  'Een homeserver moet https zijn: het access-token reist bij elk verzoek mee.':
-      'Ένας homeserver πρέπει να είναι https: το διακριτικό πρόσβασης ταξιδεύει με κάθε αίτημα.',
-  'Het access-token wordt geweigerd — controleer of je het goed hebt overgenomen en of het niet is ingetrokken.':
-      'Το διακριτικό πρόσβασης απορρίπτεται — ελέγξτε αν το αντιγράψατε σωστά και αν δεν έχει ανακληθεί.',
-  'Maak een access-token aan in je Matrix-client (bijvoorbeeld in Element onder Alle instellingen → Hulp & info), of op je homeserver. "Verbinding testen" bevestigt het token en vult je gebruikers-id en apparaat-id in.':
-      'Δημιουργήστε ένα διακριτικό πρόσβασης στον πελάτη Matrix σας (για παράδειγμα στο Element, στο Όλες οι ρυθμίσεις → Βοήθεια & πληροφορίες), ή στον homeserver σας. Το "Δοκιμή σύνδεσης" επιβεβαιώνει το διακριτικό και συμπληρώνει το αναγνωριστικό χρήστη και το αναγνωριστικό συσκευής σας.',
-  'Nodig wanneer de homeserver op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
-      'Χρειάζεται όταν ο homeserver τρέχει σε ιδιωτικό ή οικιακό δίκτυο. Χωρίς αυτή τη σήμανση ο έλεγχος ασφαλείας απορρίπτει ιδιωτική διεύθυνση.',
-  'Realtime samenwerken (Matrix)': 'Συνεργασία σε πραγματικό χρόνο (Matrix)',
   'Samenwerken': 'Συνεργασία',
-  'Verbinding gelukt — gebruikers-id en apparaat-id ingevuld':
-      'Επιτυχής σύνδεση — συμπληρώθηκαν αναγνωριστικό χρήστη και αναγνωριστικό συσκευής',
-  'Verbinding gelukt, maar de homeserver gaf geen apparaat-id terug — vul die zelf in, anders komen sleutels van mede-auteurs niet aan.':
-      'Επιτυχής σύνδεση, αλλά ο homeserver δεν επέστρεψε αναγνωριστικό συσκευής — συμπληρώστε το μόνοι σας, αλλιώς τα κλειδιά των συν-συντακτών δεν θα φτάσουν.',
-  'Vul een access-token in': 'Εισαγάγετε ένα διακριτικό πρόσβασης',
-  'Vul een geldige homeserver-URL in': 'Εισαγάγετε ένα έγκυρο URL homeserver',
-  'Werk live samen aan een presentatie via een Matrix-homeserver als versleutelde doorgeefluik. De inhoud wordt end-to-end versleuteld met OciDecks eigen sleutels; de server ziet alleen versleutelde gegevens. Vul een homeserver en een elders aangemaakt access-token in — OciDeck vraagt nooit om je wachtwoord. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
-      'Συνεργαστείτε ζωντανά σε μια παρουσίαση μέσω ενός homeserver Matrix ως κρυπτογραφημένου αναμεταδότη. Το περιεχόμενο κρυπτογραφείται από άκρο σε άκρο με τα δικά κλειδιά του OciDeck· ο διακομιστής βλέπει μόνο κρυπτογραφημένα δεδομένα. Εισαγάγετε έναν homeserver και ένα διακριτικό πρόσβασης που δημιουργήθηκε αλλού — το OciDeck δεν ζητά ποτέ τον κωδικό σας. Το διακριτικό αποθηκεύεται κρυπτογραφημένο στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
-  'wordt door de test ingevuld': 'συμπληρώνεται από τον έλεγχο',
   'Meer documentatie op de repository': 'Περισσότερη τεκμηρίωση στο αποθετήριο',
   'De volledige documentatie — ook architectuur, bouw, broncode en ontwerp — staat op de repository.':
       'Η πλήρης τεκμηρίωση — συμπεριλαμβανομένων της αρχιτεκτονικής, της κατασκευής, του πηγαίου κώδικα και του σχεδιασμού — βρίσκεται στο αποθετήριο.',

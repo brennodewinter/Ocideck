@@ -12,7 +12,6 @@ import 'storage_connection.dart';
 import 'git_settings.dart';
 import 's3_settings.dart';
 import 'webdav_settings.dart';
-import 'matrix_settings.dart';
 
 export 'ai_settings.dart';
 export 'libreplan_settings.dart';

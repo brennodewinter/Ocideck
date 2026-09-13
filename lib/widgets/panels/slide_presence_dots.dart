@@ -5,7 +5,7 @@
 
 import 'package:material_ui/material_ui.dart';
 
-import '../../collab/matrix_presence.dart';
+import '../../collab/collab.dart' show PeerPresence;
 import '../../theme/app_theme.dart';
 
 /// Wrap a slide thumbnail [child] with presence dots for whoever in [presence]

@@ -265,4 +265,3 @@ class BulkImportRunner {
     return p.join(directory, '$candidate.md');
   }
 }
-

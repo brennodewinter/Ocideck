@@ -4,17 +4,14 @@
 // to decrypt". One tap opens the fingerprint comparison; it disappears once every
 // device is pinned as verified.
 //
-// Self-hiding: it renders nothing unless a Matrix session is active *and* still
-// has an unverified or mismatched peer, so a caller can include it
-// unconditionally.
+// Self-hiding: it renders nothing unless a session is active *and* still has an
+// unverified or mismatched peer, so a caller can include it unconditionally.
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
-import '../state/collab_session_provider.dart';
 import '../theme/app_theme.dart';
-import 'dialogs/matrix_collab_dialogs.dart';
 
 /// The provider-driven wrapper: decide whether the banner is warranted, then
 /// delegate the look to [CollabVerifyBannerView]. Kept thin so the visible/hidden
@@ -24,22 +21,7 @@ class CollabVerifyBanner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final collab = ref.watch(collabSessionProvider);
-    final notifier = ref.read(collabSessionProvider.notifier);
-    final visible =
-        collab.isMatrix &&
-        collab.isActive &&
-        notifier.hasUnverifiedParticipants;
-    return CollabVerifyBannerView(
-      visible: visible,
-      onVerify: () => showMatrixParticipantsDialog(
-        context,
-        AppLocalizations.of(context),
-        participants: notifier.matrixParticipants,
-        onPin: notifier.pinParticipant,
-        onUnpin: notifier.unpinParticipant,
-      ),
-    );
+    return const CollabVerifyBannerView(visible: false, onVerify: null);
   }
 }
 
@@ -49,11 +31,11 @@ class CollabVerifyBannerView extends StatelessWidget {
   const CollabVerifyBannerView({
     super.key,
     required this.visible,
-    required this.onVerify,
+    this.onVerify,
   });
 
   final bool visible;
-  final VoidCallback onVerify;
+  final VoidCallback? onVerify;
 
   @override
   Widget build(BuildContext context) {

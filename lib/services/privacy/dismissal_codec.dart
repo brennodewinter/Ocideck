@@ -20,7 +20,6 @@ library;
 import 'dart:convert';
 import 'dart:math';
 
-
 import '../../utils/json_depth_guard.dart';
 import '../../utils/log.dart';
 import '../sidecar_format.dart';
@@ -133,8 +132,7 @@ class DeckDismissals {
 ///     overleeft is precies wat dit product wil voorkomen.
 ///  2. Het zout is per deck, dus dezelfde naam in twee decks geeft twee
 ///     onvergelijkbare uitkomsten.
-String commitmentFor(String salt, String text) =>
-    sha256HexOfText('$salt$text');
+String commitmentFor(String salt, String text) => sha256HexOfText('$salt$text');
 
 /// Een vers zout voor een deck dat er nog geen heeft.
 ///
