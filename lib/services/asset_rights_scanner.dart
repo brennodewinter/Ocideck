@@ -6,6 +6,7 @@ import 'package:image/image.dart' as img;
 
 import '../models/asset_rights.dart';
 import 'image_service.dart';
+import '../utils/content_hash.dart';
 
 class AssetRightsScanner {
   const AssetRightsScanner();
@@ -19,7 +20,7 @@ class AssetRightsScanner {
     List<AssetRightsDisposition> dispositions = const [],
     DateTime? now,
   }) async {
-    final hash = sha256.convert(bytes).toString();
+    final hash = sha256Hex(bytes);
     final mime = ImageService.imageMimeFromBytes(bytes.take(16).toList());
     if (mime == null) {
       throw const FormatException('Geen ondersteunde afbeelding');

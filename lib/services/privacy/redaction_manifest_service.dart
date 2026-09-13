@@ -10,7 +10,6 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:crypto/crypto.dart';
 
 import '../../models/deck.dart';
 import '../../models/privacy_disposition.dart';
@@ -22,6 +21,7 @@ import '../document_chrome_template.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_regions.dart';
 import 'privacy_scanner.dart';
+import '../../utils/content_hash.dart';
 
 /// Bouwt en verifieert redactiemanifesten.
 class RedactionManifestService {
@@ -329,7 +329,7 @@ class RedactionManifestService {
   /// Geschreven als escape — een rauwe control-byte maakt het bestand binair
   /// voor grep en onreviewbaar in een diff.
   static String commitmentFor({required String salt, required String value}) =>
-      sha256.convert(utf8.encode('$salt\u0000$value')).toString();
+      sha256HexOfText('$salt\u0000$value');
 
   /// Controleert één betwiste redactie.
   ///

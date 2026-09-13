@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
+import '../utils/content_hash.dart';
 
 /// Auto evidence hashing (PENTEST_MIAUW §10.2 / 3.3 / 4.8 / 4.11). MIAUW mandates
 /// a **SHA1** hash for every received document / evidence artefact; a **SHA-256**
@@ -20,7 +21,7 @@ class EvidenceHashes {
 /// Compute the SHA1 + SHA-256 of [bytes]. Pure and synchronous.
 EvidenceHashes computeEvidenceHashes(Uint8List bytes) => EvidenceHashes(
   sha1: sha1.convert(bytes).toString(),
-  sha256: sha256.convert(bytes).toString(),
+  sha256: sha256Hex(bytes),
 );
 
 /// Eén cel van de bijlage-tabel, zo dat de tabel heel blijft.

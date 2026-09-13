@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:crypto/crypto.dart' as crypto;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show MethodChannel;
@@ -16,6 +15,7 @@ import '../utils/project_path.dart';
 import 'asset_staging.dart';
 import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
+import '../utils/content_hash.dart';
 
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
 /// bewuste keuze van de gebruiker (geen melding tonen); de overige redenen
@@ -569,7 +569,7 @@ class ImageService {
         if (entry is! File) continue;
         try {
           final bytes = await entry.readAsBytes();
-          final hash = crypto.sha256.convert(bytes).toString();
+          final hash = sha256Hex(bytes);
           final rel = 'images/${p.basename(entry.path)}';
           map.putIfAbsent(hash, () => rel);
         } on Object {
@@ -706,7 +706,7 @@ class ImageService {
     // Cross-import dedup: als er al een bestand met dezelfde inhoud in de
     // projectmap staat (onder een andere naam), hergebruik het dan.
     if (existingByHash != null) {
-      final hash = crypto.sha256.convert(bytes).toString();
+      final hash = sha256Hex(bytes);
       final existing = existingByHash[hash];
       if (existing != null) return existing;
     }
@@ -727,7 +727,7 @@ class ImageService {
     // dezelfde opslaactie ook deze kan hergebruiken.
     if (existingByHash != null) {
       existingByHash.putIfAbsent(
-        crypto.sha256.convert(bytes).toString(),
+        sha256Hex(bytes),
         () => '$subdir/${p.basename(dest.file.path)}',
       );
     }

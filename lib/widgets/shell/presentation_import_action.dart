@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:crypto/crypto.dart' as crypto;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show rootBundle;
@@ -35,6 +34,7 @@ import '../dialogs/import_security_alarm_dialog.dart';
 import '../dialogs/import_rename_dialog.dart';
 import '../dialogs/presentation_import_progress_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
+import '../../utils/content_hash.dart';
 
 /// Eén gekozen bestand: de bytes plus de naam waaronder het gekozen werd.
 typedef PickedPresentation = ({Uint8List bytes, String name});
@@ -315,7 +315,7 @@ Future<Map<String, ThemeProfile>> _logoProfilesByHash(
       }
       if (bytes != null && bytes.isNotEmpty) {
         result.putIfAbsent(
-          crypto.sha256.convert(bytes).toString(),
+          sha256Hex(bytes),
           () => profile,
         );
       }

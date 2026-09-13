@@ -32,11 +32,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:crypto/crypto.dart';
 import 'package:xml/xml.dart';
 
 import '../collab/collab_crypto.dart';
 import '../collab/collab_device_directory.dart';
+import '../utils/content_hash.dart';
 import '../utils/log.dart';
 import 'companion_demux.dart';
 import 'xmpp_session.dart';
@@ -267,7 +267,7 @@ class XmppChat {
   /// dezelfde JSON — `toContent()` heeft een vaste sleutelvolgorde — dus dezelfde
   /// hash.
   String _sealedId(SealedEnvelope sealed) =>
-      sha256.convert(utf8.encode(jsonEncode(sealed.toContent()))).toString();
+      sha256HexOfText(jsonEncode(sealed.toContent()));
 
   /// Onthoud [id] in de begrensde dedup-set; verdrijf het oudste als de cap
   /// bereikt is (FIFO).

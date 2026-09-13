@@ -1,16 +1,16 @@
 import 'dart:typed_data';
 
-import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart' show compute;
 import 'package:path/path.dart' as p;
 
 import '../../models/git_settings.dart';
 import '../../utils/lru_cache.dart';
 import 'git_forge.dart';
+import '../../utils/content_hash.dart';
 
 /// Isolate-werkfunctie: sha-256 over de bytes. Buiten de UI-isolate omdat een
 /// video van honderden megabytes anders een frame-drop kost.
-String _sha256Worker(Uint8List bytes) => sha256.convert(bytes).toString();
+String _sha256Worker(Uint8List bytes) => sha256Hex(bytes);
 
 /// De gedeelde, content-geadresseerde asset-pool van §6.
 ///
