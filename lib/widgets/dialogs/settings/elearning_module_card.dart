@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../state/elearning_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'module_card.dart';
 
 /// Module card for eLearning on Settings → Uitbreidingen (#1999).
 ///
@@ -18,13 +19,7 @@ class ElearningModuleCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final enabled = ref.watch(elearningEnabledProvider);
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

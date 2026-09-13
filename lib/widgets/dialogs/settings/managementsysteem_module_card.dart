@@ -6,6 +6,7 @@ import '../../../models/management_system.dart';
 import '../../../services/management_system_catalog.dart';
 import '../../../state/managementsysteem_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'module_card.dart';
 
 /// Module card for Managementsysteem on Settings → Uitbreidingen
 /// (ISO_MANAGEMENTSYSTEEM §5).
@@ -26,13 +27,7 @@ class ManagementsysteemModuleCard extends ConsumerWidget {
       for (final s in ManagementSystemStandard.values)
         ManagementSystemCatalog.instance.controlsFor(s).length,
     ].fold<int>(0, (a, b) => a + b);
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

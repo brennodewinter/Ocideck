@@ -13,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../state/collaboration_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'module_card.dart';
 
 class CollaborationModuleCard extends ConsumerWidget {
   const CollaborationModuleCard({super.key});
@@ -22,13 +23,7 @@ class CollaborationModuleCard extends ConsumerWidget {
     final l10n = context.l10n;
     final enabled = ref.watch(collaborationEnabledProvider);
     final matrixOn = ref.watch(matrixCollabEnabledProvider);
-    return Material(
-      color: AppTheme.paper,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppTheme.iceBlue),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return ModuleCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
