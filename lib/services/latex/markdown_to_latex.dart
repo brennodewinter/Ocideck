@@ -21,7 +21,6 @@ import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_footnote_setup.dart';
 import '../document_timeline.dart';
-import '../markdown_table_codec.dart';
 
 /// Zet [markdown] (GFM) om in een LaTeX-fragment.
 ///
@@ -112,51 +111,30 @@ String markdownToLatex(
 }
 
 ({String source, List<String> latex}) _protectDocumentTimelines(String source) {
-  final lines = source.replaceAll('\r\n', '\n').split('\n');
-  final output = <String>[];
-  final rendered = <String>[];
-  var index = 0;
-  while (index < lines.length) {
-    if (lines[index].trim() != documentTimelineMarker ||
-        index + 2 >= lines.length ||
-        !isMarkdownTableLine(lines[index + 1]) ||
-        !isMarkdownTableDelimiterRow(lines[index + 2])) {
-      output.add(lines[index++]);
-      continue;
-    }
-    var end = index + 3;
-    while (end < lines.length && isMarkdownTableLine(lines[end])) {
-      end++;
-    }
-    final marked = lines.sublist(index, end).join('\n');
-    final timeline = analyzeMarkedTimeline(marked).timeline;
-    if (timeline == null) {
-      output.add(lines[index++]);
-      continue;
-    }
-    final buffer = StringBuffer('\\begin{description}\n');
-    for (final event in timeline.events) {
+  final r = protectTimelines(source, _renderTimelineLatex);
+  return (source: r.source, latex: r.rendered);
+}
+
+String _renderTimelineLatex(DocumentTimeline timeline) {
+  final buffer = StringBuffer('\\begin{description}\n');
+  for (final event in timeline.events) {
+    buffer
+      ..write('\\item[\\textbf{')
+      ..write(markdownInlineToLatex(event.marker))
+      ..write('}] ')
+      ..write(markdownInlineToLatex(event.event));
+    if ((event.metadata ?? '').isNotEmpty) {
       buffer
-        ..write('\\item[\\textbf{')
-        ..write(markdownInlineToLatex(event.marker))
-        ..write('}] ')
-        ..write(markdownInlineToLatex(event.event));
-      if ((event.metadata ?? '').isNotEmpty) {
-        buffer
-          ..write(' \\quad {\\footnotesize\\textsf{')
-          ..write(markdownInlineToLatex(timeline.headers[2]))
-          ..write(': ')
-          ..write(markdownInlineToLatex(event.metadata!))
-          ..write('}}');
-      }
-      buffer.writeln();
+        ..write(' \\quad {\\footnotesize\\textsf{')
+        ..write(markdownInlineToLatex(timeline.headers[2]))
+        ..write(': ')
+        ..write(markdownInlineToLatex(event.metadata!))
+        ..write('}}');
     }
-    buffer.write('\\end{description}');
-    output.add('OCIDECKTIMELINE${rendered.length}END');
-    rendered.add(buffer.toString());
-    index = end;
+    buffer.writeln();
   }
-  return (source: output.join('\n'), latex: rendered);
+  buffer.write('\\end{description}');
+  return buffer.toString();
 }
 
 /// Het merkteken dat een voetnootverwijzing tijdens de conversie vervangt.

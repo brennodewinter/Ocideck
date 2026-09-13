@@ -18,7 +18,6 @@ import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_footnote_setup.dart';
 import '../document_timeline.dart';
-import '../markdown_table_lines.dart';
 import '../../utils/xml_escape.dart';
 
 /// Zet [markdown] (GFM) om in een ODT body-fragment.
@@ -163,71 +162,50 @@ String _htmlInlineToOdt(String html) {
 /// tijdlijn als een gewone tabel — voor ODT volstaat dat, de marker blijft als
 /// commentaar zichtbaar voor wie de bron kent.
 ({String source, List<String> odt}) _protectDocumentTimelines(String source) {
-  final lines = source.replaceAll('\r\n', '\n').split('\n');
-  final output = <String>[];
-  final rendered = <String>[];
-  var index = 0;
-  while (index < lines.length) {
-    if (lines[index].trim() != documentTimelineMarker ||
-        index + 2 >= lines.length ||
-        !isMarkdownTableLine(lines[index + 1]) ||
-        !isMarkdownTableDelimiterRow(lines[index + 2])) {
-      output.add(lines[index++]);
-      continue;
-    }
-    var end = index + 3;
-    while (end < lines.length && isMarkdownTableLine(lines[end])) {
-      end++;
-    }
-    final marked = lines.sublist(index, end).join('\n');
-    final timeline = analyzeMarkedTimeline(marked).timeline;
-    if (timeline == null) {
-      output.add(lines[index++]);
-      continue;
-    }
-    // De tijdlijn wordt als ODT-tabel gerenderd; de marker blijft als
-    // commentaar erboven staan.
-    final buf = StringBuffer('<!-- timeline -->\n');
-    buf.writeln('<table:table table:name="Tijdlijn">');
-    buf.writeln(
-      '<table:table-column table:number-columns-repeated="${timeline.headers.length}"/>',
-    );
-    buf.writeln('<table:table-header-rows>');
-    buf.writeln('<table:table-row>');
-    for (final header in timeline.headers) {
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p text:style-name="Table_20_Heading">${xmlEscape(header)}</text:p>'
-        '</table:table-cell>',
+  final r = protectTimelines(source, _renderTimelineOdt);
+  return (source: r.source, odt: r.rendered);
+}
+
+String _renderTimelineOdt(DocumentTimeline timeline) {
+  // De tijdlijn wordt als ODT-tabel gerenderd; de marker blijft als
+      // commentaar erboven staan.
+      final buf = StringBuffer('<!-- timeline -->\n');
+      buf.writeln('<table:table table:name="Tijdlijn">');
+      buf.writeln(
+        '<table:table-column table:number-columns-repeated="${timeline.headers.length}"/>',
       );
-    }
-    buf.writeln('</table:table-row>');
-    buf.writeln('</table:table-header-rows>');
-    for (final event in timeline.events) {
+      buf.writeln('<table:table-header-rows>');
       buf.writeln('<table:table-row>');
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p>${_inlineOdt(event.marker)}</text:p>'
-        '</table:table-cell>',
-      );
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p>${_inlineOdt(event.event)}</text:p>'
-        '</table:table-cell>',
-      );
-      buf.write(
-        '<table:table-cell office:value-type="string">'
-        '<text:p>${_inlineOdt(event.metadata ?? '')}</text:p>'
-        '</table:table-cell>',
-      );
+      for (final header in timeline.headers) {
+        buf.write(
+          '<table:table-cell office:value-type="string">'
+          '<text:p text:style-name="Table_20_Heading">${xmlEscape(header)}</text:p>'
+          '</table:table-cell>',
+        );
+      }
       buf.writeln('</table:table-row>');
-    }
-    buf.writeln('</table:table>');
-    output.add('OCIDECKTIMELINE${rendered.length}END');
-    rendered.add(buf.toString());
-    index = end;
-  }
-  return (source: output.join('\n'), odt: rendered);
+      buf.writeln('</table:table-header-rows>');
+      for (final event in timeline.events) {
+        buf.writeln('<table:table-row>');
+        buf.write(
+          '<table:table-cell office:value-type="string">'
+          '<text:p>${_inlineOdt(event.marker)}</text:p>'
+          '</table:table-cell>',
+        );
+        buf.write(
+          '<table:table-cell office:value-type="string">'
+          '<text:p>${_inlineOdt(event.event)}</text:p>'
+          '</table:table-cell>',
+        );
+        buf.write(
+          '<table:table-cell office:value-type="string">'
+          '<text:p>${_inlineOdt(event.metadata ?? '')}</text:p>'
+          '</table:table-cell>',
+        );
+        buf.writeln('</table:table-row>');
+      }
+      buf.writeln('</table:table>');
+  return buf.toString();
 }
 
 class _OdtNodeVisitor implements md.NodeVisitor {

@@ -18,7 +18,6 @@ import 'package:markdown/markdown.dart' as md;
 import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
-import '../markdown_table_lines.dart';
 import '../../utils/xml_escape.dart';
 
 /// Zet [markdown] (GFM) om in een XHTML-fragment.
@@ -134,51 +133,30 @@ String _inlineXhtml(String text) => md
 /// tijdlijn als een gewone tabel, wat voor ePub goed genoeg is — de
 /// tijdlijn-marker blijft als HTML-commentaar zichtbaar.
 ({String source, List<String> xhtml}) _protectDocumentTimelines(String source) {
-  final lines = source.replaceAll('\r\n', '\n').split('\n');
-  final output = <String>[];
-  final rendered = <String>[];
-  var index = 0;
-  while (index < lines.length) {
-    if (lines[index].trim() != documentTimelineMarker ||
-        index + 2 >= lines.length ||
-        !isMarkdownTableLine(lines[index + 1]) ||
-        !isMarkdownTableDelimiterRow(lines[index + 2])) {
-      output.add(lines[index++]);
-      continue;
-    }
-    var end = index + 3;
-    while (end < lines.length && isMarkdownTableLine(lines[end])) {
-      end++;
-    }
-    final marked = lines.sublist(index, end).join('\n');
-    final timeline = analyzeMarkedTimeline(marked).timeline;
-    if (timeline == null) {
-      output.add(lines[index++]);
-      continue;
-    }
-    // De tijdlijn wordt als gewone tabel gerenderd; de marker blijft als
-    // commentaar erboven staan voor wie de bron kent.
-    final buf = StringBuffer('<!-- timeline -->\n');
-    buf.writeln('<table class="ocideck-timeline">');
-    buf.writeln('<thead><tr>');
-    for (final header in timeline.headers) {
-      buf.write('<th>${xmlEscape(header)}</th>');
-    }
-    buf.writeln('</tr></thead>');
-    buf.writeln('<tbody>');
-    for (final event in timeline.events) {
-      buf.write('<tr>');
-      buf.write('<td>${_inlineXhtml(event.marker)}</td>');
-      buf.write('<td>${_inlineXhtml(event.event)}</td>');
-      buf.write('<td>${_inlineXhtml(event.metadata ?? '')}</td>');
-      buf.writeln('</tr>');
-    }
-    buf.writeln('</tbody></table>');
-    output.add('OCIDECKTIMELINE${rendered.length}END');
-    rendered.add(buf.toString());
-    index = end;
-  }
-  return (source: output.join('\n'), xhtml: rendered);
+  final r = protectTimelines(source, _renderTimelineXhtml);
+  return (source: r.source, xhtml: r.rendered);
+}
+
+String _renderTimelineXhtml(DocumentTimeline timeline) {
+  // De tijdlijn wordt als gewone tabel gerenderd; de marker blijft als
+      // commentaar erboven staan voor wie de bron kent.
+      final buf = StringBuffer('<!-- timeline -->\n');
+      buf.writeln('<table class="ocideck-timeline">');
+      buf.writeln('<thead><tr>');
+      for (final header in timeline.headers) {
+        buf.write('<th>${xmlEscape(header)}</th>');
+      }
+      buf.writeln('</tr></thead>');
+      buf.writeln('<tbody>');
+      for (final event in timeline.events) {
+        buf.write('<tr>');
+        buf.write('<td>${_inlineXhtml(event.marker)}</td>');
+        buf.write('<td>${_inlineXhtml(event.event)}</td>');
+        buf.write('<td>${_inlineXhtml(event.metadata ?? '')}</td>');
+        buf.writeln('</tr>');
+      }
+      buf.writeln('</tbody></table>');
+  return buf.toString();
 }
 
 class _XhtmlNodeVisitor implements md.NodeVisitor {
