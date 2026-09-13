@@ -170,7 +170,7 @@ class XmppChat {
   /// Verwerk een inbound `<chat>`-stanza (wire aan de demux). Buffert de
   /// verzegeling en opent haar in [retryPending]; een eigen echo wordt gedropt.
   Future<void> handleChat(Stanza stanza) async {
-    final child = _childByNs(stanza, chatType);
+    final child = stanza.childByNs(chatType);
     if (child == null) return;
     try {
       final decoded = jsonDecode(child.innerText);
@@ -291,14 +291,4 @@ class XmppChat {
 
   // ── helpers ────────────────────────────────────────────────────────────────
 
-  /// Vind het eerste child-element met [namespace] — zowel de geserialiseerde
-  /// `xmlns`-attribuutvorm als de geparsede `namespaceUri`. Spiegelt
-  /// `XmppTransport._childByNs`.
-  static XmlElement? _childByNs(Stanza stanza, String namespace) {
-    for (final child in stanza.children) {
-      final ns = child.getAttribute('xmlns') ?? child.name.namespaceUri;
-      if (ns == namespace) return child;
-    }
-    return null;
-  }
 }

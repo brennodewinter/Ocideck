@@ -381,7 +381,7 @@ class XmppTransport implements CollabTransport {
   /// `retryLater` naar boven, dus de aanroeper begrenst hoelang ze worden
   /// herprobeerd.
   Future<_ApplyOutcome> _tryApply(Stanza stanza, String namespace) async {
-    final child = _childByNs(stanza, namespace);
+    final child = stanza.childByNs(namespace);
     if (child == null) return _ApplyOutcome.permanentDrop;
     final SealedEnvelope sealed;
     try {
@@ -459,7 +459,7 @@ class XmppTransport implements CollabTransport {
   /// deck-brede broadcasts blokkeert.
   Future<void> _onResyncStanza(Stanza stanza) async {
     if (_disposed) return;
-    final child = _childByNs(stanza, OciDeckNamespace.resync);
+    final child = stanza.childByNs(OciDeckNamespace.resync);
     if (child == null) return;
     final SealedEnvelope sealed;
     try {
@@ -556,16 +556,6 @@ class XmppTransport implements CollabTransport {
 
   // ── helpers ────────────────────────────────────────────────────────────────
 
-  /// Vind het eerste child-element met [namespace] — zowel de geserialiseerde
-  /// `xmlns`-attribuutvorm als de geparsede `namespaceUri`. Spiegelt
-  /// `XmppMuc._hasNs`.
-  static XmlElement? _childByNs(Stanza stanza, String namespace) {
-    for (final child in stanza.children) {
-      final ns = child.getAttribute('xmlns') ?? child.name.namespaceUri;
-      if (ns == namespace) return child;
-    }
-    return null;
-  }
 
   static String _stanzaKey(Stanza stanza, String namespace) =>
       // Gebruik niet toXmlString() als fallback — dat logt de volledige stanza
