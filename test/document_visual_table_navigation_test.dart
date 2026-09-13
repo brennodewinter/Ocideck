@@ -89,6 +89,39 @@ void main() {
     expect(controller.text, 'Alfa');
   });
 
+  for (final shortcut in const [
+    (name: 'Shift+Enter', modifier: LogicalKeyboardKey.shiftLeft),
+    (name: 'Cmd+Enter', modifier: LogicalKeyboardKey.metaLeft),
+  ]) {
+    testWidgets('${shortcut.name} zet een regeleinde in dezelfde cel', (
+      tester,
+    ) async {
+      final n = await openInDeCel(tester);
+      final cel = find.widgetWithText(TextField, 'Alfa');
+      final controller = tester.widget<TextField>(cel).controller!;
+      controller.selection = TextSelection.collapsed(
+        offset: controller.text.length,
+      );
+
+      await tester.sendKeyDownEvent(shortcut.modifier);
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.sendKeyUpEvent(shortcut.modifier);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+
+      expect(controller.text, 'Alfa\n');
+      expect(n.currentState.document!.source, contains('| Alfa<br> | 1 |'));
+      expect(
+        tester
+            .widget<TextField>(find.widgetWithText(TextField, 'Alfa\n'))
+            .focusNode!
+            .hasPrimaryFocus,
+        isTrue,
+        reason: '${shortcut.name} hoort niet naar een andere cel te springen',
+      );
+    });
+  }
+
   testWidgets('alleen de cursor verzetten schrijft het document niet opnieuw', (
     tester,
   ) async {

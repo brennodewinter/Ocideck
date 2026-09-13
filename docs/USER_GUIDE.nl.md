@@ -1054,7 +1054,7 @@ codeblok in de Markdown.
 
 De eerste rij is de kop. `Tab` gaat naar de volgende cel — op de laatste cel
 groeit er een rij bij. `Enter` gaat naar de cel eronder (en groeit onderaan een
-rij bij); `Shift+Enter` zet een regeleinde binnen de cel (`<br>` in de
+rij bij); `Shift+Enter` of `Cmd+Enter` zet een regeleinde binnen de cel (`<br>` in de
 Markdown). Om bestaande data binnen te halen, **plak een tabel in een willekeurige cel** met
 `Ctrl/Cmd+V` (of `Shift+Insert`): een selectie gekopieerd uit een spreadsheet (Excel,
 Numbers, LibreOffice Calc, Google Sheets), CSV-tekst (komma- of
