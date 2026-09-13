@@ -56,7 +56,11 @@ class ShapeText {
       }.contains(phType);
 }
 
-ShapeText? parseShape(XmlElement sp, String? Function(String rId) resolveLink) {
+ShapeText? parseShape(
+  XmlElement sp,
+  String? Function(String rId) resolveLink, {
+  List<XmlElement> inheritedShapes = const [],
+}) {
   final ph = descendantsLocal(sp, 'ph').firstOrNull;
   final phType = ph?.getAttribute('type') ?? 'body';
   final txBody = descendantsLocal(sp, 'txBody').firstOrNull;
@@ -70,12 +74,16 @@ ShapeText? parseShape(XmlElement sp, String? Function(String rId) resolveLink) {
     txBody,
     defaultBullet: defaultBullet,
     resolveLink: resolveLink,
+    inheritedTxBodies: [
+      for (final shape in inheritedShapes)
+        ?descendantsLocal(shape, 'txBody').firstOrNull,
+    ],
   );
 
   if (parsed.blocks.isEmpty) return null;
 
-  final off = descendantsLocal(sp, 'off').firstOrNull;
-  final ext = descendantsLocal(sp, 'ext').firstOrNull;
+  final off = _firstGeometry(sp, inheritedShapes, 'off');
+  final ext = _firstGeometry(sp, inheritedShapes, 'ext');
   final text = parsed.blocks.map((b) => b.text).join(' ').trim();
 
   return ShapeText(
@@ -90,6 +98,18 @@ ShapeText? parseShape(XmlElement sp, String? Function(String rId) resolveLink) {
     width: _emuToDouble(ext?.getAttribute('cx')),
     height: _emuToDouble(ext?.getAttribute('cy')),
   );
+}
+
+XmlElement? _firstGeometry(
+  XmlElement shape,
+  List<XmlElement> inheritedShapes,
+  String name,
+) {
+  for (final candidate in [shape, ...inheritedShapes]) {
+    final value = descendantsLocal(candidate, name).firstOrNull;
+    if (value != null) return value;
+  }
+  return null;
 }
 
 /// Converts an EMU string to a double, defaulting to `0` when missing.

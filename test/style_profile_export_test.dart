@@ -259,7 +259,7 @@ void main() {
       final out = await file.importStyleProfileBytes(
         envelopeBytes({
           'ocideck': 'style-profile',
-          'version': 2,
+          'version': 3,
           'profile': {'name': 'Toekomst'},
         }),
       );

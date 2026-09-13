@@ -61,10 +61,27 @@ void main() {
         final candidate = candidates.single;
         expect(candidate.slideIndexes, [0, 1, 2]);
         expect(candidate.edge, ImportLogoEdge.bottom);
+        expect(candidate.brandStrip, isNotNull);
+        expect(candidate.brandStrip!.placement!.left, 0);
+        expect(candidate.brandStrip!.placement!.width, 1);
+        expect(
+          candidate.brandStrip!.placement!.top,
+          closeTo(5969000 / 6858000, .0001),
+        );
+        expect(
+          candidate.brandStrip!.placement!.height,
+          closeTo(889000 / 6858000, .0001),
+        );
         expect(candidate.image.placement?.left, closeTo(1000 / 1280, .001));
-        expect(candidate.image.placement?.top, closeTo(630 / 720, .001));
+        expect(
+          candidate.image.placement?.top,
+          closeTo((5969000 + 889000 * .1) / 6858000, .001),
+        );
         expect(candidate.image.placement?.width, closeTo(180 / 1280, .001));
-        expect(candidate.image.placement?.height, closeTo(60 / 720, .001));
+        expect(
+          candidate.image.placement?.height,
+          closeTo((889000 * .6) / 6858000, .001),
+        );
         final decoded = img.decodeImage(candidate.image.bytes);
         expect(decoded, isNotNull);
         expect([decoded!.width, decoded.height], [180, 60]);
@@ -73,10 +90,14 @@ void main() {
           deck: imported.okValue!,
           candidate: candidate,
           logoPath: 'mem:merklogo',
+          brandStripPath: 'mem:merkstrook',
           name: 'Merkstijl',
         );
         expect(profile.logoPosition, 'bottom-right');
         expect(profile.logoSize, 180);
+        expect(profile.brandStripPath, 'mem:merkstrook');
+        expect(profile.brandStripHeight, closeTo(889000 / 6858000, .0001));
+        expect(profile.titleSubtitleInBrandStrip, isTrue);
         expect(profile.logoSize, greaterThan(const ThemeProfile().logoSize));
         expect(profile.accentColor, '#00A1DB');
         expect(profile.textColor, '#000000');
@@ -102,6 +123,7 @@ void main() {
         deck: source,
         candidate: candidate,
         logoPath: 'mem:merklogo',
+        brandStripPath: 'mem:merkstrook',
         name: 'Merkstijl',
       );
 
@@ -134,6 +156,12 @@ void main() {
       expect(built.deck.themeProfile.name, 'Merkstijl');
       expect(built.deck.themeProfile.logoSize, 180);
       expect(built.deck.themeProfile.logoPosition, 'bottom-right');
+      expect(built.deck.themeProfile.brandStripPath, 'mem:merkstrook');
+      expect(
+        built.deck.themeProfile.brandStripHeight,
+        closeTo(889000 / 6858000, .0001),
+      );
+      expect(built.deck.themeProfile.titleSubtitleInBrandStrip, isTrue);
     });
 
     test('vindt hetzelfde kleine randbeeld op twee van vier dia\'s', () {

@@ -664,6 +664,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'non è stato possibile ripristinare un’immagine di stile incorporata',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profilo di stile esportato — non è stato possibile includere un’immagine di stile personalizzata',
+  'Aanvullende informatie': 'Informazioni aggiuntive',
+  'Bijvoorbeeld datum, locatie of versie': 'Ad esempio data, luogo o versione',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Non è stato possibile salvare lo stile in modo permanente. La fascia del marchio verrà usata solo in questa presentazione.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Aggiungi screenshot, video o file PDF come prove. Ogni elemento avrà una propria diapositiva subito dopo il rilievo e sarà incluso nell\'esportazione.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -3886,8 +3894,6 @@ const _dutchSourceAddIt = {
   'Profiel exporteren': 'Esporta profilo',
   'Profiel importeren': 'Importa profilo',
   'Stijlprofiel geëxporteerd': 'Profilo di stile esportato',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profilo di stile esportato — il logo personalizzato non è stato incluso',
   'Stijlprofiel exporteren mislukt':
       'Esportazione del profilo di stile non riuscita',
   'Stijlprofiel importeren mislukt':
@@ -3900,8 +3906,6 @@ const _dutchSourceAddIt = {
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Questo profilo di stile proviene da una versione più recente di OciDeck',
   'die naam bestond al, bewaard als': 'quel nome esisteva già, salvato come',
-  'het ingesloten logo kon niet worden teruggezet':
-      'il logo incorporato non è stato ripristinato',
   'Maak een tussenkop': 'Crea un intertitolo',
   'Maak er weer een bullet van': 'Riconverti in punto elenco',
   'Tussenkop (leeg = alleen een scheidingslijn)':

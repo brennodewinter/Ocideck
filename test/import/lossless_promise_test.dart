@@ -55,7 +55,7 @@ void main() {
       BodyBlock(kind: BodyBlockKind.paragraph, text: t, order: order);
 
   group('wat de bouwer laat vallen komt op de notitiedia', () {
-    test('een alinea boven een bullet-lijst', () {
+    test('een alinea boven een bullet-lijst blijft als toelichting staan', () {
       final r = buildOne(
         SourceSlide(
           index: 0,
@@ -68,7 +68,8 @@ void main() {
         ),
       );
       expect(r.slide.type, SlideType.bullets);
-      expect(r.notes, contains('Alinea'));
+      expect(r.slide.subtitle, 'Inleiding');
+      expect(r.notes, isNot(contains('Alinea')));
     });
 
     test('maar een bullet-dia zonder alinea meldt niets', () {

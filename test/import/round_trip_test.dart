@@ -116,7 +116,7 @@ void main() {
     expect(slide.viewLimit?.limit, kImportedBulletLimit);
   });
 
-  test('een notitiedia over niet-overgenomen inhoud overleeft de rondgang', () {
+  test('een toelichtende alinea op een bulletdia overleeft de rondgang', () {
     final deck = buildDeck([
       SourceSlide(
         index: 0,
@@ -127,14 +127,8 @@ void main() {
       ),
     ]);
     final back = roundTrip(deck);
-    // De niet-overgenomen inhoud zit nu in de notities van de dia zelf. De
-    // tekst moet in het bestand overleven — dat is wat de belofte waard maakt.
-    final all = back.slides
-        .map(
-          (s) => [s.title, s.customMarkdown, s.notes, ...s.bullets].join(' '),
-        )
-        .join('\n');
-    expect(all, contains('Alinea'));
+    expect(back.slides.single.subtitle, 'Inleiding');
+    expect(back.slides.single.notes, isNot(contains('Alinea')));
   });
 
   test('een titel met tekens die het formaat raken overleeft de rondgang', () {

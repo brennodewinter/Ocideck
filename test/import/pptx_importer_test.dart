@@ -229,6 +229,25 @@ void main() {
     },
   );
 
+  test('body-placeholder erft buNone uit de gekoppelde dia-indeling', () async {
+    final result = await PptxImporter().importBytes(
+      pptxBrandFixture(),
+      path: 'merkdeck-met-datum.pptx',
+    );
+
+    expect(result.isOk, isTrue);
+    final opening = result.okValue!.slides.first;
+    expect(opening.bodyBlocks, hasLength(1));
+    expect(opening.bodyBlocks.single.text, '16 mei 2025');
+    expect(
+      opening.bodyBlocks.single.kind,
+      BodyBlockKind.paragraph,
+      reason:
+          'placeholder idx=11 heeft in de dia-indeling lvl1pPr/buNone en is '
+          'dus aanvullende titeltekst, geen kunstmatige bullet',
+    );
+  });
+
   test('bewaart een kleine afbeelding met genormaliseerde plaatsing', () async {
     const slideWidth = 1000;
     const slideHeight = 500;

@@ -1652,6 +1652,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'δεν ήταν δυνατή η επαναφορά μιας ενσωματωμένης εικόνας στυλ',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Το προφίλ στυλ εξήχθη — δεν ήταν δυνατή η συμπερίληψη μιας προσαρμοσμένης εικόνας στυλ',
+  'Aanvullende informatie': 'Πρόσθετες πληροφορίες',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Για παράδειγμα, ημερομηνία, τοποθεσία ή έκδοση',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Δεν ήταν δυνατή η μόνιμη αποθήκευση του στυλ. Η λωρίδα επωνυμίας θα χρησιμοποιηθεί μόνο σε αυτή την παρουσίαση.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Προσθέστε στιγμιότυπα οθόνης, βίντεο ή αρχεία PDF ως αποδεικτικά στοιχεία. Κάθε στοιχείο αποκτά τη δική του διαφάνεια αμέσως μετά το εύρημα και περιλαμβάνεται στην εξαγωγή.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4861,8 +4870,6 @@ const _dutchSourceAddEl = <String, String>{
   'Profiel exporteren': 'Εξαγωγή προφίλ',
   'Profiel importeren': 'Εισαγωγή προφίλ',
   'Stijlprofiel geëxporteerd': 'Το προφίλ στυλ εξήχθη',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Το προφίλ στυλ εξήχθη — το προσαρμοσμένο λογότυπο δεν συμπεριλήφθηκε',
   'Stijlprofiel exporteren mislukt': 'Η εξαγωγή του προφίλ στυλ απέτυχε',
   'Stijlprofiel importeren mislukt': 'Η εισαγωγή του προφίλ στυλ απέτυχε',
   'Stijlprofiel geïmporteerd': 'Το προφίλ στυλ εισήχθη',
@@ -4874,8 +4881,6 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτό το προφίλ στυλ προέρχεται από νεότερη έκδοση του OciDeck',
   'die naam bestond al, bewaard als':
       'αυτό το όνομα υπήρχε ήδη, αποθηκεύτηκε ως',
-  'het ingesloten logo kon niet worden teruggezet':
-      'το ενσωματωμένο λογότυπο δεν αποκαταστάθηκε',
   'Maak een tussenkop': 'Δημιουργία ενδιάμεσου τίτλου',
   'Maak er weer een bullet van': 'Μετατροπή ξανά σε κουκκίδα',
   'Tussenkop (leeg = alleen een scheidingslijn)':

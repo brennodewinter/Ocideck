@@ -174,6 +174,7 @@ String _parsedCustomMarkdown(
   ListStyle listStyle,
   List<String> richTextLines,
 ) {
+  if (type == SlideType.title) return _parsedTitleMarkdown(remaining);
   if (type == SlideType.freeMarkdown ||
       type == SlideType.canvas ||
       type.usesScaffoldMarkdownBody ||
@@ -194,6 +195,27 @@ String _parsedCustomMarkdown(
     );
   }
   return '';
+}
+
+String _parsedTitleMarkdown(String remaining) {
+  final lines = <String>[];
+  var skippedTitle = false;
+  var skippedSubtitle = false;
+  for (final line in remaining.split('\n')) {
+    final trimmed = line.trim();
+    if ((!skippedTitle && trimmed.startsWith('# ')) ||
+        (!skippedSubtitle && trimmed.startsWith('## ')) ||
+        _reBgImage.hasMatch(trimmed) ||
+        trimmed.startsWith('<div class="image-caption">')) {
+      if (trimmed.startsWith('# ')) skippedTitle = true;
+      if (trimmed.startsWith('## ')) skippedSubtitle = true;
+      continue;
+    }
+    lines.add(line);
+  }
+  return normalizeRichTextMarkdownForStorage(
+    unescapeDeckMarkdownDashLines(lines.join('\n').trim()),
+  );
 }
 
 extension _MarkdownParse on MarkdownService {

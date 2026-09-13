@@ -1633,6 +1633,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'vložený obrázok štýlu sa nepodarilo obnoviť',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profil štýlu bol exportovaný — vlastný obrázok štýlu sa nepodarilo zahrnúť',
+  'Aanvullende informatie': 'Doplňujúce informácie',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Napríklad dátum, miesto alebo verzia',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Štýl sa nepodarilo natrvalo uložiť. Pruh značky sa použije iba v tejto prezentácii.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Pridajte snímky obrazovky, videá alebo súbory PDF ako dôkazy. Každý dôkaz dostane vlastnú snímku hneď za zistením a zahrnie sa do exportu.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4791,8 +4800,6 @@ const _dutchSourceAddSk = <String, String>{
   'Profiel exporteren': 'Exportovať profil',
   'Profiel importeren': 'Importovať profil',
   'Stijlprofiel geëxporteerd': 'Profil štýlu bol exportovaný',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profil štýlu bol exportovaný — vlastné logo sa nepodarilo zahrnúť',
   'Stijlprofiel exporteren mislukt': 'Export profilu štýlu zlyhal',
   'Stijlprofiel importeren mislukt': 'Import profilu štýlu zlyhal',
   'Stijlprofiel geïmporteerd': 'Profil štýlu bol importovaný',
@@ -4803,8 +4810,6 @@ const _dutchSourceAddSk = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Tento profil štýlu pochádza z novšej verzie OciDeck',
   'die naam bestond al, bewaard als': 'tento názov už existoval, uložené ako',
-  'het ingesloten logo kon niet worden teruggezet':
-      'vložené logo sa nepodarilo obnoviť',
   'Maak een tussenkop': 'Vytvoriť medzititulok',
   'Maak er weer een bullet van': 'Zmeniť späť na odrážku',
   'Tussenkop (leeg = alleen een scheidingslijn)':

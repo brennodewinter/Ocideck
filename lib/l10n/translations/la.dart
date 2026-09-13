@@ -1642,6 +1642,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'imago stili inclusa restitui non potuit',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Prosopographia stili exportata — imago stili propria includi non potuit',
+  'Aanvullende informatie': 'Informationes additae',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Exempli gratia dies, locus aut versio',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Modus perpetuo servari non potuit. Fascia notae tantum in hac praesentatione adhibebitur.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Adde imagines scrinii, pelliculas vel documenta PDF ut probationes. Quaeque probatio propriam paginam statim post inventum accipit atque exportatur.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4808,8 +4817,6 @@ const _dutchSourceAddLa = <String, String>{
   'Profiel exporteren': 'Prosopographiam exportare',
   'Profiel importeren': 'Prosopographiam importare',
   'Stijlprofiel geëxporteerd': 'Prosopographia stili exportata',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Prosopographia stili exportata — insigne proprium includi non potuit',
   'Stijlprofiel exporteren mislukt':
       'Prosopographia stili exportari non potuit',
   'Stijlprofiel importeren mislukt':
@@ -4822,8 +4829,6 @@ const _dutchSourceAddLa = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Haec prosopographia stili ex recentiore OciDeck editione venit',
   'die naam bestond al, bewaard als': 'id nomen iam erat, servatum ut',
-  'het ingesloten logo kon niet worden teruggezet':
-      'insigne inclusum restitui non potuit',
   'Maak een tussenkop': 'Titulum interpositum facere',
   'Maak er weer een bullet van': 'Rursus in punctum vertere',
   'Tussenkop (leeg = alleen een scheidingslijn)':

@@ -69,8 +69,9 @@ my_presentation/
 │   └── .ocideck_captions.json      # caption sidecar (see §6.1)
 ├── data/                           # linked chart data files (see §6.4)
 │   └── revenue.json
-├── logos/                          # copied logo from the style profile
-│   └── logo.png
+├── logos/                          # copied logo and optional brand strip from the style profile
+│   ├── logo.png
+│   └── brand-strip.png
 ├── media/                          # video/audio, created on save (see §7)
 └── themes/
     └── ocideck.css                 # generated theme CSS (see §5)
@@ -544,6 +545,9 @@ these fields (with defaults):
 | `logoDarkPath` | `null` | Dark variant of the logo, shown on dark slide backgrounds (#1931). `null` for bundled brand logos (they switch automatically). |
 | `logoPosition` | `bottom-right` | `top-left`/`top-right`/`bottom-left`/`bottom-right`. |
 | `logoSize` | `96` | Logo size in px. |
+| `brandStripPath` | `null` | **Presentations.** Optional full-width brand-strip image, copied beside the logo in `logos/`. The strip is anchored to the same top or bottom edge as `logoPosition` and replaces the separate logo drawing on slides. |
+| `brandStripHeight` | `0` | **Presentations.** Strip height as a fraction of the 16:9 slide height, clamped to `0`–`0.25`. `0` keeps the classic title and logo layout. |
+| `titleSubtitleInBrandStrip` | `false` | **Presentations.** Places a title slide's subtitle/byline in the brand strip. The title and any additional information remain in the area above it. |
 | `documentLogoPath` | `null` | Document logo override. `null` shares `logoPath`; `""` deliberately disables the logo for documents. |
 | `documentLogoPosition` | `top-right` | Position of the effective document logo in its header/footer band. |
 | `documentLogoSize` | `null` | Document-logo width in px (`32`–`480`). `null` follows `logoSize`. |
@@ -595,23 +599,25 @@ The file is plain UTF-8 JSON — an envelope around the same profile JSON as
 ```json
 {
   "ocideck": "style-profile",
-  "version": 1,
+  "version": 2,
   "profile": { "name": "…", "accentColor": "#2E7D64", "…": "…" },
   "logo": { "mime": "image/png", "data": "<base64>" },
-  "documentLogo": { "mime": "image/png", "data": "<base64>" }
+  "documentLogo": { "mime": "image/png", "data": "<base64>" },
+  "brandStrip": { "mime": "image/png", "data": "<base64>" }
 }
 ```
 
 | Key | Meaning |
 | --- | --- |
 | `ocideck` | Format marker; must be `style-profile`. Import refuses anything else, so an arbitrary `.json` cannot be mistaken for a profile. |
-| `version` | Envelope version (currently `1`). A higher number is refused rather than half-read. |
+| `version` | Envelope version. Ordinary profiles remain version `1`; an exported profile with an embedded brand strip uses version `2`. A higher number is refused rather than half-read. |
 | `profile` | The profile, exactly the §3.2 field set. Unknown/missing fields fall back to defaults. |
 | `logo` | **Optional.** An embedded custom logo. `mime` is informational — the importer re-derives the type from the bytes themselves. |
 | `documentLogo` | **Optional.** The separately configured custom document logo, with the same validation and limits as `logo`. |
+| `brandStrip` | **Optional, version 2.** The full-width brand-strip image. It follows the same validation, embedding and path-restoration rules as `logo`. |
 
 Import accepts the `.ocideckstyle` and `.json` extensions. Caps: 16 MiB per
-file, 8 MiB per embedded logo.
+file, 8 MiB per embedded image.
 
 **How the logo travels.** `logoPath` is a local path and means nothing to the
 receiver, so it is handled by kind:
@@ -627,9 +633,15 @@ receiver, so it is handled by kind:
 string means no document logo. A custom override travels in `documentLogo` just
 like the presentation logo travels in `logo`.
 
-On import the embedded bytes are written back to real files and both path fields
-point at them: a `data:` URI is never left in either path, because none of the
-consumers (slide preview, rasterizer, presenter) resolve one.
+`brandStripPath` follows the same portability rule: a custom strip is embedded
+in `brandStrip`, and the sender's local path is omitted. On import the restored
+path, `brandStripHeight` and `titleSubtitleInBrandStrip` reconstitute the title
+layout. A version-1 file has no strip and therefore keeps the classic title-slide
+and corner-logo behaviour.
+
+On import the embedded bytes are written back to real files and their profile
+paths point at them: a `data:` URI is never left in a style-image path, because
+none of the consumers (slide preview, rasterizer, presenter) resolve one.
 
 > **Web caveat.** On desktop the restored logo lands in a `style_logos/` folder
 > under the app-support directory and survives a restart. On web there is no
@@ -800,7 +812,17 @@ image.
 ![bg 60% opacity:.45](images/background.png)   <!-- optional background -->
 # Title
 ## Subtitle
+
+16 May 2025
+Amsterdam
 ```
+
+Ordinary Markdown after the `#` title and optional `##` subtitle is additional
+title-page information, stored in `customMarkdown`; dates, locations and version
+labels are typical uses. It is optional, so existing title slides keep their
+original representation and layout. A style profile may provide a brand strip
+(§3.2): the same Markdown remains the source, while the renderer places the
+subtitle/byline inside that strip when `titleSubtitleInBrandStrip` is true.
 
 **Title with image columns** (`title`, #1405) — one or two image columns beside
 the title text, using native Marp `![bg left:W%]` / `![bg right:W%]` syntax (no

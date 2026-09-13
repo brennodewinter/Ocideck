@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/import/deck_builder.dart';
@@ -47,6 +48,16 @@ SourceImage _img(
   caption: caption,
 );
 
+SourceImage _positionedPng(int color, SourceImagePlacement placement) {
+  final image = img.Image(width: 20, height: 20, numChannels: 4);
+  img.fill(image, color: img.ColorUint32(color));
+  return SourceImage(
+    bytes: Uint8List.fromList(img.encodePng(image)),
+    ext: 'png',
+    placement: placement,
+  );
+}
+
 void main() {
   setUp(WebAssetStore.clear);
   tearDown(() {
@@ -68,6 +79,42 @@ void main() {
       expect(slide.title, 'Kwartaalcijfers');
       expect(slide.subtitle, 'Q3 2026');
     });
+
+    test(
+      'een openingsdia bewaart korte aanvullende tekst naast de achtergrond',
+      () {
+        final background = SourceImage(
+          bytes: Uint8List.fromList(const [1, 2, 3]),
+          ext: 'png',
+          name: 'omslag.png',
+          placement: const SourceImagePlacement(
+            left: 0,
+            top: 0,
+            width: 1,
+            height: 1,
+          ),
+          role: SourceImageRole.background,
+        );
+        final built = _build([
+          SourceSlide(
+            index: 0,
+            title: 'Workshop Recruitment',
+            subtitle: 'Door Mieke van Oers',
+            bodyBlocks: const [
+              BodyBlock(kind: BodyBlockKind.paragraph, text: '16 mei 2025'),
+            ],
+            images: [background],
+          ),
+        ]);
+
+        final slide = built.deck.slides.single;
+        expect(slide.type, SlideType.title);
+        expect(slide.title, 'Workshop Recruitment');
+        expect(slide.subtitle, 'Door Mieke van Oers');
+        expect(slide.customMarkdown, '16 mei 2025');
+        expect(slide.imagePath, startsWith('mem:'));
+      },
+    );
 
     test('bullets carry nesting as leading tabs', () {
       final built = _build([
@@ -117,6 +164,101 @@ void main() {
       expect(slide.imagePath, startsWith('mem:'));
       expect(slide.imagePath2, startsWith('mem:'));
       expect(slide.imagePath, isNot(slide.imagePath2));
+    });
+
+    test('een gepositioneerd beeldraster blijft één samengestelde dia', () {
+      final source = SourceSlide(
+        index: 3,
+        title: 'Vier perspectieven',
+        images: [
+          _positionedPng(
+            0xff0000ff,
+            const SourceImagePlacement(
+              left: .05,
+              top: .20,
+              width: .40,
+              height: .20,
+            ),
+          ),
+          _positionedPng(
+            0x00ff00ff,
+            const SourceImagePlacement(
+              left: .05,
+              top: .45,
+              width: .40,
+              height: .20,
+            ),
+          ),
+          _positionedPng(
+            0x0000ffff,
+            const SourceImagePlacement(
+              left: .05,
+              top: .70,
+              width: .40,
+              height: .20,
+            ),
+          ),
+          _positionedPng(
+            0xffffffff,
+            const SourceImagePlacement(
+              left: .52,
+              top: .20,
+              width: .43,
+              height: .70,
+            ),
+          ),
+        ],
+      );
+
+      final classified = classifySourceSlides([source]);
+      final built = DeckBuilder().build(
+        SourceDeck(slides: [source]),
+        classified,
+        title: 'Raster',
+      );
+
+      expect(classified, hasLength(1));
+      expect(classified.single.source.images, hasLength(1));
+      expect(classified.single.source.images.single.isComposite, isTrue);
+      expect(built.deck.slides, hasLength(1));
+      expect(built.deck.slides.single.type, SlideType.image);
+      expect(built.deck.slides.single.imageTitleAbove, isTrue);
+      expect(built.problemSlides, isEmpty);
+    });
+
+    test('losse alineatekst op beeld- en bulletdia blijft als toelichting', () {
+      final imageSource = SourceSlide(
+        index: 1,
+        title: 'Verwachtingen',
+        bodyBlocks: const [
+          BodyBlock(kind: BodyBlockKind.paragraph, text: 'Wat verwacht je?'),
+        ],
+        images: [
+          _img([1]),
+        ],
+      );
+      final bulletSource = SourceSlide(
+        index: 2,
+        title: 'Proces',
+        bodyBlocks: [
+          const BodyBlock(
+            kind: BodyBlockKind.paragraph,
+            text: 'Welke procedures zijn er?',
+          ),
+          _bullet('Stap een'),
+        ],
+      );
+      final classified = classifySourceSlides([imageSource, bulletSource]);
+      final built = DeckBuilder().build(
+        SourceDeck(slides: [imageSource, bulletSource]),
+        classified,
+        title: 'Toelichting',
+      );
+
+      expect(built.deck.slides[0].subtitle, 'Wat verwacht je?');
+      expect(built.deck.slides[0].imageTitleAbove, isTrue);
+      expect(built.deck.slides[1].subtitle, 'Welke procedures zijn er?');
+      expect(built.problemSlides, isEmpty);
     });
 
     test('drie of meer afbeeldingen met bullets worden bulletsImage', () {

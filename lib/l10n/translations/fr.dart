@@ -667,6 +667,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'une image de style intégrée n’a pas pu être restaurée',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profil de style exporté — une image de style personnalisée n’a pas pu être incluse',
+  'Aanvullende informatie': 'Informations complémentaires',
+  'Bijvoorbeeld datum, locatie of versie': 'Par exemple, date, lieu ou version',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Le style n’a pas pu être enregistré durablement. Le bandeau de marque ne sera utilisé que dans cette présentation.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Ajoutez des captures d\'écran, des vidéos ou des fichiers PDF comme preuves. Chaque élément est placé sur sa propre diapositive juste après le constat et inclus dans l\'exportation.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -3888,8 +3896,6 @@ const _dutchSourceAddFr = {
   'Profiel exporteren': 'Exporter le profil',
   'Profiel importeren': 'Importer le profil',
   'Stijlprofiel geëxporteerd': 'Profil de style exporté',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profil de style exporté — le logo personnalisé n\'a pas pu être inclus',
   'Stijlprofiel exporteren mislukt':
       'Échec de l\'exportation du profil de style',
   'Stijlprofiel importeren mislukt':
@@ -3902,8 +3908,6 @@ const _dutchSourceAddFr = {
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Ce profil de style provient d\'une version plus récente d\'OciDeck',
   'die naam bestond al, bewaard als': 'ce nom existait déjà, enregistré sous',
-  'het ingesloten logo kon niet worden teruggezet':
-      'le logo intégré n\'a pas pu être restauré',
   'Maak een tussenkop': 'Créer un intertitre',
   'Maak er weer een bullet van': 'Reconvertir en puce',
   'Tussenkop (leeg = alleen een scheidingslijn)':

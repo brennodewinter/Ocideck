@@ -1655,6 +1655,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'não foi possível restaurar uma imagem de estilo incorporada',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Perfil de estilo exportado — não foi possível incluir uma imagem de estilo própria',
+  'Aanvullende informatie': 'Informações adicionais',
+  'Bijvoorbeeld datum, locatie of versie': 'Por exemplo, data, local ou versão',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Não foi possível guardar o estilo de forma permanente. A faixa da marca será usada apenas nesta apresentação.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Adicione capturas de ecrã, vídeos ou ficheiros PDF como evidência. Cada item recebe o seu próprio diapositivo logo após a constatação e é incluído na exportação.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4845,8 +4853,6 @@ const _dutchSourceAddPt = <String, String>{
   'Profiel exporteren': 'Exportar perfil',
   'Profiel importeren': 'Importar perfil',
   'Stijlprofiel geëxporteerd': 'Perfil de estilo exportado',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Perfil de estilo exportado — não foi possível incluir o logótipo próprio',
   'Stijlprofiel exporteren mislukt': 'Falha ao exportar o perfil de estilo',
   'Stijlprofiel importeren mislukt': 'Falha ao importar o perfil de estilo',
   'Stijlprofiel geïmporteerd': 'Perfil de estilo importado',
@@ -4857,8 +4863,6 @@ const _dutchSourceAddPt = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Este perfil de estilo provém de uma versão mais recente do OciDeck',
   'die naam bestond al, bewaard als': 'esse nome já existia, guardado como',
-  'het ingesloten logo kon niet worden teruggezet':
-      'não foi possível restaurar o logótipo incorporado',
   'Maak een tussenkop': 'Criar um intertítulo',
   'Maak er weer een bullet van': 'Converter novamente em marcador',
   'Tussenkop (leeg = alleen een scheidingslijn)':

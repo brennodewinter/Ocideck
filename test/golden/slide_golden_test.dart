@@ -69,6 +69,25 @@ void main() {
     );
   });
 
+  testWidgets('title with full-width brand strip', (tester) async {
+    await _match(
+      tester,
+      'title_brand_strip',
+      Slide.create(SlideType.title).copyWith(
+        title: 'Workshop Recruitment',
+        subtitle: 'Samen aan de slag',
+        customMarkdown: '16 mei 2025\nAmsterdam',
+      ),
+      profile: ThemeProfile(
+        logoPath: 'asset:assets/images/ocideck-logo.png',
+        brandStripPath: 'asset:assets/images/ocideck-logo.png',
+        brandStripHeight: 94 / 720,
+        titleSubtitleInBrandStrip: true,
+        accentColor: '#006A91',
+      ),
+    );
+  });
+
   testWidgets('section', (tester) async {
     await _match(
       tester,

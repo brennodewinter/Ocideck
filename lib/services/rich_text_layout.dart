@@ -414,6 +414,10 @@ const double kLogoBottomInsetFraction = 0.12;
 /// circular gauge (cockpit) that corner is empty anyway.
 double logoSafeReserve(double w, ThemeProfile profile, {bool corner = false}) {
   if (profile.logoPath?.isEmpty ?? true) return 0;
+  if (profile.brandStripPath?.isNotEmpty == true &&
+      profile.brandStripHeight > 0) {
+    return w * 9 / 16 * profile.brandStripHeight;
+  }
   if (corner) return 0;
   final size = w * (profile.logoSize / 1280);
   final edgeInset = profile.logoPosition.startsWith('top')
@@ -442,7 +446,12 @@ double logoSafeReserve(double w, ThemeProfile profile, {bool corner = false}) {
   bool corner = false,
 }) {
   if (profile.logoPath?.isEmpty ?? true) return (0, 0);
-  if (splitText && profile.logoPosition.endsWith('right')) return (0, 0);
+  final hasStrip =
+      profile.brandStripPath?.isNotEmpty == true &&
+      profile.brandStripHeight > 0;
+  if (!hasStrip && splitText && profile.logoPosition.endsWith('right')) {
+    return (0, 0);
+  }
   final reserved = logoSafeReserve(w, profile, corner: corner);
   return profile.logoPosition.startsWith('top') ? (reserved, 0) : (0, reserved);
 }

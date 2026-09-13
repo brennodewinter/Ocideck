@@ -86,6 +86,12 @@ Future<String> _presentationLogoCss(
   final uri = await _themeLogoDataUri(path, embedImage, loadBytes);
   if (uri == null) return '';
 
+  final stripPath = theme.brandStripPath?.trim();
+  if (stripPath != null && stripPath.isNotEmpty && theme.brandStripHeight > 0) {
+    final stripUri = await _themeLogoDataUri(stripPath, embedImage, loadBytes);
+    if (stripUri != null) return _presentationBrandStripCss(theme, stripUri);
+  }
+
   final size = theme.logoSize;
   final atTop = theme.logoPosition.startsWith('top');
   final vertical = atTop ? 'top' : 'bottom';
@@ -104,6 +110,24 @@ Future<String> _presentationLogoCss(
       '$vertical:${vInset}px;$horizontal:${hInset}px;'
       'pointer-events:none;z-index:1}'
       '.slide.logo-safe{$safePad:${reserve}px}';
+}
+
+String _presentationBrandStripCss(ThemeProfile theme, String uri) {
+  final atTop = theme.logoPosition.startsWith('top');
+  final edge = atTop ? 'top' : 'bottom';
+  final height = (720 * theme.brandStripHeight).round();
+  final safePad = atTop ? 'padding-top' : 'padding-bottom';
+  final titleSubtitle = theme.titleSubtitleInBrandStrip
+      ? '.slide.title.logo-safe h2{position:absolute;left:58px;$edge:'
+            '${(height * .30).round()}px;z-index:2;color:'
+            '${theme.accentColor};font-size:18px}'
+      : '';
+  return '.slide.logo-safe::before{content:"";position:absolute;left:0;'
+      '$edge:0;width:100%;height:${height}px;'
+      'background:url("$uri") center/100% 100% no-repeat;'
+      'pointer-events:none;z-index:1}'
+      '.slide.logo-safe{$safePad:${height}px}'
+      '$titleSubtitle';
 }
 
 String _documentChromeMarkdownHtml(String markdown) => markdown

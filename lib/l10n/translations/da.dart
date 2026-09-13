@@ -1627,6 +1627,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'et indlejret stilbillede kunne ikke gendannes',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stilprofil eksporteret — et eget stilbillede kunne ikke tages med',
+  'Aanvullende informatie': 'Yderligere oplysninger',
+  'Bijvoorbeeld datum, locatie of versie':
+      'For eksempel dato, sted eller version',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Stilen kunne ikke gemmes permanent. Brandstriben bruges kun i denne præsentation.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Tilføj skærmbilleder, videoer eller PDF-filer som dokumentation. Hvert element får sit eget dias umiddelbart efter fundet og medtages i eksporten.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4790,8 +4799,6 @@ const _dutchSourceAddDa = <String, String>{
   'Profiel exporteren': 'Eksportér profil',
   'Profiel importeren': 'Importér profil',
   'Stijlprofiel geëxporteerd': 'Stilprofil eksporteret',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stilprofil eksporteret — det egne logo kunne ikke tages med',
   'Stijlprofiel exporteren mislukt': 'Eksport af stilprofilen mislykkedes',
   'Stijlprofiel importeren mislukt': 'Import af stilprofilen mislykkedes',
   'Stijlprofiel geïmporteerd': 'Stilprofil importeret',
@@ -4802,8 +4809,6 @@ const _dutchSourceAddDa = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Denne stilprofil kommer fra en nyere version af OciDeck',
   'die naam bestond al, bewaard als': 'det navn fandtes allerede, gemt som',
-  'het ingesloten logo kon niet worden teruggezet':
-      'det indlejrede logo kunne ikke gendannes',
   'Maak een tussenkop': 'Opret en mellemoverskrift',
   'Maak er weer een bullet van': 'Lav det om til et punkt igen',
   'Tussenkop (leeg = alleen een scheidingslijn)':

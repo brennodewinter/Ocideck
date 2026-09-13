@@ -239,6 +239,35 @@ Future<ImportLogoResolution?> _resolveImportLogo(
     if (choice.isIgnored) return ImportLogoResolution.ignored(candidate);
     if (!choice.isLogo) continue;
 
+    final profileName = choice.styleName.isEmpty ? suggested : choice.styleName;
+    String? durableBrandStripPath;
+    if (choice.addAsStyle && candidate.brandStrip != null) {
+      durableBrandStripPath = await ref
+          .read(fileServiceProvider)
+          .materializeImportedStyleLogo(
+            candidate.brandStrip!.bytes,
+            profileName: '$profileName merkstrook',
+          );
+      if (durableBrandStripPath == null && context.mounted) {
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          context.l10n,
+          context.l10n.d(
+            'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.',
+          ),
+        );
+      }
+    }
+    final brandStripPath = candidate.brandStrip == null
+        ? null
+        : durableBrandStripPath ??
+              WebAssetStore.put(
+                candidate.brandStrip!.bytes,
+                name:
+                    candidate.brandStrip!.name ??
+                    'merkstrook.${candidate.brandStrip!.ext}',
+              );
+
     if (matchingProfile != null) {
       // De overeenkomst bewijst dat het beeld een bekend logo is, niet dat de
       // overige bronopmaak exact dat OciDeck-profiel volgt. Neem daarom alleen
@@ -250,13 +279,13 @@ Future<ImportLogoResolution?> _resolveImportLogo(
           deck: prepared.sourceDeck,
           candidate: candidate,
           logoPath: matchingProfile.logoPath!,
+          brandStripPath: brandStripPath,
           name: suggested,
           base: settings.themeProfile,
         ),
       );
     }
 
-    final profileName = choice.styleName.isEmpty ? suggested : choice.styleName;
     String? durablePath;
     if (choice.addAsStyle) {
       durablePath = await ref
@@ -285,10 +314,13 @@ Future<ImportLogoResolution?> _resolveImportLogo(
       deck: prepared.sourceDeck,
       candidate: candidate,
       logoPath: logoPath,
+      brandStripPath: brandStripPath,
       name: profileName,
       base: settings.themeProfile,
     );
-    if (choice.addAsStyle && durablePath != null) {
+    if (choice.addAsStyle &&
+        durablePath != null &&
+        (candidate.brandStrip == null || durableBrandStripPath != null)) {
       profile = await addThemeProfileWithoutSelection(
         ref.read(settingsProvider.notifier),
         profile,

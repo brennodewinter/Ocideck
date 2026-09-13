@@ -2555,8 +2555,11 @@ compares images by their actual contents, so the file name does not have to be
 the same, and two occurrences are enough — the logo need not appear on every
 slide. PowerPoint templates sometimes put a small logo inside a full-width
 white header or footer on the slide master. OciDeck recognises that construction
-too: it offers the compact corner mark, not the surrounding strip, and keeps
-its source corner and size. If that image is already the logo of one of your
+too: it offers the compact corner mark for recognition, while retaining the
+complete strip as part of the imported house style. Its source edge, height and
+logo size are kept. On a title slide the title and additional information stay
+above the strip, while the subtitle/byline can sit inside it just as in the
+source. If that image is already the logo of one of your
 style profiles, OciDeck
 shows that match as additional evidence and can reuse the durable logo file; the
 other style values still come from the source presentation. You always choose
@@ -2568,6 +2571,14 @@ use. In the web version the logo stays with
 this presentation: the browser cannot retain it as part of a reusable style.
 The queue does not interrupt a batch for this question and therefore keeps
 unknown candidates as ordinary images.
+
+**A title slide can carry more than a title and subtitle.** In the title editor,
+*Additional information* holds ordinary Markdown for details such as a date,
+location or version. In the file these are simply paragraphs after the `#`
+title and optional `##` subtitle, so they remain readable outside OciDeck and
+survive saving and reopening. Existing title slides need no migration: with the
+field empty, and with a style that has no brand strip, the familiar classic
+title layout is unchanged.
 
 **It is not a one-to-one copy, and it says so before it starts.** OciDeck's
 slide model is deliberately simpler than PowerPoint's — fixed layouts, one
@@ -5673,8 +5684,12 @@ find it.
     default, or set separately), the header and footer text with their band
     colours, and page numbering.
   - **Presentation** — what only exists on a slide: the title and section
-    backgrounds, the slide logo, the slide footer, the optional closing slide
-    and the animation duration.
+    backgrounds, the slide logo, an optional full-width brand strip, the slide
+    footer, the optional closing slide and the animation duration. A brand strip
+    belongs to the profile, not to the Markdown: that is what lets an imported
+    or shared house style preserve its distinctive logo height and edge
+    attachment without making the content proprietary. Title slides can also
+    place their subtitle/byline inside that strip.
 
   The **base font size** is the size ordinary body text is set in, from 9 to
   28 pt, 11 pt by default — a page size rather than a screen size.
@@ -5714,8 +5729,9 @@ find it.
   passed to a colleague or kept in a repository without a deck around it. Import
   reads such a file back, adds it as a new profile and selects it; an existing
   name is never overwritten, the import gets a unique name instead. A **custom
-  logo travels inside the file**, so the profile arrives complete; the local path
-  to your logo is deliberately left out. Built-in logos stay a reference. On the
+  logo travels inside the file**, and so does a custom brand strip, so the profile
+  arrives complete; local paths are deliberately left out. Built-in logos stay a
+  reference. On the
   web build a restored custom logo lives only until you reload the page (there is
   no persistent file storage in the browser) — everything else in the profile
   keeps working. Anything that isn't a valid profile file is refused with an

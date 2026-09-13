@@ -1627,6 +1627,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'gambar gaya yang disematkan tidak dapat dipulihkan',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Profil gaya diekspor — gambar gaya khusus tidak dapat disertakan',
+  'Aanvullende informatie': 'Informasi tambahan',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Misalnya tanggal, lokasi, atau versi',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Gaya tidak dapat disimpan secara permanen. Strip merek hanya akan digunakan dalam presentasi ini.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Tambahkan tangkapan layar, video, atau berkas PDF sebagai bukti. Setiap bukti mendapat slide tersendiri tepat setelah temuan dan disertakan dalam ekspor.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4799,8 +4808,6 @@ const _dutchSourceAddId = <String, String>{
   'Profiel exporteren': 'Ekspor profil',
   'Profiel importeren': 'Impor profil',
   'Stijlprofiel geëxporteerd': 'Profil gaya diekspor',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Profil gaya diekspor — logo khusus tidak dapat disertakan',
   'Stijlprofiel exporteren mislukt': 'Gagal mengekspor profil gaya',
   'Stijlprofiel importeren mislukt': 'Gagal mengimpor profil gaya',
   'Stijlprofiel geïmporteerd': 'Profil gaya diimpor',
@@ -4811,8 +4818,6 @@ const _dutchSourceAddId = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Profil gaya ini berasal dari versi OciDeck yang lebih baru',
   'die naam bestond al, bewaard als': 'nama itu sudah ada, disimpan sebagai',
-  'het ingesloten logo kon niet worden teruggezet':
-      'logo yang disertakan tidak dapat dipulihkan',
   'Maak een tussenkop': 'Buat subjudul',
   'Maak er weer een bullet van': 'Ubah kembali menjadi butir',
   'Tussenkop (leeg = alleen een scheidingslijn)':

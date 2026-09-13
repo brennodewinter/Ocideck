@@ -5,6 +5,24 @@
 // SlideType) and behaviour is unchanged. All imports live in the main file.
 part of 'markdown_service.dart';
 
+void _writeTitleText(StringBuffer buf, Slide slide) {
+  if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+  if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
+  final details = escapeDeckMarkdownDashLines(slide.customMarkdown.trim());
+  if (details.isEmpty) return;
+  buf
+    ..writeln()
+    ..write(details);
+  if (!details.endsWith('\n')) buf.writeln();
+}
+
+void _writeSectionSubtitle(StringBuffer buf, String subtitle) {
+  if (subtitle.isEmpty) return;
+  buf
+    ..writeln()
+    ..writeln(subtitle);
+}
+
 extension _MarkdownSerialize on MarkdownService {
   /// Emits the image crop focal point(s) as HTML comments Marp ignores, only
   /// when they differ from the centre default. `2` is the twoImages right image;
@@ -81,8 +99,7 @@ extension _MarkdownSerialize on MarkdownService {
     } else {
       _writeSlideBackground(buf, slide);
     }
-    if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
-    if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
+    _writeTitleText(buf, slide);
     if (slide.titleTextColorOverride.isNotEmpty) {
       buf.writeln(
         '<!-- ocideck_title_text_color: ${slide.titleTextColorOverride} -->',
@@ -124,10 +141,7 @@ extension _MarkdownSerialize on MarkdownService {
         '<!-- ocideck_title_text_color: ${slide.titleTextColorOverride} -->',
       );
     }
-    if (slide.subtitle.isNotEmpty) {
-      buf.writeln();
-      buf.writeln(slide.subtitle);
-    }
+    _writeSectionSubtitle(buf, slide.subtitle);
   }
 
   void _writeBulletsSlide(
@@ -215,6 +229,7 @@ extension _MarkdownSerialize on MarkdownService {
       );
       buf.writeln();
       if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+      if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
       _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
       _writeBulletBody(buf, slide);
       buf.writeln();
@@ -230,6 +245,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln('</div>');
     } else {
       if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+      if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
       _writeBulletMarkerOverride(buf, slide, themeProfile, forExport);
       _writeBulletBody(buf, slide);
     }
@@ -257,6 +273,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln();
       buf.writeln('# ${slide.title}');
     }
+    if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
   }
 
   void _writeImageSlide(StringBuffer buf, Slide slide) {
@@ -270,6 +287,7 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln();
       buf.writeln('# ${slide.title}');
     }
+    if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
   }
 
   void _writeVideoSlide(StringBuffer buf, Slide slide, bool forExport) {

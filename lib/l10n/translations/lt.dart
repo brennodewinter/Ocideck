@@ -1634,6 +1634,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'nepavyko atkurti įterpto stiliaus vaizdo',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stiliaus profilis eksportuotas — nepavyko įtraukti savo stiliaus vaizdo',
+  'Aanvullende informatie': 'Papildoma informacija',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Pavyzdžiui, data, vieta arba versija',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Nepavyko išsaugoti stiliaus visam laikui. Prekės ženklo juosta bus naudojama tik šiame pristatyme.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Pridėkite ekrano kopijas, vaizdo įrašus arba PDF failus kaip įrodymus. Kiekvienam įrodymui skiriama atskira skaidrė iškart po radinio ir jis įtraukiamas į eksportą.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4801,8 +4810,6 @@ const _dutchSourceAddLt = <String, String>{
   'Profiel exporteren': 'Eksportuoti profilį',
   'Profiel importeren': 'Importuoti profilį',
   'Stijlprofiel geëxporteerd': 'Stiliaus profilis eksportuotas',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stiliaus profilis eksportuotas — nepavyko įtraukti savo logotipo',
   'Stijlprofiel exporteren mislukt': 'Nepavyko eksportuoti stiliaus profilio',
   'Stijlprofiel importeren mislukt': 'Nepavyko importuoti stiliaus profilio',
   'Stijlprofiel geïmporteerd': 'Stiliaus profilis importuotas',
@@ -4813,8 +4820,6 @@ const _dutchSourceAddLt = <String, String>{
   'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
       'Šis stiliaus profilis sukurtas naujesne OciDeck versija',
   'die naam bestond al, bewaard als': 'toks pavadinimas jau buvo, įrašyta kaip',
-  'het ingesloten logo kon niet worden teruggezet':
-      'nepavyko atkurti įterpto logotipo',
   'Maak een tussenkop': 'Sukurti tarpinę antraštę',
   'Maak er weer een bullet van': 'Vėl paversti ženkleliu',
   'Tussenkop (leeg = alleen een scheidingslijn)':

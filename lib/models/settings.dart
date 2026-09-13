@@ -148,6 +148,14 @@ class ThemeProfile {
   final String logoPosition;
   final int logoSize;
 
+  /// Optionele brede merkstrook aan dezelfde boven- of onderrand als het logo.
+  /// Het beeld bevat de volledige bronstrook; wanneer die bestaat rendert de
+  /// presentatielaag haar in plaats van het losse logo, zodat vorm en verankering
+  /// van een huisstijl niet tot een generiek hoeklogo worden afgevlakt.
+  final String? brandStripPath;
+  final double brandStripHeight;
+  final bool titleSubtitleInBrandStrip;
+
   /// Donkere variant van het logo, gekozen op donkere dia-achtergronden (#1931).
   /// `null` betekent: geen donkere variant. Gebundelde merk-logo's kiezen
   /// automatisch via [BrandLogo.effectiveAssetKey] en hebben dit veld niet nodig.
@@ -221,6 +229,9 @@ class ThemeProfile {
     this.logoPath,
     this.logoPosition = 'bottom-right',
     this.logoSize = 96,
+    this.brandStripPath,
+    this.brandStripHeight = 0,
+    this.titleSubtitleInBrandStrip = false,
     this.logoDarkPath,
     this.documentLogoPath,
     this.documentLogoPosition = 'top-right',
@@ -387,6 +398,9 @@ class ThemeProfile {
     String? logoPath,
     String? logoPosition,
     int? logoSize,
+    String? brandStripPath,
+    double? brandStripHeight,
+    bool? titleSubtitleInBrandStrip,
     String? logoDarkPath,
     String? documentLogoPath,
     String? documentLogoPosition,
@@ -411,6 +425,7 @@ class ThemeProfile {
     String? severityLowColor,
     String? severityNoneColor,
     bool clearLogo = false,
+    bool clearBrandStrip = false,
     bool clearLogoDark = false,
     bool clearDocumentLogoOverride = false,
   }) {
@@ -448,6 +463,12 @@ class ThemeProfile {
       logoPath: clearLogo ? null : (logoPath ?? this.logoPath),
       logoPosition: logoPosition ?? this.logoPosition,
       logoSize: logoSize ?? this.logoSize,
+      brandStripPath: clearBrandStrip
+          ? null
+          : (brandStripPath ?? this.brandStripPath),
+      brandStripHeight: brandStripHeight ?? this.brandStripHeight,
+      titleSubtitleInBrandStrip:
+          titleSubtitleInBrandStrip ?? this.titleSubtitleInBrandStrip,
       logoDarkPath: clearLogoDark ? null : (logoDarkPath ?? this.logoDarkPath),
       documentLogoPath: clearDocumentLogoOverride
           ? null
@@ -510,6 +531,9 @@ class ThemeProfile {
       'logoPath': logoPath,
       'logoPosition': logoPosition,
       'logoSize': logoSize,
+      'brandStripPath': brandStripPath,
+      'brandStripHeight': brandStripHeight,
+      'titleSubtitleInBrandStrip': titleSubtitleInBrandStrip,
       'logoDarkPath': logoDarkPath,
       'documentLogoPath': documentLogoPath,
       'documentLogoPosition': documentLogoPosition,
@@ -598,6 +622,11 @@ class ThemeProfile {
       logoPath: json['logoPath'] as String?,
       logoPosition: json['logoPosition'] as String? ?? 'bottom-right',
       logoSize: (json['logoSize'] as num?)?.round() ?? 96,
+      brandStripPath: json['brandStripPath'] as String?,
+      brandStripHeight: ((json['brandStripHeight'] as num?)?.toDouble() ?? 0)
+          .clamp(0.0, 0.25),
+      titleSubtitleInBrandStrip:
+          json['titleSubtitleInBrandStrip'] as bool? ?? false,
       logoDarkPath: json['logoDarkPath'] as String?,
       documentLogoPath: json['documentLogoPath'] as String?,
       documentLogoPosition:

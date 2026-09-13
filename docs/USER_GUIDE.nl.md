@@ -2646,9 +2646,15 @@ grootte- en tijdslimieten van de import.
 **Een herhaalde afbeelding boven- of onderaan kan het decklogo worden.** OciDeck
 vergelijkt de werkelijke beeldinhoud, dus de bestandsnaam hoeft niet gelijk te
 zijn, en twee vindplaatsen zijn genoeg — het logo hoeft niet op iedere dia te
-staan. Is die afbeelding al het logo van een van uw stijlprofielen, dan toont
-OciDeck die overeenkomst als extra bewijs en kan het het duurzame logobestand
-hergebruiken; de andere stijlwaarden komen nog steeds uit de bronpresentatie. U
+staan. PowerPoint-sjablonen zetten een klein logo soms in een paginabrede witte
+strook van het diamodel. OciDeck biedt dan het compacte hoeklogo ter herkenning
+aan, maar bewaart de hele strook als onderdeel van de geïmporteerde huisstijl.
+De bronrand, hoogte en logogrootte blijven behouden. Op een titeldia blijven
+titel en aanvullende informatie boven de strook staan; de ondertitel of
+naamregel kan net als in de bron in de strook komen. Is de afbeelding al het
+logo van een van uw stijlprofielen, dan toont OciDeck die overeenkomst als extra
+bewijs en kan het het duurzame logobestand hergebruiken; de andere stijlwaarden
+komen nog steeds uit de bronpresentatie. U
 kiest altijd wat ermee gebeurt: als gewone dia-afbeelding behouden, helemaal uit
 de import weglaten, of als logo gebruiken. Bij gebruik als logo haalt OciDeck
 het beeld uit de dia-indelingen en zet het in de deckstijl; daarna kiest u of die
@@ -2657,6 +2663,14 @@ OciDeck wordt toegevoegd. In de webversie blijft het logo bij deze presentatie:
 de browser kan het niet blijvend bij een stijl opslaan. De wachtrij onderbreekt
 een stapel niet voor deze vraag en houdt onbekende kandidaten daarom als gewone
 afbeeldingen.
+
+**Een titeldia kan meer bevatten dan een titel en ondertitel.** Het veld
+*Aanvullende informatie* in de titeldia-editor is gewone Markdown voor
+bijvoorbeeld datum, locatie of versie. In het bestand zijn dat simpelweg
+alinea's na de `#`-titel en optionele `##`-ondertitel. Ze blijven daardoor ook
+buiten OciDeck leesbaar en overleven opslaan en opnieuw openen. Bestaande
+titeldia's hoeven niet te worden omgezet: met een leeg veld en een stijl zonder
+merkstrook blijft de klassieke titelindeling ongewijzigd.
 
 **Het is geen één-op-één-kopie, en het zegt dat voordat het begint.** Het
 diamodel van OciDeck is met opzet eenvoudiger dan dat van PowerPoint — vaste
@@ -5691,7 +5705,12 @@ interfacetekstgrootte. Je hoeft niet te weten hoe de app iets noemt om het te
 vinden.
 
 - **Stijlprofielen** bepalen deckkleuren (inclusief de broncode-achtergrond,
-  tekst, lettertype en een optionele syntaxkleuring-schakelaar), lettertypen, logo, en footer.
+  tekst, lettertype en een optionele syntaxkleuring-schakelaar), lettertypen,
+  logo, een optionele paginabrede merkstrook en footer. Die strook hoort bij het
+  profiel en niet bij de Markdown: zo houdt een geïmporteerde of gedeelde
+  huisstijl haar eigen logohoogte en aansluiting op de boven- of onderrand,
+  zonder de inhoud OciDeck-specifiek te maken. Een titeldia kan haar ondertitel
+  of naamregel in de strook plaatsen.
   Elke kleur kan uit de presets worden gekozen of als een aangepaste hexwaarde worden ingevoerd. De
   tabbladen Colours en Logo tonen welk profiel je bewerkt. Terwijl je bewerkt, verschijnt een waarschuwing
   onder elke kleur waarvan het kwaliteitspaneel het contrast zou markeren voor een
@@ -5706,8 +5725,9 @@ vinden.
   doorgegeven aan een collega of in een repository bewaard zonder een deck eromheen. Import
   leest zo'n bestand terug, voegt het toe als een nieuw profiel en selecteert het; een bestaande
   naam wordt nooit overschreven, de import krijgt in plaats daarvan een unieke naam. Een **aangepast
-  logo reist mee in het bestand**, zodat het profiel compleet arriveert; het lokale pad
-  naar je logo wordt bewust weggelaten. Ingebouwde logo's blijven een verwijzing. Op de
+  logo reist mee in het bestand**, net als een aangepaste merkstrook, zodat het
+  profiel compleet arriveert; lokale paden worden bewust weggelaten. Ingebouwde
+  logo's blijven een verwijzing. Op de
   webbuild leeft een hersteld aangepast logo alleen tot je de pagina herlaadt (er is
   geen persistente bestandsopslag in de browser) — al het andere in het profiel
   blijft werken. Alles wat geen geldig profielbestand is, wordt geweigerd met een

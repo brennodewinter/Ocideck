@@ -673,6 +673,16 @@ class SlidePreviewWidget extends StatelessWidget {
                           projectPath: projectPath,
                           position: themeProfile.logoPosition,
                           size: w * (themeProfile.logoSize / 1280),
+                          slideWidth: w,
+                          brandStripPath: themeProfile.brandStripPath,
+                          brandStripHeight: themeProfile.brandStripHeight,
+                          titleSubtitle:
+                              slide.type == SlideType.title &&
+                                  themeProfile.titleSubtitleInBrandStrip
+                              ? slide.subtitle
+                              : '',
+                          font: fontFamily,
+                          accentColor: themeProfile.accentColor,
                         ),
                     ],
                   ),

@@ -30,6 +30,7 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
     with EditorTextControllers, BgImageHandlers {
   late final TextEditingController _title;
   late final TextEditingController _subtitle;
+  late final TextEditingController _details;
 
   /// Zoom to restore when the user turns "fill slide" back off, so toggling the
   /// checkbox doesn't discard the zoom they had dialled in. The editor is keyed
@@ -48,14 +49,33 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
     super.initState();
     _title = newController(widget.slide.title, _emit);
     _subtitle = newController(widget.slide.subtitle, _emit);
+    _details = newController(widget.slide.customMarkdown, _emit);
     if (widget.slide.imageSize > 0) _zoomBeforeFill = widget.slide.imageSize;
   }
 
   void _emit() {
     widget.onUpdate(
-      widget.slide.copyWith(title: _title.text, subtitle: _subtitle.text),
+      widget.slide.copyWith(
+        title: _title.text,
+        subtitle: _subtitle.text,
+        customMarkdown: _details.text,
+      ),
     );
   }
+
+  Widget _detailsField(AppLocalizations l10n) => EditorField(
+    label: l10n.d('Aanvullende informatie'),
+    controller: _details,
+    hint: l10n.d('Bijvoorbeeld datum, locatie of versie'),
+    maxLines: 4,
+  );
+
+  Widget _subtitleField() => EditorField(
+    label: 'Subtitel (H2)',
+    controller: _subtitle,
+    hint: 'Optionele subtitel',
+    maxLines: 2,
+  );
 
   void _setLayout(TitleColumnLayout layout) {
     widget.onUpdate(widget.slide.copyWith(titleColumnLayout: layout));
@@ -117,12 +137,9 @@ class _TitleEditorState extends ConsumerState<TitleEditor>
           maxLines: 2,
         ),
         const SizedBox(height: 16),
-        EditorField(
-          label: 'Subtitel (H2)',
-          controller: _subtitle,
-          hint: 'Optionele subtitel',
-          maxLines: 2,
-        ),
+        _subtitleField(),
+        const SizedBox(height: 16),
+        _detailsField(l10n),
         const SizedBox(height: 20),
 
         // ── Layout chooser: full-bleed vs. image columns (#1405) ─────────

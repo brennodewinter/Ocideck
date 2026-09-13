@@ -1657,6 +1657,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'níorbh fhéidir íomhá stíle leabaithe a athchóiriú',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Próifíl stíle easpórtáilte — níorbh fhéidir íomhá stíle shaincheaptha a chur san áireamh',
+  'Aanvullende informatie': 'Eolas breise',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Mar shampla, dáta, suíomh nó leagan',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Níorbh fhéidir an stíl a shábháil go buan. Ní úsáidfear an stiall bhranda ach sa chur i láthair seo.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Cuir gabhálacha scáileáin, físeáin nó comhaid PDF leis mar fhianaise. Faigheann gach píosa fianaise a shleamhnán féin díreach i ndiaidh an toraidh agus cuirtear san easpórtáil é.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4863,8 +4872,6 @@ const _dutchSourceAddGa = <String, String>{
   'Profiel exporteren': 'Easpórtáil próifíl',
   'Profiel importeren': 'Iompórtáil próifíl',
   'Stijlprofiel geëxporteerd': 'Próifíl stíle easpórtáilte',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Próifíl stíle easpórtáilte — níorbh fhéidir an lógó saincheaptha a chur san áireamh',
   'Stijlprofiel exporteren mislukt': 'Theip ar easpórtáil na próifíle stíle',
   'Stijlprofiel importeren mislukt': 'Theip ar iompórtáil na próifíle stíle',
   'Stijlprofiel geïmporteerd': 'Próifíl stíle iompórtáilte',
@@ -4876,8 +4883,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tagann an phróifíl stíle seo ó leagan níos nuaí de OciDeck',
   'die naam bestond al, bewaard als':
       'bhí an t-ainm sin ann cheana, sábháilte mar',
-  'het ingesloten logo kon niet worden teruggezet':
-      'níorbh fhéidir an lógó leabaithe a athchóiriú',
   'Maak een tussenkop': 'Cruthaigh fo-cheannteideal',
   'Maak er weer een bullet van': 'Athraigh ar ais go urchar',
   'Tussenkop (leeg = alleen een scheidingslijn)':

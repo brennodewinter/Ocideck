@@ -120,11 +120,19 @@ class SlideFactory {
     return null;
   }
 
-  Slide _title(Slide base, SourceSlide s) => base.copyWith(
-    title: _safe(s.title),
-    subtitle: _safe(s.subtitle),
-    imagePath: s.images.isNotEmpty ? _memPathFor(s.images.first) : null,
-  );
+  Slide _title(Slide base, SourceSlide s) {
+    final details = [
+      for (final block in s.bodyBlocks)
+        if (block.kind == BodyBlockKind.paragraph) _safe(block.text),
+      ..._hyperlinkMarkdown(s),
+    ];
+    return base.copyWith(
+      title: _safe(s.title),
+      subtitle: _safe(s.subtitle),
+      customMarkdown: details.join('\n\n'),
+      imagePath: s.images.isNotEmpty ? _memPathFor(s.images.first) : null,
+    );
+  }
 
   Slide _section(Slide base, SourceSlide s) {
     final paragraphs = s.bodyBlocks
@@ -145,7 +153,7 @@ class SlideFactory {
 
   Slide _bullets(Slide base, SourceSlide s) => base.copyWith(
     title: _safe(s.title),
-    subtitle: _safe(s.subtitle),
+    subtitle: _supportingSubtitle(s),
     bullets: _bulletItems(s),
   );
 
@@ -161,7 +169,7 @@ class SlideFactory {
 
   Slide _bulletsImage(Slide base, SourceSlide s) => base.copyWith(
     title: _safe(s.title),
-    subtitle: _safe(s.subtitle),
+    subtitle: _supportingSubtitle(s),
     bullets: _bulletItems(s),
     imagePath: s.images.isNotEmpty ? _memPathFor(s.images.first) : null,
     imageCaption: _caption(s, 0),
@@ -177,9 +185,19 @@ class SlideFactory {
 
   Slide _image(Slide base, SourceSlide s) => base.copyWith(
     title: _safe(s.title),
+    subtitle: _supportingSubtitle(s),
     imagePath: s.images.isNotEmpty ? _memPathFor(s.images.first) : null,
     imageCaption: _caption(s, 0),
+    imageTitleAbove:
+        (s.images.isNotEmpty && s.images.first.isComposite) ||
+        s.bodyBlocks.any((block) => block.kind == BodyBlockKind.paragraph),
   );
+
+  String _supportingSubtitle(SourceSlide s) => [
+    if (s.subtitle.isNotEmpty) _safe(s.subtitle),
+    for (final block in s.bodyBlocks)
+      if (block.kind == BodyBlockKind.paragraph) _safe(block.text),
+  ].join('\n');
 
   Slide _video(Slide base, SourceSlide s) {
     final v = s.video;

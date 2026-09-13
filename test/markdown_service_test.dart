@@ -156,6 +156,33 @@ void main() {
     expect(slide.titleImageOverlay, isFalse);
   });
 
+  test('round-trips aanvullende gewone Markdown op een titelpagina', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.title).copyWith(
+            title: 'Workshop Recruitment',
+            subtitle: 'Door Mieke van Oers',
+            customMarkdown: '16 mei 2025\n\nAmsterdam',
+          ),
+        ],
+      ),
+    );
+
+    expect(markdown, contains('16 mei 2025\n\nAmsterdam'));
+
+    final deck = service.parseDeck(markdown);
+
+    expect(deck, isNotNull);
+    final slide = deck!.slides.single;
+    expect(slide.type, SlideType.title);
+    expect(slide.title, 'Workshop Recruitment');
+    expect(slide.subtitle, 'Door Mieke van Oers');
+    expect(slide.customMarkdown, '16 mei 2025\n\nAmsterdam');
+  });
+
   test('round-trips bulletsImage slide with image and size', () {
     final service = MarkdownService();
     final markdown = service.generateDeck(
@@ -164,6 +191,7 @@ void main() {
         slides: [
           Slide.create(SlideType.bulletsImage).copyWith(
             title: 'Profiel',
+            subtitle: 'Korte toelichting',
             bullets: ['Eerste punt', '\tGenest punt'],
             imagePath: 'images/portret.png',
             imageCaption: 'Een onderschrift',
@@ -179,10 +207,34 @@ void main() {
     final slide = deck!.slides.single;
     expect(slide.type, SlideType.bulletsImage);
     expect(slide.title, 'Profiel');
+    expect(slide.subtitle, 'Korte toelichting');
     expect(slide.imagePath, 'images/portret.png');
     expect(slide.imageCaption, 'Een onderschrift');
     expect(slide.imageSize, 45);
     expect(slide.bullets, ['Eerste punt', '\tGenest punt']);
+  });
+
+  test('round-trips an image slide with title above and supporting text', () {
+    final service = MarkdownService();
+    final markdown = service.generateDeck(
+      Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.image).copyWith(
+            title: 'Verwachtingen',
+            subtitle: 'Wat verwacht je van deze workshop?',
+            imagePath: 'images/workshop.png',
+            imageTitleAbove: true,
+          ),
+        ],
+      ),
+    );
+
+    final slide = service.parseDeck(markdown)!.slides.single;
+    expect(slide.type, SlideType.image);
+    expect(slide.title, 'Verwachtingen');
+    expect(slide.subtitle, 'Wat verwacht je van deze workshop?');
+    expect(slide.imageTitleAbove, isTrue);
   });
 
   test('round-trips a caption containing a slash', () {

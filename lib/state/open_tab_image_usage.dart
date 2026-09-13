@@ -125,6 +125,7 @@ List<String> _themeLogoUsages(SettingsNotifier settings, String absolutePath) {
       profile.logoPath,
       profile.logoDarkPath,
       profile.documentLogoPath,
+      profile.brandStripPath,
     ]) {
       if (_sameLocalLogo(path, absolutePath)) usages.add(profile.name);
     }
@@ -154,6 +155,9 @@ Future<void> _replaceThemeLogoUsages(
                 _sameLocalLogo(profile.documentLogoPath, fromAbsolute)
                 ? toAbsolute
                 : profile.documentLogoPath,
+            brandStripPath: _sameLocalLogo(profile.brandStripPath, fromAbsolute)
+                ? toAbsolute
+                : profile.brandStripPath,
           );
         }()
       else
@@ -170,6 +174,7 @@ bool _profileUsesLocalLogo(ThemeProfile profile, String absolutePath) => [
   profile.logoPath,
   profile.logoDarkPath,
   profile.documentLogoPath,
+  profile.brandStripPath,
 ].any((path) => _sameLocalLogo(path, absolutePath));
 
 bool _sameLocalLogo(String? candidate, String absolutePath) {

@@ -201,7 +201,7 @@ extension _SettingsProfile on _SettingsDialogState {
       if (renamed)
         '— ${l10n.d('die naam bestond al, bewaard als')} "${saved.name}"',
       if (outcome.logoOmitted)
-        '— ${l10n.d('het ingesloten logo kon niet worden teruggezet')}',
+        '— ${l10n.d('een ingesloten stijlafbeelding kon niet worden teruggezet')}',
     ].join(' ');
     messenger.showSnackBar(SnackBar(content: Text(message)));
   }
@@ -245,7 +245,7 @@ Future<void> _exportStyleProfileAndReport(
         content: Text(
           outcome.logoOmitted
               ? l10n.d(
-                  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen',
+                  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen',
                 )
               : l10n.d('Stijlprofiel geëxporteerd'),
         ),

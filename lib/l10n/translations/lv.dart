@@ -1625,6 +1625,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'een ingesloten stijlafbeelding kon niet worden teruggezet':
+      'iegultu stila attēlu neizdevās atjaunot',
+  'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
+      'Stila profils eksportēts — savu stila attēlu neizdevās iekļaut',
+  'Aanvullende informatie': 'Papildu informācija',
+  'Bijvoorbeeld datum, locatie of versie':
+      'Piemēram, datums, vieta vai versija',
+  'De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.':
+      'Stilu neizdevās saglabāt pastāvīgi. Zīmola josla tiks izmantota tikai šajā prezentācijā.',
   'Voeg screenshots, video\'s of PDF-bestanden toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
       'Pievienojiet ekrānuzņēmumus, videoklipus vai PDF failus kā pierādījumus. Katrs pierādījums iegūst savu slaidu uzreiz pēc atraduma un tiek iekļauts eksportā.',
   'PDF/A en digitale handtekeningen blijven zichtbaar. OciDeck controleert de handtekening niet.':
@@ -4790,8 +4799,6 @@ const _dutchSourceAddLv = <String, String>{
   'Profiel exporteren': 'Eksportēt profilu',
   'Profiel importeren': 'Importēt profilu',
   'Stijlprofiel geëxporteerd': 'Stila profils eksportēts',
-  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
-      'Stila profils eksportēts — savu logotipu neizdevās iekļaut',
   'Stijlprofiel exporteren mislukt': 'Neizdevās eksportēt stila profilu',
   'Stijlprofiel importeren mislukt': 'Neizdevās importēt stila profilu',
   'Stijlprofiel geïmporteerd': 'Stila profils importēts',
@@ -4803,8 +4810,6 @@ const _dutchSourceAddLv = <String, String>{
       'Šis stila profils ir no jaunākas OciDeck versijas',
   'die naam bestond al, bewaard als':
       'šāds nosaukums jau pastāvēja, saglabāts kā',
-  'het ingesloten logo kon niet worden teruggezet':
-      'iegulto logotipu neizdevās atjaunot',
   'Maak een tussenkop': 'Izveidot starpvirsrakstu',
   'Maak er weer een bullet van': 'Pārvērst atpakaļ par aizzīmi',
   'Tussenkop (leeg = alleen een scheidingslijn)':

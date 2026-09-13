@@ -35,6 +35,7 @@ SourceSlide parseSlide(
   final rels = ctx.relsFor(slidePath);
   String? resolveLink(String rId) => ctx.resolveRel(rels, rId, slidePath);
   final slideHeight = ctx.slideSize?.height ?? 6858000;
+  final placeholders = _placeholderInheritance(ctx, slidePath);
 
   final parts = _SlideParts();
   final spTree = descendantsLocal(doc, 'spTree').firstOrNull;
@@ -48,6 +49,7 @@ SourceSlide parseSlide(
       resolveLink,
       parts,
       slideHeight,
+      placeholders,
     );
   }
 
@@ -192,6 +194,7 @@ void _readShapeTree(
   String? Function(String rId) resolveLink,
   _SlideParts parts,
   int slideHeight,
+  _PlaceholderInheritance placeholders,
 ) {
   for (final child in spTree.children.whereType<XmlElement>()) {
     switch (child.name.local) {
@@ -207,6 +210,7 @@ void _readShapeTree(
           resolveLink,
           parts,
           slideHeight,
+          placeholders,
         );
       case 'sp':
         // Eén onleesbaar tekstvak mag de rest van de dia niet meesleuren
@@ -218,7 +222,8 @@ void _readShapeTree(
           feature: 'Dia-inhoud',
           description: 'kon niet worden gelezen en is overgeslagen',
           logOp: 'PptxImporter: dia ${index + 1} tekstvak',
-          body: () => _applyShape(child, resolveLink, parts, slideHeight),
+          body: () =>
+              _applyShape(child, resolveLink, parts, slideHeight, placeholders),
         );
       case 'pic':
         final img = guardParse<SourceImage>(
@@ -276,8 +281,13 @@ void _applyShape(
   String? Function(String rId) resolveLink,
   _SlideParts parts,
   int slideHeight,
+  _PlaceholderInheritance placeholders,
 ) {
-  final shape = parseShape(child, resolveLink);
+  final shape = parseShape(
+    child,
+    resolveLink,
+    inheritedShapes: placeholders.forShape(child),
+  );
   if (shape == null) return;
   if (shape.hasPh) {
     if (shape.isTitle) {
@@ -302,6 +312,54 @@ void _applyShape(
     parts.nonPhCandidates.add(shape);
   }
   parts.links.addAll(shape.links);
+}
+
+class _PlaceholderInheritance {
+  const _PlaceholderInheritance(this.layout, this.master);
+
+  final XmlDocument? layout;
+  final XmlDocument? master;
+
+  List<XmlElement> forShape(XmlElement shape) {
+    final ph = descendantsLocal(shape, 'ph').firstOrNull;
+    if (ph == null) return const [];
+    return [
+      ?_matchingPlaceholder(layout, ph),
+      ?_matchingPlaceholder(master, ph),
+    ];
+  }
+}
+
+_PlaceholderInheritance _placeholderInheritance(
+  PptxContext context,
+  String slidePath,
+) {
+  final layoutPath = context.firstRelatedPart(slidePath, 'ppt/slideLayouts/');
+  final layout = layoutPath == null ? null : context.readXml(layoutPath);
+  final masterPath = layoutPath == null
+      ? null
+      : context.firstRelatedPart(layoutPath, 'ppt/slideMasters/');
+  return _PlaceholderInheritance(
+    layout,
+    masterPath == null ? null : context.readXml(masterPath),
+  );
+}
+
+XmlElement? _matchingPlaceholder(XmlDocument? document, XmlElement sourcePh) {
+  if (document == null) return null;
+  final sourceIndex = sourcePh.getAttribute('idx');
+  final sourceType = sourcePh.getAttribute('type') ?? 'body';
+  XmlElement? typeFallback;
+  for (final shape in descendantsLocal(document, 'sp')) {
+    final ph = descendantsLocal(shape, 'ph').firstOrNull;
+    if (ph == null) continue;
+    final type = ph.getAttribute('type') ?? 'body';
+    if (sourceIndex != null && ph.getAttribute('idx') == sourceIndex) {
+      return shape;
+    }
+    if (typeFallback == null && type == sourceType) typeFallback = shape;
+  }
+  return typeFallback;
 }
 
 /// Parse a `p:graphicFrame` whose graphic data is a DrawingML chart into a

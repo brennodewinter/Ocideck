@@ -18,6 +18,7 @@ class SourceImage {
     this.caption,
     this.placement,
     this.role = SourceImageRole.content,
+    this.isComposite = false,
   });
 
   final Uint8List bytes;
@@ -47,6 +48,11 @@ class SourceImage {
   /// classificatie bekend zijn: beide als gewone inhoud behandelen maakt van
   /// één dia meerdere losse afbeeldingsdia's.
   final SourceImageRole role;
+
+  /// Of dit beeld tijdens import uit meerdere vrij geplaatste bronbeelden is
+  /// opgebouwd. Het blijft één gewone afbeelding in het OciDeck-bestand; deze
+  /// aanwijzing helpt de bouwer alleen om de titel erboven te plaatsen.
+  final bool isComposite;
 
   /// SHA-256 hex digest of [bytes]; the content-based identity for dedup.
   late final String sha256 = sha256Hex(bytes);

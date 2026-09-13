@@ -4,6 +4,9 @@
 // _SettingsDialogState — same library, same members, no behaviour change.
 part of '../settings_dialog.dart';
 
+ThemeProfile _withoutLogoAndBrandStrip(ThemeProfile profile) =>
+    profile.copyWith(clearLogo: true, clearBrandStrip: true);
+
 extension _SettingsColors on _SettingsDialogState {
   /// De kleuren die zowel een document als een presentatie dragen: het papier,
   /// de tekst, het accent en alles wat in beide vlakken voorkomt — checklists,
@@ -499,7 +502,7 @@ extension _SettingsColors on _SettingsDialogState {
               if (_themeProfile.logoPath != null)
                 IconButton(
                   onPressed: () => _rebuild(() {
-                    _themeProfile = _themeProfile.copyWith(clearLogo: true);
+                    _themeProfile = _withoutLogoAndBrandStrip(_themeProfile);
                     _profileTouched = true;
                   }),
                   icon: const Icon(Icons.clear, size: 18),

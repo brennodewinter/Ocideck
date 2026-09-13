@@ -290,8 +290,8 @@ extension _MarkdownParseBody on MarkdownService {
       final audio = _parseAudioAttrs(t);
       b.audioPath = audio.$1;
       b.audioAutoplay = audio.$2;
-    } else if (t.isNotEmpty && b.h1.isNotEmpty && b.paragraph.isEmpty) {
-      b.paragraph = t;
+    } else if (t.isNotEmpty && b.h1.isNotEmpty) {
+      b.paragraph = b.paragraph.isEmpty ? t : '${b.paragraph}\n$t';
     }
   }
 

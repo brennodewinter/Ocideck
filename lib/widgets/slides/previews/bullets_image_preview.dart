@@ -77,6 +77,7 @@ class _BulletsImagePreview extends StatelessWidget {
     final safe = slide.showLogo
         ? _splitTextLogoSafeInsets(w, profile)
         : EdgeInsets.zero;
+    final imageSafe = _mediaBrandStripInsets(w, slide, profile);
     final imgFraction = (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40)
         .clamp(0.1, 0.70);
     final imgWidth = w * imgFraction;
@@ -114,9 +115,9 @@ class _BulletsImagePreview extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 0,
+            top: imageSafe.top,
             right: 0,
-            bottom: 0,
+            bottom: imageSafe.bottom,
             width: imgWidth,
             child: Stack(
               fit: StackFit.expand,
