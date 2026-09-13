@@ -104,7 +104,7 @@ class PptxImporter extends Importer {
           slides: slides,
           title: _coreProperty(ctx, 'title'),
           author: _coreProperty(ctx, 'creator'),
-          theme: _deckTheme(ctx),
+          theme: _deckTheme(ctx, slideRefs.first.path),
         ),
       );
     } on ImportBudgetException catch (e) {
@@ -191,9 +191,19 @@ class PptxImporter extends Importer {
     return '';
   }
 
-  SourceTheme? _deckTheme(PptxContext ctx) {
-    // The first theme part referenced by presentation.xml is the deck theme.
-    final themeXml = ctx.readPart('ppt/theme/theme1.xml');
+  SourceTheme? _deckTheme(PptxContext ctx, String firstSlidePath) {
+    // Thema-onderdelen zijn niet verplicht genummerd in gebruiksvolgorde. De
+    // eerste zichtbare dia wijst via indeling en model naar het thema dat de
+    // auteur daadwerkelijk ziet; `theme1.xml` blijft alleen de terugval voor
+    // eenvoudige bestanden zonder die relatieketen.
+    final layout = ctx.firstRelatedPart(firstSlidePath, 'ppt/slideLayouts/');
+    final master = layout == null
+        ? null
+        : ctx.firstRelatedPart(layout, 'ppt/slideMasters/');
+    final theme = master == null
+        ? null
+        : ctx.firstRelatedPart(master, 'ppt/theme/');
+    final themeXml = ctx.readPart(theme ?? 'ppt/theme/theme1.xml');
     if (themeXml == null) return null;
     return parseTheme(themeXml);
   }

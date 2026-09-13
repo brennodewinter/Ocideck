@@ -7,6 +7,7 @@ import '../../../../utils/image_resize.dart';
 import '../../models/source_image.dart';
 import '../../models/source_video.dart';
 import 'pptx_context.dart';
+import 'pptx_emf.dart';
 import '../../../../utils/file_extension.dart';
 
 const _videoExts = {
@@ -110,8 +111,9 @@ SourceImage? parsePic(
   XmlElement pic,
   PptxContext ctx,
   Map<String, String> rels,
-  String slidePath,
-) {
+  String slidePath, {
+  SourceImageRole role = SourceImageRole.content,
+}) {
   final blip = descendantsLocal(pic, 'blip').firstOrNull;
   if (blip == null) return null;
   final rId = blip.getAttribute('embed', namespaceUri: relsNs);
@@ -120,23 +122,41 @@ SourceImage? parsePic(
   final spPr = descendantsLocal(pic, 'spPr').firstOrNull;
   final xfrm = spPr != null ? childLocal(spPr, 'xfrm') : null;
 
-  final bytes = ctx.readRelBytes(rels, rId, slidePath);
-  if (bytes == null) return null;
+  final rawBytes = ctx.readRelBytes(rels, rId, slidePath);
+  if (rawBytes == null) return null;
   final resolved = ctx.resolveRel(rels, rId, slidePath) ?? '';
-  final name = descendantsLocal(pic, 'cNvPr').firstOrNull?.getAttribute('name');
+  final sourceExt = extOfFileName(resolved);
+  final converted = sourceExt == 'emf'
+      ? rasterizeTextEmf(Uint8List.fromList(rawBytes))
+      : null;
+  if (sourceExt == 'emf' && converted == null) {
+    throw const FormatException('Niet-ondersteunde EMF-inhoud');
+  }
+  if (sourceExt == 'wmf') {
+    throw const FormatException('Niet-ondersteunde WMF-inhoud');
+  }
+  final bytes = converted ?? Uint8List.fromList(rawBytes);
+  final ext = converted == null ? sourceExt : 'png';
+  final sourceName = descendantsLocal(
+    pic,
+    'cNvPr',
+  ).firstOrNull?.getAttribute('name');
+  final name = converted == null ? sourceName : '${sourceName ?? 'beeld'}.png';
+  final geometrySourceName = name ?? resolved;
 
   // Bak de vormgeometrie in de bytes bij import, zodat de rest van de pipeline
   // (weergave, opslaan, dedup) de afbeelding ziet zoals de auteur hem neerzette.
   final geometry = _geometry(pic, xfrm);
   final imageBytes = geometry.isIdentity
-      ? Uint8List.fromList(bytes)
-      : bakeImportGeometry(Uint8List.fromList(bytes), geometry, resolved);
+      ? bytes
+      : bakeImportGeometry(bytes, geometry, geometrySourceName);
 
   return SourceImage(
     bytes: imageBytes,
-    ext: extOfFileName(resolved),
+    ext: ext,
     name: name ?? p.url.basename(resolved),
     placement: _placement(xfrm, ctx.slideSize),
+    role: role,
   );
 }
 

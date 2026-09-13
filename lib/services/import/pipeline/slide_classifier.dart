@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import '../models/body_block.dart';
 import '../models/conversion_issue.dart';
+import '../models/source_image.dart';
 import '../models/source_slide.dart';
 import '../../../models/slide.dart';
 
@@ -79,6 +80,24 @@ ClassifiedSlide classifySlide(SourceSlide s) {
   // krijgt wél een image-type, in plaats van te degenereren naar `bullets`
   // dat alle afbeeldingen stil wegdropt.
   final hasBullets = _bullets(s).isNotEmpty;
+  final backgroundImage = s.images.any(
+    (image) => image.role == SourceImageRole.background,
+  );
+  final substantiveImages = s.images.where(
+    (image) => image.role != SourceImageRole.decoration,
+  );
+  // De titellayout kan zelf een beeld dragen. Dit moet vóór de generieke
+  // beeldclassificatie gebeuren, anders wordt een omslag een afbeeldingsdia en
+  // verdwijnt zijn ondertitel. Een full-bleed indelingsbeeld maakt dezelfde
+  // keuze ook voor een slotdia midden of achter in het deck.
+  if (s.title.isNotEmpty &&
+      s.bodyBlocks.isEmpty &&
+      !hasBullets &&
+      substantiveImages.isNotEmpty &&
+      substantiveImages.length <= 1 &&
+      (s.index == 0 || backgroundImage)) {
+    return ClassifiedSlide(source: s, type: SlideType.title, issues: issues);
+  }
   if (s.images.isNotEmpty) {
     if (hasBullets) {
       return ClassifiedSlide(
@@ -112,7 +131,8 @@ ClassifiedSlide classifySlide(SourceSlide s) {
     );
   }
 
-  // Title slide: the first slide with only a title (+ subtitle) and no body.
+  // Een beeldloze eerste dia blijft pas ná de vrij-geplaatste kolommen een
+  // titelvoorstel. Anders kan aanwezige kolominhoud verdwijnen in een titel.
   if (s.index == 0 &&
       s.bodyBlocks.isEmpty &&
       s.images.isEmpty &&

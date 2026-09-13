@@ -12,22 +12,26 @@ void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
 
   final png = Uint8List.fromList(
-    image.encodePng(image.Image(width: 8, height: 4)),
+    image.encodePng(
+      image.Image(width: 180, height: 60)..clear(image.ColorRgb8(210, 24, 48)),
+    ),
   );
   late ImportLogoCandidate candidate;
 
   setUp(() {
-    candidate = ImportLogoCandidate(
-      image: SourceImage(
-        bytes: png,
-        ext: 'png',
-        placement: const SourceImagePlacement(
-          left: .8,
-          top: .88,
-          width: .12,
-          height: .08,
-        ),
+    final source = SourceImage(
+      bytes: png,
+      ext: 'png',
+      placement: const SourceImagePlacement(
+        left: .8,
+        top: .88,
+        width: .12,
+        height: .08,
       ),
+    );
+    candidate = ImportLogoCandidate(
+      image: source,
+      sourceSha256: source.sha256,
       slideIndexes: const [0, 2],
       edge: ImportLogoEdge.bottom,
     );

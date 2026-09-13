@@ -74,6 +74,21 @@ class PptxContext {
     return out;
   }
 
+  /// Het eerste interne onderdeel onder [directory] waar [partPath] naar
+  /// verwijst, bijvoorbeeld `ppt/slideLayouts/` of `ppt/theme/`.
+  ///
+  /// De relatie-id zelf zegt niets over het type en kan per Office-versie
+  /// verschillen. Het opgeloste OPC-pad is wel stabiel en blijft binnen het al
+  /// uitgepakte archief; absolute relaties worden hierdoor vanzelf geweigerd.
+  String? firstRelatedPart(String partPath, String directory) {
+    final rels = relsFor(partPath);
+    for (final id in rels.keys) {
+      final resolved = resolveRel(rels, id, partPath);
+      if (resolved != null && resolved.startsWith(directory)) return resolved;
+    }
+    return null;
+  }
+
   /// Resolve a relationship id from [rels] against [partPath]'s folder.
   ///
   /// External links (absolute URIs such as `http://...` or `data:...`) are

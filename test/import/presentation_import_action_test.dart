@@ -14,6 +14,8 @@ import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/shell/presentation_import_action.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'helpers/pptx_fixture.dart';
+
 /// Het deck van het actieve tabblad, of `null` als er geen open staat.
 Deck? _openDeck(ProviderContainer container) =>
     container.read(tabsProvider).current?.deckNotifier.currentState.deck;
@@ -160,6 +162,40 @@ void main() {
 
     // De nieuwe tab startte een periodieke autosave-timer; ruim de container op
     // binnen de fake-async-test zodat die timer niet als "pending" blijft staan.
+    container.dispose();
+  });
+
+  testWidgets('geerfd beeldmerk biedt logo en volledige bronstijl aan', (
+    tester,
+  ) async {
+    final (container, ctx, ref) = await pump(tester);
+    final future = importPresentation(
+      ctx,
+      ref,
+      fileOverride: (bytes: pptxBrandFixture(), name: 'merkworkshop.pptx'),
+    );
+
+    await tester.pumpAndSettle();
+    expect(find.text('Is dit een logo?'), findsOneWidget);
+    await tester.tap(find.text('Ja, als logo gebruiken'));
+    await tester.pumpAndSettle();
+    expect(find.text('Ook als stijl toevoegen?'), findsOneWidget);
+    await tester.tap(find.text('Alleen in deze presentatie'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Openen'));
+    await tester.pumpAndSettle();
+    await future;
+
+    final deck = _openDeck(container)!;
+    expect(deck.slides, hasLength(3));
+    expect(deck.slides.first.imagePath, startsWith('mem:'));
+    expect(deck.slides.last.imagePath, startsWith('mem:'));
+    expect(deck.slides.first.subtitle, 'Samen aan de slag');
+    expect(deck.slides.map((slide) => slide.showLogo), [true, true, true]);
+    expect(deck.themeProfile.logoSize, 180);
+    expect(deck.themeProfile.logoPosition, 'bottom-right');
+    expect(deck.themeProfile.accentColor, '#00A1DB');
+    expect(deck.themeProfile.fontFamily, 'Arial');
     container.dispose();
   });
 
