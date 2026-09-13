@@ -5,7 +5,7 @@
   "serialNumber": "urn:uuid:d841a8a6-639b-53ec-8e57-9d486b132852",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-13T08:28:06.582624Z",
+    "timestamp": "2026-09-13T20:28:38.215525Z",
     "tools": {
       "components": [
         {
@@ -17,7 +17,7 @@
       ]
     },
     "component": {
-      "bom-ref": "ocideck@0.6.2+28",
+      "bom-ref": "ocideck@0.6.3+29",
       "type": "application",
       "supplier": {
         "name": "Stichting LibreKAT",
@@ -26,8 +26,8 @@
         ]
       },
       "name": "ocideck",
-      "version": "0.6.2+28",
-      "purl": "pkg:generic/ocideck@0.6.2+28",
+      "version": "0.6.3+29",
+      "purl": "pkg:generic/ocideck@0.6.3+29",
       "licenses": [
         {
           "license": {
@@ -9083,7 +9083,7 @@
   ],
   "dependencies": [
     {
-      "ref": "ocideck@0.6.2+28",
+      "ref": "ocideck@0.6.3+29",
       "dependsOn": [
         "export-asset:highlight.css",
         "font:assets/fonts/EBGaramond-Italic-Variable.ttf",

@@ -34,6 +34,27 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.3] — 2026-09-13
+
+### Added
+
+- feat(pdf): toon bewijs lokaal in OciDeck (#2083)
+
+### Changed
+
+- Merge pull request #2088 from codex/fix-release-shellcheck
+- Herstel Gantt-rendering en tabelregeleinden
+- PowerPoint-titeldia’s nemen de volledige huisstijl mee
+- PowerPoint-branding en afbeeldingen naadloos importeren
+- refactor: dupliceer-codes opruimen (13 issues) (#2084)
+- docs(build): describe SwiftPM-compatible fork
+- chore(deps): rebase multi-window fork on 0.3.1
+- Maak releasevoorcontroles voor talen en OWASP beslissend
+
+### Fixed
+
+- fix(release): sluit signing-race fail-closed
+
 ## [0.6.2] — 2026-09-12
 
 ### Changed
