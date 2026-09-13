@@ -19,6 +19,7 @@ import '../../utils/export_link.dart';
 import '../../utils/footnotes.dart';
 import '../document_timeline.dart';
 import '../markdown_table_lines.dart';
+import '../../utils/xml_escape.dart';
 
 /// Zet [markdown] (GFM) om in een XHTML-fragment.
 ///
@@ -84,7 +85,7 @@ String markdownToXhtml(
 
   var out = visitor.output.toString().replaceAll(
     tocSentinel,
-    '<nav epub:type="toc" id="ocideck-toc"><h2>${_xmlEscape(footnotesTitle)}</h2></nav>',
+    '<nav epub:type="toc" id="ocideck-toc"><h2>${xmlEscape(footnotesTitle)}</h2></nav>',
   );
 
   // Tijdlijn-placeholders herstellen.
@@ -104,7 +105,7 @@ String markdownToXhtml(
 String _endnotesSection(List<Footnote> notes, String title) {
   final buf = StringBuffer()
     ..writeln('<section class="ocideck-footnotes" epub:type="endnotes">')
-    ..writeln('<h2>${_xmlEscape(title)}</h2>')
+    ..writeln('<h2>${xmlEscape(title)}</h2>')
     ..writeln('<ol>');
   for (final note in notes) {
     buf
@@ -161,7 +162,7 @@ String _inlineXhtml(String text) => md
     buf.writeln('<table class="ocideck-timeline">');
     buf.writeln('<thead><tr>');
     for (final header in timeline.headers) {
-      buf.write('<th>${_xmlEscape(header)}</th>');
+      buf.write('<th>${xmlEscape(header)}</th>');
     }
     buf.writeln('</tr></thead>');
     buf.writeln('<tbody>');
@@ -294,7 +295,7 @@ class _XhtmlNodeVisitor implements md.NodeVisitor {
         if (href == null) {
           _stack.add(_Ctx.passThrough);
         } else {
-          _buf.write('<a href="${_xmlAttr(href)}">');
+          _buf.write('<a href="${xmlAttr(href)}">');
           _stack.add(_Ctx.link);
         }
       case 'img':
@@ -379,7 +380,7 @@ class _XhtmlNodeVisitor implements md.NodeVisitor {
     // naar aparte bestanden geschreven en het src-attribuut wordt
     // gerebaseerd. Hier schrijven we het originele src; de EPUB-builder
     // vervangt het later.
-    _buf.write('<img src="${_xmlAttr(src)}" alt="${_xmlAttr(alt)}"/>');
+    _buf.write('<img src="${xmlAttr(src)}" alt="${xmlAttr(alt)}"/>');
   }
 
   @override
@@ -466,10 +467,4 @@ enum _Ctx {
 
 /// XML-escape voor tekstinhoud: & < >. De markdown-package met
 /// `encodeHtml: true` doet dit al voor de meeste tekst, maar tijdlijn-headers
-/// en noot-titels gaan er rechtstreeks doorheen.
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
-/// XML-escape voor attribuutwaarden: & < > " '.
-String _xmlAttr(String s) =>
-    _xmlEscape(s).replaceAll('"', '&quot;').replaceAll("'", '&apos;');

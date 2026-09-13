@@ -28,6 +28,7 @@ import '../export_bundle.dart';
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
 import 'markdown_to_odt.dart';
+import '../../utils/xml_escape.dart';
 
 /// Bouwt de ODT-bytes voor een document-export. Headless: geen IO.
 ///
@@ -229,8 +230,8 @@ String _buildMetaXml(ExportDocumentMetadata meta, String title) {
       'office:version="1.2">',
     )
     ..writeln('<office:meta>')
-    ..writeln('<dc:title>${_xmlEscape(title)}</dc:title>')
-    ..writeln('<dc:creator>${_xmlEscape(meta.documentAuthor)}</dc:creator>')
+    ..writeln('<dc:title>${xmlEscape(title)}</dc:title>')
+    ..writeln('<dc:creator>${xmlEscape(meta.documentAuthor)}</dc:creator>')
     ..writeln(
       '<dc:language>${meta.language.isNotEmpty ? meta.language : "nl"}</dc:language>',
     )
@@ -239,15 +240,15 @@ String _buildMetaXml(ExportDocumentMetadata meta, String title) {
     );
   if (meta.description.trim().isNotEmpty) {
     buf.writeln(
-      '<dc:description>${_xmlEscape(meta.description.trim())}</dc:description>',
+      '<dc:description>${xmlEscape(meta.description.trim())}</dc:description>',
     );
   }
   if (meta.keywords.trim().isNotEmpty) {
-    buf.writeln('<dc:subject>${_xmlEscape(meta.keywords.trim())}</dc:subject>');
+    buf.writeln('<dc:subject>${xmlEscape(meta.keywords.trim())}</dc:subject>');
   }
   if (meta.tlp.label.isNotEmpty) {
     buf.writeln(
-      '<meta:user-defined meta:name="TLP">${_xmlEscape(meta.tlp.label)}</meta:user-defined>',
+      '<meta:user-defined meta:name="TLP">${xmlEscape(meta.tlp.label)}</meta:user-defined>',
     );
   }
   if (meta.hasUnreviewedAi) {
@@ -380,8 +381,6 @@ const _odtStyles = '''
 </text:list-style>
 ''';
 
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
 /// Voor tests: de ODT-bytes bouwen met vaste parameters.
 @visibleForTesting

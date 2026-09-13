@@ -29,6 +29,7 @@ import '../../utils/footnotes.dart';
 import '../document_footnote_setup.dart';
 import '../document_timeline.dart';
 import '../markdown_table_lines.dart';
+import '../../utils/xml_escape.dart';
 
 /// Het resultaat van de Markdown→WordprocessingML-conversie.
 class DocxConversion {
@@ -232,7 +233,7 @@ DocxConversion markdownToDocxBody(
 String _tableCell(String text, {bool bold = false}) {
   final rPr = bold ? '<w:rPr><w:b/></w:rPr>' : '';
   return '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/></w:tcPr>'
-      '<w:p><w:r>$rPr<w:t xml:space="preserve">${_xmlEscape(text)}</w:t></w:r>'
+      '<w:p><w:r>$rPr<w:t xml:space="preserve">${xmlEscape(text)}</w:t></w:r>'
       '</w:p></w:tc>';
 }
 
@@ -254,29 +255,29 @@ String _htmlInlineToDocx(String html) {
   result = result.replaceAllMapped(
     RegExp(r'<strong>(.*?)</strong>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<em>(.*?)</em>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:i/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:i/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<del>(.*?)</del>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:strike/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:strike/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<code>(.*?)</code>', dotAll: true),
     (m) =>
-        '<w:r><w:rPr><w:rStyle w:val="SourceText"/></w:rPr><w:t xml:space="preserve">${_xmlEscape(m.group(1)!)}</w:t></w:r>',
+        '<w:r><w:rPr><w:rStyle w:val="SourceText"/></w:rPr><w:t xml:space="preserve">${xmlEscape(m.group(1)!)}</w:t></w:r>',
   );
   result = result.replaceAllMapped(
     RegExp(r'<a href="([^"]*)">(.*?)</a>', dotAll: true),
     (m) =>
-        '<OCIDECKLINK href="${_xmlAttr(m.group(1)!)}">'
+        '<OCIDECKLINK href="${xmlAttr(m.group(1)!)}">'
         '<w:r><w:rPr><w:rStyle w:val="Hyperlink"/></w:rPr>'
-        '<w:t xml:space="preserve">${_xmlEscape(m.group(2)!)}</w:t></w:r>'
+        '<w:t xml:space="preserve">${xmlEscape(m.group(2)!)}</w:t></w:r>'
         '</OCIDECKLINK>',
   );
   result = result.replaceAll('<br>', '<w:r><w:br/></w:r>');
@@ -285,7 +286,7 @@ String _htmlInlineToDocx(String html) {
   result = result.replaceAllMapped(RegExp(r'(?<![>])[^<]+'), (m) {
     final t = m.group(0)!;
     if (t.trim().isEmpty) return t;
-    return '<w:r><w:t xml:space="preserve">${_xmlEscape(t)}</w:t></w:r>';
+    return '<w:r><w:t xml:space="preserve">${xmlEscape(t)}</w:t></w:r>';
   });
   return result;
 }
@@ -416,7 +417,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         if (href == null) {
           _stack.add(_Ctx.passThrough);
         } else {
-          output.write('<OCIDECKLINK href="${_xmlAttr(href)}">');
+          output.write('<OCIDECKLINK href="${xmlAttr(href)}">');
           linkTargets.add(href);
           _rPr.add('<w:rStyle w:val="Hyperlink"/>');
           _stack.add(_Ctx.link);
@@ -547,7 +548,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         output.write(
           '<w:p><w:pPr><w:pStyle w:val="PreformattedText"/></w:pPr>'
           '<w:r><w:rPr><w:rStyle w:val="SourceText"/></w:rPr>'
-          '<w:t xml:space="preserve">${_xmlEscape(line)}</w:t></w:r></w:p>',
+          '<w:t xml:space="preserve">${xmlEscape(line)}</w:t></w:r></w:p>',
         );
       }
       _stack.add(_Ctx.codeBlockBody);
@@ -566,7 +567,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     if (src.isEmpty) return;
     final idx = imageSources.length;
     imageSources.add(src);
-    output.write('<OCIDECKIMG w:idx="$idx" w:alt="${_xmlAttr(alt)}"/>');
+    output.write('<OCIDECKIMG w:idx="$idx" w:alt="${xmlAttr(alt)}"/>');
   }
 
   @override
@@ -658,10 +659,4 @@ enum _Ctx {
   tableCell,
 }
 
-/// XML-escape voor tekstinhoud: & < >.
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
-/// XML-escape voor attribuutwaarden: & < > " '.
-String _xmlAttr(String s) =>
-    _xmlEscape(s).replaceAll('"', '&quot;').replaceAll("'", '&apos;');

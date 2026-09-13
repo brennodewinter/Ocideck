@@ -22,6 +22,7 @@ import 'package:archive/archive.dart';
 
 import '../../models/deck.dart' show TlpLevelX;
 import '../export_metadata.dart';
+import '../../utils/xml_escape.dart';
 
 /// Slide-breedte en -hoogte in cm (16:9, gelijk aan LibreOffice Impress
 /// standaard).
@@ -132,7 +133,7 @@ String _odpContentXml(int slideCount, List<String>? altTexts) {
     final alt = (altTexts != null && i - 1 < altTexts.length)
         ? altTexts[i - 1].trim()
         : '';
-    final desc = alt.isEmpty ? '' : '<svg:desc>${_xmlEscape(alt)}</svg:desc>';
+    final desc = alt.isEmpty ? '' : '<svg:desc>${xmlEscape(alt)}</svg:desc>';
     buf.writeln(
       '<draw:page draw:name="page$i" draw:style-name="dp1">'
       '<draw:frame draw:style-name="gr1" svg:x="0cm" svg:y="0cm" '
@@ -156,7 +157,7 @@ String _odpMetaXml(
   required String fallbackTitle,
 }) {
   final now = DateTime.now().toUtc();
-  final title = _xmlEscape(metadata.displayTitle(fallbackTitle));
+  final title = xmlEscape(metadata.displayTitle(fallbackTitle));
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8"?>')
     ..writeln(
@@ -168,13 +169,13 @@ String _odpMetaXml(
     )
     ..writeln('<office:meta>')
     ..writeln('<dc:title>$title</dc:title>')
-    ..writeln('<dc:creator>${_xmlEscape(metadata.documentAuthor)}</dc:creator>')
+    ..writeln('<dc:creator>${xmlEscape(metadata.documentAuthor)}</dc:creator>')
     ..writeln(
       '<meta:creation-date>${now.toIso8601String().split(".").first}Z</meta:creation-date>',
     );
   if (metadata.tlp.label.isNotEmpty) {
     buf.writeln(
-      '<meta:user-defined meta:name="TLP">${_xmlEscape(metadata.tlp.label)}</meta:user-defined>',
+      '<meta:user-defined meta:name="TLP">${xmlEscape(metadata.tlp.label)}</meta:user-defined>',
     );
   }
   buf
@@ -183,5 +184,3 @@ String _odpMetaXml(
   return buf.toString();
 }
 
-String _xmlEscape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
