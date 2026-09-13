@@ -7,16 +7,71 @@ class _LogoOverlay extends StatelessWidget {
   final String? projectPath;
   final String position;
   final double size;
+  final double slideWidth;
+  final String? brandStripPath;
+  final double brandStripHeight;
+  final String titleSubtitle;
+  final String font;
+  final String accentColor;
 
   const _LogoOverlay({
     required this.logoPath,
     required this.projectPath,
     required this.position,
     required this.size,
+    required this.slideWidth,
+    this.brandStripPath,
+    this.brandStripHeight = 0,
+    this.titleSubtitle = '',
+    this.font = 'Arial',
+    this.accentColor = '#222222',
   });
 
   @override
   Widget build(BuildContext context) {
+    final stripPath = brandStripPath?.trim();
+    if (stripPath != null && stripPath.isNotEmpty && brandStripHeight > 0) {
+      final atTop = position.startsWith('top');
+      return Positioned(
+        top: atTop ? 0 : null,
+        bottom: atTop ? null : 0,
+        left: 0,
+        right: 0,
+        height: slideWidth * 9 / 16 * brandStripHeight,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            _resolvedImage(
+              context,
+              stripPath,
+              projectPath,
+              fit: BoxFit.fill,
+              trustedAsset: true,
+            ),
+            if (titleSubtitle.trim().isNotEmpty)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: slideWidth * 0.045),
+                  child: _md(
+                    context,
+                    titleSubtitle,
+                    _applyFont(
+                      font,
+                      TextStyle(
+                        color: AppTheme.parseHexColor(accentColor),
+                        fontSize: slideWidth * 0.014,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    linkColor: AppTheme.parseHexColor(accentColor),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      );
+    }
     final horizontalInset = size * kLogoHorizontalInsetFraction;
     final topInset = size * kLogoTopInsetFraction;
     final bottomInset = size * kLogoBottomInsetFraction;

@@ -37,9 +37,17 @@ List<ConversionIssue> droppedContentIssues(ClassifiedSlide c) {
   int countOf(BodyBlockKind kind) =>
       s.bodyBlocks.where((b) => b.kind == kind).length;
 
-  // Alinea's. Alleen `section` (in de ondertitel) en `freeMarkdown` (in de
-  // body) nemen ze mee; `quote` leest uitsluitend het quote-blok.
-  const readsParagraphs = {SlideType.section, SlideType.freeMarkdown};
+  // Alinea's. Een titel bewaart ze als aanvullende Markdown, een `section` in
+  // de ondertitel en `freeMarkdown` in de body; `quote` leest uitsluitend het
+  // quote-blok.
+  const readsParagraphs = {
+    SlideType.title,
+    SlideType.section,
+    SlideType.bullets,
+    SlideType.bulletsImage,
+    SlideType.image,
+    SlideType.freeMarkdown,
+  };
   final paragraphs = countOf(BodyBlockKind.paragraph);
   if (paragraphs > 0 && !readsParagraphs.contains(c.type)) {
     issues.add(

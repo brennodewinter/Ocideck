@@ -80,7 +80,12 @@ Uint8List pptxBrandFixture() {
     color: img.ColorRgb8(210, 24, 48),
   );
 
-  String slide(String title, {String subtitle = '', bool image = false}) =>
+  String slide(
+    String title, {
+    String subtitle = '',
+    String additionalInfo = '',
+    bool image = false,
+  }) =>
       '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       '<p:sld xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r"><p:cSld><p:spTree>'
       '<p:sp><p:nvSpPr><p:cNvPr id="2" name="Title"/><p:cNvSpPr/>'
@@ -89,26 +94,38 @@ Uint8List pptxBrandFixture() {
       '${subtitle.isEmpty ? '' : '<p:sp><p:nvSpPr><p:cNvPr id="3" name="Subtitle"/><p:cNvSpPr/>'
                 '<p:nvPr><p:ph type="subTitle"/></p:nvPr></p:nvSpPr><p:spPr/>'
                 '<p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>$subtitle</a:t></a:r></a:p></p:txBody></p:sp>'}'
+      '${additionalInfo.isEmpty ? '' : '<p:sp><p:nvSpPr><p:cNvPr id="5" name="Date"/><p:cNvSpPr/>'
+                '<p:nvPr><p:ph type="body" idx="11"/></p:nvPr></p:nvSpPr><p:spPr/>'
+                '<p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>$additionalInfo</a:t></a:r></a:p></p:txBody></p:sp>'}'
       '${image ? '<p:pic><p:nvPicPr><p:cNvPr id="4" name="Content photo"/>'
                 '<p:cNvPicPr/><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId2"/>'
-                '</p:blipFill><p:spPr><a:xfrm><a:off x="700" y="160"/>'
-                '<a:ext cx="480" cy="420"/></a:xfrm></p:spPr></p:pic>' : ''}'
+                '</p:blipFill><p:spPr><a:xfrm><a:off x="6667500" y="1524000"/>'
+                '<a:ext cx="4572000" cy="4000000"/></a:xfrm></p:spPr></p:pic>' : ''}'
       '</p:spTree></p:cSld></p:sld>';
 
-  String layout({bool background = false, bool duplicateBrand = false}) =>
+  String layout({
+    bool background = false,
+    bool duplicateBrand = false,
+    bool additionalInfoPlaceholder = false,
+  }) =>
       '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       '<p:sldLayout xmlns:a="$_a" xmlns:p="$_p" xmlns:r="$_r"><p:cSld><p:spTree>'
       '${background ? '<p:pic><p:nvPicPr><p:cNvPr id="10" name="Background"/>'
                 '<p:cNvPicPr/><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId2"/>'
                 '</p:blipFill><p:spPr><a:xfrm><a:off x="0" y="0"/>'
-                '<a:ext cx="1280" cy="720"/></a:xfrm></p:spPr></p:pic>' : ''}'
+                '<a:ext cx="12192000" cy="6858000"/></a:xfrm></p:spPr></p:pic>' : ''}'
       '${duplicateBrand ? _brandPicture('rId3') : ''}'
+      '${additionalInfoPlaceholder ? '<p:sp><p:nvSpPr><p:cNvPr id="11" name="Date placeholder"/><p:cNvSpPr/>'
+                '<p:nvPr><p:ph type="body" idx="11"/></p:nvPr></p:nvSpPr>'
+                '<p:spPr><a:xfrm><a:off x="548640" y="4383590"/><a:ext cx="5603216" cy="330880"/></a:xfrm></p:spPr>'
+                '<p:txBody><a:bodyPr/><a:lstStyle><a:lvl1pPr><a:buNone/></a:lvl1pPr></a:lstStyle>'
+                '<a:p><a:pPr lvl="0"/><a:r><a:t>Datum</a:t></a:r></a:p></p:txBody></p:sp>' : ''}'
       '</p:spTree></p:cSld></p:sldLayout>';
 
   final parts = <String, Object>{
     'ppt/presentation.xml':
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-        '<p:presentation xmlns:p="$_p" xmlns:r="$_r"><p:sldSz cx="1280" cy="720"/>'
+        '<p:presentation xmlns:p="$_p" xmlns:r="$_r"><p:sldSz cx="12192000" cy="6858000"/>'
         '<p:sldIdLst><p:sldId id="256" r:id="rId1"/><p:sldId id="257" r:id="rId2"/>'
         '<p:sldId id="258" r:id="rId3"/></p:sldIdLst></p:presentation>',
     'ppt/_rels/presentation.xml.rels': _relationships([
@@ -119,6 +136,7 @@ Uint8List pptxBrandFixture() {
     'ppt/slides/slide1.xml': slide(
       'Merkworkshop',
       subtitle: 'Samen aan de slag',
+      additionalInfo: '16 mei 2025',
     ),
     'ppt/slides/slide2.xml': slide('Inhoud', image: true),
     'ppt/slides/slide3.xml': slide('Bedankt'),
@@ -135,6 +153,7 @@ Uint8List pptxBrandFixture() {
     'ppt/slideLayouts/slideLayout1.xml': layout(
       background: true,
       duplicateBrand: true,
+      additionalInfoPlaceholder: true,
     ),
     'ppt/slideLayouts/slideLayout2.xml': layout(),
     'ppt/slideLayouts/slideLayout3.xml': layout(background: true),
@@ -178,8 +197,8 @@ Uint8List pptxBrandFixture() {
 String _brandPicture(String relationshipId) =>
     '<p:pic><p:nvPicPr><p:cNvPr id="20" name="Brand footer"/>'
     '<p:cNvPicPr/><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="$relationshipId"/>'
-    '</p:blipFill><p:spPr><a:xfrm><a:off x="0" y="620"/>'
-    '<a:ext cx="1280" cy="100"/></a:xfrm></p:spPr></p:pic>';
+    '</p:blipFill><p:spPr><a:xfrm><a:off x="0" y="5969000"/>'
+    '<a:ext cx="12192000" cy="889000"/></a:xfrm></p:spPr></p:pic>';
 
 String _relationships(List<(String, String, String)> entries) =>
     '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'

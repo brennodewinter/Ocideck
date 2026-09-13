@@ -444,6 +444,53 @@ void main() {
     );
   });
 
+  testWidgets('laadt de merkstrook voor en tekent haar in de export', (
+    tester,
+  ) async {
+    final dir = Directory.systemTemp.createTempSync('ocideck_raster_brand');
+    addTearDown(() => dir.deleteSync(recursive: true));
+
+    late Deck deck;
+    await tester.runAsync(() async {
+      await _writeSolidPng(dir, 'logo.png', const Color(0xFF00A0FF));
+      await _writeSolidPng(dir, 'merkstrook.png', const Color(0xFFFF8A00));
+      deck = Deck(
+        title: 'Met merkstrook',
+        projectPath: dir.path,
+        themeProfile: const ThemeProfile(
+          logoPath: 'logo.png',
+          brandStripPath: 'merkstrook.png',
+          brandStripHeight: 0.13,
+          titleSubtitleInBrandStrip: true,
+        ),
+        slides: [
+          Slide.create(SlideType.title).copyWith(
+            title: 'Opening',
+            subtitle: 'Naamregel',
+            customMarkdown: '16 mei 2025',
+          ),
+        ],
+      );
+    });
+
+    var precacheTotal = 0;
+    final images = await _rasterize(
+      tester,
+      deck,
+      targetWidth: 640,
+      onStage: (phase, _, total) {
+        if (phase == 'precache') precacheTotal = total;
+      },
+    );
+    final raster = await _decode(tester, images.single);
+    expect(precacheTotal, 2, reason: 'logo en merkstrook moeten beide laden');
+    expect(
+      _hasColourNear(raster, const Color(0xFFFF8A00)),
+      isTrue,
+      reason: 'de merkstrook ontbreekt in het PDF/PPTX-raster',
+    );
+  });
+
   // Een afbeelding in de vrije tekst moet net zo goed voorgeladen worden als
   // eentje in een afbeeldingsveld: zonder precache is hij nog niet gedecodeerd
   // wanneer het beeldje wordt vastgelegd, en staat er een leeg vak in de PDF.

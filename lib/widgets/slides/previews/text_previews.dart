@@ -20,7 +20,11 @@ class _TitlePreview extends StatelessWidget {
   /// The title block itself: a short accent rule, the title and the subtitle,
   /// left-aligned. Font sizes are proportional to the slide width, so the same
   /// column works whether it floats over an image or sits in a solid band.
-  Widget _lockupColumn(BuildContext context) {
+  Widget _lockupColumn(
+    BuildContext context, {
+    bool showSubtitle = true,
+    bool showDetails = true,
+  }) {
     final link = AppTheme.parseHexColor(profile.accentColor);
     final accent = AppTheme.parseHexColor(profile.accentColor);
     final titleColor = AppTheme.parseHexColor(
@@ -56,7 +60,7 @@ class _TitlePreview extends StatelessWidget {
             ),
             linkColor: link,
           ),
-        if (slide.subtitle.isNotEmpty) ...[
+        if (showSubtitle && slide.subtitle.isNotEmpty) ...[
           SizedBox(height: w * 0.02),
           _md(
             context,
@@ -72,7 +76,68 @@ class _TitlePreview extends StatelessWidget {
             linkColor: link,
           ),
         ],
+        if (showDetails && slide.customMarkdown.trim().isNotEmpty) ...[
+          SizedBox(height: w * 0.016),
+          _md(
+            context,
+            slide.customMarkdown,
+            _applyFont(
+              font,
+              TextStyle(
+                color: titleColor.withValues(alpha: kTitleSubtitleAlpha),
+                fontSize: w * 0.022,
+                height: 1.35,
+              ),
+            ),
+            linkColor: link,
+          ),
+        ],
       ],
+    );
+  }
+
+  Widget _brandLockup(BuildContext context) {
+    final pad = w * 0.045;
+    final stripHeight = w * 9 / 16 * profile.brandStripHeight;
+    final color = AppTheme.parseHexColor(
+      slide.titleTextColorOverride.isNotEmpty
+          ? slide.titleTextColorOverride
+          : profile.titleTextColor,
+    );
+    return Padding(
+      padding: EdgeInsets.fromLTRB(pad, pad, pad, stripHeight + pad * 0.65),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.topLeft,
+                child: SizedBox(
+                  width: w * 0.62,
+                  child: _lockupColumn(
+                    context,
+                    showSubtitle: false,
+                    showDetails: false,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          if (slide.customMarkdown.trim().isNotEmpty)
+            _md(
+              context,
+              slide.customMarkdown,
+              _applyFont(
+                font,
+                TextStyle(color: color, fontSize: w * 0.022, height: 1.3),
+              ),
+              linkColor: AppTheme.parseHexColor(profile.accentColor),
+            ),
+        ],
+      ),
     );
   }
 
@@ -204,6 +269,33 @@ class _TitlePreview extends StatelessWidget {
     }
 
     final hasBg = slide.imagePath.isNotEmpty;
+    final hasBrandStrip =
+        slide.showLogo &&
+        profile.brandStripPath?.isNotEmpty == true &&
+        profile.brandStripHeight > 0;
+
+    if (hasBrandStrip) {
+      final background = AppTheme.parseHexColor(profile.titleBackgroundColor);
+      return Stack(
+        fit: StackFit.expand,
+        children: [
+          if (hasBg)
+            _zoomedImage(
+              context,
+              slide.imagePath,
+              projectPath,
+              slide.imageSize,
+              bgColor: background,
+              alignment: focalAlignment(slide.imageFocalX, slide.imageFocalY),
+            )
+          else
+            ColoredBox(color: background),
+          if (hasBg && slide.titleImageOverlay) _scrim(),
+          _brandLockup(context),
+          if (hasBg) _captionOverlay(context, slide.imageCaption, w),
+        ],
+      );
+    }
 
     if (!hasBg) {
       return Container(

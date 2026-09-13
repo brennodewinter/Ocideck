@@ -16,6 +16,7 @@ class ImportLogoCandidate {
     required this.sourceSha256,
     required this.slideIndexes,
     required this.edge,
+    this.brandStrip,
   });
 
   final SourceImage image;
@@ -26,6 +27,11 @@ class ImportLogoCandidate {
   final String sourceSha256;
   final List<int> slideIndexes;
   final ImportLogoEdge edge;
+
+  /// De volledige brede bronstrook waaruit [image] is gesneden. Een los
+  /// hoeklogo heeft geen strook. Beide blijven beschikbaar: het compacte merk
+  /// voedt herkenning en de dialoog, de strook bewaart de huisstijl op de dia.
+  final SourceImage? brandStrip;
 
   int get occurrenceCount => slideIndexes.length;
 
@@ -96,6 +102,9 @@ List<ImportLogoCandidate> detectImportLogoCandidates(SourceDeck deck) {
         edge: occurrence.image.placement!.isAtTop
             ? ImportLogoEdge.top
             : ImportLogoEdge.bottom,
+        brandStrip: occurrence.image.placement!.isWideBrandStripAtVerticalEdge
+            ? occurrence.image
+            : null,
       ),
     );
   }
@@ -255,6 +264,7 @@ ThemeProfile importedLogoProfile({
   required SourceDeck deck,
   required ImportLogoCandidate candidate,
   required String logoPath,
+  String? brandStripPath,
   required String name,
   ThemeProfile base = const ThemeProfile(),
 }) {
@@ -272,6 +282,11 @@ ThemeProfile importedLogoProfile({
     // De renderer ijkt `logoSize` op een dia van 1280 px breed. Met 960 werd
     // ieder geïmporteerd logo structureel een kwart te klein.
     'logoSize': (placement.width * 1280).round().clamp(32, 480),
+    if (brandStripPath != null && candidate.brandStrip != null) ...{
+      'brandStripPath': brandStripPath,
+      'brandStripHeight': candidate.brandStrip!.placement!.height,
+      'titleSubtitleInBrandStrip': true,
+    },
     if (source?.slideBackgroundColor != null)
       'slideBackgroundColor': source!.slideBackgroundColor,
     if (source?.textColor != null) 'textColor': source!.textColor,

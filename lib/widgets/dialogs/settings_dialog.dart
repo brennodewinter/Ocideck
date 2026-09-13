@@ -669,7 +669,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     final path = file?.path;
     if (path != null) {
       setState(() {
-        _themeProfile = _themeProfile.copyWith(logoPath: path);
+        // Een geïmporteerde merkstrook bevat het oude logo als onderdeel van
+        // haar bronbeeld. Bij een bewuste logowissel moet die gekoppelde strook
+        // verdwijnen, anders blijft het vorige merk alsnog op de dia staan.
+        _themeProfile = _themeProfile.copyWith(
+          logoPath: path,
+          clearBrandStrip: true,
+        );
         _profileTouched = true;
       });
     }

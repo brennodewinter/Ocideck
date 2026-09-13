@@ -21,6 +21,7 @@ import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../platform/platform_features.dart';
 import '../utils/archive_limits.dart';
+import '../utils/asset_destination.dart';
 import '../utils/atomic_file.dart';
 import '../utils/safe_filename.dart';
 import '../utils/bundled_asset.dart';
@@ -59,6 +60,29 @@ part 'file/file_service_import.dart';
 part 'file/file_service_import_dirs.dart';
 part 'file/file_service_scan.dart';
 part 'file/file_service_style_profile.dart';
+
+ThemeProfile _resolveBrandStripPath(
+  ThemeProfile profile,
+  String? projectPath,
+  String? Function() homeDirectory,
+) {
+  final stripPath = profile.brandStripPath;
+  if (stripPath == null ||
+      stripPath.trim().isEmpty ||
+      isBundledAssetPath(stripPath) ||
+      kIsWeb ||
+      p.isAbsolute(stripPath)) {
+    return profile;
+  }
+  final bases = [?projectPath, ?homeDirectory()];
+  for (final base in bases) {
+    final candidate = p.normalize(p.join(base, stripPath));
+    if (File(candidate).existsSync()) {
+      return profile.copyWith(brandStripPath: candidate);
+    }
+  }
+  return profile;
+}
 
 /// Een bewerkbaar Markdown-bestand dat op schijf is gevonden: een presentatie
 /// ([deck] gevuld) of een plat document ([deck] null).
@@ -351,20 +375,32 @@ class FileService {
         isBundledAssetPath(logoPath) ||
         kIsWeb ||
         p.isAbsolute(logoPath)) {
-      return _resolveLogoDarkPath(profile, projectPath);
+      return _resolveBrandStripPath(
+        _resolveLogoDarkPath(profile, projectPath),
+        projectPath,
+        _homeDirectory,
+      );
     }
 
     final bases = [?projectPath, ?_homeDirectory()];
     for (final base in bases) {
       final candidate = p.normalize(p.join(base, logoPath));
       if (File(candidate).existsSync()) {
-        return _resolveLogoDarkPath(
-          profile.copyWith(logoPath: candidate),
+        return _resolveBrandStripPath(
+          _resolveLogoDarkPath(
+            profile.copyWith(logoPath: candidate),
+            projectPath,
+          ),
           projectPath,
+          _homeDirectory,
         );
       }
     }
-    return _resolveLogoDarkPath(profile, projectPath);
+    return _resolveBrandStripPath(
+      _resolveLogoDarkPath(profile, projectPath),
+      projectPath,
+      _homeDirectory,
+    );
   }
 
   /// Resolveert [ThemeProfile.logoDarkPath] op dezelfde manier als het lichte

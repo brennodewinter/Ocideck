@@ -5,6 +5,48 @@
 // buildPackageMembers worden buiten de library aangeroepen (tabs_provider).
 part of '../file_service.dart';
 
+Future<void> _addThemeCssArchiveMembers(
+  FileService service,
+  Archive archive,
+  Deck deck,
+  ThemeProfile profile,
+  String? logoRel,
+  String? brandStripRel,
+) async {
+  final css = await service._packageThemeCss(
+    deck.theme,
+    profile,
+    logoRel,
+    brandStripRel,
+  );
+  if (css == null) return;
+  final cssBytes = utf8.encode(css);
+  final themeName = _safeThemeName(deck.theme);
+  archive.add(ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes));
+  final cfgBytes = utf8.encode(
+    '# OciDeck Marp CLI configuration.\n'
+    '# Registers the generated theme so a plain `marp deck.md -o out.html`\n'
+    '# (run from this folder) loads it. Marp does not auto-discover a\n'
+    '# stylesheet placed beside the deck; this config is the standard route.\n'
+    'themeSet:\n'
+    '  - themes/$themeName.css\n',
+  );
+  archive.add(ArchiveFile('.marprc.yml', cfgBytes.length, cfgBytes));
+}
+
+ThemeProfile _profileWithPackageAssets(
+  ThemeProfile profile,
+  String? logoRel,
+  String? logoDarkRel,
+  String? brandStripRel,
+) => (logoRel != null || logoDarkRel != null || brandStripRel != null)
+    ? profile.copyWith(
+        logoPath: logoRel ?? profile.logoPath,
+        logoDarkPath: logoDarkRel ?? profile.logoDarkPath,
+        brandStripPath: brandStripRel ?? profile.brandStripPath,
+      )
+    : profile;
+
 List<PackageEntry>? _decodePackageEntries(
   List<int> zipBytes, {
   required int maxBytes,
@@ -298,12 +340,16 @@ extension FileServicePackage on FileService {
       deck.themeProfile.logoDarkPath ?? '',
       'logos',
     );
-    final profile = (logoRel != null || logoDarkRel != null)
-        ? deck.themeProfile.copyWith(
-            logoPath: logoRel ?? deck.themeProfile.logoPath,
-            logoDarkPath: logoDarkRel ?? deck.themeProfile.logoDarkPath,
-          )
-        : deck.themeProfile;
+    final brandStripRel = await addAsset(
+      deck.themeProfile.brandStripPath ?? '',
+      'logos',
+    );
+    final profile = _profileWithPackageAssets(
+      deck.themeProfile,
+      logoRel,
+      logoDarkRel,
+      brandStripRel,
+    );
 
     final packDeck = deck.copyWith(slides: packedSlides, themeProfile: profile);
 
@@ -319,7 +365,14 @@ extension FileServicePackage on FileService {
     _addSidecarMembers(archive, packDeck, _safeName(deck.title));
 
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
-    await _addThemeCssMember(archive, packDeck, profile, logoRel);
+    await _addThemeCssArchiveMembers(
+      this,
+      archive,
+      packDeck,
+      profile,
+      logoRel,
+      brandStripRel,
+    );
 
     // Cumulative guard over every member (markdown, sidecars, theme CSS and
     // chart data on top of the reserved assets), so the total the importer will
@@ -406,36 +459,6 @@ extension FileServicePackage on FileService {
     return slides;
   }
 
-  /// Voeg de thema-CSS als lid `themes/<naam>.css` toe, zodat het pakket ook in
-  /// Marp/CLI bruikbaar blijft. Zonder gebundeld thema-asset ([_packageThemeCss]
-  /// gaf `null`) blijft het pakket zonder CSS.
-  Future<void> _addThemeCssMember(
-    Archive archive,
-    Deck packDeck,
-    ThemeProfile profile,
-    String? logoRel,
-  ) async {
-    final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
-    if (css == null) return;
-    final cssBytes = utf8.encode(css);
-    final themeName = _safeThemeName(packDeck.theme);
-    archive.add(
-      ArchiveFile('themes/$themeName.css', cssBytes.length, cssBytes),
-    );
-    // Marp CLI laadt een stylesheet naast de deck niet uit zichzelf; dit
-    // configuratielid registreert de thema-CSS via `themeSet`, zodat een
-    // uitgepakt pakket met `marp <naam>.md` de lay-out behoudt (#1804).
-    final cfgBytes = utf8.encode(
-      '# OciDeck Marp CLI configuration.\n'
-      '# Registers the generated theme so a plain `marp deck.md -o out.html`\n'
-      '# (run from this folder) loads it. Marp does not auto-discover a\n'
-      '# stylesheet placed beside the deck; this config is the standard route.\n'
-      'themeSet:\n'
-      '  - themes/$themeName.css\n',
-    );
-    archive.add(ArchiveFile('.marprc.yml', cfgBytes.length, cfgBytes));
-  }
-
   /// Voeg de sidecar-leden van [packDeck] toe onder [base]: dezelfde
   /// bestandsnamen als naast een `.md` op schijf, zodat het openen van een
   /// pakket en het openen van een map dezelfde lagen terugvinden.
@@ -492,6 +515,7 @@ extension FileServicePackage on FileService {
     String themeName,
     ThemeProfile profile,
     String? logoRel,
+    String? brandStripRel,
   ) async {
     final safe = _safeThemeName(themeName);
     try {
@@ -502,6 +526,7 @@ extension FileServicePackage on FileService {
         base,
         profile,
         logoRel == null ? null : '../$logoRel',
+        brandStripRel == null ? null : '../$brandStripRel',
       );
     } catch (e) {
       logWarning('FileService._packageThemeCss: theme asset not bundled', e);

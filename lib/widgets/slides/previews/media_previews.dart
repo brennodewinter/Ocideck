@@ -316,9 +316,8 @@ class _TwoImagesPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final splitFraction = (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.5)
         .clamp(0.1, 0.9);
-    final leftW = w * splitFraction;
-    final rightW = w * (1 - splitFraction);
     final titleSize = w * 0.032;
+    final safe = _mediaBrandStripInsets(w, slide, profile);
 
     return Container(
       color: AppTheme.parseHexColor(profile.slideBackgroundColor),
@@ -326,58 +325,61 @@ class _TwoImagesPreview extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           // Twee afbeeldingen naast elkaar
-          Row(
-            children: [
-              SizedBox(
-                width: leftW,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    _panelImage(
-                      context,
-                      slide.imagePath,
-                      projectPath,
-                      slide.imageZoom,
-                      focalAlignment(slide.imageFocalX, slide.imageFocalY),
-                      imageSemanticsLabel(
+          Padding(
+            padding: safe,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: (splitFraction * 1000).round(),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      _panelImage(
                         context,
-                        slide.imageCaption,
-                        altText: slide.imageAltText,
+                        slide.imagePath,
+                        projectPath,
+                        slide.imageZoom,
+                        focalAlignment(slide.imageFocalX, slide.imageFocalY),
+                        imageSemanticsLabel(
+                          context,
+                          slide.imageCaption,
+                          altText: slide.imageAltText,
+                        ),
                       ),
-                    ),
-                    _captionOverlay(context, slide.imageCaption, w),
-                  ],
+                      _captionOverlay(context, slide.imageCaption, w),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: rightW,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    _panelImage(
-                      context,
-                      slide.imagePath2,
-                      projectPath,
-                      slide.imageZoom,
-                      focalAlignment(slide.imageFocalX2, slide.imageFocalY2),
-                      imageSemanticsLabel(
+                Expanded(
+                  flex: ((1 - splitFraction) * 1000).round(),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      _panelImage(
                         context,
-                        slide.imageCaption2,
-                        altText: slide.imageAltText2,
+                        slide.imagePath2,
+                        projectPath,
+                        slide.imageZoom,
+                        focalAlignment(slide.imageFocalX2, slide.imageFocalY2),
+                        imageSemanticsLabel(
+                          context,
+                          slide.imageCaption2,
+                          altText: slide.imageAltText2,
+                        ),
                       ),
-                    ),
-                    _captionOverlay(context, slide.imageCaption2, w),
-                  ],
+                      _captionOverlay(context, slide.imageCaption2, w),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           // Optionele ondertitel
           if (slide.title.isNotEmpty)
             Positioned(
               left: 0,
               right: 0,
-              bottom: w * 0.04,
+              bottom: w * 0.04 + safe.bottom,
               child: Container(
                 color: Colors.black54,
                 padding: EdgeInsets.symmetric(
@@ -427,32 +429,36 @@ class _ImagePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     if (slide.imageTitleAbove) return _titleAboveLayout(context);
     final hasTitle = slide.title.isNotEmpty;
+    final safe = _mediaBrandStripInsets(w, slide, profile);
     return Stack(
       fit: StackFit.expand,
       children: [
-        _zoomedImage(
-          context,
-          slide.imagePath,
-          projectPath,
-          slide.imageSize,
-          bgColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
-          // A focal point (crop) decides which part of the picture stays in
-          // view. Without one, keep the old default: when zoomed out, anchor to
-          // the top so the bottom title banner sits in the freed-up space.
-          alignment: hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
-              ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
-              : (hasTitle ? Alignment.topCenter : Alignment.center),
-          semanticLabel: imageSemanticsLabel(
+        Padding(
+          padding: safe,
+          child: _zoomedImage(
             context,
-            slide.imageCaption,
-            altText: slide.imageAltText,
+            slide.imagePath,
+            projectPath,
+            slide.imageSize,
+            bgColor: AppTheme.parseHexColor(profile.slideBackgroundColor),
+            // A focal point (crop) decides which part of the picture stays in
+            // view. Without one, keep the old default: when zoomed out, anchor
+            // to the top so the bottom title banner sits in the freed-up space.
+            alignment: hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
+                ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
+                : (hasTitle ? Alignment.topCenter : Alignment.center),
+            semanticLabel: imageSemanticsLabel(
+              context,
+              slide.imageCaption,
+              altText: slide.imageAltText,
+            ),
           ),
         ),
         if (slide.title.isNotEmpty)
           Positioned(
             left: w * 0.06,
             right: w * 0.06,
-            bottom: w * 0.06,
+            bottom: w * 0.06 + safe.bottom,
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: w * 0.04,
@@ -485,62 +491,94 @@ class _ImagePreview extends StatelessWidget {
   }
 
   Widget _titleAboveLayout(BuildContext context) {
-    return Container(
-      color: AppTheme.parseHexColor(profile.slideBackgroundColor),
-      child: Column(
-        children: [
-          if (slide.title.isNotEmpty)
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                w * 0.06,
-                w * 0.04,
-                w * 0.06,
-                w * 0.02,
+    return Padding(
+      padding: _mediaBrandStripInsets(w, slide, profile),
+      child: Container(
+        color: AppTheme.parseHexColor(profile.slideBackgroundColor),
+        child: Column(
+          children: [
+            if (slide.title.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  w * 0.06,
+                  w * 0.04,
+                  w * 0.06,
+                  w * 0.02,
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: _md(
+                    context,
+                    slide.title,
+                    _applyFont(
+                      font,
+                      TextStyle(
+                        color: AppTheme.parseHexColor(profile.textColor),
+                        fontSize: w * 0.045,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    linkColor: AppTheme.paleBlue2,
+                  ),
+                ),
               ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: _md(
-                  context,
-                  slide.title,
-                  _applyFont(
-                    font,
-                    TextStyle(
-                      color: AppTheme.parseHexColor(profile.textColor),
-                      fontSize: w * 0.045,
-                      fontWeight: FontWeight.bold,
+            if (slide.subtitle.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.fromLTRB(w * 0.06, 0, w * 0.06, w * 0.02),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: _md(
+                    context,
+                    slide.subtitle,
+                    _applyFont(
+                      font,
+                      TextStyle(
+                        color: AppTheme.parseHexColor(profile.textColor),
+                        fontSize: w * 0.026,
+                      ),
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    linkColor: AppTheme.paleBlue2,
+                  ),
+                ),
+              ),
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  _resolvedImage(
+                    context,
+                    slide.imagePath,
+                    projectPath,
+                    fit: BoxFit.contain,
+                    alignment:
+                        hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
+                        ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
+                        : Alignment.center,
+                    semanticLabel: imageSemanticsLabel(
+                      context,
+                      slide.imageCaption,
+                      altText: slide.imageAltText,
                     ),
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  linkColor: AppTheme.paleBlue2,
-                ),
+                  _captionOverlay(context, slide.imageCaption, w),
+                ],
               ),
             ),
-          Expanded(
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                _resolvedImage(
-                  context,
-                  slide.imagePath,
-                  projectPath,
-                  fit: BoxFit.contain,
-                  alignment:
-                      hasCustomFocal(slide.imageFocalX, slide.imageFocalY)
-                      ? focalAlignment(slide.imageFocalX, slide.imageFocalY)
-                      : Alignment.center,
-                  semanticLabel: imageSemanticsLabel(
-                    context,
-                    slide.imageCaption,
-                    altText: slide.imageAltText,
-                  ),
-                ),
-                _captionOverlay(context, slide.imageCaption, w),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+}
+
+EdgeInsets _mediaBrandStripInsets(double w, Slide slide, ThemeProfile profile) {
+  final hasStrip =
+      slide.showLogo &&
+      profile.brandStripPath?.isNotEmpty == true &&
+      profile.brandStripHeight > 0;
+  return hasStrip ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
 }

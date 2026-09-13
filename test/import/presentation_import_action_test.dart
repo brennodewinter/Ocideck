@@ -191,9 +191,13 @@ void main() {
     expect(deck.slides.first.imagePath, startsWith('mem:'));
     expect(deck.slides.last.imagePath, startsWith('mem:'));
     expect(deck.slides.first.subtitle, 'Samen aan de slag');
+    expect(deck.slides.first.customMarkdown, '16 mei 2025');
     expect(deck.slides.map((slide) => slide.showLogo), [true, true, true]);
     expect(deck.themeProfile.logoSize, 180);
     expect(deck.themeProfile.logoPosition, 'bottom-right');
+    expect(deck.themeProfile.brandStripPath, startsWith('mem:'));
+    expect(deck.themeProfile.brandStripHeight, closeTo(0.13, 0.001));
+    expect(deck.themeProfile.titleSubtitleInBrandStrip, isTrue);
     expect(deck.themeProfile.accentColor, '#00A1DB');
     expect(deck.themeProfile.fontFamily, 'Arial');
     container.dispose();

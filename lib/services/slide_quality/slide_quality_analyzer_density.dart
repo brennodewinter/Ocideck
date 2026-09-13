@@ -385,7 +385,9 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
   ) {
     final titleLen = stripInlineMarkdown(slide.title).length;
     final subtitleLen = stripInlineMarkdown(slide.subtitle).length;
-    if (titleLen + subtitleLen <= kTitleDensityCharThreshold) return;
+    final detailsLen = stripInlineMarkdown(slide.customMarkdown).length;
+    final totalLength = titleLen + subtitleLen + detailsLen;
+    if (totalLength <= kTitleDensityCharThreshold) return;
 
     issues.add(
       SlideQualityIssue(
@@ -393,7 +395,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
         kind: SlideQualityIssueKind.titleDensityHigh,
         category: SlideQualityCategory.textDensity,
         severity: MarkdownValidationSeverity.warning,
-        args: {'chars': '${titleLen + subtitleLen}'},
+        args: {'chars': '$totalLength'},
       ),
     );
   }

@@ -29,6 +29,7 @@ ParsedText parseTxBody(
   XmlElement txBody, {
   required bool defaultBullet,
   required String? Function(String rId) resolveLink,
+  List<XmlElement> inheritedTxBodies = const [],
 }) {
   final blocks = <BodyBlock>[];
   final links = <({String text, String url})>[];
@@ -37,7 +38,12 @@ ParsedText parseTxBody(
   for (final p in descendantsLocal(txBody, 'p')) {
     final pPr = childLocal(p, 'pPr');
     final level = int.tryParse(pPr?.getAttribute('lvl') ?? '') ?? 0;
-    final isBullet = _decideBullet(pPr, defaultBullet);
+    final isBullet = _decideBullet(
+      pPr,
+      defaultBullet,
+      level,
+      inheritedTxBodies,
+    );
 
     final text = StringBuffer();
     final runLinks = <({String text, String rId})>[];
@@ -96,11 +102,37 @@ ParsedText parseTxBody(
   return ParsedText(blocks: blocks, links: links, maxFontSize: maxFontSize);
 }
 
-bool _decideBullet(XmlElement? pPr, bool defaultBullet) {
-  if (pPr == null) return defaultBullet;
+bool _decideBullet(
+  XmlElement? pPr,
+  bool defaultBullet,
+  int level,
+  List<XmlElement> inheritedTxBodies,
+) {
   // An explicit buNone turns bullets off; buChar/buAutoNum turns them on.
-  if (childLocal(pPr, 'buNone') != null) return false;
-  if (childLocal(pPr, 'buChar') != null) return true;
-  if (childLocal(pPr, 'buAutoNum') != null) return true;
+  final local = _explicitBullet(pPr);
+  if (local != null) return local;
+
+  // Een dia-alinea hoeft haar lijstteken niet zelf te herhalen. PowerPoint
+  // erft `lvl1pPr` enzovoort eerst uit de dia-indeling en daarna uit het
+  // diamodel. Zonder die keten werd zelfs een expliciete `buNone` op de
+  // gekoppelde placeholder genegeerd en veranderde een datum in een bullet.
+  final levelName = 'lvl${level + 1}pPr';
+  for (final inherited in inheritedTxBodies) {
+    final listStyle = descendantsLocal(inherited, 'lstStyle').firstOrNull;
+    if (listStyle == null) continue;
+    final inheritedPr = childLocal(listStyle, levelName);
+    final inheritedValue = _explicitBullet(inheritedPr);
+    if (inheritedValue != null) return inheritedValue;
+  }
   return defaultBullet;
+}
+
+bool? _explicitBullet(XmlElement? paragraphProperties) {
+  if (paragraphProperties == null) return null;
+  if (childLocal(paragraphProperties, 'buNone') != null) return false;
+  if (childLocal(paragraphProperties, 'buChar') != null ||
+      childLocal(paragraphProperties, 'buAutoNum') != null) {
+    return true;
+  }
+  return null;
 }

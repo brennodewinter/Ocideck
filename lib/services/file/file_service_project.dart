@@ -46,6 +46,132 @@ Future<String?> _saveDestinationGated({
   );
 }
 
+Future<String?> _materializeMemStyleAsset(
+  String memPath,
+  String projectPath, {
+  required String fallbackName,
+}) async {
+  final bytes = WebAssetStore.bytesFor(memPath);
+  if (bytes == null || ImageService.imageMimeFromBytes(bytes) == null) {
+    return null;
+  }
+  final rawName = WebAssetStore.nameFor(memPath) ?? fallbackName;
+  final basename = p.basename(rawName);
+  final filename = p.extension(basename).isEmpty
+      ? '${p.basenameWithoutExtension(basename)}.png'
+      : basename;
+  final logosDir = Directory(p.join(projectPath, 'logos'));
+  await logosDir.create(recursive: true);
+  final destination = await resolveAssetDestinationForBytes(
+    logosDir,
+    filename,
+    bytes,
+  );
+  if (destination == null) return null;
+  if (!destination.alreadyPresent) {
+    await writeBytesAtomic(destination.file, bytes);
+  }
+  return p.posix.join('logos', p.basename(destination.file.path));
+}
+
+Future<_LogoProjectAsset> _copyBrandStripAsset(
+  ThemeProfile profile,
+  String projectPath,
+  Future<String?> Function(String projectPath, String normalizedPath)
+  findExisting,
+) async {
+  final stripPath = profile.brandStripPath;
+  if (stripPath == null || stripPath.trim().isEmpty) {
+    return _LogoProjectAsset(profile, null);
+  }
+  if (WebAssetStore.isMemPath(stripPath)) {
+    final stored = await _materializeMemStyleAsset(
+      stripPath,
+      projectPath,
+      fallbackName: 'merkstrook.png',
+    );
+    return stored == null
+        ? _LogoProjectAsset(profile, null)
+        : _LogoProjectAsset(
+            profile.copyWith(brandStripPath: stored),
+            '../$stored',
+          );
+  }
+  final normalized = stripPath.replaceAll('\\', '/');
+  final relative = p.posix.isRelative(normalized)
+      ? p.posix.normalize(normalized)
+      : null;
+  if (relative != null && relative.startsWith('logos/')) {
+    return _LogoProjectAsset(
+      profile.copyWith(brandStripPath: relative),
+      '../$relative',
+    );
+  }
+  var source = File(
+    p.isAbsolute(stripPath)
+        ? stripPath
+        : p.normalize(p.join(projectPath, stripPath)),
+  );
+  if (!await source.exists()) {
+    final fallback = await findExisting(projectPath, normalized);
+    if (fallback == null) return _LogoProjectAsset(profile, null);
+    source = File(fallback);
+  }
+  final filename = p.posix.basename(normalized);
+  if (filename.isEmpty || filename == '.' || filename == '..') {
+    return _LogoProjectAsset(profile, null);
+  }
+  final stored = p.posix.join('logos', filename);
+  final destination = File(p.join(projectPath, stored));
+  if (!p.equals(source.path, destination.path)) {
+    await destination.parent.create(recursive: true);
+    await source.copy(destination.path);
+  }
+  return _LogoProjectAsset(
+    profile.copyWith(brandStripPath: stored),
+    '../$stored',
+  );
+}
+
+String _brandStripCss(ThemeProfile profile, String brandStripUrl) {
+  final edge = profile.logoPosition.startsWith('top') ? 'top' : 'bottom';
+  final height = (720 * profile.brandStripHeight).round();
+  final safePadding = profile.logoPosition.startsWith('top')
+      ? 'padding-top'
+      : 'padding-bottom';
+  final titleSubtitle = profile.titleSubtitleInBrandStrip
+      ? '''
+section.title.logo-safe h2 {
+  position: absolute;
+  left: 58px;
+  $edge: ${(height * 0.30).round()}px;
+  z-index: 2;
+  color: ${profile.accentColor};
+  font-size: 18px;
+}
+'''
+      : '';
+  return '''
+section.logo-safe {
+  $safePadding: ${height}px;
+}
+
+section.logo-safe::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  $edge: 0;
+  width: 100%;
+  height: ${height}px;
+  background: url("$brandStripUrl") center / 100% 100% no-repeat;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+$titleSubtitle''';
+}
+
 extension _FileServiceProject on FileService {
   Future<({Deck deck, List<String> chartWarnings})> _writeProject(
     Deck deck,
@@ -67,7 +193,12 @@ extension _FileServiceProject on FileService {
     final mediaSlides = await _img.copyMediaToProject(imageSlides, dir);
     var updatedDeck = deck.copyWith(slides: mediaSlides, projectPath: dir);
     final logoAsset = await _copyLogoToProject(updatedDeck.themeProfile, dir);
-    updatedDeck = updatedDeck.copyWith(themeProfile: logoAsset.profile);
+    final stripAsset = await _copyBrandStripAsset(
+      logoAsset.profile,
+      dir,
+      _findExistingProjectLogo,
+    );
+    updatedDeck = updatedDeck.copyWith(themeProfile: stripAsset.profile);
     await _writeImageCaptions(updatedDeck);
 
     final writtenTheme = await _writeTheme(
@@ -75,6 +206,7 @@ extension _FileServiceProject on FileService {
       updatedDeck.theme,
       updatedDeck.themeProfile,
       logoAsset.cssUrl,
+      stripAsset.cssUrl,
     );
     // Marp CLI laadt een stylesheet naast de deck niet uit zichzelf; de
     // standaardroute is een Marp-configuratiebestand dat de CSS via `themeSet`
@@ -180,6 +312,7 @@ extension _FileServiceProject on FileService {
     String themeName,
     ThemeProfile profile,
     String? logoUrl,
+    String? brandStripUrl,
   ) async {
     final safeThemeName = _safeThemeName(themeName);
     final dest = File(p.join(themesPath, '$safeThemeName.css'));
@@ -189,7 +322,7 @@ extension _FileServiceProject on FileService {
       )).replaceFirst('@theme ocideck', '@theme $safeThemeName');
       await writeStringAtomicIfChanged(
         dest,
-        _buildThemeCss(base, profile, logoUrl),
+        _buildThemeCss(base, profile, logoUrl, brandStripUrl),
       );
       return safeThemeName;
     } catch (e) {
@@ -222,6 +355,20 @@ extension _FileServiceProject on FileService {
     final logoPath = profile.logoPath;
     if (logoPath == null || logoPath.trim().isEmpty) {
       return _LogoProjectAsset(profile, null);
+    }
+
+    if (WebAssetStore.isMemPath(logoPath)) {
+      final storedPath = await _materializeMemStyleAsset(
+        logoPath,
+        projectPath,
+        fallbackName: 'logo.png',
+      );
+      return storedPath == null
+          ? _LogoProjectAsset(profile, null)
+          : _LogoProjectAsset(
+              profile.copyWith(logoPath: storedPath),
+              '../$storedPath',
+            );
     }
 
     final normalized = logoPath.replaceAll('\\', '/');
@@ -284,9 +431,16 @@ extension _FileServiceProject on FileService {
     return null;
   }
 
-  String _buildThemeCss(String base, ThemeProfile profile, String? logoUrl) {
+  String _buildThemeCss(
+    String base,
+    ThemeProfile profile,
+    String? logoUrl,
+    String? brandStripUrl,
+  ) {
     final logoCss = logoUrl == null
         ? ''
+        : brandStripUrl != null && profile.brandStripHeight > 0
+        ? _brandStripCss(profile, brandStripUrl)
         : '''
 
 section.logo-safe {

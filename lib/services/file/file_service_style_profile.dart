@@ -12,7 +12,7 @@ const _styleProfileMarker = 'style-profile';
 
 /// Versie van het envelope-formaat. Een hoger nummer in een bestand komt uit
 /// een nieuwere OciDeck en wordt geweigerd in plaats van half gelezen.
-const _styleProfileFormatVersion = 1;
+const _styleProfileFormatVersion = 2;
 
 /// Leesbare JSON (2-spatie indent) voor handmatig bewerkbare `.ocideckstyle`-
 /// bestanden. `jsonDecode` aan de import-kant leest zowel compacte als pretty
@@ -35,8 +35,8 @@ class StyleProfileImportOutcome {
   final ThemeProfile? profile;
   final StyleProfileImportFailure? failure;
 
-  /// True wanneer het bestand een ingesloten logo droeg dat niet kon worden
-  /// teruggezet. Het profiel is dan bruikbaar, maar zonder logo.
+  /// True wanneer een ingesloten stijlafbeelding niet kon worden teruggezet.
+  /// Het profiel is dan bruikbaar, maar mist een logo of merkstrook.
   final bool logoOmitted;
 
   const StyleProfileImportOutcome.success(
@@ -71,7 +71,7 @@ class StyleProfileExportOutcome {
   /// dit hoort de gebruiker te horen, want hij heeft niets afgebroken.
   final bool downloadRefused;
 
-  /// True wanneer het profiel een eigen logo had dat niet kon worden
+  /// True wanneer het profiel een eigen stijlafbeelding had die niet kon worden
   /// ingesloten (bestand weg, of de mem:-store leeg na een herlaad).
   final bool logoOmitted;
 
@@ -82,7 +82,7 @@ class StyleProfileExportOutcome {
   });
 }
 
-/// De bytes van een profielbestand plus of het logo moest worden weggelaten.
+/// De bytes van een profielbestand plus of een stijlafbeelding moest ontbreken.
 class StyleProfileBytes {
   final Uint8List bytes;
   final bool logoOmitted;
@@ -204,7 +204,161 @@ StyleProfileBytes _encodeStyleProfileEnvelope(
     logoOmitted = true;
     bytes = encode();
   }
+  if (bytes.length > FileService.maxStyleProfileBytes &&
+      envelope.remove('brandStrip') != null) {
+    (envelope['profile']! as Map<String, Object?>)['brandStripPath'] = null;
+    logoOmitted = true;
+    bytes = encode();
+  }
   return StyleProfileBytes(bytes, logoOmitted: logoOmitted);
+}
+
+Future<String?> _materializeImportedStyleLogo(
+  Uint8List bytes,
+  String profileName,
+) async {
+  if (!_withinLogoCap(bytes)) return null;
+  final mime = ImageService.imageMimeFromBytes(bytes);
+  if (mime == null) return null;
+  return _materializeStyleLogo(bytes, mime, profileName, null);
+}
+
+Future<({ThemeProfile profile, bool omitted, bool budgetExceeded})>
+_restoreBrandStrip(
+  ThemeProfile profile,
+  Object? rawBrandStrip,
+  Directory? logoBaseDir,
+) async {
+  final embedded = _embeddedLogo(rawBrandStrip);
+  if (embedded != null) {
+    final restored = await _materializeStyleLogoSafely(
+      () => _materializeStyleLogo(
+        embedded.bytes,
+        embedded.mime,
+        '${profile.name} merkstrook',
+        logoBaseDir,
+      ),
+    );
+    if (restored.budgetExceeded) {
+      return (profile: profile, omitted: false, budgetExceeded: true);
+    }
+    return (
+      profile: restored.path == null
+          ? profile.copyWith(clearBrandStrip: true)
+          : profile.copyWith(brandStripPath: restored.path),
+      omitted: restored.path == null,
+      budgetExceeded: false,
+    );
+  }
+  if (rawBrandStrip != null) {
+    return (
+      profile: profile.copyWith(clearBrandStrip: true),
+      omitted: true,
+      budgetExceeded: false,
+    );
+  }
+  final path = profile.brandStripPath?.trim();
+  return (
+    profile: path != null && path.isNotEmpty && !isBundledAssetPath(path)
+        ? profile.copyWith(clearBrandStrip: true)
+        : profile,
+    omitted: false,
+    budgetExceeded: false,
+  );
+}
+
+Future<({ThemeProfile profile, bool omitted, bool budgetExceeded})>
+_restoreDarkLogo(
+  ThemeProfile profile,
+  Object? rawLogo,
+  Directory? logoBaseDir,
+) async {
+  final embedded = _embeddedLogo(rawLogo);
+  if (embedded != null) {
+    final restored = await _materializeStyleLogoSafely(
+      () => _materializeStyleLogo(
+        embedded.bytes,
+        embedded.mime,
+        '${profile.name}-dark',
+        logoBaseDir,
+      ),
+    );
+    if (restored.budgetExceeded) {
+      return (profile: profile, omitted: false, budgetExceeded: true);
+    }
+    return (
+      profile: restored.path == null
+          ? profile.copyWith(clearLogoDark: true)
+          : profile.copyWith(logoDarkPath: restored.path),
+      omitted: restored.path == null,
+      budgetExceeded: false,
+    );
+  }
+  if (rawLogo != null) {
+    return (
+      profile: profile.copyWith(clearLogoDark: true),
+      omitted: true,
+      budgetExceeded: false,
+    );
+  }
+  final path = profile.logoDarkPath?.trim();
+  return (
+    profile: path != null && path.isNotEmpty && !isBundledAssetPath(path)
+        ? profile.copyWith(clearLogoDark: true)
+        : profile,
+    omitted: false,
+    budgetExceeded: false,
+  );
+}
+
+Future<StyleProfileBytes> _buildStyleProfileBytes(
+  ThemeProfile profile,
+  String? projectPath,
+) async {
+  final json = profile.toJson();
+  final logo = await _encodeStyleLogo(profile.logoPath, projectPath);
+  final logoDark = await _encodeStyleLogo(profile.logoDarkPath, projectPath);
+  final brandStrip = await _encodeStyleLogo(
+    profile.brandStripPath,
+    projectPath,
+  );
+  final documentLogo = await _encodeStyleLogo(
+    profile.documentLogoPath,
+    projectPath,
+  );
+  if (profile.logoPath?.trim().isNotEmpty == true &&
+      !isBundledAssetPath(profile.logoPath!.trim())) {
+    json['logoPath'] = null;
+  }
+  if (profile.logoDarkPath?.trim().isNotEmpty == true &&
+      !isBundledAssetPath(profile.logoDarkPath!.trim())) {
+    json['logoDarkPath'] = null;
+  }
+  if (profile.brandStripPath?.trim().isNotEmpty == true &&
+      !isBundledAssetPath(profile.brandStripPath!.trim())) {
+    json['brandStripPath'] = null;
+  }
+  if (profile.documentLogoPath?.trim().isNotEmpty == true &&
+      !isBundledAssetPath(profile.documentLogoPath!.trim())) {
+    json['documentLogoPath'] = '';
+  }
+  final envelope = <String, Object?>{
+    'ocideck': _styleProfileMarker,
+    'version': brandStrip.embedded == null ? 1 : _styleProfileFormatVersion,
+    'profile': json,
+    'logo': ?logo.embedded,
+    'logoDark': ?logoDark.embedded,
+    'documentLogo': ?documentLogo.embedded,
+    'brandStrip': ?brandStrip.embedded,
+  };
+  return _encodeStyleProfileEnvelope(
+    envelope,
+    logoOmitted:
+        logo.omitted ||
+        logoDark.omitted ||
+        documentLogo.omitted ||
+        brandStrip.omitted,
+  );
 }
 
 extension FileServiceStyleProfile on FileService {
@@ -221,12 +375,7 @@ extension FileServiceStyleProfile on FileService {
   Future<String?> materializeImportedStyleLogo(
     Uint8List bytes, {
     required String profileName,
-  }) async {
-    if (!_withinLogoCap(bytes)) return null;
-    final mime = ImageService.imageMimeFromBytes(bytes);
-    if (mime == null) return null;
-    return _materializeStyleLogo(bytes, mime, profileName, null);
-  }
+  }) => _materializeImportedStyleLogo(bytes, profileName);
 
   /// Bouw de bytes van een `.ocideckstyle`-bestand: het profiel als JSON in een
   /// envelope met marker en versie.
@@ -238,40 +387,7 @@ extension FileServiceStyleProfile on FileService {
   Future<StyleProfileBytes> buildStyleProfileBytes(
     ThemeProfile profile, {
     String? projectPath,
-  }) async {
-    final json = profile.toJson();
-    final logo = await _encodeStyleLogo(profile.logoPath, projectPath);
-    final logoDark = await _encodeStyleLogo(profile.logoDarkPath, projectPath);
-    final documentLogo = await _encodeStyleLogo(
-      profile.documentLogoPath,
-      projectPath,
-    );
-    if (profile.logoPath?.trim().isNotEmpty == true &&
-        !isBundledAssetPath(profile.logoPath!.trim())) {
-      json['logoPath'] = null;
-    }
-    if (profile.logoDarkPath?.trim().isNotEmpty == true &&
-        !isBundledAssetPath(profile.logoDarkPath!.trim())) {
-      json['logoDarkPath'] = null;
-    }
-    if (profile.documentLogoPath?.trim().isNotEmpty == true &&
-        !isBundledAssetPath(profile.documentLogoPath!.trim())) {
-      json['documentLogoPath'] = '';
-    }
-
-    final envelope = <String, Object?>{
-      'ocideck': _styleProfileMarker,
-      'version': _styleProfileFormatVersion,
-      'profile': json,
-      'logo': ?logo.embedded,
-      'logoDark': ?logoDark.embedded,
-      'documentLogo': ?documentLogo.embedded,
-    };
-    return _encodeStyleProfileEnvelope(
-      envelope,
-      logoOmitted: logo.omitted || logoDark.omitted || documentLogo.omitted,
-    );
-  }
+  }) => _buildStyleProfileBytes(profile, projectPath);
 
   /// Schrijf [profile] weg als `.ocideckstyle`. Op web biedt de browser het
   /// bestand als download aan; op desktop kiest de gebruiker een bestemming en
@@ -406,39 +522,32 @@ extension FileServiceStyleProfile on FileService {
       }
     }
 
-    // Donkere logo-variant: zelfde behandeling als het lichte logo (#1931).
-    final rawLogoDark = envelope['logoDark'];
-    final embeddedLogoDark = _embeddedLogo(rawLogoDark);
-    if (embeddedLogoDark != null) {
-      final materializedDark = await _materializeStyleLogoSafely(
-        () => _materializeStyleLogo(
-          embeddedLogoDark.bytes,
-          embeddedLogoDark.mime,
-          '${profile.name}-dark',
-          logoBaseDir,
-        ),
+    final brandStrip = await _restoreBrandStrip(
+      profile,
+      envelope['brandStrip'],
+      logoBaseDir,
+    );
+    if (brandStrip.budgetExceeded) {
+      return const StyleProfileImportOutcome.failed(
+        StyleProfileImportFailure.memoryBudgetExceeded,
       );
-      if (materializedDark.budgetExceeded) {
-        return const StyleProfileImportOutcome.failed(
-          StyleProfileImportFailure.memoryBudgetExceeded,
-        );
-      }
-      final darkPath = materializedDark.path;
-      profile = darkPath == null
-          ? profile.copyWith(clearLogoDark: true)
-          : profile.copyWith(logoDarkPath: darkPath);
-      logoOmitted = logoOmitted || darkPath == null;
-    } else if (rawLogoDark != null) {
-      profile = profile.copyWith(clearLogoDark: true);
-      logoOmitted = true;
-    } else {
-      final logoDarkPath = profile.logoDarkPath?.trim();
-      if (logoDarkPath != null &&
-          logoDarkPath.isNotEmpty &&
-          !isBundledAssetPath(logoDarkPath)) {
-        profile = profile.copyWith(clearLogoDark: true);
-      }
     }
+    profile = brandStrip.profile;
+    logoOmitted = logoOmitted || brandStrip.omitted;
+
+    // Donkere logo-variant: zelfde behandeling als het lichte logo (#1931).
+    final darkLogo = await _restoreDarkLogo(
+      profile,
+      envelope['logoDark'],
+      logoBaseDir,
+    );
+    if (darkLogo.budgetExceeded) {
+      return const StyleProfileImportOutcome.failed(
+        StyleProfileImportFailure.memoryBudgetExceeded,
+      );
+    }
+    profile = darkLogo.profile;
+    logoOmitted = logoOmitted || darkLogo.omitted;
 
     final rawDocumentLogo = envelope['documentLogo'];
     final embeddedDocumentLogo = _embeddedLogo(rawDocumentLogo);

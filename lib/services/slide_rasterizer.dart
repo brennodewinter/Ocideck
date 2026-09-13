@@ -26,6 +26,13 @@ import '../widgets/document_signature_view.dart'
 import '../widgets/slides/slide_preview.dart';
 import '../theme/brand_logo.dart';
 
+String? _resolvedRasterAsset(String rawPath, String? projectPath) {
+  if (rawPath.isEmpty) return null;
+  return isBundledAssetPath(rawPath) || WebAssetStore.isMemPath(rawPath)
+      ? rawPath
+      : resolveTrustedAssetPath(rawPath, projectPath);
+}
+
 /// De export kon geen frame krijgen om de dia in te tekenen.
 ///
 /// Rasteren gebeurt door de échte voorvertoning te laten tekenen en het
@@ -184,15 +191,16 @@ class SlideRasterizer {
     // dia-achtergrond (gebundeld merk-logo automatisch, eigen logo via
     // logoDarkPath).
     final rawLogo = effectiveSlideLogoPath(themeProfile) ?? '';
-    final logo = isBundledAssetPath(rawLogo)
-        ? rawLogo
-        : resolveTrustedAssetPath(rawLogo, projectPath);
+    final logo = _resolvedRasterAsset(rawLogo, projectPath);
+    final rawBrandStrip = themeProfile.brandStripPath?.trim() ?? '';
+    final brandStrip = _resolvedRasterAsset(rawBrandStrip, projectPath);
     // Élke afbeelding van de dia wordt voorgeladen, ook een `![…](…)` in de
     // vrije tekst: zonder precache is de afbeelding nog niet gedecodeerd op het
     // moment dat het beeldje wordt vastgelegd, en belandt er een leeg vak in de
     // PDF of PPTX.
     final allPaths = <String>{
       ?logo,
+      ?brandStrip,
       for (final slide in slides)
         for (final path in slideImagePaths(slide))
           ?_resolveOrMem(path, projectPath),
