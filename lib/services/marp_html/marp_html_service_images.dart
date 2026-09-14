@@ -100,8 +100,15 @@ Future<String> _presentationLogoCss(
           .round();
   final horizontal = theme.logoPosition.endsWith('left') ? 'left' : 'right';
   final hInset = (size * kLogoHorizontalInsetFraction).round();
-  // De dia is 1280px breed; op die breedte reserveert de app dezelfde strook.
+  // De dia is 1280px breed; op die breedte reserveert de app dezelfde strook
+  // voor tekstslides. Tabel- en grafiekdia's vullen de resthoogte en hebben
+  // het hele logo-vak nodig (#2091).
   final reserve = logoSafeReserve(_kSlidePxWidth, theme).round();
+  final occupy = logoSafeReserve(
+    _kSlidePxWidth,
+    theme,
+    occupancy: true,
+  ).round();
   final safePad = atTop ? 'padding-top' : 'padding-bottom';
 
   return '.slide.logo-safe::before{content:"";position:absolute;'
@@ -109,7 +116,8 @@ Future<String> _presentationLogoCss(
       'background:url("$uri") center/contain no-repeat;'
       '$vertical:${vInset}px;$horizontal:${hInset}px;'
       'pointer-events:none;z-index:1}'
-      '.slide.logo-safe{$safePad:${reserve}px}';
+      '.slide.logo-safe{$safePad:${reserve}px}'
+      '.slide.logo-safe.logo-occupy{$safePad:${occupy}px}';
 }
 
 String _presentationBrandStripCss(ThemeProfile theme, String uri) {

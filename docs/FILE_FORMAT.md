@@ -771,7 +771,9 @@ The first class determines (together with the content) the **slide type**:
 Additional behavior classes:
 
 - `logo-safe` — reserve space so the logo does not overlap content. Added
-  automatically when a logo exists **and** the slide shows it.
+  automatically when a logo exists **and** the slide shows it. Text slides keep
+  a reduced strip at the logo edge; table, chart and gantt slides reserve the
+  whole logo box so filled content cannot draw through the mark.
 - `no-logo` — hide the logo on this slide (`showLogo = false`).
 - `no-footer` — hide the footer on this slide (`showFooter = false`). If this
   token is absent (older files), the footer remains visible.

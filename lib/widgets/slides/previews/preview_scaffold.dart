@@ -56,12 +56,18 @@ class _PreviewScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Panel slides (chart, code, table, ...) have opaque content that the logo
-    // can sit on top of — no vertical strip needed (#1932). Text slides keep
-    // a reduced strip so the text stops above the logo.
+    // Text slides keep the reduced strip (#1932). Panels that fill the frame
+    // (gantt via this scaffold, and others that call occupancy themselves)
+    // reserve the whole logo box so content cannot draw through it (#2091).
+    final occupancy = logoRequiresOccupancyReserve(slide.type);
     final isPanel = !slideUsesRichText(slide);
     final safe = slide.showLogo
-        ? _logoSafeInsets(width, profile, corner: isPanel)
+        ? _logoSafeInsets(
+            width,
+            profile,
+            corner: isPanel && !occupancy,
+            occupancy: occupancy,
+          )
         : EdgeInsets.zero;
 
     // De logostrook reserveren we búiten de `FittedBox`, niet als padding in de
@@ -122,10 +128,28 @@ EdgeInsets _logoSafeInsets(
   double w,
   ThemeProfile profile, {
   bool corner = false,
+  bool occupancy = false,
 }) {
-  final (top, bottom) = logoSafeReserveEdges(w, profile, corner: corner);
+  final (top, bottom) = logoSafeReserveEdges(
+    w,
+    profile,
+    corner: corner,
+    occupancy: occupancy,
+  );
   return EdgeInsets.only(top: top, bottom: bottom);
 }
 
 double _logoAwareBottomPadding(double defaultPad, double safeBottom) =>
     safeBottom <= 0 ? defaultPad : math.max(defaultPad, safeBottom);
+
+/// Logo-insets wanneer de dia het logo toont, anders nul. Top-level zodat
+/// previews geen extra regels in hun State-klasse hoeven te zetten.
+EdgeInsets _shownLogoInsets(
+  double w,
+  Slide slide,
+  ThemeProfile profile, {
+  bool occupancy = false,
+  bool corner = false,
+}) => slide.showLogo
+    ? _logoSafeInsets(w, profile, occupancy: occupancy, corner: corner)
+    : EdgeInsets.zero;

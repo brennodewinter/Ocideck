@@ -109,7 +109,10 @@ class _TableEditorState extends State<TableEditor> {
         widget.slide.tableNumberColumns[at.col];
     return [
       IconButton(
-        onPressed: () => _toggleNumberColumn(at.col),
+        onPressed: () {
+          _toggleNumberColumn(at.col);
+          _grid.keepEditing(at.row, at.col);
+        },
         icon: const Icon(Icons.numbers, size: 16),
         tooltip: l10n.d('Getalnotatie'),
         visualDensity: VisualDensity.compact,

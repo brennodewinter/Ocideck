@@ -749,7 +749,10 @@ De eerste klasse bepaalt (samen met de inhoud) het **slidetype**:
 Aanvullende gedragsklassen:
 
 - `logo-safe` — reserveer ruimte zodat het logo de inhoud niet overlapt. Automatisch
-  toegevoegd wanneer er een logo bestaat **en** de slide het toont.
+  toegevoegd wanneer er een logo bestaat **en** de slide het toont. Tekstdia's
+  houden een gereduceerde strook aan de logorand; tabel-, grafiek- en
+  ganttdia's reserveren het hele logo-vak zodat gevulde inhoud niet door het
+  merkteken heen loopt.
 - `no-logo` — verberg het logo op deze slide (`showLogo = false`).
 - `no-footer` — verberg de voettekst op deze slide (`showFooter = false`). Als dit
   token ontbreekt (oudere bestanden), blijft de voettekst zichtbaar.

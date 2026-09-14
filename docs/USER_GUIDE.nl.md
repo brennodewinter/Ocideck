@@ -1061,7 +1061,10 @@ Numbers, LibreOffice Calc, Google Sheets), CSV-tekst (komma- of
 puntkomma-gescheiden), of een markdown-tabel vult het raster vanaf die cel,
 en voegt rijen en kolommen toe waar nodig. Gewone tekst — zelfs een zin met een komma
 erin — plakt nog steeds in slechts die ene cel. Zonder selectie in de cel kopieert
-`Ctrl/Cmd+C` het hele raster als TSV.
+`Ctrl/Cmd+C` het hele raster als TSV. De compacte werkbalk boven de tabel zet een
+kolom links of rechts van de cel waar je staat, zonder de cursor uit de tabel
+te halen. Een tabeldia met het huisstijllogo houdt het hele logo-vak vrij, zodat
+cellen niet door het merkteken heen lopen.
 
 Vink **Verlopen datums markeren** aan in *Opties per slide* om elke cel met een
 datum vóór vandaag rood te kleuren. OciDeck berekent dit tegen de dag waarop je presenteert, zodat een
@@ -1086,7 +1089,8 @@ als een tabel: `Tab` loopt de cellen af en maakt op de laatste cel een rij bij,
 `Enter` gaat naar beneden, en `Ctrl/Cmd+V` of `Shift+Insert` in een cel plakt
 een spreadsheetselectie vanaf die cel. Gebruik **Rij** en **Reeks** om
 data toe te voegen; de kleine ✕ verwijdert een rij/kolom. Elke reeks en (voor taart/ring/radar)
-elk label kan een eigen kleur krijgen.
+elk label kan een eigen kleur krijgen. Een grafiekdia met het huisstijllogo
+houdt het hele logo-vak vrij van de plot.
 
 De beschikbare types:
 

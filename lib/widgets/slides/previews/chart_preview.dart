@@ -348,7 +348,7 @@ class _ChartPreviewState extends State<_ChartPreview>
     final spec = _spec;
     final horizontalPad = w * 0.05;
     final verticalPad = w * 0.018;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final safe = _shownLogoInsets(w, slide, profile, occupancy: true);
     final textColor = AppTheme.parseHexColor(profile.textColor);
 
     return Semantics(

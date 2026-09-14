@@ -41,7 +41,7 @@ class _CodePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     _ensureHighlightLanguages();
     final pad = w * 0.05;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final safe = _shownLogoInsets(w, slide, profile);
     final topPad = safe.top > 0 ? pad + safe.top : pad;
     final bottomPad = _logoAwareBottomPadding(pad, safe.bottom);
     final code = slide.customMarkdown;

@@ -52,7 +52,7 @@ class _ScorecardPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final pad = w * 0.055;
     final hPad = w * 0.045;
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    final safe = _shownLogoInsets(w, slide, profile);
     final spec = ScorecardSpec.fromSlide(slide.title, slide.tableRows);
     final text = AppTheme.parseHexColor(profile.textColor);
     final accent = AppTheme.parseHexColor(profile.accentColor);

@@ -401,31 +401,51 @@ const double kLogoHorizontalInsetFraction = 0.28;
 const double kLogoTopInsetFraction = 0.42;
 const double kLogoBottomInsetFraction = 0.12;
 
+/// Dia's waarvan de inhoud de volle 16:9-doos vult. Een gereduceerde
+/// logostrook (`size * edgeInset`) houdt alleen de spleet *achter* het logo
+/// vrij; deze types tekenen tot in het logo-vak zelf. Zij reserveren daarom
+/// het hele vak ([logoSafeReserve] met `occupancy: true`).
+bool logoRequiresOccupancyReserve(SlideType type) =>
+    type == SlideType.table ||
+    type == SlideType.chart ||
+    type == SlideType.gantt;
+
 /// Vertical space a shown logo reserves from its slide edge.
 ///
-/// When [corner] is false (text slides: bullets, freeMarkdown), the reserve is
-/// the logo's edge inset plus a small gap — the content extends to just above
-/// the logo's bottom edge, gaining the logo's own height back compared to the
-/// old full-height strip. The logo sits below the text, not overlapping.
+/// When [occupancy] is true the reserve is the full logo box: size plus the
+/// edge inset the overlay uses, plus a small gap. Tables and charts need this
+/// — they fill the remaining height, so the reduced strip lets them draw
+/// through the logo.
 ///
-/// When [corner] is true (panel slides: cockpit, chart, table, ...), the reserve
-/// is 0: the panel extends to full height and the logo sits on top in the
-/// corner (#1932). For opaque panels the logo covers only the corner; for a
-/// circular gauge (cockpit) that corner is empty anyway.
-double logoSafeReserve(double w, ThemeProfile profile, {bool corner = false}) {
+/// When [corner] is true and [occupancy] is false (cockpit, finding, …) the
+/// reserve is 0: the panel extends to full height and the logo sits on top in
+/// the corner (#1932). For a circular gauge that corner is empty anyway.
+///
+/// Otherwise (text slides: bullets, freeMarkdown) the reserve is the logo's
+/// edge inset plus a small gap. Wrapping text can stop short of the corner;
+/// that is the #1932 space gain, not a claim that filled panels stay clear.
+double logoSafeReserve(
+  double w,
+  ThemeProfile profile, {
+  bool corner = false,
+  bool occupancy = false,
+}) {
   if (profile.logoPath?.isEmpty ?? true) return 0;
   if (profile.brandStripPath?.isNotEmpty == true &&
       profile.brandStripHeight > 0) {
     return w * 9 / 16 * profile.brandStripHeight;
   }
-  if (corner) return 0;
+  if (!occupancy && corner) return 0;
   final size = w * (profile.logoSize / 1280);
   final edgeInset = profile.logoPosition.startsWith('top')
       ? kLogoTopInsetFraction
       : kLogoBottomInsetFraction;
-  // #1932: reduced from size*(1+edgeInset) to size*edgeInset — the content
-  // now clears the logo's edge inset + gap, not the full logo height.
-  return size * edgeInset + w * 0.014;
+  final gap = w * 0.014;
+  // Occupancy = size*(1+edgeInset)+gap, the overlay's far edge from the slide
+  // edge. The reduced strip is size*edgeInset+gap: only the inset behind the
+  // logo, which is why a table that fills availH ran through the mark (#2091).
+  if (occupancy) return size * (1 + edgeInset) + gap;
+  return size * edgeInset + gap;
 }
 
 /// Waar de logostrook aan de boven- en onderkant ruimte opeist, als `(boven,
@@ -444,6 +464,7 @@ double logoSafeReserve(double w, ThemeProfile profile, {bool corner = false}) {
   ThemeProfile profile, {
   bool splitText = false,
   bool corner = false,
+  bool occupancy = false,
 }) {
   if (profile.logoPath?.isEmpty ?? true) return (0, 0);
   final hasStrip =
@@ -452,7 +473,12 @@ double logoSafeReserve(double w, ThemeProfile profile, {bool corner = false}) {
   if (!hasStrip && splitText && profile.logoPosition.endsWith('right')) {
     return (0, 0);
   }
-  final reserved = logoSafeReserve(w, profile, corner: corner);
+  final reserved = logoSafeReserve(
+    w,
+    profile,
+    corner: corner,
+    occupancy: occupancy,
+  );
   return profile.logoPosition.startsWith('top') ? (reserved, 0) : (0, reserved);
 }
 

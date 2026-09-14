@@ -1010,7 +1010,10 @@ Numbers, LibreOffice Calc, Google Sheets), CSV text (comma- or
 semicolon-separated), or a markdown table fills the grid from that cell onward,
 adding rows and columns as needed. Ordinary text — even a sentence with a comma
 in it — still pastes into just the one cell. With no text selected in the cell,
-`Ctrl/Cmd+C` copies the whole grid as TSV.
+`Ctrl/Cmd+C` copies the whole grid as TSV. The compact toolbar above the table
+inserts a column to the left or right of the cell you are in without taking the
+cursor out of the table. A table slide with the house-style logo on keeps the
+whole logo box clear, so cells never draw through the mark.
 
 Tick **Mark expired dates** in *Per-slide options* to colour any cell holding a
 date before today red. OciDeck works this out against the day you present, so a
@@ -1035,7 +1038,8 @@ table: `Tab` walks the cells and grows a row on the last cell, `Enter` moves
 down, and `Ctrl/Cmd+V` or `Shift+Insert` in a cell pastes a spreadsheet
 selection from that cell. Use **Row** and **Series** to add data; the small ✕
 removes a row/column. Each series and (for pie/donut/radar)
-each label can be given its own colour.
+each label can be given its own colour. A chart slide with the house-style logo
+on keeps the whole logo box clear of the plot.
 
 The available types:
 

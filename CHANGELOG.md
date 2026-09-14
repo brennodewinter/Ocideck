@@ -24,6 +24,8 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Tabelwerkbalk: kolom links/rechts voegt weer een kolom in en houdt de cursor in de tabel (#2090, #2092).
+- Tabel- en grafiekdia's lopen niet meer door het presentatielogo heen; ze reserveren het hele logo-vak in plaats van alleen de spleet erachter (#2091).
 - Gantt-dia's uit LibrePlan krijgen weer een werkbare tijdlijn: de verborgen Mermaid-tekenlaag gebruikt nu een vaste interne breedte, zodat balken en mijlpalen niet meer verdwijnen in een nulbrede SVG.
 - PowerPoint-import behoudt nu beelden uit dia-indelingen en diamodellen, zet tekstgerichte EMF-beelden zichtbaar om en herkent een compact hoeklogo in een brede merkstrook met de juiste grootte en bronstijl. De volledige strook blijft daarbij aan de oorspronkelijke boven- of onderrand staan, korte toelichtende tekst blijft zichtbaar en korte informatie op een openingsdia maakt er niet langer ten onrechte een bulletdia van. Vrij geplaatste beeldrasters blijven als één compositiedia bij elkaar in plaats van te worden opgesplitst en afgesneden.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
@@ -44,6 +46,8 @@ in Dutch, and it keeps growing on `main` between releases.
 
 - Merge pull request #2088 from codex/fix-release-shellcheck
 - Herstel Gantt-rendering en tabelregeleinden
+- Tabelwerkbalk: kolom links/rechts voegt weer een kolom in en houdt de cursor in de tabel (#2090, #2092)
+- Tabel- en grafiekdia's lopen niet meer door het presentatielogo heen (#2091)
 - PowerPoint-titeldia’s nemen de volledige huisstijl mee
 - PowerPoint-branding en afbeeldingen naadloos importeren
 - refactor: dupliceer-codes opruimen (13 issues) (#2084)
