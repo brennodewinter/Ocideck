@@ -24,6 +24,7 @@ import 'latex/latex_preamble.dart';
 import 'latex/markdown_to_latex.dart';
 import 'markdown_service.dart';
 import 'marp_html_service.dart';
+import 'mermaid_theme.dart';
 import 'pdf/document_pdf_export.dart';
 import 'epub/document_epub_export.dart';
 import 'odt/document_odt_export.dart';
@@ -198,6 +199,12 @@ Future<Uint8List> buildDocumentExportBytes(
   String? outputPath,
 }) async {
   final theme = bundle.audience.deck.themeProfile;
+  // Mermaid-diagrammen volgen de stijlkleuren van het deck, net als de rest
+  // van het document — de resolver krijgt de bron al met themeVariables, zodat
+  // de PDF/DOCX-export hetzelfde beeld geeft als de voorvertoning.
+  final themedRenderMermaid = renderMermaid == null
+      ? null
+      : (String source) => renderMermaid(mermaidWithThemeColors(source, theme));
   final projectedMetadata = ExportDocumentMetadata.fromDeck(bundle.audience);
   final exportMetadata = metadata == null
       ? projectedMetadata
@@ -264,7 +271,7 @@ Future<Uint8List> buildDocumentExportBytes(
         pdfLabels: pdfLabels,
         pdfFallbackFonts: pdfFallbackFonts,
         embedImage: embedImage,
-        renderMermaid: renderMermaid,
+        renderMermaid: themedRenderMermaid,
         renderMath: renderMath,
         chapterPageBreak: chapterPageBreak,
         cropMarks: cropMarks,
@@ -311,7 +318,7 @@ Future<Uint8List> buildDocumentExportBytes(
         footnotePlacement: footnotePlacement,
         footnotesTitle: footnotesTitle,
         embedImage: embedImage,
-        renderMermaid: renderMermaid,
+        renderMermaid: themedRenderMermaid,
         renderMath: renderMath,
         sourcePath: sourcePath,
         outputPath: outputPath ?? '',

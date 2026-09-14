@@ -23,10 +23,13 @@ String _renderScriptLabels() {
 /// Een functie en geen constante, omdat de zichtbare woorden erin
 /// gelokaliseerd worden (zie [_renderScriptLabels]) en omdat de ingesloten
 /// afbeeldingen als [dataUris] meegaan — één keer, hoe vaak een dia er ook
-/// naar verwijst.
-String _renderScript(List<String> dataUris) =>
+/// naar verwijst. [theme] levert de Mermaid-themeVariables zodat diagrammen
+/// de stijlkleuren van het deck volgen; `null` laat mermaid op zijn standaard-
+/// thema draaien.
+String _renderScript(List<String> dataUris, {ThemeProfile? theme}) =>
     'var OCIDECK_L=${_renderScriptLabels()};\n'
     'var OCIDECK_IMG=${jsonEncode(dataUris)};\n'
+    'var OCIDECK_MERMAID_THEME=${jsonEncode(theme == null ? <String, Object>{} : {'themeVariables': mermaidThemeVariablesFor(theme)})};\n'
     '$_renderScriptBody';
 
 const _renderScriptBody = r'''
@@ -215,8 +218,9 @@ function runMermaid(){
   // de sanitisatie hieronder weg (het is de plek waar HTML een SVG binnen kan
   // komen). Het resultaat waren lege vakjes en pijlen zonder één woord erbij
   // — een diagram dat er wél stond maar niets meer zei.
-  mermaid.initialize({startOnLoad:false,securityLevel:'strict',
-    htmlLabels:false,flowchart:{htmlLabels:false},class:{htmlLabels:false}});
+  mermaid.initialize(Object.assign({startOnLoad:false,securityLevel:'strict',
+    htmlLabels:false,flowchart:{htmlLabels:false},class:{htmlLabels:false}},
+    OCIDECK_MERMAID_THEME));
   // Elk diagram eerst apart laten controleren. Zo tekent mermaid zijn eigen
   // foutplaatje niet, blijft een kapot diagram beperkt tot zijn eigen dia, en
   // draait de sanitisatie hieronder ALTIJD — bij de oude stille catch sloeg

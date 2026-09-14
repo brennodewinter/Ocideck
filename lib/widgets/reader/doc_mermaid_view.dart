@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../services/mermaid_render_service.dart';
+import '../../services/mermaid_theme.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/sanitize_svg.dart';
 import '../slides/mermaid_diagram.dart' show MermaidRenderer;
@@ -253,49 +252,10 @@ String mermaidWithDarkTheme(String source) {
 
   // Existing %%{init: …}%% directive: inject theme into its JSON so dark wins
   // even when the source set a different theme.
-  final merged = _injectDarkThemeIntoInit(source);
+  final merged = injectIntoMermaidInit(source, {'theme': 'dark'});
   if (merged != null) return merged;
 
   return '%%{init: {"theme":"dark"}}%%\n$source';
-}
-
-/// Finds the first `%%{init: {…}}%%` directive in [source], parses its JSON,
-/// sets `theme` to `"dark"`, and returns the source with the directive
-/// replaced. Returns `null` when no parseable directive is found (malformed
-/// JSON, missing `}%%`, or no directive at all).
-String? _injectDarkThemeIntoInit(String source) {
-  final idx = source.indexOf('%%{init:');
-  if (idx < 0) return null;
-  final jsonStart = source.indexOf('{', idx + 8);
-  if (jsonStart < 0) return null;
-  // Count braces to find the end of the JSON argument.
-  var depth = 0;
-  var i = jsonStart;
-  for (; i < source.length; i++) {
-    if (source[i] == '{') {
-      depth++;
-    } else if (source[i] == '}') {
-      if (--depth == 0) {
-        i++;
-        break;
-      }
-    }
-  }
-  if (depth != 0) return null;
-  // Expect }%% after the JSON object (possibly with spaces).
-  var j = i;
-  while (j < source.length && source[j] == ' ') {
-    j++;
-  }
-  if (!source.startsWith('}%%', j)) return null;
-  try {
-    final config =
-        jsonDecode(source.substring(jsonStart, i)) as Map<String, dynamic>;
-    config['theme'] = 'dark';
-    return '${source.substring(0, idx)}%%{init: ${jsonEncode(config)}}%%${source.substring(j + 3)}';
-  } on FormatException {
-    return null;
-  }
 }
 
 /// The diagram's intrinsic pixel size, read from the SVG `viewBox`
