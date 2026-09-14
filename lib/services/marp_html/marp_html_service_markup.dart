@@ -167,6 +167,13 @@ String _logoSectionClass(String slideMarkdown, bool hasLogo) {
   return optsOut ? '' : ' logo-safe';
 }
 
+/// Extra class on logo-safe sections whose content fills the slide, so the
+/// CSS can reserve the whole logo box rather than the reduced text strip.
+String _logoOccupySectionClass(Slide? slide, String logoClass) {
+  if (logoClass.isEmpty || slide == null) return '';
+  return logoRequiresOccupancyReserve(slide.type) ? ' logo-occupy' : '';
+}
+
 /// Extra `<section>` class that turns this slide's plain bullets into cat-paw
 /// markers (` paw-bullets`), or `''`. The decision is taken entirely from the
 /// `ocideck_bullet_marker` comment that the *export* markdown carries for
@@ -360,12 +367,13 @@ String _renderSections(
     );
     final markerClass = _bulletMarkerSectionClass(slideMd);
     final logoClass = _logoSectionClass(slideMd, hasLogo);
+    final occupyClass = _logoOccupySectionClass(slideObj, logoClass);
     final splitClass = _splitSectionClass(slideMd);
     final anchorId = _slideAnchorIdAttr(slideMd);
     final marpSection = _marpSectionStyle(slideMd, marpStyle);
     sections
       ..write(
-        '<section class="slide$markerClass$logoClass$splitClass${marpSection.classes}"'
+        '<section class="slide$markerClass$logoClass$occupyClass$splitClass${marpSection.classes}"'
         '$anchorId${marpSection.attributes}>',
       )
       ..write('<script type="text/markdown">')

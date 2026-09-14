@@ -151,8 +151,16 @@ void main() {
         logoSafeReserve(w, bottomLogo),
         closeTo(size * 0.12 + w * 0.014, 1e-6),
       );
-      // Corner mode (panel slides): no vertical reserve.
+      // Corner mode (panel slides that overlay): no vertical reserve.
       expect(logoSafeReserve(w, bottomLogo, corner: true), 0);
+      // Occupancy: the full logo box from the slide edge (#2091).
+      expect(
+        logoSafeReserve(w, bottomLogo, occupancy: true),
+        closeTo(size * 1.12 + w * 0.014, 1e-6),
+      );
+      expect(logoRequiresOccupancyReserve(SlideType.table), isTrue);
+      expect(logoRequiresOccupancyReserve(SlideType.chart), isTrue);
+      expect(logoRequiresOccupancyReserve(SlideType.bullets), isFalse);
     });
 
     test('a shown logo shrinks the rich-text body height', () {

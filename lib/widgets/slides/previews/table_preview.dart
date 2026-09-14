@@ -243,12 +243,10 @@ class _TablePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     final edit = _TableEditScope.maybeOf(context);
     final pad = w * 0.06;
-    // A table fills the slide's full width, so a bottom- or top-corner logo
-    // overlaps its edge cells regardless of which side it sits on. Reserve the
-    // whole strip (as for plain bullets) rather than the split-layout variant,
-    // which skips the reserve for a right-side logo — correct only when the
-    // text column sits away from it (bulletsImage), not for a full-width table.
-    final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
+    // A table fills the slide's full width and remaining height, so a corner
+    // logo overlaps edge cells unless we reserve the whole logo box — the
+    // reduced strip only clears the inset *behind* the logo (#2091).
+    final safe = _shownLogoInsets(w, slide, profile, occupancy: true);
     final titleSize = w * 0.038;
     final (rows, caption) = _rowsAndCaption(slide);
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
