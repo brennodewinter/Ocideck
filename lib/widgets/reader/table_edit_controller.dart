@@ -76,16 +76,56 @@ class TableEditController extends ChangeNotifier {
   ({int row, int col})? _activeCell;
   ({int row, int col})? get activeCell => _activeCell;
 
+  /// Tik op de werkbalk: de cel verliest focus vóór `onPressed`. Zonder deze
+  /// vlag wist [setActiveCell] de selectie tijdens pointer-down en is de knop
+  /// weg voordat de kolom erbij kan (#2090, #2092).
+  bool _holdActiveCell = false;
+
+  /// Er komt nog een [focusCell] aan (structuurwijziging of Tab/Enter). De
+  /// uitgestelde blur mag de werkbalk dan niet weghalen.
+  bool _focusScheduled = false;
+
+  bool _disposed = false;
+
+  /// De werkbalk tikt de cel-focus weg vóór onPressed. Houd de selectie vast
+  /// tot die tik is afgehandeld.
+  void holdActiveCell() {
+    _holdActiveCell = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _holdActiveCell = false;
+    });
+  }
+
   void setActiveCell(int r, int c, {required bool focused}) {
     if (focused) {
+      _holdActiveCell = false;
+      _focusScheduled = false;
       _activeCell = (row: r, col: c);
       onCellFocused?.call();
-    } else if (_activeCell == (row: r, col: c)) {
-      _activeCell = null;
-    } else {
+      notifyListeners();
       return;
     }
-    notifyListeners();
+    if (_activeCell != (row: r, col: c)) return;
+    // Niet meteen wissen: een tik op de werkbalk unfocust de cel in dezelfde
+    // pointer-down waarin de knop nog moet bestaan. Na deze frame kijken we
+    // of de focus écht de tabel heeft verlaten.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_disposed) return;
+      if (_holdActiveCell || _pendingFocus != null || _focusScheduled) return;
+      if (_anyCellHasFocus()) return;
+      if (_activeCell != (row: r, col: c)) return;
+      _activeCell = null;
+      notifyListeners();
+    });
+  }
+
+  bool _anyCellHasFocus() {
+    for (final row in _nodes) {
+      for (final node in row) {
+        if (node.hasFocus) return true;
+      }
+    }
+    return false;
   }
 
   int get rowCount => _cells.length;
@@ -152,7 +192,27 @@ class TableEditController extends ChangeNotifier {
 
   /// Vraagt de opbouw om cel ([r], [c]) te focussen zodra ze bestaat. De
   /// weergave haalt dit op met [takePendingFocus].
-  void _focusAfterRebuild(int r, int c) => _pendingFocus = (row: r, col: c);
+  void _focusAfterRebuild(int r, int c) {
+    _pendingFocus = (row: r, col: c);
+    _focusScheduled = true;
+  }
+
+  /// Zet de cursor na een werkbalkactie terug in [r], [c]. Publiek zodat
+  /// dia-specifieke extra knoppen (getalnotatie) hetzelfde pad gebruiken.
+  void keepEditing(int r, int c) => _focusAfterRebuild(r, c);
+
+  /// Houdt de cursor in de tabel na een structuurwijziging vanaf de werkbalk.
+  /// Zonder dit landt de focus nergens en verdwijnt de werkbalk (#2092).
+  void _retainActiveAfterStructure(({int row, int col})? active) {
+    if (active == null) return;
+    if (active.row < 0 ||
+        active.row >= rowCount ||
+        active.col < 0 ||
+        active.col >= colCount) {
+      return;
+    }
+    _focusAfterRebuild(active.row, active.col);
+  }
 
   /// De cel die focus moet pakken na deze opbouw, of `null`. Eenmalig: een
   /// tweede aanroep geeft `null`, zodat een latere opbouw de focus niet opnieuw
@@ -369,17 +429,25 @@ class TableEditController extends ChangeNotifier {
   void insertRowAt(int at, {bool silent = false}) {
     var index = at.clamp(0, rowCount);
     if (lockHeader && index == 0) index = 1;
+    final active = _activeCell;
     _cells.insert(index, [
       for (var c = 0; c < colCount; c++) _makeController(''),
     ]);
     _nodes.insert(index, [for (var c = 0; c < colCount; c++) FocusNode()]);
-    if (!silent) _emitAndRebuild();
+    if (!silent) {
+      if (active != null) {
+        final row = active.row >= index ? active.row + 1 : active.row;
+        _retainActiveAfterStructure((row: row, col: active.col));
+      }
+      _emitAndRebuild();
+    }
   }
 
   /// Verwijdert rij [r]. De koprij blijft staan: een GFM-tabel zonder kop
   /// bestaat niet, en de laatste body-rij weghalen zou de tabel leegmaken.
   void removeRowAt(int r) {
     if (rowCount <= 2 || r <= 0 || r >= rowCount) return;
+    final active = _activeCell;
     for (final cell in _cells.removeAt(r)) {
       cell
         ..removeTextListener(_emit)
@@ -388,24 +456,38 @@ class TableEditController extends ChangeNotifier {
     for (final node in _nodes.removeAt(r)) {
       node.dispose();
     }
+    if (active != null) {
+      final row = active.row > r
+          ? active.row - 1
+          : (active.row == r ? (r - 1).clamp(1, rowCount - 1) : active.row);
+      _retainActiveAfterStructure((row: row, col: active.col));
+    }
     _emitAndRebuild();
   }
 
   void insertColumnAt(int at, {bool silent = false}) {
     if (lockColumns) return;
     final index = at.clamp(0, colCount);
+    final active = _activeCell;
     for (var r = 0; r < rowCount; r++) {
       _cells[r].insert(index, _makeController(''));
       _nodes[r].insert(index, FocusNode());
     }
     _alignments = [..._alignments]
       ..insert(index.clamp(0, _alignments.length), TableAlign.left);
-    if (!silent) _emitAndRebuild();
+    if (!silent) {
+      if (active != null) {
+        final col = active.col >= index ? active.col + 1 : active.col;
+        _retainActiveAfterStructure((row: active.row, col: col));
+      }
+      _emitAndRebuild();
+    }
   }
 
   void removeColumnAt(int c) {
     if (lockColumns) return;
     if (colCount <= 1 || c < 0 || c >= colCount) return;
+    final active = _activeCell;
     for (var r = 0; r < rowCount; r++) {
       _cells[r].removeAt(c)
         ..removeTextListener(_emit)
@@ -413,6 +495,12 @@ class TableEditController extends ChangeNotifier {
       _nodes[r].removeAt(c).dispose();
     }
     if (c < _alignments.length) _alignments = [..._alignments]..removeAt(c);
+    if (active != null) {
+      final col = active.col > c
+          ? active.col - 1
+          : (active.col == c ? c.clamp(0, colCount - 1) : active.col);
+      _retainActiveAfterStructure((row: active.row, col: col));
+    }
     _emitAndRebuild();
   }
 
@@ -421,8 +509,15 @@ class TableEditController extends ChangeNotifier {
   void moveRow(int r, int delta) {
     final target = r + delta;
     if (r <= 0 || target <= 0 || target >= rowCount) return;
+    final active = _activeCell;
     _cells.insert(target, _cells.removeAt(r));
     _nodes.insert(target, _nodes.removeAt(r));
+    if (active != null) {
+      final row = active.row == r
+          ? target
+          : (active.row == target ? r : active.row);
+      _retainActiveAfterStructure((row: row, col: active.col));
+    }
     _emitAndRebuild();
   }
 
@@ -430,12 +525,19 @@ class TableEditController extends ChangeNotifier {
     if (lockColumns) return;
     final target = c + delta;
     if (c < 0 || target < 0 || target >= colCount) return;
+    final active = _activeCell;
     for (var r = 0; r < rowCount; r++) {
       _cells[r].insert(target, _cells[r].removeAt(c));
       _nodes[r].insert(target, _nodes[r].removeAt(c));
     }
     if (c < _alignments.length && target < _alignments.length) {
       _alignments = [..._alignments]..insert(target, _alignments.removeAt(c));
+    }
+    if (active != null) {
+      final col = active.col == c
+          ? target
+          : (active.col == target ? c : active.col);
+      _retainActiveAfterStructure((row: active.row, col: col));
     }
     _emitAndRebuild();
   }
@@ -444,9 +546,16 @@ class TableEditController extends ChangeNotifier {
   /// celcontrollers gaan weg; de focus landt nergens — de aanroeper zet die
   /// opnieuw als dat nodig is.
   void replaceRows(List<List<String>> rows, List<TableAlign> alignments) {
+    final active = _activeCell;
     _disposeInternals();
     _alignments = List<TableAlign>.from(alignments);
     _adopt(rows);
+    if (active != null && rowCount > 0 && colCount > 0) {
+      _retainActiveAfterStructure((
+        row: active.row.clamp(0, rowCount - 1),
+        col: active.col.clamp(0, colCount - 1),
+      ));
+    }
     _emitAndRebuild();
   }
 
@@ -457,6 +566,7 @@ class TableEditController extends ChangeNotifier {
     }
     next[c] = align;
     _alignments = next;
+    _retainActiveAfterStructure(_activeCell);
     _emitAndRebuild();
   }
 
@@ -477,6 +587,7 @@ class TableEditController extends ChangeNotifier {
 
   @override
   void dispose() {
+    _disposed = true;
     _disposeInternals();
     super.dispose();
   }

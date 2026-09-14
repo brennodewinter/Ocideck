@@ -155,6 +155,72 @@ void main() {
     expect(find.byType(TextField), findsNWidgets(9));
   });
 
+  testWidgets(
+    'kolom-rechts blijft werken als de cel daarbij unfocust (#2090)',
+    (tester) async {
+      await pump(tester);
+      await tester.tap(find.byType(TextField).at(2));
+      await tester.pump();
+      expect(editor.activeCell, (row: 1, col: 0));
+
+      // Wat de echte app doet: pointer-down op de werkbalk unfocust de cel
+      // vóór onPressed. De blur is uitgesteld tot na de frame, zodat de knop
+      // blijft bestaan tot de tik is afgehandeld.
+      editor.holdActiveCell();
+      editor.focusNode(1, 0).unfocus();
+      expect(
+        find.byTooltip('Kolom rechts'),
+        findsOneWidget,
+        reason: 'werkbalk blijft tot de tik is afgehandeld',
+      );
+      await tester.tap(find.byTooltip('Kolom rechts'));
+      await tester.pump();
+      await tester.pump();
+
+      expect(editor.colCount, 3);
+      expect(editor.activeCell, isNotNull);
+      expect(
+        editor
+            .focusNode(editor.activeCell!.row, editor.activeCell!.col)
+            .hasFocus,
+        isTrue,
+        reason: 'cursor blijft in de tabel (#2092)',
+      );
+    },
+  );
+
+  testWidgets(
+    'kolom-links verschuift de actieve cel mee en houdt focus (#2090)',
+    (tester) async {
+      await pump(tester);
+      await tester.tap(find.byType(TextField).at(3)); // rij 1, kolom 1
+      await tester.pump();
+      editor.holdActiveCell();
+      editor.focusNode(1, 1).unfocus();
+      await tester.tap(find.byTooltip('Kolom links'));
+      await tester.pump();
+      await tester.pump();
+
+      expect(editor.colCount, 3);
+      expect(editor.rows[1][2], 'Tester');
+      expect(editor.activeCell, (row: 1, col: 2));
+      expect(editor.focusNode(1, 2).hasFocus, isTrue);
+    },
+  );
+
+  testWidgets('tik buiten de tabel haalt de werkbalk wél weg (#2092)', (
+    tester,
+  ) async {
+    await pump(tester);
+    await tester.tap(find.byType(TextField).at(2));
+    await tester.pump();
+    editor.focusNode(1, 0).unfocus();
+    await tester.pump();
+    await tester.pump();
+    expect(find.byTooltip('Kolom rechts'), findsNothing);
+    expect(editor.activeCell, isNull);
+  });
+
   testWidgets('een rij verplaatsen kan zonder de tabel-editor erbij', (
     tester,
   ) async {
@@ -243,6 +309,20 @@ void main() {
       );
       expect(editor.rowCount, 4);
       expect(editor.takePendingFocus(), (row: 3, col: 1));
+    });
+
+    test('kolom rechts houdt pending focus op dezelfde cel (#2090)', () {
+      editor.setActiveCell(1, 0, focused: true);
+      editor.insertColumnAt(1);
+      expect(editor.colCount, 3);
+      expect(editor.takePendingFocus(), (row: 1, col: 0));
+    });
+
+    test('kolom links schuift pending focus met de oude kolom mee (#2090)', () {
+      editor.setActiveCell(1, 1, focused: true);
+      editor.insertColumnAt(1);
+      expect(editor.colCount, 3);
+      expect(editor.takePendingFocus(), (row: 1, col: 2));
     });
 
     group('pijltjes', () {
