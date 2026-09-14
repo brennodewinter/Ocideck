@@ -29,6 +29,7 @@ import '../../services/improvement/flow_layout.dart';
 import '../../services/improvement/flow_slide.dart';
 import '../../services/improvement/flow_spec.dart';
 import '../../services/improvement/gantt_dsl.dart';
+import '../../services/mermaid_theme.dart';
 import '../../services/improvement/chart_derivation.dart';
 import '../../services/improvement/matrix_layout.dart';
 import '../../services/improvement/matrix_slide.dart';

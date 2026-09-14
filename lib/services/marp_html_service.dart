@@ -27,6 +27,7 @@ import '../models/settings.dart';
 import '../models/page_size.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
+import 'mermaid_theme.dart';
 import '../utils/log.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/markdown_blocks.dart';
@@ -278,7 +279,7 @@ class MarpHtmlService {
         '<main><h1 class="ocideck-sr-only">$h1Title</h1>'
         '$sections'
         '</main>'
-        '${inline(_renderScript(embedded.dataUris))}'
+        '${inline(_renderScript(embedded.dataUris, theme: theme))}'
         '${notices.html}'
         '</body></html>';
   }

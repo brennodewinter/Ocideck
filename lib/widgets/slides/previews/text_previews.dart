@@ -763,7 +763,7 @@ List<Widget> _markdownBodyBlocks(
       widgets.add(
         _fullWidthBlock(
           contentWidth,
-          _markdownCodeBlock(code.join('\n'), language, w, font),
+          _markdownCodeBlock(code.join('\n'), language, w, font, profile),
         ),
       );
       continue;
@@ -927,9 +927,18 @@ Widget _markdownTextLine(
   return _md(context, line, bodyStyle, linkColor: linkColor);
 }
 
-Widget _markdownCodeBlock(String code, String language, double w, String font) {
+Widget _markdownCodeBlock(
+  String code,
+  String language,
+  double w,
+  String font,
+  ThemeProfile profile,
+) {
   if (language.toLowerCase() == 'mermaid') {
-    return MermaidDiagram(source: code, width: w);
+    return MermaidDiagram(
+      source: mermaidWithThemeColors(code, profile),
+      width: w,
+    );
   }
   _ensureHighlightLanguages();
   final mono = TextStyle(

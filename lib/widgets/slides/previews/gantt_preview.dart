@@ -62,7 +62,10 @@ class _GanttPreview extends StatelessWidget {
           ),
           SizedBox(height: pad * 0.35),
         ],
-        MermaidDiagram(source: dsl, width: w - pad * 2),
+        MermaidDiagram(
+          source: mermaidWithThemeColors(dsl, profile),
+          width: w - pad * 2,
+        ),
       ],
     );
   }
