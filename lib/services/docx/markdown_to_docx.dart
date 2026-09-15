@@ -310,7 +310,28 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     );
   }
 
-  String _rPrXml() => _rPr.isEmpty ? '' : '<w:rPr>${_rPr.join()}</w:rPr>';
+  String _rPrXml() {
+    if (_rPr.isEmpty) return '';
+    // OOXML vereist een specifieke volgorde van kind-elementen in w:rPr
+    // (rStyle → b → i → strike → …). De _rPr-stack hanteert de open-volgorde
+    // van de markdown-nesting, die niet altijd de schema-volgorde is —
+    // bijv. `_`code`_` hoopt <w:i/> vóór <w:rStyle> op. Sorteer op schema-rang
+    // bij het emitren, zonder de stack zelf te wijzigen (pop heeft de
+    // oorspronkelijke volgorde nodig).
+    if (_rPr.length == 1) return '<w:rPr>${_rPr.first}</w:rPr>';
+    final ordered = List<String>.from(_rPr)
+      ..sort((a, b) => _rPrRank(a).compareTo(_rPrRank(b)));
+    return '<w:rPr>${ordered.join()}</w:rPr>';
+  }
+
+  /// Schema-rang van een w:rPr-kind-element (ECMA-376 CT_RPr volgorde).
+  static int _rPrRank(String s) {
+    if (s.contains('rStyle')) return 0;
+    if (s.contains('<w:b/>')) return 1;
+    if (s.contains('<w:i/>')) return 2;
+    if (s.contains('<w:strike/>')) return 3;
+    return 9;
+  }
 
   @override
   bool visitElementBefore(md.Element element) {
