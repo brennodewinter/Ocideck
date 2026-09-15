@@ -509,14 +509,12 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         final idx = mermaidSources.length;
         mermaidSources.add(codeText);
         output.write('<OCIDECKMERMAID w:idx="$idx"/>');
-        _stack.add(_Ctx.codeBlockBody);
         return false;
       }
       if (lang == 'math' || lang == 'tex' || lang == 'latex') {
         final idx = mathSources.length;
         mathSources.add(codeText);
         output.write('<OCIDECKMATH w:idx="$idx"/>');
-        _stack.add(_Ctx.codeBlockBody);
         return false;
       }
 
@@ -529,7 +527,9 @@ class _DocxNodeVisitor implements md.NodeVisitor {
           '<w:t xml:space="preserve">${xmlEscape(line)}</w:t></w:r></w:p>',
         );
       }
-      _stack.add(_Ctx.codeBlockBody);
+      // Geen stack-push: visitElementBefore returnt false, dus
+      // visitElementAfter wordt niet aangeroepen — pre's visitElementAfter
+      // moet _Ctx.codeBlock treffen, niet een placeholder.
       return false;
     } else {
       // Inline-code: push de stijl; de tekst-node emit de run.
@@ -582,7 +582,6 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         if (ctx == _Ctx.inlineCode) {
           _rPr.removeLast();
         }
-      // codeBlockBody: niets te sluiten.
 
       case 'strong':
       case 'b':
@@ -627,7 +626,6 @@ enum _Ctx {
   orderedList,
   listItem,
   codeBlock,
-  codeBlockBody,
   inlineCode,
   inline,
   link,

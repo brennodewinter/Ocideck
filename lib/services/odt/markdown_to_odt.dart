@@ -416,7 +416,9 @@ class _OdtNodeVisitor implements md.NodeVisitor {
           '<text:p text:style-name="Preformatted_Text">${xmlEscape(line)}</text:p>',
         );
       }
-      _stack.add(_Ctx.codeBlockBody);
+      // Geen stack-push: visitElementBefore returnt false, dus
+      // visitElementAfter wordt niet aangeroepen — pre's visitElementAfter
+      // moet _Ctx.codeBlock treffen, niet een placeholder.
       return false;
     } else {
       _buf.write('<text:span text:style-name="Source_Text">');
@@ -470,9 +472,7 @@ class _OdtNodeVisitor implements md.NodeVisitor {
       case 'pre':
         break;
       case 'code':
-        if (ctx == _Ctx.codeBlockBody) {
-          // Code-blokregels zijn al geschreven in visitElementBefore.
-        } else if (ctx == _Ctx.inlineCode) {
+        if (ctx == _Ctx.inlineCode) {
           _buf.write('</text:span>');
         }
 
@@ -515,7 +515,6 @@ enum _Ctx {
   orderedList,
   listItem,
   codeBlock,
-  codeBlockBody,
   inlineCode,
   inline,
   link,
