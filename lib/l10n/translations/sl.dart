@@ -1627,6 +1627,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'hoofdstukken': 'poglavja',
+  'paragrafen': 'odstavki',
+  'tabellen': 'tabele',
+  'afbeeldingen': 'slike',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'vdelane slike sloga ni bilo mogoče obnoviti',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

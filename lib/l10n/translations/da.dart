@@ -1627,6 +1627,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'hoofdstukken': 'kapitler',
+  'paragrafen': 'afsnit',
+  'tabellen': 'tabeller',
+  'afbeeldingen': 'billeder',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'et indlejret stilbillede kunne ikke gendannes',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

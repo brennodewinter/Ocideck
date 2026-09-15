@@ -667,6 +667,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'hoofdstukken': 'haadstikken',
+  'paragrafen': 'paragrafen',
+  'tabellen': 'tabellen',
+  'afbeeldingen': 'ôfbyldingen',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'in ynsletten stylôfbylding koe net weromset wurde',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

@@ -1620,6 +1620,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'hoofdstukken': 'peatükid',
+  'paragrafen': 'lõigud',
+  'tabellen': 'tabelid',
+  'afbeeldingen': 'pildid',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'manustatud stiilipilti ei õnnestunud taastada',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

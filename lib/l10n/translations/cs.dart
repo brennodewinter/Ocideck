@@ -1628,6 +1628,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'hoofdstukken': 'kapitoly',
+  'paragrafen': 'odstavce',
+  'tabellen': 'tabulky',
+  'afbeeldingen': 'obrázky',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'vložený obrázek stylu nebylo možné obnovit',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

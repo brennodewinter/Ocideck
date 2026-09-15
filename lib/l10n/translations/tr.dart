@@ -2538,6 +2538,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'hoofdstukken': 'bölümler',
+  'paragrafen': 'paragraflar',
+  'tabellen': 'tablolar',
+  'afbeeldingen': 'görüntüler',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'gömülü bir stil görseli geri yüklenemedi',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

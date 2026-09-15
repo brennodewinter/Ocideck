@@ -1645,6 +1645,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'hoofdstukken': 'kapitli',
+  'paragrafen': 'paragrafi',
+  'tabellen': 'tabelli',
+  'afbeeldingen': 'stampi',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'immaġni tal-istil inkorporata ma setgħetx tiġi rrestawrata',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

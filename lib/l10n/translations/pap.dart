@@ -666,6 +666,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'hoofdstukken': 'kapítulonan',
+  'paragrafen': 'parágrafonan',
+  'tabellen': 'tablanan',
+  'afbeeldingen': 'imágennan',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'no por a restourá un imagen di estilo inkluí',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

@@ -1657,6 +1657,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'hoofdstukken': 'caibidlí',
+  'paragrafen': 'alt',
+  'tabellen': 'táblaí',
+  'afbeeldingen': 'íomhánna',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'níorbh fhéidir íomhá stíle leabaithe a athchóiriú',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

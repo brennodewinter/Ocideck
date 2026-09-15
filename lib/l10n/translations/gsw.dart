@@ -1630,6 +1630,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'hoofdstukken': 'Kapitel',
+  'paragrafen': 'Abschnitt',
+  'tabellen': 'Tabälle',
+  'afbeeldingen': 'Bilder',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'es iibettets Stilbild het me nöd chönne zrugghole',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

@@ -664,6 +664,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'hoofdstukken': 'capítulos',
+  'paragrafen': 'párrafos',
+  'tabellen': 'tablas',
+  'afbeeldingen': 'imágenes',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'no se pudo restaurar una imagen de estilo incrustada',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

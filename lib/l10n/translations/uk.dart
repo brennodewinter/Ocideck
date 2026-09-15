@@ -1642,6 +1642,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'hoofdstukken': 'розділи',
+  'paragrafen': 'абзаци',
+  'tabellen': 'таблиці',
+  'afbeeldingen': 'зображення',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'вбудоване зображення стилю не вдалося відновити',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
