@@ -70,6 +70,12 @@ void main() {
     expect(installer, contains('ElevationRequirement: elevationRequired'));
     expect(
       installer,
+      contains("DefaultInstallLocation: '%ProgramFiles%\\OciDeck'"),
+    );
+    expect(installer, contains('RelativeFilePath: ocideck.exe'));
+    expect(installer, contains('FileType: launch'));
+    expect(
+      installer,
       contains(
         'https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/'
         'download/v0.6.3/ocideck-windows-x64-setup-0.6.3.exe',
@@ -77,6 +83,14 @@ void main() {
     );
     expect(installer, contains(installerSha.toUpperCase()));
     expect(installer, isNot(contains('github.com/brennodewinter')));
+
+    final locale = File(
+      '${versionDir(out, '0.6.3').path}/LibreKAT.OciDeck.locale.en-US.yaml',
+    ).readAsStringSync();
+    expect(
+      locale,
+      contains('PackageUrl: https://pawprint.vigilis.online/LibreKAT/Ocideck'),
+    );
   });
 
   test('keeps the fixed Inno upgrade identity in the manifest', () {
