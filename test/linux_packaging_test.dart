@@ -19,6 +19,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final releaseYaml = File('.forgejo/workflows/release.yml').readAsStringSync();
   final script = File('scripts/package_linux.sh').readAsStringSync();
+  final publishScript = File(
+    'scripts/publish_debian_package.sh',
+  ).readAsStringSync();
   final desktop = File(
     'packaging/linux/com.dewinter.ocideck.desktop',
   ).readAsStringSync();
@@ -89,6 +92,56 @@ void main() {
           reason: 'The Linux artifact upload no longer lists `$asset` (#1227).',
         );
       }
+    });
+
+    test('the .deb is also published to the signed Forgejo registry', () {
+      expect(
+        releaseYaml.contains('PACKAGE_TOKEN: \${{ secrets.PACKAGE_TOKEN }}'),
+        isTrue,
+        reason: 'Package publication must use its own least-privilege secret.',
+      );
+      expect(
+        releaseYaml.contains('scripts/publish_debian_package.sh'),
+        isTrue,
+        reason: 'The release no longer updates the apt repository.',
+      );
+      expect(
+        releaseYaml.contains(r'dist/ocideck-linux-amd64-$VERSIE.deb'),
+        isTrue,
+        reason: 'The registry must receive the same .deb as the release.',
+      );
+    });
+  });
+
+  group('the Debian registry publication fails closed', () {
+    test('uses the public stable/main registry owned by LibreKAT', () {
+      expect(publishScript, contains('DEBIAN_PACKAGE_OWNER:-LibreKAT'));
+      expect(publishScript, contains('DEBIAN_DISTRIBUTION:-stable'));
+      expect(publishScript, contains('DEBIAN_COMPONENT:-main'));
+      expect(
+        publishScript,
+        contains(r'/debian/pool/$DISTRIBUTION/$COMPONENT/upload'),
+      );
+    });
+
+    test(
+      'requires a package-only credential and validates package identity',
+      () {
+        expect(publishScript, contains('PACKAGE_TOKEN is required'));
+        expect(publishScript, contains('write:package'));
+        expect(publishScript, contains('dpkg-deb -f'));
+        expect(publishScript, contains('expected ocideck/amd64'));
+      },
+    );
+
+    test('accepts a retry only for identical package bytes', () {
+      expect(publishScript, contains('EXPECTED_SHA256='));
+      expect(publishScript, contains(r'if [ "$HTTP_CODE" = "409" ]'));
+      expect(publishScript, contains(r'.sha256 == $expected'));
+      expect(
+        publishScript,
+        contains('already exists with different package bytes'),
+      );
     });
   });
 

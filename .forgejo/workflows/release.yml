@@ -706,6 +706,21 @@ jobs:
           echo
           echo "Klaar: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${GITHUB_REF_NAME}"
 
+      # De losse .deb blijft een release-asset; daarnaast publiceren we exact
+      # dezelfde bytes naar Forgejo's eigen, ondertekende Debian-registry zodat
+      # installaties via apt ook gewone updates krijgen. Een apart token houdt
+      # de bevoegdheid beperkt tot packages; een ontbrekend token of een
+      # conflicterende versie maakt de release rood in plaats van stil een
+      # verouderde pakketbron achter te laten.
+      - name: Debian-pakketbron bijwerken
+        env:
+          PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+          FORGEJO_SERVER_URL: ${{ github.server_url }}
+        run: |
+          VERSIE="${GITHUB_REF_NAME#v}"
+          scripts/publish_debian_package.sh \
+            "dist/ocideck-linux-amd64-$VERSIE.deb"
+
   website-downloads:
     name: Website-downloads bijwerken
     # Op de aangemelde Mac (mac-brenno): die heeft SSH-toegang tot de website-repo
