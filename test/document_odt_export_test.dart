@@ -25,6 +25,7 @@ import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/marp_html_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/odt/document_odt_export.dart';
+import 'package:ocideck/services/odt/markdown_to_odt.dart';
 import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:path/path.dart' as p;
@@ -278,6 +279,23 @@ void main() {
       contains('<text:list-item><text:p text:style-name="Standard">'),
     );
   });
+
+  test(
+    'odt: codeblok lekt niet door naar volgende inline code (regressie #2095)',
+    () {
+      // Een codeblok mag de visitor-stack niet beïnvloeden: inline code ná een
+      // codeblok moet een span blijven, geen Preformatted_Text-alinea.
+      final body = markdownToOdtBody(
+        '```\nfoo\n```\n\nAlinea met `code` erin.\n',
+      );
+      // Inline code is een span, geen eigen Preformatted_Text-alinea.
+      expect(
+        body,
+        contains('<text:span text:style-name="Source_Text">code</text:span>'),
+      );
+      expect(body, isNot(contains('Preformatted_Text>code</text:p>')));
+    },
+  );
 }
 
 String _readEntry(Archive archive, String name) {

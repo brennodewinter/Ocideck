@@ -363,6 +363,31 @@ void main() {
       expect(conv.body, contains('OCIDECKMERMAID'));
     });
 
+    test(
+      'codeblok lekt niet door naar volgende inline code (regressie #2095)',
+      () {
+        // Een codeblok mag de visitor-stack niet beïnvloeden: inline code ná
+        // een codeblok moet een run blijven, geen PreformattedText-alinea.
+        // Voorheen bleef _Ctx.codeBlock op de stack staan, waardoor élke
+        // volgende inline code als blok werd gerenderd — dat produceert
+        // geneste <w:p><w:p> en een ongeldig .docx.
+        final conv = markdownToDocxBody(
+          '```\nfoo\n```\n\nAlinea met `code` erin.\n',
+        );
+        // Geen geneste alinea-openingen (de handtekening van de bug).
+        expect(conv.body, isNot(contains('<w:p><w:p>')));
+        // Inline code is een run met SourceText, geen PreformattedText-blok.
+        expect(
+          conv.body,
+          contains(
+            '<w:rPr><w:rStyle w:val="SourceText"/></w:rPr>'
+            '<w:t xml:space="preserve">code</w:t>',
+          ),
+        );
+        expect(conv.body, isNot(contains('PreformattedText>code</w:t>')));
+      },
+    );
+
     test('lege body → lege conversie', () {
       final conv = markdownToDocxBody('   ');
       expect(conv.body, isEmpty);
