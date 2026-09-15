@@ -599,12 +599,15 @@ deck in plain Markdown: your work should be able to outlive the tool.
 Stated plainly, because the honest answer is thinner than most projects' and a
 reader deserves to know it before relying on this (*added 2026-07-22*).
 
-There is **no update mechanism**. The app never phones home and never checks for
-a newer version — showing you its own version (see [Supported
+There is **no update mechanism inside the app**. It never phones home and never
+checks for a newer version — showing you its own version (see [Supported
 versions](#supported-versions)) is not the same as knowing whether a newer one
-exists. There is no release feed to subscribe to, no signed installer that
-updates itself, and no notification of any kind. A fix reaches you when you
-fetch the default branch and rebuild — and not before.
+exists. Direct downloads do not update themselves. A Linux installation made
+through the signed Forgejo APT repository is the exception: the operating
+system's package manager discovers and installs a newer OciDeck package during
+the user's normal `apt update` / `apt upgrade`. The application itself still
+makes no update request. Other installations receive a fix when you download a
+new release or fetch the default branch and rebuild — and not before.
 
 Windows does have an **installer** (#1208), and it changes nothing above. It is a
 deliberately dumb, offline one: it copies the files, adds a shortcut and the file
@@ -727,6 +730,11 @@ asymmetric:
   signature over `SHA256SUMS` gives Windows and Linux downloads a verifiable
   anchor without a per-binary certificate; building from source remains the route
   that needs no signature at all.
+
+  The Linux APT route signs the **repository metadata**, not the executable:
+  apt verifies Forgejo's repository key before it accepts the package index and
+  package hash. That authenticates the update channel while leaving the binary
+  under the same no-per-platform-signature statement as the direct `.deb`.
 
 The Windows **installer** (#1208) sits under the same decision and is shipped
 unsigned for the same reasons, so it shows SmartScreen and an "Unknown publisher"

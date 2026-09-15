@@ -7,11 +7,12 @@ and the Windows installer
 ([issue #1208](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/1208)).
 
 Every format here wraps the **same** bundle `flutter build` produces and the
-release already ships as an archive. None of them is a store, a gatekeeper, a
-sandbox or an update channel: the direct download from the forge stays canonical,
-and these are extra doors to the same house. The confined Linux formats (Flatpak,
-Snap) are a separate, later track — they need the capability feature-flag first;
-see the design doc.
+release already ships as an archive. None of them is a store, a gatekeeper or a
+sandbox: the direct download from the forge stays canonical, and these are extra
+doors to the same house. The `.deb` is also published to the forge's own signed
+Debian registry so installations made through apt receive updates. The confined
+Linux formats (Flatpak, Snap) are a separate, later track — they need the
+capability feature-flag first; see the design doc.
 
 ## What is here
 
@@ -21,6 +22,7 @@ see the design doc.
 | `linux/com.dewinter.ocideck.desktop` | Desktop entry, shared by the .deb, .rpm and AppImage. Keyed on the application id `com.dewinter.ocideck` — the same id the GTK runner sets as its default icon name (`linux/runner/my_application.cc`). |
 | `linux/AppRun` | AppImage entrypoint: execs `ocideck` from the AppDir root. |
 | `aur/PKGBUILD` | AUR `ocideck-bin`: installs the release tarball on Arch/Manjaro. |
+| `../scripts/publish_debian_package.sh` | Publishes the release `.deb` to the signed Forgejo Debian registry. A retry succeeds only when the existing package has the same sha256. |
 
 The icon is **not** stored here: the bundle already ships `data/icons/app_icon.png`
 (512 px), and the packaging pulls it straight from the built bundle so there is
@@ -40,6 +42,18 @@ which produces, into `dist/`:
 - `ocideck-linux-x86_64-<version>.AppImage` — one runnable file, most distros
 - `ocideck-linux-amd64-<version>.deb` — Debian / Ubuntu / Mint
 - `ocideck-linux-x86_64-<version>.rpm` — Fedora / openSUSE
+
+After the release assets have been published,
+`scripts/publish_debian_package.sh` uploads that same `.deb` to
+`https://pawprint.vigilis.online/api/packages/LibreKAT/debian`, distribution
+`stable`, component `main`. Forgejo generates and signs the apt metadata with its
+instance repository key. The release workflow requires `PACKAGE_TOKEN`, a
+repository or organisation Actions secret containing a Forgejo token with only
+the `write:package` scope.
+
+Users add the source with the public key returned by
+`…/debian/repository.key`; the website carries the copyable commands. The direct
+release download stays available independently of the registry.
 
 Each needs its own tool: `dpkg-deb` (base system), `rpmbuild` (the `rpm`
 package, installed by the job) and `appimagetool`. The `.rpm` deliberately lets
@@ -120,7 +134,8 @@ The packages themselves are only built on a Linux tag, so no `flutter test`
 produces one. `test/linux_packaging_test.dart` pins the wiring offline — the job
 calls the packager and uploads every artifact it makes, the script names those
 exact artifacts and declares the right runtime libraries, appimagetool is
-checksum-verified, and the metadata is well formed. Validate the actual packages
+checksum-verified, the registry publisher refuses a different package under an
+existing version, and the metadata is well formed. Validate the actual packages
 with a prerelease tag (`v<next>-rc1`, which builds and publishes as a prerelease
 without touching the live web demo or the website) before the real release.
 
