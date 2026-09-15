@@ -86,6 +86,7 @@ import 'reader/table_edit_controller.dart';
 import 'reader/paged_document_view.dart';
 import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
+import 'shell/document_import_action.dart';
 
 part 'parts/document_editor_toolbar.dart';
 part 'parts/document_fields_dialog.dart';

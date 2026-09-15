@@ -1647,6 +1647,10 @@ const _dutchSourceAddRo = <String, String>{
   'paragrafen': 'paragrafe',
   'tabellen': 'tabele',
   'afbeeldingen': 'imagini',
+  'Document importeren…': 'Importă document…',
+  'Document kiezen': 'Alege documentul',
+  'Document geïmporteerd.': 'Document importat.',
+  'Importeren uit Word of LibreOffice…': 'Importă din Word sau LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'o imagine de stil încorporată nu a putut fi restaurată',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

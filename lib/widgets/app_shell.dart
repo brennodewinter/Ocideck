@@ -152,6 +152,7 @@ import 'dialogs/s3_browser_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
 import 'shell/document_save_actions.dart';
+import 'shell/document_import_action.dart';
 import 'shell/openkat_import_action.dart';
 import 'shell/presentation_import_action.dart';
 import 'panels/editor_panel.dart';

@@ -1643,6 +1643,10 @@ const _dutchSourceAddPl = <String, String>{
   'paragrafen': 'paragrafy',
   'tabellen': 'tabele',
   'afbeeldingen': 'obrazy',
+  'Document importeren…': 'Importuj dokument…',
+  'Document kiezen': 'Wybierz dokument',
+  'Document geïmporteerd.': 'Dokument zaimportowany.',
+  'Importeren uit Word of LibreOffice…': 'Importuj z Worda lub LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'nie udało się przywrócić osadzonego obrazu stylu',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

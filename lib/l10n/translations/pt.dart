@@ -1659,6 +1659,10 @@ const _dutchSourceAddPt = <String, String>{
   'paragrafen': 'parágrafos',
   'tabellen': 'tabelas',
   'afbeeldingen': 'imagens',
+  'Document importeren…': 'Importar documento…',
+  'Document kiezen': 'Escolher documento',
+  'Document geïmporteerd.': 'Documento importado.',
+  'Importeren uit Word of LibreOffice…': 'Importar do Word ou LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'não foi possível restaurar uma imagem de estilo incorporada',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

@@ -671,6 +671,10 @@ const _dutchSourceAddFr = {
   'paragrafen': 'paragraphes',
   'tabellen': 'tableaux',
   'afbeeldingen': 'images',
+  'Document importeren…': 'Importer un document…',
+  'Document kiezen': 'Choisir un document',
+  'Document geïmporteerd.': 'Document importé.',
+  'Importeren uit Word of LibreOffice…': 'Importer depuis Word ou LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'une image de style intégrée n’a pas pu être restaurée',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

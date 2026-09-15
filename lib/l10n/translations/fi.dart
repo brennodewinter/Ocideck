@@ -1631,6 +1631,10 @@ const _dutchSourceAddFi = <String, String>{
   'paragrafen': 'kappaleet',
   'tabellen': 'taulukot',
   'afbeeldingen': 'kuvat',
+  'Document importeren…': 'Tuo asiakirja…',
+  'Document kiezen': 'Valitse asiakirja',
+  'Document geïmporteerd.': 'Asiakirja tuotu.',
+  'Importeren uit Word of LibreOffice…': 'Tuo Wordista tai LibreOfficesta…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'upotettua tyylikuvaa ei voitu palauttaa',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

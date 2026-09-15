@@ -616,6 +616,16 @@ class _WelcomeScreen extends ConsumerWidget {
       ),
       onPressed: () => ref.read(tabsProvider.notifier).newDocument(),
     ),
+    const SizedBox(height: 8),
+    // De terugweg vanuit Word/LibreOffice: een bestaand document inlezen als
+    // Markdown. Behoort bij 'Nieuw document' — je begint, alleen dan vanuit
+    // iets dat al bestaat.
+    _wideSecondaryButton(
+      style: _secondaryButtonStyle(Theme.of(context).colorScheme),
+      icon: Icons.upload_file_outlined,
+      label: Text(documentImportLabel(l10n)),
+      onPressed: () => importDocument(context),
+    ),
   ];
 
   /// De knop 'Afbeeldingen beheren' onderaan de startkolom: opent de bibliotheek
