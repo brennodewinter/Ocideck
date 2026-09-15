@@ -388,6 +388,24 @@ void main() {
       },
     );
 
+    test(
+      'inline code in cursief: rStyle staat vóór i in w:rPr (OOXML-schema)',
+      () {
+        // OOXML vereist dat w:rStyle het eerste kind is van w:rPr. Wanneer
+        // inline code in cursief staat (`_`code`_`), hoopt de _rPr-stack
+        // <w:i/> gevolgd door <w:rStyle> op — de verkeerde volgorde.
+        // Microsoft Office weigert een .docx met schema-overtredingen.
+        final conv = markdownToDocxBody(r'_{`code`}_');
+        final body = conv.body.replaceAll('\n', '');
+        // De run met "code" moet rStyle vóór i hebben.
+        expect(
+          body,
+          contains('<w:rPr><w:rStyle w:val="SourceText"/><w:i/></w:rPr>'),
+        );
+        expect(body, isNot(contains('<w:rPr><w:i/><w:rStyle')));
+      },
+    );
+
     test('lege body → lege conversie', () {
       final conv = markdownToDocxBody('   ');
       expect(conv.body, isEmpty);
