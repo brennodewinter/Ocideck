@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -101,6 +101,7 @@ help:
 	@echo "  make build-macos     Build the macOS .app (macOS only)."
 	@echo "  make build-windows   Build the Windows app (Windows only)."
 	@echo "  make build-windows-installer  Wrap that build in an installer (Windows only)."
+	@echo "  make winget-manifest TAG=vX.Y.Z  Generate the community manifest from a published stable release."
 	@echo "  make build-linux     Build the Linux bundle (Linux only)."
 	@echo "  make build-all       Build web + this OS's native desktop target."
 	@echo "  make release TAG=vX.Y.Z  Orchestrate a release: tag-guard + Phase 1 (validate/build/sign); guides the irreversible steps."
@@ -1228,6 +1229,14 @@ build-windows-installer:
 	@echo "Output: dist/ocideck-windows-x64-setup-<version>.exe"
 	scripts/build_windows_installer.sh
 
+# Generate the three-file WinGet community manifest after a stable Forgejo
+# release exists. WinGet is an optional index; its review may lag and must never
+# block the canonical release. OUT defaults to dist/winget.
+winget-manifest:
+	@echo "== OciDeck package: WinGet manifest =="
+	@echo "Command: scripts/update_winget_manifest.sh $(TAG) $(OUT)"
+	scripts/update_winget_manifest.sh $(TAG) $(OUT)
+
 build-linux: sbom-verify
 	@echo "== OciDeck build: Linux bundle =="
 	@echo "Command: flutter build linux --release"
@@ -1397,23 +1406,25 @@ check-static: $(STATIC_GATES)
 #
 # LET OP — dit is een handmatige lijst, geen automatische. Komt er een nieuwe
 # registratie-/invariantpoort bij als test, voeg hem hier toe; een gemiste test is
-# opnieuw een stil gat. De vijf hieronder dekken: lib-bestand → SOURCE_MAP, docs
+# opnieuw een stil gat. De zeven hieronder dekken: lib-bestand → SOURCE_MAP, docs
 # → registratie, pubspec → SBOM, nieuwe `l10n.d`-string → vertaald, en de
-# Windows-installer die niet uit de pas mag lopen met wat hij verpakt (#1208).
-# Die laatste hoort hier omdat niets anders vóór de merge naar de installer kijkt:
-# de volle suite draait pas ná de merge op `linux-gate`.
+# Windows-installer en de WinGet-verwijzing die niet uit de pas mogen lopen met
+# wat zij verpakken. Die twee horen hier omdat niets anders vóór de merge naar
+# deze Windows-distributieketen kijkt: de volle suite draait pas ná de merge op
+# `linux-gate`.
 REGISTRATION_TESTS := \
 	test/source_map_coverage_test.dart \
 	test/docs_registration_test.dart \
 	test/sbom_test.dart \
 	test/l10n_untranslated_test.dart \
 	test/windows_packaging_test.dart \
+	test/winget_packaging_test.dart \
 	test/ociserve_api_drift_test.dart
 
 check-registrations:
 	@echo "== OciDeck registration invariants =="
 	@echo "Command: flutter test $(REGISTRATION_TESTS)"
-	@echo "Covers: new lib file in SOURCE_MAP, new docs registered, SBOM fresh vs pubspec, new l10n.d string translated, Windows installer in step with what it packages, OciServe routes match pinned OpenAPI spec."
+	@echo "Covers: new lib file in SOURCE_MAP, new docs registered, SBOM fresh vs pubspec, new l10n.d string translated, Windows packaging and WinGet manifests in step with releases, OciServe routes match pinned OpenAPI spec."
 	@echo "Failure means: something new landed without its registration — the class of drift that is a *test*, not a static gate."
 	flutter test $(REGISTRATION_TESTS) $(SUITE_REPORT) $(ON_SUITE_FAILURE)
 
