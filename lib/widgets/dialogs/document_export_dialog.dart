@@ -267,26 +267,29 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
           l10n.d('Welk formaat?'),
           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
         ),
-        const SizedBox(height: 6),
-        // Bewust een Wrap met keuzechips en geen SegmentedButton: vier keuzes
-        // passen daar niet meer naast elkaar in de 460 punten van deze dialoog,
-        // en al helemaal niet in een taal met langere woorden of bij 200%
-        // tekstgrootte. Een Wrap breekt dan gewoon af naar de volgende regel.
+        const SizedBox(height: 8),
+        // Een rooster van tegels, geen keuzechips: zeven formaten worden zo
+        // gelijkmatige kaarten met icoon en naam die netjes afbreken naar
+        // meerdere regels. De tegels hebben een vaste breedte en de label
+        // breekt erin af, dus een langere vertaling of 200% tekstgrootte maakt
+        // de tegel hoger in plaats van breder — geen vaste breedte die ergens
+        // knelt. `Wrap` centreert de tegels, zodat een onvolutte laatste regel
+        // (zeven is oneven) er niet uitzakt.
         Wrap(
+          alignment: WrapAlignment.center,
           spacing: 8,
-          runSpacing: 4,
+          runSpacing: 8,
           children: [
             for (final option in _formatOptions)
-              ChoiceChip(
-                label: Text(l10n.d(option.label)),
-                avatar: Icon(option.icon, size: 15),
+              _FormatTile(
+                label: l10n.d(option.label),
+                icon: option.icon,
                 selected: _format == option.format,
-                visualDensity: VisualDensity.compact,
-                onSelected: (_) => setState(() => _format = option.format),
+                onTap: () => setState(() => _format = option.format),
               ),
           ],
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 6),
         Text(switch (_format) {
           DocumentExportFormat.md => l10n.d(
             'Een geredigeerde kopie van de platte tekst — opent in elke Markdown-lezer.',
@@ -352,6 +355,85 @@ class _FormatOption {
   /// De Nederlandse brontekst; de dialoog haalt er de vertaling bij.
   final String label;
   final IconData icon;
+}
+
+/// Een formaat-tegel in het rooster: icoon boven, naam eronder, geselecteerd =
+/// accentrand en lichte accenttint.
+///
+/// Dezelfde accenttints als de categoriepillen in `add_slide_dialog_pills.dart`,
+/// zodat de keuzes voelen als hetzelfde oppervlak in plaats van import-Material
+/// chrome. `InkWell` maakt hem toetsenbord-toegankelijk (focus + Enter), en
+/// `Semantics` meldt de gekozen staat aan de schermlezer.
+///
+/// Vaste breedte: in een `scrollable` AlertDialog ligt de inhoud in een
+/// `IntrinsicWidth`, die een `LayoutBuilder` niet toelaat. De vaste breedte is
+/// geen probleem voor lange talen: de label breekt binnen de tegel af, de tegel
+/// wordt hoger in plaats van breder.
+class _FormatTile extends StatelessWidget {
+  static const double width = 124;
+
+  final String label;
+  final IconData icon;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _FormatTile({
+    required this.label,
+    required this.icon,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = AppTheme.accent;
+    return Semantics(
+      button: true,
+      selected: selected,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        hoverColor: accent.withValues(alpha: 0.06),
+        focusColor: accent.withValues(alpha: 0.14),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          width: width,
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+          decoration: BoxDecoration(
+            color: selected ? accent.withValues(alpha: 0.10) : AppTheme.slate50,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: selected
+                  ? accent.withValues(alpha: 0.45)
+                  : AppTheme.slate200,
+              width: selected ? 1.4 : 1,
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                size: 22,
+                color: selected ? AppTheme.accentFg : AppTheme.slate500,
+              ),
+              const SizedBox(height: 6),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  height: 1.2,
+                  fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                  color: selected ? AppTheme.accentFg : AppTheme.slate700,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 /// De formaten in de volgorde waarin ze worden aangeboden: eerst de platte
