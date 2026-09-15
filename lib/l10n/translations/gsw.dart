@@ -1634,6 +1634,10 @@ const _dutchSourceAddGsw = <String, String>{
   'paragrafen': 'Abschnitt',
   'tabellen': 'Tabälle',
   'afbeeldingen': 'Bilder',
+  'Document importeren…': 'Dokument importiere…',
+  'Document kiezen': 'Dokument wähle',
+  'Document geïmporteerd.': 'Dokument importiert.',
+  'Importeren uit Word of LibreOffice…': 'Us Word oder LibreOffice importiere…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'es iibettets Stilbild het me nöd chönne zrugghole',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

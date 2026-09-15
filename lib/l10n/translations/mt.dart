@@ -1649,6 +1649,10 @@ const _dutchSourceAddMt = <String, String>{
   'paragrafen': 'paragrafi',
   'tabellen': 'tabelli',
   'afbeeldingen': 'stampi',
+  'Document importeren…': 'Importa dokument…',
+  'Document kiezen': 'Agħżel dokument',
+  'Document geïmporteerd.': 'Dokument importat.',
+  'Importeren uit Word of LibreOffice…': 'Importa minn Word jew LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'immaġni tal-istil inkorporata ma setgħetx tiġi rrestawrata',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

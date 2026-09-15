@@ -250,7 +250,7 @@ class _DocEditorToolbar extends StatelessWidget {
               // enige route naar Instellingen in documentmodus, en meeschuiven
               // maakte hem onbereikbaar zodra er een knop bij kwam en de rij
               // breder werd dan het venster.
-              _moreMenu(l10n),
+              _moreMenu(context, l10n),
             ],
           ),
           // Opmaak-knoppenbalk alleen in bron-modus: in Visueel heeft
@@ -553,8 +553,10 @@ class _DocEditorToolbar extends StatelessWidget {
   }
 
   /// Het overloopmenu rechts: Instellingen (anders alleen via macOS-menubalk
-  /// bereikbaar in documentmodus) en conversie naar presentatie.
-  Widget _moreMenu(AppLocalizations l10n) {
+  /// bereikbaar in documentmodus), conversie naar presentatie, en de
+  /// document-import — die roept [importDocument] zelf aan met de context,
+  /// zodat er geen extra callback door de constructor hoeft.
+  Widget _moreMenu(BuildContext context, AppLocalizations l10n) {
     return PopupMenuButton<int>(
       tooltip: l10n.t('more'),
       position: PopupMenuPosition.under,
@@ -569,6 +571,8 @@ class _DocEditorToolbar extends StatelessWidget {
             onFootnotesAtEndChanged(!footnotesAtEnd);
           case 3:
             onEditFields();
+          case 4:
+            unawaited(importDocument(context));
         }
       },
       itemBuilder: (context) => [
@@ -629,6 +633,21 @@ class _DocEditorToolbar extends StatelessWidget {
               Expanded(
                 child: Text(
                   l10n.d('Converteer naar presentatie…'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        PopupMenuItem<int>(
+          value: 4,
+          child: Row(
+            children: [
+              const Icon(Icons.upload_file_outlined, size: 17),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  l10n.d('Importeren uit Word of LibreOffice…'),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

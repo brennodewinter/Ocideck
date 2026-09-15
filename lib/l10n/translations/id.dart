@@ -1631,6 +1631,10 @@ const _dutchSourceAddId = <String, String>{
   'paragrafen': 'paragraf',
   'tabellen': 'tabel',
   'afbeeldingen': 'gambar',
+  'Document importeren…': 'Impor dokumen…',
+  'Document kiezen': 'Pilih dokumen',
+  'Document geïmporteerd.': 'Dokumen diimpor.',
+  'Importeren uit Word of LibreOffice…': 'Impor dari Word atau LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'gambar gaya yang disematkan tidak dapat dipulihkan',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

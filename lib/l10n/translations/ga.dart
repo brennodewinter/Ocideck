@@ -1661,6 +1661,10 @@ const _dutchSourceAddGa = <String, String>{
   'paragrafen': 'alt',
   'tabellen': 'táblaí',
   'afbeeldingen': 'íomhánna',
+  'Document importeren…': 'Iompórtáil doiciméad…',
+  'Document kiezen': 'Roghnaigh doiciméad',
+  'Document geïmporteerd.': 'Doiciméad iompórtáilte.',
+  'Importeren uit Word of LibreOffice…': 'Iompórtáil ó Word nó LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'níorbh fhéidir íomhá stíle leabaithe a athchóiriú',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

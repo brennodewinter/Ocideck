@@ -670,6 +670,10 @@ const _dutchSourceAddPap = {
   'paragrafen': 'parágrafonan',
   'tabellen': 'tablanan',
   'afbeeldingen': 'imágennan',
+  'Document importeren…': 'Importá documento…',
+  'Document kiezen': 'Skohe un documento',
+  'Document geïmporteerd.': 'Documento importá.',
+  'Importeren uit Word of LibreOffice…': 'Importá for di Word of LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'no por a restourá un imagen di estilo inkluí',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

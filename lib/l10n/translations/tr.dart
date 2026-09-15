@@ -2542,6 +2542,11 @@ const _dutchSourceAddTr = <String, String>{
   'paragrafen': 'paragraflar',
   'tabellen': 'tablolar',
   'afbeeldingen': 'görüntüler',
+  'Document importeren…': 'Belge içe aktar…',
+  'Document kiezen': 'Belge seç',
+  'Document geïmporteerd.': 'Belge içe aktarıldı.',
+  'Importeren uit Word of LibreOffice…':
+      'Word veya LibreOffice\'den içe aktar…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'gömülü bir stil görseli geri yüklenemedi',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

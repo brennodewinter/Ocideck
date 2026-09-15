@@ -1630,6 +1630,11 @@ const _dutchSourceAddSv = <String, String>{
   'paragrafen': 'avsnitt',
   'tabellen': 'tabeller',
   'afbeeldingen': 'bilder',
+  'Document importeren…': 'Importera dokument…',
+  'Document kiezen': 'Välj dokument',
+  'Document geïmporteerd.': 'Dokument importerat.',
+  'Importeren uit Word of LibreOffice…':
+      'Importera från Word eller LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'en inbäddad stilbild kunde inte återställas',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
