@@ -1647,6 +1647,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'hoofdstukken': 'глави',
+  'paragrafen': 'абзаци',
+  'tabellen': 'таблици',
+  'afbeeldingen': 'изображения',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'вградено изображение на стила не можа да бъде възстановено',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

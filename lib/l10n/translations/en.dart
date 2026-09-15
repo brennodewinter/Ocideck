@@ -827,6 +827,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'hoofdstukken': 'chapters',
+  'paragrafen': 'sections',
+  'tabellen': 'tables',
+  'afbeeldingen': 'images',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'an embedded style image could not be restored',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

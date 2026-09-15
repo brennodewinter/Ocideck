@@ -1629,6 +1629,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'hoofdstukken': 'fejezetek',
+  'paragrafen': 'bekezdések',
+  'tabellen': 'táblázatok',
+  'afbeeldingen': 'képek',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'egy beágyazott stílusképet nem sikerült visszaállítani',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

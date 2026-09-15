@@ -1626,6 +1626,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'hoofdstukken': 'kapitel',
+  'paragrafen': 'avsnitt',
+  'tabellen': 'tabeller',
+  'afbeeldingen': 'bilder',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'en inbäddad stilbild kunde inte återställas',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

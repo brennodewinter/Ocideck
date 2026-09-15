@@ -667,6 +667,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'hoofdstukken': 'Kapitel',
+  'paragrafen': 'Abschnitte',
+  'tabellen': 'Tabellen',
+  'afbeeldingen': 'Bilder',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'ein eingebettetes Stilbild konnte nicht wiederhergestellt werden',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

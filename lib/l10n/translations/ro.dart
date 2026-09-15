@@ -1643,6 +1643,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'hoofdstukken': 'capitole',
+  'paragrafen': 'paragrafe',
+  'tabellen': 'tabele',
+  'afbeeldingen': 'imagini',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'o imagine de stil încorporată nu a putut fi restaurată',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

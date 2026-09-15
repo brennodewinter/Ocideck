@@ -1633,6 +1633,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'hoofdstukken': 'kapitoly',
+  'paragrafen': 'odseky',
+  'tabellen': 'tabuľky',
+  'afbeeldingen': 'obrázky',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'vložený obrázok štýlu sa nepodarilo obnoviť',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

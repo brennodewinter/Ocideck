@@ -1639,6 +1639,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'hoofdstukken': 'rozdziały',
+  'paragrafen': 'paragrafy',
+  'tabellen': 'tabele',
+  'afbeeldingen': 'obrazy',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'nie udało się przywrócić osadzonego obrazu stylu',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

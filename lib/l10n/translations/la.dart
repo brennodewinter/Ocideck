@@ -1642,6 +1642,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'hoofdstukken': 'capitula',
+  'paragrafen': 'paragraphi',
+  'tabellen': 'tabulae',
+  'afbeeldingen': 'imagines',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'imago stili inclusa restitui non potuit',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

@@ -1604,6 +1604,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'hoofdstukken': 'chapters',
+  'paragrafen': 'sections',
+  'tabellen': 'tables',
+  'afbeeldingen': 'images',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'Segh nagh chellu\'bogh choqlu\'laHbe\'',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

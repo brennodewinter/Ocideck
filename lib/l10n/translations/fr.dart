@@ -667,6 +667,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'hoofdstukken': 'chapitres',
+  'paragrafen': 'paragraphes',
+  'tabellen': 'tableaux',
+  'afbeeldingen': 'images',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'une image de style intégrée n’a pas pu être restaurée',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

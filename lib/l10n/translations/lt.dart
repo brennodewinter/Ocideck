@@ -1634,6 +1634,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'hoofdstukken': 'skyriai',
+  'paragrafen': 'pastraipos',
+  'tabellen': 'lentelės',
+  'afbeeldingen': 'vaizdai',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'nepavyko atkurti įterpto stiliaus vaizdo',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

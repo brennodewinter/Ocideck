@@ -1627,6 +1627,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'hoofdstukken': 'bab',
+  'paragrafen': 'paragraf',
+  'tabellen': 'tabel',
+  'afbeeldingen': 'gambar',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'gambar gaya yang disematkan tidak dapat dipulihkan',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

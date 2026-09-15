@@ -1631,6 +1631,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'hoofdstukken': 'poglavlja',
+  'paragrafen': 'odlomci',
+  'tabellen': 'tablice',
+  'afbeeldingen': 'slike',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'ugrađena slika stila nije se mogla vratiti',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

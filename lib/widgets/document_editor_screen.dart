@@ -60,6 +60,7 @@ import '../utils/markdown_caret_map.dart';
 import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
+import '../utils/document_stats.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
 import '../utils/markdown_visual_compatibility.dart'

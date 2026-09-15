@@ -1625,6 +1625,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'hoofdstukken': 'nodaļas',
+  'paragrafen': 'rindkopas',
+  'tabellen': 'tabulas',
+  'afbeeldingen': 'attēli',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'iegultu stila attēlu neizdevās atjaunot',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
