@@ -709,12 +709,13 @@ jobs:
       # De losse .deb blijft een release-asset; daarnaast publiceren we exact
       # dezelfde bytes naar Forgejo's eigen, ondertekende Debian-registry zodat
       # installaties via apt ook gewone updates krijgen. Een apart token houdt
-      # de bevoegdheid beperkt tot packages; een ontbrekend token of een
+      # de bevoegdheid beperkt tot packages; het bestaande CI_IMAGE_TOKEN heeft
+      # precies write:package. Een ontbrekend token of een
       # conflicterende versie maakt de release rood in plaats van stil een
       # verouderde pakketbron achter te laten.
       - name: Debian-pakketbron bijwerken
         env:
-          PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+          PACKAGE_TOKEN: ${{ secrets.CI_IMAGE_TOKEN }}
           FORGEJO_SERVER_URL: ${{ github.server_url }}
         run: |
           VERSIE="${GITHUB_REF_NAME#v}"

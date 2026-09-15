@@ -47,9 +47,9 @@ After the release assets have been published,
 `scripts/publish_debian_package.sh` uploads that same `.deb` to
 `https://pawprint.vigilis.online/api/packages/LibreKAT/debian`, distribution
 `stable`, component `main`. Forgejo generates and signs the apt metadata with its
-instance repository key. The release workflow requires `PACKAGE_TOKEN`, a
-repository or organisation Actions secret containing a Forgejo token with only
-the `write:package` scope.
+instance repository key. The release workflow maps the existing repository
+Actions secret `CI_IMAGE_TOKEN` to `PACKAGE_TOKEN` for the publisher. That
+Forgejo token has only the `write:package` scope.
 
 Users add the source with the public key returned by
 `…/debian/repository.key`; the website carries the copyable commands. The direct

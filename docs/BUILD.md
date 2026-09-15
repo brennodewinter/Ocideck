@@ -979,10 +979,11 @@ feature-flag) are in
   the generated repository metadata with its public `repository.key`. A retry
   is accepted only when the existing package has the same sha256; the same
   version with different bytes fails closed.
-- **One least-privilege secret.** Set the repository or organisation Actions
-  secret `PACKAGE_TOKEN` to a Forgejo token with only `write:package`. A missing
-  or rejected token fails the release instead of leaving the apt source silently
-  behind. Never reuse a broad personal token for this.
+- **One least-privilege secret.** The release reuses the existing repository
+  Actions secret `CI_IMAGE_TOKEN`: its Forgejo token has only `write:package`
+  and already publishes the project's CI images. A missing or rejected token
+  fails the release instead of leaving the apt source silently behind. Never
+  replace it with a broad personal token.
 - **Not offline-testable.** The packages only build on a Linux tag;
   `test/linux_packaging_test.dart` pins the wiring, but validate the real packages
   with a `-rc1` tag (below) before a real release.

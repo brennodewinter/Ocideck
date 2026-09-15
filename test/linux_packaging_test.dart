@@ -96,9 +96,9 @@ void main() {
 
     test('the .deb is also published to the signed Forgejo registry', () {
       expect(
-        releaseYaml.contains('PACKAGE_TOKEN: \${{ secrets.PACKAGE_TOKEN }}'),
+        releaseYaml.contains('PACKAGE_TOKEN: \${{ secrets.CI_IMAGE_TOKEN }}'),
         isTrue,
-        reason: 'Package publication must use its own least-privilege secret.',
+        reason: 'Package publication must reuse the package-only CI secret.',
       );
       expect(
         releaseYaml.contains('scripts/publish_debian_package.sh'),
