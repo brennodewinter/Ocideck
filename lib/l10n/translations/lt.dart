@@ -1634,6 +1634,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'hoofdstukken': 'skyriai',
+  'paragrafen': 'pastraipos',
+  'tabellen': 'lentelės',
+  'afbeeldingen': 'vaizdai',
+  'Document importeren…': 'Importuoti dokumentą…',
+  'Document kiezen': 'Pasirinkti dokumentą',
+  'Document geïmporteerd.': 'Dokumentas importuotas.',
+  'Importeren uit Word of LibreOffice…':
+      'Importuoti iš „Word“ arba „LibreOffice“…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'nepavyko atkurti įterpto stiliaus vaizdo',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

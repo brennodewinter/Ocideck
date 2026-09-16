@@ -1642,6 +1642,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'hoofdstukken': 'capitula',
+  'paragrafen': 'paragraphi',
+  'tabellen': 'tabulae',
+  'afbeeldingen': 'imagines',
+  'Document importeren…': 'Documentum importare…',
+  'Document kiezen': 'Documentum elige',
+  'Document geïmporteerd.': 'Documentum importatum est.',
+  'Importeren uit Word of LibreOffice…': 'Ex Word vel LibreOffice importare…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'imago stili inclusa restitui non potuit',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

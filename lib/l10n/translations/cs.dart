@@ -1628,6 +1628,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'hoofdstukken': 'kapitoly',
+  'paragrafen': 'odstavce',
+  'tabellen': 'tabulky',
+  'afbeeldingen': 'obrázky',
+  'Document importeren…': 'Importovat dokument…',
+  'Document kiezen': 'Vyberte dokument',
+  'Document geïmporteerd.': 'Dokument importován.',
+  'Importeren uit Word of LibreOffice…': 'Importovat z Wordu nebo LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'vložený obrázek stylu nebylo možné obnovit',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

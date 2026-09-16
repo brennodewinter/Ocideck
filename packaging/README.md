@@ -2,8 +2,8 @@
 
 Install formats for OciDeck: the Linux packages (Phase 1 of the broad-distro
 route, [issue #1227](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/1227),
-design in [`../docs/design/LINUX_PACKAGING.md`](../docs/design/LINUX_PACKAGING.md))
-and the Windows installer
+design in [`../docs/design/LINUX_PACKAGING.md`](../docs/design/LINUX_PACKAGING.md)),
+the Windows installer and its optional WinGet catalog manifest
 ([issue #1208](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues/1208)).
 
 Every format here wraps the **same** bundle `flutter build` produces and the
@@ -19,6 +19,7 @@ capability feature-flag first; see the design doc.
 | Path | What it is |
 | --- | --- |
 | `windows/ocideck.iss` | Inno Setup 6.3+ script for the Windows installer: Start menu shortcut, the file associations from `../windows/file-associations.reg`, and an uninstall entry. Offline by design — no update check, no network. |
+| `winget/*.yaml.tmpl` | Three-file manifest templates for `LibreKAT.OciDeck` in the WinGet Community Repository. They point to the versioned installer on the canonical forge; WinGet stores no OciDeck binary. |
 | `linux/com.dewinter.ocideck.desktop` | Desktop entry, shared by the .deb, .rpm and AppImage. Keyed on the application id `com.dewinter.ocideck` — the same id the GTK runner sets as its default icon name (`linux/runner/my_application.cc`). |
 | `linux/AppRun` | AppImage entrypoint: execs `ocideck` from the AppDir root. |
 | `aur/PKGBUILD` | AUR `ocideck-bin`: installs the release tarball on Arch/Manjaro. |
@@ -127,6 +128,35 @@ runner, so that job calls Flutter and this script directly. Authenticode
 signing is an optional step in that script, off by default and loud about it; see
 [Building the Windows installer](../docs/BUILD.md#building-the-windows-installer)
 for the environment variables and why no key file or password is accepted.
+
+## WinGet
+
+WinGet is an optional catalog entry over that same installer, not a new build
+or an update check inside OciDeck. The direct Forgejo download stays canonical.
+After a stable release is final and its `SHA256SUMS` is published, generate the
+three files in Microsoft's required repository layout with:
+
+```bash
+make winget-manifest TAG=v<version>
+```
+
+The generator reads the installer hash from the published `SHA256SUMS` and
+points at the version-specific Forgejo asset. It skips prereleases and fails if
+the expected installer is absent. On Windows, validate and install-test the
+result before submitting it to
+[`microsoft/winget-pkgs`](https://github.com/microsoft/winget-pkgs):
+
+```powershell
+winget validate --manifest dist/winget/manifests/l/LibreKAT/OciDeck/<version>
+winget settings --enable LocalManifestFiles
+winget install --manifest dist/winget/manifests/l/LibreKAT/OciDeck/<version>
+```
+
+The community-repository review is deliberately downstream of the release: a
+Microsoft outage or rejection may delay `winget upgrade`, but cannot withhold
+the installer from users. The package remains machine-wide in silent mode and
+therefore requests elevation. OciDeck stays network-silent; only the user-run
+WinGet client checks its configured catalog.
 
 ## Testing
 

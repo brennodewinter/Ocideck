@@ -1629,6 +1629,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'hoofdstukken': 'fejezetek',
+  'paragrafen': 'bekezdések',
+  'tabellen': 'táblázatok',
+  'afbeeldingen': 'képek',
+  'Document importeren…': 'Dokumentum importálása…',
+  'Document kiezen': 'Dokumentum kiválasztása',
+  'Document geïmporteerd.': 'Dokumentum importálva.',
+  'Importeren uit Word of LibreOffice…':
+      'Importálás Wordből vagy LibreOffice-ból…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'egy beágyazott stílusképet nem sikerült visszaállítani',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

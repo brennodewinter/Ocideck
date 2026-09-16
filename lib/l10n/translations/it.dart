@@ -664,6 +664,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'hoofdstukken': 'capitoli',
+  'paragrafen': 'paragrafi',
+  'tabellen': 'tabelle',
+  'afbeeldingen': 'immagini',
+  'Document importeren…': 'Importa documento…',
+  'Document kiezen': 'Scegli documento',
+  'Document geïmporteerd.': 'Documento importato.',
+  'Importeren uit Word of LibreOffice…': 'Importa da Word o LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'non è stato possibile ripristinare un’immagine di stile incorporata',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

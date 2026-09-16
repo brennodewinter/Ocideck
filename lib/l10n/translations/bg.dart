@@ -1647,6 +1647,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'hoofdstukken': 'глави',
+  'paragrafen': 'абзаци',
+  'tabellen': 'таблици',
+  'afbeeldingen': 'изображения',
+  'Document importeren…': 'Импортиране на документ…',
+  'Document kiezen': 'Избор на документ',
+  'Document geïmporteerd.': 'Документът е импортиран.',
+  'Importeren uit Word of LibreOffice…': 'Импортиране от Word или LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'вградено изображение на стила не можа да бъде възстановено',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

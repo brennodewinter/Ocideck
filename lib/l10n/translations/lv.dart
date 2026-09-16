@@ -1625,6 +1625,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'hoofdstukken': 'nodaļas',
+  'paragrafen': 'rindkopas',
+  'tabellen': 'tabulas',
+  'afbeeldingen': 'attēli',
+  'Document importeren…': 'Importēt dokumentu…',
+  'Document kiezen': 'Izvēlēties dokumentu',
+  'Document geïmporteerd.': 'Dokuments importēts.',
+  'Importeren uit Word of LibreOffice…': 'Importēt no Word vai LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'iegultu stila attēlu neizdevās atjaunot',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

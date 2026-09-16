@@ -1631,6 +1631,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'hoofdstukken': 'poglavlja',
+  'paragrafen': 'odlomci',
+  'tabellen': 'tablice',
+  'afbeeldingen': 'slike',
+  'Document importeren…': 'Uvezi dokument…',
+  'Document kiezen': 'Odaberi dokument',
+  'Document geïmporteerd.': 'Dokument uvezen.',
+  'Importeren uit Word of LibreOffice…': 'Uvezi iz Worda ili LibreOfficea…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'ugrađena slika stila nije se mogla vratiti',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

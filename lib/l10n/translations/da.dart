@@ -1627,6 +1627,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'hoofdstukken': 'kapitler',
+  'paragrafen': 'afsnit',
+  'tabellen': 'tabeller',
+  'afbeeldingen': 'billeder',
+  'Document importeren…': 'Importér dokument…',
+  'Document kiezen': 'Vælg dokument',
+  'Document geïmporteerd.': 'Dokument importeret.',
+  'Importeren uit Word of LibreOffice…': 'Importér fra Word eller LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'et indlejret stilbillede kunne ikke gendannes',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

@@ -945,6 +945,29 @@ tracked separately (#1227).
   via `brew` but Gatekeeper still blocks it on first launch — the cask eases
   distribution, not signing.
 
+### WinGet (Windows)
+
+The WinGet Community Repository is an optional index over the existing Inno
+Setup installer. It does not host a different build: the manifest points to the
+versioned asset on the canonical Forgejo release and pins its SHA-256 from that
+release's own `SHA256SUMS`. Direct download remains available if Microsoft is
+unreachable or its review is delayed.
+
+Only generate a manifest after the stable release is final:
+
+```bash
+make winget-manifest TAG=v<version>
+```
+
+This writes the three-file manifest below
+`dist/winget/manifests/l/LibreKAT/OciDeck/<version>/`. Prereleases are skipped.
+On Windows, run `winget validate --manifest <directory>` and test install,
+upgrade from the previous version, file associations and uninstall before
+submitting that directory to `microsoft/winget-pkgs`. WinGet knows the standard
+Inno silent switches; the manifest declares the current x64 machine-wide scope
+and elevation explicitly. Microsoft catalog acceptance must never gate or roll
+back the already-published Forgejo release.
+
 ### Linux packaging
 
 Homebrew Cask is macOS-only, so Linux has its own route (#1227). Phase 1 hangs

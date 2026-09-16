@@ -667,6 +667,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'hoofdstukken': 'haadstikken',
+  'paragrafen': 'paragrafen',
+  'tabellen': 'tabellen',
+  'afbeeldingen': 'ôfbyldingen',
+  'Document importeren…': 'Dokumint ymportearje…',
+  'Document kiezen': 'Dokumint kieze',
+  'Document geïmporteerd.': 'Dokumint ymportearre.',
+  'Importeren uit Word of LibreOffice…': 'Ymportearje út Word of LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'in ynsletten stylôfbylding koe net weromset wurde',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

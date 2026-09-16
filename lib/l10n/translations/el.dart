@@ -1652,6 +1652,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'hoofdstukken': 'κεφάλαια',
+  'paragrafen': 'παράγραφοι',
+  'tabellen': 'πίνακες',
+  'afbeeldingen': 'εικόνες',
+  'Document importeren…': 'Εισαγωγή εγγράφου…',
+  'Document kiezen': 'Επιλογή εγγράφου',
+  'Document geïmporteerd.': 'Το έγγραφο εισήχθη.',
+  'Importeren uit Word of LibreOffice…': 'Εισαγωγή από Word ή LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'δεν ήταν δυνατή η επαναφορά μιας ενσωματωμένης εικόνας στυλ',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

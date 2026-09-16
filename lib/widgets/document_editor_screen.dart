@@ -60,6 +60,7 @@ import '../utils/markdown_caret_map.dart';
 import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
+import '../utils/document_stats.dart';
 import '../platform/clipboard_html.dart';
 import '../utils/clipboard_markdown.dart';
 import '../utils/markdown_visual_compatibility.dart'
@@ -85,6 +86,7 @@ import 'reader/table_edit_controller.dart';
 import 'reader/paged_document_view.dart';
 import 'reader/writing_page_breaks.dart';
 import 'shell/document_save_actions.dart';
+import 'shell/document_import_action.dart';
 
 part 'parts/document_editor_toolbar.dart';
 part 'parts/document_fields_dialog.dart';

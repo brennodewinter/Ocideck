@@ -1633,6 +1633,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'hoofdstukken': 'kapitoly',
+  'paragrafen': 'odseky',
+  'tabellen': 'tabuľky',
+  'afbeeldingen': 'obrázky',
+  'Document importeren…': 'Importovať dokument…',
+  'Document kiezen': 'Vyberte dokument',
+  'Document geïmporteerd.': 'Dokument importovaný.',
+  'Importeren uit Word of LibreOffice…':
+      'Importovať z Wordu alebo LibreOffice…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'vložený obrázok štýlu sa nepodarilo obnoviť',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

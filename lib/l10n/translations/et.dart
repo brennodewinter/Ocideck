@@ -1620,6 +1620,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'hoofdstukken': 'peatükid',
+  'paragrafen': 'lõigud',
+  'tabellen': 'tabelid',
+  'afbeeldingen': 'pildid',
+  'Document importeren…': 'Impordi dokument…',
+  'Document kiezen': 'Vali dokument',
+  'Document geïmporteerd.': 'Dokument imporditud.',
+  'Importeren uit Word of LibreOffice…': 'Impordi Wordist või LibreOffice\'st…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'manustatud stiilipilti ei õnnestunud taastada',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':

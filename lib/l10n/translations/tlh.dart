@@ -1604,6 +1604,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'hoofdstukken': 'chapters',
+  'paragrafen': 'sections',
+  'tabellen': 'tables',
+  'afbeeldingen': 'images',
+  'Document importeren…': 'Degh lop…',
+  'Document kiezen': 'Degh wIv',
+  'Document geïmporteerd.': 'Degh loppu\'.',
+  'Importeren uit Word of LibreOffice…': 'Word pagh LibreOfficevo\' lop…',
   'een ingesloten stijlafbeelding kon niet worden teruggezet':
       'Segh nagh chellu\'bogh choqlu\'laHbe\'',
   'Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen':
