@@ -575,13 +575,6 @@ const Map<String, int> classSizeBaseline = {
   // van 1198 naar 1081.
   // Verlaagd van 1081 naar 1080: de klasse meet 1079.
   'lib/widgets/editors/chart_editor.dart#_ChartEditorState': 1080,
-  // +10 (#977): each thumbnail reads collab presence and wraps in the presence
-  // overlay. The overlay's real work (filter + Stack + dots) lives in the
-  // top-level `slideWithPresence` in slide_presence_dots.dart; only the per-item
-  // read and the wrap call remain in the state class.
-  // +1 (#1164): splitRunPosition-doorvoer naar de thumbnail voor de (2/3)-teller.
-  'lib/widgets/panels/slide_list_panel.dart#_SlideListPanelState':
-      1028, // +3 (#1999): elearningRevealProvider doorgeven aan AddSlideDialog.
   // +9 (#1854): null-image guard (beeld toont altijd) + for-loop die alle
   // callouts doorloopt in _buildImageStack. Statische markeringen staan in
   // callout_marker_helpers.dart; de klasse houdt de loop en de guard.

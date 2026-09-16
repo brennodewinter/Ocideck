@@ -6,6 +6,7 @@ import 'package:flutter/services.dart' show MethodChannel;
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
+import '../models/marp_style.dart';
 import '../models/slide.dart';
 import '../platform/platform_features.dart';
 import '../utils/asset_destination.dart';
@@ -536,7 +537,11 @@ class ImageService {
     // paden; de hele images/-map bij élke tekstwijziging opnieuw hashen maakte
     // Ctrl/Cmd+S lineair in alle afbeeldingsbytes zonder enig resultaat.
     final needsContentIndex = slides.any(
-      (slide) => slideImagePaths(slide).any(WebAssetStore.isMemPath),
+      (slide) =>
+          slideImagePaths(slide).any(WebAssetStore.isMemPath) ||
+          WebAssetStore.isMemPath(
+            marpBackgroundAssetPath(slide.marpStyle.backgroundImage),
+          ),
     );
     final existingByHash = needsContentIndex
         ? await _indexExistingImages(imagesDir)
@@ -545,7 +550,10 @@ class ImageService {
     final updated = <Slide>[];
     for (final slide in slides) {
       final copied = <String, String>{};
-      for (final path in slideImagePaths(slide).toSet()) {
+      // De per-dia Marp-achtergrond dekt [slideImagePaths] niet, maar draagt
+      // evengoed een lokaal bestand dat binnen de projectmap moet landen.
+      final bg = marpBackgroundAssetPath(slide.marpStyle.backgroundImage);
+      for (final path in {...slideImagePaths(slide), if (bg.isNotEmpty) bg}) {
         final dest = await _copyImageToProject(
           path,
           imagesDir,
@@ -553,9 +561,39 @@ class ImageService {
         );
         if (dest != null) copied[path] = dest;
       }
-      updated.add(rewriteSlideImagePaths(slide, (path) => copied[path]));
+      var next = rewriteSlideImagePaths(slide, (path) => copied[path]);
+      if (bg.isNotEmpty) {
+        final newBg = rewriteMarpBackgroundAssetPath(
+          next.marpStyle.backgroundImage,
+          (path) => copied[path],
+        );
+        if (newBg != next.marpStyle.backgroundImage) {
+          next = next.copyWith(
+            marpStyle: next.marpStyle.copyWith(backgroundImage: newBg),
+          );
+        }
+      }
+      updated.add(next);
     }
     return updated;
+  }
+
+  /// Neem de assets over die slides uit een ándere projectmap aanhalen: elke
+  /// absolute of `mem:`-verwijzing wordt een bestand onder images/ resp. media/
+  /// in [projectPath] en de dia wijst daarna projectrelatief.
+  ///
+  /// De plakkant van [absolutizeSlideAssetPaths] — kopiëren maakt de paden
+  /// absoluut tegen de bronmap, adopteren maakt ze relatief in de doelmap
+  /// (#2104). Zonder doelmap (web, of een deck dat nog niet op schijf staat)
+  /// valt er niets te kopiëren; absolute paden haalt de eerste opslag alsnog
+  /// binnen via [copyImagesToProject].
+  Future<List<Slide>> adoptSlideAssets(
+    List<Slide> slides,
+    String? projectPath,
+  ) async {
+    if (kIsWeb || projectPath == null || projectPath.isEmpty) return slides;
+    final withImages = await copyImagesToProject(slides, projectPath);
+    return copyMediaToProject(withImages, projectPath);
   }
 
   /// Scan [imagesDir] en geef een kaart van SHA-256 → `images/<naam>` terug.

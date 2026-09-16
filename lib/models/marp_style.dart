@@ -207,13 +207,32 @@ bool _listEquals(List<String> a, List<String> b) {
   return true;
 }
 
+final _backgroundUrl = RegExp(
+  r'''^url\(\s*(["']?)(.*?)\1\s*\)$''',
+  caseSensitive: false,
+);
+
 /// Extracts a single `url(...)` asset from a Marp background directive.
 /// Gradients and other CSS remain preserved in Markdown but are not treated as
 /// local files by Flutter's image resolver.
 String marpBackgroundAssetPath(String value) {
-  final match = RegExp(
-    r'''^url\(\s*(["']?)(.*?)\1\s*\)$''',
-    caseSensitive: false,
-  ).firstMatch(value.trim());
+  final match = _backgroundUrl.firstMatch(value.trim());
   return match?.group(2)?.trim() ?? '';
+}
+
+/// De tegenhanger van [marpBackgroundAssetPath]: dezelfde `url(...)`-vorm, met
+/// het pad erin vervangen door wat [map] ervan maakt. `null` — of een waarde
+/// die geen enkele url() draagt, zoals een gradient — laat [value] staan.
+/// Alleen het pad verandert; de aanhalingstekens om het pad blijven staan.
+String rewriteMarpBackgroundAssetPath(
+  String value,
+  String? Function(String path) map,
+) {
+  final match = _backgroundUrl.firstMatch(value.trim());
+  if (match == null) return value;
+  final path = match.group(2)!.trim();
+  final replacement = path.isEmpty ? null : map(path);
+  if (replacement == null || replacement == path) return value;
+  final quote = match.group(1)!;
+  return 'url($quote$replacement$quote)';
 }
