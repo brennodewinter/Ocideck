@@ -972,9 +972,11 @@ back the already-published Forgejo release.
 
 Homebrew Cask is macOS-only, so Linux has its own route (#1227). Phase 1 hangs
 three portable formats — AppImage, `.deb` and `.rpm` — off every release, next
-to the tarball — all wrapping the
-same bundle, none a store or a sandbox. The design and the later phases (own
-apt/rpm repo; Flatpak/Snap behind the capability feature-flag) are in
+to the tarball — all wrapping the same bundle, none a store or a sandbox. Phase
+2 also publishes the `.deb` to the signed Debian registry of the same Forgejo,
+so an apt installation receives later versions through `apt upgrade`. The
+design and the later phases (an rpm repo; Flatpak/Snap behind the capability
+feature-flag) are in
 [`design/LINUX_PACKAGING.md`](design/LINUX_PACKAGING.md); the layout is in
 [`../packaging/README.md`](../packaging/README.md).
 
@@ -993,6 +995,18 @@ apt/rpm repo; Flatpak/Snap behind the capability feature-flag) are in
   only ships a rolling `continuous` tag — there is no version to monitor, so the
   hash is the pin. A drift fails the build loudly; to re-pin, fetch the new digest
   (see [`../packaging/README.md`](../packaging/README.md)) and update the job.
+- **APT publication.** After the release assets exist,
+  `scripts/publish_debian_package.sh` uploads that exact `.deb` to distribution
+  `stable`, component `main` at
+  `https://pawprint.vigilis.online/api/packages/LibreKAT/debian`. Forgejo signs
+  the generated repository metadata with its public `repository.key`. A retry
+  is accepted only when the existing package has the same sha256; the same
+  version with different bytes fails closed.
+- **One least-privilege secret.** The release reuses the existing repository
+  Actions secret `CI_IMAGE_TOKEN`: its Forgejo token has only `write:package`
+  and already publishes the project's CI images. A missing or rejected token
+  fails the release instead of leaving the apt source silently behind. Never
+  replace it with a broad personal token.
 - **Not offline-testable.** The packages only build on a Linux tag;
   `test/linux_packaging_test.dart` pins the wiring, but validate the real packages
   with a `-rc1` tag (below) before a real release.

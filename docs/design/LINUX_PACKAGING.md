@@ -1,12 +1,14 @@
 # Linux-packaging — plan en afweging
 
-> **Status:** fase 1 gebouwd · opgesteld 2026-08-04 · onderdeel van #1227
+> **Status:** fase 1 gebouwd · fase 2 (APT) gebouwd · opgesteld 2026-08-04 · onderdeel van #1227
 >
 > Dit was een ontwerp met een aanbeveling; **fase 1 (AppImage + `.deb` + `.rpm` +
 > AUR) is inmiddels geïmplementeerd** — zie `scripts/package_linux.sh`,
 > `packaging/`, de `linux`-job in `.forgejo/workflows/release.yml` en
-> `docs/BUILD.md` § "Linux packaging". Fase 2 (eigen apt/rpm-repo) en fase 3
-> (Flatpak/Snap achter de capaciteits-feature-flag) staan nog open. Het stuk
+> `docs/BUILD.md` § "Linux packaging". Fase 2 publiceert de `.deb` inmiddels ook
+> naar de ondertekende Debian-registry van de eigen Forgejo, zodat `apt upgrade`
+> meeloopt. Een eigen rpm-repo en fase 3 (Flatpak/Snap achter de
+> capaciteits-feature-flag) staan nog open. Het stuk
 > hieronder legt de opties naast elkaar, weegt ze tegen de kernwaarden, en stelt
 > de fasering voor. De waardenlijn volgt
 > [`../../assurance/app-store-distributie-positie.md`](../../assurance/app-store-distributie-positie.md):
