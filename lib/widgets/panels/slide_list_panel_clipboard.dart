@@ -1,7 +1,97 @@
 // Part of the slide_list_panel library — see ../slide_list_panel.dart.
-// Split out for navigability (kopieer-slide-als-afbeelding); alle imports leven in
-// het hoofdbestand. Verhuisd zonder gedragswijziging.
+// Split out for navigability (kopieer-slide-als-afbeelding, kopieer-naar-
+// ander-deck); alle imports leven in het hoofdbestand.
 part of 'slide_list_panel.dart';
+
+/// Kopieer [slides] naar een ander open deck (keuze via dialoog).
+///
+/// De dia's kunnen uit een projectmap komen die niet die van het doel is: hun
+/// paden worden absoluut gemaakt tegen [sourceProjectPath] en de bestanden
+/// gaan de doelmap in (#2104). Top-level, niet als `extension … on`
+/// _SlideListPanelState: zo'n extension telt mee voor het klasse-plafond,
+/// en deze route drukt daadwerkelijk gedrag uit de klasse.
+Future<void> _copySlidesToOtherDeck(
+  WidgetRef ref,
+  BuildContext context,
+  List<Slide> slides,
+  String? sourceProjectPath,
+) async {
+  if (slides.isEmpty) return;
+
+  final tabs = ref.read(tabsProvider);
+  final currentId = tabs.current?.id;
+  final targets = tabs.tabs
+      .where((t) => t.id != currentId && t.isOpen)
+      .toList();
+
+  final messenger = ScaffoldMessenger.of(context);
+  if (targets.isEmpty) {
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d('Geen ander deck open. Open eerst een ander tabblad.'),
+        ),
+      ),
+    );
+    return;
+  }
+
+  final target = await showDialog<TabInfo>(
+    context: context,
+    builder: (ctx) {
+      final l10n = ctx.l10n;
+      return SimpleDialog(
+        title: Text(
+          slides.length == 1
+              ? l10n.d('1 slide kopiëren naar…')
+              : '${slides.length} ${l10n.d('slides kopiëren naar…')}',
+        ),
+        children: [
+          for (final t in targets)
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, t),
+              child: Row(
+                children: [
+                  const Icon(Icons.slideshow_outlined, size: 16),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(t.label)),
+                ],
+              ),
+            ),
+        ],
+      );
+    },
+  );
+  if (target == null || !context.mounted) return;
+
+  // Een documenttabblad heeft geen deck; die kan geen slides opnemen.
+  final targetDeck = target.deckNotifierOrNull;
+  if (targetDeck == null) return;
+
+  final adopted = await ref.read(imageServiceProvider).adoptSlideAssets([
+    for (final s in slides) absolutizeSlideAssetPaths(s, sourceProjectPath),
+  ], targetDeck.currentState.deck?.projectPath);
+  if (!context.mounted) return;
+
+  final at = targetDeck.insertSlides(adopted);
+  if (at >= 0) target.editorNotifier.select(at);
+
+  final targetIndex = tabs.tabs.indexWhere((t) => t.id == target.id);
+  if (targetIndex >= 0) {
+    ref.read(tabsProvider.notifier).selectTab(targetIndex);
+  }
+
+  if (!context.mounted) return;
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(
+        at >= 0
+            ? '${slides.length} ${context.l10n.d('slide(s) gekopieerd naar')} “${target.label}”.'
+            : context.l10n.d('Kopiëren mislukt.'),
+      ),
+    ),
+  );
+}
 
 /// Rasteren-naar-klembord.
 ///

@@ -10,6 +10,7 @@ import '../../models/quality_disposition.dart';
 import '../../models/slide_quality.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../services/slide_image_refs.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
@@ -675,7 +676,11 @@ class SlideThumbnail extends ConsumerWidget {
               ],
               onSelected: (v) {
                 if (v == 'copy') {
-                  ref.read(slideClipboardProvider.notifier).state = slide;
+                  // Relatieve asset-paden kloppen alleen binnen de projectmap
+                  // van dit deck; absoluut maken zodat plakken in een deck uit
+                  // een andere map de bestanden kan meenemen (#2104).
+                  ref.read(slideClipboardProvider.notifier).state =
+                      absolutizeSlideAssetPaths(slide, projectPath);
                 }
                 if (v == 'copy_image') onCopyImage();
                 if (v == 'duplicate') onDuplicate();

@@ -14,6 +14,9 @@ library;
 
 import 'dart:convert';
 
+import 'package:path/path.dart' as p;
+
+import '../models/marp_style.dart';
 import '../models/slide.dart';
 import '../utils/json_depth_guard.dart';
 
@@ -264,5 +267,48 @@ Slide rewriteSlideImagePaths(Slide slide, String? Function(String path) map) {
     imagePath: newImage,
     imagePath2: newImage2,
     customMarkdown: newMarkdown,
+  );
+}
+
+/// [slide] met élke lokale asset-verwijzing absoluut gemaakt tegen [basePath] —
+/// de projectmap van het deck waar de dia vandaan komt.
+///
+/// Een dia die van deck naar deck reist (klembord, selectie kopiëren) draagt
+/// relatieve paden die alleen binnen de bronmap kloppen: in een deck uit een
+/// andere map wijzen ze op een bestand dat er niet staat (#2104). Absoluut
+/// maken is de eerste stap van die verhuizing; de tweede is
+/// `ImageService.adoptSlideAssets`, die de bestanden de doelmap in kopieert en
+/// de paden daar weer projectrelatief maakt.
+///
+/// Alles wat geen lokaal bestand is — `mem:`/`repo:`/`asset:`-verwijzingen,
+/// `data:`-URI's, webadressen en al-absolute paden — blijft ongemoeid.
+Slide absolutizeSlideAssetPaths(Slide slide, String? basePath) {
+  String? abs(String path) {
+    final trimmed = path.trim();
+    if (trimmed.isEmpty ||
+        basePath == null ||
+        p.isAbsolute(trimmed) ||
+        Uri.tryParse(trimmed)?.hasScheme == true) {
+      return null;
+    }
+    return p.normalize(p.join(basePath, trimmed));
+  }
+
+  var next = rewriteSlideImagePaths(slide, abs);
+  final video = abs(next.videoPath);
+  final audio = abs(next.audioPath);
+  final bg = rewriteMarpBackgroundAssetPath(
+    next.marpStyle.backgroundImage,
+    abs,
+  );
+  if (video == null && audio == null && bg == next.marpStyle.backgroundImage) {
+    return next;
+  }
+  return next.copyWith(
+    videoPath: video,
+    audioPath: audio,
+    marpStyle: bg == next.marpStyle.backgroundImage
+        ? null
+        : next.marpStyle.copyWith(backgroundImage: bg),
   );
 }

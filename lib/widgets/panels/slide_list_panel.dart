@@ -24,6 +24,7 @@ import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
 import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
+import '../../services/slide_image_refs.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../state/slide_reorder.dart';
@@ -239,77 +240,16 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   /// Kopieer de geselecteerde slides (bulk) naar een ander open deck. Toont een
   /// keuzelijst van de overige open tabbladen; de slides worden achteraan dat
   /// deck toegevoegd (met nieuwe id's, zodat het kopieën zijn).
-  Future<void> _copySelectionToOtherDeck() async {
+  Future<void> _copySelectionToOtherDeck() {
     final deck = ref.read(deckProvider).deck;
-    if (deck == null) return;
-    final slides = _selectedSlides(deck);
-    if (slides.isEmpty) return;
-
-    final tabs = ref.read(tabsProvider);
-    final currentId = tabs.current?.id;
-    final targets = tabs.tabs
-        .where((t) => t.id != currentId && t.isOpen)
-        .toList();
-
-    final messenger = ScaffoldMessenger.of(context);
-    if (targets.isEmpty) {
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(
-            context.l10n.d(
-              'Geen ander deck open. Open eerst een ander tabblad.',
-            ),
-          ),
-        ),
-      );
-      return;
-    }
-
-    final target = await showDialog<TabInfo>(
-      context: context,
-      builder: (ctx) {
-        final l10n = ctx.l10n;
-        return SimpleDialog(
-          title: Text(
-            slides.length == 1
-                ? l10n.d('1 slide kopiëren naar…')
-                : '${slides.length} ${l10n.d('slides kopiëren naar…')}',
-          ),
-          children: [
-            for (final t in targets)
-              SimpleDialogOption(
-                onPressed: () => Navigator.pop(ctx, t),
-                child: Row(
-                  children: [
-                    const Icon(Icons.slideshow_outlined, size: 16),
-                    const SizedBox(width: 8),
-                    Expanded(child: Text(t.label)),
-                  ],
-                ),
-              ),
-          ],
-        );
-      },
-    );
-    if (target == null || !mounted) return;
-
-    final at = target.deckNotifier.insertSlides(slides);
-    if (at >= 0) target.editorNotifier.select(at);
-
-    final targetIndex = tabs.tabs.indexWhere((t) => t.id == target.id);
-    if (targetIndex >= 0) {
-      ref.read(tabsProvider.notifier).selectTab(targetIndex);
-    }
-
-    if (!mounted) return;
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          at >= 0
-              ? '${slides.length} ${context.l10n.d('slide(s) gekopieerd naar')} “${target.label}”.'
-              : context.l10n.d('Kopiëren mislukt.'),
-        ),
-      ),
+    if (deck == null) return Future.value();
+    // Het eigenlijke werk staat top-level in slide_list_panel_clipboard.dart —
+    // een `extension … on` telt evengoed mee voor het klasse-plafond.
+    return _copySlidesToOtherDeck(
+      ref,
+      context,
+      _selectedSlides(deck),
+      deck.projectPath,
     );
   }
 
@@ -957,12 +897,17 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               height: 32,
               width: double.infinity,
               child: OutlinedButton.icon(
-                onPressed: () {
+                onPressed: () async {
                   final idx = ref.read(editorProvider).selectedIndex;
+                  // De klembord-dia kan uit een deck in een andere map komen:
+                  // zijn (dan absolute) asset-paden de eigen projectmap in
+                  // kopiëren voordat hij ingevoegd wordt (#2104).
+                  final adopted = await ref
+                      .read(imageServiceProvider)
+                      .adoptSlideAssets([clipboard], deck.projectPath);
+                  if (!context.mounted) return;
                   // Eén ongedaan-maak-stap; zie "Afbeelding plakken" hierboven.
-                  final at = notifier.insertSlides([
-                    clipboard,
-                  ], afterIndex: idx);
+                  final at = notifier.insertSlides(adopted, afterIndex: idx);
                   if (at >= 0) editorNotifier.select(at);
                 },
                 icon: const Icon(Icons.content_paste, size: 14),
