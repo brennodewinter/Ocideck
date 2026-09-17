@@ -1657,6 +1657,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeelding toevoegen…': 'Cuir íomhá leis…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Níor aimsíodh fillteán leabharlainne inscríofa. Cuir fillteán leis nó coigeartaigh Stóráil faoi Socruithe.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V greamaíonn íomhá sa chartlann',
   'hoofdstukken': 'caibidlí',
   'paragrafen': 'alt',
   'tabellen': 'táblaí',

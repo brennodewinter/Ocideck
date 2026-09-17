@@ -1620,6 +1620,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeelding toevoegen…': 'Lisa pilt…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Kirjutatavat teegi kausta ei leitud. Lisa kaust või muuda Salvestust menüüs Seaded.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V kleebib pildi arhiivi',
   'hoofdstukken': 'peatükid',
   'paragrafen': 'lõigud',
   'tabellen': 'tabelid',

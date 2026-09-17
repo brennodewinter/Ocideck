@@ -2538,6 +2538,11 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afbeelding toevoegen…': 'Resim ekle…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Yazılabilir kitaplık klasörü bulunamadı. Klasör ekleyin veya Ayarlar altında Depolama\'yı düzenleyin.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V arşive bir resim yapıştırır',
   'hoofdstukken': 'bölümler',
   'paragrafen': 'paragraflar',
   'tabellen': 'tablolar',

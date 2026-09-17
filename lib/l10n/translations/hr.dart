@@ -1631,6 +1631,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeelding toevoegen…': 'Dodaj sliku…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nije pronađena mapa knjižnice za pisanje. Dodajte mapu ili prilagodite Pohranu u Postavke.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V lijepi sliku u arhiv',
   'hoofdstukken': 'poglavlja',
   'paragrafen': 'odlomci',
   'tabellen': 'tablice',

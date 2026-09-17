@@ -1639,6 +1639,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeelding toevoegen…': 'Dodaj obraz…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nie znaleziono zapisywalnego folderu biblioteki. Dodaj folder lub zmień Magazyn w Ustawienia.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V wkleja obraz do archiwum',
   'hoofdstukken': 'rozdziały',
   'paragrafen': 'paragrafy',
   'tabellen': 'tabele',

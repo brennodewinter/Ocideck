@@ -1647,6 +1647,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeelding toevoegen…': 'Добавяне на изображение…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Няма намерена записваема папка на библиотеката. Добавете папка или променете Съхранение в Настройки.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V поставя изображение в архива',
   'hoofdstukken': 'глави',
   'paragrafen': 'абзаци',
   'tabellen': 'таблици',

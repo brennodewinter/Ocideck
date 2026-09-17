@@ -737,4 +737,186 @@ extension _CarouselActions on _ImageCarouselPickerState {
         if (!open.contains(p.normalize(f))) f,
     ];
   }
+
+  /// Voeg een afbeelding aan het archief toe via de bestandskiezer (de knop
+  /// "Afbeelding toevoegen…" in beheermodus). Het gekozen bestand wordt de
+  /// eerste bereikbare zoekwortel in gekopieerd; daarna ververst de carousel
+  /// en staat het nieuwe beeld geselecteerd.
+  Future<void> _addImageFromFile() async {
+    final l10n = context.l10n;
+    final roots = [...widget.searchPaths, ..._extraRoots];
+    final dest = await imageArchiveDestination(roots);
+    if (!mounted) return;
+    if (dest == null) {
+      _showSnack(
+        l10n.d(
+          'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.',
+        ),
+      );
+      return;
+    }
+    final picked = await FilePicker.pickFile(
+      type: FileType.image,
+      dialogTitle: l10n.d('Kies een afbeelding'),
+    );
+    final source = picked?.path;
+    if (source == null || !mounted) return;
+    // De extensiefilter van de kiezer is ruimer dan wat de carousel toont
+    // (svg hoort daar niet bij); de magic-byte-controle dekt hernoemde
+    // niet-afbeeldingen. Beide grenzen zijn van de slide-import bekend.
+    if (!_ImageCarouselPickerState._exts.contains(
+          p.extension(source).toLowerCase(),
+        ) ||
+        !await ImageService().isAcceptableImageFile(source)) {
+      if (!mounted) return;
+      _showSnack(
+        l10n.d(
+          'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.',
+        ),
+      );
+      return;
+    }
+    final added = await adoptImageFileIntoArchive(
+      File(source),
+      dest: dest,
+      archiveRoots: roots,
+    );
+    if (!mounted) return;
+    if (added == null) {
+      _showSnack(l10n.d('Kon de afbeelding niet opslaan.'));
+      return;
+    }
+    await _refreshAndSelect(added);
+  }
+
+  /// Ctrl/Cmd+V: schrijf de klembordafbeelding als `pasted_<tijdstempel>.png`
+  /// in de eerste bereikbare zoekwortel — dezelfde naamconventie als
+  /// [ImageService.pasteImageDetailed]. Werkt in beide modi: in kiesmodus is
+  /// de eerste wortel de images/-map van het deck.
+  Future<void> _pasteImageIntoArchive() async {
+    if (!supportsLocalProjectFolders) return;
+    final l10n = context.l10n;
+    Uint8List? bytes;
+    try {
+      bytes = await Pasteboard.image;
+    } catch (e) {
+      logWarning('ImageCarouselPicker._pasteImageIntoArchive', e);
+    }
+    if (!mounted) return;
+    if (bytes == null || bytes.isEmpty) {
+      _showSnack(l10n.d('Geen afbeelding op het klembord.'));
+      return;
+    }
+    if (bytes.length > ImageService.maxImageBytes ||
+        !ImageService.looksLikeImage(bytes)) {
+      _showSnack(
+        l10n.d(
+          'Afbeelding geweigerd: te groot (max 64 MB) of geen ondersteund formaat.',
+        ),
+      );
+      return;
+    }
+    final roots = [...widget.searchPaths, ..._extraRoots];
+    final dest = await imageArchiveDestination(roots);
+    if (!mounted) return;
+    if (dest == null) {
+      _showSnack(
+        l10n.d(
+          'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.',
+        ),
+      );
+      return;
+    }
+    final added = await adoptImageBytesIntoArchive(bytes, dest: dest);
+    if (!mounted) return;
+    if (added == null) {
+      _showSnack(l10n.d('Kon de afbeelding niet opslaan.'));
+      return;
+    }
+    await _refreshAndSelect(added);
+  }
+
+  /// Rescan het archief en selecteer [path] — de afslag na elke toevoeging,
+  /// zodat het nieuwe beeld meteen zichtbaar en aangewezen is.
+  Future<void> _refreshAndSelect(String path) async {
+    await _loadImages();
+    if (!mounted || !_images.contains(path)) return;
+    await _select(path);
+  }
+
+  void _showSnack(String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+
+/// De map waarin een toegevoegde afbeelding landt: de eerste bereikbare
+/// zoekwortel uit [roots]. In beheermodus is dat de eerste bibliotheek uit
+/// Instellingen; in kiesmodus de `images/`-map van het deck — die wordt zo
+/// nodig aangemaakt, want een nog nooit opgeslagen projectmap heeft er geen.
+/// Een afwezige bibliotheekwortel (ontkoppelde schijf) valt door naar de
+/// volgende: er wordt geen nieuwe map gemaakt op een pad dat niet bereikbaar
+/// is. Null als geen wortel bereikbaar is.
+Future<Directory?> imageArchiveDestination(List<String> roots) async {
+  for (final root in roots) {
+    if (root.trim().isEmpty) continue;
+    final dir = Directory(root);
+    if (await dir.exists()) return dir;
+    if (p.basename(root) == 'images' &&
+        await Directory(p.dirname(root)).exists()) {
+      await dir.create(recursive: true);
+      return dir;
+    }
+  }
+  return null;
+}
+
+/// Neem [src] op in het archief onder [dest]. Staat het bestand al binnen
+/// een zoekwortel uit [archiveRoots], dan is kopiëren overbodig en komt zijn
+/// eigen pad terug. Botst de naam, dan wijkt de kopie uit naar een vrije
+/// naam (identieke inhoud hergebruikt het bestaande bestand — zie
+/// [resolveAssetDestination]). Null bij een schrijffout.
+Future<String?> adoptImageFileIntoArchive(
+  File src, {
+  required Directory dest,
+  required List<String> archiveRoots,
+}) async {
+  if (archiveRoots.any((r) => p.isWithin(r, src.path))) return src.path;
+  try {
+    final resolved = await resolveAssetDestination(
+      dest,
+      p.basename(src.path),
+      src,
+    );
+    if (resolved == null) return null;
+    if (!resolved.alreadyPresent) await src.copy(resolved.file.path);
+    return resolved.file.path;
+  } on FileSystemException catch (e) {
+    logWarning('adoptImageFileIntoArchive: copy', e);
+    return null;
+  }
+}
+
+/// Schrijf klembordafbeeldings-[bytes] als `pasted_<tijdstempel>.png` in
+/// [dest] — dezelfde naamconventie als de slide-import. [filename] is alleen
+/// voor de test (deterministische naam); null bij een schrijffout.
+Future<String?> adoptImageBytesIntoArchive(
+  Uint8List bytes, {
+  required Directory dest,
+  String? filename,
+}) async {
+  final name =
+      filename ?? 'pasted_${DateTime.now().millisecondsSinceEpoch}.png';
+  try {
+    final resolved = await resolveAssetDestinationForBytes(dest, name, bytes);
+    if (resolved == null) return null;
+    if (!resolved.alreadyPresent) {
+      await writeBytesAtomic(resolved.file, bytes);
+    }
+    return resolved.file.path;
+  } on FileSystemException catch (e) {
+    logWarning('adoptImageBytesIntoArchive: write', e);
+    return null;
+  }
 }

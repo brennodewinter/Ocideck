@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pasteboard/pasteboard.dart';
 import '../../theme/image_picker_palette.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
@@ -20,6 +21,8 @@ import '../../state/consent_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../platform/platform_features.dart';
+import '../../utils/asset_destination.dart';
+import '../../utils/atomic_file.dart';
 import '../../utils/log.dart';
 import '../../theme/app_theme.dart';
 import 'ai_image_outbound_dialog.dart';
@@ -224,6 +227,13 @@ class _ImageCarouselPickerState extends ConsumerState<ImageCarouselPicker> {
             _moveSelection(3),
         const SingleActivator(LogicalKeyboardKey.arrowUp): () =>
             _moveSelection(-3),
+        // Plakken voegt een klembordafbeelding aan het archief toe. Binnen de
+        // tekstvelden wint het veld zelf: zijn eigen plak-binding zit dichter
+        // bij de focus en handelt tekst af.
+        const SingleActivator(LogicalKeyboardKey.keyV, control: true): () =>
+            _pasteImageIntoArchive(),
+        const SingleActivator(LogicalKeyboardKey.keyV, meta: true): () =>
+            _pasteImageIntoArchive(),
       },
       child: Focus(
         focusNode: _focusNode,

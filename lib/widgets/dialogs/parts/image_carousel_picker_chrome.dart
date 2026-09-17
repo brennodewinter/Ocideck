@@ -362,10 +362,31 @@ extension _CarouselChrome on _ImageCarouselPickerState {
             ),
             if (!filtering) ...[
               const SizedBox(height: 20),
-              FilledButton.icon(
-                onPressed: _addLibraryFolder,
-                icon: const Icon(Icons.create_new_folder_outlined, size: 18),
-                label: Text(l10n.d('Map toevoegen…')),
+              // De lege bibliotheek vraagt om twee handelingen: een afbeelding
+              // erin zetten (beheermodus) of een extra zoekwortel kiezen.
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                alignment: WrapAlignment.center,
+                children: [
+                  if (widget.manageOnly && supportsLocalProjectFolders)
+                    FilledButton.icon(
+                      onPressed: _addImageFromFile,
+                      icon: const Icon(
+                        Icons.add_photo_alternate_outlined,
+                        size: 18,
+                      ),
+                      label: Text(l10n.d('Afbeelding toevoegen…')),
+                    ),
+                  FilledButton.icon(
+                    onPressed: _addLibraryFolder,
+                    icon: const Icon(
+                      Icons.create_new_folder_outlined,
+                      size: 18,
+                    ),
+                    label: Text(l10n.d('Map toevoegen…')),
+                  ),
+                ],
               ),
             ],
           ],

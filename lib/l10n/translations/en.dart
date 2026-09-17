@@ -827,6 +827,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afbeelding toevoegen…': 'Add image…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'No writable library folder found. Add a folder or adjust Storage under Settings.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V pastes an image into the archive',
   'hoofdstukken': 'chapters',
   'paragrafen': 'sections',
   'tabellen': 'tables',

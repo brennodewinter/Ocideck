@@ -1625,6 +1625,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeelding toevoegen…': 'Pievienot attēlu…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nav atrasta rakstāma bibliotēkas mape. Pievienojiet mapi vai pielāgojiet Krātuvi sadaļā Iestatījumi.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V ielīmē attēlu arhīvā',
   'hoofdstukken': 'nodaļas',
   'paragrafen': 'rindkopas',
   'tabellen': 'tabulas',

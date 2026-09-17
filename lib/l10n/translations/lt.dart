@@ -1634,6 +1634,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeelding toevoegen…': 'Pridėti vaizdą…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nerastas įrašomas bibliotekos aplankas. Pridėkite aplanką arba keiskite Saugyklą skiltyje Nustatymai.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V įklijuoja vaizdą į archyvą',
   'hoofdstukken': 'skyriai',
   'paragrafen': 'pastraipos',
   'tabellen': 'lentelės',
