@@ -117,6 +117,26 @@ void main() {
       );
 
       final container = ProviderContainer();
+      var cleanedUp = false;
+      Future<void> cleanup() async {
+        if (cleanedUp) return;
+        cleanedUp = true;
+        final imageProviders = tester
+            .widgetList<Image>(find.byType(Image))
+            .map((image) => image.image)
+            .toSet();
+        // Windows houdt een getoonde FileImage open zolang widgetboom of
+        // imagecache haar nog bezit. Geef beide vrij vóór de tijdelijke
+        // projectmap wordt verwijderd; anders faalt alleen de testopruiming.
+        await tester.pumpWidget(const SizedBox.shrink());
+        container.dispose();
+        for (final provider in imageProviders) {
+          await provider.evict();
+        }
+        await tester.pump();
+      }
+
+      addTearDown(cleanup);
       container.read(settingsProvider);
       await pumpUntil(
         tester,
@@ -276,9 +296,9 @@ void main() {
       expect(persistedProfile.logoDarkPath, keeper.path);
       expect(persistedProfile.documentLogoPath, keeper.path);
 
-      await tester.pumpWidget(const SizedBox.shrink());
-      container.dispose();
-      await tester.pump();
+      // De tabs-notifier bezit een periodieke timer. Ruim hem binnen het
+      // testlichaam op, vóór Flutter controleert of timers zijn blijven staan.
+      await cleanup();
     },
   );
 }

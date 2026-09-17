@@ -15,6 +15,7 @@ import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/dialogs/open_presentation_dialog.dart';
+import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/pump_until.dart';
@@ -122,7 +123,7 @@ void main() {
     await _tapRow(tester, 'Bravo');
     await tester.pumpAndSettle();
 
-    expect(result!.paths, ['${dir.path}/bravo.md']);
+    expect(result!.paths, [p.join(dir.path, 'bravo.md')]);
   });
 
   testWidgets('Ctrl-klik wijst aan zonder te openen, de knop opent alles', (
@@ -143,7 +144,10 @@ void main() {
     await tester.tap(find.text('Openen (2)'));
     await tester.pumpAndSettle();
 
-    expect(result!.paths, ['${dir.path}/alfa.md', '${dir.path}/charlie.md']);
+    expect(result!.paths, [
+      p.join(dir.path, 'alfa.md'),
+      p.join(dir.path, 'charlie.md'),
+    ]);
     // Een dia-index hoort bij één bestand; bij een stapel is er geen treffer.
     expect(result!.slideIndex, isNull);
   });
@@ -160,7 +164,10 @@ void main() {
     await tester.tap(find.text('Openen (2)'));
     await tester.pumpAndSettle();
 
-    expect(result!.paths, ['${dir.path}/alfa.md', '${dir.path}/bravo.md']);
+    expect(result!.paths, [
+      p.join(dir.path, 'alfa.md'),
+      p.join(dir.path, 'bravo.md'),
+    ]);
   });
 
   testWidgets('Ctrl-klik op een aangewezen rij haalt hem er weer af', (
@@ -180,7 +187,7 @@ void main() {
     await tester.tap(find.text('Openen (1)'));
     await tester.pumpAndSettle();
 
-    expect(result!.paths, ['${dir.path}/alfa.md']);
+    expect(result!.paths, [p.join(dir.path, 'alfa.md')]);
   });
 
   testWidgets('Shift-klik neemt het hele bereik mee', (tester) async {
@@ -198,9 +205,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(result!.paths, [
-      '${dir.path}/alfa.md',
-      '${dir.path}/bravo.md',
-      '${dir.path}/charlie.md',
+      p.join(dir.path, 'alfa.md'),
+      p.join(dir.path, 'bravo.md'),
+      p.join(dir.path, 'charlie.md'),
     ]);
   });
 
@@ -268,7 +275,7 @@ void main() {
     expect(tabs.tabs.length, 2);
     expect(
       tabs.tabs.map((t) => t.deckNotifier.currentState.filePath).toList(),
-      ['${dir.path}/alfa.md', '${dir.path}/charlie.md'],
+      [p.join(dir.path, 'alfa.md'), p.join(dir.path, 'charlie.md')],
     );
     expect(tabs.clampedIndex, 1);
   });
