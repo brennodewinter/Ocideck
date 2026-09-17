@@ -254,6 +254,7 @@ void main() {
 
       // The presenter points at the first slice.
       await _fromPresenter(tester, 'chartHover', {
+        'seq': 1,
         'index': 0,
         'hover': {'c': 0},
       });
@@ -262,6 +263,7 @@ void main() {
 
       // A hover meant for another slide is ignored — it must never land here.
       await _fromPresenter(tester, 'chartHover', {
+        'seq': 2,
         'index': 1,
         'hover': {'c': 1},
       });
@@ -269,7 +271,21 @@ void main() {
       expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsOneWidget);
 
       // The presenter's pointer leaves the chart: the highlight clears.
-      await _fromPresenter(tester, 'chartHover', {'index': 0, 'hover': null});
+      await _fromPresenter(tester, 'chartHover', {
+        'seq': 4,
+        'index': 0,
+        'hover': null,
+      });
+      await tester.pump();
+      expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsNothing);
+
+      // Een ouder hoverbericht dat na de clear aankomt mag de markering niet
+      // opnieuw aanzetten. Method-channel-aanroepen zijn niet geordend.
+      await _fromPresenter(tester, 'chartHover', {
+        'seq': 3,
+        'index': 0,
+        'hover': {'c': 1},
+      });
       await tester.pump();
       expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsNothing);
 

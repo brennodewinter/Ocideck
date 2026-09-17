@@ -519,6 +519,55 @@ void main() {
     expect(dur(), greaterThan(Duration.zero));
   });
 
+  testWidgets('chart clears a local highlight when the slide changes', (
+    tester,
+  ) async {
+    // Presenter and audience reuse their own preview State while navigating.
+    // A hover from the previous chart must not survive independently on either
+    // screen, otherwise both surfaces can show a different highlighted series.
+    const first = ChartSpec(
+      type: ChartType.line,
+      x: ['Jan', 'Feb'],
+      series: [
+        ChartSeries(name: 'Alpha', data: [10, 12]),
+        ChartSeries(name: 'Beta', data: [8, 14]),
+      ],
+    );
+    const second = ChartSpec(
+      type: ChartType.line,
+      x: ['Mrt', 'Apr'],
+      series: [
+        ChartSeries(name: 'Gamma', data: [7, 9]),
+        ChartSeries(name: 'Delta', data: [11, 13]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(first));
+    await tester.pump();
+    final alphaRegion = tester.widget<MouseRegion>(
+      find
+          .ancestor(of: find.text('Alpha'), matching: find.byType(MouseRegion))
+          .first,
+    );
+    alphaRegion.onEnter!(const PointerEnterEvent());
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<LineChart>(find.byType(LineChart))
+          .data
+          .lineBarsData[1]
+          .color!
+          .a,
+      lessThan(1.0),
+    );
+
+    await tester.pumpWidget(_host(second));
+    await tester.pumpAndSettle();
+    final lines = tester.widget<LineChart>(find.byType(LineChart));
+    expect(lines.data.lineBarsData[0].color!.a, 1.0);
+    expect(lines.data.lineBarsData[1].color!.a, 1.0);
+  });
+
   testWidgets('a chart with animation off is static even in presentation', (
     tester,
   ) async {
