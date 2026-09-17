@@ -10,6 +10,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/utils/image_limits.dart';
 import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
+import 'package:path/path.dart' as p;
 
 /// De rasterexports (PDF, PPTX, ODP) laden de dia-afbeeldingen voor en vangen
 /// dan een frame zodra de boom niet meer hoeft te verven. `CalloutOverlay`
@@ -23,7 +24,10 @@ import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
 
 String _writePng() {
   final dir = Directory.systemTemp.createTempSync('ocideck_exportframe');
-  final file = File('${dir.path}/beeld.png');
+  // Gebruik dezelfde genormaliseerde platformsleutel als
+  // calloutImageProvider. Een gemengde `C:\\…/beeld.png`-sleutel warmt op
+  // Windows een andere cache-entry dan de overlay zelf gebruikt.
+  final file = File(p.join(dir.path, 'beeld.png'));
   final image = img.Image(width: 200, height: 100);
   img.fill(image, color: img.ColorRgb8(180, 180, 180));
   file.writeAsBytesSync(Uint8List.fromList(img.encodePng(image)));
