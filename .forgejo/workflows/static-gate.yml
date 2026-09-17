@@ -29,14 +29,17 @@
 # er al in, dus de per-run-installatie vervalt. Alleen de repo-gekoppelde dingen
 # (pub-pakketten en de dartcv OpenCV-build) blijven op `actions/cache`.
 #
-# **Pin-koppeling.** Het image-tag ís de Flutter-pin (`flutter-3.47.2`). Loopt het
-# image achter op `.tool-versions`, dan draagt het een andere Flutter dan de pin
-# en valt `check-toolchain` (dat onverkort binnen `make check-static` meedraait)
-# om — fail-closed, geen stille drift. Een pin-bump werkt daarom `.tool-versions`
-# én dit tag in dezelfde commit bij; `ci-image.yml` publiceert het nieuwe tag
-# automatisch bij een `.tool-versions`-wijziging. Het image is anoniem pullbaar
-# (publieke org), en de dind heeft het lokaal; valt de registry toch weg, dan
-# start de job niet — dezelfde beschikbaarheidsgrens als de runner zelf.
+# **Pin-koppeling.** Het image-tag hoort bij de Flutter-pin. Loopt het image
+# achter op `.tool-versions`, dan draagt het een andere Flutter dan de pin en
+# valt `check-toolchain` (dat onverkort binnen `make check-static` meedraait) om
+# — fail-closed, geen stille drift. Publiceer bij een pin-bump daarom eerst het
+# nieuwe image met `make ci-image-publish`, verifieer dat het tag pullbaar is en
+# werk daarna pas alle Forgejo-imageverwijzingen bij. `ci-image.yml` blijft de
+# automatische route na een wijziging aan `.tool-versions`, maar is te laat om
+# een pull-requestpoort naar een nog niet bestaand tag te laten wijzen. Het image
+# is anoniem pullbaar (publieke org), en de dind heeft het lokaal; valt de
+# registry toch weg, dan start de job niet — dezelfde beschikbaarheidsgrens als
+# de runner zelf.
 name: static-gate
 
 on:
@@ -71,7 +74,7 @@ jobs:
   static-gate:
     runs-on: docker
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.2
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.4
     steps:
       - uses: actions/checkout@v4
 
