@@ -31,11 +31,11 @@ void main() {
 
       final out = absolutizeSlideAssetPaths(slide, sourceDir.path);
 
-      expect(out.imagePath, p.join(sourceDir.path, 'images/een.png'));
-      expect(out.imagePath2, p.join(sourceDir.path, 'images/twee.png'));
+      expect(out.imagePath, p.join(sourceDir.path, 'images', 'een.png'));
+      expect(out.imagePath2, p.join(sourceDir.path, 'images', 'twee.png'));
       expect(
         out.customMarkdown,
-        'Zie ![de foto](${p.join(sourceDir.path, 'images/drie.png')}) hierboven.',
+        'Zie ![de foto](${p.join(sourceDir.path, 'images', 'drie.png')}) hierboven.',
       );
     });
 
@@ -49,11 +49,11 @@ void main() {
 
       final out = absolutizeSlideAssetPaths(slide, sourceDir.path);
 
-      expect(out.videoPath, p.join(sourceDir.path, 'media/clip.mp4'));
-      expect(out.audioPath, p.join(sourceDir.path, 'media/geluid.mp3'));
+      expect(out.videoPath, p.join(sourceDir.path, 'media', 'clip.mp4'));
+      expect(out.audioPath, p.join(sourceDir.path, 'media', 'geluid.mp3'));
       expect(
         out.marpStyle.backgroundImage,
-        "url('${p.join(sourceDir.path, 'images/bg.png')}')",
+        "url('${p.join(sourceDir.path, 'images', 'bg.png')}')",
       );
     });
 

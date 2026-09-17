@@ -139,17 +139,33 @@ void main() {
       ],
     );
 
+    // Houd dezelfde cache-entry live tot ná het eerstvolgende frame. Dat is
+    // precies de garantie die precacheImage aan de rasterizer geeft; de
+    // expliciete listener maakt het moment van vrijgeven ook op Windows
+    // deterministisch voor deze toets.
+    late ImageStream stream;
+    late ImageStreamListener listener;
+    await tester.runAsync(() async {
+      final done = Completer<void>();
+      stream = cappedFileImage(File(path)).resolve(ImageConfiguration.empty);
+      listener = ImageStreamListener(
+        (_, _) {
+          if (!done.isCompleted) done.complete();
+        },
+        onError: (_, _) {
+          if (!done.isCompleted) done.complete();
+        },
+      );
+      stream.addListener(listener);
+      await done.future.timeout(
+        const Duration(seconds: 10),
+        onTimeout: () => throw StateError('het beeld kwam niet in de cache'),
+      );
+    });
+    addTearDown(() => stream.removeListener(listener));
+
     final key = GlobalKey<_HostState>();
     await tester.pumpWidget(_Host(key: key, eerste: zonder, tweede: met));
-
-    // Gebruik precies de rasterizerroute: precacheImage houdt het beeld tot
-    // het einde van het volgende frame live. De handmatige listener die hier
-    // eerder stond liet Windows het gecachte beeld al vóór de rebuild
-    // vrijgeven en toetste daardoor niet wat de export werkelijk doet.
-    final context = tester.element(find.byType(_Host));
-    await tester.runAsync(
-      () => precacheImage(cappedFileImage(File(path)), context),
-    );
 
     // De overlay komt er nu bij tijdens een rebuild, niet bij de allereerste
     // opbouw — net als in de export, waar de diahost per pagina een andere dia

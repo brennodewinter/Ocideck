@@ -45,9 +45,6 @@ void main() {
       final project = Directory.systemTemp.createTempSync(
         'carousel_open_tabs_dedupe_',
       );
-      addTearDown(() {
-        if (project.existsSync()) project.deleteSync(recursive: true);
-      });
       final images = Directory(p.join(project.path, 'images'))..createSync();
       final copy = File(p.join(images.path, 'kopie.png'))
         ..writeAsBytesSync(_onePixelPng);
@@ -130,10 +127,26 @@ void main() {
         // projectmap wordt verwijderd; anders faalt alleen de testopruiming.
         await tester.pumpWidget(const SizedBox.shrink());
         container.dispose();
-        for (final provider in imageProviders) {
-          await provider.evict();
-        }
+        await tester.runAsync(() async {
+          for (final provider in imageProviders) {
+            await provider.evict();
+          }
+        });
         await tester.pump();
+        await pumpUntil(
+          tester,
+          () {
+            try {
+              if (project.existsSync()) project.deleteSync(recursive: true);
+              return true;
+            } on PathAccessException {
+              return false;
+            }
+          },
+          timeout: const Duration(seconds: 1),
+          step: const Duration(milliseconds: 50),
+          reason: 'Windows hield de tijdelijke afbeeldingsmap open',
+        );
       }
 
       addTearDown(cleanup);
