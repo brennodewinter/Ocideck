@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../state/git_provider.dart';
-import '../../theme/app_theme.dart';
 import '../../utils/user_facing_error.dart';
+import 'remote_browser_dialog_chrome.dart';
 
 /// Kiest een deck uit de geconfigureerde git-repository en geeft de deckmap
 /// terug (`decks/<naam>`), of `null` bij annuleren. Het ophalen/openen zelf doet
@@ -37,50 +37,15 @@ class GitBrowserDialog extends ConsumerWidget {
     final config = ref.watch(gitConfigProvider(connectionId));
     final branch = config?.defaultBranch ?? 'main';
 
-    return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      child: SizedBox(
-        width: 520,
-        height: 460,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 18, 20, 6),
-              child: Text(
-                l10n.d('Presentatie openen uit git'),
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            if (config != null)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-                child: Text(
-                  '${config.slug} · $branch',
-                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-                ),
-              ),
-            const Divider(height: 1),
-            Expanded(child: _body(context, ref, branch)),
-            const Divider(height: 1),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(l10n.d('Annuleren')),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+    return RemoteBrowserDialogChrome(
+      title: l10n.d('Presentatie openen uit git'),
+      icon: Icons.source_outlined,
+      subtitle: config == null ? null : Text('${config.slug} · $branch'),
+      body: _body(context, ref, branch),
+      cancelLabel: l10n.d('Annuleren'),
+      onCancel: () => Navigator.of(context).pop(),
+      initialWidth: 520,
+      height: 500,
     );
   }
 
@@ -92,18 +57,18 @@ class GitBrowserDialog extends ConsumerWidget {
 
     return decks.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => _message(
+      error: (e, _) => RemoteBrowserMessage(
         // De ruwe forge-tekst was Nederlands en onvertaald, en bij een
         // onbekende status letterlijk "Onverwachte status 418". Alles wat niet
         // uit deze provider komt is een bug — dan liever algemene raad dan een
         // ruwe fout op het scherm; userFacingError doet precies dat.
-        userFacingError(l10n, e),
+        text: userFacingError(l10n, e),
         icon: Icons.error_outline,
       ),
       data: (map) {
         if (map.isEmpty) {
-          return _message(
-            l10n.d('Geen presentaties in deze repository.'),
+          return RemoteBrowserMessage(
+            text: l10n.d('Geen presentaties in deze repository.'),
             icon: Icons.folder_off_outlined,
           );
         }
@@ -121,26 +86,6 @@ class GitBrowserDialog extends ConsumerWidget {
           },
         );
       },
-    );
-  }
-
-  Widget _message(String text, {required IconData icon}) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 32, color: AppTheme.slate400),
-            const SizedBox(height: 10),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

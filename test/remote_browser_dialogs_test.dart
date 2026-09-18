@@ -7,6 +7,7 @@ import 'package:ocideck/services/webdav_service.dart';
 import 'package:ocideck/state/s3_provider.dart';
 import 'package:ocideck/state/webdav_provider.dart';
 import 'package:ocideck/widgets/dialogs/s3_browser_dialog.dart';
+import 'package:ocideck/widgets/dialogs/remote_browser_dialog_chrome.dart';
 import 'package:ocideck/widgets/dialogs/webdav_browser_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -146,6 +147,7 @@ void main() {
     testWidgets('toont decks en mappen, en verzwijgt de rest', (tester) async {
       await openWebdav(tester);
 
+      expect(find.byType(RemoteBrowserDialogChrome), findsOneWidget);
       expect(find.text('Rapporten'), findsOneWidget);
       expect(find.text('rapport.ocideck'), findsOneWidget);
       expect(find.text('notities.md'), findsOneWidget);
@@ -292,6 +294,7 @@ void main() {
     ) async {
       await openS3(tester);
 
+      expect(find.byType(RemoteBrowserDialogChrome), findsOneWidget);
       expect(find.text('Rapporten'), findsOneWidget);
       expect(find.text('rapport.ocideck'), findsOneWidget);
       expect(find.text('notities.md'), findsOneWidget);

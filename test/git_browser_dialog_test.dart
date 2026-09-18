@@ -5,6 +5,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/state/git_provider.dart';
 import 'package:ocideck/widgets/dialogs/git_browser_dialog.dart';
+import 'package:ocideck/widgets/dialogs/remote_browser_dialog_chrome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// De deckkiezer over een git-repository. Alleen kiezen: het ophalen en de
@@ -70,6 +71,7 @@ void main() {
       },
     );
 
+    expect(find.byType(RemoteBrowserDialogChrome), findsOneWidget);
     final titles = tester
         .widgetList<ListTile>(find.byType(ListTile))
         .map((t) => (t.title! as Text).data)

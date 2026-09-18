@@ -6,7 +6,7 @@ import '../../services/webdav_service.dart';
 import '../../state/webdav_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/user_facing_error.dart';
-import '../resizable_dialog_box.dart';
+import 'remote_browser_dialog_chrome.dart';
 
 /// Wat de browser laat kiezen: een deck om te openen of een afbeelding om in te
 /// voegen. Bepaalt welke bestanden klikbaar zijn.
@@ -78,65 +78,17 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
         ? l10n.d('Afbeelding kiezen op WebDAV')
         : l10n.d('Openen vanaf WebDAV');
 
-    return Dialog(
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      child: ResizableDialogBox(
-        initialWidth: 560,
-        height: 560,
-        builder: (context, handle) => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _header(title),
-            _breadcrumb(l10n),
-            const Divider(height: 1),
-            Expanded(
-              child: listing.when(
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (error, _) => _error(l10n, error),
-                data: (entries) => _list(l10n, entries),
-              ),
-            ),
-            const Divider(height: 1),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  handle,
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text(l10n.t('cancel')),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+    return RemoteBrowserDialogChrome(
+      title: title,
+      icon: Icons.cloud_outlined,
+      navigation: _breadcrumb(l10n),
+      body: listing.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, _) => _error(l10n, error),
+        data: (entries) => _list(l10n, entries),
       ),
-    );
-  }
-
-  Widget _header(String title) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(18, 16, 12, 14),
-      color: AppTheme.navy,
-      child: Row(
-        children: [
-          const Icon(Icons.cloud_outlined, color: Colors.white, size: 20),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
+      cancelLabel: l10n.t('cancel'),
+      onCancel: () => Navigator.pop(context),
     );
   }
 
@@ -185,11 +137,9 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
               .where((e) => e.isCollection || e.isOcideck || e.isMarkdown)
               .toList();
     if (visible.isEmpty) {
-      return Center(
-        child: Text(
-          l10n.d('Deze map is leeg'),
-          style: TextStyle(color: AppTheme.slate400),
-        ),
+      return RemoteBrowserMessage(
+        text: l10n.d('Deze map is leeg'),
+        icon: Icons.folder_off_outlined,
       );
     }
     return ListView.builder(
@@ -224,33 +174,13 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
   }
 
   Widget _error(AppLocalizations l10n, Object error) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.cloud_off, size: 40, color: AppTheme.slate400),
-            const SizedBox(height: 12),
-            Text(
-              // Was: alleen "niet ingesteld" apart, al het andere platgeslagen
-              // tot "Kon de map niet laden. Controleer je verbinding en
-              // instellingen." — terwijl de tabel hiernaast kon zeggen dát het
-              // wachtwoord fout was, of dat de servernaam niet bestaat.
-              userFacingError(l10n, error),
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: AppTheme.slate500),
-            ),
-            const SizedBox(height: 14),
-            OutlinedButton.icon(
-              onPressed: () =>
-                  ref.invalidate(webdavListingProvider(_key(_path))),
-              icon: const Icon(Icons.refresh, size: 16),
-              label: Text(l10n.d('Opnieuw proberen')),
-            ),
-          ],
-        ),
-      ),
+    return RemoteBrowserMessage(
+      // Was: alleen "niet ingesteld" apart, al het andere platgeslagen tot één
+      // algemene fout, terwijl de tabel hier de echte oorzaak kan noemen.
+      text: userFacingError(l10n, error),
+      icon: Icons.cloud_off,
+      retryLabel: l10n.d('Opnieuw proberen'),
+      onRetry: () => ref.invalidate(webdavListingProvider(_key(_path))),
     );
   }
 }
