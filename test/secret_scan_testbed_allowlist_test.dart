@@ -17,6 +17,22 @@ import 'package:flutter_test/flutter_test.dart';
 /// naar de volgende release. Voegt het testbed later een gegenereerd pad toe,
 /// dan valt deze test, niet de release.
 void main() {
+  test('gegenereerde SwiftPM-cache blijft buiten de geheimenscan', () {
+    final trufflehogPatterns = File(
+      '.trufflehogignore',
+    ).readAsLinesSync().map((line) => line.trim());
+
+    expect(
+      trufflehogPatterns,
+      contains(
+        r'^third_party/desktop_multi_window/macos/desktop_multi_window/\.build/',
+      ),
+      reason:
+          'Apple SDK-symbolen in de gegenereerde SwiftPM-cache zijn geen '
+          'Box-tokens; de vendored broncode en Git-historie blijven gescand',
+    );
+  });
+
   test('elk gegenereerd testbed-pad staat in beide secret-scanner-allowlists', () {
     const testbedDir = 'testbed/docker-jitsi-meet';
     final gitignore = File('$testbedDir/.gitignore');

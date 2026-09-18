@@ -16,6 +16,13 @@
 ^\.dart_tool/
 ^build/
 
+# Swift Package Manager-cache van de native macOS-regressietests. Dit is
+# gegenereerde, gitignored compileruitvoer met Apple SDK-headers; symbolen als
+# `gestaltMacOSCompatibilityBoxless` activeren ten onrechte de Box-detector.
+# Beperk de uitzondering tot deze ene cache: de vendored broncode ernaast en
+# de volledige Git-historie blijven door de afzonderlijke git-scan gedekt.
+^third_party/desktop_multi_window/macos/desktop_multi_window/\.build/
+
 # Lokale werkinstellingen, gitignored.
 ^\.claude/
 
