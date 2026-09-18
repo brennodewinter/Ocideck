@@ -237,6 +237,10 @@ const _printCss = r'''
    op elke pagina "0" af. Op het scherm is er één pagina en klopt de 1; in de
    afdruk zwijgt het nummer liever dan te liegen (KNOWN_LIMITATIONS.md). */
 @media print{.document-page-number{display:none}}
+/* Het schermvenster houdt een lange tijdlijn bedienbaar, maar bij afdrukken is
+   er geen schuifbalk. Hef de begrenzing daarom op, zodat geen gebeurtenissen
+   buiten het afgedrukte rapport vallen. */
+@media print{.slide ol.timeline{max-height:none;overflow:visible}}
 /* Bij het afdrukken blijft een kop niet alleen onderaan een blad achter, en
    laat een alinea geen losse regel over de paginagrens achter. Dezelfde regel
    als de Pagina's-weergave in de app hanteert (documentKeepWithNextHeight), zodat
