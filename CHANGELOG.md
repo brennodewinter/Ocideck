@@ -47,6 +47,33 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.4] — 2026-09-18
+
+### Added
+
+- feat(carousel): afbeelding toevoegen aan archief via knop en plakken (#2107)
+- feat(document): importeer .docx en .odt als Markdown (#2101)
+- feat(document): statistiekenhoekje linksonder in de editor (#2100)
+- feat(mermaid): diagrammen volgen de kleuren van de gekozen stijl (#2094)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Make long timelines readable across presentation and export
+- Unify task dialog styling
+- Flutter 3.47.4 en oplosbare packages bijwerken
+- Ondertekende APT-bron voor OciDeck (#2099)
+- Fix WinGet validation metadata
+- WinGet als secundair Windows-distributiekanaal
+- refactor(ui): documentexport krijgt een tegelrooster i.p.v. keuzechips (#2098)
+- Tabelkolommen, cel-focus en logo-ruimte
+
+### Fixed
+
+- fix(slides): afbeelding meenemen bij slide-copy tussen mappen (#2104)
+- fix(docx): sorteer w:rPr-elementen volgens OOXML-schema (#2097)
+- fix(docx/odt): codeblok lekt niet meer door naar volgende inline code (#2096)
+
 ## [0.6.3] — 2026-09-13
 
 ### Added
