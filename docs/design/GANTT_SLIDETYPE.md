@@ -409,8 +409,10 @@ only. The connector is a follow-up that depends on the type existing first.
 
 2. **Max tasks.** A pathological deck with 200 tasks makes the Gantt
    unreadable and the render slow. **Proposed bound: 30 tasks** (matching
-   `timelineMaxEvents = 12` in spirit — a slide is a summary, not a plan
-   file). The converter clamps and the editor warns. To be confirmed in
+   the timeline's separate safety ceiling in spirit — a slide is a summary,
+   not a plan file). The timeline now accepts 64 events behind a scrollable
+   viewport, but Gantt has its own denser renderer and therefore keeps its own
+   lower bound. The converter clamps and the editor warns. To be confirmed in
    implementation.
 
 3. **Date parsing strictness.** The table stores `YYYY-MM-DD`. What happens

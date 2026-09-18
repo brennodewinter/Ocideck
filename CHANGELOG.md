@@ -19,6 +19,9 @@ All notable changes to OciDeck are documented in this file.
 - Taakvensters delen nu één adaptieve OciDeck-schil. Git, S3 en WebDAV,
   presentatie- en documentexport en de grote importvensters gebruiken dezelfde
   themabewuste kop, inhoudsgrens en voet, ook bij 200% interfacetekst.
+- Lange presentatietijdlijnen houden zes leesbare gebeurtenissen in beeld en
+  schuiven daarna automatisch, stapgewijs of handmatig over een langere rail;
+  het publieksvenster volgt dezelfde positie en reduced-motion blijft stil.
 - Flutter 3.47.4 (Dart 3.13.3), de bijbehorende directe en transitieve
   pakketten en de software-inventaris zijn bijgewerkt; de bestandskiezer faalt
   bij een onbekende bestandsgrootte dicht in plaats van onbegrensd in te lezen.
@@ -30,6 +33,8 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- De macOS-app breekt niet meer af wanneer het beamervenster vanuit een
+  fullscreen Space borderloos op het tweede scherm wordt geplaatst.
 - Tabelwerkbalk: kolom links/rechts voegt weer een kolom in en houdt de cursor in de tabel (#2090, #2092).
 - Tabel- en grafiekdia's lopen niet meer door het presentatielogo heen; ze reserveren het hele logo-vak in plaats van alleen de spleet erachter (#2091).
 - Gantt-dia's uit LibrePlan krijgen weer een werkbare tijdlijn: de verborgen Mermaid-tekenlaag gebruikt nu een vaste interne breedte, zodat balken en mijlpalen niet meer verdwijnen in een nulbrede SVG.
