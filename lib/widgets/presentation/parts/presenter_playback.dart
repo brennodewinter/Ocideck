@@ -131,6 +131,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
       _menuCategory = 0;
       _stepIndex = 0;
     });
+    _timelineSync.reset();
     _loadUserNoteIntoController();
     _scheduleAdvance();
   }

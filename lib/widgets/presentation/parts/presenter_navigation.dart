@@ -101,6 +101,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _menuCategory = 0;
       _stepIndex = 0;
     });
+    _timelineSync.reset();
     _loadUserNoteIntoController();
     _scheduleAdvance();
     _announceSlide();
@@ -204,6 +205,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _richTextPage = prevPlan != null ? prevPlan.pageCount - 1 : 0;
       _stepIndex = 0;
     });
+    _timelineSync.reset();
     _loadUserNoteIntoController();
     _scheduleAdvance();
     _announceSlide();
@@ -227,6 +229,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       // Een expliciete teleport breekt de route: "terug" is daarna lineair (#1162).
       _jumpHistory.clear();
     });
+    _timelineSync.reset();
     _loadUserNoteIntoController();
     _scheduleAdvance();
     _announceSlide();
@@ -254,6 +257,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       // Een expliciete teleport breekt de route: "terug" is daarna lineair (#1162).
       _jumpHistory.clear();
     });
+    _timelineSync.reset();
     _loadUserNoteIntoController();
     _scheduleAdvance();
     _announceSlide();

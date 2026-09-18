@@ -61,6 +61,7 @@ extension _PresenterViews on _FullscreenPresenterState {
                         ? (page) => _setRichTextPage(page)
                         : null,
                     timelineRevealedCount: _timelineRevealedFor(slide),
+                    timelineViewController: _timelineSync.controller,
                     calloutRevealedBulletCount: _calloutRevealedBulletCount(
                       slide,
                     ),
