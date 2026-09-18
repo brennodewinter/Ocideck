@@ -305,11 +305,11 @@ api() {
       count=\$(( \$(cat "\$CALLS") + 1 ))
       printf '%s' "\$count" >"\$CALLS"
       if [ "\$count" -le 3 ]; then
-        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"}]}'
+        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"}]}'
       elif [ "\$count" -eq 4 ]; then
-        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"},{"id":202,"head_branch":"v9.9.9","status":"running","name":"Publiceren"}]}'
+        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"},{"id":202,"head_branch":"v9.9.9","status":"running","name":"Release publiceren"}]}'
       else
-        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"},{"id":202,"head_branch":"v9.9.9","status":"success","name":"Publiceren"}]}'
+        printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"},{"id":202,"head_branch":"v9.9.9","status":"success","name":"Release publiceren"},{"id":203,"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
       fi
       ;;
     'POST /actions/workflows/release.yml/dispatches')
@@ -395,7 +395,7 @@ minisign() { printf 'verify\\n' >>"\$TRACE"; return 0; }
 api() {
   case "\$1 \$2" in
     'GET /actions/tasks?limit=100')
-      printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Publiceren"}]}'
+      printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Release publiceren"},{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
     'GET /releases/41/assets') printf '%s\\n' '[]' ;;
