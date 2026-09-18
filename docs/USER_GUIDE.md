@@ -3427,6 +3427,10 @@ the editor half of it.
   text scaling for the whole editing environment, on top of what the operating
   system asks for. Slides keep their fixed 16:9 design size, so what you see is
   still exactly what you present and export.
+- **Task dialogs** — file browsers, export and the larger import windows share
+  a fixed header and footer while only their content scrolls. Their actions wrap
+  at narrow widths and with enlarged interface text, so the primary action does
+  not disappear below the window edge.
 - **Document reader** — the in-app reader for the bundled guides uses the full
   window width, so wide tables get room instead of being squeezed into a narrow
   column, while running text stays at a comfortable line length. ` ```mermaid `

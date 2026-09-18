@@ -16,6 +16,9 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Taakvensters delen nu één adaptieve OciDeck-schil. Git, S3 en WebDAV,
+  presentatie- en documentexport en de grote importvensters gebruiken dezelfde
+  themabewuste kop, inhoudsgrens en voet, ook bij 200% interfacetekst.
 - Flutter 3.47.4 (Dart 3.13.3), de bijbehorende directe en transitieve
   pakketten en de software-inventaris zijn bijgewerkt; de bestandskiezer faalt
   bij een onbekende bestandsgrootte dicht in plaats van onbegrensd in te lezen.
