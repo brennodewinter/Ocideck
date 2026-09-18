@@ -52,6 +52,15 @@ const String _twoSlideMarkdown =
     '\n'
     '- Eerste punt\n';
 
+String get _longTimelineMarkdown =>
+    '---\n'
+    'title: Tijdlijn Demo\n'
+    'theme: ocideck\n'
+    '---\n'
+    '<!-- _class: timeline timeline-horizontal timeline-static -->\n'
+    '# Lange tijdlijn\n\n'
+    '${[for (var i = 1; i <= 18; i++) '- $i :: Gebeurtenis $i'].join('\n')}\n';
+
 const _bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
 
 /// Laat de presenter een bericht sturen zoals hij dat over de vensterbrug doet.
@@ -263,6 +272,39 @@ void main() {
       await _fromPresenter(tester, 'chartHover', {'index': 0, 'hover': null});
       await tester.pump();
       expect(find.byKey(const ValueKey('pie-hover-tooltip')), findsNothing);
+
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+
+  testWidgets(
+    'a timelineView from the presenter moves only the current slide',
+    (tester) async {
+      _mockBridge(tester);
+      await _pumpAudience(tester, <String, dynamic>{
+        'markdown': _longTimelineMarkdown,
+        'index': 0,
+      });
+      final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+      expect(scrollable.position.pixels, 0);
+
+      await _fromPresenter(tester, 'timelineView', {
+        'index': 0,
+        'fraction': 0.75,
+      });
+      await tester.pump();
+      expect(
+        scrollable.position.pixels,
+        closeTo(scrollable.position.maxScrollExtent * 0.75, 1),
+      );
+
+      final acceptedOffset = scrollable.position.pixels;
+      await _fromPresenter(tester, 'timelineView', {
+        'index': 1,
+        'fraction': 0.1,
+      });
+      await tester.pump();
+      expect(scrollable.position.pixels, acceptedOffset);
 
       await tester.pumpWidget(const SizedBox());
     },

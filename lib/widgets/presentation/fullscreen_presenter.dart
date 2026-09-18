@@ -482,7 +482,8 @@ class FullscreenPresenter extends StatefulWidget {
         WindowConfiguration(arguments: argument, hiddenAtLaunch: true),
       );
       audienceHandle = AudienceWindowHandle(audience);
-      await audience.show();
+      // `coverScreen` also reveals the window. Showing it first could make the
+      // fresh macOS window join the fullscreen Space before becoming borderless.
       await audience.coverScreen(presenterScreen: presenterScreenIndex());
     } catch (e) {
       logError(
@@ -621,6 +622,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   final MermaidViewController _mermaidView = MermaidViewController();
   ({double scale, double fx, double fy})? _lastSentMermaidView;
 
+  late final _TimelineViewSync _timelineSync;
+
   /// Gedeelde grafiek-hover voor de huidige dia (#930-stijl, net als
   /// [_mermaidView]): de presentator zweeft over een grafiek, en via
   /// [_broadcastChartHover] licht dezelfde reeks/taartpunt op de beamer op — en
@@ -750,6 +753,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   void initState() {
     super.initState();
     _index = widget.initialIndex;
+    _timelineSync = _TimelineViewSync(widget.audience, () => _index);
     _mermaidView.addListener(_broadcastMermaidView);
     _chartHover.addListener(_broadcastChartHover);
     _rehearsal = RehearsalController(target: widget.targetDuration);
@@ -867,6 +871,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _gridScroll.dispose();
     _mermaidView.dispose();
     _chartHover.removeListener(_broadcastChartHover);
+    _timelineSync.dispose();
     _chartHover.dispose();
     _focusNode.dispose();
     _userNotesFocusNode.dispose();
@@ -888,6 +893,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       richTextPage: _richTextPage,
       stepIndex: _stepIndex,
       menuCategory: _menuCategory,
+      timelineView: _timelineSync.controller.fraction,
     );
     final indexChanged = _audienceSync.indexChanged(snapshot);
     if (!_audienceSync.begin(snapshot, force: force)) return;
@@ -899,6 +905,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
           'richTextPage': snapshot.richTextPage,
           'stepIndex': snapshot.stepIndex,
           'menuCategory': snapshot.menuCategory,
+          'timelineView': snapshot.timelineView,
         })
         .then<void>((_) => _audienceSync.delivered())
         .catchError((Object e) {

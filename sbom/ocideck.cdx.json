@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:7b7b7d96-3b6d-5e62-8d31-725bd168d15f",
+  "serialNumber": "urn:uuid:c94784f3-2322-51cb-86fc-829a8c975e61",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-17T06:53:33.431999Z",
+    "timestamp": "2026-09-18T13:19:16.584855Z",
     "tools": {
       "components": [
         {
@@ -9003,7 +9003,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "e97b88491e4bc3d16977145ce138dab424b7a135422ebdb1bee397dcfa589303"
+          "content": "9b39eb44dfb5f6185367c4f2b3db545e1cbf4b150e0d20d652d8d5c53b30ba92"
         }
       ],
       "externalReferences": [

@@ -481,8 +481,17 @@ fingerprint, not by id.*
   (`TimelineReveal`) are typed `Slide` fields that round-trip as extra `_class`
   tokens (`timeline-horizontal/-vertical/-steps/-static`) rather than in the
   content. In *step* mode the revealed-event count is **session-only**, mirroring
-  the `_richTextPage` pattern: the presenter intercepts next/prev and pushes a
-  `timelineStep` over the window channel so the audience window reveals in sync.
+  the `_richTextPage` pattern: the presenter intercepts next/prev and pushes the
+  generic `stepIndex` in its normal update payload so the audience window
+  reveals in sync.
+  A long timeline extends its rail beyond a responsive four-to-six-event viewport rather than
+  shrinking its cards: draw-on-enter follows that rail automatically, step mode
+  glides to the latest reveal, and an instant/static timeline remains manually
+  scrollable. `TimelineViewController` reduces its pixel position to a 0..1
+  fraction and the presenter mirrors that as `timelineView`, so differently
+  sized audience windows follow manual scrolling too. The viewport position is
+  render state and never enters Markdown; static export renderers keep emitting
+  the complete event sequence.
 - Slide ids are **regenerated on every parse**, so they are stable only within a
   session. Anything persisted that must survive a reload (annotations) re-anchors
   by slide order + a content fingerprint rather than by id.

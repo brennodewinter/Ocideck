@@ -1468,7 +1468,7 @@ kant-en-klaar bewerkbare gebeurtenissen in, met behoud van eventuele gebeurtenis
 Twee weergaveopties staan boven de gebeurtenissenlijst:
 
 - **Layout** — *Automatisch* legt de gebeurtenissen uit als een horizontale rail, waarbij de
-  kaarten op extra niveaus worden gestapeld wanneer er veel zijn zodat ze leesbaar blijven; je kunt
+  kaarten op extra niveaus worden gestapeld zolang ze samen leesbaar blijven; je kunt
   ook *Horizontaal* of een *Verticale* ruggengraat afdwingen (kaarten die links/rechts afwisselen).
 - **Animatie** — *Intekenen bij openen* tekent eerst de lijn, en plaatst dan de gebeurtenissen
   er één voor één op wanneer de slide verschijnt; *Stap voor stap* onthult één gebeurtenis meer bij elke klik tijdens het
@@ -1476,15 +1476,23 @@ Twee weergaveopties staan boven de gebeurtenissenlijst:
   alles tegelijk. Met *Intekenen bij openen* geselecteerd stelt een **Animatiesnelheid**-
   schuif in hoe lang het intekenen duurt (van ~0,4 s tot 30 s).
 
+Zodra een tijdlijn meer gebeurtenissen heeft dan er leesbaar in het huidige
+venster passen — vier in de smalle slidestrook, maximaal zes op de grote slide —
+wordt de rail zelf langer in plaats van de kaarten kleiner. Bij **Intekenen bij openen** schuift het beeld
+automatisch mee; **Stap voor stap** brengt de laatst onthulde gebeurtenis rustig in
+beeld. Bij **Geen animatie** blader je zelf met een muiswiel of trackpad, of door de
+subtiele schuifindicator te slepen. Op een tweede scherm volgt het publieksvenster
+dezelfde plek op de rail. De positie is alleen presentatiestatus en wordt niet in
+Markdown opgeslagen. Een statische export bevat altijd de volledige reeks.
+
 Kaarten maken zichzelf op maat van wat je schreef: de renderer meet je werkelijke tekst
 en kiest de grootste lettergrootte waarbij elke markering, titel en beschrijving
 nog heel past, waarbij een lange titel op een tweede regel wordt afgebroken en een beschrijving op
-maximaal drie. Er is geen lengtelimiet op de velden, maar een kaart kan maar zo ver
-groeien — aan de bovengrens (tien of meer gebeurtenissen, elk met een lange titel *en* een lange
-beschrijving) moet er iets wijken, en de tekst wordt met beletseltekens ingekort.
-Zie je een `…` op een tijdlijn, verdeel de gebeurtenissen dan over twee slides of kort de
-titels in; de beschrijvingen hebben veel meer ruimte dan de titels, die hun
-regel delen met het markeringsbadge.
+maximaal drie. Er is geen lengtelimiet op de velden, maar een afzonderlijke kaart
+kan maar zo ver groeien. Zie je in één kaart een `…`, kort dan die titel of
+beschrijving in; extra gebeurtenissen maken de kaart niet langer kleiner. Eén
+tijdlijn kan maximaal 64 gebeurtenissen bevatten, als veiligheidsgrens voor
+onbetrouwbare of per ongeluk enorme bestanden.
 
 De tijdlijn neemt het actieve stijlprofiel over (accentkleur, lettertypen en slide-
 achtergrond), zodat hij bij de rest van het deck past. Gebeurtenissen worden opgeslagen als een gewone

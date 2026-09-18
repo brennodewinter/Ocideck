@@ -8,6 +8,7 @@ typedef _AudienceSyncSnapshot = ({
   int richTextPage,
   int stepIndex,
   int menuCategory,
+  double timelineView,
 });
 
 /// Houdt verzendstatus en een begrensde snelle herkansing voor de beamer bij.
@@ -59,6 +60,45 @@ class _AudienceSyncTracker {
   }
 
   void dispose() => _retry?.cancel();
+}
+
+/// Owns the timeline viewport and its throttled audience transport.
+///
+/// Keeping this session-only concern outside [_FullscreenPresenterState] means
+/// navigation only says "reset"; it does not also carry channel bookkeeping.
+class _TimelineViewSync {
+  _TimelineViewSync(this.audience, this.index) {
+    controller.addListener(_broadcast);
+  }
+
+  final AudienceWindowHandle? audience;
+  final int Function() index;
+  final TimelineViewController controller = TimelineViewController();
+  double? _lastSent;
+
+  void reset() {
+    _lastSent = null;
+    controller.setFraction(0);
+    _broadcast();
+  }
+
+  void _broadcast() {
+    if (audience?.controller == null) return;
+    final fraction = controller.fraction;
+    if (_lastSent != null && (fraction - _lastSent!).abs() < 0.005) return;
+    _lastSent = fraction;
+    audienceChannel
+        .invokeMethod('timelineView', {'index': index(), 'fraction': fraction})
+        .catchError((Object e) {
+          logWarning('FullscreenPresenter: timeline view sync failed', e);
+          return null;
+        });
+  }
+
+  void dispose() {
+    controller.removeListener(_broadcast);
+    controller.dispose();
+  }
 }
 
 /// Guards teardown of the secondary audience window so native close is only

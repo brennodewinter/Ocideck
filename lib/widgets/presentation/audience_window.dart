@@ -95,6 +95,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// de presentatie-dia (#930): de presentator zoomt/scrolt, hier zetten we
   /// dezelfde stand.
   final MermaidViewController _mermaidView = MermaidViewController();
+  final TimelineViewController _timelineView = TimelineViewController();
 
   /// Spiegelt de grafiek-hover met het presentatorscherm: een hover hier stuurt
   /// de presentator aan, en een hover daar licht hier dezelfde reeks/taartpunt
@@ -199,6 +200,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     if (!_presenterReady.isCompleted) _presenterReady.complete(false);
     audienceChannel.setMethodCallHandler(null);
     _mermaidView.dispose();
+    _timelineView.dispose();
     _chartHover.removeListener(_broadcastChartHover);
     _chartHover.dispose();
     super.dispose();
@@ -239,6 +241,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           // _questionIndex matches and the overlay is kept.
           if (_questionIndex != _index) _questionView = null;
         });
+        _timelineView.setFraction((m['timelineView'] as num?)?.toDouble() ?? 0);
         // Een hover hoort bij één dia: wis bij het wisselen wat er nog van de
         // vorige lag (zowel de eigen als de van de presentator ontvangen hover).
         _chartHover.setLocal(null);
@@ -256,6 +259,15 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
             fx: (m['fx'] as num?)?.toDouble() ?? 0.0,
             fy: (m['fy'] as num?)?.toDouble() ?? 0.0,
           );
+        }
+      case 'timelineView':
+        // Handmatige of automatische scroll op de presenter wordt als fractie
+        // gespiegeld, zodat een anders bemeten beamervenster hetzelfde deel van
+        // de rail toont.
+        final m = Map<String, dynamic>.from(call.arguments as Map);
+        if (!mounted) return null;
+        if ((m['index'] as num?)?.toInt() == _index) {
+          _timelineView.setFraction((m['fraction'] as num?)?.toDouble() ?? 0);
         }
       case 'chartHover':
         // De presentator zweeft over de grafiek; toon dezelfde markering hier.
@@ -490,6 +502,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                     menuCategory: _menuCategory,
                     showRichTextPageControls: false,
                     timelineRevealedCount: _timelineRevealedFor(slide),
+                    timelineViewController: _timelineView,
+                    timelineInteractive: false,
                     calloutRevealedBulletCount: _calloutRevealedBulletCount(
                       slide,
                     ),

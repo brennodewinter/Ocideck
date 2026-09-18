@@ -261,6 +261,13 @@ void main() {}
     expect(html, contains('.slide .media-redacted'));
     expect(html, contains('.tlp-export-banner{'));
     expect(html, contains('@media print'));
+    expect(
+      html,
+      contains(
+        '@media print{.slide ol.timeline{max-height:none;overflow:visible}}',
+      ),
+      reason: 'een afdruk mag de tijdlijn niet tot het schermvenster afkappen',
+    );
     // En het thema kleurt de tijdlijn mee via de enige haak die het heeft.
     expect(html, contains('--ocideck-accent:#33CC99'));
   });
@@ -795,6 +802,31 @@ void main() {}
   test('een gewone opsomming blijft een gewone opsomming', () {
     const slide = '# Punten\n\n- eerste\n- tweede\n';
     expect(MarpHtmlService.renderTimelineBlocks(slide), slide);
+  });
+
+  test('tijdlijnopties verhinderen de HTML-tijdlijn niet', () {
+    const slide =
+        '<!-- _class: timeline timeline-vertical timeline-steps -->\n\n'
+        '# Verloop\n\n- 2024 :: Start :: kickoff\n';
+    final html = MarpHtmlService.renderTimelineBlocks(slide);
+
+    expect(html, contains('<ol class="timeline">'));
+    expect(html, isNot(contains('2024 :: Start')));
+  });
+
+  test('alleen het afzonderlijke timeline-klassetoken maakt een tijdlijn', () {
+    const lookalikes = <String>[
+      '<!-- _class: not-timeline -->\n\n- 2024 :: Start\n',
+      '<!-- _class: timeline-summary -->\n\n- 2024 :: Start\n',
+    ];
+
+    for (final slide in lookalikes) {
+      expect(
+        MarpHtmlService.renderTimelineBlocks(slide),
+        slide,
+        reason: 'een klassenaam die timeline bevat is niet het timeline-token',
+      );
+    }
   });
 
   test('de akkoordpagina draagt de verklaring, niet alleen een kop', () {

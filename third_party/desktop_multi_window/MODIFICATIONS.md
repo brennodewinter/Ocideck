@@ -13,8 +13,8 @@ notice of its own at the top.
 **Modified by:** the OciDeck project (Brenno de Winter), from 2026-06-06.
 
 Every file in this directory is byte-identical to that upstream commit except
-the six listed below. That was verified by hashing the upstream package subtree
-at the commit and comparing it with this copy.
+the files and grouped changes listed below. That was verified by hashing the
+upstream package subtree at the commit and comparing it with this copy.
 
 ## Why the fork exists
 
@@ -28,7 +28,9 @@ be positioned, and the presenter's keyboard focus cannot be kept on the laptop.
 | File | Change |
 | --- | --- |
 | `lib/src/window_controller.dart` | Added `close()`, `setFrame(Rect)` and `coverScreen({external, presenterScreen})` to the Dart API. `presenterScreen` targets the screen the presenter is *not* on, overriding the `external` heuristic (#1913). |
-| `macos/desktop_multi_window/Sources/desktop_multi_window/FlutterWindow.swift` | Implemented `window_close`, `window_setFrame` and `window_coverScreen`. The cover window is borderless, sits at `.statusBar` level so it hides the menu bar/notch on the beamer, joins all Spaces, and is ordered front *without* becoming key so keyboard focus stays with the presenter. `window_coverScreen` honours an optional `presenterScreen` index to cover the screen the presenter is not on (#1913). |
+| `macos/desktop_multi_window/Sources/desktop_multi_window/FlutterWindow.swift` | Implemented `window_close`, `window_setFrame` and `window_coverScreen`. The cover window is borderless, sits at `.statusBar` level so it hides the menu bar/notch on the beamer, joins all Spaces, and is ordered front *without* becoming key so keyboard focus stays with the presenter. `window_coverScreen` honours an optional `presenterScreen` index to cover the screen the presenter is not on (#1913). It delegates style selection so an unexpected native `.fullScreen` bit is preserved; AppKit aborts when that bit is cleared outside a fullscreen transition. |
+| `macos/desktop_multi_window/Sources/DesktopMultiWindowSupport/CoverScreenStyle.swift` | Added the independently testable style-mask choice used by `window_coverScreen`: ordinary windows become borderless, while native fullscreen state is preserved. |
+| `macos/desktop_multi_window/Package.swift`, `macos/desktop_multi_window/Tests/DesktopMultiWindowSupportTests/CoverScreenStyleTests.swift`, `macos/desktop_multi_window.podspec` | Added an AppKit-only Swift regression-test target and included its helper in the CocoaPods source set. Set `OCIDECK_STYLE_TESTS=1` for standalone `swift test`, because Flutter injects `FlutterMacOS` only during an app build. |
 | `macos/desktop_multi_window/Sources/desktop_multi_window/FlutterMultiWindowPlugin.swift` | Set `mouseTrackingMode = .inActiveApp` on the sub-window's `FlutterViewController`, so hover events reach a window that is never key (chart hover on the beamer). Also skip the window being registered or created when broadcasting `onWindowsChanged` (in both `AttachWindow` and `CreateWindow`): its Flutter engine's platform-message handler is not installed yet, so sending to it made `FlutterEngineSendPlatformMessage` fail with `kInvalidArguments` — as the first log line on startup (main window) and again when the audience window opens. |
 | `windows/flutter_window_wrapper.h` | Implemented `window_close`, `window_setFrame` and `window_coverScreen` on Win32, including monitor enumeration to pick the external display. `window_coverScreen` honours an optional `presenterScreen` index (#1913). |
 | `linux/flutter_window.cc` | Implemented `window_close` (destroying the GTK window on idle), `window_setFrame` and `window_coverScreen` with GDK monitor selection. `window_coverScreen` honours an optional `presenterScreen` index (#1913). |
@@ -40,7 +42,7 @@ be positioned, and the presenter's keyboard focus cannot be kept on the laptop.
 hash of this directory in the SBOM; `make sbom-verify` recomputes the hash, so
 an edit here that is not committed alongside a regenerated SBOM fails the gate.
 
-If you bump upstream, re-apply these six changes, re-test the dual-screen
+If you bump upstream, re-apply these changes, re-test the dual-screen
 presenter on all three desktop platforms, and update the commit above.
 
 The local delta is intended to disappear once equivalent window placement,

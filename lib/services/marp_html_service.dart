@@ -548,10 +548,19 @@ class MarpHtmlService {
 
   // ── Tijdlijn → HTML ───────────────────────────────────────────────────────
 
-  static final RegExp _timelineClass = RegExp(
-    r'<!--\s*_class:\s*timeline\s*-->',
+  static final RegExp _slideClassDirective = RegExp(
+    r'<!--\s*_class:\s*([^>]*?)\s*-->',
   );
+  static final RegExp _classTokenSeparator = RegExp(r'\s+');
   static final RegExp _bulletLine = RegExp(r'^[\t ]*-[\t ]+(.*)$');
+
+  static bool _hasTimelineClass(String slideMarkdown) {
+    return _slideClassDirective.allMatches(slideMarkdown).any((match) {
+      final classes = match.group(1)?.trim();
+      if (classes == null || classes.isEmpty) return false;
+      return classes.split(_classTokenSeparator).contains('timeline');
+    });
+  }
 
   /// Zet de opgeslagen tijdlijnpunten om in een echte tijdlijn.
   ///
@@ -561,7 +570,7 @@ class MarpHtmlService {
   /// lezer krijgt stond letterlijk "2024-01 :: Start". De dubbele dubbele punt
   /// is een interne scheiding en hoort niet in een opgeleverd rapport.
   static String renderTimelineBlocks(String slideMarkdown) {
-    if (!_timelineClass.hasMatch(slideMarkdown)) return slideMarkdown;
+    if (!_hasTimelineClass(slideMarkdown)) return slideMarkdown;
     final lines = slideMarkdown.split('\n');
     final out = StringBuffer();
     var events = <TimelineEvent>[];

@@ -47,7 +47,7 @@ html,body{margin:0;padding:0}
 .slide .marp-header p,.slide .marp-footer p{font-size:inherit;line-height:inherit;margin:0}
 .slide.marp-heading-fit h1,.slide.marp-heading-fit h2,.slide.marp-heading-fit h3,.slide.marp-heading-fit h4,.slide.marp-heading-fit h5,.slide.marp-heading-fit h6{white-space:nowrap}
 .slide table{border-collapse:collapse;width:100%}
-.slide ol.timeline{list-style:none;margin:.6em 0;padding:0 0 0 24px;border-left:3px solid #ccc}
+.slide ol.timeline{list-style:none;margin:.6em 0;max-height:500px;overflow-y:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--ocideck-accent) transparent;padding:0 18px 0 24px;border-left:3px solid #ccc}
 .slide ol.timeline li{position:relative;margin:0 0 .9em;padding-left:16px}
 .slide ol.timeline li::before{content:"";position:absolute;left:-31px;top:.45em;width:11px;height:11px;border-radius:50%;background:var(--ocideck-accent)}
 .slide .tl-marker{display:block;font-size:18px;font-weight:700;color:var(--ocideck-accent);letter-spacing:.04em}
@@ -237,6 +237,10 @@ const _printCss = r'''
    op elke pagina "0" af. Op het scherm is er één pagina en klopt de 1; in de
    afdruk zwijgt het nummer liever dan te liegen (KNOWN_LIMITATIONS.md). */
 @media print{.document-page-number{display:none}}
+/* Het schermvenster houdt een lange tijdlijn bedienbaar, maar bij afdrukken is
+   er geen schuifbalk. Hef de begrenzing daarom op, zodat geen gebeurtenissen
+   buiten het afgedrukte rapport vallen. */
+@media print{.slide ol.timeline{max-height:none;overflow:visible}}
 /* Bij het afdrukken blijft een kop niet alleen onderaan een blad achter, en
    laat een alinea geen losse regel over de paginagrens achter. Dezelfde regel
    als de Pagina's-weergave in de app hanteert (documentKeepWithNextHeight), zodat

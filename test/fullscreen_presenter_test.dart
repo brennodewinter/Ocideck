@@ -8,10 +8,12 @@ import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/platform/presenter_fullscreen.dart';
 import 'package:ocideck/services/split_run.dart';
 import 'package:ocideck/widgets/presentation/annotation_overlay.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
+import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 Widget _host(
   List<Slide> slides, {
@@ -423,6 +425,166 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.text('Zuid')));
     await tester.pump();
     expect(sentHovers.any((h) => (h['hover'] as Map?)?['s'] == 1), isTrue);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('timeline scrolling is sent to the audience as a fraction', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1400, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    final timeline = Slide.create(SlideType.timeline).copyWith(
+      title: 'Lange tijdlijn',
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+      timelineLayout: TimelineLayout.horizontal,
+      timelineReveal: TimelineReveal.instant,
+    );
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final sentViews = <Map<String, dynamic>>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'invokeMethod') {
+        final args = Map<String, dynamic>.from(call.arguments as Map);
+        if (args['method'] == 'timelineView') {
+          sentViews.add(Map<String, dynamic>.from(args['arguments'] as Map));
+        }
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: [timeline],
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final timelineScroll = find.descendant(
+      of: find.byType(SlidePreviewWidget),
+      matching: find.byType(Scrollable),
+    );
+    expect(timelineScroll, findsOneWidget);
+    await tester.drag(timelineScroll, const Offset(-500, 0));
+    await tester.pump();
+
+    expect(sentViews, isNotEmpty);
+    expect(sentViews.last['index'], 0);
+    expect(sentViews.last['fraction'], isA<double>());
+    expect(sentViews.last['fraction'] as double, inExclusiveRange(0, 1));
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a different timeline starts at the beginning after navigation', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1400, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    Slide timeline(String title) => Slide.create(SlideType.timeline).copyWith(
+      title: title,
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+      timelineLayout: TimelineLayout.horizontal,
+      timelineReveal: TimelineReveal.instant,
+    );
+    final deck = [
+      timeline('Eerste tijdlijn'),
+      Slide.create(
+        SlideType.bullets,
+      ).copyWith(title: 'Tussendia', bullets: const ['Punt']),
+      timeline('Tweede tijdlijn'),
+    ];
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final sentViews = <Map<String, dynamic>>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'invokeMethod') {
+        final args = Map<String, dynamic>.from(call.arguments as Map);
+        if (args['method'] == 'timelineView') {
+          sentViews.add(Map<String, dynamic>.from(args['arguments'] as Map));
+        }
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: deck,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    Finder timelineScroll() => find.descendant(
+      of: find.byType(SlidePreviewWidget),
+      matching: find.byType(Scrollable),
+    );
+    await tester.drag(timelineScroll(), const Offset(-500, 0));
+    await tester.pump();
+    expect(
+      tester.state<ScrollableState>(timelineScroll()).position.pixels,
+      greaterThan(0),
+    );
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pumpAndSettle();
+    expect(find.text('Tussendia'), findsOneWidget);
+    await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Tweede tijdlijn'), findsOneWidget);
+    expect(
+      tester.state<ScrollableState>(timelineScroll()).position.pixels,
+      0,
+      reason: 'een kijkstand hoort bij de dia en mag niet doorlekken',
+    );
+    expect(
+      sentViews,
+      contains(
+        predicate<Map<String, dynamic>>(
+          (view) => view['index'] == 2 && view['fraction'] == 0,
+          'tijdlijnstand 0 voor de nieuwe dia',
+        ),
+      ),
+      reason: 'het beamerscherm moet tegelijk naar het begin springen',
+    );
 
     await tester.pumpWidget(const SizedBox());
   });

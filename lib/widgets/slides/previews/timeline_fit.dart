@@ -147,9 +147,18 @@ double _badgeMaxWidth(double inner, bool hasTitle) =>
   double room,
   double w,
   bool showDesc,
-  String font,
-) {
-  const scaleSteps = [1.0, 0.94, 0.88, 0.82, 0.76, 0.70, 0.66, 0.62];
+  String font, {
+  List<double> scaleSteps = const [
+    1.0,
+    0.94,
+    0.88,
+    0.82,
+    0.76,
+    0.70,
+    0.66,
+    0.62,
+  ],
+}) {
   const maxTitleLines = 2;
   const maxDescLines = 3;
 
@@ -175,7 +184,7 @@ double _badgeMaxWidth(double inner, bool hasTitle) =>
 
   // Nothing fits whole. Degrade predictably: smallest type, and the most lines
   // that still stay inside the slot.
-  const scale = 0.62;
+  final scale = scaleSteps.last;
   var best = (scale: scale, descLines: 1, titleLines: 1);
   for (var titleLines = 1; titleLines <= maxTitleLines; titleLines++) {
     for (var descLines = 1; descLines <= maxDescLines; descLines++) {

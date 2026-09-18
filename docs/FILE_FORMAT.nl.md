@@ -1491,6 +1491,14 @@ gaan heen en terug als extra `_class`-tokens naast het basis-`timeline`-token:
   hele tijdlijn tekent zichzelf in wanneer de slide opent.
 - `timeline-static` — geen animatie; alles wordt in één keer getoond.
 
+Meer dan vier tot zes gebeurtenissen — afhankelijk van de schermbreedte — rekken
+de rail uit achter een schuifbaar kijkvenster;
+de bestaande animatiekeuze bepaalt of dat venster automatisch meeloopt, per stap
+naar de nieuwste gebeurtenis schuift, of handmatig wordt bediend. Die kijkpositie
+is alleen-sessie en voegt dus geen token toe. De parser aanvaardt maximaal 64
+gebeurtenissen als veiligheidsgrens; een statische export tekent de volledige
+reeks zonder het interactieve venster.
+
 De intekek**snelheid** (alleen zinvol voor de standaard on-enter-animatie) is de
 enige numerieke optie, dus hij gaat heen en terug in een HTML-commentaar in plaats van een class-
 token, en alleen wanneer hij afwijkt van de standaard van 1600 ms:

@@ -1414,7 +1414,7 @@ ready-to-edit events, keeping any events you already have.
 Two display options sit above the event list:
 
 - **Layout** — *Automatic* lays the events out as a horizontal rail, stacking
-  the cards onto extra levels when there are many so they stay readable; you can
+  the cards onto extra levels while they remain readable together; you can
   also force *Horizontal* or a *Vertical* spine (cards alternating left/right).
 - **Animation** — *Draw in on open* first draws the line, then places the events
   onto it one after another when the slide appears; *Step by step* reveals one more event on each click while
@@ -1422,15 +1422,22 @@ Two display options sit above the event list:
   everything at once. With *Draw in on open* selected, an **Animation speed**
   slider sets how long the draw-in takes (from ~0.4 s up to 30 s).
 
+Once a timeline has more events than fit legibly in the current view — four in
+the narrow slide rail and up to six on a full slide — the rail itself becomes
+longer instead of making the cards smaller. **Draw in on open** follows it automatically;
+**Step by step** glides the latest reveal into view. With **No animation**, use a
+mouse wheel or trackpad, or drag the subtle scroll indicator. On a second display,
+the audience window follows the same place on the rail. The position is
+presentation state only and is not stored in Markdown. A static export always
+contains the complete sequence.
+
 Cards size themselves to what you wrote: the renderer measures your actual text
 and picks the largest type size at which every marker, title and description
 still fits whole, wrapping a long title onto a second line and a description onto
-up to three. There is no length limit on the fields, but a card can only grow so
-far — at the upper end (ten or more events, each with a long title *and* a long
-description) something has to give, and the text is shortened with an ellipsis.
-If you see a `…` on a timeline, split the events across two slides or shorten the
-titles; the descriptions have far more room than the titles, which share their
-line with the marker badge.
+up to three. There is no length limit on the fields, but an individual card can
+only grow so far. If one card shows a `…`, shorten that title or description;
+adding events no longer makes every card smaller. A timeline accepts up to 64
+events as a safety ceiling for untrusted or accidentally enormous files.
 
 The timeline picks up the active style profile (accent colour, fonts and slide
 background), so it matches the rest of the deck. Events are stored as an ordinary

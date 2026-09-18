@@ -10,6 +10,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/slide_rasterizer.dart';
 import 'package:ocideck/services/web_asset_store.dart';
@@ -649,5 +650,44 @@ void main() {
         );
       });
     }
+  });
+
+  testWidgets('raster export includes the final event of a long timeline', (
+    tester,
+  ) async {
+    Slide longTimeline(int currentIndex) =>
+        Slide.create(SlideType.timeline).copyWith(
+          title: 'Lange tijdlijn',
+          bullets: [
+            for (var i = 1; i <= 64; i++)
+              '$i :: Gebeurtenis $i :: Toelichting $i',
+          ],
+          timelineLayout: TimelineLayout.vertical,
+          timelineReveal: TimelineReveal.instant,
+          timelineCurrentIndex: currentIndex,
+        );
+
+    final images = await _rasterize(
+      tester,
+      Deck(
+        title: 'Tijdlijn',
+        slides: [
+          longTimeline(63),
+          // Ongeldig wijst niets aan. Als export per ongeluk alleen het eerste
+          // scrollvenster vangt, zijn deze twee dia's pixelgelijk omdat het
+          // enige verschil — de markering op gebeurtenis 64 — buiten beeld is.
+          longTimeline(99),
+        ],
+      ),
+    );
+
+    expect(images, hasLength(2));
+    expect(
+      images[0],
+      isNot(orderedEquals(images[1])),
+      reason:
+          'de statische rasterroute moet gebeurtenis 64 tekenen, inclusief '
+          'zijn huidige-puntmarkering',
+    );
   });
 }
