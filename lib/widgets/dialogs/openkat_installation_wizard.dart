@@ -6,7 +6,7 @@ import '../../../models/openkat/openkat_installation.dart';
 import '../../../services/openkat/openkat_error_messages.dart';
 import '../../../services/openkat/openkat_rocky_client.dart';
 import '../../../state/openkat_provider.dart';
-import '../../../theme/app_theme.dart';
+import 'openkat_dialog_chrome.dart';
 
 /// Korte wizard (max. 3 stappen) om een OpenKAT-server toe te voegen of te
 /// bewerken. Labels uit `docs/design/OPENKAT_LIVE_UX.md`.
@@ -69,10 +69,12 @@ class _OpenKatInstallationWizardState
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AlertDialog(
-      title: Text(
-        _editing
+      title: OpenKatDialogTitle(
+        title: _editing
             ? l10n.d('OpenKAT-server bewerken')
             : l10n.d('OpenKAT-server toevoegen'),
+        currentStep: _step + 1,
+        totalSteps: 3,
       ),
       content: SizedBox(
         width: 440,
@@ -115,7 +117,9 @@ class _OpenKatInstallationWizardState
           const SizedBox(height: 8),
           Text(
             l10n.d('Verbinding met: {host}').replaceAll('{host}', host),
-            style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
         const SizedBox(height: 8),
@@ -126,23 +130,21 @@ class _OpenKatInstallationWizardState
             _trustedInternal = v;
             _fieldError = null;
           }),
-          title: Text(
-            l10n.d('Eigen netwerk (LAN)'),
-            style: const TextStyle(fontSize: 13),
-          ),
+          title: Text(l10n.d('Eigen netwerk (LAN)')),
           subtitle: Text(
             l10n.d(
               'Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.',
             ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ),
         if (_fieldError != null) ...[
           const SizedBox(height: 8),
           Text(
             l10n.d(_fieldError!),
-            style: TextStyle(
-              fontSize: 12,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Theme.of(context).colorScheme.error,
             ),
           ),
@@ -172,14 +174,16 @@ class _OpenKatInstallationWizardState
           l10n.d(
             'Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.',
           ),
-          style: TextStyle(fontSize: 12, color: AppTheme.slate600, height: 1.4),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            height: 1.4,
+          ),
         ),
         if (_fieldError != null) ...[
           const SizedBox(height: 8),
           Text(
             l10n.d(_fieldError!),
-            style: TextStyle(
-              fontSize: 12,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Theme.of(context).colorScheme.error,
             ),
           ),
@@ -194,56 +198,22 @@ class _OpenKatInstallationWizardState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (_testing)
-          Row(
-            children: [
-              const SizedBox(
-                width: 16,
-                height: 16,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  l10n.d('Verbinding wordt getest…'),
-                  style: TextStyle(fontSize: 13, color: AppTheme.slate700),
-                ),
-              ),
-            ],
+          OpenKatStatusBanner(
+            busy: true,
+            text: l10n.d('Verbinding wordt getest…'),
           )
         else if (_testMessage != null)
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                _testOk ? Icons.check_circle_outline : Icons.error_outline,
-                size: 18,
-                color: _testOk
-                    ? AppTheme.accentFg
-                    : Theme.of(context).colorScheme.error,
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  _localize(_testMessage!, _testMessageArgs),
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: _testOk
-                        ? AppTheme.accentFg
-                        : Theme.of(context).colorScheme.error,
-                    height: 1.35,
-                  ),
-                ),
-              ),
-            ],
+          OpenKatStatusBanner(
+            kind: _testOk ? OpenKatStatusKind.success : OpenKatStatusKind.error,
+            text: _localize(_testMessage!, _testMessageArgs),
           )
         else
           Text(
             l10n.d(
               'Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.',
             ),
-            style: TextStyle(
-              fontSize: 13,
-              color: AppTheme.slate600,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               height: 1.4,
             ),
           ),

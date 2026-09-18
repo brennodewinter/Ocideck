@@ -9,6 +9,7 @@ import 'package:ocideck/models/openkat/openkat_wizard_models.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/state/openkat_wizard_controller.dart';
 import 'package:ocideck/theme/app_theme.dart';
+import 'package:ocideck/widgets/dialogs/openkat_report_wizard/openkat_report_wizard.dart';
 import 'package:ocideck/widgets/dialogs/openkat_report_wizard/openkat_wizard_steps.dart';
 
 import '../openkat_wizard_test_fakes.dart';
@@ -23,6 +24,7 @@ Future<void> _match(
   Size size = const Size(1000, 720),
   Locale locale = const Locale('nl'),
   TextScaler textScaler = TextScaler.noScaling,
+  bool settle = false,
 }) async {
   AppTheme.isDark = dark;
   tester.view.physicalSize = size;
@@ -67,6 +69,12 @@ Future<void> _match(
     ),
   );
   await tester.pump(const Duration(milliseconds: 50));
+  if (settle) {
+    final image = tester.widget<Image>(find.byType(Image).first);
+    final imageContext = tester.element(find.byType(Image).first);
+    await tester.runAsync(() => precacheImage(image.image, imageContext));
+    await tester.pumpAndSettle();
+  }
   await expectLater(
     find.byKey(_surfaceKey),
     matchesGoldenFile('goldens/$name.png'),
@@ -86,6 +94,26 @@ Future<OpenKatWizardController> _preparedController({
 
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
+
+  testWidgets('volledige rapportschil volgt OciDeck in licht en donker', (
+    tester,
+  ) async {
+    for (final dark in [false, true]) {
+      final controller = await _preparedController();
+      await _match(
+        tester,
+        name: 'openkat_report_shell_${dark ? 'dark' : 'light'}',
+        dark: dark,
+        size: const Size(1280, 900),
+        settle: true,
+        child: OpenKatReportWizard(
+          controller: controller,
+          chooseDirectory: () async => null,
+          onDirectorySelected: (_) {},
+        ),
+      );
+    }
+  });
 
   testWidgets('vraagfamilie licht met aanbevolen en meer recepten', (
     tester,

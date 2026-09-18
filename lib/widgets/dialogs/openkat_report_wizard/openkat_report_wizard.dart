@@ -3,7 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../models/openkat/openkat_wizard_models.dart';
 import '../../../state/openkat_wizard_controller.dart';
-import '../../../theme/app_theme.dart';
+import '../openkat_dialog_chrome.dart';
 import 'openkat_wizard_preview.dart';
 import 'openkat_wizard_steps.dart';
 
@@ -116,22 +116,24 @@ class _OpenKatReportWizardState extends State<OpenKatReportWizard> {
     final ready = controller.scanStatus == OpenKatWizardScanStatus.ready;
     final l10n = context.l10n;
     final colors = Theme.of(context).colorScheme;
+    final screen = MediaQuery.sizeOf(context);
+    final tight = screen.width < 720 || screen.height < 620;
+    final inset = tight
+        ? const EdgeInsets.all(12)
+        : const EdgeInsets.symmetric(horizontal: 40, vertical: 28);
     return PopScope(
       canPop: !controller.busy,
       child: Dialog(
-        insetPadding: const EdgeInsets.all(20),
+        insetPadding: inset,
         clipBehavior: Clip.antiAlias,
         backgroundColor:
             Theme.of(context).dialogTheme.backgroundColor ?? colors.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: BorderSide(color: colors.outlineVariant),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1220, maxHeight: 860),
           child: SizedBox(
-            width: MediaQuery.sizeOf(context).width - 40,
-            height: MediaQuery.sizeOf(context).height - 40,
+            width: screen.width - inset.horizontal,
+            height: screen.height - inset.vertical,
             child: Column(
               children: [
                 _Header(controller: controller),
@@ -194,9 +196,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
-    final palette = AppPalette.of(theme);
+    final colors = Theme.of(context).colorScheme;
     final ready = controller.scanStatus == OpenKatWizardScanStatus.ready;
     final total = controller.hasPrimaryInputs ? 3 : 2;
     final number = switch (controller.step) {
@@ -204,44 +204,6 @@ class _Header extends StatelessWidget {
       OpenKatWizardStep.inputs => 2,
       OpenKatWizardStep.review => total,
     };
-    final title = Row(
-      children: [
-        Image.asset(
-          'assets/images/openkat-logo.png',
-          width: 52,
-          height: 52,
-          fit: BoxFit.contain,
-          excludeFromSemantics: true,
-        ),
-        const SizedBox(width: 14),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                controller.updating
-                    ? l10n.d('OpenKAT-rapport bijwerken')
-                    : l10n.d('OpenKAT-rapport maken'),
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: colors.onSurface,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(height: 3),
-              Text(
-                ready
-                    ? '${l10n.d('Stap')} $number ${l10n.d('van')} $total'
-                    : l10n.d('Rapportages voorbereiden'),
-                style: TextStyle(
-                  color: palette.accentInk,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
     final enlarged = MediaQuery.textScalerOf(context).scale(1) > 1.4;
     return Container(
       padding: EdgeInsets.symmetric(
@@ -252,29 +214,14 @@ class _Header extends StatelessWidget {
         color: colors.surface,
         border: Border(bottom: BorderSide(color: colors.outlineVariant)),
       ),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final stacked =
-              constraints.maxWidth < 760 ||
-              MediaQuery.textScalerOf(context).scale(1) > 1.4;
-          if (stacked) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                title,
-                const SizedBox(height: 12),
-                const _PrivacyPill(),
-              ],
-            );
-          }
-          return Row(
-            children: [
-              Expanded(child: title),
-              const SizedBox(width: 18),
-              const _PrivacyPill(),
-            ],
-          );
-        },
+      child: OpenKatDialogTitle(
+        title: controller.updating
+            ? l10n.d('OpenKAT-rapport bijwerken')
+            : l10n.d('OpenKAT-rapport maken'),
+        currentStep: ready ? number : null,
+        totalSteps: ready ? total : null,
+        statusText: ready ? null : l10n.d('Rapportages voorbereiden'),
+        trailing: const _PrivacyPill(),
       ),
     );
   }
