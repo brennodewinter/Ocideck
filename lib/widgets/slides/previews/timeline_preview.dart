@@ -39,6 +39,18 @@ extension _TimelinePreviewDispatch on SlidePreviewWidget {
 /// activation duration; only the per-event reveal stretches with the duration.
 const int kTimelineLineDrawMs = 450;
 
+/// Aantal keren dat de kaartgeometrie inclusief tekstmetingen is berekend.
+///
+/// Alleen bedoeld voor de regressietest die bewaakt dat een tijdlijnanimatie
+/// deze dure, inhoudsafhankelijke stap niet op ieder frame herhaalt.
+@visibleForTesting
+int timelineLayoutMeasurementPasses = 0;
+
+@visibleForTesting
+void resetTimelineLayoutMeasurementPasses() {
+  timelineLayoutMeasurementPasses = 0;
+}
+
 /// Size-independent timeline viewport shared between presenter and audience.
 /// Pixels differ per display, so only the 0..1 position along the rail crosses
 /// the window boundary. Like reveal progress, this is session-only render state.
@@ -354,6 +366,7 @@ class _TimelinePreviewState extends State<_TimelinePreview>
             w: widget.w,
             viewportSize: viewport,
             horizontal: horizontal,
+            staticLayout: !widget.scrollable,
             drawT: _controller.value,
             lineFraction: _lineFraction,
             revealedCount: widget.revealedCount,
@@ -445,15 +458,33 @@ class _TlLayout {
   final int descLines;
   final int titleLines;
   final double nodeRadius;
+  final List<_TlSpine> spines;
 
-  const _TlLayout(
+  _TlLayout(
     this.nodes,
     this.scale,
     this.showDesc,
     this.descLines,
     this.titleLines,
     this.nodeRadius,
+  ) : spines = [_TlSpine(nodes.first.pos, nodes.last.pos)];
+
+  _TlLayout.withSpines(
+    this.nodes,
+    this.scale,
+    this.showDesc,
+    this.descLines,
+    this.titleLines,
+    this.nodeRadius,
+    this.spines,
   );
+}
+
+class _TlSpine {
+  final Offset start;
+  final Offset end;
+
+  const _TlSpine(this.start, this.end);
 }
 
 /// Returns [preferred] when it has enough contrast against [bg] to stay legible,
@@ -473,11 +504,12 @@ Color _readableOn(Color bg, Color preferred) {
 
 /// Lays out the spine, nodes and cards for the available area, then stacks the
 /// painted graphics under the (content-hugging) card widgets.
-class _TimelineCanvas extends StatelessWidget {
+class _TimelineCanvas extends StatefulWidget {
   final List<TimelineEvent> events;
   final double w; // full slide width, for uniform typography
   final Size viewportSize;
   final bool horizontal;
+  final bool staticLayout;
   final double drawT;
   final int? revealedCount;
 
@@ -504,6 +536,7 @@ class _TimelineCanvas extends StatelessWidget {
     required this.w,
     required this.viewportSize,
     required this.horizontal,
+    required this.staticLayout,
     required this.drawT,
     required this.revealedCount,
     required this.currentIndex,
@@ -518,14 +551,58 @@ class _TimelineCanvas extends StatelessWidget {
   });
 
   @override
+  State<_TimelineCanvas> createState() => _TimelineCanvasState();
+}
+
+class _TimelineCanvasState extends State<_TimelineCanvas> {
+  _TlLayout? _cachedLayout;
+  Size? _cachedSize;
+
+  List<TimelineEvent> get events => widget.events;
+  double get w => widget.w;
+  Size get viewportSize => widget.viewportSize;
+  bool get horizontal => widget.horizontal;
+  double get drawT => widget.drawT;
+  int? get revealedCount => widget.revealedCount;
+  int? get currentIndex => widget.currentIndex;
+  bool get animating => widget.animating;
+  Color get accent => widget.accent;
+  Color get onAccent => widget.onAccent;
+  Color get bg => widget.bg;
+  Color get textColor => widget.textColor;
+  Color get muted => widget.muted;
+  String get font => widget.font;
+  double get lineFraction => widget.lineFraction;
+
+  @override
+  void didUpdateWidget(_TimelineCanvas oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!_sameTimelineEvents(oldWidget.events, widget.events) ||
+        oldWidget.w != widget.w ||
+        oldWidget.viewportSize != widget.viewportSize ||
+        oldWidget.horizontal != widget.horizontal ||
+        oldWidget.staticLayout != widget.staticLayout ||
+        oldWidget.font != widget.font) {
+      _cachedLayout = null;
+      _cachedSize = null;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = Size(constraints.maxWidth, constraints.maxHeight);
         final n = events.length;
-        final layout = horizontal
-            ? _horizontalLayout(size, viewportSize, n)
-            : _verticalLayout(size, viewportSize, n);
+        if (_cachedLayout == null || _cachedSize != size) {
+          _cachedSize = size;
+          _cachedLayout = widget.staticLayout && n > timelineViewportEvents
+              ? _staticLayout(size, n)
+              : horizontal
+              ? _horizontalLayout(size, viewportSize, n)
+              : _verticalLayout(size, viewportSize, n);
+        }
+        final layout = _cachedLayout!;
         final nodes = layout.nodes;
         final reveal = _revealFactors(n);
 
@@ -536,9 +613,8 @@ class _TimelineCanvas extends StatelessWidget {
               child: CustomPaint(
                 painter: _TimelineRailPainter(
                   nodes: nodes,
+                  spines: layout.spines,
                   reveal: reveal,
-                  spineStart: nodes.first.pos,
-                  spineEnd: nodes.last.pos,
                   spineProgress: _spineProgress(n),
                   nodeRadius: layout.nodeRadius,
                   currentIndex: currentIndex,
@@ -651,6 +727,7 @@ class _TimelineCanvas extends StatelessWidget {
   /// further *floors* so they never overlap. Card size adapts to the room each
   /// floor gets, dropping the description only when a floor is genuinely tight.
   _TlLayout _horizontalLayout(Size size, Size viewport, int n) {
+    timelineLayoutMeasurementPasses++;
     final aw = size.width;
     final ah = size.height;
     final railY = ah * 0.5;
@@ -765,11 +842,12 @@ class _TimelineCanvas extends StatelessWidget {
   /// Vertical spine with cards alternating left/right. Used for very long
   /// timelines; cards shrink (and drop the description) as events pack in.
   _TlLayout _verticalLayout(Size size, Size viewport, int n) {
+    timelineLayoutMeasurementPasses++;
     final aw = size.width;
     final ah = size.height;
     final spineX = aw * 0.5;
     final top = viewport.height * 0.06;
-    final bottom = ah - viewport.height * 0.035;
+    final bottom = ah - viewport.height * 0.08;
     final span = bottom - top;
     final spacing = n > 1 ? span / (n - 1) : span;
     final cardW = aw * 0.36;
@@ -812,144 +890,77 @@ class _TimelineCanvas extends StatelessWidget {
       nodeRadius,
     );
   }
-}
 
-/// Paints the shared rail, connectors and nodes underneath the event cards.
-class _TimelineRailPainter extends CustomPainter {
-  final List<_TlNode> nodes;
-  final List<double> reveal;
-  final Offset spineStart;
-  final Offset spineEnd;
-  final double spineProgress;
-  final double nodeRadius;
-
-  /// Node of the explicit current point; null = none. That node grows and gets
-  /// a halo ring, replacing the size bump the last node gets by default.
-  final int? currentIndex;
-  final Color accent;
-  final Color bg;
-
-  _TimelineRailPainter({
-    required this.nodes,
-    required this.reveal,
-    required this.spineStart,
-    required this.spineEnd,
-    required this.spineProgress,
-    required this.nodeRadius,
-    required this.currentIndex,
-    required this.accent,
-    required this.bg,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (nodes.isEmpty) return;
-    final drawnEnd = Offset.lerp(spineStart, spineEnd, spineProgress)!;
-    final trackW = math.max(2.0, nodeRadius * 0.42);
-
-    // Faint full-length track so you can see where the timeline is going.
-    canvas.drawLine(
-      spineStart,
-      spineEnd,
-      Paint()
-        ..color = accent.withValues(alpha: 0.16)
-        ..strokeWidth = trackW
-        ..strokeCap = StrokeCap.round,
+  /// Een stilstaand exportbeeld kan niet scrollen. Lange reeksen worden daarom
+  /// over meerdere leesbanen verdeeld: iedere gebeurtenis houdt een eigen
+  /// rij en de kaarttypografie mag verder schalen dan in de interactieve
+  /// kijkstand. Zo blijven alle 64 punten op één pagina zonder overlap staan.
+  _TlLayout _staticLayout(Size size, int n) {
+    timelineLayoutMeasurementPasses++;
+    // Veertien is een bovengrens, geen doel: bij 64 gebeurtenissen worden dit
+    // vijf banen van dertien rijen. Dat geeft iedere kaart ook op de smalle
+    // editorpreview voldoende hoogte voor marker, titel én toelichting.
+    const maxRows = 14;
+    final columns = (n / maxRows).ceil();
+    final rows = (n / columns).ceil();
+    final columnWidth = size.width / columns;
+    final top = size.height * 0.035;
+    final bottom = size.height * 0.965;
+    final rowPitch = rows > 1 ? (bottom - top) / (rows - 1) : bottom - top;
+    final spineInset = columnWidth * 0.07;
+    final gap = columnWidth * 0.045;
+    final cardWidth = columnWidth * 0.84;
+    final fit = _fitCards(
+      events,
+      cardWidth,
+      rowPitch * 0.94,
+      w,
+      true,
+      font,
+      scaleSteps: const [0.62, 0.56, 0.50, 0.44, 0.40],
     );
-    // Soft glow under the drawn portion.
-    canvas.drawLine(
-      spineStart,
-      drawnEnd,
-      Paint()
-        ..color = accent.withValues(alpha: 0.14)
-        ..strokeWidth = nodeRadius * 1.5
-        ..strokeCap = StrokeCap.round,
-    );
-    // Bright drawn spine.
-    canvas.drawLine(
-      spineStart,
-      drawnEnd,
-      Paint()
-        ..color = accent
-        ..strokeWidth = trackW * 1.4
-        ..strokeCap = StrokeCap.round,
-    );
-
-    // Connectors from each revealed node to its card.
-    for (var i = 0; i < nodes.length; i++) {
-      final r = reveal[i];
-      if (r <= 0.01) continue;
-      final node = nodes[i];
-      canvas.drawLine(
-        node.pos,
-        Offset.lerp(node.pos, node.connector, r)!,
-        Paint()
-          ..color = accent.withValues(alpha: 0.35 * r)
-          ..strokeWidth = math.max(1.0, nodeRadius * 0.16),
-      );
-    }
-
-    // Nodes on top.
-    for (var i = 0; i < nodes.length; i++) {
-      final r = reveal[i];
-      if (r <= 0.01) continue;
-      final node = nodes[i];
-      final current = i == currentIndex;
-      // Without an explicit current point the last node keeps its subtle bump.
-      final last = currentIndex == null && i == nodes.length - 1;
-      final rad =
-          nodeRadius *
-          (0.55 + 0.45 * r) *
-          (current
-              ? 1.35
-              : last
-              ? 1.18
-              : 1.0);
-      canvas.drawCircle(
-        node.pos,
-        rad * 2.1,
-        Paint()
-          ..color = accent.withValues(
-            alpha:
-                (current
-                    ? 0.24
-                    : last
-                    ? 0.18
-                    : 0.12) *
-                r,
+    final nodes = <_TlNode>[];
+    final spines = <_TlSpine>[];
+    for (var column = 0; column < columns; column++) {
+      final first = column * rows;
+      final count = math.min(rows, n - first);
+      final spineX = column * columnWidth + spineInset;
+      for (var row = 0; row < count; row++) {
+        final y = rows > 1 ? top + row * rowPitch : (top + bottom) / 2;
+        nodes.add(
+          _TlNode(
+            pos: Offset(spineX, y),
+            cardLeft: spineX + gap,
+            cardWidth: cardWidth,
+            anchorTop: y,
+            vertAnchor: -0.5,
+            connector: Offset(spineX + gap, y),
           ),
-      );
-      if (current) {
-        // Halo ring: the "you are here" marker around the current node.
-        canvas.drawCircle(
-          node.pos,
-          rad * 1.9,
-          Paint()
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = math.max(1.2, rad * 0.28)
-            ..color = accent.withValues(alpha: 0.55 * r),
         );
       }
-      canvas.drawCircle(node.pos, rad, Paint()..color = accent);
-      canvas.drawCircle(
-        node.pos,
-        rad,
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = math.max(1.5, rad * 0.34)
-          ..color = bg,
-      );
-      canvas.drawCircle(node.pos, rad * 0.32, Paint()..color = accent);
+      spines.add(_TlSpine(nodes[first].pos, nodes[first + count - 1].pos));
+    }
+    return _TlLayout.withSpines(
+      nodes,
+      fit.scale,
+      true,
+      fit.descLines,
+      fit.titleLines,
+      math.max(2.0, w * 0.004),
+      spines,
+    );
+  }
+}
+
+bool _sameTimelineEvents(List<TimelineEvent> a, List<TimelineEvent> b) {
+  if (identical(a, b)) return true;
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].marker != b[i].marker ||
+        a[i].title != b[i].title ||
+        a[i].description != b[i].description) {
+      return false;
     }
   }
-
-  @override
-  bool shouldRepaint(_TimelineRailPainter old) =>
-      old.spineProgress != spineProgress ||
-      !listEquals(old.reveal, reveal) ||
-      old.nodeRadius != nodeRadius ||
-      old.currentIndex != currentIndex ||
-      old.accent != accent ||
-      old.bg != bg ||
-      old.nodes.length != nodes.length;
+  return true;
 }

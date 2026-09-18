@@ -135,6 +135,7 @@ part 'previews/question_preview_answers.dart';
 part 'previews/timeline_preview.dart';
 part 'previews/timeline_card.dart';
 part 'previews/timeline_fit.dart';
+part 'previews/timeline_painter.dart';
 part 'previews/scorecard_preview.dart';
 part 'previews/asset_overview_preview.dart';
 part 'previews/discoveries_preview.dart';

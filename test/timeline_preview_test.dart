@@ -359,11 +359,47 @@ void main() {
     expect(scrollable.position.axis, Axis.vertical);
     expect(scrollable.position.maxScrollExtent, greaterThan(450));
 
-    await tester.drag(find.byType(Scrollable), const Offset(0, -2000));
+    scrollable.position.jumpTo(scrollable.position.maxScrollExtent);
     await tester.pump();
-    expect(scrollable.position.pixels, greaterThan(0));
-    expect(find.text('Gebeurtenis 64'), findsOneWidget);
+    expect(
+      scrollable.position.pixels,
+      closeTo(scrollable.position.maxScrollExtent, 0.01),
+    );
+    final viewport = tester.getRect(find.byType(Scrollable));
+    final finalCard = tester.getRect(
+      find.byKey(const ValueKey('timeline-card-63')),
+    );
+    expect(
+      viewport.overlaps(finalCard),
+      isTrue,
+      reason: 'gebeurtenis 64 moet in het laatste echte kijkvenster liggen',
+    );
+    expect(finalCard.bottom, lessThanOrEqualTo(viewport.bottom + 0.5));
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('draw-in measures card layout only once', (tester) async {
+    resetTimelineLayoutMeasurementPasses();
+    final slide = _timeline(
+      layout: TimelineLayout.vertical,
+      bullets: [
+        for (var i = 1; i <= timelineMaxEvents; i++)
+          '$i :: Gebeurtenis $i :: Toelichting $i',
+      ],
+    );
+    await tester.pumpWidget(_host(slide, presentationMode: true));
+    await tester.pump();
+    expect(timelineLayoutMeasurementPasses, 1);
+
+    for (var frame = 0; frame < 12; frame++) {
+      await tester.pump(const Duration(milliseconds: 50));
+    }
+
+    expect(
+      timelineLayoutMeasurementPasses,
+      1,
+      reason: 'de animatie verandert alleen revealwaarden, niet de geometrie',
+    );
   });
 
   testWidgets('draw-in mode automatically travels along a long rail', (
@@ -421,14 +457,36 @@ void main() {
       final slide = _timeline(
         layout: TimelineLayout.vertical,
         reveal: TimelineReveal.instant,
-        bullets: [for (var i = 1; i <= 24; i++) '$i :: Gebeurtenis $i'],
+        bullets: [
+          for (var i = 1; i <= timelineMaxEvents; i++)
+            '$i :: Gebeurtenis $i :: Toelichting $i',
+        ],
       );
       await tester.pumpWidget(_host(slide, scrollableTimeline: false));
       await tester.pump();
 
       expect(find.byType(Scrollable), findsNothing);
       expect(find.text('Gebeurtenis 1'), findsOneWidget);
-      expect(find.text('Gebeurtenis 24'), findsOneWidget);
+      expect(find.text('Gebeurtenis 64'), findsOneWidget);
+      expect(find.text('Toelichting 64'), findsOneWidget);
+      final slideRect = tester.getRect(find.byType(SlidePreviewWidget));
+      final cards = [
+        for (var i = 0; i < timelineMaxEvents; i++)
+          tester.getRect(find.byKey(ValueKey('timeline-card-$i'))),
+      ];
+      for (var a = 0; a < cards.length; a++) {
+        expect(cards[a].height, greaterThanOrEqualTo(18));
+        expect(slideRect.contains(cards[a].topLeft), isTrue);
+        expect(slideRect.contains(cards[a].bottomRight), isTrue);
+        for (var b = a + 1; b < cards.length; b++) {
+          final overlap = cards[a].intersect(cards[b]);
+          expect(
+            overlap.width > 0.5 && overlap.height > 0.5,
+            isFalse,
+            reason: 'statische kaarten $a en $b overlappen: $overlap',
+          );
+        }
+      }
       expect(tester.takeException(), isNull);
     },
   );
