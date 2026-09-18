@@ -12,6 +12,7 @@ import '../../services/import/pipeline/import_task.dart';
 import '../../services/import/presentation_import_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/user_facing_error.dart';
+import 'dialog_shell.dart';
 
 /// De wachtrij voor een import van meer dan één presentatie (#772).
 ///
@@ -168,27 +169,16 @@ class _PresentationImportQueueDialogState
       // Tijdens het omzetten niet weg te klikken: de rij loopt door en het
       // scherm is het enige dat vertelt hoe ver hij is.
       canPop: !_running,
-      child: AlertDialog(
-        title: Row(
-          children: [
-            const Icon(Icons.slideshow_outlined, size: 20),
-            const SizedBox(width: 8),
-            Flexible(
-              child: Text(
-                l10n.d('Presentaties importeren'),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              '${_queue.length}',
-              style: TextStyle(fontSize: 13, color: AppTheme.slate500),
-            ),
-          ],
-        ),
-        content: SizedBox(
-          width: 560,
-          child: Column(
+      child: OciDialogShell(
+        width: 660,
+        height: 680,
+        maxWidth: 760,
+        maxHeight: 760,
+        child: OciDialogScaffold(
+          title: l10n.d('Presentaties importeren'),
+          leading: const Icon(Icons.slideshow_outlined),
+          headerTrailing: Text('${_queue.length}'),
+          body: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -221,8 +211,8 @@ class _PresentationImportQueueDialogState
               ],
             ],
           ),
+          actions: _actions(l10n),
         ),
-        actions: _actions(l10n),
       ),
     );
   }
