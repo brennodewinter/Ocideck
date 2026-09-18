@@ -148,9 +148,20 @@ void main() {
         );
       }
       expect(
+        File(
+          'third_party/desktop_multi_window/macos/desktop_multi_window/'
+          'Sources/DesktopMultiWindowSupport/CoverScreenStyle.swift',
+        ).existsSync(),
+        isTrue,
+        reason:
+            'The shared AppKit support target must ship through both SwiftPM '
+            'and CocoaPods.',
+      );
+      expect(
         podspec,
-        contains('desktop_multi_window/Sources/desktop_multi_window/**/*'),
-        reason: 'The CocoaPods fallback must follow the SwiftPM source move.',
+        contains('desktop_multi_window/Sources/**/*'),
+        reason:
+            'The CocoaPods fallback must include both SwiftPM source targets.',
       );
     });
 
