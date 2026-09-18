@@ -262,7 +262,7 @@ class _TimelineEditorState extends State<TimelineEditor> {
         Align(
           alignment: Alignment.centerLeft,
           child: TextButton.icon(
-            onPressed: _addEvent,
+            onPressed: _rows.length < timelineMaxEvents ? _addEvent : null,
             icon: const Icon(Icons.add, size: 16),
             label: Text(l10n.d('Gebeurtenis toevoegen')),
           ),

@@ -4,17 +4,31 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
-Widget _host(Slide slide, {bool presentationMode = false, int? revealed}) {
+Widget _host(
+  Slide slide, {
+  bool presentationMode = false,
+  bool scrollableTimeline = true,
+  bool disableAnimations = false,
+  TimelineViewController? timelineViewController,
+  bool timelineInteractive = true,
+  int? revealed,
+}) {
   return MaterialApp(
-    home: Scaffold(
-      body: Center(
-        child: SizedBox(
-          width: 800,
-          height: 450,
-          child: SlidePreviewWidget(
-            slide: slide,
-            presentationMode: presentationMode,
-            timelineRevealedCount: revealed,
+    home: MediaQuery(
+      data: MediaQueryData(disableAnimations: disableAnimations),
+      child: Scaffold(
+        body: Center(
+          child: SizedBox(
+            width: 800,
+            height: 450,
+            child: SlidePreviewWidget(
+              slide: slide,
+              presentationMode: presentationMode,
+              scrollableTimeline: scrollableTimeline,
+              timelineViewController: timelineViewController,
+              timelineInteractive: timelineInteractive,
+              timelineRevealedCount: revealed,
+            ),
           ),
         ),
       ),
@@ -186,13 +200,245 @@ void main() {
       }
     }
 
-    // timelineMaxEvents caps a timeline at 12 events; cover the whole range at a
-    // normal 16:9 height and at a squat height (less vertical room for floors,
-    // which exercises the width-cap fallback).
+    // Above six events the rail extends beyond the viewport instead of
+    // crowding more cards into the same frame. Cover that transition at a
+    // normal 16:9 height and at a squat height.
     for (final n in [4, 5, 6, 7, 8, 9, 10, 11, 12]) {
       await check(n, 450);
       await check(n, 300);
     }
+  });
+
+  testWidgets('a long horizontal timeline scrolls instead of shrinking', (
+    tester,
+  ) async {
+    final slide = _timeline(
+      layout: TimelineLayout.horizontal,
+      reveal: TimelineReveal.instant,
+      bullets: [
+        for (var i = 1; i <= 24; i++)
+          '$i :: Mijlpaal $i :: Volledige toelichting bij gebeurtenis $i.',
+      ],
+    );
+    await tester.pumpWidget(_host(slide, presentationMode: true));
+    await tester.pump();
+
+    final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+    expect(scrollable.position.maxScrollExtent, greaterThan(800));
+    expect(find.byType(RawScrollbar), findsOneWidget);
+
+    await tester.drag(find.byType(Scrollable), const Offset(-500, 0));
+    await tester.pump();
+    expect(scrollable.position.pixels, greaterThan(0));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('step mode automatically follows the latest event', (
+    tester,
+  ) async {
+    final slide = _timeline(
+      layout: TimelineLayout.horizontal,
+      reveal: TimelineReveal.steps,
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+    );
+    await tester.pumpWidget(_host(slide, presentationMode: true, revealed: 1));
+    await tester.pump();
+    final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+    expect(scrollable.position.pixels, 0);
+
+    await tester.pumpWidget(_host(slide, presentationMode: true, revealed: 14));
+    await tester.pumpAndSettle();
+    expect(scrollable.position.pixels, greaterThan(0));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('manual position is shared as a display-independent fraction', (
+    tester,
+  ) async {
+    final controller = TimelineViewController();
+    addTearDown(controller.dispose);
+    final slide = _timeline(
+      layout: TimelineLayout.horizontal,
+      reveal: TimelineReveal.instant,
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+    );
+    await tester.pumpWidget(
+      _host(slide, presentationMode: true, timelineViewController: controller),
+    );
+    await tester.pump();
+    final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+
+    await tester.drag(find.byType(Scrollable), const Offset(-400, 0));
+    await tester.pump();
+    expect(controller.fraction, greaterThan(0));
+
+    controller.setFraction(0.75);
+    await tester.pump();
+    expect(
+      scrollable.position.pixels,
+      closeTo(scrollable.position.maxScrollExtent * 0.75, 1),
+    );
+  });
+
+  testWidgets('an already shared position is applied on first layout', (
+    tester,
+  ) async {
+    final controller = TimelineViewController()..setFraction(0.75);
+    addTearDown(controller.dispose);
+    final slide = _timeline(
+      layout: TimelineLayout.horizontal,
+      reveal: TimelineReveal.instant,
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+    );
+
+    await tester.pumpWidget(
+      _host(
+        slide,
+        presentationMode: true,
+        timelineViewController: controller,
+        timelineInteractive: false,
+      ),
+    );
+    await tester.pump();
+
+    final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+    expect(
+      scrollable.position.pixels,
+      closeTo(scrollable.position.maxScrollExtent * 0.75, 1),
+      reason:
+          'de kijkstand kan vóór de dia-update arriveren; het nieuw gebouwde '
+          'publieksoppervlak moet die beginstand alsnog toepassen',
+    );
+  });
+
+  testWidgets('a read-only surface never publishes its local scroll', (
+    tester,
+  ) async {
+    final controller = TimelineViewController();
+    addTearDown(controller.dispose);
+    final slide = _timeline(
+      layout: TimelineLayout.horizontal,
+      reveal: TimelineReveal.instant,
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+    );
+
+    await tester.pumpWidget(
+      _host(
+        slide,
+        presentationMode: true,
+        timelineViewController: controller,
+        timelineInteractive: false,
+      ),
+    );
+    await tester.pump();
+    await tester.drag(find.byType(Scrollable), const Offset(-400, 0));
+    await tester.pump();
+
+    expect(controller.fraction, 0);
+    expect(
+      tester.state<ScrollableState>(find.byType(Scrollable)).position.pixels,
+      greaterThan(0),
+    );
+  });
+
+  testWidgets('a long vertical timeline scrolls to its final event', (
+    tester,
+  ) async {
+    final slide = _timeline(
+      layout: TimelineLayout.vertical,
+      reveal: TimelineReveal.instant,
+      bullets: [
+        for (var i = 1; i <= timelineMaxEvents; i++)
+          '$i :: Gebeurtenis $i :: Toelichting $i',
+      ],
+    );
+    await tester.pumpWidget(_host(slide, presentationMode: true));
+    await tester.pump();
+
+    final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+    expect(scrollable.position.axis, Axis.vertical);
+    expect(scrollable.position.maxScrollExtent, greaterThan(450));
+
+    await tester.drag(find.byType(Scrollable), const Offset(0, -2000));
+    await tester.pump();
+    expect(scrollable.position.pixels, greaterThan(0));
+    expect(find.text('Gebeurtenis 64'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('draw-in mode automatically travels along a long rail', (
+    tester,
+  ) async {
+    final slide = _timeline(
+      layout: TimelineLayout.horizontal,
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+    );
+    await tester.pumpWidget(_host(slide, presentationMode: true));
+    await tester.pump();
+    final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+
+    await tester.pump(const Duration(milliseconds: 1100));
+    expect(scrollable.position.pixels, greaterThan(0));
+    await tester.pumpAndSettle();
+    expect(
+      scrollable.position.pixels,
+      closeTo(scrollable.position.maxScrollExtent, 1),
+    );
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('reduced motion shows the settled rail without auto-scrolling', (
+    tester,
+  ) async {
+    final slide = _timeline(
+      layout: TimelineLayout.horizontal,
+      bullets: [for (var i = 1; i <= 18; i++) '$i :: Gebeurtenis $i'],
+    );
+    await tester.pumpWidget(
+      _host(slide, presentationMode: true, disableAnimations: true),
+    );
+    await tester.pump();
+    final scrollable = tester.state<ScrollableState>(find.byType(Scrollable));
+    expect(scrollable.position.pixels, 0);
+    expect(
+      tester
+          .widget<Opacity>(
+            find
+                .ancestor(
+                  of: find.text('Gebeurtenis 18'),
+                  matching: find.byType(Opacity),
+                )
+                .first,
+          )
+          .opacity,
+      1,
+    );
+  });
+
+  testWidgets(
+    'static export fallback keeps the complete sequence on one slide',
+    (tester) async {
+      final slide = _timeline(
+        layout: TimelineLayout.vertical,
+        reveal: TimelineReveal.instant,
+        bullets: [for (var i = 1; i <= 24; i++) '$i :: Gebeurtenis $i'],
+      );
+      await tester.pumpWidget(_host(slide, scrollableTimeline: false));
+      await tester.pump();
+
+      expect(find.byType(Scrollable), findsNothing);
+      expect(find.text('Gebeurtenis 1'), findsOneWidget);
+      expect(find.text('Gebeurtenis 24'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  test('the safety ceiling keeps the first 64 events', () {
+    final events = parseTimelineEvents([
+      for (var i = 1; i <= timelineMaxEvents + 5; i++) '$i :: Gebeurtenis $i',
+    ]);
+    expect(events, hasLength(timelineMaxEvents));
+    expect(events.last.title, 'Gebeurtenis 64');
   });
 
   testWidgets(

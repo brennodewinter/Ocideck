@@ -15,7 +15,17 @@ library;
 const String timelineFieldSeparator = ' :: ';
 
 /// Upper bound on events so a pathological deck can't make the painter crawl.
-const int timelineMaxEvents = 12;
+///
+/// The renderer presents long timelines through a scrollable viewport, so this
+/// is a safety ceiling rather than a layout ceiling. Sixty-four keeps even a
+/// multi-year monthly roadmap practical without letting an untrusted deck hand
+/// the painter an unbounded list.
+const int timelineMaxEvents = 64;
+
+/// Comfortable number of events visible in one timeline viewport. More events
+/// extend the rail beyond the slide and are reached by automatic or manual
+/// scrolling instead of shrinking every card until the text becomes decoration.
+const int timelineViewportEvents = 6;
 
 /// Default draw-on-enter duration for the whole timeline.
 const int timelineDefaultAnimationDurationMs = 1600;
