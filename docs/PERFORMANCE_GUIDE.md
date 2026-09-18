@@ -1,6 +1,6 @@
 # OciDeck — Performance Guide
 
-> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-09-06 · **Published by:** Stichting LibreKAT
+> **Status:** current-state description of enforced limits and measured sizes · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
 
 This document describes OciDeck's performance characteristics using the **actual
 limits and sizes enforced in the codebase** (with `file:line` citations), plus a
@@ -74,6 +74,10 @@ optimisation.
 - Charts use the `fl_chart` library; the categorical palette is **10 colours**
   and cycles (`index % 10`) beyond that (`lib/models/chart.dart:10`), and legend
   tiles lay out in **≤ 6 columns × 1–3 rows** (`marp_html_service_charts.dart`, `maxColumns`).
+- Timeline rendering is linear in the number of events and capped at **64**
+  events (`lib/models/timeline.dart`, `timelineMaxEvents`). Interactive surfaces
+  keep **4–6** events in their viewport and scroll across the bounded rail;
+  static exports lay out the same bounded sequence in full.
 - Mermaid diagrams render to sanitised inline SVG via a shared WebView.
 - Video plays through a shared media host so only one heavy player is live.
 - A Marp background may keep every authored image filter for lossless Markdown,
