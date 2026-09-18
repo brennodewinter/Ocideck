@@ -107,6 +107,88 @@ void main() {
     expect(printVersion('major'), 'v${current.major + 1}.0.0');
   }, skip: skipOnWindows);
 
+  test('resume borgt het scans-image voordat een PR wordt geopend', () {
+    final body = functionBody('resume_release');
+    final ensureIdx = body.indexOf('ensure_scans_image');
+    final prIdx = body.indexOf('open_or_find_pr');
+
+    expect(
+      ensureIdx,
+      isNonNegative,
+      reason:
+          '--resume moet het scanner-image opnieuw borgen; anders opent een '
+          'onderbroken release een PR waarvan de scan het gepinde image niet kan vinden.',
+    );
+    expect(prIdx, isNonNegative);
+    expect(
+      ensureIdx,
+      lessThan(prIdx),
+      reason: 'het scanner-image moet bestaan voordat de PR-scan kan starten.',
+    );
+  });
+
+  test(
+    'de scans-imagewacht controleert het register en faalt snel zonder taak',
+    () {
+      final ensure = functionBody('ensure_scans_image');
+      final publish = functionBody('publish_scans_image');
+
+      expect(
+        ensure,
+        contains('scan_image_available'),
+        reason: 'idempotentie hoort op het gepubliceerde artefact te rusten.',
+      );
+      expect(
+        publish,
+        contains('scan_image_available'),
+        reason:
+            'een groene workflow alleen bewijst niet dat het image pullbaar is.',
+      );
+      expect(
+        publish,
+        contains('geen ci-image-scans-taak'),
+        reason:
+            'een geaccepteerde dispatch zonder aangemaakte taak moet snel en '
+            'herkenbaar stoppen, niet pas na twintig minuten.',
+      );
+    },
+  );
+
+  test('release-CI wacht op de laatste afhankelijke job', () {
+    final completion = functionBody('release_ci_completion_seen');
+    final follow = functionBody('follow_ci');
+    final assertion = functionBody('assert_release_ci_terminal');
+
+    expect(
+      completion,
+      contains('Website-downloads bijwerken'),
+      reason:
+          'een groene voorlopertaak bewijst niet dat geblokkeerde vervolgjobs '
+          'al door Forgejo als runner-taak zichtbaar zijn.',
+    );
+    expect(
+      completion,
+      contains('Release publiceren'),
+      reason:
+          'een terminale fout in release.yml moet herstelbaar blijven als de '
+          'laatste websitejob door die fout nooit kan starten.',
+    );
+    expect(
+      follow,
+      contains('release_ci_completion_seen'),
+      reason:
+          'follow_ci mag niet stoppen in het onzichtbare interval tussen twee '
+          'afhankelijke releasejobs.',
+    );
+    expect(
+      assertion,
+      contains('release_ci_completion_seen'),
+      reason:
+          'fase 3 moet zelfstandig weigeren zolang de laatste releasejob niet '
+          'terminaal zichtbaar is.',
+    );
+  });
+
   test('zonder niveau weigert --print-version', () {
     final r = Process.runSync('bash', [script, '--print-version']);
     expect(r.exitCode, isNot(0));

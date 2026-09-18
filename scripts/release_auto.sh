@@ -275,6 +275,24 @@ release_ci_snapshot() {
     | sort -u
 }
 
+# Forgejo's tasks-endpoint toont alleen jobs waarvoor al een runner-taak bestaat.
+# Tussen twee afhankelijke jobs kan de zojuist afgeronde taak daardoor de enige
+# zichtbare zijn, terwijl de volgende nog geblokkeerd en dus onzichtbaar is. De
+# laatste job van release.yml is het bewijs dat de hele keten geregistreerd is;
+# zonder die marker mag "nul actieve taken" nooit als "release klaar" tellen.
+release_ci_completion_seen() { # release_ci_completion_seen SNAPSHOT
+  local snapshot="$1"
+  # Groen is pas compleet na de laatste job. Een fout kan die laatste job juist
+  # blokkeren; accepteer die daarom alleen wanneer de falende taak herkenbaar uit
+  # release.yml komt. De losse ci.yml-job heet simpelweg `gate` en telt hier dus
+  # uitdrukkelijk niet als bewijs dat de releaseketen terminaal is.
+  printf '%s\n' "$snapshot" \
+    | grep -qE '^(success|failure|cancelled|skipped|error)\|Website-downloads bijwerken$' \
+    && return 0
+  printf '%s\n' "$snapshot" \
+    | grep -qE '^(failure|cancelled|skipped|error)\|(Poort \(vóór het bouwen\)|Web bouwen|Webversie live zetten|Linux bouwen|macOS bouwen|Windows ophalen van de spiegel|Release publiceren)$'
+}
+
 release_ci_task_ids() {
   api GET '/actions/tasks?limit=100' 2>/dev/null \
     | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
@@ -305,6 +323,8 @@ assert_release_ci_terminal() {
   if [ "$running" -ne 0 ]; then
     die "release-CI voor $TAG is nog actief — wacht tot alle jobs terminaal zijn en hervat daarna met: scripts/release_auto.sh --resume $TAG"
   fi
+  release_ci_completion_seen "$snap" \
+    || die "release-CI voor $TAG heeft de laatste job nog niet bereikt — een afhankelijke vervolgjob kan nog onzichtbaar wachten; hervat later met: scripts/release_auto.sh --resume $TAG"
 }
 
 mark() { if [ "$1" -eq 1 ]; then printf '   [x] %s\n' "$2"; else printf '   [ ] %s\n' "$2"; fi; }
@@ -971,26 +991,78 @@ open_or_find_pr() {
 # Scanner-pins gebumpt → scans.yml wijst naar een image-tag die nog niet bestaat.
 # Publiceer dat EERST (ci-image-scans op deze branch) vóór de PR-scan draait.
 # Zie [[scans-image-eerst-publiceren]].
-publish_scans_image() {
+scan_image_tag_for_ref() { # scan_image_tag_for_ref GIT_REF
+  git show "$1:.github/pinned-ci-versions.json" \
+    | jq -r '[.tools[] | select(.name == "gitleaks" or .name == "trufflehog" or .name == "semgrep")
+        | {key:.name, value:.version}] | from_entries
+        | "gl\(.gitleaks)-th\(.trufflehog)-sg\(.semgrep)"'
+}
+
+scan_image_available() { # scan_image_available TAG
+  local image_tag="$1" token code
+  token="$(curl -fsSLG 'https://pawprint.vigilis.online/v2/token' \
+    --data-urlencode 'service=container_registry' \
+    --data-urlencode 'scope=repository:librekat/ocideck-scans:pull' \
+    | jq -r '.token // .access_token // empty' 2>/dev/null || true)"
+  [ -n "$token" ] || return 1
+  code="$(curl -sS -o /dev/null -w '%{http_code}' \
+    -H "Authorization: Bearer $token" \
+    -H 'Accept: application/vnd.oci.image.index.v1+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json' \
+    "https://pawprint.vigilis.online/v2/librekat/ocideck-scans/manifests/$image_tag" \
+    2>/dev/null || true)"
+  [ "$code" = "200" ]
+}
+
+publish_scans_image() { # publish_scans_image IMAGE_TAG
+  local image_tag="$1"
   STEP="scans-image publiceren"
   section "Fase 2 — nieuw scans-image publiceren (scanner-pins gebumpt)"
   api POST "/actions/workflows/ci-image-scans.yml/dispatches" -H 'Content-Type: application/json' \
     -d "$(jq -n --arg r "$BRANCH" '{ref:$r}')" -o /dev/null
   log "ci-image-scans gedispatcht op $BRANCH — wachten tot het scans-image gepubliceerd is…"
   sleep 10
-  local ist="" _
-  for _ in $(seq 1 60); do
+  local ist="" task_seen=0 poll
+  for poll in $(seq 1 60); do
     ist="$(api GET '/actions/tasks?limit=20' \
       | jq -r --arg ref "$BRANCH" '[(.workflow_runs // .tasks // [])[]
           | select(.head_branch==$ref and .name=="build-publish") | .status][0] // "onbekend"')"
     case "$ist" in
-      success) break ;;
+      success) task_seen=1; break ;;
       failure|cancelled) die "ci-image-scans faalde op $BRANCH — het nieuwe scans-image is niet gepubliceerd; de PR-scan zou het niet vinden." ;;
-      *) sleep 20 ;;
+      onbekend)
+        # Forgejo kan een dispatch met 204 accepteren zonder een taak te maken.
+        # Wacht daar geen twintig minuten op: dit vraagt om de gedocumenteerde
+        # lokale publicatieroute en daarna een veilige --resume.
+        if [ "$poll" -ge 3 ]; then
+          die "geen ci-image-scans-taak aangemaakt voor $BRANCH; publiceer lokaal met 'make ci-image-scans-publish' en hervat daarna met: scripts/release_auto.sh --resume $TAG"
+        fi
+        sleep 20
+        ;;
+      *) task_seen=1; sleep 20 ;;
     esac
   done
-  [ "$ist" = "success" ] || die "scans-image werd niet op tijd gepubliceerd — controleer de ci-image-scans-run."
-  log "Nieuw scans-image gepubliceerd."
+  [ "$task_seen" -eq 1 ] && [ "$ist" = "success" ] \
+    || die "scans-image werd niet op tijd gepubliceerd — controleer de ci-image-scans-run."
+  for _ in $(seq 1 12); do
+    scan_image_available "$image_tag" && break
+    sleep 5
+  done
+  scan_image_available "$image_tag" \
+    || die "ci-image-scans was groen, maar $image_tag is niet pullbaar uit het register; open geen release-PR."
+  log "Nieuw scans-image $image_tag gepubliceerd en pullbaar geverifieerd."
+}
+
+ensure_scans_image() {
+  local image_tag
+  git fetch origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH" --quiet
+  image_tag="$(scan_image_tag_for_ref "origin/$BRANCH")"
+  [ -n "$image_tag" ] && [ "$image_tag" != "null" ] \
+    || die "kon de scanner-image-tag niet uit origin/$BRANCH bepalen."
+  if scan_image_available "$image_tag"; then
+    log "Scans-image $image_tag is al pullbaar; publiceren overslaan."
+    return 0
+  fi
+  publish_scans_image "$image_tag"
 }
 
 # Wacht tot de PR-poort groen is. De combined status wordt pas 'success' als ÁLLE
@@ -1126,14 +1198,17 @@ follow_ci() {
     snap="$(release_ci_snapshot || true)"
     running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
     if [ "$snap" != "$prev" ] && [ -n "$snap" ]; then printf '%s\n' "$snap" | sed 's/^/   /'; prev="$snap"; fi
-    { [ -n "$snap" ] && [ "$running" -eq 0 ]; } && break
+    if [ -n "$snap" ] && [ "$running" -eq 0 ] \
+        && release_ci_completion_seen "$snap"; then
+      break
+    fi
     sleep 30
   done
   if [ -z "$snap" ]; then
     die "geen release-CI-taken voor $TAG gevonden binnen de wachttijd — fase 3 wordt niet gestart."
   fi
-  if [ "$running" -ne 0 ]; then
-    die "release-CI voor $TAG is na 60 minuten nog actief — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"
+  if [ "$running" -ne 0 ] || ! release_ci_completion_seen "$snap"; then
+    die "release-CI voor $TAG is na 60 minuten nog actief of niet volledig zichtbaar — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"
   fi
   if printf '%s\n' "$snap" | grep -q '^failure|'; then
     log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
@@ -1156,6 +1231,10 @@ resume_release() {
     follow_ci
     phase3; finish; return 0
   fi
+  # Een eerdere run kan precies tussen het pushen van de release-branch en het
+  # publiceren van het nieuwe scanner-image zijn gestopt. Borg het artefact bij
+  # élke hervatting vóór een bestaande of nieuw te openen PR verder kan.
+  ensure_scans_image
   local st num merged headsha mergesha
   st="$(find_release_pr)"
   if [ -n "$st" ]; then
@@ -1423,7 +1502,7 @@ HEAD_SHA="$(git rev-parse HEAD)"
 
 # Scanner-pins gebumpt → eerst het nieuwe scans-image publiceren, anders vindt de
 # PR-scan het niet.
-[ "$PINS_BUMPED" -eq 1 ] && publish_scans_image
+[ "$PINS_BUMPED" -eq 1 ] && ensure_scans_image
 
 PR_NUMBER="$(open_or_find_pr)"
 [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "null" ] || die "PR aanmaken mislukte."
