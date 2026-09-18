@@ -4,6 +4,7 @@ import 'package:ocideck/services/import/importers/import_failure.dart';
 import 'package:ocideck/services/import/pipeline/import_task.dart';
 import 'package:ocideck/services/import/presentation_import_service.dart';
 import 'package:ocideck/widgets/dialogs/presentation_import_progress_dialog.dart';
+import 'package:ocideck/widgets/dialogs/dialog_shell.dart';
 
 /// #875 — het enkelvoudige annuleerbare voortgangsvenster. Dit is de
 /// widget/integratietest die het issue vraagt: het venster verwerkt invoer
@@ -64,6 +65,7 @@ void main() {
     );
 
     // Het venster staat, met titel, voortgangsbalk en de melding.
+    expect(find.byType(OciDialogShell), findsOneWidget);
     expect(find.text('plan.pptx'), findsOneWidget);
     expect(find.byType(LinearProgressIndicator), findsOneWidget);
     expect(find.text('Slides classificeren…'), findsOneWidget);

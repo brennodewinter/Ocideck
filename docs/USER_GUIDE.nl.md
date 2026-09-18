@@ -3531,6 +3531,10 @@ de editorhelft ervan.
   tekstschaling voor de hele bewerkomgeving, boven op wat het besturingssysteem
   vraagt. Dia's houden hun vaste 16:9-ontwerpformaat, zodat wat je ziet
   nog steeds precies is wat je presenteert en exporteert.
+- **Taakvensters** — bestandsbrowsers, export en de grotere importvensters delen
+  een vaste kop en voet terwijl alleen hun inhoud scrolt. Acties lopen om bij
+  smalle vensters en vergrote interfacetekst, zodat de primaire actie niet onder
+  de vensterrand verdwijnt.
 - **Documentlezer** — de lezer in de app voor de gebundelde gidsen gebruikt de volle
   vensterbreedte, zodat brede tabellen ruimte krijgen in plaats van in een smalle
   kolom geperst te worden, terwijl lopende tekst een comfortabele regellengte houdt. ` ```mermaid `

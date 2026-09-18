@@ -10,6 +10,7 @@ import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/widgets/dialogs/export_dialog.dart';
+import 'package:ocideck/widgets/dialogs/dialog_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Zelfs een test komt alleen via de projectiegrens aan een AudienceDeck — de
@@ -77,8 +78,10 @@ void main() {
     await openDialog(tester);
 
     expect(find.byType(ExportDialog), findsOneWidget);
+    expect(find.byType(OciDialogShell), findsOneWidget);
     // De kwaliteitskeuze is ingeklapt tot de kop wordt aangetikt.
     expect(find.byType(SegmentedButton<bool>), findsNothing);
+    await tester.ensureVisible(find.text('Afbeeldingskwaliteit (PDF)'));
     await tester.tap(find.text('Afbeeldingskwaliteit (PDF)'));
     await tester.pumpAndSettle();
     expect(find.byType(SegmentedButton<bool>), findsOneWidget);
@@ -92,8 +95,10 @@ void main() {
 
     await openDialog(tester);
 
+    await tester.ensureVisible(find.text('Afbeeldingskwaliteit (PDF)'));
     await tester.tap(find.text('Afbeeldingskwaliteit (PDF)'));
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Gecomprimeerd'));
     await tester.tap(find.text('Gecomprimeerd'));
     await tester.pumpAndSettle();
 

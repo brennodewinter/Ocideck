@@ -6,12 +6,14 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/openkat/openkat_installation.dart';
 import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/state/secret_store_provider.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/openkat_installation_wizard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Widget _app(Widget child) {
   return ProviderScope(
     child: MaterialApp(
+      theme: AppTheme.light,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         ...GlobalMaterialLocalizations.delegates,
@@ -26,6 +28,7 @@ Widget _appWithSecrets(SecretStore secrets, Widget child) {
   return ProviderScope(
     overrides: [secretStoreProvider.overrideWithValue(secrets)],
     child: MaterialApp(
+      theme: AppTheme.light,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         ...GlobalMaterialLocalizations.delegates,
@@ -89,6 +92,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('OpenKAT-server toevoegen'), findsOneWidget);
+      expect(find.text('Stap 1 van 3'), findsOneWidget);
       await tester.tap(find.text('Annuleren'));
       await tester.pumpAndSettle();
 

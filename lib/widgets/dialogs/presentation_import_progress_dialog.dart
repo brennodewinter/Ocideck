@@ -7,6 +7,7 @@ import '../../services/import/pipeline/import_task.dart';
 import '../../services/import/presentation_import_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/user_facing_error.dart';
+import 'dialog_shell.dart';
 
 /// Een klein annuleerbaar voortgangsvenster voor het importeren van één
 /// presentatie (#875).
@@ -130,45 +131,43 @@ class _PresentationImportProgressDialogState
       // gaat via de knop, die de worker netjes afbreekt. In de foutstaat sluit
       // Sluiten het venster.
       canPop: false,
-      child: AlertDialog(
-        title: Row(
-          children: [
-            const Icon(Icons.slideshow_outlined, size: 20),
-            const SizedBox(width: 8),
-            Flexible(
-              child: Text(widget.fileName, overflow: TextOverflow.ellipsis),
-            ),
-          ],
-        ),
-        content: _failure == null
-            ? _progressContent(l10n)
-            : _errorContent(l10n),
-        actions: _failure == null
-            ? [
-                TextButton(
-                  onPressed: _stopRequested
-                      ? null
-                      : () {
-                          _cancel.cancel();
-                          setState(() => _stopRequested = true);
-                        },
-                  child: Text(l10n.d('Stoppen')),
-                ),
-              ]
-            : [
-                TextButton(
-                  onPressed: _copied ? null : _copyDetail,
-                  child: Text(
-                    _copied ? l10n.d('Gekopieerd') : l10n.d('Kopiëren'),
+      child: OciDialogShell(
+        width: 560,
+        height: _failure == null ? 360 : 540,
+        maxWidth: 640,
+        maxHeight: 640,
+        child: OciDialogScaffold(
+          title: l10n.d('Presentatie importeren'),
+          leading: const Icon(Icons.slideshow_outlined),
+          subtitle: Text(widget.fileName, overflow: TextOverflow.ellipsis),
+          body: _failure == null ? _progressContent(l10n) : _errorContent(l10n),
+          actions: _failure == null
+              ? [
+                  TextButton(
+                    onPressed: _stopRequested
+                        ? null
+                        : () {
+                            _cancel.cancel();
+                            setState(() => _stopRequested = true);
+                          },
+                    child: Text(l10n.d('Stoppen')),
                   ),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(
-                    context,
-                  ).pop(PreparedImportResult.failed(_failure!)),
-                  child: Text(l10n.t('close')),
-                ),
-              ],
+                ]
+              : [
+                  TextButton(
+                    onPressed: _copied ? null : _copyDetail,
+                    child: Text(
+                      _copied ? l10n.d('Gekopieerd') : l10n.d('Kopiëren'),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(
+                      context,
+                    ).pop(PreparedImportResult.failed(_failure!)),
+                    child: Text(l10n.t('close')),
+                  ),
+                ],
+        ),
       ),
     );
   }

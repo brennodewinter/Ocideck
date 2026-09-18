@@ -12,9 +12,9 @@ import '../../services/openkat/openkat_error_messages.dart';
 import '../../services/openkat/openkat_rocky_client.dart';
 import '../../state/openkat_provider.dart';
 import '../../state/settings_provider.dart';
-import '../../theme/app_theme.dart';
 import '../../utils/atomic_file.dart';
 import '../../widgets/shell/openkat_import_action.dart';
+import 'openkat_dialog_chrome.dart';
 import 'openkat_installation_wizard.dart';
 
 /// Kiest installatie → organisatie → aggregaat-rapport, en begeleidt daarna
@@ -66,7 +66,11 @@ class _OpenKatServerReportDialogState
     final l10n = context.l10n;
     final installations = ref.watch(openKatInstallationsProvider);
     return AlertDialog(
-      title: Text(l10n.d('Rapportage van OpenKAT-server')),
+      title: OpenKatDialogTitle(
+        title: l10n.d('Rapportage van OpenKAT-server'),
+        currentStep: _step + 1,
+        totalSteps: 4,
+      ),
       content: SizedBox(
         width: 480,
         child: Column(
@@ -78,15 +82,16 @@ class _OpenKatServerReportDialogState
                 l10n
                     .d('Server: {name}')
                     .replaceAll('{name}', _installation!.name),
-                style: TextStyle(
-                  fontSize: 12,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: AppTheme.slate700,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               Text(
                 _installation!.host,
-                style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 12),
             ],
@@ -107,30 +112,19 @@ class _OpenKatServerReportDialogState
       );
     }
     if (_loading) {
-      return Row(
-        children: [
-          const SizedBox(
-            width: 16,
-            height: 16,
-            child: CircularProgressIndicator(strokeWidth: 2),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              l10n.d(
-                _step <= 1
-                    ? 'Organisaties worden opgehaald…'
-                    : 'Rapportages worden opgehaald…',
-              ),
-            ),
-          ),
-        ],
+      return OpenKatStatusBanner(
+        busy: true,
+        text: l10n.d(
+          _step <= 1
+              ? 'Organisaties worden opgehaald…'
+              : 'Rapportages worden opgehaald…',
+        ),
       );
     }
     if (_error != null) {
-      return Text(
-        _error!.apply(l10n.d(_error!.source)),
-        style: TextStyle(color: Theme.of(context).colorScheme.error),
+      return OpenKatStatusBanner(
+        kind: OpenKatStatusKind.error,
+        text: _error!.apply(l10n.d(_error!.source)),
       );
     }
     return switch (_step) {
@@ -279,21 +273,27 @@ class _OpenKatServerReportDialogState
       children: [
         Text(
           l10n.d('JSON-export uit OpenKAT'),
-          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 6),
         Text(
           l10n.d(
             'OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.',
           ),
-          style: TextStyle(
-            fontSize: 12,
-            color: AppTheme.slate600,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
             height: 1.35,
           ),
         ),
         const SizedBox(height: 8),
-        Text(chosen, style: TextStyle(fontSize: 11, color: AppTheme.slate500)),
+        Text(
+          chosen,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
         const SizedBox(height: 14),
         if (_importing)
           const LinearProgressIndicator()
@@ -354,11 +354,18 @@ class _OpenKatServerReportDialogState
       ),
       if (_step < 3)
         FilledButton(
-          onPressed: _importing ? null : _goNext,
+          onPressed: _importing || !_canGoNext ? null : _goNext,
           child: Text(_step == 2 ? l10n.d('Doorgaan') : l10n.d('Volgende')),
         ),
     ];
   }
+
+  bool get _canGoNext => switch (_step) {
+    0 => _installation != null,
+    1 => _organization != null,
+    2 => _report != null,
+    _ => false,
+  };
 
   Future<void> _goNext() async {
     if (_step == 0) {

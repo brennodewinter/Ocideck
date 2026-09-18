@@ -16,6 +16,7 @@ import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/dialogs/presentation_import_queue_dialog.dart';
+import 'package:ocideck/widgets/dialogs/dialog_shell.dart';
 import 'package:ocideck/widgets/shell/presentation_import_action.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as p;
@@ -125,6 +126,7 @@ void main() {
     tester,
   ) async {
     await pumpDialog(tester, items(['een', 'twee', 'drie']));
+    expect(find.byType(OciDialogShell), findsOneWidget);
     expect(find.text(target.path), findsOneWidget);
 
     await tester.tap(find.text('Importeren'));

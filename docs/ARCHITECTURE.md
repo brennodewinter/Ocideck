@@ -203,6 +203,13 @@ lib/
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
 
+Taakvensters delen hun geometrie, kop en voet via
+`widgets/dialogs/dialog_shell.dart`. Die schil is uitsluitend presentatie:
+sluitbeleid, providers, workflowtoestand en getypeerde resultaten blijven bij
+de concrete dialoog of zijn aanroeper. Daardoor kan een Git-, S3- of
+WebDAV-browser er hetzelfde uitzien zonder hun verschillende opslagcontracten
+tot één kunstmatig domeinmodel samen te voegen.
+
 *(Corrected 2026-08-30. Three top-level directories were missing — `collab/`,
 `xmpp/` and `meetings/`, together some 12,000 lines — so a reader of this map
 could not tell that co-authoring and calls exist at all. The `services/`

@@ -625,7 +625,12 @@ class AppTheme {
       scaffoldBackgroundColor: background,
       canvasColor: surfaceColor,
       cardColor: surfaceColor,
-      dialogTheme: DialogThemeData(backgroundColor: surfaceColor),
+      dialogTheme: DialogThemeData(
+        backgroundColor: surfaceColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+        ),
+      ),
       textTheme: ThemeData(
         brightness: brightness,
       ).textTheme.apply(bodyColor: text, displayColor: text),

@@ -10,6 +10,7 @@ import '../../services/slide_image_refs.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
+import 'dialog_shell.dart';
 import 'slide_diff_dialog.dart';
 import '../../platform/platform_features.dart';
 
@@ -210,34 +211,24 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
     final visible = _visible();
     final selectedCount = _selectedIds.length;
 
-    return AlertDialog(
-      title: Row(
-        children: [
-          const Icon(Icons.library_add_outlined, size: 20),
-          const SizedBox(width: 8),
-          Flexible(
-            child: Text(
-              l10n.d('Slides importeren'),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          const Spacer(),
-          if (selectedCount > 0)
-            Text(
-              '$selectedCount ${l10n.d('geselecteerd')}',
-              style: TextStyle(
-                fontSize: 12,
-                color: AppTheme.accentFg,
-                fontWeight: FontWeight.w600,
+    return OciDialogShell(
+      width: 860,
+      height: 700,
+      maxWidth: 980,
+      maxHeight: 780,
+      child: OciDialogScaffold(
+        title: l10n.d('Slides importeren'),
+        leading: const Icon(Icons.library_add_outlined),
+        headerTrailing: selectedCount == 0
+            ? null
+            : Text(
+                '$selectedCount ${l10n.d('geselecteerd')}',
+                style: TextStyle(
+                  color: AppPalette.of(Theme.of(context)).accentInk,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-        ],
-      ),
-      contentPadding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-      content: SizedBox(
-        width: 760,
-        height: 560,
-        child: Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _toolbar(),
@@ -245,57 +236,68 @@ class _ImportSlidesDialogState extends State<ImportSlidesDialog> {
             Expanded(child: _body(visible)),
           ],
         ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.t('cancel')),
-        ),
-        ElevatedButton.icon(
-          onPressed: selectedCount == 0
-              ? null
-              : () => Navigator.pop(context, _collectSelected()),
-          icon: const Icon(Icons.download_done, size: 16),
-          label: Text(
-            selectedCount == 0
-                ? l10n.d('Importeren')
-                : '${l10n.d('Importeren')} ($selectedCount)',
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.t('cancel')),
           ),
-        ),
-      ],
+          ElevatedButton.icon(
+            onPressed: selectedCount == 0
+                ? null
+                : () => Navigator.pop(context, _collectSelected()),
+            icon: const Icon(Icons.download_done, size: 16),
+            label: Text(
+              selectedCount == 0
+                  ? l10n.d('Importeren')
+                  : '${l10n.d('Importeren')} ($selectedCount)',
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _toolbar() {
     final l10n = context.l10n;
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-            autofocus: true,
-            decoration: InputDecoration(
-              isDense: true,
-              prefixIcon: const Icon(Icons.search, size: 18),
-              hintText: l10n.d('Zoek op presentatie, titel of tekst…'),
-            ),
-            onChanged: (v) => setState(() => _query = v),
-          ),
+    final search = TextField(
+      autofocus: true,
+      decoration: InputDecoration(
+        isDense: true,
+        prefixIcon: const Icon(Icons.search, size: 18),
+        hintText: l10n.d('Zoek op presentatie, titel of tekst…'),
+      ),
+      onChanged: (v) => setState(() => _query = v),
+    );
+    final folder = Tooltip(
+      message: _directory ?? l10n.d('Geen map gekozen'),
+      child: OutlinedButton.icon(
+        onPressed: _pickDirectory,
+        icon: const Icon(Icons.folder_open_outlined, size: 16),
+        label: Text(
+          _directory == null ? l10n.d('Map kiezen') : p.basename(_directory!),
+          overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(width: 8),
-        Tooltip(
-          message: _directory ?? l10n.d('Geen map gekozen'),
-          child: OutlinedButton.icon(
-            onPressed: _pickDirectory,
-            icon: const Icon(Icons.folder_open_outlined, size: 16),
-            label: Text(
-              _directory == null
-                  ? l10n.d('Map kiezen')
-                  : p.basename(_directory!),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ),
-      ],
+      ),
+    );
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final stacked =
+            constraints.maxWidth < 620 ||
+            MediaQuery.textScalerOf(context).scale(1) >= 1.5;
+        if (stacked) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [search, const SizedBox(height: 8), folder],
+          );
+        }
+        return Row(
+          children: [
+            Expanded(child: search),
+            const SizedBox(width: 8),
+            folder,
+          ],
+        );
+      },
     );
   }
 

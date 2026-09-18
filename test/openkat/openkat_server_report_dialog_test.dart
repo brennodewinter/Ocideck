@@ -6,6 +6,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/openkat/openkat_installation.dart';
 import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/state/secret_store_provider.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/openkat_server_report_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,7 @@ Widget _app({
         ? const []
         : [secretStoreProvider.overrideWithValue(secrets)],
     child: MaterialApp(
+      theme: AppTheme.light,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         ...GlobalMaterialLocalizations.delegates,
@@ -48,8 +50,15 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Rapportage van OpenKAT-server'), findsOneWidget);
+    expect(find.text('Stap 1 van 4'), findsOneWidget);
     expect(find.text('Nog geen OpenKAT-server aangesloten.'), findsOneWidget);
     expect(find.text('Server toevoegen…'), findsOneWidget);
+    expect(
+      tester
+          .widget<FilledButton>(find.widgetWithText(FilledButton, 'Volgende'))
+          .onPressed,
+      isNull,
+    );
   });
 
   testWidgets('twee installaties toont radiolijst', (tester) async {

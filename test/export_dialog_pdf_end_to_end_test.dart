@@ -225,6 +225,8 @@ void main() {
 
     final compact = find.text('Gecomprimeerd');
     expect(compact, findsWidgets, reason: 'de compacte keuze staat er niet');
+    await tester.ensureVisible(compact.first);
+    await tester.pump();
     await tester.tap(compact.first);
     await tester.pump(const Duration(milliseconds: 100));
 

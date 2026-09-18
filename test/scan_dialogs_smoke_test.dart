@@ -10,6 +10,7 @@ import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/widgets/dialogs/import_slides_dialog.dart';
+import 'package:ocideck/widgets/dialogs/dialog_shell.dart';
 import 'package:ocideck/widgets/dialogs/open_presentation_dialog.dart';
 import 'package:ocideck/widgets/dialogs/scan_library_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
@@ -164,5 +165,6 @@ void main() {
     await _openAndScan(tester);
 
     expect(find.byType(ImportSlidesDialog), findsOneWidget);
+    expect(find.byType(OciDialogShell), findsOneWidget);
   });
 }
