@@ -1627,6 +1627,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeelding toevoegen…': 'Lisää kuva…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Kirjoituskelpoinen kirjastokansio ei löytynyt. Lisää kansio tai muokkaa Tallennusta kohdassa Asetukset.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V liittää kuvan arkistoon',
   'hoofdstukken': 'luvut',
   'paragrafen': 'kappaleet',
   'tabellen': 'taulukot',

@@ -1628,6 +1628,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeelding toevoegen…': 'Přidat obrázek…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nenalezena zapisovatelná složka knihovny. Přidejte složku nebo upravte Úložiště v Nastavení.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V vloží obrázek do archivu',
   'hoofdstukken': 'kapitoly',
   'paragrafen': 'odstavce',
   'tabellen': 'tabulky',

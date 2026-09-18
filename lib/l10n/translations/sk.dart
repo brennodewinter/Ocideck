@@ -1633,6 +1633,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeelding toevoegen…': 'Pridať obrázok…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nenašiel sa zapisovateľný priečinok knižnice. Pridajte priečinok alebo upravte Úložisko v Nastavenia.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V prilepí obrázok do archívu',
   'hoofdstukken': 'kapitoly',
   'paragrafen': 'odseky',
   'tabellen': 'tabuľky',

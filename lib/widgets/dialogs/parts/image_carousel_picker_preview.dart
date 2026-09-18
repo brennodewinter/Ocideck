@@ -224,7 +224,18 @@ extension _CarouselPreview on _ImageCarouselPickerState {
           // vult een lege ruimte de plek zodat de knoppen rechts blijven staan.
           Expanded(
             child: widget.manageOnly
-                ? const SizedBox.shrink()
+                ? (supportsLocalProjectFolders
+                      ? Text(
+                          l10n.d(
+                            'Ctrl/Cmd+V plakt een afbeelding in het archief',
+                          ),
+                          style: TextStyle(
+                            color: ImagePickerPalette.textMuted,
+                            fontSize: 11,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : const SizedBox.shrink())
                 : Text(
                     l10n.d(
                       '↑↓←→ navigeren  ·  Enter kiezen  ·  Dubbelklik selecteert',
@@ -296,8 +307,9 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     );
   }
 
-  /// Bladeren (één bestand) en Map toevoegen (zoekwortel) — uit [_buildFooter]
-  /// getild voor de methode-lengteratchet.
+  /// Bladeren (één bestand, kiesmodus), Afbeelding toevoegen (beheermodus)
+  /// en Map toevoegen (zoekwortel) — uit [_buildFooter] getild voor de
+  /// methode-lengteratchet.
   List<Widget> _footerLibraryButtons(AppLocalizations l10n) {
     final style = OutlinedButton.styleFrom(
       foregroundColor: ImagePickerPalette.textMuted,
@@ -310,6 +322,18 @@ extension _CarouselPreview on _ImageCarouselPickerState {
           onPressed: _browse,
           icon: const Icon(Icons.folder_open_outlined, size: 16),
           label: Text(l10n.d('Bladeren…')),
+          style: style,
+        ),
+        const SizedBox(width: 8),
+      ],
+      // In beheermodus is "Bladeren" zinloos (er valt niets te kiezen) — de
+      // ontbrekende handeling daar is juist: een afbeelding ín het archief
+      // zetten (#2107).
+      if (widget.manageOnly && supportsLocalProjectFolders) ...[
+        OutlinedButton.icon(
+          onPressed: _loading ? null : _addImageFromFile,
+          icon: const Icon(Icons.add_photo_alternate_outlined, size: 16),
+          label: Text(l10n.d('Afbeelding toevoegen…')),
           style: style,
         ),
         const SizedBox(width: 8),

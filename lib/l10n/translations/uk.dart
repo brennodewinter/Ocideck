@@ -1642,6 +1642,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeelding toevoegen…': 'Додати зображення…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Записувану теку бібліотеки не знайдено. Додайте теку або змініть Сховище в Налаштування.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V вставляє зображення в архів',
   'hoofdstukken': 'розділи',
   'paragrafen': 'абзаци',
   'tabellen': 'таблиці',

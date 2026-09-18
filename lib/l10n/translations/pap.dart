@@ -666,6 +666,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeelding toevoegen…': 'Añadi imágen…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'No a haña un karpeta di biblioteca ku por wordu skirbí. Añadi un karpeta of ajustá Almacenamentu bou di Konfigurashon.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V ta pegá un imágen den e archivo',
   'hoofdstukken': 'kapítulonan',
   'paragrafen': 'parágrafonan',
   'tabellen': 'tablanan',

@@ -667,6 +667,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeelding toevoegen…': 'Ofbylding tafoegje…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Gjin beskriuwbere biblioteekmap fûn. Foegje in map ta of pas Opslach oan ûnder Ynstellingen.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V plakt in ôfbylding yn it argyf',
   'hoofdstukken': 'haadstikken',
   'paragrafen': 'paragrafen',
   'tabellen': 'tabellen',

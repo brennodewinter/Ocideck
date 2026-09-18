@@ -1629,6 +1629,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeelding toevoegen…': 'Kép hozzáadása…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nem található írható könyvtármappa. Adjon hozzá egy mappát, vagy módosítsa a Tárolót itt: Beállítások.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V képet illeszt be az archívumba',
   'hoofdstukken': 'fejezetek',
   'paragrafen': 'bekezdések',
   'tabellen': 'táblázatok',

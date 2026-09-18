@@ -1630,6 +1630,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeelding toevoegen…': 'Bild hinzuefüege…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Kein beschriibbare Bibliotheksordner gfunde. Füeg en Ordner dezue oder pass Speicher under Iistellige a.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V füegt es Bild is Archiv ii',
   'hoofdstukken': 'Kapitel',
   'paragrafen': 'Abschnitt',
   'tabellen': 'Tabälle',

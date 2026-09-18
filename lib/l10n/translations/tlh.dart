@@ -1604,6 +1604,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeelding toevoegen…': 'mIllogh chel…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'De\' Qul mIw ghItlhlaHbe\' tu\'lu\'be\'. Daq yIchel pagh Segh chu\' yIchoH.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V mIllogh De\' Qul mIwDaq chel',
   'hoofdstukken': 'chapters',
   'paragrafen': 'sections',
   'tabellen': 'tables',

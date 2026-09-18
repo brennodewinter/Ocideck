@@ -1643,6 +1643,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeelding toevoegen…': 'Adaugă imagine…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Nu s-a găsit un folder de bibliotecă inscripționabil. Adaugă un folder sau ajustează Stocare în Setări.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V lipește o imagine în arhivă',
   'hoofdstukken': 'capitole',
   'paragrafen': 'paragrafe',
   'tabellen': 'tabele',

@@ -1627,6 +1627,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeelding toevoegen…': 'Tambahkan gambar…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Tidak ada folder perpustakaan yang dapat ditulis. Tambahkan folder atau sesuaikan Penyimpanan di Pengaturan.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V menempel gambar ke arsip',
   'hoofdstukken': 'bab',
   'paragrafen': 'paragraf',
   'tabellen': 'tabel',

@@ -667,6 +667,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeelding toevoegen…': 'Ajouter une image…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Aucun dossier bibliothèque accessible en écriture. Ajoutez un dossier ou modifiez Stockage dans Paramètres.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V colle une image dans l\'archive',
   'hoofdstukken': 'chapitres',
   'paragrafen': 'paragraphes',
   'tabellen': 'tableaux',

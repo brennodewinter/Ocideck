@@ -1642,6 +1642,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeelding toevoegen…': 'Imaginem adde…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Plica bibliothecae scribibilis non inventa. Adde fasciculum aut Mémoriam sub Configuratio muta.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V imaginem in archivum glutinat',
   'hoofdstukken': 'capitula',
   'paragrafen': 'paragraphi',
   'tabellen': 'tabulae',

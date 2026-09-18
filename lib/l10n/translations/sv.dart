@@ -1626,6 +1626,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeelding toevoegen…': 'Lägg till bild…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Ingen skrivbar biblioteksmapp hittades. Lägg till en mapp eller justera Lagring under Inställningar.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V klistrar in en bild i arkivet',
   'hoofdstukken': 'kapitel',
   'paragrafen': 'avsnitt',
   'tabellen': 'tabeller',

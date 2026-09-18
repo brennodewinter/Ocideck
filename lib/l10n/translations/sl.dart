@@ -1627,6 +1627,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeelding toevoegen…': 'Dodaj sliko…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Ni zapisljive mape knjižnice. Dodajte mapo ali prilagodite Shrambo v Nastavitve.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V prilepi sliko v arhiv',
   'hoofdstukken': 'poglavja',
   'paragrafen': 'odstavki',
   'tabellen': 'tabele',

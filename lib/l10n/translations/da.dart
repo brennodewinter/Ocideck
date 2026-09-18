@@ -1627,6 +1627,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeelding toevoegen…': 'Tilføj billede…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Ingen skrivbar biblioteksmappe fundet. Tilføj en mappe, eller juster Lager under Indstillinger.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V indsætter et billede i arkivet',
   'hoofdstukken': 'kapitler',
   'paragrafen': 'afsnit',
   'tabellen': 'tabeller',

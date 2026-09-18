@@ -1645,6 +1645,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeelding toevoegen…': 'Żid immaġni…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'L-ebda kartella tal-librerija li tista\' tiġi miktuba ma nstabet. Żid kartella jew aġġusta l-Ħażna taħt Settings.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V jippejstja immaġni fl-arkivju',
   'hoofdstukken': 'kapitli',
   'paragrafen': 'paragrafi',
   'tabellen': 'tabelli',

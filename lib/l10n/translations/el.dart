@@ -1652,6 +1652,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeelding toevoegen…': 'Προσθήκη εικόνας…',
+  'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
+      'Δεν βρέθηκε εγγράψιμος φάκελος βιβλιοθήκης. Προσθέστε φάκελο ή προσαρμόστε την Αποθήκευση στις Ρυθμίσεις.',
+  'Ctrl/Cmd+V plakt een afbeelding in het archief':
+      'Ctrl/Cmd+V επικολλά μια εικόνα στο αρχείο',
   'hoofdstukken': 'κεφάλαια',
   'paragrafen': 'παράγραφοι',
   'tabellen': 'πίνακες',

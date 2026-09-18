@@ -486,7 +486,11 @@ const Map<String, int> classSizeBaseline = {
   // van 2460: `_parsedCustomMarkdown` is naar het hoogste niveau getild — het
   // leest niets van de service, dus het hoorde nooit op de klasse. Meet 2428.
   'lib/widgets/dialogs/image_carousel_picker.dart#_ImageCarouselPickerState':
-      2437, // +228 (#1404): hernoem-actie + dialoog; testbare logica zit in
+      2601, // +164 (#2107): archief-toevoeging — upload-knop en Ctrl/Cmd+V in
+  // beheermodus. De file-IO zit bewust in top-level functies
+  // (imageArchiveDestination/adoptImage*IntoArchive), de klasse draagt alleen
+  // de dunne pick/plak-orchestratie en snackbar-afslag.
+  // Was 2437 (+228, #1404): hernoem-actie + dialoog; testbare logica zit in
   // ImageRenameService, hier blijft alleen UI-orchestratie
   'lib/services/privacy/privacy_scanner.dart#PrivacyScanner': 1616,
   // +12 (#1845): calloutDescription fragments — descriptions are scannable
