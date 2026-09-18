@@ -146,7 +146,16 @@ class FlutterWindow: NSObject {
                 }
             }
             if let screen = target ?? screens.first {
-                window.styleMask = [.borderless]
+                // AppKit raises NSGenericException (and aborts the process)
+                // when code clears NSWindowStyleMaskFullScreen outside a
+                // fullscreen transition. A newly created hidden audience
+                // window should not carry that bit, but macOS can attach it
+                // while restoring/organising Spaces. In that exceptional state
+                // it already has a fullscreen surface, so preserve the mask
+                // instead of asking AppKit to clear the protected bit.
+                if !window.styleMask.contains(.fullScreen) {
+                    window.styleMask = [.borderless]
+                }
                 // Raise above the menu bar (.mainMenu == 24) so the macOS menu
                 // bar and notch area on the beamer are covered by the slide; a
                 // plain .normal window would sit *under* the menu bar and leave
