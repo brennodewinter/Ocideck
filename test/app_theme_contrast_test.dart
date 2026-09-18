@@ -404,6 +404,20 @@ void main() {
   });
 
   group('de rollen die Material anders zelf invult, zijn expliciet gezet', () {
+    test('dialoogvensters delen de afgeronde OciDeck-vorm', () {
+      final shape = AppTheme.light.dialogTheme.shape;
+
+      expect(shape, isA<RoundedRectangleBorder>());
+      final border = shape! as RoundedRectangleBorder;
+      expect(
+        border.borderRadius,
+        BorderRadius.circular(18),
+        reason:
+            'zonder centrale vorm kiest elk venster zelf een radius en groeit '
+            'de interface opnieuw uit elkaar',
+      );
+    });
+
     // De rekensom hierboven vindt een slechte kleur. Deze vindt een ontbrékende
     // kleur — en dát was #744: er stond geen `textButtonTheme`, dus viel Flutter
     // terug op `colorScheme.primary`. Een verhoudingstoets alleen zou de dag dat
