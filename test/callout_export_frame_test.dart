@@ -10,6 +10,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/utils/image_limits.dart';
 import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
+import 'package:path/path.dart' as p;
 
 /// De rasterexports (PDF, PPTX, ODP) laden de dia-afbeeldingen voor en vangen
 /// dan een frame zodra de boom niet meer hoeft te verven. `CalloutOverlay`
@@ -23,7 +24,10 @@ import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
 
 String _writePng() {
   final dir = Directory.systemTemp.createTempSync('ocideck_exportframe');
-  final file = File('${dir.path}/beeld.png');
+  // Gebruik dezelfde genormaliseerde platformsleutel als
+  // calloutImageProvider. Een gemengde `C:\\…/beeld.png`-sleutel warmt op
+  // Windows een andere cache-entry dan de overlay zelf gebruikt.
+  final file = File(p.join(dir.path, 'beeld.png'));
   final image = img.Image(width: 200, height: 100);
   img.fill(image, color: img.ColorRgb8(180, 180, 180));
   file.writeAsBytesSync(Uint8List.fromList(img.encodePng(image)));
@@ -124,30 +128,6 @@ void main() {
     tester,
   ) async {
     final path = _writePng();
-
-    // Wat de rasterizer doet vóór hij een frame vangt.
-    await tester.runAsync(() async {
-      final stream = cappedFileImage(
-        File(path),
-      ).resolve(ImageConfiguration.empty);
-      final done = Completer<void>();
-      late ImageStreamListener listener;
-      listener = ImageStreamListener(
-        (_, _) {
-          if (!done.isCompleted) done.complete();
-        },
-        onError: (_, _) {
-          if (!done.isCompleted) done.complete();
-        },
-      );
-      stream.addListener(listener);
-      await done.future.timeout(
-        const Duration(seconds: 10),
-        onTimeout: () => throw StateError('het beeld kwam niet in de cache'),
-      );
-      stream.removeListener(listener);
-    });
-
     final zonder = Slide(id: 'een', type: SlideType.bulletsImage);
     final met = Slide(
       id: 'twee',
@@ -162,6 +142,31 @@ void main() {
         ),
       ],
     );
+
+    // Houd dezelfde cache-entry live tot ná het eerstvolgende frame. Dat is
+    // precies de garantie die precacheImage aan de rasterizer geeft; de
+    // expliciete listener maakt het moment van vrijgeven ook op Windows
+    // deterministisch voor deze toets.
+    late ImageStream stream;
+    late ImageStreamListener listener;
+    await tester.runAsync(() async {
+      final done = Completer<void>();
+      stream = cappedFileImage(File(path)).resolve(ImageConfiguration.empty);
+      listener = ImageStreamListener(
+        (_, _) {
+          if (!done.isCompleted) done.complete();
+        },
+        onError: (_, _) {
+          if (!done.isCompleted) done.complete();
+        },
+      );
+      stream.addListener(listener);
+      await done.future.timeout(
+        const Duration(seconds: 10),
+        onTimeout: () => throw StateError('het beeld kwam niet in de cache'),
+      );
+    });
+    addTearDown(() => stream.removeListener(listener));
 
     final key = GlobalKey<_HostState>();
     await tester.pumpWidget(_Host(key: key, eerste: zonder, tweede: met));

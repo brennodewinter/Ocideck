@@ -22,36 +22,38 @@ void main() {
 
   group('absolutizeSlideAssetPaths', () {
     test('maakt relatieve paden absoluut tegen de bronmap', () {
+      final sourceDir = Directory(p.join(tmp.path, 'bronmap'))..createSync();
       final slide = Slide.create(SlideType.image).copyWith(
         imagePath: 'images/een.png',
         imagePath2: 'images/twee.png',
         customMarkdown: 'Zie ![de foto](images/drie.png) hierboven.',
       );
 
-      final out = absolutizeSlideAssetPaths(slide, '/bronmap');
+      final out = absolutizeSlideAssetPaths(slide, sourceDir.path);
 
-      expect(out.imagePath, p.join('/bronmap', 'images/een.png'));
-      expect(out.imagePath2, p.join('/bronmap', 'images/twee.png'));
+      expect(out.imagePath, p.join(sourceDir.path, 'images', 'een.png'));
+      expect(out.imagePath2, p.join(sourceDir.path, 'images', 'twee.png'));
       expect(
         out.customMarkdown,
-        'Zie ![de foto](${p.join('/bronmap', 'images/drie.png')}) hierboven.',
+        'Zie ![de foto](${p.join(sourceDir.path, 'images', 'drie.png')}) hierboven.',
       );
     });
 
     test('neemt video, audio en de Marp-achtergrond mee', () {
+      final sourceDir = Directory(p.join(tmp.path, 'bronmap'))..createSync();
       final slide = Slide.create(SlideType.video).copyWith(
         videoPath: 'media/clip.mp4',
         audioPath: 'media/geluid.mp3',
         marpStyle: const MarpStyle(backgroundImage: "url('images/bg.png')"),
       );
 
-      final out = absolutizeSlideAssetPaths(slide, '/bronmap');
+      final out = absolutizeSlideAssetPaths(slide, sourceDir.path);
 
-      expect(out.videoPath, p.join('/bronmap', 'media/clip.mp4'));
-      expect(out.audioPath, p.join('/bronmap', 'media/geluid.mp3'));
+      expect(out.videoPath, p.join(sourceDir.path, 'media', 'clip.mp4'));
+      expect(out.audioPath, p.join(sourceDir.path, 'media', 'geluid.mp3'));
       expect(
         out.marpStyle.backgroundImage,
-        "url('${p.join('/bronmap', 'images/bg.png')}')",
+        "url('${p.join(sourceDir.path, 'images', 'bg.png')}')",
       );
     });
 

@@ -598,7 +598,16 @@ extension FileServiceStyleProfile on FileService {
         StyleProfileImportFailure.cancelled,
       );
     }
-    if (await file.length() > FileService.maxStyleProfileBytes) {
+    // file_picker 13 onderscheidt een echt leeg bestand van een mislukte
+    // lengtemeting. Bij die laatste mogen we niet alsnog onbegrensd inlezen:
+    // dit pad bewaakt de geheugencap en faalt daarom dicht.
+    final length = file.lengthSync() ?? await file.length();
+    if (length == null) {
+      return const StyleProfileImportOutcome.failed(
+        StyleProfileImportFailure.invalid,
+      );
+    }
+    if (length > FileService.maxStyleProfileBytes) {
       return const StyleProfileImportOutcome.failed(
         StyleProfileImportFailure.tooLarge,
       );

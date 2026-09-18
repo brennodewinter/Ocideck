@@ -519,7 +519,7 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** at least one file is not formatted. Fix with `make format`
   (which rewrites files in place), then re-run.
 - **Note:** `dart format`'s output is tied to the Dart/Flutter version. The repo
-  is pinned to **Flutter 3.47.2** (see [Version pin](#version-pin)); a different
+  is pinned to **Flutter 3.47.4** (see [Version pin](#version-pin)); a different
   local version can report spurious drift. Match the pin before reformatting the
   whole tree.
 
@@ -2454,13 +2454,14 @@ See [`BUILD.md`](BUILD.md) for the matching local `make build-*` targets, and
 
 ## Version pin
 
-CI pins **Flutter 3.47.2 (stable)**, recorded in `.tool-versions` (asdf) and in
-both `.github/workflows/*.yml`. The pin matters mainly for **`dart format`**: its
+The local gate and GitHub workflows pin **Flutter 3.47.4 (stable)**, recorded in
+`.tool-versions` (asdf) and `.github/workflows/*.yml`. The pin matters mainly for
+**`dart format`**: its
 line-wrapping output changes between releases, so an unpinned local toolchain — or
 a separately installed standalone Dart used instead of the Flutter-bundled one —
 can disagree with CI on formatting. Keep your local Flutter on the pinned version
-and use its bundled `dart` (or bump the pin in `.tool-versions` + both workflows
-and reformat the tree in one mechanical commit).
+and use its bundled `dart` (or bump the pin in `.tool-versions` + the GitHub
+workflows and reformat the tree in one mechanical commit).
 
 ### Toolchains of record
 
@@ -2472,8 +2473,8 @@ actually runs on is listed here, deviations included.
 
 | Where | `flutter --version` | Against the pin |
 | --- | --- | --- |
-| Maintainer machine (macOS arm64) | `3.47.2 • stable • https://github.com/flutter/flutter.git` | matches |
-| CI (GitHub Actions, all jobs) | `3.47.2 • stable • https://github.com/flutter/flutter.git` | matches |
+| Maintainer machine (macOS arm64) | `3.47.4 • stable • https://github.com/flutter/flutter.git` | matches |
+| CI (GitHub Actions, all jobs) | `3.47.4 • stable • https://github.com/flutter/flutter.git` | matches |
 
 **The maintainer machine is the one that matters**, because there is no CI
 runner: it is the only place the gate has ever run.

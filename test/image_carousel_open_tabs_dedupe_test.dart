@@ -45,9 +45,6 @@ void main() {
       final project = Directory.systemTemp.createTempSync(
         'carousel_open_tabs_dedupe_',
       );
-      addTearDown(() {
-        if (project.existsSync()) project.deleteSync(recursive: true);
-      });
       final images = Directory(p.join(project.path, 'images'))..createSync();
       final copy = File(p.join(images.path, 'kopie.png'))
         ..writeAsBytesSync(_onePixelPng);
@@ -117,6 +114,42 @@ void main() {
       );
 
       final container = ProviderContainer();
+      var cleanedUp = false;
+      Future<void> cleanup() async {
+        if (cleanedUp) return;
+        cleanedUp = true;
+        final imageProviders = tester
+            .widgetList<Image>(find.byType(Image))
+            .map((image) => image.image)
+            .toSet();
+        // Windows houdt een getoonde FileImage open zolang widgetboom of
+        // imagecache haar nog bezit. Geef beide vrij vóór de tijdelijke
+        // projectmap wordt verwijderd; anders faalt alleen de testopruiming.
+        await tester.pumpWidget(const SizedBox.shrink());
+        container.dispose();
+        await tester.runAsync(() async {
+          for (final provider in imageProviders) {
+            await provider.evict();
+          }
+        });
+        await tester.pump();
+        await pumpUntil(
+          tester,
+          () {
+            try {
+              if (project.existsSync()) project.deleteSync(recursive: true);
+              return true;
+            } on PathAccessException {
+              return false;
+            }
+          },
+          timeout: const Duration(seconds: 1),
+          step: const Duration(milliseconds: 50),
+          reason: 'Windows hield de tijdelijke afbeeldingsmap open',
+        );
+      }
+
+      addTearDown(cleanup);
       container.read(settingsProvider);
       await pumpUntil(
         tester,
@@ -276,9 +309,9 @@ void main() {
       expect(persistedProfile.logoDarkPath, keeper.path);
       expect(persistedProfile.documentLogoPath, keeper.path);
 
-      await tester.pumpWidget(const SizedBox.shrink());
-      container.dispose();
-      await tester.pump();
+      // De tabs-notifier bezit een periodieke timer. Ruim hem binnen het
+      // testlichaam op, vóór Flutter controleert of timers zijn blijven staan.
+      await cleanup();
     },
   );
 }

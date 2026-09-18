@@ -16,6 +16,9 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Flutter 3.47.4 (Dart 3.13.3), de bijbehorende directe en transitieve
+  pakketten en de software-inventaris zijn bijgewerkt; de bestandskiezer faalt
+  bij een onbekende bestandsgrootte dicht in plaats van onbegrensd in te lezen.
 - De bewuste `desktop_multi_window`-fork is herbaseerd op upstream 0.3.1, zodat
   de macOS-plugin Swift Package Manager ondersteunt zonder de
   presentatie-specifieke vensterbediening op te geven.
