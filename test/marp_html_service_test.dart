@@ -797,6 +797,16 @@ void main() {}
     expect(MarpHtmlService.renderTimelineBlocks(slide), slide);
   });
 
+  test('tijdlijnopties verhinderen de HTML-tijdlijn niet', () {
+    const slide =
+        '<!-- _class: timeline timeline-vertical timeline-steps -->\n\n'
+        '# Verloop\n\n- 2024 :: Start :: kickoff\n';
+    final html = MarpHtmlService.renderTimelineBlocks(slide);
+
+    expect(html, contains('<ol class="timeline">'));
+    expect(html, isNot(contains('2024 :: Start')));
+  });
+
   test('de akkoordpagina draagt de verklaring, niet alleen een kop', () {
     // De ondertekening staat op dekniveau; de dia bewaart alleen een kop. De
     // export liet daardoor precies de pagina leeg waar de verklaring hoort.

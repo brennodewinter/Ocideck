@@ -549,7 +549,7 @@ class MarpHtmlService {
   // ── Tijdlijn → HTML ───────────────────────────────────────────────────────
 
   static final RegExp _timelineClass = RegExp(
-    r'<!--\s*_class:\s*timeline\s*-->',
+    r'<!--\s*_class:\s*[^>]*\btimeline\b[^>]*-->',
   );
   static final RegExp _bulletLine = RegExp(r'^[\t ]*-[\t ]+(.*)$');
 

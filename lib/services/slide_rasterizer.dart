@@ -536,6 +536,10 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           // mermaid-diagram valt hier terug op passend verkleinen i.p.v. een
           // scrollvenster (#872), zodat het hele diagram op de pagina staat.
           scrollableMermaid: false,
+          // Hetzelfde statische-exportcontract geldt voor tijdlijnen: de
+          // volledige reeks blijft in de PDF/PPTX zichtbaar, niet alleen het
+          // eerste kijkvenster van de interactieve presentatie.
+          scrollableTimeline: false,
           slide: _slide,
           projectPath: widget.projectPath,
           themeProfile: widget.themeProfile,
