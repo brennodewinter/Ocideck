@@ -228,11 +228,12 @@ class OciDialogFooter extends StatelessWidget {
         final stacked =
             constraints.maxWidth < 460 ||
             MediaQuery.textScalerOf(context).scale(1) >= 1.5;
-        if (leading == null)
+        if (leading == null) {
           return Align(
             alignment: AlignmentDirectional.centerEnd,
             child: actionWrap,
           );
+        }
         if (stacked) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
