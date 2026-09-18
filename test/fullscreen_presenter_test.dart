@@ -516,6 +516,25 @@ void main() {
       ).copyWith(title: 'Tussendia', bullets: const ['Punt']),
       timeline('Tweede tijdlijn'),
     ];
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final sentViews = <Map<String, dynamic>>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'invokeMethod') {
+        final args = Map<String, dynamic>.from(call.arguments as Map);
+        if (args['method'] == 'timelineView') {
+          sentViews.add(Map<String, dynamic>.from(args['arguments'] as Map));
+        }
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
 
     await tester.pumpWidget(
       MaterialApp(
@@ -524,6 +543,10 @@ void main() {
           projectPath: null,
           themeProfile: const ThemeProfile(),
           initialIndex: 0,
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
         ),
       ),
     );
@@ -551,6 +574,16 @@ void main() {
       tester.state<ScrollableState>(timelineScroll()).position.pixels,
       0,
       reason: 'een kijkstand hoort bij de dia en mag niet doorlekken',
+    );
+    expect(
+      sentViews,
+      contains(
+        predicate<Map<String, dynamic>>(
+          (view) => view['index'] == 2 && view['fraction'] == 0,
+          'tijdlijnstand 0 voor de nieuwe dia',
+        ),
+      ),
+      reason: 'het beamerscherm moet tegelijk naar het begin springen',
     );
 
     await tester.pumpWidget(const SizedBox());
