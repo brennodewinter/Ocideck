@@ -13,8 +13,8 @@ notice of its own at the top.
 **Modified by:** the OciDeck project (Brenno de Winter), from 2026-06-06.
 
 Every file in this directory is byte-identical to that upstream commit except
-the six listed below. That was verified by hashing the upstream package subtree
-at the commit and comparing it with this copy.
+the files and grouped changes listed below. That was verified by hashing the
+upstream package subtree at the commit and comparing it with this copy.
 
 ## Why the fork exists
 
@@ -42,7 +42,7 @@ be positioned, and the presenter's keyboard focus cannot be kept on the laptop.
 hash of this directory in the SBOM; `make sbom-verify` recomputes the hash, so
 an edit here that is not committed alongside a regenerated SBOM fails the gate.
 
-If you bump upstream, re-apply these six changes, re-test the dual-screen
+If you bump upstream, re-apply these changes, re-test the dual-screen
 presenter on all three desktop platforms, and update the commit above.
 
 The local delta is intended to disappear once equivalent window placement,

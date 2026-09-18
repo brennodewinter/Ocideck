@@ -77,7 +77,9 @@ optimisation.
 - Timeline rendering is linear in the number of events and capped at **64**
   events (`lib/models/timeline.dart`, `timelineMaxEvents`). Interactive surfaces
   keep **4–6** events in their viewport and scroll across the bounded rail;
-  static exports lay out the same bounded sequence in full.
+  static exports lay out the same bounded sequence in full. Card geometry and
+  text fit are measured once per content/size/style revision and reused while
+  reveal animation frames only update paint and opacity.
 - Mermaid diagrams render to sanitised inline SVG via a shared WebView.
 - Video plays through a shared media host so only one heavy player is live.
 - A Marp background may keep every authored image filter for lossless Markdown,
