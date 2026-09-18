@@ -6,6 +6,7 @@ import '../../models/privacy_disposition.dart';
 import '../../services/document_export_service.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
+import 'dialog_shell.dart';
 import 'export_failure_text.dart';
 
 /// De compacte export-dialoog voor een plat-Markdown-**document**
@@ -97,43 +98,48 @@ class _DocumentExportDialogState extends State<DocumentExportDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AlertDialog(
-      scrollable: true,
-      title: Text(l10n.d('Document exporteren')),
-      content: SizedBox(
-        width: 460,
-        child: _writtenPath != null
-            ? _resultView(l10n, _writtenPath!)
-            : _optionsView(l10n),
+    return OciDialogShell(
+      width: 560,
+      height: 620,
+      maxWidth: 620,
+      maxHeight: 720,
+      child: OciDialogScaffold(
+        title: l10n.d('Document exporteren'),
+        leading: const Icon(Icons.ios_share_outlined),
+        body: SingleChildScrollView(
+          child: _writtenPath != null
+              ? _resultView(l10n, _writtenPath!)
+              : _optionsView(l10n),
+        ),
+        actions: _writtenPath != null
+            ? [
+                TextButton(
+                  onPressed: () => setState(() => _writtenPath = null),
+                  child: Text(l10n.d('Nog een export')),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(l10n.t('close')),
+                ),
+              ]
+            : [
+                TextButton(
+                  onPressed: _busy ? null : () => Navigator.pop(context),
+                  child: Text(l10n.t('cancel')),
+                ),
+                FilledButton.icon(
+                  onPressed: _busy ? null : _run,
+                  icon: _busy
+                      ? const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.ios_share, size: 16),
+                  label: Text(l10n.d('Exporteren…')),
+                ),
+              ],
       ),
-      actions: _writtenPath != null
-          ? [
-              TextButton(
-                onPressed: () => setState(() => _writtenPath = null),
-                child: Text(l10n.d('Nog een export')),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(l10n.t('close')),
-              ),
-            ]
-          : [
-              TextButton(
-                onPressed: _busy ? null : () => Navigator.pop(context),
-                child: Text(l10n.t('cancel')),
-              ),
-              FilledButton.icon(
-                onPressed: _busy ? null : _run,
-                icon: _busy
-                    ? const SizedBox(
-                        width: 14,
-                        height: 14,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.ios_share, size: 16),
-                label: Text(l10n.d('Exporteren…')),
-              ),
-            ],
     );
   }
 

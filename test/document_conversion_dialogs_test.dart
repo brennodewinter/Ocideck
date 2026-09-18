@@ -11,6 +11,7 @@ import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/widgets/dialogs/convert_to_document_dialog.dart';
 import 'package:ocideck/widgets/dialogs/convert_to_presentation_dialog.dart';
 import 'package:ocideck/widgets/dialogs/document_export_dialog.dart';
+import 'package:ocideck/widgets/dialogs/dialog_shell.dart';
 
 Widget _app(Widget home) => MaterialApp(
   supportedLocales: AppLocalizations.supportedLocales,
@@ -43,6 +44,7 @@ void main() {
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
 
+      expect(find.byType(OciDialogShell), findsOneWidget);
       expect(
         find.textContaining('Je byte-getrouwe origineel bewaar je met Opslaan'),
         findsOneWidget,

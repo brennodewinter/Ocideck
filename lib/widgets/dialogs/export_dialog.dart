@@ -21,6 +21,7 @@ import '../../theme/app_theme.dart';
 import '../../l10n/export_block_localization.dart';
 import 'export_failure_text.dart';
 import 'export_progress_text.dart';
+import 'dialog_shell.dart';
 
 part 'parts/export_dialog_notices.dart';
 part 'parts/export_dialog_sections.dart';
@@ -477,34 +478,40 @@ class _ExportDialogState extends State<ExportDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AlertDialog(
-      scrollable: true,
-      title: Text(l10n.t('exportDialogTitle')),
-      content: SizedBox(width: 380, child: _content()),
-      actions: [
-        if (_loading)
+    return OciDialogShell(
+      width: 540,
+      height: 680,
+      maxWidth: 620,
+      maxHeight: 760,
+      child: OciDialogScaffold(
+        title: l10n.t('exportDialogTitle'),
+        leading: const Icon(Icons.ios_share_outlined),
+        body: SingleChildScrollView(child: _content()),
+        actions: [
+          if (_loading)
+            TextButton(
+              onPressed: _cancelRequested
+                  ? null
+                  : () => setState(() {
+                      _cancelRequested = true;
+                      _phase = l10n.d('Annuleren…');
+                    }),
+              child: Text(l10n.t('cancel')),
+            ),
+          if (_result != null && _success)
+            TextButton(
+              onPressed: () => setState(() {
+                _result = null;
+                _outputPath = null;
+              }),
+              child: Text(l10n.t('exportAgain')),
+            ),
           TextButton(
-            onPressed: _cancelRequested
-                ? null
-                : () => setState(() {
-                    _cancelRequested = true;
-                    _phase = l10n.d('Annuleren…');
-                  }),
-            child: Text(l10n.t('cancel')),
+            onPressed: _loading ? null : () => Navigator.pop(context),
+            child: Text(l10n.t('close')),
           ),
-        if (_result != null && _success)
-          TextButton(
-            onPressed: () => setState(() {
-              _result = null;
-              _outputPath = null;
-            }),
-            child: Text(l10n.t('exportAgain')),
-          ),
-        TextButton(
-          onPressed: _loading ? null : () => Navigator.pop(context),
-          child: Text(l10n.t('close')),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
