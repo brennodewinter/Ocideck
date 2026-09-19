@@ -29,6 +29,10 @@ All notable changes to OciDeck are documented in this file.
 - Lange presentatietijdlijnen houden zes leesbare gebeurtenissen in beeld en
   schuiven daarna automatisch, stapgewijs of handmatig over een langere rail;
   het publieksvenster volgt dezelfde positie en reduced-motion blijft stil.
+- De onbewaakte releaseketen (`scripts/release_auto.sh`) weigert te starten
+  zolang er open issues of pull requests met het label `release-blocker` zijn,
+  of `fix/*`-takken op origin die nog niet in `main` zitten; `--ondanks-fixes`
+  is de bewuste uitzondering en staat dan in het releaselogboek (#2115).
 - Flutter 3.47.4 (Dart 3.13.3), de bijbehorende directe en transitieve
   pakketten en de software-inventaris zijn bijgewerkt; de bestandskiezer faalt
   bij een onbekende bestandsgrootte dicht in plaats van onbegrensd in te lezen.
@@ -46,6 +50,8 @@ All notable changes to OciDeck are documented in this file.
 - Tabel- en grafiekdia's lopen niet meer door het presentatielogo heen; ze reserveren het hele logo-vak in plaats van alleen de spleet erachter (#2091).
 - Gantt-dia's uit LibrePlan krijgen weer een werkbare tijdlijn: de verborgen Mermaid-tekenlaag gebruikt nu een vaste interne breedte, zodat balken en mijlpalen niet meer verdwijnen in een nulbrede SVG.
 - PowerPoint-import behoudt nu beelden uit dia-indelingen en diamodellen, zet tekstgerichte EMF-beelden zichtbaar om en herkent een compact hoeklogo in een brede merkstrook met de juiste grootte en bronstijl. De volledige strook blijft daarbij aan de oorspronkelijke boven- of onderrand staan, korte toelichtende tekst blijft zichtbaar en korte informatie op een openingsdia maakt er niet langer ten onrechte een bulletdia van. Vrij geplaatste beeldrasters blijven als één compositiedia bij elkaar in plaats van te worden opgesplitst en afgesneden.
+- macOS-app start weer: het meegeleverde PDFium-framework heette in de bundel `PDFium.framework` terwijl de binary erin `pdfium` is. Op een hoofdletterongevoelige buildschijf vallen de naam waar `pdfium_flutter` tegen linkt en de naam die Flutter als native asset wegschrijft samen in één map. Op macOS 27 eist dyld bij een genotariseerde app dat de bladnaam exact klopt en weigerde de app te starten met "Library not loaded: @rpath/PDFium.framework/PDFium" (v0.6.4 op macOS 27.2; macOS 26.6 laadt dezelfde bundel nog). `scripts/notarize_macos.sh` normaliseert nu vóór het tekenen naar `pdfium.framework/pdfium`, toetst daarna élke `@rpath`-, `@executable_path`- en `@loader_path`-verwijzing in de bundel op een bestaand bestand met exact dezelfde schrijfwijze, en start de gestapelde app nog één keer echt op voordat hij de deur uitgaat (#2115).
+- Homebrew-cask sluit een draaiende OciDeck af vóór een upgrade (`uninstall quit`), zodat `brew upgrade` de bundel niet half vervangt terwijl de app open staat.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
@@ -2671,6 +2677,76 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **0.6.5 ging uit mét de v0.6.4-startfout; drie poorten tegen herhaling
+  (#2115).** De fix hieronder stond al als tak op origin toen de onbewaakte
+  releaseketen voor 0.6.5 werd gestart; niets in die keten keek ernaar, want de
+  pre-flight toetst gereedschappen (token, mirror, sleutel, notary-profiel), niet
+  of de release inhoudelijk compleet is. De tag staat vast en wordt niet opnieuw
+  gezet; de fix gaat mee in 0.6.6. Drie maatregelen, elk op de plek waar de fout
+  had moeten vallen:
+  1. *Bundelkoppelingen, vóór het tekenen.* De PDFium-normalisatie repareert het
+     ene geval; `check_bundle_links` in `scripts/notarize_macos.sh` bewaakt de
+     klasse. Elke `@rpath`-, `@executable_path`- en `@loader_path`-verwijzing in
+     elk Mach-O-bestand van de bundel moet oplossen naar een bestand dat er is,
+     met exact dezelfde schrijfwijze per padcomponent. `test -e` slaagt op APFS
+     ook bij de verkeerde schrijfwijze; `find -name` vergelijkt tegen de
+     directory-entries zelf en ziet het verschil wél, dus de controle loopt
+     component voor component. Tegen de 0.6.5-bundel van deze bouwmachine geeft
+     hij precies de ene fout (`@rpath/PDFium.framework/PDFium`, "bestaat als
+     …/pdfium.framework/pdfium") en na de normalisatie nul.
+     `test/notarize_bundle_links_test.dart` draait de echte bashfuncties tegen
+     een nagebouwde bundel met een nep-`otool`.
+  2. *Opstartproef, ná het staplen.* Het hoofdbinary wordt rechtstreeks gestart,
+     krijgt zes seconden en wordt dan beëindigd; een dyld-weigering komt binnen
+     één seconde met exit ≠ 0. Alleen in een grafische sessie
+     (`launchctl managername` = Aqua; de Mac-runner is een LaunchAgent in de
+     gebruikerssessie en toont dus even een venster); `OCIDECK_SKIP_LAUNCH_PROBE=1`
+     slaat over. Eerlijk over de grens: op macOS 26.6.2, deze bouwmachine, laadt
+     dyld de foute bundel nog gewoon, ook met Developer ID en hardened runtime;
+     de weigering is van macOS 27. De proef vangt dit geval hier dus niet, de
+     koppelingscontrole wél. De proef blijft, omdat handtekening en notarisatie
+     niets zeggen over laden.
+  3. *Bekend herstelwerk, vóór het wachtwoord.* `scripts/release_auto.sh`
+     bevraagt de forge op open issues en PR's met het nieuwe label
+     `release-blocker` en `git ls-remote` op `fix/*`-takken waarvan de kop niet
+     in `origin/main` zit, en weigert dan. `--ondanks-fixes` laat ze bewust
+     buiten de release en zet dat in het logboek; `--resume` slaat de poort over
+     omdat de inhoud van een lopende release al vastligt. Live getoetst: de
+     poort had 0.6.5 vandaag tegengehouden op `fix/pdfium-framework-casing`.
+     `test/release_auto_pending_fixes_test.dart` pint het gedrag met gemockte
+     `git` en `api`.
+  Terzijde, uit de bron in `~/.pub-cache`: de `MACOSX_DEPLOYMENT_TARGET 10.15`
+  die een dartcv4-build onder Xcode 27 kan laten struikelen komt niet uit
+  dartcv4 maar uit `native_toolchain_cmake` 0.3.2
+  (`run_builder.dart:300`, de terugval als Flutter geen macOS-doelversie
+  meegeeft). dartcv4 2.2.1 en 2.3.0 geven zelf `DEPLOYMENT_TARGET=12.0` mee, ná
+  die terugval, en op deze machine (Xcode 27.0, SDK 27.0) wint die: de
+  hooks-cache toont een geslaagde build met deployment target 12.0.
+- **macOS-start hersteld: PDFium-framework genormaliseerd naar kleine letters.**
+  De bundel vertrok met `Contents/Frameworks/PDFium.framework` als mapnaam en
+  `Versions/A/pdfium` als binary, met install name `@rpath/pdfium.framework/pdfium`
+  en `CFBundleExecutable` "pdfium". Alleen het hoofdbinary droeg de
+  hoofdlettervariant `@rpath/PDFium.framework/PDFium`: `pdfium_flutter` linkt zijn
+  Swift-plugin tegen `-framework PDFium`, terwijl de native-assets-stap van Flutter
+  hetzelfde framework als `pdfium.framework` wegschrijft. Op APFS, dat standaard
+  hoofdletterongevoelig is, belanden die twee in dezelfde map: de mapnaam houdt de
+  hoofdletters, de inhoud de kleine letters. Oudere dyld-versies laadden dat om
+  diezelfde reden alsnog. Op macOS 27 eist dyld bij een hardened, genotariseerde
+  binary dat de bladnaam exact klopt, en stopt de app bij het starten met
+  `Termination Reason: Namespace DYLD, Code 1, Library missing`. Dat trof v0.6.4 op
+  macOS 27.2 (26B5086k). `scripts/notarize_macos.sh` normaliseert nu naar kleine
+  letters, de schrijfwijze die het framework zelf overal al draagt: mapnaam, binary,
+  symlink, `Info.plist` en install name, plus een `install_name_tool -change` op het
+  hoofdbinary. Dat gebeurt vóór het tekenen, want hernoemen breekt het zegel. Een
+  poort erachter laat de release falen zodra er nog ergens in de bundel een
+  verwijzing met hoofdletters staat, zodat een volgende `pdfrx`- of
+  `pdfium_flutter`-versie dit niet stil opnieuw introduceert. De oorzaak hoort
+  bovendien upstream thuis: `pdfium_flutter` 0.3.0 linkt onder een andere
+  schrijfwijze dan het asset dat het meelevert.
+- **Homebrew-cask sluit de app af vóór een upgrade.** De cask had geen
+  `uninstall quit`, dus `brew upgrade` verving de bundel terwijl OciDeck draaide.
+  Dat is niet de oorzaak van de dyld-fout hierboven, maar het is wel een bron van
+  half vervangen bundels die pas bij de volgende start zichtbaar wordt.
 - **eLearning toont een verbindingsstoring op de plek waar de cursist verder
   wil.** Na een mislukte serverpoging staat **Geen verbinding** als passieve
   badge naast **Inloggen** of **Mijn cursussen**. De bestaande knop blijft de

@@ -79,6 +79,9 @@ require_cmd xcrun
 require_cmd codesign
 require_cmd ditto
 require_cmd security
+# Nodig voor het normaliseren van het PDFium-framework, verderop.
+require_cmd otool
+require_cmd install_name_tool
 
 # Vroeg en duidelijk stoppen als de identiteit ontbreekt. Anders faalt codesign
 # pas halverwege met een cryptische melding, na een build van minuten.
@@ -144,6 +147,216 @@ fi
   exit 1
 }
 
+# ---------------------------------------------------------------------------
+# PDFium-framework normaliseren, vóór het tekenen.
+#
+# pdfium_flutter linkt zijn Swift-plugin tegen "-framework PDFium", terwijl de
+# native-assets-stap van Flutter datzelfde framework als pdfium.framework
+# wegschrijft: install name @rpath/pdfium.framework/pdfium, CFBundleExecutable
+# "pdfium". Op een hoofdletterongevoelige buildschijf komen die twee in dezelfde
+# map terecht. De mapnaam houdt dan de hoofdletters van de linker en de inhoud
+# de kleine letters van de native asset, en de bundel vertrekt met
+# PDFium.framework/Versions/A/pdfium erin.
+#
+# Oudere dyld-versies laadden dat alsnog, juist omdat APFS hoofdletterongevoelig
+# is. Op macOS 27 eist dyld bij een hardened, genotariseerde binary dat de
+# bladnaam exact klopt. De app stopt dan bij het starten met "Library not
+# loaded: @rpath/PDFium.framework/PDFium ... security level requires its leaf
+# name to match". Zo strandde de gedownloade v0.6.4 op macOS 27.2; macOS 26.6
+# (de bouwmachine) laadt dezelfde bundel nog, dus lokaal starten bewijst niets.
+#
+# Er wordt naar kleine letters genormaliseerd. Alles behalve dat ene load
+# command in het hoofdbinary draagt die schrijfwijze al: de install name van het
+# framework, zijn Info.plist en de native-assets-mapping van Dart. Hernoemen
+# gaat in twee stappen, want op een hoofdletterongevoelig volume is "PDFium"
+# naar "pdfium" hernoemen geen wijziging.
+#
+# Deze stap hoort vóór het tekenen: hernoemen en install_name_tool breken het
+# zegel van de bundel.
+# ---------------------------------------------------------------------------
+section "PDFium-framework normaliseren"
+FRAMEWORKS="$APP/Contents/Frameworks"
+MAIN_BINARY="$APP/Contents/MacOS/OciDeck"
+PDFIUM_REF_UPPER='@rpath/PDFium.framework/PDFium'
+PDFIUM_REF_LOWER='@rpath/pdfium.framework/pdfium'
+
+# Hernoemt alleen als de naam op schijf werkelijk afwijkt. De omweg via een
+# tijdelijke naam is nodig omdat een rechtstreekse mv op dit volume niets doet.
+rename_exact() {
+  local path="$1" want="$2" dir base
+  dir="$(dirname "$path")"
+  base="$(basename "$path")"
+  if [[ "$base" == "$want" ]]; then
+    return 0
+  fi
+  mv "$path" "$dir/.$want.rename"
+  mv "$dir/.$want.rename" "$dir/$want"
+  echo "  hernoemd: $base -> $want"
+}
+
+# -iname geeft de naam die er werkelijk staat; een test op het pad zou op dit
+# volume ook bij de verkeerde schrijfwijze slagen en dus niets bewaken.
+PDFIUM_FW="$(find "$FRAMEWORKS" -maxdepth 1 -iname 'pdfium.framework' -print -quit)"
+if [[ -z "$PDFIUM_FW" ]]; then
+  echo "Geen pdfium-framework in $FRAMEWORKS gevonden." >&2
+  echo "Is de PDF-bewijsviewer uit de build gevallen? Zonder dit framework start de app niet." >&2
+  exit 1
+fi
+rename_exact "$PDFIUM_FW" 'pdfium.framework'
+PDFIUM_FW="$FRAMEWORKS/pdfium.framework"
+
+PDFIUM_BIN="$(find "$PDFIUM_FW/Versions/A" -maxdepth 1 -iname 'pdfium' -print -quit)"
+if [[ -z "$PDFIUM_BIN" ]]; then
+  echo "Geen pdfium-binary in $PDFIUM_FW/Versions/A." >&2
+  exit 1
+fi
+rename_exact "$PDFIUM_BIN" 'pdfium'
+PDFIUM_BIN="$PDFIUM_FW/Versions/A/pdfium"
+
+# De symlink bovenin de framework-map draagt dezelfde naam als de binary en
+# wijst ernaar. Hier niet hernoemen maar opnieuw zetten: bij een hernoemde
+# binary klopt ook het doel van de bestaande symlink niet meer.
+PDFIUM_LINK="$(find "$PDFIUM_FW" -maxdepth 1 -iname 'pdfium' -print -quit)"
+if [[ -n "$PDFIUM_LINK" ]]; then
+  rm -f "$PDFIUM_LINK"
+fi
+ln -s 'Versions/Current/pdfium' "$PDFIUM_FW/pdfium"
+
+# Info.plist en install name gelijktrekken, zodat de identiteit van het
+# framework op elk niveau dezelfde schrijfwijze heeft.
+PDFIUM_PLIST="$PDFIUM_FW/Versions/A/Resources/Info.plist"
+if [[ -f "$PDFIUM_PLIST" ]]; then
+  for key in CFBundleExecutable CFBundleName; do
+    if [[ "$(/usr/libexec/PlistBuddy -c "Print :$key" "$PDFIUM_PLIST" 2>/dev/null)" != "pdfium" ]]; then
+      /usr/libexec/PlistBuddy -c "Set :$key pdfium" "$PDFIUM_PLIST"
+      echo "  Info.plist: $key -> pdfium"
+    fi
+  done
+fi
+if [[ "$(otool -D "$PDFIUM_BIN" | tail -n1)" != "$PDFIUM_REF_LOWER" ]]; then
+  install_name_tool -id "$PDFIUM_REF_LOWER" "$PDFIUM_BIN"
+  echo "  install name -> $PDFIUM_REF_LOWER"
+fi
+
+# Het hoofdbinary is in v0.6.4 de enige plek met de hoofdlettervariant.
+if otool -L "$MAIN_BINARY" | grep -qF "$PDFIUM_REF_UPPER"; then
+  install_name_tool -change "$PDFIUM_REF_UPPER" "$PDFIUM_REF_LOWER" "$MAIN_BINARY"
+  echo "  load command in OciDeck -> $PDFIUM_REF_LOWER"
+fi
+
+echo "  in orde: pdfium.framework/pdfium, overal dezelfde schrijfwijze"
+
+# ---------------------------------------------------------------------------
+# Bundelkoppelingen toetsen, vóór het tekenen.
+#
+# De PDFium-normalisatie hierboven repareert het ene geval dat v0.6.4 brak. Deze
+# controle bewaakt de hele klasse: élke @rpath-, @executable_path- of
+# @loader_path-verwijzing in élk Mach-O-bestand van de bundel moet oplossen naar
+# een bestand dat er is, met exact dezelfde schrijfwijze per padcomponent. Op een
+# hoofdletterongevoelig volume slaagt `test -e` ook bij de verkeerde
+# schrijfwijze; `find -name` vergelijkt tegen de directory-entries zelf en ziet
+# het verschil wél. Daarom loopt de controle component voor component.
+#
+# Waarom hier en niet pas bij het starten: v0.6.4 is getekend, genotariseerd en
+# gestapeld met een verwijzing die dyld op macOS 27 weigert. Een geldige
+# handtekening zegt niets over laden. Deze stap faalt de release op de
+# bouwmachine, niet op de Mac van een gebruiker.
+# ---------------------------------------------------------------------------
+section "Bundelkoppelingen toetsen (exacte schrijfwijze)"
+
+# Loopt REL component voor component onder ROOT af en eist per stap een
+# directory-entry met precies die naam. Symlinks (Versions/Current) worden
+# gevolgd; de bladnaam moet ook ná het volgen exact kloppen, want dyld
+# vergelijkt de gevraagde bladnaam met de naam van het bestand dat hij opent.
+resolve_exact() { # resolve_exact ROOT REL -> pad op stdout, of status 1
+  local cur="$1" rel="$2" comp hit parts
+  IFS='/' read -r -a parts <<<"$rel"
+  for comp in "${parts[@]}"; do
+    [[ -n "$comp" && "$comp" != "." ]] || continue
+    # '..' is geen directory-entry en heeft geen schrijfwijze; gewoon omhoog.
+    [[ "$comp" != ".." ]] || { cur="$cur/.."; continue; }
+    hit="$(find "$cur/" -maxdepth 1 -mindepth 1 -name "$comp" -print -quit 2>/dev/null)"
+    [[ -n "$hit" ]] || return 1
+    cur="$hit"
+  done
+  [[ -e "$cur" ]] || return 1
+  [[ "$(basename "$(realpath "$cur")")" == "${parts[${#parts[@]}-1]}" ]] || return 1
+  printf '%s\n' "$cur"
+}
+
+# Alle LC_RPATH-paden van een Mach-O, met @executable_path en @loader_path al
+# ingevuld. Het hoofdbinary levert de rpaths die dyld voor de hele keten
+# hanteert; een framework voegt hoogstens zijn eigen toe.
+rpaths_of() { # rpaths_of MACHO EXEC_DIR
+  local f="$1" exec_dir="$2" loader_dir
+  loader_dir="$(dirname "$f")"
+  otool -l "$f" 2>/dev/null \
+    | awk '/^ *cmd LC_RPATH/{r=1} r && /^ *path /{print $2; r=0}' \
+    | sed -e "s|^@executable_path|$exec_dir|" -e "s|^@loader_path|$loader_dir|"
+}
+
+# Toetst één bundel. Schrijft per fout één regel naar stderr en geeft het aantal
+# fouten terug als status, zodat de aanroeper in één keer alles ziet.
+check_bundle_links() { # check_bundle_links APP
+  local app="$1" exec_dir main_bin f dep rest hit root roots found errors=0
+  exec_dir="$app/Contents/MacOS"
+  main_bin="$(find "$exec_dir" -maxdepth 1 -type f -perm -u+x -print -quit)"
+  local main_rpaths
+  main_rpaths="$(rpaths_of "$main_bin" "$exec_dir")"
+  while IFS= read -r -d '' f; do
+    file -b "$f" 2>/dev/null | grep -q 'Mach-O' || continue
+    while IFS= read -r dep; do
+      case "$dep" in
+        @rpath/*)           rest="${dep#@rpath/}" ;;
+        @executable_path/*) rest="${dep#@executable_path/}" ;;
+        @loader_path/*)     rest="${dep#@loader_path/}" ;;
+        *) continue ;;
+      esac
+      found=0
+      case "$dep" in
+        @rpath/*)
+          # Eerst verzamelen, dan lopen: een 'break' uit een lus op een
+          # procesvervanging laat otool/sed met een SIGPIPE en een losse
+          # "Broken pipe" op stderr achter.
+          roots="$(printf '%s\n' "$main_rpaths"; rpaths_of "$f" "$exec_dir")"
+          while IFS= read -r root; do
+            [[ -n "$root" ]] || continue
+            if [[ "$root" != "$app"/* ]]; then
+              # Een rpath buiten de bundel (/usr/lib/swift) hoort bij het
+              # systeem; als het daar staat, is het geen zaak van deze bundel.
+              [[ -e "$root/$rest" ]] && { found=1; break; }
+              continue
+            fi
+            hit="$(resolve_exact "$root" "$rest")" && { found=1; break; }
+          done <<<"$roots"
+          ;;
+        @executable_path/*) hit="$(resolve_exact "$exec_dir" "$rest")" && found=1 ;;
+        @loader_path/*)     hit="$(resolve_exact "$(dirname "$f")" "$rest")" && found=1 ;;
+      esac
+      if [[ $found -eq 0 ]]; then
+        errors=$((errors + 1))
+        echo "  FOUT ${f#"$app"/}: $dep" >&2
+        # Diagnose: bestaat het wel, maar anders geschreven? Dan is dít de
+        # v0.6.4-klasse en niet een ontbrekend framework.
+        hit="$(find "$app/Contents/Frameworks" -ipath "$app/Contents/Frameworks/$rest" -print -quit 2>/dev/null)"
+        if [[ -n "$hit" ]]; then
+          echo "       bestaat als ${hit#"$app"/} (andere schrijfwijze; dyld weigert dat op macOS 27)" >&2
+        else
+          echo "       lost binnen de bundel nergens op" >&2
+        fi
+      fi
+    done < <(otool -L "$f" 2>/dev/null | tail -n +2 | awk '{print $1}')
+  done < <(find "$app" -type f \( -perm -u+x -o -name '*.dylib' \) -print0)
+  return "$errors"
+}
+
+if ! check_bundle_links "$APP"; then
+  echo "Bundelkoppelingen kloppen niet (zie boven). Deze app zou getekend en" >&2
+  echo "genotariseerd raken maar op macOS 27 niet starten; zo verging het v0.6.4." >&2
+  exit 1
+fi
+echo "  in orde: elke verwijzing lost op met exact dezelfde schrijfwijze"
+
 # Inside-out tekenen: eerst elk ingebed framework/dylib, dan pas de app-bundel.
 # Hardened runtime en een veilige tijdstempel zijn allebei voorwaarden voor
 # notarisatie; de entitlements horen alleen op de buitenste bundel.
@@ -180,6 +393,51 @@ section "Ticket stapelen en eindcontrole"
 xcrun stapler staple "$APP"
 xcrun stapler validate "$APP"
 spctl -a -t exec -vvv "$APP"
+
+# ---------------------------------------------------------------------------
+# Opstartproef: de app die zo de deur uitgaat écht starten.
+#
+# Handtekening, notarisatie en de koppelingscontrole hierboven zijn allemaal
+# statisch. Wat dyld en het hardened runtime bij het laden doen, blijkt alleen
+# door te laden. Het hoofdbinary wordt rechtstreeks gestart (niet via `open`,
+# dan is de exitstatus van de app zelf zichtbaar), krijgt een paar seconden en
+# wordt dan netjes beëindigd. Een dyld-weigering komt binnen een seconde met
+# een niet-nul status en "Library not loaded" op stderr; die gaat hier de
+# release in als fout, niet als klacht van een gebruiker.
+#
+# Alleen in een grafische sessie: zonder WindowServer kan een Cocoa-app niet
+# opkomen, en dat zou een valse rode uitslag zijn. De Mac-runner draait als
+# LaunchAgent in de gebruikerssessie en komt dus door deze poort; de proef
+# toont daar enkele seconden een venster. OCIDECK_SKIP_LAUNCH_PROBE=1 slaat
+# hem bewust over.
+# ---------------------------------------------------------------------------
+section "Opstartproef"
+if [[ "${OCIDECK_SKIP_LAUNCH_PROBE:-0}" == "1" ]]; then
+  echo "  overgeslagen (OCIDECK_SKIP_LAUNCH_PROBE=1)"
+elif [[ "$(launchctl managername 2>/dev/null)" != "Aqua" ]]; then
+  echo "  overgeslagen: geen grafische sessie (launchctl managername != Aqua)"
+else
+  PROBE_LOG="$(mktemp -t ocideck-opstartproef)"
+  "$APP/Contents/MacOS/OciDeck" >"$PROBE_LOG" 2>&1 &
+  PROBE_PID=$!
+  # Zes seconden is ruim: een dyld-fout valt binnen één seconde, en een app die
+  # zo lang leeft heeft al zijn frameworks geladen en zijn venster gebouwd.
+  sleep 6
+  if kill -0 "$PROBE_PID" 2>/dev/null; then
+    kill "$PROBE_PID" 2>/dev/null || true
+    wait "$PROBE_PID" 2>/dev/null || true
+    rm -f "$PROBE_LOG"
+    echo "  in orde: de app start en blijft draaien"
+  else
+    PROBE_RC=0
+    wait "$PROBE_PID" || PROBE_RC=$?
+    echo "De app stopte binnen zes seconden na het starten (exit $PROBE_RC):" >&2
+    sed 's/^/   /' "$PROBE_LOG" >&2
+    rm -f "$PROBE_LOG"
+    echo "Een getekende en genotariseerde app die niet start, mag niet uit; zo verging het v0.6.4." >&2
+    exit 1
+  fi
+fi
 
 # De notarisatie-zip ging vóór het staplen de deur uit; die hebben we niet meer nodig.
 rm -f "$ZIP"

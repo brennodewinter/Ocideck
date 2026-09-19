@@ -77,6 +77,8 @@
 #   scripts/release_auto.sh --preflight          # generale repetitie: toets élke
 #                                                # voorwaarde, muteer niets
 #   scripts/release_auto.sh --skip-install [..]  # sla /Applications-vervanging over
+#   scripts/release_auto.sh --ondanks-fixes [..] # ga door langs ongemergede fix/*-
+#                                                # takken en open release-blockers
 #   scripts/release_auto.sh --resume vX.Y.Z      # hervat een onderbroken release
 #   scripts/release_auto.sh --status vX.Y.Z      # toon waar een release staat (read-only)
 
@@ -103,6 +105,7 @@ DRY_RUN=0
 SKIP_INSTALL=0
 PRINT_VERSION=0
 PREFLIGHT_ONLY=0
+IGNORE_FIXES=0  # --ondanks-fixes: bekend herstelwerk bewust buiten deze release laten
 LEVEL=""
 RESUME_TAG=""   # --resume vX.Y.Z: sla fase 1+2 over, maak alleen fase 3 af
 
@@ -200,6 +203,7 @@ for arg in "$@"; do
     --dry-run) DRY_RUN=1 ;;
     --preflight) PREFLIGHT_ONLY=1 ;;
     --skip-install) SKIP_INSTALL=1 ;;
+    --ondanks-fixes) IGNORE_FIXES=1 ;;
     --print-version) PRINT_VERSION=1 ;;
     --resume) RESUME=1 ;;
     --status) STATUS=1 ;;
@@ -212,7 +216,7 @@ for arg in "$@"; do
       awk 'NR>1 && /^#/ { sub(/^# ?/, ""); print; next } NR>1 { exit }' \
         "${BASH_SOURCE[0]}"
       exit 0 ;;
-    *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
+    *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --ondanks-fixes, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
   esac
 done
 
@@ -1274,9 +1278,52 @@ resume_release() {
 # en dat wil je weten vóór je een wachtwoord intikt.
 assert_workspace_idle
 
+# ── Bekend herstelwerk dat nog niet in main zit ────────────────────────────────
+# v0.6.5 ging de deur uit terwijl fix/pdfium-framework-casing al op origin stond:
+# het herstel van de macOS-startfout van v0.6.4, nog niet gemerged. Niemand zag
+# het, want niets in deze keten keek ernaar — de pre-flight toetst de
+# gereedschappen, niet of de release inhoudelijk compleet is. Daarom nu, vóór
+# het wachtwoord, twee bronnen:
+#   1. open issues en pull requests met het label `release-blocker` — de
+#      afgesproken manier om te zeggen "niet uitbrengen voordat dit erin zit";
+#   2. takken fix/* op origin waarvan de kop niet in origin/main zit — een fix
+#      die al gebouwd is maar nog geen PR heeft, precies het v0.6.5-geval.
+# Beide stoppen de keten. --ondanks-fixes laat ze bewust buiten deze release; die
+# keuze staat dan zwart op wit in het releaselogboek. --resume slaat dit over: de
+# inhoud van een lopende release ligt al vast.
+unmerged_fix_branches() {
+  git fetch origin --quiet 2>/dev/null || true
+  git ls-remote --heads origin 'refs/heads/fix/*' 2>/dev/null \
+    | while read -r sha ref; do
+        git merge-base --is-ancestor "$sha" origin/main 2>/dev/null \
+          || printf '%s\n' "${ref#refs/heads/}"
+      done
+}
+open_release_blockers() {
+  api GET '/issues?state=open&labels=release-blocker&limit=50' 2>/dev/null \
+    | jq -r '.[] | "#\(.number) \(.title)"' 2>/dev/null
+}
+assert_no_pending_fixes() {
+  STEP="bekend herstelwerk"
+  [ -z "$RESUME_TAG" ] || return 0
+  local branches blockers
+  branches="$(unmerged_fix_branches || true)"
+  blockers="$(open_release_blockers || true)"
+  [ -n "$branches$blockers" ] || return 0
+  section "Bekend herstelwerk dat nog niet in main zit"
+  [ -z "$blockers" ] || { log "open met label release-blocker:"; printf '%s\n' "$blockers" | sed 's/^/     /'; }
+  [ -z "$branches" ] || { log "fix/*-takken op origin, niet in main:"; printf '%s\n' "$branches" | sed 's/^/     /'; }
+  if [ "$IGNORE_FIXES" -eq 1 ]; then
+    log "--ondanks-fixes: bovenstaand herstelwerk blijft bewust buiten deze release."
+    return 0
+  fi
+  die "een release langs bekend herstelwerk is hoe v0.6.5 de v0.6.4-startfout meenam. Merge het eerst, of geef --ondanks-fixes mee als het bewust buiten deze release blijft. Niets gemuteerd."
+}
+
 # ── De twee prompts (de enige interactie) ───────────────────────────────────────
 STEP="wachtwoord"
 read_token
+assert_no_pending_fixes
 section "Wachtwoord"
 log "Het minisign-sleutelwachtwoord wordt nu gevraagd en blijft alleen in het"
 log "geheugen van deze run (voor het tekenen van SHA256SUMS, geheel aan het eind)."
@@ -1293,8 +1340,9 @@ echo
 preflight
 
 # --preflight: hier houdt de repetitie op. Alles wat een release onderweg nodig
-# heeft is nu getoetst — referentiedata, schone werkboom, vrije werkboom,
-# forge-token, mirror, deploy-host, minisign-sleutel én de macOS-ondertekening —
+# heeft is nu getoetst — referentiedata, schone werkboom, vrije werkboom, bekend
+# herstelwerk, forge-token, mirror, deploy-host, minisign-sleutel én de
+# macOS-ondertekening —
 # en er is niets gemuteerd. Dit bestaat omdat de dure fouten in deze keten
 # telkens vooraf kenbaar waren: een notary-profiel dat na een sessieherstart weg
 # was, een deploy-host die niet antwoordde, een catalogus die achterliep. Die
