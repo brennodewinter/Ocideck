@@ -809,7 +809,15 @@ branch and wait, so `scans.yml`'s new image tag exists before the PR scan runs) 
 PR → wait for the gate (up to `OCIDECK_GATE_TIMEOUT_MIN`, default 75 min: `linux-gate`
 runs the full suite per-PR on a capacity-1 serial runner and can queue, so the wait
 prints progress rather than giving up at 30) → merge → tag → push to origin **and**
-mirror → poll the release CI until every job is done; **Phase 3** `make deploy-web`
+mirror → poll the release CI until every job is done (up to
+`OCIDECK_RELEASE_CI_TIMEOUT_MIN`, default 240 min: the tag chain takes a good two
+hours — v0.6.4 2h05, v0.6.5 2h14, with `Linux bouwen` alone around 50 min — and
+the old fixed 60 min cut the v0.6.5 run off mid-build while every job was
+running or green; while a job visibly runs, waiting is never wrong, a hung job
+is cut by the runner's own 2 h timeout, and a heartbeat every ten minutes shows
+the wait is alive; a red `gate` from ci.yml on the same tag is reported as the
+test run beside the chain that it is, not as a failed release job) →
+**Phase 3** `make deploy-web`
 *first* — the web
 demo depends only on the web bundle, so a signing or platform failure never leaves
 it on the old version — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
