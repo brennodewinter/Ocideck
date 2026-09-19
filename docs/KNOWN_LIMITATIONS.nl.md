@@ -227,6 +227,22 @@ Keynote is er doorheen gegaan. →
 [USER_GUIDE.md](USER_GUIDE.md#importing-presentations-powerpoint-keynote-impress),
 [design/VERIFICATION.md](design/VERIFICATION.md) punt 11 *(toegevoegd 2026-07-24)*
 
+## Een document importeren neemt de stijl mee, maar niet elke kleur en niet de afbeeldingen
+
+Een `.docx`- of `.odt`-import leest de huisstijl en biedt die aan als
+stijlprofiel (lettertypen, kleuren, het logo op elke bladzijde, kop- en
+voettekst — zie de
+[gebruikersgids](USER_GUIDE.nl.md#een-word--of-libreoffice-document-importeren)).
+Twee dingen blijven achter. Een stijlprofiel heeft **één kopkleur**, dus een
+document waarvan Kop 2 een eigen kleur heeft houdt die alleen voor Kop 1; de
+dialoog noemt de andere kleuren onder *Niet overgenomen*. En de **afbeeldingen
+in de lopende tekst** worden nog niet geïmporteerd — de import telt ze in zijn
+melding, zodat er niets stil verdwijnt, en #2120 volgt ze. De letter die het
+document vraagt blijft op naam bewaard, ook als OciDeck hem niet kan tonen; het
+scherm gebruikt een plaatsvervanger en de exports noemen de echte, behalve de
+PDF en LaTeX, die alleen de klasse schreef/schreefloos overnemen (zie
+hierboven). *(Toegevoegd 2026-09-19, #2119.)*
+
 ## Alleen van links naar rechts
 
 De interface en het diacanvas zijn van links naar rechts. Geen van de 32

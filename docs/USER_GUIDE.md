@@ -4894,6 +4894,52 @@ not, and why conversion is deliberately lossy — is written up in
   remove the `tlp:` line again; an otherwise plain document becomes plain
   Markdown again byte for byte.
 
+### Importing a Word or LibreOffice document
+
+**Document importeren…** (welcome screen, or the document toolbar) opens a
+`.docx` or `.odt` as a new document: headings, paragraphs, lists, tables,
+bold/italic and links become Markdown. The import is best-effort and never
+writes to the source file. *(Added 2026-09-18, #2101.)*
+
+**Taking the house style along.** Since 2026-09-19 (#2119) the import also reads
+what the document carries as house style, and when it finds anything, one
+dialog — **Stijl overnemen?** — shows it before the document opens:
+
+- the **fonts** of headings and body text, by the name the document uses
+  (Word's theme *major* and *minor* fonts, the `heading 1` style, the default
+  paragraph font; LibreOffice's *Heading* and *Standard* styles). When OciDeck
+  cannot show that face itself, the line says which offered font stands in for
+  it — *Aptos (weergegeven als Calibri, bewaard voor export)* — and the name is
+  kept for export, see [Building a document style](#building-a-document-style);
+- the **colours** of text, headings (Heading 1) and the theme accent, as
+  swatches;
+- the **logo**: a picture that sits in the default header or footer — that is
+  how Word and LibreOffice put a picture on every page — or one that was pasted
+  page-anchored on every page. It becomes the document logo, at the side
+  (left/right) and edge (top/bottom) where it sat and at the width it had. A
+  picture that only appears on the title page is not a logo and is listed as
+  such; so is a centred one (the style knows left and right; it lands left) and
+  a vector-only picture without a raster fallback;
+- the **header and footer text** and whether the footer carries a **page
+  number**;
+- **Niet overgenomen**: what the style profile cannot hold — most often a
+  second heading colour (Word gives Heading 2 its own colour; a style profile
+  has one heading colour).
+
+Taking the style is optional, because it may already exist or be dropped on
+purpose. **Alleen tekst** opens the document without a style. **Stijl
+overnemen** saves a new style profile under the name in the field (*Stijl van
+<title>* by default) and puts `theme: <name>` in the document's front matter,
+exactly as the Style button would. When a profile already *is* this house
+style — same fonts, colours, header/footer and the same logo bytes — the dialog
+says so and offers **Bestaande stijl gebruiken**, so importing a second document
+from the same template does not grow a second profile. The **Als documentlogo
+gebruiken** box lets you take the style without the picture. On the web build
+the profile is kept but the logo lives for this session only.
+
+The message after the import counts the pictures in the running text that did
+not come along; they are not imported yet (#2120).
+
 ### Document properties in the header and footer
 
 Open **Document · Properties** from the document toolbar to set the values that
@@ -5231,6 +5277,23 @@ out: a browser does not tell the content which page it is printing (see
 [KNOWN_LIMITATIONS](KNOWN_LIMITATIONS.md)). Markdown content stays unchanged:
 these values travel in the style profile, not in the document body. The presentation
 editor itself remains deliberately sober and presentation-focused.
+
+**Fonts: what you see and what you export.** The font list picks the face
+OciDeck draws with, for documents and presentations alike. Under it, **Gewenst
+lettertype (export)** takes the name the house style *actually* asks for when
+that is not one OciDeck can show — `Aptos`, say. The screen keeps the face
+from the list as a stand-in; an export names the requested one first, so Word,
+LibreOffice or a browser that has the font shows the real face (the HTML export
+writes it at the front of the font stack, Word and LibreOffice get it in their
+styles, and the PDF takes only its class, serif or sans). Leave it empty and
+screen and export use the same face. The name is checked as you type — letters,
+digits, spaces, dots and hyphens — because it ends up in a style sheet. The
+document surface adds a **Kopletter**: the face of a document's headings, with
+*Zelfde als de tekst* in front, and its own **Gewenste kopletter (export)**.
+Slides never read the heading face; a separate heading font is a document fact.
+An imported Word or LibreOffice document fills these in for you, see
+[Importing a Word or LibreOffice document](#importing-a-word-or-libreoffice-document).
+*(Added 2026-09-19, #2119.)*
 
 The profile's colours also carry the **table style**: the border style (*Lijnen
 (horizontaal)*, thin horizontal rules in the manner of a typeset book, *Omrand

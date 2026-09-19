@@ -5219,6 +5219,52 @@ mee naar Markdown, doorlopende HTML en LaTeX. Kies **Geen** om de `tlp:`-regel
 weer te verwijderen; een verder plat document wordt dan byte voor byte weer
 gewone Markdown.
 
+### Een Word- of LibreOffice-document importeren
+
+**Document importeren…** (welkomstscherm, of de documentwerkbalk) opent een
+`.docx` of `.odt` als nieuw document: koppen, alinea's, lijsten, tabellen,
+vet/cursief en links worden Markdown. De import is best-effort en schrijft
+nooit naar het bronbestand. *(Toegevoegd 2026-09-18, #2101.)*
+
+**De huisstijl meenemen.** Sinds 2026-09-19 (#2119) leest de import ook wat het
+document aan huisstijl draagt, en als er iets te vinden is toont één dialoog —
+**Stijl overnemen?** — dat vóór het document opent:
+
+- de **lettertypen** van koppen en tekst, met de naam die het document gebruikt
+  (de *major*- en *minor*-letter van het Word-thema, de stijl `heading 1`, de
+  standaardalinealetter; bij LibreOffice de stijlen *Heading* en *Standard*).
+  Kan OciDeck die letter zelf niet tonen, dan zegt de regel welk aangeboden
+  lettertype hem vervangt — *Aptos (weergegeven als Calibri, bewaard voor
+  export)* — en blijft de naam bewaard voor de export, zie
+  [Een documentstijl maken](#een-documentstijl-maken);
+- de **kleuren** van tekst, koppen (Kop 1) en het thema-accent, als stalen;
+- het **logo**: een beeld dat in de standaardkop- of -voettekst staat — zo
+  zetten Word en LibreOffice een beeld op elke bladzijde — of een beeld dat
+  aan de bladzijde verankerd op elke bladzijde geplakt is. Het wordt het
+  documentlogo, aan de kant (links/rechts) en rand (boven/onder) waar het
+  stond en op de breedte die het had. Een beeld dat alleen op het titelblad
+  staat is geen logo en wordt zo gemeld; een gecentreerd beeld ook (de stijl
+  kent links en rechts; het komt links), net als een vectorbeeld zonder
+  rasterterugval;
+- de **kop- en voettekst** en of de voettekst een **paginanummer** draagt;
+- **Niet overgenomen**: wat het stijlprofiel niet kan dragen — meestal een
+  tweede kopkleur (Word geeft Kop 2 een eigen kleur; een stijlprofiel heeft
+  één kopkleur).
+
+De stijl overnemen is optioneel, want hij kan al bestaan of bewust losgelaten
+worden. **Alleen tekst** opent het document zonder stijl. **Stijl overnemen**
+bewaart een nieuw stijlprofiel onder de naam in het veld (standaard *Stijl van
+<titel>*) en zet `theme: <naam>` in de front matter van het document, precies
+zoals de Stijl-knop dat doet. Is er al een profiel dat deze huisstijl *is* —
+dezelfde letters, kleuren, kop-/voettekst en dezelfde logobytes — dan zegt de
+dialoog dat en biedt **Bestaande stijl gebruiken**, zodat een tweede document
+uit hetzelfde sjabloon geen tweede profiel oplevert. Met het vinkje **Als
+documentlogo gebruiken** neem je de stijl zonder het beeld. In de webversie
+blijft het profiel, maar het logo alleen voor deze sessie.
+
+De melding na de import telt de afbeeldingen in de lopende tekst die niet mee
+konden; die worden nog niet geïmporteerd (#2120).
+
 ### Documenteigenschappen in kop en voet
 
 Open **Document · Eigenschappen** vanuit de documentwerkbalk om waarden in te
@@ -5284,6 +5330,24 @@ afgedrukte HTML wegblijft: een browser vertelt de inhoud niet welke pagina hij
 afdrukt (zie [KNOWN_LIMITATIONS](KNOWN_LIMITATIONS.nl.md)). De Markdownbron
 blijft onveranderd; deze gegevens reizen in het stijlprofiel, niet in de inhoud.
 De presentatiebewerker zelf blijft bewust sober en presentatiegericht.
+
+**Lettertypen: wat je ziet en wat je exporteert.** De lettertypelijst kiest de
+letter waarmee OciDeck tekent, voor documenten én presentaties. Eronder neemt
+**Gewenst lettertype (export)** de naam die de huisstijl *werkelijk* vraagt
+wanneer dat er geen is die OciDeck kan tonen — `Aptos`, bijvoorbeeld. Het
+scherm houdt de letter uit de lijst als plaatsvervanger; een export noemt de
+gewenste als eerste, zodat Word, LibreOffice of een browser die het lettertype
+heeft het echte gezicht toont (de HTML-export zet hem vooraan in de
+letterstapel, Word en LibreOffice krijgen hem in hun stijlen, de PDF neemt
+alleen de klasse over: schreef of schreefloos). Leeg gelaten gebruiken scherm
+en export dezelfde letter. De naam wordt tijdens het typen getoetst — letters,
+cijfers, spaties, punten en koppeltekens — omdat hij in een stylesheet belandt.
+Het documentvlak voegt een **Kopletter** toe: de letter van de koppen van een
+document, met *Zelfde als de tekst* vooraan, en een eigen **Gewenste kopletter
+(export)**. Dia's lezen de kopletter nooit; een aparte kopletter is een
+documentgegeven. Een geïmporteerd Word- of LibreOffice-document vult dit voor
+je in, zie [Een Word- of LibreOffice-document importeren](#een-word--of-libreoffice-document-importeren).
+*(Toegevoegd 2026-09-19, #2119.)*
 
 Bij de kleuren van het profiel staat ook de **tabelstijl**: de randstijl (*Lijnen
 (horizontaal)* in de trant van een gezet boek, *Omrand (volledig)* of *Geen

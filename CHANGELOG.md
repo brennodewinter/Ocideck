@@ -20,6 +20,26 @@ All notable changes to OciDeck are documented in this file.
 - PDF-, PDF/A- en zichtbaar ondertekend bewijs kan lokaal in OciDeck worden bekeken en vanuit gecontroleerde OciServe-bewijskaarten worden geopend, met een open-source, lokale renderer en zonder een niet-uitgevoerde handtekeningcontrole te suggereren.
 - OciServe-lessen worden per afspeelsessie met een nieuw AES-256-pakket en een tijdelijke sleutel geopend en bij het sluiten lokaal opgeruimd.
 - Een aparte formele examenclient toont alleen de huidige persoonlijke vraag, gebruikt challenge- en revisiegebonden antwoorden en benoemt de noodzaak van menselijk toezicht.
+- Documentimport neemt de huisstijl van een `.docx` of `.odt` over (#2119):
+  na het omzetten vraagt één dialoog "Stijl overnemen?" — met de letters van
+  koppen en tekst (de naam uit de bron, en de plaatsvervanger die OciDeck
+  toont), de kleuren van tekst, koppen en accent, het beeld dat in de kop- of
+  voettekst op elke bladzijde staat als documentlogo op de plek en maat waar
+  het stond, de voettekst en de paginanummers, en wat niet mee kan. De keuze
+  is optioneel: alleen tekst, een nieuw stijlprofiel, of het profiel dat deze
+  huisstijl al is. Het gekozen profiel landt als `theme:` in het document.
+- Een stijlprofiel kent een aparte **kopletter** voor documenten
+  (`documentHeadingFontFamily`) en een **gewenst lettertype** voor tekst en
+  koppen (`preferredFontFamily`, `preferredDocumentHeadingFontFamily`): de
+  naam die de huisstijl écht vraagt, bijvoorbeeld `Aptos`, bewaard ook als
+  OciDeck hem niet kan tonen. Een export noemt die naam als eerste — de
+  HTML als font-stack, Word en LibreOffice in hun stijlen (geen vast Calibri
+  meer), de PDF als klasse schreef/schreefloos — en het scherm toont de
+  plaatsvervanger. Instelbaar in de stijlbouwer; `.ocideckstyle` draagt de
+  velden mee (FILE_FORMAT §3.2).
+- De melding na een documentimport telt de afbeeldingen in de tekst die niet
+  mee konden, in plaats van ze te verzwijgen (#2120 volgt met de afbeeldingen
+  zelf).
 
 ### Changed
 

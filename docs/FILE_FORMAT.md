@@ -612,6 +612,9 @@ these fields (with defaults):
 | `documentBandTextColor` | `null` | Header/footer text colour. `null` follows `textColor`. |
 | `documentBandBackgroundColor` | `null` | Header/footer background colour. `null` follows `slideBackgroundColor`. |
 | `documentShowPageNumbers` | `false` | Show the page number at the bottom right of document pages. |
+| `documentHeadingFontFamily` | `null` | **Documents.** Font family of a document's headings, from the same offered set as `fontFamily`. `null` keeps the headings in `fontFamily`, as they always were. A slide never reads it: a separate heading face is a document fact (Word's *major* font), not a slide fact. *(Added 2026-09-19, #2119.)* |
+| `preferredFontFamily` | `null` | The font the house style *actually* asks for — the `Aptos` of an imported Word document, say — when OciDeck cannot show it itself. `fontFamily` is then the stand-in on screen; an export names this one first (the HTML font stack, `w:rFonts` in Word, `style:font-name` in LibreOffice; the PDF and LaTeX only take its serif/sans class), so a program that has the font shows the real face. `null`: no preference, screen and export set the same face. Free text, sanitised on read: letters, digits, space, `.` and `-`, at most 64 characters, starting with a letter or digit — anything that could break out of a CSS or XML declaration is dropped to `null`. *(Added 2026-09-19, #2119.)* |
+| `preferredDocumentHeadingFontFamily` | `null` | **Documents.** As `preferredFontFamily`, for the headings. On export a heading uses this, else `documentHeadingFontFamily`, else the body's export font (`preferredFontFamily` ?? `fontFamily`). *(Added 2026-09-19, #2119.)* |
 | `fontFamily` | `Arial` | Font family for documents and presentations alike. |
 | `footerText` | `""` | Free footer text; tokens: `{page}`, `{total}`, `{date}`, `{title}`. |
 | `footerShowPageNumbers` | `false` | Show "page / total" at the bottom right. |
