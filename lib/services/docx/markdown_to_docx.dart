@@ -82,10 +82,14 @@ class DocxFootnoteDef {
 /// [footnotePlacement] bepaalt of noten als voetnoot (`footnotes.xml`) of
 /// eindnoot (`endnotes.xml`) worden gemarkeerd — de sentinel is hetzelfde;
 /// de export-service kiest het bestand.
+/// [tableHeaderFill] is de `RRGGBB`-vulling die op de kopcellen van een tabel
+/// komt (`w:shd`), uit `ThemeProfile.tableHeaderBackgroundColor`. `null`
+/// laat de cel ongevuld — voor aanroepen die geen profiel kennen.
 DocxConversion markdownToDocxBody(
   String markdown, {
   bool chapterPageBreak = false,
   FootnotePlacement footnotePlacement = FootnotePlacement.page,
+  String? tableHeaderFill,
 }) {
   if (markdown.trim().isEmpty) {
     return const DocxConversion(
@@ -104,7 +108,10 @@ DocxConversion markdownToDocxBody(
   var source = stripFootnoteDefinitions(markdown);
 
   // Tijdlijnen beschermen vóór de parse, net als de ODT-converter.
-  final timelines = _protectDocumentTimelines(source);
+  final timelines = _protectDocumentTimelines(
+    source,
+    headerFill: tableHeaderFill,
+  );
   source = timelines.source;
 
   // Voetnootverwijzingen → sentinels vóór de parse.
@@ -120,7 +127,10 @@ DocxConversion markdownToDocxBody(
     extensionSet: md.ExtensionSet.gitHubFlavored,
   );
   final nodes = document.parse(source);
-  final visitor = _DocxNodeVisitor(chapterPageBreak: chapterPageBreak);
+  final visitor = _DocxNodeVisitor(
+    chapterPageBreak: chapterPageBreak,
+    tableHeaderFill: tableHeaderFill,
+  );
   for (final node in nodes) {
     node.accept(visitor);
   }
@@ -164,12 +174,18 @@ DocxConversion markdownToDocxBody(
 /// Bescherm tijdlijn-tabellen vóór de parse. De markdown-package rendert een
 /// tijdlijn als een gewone tabel — voor docx volstaat dat, de marker blijft
 /// als commentaar zichtbaar voor wie de bron kent.
-({String source, List<String> docx}) _protectDocumentTimelines(String source) {
-  final r = protectTimelines(source, _renderTimelineDocx);
+({String source, List<String> docx}) _protectDocumentTimelines(
+  String source, {
+  String? headerFill,
+}) {
+  final r = protectTimelines(
+    source,
+    (timeline) => _renderTimelineDocx(timeline, headerFill: headerFill),
+  );
   return (source: r.source, docx: r.rendered);
 }
 
-String _renderTimelineDocx(DocumentTimeline timeline) {
+String _renderTimelineDocx(DocumentTimeline timeline, {String? headerFill}) {
   // De tijdlijn wordt als Word-tabel gerenderd; de marker blijft als
   // commentaar erboven staan.
   final buf = StringBuffer('<!-- timeline -->\n');
@@ -192,7 +208,7 @@ String _renderTimelineDocx(DocumentTimeline timeline) {
   // Koptekstrij.
   buf.writeln('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
   for (final header in timeline.headers) {
-    buf.write(_tableCell(header, bold: true));
+    buf.write(_tableCell(header, header: true, fill: headerFill));
   }
   buf.writeln('</w:tr>');
   for (final event in timeline.events) {
@@ -208,10 +224,14 @@ String _renderTimelineDocx(DocumentTimeline timeline) {
   return buf.toString();
 }
 
-String _tableCell(String text, {bool bold = false}) {
-  final rPr = bold ? '<w:rPr><w:b/></w:rPr>' : '';
-  return '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/></w:tcPr>'
-      '<w:p><w:r>$rPr<w:t xml:space="preserve">${xmlEscape(text)}</w:t></w:r>'
+String _tableCell(String text, {bool header = false, String? fill}) {
+  final shd = fill == null
+      ? ''
+      : '<w:shd w:val="clear" w:color="auto" w:fill="$fill"/>';
+  final style = header ? 'TableHeading' : 'TableContents';
+  return '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/>$shd</w:tcPr>'
+      '<w:p><w:pPr><w:pStyle w:val="$style"/></w:pPr>'
+      '<w:r><w:t xml:space="preserve">${xmlEscape(text)}</w:t></w:r>'
       '</w:p></w:tc>';
 }
 
@@ -270,10 +290,13 @@ String _htmlInlineToDocx(String html) {
 }
 
 class _DocxNodeVisitor implements md.NodeVisitor {
-  _DocxNodeVisitor({this.chapterPageBreak = false});
+  _DocxNodeVisitor({this.chapterPageBreak = false, this.tableHeaderFill});
 
   final StringBuffer output = StringBuffer();
   final bool chapterPageBreak;
+
+  /// De `RRGGBB`-vulling voor tabelkopcellen, of `null` voor geen vulling.
+  final String? tableHeaderFill;
 
   bool _seenChapter = false;
 
@@ -462,18 +485,9 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         if (inHeader) output.write('<w:trPr><w:tblHeader/></w:trPr>');
         return true;
       case 'th':
-        _stack.add(_Ctx.tableCell);
-        output.write(
-          '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/></w:tcPr>'
-          '<w:p><w:pPr><w:jc w:val="${_alignVal(element.attributes['align'])}"/></w:pPr>',
-        );
-        _rPr.add('<w:b/>');
+        _openTableCell(element, header: true);
       case 'td':
-        _stack.add(_Ctx.tableCell);
-        output.write(
-          '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/></w:tcPr>'
-          '<w:p><w:pPr><w:jc w:val="${_alignVal(element.attributes['align'])}"/></w:pPr>',
-        );
+        _openTableCell(element, header: false);
 
       default:
         _stack.add(_Ctx.passThrough);
@@ -488,6 +502,20 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     output.write('</w:pPr>');
     _rPr.add('<w:b/>');
     _stack.add(_Ctx.heading);
+  }
+
+  void _openTableCell(md.Element element, {required bool header}) {
+    _stack.add(_Ctx.tableCell);
+    final shd = header && tableHeaderFill != null
+        ? '<w:shd w:val="clear" w:color="auto" w:fill="$tableHeaderFill"/>'
+        : '';
+    // Vet en de koptekstkleur zitten in de TableHeading-stijl; hier blijft
+    // alleen de uitlijning als alinea-eigenschap over.
+    output.write(
+      '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/>$shd</w:tcPr>'
+      '<w:p><w:pPr><w:pStyle w:val="${header ? 'TableHeading' : 'TableContents'}"/>'
+      '<w:jc w:val="${_alignVal(element.attributes['align'])}"/></w:pPr>',
+    );
   }
 
   String _alignVal(String? align) => switch (align) {
@@ -619,8 +647,6 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         }
 
       case 'th':
-        _rPr.removeLast();
-        output.write('</w:p></w:tc>\n');
       case 'td':
         output.write('</w:p></w:tc>\n');
       case 'tr':

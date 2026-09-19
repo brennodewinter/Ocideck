@@ -1627,6 +1627,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Asiakirja tuotu — ei otettu mukaan: {lijst}',
+  '{n} tekstkader': '{n} tekstikehys',
+  '{n} tekstkaders': '{n} tekstikehystä',
+  '{n} groep': '{n} ryhmä',
+  '{n} groepen': '{n} ryhmää',
+  '{n} object': '{n} objekti',
+  '{n} objecten': '{n} objektia',
   'Presentatievorm': 'Esitysmuoto',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Valitse, miten diat vaihtuvat esityksen aikana.',

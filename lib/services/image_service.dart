@@ -11,6 +11,7 @@ import '../models/slide.dart';
 import '../platform/platform_features.dart';
 import '../utils/asset_destination.dart';
 import '../utils/atomic_file.dart';
+import '../utils/image_signature.dart' as image_signature;
 import '../utils/log.dart';
 import '../utils/project_path.dart';
 import 'asset_staging.dart';
@@ -110,29 +111,12 @@ class ImageService {
   /// [looksLikeImage]; callers that must *name* the type (the style-profile
   /// export embeds a logo as `data:<mime>;base64,…`) sniff it here rather than
   /// trusting a file extension or a declared type from an outside file.
-  static String? imageMimeFromBytes(List<int> b) {
-    if (b.length < 4) return null;
-    // PNG
-    if (b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47) {
-      return 'image/png';
-    }
-    if (b[0] == 0xFF && b[1] == 0xD8 && b[2] == 0xFF) return 'image/jpeg';
-    if (b[0] == 0x47 && b[1] == 0x49 && b[2] == 0x46) return 'image/gif';
-    if (b[0] == 0x42 && b[1] == 0x4D) return 'image/bmp';
-    // WebP: "RIFF"...."WEBP"
-    if (b.length >= 12 &&
-        b[0] == 0x52 &&
-        b[1] == 0x49 &&
-        b[2] == 0x46 &&
-        b[3] == 0x46 &&
-        b[8] == 0x57 &&
-        b[9] == 0x45 &&
-        b[10] == 0x42 &&
-        b[11] == 0x50) {
-      return 'image/webp';
-    }
-    return null;
-  }
+  ///
+  /// De implementatie deelt ze met de document-importeurs via
+  /// `utils/image_signature.dart` — de static blijft staan voor de bestaande
+  /// aanroepers.
+  static String? imageMimeFromBytes(List<int> b) =>
+      image_signature.imageMimeFromBytes(b);
 
   /// The MIME type behind [b]'s audio/video **container** signature, or null
   /// when the bytes match none of them.
@@ -191,13 +175,8 @@ class ImageService {
 
   /// The file extension for a MIME type from [imageMimeFromBytes]. Falls back
   /// to `png` so a materialized file always carries a usable extension.
-  static String extensionForImageMime(String mime) => switch (mime) {
-    'image/jpeg' => 'jpg',
-    'image/gif' => 'gif',
-    'image/bmp' => 'bmp',
-    'image/webp' => 'webp',
-    _ => 'png',
-  };
+  static String extensionForImageMime(String mime) =>
+      image_signature.extensionForImageMime(mime);
 
   /// Size cap **and** container signature — the two checks an imported media
   /// file has to pass. [what] names the caller for the log line only.
@@ -576,6 +555,50 @@ class ImageService {
       updated.add(next);
     }
     return updated;
+  }
+
+  /// De documentvariant van [copyImagesToProject]: werkt op de kale
+  /// Markdown-bron in plaats van op slides. Elke `mem:`- of absolute
+  /// afbeeldingsverwijzing in [source] wordt een bestand onder `images/` naast
+  /// het document en de bron wijst daarna projectrelatief — zodat een
+  /// opgeslagen `.md` draagbaar is en geen verwijzing naar het vluchtige
+  /// geheugen of een tijdelijke staging-map overhoudt (#2120).
+  ///
+  /// Bron zónder zulke verwijzingen komt letterlijk terug, zonder dat er een
+  /// lege `images/`-map ontstaat. Verwijzingen die niet landen (weggevaagde
+  /// `mem:`-bytes, onleesbaar bronbestand) blijven staan — de zichtbare
+  /// lege-afbeeldingsplek is eerlijker dan stil weglaten.
+  Future<String> copyDocumentImagesToProject(
+    String source,
+    String projectPath,
+  ) async {
+    final targets = <String>{
+      for (final path in inlineImagePaths(source))
+        if (WebAssetStore.isMemPath(path) ||
+            (!path.startsWith('images/') && p.isAbsolute(path)))
+          path,
+    };
+    if (targets.isEmpty) return source;
+    final imagesDir = Directory(p.join(projectPath, 'images'));
+    await imagesDir.create(recursive: true);
+
+    // Dezelfde inhoudsindex als bij slides: alleen bouwen als er een
+    // mem:-pad bij zit, anders betaalt élke opslag een scan van images/.
+    final existingByHash = targets.any(WebAssetStore.isMemPath)
+        ? await _indexExistingImages(imagesDir)
+        : null;
+
+    final rewrites = <String, String>{};
+    for (final path in targets) {
+      final dest = await _copyImageToProject(
+        path,
+        imagesDir,
+        existingByHash: existingByHash,
+      );
+      if (dest != null) rewrites[path] = dest;
+    }
+    if (rewrites.isEmpty) return source;
+    return rewriteInlineImagePaths(source, (path) => rewrites[path]);
   }
 
   /// Neem de assets over die slides uit een ándere projectmap aanhalen: elke

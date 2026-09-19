@@ -1631,6 +1631,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument uvezen — nije preneseno: {lijst}',
+  '{n} tekstkader': '{n} tekstualni okvir',
+  '{n} tekstkaders': '{n} tekstualnih okvira',
+  '{n} groep': '{n} grupa',
+  '{n} groepen': '{n} grupe',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objekata',
   'Presentatievorm': 'Oblik prezentacije',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Odaberite kako se slajdovi izmjenjuju tijekom prezentacije.',

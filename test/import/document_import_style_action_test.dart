@@ -308,7 +308,9 @@ void main() {
     container.dispose();
   });
 
-  testWidgets('overgeslagen beelden staan in de melding', (tester) async {
+  testWidgets('beelden in de tekst komen mee; de stijlvraag staat er los van', (
+    tester,
+  ) async {
     final (container, ctx) = await pump(tester);
     final done = await startImport(
       tester,
@@ -318,7 +320,11 @@ void main() {
     await tester.tap(find.byKey(const Key('import-document-style-text-only')));
     await done;
     await tester.pump();
-    expect(find.textContaining('1 afbeelding'), findsOneWidget);
+    // #2128 neemt de afbeelding mee als `mem:`-verwijzing; de melding blijft
+    // dan de gewone succesmelding, zonder "niet overgenomen".
+    expect(_openDocumentSource(container), contains('](mem:'));
+    expect(find.textContaining('niet overgenomen'), findsNothing);
+    expect(find.textContaining('geïmporteerd'), findsOneWidget);
     container.dispose();
   });
 

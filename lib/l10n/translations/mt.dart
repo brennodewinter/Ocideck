@@ -1645,6 +1645,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importat — ma ttieħed xejn: {lijst}',
+  '{n} tekstkader': '{n} qafas tat-test',
+  '{n} tekstkaders': '{n} oqfsa tat-test',
+  '{n} groep': '{n} grupp',
+  '{n} groepen': '{n} gruppi',
+  '{n} object': '{n} oġġett',
+  '{n} objecten': '{n} oġġetti',
   'Presentatievorm': 'Format tal-preżentazzjoni',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Agħżel kif jinbidlu s-slajds waqt il-preżentazzjoni.',

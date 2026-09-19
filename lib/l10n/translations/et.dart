@@ -1620,6 +1620,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument imporditud — ei viidud kaasa: {lijst}',
+  '{n} tekstkader': '{n} tekstiraam',
+  '{n} tekstkaders': '{n} tekstiraami',
+  '{n} groep': '{n} rühm',
+  '{n} groepen': '{n} rühma',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objekti',
   'Presentatievorm': 'Esitlusvorming',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Vali, kuidas slaidid esitluse ajal edasi liiguvad.',

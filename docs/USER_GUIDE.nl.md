@@ -5262,9 +5262,6 @@ uit hetzelfde sjabloon geen tweede profiel oplevert. Met het vinkje **Als
 documentlogo gebruiken** neem je de stijl zonder het beeld. In de webversie
 blijft het profiel, maar het logo alleen voor deze sessie.
 
-De melding na de import telt de afbeeldingen in de lopende tekst die niet mee
-konden; die worden nog niet geïmporteerd (#2120).
-
 ### Documenteigenschappen in kop en voet
 
 Open **Document · Eigenschappen** vanuit de documentwerkbalk om waarden in te

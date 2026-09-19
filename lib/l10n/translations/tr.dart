@@ -2538,6 +2538,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Belge içe aktarıldı — taşınmadı: {lijst}',
+  '{n} tekstkader': '{n} metin çerçevesi',
+  '{n} tekstkaders': '{n} metin çerçevesi',
+  '{n} groep': '{n} grup',
+  '{n} groepen': '{n} grup',
+  '{n} object': '{n} nesne',
+  '{n} objecten': '{n} nesne',
   'Presentatievorm': 'Sunum biçimi',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Sunum sırasında slaytların nasıl ilerleyeceğini seçin.',

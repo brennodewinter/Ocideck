@@ -83,19 +83,13 @@ Future<void> importDocument(
 
   container.read(tabsProvider.notifier).newDocumentFromMarkdown(markdown);
   messenger.showSnackBar(
-    SnackBar(content: Text(_importedMessage(l10n, result.skippedImages))),
+    SnackBar(
+      content: Text(
+        _notImportedSummary(l10n, result.notImported) ??
+            l10n.d('Document geïmporteerd.'),
+      ),
+    ),
   );
-}
-
-/// De melding na de import. Beelden die niet mee konden (#2120) worden
-/// geteld in plaats van verzwegen.
-String _importedMessage(AppLocalizations l10n, int skippedImages) {
-  if (skippedImages == 0) return l10n.d('Document geïmporteerd.');
-  return l10n
-      .d(
-        'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.',
-      )
-      .replaceAll('{n}', '$skippedImages');
 }
 
 /// De eerste kop van het document, als suggestie voor de stijlnaam. De
@@ -228,6 +222,34 @@ Future<String> _placeLogo(
     );
   }
   return WebAssetStore.put(logo.bytes, name: logo.name ?? 'logo.${logo.ext}');
+}
+
+/// De "niet overgenomen"-bijlage bij de succesmelding: wat er in het
+/// brondocument stond maar niet meekwam, geteld per soort (#2120). `null`
+/// als alles mee is — dan blijft de gewone succesmelding staan.
+String? _notImportedSummary(AppLocalizations l10n, List<String> kinds) {
+  if (kinds.isEmpty) return null;
+  const names = {
+    'afbeelding': ('{n} afbeelding', '{n} afbeeldingen'),
+    'tekstkader': ('{n} tekstkader', '{n} tekstkaders'),
+    'groep': ('{n} groep', '{n} groepen'),
+    'object': ('{n} object', '{n} objecten'),
+  };
+  final counts = <String, int>{};
+  for (final kind in kinds) {
+    counts[kind] = (counts[kind] ?? 0) + 1;
+  }
+  final parts = [
+    for (final entry in counts.entries)
+      if (names[entry.key] case final pair?)
+        l10n
+            .d(entry.value == 1 ? pair.$1 : pair.$2)
+            .replaceAll('{n}', '${entry.value}'),
+  ];
+  if (parts.isEmpty) return null;
+  return l10n
+      .d('Document geïmporteerd — niet overgenomen: {lijst}')
+      .replaceAll('{lijst}', parts.join(', '));
 }
 
 /// De bestandskiezer, apart gehouden zodat de import zelf één rechte lijn

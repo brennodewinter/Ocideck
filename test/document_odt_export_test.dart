@@ -19,6 +19,7 @@ import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/document_export_service.dart';
 import 'package:ocideck/services/export_bundle.dart';
@@ -46,6 +47,7 @@ void main() {
   Future<ExportBundle> buildBundle(
     String body, {
     TlpLevel tlp = TlpLevel.none,
+    ThemeProfile? theme,
   }) async => buildDocumentExportBundle(
     body,
     projectPath: null,
@@ -56,6 +58,7 @@ void main() {
     markdownService: MarkdownService(),
     title: 'Rapport',
     tlp: tlp,
+    theme: theme,
   );
 
   test(
@@ -218,6 +221,69 @@ void main() {
     // De tweede H1 krijgt een restart-numbering (wat de page-break marker
     // aangeeft in de ODT-converter).
     expect(content, contains('text:restart-numbering'));
+  });
+
+  group('odt: profielkleuren', () {
+    test(
+      'kop-, tekst-, link- en tabelkleuren uit het profiel bereiken de export',
+      () async {
+        const theme = ThemeProfile(
+          textColor: '#a1b2c3',
+          accentColor: '#aa6600',
+          documentHeadingColor: '#003399',
+          tableHeaderBackgroundColor: '#445566',
+          tableHeaderTextColor: '#eeddcc',
+          tableTextColor: '#334455',
+        );
+        final bundle = await buildBundle(
+          '# Kop\n\nTekst.\n\n## Subkop\n\n'
+          '| Naam | Waarde |\n| --- | --- |\n| A | 1 |\n\n'
+          '[link](https://ocideck.nl)\n',
+          theme: theme,
+        );
+        final bytes = await buildDocumentExportOdt(bundle);
+        final archive = ZipDecoder().decodeBytes(bytes);
+        final content = _readEntry(archive, 'content.xml');
+
+        // Broodtekstkleur op de default-stijl; kopkleur op de kopstijlen.
+        expect(content, contains('fo:color="#A1B2C3"'));
+        expect(content, contains('fo:color="#003399"'));
+        // Links volgen het accent via de Link-tekststijl.
+        expect(content, contains('fo:color="#AA6600"'));
+        expect(content, contains('<text:a xlink:href="https://ocideck.nl"'));
+        expect(content, contains('text:style-name="Link"'));
+        // Tabelkop-vulling en -tekstkleur; de cel refereert de stijl.
+        expect(content, contains('fo:background-color="#445566"'));
+        expect(content, contains('fo:color="#EEDDCC"'));
+        expect(content, contains('fo:color="#334455"'));
+        expect(content, contains('table:style-name="Table_Header_Cell"'));
+      },
+    );
+
+    test(
+      'zonder documentHeadingColor volgt h1 de tekstkleur en h2+ het accent',
+      () async {
+        const theme = ThemeProfile(
+          textColor: '#102030',
+          accentColor: '#607080',
+        );
+        final bundle = await buildBundle('# Kop\n\n## Sub\n', theme: theme);
+        final bytes = await buildDocumentExportOdt(bundle);
+        final archive = ZipDecoder().decodeBytes(bytes);
+        final content = _readEntry(archive, 'content.xml');
+
+        final h1 = RegExp(
+          r'<style:style style:name="Heading_20_1".*?</style:style>',
+          dotAll: true,
+        ).firstMatch(content)!.group(0)!;
+        final h2 = RegExp(
+          r'<style:style style:name="Heading_20_2".*?</style:style>',
+          dotAll: true,
+        ).firstMatch(content)!.group(0)!;
+        expect(h1, contains('fo:color="#102030"'));
+        expect(h2, contains('fo:color="#607080"'));
+      },
+    );
   });
 
   test('odt: tabellen worden als ODT-table gerenderd', () async {

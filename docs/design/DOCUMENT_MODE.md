@@ -1713,7 +1713,7 @@ A reader sees serif against sans, not one sans against another.
 - **DOCX**: `w:rFonts` in `docDefaults` from `exportFontFamily`, and on
   `Heading1–6` from `exportDocumentHeadingFontFamily` when it differs. This
   replaced a hard-coded Calibri that ignored the profile altogether; the
-  colours still do (#2121).
+  colours landed beside it the same day (#2129).
 - **ODT**: `office:font-face-decls` plus `style:font-name` on the paragraph
   default style and the heading styles.
 - **PDF**: unchanged in kind — the fourteen standard faces — but the
@@ -1776,11 +1776,12 @@ mode. The dialog does not appear for a document that carries nothing, and it
 never runs before the safety scan: a document refused for executable content
 gets no style question either.
 
-### 18.5 What was left out, and where it is tracked
+### 18.5 What was left out, and where it went
 
-- Body pictures are still dropped by the import; the snackbar now counts them
-  so nothing disappears silently, and #2120 tracks bringing them along.
-- The DOCX/ODT exports carry the profile's fonts now but not its colours
-  (#2121).
+- Body pictures were dropped by the import when this was designed; the two
+  side findings became #2120 (body images salvaged as `mem:` assets, with a
+  *niet overgenomen* summary — landed as #2128) and #2121 (profile colours in
+  the DOCX/ODT styles — landed as #2129), both merged the same day and merged
+  into this branch.
 - Per-level heading colours, heading sizes and the theme's other accents are
   not expressible in a profile and are reported as losses rather than modelled.

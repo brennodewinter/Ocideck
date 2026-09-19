@@ -15,13 +15,13 @@ import 'helpers/docx_styled_fixture.dart';
 void main() {
   group('letters', () {
     test('koppen volgen de major-letter, de tekst de minor-letter', () {
-      final style = importDocx(docxStyledFixture()).style;
+      final style = convertDocxDetailed(docxStyledFixture()).style;
       expect(style.headingFontFamily, 'Aptos');
       expect(style.bodyFontFamily, 'Aptos Light');
     });
 
     test('een kopstijl met een eigen naam wint van het thema', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(heading1Font: 'Segoe UI'),
       ).style;
       expect(style.headingFontFamily, 'Segoe UI');
@@ -29,21 +29,23 @@ void main() {
     });
 
     test('zonder thema blijft een thema-verwijzing leeg', () {
-      final style = importDocx(docxStyledFixture(withTheme: false)).style;
+      final style = convertDocxDetailed(
+        docxStyledFixture(withTheme: false),
+      ).style;
       expect(style.headingFontFamily, isNull);
       expect(style.bodyFontFamily, isNull);
       expect(style.accentColor, isNull);
     });
 
     test('de kale fixture zonder stijlinformatie is leeg', () {
-      final style = importDocx(docxFixture()).style;
+      final style = convertDocxDetailed(docxFixture()).style;
       expect(style.isEmpty, isTrue, reason: '$style');
     });
   });
 
   group('kleuren', () {
     test('tekst-, kop- en accentkleur komen als #RRGGBB', () {
-      final style = importDocx(docxStyledFixture()).style;
+      final style = convertDocxDetailed(docxStyledFixture()).style;
       expect(style.textColor, '#000000');
       expect(style.headingColor, '#00464F');
       expect(style.accentColor, '#00464F');
@@ -52,7 +54,7 @@ void main() {
     test(
       'een subkop met een andere kleur wordt een verlies, één per kleur',
       () {
-        final style = importDocx(docxStyledFixture()).style;
+        final style = convertDocxDetailed(docxStyledFixture()).style;
         // Kop 2 is blauw, Kop 3 erft dat via basedOn: samen één melding.
         expect(
           style.losses.where(
@@ -69,7 +71,7 @@ void main() {
     );
 
     test('subkoppen in dezelfde kleur als Kop 1 zijn geen verlies', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(heading2Color: '00464F'),
       ).style;
       expect(
@@ -81,7 +83,7 @@ void main() {
     });
 
     test('auto en ontbrekende kleuren worden null', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           bodyColor: 'auto',
           heading1Color: null,
@@ -95,27 +97,29 @@ void main() {
 
   group('kop- en voettekst', () {
     test('de voettekst komt zonder tekstkader en zonder paginanummer', () {
-      final style = importDocx(docxStyledFixture()).style;
+      final style = convertDocxDetailed(docxStyledFixture()).style;
       expect(style.footerText, 'Information security policy');
       expect(style.showPageNumbers, isTrue);
       expect(style.headerText, isNull);
     });
 
     test('zonder PAGE-veld geen paginanummers', () {
-      final style = importDocx(docxStyledFixture(footerPageField: false)).style;
+      final style = convertDocxDetailed(
+        docxStyledFixture(footerPageField: false),
+      ).style;
       expect(style.showPageNumbers, isFalse);
       expect(style.footerText, 'Information security policy');
     });
 
     test('een voettekst met alleen een tekstkader is leeg', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(footerText: null, footerPageField: false),
       ).style;
       expect(style.footerText, isNull);
     });
 
     test('de standaardkoptekst komt mee', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(headerText: 'NEO NL — beleid'),
       ).style;
       expect(style.headerText, 'NEO NL — beleid');
@@ -127,7 +131,7 @@ void main() {
       'het beeldmerk in de standaardvoettekst is de kandidaat, rechtsonder',
       () {
         final logo = fixtureLogoPng();
-        final style = importDocx(
+        final style = convertDocxDetailed(
           docxStyledFixture(defaultFooterLogo: logo, firstHeaderLogo: logo),
         ).style;
         expect(style.logoCandidates, hasLength(1));
@@ -142,7 +146,7 @@ void main() {
     );
 
     test('het woordmerk op het titelblad telt niet, maar wordt gemeld', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(firstHeaderLogo: fixtureLogoPng()),
       ).style;
       expect(style.logoCandidates, isEmpty);
@@ -153,7 +157,7 @@ void main() {
     });
 
     test('zonder titelblad is het first-deel geen titelblad', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(titlePage: false, firstHeaderLogo: fixtureLogoPng()),
       ).style;
       expect(
@@ -164,14 +168,14 @@ void main() {
 
     test('een inline beeld in de standaardkoptekst volgt de uitlijning', () {
       final logo = fixtureLogoPng();
-      final left = importDocx(
+      final left = convertDocxDetailed(
         docxStyledFixture(defaultHeaderInlineLogo: logo),
       ).style;
       expect(left.logoCandidates.single.position, 'top-left');
       expect(left.logoCandidates.single.origin, DocumentLogoOrigin.header);
       expect(left.logoCandidates.single.widthMm, closeTo(33.3, 0.1));
 
-      final right = importDocx(
+      final right = convertDocxDetailed(
         docxStyledFixture(
           defaultHeaderInlineLogo: logo,
           defaultHeaderJc: 'right',
@@ -181,7 +185,7 @@ void main() {
     });
 
     test('een gecentreerd beeld wordt links, met een melding', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           defaultHeaderInlineLogo: fixtureLogoPng(),
           defaultHeaderJc: 'center',
@@ -196,7 +200,7 @@ void main() {
     });
 
     test('een verankerd beeld links van het midden is links', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           defaultFooterLogo: fixtureLogoPng(),
           defaultFooterAnchor: const FixtureAnchor(
@@ -211,7 +215,7 @@ void main() {
     });
 
     test('een verankerd beeld met uitlijning volgt die uitlijning', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           defaultFooterLogo: fixtureLogoPng(),
           defaultFooterAnchor: const FixtureAnchor(
@@ -227,7 +231,7 @@ void main() {
     });
 
     test('een beeld breder dan het halve blad is geen logo', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           defaultFooterLogo: fixtureLogoPng(),
           defaultFooterAnchor: const FixtureAnchor(
@@ -242,7 +246,7 @@ void main() {
     });
 
     test('een beeld zonder rasterterugval (alleen SVG) wordt gemeld', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           defaultFooterLogo: fixtureLogoPng(),
           svgOnlyFooterLogo: true,
@@ -257,7 +261,7 @@ void main() {
 
     test('een beeld dat per bladzijde in de body herhaald is telt ook', () {
       final logo = fixtureLogoPng(seed: 3);
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           footerText: null,
           footerPageField: false,
@@ -274,7 +278,7 @@ void main() {
     });
 
     test('één los beeld in de body is geen logo', () {
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           bodyRepeatedLogo: fixtureLogoPng(),
           bodyRepeatCount: 1,
@@ -285,7 +289,7 @@ void main() {
 
     test('hetzelfde beeld in koptekst én voettekst blijft twee kandidaten', () {
       final logo = fixtureLogoPng();
-      final style = importDocx(
+      final style = convertDocxDetailed(
         docxStyledFixture(
           defaultFooterLogo: logo,
           defaultHeaderInlineLogo: logo,
@@ -299,19 +303,20 @@ void main() {
   });
 
   group('beelden in de tekst', () {
-    test('worden geteld zodat de import ze kan melden', () {
-      final result = importDocx(
+    test('komen mee als afbeelding, náást de stijl', () {
+      final result = convertDocxDetailed(
         docxStyledFixture(
           bodyRepeatedLogo: fixtureLogoPng(),
           bodyRepeatCount: 3,
         ),
       );
-      expect(result.skippedImages, 3);
-      expect(importDocx(docxStyledFixture()).skippedImages, 0);
+      expect(result.images, hasLength(3));
+      expect(result.notImported, isEmpty);
+      expect(result.style.headingFontFamily, 'Aptos');
     });
 
     test('de Markdown zelf verandert niet door de stijl', () {
-      final result = importDocx(docxStyledFixture());
+      final result = convertDocxDetailed(docxStyledFixture());
       expect(result.markdown, contains('# Beleid'));
       expect(result.markdown, contains('Een alinea.'));
       expect(convertDocxToMarkdown(docxStyledFixture()), result.markdown);

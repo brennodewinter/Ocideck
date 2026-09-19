@@ -1639,6 +1639,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument zaimportowany — nie przeniesiono: {lijst}',
+  '{n} tekstkader': '{n} ramka tekstowa',
+  '{n} tekstkaders': '{n} ramki tekstowe',
+  '{n} groep': '{n} grupa',
+  '{n} groepen': '{n} grupy',
+  '{n} object': '{n} obiekt',
+  '{n} objecten': '{n} obiekty',
   'Presentatievorm': 'Format prezentacji',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Wybierz sposób przechodzenia slajdów podczas prezentacji.',

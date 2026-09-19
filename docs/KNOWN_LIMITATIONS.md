@@ -213,20 +213,17 @@ suite builds itself. No file written by PowerPoint, Impress or Keynote has been
 through them. → [USER_GUIDE.md](USER_GUIDE.md#importing-presentations-powerpoint-keynote-impress),
 [design/VERIFICATION.md](design/VERIFICATION.md) item 11 *(added 2026-07-24)*
 
-## Importing a document takes its style, but not every colour, and not its pictures
+## Importing a document takes its style, but a profile has one heading colour
 
 A `.docx` or `.odt` import reads the house style and offers it as a style
 profile (fonts, colours, the logo on every page, header and footer — see the
-[User Guide](USER_GUIDE.md#importing-a-word-or-libreoffice-document)). Two
-things stay behind. A style profile has **one heading colour**, so a document
+[User Guide](USER_GUIDE.md#importing-a-word-or-libreoffice-document)). One
+thing stays behind: a style profile has **one heading colour**, so a document
 whose Heading 2 has a colour of its own keeps that only for Heading 1; the
-dialog lists the other colours under *Niet overgenomen*. And the **pictures in
-the running text** are not imported yet — the import counts them in its message
-so nothing goes missing silently, and #2120 tracks bringing them along. The font
-the document asks for is kept by name even when OciDeck cannot show it; the
-screen uses a stand-in and the exports name the real one, except the PDF and
-LaTeX, which only take its serif/sans class (see above). *(Added 2026-09-19,
-#2119.)*
+dialog lists the other colours under *Niet overgenomen*. The font the document
+asks for is kept by name even when OciDeck cannot show it; the screen uses a
+stand-in and the exports name the real one, except the PDF and LaTeX, which
+only take its serif/sans class (see above). *(Added 2026-09-19, #2119.)*
 
 ## Left-to-right only
 

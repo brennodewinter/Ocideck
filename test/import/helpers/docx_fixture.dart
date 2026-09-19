@@ -11,12 +11,27 @@ const _w = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 const _r =
     'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
 const _pkg = 'http://schemas.openxmlformats.org/package/2006/relationships';
+const _a = 'http://schemas.openxmlformats.org/drawingml/2006/main';
+const _wp =
+    'http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing';
+const _mc = 'http://schemas.openxmlformats.org/markup-compatibility/2006';
+const _v = 'urn:schemas-microsoft-com:vml';
 
 /// Bouw een minimale `.docx` met een op maat gemaakte body.
-Uint8List docxFixture({String? body}) {
+///
+/// [extraRels] voegt `<Relationship>`-elementen toe aan
+/// `word/_rels/document.xml.rels` (bijvoorbeeld een afbeeldingsrelatie) en
+/// [binaries] voegt ruwe delen toe — `{'word/media/foto.png': bytes}` voor
+/// een afbeelding die de body aanhaalt.
+Uint8List docxFixture({
+  String? body,
+  String? extraRels,
+  Map<String, List<int>>? binaries,
+}) {
   final documentXml =
       '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-      '<w:document xmlns:w="$_w" xmlns:r="$_r"><w:body>'
+      '<w:document xmlns:w="$_w" xmlns:r="$_r" xmlns:a="$_a" '
+      'xmlns:wp="$_wp" xmlns:mc="$_mc" xmlns:v="$_v"><w:body>'
       '${body ?? _defaultBody}'
       '</w:body></w:document>';
   final stylesXml =
@@ -37,6 +52,7 @@ Uint8List docxFixture({String? body}) {
         '<Relationships xmlns="$_pkg">'
         '<Relationship Id="rId1" Type="$_r/hyperlink" '
         'Target="https://voorbeeld.nl" TargetMode="External"/>'
+        '${extraRels ?? ''}'
         '</Relationships>',
     'word/numbering.xml':
         '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
@@ -56,6 +72,9 @@ Uint8List docxFixture({String? body}) {
     archive.addFile(
       ArchiveFile.bytes(name, Uint8List.fromList(content.codeUnits)),
     );
+  });
+  binaries?.forEach((name, content) {
+    archive.addFile(ArchiveFile.bytes(name, Uint8List.fromList(content)));
   });
   return Uint8List.fromList(ZipEncoder().encode(archive));
 }

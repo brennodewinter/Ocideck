@@ -227,10 +227,7 @@ void main() {
       expect(
         documentStyleMatchesProfile(
           sparse,
-          base.copyWith(
-            documentFooterText: '',
-            documentShowPageNumbers: false,
-          ),
+          base.copyWith(documentFooterText: '', documentShowPageNumbers: false),
         ),
         isTrue,
       );

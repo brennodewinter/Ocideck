@@ -4937,9 +4937,6 @@ from the same template does not grow a second profile. The **Als documentlogo
 gebruiken** box lets you take the style without the picture. On the web build
 the profile is kept but the logo lives for this session only.
 
-The message after the import counts the pictures in the running text that did
-not come along; they are not imported yet (#2120).
-
 ### Document properties in the header and footer
 
 Open **Document · Properties** from the document toolbar to set the values that

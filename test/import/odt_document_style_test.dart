@@ -12,7 +12,7 @@ import 'helpers/odt_styled_fixture.dart';
 void main() {
   group('letters en kleuren', () {
     test('koppen volgen de Heading-stijl, de tekst de default-style', () {
-      final style = importOdt(odtStyledFixture()).style;
+      final style = convertOdtDetailed(odtStyledFixture()).style;
       expect(style.headingFontFamily, 'Liberation Sans');
       expect(style.bodyFontFamily, 'Liberation Serif');
       expect(style.textColor, '#000000');
@@ -22,7 +22,7 @@ void main() {
     });
 
     test('een subkop met een andere kleur is één verlies per kleur', () {
-      final style = importOdt(odtStyledFixture()).style;
+      final style = convertOdtDetailed(odtStyledFixture()).style;
       expect(
         style.losses.where(
           (l) => l.kind == DocumentStyleLossKind.perLevelHeadingColor,
@@ -37,25 +37,29 @@ void main() {
     });
 
     test('de kale fixture is leeg', () {
-      expect(importOdt(odtFixture()).style.isEmpty, isTrue);
+      expect(convertOdtDetailed(odtFixture()).style.isEmpty, isTrue);
     });
   });
 
   group('kop- en voettekst', () {
     test('de voettekst komt zonder paginanummer, mét de vlag', () {
-      final style = importOdt(odtStyledFixture()).style;
+      final style = convertOdtDetailed(odtStyledFixture()).style;
       expect(style.footerText, 'Information security policy');
       expect(style.showPageNumbers, isTrue);
       expect(style.headerText, isNull);
     });
 
     test('zonder paginanummerveld geen vlag', () {
-      final style = importOdt(odtStyledFixture(footerPageNumber: false)).style;
+      final style = convertOdtDetailed(
+        odtStyledFixture(footerPageNumber: false),
+      ).style;
       expect(style.showPageNumbers, isFalse);
     });
 
     test('de koptekst komt mee', () {
-      final style = importOdt(odtStyledFixture(headerText: 'Beleid')).style;
+      final style = convertOdtDetailed(
+        odtStyledFixture(headerText: 'Beleid'),
+      ).style;
       expect(style.headerText, 'Beleid');
     });
   });
@@ -63,7 +67,7 @@ void main() {
   group('logo', () {
     test('het beeldmerk in de voettekst, aan de bladzijde verankerd', () {
       final logo = fixtureLogoPng();
-      final style = importOdt(
+      final style = convertOdtDetailed(
         odtStyledFixture(footerLogo: logo, firstPageLogo: logo),
       ).style;
       expect(style.logoCandidates, hasLength(1));
@@ -80,7 +84,7 @@ void main() {
 
     test('een kader in de koptekst volgt zijn horizontale positie', () {
       final logo = fixtureLogoPng();
-      final right = importOdt(
+      final right = convertOdtDetailed(
         odtStyledFixture(
           headerLogo: logo,
           headerFrame: const OdtFrame(
@@ -94,7 +98,7 @@ void main() {
       expect(right.logoCandidates.single.origin, DocumentLogoOrigin.header);
       expect(right.logoCandidates.single.widthMm, closeTo(30, 0.01));
 
-      final centred = importOdt(
+      final centred = convertOdtDetailed(
         odtStyledFixture(
           headerLogo: logo,
           headerFrame: const OdtFrame(
@@ -112,7 +116,7 @@ void main() {
     });
 
     test('zonder positie volgt een kader de uitlijning van de alinea', () {
-      final style = importOdt(
+      final style = convertOdtDetailed(
         odtStyledFixture(
           footerLogo: fixtureLogoPng(),
           footerFrame: const OdtFrame(widthCm: 2, heightCm: 1),
@@ -123,7 +127,7 @@ void main() {
     });
 
     test('alleen SVG wordt gemeld, niet overgenomen', () {
-      final style = importOdt(
+      final style = convertOdtDetailed(
         odtStyledFixture(footerLogo: fixtureLogoPng(), footerLogoSvgOnly: true),
       ).style;
       expect(style.logoCandidates, isEmpty);
@@ -134,7 +138,7 @@ void main() {
     });
 
     test('een beeld dat per bladzijde in de body herhaald is telt ook', () {
-      final style = importOdt(
+      final style = convertOdtDetailed(
         odtStyledFixture(
           footerText: null,
           footerPageNumber: false,
@@ -150,15 +154,15 @@ void main() {
     });
   });
 
-  test('beelden in de tekst worden geteld en de Markdown blijft gelijk', () {
-    final result = importOdt(
+  test('beelden in de tekst komen mee, náást de stijl', () {
+    final result = convertOdtDetailed(
       odtStyledFixture(bodyRepeatedLogo: fixtureLogoPng(), bodyRepeatCount: 2),
     );
-    expect(result.skippedImages, 2);
+    expect(result.images, hasLength(2));
     expect(result.markdown, contains('# Beleid'));
     expect(
       convertOdtToMarkdown(odtStyledFixture()),
-      importOdt(odtStyledFixture()).markdown,
+      convertOdtDetailed(odtStyledFixture()).markdown,
     );
   });
 }

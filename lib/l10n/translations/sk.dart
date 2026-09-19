@@ -1633,6 +1633,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importovaný — neprenesené: {lijst}',
+  '{n} tekstkader': '{n} textový rám',
+  '{n} tekstkaders': '{n} textových rámov',
+  '{n} groep': '{n} skupina',
+  '{n} groepen': '{n} skupín',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objektov',
   'Presentatievorm': 'Formát prezentácie',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Vyberte, ako sa budú snímky počas prezentácie posúvať.',

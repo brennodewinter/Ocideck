@@ -37,9 +37,6 @@ All notable changes to OciDeck are documented in this file.
   meer), de PDF als klasse schreef/schreefloos — en het scherm toont de
   plaatsvervanger. Instelbaar in de stijlbouwer; `.ocideckstyle` draagt de
   velden mee (FILE_FORMAT §3.2).
-- De melding na een documentimport telt de afbeeldingen in de tekst die niet
-  mee konden, in plaats van ze te verzwijgen (#2120 volgt met de afbeeldingen
-  zelf).
 
 ### Changed
 
@@ -59,6 +56,11 @@ All notable changes to OciDeck are documented in this file.
   9.6.0, `code_assets` 2.1.0 en `vector_math` 2.4.3; de software-inventaris
   volgt. `dartcv4` krijgt bewust een ondergrens van 2.3.1: de OpenCV-build volgt
   vanaf daar de deployment target van de app, wat onder Xcode 27 nodig is.
+- De releaseketen wacht na de tag tot vier uur op de release-CI in plaats van
+  één uur, met een hartslag elke tien minuten, en benoemt een rode losse
+  ci.yml-poort op de tag als testuitslag naast de keten in plaats van als
+  gefaalde releasejob. De v0.6.5-run brak na 60 minuten af midden in
+  `Linux bouwen` terwijl elke job liep of groen was.
 - Flutter 3.47.4 (Dart 3.13.3), de bijbehorende directe en transitieve
   pakketten en de software-inventaris zijn bijgewerkt; de bestandskiezer faalt
   bij een onbekende bestandsgrootte dicht in plaats van onbegrensd in te lezen.
@@ -2728,6 +2730,23 @@ that before deciding whether this alpha fits what you are doing.
   --version` draaien bouwt de snapshot met Apple's bash, daarna werkt `flutter`
   weer via `env`. `pdfium_flutter` 0.3.1 verandert niets aan de
   darwin-verpakking; de PDFium-normalisatie uit #2116 blijft nodig.
+- **De release-CI-wacht gaf op terwijl de keten gezond was.** `follow_ci` in
+  `scripts/release_auto.sh` pollde vast 120 × 30 s en stierf daarna met
+  "na 60 minuten nog actief"; de v0.6.5-run stopte zo midden in `Linux bouwen`
+  met elke andere job groen, en de keten werd 74 minuten later gewoon
+  terminaal. Gemeten duur ná de tag: v0.6.4 2u05, v0.6.5 2u14 (gate ~12 →
+  Poort ~12 → macOS ~15 naast Linux ~50 en web ~45 → publiceren → website).
+  Een "geen wijziging"-drempel helpt hier niet: een lange job verandert het
+  beeld een half uur lang niet. Daarom een tijdcap die een vangnet is en geen
+  verwachting (`OCIDECK_RELEASE_CI_TIMEOUT_MIN`, standaard 240): zolang een
+  job zichtbaar draait is wachten nooit fout, en een job die écht hangt kapt
+  de runner zelf af na twee uur. Een hartslag elke tien minuten laat zien dat
+  er gewacht wordt en niet gehangen. Daarnaast las de samenvatting `failure|gate`
+  (de losse ci.yml-poort op dezelfde tag, die bewust niet meetelt voor de
+  keten) als "minstens één release-job faalde"; die wordt nu apart benoemd als
+  testuitslag naast de keten. `test/release_auto_race_test.dart` pint beide:
+  een keten die pas na 150 polls compleet is, komt door; de oude 120-cap maakt
+  die test rood.
 - **0.6.5 ging uit mét de v0.6.4-startfout; drie poorten tegen herhaling
   (#2115).** De fix hieronder stond al als tak op origin toen de onbewaakte
   releaseketen voor 0.6.5 werd gestart; niets in die keten keek ernaar, want de

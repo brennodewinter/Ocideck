@@ -364,8 +364,8 @@ class _DocxSections {
         if (local != 'headerReference' && local != 'footerReference') continue;
         final rid = _attr(ref, 'id');
         final target = rid == null ? null : ctx.relationship(rid);
-        if (target == null) continue;
-        final path = _resolveWordPath(target);
+        final path = target == null ? null : _resolveWordPath(target);
+        if (path == null) continue;
         switch (_attr(ref, 'type')) {
           case 'default':
             (local == 'headerReference' ? headers : footers).add(path);
@@ -403,10 +403,15 @@ double? _twipsToEmu(String? twips) {
 }
 
 /// Een relatiedoel (`header2.xml`, `media/image1.png`, `/word/x.xml`) naar
-/// een archiefpad onder `word/`.
-String _resolveWordPath(String target) {
-  if (target.startsWith('/')) return target.substring(1);
-  return 'word/$target';
+/// een archiefpad onder `word/`, of `null` voor een doel dat het pakket wil
+/// verlaten: `..` of een schema (`http:`, `file:`) — dezelfde grens als
+/// `imagePartPath` voor de beelden in de tekst.
+String? _resolveWordPath(String target) {
+  if (target.contains(':') || target.contains('..')) return null;
+  final path = target.startsWith('/')
+      ? target.replaceFirst(RegExp('^/+'), '')
+      : 'word/$target';
+  return path.isEmpty || path == 'word/' ? null : path;
 }
 
 // --- Kop- en voettekst lezen ---------------------------------------------------
@@ -586,8 +591,8 @@ DocumentLogoCandidate? _readDrawing(
   if (blip == null) return null;
   final rid = _attr(blip, 'embed');
   final target = rid == null ? null : ctx.relationshipOf(partPath, rid);
-  if (target == null) return null;
-  final mediaPath = _resolveWordPath(target);
+  final mediaPath = target == null ? null : _resolveWordPath(target);
+  if (mediaPath == null) return null;
   final bytes = ctx.readPartBytes(mediaPath);
   if (bytes == null || bytes.length > _maxLogoBytes) return null;
   final ext = _rasterExtension(bytes);

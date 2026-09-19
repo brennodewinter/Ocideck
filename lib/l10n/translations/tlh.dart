@@ -1604,6 +1604,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Deq lanpu — tlhaplu\'be\': {lijst}',
+  '{n} tekstkader': '{n} ghItlh wot',
+  '{n} tekstkaders': '{n} ghItlh wotmey',
+  '{n} groep': '{n} ghom',
+  '{n} groepen': '{n} ghommey',
+  '{n} object': '{n} Doch',
+  '{n} objecten': '{n} Dochmey',
   'Presentatievorm': 'much ngIq Segh',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'muchtaHvIS Qorwaghmey vIHmeH mIw yIwIv.',
