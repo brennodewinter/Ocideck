@@ -79,6 +79,9 @@ require_cmd xcrun
 require_cmd codesign
 require_cmd ditto
 require_cmd security
+# Nodig voor het normaliseren van het PDFium-framework, verderop.
+require_cmd otool
+require_cmd install_name_tool
 
 # Vroeg en duidelijk stoppen als de identiteit ontbreekt. Anders faalt codesign
 # pas halverwege met een cryptische melding, na een build van minuten.
@@ -143,6 +146,113 @@ fi
   echo "Geen app gevonden op $APP — bouw eerst (laat --skip-build weg)." >&2
   exit 1
 }
+
+# ---------------------------------------------------------------------------
+# PDFium-framework normaliseren, vóór het tekenen.
+#
+# pdfium_flutter linkt zijn Swift-plugin tegen "-framework PDFium", terwijl de
+# native-assets-stap van Flutter datzelfde framework als pdfium.framework
+# wegschrijft: install name @rpath/pdfium.framework/pdfium, CFBundleExecutable
+# "pdfium". Op een hoofdletterongevoelige buildschijf komen die twee in dezelfde
+# map terecht. De mapnaam houdt dan de hoofdletters van de linker en de inhoud
+# de kleine letters van de native asset, en de bundel vertrekt met
+# PDFium.framework/Versions/A/pdfium erin.
+#
+# Oudere dyld-versies laadden dat alsnog, juist omdat APFS hoofdletterongevoelig
+# is. Vanaf macOS 26 eist dyld bij een hardened, genotariseerde binary dat de
+# bladnaam exact klopt. De app stopt dan bij het starten met "Library not
+# loaded: @rpath/PDFium.framework/PDFium ... security level requires its leaf
+# name to match". Zo strandde v0.6.4 op macOS 27.2.
+#
+# Er wordt naar kleine letters genormaliseerd. Alles behalve dat ene load
+# command in het hoofdbinary draagt die schrijfwijze al: de install name van het
+# framework, zijn Info.plist en de native-assets-mapping van Dart. Hernoemen
+# gaat in twee stappen, want op een hoofdletterongevoelig volume is "PDFium"
+# naar "pdfium" hernoemen geen wijziging.
+#
+# Deze stap hoort vóór het tekenen: hernoemen en install_name_tool breken het
+# zegel van de bundel.
+# ---------------------------------------------------------------------------
+section "PDFium-framework normaliseren"
+FRAMEWORKS="$APP/Contents/Frameworks"
+MAIN_BINARY="$APP/Contents/MacOS/OciDeck"
+PDFIUM_REF_UPPER='@rpath/PDFium.framework/PDFium'
+PDFIUM_REF_LOWER='@rpath/pdfium.framework/pdfium'
+
+# Hernoemt alleen als de naam op schijf werkelijk afwijkt. De omweg via een
+# tijdelijke naam is nodig omdat een rechtstreekse mv op dit volume niets doet.
+rename_exact() {
+  local path="$1" want="$2" dir base
+  dir="$(dirname "$path")"
+  base="$(basename "$path")"
+  if [[ "$base" == "$want" ]]; then
+    return 0
+  fi
+  mv "$path" "$dir/.$want.rename"
+  mv "$dir/.$want.rename" "$dir/$want"
+  echo "  hernoemd: $base -> $want"
+}
+
+# -iname geeft de naam die er werkelijk staat; een test op het pad zou op dit
+# volume ook bij de verkeerde schrijfwijze slagen en dus niets bewaken.
+PDFIUM_FW="$(find "$FRAMEWORKS" -maxdepth 1 -iname 'pdfium.framework' -print -quit)"
+if [[ -z "$PDFIUM_FW" ]]; then
+  echo "Geen pdfium-framework in $FRAMEWORKS gevonden." >&2
+  echo "Is de PDF-bewijsviewer uit de build gevallen? Zonder dit framework start de app niet." >&2
+  exit 1
+fi
+rename_exact "$PDFIUM_FW" 'pdfium.framework'
+PDFIUM_FW="$FRAMEWORKS/pdfium.framework"
+
+PDFIUM_BIN="$(find "$PDFIUM_FW/Versions/A" -maxdepth 1 -iname 'pdfium' -print -quit)"
+if [[ -z "$PDFIUM_BIN" ]]; then
+  echo "Geen pdfium-binary in $PDFIUM_FW/Versions/A." >&2
+  exit 1
+fi
+rename_exact "$PDFIUM_BIN" 'pdfium'
+PDFIUM_BIN="$PDFIUM_FW/Versions/A/pdfium"
+
+# De symlink bovenin de framework-map draagt dezelfde naam als de binary en
+# wijst ernaar. Hier niet hernoemen maar opnieuw zetten: bij een hernoemde
+# binary klopt ook het doel van de bestaande symlink niet meer.
+PDFIUM_LINK="$(find "$PDFIUM_FW" -maxdepth 1 -iname 'pdfium' -print -quit)"
+if [[ -n "$PDFIUM_LINK" ]]; then
+  rm -f "$PDFIUM_LINK"
+fi
+ln -s 'Versions/Current/pdfium' "$PDFIUM_FW/pdfium"
+
+# Info.plist en install name gelijktrekken, zodat de identiteit van het
+# framework op elk niveau dezelfde schrijfwijze heeft.
+PDFIUM_PLIST="$PDFIUM_FW/Versions/A/Resources/Info.plist"
+if [[ -f "$PDFIUM_PLIST" ]]; then
+  for key in CFBundleExecutable CFBundleName; do
+    if [[ "$(/usr/libexec/PlistBuddy -c "Print :$key" "$PDFIUM_PLIST" 2>/dev/null)" != "pdfium" ]]; then
+      /usr/libexec/PlistBuddy -c "Set :$key pdfium" "$PDFIUM_PLIST"
+      echo "  Info.plist: $key -> pdfium"
+    fi
+  done
+fi
+if [[ "$(otool -D "$PDFIUM_BIN" | tail -n1)" != "$PDFIUM_REF_LOWER" ]]; then
+  install_name_tool -id "$PDFIUM_REF_LOWER" "$PDFIUM_BIN"
+  echo "  install name -> $PDFIUM_REF_LOWER"
+fi
+
+# Het hoofdbinary is in v0.6.4 de enige plek met de hoofdlettervariant.
+if otool -L "$MAIN_BINARY" | grep -qF "$PDFIUM_REF_UPPER"; then
+  install_name_tool -change "$PDFIUM_REF_UPPER" "$PDFIUM_REF_LOWER" "$MAIN_BINARY"
+  echo "  load command in OciDeck -> $PDFIUM_REF_LOWER"
+fi
+
+# Bewaken en niet aannemen. Loopt de naamgeving bij een volgende pdfrx- of
+# pdfium_flutter-versie opnieuw uiteen, dan faalt de release hier en niet pas
+# bij het starten op de Mac van een gebruiker.
+if grep -rlF "$PDFIUM_REF_UPPER" "$APP" >/dev/null 2>&1; then
+  echo "Er staat nog een verwijzing naar $PDFIUM_REF_UPPER in de bundel:" >&2
+  grep -rlF "$PDFIUM_REF_UPPER" "$APP" | sed "s|^$APP/|   |" >&2
+  echo "Normaliseer die mee; anders weigert dyld de app op macOS 26 en later." >&2
+  exit 1
+fi
+echo "  in orde: pdfium.framework/pdfium, overal dezelfde schrijfwijze"
 
 # Inside-out tekenen: eerst elk ingebed framework/dylib, dan pas de app-bundel.
 # Hardened runtime en een veilige tijdstempel zijn allebei voorwaarden voor
