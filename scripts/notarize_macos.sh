@@ -298,7 +298,7 @@ rpaths_of() { # rpaths_of MACHO EXEC_DIR
 # Toetst één bundel. Schrijft per fout één regel naar stderr en geeft het aantal
 # fouten terug als status, zodat de aanroeper in één keer alles ziet.
 check_bundle_links() { # check_bundle_links APP
-  local app="$1" exec_dir main_bin f dep rest hit root found errors=0
+  local app="$1" exec_dir main_bin f dep rest hit root roots found errors=0
   exec_dir="$app/Contents/MacOS"
   main_bin="$(find "$exec_dir" -maxdepth 1 -type f -perm -u+x -print -quit)"
   local main_rpaths
@@ -315,6 +315,10 @@ check_bundle_links() { # check_bundle_links APP
       found=0
       case "$dep" in
         @rpath/*)
+          # Eerst verzamelen, dan lopen: een 'break' uit een lus op een
+          # procesvervanging laat otool/sed met een SIGPIPE en een losse
+          # "Broken pipe" op stderr achter.
+          roots="$(printf '%s\n' "$main_rpaths"; rpaths_of "$f" "$exec_dir")"
           while IFS= read -r root; do
             [[ -n "$root" ]] || continue
             if [[ "$root" != "$app"/* ]]; then
@@ -324,7 +328,7 @@ check_bundle_links() { # check_bundle_links APP
               continue
             fi
             hit="$(resolve_exact "$root" "$rest")" && { found=1; break; }
-          done < <(printf '%s\n' "$main_rpaths"; rpaths_of "$f" "$exec_dir")
+          done <<<"$roots"
           ;;
         @executable_path/*) hit="$(resolve_exact "$exec_dir" "$rest")" && found=1 ;;
         @loader_path/*)     hit="$(resolve_exact "$(dirname "$f")" "$rest")" && found=1 ;;

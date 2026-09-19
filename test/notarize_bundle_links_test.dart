@@ -49,7 +49,7 @@ void main() {
       ..createSync(recursive: true);
     final main = File('${macos.path}/OciDeck')..writeAsStringSync('binary');
     Process.runSync('chmod', ['755', main.path]);
-    File('${main.path}.deps').writeAsStringSync(deps.join('\n'));
+    File('${main.path}.deps').writeAsStringSync('${deps.join('\n')}\n');
 
     Directory('${fw.path}/pdfium.framework/Versions/A')
         .createSync(recursive: true);
@@ -80,7 +80,7 @@ case "\$1" in
   -l) printf '          cmd LC_RPATH\\n         path @executable_path/../Frameworks (offset 12)\\n'
       printf '          cmd LC_RPATH\\n         path @loader_path/Frameworks (offset 12)\\n' ;;
   -L) printf '%s:\\n' "\$2"
-      [ -f "\$2.deps" ] && while read -r d; do
+      [ -f "\$2.deps" ] && while read -r d || [ -n "\$d" ]; do
         [ -n "\$d" ] && printf '\\t%s (compatibility version 0.0.0, current version 0.0.0)\\n' "\$d"
       done <"\$2.deps" ;;
 esac
@@ -122,6 +122,16 @@ check_bundle_links "${fx.app}"
     final r = check(fx);
     expect(r.exitCode, 1, reason: 'stderr: ${r.stderr}');
     expect(r.stderr, contains('FOUT Contents/MacOS/OciDeck: @rpath/PDFium.framework/PDFium'));
+  }, skip: skipOnWindows);
+
+  test('ook een mapcomponent met andere schrijfwijze valt om', () {
+    // dyld kijkt alleen naar de bladnaam; deze controle eist bewust élke
+    // component, zodat de bundel overal dezelfde spelling draagt en een
+    // volgende toolchain die strenger wordt hier niets nieuws vindt.
+    final fx = buildFixture(['@rpath/PDFium.framework/pdfium']);
+    final r = check(fx);
+    expect(r.exitCode, 1, reason: 'stderr: ${r.stderr}');
+    expect(r.stderr, contains('@rpath/PDFium.framework/pdfium'));
   }, skip: skipOnWindows);
 
   test('een verwijzing die nergens oplost valt om en wordt genoemd', () {
