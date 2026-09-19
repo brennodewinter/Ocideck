@@ -90,11 +90,14 @@ extension FileServiceDocumentOpen on FileService {
   }
 
   /// Vraagt de gebruiker waar het document naartoe moet en schrijft het daar
-  /// byte-getrouw heen (nieuw of nog niet opgeslagen document, DOCUMENT_MODE.md
-  /// §3). Levert het gekozen pad, of null bij wegklikken of schrijffout — zie
-  /// [_writeDocumentToPicked]. Spiegel van [saveDeckAsDetailed], zonder projectmap
-  /// of sidecars: een document is één plat bestand.
-  Future<String?> saveDocumentAs(
+  /// heen (nieuw of nog niet opgeslagen document, DOCUMENT_MODE.md §3).
+  /// Levert het gekozen pad én het document zoals het op schijf staat —
+  /// `mem:`- en absolute afbeeldingsverwijzingen zijn dan al naar `images/`
+  /// gematerialiseerd — of null bij wegklikken of schrijffout, zie
+  /// [_writeDocumentToPicked]. Spiegel van [saveDeckAsDetailed], zonder
+  /// projectmap of sidecars: een document is één plat bestand plus zijn
+  /// afbeeldingsmap.
+  Future<({String path, MarkdownDocument document})?> saveDocumentAs(
     MarkdownDocument document, {
     String? initialDirectory,
   }) async => _writeDocumentToPicked(
@@ -108,37 +111,58 @@ extension FileServiceDocumentOpen on FileService {
 }
 
 /// Schrijft [document] naar het gekozen [dest] (vult `.md` aan wanneer die
-/// ontbreekt). Levert het uiteindelijke pad, of null wanneer de gebruiker het
-/// venster wegklikte (`dest == null`) of het schrijven mislukte (dat logt
-/// [saveDocument]). Top-level en niet op [FileService]: hij raakt geen veld van
-/// die klasse aan, en de klasse zit tegen haar plafond.
-Future<String?> _writeDocumentToPicked(
+/// ontbreekt). Levert pad én het document zoals geschreven, of null wanneer
+/// de gebruiker het venster wegklikte (`dest == null`) of het schrijven
+/// mislukte (dat logt [saveDocument]). Top-level en niet op [FileService]:
+/// hij raakt geen veld van die klasse aan, en de klasse zit tegen haar
+/// plafond.
+Future<({String path, MarkdownDocument document})?> _writeDocumentToPicked(
   MarkdownDocument document,
   String? dest,
 ) async {
   if (dest == null) return null;
   final path = withExtension(dest, '.md');
-  return await saveDocument(document, path) ? path : null;
+  final written = await saveDocument(document, path);
+  return written == null ? null : (path: path, document: written);
 }
 
-/// Schrijf een document byte-getrouw naar [filePath]: precies de bron, geen
-/// deck-scaffold, geen `marp:`-kop, geen normalisatie (DOCUMENT_MODE.md §3).
-/// Atomair via [writeStringAtomic], zodat een onderbroken schrijfactie nooit een
-/// half bestand achterlaat. Levert `true` bij succes.
+/// Schrijf een document naar [filePath]: de bron, geen deck-scaffold, geen
+/// `marp:`-kop, geen normalisatie (DOCUMENT_MODE.md §3). Atomair via
+/// [writeStringAtomic], zodat een onderbroken schrijfactie nooit een half
+/// bestand achterlaat.
+///
+/// Twee afwijkingen op "byte-getrouw", beide aan de afbeeldingskant (#2120):
+/// `mem:`-verwijzingen (uit een import of plak-actie) worden als echt
+/// bestand naar `images/` naast het `.md` geschreven en absolute paden
+/// worden daarheen gekopieerd — de teruggegeven bron wijst er dan
+/// projectrelatief naar. Levert het document zoals het op schijf staat, of
+/// null bij een schrijffout; de aanroeper moet die versie overnemen zodat
+/// editor, schijf en conflict-hash over één bron lopen.
 ///
 /// De veiligheidsscan hoort bij het *openen* (onvertrouwde invoer); wat de
 /// gebruiker in zijn eigen editor typt en naar zijn eigen, gekozen pad
 /// wegschrijft, is geen onvertrouwde invoer en gaat er niet nog eens doorheen.
 ///
-/// Top-level en niet op [FileService]: hij raakt geen enkel veld van die klasse
-/// aan, en de klasse zit tegen haar plafond.
-Future<bool> saveDocument(MarkdownDocument document, String filePath) async {
+/// Top-level en niet op [FileService]: hij raakt geen enkel veld van die
+/// klasse aan, en de klasse zit tegen haar plafond.
+Future<MarkdownDocument?> saveDocument(
+  MarkdownDocument document,
+  String filePath,
+) async {
   try {
-    await writeStringAtomic(File(filePath), document.toMarkdown());
-    return true;
+    final written = kIsWeb
+        ? document
+        : document.withSource(
+            await ImageService().copyDocumentImagesToProject(
+              document.source,
+              p.dirname(filePath),
+            ),
+          );
+    await writeStringAtomic(File(filePath), written.toMarkdown());
+    return written;
   } catch (e) {
     logWarning('FileService.saveDocument: not writable', e);
-    return false;
+    return null;
   }
 }
 
