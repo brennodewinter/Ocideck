@@ -30,6 +30,7 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
+import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBody;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
@@ -39,6 +40,7 @@ import '../pdf/document_pdf_export.dart'
     show MathSvgResolver, MermaidSvgResolver;
 import 'markdown_to_docx.dart';
 import 'svg_to_png.dart';
+import '../../utils/hex_color.dart';
 import '../../utils/xml_escape.dart';
 
 /// Bouwt de DOCX-bytes voor een document-export. Headless: geen IO.
@@ -73,12 +75,14 @@ Future<Uint8List> buildDocumentExportDocx(
   final body = projectedDocumentBody(bundle);
   final meta = metadata ?? ExportDocumentMetadata.fromDeck(bundle.audience);
   final title = meta.displayTitle('Document');
+  final theme = bundle.audience.deck.themeProfile;
 
   // 1. Markdown → WordprocessingML body + nevenproducten.
   final conversion = markdownToDocxBody(
     body,
     chapterPageBreak: chapterPageBreak,
     footnotePlacement: footnotePlacement,
+    tableHeaderFill: hexRgbTriplet(theme.tableHeaderBackgroundColor),
   );
 
   // 2-4. Rasterisatie, afbeeldingen ophalen, sentinels vervangen.
@@ -93,7 +97,7 @@ Future<Uint8List> buildDocumentExportDocx(
   final pageSize = _pageSizeTwips(bundle);
   final pageMargins = _pageMarginsTwips(bundle);
   final documentXml = _buildDocumentXml(prepared.body, pageSize, pageMargins);
-  final stylesXml = _buildStylesXml();
+  final stylesXml = _buildStylesXml(theme);
   final numberingXml = _buildNumberingXml();
   final footnotesXml = conversion.footnotes.isNotEmpty
       ? _buildNotesXml(
@@ -564,43 +568,58 @@ String _buildDocumentXml(
       '<w:body>$body\n$sectPr</w:body></w:document>';
 }
 
-String _buildStylesXml() =>
-    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
-    '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
-    '<w:docDefaults><w:rPrDefault><w:rPr>'
-    '<w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>'
-    '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
-    '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
-    '</w:docDefaults>'
-    '${_headingStyle(1, 32, 240)}'
-    '${_headingStyle(2, 26, 240)}'
-    '${_headingStyle(3, 22, 200)}'
-    '${_headingStyle(4, 20, 200)}'
-    '${_headingStyle(5, 18, 160)}'
-    '${_headingStyle(6, 16, 160)}'
-    '<w:style w:type="character" w:styleId="SourceText"><w:rPr>'
-    '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
-    '</w:rPr></w:style>'
-    '<w:style w:type="paragraph" w:styleId="PreformattedText"><w:pPr>'
-    '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
-    '</w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
-    '<w:sz w:val="20"/></w:rPr></w:style>'
-    '<w:style w:type="paragraph" w:styleId="Quote"><w:pPr>'
-    '<w:ind w:left="567" w:right="567"/><w:spacing w:after="160"/>'
-    '</w:pPr><w:rPr><w:i/></w:rPr></w:style>'
-    '<w:style w:type="paragraph" w:styleId="ListParagraph"><w:pPr>'
-    '<w:ind w:left="720" w:hanging="360"/></w:pPr></w:style>'
-    '<w:style w:type="character" w:styleId="Hyperlink"><w:rPr>'
-    '<w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr></w:style>'
-    '<w:style w:type="character" w:styleId="FootnoteReference"><w:rPr>'
-    '<w:vertAlign w:val="superscript"/></w:rPr></w:style>'
-    '</w:styles>';
+String _buildStylesXml(ThemeProfile theme) {
+  // De profielkleuren, in de RRGGBB-vorm die OOXML verwacht. Een hoofdstukkop
+  // (h1) volgt de tekstkleur, een subkop (h2–h6) het accent — dezelfde
+  // verdeling als de documentweergave en de HTML-/PDF-export, zodat het
+  // papier hetzelfde blad toont als het scherm.
+  final heading = hexRgbTriplet(theme.effectiveDocumentHeadingColor);
+  final subheading = hexRgbTriplet(theme.effectiveDocumentSubheadingColor);
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
+      '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+      '<w:docDefaults><w:rPrDefault><w:rPr>'
+      '<w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>'
+      '<w:color w:val="${hexRgbTriplet(theme.textColor)}"/>'
+      '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+      '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
+      '</w:docDefaults>'
+      '${_headingStyle(1, 32, 240, heading)}'
+      '${_headingStyle(2, 26, 240, subheading)}'
+      '${_headingStyle(3, 22, 200, subheading)}'
+      '${_headingStyle(4, 20, 200, subheading)}'
+      '${_headingStyle(5, 18, 160, subheading)}'
+      '${_headingStyle(6, 16, 160, subheading)}'
+      '<w:style w:type="character" w:styleId="SourceText"><w:rPr>'
+      '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
+      '</w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="PreformattedText"><w:pPr>'
+      '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
+      '</w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
+      '<w:sz w:val="20"/></w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="Quote"><w:pPr>'
+      '<w:ind w:left="567" w:right="567"/><w:spacing w:after="160"/>'
+      '</w:pPr><w:rPr><w:i/></w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="ListParagraph"><w:pPr>'
+      '<w:ind w:left="720" w:hanging="360"/></w:pPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="TableHeading"><w:rPr>'
+      '<w:b/><w:color w:val="${hexRgbTriplet(theme.tableHeaderTextColor)}"/>'
+      '</w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="TableContents"><w:rPr>'
+      '<w:color w:val="${hexRgbTriplet(theme.tableTextColor)}"/></w:rPr></w:style>'
+      '<w:style w:type="character" w:styleId="Hyperlink"><w:rPr>'
+      '<w:color w:val="${hexRgbTriplet(theme.accentColor)}"/>'
+      '<w:u w:val="single"/></w:rPr></w:style>'
+      '<w:style w:type="character" w:styleId="FootnoteReference"><w:rPr>'
+      '<w:vertAlign w:val="superscript"/></w:rPr></w:style>'
+      '</w:styles>';
+}
 
-String _headingStyle(int level, int szHalfPt, int spacingAfter) =>
+String _headingStyle(int level, int szHalfPt, int spacingAfter, String color) =>
     '<w:style w:type="paragraph" w:styleId="Heading$level">'
     '<w:pPr><w:spacing w:before="$spacingAfter" w:after="80"/>'
     '<w:outlineLvl w:val="${level - 1}"/></w:pPr>'
-    '<w:rPr><w:b/><w:sz w:val="$szHalfPt"/></w:rPr></w:style>';
+    '<w:rPr><w:b/><w:color w:val="$color"/><w:sz w:val="$szHalfPt"/></w:rPr>'
+    '</w:style>';
 
 String _buildNumberingXml() =>
     '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
