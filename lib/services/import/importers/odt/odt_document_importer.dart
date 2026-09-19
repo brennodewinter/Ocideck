@@ -12,15 +12,34 @@
 // afhankelijkheid.
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
+import '../../../../utils/content_hash.dart';
+import '../../models/source_document_style.dart';
 import '../../utils/archive_utils.dart';
 import '../../utils/import_budget.dart';
 import '../../utils/xml_utils.dart';
 import '../odp/odp_context.dart'
     show descendantsLocal, childLocal, childrenLocal, xlinkHref;
+
+part 'odt_document_style.dart';
+
+/// Wat de import van een `.odt` oplevert: de Markdown, de huisstijl van de
+/// bron en het aantal beelden in de tekst dat niet mee kon (#2120).
+class OdtDocumentImport {
+  const OdtDocumentImport({
+    required this.markdown,
+    required this.style,
+    required this.skippedImages,
+  });
+
+  final String markdown;
+  final SourceDocumentStyle style;
+  final int skippedImages;
+}
 
 /// Zet de bytes van een `.odt` om in Markdown.
 ///
@@ -29,6 +48,13 @@ import '../odp/odp_context.dart'
 /// onleesbaar onderdeel. De aanroeper vangt deze en vertaalt ze naar
 /// gebruikersmeldingen.
 String convertOdtToMarkdown(
+  List<int> bytes, {
+  ImportBudget budget = ImportBudget.standard,
+}) => importOdt(bytes, budget: budget).markdown;
+
+/// Leest een `.odt`: de Markdown én de huisstijl van de bron. Dezelfde
+/// uitzonderingen als [convertOdtToMarkdown].
+OdtDocumentImport importOdt(
   List<int> bytes, {
   ImportBudget budget = ImportBudget.standard,
 }) {
@@ -49,7 +75,14 @@ String convertOdtToMarkdown(
   for (final child in text.children.whereType<XmlElement>()) {
     _emitBlock(ctx, child, buf, indent: '');
   }
-  return _trimTrailingBlank(buf.toString());
+  return OdtDocumentImport(
+    markdown: _trimTrailingBlank(buf.toString()),
+    style: _extractOdtStyle(ctx),
+    skippedImages: descendantsLocal(
+      text,
+      'frame',
+    ).where((f) => descendantsLocal(f, 'image').isNotEmpty).length,
+  );
 }
 
 XmlElement? _findOfficeText(XmlDocument doc) {
