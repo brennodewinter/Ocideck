@@ -13,20 +13,35 @@
 // volgende export als HTML de deur uit gaan.
 
 import 'importers/import_failure.dart';
+import 'models/source_document_style.dart';
 import 'utils/import_budget.dart';
 import '../markdown_safety.dart';
 import 'importers/docx/docx_document_importer.dart';
 import 'importers/odt/odt_document_importer.dart';
 
-/// De uitkomst van een documentimport: de Markdown, of de reden van een
-/// mislukking.
+/// De uitkomst van een documentimport: de Markdown mét de huisstijl van de
+/// bron (#2119), of de reden van een mislukking.
 class DocumentImportResult {
-  const DocumentImportResult.success(this.markdown) : failure = null;
+  const DocumentImportResult.success(
+    this.markdown, {
+    this.style = SourceDocumentStyle.empty,
+    this.skippedImages = 0,
+  }) : failure = null;
 
-  const DocumentImportResult.failed(this.failure) : markdown = null;
+  const DocumentImportResult.failed(this.failure)
+    : markdown = null,
+      style = SourceDocumentStyle.empty,
+      skippedImages = 0;
 
   final String? markdown;
   final DocumentImportFailure? failure;
+
+  /// Wat de bron aan huisstijl droeg; leeg als er niets te halen viel.
+  final SourceDocumentStyle style;
+
+  /// Beelden in de lopende tekst die niet mee konden (#2120): de melding na
+  /// de import telt ze, zodat er niets stil verdwijnt.
+  final int skippedImages;
 
   bool get isSuccess => markdown != null;
 }
@@ -76,9 +91,9 @@ DocumentImportResult importDocumentBytes(
     );
   }
   try {
-    final markdown = switch (format) {
-      DocumentImportFormat.docx => convertDocxToMarkdown(bytes, budget: budget),
-      DocumentImportFormat.odt => convertOdtToMarkdown(bytes, budget: budget),
+    final (markdown, style, skippedImages) = switch (format) {
+      DocumentImportFormat.docx => _unpackDocx(bytes, budget),
+      DocumentImportFormat.odt => _unpackOdt(bytes, budget),
     };
     // Fail-closed: de importer produceert zelf Markdown, maar de brontekst
     // kan HTML-fragmenten bevatten die als Markdown renderen. Dezelfde poort
@@ -91,7 +106,11 @@ DocumentImportResult importDocumentBytes(
         ),
       );
     }
-    return DocumentImportResult.success(markdown);
+    return DocumentImportResult.success(
+      markdown,
+      style: style,
+      skippedImages: skippedImages,
+    );
   } on ImportBudgetException catch (e) {
     return DocumentImportResult.failed(
       DocumentImportFailure(
@@ -114,6 +133,22 @@ DocumentImportResult importDocumentBytes(
       DocumentImportFailure('Kon het document niet lezen.', cause: e),
     );
   }
+}
+
+(String, SourceDocumentStyle, int) _unpackDocx(
+  List<int> bytes,
+  ImportBudget budget,
+) {
+  final result = importDocx(bytes, budget: budget);
+  return (result.markdown, result.style, result.skippedImages);
+}
+
+(String, SourceDocumentStyle, int) _unpackOdt(
+  List<int> bytes,
+  ImportBudget budget,
+) {
+  final result = importOdt(bytes, budget: budget);
+  return (result.markdown, result.style, result.skippedImages);
 }
 
 DocumentImportFormat? _detectFormat(String filename) {
