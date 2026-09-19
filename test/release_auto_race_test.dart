@@ -152,6 +152,58 @@ follow_ci
     );
   }, skip: skipOnWindows);
 
+  test('follow_ci wacht langer dan een uur zolang de keten zichtbaar draait', () {
+    // v0.6.5: na 60 minuten (120 polls) brak de wacht af terwijl "Linux
+    // bouwen" nog liep en elke andere job groen was; de keten werd 74 minuten
+    // later netjes terminaal. Hier wordt de keten pas na 150 polls compleet.
+    final counter = File(
+      '${Directory.systemTemp.path}/ocideck-release-polls-$pid.log',
+    );
+    addTearDown(() {
+      if (counter.existsSync()) counter.deleteSync();
+    });
+    final result = runReleaseHarness('''
+COUNTER=${counter.path}
+section() { :; }
+log() { printf '%s\\n' "\$1"; }
+sleep() { :; }
+die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
+api() {
+  n=\$(( \$(cat "\$COUNTER" 2>/dev/null || echo 0) + 1 )); printf '%s' "\$n" >"\$COUNTER"
+  if [ "\$n" -lt 150 ]; then
+    printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"running","name":"Linux bouwen"},{"head_branch":"v9.9.9","status":"success","name":"macOS bouwen"},{"head_branch":"v9.9.9","status":"failure","name":"gate"}]}'
+  else
+    printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Linux bouwen"},{"head_branch":"v9.9.9","status":"success","name":"macOS bouwen"},{"head_branch":"v9.9.9","status":"failure","name":"gate"},{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
+  fi
+}
+follow_ci
+echo "KLAAR"
+''');
+    expect(result.exitCode, 0, reason: 'stderr: ${result.stderr}');
+    expect(result.stdout, endsWith('KLAAR\n'));
+    expect(int.parse(counter.readAsStringSync()), greaterThanOrEqualTo(150));
+    // Een hartslag om de tien minuten laat zien dat er gewacht wordt, niet gehangen.
+    expect(result.stdout, contains('nog bezig na'));
+    // De rode ci.yml-poort is een testuitslag naast de keten, geen releasejob.
+    expect(result.stdout, contains('losse ci.yml-poort (gate)'));
+    expect(result.stdout, isNot(contains('minstens één release-job faalde')));
+  }, skip: skipOnWindows);
+
+  test('een gefaalde releasejob wordt wél als zodanig gemeld', () {
+    final result = runReleaseHarness('''
+section() { :; }
+log() { printf '%s\\n' "\$1"; }
+sleep() { :; }
+die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
+api() {
+  printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"failure","name":"Linux bouwen"},{"head_branch":"v9.9.9","status":"failure","name":"Release publiceren"}]}'
+}
+follow_ci
+''');
+    expect(result.exitCode, 0, reason: 'stderr: ${result.stderr}');
+    expect(result.stdout, contains('minstens één release-job faalde'));
+  }, skip: skipOnWindows);
+
   test('fase 3 herdispatcht niet zolang dezelfde release-CI nog actief is', () {
     final mutations = File(
       '${Directory.systemTemp.path}/ocideck-release-dispatch-$pid.log',

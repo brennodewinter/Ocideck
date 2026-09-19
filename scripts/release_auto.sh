@@ -100,6 +100,15 @@ DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@braniebananie.nl}"
 # serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
 # stuk. Zie wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
 GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-75}"
+# De wachttijd op de release-CI ná de tag (minuten). Die keten duurt ruim twee
+# uur: v0.6.4 2u05 en v0.6.5 2u14 (gate ~12 → Poort ~12 → macOS ~15 naast
+# Linux ~50 en web ~45 → publiceren → website). De oude vaste 60 min brak de
+# v0.6.5-run midden in "Linux bouwen" af terwijl elke job liep of groen was, en
+# schoof fase 3 naar --resume. Zolang een job zichtbaar draait is wachten nooit
+# fout; een job die écht hangt kapt de runner zelf af (timeout 2 uur). Deze cap
+# is dus een vangnet tegen een keten die nooit terminaal wordt, niet de
+# verwachte duur. Overschrijfbaar via OCIDECK_RELEASE_CI_TIMEOUT_MIN.
+RELEASE_CI_TIMEOUT_MIN="${OCIDECK_RELEASE_CI_TIMEOUT_MIN:-240}"
 
 DRY_RUN=0
 SKIP_INSTALL=0
@@ -1195,13 +1204,25 @@ tag_and_push() { # tag_and_push MERGE_SHA
 # echt niet groen werd.
 follow_ci() {
   STEP="release-CI volgen"
-  section "Fase 2 — release-CI volgen (tot alle jobs klaar zijn)"
-  local prev="" running _
+  local cap="${RELEASE_CI_TIMEOUT_MIN:-240}"
+  section "Fase 2 — release-CI volgen (tot alle jobs klaar zijn, max ${cap} min)"
+  local prev="" running _ unchanged=0
   snap=""
-  for _ in $(seq 1 120); do
+  # Elke iteratie ~30 s. Een lange job (Linux bouwen, ~50 min) verandert het
+  # beeld een half uur lang niet; daarom is de cap een tijd en geen "geen
+  # wijziging"-drempel, en laat een hartslag elke tien minuten zien dat er nog
+  # gewacht wordt en niet gehangen.
+  for _ in $(seq 1 $(( cap * 2 ))); do
     snap="$(release_ci_snapshot || true)"
     running="$(printf '%s\n' "$snap" | grep -cE '^(running|waiting|pending)\|' || true)"
-    if [ "$snap" != "$prev" ] && [ -n "$snap" ]; then printf '%s\n' "$snap" | sed 's/^/   /'; prev="$snap"; fi
+    if [ "$snap" != "$prev" ] && [ -n "$snap" ]; then
+      printf '%s\n' "$snap" | sed 's/^/   /'; prev="$snap"; unchanged=0
+    else
+      unchanged=$(( unchanged + 1 ))
+      if [ $(( unchanged % 20 )) -eq 0 ]; then
+        log "nog bezig na $(elapsed 2>/dev/null || echo '?'): $running job(s) actief, geen wijziging in de laatste 10 min."
+      fi
+    fi
     if [ -n "$snap" ] && [ "$running" -eq 0 ] \
         && release_ci_completion_seen "$snap"; then
       break
@@ -1212,9 +1233,17 @@ follow_ci() {
     die "geen release-CI-taken voor $TAG gevonden binnen de wachttijd — fase 3 wordt niet gestart."
   fi
   if [ "$running" -ne 0 ] || ! release_ci_completion_seen "$snap"; then
-    die "release-CI voor $TAG is na 60 minuten nog actief of niet volledig zichtbaar — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"
+    die "release-CI voor $TAG is na ${cap} minuten nog actief of niet volledig zichtbaar — fase 3 wordt niet gestart; hervat later met: scripts/release_auto.sh --resume $TAG"
   fi
-  if printf '%s\n' "$snap" | grep -q '^failure|'; then
+  # De losse ci.yml-poort heet simpelweg `gate` en draait náást release.yml op
+  # dezelfde tag. Rood daar is een testuitslag om naar te kijken, geen
+  # gefaalde releasejob; het zegt niets over de artefacten. Benoem het apart,
+  # anders leest de operator "release-job faalde" en gaat de verkeerde kant op.
+  if printf '%s\n' "$snap" | grep -q '^failure|gate$'; then
+    log "Terzijde: de losse ci.yml-poort (gate) op $TAG is rood. Dat is een testrun naast de"
+    log "releaseketen, geen releasejob — bekijk de uitslag, maar de release gaat door."
+  fi
+  if printf '%s\n' "$snap" | grep -v '^failure|gate$' | grep -q '^failure|'; then
     log "LET OP: minstens één release-job faalde (zie hierboven). De tag staat vast."
     log "Herstel de upstream-job en maak DEZELFDE tag af met '--resume $TAG'; her-tag niet."
   fi
