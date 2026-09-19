@@ -46,6 +46,8 @@ All notable changes to OciDeck are documented in this file.
 - Tabel- en grafiekdia's lopen niet meer door het presentatielogo heen; ze reserveren het hele logo-vak in plaats van alleen de spleet erachter (#2091).
 - Gantt-dia's uit LibrePlan krijgen weer een werkbare tijdlijn: de verborgen Mermaid-tekenlaag gebruikt nu een vaste interne breedte, zodat balken en mijlpalen niet meer verdwijnen in een nulbrede SVG.
 - PowerPoint-import behoudt nu beelden uit dia-indelingen en diamodellen, zet tekstgerichte EMF-beelden zichtbaar om en herkent een compact hoeklogo in een brede merkstrook met de juiste grootte en bronstijl. De volledige strook blijft daarbij aan de oorspronkelijke boven- of onderrand staan, korte toelichtende tekst blijft zichtbaar en korte informatie op een openingsdia maakt er niet langer ten onrechte een bulletdia van. Vrij geplaatste beeldrasters blijven als één compositiedia bij elkaar in plaats van te worden opgesplitst en afgesneden.
+- macOS-app start weer: het meegeleverde PDFium-framework heette in de bundel `PDFium.framework` terwijl de binary erin `pdfium` is. Op een hoofdletterongevoelige buildschijf vallen de naam waar `pdfium_flutter` tegen linkt en de naam die Flutter als native asset wegschrijft samen in één map. Vanaf macOS 26 eist dyld bij een genotariseerde app dat de bladnaam exact klopt en weigerde de app te starten met "Library not loaded: @rpath/PDFium.framework/PDFium" (v0.6.4 op macOS 27.2). `scripts/notarize_macos.sh` normaliseert nu vóór het tekenen naar `pdfium.framework/pdfium` en faalt de release als er nog een verwijzing met hoofdletters in de bundel staat.
+- Homebrew-cask sluit een draaiende OciDeck af vóór een upgrade (`uninstall quit`), zodat `brew upgrade` de bundel niet half vervangt terwijl de app open staat.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
@@ -2671,6 +2673,31 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **macOS-start hersteld: PDFium-framework genormaliseerd naar kleine letters.**
+  De bundel vertrok met `Contents/Frameworks/PDFium.framework` als mapnaam en
+  `Versions/A/pdfium` als binary, met install name `@rpath/pdfium.framework/pdfium`
+  en `CFBundleExecutable` "pdfium". Alleen het hoofdbinary droeg de
+  hoofdlettervariant `@rpath/PDFium.framework/PDFium`: `pdfium_flutter` linkt zijn
+  Swift-plugin tegen `-framework PDFium`, terwijl de native-assets-stap van Flutter
+  hetzelfde framework als `pdfium.framework` wegschrijft. Op APFS, dat standaard
+  hoofdletterongevoelig is, belanden die twee in dezelfde map: de mapnaam houdt de
+  hoofdletters, de inhoud de kleine letters. Oudere dyld-versies laadden dat om
+  diezelfde reden alsnog. Vanaf macOS 26 eist dyld bij een hardened, genotariseerde
+  binary dat de bladnaam exact klopt, en stopt de app bij het starten met
+  `Termination Reason: Namespace DYLD, Code 1, Library missing`. Dat trof v0.6.4 op
+  macOS 27.2 (26B5086k). `scripts/notarize_macos.sh` normaliseert nu naar kleine
+  letters, de schrijfwijze die het framework zelf overal al draagt: mapnaam, binary,
+  symlink, `Info.plist` en install name, plus een `install_name_tool -change` op het
+  hoofdbinary. Dat gebeurt vóór het tekenen, want hernoemen breekt het zegel. Een
+  poort erachter laat de release falen zodra er nog ergens in de bundel een
+  verwijzing met hoofdletters staat, zodat een volgende `pdfrx`- of
+  `pdfium_flutter`-versie dit niet stil opnieuw introduceert. De oorzaak hoort
+  bovendien upstream thuis: `pdfium_flutter` 0.3.0 linkt onder een andere
+  schrijfwijze dan het asset dat het meelevert.
+- **Homebrew-cask sluit de app af vóór een upgrade.** De cask had geen
+  `uninstall quit`, dus `brew upgrade` verving de bundel terwijl OciDeck draaide.
+  Dat is niet de oorzaak van de dyld-fout hierboven, maar het is wel een bron van
+  half vervangen bundels die pas bij de volgende start zichtbaar wordt.
 - **eLearning toont een verbindingsstoring op de plek waar de cursist verder
   wil.** Na een mislukte serverpoging staat **Geen verbinding** als passieve
   badge naast **Inloggen** of **Mijn cursussen**. De bestaande knop blijft de
