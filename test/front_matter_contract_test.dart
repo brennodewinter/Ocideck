@@ -5,6 +5,7 @@ import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/improvement_y01.dart';
 import 'package:ocideck/models/marp_style.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/presentation_timing.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/services/front_matter_merge.dart';
@@ -381,10 +382,30 @@ style: |
             const {'2.3': 'bevestigd'},
           ),
         );
-        final markdown = MarkdownService().generateDeck(deck);
-        final geschreven = _frontMatter(
-          markdown,
-        ).map(frontMatterKeyOf).whereType<String>().toSet();
+        final service = MarkdownService();
+        final geschreven = <String>{};
+        for (final variant in [
+          deck,
+          deck.copyWith(
+            presentationTiming:
+                const PresentationTimingConfig.pechaKuchaPreset(),
+          ),
+          deck.copyWith(
+            presentationTiming: const PresentationTimingConfig.ignitePreset(),
+          ),
+          deck.copyWith(
+            presentationTiming: const PresentationTimingConfig(
+              autoplay: true,
+              slideDuration: Duration(seconds: 30),
+            ),
+          ),
+        ]) {
+          geschreven.addAll(
+            _frontMatter(
+              service.generateDeck(variant),
+            ).map(frontMatterKeyOf).whereType<String>(),
+          );
+        }
         expect(geschreven, kOwnedFrontMatterKeys);
       },
     );

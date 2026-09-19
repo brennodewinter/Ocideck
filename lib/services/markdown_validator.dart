@@ -106,7 +106,8 @@ class MarkdownValidator {
       blockStartLine += block.split('\n').length + 1;
     }
 
-    if (MarkdownService().parseDeck(markdown) == null) {
+    final parsedDeck = MarkdownService().parseDeck(markdown);
+    if (parsedDeck == null) {
       issues.add(
         const MarkdownValidationIssue(
           line: 1,
@@ -115,10 +116,53 @@ class MarkdownValidator {
               'De markdown kon niet worden ingelezen. Controleer de structuur.',
         ),
       );
+    } else {
+      _validatePresentationTiming(parsedDeck, lines, issues);
     }
 
     issues.sort((a, b) => a.line.compareTo(b.line));
     return MarkdownValidationResult(issues);
+  }
+
+  void _validatePresentationTiming(
+    Deck deck,
+    List<String> lines,
+    List<MarkdownValidationIssue> issues,
+  ) {
+    final timing = deck.presentationTiming;
+    final validation = timing.validate(deck.slides.length);
+    if (validation.isValid) return;
+    final formatLine = lines.indexWhere(
+      (line) => frontMatterKeyOf(line) == 'format',
+    );
+    final label = timing.isPechaKucha
+        ? 'PechaKucha'
+        : timing.isIgnite
+        ? 'Ignite'
+        : 'Deze presentatie';
+    final expected = validation.requiredSlides ?? validation.maxSlides;
+    if (validation.missingSlides > 0) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: formatLine < 0 ? 1 : formatLine + 1,
+          severity: MarkdownValidationSeverity.warning,
+          message:
+              '$label vereist $expected slides; '
+              '${validation.missingSlides} ontbreken er nog.',
+        ),
+      );
+    }
+    if (validation.excessSlides > 0) {
+      issues.add(
+        MarkdownValidationIssue(
+          line: formatLine < 0 ? 1 : formatLine + 1,
+          severity: MarkdownValidationSeverity.warning,
+          message:
+              '$label staat maximaal ${validation.maxSlides} slides toe; '
+              '${validation.excessSlides} te veel.',
+        ),
+      );
+    }
   }
 
   void _validateFrontMatter(

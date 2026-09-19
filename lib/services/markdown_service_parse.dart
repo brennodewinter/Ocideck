@@ -221,7 +221,6 @@ String _parsedTitleMarkdown(String remaining) {
 extension _MarkdownParse on MarkdownService {
   Deck _doParse(String markdown, {String? filePath, String fileHash = ''}) {
     final fm = _parseFrontMatter(markdown);
-
     final blocks = MarkdownService.splitSlideBlocks(fm.body);
     final slides = <Slide>[];
     for (final block in blocks) {
@@ -279,6 +278,7 @@ extension _MarkdownParse on MarkdownService {
       tlp: fm.tlp,
       privacy: fm.privacy,
       presentationTargetSeconds: fm.presentationTargetSeconds.clamp(0, 86400),
+      presentationTiming: fm.presentationTiming,
       showRehearsalSummary: fm.showRehearsalSummary,
       playOnly: fm.playOnly,
       improvementFramework: fm.improvementFramework,

@@ -6,6 +6,7 @@ import '../models/annotation.dart';
 import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
 import '../models/deck.dart';
+import '../models/presentation_timing.dart';
 import '../models/provenance_signature.dart';
 import '../models/improvement_y01.dart';
 import '../models/document_signature.dart';
@@ -646,6 +647,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     List<UsedTool>? toolsUsed,
     TlpLevel? tlp,
     int? presentationTargetSeconds,
+    PresentationTimingConfig? presentationTiming,
     bool? showRehearsalSummary,
     bool? playOnly,
   }) {
@@ -665,6 +667,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
         toolsUsed: toolsUsed,
         tlp: tlp,
         presentationTargetSeconds: presentationTargetSeconds,
+        presentationTiming: presentationTiming,
         showRehearsalSummary: showRehearsalSummary,
         playOnly: playOnly,
       ),

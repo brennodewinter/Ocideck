@@ -1,4 +1,5 @@
 import '../services/front_matter_merge.dart';
+import 'presentation_timing.dart';
 import 'privacy_disposition.dart';
 import 'annotation.dart';
 import 'document_signature.dart';
@@ -251,6 +252,9 @@ class Deck {
   /// aftelling. Live aanpasbaar tijdens presenteren (toets K).
   final int presentationTargetSeconds;
 
+  /// Automatische diatiming, eventueel afkomstig uit een strikt format-preset.
+  final PresentationTimingConfig presentationTiming;
+
   /// Of het tijden-overzicht (oefenrun-samenvatting) ná deze presentatie
   /// verschijnt. De tijd wordt ALTIJD gemeten; dit bepaalt enkel of het
   /// eindscherm getoond wordt. Per presentatie ingesteld (presentatie-info).
@@ -432,6 +436,7 @@ class Deck {
     this.tlp = TlpLevel.none,
     this.privacy = PrivacyDisposition.warn,
     this.presentationTargetSeconds = 0,
+    this.presentationTiming = PresentationTimingConfig.disabled,
     this.showRehearsalSummary = false,
     this.playOnly = false,
     this.improvementFramework = '',
@@ -476,6 +481,7 @@ class Deck {
     TlpLevel? tlp,
     PrivacyDisposition? privacy,
     int? presentationTargetSeconds,
+    PresentationTimingConfig? presentationTiming,
     bool? showRehearsalSummary,
     bool? playOnly,
     String? improvementFramework,
@@ -522,6 +528,7 @@ class Deck {
       privacy: privacy ?? this.privacy,
       presentationTargetSeconds:
           presentationTargetSeconds ?? this.presentationTargetSeconds,
+      presentationTiming: presentationTiming ?? this.presentationTiming,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       playOnly: playOnly ?? this.playOnly,
       improvementFramework: improvementFramework ?? this.improvementFramework,

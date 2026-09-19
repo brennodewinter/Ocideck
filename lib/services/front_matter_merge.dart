@@ -79,6 +79,8 @@ const Set<String> kOwnedFrontMatterKeys = {
   'language',
   'tlp',
   'privacy',
+  'format',
+  'timing',
   kFormatVersionKey,
   'ocideck_target_seconds',
   'ocideck_show_rehearsal_summary',
@@ -226,6 +228,11 @@ List<String> mergeFrontMatter({
     final key = frontMatterKeyOf(line);
     if (key != null) {
       inOwnedBlock = ownsFrontMatterKey(key);
+      if (key == 'format' &&
+          !byKey.containsKey(key) &&
+          !_isTimedPresentationFormatLine(line)) {
+        inOwnedBlock = false;
+      }
       if (!inOwnedBlock) {
         out.add(line);
       } else if (placed.add(key)) {
@@ -248,4 +255,14 @@ List<String> mergeFrontMatter({
     out.addAll(byKey[key]!);
   }
   return out;
+}
+
+bool _isTimedPresentationFormatLine(String line) {
+  var value = line.substring(line.indexOf(':') + 1).trim();
+  if (value.length >= 2 &&
+      ((value.startsWith('"') && value.endsWith('"')) ||
+          (value.startsWith("'") && value.endsWith("'")))) {
+    value = value.substring(1, value.length - 1);
+  }
+  return const {'pechakucha', 'ignite'}.contains(value.toLowerCase());
 }

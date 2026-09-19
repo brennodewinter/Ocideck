@@ -6,6 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:ocideck/models/annotation.dart';
 import 'package:ocideck/models/checklist_spec.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/presentation_timing.dart';
 import 'package:ocideck/models/image_callout.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/settings.dart';
@@ -36,6 +37,22 @@ void main() {
     expect(n.state.deck!.slides.single.type, SlideType.title);
     expect(n.state.deck!.slides.single.title, 'Mijn deck');
     expect(n.state.isDirty, isTrue);
+  });
+
+  test('presentatievorm instellen kan ongedaan en opnieuw', () {
+    final n = _notifier()..newDeck('D');
+
+    n.updateInfo(
+      presentationTiming: const PresentationTimingConfig.ignitePreset(),
+    );
+    expect(n.state.deck!.presentationTiming.isIgnite, isTrue);
+    expect(n.state.isDirty, isTrue);
+
+    n.undo();
+    expect(n.state.deck!.presentationTiming.hasSettings, isFalse);
+
+    n.redo();
+    expect(n.state.deck!.presentationTiming.isIgnite, isTrue);
   });
 
   test('newDeck with pre-built slides opens with those slides', () {
