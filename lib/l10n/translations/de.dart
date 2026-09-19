@@ -667,6 +667,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importiert — nicht übernommen: {lijst}',
+  '{n} tekstkader': '{n} Textrahmen',
+  '{n} tekstkaders': '{n} Textrahmen',
+  '{n} groep': '{n} Gruppe',
+  '{n} groepen': '{n} Gruppen',
+  '{n} object': '{n} Objekt',
+  '{n} objecten': '{n} Objekte',
   'Presentatievorm': 'Präsentationsformat',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Wähle, wie die Folien während der Präsentation weiterlaufen.',

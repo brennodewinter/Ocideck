@@ -1626,6 +1626,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importerat — inte överfört: {lijst}',
+  '{n} tekstkader': '{n} textram',
+  '{n} tekstkaders': '{n} textramar',
+  '{n} groep': '{n} grupp',
+  '{n} groepen': '{n} grupper',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objekt',
   'Presentatievorm': 'Presentationsformat',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Välj hur bilderna går vidare under presentationen.',

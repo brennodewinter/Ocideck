@@ -1627,6 +1627,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument uvožen — ni preneseno: {lijst}',
+  '{n} tekstkader': '{n} besedilni okvir',
+  '{n} tekstkaders': '{n} besedilnih okvirjev',
+  '{n} groep': '{n} skupina',
+  '{n} groepen': '{n} skupin',
+  '{n} object': '{n} predmet',
+  '{n} objecten': '{n} predmetov',
   'Presentatievorm': 'Oblika predstavitve',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Izberite, kako se diapozitivi pomikajo med predstavitvijo.',

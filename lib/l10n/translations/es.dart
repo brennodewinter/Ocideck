@@ -664,6 +664,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Documento importado — no se llevó: {lijst}',
+  '{n} tekstkader': '{n} marco de texto',
+  '{n} tekstkaders': '{n} marcos de texto',
+  '{n} groep': '{n} grupo',
+  '{n} groepen': '{n} grupos',
+  '{n} object': '{n} objeto',
+  '{n} objecten': '{n} objetos',
   'Presentatievorm': 'Formato de presentación',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Elige cómo avanzan las diapositivas durante la presentación.',

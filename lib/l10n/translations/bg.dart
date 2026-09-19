@@ -1647,6 +1647,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Документът е импортиран — не е пренесено: {lijst}',
+  '{n} tekstkader': '{n} текстова рамка',
+  '{n} tekstkaders': '{n} текстови рамки',
+  '{n} groep': '{n} група',
+  '{n} groepen': '{n} групи',
+  '{n} object': '{n} обект',
+  '{n} objecten': '{n} обекта',
   'Presentatievorm': 'Формат на презентацията',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Изберете как да се сменят слайдовете по време на презентацията.',

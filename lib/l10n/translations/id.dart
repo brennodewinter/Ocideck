@@ -1627,6 +1627,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokumen diimpor — tidak dibawa: {lijst}',
+  '{n} tekstkader': '{n} bingkai teks',
+  '{n} tekstkaders': '{n} bingkai teks',
+  '{n} groep': '{n} grup',
+  '{n} groepen': '{n} grup',
+  '{n} object': '{n} objek',
+  '{n} objecten': '{n} objek',
   'Presentatievorm': 'Format presentasi',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Pilih cara slide berganti selama presentasi.',

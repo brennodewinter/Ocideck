@@ -1629,6 +1629,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokumentum importálva — nem került át: {lijst}',
+  '{n} tekstkader': '{n} szövegkeret',
+  '{n} tekstkaders': '{n} szövegkeret',
+  '{n} groep': '{n} csoport',
+  '{n} groepen': '{n} csoport',
+  '{n} object': '{n} objektum',
+  '{n} objecten': '{n} objektum',
   'Presentatievorm': 'Bemutató formátuma',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Válaszd ki, hogyan lépjenek tovább a diák a bemutató alatt.',

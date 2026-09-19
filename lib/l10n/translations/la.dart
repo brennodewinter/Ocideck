@@ -1642,6 +1642,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Documentum importatum — non receptum: {lijst}',
+  '{n} tekstkader': '{n} capsula textus',
+  '{n} tekstkaders': '{n} capsulae textus',
+  '{n} groep': '{n} grex',
+  '{n} groepen': '{n} greges',
+  '{n} object': '{n} obiectum',
+  '{n} objecten': '{n} obiecta',
   'Presentatievorm': 'Forma praesentationis',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Elige quomodo imagines per praesentationem progrediantur.',
