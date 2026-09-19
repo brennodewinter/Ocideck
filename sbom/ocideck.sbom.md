@@ -4,7 +4,7 @@
 
 This is **ocideck 0.6.5+31** (licence EUPL-1.2) and every third-party component it ships (219 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **776 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **777 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -26,7 +26,7 @@ The JSON documents carry **776 dependency relations** between these components: 
 | _fe_analyzer_shared _(transitive)_ | 108.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/_fe_analyzer_shared@108.0.0` |
 | analyzer _(direct dev)_ | 14.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/analyzer@14.4.0` |
 | android_file_picker _(transitive)_ | 2.0.0 | MIT | vicajilau | `pkg:pub/android_file_picker@2.0.0` |
-| archive _(direct main)_ | 4.0.9 | MIT | brendan-duncan | `pkg:pub/archive@4.0.9` |
+| archive _(direct main)_ | 4.3.0 | MIT | brendan-duncan | `pkg:pub/archive@4.3.0` |
 | args _(transitive)_ | 2.7.0 | BSD-3-Clause | dart-lang | `pkg:pub/args@2.7.0` |
 | asn1lib _(transitive)_ | 1.6.5 | BSD | wstrange | `pkg:pub/asn1lib@1.6.5` |
 | async _(transitive)_ | 2.13.1 | BSD-3-Clause | dart-lang | `pkg:pub/async@2.13.1` |
@@ -38,7 +38,7 @@ The JSON documents carry **776 dependency relations** between these components: 
 | charcode _(transitive)_ | 1.4.0 | BSD-3-Clause | lrhn | `pkg:pub/charcode@1.4.0` |
 | clock _(transitive)_ | 1.1.3 | Apache-2.0 | dart-lang | `pkg:pub/clock@1.1.3` |
 | cnativeapi _(direct overridden)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
-| code_assets _(transitive)_ | 1.2.1 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@1.2.1` |
+| code_assets _(transitive)_ | 2.1.0 | BSD-3-Clause | dart-lang | `pkg:pub/code_assets@2.1.0` |
 | collection _(transitive)_ | 1.19.1 | BSD-3-Clause | dart-lang | `pkg:pub/collection@1.19.1` |
 | convert _(transitive)_ | 3.1.2 | BSD-3-Clause | dart-lang | `pkg:pub/convert@3.1.2` |
 | cross_file _(transitive)_ | 0.3.5+5 | BSD-3-Clause | flutter | `pkg:pub/cross_file@0.3.5+5` |
@@ -50,7 +50,7 @@ The JSON documents carry **776 dependency relations** between these components: 
 | cupertino_ui _(transitive)_ | 1.1.0 | BSD-3-Clause | flutter | `pkg:pub/cupertino_ui@1.1.0` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | FlutterQuill | `pkg:pub/dart_quill_delta@10.8.3` |
 | dart_webrtc _(transitive)_ | 1.8.2 | MIT | flutter-webrtc | `pkg:pub/dart_webrtc@1.8.2` |
-| dartcv4 _(direct main)_ | 2.3.0 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@2.3.0` |
+| dartcv4 _(direct main)_ | 2.3.1 | Apache-2.0 | rainyl | `pkg:pub/dartcv4@2.3.1` |
 | dbus _(transitive)_ | 0.7.15 | MPL-2.0 | canonical | `pkg:pub/dbus@0.7.15` |
 | desktop_drop _(direct main)_ | 0.8.4 | Apache-2.0 | MixinNetwork | `pkg:pub/desktop_drop@0.8.4` |
 | diff_match_patch _(transitive)_ | 0.4.1 | Apache-2.0 | jheyne | `pkg:pub/diff_match_patch@0.4.1` |
@@ -127,7 +127,7 @@ The JSON documents carry **776 dependency relations** between these components: 
 | native_toolchain_cmake _(transitive)_ | 0.3.2 | Apache-2.0 | rainyl | `pkg:pub/native_toolchain_cmake@0.3.2` |
 | nativeapi _(direct main)_ | 0.1.4 | MIT | libnativeapi | Source: git. |
 | nested _(transitive)_ | 1.0.0 | MIT | rrousselGit | `pkg:pub/nested@1.0.0` |
-| objective_c _(transitive)_ | 9.5.0 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.5.0` |
+| objective_c _(transitive)_ | 9.6.0 | BSD-3-Clause | dart-lang | `pkg:pub/objective_c@9.6.0` |
 | openid_client _(direct main)_ | 0.4.10+2 | BSD-3-Clause | appsup-dart | `pkg:pub/openid_client@0.4.10+2` |
 | package_config _(transitive)_ | 3.0.0 | BSD-3-Clause | dart-lang | `pkg:pub/package_config@3.0.0` |
 | package_info_plus _(transitive)_ | 10.2.1 | BSD-3-Clause | fluttercommunity | `pkg:pub/package_info_plus@10.2.1` |
@@ -141,11 +141,11 @@ The JSON documents carry **776 dependency relations** between these components: 
 | path_provider_linux _(transitive)_ | 2.2.2 | BSD-3-Clause | flutter | `pkg:pub/path_provider_linux@2.2.2` |
 | path_provider_platform_interface _(transitive)_ | 2.1.3 | BSD-3-Clause | flutter | `pkg:pub/path_provider_platform_interface@2.1.3` |
 | path_provider_windows _(transitive)_ | 2.3.0 | BSD-3-Clause | flutter | `pkg:pub/path_provider_windows@2.3.0` |
-| pdf _(direct main)_ | 3.13.0 | Apache-2.0 | DavBfr | `pkg:pub/pdf@3.13.0` |
-| pdfium_dart _(transitive)_ | 0.3.0 | MIT | espresso3389 | `pkg:pub/pdfium_dart@0.3.0` |
-| pdfium_flutter _(transitive)_ | 0.3.0 | MIT | espresso3389 | `pkg:pub/pdfium_flutter@0.3.0` |
-| pdfrx _(direct main)_ | 2.6.1 | MIT | espresso3389 | `pkg:pub/pdfrx@2.6.1` |
-| pdfrx_engine _(transitive)_ | 0.6.0 | MIT | espresso3389 | `pkg:pub/pdfrx_engine@0.6.0` |
+| pdf _(direct main)_ | 3.13.1 | Apache-2.0 | DavBfr | `pkg:pub/pdf@3.13.1` |
+| pdfium_dart _(transitive)_ | 0.3.1 | MIT | espresso3389 | `pkg:pub/pdfium_dart@0.3.1` |
+| pdfium_flutter _(transitive)_ | 0.3.1 | MIT | espresso3389 | `pkg:pub/pdfium_flutter@0.3.1` |
+| pdfrx _(direct main)_ | 2.6.5 | MIT | espresso3389 | `pkg:pub/pdfrx@2.6.5` |
+| pdfrx_engine _(transitive)_ | 0.6.1 | MIT | espresso3389 | `pkg:pub/pdfrx_engine@0.6.1` |
 | petitparser _(transitive)_ | 7.0.2 | MIT | petitparser | `pkg:pub/petitparser@7.0.2` |
 | platform _(transitive)_ | 3.2.0 | BSD-3-Clause | dart-lang | `pkg:pub/platform@3.2.0` |
 | plugin_platform_interface _(direct dev)_ | 2.1.8 | BSD-3-Clause | flutter | `pkg:pub/plugin_platform_interface@2.1.8` |
@@ -200,7 +200,7 @@ The JSON documents carry **776 dependency relations** between these components: 
 | vector_graphics _(transitive)_ | 1.2.3 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics@1.2.3` |
 | vector_graphics_codec _(transitive)_ | 1.1.13 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics_codec@1.1.13` |
 | vector_graphics_compiler _(transitive)_ | 1.3.0 | BSD-3-Clause | flutter | `pkg:pub/vector_graphics_compiler@1.3.0` |
-| vector_math _(direct dev)_ | 2.4.2 | BSD-3-Clause | flutter | `pkg:pub/vector_math@2.4.2` |
+| vector_math _(direct dev)_ | 2.4.3 | BSD-3-Clause | flutter | `pkg:pub/vector_math@2.4.3` |
 | video_player _(direct main)_ | 2.14.0 | BSD-3-Clause | flutter | `pkg:pub/video_player@2.14.0` |
 | video_player_android _(transitive)_ | 2.12.2 | BSD-3-Clause | flutter | `pkg:pub/video_player_android@2.12.2` |
 | video_player_avfoundation _(transitive)_ | 2.12.0 | BSD-3-Clause | flutter | `pkg:pub/video_player_avfoundation@2.12.0` |
@@ -271,4 +271,4 @@ The JSON documents carry **776 dependency relations** between these components: 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
 | dart | ^3.12.0 | BSD-3-Clause | dart-lang | https://github.com/dart-lang/sdk |
-| flutter | 3.47.4 | BSD-3-Clause | flutter | https://github.com/flutter/flutter |
+| flutter | 3.47.5 | BSD-3-Clause | flutter | https://github.com/flutter/flutter |

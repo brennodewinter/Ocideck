@@ -15,7 +15,7 @@ How to build OciDeck from source and produce distributable apps.
 > answers — "3.44+ / 3.12+" in one place and "3.44.6 / 3.12.2" in two others —
 > without either saying which one mattered and why.)*
 
-- **Flutter 3.47.4** (stable) — the exact version in `.tool-versions` and the
+- **Flutter 3.47.5** (stable) — the exact version in `.tool-versions` and the
   `.github/workflows/*.yml` workflows. Only Flutter is pinned; the Dart SDK comes
   bundled with it, and `pubspec.yaml` merely constrains it (`sdk: ^3.12.0`).
   Building tolerates
@@ -26,7 +26,7 @@ How to build OciDeck from source and produce distributable apps.
   `flutter --version`.
 
   In short: *build* with 3.44 or newer if you must, but *pass the gate* with
-  3.47.4. The two are different requirements and only the second is enforced.
+  3.47.5. The two are different requirements and only the second is enforced.
 - A desktop toolchain for your target:
   - **macOS**: Xcode + CocoaPods.
   - **Windows**: Visual Studio with the "Desktop development with C++" workload.
@@ -704,7 +704,7 @@ native binaries; it validates formatting, static analysis, and the test suite
 
 `.github/workflows/release.yml` is the one file on the mirror that really runs:
 it builds the **Windows** artifact, which the forge has no machine for. The
-GitHub workflows pin **Flutter 3.47.4** (stable), and
+GitHub workflows pin **Flutter 3.47.5** (stable), and
 `make check-toolchain` fails if any version claim drifts from `.tool-versions`.
 
 For the full check reference, see [`CHECKS.md`](CHECKS.md).

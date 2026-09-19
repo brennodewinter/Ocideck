@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path/path.dart' as p;
 import 'package:ocideck/services/caption_service.dart';
 import 'package:ocideck/services/description_service.dart';
 import 'package:ocideck/widgets/dialogs/image_carousel_picker.dart';
@@ -87,7 +88,7 @@ void main() {
         archiveRoots: [archive.path],
       );
 
-      expect(added, '${archive.path}/foto.png');
+      expect(added, p.join(archive.path, 'foto.png'));
       expect(File('${archive.path}/foto.png').existsSync(), isTrue);
     });
 
@@ -121,7 +122,7 @@ void main() {
           archiveRoots: [archive.path],
         );
 
-        expect(added, '${archive.path}/foto_2.png');
+        expect(added, p.join(archive.path, 'foto_2.png'));
         expect(File('${archive.path}/foto.png').readAsBytesSync(), [1, 2, 3]);
       },
     );
@@ -139,7 +140,7 @@ void main() {
         archiveRoots: [archive.path],
       );
 
-      expect(added, '${archive.path}/foto.png');
+      expect(added, p.join(archive.path, 'foto.png'));
       expect(archive.listSync().whereType<File>().length, 1);
     });
   });
@@ -154,7 +155,7 @@ void main() {
         filename: 'pasted_test.png',
       );
 
-      expect(added, '${archive.path}/pasted_test.png');
+      expect(added, p.join(archive.path, 'pasted_test.png'));
       expect(
         File('${archive.path}/pasted_test.png').readAsBytesSync(),
         _onePixelPng,

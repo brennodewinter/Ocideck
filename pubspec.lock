@@ -29,10 +29,10 @@ packages:
     dependency: "direct main"
     description:
       name: archive
-      sha256: a96e8b390886ee8abb49b7bd3ac8df6f451c621619f52a26e815fdcf568959ff
+      sha256: "6c5bcd986e06b94e3c40244af471750840a3d2341d1f9763a1100a14add517b4"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.9"
+    version: "4.3.0"
   args:
     dependency: transitive
     description:
@@ -126,10 +126,10 @@ packages:
     dependency: transitive
     description:
       name: code_assets
-      sha256: bf394f466ba9205f1812a0433b392d6af280f155f56651eda7c18cc32ed493b8
+      sha256: "828110d598123b5ea96c00c9f3c72105bf79f8ee36c20a39b26209ade421ec57"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.1"
+    version: "2.1.0"
   collection:
     dependency: transitive
     description:
@@ -222,10 +222,10 @@ packages:
     dependency: "direct main"
     description:
       name: dartcv4
-      sha256: "3d0418dd2c8437f9b2151fab4758c1796e3b37ae1f41bbda9ef2f65b383ff2e1"
+      sha256: e78c39ea09decc04ee70be9684eb63c092e0cb006b37615d214a08b6e098d5a9
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.3.1"
   dbus:
     dependency: transitive
     description:
@@ -832,10 +832,10 @@ packages:
     dependency: transitive
     description:
       name: objective_c
-      sha256: b7fb95a6d9a4f009edd63dc5ac69f07420b23a16161c6dd8660290b59c602e8e
+      sha256: ad56fd53a78ff6b1472fa59ff2a4e8b8ccabafc586fc263a1dfad0b99b5553e3
       url: "https://pub.dev"
     source: hosted
-    version: "9.5.0"
+    version: "9.6.0"
   openid_client:
     dependency: "direct main"
     description:
@@ -944,42 +944,42 @@ packages:
     dependency: "direct main"
     description:
       name: pdf
-      sha256: "517df47af468734a23c8b513c0c6a8a62357403ab1b8ab7fad1606576a9dbdd0"
+      sha256: "6e40827f370d196e97c6611724d923a3d86c431ce8e2ce1e59edd03a67a1a6e6"
       url: "https://pub.dev"
     source: hosted
-    version: "3.13.0"
+    version: "3.13.1"
   pdfium_dart:
     dependency: transitive
     description:
       name: pdfium_dart
-      sha256: ed25295fd2624bbf54b8e6bd3cd3d0fc644412d3d5e79ca2485cb36e65f20eb2
+      sha256: e296a26c030e6e0fb34b32ce7481a3cfa0c2d35ce80f6269551c685759f4c91f
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   pdfium_flutter:
     dependency: transitive
     description:
       name: pdfium_flutter
-      sha256: "2b1f27e30d29d0bb1d57a37c351b0cfa605cf5d2334aa565af370fa5b1eba8f4"
+      sha256: "59897274513984b347fc98e7bf71ba457678daea8b5568cd7c688979aeb77765"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   pdfrx:
     dependency: "direct main"
     description:
       name: pdfrx
-      sha256: "5eed06c4318157ea6791666c2ea4b01a35adac554b0aac7ca6b6d0cd80ba8e15"
+      sha256: "52e78d84a706e5d63d2502689fe8e800d823bc780ac4341b2d3683a4d726505a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "2.6.5"
   pdfrx_engine:
     dependency: transitive
     description:
       name: pdfrx_engine
-      sha256: f7b80b9af7d72188cecc15b31a91558d216cb15f97980b24146fd0c36cd6d049
+      sha256: f74ca9ea4ec722545f054a1d6ee1bf01222409ecd9458e5945c0cc5feaa3d2c6
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.6.1"
   petitparser:
     dependency: transitive
     description:
@@ -1413,10 +1413,10 @@ packages:
     dependency: "direct dev"
     description:
       name: vector_math
-      sha256: f36f9f3be64c6198714492bb455c11056e33e2f85d9a0b676a48301e44fdcf47
+      sha256: "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.2"
+    version: "2.4.3"
   video_player:
     dependency: "direct main"
     description:

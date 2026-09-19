@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.6.5+31",
-  "documentNamespace": "https://ocideck.app/spdx/cdb0ee66-0c6b-5079-851d-0c22487f73c5",
+  "documentNamespace": "https://ocideck.app/spdx/24c2a03c-2d56-53f1-81c0-ccc2b7c57002",
   "creationInfo": {
-    "created": "2026-09-19T11:17:17.607711Z",
+    "created": "2026-09-19T15:29:34.785708Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -102,23 +102,23 @@
     {
       "SPDXID": "SPDXRef-4-archive",
       "name": "archive",
-      "versionInfo": "4.0.9",
+      "versionInfo": "4.3.0",
       "supplier": "Organization: brendan-duncan",
-      "downloadLocation": "https://pub.dev/packages/archive/versions/4.0.9",
+      "downloadLocation": "https://pub.dev/packages/archive/versions/4.3.0",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "a96e8b390886ee8abb49b7bd3ac8df6f451c621619f52a26e815fdcf568959ff"
+          "checksumValue": "6c5bcd986e06b94e3c40244af471750840a3d2341d1f9763a1100a14add517b4"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/archive@4.0.9"
+          "referenceLocator": "pkg:pub/archive@4.3.0"
         }
       ]
     },
@@ -366,23 +366,23 @@
     {
       "SPDXID": "SPDXRef-16-code-assets",
       "name": "code_assets",
-      "versionInfo": "1.2.1",
+      "versionInfo": "2.1.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/code_assets/versions/1.2.1",
+      "downloadLocation": "https://pub.dev/packages/code_assets/versions/2.1.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "bf394f466ba9205f1812a0433b392d6af280f155f56651eda7c18cc32ed493b8"
+          "checksumValue": "828110d598123b5ea96c00c9f3c72105bf79f8ee36c20a39b26209ade421ec57"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/code_assets@1.2.1"
+          "referenceLocator": "pkg:pub/code_assets@2.1.0"
         }
       ]
     },
@@ -642,23 +642,23 @@
     {
       "SPDXID": "SPDXRef-28-dartcv4",
       "name": "dartcv4",
-      "versionInfo": "2.3.0",
+      "versionInfo": "2.3.1",
       "supplier": "Organization: rainyl",
-      "downloadLocation": "https://pub.dev/packages/dartcv4/versions/2.3.0",
+      "downloadLocation": "https://pub.dev/packages/dartcv4/versions/2.3.1",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "3d0418dd2c8437f9b2151fab4758c1796e3b37ae1f41bbda9ef2f65b383ff2e1"
+          "checksumValue": "e78c39ea09decc04ee70be9684eb63c092e0cb006b37615d214a08b6e098d5a9"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/dartcv4@2.3.0"
+          "referenceLocator": "pkg:pub/dartcv4@2.3.1"
         }
       ]
     },
@@ -2317,23 +2317,23 @@
     {
       "SPDXID": "SPDXRef-105-objective-c",
       "name": "objective_c",
-      "versionInfo": "9.5.0",
+      "versionInfo": "9.6.0",
       "supplier": "Organization: dart-lang",
-      "downloadLocation": "https://pub.dev/packages/objective_c/versions/9.5.0",
+      "downloadLocation": "https://pub.dev/packages/objective_c/versions/9.6.0",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "b7fb95a6d9a4f009edd63dc5ac69f07420b23a16161c6dd8660290b59c602e8e"
+          "checksumValue": "ad56fd53a78ff6b1472fa59ff2a4e8b8ccabafc586fc263a1dfad0b99b5553e3"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/objective_c@9.5.0"
+          "referenceLocator": "pkg:pub/objective_c@9.6.0"
         }
       ]
     },
@@ -2639,115 +2639,115 @@
     {
       "SPDXID": "SPDXRef-119-pdf",
       "name": "pdf",
-      "versionInfo": "3.13.0",
+      "versionInfo": "3.13.1",
       "supplier": "Organization: DavBfr",
-      "downloadLocation": "https://pub.dev/packages/pdf/versions/3.13.0",
+      "downloadLocation": "https://pub.dev/packages/pdf/versions/3.13.1",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "517df47af468734a23c8b513c0c6a8a62357403ab1b8ab7fad1606576a9dbdd0"
+          "checksumValue": "6e40827f370d196e97c6611724d923a3d86c431ce8e2ce1e59edd03a67a1a6e6"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/pdf@3.13.0"
+          "referenceLocator": "pkg:pub/pdf@3.13.1"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-120-pdfium-dart",
       "name": "pdfium_dart",
-      "versionInfo": "0.3.0",
+      "versionInfo": "0.3.1",
       "supplier": "Organization: espresso3389",
-      "downloadLocation": "https://pub.dev/packages/pdfium_dart/versions/0.3.0",
+      "downloadLocation": "https://pub.dev/packages/pdfium_dart/versions/0.3.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "ed25295fd2624bbf54b8e6bd3cd3d0fc644412d3d5e79ca2485cb36e65f20eb2"
+          "checksumValue": "e296a26c030e6e0fb34b32ce7481a3cfa0c2d35ce80f6269551c685759f4c91f"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/pdfium_dart@0.3.0"
+          "referenceLocator": "pkg:pub/pdfium_dart@0.3.1"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-121-pdfium-flutter",
       "name": "pdfium_flutter",
-      "versionInfo": "0.3.0",
+      "versionInfo": "0.3.1",
       "supplier": "Organization: espresso3389",
-      "downloadLocation": "https://pub.dev/packages/pdfium_flutter/versions/0.3.0",
+      "downloadLocation": "https://pub.dev/packages/pdfium_flutter/versions/0.3.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "2b1f27e30d29d0bb1d57a37c351b0cfa605cf5d2334aa565af370fa5b1eba8f4"
+          "checksumValue": "59897274513984b347fc98e7bf71ba457678daea8b5568cd7c688979aeb77765"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/pdfium_flutter@0.3.0"
+          "referenceLocator": "pkg:pub/pdfium_flutter@0.3.1"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-122-pdfrx",
       "name": "pdfrx",
-      "versionInfo": "2.6.1",
+      "versionInfo": "2.6.5",
       "supplier": "Organization: espresso3389",
-      "downloadLocation": "https://pub.dev/packages/pdfrx/versions/2.6.1",
+      "downloadLocation": "https://pub.dev/packages/pdfrx/versions/2.6.5",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "5eed06c4318157ea6791666c2ea4b01a35adac554b0aac7ca6b6d0cd80ba8e15"
+          "checksumValue": "52e78d84a706e5d63d2502689fe8e800d823bc780ac4341b2d3683a4d726505a"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/pdfrx@2.6.1"
+          "referenceLocator": "pkg:pub/pdfrx@2.6.5"
         }
       ]
     },
     {
       "SPDXID": "SPDXRef-123-pdfrx-engine",
       "name": "pdfrx_engine",
-      "versionInfo": "0.6.0",
+      "versionInfo": "0.6.1",
       "supplier": "Organization: espresso3389",
-      "downloadLocation": "https://pub.dev/packages/pdfrx_engine/versions/0.6.0",
+      "downloadLocation": "https://pub.dev/packages/pdfrx_engine/versions/0.6.1",
       "filesAnalyzed": false,
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f7b80b9af7d72188cecc15b31a91558d216cb15f97980b24146fd0c36cd6d049"
+          "checksumValue": "f74ca9ea4ec722545f054a1d6ee1bf01222409ecd9458e5945c0cc5feaa3d2c6"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/pdfrx_engine@0.6.0"
+          "referenceLocator": "pkg:pub/pdfrx_engine@0.6.1"
         }
       ]
     },
@@ -3984,23 +3984,23 @@
     {
       "SPDXID": "SPDXRef-178-vector-math",
       "name": "vector_math",
-      "versionInfo": "2.4.2",
+      "versionInfo": "2.4.3",
       "supplier": "Organization: flutter",
-      "downloadLocation": "https://pub.dev/packages/vector_math/versions/2.4.2",
+      "downloadLocation": "https://pub.dev/packages/vector_math/versions/2.4.3",
       "filesAnalyzed": false,
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "f36f9f3be64c6198714492bb455c11056e33e2f85d9a0b676a48301e44fdcf47"
+          "checksumValue": "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
         }
       ],
       "externalRefs": [
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:pub/vector_math@2.4.2"
+          "referenceLocator": "pkg:pub/vector_math@2.4.3"
         }
       ]
     },
@@ -4856,7 +4856,7 @@
     {
       "SPDXID": "SPDXRef-217-flutter",
       "name": "flutter",
-      "versionInfo": "3.47.4",
+      "versionInfo": "3.47.5",
       "supplier": "Organization: flutter",
       "downloadLocation": "https://flutter.dev",
       "filesAnalyzed": false,
@@ -5416,6 +5416,11 @@
       "spdxElementId": "SPDXRef-16-code-assets",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-78-hooks"
+    },
+    {
+      "spdxElementId": "SPDXRef-16-code-assets",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-96-logging"
     },
     {
       "spdxElementId": "SPDXRef-18-convert",
