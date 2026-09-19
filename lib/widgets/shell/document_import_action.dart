@@ -1,27 +1,41 @@
 // Document-import-actie: kiest een .docx of .odt, zet het om naar Markdown,
 // en opent het resultaat als een nieuw document-tabblad.
 //
-// Bewust lichter dan de presentatie-import (presentation_import_action.dart):
-// een document kent geen dia's, geen probleemdia's, geen logo-detectie en geen
-// stijlkeuze. De enige stap is: bestand kiezen → omzetten → openen. De
+// Lichter dan de presentatie-import (presentation_import_action.dart): een
+// document kent geen dia's en geen probleemdia's. Wat het sinds #2119 wél
+// kent is de huisstijl van de bron: draagt het document letters, kleuren, een
+// logo op elke bladzijde of een voettekst, dan vraagt één dialoog of die als
+// stijl overgenomen wordt — nieuw, of als een profiel dat er al is. De
 // fail-closed safety-scan zit in de service (document_import_service.dart),
 // niet hier — dezelfde plek als bij het openen van een vreemd `.md`.
 
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/settings.dart';
+import '../../services/file_service.dart' hide ImportFailure;
 import '../../services/import/document_import_service.dart';
+import '../../services/import/imported_document_profile.dart';
+import '../../services/import/models/source_document_style.dart';
+import '../../services/style_logo_lookup.dart';
+import '../../services/web_asset_store.dart';
+import '../../state/deck_provider.dart' show fileServiceProvider;
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
+import '../../utils/document_front_matter.dart';
 import '../../utils/error_snackbar.dart';
+import '../../utils/file_extension.dart';
 import '../../utils/log.dart';
+import '../dialogs/import_document_style_dialog.dart';
 
 /// Importeert een `.docx` of `.odt` als een nieuw Markdown-document: kiest een
-/// bestand, zet het om, en opent het resultaat in een nieuw tabblad.
+/// bestand, zet het om, vraagt zo nodig naar de huisstijl, en opent het
+/// resultaat in een nieuw tabblad.
 ///
 /// Leest de providers zelf via de container (zoals `app_shell_menu.dart`),
 /// zodat de aanroepers — het welkomstscherm, de documenttoolbar — geen `ref`
@@ -46,18 +60,169 @@ Future<void> importDocument(
   final result = importDocumentBytes(picked.bytes, filename: picked.name);
   if (!context.mounted) return;
 
-  if (result.isSuccess) {
-    container
-        .read(tabsProvider.notifier)
-        .newDocumentFromMarkdown(result.markdown!);
-    messenger.showSnackBar(
-      SnackBar(content: Text(l10n.d('Document geïmporteerd.'))),
-    );
-  } else {
+  if (!result.isSuccess) {
     final failure = result.failure!;
     logWarning('importDocument: ${failure.message}', failure.cause);
     showErrorSnackBar(messenger, l10n, failure.message);
+    return;
   }
+
+  var markdown = result.markdown!;
+  if (result.style.isNotEmpty) {
+    final styleName = await _resolveDocumentStyle(
+      context,
+      container,
+      result.style,
+      fallbackName: _documentTitle(markdown) ?? stemOfFileName(picked.name),
+    );
+    if (!context.mounted) return;
+    if (styleName != null) {
+      markdown = withDocumentStyleName(markdown, styleName);
+    }
+  }
+
+  container.read(tabsProvider.notifier).newDocumentFromMarkdown(markdown);
+  messenger.showSnackBar(
+    SnackBar(content: Text(_importedMessage(l10n, result.skippedImages))),
+  );
+}
+
+/// De melding na de import. Beelden die niet mee konden (#2120) worden
+/// geteld in plaats van verzwegen.
+String _importedMessage(AppLocalizations l10n, int skippedImages) {
+  if (skippedImages == 0) return l10n.d('Document geïmporteerd.');
+  return l10n
+      .d(
+        'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.',
+      )
+      .replaceAll('{n}', '$skippedImages');
+}
+
+/// De eerste kop van het document, als suggestie voor de stijlnaam.
+String? _documentTitle(String markdown) {
+  for (final line in markdown.split('\n')) {
+    final trimmed = line.trim();
+    if (trimmed.startsWith('# ')) {
+      final title = trimmed.substring(2).trim();
+      if (title.isNotEmpty) return title;
+    }
+  }
+  return null;
+}
+
+/// Vraagt wat er met de huisstijl gebeurt en levert de naam van het profiel
+/// dat het document krijgt — of `null` voor alleen tekst.
+Future<String?> _resolveDocumentStyle(
+  BuildContext context,
+  ProviderContainer container,
+  SourceDocumentStyle style, {
+  required String fallbackName,
+}) async {
+  final settings = container.read(settingsProvider);
+  final logo = style.logoCandidates.firstOrNull;
+  final existing = await _matchingProfile(settings.themeProfiles, style, logo);
+  if (!context.mounted) return null;
+
+  final choice = await ImportDocumentStyleDialog.ask(
+    context,
+    style: style,
+    suggestedStyleName: context.l10n
+        .d('Stijl van {naam}')
+        .replaceAll('{naam}', fallbackName),
+    existingStyleName: existing?.name,
+    logoIsSessionOnly: kIsWeb,
+  );
+  if (!context.mounted) return null;
+
+  switch (choice.disposition) {
+    case ImportDocumentStyleDisposition.textOnly:
+      return null;
+    case ImportDocumentStyleDisposition.useExisting:
+      return existing?.name;
+    case ImportDocumentStyleDisposition.newStyle:
+      final name = choice.styleName.isEmpty
+          ? context.l10n
+                .d('Stijl van {naam}')
+                .replaceAll('{naam}', fallbackName)
+          : choice.styleName;
+      String? logoPath;
+      if (choice.includeLogo && logo != null) {
+        logoPath = await _placeLogo(context, container, logo, name);
+        if (!context.mounted) return null;
+      }
+      final profile = buildImportedDocumentProfile(
+        style: style,
+        base: settings.themeProfile,
+        name: name,
+        logoPath: logoPath,
+        logo: logoPath == null ? null : logo,
+      );
+      final added = await addThemeProfileWithoutSelection(
+        container.read(settingsProvider.notifier),
+        profile,
+      );
+      return added.name;
+  }
+}
+
+/// Het profiel dat deze huisstijl al is: dezelfde letters, kleuren en banden,
+/// én hetzelfde logo (op de bytes) — of allebei geen logo.
+Future<ThemeProfile?> _matchingProfile(
+  List<ThemeProfile> profiles,
+  SourceDocumentStyle style,
+  DocumentLogoCandidate? logo,
+) async {
+  final byHash = await styleProfilesByLogoHash(
+    profiles,
+    pathOf: (profile) => profile.effectiveDocumentLogoPath,
+  );
+  for (final profile in profiles) {
+    if (!documentStyleMatchesProfile(style, profile)) continue;
+    final path = profile.effectiveDocumentLogoPath?.trim() ?? '';
+    if (logo == null) {
+      if (path.isEmpty) return profile;
+      continue;
+    }
+    if (identical(byHash[logo.sha256], profile)) return profile;
+  }
+  return null;
+}
+
+/// Hoe een logo blijvend wordt weggeschreven. Onder `flutter test` hangt de
+/// app-supportmap van `path_provider` op de fake-async-klok (het antwoord
+/// van het platform komt nooit), dus een widget-test zet hier een schrijver
+/// neer die in het geheugen blijft — dezelfde reden als
+/// `debugImportTaskRunner` bij de presentatie-import.
+@visibleForTesting
+Future<String?> Function(Uint8List bytes, {required String profileName})?
+debugImportedDocumentLogoWriter;
+
+/// Zet het logo blijvend neer (desktop) of in de webopslag; valt bij een
+/// mislukte schrijfactie terug op de webopslag mét melding, zodat de stijl er
+/// in elk geval voor deze sessie is.
+Future<String> _placeLogo(
+  BuildContext context,
+  ProviderContainer container,
+  DocumentLogoCandidate logo,
+  String profileName,
+) async {
+  final writer =
+      debugImportedDocumentLogoWriter ??
+      container.read(fileServiceProvider).materializeImportedStyleLogo;
+  final durable = kIsWeb
+      ? null
+      : await writer(logo.bytes, profileName: profileName);
+  if (durable != null) return durable;
+  if (!kIsWeb && context.mounted) {
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      context.l10n,
+      context.l10n.d(
+        'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.',
+      ),
+    );
+  }
+  return WebAssetStore.put(logo.bytes, name: logo.name ?? 'logo.${logo.ext}');
 }
 
 /// De bestandskiezer, apart gehouden zodat de import zelf één rechte lijn

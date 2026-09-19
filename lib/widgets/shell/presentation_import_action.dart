@@ -2,19 +2,18 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/deck.dart';
-import '../../models/settings.dart';
 import '../../services/file_service.dart' hide ImportFailure;
 import '../../services/import/bulk_import_runner.dart';
 import '../../services/import/deck_builder.dart';
 import '../../services/import/importers/import_failure.dart';
 import '../../services/import/logo_detection.dart';
 import '../../services/import/presentation_import_service.dart';
+import '../../services/style_logo_lookup.dart';
 import '../../services/import/utils/import_budget.dart';
 import '../../services/web_asset_store.dart';
 import '../../state/deck_provider.dart';
@@ -22,7 +21,6 @@ import '../../state/import_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../utils/error_snackbar.dart';
-import '../../utils/bundled_asset.dart';
 import '../../utils/log.dart';
 import '../../utils/user_facing_error.dart';
 import '../dialogs/settings_dialog.dart';
@@ -34,7 +32,6 @@ import '../dialogs/import_security_alarm_dialog.dart';
 import '../dialogs/import_rename_dialog.dart';
 import '../dialogs/presentation_import_progress_dialog.dart';
 import '../dialogs/presentation_import_queue_dialog.dart';
-import '../../utils/content_hash.dart';
 import '../../utils/file_extension.dart';
 
 /// Eén gekozen bestand: de bytes plus de naam waaronder het gekozen werd.
@@ -225,7 +222,10 @@ Future<ImportLogoResolution?> _resolveImportLogo(
             ? fallbackName
             : prepared.sourceDeck.title.trim(),
       );
-  final known = await _logoProfilesByHash(profiles);
+  final known = await styleProfilesByLogoHash(
+    profiles,
+    pathOf: (profile) => profile.logoPath,
+  );
   for (final candidate in candidates) {
     final matchingProfile = known[candidate.image.sha256];
     if (!context.mounted) return null;
@@ -329,31 +329,6 @@ Future<ImportLogoResolution?> _resolveImportLogo(
     return ImportLogoResolution(candidate: candidate, profile: profile);
   }
   return null;
-}
-
-Future<Map<String, ThemeProfile>> _logoProfilesByHash(
-  List<ThemeProfile> profiles,
-) async {
-  final result = <String, ThemeProfile>{};
-  for (final profile in profiles) {
-    final path = profile.logoPath?.trim();
-    if (path == null || path.isEmpty) continue;
-    try {
-      final Uint8List? bytes;
-      if (isBundledAssetPath(path)) {
-        final data = await rootBundle.load(bundledAssetKey(path));
-        bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-      } else {
-        bytes = await readStyleLogoBytes(path);
-      }
-      if (bytes != null && bytes.isNotEmpty) {
-        result.putIfAbsent(sha256Hex(bytes), () => profile);
-      }
-    } on Exception catch (e, s) {
-      logError('importPresentation: stijlprofiellogo vergelijken', e, s);
-    }
-  }
-  return result;
 }
 
 /// Zet het geïmporteerde deck in een nieuw tabblad: vraagt de titel, markeert
