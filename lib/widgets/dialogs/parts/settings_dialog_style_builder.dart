@@ -338,6 +338,22 @@ class _DocumentStyleBuilder {
           _sectionTitle(l10n.d('Lettertype')),
           const SizedBox(height: 8),
           _fontSection(),
+          // De letter die de huisstijl écht vraagt (#2119): een export noemt
+          // hem als eerste; op het scherm blijft de keuze hierboven staan.
+          _PreferredFontField(
+            key: const Key('preferred-font-family'),
+            value: _themeProfile.preferredFontFamily,
+            label: l10n.d('Gewenst lettertype (export)'),
+            helper: l10n.d(
+              'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.',
+            ),
+            onChanged: (value) => _rebuild(() {
+              _themeProfile = value == null
+                  ? _themeProfile.copyWith(clearPreferredFontFamily: true)
+                  : _themeProfile.copyWith(preferredFontFamily: value);
+              _profileTouched = true;
+            }),
+          ),
           _presentationStyleDivider(l10n.d('Kleuren')),
           ..._generalColorChildren(),
         ],
@@ -374,6 +390,7 @@ class _DocumentStyleBuilder {
             _sectionTitle(l10n.d('Tekst')),
             const SizedBox(height: 8),
             ..._documentFontSizeSettings(l10n),
+            ..._documentHeadingFontSettings(l10n),
             _themeColorAnchor(
               'documentHeadingColor',
               _colorWithContrastWarning(
@@ -442,6 +459,40 @@ class _DocumentStyleBuilder {
       ),
     ];
   }
+
+  /// De kopletter van een document (#2119): welke aangeboden letter de koppen
+  /// dragen, en de naam die een export daarvoor noemt.
+  List<Widget> _documentHeadingFontSettings(AppLocalizations l10n) => [
+    const SizedBox(height: 12),
+    Text(l10n.d('Kopletter'), style: const TextStyle(fontSize: 13)),
+    const SizedBox(height: 6),
+    _DocumentHeadingFontPicker(
+      selected: _themeProfile.documentHeadingFontFamily,
+      bodyFont: _themeProfile.fontFamily,
+      onSelected: (font) => _rebuild(() {
+        _themeProfile = font == null
+            ? _themeProfile.copyWith(clearDocumentHeadingFontFamily: true)
+            : _themeProfile.copyWith(documentHeadingFontFamily: font);
+        _profileTouched = true;
+      }),
+    ),
+    _PreferredFontField(
+      key: const Key('preferred-document-heading-font-family'),
+      value: _themeProfile.preferredDocumentHeadingFontFamily,
+      label: l10n.d('Gewenste kopletter (export)'),
+      helper: l10n.d(
+        'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.',
+      ),
+      onChanged: (value) => _rebuild(() {
+        _themeProfile = value == null
+            ? _themeProfile.copyWith(
+                clearPreferredDocumentHeadingFontFamily: true,
+              )
+            : _themeProfile.copyWith(preferredDocumentHeadingFontFamily: value);
+        _profileTouched = true;
+      }),
+    ),
+  ];
 
   List<Widget> _documentLogoSettings(AppLocalizations l10n) {
     final shared = _themeProfile.documentLogoPath == null;
