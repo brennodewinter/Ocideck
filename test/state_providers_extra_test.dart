@@ -8,6 +8,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/state/document_provider.dart';
 import 'package:ocideck/state/image_contrast_provider.dart';
 import 'package:ocideck/state/slide_clipboard_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
@@ -291,6 +292,45 @@ void main() {
         isNotNull,
         reason: 'de dia op het klembord kan nog worden geplakt',
       );
+    });
+
+    // Sinds #2120 dragen ook documenttabbladen mem:-verwijzingen (import legt
+    // afbeeldingen in de store tot een opslag ze naar schijf schrijft).
+    group('documenttabbladen', () {
+      DocumentNotifier docOf(ProviderContainer c) =>
+          c.read(tabsProvider).current!.documentNotifier!;
+
+      test('een mem:-afbeelding in het document blijft staan', () {
+        final container = _container();
+        final used = putMem();
+        final orphan = putMem();
+        container
+            .read(tabsProvider.notifier)
+            .newDocumentFromMarkdown('tekst\n\n![foto]($used)\n');
+
+        container.read(tabsProvider.notifier).sweepWebAssets();
+
+        expect(WebAssetStore.bytesFor(used), isNotNull);
+        expect(WebAssetStore.bytesFor(orphan), isNull);
+      });
+
+      test('een mem:-afbeelding in de ongedaan-stapel blijft staan', () {
+        final container = _container();
+        final b = putMem();
+        container
+            .read(tabsProvider.notifier)
+            .newDocumentFromMarkdown('tekst\n\n![foto]($b)\n');
+        final doc = docOf(container);
+        doc.edit('alleen tekst\n'); // b zit nu alleen nog in de undo-stapel
+
+        container.read(tabsProvider.notifier).sweepWebAssets();
+
+        expect(
+          WebAssetStore.bytesFor(b),
+          isNotNull,
+          reason: 'undo kan de afbeelding terughalen',
+        );
+      });
     });
   });
 

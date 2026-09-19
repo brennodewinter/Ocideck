@@ -280,7 +280,10 @@ void main() {
           (tab) => tab.content is DocumentTabContent,
         )) {
           final state = tab.documentNotifier!.currentState;
-          expect(await saveDocument(state.document!, state.filePath!), isTrue);
+          expect(
+            await saveDocument(state.document!, state.filePath!),
+            isNotNull,
+          );
         }
       });
 

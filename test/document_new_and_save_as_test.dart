@@ -46,17 +46,17 @@ void main() {
       final target = p.join(temp.path, 'memo'); // zonder .md
       final doc = MarkdownDocument.parse('# Memo\n\ninhoud\n');
 
-      final path = await fileServiceReturning(target).saveDocumentAs(doc);
+      final saved = await fileServiceReturning(target).saveDocumentAs(doc);
 
-      expect(path, '$target.md');
+      expect(saved?.path, '$target.md');
       expect(File('$target.md').readAsStringSync(), '# Memo\n\ninhoud\n');
     });
 
     test('wegklikken schrijft niets en geeft null', () async {
-      final path = await fileServiceReturning(
+      final saved = await fileServiceReturning(
         null,
       ).saveDocumentAs(MarkdownDocument.parse('x'));
-      expect(path, isNull);
+      expect(saved, isNull);
     });
   });
 
