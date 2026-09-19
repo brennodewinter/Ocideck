@@ -372,7 +372,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       const _ActionsDivider(),
       // ── Presenteren & uitvoer ───────────────────────────────────
       IconButton(
-        tooltip: l10n.t('presentFullscreen'),
+        tooltip: presentationActionTooltip(deckState.deck!, l10n),
         icon: const Icon(Icons.play_circle_outline, size: 20),
         onPressed: _presentDeck,
       ),
@@ -443,6 +443,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _clearAllChecklists();
             case 'full_preview':
               _openFullDeckPreview();
+            case 'rehearse_timed_presentation':
+              presentDeck(context, ref, fromStart: true, rehearsalMode: true);
             case 'convert_to_document':
               convertDeckToDocument(context, ref);
             case 'finalize':

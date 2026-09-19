@@ -20,6 +20,7 @@ import '../../models/question.dart';
 import '../../models/rehearsal.dart';
 import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
+import '../../models/presentation_timing.dart';
 import '../../models/playback.dart';
 import '../../models/slide.dart';
 import '../../models/video_source.dart';
@@ -29,6 +30,7 @@ import '../../services/quality_autofix.dart';
 import '../../services/question_round_builder.dart';
 import '../mermaid_render_host.dart';
 import '../../services/rehearsal_controller.dart';
+import '../../services/timed_presentation_controller.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
@@ -69,9 +71,12 @@ part 'parts/presenter_overlays.dart';
 part 'parts/presenter_content.dart';
 part 'parts/presenter_views.dart';
 part 'parts/presenter_support.dart';
+part 'parts/presenter_timed_mode.dart';
 
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
 enum _Blank { none, black, white }
+
+enum _TimedSessionPhase { ready, countdown, running, paused, finished }
 
 /// Tick-interval (ms) voor de vraag-timer. Top-level zodat de presenter-
 /// onderdelen die over `part`-bestanden zijn verdeeld erbij kunnen.
@@ -148,6 +153,13 @@ class FullscreenPresenter extends StatefulWidget {
   /// Sessie-only; live aanpasbaar in de presenter (toets K).
   final Duration? targetDuration;
 
+  /// Effectieve, generieke tijdpreset. PechaKucha is hier slechts één
+  /// configuratie van; de runtime bevat geen formaat-specifieke timer.
+  final PresentationTimingConfig presentationTiming;
+
+  /// Opent rechtstreeks in de privécockpit om de exacte timing te oefenen.
+  final bool rehearsalMode;
+
   /// Of het oefenoverzicht (bestede tijd per slide) na afloop verschijnt. De
   /// tijd wordt altijd gemeten; dit schakelt enkel het eindscherm. Komt uit de
   /// instelling `showRehearsalSummary` (standaard aan).
@@ -212,6 +224,8 @@ class FullscreenPresenter extends StatefulWidget {
     this.showClassificationWatermark = false,
     this.allowRemoteMedia = false,
     this.targetDuration,
+    this.presentationTiming = PresentationTimingConfig.disabled,
+    this.rehearsalMode = false,
     this.showRehearsalSummary = true,
     this.playOnly = false,
     this.audience,
@@ -243,6 +257,7 @@ class FullscreenPresenter extends StatefulWidget {
     Duration? targetDuration,
     bool showRehearsalSummary = true,
     bool playOnly = false,
+    bool rehearsalMode = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -260,6 +275,7 @@ class FullscreenPresenter extends StatefulWidget {
     final tlp = deck.tlp;
     final organization = deck.organization;
     final reportLanguage = deck.language;
+    final presentationTiming = deck.presentationTiming;
 
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
@@ -276,7 +292,7 @@ class FullscreenPresenter extends StatefulWidget {
       displayCount: displayCount,
     );
     if (!context.mounted) return null;
-    if (dual) {
+    if (dual && !rehearsalMode) {
       return await showDualScreen(
         context,
         slides: slides,
@@ -293,6 +309,8 @@ class FullscreenPresenter extends StatefulWidget {
         targetDuration: targetDuration,
         showRehearsalSummary: showRehearsalSummary,
         playOnly: playOnly,
+        presentationTiming: presentationTiming,
+        rehearsalMode: rehearsalMode,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -320,6 +338,8 @@ class FullscreenPresenter extends StatefulWidget {
         targetDuration: targetDuration,
         showRehearsalSummary: showRehearsalSummary,
         playOnly: playOnly,
+        presentationTiming: presentationTiming,
+        rehearsalMode: rehearsalMode,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -349,6 +369,9 @@ class FullscreenPresenter extends StatefulWidget {
     Duration? targetDuration,
     bool showRehearsalSummary = true,
     bool playOnly = false,
+    PresentationTimingConfig presentationTiming =
+        PresentationTimingConfig.disabled,
+    bool rehearsalMode = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -386,6 +409,8 @@ class FullscreenPresenter extends StatefulWidget {
               targetDuration: targetDuration,
               showRehearsalSummary: showRehearsalSummary,
               playOnly: playOnly,
+              presentationTiming: presentationTiming,
+              rehearsalMode: rehearsalMode,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
@@ -442,6 +467,9 @@ class FullscreenPresenter extends StatefulWidget {
     Duration? targetDuration,
     bool showRehearsalSummary = true,
     bool playOnly = false,
+    PresentationTimingConfig presentationTiming =
+        PresentationTimingConfig.disabled,
+    bool rehearsalMode = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -452,29 +480,21 @@ class FullscreenPresenter extends StatefulWidget {
     void Function(Map<String, String>)? onUserNotesChanged,
     ImprovementY01Metric improvementY01 = ImprovementY01Metric.empty,
   }) async {
-    final markdown = buildBeamerMarkdown(
+    final argument = _dualWindowArguments(
       slides: slides,
       projectPath: projectPath,
+      initialIndex: initialIndex,
       tlp: tlp,
       organization: organization,
       reportLanguage: reportLanguage,
       improvementY01: improvementY01,
-    );
-    // Pre-existing annotations re-keyed by index so the beamer shows them
-    // immediately (the audience window has no stable slide ids of its own).
-    final inkByIndex = _annotationsBySlideIndex(slides, annotations);
-    final argument = _audienceWindowArguments(
-      markdown: markdown,
-      projectPath: projectPath,
-      initialIndex: initialIndex,
-      inkByIndex: inkByIndex,
+      annotations: annotations,
       showClassificationWatermark: showClassificationWatermark,
       allowRemoteMedia: allowRemoteMedia,
       themeProfile: themeProfile,
       marpStyle: marpStyle,
       cockpitColorScheme: cockpitColorScheme,
     );
-
     WindowController? audience;
     AudienceWindowHandle? audienceHandle;
     try {
@@ -512,8 +532,11 @@ class FullscreenPresenter extends StatefulWidget {
           reportLanguage: reportLanguage,
           showClassificationWatermark: showClassificationWatermark,
           allowRemoteMedia: allowRemoteMedia,
+          targetDuration: targetDuration,
           showRehearsalSummary: showRehearsalSummary,
           playOnly: playOnly,
+          presentationTiming: presentationTiming,
+          rehearsalMode: rehearsalMode,
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
@@ -528,51 +551,39 @@ class FullscreenPresenter extends StatefulWidget {
       return null;
     }
 
-    final hadWakeLock = await _wakeLockEnabled();
-    await _enableWakeLock();
-    try {
-      if (context.mounted) {
-        return await Navigator.push<String>(
-          context,
-          PageRouteBuilder<String>(
-            opaque: true,
-            pageBuilder: (context, anim, anim2) => FullscreenPresenter(
-              slides: slides,
-              projectPath: projectPath,
-              themeProfile: themeProfile,
-              marpStyle: marpStyle,
-              cockpitColorScheme: cockpitColorScheme,
-              initialIndex: initialIndex,
-              tlp: tlp,
-              organization: organization,
-              reportLanguage: reportLanguage,
-              showClassificationWatermark: showClassificationWatermark,
-              allowRemoteMedia: allowRemoteMedia,
-              showRehearsalSummary: showRehearsalSummary,
-              playOnly: playOnly,
-              audience: audienceHandle,
-              initialAnnotations: annotations,
-              onAnnotationsChanged: onAnnotationsChanged,
-              onSlideChanged: onSlideChanged,
-              onSlideSplit: onSlideSplit,
-              onSessionEdit: onSessionEdit,
-              onPlaybackFinished: onPlaybackFinished,
-              initialUserNotes: initialUserNotes,
-              onUserNotesChanged: onUserNotesChanged,
-              improvementY01: improvementY01,
-            ),
-            transitionsBuilder: (context, animation, secondary, child) =>
-                FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 200),
-          ),
-        );
-      }
-      return null;
-    } finally {
-      await _restoreWakeLock(hadWakeLock);
-      // Make sure the audience window is gone even if exit didn't close it.
+    if (!context.mounted) {
       await audienceHandle.close();
+      return null;
     }
+    return _runDualPresenter(
+      context,
+      audienceHandle: audienceHandle,
+      slides: slides,
+      projectPath: projectPath,
+      themeProfile: themeProfile,
+      marpStyle: marpStyle,
+      cockpitColorScheme: cockpitColorScheme,
+      initialIndex: initialIndex,
+      tlp: tlp,
+      organization: organization,
+      reportLanguage: reportLanguage,
+      showClassificationWatermark: showClassificationWatermark,
+      allowRemoteMedia: allowRemoteMedia,
+      targetDuration: targetDuration,
+      showRehearsalSummary: showRehearsalSummary,
+      playOnly: playOnly,
+      presentationTiming: presentationTiming,
+      rehearsalMode: rehearsalMode,
+      annotations: annotations,
+      onAnnotationsChanged: onAnnotationsChanged,
+      onSlideChanged: onSlideChanged,
+      onSlideSplit: onSlideSplit,
+      onSessionEdit: onSessionEdit,
+      onPlaybackFinished: onPlaybackFinished,
+      initialUserNotes: initialUserNotes,
+      onUserNotesChanged: onUserNotesChanged,
+      improvementY01: improvementY01,
+    );
   }
 
   @override
@@ -581,6 +592,7 @@ class FullscreenPresenter extends StatefulWidget {
 
 class _FullscreenPresenterState extends State<FullscreenPresenter> {
   late int _index;
+  late final _TimedPresentationSession _timedSession;
 
   /// Werkelijk gelopen route (#1162): voorwaarts duwt, "terug" popt. Zie `_prev`.
   final List<int> _jumpHistory = [];
@@ -752,7 +764,12 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   @override
   void initState() {
     super.initState();
-    _index = widget.initialIndex;
+    _index = widget.presentationTiming.enabled ? 0 : widget.initialIndex;
+    _timedSession = _TimedPresentationSession(
+      config: widget.presentationTiming,
+      slideCount: widget.slides.length,
+      onChanged: (snapshot) => _applyTimedSnapshot(this, snapshot),
+    );
     _timelineSync = _TimelineViewSync(widget.audience, () => _index);
     _mermaidView.addListener(_broadcastMermaidView);
     _chartHover.addListener(_broadcastChartHover);
@@ -764,9 +781,9 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
         e.key: List<InkStroke>.from(e.value),
     };
     _userNotes = Map<String, String>.from(widget.initialUserNotes);
+    if (_dual || widget.rehearsalMode) _presenterView = true;
     if (_dual) {
       // The laptop shows the presenter view; the slide lives on the beamer.
-      _presenterView = true;
       // Navigation triggered on the beamer (clicks) and its audio-end events
       // come back over this channel.
       presenterChannel.setMethodCallHandler((call) async {
@@ -828,7 +845,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     // Tik elke seconde, maar herbouw alleen in presenter view (klok/teller).
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
-      if (_presenterView) setState(() {});
+      if (_presenterView || widget.presentationTiming.enabled) setState(() {});
       if (_userNotesMode) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) _userNotesFocusNode.requestFocus();
@@ -838,7 +855,15 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
       _loadDisplays();
-      _scheduleAdvance();
+      if (widget.presentationTiming.enabled) {
+        _timedSession.prepare();
+        // `Presenteren` is de startactie. Een tweede klik op een startkaart
+        // voelt alsof automatisch afspelen stuk is; de korte 3-2-1 geeft al
+        // voldoende waarschuwing voordat de eerste dia haar tijd gaat tellen.
+        _timedSession.startCountdown();
+      } else {
+        _scheduleAdvance();
+      }
       // In enkel-scherm-modus zet `show()` het venster in volledig scherm.
       // macOS en de browser onderscheppen Escape op platformniveau om het
       // verlaten — de toets bereikt Flutter niet. Poll het venster en verlaat
@@ -862,6 +887,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   @override
   void dispose() {
     _advanceTimer?.cancel();
+    _timedSession.dispose();
     _clockTimer?.cancel();
     _fullscreenGuard?.cancel();
     _typedTimer?.cancel();
@@ -884,68 +910,15 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
       _blank == _Blank.white ? 2 : (_blank == _Blank.black ? 1 : 0);
 
   /// Mirror the current index/blank state to the audience window when it changed.
-  void _syncAudience({bool force = false}) {
-    final aw = widget.audience?.controller;
-    if (aw == null) return;
-    final snapshot = (
-      index: _index,
-      blank: _blankCode,
-      richTextPage: _richTextPage,
-      stepIndex: _stepIndex,
-      menuCategory: _menuCategory,
-      timelineView: _timelineSync.controller.fraction,
-    );
-    final indexChanged = _audienceSync.indexChanged(snapshot);
-    if (!_audienceSync.begin(snapshot, force: force)) return;
-    audienceChannel
-        .invokeMethod('update', {
-          'seq': _audienceSync.nextSequence,
-          'index': snapshot.index,
-          'blank': snapshot.blank,
-          'richTextPage': snapshot.richTextPage,
-          'stepIndex': snapshot.stepIndex,
-          'menuCategory': snapshot.menuCategory,
-          'timelineView': snapshot.timelineView,
-        })
-        .then<void>((_) => _audienceSync.delivered())
-        .catchError((Object e) {
-          logWarning('FullscreenPresenter: audience window sync failed', e);
-          if (mounted) {
-            _audienceSync.failed(snapshot, e, () => _syncAudience());
-          }
-          return null;
-        });
-    if (indexChanged) {
-      // Een hover hoort bij één dia. Wis bij het wisselen zowel de eigen hover
-      // (anders zendt hij met de nieuwe index door) als de van de beamer
-      // ontvangen hover, zodat er niets van de vorige dia blijft hangen.
-      _chartHover.setLocal(null);
-      _chartHover.setExternal(null);
-      _pushInk();
-    }
-  }
+  void _syncAudience({bool force = false}) =>
+      _syncPresenterAudience(this, force: force);
 
   // ── Vraag-slides ───────────────────────────────────────────────────────────
 
   /// Wordt aangeroepen als de getoonde slide wijzigt. Start een verse
   /// vraagronde of toont de reeds-beantwoorde toestand. Idempotent: meerdere
   /// keren aanroepen voor dezelfde index doet niets.
-  void _onSlideShown() {
-    if (_index == _shownIndex) return;
-    _shownIndex = _index;
-    _questionTimer?.cancel();
-    final slide = _currentSlide;
-    if (slide.type != SlideType.question) {
-      _pushQuestion(); // wist de vraag-overlay op het publieksvenster
-      return;
-    }
-    final existing = _questionViews[slide.id];
-    if (existing != null && existing.passed) {
-      _pushQuestion();
-      return;
-    }
-    _startQuestionRound(slide);
-  }
+  void _onSlideShown() => _handleSlideShown(this);
 
   // ── Annotatielaag ─────────────────────────────────────────────────────────
 
@@ -1012,6 +985,10 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
                 bottom: 60,
                 child: Center(child: _buildTargetBadge(context, _targetTyped)),
               ),
+            if (widget.presentationTiming.enabled &&
+                _timedSession.phase != _TimedSessionPhase.running &&
+                _timedSession.phase != _TimedSessionPhase.paused)
+              Positioned.fill(child: _TimedPresentationOverlay(state: this)),
             if (_fixFlash != null)
               Positioned(
                 left: 0,

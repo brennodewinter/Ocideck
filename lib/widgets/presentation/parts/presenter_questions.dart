@@ -2,6 +2,23 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../fullscreen_presenter.dart';
 
+void _handleSlideShown(_FullscreenPresenterState state) {
+  if (state._index == state._shownIndex) return;
+  state._shownIndex = state._index;
+  state._questionTimer?.cancel();
+  final slide = state._currentSlide;
+  if (slide.type != SlideType.question) {
+    state._pushQuestion();
+    return;
+  }
+  final existing = state._questionViews[slide.id];
+  if (existing != null && existing.passed) {
+    state._pushQuestion();
+    return;
+  }
+  state._startQuestionRound(slide);
+}
+
 extension _PresenterQuestions on _FullscreenPresenterState {
   /// Of de kijker nu een antwoord staat te typen. Afgeleid uit de vraag zelf,
   /// niet apart bijgehouden: zodra er een openstaande getypte vraag op het

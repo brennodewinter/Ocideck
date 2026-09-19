@@ -66,12 +66,31 @@ PopupMenuItem<String> shellMenuItem(String value, IconData icon, String label) {
   );
 }
 
-extension _MainLayoutMenu on _MainLayoutState {
-  /// Of er iets te openen of op te slaan valt buiten de lokale schijf. Zonder
-  /// verbinding zouden beide items altijd op dezelfde "stel eerst iets in"-
-  /// melding uitkomen, en dat is geen menu-item maar ruis.
-  bool get _hasRemoteConnections => _remoteConnections(ref).isNotEmpty;
+String presentationActionTooltip(Deck deck, AppLocalizations l10n) =>
+    deck.presentationTiming.isIgnite
+    ? l10n.d('Ignite presenteren')
+    : deck.presentationTiming.isPechaKucha
+    ? l10n.d('PechaKucha presenteren')
+    : l10n.t('presentFullscreen');
 
+List<PopupMenuEntry<String>> timedRehearsalMenuItems(
+  Deck? deck,
+  AppLocalizations l10n,
+) => deck?.presentationTiming.isTimedPreset == true
+    ? [
+        shellMenuItem(
+          'rehearse_timed_presentation',
+          Icons.timer_outlined,
+          deck!.presentationTiming.isIgnite
+              ? l10n.d('Ignite oefenen')
+              : l10n.d('PechaKucha oefenen'),
+        ),
+      ]
+    : const [];
+
+bool hasRemoteConnections(WidgetRef ref) => _remoteConnections(ref).isNotEmpty;
+
+extension _MainLayoutMenu on _MainLayoutState {
   /// De git-blokken van het menu.
   ///
   /// Eigen methode omdat dit één samenhangend verhaal is: wat er te zien is
@@ -182,7 +201,7 @@ extension _MainLayoutMenu on _MainLayoutState {
       // precies één verbinding stelt de kiezer de vraag helemaal niet.
       // Opslaan zonder meer volgt de herkomst; dit is het pad om iets bewust
       // ergens ánders neer te zetten.
-      if (_hasRemoteConnections) ...[
+      if (hasRemoteConnections(ref)) ...[
         shellMenuItem(
           'open_remote',
           Icons.cloud_download_outlined,
@@ -233,6 +252,7 @@ extension _MainLayoutMenu on _MainLayoutState {
         Icons.preview_outlined,
         l10n.t('fullDeckPreview'),
       ),
+      ...timedRehearsalMenuItems(ref.read(deckProvider).deck, l10n),
       // Conversie naar een plat document: een NIEUW tabblad (kopie), nooit een
       // in-place omschakeling. Het zegel reist niet mee (DOCUMENT_MODE.md §11.3).
       shellMenuItem(

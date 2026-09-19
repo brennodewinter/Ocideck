@@ -286,6 +286,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
   }
 
   Widget _buildClockBar() {
+    if (widget.presentationTiming.enabled) return _timedClockBar(this);
     final l10n = context.l10n;
     final elapsed = _rehearsal.elapsed;
     final remaining = _rehearsal.remaining;
@@ -377,14 +378,19 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       children: [
         _NavButton(
           icon: Icons.chevron_left,
-          onTap: _index > 0 || _richTextPage > 0 ? _prev : null,
+          onTap:
+              !_timedManualAdvanceBlocked(this) &&
+                  (_index > 0 || _richTextPage > 0)
+              ? _prev
+              : null,
         ),
         const SizedBox(width: 8),
         _NavButton(
           icon: Icons.chevron_right,
           onTap:
-              _index < total - 1 ||
-                  (hasRichTextPages && _richTextPage < richTextPages - 1)
+              !_timedManualAdvanceBlocked(this) &&
+                  (_index < total - 1 ||
+                      (hasRichTextPages && _richTextPage < richTextPages - 1))
               ? _next
               : null,
         ),

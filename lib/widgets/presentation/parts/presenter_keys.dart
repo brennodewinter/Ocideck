@@ -30,6 +30,41 @@ KeyEventResult? _handleZoomKey(
       : KeyEventResult.ignored;
 }
 
+KeyEventResult? _handleTimedPresentationKey(
+  _FullscreenPresenterState state,
+  LogicalKeyboardKey key,
+) {
+  if (!state.widget.presentationTiming.enabled) return null;
+  if (_digits.containsKey(key)) return KeyEventResult.handled;
+  switch (key) {
+    case LogicalKeyboardKey.space:
+      state._timedSession.togglePause();
+      return KeyEventResult.handled;
+    case LogicalKeyboardKey.enter:
+    case LogicalKeyboardKey.numpadEnter:
+      if (state._timedSession.phase == _TimedSessionPhase.ready ||
+          state._timedSession.phase == _TimedSessionPhase.finished) {
+        state._timedSession.startCountdown();
+      }
+      return KeyEventResult.handled;
+    case LogicalKeyboardKey.arrowRight:
+    case LogicalKeyboardKey.arrowLeft:
+    case LogicalKeyboardKey.pageDown:
+    case LogicalKeyboardKey.pageUp:
+    case LogicalKeyboardKey.home:
+    case LogicalKeyboardKey.end:
+    case LogicalKeyboardKey.keyA:
+    case LogicalKeyboardKey.keyL:
+    case LogicalKeyboardKey.keyM:
+    case LogicalKeyboardKey.keyK:
+    case LogicalKeyboardKey.keyR:
+    case LogicalKeyboardKey.keyG:
+      return KeyEventResult.handled;
+    default:
+      return null;
+  }
+}
+
 extension _PresenterKeys on _FullscreenPresenterState {
   KeyEventResult _handleKey(FocusNode _, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
@@ -121,6 +156,9 @@ extension _PresenterKeys on _FullscreenPresenterState {
 
     // Tabelbewerking: navigatie-toetsen voor celkeuze; tekstinvoer blijft intact.
     if (_tableEditMode) return _handleTableEditKey(key, shift: shift);
+
+    final timedResult = _handleTimedPresentationKey(this, key);
+    if (timedResult != null) return timedResult;
 
     // Cijfers verzamelen om naar een slidenummer te springen.
     final digit = _digits[key];

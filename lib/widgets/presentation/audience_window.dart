@@ -11,6 +11,7 @@ import '../../models/question.dart';
 import '../../models/settings.dart';
 import '../../models/presentation_step_plan.dart';
 import '../../models/slide.dart';
+import '../../theme/presenter_palette.dart';
 import '../../services/markdown_service.dart';
 import '../mermaid_render_host.dart';
 import '../../services/finding_context_score.dart';
@@ -90,6 +91,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   int _menuCategory = 0;
   int _stepIndex = 0;
   int _blank = 0; // 0 = none, 1 = black, 2 = white
+  int _timedPhase = -1;
+  int _countdown = 3;
 
   /// Volgt de kijkstand (zoom + scrollpositie) van een groot mermaid-diagram op
   /// de presentatie-dia (#930): de presentator zoomt/scrolt, hier zetten we
@@ -217,6 +220,11 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _send('chartHover', {'index': _index, 'hover': hover?.toJson()});
   }
 
+  void _applyTimedUpdate(Map<String, dynamic> message) {
+    _timedPhase = (message['timedPhase'] as num?)?.toInt() ?? -1;
+    _countdown = (message['countdown'] as num?)?.toInt() ?? 3;
+  }
+
   Future<dynamic> _onPresenterCall(MethodCall call) async {
     switch (call.method) {
       case 'update':
@@ -234,6 +242,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           _menuCategory = (m['menuCategory'] as num?)?.toInt() ?? 0;
           _stepIndex = (m['stepIndex'] as num?)?.toInt() ?? 0;
           _blank = (m['blank'] as num?)?.toInt() ?? 0;
+          _applyTimedUpdate(m);
           _laserPoint = null; // laser never carries over to another slide
           _activeStroke = null; // nor does an in-progress stroke
           // Drop a stale question overlay when moving to a different slide. If a
@@ -442,6 +451,9 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
 
   Widget _body() {
     if (_slides.isEmpty) return const SizedBox.shrink();
+    if (_timedPhase == 0) return _timedWaitingSurface();
+    if (_timedPhase == 1) return _timedCountdownSurface();
+    if (_timedPhase == 4) return const ColoredBox(color: Colors.black);
     if (_blank != 0) {
       return Container(color: _blank == 2 ? Colors.white : Colors.black);
     }
@@ -452,6 +464,44 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
       child: SizedBox.expand(child: _canvas(slide)),
     );
   }
+
+  Widget _timedWaitingSurface() => const ColoredBox(
+    color: Colors.black,
+    child: Center(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.fromBorderSide(
+            BorderSide(color: PresenterPalette.laserGreen, width: 3),
+          ),
+        ),
+        child: SizedBox(
+          width: 92,
+          height: 92,
+          child: Icon(
+            Icons.auto_awesome_motion,
+            color: PresenterPalette.laserGreen,
+            size: 38,
+          ),
+        ),
+      ),
+    ),
+  );
+
+  Widget _timedCountdownSurface() => ColoredBox(
+    color: Colors.black,
+    child: Center(
+      child: Text(
+        '$_countdown',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 112,
+          fontWeight: FontWeight.w300,
+          fontFeatures: [FontFeature.tabularFigures()],
+        ),
+      ),
+    ),
+  );
 
   /// A 16:9 slide letterboxed to fit the screen, mirroring the presenter's view.
   Widget _canvas(Slide slide) {
