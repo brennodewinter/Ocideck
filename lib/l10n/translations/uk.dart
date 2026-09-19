@@ -1642,6 +1642,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Документ імпортовано — не перенесено: {lijst}',
+  '{n} tekstkader': '{n} текстовий кадр',
+  '{n} tekstkaders': '{n} текстових кадрів',
+  '{n} groep': '{n} група',
+  '{n} groepen': '{n} групи',
+  '{n} object': '{n} об\'єкт',
+  '{n} objecten': '{n} об\'єкти',
   'Presentatievorm': 'Формат презентації',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Виберіть, як перемикатимуться слайди під час презентації.',

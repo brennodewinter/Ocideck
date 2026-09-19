@@ -1643,6 +1643,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Document importat — nepreluat: {lijst}',
+  '{n} tekstkader': '{n} cadru de text',
+  '{n} tekstkaders': '{n} cadre de text',
+  '{n} groep': '{n} grup',
+  '{n} groepen': '{n} grupuri',
+  '{n} object': '{n} obiect',
+  '{n} objecten': '{n} obiecte',
   'Presentatievorm': 'Formatul prezentării',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Alege cum avansează diapozitivele în timpul prezentării.',

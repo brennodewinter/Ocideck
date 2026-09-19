@@ -1655,6 +1655,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Documento importado — não transportado: {lijst}',
+  '{n} tekstkader': '{n} caixa de texto',
+  '{n} tekstkaders': '{n} caixas de texto',
+  '{n} groep': '{n} grupo',
+  '{n} groepen': '{n} grupos',
+  '{n} object': '{n} objeto',
+  '{n} objecten': '{n} objetos',
   'Presentatievorm': 'Formato da apresentação',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Escolha como os diapositivos avançam durante a apresentação.',

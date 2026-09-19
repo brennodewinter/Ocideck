@@ -1630,6 +1630,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokumänt importiert — nöd übernoh: {lijst}',
+  '{n} tekstkader': '{n} Tegschtrahme',
+  '{n} tekstkaders': '{n} Tegschtrahme',
+  '{n} groep': '{n} Gruppä',
+  '{n} groepen': '{n} Gruppä',
+  '{n} object': '{n} Objäkt',
+  '{n} objecten': '{n} Objäkt',
   'Presentatievorm': 'Präsentationsformat',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Wähl, wie d Folie während dr Präsentation wiitergönd.',

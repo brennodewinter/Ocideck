@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/legacy.dart';
 
 import '../models/markdown_document.dart';
 import '../services/document_integrity.dart';
+import '../services/slide_image_refs.dart';
+import '../services/web_asset_store.dart';
 
 /// De bewerkbare toestand van één documenttabblad: het [MarkdownDocument] zelf,
 /// plus of het gewijzigd is, waar het op schijf vandaan komt, en of
@@ -304,6 +306,28 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       document: current.withSource(nextSource),
       visualEdited: false,
     );
+  }
+
+  /// Verzamelt de `mem:`-paden die dit tabblad nog kan aanhalen — de bron
+  /// nu én elke stap op de ongedaan-/opnieuw-stapel — in [live]. De
+  /// web-sweep ([TabsNotifier.sweepWebAssets]) mag niets wegvagen dat nog
+  /// terugkomt: een geïmporteerde of geplakte afbeelding in een ongedaan-stap
+  /// is bij undo weer zichtbaar (#2120).
+  void collectLiveMemoryAssetPaths(Set<String> live) {
+    void scan(MarkdownDocument? doc) {
+      if (doc == null) return;
+      for (final path in inlineImagePaths(doc.source)) {
+        if (WebAssetStore.isMemPath(path)) live.add(path);
+      }
+    }
+
+    scan(state.document);
+    for (final (doc, _) in _undoStack) {
+      scan(doc);
+    }
+    for (final (doc, _) in _redoStack) {
+      scan(doc);
+    }
   }
 }
 

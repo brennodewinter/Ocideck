@@ -666,6 +666,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Documento importá — no a keda: {lijst}',
+  '{n} tekstkader': '{n} kader di teksto',
+  '{n} tekstkaders': '{n} kader di teksto',
+  '{n} groep': '{n} grupo',
+  '{n} groepen': '{n} grupo',
+  '{n} object': '{n} objekto',
+  '{n} objecten': '{n} objekto',
   'Presentatievorm': 'Formato di presentashon',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Skohe kon e slidenan ta sigui durante e presentashon.',

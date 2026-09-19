@@ -1625,6 +1625,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokuments importēts — nav pārnests: {lijst}',
+  '{n} tekstkader': '{n} teksta rāmis',
+  '{n} tekstkaders': '{n} teksta rāmji',
+  '{n} groep': '{n} grupa',
+  '{n} groepen': '{n} grupas',
+  '{n} object': '{n} objekts',
+  '{n} objecten': '{n} objekti',
   'Presentatievorm': 'Prezentācijas formāts',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Izvēlieties, kā slaidi pāriet prezentācijas laikā.',

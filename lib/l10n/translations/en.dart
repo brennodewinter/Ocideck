@@ -827,6 +827,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Document imported — not carried over: {lijst}',
+  '{n} tekstkader': '{n} text frame',
+  '{n} tekstkaders': '{n} text frames',
+  '{n} groep': '{n} group',
+  '{n} groepen': '{n} groups',
+  '{n} object': '{n} object',
+  '{n} objecten': '{n} objects',
   'Presentatievorm': 'Presentation format',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Choose how slides advance during the presentation.',

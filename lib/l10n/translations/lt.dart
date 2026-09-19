@@ -1634,6 +1634,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokumentas importuotas — neperkelta: {lijst}',
+  '{n} tekstkader': '{n} teksto rėmelis',
+  '{n} tekstkaders': '{n} teksto rėmeliai',
+  '{n} groep': '{n} grupė',
+  '{n} groepen': '{n} grupės',
+  '{n} object': '{n} objektas',
+  '{n} objecten': '{n} objektai',
   'Presentatievorm': 'Pateikties formatas',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Pasirinkite, kaip skaidrės keičiamos pristatymo metu.',

@@ -1657,6 +1657,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Doiciméad allmhairithe — nár aistríodh: {lijst}',
+  '{n} tekstkader': '{n} fráma téacs',
+  '{n} tekstkaders': '{n} frámaí téacs',
+  '{n} groep': '{n} grúpa',
+  '{n} groepen': '{n} grúpaí',
+  '{n} object': '{n} réad',
+  '{n} objecten': '{n} réada',
   'Presentatievorm': 'Formáid an chur i láthair',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Roghnaigh conas a théann na sleamhnáin ar aghaidh le linn an chur i láthair.',

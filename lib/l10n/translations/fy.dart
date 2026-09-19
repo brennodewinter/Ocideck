@@ -667,6 +667,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokumint ymportearre — net oernommen: {lijst}',
+  '{n} tekstkader': '{n} tekstframe',
+  '{n} tekstkaders': '{n} tekstframes',
+  '{n} groep': '{n} groep',
+  '{n} groepen': '{n} groepen',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objekten',
   'Presentatievorm': 'Presintaasjefoarm',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Kies hoe\'t de dia\'s by it presintearjen trochgean.',

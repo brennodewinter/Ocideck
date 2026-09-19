@@ -1652,6 +1652,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Το έγγραφο εισήχθη — δεν μεταφέρθηκε: {lijst}',
+  '{n} tekstkader': '{n} πλαίσιο κειμένου',
+  '{n} tekstkaders': '{n} πλαίσια κειμένου',
+  '{n} groep': '{n} ομάδα',
+  '{n} groepen': '{n} ομάδες',
+  '{n} object': '{n} αντικείμενο',
+  '{n} objecten': '{n} αντικείμενα',
   'Presentatievorm': 'Μορφή παρουσίασης',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Επιλέξτε πώς θα προχωρούν οι διαφάνειες κατά την παρουσίαση.',

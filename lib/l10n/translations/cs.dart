@@ -1628,6 +1628,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importován — nepřeneseno: {lijst}',
+  '{n} tekstkader': '{n} textový rámeček',
+  '{n} tekstkaders': '{n} textových rámečků',
+  '{n} groep': '{n} skupina',
+  '{n} groepen': '{n} skupin',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objektů',
   'Presentatievorm': 'Formát prezentace',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Zvolte, jak se budou snímky během prezentace posouvat.',

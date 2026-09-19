@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/markdown_document.dart';
@@ -6,6 +7,7 @@ import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:path/path.dart' as p;
 
 /// Het openpad voor een plat document loopt door dezelfde fail-closed poorten
@@ -78,8 +80,8 @@ void main() {
   test('saveDocument schrijft de bron byte-getrouw naar schijf', () async {
     const source = '# Rapport\n\nTekst.\n\n---\n\nMeer.\r\n';
     final path = p.join(temp.path, 'uit.md');
-    final ok = await saveDocument(MarkdownDocument.parse(source), path);
-    expect(ok, isTrue);
+    final written = await saveDocument(MarkdownDocument.parse(source), path);
+    expect(written, isNotNull);
     expect(File(path).readAsStringSync(), source);
   });
 
@@ -91,9 +93,68 @@ void main() {
 
     final opened = (await svc.openDocumentDetailed(path)).document!;
     const edited = '$source\nExtra regel.\n';
-    expect(await saveDocument(opened.withSource(edited), path), isTrue);
+    expect(await saveDocument(opened.withSource(edited), path), isNotNull);
 
     final reopened = (await svc.openDocumentDetailed(path)).document!;
     expect(reopened.toMarkdown(), edited);
+  });
+
+  // Een mem:-verwijzing is vluchtig (import, plakken): de opslag schrijft de
+  // bytes als echt bestand weg en de bron wijst er daarna projectrelatief
+  // naar — anders staat er een verwijzing naar niets in het .md (#2120).
+  group('mem:-afbeeldingen bij opslaan', () {
+    tearDown(WebAssetStore.clear);
+
+    final png = Uint8List.fromList([
+      0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, //
+      1, 2, 3, 4,
+    ]);
+
+    test(
+      'een mem:-afbeelding landt in images/ en de bron wijst ernaar',
+      () async {
+        final mem = WebAssetStore.put(png, name: 'foto.png');
+        final path = p.join(temp.path, 'doc.md');
+
+        final written = await saveDocument(
+          MarkdownDocument.parse('tekst\n\n![kat]($mem)\n'),
+          path,
+        );
+
+        expect(written, isNotNull);
+        expect(written!.source, contains('![kat](images/foto.png)'));
+        expect(
+          File(p.join(temp.path, 'images', 'foto.png')).readAsBytesSync(),
+          png,
+        );
+        expect(File(path).readAsStringSync(), written.source);
+      },
+    );
+
+    test('een absolute verwijzing wordt naar images/ gekopieerd', () async {
+      final bron = File(p.join(temp.path, 'invoer.png'))..writeAsBytesSync(png);
+      final path = p.join(temp.path, 'doc.md');
+
+      final written = await saveDocument(
+        MarkdownDocument.parse('![foto](${bron.path})\n'),
+        path,
+      );
+
+      expect(written!.source, contains('![foto](images/invoer.png)'));
+      expect(
+        File(p.join(temp.path, 'images', 'invoer.png')).readAsBytesSync(),
+        png,
+      );
+    });
+
+    test(
+      'een document zonder verwijzingen maakt geen lege images/-map',
+      () async {
+        final path = p.join(temp.path, 'kaal.md');
+        await saveDocument(MarkdownDocument.parse('alleen tekst\n'), path);
+
+        expect(Directory(p.join(temp.path, 'images')).existsSync(), isFalse);
+      },
+    );
   });
 }

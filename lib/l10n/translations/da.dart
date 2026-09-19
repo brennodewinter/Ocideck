@@ -1627,6 +1627,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importeret — ikke overført: {lijst}',
+  '{n} tekstkader': '{n} tekstramme',
+  '{n} tekstkaders': '{n} tekstrammer',
+  '{n} groep': '{n} gruppe',
+  '{n} groepen': '{n} grupper',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objekter',
   'Presentatievorm': 'Præsentationsformat',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Vælg, hvordan dias skifter under præsentationen.',
