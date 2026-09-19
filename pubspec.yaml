@@ -46,7 +46,13 @@ dependencies:
   # van opencv_core -> dartcv4 1.1.8 paste niet meer bij de Windows-toolchain,
   # waardoor `flutter build windows` afbrak op find_package(OpenCV). Alleen
   # gebruikt in lib/services/privacy/image_face_scan_io.dart (YuNet-detectie).
-  dartcv4: ^2.2.1
+  # Minimaal 2.3.1: vanaf daar volgt de OpenCV-build de deployment target van
+  # de app (12.0) in plaats van een vaste waarde. Onder Xcode 27 weigert
+  # xcodebuild een MACOSX_DEPLOYMENT_TARGET van 10.15 — de terugval van
+  # native_toolchain_cmake als er geen doelversie binnenkomt — met "the range
+  # of supported deployment target versions is 12.0 to 27.0". Een verouderde
+  # .dart_tool/hooks_runner-cache kan die fout ook laten zien; eerst opruimen.
+  dartcv4: ^2.3.1
   flutter_math_fork: ^0.7.4
   wakelock_plus: ^1.7.0
   # Taalbewuste getalnotatie in tabelcellen (render-time, opt-in per kolom).
