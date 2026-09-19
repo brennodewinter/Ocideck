@@ -98,12 +98,17 @@ String _importedMessage(AppLocalizations l10n, int skippedImages) {
       .replaceAll('{n}', '$skippedImages');
 }
 
-/// De eerste kop van het document, als suggestie voor de stijlnaam.
+/// De eerste kop van het document, als suggestie voor de stijlnaam. De
+/// importeur escapet Markdown-tekens (`\_`, `\#`); in een naam horen die
+/// backslashes niet.
 String? _documentTitle(String markdown) {
   for (final line in markdown.split('\n')) {
     final trimmed = line.trim();
     if (trimmed.startsWith('# ')) {
-      final title = trimmed.substring(2).trim();
+      final title = trimmed
+          .substring(2)
+          .replaceAllMapped(RegExp(r'\\(.)'), (m) => m.group(1)!)
+          .trim();
       if (title.isNotEmpty) return title;
     }
   }
