@@ -390,6 +390,51 @@ xcrun stapler staple "$APP"
 xcrun stapler validate "$APP"
 spctl -a -t exec -vvv "$APP"
 
+# ---------------------------------------------------------------------------
+# Opstartproef: de app die zo de deur uitgaat écht starten.
+#
+# Handtekening, notarisatie en de koppelingscontrole hierboven zijn allemaal
+# statisch. Wat dyld en het hardened runtime bij het laden doen, blijkt alleen
+# door te laden. Het hoofdbinary wordt rechtstreeks gestart (niet via `open`,
+# dan is de exitstatus van de app zelf zichtbaar), krijgt een paar seconden en
+# wordt dan netjes beëindigd. Een dyld-weigering komt binnen een seconde met
+# een niet-nul status en "Library not loaded" op stderr; die gaat hier de
+# release in als fout, niet als klacht van een gebruiker.
+#
+# Alleen in een grafische sessie: zonder WindowServer kan een Cocoa-app niet
+# opkomen, en dat zou een valse rode uitslag zijn. De Mac-runner draait als
+# LaunchAgent in de gebruikerssessie en komt dus door deze poort; de proef
+# toont daar enkele seconden een venster. OCIDECK_SKIP_LAUNCH_PROBE=1 slaat
+# hem bewust over.
+# ---------------------------------------------------------------------------
+section "Opstartproef"
+if [[ "${OCIDECK_SKIP_LAUNCH_PROBE:-0}" == "1" ]]; then
+  echo "  overgeslagen (OCIDECK_SKIP_LAUNCH_PROBE=1)"
+elif [[ "$(launchctl managername 2>/dev/null)" != "Aqua" ]]; then
+  echo "  overgeslagen: geen grafische sessie (launchctl managername != Aqua)"
+else
+  PROBE_LOG="$(mktemp -t ocideck-opstartproef)"
+  "$APP/Contents/MacOS/OciDeck" >"$PROBE_LOG" 2>&1 &
+  PROBE_PID=$!
+  # Zes seconden is ruim: een dyld-fout valt binnen één seconde, en een app die
+  # zo lang leeft heeft al zijn frameworks geladen en zijn venster gebouwd.
+  sleep 6
+  if kill -0 "$PROBE_PID" 2>/dev/null; then
+    kill "$PROBE_PID" 2>/dev/null || true
+    wait "$PROBE_PID" 2>/dev/null || true
+    rm -f "$PROBE_LOG"
+    echo "  in orde: de app start en blijft draaien"
+  else
+    PROBE_RC=0
+    wait "$PROBE_PID" || PROBE_RC=$?
+    echo "De app stopte binnen zes seconden na het starten (exit $PROBE_RC):" >&2
+    sed 's/^/   /' "$PROBE_LOG" >&2
+    rm -f "$PROBE_LOG"
+    echo "Een getekende en genotariseerde app die niet start, mag niet uit; zo verging het v0.6.4." >&2
+    exit 1
+  fi
+fi
+
 # De notarisatie-zip ging vóór het staplen de deur uit; die hebben we niet meer nodig.
 rm -f "$ZIP"
 
