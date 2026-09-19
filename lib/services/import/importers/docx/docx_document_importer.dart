@@ -10,15 +10,38 @@
 // Best-effort: koppen, lijsten, tabellen, vet/cursief/doorgestreept en links
 // gaan mee; wat geen Markdown-tegenhanger heeft (voetnoten, tekstkaders,
 // positie-geplaatste objecten) valt stil. De uitvoer is gewone Markdown.
+//
+// De huisstijl (letters, kleuren, kop- en voettekst, het beeld op elke
+// bladzijde) leest het zusterdeel `docx_document_style.dart` uit hetzelfde
+// archief, zodat het bestand maar één keer uitgepakt wordt.
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
+import '../../../../utils/content_hash.dart';
+import '../../models/source_document_style.dart';
 import '../../utils/archive_utils.dart';
 import '../../utils/import_budget.dart';
 import '../../utils/xml_utils.dart';
+
+part 'docx_document_style.dart';
+
+/// Wat de import van een `.docx` oplevert: de Markdown, de huisstijl van de
+/// bron en het aantal beelden in de tekst dat niet mee kon (#2120).
+class DocxDocumentImport {
+  const DocxDocumentImport({
+    required this.markdown,
+    required this.style,
+    required this.skippedImages,
+  });
+
+  final String markdown;
+  final SourceDocumentStyle style;
+  final int skippedImages;
+}
 
 /// Zet de bytes van een `.docx` om in Markdown.
 ///
@@ -26,6 +49,13 @@ import '../../utils/xml_utils.dart';
 /// [FormatException] bij een beschadigd archief, en [Exception] bij een
 /// onleesbaar onderdeel.
 String convertDocxToMarkdown(
+  List<int> bytes, {
+  ImportBudget budget = ImportBudget.standard,
+}) => importDocx(bytes, budget: budget).markdown;
+
+/// Leest een `.docx`: de Markdown én de huisstijl van de bron. Dezelfde
+/// uitzonderingen als [convertDocxToMarkdown].
+DocxDocumentImport importDocx(
   List<int> bytes, {
   ImportBudget budget = ImportBudget.standard,
 }) {
@@ -46,7 +76,25 @@ String convertDocxToMarkdown(
   for (final child in body.children.whereType<XmlElement>()) {
     _emitBlock(ctx, child, buf, indent: '');
   }
-  return _trimTrailingBlank(buf.toString());
+  return DocxDocumentImport(
+    markdown: _trimTrailingBlank(buf.toString()),
+    style: _extractDocxStyle(ctx),
+    skippedImages: _countBodyImages(body),
+  );
+}
+
+/// Beelden in de lopende tekst die de omzetting laat liggen: elke tekening
+/// (`w:drawing`, of het oude `w:pict`) buiten een `mc:Fallback`, zodat één
+/// beeld met twee uitvoeringen één keer telt.
+int _countBodyImages(XmlElement body) {
+  var count = 0;
+  for (final el in body.descendants.whereType<XmlElement>()) {
+    final local = el.name.local;
+    if ((local == 'drawing' || local == 'pict') && !_insideFallback(el)) {
+      count++;
+    }
+  }
+  return count;
 }
 
 XmlElement? _findLocal(XmlNode root, String local) {
@@ -313,6 +361,7 @@ class _DocxContext {
   Map<String, int>?
   _headingStyles; // style-id → heading level (0 = not heading)
   Map<String, String>? _relationships; // r:id → target URL
+  final _partRelationships = <String, Map<String, String>>{};
   Map<String, bool>? _numbering; // numId → isOrdered
 
   String? readPart(String path) {
@@ -346,6 +395,33 @@ class _DocxContext {
   String? relationship(String rid) {
     _relationships ??= _loadRelationships();
     return _relationships![rid];
+  }
+
+  /// Het relatiedoel van [rid] in het `.rels`-bestand van [partPath]
+  /// (`word/header2.xml` → `word/_rels/header2.xml.rels`), of null.
+  String? relationshipOf(String partPath, String rid) {
+    final rels = _partRelationships.putIfAbsent(partPath, () {
+      final slash = partPath.lastIndexOf('/');
+      final dir = slash < 0 ? '' : partPath.substring(0, slash + 1);
+      final name = partPath.substring(slash + 1);
+      return _loadRelationshipsFrom('${dir}_rels/$name.rels');
+    });
+    return rels[rid];
+  }
+
+  /// Het archiefpad van het deel dat de hoofdrelaties als [type] aanwijzen
+  /// (`theme` → `word/theme/theme1.xml`), of null.
+  String? partPathForRelationshipType(String type) {
+    final doc = readXml('word/_rels/document.xml.rels');
+    if (doc == null) return null;
+    for (final rel in _descendants(doc, 'Relationship')) {
+      final relType = _attr(rel, 'Type');
+      final target = _attr(rel, 'Target');
+      if (relType != null && target != null && relType.endsWith('/$type')) {
+        return _resolveWordPath(target);
+      }
+    }
+    return null;
   }
 
   /// Geeft true als een numId een geordende lijst is.
@@ -385,9 +461,12 @@ class _DocxContext {
     return null;
   }
 
-  Map<String, String> _loadRelationships() {
+  Map<String, String> _loadRelationships() =>
+      _loadRelationshipsFrom('word/_rels/document.xml.rels');
+
+  Map<String, String> _loadRelationshipsFrom(String path) {
     final result = <String, String>{};
-    final doc = readXml('word/_rels/document.xml.rels');
+    final doc = readXml(path);
     if (doc == null) return result;
     for (final rel in _descendants(doc, 'Relationship')) {
       final id = _attr(rel, 'Id');
