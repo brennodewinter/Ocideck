@@ -93,8 +93,7 @@ echo "doorgelaten"
 
   test('een open release-blocker stopt de keten, ook zonder fix-tak', () {
     final r = run(
-      blockers:
-          '[{"number":2115,"title":"macOS 27: 0.6.4 start niet"}]',
+      blockers: '[{"number":2115,"title":"macOS 27: 0.6.4 start niet"}]',
     );
     expect(r.exitCode, 1);
     expect(r.stdout, contains('#2115 macOS 27: 0.6.4 start niet'));

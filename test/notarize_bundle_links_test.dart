@@ -51,23 +51,32 @@ void main() {
     Process.runSync('chmod', ['755', main.path]);
     File('${main.path}.deps').writeAsStringSync('${deps.join('\n')}\n');
 
-    Directory('${fw.path}/pdfium.framework/Versions/A')
-        .createSync(recursive: true);
-    File('${fw.path}/pdfium.framework/Versions/A/pdfium')
-        .writeAsStringSync('dylib');
+    Directory(
+      '${fw.path}/pdfium.framework/Versions/A',
+    ).createSync(recursive: true);
+    File(
+      '${fw.path}/pdfium.framework/Versions/A/pdfium',
+    ).writeAsStringSync('dylib');
     Process.runSync('chmod', [
       '755',
       '${fw.path}/pdfium.framework/Versions/A/pdfium',
     ]);
-    File('${fw.path}/pdfium.framework/Versions/A/pdfium.deps')
-        .writeAsStringSync('');
+    File(
+      '${fw.path}/pdfium.framework/Versions/A/pdfium.deps',
+    ).writeAsStringSync('');
     Link('${fw.path}/pdfium.framework/Versions/Current').createSync('A');
-    Link('${fw.path}/pdfium.framework/pdfium')
-        .createSync('Versions/Current/pdfium');
+    Link(
+      '${fw.path}/pdfium.framework/pdfium',
+    ).createSync('Versions/Current/pdfium');
 
-    Directory('${fw.path}/Foo.framework/Versions/A').createSync(recursive: true);
+    Directory(
+      '${fw.path}/Foo.framework/Versions/A',
+    ).createSync(recursive: true);
     File('${fw.path}/Foo.framework/Versions/A/Foo').writeAsStringSync('dylib');
-    Process.runSync('chmod', ['755', '${fw.path}/Foo.framework/Versions/A/Foo']);
+    Process.runSync('chmod', [
+      '755',
+      '${fw.path}/Foo.framework/Versions/A/Foo',
+    ]);
     File('${fw.path}/Foo.framework/Versions/A/Foo.deps').writeAsStringSync('');
 
     // Nep-otool: -l geeft de twee rpaths die Flutter's Runner altijd draagt,
@@ -121,7 +130,10 @@ check_bundle_links "${fx.app}"
     final fx = buildFixture(['@rpath/PDFium.framework/PDFium']);
     final r = check(fx);
     expect(r.exitCode, 1, reason: 'stderr: ${r.stderr}');
-    expect(r.stderr, contains('FOUT Contents/MacOS/OciDeck: @rpath/PDFium.framework/PDFium'));
+    expect(
+      r.stderr,
+      contains('FOUT Contents/MacOS/OciDeck: @rpath/PDFium.framework/PDFium'),
+    );
   }, skip: skipOnWindows);
 
   test('ook een mapcomponent met andere schrijfwijze valt om', () {
