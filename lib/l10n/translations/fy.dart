@@ -667,6 +667,46 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Presentatievorm': 'Presintaasjefoarm',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Kies hoe\'t de dia\'s by it presintearjen trochgean.',
+  'Vrij presenteren': 'Frij presintearje',
+  'Zelf doorgaan': 'Sels trochgean',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Do bepaalst sels wannear\'t de folgjende dia ferskynt.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Tweintich dia\'s geane automatysk troch.',
+  'Twintig dia\'s in een stevig tempo.':
+      'Tweintich dia\'s yn in stevich tempo.',
+  'Aangepaste timing': 'Oanpaste timing',
+  'In de bron ingesteld': 'Yn de boarne ynsteld',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Bliuwt bewarre oantst in oare foarm kiest.',
+  'Ignite afgerond': 'Ignite ôfrûne',
+  'Ignite klaar om te starten': 'Ignite klear om te begjinnen',
+  'Ignite oefenen': 'Ignite oefenje',
+  'Ignite presenteren': 'Ignite presintearje',
+  'Ignite-storyboard': 'Ignite-storyboard',
+  'Buiten het format': 'Bûten it format',
+  'GEPAUZEERD': 'PAUZEARRE',
+  'Hervatten': 'Trochgean',
+  'Klaar om te presenteren': 'Klear om te presintearjen',
+  'PechaKucha afgerond': 'PechaKucha ôfrûne',
+  'PechaKucha klaar om te starten': 'PechaKucha klear om te begjinnen',
+  'PechaKucha oefenen': 'PechaKucha oefenje',
+  'PechaKucha presenteren': 'PechaKucha presintearje',
+  'PechaKucha-storyboard': 'PechaKucha-storyboard',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Spaasje pauzearret · Escape stoppet de presintaasje',
+  'Start aftellen': 'Ofrekken starte',
+  'dia\'s': 'dia\'s',
+  'handmatig doorgaan uit': 'hânmjittich trochgean út',
+  'nog nodig': 'noch nedich',
+  'ontbreekt': 'ûntbrekt',
+  'sec': 'sek',
+  'seconden': 'sekonden',
+  'seconden per dia': 'sekonden per dia',
+  'te veel': 'tefolle',
   'Afbeelding toevoegen…': 'Ofbylding tafoegje…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Gjin beskriuwbere biblioteekmap fûn. Foegje in map ta of pas Opslach oan ûnder Ynstellingen.',

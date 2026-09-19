@@ -1642,6 +1642,45 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Presentatievorm': 'Формат презентації',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Виберіть, як перемикатимуться слайди під час презентації.',
+  'Vrij presenteren': 'Вільна презентація',
+  'Zelf doorgaan': 'Перемикати вручну',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Ви самі вирішуєте, коли з’явиться наступний слайд.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Двадцять слайдів перемикаються автоматично.',
+  'Twintig dia\'s in een stevig tempo.': 'Двадцять слайдів у жвавому темпі.',
+  'Aangepaste timing': 'Власний час показу',
+  'In de bron ingesteld': 'Задано у джерелі',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Зберігатиметься, доки ви не виберете інший формат.',
+  'Ignite afgerond': 'Ignite завершено',
+  'Ignite klaar om te starten': 'Ignite готове до початку',
+  'Ignite oefenen': 'Репетирувати Ignite',
+  'Ignite presenteren': 'Презентувати Ignite',
+  'Ignite-storyboard': 'Розкадрування Ignite',
+  'Buiten het format': 'Поза форматом',
+  'GEPAUZEERD': 'ПРИЗУПИНЕНО',
+  'Hervatten': 'Продовжити',
+  'Klaar om te presenteren': 'Готово до презентації',
+  'PechaKucha afgerond': 'PechaKucha завершено',
+  'PechaKucha klaar om te starten': 'PechaKucha готове до початку',
+  'PechaKucha oefenen': 'Репетирувати PechaKucha',
+  'PechaKucha presenteren': 'Презентувати PechaKucha',
+  'PechaKucha-storyboard': 'Розкадрування PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Пробіл призупиняє · Escape зупиняє презентацію',
+  'Start aftellen': 'Почати відлік',
+  'dia\'s': 'слайди',
+  'handmatig doorgaan uit': 'ручний перехід вимкнено',
+  'nog nodig': 'ще потрібно',
+  'ontbreekt': 'бракує',
+  'sec': 'с',
+  'seconden': 'секунди',
+  'seconden per dia': 'секунд на слайд',
+  'te veel': 'забагато',
   'Afbeelding toevoegen…': 'Додати зображення…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Записувану теку бібліотеки не знайдено. Додайте теку або змініть Сховище в Налаштування.',

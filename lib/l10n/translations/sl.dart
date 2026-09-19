@@ -1627,6 +1627,46 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Presentatievorm': 'Oblika predstavitve',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Izberite, kako se diapozitivi pomikajo med predstavitvijo.',
+  'Vrij presenteren': 'Prosto predstavljanje',
+  'Zelf doorgaan': 'Ročno nadaljevanje',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Sami določite, kdaj se prikaže naslednji diapozitiv.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Dvajset diapozitivov se samodejno pomika naprej.',
+  'Twintig dia\'s in een stevig tempo.':
+      'Dvajset diapozitivov v živahnem tempu.',
+  'Aangepaste timing': 'Čas po meri',
+  'In de bron ingesteld': 'Nastavljeno v izvorni kodi',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Ostane ohranjeno, dokler ne izberete druge oblike.',
+  'Ignite afgerond': 'Ignite končana',
+  'Ignite klaar om te starten': 'Ignite pripravljena na začetek',
+  'Ignite oefenen': 'Vadi Ignite',
+  'Ignite presenteren': 'Predstavi Ignite',
+  'Ignite-storyboard': 'Snemalna knjiga Ignite',
+  'Buiten het format': 'Zunaj formata',
+  'GEPAUZEERD': 'ZAČASNO USTAVLJENO',
+  'Hervatten': 'Nadaljuj',
+  'Klaar om te presenteren': 'Pripravljeno za predstavitev',
+  'PechaKucha afgerond': 'PechaKucha končana',
+  'PechaKucha klaar om te starten': 'PechaKucha pripravljena na začetek',
+  'PechaKucha oefenen': 'Vadi PechaKucha',
+  'PechaKucha presenteren': 'Predstavi PechaKucha',
+  'PechaKucha-storyboard': 'Snemalna knjiga PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Preslednica začasno ustavi · Escape konča predstavitev',
+  'Start aftellen': 'Začni odštevanje',
+  'dia\'s': 'diapozitivi',
+  'handmatig doorgaan uit': 'ročno nadaljevanje izklopljeno',
+  'nog nodig': 'še potrebno',
+  'ontbreekt': 'manjka',
+  'sec': 's',
+  'seconden': 'sekunde',
+  'seconden per dia': 'sekund na diapozitiv',
+  'te veel': 'preveč',
   'Afbeelding toevoegen…': 'Dodaj sliko…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Ni zapisljive mape knjižnice. Dodajte mapo ali prilagodite Shrambo v Nastavitve.',

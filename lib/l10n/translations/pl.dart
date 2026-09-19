@@ -1639,6 +1639,46 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Presentatievorm': 'Format prezentacji',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Wybierz sposób przechodzenia slajdów podczas prezentacji.',
+  'Vrij presenteren': 'Prezentacja swobodna',
+  'Zelf doorgaan': 'Przechodź ręcznie',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Ty decydujesz, kiedy pojawi się następny slajd.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Dwadzieścia slajdów przechodzi automatycznie.',
+  'Twintig dia\'s in een stevig tempo.':
+      'Dwadzieścia slajdów w szybkim tempie.',
+  'Aangepaste timing': 'Niestandardowe czasy',
+  'In de bron ingesteld': 'Ustawiono w źródle',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Pozostanie bez zmian, dopóki nie wybierzesz innego formatu.',
+  'Ignite afgerond': 'Ignite zakończona',
+  'Ignite klaar om te starten': 'Ignite gotowa do rozpoczęcia',
+  'Ignite oefenen': 'Przećwicz Ignite',
+  'Ignite presenteren': 'Prezentuj Ignite',
+  'Ignite-storyboard': 'Scenorys Ignite',
+  'Buiten het format': 'Poza formatem',
+  'GEPAUZEERD': 'WSTRZYMANO',
+  'Hervatten': 'Wznów',
+  'Klaar om te presenteren': 'Gotowe do prezentacji',
+  'PechaKucha afgerond': 'PechaKucha zakończona',
+  'PechaKucha klaar om te starten': 'PechaKucha gotowa do rozpoczęcia',
+  'PechaKucha oefenen': 'Przećwicz PechaKucha',
+  'PechaKucha presenteren': 'Prezentuj PechaKucha',
+  'PechaKucha-storyboard': 'Scenorys PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Spacja wstrzymuje · Escape kończy prezentację',
+  'Start aftellen': 'Rozpocznij odliczanie',
+  'dia\'s': 'slajdy',
+  'handmatig doorgaan uit': 'ręczne przechodzenie wyłączone',
+  'nog nodig': 'jeszcze potrzebne',
+  'ontbreekt': 'brakuje',
+  'sec': 's',
+  'seconden': 'sekundy',
+  'seconden per dia': 'sekundy na slajd',
+  'te veel': 'za dużo',
   'Afbeelding toevoegen…': 'Dodaj obraz…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nie znaleziono zapisywalnego folderu biblioteki. Dodaj folder lub zmień Magazyn w Ustawienia.',

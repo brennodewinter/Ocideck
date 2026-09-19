@@ -1647,6 +1647,45 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Presentatievorm': 'Формат на презентацията',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Изберете как да се сменят слайдовете по време на презентацията.',
+  'Vrij presenteren': 'Свободно представяне',
+  'Zelf doorgaan': 'Ръчно преминаване',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Вие решавате кога да се появи следващият слайд.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Двадесет слайда се сменят автоматично.',
+  'Twintig dia\'s in een stevig tempo.': 'Двадесет слайда в бързо темпо.',
+  'Aangepaste timing': 'Персонализирано време',
+  'In de bron ingesteld': 'Зададено в източника',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Запазва се, докато не изберете друг формат.',
+  'Ignite afgerond': 'Ignite завършена',
+  'Ignite klaar om te starten': 'Ignite е готова за старт',
+  'Ignite oefenen': 'Упражнявай Ignite',
+  'Ignite presenteren': 'Представи Ignite',
+  'Ignite-storyboard': 'Сториборд на Ignite',
+  'Buiten het format': 'Извън формата',
+  'GEPAUZEERD': 'НА ПАУЗА',
+  'Hervatten': 'Продължи',
+  'Klaar om te presenteren': 'Готово за представяне',
+  'PechaKucha afgerond': 'PechaKucha завършена',
+  'PechaKucha klaar om te starten': 'PechaKucha е готова за старт',
+  'PechaKucha oefenen': 'Упражнявай PechaKucha',
+  'PechaKucha presenteren': 'Представи PechaKucha',
+  'PechaKucha-storyboard': 'Сториборд на PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Интервалът поставя на пауза · Escape спира презентацията',
+  'Start aftellen': 'Стартирай отброяването',
+  'dia\'s': 'слайдове',
+  'handmatig doorgaan uit': 'ръчното продължаване е изключено',
+  'nog nodig': 'още са нужни',
+  'ontbreekt': 'липсва',
+  'sec': 'сек',
+  'seconden': 'секунди',
+  'seconden per dia': 'секунди на слайд',
+  'te veel': 'твърде много',
   'Afbeelding toevoegen…': 'Добавяне на изображение…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Няма намерена записваема папка на библиотеката. Добавете папка или променете Съхранение в Настройки.',

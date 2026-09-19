@@ -1633,6 +1633,45 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Presentatievorm': 'Formát prezentácie',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Vyberte, ako sa budú snímky počas prezentácie posúvať.',
+  'Vrij presenteren': 'Voľná prezentácia',
+  'Zelf doorgaan': 'Ručný posun',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Sami určíte, kedy sa zobrazí ďalšia snímka.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Dvadsať snímok sa posúva automaticky.',
+  'Twintig dia\'s in een stevig tempo.': 'Dvadsať snímok v svižnom tempe.',
+  'Aangepaste timing': 'Vlastné časovanie',
+  'In de bron ingesteld': 'Nastavené v zdroji',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Zostane zachované, kým nevyberiete iný formát.',
+  'Ignite afgerond': 'Ignite dokončená',
+  'Ignite klaar om te starten': 'Ignite pripravená na spustenie',
+  'Ignite oefenen': 'Precvičiť Ignite',
+  'Ignite presenteren': 'Prezentovať Ignite',
+  'Ignite-storyboard': 'Scenár Ignite',
+  'Buiten het format': 'Mimo formátu',
+  'GEPAUZEERD': 'POZASTAVENÉ',
+  'Hervatten': 'Pokračovať',
+  'Klaar om te presenteren': 'Pripravené na prezentovanie',
+  'PechaKucha afgerond': 'PechaKucha dokončená',
+  'PechaKucha klaar om te starten': 'PechaKucha pripravená na spustenie',
+  'PechaKucha oefenen': 'Precvičiť PechaKucha',
+  'PechaKucha presenteren': 'Prezentovať PechaKucha',
+  'PechaKucha-storyboard': 'Scenár PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Medzerník pozastaví · Escape ukončí prezentáciu',
+  'Start aftellen': 'Spustiť odpočítavanie',
+  'dia\'s': 'snímky',
+  'handmatig doorgaan uit': 'ručný posun vypnutý',
+  'nog nodig': 'ešte potrebné',
+  'ontbreekt': 'chýba',
+  'sec': 's',
+  'seconden': 'sekundy',
+  'seconden per dia': 'sekúnd na snímku',
+  'te veel': 'priveľa',
   'Afbeelding toevoegen…': 'Pridať obrázok…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nenašiel sa zapisovateľný priečinok knižnice. Pridajte priečinok alebo upravte Úložisko v Nastavenia.',

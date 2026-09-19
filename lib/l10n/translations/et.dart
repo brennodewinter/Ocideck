@@ -1620,6 +1620,45 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Presentatievorm': 'Esitlusvorming',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Vali, kuidas slaidid esitluse ajal edasi liiguvad.',
+  'Vrij presenteren': 'Vaba esitlus',
+  'Zelf doorgaan': 'Liigu käsitsi edasi',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Sina otsustad, millal järgmine slaid ilmub.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Kakskümmend slaidi liiguvad automaatselt edasi.',
+  'Twintig dia\'s in een stevig tempo.': 'Kakskümmend slaidi tempokas rütmis.',
+  'Aangepaste timing': 'Kohandatud ajastus',
+  'In de bron ingesteld': 'Määratud lähtekoodis',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'See säilib, kuni valid teise vormingu.',
+  'Ignite afgerond': 'Ignite lõpetatud',
+  'Ignite klaar om te starten': 'Ignite alustamiseks valmis',
+  'Ignite oefenen': 'Harjuta Ignite’i',
+  'Ignite presenteren': 'Esitle Ignite’i',
+  'Ignite-storyboard': 'Ignite pildistsenaarium',
+  'Buiten het format': 'Väljaspool vormingut',
+  'GEPAUZEERD': 'PAUSIL',
+  'Hervatten': 'Jätka',
+  'Klaar om te presenteren': 'Esitluseks valmis',
+  'PechaKucha afgerond': 'PechaKucha lõpetatud',
+  'PechaKucha klaar om te starten': 'PechaKucha alustamiseks valmis',
+  'PechaKucha oefenen': 'Harjuta PechaKuchat',
+  'PechaKucha presenteren': 'Esitle PechaKuchat',
+  'PechaKucha-storyboard': 'PechaKucha pildistsenaarium',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Tühik paneb pausile · Escape lõpetab esitluse',
+  'Start aftellen': 'Alusta loendurit',
+  'dia\'s': 'slaidid',
+  'handmatig doorgaan uit': 'käsitsi edasiliikumine väljas',
+  'nog nodig': 'veel vaja',
+  'ontbreekt': 'puudub',
+  'sec': 's',
+  'seconden': 'sekundit',
+  'seconden per dia': 'sekundit slaidi kohta',
+  'te veel': 'liiga palju',
   'Afbeelding toevoegen…': 'Lisa pilt…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Kirjutatavat teegi kausta ei leitud. Lisa kaust või muuda Salvestust menüüs Seaded.',

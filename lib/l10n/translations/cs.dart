@@ -1628,6 +1628,45 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Presentatievorm': 'Formát prezentace',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Zvolte, jak se budou snímky během prezentace posouvat.',
+  'Vrij presenteren': 'Volná prezentace',
+  'Zelf doorgaan': 'Ruční posun',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Sami určíte, kdy se zobrazí další snímek.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Dvacet snímků se posouvá automaticky.',
+  'Twintig dia\'s in een stevig tempo.': 'Dvacet snímků ve svižném tempu.',
+  'Aangepaste timing': 'Vlastní časování',
+  'In de bron ingesteld': 'Nastaveno ve zdroji',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Zůstane zachováno, dokud nezvolíte jiný formát.',
+  'Ignite afgerond': 'Ignite dokončena',
+  'Ignite klaar om te starten': 'Ignite připravena ke spuštění',
+  'Ignite oefenen': 'Procvičit Ignite',
+  'Ignite presenteren': 'Prezentovat Ignite',
+  'Ignite-storyboard': 'Scénář Ignite',
+  'Buiten het format': 'Mimo formát',
+  'GEPAUZEERD': 'POZASTAVENO',
+  'Hervatten': 'Pokračovat',
+  'Klaar om te presenteren': 'Připraveno k prezentaci',
+  'PechaKucha afgerond': 'PechaKucha dokončena',
+  'PechaKucha klaar om te starten': 'PechaKucha připravena ke spuštění',
+  'PechaKucha oefenen': 'Procvičit PechaKucha',
+  'PechaKucha presenteren': 'Prezentovat PechaKucha',
+  'PechaKucha-storyboard': 'Scénář PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Mezerník pozastaví · Escape ukončí prezentaci',
+  'Start aftellen': 'Spustit odpočet',
+  'dia\'s': 'snímky',
+  'handmatig doorgaan uit': 'ruční posun vypnutý',
+  'nog nodig': 'ještě potřeba',
+  'ontbreekt': 'chybí',
+  'sec': 's',
+  'seconden': 'sekundy',
+  'seconden per dia': 'sekund na snímek',
+  'te veel': 'příliš mnoho',
   'Afbeelding toevoegen…': 'Přidat obrázek…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nenalezena zapisovatelná složka knihovny. Přidejte složku nebo upravte Úložiště v Nastavení.',

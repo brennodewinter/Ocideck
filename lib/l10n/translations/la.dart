@@ -1642,6 +1642,45 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Presentatievorm': 'Forma praesentationis',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Elige quomodo imagines per praesentationem progrediantur.',
+  'Vrij presenteren': 'Libere praesenta',
+  'Zelf doorgaan': 'Manu progredere',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Tu statuis quando imago proxima appareat.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Viginti imagines automatice progrediuntur.',
+  'Twintig dia\'s in een stevig tempo.': 'Viginti imagines celeri gradu.',
+  'Aangepaste timing': 'Temporum ratio accommodata',
+  'In de bron ingesteld': 'In fonte constituta',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Manet donec aliam formam elegeris.',
+  'Ignite afgerond': 'Ignite perfecta',
+  'Ignite klaar om te starten': 'Ignite parata ad incipiendum',
+  'Ignite oefenen': 'Ignite exerce',
+  'Ignite presenteren': 'Ignite praesenta',
+  'Ignite-storyboard': 'Ignite tabula scaenarum',
+  'Buiten het format': 'Extra formam',
+  'GEPAUZEERD': 'INTERMISSUM',
+  'Hervatten': 'Perge',
+  'Klaar om te presenteren': 'Paratus ad praesentandum',
+  'PechaKucha afgerond': 'PechaKucha perfecta',
+  'PechaKucha klaar om te starten': 'PechaKucha parata ad incipiendum',
+  'PechaKucha oefenen': 'PechaKucha exerce',
+  'PechaKucha presenteren': 'PechaKucha praesenta',
+  'PechaKucha-storyboard': 'PechaKucha tabula scaenarum',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Spatium intermittit · Escape praesentationem sistit',
+  'Start aftellen': 'Numerationem retro incipe',
+  'dia\'s': 'chartae',
+  'handmatig doorgaan uit': 'progressus manualis exstinctus',
+  'nog nodig': 'adhuc necessaria',
+  'ontbreekt': 'deest',
+  'sec': 'sec',
+  'seconden': 'secunda',
+  'seconden per dia': 'secunda per chartam',
+  'te veel': 'nimis multa',
   'Afbeelding toevoegen…': 'Imaginem adde…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Plica bibliothecae scribibilis non inventa. Adde fasciculum aut Mémoriam sub Configuratio muta.',

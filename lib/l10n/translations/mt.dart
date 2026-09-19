@@ -1645,6 +1645,45 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Presentatievorm': 'Format tal-preżentazzjoni',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Agħżel kif jinbidlu s-slajds waqt il-preżentazzjoni.',
+  'Vrij presenteren': 'Ippreżenta liberament',
+  'Zelf doorgaan': 'Għaddi manwalment',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Int tiddeċiedi meta tidher is-slajd li jmiss.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Għoxrin slajd jinbidlu awtomatikament.',
+  'Twintig dia\'s in een stevig tempo.': 'Għoxrin slajd b’ritmu mgħaġġel.',
+  'Aangepaste timing': 'Ħin personalizzat',
+  'In de bron ingesteld': 'Issettjat fis-sors',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Jibqa’ kif inhu sakemm tagħżel format ieħor.',
+  'Ignite afgerond': 'Ignite lesta',
+  'Ignite klaar om te starten': 'Ignite lesta biex tibda',
+  'Ignite oefenen': 'Ipprattika Ignite',
+  'Ignite presenteren': 'Ippreżenta Ignite',
+  'Ignite-storyboard': 'Storyboard ta\' Ignite',
+  'Buiten het format': 'Barra mill-format',
+  'GEPAUZEERD': 'WAQFA',
+  'Hervatten': 'Kompli',
+  'Klaar om te presenteren': 'Lest għall-preżentazzjoni',
+  'PechaKucha afgerond': 'PechaKucha lesta',
+  'PechaKucha klaar om te starten': 'PechaKucha lesta biex tibda',
+  'PechaKucha oefenen': 'Ipprattika PechaKucha',
+  'PechaKucha presenteren': 'Ippreżenta PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard ta\' PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'L-ispazju jwaqqaf temporanjament · Escape twaqqaf il-preżentazzjoni',
+  'Start aftellen': 'Ibda l-għadd lura',
+  'dia\'s': 'slajds',
+  'handmatig doorgaan uit': 'avvanz manwali mitfi',
+  'nog nodig': 'għadhom meħtieġa',
+  'ontbreekt': 'nieqes',
+  'sec': 'sek',
+  'seconden': 'sekondi',
+  'seconden per dia': 'sekondi għal kull slajd',
+  'te veel': 'wisq',
   'Afbeelding toevoegen…': 'Żid immaġni…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'L-ebda kartella tal-librerija li tista\' tiġi miktuba ma nstabet. Żid kartella jew aġġusta l-Ħażna taħt Settings.',

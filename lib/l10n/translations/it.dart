@@ -664,6 +664,45 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Presentatievorm': 'Formato della presentazione',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Scegli come avanzano le diapositive durante la presentazione.',
+  'Vrij presenteren': 'Presentazione libera',
+  'Zelf doorgaan': 'Avanzamento manuale',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Decidi tu quando appare la diapositiva successiva.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Venti diapositive avanzano automaticamente.',
+  'Twintig dia\'s in een stevig tempo.': 'Venti diapositive a ritmo sostenuto.',
+  'Aangepaste timing': 'Tempi personalizzati',
+  'In de bron ingesteld': 'Impostata nel sorgente',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Resta invariata finché non scegli un altro formato.',
+  'Ignite afgerond': 'Ignite completata',
+  'Ignite klaar om te starten': 'Ignite pronta per iniziare',
+  'Ignite oefenen': 'Prova Ignite',
+  'Ignite presenteren': 'Presenta Ignite',
+  'Ignite-storyboard': 'Storyboard Ignite',
+  'Buiten het format': 'Fuori formato',
+  'GEPAUZEERD': 'IN PAUSA',
+  'Hervatten': 'Riprendi',
+  'Klaar om te presenteren': 'Pronto per la presentazione',
+  'PechaKucha afgerond': 'PechaKucha completata',
+  'PechaKucha klaar om te starten': 'PechaKucha pronta per iniziare',
+  'PechaKucha oefenen': 'Prova PechaKucha',
+  'PechaKucha presenteren': 'Presenta PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Spazio mette in pausa · Esc interrompe la presentazione',
+  'Start aftellen': 'Avvia conto alla rovescia',
+  'dia\'s': 'diapositive',
+  'handmatig doorgaan uit': 'avanzamento manuale disattivato',
+  'nog nodig': 'ancora necessari',
+  'ontbreekt': 'mancante',
+  'sec': 'sec',
+  'seconden': 'secondi',
+  'seconden per dia': 'secondi per diapositiva',
+  'te veel': 'troppi',
   'Afbeelding toevoegen…': 'Aggiungi immagine…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nessuna cartella libreria scrivibile trovata. Aggiungi una cartella o modifica Archiviazione in Impostazioni.',

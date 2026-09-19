@@ -1631,6 +1631,45 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Presentatievorm': 'Oblik prezentacije',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Odaberite kako se slajdovi izmjenjuju tijekom prezentacije.',
+  'Vrij presenteren': 'Slobodno prezentiranje',
+  'Zelf doorgaan': 'Ručno nastavljanje',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Sami odlučujete kada će se pojaviti sljedeći slajd.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Dvadeset slajdova izmjenjuje se automatski.',
+  'Twintig dia\'s in een stevig tempo.': 'Dvadeset slajdova u brzom ritmu.',
+  'Aangepaste timing': 'Prilagođeno vrijeme',
+  'In de bron ingesteld': 'Postavljeno u izvornom tekstu',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Ostaje sačuvano dok ne odaberete drugi oblik.',
+  'Ignite afgerond': 'Ignite završena',
+  'Ignite klaar om te starten': 'Ignite spremna za početak',
+  'Ignite oefenen': 'Vježbaj Ignite',
+  'Ignite presenteren': 'Prezentiraj Ignite',
+  'Ignite-storyboard': 'Ignite scenarij',
+  'Buiten het format': 'Izvan formata',
+  'GEPAUZEERD': 'PAUZIRANO',
+  'Hervatten': 'Nastavi',
+  'Klaar om te presenteren': 'Spremno za prezentaciju',
+  'PechaKucha afgerond': 'PechaKucha završena',
+  'PechaKucha klaar om te starten': 'PechaKucha spremna za početak',
+  'PechaKucha oefenen': 'Vježbaj PechaKucha',
+  'PechaKucha presenteren': 'Prezentiraj PechaKucha',
+  'PechaKucha-storyboard': 'PechaKucha scenarij',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Razmaknica pauzira · Escape zaustavlja prezentaciju',
+  'Start aftellen': 'Pokreni odbrojavanje',
+  'dia\'s': 'slajdovi',
+  'handmatig doorgaan uit': 'ručno napredovanje isključeno',
+  'nog nodig': 'još potrebno',
+  'ontbreekt': 'nedostaje',
+  'sec': 's',
+  'seconden': 'sekunde',
+  'seconden per dia': 'sekundi po slajdu',
+  'te veel': 'previše',
   'Afbeelding toevoegen…': 'Dodaj sliku…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nije pronađena mapa knjižnice za pisanje. Dodajte mapu ili prilagodite Pohranu u Postavke.',

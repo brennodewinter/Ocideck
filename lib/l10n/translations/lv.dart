@@ -1625,6 +1625,45 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Presentatievorm': 'Prezentācijas formāts',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Izvēlieties, kā slaidi pāriet prezentācijas laikā.',
+  'Vrij presenteren': 'Brīva prezentēšana',
+  'Zelf doorgaan': 'Pāriet manuāli',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Jūs pats izvēlaties, kad parādās nākamais slaids.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Divdesmit slaidi pāriet automātiski.',
+  'Twintig dia\'s in een stevig tempo.': 'Divdesmit slaidi straujā tempā.',
+  'Aangepaste timing': 'Pielāgots laiks',
+  'In de bron ingesteld': 'Iestatīts avotā',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Tas tiek saglabāts, līdz izvēlaties citu formātu.',
+  'Ignite afgerond': 'Ignite pabeigta',
+  'Ignite klaar om te starten': 'Ignite gatava sākšanai',
+  'Ignite oefenen': 'Izmēģināt Ignite',
+  'Ignite presenteren': 'Prezentēt Ignite',
+  'Ignite-storyboard': 'Ignite scenārijs',
+  'Buiten het format': 'Ārpus formāta',
+  'GEPAUZEERD': 'PAUZE',
+  'Hervatten': 'Turpināt',
+  'Klaar om te presenteren': 'Gatavs prezentēšanai',
+  'PechaKucha afgerond': 'PechaKucha pabeigta',
+  'PechaKucha klaar om te starten': 'PechaKucha gatava sākšanai',
+  'PechaKucha oefenen': 'Izmēģināt PechaKucha',
+  'PechaKucha presenteren': 'Prezentēt PechaKucha',
+  'PechaKucha-storyboard': 'PechaKucha scenārijs',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Atstarpes taustiņš pauzē · Escape aptur prezentāciju',
+  'Start aftellen': 'Sākt atskaiti',
+  'dia\'s': 'slaidi',
+  'handmatig doorgaan uit': 'manuāla pāreja izslēgta',
+  'nog nodig': 'vēl nepieciešams',
+  'ontbreekt': 'trūkst',
+  'sec': 'sek.',
+  'seconden': 'sekundes',
+  'seconden per dia': 'sekundes vienam slaidam',
+  'te veel': 'par daudz',
   'Afbeelding toevoegen…': 'Pievienot attēlu…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nav atrasta rakstāma bibliotēkas mape. Pievienojiet mapi vai pielāgojiet Krātuvi sadaļā Iestatījumi.',

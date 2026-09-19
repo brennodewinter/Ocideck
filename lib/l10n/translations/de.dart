@@ -667,6 +667,45 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Presentatievorm': 'Präsentationsformat',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Wähle, wie die Folien während der Präsentation weiterlaufen.',
+  'Vrij presenteren': 'Frei präsentieren',
+  'Zelf doorgaan': 'Manuell weiter',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Du entscheidest, wann die nächste Folie erscheint.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Zwanzig Folien laufen automatisch weiter.',
+  'Twintig dia\'s in een stevig tempo.': 'Zwanzig Folien in zügigem Tempo.',
+  'Aangepaste timing': 'Benutzerdefinierte Zeitsteuerung',
+  'In de bron ingesteld': 'Im Quelltext festgelegt',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Sie bleibt erhalten, bis du ein anderes Format wählst.',
+  'Ignite afgerond': 'Ignite abgeschlossen',
+  'Ignite klaar om te starten': 'Ignite startbereit',
+  'Ignite oefenen': 'Ignite üben',
+  'Ignite presenteren': 'Ignite präsentieren',
+  'Ignite-storyboard': 'Ignite-Storyboard',
+  'Buiten het format': 'Außerhalb des Formats',
+  'GEPAUZEERD': 'PAUSIERT',
+  'Hervatten': 'Fortsetzen',
+  'Klaar om te presenteren': 'Bereit zum Präsentieren',
+  'PechaKucha afgerond': 'PechaKucha abgeschlossen',
+  'PechaKucha klaar om te starten': 'PechaKucha startbereit',
+  'PechaKucha oefenen': 'PechaKucha üben',
+  'PechaKucha presenteren': 'PechaKucha präsentieren',
+  'PechaKucha-storyboard': 'PechaKucha-Storyboard',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Leertaste pausiert · Escape beendet die Präsentation',
+  'Start aftellen': 'Countdown starten',
+  'dia\'s': 'Folien',
+  'handmatig doorgaan uit': 'manuelles Weiterblättern aus',
+  'nog nodig': 'noch benötigt',
+  'ontbreekt': 'fehlt',
+  'sec': 'Sek.',
+  'seconden': 'Sekunden',
+  'seconden per dia': 'Sekunden pro Folie',
+  'te veel': 'zu viele',
   'Afbeelding toevoegen…': 'Bild hinzufügen…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Kein beschreibbarer Bibliotheksordner gefunden. Füge einen Ordner hinzu oder passe Speicher unter Einstellungen an.',

@@ -12,6 +12,11 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'Ignite',
+  'PechaKucha',
+  // De korte tijdseenheid blijft in het Engels eveneens 'sec'; de overige
+  // talen gebruiken hun eigen afkorting en blijven dus volledig getoetst.
+  'sec',
   'Details',
   'Score',
   'https://leren.example.org',
@@ -256,6 +261,8 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'Ignite',
+  'PechaKucha',
   'Details',
   'Score',
   'https://leren.example.org',

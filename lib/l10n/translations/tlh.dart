@@ -1604,6 +1604,46 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Presentatievorm': 'much ngIq Segh',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'muchtaHvIS Qorwaghmey vIHmeH mIw yIwIv.',
+  'Vrij presenteren': 'tlhabtaHvIS yImuch',
+  'Zelf doorgaan': 'nIteb yIvangqa\'',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Qorwagh veb narghmeH poH Dangu\' SoH.',
+  'Twintig dia\'s gaan automatisch door.':
+      'cha\'maH Qorwaghmey\'e\' leghlu\'be\'lu\'taHvIS vIH.',
+  'Twintig dia\'s in een stevig tempo.':
+      'nom muchlu\'taHvIS cha\'maH Qorwaghmey.',
+  'Aangepaste timing': 'poH SeHmeH mIw le\'',
+  'In de bron ingesteld': 'HalDaq cherlu\'',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'ngIq Segh latlh DawIvpa\' poltaHlu\'.',
+  'Ignite afgerond': 'Ignite rIn',
+  'Ignite klaar om te starten': 'Ignite taghrup',
+  'Ignite oefenen': 'Ignite qeq',
+  'Ignite presenteren': 'Ignite much',
+  'Ignite-storyboard': 'Ignite lut nab',
+  'Buiten het format': 'ngoq HurDaq',
+  'GEPAUZEERD': 'MEVPU\'',
+  'Hervatten': 'taH',
+  'Klaar om te presenteren': 'muchrup',
+  'PechaKucha afgerond': 'PechaKucha rIn',
+  'PechaKucha klaar om te starten': 'PechaKucha taghrup',
+  'PechaKucha oefenen': 'PechaKucha qeq',
+  'PechaKucha presenteren': 'PechaKucha much',
+  'PechaKucha-storyboard': 'PechaKucha lut nab',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'nI\'be\'Ha\'meH Qey yI\'uy · much mevmeH Escape yI\'uy',
+  'Start aftellen': 'mI\'Ha\'choH',
+  'dia\'s': 'much navmey',
+  'handmatig doorgaan uit': 'ghItlhvam vIHmoHmeH ghop lo\'laHbe\'',
+  'nog nodig': 'wej poQlu\'',
+  'ontbreekt': 'Hutlh',
+  'sec': 'lup',
+  'seconden': 'lupmey',
+  'seconden per dia': 'much nav wa\' lupmey',
+  'te veel': '\'Iq',
   'Afbeelding toevoegen…': 'mIllogh chel…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'De\' Qul mIw ghItlhlaHbe\' tu\'lu\'be\'. Daq yIchel pagh Segh chu\' yIchoH.',

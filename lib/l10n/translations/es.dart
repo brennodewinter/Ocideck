@@ -664,6 +664,45 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Presentatievorm': 'Formato de presentación',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Elige cómo avanzan las diapositivas durante la presentación.',
+  'Vrij presenteren': 'Presentación libre',
+  'Zelf doorgaan': 'Avance manual',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Tú decides cuándo aparece la siguiente diapositiva.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Veinte diapositivas avanzan automáticamente.',
+  'Twintig dia\'s in een stevig tempo.': 'Veinte diapositivas a un ritmo ágil.',
+  'Aangepaste timing': 'Temporización personalizada',
+  'In de bron ingesteld': 'Definida en el código fuente',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Se conserva hasta que elijas otro formato.',
+  'Ignite afgerond': 'Ignite finalizada',
+  'Ignite klaar om te starten': 'Ignite lista para comenzar',
+  'Ignite oefenen': 'Practicar Ignite',
+  'Ignite presenteren': 'Presentar Ignite',
+  'Ignite-storyboard': 'Guion gráfico de Ignite',
+  'Buiten het format': 'Fuera del formato',
+  'GEPAUZEERD': 'EN PAUSA',
+  'Hervatten': 'Reanudar',
+  'Klaar om te presenteren': 'Listo para presentar',
+  'PechaKucha afgerond': 'PechaKucha finalizada',
+  'PechaKucha klaar om te starten': 'PechaKucha lista para comenzar',
+  'PechaKucha oefenen': 'Practicar PechaKucha',
+  'PechaKucha presenteren': 'Presentar PechaKucha',
+  'PechaKucha-storyboard': 'Guion gráfico de PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Espacio pausa · Escape detiene la presentación',
+  'Start aftellen': 'Iniciar cuenta atrás',
+  'dia\'s': 'diapositivas',
+  'handmatig doorgaan uit': 'avance manual desactivado',
+  'nog nodig': 'aún necesarios',
+  'ontbreekt': 'falta',
+  'sec': 's',
+  'seconden': 'segundos',
+  'seconden per dia': 'segundos por diapositiva',
+  'te veel': 'demasiados',
   'Afbeelding toevoegen…': 'Añadir imagen…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'No se encontró una carpeta de biblioteca con permiso de escritura. Añade una carpeta o ajusta Almacenamiento en Ajustes.',

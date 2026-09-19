@@ -1630,6 +1630,45 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Presentatievorm': 'Präsentationsformat',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Wähl, wie d Folie während dr Präsentation wiitergönd.',
+  'Vrij presenteren': 'Frei präsentiere',
+  'Zelf doorgaan': 'Sälber wiitergah',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Du bestimmisch, wänn d nöchscht Folie erscheint.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Zwänzg Folie gönd automatisch wiiter.',
+  'Twintig dia\'s in een stevig tempo.': 'Zwänzg Folie i rassigem Tempo.',
+  'Aangepaste timing': 'Aapassti Ziitstüürig',
+  'In de bron ingesteld': 'Im Quelltext feschtgleit',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Si bliibt erhalte, bis du es anders Format wählsch.',
+  'Ignite afgerond': 'Ignite abgeschlossen',
+  'Ignite klaar om te starten': 'Ignite startbereit',
+  'Ignite oefenen': 'Ignite üebe',
+  'Ignite presenteren': 'Ignite präsentiere',
+  'Ignite-storyboard': 'Ignite-Storyboard',
+  'Buiten het format': 'Usserhalb vom Format',
+  'GEPAUZEERD': 'PAUSIERT',
+  'Hervatten': 'Witermache',
+  'Klaar om te presenteren': 'Bereit zum Präsentiere',
+  'PechaKucha afgerond': 'PechaKucha abgeschlossen',
+  'PechaKucha klaar om te starten': 'PechaKucha startbereit',
+  'PechaKucha oefenen': 'PechaKucha üebe',
+  'PechaKucha presenteren': 'PechaKucha präsentiere',
+  'PechaKucha-storyboard': 'PechaKucha-Storyboard',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Leertaste pausiert · Escape beendet d Präsentation',
+  'Start aftellen': 'Countdown starte',
+  'dia\'s': 'Folie',
+  'handmatig doorgaan uit': 'manuells Witerblättere us',
+  'nog nodig': 'no nötig',
+  'ontbreekt': 'fehlt',
+  'sec': 'Sek.',
+  'seconden': 'Sekunde',
+  'seconden per dia': 'Sekunde pro Folie',
+  'te veel': 'z vill',
   'Afbeelding toevoegen…': 'Bild hinzuefüege…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Kein beschriibbare Bibliotheksordner gfunde. Füeg en Ordner dezue oder pass Speicher under Iistellige a.',

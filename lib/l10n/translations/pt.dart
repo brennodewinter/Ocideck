@@ -1655,6 +1655,46 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Presentatievorm': 'Formato da apresentação',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Escolha como os diapositivos avançam durante a apresentação.',
+  'Vrij presenteren': 'Apresentação livre',
+  'Zelf doorgaan': 'Avançar manualmente',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Decide quando aparece o diapositivo seguinte.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Vinte diapositivos avançam automaticamente.',
+  'Twintig dia\'s in een stevig tempo.':
+      'Vinte diapositivos a um ritmo acelerado.',
+  'Aangepaste timing': 'Temporização personalizada',
+  'In de bron ingesteld': 'Definida na fonte',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Mantém-se até escolher outro formato.',
+  'Ignite afgerond': 'Ignite concluída',
+  'Ignite klaar om te starten': 'Ignite pronta para começar',
+  'Ignite oefenen': 'Praticar Ignite',
+  'Ignite presenteren': 'Apresentar Ignite',
+  'Ignite-storyboard': 'Storyboard Ignite',
+  'Buiten het format': 'Fora do formato',
+  'GEPAUZEERD': 'EM PAUSA',
+  'Hervatten': 'Retomar',
+  'Klaar om te presenteren': 'Pronto para apresentar',
+  'PechaKucha afgerond': 'PechaKucha concluída',
+  'PechaKucha klaar om te starten': 'PechaKucha pronta para começar',
+  'PechaKucha oefenen': 'Praticar PechaKucha',
+  'PechaKucha presenteren': 'Apresentar PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Espaço pausa · Escape termina a apresentação',
+  'Start aftellen': 'Iniciar contagem decrescente',
+  'dia\'s': 'diapositivos',
+  'handmatig doorgaan uit': 'avanço manual desativado',
+  'nog nodig': 'ainda necessários',
+  'ontbreekt': 'em falta',
+  'sec': 's',
+  'seconden': 'segundos',
+  'seconden per dia': 'segundos por diapositivo',
+  'te veel': 'demasiados',
   'Afbeelding toevoegen…': 'Adicionar imagem…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nenhuma pasta de biblioteca gravável encontrada. Adicione uma pasta ou ajuste Armazenamento em Definições.',
