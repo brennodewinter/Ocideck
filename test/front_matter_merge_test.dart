@@ -155,6 +155,52 @@ void main() {
       );
     });
 
+    group('een vreemde format-sleutel (Quarto, Pandoc)', () {
+      // `format:` is bewust generiek gekozen zodat een mens het leest, maar
+      // Quarto gebruikt dezelfde sleutel voor zijn uitvoerdoel. Zonder preset
+      // van OciDeck is die regel van de gebruiker en blijft hij staan.
+      test('blijft staan zolang OciDeck geen preset schrijft', () {
+        expect(
+          mergeFrontMatter(
+            original: const ['format: revealjs', 'theme: oud'],
+            generated: const ['theme: nieuw'],
+          ),
+          ['format: revealjs', 'theme: nieuw'],
+        );
+      });
+
+      test('blijft heel als genest blok', () {
+        const quarto = ['format:', '  revealjs:', '    theme: moon'];
+        expect(
+          mergeFrontMatter(
+            original: const [...quarto, 'theme: oud'],
+            generated: const ['theme: nieuw'],
+          ),
+          [...quarto, 'theme: nieuw'],
+        );
+      });
+
+      test('wijkt voor een preset die de gebruiker in OciDeck koos', () {
+        expect(
+          mergeFrontMatter(
+            original: const ['format: revealjs', 'theme: oud'],
+            generated: const ['theme: nieuw', 'format: pechakucha'],
+          ),
+          ['format: pechakucha', 'theme: nieuw'],
+        );
+      });
+
+      test('een uitgezette preset verdwijnt wél', () {
+        expect(
+          mergeFrontMatter(
+            original: const ['format: pechakucha', 'theme: oud'],
+            generated: const ['theme: nieuw'],
+          ),
+          ['theme: nieuw'],
+        );
+      });
+    });
+
     test('de vervolgregels van een eigen sleutel gaan mee met de waarde', () {
       // Half werk is hier erger dan schoon vervangen: een achtergebleven
       // ingesprongen regel is geen geldige YAML meer.
