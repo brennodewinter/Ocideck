@@ -409,9 +409,45 @@ runs only on the machine that built it. To hand the app to anyone else it must b
 signed with a **Developer ID Application** certificate, built with the **hardened
 runtime**, and **notarised** by Apple with the ticket stapled into the bundle —
 otherwise Gatekeeper reports it as "damaged". `make notarize-macos` does the whole
-chain (`scripts/notarize_macos.sh`): clean build → inside-out sign of every
+chain (`scripts/notarize_macos.sh`): clean build → normalise the bundled PDFium
+framework to lower case → check every bundle link → inside-out sign of every
 embedded framework and then the bundle → local signature check → notarise →
-staple → verify the way Gatekeeper does.
+staple → verify the way Gatekeeper does → launch probe.
+
+Three of those steps exist because of v0.6.4, which was signed, notarised and
+stapled — and did not start on macOS 27 (#2115). `pdfium_flutter` links its Swift
+plugin against `-framework PDFium` while Flutter's native-assets step writes the
+same framework as `pdfium.framework`; on a case-insensitive build volume the two
+land in one directory and the bundle ships `PDFium.framework/Versions/A/pdfium`.
+macOS 26 loads that anyway; macOS 27's dyld requires the leaf name of a hardened,
+notarised binary to match exactly and aborts with `Library not loaded:
+@rpath/PDFium.framework/PDFium`.
+
+- **Normalise.** Before signing (renaming breaks the seal), the script renames
+  directory, binary and symlink to `pdfium`, sets `CFBundleExecutable` and the
+  install name to match, and rewrites the load command in the main binary with
+  `install_name_tool -change`. Lower case is the spelling the framework already
+  carries everywhere except that one load command.
+- **Check every bundle link** (`check_bundle_links`). Every `@rpath`,
+  `@executable_path` and `@loader_path` reference in every Mach-O file of the
+  bundle must resolve to a file that exists **with exactly that spelling, per path
+  component**. `test -e` is satisfied by the wrong case on APFS; `find -name`
+  compares against the directory entries themselves and is not, so the check
+  walks component by component. It guards the whole class, not just PDFium: a
+  future plugin that links under one spelling and ships under another fails the
+  release on the build machine, not on a user's Mac.
+  `test/notarize_bundle_links_test.dart` runs the real bash functions against a
+  fixture bundle with a fake `otool`.
+- **Launch probe.** After stapling, the main binary is started directly (not via
+  `open`, so its own exit status is visible), given six seconds, and terminated.
+  A dyld refusal exits non-zero within a second with `Library not loaded` on
+  stderr, which fails the release. Only in a graphical session (`launchctl
+  managername` = `Aqua`; the Mac runner is a LaunchAgent in the user session, so
+  a release build briefly shows a window there); `OCIDECK_SKIP_LAUNCH_PROBE=1`
+  skips it. Be honest about what it proves: on this build machine (macOS 26.6)
+  dyld still loads the faulty v0.6.4 layout, so the probe would not have caught
+  #2115 here — the link check does. The probe stays because a valid signature
+  says nothing about loading.
 
 **One-time setup.**
 
@@ -714,6 +750,16 @@ half-deleted `hooks_runner` cache ten minutes later — as the v0.4.4 run did. C
 the other process and start again. `scripts/notarize_macos.sh` checks the same
 invariant directly (is `.dart_tool` actually gone?) so it also holds when you run
 that script by hand.
+
+Before the password, the chain refuses to start past **known, unmerged fix
+work**: open issues or pull requests carrying the `release-blocker` label, and
+`fix/*` branches on origin whose head is not in `origin/main`. v0.6.5 was cut
+while `fix/pdfium-framework-casing` — the repair for the v0.6.4 launch failure —
+already sat on origin, and nothing in the chain looked (#2115). The tooling
+pre-flight below checks tools, not whether the release is complete; this check
+does. `--ondanks-fixes` lets a run proceed anyway and records that choice in the
+release log; `--resume` skips the check because the content of a running release
+is already fixed. `test/release_auto_pending_fixes_test.dart` pins the behaviour.
 
 Right after the password, a **pre-flight** checks everything the later,
 irreversible steps will need — the forge token, the `mirror` remote, the deploy

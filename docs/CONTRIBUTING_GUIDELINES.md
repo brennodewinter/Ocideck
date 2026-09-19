@@ -143,6 +143,9 @@ labelled with the tracker's own label set:
 - **`triage`** — read but not yet weighed
 - **`accepted`** / **`declined`** / **`needs-info`** / **`duplicate`** — the
   outcome of triage
+- **`release-blocker`** — must land before the next release.
+  `scripts/release_auto.sh` refuses to start while an issue or pull request with
+  this label is open (added after v0.6.5 shipped past an unmerged fix, #2115)
 
 *(Corrected 2026-07-22: this listed `Feature` and `Documentation`, which are not
 labels on this tracker, and omitted `privacy` and the whole triage set.)*
