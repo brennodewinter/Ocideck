@@ -11,14 +11,16 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// De Homebrew-caskgenerator (`scripts/update_homebrew_cask.sh`).
 ///
-/// Bewaakt de drie eigenschappen waar de cask op moet kunnen rekenen, en die
+/// Bewaakt de vier eigenschappen waar de cask op moet kunnen rekenen, en die
 /// stil kapot kunnen gaan:
 ///   1. de gepinde hash komt uit de gepubliceerde `SHA256SUMS`, niet uit een
 ///      herberekening — de cask pint wat de release verstuurde;
 ///   2. de cask is **macOS-only** (Homebrew Cask kent geen Linux-casks) — geen
 ///      `on_linux`/`binary`, en geen `auto_updates` (dat zou `brew upgrade`
 ///      juist onderdrukken; OciDeck werkt zichzelf niet bij);
-///   3. een prerelease-tag levert geen cask op.
+///   3. een prerelease-tag levert geen cask op;
+///   4. de cask sluit een draaiende OciDeck af vóór een upgrade, zodat brew de
+///      bundel niet half vervangt terwijl die in gebruik is.
 void main() {
   late Directory temp;
   late String repoRoot;
@@ -79,6 +81,14 @@ void main() {
     expect(cask, isNot(contains('on_linux')));
     expect(cask, isNot(contains('binary ')));
     expect(cask, isNot(contains('auto_updates')));
+  });
+
+  test('sluit een draaiende app af vóór een upgrade', () {
+    final out = '${temp.path}/ocideck.rb';
+    expect(run('v0.6.5', out, writeSums('0.6.5')).exitCode, 0);
+
+    final cask = File(out).readAsStringSync();
+    expect(cask, contains('uninstall quit: "com.dewinter.ocideck"'));
   });
 
   test('een prerelease-tag levert geen cask op', () {

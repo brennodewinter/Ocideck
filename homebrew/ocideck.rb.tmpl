@@ -8,4 +8,9 @@ cask "ocideck" do
   homepage "https://ocideck.librekat.nl"
 
   app "OciDeck.app"
+
+  # Zonder deze regel vervangt `brew upgrade` de bundel terwijl de app
+  # draait. Dat levert half vervangen frameworks op en een app die pas bij
+  # de volgende start met een dyld-fout stukloopt.
+  uninstall quit: "com.dewinter.ocideck"
 end
