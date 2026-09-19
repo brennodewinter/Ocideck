@@ -1634,6 +1634,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Antraščių lygiai {niveau} kiekvienas turi savo spalvą ({kleur}); stilius žino tik vieną antraštės spalvą.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(rodoma kaip {vervanger}, išsaugota eksportui)',
   'Accent': 'Akcentas',

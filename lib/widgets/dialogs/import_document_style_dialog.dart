@@ -145,6 +145,20 @@ class _ImportDocumentStyleDialogState
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
               ],
+              // De naam bovenaan, niet onder de vouw: bij een echt document
+              // (drie kopkleuren, een titelbladbeeld) scrolde het veld uit
+              // beeld en wist niemand dat de naam te kiezen was.
+              const SizedBox(height: 12),
+              TextField(
+                key: const Key('import-document-style-name'),
+                controller: _name,
+                decoration: InputDecoration(
+                  labelText: l10n.d('Naam van de stijl'),
+                  isDense: true,
+                ),
+                textInputAction: TextInputAction.done,
+                onSubmitted: name.isEmpty ? null : (_) => _saveNew(),
+              ),
               if (style.headingFontFamily != null ||
                   style.bodyFontFamily != null) ...[
                 _sectionTitle(l10n.d('Lettertype')),
@@ -183,19 +197,9 @@ class _ImportDocumentStyleDialogState
               ],
               if (style.losses.isNotEmpty) ...[
                 _sectionTitle(l10n.d('Niet overgenomen')),
-                for (final loss in style.losses)
-                  Text('• ${_lossLabel(l10n, loss)}'),
+                for (final line in _lossLines(l10n, style.losses))
+                  Text('• $line'),
               ],
-              const SizedBox(height: 16),
-              TextField(
-                key: const Key('import-document-style-name'),
-                controller: _name,
-                decoration: InputDecoration(
-                  labelText: l10n.d('Naam van de stijl'),
-                ),
-                textInputAction: TextInputAction.done,
-                onSubmitted: name.isEmpty ? null : (_) => _saveNew(),
-              ),
             ],
           ),
         ),
@@ -347,16 +351,48 @@ class _ImportDocumentStyleDialogState
     };
   }
 
+  /// De verliezen als zinnen; de kopkleuren per niveau als één zin, want
+  /// een Word-sjabloon geeft Kop 2, 5 én 6 een eigen kleur en drie keer
+  /// dezelfde zin leest als drie problemen in plaats van één.
+  List<String> _lossLines(
+    AppLocalizations l10n,
+    List<DocumentStyleLoss> losses,
+  ) {
+    final levels = <String>[];
+    final colors = <String>[];
+    final lines = <String>[];
+    for (final loss in losses) {
+      if (loss.kind == DocumentStyleLossKind.perLevelHeadingColor) {
+        final parts = (loss.detail ?? ':').split(':');
+        levels.add(parts.first);
+        if (parts.length > 1) colors.add(parts[1]);
+      } else {
+        lines.add(_lossLabel(l10n, loss));
+      }
+    }
+    if (levels.isNotEmpty) {
+      final sentence = levels.length == 1
+          ? l10n.d(
+              'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.',
+            )
+          : l10n.d(
+              'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.',
+            );
+      lines.insert(
+        0,
+        sentence
+            .replaceAll('{niveau}', levels.join(', '))
+            .replaceAll('{kleur}', colors.join(', ')),
+      );
+    }
+    return lines;
+  }
+
   String _lossLabel(AppLocalizations l10n, DocumentStyleLoss loss) {
     switch (loss.kind) {
       case DocumentStyleLossKind.perLevelHeadingColor:
-        final parts = (loss.detail ?? ':').split(':');
-        return l10n
-            .d(
-              'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.',
-            )
-            .replaceAll('{niveau}', parts.first)
-            .replaceAll('{kleur}', parts.length > 1 ? parts[1] : '');
+        // Gegroepeerd in [_lossLines]; komt hier niet.
+        return '';
       case DocumentStyleLossKind.titlePageImage:
         return l10n.d(
           'Een afbeelding op alleen het titelblad; die is geen documentlogo.',

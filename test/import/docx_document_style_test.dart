@@ -37,6 +37,24 @@ void main() {
       expect(style.accentColor, isNull);
     });
 
+    test('de titel uit docProps/core.xml is de naamsuggestie', () {
+      expect(convertDocxDetailed(docxStyledFixture()).style.title, isNull);
+      expect(
+        convertDocxDetailed(
+          docxStyledFixture(packageTitle: 'Information security policy'),
+        ).style.title,
+        'Information security policy',
+      );
+      // Een titel alleen maakt van een kaal document geen stijl.
+      expect(
+        convertDocxDetailed(
+          docxStyledFixture(withTheme: false, packageTitle: 'X'),
+        ).style.isEmpty,
+        isFalse,
+        reason: 'de fixture draagt kleuren; de titel doet er niet toe',
+      );
+    });
+
     test('de kale fixture zonder stijlinformatie is leeg', () {
       final style = convertDocxDetailed(docxFixture()).style;
       expect(style.isEmpty, isTrue, reason: '$style');

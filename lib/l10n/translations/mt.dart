@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Il-livelli tal-intestaturi {niveau} kull wieħed għandu l-kulur tiegħu ({kleur}); l-istil jaf kulur wieħed biss tal-intestatura.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(muri bħala {vervanger}, miżmum għall-esportazzjoni)',
   'Accent': 'Aċċent',

@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Τα επίπεδα επικεφαλίδων {niveau} έχουν το καθένα δικό του χρώμα ({kleur})· το στυλ γνωρίζει μόνο ένα χρώμα επικεφαλίδας.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(εμφανίζεται ως {vervanger}, διατηρείται για την εξαγωγή)',
   'Accent': 'Τόνος',

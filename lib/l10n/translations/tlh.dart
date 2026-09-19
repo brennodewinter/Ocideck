@@ -1604,6 +1604,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'nach patlh {niveau} Hoch nguv ghaj ({kleur}); wa\' nach nguv neH Sov motlhghach.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '({vervanger} rur \'anglu\', DoQmeH ngeHvaD pollu\')',
   'Accent': 'DuD',

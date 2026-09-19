@@ -664,6 +664,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Los niveles de encabezado {niveau} tienen cada uno su propio color ({kleur}); el estilo solo conoce un color de encabezado.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(mostrado como {vervanger}, conservado para la exportación)',
   'Accent': 'Acento',

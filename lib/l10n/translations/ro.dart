@@ -1643,6 +1643,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Nivelurile de titlu {niveau} au fiecare propria culoare ({kleur}); stilul cunoaște o singură culoare de titlu.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(afișat ca {vervanger}, păstrat pentru export)',
   'Accent': 'Accent',

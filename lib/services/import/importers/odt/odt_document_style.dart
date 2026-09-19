@@ -96,6 +96,7 @@ SourceDocumentStyle _extractOdtStyle(_OdtContext ctx) {
   }
 
   return SourceDocumentStyle(
+    title: _packageTitle(ctx),
     bodyFontFamily: bodyFont,
     headingFontFamily: headingFont,
     textColor: textColor,
@@ -106,6 +107,14 @@ SourceDocumentStyle _extractOdtStyle(_OdtContext ctx) {
     logoCandidates: logos,
     losses: losses,
   );
+}
+
+/// De titel uit `meta.xml` (`dc:title`), of `null` als die leeg is.
+String? _packageTitle(_OdtContext ctx) {
+  final doc = ctx.readXml('meta.xml');
+  if (doc == null) return null;
+  final title = descendantsLocal(doc, 'title').firstOrNull?.innerText.trim();
+  return title == null || title.isEmpty ? null : title;
 }
 
 void _noteOtherOdtHeadingColors(

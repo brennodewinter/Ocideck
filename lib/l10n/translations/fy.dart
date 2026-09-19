@@ -667,6 +667,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Kopnivo’s {niveau} hawwe elk in eigen kleur ({kleur}); de styl ken ien kopkleur.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(werjûn as {vervanger}, bewarre foar eksport)',
   'Accent': 'Aksint',

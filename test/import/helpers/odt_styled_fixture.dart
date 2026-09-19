@@ -59,8 +59,18 @@ Uint8List odtStyledFixture({
   Uint8List? firstPageLogo,
   Uint8List? bodyRepeatedLogo,
   int bodyRepeatCount = 0,
+  String? packageTitle,
 }) {
   final parts = <String, List<int>>{};
+  if (packageTitle != null) {
+    parts['meta.xml'] = utf8.encode(
+      '<?xml version="1.0" encoding="UTF-8"?>'
+      '<office:document-meta xmlns:office="$_office" '
+      'xmlns:dc="http://purl.org/dc/elements/1.1/">'
+      '<office:meta><dc:title>$packageTitle</dc:title></office:meta>'
+      '</office:document-meta>',
+    );
+  }
   var pictureIndex = 1;
   String addPicture(Uint8List bytes, {String ext = 'png'}) {
     final path = 'Pictures/logo${pictureIndex++}.$ext';

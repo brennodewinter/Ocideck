@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Otsikkotasoilla {niveau} on kullakin oma värinsä ({kleur}); tyyli tuntee vain yhden otsikkovärin.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(näytetään fontilla {vervanger}, säilytetään vientiä varten)',
   'Accent': 'Korostus',

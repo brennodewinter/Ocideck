@@ -1628,6 +1628,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Úrovně nadpisů {niveau} mají každá vlastní barvu ({kleur}); styl zná jen jednu barvu nadpisu.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(zobrazeno jako {vervanger}, zachováno pro export)',
   'Accent': 'Akcent',

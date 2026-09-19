@@ -1657,6 +1657,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Tá a dhath féin ag gach ceann de leibhéil cheannteidil {niveau} ({kleur}); ní aithníonn an stíl ach dath amháin ceannteidil.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(taispeánta mar {vervanger}, coinnithe le haghaidh easpórtála)',
   'Accent': 'Aibhsiú',

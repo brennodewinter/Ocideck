@@ -1620,6 +1620,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Pealkirjatasemetel {niveau} on igaühel oma värv ({kleur}); stiil tunneb ainult ühte pealkirjavärvi.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(kuvatakse kui {vervanger}, ekspordi jaoks säilitatud)',
   'Accent': 'Aktsent',

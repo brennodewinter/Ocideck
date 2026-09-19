@@ -38,6 +38,10 @@ void main() {
     documentHeadingColor: '#123456',
   );
 
+  test('een titel alleen is geen stijl', () {
+    expect(const SourceDocumentStyle(title: 'X').isEmpty, isTrue);
+  });
+
   group('letters', () {
     test('een vreemde letter krijgt een plaatsvervanger en blijft bewaard', () {
       final profile = buildImportedDocumentProfile(

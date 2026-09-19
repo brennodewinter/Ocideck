@@ -1655,6 +1655,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Os níveis de título {niveau} têm cada um a sua própria cor ({kleur}); o estilo conhece apenas uma cor de título.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(mostrado como {vervanger}, guardado para exportação)',
   'Accent': 'Destaque',

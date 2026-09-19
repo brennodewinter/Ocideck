@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Рівні заголовків {niveau} мають кожен свій колір ({kleur}); стиль знає лише один колір заголовка.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(показано як {vervanger}, збережено для експорту)',
   'Accent': 'Акцент',

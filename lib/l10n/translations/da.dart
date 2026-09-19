@@ -1627,6 +1627,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Overskriftsniveauerne {niveau} har hver deres egen farve ({kleur}); typografien kender kun én overskriftsfarve.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(vises som {vervanger}, bevaret til eksport)',
   'Accent': 'Accent',

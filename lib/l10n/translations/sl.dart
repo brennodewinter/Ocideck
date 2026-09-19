@@ -1627,6 +1627,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Ravni naslovov {niveau} imajo vsaka svojo barvo ({kleur}); slog pozna le eno barvo naslova.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(prikazano kot {vervanger}, ohranjeno za izvoz)',
   'Accent': 'Poudarek',

@@ -1631,6 +1631,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Razine naslova {niveau} imaju svaka svoju boju ({kleur}); stil poznaje samo jednu boju naslova.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(prikazano kao {vervanger}, sačuvano za izvoz)',
   'Accent': 'Naglasak',

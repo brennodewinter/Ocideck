@@ -79,8 +79,19 @@ Uint8List docxStyledFixture({
   int bodyRepeatCount = 0,
   FixtureAnchor? bodyAnchor,
   bool svgOnlyFooterLogo = false,
+  String? packageTitle,
 }) {
   final parts = <String, List<int>>{};
+  if (packageTitle != null) {
+    parts['docProps/core.xml'] = _utf8(
+      '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      '<cp:coreProperties '
+      'xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '
+      'xmlns:dc="http://purl.org/dc/elements/1.1/">'
+      '<dc:title>$packageTitle</dc:title><dc:creator>Fixture</dc:creator>'
+      '</cp:coreProperties>',
+    );
+  }
   final docRels = StringBuffer();
   var nextRid = 20;
   String addDocRel(String type, String target) {

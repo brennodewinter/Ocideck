@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Tingkat judul {niveau} masing-masing memiliki warna sendiri ({kleur}); gaya hanya mengenal satu warna judul.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(ditampilkan sebagai {vervanger}, disimpan untuk ekspor)',
   'Accent': 'Aksen',

@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'D Überschriftsebene {niveau} händ jedi en eigeni Farb ({kleur}); de Stil kännt nur eini Überschriftfarb.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(azeigt als {vervanger}, für dr Export bhalte)',
   'Accent': 'Akzänt',

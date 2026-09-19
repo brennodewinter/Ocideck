@@ -130,6 +130,32 @@ void main() {
     container.dispose();
   });
 
+  testWidgets('de naamsuggestie volgt de documenttitel uit het pakket', (
+    tester,
+  ) async {
+    final (container, ctx) = await pump(tester);
+    final done = await startImport(
+      tester,
+      ctx,
+      docxStyledFixture(packageTitle: 'Information security policy'),
+    );
+    expect(
+      tester
+          .widget<TextField>(
+            find.byKey(const Key('import-document-style-name')),
+          )
+          .controller!
+          .text,
+      'Stijl van Information security policy',
+    );
+    // Kop 2 en 3 delen één afwijkende kleur: één regel, enkelvoud.
+    expect(find.textContaining('Kopniveau 2 heeft'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('import-document-style-text-only')));
+    await done;
+    await tester.pump();
+    container.dispose();
+  });
+
   testWidgets('"Alleen tekst" opent het document zonder stijl', (tester) async {
     final (container, ctx) = await pump(tester);
     final before = container.read(settingsProvider).themeProfiles.length;

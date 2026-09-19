@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Gradus titulorum {niveau} singuli suum colorem habent ({kleur}); stilus unum tantum colorem titulorum novit.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(ut {vervanger} monstratum, ad exportationem servatum)',
   'Accent': 'Accentus',

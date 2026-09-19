@@ -667,6 +667,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Die Überschriftenebenen {niveau} haben jeweils eine eigene Farbe ({kleur}); der Stil kennt nur eine Überschriftfarbe.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(angezeigt als {vervanger}, für den Export gespeichert)',
   'Accent': 'Akzent',

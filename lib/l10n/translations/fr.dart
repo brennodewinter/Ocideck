@@ -667,6 +667,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Les niveaux de titre {niveau} ont chacun leur propre couleur ({kleur}) ; le style ne connaît qu’une seule couleur de titre.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(affiché en {vervanger}, conservé pour l\'export)',
   'Accent': 'Accent',

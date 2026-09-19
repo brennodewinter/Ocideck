@@ -4929,7 +4929,8 @@ dialog — **Stijl overnemen?** — shows it before the document opens:
 Taking the style is optional, because it may already exist or be dropped on
 purpose. **Alleen tekst** opens the document without a style. **Stijl
 overnemen** saves a new style profile under the name in the field (*Stijl van
-<title>* by default) and puts `theme: <name>` in the document's front matter,
+<title>* by default, the title being the one the document names itself in its
+properties, else its first heading, else the file name) and puts `theme: <name>` in the document's front matter,
 exactly as the Style button would. When a profile already *is* this house
 style — same fonts, colours, header/footer and the same logo bytes — the dialog
 says so and offers **Bestaande stijl gebruiken**, so importing a second document

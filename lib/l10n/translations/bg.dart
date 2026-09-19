@@ -1647,6 +1647,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Нивата на заглавията {niveau} имат всяко свой собствен цвят ({kleur}); стилът познава само един цвят на заглавие.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(показано като {vervanger}, запазено за експорт)',
   'Accent': 'Акцент',

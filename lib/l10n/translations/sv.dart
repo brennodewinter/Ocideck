@@ -1626,6 +1626,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Rubriknivåerna {niveau} har var sin egen färg ({kleur}); stilen känner bara en rubrikfärg.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(visas som {vervanger}, sparad för export)',
   'Accent': 'Accent',

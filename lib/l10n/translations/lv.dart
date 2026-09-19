@@ -1625,6 +1625,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Virsrakstu līmeņiem {niveau} katram ir sava krāsa ({kleur}); stils pazīst tikai vienu virsraksta krāsu.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(rādīts kā {vervanger}, saglabāts eksportam)',
   'Accent': 'Akcents',

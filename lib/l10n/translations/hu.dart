@@ -1629,6 +1629,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'A(z) {niveau}. címsorszintek mindegyikének saját színe van ({kleur}); a stílus csak egy címsorszínt ismer.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(megjelenítve mint {vervanger}, exporthoz megőrizve)',
   'Accent': 'Kiemelés',

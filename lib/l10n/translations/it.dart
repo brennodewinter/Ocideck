@@ -664,6 +664,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'I livelli di intestazione {niveau} hanno ciascuno un proprio colore ({kleur}); lo stile conosce un solo colore per le intestazioni.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(mostrato come {vervanger}, conservato per l\'esportazione)',
   'Accent': 'Accento',

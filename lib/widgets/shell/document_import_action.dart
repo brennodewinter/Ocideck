@@ -73,7 +73,10 @@ Future<void> importDocument(
       context,
       container,
       result.style,
-      fallbackName: _documentTitle(markdown) ?? stemOfFileName(picked.name),
+      fallbackName:
+          result.style.title ??
+          _documentTitle(markdown) ??
+          stemOfFileName(picked.name),
     );
     if (!context.mounted) return;
     if (styleName != null) {

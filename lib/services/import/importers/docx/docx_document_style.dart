@@ -89,6 +89,7 @@ SourceDocumentStyle _extractDocxStyle(_DocxContext ctx) {
   }
 
   return SourceDocumentStyle(
+    title: _packageTitle(ctx),
     bodyFontFamily: bodyFont,
     headingFontFamily: headingFont,
     textColor: textColor,
@@ -100,6 +101,14 @@ SourceDocumentStyle _extractDocxStyle(_DocxContext ctx) {
     logoCandidates: logos,
     losses: losses,
   );
+}
+
+/// De titel uit `docProps/core.xml` (`dc:title`), of `null` als die leeg is.
+String? _packageTitle(_DocxContext ctx) {
+  final doc = ctx.readXml('docProps/core.xml');
+  if (doc == null) return null;
+  final title = _findLocal(doc, 'title')?.innerText.trim();
+  return title == null || title.isEmpty ? null : title;
 }
 
 void _addLogos(

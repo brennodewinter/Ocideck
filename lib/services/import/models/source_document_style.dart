@@ -113,6 +113,7 @@ class DocumentStyleLoss {
 /// hoeft de gebruiker niet eens te zien.
 class SourceDocumentStyle {
   const SourceDocumentStyle({
+    this.title,
     this.bodyFontFamily,
     this.headingFontFamily,
     this.textColor,
@@ -126,6 +127,11 @@ class SourceDocumentStyle {
   });
 
   static const empty = SourceDocumentStyle();
+
+  /// De titel die het document zichzelf geeft (`dc:title` in de
+  /// pakketmetadata), als suggestie voor de naam van de stijl. Geen stijl
+  /// op zich, dus telt niet mee voor [isEmpty].
+  final String? title;
 
   /// De letter van de lopende tekst, zoals de bron haar noemt.
   final String? bodyFontFamily;

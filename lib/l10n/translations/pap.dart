@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Nivelnan di titulo {niveau} kada un tin su propio koló ({kleur}); e stilo konosé un koló di titulo so.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(mustrá komo {vervanger}, wardá pa eksportashon)',
   'Accent': 'Acento',

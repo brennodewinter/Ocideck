@@ -1639,6 +1639,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Poziomy nagłówków {niveau} mają każdy własny kolor ({kleur}); styl zna tylko jeden kolor nagłówka.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(wyświetlane jako {vervanger}, zachowane do eksportu)',
   'Accent': 'Akcent',

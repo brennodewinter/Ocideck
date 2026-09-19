@@ -36,6 +36,16 @@ void main() {
       );
     });
 
+    test('de titel uit meta.xml is de naamsuggestie', () {
+      expect(convertOdtDetailed(odtStyledFixture()).style.title, isNull);
+      expect(
+        convertOdtDetailed(
+          odtStyledFixture(packageTitle: 'Beleid 2026'),
+        ).style.title,
+        'Beleid 2026',
+      );
+    });
+
     test('de kale fixture is leeg', () {
       expect(convertOdtDetailed(odtFixture()).style.isEmpty, isTrue);
     });

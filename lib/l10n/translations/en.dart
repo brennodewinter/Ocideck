@@ -827,6 +827,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Heading levels {niveau} each have their own colour ({kleur}); the style has one heading colour.',
   '(weergegeven als {vervanger}, bewaard voor export)':
       '(shown as {vervanger}, kept for export)',
   'Accent': 'Accent',
