@@ -29,6 +29,7 @@ import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../state/slide_reorder.dart';
 import '../../theme/app_theme.dart';
+import '../../theme/presenter_palette.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
@@ -748,6 +749,10 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           ),
           const SizedBox(height: 6),
           _buildSearchField(),
+          if (deck.presentationTiming.isTimedPreset) ...[
+            const SizedBox(height: 6),
+            _TimedPresentationStatus(deck: deck),
+          ],
           // "Overslaan"-balk: alleen zichtbaar als er slides overgeslagen
           // worden. Eén klik zet alle markeringen weer uit.
           if (skippedCount > 0) ...[

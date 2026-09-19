@@ -3,6 +3,104 @@
 // live in the main library file. Top-level widgets relocate verbatim.
 part of 'slide_list_panel.dart';
 
+/// Compacte, live gereedheidsmeter voor een strikt tijdformat. De balk woont in de
+/// slidestrook omdat toevoegen en verwijderen daar gebeurt: de terugkoppeling
+/// staat daardoor precies naast de handeling die haar verandert.
+class _TimedPresentationStatus extends StatelessWidget {
+  const _TimedPresentationStatus({required this.deck});
+
+  final Deck deck;
+
+  String _clock(Duration duration) {
+    final minutes = duration.inMinutes;
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final timing = deck.presentationTiming;
+    final formatName = timing.isIgnite
+        ? l10n.d('Ignite')
+        : l10n.d('PechaKucha');
+    final validation = timing.validate(deck.slides.length);
+    final tooMany = validation.excessSlides > 0;
+    final ready = validation.isValid;
+    final color = ready
+        ? PresenterPalette.laserGreen
+        : tooMany
+        ? AppTheme.danger500
+        : AppTheme.amber600;
+    final status = ready
+        ? l10n.d('Klaar om te presenteren')
+        : tooMany
+        ? '${validation.excessSlides} ${l10n.d('te veel')}'
+        : '${validation.missingSlides} ${l10n.d('nog nodig')}';
+    final summary =
+        '${deck.slides.length} / ${validation.requiredSlides}  ·  '
+        '${_clock(validation.currentDuration)} / ${_clock(validation.targetDuration!)}';
+
+    return Semantics(
+      container: true,
+      label: '$formatName, $summary, $status',
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.10),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: color.withValues(alpha: 0.45)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 7),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                ready
+                    ? Icons.check_circle_outline
+                    : tooMany
+                    ? Icons.error_outline
+                    : Icons.timelapse_outlined,
+                size: 16,
+                color: color,
+              ),
+              const SizedBox(width: 7),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '$formatName  ·  $summary',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Theme.of(
+                          context,
+                        ).extension<AppPalette>()!.panelText,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      status,
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// Smalle balk bovenin de slidelijst die toont hoeveel slides overgeslagen
 /// worden, met één knop om alle markeringen ineens te wissen.
 class _SkipBanner extends StatelessWidget {

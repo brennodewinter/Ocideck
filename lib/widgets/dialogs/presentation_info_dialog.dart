@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
+import '../../models/presentation_timing.dart';
 import '../../l10n/app_localizations.dart';
 import '../../state/deck_provider.dart';
 import '../../state/info_safety_provider.dart';
@@ -32,6 +33,7 @@ class PresentationInfo {
   /// De hulpmiddelen die bij het onderzoek zijn gebruikt (MIAUW EIS 4.8.2).
   final List<UsedTool> toolsUsed;
   final int presentationTargetSeconds;
+  final PresentationTimingConfig presentationTiming;
   final bool showRehearsalSummary;
 
   /// 'Alleen afspelen'-vergrendeling. Zie [Deck.playOnly].
@@ -52,6 +54,7 @@ class PresentationInfo {
     this.standardsUsed = const [],
     this.toolsUsed = const [],
     this.presentationTargetSeconds = 0,
+    this.presentationTiming = PresentationTimingConfig.disabled,
     this.showRehearsalSummary = true,
     this.playOnly = false,
     this.styleProfileName,
@@ -83,6 +86,7 @@ Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
     standardsUsed: info.standardsUsed,
     toolsUsed: info.toolsUsed,
     presentationTargetSeconds: info.presentationTargetSeconds,
+    presentationTiming: info.presentationTiming,
     showRehearsalSummary: info.showRehearsalSummary,
     playOnly: info.playOnly,
   );
@@ -154,6 +158,8 @@ class _PresentationInfoDialogState
   late final TextEditingController _tools;
   String _language = '';
   late int _presentationTargetSeconds;
+  late PresentationTimingConfig _presentationTiming;
+  late final PresentationTimingConfig _initialCustomTiming;
   late bool _useCustomTarget;
   late final TextEditingController _customMinutes;
   late bool _showRehearsalSummary;
@@ -178,6 +184,8 @@ class _PresentationInfoDialogState
     );
     _language = widget.deck.language;
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
+    _presentationTiming = widget.deck.presentationTiming;
+    _initialCustomTiming = widget.deck.presentationTiming;
     _useCustomTarget =
         _presentationTargetSeconds > 0 &&
         !_targetSteps.contains(_presentationTargetSeconds);
@@ -223,6 +231,7 @@ class _PresentationInfoDialogState
             .toList(),
         toolsUsed: UsedTool.parseAll(_tools.text),
         presentationTargetSeconds: _presentationTargetSeconds,
+        presentationTiming: _presentationTiming,
         showRehearsalSummary: _showRehearsalSummary,
         playOnly: _playOnly,
         styleProfileName: _profileName,
@@ -262,12 +271,14 @@ class _PresentationInfoDialogState
           ],
         ),
         content: SizedBox(
-          width: 460,
+          width: 620,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                _presentationFormatControl(l10n),
+                const SizedBox(height: 20),
                 _metadataFields(),
                 const SizedBox(height: 16),
                 _styleProfileControl(l10n),
@@ -332,6 +343,118 @@ class _PresentationInfoDialogState
           ElevatedButton(onPressed: _save, child: Text(l10n.t('save'))),
         ],
       ),
+    );
+  }
+
+  /// Deckbrede afspeelvorm als drie direct vergelijkbare kaarten. Dit staat
+  /// boven de metadata: wie alleen een PechaKucha of Ignite wil maken, hoeft
+  /// niet langs auteurs- en rapportvelden te zoeken. Een generieke timing uit
+  /// de bron blijft als vierde, huidige kaart zichtbaar zodat openen en
+  /// opslaan nooit ongemerkt een geavanceerde instelling wist.
+  Widget _presentationFormatControl(AppLocalizations l10n) {
+    final hasCustomTiming =
+        _initialCustomTiming.hasSettings && !_initialCustomTiming.isTimedPreset;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const Icon(Icons.auto_awesome_motion_outlined, size: 20),
+            const SizedBox(width: 8),
+            Text(
+              l10n.d('Presentatievorm'),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          l10n.d('Kies hoe de dia\'s tijdens het presenteren doorgaan.'),
+          style: TextStyle(fontSize: 12, color: AppTheme.slate400),
+        ),
+        const SizedBox(height: 12),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final stacked = constraints.maxWidth < 560;
+            final cards = <Widget>[
+              _PresentationFormatCard(
+                key: const ValueKey('presentation-format-free'),
+                selected: !_presentationTiming.hasSettings,
+                icon: Icons.touch_app_outlined,
+                title: l10n.d('Vrij presenteren'),
+                metric: l10n.d('Zelf doorgaan'),
+                description: l10n.d(
+                  'Je bepaalt zelf wanneer de volgende dia verschijnt.',
+                ),
+                onTap: () => setState(
+                  () => _presentationTiming = PresentationTimingConfig.disabled,
+                ),
+              ),
+              _PresentationFormatCard(
+                key: const ValueKey('presentation-format-pechakucha'),
+                selected: _presentationTiming.isPechaKucha,
+                icon: Icons.view_carousel_outlined,
+                title: l10n.d('PechaKucha'),
+                metric: '20 × 20 ${l10n.d('seconden')} · 6:40',
+                description: l10n.d('Twintig dia\'s gaan automatisch door.'),
+                onTap: () => setState(
+                  () => _presentationTiming =
+                      const PresentationTimingConfig.pechaKuchaPreset(),
+                ),
+              ),
+              _PresentationFormatCard(
+                key: const ValueKey('presentation-format-ignite'),
+                selected: _presentationTiming.isIgnite,
+                icon: Icons.local_fire_department_outlined,
+                title: l10n.d('Ignite'),
+                metric: '20 × 15 ${l10n.d('seconden')} · 5:00',
+                description: l10n.d('Twintig dia\'s in een stevig tempo.'),
+                onTap: () => setState(
+                  () => _presentationTiming =
+                      const PresentationTimingConfig.ignitePreset(),
+                ),
+              ),
+              if (hasCustomTiming)
+                _PresentationFormatCard(
+                  key: const ValueKey('presentation-format-custom'),
+                  selected:
+                      _presentationTiming.hasSettings &&
+                      !_presentationTiming.isTimedPreset,
+                  icon: Icons.code_outlined,
+                  title: l10n.d('Aangepaste timing'),
+                  metric: l10n.d('In de bron ingesteld'),
+                  description: l10n.d(
+                    'Blijft behouden totdat je een andere vorm kiest.',
+                  ),
+                  onTap: () => setState(
+                    () => _presentationTiming = _initialCustomTiming,
+                  ),
+                ),
+            ];
+            if (stacked) {
+              return Column(
+                children: [
+                  for (var i = 0; i < cards.length; i++) ...[
+                    cards[i],
+                    if (i != cards.length - 1) const SizedBox(height: 8),
+                  ],
+                ],
+              );
+            }
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (var i = 0; i < cards.length; i++) ...[
+                  Expanded(child: cards[i]),
+                  if (i != cards.length - 1) const SizedBox(width: 8),
+                ],
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -683,6 +806,122 @@ class _PresentationInfoDialogState
       behavior: HitTestBehavior.translucent,
       onDoubleTap: onDoubleTap,
       child: field,
+    );
+  }
+}
+
+class _PresentationFormatCard extends StatelessWidget {
+  const _PresentationFormatCard({
+    super.key,
+    required this.selected,
+    required this.icon,
+    required this.title,
+    required this.metric,
+    required this.description,
+    required this.onTap,
+  });
+
+  final bool selected;
+  final IconData icon;
+  final String title;
+  final String metric;
+  final String description;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    final border = selected ? scheme.primary : scheme.outlineVariant;
+    final background = selected
+        ? scheme.primaryContainer.withValues(alpha: 0.46)
+        : scheme.surfaceContainerLow;
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: '$title, $metric. $description',
+      child: Material(
+        color: background,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: border, width: selected ? 2 : 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 34,
+                      height: 34,
+                      decoration: BoxDecoration(
+                        color: selected
+                            ? scheme.primary.withValues(alpha: 0.14)
+                            : scheme.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(9),
+                      ),
+                      child: Icon(
+                        icon,
+                        size: 19,
+                        color: selected
+                            ? scheme.primary
+                            : scheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const Spacer(),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 140),
+                      child: Icon(
+                        selected
+                            ? Icons.check_circle
+                            : Icons.radio_button_unchecked,
+                        key: ValueKey(selected),
+                        size: 20,
+                        color: selected ? scheme.primary : scheme.outline,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  metric,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: selected ? scheme.primary : scheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 7),
+                Text(
+                  description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                    height: 1.25,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

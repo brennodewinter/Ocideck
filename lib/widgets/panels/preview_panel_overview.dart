@@ -200,39 +200,63 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
     final numberStarts = numberedListStarts(deck.slides);
     return LayoutBuilder(
       builder: (context, constraints) {
-        _columns = (constraints.maxWidth / 320).floor().clamp(1, 6);
-        return GridView.builder(
-          key: const Key('slide-overview-grid'),
-          padding: const EdgeInsets.all(24),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: _columns,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: 1.52,
-          ),
-          itemCount: deck.slides.length,
-          itemBuilder: (context, index) => _OverviewSlideCard(
-            key: ValueKey('overview-${deck.slides[index].id}'),
-            deck: deck,
-            index: index,
-            selected: editor.selection.contains(index),
-            readOnly: readOnly,
-            settings: settings,
-            scopeCia: scopeCia,
-            numberStart: numberStarts[index],
-            onSelect: () => _select(index),
-            onOpen: () {
-              _select(index);
-              Navigator.pop(context);
-            },
-            onReorder: (oldIndex) => _reorder(oldIndex, index),
-            onMovePrevious: index == 0
-                ? null
-                : () => _reorder(index, index - 1),
-            onMoveNext: index == deck.slides.length - 1
-                ? null
-                : () => _reorder(index, index + 1),
-          ),
+        final timedPreset = deck.presentationTiming.isTimedPreset;
+        _columns = (constraints.maxWidth / (timedPreset ? 280 : 320))
+            .floor()
+            .clamp(1, timedPreset ? 5 : 6);
+        final itemCount = timedPreset
+            ? math.max(
+                deck.slides.length,
+                deck.presentationTiming.requiredSlides!,
+              )
+            : deck.slides.length;
+        return Column(
+          children: [
+            if (timedPreset) _TimedPresentationOverviewHeader(deck: deck),
+            Expanded(
+              child: GridView.builder(
+                key: const Key('slide-overview-grid'),
+                padding: const EdgeInsets.all(24),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: _columns,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  childAspectRatio: 1.52,
+                ),
+                itemCount: itemCount,
+                itemBuilder: (context, index) {
+                  if (index >= deck.slides.length) {
+                    return _MissingTimedPresentationSlide(index: index);
+                  }
+                  return _OverviewSlideCard(
+                    key: ValueKey('overview-${deck.slides[index].id}'),
+                    deck: deck,
+                    index: index,
+                    selected: editor.selection.contains(index),
+                    readOnly: readOnly,
+                    settings: settings,
+                    scopeCia: scopeCia,
+                    numberStart: numberStarts[index],
+                    outsideTimedFormat:
+                        timedPreset &&
+                        index >= (deck.presentationTiming.maxSlides ?? 20),
+                    onSelect: () => _select(index),
+                    onOpen: () {
+                      _select(index);
+                      Navigator.pop(context);
+                    },
+                    onReorder: (oldIndex) => _reorder(oldIndex, index),
+                    onMovePrevious: index == 0
+                        ? null
+                        : () => _reorder(index, index - 1),
+                    onMoveNext: index == deck.slides.length - 1
+                        ? null
+                        : () => _reorder(index, index + 1),
+                  );
+                },
+              ),
+            ),
+          ],
         );
       },
     );
@@ -297,6 +321,133 @@ class _FullDeckPreviewState extends ConsumerState<FullDeckPreview> {
   }
 }
 
+class _TimedPresentationOverviewHeader extends StatelessWidget {
+  const _TimedPresentationOverviewHeader({required this.deck});
+
+  final Deck deck;
+
+  String _clock(Duration duration) {
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '${duration.inMinutes}:$seconds';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final timing = deck.presentationTiming;
+    final validation = timing.validate(deck.slides.length);
+    final formatName = timing.isIgnite
+        ? l10n.d('Ignite-storyboard')
+        : l10n.d('PechaKucha-storyboard');
+    final color = validation.isValid
+        ? PresenterPalette.laserGreen
+        : validation.excessSlides > 0
+        ? Theme.of(context).colorScheme.error
+        : AppTheme.amber600;
+    return Material(
+      color: color.withValues(alpha: 0.08),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        child: Row(
+          children: [
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.14),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Icon(Icons.auto_awesome_motion, color: color, size: 22),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    formatName,
+                    style: const TextStyle(
+                      color: PresenterPalette.text,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    '${validation.requiredSlides} ${l10n.d('dia\'s')} × '
+                    '${timing.slideDuration.inSeconds} ${l10n.d('seconden')}  ·  '
+                    '${_clock(validation.targetDuration!)}',
+                    style: const TextStyle(
+                      color: PresenterPalette.textMuted,
+                      fontFeatures: [FontFeature.tabularFigures()],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              '${deck.slides.length} / ${validation.requiredSlides}',
+              style: TextStyle(
+                color: color,
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+                fontFeatures: const [FontFeature.tabularFigures()],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MissingTimedPresentationSlide extends StatelessWidget {
+  const _MissingTimedPresentationSlide({required this.index});
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final colorScheme = Theme.of(context).colorScheme;
+    return Semantics(
+      label: '${l10n.d('Slide')} ${index + 1}, ${l10n.d('ontbreekt')}',
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: colorScheme.surfaceContainerLow,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: colorScheme.outlineVariant,
+            width: 2,
+            strokeAlign: BorderSide.strokeAlignInside,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.add_photo_alternate_outlined,
+                color: colorScheme.onSurfaceVariant,
+                size: 30,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '${(index + 1).toString().padLeft(2, '0')}  ·  ${l10n.d('ontbreekt')}',
+                style: TextStyle(
+                  color: colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _OverviewSlideCard extends StatelessWidget {
   const _OverviewSlideCard({
     super.key,
@@ -312,6 +463,7 @@ class _OverviewSlideCard extends StatelessWidget {
     required this.onReorder,
     required this.onMovePrevious,
     required this.onMoveNext,
+    this.outsideTimedFormat = false,
   });
 
   final Deck deck;
@@ -326,6 +478,7 @@ class _OverviewSlideCard extends StatelessWidget {
   final ValueChanged<int> onReorder;
   final VoidCallback? onMovePrevious;
   final VoidCallback? onMoveNext;
+  final bool outsideTimedFormat;
 
   Map<CustomSemanticsAction, VoidCallback> _semanticActions(
     AppLocalizations l10n,
@@ -426,7 +579,9 @@ class _OverviewSlideCard extends StatelessWidget {
       builder: (context, candidates, rejected) {
         final targeted = candidates.isNotEmpty;
         final colorScheme = Theme.of(context).colorScheme;
-        final borderColor = targeted
+        final borderColor = outsideTimedFormat
+            ? Theme.of(context).colorScheme.error
+            : targeted
             ? AppTheme.accent
             : selected
             ? colorScheme.primary
@@ -458,46 +613,75 @@ class _OverviewSlideCard extends StatelessWidget {
                 ],
               ),
               clipBehavior: Clip.antiAlias,
-              child: Column(
+              child: Stack(
                 children: [
-                  Expanded(
-                    child: ExcludeSemantics(
-                      child: RepaintBoundary(
-                        child: SlidePreviewWidget(
-                          slide: slide,
-                          projectPath: deck.projectPath,
-                          themeProfile: deck.themeProfile,
-                          deckMarpStyle: deck.marpStyle,
-                          cockpitColorScheme: settings.cockpitColorScheme,
-                          allowRemoteMedia: settings.allowRemoteMedia,
-                          slideNumber: index + 1,
-                          slideCount: deck.slides.length,
-                          fitScaleOverride: sharedSplitFitScale(
-                            deck.slides,
-                            index,
-                            deck.themeProfile,
-                            deck.themeProfile.fontFamily,
+                  Column(
+                    children: [
+                      Expanded(
+                        child: ExcludeSemantics(
+                          child: RepaintBoundary(
+                            child: SlidePreviewWidget(
+                              slide: slide,
+                              projectPath: deck.projectPath,
+                              themeProfile: deck.themeProfile,
+                              deckMarpStyle: deck.marpStyle,
+                              cockpitColorScheme: settings.cockpitColorScheme,
+                              allowRemoteMedia: settings.allowRemoteMedia,
+                              slideNumber: index + 1,
+                              slideCount: deck.slides.length,
+                              fitScaleOverride: sharedSplitFitScale(
+                                deck.slides,
+                                index,
+                                deck.themeProfile,
+                                deck.themeProfile.fontFamily,
+                              ),
+                              splitRunPosition: splitRunPositionFor(
+                                deck.slides,
+                                index,
+                              ),
+                              numberStart: numberStart,
+                              scopeCia: scopeCia,
+                              reportLanguage: deck.language,
+                              improvementY01: deck.improvementY01Metric,
+                              tlp: deck.tlp,
+                              organization: deck.organization,
+                              deckSignature: deck.signature,
+                              sealedAt: deck.finalized ? deck.sealAt : '',
+                              showClassificationWatermark:
+                                  settings.classificationWatermarkEnabled,
+                              decodeMaxEdge: 512,
+                            ),
                           ),
-                          splitRunPosition: splitRunPositionFor(
-                            deck.slides,
-                            index,
+                        ),
+                      ),
+                      _footer(context, title, colorScheme),
+                    ],
+                  ),
+                  if (outsideTimedFormat)
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: colorScheme.errorContainer,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
                           ),
-                          numberStart: numberStart,
-                          scopeCia: scopeCia,
-                          reportLanguage: deck.language,
-                          improvementY01: deck.improvementY01Metric,
-                          tlp: deck.tlp,
-                          organization: deck.organization,
-                          deckSignature: deck.signature,
-                          sealedAt: deck.finalized ? deck.sealAt : '',
-                          showClassificationWatermark:
-                              settings.classificationWatermarkEnabled,
-                          decodeMaxEdge: 512,
+                          child: Text(
+                            l10n.d('Buiten het format'),
+                            style: TextStyle(
+                              color: colorScheme.onErrorContainer,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  _footer(context, title, colorScheme),
                 ],
               ),
             ),
