@@ -53,6 +53,11 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   }
 
   void _scheduleAdvance() {
+    if (widget.presentationTiming.enabled) {
+      _precacheNeighbours();
+      _onSlideShown();
+      return;
+    }
     // Funnel point for every navigation (next/prev/jump/auto) and the initial
     // frame, so neighbour images are always warm before they are shown.
     _precacheNeighbours();
@@ -98,6 +103,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   /// of bij herhaling vanaf de laatste terug naar de eerste. Zonder herhaling
   /// blijft de laatste slide gewoon staan.
   void _autoAdvance() {
+    if (widget.presentationTiming.enabled) return;
     if (_blank != _Blank.none || _tableEditMode) return;
     final plan = _richTextPlanFor(_currentSlide);
     if (plan != null && _richTextPage < plan.pageCount - 1) {
@@ -137,6 +143,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   }
 
   void _onMediaCompleted({int? index, String? kind}) {
+    if (widget.presentationTiming.enabled) return;
     if (index != null && index != _index) return;
     final slide = widget.slides[_index.clamp(0, widget.slides.length - 1)];
     // A video is primary on a video slide. Ignore an attached audio track that

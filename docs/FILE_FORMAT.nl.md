@@ -4,7 +4,7 @@
 
 # OciDeck — Bestandsformaat
 
-> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-08-19 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** specificatie van het bestandsformaat op schijf — het stabiele contract · **Status laatst nagekeken:** 2026-09-18 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -277,6 +277,8 @@ het bestand. Zie §6.6 voor waarom dat veranderd is.)
 | `standards` | string | Standaarden waartegen de test is uitgevoerd, kommagescheiden als `name@version` (bijv. `OWASP WSTG@4.2`). MIAUW EIS 4.3.2. De **versie is hier bewust bevroren**: een rapport is een vastlegging van wat daadwerkelijk is gebruikt, dus het heropenen in een build die een nieuwere standaard meelevert, mag de nieuwe versie niet stilletjes herformuleren. |
 | `tool` | string | Eén **per regel, herhaald**, als `name@version \| url \| description` (bijv. `Burp Suite@2026.4 \| https://portswigger.net \| Web proxy`). De gereedschappen die tijdens de test zijn gebruikt — MIAUW EIS 4.8.2 (.1 beschrijving, .2 versie, .3 openbare verwijzing). Een andere lijst dan `standards`: dit zijn de gereedschappen van de tester, niet de standaarden waartegen is getest. Alleen de naam is verplicht; de rest kan later worden ingevuld. |
 | `tlp` | enum | Traffic Light Protocol-niveau (§3.1). Alleen geschreven wanneer niet `none`. |
+| `format` | string/afwezig | Benoemde preset voor presentatietiming. De herkende waarden zijn `pechakucha` (20 dia's × 20 seconden) en `ignite` (20 dia's × 15 seconden), niet hoofdlettergevoelig. Een onbekende waarde heeft geen timingseffect en blijft bij opslaan behouden. |
+| `timing` | genest blok/afwezig | Generieke instellingen voor een getimede presentatie. De herkende onderliggende velden staan hieronder. Wordt niet geschreven wanneer alle instellingen hun standaardwaarde hebben; een herkende strikte `format:`-preset wint. |
 | `ocideck_target_seconds` | int | Doelduur voor het aftellen van de presentator, in seconden. Alleen geschreven wanneer `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/afwezig | Afmelden voor de tijdsamenvatting na de presentatie. Standaard (getoond) blijft uit het bestand; alleen `false` wordt geschreven. Wordt overschreven door `ocideck_play_only`: een alleen-afspelen-deck toont de samenvatting nooit, wat deze sleutel ook zegt. |
 | `ocideck_play_only` | `true`/afwezig | Alleen-afspelen-vergrendeling. Wanneer `true`, opent het deck vergrendeld: geen editor, werkbalk, menu's of export — alleen de eerste slide met een afspeelknop, schermvullend gepresenteerd. Het deck sluiten herstelt het normale bewerken. Standaard (ontgrendeld) blijft uit het bestand; alleen `true` wordt geschreven. Deze sleutel verwijderen ontgrendelt het deck. |
@@ -288,6 +290,56 @@ het bestand. Zie §6.6 voor waarom dat veranderd is.)
 | `ocideck_improvement_y01_target` | number/afwezig | Procesdoel voor Y-01. |
 | `ocideck_improvement_y01_baseline` | number/afwezig | Basislijnwaarde voor Y-01 (projectcharter). |
 | `ocideck_improvement_y01_goal` | number/afwezig | Doelwaarde voor Y-01 (projectcharter). |
+
+**Getimede presentaties.** De compacte vaste vormen zijn:
+
+```yaml
+format: pechakucha
+```
+
+of:
+
+```yaml
+format: ignite
+```
+
+PechaKucha wordt één onveranderlijke configuratie: `autoplay: true`,
+`slide-duration: 20s`, `max-slides: 20`, `required-slides: 20`,
+`stop-after-last-slide: true` en `manual-advance: false`. De doelduur is dus
+6:40. Ignite heeft dezelfde onveranderlijke bediening en hetzelfde aantal dia's,
+maar `slide-duration: 15s`; de doelduur is daardoor 5:00. Een deck met minder of
+meer dan twintig geschreven dia's opent gewoon en blijft bewerkbaar; de
+markdowncontrole geeft een waarschuwing bij de `format:`-regel. Staan een
+herkende `format:` en `timing:` allebei in het bestand, dan wint de preset. Bij de
+volgende opslag schrijft OciDeck alleen het herkende `format:`-token, zodat een
+generiek onderliggend veld het benoemde format niet stilletjes kan afzwakken.
+
+Zonder benoemde preset ziet de generieke vorm er zo uit:
+
+```yaml
+timing:
+  autoplay: true
+  slide-duration: 30s
+  max-slides: 12
+  required-slides: 10
+  stop-after-last-slide: true
+  manual-advance: false
+```
+
+| Onderliggend veld | Type/standaard | Betekenis |
+| --- | --- | --- |
+| `autoplay` | boolean, `false` | Schakelt de getimede runtime in wanneer `slide-duration` ook groter dan nul is. |
+| `slide-duration` | duur, `0` | Tijd per dia. Toegestane achtervoegsels zijn `ms`, `s` en `m`; decimalen zijn toegestaan (`1.5s`). Een ontbrekende of ongeldige waarde wordt nul, waardoor getimed afspelen uit blijft. |
+| `max-slides` | positief geheel getal/afwezig | Maximumaantal dia's in de validatie en bovengrens van het effectieve aantal dia's in de getimede run. Nul, een negatieve waarde en niet-numerieke tekst tellen als afwezig. |
+| `required-slides` | positief geheel getal/afwezig | Vereist aantal dia's voor de validatie van ontbrekende dia's en de getoonde doelduur. Ongeldige/niet-positieve waarden tellen als afwezig. |
+| `stop-after-last-slide` | boolean, `false` | Markeert de getimede run na zijn effectieve totale duur als afgerond in plaats van op de laatste dia te blijven staan. |
+| `manual-advance` | boolean, `true` | Bij `false` kunnen volgende/vorige-paden van de presentator (ook aanwijzer- en clickeracties) het deck niet verplaatsen. Een getimede sessie reserveert zijn eigen toetsen ook wanneer dit `true` is. |
+
+De schrijver neemt `autoplay`, `stop-after-last-slide` en `manual-advance`
+altijd op in een niet-leeg generiek blok. Een duur van nul en afwezige
+dialimieten laat hij weg. De runtime begint op dia 1, toont een afzonderlijke
+3‑2‑1-aftelling, leidt de huidige dia af uit monotoon verstreken tijd en telt
+gepauzeerde tijd niet mee.
 
 **Migratie (Y-01).** Een deck dat alleen `ocideck_improvement_y01` heeft (naam, geen
 limietsleutels) blijft voor altijd geldig; ontbrekende limietsleutels betekenen `null`.
@@ -304,7 +356,10 @@ Metadatavelden worden alleen geschreven wanneer ze niet leeg zijn. Tekst wordt g
 YAML-scalar en alleen tussen aanhalingstekens gezet wanneer dat nodig is (lege waarde, voor-/
 achterliggende witruimte, speciale tekens zoals `: # "`, of een YAML-indicator aan het
 begin). OciDeck gebruikt bij het lezen geen volledige YAML-parser; het gebruikt een eenvoudige
-parser die regel voor regel werkt, dus houd de front matter plat (één sleutel per regel).
+parser die regel voor regel werkt. Zet velden die OciDeck moet begrijpen op het
+hoogste niveau, één sleutel per regel. De geneste structuren die OciDeck zelf
+bezit zijn `timing` en `ocideck_callouts`; andere geneste blokken blijven volgens
+regel 1 behouden, maar worden niet uitgelegd.
 
 De lokale vormen van de vijf visuele Marp-sleutels (`_color`,
 `_backgroundColor`, `_backgroundImage`, `_header`, `_footer`) worden uit een
@@ -3246,6 +3301,7 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 | **Front matter** | waarschuwing | Regel zonder `key: value`-vorm. |
 | **Front matter** | waarschuwing | Sleutel die OciDeck niet kent: heeft geen effect, maar blijft bij het opslaan behouden (§3.0). |
 | **Front matter** | fout | Onbekende `tlp:`-waarde. |
+| **Presentatietiming** | waarschuwing | Het ingelezen deck heeft minder `required-slides` of meer `max-slides` dan zijn `format:`-/`timing:`-configuratie toestaat. Voor PechaKucha en Ignite is elk aantal anders dan twintig een waarschuwing; bewerken blijft mogelijk. |
 | **Commentaar** | fout | `<!--` zonder `-->` op dezelfde regel. |
 | **Commentaar** | waarschuwing | Commentaar zonder `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:` of `advance:`. |
 | **Commentaar** | waarschuwing | Een kale Marp-richtlijn (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck modelleert die niet, dus de hele slide blijft vrije Markdown en krijgt geen slidetype (§8, §9). *(Toegevoegd 2026-08-27, #1815 — deze terugval gebeurde eerder zonder één woord uitleg.)* |

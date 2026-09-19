@@ -137,6 +137,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(PresentationInfoDialog), findsOneWidget);
+    expect(find.text('Presentatievorm'), findsOneWidget);
   });
 
   testWidgets('the overflow menu opens the command palette', (tester) async {

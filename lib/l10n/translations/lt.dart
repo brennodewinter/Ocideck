@@ -1634,6 +1634,45 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Presentatievorm': 'Pateikties formatas',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Pasirinkite, kaip skaidrės keičiamos pristatymo metu.',
+  'Vrij presenteren': 'Laisvas pristatymas',
+  'Zelf doorgaan': 'Keisti rankiniu būdu',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Jūs nusprendžiate, kada pasirodys kita skaidrė.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Dvidešimt skaidrių keičiamos automatiškai.',
+  'Twintig dia\'s in een stevig tempo.': 'Dvidešimt skaidrių sparčiu tempu.',
+  'Aangepaste timing': 'Pasirinktinis laikas',
+  'In de bron ingesteld': 'Nustatyta šaltinyje',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Išlieka, kol pasirenkate kitą formatą.',
+  'Ignite afgerond': 'Ignite baigta',
+  'Ignite klaar om te starten': 'Ignite paruošta pradėti',
+  'Ignite oefenen': 'Repetuoti Ignite',
+  'Ignite presenteren': 'Pristatyti Ignite',
+  'Ignite-storyboard': 'Ignite siužetinė schema',
+  'Buiten het format': 'Už formato ribų',
+  'GEPAUZEERD': 'PRISTABDYTA',
+  'Hervatten': 'Tęsti',
+  'Klaar om te presenteren': 'Paruošta pristatyti',
+  'PechaKucha afgerond': 'PechaKucha baigta',
+  'PechaKucha klaar om te starten': 'PechaKucha paruošta pradėti',
+  'PechaKucha oefenen': 'Repetuoti PechaKucha',
+  'PechaKucha presenteren': 'Pristatyti PechaKucha',
+  'PechaKucha-storyboard': 'PechaKucha siužetinė schema',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Tarpo klavišas pristabdo · Escape sustabdo pristatymą',
+  'Start aftellen': 'Pradėti atgalinį skaičiavimą',
+  'dia\'s': 'skaidrės',
+  'handmatig doorgaan uit': 'rankinis perėjimas išjungtas',
+  'nog nodig': 'dar reikia',
+  'ontbreekt': 'trūksta',
+  'sec': 'sek.',
+  'seconden': 'sekundės',
+  'seconden per dia': 'sekundžių skaidrei',
+  'te veel': 'per daug',
   'Afbeelding toevoegen…': 'Pridėti vaizdą…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nerastas įrašomas bibliotekos aplankas. Pridėkite aplanką arba keiskite Saugyklą skiltyje Nustatymai.',

@@ -827,6 +827,45 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Presentatievorm': 'Presentation format',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Choose how slides advance during the presentation.',
+  'Vrij presenteren': 'Present freely',
+  'Zelf doorgaan': 'Advance manually',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'You decide when the next slide appears.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Twenty slides advance automatically.',
+  'Twintig dia\'s in een stevig tempo.': 'Twenty slides at a brisk pace.',
+  'Aangepaste timing': 'Custom timing',
+  'In de bron ingesteld': 'Set in the source',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'It stays in place until you choose another format.',
+  'Ignite afgerond': 'Ignite complete',
+  'Ignite klaar om te starten': 'Ignite ready to start',
+  'Ignite oefenen': 'Practice Ignite',
+  'Ignite presenteren': 'Present Ignite',
+  'Ignite-storyboard': 'Ignite storyboard',
+  'Buiten het format': 'Outside the format',
+  'GEPAUZEERD': 'PAUSED',
+  'Hervatten': 'Resume',
+  'Klaar om te presenteren': 'Ready to present',
+  'PechaKucha afgerond': 'PechaKucha complete',
+  'PechaKucha klaar om te starten': 'PechaKucha ready to start',
+  'PechaKucha oefenen': 'Practice PechaKucha',
+  'PechaKucha presenteren': 'Present PechaKucha',
+  'PechaKucha-storyboard': 'PechaKucha storyboard',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Space pauses · Escape stops the presentation',
+  'Start aftellen': 'Start countdown',
+  'dia\'s': 'slides',
+  'handmatig doorgaan uit': 'manual advance off',
+  'nog nodig': 'still needed',
+  'ontbreekt': 'missing',
+  'sec': 'sec',
+  'seconden': 'seconds',
+  'seconden per dia': 'seconds per slide',
+  'te veel': 'too many',
   'Afbeelding toevoegen…': 'Add image…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'No writable library folder found. Add a folder or adjust Storage under Settings.',

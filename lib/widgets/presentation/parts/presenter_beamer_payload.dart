@@ -9,7 +9,58 @@ typedef _AudienceSyncSnapshot = ({
   int stepIndex,
   int menuCategory,
   double timelineView,
+  int timedPhase,
+  int countdown,
 });
+
+void _syncPresenterAudience(
+  _FullscreenPresenterState state, {
+  bool force = false,
+}) {
+  if (state.widget.audience?.controller == null) return;
+  final snapshot = (
+    index: state._index,
+    blank: state._blankCode,
+    richTextPage: state._richTextPage,
+    stepIndex: state._stepIndex,
+    menuCategory: state._menuCategory,
+    timelineView: state._timelineSync.controller.fraction,
+    timedPhase: state.widget.presentationTiming.enabled
+        ? state._timedSession.phase.index
+        : -1,
+    countdown: state._timedSession.countdown,
+  );
+  final indexChanged = state._audienceSync.indexChanged(snapshot);
+  if (!state._audienceSync.begin(snapshot, force: force)) return;
+  audienceChannel
+      .invokeMethod('update', {
+        'seq': state._audienceSync.nextSequence,
+        'index': snapshot.index,
+        'blank': snapshot.blank,
+        'richTextPage': snapshot.richTextPage,
+        'stepIndex': snapshot.stepIndex,
+        'menuCategory': snapshot.menuCategory,
+        'timelineView': snapshot.timelineView,
+        'timedPhase': snapshot.timedPhase,
+        'countdown': snapshot.countdown,
+      })
+      .then<void>((_) => state._audienceSync.delivered())
+      .catchError((Object error) {
+        logWarning('FullscreenPresenter: audience window sync failed', error);
+        if (state.mounted) {
+          state._audienceSync.failed(
+            snapshot,
+            error,
+            () => state._syncAudience(),
+          );
+        }
+        return null;
+      });
+  if (!indexChanged) return;
+  state._chartHover.setLocal(null);
+  state._chartHover.setExternal(null);
+  state._pushInk();
+}
 
 /// Houdt verzendstatus en een begrensde snelle herkansing voor de beamer bij.
 ///
@@ -243,4 +294,113 @@ ChartHover? _sendChartHover({
         return null;
       });
   return hover;
+}
+
+String _dualWindowArguments({
+  required List<Slide> slides,
+  required String? projectPath,
+  required int initialIndex,
+  required TlpLevel tlp,
+  required String organization,
+  required String reportLanguage,
+  required ImprovementY01Metric improvementY01,
+  required Map<String, List<InkStroke>> annotations,
+  required bool showClassificationWatermark,
+  required bool allowRemoteMedia,
+  required ThemeProfile themeProfile,
+  required MarpStyle marpStyle,
+  required CockpitColorScheme cockpitColorScheme,
+}) => _audienceWindowArguments(
+  markdown: buildBeamerMarkdown(
+    slides: slides,
+    projectPath: projectPath,
+    tlp: tlp,
+    organization: organization,
+    reportLanguage: reportLanguage,
+    improvementY01: improvementY01,
+  ),
+  projectPath: projectPath,
+  initialIndex: initialIndex,
+  inkByIndex: FullscreenPresenter._annotationsBySlideIndex(slides, annotations),
+  showClassificationWatermark: showClassificationWatermark,
+  allowRemoteMedia: allowRemoteMedia,
+  themeProfile: themeProfile,
+  marpStyle: marpStyle,
+  cockpitColorScheme: cockpitColorScheme,
+);
+
+Future<String?> _runDualPresenter(
+  BuildContext context, {
+  required AudienceWindowHandle audienceHandle,
+  required List<Slide> slides,
+  required String? projectPath,
+  required ThemeProfile themeProfile,
+  required MarpStyle marpStyle,
+  required CockpitColorScheme cockpitColorScheme,
+  required int initialIndex,
+  required TlpLevel tlp,
+  required String organization,
+  required String reportLanguage,
+  required bool showClassificationWatermark,
+  required bool allowRemoteMedia,
+  required Duration? targetDuration,
+  required bool showRehearsalSummary,
+  required bool playOnly,
+  required PresentationTimingConfig presentationTiming,
+  required bool rehearsalMode,
+  required Map<String, List<InkStroke>> annotations,
+  required void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
+  required ValueChanged<Slide>? onSlideChanged,
+  required ValueChanged<String>? onSlideSplit,
+  required ValueChanged<Slide>? onSessionEdit,
+  required Future<void> Function(PlaybackReport report)? onPlaybackFinished,
+  required Map<String, String> initialUserNotes,
+  required void Function(Map<String, String>)? onUserNotesChanged,
+  required ImprovementY01Metric improvementY01,
+}) async {
+  final hadWakeLock = await _wakeLockEnabled();
+  await _enableWakeLock();
+  try {
+    if (!context.mounted) return null;
+    return await Navigator.push<String>(
+      context,
+      PageRouteBuilder<String>(
+        opaque: true,
+        pageBuilder: (context, anim, anim2) => FullscreenPresenter(
+          slides: slides,
+          projectPath: projectPath,
+          themeProfile: themeProfile,
+          marpStyle: marpStyle,
+          cockpitColorScheme: cockpitColorScheme,
+          initialIndex: initialIndex,
+          tlp: tlp,
+          organization: organization,
+          reportLanguage: reportLanguage,
+          showClassificationWatermark: showClassificationWatermark,
+          allowRemoteMedia: allowRemoteMedia,
+          targetDuration: targetDuration,
+          showRehearsalSummary: showRehearsalSummary,
+          playOnly: playOnly,
+          presentationTiming: presentationTiming,
+          rehearsalMode: rehearsalMode,
+          audience: audienceHandle,
+          initialAnnotations: annotations,
+          onAnnotationsChanged: onAnnotationsChanged,
+          onSlideChanged: onSlideChanged,
+          onSlideSplit: onSlideSplit,
+          onSessionEdit: onSessionEdit,
+          onPlaybackFinished: onPlaybackFinished,
+          initialUserNotes: initialUserNotes,
+          onUserNotesChanged: onUserNotesChanged,
+          improvementY01: improvementY01,
+        ),
+        transitionsBuilder: (context, animation, secondary, child) =>
+            FadeTransition(opacity: animation, child: child),
+        transitionDuration: const Duration(milliseconds: 200),
+      ),
+    );
+  } finally {
+    await _restoreWakeLock(hadWakeLock);
+    await audienceHandle.close();
+  }
 }

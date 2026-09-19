@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/presentation_timing.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
@@ -38,6 +39,31 @@ ProviderContainer _deck() {
     ),
     Slide.create(SlideType.section).copyWith(title: 'Vragen'),
   ]);
+  return container;
+}
+
+ProviderContainer _igniteDeck() {
+  SharedPreferences.setMockInitialValues({});
+  final container = ProviderContainer();
+  final notifier = container.read(deckProvider.notifier);
+  notifier.newDeck(
+    'Ignite',
+    slides: List.generate(
+      20,
+      (index) => Slide.create(
+        SlideType.section,
+      ).copyWith(title: 'Ignite ${index + 1}'),
+    ),
+  );
+  notifier.loadDeck(
+    container
+        .read(deckProvider)
+        .deck!
+        .copyWith(
+          presentationTiming: const PresentationTimingConfig.ignitePreset(),
+        ),
+    preserveThemeProfile: true,
+  );
   return container;
 }
 
@@ -116,5 +142,21 @@ void main() {
 
     await gesture.up();
     await tester.pump(const Duration(milliseconds: 100));
+  });
+
+  testWidgets('Ignite-storyboard toont twintig dia\'s en vijf minuten', (
+    tester,
+  ) async {
+    final container = _igniteDeck();
+    addTearDown(container.dispose);
+    await _pumpOverview(tester, container, const Size(1200, 800));
+
+    expect(find.text('Ignite-storyboard'), findsOneWidget);
+    expect(find.textContaining('5:00'), findsOneWidget);
+    expect(find.text('20 / 20'), findsOneWidget);
+    await expectLater(
+      find.byKey(_surfaceKey),
+      matchesGoldenFile('goldens/slide_overview_ignite.png'),
+    );
   });
 }

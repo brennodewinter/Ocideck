@@ -1629,6 +1629,44 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Presentatievorm': 'Bemutató formátuma',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Válaszd ki, hogyan lépjenek tovább a diák a bemutató alatt.',
+  'Vrij presenteren': 'Szabad előadás',
+  'Zelf doorgaan': 'Kézi továbblépés',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Te döntöd el, mikor jelenjen meg a következő dia.',
+  'Twintig dia\'s gaan automatisch door.': 'Húsz dia automatikusan továbblép.',
+  'Twintig dia\'s in een stevig tempo.': 'Húsz dia lendületes tempóban.',
+  'Aangepaste timing': 'Egyéni időzítés',
+  'In de bron ingesteld': 'A forrásban beállítva',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Mindaddig megmarad, amíg másik formátumot nem választasz.',
+  'Ignite afgerond': 'Ignite befejezve',
+  'Ignite klaar om te starten': 'Az Ignite indításra kész',
+  'Ignite oefenen': 'Ignite gyakorlása',
+  'Ignite presenteren': 'Ignite bemutatása',
+  'Ignite-storyboard': 'Ignite-forgatókönyv',
+  'Buiten het format': 'Formátumon kívül',
+  'GEPAUZEERD': 'SZÜNETELTETVE',
+  'Hervatten': 'Folytatás',
+  'Klaar om te presenteren': 'Prezentálásra kész',
+  'PechaKucha afgerond': 'PechaKucha befejezve',
+  'PechaKucha klaar om te starten': 'A PechaKucha indításra kész',
+  'PechaKucha oefenen': 'PechaKucha gyakorlása',
+  'PechaKucha presenteren': 'PechaKucha bemutatása',
+  'PechaKucha-storyboard': 'PechaKucha-forgatókönyv',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'A szóköz szüneteltet · Az Escape leállítja a bemutatót',
+  'Start aftellen': 'Visszaszámlálás indítása',
+  'dia\'s': 'diák',
+  'handmatig doorgaan uit': 'kézi továbblépés kikapcsolva',
+  'nog nodig': 'még szükséges',
+  'ontbreekt': 'hiányzik',
+  'sec': 'mp',
+  'seconden': 'másodperc',
+  'seconden per dia': 'másodperc diánként',
+  'te veel': 'túl sok',
   'Afbeelding toevoegen…': 'Kép hozzáadása…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nem található írható könyvtármappa. Adjon hozzá egy mappát, vagy módosítsa a Tárolót itt: Beállítások.',

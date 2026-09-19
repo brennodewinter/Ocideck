@@ -3,6 +3,7 @@ import 'dart:math' show max;
 import '../models/deck.dart';
 import '../models/document_signature.dart';
 import '../models/privacy_disposition.dart';
+import '../models/presentation_timing.dart';
 import 'callout_codec.dart';
 import 'front_matter_merge.dart';
 
@@ -93,6 +94,7 @@ List<String> ownedFrontMatterLines(
   if (deck.presentationTargetSeconds > 0) {
     out.add('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
   }
+  _addPresentationTiming(out, deck.presentationTiming);
   if (deck.showRehearsalSummary) {
     out.add('ocideck_show_rehearsal_summary: true');
   }
@@ -140,6 +142,37 @@ List<String> ownedFrontMatterLines(
 
   if (legacySignatureLines) _addLegacySignature(out, deck.signature);
   return out;
+}
+
+void _addPresentationTiming(List<String> out, PresentationTimingConfig timing) {
+  if (timing.isTimedPreset) {
+    out.add('format: ${timing.format}');
+    return;
+  }
+  if (!timing.hasSettings) return;
+  out.add('timing:');
+  out.add('  autoplay: ${timing.autoplay}');
+  if (timing.slideDuration > Duration.zero) {
+    out.add('  slide-duration: ${_formatTimingDuration(timing.slideDuration)}');
+  }
+  if (timing.maxSlides case final value?) {
+    out.add('  max-slides: $value');
+  }
+  if (timing.requiredSlides case final value?) {
+    out.add('  required-slides: $value');
+  }
+  out.add('  stop-after-last-slide: ${timing.stopAfterLastSlide}');
+  out.add('  manual-advance: ${timing.manualAdvance}');
+}
+
+String _formatTimingDuration(Duration duration) {
+  if (duration.inMicroseconds % Duration.microsecondsPerSecond == 0) {
+    return '${duration.inSeconds}s';
+  }
+  if (duration.inMicroseconds % Duration.microsecondsPerMillisecond == 0) {
+    return '${duration.inMilliseconds}ms';
+  }
+  return '${duration.inMicroseconds / Duration.microsecondsPerSecond}s';
 }
 
 void _addLegacySignature(List<String> out, DocumentSignature? signature) {

@@ -158,12 +158,18 @@ extension _PresenterViews on _FullscreenPresenterState {
     if (_blank != _Blank.none) return _blankFill();
 
     return AudienceSurface(
-      onPrev: _index > 0 ? _prev : null,
-      onNext: _index < total - 1 ? _next : null,
+      onPrev: !_timedManualAdvanceBlocked(this) && _index > 0 ? _prev : null,
+      onNext: !_timedManualAdvanceBlocked(this) && _index < total - 1
+          ? _next
+          : null,
       onExit: _exit,
       child: GestureDetector(
-        onTap: _tableEditMode ? null : _next,
-        onSecondaryTap: _tableEditMode ? null : _prev,
+        onTap: _tableEditMode || _timedManualAdvanceBlocked(this)
+            ? null
+            : _next,
+        onSecondaryTap: _tableEditMode || _timedManualAdvanceBlocked(this)
+            ? null
+            : _prev,
         child: Stack(
           children: [
             SizedBox.expand(child: _slideCanvas(slide)),
@@ -203,7 +209,9 @@ extension _PresenterViews on _FullscreenPresenterState {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: GestureDetector(
-                      onTap: _tableEditMode ? null : _next,
+                      onTap: _tableEditMode || _timedManualAdvanceBlocked(this)
+                          ? null
+                          : _next,
                       child: Stack(
                         children: [
                           Positioned.fill(child: _slideCanvas(slide)),

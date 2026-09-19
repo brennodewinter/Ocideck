@@ -1627,6 +1627,44 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Presentatievorm': 'Præsentationsformat',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Vælg, hvordan dias skifter under præsentationen.',
+  'Vrij presenteren': 'Præsenter frit',
+  'Zelf doorgaan': 'Skift selv',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Du bestemmer selv, hvornår det næste dias vises.',
+  'Twintig dia\'s gaan automatisch door.': 'Tyve dias skifter automatisk.',
+  'Twintig dia\'s in een stevig tempo.': 'Tyve dias i et friskt tempo.',
+  'Aangepaste timing': 'Tilpasset timing',
+  'In de bron ingesteld': 'Angivet i kilden',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Den bevares, indtil du vælger et andet format.',
+  'Ignite afgerond': 'Ignite fuldført',
+  'Ignite klaar om te starten': 'Ignite klar til at starte',
+  'Ignite oefenen': 'Øv Ignite',
+  'Ignite presenteren': 'Præsenter Ignite',
+  'Ignite-storyboard': 'Ignite-storyboard',
+  'Buiten het format': 'Uden for formatet',
+  'GEPAUZEERD': 'SAT PÅ PAUSE',
+  'Hervatten': 'Fortsæt',
+  'Klaar om te presenteren': 'Klar til at præsentere',
+  'PechaKucha afgerond': 'PechaKucha fuldført',
+  'PechaKucha klaar om te starten': 'PechaKucha klar til at starte',
+  'PechaKucha oefenen': 'Øv PechaKucha',
+  'PechaKucha presenteren': 'Præsenter PechaKucha',
+  'PechaKucha-storyboard': 'PechaKucha-storyboard',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Mellemrum sætter på pause · Escape stopper præsentationen',
+  'Start aftellen': 'Start nedtælling',
+  'dia\'s': 'dias',
+  'handmatig doorgaan uit': 'manuel fremføring slået fra',
+  'nog nodig': 'mangler stadig',
+  'ontbreekt': 'mangler',
+  'sec': 'sek.',
+  'seconden': 'sekunder',
+  'seconden per dia': 'sekunder pr. dias',
+  'te veel': 'for mange',
   'Afbeelding toevoegen…': 'Tilføj billede…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Ingen skrivbar biblioteksmappe fundet. Tilføj en mappe, eller juster Lager under Indstillinger.',

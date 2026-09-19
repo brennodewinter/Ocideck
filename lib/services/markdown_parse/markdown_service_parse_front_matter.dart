@@ -31,6 +31,8 @@ class _FrontMatter {
   TlpLevel tlp = TlpLevel.none;
   PrivacyDisposition privacy = PrivacyDisposition.warn;
   int presentationTargetSeconds = 0;
+  PresentationTimingConfig presentationTiming =
+      PresentationTimingConfig.disabled;
   bool showRehearsalSummary = false;
   bool playOnly = false;
   String improvementFramework = '';
@@ -212,7 +214,7 @@ extension _MarkdownParseFrontMatter on MarkdownService {
     // geen key op kolom 0). Parse het apart uit de bronregels — de codec houdt
     // de raw lines bij voor de lossless nested merge (§2.5).
     fm.calloutBlock = parseCalloutBlock(fm.sourceLines);
-
+    fm.presentationTiming = _parsePresentationTiming(fm.sourceLines);
     fm.body = content;
     return fm;
   }
@@ -244,4 +246,86 @@ extension _MarkdownParseFrontMatter on MarkdownService {
         return sig;
     }
   }
+}
+
+PresentationTimingConfig _parsePresentationTiming(List<String> lines) {
+  String? format;
+  var autoplay = false;
+  var slideDuration = Duration.zero;
+  int? maxSlides;
+  int? requiredSlides;
+  var stopAfterLastSlide = false;
+  var manualAdvance = true;
+  var inTiming = false;
+
+  for (final rawLine in lines) {
+    final key = frontMatterKeyOf(rawLine);
+    if (key == 'format') {
+      format = parseMarkdownYamlScalar(
+        rawLine.substring(rawLine.indexOf(':') + 1).trim(),
+      ).toLowerCase();
+      inTiming = false;
+      continue;
+    }
+    if (key == 'timing') {
+      inTiming = true;
+      continue;
+    }
+    if (!inTiming) continue;
+    if (!isFrontMatterContinuation(rawLine)) {
+      inTiming = false;
+      continue;
+    }
+    final line = rawLine.trim();
+    final separator = line.indexOf(':');
+    if (separator < 1) continue;
+    final nestedKey = line.substring(0, separator).trim();
+    final value = line.substring(separator + 1).trim();
+    switch (nestedKey) {
+      case 'autoplay':
+        autoplay = value == 'true';
+      case 'slide-duration':
+        slideDuration = _parseTimingDuration(value) ?? Duration.zero;
+      case 'max-slides':
+        maxSlides = _positiveInt(value);
+      case 'required-slides':
+        requiredSlides = _positiveInt(value);
+      case 'stop-after-last-slide':
+        stopAfterLastSlide = value == 'true';
+      case 'manual-advance':
+        manualAdvance = value != 'false';
+    }
+  }
+
+  if (format == PresentationTimingConfig.pechaKuchaFormat) {
+    return const PresentationTimingConfig.pechaKuchaPreset();
+  }
+  if (format == PresentationTimingConfig.igniteFormat) {
+    return const PresentationTimingConfig.ignitePreset();
+  }
+  return PresentationTimingConfig(
+    autoplay: autoplay,
+    slideDuration: slideDuration,
+    maxSlides: maxSlides,
+    requiredSlides: requiredSlides,
+    stopAfterLastSlide: stopAfterLastSlide,
+    manualAdvance: manualAdvance,
+  );
+}
+
+int? _positiveInt(String value) {
+  final parsed = int.tryParse(value);
+  return parsed != null && parsed > 0 ? parsed : null;
+}
+
+Duration? _parseTimingDuration(String value) {
+  final match = RegExp(r'^(\d+(?:\.\d+)?)(ms|s|m)$').firstMatch(value);
+  if (match == null) return null;
+  final amount = double.parse(match.group(1)!);
+  return switch (match.group(2)) {
+    'ms' => Duration(microseconds: (amount * 1000).round()),
+    's' => Duration(microseconds: (amount * 1000000).round()),
+    'm' => Duration(microseconds: (amount * 60000000).round()),
+    _ => null,
+  };
 }

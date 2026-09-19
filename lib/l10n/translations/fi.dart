@@ -1627,6 +1627,46 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Presentatievorm': 'Esitysmuoto',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Valitse, miten diat vaihtuvat esityksen aikana.',
+  'Vrij presenteren': 'Vapaa esitys',
+  'Zelf doorgaan': 'Siirry itse eteenpäin',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Päätät itse, milloin seuraava dia tulee näkyviin.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Kaksikymmentä diaa vaihtuu automaattisesti.',
+  'Twintig dia\'s in een stevig tempo.':
+      'Kaksikymmentä diaa ripeässä tahdissa.',
+  'Aangepaste timing': 'Mukautettu ajoitus',
+  'In de bron ingesteld': 'Määritetty lähteessä',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Se säilyy, kunnes valitset toisen muodon.',
+  'Ignite afgerond': 'Ignite valmis',
+  'Ignite klaar om te starten': 'Ignite valmis alkamaan',
+  'Ignite oefenen': 'Harjoittele Ignitea',
+  'Ignite presenteren': 'Esitä Ignite',
+  'Ignite-storyboard': 'Ignite-kuvakäsikirjoitus',
+  'Buiten het format': 'Muodon ulkopuolella',
+  'GEPAUZEERD': 'TAUOLLA',
+  'Hervatten': 'Jatka',
+  'Klaar om te presenteren': 'Valmis esitettäväksi',
+  'PechaKucha afgerond': 'PechaKucha valmis',
+  'PechaKucha klaar om te starten': 'PechaKucha valmis alkamaan',
+  'PechaKucha oefenen': 'Harjoittele PechaKuchaa',
+  'PechaKucha presenteren': 'Esitä PechaKucha',
+  'PechaKucha-storyboard': 'PechaKucha-kuvakäsikirjoitus',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Välilyönti keskeyttää · Escape lopettaa esityksen',
+  'Start aftellen': 'Aloita lähtölaskenta',
+  'dia\'s': 'diat',
+  'handmatig doorgaan uit': 'manuaalinen eteneminen pois käytöstä',
+  'nog nodig': 'tarvitaan vielä',
+  'ontbreekt': 'puuttuu',
+  'sec': 's',
+  'seconden': 'sekuntia',
+  'seconden per dia': 'sekuntia per dia',
+  'te veel': 'liikaa',
   'Afbeelding toevoegen…': 'Lisää kuva…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Kirjoituskelpoinen kirjastokansio ei löytynyt. Lisää kansio tai muokkaa Tallennusta kohdassa Asetukset.',

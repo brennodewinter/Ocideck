@@ -91,6 +91,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
   /// Ga voorwaarts naar [target] en onthoud de dia die je verlaat op de
   /// retrace-stack, zodat "terug" langs de werkelijke route loopt (#1162).
   void _advanceTo(int target) {
+    if (_timedManualAdvanceBlocked(this)) return;
     _commitActiveInk();
     _persistUserNoteFromController();
     _rebuild(() {
@@ -111,11 +112,13 @@ extension _PresenterNavigation on _FullscreenPresenterState {
   /// Onbekend anker = niets doen (fail-safe). De sprong gaat via [_advanceTo], dus
   /// "terug" keert netjes terug naar de menudia.
   void _jumpToAnchor(String anchor) {
+    if (_timedManualAdvanceBlocked(this)) return;
     final target = _indexOfAnchor(widget.slides, anchor);
     if (target != null) _advanceTo(target);
   }
 
   void _next({bool allowInUserNotes = false}) {
+    if (_timedManualAdvanceBlocked(this)) return;
     // Met het notitiepaneel open bladert alleen PgUp/PgDn expliciet door;
     // klikken en overige toetsen blijven bij het tekstveld.
     if (_userNotesMode && !allowInUserNotes) return;
@@ -169,6 +172,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
   }
 
   void _prev({bool allowInUserNotes = false}) {
+    if (_timedManualAdvanceBlocked(this)) return;
     if (_userNotesMode && !allowInUserNotes) return;
     _clearTyped();
     if (_blank != _Blank.none) {
@@ -213,6 +217,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
 
   /// Spring direct naar een slide (vanuit het rasteroverzicht).
   void _jumpTo(int index) {
+    if (_timedManualAdvanceBlocked(this)) return;
     _commitActiveInk();
     _persistUserNoteFromController();
     _rebuild(() {
@@ -237,6 +242,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
 
   /// Ga rechtstreeks naar slide [index] zonder het raster te openen (Home/End).
   void _goTo(int index) {
+    if (_timedManualAdvanceBlocked(this)) return;
     if (_blank != _Blank.none) {
       _rebuild(() => _blank = _Blank.none);
       return;
@@ -363,6 +369,7 @@ extension _PresenterNavigation on _FullscreenPresenterState {
 
   /// Zet het scherm op zwart/wit, of terug naar de slide bij dezelfde toets.
   void _toggleBlank(_Blank target) {
+    if (widget.presentationTiming.enabled) _timedSession.pauseIfRunning();
     _rebuild(() {
       _blank = _blank == target ? _Blank.none : target;
       if (_blank != _Blank.none) _gridOpen = false;

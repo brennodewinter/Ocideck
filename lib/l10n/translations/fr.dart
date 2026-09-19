@@ -667,6 +667,46 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Presentatievorm': 'Format de présentation',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Choisissez comment les diapositives défilent pendant la présentation.',
+  'Vrij presenteren': 'Présentation libre',
+  'Zelf doorgaan': 'Avancer manuellement',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Vous décidez quand la diapositive suivante apparaît.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Vingt diapositives défilent automatiquement.',
+  'Twintig dia\'s in een stevig tempo.':
+      'Vingt diapositives à un rythme soutenu.',
+  'Aangepaste timing': 'Minutage personnalisé',
+  'In de bron ingesteld': 'Défini dans la source',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Il reste en place jusqu’à ce que vous choisissiez un autre format.',
+  'Ignite afgerond': 'Ignite terminée',
+  'Ignite klaar om te starten': 'Ignite prête à démarrer',
+  'Ignite oefenen': 'Répéter Ignite',
+  'Ignite presenteren': 'Présenter Ignite',
+  'Ignite-storyboard': 'Storyboard Ignite',
+  'Buiten het format': 'Hors format',
+  'GEPAUZEERD': 'EN PAUSE',
+  'Hervatten': 'Reprendre',
+  'Klaar om te presenteren': 'Prêt à présenter',
+  'PechaKucha afgerond': 'PechaKucha terminée',
+  'PechaKucha klaar om te starten': 'PechaKucha prête à démarrer',
+  'PechaKucha oefenen': 'Répéter PechaKucha',
+  'PechaKucha presenteren': 'Présenter PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Espace met en pause · Échap arrête la présentation',
+  'Start aftellen': 'Lancer le compte à rebours',
+  'dia\'s': 'diapositives',
+  'handmatig doorgaan uit': 'avance manuelle désactivée',
+  'nog nodig': 'encore nécessaires',
+  'ontbreekt': 'manquant',
+  'sec': 's',
+  'seconden': 'secondes',
+  'seconden per dia': 'secondes par diapositive',
+  'te veel': 'trop',
   'Afbeelding toevoegen…': 'Ajouter une image…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Aucun dossier bibliothèque accessible en écriture. Ajoutez un dossier ou modifiez Stockage dans Paramètres.',

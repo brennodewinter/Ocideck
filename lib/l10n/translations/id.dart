@@ -1627,6 +1627,45 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Presentatievorm': 'Format presentasi',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Pilih cara slide berganti selama presentasi.',
+  'Vrij presenteren': 'Presentasi bebas',
+  'Zelf doorgaan': 'Lanjutkan secara manual',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Anda menentukan kapan slide berikutnya muncul.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Dua puluh slide berganti secara otomatis.',
+  'Twintig dia\'s in een stevig tempo.': 'Dua puluh slide dengan tempo cepat.',
+  'Aangepaste timing': 'Pengaturan waktu khusus',
+  'In de bron ingesteld': 'Diatur di sumber',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Tetap dipertahankan hingga Anda memilih format lain.',
+  'Ignite afgerond': 'Ignite selesai',
+  'Ignite klaar om te starten': 'Ignite siap dimulai',
+  'Ignite oefenen': 'Latihan Ignite',
+  'Ignite presenteren': 'Presentasikan Ignite',
+  'Ignite-storyboard': 'Storyboard Ignite',
+  'Buiten het format': 'Di luar format',
+  'GEPAUZEERD': 'DIJEDA',
+  'Hervatten': 'Lanjutkan',
+  'Klaar om te presenteren': 'Siap untuk presentasi',
+  'PechaKucha afgerond': 'PechaKucha selesai',
+  'PechaKucha klaar om te starten': 'PechaKucha siap dimulai',
+  'PechaKucha oefenen': 'Latihan PechaKucha',
+  'PechaKucha presenteren': 'Presentasikan PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Spasi menjeda · Escape menghentikan presentasi',
+  'Start aftellen': 'Mulai hitung mundur',
+  'dia\'s': 'slide',
+  'handmatig doorgaan uit': 'lanjut manual nonaktif',
+  'nog nodig': 'masih diperlukan',
+  'ontbreekt': 'kurang',
+  'sec': 'dtk',
+  'seconden': 'detik',
+  'seconden per dia': 'detik per slide',
+  'te veel': 'terlalu banyak',
   'Afbeelding toevoegen…': 'Tambahkan gambar…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Tidak ada folder perpustakaan yang dapat ditulis. Tambahkan folder atau sesuaikan Penyimpanan di Pengaturan.',

@@ -4,7 +4,7 @@
 
 # OciDeck — Gebruikershandleiding
 
-> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-08-30 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** actuele gebruikershandleiding · **Status laatst nagekeken:** 2026-09-18 · **Uitgegeven door:** Stichting LibreKAT
 
 ## Inhoud
 
@@ -3153,6 +3153,67 @@ staat er meteen, op je eigen scherm.
 die het scherm noemde. Iemand die voor het eerst presenteerde moest gokken, voor
 een publiek, wat het slechtst denkbare moment is om te gokken. (Het balkje toonde
 oorspronkelijk ook het dianummer; dat is verwijderd in #864.)*
+
+### PechaKucha en Ignite: twintig vaste dia's
+
+Maak van een deck een PechaKucha of Ignite door in de **markdown-modus** het
+format-token aan de front matter toe te voegen:
+
+```yaml
+---
+title: Vijf manieren om met AI te falen
+format: pechakucha
+---
+```
+
+Gebruik `format: ignite` voor Ignite. Beide zijn strikte formats van twintig
+dia's met automatisch doorschakelen: PechaKucha is **20 × 20** en duurt
+**6:40**; Ignite is **20 × 15** en duurt **5:00**. Je hoeft geen losse timer in
+te stellen. Staat er ook een `timing:`-blok, dan wint de benoemde preset en
+bewaart OciDeck het compacte `format:`-token.
+
+De slidestrook toont meteen hoe ver het deck van twintig dia's af is en zet de
+huidige duur naast de totale tijd van het format. De meter wordt groen bij
+precies twintig, amber zolang
+er dia's ontbreken en rood zodra er te veel zijn. Dit is begeleiding, geen
+bewerkblokkade: een onvoltooid deck blijft gewoon te bewerken. De
+markdowncontrole meldt hetzelfde tekort of overschot als waarschuwing.
+
+Open **Slide-overzicht** met de rasterknop naast *SLIDES* voor het
+format-storyboard. Het reserveert twintig genummerde plekken in een compact
+raster: ontbrekende dia's blijven als lege plekken zichtbaar en dia's na nummer
+twintig krijgen het label *Buiten het format*. Echte dia's kun je er net als in
+het gewone overzicht selecteren, herschikken en openen.
+
+Een presentatie met een van beide formats zet altijd dia 1 klaar, ongeacht welke
+dia in de editor was geselecteerd. Een rustig startscherm noemt eerst het format, het
+aantal dia's, de seconden per dia en de totale tijd. Kies **Start aftellen** (of
+druk `Enter` of `Spatie`) voor een aparte `3 · 2 · 1`; daarvan gaat niets af
+van de twintig seconden van dia 1. Daarna leidt de presentatie de huidige dia af
+uit één verstreken klok, zodat een late schermverversing niet elke volgende
+dia verder laat uitlopen. Na dia 20 verschijnt een afgerond scherm en begint het
+deck niet opnieuw.
+
+Tijdens de getimede run kunnen klikken, clickers, pijltjes, Page Up/Down,
+Home/End, getypte dianummers en het slideraster het deck niet voortijdig
+verplaatsen. `Spatie` pauzeert en hervat zonder de resterende tijd van de huidige
+dia kwijt te raken. `Esc` sluit af wanneer er geen andere presentatielaag open
+staat; `Ctrl/Cmd + W` sluit direct. De timing blijft in het presentatoraanzicht:
+dat toont de huidige dia, de volgende miniatuur, sprekersnotities, resterende
+seconden voor deze dia, de totaal verstreken tijd en de totale tijd van het format, met een
+smalle voortgangslijn die in de laatste vijf seconden amber wordt. Het
+publieksscherm toont de dia, niet de timingbediening.
+
+Open voor een oefenronde het `⋮`-menu en kies de oefenactie voor het actieve
+format. Die gebruikt dezelfde aftelling, automatische timing en pauzewerking,
+maar opent het presentatoraanzicht voor de auteur zonder een apart publieksscherm
+te starten. De actie is alleen zichtbaar bij een deck met een vaste format-preset.
+
+Voor auteurs die een ander getimed format bouwen leest OciDeck ook een generiek,
+genest `timing:`-blok. De velden en toegestane tijdeenheden staan in
+[`FILE_FORMAT.nl.md`](FILE_FORMAT.nl.md#3-front-matter). PechaKucha en Ignite
+zijn de ondersteunde benoemde presets boven op dat generieke timingmodel; die
+generieke velden wijzigen hun strikte regels niet.
 
 ### Niet-lineaire volgorde: springen naar een andere dia (#1162)
 

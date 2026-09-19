@@ -1643,6 +1643,46 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Presentatievorm': 'Formatul prezentării',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Alege cum avansează diapozitivele în timpul prezentării.',
+  'Vrij presenteren': 'Prezentare liberă',
+  'Zelf doorgaan': 'Avansare manuală',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Tu decizi când apare următorul diapozitiv.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Douăzeci de diapozitive avansează automat.',
+  'Twintig dia\'s in een stevig tempo.':
+      'Douăzeci de diapozitive într-un ritm alert.',
+  'Aangepaste timing': 'Temporizare personalizată',
+  'In de bron ingesteld': 'Setată în sursă',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Se păstrează până când alegi alt format.',
+  'Ignite afgerond': 'Ignite finalizată',
+  'Ignite klaar om te starten': 'Ignite gata de pornire',
+  'Ignite oefenen': 'Exersează Ignite',
+  'Ignite presenteren': 'Prezintă Ignite',
+  'Ignite-storyboard': 'Storyboard Ignite',
+  'Buiten het format': 'În afara formatului',
+  'GEPAUZEERD': 'ÎN PAUZĂ',
+  'Hervatten': 'Reia',
+  'Klaar om te presenteren': 'Gata de prezentare',
+  'PechaKucha afgerond': 'PechaKucha finalizată',
+  'PechaKucha klaar om te starten': 'PechaKucha gata de pornire',
+  'PechaKucha oefenen': 'Exersează PechaKucha',
+  'PechaKucha presenteren': 'Prezintă PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Spațiu pune pe pauză · Escape oprește prezentarea',
+  'Start aftellen': 'Pornește numărătoarea inversă',
+  'dia\'s': 'diapozitive',
+  'handmatig doorgaan uit': 'avansare manuală dezactivată',
+  'nog nodig': 'încă necesare',
+  'ontbreekt': 'lipsește',
+  'sec': 'sec',
+  'seconden': 'secunde',
+  'seconden per dia': 'secunde per diapozitiv',
+  'te veel': 'prea multe',
   'Afbeelding toevoegen…': 'Adaugă imagine…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Nu s-a găsit un folder de bibliotecă inscripționabil. Adaugă un folder sau ajustează Stocare în Setări.',

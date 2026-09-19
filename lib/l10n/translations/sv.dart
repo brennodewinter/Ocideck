@@ -1626,6 +1626,45 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Presentatievorm': 'Presentationsformat',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Välj hur bilderna går vidare under presentationen.',
+  'Vrij presenteren': 'Presentera fritt',
+  'Zelf doorgaan': 'Gå vidare manuellt',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Du bestämmer själv när nästa bild visas.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Tjugo bilder går vidare automatiskt.',
+  'Twintig dia\'s in een stevig tempo.': 'Tjugo bilder i raskt tempo.',
+  'Aangepaste timing': 'Anpassad tidsinställning',
+  'In de bron ingesteld': 'Angivet i källan',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Den behålls tills du väljer ett annat format.',
+  'Ignite afgerond': 'Ignite slutförd',
+  'Ignite klaar om te starten': 'Ignite redo att starta',
+  'Ignite oefenen': 'Öva Ignite',
+  'Ignite presenteren': 'Presentera Ignite',
+  'Ignite-storyboard': 'Ignite-storyboard',
+  'Buiten het format': 'Utanför formatet',
+  'GEPAUZEERD': 'PAUSAD',
+  'Hervatten': 'Fortsätt',
+  'Klaar om te presenteren': 'Redo att presentera',
+  'PechaKucha afgerond': 'PechaKucha slutförd',
+  'PechaKucha klaar om te starten': 'PechaKucha redo att starta',
+  'PechaKucha oefenen': 'Öva PechaKucha',
+  'PechaKucha presenteren': 'Presentera PechaKucha',
+  'PechaKucha-storyboard': 'PechaKucha-storyboard',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Blanksteg pausar · Escape stoppar presentationen',
+  'Start aftellen': 'Starta nedräkning',
+  'dia\'s': 'bilder',
+  'handmatig doorgaan uit': 'manuell frammatning av',
+  'nog nodig': 'behövs fortfarande',
+  'ontbreekt': 'saknas',
+  'sec': 'sek',
+  'seconden': 'sekunder',
+  'seconden per dia': 'sekunder per bild',
+  'te veel': 'för många',
   'Afbeelding toevoegen…': 'Lägg till bild…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Ingen skrivbar biblioteksmapp hittades. Lägg till en mapp eller justera Lagring under Inställningar.',

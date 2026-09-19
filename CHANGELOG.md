@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- PechaKucha en Ignite zijn volwaardige vaste presentatieformats: respectievelijk
+  20×20 en 20×15 (vijf minuten), met live terugkoppeling over het aantal dia's,
+  een compact storyboard, startaftelling, driftvast
+  automatisch doorschakelen, geblokkeerde handmatige navigatie,
+  pauzeren/hervatten, presentatortiming en een eigen oefenactie; dezelfde runtime
+  leest generieke `timing:`-velden uit de front matter voor volgende getimede
+  formats.
 - PDF-, PDF/A- en zichtbaar ondertekend bewijs kan lokaal in OciDeck worden bekeken en vanuit gecontroleerde OciServe-bewijskaarten worden geopend, met een open-source, lokale renderer en zonder een niet-uitgevoerde handtekeningcontrole te suggereren.
 - OciServe-lessen worden per afspeelsessie met een nieuw AES-256-pakket en een tijdelijke sleutel geopend en bij het sluiten lokaal opgeruimd.
 - Een aparte formele examenclient toont alleen de huidige persoonlijke vraag, gebruikt challenge- en revisiegebonden antwoorden en benoemt de noodzaak van menselijk toezicht.

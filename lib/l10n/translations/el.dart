@@ -1652,6 +1652,45 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Presentatievorm': 'Μορφή παρουσίασης',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Επιλέξτε πώς θα προχωρούν οι διαφάνειες κατά την παρουσίαση.',
+  'Vrij presenteren': 'Ελεύθερη παρουσίαση',
+  'Zelf doorgaan': 'Χειροκίνητη μετάβαση',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Εσείς αποφασίζετε πότε θα εμφανιστεί η επόμενη διαφάνεια.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Είκοσι διαφάνειες προχωρούν αυτόματα.',
+  'Twintig dia\'s in een stevig tempo.': 'Είκοσι διαφάνειες με γρήγορο ρυθμό.',
+  'Aangepaste timing': 'Προσαρμοσμένος χρονισμός',
+  'In de bron ingesteld': 'Ορίστηκε στην πηγή',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Διατηρείται μέχρι να επιλέξετε άλλη μορφή.',
+  'Ignite afgerond': 'Το Ignite ολοκληρώθηκε',
+  'Ignite klaar om te starten': 'Το Ignite είναι έτοιμο να ξεκινήσει',
+  'Ignite oefenen': 'Εξάσκηση Ignite',
+  'Ignite presenteren': 'Παρουσίαση Ignite',
+  'Ignite-storyboard': 'Storyboard Ignite',
+  'Buiten het format': 'Εκτός μορφής',
+  'GEPAUZEERD': 'ΣΕ ΠΑΥΣΗ',
+  'Hervatten': 'Συνέχιση',
+  'Klaar om te presenteren': 'Έτοιμο για παρουσίαση',
+  'PechaKucha afgerond': 'Το PechaKucha ολοκληρώθηκε',
+  'PechaKucha klaar om te starten': 'Το PechaKucha είναι έτοιμο να ξεκινήσει',
+  'PechaKucha oefenen': 'Εξάσκηση PechaKucha',
+  'PechaKucha presenteren': 'Παρουσίαση PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Το Space κάνει παύση · Το Escape σταματά την παρουσίαση',
+  'Start aftellen': 'Έναρξη αντίστροφης μέτρησης',
+  'dia\'s': 'διαφάνειες',
+  'handmatig doorgaan uit': 'χειροκίνητη μετάβαση ανενεργή',
+  'nog nodig': 'χρειάζονται ακόμη',
+  'ontbreekt': 'λείπει',
+  'sec': 'δευτ.',
+  'seconden': 'δευτερόλεπτα',
+  'seconden per dia': 'δευτερόλεπτα ανά διαφάνεια',
+  'te veel': 'πάρα πολλά',
   'Afbeelding toevoegen…': 'Προσθήκη εικόνας…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Δεν βρέθηκε εγγράψιμος φάκελος βιβλιοθήκης. Προσθέστε φάκελο ή προσαρμόστε την Αποθήκευση στις Ρυθμίσεις.',

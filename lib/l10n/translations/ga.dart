@@ -1657,6 +1657,45 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Presentatievorm': 'Formáid an chur i láthair',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Roghnaigh conas a théann na sleamhnáin ar aghaidh le linn an chur i láthair.',
+  'Vrij presenteren': 'Cur i láthair saor',
+  'Zelf doorgaan': 'Téigh ar aghaidh de láimh',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Socraíonn tú cathain a fheictear an chéad sleamhnán eile.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Téann fiche sleamhnán ar aghaidh go huathoibríoch.',
+  'Twintig dia\'s in een stevig tempo.': 'Fiche sleamhnán ar luas bríomhar.',
+  'Aangepaste timing': 'Uainiú saincheaptha',
+  'In de bron ingesteld': 'Socraithe san fhoinse',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Coinnítear é go dtí go roghnaíonn tú formáid eile.',
+  'Ignite afgerond': 'Ignite críochnaithe',
+  'Ignite klaar om te starten': 'Ignite réidh le tosú',
+  'Ignite oefenen': 'Cleacht Ignite',
+  'Ignite presenteren': 'Cuir Ignite i láthair',
+  'Ignite-storyboard': 'Clár scéil Ignite',
+  'Buiten het format': 'Lasmuigh den fhormáid',
+  'GEPAUZEERD': 'AR SOS',
+  'Hervatten': 'Lean ar aghaidh',
+  'Klaar om te presenteren': 'Réidh le cur i láthair',
+  'PechaKucha afgerond': 'PechaKucha críochnaithe',
+  'PechaKucha klaar om te starten': 'PechaKucha réidh le tosú',
+  'PechaKucha oefenen': 'Cleacht PechaKucha',
+  'PechaKucha presenteren': 'Cuir PechaKucha i láthair',
+  'PechaKucha-storyboard': 'Clár scéil PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Cuireann Spás ar sos · Stopann Escape an cur i láthair',
+  'Start aftellen': 'Tosaigh an comhaireamh síos',
+  'dia\'s': 'sleamhnáin',
+  'handmatig doorgaan uit': 'dul ar aghaidh de láimh múchta',
+  'nog nodig': 'fós de dhíth',
+  'ontbreekt': 'ar iarraidh',
+  'sec': 'soic',
+  'seconden': 'soicind',
+  'seconden per dia': 'soicind in aghaidh an tsleamhnáin',
+  'te veel': 'an iomarca',
   'Afbeelding toevoegen…': 'Cuir íomhá leis…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Níor aimsíodh fillteán leabharlainne inscríofa. Cuir fillteán leis nó coigeartaigh Stóráil faoi Socruithe.',

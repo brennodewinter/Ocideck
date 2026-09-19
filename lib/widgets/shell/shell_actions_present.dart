@@ -103,6 +103,7 @@ void presentDeck(
   BuildContext context,
   WidgetRef ref, {
   bool fromStart = false,
+  bool rehearsalMode = false,
 }) {
   final deckNotifier = ref.read(deckProvider.notifier);
   final editorNotifier = ref.read(editorProvider.notifier);
@@ -168,6 +169,7 @@ void presentDeck(
     allowRemoteMedia: settings.allowRemoteMedia,
     showRehearsalSummary: deck.showRehearsalSummary,
     playOnly: deck.playOnly || learningSession != null,
+    rehearsalMode: rehearsalMode,
     onPlaybackFinished: learningSession == null
         ? null
         : (report) async {

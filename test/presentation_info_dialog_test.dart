@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/presentation_timing.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/widgets/dialogs/presentation_info_dialog.dart';
@@ -42,6 +43,139 @@ void main() {
     expect(labelledField('Gebruikte hulpmiddelen'), findsNothing);
     // De gewone metadata staat er wél: dit bewijst geen leeg dialoog.
     expect(labelledField('Titel'), findsOneWidget);
+  });
+
+  testWidgets('de actieve presentatievorm is direct zichtbaar', (tester) async {
+    await pumpDialog(
+      tester,
+      reveal: false,
+      deck: const Deck(
+        title: 'Test',
+        presentationTiming: PresentationTimingConfig.ignitePreset(),
+      ),
+    );
+
+    final ignite = find.byKey(const ValueKey('presentation-format-ignite'));
+    expect(find.text('Presentatievorm'), findsOneWidget);
+    expect(find.text('20 × 15 seconden · 5:00'), findsOneWidget);
+    expect(
+      find.descendant(of: ignite, matching: find.byIcon(Icons.check_circle)),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('Ignite kiezen komt als preset in het resultaat', (tester) async {
+    tester.view.physicalSize = const Size(1200, 1800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+
+    Future<PresentationInfo?>? result;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: ElevatedButton(
+                onPressed: () => result = PresentationInfoDialog.show(
+                  context,
+                  const Deck(title: 'Test'),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const ValueKey('presentation-format-ignite')));
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    expect((await result!)!.presentationTiming.isIgnite, isTrue);
+  });
+
+  testWidgets('vrij presenteren schakelt een preset uit', (tester) async {
+    tester.view.physicalSize = const Size(1200, 1800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+
+    Future<PresentationInfo?>? result;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: ElevatedButton(
+                onPressed: () => result = PresentationInfoDialog.show(
+                  context,
+                  const Deck(
+                    title: 'Test',
+                    presentationTiming:
+                        PresentationTimingConfig.pechaKuchaPreset(),
+                  ),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const ValueKey('presentation-format-free')));
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    expect((await result!)!.presentationTiming.hasSettings, isFalse);
+  });
+
+  testWidgets('aangepaste brontiming blijft bij alleen opslaan behouden', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.reset);
+    const custom = PresentationTimingConfig(
+      autoplay: true,
+      slideDuration: Duration(seconds: 42),
+      maxSlides: 12,
+      manualAdvance: false,
+    );
+
+    Future<PresentationInfo?>? result;
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: ElevatedButton(
+                onPressed: () => result = PresentationInfoDialog.show(
+                  context,
+                  const Deck(title: 'Test', presentationTiming: custom),
+                ),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Aangepaste timing'), findsOneWidget);
+    await tester.tap(find.text('Opslaan'));
+    await tester.pumpAndSettle();
+
+    final timing = (await result!)!.presentationTiming;
+    expect(timing.slideDuration, const Duration(seconds: 42));
+    expect(timing.maxSlides, 12);
+    expect(timing.manualAdvance, isFalse);
   });
 
   testWidgets('MIAUW-velden verschijnen met de module aan', (tester) async {

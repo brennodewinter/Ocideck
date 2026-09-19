@@ -2538,6 +2538,45 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Presentatievorm': 'Sunum biçimi',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Sunum sırasında slaytların nasıl ilerleyeceğini seçin.',
+  'Vrij presenteren': 'Serbest sunum',
+  'Zelf doorgaan': 'Elle ilerle',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Sonraki slaydın ne zaman görüneceğine siz karar verirsiniz.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Yirmi slayt otomatik olarak ilerler.',
+  'Twintig dia\'s in een stevig tempo.': 'Tempoyu yüksek tutan yirmi slayt.',
+  'Aangepaste timing': 'Özel zamanlama',
+  'In de bron ingesteld': 'Kaynakta ayarlandı',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'Başka bir biçim seçene kadar korunur.',
+  'Ignite afgerond': 'Ignite tamamlandı',
+  'Ignite klaar om te starten': 'Ignite başlamaya hazır',
+  'Ignite oefenen': 'Ignite provası yap',
+  'Ignite presenteren': 'Ignite sun',
+  'Ignite-storyboard': 'Ignite hikâye panosu',
+  'Buiten het format': 'Biçimin dışında',
+  'GEPAUZEERD': 'DURAKLATILDI',
+  'Hervatten': 'Sürdür',
+  'Klaar om te presenteren': 'Sunuma hazır',
+  'PechaKucha afgerond': 'PechaKucha tamamlandı',
+  'PechaKucha klaar om te starten': 'PechaKucha başlamaya hazır',
+  'PechaKucha oefenen': 'PechaKucha provası yap',
+  'PechaKucha presenteren': 'PechaKucha sun',
+  'PechaKucha-storyboard': 'PechaKucha hikâye panosu',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Boşluk duraklatır · Escape sunumu durdurur',
+  'Start aftellen': 'Geri sayımı başlat',
+  'dia\'s': 'slaytlar',
+  'handmatig doorgaan uit': 'elle ilerleme kapalı',
+  'nog nodig': 'daha gerekli',
+  'ontbreekt': 'eksik',
+  'sec': 'sn',
+  'seconden': 'saniye',
+  'seconden per dia': 'slayt başına saniye',
+  'te veel': 'çok fazla',
   'Afbeelding toevoegen…': 'Resim ekle…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'Yazılabilir kitaplık klasörü bulunamadı. Klasör ekleyin veya Ayarlar altında Depolama\'yı düzenleyin.',

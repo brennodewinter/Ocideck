@@ -666,6 +666,45 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Presentatievorm': 'Formato di presentashon',
+  'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
+      'Skohe kon e slidenan ta sigui durante e presentashon.',
+  'Vrij presenteren': 'Presentá libremente',
+  'Zelf doorgaan': 'Sigui manualmente',
+  'Je bepaalt zelf wanneer de volgende dia verschijnt.':
+      'Abo ta disidí ki ora e siguiente slide ta aparesé.',
+  'Twintig dia\'s gaan automatisch door.':
+      'Binti slide ta sigui outomátikamente.',
+  'Twintig dia\'s in een stevig tempo.': 'Binti slide na un ritmo lihé.',
+  'Aangepaste timing': 'Temporisashon adaptá',
+  'In de bron ingesteld': 'Definí den e fuente',
+  'Blijft behouden totdat je een andere vorm kiest.':
+      'E ta keda warda te ora bo skohe un otro formato.',
+  'Ignite afgerond': 'Ignite kompletá',
+  'Ignite klaar om te starten': 'Ignite kla pa kuminsá',
+  'Ignite oefenen': 'Praktiká Ignite',
+  'Ignite presenteren': 'Presentá Ignite',
+  'Ignite-storyboard': 'Storyboard di Ignite',
+  'Buiten het format': 'Pafó di e formato',
+  'GEPAUZEERD': 'PAUSÁ',
+  'Hervatten': 'Sigui',
+  'Klaar om te presenteren': 'Kla pa presentá',
+  'PechaKucha afgerond': 'PechaKucha kompletá',
+  'PechaKucha klaar om te starten': 'PechaKucha kla pa kuminsá',
+  'PechaKucha oefenen': 'Praktiká PechaKucha',
+  'PechaKucha presenteren': 'Presentá PechaKucha',
+  'PechaKucha-storyboard': 'Storyboard di PechaKucha',
+  'Spatie pauzeert · Escape stopt de presentatie':
+      'Spasio ta pausa · Escape ta stòp e presentashon',
+  'Start aftellen': 'Kuminsá konta regresivo',
+  'dia\'s': 'diapositiva',
+  'handmatig doorgaan uit': 'avanse manual desaktivá',
+  'nog nodig': 'ainda nesesario',
+  'ontbreekt': 'ta falta',
+  'sec': 'seg',
+  'seconden': 'sekònde',
+  'seconden per dia': 'sekònde pa diapositiva',
+  'te veel': 'muchu hopi',
   'Afbeelding toevoegen…': 'Añadi imágen…',
   'Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.':
       'No a haña un karpeta di biblioteca ku por wordu skirbí. Añadi un karpeta of ajustá Almacenamentu bou di Konfigurashon.',
