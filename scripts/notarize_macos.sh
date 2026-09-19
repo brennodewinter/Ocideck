@@ -159,10 +159,11 @@ fi
 # PDFium.framework/Versions/A/pdfium erin.
 #
 # Oudere dyld-versies laadden dat alsnog, juist omdat APFS hoofdletterongevoelig
-# is. Vanaf macOS 26 eist dyld bij een hardened, genotariseerde binary dat de
+# is. Op macOS 27 eist dyld bij een hardened, genotariseerde binary dat de
 # bladnaam exact klopt. De app stopt dan bij het starten met "Library not
 # loaded: @rpath/PDFium.framework/PDFium ... security level requires its leaf
-# name to match". Zo strandde v0.6.4 op macOS 27.2.
+# name to match". Zo strandde de gedownloade v0.6.4 op macOS 27.2; macOS 26.6
+# (de bouwmachine) laadt dezelfde bundel nog, dus lokaal starten bewijst niets.
 #
 # Er wordt naar kleine letters genormaliseerd. Alles behalve dat ene load
 # command in het hoofdbinary draagt die schrijfwijze al: de install name van het
@@ -243,16 +244,114 @@ if otool -L "$MAIN_BINARY" | grep -qF "$PDFIUM_REF_UPPER"; then
   echo "  load command in OciDeck -> $PDFIUM_REF_LOWER"
 fi
 
-# Bewaken en niet aannemen. Loopt de naamgeving bij een volgende pdfrx- of
-# pdfium_flutter-versie opnieuw uiteen, dan faalt de release hier en niet pas
-# bij het starten op de Mac van een gebruiker.
-if grep -rlF "$PDFIUM_REF_UPPER" "$APP" >/dev/null 2>&1; then
-  echo "Er staat nog een verwijzing naar $PDFIUM_REF_UPPER in de bundel:" >&2
-  grep -rlF "$PDFIUM_REF_UPPER" "$APP" | sed "s|^$APP/|   |" >&2
-  echo "Normaliseer die mee; anders weigert dyld de app op macOS 26 en later." >&2
+echo "  in orde: pdfium.framework/pdfium, overal dezelfde schrijfwijze"
+
+# ---------------------------------------------------------------------------
+# Bundelkoppelingen toetsen, vóór het tekenen.
+#
+# De PDFium-normalisatie hierboven repareert het ene geval dat v0.6.4 brak. Deze
+# controle bewaakt de hele klasse: élke @rpath-, @executable_path- of
+# @loader_path-verwijzing in élk Mach-O-bestand van de bundel moet oplossen naar
+# een bestand dat er is, met exact dezelfde schrijfwijze per padcomponent. Op een
+# hoofdletterongevoelig volume slaagt `test -e` ook bij de verkeerde
+# schrijfwijze; `find -name` vergelijkt tegen de directory-entries zelf en ziet
+# het verschil wél. Daarom loopt de controle component voor component.
+#
+# Waarom hier en niet pas bij het starten: v0.6.4 is getekend, genotariseerd en
+# gestapeld met een verwijzing die dyld op macOS 27 weigert. Een geldige
+# handtekening zegt niets over laden. Deze stap faalt de release op de
+# bouwmachine, niet op de Mac van een gebruiker.
+# ---------------------------------------------------------------------------
+section "Bundelkoppelingen toetsen (exacte schrijfwijze)"
+
+# Loopt REL component voor component onder ROOT af en eist per stap een
+# directory-entry met precies die naam. Symlinks (Versions/Current) worden
+# gevolgd; de bladnaam moet ook ná het volgen exact kloppen, want dyld
+# vergelijkt de gevraagde bladnaam met de naam van het bestand dat hij opent.
+resolve_exact() { # resolve_exact ROOT REL -> pad op stdout, of status 1
+  local cur="$1" rel="$2" comp hit parts
+  IFS='/' read -r -a parts <<<"$rel"
+  for comp in "${parts[@]}"; do
+    [[ -n "$comp" && "$comp" != "." ]] || continue
+    # '..' is geen directory-entry en heeft geen schrijfwijze; gewoon omhoog.
+    [[ "$comp" != ".." ]] || { cur="$cur/.."; continue; }
+    hit="$(find "$cur/" -maxdepth 1 -mindepth 1 -name "$comp" -print -quit 2>/dev/null)"
+    [[ -n "$hit" ]] || return 1
+    cur="$hit"
+  done
+  [[ -e "$cur" ]] || return 1
+  [[ "$(basename "$(realpath "$cur")")" == "${parts[${#parts[@]}-1]}" ]] || return 1
+  printf '%s\n' "$cur"
+}
+
+# Alle LC_RPATH-paden van een Mach-O, met @executable_path en @loader_path al
+# ingevuld. Het hoofdbinary levert de rpaths die dyld voor de hele keten
+# hanteert; een framework voegt hoogstens zijn eigen toe.
+rpaths_of() { # rpaths_of MACHO EXEC_DIR
+  local f="$1" exec_dir="$2" loader_dir
+  loader_dir="$(dirname "$f")"
+  otool -l "$f" 2>/dev/null \
+    | awk '/^ *cmd LC_RPATH/{r=1} r && /^ *path /{print $2; r=0}' \
+    | sed -e "s|^@executable_path|$exec_dir|" -e "s|^@loader_path|$loader_dir|"
+}
+
+# Toetst één bundel. Schrijft per fout één regel naar stderr en geeft het aantal
+# fouten terug als status, zodat de aanroeper in één keer alles ziet.
+check_bundle_links() { # check_bundle_links APP
+  local app="$1" exec_dir main_bin f dep rest hit root found errors=0
+  exec_dir="$app/Contents/MacOS"
+  main_bin="$(find "$exec_dir" -maxdepth 1 -type f -perm -u+x -print -quit)"
+  local main_rpaths
+  main_rpaths="$(rpaths_of "$main_bin" "$exec_dir")"
+  while IFS= read -r -d '' f; do
+    file -b "$f" 2>/dev/null | grep -q 'Mach-O' || continue
+    while IFS= read -r dep; do
+      case "$dep" in
+        @rpath/*)           rest="${dep#@rpath/}" ;;
+        @executable_path/*) rest="${dep#@executable_path/}" ;;
+        @loader_path/*)     rest="${dep#@loader_path/}" ;;
+        *) continue ;;
+      esac
+      found=0
+      case "$dep" in
+        @rpath/*)
+          while IFS= read -r root; do
+            [[ -n "$root" ]] || continue
+            if [[ "$root" != "$app"/* ]]; then
+              # Een rpath buiten de bundel (/usr/lib/swift) hoort bij het
+              # systeem; als het daar staat, is het geen zaak van deze bundel.
+              [[ -e "$root/$rest" ]] && { found=1; break; }
+              continue
+            fi
+            hit="$(resolve_exact "$root" "$rest")" && { found=1; break; }
+          done < <(printf '%s\n' "$main_rpaths"; rpaths_of "$f" "$exec_dir")
+          ;;
+        @executable_path/*) hit="$(resolve_exact "$exec_dir" "$rest")" && found=1 ;;
+        @loader_path/*)     hit="$(resolve_exact "$(dirname "$f")" "$rest")" && found=1 ;;
+      esac
+      if [[ $found -eq 0 ]]; then
+        errors=$((errors + 1))
+        echo "  FOUT ${f#"$app"/}: $dep" >&2
+        # Diagnose: bestaat het wel, maar anders geschreven? Dan is dít de
+        # v0.6.4-klasse en niet een ontbrekend framework.
+        hit="$(find "$app/Contents/Frameworks" -ipath "$app/Contents/Frameworks/$rest" -print -quit 2>/dev/null)"
+        if [[ -n "$hit" ]]; then
+          echo "       bestaat als ${hit#"$app"/} (andere schrijfwijze; dyld weigert dat op macOS 27)" >&2
+        else
+          echo "       lost binnen de bundel nergens op" >&2
+        fi
+      fi
+    done < <(otool -L "$f" 2>/dev/null | tail -n +2 | awk '{print $1}')
+  done < <(find "$app" -type f \( -perm -u+x -o -name '*.dylib' \) -print0)
+  return "$errors"
+}
+
+if ! check_bundle_links "$APP"; then
+  echo "Bundelkoppelingen kloppen niet (zie boven). Deze app zou getekend en" >&2
+  echo "genotariseerd raken maar op macOS 27 niet starten; zo verging het v0.6.4." >&2
   exit 1
 fi
-echo "  in orde: pdfium.framework/pdfium, overal dezelfde schrijfwijze"
+echo "  in orde: elke verwijzing lost op met exact dezelfde schrijfwijze"
 
 # Inside-out tekenen: eerst elk ingebed framework/dylib, dan pas de app-bundel.
 # Hardened runtime en een veilige tijdstempel zijn allebei voorwaarden voor
