@@ -1,6 +1,6 @@
 # OciDeck — User Guide
 
-> **Status:** current-state user manual · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** current-state user manual · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -3049,6 +3049,66 @@ is right there, on your own screen.
 that the screen mentioned. Someone presenting for the first time had to guess, in
 front of an audience, which is the worst possible moment to be guessing. (The bar
 originally also showed the slide number; that was removed in #864.)*
+
+### PechaKucha and Ignite: twenty fixed slides
+
+Make a deck a PechaKucha or Ignite in **Markdown mode** by adding its format
+token to the front matter:
+
+```yaml
+---
+title: Five ways to fail with AI
+format: pechakucha
+---
+```
+
+Use `format: ignite` instead for Ignite. Both are strict twenty-slide formats
+with automatic advance: PechaKucha is **20 × 20** for **6:40**; Ignite is
+**20 × 15** for **5:00**. You do not have to set a separate timer. If a
+`timing:` block is present as well, the named preset wins and OciDeck saves its
+compact `format:` token.
+
+The slide strip immediately shows how far the deck is from twenty slides and
+the current duration against that format's total. It turns green at exactly
+twenty, amber while
+slides are still missing, and red once there are too many. This is guidance, not
+an editing lock: an unfinished deck stays editable. The Markdown check reports
+the same shortfall or excess as a warning.
+
+Open **Slide overview** with the grid button beside *SLIDES* to see the
+format storyboard. It reserves twenty numbered places in a compact grid:
+missing slides remain visible as empty places, and slides beyond number twenty
+are marked *Outside the format*. You can select, reorder and open real slides
+there just as in the ordinary overview.
+
+Presenting either format always prepares slide 1, regardless of which slide was
+selected in the editor. A calm start screen first states the format, slide count,
+seconds per slide and total time. Choose **Start countdown** (or press `Enter` or
+`Space`) for a separate `3 · 2 · 1`; none of that countdown is taken from
+slide 1. The run then derives the current slide from one elapsed clock, so a late
+screen refresh does not push every later slide further behind. After slide 20 it
+shows a finished screen and does not loop.
+
+During the timed run, clicks, clickers, arrows, Page Up/Down, Home/End, typed
+slide numbers and the slide grid cannot move the deck early. `Space` pauses and
+resumes without losing the remaining time on the current slide. `Esc` exits when
+no other presenter layer is open; `Ctrl/Cmd + W` closes directly. The timing
+stays in the presenter view: it shows the current slide, the next thumbnail,
+speaker notes, seconds left on this slide, total elapsed time and the format
+total,
+with a small progress line that turns amber for the last five seconds. The
+audience screen shows the slide, not the timing controls.
+
+For a practice run, open the `⋮` menu and choose the rehearsal action for the
+active format. It uses the same countdown, automatic timing and pause behaviour,
+but opens the presenter view for the author without starting a separate audience
+window. It is available only on a deck carrying a fixed format preset.
+
+For authors building another timed format, OciDeck also reads a generic nested
+`timing:` block. Its fields and accepted duration units are specified in
+[`FILE_FORMAT.md`](FILE_FORMAT.md#3-front-matter). PechaKucha and Ignite are
+the supported named presets on top of that generic timing model; changing those
+generic fields does not change their strict rules.
 
 ### Non-linear order: jump to another slide (#1162)
 

@@ -1,6 +1,6 @@
 # OciDeck — Keyboard shortcuts
 
-> **Status:** reference, current · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** reference, current · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
 
 `Ctrl` is shown for Windows/Linux; use `Cmd` (⌘) on macOS.
 
@@ -96,6 +96,24 @@ source field itself, Enter continues a bullet, numbered list or quote; brackets
 and parentheses pair automatically, and a third backtick opens a fenced block.
 
 ## Fullscreen presenter
+
+PechaKucha and Ignite have their own deliberately small control set. While
+`format: pechakucha` or `format: ignite` is active, this table overrides the
+ordinary navigation table below; clicks and clicker next/previous actions are
+blocked as well.
+
+| Shortcut | Action in PechaKucha or Ignite |
+| --- | --- |
+| `Space` | On the start/finished screen: start the `3 · 2 · 1` countdown. During the run: pause or resume with the remaining slide time intact. During the countdown itself it does nothing. |
+| `Enter` | Start the countdown from the start or finished screen; it does nothing during the countdown and timed run. |
+| `←` · `→` · `Page Up` · `Page Down` · `Home` · `End` · digits | Consumed without navigating, so a key or clicker cannot move the deck early. |
+| `G` · `A` · `L` · `M` · `K` · `R` | Consumed: slide-grid jumps, ordinary autoplay/loop/media timing, target-time input and rehearsal reset do not replace the fixed run. |
+| `Esc` | Exit the presentation when no other presenter layer is open. |
+| `Ctrl/Cmd + W` | Close the presentation directly. |
+
+The presenter-side pause button performs the same pause/resume action as
+`Space`. Other view and annotation shortcuts remain available unless an open
+field or overlay owns the keyboard.
 
 Navigation:
 

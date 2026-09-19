@@ -1,6 +1,6 @@
 # OciDeck — Sneltoetsen
 
-> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-09-03 · **Uitgegeven door:** Stichting LibreKAT
+> **Status:** referentie, actueel · **Status laatst nagekeken:** 2026-09-18 · **Uitgegeven door:** Stichting LibreKAT
 
 `Ctrl` wordt getoond voor Windows/Linux; gebruik `Cmd` (⌘) op macOS.
 
@@ -102,6 +102,24 @@ opsommingsteken, genummerde lijst of citaat voort; haakjes en ronde haken worden
 automatisch gepaard, en een derde backtick opent een fenced blok.
 
 ## Presentator op volledig scherm
+
+PechaKucha en Ignite hebben bewust een kleine eigen bediening. Zolang
+`format: pechakucha` of `format: ignite` actief is, vervangt deze tabel de
+gewone navigatietabel hieronder; klikken en de vorige/volgende-acties van een
+clicker worden eveneens geblokkeerd.
+
+| Sneltoets | Actie in PechaKucha of Ignite |
+| --- | --- |
+| `Spatie` | Op het start-/afgerondscherm: begin het aftellen met `3 · 2 · 1`. Tijdens de run: pauzeer of hervat met behoud van de resterende diatijd. Tijdens het aftellen zelf doet de toets niets. |
+| `Enter` | Begin het aftellen vanaf het start- of afgerondscherm; tijdens het aftellen en de getimede run doet de toets niets. |
+| `←` · `→` · `Page Up` · `Page Down` · `Home` · `End` · cijfers | Worden verwerkt zonder te navigeren, zodat een toets of clicker het deck niet voortijdig verplaatst. |
+| `G` · `A` · `L` · `M` · `K` · `R` | Worden verwerkt zonder actie: sprongen via het slideraster, gewone autoplay/herhaling/mediatiming, doeltijdinvoer en het resetten van de oefenrun vervangen de vaste run niet. |
+| `Esc` | Sluit de presentatie af wanneer er geen andere presentatielaag open staat. |
+| `Ctrl/Cmd + W` | Sluit de presentatie direct. |
+
+De pauzeknop aan de presentatorzijde voert dezelfde pauze-/hervatactie uit als
+`Spatie`. Andere weergave- en annotatietoetsen blijven beschikbaar, tenzij een
+open veld of laag het toetsenbord in gebruik heeft.
 
 Navigatie:
 

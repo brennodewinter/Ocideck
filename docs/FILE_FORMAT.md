@@ -1,6 +1,6 @@
 # OciDeck — File Format
 
-> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-08-19 · **Published by:** Stichting LibreKAT
+> **Status:** specification of the on-disk format — the stable contract · **Status last reviewed:** 2026-09-18 · **Published by:** Stichting LibreKAT
 
 ## Contents
 
@@ -278,6 +278,8 @@ over the file. See §6.6 for why that changed.)
 | `standards` | string | Standards the test was carried out against, comma-separated as `name@version` (e.g. `OWASP WSTG@4.2`). MIAUW EIS 4.3.2. The **version is frozen here on purpose**: a report is a record of what was actually used, so reopening it in a build that bundles a newer standard must not silently restate the new version. |
 | `tool` | string | One **per line, repeated**, as `name@version \| url \| description` (e.g. `Burp Suite@2026.4 \| https://portswigger.net \| Web proxy`). The tools used during the test — MIAUW EIS 4.8.2 (.1 description, .2 version, .3 public reference). A different list from `standards`: these are the tester's tools, not the standards tested against. Only the name is required; the rest may be filled in later. |
 | `tlp` | enum | Traffic Light Protocol level (§3.1). Written only when not `none`. |
+| `format` | string/absent | Named presentation-timing preset. Recognised values are `pechakucha` (20 slides × 20 seconds) and `ignite` (20 slides × 15 seconds), case-insensitive. An unrecognised value has no timing effect and is retained on save. |
+| `timing` | nested block/absent | Generic timed-presentation settings. Recognised child fields are listed below. Not written when all settings have their defaults; ignored in favour of a recognised strict `format:` preset. |
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. Overruled by `ocideck_play_only`: a play-only deck never shows the summary, whatever this key says. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
@@ -290,6 +292,55 @@ over the file. See §6.6 for why that changed.)
 | `ocideck_improvement_y01_baseline` | number/absent | Baseline value for Y-01 (project charter). |
 | `ocideck_improvement_y01_goal` | number/absent | Goal value for Y-01 (project charter). |
 | `ocideck_callouts` | nested block/absent | Image callouts (IMAGE_CALLOUTS.md §2). A nested map keyed by slide anchor, each containing `mode:` / `reveal:` directives and `A: point 0.4 0.2 \| description` entry lines. Written only when at least one slide has callouts; writing it bumps `ocideck_format` to `2`. The codec owns this block: on save, only edited entries go through canonical form — comments, malformed entries and unknown tokens are preserved byte-voor-byte (§2.5 nested merge). |
+
+**Timed presentations.** The compact fixed forms are:
+
+```yaml
+format: pechakucha
+```
+
+or:
+
+```yaml
+format: ignite
+```
+
+PechaKucha resolves to one immutable configuration: `autoplay: true`,
+`slide-duration: 20s`, `max-slides: 20`, `required-slides: 20`,
+`stop-after-last-slide: true`, and `manual-advance: false`. Its target duration
+is therefore 6:40. Ignite has the same immutable controls and slide count, with
+`slide-duration: 15s`, so its target duration is 5:00. A deck with fewer or more
+than twenty authored slides still opens and remains editable; the Markdown check
+emits a warning at the `format:` line. When a recognised `format:` and `timing:`
+are both present, the preset wins. The next save writes only the recognised
+`format:` token, so a generic child value cannot silently weaken the named format.
+
+Without a named preset, the generic form is:
+
+```yaml
+timing:
+  autoplay: true
+  slide-duration: 30s
+  max-slides: 12
+  required-slides: 10
+  stop-after-last-slide: true
+  manual-advance: false
+```
+
+| Child field | Type/default | Meaning |
+| --- | --- | --- |
+| `autoplay` | boolean, `false` | Enables the timed runtime when `slide-duration` is also greater than zero. |
+| `slide-duration` | duration, `0` | Time per slide. Accepted suffixes are `ms`, `s`, and `m`; decimals are accepted (`1.5s`). An absent or invalid value becomes zero, which leaves timed playback disabled. |
+| `max-slides` | positive int/absent | Maximum number of slides in validation and the cap on the timed run's effective slide count. Zero, a negative value, and non-numeric text are treated as absent. |
+| `required-slides` | positive int/absent | Required slide count used for missing-slide validation and the target-duration display. Invalid/non-positive values are treated as absent. |
+| `stop-after-last-slide` | boolean, `false` | Marks the timed run complete at its effective total duration instead of leaving it on the last slide. |
+| `manual-advance` | boolean, `true` | When `false`, presenter next/previous paths (including pointer and clicker actions) cannot move the deck. A timed session still reserves its own keyboard controls even when this is `true`. |
+
+The writer always emits `autoplay`, `stop-after-last-slide`, and
+`manual-advance` inside a non-empty generic block. It omits a zero duration and
+absent slide limits. The runtime starts on slide 1, shows a separate 3‑2‑1
+countdown, derives the current slide from elapsed monotonic time, and treats
+paused time as outside the run.
 
 **Migration (Y-01).** A deck that only has `ocideck_improvement_y01` (name, no
 limit keys) remains valid forever; missing limit keys mean `null`. Charts that
@@ -306,7 +357,10 @@ Metadata fields are written only when they are not empty. Text is written as a
 YAML scalar and quoted only when needed (empty value, leading/trailing
 whitespace, special characters such as `: # "`, or a YAML indicator at the
 start). OciDeck does not use a full YAML parser when reading; it uses a simple
-line-by-line parser, so keep front matter flat (one key per line).
+line-by-line parser. Put fields that OciDeck must interpret at the top level,
+one key per line. Its owned nested structures are `timing` and
+`ocideck_callouts`; other nested blocks are preserved under rule 1 but are not
+interpreted.
 
 The local forms of the five standard Marp visual keys (`_color`,
 `_backgroundColor`, `_backgroundImage`, `_header`, `_footer`) are read from a
@@ -3266,6 +3320,7 @@ not model is not reported.
 | **Front matter** | warning | Line without `key: value` shape. |
 | **Front matter** | warning | Key OciDeck does not know: it has no effect, but it is kept on save (§3.0). |
 | **Front matter** | error | Unknown `tlp:` value. |
+| **Presentation timing** | warning | The parsed deck has fewer `required-slides` or more `max-slides` than its `format:`/`timing:` configuration allows. For PechaKucha and Ignite this is any count other than twenty; editing remains available. |
 | **Comment** | error | `<!--` without `-->` on the same line. |
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Comment** | warning | A bare Marp directive (`paginate:`, `footer:`, `backgroundPosition:`, …). OciDeck does not model it, so the whole slide stays free Markdown and gets no slide type (§8, §9). *(Added 2026-08-27, #1815 — this fallback used to happen without a word.)* |
