@@ -1,8 +1,6 @@
 // De stijldialoog van de documentimport (#2119) op zichzelf: wat hij toont
 // bij een gegeven bronstijl, los van een echt bestand.
 
-import 'dart:typed_data';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
