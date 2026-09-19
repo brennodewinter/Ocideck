@@ -54,6 +54,16 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.5] — 2026-09-19
+
+### Added
+
+- feat: PechaKucha en Ignite als vaste presentatieformats
+
+### Changed
+
+- Merge pull request #2112 from codex/release-resume-scanner-image
+
 ## [0.6.4] — 2026-09-18
 
 ### Added
