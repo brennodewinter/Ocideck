@@ -664,6 +664,56 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(mostrado como {vervanger}, conservado para la exportación)',
+  'Accent': 'Acento',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Solo letras, dígitos, espacios, puntos y guiones.',
+  'Alleen tekst': 'Solo texto',
+  'Als documentlogo gebruiken': 'Usar como logotipo del documento',
+  'Bestaande stijl gebruiken': 'Usar el estilo existente',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'La fuente que Word, LibreOffice o un navegador usan si la tienen; arriba se indica lo que muestra OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Este estilo corporativo ya existe como el estilo {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Documento importado; {n} imagen(es) del texto no incluida(s).',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Una imagen del encabezado o pie de página es solo vectorial (SVG) y no puede convertirse en logotipo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Una imagen solo en la portada; no es un logotipo del documento.',
+  'Gewenst lettertype (export)': 'Fuente deseada (exportación)',
+  'Gewenste kopletter (export)': 'Fuente de títulos deseada (exportación)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'El documento tiene su propio estilo corporativo. OciDeck puede guardarlo como estilo y aplicarlo a este documento.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'No se ha podido guardar el logotipo de forma permanente; solo estará disponible durante esta sesión.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'El logotipo estaba centrado; el estilo solo conoce izquierda y derecha, así que irá a la izquierda.',
+  'Kop- en voettekst': 'Encabezado y pie de página',
+  'Kopletter': 'Fuente de los títulos',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'El nivel de título {niveau} tiene su propio color ({kleur}); el estilo solo conoce un color de título.',
+  'Koppen': 'Títulos',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Vacío: al exportar, los títulos siguen la fuente deseada del texto.',
+  'Niet overgenomen': 'No incorporado',
+  'Nieuwe stijl toevoegen': 'Añadir estilo nuevo',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'En la web, el logotipo solo se conserva durante esta sesión.',
+  'Paginanummers': 'Números de página',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Aparece {plaats} en cada página, {mm} mm de ancho.',
+  'Stijl overnemen': 'Adoptar estilo',
+  'Stijl overnemen?': '¿Adoptar el estilo?',
+  'Voettekst': 'Pie de página',
+  'Zelfde als de tekst ({letter})': 'Igual que el texto ({letter})',
+  'gecentreerd bovenaan': 'centrado arriba',
+  'gecentreerd onderaan': 'centrado abajo',
+  'linksboven': 'arriba a la izquierda',
+  'linksonder': 'abajo a la izquierda',
+  'rechtsboven': 'arriba a la derecha',
+  'rechtsonder': 'abajo a la derecha',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Documento importado — no se llevó: {lijst}',
   '{n} tekstkader': '{n} marco de texto',

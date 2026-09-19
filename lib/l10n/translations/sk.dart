@@ -1633,6 +1633,56 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(zobrazené ako {vervanger}, zachované pre export)',
+  'Accent': 'Akcent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Iba písmená, číslice, medzery, bodky a pomlčky.',
+  'Alleen tekst': 'Iba text',
+  'Als documentlogo gebruiken': 'Použiť ako logo dokumentu',
+  'Bestaande stijl gebruiken': 'Použiť existujúci štýl',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Písmo, ktoré Word, LibreOffice alebo prehliadač použije, ak ho má; vyššie je to, čo zobrazuje samotný OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Tento firemný štýl už existuje ako štýl {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument importovaný; {n} obrázok/obrázkov v texte nebolo prevzatých.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Obrázok v hlavičke alebo päte je iba vektorový (SVG) a nemôže sa stať logom.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Obrázok iba na titulnej strane; to nie je logo dokumentu.',
+  'Gewenst lettertype (export)': 'Požadované písmo (export)',
+  'Gewenste kopletter (export)': 'Požadované písmo nadpisov (export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokument nesie vlastný firemný štýl. OciDeck ho môže uložiť ako štýl a použiť na tento dokument.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logo sa nepodarilo natrvalo uložiť; zostáva dostupné len v tejto relácii.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logo bolo na stred; štýl pozná len vľavo a vpravo, pôjde vľavo.',
+  'Kop- en voettekst': 'Hlavička a päta',
+  'Kopletter': 'Písmo nadpisov',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Úroveň nadpisu {niveau} má vlastnú farbu ({kleur}); štýl pozná len jednu farbu nadpisov.',
+  'Koppen': 'Nadpisy',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Prázdne: pri exporte nadpisy preberajú požadované písmo textu.',
+  'Niet overgenomen': 'Neprenesené',
+  'Nieuwe stijl toevoegen': 'Pridať nový štýl',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Na webe zostane logo uložené len v tejto relácii.',
+  'Paginanummers': 'Čísla strán',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Je {plaats} na každej strane, šírka {mm} mm.',
+  'Stijl overnemen': 'Prevziať štýl',
+  'Stijl overnemen?': 'Prevziať štýl?',
+  'Voettekst': 'Päta',
+  'Zelfde als de tekst ({letter})': 'Rovnaké ako text ({letter})',
+  'gecentreerd bovenaan': 'hore na stred',
+  'gecentreerd onderaan': 'dole na stred',
+  'linksboven': 'vľavo hore',
+  'linksonder': 'vľavo dole',
+  'rechtsboven': 'vpravo hore',
+  'rechtsonder': 'vpravo dole',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokument importovaný — neprenesené: {lijst}',
   '{n} tekstkader': '{n} textový rám',

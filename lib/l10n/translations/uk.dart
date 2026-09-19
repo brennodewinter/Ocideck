@@ -1642,6 +1642,56 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(показано як {vervanger}, збережено для експорту)',
+  'Accent': 'Акцент',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Лише літери, цифри, пробіли, крапки та дефіси.',
+  'Alleen tekst': 'Лише текст',
+  'Als documentlogo gebruiken': 'Використати як логотип документа',
+  'Bestaande stijl gebruiken': 'Використати наявний стиль',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Шрифт, який використовує Word, LibreOffice або браузер, якщо він у них є; вище показано, що показує сам OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Цей фірмовий стиль уже існує як стиль {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Документ імпортовано; {n} зображення в тексті не перенесено.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Зображення у верхньому чи нижньому колонтитулі є лише векторним (SVG) і не може стати логотипом.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Зображення лише на титульній сторінці; це не логотип документа.',
+  'Gewenst lettertype (export)': 'Бажаний шрифт (експорт)',
+  'Gewenste kopletter (export)': 'Бажаний шрифт заголовків (експорт)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Документ має власний фірмовий стиль. OciDeck може зберегти його як стиль і застосувати до цього документа.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Не вдалося зберегти логотип назавжди; він доступний лише в цьому сеансі.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Логотип був по центру; стиль знає лише ліворуч і праворуч, тож він буде ліворуч.',
+  'Kop- en voettekst': 'Верхній і нижній колонтитули',
+  'Kopletter': 'Шрифт заголовків',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Рівень заголовка {niveau} має власний колір ({kleur}); стиль знає лише один колір заголовків.',
+  'Koppen': 'Заголовки',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Порожньо: під час експорту заголовки використовують бажаний шрифт тексту.',
+  'Niet overgenomen': 'Не перенесено',
+  'Nieuwe stijl toevoegen': 'Додати новий стиль',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'У вебверсії логотип зберігається лише на цей сеанс.',
+  'Paginanummers': 'Номери сторінок',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Розміщено {plaats} на кожній сторінці, ширина {mm} мм.',
+  'Stijl overnemen': 'Перейняти стиль',
+  'Stijl overnemen?': 'Перейняти стиль?',
+  'Voettekst': 'Нижній колонтитул',
+  'Zelfde als de tekst ({letter})': 'Як у тексті ({letter})',
+  'gecentreerd bovenaan': 'по центру вгорі',
+  'gecentreerd onderaan': 'по центру внизу',
+  'linksboven': 'угорі ліворуч',
+  'linksonder': 'унизу ліворуч',
+  'rechtsboven': 'угорі праворуч',
+  'rechtsonder': 'унизу праворуч',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Документ імпортовано — не перенесено: {lijst}',
   '{n} tekstkader': '{n} текстовий кадр',

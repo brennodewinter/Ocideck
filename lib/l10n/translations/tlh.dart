@@ -1604,6 +1604,56 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '({vervanger} rur \'anglu\', DoQmeH ngeHvaD pollu\')',
+  'Accent': 'DuD',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'ghItmey, mI\'mey, chImmey, lurDechmey, ghItlhmey je neH.',
+  'Alleen tekst': 'mu\' neH',
+  'Als documentlogo gebruiken': 'ghItlh Degh rur yIlo\'',
+  'Bestaande stijl gebruiken': 'motlhghach tu\'lu\'bogh yIlo\'',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Word, LibreOffice pagh browser ghajchugh ghItlh Segh lo\'lu\'bogh; OciDeck\'e\' \'anglu\'bogh Dung \'ang.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'motlhghach {naam} rur qorDu\' SEGH nabvam tu\'lu\'.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Degh loppu\'; mu\'Daq {n} mIllogh(mey) lopbe\'lu\'.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'nav Dung pagh bIngDaq mIllogh vector (SVG) neH \'oH; Degh mojlaHbe\'.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'per navDaq neH mIllogh; ghItlh Degh \'oHbe\'.',
+  'Gewenst lettertype (export)': 'ghItlh Segh neHlu\'bogh (DoQmeH ngeH)',
+  'Gewenste kopletter (export)': 'nach ghItlh Segh neHlu\'bogh (DoQmeH ngeH)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'qorDu\' SEGH nab ghaj ghItlhvam. motlhghach rur pollaH OciDeck \'ej ghItlhvamDaq lo\'laH.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Degh poltaHlaHbe\'; Qu\'vamDaq neH lo\'laH.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'botlhDaq Degh; poS nIH je neH Sov motlhghach, poSDaq ghoS.',
+  'Kop- en voettekst': 'nav Dung bIng je ghItlh',
+  'Kopletter': 'nach ghItlh Segh',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'nach patlh {niveau} rItlh ghaj ({kleur}); wa\' nach rItlh neH Sov motlhghach.',
+  'Koppen': 'nachmey',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'chIm: DoQmeH ngeHDI\', mu\' ghItlh Segh neHlu\'bogh tlha\' nachmey.',
+  'Niet overgenomen': 'lo\'lu\'be\'',
+  'Nieuwe stijl toevoegen': 'motlhghach chu\' chel',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'webDaq Qu\'vamDaq neH Degh pollu\'.',
+  'Paginanummers': 'nav mI\'mey',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Hoch navDaq {plaats} Qam, {mm} mm juch.',
+  'Stijl overnemen': 'motlhghach yItlhap',
+  'Stijl overnemen?': 'motlhghach tlhap\'a\'?',
+  'Voettekst': 'bIng mu\'mey',
+  'Zelfde als de tekst ({letter})': 'mu\' rur ({letter})',
+  'gecentreerd bovenaan': 'Dung botlhDaq',
+  'gecentreerd onderaan': 'bIng botlhDaq',
+  'linksboven': 'poS DungDaq',
+  'linksonder': 'poS bIngDaq',
+  'rechtsboven': 'nIH DungDaq',
+  'rechtsonder': 'nIH bIngDaq',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Deq lanpu — tlhaplu\'be\': {lijst}',
   '{n} tekstkader': '{n} ghItlh wot',

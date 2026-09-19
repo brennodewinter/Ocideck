@@ -1630,6 +1630,56 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(azeigt als {vervanger}, für dr Export bhalte)',
+  'Accent': 'Akzänt',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Nur Buechstabe, Ziffere, Leerzeiche, Pünkt und Bindestrich.',
+  'Alleen tekst': 'Nur Täxt',
+  'Als documentlogo gebruiken': 'Als Dokumänt-Logo bruuche',
+  'Bestaande stijl gebruiken': 'Dr bestehend Stil bruuche',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'D Schrift, wo Word, LibreOffice oder en Browser bruucht, wänn er si het; obe staht, was OciDeck sälber zeigt.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Dä Huusstil git\'s scho als Stil {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument importiert; {n} Bild(er) im Täxt nid übernoh.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Es Bild i de Chopf- oder Fuesszyyle isch nur Vektorgrafik (SVG) und cha kei Logo wärde.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Es Bild nur uf em Titelblatt; das isch kei Dokumänt-Logo.',
+  'Gewenst lettertype (export)': 'Gwünschti Schrift (Export)',
+  'Gewenste kopletter (export)': 'Gwünschti Überschrifteschrift (Export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'S Dokumänt het en eigene Huusstil. OciDeck cha dä als Stil speichere und uf das Dokumänt aawände.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'S Logo het nöd chönne dauerhaft gspeicheret werde; es blibt nume i dere Sitzig verfüegbar.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'S Logo isch zentriert gsi; dr Stil kennt nur links und rächts, es chunnt links.',
+  'Kop- en voettekst': 'Chopf- und Fuesszyyle',
+  'Kopletter': 'Überschrifteschrift',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'D Überschrifte-Ebeni {niveau} het e eigeni Farb ({kleur}); dr Stil kennt nur ei Überschriftefarb.',
+  'Koppen': 'Überschrifte',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Leer: bim Export folged d Überschrifte dr gwünschte Schrift vom Täxt.',
+  'Niet overgenomen': 'Nöd übernoo',
+  'Nieuwe stijl toevoegen': 'Neue Stil dezue tue',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Im Web blibt s Logo nume für die Sitzig gspeicheret.',
+  'Paginanummers': 'Sitezahle',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Staht {plaats} uf jedere Siite, {mm} mm breit.',
+  'Stijl overnemen': 'Stil übernäh',
+  'Stijl overnemen?': 'Stil übernäh?',
+  'Voettekst': 'Fuesszile',
+  'Zelfde als de tekst ({letter})': 'Gliich wie dr Täxt ({letter})',
+  'gecentreerd bovenaan': 'obe zentriert',
+  'gecentreerd onderaan': 'unde zentriert',
+  'linksboven': 'obe links',
+  'linksonder': 'une links',
+  'rechtsboven': 'obe rächts',
+  'rechtsonder': 'une rächts',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokumänt importiert — nöd übernoh: {lijst}',
   '{n} tekstkader': '{n} Tegschtrahme',

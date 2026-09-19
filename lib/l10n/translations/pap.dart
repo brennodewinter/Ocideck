@@ -666,6 +666,56 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(mustrá komo {vervanger}, wardá pa eksportashon)',
+  'Accent': 'Acento',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Solamente letternan, sifranan, espasio, punto i streek.',
+  'Alleen tekst': 'Solamente teksto',
+  'Als documentlogo gebruiken': 'Usa komo logo di dokumento',
+  'Bestaande stijl gebruiken': 'Usa e stilo eksistente',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'E lèter ku Word, LibreOffice òf un browser ta usa si e tin\'é; ariba ta para loke OciDeck mes ta mustra.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'E stil di kas aki ta eksistí kaba komo e stilo {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Documento importá; {n} imagen den e teksto no a wòrdu tumá.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Un imagen den e kabesera òf pia di página ta solamente imagen vektorial (SVG) i no por bira logo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Un imagen solamente riba e página di título; esei no ta un logo di dokumento.',
+  'Gewenst lettertype (export)': 'Tipo di lèter deseá (eksportashon)',
+  'Gewenste kopletter (export)': 'Tipo di lèter deseá pa título (eksportashon)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'E dokumento tin su mes stil di kas. OciDeck por ward\'é komo stilo i aplik\'é riba e dokumento aki.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'No tabata posibel pa warda e logo permanentemente; e ta keda disponibel solamente den e seshon aki.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'E logo tabata sentrá; e stilo konosé solamente robes i drechi, e ta bai robes.',
+  'Kop- en voettekst': 'Kabesera i pia di página',
+  'Kopletter': 'Tipo di lèter di título',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Nivel di título {niveau} tin su mes koló ({kleur}); e stilo konosé un solo koló pa título.',
+  'Koppen': 'Títulonan',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Bashí: na eksportashon e títulonan ta sigui e tipo di lèter deseá di e teksto.',
+  'Niet overgenomen': 'No traspasá',
+  'Nieuwe stijl toevoegen': 'Agregá stilo nobo',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Riba web e logo ta keda wardá solamente den e seshon aki.',
+  'Paginanummers': 'Number di página',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Ta para {plaats} riba kada página, {mm} mm hanchu.',
+  'Stijl overnemen': 'Tuma e stilo',
+  'Stijl overnemen?': 'Tuma e stilo?',
+  'Voettekst': 'Pia di página',
+  'Zelfde als de tekst ({letter})': 'Mesun ku e teksto ({letter})',
+  'gecentreerd bovenaan': 'sentrá na parti ariba',
+  'gecentreerd onderaan': 'sentrá na parti abou',
+  'linksboven': 'ariba na man robes',
+  'linksonder': 'abou na man robes',
+  'rechtsboven': 'ariba na man drechi',
+  'rechtsonder': 'abou na man drechi',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Documento importá — no a keda: {lijst}',
   '{n} tekstkader': '{n} kader di teksto',

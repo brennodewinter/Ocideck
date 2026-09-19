@@ -1652,6 +1652,57 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(εμφανίζεται ως {vervanger}, διατηρείται για την εξαγωγή)',
+  'Accent': 'Τόνος',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Μόνο γράμματα, ψηφία, κενά, τελείες και παύλες.',
+  'Alleen tekst': 'Μόνο κείμενο',
+  'Als documentlogo gebruiken': 'Χρήση ως λογότυπο εγγράφου',
+  'Bestaande stijl gebruiken': 'Χρήση υπάρχοντος στυλ',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Η γραμματοσειρά που χρησιμοποιεί το Word, το LibreOffice ή ένας φυλλομετρητής αν τη διαθέτει· παραπάνω φαίνεται τι εμφανίζει το ίδιο το OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Αυτό το εταιρικό στυλ υπάρχει ήδη ως το στυλ {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Το έγγραφο εισήχθη· {n} εικόνα/ες στο κείμενο δεν μεταφέρθηκαν.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Μια εικόνα στην κεφαλίδα ή στο υποσέλιδο είναι μόνο διανυσματική (SVG) και δεν μπορεί να γίνει λογότυπο.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Μια εικόνα μόνο στη σελίδα τίτλου· δεν είναι λογότυπο εγγράφου.',
+  'Gewenst lettertype (export)': 'Επιθυμητή γραμματοσειρά (εξαγωγή)',
+  'Gewenste kopletter (export)':
+      'Επιθυμητή γραμματοσειρά επικεφαλίδων (εξαγωγή)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Το έγγραφο φέρει δικό του εταιρικό στυλ. Το OciDeck μπορεί να το αποθηκεύσει ως στυλ και να το εφαρμόσει σε αυτό το έγγραφο.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Δεν ήταν δυνατή η μόνιμη αποθήκευση του λογότυπου· παραμένει διαθέσιμο μόνο σε αυτήν τη συνεδρία.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Το λογότυπο ήταν κεντραρισμένο· το στυλ γνωρίζει μόνο αριστερά και δεξιά, θα μπει αριστερά.',
+  'Kop- en voettekst': 'Κεφαλίδα και υποσέλιδο',
+  'Kopletter': 'Γραμματοσειρά επικεφαλίδων',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Το επίπεδο επικεφαλίδας {niveau} έχει δικό του χρώμα ({kleur})· το στυλ γνωρίζει ένα μόνο χρώμα επικεφαλίδων.',
+  'Koppen': 'Επικεφαλίδες',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Κενό: κατά την εξαγωγή οι επικεφαλίδες ακολουθούν την επιθυμητή γραμματοσειρά του κειμένου.',
+  'Niet overgenomen': 'Δεν μεταφέρθηκε',
+  'Nieuwe stijl toevoegen': 'Προσθήκη νέου στυλ',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Στο web το λογότυπο διατηρείται μόνο για αυτήν τη συνεδρία.',
+  'Paginanummers': 'Αριθμοί σελίδων',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Εμφανίζεται {plaats} σε κάθε σελίδα, πλάτος {mm} mm.',
+  'Stijl overnemen': 'Υιοθέτηση στυλ',
+  'Stijl overnemen?': 'Υιοθέτηση στυλ;',
+  'Voettekst': 'Υποσέλιδο',
+  'Zelfde als de tekst ({letter})': 'Ίδια με το κείμενο ({letter})',
+  'gecentreerd bovenaan': 'κεντραρισμένο επάνω',
+  'gecentreerd onderaan': 'κεντραρισμένο κάτω',
+  'linksboven': 'επάνω αριστερά',
+  'linksonder': 'κάτω αριστερά',
+  'rechtsboven': 'επάνω δεξιά',
+  'rechtsonder': 'κάτω δεξιά',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Το έγγραφο εισήχθη — δεν μεταφέρθηκε: {lijst}',
   '{n} tekstkader': '{n} πλαίσιο κειμένου',
