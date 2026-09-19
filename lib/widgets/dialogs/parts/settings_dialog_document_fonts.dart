@@ -174,3 +174,39 @@ class _DocumentHeadingFontPicker extends StatelessWidget {
     );
   }
 }
+
+/// De kopletterinstellingen van het documentvlak (#2119): welke aangeboden
+/// letter de koppen dragen, en de naam die een export daarvoor noemt. Een
+/// top-level bouwer — hij leest alleen [profile] en meldt het nieuwe profiel
+/// via [onChanged] — zodat de stijlbouwer onder zijn plafond blijft.
+List<Widget> _documentHeadingFontControls(
+  AppLocalizations l10n,
+  ThemeProfile profile,
+  ValueChanged<ThemeProfile> onChanged,
+) => [
+  const SizedBox(height: 12),
+  Text(l10n.d('Kopletter'), style: const TextStyle(fontSize: 13)),
+  const SizedBox(height: 6),
+  _DocumentHeadingFontPicker(
+    selected: profile.documentHeadingFontFamily,
+    bodyFont: profile.fontFamily,
+    onSelected: (font) => onChanged(
+      font == null
+          ? profile.copyWith(clearDocumentHeadingFontFamily: true)
+          : profile.copyWith(documentHeadingFontFamily: font),
+    ),
+  ),
+  _PreferredFontField(
+    key: const Key('preferred-document-heading-font-family'),
+    value: profile.preferredDocumentHeadingFontFamily,
+    label: l10n.d('Gewenste kopletter (export)'),
+    helper: l10n.d(
+      'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.',
+    ),
+    onChanged: (value) => onChanged(
+      value == null
+          ? profile.copyWith(clearPreferredDocumentHeadingFontFamily: true)
+          : profile.copyWith(preferredDocumentHeadingFontFamily: value),
+    ),
+  ),
+];

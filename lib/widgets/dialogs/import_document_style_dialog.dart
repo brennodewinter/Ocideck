@@ -170,61 +170,7 @@ class _ImportDocumentStyleDialogState
                   ],
                 ),
               ],
-              if (logo != null) ...[
-                _sectionTitle(l10n.d('Logo')),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Semantics(
-                      image: true,
-                      label: l10n.d('Mogelijk logo'),
-                      child: Container(
-                        width: 120,
-                        height: 64,
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppTheme.slate300),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Image(
-                          image: cappedMemoryImage(logo.bytes),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        l10n
-                            .d(
-                              'Staat {plaats} op elke bladzijde, {mm} mm breed.',
-                            )
-                            .replaceAll('{plaats}', _placeLabel(l10n, logo))
-                            .replaceAll(
-                              '{mm}',
-                              logo.widthMm.toStringAsFixed(0),
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                CheckboxListTile(
-                  key: const Key('import-document-style-logo'),
-                  contentPadding: EdgeInsets.zero,
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: _includeLogo,
-                  onChanged: (value) =>
-                      setState(() => _includeLogo = value ?? false),
-                  title: Text(l10n.d('Als documentlogo gebruiken')),
-                  subtitle: widget.logoIsSessionOnly
-                      ? Text(
-                          l10n.d(
-                            'Op het web blijft het logo alleen deze sessie bewaard.',
-                          ),
-                        )
-                      : null,
-                ),
-              ],
+              if (logo != null) ..._logoSection(l10n, logo),
               if (style.headerText != null ||
                   style.footerText != null ||
                   style.showPageNumbers) ...[
@@ -254,38 +200,93 @@ class _ImportDocumentStyleDialogState
           ),
         ),
       ),
-      actions: [
-        TextButton(
-          key: const Key('import-document-style-text-only'),
-          onPressed: () => Navigator.pop(
-            context,
-            const ImportDocumentStyleChoice.textOnly(),
-          ),
-          child: Text(l10n.d('Alleen tekst')),
-        ),
-        if (widget.existingStyleName != null) ...[
-          TextButton(
-            key: const Key('import-document-style-new'),
-            onPressed: name.isEmpty ? null : _saveNew,
-            child: Text(l10n.d('Nieuwe stijl toevoegen')),
-          ),
-          FilledButton(
-            key: const Key('import-document-style-existing'),
-            onPressed: () => Navigator.pop(
-              context,
-              const ImportDocumentStyleChoice.useExisting(),
-            ),
-            child: Text(l10n.d('Bestaande stijl gebruiken')),
-          ),
-        ] else
-          FilledButton(
-            key: const Key('import-document-style-new'),
-            onPressed: name.isEmpty ? null : _saveNew,
-            child: Text(l10n.d('Stijl overnemen')),
-          ),
-      ],
+      actions: _actions(l10n, name),
     );
   }
+
+  /// Het gevonden logo: miniatuur, waar het stond en hoe breed, en het vinkje
+  /// om het mee te nemen.
+  List<Widget> _logoSection(
+    AppLocalizations l10n,
+    DocumentLogoCandidate logo,
+  ) => [
+    _sectionTitle(l10n.d('Logo')),
+    Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Semantics(
+          image: true,
+          label: l10n.d('Mogelijk logo'),
+          child: Container(
+            width: 120,
+            height: 64,
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              border: Border.all(color: AppTheme.slate300),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Image(
+              image: cappedMemoryImage(logo.bytes),
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Text(
+            l10n
+                .d('Staat {plaats} op elke bladzijde, {mm} mm breed.')
+                .replaceAll('{plaats}', _placeLabel(l10n, logo))
+                .replaceAll('{mm}', logo.widthMm.toStringAsFixed(0)),
+          ),
+        ),
+      ],
+    ),
+    CheckboxListTile(
+      key: const Key('import-document-style-logo'),
+      contentPadding: EdgeInsets.zero,
+      controlAffinity: ListTileControlAffinity.leading,
+      value: _includeLogo,
+      onChanged: (value) => setState(() => _includeLogo = value ?? false),
+      title: Text(l10n.d('Als documentlogo gebruiken')),
+      subtitle: widget.logoIsSessionOnly
+          ? Text(
+              l10n.d('Op het web blijft het logo alleen deze sessie bewaard.'),
+            )
+          : null,
+    ),
+  ];
+
+  /// Alleen tekst; en dan óf "Stijl overnemen", óf — als de huisstijl al een
+  /// profiel is — "Bestaande stijl gebruiken" naast "Nieuwe stijl toevoegen".
+  List<Widget> _actions(AppLocalizations l10n, String name) => [
+    TextButton(
+      key: const Key('import-document-style-text-only'),
+      onPressed: () =>
+          Navigator.pop(context, const ImportDocumentStyleChoice.textOnly()),
+      child: Text(l10n.d('Alleen tekst')),
+    ),
+    if (widget.existingStyleName != null) ...[
+      TextButton(
+        key: const Key('import-document-style-new'),
+        onPressed: name.isEmpty ? null : _saveNew,
+        child: Text(l10n.d('Nieuwe stijl toevoegen')),
+      ),
+      FilledButton(
+        key: const Key('import-document-style-existing'),
+        onPressed: () => Navigator.pop(
+          context,
+          const ImportDocumentStyleChoice.useExisting(),
+        ),
+        child: Text(l10n.d('Bestaande stijl gebruiken')),
+      ),
+    ] else
+      FilledButton(
+        key: const Key('import-document-style-new'),
+        onPressed: name.isEmpty ? null : _saveNew,
+        child: Text(l10n.d('Stijl overnemen')),
+      ),
+  ];
 
   void _saveNew() => Navigator.pop(
     context,

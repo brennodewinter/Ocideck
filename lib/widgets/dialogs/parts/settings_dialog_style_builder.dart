@@ -390,7 +390,14 @@ class _DocumentStyleBuilder {
             _sectionTitle(l10n.d('Tekst')),
             const SizedBox(height: 8),
             ..._documentFontSizeSettings(l10n),
-            ..._documentHeadingFontSettings(l10n),
+            ..._documentHeadingFontControls(
+              l10n,
+              _themeProfile,
+              (profile) => _rebuild(() {
+                _themeProfile = profile;
+                _profileTouched = true;
+              }),
+            ),
             _themeColorAnchor(
               'documentHeadingColor',
               _colorWithContrastWarning(
@@ -459,40 +466,6 @@ class _DocumentStyleBuilder {
       ),
     ];
   }
-
-  /// De kopletter van een document (#2119): welke aangeboden letter de koppen
-  /// dragen, en de naam die een export daarvoor noemt.
-  List<Widget> _documentHeadingFontSettings(AppLocalizations l10n) => [
-    const SizedBox(height: 12),
-    Text(l10n.d('Kopletter'), style: const TextStyle(fontSize: 13)),
-    const SizedBox(height: 6),
-    _DocumentHeadingFontPicker(
-      selected: _themeProfile.documentHeadingFontFamily,
-      bodyFont: _themeProfile.fontFamily,
-      onSelected: (font) => _rebuild(() {
-        _themeProfile = font == null
-            ? _themeProfile.copyWith(clearDocumentHeadingFontFamily: true)
-            : _themeProfile.copyWith(documentHeadingFontFamily: font);
-        _profileTouched = true;
-      }),
-    ),
-    _PreferredFontField(
-      key: const Key('preferred-document-heading-font-family'),
-      value: _themeProfile.preferredDocumentHeadingFontFamily,
-      label: l10n.d('Gewenste kopletter (export)'),
-      helper: l10n.d(
-        'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.',
-      ),
-      onChanged: (value) => _rebuild(() {
-        _themeProfile = value == null
-            ? _themeProfile.copyWith(
-                clearPreferredDocumentHeadingFontFamily: true,
-              )
-            : _themeProfile.copyWith(preferredDocumentHeadingFontFamily: value);
-        _profileTouched = true;
-      }),
-    ),
-  ];
 
   List<Widget> _documentLogoSettings(AppLocalizations l10n) {
     final shared = _themeProfile.documentLogoPath == null;
