@@ -171,8 +171,11 @@ Future<DocumentPdfResult> buildDocumentExportPdf(
     footnotesTitle: labels.footnotesTitle,
   );
 
+  // De klasse (schreef/schreefloos) volgt de letter die de huisstijl vraagt,
+  // niet de plaatsvervanger op het scherm (#2119).
   final fonts = DocumentPdfFonts.forFamily(
-    theme.fontFamily,
+    theme.exportFontFamily,
+    headingFamily: theme.exportDocumentHeadingFontFamily,
     fallbackFonts: fallbackFonts,
   );
   final images = await _resolveImages(blocks, embedImage);

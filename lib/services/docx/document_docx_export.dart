@@ -33,6 +33,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import '../document_export_service.dart' show projectedDocumentBody;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
+import '../../models/settings.dart' show ThemeProfile;
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
 import '../pdf/document_pdf_export.dart'
@@ -93,7 +94,7 @@ Future<Uint8List> buildDocumentExportDocx(
   final pageSize = _pageSizeTwips(bundle);
   final pageMargins = _pageMarginsTwips(bundle);
   final documentXml = _buildDocumentXml(prepared.body, pageSize, pageMargins);
-  final stylesXml = _buildStylesXml();
+  final stylesXml = _buildStylesXml(bundle.audience.deck.themeProfile);
   final numberingXml = _buildNumberingXml();
   final footnotesXml = conversion.footnotes.isNotEmpty
       ? _buildNotesXml(
@@ -564,43 +565,67 @@ String _buildDocumentXml(
       '<w:body>$body\n$sectPr</w:body></w:document>';
 }
 
-String _buildStylesXml() =>
-    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
-    '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
-    '<w:docDefaults><w:rPrDefault><w:rPr>'
-    '<w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>'
-    '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
-    '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
-    '</w:docDefaults>'
-    '${_headingStyle(1, 32, 240)}'
-    '${_headingStyle(2, 26, 240)}'
-    '${_headingStyle(3, 22, 200)}'
-    '${_headingStyle(4, 20, 200)}'
-    '${_headingStyle(5, 18, 160)}'
-    '${_headingStyle(6, 16, 160)}'
-    '<w:style w:type="character" w:styleId="SourceText"><w:rPr>'
-    '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
-    '</w:rPr></w:style>'
-    '<w:style w:type="paragraph" w:styleId="PreformattedText"><w:pPr>'
-    '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
-    '</w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
-    '<w:sz w:val="20"/></w:rPr></w:style>'
-    '<w:style w:type="paragraph" w:styleId="Quote"><w:pPr>'
-    '<w:ind w:left="567" w:right="567"/><w:spacing w:after="160"/>'
-    '</w:pPr><w:rPr><w:i/></w:rPr></w:style>'
-    '<w:style w:type="paragraph" w:styleId="ListParagraph"><w:pPr>'
-    '<w:ind w:left="720" w:hanging="360"/></w:pPr></w:style>'
-    '<w:style w:type="character" w:styleId="Hyperlink"><w:rPr>'
-    '<w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr></w:style>'
-    '<w:style w:type="character" w:styleId="FootnoteReference"><w:rPr>'
-    '<w:vertAlign w:val="superscript"/></w:rPr></w:style>'
-    '</w:styles>';
+/// De stijlen van het document. De letters komen uit het stijlprofiel
+/// (#2119): de lopende tekst in [ThemeProfile.exportFontFamily], de koppen in
+/// [ThemeProfile.exportDocumentHeadingFontFamily] — dus in de letter die de
+/// huisstijl wérkelijk vraagt (`Aptos`), niet in de plaatsvervanger die het
+/// scherm toont. Word heeft die letter doorgaans zelf, en anders valt het
+/// terug zoals Word altijd terugvalt.
+String _buildStylesXml(ThemeProfile theme) {
+  final bodyFont = _rFonts(theme.exportFontFamily);
+  final headingFont = theme.exportDocumentHeadingFontFamily;
+  final headingRFonts = headingFont == theme.exportFontFamily
+      ? ''
+      : _rFonts(headingFont);
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
+      '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+      '<w:docDefaults><w:rPrDefault><w:rPr>'
+      '$bodyFont'
+      '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
+      '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
+      '</w:docDefaults>'
+      '${_headingStyle(1, 32, 240, headingRFonts)}'
+      '${_headingStyle(2, 26, 240, headingRFonts)}'
+      '${_headingStyle(3, 22, 200, headingRFonts)}'
+      '${_headingStyle(4, 20, 200, headingRFonts)}'
+      '${_headingStyle(5, 18, 160, headingRFonts)}'
+      '${_headingStyle(6, 16, 160, headingRFonts)}'
+      '<w:style w:type="character" w:styleId="SourceText"><w:rPr>'
+      '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
+      '</w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="PreformattedText"><w:pPr>'
+      '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
+      '</w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
+      '<w:sz w:val="20"/></w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="Quote"><w:pPr>'
+      '<w:ind w:left="567" w:right="567"/><w:spacing w:after="160"/>'
+      '</w:pPr><w:rPr><w:i/></w:rPr></w:style>'
+      '<w:style w:type="paragraph" w:styleId="ListParagraph"><w:pPr>'
+      '<w:ind w:left="720" w:hanging="360"/></w:pPr></w:style>'
+      '<w:style w:type="character" w:styleId="Hyperlink"><w:rPr>'
+      '<w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr></w:style>'
+      '<w:style w:type="character" w:styleId="FootnoteReference"><w:rPr>'
+      '<w:vertAlign w:val="superscript"/></w:rPr></w:style>'
+      '</w:styles>';
+}
 
-String _headingStyle(int level, int szHalfPt, int spacingAfter) =>
+/// Eén `w:rFonts` voor [family]; de naam is al gesaneerd door het profiel,
+/// de escape is de gordel bij de bretels.
+String _rFonts(String family) {
+  final name = xmlAttr(family);
+  return '<w:rFonts w:ascii="$name" w:hAnsi="$name" w:cs="$name"/>';
+}
+
+String _headingStyle(
+  int level,
+  int szHalfPt,
+  int spacingAfter,
+  String rFonts,
+) =>
     '<w:style w:type="paragraph" w:styleId="Heading$level">'
     '<w:pPr><w:spacing w:before="$spacingAfter" w:after="80"/>'
     '<w:outlineLvl w:val="${level - 1}"/></w:pPr>'
-    '<w:rPr><w:b/><w:sz w:val="$szHalfPt"/></w:rPr></w:style>';
+    '<w:rPr>$rFonts<w:b/><w:sz w:val="$szHalfPt"/></w:rPr></w:style>';
 
 String _buildNumberingXml() =>
     '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'

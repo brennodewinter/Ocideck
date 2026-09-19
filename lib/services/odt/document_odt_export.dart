@@ -22,6 +22,7 @@ import 'package:archive/archive.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
 import '../../models/deck.dart' show TlpLevelX;
+import '../../models/settings.dart' show ThemeProfile;
 import '../document_export_service.dart' show projectedDocumentBody;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
@@ -71,7 +72,7 @@ Future<Uint8List> buildDocumentExportOdt(
   }
 
   // 3. content.xml (stijlen + body).
-  final content = _buildContentXml(odtBody);
+  final content = _buildContentXml(odtBody, bundle.audience.deck.themeProfile);
 
   // 4. meta.xml.
   final metaXml = _buildMetaXml(meta, title);
@@ -190,7 +191,9 @@ String _extensionForMediaType(String mediaType) => switch (mediaType) {
 };
 
 /// content.xml met automatic-styles en body.
-String _buildContentXml(String body) {
+String _buildContentXml(String body, ThemeProfile theme) {
+  final bodyFont = theme.exportFontFamily;
+  final headingFont = theme.exportDocumentHeadingFontFamily;
   final buf = StringBuffer()
     ..writeln('<?xml version="1.0" encoding="UTF-8"?>')
     ..writeln(
@@ -205,8 +208,9 @@ String _buildContentXml(String body) {
       'xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" '
       'office:version="1.2">',
     )
+    ..writeln(_odtFontFaceDecls({bodyFont, headingFont}))
     ..writeln('<office:automatic-styles>')
-    ..writeln(_odtStyles)
+    ..writeln(_odtStyles(bodyFont: bodyFont, headingFont: headingFont))
     ..writeln('</office:automatic-styles>')
     ..writeln('<office:body>')
     ..writeln('<office:text>')
@@ -289,6 +293,20 @@ String _buildManifest(List<_OdtImage> images) {
   return buf.toString();
 }
 
+/// De letterdeclaraties die `style:font-name` in de stijlen nodig heeft
+/// (#2119). Eén per unieke naam; de namen zijn al gesaneerd door het profiel.
+String _odtFontFaceDecls(Set<String> families) {
+  final buf = StringBuffer('<office:font-face-decls>');
+  for (final family in families) {
+    final name = xmlAttr(family);
+    buf.write(
+      '<style:font-face style:name="$name" svg:font-family="&apos;$name&apos;"/>',
+    );
+  }
+  buf.write('</office:font-face-decls>');
+  return buf.toString();
+}
+
 /// ODT-stijlen voor de automatic-styles sectie. Definieert koppen, alinea's,
 /// inline-opmaak, tabellen en lijsten die de converter refereert.
 ///
@@ -296,37 +314,44 @@ String _buildManifest(List<_OdtImage> images) {
 /// ademt: alinea's hebben onderlinge ruimte en een kop blijft nooit wees
 /// onderaan een pagina (`fo:keep-with-next`). Zonder deze zou alles tegen
 /// elkaar plakken — issue #1917.
-const _odtStyles = '''
+///
+/// De letters komen uit het stijlprofiel (#2119): [bodyFont] voor de lopende
+/// tekst, [headingFont] voor de koppen — de letter die de huisstijl vraagt,
+/// niet de plaatsvervanger van het scherm.
+String _odtStyles({required String bodyFont, required String headingFont}) {
+  final body = 'style:font-name="${xmlAttr(bodyFont)}"';
+  final heading = 'style:font-name="${xmlAttr(headingFont)}"';
+  return '''
 <style:default-style style:family="paragraph">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%" fo:text-align="start" style:justify-single-word="false"/>
-  <style:text-properties fo:font-size="100%" style:font-name-asian="Noto Sans CJK SC"/>
+  <style:text-properties $body fo:font-size="100%" style:font-name-asian="Noto Sans CJK SC"/>
 </style:default-style>
 <style:style style:name="Standard" style:family="paragraph" style:class="text">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%"/>
 </style:style>
 <style:style style:name="Heading_20_1" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.8cm" fo:margin-bottom="0.3cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="170%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $heading fo:font-size="170%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_2" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.6cm" fo:margin-bottom="0.25cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="140%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $heading fo:font-size="140%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_3" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.5cm" fo:margin-bottom="0.2cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="120%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $heading fo:font-size="120%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_4" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.4cm" fo:margin-bottom="0.2cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="110%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $heading fo:font-size="110%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_5" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.3cm" fo:margin-bottom="0.15cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="100%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $heading fo:font-size="100%" fo:font-weight="bold" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_6" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.3cm" fo:margin-bottom="0.15cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="100%" fo:font-weight="bold" fo:font-style="italic" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $heading fo:font-size="100%" fo:font-weight="bold" fo:font-style="italic" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Strong" style:family="text">
   <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
@@ -380,6 +405,7 @@ const _odtStyles = '''
   <text:list-level-style-number text:level="10" text:style-name="Number" style:num-format="1." text:start-value="1"/>
 </text:list-style>
 ''';
+}
 
 /// Voor tests: de ODT-bytes bouwen met vaste parameters.
 @visibleForTesting
