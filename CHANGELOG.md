@@ -33,6 +33,12 @@ All notable changes to OciDeck are documented in this file.
   zolang er open issues of pull requests met het label `release-blocker` zijn,
   of `fix/*`-takken op origin die nog niet in `main` zitten; `--ondanks-fixes`
   is de bewuste uitzondering en staat dan in het releaselogboek (#2115).
+- Flutter 3.47.5 (Dart 3.13.4) en de oplosbare pakketten zijn bijgewerkt:
+  `archive` 4.3.0, `dartcv4` 2.3.1, `pdf` 3.13.1, `pdfrx` 2.6.5 (met
+  `pdfrx_engine` 0.6.1 en `pdfium_dart`/`pdfium_flutter` 0.3.1), `objective_c`
+  9.6.0, `code_assets` 2.1.0 en `vector_math` 2.4.3; de software-inventaris
+  volgt. `dartcv4` krijgt bewust een ondergrens van 2.3.1: de OpenCV-build volgt
+  vanaf daar de deployment target van de app, wat onder Xcode 27 nodig is.
 - Flutter 3.47.4 (Dart 3.13.3), de bijbehorende directe en transitieve
   pakketten en de software-inventaris zijn bijgewerkt; de bestandskiezer faalt
   bij een onbekende bestandsgrootte dicht in plaats van onbegrensd in te lezen.
@@ -2677,6 +2683,31 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Flutter 3.47.5 en de oplosbare pakketten; dartcv4 2.3.1 om Xcode 27.**
+  De pin staat op 21 plekken (`.tool-versions`, elke workflow, de docs,
+  `tool/check_toolchain.dart`, de pubspec-toelichting) en beweegt in één
+  commit; het CI-image `ocideck-ci:flutter-3.47.5` is vóór de PR gepubliceerd
+  via een dispatch van `ci-image.yml` op de tak, zodat de poort het kan trekken.
+  `flutter pub upgrade` nam tien pakketten mee binnen de bestaande grenzen;
+  `code_assets` 1.2.1 → 2.1.0 is de enige major, transitief via de build-hooks
+  van dartcv4 en pdfium. `dartcv4` krijgt een ondergrens 2.3.1, met de reden in
+  de pubspec: vanaf 2.3.1 volgt de OpenCV-build de deployment target van de app
+  (hier 12.0) in plaats van een vaste waarde. Onder Xcode 27 weigert xcodebuild
+  een `MACOSX_DEPLOYMENT_TARGET` van 10.15 ("the range of supported deployment
+  target versions is 12.0 to 27.0"); die 10.15 is de terugval van
+  `native_toolchain_cmake` 0.3.2 wanneer er geen doelversie binnenkomt, niet
+  iets van dartcv4 zelf, dat in 2.2.1 en 2.3.0 al `12.0` meegaf ná die terugval.
+  Op deze bouwmachine (Xcode 27.0) bouwde 2.3.0 daarom al; 2.3.1 haalt de
+  hardcodering weg. Twee valkuilen die hier allebei voorbijkwamen: de
+  `.dart_tool/hooks_runner`-cache van dartcv4 is gesleuteld op de
+  configuratie-hash en niet op de pakketversie, dus na een bump botst CMake op
+  "does not match the source used to generate cache" tot je die map weggooit;
+  en de MacPorts-bash (`/opt/local/bin/bash` 5.2.37, gebouwd tegen darwin24)
+  segfault in CoreFoundation zodra Flutter's bootstrap de tool-snapshot
+  herbouwt (`shared.sh` regel 93) — éénmalig `/bin/bash ~/flutter/bin/flutter
+  --version` draaien bouwt de snapshot met Apple's bash, daarna werkt `flutter`
+  weer via `env`. `pdfium_flutter` 0.3.1 verandert niets aan de
+  darwin-verpakking; de PDFium-normalisatie uit #2116 blijft nodig.
 - **0.6.5 ging uit mét de v0.6.4-startfout; drie poorten tegen herhaling
   (#2115).** De fix hieronder stond al als tak op origin toen de onbewaakte
   releaseketen voor 0.6.5 werd gestart; niets in die keten keek ernaar, want de
