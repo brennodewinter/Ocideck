@@ -234,11 +234,13 @@ String _renderTimelineDocx(
   String? headerFill,
   required int contentWidthTwips,
 }) {
-  // De tijdlijn wordt als Word-tabel gerenderd; de marker blijft als
-  // commentaar erboven staan.
+  // De tijdlijn wordt als Word-tabel gerenderd. De `<!-- timeline -->`-marker
+  // blijft in de Markdown-bron staan maar gaat hier niet mee: een
+  // XML-commentaar in het document draagt niets en maakt de body alleen
+  // zwaarder.
   final cols = timeline.headers.length;
   final width = columnWidthTwips(cols, contentWidthTwips);
-  final buf = StringBuffer('<!-- timeline -->\n');
+  final buf = StringBuffer();
   buf.write(_tableOpenXml(cols, contentWidthTwips));
   // Koptekstrij.
   buf.write('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
@@ -475,6 +477,16 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
       // ── Alinea's en blokken ──
       case 'p':
+        // Een tijdlijn is vóór de parse een sentinel op een eigen regel
+        // geworden, waar de parser een alinea van maakt. De tabel die straks
+        // in de plaats van de sentinel komt hoort naast een alinea, niet in
+        // een `w:t` — Word weigert een tabel binnen een tekstelement.
+        final blockSentinel = _loneBlockSentinel(element);
+        if (blockSentinel != null) {
+          _closeParagraph();
+          output.write('$blockSentinel\n');
+          return false;
+        }
         // Binnen een lijstpunt heeft `li` de alinea al geopend; die wordt
         // hergebruikt in plaats van er een tweede binnenin te openen.
         if (_paragraphOpen) {
@@ -629,6 +641,21 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     _ => 'left',
   };
 
+  /// De tekst van een `<p>` die niets anders bevat dan een sentinel die
+  /// straks een heel blok wordt. Op dit moment is dat alleen de tijdlijn;
+  /// de voetnoot- en linksentinels blijven inline en horen juist wél in een
+  /// alinea.
+  String? _loneBlockSentinel(md.Element element) {
+    final children = element.children;
+    if (children == null || children.length != 1) return null;
+    final only = children.first;
+    if (only is! md.Text) return null;
+    final text = only.text.trim();
+    return _timelineSentinel.hasMatch(text) ? text : null;
+  }
+
+  static final RegExp _timelineSentinel = RegExp(r'^OCIDECKTIMELINE\d+END$');
+
   int _tableColumnCount(md.Element table) {
     final firstRow = table.children?.whereType<md.Element>().firstWhere(
       (e) => e.tag == 'thead' || e.tag == 'tbody',
@@ -655,13 +682,14 @@ class _DocxNodeVisitor implements md.NodeVisitor {
           ) ??
           '';
 
+      // Een codeblok, diagram of formule staat op blokniveau: een lijstpunt
+      // dat er een bevat moet zijn alinea eerst sluiten.
+      _closeParagraph();
+
       // Mermaid- en wiskundeblokken worden sentinels; de export-service
       // rasteriseert mermaid naar PNG en zet wiskunde om (of valt terug op
       // bron). Mermaid heet hier 'mermaid'; display-math komt binnen als
       // language-math of language-tex.
-      // Een codeblok, diagram of formule staat op blokniveau: een lijstpunt
-      // dat er een bevat moet zijn alinea eerst sluiten.
-      _closeParagraph();
       if (lang == 'mermaid') {
         final idx = mermaidSources.length;
         mermaidSources.add(codeText);

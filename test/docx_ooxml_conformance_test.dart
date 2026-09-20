@@ -277,6 +277,44 @@ Een slotalinea.
     });
   });
 
+  group('docx: tijdlijn', () {
+    /// Een tijdlijn wordt vóór de parse een sentinel op een eigen regel, waar
+    /// de markdown-parser een alinea van maakt. Werd die sentinel binnen de
+    /// alinea vervangen, dan belandde de hele tabel in een `w:t` — `xmllint`
+    /// tegen `wml.xsd`: "Element content is not allowed, because the content
+    /// type is a simple type definition".
+    const withTimeline = '''
+Ervoor.
+
+<!-- timeline -->
+| Wanneer | Wat | Wie |
+|---|---|---|
+| 2027 | Gunning | CISO |
+
+Erna.
+''';
+
+    test('de tabel staat naast de alinea\'s, niet in een w:t', () {
+      final body = markdownToDocxBody(withTimeline).body;
+      final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
+
+      final tables = doc.findAllElements('tbl', namespaceUri: _w).toList();
+      expect(tables, hasLength(1));
+      expect(_hasAncestor(tables.first, 't'), isFalse);
+      expect(_hasAncestor(tables.first, 'p'), isFalse);
+      expect(_elementsInsideText(doc), isEmpty);
+    });
+
+    test('geen sentinel en geen marker blijven achter', () {
+      final body = markdownToDocxBody(withTimeline).body;
+
+      expect(body, isNot(contains('OCIDECKTIMELINE')));
+      // Het XML-commentaar van de marker hoort niet in de body thuis.
+      expect(body, isNot(contains('<!--')));
+      expect(body, contains('Gunning'));
+    });
+  });
+
   group('docx: het hele bestand', () {
     test('de geëxporteerde document.xml is vrij van overtredingen', () async {
       final bundle = await buildBundle(awkwardMarkdown);
@@ -287,6 +325,7 @@ Een slotalinea.
       expect(_nestedParagraphs(doc), isEmpty);
       expect(_runsOutsideParagraph(doc), isEmpty);
       expect(_tablesInsideParagraph(doc), isEmpty);
+      expect(_elementsInsideText(doc), isEmpty);
       expect(_outOfOrder(doc, 'pPr', _pPrOrder), isEmpty);
       expect(_outOfOrder(doc, 'rPr', _rPrOrder), isEmpty);
     });
@@ -366,6 +405,14 @@ List<String> _nestedParagraphs(XmlNode root) => [
 List<String> _runsOutsideParagraph(XmlNode root) => [
   for (final r in root.findAllElements('r', namespaceUri: _w))
     if (!_hasAncestor(r, 'p')) _textOf(r),
+];
+
+/// `w:t` is in het schema een simpel type: het draagt tekst en niets anders.
+/// Een element of commentaar erin betekent dat er markup in een tekstwaarde
+/// is beland.
+List<String> _elementsInsideText(XmlNode root) => [
+  for (final t in root.findAllElements('t', namespaceUri: _w))
+    if (t.childElements.isNotEmpty) t.childElements.first.localName,
 ];
 
 List<String> _tablesInsideParagraph(XmlNode root) => [

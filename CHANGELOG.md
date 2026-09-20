@@ -91,6 +91,11 @@ All notable changes to OciDeck are documented in this file.
   `word/document.xml`, `word/styles.xml` en `word/numbering.xml` toetsen
   nu schoon tegen `wml.xsd`; het bestand van vóór deze reparatie faalde er
   op twee punten.
+- Een tijdlijn (`<!-- timeline -->` boven een tabel) landde in de
+  DOCX-export binnen een `w:t`: de sentinel die de tabel vervangt stond in
+  een alinea, en `w:t` draagt alleen tekst. De sentinel staat nu op
+  blokniveau, en het XML-commentaar van de marker gaat niet meer mee het
+  document in.
 - De macOS-app breekt niet meer af wanneer het beamervenster vanuit een
   fullscreen Space borderloos op het tweede scherm wordt geplaatst.
 - Tabelwerkbalk: kolom links/rechts voegt weer een kolom in en houdt de cursor in de tabel (#2090, #2092).
