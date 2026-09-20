@@ -114,6 +114,7 @@ same answer `make licenses` and the SBOM give.
 | `web` | Browser interop in the web build | BSD-3-Clause |
 | `wakelock_plus` | Keeps the screen awake while presenting | BSD-3-Clause |
 | `intl` | Locale-aware number formatting in table cells | BSD-3-Clause |
+| `timezone` | Bundled IANA tzdb for rendering session times in the session's declared zone (OciServe planning) — fully offline | BSD-3-Clause |
 | `fl_chart` | Chart slides | MIT |
 | `cupertino_icons` | Icon set | MIT |
 | `desktop_multi_window` | The second (audience) window — vendored fork, see above | Apache-2.0 |

@@ -149,26 +149,47 @@ class _FakeApi implements OciServeApi {
     serverTime: DateTime.utc(2026, 9, 12),
   );
 
+  OciServeExamAttempt attemptValue = OciServeExamAttempt(
+    id: 'attempt',
+    participantId: 'user',
+    blueprintVersionId: 'blueprint',
+    status: 'in_progress',
+    startedAt: DateTime.utc(2026, 9, 12),
+  );
+  OciServeCurrentExamItem? currentItemValue;
+  OciServeAcceptedExamAnswer? acceptedAnswerValue;
+  String? lastIdempotencyKey;
+
   @override
   Future<OciServeExamAttempt> startExamAttempt({
     required String accessToken,
     required String organizationId,
     required String sessionId,
     required String idempotencyKey,
-  }) => throw UnimplementedError();
+  }) async {
+    lastIdempotencyKey = idempotencyKey;
+    return attemptValue;
+  }
 
   @override
   Future<OciServeCurrentExamItem?> currentExamItem({
     required String accessToken,
     required String organizationId,
     required String attemptId,
-  }) => throw UnimplementedError();
+  }) async => currentItemValue;
 
   @override
   Future<OciServeAcceptedExamAnswer> answerExamItem({
     required String accessToken,
     required OciServeExamAnswerMutation mutation,
-  }) => throw UnimplementedError();
+  }) async =>
+      acceptedAnswerValue ??
+      OciServeAcceptedExamAnswer(
+        attemptId: mutation.attemptId,
+        attemptItemId: mutation.attemptItemId,
+        revision: mutation.revision + 1,
+        acceptedAt: DateTime.utc(2026, 9, 12),
+      );
 
   @override
   Future<OciServeExamAttempt> submitExamAttempt({
@@ -176,7 +197,10 @@ class _FakeApi implements OciServeApi {
     required String organizationId,
     required String attemptId,
     required String idempotencyKey,
-  }) => throw UnimplementedError();
+  }) async {
+    lastIdempotencyKey = idempotencyKey;
+    return attemptValue;
+  }
 
   @override
   Future<OciServeLearningState> learningState({
@@ -292,6 +316,111 @@ class _FakeApi implements OciServeApi {
     required String accessToken,
     required String organizationId,
   }) async => Uri.parse('https://badges.example.org');
+
+  OciServeOfferingList offeringListValue = const OciServeOfferingList(
+    offerings: [],
+  );
+  OciServeOfferingSummary? offeringValue;
+  OciServeRegistration? registrationValue;
+  OciServeBookingList bookingListValue = const OciServeBookingList(
+    bookings: [],
+  );
+  OciServeSessionBooking? sessionBookingValue;
+  Object? planningError;
+  String? lastVoucherCode;
+  bool? lastAllowWaitlist;
+  List<String>? lastSessionIds;
+  final bookingActionCalls = <String>[];
+
+  @override
+  Future<OciServeOfferingList> myCourseOfferings({
+    required String accessToken,
+    required String organizationId,
+    String? cursor,
+    DateTime? from,
+    DateTime? to,
+  }) async {
+    if (planningError != null) throw planningError!;
+    return offeringListValue;
+  }
+
+  @override
+  Future<OciServeOfferingSummary> myCourseOffering({
+    required String accessToken,
+    required String organizationId,
+    required String offeringId,
+  }) async {
+    if (planningError != null) throw planningError!;
+    return offeringValue!;
+  }
+
+  @override
+  Future<OciServeRegistration> registerForOffering({
+    required String accessToken,
+    required String organizationId,
+    required String offeringId,
+    required List<String> sessionIds,
+    required bool allowWaitlist,
+    String? voucherCode,
+    required String idempotencyKey,
+  }) async {
+    lastIdempotencyKey = idempotencyKey;
+    lastVoucherCode = voucherCode;
+    lastAllowWaitlist = allowWaitlist;
+    lastSessionIds = sessionIds;
+    if (planningError != null) throw planningError!;
+    return registrationValue!;
+  }
+
+  @override
+  Future<OciServeBookingList> myBookings({
+    required String accessToken,
+    required String organizationId,
+    String? cursor,
+    bool includePast = false,
+  }) async {
+    if (planningError != null) throw planningError!;
+    return bookingListValue;
+  }
+
+  @override
+  Future<OciServeSessionBooking> cancelMyBooking({
+    required String accessToken,
+    required String organizationId,
+    required String bookingId,
+    required String idempotencyKey,
+  }) async {
+    bookingActionCalls.add('cancel:$bookingId');
+    lastIdempotencyKey = idempotencyKey;
+    if (planningError != null) throw planningError!;
+    return sessionBookingValue!;
+  }
+
+  @override
+  Future<OciServeSessionBooking> confirmMyBookingOffer({
+    required String accessToken,
+    required String organizationId,
+    required String bookingId,
+    required String idempotencyKey,
+  }) async {
+    bookingActionCalls.add('confirm:$bookingId');
+    lastIdempotencyKey = idempotencyKey;
+    if (planningError != null) throw planningError!;
+    return sessionBookingValue!;
+  }
+
+  @override
+  Future<OciServeSessionBooking> declineMyBooking({
+    required String accessToken,
+    required String organizationId,
+    required String bookingId,
+    required String idempotencyKey,
+  }) async {
+    bookingActionCalls.add('decline:$bookingId');
+    lastIdempotencyKey = idempotencyKey;
+    if (planningError != null) throw planningError!;
+    return sessionBookingValue!;
+  }
 }
 
 ProviderContainer _container(
@@ -975,5 +1104,188 @@ void main() {
     expect(prefs.getString(kOciServeSettingsKey), isNull);
     expect(await secrets.readOciServeRefreshToken(_settings.baseUrl), isNull);
     expect(await secrets.readOciServeOutbox(_settings.baseUrl), isNull);
+  });
+
+  group('planning self-service', () {
+    Future<OciServeNotifier> signedIn(ProviderContainer container) async {
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      expect(await notifier.login(), isTrue);
+      return notifier;
+    }
+
+    test('leest aanbod en boekingen door naar de gateway', () async {
+      final offering = OciServeOfferingSummary(
+        id: 'off-1',
+        courseVersionId: 'cv-1',
+        name: 'Rijopleiding',
+        status: 'open',
+        selfEnrollmentEnabled: true,
+        voucherRequired: false,
+        maxSelfEnrollmentsPerParticipant: 2,
+      );
+      api.offeringListValue = OciServeOfferingList(offerings: [offering]);
+      api.offeringValue = offering;
+      api.bookingListValue = OciServeBookingList(
+        bookings: [
+          OciServeBooking(
+            id: 'bk-1',
+            sessionId: 'ses-1',
+            enrollmentId: 'enr-1',
+            status: OciServeBookingStatus.booked,
+            participantId: 'user',
+            sessionTitle: 'Ochtend',
+            startsAt: DateTime.utc(2099, 1, 10, 9),
+            endsAt: DateTime.utc(2099, 1, 10, 11),
+            timezone: 'Europe/Amsterdam',
+            offeringId: 'off-1',
+            offeringName: 'Rijopleiding',
+          ),
+        ],
+      );
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = await signedIn(container);
+
+      final list = await notifier.courseOfferings('org');
+      expect(list.offerings.single.id, 'off-1');
+      final detail = await notifier.courseOffering(
+        organizationId: 'org',
+        offeringId: 'off-1',
+      );
+      expect(detail.name, 'Rijopleiding');
+      final bookings = await notifier.myBookings('org', includePast: true);
+      expect(bookings.bookings.single.id, 'bk-1');
+    });
+
+    test(
+      'inschrijven en boekingsacties geven de idempotency-sleutel door',
+      () async {
+        api.registrationValue = const OciServeRegistration(
+          enrollmentId: 'enr-1',
+          bookings: [
+            OciServeSessionBooking(
+              id: 'bk-1',
+              sessionId: 'ses-1',
+              status: OciServeBookingStatus.booked,
+            ),
+          ],
+        );
+        api.sessionBookingValue = const OciServeSessionBooking(
+          id: 'bk-1',
+          sessionId: 'ses-1',
+          status: OciServeBookingStatus.cancelled,
+        );
+        final container = _container(api, secrets);
+        addTearDown(container.dispose);
+        final notifier = await signedIn(container);
+
+        final registration = await notifier.registerForOffering(
+          organizationId: 'org',
+          offeringId: 'off-1',
+          sessionIds: const ['ses-1'],
+          allowWaitlist: true,
+          voucherCode: 'OCVO-AAAA-BBBB',
+          idempotencyKey: 'key-register',
+        );
+        expect(registration.enrollmentId, 'enr-1');
+        expect(api.lastIdempotencyKey, 'key-register');
+        expect(api.lastVoucherCode, 'OCVO-AAAA-BBBB');
+        expect(api.lastAllowWaitlist, isTrue);
+        expect(api.lastSessionIds, ['ses-1']);
+
+        await notifier.cancelBooking(
+          organizationId: 'org',
+          bookingId: 'bk-1',
+          idempotencyKey: 'key-cancel',
+        );
+        await notifier.confirmBookingOffer(
+          organizationId: 'org',
+          bookingId: 'bk-1',
+          idempotencyKey: 'key-confirm',
+        );
+        await notifier.declineBooking(
+          organizationId: 'org',
+          bookingId: 'bk-1',
+          idempotencyKey: 'key-decline',
+        );
+        expect(api.bookingActionCalls, [
+          'cancel:bk-1',
+          'confirm:bk-1',
+          'decline:bk-1',
+        ]);
+        expect(api.lastIdempotencyKey, 'key-decline');
+      },
+    );
+
+    test('weigert een organisatie zonder lidmaatschap', () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = await signedIn(container);
+
+      expect(
+        () => notifier.myBookings('other-org'),
+        throwsA(isA<OciServeException>()),
+      );
+      expect(
+        () => notifier.registerForOffering(
+          organizationId: 'other-org',
+          offeringId: 'off-1',
+          sessionIds: const ['ses-1'],
+          allowWaitlist: false,
+          idempotencyKey: 'key',
+        ),
+        throwsA(isA<OciServeException>()),
+      );
+    });
+  });
+
+  group('examens', () {
+    test('examensessies en -pogingen gaan via de gateway', () async {
+      final container = _container(api, secrets);
+      addTearDown(container.dispose);
+      final notifier = container.read(ociServeProvider.notifier);
+      await notifier.saveSettings(_settings);
+      expect(await notifier.login(), isTrue);
+
+      final sessions = await notifier.examSessions('org');
+      expect(sessions.sessions, isEmpty);
+
+      final attempt = await notifier.startExamAttempt(
+        organizationId: 'org',
+        sessionId: 'session-1',
+        idempotencyKey: 'key-start',
+      );
+      expect(attempt.id, 'attempt');
+      expect(api.lastIdempotencyKey, 'key-start');
+
+      expect(
+        await notifier.currentExamItem(
+          organizationId: 'org',
+          attemptId: 'attempt',
+        ),
+        isNull,
+      );
+
+      const mutation = OciServeExamAnswerMutation(
+        organizationId: 'org',
+        attemptId: 'attempt',
+        attemptItemId: 'item',
+        answerData: {'text': 'antwoord'},
+        challenge: 'abcdefghijklmnopqrstuv',
+        revision: 0,
+        idempotencyKey: 'key-answer',
+      );
+      final accepted = await notifier.answerExamItem(mutation: mutation);
+      expect(accepted.revision, 1);
+
+      final submitted = await notifier.submitExamAttempt(
+        organizationId: 'org',
+        attemptId: 'attempt',
+        idempotencyKey: 'key-submit',
+      );
+      expect(submitted.id, 'attempt');
+      expect(api.lastIdempotencyKey, 'key-submit');
+    });
   });
 }

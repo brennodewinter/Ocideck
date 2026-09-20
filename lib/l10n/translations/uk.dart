@@ -1642,6 +1642,99 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Ви більше не можете скасувати запис: термін минув. Зверніться до своєї організації.',
+  'Aanbod': 'Пропозиція',
+  'Aanwezig geweest': 'Був присутній',
+  'Afmelden': 'Скасувати реєстрацію',
+  'Afmelden voor bijeenkomst': 'Скасувати реєстрацію на заняття',
+  'Afzien': 'Відхилити',
+  'Bekijk mijn inschrijvingen': 'Переглянути мої реєстрації',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Перегляньте, які докази ви подали.',
+  'Binnenkort': 'Незабаром',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Код не зберігається і надсилається лише під час реєстрації.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Обране заняття заповнене. Виберіть інше або встаньте в список очікування.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Зміна не вдалася. Спробуйте ще раз.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Цей код неправильний — перевірте його на помилки.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Це заняття перетинається з наявною подією у вашому розкладі.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Цей код ваучера недійсний для цього курсу.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Ця пропозиція більше не дійсна. Список оновлено.',
+  'Er is een plaats vrij': 'Є вільне місце',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Для вас є вільне місце. Підтвердьте якомога швидше — пропозиція діє до {deadline} спйанйн.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Зараз немає пропозицій для запису.',
+  'Geen sessies gepland.': 'Немає запланованих занять.',
+  'Geweest': 'Минулі',
+  'Het aanbod kon niet worden opgehaald.': 'Не вдалося отримати пропозиції.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'За вашим часовим поясом: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Зареєстрований',
+  'Inschrijven': 'Записатися',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Реєстрація не вдалася. Спробуйте ще раз.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Ви зможете записатися лише після виконання всіх вимог до вступу.',
+  'Inschrijven voor deze uitvoering is gesloten.': 'Запис на цей курс закрито.',
+  'Kies per les precies één sessie.': 'Виберіть рівно одне заняття на урок.',
+  'Mijn inschrijvingen': 'Мої реєстрації',
+  'Niet aanwezig geweest': 'Був відсутній',
+  'Onbekende status': 'Невідомий статус',
+  'Op de wachtlijst': 'У списку очікування',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'У списку очікування, місце {plaats} з {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Поставте мене в список очікування на заповнені заняття',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Запишіться самостійно на курс цієї організації.',
+  'Sessie': 'Заняття',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Забагато спроб — повторіть через {seconden} с.',
+  'Toelatingseisen': 'Вимоги до вступу',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Ви вже записані на цей курс.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Ви ще не записані жодного заняття.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Ви досягли максимальної кількості записів на цей курс.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Ви ще не відповідаєте вимогам до вступу.',
+  'Uitvoering': 'Курс',
+  'Uw inschrijving': 'Ваша реєстрація',
+  'Uw inschrijving is verwerkt.': 'Вашу реєстрацію оброблено.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Не вдалося отримати ваші реєстрації.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Ваші очні заняття: майбутні та минулі.',
+  'Vol': 'Заповнене',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Майже? Запитайте у своєї організації, чи можливе звільнення.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Для цього курсу потрібен код ваучера.',
+  'Vouchercode': 'Код ваучера',
+  'Vouchercode vereist': 'Потрібен код ваучера',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Бажаєте скасувати запис на {titel} {datum}? Місце в списку очікування перейде наступному.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Самостійне скасування було можливе до {deadline}. Після цього — лише через {organisatie}.',
+  'ingeschreven': 'зареєстрований',
+  'nog niet voldaan': 'ще не виконано',
+  'ontheffing verleend': 'звільнення надано',
+  'op de wachtlijst': 'у списку очікування',
+  'verloopt vóór de start': 'закінчується до початку',
+  'voldaan': 'виконано',
+  'wachtlijst': 'список очікування',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} очних уроків · {sessies} занять',
+  '{vrij} plaatsen vrij': '{vrij} вільних місць',
   'Presentatievorm': 'Формат презентації',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Виберіть, як перемикатимуться слайди під час презентації.',

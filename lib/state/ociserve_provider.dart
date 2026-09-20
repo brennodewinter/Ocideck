@@ -21,10 +21,15 @@ import '../utils/log.dart';
 import 'secret_store_provider.dart';
 
 part 'ociserve_state.dart';
+part 'ociserve_provider_planning.dart';
+part 'ociserve_provider_exams.dart';
 
 /// Owns OciServe connection/session state. Tokens stay private to the notifier;
 /// consumers receive only the minimal account/membership read model.
-class OciServeNotifier extends Notifier<OciServeState> {
+/// Abstract: de self-service planningmethoden leven in de mixin
+/// [_OciServePlanningMethods] (part-bestand) om dit bestand onder de
+/// bestandsgrens te houden.
+abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   SecretStore get _secrets => ref.read(secretStoreProvider);
   OciServeGatewayFactory get _gatewayFactory =>
       ref.read(ociServeGatewayFactoryProvider);
@@ -601,67 +606,6 @@ class OciServeNotifier extends Notifier<OciServeState> {
     }
   }
 
-  Future<OciServeExamSessionList> examSessions(String organizationId) async {
-    _requireMembership(organizationId);
-    final access = await _accessToken();
-    return _gatewayFactory(
-      state.settings,
-    ).examSessions(accessToken: access, organizationId: organizationId);
-  }
-
-  Future<OciServeExamAttempt> startExamAttempt({
-    required String organizationId,
-    required String sessionId,
-    required String idempotencyKey,
-  }) async {
-    _requireMembership(organizationId);
-    final access = await _accessToken();
-    return _gatewayFactory(state.settings).startExamAttempt(
-      accessToken: access,
-      organizationId: organizationId,
-      sessionId: sessionId,
-      idempotencyKey: idempotencyKey,
-    );
-  }
-
-  Future<OciServeCurrentExamItem?> currentExamItem({
-    required String organizationId,
-    required String attemptId,
-  }) async {
-    _requireMembership(organizationId);
-    final access = await _accessToken();
-    return _gatewayFactory(state.settings).currentExamItem(
-      accessToken: access,
-      organizationId: organizationId,
-      attemptId: attemptId,
-    );
-  }
-
-  Future<OciServeAcceptedExamAnswer> answerExamItem({
-    required OciServeExamAnswerMutation mutation,
-  }) async {
-    _requireMembership(mutation.organizationId);
-    final access = await _accessToken();
-    return _gatewayFactory(
-      state.settings,
-    ).answerExamItem(accessToken: access, mutation: mutation);
-  }
-
-  Future<OciServeExamAttempt> submitExamAttempt({
-    required String organizationId,
-    required String attemptId,
-    required String idempotencyKey,
-  }) async {
-    _requireMembership(organizationId);
-    final access = await _accessToken();
-    return _gatewayFactory(state.settings).submitExamAttempt(
-      accessToken: access,
-      organizationId: organizationId,
-      attemptId: attemptId,
-      idempotencyKey: idempotencyKey,
-    );
-  }
-
   Future<Uint8List> courseImage({
     required String organizationId,
     required String imageHash,
@@ -996,3 +940,8 @@ class OciServeNotifier extends Notifier<OciServeState> {
     }
   }
 }
+
+/// De concrete notifier: de kern uit [OciServeNotifierBase] plus de
+/// planning-methoden uit [_OciServePlanningMethods].
+class OciServeNotifier extends OciServeNotifierBase
+    with _OciServePlanningMethods, _OciServeExamMethods {}

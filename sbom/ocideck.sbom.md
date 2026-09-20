@@ -2,9 +2,9 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.6.5+31** (licence EUPL-1.2) and every third-party component it ships (219 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.6.5+31** (licence EUPL-1.2) and every third-party component it ships (220 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
-The JSON documents carry **777 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
+The JSON documents carry **780 dependency relations** between these components: each package declares its own dependencies, so the graph can be walked from a leaf back to what pulls it in. 7 component(s) name no supplier — no local source of truth states one, and the field is left empty rather than guessed.
 
 ## Licences
 
@@ -14,12 +14,12 @@ The JSON documents carry **777 dependency relations** between these components: 
 | MIT | 63 |
 | Apache-2.0 | 19 |
 | OFL-1.1 | 7 |
-| BSD | 2 |
+| BSD | 3 |
 | MPL-2.0 | 1 |
 
 ## Components
 
-### Dart / Flutter packages (201)
+### Dart / Flutter packages (202)
 
 | Component | Version | Licence | Supplier | Source |
 | --- | --- | --- | --- | --- |
@@ -185,6 +185,7 @@ The JSON documents carry **777 dependency relations** between these components: 
 | synchronized _(transitive)_ | 3.4.2 | MIT | tekartik | `pkg:pub/synchronized@3.4.2` |
 | term_glyph _(transitive)_ | 1.2.2 | BSD-3-Clause | dart-lang | `pkg:pub/term_glyph@1.2.2` |
 | test_api _(transitive)_ | 0.7.12 | BSD-3-Clause | dart-lang | `pkg:pub/test_api@0.7.12` |
+| timezone _(direct main)_ | 0.11.1 | BSD | dart-lang | `pkg:pub/timezone@0.11.1` |
 | tuple _(transitive)_ | 2.0.2 | BSD | google | `pkg:pub/tuple@2.0.2` |
 | typed_data _(transitive)_ | 1.4.0 | BSD-3-Clause | dart-lang | `pkg:pub/typed_data@1.4.0` |
 | universal_platform _(transitive)_ | 1.1.0 | MIT | gskinnerTeam | `pkg:pub/universal_platform@1.1.0` |

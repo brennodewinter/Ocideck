@@ -1620,6 +1620,101 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Te ei saa enam registreerimist tühistada: tähtaeg on möödunud. Võtke ühendust oma organisatsiooniga.',
+  'Aanbod': 'Pakkumine',
+  'Aanwezig geweest': 'Osales',
+  'Afmelden': 'Registreerimise tühistamine',
+  'Afmelden voor bijeenkomst': 'Seanssist registreerimise tühistamine',
+  'Afzien': 'Keeldu',
+  'Bekijk mijn inschrijvingen': 'Vaata minu registreerumisi',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Vaadake, milliseid tõendeid olete esitanud.',
+  'Binnenkort': 'Peagi',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Koodi ei salvestata ja see saadetakse ainult registreerimisel.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Valitud seanss on täis. Valige teine või pange end ootejärjekorda.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Muudatus ebaõnnestus. Proovige uuesti.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'See kood pole õige — kontrollige kirjavead.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'See seanss kattub teie kalendris olemasoleva kohtumisega.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'See vautšeri kood ei kehti selle läbiviimise jaoks.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'See pakkumine pole enam kehtiv. Nimekiri on värskendatud.',
+  'Er is een plaats vrij': 'On vaba koht',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Teile on vaba koht. Kinnitage võimalikult kiiresti — pakkumine aegub hiljemalt {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Praegu pole pakkumist, kuhu registreeruda.',
+  'Geen sessies gepland.': 'Ühtegi seanssi pole planeeritud.',
+  'Geweest': 'Möödunud',
+  'Het aanbod kon niet worden opgehaald.': 'Pakkumist ei õnnestunud laadida.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Teie ajavööndis: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Registreeritud',
+  'Inschrijven': 'Registreeru',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Registreerumine ebaõnnestus. Proovige uuesti.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Registreeruda saate alles siis, kui täidate kõik vastuvõtunõuded.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Selle läbiviimise registreerimine on suletud.',
+  'Kies per les precies één sessie.':
+      'Valige iga tunni kohta täpselt üks seanss.',
+  'Mijn inschrijvingen': 'Minu registreerumised',
+  'Niet aanwezig geweest': 'Ei osalenud',
+  'Onbekende status': 'Tundmatu olek',
+  'Op de wachtlijst': 'Ootejärjekorras',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Ootejärjekorras, koht {plaats} {totaal}-st',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Pange mind täis seansi(de) ootejärjekorda',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Registreeruge ise selle organisatsiooni läbiviimisele.',
+  'Sessie': 'Seanss',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Liiga palju katseid — proovige uuesti {seconden} sekundi pärast.',
+  'Toelatingseisen': 'Vastuvõtunõuded',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Olete sellele läbiviimisele juba registreerunud.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Te pole veel ühelegi seansile registreerunud.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Olete jõudnud selle läbiviimise registreerimiste maksimumini.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Te ei täida veel vastuvõtunõudeid.',
+  'Uitvoering': 'Läbiviimine',
+  'Uw inschrijving': 'Teie registreerumine',
+  'Uw inschrijving is verwerkt.': 'Teie registreerumine on töödeldud.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Teie registreerumisi ei õnnestunud laadida.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Teie kontakttunnid: tulevased ja möödunud.',
+  'Vol': 'Täis',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Peaaegu? Küsige oma organisatsioonilt, kas erand on võimalik.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Selle läbiviimise jaoks on vaja vautšeri koodi.',
+  'Vouchercode': 'Vautšeri kood',
+  'Vouchercode vereist': 'Vautšeri kood nõutud',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Kas soovite tühistada registreerumise {titel} {datum}? Võimalik ootejärjekorra koht läheb siis järgmisele.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Ise tühistamine oli võimalik kuni {deadline}. Pärast seda ainult {organisatie} kaudu.',
+  'ingeschreven': 'registreeritud',
+  'nog niet voldaan': 'veel täitmata',
+  'ontheffing verleend': 'erand antud',
+  'op de wachtlijst': 'ootejärjekorras',
+  'verloopt vóór de start': 'aegub enne algust',
+  'voldaan': 'täidetud',
+  'wachtlijst': 'ootejärjekord',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} kontakttundi · {sessies} seanssi',
+  '{vrij} plaatsen vrij': '{vrij} vaba kohta',
   'Presentatievorm': 'Esitlusvorming',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Vali, kuidas slaidid esitluse ajal edasi liiguvad.',

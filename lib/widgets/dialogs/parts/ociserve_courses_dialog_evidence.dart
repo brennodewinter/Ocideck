@@ -4,7 +4,7 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
   Future<void> _loadEvidence() async {
     final org = _organizationId;
     if (org == null) return;
-    _changePrivacy(() {
+    _mutate(() {
       _evidenceLoading = true;
       _evidenceError = null;
     });
@@ -17,11 +17,11 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
             .read(ociServeProvider.notifier)
             .privacyData(org);
         if (!mounted || org != _organizationId) return;
-        _changePrivacy(() => _privacyData = privacy);
+        _mutate(() => _privacyData = privacy);
         participantId = privacy.participantId;
       }
       if (participantId.isEmpty) {
-        _changePrivacy(() {
+        _mutate(() {
           _evidenceLoading = false;
           _evidenceError = 'no_participant';
         });
@@ -39,7 +39,7 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
         ),
       ]);
       if (!mounted || org != _organizationId) return;
-      _changePrivacy(() {
+      _mutate(() {
         _evidenceUploads = results[0] as List<EvidenceUpload>;
         _qualifications = results[1] as List<OciServeQualification>;
         _evidenceLoading = false;
@@ -47,7 +47,7 @@ extension _OciServeCoursesDialogEvidence on _OciServeCoursesDialogState {
     } catch (error, stack) {
       logError('OciServe: bewijs laden', error.runtimeType, stack);
       if (!mounted || org != _organizationId) return;
-      _changePrivacy(() {
+      _mutate(() {
         _evidenceLoading = false;
         _evidenceError = 'load_failed';
       });

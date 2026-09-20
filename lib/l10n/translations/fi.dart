@@ -1627,6 +1627,101 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Et voi enää perua: määräaika on umpeutunut. Ota yhteyttä organisaatioosi.',
+  'Aanbod': 'Tarjonta',
+  'Aanwezig geweest': 'Oli paikalla',
+  'Afmelden': 'Peru ilmoittautuminen',
+  'Afmelden voor bijeenkomst': 'Peru ilmoittautuminen tilaisuuteen',
+  'Afzien': 'Hylkää',
+  'Bekijk mijn inschrijvingen': 'Katso ilmoittautumiseni',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Katso, mitä todisteita olet lähettänyt.',
+  'Binnenkort': 'Pian',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Koodia ei tallenneta ja se lähetetään vain ilmoittautumisen yhteydessä.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Valittu istunto on täynnä. Valitse toinen tai liity jonotuslistalle.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Muutos epäonnistui. Yritä uudelleen.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Tämä koodi ei ole oikein — tarkista kirjoitusvirheet.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Tämä istunto menee päällekkäin kalenterissasi olevan tapaamisen kanssa.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Tämä etukoodi ei kelpaa tähän toteutukseen.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Tämä tarjous ei ole enää voimassa. Lista on päivitetty.',
+  'Er is een plaats vrij': 'Paikka on vapaa',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Sinulle on vapaa paikka. Vahvista mahdollisimman pian — tarjous vanhenee viimeistään {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Tällä hetkellä ei ole tarjontaa, johon ilmoittautua.',
+  'Geen sessies gepland.': 'Ei aikataulutettuja istuntoja.',
+  'Geweest': 'Menneet',
+  'Het aanbod kon niet worden opgehaald.': 'Tarjontaa ei voitu hakea.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Aikavyöhykkeelläsi: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Ilmoittautunut',
+  'Inschrijven': 'Ilmoittaudu',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Ilmoittautuminen epäonnistui. Yritä uudelleen.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Voit ilmoittautua vasta, kun täytät kaikki hyväksymisvaatimukset.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Ilmoittautuminen tähän toteutukseen on sulkeutunut.',
+  'Kies per les precies één sessie.':
+      'Valitse tasan yksi istunto oppituntia kohden.',
+  'Mijn inschrijvingen': 'Ilmoittautumiseni',
+  'Niet aanwezig geweest': 'Ei ollut paikalla',
+  'Onbekende status': 'Tuntematon tila',
+  'Op de wachtlijst': 'Jonotuslistalla',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Jonotuslistalla, sija {plaats}/{totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Laita minut jonotuslistalle täynnä oleville istunnoille',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Ilmoittaudu itse tämän organisaation toteutukseen.',
+  'Sessie': 'Istunto',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Liian monta yritystä — yritä uudelleen {seconden} sekunnin kuluttua.',
+  'Toelatingseisen': 'Hyväksymisvaatimukset',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Olet jo ilmoittautunut tähän toteutukseen.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Et ole vielä ilmoittautunut mihinkään istuntoon.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Olet saavuttanut tämän toteutuksen enimmäisilmoittautumisten määrän.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Et täytä vielä hyväksymisvaatimuksia.',
+  'Uitvoering': 'Toteutus',
+  'Uw inschrijving': 'Ilmoittautumisesi',
+  'Uw inschrijving is verwerkt.': 'Ilmoittautumisesi on käsitelty.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Ilmoittautumisiasi ei voitu hakea.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Lähiopetustuntisi: tulevat ja menneet.',
+  'Vol': 'Täynnä',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Lähes? Kysy organisaatioltasi, onko vapautus mahdollinen.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Tähän toteutukseen vaaditaan etukoodi.',
+  'Vouchercode': 'Etukoodi',
+  'Vouchercode vereist': 'Etukoodi vaaditaan',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Haluatko perua ilmoittautumisesi tapahtumaan {titel} {datum}? Mahdollinen jonotuspaikka siirtyy seuraavalle.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Peruutus itse oli mahdollista {deadline} asti. Sen jälkeen vain {organisatie} kautta.',
+  'ingeschreven': 'ilmoittautunut',
+  'nog niet voldaan': 'ei vielä täytetty',
+  'ontheffing verleend': 'vapautus myönnetty',
+  'op de wachtlijst': 'jonotuslistalla',
+  'verloopt vóór de start': 'vanhenee ennen alkua',
+  'voldaan': 'täytetty',
+  'wachtlijst': 'jonotuslista',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} lähiopetustuntia · {sessies} istuntoa',
+  '{vrij} plaatsen vrij': '{vrij} paikkaa vapaana',
   'Presentatievorm': 'Esitysmuoto',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Valitse, miten diat vaihtuvat esityksen aikana.',

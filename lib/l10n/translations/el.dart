@@ -1652,6 +1652,102 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Δεν μπορείτε πλέον να ακυρώσετε: η προθεσμία έληξε. Επικοινωνήστε με τον οργανισμό σας.',
+  'Aanbod': 'Προσφορά',
+  'Aanwezig geweest': 'Ήταν παρών',
+  'Afmelden': 'Ακύρωση εγγραφής',
+  'Afmelden voor bijeenkomst': 'Ακύρωση εγγραφής στη συνεδρία',
+  'Afzien': 'Απόρριψη',
+  'Bekijk mijn inschrijvingen': 'Δείτε τις εγγραφές μου',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Δείτε ποια αποδεικτικά έχετε υποβάλει.',
+  'Binnenkort': 'Σύντομα',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Ο κωδικός δεν αποθηκεύεται και αποστέλλεται μόνο κατά την εγγραφή.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Η επιλεγμένη συνεδρία είναι πλήρης. Επιλέξτε άλλη ή μπείτε στη λίστα αναμονής.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Η αλλαγή απέτυχε. Δοκιμάστε ξανά.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Αυτός ο κωδικός δεν είναι σωστός — ελέγξτε για τυπογραφικά λάθη.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Αυτή η συνεδρία επικαλύπτεται με υπάρχον ραντεβού στο ημερολόγιό σας.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Αυτός ο κωδικός voucher δεν ισχύει για αυτή την υλοποίηση.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Αυτή η προσφορά δεν ισχύει πλέον. Η λίστα ανανεώθηκε.',
+  'Er is een plaats vrij': 'Υπάρχει ελεύθερη θέση',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Υπάρχει διαθέσιμη θέση για εσάς. Επιβεβαιώστε το συντομότερο — η προσφορά λήγει το αργότερο στις {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Δεν υπάρχει προσφορά για εγγραφή αυτή τη στιγμή.',
+  'Geen sessies gepland.': 'Δεν έχουν προγραμματιστεί συνεδρίες.',
+  'Geweest': 'Παρελθόντες',
+  'Het aanbod kon niet worden opgehaald.':
+      'Δεν ήταν δυνατή η ανάκτηση της προσφοράς.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Στη ζώνη ώρας σας: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Εγγεγραμμένος',
+  'Inschrijven': 'Εγγραφή',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Η εγγραφή απέτυχε. Δοκιμάστε ξανά.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Μπορείτε να εγγραφείτε μόνο όταν πληροίτε όλες τις προϋποθέσεις εισαγωγής.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Η εγγραφή για αυτή την υλοποίηση έχει κλείσει.',
+  'Kies per les precies één sessie.':
+      'Επιλέξτε ακριβώς μία συνεδρία ανά μάθημα.',
+  'Mijn inschrijvingen': 'Οι εγγραφές μου',
+  'Niet aanwezig geweest': 'Ήταν απόντ',
+  'Onbekende status': 'Άγνωστη κατάσταση',
+  'Op de wachtlijst': 'Σε λίστα αναμονής',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Σε λίστα αναμονής, θέση {plaats} από {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Βάλτε με στη λίστα αναμονής για τις πλήρεις συνεδρίες',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Εγγραφείτε μόνοι σας σε μια υλοποίηση αυτού του οργανισμού.',
+  'Sessie': 'Συνεδρία',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Πάρα πολλές προσπάθειες — δοκιμάστε ξανά σε {seconden} δευτερόλεπτα.',
+  'Toelatingseisen': 'Προϋποθέσεις εισαγωγής',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Είστε ήδη εγγεγραμμένος σε αυτή την υλοποίηση.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Δεν έχετε εγγραφεί ακόμη σε καμία συνεδρία.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Έχετε φτάσει τον μέγιστο αριθμό εγγραφών για αυτή την υλοποίηση.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Δεν πληροίτε ακόμη τις προϋποθέσεις εισαγωγής.',
+  'Uitvoering': 'Υλοποίηση',
+  'Uw inschrijving': 'Η εγγραφή σας',
+  'Uw inschrijving is verwerkt.': 'Η εγγραφή σας έχει επεξεργαστεί.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Δεν ήταν δυνατή η ανάκτηση των εγγραφών σας.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Οι δια ζώσης συνεδρίες σας: επερχόμενες και παρελθούσες.',
+  'Vol': 'Πλήρης',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Σχεδόν; Ρωτήστε τον οργανισμό σας αν είναι δυνατή μια παρέκκλιση.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Για αυτή την υλοποίηση απαιτείται κωδικός voucher.',
+  'Vouchercode': 'Κωδικός voucher',
+  'Vouchercode vereist': 'Απαιτείται κωδικός voucher',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Θέλετε να ακυρώσετε την εγγραφή σας στο {titel} στις {datum}; Τυχόν θέση στη λίστα αναμονής θα περάσει στον επόμενο.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Η αυτό-ακύρωση ήταν δυνατή έως {deadline}. Στη συνέχεια μόνο μέσω {organisatie}.',
+  'ingeschreven': 'εγγεγραμμένος',
+  'nog niet voldaan': 'δεν πληρείται ακόμη',
+  'ontheffing verleend': 'χορηγήθηκε παρέκκλιση',
+  'op de wachtlijst': 'σε λίστα αναμονής',
+  'verloopt vóór de start': 'λήγει πριν την έναρξη',
+  'voldaan': 'πληρείται',
+  'wachtlijst': 'λίστα αναμονής',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} δια ζώσης μαθήματα · {sessies} συνεδρίες',
+  '{vrij} plaatsen vrij': '{vrij} θέσεις ελεύθερες',
   'Presentatievorm': 'Μορφή παρουσίασης',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Επιλέξτε πώς θα προχωρούν οι διαφάνειες κατά την παρουσίαση.',

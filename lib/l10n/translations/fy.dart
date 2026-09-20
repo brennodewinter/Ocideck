@@ -667,6 +667,100 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Jo kinne jo net mear ôfmelde: de termyn is ferrûn. Nim kontakt op mei jo organisaasje.',
+  'Aanbod': 'Oanbod',
+  'Aanwezig geweest': 'Oanwêzich west',
+  'Afmelden': 'Ofmelde',
+  'Afmelden voor bijeenkomst': 'Ofmelde foar sesje',
+  'Afzien': 'Ofsjen',
+  'Bekijk mijn inschrijvingen': 'Besjoch myn ynskriuwings',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Sjoch hokker bewiisstikken jo yntsjinne hawwe.',
+  'Binnenkort': 'Koartlyn',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'De koade wurdt net bewarre en allinnich by ynskriuwing ferstjoerd.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'De keazen sesje sit fol. Kies in oare sesje of set josels op de wachtlist.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'De wiziging is mislearre. Probearje it opnij.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Dizze koade kloppet net — kontrolearje him op typfouten.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Dizze sesje oerlapet in besteande ôfspraak yn jo aginda.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Dizze voucherkoade is net jildich foar dizze útfiering.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Dit oanbod is net mear jildich. De list is fernijd.',
+  'Er is een plaats vrij': 'In plak is frij',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Der is in plak frij foar jo. Befêstigje sa fluch as mooglik — it oanbod ferrint op syn letst op {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Der is no gjin oanbod om jo foar yn te skriuwen.',
+  'Geen sessies gepland.': 'Gjin sesjes pland.',
+  'Geweest': 'West',
+  'Het aanbod kon niet worden opgehaald.': 'It oanbod koe net ophelle wurde.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Yn jo tiidsône: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Ynskreaun',
+  'Inschrijven': 'Ynskriuwe',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Ynskriuwing is mislearre. Probearje it opnij.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Jo kinne jo pas ynskriuwe as jo oan alle talittingseasken foldogge.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Ynskriuwing foar dizze útfiering is sletten.',
+  'Kies per les precies één sessie.': 'Kies per les krekt ien sesje.',
+  'Mijn inschrijvingen': 'Myn ynskriuwings',
+  'Niet aanwezig geweest': 'Net oanwêzich west',
+  'Onbekende status': 'Unbekende status',
+  'Op de wachtlijst': 'Op de wachtlist',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Op de wachtlist, plak {plaats} fan {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Set my op de wachtlist foar de folle sesje(s)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Skriuw josels yn foar in útfiering fan dizze organisaasje.',
+  'Sessie': 'Sesje',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Te folle besykjen — probearje it oer {seconden} sekonden opnij.',
+  'Toelatingseisen': 'Talittingseasken',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Jo binne al ynskreaun foar dizze útfiering.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Jo binne noch net ynskreaun foar in sesje.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Jo hawwe it maksimale oantal ynskriuwings foar dizze útfiering berikt.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Jo foldogge noch net oan de talittingseasken.',
+  'Uitvoering': 'Útfiering',
+  'Uw inschrijving': 'Jo ynskriuwing',
+  'Uw inschrijving is verwerkt.': 'Jo ynskriuwing is ferwurke.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Jo ynskriuwings koene net ophelle wurde.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Jo klassikale sesjes: koartlyn en west.',
+  'Vol': 'Fol',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Hast? Fregje jo organisaasje oft in ûntheffing mooglik is.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Foar dizze útfiering is in voucherkoade fereaske.',
+  'Vouchercode': 'Voucherkoade',
+  'Vouchercode vereist': 'Voucherkoade fereaske',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Wolle jo jo ôfmelde foar {titel} op {datum}? In mooglik plak op de wachtlist giet dan nei de folgjende.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Sels ôfmelde koe oant {deadline}. Dêrnei kin ôfmelden allinnich noch fia {organisatie}.',
+  'ingeschreven': 'ynskreaun',
+  'nog niet voldaan': 'noch net foldien',
+  'ontheffing verleend': 'ûntheffing ferliend',
+  'op de wachtlijst': 'op de wachtlist',
+  'verloopt vóór de start': 'ferrint foar de start',
+  'voldaan': 'foldien',
+  'wachtlijst': 'wachtlist',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} klassikale lessen · {sessies} sesjes',
+  '{vrij} plaatsen vrij': '{vrij} plakken frij',
   'Presentatievorm': 'Presintaasjefoarm',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Kies hoe\'t de dia\'s by it presintearjen trochgean.',

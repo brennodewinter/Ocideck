@@ -1625,6 +1625,101 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Jūs nevarat vairs atcelt reģistrāciju: termiņš ir beidzies. Sazinieties ar savu organizāciju.',
+  'Aanbod': 'Piedāvājums',
+  'Aanwezig geweest': 'Bija klāt',
+  'Afmelden': 'Atcelt reģistrāciju',
+  'Afmelden voor bijeenkomst': 'Atcelt reģistrāciju nodarbībai',
+  'Afzien': 'Atteikties',
+  'Bekijk mijn inschrijvingen': 'Skatīt manas reģistrācijas',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Skatiet, kādus pierādījumus esat iesniedzis.',
+  'Binnenkort': 'Drīz',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Kods netiek saglabāts un tiek nosūtīts tikai reģistrējoties.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Izvēlētā sesija ir pilna. Izvēlieties citu vai pierakstieties gaidīšanas sarakstā.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Izmaiņa neizdevās. Mēģiniet vēlreiz.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Šis kods nav pareizs — pārbaudiet drukas kļūdas.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Šī sesija pārklājas ar esošu tikšanos jūsu kalendārā.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Šis kupona kods nav derīgs šai norisei.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Šis piedāvājums vairs nav derīgs. Saraksts ir atjaunināts.',
+  'Er is een plaats vrij': 'Ir brīva vieta',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Jums ir brīva vieta. Apstipriniet pēc iespējas ātrāk — piedāvājums beidzas vēlākais {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Pašlaik nav piedāvājuma, kuram pieteikties.',
+  'Geen sessies gepland.': 'Nav ieplānotu sesiju.',
+  'Geweest': 'Pagājušās',
+  'Het aanbod kon niet worden opgehaald.': 'Piedāvājumu neizdevās ielādēt.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Jūsu laika joslā: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Reģistrēts',
+  'Inschrijven': 'Pierakstīties',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Reģistrācija neizdevās. Mēģiniet vēlreiz.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Jūs varēsiet pieteikties tikai tad, kad izpildīsiet visas uzņemšanas prasības.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Reģistrācija šai norisei ir slēgta.',
+  'Kies per les precies één sessie.':
+      'Izvēlieties tieši vienu sesiju katrai nodarbībai.',
+  'Mijn inschrijvingen': 'Manas reģistrācijas',
+  'Niet aanwezig geweest': 'Nebija klāt',
+  'Onbekende status': 'Nezināms statuss',
+  'Op de wachtlijst': 'Gaidīšanas sarakstā',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Gaidīšanas sarakstā, vieta {plaats} no {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Ierakstiet mani gaidīšanas sarakstā pilnajai(-ām) sesijai(-ām)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Pieteikties pats šīs organizācijas norisei.',
+  'Sessie': 'Sesija',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Pārāk daudz mēģinājumu — mēģiniet vēlreiz pēc {seconden} sekundēm.',
+  'Toelatingseisen': 'Uzņemšanas prasības',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Jūs jau esat reģistrējies šai norisei.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Jūs vēl neesat reģistrējies nevienai nodarbībai.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Jūs esat sasniedzis maksimālo reģistrāciju skaitu šai norisei.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Jūs vēl neatbildāt uzņemšanas prasībām.',
+  'Uitvoering': 'Norise',
+  'Uw inschrijving': 'Jūsu reģistrācija',
+  'Uw inschrijving is verwerkt.': 'Jūsu reģistrācija ir apstrādāta.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Jūsu reģistrācijas neizdevās ielādēt.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Jūsu klātienes nodarbības: gaidāmās un pagājušās.',
+  'Vol': 'Pilna',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Gandrīz? Jautājiet savai organizācijai, vai iespējams atbrīvojums.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Šai norisei nepieciešams kupona kods.',
+  'Vouchercode': 'Kupona kods',
+  'Vouchercode vereist': 'Nepieciešams kupona kods',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Vai vēlaties atcelt reģistrāciju {titel} {datum}? Iespējama vieta gaidīšanas sarakstā pāries nākamajam.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Pats atcelt reģistrāciju varēja līdz {deadline}. Pēc tam tikai caur {organisatie}.',
+  'ingeschreven': 'reģistrēts',
+  'nog niet voldaan': 'vēl nav izpildīts',
+  'ontheffing verleend': 'atbrīvojums piešķirts',
+  'op de wachtlijst': 'gaidīšanas sarakstā',
+  'verloopt vóór de start': 'beidzas pirms sākuma',
+  'voldaan': 'izpildīts',
+  'wachtlijst': 'gaidīšanas saraksts',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} klātienes nodarbības · {sessies} sesijas',
+  '{vrij} plaatsen vrij': '{vrij} brīvas vietas',
   'Presentatievorm': 'Prezentācijas formāts',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Izvēlieties, kā slaidi pāriet prezentācijas laikā.',

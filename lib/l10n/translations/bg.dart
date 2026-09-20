@@ -1647,6 +1647,101 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Вече не можете да се отпишете: срокът е изтекъл. Свържете се с вашата организация.',
+  'Aanbod': 'Оферта',
+  'Aanwezig geweest': 'Беше присъстнал',
+  'Afmelden': 'Отказ от записване',
+  'Afmelden voor bijeenkomst': 'Отказ от сесията',
+  'Afzien': 'Откажи',
+  'Bekijk mijn inschrijvingen': 'Виж моите записвания',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Вижте какви доказателства сте подали.',
+  'Binnenkort': 'Скоро',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Кодът не се съхранява и се изпраща само при записване.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Избраната сесия е пълна. Изберете друга или се запишете в списъка за чакащи.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Промяната не успя. Опитайте отново.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Този код не е верен — проверете за правописни грешки.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Тази сесия се припокрива със съществуваща среща в календара ви.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Този ваучерен код не е валиден за това издание.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Това предложение вече не е валидно. Списъкът е обновен.',
+  'Er is een plaats vrij': 'Има свободно място',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Има свободно място за вас. Потвърдете възможно най-скоро — офертата изтича най-късно на {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'В момента няма оферта, за която да се запишете.',
+  'Geen sessies gepland.': 'Няма планирани сесии.',
+  'Geweest': 'Минали',
+  'Het aanbod kon niet worden opgehaald.':
+      'Офертата не можа да бъде изтеглена.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Във вашата часова зона: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Записан',
+  'Inschrijven': 'Запиши се',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Записването не успя. Опитайте отново.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Можете да се запишете едва след като изпълните всички условия за допускане.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Записването за това издание е затворено.',
+  'Kies per les precies één sessie.': 'Изберете точно една сесия на урок.',
+  'Mijn inschrijvingen': 'Моите записвания',
+  'Niet aanwezig geweest': 'Не е присъствал',
+  'Onbekende status': 'Неизвестен статус',
+  'Op de wachtlijst': 'В списъка за чакащи',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'В списъка за чакащи, място {plaats} от {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Запишете ме в списъка за чакащи за пълната(ите) сесия(и)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Запишете се сами за издание на тази организация.',
+  'Sessie': 'Сесия',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Твърде много опити — опитайте отново след {seconden} секунди.',
+  'Toelatingseisen': 'Условия за допускане',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Вече сте записани за това издание.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Все още не сте записани за сесия.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Достигнахте максималния брой записвания за това издание.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Все още не отговаряте на условията за допускане.',
+  'Uitvoering': 'Издание',
+  'Uw inschrijving': 'Вашето записване',
+  'Uw inschrijving is verwerkt.': 'Вашето записване е обработено.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Вашите записвания не можаха да бъдат изтеглени.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Вашите присъствени занятия: предстоящи и минали.',
+  'Vol': 'Пълна',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Почти? Попитайте вашата организация дали е възможно освобождаване.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'За това издание се изисква ваучерен код.',
+  'Vouchercode': 'Ваучерен код',
+  'Vouchercode vereist': 'Изисква се ваучерен код',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Искате ли да се отпишете от {titel} на {datum}? Евентуално място в списъка за чакащи отива при следващия.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Самостоятелното отписване беше възможно до {deadline}. След това само чрез {organisatie}.',
+  'ingeschreven': 'записан',
+  'nog niet voldaan': 'все още не е изпълнено',
+  'ontheffing verleend': 'дадено е освобождаване',
+  'op de wachtlijst': 'в списъка за чакащи',
+  'verloopt vóór de start': 'изтича преди началото',
+  'voldaan': 'изпълнено',
+  'wachtlijst': 'списък за чакащи',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} присъствени урока · {sessies} сесии',
+  '{vrij} plaatsen vrij': '{vrij} свободни места',
   'Presentatievorm': 'Формат на презентацията',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Изберете как да се сменят слайдовете по време на презентацията.',

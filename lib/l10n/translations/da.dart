@@ -1627,6 +1627,100 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Du kan ikke længere afmelde dig: fristen er udløbet. Kontakt din organisation.',
+  'Aanbod': 'Tilbud',
+  'Aanwezig geweest': 'Var til stede',
+  'Afmelden': 'Afmeld',
+  'Afmelden voor bijeenkomst': 'Afmeld fra møde',
+  'Afzien': 'Afslå',
+  'Bekijk mijn inschrijvingen': 'Se mine tilmeldinger',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Se hvilke beviser du har indsendt.',
+  'Binnenkort': 'Snart',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Koden gemmes ikke og sendes kun ved tilmelding.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Den valgte session er fuld. Vælg en anden eller skriv dig på ventelisten.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Ændringen mislykkedes. Prøv igen.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Denne kode er ikke rigtig — tjek den for slåfejl.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Denne session overlapper en eksisterende aftale i din kalender.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Denne voucherkode er ikke gyldig for dette forløb.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Dette tilbud er ikke længere gyldigt. Listen er opdateret.',
+  'Er is een plaats vrij': 'Der er en ledig plads',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Der er en ledig plads til dig. Bekræft hurtigst muligt — tilbuddet udløber senest {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Der er lige nu intet tilbud at tilmelde sig.',
+  'Geen sessies gepland.': 'Ingen planlagte sessioner.',
+  'Geweest': 'Tidligere',
+  'Het aanbod kon niet worden opgehaald.': 'Tilbuddet kunne ikke hentes.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'I din tidszone: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Tilmeldt',
+  'Inschrijven': 'Tilmeld',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Tilmeldingen mislykkedes. Prøv igen.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Du kan først tilmelde dig, når du opfylder alle adgangskravene.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Tilmeldingen til dette forløb er lukket.',
+  'Kies per les precies één sessie.': 'Vælg præcis én session pr. lektion.',
+  'Mijn inschrijvingen': 'Mine tilmeldinger',
+  'Niet aanwezig geweest': 'Var ikke til stede',
+  'Onbekende status': 'Ukendt status',
+  'Op de wachtlijst': 'På ventelisten',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'På ventelisten, plads {plaats} af {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Sæt mig på ventelisten for den/de fulde session(er)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Tilmeld dig selv til et forløb i denne organisation.',
+  'Sessie': 'Session',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'For mange forsøg — prøv igen om {seconden} sekunder.',
+  'Toelatingseisen': 'Adgangskrav',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Du er allerede tilmeldt dette forløb.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Du er endnu ikke tilmeldt en session.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Du har nået det maksimale antal tilmeldinger til dette forløb.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Du opfylder endnu ikke adgangskravene.',
+  'Uitvoering': 'Forløb',
+  'Uw inschrijving': 'Din tilmelding',
+  'Uw inschrijving is verwerkt.': 'Din tilmelding er blevet behandlet.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Dine tilmeldinger kunne ikke hentes.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Dine fysiske møder: kommende og tidligere.',
+  'Vol': 'Fuld',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Næsten? Spørg din organisation, om en dispensation er mulig.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'En voucherkode er påkrævet for dette forløb.',
+  'Vouchercode': 'Voucherkode',
+  'Vouchercode vereist': 'Voucherkode påkrævet',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Vil du afmelde dig fra {titel} den {datum}? En eventuel ventelisteplads går så videre til den næste.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Selvafmelding var mulig indtil {deadline}. Derefter kun via {organisatie}.',
+  'ingeschreven': 'tilmeldt',
+  'nog niet voldaan': 'endnu ikke opfyldt',
+  'ontheffing verleend': 'dispensation givet',
+  'op de wachtlijst': 'på ventelisten',
+  'verloopt vóór de start': 'udløber før start',
+  'voldaan': 'opfyldt',
+  'wachtlijst': 'venteliste',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} fysiske lektioner · {sessies} sessioner',
+  '{vrij} plaatsen vrij': '{vrij} ledige pladser',
   'Presentatievorm': 'Præsentationsformat',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Vælg, hvordan dias skifter under præsentationen.',

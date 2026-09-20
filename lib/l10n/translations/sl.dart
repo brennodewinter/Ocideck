@@ -1627,6 +1627,100 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Preklica ni več mogoč: rok je potekel. Obrnite se na svojo organizacijo.',
+  'Aanbod': 'Ponudba',
+  'Aanwezig geweest': 'Bil je prisoten',
+  'Afmelden': 'Odjavi se',
+  'Afmelden voor bijeenkomst': 'Odjava z dogodka',
+  'Afzien': 'Zavrni',
+  'Bekijk mijn inschrijvingen': 'Poglej moje prijave',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Oglejte si, katere dokaze ste oddali.',
+  'Binnenkort': 'Kmalu',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Koda se ne shranjuje in se pošlje samo ob prijavi.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Izbrana seja je polna. Izberite drugo ali se vpišite na čakalno listo.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Sprememba ni uspela. Poskusite znova.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Ta koda ni pravilna — preverite tipkarske napake.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Ta seja se prekriva z obstoječim sestankom v vašem koledarju.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Ta koda bona ni veljavna za to izvedbo.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Ta ponudba ni več veljavna. Seznam je bil osvežen.',
+  'Er is een plaats vrij': 'Prosto je mesto',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Za vas je prosto mesto. Potrdite čim prej — ponudba poteče najpozneje {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Trenutno ni ponudbe, na katero bi se lahko vpisali.',
+  'Geen sessies gepland.': 'Ni načrtovanih sej.',
+  'Geweest': 'Pretekle',
+  'Het aanbod kon niet worden opgehaald.': 'Ponudbe ni bilo mogoče pridobiti.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'V vašem časovnem pasu: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Vpisan',
+  'Inschrijven': 'Vpiši se',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Vpis ni uspel. Poskusite znova.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Vpisate se lahko šele, ko izpolnite vse pogoje za sprejem.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Vpis za to izvedbo je zaprt.',
+  'Kies per les precies één sessie.': 'Izberite natanko eno sejo na uro.',
+  'Mijn inschrijvingen': 'Moje prijave',
+  'Niet aanwezig geweest': 'Ni bil prisoten',
+  'Onbekende status': 'Neznano stanje',
+  'Op de wachtlijst': 'Na čakalni listi',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Na čakalni listi, mesto {plaats} od {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Vpišite me na čakalno listo za polno(e) sejo(e)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Sami se vpišite v izvedbo te organizacije.',
+  'Sessie': 'Seja',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Preveč poskusov — poskusite znova čez {seconden} sekund.',
+  'Toelatingseisen': 'Pogoji za sprejem',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Za to izvedbo ste že vpisani.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Za nobeno sejo še niste vpisani.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Dosegli ste največje število vpisov za to izvedbo.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Še ne izpolnjujete pogojev za sprejem.',
+  'Uitvoering': 'Izvedba',
+  'Uw inschrijving': 'Vaš vpis',
+  'Uw inschrijving is verwerkt.': 'Vaš vpis je bil obdelan.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Vaših vpisov ni bilo mogoče pridobiti.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Vaše klasične seje: prihajajoče in pretekle.',
+  'Vol': 'Polna',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Skoraj? Vprašajte svojo organizacijo, ali je izjema možna.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Za to izvedbo je potrebna koda bona.',
+  'Vouchercode': 'Koda bona',
+  'Vouchercode vereist': 'Potrebna koda bona',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Želite preklicati vpis za {titel} dne {datum}? Morebitno mesto na čakalni listi gre naprej.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Preklic samostojno je bil mogoč do {deadline}. Nato le prek {organisatie}.',
+  'ingeschreven': 'vpisan',
+  'nog niet voldaan': 'še ni izpolnjeno',
+  'ontheffing verleend': 'izjema odobrena',
+  'op de wachtlijst': 'na čakalni listi',
+  'verloopt vóór de start': 'poteče pred začetkom',
+  'voldaan': 'izpolnjeno',
+  'wachtlijst': 'čakalna lista',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} klasičnih ur · {sessies} sej',
+  '{vrij} plaatsen vrij': '{vrij} prostih mest',
   'Presentatievorm': 'Oblika predstavitve',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Izberite, kako se diapozitivi pomikajo med predstavitvijo.',

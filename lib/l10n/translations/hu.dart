@@ -1629,6 +1629,101 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Már nem tud leiratkozni: a határidő lejárt. Forduljon a szervezetéhez.',
+  'Aanbod': 'Kínálat',
+  'Aanwezig geweest': 'Jelen volt',
+  'Afmelden': 'Leiratkozás',
+  'Afmelden voor bijeenkomst': 'Leiratkozás az alkalomról',
+  'Afzien': 'Elutasít',
+  'Bekijk mijn inschrijvingen': 'Jelentkezéseim megtekintése',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Tekintse meg, mely bizonyítékokat nyújtott be.',
+  'Binnenkort': 'Hamarosan',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'A kód nem kerül tárolásra, és csak a jelentkezéskor küldjük el.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'A választott alkalom betelt. Válasszon másikat, vagy iratkozzon fel a várólistára.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'A módosítás nem sikerült. Próbálja újra.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Ez a kód nem stimmel — ellenőrizze az elütéseket.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Ez az alkalom átfedésben van egy meglévő időponttal a naptárában.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Ez a kuponkód nem érvényes erre a kiírásra.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Ez az ajánlat már nem érvényes. A lista frissült.',
+  'Er is een plaats vrij': 'Van szabad hely',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Van szabad hely az Ön számára. Erősítse meg mielőbb — az ajánlat legkésőbb {deadline} lejár.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Jelenleg nincs kiírás, amire jelentkezhetne.',
+  'Geen sessies gepland.': 'Nincs ütemezett alkalom.',
+  'Geweest': 'Korábbi',
+  'Het aanbod kon niet worden opgehaald.': 'A kínálat nem tölthető le.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Az Ön időzónájában: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Jelentkezett',
+  'Inschrijven': 'Jelentkezés',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'A jelentkezés nem sikerült. Próbálja újra.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Csak akkor jelentkezhet, ha minden felvételi követelménynek megfelel.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'A jelentkezés erre a kiírásra lezárult.',
+  'Kies per les precies één sessie.':
+      'Válasszon óránként pontosan egy alkalmat.',
+  'Mijn inschrijvingen': 'Jelentkezéseim',
+  'Niet aanwezig geweest': 'Nem volt jelen',
+  'Onbekende status': 'Ismeretlen állapot',
+  'Op de wachtlijst': 'Várólistán',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Várólistán, {plaats}. hely a(z) {totaal}-ból',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Tegyen fel a várólistára a betelt alkalom/alkalmakra',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Jelentkezzen saját maga a szervezet egyik kiírására.',
+  'Sessie': 'Alkalom',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Túl sok próbálkozás — próbálja újra {seconden} másodperc múlva.',
+  'Toelatingseisen': 'Felvételi követelmények',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Már jelentkezett erre a kiírásra.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Még nem jelentkezett egyetlen alkalomra sem.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Elérte a kiírásra vonatkozó jelentkezések maximális számát.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Még nem felel meg a felvételi követelményeknek.',
+  'Uitvoering': 'Kiírás',
+  'Uw inschrijving': 'Jelentkezése',
+  'Uw inschrijving is verwerkt.': 'Jelentkezését feldolgoztuk.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Jelentkezései nem tölthetők le.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Jelenléti alkalmai: közelgők és korábbiak.',
+  'Vol': 'Betelt',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Majdnem? Kérdezze meg szervezetét, hogy lehetséges-e felmentés.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Ehhez a kiíráshoz kuponkód szükséges.',
+  'Vouchercode': 'Kuponkód',
+  'Vouchercode vereist': 'Kuponkód szükséges',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Le szeretne iratkozni a(z) {titel} alkalomról {datum}? Az esetleges várólistás hely a következőre száll.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Az önálló leiratkozás {deadline}-ig volt lehetséges. Aztán már csak a(z) {organisatie} útján.',
+  'ingeschreven': 'jelentkezett',
+  'nog niet voldaan': 'még nem teljesült',
+  'ontheffing verleend': 'felmentés megadva',
+  'op de wachtlijst': 'várólistán',
+  'verloopt vóór de start': 'lejár a kezdet előtt',
+  'voldaan': 'teljesült',
+  'wachtlijst': 'várólista',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} jelenléti óra · {sessies} alkalom',
+  '{vrij} plaatsen vrij': '{vrij} szabad hely',
   'Presentatievorm': 'Bemutató formátuma',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Válaszd ki, hogyan lépjenek tovább a diák a bemutató alatt.',

@@ -1645,6 +1645,102 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Ma tistax tikkanċella aktar: it-terminu għadda. Ikkuntattja lill-organizzazzjoni tiegħek.',
+  'Aanbod': 'Offerta',
+  'Aanwezig geweest': 'Kien preżenti',
+  'Afmelden': 'Ikkanċella r-reġistrazzjoni',
+  'Afmelden voor bijeenkomst': 'Ikkanċella r-reġistrazzjoni għas-sessjoni',
+  'Afzien': 'Irriżerva',
+  'Bekijk mijn inschrijvingen': 'Ara r-reġistrazzjonijiet tiegħi',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Ara liema evidenzi intbagħtet.',
+  'Binnenkort': 'Dalwaqt',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Il-kodiċi ma jinħażenx u jintbagħat biss waqt ir-reġistrazzjoni.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Is-sessjoni magħżula hija mimlija. Agħżel sessjoni oħra jew idħol fil-lista ta\' stennija.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Il-bidla ma rnexxietx. Erġa\' pprova.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Dan il-kodiċi mhux tajjeb — iċċekkja għal żbalji.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Din is-sessjoni ttieħed ma\' appuntament eżistenti fil-kalendarju tiegħek.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Dan il-kodiċi tal-voucher mhuwiex validu għal din l-offerta.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Din l-offerta mhijiex valida aktar. Il-lista ġiet aġġornata.',
+  'Er is een plaats vrij': 'Hemm post liberu',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Hemm post liberu għalik. Ikkonferma kemm jista\' malajr — l-offerta tiskadi l-aktar sa {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Bħalissa m\'hemm l-ebda offerta li tista\' tirreġistra għaliha.',
+  'Geen sessies gepland.': 'L-ebda sessjoni skedata.',
+  'Geweest': 'Li għaddew',
+  'Het aanbod kon niet worden opgehaald.': 'L-offerta ma setgħatx tinkiseb.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Fiż-żona tal-ħin tiegħek: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Irreġistrat',
+  'Inschrijven': 'Irreġistra',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Ir-reġistrazzjoni ma rnexxietx. Erġa\' pprova.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Tista\' tirreġistra biss meta tissodisfa r-rekwiżiti kollha tad-dħul.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Ir-reġistrazzjoni għal din l-offerta hija magħluqa.',
+  'Kies per les precies één sessie.':
+      'Agħżel eżattament sessjoni waħda għal kull lezzjoni.',
+  'Mijn inschrijvingen': 'Ir-reġistrazzjonijiet tiegħi',
+  'Niet aanwezig geweest': 'Ma kienx preżenti',
+  'Onbekende status': 'Statut mhux magħruf',
+  'Op de wachtlijst': 'Fil-lista ta\' stennija',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Fil-lista ta\' stennija, post {plaats} minn {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Poġġini fil-lista ta\' stennija għas-sessjoni(jiet) mimlija',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Irreġistra lilek innifsek għal offerta ta\' din l-organizzazzjoni.',
+  'Sessie': 'Sessjoni',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Wisq tentattivi — erġa\' pprova wara {seconden} sekondi.',
+  'Toelatingseisen': 'Rekwiżiti tad-dħul',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Inti diġà rreġistrat għal din l-offerta.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'M\'intix irreġistrat għal ebda sessjoni għadha.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Intlaqt il-massimu ta\' reġistrazzjonijiet għal din l-offerta.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Għadek ma tissodisfax ir-rekwiżiti tad-dħul.',
+  'Uitvoering': 'Offerta',
+  'Uw inschrijving': 'Ir-reġistrazzjoni tiegħek',
+  'Uw inschrijving is verwerkt.':
+      'Ir-reġistrazzjoni tiegħek ġiet ipproċessata.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Ir-reġistrazzjonijiet tiegħek ma setgħux jinkisbu.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Is-sessjonijiet presenzjali tiegħek: li ġejjin u li għaddew.',
+  'Vol': 'Mimlija',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Kważi? Staqsi lill-organizzazzjoni tiegħek jekk eżenzjoni hija possibbli.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Għal din l-offerta huwa meħtieġ kodiċi tal-voucher.',
+  'Vouchercode': 'Kodiċi tal-voucher',
+  'Vouchercode vereist': 'Kodiċi tal-voucher meħtieġ',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Trid tikkanċella r-reġistrazzjoni tiegħek għal {titel} nhar {datum}? Kwalunkwe post fil-lista ta\' stennija imur għall-li jmiss.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Ikkanċellar waħdek kien possibbli sa {deadline}. Wara dan, biss permezz ta\' {organisatie}.',
+  'ingeschreven': 'irreġistrat',
+  'nog niet voldaan': 'għadha mhux issodisfat',
+  'ontheffing verleend': 'eżenzjoni mogħtija',
+  'op de wachtlijst': 'fil-lista ta\' stennija',
+  'verloopt vóór de start': 'jiskadi qabel il-bidu',
+  'voldaan': 'issodisfat',
+  'wachtlijst': 'lista ta\' stennija',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} lezzjonijiet presenzjali · {sessies} sessjonijiet',
+  '{vrij} plaatsen vrij': '{vrij} postijiet ħielsa',
   'Presentatievorm': 'Format tal-preżentazzjoni',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Agħżel kif jinbidlu s-slajds waqt il-preżentazzjoni.',
