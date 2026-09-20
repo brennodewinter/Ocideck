@@ -85,6 +85,7 @@ All notable changes to OciDeck are documented in this file.
 - macOS-app start weer: het meegeleverde PDFium-framework heette in de bundel `PDFium.framework` terwijl de binary erin `pdfium` is. Op een hoofdletterongevoelige buildschijf vallen de naam waar `pdfium_flutter` tegen linkt en de naam die Flutter als native asset wegschrijft samen in één map. Op macOS 27 eist dyld bij een genotariseerde app dat de bladnaam exact klopt en weigerde de app te starten met "Library not loaded: @rpath/PDFium.framework/PDFium" (v0.6.4 op macOS 27.2; macOS 26.6 laadt dezelfde bundel nog). `scripts/notarize_macos.sh` normaliseert nu vóór het tekenen naar `pdfium.framework/pdfium`, toetst daarna élke `@rpath`-, `@executable_path`- en `@loader_path`-verwijzing in de bundel op een bestaand bestand met exact dezelfde schrijfwijze, en start de gestapelde app nog één keer echt op voordat hij de deur uitgaat (#2115).
 - Homebrew-cask sluit een draaiende OciDeck af vóór een upgrade (`uninstall quit`), zodat `brew upgrade` de bundel niet half vervangt terwijl de app open staat.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
+- De releaseketen en de bouwdoelen ruimen vóór het bouwen een CMake-cache op die nog bij een vórige versie van een pakket met een build-hook hoort (na de dartcv4-bump 2.3.0 → 2.3.1 stierf de 0.6.6-run pas in `make build-release`, ná anderhalf uur groene poort). `scripts/prune_stale_hook_cache.sh` vergelijkt per configuratiehash de bron van de cache met wat `package_config.json` oplost en wist alleen `CMakeCache.txt` en `CMakeFiles/`; `_deps` blijft, dus geen herdownload. Aangeroepen door de pre-flight van `release_auto.sh`, het poortslot (`make check`) en `make sbom`/`build-*`.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project follows [Semantic Versioning](https://semver.org/). Tagging began
@@ -2709,6 +2710,40 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Verouderde CMake-cache van een gebumpt pakket stopte de 0.6.6-run ná
+  anderhalf uur groen.** `hooks_runner` sleutelt zijn gedeelde buildmappen op
+  een hash van de bouwconfiguratie (doel-OS, architectuur, compiler,
+  deployment target), niet op de pakketversie. Na de bump van dartcv4 2.3.0
+  naar 2.3.1 draaide de hook opnieuw (package_config.json is een van zijn
+  afhankelijkheden) en stuitte cmake in `shared/dartcv4/build/<hash>/` op de
+  cache van de oude bron: *"The source …/dartcv4-2.3.1/src/CMakeLists.txt
+  does not match the source …/dartcv4-2.3.0/… used to generate cache"*. Omdat
+  `dart run` en `flutter test` een ándere hash hebben dan `flutter build
+  macos`, waren `make sbom` en de hele `make check-release` groen; pas
+  `make build-release` viel. Gereproduceerd door in de hoofdboom de
+  `CMAKE_HOME_DIRECTORY` van de macOS-hash op 2.3.0 te zetten, het
+  hook-record weg te halen en Flutters eigen bouwvingerafdruk
+  (`.dart_tool/flutter_build`) te wissen; zonder die laatste stap slaat
+  Flutter de native-assets-stap over en is er niets te zien. Het nieuwe
+  `scripts/prune_stale_hook_cache.sh` leest per `CMakeCache.txt` de bron en
+  vergelijkt die met de wortel die `package_config.json` nu noemt (file-URI
+  of relatief pad, percent-gedecodeerd); bij verschil gaan alleen
+  `CMakeCache.txt` en `CMakeFiles/` weg — dezelfde ingreep als het poortslot
+  al deed voor een cache op naam van een andere worktree — zodat `_deps` en
+  het OpenCV-archief blijven. Na die ingreep configureerde dezelfde bouw in
+  2:40 opnieuw en slaagde; een volledige `rm -rf .dart_tool/hooks_runner`
+  kostte 7:22. Zonder `package_config.json` beoordeelt het script niets en
+  wist het niets. Drie plekken roepen het aan: de pre-flight van
+  `release_auto.sh` (minuut nul, vóór de poort), `gate_lock.sh` (dus elke
+  `make check`/`check-full`/`check-release`) en de Makefile-doelen `sbom`,
+  `sbom-verify`, `build-macos`, `build-windows` en `build-linux`. Een
+  `dart run`-tool kon het niet zijn: `dart run` draait zelf de build-hooks
+  en zou op precies deze fout vallen vóór hij iets kon opruimen. Tests:
+  `test/prune_stale_hook_cache_test.dart` (elf gevallen, drie mutaties rood
+  geproefd), een geval in `test/gate_lock_test.dart` en
+  `test/release_auto_preflight_cache_test.dart` dat de echte `preflight`
+  tegen een nagebouwde `ROOT_DIR` draait; beide koppelingen met de aanroep
+  eruit rood geproefd.
 - **`--resume` bouwde de webdemo uit de werkboom, niet uit de tag.** Fase 3
   begint met `make deploy-web`, en dat doel bouwt (`build-web`) uit wat er
   uitgecheckt staat. In de verse keten is dat de release-branch; bij een
