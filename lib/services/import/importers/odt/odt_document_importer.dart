@@ -7,20 +7,34 @@
 // `table:table`).
 //
 // Best-effort: structuur (koppen, lijsten, tabellen, vet/cursief, links) gaat
-// mee; wat geen Markdown-tegenhanger heeft (voetnoten, annotaties, geneste
-// frames) valt stil. De uitvoer is gewone Markdown — geen slot, geen nieuwe
-// afhankelijkheid.
+// mee, en afbeeldingen (`draw:frame`/`draw:image` → `Pictures/`) worden als
+// `![alt](ref)` neergezet met hun bytes in [DocumentConversion]. Wat geen
+// Markdown-tegenhanger heeft (voetnoten, annotaties, tekstkaders, groepen,
+// objecten) wordt geteld in `notImported` in plaats van stil te vallen
+// (#2120). De uitvoer is gewone Markdown — geen slot, geen nieuwe
+// afhankelijkheid. De huisstijl (letters, kleuren, kop- en voettekst, het
+// beeld op elke bladzijde) leest het zusterdeel `odt_document_style.dart`
+// uit hetzelfde archief (#2119).
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
+import '../../../../utils/content_hash.dart';
+import '../../models/source_document_style.dart';
+import '../../../../utils/image_signature.dart';
+import '../../../../utils/markdown_blocks.dart';
+import '../../models/document_conversion.dart';
 import '../../utils/archive_utils.dart';
 import '../../utils/import_budget.dart';
+import '../../utils/safe_extensions.dart';
 import '../../utils/xml_utils.dart';
 import '../odp/odp_context.dart'
     show descendantsLocal, childLocal, childrenLocal, xlinkHref;
+
+part 'odt_document_style.dart';
 
 /// Zet de bytes van een `.odt` om in Markdown.
 ///
@@ -29,6 +43,14 @@ import '../odp/odp_context.dart'
 /// onleesbaar onderdeel. De aanroeper vangt deze en vertaalt ze naar
 /// gebruikersmeldingen.
 String convertOdtToMarkdown(
+  List<int> bytes, {
+  ImportBudget budget = ImportBudget.standard,
+}) => convertOdtDetailed(bytes, budget: budget).markdown;
+
+/// Als [convertOdtToMarkdown], maar levert ook de afbeeldingen en de lijst
+/// met niet-overgenomen inhoud — de servicelaag beslist waar de bytes landen
+/// en hoe het verlies gemeld wordt.
+DocumentConversion convertOdtDetailed(
   List<int> bytes, {
   ImportBudget budget = ImportBudget.standard,
 }) {
@@ -49,7 +71,12 @@ String convertOdtToMarkdown(
   for (final child in text.children.whereType<XmlElement>()) {
     _emitBlock(ctx, child, buf, indent: '');
   }
-  return _trimTrailingBlank(buf.toString());
+  return DocumentConversion(
+    markdown: _trimTrailingBlank(buf.toString()),
+    images: ctx.images,
+    notImported: ctx.notImported,
+    style: _extractOdtStyle(ctx),
+  );
 }
 
 XmlElement? _findOfficeText(XmlDocument doc) {
@@ -219,11 +246,126 @@ void _walkInline(
           if (i && !italic) suffix.write('_');
           if (b && !bold) suffix.write('**');
           buf.write(suffix);
+        case 'frame':
+          _emitFrame(ctx, child, buf);
+        case 'g':
+          // draw:g — gegroepeerde vormen; ze vallen als één stuk weg.
+          ctx.notImported.add('groep');
+        case 'object':
+        case 'object-ole':
+        case 'rect':
+        case 'line':
+        case 'ellipse':
+        case 'circle':
+        case 'custom-shape':
+        case 'polygon':
+        case 'polyline':
+        case 'connector':
+        case 'caption':
+          // Ingebed objecten en losse vormen zonder kader.
+          ctx.notImported.add('object');
         default:
           _walkInline(ctx, child, buf, bold: bold, italic: italic);
       }
     }
   }
+}
+
+/// Verwerk een `draw:frame`: de `draw:image` erin gaat mee als `![alt](ref)`,
+/// en wat het kader verder draagt (tekstkader, object) wordt geteld als
+/// niet-overgenomen zodat niets stil verdwijnt (#2120).
+void _emitFrame(_OdtContext ctx, XmlElement frame, StringBuffer buf) {
+  final image = childLocal(frame, 'image');
+  if (image == null) {
+    // Zwevend kader zónder afbeelding: een tekstkader of een ingebed
+    // object — in allebei de gevallen tekst/inhoud die wegvalt.
+    ctx.notImported.add(
+      childLocal(frame, 'object') != null ||
+              childLocal(frame, 'object-ole') != null
+          ? 'object'
+          : 'tekstkader',
+    );
+    return;
+  }
+  final href = xlinkHref(image);
+  final path = href == null ? null : _packagePath(href);
+  if (path == null || !_emitImage(ctx, path, buf, alt: _frameAlt(ctx, frame))) {
+    ctx.notImported.add('afbeelding');
+  }
+  // Een kader kan naast de (voorvertoon)afbeelding ook iets anders dragen;
+  // de afbeelding is dan mee, de rest niet.
+  if (childLocal(frame, 'object') != null ||
+      childLocal(frame, 'object-ole') != null) {
+    ctx.notImported.add('object');
+  }
+  if (childLocal(frame, 'text-box') != null) {
+    ctx.notImported.add('tekstkader');
+  }
+}
+
+/// De alt-tekst van een `draw:frame`: `draw:name`, `svg:title`/`svg:desc`,
+/// of het bijschrift (`text:p`) dat in het kader hangt.
+String _frameAlt(_OdtContext ctx, XmlElement frame) {
+  var raw = _attr(frame, 'name') ?? '';
+  if (raw.isEmpty) {
+    final label = childLocal(frame, 'title') ?? childLocal(frame, 'desc');
+    if (label != null) raw = label.innerText;
+  }
+  if (raw.isEmpty) {
+    raw = [
+      for (final p in childrenLocal(frame, 'p')) p.innerText.trim(),
+    ].where((t) => t.isNotEmpty).join(' ');
+  }
+  return _altText(raw);
+}
+
+/// Gesaneerde alt-tekst: één regel, zonder blokhaken — zodat de
+/// `![…](…)`-syntaxis heel blijft.
+String _altText(String raw) =>
+    markdownImageAlt(raw.replaceAll(RegExp(r'\s+'), ' ').trim());
+
+/// Package-relatief pad van een `xlink:href`, of null als de verwijzing het
+/// pakket verlaat (een schema als `http:` of een `..`). Externe beelden
+/// halen we bewust niet binnen.
+String? _packagePath(String href) {
+  var h = href.trim();
+  if (h.contains(':') || h.contains('..')) return null;
+  if (h.startsWith('./')) h = h.substring(2);
+  while (h.startsWith('/')) {
+    h = h.substring(1);
+  }
+  return h.isEmpty ? null : h;
+}
+
+/// Leest [path] uit het archief en zet — als de bytes een weergeefbaar
+/// rasterbeeld zijn — een `![alt](ref)` in de uitvoer. Geeft terug of er een
+/// verwijzing is geplaatst; de aanroeper telt het element anders als
+/// niet-overgenomen.
+bool _emitImage(
+  _OdtContext ctx,
+  String path,
+  StringBuffer buf, {
+  required String alt,
+}) {
+  final bytes = ctx.readPartBytes(path);
+  if (bytes == null) return false;
+  final mime = imageMimeFromBytes(bytes);
+  // Alleen raster gaat mee: SVG rendert de documentweergave niet, en
+  // ontbrekende of verkeerde bytes zijn sowieso niet overdraagbaar.
+  if (mime == null) return false;
+  ctx.images.add(
+    ImportedDocumentImage(
+      ref: path,
+      name: normalizeImageFileName(
+        path.split('/').last,
+        fallbackExtension: extensionForImageMime(mime),
+      ),
+      bytes: Uint8List.fromList(bytes),
+      alt: alt,
+    ),
+  );
+  buf.write('![$alt]($path)');
+  return true;
 }
 
 /// Ontsnapt Markdown-magische tekens in platte tekst zodat de uitvoer niet
@@ -260,6 +402,11 @@ class _OdtContext {
   final _parsed = <String, XmlDocument?>{};
   Map<String, (bool, bool)>? _spanStyles; // style-name → (bold, italic)
   Map<String, String>? _listStyles; // style-name → list-style name
+
+  /// De afbeeldingen die de omzetting plaatste, en wat er niet meekwam —
+  /// de importeur verzamelt, [convertOdtDetailed] levert op.
+  final List<ImportedDocumentImage> images = [];
+  final List<String> notImported = [];
 
   String? readPart(String path) {
     final bytes = readPartBytes(path);

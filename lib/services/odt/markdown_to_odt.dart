@@ -178,7 +178,8 @@ String _renderTimelineOdt(DocumentTimeline timeline) {
   buf.writeln('<table:table-row>');
   for (final header in timeline.headers) {
     buf.write(
-      '<table:table-cell office:value-type="string">'
+      '<table:table-cell table:style-name="Table_Header_Cell" '
+      'office:value-type="string">'
       '<text:p text:style-name="Table_20_Heading">${xmlEscape(header)}</text:p>'
       '</table:table-cell>',
     );
@@ -309,7 +310,8 @@ class _OdtNodeVisitor implements md.NodeVisitor {
           _stack.add(_Ctx.passThrough);
         } else {
           _buf.write(
-            '<text:a xlink:href="${xmlAttr(href)}" xlink:type="simple">',
+            '<text:a xlink:href="${xmlAttr(href)}" xlink:type="simple" '
+            'text:style-name="Link">',
           );
           _stack.add(_Ctx.link);
         }
@@ -347,7 +349,8 @@ class _OdtNodeVisitor implements md.NodeVisitor {
       case 'th':
         _stack.add(_Ctx.tableCell);
         _buf.write(
-          '<table:table-cell office:value-type="string">'
+          '<table:table-cell table:style-name="Table_Header_Cell" '
+          'office:value-type="string">'
           '<text:p text:style-name="Table_20_Heading">',
         );
         return true;

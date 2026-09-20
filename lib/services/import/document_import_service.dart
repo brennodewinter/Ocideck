@@ -12,21 +12,39 @@
 // zonder deze scan als gewone Markdown in de editor belanden, en bij de
 // volgende export als HTML de deur uit gaan.
 
+import 'models/document_conversion.dart';
 import 'importers/import_failure.dart';
+import 'models/source_document_style.dart';
 import 'utils/import_budget.dart';
 import '../markdown_safety.dart';
+import '../web_asset_store.dart';
 import 'importers/docx/docx_document_importer.dart';
 import 'importers/odt/odt_document_importer.dart';
 
-/// De uitkomst van een documentimport: de Markdown, of de reden van een
-/// mislukking.
+/// De uitkomst van een documentimport: de Markdown mét de huisstijl van de
+/// bron (#2119), of de reden van een mislukking.
 class DocumentImportResult {
-  const DocumentImportResult.success(this.markdown) : failure = null;
+  const DocumentImportResult.success(
+    this.markdown, {
+    this.style = SourceDocumentStyle.empty,
+    this.notImported = const [],
+  }) : failure = null;
 
-  const DocumentImportResult.failed(this.failure) : markdown = null;
+  const DocumentImportResult.failed(this.failure)
+    : markdown = null,
+      style = SourceDocumentStyle.empty,
+      notImported = const [];
 
   final String? markdown;
   final DocumentImportFailure? failure;
+
+  /// Wat de bron aan huisstijl droeg (#2119); leeg als er niets te halen viel.
+  final SourceDocumentStyle style;
+
+  /// Soorten inhoud die niet meekwamen, één sleutel per weggevallen element
+  /// (`'afbeelding'`, `'tekstkader'`, `'groep'`, `'object'`). De UI telt en
+  /// vertaalt ze — een lege lijst betekent: alles is mee (#2120).
+  final List<String> notImported;
 
   bool get isSuccess => markdown != null;
 }
@@ -76,14 +94,15 @@ DocumentImportResult importDocumentBytes(
     );
   }
   try {
-    final markdown = switch (format) {
-      DocumentImportFormat.docx => convertDocxToMarkdown(bytes, budget: budget),
-      DocumentImportFormat.odt => convertOdtToMarkdown(bytes, budget: budget),
+    final conversion = switch (format) {
+      DocumentImportFormat.docx => convertDocxDetailed(bytes, budget: budget),
+      DocumentImportFormat.odt => convertOdtDetailed(bytes, budget: budget),
     };
+    final materialized = _materializeImages(conversion);
     // Fail-closed: de importer produceert zelf Markdown, maar de brontekst
     // kan HTML-fragmenten bevatten die als Markdown renderen. Dezelfde poort
     // als het openen van een vreemd `.md` — geen uitvoerbare inhoud erin.
-    final findings = MarkdownSafetyScanner.scan(markdown);
+    final findings = MarkdownSafetyScanner.scan(materialized.markdown);
     if (findings.isNotEmpty) {
       return DocumentImportResult.failed(
         DocumentImportFailure(
@@ -91,7 +110,11 @@ DocumentImportResult importDocumentBytes(
         ),
       );
     }
-    return DocumentImportResult.success(markdown);
+    return DocumentImportResult.success(
+      materialized.markdown,
+      notImported: materialized.notImported,
+      style: conversion.style,
+    );
   } on ImportBudgetException catch (e) {
     return DocumentImportResult.failed(
       DocumentImportFailure(
@@ -123,4 +146,33 @@ DocumentImportFormat? _detectFormat(String filename) {
     'odt' => DocumentImportFormat.odt,
     _ => null,
   };
+}
+
+/// Legt de archiefbytes van elke meegekomen afbeelding in de `mem:`-store
+/// en herschrijft `![alt](archiefpad)` naar `![alt](mem:…)`. Dat is hetzelfde
+/// tussentijdse contract als de presentatie-import: de documentweergave
+/// tekent er direct uit, en de eerste opslag materialiseert ze naar
+/// `images/` naast het `.md` (#2120).
+///
+/// Een afbeelding die het webbudget niet meer past verdwijnt níet stil:
+/// haar token wordt uit de Markdown gehaald (geen dode verwijzing naar een
+/// pad dat nooit heeft bestaan) én ze telt mee in `notImported`.
+DocumentConversion _materializeImages(DocumentConversion conversion) {
+  if (conversion.images.isEmpty) return conversion;
+  var markdown = conversion.markdown;
+  final dropped = [...conversion.notImported];
+  for (final image in conversion.images) {
+    try {
+      final path = WebAssetStore.put(image.bytes, name: image.name);
+      markdown = markdown.replaceAll(image.emitted, '![${image.alt}]($path)');
+    } on WebAssetBudgetExceeded {
+      dropped.add('afbeelding');
+      markdown = markdown.replaceAll(image.emitted, '');
+    }
+  }
+  return DocumentConversion(
+    markdown: markdown,
+    notImported: dropped,
+    style: conversion.style,
+  );
 }

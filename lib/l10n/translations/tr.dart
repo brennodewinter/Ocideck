@@ -2632,6 +2632,66 @@ const _dutchSourceAddTr = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} yüz yüze ders · {sessies} oturum',
   '{vrij} plaatsen vrij': '{vrij} boş yer',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      '{niveau} başlık düzeylerinin her birinin kendi rengi var ({kleur}); stil yalnızca bir başlık rengi tanır.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '({vervanger} olarak gösterilir, dışa aktarma için saklanır)',
+  'Accent': 'Vurgu',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Yalnızca harf, rakam, boşluk, nokta ve tire.',
+  'Alleen tekst': 'Yalnızca metin',
+  'Als documentlogo gebruiken': 'Belge logosu olarak kullan',
+  'Bestaande stijl gebruiken': 'Mevcut stili kullan',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Word, LibreOffice veya bir tarayıcının, varsa kullanacağı yazı tipi; yukarıda OciDeck\'in kendisinin gösterdiği yer alır.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Bu kurumsal stil zaten {naam} stili olarak mevcut.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Belge içe aktarıldı; metindeki {n} görsel aktarılmadı.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Üstbilgi veya altbilgideki bir görsel yalnızca vektörel (SVG) olduğundan logo olamaz.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Yalnızca kapak sayfasında bir görsel; bu bir belge logosu değildir.',
+  'Gewenst lettertype (export)': 'İstenen yazı tipi (dışa aktarma)',
+  'Gewenste kopletter (export)': 'İstenen başlık yazı tipi (dışa aktarma)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Belge kendi kurumsal stilini taşıyor. OciDeck bunu stil olarak kaydedip bu belgeye uygulayabilir.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logo kalıcı olarak kaydedilemedi; yalnızca bu oturumda kullanılabilir.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logo ortalanmıştı; stil yalnızca sol ve sağı bilir, sola gelecek.',
+  'Kop- en voettekst': 'Üstbilgi ve altbilgi',
+  'Kopletter': 'Başlık yazı tipi',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      '{niveau}. başlık düzeyinin kendi rengi var ({kleur}); stil tek bir başlık rengi bilir.',
+  'Koppen': 'Başlıklar',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Boş: dışa aktarmada başlıklar metnin istenen yazı tipini izler.',
+  'Niet overgenomen': 'Alınmadı',
+  'Nieuwe stijl toevoegen': 'Yeni stil ekle',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Web\'de logo yalnızca bu oturum için saklanır.',
+  'Paginanummers': 'Sayfa numaraları',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Her sayfada {plaats} yer alır, {mm} mm genişliğinde.',
+  'Stijl overnemen': 'Stili devral',
+  'Stijl overnemen?': 'Stil devralınsın mı?',
+  'Voettekst': 'Altbilgi',
+  'Zelfde als de tekst ({letter})': 'Metinle aynı ({letter})',
+  'gecentreerd bovenaan': 'üstte ortalanmış',
+  'gecentreerd onderaan': 'altta ortalanmış',
+  'linksboven': 'sol üstte',
+  'linksonder': 'sol altta',
+  'rechtsboven': 'sağ üstte',
+  'rechtsonder': 'sağ altta',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Belge içe aktarıldı — taşınmadı: {lijst}',
+  '{n} tekstkader': '{n} metin çerçevesi',
+  '{n} tekstkaders': '{n} metin çerçevesi',
+  '{n} groep': '{n} grup',
+  '{n} groepen': '{n} grup',
+  '{n} object': '{n} nesne',
+  '{n} objecten': '{n} nesne',
   'Presentatievorm': 'Sunum biçimi',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Sunum sırasında slaytların nasıl ilerleyeceğini seçin.',

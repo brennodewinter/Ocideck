@@ -1741,6 +1741,66 @@ const _dutchSourceAddMt = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} lezzjonijiet presenzjali · {sessies} sessjonijiet',
   '{vrij} plaatsen vrij': '{vrij} postijiet ħielsa',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Il-livelli tal-intestaturi {niveau} kull wieħed għandu l-kulur tiegħu ({kleur}); l-istil jaf kulur wieħed biss tal-intestatura.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(muri bħala {vervanger}, miżmum għall-esportazzjoni)',
+  'Accent': 'Aċċent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Ittri, ċifri, spazji, punti u sing biss.',
+  'Alleen tekst': 'Test biss',
+  'Als documentlogo gebruiken': 'Uża bħala logo tad-dokument',
+  'Bestaande stijl gebruiken': 'Uża l-istil eżistenti',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Il-font li Word, LibreOffice jew browser juża jekk għandu; hawn fuq hemm dak li OciDeck innifsu juri.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Dan l-istil tad-dar diġà jeżisti bħala l-istil {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument importat; {n} immaġni fit-test ma ġewx trasferiti.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Immaġni fl-intestatura jew fil-qiegħ tal-paġna hija vettorjali biss (SVG) u ma tistax issir logo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Immaġni fuq il-paġna tat-titlu biss; dik mhijiex logo tad-dokument.',
+  'Gewenst lettertype (export)': 'Font mixtieq (esportazzjoni)',
+  'Gewenste kopletter (export)': 'Font tal-intestaturi mixtieq (esportazzjoni)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Id-dokument iġorr l-istil tad-dar tiegħu stess. OciDeck jista\' jżommu bħala stil u japplikah fuq dan id-dokument.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Il-logo ma setax jiġi ssejvjat b\'mod permanenti; jibqa\' disponibbli biss f\'din is-sessjoni.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Il-logo kien iċċentrat; l-istil jaf biss xellug u lemin, imur fuq ix-xellug.',
+  'Kop- en voettekst': 'Intestatura u qiegħ tal-paġna',
+  'Kopletter': 'Font tal-intestaturi',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Il-livell tal-intestatura {niveau} għandu l-kulur tiegħu ({kleur}); l-istil jaf kulur wieħed biss għall-intestaturi.',
+  'Koppen': 'Intestaturi',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Vojt: fl-esportazzjoni l-intestaturi jsegwu l-font mixtieq tat-test.',
+  'Niet overgenomen': 'Ma ġiex trasferit',
+  'Nieuwe stijl toevoegen': 'Żid stil ġdid',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Fuq il-web il-logo jinżamm biss għal din is-sessjoni.',
+  'Paginanummers': 'Numri tal-paġni',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Jidher {plaats} fuq kull paġna, {mm} mm wiesa\'.',
+  'Stijl overnemen': 'Adotta l-istil',
+  'Stijl overnemen?': 'Tadotta l-istil?',
+  'Voettekst': 'Qiegħ tal-paġna',
+  'Zelfde als de tekst ({letter})': 'L-istess bħat-test ({letter})',
+  'gecentreerd bovenaan': 'iċċentrat fuq',
+  'gecentreerd onderaan': 'iċċentrat isfel',
+  'linksboven': 'fuq ix-xellug',
+  'linksonder': 'isfel ix-xellug',
+  'rechtsboven': 'fuq il-lemin',
+  'rechtsonder': 'isfel il-lemin',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importat — ma ttieħed xejn: {lijst}',
+  '{n} tekstkader': '{n} qafas tat-test',
+  '{n} tekstkaders': '{n} oqfsa tat-test',
+  '{n} groep': '{n} grupp',
+  '{n} groepen': '{n} gruppi',
+  '{n} object': '{n} oġġett',
+  '{n} objecten': '{n} oġġetti',
   'Presentatievorm': 'Format tal-preżentazzjoni',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Agħżel kif jinbidlu s-slajds waqt il-preżentazzjoni.',

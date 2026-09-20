@@ -179,6 +179,26 @@ class ThemeProfile {
   final String? documentBandBackgroundColor;
   final bool documentShowPageNumbers;
 
+  /// Het lettertype van de koppen ván een document. `null` zet de koppen in
+  /// [fontFamily], zoals het altijd was. Alleen documenten: een dia zet haar
+  /// titels in [fontFamily] — een huisstijl met een aparte kopletter is een
+  /// documentgegeven (Word noemt het de *major*-letter), geen dia-gegeven.
+  final String? documentHeadingFontFamily;
+
+  /// Het lettertype dat de huisstijl wérkelijk vraagt — het `Aptos` van een
+  /// geïmporteerd Word-document, bijvoorbeeld — wanneer OciDeck het zelf niet
+  /// kan tonen. [fontFamily] is dan de plaatsvervanger op het scherm; een
+  /// export noemt éérst dit lettertype, zodat Word, LibreOffice of een browser
+  /// die het wél heeft het echte gezicht laat zien. `null`: geen voorkeur, het
+  /// scherm en de export zetten dezelfde letter.
+  ///
+  /// Vrije tekst, dus gesaneerd bij het lezen ([_preferredFont]): de naam
+  /// belandt in een CSS-declaratie en in een XML-attribuut.
+  final String? preferredFontFamily;
+
+  /// Als [preferredFontFamily], maar voor de koppen van een document.
+  final String? preferredDocumentHeadingFontFamily;
+
   final String fontFamily;
 
   /// Vrije footertekst onderaan elke slide; ondersteunt tokens.
@@ -243,6 +263,9 @@ class ThemeProfile {
     this.documentBandTextColor,
     this.documentBandBackgroundColor,
     this.documentShowPageNumbers = false,
+    this.documentHeadingFontFamily,
+    this.preferredFontFamily,
+    this.preferredDocumentHeadingFontFamily,
     this.fontFamily = 'Arial',
     this.footerText = '',
     this.footerShowPageNumbers = false,
@@ -412,6 +435,9 @@ class ThemeProfile {
     String? documentBandTextColor,
     String? documentBandBackgroundColor,
     bool? documentShowPageNumbers,
+    String? documentHeadingFontFamily,
+    String? preferredFontFamily,
+    String? preferredDocumentHeadingFontFamily,
     String? fontFamily,
     String? footerText,
     bool? footerShowPageNumbers,
@@ -428,6 +454,9 @@ class ThemeProfile {
     bool clearBrandStrip = false,
     bool clearLogoDark = false,
     bool clearDocumentLogoOverride = false,
+    bool clearDocumentHeadingFontFamily = false,
+    bool clearPreferredFontFamily = false,
+    bool clearPreferredDocumentHeadingFontFamily = false,
   }) {
     return ThemeProfile(
       name: name ?? this.name,
@@ -485,6 +514,17 @@ class ThemeProfile {
           documentBandBackgroundColor ?? this.documentBandBackgroundColor,
       documentShowPageNumbers:
           documentShowPageNumbers ?? this.documentShowPageNumbers,
+      documentHeadingFontFamily: clearDocumentHeadingFontFamily
+          ? null
+          : (documentHeadingFontFamily ?? this.documentHeadingFontFamily),
+      preferredFontFamily: clearPreferredFontFamily
+          ? null
+          : (preferredFontFamily ?? this.preferredFontFamily),
+      preferredDocumentHeadingFontFamily:
+          clearPreferredDocumentHeadingFontFamily
+          ? null
+          : (preferredDocumentHeadingFontFamily ??
+                this.preferredDocumentHeadingFontFamily),
       fontFamily: fontFamily ?? this.fontFamily,
       footerText: footerText ?? this.footerText,
       footerShowPageNumbers:
@@ -545,6 +585,9 @@ class ThemeProfile {
       'documentBandTextColor': documentBandTextColor,
       'documentBandBackgroundColor': documentBandBackgroundColor,
       'documentShowPageNumbers': documentShowPageNumbers,
+      'documentHeadingFontFamily': documentHeadingFontFamily,
+      'preferredFontFamily': preferredFontFamily,
+      'preferredDocumentHeadingFontFamily': preferredDocumentHeadingFontFamily,
       'fontFamily': fontFamily,
       'footerText': footerText,
       'footerShowPageNumbers': footerShowPageNumbers,
@@ -568,6 +611,22 @@ class ThemeProfile {
   /// break out of the `font-family:'…'` declaration, so reject it.
   static String _font(Object? value, List<String> allowed, String fallback) =>
       value is String && allowed.contains(value) ? value : fallback;
+
+  /// Als [_font], maar voor een veld dat leeg mag zijn: een onbekende naam
+  /// wordt `null` (volg de bodyletter), niet een willekeurige terugval.
+  static String? _optionalFont(Object? value, List<String> allowed) =>
+      value is String && allowed.contains(value) ? value : null;
+
+  /// Saneert een gewenst lettertype. De naam is vrije tekst uit een
+  /// brondocument of uit een tekstveld en belandt in `font-family:'…'` en in
+  /// `w:rFonts w:ascii="…"`; alles wat uit een aanhalingsteken of een attribuut
+  /// kan breken valt af. Letters, cijfers, spatie, punt en koppelteken volstaan
+  /// voor elke lettertypenaam die een kantoorpakket schrijft.
+  static String? _preferredFont(Object? value) {
+    if (value is! String) return null;
+    final name = value.trim();
+    return kPreferredFontFamilyPattern.hasMatch(name) ? name : null;
+  }
 
   factory ThemeProfile.fromJson(Map<String, Object?> json) {
     return ThemeProfile(
@@ -652,6 +711,14 @@ class ThemeProfile {
           : _color(json['documentBandBackgroundColor'], '#FFFFFF'),
       documentShowPageNumbers:
           json['documentShowPageNumbers'] as bool? ?? false,
+      documentHeadingFontFamily: _optionalFont(
+        json['documentHeadingFontFamily'],
+        AppSettings.availableFonts,
+      ),
+      preferredFontFamily: _preferredFont(json['preferredFontFamily']),
+      preferredDocumentHeadingFontFamily: _preferredFont(
+        json['preferredDocumentHeadingFontFamily'],
+      ),
       fontFamily: _font(
         json['fontFamily'],
         AppSettings.availableFonts,
@@ -706,4 +773,32 @@ class ThemeProfile {
       documentBandTextColor ?? textColor;
   String get effectiveDocumentBandBackgroundColor =>
       documentBandBackgroundColor ?? slideBackgroundColor;
+
+  /// De letter waarin een documentkop op het scherm staat: de kopletter als
+  /// die gezet is, anders de bodyletter.
+  String get effectiveDocumentHeadingFontFamily =>
+      documentHeadingFontFamily ?? fontFamily;
+
+  /// De letter die een export als éérste noemt voor de lopende tekst: de
+  /// gewenste als die er is, anders wat het scherm ook toont.
+  String get exportFontFamily => preferredFontFamily ?? fontFamily;
+
+  /// De letter die een export als éérste noemt voor een documentkop. Een
+  /// gewenste kopletter wint; anders een expliciet gezette kopletter; anders
+  /// volgt de kop de lopende tekst — inclusief háár voorkeur, want een
+  /// huisstijl zonder aparte kopletter zet de koppen in de bodyletter.
+  String get exportDocumentHeadingFontFamily =>
+      preferredDocumentHeadingFontFamily ??
+      documentHeadingFontFamily ??
+      exportFontFamily;
 }
+
+/// Wat een gewenst lettertype ([ThemeProfile.preferredFontFamily]) mag zijn:
+/// letters, cijfers, spatie, punt en koppelteken, beginnend met een letter of
+/// cijfer, hooguit 64 tekens. Geen aanhalingstekens, puntkomma's, accolades of
+/// haken — de naam wordt in CSS en XML geïnterpoleerd. Publiek zodat het
+/// invoerveld in de instellingen dezelfde grens hanteert als de lezer.
+final RegExp kPreferredFontFamilyPattern = RegExp(
+  r'^[\p{L}\p{N}][\p{L}\p{N} .\-]{0,63}$',
+  unicode: true,
+);

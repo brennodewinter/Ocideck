@@ -763,6 +763,66 @@ const _dutchSourceAddFr = {
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} leçons en présentiel · {sessies} séances',
   '{vrij} plaatsen vrij': '{vrij} places libres',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Les niveaux de titre {niveau} ont chacun leur propre couleur ({kleur}) ; le style ne connaît qu’une seule couleur de titre.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(affiché en {vervanger}, conservé pour l\'export)',
+  'Accent': 'Accent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Uniquement lettres, chiffres, espaces, points et traits d\'union.',
+  'Alleen tekst': 'Texte seul',
+  'Als documentlogo gebruiken': 'Utiliser comme logo du document',
+  'Bestaande stijl gebruiken': 'Utiliser le style existant',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'La police que Word, LibreOffice ou un navigateur utilise s\'il en dispose ; ci-dessus figure ce qu\'OciDeck affiche lui-même.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Cette charte graphique existe déjà sous le style {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Document importé ; {n} image(s) dans le texte non reprise(s).',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Une image de l\'en-tête ou du pied de page est uniquement vectorielle (SVG) et ne peut pas devenir un logo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Une image uniquement sur la page de titre ; ce n\'est pas un logo du document.',
+  'Gewenst lettertype (export)': 'Police souhaitée (export)',
+  'Gewenste kopletter (export)': 'Police des titres souhaitée (export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Le document possède sa propre charte graphique. OciDeck peut l\'enregistrer comme style et l\'appliquer à ce document.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Le logo n\'a pas pu être enregistré de manière permanente ; il reste disponible uniquement pour cette session.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Le logo était centré ; le style ne connaît que gauche et droite, il ira à gauche.',
+  'Kop- en voettekst': 'En-tête et pied de page',
+  'Kopletter': 'Police des titres',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Le niveau de titre {niveau} a sa propre couleur ({kleur}) ; le style ne connaît qu\'une seule couleur de titre.',
+  'Koppen': 'Titres',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Vide : à l\'export, les titres suivent la police souhaitée du texte.',
+  'Niet overgenomen': 'Non repris',
+  'Nieuwe stijl toevoegen': 'Ajouter un nouveau style',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Sur le web, le logo n\'est conservé que pour cette session.',
+  'Paginanummers': 'Numéros de page',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Figure {plaats} sur chaque page, {mm} mm de large.',
+  'Stijl overnemen': 'Adopter le style',
+  'Stijl overnemen?': 'Adopter le style ?',
+  'Voettekst': 'Pied de page',
+  'Zelfde als de tekst ({letter})': 'Identique au texte ({letter})',
+  'gecentreerd bovenaan': 'centré en haut',
+  'gecentreerd onderaan': 'centré en bas',
+  'linksboven': 'en haut à gauche',
+  'linksonder': 'en bas à gauche',
+  'rechtsboven': 'en haut à droite',
+  'rechtsonder': 'en bas à droite',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Document importé — non repris : {lijst}',
+  '{n} tekstkader': '{n} cadre de texte',
+  '{n} tekstkaders': '{n} cadres de texte',
+  '{n} groep': '{n} groupe',
+  '{n} groepen': '{n} groupes',
+  '{n} object': '{n} objet',
+  '{n} objecten': '{n} objets',
   'Presentatievorm': 'Format de présentation',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Choisissez comment les diapositives défilent pendant la présentation.',

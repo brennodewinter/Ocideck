@@ -1734,6 +1734,66 @@ const _dutchSourceAddPl = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} zajęć stacjonarnych · {sessies} sesji',
   '{vrij} plaatsen vrij': '{vrij} miejsc wolnych',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Poziomy nagłówków {niveau} mają każdy własny kolor ({kleur}); styl zna tylko jeden kolor nagłówka.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(wyświetlane jako {vervanger}, zachowane do eksportu)',
+  'Accent': 'Akcent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Tylko litery, cyfry, spacje, kropki i myślniki.',
+  'Alleen tekst': 'Tylko tekst',
+  'Als documentlogo gebruiken': 'Użyj jako logo dokumentu',
+  'Bestaande stijl gebruiken': 'Użyj istniejącego stylu',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Czcionka, której użyje Word, LibreOffice lub przeglądarka, jeśli ją ma; powyżej widać, co pokazuje sam OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Ten styl firmowy istnieje już jako styl {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument zaimportowany; {n} obraz(ów) w tekście nie przeniesiono.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Obraz w nagłówku lub stopce jest wyłącznie wektorowy (SVG) i nie może zostać logo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Obraz tylko na stronie tytułowej; to nie jest logo dokumentu.',
+  'Gewenst lettertype (export)': 'Preferowana czcionka (eksport)',
+  'Gewenste kopletter (export)': 'Preferowana czcionka nagłówków (eksport)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokument ma własny styl firmowy. OciDeck może zapisać go jako styl i zastosować do tego dokumentu.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Nie udało się trwale zapisać logo; pozostaje dostępne tylko w tej sesji.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logo było wyśrodkowane; styl zna tylko lewą i prawą stronę, trafi na lewą.',
+  'Kop- en voettekst': 'Nagłówek i stopka',
+  'Kopletter': 'Czcionka nagłówków',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Poziom nagłówka {niveau} ma własny kolor ({kleur}); styl zna tylko jeden kolor nagłówków.',
+  'Koppen': 'Nagłówki',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Puste: przy eksporcie nagłówki przejmują preferowaną czcionkę tekstu.',
+  'Niet overgenomen': 'Nie przeniesiono',
+  'Nieuwe stijl toevoegen': 'Dodaj nowy styl',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'W przeglądarce logo pozostaje zapisane tylko w tej sesji.',
+  'Paginanummers': 'Numery stron',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Widnieje {plaats} na każdej stronie, szerokość {mm} mm.',
+  'Stijl overnemen': 'Przejmij styl',
+  'Stijl overnemen?': 'Przejąć styl?',
+  'Voettekst': 'Stopka',
+  'Zelfde als de tekst ({letter})': 'Tak jak tekst ({letter})',
+  'gecentreerd bovenaan': 'na górze, wyśrodkowane',
+  'gecentreerd onderaan': 'na dole, wyśrodkowane',
+  'linksboven': 'w lewym górnym rogu',
+  'linksonder': 'w lewym dolnym rogu',
+  'rechtsboven': 'w prawym górnym rogu',
+  'rechtsonder': 'w prawym dolnym rogu',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument zaimportowany — nie przeniesiono: {lijst}',
+  '{n} tekstkader': '{n} ramka tekstowa',
+  '{n} tekstkaders': '{n} ramki tekstowe',
+  '{n} groep': '{n} grupa',
+  '{n} groepen': '{n} grupy',
+  '{n} object': '{n} obiekt',
+  '{n} objecten': '{n} obiekty',
   'Presentatievorm': 'Format prezentacji',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Wybierz sposób przechodzenia slajdów podczas prezentacji.',

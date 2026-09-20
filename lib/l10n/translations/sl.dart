@@ -1721,6 +1721,66 @@ const _dutchSourceAddSl = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} klasičnih ur · {sessies} sej',
   '{vrij} plaatsen vrij': '{vrij} prostih mest',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Ravni naslovov {niveau} imajo vsaka svojo barvo ({kleur}); slog pozna le eno barvo naslova.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(prikazano kot {vervanger}, ohranjeno za izvoz)',
+  'Accent': 'Poudarek',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Samo črke, števke, presledki, pike in vezaji.',
+  'Alleen tekst': 'Samo besedilo',
+  'Als documentlogo gebruiken': 'Uporabi kot logotip dokumenta',
+  'Bestaande stijl gebruiken': 'Uporabi obstoječi slog',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Pisava, ki jo Word, LibreOffice ali brskalnik uporabi, če jo ima; zgoraj je to, kar prikazuje sam OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Ta celostna grafična podoba že obstaja kot slog {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument uvožen; {n} slika/slik v besedilu ni prenesenih.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Slika v glavi ali nogi je samo vektorska (SVG) in ne more postati logotip.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Slika samo na naslovni strani; to ni logotip dokumenta.',
+  'Gewenst lettertype (export)': 'Želena pisava (izvoz)',
+  'Gewenste kopletter (export)': 'Želena pisava naslovov (izvoz)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokument nosi lastno celostno grafično podobo. OciDeck jo lahko shrani kot slog in uporabi na tem dokumentu.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logotipa ni bilo mogoče trajno shraniti; na voljo ostane samo v tej seji.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logotip je bil na sredini; slog pozna samo levo in desno, zato bo levo.',
+  'Kop- en voettekst': 'Glava in noga',
+  'Kopletter': 'Pisava naslovov',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Raven naslova {niveau} ima svojo barvo ({kleur}); slog pozna samo eno barvo naslovov.',
+  'Koppen': 'Naslovi',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Prazno: pri izvozu naslovi sledijo želeni pisavi besedila.',
+  'Niet overgenomen': 'Ni preneseno',
+  'Nieuwe stijl toevoegen': 'Dodaj nov slog',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Na spletu logotip ostane shranjen samo v tej seji.',
+  'Paginanummers': 'Številke strani',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Stoji {plaats} na vsaki strani, širine {mm} mm.',
+  'Stijl overnemen': 'Prevzemi slog',
+  'Stijl overnemen?': 'Prevzamem slog?',
+  'Voettekst': 'Noga',
+  'Zelfde als de tekst ({letter})': 'Enako kot besedilo ({letter})',
+  'gecentreerd bovenaan': 'na sredini zgoraj',
+  'gecentreerd onderaan': 'na sredini spodaj',
+  'linksboven': 'zgoraj levo',
+  'linksonder': 'spodaj levo',
+  'rechtsboven': 'zgoraj desno',
+  'rechtsonder': 'spodaj desno',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument uvožen — ni preneseno: {lijst}',
+  '{n} tekstkader': '{n} besedilni okvir',
+  '{n} tekstkaders': '{n} besedilnih okvirjev',
+  '{n} groep': '{n} skupina',
+  '{n} groepen': '{n} skupin',
+  '{n} object': '{n} predmet',
+  '{n} objecten': '{n} predmetov',
   'Presentatievorm': 'Oblika predstavitve',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Izberite, kako se diapozitivi pomikajo med predstavitvijo.',

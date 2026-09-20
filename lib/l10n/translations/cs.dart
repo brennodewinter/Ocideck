@@ -1722,6 +1722,66 @@ const _dutchSourceAddCs = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} prezenčních lekcí · {sessies} lekcí',
   '{vrij} plaatsen vrij': '{vrij} volných míst',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Úrovně nadpisů {niveau} mají každá vlastní barvu ({kleur}); styl zná jen jednu barvu nadpisu.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(zobrazeno jako {vervanger}, zachováno pro export)',
+  'Accent': 'Akcent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Pouze písmena, číslice, mezery, tečky a pomlčky.',
+  'Alleen tekst': 'Pouze text',
+  'Als documentlogo gebruiken': 'Použít jako logo dokumentu',
+  'Bestaande stijl gebruiken': 'Použít existující styl',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Písmo, které Word, LibreOffice nebo prohlížeč použije, pokud ho má; výše je to, co zobrazuje sám OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Tento firemní styl už existuje jako styl {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument importován; {n} obrázek/obrázků v textu nebylo převzato.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Obrázek v záhlaví nebo zápatí je pouze vektorový (SVG) a nemůže se stát logem.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Obrázek pouze na titulní straně; to není logo dokumentu.',
+  'Gewenst lettertype (export)': 'Požadované písmo (export)',
+  'Gewenste kopletter (export)': 'Požadované písmo nadpisů (export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokument nese vlastní firemní styl. OciDeck ho může uložit jako styl a použít na tento dokument.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logo se nepodařilo trvale uložit; zůstává dostupné jen v této relaci.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logo bylo na střed; styl zná jen vlevo a vpravo, půjde vlevo.',
+  'Kop- en voettekst': 'Záhlaví a zápatí',
+  'Kopletter': 'Písmo nadpisů',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Úroveň nadpisu {niveau} má vlastní barvu ({kleur}); styl zná jen jednu barvu nadpisů.',
+  'Koppen': 'Nadpisy',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Prázdné: při exportu nadpisy přebírají požadované písmo textu.',
+  'Niet overgenomen': 'Nepřeneseno',
+  'Nieuwe stijl toevoegen': 'Přidat nový styl',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Na webu zůstane logo uloženo jen v této relaci.',
+  'Paginanummers': 'Čísla stránek',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Je {plaats} na každé stránce, šířka {mm} mm.',
+  'Stijl overnemen': 'Převzít styl',
+  'Stijl overnemen?': 'Převzít styl?',
+  'Voettekst': 'Zápatí',
+  'Zelfde als de tekst ({letter})': 'Stejné jako text ({letter})',
+  'gecentreerd bovenaan': 'nahoře na střed',
+  'gecentreerd onderaan': 'dole na střed',
+  'linksboven': 'vlevo nahoře',
+  'linksonder': 'vlevo dole',
+  'rechtsboven': 'vpravo nahoře',
+  'rechtsonder': 'vpravo dole',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importován — nepřeneseno: {lijst}',
+  '{n} tekstkader': '{n} textový rámeček',
+  '{n} tekstkaders': '{n} textových rámečků',
+  '{n} groep': '{n} skupina',
+  '{n} groepen': '{n} skupin',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objektů',
   'Presentatievorm': 'Formát prezentace',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Zvolte, jak se budou snímky během prezentace posouvat.',

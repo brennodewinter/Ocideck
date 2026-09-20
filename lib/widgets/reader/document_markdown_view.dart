@@ -684,6 +684,7 @@ class DocumentMarkdownView extends StatelessWidget {
       child: _inline(
         text,
         t.body.copyWith(
+          fontFamily: t.headingFontFamily,
           fontSize: size,
           fontWeight: level <= 2 ? FontWeight.w800 : FontWeight.w700,
           height: 1.25,
@@ -730,34 +731,6 @@ class DocumentMarkdownView extends StatelessWidget {
     // which is the only way it stays right in all thirty languages.
     return Semantics(checked: it.checked, child: row);
   }
-
-  Widget _bulletMarker(_Theme t, _ListLine it) => SizedBox(
-    width: it.ordered ? 24 : 18,
-    child: Text(
-      it.ordered ? '${it.number}.' : '•',
-      style: t.body.copyWith(
-        fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
-        color: it.ordered ? t.body.color : t.marker,
-      ),
-    ),
-  );
-
-  /// The box of a GFM task item. Read-only on purpose: this renders bundled
-  /// documentation shipped as an asset, so a tick here would have nowhere to be
-  /// written back to. It reports progress, it does not record it.
-  Widget _checkMarker(_Theme t, {required bool checked}) => SizedBox(
-    width: 24,
-    child: Padding(
-      // Nudge the box onto the text baseline; the glyph sits higher than the
-      // cap height of the line it labels.
-      padding: const EdgeInsets.only(top: 2),
-      child: Icon(
-        checked ? Icons.check_box_outlined : Icons.check_box_outline_blank,
-        size: 17,
-        color: checked ? t.checkboxChecked : t.checkboxEmpty,
-      ),
-    ),
-  );
 
   Widget _blockQuote(_Theme t, String text) => Container(
     margin: const EdgeInsets.only(bottom: 12),

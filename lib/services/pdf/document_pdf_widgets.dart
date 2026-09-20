@@ -324,6 +324,10 @@ class DocumentPdfWidgets {
       overflow: pw.TextOverflow.span,
       text: pw.TextSpan(
         style: _baseStyle.copyWith(
+          font: fonts.headingBase,
+          fontBold: fonts.headingBold,
+          fontItalic: fonts.headingItalic,
+          fontBoldItalic: fonts.headingBoldItalic,
           fontSize: size,
           fontWeight: pw.FontWeight.bold,
           lineSpacing: size * 0.2,

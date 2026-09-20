@@ -4,21 +4,38 @@
 // Headless: geen Flutter, geen IO — draait op bytes, dus ook op web.
 //
 // Parseert `word/document.xml` (de body), `word/styles.xml` (kop-stijlnamen)
-// en `word/_rels/document.xml.rels` (hyperlink-relaties). `word/numbering.xml`
-// wordt gelezen om onderscheid te maken tussen geordende en ongeordende lijsten.
+// en `word/_rels/document.xml.rels` (hyperlink- én afbeeldingsrelaties).
+// `word/numbering.xml` wordt gelezen om onderscheid te maken tussen geordende
+// en ongeordende lijsten.
 //
 // Best-effort: koppen, lijsten, tabellen, vet/cursief/doorgestreept en links
-// gaan mee; wat geen Markdown-tegenhanger heeft (voetnoten, tekstkaders,
-// positie-geplaatste objecten) valt stil. De uitvoer is gewone Markdown.
+// gaan mee, en afbeeldingen (`w:drawing`/`v:imagedata` → `word/media/`)
+// worden als `![alt](ref)` neergezet met hun bytes in [DocumentConversion].
+// Wat geen Markdown-tegenhanger heeft (voetnoten, tekstkaders, groepen,
+// objecten) wordt geteld in `notImported` in plaats van stil te vallen
+// (#2120). De uitvoer is gewone Markdown.
+//
+// De huisstijl (letters, kleuren, kop- en voettekst, het beeld op elke
+// bladzijde) leest het zusterdeel `docx_document_style.dart` uit hetzelfde
+// archief, zodat het bestand maar één keer uitgepakt wordt (#2119).
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
+import '../../../../utils/content_hash.dart';
+import '../../models/source_document_style.dart';
+import '../../../../utils/image_signature.dart';
+import '../../../../utils/markdown_blocks.dart';
+import '../../models/document_conversion.dart';
 import '../../utils/archive_utils.dart';
 import '../../utils/import_budget.dart';
+import '../../utils/safe_extensions.dart';
 import '../../utils/xml_utils.dart';
+
+part 'docx_document_style.dart';
 
 /// Zet de bytes van een `.docx` om in Markdown.
 ///
@@ -26,6 +43,14 @@ import '../../utils/xml_utils.dart';
 /// [FormatException] bij een beschadigd archief, en [Exception] bij een
 /// onleesbaar onderdeel.
 String convertDocxToMarkdown(
+  List<int> bytes, {
+  ImportBudget budget = ImportBudget.standard,
+}) => convertDocxDetailed(bytes, budget: budget).markdown;
+
+/// Als [convertDocxToMarkdown], maar levert ook de afbeeldingen en de lijst
+/// met niet-overgenomen inhoud — de servicelaag beslist waar de bytes landen
+/// en hoe het verlies gemeld wordt.
+DocumentConversion convertDocxDetailed(
   List<int> bytes, {
   ImportBudget budget = ImportBudget.standard,
 }) {
@@ -46,7 +71,12 @@ String convertDocxToMarkdown(
   for (final child in body.children.whereType<XmlElement>()) {
     _emitBlock(ctx, child, buf, indent: '');
   }
-  return _trimTrailingBlank(buf.toString());
+  return DocumentConversion(
+    markdown: _trimTrailingBlank(buf.toString()),
+    images: ctx.images,
+    notImported: ctx.notImported,
+    style: _extractDocxStyle(ctx),
+  );
 }
 
 XmlElement? _findLocal(XmlNode root, String local) {
@@ -216,6 +246,30 @@ void _walkInline(
       buf.write('\n');
     case 'cr':
       buf.write('\n');
+    case 'drawing':
+      _emitDrawing(ctx, el, buf);
+    case 'pict':
+      _emitPict(ctx, el, buf);
+    case 'object':
+      // Ingebed OLE-object (Excel-blad, vergelijking): geen afbeelding om
+      // mee te nemen, maar wél inhoud die de gebruiker kwijtraakt.
+      ctx.notImported.add('object');
+    case 'AlternateContent':
+      // mc:AlternateContent draagt dezelfde inhoud twee keer: de keuze in
+      // de nieuwe notatie (w:drawing) en de terugval in de oude (w:pict).
+      // Alleen de keuzes doorlopen — anders telt elke afbeelding dubbel.
+      for (final child in el.children.whereType<XmlElement>()) {
+        if (child.name.local == 'Choice') {
+          _walkInline(
+            ctx,
+            child,
+            buf,
+            bold: bold,
+            italic: italic,
+            strike: strike,
+          );
+        }
+      }
     default:
       for (final child in el.children.whereType<XmlElement>()) {
         _walkInline(
@@ -250,6 +304,98 @@ void _walkRunChild(
     default:
       _walkInline(ctx, el, buf, bold: bold, italic: italic, strike: strike);
   }
+}
+
+/// Verwerk een `w:drawing`: een rasterafbeelding gaat mee als `![alt](ref)`,
+/// de rest wordt geteld als niet-overgenomen zodat niets stil verdwijnt
+/// (#2120). Inline én geankerde tekeningen komen hier langs — beide hangen
+/// als `w:drawing` in een run.
+void _emitDrawing(_DocxContext ctx, XmlElement drawing, StringBuffer buf) {
+  // Gegroepeerde vormen (wpg:wgp) vallen als één stuk weg.
+  if (_findLocal(drawing, 'wgp') != null) {
+    ctx.notImported.add('groep');
+    return;
+  }
+  // Tekstkaders (wps:txbx of het oudere v:textbox met w:txbxContent).
+  if (_findLocal(drawing, 'txbxContent') != null) {
+    ctx.notImported.add('tekstkader');
+    return;
+  }
+  final blip = _findLocal(drawing, 'blip');
+  if (blip == null) {
+    // Een tekening zónder blip is een vorm, grafiek of diagram — iets dat
+    // we niet kunnen afbeelden maar wél benoemen.
+    ctx.notImported.add('object');
+    return;
+  }
+  // `r:embed` wijst naar een deel in het pakket; `r:link` naar een externe
+  // bron — beide lossen via dezelfde relatie op, maar alleen de interne
+  // levert bytes (imagePartPath weigert doelen buiten word/).
+  final rid = _attr(blip, 'embed') ?? _attr(blip, 'link');
+  final path = rid == null ? null : ctx.imagePartPath(rid);
+  if (path == null || !_emitImage(ctx, path, buf, alt: _drawingAlt(drawing))) {
+    ctx.notImported.add('afbeelding');
+  }
+}
+
+/// Verwerk een `w:pict` (de VML-notatie uit oudere documenten): `v:imagedata`
+/// is een afbeelding, `v:textbox` een tekstkader, de rest een vorm.
+void _emitPict(_DocxContext ctx, XmlElement pict, StringBuffer buf) {
+  if (_findLocal(pict, 'textbox') != null) {
+    ctx.notImported.add('tekstkader');
+    return;
+  }
+  final imageData = _findLocal(pict, 'imagedata');
+  if (imageData == null) {
+    ctx.notImported.add('object');
+    return;
+  }
+  final rid = _attr(imageData, 'id');
+  final path = rid == null ? null : ctx.imagePartPath(rid);
+  if (path == null || !_emitImage(ctx, path, buf, alt: '')) {
+    ctx.notImported.add('afbeelding');
+  }
+}
+
+/// Leest [path] uit het archief en zet — als de bytes een weergeefbaar
+/// rasterbeeld zijn — een `![alt](ref)` in de uitvoer. Geeft terug of er een
+/// verwijzing is geplaatst; de aanroeper telt het element anders als
+/// niet-overgenomen.
+bool _emitImage(
+  _DocxContext ctx,
+  String path,
+  StringBuffer buf, {
+  required String alt,
+}) {
+  final bytes = ctx.readPartBytes(path);
+  if (bytes == null) return false;
+  final mime = imageMimeFromBytes(bytes);
+  // Alleen raster gaat mee: SVG/EMF/WMF kan de documentweergave niet
+  // tonen, en ontbrekende of verkeerde bytes zijn sowieso niet overdraagbaar.
+  if (mime == null) return false;
+  ctx.images.add(
+    ImportedDocumentImage(
+      ref: path,
+      name: normalizeImageFileName(
+        path.split('/').last,
+        fallbackExtension: extensionForImageMime(mime),
+      ),
+      bytes: Uint8List.fromList(bytes),
+      alt: alt,
+    ),
+  );
+  buf.write('![$alt]($path)');
+  return true;
+}
+
+/// De alt-tekst van een `w:drawing`: `wp:docPr/@descr`, of anders `/@name`.
+/// Gesaneerd zodat de `![…](…)`-syntaxis heel blijft.
+String _drawingAlt(XmlElement drawing) {
+  final docPr = _findLocal(drawing, 'docPr');
+  final raw = docPr == null
+      ? ''
+      : (_attr(docPr, 'descr') ?? _attr(docPr, 'name') ?? '');
+  return markdownImageAlt(raw.replaceAll(RegExp(r'\s+'), ' ').trim());
 }
 
 String _escapeText(String s) => s
@@ -313,7 +459,13 @@ class _DocxContext {
   Map<String, int>?
   _headingStyles; // style-id → heading level (0 = not heading)
   Map<String, String>? _relationships; // r:id → target URL
+  final _partRelationships = <String, Map<String, String>>{};
   Map<String, bool>? _numbering; // numId → isOrdered
+
+  /// De afbeeldingen die de omzetting plaatste, en wat er niet meekwam —
+  /// de importeur verzamelt, [convertDocxDetailed] levert op.
+  final List<ImportedDocumentImage> images = [];
+  final List<String> notImported = [];
 
   String? readPart(String path) {
     final bytes = readPartBytes(path);
@@ -346,6 +498,47 @@ class _DocxContext {
   String? relationship(String rid) {
     _relationships ??= _loadRelationships();
     return _relationships![rid];
+  }
+
+  /// Het relatiedoel van [rid] in het `.rels`-bestand van [partPath]
+  /// (`word/header2.xml` → `word/_rels/header2.xml.rels`), of null.
+  String? relationshipOf(String partPath, String rid) {
+    final rels = _partRelationships.putIfAbsent(partPath, () {
+      final slash = partPath.lastIndexOf('/');
+      final dir = slash < 0 ? '' : partPath.substring(0, slash + 1);
+      final name = partPath.substring(slash + 1);
+      return _loadRelationshipsFrom('${dir}_rels/$name.rels');
+    });
+    return rels[rid];
+  }
+
+  /// Het archiefpad van het deel dat de hoofdrelaties als [type] aanwijzen
+  /// (`theme` → `word/theme/theme1.xml`), of null.
+  String? partPathForRelationshipType(String type) {
+    final doc = readXml('word/_rels/document.xml.rels');
+    if (doc == null) return null;
+    for (final rel in _descendants(doc, 'Relationship')) {
+      final relType = _attr(rel, 'Type');
+      final target = _attr(rel, 'Target');
+      if (relType != null && target != null && relType.endsWith('/$type')) {
+        return _resolveWordPath(target);
+      }
+    }
+    return null;
+  }
+
+  /// Het archiefpad van een afbeeldingsrelatie (`r:embed`/`r:id`), of null
+  /// als de relatie niet bestaat of het doel buiten `word/` wijst. Doelen
+  /// met `..` of een schema (`http:`, `file:`) worden geweigerd: ze mogen
+  /// het documentdeel niet ontsnappen en externe beelden halen we bewust
+  /// niet binnen.
+  String? imagePartPath(String rid) {
+    final target = relationship(rid);
+    if (target == null || target.contains(':') || target.contains('..')) {
+      return null;
+    }
+    final path = 'word/${target.replaceFirst(RegExp('^/+'), '')}';
+    return path == 'word/' ? null : path;
   }
 
   /// Geeft true als een numId een geordende lijst is.
@@ -385,9 +578,12 @@ class _DocxContext {
     return null;
   }
 
-  Map<String, String> _loadRelationships() {
+  Map<String, String> _loadRelationships() =>
+      _loadRelationshipsFrom('word/_rels/document.xml.rels');
+
+  Map<String, String> _loadRelationshipsFrom(String path) {
     final result = <String, String>{};
-    final doc = readXml('word/_rels/document.xml.rels');
+    final doc = readXml(path);
     if (doc == null) return result;
     for (final rel in _descendants(doc, 'Relationship')) {
       final id = _attr(rel, 'Id');

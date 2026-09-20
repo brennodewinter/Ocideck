@@ -1653,3 +1653,135 @@ The feature is not complete until tests and visual checks prove at least:
 The format and product decision is deliberately small: one ignored comment, a
 real table, a standard table sort and a derived view. If OciDeck disappeared,
 the user's ordered facts would still be a useful Markdown table.
+
+## 18. Importing a document's house style (design signed off 2026-09-19, #2119)
+
+*A `.docx` or `.odt` carries its house style in three places — the theme
+fonts and colours, the heading styles, and the header/footer parts that put a
+picture on every page. The import reads them, shows them, and — only when
+asked — turns them into a style profile the document points at with `theme:`.
+Nothing new lands in the `.md`; the profile grows three fields so the font the
+house style asks for survives even when OciDeck cannot show it.*
+
+### 18.1 What is on disk, and what is not
+
+Nothing changes in the document format. A styled import produces exactly what
+the Style button produces: a `theme: <name>` line (§12.1), byte-surgical, and
+otherwise plain Markdown. The house style itself lives where every style lives
+— in the profile — and a profile is never in a `.md` (FILE_FORMAT §3.2). That
+was the first design decision and the one that made the rest cheap: the
+importer reuses the presentation import's route (a new `ThemeProfile` through
+`addThemeProfileWithoutSelection`, the logo through
+`materializeImportedStyleLogo`) instead of inventing a document-side carrier.
+
+The profile format does grow, by three optional fields, all `null` by default
+and all ignored by an older reader:
+
+- `documentHeadingFontFamily` — the face of a document's headings, whitelisted
+  like `fontFamily`; `null` keeps headings in `fontFamily`. Documents only:
+  Word's *major* font is a document fact, and applying it to the twenty slide
+  surfaces would have been a second project for no document gain.
+- `preferredFontFamily` and `preferredDocumentHeadingFontFamily` — the names
+  the house style *asks for*. This is the load-bearing idea: `fontFamily`
+  stays what the app draws with (whitelisted, so the 48 render sites are
+  untouched and the CSS-injection guard stands), while the preferred name is
+  free text that an export names first. A browser, Word or LibreOffice that
+  has `Aptos` shows Aptos; one that does not falls back to the stand-in, which
+  is also what the screen showed. Free text into CSS and XML needs its own
+  gate: `kPreferredFontFamilyPattern` (letters, digits, space, `.`, `-`, ≤ 64,
+  no quotes, semicolons, braces or angle brackets), applied in
+  `ThemeProfile.fromJson` and again in the settings field, so a `.ocideckstyle`
+  from elsewhere cannot carry a breakout.
+
+Two fields rather than one free `fontFamily` with a derived stand-in was a
+deliberate choice: with two, the user can override the stand-in (prefer
+*Segoe UI* over *Calibri* for *Aptos*), the existing whitelist keeps its job,
+and the render sites need no change. The stand-in itself is coarse by design
+(`font_substitution.dart`): an offered font or a weight variant of one stays
+itself, a few known neighbours are mapped (Aptos → Calibri, Helvetica →
+Helvetica Neue, the Liberation faces to their metric twins), and otherwise the
+*class* decides — serif → EB Garamond, because it is bundled and therefore
+identical on every platform and on web; mono → Courier New; the rest → Arial.
+A reader sees serif against sans, not one sans against another.
+
+### 18.2 Where the exports put the name
+
+- **HTML** (continuous and slides): `font-family:'Aptos Light', 'Calibri',
+  sans-serif` — preferred, stand-in, generic; the generic follows the
+  *preferred* font's class. Document headings get their own stack only when it
+  differs from the body's.
+- **DOCX**: `w:rFonts` in `docDefaults` from `exportFontFamily`, and on
+  `Heading1–6` from `exportDocumentHeadingFontFamily` when it differs. This
+  replaced a hard-coded Calibri that ignored the profile altogether; the
+  colours landed beside it the same day (#2129).
+- **ODT**: `office:font-face-decls` plus `style:font-name` on the paragraph
+  default style and the heading styles.
+- **PDF**: unchanged in kind — the fourteen standard faces — but the
+  serif/sans class is now decided on the preferred name, and the headings get
+  their own class (`DocumentPdfFonts.headingBold` etc.), so serif headings over
+  sans text survive into the PDF.
+- **LaTeX** and **ePub**: untouched. LaTeX sets no font at all (see the head of
+  `document_pdf_fonts.dart`); the ePub keeps the reader's font on purpose, as it
+  carries no profile.
+
+### 18.3 What the importer reads
+
+`docx_document_style.dart` and `odt_document_style.dart` are parts of their
+importers, so the archive is unpacked once. Both produce a
+`SourceDocumentStyle`: requested fonts, raw colours, band text, page-number
+flag, logo candidates and a loss list. The reading rules that matter:
+
+- **Fonts** resolve the way the office suite resolves them: a `w:rFonts` name
+  wins, a `w:asciiTheme` reference goes to the theme's major/minor font, and a
+  style without either walks its `basedOn`/`parent-style-name` chain (bounded
+  to eight hops). Heading 1 stands for "the headings"; body is the default
+  paragraph style, then `docDefaults`, then the theme minor font.
+- **Colours**: text from the default paragraph style or `docDefaults`, heading
+  from Heading 1, accent from the theme's `accent1` (ODF has no theme colours,
+  so its accent stays `null`). Heading 2–6 colours that differ from Heading 1
+  become a `perLevelHeadingColor` loss, one per colour: the profile has one
+  heading colour (§12), and widening the model for a second was judged not
+  worth it for the import alone.
+- **The logo** is structural, not statistical. In Word a picture "on every
+  page" is one picture in the `default` header or footer part that the section
+  points at; in ODF it is a frame in the `style:header`/`style:footer` of a
+  master page that does not name a `next-style-name`. The `first` part of a
+  section with `w:titlePg` — and a master *with* a next style — is the title
+  page: its picture is reported, not proposed. A second route catches the
+  hand-pasted case: an anchored body picture, identical by hash and position,
+  at least twice and at least on every page but one (page count from hard
+  breaks, a lower bound). Side and edge come from the anchor's offsets against
+  the page size, or from the paragraph alignment for an inline picture; a
+  centred picture becomes left plus a `centredLogo` note, and anything wider
+  than half the page is decoration, not a logo. Only raster bytes qualify:
+  Word writes a PNG fallback next to every SVG and the profile can only carry
+  raster, so a vector-only picture is a `vectorOnlyLogo` note.
+- **Header/footer text** drops text boxes (the classification label lives
+  there), both halves of an `mc:AlternateContent`, and the last computed value
+  of a field — the `2` of a `PAGE` field is a fact about the source, not a
+  footer.
+
+### 18.4 The question is optional, and asked once
+
+The presentation import creates a profile only when a logo is confirmed; a
+document with a font and a colour but no logo would never get its style that
+way. So the document import asks one broader question instead
+(`ImportDocumentStyleDialog`): here is what your document carries, here is
+what OciDeck makes of it, here is what it cannot take — *Alleen tekst*, *Stijl
+overnemen*, or, when a profile already *is* this style, *Bestaande stijl
+gebruiken*. Recognition (`documentStyleMatchesProfile` plus the logo bytes via
+`styleProfilesByLogoHash`) exists because the realistic case is the second
+document from the same template, and a profile per document is the failure
+mode. The dialog does not appear for a document that carries nothing, and it
+never runs before the safety scan: a document refused for executable content
+gets no style question either.
+
+### 18.5 What was left out, and where it went
+
+- Body pictures were dropped by the import when this was designed; the two
+  side findings became #2120 (body images salvaged as `mem:` assets, with a
+  *niet overgenomen* summary — landed as #2128) and #2121 (profile colours in
+  the DOCX/ODT styles — landed as #2129), both merged the same day and merged
+  into this branch.
+- Per-level heading colours, heading sizes and the theme's other accents are
+  not expressible in a profile and are reported as losses rather than modelled.

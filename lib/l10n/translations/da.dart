@@ -1721,6 +1721,66 @@ const _dutchSourceAddDa = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} fysiske lektioner · {sessies} sessioner',
   '{vrij} plaatsen vrij': '{vrij} ledige pladser',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Overskriftsniveauerne {niveau} har hver deres egen farve ({kleur}); typografien kender kun én overskriftsfarve.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(vises som {vervanger}, bevaret til eksport)',
+  'Accent': 'Accent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Kun bogstaver, tal, mellemrum, punktummer og bindestreger.',
+  'Alleen tekst': 'Kun tekst',
+  'Als documentlogo gebruiken': 'Brug som dokumentlogo',
+  'Bestaande stijl gebruiken': 'Brug eksisterende stil',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Den skrifttype, som Word, LibreOffice eller en browser bruger, hvis den findes; ovenfor står, hvad OciDeck selv viser.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Denne husstil findes allerede som stilen {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument importeret; {n} billede(r) i teksten ikke overført.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Et billede i sidehovedet eller sidefoden er kun vektorgrafik (SVG) og kan ikke blive et logo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Et billede kun på titelbladet; det er ikke et dokumentlogo.',
+  'Gewenst lettertype (export)': 'Ønsket skrifttype (eksport)',
+  'Gewenste kopletter (export)': 'Ønsket overskriftsskrifttype (eksport)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokumentet har sin egen husstil. OciDeck kan gemme den som stil og anvende den på dette dokument.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logoet kunne ikke gemmes permanent; det er kun tilgængeligt i denne session.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logoet var centreret; stilen kender kun venstre og højre, så det placeres til venstre.',
+  'Kop- en voettekst': 'Sidehoved og sidefod',
+  'Kopletter': 'Overskriftsskrifttype',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Overskriftsniveau {niveau} har sin egen farve ({kleur}); stilen kender kun én overskriftsfarve.',
+  'Koppen': 'Overskrifter',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Tom: ved eksport følger overskrifterne tekstens ønskede skrifttype.',
+  'Niet overgenomen': 'Ikke overført',
+  'Nieuwe stijl toevoegen': 'Tilføj ny stil',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'På nettet gemmes logoet kun i denne session.',
+  'Paginanummers': 'Sidetal',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Står {plaats} på hver side, {mm} mm bred.',
+  'Stijl overnemen': 'Overtag stil',
+  'Stijl overnemen?': 'Overtag stil?',
+  'Voettekst': 'Sidefod',
+  'Zelfde als de tekst ({letter})': 'Samme som teksten ({letter})',
+  'gecentreerd bovenaan': 'centreret øverst',
+  'gecentreerd onderaan': 'centreret nederst',
+  'linksboven': 'øverst til venstre',
+  'linksonder': 'nederst til venstre',
+  'rechtsboven': 'øverst til højre',
+  'rechtsonder': 'nederst til højre',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokument importeret — ikke overført: {lijst}',
+  '{n} tekstkader': '{n} tekstramme',
+  '{n} tekstkaders': '{n} tekstrammer',
+  '{n} groep': '{n} gruppe',
+  '{n} groepen': '{n} grupper',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objekter',
   'Presentatievorm': 'Præsentationsformat',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Vælg, hvordan dias skifter under præsentationen.',

@@ -1724,6 +1724,66 @@ const _dutchSourceAddHu = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} jelenléti óra · {sessies} alkalom',
   '{vrij} plaatsen vrij': '{vrij} szabad hely',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'A(z) {niveau}. címsorszintek mindegyikének saját színe van ({kleur}); a stílus csak egy címsorszínt ismer.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(megjelenítve mint {vervanger}, exporthoz megőrizve)',
+  'Accent': 'Kiemelés',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Csak betűk, számok, szóközök, pontok és kötőjelek.',
+  'Alleen tekst': 'Csak szöveg',
+  'Als documentlogo gebruiken': 'Használat dokumentumlogóként',
+  'Bestaande stijl gebruiken': 'Meglévő stílus használata',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Az a betűtípus, amelyet a Word, a LibreOffice vagy egy böngésző használ, ha megvan neki; fent az áll, amit maga az OciDeck mutat.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Ez az arculati stílus már létezik {naam} stílusként.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokumentum importálva; {n} kép a szövegben nem került át.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'A fejlécben vagy láblécben lévő kép csak vektoros (SVG), így nem lehet logó.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Kép csak a címlapon; az nem dokumentumlogó.',
+  'Gewenst lettertype (export)': 'Kívánt betűtípus (export)',
+  'Gewenste kopletter (export)': 'Kívánt címsor-betűtípus (export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'A dokumentum saját arculati stílust hordoz. Az OciDeck elmentheti stílusként, és alkalmazhatja erre a dokumentumra.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'A logót nem sikerült tartósan menteni; csak ebben a munkamenetben marad elérhető.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'A logó középre volt igazítva; a stílus csak balt és jobbat ismer, ezért balra kerül.',
+  'Kop- en voettekst': 'Élőfej és élőláb',
+  'Kopletter': 'Címsor betűtípusa',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'A(z) {niveau}. címsorszintnek saját színe van ({kleur}); a stílus csak egy címsorszínt ismer.',
+  'Koppen': 'Címsorok',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Üres: exportkor a címsorok a szöveg kívánt betűtípusát követik.',
+  'Niet overgenomen': 'Nem került át',
+  'Nieuwe stijl toevoegen': 'Új stílus hozzáadása',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'A weben a logó csak ebben a munkamenetben marad meg.',
+  'Paginanummers': 'Oldalszámok',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Minden oldalon {plaats} áll, {mm} mm széles.',
+  'Stijl overnemen': 'Stílus átvétele',
+  'Stijl overnemen?': 'Átveszi a stílust?',
+  'Voettekst': 'Élőláb',
+  'Zelfde als de tekst ({letter})': 'Ugyanaz, mint a szövegé ({letter})',
+  'gecentreerd bovenaan': 'felül középen',
+  'gecentreerd onderaan': 'alul középen',
+  'linksboven': 'bal felül',
+  'linksonder': 'bal alul',
+  'rechtsboven': 'jobb felül',
+  'rechtsonder': 'jobb alul',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokumentum importálva — nem került át: {lijst}',
+  '{n} tekstkader': '{n} szövegkeret',
+  '{n} tekstkaders': '{n} szövegkeret',
+  '{n} groep': '{n} csoport',
+  '{n} groepen': '{n} csoport',
+  '{n} object': '{n} objektum',
+  '{n} objecten': '{n} objektum',
   'Presentatievorm': 'Bemutató formátuma',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Válaszd ki, hogyan lépjenek tovább a diák a bemutató alatt.',

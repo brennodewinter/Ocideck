@@ -289,7 +289,12 @@ String _documentTableAccentHeaderCss(ThemeProfile t) =>
 /// Top-level in dit part-bestand (en niet in `_themedCss` in de
 /// hoofdbibliotheek) zodat die onder de bestandsgrensratchet blijft. GÉÉN
 /// externe `url()`/`@font-face`: de CSP is het vangnet, niet de vergunning.
-String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
+String _themedDocumentCss(
+  ThemeProfile t,
+  String family,
+  String codeFamily, {
+  required String headingFamily,
+}) {
   final logoSize = t.effectiveDocumentLogoSize;
   final bandText = t.effectiveDocumentBandTextColor;
   final bandBackground = t.effectiveDocumentBandBackgroundColor;
@@ -305,6 +310,9 @@ String _themedDocumentCss(ThemeProfile t, String family, String codeFamily) {
       'font-family:$family;font-size:${bodyFontSize.toStringAsFixed(1)}px;'
       'line-height:1.65;border-radius:4px;'
       'box-shadow:0 4px 24px rgba(0,0,0,.4)}'
+      // De kopletter van de documentstijl (#2119): alleen uitgeschreven als
+      // hij van de bodyletter verschilt, anders erven de koppen gewoon.
+      '${headingFamily == family ? '' : '.document h1,.document h2,.document h3,.document h4,.document h5,.document h6{font-family:$headingFamily}'}'
       '.document h1{color:var(--ocideck-title-color,'
       '${t.effectiveDocumentHeadingColor})}'
       // h2 tot en met h6, niet alleen h2: de documentweergave in de app
@@ -469,3 +477,22 @@ String _pageAtRuleCss(PageSizeSpec? size, PageMargins? margins) {
 /// Millimeters zonder overbodige nullen — `3` in plaats van `3.0`.
 String _fmtBleedMm(double mm) =>
     mm == mm.roundToDouble() ? mm.toStringAsFixed(0) : mm.toString();
+
+/// De CSS-letterstapel voor [font], met een gewenste letter ([preferred],
+/// zie `ThemeProfile.preferredFontFamily`) vooraan: een browser die de
+/// letter van de huisstijl heeft, toont die; wie hem mist krijgt de
+/// plaatsvervanger die de app ook toont, en anders de klasse.
+///
+/// Top-level in dit part-bestand om dezelfde reden als [_themedDocumentCss]:
+/// het leest geen veld van de service, en het hoofdbestand zit aan zijn
+/// regelplafond.
+String _cssFontStack(String font, {String? preferred}) {
+  final prefix = preferred == null || preferred == font ? '' : "'$preferred', ";
+  if (font == 'EB Garamond') {
+    return "$prefix'EB Garamond', Georgia, serif";
+  }
+  final generic = classifyFontFamily(preferred ?? font) == FontClass.serif
+      ? 'serif'
+      : 'sans-serif';
+  return "$prefix'$font', $generic";
+}

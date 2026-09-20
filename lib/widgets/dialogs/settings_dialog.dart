@@ -93,6 +93,7 @@ part 'parts/settings_dialog_storage.dart';
 part 'parts/settings_dialog_collaboration.dart';
 part 'parts/settings_dialog_presentation.dart';
 part 'parts/settings_dialog_style_builder.dart';
+part 'parts/settings_dialog_document_fonts.dart';
 part 'parts/settings_dialog_style_preview.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';

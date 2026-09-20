@@ -24,6 +24,7 @@ import 'package:archive/archive.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/docx/document_docx_export.dart';
 import 'package:ocideck/services/docx/markdown_to_docx.dart';
@@ -52,6 +53,7 @@ void main() {
   Future<ExportBundle> buildBundle(
     String body, {
     TlpLevel tlp = TlpLevel.none,
+    ThemeProfile? theme,
   }) async => buildDocumentExportBundle(
     body,
     projectPath: null,
@@ -62,6 +64,7 @@ void main() {
     markdownService: MarkdownService(),
     title: 'Rapport',
     tlp: tlp,
+    theme: theme,
   );
 
   group('docx-structuur', () {
@@ -227,6 +230,69 @@ void main() {
       expect(core, contains('<dc:title>'));
       expect(core, contains('Rapport'));
     });
+  });
+
+  group('docx: profielkleuren', () {
+    test(
+      'kop-, tekst-, link- en tabelkleuren uit het profiel bereiken de export',
+      () async {
+        const theme = ThemeProfile(
+          textColor: '#a1b2c3',
+          accentColor: '#aa6600',
+          documentHeadingColor: '#003399',
+          tableHeaderBackgroundColor: '#445566',
+          tableHeaderTextColor: '#eeddcc',
+          tableTextColor: '#334455',
+        );
+        final bundle = await buildBundle(
+          '# Kop\n\nTekst.\n\n## Subkop\n\n'
+          '| Naam | Waarde |\n| --- | --- |\n| A | 1 |\n',
+          theme: theme,
+        );
+        final bytes = await buildDocumentExportDocx(bundle);
+        final archive = ZipDecoder().decodeBytes(bytes);
+        final styles = _readEntry(archive, 'word/styles.xml');
+        final doc = _readEntry(archive, 'word/document.xml');
+
+        // Broodtekstkleur in docDefaults; kopkleur op alle kopstijlen.
+        expect(styles, contains('<w:color w:val="A1B2C3"/>'));
+        expect(styles, contains('<w:color w:val="003399"/>'));
+        // Links volgen het accent.
+        expect(styles, contains('<w:color w:val="AA6600"/>'));
+        // Tabelkop- en tabeltekstkleur op de cel-alineastijlen.
+        expect(styles, contains('<w:color w:val="EEDDCC"/>'));
+        expect(styles, contains('<w:color w:val="334455"/>'));
+        // De kopcel krijgt de profielvulling en de TableHeading-stijl.
+        expect(doc, contains('w:fill="445566"'));
+        expect(doc, contains('<w:pStyle w:val="TableHeading"/>'));
+        expect(doc, contains('<w:pStyle w:val="TableContents"/>'));
+      },
+    );
+
+    test(
+      'zonder documentHeadingColor volgt h1 de tekstkleur en h2+ het accent',
+      () async {
+        const theme = ThemeProfile(
+          textColor: '#102030',
+          accentColor: '#607080',
+        );
+        final bundle = await buildBundle('# Kop\n\n## Sub\n', theme: theme);
+        final bytes = await buildDocumentExportDocx(bundle);
+        final archive = ZipDecoder().decodeBytes(bytes);
+        final styles = _readEntry(archive, 'word/styles.xml');
+
+        final h1 = RegExp(
+          r'<w:style w:type="paragraph" w:styleId="Heading1">.*?</w:style>',
+          dotAll: true,
+        ).firstMatch(styles)!.group(0)!;
+        final h2 = RegExp(
+          r'<w:style w:type="paragraph" w:styleId="Heading2">.*?</w:style>',
+          dotAll: true,
+        ).firstMatch(styles)!.group(0)!;
+        expect(h1, contains('<w:color w:val="102030"/>'));
+        expect(h2, contains('<w:color w:val="607080"/>'));
+      },
+    );
   });
 
   group('docx: tabellen', () {

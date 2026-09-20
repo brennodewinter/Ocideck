@@ -10,17 +10,26 @@ import 'package:archive/archive.dart';
 const _office = 'urn:oasis:names:tc:opendocument:xmlns:office:1.0';
 const _text = 'urn:oasis:names:tc:opendocument:xmlns:text:1.0';
 const _table = 'urn:oasis:names:tc:opendocument:xmlns:table:1.0';
+const _draw = 'urn:oasis:names:tc:opendocument:xmlns:drawing:1.0';
+const _svg = 'urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0';
 const _xlink = 'http://www.w3.org/1999/xlink';
 const _fo = 'urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0';
 const _style = 'urn:oasis:names:tc:opendocument:xmlns:style:1.0';
 
 /// Bouw een minimale `.odt` met een op maat gemaakte body.
-Uint8List odtFixture({String? body, String? styles}) {
+///
+/// [binaries] voegt ruwe delen toe — `{'Pictures/foto.png': bytes}` voor een
+/// afbeelding die een `draw:frame` in de body aanhaalt.
+Uint8List odtFixture({
+  String? body,
+  String? styles,
+  Map<String, List<int>>? binaries,
+}) {
   final contentXml =
       '<?xml version="1.0" encoding="UTF-8"?>'
       '<office:document-content xmlns:office="$_office" xmlns:text="$_text" '
-      'xmlns:table="$_table" xmlns:xlink="$_xlink" xmlns:fo="$_fo" '
-      'xmlns:style="$_style">'
+      'xmlns:table="$_table" xmlns:draw="$_draw" xmlns:svg="$_svg" '
+      'xmlns:xlink="$_xlink" xmlns:fo="$_fo" xmlns:style="$_style">'
       '<office:body><office:text>'
       '${body ?? _defaultBody}'
       '</office:text></office:body>'
@@ -57,6 +66,9 @@ Uint8List odtFixture({String? body, String? styles}) {
     archive.addFile(
       ArchiveFile.bytes(name, Uint8List.fromList(content.codeUnits)),
     );
+  });
+  binaries?.forEach((name, content) {
+    archive.addFile(ArchiveFile.bytes(name, Uint8List.fromList(content)));
   });
   return Uint8List.fromList(ZipEncoder().encode(archive));
 }

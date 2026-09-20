@@ -1722,6 +1722,66 @@ const _dutchSourceAddFi = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} lähiopetustuntia · {sessies} istuntoa',
   '{vrij} plaatsen vrij': '{vrij} paikkaa vapaana',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Otsikkotasoilla {niveau} on kullakin oma värinsä ({kleur}); tyyli tuntee vain yhden otsikkovärin.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(näytetään fontilla {vervanger}, säilytetään vientiä varten)',
+  'Accent': 'Korostus',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Vain kirjaimet, numerot, välilyönnit, pisteet ja yhdysmerkit.',
+  'Alleen tekst': 'Vain teksti',
+  'Als documentlogo gebruiken': 'Käytä asiakirjan logona',
+  'Bestaande stijl gebruiken': 'Käytä olemassa olevaa tyyliä',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Fontti, jota Word, LibreOffice tai selain käyttää, jos se on saatavilla; yllä näkyy, mitä OciDeck itse näyttää.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Tämä talotyyli on jo olemassa tyylinä {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Asiakirja tuotu; {n} kuva(a) tekstissä ei siirtynyt.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Ylä- tai alatunnisteen kuva on pelkkä vektorikuva (SVG) eikä siitä voi tulla logoa.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Kuva vain kansilehdellä; se ei ole asiakirjan logo.',
+  'Gewenst lettertype (export)': 'Toivottu fontti (vienti)',
+  'Gewenste kopletter (export)': 'Toivottu otsikkofontti (vienti)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Asiakirjalla on oma talotyyli. OciDeck voi tallentaa sen tyylinä ja käyttää sitä tässä asiakirjassa.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logoa ei voitu tallentaa pysyvästi; se on käytettävissä vain tässä istunnossa.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logo oli keskitetty; tyyli tuntee vain vasemman ja oikean, joten se tulee vasemmalle.',
+  'Kop- en voettekst': 'Ylä- ja alatunniste',
+  'Kopletter': 'Otsikkofontti',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Otsikkotasolla {niveau} on oma väri ({kleur}); tyyli tuntee vain yhden otsikkovärin.',
+  'Koppen': 'Otsikot',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Tyhjä: viennissä otsikot noudattavat tekstin toivottua fonttia.',
+  'Niet overgenomen': 'Ei siirretty',
+  'Nieuwe stijl toevoegen': 'Lisää uusi tyyli',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Verkkoversiossa logo säilyy vain tämän istunnon ajan.',
+  'Paginanummers': 'Sivunumerot',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Sijaitsee {plaats} joka sivulla, leveys {mm} mm.',
+  'Stijl overnemen': 'Ota tyyli käyttöön',
+  'Stijl overnemen?': 'Otetaanko tyyli käyttöön?',
+  'Voettekst': 'Alatunniste',
+  'Zelfde als de tekst ({letter})': 'Sama kuin tekstissä ({letter})',
+  'gecentreerd bovenaan': 'keskitettynä ylhäällä',
+  'gecentreerd onderaan': 'keskitettynä alhaalla',
+  'linksboven': 'ylhäällä vasemmalla',
+  'linksonder': 'alhaalla vasemmalla',
+  'rechtsboven': 'ylhäällä oikealla',
+  'rechtsonder': 'alhaalla oikealla',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Asiakirja tuotu — ei otettu mukaan: {lijst}',
+  '{n} tekstkader': '{n} tekstikehys',
+  '{n} tekstkaders': '{n} tekstikehystä',
+  '{n} groep': '{n} ryhmä',
+  '{n} groepen': '{n} ryhmää',
+  '{n} object': '{n} objekti',
+  '{n} objecten': '{n} objektia',
   'Presentatievorm': 'Esitysmuoto',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Valitse, miten diat vaihtuvat esityksen aikana.',

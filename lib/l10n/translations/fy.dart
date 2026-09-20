@@ -761,6 +761,66 @@ const _dutchSourceAddFy = {
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} klassikale lessen · {sessies} sesjes',
   '{vrij} plaatsen vrij': '{vrij} plakken frij',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Kopnivo’s {niveau} hawwe elk in eigen kleur ({kleur}); de styl ken ien kopkleur.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(werjûn as {vervanger}, bewarre foar eksport)',
+  'Accent': 'Aksint',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Allinnich letters, sifers, spaasjes, punten en keppeltekens.',
+  'Alleen tekst': 'Allinnich tekst',
+  'Als documentlogo gebruiken': 'As dokumintlogo brûke',
+  'Bestaande stijl gebruiken': 'Besteande styl brûke',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'De letter dy\'t Word, LibreOffice of in browser brûkt as dy him hat; hjirboppe stiet wat OciDeck sels toant.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Dizze hússtyl bestiet al as de styl {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokumint ymportearre; {n} ôfbylding(s) yn de tekst net oernommen.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'In ôfbylding yn de kop- of fuottekst is allinnich fektorbyld (SVG) en kin gjin logo wurde.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'In ôfbylding allinnich op it titelblêd; dat is gjin dokumintlogo.',
+  'Gewenst lettertype (export)': 'Winske lettertype (eksport)',
+  'Gewenste kopletter (export)': 'Winske kopletter (eksport)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'It dokumint hat in eigen hússtyl. OciDeck kin dy as styl bewarje en op dit dokumint tapasse.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'It logo koe net bliuwend bewarre wurde; it bliuwt allinnich dizze sesje beskikber.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'It logo stie sintraal; de styl ken lofts en rjochts, it komt lofts.',
+  'Kop- en voettekst': 'Kop- en fuottekst',
+  'Kopletter': 'Kopletter',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Kopnivo {niveau} hat in eigen kleur ({kleur}); de styl ken ien kopkleur.',
+  'Koppen': 'Koppen',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Leech: by eksport folgje de koppen it winske lettertype fan de tekst.',
+  'Niet overgenomen': 'Net oernommen',
+  'Nieuwe stijl toevoegen': 'Nije styl tafoegje',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Op it web bliuwt it logo allinnich dizze sesje bewarre.',
+  'Paginanummers': 'Sidenûmers',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Stiet {plaats} op elke side, {mm} mm breed.',
+  'Stijl overnemen': 'Styl oernimme',
+  'Stijl overnemen?': 'Styl oernimme?',
+  'Voettekst': 'Fuottekst',
+  'Zelfde als de tekst ({letter})': 'Itselde as de tekst ({letter})',
+  'gecentreerd bovenaan': 'sintraal boppe-oan',
+  'gecentreerd onderaan': 'sintraal ûnderoan',
+  'linksboven': 'loftsboppe',
+  'linksonder': 'loftsûnder',
+  'rechtsboven': 'rjochtsboppe',
+  'rechtsonder': 'rjochtsûnder',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Dokumint ymportearre — net oernommen: {lijst}',
+  '{n} tekstkader': '{n} tekstframe',
+  '{n} tekstkaders': '{n} tekstframes',
+  '{n} groep': '{n} groep',
+  '{n} groepen': '{n} groepen',
+  '{n} object': '{n} objekt',
+  '{n} objecten': '{n} objekten',
   'Presentatievorm': 'Presintaasjefoarm',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Kies hoe\'t de dia\'s by it presintearjen trochgean.',

@@ -1738,6 +1738,66 @@ const _dutchSourceAddRo = <String, String>{
   '{lessen} klassikale lessen · {sessies} sessies':
       '{lessen} lecții față în față · {sessies} sesiuni',
   '{vrij} plaatsen vrij': '{vrij} locuri libere',
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Nivelurile de titlu {niveau} au fiecare propria culoare ({kleur}); stilul cunoaște o singură culoare de titlu.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(afișat ca {vervanger}, păstrat pentru export)',
+  'Accent': 'Accent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Doar litere, cifre, spații, puncte și cratime.',
+  'Alleen tekst': 'Doar text',
+  'Als documentlogo gebruiken': 'Folosește ca siglă a documentului',
+  'Bestaande stijl gebruiken': 'Folosește stilul existent',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Fontul pe care Word, LibreOffice sau un browser îl folosește dacă îl are; mai sus este ceea ce afișează OciDeck însuși.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Acest stil instituțional există deja ca stilul {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Document importat; {n} imagine(i) din text nu au fost preluate.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'O imagine din antet sau subsol este doar vectorială (SVG) și nu poate deveni siglă.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'O imagine doar pe pagina de titlu; aceasta nu este siglă a documentului.',
+  'Gewenst lettertype (export)': 'Font dorit (export)',
+  'Gewenste kopletter (export)': 'Font dorit pentru titluri (export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Documentul are un stil instituțional propriu. OciDeck îl poate salva ca stil și îl poate aplica acestui document.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Sigla nu a putut fi salvată permanent; rămâne disponibilă doar în această sesiune.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Sigla era centrată; stilul cunoaște doar stânga și dreapta, așa că va fi la stânga.',
+  'Kop- en voettekst': 'Antet și subsol',
+  'Kopletter': 'Font pentru titluri',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Nivelul de titlu {niveau} are propria culoare ({kleur}); stilul cunoaște o singură culoare pentru titluri.',
+  'Koppen': 'Titluri',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Gol: la export, titlurile urmează fontul dorit al textului.',
+  'Niet overgenomen': 'Nepreluat',
+  'Nieuwe stijl toevoegen': 'Adaugă stil nou',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Pe web, sigla se păstrează doar în această sesiune.',
+  'Paginanummers': 'Numere de pagină',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Apare {plaats} pe fiecare pagină, {mm} mm lățime.',
+  'Stijl overnemen': 'Preia stilul',
+  'Stijl overnemen?': 'Preiei stilul?',
+  'Voettekst': 'Subsol',
+  'Zelfde als de tekst ({letter})': 'La fel ca textul ({letter})',
+  'gecentreerd bovenaan': 'centrat sus',
+  'gecentreerd onderaan': 'centrat jos',
+  'linksboven': 'în stânga sus',
+  'linksonder': 'în stânga jos',
+  'rechtsboven': 'în dreapta sus',
+  'rechtsonder': 'în dreapta jos',
+  'Document geïmporteerd — niet overgenomen: {lijst}':
+      'Document importat — nepreluat: {lijst}',
+  '{n} tekstkader': '{n} cadru de text',
+  '{n} tekstkaders': '{n} cadre de text',
+  '{n} groep': '{n} grup',
+  '{n} groepen': '{n} grupuri',
+  '{n} object': '{n} obiect',
+  '{n} objecten': '{n} obiecte',
   'Presentatievorm': 'Formatul prezentării',
   'Kies hoe de dia\'s tijdens het presenteren doorgaan.':
       'Alege cum avansează diapozitivele în timpul prezentării.',

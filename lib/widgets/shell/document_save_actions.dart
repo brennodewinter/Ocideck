@@ -72,15 +72,17 @@ Future<bool> saveDocumentWithDestination(
       }
       // overwrite: ga door met opslaan.
     }
-    if (await saveDocument(documentToSave, path)) {
-      // Werk de notifier bij met de byte-getrouwe versie, zodat de editor
-      // en de notifier dezelfde bron zien — geen drift meer.
-      if (documentToSave != document) {
-        notifier.replaceSource(documentToSave.source);
+    final written = await saveDocument(documentToSave, path);
+    if (written != null) {
+      // Werk de notifier bij met de versie zoals die op schijf staat —
+      // mem:-verwijzingen zijn inmiddels images/-paden — zodat editor,
+      // schijf en conflict-hash over één bron lopen (#2120).
+      if (written.source != document.source) {
+        notifier.replaceSource(written.source);
       }
       notifier.markSaved(
         filePath: path,
-        savedFileHash: DocumentIntegrity.hashMarkdown(documentToSave.source),
+        savedFileHash: DocumentIntegrity.hashMarkdown(written.source),
       );
       // Werk de recente-bestanden-lijst bij, net als bij openen en
       // Opslaan-als — een in-place save liet de lijst ongemoeid (#1676).
@@ -99,16 +101,16 @@ Future<bool> saveDocumentWithDestination(
       .read(fileServiceProvider)
       .saveDocumentAs(documentToSave);
   if (saved == null) return false;
-  if (documentToSave != document) {
-    notifier.replaceSource(documentToSave.source);
+  if (saved.document.source != document.source) {
+    notifier.replaceSource(saved.document.source);
   }
   notifier.markSaved(
-    filePath: saved,
-    savedFileHash: DocumentIntegrity.hashMarkdown(documentToSave.source),
+    filePath: saved.path,
+    savedFileHash: DocumentIntegrity.hashMarkdown(saved.document.source),
   );
   await ref
       .read(settingsProvider.notifier)
-      .addRecentFile(saved, kind: MarkdownKind.document);
+      .addRecentFile(saved.path, kind: MarkdownKind.document);
   return true;
 }
 

@@ -139,10 +139,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (WebAssetStore.isEmpty) return;
     final live = <String>{};
     for (final tab in state.tabs) {
-      // Documenttabbladen kennen (nog) geen mem:-assets; hun bron is één string.
       final dn = tab.deckNotifierOrNull;
-      if (dn == null || !dn.mounted) continue;
-      dn.collectLiveMemoryAssetPaths(live);
+      if (dn != null && dn.mounted) {
+        dn.collectLiveMemoryAssetPaths(live);
+        continue;
+      }
+      // Documenttabbladen kennen sinds #2120 óók mem:-assets: de import legt
+      // afbeeldingen in de store totdat een opslag ze naar schijf schrijft.
+      final doc = tab.documentNotifier;
+      if (doc != null && doc.mounted) doc.collectLiveMemoryAssetPaths(live);
     }
     final clipboard = _ref.read(slideClipboardProvider);
     if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
