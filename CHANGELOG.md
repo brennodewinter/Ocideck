@@ -85,6 +85,7 @@ All notable changes to OciDeck are documented in this file.
 - macOS-app start weer: het meegeleverde PDFium-framework heette in de bundel `PDFium.framework` terwijl de binary erin `pdfium` is. Op een hoofdletterongevoelige buildschijf vallen de naam waar `pdfium_flutter` tegen linkt en de naam die Flutter als native asset wegschrijft samen in één map. Op macOS 27 eist dyld bij een genotariseerde app dat de bladnaam exact klopt en weigerde de app te starten met "Library not loaded: @rpath/PDFium.framework/PDFium" (v0.6.4 op macOS 27.2; macOS 26.6 laadt dezelfde bundel nog). `scripts/notarize_macos.sh` normaliseert nu vóór het tekenen naar `pdfium.framework/pdfium`, toetst daarna élke `@rpath`-, `@executable_path`- en `@loader_path`-verwijzing in de bundel op een bestaand bestand met exact dezelfde schrijfwijze, en start de gestapelde app nog één keer echt op voordat hij de deur uitgaat (#2115).
 - Homebrew-cask sluit een draaiende OciDeck af vóór een upgrade (`uninstall quit`), zodat `brew upgrade` de bundel niet half vervangt terwijl de app open staat.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
+- De releaseketen zet de webdemo weer live. Sinds de vorige reparatie sloeg fase 3 `deploy-web` over zodra de CI-job *Webversie live zetten* groen was — maar die job meldt óók groen wanneer hij niets doet (de deploy-secrets ontbreken met opzet, de demo gaat met de hand live). Daardoor bleef ocideck.librekat.nl bij 0.6.5 en 0.6.6 op 0.6.4 staan terwijl de keten "klaar" meldde. De keten leest nu `version.json` op de site zelf, deployt alleen vanaf de tag-commit, en toetst ná afloop dat de site de nieuwe versie meldt. `--status` rapporteert de live versie als eigen regel in plaats van "controleer nog de live web-versie".
 - De releaseketen en de bouwdoelen ruimen vóór het bouwen een CMake-cache op die nog bij een vórige versie van een pakket met een build-hook hoort (na de dartcv4-bump 2.3.0 → 2.3.1 stierf de 0.6.6-run pas in `make build-release`, ná anderhalf uur groene poort). `scripts/prune_stale_hook_cache.sh` vergelijkt per configuratiehash de bron van de cache met wat `package_config.json` oplost en wist alleen `CMakeCache.txt` en `CMakeFiles/`; `_deps` blijft, dus geen herdownload. Aangeroepen door de pre-flight van `release_auto.sh`, het poortslot (`make check`) en `make sbom`/`build-*`.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
@@ -2730,6 +2731,44 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Een groene job die niets deed, hield de webdemo twee releases op 0.6.4.**
+  `deploy_web_if_needed` sloeg de lokale `make deploy-web` over zodra de
+  release-CI-job *Webversie live zetten* in de momentopname `success` stond.
+  Die job is echter met opzet groen-als-hij-overslaat: ontbreken
+  `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS` — en die staan niet in de repo, de
+  demo gaat met de hand live — dan meldt hij de skip op de run-samenvatting en
+  eindigt `success`, zodat een echte tag geen rode job en faalmail oplevert.
+  Gevolg: v0.6.5 en v0.6.6 lieten `ocideck.librekat.nl` op 0.6.4 staan
+  (`version.json` 0.6.4, `build-info.json` `v0.6.3-65-gcd5fe5c11`, index van
+  18-09) terwijl beide ketens "klaar" meldden. Dit is precies de fout die de
+  vorige reparatie introduceerde: die verving een echte meting door een
+  procesindicator. De keten meet nu weer de uitkomst — `version.json` op de
+  live site — en gebruikt de jobstatus daar niet meer voor. Deployen mag nog
+  steeds alleen vanaf de tag-commit (die helft was goed en blijft), en ná
+  `make deploy-web` wordt de site opnieuw gelezen: meldt hij niet de nieuwe
+  versie, dan valt fase 3 met de hersteltip in plaats van "klaar" te zeggen.
+  `--status` kreeg dezelfde meting als eigen regel; het advies zei tot nu toe
+  "controleer nog de live web-versie", wat de controle bij de mens legde die
+  hem juist niet deed. Zes tests in `test/release_auto_race_test.dart`
+  (skip, oude demo mét groene job, naast de tag, onleesbare site, deploy die
+  niets verzet, en twee `--status`-gevallen); alle drie de mutaties — terug
+  naar de jobstatus, verificatie weg, webdemo uit de completeness-voorwaarde —
+  rood geproefd. De gedeelde testharnas kende `DEPLOY_URL` niet; dat viel op
+  doordat `set -u` de meting stil leeg maakte, en is nu een constante in de
+  harnas zoals in het script.
+- **Een functie die pas ná zijn aanroeper stond, gaf een segfault in plaats van
+  "command not found".** De nieuwe `live_web_version` zat in het fase-3-blok
+  (regel ~860), maar `--status` roept `cmd_status` aan op regel ~512; bash zoekt
+  een functie pas bij het aanroepen, dus zocht hij een *programma* met die naam.
+  Op de MacPorts-bash van de bouw-Mac (5.2.37, zie het eerdere
+  `flutter upgrade`-verhaal) eindigt die zoektocht in een segfault in
+  CoreFoundation — `--status v0.6.5` viel drie van de drie keer om met exit 139,
+  en de melding wees naar de regel van de aanroep, niet naar de oorzaak. De
+  functie staat nu vóór `cmd_status`, en een structuurtoets loopt de body van
+  `cmd_status` langs en eist dat elke daarin gebruikte scriptfunctie eerder in
+  het bestand gedefinieerd is dan de aanroep. Die toets was nodig naast de
+  harnas-toetsen: die plakken álle functiedefinities vóór de aanroep en maken de
+  volgorde in het bestand juist onzichtbaar.
 - **Verouderde CMake-cache van een gebumpt pakket stopte de 0.6.6-run ná
   anderhalf uur groen.** `hooks_runner` sleutelt zijn gedeelde buildmappen op
   een hash van de bouwconfiguratie (doel-OS, architectuur, compiler,

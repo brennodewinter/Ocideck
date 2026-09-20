@@ -37,6 +37,7 @@ TAG=v9.9.9
 NEW_VERSION=9.9.9
 ROOT_DIR=${Directory.current.path}
 RELEASE_BASE_URL=https://releases.invalid/download
+DEPLOY_URL=https://demo.invalid
 FORGE_API=https://forge.invalid/api/v1
 REPO_SLUG=LibreKAT/Ocideck
 TOKEN=test-token
@@ -115,6 +116,132 @@ cmd_status
     },
     skip: skipOnWindows,
   );
+
+  // Bash zoekt een functie pas op het moment van aanroepen. `--status` roept
+  // cmd_status aan op ongeveer regel 512, en alles wat die functie gebruikt
+  // moet dáárvóór gedefinieerd zijn. Stond `live_web_version` bij fase 3, dan
+  // zocht bash een programma met die naam; de MacPorts-bash van de bouw-Mac
+  // eindigt dat niet met "command not found" maar met een segfault in
+  // CoreFoundation — drie keer achtereen gereproduceerd op 20-09-2026.
+  // De harnas-toetsen hierboven zien dit niet: die plakken álle functies vóór
+  // de aanroep en maken de volgorde in het bestand juist onzichtbaar.
+  test('elke functie die cmd_status gebruikt, staat vóór de aanroep', () {
+    final lines = File(script).readAsLinesSync();
+    final defined = <String, int>{};
+    final open = RegExp(r'^([a-zA-Z_][a-zA-Z0-9_]*)\(\)\s*\{');
+    for (var i = 0; i < lines.length; i++) {
+      final m = open.firstMatch(lines[i]);
+      if (m != null) defined.putIfAbsent(m.group(1)!, () => i);
+    }
+    final callSite = lines.indexWhere((l) => l.trim() == 'cmd_status');
+    expect(
+      callSite,
+      greaterThan(0),
+      reason: 'aanroep van cmd_status niet gevonden',
+    );
+
+    // De body van cmd_status, en daarin elk woord dat een functie uit dit
+    // script is.
+    final start = defined['cmd_status']!;
+    final end = lines.indexWhere((l) => RegExp(r'^\}\s*$').hasMatch(l), start);
+    final body = lines.sublist(start + 1, end).join('\n');
+    final used = defined.keys
+        .where((f) => f != 'cmd_status')
+        .where(
+          (f) => RegExp('(^|[^a-zA-Z0-9_])$f([^a-zA-Z0-9_]|\$)').hasMatch(body),
+        )
+        .toList();
+    expect(
+      used,
+      contains('live_web_version'),
+      reason: 'de webdemo hoort in het statusrapport',
+    );
+    for (final f in used) {
+      expect(
+        defined[f]!,
+        lessThan(callSite),
+        reason:
+            'cmd_status gebruikt $f (regel ${defined[f]! + 1}), maar de aanroep '
+            'staat op regel ${callSite + 1}; bash kent de functie dan nog niet.',
+      );
+    }
+  }, skip: skipOnWindows);
+
+  // --status rapporteerde de webdemo niet; het advies zei "controleer nog de
+  // live web-versie", en dat deed niemand. v0.6.5 en v0.6.6 stonden compleet in
+  // het rapport terwijl de demo op 0.6.4 bleef staan.
+  ProcessResult runStatus({required String liveVersion}) {
+    final live = File(
+      '${Directory.systemTemp.path}/ocideck-status-live-$pid.txt',
+    )..writeAsStringSync(liveVersion);
+    addTearDown(() {
+      if (live.existsSync()) live.deleteSync();
+    });
+    return runReleaseHarness('''
+LIVE=${live.path}
+BRANCH=release/v9.9.9
+read_token() { :; }
+section() { printf '== %s ==\\n' "\$1"; }
+log() { printf '%s\\n' "\$1"; }
+mark() { printf 'mark %s %s\\n' "\$1" "\$2"; }
+git() {
+  if [ "\$1 \$2" = 'remote get-url' ]; then return 1; fi
+  case "\${*: -1}" in
+    refs/heads/*) return 1 ;;
+    refs/tags/*) return 0 ;;
+  esac
+  return 1
+}
+api() {
+  case "\$2" in
+    '/pulls?state=all&limit=50') printf '%s\\n' '[]' ;;
+    '/releases/tags/v9.9.9')
+      printf '%s\\n' '{"id":41,"assets":[{"name":"SHA256SUMS"},{"name":"SHA256SUMS.minisig"}]}'
+      ;;
+    *) printf '%s\\n' '{}' ;;
+  esac
+}
+curl() {
+  local out='' url='' previous='' arg
+  for arg in "\$@"; do
+    if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
+    previous="\$arg"; url="\$arg"
+  done
+  case "\$url" in
+    */version.json)
+      v="\$(cat "\$LIVE")"
+      [ -n "\$v" ] || return 22
+      printf '{"version":"%s"}\\n' "\$v"
+      ;;
+    */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;
+    */SHA256SUMS) printf 'manifest-A\\n' >"\$out" ;;
+    *) return 22 ;;
+  esac
+}
+minisign() { return 0; }
+cmd_status
+''');
+  }
+
+  test(
+    '--status noemt een release met een achtergebleven webdemo niet compleet',
+    () {
+      final r = runStatus(liveVersion: '0.6.4');
+      final output = '${r.stdout}\n${r.stderr}';
+      expect(output, contains('mark 0 webdemo'), reason: output);
+      expect(output, contains('(nu: 0.6.4)'));
+      expect(output, isNot(contains('De release lijkt compleet')));
+      expect(output, contains('make deploy-web'));
+    },
+    skip: skipOnWindows,
+  );
+
+  test('--status noemt een release met een live webdemo compleet', () {
+    final r = runStatus(liveVersion: '9.9.9');
+    final output = '${r.stdout}\n${r.stderr}';
+    expect(output, contains('mark 1 webdemo'), reason: output);
+    expect(output, contains('De release lijkt compleet'));
+  }, skip: skipOnWindows);
 
   test('een actieve release-CI mag na de wachttijd niet stil doorlopen', () {
     final mutations = File(
@@ -207,22 +334,45 @@ follow_ci
   // Fase 3 bouwt de webdemo uit de wérkboom. Een --resume van v0.6.5 draaide
   // een dag later op main mét merges die niet in de tag zaten; alleen een
   // toevallig rode sbom-verify hield tegen dat die code als v0.6.5 live ging.
+  // Of er gedeployd moet worden, beslist de live `version.json` — niet de
+  // CI-job *Webversie live zetten*, die ook groen meldt als hij niets deed.
+  //
+  // [liveVersion] is wat de site vóór de deploy meldt (leeg = niet leesbaar),
+  // [deployedVersion] wat hij erna meldt (standaard: de deploy werkt).
   ProcessResult runDeployWeb({
-    required String snapshotJobs,
+    required String liveVersion,
     required String headSha,
     String tagSha = 'tagsha000',
+    String? deployedVersion,
+    String snapshotJobs = '',
   }) {
     final calls = File(
       '${Directory.systemTemp.path}/ocideck-deploy-web-$pid.log',
     );
+    final live = File(
+      '${Directory.systemTemp.path}/ocideck-deploy-web-live-$pid.txt',
+    )..writeAsStringSync(liveVersion);
     addTearDown(() {
-      if (calls.existsSync()) calls.deleteSync();
+      for (final f in [calls, live]) {
+        if (f.existsSync()) f.deleteSync();
+      }
     });
     final r = runReleaseHarness('''
 CALLS=${calls.path}
+LIVE=${live.path}
 log() { printf '%s\\n' "\$1"; }
 die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
-make() { printf 'make %s\\n' "\$*" >>"\$CALLS"; }
+# De site: leeg bestand = onbereikbaar (curl faalt), anders een version.json.
+curl() {
+  v="\$(cat "\$LIVE")"
+  [ -n "\$v" ] || return 22
+  printf '{"app_name":"ocideck","version":"%s","build_number":"1"}\\n' "\$v"
+}
+make() {
+  printf 'make %s\\n' "\$*" >>"\$CALLS"
+  [ "\$1" = deploy-web ] && printf '%s' '${deployedVersion ?? "9.9.9"}' >"\$LIVE"
+  return 0
+}
 git() {
   case "\$1" in
     rev-list) printf '%s\\n' '$tagSha' ;;
@@ -240,31 +390,53 @@ echo "DOOR"
     return ProcessResult(r.pid, r.exitCode, r.stdout, '${r.stderr}$made');
   }
 
-  test('fase 3 bouwt de webdemo niet lokaal als de CI hem al live zette', () {
-    final r = runDeployWeb(
-      snapshotJobs:
-          '{"head_branch":"v9.9.9","status":"success","name":"Webversie live zetten"}',
-      headSha: 'ergens-op-main',
-    );
+  test('fase 3 deployt niet als de demo de release al draait', () {
+    final r = runDeployWeb(liveVersion: '9.9.9', headSha: 'ergens-op-main');
     expect(r.exitCode, 0, reason: r.stderr as String);
-    expect(r.stdout, contains('overgeslagen'));
+    expect(r.stdout, contains('draait al 9.9.9'));
     expect(r.stdout, endsWith('DOOR\n'));
     expect(r.stderr, isNot(contains('make deploy-web')));
   }, skip: skipOnWindows);
 
-  test('zonder CI-deploy bouwt fase 3 alleen vanaf de tag-commit', () {
-    final r = runDeployWeb(snapshotJobs: '', headSha: 'tagsha000');
+  test('een groene CI-job is geen bewijs: een oude demo wordt gedeployd', () {
+    // v0.6.5 en v0.6.6 lieten de demo op 0.6.4 staan omdat de job *Webversie
+    // live zetten* groen meldt terwijl hij overslaat (geen DEPLOY_SSH_KEY).
+    final r = runDeployWeb(
+      liveVersion: '0.6.4',
+      headSha: 'tagsha000',
+      snapshotJobs:
+          '{"head_branch":"v9.9.9","status":"success","name":"Webversie live zetten"}',
+    );
     expect(r.exitCode, 0, reason: r.stderr as String);
+    expect(r.stdout, contains('draait nog 0.6.4'));
     expect(r.stderr, contains('make deploy-web'));
-    expect(r.stdout, contains('deploy-web klaar'));
+    expect(r.stdout, contains('draait 9.9.9'));
   }, skip: skipOnWindows);
 
-  test('zonder CI-deploy en naast de tag weigert fase 3 te deployen', () {
-    final r = runDeployWeb(snapshotJobs: '', headSha: 'ergens-op-main');
+  test('een oude demo naast de tag weigert fase 3 te deployen', () {
+    final r = runDeployWeb(liveVersion: '0.6.4', headSha: 'ergens-op-main');
     expect(r.exitCode, 1);
     expect(r.stderr, contains('DIE:'));
     expect(r.stderr, contains('git checkout v9.9.9'));
     expect(r.stderr, isNot(contains('make deploy-web')));
+  }, skip: skipOnWindows);
+
+  test('een onleesbare site laat fase 3 vanaf de tag deployen', () {
+    final r = runDeployWeb(liveVersion: '', headSha: 'tagsha000');
+    expect(r.exitCode, 0, reason: r.stderr as String);
+    expect(r.stdout, contains('niet lezen'));
+    expect(r.stderr, contains('make deploy-web'));
+  }, skip: skipOnWindows);
+
+  test('een deploy die de demo niet verzet, laat fase 3 vallen', () {
+    final r = runDeployWeb(
+      liveVersion: '0.6.4',
+      headSha: 'tagsha000',
+      deployedVersion: '0.6.4',
+    );
+    expect(r.exitCode, 1);
+    expect(r.stderr, contains('make deploy-web'));
+    expect(r.stderr, contains('meldt 0.6.4 in plaats van 9.9.9'));
   }, skip: skipOnWindows);
 
   test('fase 3 herdispatcht niet zolang dezelfde release-CI nog actief is', () {
@@ -406,6 +578,9 @@ curl() {
     if [ "\$previous" = '-o' ] || [[ "\$previous" == *o ]]; then out="\$arg"; fi
     previous="\$arg"; url="\$arg"
   done
+  # De webdemo draait de release al; deze toets gaat over tekenen, niet over
+  # deployen. Zonder dit antwoord valt fase 3 al bij deploy_web_if_needed.
+  case "\$url" in */version.json) printf '{"version":"9.9.9"}\\n'; return 0 ;; esac
   [ -f "\$DISPATCHED" ] || return 22
   case "\$url" in
     */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;
@@ -495,6 +670,8 @@ curl() {
     previous="\$arg"; url="\$arg"
   done
   case "\$url" in
+    # De webdemo draait de release al; deze toets gaat over het manifest.
+    */version.json) printf '{"version":"9.9.9"}\\n' ;;
     */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;
     */SHA256SUMS)
       SUM_DOWNLOADS=\$((SUM_DOWNLOADS + 1))
