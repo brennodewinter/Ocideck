@@ -835,6 +835,7 @@ class SlidePreviewWidget extends StatelessWidget {
         );
       case SlideType.chart:
         return _ChartPreview(
+          key: ValueKey(slide.id),
           slide: slide,
           w: w,
           font: fontFamily,

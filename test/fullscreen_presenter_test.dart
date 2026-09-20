@@ -392,14 +392,14 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    Future<void> fromBeamer(Object? hover) =>
+    Future<void> fromBeamer(Object? hover, {required int sequence}) =>
         tester.binding.defaultBinaryMessenger.handlePlatformMessage(
           bridge.name,
           bridge.codec.encodeMethodCall(
             MethodCall('methodCall', {
               'channel': 'ocideck/presenter',
               'method': 'chartHover',
-              'arguments': {'index': 0, 'hover': hover},
+              'arguments': {'seq': sequence, 'index': 0, 'hover': hover},
             }),
           ),
           (_) {},
@@ -407,12 +407,17 @@ void main() {
 
     // Receive: the beamer points at Q2 of the Noord series; the presenter shows
     // the same tooltip (exercises _applyBeamerChartHover).
-    await fromBeamer({'s': 0, 'c': 1});
+    await fromBeamer({'s': 0, 'c': 1}, sequence: 1);
     await tester.pump();
     expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsOneWidget);
 
     // And it clears when the beamer's pointer leaves the chart.
-    await fromBeamer(null);
+    await fromBeamer(null, sequence: 3);
+    await tester.pump();
+    expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsNothing);
+
+    // Een vertraagd ouder bericht mag de zojuist gewiste hover niet herstellen.
+    await fromBeamer({'s': 1, 'c': 0}, sequence: 2);
     await tester.pump();
     expect(find.byKey(const ValueKey('cell-hover-tooltip')), findsNothing);
 
@@ -425,6 +430,7 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.text('Zuid')));
     await tester.pump();
     expect(sentHovers.any((h) => (h['hover'] as Map?)?['s'] == 1), isTrue);
+    expect(sentHovers.every((h) => h['seq'] is int), isTrue);
 
     await tester.pumpWidget(const SizedBox());
   });

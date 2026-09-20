@@ -105,6 +105,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// op. Dezelfde opzet als [_mermaidView].
   final ChartHoverController _chartHover = ChartHoverController();
   ChartHover? _lastSentChartHover;
+  int _chartHoverSequence = 0;
+  int _lastReceivedChartHoverSequence = -1;
   // Hoogst verwerkte 'update'-sequencenummer; oudere berichten worden genegeerd.
   int _lastUpdateSeq = -1;
 
@@ -217,7 +219,11 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     final hover = _chartHover.local;
     if (hover == _lastSentChartHover) return;
     _lastSentChartHover = hover;
-    _send('chartHover', {'index': _index, 'hover': hover?.toJson()});
+    _send('chartHover', {
+      'seq': ++_chartHoverSequence,
+      'index': _index,
+      'hover': hover?.toJson(),
+    });
   }
 
   void _applyTimedUpdate(Map<String, dynamic> message) {
@@ -279,13 +285,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
           _timelineView.setFraction((m['fraction'] as num?)?.toDouble() ?? 0);
         }
       case 'chartHover':
-        // De presentator zweeft over de grafiek; toon dezelfde markering hier.
-        // Alleen als dit venster op dezelfde dia staat (net als 'mermaidView').
-        final m = Map<String, dynamic>.from(call.arguments as Map);
-        if (!mounted) return null;
-        if ((m['index'] as num?)?.toInt() == _index) {
-          _chartHover.setExternal(ChartHover.fromJson(m['hover']));
-        }
+        _applyChartHover(call.arguments);
       case 'question':
         final m = Map<String, dynamic>.from(call.arguments as Map);
         if (!mounted) return null;
@@ -374,6 +374,21 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
         });
     }
     return null;
+  }
+
+  /// De presentator zweeft over de grafiek; toon dezelfde markering hier.
+  /// Alleen als dit venster op dezelfde dia staat (net als 'mermaidView').
+  /// [sequence] maakt een snelle hover A -> B -> weg bestand tegen berichten
+  /// die door de vensterbrug buiten volgorde aankomen.
+  void _applyChartHover(Object? arguments) {
+    final m = Map<String, dynamic>.from(arguments as Map);
+    if (!mounted) return;
+    final sequence = (m['seq'] as num?)?.toInt();
+    if (isStaleUpdateSeq(sequence, _lastReceivedChartHoverSequence)) return;
+    if (sequence != null) _lastReceivedChartHoverSequence = sequence;
+    if ((m['index'] as num?)?.toInt() == _index) {
+      _chartHover.setExternal(ChartHover.fromJson(m['hover']));
+    }
   }
 
   void _send(String method, [Object? arguments]) {

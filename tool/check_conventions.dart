@@ -260,8 +260,10 @@ const Map<String, int> fileSizeBaseline = {
   // part-bestand menu_preview_layouts.dart.
   // +8 (#1828): calloutRevealedBulletCount veld + doc + constructor-param +
   // doorgeven aan _BulletsImagePreview, en de image_callout import.
+  // +1: `key: ValueKey(slide.id)` op _ChartPreview — zonder sleutel blijft de
+  // hover-/animatiestate van de ene grafiekdia aan de volgende kleven.
   'lib/widgets/slides/slide_preview.dart':
-      1072, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
+      1073, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   // +3: `setShowOpenPreview` — de zetter van de instelling "Voorbeeld tonen bij
@@ -401,8 +403,11 @@ const Map<String, int> classSizeBaseline = {
   // +37 (#1828): PresentationStepPlan-migratie — _stepIndex hernoemd van
   // _timelineStep, _announceStep voor schermlezer, plan-gebaseerde helpers
   // in presenter_content/navigation/playback/views.
+  // +3: chartHover-sequencenummers — twee tellervelden in de State en de
+  // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
+  // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3478,
+      3481,
   // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen

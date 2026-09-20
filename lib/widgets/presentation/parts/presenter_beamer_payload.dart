@@ -254,11 +254,14 @@ extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
   /// Leest alleen [ChartHoverController.local] — een van de beamer ontvangen
   /// hover (extern) verandert `local` niet, dus wordt hij niet teruggekaatst.
   void _broadcastChartHover() {
-    _lastSentChartHover = _sendChartHover(
+    final hover = _chartHover.local;
+    if (hover == _lastSentChartHover) return;
+    _lastSentChartHover = hover;
+    _sendChartHover(
       audience: widget.audience,
-      hover: _chartHover.local,
+      hover: hover,
       index: _index,
-      lastSent: _lastSentChartHover,
+      sequence: ++_chartHoverSequence,
     );
   }
 
@@ -267,6 +270,9 @@ extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
   /// nooit op een andere dia belanden).
   void _applyBeamerChartHover(Object? arguments) {
     final args = Map<String, dynamic>.from(arguments as Map);
+    final sequence = (args['seq'] as num?)?.toInt();
+    if (isStaleUpdateSeq(sequence, _lastReceivedChartHoverSequence)) return;
+    if (sequence != null) _lastReceivedChartHoverSequence = sequence;
     if ((args['index'] as num?)?.toInt() == _index) {
       _chartHover.setExternal(ChartHover.fromJson(args['hover']));
     }
@@ -276,24 +282,28 @@ extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
 /// Stuurt de huidige lokale grafiek-hover naar het publieksvenster (#930-stijl,
 /// naast [_sendMermaidView]). Alleen bij een echte wijziging: de hover verspringt
 /// pas als de aanwijzer een andere reeks/punt/taartpunt raakt, dus is geen
-/// tijd-throttle nodig. Geeft de verzonden hover terug voor de dedup. De index
-/// reist mee zodat het venster een late hover nooit op een andere dia zet.
-/// Top-level, net als [_sendMermaidView].
-ChartHover? _sendChartHover({
+/// tijd-throttle nodig. De index reist mee zodat het venster een late hover
+/// nooit op een andere dia zet.
+/// [sequence] maakt een snelle hover A -> B -> weg bestand tegen berichten die
+/// door de vensterbrug buiten volgorde aankomen. Top-level, net als
+/// [_sendMermaidView].
+void _sendChartHover({
   required AudienceWindowHandle? audience,
   required ChartHover? hover,
   required int index,
-  required ChartHover? lastSent,
+  required int sequence,
 }) {
-  if (audience?.controller == null) return lastSent;
-  if (hover == lastSent) return lastSent;
+  if (audience?.controller == null) return;
   audienceChannel
-      .invokeMethod('chartHover', {'index': index, 'hover': hover?.toJson()})
+      .invokeMethod('chartHover', {
+        'seq': sequence,
+        'index': index,
+        'hover': hover?.toJson(),
+      })
       .catchError((Object e) {
         logWarning('FullscreenPresenter: chart hover sync failed', e);
         return null;
       });
-  return hover;
 }
 
 String _dualWindowArguments({

@@ -12,6 +12,7 @@ class _ChartPreview extends StatefulWidget {
   final ImprovementY01Metric y01;
 
   const _ChartPreview({
+    super.key,
     required this.slide,
     required this.w,
     required this.font,
