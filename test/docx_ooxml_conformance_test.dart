@@ -97,7 +97,7 @@ Een slotalinea.
       ).body;
       final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
       final quotes = doc
-          .findAllElements('p', namespace: _w)
+          .findAllElements('p', namespaceUri: _w)
           .where((p) => _styleOf(p) == 'Quote')
           .toList();
 
@@ -111,15 +111,18 @@ Een slotalinea.
         '- het punt\n\n  de vervolgalinea\n',
       ).body;
       final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
-      final paragraphs = doc.findAllElements('p', namespace: _w).toList();
+      final paragraphs = doc.findAllElements('p', namespaceUri: _w).toList();
 
       expect(paragraphs, hasLength(2));
       // Alleen het eerste punt draagt de opsommingsnummering.
       expect(
-        paragraphs.first.findAllElements('numPr', namespace: _w),
+        paragraphs.first.findAllElements('numPr', namespaceUri: _w),
         isNotEmpty,
       );
-      expect(paragraphs.last.findAllElements('numPr', namespace: _w), isEmpty);
+      expect(
+        paragraphs.last.findAllElements('numPr', namespaceUri: _w),
+        isEmpty,
+      );
       expect(_textOf(paragraphs.last), 'de vervolgalinea');
     });
   });
@@ -133,10 +136,12 @@ Een slotalinea.
         _entry(await buildDocumentExportDocx(bundle), 'word/styles.xml'),
       );
 
-      final defined = styles.findAllElements('style', namespace: _w).toList();
+      final defined = styles
+          .findAllElements('style', namespaceUri: _w)
+          .toList();
       expect(defined, isNotEmpty);
       for (final style in defined) {
-        final id = style.getAttribute('styleId', namespace: _w);
+        final id = style.getAttribute('styleId', namespaceUri: _w);
         final first = style.childElements.firstOrNull;
         expect(
           first?.localName,
@@ -144,7 +149,7 @@ Een slotalinea.
           reason: 'stijl $id mist <w:name> als eerste kind',
         );
         expect(
-          first?.getAttribute('val', namespace: _w),
+          first?.getAttribute('val', namespaceUri: _w),
           isNotEmpty,
           reason: 'stijl $id heeft een lege naam',
         );
@@ -158,12 +163,12 @@ Een slotalinea.
       final styles = XmlDocument.parse(_entry(bytes, 'word/styles.xml'));
 
       final defined = styles
-          .findAllElements('style', namespace: _w)
-          .map((s) => s.getAttribute('styleId', namespace: _w))
+          .findAllElements('style', namespaceUri: _w)
+          .map((s) => s.getAttribute('styleId', namespaceUri: _w))
           .toSet();
       final used = doc
-          .findAllElements('pStyle', namespace: _w)
-          .map((s) => s.getAttribute('val', namespace: _w))
+          .findAllElements('pStyle', namespaceUri: _w)
+          .map((s) => s.getAttribute('val', namespaceUri: _w))
           .toSet();
 
       expect(used, isNotEmpty);
@@ -184,9 +189,9 @@ Een slotalinea.
         _entry(await buildDocumentExportDocx(bundle), 'word/styles.xml'),
       );
       final quote = styles
-          .findAllElements('style', namespace: _w)
+          .findAllElements('style', namespaceUri: _w)
           .firstWhere(
-            (s) => s.getAttribute('styleId', namespace: _w) == 'Quote',
+            (s) => s.getAttribute('styleId', namespaceUri: _w) == 'Quote',
           );
 
       expect(_outOfOrder(quote, 'pPr', _pPrOrder), isEmpty);
@@ -196,8 +201,8 @@ Een slotalinea.
       final body = markdownToDocxBody(awkwardMarkdown).body;
       final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
       final values = doc
-          .findAllElements('jc', namespace: _w)
-          .map((e) => e.getAttribute('val', namespace: _w))
+          .findAllElements('jc', namespaceUri: _w)
+          .map((e) => e.getAttribute('val', namespaceUri: _w))
           .toSet();
 
       expect(values, isNotEmpty);
@@ -214,7 +219,7 @@ Een slotalinea.
       final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
 
       for (final tag in const ['tbl', 'tr', 'tc']) {
-        for (final el in doc.findAllElements(tag, namespace: _w)) {
+        for (final el in doc.findAllElements(tag, namespaceUri: _w)) {
           final text = el.children
               .whereType<XmlText>()
               .map((t) => t.value)
@@ -228,12 +233,12 @@ Een slotalinea.
       final body = markdownToDocxBody(awkwardMarkdown).body;
       final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
 
-      final tables = doc.findAllElements('tbl', namespace: _w).toList();
+      final tables = doc.findAllElements('tbl', namespaceUri: _w).toList();
       expect(tables, isNotEmpty);
       for (final tbl in tables) {
-        final cols = tbl.findAllElements('gridCol', namespace: _w).length;
-        for (final tr in tbl.findElements('tr', namespace: _w)) {
-          expect(tr.findElements('tc', namespace: _w).length, cols);
+        final cols = tbl.findAllElements('gridCol', namespaceUri: _w).length;
+        for (final tr in tbl.findElements('tr', namespaceUri: _w)) {
+          expect(tr.findElements('tc', namespaceUri: _w).length, cols);
         }
       }
     });
@@ -242,18 +247,18 @@ Een slotalinea.
       const width = defaultContentWidthTwips;
       final body = markdownToDocxBody(awkwardMarkdown).body;
       final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
-      final tbl = doc.findAllElements('tbl', namespace: _w).first;
+      final tbl = doc.findAllElements('tbl', namespaceUri: _w).first;
 
       final cols = tbl
-          .findAllElements('gridCol', namespace: _w)
-          .map((c) => int.parse(c.getAttribute('w', namespace: _w)!))
+          .findAllElements('gridCol', namespaceUri: _w)
+          .map((c) => int.parse(c.getAttribute('w', namespaceUri: _w)!))
           .toList();
       expect(cols, hasLength(5));
       expect(cols.reduce((a, b) => a + b), lessThanOrEqualTo(width));
 
       // De cellen volgen het raster, anders rekent Word zelf iets uit.
-      for (final tc in tbl.findAllElements('tcW', namespace: _w)) {
-        expect(int.parse(tc.getAttribute('w', namespace: _w)!), cols.first);
+      for (final tc in tbl.findAllElements('tcW', namespaceUri: _w)) {
+        expect(int.parse(tc.getAttribute('w', namespaceUri: _w)!), cols.first);
       }
     });
 
@@ -264,8 +269,8 @@ Een slotalinea.
       ).body;
       final doc = XmlDocument.parse('<w:body xmlns:w="$_w">$body</w:body>');
       final cols = doc
-          .findAllElements('gridCol', namespace: _w)
-          .map((c) => int.parse(c.getAttribute('w', namespace: _w)!))
+          .findAllElements('gridCol', namespaceUri: _w)
+          .map((c) => int.parse(c.getAttribute('w', namespaceUri: _w)!))
           .toList();
 
       expect(cols, [3000, 3000]);
@@ -300,7 +305,9 @@ Een slotalinea.
         ),
       );
 
-      final drawings = doc.findAllElements('drawing', namespace: _w).toList();
+      final drawings = doc
+          .findAllElements('drawing', namespaceUri: _w)
+          .toList();
       expect(drawings, hasLength(1));
       expect(_runsOutsideParagraph(doc), isEmpty);
     });
@@ -352,17 +359,17 @@ const List<String> _rPrOrder = [
 ];
 
 List<String> _nestedParagraphs(XmlNode root) => [
-  for (final p in root.findAllElements('p', namespace: _w))
-    if (p.findAllElements('p', namespace: _w).isNotEmpty) _textOf(p),
+  for (final p in root.findAllElements('p', namespaceUri: _w))
+    if (p.findAllElements('p', namespaceUri: _w).isNotEmpty) _textOf(p),
 ];
 
 List<String> _runsOutsideParagraph(XmlNode root) => [
-  for (final r in root.findAllElements('r', namespace: _w))
+  for (final r in root.findAllElements('r', namespaceUri: _w))
     if (!_hasAncestor(r, 'p')) _textOf(r),
 ];
 
 List<String> _tablesInsideParagraph(XmlNode root) => [
-  for (final t in root.findAllElements('tbl', namespace: _w))
+  for (final t in root.findAllElements('tbl', namespaceUri: _w))
     if (_hasAncestor(t, 'p')) _textOf(t),
 ];
 
@@ -380,7 +387,7 @@ bool _hasAncestor(XmlElement node, String localName) {
 /// De elementen van [container] waarvan de kinderen niet in [order] staan.
 List<String> _outOfOrder(XmlNode root, String container, List<String> order) {
   final problems = <String>[];
-  for (final el in root.findAllElements(container, namespace: _w)) {
+  for (final el in root.findAllElements(container, namespaceUri: _w)) {
     var last = -1;
     for (final child in el.childElements) {
       final rank = order.indexOf(child.localName);
@@ -395,13 +402,13 @@ List<String> _outOfOrder(XmlNode root, String container, List<String> order) {
 }
 
 String? _styleOf(XmlElement paragraph) => paragraph
-    .findElements('pPr', namespace: _w)
-    .expand((pPr) => pPr.findElements('pStyle', namespace: _w))
-    .map((s) => s.getAttribute('val', namespace: _w))
+    .findElements('pPr', namespaceUri: _w)
+    .expand((pPr) => pPr.findElements('pStyle', namespaceUri: _w))
+    .map((s) => s.getAttribute('val', namespaceUri: _w))
     .firstOrNull;
 
 String _textOf(XmlNode node) =>
-    node.findAllElements('t', namespace: _w).map((t) => t.innerText).join();
+    node.findAllElements('t', namespaceUri: _w).map((t) => t.innerText).join();
 
 String _entry(List<int> docxBytes, String name) {
   final entry = ZipDecoder().decodeBytes(docxBytes).find(name);
