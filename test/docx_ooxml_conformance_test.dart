@@ -32,7 +32,8 @@ import 'package:ocideck/services/privacy/privacy_own_identity.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:xml/xml.dart';
 
-const String _w = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+const String _w =
+    'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -114,7 +115,10 @@ Een slotalinea.
 
       expect(paragraphs, hasLength(2));
       // Alleen het eerste punt draagt de opsommingsnummering.
-      expect(paragraphs.first.findAllElements('numPr', namespace: _w), isNotEmpty);
+      expect(
+        paragraphs.first.findAllElements('numPr', namespace: _w),
+        isNotEmpty,
+      );
       expect(paragraphs.last.findAllElements('numPr', namespace: _w), isEmpty);
       expect(_textOf(paragraphs.last), 'de vervolgalinea');
     });
@@ -122,7 +126,9 @@ Een slotalinea.
 
   group('docx: schema-volgorde en toegestane waarden', () {
     test('elke stijl draagt een w:name als eerste kind', () async {
-      final bundle = await buildBundle('# Rapport\n\n| a | b |\n|---|---|\n| 1 | 2 |\n');
+      final bundle = await buildBundle(
+        '# Rapport\n\n| a | b |\n|---|---|\n| 1 | 2 |\n',
+      );
       final styles = XmlDocument.parse(
         _entry(await buildDocumentExportDocx(bundle), 'word/styles.xml'),
       );
@@ -179,7 +185,9 @@ Een slotalinea.
       );
       final quote = styles
           .findAllElements('style', namespace: _w)
-          .firstWhere((s) => s.getAttribute('styleId', namespace: _w) == 'Quote');
+          .firstWhere(
+            (s) => s.getAttribute('styleId', namespace: _w) == 'Quote',
+          );
 
       expect(_outOfOrder(quote, 'pPr', _pPrOrder), isEmpty);
     });
@@ -193,7 +201,10 @@ Een slotalinea.
           .toSet();
 
       expect(values, isNotEmpty);
-      expect(values, everyElement(isIn(const ['left', 'center', 'right', 'both'])));
+      expect(
+        values,
+        everyElement(isIn(const ['left', 'center', 'right', 'both'])),
+      );
     });
   });
 
@@ -204,7 +215,10 @@ Een slotalinea.
 
       for (final tag in const ['tbl', 'tr', 'tc']) {
         for (final el in doc.findAllElements(tag, namespace: _w)) {
-          final text = el.children.whereType<XmlText>().map((t) => t.value).join();
+          final text = el.children
+              .whereType<XmlText>()
+              .map((t) => t.value)
+              .join();
           expect(text, isEmpty, reason: '<w:$tag> bevat tekst: ${text.trim()}');
         }
       }
@@ -291,15 +305,18 @@ Een slotalinea.
       expect(_runsOutsideParagraph(doc), isEmpty);
     });
 
-    test('een diagram zonder renderer valt terug zonder geneste alinea', () async {
-      final bundle = await buildBundle('```mermaid\ngraph TD\nA-->B\n```\n');
-      final doc = XmlDocument.parse(
-        _entry(await buildDocumentExportDocx(bundle), 'word/document.xml'),
-      );
+    test(
+      'een diagram zonder renderer valt terug zonder geneste alinea',
+      () async {
+        final bundle = await buildBundle('```mermaid\ngraph TD\nA-->B\n```\n');
+        final doc = XmlDocument.parse(
+          _entry(await buildDocumentExportDocx(bundle), 'word/document.xml'),
+        );
 
-      expect(_nestedParagraphs(doc), isEmpty);
-      expect(_runsOutsideParagraph(doc), isEmpty);
-    });
+        expect(_nestedParagraphs(doc), isEmpty);
+        expect(_runsOutsideParagraph(doc), isEmpty);
+      },
+    );
   });
 }
 
@@ -350,7 +367,11 @@ List<String> _tablesInsideParagraph(XmlNode root) => [
 ];
 
 bool _hasAncestor(XmlElement node, String localName) {
-  for (var parent = node.parentElement; parent != null; parent = parent.parentElement) {
+  for (
+    var parent = node.parentElement;
+    parent != null;
+    parent = parent.parentElement
+  ) {
     if (parent.localName == localName && parent.namespaceUri == _w) return true;
   }
   return false;

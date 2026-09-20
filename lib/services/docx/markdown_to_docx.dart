@@ -243,9 +243,7 @@ String _renderTimelineDocx(
   // Koptekstrij.
   buf.write('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
   for (final header in timeline.headers) {
-    buf.write(
-      _tableCell(header, width: width, header: true, fill: headerFill),
-    );
+    buf.write(_tableCell(header, width: width, header: true, fill: headerFill));
   }
   buf.write('</w:tr>');
   for (final event in timeline.events) {
@@ -610,7 +608,9 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         ? '<w:shd w:val="clear" w:color="auto" w:fill="$tableHeaderFill"/>'
         : '';
     final width = columnWidthTwips(_tableColumns, contentWidthTwips);
-    output.write('<w:tc><w:tcPr><w:tcW w:w="$width" w:type="dxa"/>$shd</w:tcPr>');
+    output.write(
+      '<w:tc><w:tcPr><w:tcW w:w="$width" w:type="dxa"/>$shd</w:tcPr>',
+    );
     // Vet en de koptekstkleur zitten in de TableHeading-stijl; hier blijft
     // alleen de uitlijning als alinea-eigenschap over.
     _openParagraph(
