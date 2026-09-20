@@ -235,4 +235,59 @@ void main() {
     expect(find.matchCount, 0);
     expect(find.matchIndex, -1);
   });
+
+  test('zoeken telt alleen proza — geen links, comments of code (#2137)', () {
+    final find = sessionFor(
+      'Management Team komt bijeen.\n\n'
+      '[Management Team](Management Team.md)\n\n'
+      '<!-- Management Team overlegt maandag. -->\n\n'
+      '```chart\nlabel: Management Team\n```\n\n'
+      '![Management Team](team.png)\n',
+    );
+    find.open(showReplace: false);
+    find.setQuery('Management Team');
+
+    expect(
+      find.matchCount,
+      1,
+      reason: 'alleen de lopende tekst telt; links, afbeeldingen, comments '
+          'en fenced code zijn machinesyntax',
+    );
+  });
+
+  test('alles vervangen laat machinesyntax ongemoeid (#2137)', () {
+    const source =
+        'Management Team komt bijeen.\n\n'
+        '[Management Team](Management Team.md)\n\n'
+        '<!-- Management Team overlegt maandag. -->\n\n'
+        '```chart\nlabel: Management Team\n```\n';
+    final find = sessionFor(source);
+    find.open(showReplace: true);
+    find
+      ..setQuery('Management Team')
+      ..setReplacement('Executive Team');
+
+    find.replaceAll();
+
+    expect(
+      controller.text,
+      'Executive Team komt bijeen.\n\n'
+      '[Management Team](Management Team.md)\n\n'
+      '<!-- Management Team overlegt maandag. -->\n\n'
+      '```chart\nlabel: Management Team\n```\n',
+      reason: 'een linkdoel of grafiekspec herschrijven is stil dataverlies',
+    );
+  });
+
+  test('voetnoottekst is proza, de [^…]-markering niet (#2137)', () {
+    final find = sessionFor(
+      'De kat[^kat] zit.\n\n[^kat]: de kat slaapt.\n',
+    );
+    find.open(showReplace: false);
+
+    find.setQuery('kat');
+    // 'kat' staat twee keer als zichtbare tekst (in de zin én in de
+    // definitie) maar ook in twee [^…]-markeringen; alleen de tekst telt.
+    expect(find.matchCount, 2);
+  });
 }
