@@ -247,7 +247,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// wanneer alleen de selectie/cursor verschoof (body gelijk) — anders zou een
   /// simpele cursorbeweging een lege bewerking worden.
   void _onControllerChanged() {
-    _syncOutlineToMarkdownCaret();
+    // In de visuele stand is de Quill-caret leidend; de bronselectie wordt
+    // daar juist náár die caret gezet (_syncOutlineToVisualCaret). Hem hier
+    // weer uitlezen zou de Overzicht-markering tussen twee berekeningen
+    // laten flippen (#2141). Valt Visueel terug op de platte broneditor —
+    // geen Quill gebouwd — dan geldt de bronselectie wél.
+    if (_viewMode != _DocViewMode.visual ||
+        _visualEditorKey.currentState == null) {
+      _syncOutlineToMarkdownCaret();
+    }
     if (_applyingExternal) return;
     final body = _controller.text;
     final doc = ref.read(documentProvider).document;
