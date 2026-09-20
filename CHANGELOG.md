@@ -2756,6 +2756,19 @@ that before deciding whether this alpha fits what you are doing.
   rood geproefd. De gedeelde testharnas kende `DEPLOY_URL` niet; dat viel op
   doordat `set -u` de meting stil leeg maakte, en is nu een constante in de
   harnas zoals in het script.
+- **Een functie die pas ná zijn aanroeper stond, gaf een segfault in plaats van
+  "command not found".** De nieuwe `live_web_version` zat in het fase-3-blok
+  (regel ~860), maar `--status` roept `cmd_status` aan op regel ~512; bash zoekt
+  een functie pas bij het aanroepen, dus zocht hij een *programma* met die naam.
+  Op de MacPorts-bash van de bouw-Mac (5.2.37, zie het eerdere
+  `flutter upgrade`-verhaal) eindigt die zoektocht in een segfault in
+  CoreFoundation — `--status v0.6.5` viel drie van de drie keer om met exit 139,
+  en de melding wees naar de regel van de aanroep, niet naar de oorzaak. De
+  functie staat nu vóór `cmd_status`, en een structuurtoets loopt de body van
+  `cmd_status` langs en eist dat elke daarin gebruikte scriptfunctie eerder in
+  het bestand gedefinieerd is dan de aanroep. Die toets was nodig naast de
+  harnas-toetsen: die plakken álle functiedefinities vóór de aanroep en maken de
+  volgorde in het bestand juist onzichtbaar.
 - **Verouderde CMake-cache van een gebumpt pakket stopte de 0.6.6-run ná
   anderhalf uur groen.** `hooks_runner` sleutelt zijn gedeelde buildmappen op
   een hash van de bouwconfiguratie (doel-OS, architectuur, compiler,

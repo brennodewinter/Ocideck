@@ -117,6 +117,56 @@ cmd_status
     skip: skipOnWindows,
   );
 
+  // Bash zoekt een functie pas op het moment van aanroepen. `--status` roept
+  // cmd_status aan op ongeveer regel 512, en alles wat die functie gebruikt
+  // moet dáárvóór gedefinieerd zijn. Stond `live_web_version` bij fase 3, dan
+  // zocht bash een programma met die naam; de MacPorts-bash van de bouw-Mac
+  // eindigt dat niet met "command not found" maar met een segfault in
+  // CoreFoundation — drie keer achtereen gereproduceerd op 20-09-2026.
+  // De harnas-toetsen hierboven zien dit niet: die plakken álle functies vóór
+  // de aanroep en maken de volgorde in het bestand juist onzichtbaar.
+  test('elke functie die cmd_status gebruikt, staat vóór de aanroep', () {
+    final lines = File(script).readAsLinesSync();
+    final defined = <String, int>{};
+    final open = RegExp(r'^([a-zA-Z_][a-zA-Z0-9_]*)\(\)\s*\{');
+    for (var i = 0; i < lines.length; i++) {
+      final m = open.firstMatch(lines[i]);
+      if (m != null) defined.putIfAbsent(m.group(1)!, () => i);
+    }
+    final callSite = lines.indexWhere((l) => l.trim() == 'cmd_status');
+    expect(
+      callSite,
+      greaterThan(0),
+      reason: 'aanroep van cmd_status niet gevonden',
+    );
+
+    // De body van cmd_status, en daarin elk woord dat een functie uit dit
+    // script is.
+    final start = defined['cmd_status']!;
+    final end = lines.indexWhere((l) => RegExp(r'^\}\s*$').hasMatch(l), start);
+    final body = lines.sublist(start + 1, end).join('\n');
+    final used = defined.keys
+        .where((f) => f != 'cmd_status')
+        .where(
+          (f) => RegExp('(^|[^a-zA-Z0-9_])$f([^a-zA-Z0-9_]|\$)').hasMatch(body),
+        )
+        .toList();
+    expect(
+      used,
+      contains('live_web_version'),
+      reason: 'de webdemo hoort in het statusrapport',
+    );
+    for (final f in used) {
+      expect(
+        defined[f]!,
+        lessThan(callSite),
+        reason:
+            'cmd_status gebruikt $f (regel ${defined[f]! + 1}), maar de aanroep '
+            'staat op regel ${callSite + 1}; bash kent de functie dan nog niet.',
+      );
+    }
+  }, skip: skipOnWindows);
+
   // --status rapporteerde de webdemo niet; het advies zei "controleer nog de
   // live web-versie", en dat deed niemand. v0.6.5 en v0.6.6 stonden compleet in
   // het rapport terwijl de demo op 0.6.4 bleef staan.

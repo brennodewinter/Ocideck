@@ -343,6 +343,23 @@ assert_release_ci_terminal() {
 
 mark() { if [ "$1" -eq 1 ]; then printf '   [x] %s\n' "$2"; else printf '   [ ] %s\n' "$2"; fi; }
 
+# Wat er live staat, vraag je aan de site — niet aan een jobstatus.
+#
+# `version.json` reist mee in de webbundel en noemt de versie die er op dat
+# moment op $DEPLOY_URL staat. Dat is het enige antwoord dat niet kan liegen:
+# het meet de uitkomst, niet een stap die de uitkomst zou moeten bereiken.
+#
+# Staat bewust hier, vóór cmd_status: `--status` roept hem aan op regel ~512 en
+# bash zoekt een functie pas op het moment van aanroepen. Stond hij bij fase 3
+# (regel ~860), dan was hij daar nog niet gedefinieerd — en zocht bash een
+# programma met die naam. Op de MacPorts-bash van deze machine eindigt dat niet
+# in "command not found" maar in een segfault in CoreFoundation.
+live_web_version() { # → de versie op de live demo, leeg als die niet te lezen is
+  curl -fsSL --max-time 20 "$DEPLOY_URL/version.json" 2>/dev/null \
+    | sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
+    | head -n 1
+}
+
 # --status vX.Y.Z: read-only overzicht van waar een release staat — geen mutatie,
 # geen wachtwoord, geen poort. Beantwoordt "waar ben ik?" na een afbreking en zegt
 # wat --resume nu zou doen. Leunt op TAG/NEW_VERSION/BRANCH die hierboven al bepaald
@@ -856,17 +873,6 @@ preflight() {
 }
 
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
-# Wat er live staat, vraag je aan de site — niet aan een jobstatus.
-#
-# `version.json` reist mee in de webbundel en noemt de versie die er op dat
-# moment op $DEPLOY_URL staat. Dat is het enige antwoord dat niet kan liegen:
-# het meet de uitkomst, niet een stap die de uitkomst zou moeten bereiken.
-live_web_version() { # → de versie op de live demo, leeg als die niet te lezen is
-  curl -fsSL --max-time 20 "$DEPLOY_URL/version.json" 2>/dev/null \
-    | sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
-    | head -n 1
-}
-
 # De webdemo alleen lokaal bouwen en deployen als hij nog niet live staat, en
 # dan alleen vanaf de commit die de tag draagt.
 #
