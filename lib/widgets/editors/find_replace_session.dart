@@ -105,17 +105,23 @@ class FindReplaceSession {
     recount(selectFirst: true);
   }
 
+  /// Treffers in de lopende tekst van [controller.text]: machinesyntax
+  /// (links, comments, code, voetnootmarkeringen) is gemaskeerd — die telt
+  /// niet mee en mag vervangen nooit stil herschrijven (#2137).
+  List<TextMatchRange> _proseMatches() => findAllMatches(
+    controller.text,
+    _query,
+    caseSensitive: _caseSensitive,
+    protectedRanges: markdownNonTextRanges(controller.text),
+  );
+
   /// De zoekvraag zoals die in het zoekveld wordt getypt: telt de treffers
   /// bij, maar springt niet naar de eerste treffer — anders trekt elke
   /// toetsaanslag de focus naar het document en kan de gebruiker zijn
   /// zoekterm niet invullen (#1760).
   void onQueryFieldChanged(String value) {
     _query = value;
-    _matches = findAllMatches(
-      controller.text,
-      _query,
-      caseSensitive: _caseSensitive,
-    );
+    _matches = _proseMatches();
     _matchIndex = _matches.isEmpty ? -1 : 0;
     onChanged();
     syncHighlights();
@@ -147,11 +153,7 @@ class FindReplaceSession {
   /// de treffer waar hij stond, tenzij die door de nieuwe telling niet meer
   /// bestaat.
   void recount({bool selectFirst = false}) {
-    final matches = findAllMatches(
-      controller.text,
-      _query,
-      caseSensitive: _caseSensitive,
-    );
+    final matches = _proseMatches();
     _matches = matches;
     int? jumpIndex;
     if (matches.isEmpty) {
@@ -178,11 +180,7 @@ class FindReplaceSession {
   /// waar je bezig bent.
   void refreshWhileTyping() {
     if (!_visible || _query.isEmpty) return;
-    final matches = findAllMatches(
-      controller.text,
-      _query,
-      caseSensitive: _caseSensitive,
-    );
+    final matches = _proseMatches();
     _matches = matches;
     _matchIndex = matches.isEmpty
         ? -1
@@ -239,6 +237,7 @@ class FindReplaceSession {
       _query,
       _replacement,
       caseSensitive: _caseSensitive,
+      protectedRanges: markdownNonTextRanges(controller.text),
     );
     if (result.count == 0) {
       _matches = const [];

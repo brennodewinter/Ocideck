@@ -187,6 +187,78 @@ void main() {
       expect(notifier.currentState.document!.source, onDisk);
     });
 
+    testWidgets('document met frontmatter: geen lekkage in de body (#2142)', (
+      tester,
+    ) async {
+      final temp = Directory.systemTemp.createTempSync('visual_save_fm');
+      addTearDown(() => temp.deleteSync(recursive: true));
+      final path = p.join(temp.path, 'gestyled.md');
+
+      // Document met frontmatter (stijl, TLP en een vrij veld) — de codec kent
+      // geen YAML en vermengde het blok vroeger als setext-kop in de baseline,
+      // waarna de regel-diff `theme:`/`---` midden in de body plantte.
+      const source =
+          '---\ntheme: rvs\ntlp: amber\nauteur: Brenno\n---\n\n# Titel\n\nEerste regel.\n';
+      final doc = MarkdownDocument.parse(source);
+      final notifier = DocumentNotifier()..loadDocument(doc, filePath: path);
+
+      // Visuele bewerking: één letter aan "Eerste regel." De notifier houdt
+      // frontMatter + roundTrip(body) vast, zoals _onControllerChanged hem
+      // aanlevert.
+      final editedBody = roundTrip('# Titel\n\nEerste regelx.\n');
+      notifier.edit(doc.frontMatter + editedBody, visualEdit: true);
+
+      late WidgetRef ref;
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            documentProvider.overrideWith((_) => notifier),
+            fileServiceProvider.overrideWithValue(
+              FileService(
+                MarkdownService(),
+                ImageService(),
+                () => throw UnimplementedError(),
+              ),
+            ),
+          ],
+          child: MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              ...GlobalMaterialLocalizations.delegates,
+              FlutterQuillLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Consumer(
+              builder: (context, r, _) {
+                ref = r;
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
+      );
+
+      final saved = await tester.runAsync(
+        () => saveDocumentWithDestination(
+          tester.element(find.byType(SizedBox)),
+          ref,
+          notifier,
+        ),
+      );
+      expect(saved, isTrue);
+
+      final onDisk = File(path).readAsStringSync();
+      // Het frontmatter-blok staat ongewijzigd vooraan en lekt niet als
+      // tekst/setext-kop in de body; de bewerking is wel doorgekomen.
+      expect(
+        onDisk,
+        '---\ntheme: rvs\ntlp: amber\nauteur: Brenno\n---\n\n# Titel\n\nEerste regelx.\n',
+      );
+      expect('theme: rvs'.allMatches(onDisk), hasLength(1));
+      expect(notifier.currentState.isDirty, isFalse);
+      expect(notifier.currentState.document!.source, onDisk);
+    });
+
     testWidgets('opslaan vanuit Bron is byte-getrouw zonder patching', (
       tester,
     ) async {

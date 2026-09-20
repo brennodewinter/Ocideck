@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
@@ -147,7 +148,27 @@ class TableEditScaffold extends StatelessWidget {
       child: ExcludeFocus(
         child: Listener(
           behavior: HitTestBehavior.translucent,
-          onPointerDown: (_) => editor.holdActiveCell(),
+          // De hold moet de hele aanraking overleven, niet één frame: op
+          // desktop komt pointer-up frames later en vuurt de knop pas dán —
+          // was de selectie toen al losgelaten, lag de werkbalk er vóór de
+          // klik al uit (#2140). De router volgt de pointer ook wanneer hij
+          // buiten de werkbalk wordt losgelaten of afgebroken.
+          onPointerDown: (event) {
+            editor.holdActiveCell();
+            void release(PointerEvent e) {
+              if (e is! PointerUpEvent && e is! PointerCancelEvent) return;
+              GestureBinding.instance.pointerRouter.removeRoute(
+                event.pointer,
+                release,
+              );
+              editor.releaseActiveCell();
+            }
+
+            GestureBinding.instance.pointerRouter.addRoute(
+              event.pointer,
+              release,
+            );
+          },
           // Wrap en geen Row: de werkbalk hoort bij de tabel waar hij boven
           // staat, en een smalle tabel liet de knoppen over de rand lopen
           // (14px, zichtbaar als de rood-gele streep). Nu vouwt hij naar een

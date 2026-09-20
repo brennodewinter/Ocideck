@@ -12,6 +12,7 @@ import '../../state/deck_provider.dart' show fileServiceProvider;
 import '../../state/document_provider.dart';
 import '../../state/settings_provider.dart'
     show settingsProvider, SettingsTraces;
+import '../../utils/document_front_matter.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/source_patcher.dart';
@@ -124,17 +125,26 @@ Future<bool> saveDocumentWithDestination(
 /// bewerkingen te isoleren. Die diff toegepast op savedSource levert de
 /// byte-getrouwe versie op.
 MarkdownDocument _patchVisualSave(String savedSource, String currentSource) {
+  // De codec kent geen YAML-frontmatter: `theme: rvs\n---` parseert als een
+  // setext-kop en de baseline vermangelt het blok, waarna de regel-diff het
+  // frontmatter-verschil als een gebruikersbewerking midden in de body plant
+  // (#2142). De visuele editor laadt alleen de body — dus de baseline hoort
+  // óók alleen over de body te lopen, met het frontmatter-blok erbuiten.
+  final savedSplit = splitDocumentFrontMatter(savedSource);
+  final currSplit = splitDocumentFrontMatter(currentSource);
   final baseline = MarkdownQuillCodec.markdownFromDocument(
     MarkdownQuillCodec.documentFromMarkdown(
-      normalizeRichTextMarkdown(savedSource),
+      normalizeRichTextMarkdown(savedSplit.body),
     ),
   );
   final patched = patchVisualEdits(
-    original: savedSource,
+    original: savedSplit.body,
     baseline: baseline,
-    current: currentSource,
+    current: currSplit.body,
   );
-  return MarkdownDocument.parse(patched);
+  // Neem het huidige blok terug, niet het opgeslagen: zo overleeft een
+  // tussentijdse stijl-/TLP-wijziging de opslag.
+  return MarkdownDocument.parse(currSplit.block + patched);
 }
 
 /// De keuzes uit de conflict-dialoog (#1699).

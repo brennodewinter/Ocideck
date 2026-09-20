@@ -39,7 +39,12 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   void _syncOutlineToMarkdownCaret() {
     final sel = _controller.selection;
     if (!sel.isValid) return;
-    _setActiveOutlineFromMarkdownOffset(sel.baseOffset);
+    _setActiveOutlineIndex(
+      activeOutlineIndexForOffset(
+        buildMarkdownOutline(_controller.text),
+        sel.baseOffset,
+      ),
+    );
   }
 
   /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
@@ -63,19 +68,16 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     );
   }
 
-  void _setActiveOutlineFromMarkdownOffset(int offset) {
-    _setActiveOutlineIndex(
-      activeOutlineIndexForOffset(
-        buildMarkdownOutline(_controller.text),
-        offset,
-      ),
-    );
-  }
-
   /// Slim plakken: afbeelding → `![](…)`, spreadsheet → GFM-tabel, HTML van
   /// het klembord → Markdown, anders opgeschoonde platte tekst. Geeft `true`
   /// als de plak is afgehandeld (dan mag de editor niet nóg eens plakken).
   Future<bool> _smartPaste() async {
+    // Vang de Quill-caret vóór de async klembordlezing: raakt de selectie in
+    // dat gat invalide, dan zou een tekstplak stilletjes op het einde van het
+    // document landen (#2138).
+    final visualCaret = _viewMode == _DocViewMode.visual
+        ? _visualEditorKey.currentState?.widget.controller.selection
+        : null;
     final state = ref.read(documentProvider);
     final projectPath = state.filePath == null
         ? null
@@ -118,30 +120,32 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
       return true;
     }
 
-    _insertPastedMarkdown(resolved.text);
+    _insertPastedMarkdown(resolved.text, visualCaret: visualCaret);
     return true;
   }
 
   /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
-  /// In de visuele stand gaat de invoeging via de Quill-cursor, net als
-  /// [_insertBlock] — de bron-controller staat daar stil op een oude positie.
-  void _insertPastedMarkdown(String text) {
-    if (_viewMode == _DocViewMode.visual &&
-        markdownRoundTripsVisually(_controller.text)) {
-      _requestVisualInsert(block: text);
+  /// In de visuele stand landt geplakte tekst op de Quill-caret — het blokpad
+  /// van [_insertBlock] zoekt bewust het einde van de regel, wat voor een
+  /// tabel klopt maar een zin onder de cursor zou zetten (#2138).
+  void _insertPastedMarkdown(String text, {TextSelection? visualCaret}) {
+    final quill =
+        _viewMode == _DocViewMode.visual &&
+            markdownRoundTripsVisually(_controller.text)
+        ? _visualEditorKey.currentState?.widget.controller
+        : null;
+    if (_pasteInlineAtVisualCaret(
+      quill,
+      text,
+      visualCaret,
+      markInsert: () => _expectVisualInsert = true,
+    )) {
       return;
     }
-    final sel = _controller.selection;
-    final start = sel.isValid ? sel.start : _controller.text.length;
-    final end = sel.isValid ? sel.end : start;
-    final next = _controller.text.replaceRange(start, end, text);
     _applyingExternal = true;
-    _controller.value = TextEditingValue(
-      text: next,
-      selection: TextSelection.collapsed(offset: start + text.length),
-    );
+    _replaceSourceSelection(_controller, text);
     _applyingExternal = false;
-    _commitDocumentBody(ref, next, coalesceKey: 'doc');
+    _commitDocumentBody(ref, _controller.text, coalesceKey: 'doc');
   }
 
   /// Bron-modus: de rauwe bron en de live weergave naast elkaar op een breed
@@ -421,6 +425,141 @@ TableEditController? _sourceTableFor(
       }
     },
     onCellFocused: null,
+  );
+}
+
+/// Plakt [markdown] als tekst op de Quill-caret van de visuele editor en
+/// vervangt daarbij een actieve selectie. `false` als er geen visuele
+/// editor staat — de aanroeper valt dan terug op de bronroute.
+///
+/// [caret] is de selectie zoals de aanroeper hem vóór de async
+/// klembordlezing vastlegde; zonder die vangst landt een plak na
+/// focusverlies op het documenteinde (#2138).
+bool _pasteInlineAtVisualCaret(
+  QuillController? quill,
+  String markdown,
+  TextSelection? caret, {
+  required VoidCallback markInsert,
+}) {
+  if (quill == null) return false;
+  // De delta van een heel document sluit af met de verplichte
+  // regelafsluiter; die is geen inhoud. Laat je hem staan, dan breekt de
+  // geplakte tekst de regel waar de caret in staat.
+  final ops = MarkdownQuillCodec.documentFromMarkdown(
+    markdown,
+  ).toDelta().toList();
+  final last = ops.isEmpty ? null : ops.last;
+  if (last != null &&
+      last.isInsert &&
+      last.isPlain &&
+      last.data is String &&
+      (last.data as String).endsWith('\n')) {
+    final trimmed = (last.data as String).substring(
+      0,
+      (last.data as String).length - 1,
+    );
+    if (trimmed.isEmpty) {
+      ops.removeLast();
+    } else {
+      ops[ops.length - 1] = Operation.insert(trimmed);
+    }
+  }
+  if (ops.isEmpty) return true;
+  final end = quill.document.length - 1;
+  final sel = (caret != null && caret.isValid) ? caret : quill.selection;
+  final at = sel.isValid ? sel.start.clamp(0, end) : end;
+  final len = sel.isValid ? sel.end.clamp(at, end) - at : 0;
+  final inserted = ops.fold<int>(0, (sum, op) => sum + (op.length ?? 0));
+  // Een plak is een eigen bewerking, geen voortzetting van het typen ervoor
+  // — net zoals [_requestVisualInsert] dat voor blokken regelt.
+  markInsert();
+  quill.replaceText(
+    at,
+    len,
+    Delta.fromOperations(ops),
+    TextSelection.collapsed(offset: at + inserted),
+  );
+  return true;
+}
+
+/// Open de document-export-dialoog (DOCUMENT_MODE.md §11.2). De dialoog kiest
+/// profiel en formaat; het echte bouwen-en-wegschrijven gebeurt in de closure
+/// hieronder, die de bron langs `buildDocumentExportBundle → AudienceDeck`
+/// projecteert (nooit de rauwe bron), een pad laat kiezen en atomisch
+/// wegschrijft. De bron zelf blijft ongemoeid — export is een afgeleid
+/// bestand.
+Future<void> _exportDocument(_DocumentEditorScreenState s) async {
+  final state = s.ref.read(documentProvider);
+  final document = state.document;
+  if (document == null) return;
+  final settings = s.ref.read(settingsProvider);
+  await DocumentExportDialog.show(
+    s.context,
+    privacyChecksEnabled: settings.privacyChecksEnabled,
+    onExport: (profile, format) =>
+        _writeDocumentExport(s.ref, s.context, profile, format),
+  );
+}
+
+/// Converteer dit document naar een NIEUWE presentatie in een nieuw tabblad
+/// (DOCUMENT_MODE.md §11.3). De dialoog toont het voorgestelde aantal dia's
+/// en de drop-lijst vóór het committen; pas bij bevestigen ontstaat het
+/// nieuwe tabblad.
+Future<void> _convertDocumentToPresentation(
+  _DocumentEditorScreenState s,
+) async {
+  final state = s.ref.read(documentProvider);
+  // De body zonder het stijl-frontmatter-blok: de `theme:`-regel is geen
+  // slide-inhoud. Een presentatie krijgt zijn eigen thema; de documentstijl
+  // reist bewust niet mee (§11.3).
+  final body = state.document?.body ?? '';
+  final title = _documentTitle(body, state.filePath);
+  // De getypeerde, zero-loss deconstructie ís de bron van waarheid — voor het
+  // voorgestelde aantal dia's én voor het nieuwe deck. Bewust niet
+  // generateDeck→parseDeck: dat zou een kop-geleide sectie via `_inferSlideType`
+  // weer stil kunnen laten vallen (§11.3, §11.5). De nieuwe presentatie is een
+  // kopie. De documentclassificatie blijft gelden voor alle ontstane dia's;
+  // alleen documentvelden en documentstijl zijn geen presentatiegegevens.
+  final documentTlp = state.document?.tlp ?? TlpLevel.none;
+  // Grafiekdata inline vouwen vóór de brug, gelijk aan het exportpad
+  // (buildDocumentExportBundle). Zonder dit staat een `source: data/….json`
+  // chart-dia leeg in het nieuwe tabblad — de cijfers reizen niet mee (#1639).
+  final projectPath = _documentProjectPath(s.ref);
+  final hydrated = await hydrateDocumentChartData(
+    body,
+    projectPath: projectPath,
+  );
+  if (!s.mounted) return;
+  final deck = DocumentDeckBridge.documentToDeck(
+    hydrated,
+    projectPath: projectPath,
+    title: title,
+    tlp: documentTlp,
+  );
+  final confirmed = await ConvertToPresentationDialog.show(
+    s.context,
+    slideCount: deck.slides.length,
+  );
+  if (confirmed != true || !s.mounted) return;
+  s.ref
+      .read(tabsProvider.notifier)
+      .newDeckInNewTab(
+        title,
+        tlp: deck.tlp,
+        slides: deck.slides,
+        projectPath: projectPath,
+      );
+}
+
+/// Zet [text] op de selectie van [controller] — het plakpad voor de
+/// bronstand en voor blokken.
+void _replaceSourceSelection(TextEditingController controller, String text) {
+  final sel = controller.selection;
+  final start = sel.isValid ? sel.start : controller.text.length;
+  final end = sel.isValid ? sel.end : start;
+  controller.value = TextEditingValue(
+    text: controller.text.replaceRange(start, end, text),
+    selection: TextSelection.collapsed(offset: start + text.length),
   );
 }
 

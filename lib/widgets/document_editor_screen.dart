@@ -5,7 +5,9 @@ import 'dart:math' as math;
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_quill/flutter_quill.dart' show EditorState;
+import 'package:flutter_quill/flutter_quill.dart'
+    show EditorState, QuillController;
+import 'package:flutter_quill/quill_delta.dart' show Delta, Operation;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
@@ -57,6 +59,7 @@ import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
+import '../utils/markdown_quill_codec.dart';
 import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';
@@ -245,7 +248,13 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// wanneer alleen de selectie/cursor verschoof (body gelijk) — anders zou een
   /// simpele cursorbeweging een lege bewerking worden.
   void _onControllerChanged() {
-    _syncOutlineToMarkdownCaret();
+    // In Visueel is de Quill-caret leidend; de bronselectie wordt er juist
+    // náár gezet — teruglezen liet de markering flippen (#2141). Pas zonder
+    // gebouwde Quill (de platte-bron-fallback) geldt de bronselectie.
+    if (_viewMode != _DocViewMode.visual ||
+        _visualEditorKey.currentState == null) {
+      _syncOutlineToMarkdownCaret();
+    }
     if (_applyingExternal) return;
     final body = _controller.text;
     final doc = ref.read(documentProvider).document;
@@ -296,71 +305,15 @@ class _DocumentEditorScreenState extends ConsumerState<DocumentEditorScreen> {
   /// De titel van dit document: de eerste H1, anders de bestandsnaam, anders
   /// leeg. Bepaalt de voorgestelde exportnaam en de HTML-`<title>` — net als een
   /// tekstverwerker een document naar zijn kop noemt.
-  /// Open de document-export-dialoog (DOCUMENT_MODE.md §11.2). De dialoog kiest
-  /// profiel en formaat; het echte bouwen-en-wegschrijven gebeurt in de closure
-  /// hieronder, die de bron langs `buildDocumentExportBundle → AudienceDeck`
-  /// projecteert (nooit de rauwe bron), een pad laat kiezen en atomisch
-  /// wegschrijft. De bron zelf blijft ongemoeid — export is een afgeleid bestand.
-  Future<void> _export() async {
-    final state = ref.read(documentProvider);
-    final document = state.document;
-    if (document == null) return;
-    final settings = ref.read(settingsProvider);
-    await DocumentExportDialog.show(
-      context,
-      privacyChecksEnabled: settings.privacyChecksEnabled,
-      onExport: (profile, format) =>
-          _writeDocumentExport(ref, context, profile, format),
-    );
-  }
+  /// Open de document-export-dialoog (DOCUMENT_MODE.md §11.2). Zie
+  /// [_exportDocument] voor de projectie die de bron nooit raakt.
+  Future<void> _export() => _exportDocument(this);
 
   /// Converteer dit document naar een NIEUWE presentatie in een nieuw tabblad
   /// (DOCUMENT_MODE.md §11.3). Een expliciete kopie: dit document blijft
-  /// ongemoeid. De dialoog toont het voorgestelde aantal dia's en de drop-lijst
-  /// vóór het committen; pas bij bevestigen ontstaat het nieuwe tabblad.
-  Future<void> _convertToPresentation() async {
-    final state = ref.read(documentProvider);
-    // De body zonder het stijl-frontmatter-blok: de `theme:`-regel is geen
-    // slide-inhoud. Een presentatie krijgt zijn eigen thema; de documentstijl
-    // reist bewust niet mee (§11.3).
-    final body = state.document?.body ?? '';
-    final title = _documentTitle(body, state.filePath);
-    // De getypeerde, zero-loss deconstructie ís de bron van waarheid — voor het
-    // voorgestelde aantal dia's én voor het nieuwe deck. Bewust niet
-    // generateDeck→parseDeck: dat zou een kop-geleide sectie via `_inferSlideType`
-    // weer stil kunnen laten vallen (§11.3, §11.5). De nieuwe presentatie is een
-    // kopie. De documentclassificatie blijft gelden voor alle ontstane dia's;
-    // alleen documentvelden en documentstijl zijn geen presentatiegegevens.
-    final documentTlp = state.document?.tlp ?? TlpLevel.none;
-    // Grafiekdata inline vouwen vóór de brug, gelijk aan het exportpad
-    // (buildDocumentExportBundle). Zonder dit staat een `source: data/….json`
-    // chart-dia leeg in het nieuwe tabblad — de cijfers reizen niet mee (#1639).
-    final projectPath = _documentProjectPath(ref);
-    final hydrated = await hydrateDocumentChartData(
-      body,
-      projectPath: projectPath,
-    );
-    if (!mounted) return;
-    final deck = DocumentDeckBridge.documentToDeck(
-      hydrated,
-      projectPath: projectPath,
-      title: title,
-      tlp: documentTlp,
-    );
-    final confirmed = await ConvertToPresentationDialog.show(
-      context,
-      slideCount: deck.slides.length,
-    );
-    if (confirmed != true || !mounted) return;
-    ref
-        .read(tabsProvider.notifier)
-        .newDeckInNewTab(
-          title,
-          tlp: deck.tlp,
-          slides: deck.slides,
-          projectPath: projectPath,
-        );
-  }
+  /// ongemoeid. Zie [_convertDocumentToPresentation] voor de bevestiging en
+  /// het nieuwe tabblad.
+  Future<void> _convertToPresentation() => _convertDocumentToPresentation(this);
 
   /// Scroll / spring naar de aangeklikte kop uit de Overzicht-rail.
   ///
