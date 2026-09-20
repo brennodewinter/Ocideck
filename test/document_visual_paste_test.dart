@@ -13,6 +13,8 @@ import 'package:ocideck/widgets/document_editor_screen.dart';
 import 'package:ocideck/widgets/markdown_editor/wysiwyg_notes_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/pump_until.dart';
+
 /// Plakken in de visuele stand landt op de cursor, niet als eigen blok eronder
 /// of onderaan het document (#2138).
 ///
@@ -89,16 +91,21 @@ void main() {
     await tester.pump();
   }
 
-  Future<void> paste(WidgetTester tester) async {
+  Future<void> paste(
+    WidgetTester tester, {
+    required bool Function() landed,
+  }) async {
     await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
     await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
     await tester.sendKeyUpEvent(LogicalKeyboardKey.controlLeft);
     await tester.pump();
-    // De plakroute leest het klembord asynchroon — laat die keten aflopen.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 100)),
+    // De plakroute leest het klembord asynchroon — wacht op de uitkomst,
+    // niet op een gokgetal.
+    await pumpUntil(
+      tester,
+      landed,
+      reason: 'de plak kwam nooit in het document terecht',
     );
-    await tester.pump();
   }
 
   testWidgets('tekst plakken landt inline op de cursor (#2138)', (
@@ -108,7 +115,12 @@ void main() {
     // Caret midden in "zin" (offset 8, tussen z en i) → "Eerste zplakin.":
     // letterlijk óp de caret, niet als eigen regel eronder.
     await placeCaret(tester, 8);
-    await paste(tester);
+    await paste(
+      tester,
+      landed: () =>
+          notifier.currentState.document?.body ==
+          'Eerste zplakin.\n\nTweede zin.',
+    );
     expect(
       notifier.currentState.document!.body,
       'Eerste zplakin.\n\nTweede zin.',
@@ -128,7 +140,12 @@ void main() {
           ChangeSource.local,
         );
     await tester.pump();
-    await paste(tester);
+    await paste(
+      tester,
+      landed: () =>
+          notifier.currentState.document?.body ==
+          'Eerste alinea.\n\nTweede zin.',
+    );
     expect(
       notifier.currentState.document!.body,
       'Eerste alinea.\n\nTweede zin.',

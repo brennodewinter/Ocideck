@@ -39,7 +39,12 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   void _syncOutlineToMarkdownCaret() {
     final sel = _controller.selection;
     if (!sel.isValid) return;
-    _setActiveOutlineFromMarkdownOffset(sel.baseOffset);
+    _setActiveOutlineIndex(
+      activeOutlineIndexForOffset(
+        buildMarkdownOutline(_controller.text),
+        sel.baseOffset,
+      ),
+    );
   }
 
   /// Quill-caret → actieve Overzicht-kop via titelvolgorde in de platte tekst.
@@ -59,15 +64,6 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
         buildMarkdownOutline(_controller.text),
         plain,
         plainOffset,
-      ),
-    );
-  }
-
-  void _setActiveOutlineFromMarkdownOffset(int offset) {
-    _setActiveOutlineIndex(
-      activeOutlineIndexForOffset(
-        buildMarkdownOutline(_controller.text),
-        offset,
       ),
     );
   }
@@ -133,72 +129,23 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// van [_insertBlock] zoekt bewust het einde van de regel, wat voor een
   /// tabel klopt maar een zin onder de cursor zou zetten (#2138).
   void _insertPastedMarkdown(String text, {TextSelection? visualCaret}) {
-    if (_viewMode == _DocViewMode.visual &&
-        markdownRoundTripsVisually(_controller.text) &&
-        _pasteInlineAtVisualCaret(text, visualCaret)) {
+    final quill =
+        _viewMode == _DocViewMode.visual &&
+            markdownRoundTripsVisually(_controller.text)
+        ? _visualEditorKey.currentState?.widget.controller
+        : null;
+    if (_pasteInlineAtVisualCaret(
+      quill,
+      text,
+      visualCaret,
+      markInsert: () => _expectVisualInsert = true,
+    )) {
       return;
     }
-    final sel = _controller.selection;
-    final start = sel.isValid ? sel.start : _controller.text.length;
-    final end = sel.isValid ? sel.end : start;
-    final next = _controller.text.replaceRange(start, end, text);
     _applyingExternal = true;
-    _controller.value = TextEditingValue(
-      text: next,
-      selection: TextSelection.collapsed(offset: start + text.length),
-    );
+    _replaceSourceSelection(_controller, text);
     _applyingExternal = false;
-    _commitDocumentBody(ref, next, coalesceKey: 'doc');
-  }
-
-  /// Plakt [markdown] als tekst op de Quill-caret van de visuele editor en
-  /// vervangt daarbij een actieve selectie. `false` als er geen visuele
-  /// editor staat — de aanroeper valt dan terug op de bronroute.
-  ///
-  /// [caret] is de selectie zoals [_smartPaste] hem vóór de async
-  /// klembordlezing vastlegde; zonder die vangst landt een plak na
-  /// focusverlies op het documenteinde.
-  bool _pasteInlineAtVisualCaret(String markdown, TextSelection? caret) {
-    final quill = _visualEditorKey.currentState?.widget.controller;
-    if (quill == null) return false;
-    // De delta van een heel document sluit af met de verplichte
-    // regelafsluiter; die is geen inhoud. Laat je hem staan, dan breekt de
-    // geplakte tekst de regel waar de caret in staat.
-    final ops = MarkdownQuillCodec.documentFromMarkdown(
-      markdown,
-    ).toDelta().toList();
-    final last = ops.isEmpty ? null : ops.last;
-    if (last != null &&
-        last.isInsert &&
-        last.isPlain &&
-        last.data is String &&
-        (last.data as String).endsWith('\n')) {
-      final trimmed = (last.data as String).substring(
-        0,
-        (last.data as String).length - 1,
-      );
-      if (trimmed.isEmpty) {
-        ops.removeLast();
-      } else {
-        ops[ops.length - 1] = Operation.insert(trimmed);
-      }
-    }
-    if (ops.isEmpty) return true;
-    final end = quill.document.length - 1;
-    final sel = (caret != null && caret.isValid) ? caret : quill.selection;
-    final at = sel.isValid ? sel.start.clamp(0, end) : end;
-    final len = sel.isValid ? sel.end.clamp(at, end) - at : 0;
-    final inserted = ops.fold<int>(0, (sum, op) => sum + (op.length ?? 0));
-    // Een plak is een eigen bewerking, geen voortzetting van het typen ervoor
-    // — net zoals [_requestVisualInsert] dat voor blokken regelt.
-    _expectVisualInsert = true;
-    quill.replaceText(
-      at,
-      len,
-      Delta.fromOperations(ops),
-      TextSelection.collapsed(offset: at + inserted),
-    );
-    return true;
+    _commitDocumentBody(ref, _controller.text, coalesceKey: 'doc');
   }
 
   /// Bron-modus: de rauwe bron en de live weergave naast elkaar op een breed
@@ -478,6 +425,72 @@ TableEditController? _sourceTableFor(
       }
     },
     onCellFocused: null,
+  );
+}
+
+/// Plakt [markdown] als tekst op de Quill-caret van de visuele editor en
+/// vervangt daarbij een actieve selectie. `false` als er geen visuele
+/// editor staat — de aanroeper valt dan terug op de bronroute.
+///
+/// [caret] is de selectie zoals de aanroeper hem vóór de async
+/// klembordlezing vastlegde; zonder die vangst landt een plak na
+/// focusverlies op het documenteinde (#2138).
+bool _pasteInlineAtVisualCaret(
+  QuillController? quill,
+  String markdown,
+  TextSelection? caret, {
+  required VoidCallback markInsert,
+}) {
+  if (quill == null) return false;
+  // De delta van een heel document sluit af met de verplichte
+  // regelafsluiter; die is geen inhoud. Laat je hem staan, dan breekt de
+  // geplakte tekst de regel waar de caret in staat.
+  final ops = MarkdownQuillCodec.documentFromMarkdown(
+    markdown,
+  ).toDelta().toList();
+  final last = ops.isEmpty ? null : ops.last;
+  if (last != null &&
+      last.isInsert &&
+      last.isPlain &&
+      last.data is String &&
+      (last.data as String).endsWith('\n')) {
+    final trimmed = (last.data as String).substring(
+      0,
+      (last.data as String).length - 1,
+    );
+    if (trimmed.isEmpty) {
+      ops.removeLast();
+    } else {
+      ops[ops.length - 1] = Operation.insert(trimmed);
+    }
+  }
+  if (ops.isEmpty) return true;
+  final end = quill.document.length - 1;
+  final sel = (caret != null && caret.isValid) ? caret : quill.selection;
+  final at = sel.isValid ? sel.start.clamp(0, end) : end;
+  final len = sel.isValid ? sel.end.clamp(at, end) - at : 0;
+  final inserted = ops.fold<int>(0, (sum, op) => sum + (op.length ?? 0));
+  // Een plak is een eigen bewerking, geen voortzetting van het typen ervoor
+  // — net zoals [_requestVisualInsert] dat voor blokken regelt.
+  markInsert();
+  quill.replaceText(
+    at,
+    len,
+    Delta.fromOperations(ops),
+    TextSelection.collapsed(offset: at + inserted),
+  );
+  return true;
+}
+
+/// Zet [text] op de selectie van [controller] — het plakpad voor de
+/// bronstand en voor blokken.
+void _replaceSourceSelection(TextEditingController controller, String text) {
+  final sel = controller.selection;
+  final start = sel.isValid ? sel.start : controller.text.length;
+  final end = sel.isValid ? sel.end : start;
+  controller.value = TextEditingValue(
+    text: controller.text.replaceRange(start, end, text),
+    selection: TextSelection.collapsed(offset: start + text.length),
   );
 }
 
