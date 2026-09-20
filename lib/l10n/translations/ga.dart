@@ -1657,6 +1657,102 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Ní féidir leat a chealú a thuilleadh: tá an spriocdháta caite. Déan teagmháil le d\'eagraíocht.',
+  'Aanbod': 'Tairiscint',
+  'Aanwezig geweest': 'Bhí i láthair',
+  'Afmelden': 'Cuir do chlárú ar ceal',
+  'Afmelden voor bijeenkomst': 'Ceal do chlárú don seisiún',
+  'Afzien': 'Diúltaigh',
+  'Bekijk mijn inschrijvingen': 'Féach ar mo chlárúcháin',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Féach cad iad na fianaise a chuir tú isteach.',
+  'Binnenkort': 'Go luath',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Ní stóráiltear an cód agus ní sheoltar é ach ag clárú.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Tá an seisiún roghnaithe lán. Roghnaigh seisiún eile nó cuir tú féin ar an liosta feithimh.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Theip ar an athrú. Bain triail eile as.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Níl an cód seo ceart — seiceáil le haghaidh botúin chló.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Forluíonn an seisiún seo coinne atá ann cheana i do fhéilire.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Níl an cód dearbháin seo bailí don tsoláthar seo.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Níl an tairiscint seo bailí a thuilleadh. Nuashonraíodh an liosta.',
+  'Er is een plaats vrij': 'Tá áit shaor ann',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Tá áit shaor duit. Deimhnigh chomh luath agus is féidir — éagfaidh an tairiscint ar a dhéanaí {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Níl aon tairiscint ann faoi láthair le clárú ina haghaidh.',
+  'Geen sessies gepland.': 'Níl aon seisiún sceidealta.',
+  'Geweest': 'Caite',
+  'Het aanbod kon niet worden opgehaald.':
+      'Níorbh fhéidir an tairiscint a fháil.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'I do chrios ama: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Cláraithe',
+  'Inschrijven': 'Cláraigh',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Theip ar an gclárú. Bain triail eile as.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Ní féidir leat clárú go dtí go gcomhlíonann tú gach riachtanas iontrála.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Tá clárú don tsoláthar seo dúnta.',
+  'Kies per les precies één sessie.':
+      'Roghnaigh seisiún amháin go díreach in aghaidh gach ceachta.',
+  'Mijn inschrijvingen': 'Mo chlárúcháin',
+  'Niet aanwezig geweest': 'Ní raibh i láthair',
+  'Onbekende status': 'Stádas anaithnid',
+  'Op de wachtlijst': 'Ar an liosta feithimh',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Ar an liosta feithimh, áit {plaats} as {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Cuir mé ar an liosta feithimh don/do na seisiún lán',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Cláraigh tú féin do sholáthar den eagraíocht seo.',
+  'Sessie': 'Seisiún',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'An iomarca iarracht — bain triail eile as i gceann {seconden} soicind.',
+  'Toelatingseisen': 'Riachtanais iontrála',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Tá tú cláraithe don tsoláthar seo cheana.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Níl tú cláraithe d\'aon seisiún go fóil.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Shroich tú an líon uasta clárúcháin don tsoláthar seo.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Ní chomhlíonann tú na riachtanais iontrála go fóil.',
+  'Uitvoering': 'Soláthar',
+  'Uw inschrijving': 'Do chlárú',
+  'Uw inschrijving is verwerkt.': 'Próiseáladh do chlárú.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Níorbh fhéidir do chlárúcháin a fháil.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Do sheisiúin ranga: atá le teacht agus caite.',
+  'Vol': 'Lán',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Beagnach ann? Fiafraigh d\'eagraíocht an bhfuil maolú indéanta.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Tá cód dearbháin ag teastáil don tsoláthar seo.',
+  'Vouchercode': 'Cód dearbháin',
+  'Vouchercode vereist': 'Cód dearbháin riachtanach',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Ar mhaith leat do chlárú do {titel} ar {datum} a chealú? Rachaidh aon áit ar an liosta feithimh chuig an gcéad duine eile.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Bhí sé indéanta tú féin a chealú go dtí {deadline}. Ina dhiaidh sin ní féidir ach trí {organisatie}.',
+  'ingeschreven': 'cláraithe',
+  'nog niet voldaan': 'gan comhlíonadh fós',
+  'ontheffing verleend': 'maolú deonaithe',
+  'op de wachtlijst': 'ar an liosta feithimh',
+  'verloopt vóór de start': 'éag roimh an tús',
+  'voldaan': 'comhlíonta',
+  'wachtlijst': 'liosta feithimh',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} ceachtanna ranga · {sessies} seisiún',
+  '{vrij} plaatsen vrij': '{vrij} áiteanna saora',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Tá a dhath féin ag gach ceann de leibhéil cheannteidil {niveau} ({kleur}); ní aithníonn an stíl ach dath amháin ceannteidil.',
   '(weergegeven als {vervanger}, bewaard voor export)':

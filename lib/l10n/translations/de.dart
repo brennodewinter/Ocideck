@@ -667,6 +667,102 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Sie können sich nicht mehr abmelden: die Frist ist abgelaufen. Wenden Sie sich an Ihre Organisation.',
+  'Aanbod': 'Angebot',
+  'Aanwezig geweest': 'War anwesend',
+  'Afmelden': 'Abmelden',
+  'Afmelden voor bijeenkomst': 'Von der Sitzung abmelden',
+  'Afzien': 'Ablehnen',
+  'Bekijk mijn inschrijvingen': 'Meine Anmeldungen ansehen',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Sehen Sie, welche Nachweise Sie eingereicht haben.',
+  'Binnenkort': 'Demnächst',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Der Code wird nicht gespeichert und nur bei der Anmeldung gesendet.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Die gewählte Sitzung ist voll. Wählen Sie eine andere Sitzung oder setzen Sie sich auf die Warteliste.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Die Änderung ist fehlgeschlagen. Bitte erneut versuchen.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Dieser Code stimmt nicht — prüfen Sie ihn auf Tippfehler.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Diese Sitzung überschneidet sich mit einem bestehenden Termin in Ihrem Kalender.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Dieser Gutscheincode ist für diese Durchführung nicht gültig.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Dieses Angebot ist nicht mehr gültig. Die Liste wurde aktualisiert.',
+  'Er is een plaats vrij': 'Ein Platz ist frei',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Ein Platz ist für Sie frei. Bestätigen Sie so schnell wie möglich — das Angebot verfällt spätestens am {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Derzeit gibt es kein Angebot zur Anmeldung.',
+  'Geen sessies gepland.': 'Keine Sitzungen geplant.',
+  'Geweest': 'Vergangen',
+  'Het aanbod kon niet worden opgehaald.':
+      'Das Angebot konnte nicht abgerufen werden.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'In Ihrer Zeitzone: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Angemeldet',
+  'Inschrijven': 'Anmelden',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Die Anmeldung ist fehlgeschlagen. Bitte erneut versuchen.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Sie können sich erst anmelden, wenn Sie alle Zulassungsvoraussetzungen erfüllen.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Die Anmeldung für diese Durchführung ist geschlossen.',
+  'Kies per les precies één sessie.':
+      'Wählen Sie pro Unterrichtseinheit genau eine Sitzung.',
+  'Mijn inschrijvingen': 'Meine Anmeldungen',
+  'Niet aanwezig geweest': 'War nicht anwesend',
+  'Onbekende status': 'Unbekannter Status',
+  'Op de wachtlijst': 'Auf der Warteliste',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Auf der Warteliste, Platz {plaats} von {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Setzen Sie mich für die volle(n) Sitzung(en) auf die Warteliste',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Melden Sie sich selbst für eine Durchführung dieser Organisation an.',
+  'Sessie': 'Sitzung',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Zu viele Versuche — versuchen Sie es in {seconden} Sekunden erneut.',
+  'Toelatingseisen': 'Zulassungsvoraussetzungen',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Sie sind bereits für diese Durchführung angemeldet.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Sie sind noch für keine Sitzung angemeldet.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Sie haben die Höchstzahl an Anmeldungen für diese Durchführung erreicht.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Sie erfüllen die Zulassungsvoraussetzungen noch nicht.',
+  'Uitvoering': 'Durchführung',
+  'Uw inschrijving': 'Ihre Anmeldung',
+  'Uw inschrijving is verwerkt.': 'Ihre Anmeldung wurde verarbeitet.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Ihre Anmeldungen konnten nicht abgerufen werden.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Ihre Präsenzveranstaltungen: kommend und vergangen.',
+  'Vol': 'Voll',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Fast geschafft? Fragen Sie Ihre Organisation, ob eine Befreiung möglich ist.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Für diese Durchführung ist ein Gutscheincode erforderlich.',
+  'Vouchercode': 'Gutscheincode',
+  'Vouchercode vereist': 'Gutscheincode erforderlich',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Möchten Sie sich von {titel} am {datum} abmelden? Ein eventueller Wartelistenplatz geht dann an die nächste Person.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Die Selbstabmeldung war bis {deadline} möglich. Danach ist die Abmeldung nur noch über {organisatie} möglich.',
+  'ingeschreven': 'angemeldet',
+  'nog niet voldaan': 'noch nicht erfüllt',
+  'ontheffing verleend': 'Befreiung erteilt',
+  'op de wachtlijst': 'auf der Warteliste',
+  'verloopt vóór de start': 'läuft vor Beginn ab',
+  'voldaan': 'erfüllt',
+  'wachtlijst': 'Warteliste',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} Präsenzlektionen · {sessies} Sitzungen',
+  '{vrij} plaatsen vrij': '{vrij} Plätze frei',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Die Überschriftenebenen {niveau} haben jeweils eine eigene Farbe ({kleur}); der Stil kennt nur eine Überschriftfarbe.',
   '(weergegeven als {vervanger}, bewaard voor export)':

@@ -1642,6 +1642,101 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Iam te abdicare non potes: terminus praeteriit. Societatem tuam contacte.',
+  'Aanbod': 'Offerta',
+  'Aanwezig geweest': 'Aderat',
+  'Afmelden': 'Se abdicare',
+  'Afmelden voor bijeenkomst': 'A sessione se abdicare',
+  'Afzien': 'Recusare',
+  'Bekijk mijn inschrijvingen': 'Inscriptiones meas vide',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Vide quae testimonia miseris.',
+  'Binnenkort': 'Mox',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Codex non servatur sed tantum inscribendo mittitur.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Sessio lecta plena est. Alian elige vel te in ordinem inscriptionis pone.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Mutatio non successit. Iterum tempta.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Hic codex non rectus est — errores scripti explora.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Haec sessio cum conventu iam facto in agenda tua congruit.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Hic tesserae codex pro hac editione non valet.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Haec oblatio iam non valet. Index renovatus est.',
+  'Er is een plaats vrij': 'Locus vacat',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Locus tibi vacat. Quam primum confirma — oblatio decurrit ad summum {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Nulla iam editio est cui te inscribas.',
+  'Geen sessies gepland.': 'Nullae sessiones constitutae sunt.',
+  'Geweest': 'Praeteritae',
+  'Het aanbod kon niet worden opgehaald.': 'Offerta peti non potuit.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'In zona tua temporali: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Inscriptus',
+  'Inschrijven': 'Inscribere',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Inscriptio non successit. Iterum tempta.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Inscribere non potes nisi omnibus condicionibus admissionis satisfeceris.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Inscriptio in hanc editionem clausa est.',
+  'Kies per les precies één sessie.':
+      'Per quamque lectionem unam sessionem exacte elige.',
+  'Mijn inschrijvingen': 'Inscriptiones meae',
+  'Niet aanwezig geweest': 'Aberat',
+  'Onbekende status': 'Status ignotus',
+  'Op de wachtlijst': 'In ordine expectationis',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'In ordine, locus {plaats} ex {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'In ordinem me pone pro sessionibus plenis',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Te ipse in editionem huius societatis inscribe.',
+  'Sessie': 'Sessio',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Nimis conatus — post {seconden} secunda iterum tempta.',
+  'Toelatingseisen': 'Condiciones admissionis',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Iam in hanc editionem inscriptus es.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Nondum in ullam sessionem inscriptus es.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Maximum inscriptionum numerum pro hac editione attigisti.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Condicionibus admissionis nondum satisfacis.',
+  'Uitvoering': 'Editio',
+  'Uw inschrijving': 'Inscriptio tua',
+  'Uw inschrijving is verwerkt.': 'Inscriptio tua peracta est.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Inscriptiones tuae peti non potuerunt.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Sessiones tuae praesentiae: venturae et praeteritae.',
+  'Vol': 'Plenum',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Paene? Rogatus sit societas tua num exemptio fieri possit.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Pro hac editione tesserae codex requiritur.',
+  'Vouchercode': 'Codex tesserae',
+  'Vouchercode vereist': 'Codex tesserae requisitus',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Visne te abdicare a {titel} die {datum}? Locus ordinis, si quis, ad proximum ibit.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Abdicatio ipsa usque ad {deadline} licebat. Deinceps tantum per {organisatie} fieri potest.',
+  'ingeschreven': 'inscriptus',
+  'nog niet voldaan': 'nondum expletum',
+  'ontheffing verleend': 'exemptio concessa',
+  'op de wachtlijst': 'in ordine expectationis',
+  'verloopt vóór de start': 'ante initium decurrit',
+  'voldaan': 'expletum',
+  'wachtlijst': 'ordo expectationis',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} lectiones praesentiae · {sessies} sessiones',
+  '{vrij} plaatsen vrij': '{vrij} loci vacui',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Gradus titulorum {niveau} singuli suum colorem habent ({kleur}); stilus unum tantum colorem titulorum novit.',
   '(weergegeven als {vervanger}, bewaard voor export)':

@@ -14,7 +14,7 @@ import 'package:yaml/yaml.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = 'd6625dd74139cdcdecc051c74b16df57e65cab54';
+const pinnedOciServeCommit = '69147a084daf85cc4b573617aaa9f946ec08c841';
 
 /// One route the gateway calls, with the response fields OciDeck reads.
 /// Fields are dot-paths into the JSON response (after $ref resolution).
@@ -190,6 +190,56 @@ const gatewayRoutes = <GatewayRoute>[
     path: '/api/v1/organizations/{}/badges',
     // Returns an external URL — minimal schema check.
   ),
+  // — Planning: zelfinschrijving (self-service) —
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/me/course-offerings',
+    responseSchema: 'SelfOfferingList',
+    responseFields: ['offerings', 'next_cursor'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/me/course-offerings/{}',
+    responseFields: [
+      'id',
+      'name',
+      'voucher_required',
+      'cancellation_notice_hours',
+      'classroom_lessons',
+      'sessions',
+      'eligibility',
+    ],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/course-offerings/{}/registrations',
+    responseSchema: 'RegistrationResponse',
+    responseFields: ['enrollment_id', 'bookings'],
+  ),
+  GatewayRoute(
+    method: 'GET',
+    path: '/api/v1/organizations/{}/me/bookings',
+    responseSchema: 'MyBookingList',
+    responseFields: ['bookings'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/bookings/{}/cancel',
+    responseSchema: 'SessionBookingResponse',
+    responseFields: ['id', 'session_id', 'status'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/bookings/{}/confirm',
+    responseSchema: 'SessionBookingResponse',
+    responseFields: ['id', 'session_id', 'status'],
+  ),
+  GatewayRoute(
+    method: 'POST',
+    path: '/api/v1/organizations/{}/me/bookings/{}/decline',
+    responseSchema: 'SessionBookingResponse',
+    responseFields: ['id', 'session_id', 'status'],
+  ),
 ];
 
 /// Normalise a path so {param_name} becomes {} for comparison.
@@ -253,17 +303,35 @@ Map<String, dynamic>? responseSchemaFor(
   return null;
 }
 
+/// Merge the `properties` maps of a schema node and its `allOf` branches —
+/// SelfOffering and SelfSession extend a $ref schema this way.
+Map<String, dynamic> _mergedProperties(
+  Map<String, dynamic> node,
+  Map<String, dynamic> root,
+) {
+  final merged = <String, dynamic>{
+    ...(node['properties'] as Map<String, dynamic>? ?? const {}),
+  };
+  for (final branch in node['allOf'] as List? ?? const []) {
+    final resolved = resolveAllRefs(branch, root);
+    if (resolved is Map<String, dynamic>) {
+      merged.addAll(_mergedProperties(resolved, root));
+    }
+  }
+  return merged;
+}
+
 /// Check that a dot-path like 'account.id' exists in a schema map.
-/// Handles nested objects via 'properties'.
+/// Handles nested objects via 'properties' and allOf composition.
 bool schemaHasField(Map<String, dynamic>? schema, String dotPath) {
   if (schema == null) return false;
   final parts = dotPath.split('.');
   dynamic current = schema;
   for (final part in parts) {
     if (current is! Map) return false;
-    // Navigate through 'properties' if present.
-    final props = current['properties'] as Map<String, dynamic>?;
-    final value = props?[part] ?? current[part];
+    final value =
+        _mergedProperties(Map<String, dynamic>.from(current), schema)[part] ??
+        current[part];
     if (value == null) return false;
     current = resolveAllRefs(value, schema);
   }

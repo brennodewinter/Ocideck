@@ -827,6 +827,101 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'You can no longer cancel: the deadline has passed. Contact your organization.',
+  'Aanbod': 'Offerings',
+  'Aanwezig geweest': 'Was present',
+  'Afmelden': 'Cancel registration',
+  'Afmelden voor bijeenkomst': 'Cancel registration for session',
+  'Afzien': 'Decline',
+  'Bekijk mijn inschrijvingen': 'View my registrations',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'See which evidence you have submitted.',
+  'Binnenkort': 'Soon',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'The code is not stored and is only sent during registration.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'The selected session is full. Choose another session or join the waitlist.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'The change failed. Please try again.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'This code is not right — check it for typos.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'This session overlaps an existing appointment in your calendar.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'This voucher code is not valid for this offering.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'This offer is no longer valid. The list has been refreshed.',
+  'Er is een plaats vrij': 'A seat is available',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'A seat is available for you. Confirm as soon as possible — the offer expires at the latest on {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'There is currently no offering you can enroll in.',
+  'Geen sessies gepland.': 'No sessions scheduled.',
+  'Geweest': 'Past',
+  'Het aanbod kon niet worden opgehaald.':
+      'The offering could not be retrieved.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'In your time zone: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Registered',
+  'Inschrijven': 'Enroll',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Enrollment failed. Please try again.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'You can only enroll once you meet all admission requirements.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Enrollment for this offering is closed.',
+  'Kies per les precies één sessie.': 'Choose exactly one session per lesson.',
+  'Mijn inschrijvingen': 'My registrations',
+  'Niet aanwezig geweest': 'Was absent',
+  'Onbekende status': 'Unknown status',
+  'Op de wachtlijst': 'On the waitlist',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'On the waitlist, position {plaats} of {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Put me on the waitlist for the full session(s)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Enroll yourself in an offering of this organization.',
+  'Sessie': 'Session',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Too many attempts — try again in {seconden} seconds.',
+  'Toelatingseisen': 'Admission requirements',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'You are already enrolled in this offering.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'You are not registered for a session yet.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'You have reached the maximum number of enrollments for this offering.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'You do not yet meet the admission requirements.',
+  'Uitvoering': 'Offering',
+  'Uw inschrijving': 'Your registration',
+  'Uw inschrijving is verwerkt.': 'Your registration has been processed.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Your registrations could not be retrieved.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Your classroom sessions: upcoming and past.',
+  'Vol': 'Full',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Nearly there? Ask your organization whether a waiver is possible.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'A voucher code is required for this offering.',
+  'Vouchercode': 'Voucher code',
+  'Vouchercode vereist': 'Voucher code required',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Do you want to cancel your registration for {titel} on {datum}? Any waitlist spot will then go to the next person.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Self-cancellation was possible until {deadline}. After that, cancelling is only possible via {organisatie}.',
+  'ingeschreven': 'registered',
+  'nog niet voldaan': 'not yet met',
+  'ontheffing verleend': 'waiver granted',
+  'op de wachtlijst': 'on the waitlist',
+  'verloopt vóór de start': 'expires before the start',
+  'voldaan': 'met',
+  'wachtlijst': 'waitlist',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} classroom lessons · {sessies} sessions',
+  '{vrij} plaatsen vrij': '{vrij} seats free',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Heading levels {niveau} each have their own colour ({kleur}); the style has one heading colour.',
   '(weergegeven als {vervanger}, bewaard voor export)':

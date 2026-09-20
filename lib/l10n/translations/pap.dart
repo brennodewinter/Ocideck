@@ -666,6 +666,100 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Bo no por kansela mas: e plaso a pasá. Tuma kontakt ku bo organisashon.',
+  'Aanbod': 'Oferta',
+  'Aanwezig geweest': 'Taba presente',
+  'Afmelden': 'Kansela inskripshon',
+  'Afmelden voor bijeenkomst': 'Kansela inskripshon pa e sesion',
+  'Afzien': 'Rechasa',
+  'Bekijk mijn inschrijvingen': 'Mira mi inskripshonnan',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Mira kua evidensia bo a entrega.',
+  'Binnenkort': 'Pron',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'E kodigo no ta wordu warda i ta wordu manda solamente ora di inskribí.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'E sesion skohí ta yena. Skohe otro sesion of pone bo mes riba lista di spera.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'E kambio no a sosé. Purba atrobe.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'E kodigo akí no ta korekto — kontrol\'é pa eror di skirbí.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'E sesion akí ta koinsidí ku un sita eksistente na bo agenda.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'E kodigo di voucher akí no ta bálido pa e ofresé akí.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'E oferta akí ya no ta bálido. E lista a wordu aktualisá.',
+  'Er is een plaats vrij': 'Un lugá ta liber',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Un lugá ta disponibel pa bo. Konfirmá mas lihe posibel — e oferta ta kaduka mas lat {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'No tin nada pa inskribí riba awe.',
+  'Geen sessies gepland.': 'No tin sesion plania.',
+  'Geweest': 'Pasa',
+  'Het aanbod kon niet worden opgehaald.': 'E oferta no por a wordu haña.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Den bo zona di tempu: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Inskribí',
+  'Inschrijven': 'Inskribí',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Inskripshon no a sosé. Purba atrobe.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Bo por inskribí solamente ora bo kumpli ku tur e rekisitonan di admishon.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Inskripshon pa e ofresé akí ta kla.',
+  'Kies per les precies één sessie.': 'Skohe eksaktamente un sesion pa les.',
+  'Mijn inschrijvingen': 'Mi inskripshonnan',
+  'Niet aanwezig geweest': 'No taba presente',
+  'Onbekende status': 'Estado deskonosí',
+  'Op de wachtlijst': 'Riba lista di spera',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Riba lista di spera, posishon {plaats} di {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Pone mi riba lista di spera pa e sesion(nan) yená',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Inskribí bo mes pa un ofresé di e organisashon akí.',
+  'Sessie': 'Sesion',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Demasiá intento — purba atrobe den {seconden} sekònde.',
+  'Toelatingseisen': 'Rekisitonan di admishon',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Bo ya ta inskribí pa e ofresé akí.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Bo ainda no ta inskribí pa niun sesion.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Bo a yega e máksimo di inskripshonnan pa e ofresé akí.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Bo ainda no ta kumpli ku e rekisitonan di admishon.',
+  'Uitvoering': 'Ofresé',
+  'Uw inschrijving': 'Bo inskripshon',
+  'Uw inschrijving is verwerkt.': 'Bo inskripshon a wordu prosesá.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Bo inskripshonnan no por a wordu haña.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Bo sesionnan klasiko: promé i pasa.',
+  'Vol': 'Yená',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Kasi? Puntra bo organisashon si un dispensashon ta posibel.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Pa e ofresé akí un kodigo di voucher ta mester.',
+  'Vouchercode': 'Kodigo di voucher',
+  'Vouchercode vereist': 'Kodigo di voucher mester',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Bo kier kansela bo inskripshon pa {titel} riba {datum}? Un posibel lugá riba lista di spera lo bai pa e siguiente.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Kanselashon pa bo mes tabata posibel te {deadline}. Despues solamente por medio di {organisatie}.',
+  'ingeschreven': 'inskribí',
+  'nog niet voldaan': 'ainda no kumplí',
+  'ontheffing verleend': 'dispensashon otorgá',
+  'op de wachtlijst': 'riba lista di spera',
+  'verloopt vóór de start': 'kaduka prome ku e kuminsamentu',
+  'voldaan': 'kumplí',
+  'wachtlijst': 'lista di spera',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} lesnan klasiko · {sessies} sesionnan',
+  '{vrij} plaatsen vrij': '{vrij} lugánan liber',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Nivelnan di titulo {niveau} kada un tin su propio koló ({kleur}); e stilo konosé un koló di titulo so.',
   '(weergegeven als {vervanger}, bewaard voor export)':

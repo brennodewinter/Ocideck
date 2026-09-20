@@ -1604,6 +1604,87 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'DaH bI\'laHbe\': poH qu\' — ponglIj Daq',
+  'Aanbod': 'pong',
+  'Aanwezig geweest': 'pa\' \'oH',
+  'Afmelden': 'nga\'',
+  'Afmelden voor bijeenkomst': 'qab vI\'',
+  'Afzien': 'qu\'',
+  'Bekijk mijn inschrijvingen': 'jI\'emDaq',
+  'Bekijk welke bewijsstukken u heeft ingediend.': 'qeylIS lIj\'e\'',
+  'Binnenkort': 'tuq',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'mu\' rarbe\' net wIvbe\'',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Dutlhe\' wa\' qab. latlh wIv pagh qab poHlIj Daq',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'choH lulujpu\'. jatlhqa\'',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'mu\'vam rarbe\'be\' — Qaghmey yIbuq',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'qabvam Daq nuHwI\' DuH',
+  'Deze vouchercode is niet geldig voor deze uitvoering.': 'vam Dotlh pong',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'pongvam vIl. tetlh choHpu\'',
+  'Er is een plaats vrij': 'Daq vul',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Daq vul SoHvaD. nom nom — pong qu\' {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.': 'pong \'oHbe\'.',
+  'Geen sessies gepland.': 'qabmey nISbe\'',
+  'Geweest': 'ret',
+  'Het aanbod kon niet worden opgehaald.': 'pong jonlaHbe\'',
+  'In uw tijdzone: {datum} · {van}–{tot}': 'poHlIjDaq: {datum} · {van}–{tot}',
+  'Ingeschreven': 'qab qoQ',
+  'Inschrijven': 'lI\'',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.': 'qab lujpu\'. jatlhqa\'',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'DaH SoH qab qach neH',
+  'Inschrijven voor deze uitvoering is gesloten.': 'pongvam qoQ',
+  'Kies per les precies één sessie.': 'qab wa\'Daq',
+  'Mijn inschrijvingen': 'jI\'em',
+  'Niet aanwezig geweest': 'pa\' \'oHbe\'',
+  'Onbekende status': 'Dotlh Sovbe\'',
+  'Op de wachtlijst': 'poH',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'poH, Daq {plaats} {totaal}Daq',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)': 'qabDotlhDaq jIH',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.': 'pongDaq bI\'',
+  'Sessie': 'qab',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'tlhoy Doch — {seconden} qaS retlh',
+  'Toelatingseisen': 'qabDaq',
+  'U bent al ingeschreven voor deze uitvoering.': 'pongvamDaq qabpu\'',
+  'U bent nog niet ingeschreven voor een bijeenkomst.': 'qabDaq qabbe\'',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'pongvam qabDotlh maximum Daq',
+  'U voldoet nog niet aan de toelatingseisen.': 'qabDaq Daqbe\'',
+  'Uitvoering': 'pong',
+  'Uw inschrijving': 'qablIj',
+  'Uw inschrijving is verwerkt.': 'qablIj qaSpu\'',
+  'Uw inschrijvingen konden niet worden opgehaald.': 'qablIjmey jonlaHbe\'',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'qabmeylIj: tuq \'ej ret',
+  'Vol': 'vul',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'law\' \'? pongwIjDaq SuD',
+  'Voor deze uitvoering is een vouchercode vereist.': 'pongvam Dotlh poQ',
+  'Vouchercode': 'Dotlh',
+  'Vouchercode vereist': 'Dotlh poQ',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      '{titel} {datum}Daq bI\' vIneH\'a\'? poH Daq botlh',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      '{deadline}Daq bI\' lI\'. choH {organisatie} neH',
+  'ingeschreven': 'qab qoQ',
+  'nog niet voldaan': 'Dotlhbe\'',
+  'ontheffing verleend': 'qu\' Dotlh',
+  'op de wachtlijst': 'poH',
+  'verloopt vóór de start': 'qaSpu\'',
+  'voldaan': 'Dotlh',
+  'wachtlijst': 'poH',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} qabmey · {sessies} qab',
+  '{vrij} plaatsen vrij': '{vrij} Daq vul',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'nach patlh {niveau} Hoch nguv ghaj ({kleur}); wa\' nach nguv neH Sov motlhghach.',
   '(weergegeven als {vervanger}, bewaard voor export)':

@@ -1643,6 +1643,101 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Nu vă mai puteți anula: termenul a expirat. Contactați organizația dvs.',
+  'Aanbod': 'Ofertă',
+  'Aanwezig geweest': 'A fost prezent',
+  'Afmelden': 'Anulează înscrierea',
+  'Afmelden voor bijeenkomst': 'Anulare înscriere la sesiune',
+  'Afzien': 'Zavrni',
+  'Bekijk mijn inschrijvingen': 'Vezi înscrierile mele',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Vedeți ce dovezi ați depus.',
+  'Binnenkort': 'În curând',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Codul nu este stocat și este trimis doar la înscriere.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Sesiunea aleasă este completă. Alegeți alta sau înscrieți-vă pe lista de așteptare.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Modificarea nu a reușit. Încercați din nou.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Acest cod nu este corect — verificați erorile de tastare.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Această sesiune se suprapune cu o întâlnire existentă din calendarul dvs.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Acest cod de voucher nu este valabil pentru această ediție.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Această ofertă nu mai este valabilă. Lista a fost actualizată.',
+  'Er is een plaats vrij': 'Există un loc liber',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Există un loc liber pentru dvs. Confirmați cât mai curând — oferta expiră cel târziu la {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Momentan nu există nicio ofertă pentru înscriere.',
+  'Geen sessies gepland.': 'Nicio sesiune programată.',
+  'Geweest': 'Pretekle',
+  'Het aanbod kon niet worden opgehaald.': 'Oferta nu a putut fi încărcată.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'În fusul orar al dvs.: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Înscris',
+  'Inschrijven': 'Înscrie-te',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Înscrierea nu a reușit. Încercați din nou.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Vă puteți înscrie abia după ce îndepliniți toate cerințele de admitere.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Înscrierea pentru această ediție este închisă.',
+  'Kies per les precies één sessie.':
+      'Alegeți exact o sesiune pentru fiecare lecție.',
+  'Mijn inschrijvingen': 'Înscrierile mele',
+  'Niet aanwezig geweest': 'A fost absent',
+  'Onbekende status': 'Stare necunoscută',
+  'Op de wachtlijst': 'Pe lista de așteptare',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Pe lista de așteptare, locul {plaats} din {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Puneți-mă pe lista de așteptare pentru sesiunea(sesionile) completă(e)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Înscrieți-vă singur la o ediție a acestei organizații.',
+  'Sessie': 'Sesiune',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Prea multe încercări — încercați din nou în {seconden} secunde.',
+  'Toelatingseisen': 'Cerințe de admitere',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Sunteți deja înscris la această ediție.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Nu sunteți încă înscris la nicio sesiune.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Ați atins numărul maxim de înscrieri pentru această ediție.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Încă nu îndepliniți cerințele de admitere.',
+  'Uitvoering': 'Ediție',
+  'Uw inschrijving': 'Înscrierea dvs.',
+  'Uw inschrijving is verwerkt.': 'Înscrierea dvs. a fost procesată.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Înscrierile dvs. nu au putut fi încărcate.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Sesurile dvs. față în față: viitoare și trecute.',
+  'Vol': 'Completă',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Aproape? Întrebați organizația dacă este posibilă o derogare.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Pentru această ediție este necesar un cod de voucher.',
+  'Vouchercode': 'Cod de voucher',
+  'Vouchercode vereist': 'Cod de voucher necesar',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Doriți să vă anulați înscrierea la {titel} din {datum}? Un eventual loc pe lista de așteptare va trece la următorul.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Anularea individuală era posibilă până la {deadline}. După aceea, doar prin {organisatie}.',
+  'ingeschreven': 'înscris',
+  'nog niet voldaan': 'încă neîndeplinit',
+  'ontheffing verleend': 'derogare acordată',
+  'op de wachtlijst': 'pe lista de așteptare',
+  'verloopt vóór de start': 'expiră înainte de început',
+  'voldaan': 'îndeplinit',
+  'wachtlijst': 'listă de așteptare',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} lecții față în față · {sessies} sesiuni',
+  '{vrij} plaatsen vrij': '{vrij} locuri libere',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Nivelurile de titlu {niveau} au fiecare propria culoare ({kleur}); stilul cunoaște o singură culoare de titlu.',
   '(weergegeven als {vervanger}, bewaard voor export)':

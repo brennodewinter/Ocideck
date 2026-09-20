@@ -1634,6 +1634,101 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Daugiau nebegalite atsisakyti: terminas pasibaigė. Kreipkitės į savo organizaciją.',
+  'Aanbod': 'Pasiūlymas',
+  'Aanwezig geweest': 'Buvo',
+  'Afmelden': 'Atšaukti registraciją',
+  'Afmelden voor bijeenkomst': 'Atsisakyti užsiėmimo',
+  'Afzien': 'Atmest',
+  'Bekijk mijn inschrijvingen': 'Žiūrėti mano registracijas',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Peržiūrėkite, kokius įrodymus pateikėte.',
+  'Binnenkort': 'Netrukus',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Kodas nesaugomas ir siunčiamas tik registruojantis.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Pasirinkta sesija pilna. Pasirinkite kitą arba įsirašykite į laukiančiųjų sąrašą.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Pakeitimas nepavyko. Bandykite dar kartą.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Šis kodas neteisingas — patikrinkite rašybos klaidas.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Ši sesija dubliuojasi su esamu susitikimu jūsų kalendoriuje.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Šis kvito kodas negalioja šiai eilei.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Šis pasiūlymas nebegalioja. Sąrašas atnaujintas.',
+  'Er is een plaats vrij': 'Yra laisva vieta',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Jums yra laisva vieta. Patvirtinkite kuo greičiau — pasiūlymas baigiasi vėliausiai {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Šiuo metu nėra pasiūlymo, į kurį galėtumėte registruotis.',
+  'Geen sessies gepland.': 'Nėra suplanuotų sesijų.',
+  'Geweest': 'Buvusios',
+  'Het aanbod kon niet worden opgehaald.': 'Pasiūlymo nepavyko gauti.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Jūsų laiko juostoje: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Užsiregistravęs',
+  'Inschrijven': 'Registruotis',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Registracija nepavyko. Bandykite dar kartą.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Registruotis galėsite tik įvykdę visas priėmimo sąlygas.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Registracija į šią eilę uždaryta.',
+  'Kies per les precies één sessie.':
+      'Kiekvienai pamokai pasirinkite lygiai vieną sesiją.',
+  'Mijn inschrijvingen': 'Mano registracijos',
+  'Niet aanwezig geweest': 'Nebuvo',
+  'Onbekende status': 'Nežinoma būsena',
+  'Op de wachtlijst': 'Laukiančiųjų sąraše',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Laukiančiųjų sąraše, vieta {plaats} iš {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Įrašykite mane į laukiančiųjų sąrašą pilnai(-oms) sesijai(-oms)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Pats užsiregistruokite į šios organizacijos eilę.',
+  'Sessie': 'Sesija',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Per daug bandymų — bandykite dar kartą po {seconden} sekundžių.',
+  'Toelatingseisen': 'Priėmimo sąlygos',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Jūs jau užsiregistravę į šią eilę.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Dar nesate užsiregistravę į jokią sesiją.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Pasiekėte didžiausią registracijų skaičių šiai eilei.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Kol kas neatitinkate priėmimo sąlygų.',
+  'Uitvoering': 'Eilė',
+  'Uw inschrijving': 'Jūsų registracija',
+  'Uw inschrijving is verwerkt.': 'Jūsų registracija apdorota.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Jūsų registracijų nepavyko gauti.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Jūsų kontaktiniai užsiėmimai: būsimi ir praėję.',
+  'Vol': 'Pilna',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Beveik? Klauskite savo organizacijos, ar galimas atleidimas.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Šiai eilei reikalingas kvito kodas.',
+  'Vouchercode': 'Kvito kodas',
+  'Vouchercode vereist': 'Reikalingas kvito kodas',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Ar norite atsisakyti registracijos į {titel} {datum}? Galima vieta laukiančiųjų sąraše pereis kitam.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Savaitgalis atšaukti galėjote iki {deadline}. Vėliau tik per {organisatie}.',
+  'ingeschreven': 'užsiregistravęs',
+  'nog niet voldaan': 'dar neatitinka',
+  'ontheffing verleend': 'atleidimas suteiktas',
+  'op de wachtlijst': 'laukiančiųjų sąraše',
+  'verloopt vóór de start': 'baigiasi prieš pradžią',
+  'voldaan': 'atitinka',
+  'wachtlijst': 'laukiančiųjų sąrašas',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} kontaktinės pamokos · {sessies} sesijos',
+  '{vrij} plaatsen vrij': '{vrij} laisvų vietų',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Antraščių lygiai {niveau} kiekvienas turi savo spalvą ({kleur}); stilius žino tik vieną antraštės spalvą.',
   '(weergegeven als {vervanger}, bewaard voor export)':

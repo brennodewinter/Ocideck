@@ -1265,7 +1265,7 @@ paths:
       parameters:
         - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
         - { name: membership_id, in: path, required: true, schema: { type: string, format: uuid } }
-        - { name: If-Match, in: header, required: true, schema: { type: string }, description: Strong ETag returned by the membership detail endpoint, or `*` to match any current representation. }
+        - { name: If-Match, in: header, required: true, schema: { type: string }, description: "Strong ETag returned by the membership detail endpoint, or `*` to match any current representation." }
       requestBody:
         required: true
         content:
@@ -7048,6 +7048,10 @@ paths:
       summary: List course offerings
       parameters:
         - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: status, in: query, required: false, schema: { type: string, enum: [draft, open, closed, archived] } }
+        - { name: q, in: query, required: false, schema: { type: string } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer } }
       responses:
         "200":
           description: Course offerings.
@@ -7116,6 +7120,32 @@ paths:
         "403": { $ref: '#/components/responses/ProblemResponse' }
         "404": { $ref: '#/components/responses/ProblemResponse' }
 
+  /api/v1/organizations/{organization_id}/course-offerings/{offering_id}/session-series:
+    post:
+      tags: [Planning]
+      summary: Plan a recurring series of classroom sessions atomically
+      description: Creates every occurrence in one transaction. Occurrences are computed in the session's IANA timezone, so a 09:00 class stays at 09:00 across daylight-saving changes. With dry_run the server returns the per-occurrence conflict report without creating anything. A conflicting series is refused with 409 and the same report unless force is set.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SessionSeriesCreateRequest' }
+      responses:
+        "201":
+          description: Series report with the created sessions, or the dry-run conflict report.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionSeriesResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
   /api/v1/organizations/{organization_id}/course-offerings/{offering_id}/registrations:
     post:
       tags: [Planning]
@@ -7141,6 +7171,458 @@ paths:
         "403": { $ref: '#/components/responses/ProblemResponse' }
         "404": { $ref: '#/components/responses/ProblemResponse' }
         "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/course-offerings:
+    get:
+      tags: [Planning]
+      summary: Participant catalog of self-enrollable offerings
+      description: Only offerings flagged for self-enrollment, open, and inside their enrollment window. Sessions carry capacity and the caller's own waitlist position — never other participants.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100 } }
+        - { name: from, in: query, required: false, schema: { type: string, format: date-time } }
+        - { name: to, in: query, required: false, schema: { type: string, format: date-time } }
+      responses:
+        "200":
+          description: Enrollable offerings with sessions and eligibility.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SelfOfferingList' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/course-offerings/{offering_id}:
+    get:
+      tags: [Planning]
+      summary: One self-enrollable offering for the participant
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Offering with sessions and the caller's eligibility.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SelfOffering' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/course-offerings/{offering_id}/registrations:
+    post:
+      tags: [Planning]
+      summary: Enroll the caller in an offering
+      description: The participant is resolved from the access token — the body never carries a participant_id.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SelfRegistrationRequest' }
+      responses:
+        "201":
+          description: Enrollment with the bookings it created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RegistrationResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/bookings:
+    get:
+      tags: [Planning]
+      summary: The caller's own session bookings
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100 } }
+        - { name: include_past, in: query, required: false, schema: { type: boolean, default: false } }
+      responses:
+        "200":
+          description: Bookings with their sessions, earliest first.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MyBookingList' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/bookings/{booking_id}/cancel:
+    post:
+      tags: [Planning]
+      summary: Cancel the caller's own booking
+      description: Refused inside the offering's cancellation notice window.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Booking cancelled.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/bookings/{booking_id}/confirm:
+    post:
+      tags: [Planning]
+      summary: Accept a waitlist offer on the caller's booking
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Offer confirmed, seat booked.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/bookings/{booking_id}/decline:
+    post:
+      tags: [Planning]
+      summary: Release a waitlisted or offered booking of the caller
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Booking released.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/calendar-subscription:
+    post:
+      tags: [Planning]
+      summary: Issue or rotate the caller's calendar feed URL
+      description: Returns a signed, expiring feed URL for calendar subscription. Only the token's hash is stored; the plaintext URL is shown once. Issuing again rotates the token and invalidates the previous URL.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "201":
+          description: Subscription URL issued.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CalendarSubscription' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+    delete:
+      tags: [Planning]
+      summary: Revoke the caller's calendar feed URL
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "204": { description: Subscription revoked }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/calendar.ics:
+    get:
+      tags: [Planning]
+      summary: The caller's booking calendar feed (token-authenticated)
+      description: Serves an RFC 5545 feed of the participant's session bookings. The bearer token in the query string is the credential — no session is required. Cancelled bookings appear as STATUS:CANCELLED so clients remove them.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: token, in: query, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: iCalendar feed.
+          content:
+            text/calendar:
+              schema: { type: string }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/planning-settings:
+    get:
+      tags: [Planning]
+      summary: Planning notification settings
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Notification settings.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlanningSettings' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+    put:
+      tags: [Planning]
+      summary: Enable or disable planning notifications
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      requestBody:
+        required: true
+        content:
+          application/json: { schema: { $ref: '#/components/schemas/PlanningSettings' } }
+      responses:
+        "200":
+          description: Settings saved.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PlanningSettings' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/voucher-batches:
+    get:
+      tags: [Planning]
+      summary: List voucher batches
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100 } }
+      responses:
+        "200":
+          description: Batches newest-first with redemption counts.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/VoucherBatchList' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+    post:
+      tags: [Planning]
+      summary: Issue a batch of voucher codes
+      description: Generates the codes and stores only their hashes. The response carries the plaintext codes exactly once — as JSON by default, or as one-column CSV when the client asks for text/csv. They can never be retrieved again.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/VoucherBatchRequest' }
+      responses:
+        "201":
+          description: Batch issued; codes shown once.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/VoucherBatchCreateResponse' }
+            text/csv:
+              schema: { type: string, description: One code per row under a 'code' header. }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/voucher-batches/{batch_id}:
+    get:
+      tags: [Planning]
+      summary: Read one voucher batch with counts
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: batch_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Batch metadata and redemption counts.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/VoucherBatch' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/voucher-batches/{batch_id}/revoke:
+    post:
+      tags: [Planning]
+      summary: Revoke a batch and all its unredeemed vouchers
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: batch_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string, maxLength: 500 }
+      responses:
+        "204": { description: Batch revoked. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/voucher-batches/{batch_id}/vouchers:
+    get:
+      tags: [Planning]
+      summary: List the vouchers in a batch
+      description: Statuses only — codes and hashes are never returned.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: batch_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100 } }
+      responses:
+        "200":
+          description: Voucher statuses newest-first.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/VoucherList' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/vouchers/{voucher_id}/revoke:
+    post:
+      tags: [Planning]
+      summary: Revoke a single voucher
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: voucher_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Voucher revoked. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/vouchers/validate:
+    post:
+      tags: [Planning]
+      summary: Check a voucher code without consuming it
+      description: Rate-limited per account and per IP. The answer never echoes the code.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code: { type: string }
+      responses:
+        "200":
+          description: Validation outcome.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/VoucherValidation' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "429": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/course-offerings/{offering_id}/requirements:
+    get:
+      tags: [Planning]
+      summary: Read the offering's admission requirements
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: The requirement set with an ETag for If-Match updates.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RequirementSet' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+    put:
+      tags: [Planning]
+      summary: Replace the offering's admission requirements atomically
+      description: Requires training_session:manage or content:create. Keep existing requirement ids when updating — waivers reference them.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RequirementSet' }
+      responses:
+        "200":
+          description: The stored set with assigned requirement ids.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RequirementSet' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "412": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/course-offerings/{offering_id}/eligibility:
+    get:
+      tags: [Planning]
+      summary: Evaluate a participant against the admission requirements
+      description: A participant sees only their own outcome; staff needs enrollment:manage or training_session:manage for another participant.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: participant_id, in: query, required: false, schema: { type: string, format: uuid }, description: Defaults to the caller's own participant record. }
+      responses:
+        "200":
+          description: Per-requirement outcome with a displayable reason.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EligibilityResult' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/course-offerings/{offering_id}/waivers:
+    post:
+      tags: [Planning]
+      summary: Grant an audited exemption from one requirement
+      description: Requires enrollment:manage. The reason documents the exemption; it must not contain medical or personal particulars.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/WaiverRequest' }
+      responses:
+        "201":
+          description: Waiver granted.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Waiver' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/waivers/{waiver_id}:
+    delete:
+      tags: [Planning]
+      summary: Revoke a requirement waiver
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: waiver_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "204": { description: Waiver revoked. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
 
   /api/v1/organizations/{organization_id}/training-sessions/{session_id}/roster:
     get:
@@ -7173,6 +7655,409 @@ paths:
             schema: { $ref: '#/components/schemas/SessionAttendanceRequest' }
       responses:
         "204": { description: Attendance confirmed and lesson completion recalculated. }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/training-sessions:
+    get:
+      tags: [Planning]
+      summary: List training sessions across all offerings
+      description: Organization-wide agenda query. The from/to window is required and bounded; counts only, never participant names.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: from, in: query, required: true, schema: { type: string, format: date-time } }
+        - { name: to, in: query, required: true, schema: { type: string, format: date-time } }
+        - { name: room_id, in: query, required: false, schema: { type: string, format: uuid } }
+        - { name: instructor_id, in: query, required: false, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: query, required: false, schema: { type: string, format: uuid } }
+        - { name: course_id, in: query, required: false, schema: { type: string, format: uuid } }
+        - { name: status, in: query, required: false, schema: { type: string, enum: [scheduled, cancelled, completed] } }
+        - { name: q, in: query, required: false, schema: { type: string } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer } }
+      responses:
+        "200":
+          description: Sessions in start-time order.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/AgendaSessionList' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/training-sessions/{session_id}/waitlist:
+    get:
+      tags: [Planning]
+      summary: List the session waitlist
+      description: Planner view with names, positions and offer deadlines. Response is marked private, no-store.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+        - { name: limit, in: query, required: false, schema: { type: integer } }
+      responses:
+        "200":
+          description: Waitlist entries in position order.
+          headers:
+            Cache-Control: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/WaitlistResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/training-sessions/{session_id}:
+    get:
+      tags: [Planning]
+      summary: Get one classroom session
+      description: The ETag header is required for If-Match on PATCH.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: The session.
+          headers:
+            ETag: { schema: { type: string }, description: Strong entity tag for optimistic concurrency. }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TrainingSessionResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+    patch:
+      tags: [Planning]
+      summary: Modify a session's title, capacity, room, location or instructors
+      description: Merge-patch semantics. Room and instructor conflicts are re-validated; force bypasses them and is audited.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TrainingSessionPatchRequest' }
+      responses:
+        "200":
+          description: The updated session.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TrainingSessionResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "412": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/training-sessions/{session_id}/reschedule:
+    post:
+      tags: [Planning]
+      summary: Move a session in time
+      description: Re-validates room and instructor conflicts and keeps the bookings intact.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SessionRescheduleRequest' }
+      responses:
+        "200":
+          description: The rescheduled session.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TrainingSessionResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/training-sessions/{session_id}/cancel:
+    post:
+      tags: [Planning]
+      summary: Cancel a session and all its bookings
+      description: Requires a bounded reason. dry_run reports the affected participants without changing anything. Rejected once attendance is recorded.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SessionCancelRequest' }
+      responses:
+        "200":
+          description: Cancellation result.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionCancelResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/bookings/{booking_id}/cancel:
+    post:
+      tags: [Planning]
+      summary: Cancel one booking
+      description: Rejected once attendance is recorded for that participant in the session.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BookingCancelRequest' }
+      responses:
+        "200":
+          description: The cancelled booking.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/bookings/{booking_id}/move:
+    post:
+      tags: [Planning]
+      summary: Move a booking to another session of the same lesson
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BookingMoveRequest' }
+      responses:
+        "200":
+          description: The moved booking.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/bookings/{booking_id}/promote:
+    post:
+      tags: [Planning]
+      summary: Offer a waitlisted booking a freed seat
+      description: Requires a free seat. Inside 24 hours of the session start the seat is booked directly; otherwise the booking is offered with a deadline.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The promoted booking.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/bookings/{booking_id}/confirm:
+    post:
+      tags: [Planning]
+      summary: Confirm a pending seat offer
+      description: Allowed for planners and for the participant the booking belongs to.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The confirmed booking.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/bookings/{booking_id}/decline:
+    post:
+      tags: [Planning]
+      summary: Decline a seat offer or withdraw from the waitlist
+      description: Cancels the waitlisted or offered booking and promotes the next in line. Allowed for planners and for the participant the booking belongs to.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: booking_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The declined booking.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SessionBookingResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/me/teaching-sessions:
+    get:
+      tags: [Planning]
+      summary: List the caller's own teaching sessions
+      description: Returns the sessions the caller's membership is assigned to as instructor, overlapping the requested window. Defaults to the coming 90 days.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: from, in: query, required: false, schema: { type: string, format: date-time } }
+        - { name: to, in: query, required: false, schema: { type: string, format: date-time } }
+      responses:
+        "200":
+          description: Sessions the caller teaches.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TrainingSessionList' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/rooms:
+    get:
+      tags: [Planning]
+      summary: List bookable and retired rooms
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: bookable, in: query, required: false, schema: { type: boolean } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100 } }
+        - { name: cursor, in: query, required: false, schema: { type: string } }
+      responses:
+        "200":
+          description: Rooms.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RoomList' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+    post:
+      tags: [Planning]
+      summary: Create a room
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: Idempotency-Key, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RoomCreateRequest' }
+      responses:
+        "201":
+          description: Room created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RoomResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/rooms/{room_id}:
+    get:
+      tags: [Planning]
+      summary: Get a room
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: room_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Room with a strong ETag for If-Match updates.
+          headers: { ETag: { schema: { type: string } } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RoomResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+    patch:
+      tags: [Planning]
+      summary: Update a room
+      description: "Merge-patch semantics (RFC 7396): an absent field stays, an explicit null clears the field, a value sets it."
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: room_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RoomPatchRequest' }
+      responses:
+        "200":
+          description: Room updated.
+          headers: { ETag: { schema: { type: string } } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RoomResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "412": { $ref: '#/components/responses/ProblemResponse' }
+    delete:
+      tags: [Planning]
+      summary: Delete or retire a room
+      description: Deletes the room when no session references it; otherwise sets bookable=false so history is preserved.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: room_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Room was in use and is now retired (bookable=false).
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RoomResponse' }
+        "204": { description: Room deleted. }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+
+  /api/v1/organizations/{organization_id}/rooms/{room_id}/availability:
+    get:
+      tags: [Planning]
+      summary: Sessions occupying a room in a window
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: room_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: from, in: query, required: true, schema: { type: string, format: date-time } }
+        - { name: to, in: query, required: true, schema: { type: string, format: date-time } }
+      responses:
+        "200":
+          description: Sessions in the room overlapping the window.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TrainingSessionList' }
         "400": { $ref: '#/components/responses/ProblemResponse' }
         "401": { $ref: '#/components/responses/ProblemResponse' }
         "403": { $ref: '#/components/responses/ProblemResponse' }
@@ -7275,7 +8160,7 @@ paths:
         - { name: session_id, in: path, required: true, schema: { type: string, format: uuid } }
         - { name: Idempotency-Key, in: header, required: true, schema: { type: string, maxLength: 128 } }
       responses:
-        "201": { description: One-time code. Never replayed, cached or logged., headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamReleaseCode' } } } }
+        "201": { description: "One-time code. Never replayed, cached or logged.", headers: { Cache-Control: { schema: { type: string, const: 'private, no-store' } } }, content: { application/json: { schema: { $ref: '#/components/schemas/ExamReleaseCode' } } } }
 
   /api/v1/organizations/{org_id}/exam-sessions/{session_id}/release-codes/current:
     delete:
@@ -7585,10 +8470,22 @@ components:
           pattern: '^[0-9a-f]{64}$'
           description: Optional organization-owned PNG, JPEG, or WebP image.
         self_enrollment_enabled: { type: boolean, default: false }
+        voucher_required:
+          type: boolean
+          default: false
+          description: When true, every registration must redeem a valid voucher code.
+        enrollment_opens_at: { type: string, format: date-time, nullable: true }
+        enrollment_closes_at: { type: string, format: date-time, nullable: true }
+        cancellation_notice_hours:
+          type: integer
+          minimum: 0
+          nullable: true
+          description: Self-cancellation is refused within this many hours before the session.
+        max_self_enrollments_per_participant: { type: integer, minimum: 1, default: 1 }
 
     CourseOfferingResponse:
       type: object
-      required: [id, course_version_id, name, self_enrollment_enabled, status, created_at, classroom_lessons]
+      required: [id, course_version_id, name, self_enrollment_enabled, voucher_required, status, created_at, classroom_lessons]
       properties:
         id: { type: string, format: uuid }
         course_version_id: { type: string, format: uuid }
@@ -7598,7 +8495,12 @@ components:
           nullable: true
           pattern: '^[0-9a-f]{64}$'
         self_enrollment_enabled: { type: boolean }
+        voucher_required: { type: boolean }
         status: { type: string, enum: [draft, open, closed, archived] }
+        enrollment_opens_at: { type: string, format: date-time, nullable: true }
+        enrollment_closes_at: { type: string, format: date-time, nullable: true }
+        cancellation_notice_hours: { type: integer, nullable: true }
+        max_self_enrollments_per_participant: { type: integer }
         created_at: { type: string, format: date-time }
         classroom_lessons:
           type: array
@@ -7616,22 +8518,368 @@ components:
         offerings:
           type: array
           items: { $ref: '#/components/schemas/CourseOfferingResponse' }
+        next_cursor: { type: string }
 
     TrainingSessionCreateRequest:
       type: object
-      required: [lesson_id, title, starts_at, ends_at, timezone, location, capacity]
+      required: [lesson_id, title, starts_at, ends_at, timezone, capacity]
+      description: Either room_id, location, both or neither may be set. A session without a place is valid; clients show "location not yet known".
       properties:
         lesson_id: { type: string }
         title: { type: string, minLength: 1 }
         starts_at: { type: string, format: date-time }
         ends_at: { type: string, format: date-time }
         timezone: { type: string, description: Original IANA timezone used for human planning. }
-        location: { type: string, minLength: 1 }
+        location: { type: string, minLength: 1, description: Free-text place when no room from the list applies (external address, online). }
+        room_id: { type: string, format: uuid }
         capacity: { type: integer, minimum: 1 }
+        force:
+          type: boolean
+          default: false
+          description: Book despite an overlapping session in the same room. Audited.
+        capacity_override:
+          type: object
+          required: [reason]
+          properties:
+            reason: { type: string, minLength: 1, description: Why the session may exceed the room capacity. }
+        instructors:
+          type: array
+          items: { $ref: '#/components/schemas/SessionInstructorAssignment' }
+          description: Memberships assigned to teach this session. An overlap with another scheduled session is rejected unless force is set.
+
+    SessionSeriesCreateRequest:
+      type: object
+      required: [lesson_id, title, starts_at, ends_at, timezone, capacity, recurrence]
+      description: Session template plus recurrence rule. At most 52 occurrences per call.
+      properties:
+        lesson_id: { type: string }
+        title: { type: string, minLength: 1 }
+        starts_at: { type: string, format: date-time, description: First occurrence; the local wall-clock time is reused for every occurrence. }
+        ends_at: { type: string, format: date-time }
+        timezone: { type: string, description: IANA timezone the recurrence is computed in. }
+        location: { type: string, minLength: 1 }
+        room_id: { type: string, format: uuid }
+        capacity: { type: integer, minimum: 1 }
+        force:
+          type: boolean
+          default: false
+          description: Create conflicting occurrences anyway. Audited.
+        capacity_override:
+          type: object
+          required: [reason]
+          properties:
+            reason: { type: string, minLength: 1 }
+        instructors:
+          type: array
+          items: { $ref: '#/components/schemas/SessionInstructorAssignment' }
+        recurrence: { $ref: '#/components/schemas/SessionSeriesRecurrence' }
+        dry_run:
+          type: boolean
+          default: false
+          description: Return the conflict report without creating sessions.
+
+    SessionSeriesRecurrence:
+      type: object
+      required: [frequency]
+      properties:
+        frequency: { type: string, enum: [weekly, biweekly, dates] }
+        count: { type: integer, minimum: 1, maximum: 52, description: Required for weekly and biweekly unless until is set. }
+        until: { type: string, format: date, description: Last allowed occurrence date (local). }
+        dates: { type: array, items: { type: string, description: Local date as YYYY-MM-DD. }, description: Explicit local dates; required for frequency dates. }
+        skip_dates: { type: array, items: { type: string, description: Local date as YYYY-MM-DD. }, description: Local dates dropped from the series. }
+
+    SeriesOccurrence:
+      type: object
+      required: [starts_at, ends_at, conflicts]
+      properties:
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time }
+        conflicts:
+          type: array
+          items: { type: string, enum: [room_overlap, instructor_overlap] }
+
+    SessionSeriesResponse:
+      type: object
+      required: [series_id, occurrences, dry_run]
+      properties:
+        series_id: { type: string, format: uuid }
+        sessions:
+          type: array
+          items: { $ref: '#/components/schemas/TrainingSessionResponse' }
+        occurrences:
+          type: array
+          items: { $ref: '#/components/schemas/SeriesOccurrence' }
+        dry_run: { type: boolean }
+
+    AdmissionRequirement:
+      type: object
+      description: A leaf requirement or a one-level group combined with all_of or any_of.
+      properties:
+        id: { type: string, format: uuid, description: Assigned by the server; preserve it on updates to keep waivers valid. }
+        kind: { type: string, enum: [qualification, course_completion] }
+        target_id: { type: string, format: uuid, description: Skill id for qualification, course id for course_completion. }
+        minimum_level: { type: integer, minimum: 1, description: Stored for the contract; the skill domain does not model levels yet. }
+        valid_on: { type: string, enum: [session_start, registration] }
+        waivable: { type: boolean, default: false }
+        label: { type: string, description: Display name used in outcome reasons. }
+        all_of:
+          type: array
+          items: { $ref: '#/components/schemas/AdmissionRequirement' }
+        any_of:
+          type: array
+          items: { $ref: '#/components/schemas/AdmissionRequirement' }
+
+    RequirementSet:
+      type: object
+      required: [requirements]
+      properties:
+        requirements:
+          type: array
+          items: { $ref: '#/components/schemas/AdmissionRequirement' }
+
+    RequirementOutcome:
+      type: object
+      required: [requirement_id, kind, target_id, status, reason]
+      properties:
+        requirement_id: { type: string }
+        kind: { type: string, enum: [qualification, course_completion] }
+        target_id: { type: string }
+        label: { type: string }
+        status: { type: string, enum: [met, not_met, waived, expires_before_start] }
+        reason: { type: string, description: Factual, displayable explanation referring to the requirement. }
+
+    EligibilityResult:
+      type: object
+      required: [eligible, outcomes]
+      properties:
+        eligible: { type: boolean }
+        outcomes:
+          type: array
+          items: { $ref: '#/components/schemas/RequirementOutcome' }
+
+    WaiverRequest:
+      type: object
+      required: [requirement_id, participant_id, reason]
+      properties:
+        requirement_id: { type: string }
+        participant_id: { type: string, format: uuid }
+        reason: { type: string, minLength: 1, maxLength: 500, description: Documents the exemption; no medical or personal particulars. }
+        expires_at: { type: string, format: date-time }
+
+    Waiver:
+      type: object
+      required: [id, offering_id, requirement_id, participant_id, granted_by, reason, created_at]
+      properties:
+        id: { type: string, format: uuid }
+        offering_id: { type: string, format: uuid }
+        requirement_id: { type: string }
+        participant_id: { type: string, format: uuid }
+        granted_by: { type: string, format: uuid }
+        reason: { type: string }
+        expires_at: { type: string, format: date-time }
+        created_at: { type: string, format: date-time }
+
+
+
+    SelfRegistrationRequest:
+      type: object
+      required: [session_ids]
+      properties:
+        session_ids:
+          type: array
+          uniqueItems: true
+          items: { type: string, format: uuid }
+        allow_waitlist: { type: boolean, default: false }
+        voucher_code: { type: string, description: Required when the offering has voucher_required. }
+
+    SelfSession:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/TrainingSessionResponse'
+        - type: object
+          required: [free_seats]
+          properties:
+            free_seats: { type: integer }
+            waitlist_position: { type: integer }
+
+    SelfOffering:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/CourseOfferingResponse'
+        - type: object
+          required: [sessions, eligibility]
+          properties:
+            sessions:
+              type: array
+              items: { $ref: '#/components/schemas/SelfSession' }
+            eligibility:
+              type: object
+              required: [eligible]
+              properties:
+                eligible: { type: boolean }
+                outcomes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      requirement_id: { type: string }
+                      label: { type: string }
+                      status: { type: string, enum: [met, not_met, waived] }
+                      reason: { type: string }
+
+    SelfOfferingList:
+      type: object
+      required: [offerings]
+      properties:
+        offerings:
+          type: array
+          items: { $ref: '#/components/schemas/SelfOffering' }
+        next_cursor: { type: string }
+
+    MyBooking:
+      type: object
+      required: [id, session_id, enrollment_id, status, participant_id, session_title, starts_at, ends_at, timezone, offering_id, offering_name]
+      properties:
+        id: { type: string, format: uuid }
+        session_id: { type: string, format: uuid }
+        enrollment_id: { type: string, format: uuid }
+        status: { type: string, enum: [booked, waitlisted, offered, cancelled] }
+        participant_id: { type: string, format: uuid }
+        session_title: { type: string }
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time }
+        timezone: { type: string }
+        offering_id: { type: string, format: uuid }
+        offering_name: { type: string }
+
+    MyBookingList:
+      type: object
+      required: [bookings]
+      properties:
+        bookings:
+          type: array
+          items: { $ref: '#/components/schemas/MyBooking' }
+        next_cursor: { type: string }
+
+    CalendarSubscription:
+      type: object
+      required: [url, expires_at]
+      properties:
+        url:
+          type: string
+          description: Feed URL carrying the bearer token, relative to the API base.
+        expires_at: { type: string, format: date-time }
+
+    PlanningSettings:
+      type: object
+      required: [notifications_enabled]
+      properties:
+        notifications_enabled:
+          type: boolean
+          description: Whether planning e-mail notifications (confirmations, changes, cancellations, waitlist offers, reminders) are sent for this organization.
+
+    RegistrationResponse:
+      type: object
+      required: [enrollment_id, bookings]
+      properties:
+        enrollment_id: { type: string, format: uuid }
+        bookings:
+          type: array
+          items: { $ref: '#/components/schemas/SessionBookingResponse' }
+
+    VoucherBatchRequest:
+      type: object
+      required: [label, quantity, valid_from]
+      properties:
+        label: { type: string, minLength: 1 }
+        offering_id: { type: string, format: uuid, nullable: true, description: Empty means the voucher applies organization-wide. }
+        quantity: { type: integer, minimum: 1, maximum: 1000 }
+        valid_from: { type: string, format: date-time }
+        valid_until: { type: string, format: date-time }
+        max_redemptions_per_code: { type: integer, minimum: 1, default: 1 }
+        note: { type: string }
+
+    VoucherBatch:
+      type: object
+      required: [id, label, quantity, valid_from, max_redemptions_per_code, issued, redeemed, revoked, revoked_count, created_at]
+      properties:
+        id: { type: string, format: uuid }
+        label: { type: string }
+        offering_id: { type: string, format: uuid, nullable: true }
+        quantity: { type: integer }
+        valid_from: { type: string, format: date-time }
+        valid_until: { type: string, format: date-time }
+        max_redemptions_per_code: { type: integer }
+        note: { type: string }
+        issued: { type: integer }
+        redeemed: { type: integer }
+        revoked: { type: boolean }
+        revoked_count: { type: integer }
+        created_at: { type: string, format: date-time }
+
+    VoucherBatchList:
+      type: object
+      required: [batches]
+      properties:
+        batches:
+          type: array
+          items: { $ref: '#/components/schemas/VoucherBatch' }
+        next_cursor: { type: string }
+
+    VoucherBatchCreateResponse:
+      type: object
+      required: [batch, codes]
+      properties:
+        batch: { $ref: '#/components/schemas/VoucherBatch' }
+        codes:
+          type: array
+          items: { type: string }
+          description: Plaintext codes — returned exactly once, never stored.
+
+    Voucher:
+      type: object
+      required: [id, batch_id, status, redeemed_count, created_at]
+      properties:
+        id: { type: string, format: uuid }
+        batch_id: { type: string, format: uuid }
+        status: { type: string, enum: [issued, redeemed, revoked, expired] }
+        redeemed_count: { type: integer }
+        created_at: { type: string, format: date-time }
+
+    VoucherList:
+      type: object
+      required: [vouchers]
+      properties:
+        vouchers:
+          type: array
+          items: { $ref: '#/components/schemas/Voucher' }
+        next_cursor: { type: string }
+
+    VoucherValidation:
+      type: object
+      required: [valid]
+      properties:
+        valid: { type: boolean }
+        reason: { type: string }
+
+    SessionInstructorAssignment:
+      type: object
+      required: [membership_id, role]
+      properties:
+        membership_id: { type: string, format: uuid, description: Organization membership assigned to teach. }
+        role: { type: string, enum: [lead, assistant] }
+
+    SessionInstructor:
+      type: object
+      required: [membership_id, role, display_name]
+      properties:
+        membership_id: { type: string, format: uuid }
+        role: { type: string, enum: [lead, assistant] }
+        display_name: { type: string }
 
     TrainingSessionResponse:
       type: object
-      required: [id, course_offering_id, lesson_id, title, starts_at, ends_at, timezone, location, capacity, booked, waitlisted, status]
+      required: [id, course_offering_id, lesson_id, title, starts_at, ends_at, timezone, location, room_id, capacity, booked, waitlisted, offered, status, instructors]
       properties:
         id: { type: string, format: uuid }
         course_offering_id: { type: string, format: uuid }
@@ -7640,11 +8888,16 @@ components:
         starts_at: { type: string, format: date-time }
         ends_at: { type: string, format: date-time }
         timezone: { type: string }
-        location: { type: string }
+        location: { type: string, nullable: true }
+        room_id: { type: string, format: uuid, nullable: true }
         capacity: { type: integer }
         booked: { type: integer }
         waitlisted: { type: integer }
+        offered: { type: integer }
         status: { type: string, enum: [scheduled, cancelled, completed] }
+        instructors:
+          type: array
+          items: { $ref: '#/components/schemas/SessionInstructor' }
 
     TrainingSessionList:
       type: object
@@ -7653,6 +8906,39 @@ components:
         sessions:
           type: array
           items: { $ref: '#/components/schemas/TrainingSessionResponse' }
+
+    AgendaSession:
+      type: object
+      required: [id, course_offering_id, lesson_id, title, starts_at, ends_at, timezone, location, room_id, capacity, booked, waitlisted, offered, status, instructors, offering_name, room_name]
+      properties:
+        id: { type: string, format: uuid }
+        course_offering_id: { type: string, format: uuid }
+        lesson_id: { type: string }
+        title: { type: string }
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time }
+        timezone: { type: string }
+        location: { type: string, nullable: true }
+        room_id: { type: string, format: uuid, nullable: true }
+        capacity: { type: integer }
+        booked: { type: integer }
+        waitlisted: { type: integer }
+        offered: { type: integer }
+        status: { type: string, enum: [scheduled, cancelled, completed] }
+        instructors:
+          type: array
+          items: { $ref: '#/components/schemas/SessionInstructor' }
+        offering_name: { type: string }
+        room_name: { type: string, nullable: true }
+
+    AgendaSessionList:
+      type: object
+      required: [sessions]
+      properties:
+        sessions:
+          type: array
+          items: { $ref: '#/components/schemas/AgendaSession' }
+        next_cursor: { type: string }
 
     ManagedRegistrationRequest:
       type: object
@@ -7664,6 +8950,9 @@ components:
           uniqueItems: true
           items: { type: string, format: uuid }
         allow_waitlist: { type: boolean, default: false }
+        voucher_code:
+          type: string
+          description: Access voucher code redeemed atomically with the booking. Required when the offering has voucher_required.
 
     SessionBookingResponse:
       type: object
@@ -7671,7 +8960,101 @@ components:
       properties:
         id: { type: string, format: uuid }
         session_id: { type: string, format: uuid }
-        status: { type: string, enum: [booked, waitlisted, cancelled] }
+        status: { type: string, enum: [booked, waitlisted, offered, cancelled, no_show, attended] }
+
+    WaitlistEntry:
+      type: object
+      required: [booking_id, participant_id, display_name, status, position, waitlisted_at]
+      properties:
+        booking_id: { type: string, format: uuid }
+        participant_id: { type: string, format: uuid }
+        display_name: { type: string }
+        status: { type: string, enum: [waitlisted, offered] }
+        position: { type: integer }
+        waitlisted_at: { type: string, format: date-time }
+        offered_at: { type: string, format: date-time }
+        offer_expires_at: { type: string, format: date-time }
+
+    WaitlistResponse:
+      type: object
+      required: [entries]
+      properties:
+        entries:
+          type: array
+          items: { $ref: '#/components/schemas/WaitlistEntry' }
+        next_cursor: { type: string }
+
+    TrainingSessionPatchRequest:
+      type: object
+      properties:
+        title: { type: string, minLength: 1 }
+        capacity: { type: integer, minimum: 1 }
+        room_id: { type: string, format: uuid, nullable: true, description: Explicit null detaches the room. }
+        location: { type: string, nullable: true, description: Explicit null clears the free-text location. }
+        instructors:
+          type: array
+          items: { $ref: '#/components/schemas/SessionInstructorAssignment' }
+          description: Replaces the whole assignment set when present.
+        force:
+          type: boolean
+          default: false
+          description: Apply despite a room or instructor overlap. Audited.
+        capacity_override:
+          type: object
+          required: [reason]
+          properties:
+            reason: { type: string, minLength: 1, description: Why the session may exceed the room capacity. }
+
+    SessionRescheduleRequest:
+      type: object
+      required: [starts_at, ends_at, timezone]
+      properties:
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time }
+        timezone: { type: string, minLength: 1 }
+        room_id: { type: string, format: uuid, nullable: true, description: Explicit null detaches the room. }
+        force:
+          type: boolean
+          default: false
+          description: Reschedule despite a room or instructor overlap. Audited.
+        capacity_override:
+          type: object
+          required: [reason]
+          properties:
+            reason: { type: string, minLength: 1 }
+
+    SessionCancelRequest:
+      type: object
+      required: [reason]
+      properties:
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Bounded free text for the audit trail; must not contain personal data.
+        dry_run:
+          type: boolean
+          default: false
+          description: Report the affected participants without changing anything.
+
+    SessionCancelResponse:
+      type: object
+      required: [cancelled, dry_run, affected]
+      properties:
+        cancelled: { type: boolean }
+        dry_run: { type: boolean }
+        affected: { type: integer, description: Number of live bookings cancelled (or that would be). }
+
+    BookingCancelRequest:
+      type: object
+      properties:
+        reason: { type: string, maxLength: 500, description: Optional bounded reason; must not contain personal data. }
+
+    BookingMoveRequest:
+      type: object
+      required: [session_id]
+      properties:
+        session_id: { type: string, format: uuid, description: Scheduled session of the same lesson. }
 
     ManagedRegistrationResponse:
       type: object
@@ -7724,6 +9107,64 @@ components:
           type: array
           minItems: 1
           items: { $ref: '#/components/schemas/AttendanceEntry' }
+
+    RoomCreateRequest:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string, minLength: 1 }
+        building: { type: string, nullable: true }
+        address:
+          type: string
+          nullable: true
+          description: Organization-sensitive; stays within the tenant.
+        capacity: { type: integer, minimum: 1, nullable: true }
+        bookable: { type: boolean, default: true }
+        features:
+          type: array
+          items: { type: string }
+          description: e.g. beamer, hybrid setup, wheelchair access.
+        notes: { type: string, nullable: true }
+
+    RoomPatchRequest:
+      type: object
+      description: Merge-patch (RFC 7396). Absent fields stay unchanged; explicit null clears a nullable field.
+      properties:
+        name: { type: string, minLength: 1 }
+        building: { type: string, nullable: true }
+        address: { type: string, nullable: true }
+        capacity: { type: integer, minimum: 1, nullable: true }
+        bookable: { type: boolean }
+        features:
+          type: array
+          items: { type: string }
+        notes: { type: string, nullable: true }
+
+    RoomResponse:
+      type: object
+      required: [id, name, building, address, capacity, bookable, features, notes, created_at, updated_at]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        building: { type: string, nullable: true }
+        address: { type: string, nullable: true }
+        capacity: { type: integer, nullable: true }
+        bookable: { type: boolean }
+        features:
+          type: array
+          items: { type: string }
+        notes: { type: string, nullable: true }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
+    RoomList:
+      type: object
+      required: [rooms]
+      properties:
+        rooms:
+          type: array
+          items: { $ref: '#/components/schemas/RoomResponse' }
+        next_cursor: { type: string }
 
     AssetUploadResponse:
       type: object

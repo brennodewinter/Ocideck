@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:62af8712-1d80-53e4-804f-efbce8aab039",
+  "serialNumber": "urn:uuid:b9f0ab8c-5835-57f8-8434-35d04e876017",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-19T15:29:34.785708Z",
+    "timestamp": "2026-09-20T00:18:10.988397Z",
     "tools": {
       "components": [
         {
@@ -6777,6 +6777,48 @@
       ]
     },
     {
+      "bom-ref": "pkg:pub/timezone@0.11.1",
+      "type": "library",
+      "supplier": {
+        "name": "dart-lang",
+        "url": [
+          "https://github.com/dart-lang"
+        ]
+      },
+      "name": "timezone",
+      "version": "0.11.1",
+      "purl": "pkg:pub/timezone@0.11.1",
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "981d1020d6ef8fe1e7b3de5054e5b25579ae7c403d7734adc508ffc47668e9cb"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/timezone/versions/0.11.1"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
+        }
+      ]
+    },
+    {
       "bom-ref": "pkg:pub/tuple@2.0.2",
       "type": "library",
       "supplier": {
@@ -9137,6 +9179,7 @@
         "pkg:pub/plugin_platform_interface@2.1.8",
         "pkg:pub/re_highlight@0.0.3",
         "pkg:pub/shared_preferences@2.5.5",
+        "pkg:pub/timezone@0.11.1",
         "pkg:pub/url_launcher@6.3.2",
         "pkg:pub/url_launcher_platform_interface@2.3.2",
         "pkg:pub/uuid@4.6.0",
@@ -10531,6 +10574,13 @@
         "pkg:pub/stream_channel@2.1.4",
         "pkg:pub/string_scanner@1.4.1",
         "pkg:pub/term_glyph@1.2.2"
+      ]
+    },
+    {
+      "ref": "pkg:pub/timezone@0.11.1",
+      "dependsOn": [
+        "pkg:pub/http@1.6.0",
+        "pkg:pub/path@1.9.1"
       ]
     },
     {

@@ -2538,6 +2538,100 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Artık iptal edemezsiniz: süre doldu. Kuruluşunuzla iletişime geçin.',
+  'Aanbod': 'Teklif',
+  'Aanwezig geweest': 'Katıldı',
+  'Afmelden': 'Kaydı iptal et',
+  'Afmelden voor bijeenkomst': 'Oturum kaydını iptal et',
+  'Afzien': 'Reddet',
+  'Bekijk mijn inschrijvingen': 'Kayıtlarımı görüntüle',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Gönderdiğiniz kanıtları görün.',
+  'Binnenkort': 'Yakında',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Kod saklanmaz ve yalnızca kayıt sırasında gönderilir.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Seçilen oturum dolu. Başka bir oturum seçin veya bekleme listesine katılın.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Değişiklik başarısız oldu. Tekrar deneyin.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Bu kod doğru değil — yazım hatalarını kontrol edin.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Bu oturum takviminizdeki mevcut bir randevuyla çakışıyor.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Bu kupon kodu bu düzenleme için geçerli değil.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Bu teklif artık geçerli değil. Liste yenilendi.',
+  'Er is een plaats vrij': 'Yer var',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Sizin için bir yer var. En kısa sürede onaylayın — teklif en geç {deadline} tarihinde sona eriyor.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Şu anda kaydolabileceğiniz bir teklif yok.',
+  'Geen sessies gepland.': 'Planlanmış oturum yok.',
+  'Geweest': 'Geçmiş',
+  'Het aanbod kon niet worden opgehaald.': 'Teklif alınamadı.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Saat diliminizde: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Kayıtlı',
+  'Inschrijven': 'Kaydol',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Kayıt başarısız oldu. Tekrar deneyin.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Kayıt ancak tüm kabul koşullarını karşıladığınızda mümkündür.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Bu düzenleme için kayıt kapandı.',
+  'Kies per les precies één sessie.':
+      'Her ders için tam olarak bir oturum seçin.',
+  'Mijn inschrijvingen': 'Kayıtlarım',
+  'Niet aanwezig geweest': 'Katılmadı',
+  'Onbekende status': 'Bilinmeyen durum',
+  'Op de wachtlijst': 'Bekleme listesinde',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Bekleme listesinde, {totaal} içinden {plaats}. sıra',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Dolu oturum(lar) için beni bekleme listesine al',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Bu kuruluşun bir düzenlemesine kendiniz kaydolun.',
+  'Sessie': 'Oturum',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Çok fazla deneme — {seconden} saniye sonra tekrar deneyin.',
+  'Toelatingseisen': 'Kabul koşulları',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Bu düzenlemeye zaten kayıtlısınız.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Henüz bir oturuma kayıtlı değilsiniz.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Bu düzenleme için azami kayıt sayısına ulaştınız.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Kabul koşullarını henüz karşılamıyorsunuz.',
+  'Uitvoering': 'Düzenleme',
+  'Uw inschrijving': 'Kaydınız',
+  'Uw inschrijving is verwerkt.': 'Kaydınız işlendi.',
+  'Uw inschrijvingen konden niet worden opgehaald.': 'Kayıtlarınız alınamadı.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Yüz yüze oturumlarınız: yaklaşan ve geçmiş.',
+  'Vol': 'Dolu',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Neredeyse? Kuruluşunuza muafiyet mümkün olup olmadığını sorun.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Bu düzenleme için kupon kodu gereklidir.',
+  'Vouchercode': 'Kupon kodu',
+  'Vouchercode vereist': 'Kupon kodu gerekli',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      '{titel} ({datum}) kaydınızı iptal etmek istiyor musunuz? Bekleme listesindeki yer sıradaki kişiye geçer.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Kendi iptaliniz {deadline} tarihine kadar mümkündü. Sonrasında yalnızca {organisatie} aracılığıyla iptal edilebilir.',
+  'ingeschreven': 'kayıtlı',
+  'nog niet voldaan': 'henüz karşılanmadı',
+  'ontheffing verleend': 'muafiyet verildi',
+  'op de wachtlijst': 'bekleme listesinde',
+  'verloopt vóór de start': 'başlangıçtan önce sona eriyor',
+  'voldaan': 'karşılandı',
+  'wachtlijst': 'bekleme listesi',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} yüz yüze ders · {sessies} oturum',
+  '{vrij} plaatsen vrij': '{vrij} boş yer',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       '{niveau} başlık düzeylerinin her birinin kendi rengi var ({kleur}); stil yalnızca bir başlık rengi tanır.',
   '(weergegeven als {vervanger}, bewaard voor export)':

@@ -664,6 +664,101 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Ya no puede darse de baja: el plazo ha vencido. Póngase en contacto con su organización.',
+  'Aanbod': 'Oferta',
+  'Aanwezig geweest': 'Estuvo presente',
+  'Afmelden': 'Cancelar inscripción',
+  'Afmelden voor bijeenkomst': 'Cancelar inscripción a la sesión',
+  'Afzien': 'Rechazar',
+  'Bekijk mijn inschrijvingen': 'Ver mis inscripciones',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Vea qué pruebas ha enviado.',
+  'Binnenkort': 'Próximamente',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'El código no se guarda y solo se envía al inscribirse.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'La sesión elegida está llena. Elija otra sesión o apúntese a la lista de espera.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'El cambio no se ha podido realizar. Inténtelo de nuevo.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Este código no es correcto: compruebe si hay errores de escritura.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Esta sesión se solapa con una cita existente en su agenda.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Este código de cupón no es válido para esta convocatoria.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Esta oferta ya no es válida. La lista se ha actualizado.',
+  'Er is een plaats vrij': 'Hay una plaza libre',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Hay una plaza libre para usted. Confirme lo antes posible: la oferta caduca a más tardar el {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Actualmente no hay ninguna convocatoria a la que inscribirse.',
+  'Geen sessies gepland.': 'No hay sesiones programadas.',
+  'Geweest': 'Pasadas',
+  'Het aanbod kon niet worden opgehaald.': 'No se pudo obtener el catálogo.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'En su zona horaria: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Inscrito',
+  'Inschrijven': 'Inscribirse',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'La inscripción no se ha podido realizar. Inténtelo de nuevo.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Solo puede inscribirse cuando cumpla todos los requisitos de admisión.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'La inscripción a esta convocatoria está cerrada.',
+  'Kies per les precies één sessie.':
+      'Elija exactamente una sesión por lección.',
+  'Mijn inschrijvingen': 'Mis inscripciones',
+  'Niet aanwezig geweest': 'No estuvo presente',
+  'Onbekende status': 'Estado desconocido',
+  'Op de wachtlijst': 'En lista de espera',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'En lista de espera, puesto {plaats} de {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Apúnteme a la lista de espera de las sesiones completas',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Inscríbase usted mismo en una convocatoria de esta organización.',
+  'Sessie': 'Sesión',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Demasiados intentos: inténtelo de nuevo en {seconden} segundos.',
+  'Toelatingseisen': 'Requisitos de admisión',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Ya está inscrito en esta convocatoria.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Aún no está inscrito en ninguna sesión.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Ha alcanzado el número máximo de inscripciones para esta convocatoria.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Aún no cumple los requisitos de admisión.',
+  'Uitvoering': 'Convocatoria',
+  'Uw inschrijving': 'Su inscripción',
+  'Uw inschrijving is verwerkt.': 'Su inscripción ha sido procesada.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'No se pudieron obtener sus inscripciones.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Sus sesiones presenciales: próximas y pasadas.',
+  'Vol': 'Completa',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      '¿Casi? Pregunte a su organización si es posible una exención.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Para esta convocatoria se requiere un código de cupón.',
+  'Vouchercode': 'Código de cupón',
+  'Vouchercode vereist': 'Código de cupón requerido',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      '¿Desea cancelar su inscripción en {titel} del {datum}? Una posible plaza en lista de espera pasará al siguiente.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'La cancelación era posible hasta {deadline}. Después solo es posible a través de {organisatie}.',
+  'ingeschreven': 'inscrito',
+  'nog niet voldaan': 'aún no cumplido',
+  'ontheffing verleend': 'exención concedida',
+  'op de wachtlijst': 'en lista de espera',
+  'verloopt vóór de start': 'caduca antes del inicio',
+  'voldaan': 'cumplido',
+  'wachtlijst': 'lista de espera',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} lecciones presenciales · {sessies} sesiones',
+  '{vrij} plaatsen vrij': '{vrij} plazas libres',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Los niveles de encabezado {niveau} tienen cada uno su propio color ({kleur}); el estilo solo conoce un color de encabezado.',
   '(weergegeven als {vervanger}, bewaard voor export)':

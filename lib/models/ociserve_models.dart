@@ -368,6 +368,511 @@ class OciServeLessonState {
       );
 }
 
+// — Planning: zelfinschrijving —
+//
+// Modellen voor het self-service planningsoppervlak (OciServe `me/`):
+// aanbod met klassikale sessies en toelatingseisen, en de eigen boekingen.
+// Zelfde parseervorm als de rest van dit bestand: verplichte velden
+// ontbreken of zijn onleesbaar → FormatException; extra velden worden
+// getolereerd zodat een nieuwere server de client niet breekt.
+
+/// Eén klassikale les binnen een uitvoering (voor deze les is een sessie te
+/// kiezen bij het inschrijven).
+@immutable
+class OciServeClassroomLesson {
+  const OciServeClassroomLesson({required this.id, required this.title});
+
+  final String id;
+  final String title;
+
+  factory OciServeClassroomLesson.fromJson(Map<String, Object?> json) =>
+      OciServeClassroomLesson(
+        id: (json['id'] as String? ?? '').trim(),
+        title: (json['title'] as String? ?? '').trim(),
+      );
+}
+
+/// Eén instructeur op een klassikale sessie.
+@immutable
+class OciServeSessionInstructor {
+  const OciServeSessionInstructor({
+    required this.membershipId,
+    required this.role,
+    required this.displayName,
+  });
+
+  final String membershipId;
+  final String role;
+  final String displayName;
+
+  factory OciServeSessionInstructor.fromJson(Map<String, Object?> json) =>
+      OciServeSessionInstructor(
+        membershipId: (json['membership_id'] as String? ?? '').trim(),
+        role: (json['role'] as String? ?? '').trim(),
+        displayName: (json['display_name'] as String? ?? '').trim(),
+      );
+}
+
+/// Levenscyclus van een boeking; `attended`/`noShow` zijn serverwaarden voor
+/// sessies waarvan de aanwezigheid is vastgelegd.
+enum OciServeBookingStatus {
+  booked,
+  waitlisted,
+  offered,
+  cancelled,
+  attended,
+  noShow,
+  unknown,
+}
+
+OciServeBookingStatus _bookingStatus(String raw) => switch (raw) {
+  'booked' => OciServeBookingStatus.booked,
+  'waitlisted' => OciServeBookingStatus.waitlisted,
+  'offered' => OciServeBookingStatus.offered,
+  'cancelled' => OciServeBookingStatus.cancelled,
+  'attended' => OciServeBookingStatus.attended,
+  'no_show' => OciServeBookingStatus.noShow,
+  _ => OciServeBookingStatus.unknown,
+};
+
+/// Eén klassikale sessie zoals de self-catalogus hem toont: capaciteit,
+/// vrije plaatsen en de eigen wachtlijstpositie — nooit andermans naam.
+@immutable
+class OciServeTrainingSession {
+  const OciServeTrainingSession({
+    required this.id,
+    required this.offeringId,
+    required this.lessonId,
+    required this.title,
+    required this.startsAt,
+    required this.endsAt,
+    required this.timezone,
+    required this.capacity,
+    required this.booked,
+    required this.waitlisted,
+    required this.offered,
+    required this.status,
+    required this.freeSeats,
+    this.location,
+    this.roomId,
+    this.instructors = const [],
+    this.waitlistPosition,
+  });
+
+  final String id;
+  final String offeringId;
+  final String lessonId;
+  final String title;
+  final DateTime startsAt;
+  final DateTime endsAt;
+
+  /// IANA-zoals `Europe/Amsterdam` — de wandklok waarin de sessie plaatsvindt.
+  final String timezone;
+  final int capacity;
+  final int booked;
+  final int waitlisted;
+  final int offered;
+  final String status;
+  final int freeSeats;
+  final String? location;
+  final String? roomId;
+  final List<OciServeSessionInstructor> instructors;
+
+  /// Eigen plaats op de wachtlijst als de kijker `waitlisted`/`offered` is.
+  final int? waitlistPosition;
+
+  bool get isScheduled => status == 'scheduled';
+  bool get isFull => freeSeats <= 0;
+
+  factory OciServeTrainingSession.fromJson(Map<String, Object?> json) {
+    final id = (json['id'] as String? ?? '').trim();
+    final startsAt = DateTime.tryParse(json['starts_at'] as String? ?? '');
+    final endsAt = DateTime.tryParse(json['ends_at'] as String? ?? '');
+    if (id.isEmpty || startsAt == null || endsAt == null) {
+      throw const FormatException('incomplete training session');
+    }
+    int count(String key) => (json[key] as num?)?.toInt() ?? 0;
+    final rawInstructors = json['instructors'] is List
+        ? json['instructors']! as List
+        : const <Object?>[];
+    return OciServeTrainingSession(
+      id: id,
+      offeringId: (json['course_offering_id'] as String? ?? '').trim(),
+      lessonId: (json['lesson_id'] as String? ?? '').trim(),
+      title: (json['title'] as String? ?? '').trim(),
+      startsAt: startsAt.toUtc(),
+      endsAt: endsAt.toUtc(),
+      timezone: (json['timezone'] as String? ?? '').trim(),
+      capacity: count('capacity'),
+      booked: count('booked'),
+      waitlisted: count('waitlisted'),
+      offered: count('offered'),
+      status: (json['status'] as String? ?? '').trim(),
+      freeSeats: count('free_seats'),
+      location: (json['location'] as String?)?.trim(),
+      roomId: (json['room_id'] as String?)?.trim(),
+      instructors: rawInstructors
+          .map(
+            (item) => OciServeSessionInstructor.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
+          .toList(growable: false),
+      waitlistPosition: (json['waitlist_position'] as num?)?.toInt(),
+    );
+  }
+}
+
+/// Toelatingsstatus van één eis: `expiresBeforeStart` is de eis die wel
+/// geldt maar voor de startdatum afloopt.
+enum OciServeRequirementStatus {
+  met,
+  notMet,
+  waived,
+  expiresBeforeStart,
+  unknown,
+}
+
+OciServeRequirementStatus _requirementStatus(String raw) => switch (raw) {
+  'met' => OciServeRequirementStatus.met,
+  'not_met' => OciServeRequirementStatus.notMet,
+  'waived' => OciServeRequirementStatus.waived,
+  'expires_before_start' => OciServeRequirementStatus.expiresBeforeStart,
+  _ => OciServeRequirementStatus.unknown,
+};
+
+/// Uitkomst van één toelatingseis; [reason] is de toonbare, feitelijke
+/// toelichting die de server meestuurt en beschrijft de eis, niet de persoon.
+@immutable
+class OciServeRequirementOutcome {
+  const OciServeRequirementOutcome({
+    required this.requirementId,
+    required this.kind,
+    required this.targetId,
+    required this.status,
+    required this.reason,
+    this.label = '',
+  });
+
+  final String requirementId;
+  final String kind;
+  final String targetId;
+  final OciServeRequirementStatus status;
+  final String reason;
+  final String label;
+
+  factory OciServeRequirementOutcome.fromJson(Map<String, Object?> json) {
+    final id = (json['requirement_id'] as String? ?? '').trim();
+    if (id.isEmpty) {
+      throw const FormatException('incomplete requirement outcome');
+    }
+    return OciServeRequirementOutcome(
+      requirementId: id,
+      kind: (json['kind'] as String? ?? '').trim(),
+      targetId: (json['target_id'] as String? ?? '').trim(),
+      status: _requirementStatus((json['status'] as String? ?? '').trim()),
+      reason: (json['reason'] as String? ?? '').trim(),
+      label: (json['label'] as String? ?? '').trim(),
+    );
+  }
+}
+
+/// Eigen toelatingsevaluatie voor één uitvoering — zelf-gescoped, nooit de
+/// uitkomst van een andere cursist.
+@immutable
+class OciServeEligibility {
+  const OciServeEligibility({required this.eligible, this.outcomes = const []});
+
+  final bool eligible;
+  final List<OciServeRequirementOutcome> outcomes;
+
+  factory OciServeEligibility.fromJson(Map<String, Object?> json) {
+    final rawOutcomes = json['outcomes'] is List
+        ? json['outcomes']! as List
+        : const <Object?>[];
+    return OciServeEligibility(
+      eligible: json['eligible'] as bool? ?? false,
+      outcomes: rawOutcomes
+          .map(
+            (item) => OciServeRequirementOutcome.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
+          .toList(growable: false),
+    );
+  }
+}
+
+/// Eén uitvoering in het self-aanbod: naam, inschrijfbeleid, de klassikale
+/// lessen, de kiesbare sessies en de eigen toelatingsevaluatie.
+@immutable
+class OciServeOfferingSummary {
+  const OciServeOfferingSummary({
+    required this.id,
+    required this.courseVersionId,
+    required this.name,
+    required this.status,
+    required this.selfEnrollmentEnabled,
+    required this.voucherRequired,
+    required this.maxSelfEnrollmentsPerParticipant,
+    this.imageHash,
+    this.enrollmentOpensAt,
+    this.enrollmentClosesAt,
+    this.cancellationNoticeHours,
+    this.classroomLessons = const [],
+    this.sessions = const [],
+    this.eligibility = const OciServeEligibility(eligible: true),
+  });
+
+  final String id;
+  final String courseVersionId;
+  final String name;
+  final String status;
+  final bool selfEnrollmentEnabled;
+  final bool voucherRequired;
+  final int maxSelfEnrollmentsPerParticipant;
+  final String? imageHash;
+  final DateTime? enrollmentOpensAt;
+  final DateTime? enrollmentClosesAt;
+
+  /// Zelf afmelden is geweigerd binnen dit aantal uur vóór de sessie;
+  /// `null` betekent dat afmelden altijd kan tot de sessie begint.
+  final int? cancellationNoticeHours;
+  final List<OciServeClassroomLesson> classroomLessons;
+  final List<OciServeTrainingSession> sessions;
+  final OciServeEligibility eligibility;
+
+  /// Sessies van één klassikale les, op starttijd.
+  List<OciServeTrainingSession> sessionsForLesson(String lessonId) =>
+      sessions.where((session) => session.lessonId == lessonId).toList()
+        ..sort((a, b) => a.startsAt.compareTo(b.startsAt));
+
+  /// Laatste moment waarop afmelden voor [session] nog kan; `null` betekent
+  /// "tot de sessie begint".
+  DateTime cancellationDeadline(OciServeTrainingSession session) =>
+      cancellationNoticeHours == null
+      ? session.startsAt
+      : session.startsAt.subtract(Duration(hours: cancellationNoticeHours!));
+
+  factory OciServeOfferingSummary.fromJson(Map<String, Object?> json) {
+    final id = (json['id'] as String? ?? '').trim();
+    if (id.isEmpty) {
+      throw const FormatException('incomplete course offering');
+    }
+    List<T> list<T>(String key, T Function(Map<String, Object?>) parse) =>
+        json[key] is List
+        ? (json[key]! as List)
+              .map((item) => parse(Map<String, Object?>.from(item as Map)))
+              .toList(growable: false)
+        : const [];
+    return OciServeOfferingSummary(
+      id: id,
+      courseVersionId: (json['course_version_id'] as String? ?? '').trim(),
+      name: (json['name'] as String? ?? '').trim(),
+      status: (json['status'] as String? ?? '').trim(),
+      selfEnrollmentEnabled: json['self_enrollment_enabled'] as bool? ?? false,
+      voucherRequired: json['voucher_required'] as bool? ?? false,
+      maxSelfEnrollmentsPerParticipant:
+          (json['max_self_enrollments_per_participant'] as num?)?.toInt() ?? 1,
+      imageHash: (json['image_hash'] as String?)?.trim(),
+      enrollmentOpensAt: DateTime.tryParse(
+        json['enrollment_opens_at'] as String? ?? '',
+      )?.toUtc(),
+      enrollmentClosesAt: DateTime.tryParse(
+        json['enrollment_closes_at'] as String? ?? '',
+      )?.toUtc(),
+      cancellationNoticeHours: (json['cancellation_notice_hours'] as num?)
+          ?.toInt(),
+      classroomLessons: list(
+        'classroom_lessons',
+        OciServeClassroomLesson.fromJson,
+      ),
+      sessions: list('sessions', OciServeTrainingSession.fromJson),
+      eligibility: json['eligibility'] is Map
+          ? OciServeEligibility.fromJson(
+              Map<String, Object?>.from(json['eligibility']! as Map),
+            )
+          : const OciServeEligibility(eligible: true),
+    );
+  }
+}
+
+/// Eén pagina uit het self-aanbod.
+@immutable
+class OciServeOfferingList {
+  const OciServeOfferingList({required this.offerings, this.nextCursor});
+
+  final List<OciServeOfferingSummary> offerings;
+  final String? nextCursor;
+
+  factory OciServeOfferingList.fromJson(Map<String, Object?> json) {
+    final raw = json['offerings'] is List
+        ? json['offerings']! as List
+        : throw const FormatException('offering list without offerings');
+    return OciServeOfferingList(
+      offerings: raw
+          .map(
+            (item) => OciServeOfferingSummary.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
+          .toList(growable: false),
+      nextCursor: (json['next_cursor'] as String?)?.trim(),
+    );
+  }
+}
+
+/// De eigen boeking op één sessie, aangevuld met sessie- en uitvoeringsnaam.
+///
+/// `me/bookings` stuurt de boekingvelden op dit moment hoofdlettergevoelig
+/// uit (de Go-struct heeft geen json-tags voor de ingebedde kern) — daarom
+/// worden `id`/`ID`, `session_id`/`SessionID` e.d. allebei gelezen.
+@immutable
+class OciServeBooking {
+  const OciServeBooking({
+    required this.id,
+    required this.sessionId,
+    required this.enrollmentId,
+    required this.status,
+    required this.participantId,
+    required this.sessionTitle,
+    required this.startsAt,
+    required this.endsAt,
+    required this.timezone,
+    required this.offeringId,
+    required this.offeringName,
+  });
+
+  final String id;
+  final String sessionId;
+  final String enrollmentId;
+  final OciServeBookingStatus status;
+  final String participantId;
+  final String sessionTitle;
+  final DateTime startsAt;
+  final DateTime endsAt;
+  final String timezone;
+  final String offeringId;
+  final String offeringName;
+
+  bool get isUpcoming => startsAt.isAfter(DateTime.now().toUtc());
+
+  static String _field(
+    Map<String, Object?> json,
+    String snake,
+    String pascal,
+  ) => (json[snake] as String? ?? json[pascal] as String? ?? '').trim();
+
+  factory OciServeBooking.fromJson(Map<String, Object?> json) {
+    final id = _field(json, 'id', 'ID');
+    final sessionId = _field(json, 'session_id', 'SessionID');
+    final startsAt = DateTime.tryParse(json['starts_at'] as String? ?? '');
+    final endsAt = DateTime.tryParse(json['ends_at'] as String? ?? '');
+    if (id.isEmpty || sessionId.isEmpty || startsAt == null || endsAt == null) {
+      throw const FormatException('incomplete booking');
+    }
+    return OciServeBooking(
+      id: id,
+      sessionId: sessionId,
+      enrollmentId: _field(json, 'enrollment_id', 'EnrollmentID'),
+      status: _bookingStatus(_field(json, 'status', 'Status')),
+      participantId: _field(json, 'participant_id', 'ParticipantID'),
+      sessionTitle: (json['session_title'] as String? ?? '').trim(),
+      startsAt: startsAt.toUtc(),
+      endsAt: endsAt.toUtc(),
+      timezone: (json['timezone'] as String? ?? '').trim(),
+      offeringId: (json['offering_id'] as String? ?? '').trim(),
+      offeringName: (json['offering_name'] as String? ?? '').trim(),
+    );
+  }
+}
+
+/// Eén pagina eigen boekingen.
+@immutable
+class OciServeBookingList {
+  const OciServeBookingList({required this.bookings, this.nextCursor});
+
+  final List<OciServeBooking> bookings;
+  final String? nextCursor;
+
+  factory OciServeBookingList.fromJson(Map<String, Object?> json) {
+    final raw = json['bookings'] is List
+        ? json['bookings']! as List
+        : throw const FormatException('booking list without bookings');
+    return OciServeBookingList(
+      bookings: raw
+          .map(
+            (item) => OciServeBooking.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
+          .toList(growable: false),
+      nextCursor: (json['next_cursor'] as String?)?.trim(),
+    );
+  }
+}
+
+/// De kern van een boeking zoals mutaties (inschrijven, afmelden, bevestigen,
+/// afzien) hem teruggeven.
+@immutable
+class OciServeSessionBooking {
+  const OciServeSessionBooking({
+    required this.id,
+    required this.sessionId,
+    required this.status,
+  });
+
+  final String id;
+  final String sessionId;
+  final OciServeBookingStatus status;
+
+  factory OciServeSessionBooking.fromJson(Map<String, Object?> json) {
+    final id = (json['id'] as String? ?? '').trim();
+    final sessionId = (json['session_id'] as String? ?? '').trim();
+    if (id.isEmpty || sessionId.isEmpty) {
+      throw const FormatException('incomplete session booking');
+    }
+    return OciServeSessionBooking(
+      id: id,
+      sessionId: sessionId,
+      status: _bookingStatus((json['status'] as String? ?? '').trim()),
+    );
+  }
+}
+
+/// Resultaat van een inschrijving: de enrollment plus per gekozen sessie de
+/// aangemaakte boeking.
+@immutable
+class OciServeRegistration {
+  const OciServeRegistration({
+    required this.enrollmentId,
+    required this.bookings,
+  });
+
+  final String enrollmentId;
+  final List<OciServeSessionBooking> bookings;
+
+  factory OciServeRegistration.fromJson(Map<String, Object?> json) {
+    final enrollmentId = (json['enrollment_id'] as String? ?? '').trim();
+    final raw = json['bookings'] is List
+        ? json['bookings']! as List
+        : throw const FormatException('registration without bookings');
+    if (enrollmentId.isEmpty) {
+      throw const FormatException('incomplete registration');
+    }
+    return OciServeRegistration(
+      enrollmentId: enrollmentId,
+      bookings: raw
+          .map(
+            (item) => OciServeSessionBooking.fromJson(
+              Map<String, Object?>.from(item as Map),
+            ),
+          )
+          .toList(growable: false),
+    );
+  }
+}
+
 @immutable
 class OciServePlaybackSnapshot {
   const OciServePlaybackSnapshot({

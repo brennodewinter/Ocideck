@@ -1630,6 +1630,101 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Du chasch dich nümm abmälde: d Frist isch abglaufe. Mäld dich bi dinere Organisation.',
+  'Aanbod': 'Agebot',
+  'Aanwezig geweest': 'Isch da gsii',
+  'Afmelden': 'Abmälde',
+  'Afmelden voor bijeenkomst': 'Vu dr Sitzig abmälde',
+  'Afzien': 'Ablehne',
+  'Bekijk mijn inschrijvingen': 'Mini Aamäldige aaluege',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Lueg, weli Beläg du ygräicht hesch.',
+  'Binnenkort': 'Bald',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'De Code wird nöd gspycheret und nu bim Aamälde gsändet.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'D gwälti Sitzig isch voll. Wähl e anderi oder setz dich uf d Wartelischte.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'D Änderig isch fählgange. Versuechs nomol.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'De Code stimmt nöd — lueg ne ufs Tippfähler.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Die Sitzig überchrischt sich mit eme bestehende Tärmin i dim Kaländer.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'De Gutschiincode isch für die Durchfüehrig nöd gültig.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Des Agebot isch nümm gültig. D Lischte isch aktualisiert worde.',
+  'Er is een plaats vrij': 'Es isch e Platz frei',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Für dich isch e Platz frei. Bestätig so schnell wie möglich — s Agebot verfällt spötestens am {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Es git grad nüt zum Aamälde.',
+  'Geen sessies gepland.': 'Kei Sitzige plant.',
+  'Geweest': 'Vergange',
+  'Het aanbod kon niet worden opgehaald.':
+      'S Agebot hät nöd chönne glade wärde.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'I dynere Ziitzone: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Aagmäldet',
+  'Inschrijven': 'Aamälde',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'D Aamäldig isch fählgange. Versuechs nomol.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Du chasch dich erst aamälde, wenn du alli Zuelassigsaaforderige erfellsch.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'D Aamäldig für die Durchfüehrig isch gschlosse.',
+  'Kies per les precies één sessie.': 'Wähl pro Leereinheit genau ei Sitzig.',
+  'Mijn inschrijvingen': 'Mini Aamäldige',
+  'Niet aanwezig geweest': 'Isch nöd da gsii',
+  'Onbekende status': 'Unbekannte Status',
+  'Op de wachtlijst': 'Uf dr Wartelischte',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Uf dr Wartelischte, Platz {plaats} vo {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Setz mi uf d Wartelischte für d volle(n) Sitzig(e)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Mäld di sälber für e Durchfüehrig vo dere Organisation aa.',
+  'Sessie': 'Sitzig',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Zvyl Versüech — versuechs in {seconden} Sekunde nomol.',
+  'Toelatingseisen': 'Zuelassigsaaforderige',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Du bisch scho für die Durchfüehrig aagmäldet.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Du bisch no für kei Sitzig aagmäldet.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Du hesch s Maximum Aamäldige für die Durchfüehrig erreicht.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Du erfellsch d Zuelassigsaaforderige no nöd.',
+  'Uitvoering': 'Durchfüehrig',
+  'Uw inschrijving': 'Dini Aamäldig',
+  'Uw inschrijving is verwerkt.': 'Dini Aamäldig isch verarbeitet worde.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Dini Aamäldige hende nöd chönne glade wärde.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Dini Präsenzveranstaltige: chümend und vergange.',
+  'Vol': 'Voll',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Fascht? Frag dini Organisation, ob e Befreiyg möglich isch.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Für die Durchfüehrig isch e Gutschiincode nötig.',
+  'Vouchercode': 'Gutschiincode',
+  'Vouchercode vereist': 'Gutschiincode nötig',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Wottsch dich vo {titel} am {datum} abmälde? En eventuelle Wartelischteplatz gaht denn an de Nöggst.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Sälberabmäldig isch bis {deadline} möglich gsii. Dernoch gaits nu no über {organisatie}.',
+  'ingeschreven': 'aagmäldet',
+  'nog niet voldaan': 'no nöd erfüllt',
+  'ontheffing verleend': 'Befreiyg erteilt',
+  'op de wachtlijst': 'uf dr Wartelischte',
+  'verloopt vóór de start': 'lauft vorm Start ab',
+  'voldaan': 'erfüllt',
+  'wachtlijst': 'Wartelischte',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} Präsenzlektione · {sessies} Sitzige',
+  '{vrij} plaatsen vrij': '{vrij} Plätz frei',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'D Überschriftsebene {niveau} händ jedi en eigeni Farb ({kleur}); de Stil kännt nur eini Überschriftfarb.',
   '(weergegeven als {vervanger}, bewaard voor export)':

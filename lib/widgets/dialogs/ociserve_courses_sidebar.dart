@@ -5,27 +5,77 @@ import '../../models/ociserve_models.dart';
 import '../../theme/app_theme.dart';
 import 'ociserve_account_avatar.dart';
 
+/// Welke sectie van de leeromgeving-dialoog actief is.
+enum OciServeCoursesSection {
+  courses,
+  progress,
+  data,
+  evidence,
+  bookings,
+  offerings,
+}
+
+/// De kopteksten van elke sectie, zodat zowel de zijbalk als de header van de
+/// dialoog dezelfde naamgeving gebruiken zonder de sectie-state te kennen.
+extension OciServeCoursesSectionCopy on OciServeCoursesSection {
+  /// De kleine label-regel boven de kop.
+  String eyebrow(AppLocalizations l10n) => switch (this) {
+    OciServeCoursesSection.data => l10n.d('Privacy-inzage'),
+    OciServeCoursesSection.evidence => l10n.d('Mijn bewijs'),
+    OciServeCoursesSection.progress => l10n.d('Persoonlijk overzicht'),
+    OciServeCoursesSection.bookings => l10n.d('Mijn inschrijvingen'),
+    OciServeCoursesSection.offerings => l10n.d('Aanbod'),
+    OciServeCoursesSection.courses => l10n.d('Mijn leeromgeving'),
+  };
+
+  /// De grote kop. [name] is de weergavenaam van de cursist en wordt alleen
+  /// voor de cursussectie gebruikt.
+  String title(AppLocalizations l10n, {String name = ''}) => switch (this) {
+    OciServeCoursesSection.data => l10n.d('Mijn gegevens'),
+    OciServeCoursesSection.evidence => l10n.d('Mijn bewijs'),
+    OciServeCoursesSection.progress => l10n.d('Mijn voortgang'),
+    OciServeCoursesSection.bookings => l10n.d('Mijn inschrijvingen'),
+    OciServeCoursesSection.offerings => l10n.d('Aanbod'),
+    OciServeCoursesSection.courses =>
+      name.isEmpty
+          ? l10n.d('Mijn cursussen')
+          : l10n.d('Welkom, {naam}').replaceAll('{naam}', name),
+  };
+
+  /// De toelichting onder de kop.
+  String subtitle(AppLocalizations l10n) => switch (this) {
+    OciServeCoursesSection.data => l10n.d(
+      'Bekijk welke gegevens eLearning voor u heeft geregistreerd.',
+    ),
+    OciServeCoursesSection.evidence => l10n.d(
+      'Bekijk welke bewijsstukken u heeft ingediend.',
+    ),
+    OciServeCoursesSection.progress => l10n.d(
+      'Bekijk uw resultaten, activiteit en voortgang per cursus.',
+    ),
+    OciServeCoursesSection.bookings => l10n.d(
+      'Uw klassikale bijeenkomsten: binnenkort en geweest.',
+    ),
+    OciServeCoursesSection.offerings => l10n.d(
+      'Schrijf u zelf in voor een uitvoering van deze organisatie.',
+    ),
+    OciServeCoursesSection.courses => l10n.d(
+      'Ga verder waar u gebleven was, of kies een andere cursus die voor u klaarstaat.',
+    ),
+  };
+}
+
 class OciServeCoursesSidebar extends StatelessWidget {
   const OciServeCoursesSidebar({
     super.key,
     required this.account,
-    required this.showProgress,
-    required this.showData,
-    required this.showEvidence,
-    required this.onCourses,
-    required this.onProgress,
-    required this.onData,
-    required this.onEvidence,
+    required this.section,
+    required this.onSelect,
   });
 
   final OciServeAccount account;
-  final bool showProgress;
-  final bool showData;
-  final bool showEvidence;
-  final VoidCallback onCourses;
-  final VoidCallback onProgress;
-  final VoidCallback onData;
-  final VoidCallback onEvidence;
+  final OciServeCoursesSection section;
+  final ValueChanged<OciServeCoursesSection> onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -71,87 +121,116 @@ class OciServeCoursesSidebar extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 28),
-              _destination(
-                context,
-                icon: Icons.school_outlined,
-                label: l10n.d('Mijn cursussen'),
-                selected: !showProgress && !showData && !showEvidence,
-                onTap: onCourses,
-              ),
-              const SizedBox(height: 8),
-              _destination(
-                context,
-                icon: Icons.insights_outlined,
-                label: l10n.d('Mijn voortgang'),
-                selected: showProgress,
-                onTap: onProgress,
-              ),
-              const SizedBox(height: 8),
-              _destination(
-                context,
-                icon: Icons.manage_search_outlined,
-                label: l10n.d('Mijn gegevens'),
-                selected: showData,
-                onTap: onData,
-              ),
-              const SizedBox(height: 8),
-              _destination(
-                context,
-                icon: Icons.verified_outlined,
-                label: l10n.d('Mijn bewijs'),
-                selected: showEvidence,
-                onTap: onEvidence,
-              ),
-              const Spacer(),
-              Divider(color: palette.panelText.withValues(alpha: 0.18)),
-              const SizedBox(height: 8),
-              Semantics(
-                button: true,
-                label: l10n.d('Bekijk mijn voortgang'),
-                child: InkWell(
-                  key: const Key('ociserve-learning-profile-button'),
-                  onTap: onProgress,
-                  borderRadius: BorderRadius.circular(10),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        OciServeAccountAvatar(account: account, name: name),
-                        const SizedBox(width: 9),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: palette.panelText,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                l10n.d('Bekijk uw resultaten'),
-                                style: TextStyle(
-                                  color: palette.panelText.withValues(
-                                    alpha: 0.72,
-                                  ),
-                                  fontSize: 11,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(
-                          Icons.chevron_right,
-                          size: 18,
-                          color: palette.panelText.withValues(alpha: 0.72),
-                        ),
-                      ],
-                    ),
+              // De bestemmingen scrollen als het venster lager is dan de lijst;
+              // de accountkaart blijft onderaan verankerd.
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _destination(
+                        context,
+                        icon: Icons.school_outlined,
+                        label: l10n.d('Mijn cursussen'),
+                        selected: section == OciServeCoursesSection.courses,
+                        onTap: () => onSelect(OciServeCoursesSection.courses),
+                      ),
+                      const SizedBox(height: 8),
+                      _destination(
+                        context,
+                        icon: Icons.event_available_outlined,
+                        label: l10n.d('Mijn inschrijvingen'),
+                        selected: section == OciServeCoursesSection.bookings,
+                        onTap: () => onSelect(OciServeCoursesSection.bookings),
+                      ),
+                      const SizedBox(height: 8),
+                      _destination(
+                        context,
+                        icon: Icons.app_registration_outlined,
+                        label: l10n.d('Aanbod'),
+                        selected: section == OciServeCoursesSection.offerings,
+                        onTap: () => onSelect(OciServeCoursesSection.offerings),
+                      ),
+                      const SizedBox(height: 8),
+                      _destination(
+                        context,
+                        icon: Icons.insights_outlined,
+                        label: l10n.d('Mijn voortgang'),
+                        selected: section == OciServeCoursesSection.progress,
+                        onTap: () => onSelect(OciServeCoursesSection.progress),
+                      ),
+                      const SizedBox(height: 8),
+                      _destination(
+                        context,
+                        icon: Icons.manage_search_outlined,
+                        label: l10n.d('Mijn gegevens'),
+                        selected: section == OciServeCoursesSection.data,
+                        onTap: () => onSelect(OciServeCoursesSection.data),
+                      ),
+                      const SizedBox(height: 8),
+                      _destination(
+                        context,
+                        icon: Icons.verified_outlined,
+                        label: l10n.d('Mijn bewijs'),
+                        selected: section == OciServeCoursesSection.evidence,
+                        onTap: () => onSelect(OciServeCoursesSection.evidence),
+                      ),
+                    ],
                   ),
                 ),
+              ),
+              Divider(color: palette.panelText.withValues(alpha: 0.18)),
+              const SizedBox(height: 8),
+              _profileCard(context, palette, name),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _profileCard(BuildContext context, AppPalette palette, String name) {
+    final l10n = context.l10n;
+    return Semantics(
+      button: true,
+      label: l10n.d('Bekijk mijn voortgang'),
+      child: InkWell(
+        key: const Key('ociserve-learning-profile-button'),
+        onTap: () => onSelect(OciServeCoursesSection.progress),
+        borderRadius: BorderRadius.circular(10),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            children: [
+              OciServeAccountAvatar(account: account, name: name),
+              const SizedBox(width: 9),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: palette.panelText,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      l10n.d('Bekijk uw resultaten'),
+                      style: TextStyle(
+                        color: palette.panelText.withValues(alpha: 0.72),
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                size: 18,
+                color: palette.panelText.withValues(alpha: 0.72),
               ),
             ],
           ),

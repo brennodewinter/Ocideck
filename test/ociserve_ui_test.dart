@@ -606,6 +606,38 @@ void main() {
           feed: const [
             ..._feed,
             OciServeFeedItem(
+              versionId: 'extra-a',
+              lessonId: 'extra-a-one',
+              title: 'Les A',
+              enrollmentId: 'extra-a-enrollment',
+              courseTitle: 'Aanvulling A',
+              lessonOrder: 1,
+            ),
+            OciServeFeedItem(
+              versionId: 'extra-b',
+              lessonId: 'extra-b-one',
+              title: 'Les B',
+              enrollmentId: 'extra-b-enrollment',
+              courseTitle: 'Aanvulling B',
+              lessonOrder: 1,
+            ),
+            OciServeFeedItem(
+              versionId: 'extra-c',
+              lessonId: 'extra-c-one',
+              title: 'Les C',
+              enrollmentId: 'extra-c-enrollment',
+              courseTitle: 'Aanvulling C',
+              lessonOrder: 1,
+            ),
+            OciServeFeedItem(
+              versionId: 'extra-d',
+              lessonId: 'extra-d-one',
+              title: 'Les D',
+              enrollmentId: 'extra-d-enrollment',
+              courseTitle: 'Aanvulling D',
+              lessonOrder: 1,
+            ),
+            OciServeFeedItem(
               versionId: 'privacy',
               lessonId: 'privacy-one',
               title: 'Persoonsgegevens',
@@ -614,6 +646,39 @@ void main() {
               lessonOrder: 1,
             ),
           ],
+          progress: const OciServeLearningState([
+            OciServeLessonState(
+              courseVersionId: 'version',
+              lessonId: 'one',
+              completed: true,
+              lastSlideAnchor: 'einde',
+              displayedMilliseconds: 90000,
+            ),
+            OciServeLessonState(
+              courseVersionId: 'extra-a',
+              lessonId: 'extra-a-one',
+              completed: true,
+              displayedMilliseconds: 60000,
+            ),
+            OciServeLessonState(
+              courseVersionId: 'extra-b',
+              lessonId: 'extra-b-one',
+              completed: true,
+              displayedMilliseconds: 60000,
+            ),
+            OciServeLessonState(
+              courseVersionId: 'extra-c',
+              lessonId: 'extra-c-one',
+              completed: true,
+              displayedMilliseconds: 60000,
+            ),
+            OciServeLessonState(
+              courseVersionId: 'extra-d',
+              lessonId: 'extra-d-one',
+              completed: true,
+              displayedMilliseconds: 60000,
+            ),
+          ]),
         ),
       );
 
@@ -649,7 +714,7 @@ void main() {
       );
       expect(find.text('Bekeken: 1:30'), findsOneWidget);
       expect(find.text('Les 2 / 2 · Praktijk'), findsOneWidget);
-      expect(find.text('2 cursussen'), findsOneWidget);
+      expect(find.text('6 cursussen'), findsOneWidget);
 
       final heroContainer = tester.widget<Container>(hero);
       final theme = Theme.of(tester.element(hero));

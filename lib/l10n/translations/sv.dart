@@ -1626,6 +1626,100 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Du kan inte längre avanmäla dig: tidsfristen har gått ut. Kontakta din organisation.',
+  'Aanbod': 'Utbud',
+  'Aanwezig geweest': 'Var närvarande',
+  'Afmelden': 'Avanmäl',
+  'Afmelden voor bijeenkomst': 'Avanmäl från sessionen',
+  'Afzien': 'Avböj',
+  'Bekijk mijn inschrijvingen': 'Visa mina anmälningar',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Se vilka bevis du har skickat in.',
+  'Binnenkort': 'Snart',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Koden sparas inte och skickas bara vid anmälan.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Den valda sessionen är full. Välj en annan eller ställ dig på väntelistan.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Ändringen misslyckades. Försök igen.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Den här koden stämmer inte — kontrollera att det inte finns några stavfel.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Den här sessionen överlappar ett befintligt möte i din kalender.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Den här voucherkoden är inte giltig för den här kursomgången.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Det här erbjudandet är inte längre giltigt. Listan har uppdaterats.',
+  'Er is een plaats vrij': 'Det finns en ledig plats',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Det finns en plats ledig åt dig. Bekräfta så snart som möjligt — erbjudandet går ut senast {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Det finns just nu inget erbjudande att anmäla sig till.',
+  'Geen sessies gepland.': 'Inga sessioner planerade.',
+  'Geweest': 'Tidigare',
+  'Het aanbod kon niet worden opgehaald.': 'Utbudet kunde inte hämtas.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'I din tidszon: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Anmäld',
+  'Inschrijven': 'Anmäl',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Anmälan misslyckades. Försök igen.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Du kan anmäla dig först när du uppfyller alla behörighetskrav.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Anmälan till den här kursomgången är stängd.',
+  'Kies per les precies één sessie.': 'Välj exakt en session per lektion.',
+  'Mijn inschrijvingen': 'Mina anmälningar',
+  'Niet aanwezig geweest': 'Var inte närvarande',
+  'Onbekende status': 'Okänd status',
+  'Op de wachtlijst': 'På väntelistan',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'På väntelistan, plats {plaats} av {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Sätt mig på väntelistan för den/de fulla session(er)',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Anmäl dig själv till en kursomgång i den här organisationen.',
+  'Sessie': 'Session',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'För många försök — försök igen om {seconden} sekunder.',
+  'Toelatingseisen': 'Behörighetskrav',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Du är redan anmäld till den här kursomgången.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Du är ännu inte anmäld till någon session.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Du har nått det maximala antalet anmälningar för den här kursomgången.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Du uppfyller ännu inte behörighetskraven.',
+  'Uitvoering': 'Kursomgång',
+  'Uw inschrijving': 'Din anmälan',
+  'Uw inschrijving is verwerkt.': 'Din anmälan har behandlats.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Dina anmälningar kunde inte hämtas.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Dina fysiska träffar: kommande och tidigare.',
+  'Vol': 'Full',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Nästan? Fråga din organisation om ett undantag är möjligt.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'En voucherkod krävs för den här kursomgången.',
+  'Vouchercode': 'Voucherkod',
+  'Vouchercode vereist': 'Voucherkod krävs',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Vill du avanmäla dig från {titel} den {datum}? En eventuell väntelisteplats går då vidare till nästa person.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Självavanmälan var möjlig fram till {deadline}. Därefter endast via {organisatie}.',
+  'ingeschreven': 'anmäld',
+  'nog niet voldaan': 'ännu inte uppfyllt',
+  'ontheffing verleend': 'undantag beviljat',
+  'op de wachtlijst': 'på väntelistan',
+  'verloopt vóór de start': 'går ut före start',
+  'voldaan': 'uppfyllt',
+  'wachtlijst': 'väntelista',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} fysiska lektioner · {sessies} sessioner',
+  '{vrij} plaatsen vrij': '{vrij} lediga platser',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Rubriknivåerna {niveau} har var sin egen färg ({kleur}); stilen känner bara en rubrikfärg.',
   '(weergegeven als {vervanger}, bewaard voor export)':

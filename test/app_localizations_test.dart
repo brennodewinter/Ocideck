@@ -14,6 +14,7 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 const unchangedInEnglish = {
   'Accent',
   'Ignite',
+  'OCVO-XXXX-XXXX-XXXX-XXXX-XX',
   'PechaKucha',
   // De korte tijdseenheid blijft in het Engels eveneens 'sec'; de overige
   // talen gebruiken hun eigen afkorting en blijven dus volledig getoetst.
@@ -264,6 +265,7 @@ const unchangedInEnglish = {
 const unchangedInAllLanguages = {
   'Accent',
   'Ignite',
+  'OCVO-XXXX-XXXX-XXXX-XXXX-XX',
   'PechaKucha',
   'Details',
   'Score',

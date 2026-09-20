@@ -1627,6 +1627,100 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
+      'Anda tidak dapat lagi membatalkan: batas waktu telah lewat. Hubungi organisasi Anda.',
+  'Aanbod': 'Penawaran',
+  'Aanwezig geweest': 'Hadir',
+  'Afmelden': 'Batalkan pendaftaran',
+  'Afmelden voor bijeenkomst': 'Batalkan pendaftaran sesi',
+  'Afzien': 'Tolak',
+  'Bekijk mijn inschrijvingen': 'Lihat pendaftaran saya',
+  'Bekijk welke bewijsstukken u heeft ingediend.':
+      'Lihat bukti yang telah Anda kirimkan.',
+  'Binnenkort': 'Segera',
+  'De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.':
+      'Kode tidak disimpan dan hanya dikirim saat pendaftaran.',
+  'De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.':
+      'Sesi yang dipilih penuh. Pilih sesi lain atau masukkan diri ke daftar tunggu.',
+  'De wijziging is niet gelukt. Probeer het opnieuw.':
+      'Perubahan gagal. Coba lagi.',
+  'Deze code klopt niet — controleer de code op typefouten.':
+      'Kode ini tidak benar — periksa kesalahan ketik.',
+  'Deze sessie overlapt met een bestaande afspraak in uw agenda.':
+      'Sesi ini tumpang tindih dengan janji yang sudah ada di agenda Anda.',
+  'Deze vouchercode is niet geldig voor deze uitvoering.':
+      'Kode voucher ini tidak valid untuk penyelenggaraan ini.',
+  'Dit aanbod is niet meer geldig. De lijst is ververst.':
+      'Penawaran ini tidak lagi berlaku. Daftar telah disegarkan.',
+  'Er is een plaats vrij': 'Ada kursi kosong',
+  'Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.':
+      'Ada kursi kosong untuk Anda. Konfirmasi secepatnya — penawaran kedaluwarsa paling lambat {deadline}.',
+  'Er is nu geen aanbod om u voor in te schrijven.':
+      'Saat ini tidak ada penawaran untuk mendaftar.',
+  'Geen sessies gepland.': 'Belum ada sesi terjadwal.',
+  'Geweest': 'Sudah lewat',
+  'Het aanbod kon niet worden opgehaald.': 'Penawaran tidak dapat diambil.',
+  'In uw tijdzone: {datum} · {van}–{tot}':
+      'Di zona waktu Anda: {datum} · {van}–{tot}',
+  'Ingeschreven': 'Terdaftar',
+  'Inschrijven': 'Daftar',
+  'Inschrijven is niet gelukt. Probeer het opnieuw.':
+      'Pendaftaran gagal. Coba lagi.',
+  'Inschrijven kan pas als u aan alle toelatingseisen voldoet.':
+      'Anda baru dapat mendaftar setelah memenuhi semua syarat masuk.',
+  'Inschrijven voor deze uitvoering is gesloten.':
+      'Pendaftaran untuk penyelenggaraan ini sudah ditutup.',
+  'Kies per les precies één sessie.': 'Pilih tepat satu sesi per pelajaran.',
+  'Mijn inschrijvingen': 'Pendaftaran saya',
+  'Niet aanwezig geweest': 'Tidak hadir',
+  'Onbekende status': 'Status tidak diketahui',
+  'Op de wachtlijst': 'Dalam daftar tunggu',
+  'Op de wachtlijst, plaats {plaats} van {totaal}':
+      'Dalam daftar tunggu, posisi {plaats} dari {totaal}',
+  'Plaats mij op de wachtlijst voor de volle sessie(s)':
+      'Masukkan saya ke daftar tunggu untuk sesi yang penuh',
+  'Schrijf u zelf in voor een uitvoering van deze organisatie.':
+      'Daftarkan diri Anda untuk penyelenggaraan organisasi ini.',
+  'Sessie': 'Sesi',
+  'Te veel pogingen — probeer het over {seconden} seconden opnieuw.':
+      'Terlalu banyak percobaan — coba lagi dalam {seconden} detik.',
+  'Toelatingseisen': 'Syarat masuk',
+  'U bent al ingeschreven voor deze uitvoering.':
+      'Anda sudah terdaftar untuk penyelenggaraan ini.',
+  'U bent nog niet ingeschreven voor een bijeenkomst.':
+      'Anda belum terdaftar untuk sesi apa pun.',
+  'U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.':
+      'Anda telah mencapai jumlah maksimum pendaftaran untuk penyelenggaraan ini.',
+  'U voldoet nog niet aan de toelatingseisen.':
+      'Anda belum memenuhi syarat masuk.',
+  'Uitvoering': 'Penyelenggaraan',
+  'Uw inschrijving': 'Pendaftaran Anda',
+  'Uw inschrijving is verwerkt.': 'Pendaftaran Anda telah diproses.',
+  'Uw inschrijvingen konden niet worden opgehaald.':
+      'Pendaftaran Anda tidak dapat diambil.',
+  'Uw klassikale bijeenkomsten: binnenkort en geweest.':
+      'Sesi tatap muka Anda: yang akan datang dan yang sudah lewat.',
+  'Vol': 'Penuh',
+  'Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.':
+      'Hampir? Tanyakan kepada organisasi Anda apakah pengecualian dimungkinkan.',
+  'Voor deze uitvoering is een vouchercode vereist.':
+      'Kode voucher diperlukan untuk penyelenggaraan ini.',
+  'Vouchercode': 'Kode voucher',
+  'Vouchercode vereist': 'Kode voucher diperlukan',
+  'Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.':
+      'Apakah Anda ingin membatalkan pendaftaran untuk {titel} pada {datum}? Tempat daftar tunggu akan diberikan kepada orang berikutnya.',
+  'Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.':
+      'Pembatalan mandiri dapat dilakukan hingga {deadline}. Setelah itu hanya bisa melalui {organisatie}.',
+  'ingeschreven': 'terdaftar',
+  'nog niet voldaan': 'belum terpenuhi',
+  'ontheffing verleend': 'pengecualian diberikan',
+  'op de wachtlijst': 'dalam daftar tunggu',
+  'verloopt vóór de start': 'kedaluwarsa sebelum dimulai',
+  'voldaan': 'terpenuhi',
+  'wachtlijst': 'daftar tunggu',
+  '{lessen} klassikale lessen · {sessies} sessies':
+      '{lessen} pelajaran tatap muka · {sessies} sesi',
+  '{vrij} plaatsen vrij': '{vrij} kursi kosong',
   'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
       'Tingkat judul {niveau} masing-masing memiliki warna sendiri ({kleur}); gaya hanya mengenal satu warna judul.',
   '(weergegeven als {vervanger}, bewaard voor export)':

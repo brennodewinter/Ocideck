@@ -4,7 +4,7 @@ extension _OciServeCoursesDialogPrivacy on _OciServeCoursesDialogState {
   Future<void> _loadPrivacyData() async {
     final org = _organizationId;
     if (org == null) return;
-    _changePrivacy(() {
+    _mutate(() {
       _privacyLoading = true;
       _privacyError = null;
       _privacyData = null;
@@ -12,14 +12,14 @@ extension _OciServeCoursesDialogPrivacy on _OciServeCoursesDialogState {
     try {
       final value = await ref.read(ociServeProvider.notifier).privacyData(org);
       if (!mounted || org != _organizationId) return;
-      _changePrivacy(() {
+      _mutate(() {
         _privacyData = value;
         _privacyLoading = false;
       });
     } catch (error, stack) {
       logError('OciServe: gegevensinzage laden', error.runtimeType, stack);
       if (!mounted || org != _organizationId) return;
-      _changePrivacy(() {
+      _mutate(() {
         _privacyLoading = false;
         _privacyError = 'load_failed';
       });

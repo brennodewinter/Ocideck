@@ -1006,7 +1006,7 @@ also declares them, but see the [CI note](#continuous-integration).)
   hervormde route in OciServe laat deze poort rood worden — vóórdat een
   gebruiker een kapotte endpoint raakt.
 - **Pinned spec:** `test/fixtures/ociserve_openapi.yaml`, gekopieerd van
-  `brenno/OciServe` op commit `8f73aefd5e4f2dfaf3060a4c819f68fe7edef266`.
+  `brenno/OciServe` op commit `69147a084daf85cc4b573617aaa9f946ec08c841`.
 - **Pin bijwerken:**
   1. Kopieer `docs/openapi.yaml` uit de OciServe-repo naar
      `test/fixtures/ociserve_openapi.yaml`.
