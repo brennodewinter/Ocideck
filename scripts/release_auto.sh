@@ -96,6 +96,7 @@ APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
 # Zelfde standaard-doel als scripts/deploy_web.sh; de pre-flight toetst dat het
 # bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
 DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@braniebananie.nl}"
+DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de liveverificatie
 # De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
 # serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
 # stuk. Zie wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
@@ -350,7 +351,8 @@ cmd_status() {
   read_token
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
-  local has_rel=0 has_sums=0 has_sig=0 sig_valid=0 prnum="" prstate="" pr rel assets
+  local has_rel=0 has_sums=0 has_sig=0 sig_valid=0 web_live=0 live=""
+  local prnum="" prstate="" pr rel assets
 
   git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1 && has_branch=1
 
@@ -388,6 +390,11 @@ cmd_status() {
     fi
   fi
 
+  # De webdemo hoort bij de release en werd tot v0.6.6 nergens gemeten: het
+  # advies zei "controleer nog de live web-versie", en dat deed niemand.
+  live="$(live_web_version)"
+  [ "$live" = "$NEW_VERSION" ] && web_live=1
+
   local prdesc
   if [ "$has_pr" -eq 0 ]; then prdesc="release-PR aangemaakt"
   elif [ "$pr_merged" -eq 1 ]; then prdesc="release-PR #$prnum gemerged"
@@ -400,11 +407,18 @@ cmd_status() {
   mark "$has_rel" "release aangemaakt op de forge"
   mark "$has_sums" "SHA256SUMS aanwezig (van de publiceren-job)"
   mark "$sig_valid" "publieke SHA256SUMS.minisig cryptografisch geldig"
+  local webdesc="webdemo op $DEPLOY_URL draait $NEW_VERSION"
+  [ "$web_live" -eq 1 ] || webdesc="$webdesc (nu: ${live:-niet te lezen})"
+  mark "$web_live" "$webdesc"
 
   section "Advies"
-  if [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
-    log "De release lijkt compleet. Controleer nog de live web-versie en de downloadpagina."
+  if [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
+    log "De release lijkt compleet. Controleer nog de downloadpagina."
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
+  elif [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
+    log "Alles is uitgebracht en getekend, maar de webdemo draait ${live:-een onleesbare versie} in plaats van $NEW_VERSION."
+    log "Zet hem live vanaf de tag:  git checkout $TAG && make deploy-web"
+    log "(of, in de keten:  scripts/release_auto.sh --resume $TAG)"
   elif [ "$has_tag_o" -eq 1 ]; then
     log "De tag staat vast, maar de release is nog niet af (mirror-tag / tekenen / deploy)."
     log "Maak DEZELFDE tag af met:  scripts/release_auto.sh --resume $TAG"
@@ -842,23 +856,51 @@ preflight() {
 }
 
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
-# De webdemo alleen lokaal bouwen en deployen als de release-CI dat niet al
-# gedaan heeft, en dan alleen vanaf de commit die de tag draagt.
-deploy_web_if_needed() { # gebruikt de momentopname die assert_release_ci_terminal net nam
-  local tag_sha head_sha
-  [ -n "${snap:-}" ] || snap="$(release_ci_snapshot || true)"
-  if printf '%s\n' "$snap" | grep -qx 'success|Webversie live zetten'; then
-    log "De release-CI heeft de webbundel van $TAG al live gezet (Webversie live zetten: groen);"
-    log "lokaal deploy-web overgeslagen — de werkboom is niet per se de tag."
+# Wat er live staat, vraag je aan de site — niet aan een jobstatus.
+#
+# `version.json` reist mee in de webbundel en noemt de versie die er op dat
+# moment op $DEPLOY_URL staat. Dat is het enige antwoord dat niet kan liegen:
+# het meet de uitkomst, niet een stap die de uitkomst zou moeten bereiken.
+live_web_version() { # → de versie op de live demo, leeg als die niet te lezen is
+  curl -fsSL --max-time 20 "$DEPLOY_URL/version.json" 2>/dev/null \
+    | sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
+    | head -n 1
+}
+
+# De webdemo alleen lokaal bouwen en deployen als hij nog niet live staat, en
+# dan alleen vanaf de commit die de tag draagt.
+#
+# Dat "nog niet live staat" is bewust geen jobstatus. De CI-job *Webversie live
+# zetten* meldt `success` óók wanneer hij niets deed: ontbreken
+# `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS` — en die ontbreken met opzet, de demo
+# gaat met de hand live — dan slaat de job de deploy over en eindigt groen,
+# zodat een echte tag geen rode job en faalmail geeft. Deze functie las die
+# groene status een release lang als bewijs, waardoor v0.6.5 en v0.6.6 de demo
+# op 0.6.4 lieten staan terwijl de keten "klaar" meldde.
+deploy_web_if_needed() {
+  local tag_sha head_sha live
+  live="$(live_web_version)"
+  if [ "$live" = "$NEW_VERSION" ]; then
+    log "De webdemo op $DEPLOY_URL draait al $NEW_VERSION; lokaal deploy-web overgeslagen."
     return 0
+  fi
+  if [ -n "$live" ]; then
+    log "De webdemo op $DEPLOY_URL draait nog $live; die moet naar $NEW_VERSION."
+  else
+    log "Kon de versie op $DEPLOY_URL niet lezen; deploy-web draait, de verificatie hieronder beslist."
   fi
   tag_sha="$(git rev-list -n 1 "$TAG" 2>/dev/null || true)"
   head_sha="$(git rev-parse HEAD 2>/dev/null || true)"
   if [ -z "$tag_sha" ] || [ "$tag_sha" != "$head_sha" ]; then
-    die "de release-CI heeft de webbundel van $TAG niet live gezet en de werkboom staat niet op die tag (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Check de tag uit (git checkout $TAG) of herstel de CI-job, en hervat: scripts/release_auto.sh --resume $TAG"
+    die "de webdemo draait ${live:-een onbekende versie} en de werkboom staat niet op $TAG (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Check de tag uit (git checkout $TAG) en hervat: scripts/release_auto.sh --resume $TAG"
   fi
   make deploy-web
-  log "deploy-web klaar."
+  # Meten, niet aannemen: `deploy_web.sh` verifieert zijn eigen bundel, maar
+  # alleen dit zegt dat de bezoeker de nieuwe versie krijgt.
+  live="$(live_web_version)"
+  [ "$live" = "$NEW_VERSION" ] \
+    || die "deploy-web is gedraaid, maar $DEPLOY_URL meldt ${live:-geen leesbare versie} in plaats van $NEW_VERSION — kijk op de host voor de wissel en hervat daarna: scripts/release_auto.sh --resume $TAG"
+  log "deploy-web klaar; $DEPLOY_URL draait $NEW_VERSION."
 }
 
 phase3() {
@@ -874,10 +916,9 @@ phase3() {
   # Maar `make deploy-web` bouwt uit de wérkboom, en die is niet per se de tag.
   # Een --resume van v0.6.5 draaide een dag later op main, mét vier merges die
   # niet in die tag zaten; alleen een toevallig rode sbom-verify hield tegen dat
-  # die code als "v0.6.5" live ging. De release-CI heeft een eigen job
-  # (Webversie live zetten) die de bundel van de tag zelf deployt; is die groen,
-  # dan is de demo al goed en doet een lokale bouw alleen kwaad. Ontbreekt of
-  # faalde die job, dan mag de lokale bouw alleen vanaf de tag-commit.
+  # die code als "v0.6.5" live ging. Daarom bouwt de lokale route alleen vanaf
+  # de tag-commit, en beslist `version.json` op de live site of er überhaupt
+  # gedeployd moet worden — de CI-job zegt daar niets over (zie hieronder).
   STEP="deploy-web"
   section "Fase 3 — webversie live zetten"
   deploy_web_if_needed

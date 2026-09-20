@@ -751,6 +751,18 @@ the other process and start again. `scripts/notarize_macos.sh` checks the same
 invariant directly (is `.dart_tool` actually gone?) so it also holds when you run
 that script by hand.
 
+Phase 3 puts the web demo live, and decides that by **asking the site**, not by
+reading a job status. `version.json` in the deployed bundle names the version
+that is actually served; the chain compares it with the release version, deploys
+only from the tag commit when they differ, and reads the site again afterwards to
+confirm the new version is being served. The release CI's *Webversie live zetten*
+job is deliberately **not** evidence: with `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS`
+absent — they are, the demo is deployed by hand — it records the skip on the run
+summary and ends green, so a real tag does not produce a red job and a failure
+mail. Reading that green as "deployed" left `ocideck.librekat.nl` on 0.6.4 for
+both v0.6.5 and v0.6.6. `--status <tag>` reports the live version on its own
+line for the same reason.
+
 Also before the password, the pre-flight clears a **native-assets CMake cache
 left by a previous package version**. `hooks_runner` keys its shared build
 directories on a hash of the build configuration, not on the package version,
