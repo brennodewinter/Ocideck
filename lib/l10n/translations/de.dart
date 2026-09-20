@@ -667,6 +667,58 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Die Überschriftenebenen {niveau} haben jeweils eine eigene Farbe ({kleur}); der Stil kennt nur eine Überschriftfarbe.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(angezeigt als {vervanger}, für den Export gespeichert)',
+  'Accent': 'Akzent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Nur Buchstaben, Ziffern, Leerzeichen, Punkte und Bindestriche.',
+  'Alleen tekst': 'Nur Text',
+  'Als documentlogo gebruiken': 'Als Dokumentlogo verwenden',
+  'Bestaande stijl gebruiken': 'Vorhandenen Stil verwenden',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Die Schrift, die Word, LibreOffice oder ein Browser verwendet, wenn sie vorhanden ist; oben steht, was OciDeck selbst anzeigt.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Dieser Hausstil existiert bereits als Stil {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument importiert; {n} Bild(er) im Text nicht übernommen.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Ein Bild in der Kopf- oder Fußzeile ist reine Vektorgrafik (SVG) und kann kein Logo werden.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Ein Bild nur auf dem Titelblatt; das ist kein Dokumentlogo.',
+  'Gewenst lettertype (export)': 'Gewünschte Schriftart (Export)',
+  'Gewenste kopletter (export)': 'Gewünschte Überschriftenschrift (Export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Das Dokument trägt einen eigenen Hausstil. OciDeck kann ihn als Stil speichern und auf dieses Dokument anwenden.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Das Logo konnte nicht dauerhaft gespeichert werden; es bleibt nur in dieser Sitzung verfügbar.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Das Logo stand zentriert; der Stil kennt nur links und rechts, es kommt nach links.',
+  'Kop- en voettekst': 'Kopf- und Fußzeile',
+  'Kopletter': 'Überschriftenschrift',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Überschriftenebene {niveau} hat eine eigene Farbe ({kleur}); der Stil kennt nur eine Überschriftenfarbe.',
+  'Koppen': 'Überschriften',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Leer: beim Export folgen die Überschriften der gewünschten Schriftart des Textes.',
+  'Niet overgenomen': 'Nicht übernommen',
+  'Nieuwe stijl toevoegen': 'Neuen Stil hinzufügen',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Im Web bleibt das Logo nur für diese Sitzung gespeichert.',
+  'Paginanummers': 'Seitenzahlen',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Steht {plaats} auf jeder Seite, {mm} mm breit.',
+  'Stijl overnemen': 'Stil übernehmen',
+  'Stijl overnemen?': 'Stil übernehmen?',
+  'Voettekst': 'Fußzeile',
+  'Zelfde als de tekst ({letter})': 'Wie der Text ({letter})',
+  'gecentreerd bovenaan': 'oben zentriert',
+  'gecentreerd onderaan': 'unten zentriert',
+  'linksboven': 'oben links',
+  'linksonder': 'unten links',
+  'rechtsboven': 'oben rechts',
+  'rechtsonder': 'unten rechts',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokument importiert — nicht übernommen: {lijst}',
   '{n} tekstkader': '{n} Textrahmen',

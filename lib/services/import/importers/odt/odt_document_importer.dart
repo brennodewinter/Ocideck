@@ -12,7 +12,9 @@
 // Markdown-tegenhanger heeft (voetnoten, annotaties, tekstkaders, groepen,
 // objecten) wordt geteld in `notImported` in plaats van stil te vallen
 // (#2120). De uitvoer is gewone Markdown — geen slot, geen nieuwe
-// afhankelijkheid.
+// afhankelijkheid. De huisstijl (letters, kleuren, kop- en voettekst, het
+// beeld op elke bladzijde) leest het zusterdeel `odt_document_style.dart`
+// uit hetzelfde archief (#2119).
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -20,6 +22,8 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:xml/xml.dart';
 
+import '../../../../utils/content_hash.dart';
+import '../../models/source_document_style.dart';
 import '../../../../utils/image_signature.dart';
 import '../../../../utils/markdown_blocks.dart';
 import '../../models/document_conversion.dart';
@@ -29,6 +33,8 @@ import '../../utils/safe_extensions.dart';
 import '../../utils/xml_utils.dart';
 import '../odp/odp_context.dart'
     show descendantsLocal, childLocal, childrenLocal, xlinkHref;
+
+part 'odt_document_style.dart';
 
 /// Zet de bytes van een `.odt` om in Markdown.
 ///
@@ -69,6 +75,7 @@ DocumentConversion convertOdtDetailed(
     markdown: _trimTrailingBlank(buf.toString()),
     images: ctx.images,
     notImported: ctx.notImported,
+    style: _extractOdtStyle(ctx),
   );
 }
 

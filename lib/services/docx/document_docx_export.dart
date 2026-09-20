@@ -34,6 +34,7 @@ import '../../models/settings.dart';
 import '../document_export_service.dart' show projectedDocumentBody;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
+import '../../models/settings.dart' show ThemeProfile;
 import '../export_metadata.dart';
 import '../marp_html_service.dart' show HtmlImageResolver;
 import '../pdf/document_pdf_export.dart'
@@ -568,7 +569,18 @@ String _buildDocumentXml(
       '<w:body>$body\n$sectPr</w:body></w:document>';
 }
 
+/// De stijlen van het document. De letters én de kleuren komen uit het
+/// stijlprofiel: de lopende tekst in [ThemeProfile.exportFontFamily], de
+/// koppen in [ThemeProfile.exportDocumentHeadingFontFamily] — dus in de
+/// letter die de huisstijl wérkelijk vraagt (`Aptos`), niet in de
+/// plaatsvervanger die het scherm toont (#2119). Word heeft die letter
+/// doorgaans zelf, en anders valt het terug zoals Word altijd terugvalt.
 String _buildStylesXml(ThemeProfile theme) {
+  final bodyFont = _rFonts(theme.exportFontFamily);
+  final headingFont = theme.exportDocumentHeadingFontFamily;
+  final headingRFonts = headingFont == theme.exportFontFamily
+      ? ''
+      : _rFonts(headingFont);
   // De profielkleuren, in de RRGGBB-vorm die OOXML verwacht. Een hoofdstukkop
   // (h1) volgt de tekstkleur, een subkop (h2–h6) het accent — dezelfde
   // verdeling als de documentweergave en de HTML-/PDF-export, zodat het
@@ -578,17 +590,17 @@ String _buildStylesXml(ThemeProfile theme) {
   return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'
       '<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
       '<w:docDefaults><w:rPrDefault><w:rPr>'
-      '<w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>'
+      '$bodyFont'
       '<w:color w:val="${hexRgbTriplet(theme.textColor)}"/>'
       '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
       '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
       '</w:docDefaults>'
-      '${_headingStyle(1, 32, 240, heading)}'
-      '${_headingStyle(2, 26, 240, subheading)}'
-      '${_headingStyle(3, 22, 200, subheading)}'
-      '${_headingStyle(4, 20, 200, subheading)}'
-      '${_headingStyle(5, 18, 160, subheading)}'
-      '${_headingStyle(6, 16, 160, subheading)}'
+      '${_headingStyle(1, 32, 240, heading, headingRFonts)}'
+      '${_headingStyle(2, 26, 240, subheading, headingRFonts)}'
+      '${_headingStyle(3, 22, 200, subheading, headingRFonts)}'
+      '${_headingStyle(4, 20, 200, subheading, headingRFonts)}'
+      '${_headingStyle(5, 18, 160, subheading, headingRFonts)}'
+      '${_headingStyle(6, 16, 160, subheading, headingRFonts)}'
       '<w:style w:type="character" w:styleId="SourceText"><w:rPr>'
       '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
       '</w:rPr></w:style>'
@@ -614,11 +626,24 @@ String _buildStylesXml(ThemeProfile theme) {
       '</w:styles>';
 }
 
-String _headingStyle(int level, int szHalfPt, int spacingAfter, String color) =>
+/// Eén `w:rFonts` voor [family]; de naam is al gesaneerd door het profiel,
+/// de escape is de gordel bij de bretels.
+String _rFonts(String family) {
+  final name = xmlAttr(family);
+  return '<w:rFonts w:ascii="$name" w:hAnsi="$name" w:cs="$name"/>';
+}
+
+String _headingStyle(
+  int level,
+  int szHalfPt,
+  int spacingAfter,
+  String color,
+  String rFonts,
+) =>
     '<w:style w:type="paragraph" w:styleId="Heading$level">'
     '<w:pPr><w:spacing w:before="$spacingAfter" w:after="80"/>'
     '<w:outlineLvl w:val="${level - 1}"/></w:pPr>'
-    '<w:rPr><w:b/><w:color w:val="$color"/><w:sz w:val="$szHalfPt"/></w:rPr>'
+    '<w:rPr>$rFonts<w:b/><w:color w:val="$color"/><w:sz w:val="$szHalfPt"/></w:rPr>'
     '</w:style>';
 
 String _buildNumberingXml() =>

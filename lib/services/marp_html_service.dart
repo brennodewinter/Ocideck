@@ -27,6 +27,7 @@ import '../models/settings.dart';
 import '../models/page_size.dart';
 import '../models/slide.dart';
 import '../models/timeline.dart';
+import 'font_substitution.dart';
 import 'mermaid_theme.dart';
 import '../utils/log.dart';
 import '../utils/bundled_asset.dart';
@@ -869,7 +870,14 @@ class MarpHtmlService {
   /// achtergrond in plaats van een balk bovenaan het document.
   Future<String> _themedCss(ThemeProfile t) async {
     final fontFace = await _ebGaramondFontFace(t.fontFamily);
-    final family = _cssFontStack(t.fontFamily);
+    final family = _cssFontStack(
+      t.fontFamily,
+      preferred: t.preferredFontFamily,
+    );
+    final headingFamily = _cssFontStack(
+      t.effectiveDocumentHeadingFontFamily,
+      preferred: t.preferredDocumentHeadingFontFamily,
+    );
     final codePrefix = t.codeFontFamily == 'monospace'
         ? ''
         : "'${t.codeFontFamily}',";
@@ -908,14 +916,7 @@ class MarpHtmlService {
         '.slide th{background:${t.tableHeaderBackgroundColor};color:${t.tableHeaderTextColor};'
         'border:1px solid #ccc;padding:6px 12px;font-size:20px}'
         '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}'
-        '\n${_themedDocumentCss(t, family, codeFamily)}';
-  }
-
-  String _cssFontStack(String font) {
-    if (font == 'EB Garamond') return "'EB Garamond', Georgia, serif";
-    const serif = {'Georgia', 'Times New Roman'};
-    final generic = serif.contains(font) ? 'serif' : 'sans-serif';
-    return "'$font', $generic";
+        '\n${_themedDocumentCss(t, family, codeFamily, headingFamily: headingFamily)}';
   }
 
   /// Gecachte @font-face (de base64 van ~0,5 MB font liep anders bij elke

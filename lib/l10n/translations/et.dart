@@ -1620,6 +1620,58 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Pealkirjatasemetel {niveau} on igaühel oma värv ({kleur}); stiil tunneb ainult ühte pealkirjavärvi.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(kuvatakse kui {vervanger}, ekspordi jaoks säilitatud)',
+  'Accent': 'Aktsent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Ainult tähed, numbrid, tühikud, punktid ja sidekriipsud.',
+  'Alleen tekst': 'Ainult tekst',
+  'Als documentlogo gebruiken': 'Kasuta dokumendi logona',
+  'Bestaande stijl gebruiken': 'Kasuta olemasolevat stiili',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Font, mida Word, LibreOffice või brauser kasutab, kui see on olemas; ülal on see, mida OciDeck ise näitab.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'See majastiil on juba olemas stiilina {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument imporditud; {n} pilt(i) tekstis jäi üle kandmata.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Päises või jaluses olev pilt on ainult vektorpilt (SVG) ega saa logoks.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Pilt ainult tiitellehel; see ei ole dokumendi logo.',
+  'Gewenst lettertype (export)': 'Soovitud font (eksport)',
+  'Gewenste kopletter (export)': 'Soovitud pealkirjafont (eksport)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokumendil on oma majastiil. OciDeck saab selle stiilina salvestada ja sellele dokumendile rakendada.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logo ei saanud püsivalt salvestada; see jääb kättesaadavaks ainult selles seansis.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logo oli keskel; stiil tunneb ainult vasakut ja paremat, see läheb vasakule.',
+  'Kop- en voettekst': 'Päis ja jalus',
+  'Kopletter': 'Pealkirjafont',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Pealkirjatasemel {niveau} on oma värv ({kleur}); stiil tunneb ainult ühte pealkirjavärvi.',
+  'Koppen': 'Pealkirjad',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Tühi: ekspordil järgivad pealkirjad teksti soovitud fonti.',
+  'Niet overgenomen': 'Üle ei võetud',
+  'Nieuwe stijl toevoegen': 'Lisa uus stiil',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Veebis säilib logo ainult selle seansi ajaks.',
+  'Paginanummers': 'Lehenumbrid',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Asub {plaats} igal leheküljel, {mm} mm lai.',
+  'Stijl overnemen': 'Võta stiil üle',
+  'Stijl overnemen?': 'Kas võtta stiil üle?',
+  'Voettekst': 'Jalus',
+  'Zelfde als de tekst ({letter})': 'Sama mis tekstil ({letter})',
+  'gecentreerd bovenaan': 'ülal keskel',
+  'gecentreerd onderaan': 'all keskel',
+  'linksboven': 'ülal vasakul',
+  'linksonder': 'all vasakul',
+  'rechtsboven': 'ülal paremal',
+  'rechtsonder': 'all paremal',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokument imporditud — ei viidud kaasa: {lijst}',
   '{n} tekstkader': '{n} tekstiraam',

@@ -14,26 +14,32 @@
 
 import 'models/document_conversion.dart';
 import 'importers/import_failure.dart';
+import 'models/source_document_style.dart';
 import 'utils/import_budget.dart';
 import '../markdown_safety.dart';
 import '../web_asset_store.dart';
 import 'importers/docx/docx_document_importer.dart';
 import 'importers/odt/odt_document_importer.dart';
 
-/// De uitkomst van een documentimport: de Markdown, of de reden van een
-/// mislukking.
+/// De uitkomst van een documentimport: de Markdown mét de huisstijl van de
+/// bron (#2119), of de reden van een mislukking.
 class DocumentImportResult {
   const DocumentImportResult.success(
     this.markdown, {
+    this.style = SourceDocumentStyle.empty,
     this.notImported = const [],
   }) : failure = null;
 
   const DocumentImportResult.failed(this.failure)
     : markdown = null,
+      style = SourceDocumentStyle.empty,
       notImported = const [];
 
   final String? markdown;
   final DocumentImportFailure? failure;
+
+  /// Wat de bron aan huisstijl droeg (#2119); leeg als er niets te halen viel.
+  final SourceDocumentStyle style;
 
   /// Soorten inhoud die niet meekwamen, één sleutel per weggevallen element
   /// (`'afbeelding'`, `'tekstkader'`, `'groep'`, `'object'`). De UI telt en
@@ -107,6 +113,7 @@ DocumentImportResult importDocumentBytes(
     return DocumentImportResult.success(
       materialized.markdown,
       notImported: materialized.notImported,
+      style: conversion.style,
     );
   } on ImportBudgetException catch (e) {
     return DocumentImportResult.failed(
@@ -163,5 +170,9 @@ DocumentConversion _materializeImages(DocumentConversion conversion) {
       markdown = markdown.replaceAll(image.emitted, '');
     }
   }
-  return DocumentConversion(markdown: markdown, notImported: dropped);
+  return DocumentConversion(
+    markdown: markdown,
+    notImported: dropped,
+    style: conversion.style,
+  );
 }

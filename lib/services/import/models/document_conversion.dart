@@ -8,6 +8,8 @@ library;
 
 import 'dart:typed_data';
 
+import 'source_document_style.dart';
+
 /// Eén afbeelding uit het bronpakket: de bytes, een veilige bestandsnaam, en
 /// de verwijzing zoals die in de opgeleverde Markdown staat.
 class ImportedDocumentImage {
@@ -42,12 +44,14 @@ class ImportedDocumentImage {
 }
 
 /// De uitkomst van `convertDocxDetailed`/`convertOdtDetailed`: de Markdown,
-/// de mee te nemen afbeeldingen en wat er níet meekwam.
+/// de mee te nemen afbeeldingen, wat er níet meekwam, en de huisstijl van de
+/// bron (#2119).
 class DocumentConversion {
   const DocumentConversion({
     required this.markdown,
     this.images = const [],
     this.notImported = const [],
+    this.style = SourceDocumentStyle.empty,
   });
 
   /// De omgezette documenttekst, met `![alt](ref)`-verwijzingen naar
@@ -62,4 +66,8 @@ class DocumentConversion {
   /// `'tekstkader'`, `'groep'` en `'object'`. De UI telt en vertaalt ze;
   /// de importeur zelf kent geen vertaling.
   final List<String> notImported;
+
+  /// Wat de bron aan huisstijl draagt — letters, kleuren, kop- en voettekst,
+  /// het beeld op elke bladzijde; leeg als er niets te halen valt.
+  final SourceDocumentStyle style;
 }

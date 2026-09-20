@@ -25,6 +25,8 @@ import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
+import '../font_substitution.dart';
+
 /// De lettersneden waarmee de PDF wordt gezet.
 class DocumentPdfFonts {
   DocumentPdfFonts({
@@ -33,9 +35,17 @@ class DocumentPdfFonts {
     required this.italic,
     required this.boldItalic,
     required this.mono,
+    pw.Font? headingBase,
+    pw.Font? headingBold,
+    pw.Font? headingItalic,
+    pw.Font? headingBoldItalic,
     this.fallback = const [],
     this.fallbackCoverages = const [],
-  }) : fallbackCoverage = {
+  }) : headingBase = headingBase ?? base,
+       headingBold = headingBold ?? bold,
+       headingItalic = headingItalic ?? italic,
+       headingBoldItalic = headingBoldItalic ?? boldItalic,
+       fallbackCoverage = {
          for (final coverage in fallbackCoverages) ...coverage,
        };
 
@@ -44,6 +54,16 @@ class DocumentPdfFonts {
   final pw.Font italic;
   final pw.Font boldItalic;
   final pw.Font mono;
+
+  /// De sneden van een documentkop (#2119). Dezelfde als de lopende tekst,
+  /// tenzij de kopletter van het profiel in een andere klasse valt: een
+  /// rapport met schreefloze koppen boven een schreeftekst krijgt dat
+  /// onderscheid ook in de PDF — de exacte letter reist niet mee, de klasse
+  /// wel, net als bij de lopende tekst.
+  final pw.Font headingBase;
+  final pw.Font headingBold;
+  final pw.Font headingItalic;
+  final pw.Font headingBoldItalic;
 
   /// De fonts waar een teken op terugvalt dat de standaardsnede niet kent.
   final List<pw.Font> fallback;
@@ -78,14 +98,26 @@ class DocumentPdfFonts {
   /// Latin-1 — [unsupportedRunes] meldt dan navenant meer.
   factory DocumentPdfFonts.forFamily(
     String fontFamily, {
+    String? headingFamily,
     List<ByteData> fallbackFonts = const [],
   }) {
-    final serif = _serifFamilies.contains(fontFamily.toLowerCase().trim());
+    final serif = _isSerif(fontFamily);
+    final headingSerif = headingFamily == null
+        ? serif
+        : _isSerif(headingFamily);
     return DocumentPdfFonts(
       base: serif ? pw.Font.times() : pw.Font.helvetica(),
       bold: serif ? pw.Font.timesBold() : pw.Font.helveticaBold(),
       italic: serif ? pw.Font.timesItalic() : pw.Font.helveticaOblique(),
       boldItalic: serif
+          ? pw.Font.timesBoldItalic()
+          : pw.Font.helveticaBoldOblique(),
+      headingBase: headingSerif ? pw.Font.times() : pw.Font.helvetica(),
+      headingBold: headingSerif ? pw.Font.timesBold() : pw.Font.helveticaBold(),
+      headingItalic: headingSerif
+          ? pw.Font.timesItalic()
+          : pw.Font.helveticaOblique(),
+      headingBoldItalic: headingSerif
           ? pw.Font.timesBoldItalic()
           : pw.Font.helveticaBoldOblique(),
       mono: pw.Font.courier(),
@@ -96,16 +128,10 @@ class DocumentPdfFonts {
     );
   }
 
-  /// De families die de app als schreefletter aanbiedt. Kleingeschreven, want
-  /// de vergelijking is dat ook.
-  static const _serifFamilies = {
-    'eb garamond',
-    'lora',
-    'georgia',
-    'times',
-    'times new roman',
-    'serif',
-  };
+  /// Dezelfde klassetabel als de plaatsvervanger-keuze bij de import, zodat
+  /// een letter die daar schreef heet het hier ook is.
+  static bool _isSerif(String family) =>
+      classifyFontFamily(family) == FontClass.serif;
 
   /// Het thema dat elke tekst in het document erft.
   pw.ThemeData themeData({required double fontSize, required PdfColor color}) =>

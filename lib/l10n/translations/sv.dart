@@ -1626,6 +1626,58 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Rubriknivåerna {niveau} har var sin egen färg ({kleur}); stilen känner bara en rubrikfärg.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(visas som {vervanger}, sparad för export)',
+  'Accent': 'Accent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Endast bokstäver, siffror, mellanslag, punkter och bindestreck.',
+  'Alleen tekst': 'Endast text',
+  'Als documentlogo gebruiken': 'Använd som dokumentlogotyp',
+  'Bestaande stijl gebruiken': 'Använd befintlig stil',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Det teckensnitt som Word, LibreOffice eller en webbläsare använder om det finns; ovan står vad OciDeck självt visar.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Den här grafiska profilen finns redan som stilen {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokument importerat; {n} bild(er) i texten följde inte med.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'En bild i sidhuvudet eller sidfoten är enbart vektorgrafik (SVG) och kan inte bli en logotyp.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'En bild enbart på titelsidan; det är ingen dokumentlogotyp.',
+  'Gewenst lettertype (export)': 'Önskat teckensnitt (export)',
+  'Gewenste kopletter (export)': 'Önskat rubrikteckensnitt (export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokumentet har en egen grafisk profil. OciDeck kan spara den som stil och tillämpa den på det här dokumentet.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logotypen kunde inte sparas permanent; den finns bara kvar under den här sessionen.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logotypen var centrerad; stilen känner bara till vänster och höger, så den hamnar till vänster.',
+  'Kop- en voettekst': 'Sidhuvud och sidfot',
+  'Kopletter': 'Rubrikteckensnitt',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Rubriknivå {niveau} har en egen färg ({kleur}); stilen känner bara till en rubrikfärg.',
+  'Koppen': 'Rubriker',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Tomt: vid export följer rubrikerna textens önskade teckensnitt.',
+  'Niet overgenomen': 'Överfördes inte',
+  'Nieuwe stijl toevoegen': 'Lägg till ny stil',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'På webben sparas logotypen bara under den här sessionen.',
+  'Paginanummers': 'Sidnummer',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Står {plaats} på varje sida, {mm} mm bred.',
+  'Stijl overnemen': 'Ta över stil',
+  'Stijl overnemen?': 'Ta över stil?',
+  'Voettekst': 'Sidfot',
+  'Zelfde als de tekst ({letter})': 'Samma som texten ({letter})',
+  'gecentreerd bovenaan': 'centrerat upptill',
+  'gecentreerd onderaan': 'centrerat nedtill',
+  'linksboven': 'uppe till vänster',
+  'linksonder': 'nere till vänster',
+  'rechtsboven': 'uppe till höger',
+  'rechtsonder': 'nere till höger',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokument importerat — inte överfört: {lijst}',
   '{n} tekstkader': '{n} textram',

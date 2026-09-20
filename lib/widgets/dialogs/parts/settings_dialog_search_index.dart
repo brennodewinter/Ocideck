@@ -223,6 +223,18 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.presentation,
+    label: 'Kopletter',
+    section: 'Tekst',
+    keywords: ['kop', 'lettertype', 'font', 'document', 'export', 'gewenst'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
+    label: 'Gewenst lettertype (export)',
+    section: 'Lettertype',
+    keywords: ['font', 'lettertype', 'export', 'word', 'gewenst', 'aptos'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.presentation,
     label: 'Koptekst',
     section: 'Koptekst',
     keywords: ['header', 'koptekst', 'document'],

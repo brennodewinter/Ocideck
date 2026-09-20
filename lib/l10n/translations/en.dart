@@ -827,6 +827,58 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Heading levels {niveau} each have their own colour ({kleur}); the style has one heading colour.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(shown as {vervanger}, kept for export)',
+  'Accent': 'Accent',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Only letters, digits, spaces, dots and hyphens.',
+  'Alleen tekst': 'Text only',
+  'Als documentlogo gebruiken': 'Use as document logo',
+  'Bestaande stijl gebruiken': 'Use existing style',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'The font Word, LibreOffice or a browser uses if it has it; above is what OciDeck itself shows.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'This house style already exists as the style {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Document imported; {n} image(s) in the text not carried over.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'An image in the header or footer is vector-only (SVG) and cannot become a logo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'An image on the title page only; that is not a document logo.',
+  'Gewenst lettertype (export)': 'Preferred font (export)',
+  'Gewenste kopletter (export)': 'Preferred heading font (export)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'The document carries its own house style. OciDeck can save it as a style and apply it to this document.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'The logo could not be saved permanently; it remains available only for this session.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'The logo was centred; the style knows only left and right, so it goes left.',
+  'Kop- en voettekst': 'Header and footer',
+  'Kopletter': 'Heading font',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Heading level {niveau} has its own colour ({kleur}); the style knows one heading colour.',
+  'Koppen': 'Headings',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Empty: on export the headings follow the preferred font of the text.',
+  'Niet overgenomen': 'Not carried over',
+  'Nieuwe stijl toevoegen': 'Add new style',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'On the web the logo is kept for this session only.',
+  'Paginanummers': 'Page numbers',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Appears {plaats} on every page, {mm} mm wide.',
+  'Stijl overnemen': 'Adopt style',
+  'Stijl overnemen?': 'Adopt style?',
+  'Voettekst': 'Footer',
+  'Zelfde als de tekst ({letter})': 'Same as the text ({letter})',
+  'gecentreerd bovenaan': 'centred at the top',
+  'gecentreerd onderaan': 'centred at the bottom',
+  'linksboven': 'at the top left',
+  'linksonder': 'at the bottom left',
+  'rechtsboven': 'at the top right',
+  'rechtsonder': 'at the bottom right',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Document imported — not carried over: {lijst}',
   '{n} tekstkader': '{n} text frame',

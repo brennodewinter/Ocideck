@@ -338,6 +338,22 @@ class _DocumentStyleBuilder {
           _sectionTitle(l10n.d('Lettertype')),
           const SizedBox(height: 8),
           _fontSection(),
+          // De letter die de huisstijl écht vraagt (#2119): een export noemt
+          // hem als eerste; op het scherm blijft de keuze hierboven staan.
+          _PreferredFontField(
+            key: const Key('preferred-font-family'),
+            value: _themeProfile.preferredFontFamily,
+            label: l10n.d('Gewenst lettertype (export)'),
+            helper: l10n.d(
+              'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.',
+            ),
+            onChanged: (value) => _rebuild(() {
+              _themeProfile = value == null
+                  ? _themeProfile.copyWith(clearPreferredFontFamily: true)
+                  : _themeProfile.copyWith(preferredFontFamily: value);
+              _profileTouched = true;
+            }),
+          ),
           _presentationStyleDivider(l10n.d('Kleuren')),
           ..._generalColorChildren(),
         ],
@@ -374,6 +390,14 @@ class _DocumentStyleBuilder {
             _sectionTitle(l10n.d('Tekst')),
             const SizedBox(height: 8),
             ..._documentFontSizeSettings(l10n),
+            ..._documentHeadingFontControls(
+              l10n,
+              _themeProfile,
+              (profile) => _rebuild(() {
+                _themeProfile = profile;
+                _profileTouched = true;
+              }),
+            ),
             _themeColorAnchor(
               'documentHeadingColor',
               _colorWithContrastWarning(

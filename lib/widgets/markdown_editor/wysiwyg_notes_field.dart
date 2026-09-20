@@ -69,6 +69,12 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
     final size = documentHeadingSize(level, bodyFontSize: theme.fontSize);
     return DefaultTextBlockStyle(
       body.copyWith(
+        // De kopletter van de documentstijl, zoals in de lezer en de export;
+        // zonder aparte kopletter blijft dit de bodyletter (#2119).
+        fontFamily: doc
+            ? theme.profile?.effectiveDocumentHeadingFontFamily ??
+                  theme.fontFamily
+            : theme.fontFamily,
         fontSize: doc
             ? size
             : theme.fontSize + (level == 1 ? 8 : (level == 2 ? 4 : 2)),

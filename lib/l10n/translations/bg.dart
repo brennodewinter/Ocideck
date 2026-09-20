@@ -1647,6 +1647,58 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Нивата на заглавията {niveau} имат всяко свой собствен цвят ({kleur}); стилът познава само един цвят на заглавие.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(показано като {vervanger}, запазено за експорт)',
+  'Accent': 'Акцент',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Само букви, цифри, интервали, точки и тирета.',
+  'Alleen tekst': 'Само текст',
+  'Als documentlogo gebruiken': 'Използвай като лого на документа',
+  'Bestaande stijl gebruiken': 'Използвай съществуващия стил',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Шрифтът, който Word, LibreOffice или браузър използва, ако го има; по-горе е това, което самият OciDeck показва.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Този фирмен стил вече съществува като стила {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Документът е импортиран; {n} изображение(я) в текста не са прехвърлени.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Изображение в горния или долния колонтитул е само векторно (SVG) и не може да стане лого.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Изображение само на заглавната страница; това не е лого на документа.',
+  'Gewenst lettertype (export)': 'Желан шрифт (експорт)',
+  'Gewenste kopletter (export)': 'Желан шрифт за заглавия (експорт)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Документът носи собствен фирмен стил. OciDeck може да го запази като стил и да го приложи към този документ.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Логото не можа да бъде запазено за постоянно; остава достъпно само в тази сесия.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Логото беше центрирано; стилът познава само ляво и дясно, затова отива вляво.',
+  'Kop- en voettekst': 'Горен и долен колонтитул',
+  'Kopletter': 'Шрифт на заглавията',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Ниво на заглавие {niveau} има собствен цвят ({kleur}); стилът познава само един цвят за заглавия.',
+  'Koppen': 'Заглавия',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Празно: при експорт заглавията следват желания шрифт на текста.',
+  'Niet overgenomen': 'Не е пренесено',
+  'Nieuwe stijl toevoegen': 'Добави нов стил',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'В уеб версията логото се пази само в тази сесия.',
+  'Paginanummers': 'Номера на страници',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Стои {plaats} на всяка страница, широчина {mm} мм.',
+  'Stijl overnemen': 'Приеми стила',
+  'Stijl overnemen?': 'Да се приеме ли стилът?',
+  'Voettekst': 'Долен колонтитул',
+  'Zelfde als de tekst ({letter})': 'Същият като текста ({letter})',
+  'gecentreerd bovenaan': 'центрирано горе',
+  'gecentreerd onderaan': 'центрирано долу',
+  'linksboven': 'горе вляво',
+  'linksonder': 'долу вляво',
+  'rechtsboven': 'горе вдясно',
+  'rechtsonder': 'долу вдясно',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Документът е импортиран — не е пренесено: {lijst}',
   '{n} tekstkader': '{n} текстова рамка',

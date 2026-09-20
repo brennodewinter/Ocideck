@@ -1642,6 +1642,59 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Gradus titulorum {niveau} singuli suum colorem habent ({kleur}); stilus unum tantum colorem titulorum novit.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(ut {vervanger} monstratum, ad exportationem servatum)',
+  'Accent': 'Accentus',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Solum litterae, numeri, spatia, puncta et lineolae.',
+  'Alleen tekst': 'Textus tantum',
+  'Als documentlogo gebruiken': 'Ut insigni documenti uti',
+  'Bestaande stijl gebruiken': 'Stilo exsistente uti',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Litterarum forma qua Word, LibreOffice vel navigatrum utitur, si eam habet; supra stat quod OciDeck ipsum monstrat.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Hic stilus domesticus iam ut stilus {naam} exstat.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Documentum importatum est; {n} imago (imagines) in textu non receptae.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Imago in capite vel pede paginae tantum vectorialis (SVG) est nec insigne fieri potest.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Imago in sola pagina tituli; non est insigne documenti.',
+  'Gewenst lettertype (export)': 'Litterarum forma optata (exportatio)',
+  'Gewenste kopletter (export)':
+      'Litterarum forma titulorum optata (exportatio)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Documentum proprium stilum domesticum fert. OciDeck eum ut stilum servare et huic documento applicare potest.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Insigne perpetuo servari non potuit; in hac tantum sessione praesto manet.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Insigne in medio stabat; stilus sinistram et dextram tantum novit, sinistra ponetur.',
+  'Kop- en voettekst': 'Caput et pes paginae',
+  'Kopletter': 'Litterarum forma titulorum',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Gradus tituli {niveau} proprium colorem habet ({kleur}); stilus unum titulorum colorem novit.',
+  'Koppen': 'Tituli',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Vacuum: in exportatione tituli litterarum formam optatam textus sequuntur.',
+  'Niet overgenomen': 'Non receptum',
+  'Nieuwe stijl toevoegen': 'Novum stilum addere',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'In interreti insigne in hac tantum sessione servatur.',
+  'Paginanummers': 'Numeri paginarum',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'In omni pagina {plaats} stat, {mm} mm latum.',
+  'Stijl overnemen': 'Stilum adoptare',
+  'Stijl overnemen?': 'Stilum adoptare?',
+  'Voettekst': 'Pes paginae',
+  'Zelfde als de tekst ({letter})': 'Idem ac textus ({letter})',
+  'gecentreerd bovenaan': 'in summo in medio',
+  'gecentreerd onderaan': 'in imo in medio',
+  'linksboven': 'supra sinistra',
+  'linksonder': 'infra sinistra',
+  'rechtsboven': 'supra dextra',
+  'rechtsonder': 'infra dextra',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Documentum importatum — non receptum: {lijst}',
   '{n} tekstkader': '{n} capsula textus',

@@ -207,6 +207,12 @@ String _buildContentXml(String body, ThemeProfile theme) {
       'xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" '
       'office:version="1.2">',
     )
+    ..writeln(
+      _odtFontFaceDecls({
+        theme.exportFontFamily,
+        theme.exportDocumentHeadingFontFamily,
+      }),
+    )
     ..writeln('<office:automatic-styles>')
     ..writeln(_odtStyles(theme))
     ..writeln('</office:automatic-styles>')
@@ -291,6 +297,20 @@ String _buildManifest(List<_OdtImage> images) {
   return buf.toString();
 }
 
+/// De letterdeclaraties die `style:font-name` in de stijlen nodig heeft
+/// (#2119). Eén per unieke naam; de namen zijn al gesaneerd door het profiel.
+String _odtFontFaceDecls(Set<String> families) {
+  final buf = StringBuffer('<office:font-face-decls>');
+  for (final family in families) {
+    final name = xmlAttr(family);
+    buf.write(
+      '<style:font-face style:name="$name" svg:font-family="&apos;$name&apos;"/>',
+    );
+  }
+  buf.write('</office:font-face-decls>');
+  return buf.toString();
+}
+
 /// ODT-stijlen voor de automatic-styles sectie. Definieert koppen, alinea's,
 /// inline-opmaak, tabellen en lijsten die de converter refereert.
 ///
@@ -303,7 +323,15 @@ String _buildManifest(List<_OdtImage> images) {
 /// de default-stijl, kopkleur op Heading_20_1 en subkop-accent op 2–6 (de
 /// verdeling die de documentweergave en de HTML-/PDF-export ook hanteren),
 /// en de tabelkop-vulling op Table_Header_Cell.
+///
+/// De letters komen er ook uit (#2119): [ThemeProfile.exportFontFamily] voor
+/// de lopende tekst, [ThemeProfile.exportDocumentHeadingFontFamily] voor de
+/// koppen — de letter die de huisstijl vraagt, niet de plaatsvervanger van
+/// het scherm.
 String _odtStyles(ThemeProfile t) {
+  final bodyFont = 'style:font-name="${xmlAttr(t.exportFontFamily)}"';
+  final headingFont =
+      'style:font-name="${xmlAttr(t.exportDocumentHeadingFontFamily)}"';
   final text = '#${hexRgbTriplet(t.textColor)}';
   final accent = '#${hexRgbTriplet(t.accentColor)}';
   final heading = '#${hexRgbTriplet(t.effectiveDocumentHeadingColor)}';
@@ -314,34 +342,34 @@ String _odtStyles(ThemeProfile t) {
   return '''
 <style:default-style style:family="paragraph">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%" fo:text-align="start" style:justify-single-word="false"/>
-  <style:text-properties fo:font-size="100%" fo:color="$text" style:font-name-asian="Noto Sans CJK SC"/>
+  <style:text-properties $bodyFont fo:font-size="100%" fo:color="$text" style:font-name-asian="Noto Sans CJK SC"/>
 </style:default-style>
 <style:style style:name="Standard" style:family="paragraph" style:class="text">
   <style:paragraph-properties fo:margin-bottom="0.3cm" fo:line-height="115%"/>
 </style:style>
 <style:style style:name="Heading_20_1" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.8cm" fo:margin-bottom="0.3cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="170%" fo:font-weight="bold" fo:color="$heading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $headingFont fo:font-size="170%" fo:font-weight="bold" fo:color="$heading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_2" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.6cm" fo:margin-bottom="0.25cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="140%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $headingFont fo:font-size="140%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_3" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.5cm" fo:margin-bottom="0.2cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="120%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $headingFont fo:font-size="120%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_4" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.4cm" fo:margin-bottom="0.2cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="110%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $headingFont fo:font-size="110%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_5" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.3cm" fo:margin-bottom="0.15cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="100%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $headingFont fo:font-size="100%" fo:font-weight="bold" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Heading_20_6" style:family="paragraph" style:next-style-name="Standard" style:class="text">
   <style:paragraph-properties fo:margin-top="0.3cm" fo:margin-bottom="0.15cm" fo:keep-with-next="true"/>
-  <style:text-properties fo:font-size="100%" fo:font-weight="bold" fo:font-style="italic" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+  <style:text-properties $headingFont fo:font-size="100%" fo:font-weight="bold" fo:font-style="italic" fo:color="$subheading" style:font-name-asian="Noto Sans CJK SC" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
 </style:style>
 <style:style style:name="Strong" style:family="text">
   <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>

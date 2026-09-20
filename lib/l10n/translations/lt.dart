@@ -1634,6 +1634,58 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Antraščių lygiai {niveau} kiekvienas turi savo spalvą ({kleur}); stilius žino tik vieną antraštės spalvą.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(rodoma kaip {vervanger}, išsaugota eksportui)',
+  'Accent': 'Akcentas',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Tik raidės, skaitmenys, tarpai, taškai ir brūkšneliai.',
+  'Alleen tekst': 'Tik tekstas',
+  'Als documentlogo gebruiken': 'Naudoti kaip dokumento logotipą',
+  'Bestaande stijl gebruiken': 'Naudoti esamą stilių',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Šriftas, kurį naudoja „Word“, „LibreOffice“ ar naršyklė, jei jį turi; aukščiau nurodyta, ką rodo pats OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Šis įmonės stilius jau egzistuoja kaip stilius {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokumentas importuotas; {n} paveikslėlis (-iai) tekste neperkelti.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Antraštės ar poraštės paveikslėlis yra tik vektorinis (SVG) ir negali tapti logotipu.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Paveikslėlis tik tituliniame lape; tai ne dokumento logotipas.',
+  'Gewenst lettertype (export)': 'Pageidaujamas šriftas (eksportas)',
+  'Gewenste kopletter (export)': 'Pageidaujamas antraščių šriftas (eksportas)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokumentas turi savo įmonės stilių. OciDeck gali jį išsaugoti kaip stilių ir pritaikyti šiam dokumentui.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Nepavyko visam laikui išsaugoti logotipo; jis lieka prieinamas tik šioje sesijoje.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logotipas buvo centruotas; stilius žino tik kairę ir dešinę, jis bus kairėje.',
+  'Kop- en voettekst': 'Antraštė ir poraštė',
+  'Kopletter': 'Antraščių šriftas',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Antraštės lygis {niveau} turi savo spalvą ({kleur}); stilius žino tik vieną antraščių spalvą.',
+  'Koppen': 'Antraštės',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Tuščia: eksportuojant antraštės naudoja pageidaujamą teksto šriftą.',
+  'Niet overgenomen': 'Neperkelta',
+  'Nieuwe stijl toevoegen': 'Pridėti naują stilių',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Žiniatinklyje logotipas išsaugomas tik šiai sesijai.',
+  'Paginanummers': 'Puslapių numeriai',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Yra {plaats} kiekviename puslapyje, {mm} mm pločio.',
+  'Stijl overnemen': 'Perimti stilių',
+  'Stijl overnemen?': 'Perimti stilių?',
+  'Voettekst': 'Poraštė',
+  'Zelfde als de tekst ({letter})': 'Toks pat kaip teksto ({letter})',
+  'gecentreerd bovenaan': 'centruotas viršuje',
+  'gecentreerd onderaan': 'centruotas apačioje',
+  'linksboven': 'viršuje kairėje',
+  'linksonder': 'apačioje kairėje',
+  'rechtsboven': 'viršuje dešinėje',
+  'rechtsonder': 'apačioje dešinėje',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokumentas importuotas — neperkelta: {lijst}',
   '{n} tekstkader': '{n} teksto rėmelis',

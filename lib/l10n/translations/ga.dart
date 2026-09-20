@@ -1657,6 +1657,58 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Tá a dhath féin ag gach ceann de leibhéil cheannteidil {niveau} ({kleur}); ní aithníonn an stíl ach dath amháin ceannteidil.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(taispeánta mar {vervanger}, coinnithe le haghaidh easpórtála)',
+  'Accent': 'Aibhsiú',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Litreacha, digití, spásanna, poncanna agus fleiscíní amháin.',
+  'Alleen tekst': 'Téacs amháin',
+  'Als documentlogo gebruiken': 'Úsáid mar lógó an doiciméid',
+  'Bestaande stijl gebruiken': 'Úsáid an stíl atá ann',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'An cló a úsáideann Word, LibreOffice nó brabhsálaí má tá sé aige; thuas tá an rud a thaispeánann OciDeck féin.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Tá stíl an chomhlachta seo ann cheana mar an stíl {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Doiciméad iompórtáilte; níor tugadh {n} íomhá sa téacs anonn.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Níl íomhá sa cheanntásc nó sa bhuntásc ach veicteoireach (SVG) agus ní féidir léi a bheith ina lógó.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Íomhá ar an leathanach teidil amháin; ní lógó doiciméid í.',
+  'Gewenst lettertype (export)': 'Cló inmhianaithe (easpórtáil)',
+  'Gewenste kopletter (export)': 'Cló ceannteideal inmhianaithe (easpórtáil)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Tá stíl an chomhlachta dá chuid féin ag an doiciméad. Is féidir le OciDeck í a shábháil mar stíl agus í a chur i bhfeidhm ar an doiciméad seo.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Níorbh fhéidir an lógó a shábháil go buan; níl sé ar fáil ach sa seisiún seo.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Bhí an lógó láraithe; níl ach clé agus deis ag an stíl, mar sin rachaidh sé ar chlé.',
+  'Kop- en voettekst': 'Ceanntásc agus buntásc',
+  'Kopletter': 'Cló na gceannteideal',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Tá dath dá chuid féin ({kleur}) ag leibhéal ceannteidil {niveau}; níl ach dath amháin ceannteidil ag an stíl.',
+  'Koppen': 'Ceannteidil',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Folamh: ag easpórtáil leanann na ceannteidil cló inmhianaithe an téacs.',
+  'Niet overgenomen': 'Níor aistríodh',
+  'Nieuwe stijl toevoegen': 'Cuir stíl nua leis',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Ar an ngréasán ní choinnítear an lógó ach don seisiún seo.',
+  'Paginanummers': 'Uimhreacha leathanaigh',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Feictear {plaats} ar gach leathanach, {mm} mm ar leithead.',
+  'Stijl overnemen': 'Glac leis an stíl',
+  'Stijl overnemen?': 'Glacadh leis an stíl?',
+  'Voettekst': 'Buntásc',
+  'Zelfde als de tekst ({letter})': 'Mar an gcéanna leis an téacs ({letter})',
+  'gecentreerd bovenaan': 'láraithe ag an mbarr',
+  'gecentreerd onderaan': 'láraithe ag an mbun',
+  'linksboven': 'ag an mbarr ar chlé',
+  'linksonder': 'ag an mbun ar chlé',
+  'rechtsboven': 'ag an mbarr ar dheis',
+  'rechtsonder': 'ag an mbun ar dheis',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Doiciméad allmhairithe — nár aistríodh: {lijst}',
   '{n} tekstkader': '{n} fráma téacs',

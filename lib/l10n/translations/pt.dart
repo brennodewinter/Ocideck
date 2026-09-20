@@ -1655,6 +1655,59 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Os níveis de título {niveau} têm cada um a sua própria cor ({kleur}); o estilo conhece apenas uma cor de título.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(mostrado como {vervanger}, guardado para exportação)',
+  'Accent': 'Destaque',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Apenas letras, dígitos, espaços, pontos e hífenes.',
+  'Alleen tekst': 'Apenas texto',
+  'Als documentlogo gebruiken': 'Usar como logótipo do documento',
+  'Bestaande stijl gebruiken': 'Usar o estilo existente',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'O tipo de letra que o Word, o LibreOffice ou um browser usa se o tiver; acima está o que o próprio OciDeck mostra.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Este estilo institucional já existe como o estilo {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Documento importado; {n} imagem(ns) no texto não mantida(s).',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Uma imagem no cabeçalho ou rodapé é apenas vetorial (SVG) e não pode tornar-se logótipo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Uma imagem apenas na página de título; isso não é um logótipo do documento.',
+  'Gewenst lettertype (export)': 'Tipo de letra pretendido (exportação)',
+  'Gewenste kopletter (export)':
+      'Tipo de letra dos títulos pretendido (exportação)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'O documento tem um estilo institucional próprio. O OciDeck pode guardá-lo como estilo e aplicá-lo a este documento.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Não foi possível guardar o logótipo de forma permanente; fica disponível apenas nesta sessão.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'O logótipo estava centrado; o estilo só conhece esquerda e direita, por isso fica à esquerda.',
+  'Kop- en voettekst': 'Cabeçalho e rodapé',
+  'Kopletter': 'Tipo de letra dos títulos',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'O nível de título {niveau} tem cor própria ({kleur}); o estilo só conhece uma cor de título.',
+  'Koppen': 'Títulos',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Vazio: na exportação, os títulos seguem o tipo de letra pretendido do texto.',
+  'Niet overgenomen': 'Não incorporado',
+  'Nieuwe stijl toevoegen': 'Adicionar novo estilo',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Na web, o logótipo só fica guardado nesta sessão.',
+  'Paginanummers': 'Números de página',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Aparece {plaats} em todas as páginas, com {mm} mm de largura.',
+  'Stijl overnemen': 'Adotar estilo',
+  'Stijl overnemen?': 'Adotar o estilo?',
+  'Voettekst': 'Rodapé',
+  'Zelfde als de tekst ({letter})': 'Igual ao texto ({letter})',
+  'gecentreerd bovenaan': 'centrado no topo',
+  'gecentreerd onderaan': 'centrado em baixo',
+  'linksboven': 'no canto superior esquerdo',
+  'linksonder': 'no canto inferior esquerdo',
+  'rechtsboven': 'no canto superior direito',
+  'rechtsonder': 'no canto inferior direito',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Documento importado — não transportado: {lijst}',
   '{n} tekstkader': '{n} caixa de texto',

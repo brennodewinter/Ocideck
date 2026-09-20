@@ -1627,6 +1627,58 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Tingkat judul {niveau} masing-masing memiliki warna sendiri ({kleur}); gaya hanya mengenal satu warna judul.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(ditampilkan sebagai {vervanger}, disimpan untuk ekspor)',
+  'Accent': 'Aksen',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Hanya huruf, angka, spasi, titik, dan tanda hubung.',
+  'Alleen tekst': 'Hanya teks',
+  'Als documentlogo gebruiken': 'Gunakan sebagai logo dokumen',
+  'Bestaande stijl gebruiken': 'Gunakan gaya yang ada',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Font yang dipakai Word, LibreOffice, atau browser jika tersedia; di atas adalah yang ditampilkan OciDeck sendiri.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Gaya perusahaan ini sudah ada sebagai gaya {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokumen diimpor; {n} gambar di dalam teks tidak ikut.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Sebuah gambar di header atau footer hanya berupa vektor (SVG) dan tidak dapat menjadi logo.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Sebuah gambar hanya di halaman judul; itu bukan logo dokumen.',
+  'Gewenst lettertype (export)': 'Font yang diinginkan (ekspor)',
+  'Gewenste kopletter (export)': 'Font judul yang diinginkan (ekspor)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokumen ini membawa gaya perusahaannya sendiri. OciDeck dapat menyimpannya sebagai gaya dan menerapkannya pada dokumen ini.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logo tidak dapat disimpan secara permanen; logo hanya tersedia selama sesi ini.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logo berada di tengah; gaya hanya mengenal kiri dan kanan, jadi logo diletakkan di kiri.',
+  'Kop- en voettekst': 'Header dan footer',
+  'Kopletter': 'Font judul',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Tingkat judul {niveau} memiliki warna sendiri ({kleur}); gaya hanya mengenal satu warna judul.',
+  'Koppen': 'Judul',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Kosong: saat ekspor, judul mengikuti font yang diinginkan untuk teks.',
+  'Niet overgenomen': 'Tidak disertakan',
+  'Nieuwe stijl toevoegen': 'Tambah gaya baru',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Di web, logo hanya disimpan selama sesi ini.',
+  'Paginanummers': 'Nomor halaman',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Muncul {plaats} di setiap halaman, lebar {mm} mm.',
+  'Stijl overnemen': 'Ambil gaya',
+  'Stijl overnemen?': 'Ambil gaya?',
+  'Voettekst': 'Footer',
+  'Zelfde als de tekst ({letter})': 'Sama dengan teks ({letter})',
+  'gecentreerd bovenaan': 'di tengah atas',
+  'gecentreerd onderaan': 'di tengah bawah',
+  'linksboven': 'di kiri atas',
+  'linksonder': 'di kiri bawah',
+  'rechtsboven': 'di kanan atas',
+  'rechtsonder': 'di kanan bawah',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokumen diimpor — tidak dibawa: {lijst}',
   '{n} tekstkader': '{n} bingkai teks',

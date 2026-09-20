@@ -341,6 +341,9 @@ class _Theme {
          height: kDocumentBodyLineHeight,
          color: _profileColor(profile?.textColor, theme.colorScheme.onSurface),
        ),
+       // De kopletter van de documentstijl; zonder stijl `null`, dan volgt
+       // de kop het app-lettertype, net als de tekst.
+       headingFontFamily = profile?.effectiveDocumentHeadingFontFamily,
        heading = _profileColor(
          profile?.effectiveDocumentHeadingColor,
          theme.colorScheme.onSurface,
@@ -458,6 +461,7 @@ class _Theme {
   final TextStyle body;
   final Color heading;
   final Color subheading;
+  final String? headingFontFamily;
   final Color marker;
   final Color checkboxEmpty;
   final Color checkboxChecked;
@@ -669,3 +673,33 @@ String _extractImageSource(String raw) {
 }
 
 final RegExp _imageLinePattern = RegExp(r'^!\[([^\]]*)\]\((.+)\)$');
+
+/// Het opsommingsteken of nummer vóór een lijstregel. Top-level, want het
+/// leest alleen het thema en de regel — niets van de weergave zelf.
+Widget _bulletMarker(_Theme t, _ListLine it) => SizedBox(
+  width: it.ordered ? 24 : 18,
+  child: Text(
+    it.ordered ? '${it.number}.' : '•',
+    style: t.body.copyWith(
+      fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
+      color: it.ordered ? t.body.color : t.marker,
+    ),
+  ),
+);
+
+/// The box of a GFM task item. Read-only on purpose: this renders bundled
+/// documentation shipped as an asset, so a tick here would have nowhere to be
+/// written back to. It reports progress, it does not record it.
+Widget _checkMarker(_Theme t, {required bool checked}) => SizedBox(
+  width: 24,
+  child: Padding(
+    // Nudge the box onto the text baseline; the glyph sits higher than the
+    // cap height of the line it labels.
+    padding: const EdgeInsets.only(top: 2),
+    child: Icon(
+      checked ? Icons.check_box_outlined : Icons.check_box_outline_blank,
+      size: 17,
+      color: checked ? t.checkboxChecked : t.checkboxEmpty,
+    ),
+  ),
+);

@@ -1625,6 +1625,58 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Virsrakstu līmeņiem {niveau} katram ir sava krāsa ({kleur}); stils pazīst tikai vienu virsraksta krāsu.',
+  '(weergegeven als {vervanger}, bewaard voor export)':
+      '(rādīts kā {vervanger}, saglabāts eksportam)',
+  'Accent': 'Akcents',
+  'Alleen letters, cijfers, spaties, punten en koppeltekens.':
+      'Tikai burti, cipari, atstarpes, punkti un defises.',
+  'Alleen tekst': 'Tikai teksts',
+  'Als documentlogo gebruiken': 'Izmantot kā dokumenta logotipu',
+  'Bestaande stijl gebruiken': 'Izmantot esošo stilu',
+  'De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.':
+      'Fonts, ko Word, LibreOffice vai pārlūks izmanto, ja tas ir pieejams; augstāk redzams, ko rāda pats OciDeck.',
+  'Deze huisstijl bestaat al als de stijl {naam}.':
+      'Šis uzņēmuma stils jau pastāv kā stils {naam}.',
+  'Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.':
+      'Dokuments importēts; {n} attēls(-i) tekstā nav pārņemti.',
+  'Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.':
+      'Attēls galvenē vai kājenē ir tikai vektorgrafika (SVG) un nevar kļūt par logotipu.',
+  'Een afbeelding op alleen het titelblad; die is geen documentlogo.':
+      'Attēls tikai titullapā; tas nav dokumenta logotips.',
+  'Gewenst lettertype (export)': 'Vēlamais fonts (eksports)',
+  'Gewenste kopletter (export)': 'Vēlamais virsrakstu fonts (eksports)',
+  'Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.':
+      'Dokumentam ir savs uzņēmuma stils. OciDeck var to saglabāt kā stilu un lietot šim dokumentam.',
+  'Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.':
+      'Logotipu neizdevās saglabāt pastāvīgi; tas ir pieejams tikai šajā sesijā.',
+  'Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.':
+      'Logotips bija centrēts; stils pazīst tikai kreiso un labo pusi, tas būs kreisajā.',
+  'Kop- en voettekst': 'Galvene un kājene',
+  'Kopletter': 'Virsrakstu fonts',
+  'Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.':
+      'Virsraksta līmenim {niveau} ir sava krāsa ({kleur}); stils pazīst tikai vienu virsrakstu krāsu.',
+  'Koppen': 'Virsraksti',
+  'Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.':
+      'Tukšs: eksportējot virsraksti seko teksta vēlamajam fontam.',
+  'Niet overgenomen': 'Nav pārnests',
+  'Nieuwe stijl toevoegen': 'Pievienot jaunu stilu',
+  'Op het web blijft het logo alleen deze sessie bewaard.':
+      'Tīmeklī logotips tiek saglabāts tikai šajā sesijā.',
+  'Paginanummers': 'Lappušu numuri',
+  'Staat {plaats} op elke bladzijde, {mm} mm breed.':
+      'Atrodas {plaats} katrā lappusē, {mm} mm plats.',
+  'Stijl overnemen': 'Pārņemt stilu',
+  'Stijl overnemen?': 'Pārņemt stilu?',
+  'Voettekst': 'Kājene',
+  'Zelfde als de tekst ({letter})': 'Tāds pats kā tekstam ({letter})',
+  'gecentreerd bovenaan': 'centrēts augšā',
+  'gecentreerd onderaan': 'centrēts apakšā',
+  'linksboven': 'augšā pa kreisi',
+  'linksonder': 'apakšā pa kreisi',
+  'rechtsboven': 'augšā pa labi',
+  'rechtsonder': 'apakšā pa labi',
   'Document geïmporteerd — niet overgenomen: {lijst}':
       'Dokuments importēts — nav pārnests: {lijst}',
   '{n} tekstkader': '{n} teksta rāmis',
