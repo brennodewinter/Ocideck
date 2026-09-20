@@ -817,10 +817,15 @@ running or green; while a job visibly runs, waiting is never wrong, a hung job
 is cut by the runner's own 2 h timeout, and a heartbeat every ten minutes shows
 the wait is alive; a red `gate` from ci.yml on the same tag is reported as the
 test run beside the chain that it is, not as a failed release job) →
-**Phase 3** `make deploy-web`
-*first* — the web
-demo depends only on the web bundle, so a signing or platform failure never leaves
-it on the old version — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
+**Phase 3** the web demo
+*first* — it depends only on the web bundle, so a signing or platform failure
+never leaves it on the old version. The release CI's own `Webversie live zetten`
+job deploys the bundle of the tag; when it is green, Phase 3 skips the local
+`make deploy-web`, because that builds from the *working tree*, which is not
+necessarily the tag: a `--resume` of v0.6.5 ran a day later on `main` with four
+merges the tag did not carry, and only a coincidentally red `sbom-verify` kept
+that code from going live as v0.6.5. Without a green CI deploy, the local build
+runs only when `HEAD` is the tag's commit — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
 (waiting quietly for `publiceren` to attach it rather than printing every expected
 404), read both public files back and verify them with `minisign`, and watch the
 website-downloads job. Phase 3 refuses to start while any job for the tag is still

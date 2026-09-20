@@ -204,6 +204,69 @@ follow_ci
     expect(result.stdout, contains('minstens één release-job faalde'));
   }, skip: skipOnWindows);
 
+  // Fase 3 bouwt de webdemo uit de wérkboom. Een --resume van v0.6.5 draaide
+  // een dag later op main mét merges die niet in de tag zaten; alleen een
+  // toevallig rode sbom-verify hield tegen dat die code als v0.6.5 live ging.
+  ProcessResult runDeployWeb({
+    required String snapshotJobs,
+    required String headSha,
+    String tagSha = 'tagsha000',
+  }) {
+    final calls = File(
+      '${Directory.systemTemp.path}/ocideck-deploy-web-$pid.log',
+    );
+    addTearDown(() {
+      if (calls.existsSync()) calls.deleteSync();
+    });
+    final r = runReleaseHarness('''
+CALLS=${calls.path}
+log() { printf '%s\\n' "\$1"; }
+die() { printf 'DIE: %s\\n' "\$1" >&2; exit 1; }
+make() { printf 'make %s\\n' "\$*" >>"\$CALLS"; }
+git() {
+  case "\$1" in
+    rev-list) printf '%s\\n' '$tagSha' ;;
+    rev-parse) printf '%s\\n' '$headSha' ;;
+    *) return 1 ;;
+  esac
+}
+api() { printf '%s\\n' '{"workflow_runs":[$snapshotJobs]}'; }
+deploy_web_if_needed
+echo "DOOR"
+''');
+    // De make-aanroepen reizen mee in stderr van het resultaat, zodat één
+    // ProcessResult volstaat.
+    final made = calls.existsSync() ? calls.readAsStringSync() : '';
+    return ProcessResult(r.pid, r.exitCode, r.stdout, '${r.stderr}$made');
+  }
+
+  test('fase 3 bouwt de webdemo niet lokaal als de CI hem al live zette', () {
+    final r = runDeployWeb(
+      snapshotJobs:
+          '{"head_branch":"v9.9.9","status":"success","name":"Webversie live zetten"}',
+      headSha: 'ergens-op-main',
+    );
+    expect(r.exitCode, 0, reason: r.stderr as String);
+    expect(r.stdout, contains('overgeslagen'));
+    expect(r.stdout, endsWith('DOOR\n'));
+    expect(r.stderr, isNot(contains('make deploy-web')));
+  }, skip: skipOnWindows);
+
+  test('zonder CI-deploy bouwt fase 3 alleen vanaf de tag-commit', () {
+    final r = runDeployWeb(snapshotJobs: '', headSha: 'tagsha000');
+    expect(r.exitCode, 0, reason: r.stderr as String);
+    expect(r.stderr, contains('make deploy-web'));
+    expect(r.stdout, contains('deploy-web klaar'));
+  }, skip: skipOnWindows);
+
+  test('zonder CI-deploy en naast de tag weigert fase 3 te deployen', () {
+    final r = runDeployWeb(snapshotJobs: '', headSha: 'ergens-op-main');
+    expect(r.exitCode, 1);
+    expect(r.stderr, contains('DIE:'));
+    expect(r.stderr, contains('git checkout v9.9.9'));
+    expect(r.stderr, isNot(contains('make deploy-web')));
+  }, skip: skipOnWindows);
+
   test('fase 3 herdispatcht niet zolang dezelfde release-CI nog actief is', () {
     final mutations = File(
       '${Directory.systemTemp.path}/ocideck-release-dispatch-$pid.log',
@@ -326,6 +389,7 @@ section() { :; }
 log() { :; }
 sleep() { :; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
+git() { case "\$1" in rev-list|rev-parse) printf 'op-de-tag\\n' ;; *) return 1 ;; esac; }
 make() {
   [ "\${1:-}" = deploy-web ] && return 0
   local arg sums=''
@@ -414,6 +478,7 @@ section() { :; }
 log() { :; }
 sleep() { :; }
 die() { printf '%s\\n' "\$1" >&2; exit 1; }
+git() { case "\$1" in rev-list|rev-parse) printf 'op-de-tag\\n' ;; *) return 1 ;; esac; }
 make() {
   [ "\${1:-}" = deploy-web ] && return 0
   local arg sums=''

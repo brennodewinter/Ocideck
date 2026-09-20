@@ -61,6 +61,10 @@ All notable changes to OciDeck are documented in this file.
   ci.yml-poort op de tag als testuitslag naast de keten in plaats van als
   gefaalde releasejob. De v0.6.5-run brak na 60 minuten af midden in
   `Linux bouwen` terwijl elke job liep of groen was.
+- Fase 3 van de releaseketen bouwt de webdemo niet meer lokaal als de
+  release-CI de bundel van de tag al live heeft gezet, en anders alleen vanaf
+  de tag-commit. Een `--resume` draaide een dag later op `main` met merges die
+  niet in de tag zaten en had die code als v0.6.5 gepubliceerd.
 - Flutter 3.47.4 (Dart 3.13.3), de bijbehorende directe en transitieve
   pakketten en de software-inventaris zijn bijgewerkt; de bestandskiezer faalt
   bij een onbekende bestandsgrootte dicht in plaats van onbegrensd in te lezen.
@@ -2705,6 +2709,27 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **`--resume` bouwde de webdemo uit de werkboom, niet uit de tag.** Fase 3
+  begint met `make deploy-web`, en dat doel bouwt (`build-web`) uit wat er
+  uitgecheckt staat. In de verse keten is dat de release-branch; bij een
+  `--resume v0.6.5` een dag later was het `main` met #2128–#2131 erin, die
+  niet in de tag zaten. Dat die code niet als v0.6.5 op ocideck.librekat.nl
+  belandde, kwam door een vals alarm van `sbom-verify` (een
+  `.dart_tool/package_config.json` van vóór #2131, waardoor de generator
+  `timezone` niet vond en `NOASSERTION` schreef; na `flutter pub get`
+  verifieert de committede SBOM schoon). De release-CI heeft een eigen job,
+  *Webversie live zetten*, die de bundel van de tag deployt en gisteren groen
+  was. `deploy_web_if_needed` slaat de lokale deploy daarom over als die job
+  groen is, en weigert anders zolang HEAD niet de tag-commit is; alleen op de
+  tag bouwt hij nog lokaal. De momentopname komt van
+  `assert_release_ci_terminal`, dus er komt geen extra forge-aanroep bij. Drie
+  tests in `test/release_auto_race_test.dart`; de bestaande fase-3-tests
+  kregen een git-mock die HEAD op de tag zet, zodat hun aanname dat deploy-web
+  draait expliciet is. Waarom `sbom-verify` in fase 3 níet stil `make sbom`
+  draait, zoals gevraagd: de SBOM die de release meegeeft moet bij de getagde
+  bron horen; hergenereren zou juist de fout verhullen die de poort vangt
+  (een dependency gewijzigd zonder de inventaris bij te werken). Fase 1 doet
+  `make sbom` wél, als eigen commit na de versiebump.
 - **Flutter 3.47.5 en de oplosbare pakketten; dartcv4 2.3.1 om Xcode 27.**
   De pin staat op 21 plekken (`.tool-versions`, elke workflow, de docs,
   `tool/check_toolchain.dart`, de pubspec-toelichting) en beweegt in één
