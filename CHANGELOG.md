@@ -93,6 +93,26 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.6] — 2026-09-20
+
+### Added
+
+- feat(ociserve): zelfinschrijving voor klassikaal aanbod en eigen boekingen
+- feat(import): huisstijl van een .docx/.odt overnemen als stijlprofiel
+- feat(export): profielkleuren in DOCX- en ODT-kop- en tabelstijlen (#2129)
+- feat(import): DOCX/ODT body-afbeeldingen meenemen en niet-overgenomen melden (#2128)
+
+### Changed
+
+- build(release): prune native-assets CMake caches left by a previous package version
+- chore(toolchain): Flutter 3.47.5, oplosbare pakketten en dartcv4 2.3.1 om Xcode 27
+
+### Fixed
+
+- fix(release): fase 3 bouwt de webdemo niet uit een werkboom die de tag niet is
+- fix(release): wacht op de release-CI zolang die zichtbaar draait
+- fix(release): PDFium-framework genormaliseerd, bundelkoppelingen en opstart bewaakt, release weigert langs bekend herstelwerk
+
 ## [0.6.5] — 2026-09-19
 
 ### Added
