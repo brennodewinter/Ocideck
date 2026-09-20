@@ -802,6 +802,13 @@ assert_workspace_idle() {
 preflight() {
   STEP="pre-flight"
   section "Pre-flight — forge, mirror, deploy-host en minisign toetsen"
+  # Afgeleide staat eerst: een CMake-cache van een vórige pakketversie (na een
+  # dartcv4-bump) laat `flutter build macos` in fase 1 falen ná anderhalf uur
+  # groene `make check-release`, omdat die bouw een andere configuratiehash
+  # heeft dan `dart run` en `flutter test` (0.6.6-run, 20-09-2026). Opruimen
+  # is geen mutatie van de release; de volgende bouw configureert opnieuw.
+  "$ROOT_DIR/scripts/prune_stale_hook_cache.sh" "$ROOT_DIR" 2>&1 | sed 's/^/   /' \
+    || die "kon de native-assets-cache niet beoordelen (scripts/prune_stale_hook_cache.sh) — zie hierboven. Niets gemuteerd."
   api GET "" -o /dev/null \
     || die "forge-token werkt niet tegen $REPO_SLUG (keychain '$TOKEN_KEYCHAIN_SERVICE')."
   git ls-remote mirror >/dev/null 2>&1 \

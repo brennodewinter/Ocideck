@@ -157,6 +157,15 @@ for cache in "$shared_abs"/*/build/*/CMakeCache.txt; do
   rm -rf "$build_dir/CMakeFiles"
 done
 
+# Een cache die nog bij een vórige pakketversie hoort (na een bump van dartcv4)
+# laat CMake net zo hard falen, en dat per configuratiehash: `dart run` kan
+# groen zijn terwijl `flutter build macos` nog op de oude bron stuit. Het slot
+# is de plek waar elke poortrun langskomt, dus hier ruimen we die ook op — met
+# dezelfde ingreep (CMakeCache.txt en CMakeFiles/, `_deps` blijft). Het script
+# beoordeelt alleen wat package_config.json kan staven en zwijgt anders.
+"$(dirname "$0")/prune_stale_hook_cache.sh" || \
+  echo "poortslot: prune_stale_hook_cache.sh eindigde met status $? — de bouw kan op een verouderde CMake-cache stuiten" >&2
+
 # De rem: houd vier kernen vrij, zodat één poortrun de machine (en op een
 # laptop de adapter) niet volledig opeist. Een eigen waarde blijft staan.
 if [ -z "${CMAKE_BUILD_PARALLEL_LEVEL:-}" ]; then
