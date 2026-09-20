@@ -38,14 +38,14 @@ void main() {
           : null,
     );
     addTearDown(
-      () => tester.binding.defaultBinaryMessenger
-          .setMockMethodCallHandler(SystemChannels.platform, null),
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        SystemChannels.platform,
+        null,
+      ),
     );
 
     final notifier = DocumentNotifier()
-      ..loadDocument(
-        MarkdownDocument.parse('Eerste zin.\n\nTweede zin.\n'),
-      );
+      ..loadDocument(MarkdownDocument.parse('Eerste zin.\n\nTweede zin.\n'));
     await tester.pumpWidget(
       ProviderScope(
         overrides: [

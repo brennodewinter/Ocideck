@@ -133,7 +133,9 @@ void _maskInlineSyntax(
   final segment = line.substring(from, to);
   for (final re in [_inlineLinkRe, _refLinkRe, _footnoteRe]) {
     for (final match in re.allMatches(segment)) {
-      out.add(TextMatchRange(base + from + match.start, base + from + match.end));
+      out.add(
+        TextMatchRange(base + from + match.start, base + from + match.end),
+      );
     }
   }
 }

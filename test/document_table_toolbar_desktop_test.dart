@@ -32,8 +32,7 @@ void main() {
     await tester.binding.setSurfaceSize(const Size(1400, 900));
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    const doc =
-        'Vooraf.\n\n| Naam | Waarde |\n| --- | --- |\n| Alfa | 1 |\n';
+    const doc = 'Vooraf.\n\n| Naam | Waarde |\n| --- | --- |\n| Alfa | 1 |\n';
     final notifier = DocumentNotifier()
       ..loadDocument(MarkdownDocument.parse(doc));
     await tester.pumpWidget(

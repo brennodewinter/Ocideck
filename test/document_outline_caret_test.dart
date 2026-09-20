@@ -80,10 +80,11 @@ void main() {
     // Nu schuift de bronselectie alsof een schrijfactie hem verplaatste —
     // in Visueel is die niet leidend, de markering mag niet mee flippen.
     tester
-            .widget<MarkdownNotesEditor>(find.byType(MarkdownNotesEditor))
-            .controller
-            .selection =
-        const TextSelection.collapsed(offset: 0);
+        .widget<MarkdownNotesEditor>(find.byType(MarkdownNotesEditor))
+        .controller
+        .selection = const TextSelection.collapsed(
+      offset: 0,
+    );
     // De post-frame die de markering bijwerkt draait pas zodra er een frame
     // gepland staat — in de app is dat na elke bewerking zo, in de test moet
     // dat expliciet.

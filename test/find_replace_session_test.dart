@@ -250,7 +250,8 @@ void main() {
     expect(
       find.matchCount,
       1,
-      reason: 'alleen de lopende tekst telt; links, afbeeldingen, comments '
+      reason:
+          'alleen de lopende tekst telt; links, afbeeldingen, comments '
           'en fenced code zijn machinesyntax',
     );
   });
@@ -280,9 +281,7 @@ void main() {
   });
 
   test('voetnoottekst is proza, de [^…]-markering niet (#2137)', () {
-    final find = sessionFor(
-      'De kat[^kat] zit.\n\n[^kat]: de kat slaapt.\n',
-    );
+    final find = sessionFor('De kat[^kat] zit.\n\n[^kat]: de kat slaapt.\n');
     find.open(showReplace: false);
 
     find.setQuery('kat');
