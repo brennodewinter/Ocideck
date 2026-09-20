@@ -88,11 +88,29 @@ class TableEditController extends ChangeNotifier {
   bool _disposed = false;
 
   /// De werkbalk tikt de cel-focus weg vóór onPressed. Houd de selectie vast
-  /// tot die tik is afgehandeld.
+  /// voor de duur van de aanraking — niet één frame: op desktop kan pointer-up
+  /// pas een of meer frames na pointer-down komen, en alleen dán vuurt de
+  /// knop (#2140). [releaseActiveCell] doet het loslaten.
   void holdActiveCell() {
     _holdActiveCell = true;
+  }
+
+  /// De aanraking op de werkbalk is voorbij (pointer-up of -cancel). Laat de
+  /// hold los ná dit frame, zodat `onPressed` — die tijdens dezelfde
+  /// pointer-up vuurt — de cel nog vastgehouden vindt.
+  ///
+  /// Ruimt daarna de selectie op als de aanraking geen actie opleverde (een
+  /// uitgeschakelde knop, of een tik die van de knop afschoof): anders bleef
+  /// de werkbalk zichtbaar zonder dat nog een cel focus heeft.
+  void releaseActiveCell() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _holdActiveCell = false;
+      if (_disposed) return;
+      if (_pendingFocus != null || _focusScheduled) return;
+      if (_activeCell != null && !_anyCellHasFocus()) {
+        _activeCell = null;
+        notifyListeners();
+      }
     });
   }
 
