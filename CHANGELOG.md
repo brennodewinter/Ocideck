@@ -105,6 +105,7 @@ All notable changes to OciDeck are documented in this file.
 - macOS-app start weer: het meegeleverde PDFium-framework heette in de bundel `PDFium.framework` terwijl de binary erin `pdfium` is. Op een hoofdletterongevoelige buildschijf vallen de naam waar `pdfium_flutter` tegen linkt en de naam die Flutter als native asset wegschrijft samen in één map. Op macOS 27 eist dyld bij een genotariseerde app dat de bladnaam exact klopt en weigerde de app te starten met "Library not loaded: @rpath/PDFium.framework/PDFium" (v0.6.4 op macOS 27.2; macOS 26.6 laadt dezelfde bundel nog). `scripts/notarize_macos.sh` normaliseert nu vóór het tekenen naar `pdfium.framework/pdfium`, toetst daarna élke `@rpath`-, `@executable_path`- en `@loader_path`-verwijzing in de bundel op een bestaand bestand met exact dezelfde schrijfwijze, en start de gestapelde app nog één keer echt op voordat hij de deur uitgaat (#2115).
 - Homebrew-cask sluit een draaiende OciDeck af vóór een upgrade (`uninstall quit`), zodat `brew upgrade` de bundel niet half vervangt terwijl de app open staat.
 - De releaseketen wacht nu fail-closed op alle publicatiejobs en verifieert de publiek teruggelezen minisign-handtekening, zodat een herstart het manifest niet meer na ondertekening kan vervangen.
+- Grafiekweergaven blijven synchroon tussen presentator- en publieksvenster. Een grafiek-hover reisde zonder volgnummer over de vensterbrug, terwijl method-channel-berichten niet geordend aankomen: een snelle beweging A → B → weg kon eindigen met de oude markering nog aan op één van beide schermen. De hover draagt nu hetzelfde soort volgnummer als de dia-update (`isStaleUpdateSeq`), en beide kanten negeren een bericht dat ouder is dan wat ze al verwerkten. Daarnaast hield een grafiekdia zijn markering vast bij het doorbladeren, doordat de voorbeeldwidget zijn State hergebruikte voor de volgende dia; hij krijgt nu een sleutel op de dia-id.
 - De releaseketen zet de webdemo weer live. Sinds de vorige reparatie sloeg fase 3 `deploy-web` over zodra de CI-job *Webversie live zetten* groen was — maar die job meldt óók groen wanneer hij niets doet (de deploy-secrets ontbreken met opzet, de demo gaat met de hand live). Daardoor bleef ocideck.librekat.nl bij 0.6.5 en 0.6.6 op 0.6.4 staan terwijl de keten "klaar" meldde. De keten leest nu `version.json` op de site zelf, deployt alleen vanaf de tag-commit, en toetst ná afloop dat de site de nieuwe versie meldt. `--status` rapporteert de live versie als eigen regel in plaats van "controleer nog de live web-versie".
 - De releaseketen en de bouwdoelen ruimen vóór het bouwen een CMake-cache op die nog bij een vórige versie van een pakket met een build-hook hoort (na de dartcv4-bump 2.3.0 → 2.3.1 stierf de 0.6.6-run pas in `make build-release`, ná anderhalf uur groene poort). `scripts/prune_stale_hook_cache.sh` vergelijkt per configuratiehash de bron van de cache met wat `package_config.json` oplost en wist alleen `CMakeCache.txt` en `CMakeFiles/`; `_deps` blijft, dus geen herdownload. Aangeroepen door de pre-flight van `release_auto.sh`, het poortslot (`make check`) en `make sbom`/`build-*`.
 
@@ -2751,6 +2752,24 @@ that before deciding whether this alpha fits what you are doing.
 
 ## Development log
 
+- **Grafiek-hover: volgnummer over de brug, en een sleutel per dia.** De
+  spiegeling van #1482 stuurde `chartHover` zonder volgnummer. De dia-update
+  had dat wél (`seq` + `isStaleUpdateSeq`), precies omdat aanroepen over de
+  vensterbrug niet geordend aankomen; voor de hover ontbrak het. Een snelle
+  beweging over twee reeksen en er dan weer af kon dus eindigen met "weg"
+  vóór "B", waarna één scherm een markering toont die het andere niet heeft.
+  Beide kanten (presentator én publieksvenster) hebben nu een eigen teller en
+  een eigen waterlijn; twee tellers, geen gedeelde, want de ontvanger vergelijkt
+  per berichtsoort en een gedeelde teller zou de waterlijn van de hover laten
+  meespringen met elke dia-update. Tweede helft: `_ChartPreview` kreeg geen
+  sleutel, dus hergebruikte Flutter bij het doorbladeren dezelfde State — met de
+  hover van de vórige grafiek er nog in. `ValueKey(slide.id)` dwingt een verse
+  State af. Drie toetsen, elk met de bijbehorende helft eruit rood geproefd:
+  een laat bericht mag de markering niet opnieuw aanzetten (publieksvenster),
+  hetzelfde de andere kant op (presentator), en een grafiekdia begint zonder
+  markering na het doorbladeren. Het werk komt van een codex-sessie van
+  17-09-2026 die op een losse tak in `/private/tmp` was blijven liggen; de
+  functionaliteit zat nog niet in main en is hier op de huidige main gezet.
 - **Een groene job die niets deed, hield de webdemo twee releases op 0.6.4.**
   `deploy_web_if_needed` sloeg de lokale `make deploy-web` over zodra de
   release-CI-job *Webversie live zetten* in de momentopname `success` stond.

@@ -432,6 +432,18 @@ void main() {
     expect(sentHovers.any((h) => (h['hover'] as Map?)?['s'] == 1), isTrue);
     expect(sentHovers.every((h) => h['seq'] is int), isTrue);
 
+    // Geen echo: een hover die binnenkomt verandert alleen `external`, dus de
+    // listener draait met een ongewijzigde `local`. Kaatst die tóch terug, dan
+    // ontstaat er een lus tussen de twee vensters.
+    final sentSoFar = sentHovers.length;
+    await fromBeamer({'s': 0, 'c': 0}, sequence: 4);
+    await tester.pump();
+    expect(
+      sentHovers.length,
+      sentSoFar,
+      reason: 'een ontvangen hover werd teruggekaatst naar de beamer',
+    );
+
     await tester.pumpWidget(const SizedBox());
   });
 

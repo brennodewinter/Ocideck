@@ -51,6 +51,37 @@ const presenterChannel = WindowMethodChannel(
 /// worden altijd verwerkt.
 bool isStaleUpdateSeq(int? seq, int lastSeq) => seq != null && seq <= lastSeq;
 
+/// Boekhouding voor één berichtsoort over de vensterbrug: wat er als laatste
+/// verstuurd is, en het hoogste nummer dat binnenkwam.
+///
+/// Aanroepen over de brug komen niet geordend aan. Voor de dia-update was dat
+/// al afgedekt met een volgnummer; voor de grafiek-hover niet, en een snelle
+/// beweging A → B → weg kon daardoor eindigen met "weg" vóór "B" — één scherm
+/// houdt dan een markering die het andere niet heeft. Beide kanten hebben een
+/// eigen exemplaar: de teller van de ene richting hoort niet die van de andere
+/// te verzetten.
+class WindowMessageStream<T> {
+  T? _lastSent;
+  int _sent = 0;
+  int _received = -1;
+
+  /// Het volgnummer voor [value], of null als die niets nieuws is — dan hoeft
+  /// er niets over de brug.
+  int? nextFor(T? value) {
+    if (value == _lastSent) return null;
+    _lastSent = value;
+    return ++_sent;
+  }
+
+  /// False zodra [seq] ouder is dan wat al verwerkt is; anders onthoudt hij
+  /// het nummer. Een bericht zonder nummer wordt altijd verwerkt.
+  bool accept(int? seq) {
+    if (isStaleUpdateSeq(seq, _received)) return false;
+    if (seq != null) _received = seq;
+    return true;
+  }
+}
+
 bool _permanentChannelFailure(Object error) =>
     error is WindowChannelException &&
     const {
@@ -104,9 +135,8 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// de presentator aan, en een hover daar licht hier dezelfde reeks/taartpunt
   /// op. Dezelfde opzet als [_mermaidView].
   final ChartHoverController _chartHover = ChartHoverController();
-  ChartHover? _lastSentChartHover;
-  int _chartHoverSequence = 0;
-  int _lastReceivedChartHoverSequence = -1;
+  final WindowMessageStream<ChartHover> _chartHoverStream =
+      WindowMessageStream<ChartHover>();
   // Hoogst verwerkte 'update'-sequencenummer; oudere berichten worden genegeerd.
   int _lastUpdateSeq = -1;
 
@@ -217,10 +247,10 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   /// zodat een late hover nooit op een andere dia belandt.
   void _broadcastChartHover() {
     final hover = _chartHover.local;
-    if (hover == _lastSentChartHover) return;
-    _lastSentChartHover = hover;
+    final seq = _chartHoverStream.nextFor(hover);
+    if (seq == null) return;
     _send('chartHover', {
-      'seq': ++_chartHoverSequence,
+      'seq': seq,
       'index': _index,
       'hover': hover?.toJson(),
     });
@@ -378,14 +408,12 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
 
   /// De presentator zweeft over de grafiek; toon dezelfde markering hier.
   /// Alleen als dit venster op dezelfde dia staat (net als 'mermaidView').
-  /// [sequence] maakt een snelle hover A -> B -> weg bestand tegen berichten
-  /// die door de vensterbrug buiten volgorde aankomen.
+  /// Het volgnummer maakt een snelle hover A -> B -> weg bestand tegen
+  /// berichten die door de vensterbrug buiten volgorde aankomen.
   void _applyChartHover(Object? arguments) {
     final m = Map<String, dynamic>.from(arguments as Map);
     if (!mounted) return;
-    final sequence = (m['seq'] as num?)?.toInt();
-    if (isStaleUpdateSeq(sequence, _lastReceivedChartHoverSequence)) return;
-    if (sequence != null) _lastReceivedChartHoverSequence = sequence;
+    if (!_chartHoverStream.accept((m['seq'] as num?)?.toInt())) return;
     if ((m['index'] as num?)?.toInt() == _index) {
       _chartHover.setExternal(ChartHover.fromJson(m['hover']));
     }

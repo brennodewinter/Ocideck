@@ -641,9 +641,8 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// [_broadcastChartHover] licht dezelfde reeks/taartpunt op de beamer op — en
   /// andersom. Alleen relevant in dual-screen; los daarvan een no-op.
   final ChartHoverController _chartHover = ChartHoverController();
-  ChartHover? _lastSentChartHover;
-  int _chartHoverSequence = 0;
-  int _lastReceivedChartHoverSequence = -1;
+  final WindowMessageStream<ChartHover> _chartHoverStream =
+      WindowMessageStream<ChartHover>();
 
   /// Oefenklok: verstreken tijd, aftelling en per-slide-tijd. Sessie-only,
   /// puur meten (geen pacing). Resetbaar met R.
