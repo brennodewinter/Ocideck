@@ -76,6 +76,21 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Word weigerde een geëxporteerd `.docx` te openen en LibreOffice liet er
+  tabellen uit vallen. Drie fouten in de WordprocessingML: een blokcitaat of
+  een lijstpunt met een eigen alinea leverde een `w:p` binnen een `w:p`, wat
+  het schema verbiedt; de stijlen in `word/styles.xml` misten hun `w:name`,
+  waardoor LibreOffice elke tabel wegliet die naar zo'n stijl verwees en de
+  cellen als losse alinea's onder de tabel neerzette; en een gerasteriseerd
+  Mermaid-diagram belandde als losse `w:r` buiten een alinea. Daarbij kreeg
+  elke kolom een vaste breedte van 2880 twips, zodat een tabel vanaf vier
+  kolommen buiten het papier liep — kolommen verdelen nu de tekstbreedte van
+  de pagina. De uitlijning gebruikt weer `left`/`right` in plaats van
+  `start`/`end`, die pas in een latere editie van het formaat bijkwamen
+  terwijl het document de eerste als namespace noemt. Het geëxporteerde
+  `word/document.xml`, `word/styles.xml` en `word/numbering.xml` toetsen
+  nu schoon tegen `wml.xsd`; het bestand van vóór deze reparatie faalde er
+  op twee punten.
 - De macOS-app breekt niet meer af wanneer het beamervenster vanuit een
   fullscreen Space borderloos op het tweede scherm wordt geplaatst.
 - Tabelwerkbalk: kolom links/rechts voegt weer een kolom in en houdt de cursor in de tabel (#2090, #2092).

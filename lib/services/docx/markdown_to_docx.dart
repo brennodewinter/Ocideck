@@ -85,11 +85,15 @@ class DocxFootnoteDef {
 /// [tableHeaderFill] is de `RRGGBB`-vulling die op de kopcellen van een tabel
 /// komt (`w:shd`), uit `ThemeProfile.tableHeaderBackgroundColor`. `null`
 /// laat de cel ongevuld — voor aanroepen die geen profiel kennen.
+/// [contentWidthTwips] is de breedte van de tekstkolom (paginabreedte minus
+/// de marges); tabellen verdelen die breedte over hun kolommen, zodat een
+/// brede tabel niet buiten het papier valt.
 DocxConversion markdownToDocxBody(
   String markdown, {
   bool chapterPageBreak = false,
   FootnotePlacement footnotePlacement = FootnotePlacement.page,
   String? tableHeaderFill,
+  int contentWidthTwips = defaultContentWidthTwips,
 }) {
   if (markdown.trim().isEmpty) {
     return const DocxConversion(
@@ -111,6 +115,7 @@ DocxConversion markdownToDocxBody(
   final timelines = _protectDocumentTimelines(
     source,
     headerFill: tableHeaderFill,
+    contentWidthTwips: contentWidthTwips,
   );
   source = timelines.source;
 
@@ -130,6 +135,7 @@ DocxConversion markdownToDocxBody(
   final visitor = _DocxNodeVisitor(
     chapterPageBreak: chapterPageBreak,
     tableHeaderFill: tableHeaderFill,
+    contentWidthTwips: contentWidthTwips,
   );
   for (final node in nodes) {
     node.accept(visitor);
@@ -177,46 +183,77 @@ DocxConversion markdownToDocxBody(
 ({String source, List<String> docx}) _protectDocumentTimelines(
   String source, {
   String? headerFill,
+  required int contentWidthTwips,
 }) {
   final r = protectTimelines(
     source,
-    (timeline) => _renderTimelineDocx(timeline, headerFill: headerFill),
+    (timeline) => _renderTimelineDocx(
+      timeline,
+      headerFill: headerFill,
+      contentWidthTwips: contentWidthTwips,
+    ),
   );
   return (source: r.source, docx: r.rendered);
 }
 
-String _renderTimelineDocx(DocumentTimeline timeline, {String? headerFill}) {
+/// De breedte van de tekstkolom op A4-staand met de marges die de
+/// DOCX-export zet (20 mm links en rechts): 11906 − 2 × 1134 twips.
+/// Aanroepers met een andere paginaopmaak geven hun eigen breedte mee.
+const int defaultContentWidthTwips = 9638;
+
+/// De kolombreedte voor een tabel van [colCount] kolommen binnen een
+/// tekstkolom van [contentWidthTwips]: gelijk verdeeld, zodat een tabel van
+/// vijf kolommen niet buiten het papier valt. Een tabel houdt zo altijd
+/// dezelfde buitenmaat als de lopende tekst.
+int columnWidthTwips(int colCount, int contentWidthTwips) =>
+    colCount <= 0 ? contentWidthTwips : contentWidthTwips ~/ colCount;
+
+/// `w:tbl` plus `w:tblPr` en `w:tblGrid` voor een tabel van [colCount]
+/// kolommen. De breedte staat vast (`w:tblLayout fixed`) omdat Word,
+/// LibreOffice en Pages `w:type="auto"` alle drie anders uitleggen; met een
+/// vaste opmaak toont het papier overal dezelfde tabel.
+String _tableOpenXml(int colCount, int contentWidthTwips) {
+  final col = columnWidthTwips(colCount, contentWidthTwips);
+  final grid = StringBuffer();
+  for (var i = 0; i < colCount; i++) {
+    grid.write('<w:gridCol w:w="$col"/>');
+  }
+  return '<w:tbl><w:tblPr><w:tblW w:w="${col * colCount}" w:type="dxa"/>'
+      '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+      '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+      '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+      '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+      '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+      '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
+      '</w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr>'
+      '<w:tblGrid>$grid</w:tblGrid>';
+}
+
+String _renderTimelineDocx(
+  DocumentTimeline timeline, {
+  String? headerFill,
+  required int contentWidthTwips,
+}) {
   // De tijdlijn wordt als Word-tabel gerenderd; de marker blijft als
   // commentaar erboven staan.
+  final cols = timeline.headers.length;
+  final width = columnWidthTwips(cols, contentWidthTwips);
   final buf = StringBuffer('<!-- timeline -->\n');
-  buf.writeln('<w:tbl>');
-  buf.writeln(
-    '<w:tblPr><w:tblW w:w="0" w:type="auto"/>'
-    '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-    '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-    '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-    '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-    '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-    '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-    '</w:tblBorders></w:tblPr>',
-  );
-  buf.writeln('<w:tblGrid>');
-  for (final _ in timeline.headers) {
-    buf.writeln('<w:gridCol w:w="2880"/>');
-  }
-  buf.writeln('</w:tblGrid>');
+  buf.write(_tableOpenXml(cols, contentWidthTwips));
   // Koptekstrij.
-  buf.writeln('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
+  buf.write('<w:tr><w:trPr><w:tblHeader/></w:trPr>');
   for (final header in timeline.headers) {
-    buf.write(_tableCell(header, header: true, fill: headerFill));
+    buf.write(
+      _tableCell(header, width: width, header: true, fill: headerFill),
+    );
   }
-  buf.writeln('</w:tr>');
+  buf.write('</w:tr>');
   for (final event in timeline.events) {
-    buf.writeln('<w:tr>');
-    buf.write(_tableCell(event.marker));
-    buf.write(_tableCell(event.event));
-    buf.write(_tableCell(event.metadata ?? ''));
-    buf.writeln('</w:tr>');
+    buf.write('<w:tr>');
+    buf.write(_tableCell(event.marker, width: width));
+    buf.write(_tableCell(event.event, width: width));
+    buf.write(_tableCell(event.metadata ?? '', width: width));
+    buf.write('</w:tr>');
   }
   buf.writeln('</w:tbl>');
   // Een lege alinea na de tabel, anders plakt de volgende tekst vast.
@@ -224,12 +261,17 @@ String _renderTimelineDocx(DocumentTimeline timeline, {String? headerFill}) {
   return buf.toString();
 }
 
-String _tableCell(String text, {bool header = false, String? fill}) {
+String _tableCell(
+  String text, {
+  required int width,
+  bool header = false,
+  String? fill,
+}) {
   final shd = fill == null
       ? ''
       : '<w:shd w:val="clear" w:color="auto" w:fill="$fill"/>';
   final style = header ? 'TableHeading' : 'TableContents';
-  return '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/>$shd</w:tcPr>'
+  return '<w:tc><w:tcPr><w:tcW w:w="$width" w:type="dxa"/>$shd</w:tcPr>'
       '<w:p><w:pPr><w:pStyle w:val="$style"/></w:pPr>'
       '<w:r><w:t xml:space="preserve">${xmlEscape(text)}</w:t></w:r>'
       '</w:p></w:tc>';
@@ -290,7 +332,11 @@ String _htmlInlineToDocx(String html) {
 }
 
 class _DocxNodeVisitor implements md.NodeVisitor {
-  _DocxNodeVisitor({this.chapterPageBreak = false, this.tableHeaderFill});
+  _DocxNodeVisitor({
+    this.chapterPageBreak = false,
+    this.tableHeaderFill,
+    this.contentWidthTwips = defaultContentWidthTwips,
+  });
 
   final StringBuffer output = StringBuffer();
   final bool chapterPageBreak;
@@ -298,13 +344,27 @@ class _DocxNodeVisitor implements md.NodeVisitor {
   /// De `RRGGBB`-vulling voor tabelkopcellen, of `null` voor geen vulling.
   final String? tableHeaderFill;
 
+  /// De breedte van de tekstkolom, waarover tabellen hun kolommen verdelen.
+  final int contentWidthTwips;
+
   bool _seenChapter = false;
+
+  /// Of er op dit moment een `<w:p>` open staat. WordprocessingML kent geen
+  /// alinea in een alinea: een citaat of een lijstpunt dat een `<p>` bevat
+  /// moet de lopende alinea hergebruiken of sluiten, nooit er een tweede
+  /// binnenin openen. Word weigert zo'n bestand ("er zijn problemen met de
+  /// inhoud"); LibreOffice herstelt het door de structuur te laten vallen.
+  bool _paragraphOpen = false;
 
   /// Lijst-diepte (geneste lijsten). 0 = geen lijst.
   int _listDepth = 0;
 
   /// Of de huidige lijst geordend is, per diepteniveau.
   final List<bool> _orderedStack = [];
+
+  /// Het kolomaantal van de tabel die op dit moment open staat — de cellen
+  /// delen de tekstbreedte daarover.
+  int _tableColumns = 1;
 
   final List<String> mermaidSources = [];
   final List<String> mathSources = [];
@@ -319,12 +379,53 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
   bool get _inCodeBlock => _stack.any((c) => c == _Ctx.codeBlock);
 
+  bool get _inTable => _stack.any((c) => c == _Ctx.table);
+
+  /// Opent een alinea met [pPr] als alinea-eigenschappen. Staat er nog een
+  /// alinea open, dan wordt die eerst gesloten — een alinea in een alinea is
+  /// geen geldige WordprocessingML.
+  void _openParagraph(String pPr) {
+    _closeParagraph();
+    output.write('<w:p>$pPr');
+    _paragraphOpen = true;
+  }
+
+  void _closeParagraph() {
+    if (!_paragraphOpen) return;
+    // Binnen een tabel geen regelovergang: `w:tbl`, `w:tr` en `w:tc` dragen
+    // alleen elementen, geen tekst. Op blokniveau houdt de regelovergang de
+    // XML leesbaar voor wie hem naast een diff legt.
+    output.write(_inTable ? '</w:p>' : '</w:p>\n');
+    _paragraphOpen = false;
+  }
+
+  /// De alinea-eigenschappen voor een `<p>` op blokniveau. Binnen een citaat
+  /// krijgt elke alinea de Quote-stijl; binnen een lijstpunt is een tweede
+  /// alinea een vervolgalinea (wel de inspringing, geen nieuw opsommingsteken).
+  String _blockParagraphPr() {
+    for (final ctx in _stack.reversed) {
+      if (ctx == _Ctx.blockquote) {
+        return '<w:pPr><w:pStyle w:val="Quote"/></w:pPr>';
+      }
+      if (ctx == _Ctx.listItem) {
+        final left = 720 + (_listDepth - 1).clamp(0, 5) * 360;
+        return '<w:pPr><w:pStyle w:val="ListParagraph"/>'
+            '<w:ind w:left="$left"/></w:pPr>';
+      }
+      if (ctx == _Ctx.tableCell) return '';
+    }
+    return '';
+  }
+
   @override
   void visitText(md.Text text) {
     if (_inCodeBlock) {
       // Code-blok-tekst wordt in _visitCode afgehandeld.
       return;
     }
+    // Losse tekst op blokniveau (een citaat zonder alinea, bijvoorbeeld) hoort
+    // toch in een alinea: een `<w:r>` direct onder `<w:body>` is ongeldig.
+    if (!_paragraphOpen) _openParagraph(_blockParagraphPr());
     // Elke tekst-node wordt een eigen run met de geldende run-properties.
     // `xml:space="preserve"` houdt voorloop- en achterloopspaties staan —
     // zonder dat plakt "vet " aan de volgende run vast.
@@ -376,12 +477,21 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
       // ── Alinea's en blokken ──
       case 'p':
-        output.write('<w:p>');
-        _stack.add(_Ctx.paragraph);
+        // Binnen een lijstpunt heeft `li` de alinea al geopend; die wordt
+        // hergebruikt in plaats van er een tweede binnenin te openen.
+        if (_paragraphOpen) {
+          _stack.add(_Ctx.reusedParagraph);
+        } else {
+          _openParagraph(_blockParagraphPr());
+          _stack.add(_Ctx.paragraph);
+        }
       case 'blockquote':
-        output.write('<w:p><w:pPr><w:pStyle w:val="Quote"/></w:pPr>');
+        // Een citaat opent zelf géén alinea: zijn kind-alinea's krijgen de
+        // Quote-stijl via _blockParagraphPr.
+        _closeParagraph();
         _stack.add(_Ctx.blockquote);
       case 'hr':
+        _closeParagraph();
         output.write(
           '<w:p><w:pPr><w:pBdr><w:bottom w:val="single" '
           'w:sz="6" w:space="1" w:color="auto"/></w:pBdr></w:pPr></w:p>',
@@ -403,8 +513,8 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         final ordered = _orderedStack.isEmpty ? false : _orderedStack.last;
         final numId = ordered ? 2 : 1;
         final ilvl = _listDepth - 1;
-        output.write(
-          '<w:p><w:pPr><w:pStyle w:val="ListParagraph"/>'
+        _openParagraph(
+          '<w:pPr><w:pStyle w:val="ListParagraph"/>'
           '<w:numPr><w:ilvl w:val="$ilvl"/><w:numId w:val="$numId"/></w:numPr>'
           '<w:ind w:left="${720 + ilvl * 360}" w:hanging="360"/></w:pPr>',
         );
@@ -455,22 +565,11 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
       // ── Tabellen (GFM) ──
       case 'table':
+        // Een tabel staat naast een alinea, nooit erin.
+        _closeParagraph();
         _stack.add(_Ctx.table);
-        final colCount = _tableColumnCount(element);
-        output.write(
-          '<w:tbl><w:tblPr><w:tblW w:w="0" w:type="auto"/>'
-          '<w:tblBorders><w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-          '<w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-          '<w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-          '<w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-          '<w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-          '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>'
-          '</w:tblBorders></w:tblPr><w:tblGrid>',
-        );
-        for (var i = 0; i < colCount; i++) {
-          output.write('<w:gridCol w:w="2880"/>');
-        }
-        output.write('</w:tblGrid>');
+        _tableColumns = _tableColumnCount(element);
+        output.write(_tableOpenXml(_tableColumns, contentWidthTwips));
         return true;
       case 'thead':
         _stack.add(_Ctx.tableHeader);
@@ -497,9 +596,10 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
   void _openHeading(int level) {
     final breakBefore = chapterPageBreak && level == 1 && _seenChapter;
-    output.write('<w:p><w:pPr><w:pStyle w:val="Heading$level"/>');
-    if (breakBefore) output.write('<w:pageBreakBefore/>');
-    output.write('</w:pPr>');
+    final pageBreak = breakBefore ? '<w:pageBreakBefore/>' : '';
+    _openParagraph(
+      '<w:pPr><w:pStyle w:val="Heading$level"/>$pageBreak</w:pPr>',
+    );
     _rPr.add('<w:b/>');
     _stack.add(_Ctx.heading);
   }
@@ -509,19 +609,24 @@ class _DocxNodeVisitor implements md.NodeVisitor {
     final shd = header && tableHeaderFill != null
         ? '<w:shd w:val="clear" w:color="auto" w:fill="$tableHeaderFill"/>'
         : '';
+    final width = columnWidthTwips(_tableColumns, contentWidthTwips);
+    output.write('<w:tc><w:tcPr><w:tcW w:w="$width" w:type="dxa"/>$shd</w:tcPr>');
     // Vet en de koptekstkleur zitten in de TableHeading-stijl; hier blijft
     // alleen de uitlijning als alinea-eigenschap over.
-    output.write(
-      '<w:tc><w:tcPr><w:tcW w:w="2880" w:type="dxa"/>$shd</w:tcPr>'
-      '<w:p><w:pPr><w:pStyle w:val="${header ? 'TableHeading' : 'TableContents'}"/>'
+    _openParagraph(
+      '<w:pPr><w:pStyle w:val="${header ? 'TableHeading' : 'TableContents'}"/>'
       '<w:jc w:val="${_alignVal(element.attributes['align'])}"/></w:pPr>',
     );
   }
 
+  /// De uitlijning als `ST_Jc`-waarde. `left`/`right` en niet `start`/`end`:
+  /// die laatste kwamen pas in een latere editie van het formaat, terwijl de
+  /// namespace van dit document de eerste noemt. `left`/`right` staat in elke
+  /// editie.
   String _alignVal(String? align) => switch (align) {
     'center' => 'center',
-    'right' => 'end',
-    _ => 'start',
+    'right' => 'right',
+    _ => 'left',
   };
 
   int _tableColumnCount(md.Element table) {
@@ -554,6 +659,9 @@ class _DocxNodeVisitor implements md.NodeVisitor {
       // rasteriseert mermaid naar PNG en zet wiskunde om (of valt terug op
       // bron). Mermaid heet hier 'mermaid'; display-math komt binnen als
       // language-math of language-tex.
+      // Een codeblok, diagram of formule staat op blokniveau: een lijstpunt
+      // dat er een bevat moet zijn alinea eerst sluiten.
+      _closeParagraph();
       if (lang == 'mermaid') {
         final idx = mermaidSources.length;
         mermaidSources.add(codeText);
@@ -608,13 +716,16 @@ class _DocxNodeVisitor implements md.NodeVisitor {
       case 'h5':
       case 'h6':
         _rPr.removeLast();
-        output.write('</w:p>\n');
+        _closeParagraph();
 
       case 'p':
-        if (ctx == _Ctx.paragraph) output.write('</w:p>\n');
+        // Ook een hergebruikte alinea (`<p>` binnen een lijstpunt) sluit
+        // hier: een tweede `<p>` in hetzelfde punt opent dan een eigen
+        // vervolgalinea in plaats van tegen de eerste aan te plakken.
+        _closeParagraph();
 
       case 'blockquote':
-        output.write('</w:p>\n');
+        _closeParagraph();
 
       case 'ul':
         _orderedStack.removeLast();
@@ -623,7 +734,7 @@ class _DocxNodeVisitor implements md.NodeVisitor {
         _orderedStack.removeLast();
         _listDepth--;
       case 'li':
-        output.write('</w:p>\n');
+        _closeParagraph();
 
       case 'pre':
         break;
@@ -648,9 +759,10 @@ class _DocxNodeVisitor implements md.NodeVisitor {
 
       case 'th':
       case 'td':
-        output.write('</w:p></w:tc>\n');
+        _closeParagraph();
+        output.write('</w:tc>');
       case 'tr':
-        output.write('</w:tr>\n');
+        output.write('</w:tr>');
       case 'thead':
         break;
       case 'tbody':
@@ -668,6 +780,10 @@ enum _Ctx {
   passThrough,
   heading,
   paragraph,
+
+  /// Een `<p>` die de alinea van zijn blok (een lijstpunt) hergebruikt in
+  /// plaats van er een nieuwe binnenin te openen.
+  reusedParagraph,
   blockquote,
   unorderedList,
   orderedList,

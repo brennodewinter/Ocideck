@@ -78,12 +78,17 @@ Future<Uint8List> buildDocumentExportDocx(
   final title = meta.displayTitle('Document');
   final theme = bundle.audience.deck.themeProfile;
 
-  // 1. Markdown → WordprocessingML body + nevenproducten.
+  // 1. Markdown → WordprocessingML body + nevenproducten. De tabellen
+  // verdelen de tekstbreedte van de sectie, zodat een brede tabel binnen de
+  // marges blijft.
+  final pageSize = _pageSizeTwips(bundle);
+  final pageMargins = _pageMarginsTwips(bundle);
   final conversion = markdownToDocxBody(
     body,
     chapterPageBreak: chapterPageBreak,
     footnotePlacement: footnotePlacement,
     tableHeaderFill: hexRgbTriplet(theme.tableHeaderBackgroundColor),
+    contentWidthTwips: pageSize.w - pageMargins.left - pageMargins.right,
   );
 
   // 2-4. Rasterisatie, afbeeldingen ophalen, sentinels vervangen.
@@ -95,8 +100,6 @@ Future<Uint8List> buildDocumentExportDocx(
   );
 
   // 5. XML-onderdelen bouwen.
-  final pageSize = _pageSizeTwips(bundle);
-  final pageMargins = _pageMarginsTwips(bundle);
   final documentXml = _buildDocumentXml(prepared.body, pageSize, pageMargins);
   final stylesXml = _buildStylesXml(theme);
   final numberingXml = _buildNumberingXml();
@@ -336,9 +339,12 @@ String _replaceGraphicSentinels(
     final (w, h) = _imageDimensions(png);
     final (cx, cy) = _drawingExtent(w, h);
     final (rId, mediaName, mediaType) = _addMedia(png, media, relations);
+    // Een diagram of formule staat op blokniveau: de tekening krijgt een
+    // eigen alinea. Een `w:r` mag niet los onder `w:body` staan — Word
+    // weigert zo'n bestand.
     out = out.replaceAll(
       sentinel,
-      _drawingXml(rId, mediaName, mediaType, cx, cy, label),
+      '<w:p>${_drawingXml(rId, mediaName, mediaType, cx, cy, label)}</w:p>',
     );
   }
   return out;
@@ -595,33 +601,44 @@ String _buildStylesXml(ThemeProfile theme) {
       '<w:sz w:val="22"/></w:rPr></w:rPrDefault>'
       '<w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="259" w:lineRule="auto"/></w:pPr></w:pPrDefault>'
       '</w:docDefaults>'
+      '<w:style w:type="paragraph" w:default="1" w:styleId="Normal">'
+      '<w:name w:val="Normal"/><w:qFormat/></w:style>'
       '${_headingStyle(1, 32, 240, heading, headingRFonts)}'
       '${_headingStyle(2, 26, 240, subheading, headingRFonts)}'
       '${_headingStyle(3, 22, 200, subheading, headingRFonts)}'
       '${_headingStyle(4, 20, 200, subheading, headingRFonts)}'
       '${_headingStyle(5, 18, 160, subheading, headingRFonts)}'
       '${_headingStyle(6, 16, 160, subheading, headingRFonts)}'
-      '<w:style w:type="character" w:styleId="SourceText"><w:rPr>'
+      '<w:style w:type="character" w:styleId="SourceText">'
+      '<w:name w:val="Source Text"/><w:rPr>'
       '<w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
       '</w:rPr></w:style>'
-      '<w:style w:type="paragraph" w:styleId="PreformattedText"><w:pPr>'
+      '<w:style w:type="paragraph" w:styleId="PreformattedText">'
+      '<w:name w:val="Preformatted Text"/><w:pPr>'
       '<w:spacing w:after="0" w:line="240" w:lineRule="auto"/>'
       '</w:pPr><w:rPr><w:rFonts w:ascii="Consolas" w:hAnsi="Consolas" w:cs="Consolas"/>'
       '<w:sz w:val="20"/></w:rPr></w:style>'
-      '<w:style w:type="paragraph" w:styleId="Quote"><w:pPr>'
-      '<w:ind w:left="567" w:right="567"/><w:spacing w:after="160"/>'
+      // `w:spacing` vóór `w:ind`: CT_PPrBase schrijft die volgorde voor.
+      '<w:style w:type="paragraph" w:styleId="Quote">'
+      '<w:name w:val="Quote"/><w:pPr>'
+      '<w:spacing w:after="160"/><w:ind w:left="567" w:right="567"/>'
       '</w:pPr><w:rPr><w:i/></w:rPr></w:style>'
-      '<w:style w:type="paragraph" w:styleId="ListParagraph"><w:pPr>'
+      '<w:style w:type="paragraph" w:styleId="ListParagraph">'
+      '<w:name w:val="List Paragraph"/><w:pPr>'
       '<w:ind w:left="720" w:hanging="360"/></w:pPr></w:style>'
-      '<w:style w:type="paragraph" w:styleId="TableHeading"><w:rPr>'
+      '<w:style w:type="paragraph" w:styleId="TableHeading">'
+      '<w:name w:val="Table Heading"/><w:rPr>'
       '<w:b/><w:color w:val="${hexRgbTriplet(theme.tableHeaderTextColor)}"/>'
       '</w:rPr></w:style>'
-      '<w:style w:type="paragraph" w:styleId="TableContents"><w:rPr>'
+      '<w:style w:type="paragraph" w:styleId="TableContents">'
+      '<w:name w:val="Table Contents"/><w:rPr>'
       '<w:color w:val="${hexRgbTriplet(theme.tableTextColor)}"/></w:rPr></w:style>'
-      '<w:style w:type="character" w:styleId="Hyperlink"><w:rPr>'
+      '<w:style w:type="character" w:styleId="Hyperlink">'
+      '<w:name w:val="Hyperlink"/><w:rPr>'
       '<w:color w:val="${hexRgbTriplet(theme.accentColor)}"/>'
       '<w:u w:val="single"/></w:rPr></w:style>'
-      '<w:style w:type="character" w:styleId="FootnoteReference"><w:rPr>'
+      '<w:style w:type="character" w:styleId="FootnoteReference">'
+      '<w:name w:val="Footnote Reference"/><w:rPr>'
       '<w:vertAlign w:val="superscript"/></w:rPr></w:style>'
       '</w:styles>';
 }
@@ -636,12 +653,14 @@ String _rFonts(String family) {
 String _headingStyle(
   int level,
   int szHalfPt,
-  int spacingAfter,
+  int spacingBefore,
   String color,
   String rFonts,
 ) =>
     '<w:style w:type="paragraph" w:styleId="Heading$level">'
-    '<w:pPr><w:spacing w:before="$spacingAfter" w:after="80"/>'
+    '<w:name w:val="heading $level"/><w:basedOn w:val="Normal"/>'
+    '<w:qFormat/>'
+    '<w:pPr><w:spacing w:before="$spacingBefore" w:after="80"/>'
     '<w:outlineLvl w:val="${level - 1}"/></w:pPr>'
     '<w:rPr>$rFonts<w:b/><w:color w:val="$color"/><w:sz w:val="$szHalfPt"/></w:rPr>'
     '</w:style>';
