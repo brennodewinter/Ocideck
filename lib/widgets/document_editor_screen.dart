@@ -6,6 +6,7 @@ import 'dart:math' as math;
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart' show EditorState;
+import 'package:flutter_quill/quill_delta.dart' show Delta, Operation;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
@@ -57,6 +58,7 @@ import '../utils/image_search_paths.dart';
 import '../utils/footnotes.dart';
 import '../utils/markdown_blocks.dart';
 import '../utils/markdown_caret_map.dart';
+import '../utils/markdown_quill_codec.dart';
 import '../utils/physical_control_shortcut.dart';
 import '../utils/text_search.dart';
 import '../utils/url_launcher_util.dart';

@@ -76,6 +76,12 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
   /// het klembord → Markdown, anders opgeschoonde platte tekst. Geeft `true`
   /// als de plak is afgehandeld (dan mag de editor niet nóg eens plakken).
   Future<bool> _smartPaste() async {
+    // Vang de Quill-caret vóór de async klembordlezing: raakt de selectie in
+    // dat gat invalide, dan zou een tekstplak stilletjes op het einde van het
+    // document landen (#2138).
+    final visualCaret = _viewMode == _DocViewMode.visual
+        ? _visualEditorKey.currentState?.widget.controller.selection
+        : null;
     final state = ref.read(documentProvider);
     final projectPath = state.filePath == null
         ? null
@@ -118,17 +124,18 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
       return true;
     }
 
-    _insertPastedMarkdown(resolved.text);
+    _insertPastedMarkdown(resolved.text, visualCaret: visualCaret);
     return true;
   }
 
   /// Zet [text] op de cursor in de bron, het bestaande pad voor platte tekst.
-  /// In de visuele stand gaat de invoeging via de Quill-cursor, net als
-  /// [_insertBlock] — de bron-controller staat daar stil op een oude positie.
-  void _insertPastedMarkdown(String text) {
+  /// In de visuele stand landt geplakte tekst op de Quill-caret — het blokpad
+  /// van [_insertBlock] zoekt bewust het einde van de regel, wat voor een
+  /// tabel klopt maar een zin onder de cursor zou zetten (#2138).
+  void _insertPastedMarkdown(String text, {TextSelection? visualCaret}) {
     if (_viewMode == _DocViewMode.visual &&
-        markdownRoundTripsVisually(_controller.text)) {
-      _requestVisualInsert(block: text);
+        markdownRoundTripsVisually(_controller.text) &&
+        _pasteInlineAtVisualCaret(text, visualCaret)) {
       return;
     }
     final sel = _controller.selection;
@@ -142,6 +149,56 @@ extension _DocumentEditorLayouts on _DocumentEditorScreenState {
     );
     _applyingExternal = false;
     _commitDocumentBody(ref, next, coalesceKey: 'doc');
+  }
+
+  /// Plakt [markdown] als tekst op de Quill-caret van de visuele editor en
+  /// vervangt daarbij een actieve selectie. `false` als er geen visuele
+  /// editor staat — de aanroeper valt dan terug op de bronroute.
+  ///
+  /// [caret] is de selectie zoals [_smartPaste] hem vóór de async
+  /// klembordlezing vastlegde; zonder die vangst landt een plak na
+  /// focusverlies op het documenteinde.
+  bool _pasteInlineAtVisualCaret(String markdown, TextSelection? caret) {
+    final quill = _visualEditorKey.currentState?.widget.controller;
+    if (quill == null) return false;
+    // De delta van een heel document sluit af met de verplichte
+    // regelafsluiter; die is geen inhoud. Laat je hem staan, dan breekt de
+    // geplakte tekst de regel waar de caret in staat.
+    final ops = MarkdownQuillCodec.documentFromMarkdown(
+      markdown,
+    ).toDelta().toList();
+    final last = ops.isEmpty ? null : ops.last;
+    if (last != null &&
+        last.isInsert &&
+        last.isPlain &&
+        last.data is String &&
+        (last.data as String).endsWith('\n')) {
+      final trimmed = (last.data as String).substring(
+        0,
+        (last.data as String).length - 1,
+      );
+      if (trimmed.isEmpty) {
+        ops.removeLast();
+      } else {
+        ops[ops.length - 1] = Operation.insert(trimmed);
+      }
+    }
+    if (ops.isEmpty) return true;
+    final end = quill.document.length - 1;
+    final sel = (caret != null && caret.isValid) ? caret : quill.selection;
+    final at = sel.isValid ? sel.start.clamp(0, end) : end;
+    final len = sel.isValid ? sel.end.clamp(at, end) - at : 0;
+    final inserted = ops.fold<int>(0, (sum, op) => sum + (op.length ?? 0));
+    // Een plak is een eigen bewerking, geen voortzetting van het typen ervoor
+    // — net zoals [_requestVisualInsert] dat voor blokken regelt.
+    _expectVisualInsert = true;
+    quill.replaceText(
+      at,
+      len,
+      Delta.fromOperations(ops),
+      TextSelection.collapsed(offset: at + inserted),
+    );
+    return true;
   }
 
   /// Bron-modus: de rauwe bron en de live weergave naast elkaar op een breed
