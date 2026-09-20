@@ -751,6 +751,22 @@ the other process and start again. `scripts/notarize_macos.sh` checks the same
 invariant directly (is `.dart_tool` actually gone?) so it also holds when you run
 that script by hand.
 
+Also before the password, the pre-flight clears a **native-assets CMake cache
+left by a previous package version**. `hooks_runner` keys its shared build
+directories on a hash of the build configuration, not on the package version,
+and each configuration has its own hash: after a bump of a package with a CMake
+build hook (`dartcv4`), `dart run` and `flutter test` rebuild their hash and go
+green while `flutter build macos` still meets the old cache and cmake refuses
+(*"The source … does not match the source … used to generate cache"*). The
+0.6.6 run died on exactly that in `make build-release`, after ninety green
+minutes of `make check-release`. `scripts/prune_stale_hook_cache.sh` compares
+each cache's source with what `.dart_tool/package_config.json` resolves and
+removes only `CMakeCache.txt` and `CMakeFiles/` of a mismatching one, so `_deps`
+and the OpenCV archive stay and the next build reconfigures instead of
+redownloading. The same script runs from the gate lock (`make check`) and from
+`make sbom`, `sbom-verify` and the desktop `build-*` targets; `--check` only
+reports. A tree without `package_config.json` is left alone.
+
 Before the password, the chain refuses to start past **known, unmerged fix
 work**: open issues or pull requests carrying the `release-blocker` label, and
 `fix/*` branches on origin whose head is not in `origin/main`. v0.6.5 was cut

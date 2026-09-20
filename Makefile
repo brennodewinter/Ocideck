@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -77,6 +77,7 @@ help:
 	@echo "  make licenses        Verify all dependencies use open-source licences."
 	@echo "  make sbom            Generate the SBOM (CycloneDX + SPDX) in sbom/."
 	@echo "  make sbom-verify     Fail if the committed SBOM is stale (CRA staleness gate)."
+	@echo "  make prune-hook-cache Drop native-build CMake caches left by a previous package version."
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
 	@echo "  make check-audience-boundary  Every output channel classified: audience (needs AudienceDeck) or source."
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
@@ -720,18 +721,36 @@ licenses:
 # Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires, in
 # both common formats, from the files that are already the source of truth
 # (pubspec.lock, MANIFEST.json, pubspec.yaml, .tool-versions). Commit the result.
-sbom:
+sbom: prune-hook-cache
 	@echo "== OciDeck build: Software Bill of Materials =="
 	@echo "Command: dart run tool/generate_sbom.dart"
 	@echo "Output: sbom/ocideck.cdx.json (CycloneDX 1.6), sbom/ocideck.spdx.json (SPDX 2.3),"
 	@echo "        and sbom/ocideck.sbom.md (human-readable)."
 	dart run tool/generate_sbom.dart
 
+# Native-assets hygiene. hooks_runner keys its shared CMake build directories on
+# a hash of the build configuration (target OS/arch, compiler, deployment
+# target), not on the package version. After a bump of a package with a CMake
+# build hook (dartcv4) the hook re-runs but cmake finds the previous version's
+# cache and refuses ("The source … does not match the source … used to generate
+# cache"). Every configuration has its own hash, so `dart run`/`flutter test`
+# being green says nothing about `flutter build macos` — the 0.6.6 release run
+# (2026-09-20) died on exactly that after ninety green minutes. The script only
+# removes CMakeCache.txt and CMakeFiles/ of a cache whose source no longer
+# matches pub's resolution; _deps (the downloaded OpenCV archive) stays. It is
+# a prerequisite of every target that invokes a build hook on a long-lived tree
+# (sbom, sbom-verify, the desktop builds) and of the gate lock.
+prune-hook-cache:
+	@echo "== OciDeck build: native-assets cache hygiene =="
+	@echo "Command: scripts/prune_stale_hook_cache.sh"
+	@echo "Failure means: .dart_tool/package_config.json could not be read — run 'flutter pub get'."
+	scripts/prune_stale_hook_cache.sh
+
 # Staleness gate: regenerate in memory and fail if the committed SBOM drifted
 # from the current dependency set (volatile timestamp/serial fields ignored).
 # Same role as deps-verify-offline for the JS bundles — keeps the CRA artefact
 # from silently going out of date. Wired into CI and check-full.
-sbom-verify:
+sbom-verify: prune-hook-cache
 	@echo "== OciDeck check: SBOM up to date =="
 	@echo "Command: dart run tool/generate_sbom.dart --check"
 	@echo "Failure means: dependencies changed but the SBOM wasn't regenerated —"
@@ -1199,7 +1218,7 @@ check-web: build-web
 # cannot cross-compile a desktop bundle (a macOS .app needs macOS, a Windows
 # .exe needs Windows, a Linux bundle needs Linux). Run the matching target on
 # the matching machine, or use the release CI workflow to produce all at once.
-build-macos: sbom-verify
+build-macos: prune-hook-cache sbom-verify
 	@echo "== OciDeck build: macOS app (.app) =="
 	@echo "Command: flutter build macos --release"
 	@echo "Output: build/macos/Build/Products/Release/*.app"
@@ -1207,7 +1226,7 @@ build-macos: sbom-verify
 	@echo "== OciDeck check: bundled documentation is fresh =="
 	dart run tool/check_bundled_docs_fresh.dart build/macos
 
-build-windows: sbom-verify
+build-windows: prune-hook-cache sbom-verify
 	@echo "== OciDeck build: Windows app (.exe) =="
 	@echo "Command: flutter build windows --release"
 	@echo "Output: build/windows/x64/runner/Release"
@@ -1237,7 +1256,7 @@ winget-manifest:
 	@echo "Command: scripts/update_winget_manifest.sh $(TAG) $(OUT)"
 	scripts/update_winget_manifest.sh $(TAG) $(OUT)
 
-build-linux: sbom-verify
+build-linux: prune-hook-cache sbom-verify
 	@echo "== OciDeck build: Linux bundle =="
 	@echo "Command: flutter build linux --release"
 	@echo "Output: build/linux/x64/release/bundle"

@@ -186,6 +186,42 @@ void main() {
     expect(Directory('${build.path}/CMakeFiles').existsSync(), isTrue);
   }, skip: skipOnWindows);
 
+  test('een cache uit een vorige pakketversie wordt opgeruimd', () async {
+    // De 0.6.6-run van 20-09-2026: package_config.json wijst naar dartcv4
+    // 2.3.1, de gedeelde buildmap van de macOS-bouw droeg nog de cache van
+    // 2.3.0. Het slot is de plek waar elke poortrun langskomt, dus hier gaat
+    // hij weg — met dezelfde ingreep als een cache van een andere worktree.
+    final pubCache = Directory('${sandbox.path}/pub-cache')..createSync();
+    Directory('${pubCache.path}/dartcv4-2.3.0/src').createSync(recursive: true);
+    Directory('${pubCache.path}/dartcv4-2.3.1/src').createSync(recursive: true);
+    File('${sandbox.path}/.dart_tool/package_config.json').writeAsStringSync(
+      '{"configVersion": 2, "packages": [\n'
+      '    {\n      "name": "dartcv4",\n'
+      '      "rootUri": "file://${pubCache.path}/dartcv4-2.3.1",\n'
+      '      "packageUri": "lib/"\n    }\n  ]}\n',
+    );
+    final build = writeCache(
+      '${sandbox.path}/.dart_tool/hooks_runner/shared/dartcv4/build/7ad245dadc',
+    );
+    final cache = File('${build.path}/CMakeCache.txt');
+    cache.writeAsStringSync(
+      '${cache.readAsStringSync()}'
+      'CMAKE_HOME_DIRECTORY:INTERNAL=${pubCache.path}/dartcv4-2.3.0/src\n',
+    );
+
+    final result = await run(['sh', '-c', 'echo gedraaid']);
+
+    expect(result.exitCode, 0);
+    expect(cache.existsSync(), isFalse);
+    expect(Directory('${build.path}/CMakeFiles').existsSync(), isFalse);
+    expect(
+      Directory('${build.path}/_deps').existsSync(),
+      isTrue,
+      reason: 'zonder _deps volgt een herdownload, en die weigert GitHub',
+    );
+    expect(result.stderr, contains('dartcv4-2.3.0'));
+  }, skip: skipOnWindows);
+
   test('de bouw laat kernen vrij', () async {
     // Zonder rem bouwt CMake met zoveel taken als er kernen zijn; op een
     // laptop trok dat meer stroom dan de adapter kon leveren.

@@ -119,6 +119,15 @@ make check        # format-check + analyze + conventions + method-length + dead-
 > answer it with a 429 anyway). A rebuild after a switch is still slow — that
 > part was true.
 >
+> **The version stamp.** The same loop also clears a cache whose source no
+> longer matches the package version pub resolves — after a `dartcv4` bump,
+> cmake refuses with *"The source … does not match the source … used to
+> generate cache"*, and it does so per configuration hash, so a green
+> `dart run` says nothing about `flutter build macos`. That is
+> `scripts/prune_stale_hook_cache.sh`, which the desktop `build-*` targets,
+> `make sbom` and the release pre-flight run as well; it removes the same two
+> things (`CMakeCache.txt`, `CMakeFiles/`) and keeps `_deps`.
+>
 > **The brake.** Left alone, CMake builds with one job per core and
 > `flutter test` starts one worker per core. On a laptop that drew more power
 > than the adapter could supply: the battery ran down while plugged in. The
