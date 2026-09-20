@@ -115,6 +115,19 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.7] — 2026-09-21
+
+### Changed
+
+- refactor(presentatie): bundel volgnummer en dedup per berichtsoort (#2143)
+
+### Fixed
+
+- fix(document): vijf visuele-editorbugs — frontmatter, plakken, tabelbalk, overzicht, zoeken (#2144)
+- fix(presentatie): houd grafiekweergaven synchroon (#2139)
+- fix(docx): laat Word de export weer openen en LibreOffice de tabellen houden
+- fix(release): ask the live site whether the web demo is deployed
+
 ## [0.6.6] — 2026-09-20
 
 ### Added
