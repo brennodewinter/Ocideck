@@ -255,13 +255,13 @@ extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
   /// hover (extern) verandert `local` niet, dus wordt hij niet teruggekaatst.
   void _broadcastChartHover() {
     final hover = _chartHover.local;
-    if (hover == _lastSentChartHover) return;
-    _lastSentChartHover = hover;
+    final seq = _chartHoverStream.nextFor(hover);
+    if (seq == null) return;
     _sendChartHover(
       audience: widget.audience,
       hover: hover,
       index: _index,
-      sequence: ++_chartHoverSequence,
+      sequence: seq,
     );
   }
 
@@ -270,9 +270,7 @@ extension _PresenterMermaidBroadcast on _FullscreenPresenterState {
   /// nooit op een andere dia belanden).
   void _applyBeamerChartHover(Object? arguments) {
     final args = Map<String, dynamic>.from(arguments as Map);
-    final sequence = (args['seq'] as num?)?.toInt();
-    if (isStaleUpdateSeq(sequence, _lastReceivedChartHoverSequence)) return;
-    if (sequence != null) _lastReceivedChartHoverSequence = sequence;
+    if (!_chartHoverStream.accept((args['seq'] as num?)?.toInt())) return;
     if ((args['index'] as num?)?.toInt() == _index) {
       _chartHover.setExternal(ChartHover.fromJson(args['hover']));
     }

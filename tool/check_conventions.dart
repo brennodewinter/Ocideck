@@ -260,8 +260,9 @@ const Map<String, int> fileSizeBaseline = {
   // part-bestand menu_preview_layouts.dart.
   // +8 (#1828): calloutRevealedBulletCount veld + doc + constructor-param +
   // doorgeven aan _BulletsImagePreview, en de image_callout import.
-  // +1: `key: ValueKey(slide.id)` op _ChartPreview — zonder sleutel blijft de
-  // hover-/animatiestate van de ene grafiekdia aan de volgende kleven.
+  // +1: `key: ValueKey(slide.id)` op _ChartPreview. Zonder sleutel hergebruikt
+  // Flutter de State van de vorige grafiekdia, inclusief de markering die daar
+  // aan stond; de sleutel is het gedrag, er valt niets uit te halen.
   'lib/widgets/slides/slide_preview.dart':
       1073, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
