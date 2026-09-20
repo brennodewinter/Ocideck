@@ -835,6 +835,25 @@ preflight() {
 }
 
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
+# De webdemo alleen lokaal bouwen en deployen als de release-CI dat niet al
+# gedaan heeft, en dan alleen vanaf de commit die de tag draagt.
+deploy_web_if_needed() { # gebruikt de momentopname die assert_release_ci_terminal net nam
+  local tag_sha head_sha
+  [ -n "${snap:-}" ] || snap="$(release_ci_snapshot || true)"
+  if printf '%s\n' "$snap" | grep -qx 'success|Webversie live zetten'; then
+    log "De release-CI heeft de webbundel van $TAG al live gezet (Webversie live zetten: groen);"
+    log "lokaal deploy-web overgeslagen — de werkboom is niet per se de tag."
+    return 0
+  fi
+  tag_sha="$(git rev-list -n 1 "$TAG" 2>/dev/null || true)"
+  head_sha="$(git rev-parse HEAD 2>/dev/null || true)"
+  if [ -z "$tag_sha" ] || [ "$tag_sha" != "$head_sha" ]; then
+    die "de release-CI heeft de webbundel van $TAG niet live gezet en de werkboom staat niet op die tag (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Check de tag uit (git checkout $TAG) of herstel de CI-job, en hervat: scripts/release_auto.sh --resume $TAG"
+  fi
+  make deploy-web
+  log "deploy-web klaar."
+}
+
 phase3() {
   # Verdediging in de diepte: de normale route heeft follow_ci al doorlopen en
   # --resume doet dat eveneens. Toch weigert fase 3 zelf ook wanneer een job nog
@@ -844,10 +863,17 @@ phase3() {
   # #10: eerst de webdemo. Die hangt alleen aan de web-bundel, niet aan de
   # platform-artefacten of de handtekening — dus een teken- of platformfout mag
   # de demo nooit op de oude versie laten staan.
+  #
+  # Maar `make deploy-web` bouwt uit de wérkboom, en die is niet per se de tag.
+  # Een --resume van v0.6.5 draaide een dag later op main, mét vier merges die
+  # niet in die tag zaten; alleen een toevallig rode sbom-verify hield tegen dat
+  # die code als "v0.6.5" live ging. De release-CI heeft een eigen job
+  # (Webversie live zetten) die de bundel van de tag zelf deployt; is die groen,
+  # dan is de demo al goed en doet een lokale bouw alleen kwaad. Ontbreekt of
+  # faalde die job, dan mag de lokale bouw alleen vanaf de tag-commit.
   STEP="deploy-web"
   section "Fase 3 — webversie live zetten"
-  make deploy-web
-  log "deploy-web klaar."
+  deploy_web_if_needed
 
   STEP="SHA256SUMS tekenen"
   section "Fase 3 — SHA256SUMS tekenen en aanhangen"
