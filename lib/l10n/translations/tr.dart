@@ -2538,6 +2538,9 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'niet leesbaar': 'okunamıyor',
+  'niet decodeerbaar': 'çözümlenemiyor',
+  'model gaf niets bruikbaars terug': 'model kullanılabilir bir şey döndürmedi',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Artık iptal edemezsiniz: süre doldu. Kuruluşunuzla iletişime geçin.',
   'Aanbod': 'Teklif',

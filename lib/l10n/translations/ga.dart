@@ -1657,6 +1657,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'niet leesbaar': 'do-léite',
+  'niet decodeerbaar': 'neamh-dhíchódaithe',
+  'model gaf niets bruikbaars terug':
+      'níor thug an tsamhail aon rud inúsáidte ar ais',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Ní féidir leat a chealú a thuilleadh: tá an spriocdháta caite. Déan teagmháil le d\'eagraíocht.',
   'Aanbod': 'Tairiscint',

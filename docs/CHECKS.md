@@ -560,7 +560,7 @@ also declares them, but see the [CI note](#continuous-integration).)
     and the escape costs nothing: the resulting string is byte-identical;
   - **layering ratchet** — `lib/models/` may not import Flutter's UI layer or
     `lib/widgets/` at all (hard **0**), and the count in `lib/services/` may
-    shrink but never grow (`serviceUiImportBaseline`, currently **4**). A
+    shrink but never grow (`serviceUiImportBaseline`, currently **3**). A
     service is the headless core: usable without a widget tree, testable
     without pumping one. `foundation.dart`/`services.dart` are exempt — they
     carry no widget tree.

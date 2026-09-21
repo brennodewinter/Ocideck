@@ -1631,6 +1631,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'niet leesbaar': 'nečitljivo',
+  'niet decodeerbaar': 'nedekodirajuće',
+  'model gaf niets bruikbaars terug': 'model nije vratio ništa korisno',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Više se ne možete odjaviti: rok je prošao. Obratite se svojoj organizaciji.',
   'Aanbod': 'Ponuda',

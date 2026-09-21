@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/description_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:path/path.dart' as p;
@@ -55,6 +56,51 @@ void main() {
         );
       },
     );
+
+    test('neemt de beschrijving mee naar de projectmap (#2147)', () async {
+      final src = File(p.join(tmp.path, 'getagd.png'))
+        ..writeAsBytesSync([1, 2]);
+      final descriptions = DescriptionService();
+      await descriptions.saveDescription(src.path, 'zon, zee');
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final out = await service.copyImagesToProject([
+        Slide.create(SlideType.image).copyWith(imagePath: src.path),
+      ], project.path);
+
+      expect(out.single.imagePath, 'images/getagd.png');
+      expect(
+        await descriptions.getDescription(
+          p.join(project.path, 'images', 'getagd.png'),
+        ),
+        'zon, zee',
+      );
+      // De bron-sidecar blijft staan: kopiëren, niet verhuizen.
+      expect(await descriptions.getDescription(src.path), 'zon, zee');
+    });
+
+    test('voegt beschrijvingen samen bij hergebruik van een identiek bestand '
+        '(#2147)', () async {
+      const bytes = [7, 7, 7];
+      final src = File(p.join(tmp.path, 'dubbel.png'))..writeAsBytesSync(bytes);
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+      final imagesDir = Directory(p.join(project.path, 'images'))..createSync();
+      final existing = p.join(imagesDir.path, 'dubbel.png');
+      File(existing).writeAsBytesSync(bytes);
+      final descriptions = DescriptionService();
+      await descriptions.saveDescription(src.path, 'nieuwe tag');
+      await descriptions.saveDescription(existing, 'bestaande tag');
+
+      final out = await service.copyImagesToProject([
+        Slide.create(SlideType.image).copyWith(imagePath: src.path),
+      ], project.path);
+
+      // Byte-identiek → geen nieuwe kopie, wél samengevoegde tags.
+      expect(out.single.imagePath, 'images/dubbel.png');
+      final merged = await descriptions.getDescription(existing);
+      expect(merged, contains('bestaande tag'));
+      expect(merged, contains('nieuwe tag'));
+    });
 
     test('leaves already-relative image paths unchanged', () async {
       final project = Directory(p.join(tmp.path, 'project'))..createSync();

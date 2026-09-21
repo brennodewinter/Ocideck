@@ -1630,6 +1630,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'niet leesbaar': 'nid lesbar',
+  'niet decodeerbaar': 'nid dekodierbar',
+  'model gaf niets bruikbaars terug': 's Modäll het nüt Bruuchbars zrugggee',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Du chasch dich nümm abmälde: d Frist isch abglaufe. Mäld dich bi dinere Organisation.',
   'Aanbod': 'Agebot',

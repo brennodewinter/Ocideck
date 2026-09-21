@@ -208,29 +208,25 @@ extension _CarouselActions on _ImageCarouselPickerState {
     final imageService = ImageService();
     final langName =
         AppLocalizations.languageNames[l10n.languageCode] ?? 'English';
-    final tagged = <String>[];
     _rebuild(() => _autoTagging = true);
-    for (var i = 0; i < untagged.length; i++) {
-      if (!mounted) break;
-      _rebuild(
-        () => _autoTagPhase =
-            '${l10n.d('Afbeeldingen taggen…')} ${i + 1}/${untagged.length}',
-      );
-      try {
-        final bytes = await imageService.readSlideImageBytes(untagged[i]);
-        if (bytes == null) continue;
-        final tags = await tagger.suggestTags(
-          imageBytes: bytes,
-          languageName: langName,
+    final result = await runAutoTag(
+      untagged,
+      readBytes: imageService.readSlideImageBytes,
+      tag: (bytes) =>
+          tagger.suggestTags(imageBytes: bytes, languageName: langName),
+      save: (path, tags) async {
+        await widget.descriptionService.saveDescription(path, tags);
+        _descriptions[path] = tags;
+      },
+      onProgress: (current, total) {
+        if (!mounted) return;
+        _rebuild(
+          () => _autoTagPhase =
+              '${l10n.d('Afbeeldingen taggen…')} $current/$total',
         );
-        if (tags.isEmpty) continue;
-        await widget.descriptionService.saveDescription(untagged[i], tags);
-        _descriptions[untagged[i]] = tags;
-        tagged.add(untagged[i]);
-      } catch (e, s) {
-        logError('ImageCarouselPicker._autoTagUntagged', e, s);
-      }
-    }
+      },
+      isCancelled: () => !mounted,
+    );
     if (!mounted) return;
     _rebuild(() {
       _autoTagging = false;
@@ -239,14 +235,16 @@ extension _CarouselActions on _ImageCarouselPickerState {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          '${tagged.length} ${l10n.d('afbeeldingen getagd door AI.')}',
-        ),
-        action: tagged.isEmpty
+        content: Text(autoTagSummary(l10n.d, result)),
+        // Een actieknop maakt de melding standaard blijvend (persist) — hier
+        // is acht tellen genoeg om "Ongedaan maken" te bereiken (#2149).
+        duration: const Duration(seconds: 8),
+        persist: false,
+        action: result.tagged.isEmpty
             ? null
             : SnackBarAction(
                 label: l10n.d('Ongedaan maken'),
-                onPressed: () => _undoAutoTag(tagged),
+                onPressed: () => _undoAutoTag(result.tagged),
               ),
       ),
     );
@@ -780,6 +778,8 @@ extension _CarouselActions on _ImageCarouselPickerState {
       File(source),
       dest: dest,
       archiveRoots: roots,
+      descriptions: widget.descriptionService,
+      captions: widget.captionService,
     );
     if (!mounted) return;
     if (added == null) {
@@ -874,13 +874,17 @@ Future<Directory?> imageArchiveDestination(List<String> roots) async {
 
 /// Neem [src] op in het archief onder [dest]. Staat het bestand al binnen
 /// een zoekwortel uit [archiveRoots], dan is kopiëren overbodig en komt zijn
-/// eigen pad terug. Botst de naam, dan wijkt de kopie uit naar een vrije
-/// naam (identieke inhoud hergebruikt het bestaande bestand — zie
-/// [resolveAssetDestination]). Null bij een schrijffout.
+/// eigen pad terug — de sidecars staan dan al op de goede plek. Botst de
+/// naam, dan wijkt de kopie uit naar een vrije naam (identieke inhoud
+/// hergebruikt het bestaande bestand — zie [resolveAssetDestination]).
+/// [descriptions]/[captions] laten de beeld-sidecars meeverhuizen, zoals bij
+/// opslaan (#2147). Null bij een schrijffout.
 Future<String?> adoptImageFileIntoArchive(
   File src, {
   required Directory dest,
   required List<String> archiveRoots,
+  DescriptionService? descriptions,
+  CaptionService? captions,
 }) async {
   if (archiveRoots.any((r) => p.isWithin(r, src.path))) return src.path;
   try {
@@ -891,6 +895,12 @@ Future<String?> adoptImageFileIntoArchive(
     );
     if (resolved == null) return null;
     if (!resolved.alreadyPresent) await src.copy(resolved.file.path);
+    await ImageService.migrateImageSidecars(
+      src.path,
+      resolved.file.path,
+      descriptions: descriptions,
+      captions: captions,
+    );
     return resolved.file.path;
   } on FileSystemException catch (e) {
     logWarning('adoptImageFileIntoArchive: copy', e);

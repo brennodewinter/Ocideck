@@ -1647,6 +1647,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'niet leesbaar': 'нечетливо',
+  'niet decodeerbaar': 'не може да се декодира',
+  'model gaf niets bruikbaars terug': 'моделът не върна нищо използваемо',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Вече не можете да се отпишете: срокът е изтекъл. Свържете се с вашата организация.',
   'Aanbod': 'Оферта',

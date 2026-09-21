@@ -132,17 +132,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             builder: (ctx) {
               if (deckState.error != null) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  ScaffoldMessenger.of(ctx).showSnackBar(
-                    SnackBar(
-                      content: Text(deckState.error!),
-                      backgroundColor: Colors.red[700],
-                      action: SnackBarAction(
-                        label: ctx.l10n.d('OK'),
-                        textColor: Colors.white,
-                        onPressed: () =>
-                            ref.read(deckProvider.notifier).clearError(),
-                      ),
-                    ),
+                  showActionSnackBar(
+                    ScaffoldMessenger.of(ctx),
+                    deckState.error!,
+                    ctx.l10n.d('OK'),
+                    () => ref.read(deckProvider.notifier).clearError(),
+                    duration: const Duration(seconds: 10),
+                    backgroundColor: Colors.red[700],
+                    actionTextColor: Colors.white,
                   );
                   ref.read(deckProvider.notifier).clearError();
                 });

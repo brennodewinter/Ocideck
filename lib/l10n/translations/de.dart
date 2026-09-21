@@ -667,6 +667,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'niet leesbaar': 'nicht lesbar',
+  'niet decodeerbaar': 'nicht dekodierbar',
+  'model gaf niets bruikbaars terug':
+      'das Modell gab nichts Verwertbares zurück',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Sie können sich nicht mehr abmelden: die Frist ist abgelaufen. Wenden Sie sich an Ihre Organisation.',
   'Aanbod': 'Angebot',

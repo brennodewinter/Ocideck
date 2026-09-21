@@ -664,6 +664,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'niet leesbaar': 'ilegible',
+  'niet decodeerbaar': 'no decodificable',
+  'model gaf niets bruikbaars terug': 'el modelo no devolvió nada aprovechable',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Ya no puede darse de baja: el plazo ha vencido. Póngase en contacto con su organización.',
   'Aanbod': 'Oferta',

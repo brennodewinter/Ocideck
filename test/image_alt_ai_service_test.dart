@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:ocideck/models/ai_settings.dart';
@@ -140,11 +142,30 @@ void main() {
         isWeb: false,
       );
       final png = img.encodePng(img.Image(width: 48, height: 48));
-      final tags = await ImageAltAiService(
+      final result = await ImageAltAiService(
         client,
       ).suggestTags(imageBytes: png, languageName: 'English');
-      expect(tags, 'mountain, lake');
+      expect(result.tags, 'mountain, lake');
+      expect(result.imageSent, isTrue);
       expect(fake.lastBody, contains('data:image/jpeg;base64,'));
+    });
+
+    test('undecodable bytes send nothing and say so (#2148)', () async {
+      final fake = _FakeTransport();
+      final client = AiClientService(
+        settings: _localSettings,
+        hasOutboundConsent: false,
+        transport: fake,
+        isWeb: false,
+      );
+      final result = await ImageAltAiService(client).suggestTags(
+        imageBytes: Uint8List.fromList([1, 2, 3, 4, 5]),
+        languageName: 'English',
+      );
+      expect(result.tags, isEmpty);
+      expect(result.imageSent, isFalse);
+      // Het beeld ging de deur niet uit — geen verzoek verstuurd.
+      expect(fake.lastBody, isNull);
     });
   });
 }

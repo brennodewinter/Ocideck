@@ -475,6 +475,7 @@ void _listenDuplicateCopyNotice(BuildContext context, WidgetRef ref) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 7),
+        persist: false,
         content: Text(
           '${l10n.d('Deze presentatie staat ook op een andere plek:')} '
           '${displayFolder(notice.copyPath, homeDir: homeDir, osHome: osHomeDirectory)}',

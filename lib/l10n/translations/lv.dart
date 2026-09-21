@@ -1625,6 +1625,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'niet leesbaar': 'nelasāms',
+  'niet decodeerbaar': 'nedekodējams',
+  'model gaf niets bruikbaars terug': 'modelis neatgrieza neko lietojamu',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Jūs nevarat vairs atcelt reģistrāciju: termiņš ir beidzies. Sazinieties ar savu organizāciju.',
   'Aanbod': 'Piedāvājums',

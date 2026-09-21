@@ -1627,6 +1627,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'niet leesbaar': 'neberljivo',
+  'niet decodeerbaar': 'nedekodirno',
+  'model gaf niets bruikbaars terug': 'model ni vrnil ničesar uporabnega',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Preklica ni več mogoč: rok je potekel. Obrnite se na svojo organizacijo.',
   'Aanbod': 'Ponudba',

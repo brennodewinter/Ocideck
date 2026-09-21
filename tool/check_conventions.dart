@@ -106,7 +106,7 @@ const Set<String> _quoteScannerHomes = {
 /// the widget half out (`lib/widgets/mermaid_render_host.dart`) and the
 /// text-only half in (`lib/utils/inline_markdown.dart`). A new entry means a
 /// service grew a UI dependency it almost certainly does not need.
-const int serviceUiImportBaseline = 4;
+const int serviceUiImportBaseline = 3;
 
 /// UI imports inside `lib/models/`. Hard zero — do not raise. A model that
 /// imports Flutter cannot be reused, tested, or reasoned about on its own.
@@ -204,7 +204,7 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/presentation/fullscreen_presenter.dart': 1066,
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor). Cohesief met de analyzer-staat.
-  'lib/services/slide_quality_analyzer.dart': 1110,
+  'lib/services/slide_quality_analyzer.dart': 1015,
   // Procesverbetering: matrix/canvas/tree/flow discovery + create() branches.
   // +20 (#1162): de twee onherleidbare navigatievelden `anchor` + `nextAnchor`
   // (stabiel dia-anker en per-dia sprong-uit) met hun doc, constructor- en
@@ -280,7 +280,7 @@ const Map<String, int> fileSizeBaseline = {
   'lib/widgets/dialogs/settings_dialog.dart': 1046,
   // +24 (#1931): _resolveLogoDarkPath voor donkere logo-variant.
   'lib/services/file_service.dart':
-      1050, // +26 (#1951): fileMtime + fileChangedSince.
+      1017, // +26 (#1951): fileMtime + fileChangedSince.
   // +82 (#1859/#1863/#1864): layout-herstructurering met _buildSlideSettings,
   // _buildBulletList en _buildWorkSurface; State-level controller + geselecteerd
   // doel; venstermaat-klemming en Nederlandse termen. De build-methode kromp
@@ -526,7 +526,7 @@ const Map<String, int> classSizeBaseline = {
       // +3: `setShowOpenPreview`, de zetter van "Voorbeeld tonen bij openen".
       // Een zetter móét de state van deze notifier aanraken, dus top-level
       // halen zou hem alleen omslachtiger maken, niet kleiner.
-      1401,
+      1373,
   // Bewust verhoogd van 1256 naar 1261 (#651): `setDismissals` is een nieuwe
   // openbare mogelijkheid, geen drift. In dezelfde wijziging ging er 24 regels
   // uit — de vier identieke regels die annotaties, notities en terzijdeleggingen
@@ -578,7 +578,7 @@ const Map<String, int> classSizeBaseline = {
   // +60 (#1824): callout-checker — §2.6 binding table (orphan, duplicate,
   // invalid geometry, missing anchor) met tekst-ref-telling en entry-vergelijking.
   // De klasse meet 1097.
-  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1110,
+  'lib/services/slide_quality_analyzer.dart#SlideQualityAnalyzer': 1083,
   // Procesverbetering: Y-01-UI, type-toolbar, plaklogica en DOE-dialoog zijn
   // naar losse widgets/helpers getild (chart_histogram_limits,
   // chart_type_toolbar, table_clipboard, DoeDesignDialog). Plafond verlaagd
@@ -1072,6 +1072,69 @@ Map<String, List<int>> fixedDelaysIn(Map<String, String> sources) {
   return perBestand;
 }
 
+/// Vindt `SnackBar`-creaties die een `action:` dragen zónder `persist:` en
+/// `duration:` expliciet te benoemen.
+///
+/// Waarom dit een poort is: de SDK laat `persist` standaard op
+/// `action != null` vallen — élke melding met een actieknop bleef daardoor
+/// ongemerkt voorgoed liggen, terwijl er nergens een sluitknop op stond
+/// (#2149). Wie bewust een blijvende melding bouwt, schrijft `persist: true`;
+/// wie dat niet bedoelde, schrijft `persist: false` én een duur waarin de
+/// actieknop nog bereikbaar is. De default is hier te gevaarlijk om te erven.
+class _SnackBarVisitor extends RecursiveAstVisitor<void> {
+  final List<int> hits = [];
+
+  @override
+  void visitInstanceCreationExpression(InstanceCreationExpression node) {
+    if (node.constructorName.type.name.lexeme == 'SnackBar') {
+      final named = {
+        for (final arg in node.argumentList.arguments)
+          if (arg is NamedArgument) arg.name.lexeme,
+      };
+      if (named.contains('action') &&
+          (!named.contains('persist') || !named.contains('duration'))) {
+        hits.add(node.offset);
+      }
+    }
+    super.visitInstanceCreationExpression(node);
+  }
+}
+
+/// [snackBarActionWithoutPersistIn] als pure functie over pad → bron, zodat de
+/// regel in een test met verzonnen bestanden te voeren is.
+Map<String, List<int>> snackBarActionWithoutPersistIn(
+  Map<String, String> sources,
+) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    if (!raw.contains('SnackBar')) return;
+    final parsed = parseString(
+      content: raw,
+      featureSet: FeatureSet.latestLanguageVersion(),
+      throwIfDiagnostics: false,
+    );
+    if (parsed.errors.isNotEmpty) return;
+    final visitor = _SnackBarVisitor();
+    parsed.unit.accept(visitor);
+    if (visitor.hits.isEmpty) return;
+    perFile[path] = [
+      for (final offset in visitor.hits)
+        parsed.lineInfo.getLocation(offset).lineNumber,
+    ]..sort();
+  });
+  return perFile;
+}
+
+/// De regelnummers per lib/-bestand waar een actie-snackbar `persist` of
+/// `duration` aan de default overlaat.
+Map<String, List<int>> _snackBarActionWithoutPersist() {
+  final sources = <String, String>{};
+  for (final file in _dartFiles(Directory('lib'))) {
+    sources[file.path.replaceAll(r'\', '/')] = file.readAsStringSync();
+  }
+  return snackBarActionWithoutPersistIn(sources);
+}
+
 /// Tests die binnen een `runAsync` op een vaste klok wachten.
 _DelayScan _fixedDelayInRunAsync() {
   final sources = <String, String>{};
@@ -1481,6 +1544,24 @@ void main() {
       '`fixedDelayBaseline` niet om dit stil te krijgen — die lijst mag alleen '
       'krimpen:\n'
       '    ${delays.overBasislijn.join('\n    ')}',
+    );
+  }
+
+  final snackBarHits = _snackBarActionWithoutPersist();
+  if (snackBarHits.isNotEmpty) {
+    final sites = [
+      for (final entry in snackBarHits.entries)
+        for (final line in entry.value) '${entry.key}:$line',
+    ];
+    failures.add(
+      '${sites.length} melding(en) met een actieknop erven `persist` en/of '
+      '`duration` van de default — en die default is verraderlijk: de SDK '
+      'laat een snackbar mét actie voorgoed liggen. Kies bewust: '
+      '`persist: false` plus een `duration` waarin de knop bereikbaar is '
+      '(7–10s), of `persist: true` als de melding echt moet blijven staan '
+      '(de sluitknop uit snackBarTheme dekt die dan). Zie '
+      'snackBarActionWithoutPersistIn in tool/check_conventions.dart:\n'
+      '    ${sites.join('\n    ')}',
     );
   }
 

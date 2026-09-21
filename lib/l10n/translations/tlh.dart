@@ -1604,6 +1604,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'niet leesbaar': 'laDlaHbe\'lu\'',
+  'niet decodeerbaar': 'vunlaHbe\'lu\'',
+  'model gaf niets bruikbaars terug': 'mIw pagh lo\'laHghach nob',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'DaH bI\'laHbe\': poH qu\' — ponglIj Daq',
   'Aanbod': 'pong',

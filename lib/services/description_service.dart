@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
+import 'image_dedup_service.dart';
 import 'image_sidecar_store.dart';
 
 /// Stores short, searchable image descriptions as a JSON sidecar in the image's
@@ -30,6 +31,28 @@ class DescriptionService {
   /// deleted). Safe to call when no entry exists.
   Future<void> removeDescription(String imagePath) =>
       saveDescription(imagePath, '');
+
+  /// Neem de beschrijving (de zoekbare tags) van [sourceImagePath] mee naar
+  /// [destinationImagePath] — de sidecar-tak van het kopiëren van het bestand
+  /// zelf. Zonder dit verhuist de kopieerslag alleen de bytes en is de kopie in
+  /// de doelmap ongetagd (#2147).
+  ///
+  /// Draagt de bestemming al een eigen beschrijving (een hergebruikt,
+  /// byte-identiek bestand, of een handmatige tag), dan wint die: de brontekst
+  /// wordt er met een komma achter gezet in plaats van hem te overschrijven.
+  Future<void> copyDescription(
+    String sourceImagePath,
+    String destinationImagePath,
+  ) async {
+    final description = await getDescription(sourceImagePath);
+    if (description == null || description.trim().isEmpty) return;
+    final existing = await getDescription(destinationImagePath);
+    final merged = ImageDedupService().mergeMetadata([
+      existing,
+      description,
+    ], separator: ', ');
+    await saveDescription(destinationImagePath, merged);
+  }
 
   /// Load every description stored in the directories that contain [imagePaths].
   /// Returns a map of absolute image path → description. Each sidecar is read

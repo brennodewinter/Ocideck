@@ -1629,6 +1629,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'niet leesbaar': 'nem olvasható',
+  'niet decodeerbaar': 'nem dekódolható',
+  'model gaf niets bruikbaars terug':
+      'a modell nem adott vissza semmi használhatót',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Már nem tud leiratkozni: a határidő lejárt. Forduljon a szervezetéhez.',
   'Aanbod': 'Kínálat',

@@ -20,28 +20,38 @@ import 'ai_request.dart';
 const int kVisionMaxEdge = 1568;
 
 /// Decode [bytes] (any supported format), downscale the longest edge to
-/// [kVisionMaxEdge] when larger, and re-encode as JPEG. Returns the original
-/// bytes when decoding fails, so the caller still sends something valid. Pure and
-/// synchronous, so it runs inside [compute] off the UI isolate.
+/// [kVisionMaxEdge] when larger, and re-encode as JPEG. Returns an empty list
+/// when the bytes cannot be decoded — nothing goes out that we could not read
+/// ourselves. Pure and synchronous, so it runs inside [compute] off the UI
+/// isolate.
 Uint8List resizeImageForVision(Uint8List bytes) {
-  // Niet decoderen wat te groot is om te decoderen. `kMaxImageDecodeDimension`
-  // bewaakt de Flutter-decode, maar dit is de `image`-pakketvariant en die viel
-  // buiten die poort: een egaal gekleurde PNG van 30000×30000 is een paar KB op
-  // schijf en gigabytes uitgepakt — in een `compute`-isolaat, wat het proces
-  // net zo goed omlegt.
-  final size = img.findDecoderForData(bytes)?.startDecode(bytes);
-  if (size != null &&
-      (size.width > kMaxImageDecodeDimension ||
-          size.height > kMaxImageDecodeDimension)) {
+  try {
+    // Niet decoderen wat te groot is om te decoderen. `kMaxImageDecodeDimension`
+    // bewaakt de Flutter-decode, maar dit is de `image`-pakketvariant en die viel
+    // buiten die poort: een egaal gekleurde PNG van 30000×30000 is een paar KB op
+    // schijf en gigabytes uitgepakt — in een `compute`-isolaat, wat het proces
+    // net zo goed omlegt.
+    final size = img.findDecoderForData(bytes)?.startDecode(bytes);
+    if (size != null &&
+        (size.width > kMaxImageDecodeDimension ||
+            size.height > kMaxImageDecodeDimension)) {
+      return Uint8List(0);
+    }
+    final decoded = img.decodeImage(bytes);
+    // Niet-decodeerbare bytes zijn geen "iets geldigs": ze zouden als
+    // `data:image/jpeg` naar een derde partij gaan onder een onjuist type, en
+    // zonder enige begrenzing op de omvang. Liever niets sturen.
+    if (decoded == null) return Uint8List(0);
+    final resized = resizeLongestEdge(decoded, kVisionMaxEdge);
+    return img.encodeJpg(resized, quality: 85);
+  } catch (e) {
+    // Een decoder die op malforme bytes valt — de PSD-detectie leest bij
+    // vijf bytes rommel al voorbij het einde — is evenzeer "niet
+    // decodeerbaar". Een onverwerkte throw hier zou de skip-telling om
+    // afbeeldingen (#2148) als mislukte AI-aanroep tellen, terwijl er
+    // helemaal niets de deur uit is gegaan.
     return Uint8List(0);
   }
-  final decoded = img.decodeImage(bytes);
-  // Niet-decodeerbare bytes zijn geen "iets geldigs": ze zouden als
-  // `data:image/jpeg` naar een derde partij gaan onder een onjuist type, en
-  // zonder enige begrenzing op de omvang. Liever niets sturen.
-  if (decoded == null) return Uint8List(0);
-  final resized = resizeLongestEdge(decoded, kVisionMaxEdge);
-  return img.encodeJpg(resized, quality: 85);
 }
 
 /// A `data:image/jpeg;base64,…` URI for [jpeg], the only image form the `/v1`
@@ -146,6 +156,14 @@ String cleanAltDraft(String raw, {int maxChars = 250}) {
   return text;
 }
 
+/// Uitkomst van [ImageAltAiService.suggestTags]. [tags] is leeg als er niets
+/// bruikbaars terugkwam; [imageSent] zegt of er beeld de deur uit is gegaan.
+/// Dat onderscheid telt voor de gebruiker: `false` betekent een lokaal
+/// formaatprobleem (niet decodeerbaar — bijv. HEIC — of boven de decodegrens),
+/// `true` met lege tags betekent dat het model niets bruikbaars teruggaf —
+/// een instellingen- of modelprobleem (#2148).
+typedef TagSuggestion = ({String tags, bool imageSent});
+
 /// Wraps a gated [AiClientService] as the alt-text vision consumer.
 class ImageAltAiService {
   ImageAltAiService(this._client);
@@ -176,8 +194,11 @@ class ImageAltAiService {
 
   /// Suggest searchable keyword tags (comma-separated) for [imageBytes] in
   /// [languageName], for the image-library search sidecar. Same resize/gate path
-  /// as [suggestAltText]; returns the cleaned tag string (empty = none).
-  Future<String> suggestTags({
+  /// as [suggestAltText]; returns a [TagSuggestion] — empty tags = none, and
+  /// [TagSuggestion.imageSent] tells the caller whether the image actually
+  /// went out (so "local decode failure" and "model gave nothing" stay
+  /// distinguishable, #2148).
+  Future<TagSuggestion> suggestTags({
     required Uint8List imageBytes,
     required String languageName,
   }) async {
@@ -185,12 +206,15 @@ class ImageAltAiService {
     // Leeg betekent: te groot of niet te decoderen. Dan gaat er niets naar
     // buiten — een lege of onbegrepen afbeelding levert toch geen beschrijving
     // op, en versturen wat je zelf niet kon lezen is de verkeerde kant op.
-    if (jpeg.isEmpty) return '';
+    if (jpeg.isEmpty) return (tags: '', imageSent: false);
     final request = buildTagsRequest(
       model: _client.settings.model,
       imageDataUri: jpegDataUri(jpeg),
       languageName: languageName,
     );
-    return cleanTagsDraft((await _client.chat(request)).text);
+    return (
+      tags: cleanTagsDraft((await _client.chat(request)).text),
+      imageSent: true,
+    );
   }
 }
