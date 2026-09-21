@@ -307,6 +307,18 @@ against a real forge, a second operating system or a real report is kept
 deliberately. It is in Dutch. →
 [design/VERIFICATION.md](design/VERIFICATION.md)
 
+## AI assistance brings its own model, and does not speak MCP
+
+Nothing is bundled: AI features stay dark until you point the app at an
+OpenAI-compatible endpoint you run or pay for yourself. Two shapes of that are
+worth knowing in advance. **One model name serves every feature** — text drafting
+and image alt-text alike — so a text-only model leaves the image features failing
+rather than degrading. And OciDeck **is not an MCP client or server**; exposing it
+as one, so an external agent could drive it, is designed but unbuilt, and would
+not be a way to attach a model in any case. →
+[USER_GUIDE.md](USER_GUIDE.md#ai-assistance-optional),
+[design/AI_ASSIST.md](design/AI_ASSIST.md)
+
 ## The privacy check is an aid, not a guarantee
 
 It reduces the chance that personal data leaks out unintentionally. It does not

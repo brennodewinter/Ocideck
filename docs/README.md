@@ -80,7 +80,7 @@ they live in the repository. See [How these documents are maintained](#how-these
 | [GIT_STORAGE.md](design/GIT_STORAGE.md) | Design of the git storage plane; phases 0–6 have landed, what remains is verification. |
 | [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | The original design for the MIAUW pentest module, which ships. Parts are contradicted by the code. |
 | [PENTEST_DOCUMENT.md](design/PENTEST_DOCUMENT.md) | Design proposal, unbuilt, **in Dutch**: the MIAUW report moves from a presentation to a document, and a signed-and-sealed report can derive a management and an IT highlights deck. Builds on PENTEST_MIAUW.md and DOCUMENT_MODE.md. |
-| [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not. |
+| [AI_ASSIST.md](design/AI_ASSIST.md) | The optional AI assistance design; phases 0–3 are built, phase 4 (MCP) is not — OciDeck does not speak MCP, and MCP is not how a model is attached. To attach one, see *AI assistance (optional)* in [USER_GUIDE.md](USER_GUIDE.md#ai-assistance-optional). |
 | [OCIWACHT.md](design/OCIWACHT.md) | The privacy scanner design, **in Dutch**, with a per-section delivered/open table at the top. At 2,668 lines it is the largest of the three Dutch documents. |
 | [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historical: the agentic build plan for the pentest/AI work. Executed; kept as a worked example, not a queue. |
 | [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Design proposal, unbuilt: a Lean Six Sigma authoring module. Despite the name it is a product design, not a report about our process. |

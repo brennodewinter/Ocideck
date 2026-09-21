@@ -328,6 +328,19 @@ beproefd tegen een echte forge, een tweede besturingssysteem of een echt rapport
 wordt bewust bijgehouden. Hij is in het Nederlands. →
 [design/VERIFICATION.md](design/VERIFICATION.md)
 
+## AI-assistentie brengt zijn eigen model mee, en spreekt geen MCP
+
+Er wordt niets meegeleverd: AI-functies blijven donker tot je de app naar een
+OpenAI-compatibel eindpunt wijst dat je zelf draait of afneemt. Twee vormen
+daarvan zijn het waard om vooraf te weten. **Eén modelnaam bedient alle functies**
+— tekstconcepten zowel als alt-tekst voor afbeeldingen — dus bij een model dat
+alleen tekst kan, falen de afbeeldingsfuncties in plaats van minder goed te
+werken. En OciDeck **is geen MCP-client of -server**; hem als zodanig aanbieden,
+zodat een externe agent hem kan besturen, is ontworpen maar ongebouwd, en zou
+sowieso geen manier zijn om een model aan te haken. →
+[USER_GUIDE.nl.md](USER_GUIDE.nl.md#ai-assistentie-optioneel),
+[design/AI_ASSIST.md](design/AI_ASSIST.md)
+
 ## De privacycheck is een hulpmiddel, geen garantie
 
 Hij verkleint de kans dat persoonsgegevens onbedoeld naar buiten lekken. Hij
