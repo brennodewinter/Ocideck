@@ -417,7 +417,17 @@ cmd_status() {
   elif [ "$pr_merged" -eq 1 ]; then prdesc="release-PR #$prnum gemerged"
   else prdesc="release-PR #$prnum ($prstate — nog niet gemerged)"; fi
 
-  mark "$has_branch" "release-branch $BRANCH op origin"
+  # De release-branch wordt bij de merge verwijderd. Ná de merge is "weg" dus de
+  # goede afloop en "staat er nog" de afwijking; daarvóór is hij juist
+  # voortgang. Eén vaste regel liet op een afgeronde release altijd een leeg
+  # vakje achter — een open punt dat geen open punt was.
+  if [ "$pr_merged" -eq 0 ]; then
+    mark "$has_branch" "release-branch $BRANCH op origin"
+  elif [ "$has_branch" -eq 1 ]; then
+    mark 0 "release-branch $BRANCH staat nog op origin (de merge hoort 'm te verwijderen)"
+  else
+    mark 1 "release-branch $BRANCH opgeruimd bij de merge"
+  fi
   mark "$pr_merged" "$prdesc"
   mark "$has_tag_o" "tag $TAG op origin (start de Forgejo-release-CI)"
   [ "$has_mirror" -eq 1 ] && mark "$has_tag_m" "tag $TAG op mirror (start de Windows-build)"
@@ -434,8 +444,8 @@ cmd_status() {
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
   elif [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
     log "Alles is uitgebracht en getekend, maar de webdemo draait ${live:-een onleesbare versie} in plaats van $NEW_VERSION."
-    log "Zet hem live vanaf de tag:  git checkout $TAG && make deploy-web"
-    log "(of, in de keten:  scripts/release_auto.sh --resume $TAG)"
+    log "Zet hem live met:  scripts/release_auto.sh --resume $TAG"
+    log "(die checkt de tag zelf uit; met de hand is het:  git checkout $TAG && make deploy-web)"
   elif [ "$has_tag_o" -eq 1 ]; then
     log "De tag staat vast, maar de release is nog niet af (mirror-tag / tekenen / deploy)."
     log "Maak DEZELFDE tag af met:  scripts/release_auto.sh --resume $TAG"
