@@ -40,6 +40,20 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- De documentatie legt nu uit hoe je een eigen AI-model aanhaakt, en spreekt de
+  aanname tegen dat dat via MCP gaat. `USER_GUIDE` kreeg een sectie
+  *AI-assistentie (optioneel)*: de twee schakelaars, een stap-voor-stap route met
+  Ollama (`ollama pull gemma3:4b`, backend *Lokaal*, `http://127.0.0.1:11434/v1`,
+  **Verbinding testen**), de drie tiers met wat ze aan toestemming kosten, en wat
+  te doen als de test faalt. Nieuw daarin, want het stond nergens: het ene veld
+  **Modelnaam** bedient álle functies, dus wie AI-alt-tekst wil moet een
+  multimodaal model kiezen — een tekstmodel laat de afbeeldingsfuncties falen in
+  plaats van minder goed werken. `FAQ` en `KNOWN_LIMITATIONS` zeggen nu ronduit
+  dat OciDeck geen MCP spreekt (geen client, geen server, geen pakket) en waarom
+  MCP sowieso geen route naar een model is: een MCP-server houdt geen model.
+  `AI_ASSIST.md` noteert wat op 21-09-2026 tegen de code is nagelezen en voegt de
+  derde consument toe (Procesverbetering), die tegen deze backend landde zonder
+  in het gedeelde ontwerp te worden opgeschreven.
 - Taakvensters delen nu één adaptieve OciDeck-schil. Git, S3 en WebDAV,
   presentatie- en documentexport en de grote importvensters gebruiken dezelfde
   themabewuste kop, inhoudsgrens en voet, ook bij 200% interfacetekst.
