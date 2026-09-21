@@ -76,6 +76,35 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- De release-keten van 0.6.7 strandde op een prestatietest die
+  machinebelasting voor een algoritmische regressie aanzag.
+  `large_deck_performance_test.dart` zette één parse van 50 slides naast één
+  van 200 en liet een factor 10 toe; op de belaste release-runner werd dat
+  3,6 ms tegen 59,7 ms — 16,6× — terwijl dezelfde commit lokaal op 3 à 4×
+  uitkwam. Het minimum van drie doorlopen filtert één uitschieter weg, maar
+  geen aanhoudende belasting, en die treft de lángste meting het hardst omdat
+  daar meer gelegenheid tot onderbreking zit. De test vergelijkt nu gelijke
+  hoeveelheden werk — vier parses van 50 slides tegen één van 200 — zodat
+  beide metingen even lang duren en belasting ze even hard raakt. Lineair
+  gedrag komt daarmee op ~1×, kwadratisch op ~4×; de drempel ligt op 2,5×.
+  Omdat `gate` de wortel van de release-workflow is, sloeg die ene rode test
+  álle builds, `publiceren` en daarmee `SHA256SUMS` over.
+- De opstartproef in `scripts/notarize_macos.sh` keurde een kerngezonde,
+  getekende en genotariseerde app af omdat het scherm van de bouw-Mac op slot
+  zat. `launchctl managername` blijft in dat geval gewoon `Aqua`, dus de
+  bestaande sessiecheck zag het verschil niet: de app kwam op, vond geen
+  bruikbaar venster en sloot netjes af met exit 0 — binnen de zes seconden van
+  de proef. De proef onderscheidt nu waar ze voor bestaat. Een niet-nul
+  afsluiting (een dyld- of hardened-runtime-weigering, zoals v0.6.4 en de
+  PDFium-casing van #2115) blijft onverkort hard rood; een nette exit 0 krijgt
+  een tweede poging en een blik op de echte sessiestatus uit `ioreg`
+  (`CGSSessionScreenIsLocked`, `kCGSSessionOnConsoleKey`). Staat het scherm op
+  slot, dan slaat de proef over mét melding; is de sessie bruikbaar en sluit de
+  app twee keer meteen af, dan is het alsnog rood. Een onleesbare sessiestatus
+  telt bewust als "niet geblokkeerd", zodat een kapotte `ioreg` nooit een excuus
+  wordt om de proef stil over te slaan. De proef staat nu in een functie,
+  zodat `test/notarize_opstartproef_test.dart` alle vier de takken
+  hermetisch naspeelt met een stub-app en nagebootste `ioreg`-uitvoer.
 - Word weigerde een geëxporteerd `.docx` te openen en LibreOffice liet er
   tabellen uit vallen. Drie fouten in de WordprocessingML: een blokcitaat of
   een lijstpunt met een eigen alinea leverde een `w:p` binnen een `w:p`, wat
