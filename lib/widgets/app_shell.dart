@@ -154,6 +154,7 @@ import '../services/trash_service.dart';
 import 'shell/document_save_actions.dart';
 import 'shell/document_import_action.dart';
 import 'shell/openkat_import_action.dart';
+import 'shell/dropped_files.dart';
 import 'shell/presentation_import_action.dart';
 import 'panels/editor_panel.dart';
 import 'panels/preview_panel.dart';
@@ -557,18 +558,6 @@ class _AppShellState extends ConsumerState<AppShell> {
 
   bool _dragging = false;
 
-  static const _imageExtensions = {
-    '.jpg',
-    '.jpeg',
-    '.png',
-    '.gif',
-    '.webp',
-    '.bmp',
-    '.heic',
-    '.tiff',
-    '.tif',
-  };
-
   /// Verwerk gesleepte bestanden: presentaties/pakketten openen, afbeeldingen
   /// als nieuwe slide(s) toevoegen aan het actieve deck. Hetzelfde pad als
   /// Finder-"Open met" (via [OpenFileChannel]): een plat `.md` opent als
@@ -607,7 +596,7 @@ class _AppShellState extends ConsumerState<AppShell> {
               importFailureMessage(context.l10n, failure),
             );
           }
-        } else if (_imageExtensions.contains(ext)) {
+        } else if (droppedImageExtensions.contains(ext)) {
           final adopted = await _adoptDroppedImage(path);
           if (adopted != null) images.add(adopted);
         } else if (isImportablePresentationName(path)) {
@@ -843,11 +832,22 @@ class _AppShellState extends ConsumerState<AppShell> {
             onDragExited: (_) => setState(() => _dragging = false),
             onDragDone: (detail) {
               setState(() => _dragging = false);
-              if (isWebPlatform) {
-                _onWebFilesDropped(detail.files);
-              } else {
-                _onFilesDropped(detail.files.map((f) => f.path).toList());
-              }
+              final handled = isWebPlatform
+                  ? _onWebFilesDropped(detail.files)
+                  : _onFilesDropped(detail.files.map((f) => f.path).toList());
+              // Een drop is fire-and-forget — er is geen aanroeper die op de
+              // afloop wacht. Zonder deze vangst landt een fout in de zone en
+              // ziet de gebruiker enkel dat er niets gebeurt; de handlers
+              // melden zelf wat ze wél kunnen duiden.
+              unawaited(
+                handled.catchError(
+                  (Object e, StackTrace s) => logError(
+                    'AppShell.onDragDone: drop-afhandeling mislukt',
+                    e,
+                    s,
+                  ),
+                ),
+              );
             },
             child: Material(
               child: Stack(

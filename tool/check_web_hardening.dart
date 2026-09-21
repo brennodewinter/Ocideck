@@ -71,10 +71,20 @@ void main() {
       // URL-import (the browser's CORS policy still gates every cross-origin
       // read). Anything broader (http:, *, data:) would reopen the holes this
       // check exists to guard.
+      //
+      // `blob:` is required, not merely tolerated: a file dropped on the
+      // window arrives as a blob URL, and reading its bytes back is an XHR
+      // that this directive governs. Without the token the browser blocks that
+      // read and drag-and-drop dies silently on web — which is how it shipped.
+      // It costs nothing on the exfiltration axis: a blob URL is local by
+      // construction, only the page's own origin can mint one, and no byte
+      // leaves the machine over it — strictly narrower than the https: that
+      // already stands beside it.
       require(
-        _eq(directives['connect-src'], ["'self'", 'https:']),
-        "CSP connect-src must be exactly 'self' https: "
-        '(first-party plus TLS-only URL-import fetches).',
+        _eq(directives['connect-src'], ["'self'", 'https:', 'blob:']),
+        "CSP connect-src must be exactly 'self' https: blob: "
+        '(first-party, TLS-only URL-import fetches, and reading back the '
+        'blob URLs that dropped files arrive as).',
       );
       require(
         _eq(directives['object-src'], ["'none'"]),

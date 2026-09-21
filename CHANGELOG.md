@@ -76,6 +76,18 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Slepen werkte niet in de browserversie: een `.pptx` (of een `.md`, een
+  pakket, een afbeelding) op het venster gooien deed niets — geen import, geen
+  melding, niets om op te volgen. Een gesleept bestand komt in de browser
+  binnen als blob-URL, en de bytes teruglezen is een verzoek dat de
+  Content-Security-Policy bewaakt; `connect-src` stond `blob:` niet toe, dus de
+  browser weigerde elke lezing. De fout verdween bovendien geruisloos, want de
+  drop-afhandeling wordt gestart zonder dat iemand op de afloop wacht. De
+  policy laat `blob:` nu toe — een lokaal schema dat geen byte de machine af
+  stuurt, en dat de poort `check_web_hardening` voortaan *eist* in plaats van
+  toestaat — en een bestand dat alsnog onleesbaar blijkt kost hoogstens dát
+  bestand en levert een melding op in plaats van stilte.
+
 - De release-keten van 0.6.7 strandde op een prestatietest die
   machinebelasting voor een algoritmische regressie aanzag.
   `large_deck_performance_test.dart` zette één parse van 50 slides naast één

@@ -76,6 +76,47 @@ void main() {
     );
   });
 
+  test('connect-src houdt blob:, anders sterft slepen geruisloos', () {
+    // Een bestand dat op het venster valt, komt op web binnen als blob-URL; de
+    // bytes teruglezen is een XHR naar die URL, en dat is precies wat
+    // `connect-src` bewaakt. Zonder `blob:` weigert de browser die lezing en
+    // gebeurt er bij een drop letterlijk niets: geen deck, geen afbeelding,
+    // geen import, geen melding. Zo stond het in de bundel tot deze poort er
+    // was.
+    //
+    // De toets staat aan de uitgaande kant niets toe: een blob-URL is lokaal,
+    // alleen deze origin kan er een munten, en er verlaat geen byte de machine
+    // over dat schema.
+    //
+    // Beide vormen worden getoetst omdat een header-CSP en een meta-CSP
+    // cumulatief gelden: mist één van de twee het token, dan blokkeert díe de
+    // lezing en is de andere voor niets versoepeld.
+    final metaCsp = RegExp(
+      r'<meta\s+http-equiv="Content-Security-Policy"\s+content="([^"]*)"',
+      caseSensitive: false,
+    ).firstMatch(indexHtml)?.group(1);
+    for (final policy in {
+      'meta-CSP': metaCsp,
+      'header-CSP': headerValue('Content-Security-Policy'),
+    }.entries) {
+      final connectSrc = RegExp(
+        r'connect-src([^;]*)',
+      ).firstMatch(policy.value ?? '')?.group(1);
+      expect(
+        connectSrc,
+        isNotNull,
+        reason: '${policy.key} moet connect-src zetten',
+      );
+      expect(
+        connectSrc!.split(RegExp(r'\s+')),
+        contains('blob:'),
+        reason:
+            '${policy.key} moet blob: toestaan, anders kan een gesleept '
+            'bestand niet teruggelezen worden en faalt drag-and-drop stil',
+      );
+    }
+  });
+
   test('de headers die alleen als header kunnen bestaan, staan er', () {
     expect(
       headerValue('X-Frame-Options'),
