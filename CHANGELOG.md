@@ -76,6 +76,19 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- De release-keten van 0.6.7 strandde op een prestatietest die
+  machinebelasting voor een algoritmische regressie aanzag.
+  `large_deck_performance_test.dart` zette één parse van 50 slides naast één
+  van 200 en liet een factor 10 toe; op de belaste release-runner werd dat
+  3,6 ms tegen 59,7 ms — 16,6× — terwijl dezelfde commit lokaal op 3 à 4×
+  uitkwam. Het minimum van drie doorlopen filtert één uitschieter weg, maar
+  geen aanhoudende belasting, en die treft de lángste meting het hardst omdat
+  daar meer gelegenheid tot onderbreking zit. De test vergelijkt nu gelijke
+  hoeveelheden werk — vier parses van 50 slides tegen één van 200 — zodat
+  beide metingen even lang duren en belasting ze even hard raakt. Lineair
+  gedrag komt daarmee op ~1×, kwadratisch op ~4×; de drempel ligt op 2,5×.
+  Omdat `gate` de wortel van de release-workflow is, sloeg die ene rode test
+  álle builds, `publiceren` en daarmee `SHA256SUMS` over.
 - Word weigerde een geëxporteerd `.docx` te openen en LibreOffice liet er
   tabellen uit vallen. Drie fouten in de WordprocessingML: een blokcitaat of
   een lijstpunt met een eigen alinea leverde een `w:p` binnen een `w:p`, wat

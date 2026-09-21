@@ -27,6 +27,11 @@ import 'support/fastest_of.dart';
 /// algoritmische regressies, geen micro-timing. Metingen nemen het *minimum*
 /// van meerdere runs, wat robuust is tegen planningsruis op een belaste
 /// machine — een trager gemiddelde zegt niets, een trager minimum wel.
+///
+/// Waar twee metingen met elkáár worden vergeleken, dragen ze bovendien even
+/// veel werk. Alleen dan raakt een belaste machine beide even hard en blijft
+/// de verhouding een uitspraak over het algoritme in plaats van over de
+/// machine.
 
 /// Bouwt een realistisch deck van [slideCount] slides, met een mix van
 /// slidetypes zodat de meting niet op één serialiser-pad blijft hangen.
@@ -192,9 +197,22 @@ void main() {
     });
 
     test('parsen schaalt niet kwadratisch met het aantal slides', () {
-      // Vier keer zoveel slides hoort ~4x zoveel tijd te kosten (lineair) en
-      // ~16x bij kwadratisch gedrag. De drempel van 10x ligt daar ruim
-      // tussenin, zodat ruis niet rood slaat maar een echte O(n²) wel.
+      // Zet twee even lange metingen naast elkaar. Vier keer een deck van 50
+      // slides parsen is precies evenveel werk als één keer 200 slides zolang
+      // het gedrag lineair is; bij O(n²) kost die ene grote parse vier keer
+      // zoveel (16 eenheden tegen 4).
+      //
+      // De oude vorm vergeleek één parse van 50 slides met één van 200 en
+      // liet 10x toe. Dat hield geen stand op een belaste machine. Het
+      // minimum van drie doorlopen filtert een incidentele uitschieter weg,
+      // maar geen aanhoudende belasting — en die treft de lángste meting het
+      // hardst, simpelweg omdat daar meer gelegenheid is om onderbroken te
+      // worden. Op de release-runner van v0.6.7 werd 50 slides 3,6 ms en 200
+      // slides 59,7 ms (16,6x) terwijl dezelfde commit lokaal 3-4x haalde:
+      // de poort sloeg rood en de hele release-keten viel stil. Even lange
+      // metingen worden door belasting even hard geraakt, dus dán blijft de
+      // verhouding overeind.
+      const grootteFactor = 4; // 200 slides / 50 slides
       final smallMarkdown = service.generateDeck(buildLargeDeck(50));
       final largeMarkdown = service.generateDeck(buildLargeDeck(200));
 
@@ -203,15 +221,33 @@ void main() {
       service.parseDeck(smallMarkdown);
       service.parseDeck(largeMarkdown);
 
-      final small = fastestOf(3, () => service.parseDeck(smallMarkdown));
-      final large = fastestOf(3, () => service.parseDeck(largeMarkdown));
+      // Gelijke werklast is de helft van het werk; de andere helft is dezelfde
+      // redenering als in fastestOf, maar één niveau hoger. Ook een verhouding
+      // heeft een beste meting: die waarin de machine er het minst tussen zat.
+      // Gemeten op deze Mac wappert de oude vorm over een band van 1,0 tot 1,6
+      // en deze over 0,05 tot 0,22 — en een drempel valt om door spreiding,
+      // niet door het gemiddelde.
+      var laagste = double.infinity;
+      for (var poging = 0; poging < 3; poging++) {
+        final small = fastestOf(3, () {
+          for (var i = 0; i < grootteFactor; i++) {
+            service.parseDeck(smallMarkdown);
+          }
+        });
+        final large = fastestOf(3, () => service.parseDeck(largeMarkdown));
+        final verhouding = large.inMicroseconds / small.inMicroseconds;
+        if (verhouding < laagste) laagste = verhouding;
+      }
 
+      // Lineair gedrag ligt op 1x, kwadratisch op 4x; 2,5x ligt daar ruim
+      // tussenin.
       expect(
-        large.inMicroseconds,
-        lessThan(small.inMicroseconds * 10),
+        laagste,
+        lessThan(2.5),
         reason:
-            'parsen ging van $small (50 slides) naar $large (200 slides); '
-            'dat wijst op superlineair gedrag',
+            'parsen van 200 slides kostte ${laagste.toStringAsFixed(2)}x '
+            'zoveel als $grootteFactor keer 50 slides; meer dan 2,5x wijst '
+            'op superlineair gedrag',
       );
     });
 
