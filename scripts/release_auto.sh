@@ -885,14 +885,6 @@ preflight() {
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
 # De webdemo alleen lokaal bouwen en deployen als hij nog niet live staat, en
 # dan alleen vanaf de commit die de tag draagt.
-#
-# Dat "nog niet live staat" is bewust geen jobstatus. De CI-job *Webversie live
-# zetten* meldt `success` óók wanneer hij niets deed: ontbreken
-# `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS` — en die ontbreken met opzet, de demo
-# gaat met de hand live — dan slaat de job de deploy over en eindigt groen,
-# zodat een echte tag geen rode job en faalmail geeft. Deze functie las die
-# groene status een release lang als bewijs, waardoor v0.6.5 en v0.6.6 de demo
-# op 0.6.4 lieten staan terwijl de keten "klaar" meldde.
 
 # `make deploy-web` bouwt uit de wérkboom, en die staat na fase 2 nooit op de tag:
 # de release-PR landt met een merge-commit, de tag gaat op díe commit, en de
@@ -926,6 +918,13 @@ ensure_worktree_on_tag() {
   log "Werkboom op $TAG gezet; deploy-web bouwt nu precies de code van de tag."
 }
 
+# Of de demo "nog niet live staat" is bewust geen jobstatus. De CI-job *Webversie
+# live zetten* meldt `success` óók wanneer hij niets deed: ontbreken
+# `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS` — en die ontbreken met opzet, de demo
+# gaat met de hand live — dan slaat de job de deploy over en eindigt groen,
+# zodat een echte tag geen rode job en faalmail geeft. Deze functie las die
+# groene status een release lang als bewijs, waardoor v0.6.5 en v0.6.6 de demo
+# op 0.6.4 lieten staan terwijl de keten "klaar" meldde.
 deploy_web_if_needed() {
   local tag_sha head_sha live
   live="$(live_web_version)"
