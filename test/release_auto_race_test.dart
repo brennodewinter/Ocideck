@@ -413,13 +413,23 @@ echo "DOOR"
     expect(r.stdout, contains('draait 9.9.9'));
   }, skip: skipOnWindows);
 
-  test('een oude demo naast de tag weigert fase 3 te deployen', () {
-    final r = runDeployWeb(liveVersion: '0.6.4', headSha: 'ergens-op-main');
-    expect(r.exitCode, 1);
-    expect(r.stderr, contains('DIE:'));
-    expect(r.stderr, contains('git checkout v9.9.9'));
-    expect(r.stderr, isNot(contains('make deploy-web')));
-  }, skip: skipOnWindows);
+  // Sinds fase 3 de werkboom zélf op de tag zet (de release-PR landt met een
+  // merge-commit, dus HEAD kán de tag niet zijn) is "HEAD is niet de tag" geen
+  // reden meer om te stoppen — mislukken van die verhuizing wél. Deze stub-git
+  // weigert `diff` en `checkout`, precies het geval waarin niets gepubliceerd mag
+  // worden. De geslaagde route staat in release_auto_deploy_tag_test.dart, op een
+  // echte repo met een echte merge-commit.
+  test(
+    'fase 3 publiceert niets als de werkboom niet op de tag te krijgen is',
+    () {
+      final r = runDeployWeb(liveVersion: '0.6.4', headSha: 'ergens-op-main');
+      expect(r.exitCode, 1);
+      expect(r.stderr, contains('DIE:'));
+      expect(r.stderr, contains('--resume v9.9.9'));
+      expect(r.stderr, isNot(contains('make deploy-web')));
+    },
+    skip: skipOnWindows,
+  );
 
   test('een onleesbare site laat fase 3 vanaf de tag deployen', () {
     final r = runDeployWeb(liveVersion: '', headSha: 'tagsha000');

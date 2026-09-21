@@ -883,6 +883,39 @@ preflight() {
 # zodat een echte tag geen rode job en faalmail geeft. Deze functie las die
 # groene status een release lang als bewijs, waardoor v0.6.5 en v0.6.6 de demo
 # op 0.6.4 lieten staan terwijl de keten "klaar" meldde.
+
+# `make deploy-web` bouwt uit de wérkboom, en die staat na fase 2 nooit op de tag:
+# de release-PR landt met een merge-commit, de tag gaat op díe commit, en de
+# werkboom blijft op de release-branch staan — de tweede ouder ervan. Twee
+# verschillende commits, doorgaans met exact dezelfde inhoud.
+#
+# Fase 3 eiste alleen dat HEAD de tag-commit wás en stierf anders. Dat maakte van
+# een terechte voorwaarde een onhaalbare: zolang de PR met een merge-commit landt
+# (v0.6.5 t/m v0.6.8 deden dat alle vier) kán HEAD de tag niet zijn, dus strandde
+# élke verse release hier en moest de operator met de hand uitchecken en
+# hervatten. De voorwaarde blijft — er mag geen andere code als $TAG live gaan —
+# maar het script haalt 'm nu zelf, in plaats van de operator ernaartoe te sturen.
+ensure_worktree_on_tag() {
+  STEP="werkboom op de tag zetten"
+  # Op een andere machine, of na opruiming, kan de tag lokaal ontbreken; --resume
+  # moet ook vanaf een verse kloon kunnen deployen.
+  if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
+    git fetch --quiet --force origin "refs/tags/$TAG:refs/tags/$TAG" \
+      || die "kon tag $TAG niet lokaal krijgen — zonder de tag-commit zou deploy-web andere code als $TAG publiceren. Is origin bereikbaar?"
+  fi
+  local tag_sha
+  tag_sha="$(git rev-list -n 1 "$TAG")"
+  [ "$tag_sha" != "$(git rev-parse HEAD)" ] || return 0
+  # Nooit andermans werk onder de checkout vandaan trekken: liever stoppen met een
+  # melding dan een niet-gecommitte wijziging meenemen of weggooien.
+  if ! git diff --quiet || ! git diff --cached --quiet; then
+    die "werkboom niet schoon — fase 3 zet 'm daarom niet op $TAG (nooit 'git stash' in deze repo delen). Commit of herstel de wijzigingen en hervat: scripts/release_auto.sh --resume $TAG"
+  fi
+  git checkout --quiet --detach "$TAG" \
+    || die "kon $TAG niet uitchecken — ligt er een niet-gevolgd bestand in de weg? Ruim dat op en hervat: scripts/release_auto.sh --resume $TAG"
+  log "Werkboom op $TAG gezet; deploy-web bouwt nu precies de code van de tag."
+}
+
 deploy_web_if_needed() {
   local tag_sha head_sha live
   live="$(live_web_version)"
@@ -895,10 +928,15 @@ deploy_web_if_needed() {
   else
     log "Kon de versie op $DEPLOY_URL niet lezen; deploy-web draait, de verificatie hieronder beslist."
   fi
+  ensure_worktree_on_tag
+  # Naconditie, geen instructie meer aan de operator: ensure_worktree_on_tag is
+  # hierboven geslaagd of gestorven, dus dit hóórt te kloppen. Het blijft staan
+  # omdat "wat we publiceren is de tag" de enige bewering is die deze stap doet,
+  # en die meet je liever dan dat je 'm aanneemt.
   tag_sha="$(git rev-list -n 1 "$TAG" 2>/dev/null || true)"
   head_sha="$(git rev-parse HEAD 2>/dev/null || true)"
   if [ -z "$tag_sha" ] || [ "$tag_sha" != "$head_sha" ]; then
-    die "de webdemo draait ${live:-een onbekende versie} en de werkboom staat niet op $TAG (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Check de tag uit (git checkout $TAG) en hervat: scripts/release_auto.sh --resume $TAG"
+    die "de werkboom staat ná het uitchecken nog steeds niet op $TAG (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Onderzoek de repotoestand en hervat: scripts/release_auto.sh --resume $TAG"
   fi
   make deploy-web
   # Meten, niet aannemen: `deploy_web.sh` verifieert zijn eigen bundel, maar
