@@ -102,7 +102,9 @@ All notable changes to OciDeck are documented in this file.
   slot, dan slaat de proef over mét melding; is de sessie bruikbaar en sluit de
   app twee keer meteen af, dan is het alsnog rood. Een onleesbare sessiestatus
   telt bewust als "niet geblokkeerd", zodat een kapotte `ioreg` nooit een excuus
-  wordt om de proef stil over te slaan.
+  wordt om de proef stil over te slaan. De proef staat nu in een functie,
+  zodat `test/notarize_opstartproef_test.dart` alle vier de takken
+  hermetisch naspeelt met een stub-app en nagebootste `ioreg`-uitvoer.
 - Word weigerde een geëxporteerd `.docx` te openen en LibreOffice liet er
   tabellen uit vallen. Drie fouten in de WordprocessingML: een blokcitaat of
   een lijstpunt met een eigen alinea leverde een `w:p` binnen een `w:p`, wat

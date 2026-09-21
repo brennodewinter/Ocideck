@@ -435,62 +435,70 @@ grafische_sessie_geblokkeerd() {
   return 1
 }
 
-section "Opstartproef"
-if [[ "${OCIDECK_SKIP_LAUNCH_PROBE:-0}" == "1" ]]; then
-  echo "  overgeslagen (OCIDECK_SKIP_LAUNCH_PROBE=1)"
-elif [[ "$(launchctl managername 2>/dev/null)" != "Aqua" ]]; then
-  echo "  overgeslagen: geen grafische sessie (launchctl managername != Aqua)"
-else
-  # Waar deze proef voor bestaat, is een dyld- of hardened-runtime-weigering:
-  # die valt binnen een seconde met een NIET-NUL status en "Library not loaded"
-  # op stderr (v0.6.4, en de PDFium-casing van #2115). Een nette afsluiting met
-  # exit 0 is juist niet dat signaal — dat is een app die opkwam en weer
-  # wegging. Niet-nul blijft dus onverkort hard rood; exit 0 kost een tweede
-  # poging en een blik op de sessiestatus.
-  PROBE_OK=0
-  for POGING in 1 2; do
-    PROBE_LOG="$(mktemp -t ocideck-opstartproef)"
-    "$APP/Contents/MacOS/OciDeck" >"$PROBE_LOG" 2>&1 &
-    PROBE_PID=$!
-    # Zes seconden is ruim: een dyld-fout valt binnen één seconde, en een app
-    # die zo lang leeft heeft al zijn frameworks geladen en zijn venster
-    # gebouwd.
-    sleep 6
-    if kill -0 "$PROBE_PID" 2>/dev/null; then
-      kill "$PROBE_PID" 2>/dev/null || true
-      wait "$PROBE_PID" 2>/dev/null || true
-      rm -f "$PROBE_LOG"
-      echo "  in orde: de app start en blijft draaien"
-      PROBE_OK=1
-      break
-    fi
-    PROBE_RC=0
-    wait "$PROBE_PID" || PROBE_RC=$?
-    if [[ $PROBE_RC -ne 0 ]]; then
-      echo "De app stopte binnen zes seconden na het starten (exit $PROBE_RC):" >&2
+# De proef staat in een functie zodat `test/notarize_opstartproef_test.dart`
+# hem hermetisch kan draaien met een stub-app, zoals de bashfuncties van
+# release_auto.sh. Een beslisboom die niemand kan naspelen, is een
+# beslisboom die stilletjes verkeerd gaat.
+opstartproef() {
+  section "Opstartproef"
+  if [[ "${OCIDECK_SKIP_LAUNCH_PROBE:-0}" == "1" ]]; then
+    echo "  overgeslagen (OCIDECK_SKIP_LAUNCH_PROBE=1)"
+  elif [[ "$(launchctl managername 2>/dev/null)" != "Aqua" ]]; then
+    echo "  overgeslagen: geen grafische sessie (launchctl managername != Aqua)"
+  else
+    # Waar deze proef voor bestaat, is een dyld- of hardened-runtime-weigering:
+    # die valt binnen een seconde met een NIET-NUL status en "Library not loaded"
+    # op stderr (v0.6.4, en de PDFium-casing van #2115). Een nette afsluiting met
+    # exit 0 is juist niet dat signaal — dat is een app die opkwam en weer
+    # wegging. Niet-nul blijft dus onverkort hard rood; exit 0 kost een tweede
+    # poging en een blik op de sessiestatus.
+    PROBE_OK=0
+    for POGING in 1 2; do
+      PROBE_LOG="$(mktemp -t ocideck-opstartproef)"
+      "$APP/Contents/MacOS/OciDeck" >"$PROBE_LOG" 2>&1 &
+      PROBE_PID=$!
+      # Zes seconden is ruim: een dyld-fout valt binnen één seconde, en een app
+      # die zo lang leeft heeft al zijn frameworks geladen en zijn venster
+      # gebouwd.
+      sleep "${OCIDECK_PROBE_SECONDEN:-6}"
+      if kill -0 "$PROBE_PID" 2>/dev/null; then
+        kill "$PROBE_PID" 2>/dev/null || true
+        wait "$PROBE_PID" 2>/dev/null || true
+        rm -f "$PROBE_LOG"
+        echo "  in orde: de app start en blijft draaien"
+        PROBE_OK=1
+        break
+      fi
+      PROBE_RC=0
+      wait "$PROBE_PID" || PROBE_RC=$?
+      if [[ $PROBE_RC -ne 0 ]]; then
+        echo "De app stopte binnen zes seconden na het starten (exit $PROBE_RC):" >&2
+        sed 's/^/   /' "$PROBE_LOG" >&2
+        rm -f "$PROBE_LOG"
+        echo "Een getekende en genotariseerde app die niet start, mag niet uit; zo verging het v0.6.4." >&2
+        exit 1
+      fi
+      if grafische_sessie_geblokkeerd; then
+        sed 's/^/   /' "$PROBE_LOG" >&2
+        rm -f "$PROBE_LOG"
+        echo "  overgeslagen: de app sloot netjes af (exit 0) terwijl het scherm op slot" >&2
+        echo "  staat of de sessie niet op de console is — dat zegt niets over de app." >&2
+        PROBE_OK=1
+        break
+      fi
+      echo "  poging $POGING: de app sloot netjes af (exit 0), geen laadfout zichtbaar:" >&2
       sed 's/^/   /' "$PROBE_LOG" >&2
       rm -f "$PROBE_LOG"
-      echo "Een getekende en genotariseerde app die niet start, mag niet uit; zo verging het v0.6.4." >&2
+    done
+    if [[ $PROBE_OK -ne 1 ]]; then
+      echo "De app sloot tweemaal binnen zes seconden af met exit 0, met een" >&2
+      echo "bruikbare grafische sessie. Een app die meteen weer weg is, mag niet uit." >&2
       exit 1
     fi
-    if grafische_sessie_geblokkeerd; then
-      sed 's/^/   /' "$PROBE_LOG" >&2
-      rm -f "$PROBE_LOG"
-      echo "  overgeslagen: de app sloot netjes af (exit 0) terwijl het scherm op slot" >&2
-      echo "  staat of de sessie niet op de console is — dat zegt niets over de app." >&2
-      PROBE_OK=1
-      break
-    fi
-    echo "  poging $POGING: de app sloot netjes af (exit 0), geen laadfout zichtbaar:" >&2
-    sed 's/^/   /' "$PROBE_LOG" >&2
-    rm -f "$PROBE_LOG"
-  done
-  if [[ $PROBE_OK -ne 1 ]]; then
-    echo "De app sloot tweemaal binnen zes seconden af met exit 0, met een" >&2
-    echo "bruikbare grafische sessie. Een app die meteen weer weg is, mag niet uit." >&2
-    exit 1
   fi
-fi
+}
+
+opstartproef
 
 # De notarisatie-zip ging vóór het staplen de deur uit; die hebben we niet meer nodig.
 rm -f "$ZIP"
