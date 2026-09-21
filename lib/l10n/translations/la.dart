@@ -1642,6 +1642,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'niet leesbaar': 'non legibilis',
+  'niet decodeerbaar': 'non decodificabilis',
+  'model gaf niets bruikbaars terug': 'exemplar nihil utile reddidit',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Iam te abdicare non potes: terminus praeteriit. Societatem tuam contacte.',
   'Aanbod': 'Offerta',

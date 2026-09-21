@@ -827,6 +827,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'niet leesbaar': 'not readable',
+  'niet decodeerbaar': 'not decodable',
+  'model gaf niets bruikbaars terug': 'the model returned nothing usable',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'You can no longer cancel: the deadline has passed. Contact your organization.',
   'Aanbod': 'Offerings',

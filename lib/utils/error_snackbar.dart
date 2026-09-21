@@ -18,6 +18,7 @@ void showCopyableSnackBar(
     SnackBar(
       content: Text(message),
       duration: duration,
+      persist: false,
       action: SnackBarAction(
         label: l10n.d('Kopiëren'),
         onPressed: () {
@@ -34,6 +35,36 @@ void showCopyableSnackBar(
       ),
     ),
   );
+}
+
+/// Show a snackbar with ONE action button that still dismisses itself.
+/// Replaces whatever snackbar is currently showing. The `persist: false` is
+/// load-bearing: without it a SnackBar with an action stays up forever, and
+/// SnackBarTheme offers no duration to lean on — that was #2149.
+void showActionSnackBar(
+  ScaffoldMessengerState messenger,
+  String message,
+  String actionLabel,
+  VoidCallback onAction, {
+  Duration duration = const Duration(seconds: 4),
+  Color? backgroundColor,
+  Color? actionTextColor,
+}) {
+  messenger
+    ..clearSnackBars()
+    ..showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: backgroundColor,
+        duration: duration,
+        persist: false,
+        action: SnackBarAction(
+          label: actionLabel,
+          textColor: actionTextColor,
+          onPressed: onAction,
+        ),
+      ),
+    );
 }
 
 /// Show an error message the user can COPY — [showCopyableSnackBar] with a

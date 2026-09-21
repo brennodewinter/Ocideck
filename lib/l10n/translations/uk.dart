@@ -1642,6 +1642,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'niet leesbaar': 'не читається',
+  'niet decodeerbaar': 'не декодується',
+  'model gaf niets bruikbaars terug': 'модель не повернула нічого корисного',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Ви більше не можете скасувати запис: термін минув. Зверніться до своєї організації.',
   'Aanbod': 'Пропозиція',

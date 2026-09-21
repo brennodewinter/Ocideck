@@ -1626,6 +1626,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'niet leesbaar': 'ej läsbar',
+  'niet decodeerbaar': 'ej avkodbar',
+  'model gaf niets bruikbaars terug': 'modellen returnerade inget användbart',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Du kan inte längre avanmäla dig: tidsfristen har gått ut. Kontakta din organisation.',
   'Aanbod': 'Utbud',

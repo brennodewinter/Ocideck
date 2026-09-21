@@ -81,6 +81,20 @@ void main() {
     expect(await service.getCaption(b), 'Gedeeld');
   });
 
+  test(
+    'copyCaption voegt samen in plaats van te overschrijven (#2147)',
+    () async {
+      final a = p.join(tmp.path, 'a.png');
+      final b = p.join(tmp.path, 'b.png');
+      await service.saveCaption(a, 'van de bron');
+      await service.saveCaption(b, 'van de bestemming');
+
+      await service.copyCaption(a, b);
+
+      expect(await service.getCaption(b), 'van de bestemming · van de bron');
+    },
+  );
+
   test('does not write caption sidecar outside project via ../ path', () async {
     final project = Directory.systemTemp.createTempSync('ocideck_cap_proj');
     final outside = Directory.systemTemp.createTempSync('ocideck_cap_out');

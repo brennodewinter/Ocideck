@@ -1639,6 +1639,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'niet leesbaar': 'nieczytelny',
+  'niet decodeerbaar': 'nie do zdekodowania',
+  'model gaf niets bruikbaars terug': 'model nie zwrócił niczego użytecznego',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Nie możesz się już wypisać: termin minął. Skontaktuj się ze swoją organizacją.',
   'Aanbod': 'Oferta',

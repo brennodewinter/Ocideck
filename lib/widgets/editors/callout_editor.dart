@@ -18,6 +18,7 @@ import '../../services/web_asset_store.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/bundled_asset.dart';
+import '../../utils/error_snackbar.dart';
 import '../../utils/image_dimensions.dart';
 import '../../utils/project_path.dart';
 import '../../widgets/editors/callout_marker_helpers.dart';
@@ -353,33 +354,23 @@ class _CalloutEditorDialogState extends State<CalloutEditorDialog> {
     // niets en leest een volgende opening hem als een callout die niet bestaat.
     if (bulletIndex != null) setState(() => _setReference(bulletIndex, null));
     _emit();
-    _showUndoSnackbar(() {
-      setState(() {
-        _callouts.insert(index, removed);
-        _bullets = oldBullets;
-        _selectedCalloutIndex = index;
-        _selectedTargetIndex = 0;
-      });
-      _syncDescriptionController();
-      _emit();
-    });
-  }
-
-  void _showUndoSnackbar(VoidCallback undo) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     if (messenger == null) return;
-    messenger
-      ..clearSnackBars()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.d('Verwijzing verwijderd')),
-          action: SnackBarAction(
-            label: context.l10n.d('Ongedaan maken'),
-            onPressed: undo,
-          ),
-          duration: const Duration(seconds: 4),
-        ),
-      );
+    showActionSnackBar(
+      messenger,
+      context.l10n.d('Verwijzing verwijderd'),
+      context.l10n.d('Ongedaan maken'),
+      () {
+        setState(() {
+          _callouts.insert(index, removed);
+          _bullets = oldBullets;
+          _selectedCalloutIndex = index;
+          _selectedTargetIndex = 0;
+        });
+        _syncDescriptionController();
+        _emit();
+      },
+    );
   }
 
   void _moveTarget(int calloutIndex, int targetIndex, double x, double y) {

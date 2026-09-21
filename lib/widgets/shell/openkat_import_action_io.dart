@@ -96,6 +96,7 @@ Future<OpenKatImportOutcome?> importOpenKatReports(
     messenger.showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 8),
+        persist: false,
         content: Text(openKatImportSummary(l10n, outcome)),
         action: SnackBarAction(
           label: l10n.d('Bekijk verslag'),

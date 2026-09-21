@@ -690,6 +690,13 @@ class AppTheme {
           foregroundColor: profile.isDark ? text : primary,
         ),
       ),
+      // Elke melding in de app krijgt een sluitknop. Een snackbar mét een
+      // actieknop blijft standaard liggen (`persist` volgt `action != null`),
+      // en zonder dit icoon was er dan letterlijk geen weg hem weg te doen —
+      // ook niet voor wie toegankelijkheidsnavigatie aan heeft staan (#2149).
+      // De kleur komt uit de standaard (inverseSurface uit het schema), dus
+      // hier alleen de schakelaar.
+      snackBarTheme: const SnackBarThemeData(showCloseIcon: true),
       extensions: [
         AppPalette(
           panel: panel,

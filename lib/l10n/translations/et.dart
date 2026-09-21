@@ -1620,6 +1620,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'niet leesbaar': 'loetamatu',
+  'niet decodeerbaar': 'mitte dekodeeritav',
+  'model gaf niets bruikbaars terug': 'mudel ei tagastanud midagi kasulikku',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Te ei saa enam registreerimist tühistada: tähtaeg on möödunud. Võtke ühendust oma organisatsiooniga.',
   'Aanbod': 'Pakkumine',

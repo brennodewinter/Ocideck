@@ -1628,6 +1628,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'niet leesbaar': 'nečitelné',
+  'niet decodeerbaar': 'nedekódovatelné',
+  'model gaf niets bruikbaars terug': 'model nevrátil nic použitelného',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Odhlásit se již nelze: lhůta vypršela. Kontaktujte svou organizaci.',
   'Aanbod': 'Nabídka',

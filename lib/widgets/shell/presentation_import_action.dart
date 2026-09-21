@@ -512,6 +512,7 @@ SnackBar? presentationOpenRescueSnackBar(
   return SnackBar(
     content: Text(rescue.message),
     duration: const Duration(seconds: 8),
+    persist: false,
     action: SnackBarAction(
       label: rescue.startsImport ? l10n.d('Importeren') : l10n.t('settings'),
       onPressed: rescue.startsImport ? onImport : onOpenSettings,

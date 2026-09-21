@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 
 import '../utils/project_path.dart';
+import 'image_dedup_service.dart';
 import 'image_sidecar_store.dart';
 
 /// Slaat afbeeldingscaptions op als JSON-sidecar in de map van de afbeelding.
@@ -42,6 +43,11 @@ class CaptionService {
     await _store.writeAll(resolved);
   }
 
+  /// Neem het bijschrift van [sourceImagePath] mee naar
+  /// [destinationImagePath]. Draagt de bestemming al een eigen bijschrift (een
+  /// hergebruikt, byte-identiek bestand, of handmatig werk), dan wint dat: de
+  /// brontekst wordt er met ` · ` achter gezet in plaats van hem te
+  /// overschrijven (#2147).
   Future<void> copyCaption(
     String sourceImagePath,
     String destinationImagePath, {
@@ -50,9 +56,13 @@ class CaptionService {
   }) async {
     final caption = await getCaption(sourceImagePath, basePath: sourceBasePath);
     if (caption == null || caption.trim().isEmpty) return;
+    final existing = await getCaption(
+      destinationImagePath,
+      basePath: destinationBasePath,
+    );
     await saveCaption(
       destinationImagePath,
-      caption,
+      ImageDedupService().mergeMetadata([existing, caption]),
       basePath: destinationBasePath,
     );
   }

@@ -28,6 +28,7 @@ import '../../theme/app_theme.dart';
 import 'ai_image_outbound_dialog.dart';
 
 part 'parts/image_carousel_picker_actions.dart';
+part 'parts/image_carousel_picker_autotag.dart';
 part 'parts/image_carousel_picker_delete.dart';
 part 'parts/image_carousel_picker_rename.dart';
 part 'parts/image_carousel_picker_chrome.dart';

@@ -1634,6 +1634,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'niet leesbaar': 'neįskaitoma',
+  'niet decodeerbaar': 'nedekoduojama',
+  'model gaf niets bruikbaars terug': 'modelis negrąžino nieko naudingo',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Daugiau nebegalite atsisakyti: terminas pasibaigė. Kreipkitės į savo organizaciją.',
   'Aanbod': 'Pasiūlymas',

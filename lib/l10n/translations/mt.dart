@@ -1645,6 +1645,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'niet leesbaar': 'mhux jinqara',
+  'niet decodeerbaar': 'mhux dekodifikabbli',
+  'model gaf niets bruikbaars terug': 'il-mudell ma ritorna xejn utli',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Ma tistax tikkanċella aktar: it-terminu għadda. Ikkuntattja lill-organizzazzjoni tiegħek.',
   'Aanbod': 'Offerta',

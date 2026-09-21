@@ -1627,6 +1627,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'niet leesbaar': 'ei luettavissa',
+  'niet decodeerbaar': 'ei dekoodattavissa',
+  'model gaf niets bruikbaars terug':
+      'malli ei palauttanut mitään käyttökelpoista',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Et voi enää perua: määräaika on umpeutunut. Ota yhteyttä organisaatioosi.',
   'Aanbod': 'Tarjonta',

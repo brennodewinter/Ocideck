@@ -1652,6 +1652,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'niet leesbaar': 'μη αναγνώσιμο',
+  'niet decodeerbaar': 'μη αποκωδικοποιήσιμο',
+  'model gaf niets bruikbaars terug':
+      'το μοντέλο δεν επέστρεψε κάτι αξιοποιήσιμο',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Δεν μπορείτε πλέον να ακυρώσετε: η προθεσμία έληξε. Επικοινωνήστε με τον οργανισμό σας.',
   'Aanbod': 'Προσφορά',

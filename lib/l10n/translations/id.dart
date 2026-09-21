@@ -1627,6 +1627,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'niet leesbaar': 'tidak terbaca',
+  'niet decodeerbaar': 'tidak dapat didekode',
+  'model gaf niets bruikbaars terug':
+      'model tidak mengembalikan hasil yang berguna',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Anda tidak dapat lagi membatalkan: batas waktu telah lewat. Hubungi organisasi Anda.',
   'Aanbod': 'Penawaran',

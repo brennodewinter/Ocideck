@@ -667,6 +667,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'niet leesbaar': 'net lêsber',
+  'niet decodeerbaar': 'net te dekodearjen',
+  'model gaf niets bruikbaars terug': 'it model joech neat brûkbers werom',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Jo kinne jo net mear ôfmelde: de termyn is ferrûn. Nim kontakt op mei jo organisaasje.',
   'Aanbod': 'Oanbod',

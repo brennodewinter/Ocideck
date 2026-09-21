@@ -1627,6 +1627,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'niet leesbaar': 'ikke læsbar',
+  'niet decodeerbaar': 'kan ikke afkodes',
+  'model gaf niets bruikbaars terug': 'modellen returnerede intet brugbart',
   'Afmelden kan niet meer: de termijn is verstreken. Neem contact op met uw organisatie.':
       'Du kan ikke længere afmelde dig: fristen er udløbet. Kontakt din organisation.',
   'Aanbod': 'Tilbud',

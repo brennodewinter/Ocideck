@@ -15,6 +15,9 @@ import '../utils/image_signature.dart' as image_signature;
 import '../utils/log.dart';
 import '../utils/project_path.dart';
 import 'asset_staging.dart';
+import 'caption_service.dart';
+import 'description_service.dart';
+import 'image_sidecar_store.dart';
 import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 import '../utils/content_hash.dart';
@@ -471,7 +474,15 @@ class ImageService {
     // dezelfde indeling heeft als een echt project. Lukt zelfs dat niet, dan
     // is het bronpad nog altijd beter dan niets.
     if (projectPath == null || projectPath.isEmpty) {
-      return await AssetStaging.stage(sourcePath, subdir: subdir) ?? sourcePath;
+      final staged =
+          await AssetStaging.stage(sourcePath, subdir: subdir) ?? sourcePath;
+      // De stagingmap heeft de indeling van een project — en dus ook zijn
+      // sidecars. Tags meenemen voorkomt dat een getagde afbeelding die vóór de
+      // eerste opslag wordt ingevoegd haar beschrijving onderweg verliest.
+      if (subdir == 'images' && staged != sourcePath) {
+        await migrateImageSidecars(sourcePath, staged);
+      }
+      return staged;
     }
     final destDir = Directory(p.join(projectPath, subdir));
     await destDir.create(recursive: true);
@@ -491,7 +502,40 @@ class ImageService {
     if (!dest.alreadyPresent) {
       await src.copy(dest.file.path);
     }
+    if (subdir == 'images') {
+      await migrateImageSidecars(src.path, dest.file.path);
+    }
     return '$subdir/${p.basename(dest.file.path)}';
+  }
+
+  /// Laat de beeld-sidecars (tags én bijschriften) met het bestand meeverhuizen.
+  /// De kopieerslag verplaatst alleen de bytes; zonder deze stap blijft de
+  /// zoekbare beschrijving in de bronmap achter en telt de kopie in de
+  /// bibliotheek weer als ongetagd (#2147). Een bestaande tekst op de
+  /// bestemming wint — de services voegen de brontekst erachter in plaats van
+  /// hem te overschrijven. Doet niets op web, waar geen sidecars bestaan.
+  ///
+  /// Gedeeld door álle kopieerpaden (opslag, import, archiefadoptie): de
+  /// foutafhandeling hoort hier — een corrupte of onleesbare sidecar mag het
+  /// kopiëren van het bestand zelf niet laten falen.
+  static Future<void> migrateImageSidecars(
+    String sourcePath,
+    String destPath, {
+    DescriptionService? descriptions,
+    CaptionService? captions,
+  }) async {
+    if (kIsWeb || p.equals(sourcePath, destPath)) return;
+    try {
+      await (descriptions ?? DescriptionService()).copyDescription(
+        sourcePath,
+        destPath,
+      );
+      await (captions ?? CaptionService()).copyCaption(sourcePath, destPath);
+    } on SidecarUnreadable catch (e) {
+      logWarning('ImageService: doel-sidecar onleesbaar bij migratie', e);
+    } on FileSystemException catch (e) {
+      logWarning('ImageService: sidecar-migratie bij kopiëren mislukt', e);
+    }
   }
 
   /// Copy images referenced by absolute path into the project images/ dir
@@ -813,6 +857,9 @@ class ImageService {
     );
     if (dest == null) return null;
     if (!dest.alreadyPresent) await src.copy(dest.file.path);
+    if (subdir == 'images') {
+      await migrateImageSidecars(src.path, dest.file.path);
+    }
     return '$subdir/${p.basename(dest.file.path)}';
   }
 
