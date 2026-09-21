@@ -168,6 +168,27 @@ The optional AI assistance requires explicit user consent:
 3. Used for generating text suggestions and alt-text for images  
 4. All data processing stays within the user's control
 
+### How do I connect OciDeck to a local AI model?
+Run an OpenAI-compatible runtime and point the app at it — there is no bundled
+model and no vendor baked in. The short version, with [Ollama](https://ollama.com):
+`brew install ollama`, then `ollama pull gemma3:4b`, then `ollama serve`. In
+OciDeck: switch the *AI-assistentie* module on under **Settings → Uitbreidingen**,
+open the **AI-assistentie** tab, set **AI-backend** to *Lokaal (op dit apparaat)*,
+leave the URL at `http://127.0.0.1:11434/v1`, put `gemma3:4b` in **Modelnaam**, and
+press **Verbinding testen**. Note the single model field serves both text and
+images, so pick a multimodal model if you want AI alt-text. The full walkthrough,
+including the self-hosted and cloud tiers, is in
+[USER_GUIDE.md](USER_GUIDE.md#ai-assistance-optional).
+
+### Does OciDeck support MCP?
+No. OciDeck is neither an MCP client nor an MCP server, and no MCP package is in
+the build. Exposing OciDeck *as* an MCP server, so an external agent could drive
+it, is a designed but unbuilt phase ([AI_ASSIST.md §10](design/AI_ASSIST.md)).
+Note that MCP would not be the way to attach a model in any case: an MCP server
+holds no model, and the one server-to-model bridge in the protocol (sampling) was
+deprecated in favour of talking to provider APIs directly — which is exactly what
+the backend described above does.
+
 ## Platform Support
 
 ### What platforms does OciDeck support?

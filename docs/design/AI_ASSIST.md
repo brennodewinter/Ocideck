@@ -1,17 +1,29 @@
 # OciDeck — Optional AI Assistance (Design)
 
-> **Status:** design; phases 0–3 shipped, phase 4 unbuilt — not a current-state reference · **Status last reviewed:** 2026-07-23 · **Published by:** Stichting LibreKAT
+> **Status:** design; phases 0–3 shipped, phase 4 unbuilt — not a current-state reference · **Status last reviewed:** 2026-09-21 · **Published by:** Stichting LibreKAT
 
 > **Phases 0–3 are built and shipped. Only Phase 4 (the MCP server
 > surface) is unbuilt.** This header said "design proposal — not yet
 > implemented" long after the code had overtaken it; corrected 2026-07-18.
 >
+> **OciDeck does not speak MCP today** — no MCP client, no MCP server, no MCP
+> package in `pubspec.yaml` (checked 2026-09-21). Said here because this
+> document is where the word appears, and a reader who meets it naturally asks
+> whether MCP is how one attaches a local model. It is not, for two independent
+> reasons set out in §10.1: an MCP server holds no model, and the direction in
+> §10 is an external agent driving OciDeck, not OciDeck obtaining inference. The
+> way to attach a model is §3, which is built — for users, written up as
+> *AI assistance (optional)* in [`USER_GUIDE.md`](../USER_GUIDE.md).
+>
 > What exists today: the shared `/v1` client and guardrails
 > (`ai_client_service.dart`, `ai_security_gate.dart`, settings in
 > `settings_dialog_ai.dart`), image alt-text (`image_alt_ai_service.dart`,
 > `alt_text_field.dart`), auto-tagging incl. the bulk "tag untagged" action
-> (`image_carousel_picker_actions.dart`), and pentest field drafting
-> (`finding_ai_service.dart`, `ai_suggest_field.dart`).
+> (`image_carousel_picker_actions.dart`), pentest field drafting
+> (`finding_ai_service.dart`, `ai_suggest_field.dart`), and — added after this
+> document was last revised — Procesverbetering wording assist
+> (`improvement_ai_service.dart`, `improvement_ai_guard.dart`) plus the bulk
+> alt-text cleanup (`ai_alt_text_cleanup.dart`).
 >
 > Treat §§1–6 as a **specification of shipped behaviour**, not a proposal — but
 > not as a current-state reference either: it has not been re-read line by line
@@ -20,7 +32,20 @@
 > [`SOURCE_MAP.md`](../SOURCE_MAP.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md) and
 > [`USER_GUIDE.md`](../USER_GUIDE.md).
 >
-> **How far that distrust reaches, as of 2026-07-22.** What has been checked is
+> **What was checked against the code on 2026-09-21.** A second, wider pass than
+> the 2026-07-22 one below, made while writing the user-facing guide. These held
+> and may be read as verified at that date: the `/v1` transport shape of §3.2
+> (the client appends `chat/completions` to the configured base, and
+> `testConnection` is a `GET …/models`); the tier regime of §3.2/§3.3 as
+> `ai_security_gate.dart` enforces it, including that `local` demands a genuine
+> loopback host and that `cloud` is refused on web, without consent, or without
+> the per-endpoint confirmation; `defaultLocalBaseUrl` being
+> `http://127.0.0.1:11434/v1`; the §6.3 byte path (resize, JPEG re-encode,
+> base64 data URI, the **object** form of `image_url`); and open question 5, in
+> that no `/api/chat` fallback exists. Two things the document did **not** say
+> and now does: the single model field (§3.1) and consumer C (§1).
+>
+> **How far the earlier distrust reached, as of 2026-07-22.** What has been checked is
 > narrow and worth naming so the rest is not mistaken for checked: every file
 > named in the paragraph above exists at the path given, and `AiSettings.enabled`
 > is indeed a setting of its own that is off by default. That is all. The prose,
@@ -61,6 +86,14 @@ per-image sidecars return null on web.
   keyword tags for images. Detailed in §6 below. Useful to *all* users, not just
   pentesters — which is exactly why AI is a general capability, not a
   pentest-module sub-feature.
+- **C — Procesverbetering wording assist**: polishing the free text on canvas,
+  matrix, tree and flow slides. Specified in `PROCESS_IMPROVEMENT.md` §9 and
+  built as `improvement_ai_service.dart`; its guard
+  (`improvement_ai_guard.dart`) strips any **X-nn**/**Y-nn** id, statistic or
+  cause-list pattern the model emits, the way consumer A strips CWE/CVE ids.
+  *(Recorded here 2026-09-21: it shipped against this backend without being
+  added to this list, which is the failure mode §1 exists to prevent — a
+  consumer that no shared-backend document knows about.)*
 
 ### Goals
 - One backend, one request builder, one settings surface — reused by every
@@ -141,7 +174,14 @@ once the module is on (or a backend is already configured: switching the module
 off must never make existing configuration unreachable). The tab itself holds
 the backend choice and per-consumer switches. Backend fields: mode
 (`none | local | self-hosted | cloud`), base URL, model name, and a "test
-connection" action. Default mode is **none** even when the module is on — nothing
+connection" action (a `GET <base>/models` — it exercises gate, resolve and pin
+without generating tokens). **There is exactly one model-name field, shared by
+every consumer**, text and vision alike: `image_alt_ai_service.dart` reads the
+same `settings.model` as the finding and improvement consumers. The consequence
+is a user-visible one and belongs in the user documentation, not just here — a
+text-only model does not degrade the image consumers, it fails them — so pick a
+multimodal model (e.g. `gemma3:4b`) to have both. A per-consumer model override
+is the obvious future refinement; nothing depends on it yet. Default mode is **none** even when the module is on — nothing
 fires until the user acts on a specific field.
 
 ### 3.2 Three-tier backend — a *provider-agnostic* client
@@ -370,6 +410,12 @@ is already load-bearing.
    Optional interop, desktop-only, and dependent on a community Dart MCP package
    (`mcp_dart`) until the official `dart_mcp` ships an HTTP transport. Phase 4
    exists precisely so this can be decided on its own timing.
+   *(2026-09-21: still open, and still nothing in `pubspec.yaml`. What changed is
+   that the gap is now stated where users look — [`USER_GUIDE.md`](../USER_GUIDE.md)
+   §AI assistance, [`FAQ.md`](../FAQ.md) and
+   [`KNOWN_LIMITATIONS.md`](../KNOWN_LIMITATIONS.md) all say OciDeck does not
+   speak MCP, and why MCP would not be the route to a model anyway. Prompted by
+   a user who reasonably assumed the opposite from this document's §10.)*
 
 ---
 
@@ -380,9 +426,23 @@ model. Document the recommended local runtimes (Ollama/LM Studio, their licences
 and the fact that model outputs are unverified drafts in the
 [`USER_GUIDE.md`](../USER_GUIDE.md) and an about/AI screen when this lands.
 
+*(2026-09-21 — half done, so that the other half is not mistaken for shipped.)*
+The `USER_GUIDE.md` half now exists: *AI assistance (optional)* names the
+runtimes, states that `ollama pull` reaches the runtime's own registry — a party
+the user trusts outside the app and outside its consent gates — and warns that
+model licences diverge, several popular ones not being open source. Drafts being
+unverified is said throughout, and carried by the **AI-concept** badge. **Still
+open: the about/AI screen.** Nothing in the app itself repeats the licence and
+provenance point at the moment the user configures a backend; today it lives only
+in the guide.
+
 ---
 
 ## 10. MCP server surface — external agents drive OciDeck (optional, additive)
+
+> **Unbuilt as of 2026-09-21** — nothing below exists in the tree, and none of
+> it is how a model gets attached. For that, see §3 and the *AI assistance
+> (optional)* section of [`USER_GUIDE.md`](../USER_GUIDE.md).
 
 A **separate, optional** capability from the §3 client, and the honest home for
 "let AI live outside OciDeck / another application drives it": OciDeck exposes

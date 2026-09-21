@@ -84,7 +84,7 @@ ze leven in de repository. Zie [Hoe deze documenten worden onderhouden](#hoe-dez
 | [TEAMS_GUEST_CLIENT.md](design/TEAMS_GUEST_CLIENT.md) | Ontwerpvoorstel, ongebouwd: deelnemen aan ondersteunde Teams-werk/school-vergaderingen via een OciDeck-web/PWA-gastclient zonder een Microsoft-account. |
 | [GIT_STORAGE.md](design/GIT_STORAGE.md) | Ontwerp van het git-opslagvlak; fasen 0–6 zijn geland, wat rest is verificatie. |
 | [PENTEST_MIAUW.md](design/PENTEST_MIAUW.md) | Het oorspronkelijke ontwerp voor de MIAUW-pentestmodule, die wordt meegeleverd. Delen worden door de code tegengesproken. |
-| [AI_ASSIST.md](design/AI_ASSIST.md) | Het optionele AI-assistentieontwerp; fasen 0–3 zijn gebouwd, fase 4 (MCP) niet. |
+| [AI_ASSIST.md](design/AI_ASSIST.md) | Het optionele AI-assistentieontwerp; fasen 0–3 zijn gebouwd, fase 4 (MCP) niet — OciDeck spreekt geen MCP, en MCP is niet de manier om een model aan te haken. Om er een aan te haken: *AI-assistentie (optioneel)* in [USER_GUIDE.nl.md](USER_GUIDE.nl.md#ai-assistentie-optioneel). |
 | [OCIWACHT.md](design/OCIWACHT.md) | Het ontwerp van de privacyscanner, **in het Nederlands**, met bovenaan een tabel per sectie van geleverd/open. Met 2.668 regels is het het grootste van de drie Nederlandse documenten. |
 | [AGENTIC_BUILD_PLAN.md](design/AGENTIC_BUILD_PLAN.md) | Historisch: het agentische bouwplan voor het pentest/AI-werk. Uitgevoerd; bewaard als uitgewerkt voorbeeld, niet als wachtrij. |
 | [PROCESS_IMPROVEMENT.md](design/PROCESS_IMPROVEMENT.md) | Ontwerpvoorstel, ongebouwd: een Lean Six Sigma-auteursmodule. Ondanks de naam is het een productontwerp, geen rapport over ons proces. |
