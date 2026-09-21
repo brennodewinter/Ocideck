@@ -454,7 +454,11 @@ opstartproef() {
     # poging en een blik op de sessiestatus.
     PROBE_OK=0
     for POGING in 1 2; do
-      PROBE_LOG="$(mktemp -t ocideck-opstartproef)"
+      # Geen `mktemp -t naam`: BSD accepteert een sjabloon zonder X's, GNU
+      # (Linux, Git Bash) weigert die met "too few X's in template". De
+      # uitdrukkelijke padvorm werkt op beide — en dus ook in de hermetische
+      # test, die deze functie onder de Gate (Linux)-job draait.
+      PROBE_LOG="$(mktemp "${TMPDIR:-/tmp}/ocideck-opstartproef.XXXXXX")"
       "$APP/Contents/MacOS/OciDeck" >"$PROBE_LOG" 2>&1 &
       PROBE_PID=$!
       # Zes seconden is ruim: een dyld-fout valt binnen één seconde, en een app
