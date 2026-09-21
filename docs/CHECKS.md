@@ -1925,9 +1925,12 @@ that reaches beyond `build/test_cache`.
 > same machine that serves the repository). What it executes comes from
 > `.forgejo/workflows/` — Forgejo reads the first workflow directory that
 > exists, so that directory shadows `.github/workflows/`, whose files remain
-> reference definitions for a GitHub mirror — with one exception: since
-> 2026-07-24 `.github/workflows/release.yml` really runs there, because it
-> builds the Windows artifact the forge has no machine for. Most of
+> reference definitions for a GitHub mirror — with three exceptions that really
+> run there: since 2026-07-24 `.github/workflows/release.yml`, because it
+> builds the Windows artifact the forge has no machine for;
+> `windows-native-check.yml`, a post-merge build check on the same platform
+> gap; and `windows-test-check.yml`, a weekly suite run over `main` for the
+> same reason. Most of
 > `make check-full` (the dependency/web checks) still runs only locally; run it
 > before a dependency or web-facing change. Its two *security* scans are the
 > exception since #778 —
@@ -2375,6 +2378,31 @@ The three path filters are themselves guarded by
 `test/native_build_triggers_test.dart`: a build that no longer fires guards
 nothing, and that must not be able to happen quietly. `.tool-versions` is on
 every list because a *bare* pin bump touches neither pubspec file.
+
+### `.github/workflows/windows-test-check.yml` — the test suite on Windows, weekly
+- **test** — `flutter test --test-randomize-ordering-seed random
+  --exclude-tags golden` on `windows-2022`, once a week over `main` (Monday
+  06:47 UTC) plus `workflow_dispatch`. It is the Windows twin of the Forgejo
+  [`linux-gate.yml`](#forgejoworkflowslinux-gateyml--nightly-schedule-and-on-demand-workflow_dispatch)
+  nightly: **detection, not prevention** — a red run blocks nothing but names
+  the failing test, and at most a week of commits sits between it and green.
+- **Why it exists.** For years the suite saw Windows only on a `v*` tag (the
+  `ci.yml` matrix below), while the local gate and both Forgejo gates run on
+  macOS or Linux. Three release tags in a row (v0.6.3–v0.6.5) went red on
+  tests that compare a code-built path against a `'${dir.path}/file'` literal
+  — green everywhere `/` is the separator, broken where `p.join` emits `\`.
+  The same class cost v0.6.8 the Linux gate (`mktemp -t` without X's).
+  `make check-conventions` now refuses both shapes at the source, and this
+  run is the early alarm for whatever slips past a ratchet.
+- **Why weekly rather than per merge.** A full suite run per merge was already
+  refused once (#1123, see `linux-gate.yml`): ~6.5 h/day on a capacity-1
+  runner for zero found regressions. On hosted minutes the cost is only time,
+  but a red run per merge would still just fill the last committer's mailbox —
+  a break found within a week is still found long before the next tag.
+- The `windows-2022` pin follows the same MSVC/dartcv4 reason as the
+  `ci.yml` matrix and `release.yml` (#788), and its `flutter-version` literal
+  is asserted against `.tool-versions` by `check_toolchain`, like every
+  workflow that names one.
 
 ### `.forgejo/workflows/release.yml` — on a version tag (`v*`)
 One tag, one release. Not a gate: everything here assumes `make check` was

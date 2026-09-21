@@ -1,0 +1,79 @@
+# Draait de testsuite op Windows, één keer per week over main — als controle,
+# niet als samenvoegpoort.
+#
+# ⚠️  Deze map draait alleen op de GitHub-spiegel. Forgejo leest
+# `.forgejo/workflows/` en negeert `.github/`.
+#
+# **Waarom dit bestaat.** De testsuite zag Windows jarenlang alleen op een
+# `v*`-tag (`ci.yml`, test-matrix) — en de lokale poort plus de Forgejo-poort
+# draaien allebei op macOS. Drie releases op rij (v0.6.3 t/m v0.6.5) gingen er
+# rood op uit: tests die een pad met `'${map.path}/bestand'` vergelijken
+# terwijl de code met `p.join` joint, staan overal groen waar `/` het
+# scheidingsteken is — en breken hier. Dezelfde klasse kostte v0.6.8 de
+# Linux-gate (`mktemp -t` zonder X's). Die Linux-kant is inmiddels gedekt:
+# `linux-gate.yml` op de forge draait de suite elke nacht, en
+# `check_conventions.dart` weert beide schrijfwijzen bij de bron. Wat overbleef
+# is de Windows-kant — geen enkele poort draait daar de suite behalve de
+# tag-pijplijn, waar de breuk al op main staat.
+#
+# **Waarom wekelijks en niet per merge.** Eén volle suite-run per merge naar
+# main is al eens afgewezen: op de forge kostte dat ~6,5 uur per dag op een
+# capacity-1-runner voor nul gevonden regressies (#1123, zie linux-gate.yml).
+# Op de GitHub-hosted runner kost het niets dan tijd, maar ook dáár zou een
+# rode run per merge alleen de mail van de laatste commiter vullen — terwijl
+# de schuldige wijziging evengoed binnen een week opvalt. Detectie hoeft niet
+# bij de merge, alleen ruim vóór de volgende tag. `workflow_dispatch` blijft
+# voor een tak die het eerder wil weten.
+#
+# **Geen artefact, geen gate.** Rood blokkeert niets — de tag-pijplijn is dat
+# wel — maar noemt de falende test bij naam, en er zitten hooguit een week
+# commits tussen.
+name: Windows test suite (weekly)
+
+on:
+  schedule:
+    # Maandag 06:47 UTC, achter de nachtelijke linux-gate (02:11) en de vroege
+    # spiegelcontroles aan: de week begint met alle platformbreuken bekend in
+    # plaats van verspreid.
+    - cron: "47 6 * * 1"
+  workflow_dispatch:
+
+# Deze workflow leest alleen; hij publiceert niets.
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (windows-2022)
+    # Zelfde pin als de matrix in ci.yml en release.yml (#788): dartcv4 haalt
+    # een voorgebouwd OpenCV-Windows-pakket op dat niet samengaat met de MSVC
+    # op windows-latest. `flutter test` bouwt die laag niet, maar `pub get`
+    # resolveert hem wel — houd de pin gelijk, los hem pas mee op als upstream
+    # een pakket voor nieuwere MSVC's uitbrengt.
+    runs-on: windows-2022
+    # De suite deed op de laatste tag-runs ~35-50 min op deze runner.
+    timeout-minutes: 75
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          # Letterlijk, en dat is met opzet: `make check-toolchain` leest deze
+          # regel en faalt zodra hij afwijkt van de pin in .tool-versions.
+          flutter-version: 3.47.5
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      # Dezelfde aanroep als de test-matrix in ci.yml: de willekeurige volgorde
+      # is opzet, de seed staat bovenin de log voor wie een breuk wil
+      # reproduceren.
+      - name: Test
+        shell: bash
+        run: flutter test --test-randomize-ordering-seed random --exclude-tags golden
