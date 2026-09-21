@@ -31,6 +31,7 @@
 - [Presenteren](#presenteren)
 - [Exporteren](#exporteren)
 - [Toegankelijkheid](#toegankelijkheid)
+- [AI-assistentie (optioneel)](#ai-assistentie-optioneel)
 - [Informatiebeveiligingsmodule (pentestrapporten)](#informatiebeveiligingsmodule-pentestrapporten)
 - [Managementsysteemmodule (ISO-voortgangsrapportage)](#managementsysteemmodule-iso-voortgangsrapportage)
 - [eLearning-module (lesmateriaal)](#elearning-module-lesmateriaal)
@@ -40,7 +41,7 @@
 - [Wat de browserversie niet kan](#wat-de-browserversie-niet-kan)
 - [Thema's en taal](#themas-en-taal)
 
-*(Toegevoegd 2026-07-22: dit document telt zo'n 5.500 regels en had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repositorypagina niet. Getal gecorrigeerd 2026-07-24, 2026-07-30, 2026-08-30 en 2026-09-06; er stond 2.992, daarna 3.350, daarna 3.800, daarna 5.300, elk kloppend op het moment van schrijven.)*
+*(Toegevoegd 2026-07-22: dit document telt zo'n 6.000 regels en had geen andere ingang dan scrollen. In de app heeft de documentatielezer volledige zoekfunctie; op de repositorypagina niet. Getal gecorrigeerd 2026-07-24, 2026-07-30, 2026-08-30, 2026-09-06 en 2026-09-21; er stond 2.992, daarna 3.350, daarna 3.800, daarna 5.300, daarna 5.500, elk kloppend op het moment van schrijven.)*
 
 OciDeck bouwt [Marp](https://marp.app/)-presentaties via een gestructureerde,
 slide-voor-slide-editor. Je stelt getypeerde slides samen, bekijkt ze live,
@@ -3944,6 +3945,156 @@ Onder *Instellingen → Algemeen → Toegankelijkheid*:
 
 Wanneer *Waarschuwen bij export* uit staat, worden kwaliteitsproblemen genegeerd bij het exporteren (ze
 tonen nog steeds tijdens het bewerken).
+## AI-assistentie (optioneel)
+
+OciDeck heeft geen eigen AI en levert geen model mee. Wat het wél heeft is een
+**client**: je wijst hem naar een model dat je zelf draait of afneemt, en dan
+gaan enkele functies concepten aanbieden. Het staat standaard uit, het werkt
+alleen op de desktop, en elke uitvoer is een *concept* dat jij aanvaardt of
+bewerkt — nooit iets dat de app buiten je om toepast.
+
+Vier functies gebruiken het zodra er een backend staat: **alt-tekst en
+automatisch taggen van afbeeldingen** (zie [Toegankelijkheid](#toegankelijkheid)
+en [Afbeeldingsbibliotheek](#afbeeldingsbibliotheek)), **bevindingteksten** in de
+informatiebeveiligingsmodule, en **tekstsuggesties** in de module
+Procesverbetering. Elk daarvan staat in zijn eigen sectie beschreven; deze gaat
+erover dat er überhaupt een model aan hangt.
+
+De client spreekt het OpenAI-compatibele `/v1/chat/completions`-formaat. Dat is
+een *formaat*, geen leverancier: Ollama, LM Studio, llama.cpp, vLLM, LocalAI, Jan
+en de gehoste aanbieders spreken het allemaal, zodat **basis-URL + modelnaam** de
+hele modelkeuze is. Er zit niets ingebakken, en het model op je eigen machine
+draaien is wat het instellingenscherm voorstelt.
+
+### Inschakelen
+
+Twee schakelaars, bewust uit elkaar:
+
+1. **Instellingen → Uitbreidingen** — zet de modulekaart *AI-assistentie* aan.
+   Met de module uit is er helemaal geen AI-tab.
+2. **Instellingen → AI-assistentie** — de tab die daarmee verschijnt bevat de
+   backend. Kies **AI-backend**; die staat op **Geen**, ook met de module aan, dus
+   er kan niets gebeuren tot je zelf een tier kiest.
+
+De module weer uitzetten verbergt een reeds ingestelde backend **niet** — je kunt
+er altijd terug om hem te zien en op te ruimen.
+
+### Een model op je eigen machine draaien (Ollama)
+
+Dit is de aanbevolen route en degene waar het instellingenscherm naar hint. Ollama
+serveert een OpenAI-compatibel eindpunt op `127.0.0.1:11434` en vraagt geen sleutel.
+
+Installeer het (macOS getoond; voor Windows en Linux staan er installers op
+[ollama.com](https://ollama.com)):
+
+```sh
+brew install ollama
+```
+
+Haal een model op — `gemma3:4b` is een goede eerste keuze, ruwweg 3,3 GB op schijf:
+
+```sh
+ollama pull gemma3:4b
+```
+
+Start de server, en laat hem draaien terwijl je OciDeck gebruikt:
+
+```sh
+ollama serve
+```
+
+Daarna, op de tab **AI-assistentie**:
+
+- **AI-backend** → *Lokaal (op dit apparaat)*. Die keuze vult de URL voor je in.
+- **Server-URL** → `http://127.0.0.1:11434/v1`. Laat de `/v1` staan; OciDeck plakt
+  er zelf `chat/completions` en `models` achter. Pas alleen de poort aan als je
+  runtime afwijkt — LM Studio serveert op 1234, een llama.cpp-server op 8080.
+- **Modelnaam** → `gemma3:4b`, of wat `ollama list` toont. De naam moet overeenkomen
+  met wat het eindpunt werkelijk heeft opgehaald; OciDeck raadt hem niet.
+- **API-sleutel** → laat leeg. Ollama vraagt er geen. (Waar wel een sleutel nodig
+  is, gaat die naar de sleutelbos van het besturingssysteem, nooit naar het
+  instellingenbestand.)
+- **Verbinding testen** → dit vraagt het eindpunt om zijn modellijst. Het bewijst
+  de hele route — poort, DNS, socket — zonder één token te genereren.
+- **Opslaan**. De test alleen bewaart niets.
+
+Een lokaal model is **lokale IPC, geen egress**: de bytes verlaten de machine niet,
+dus deze tier heeft de uitgaande privacytoestemming niet nodig en vraagt er ook
+niet om.
+
+### Een model kiezen — één veld voor tekst en beeld
+
+Er is **één veld Modelnaam voor alle functies**, tekst zowel als beeld. Dat heeft
+een gevolg dat de moeite waard is vóór je kiest:
+
+- Wil je **alt-tekst of automatisch taggen van afbeeldingen**? Dan moet het model
+  **multimodaal** zijn. Bij een model dat alleen tekst kan, blijven die knoppen
+  falen, want OciDeck stuurt de afbeelding als base64-JPEG mee in hetzelfde verzoek.
+- Gaat het je alleen om **bevindingtekst of tekstsuggesties**? Dan voldoet elk
+  tekstmodel.
+
+`gemma3:4b` dekt beide en is de veilige standaard. Voor presentaties vol
+schermafdrukken, grafieken en gescande documenten leest `qwen2.5vl:7b` ze
+merkbaar beter, ten koste van snelheid. `llama3.2-vision:11b` is de stap omhoog
+in kwaliteit als je er het geheugen voor hebt; `moondream` (~1,5 GB) is de
+terugval op een machine zonder GPU. Geen van deze namen staat hard in OciDeck —
+de lijst verschuift, dus het veld is vrije tekst en het eindpunt bepaalt wat geldig is.
+
+Vóór het versturen verkleint OciDeck de afbeelding en hercodeert hem als JPEG,
+zodat een foto van 12 megapixel geen verzoek van 16 MB wordt. Alt-tekstconcepten
+worden met opzet kort afgekapt (WCAG 1.1.1 wil een beknopte beschrijving, geen alinea).
+
+### De drie backend-tiers
+
+| Tier | Wat het is | Wat het je kost |
+|---|---|---|
+| **Lokaal (op dit apparaat)** | Ollama/LM Studio/llama.cpp op loopback | Er verlaat niets de machine. Geen toestemmingspoort. |
+| **Zelf gehost (eigen server)** | Je eigen server op het LAN of VPN | Vereist de schakelaar **Vertrouwde interne server**; het adres wordt dan onder de SSRF-bewaking opgezocht en de socket eraan vastgepind. |
+| **Cloud (externe dienst)** | Een API van een derde | Vereist de algemene uitgaande privacytoestemming bij *Privacy en classificatie* **en** een aparte bevestiging per eindpunt die de bestemming benoemt. Geblokkeerd op web. |
+
+De tiers worden afgedwongen vóórdat er iets verstuurd wordt, niet achteraf. In de
+lokale tier moet de host werkelijk loopback zijn — `localhost`, `127.0.0.0/8` of
+`::1`; al het andere wordt geweigerd in plaats van stilzwijgend tot een uitgaande
+aanroep gepromoveerd. Omleidingen worden nooit gevolgd, en een te groot antwoord
+wordt afgekapt in plaats van opgeslokt.
+
+### Wat OciDeck niet doet: MCP
+
+OciDeck **spreekt geen MCP** — het is noch een MCP-client noch een MCP-server, en
+er zit geen MCP-pakket in de build. Het is een ontworpen maar ongebouwde fase; zie
+[AI_ASSIST.md §10](design/AI_ASSIST.md).
+
+Dat is het waard om ronduit te zeggen, want MCP is een redelijke gok naar hoe je
+een lokaal model zou aanhaken, en het is op twee manieren de verkeerde. Een
+MCP-server **houdt geen model** — hij biedt gereedschappen en context, geen
+inferentie — dus hij zou OciDeck er geen kunnen leveren, ook al was het gebouwd.
+En hij wijst de andere kant op: de mogelijkheid uit dat ontwerp laat een *externe*
+agent (Claude Desktop, Cursor, een IDE) OciDeck besturen, waarbij het model
+volledig buiten de app leeft.
+
+Om een lokaal model aan te haken gebruik je de backend op deze pagina. Dat is de
+ondersteunde route, en de enige.
+
+### Als de verbindingstest faalt
+
+- **Ongeldige server-URL** — de URL is leeg, is geen `http`/`https`, of is
+  onleesbaar. Een kale `127.0.0.1:11434` is een veelgemaakte misser: het schema is
+  verplicht.
+- **Verbinding mislukt** op de lokale tier — meestal draait de runtime niet
+  (`ollama serve`), zit hij op een andere poort, of is de host geen loopback-adres.
+  Toets het eerst buiten OciDeck: `curl http://127.0.0.1:11434/v1/models`.
+- **De test slaagt maar een voorstelknop faalt** — het eindpunt is bereikbaar,
+  maar de **Modelnaam** komt niet overeen met een opgehaald model, of het model kan
+  alleen tekst terwijl de functie beeld nodig heeft. `ollama list` toont wat je
+  werkelijk hebt.
+- **Er gebeurt helemaal niets** — kijk na of de module aanstaat *én* dat
+  **AI-backend** niet nog op **Geen** staat, en onthoud dat dit alleen op de desktop
+  werkt: de browserversie toont de tab met een toelichtende regel en geen velden.
+
+Een mislukking hier blokkeert nooit. Elk veld dat een concept aanbiedt blijft
+volledig met de hand bewerkbaar, en een presentatie die de AI-backend nooit heeft
+gezien verschilt in niets van een andere.
+
 ## Informatiebeveiligingsmodule (pentestrapporten)
 
 OciDeck heeft een optionele module voor het schrijven van penetratietestrapporten
