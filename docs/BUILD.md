@@ -753,9 +753,11 @@ that script by hand.
 
 Phase 3 puts the web demo live, and decides that by **asking the site**, not by
 reading a job status. `version.json` in the deployed bundle names the version
-that is actually served; the chain compares it with the release version, deploys
-only from the tag commit when they differ, and reads the site again afterwards to
-confirm the new version is being served. The release CI's *Webversie live zetten*
+that is actually served; the chain compares it with the release version and,
+when they differ, moves the working tree onto the tag commit itself — `make
+deploy-web` builds from the working tree, so that is the only way the bundle is
+the tag's code and not whatever the tree happens to hold — and reads the site
+again afterwards to confirm the new version is being served. The release CI's *Webversie live zetten*
 job is deliberately **not** evidence: with `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS`
 absent — they are, the demo is deployed by hand — it records the skip on the run
 summary and ends green, so a real tag does not produce a red job and a failure
@@ -847,16 +849,25 @@ the wait is alive; a red `gate` from ci.yml on the same tag is reported as the
 test run beside the chain that it is, not as a failed release job) →
 **Phase 3** the web demo
 *first* — it depends only on the web bundle, so a signing or platform failure
-never leaves it on the old version. The release CI's own `Webversie live zetten`
-job deploys the bundle of the tag; when it is green, Phase 3 skips the local
-`make deploy-web`, because that builds from the *working tree*, which is not
-necessarily the tag: a `--resume` of v0.6.5 ran a day later on `main` with four
-merges the tag did not carry, and only a coincidentally red `sbom-verify` kept
-that code from going live as v0.6.5. Without a green CI deploy, the local build
-runs only when `HEAD` is the tag's commit — then sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
+never leaves it on the old version. When the site already serves the release
+version — because the release CI's own `Webversie live zetten` job had the
+deploy secrets and did the work — the local `make deploy-web` is skipped. When
+it does run, it builds from the *working tree*, which is not by itself the tag:
+a `--resume` of v0.6.5 ran a day later on `main` with four merges the tag did
+not carry, and only a coincidentally red `sbom-verify` kept that code from going
+live as v0.6.5. So Phase 3 checks the tag out itself (fetching it from `origin`
+first if this clone lacks it) and refuses only when it *cannot*: a dirty working
+tree, or an untracked file in the way. Up to v0.6.8 it merely demanded that
+`HEAD` already be the tag, which a release that lands as a merge commit can
+never satisfy — the tag sits on the merge, the working tree on the release
+branch merged into it — so every fresh run stranded here and had to be checked
+out and resumed by hand. After the deploy, sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
 (waiting quietly for `publiceren` to attach it rather than printing every expected
 404), read both public files back and verify them with `minisign`, and watch the
-website-downloads job. Phase 3 refuses to start while any job for the tag is still
+website-downloads job. Because checking the tag out leaves the working tree on a
+detached `HEAD`, the chain puts it back on the branch the release started from
+when it finishes — a failure there is reported, never fatal to a release that is
+already out. Phase 3 refuses to start while any job for the tag is still
 active. A timed-out CI wait stops the chain instead of falling through, and
 `--resume` follows the existing jobs before it signs. An absent manifest causes
 one automatic retry only after the previous run is terminal and has a failed job;
