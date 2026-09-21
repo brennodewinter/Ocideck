@@ -172,6 +172,28 @@ deploy_web_if_needed
     skip: skipOnWindows,
   );
 
+  test('na afloop staat de werkboom weer op de tak waar de release begon', () {
+    final repo = releaseRepoAfterMerge();
+    final branchHead = headOf(repo);
+
+    final result = runInRepo(repo, '''
+START_BRANCH=release/v9.9.9
+git checkout --quiet --detach v9.9.9
+restore_start_branch
+''');
+
+    expect(result.exitCode, 0, reason: '${result.stdout}${result.stderr}');
+    expect(
+      Process.runSync('git', [
+        'branch',
+        '--show-current',
+      ], workingDirectory: repo.path).stdout.toString().trim(),
+      'release/v9.9.9',
+      reason: 'een losse HEAD is geen plek om verder te werken',
+    );
+    expect(headOf(repo), branchHead);
+  }, skip: skipOnWindows);
+
   test('een webdemo die de tag-versie al draait laat de werkboom met rust', () {
     final repo = releaseRepoAfterMerge();
     final branchHead = headOf(repo);

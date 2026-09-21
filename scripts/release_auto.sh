@@ -1078,9 +1078,27 @@ phase3() {
   fi
 }
 
+# Fase 3 bouwt de webdemo vanaf de tag en laat de werkboom dus op een losse HEAD
+# achter. Dat is een slechte plek om de volgende ochtend verder te werken: een
+# commit erop hangt aan geen enkele tak en is met een checkout zo weg. Zet 'm
+# terug waar de release vandaan vertrok. Dit mag nooit een geslaagde release laten
+# vallen, dus een mislukking is hier een melding en geen fout.
+restore_start_branch() {
+  [ -n "${START_BRANCH:-}" ] || return 0
+  # Alleen een losse HEAD verzetten; staat de operator al op een tak, dan is dat
+  # zijn keuze en niet aan ons.
+  [ "$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" = "HEAD" ] || return 0
+  if git checkout --quiet "$START_BRANCH" 2>/dev/null; then
+    log "Werkboom terug op $START_BRANCH."
+  else
+    log "LET OP: de werkboom staat los van elke tak (op $TAG); ga zelf terug met 'git checkout $START_BRANCH'."
+  fi
+}
+
 finish() {
   STEP="klaar"
   section "Klaar — $TAG in $(elapsed)"
+  restore_start_branch
   log "OciDeck $TAG is uitgebracht, getekend en live."
   log ""
   log "Release-pagina : ${RELEASE_BASE_URL%/download}/tag/$TAG"
