@@ -2512,16 +2512,24 @@ deck unchanged.
 
 *(Added 2026-07-24.)*
 
-**… → Presentaties importeren…** turns a PowerPoint (`.pptx`), LibreOffice
+**Presentaties importeren…** turns a PowerPoint (`.pptx`), LibreOffice
 Impress (`.odp`) or Apple Keynote (`.key`) file into a real OciDeck deck: typed
 slides you can edit, in ordinary Marp Markdown, not a stack of pictures of
 somebody else's slides. It lives behind the **Importeren** module
-(**Instellingen → Uitbreidingen → Importeren**, off by default), so the menu
-item appears once that module is switched on. *(Changed 2026-08-03, #1158: the
-Importeren module now covers only this presentation import; OpenKAT moved out to
-its own integration, described above.)* Unlike the OpenKAT import it reads the
-bytes of the file you picked rather than a folder on disk, so this one exists in
-the browser version too.
+(**Instellingen → Uitbreidingen → Importeren**, off by default), so it appears
+once that module is switched on. *(Changed 2026-08-03, #1158: the Importeren
+module now covers only this presentation import; OpenKAT moved out to its own
+integration, described above.)* Unlike the OpenKAT import it reads the bytes of
+the file you picked rather than a folder on disk, so this one exists in the
+browser version too.
+
+You will find it in two places: on the **opening screen**, directly under
+*Nieuwe presentatie* — the same spot *Document importeren…* occupies under
+*Nieuw document* — and in the **… menu** of an open workspace. *(The
+opening-screen button was added 21-09-2026; before that the only route went
+through the menu of an open deck, so someone arriving with a `.pptx` found the
+document import instead, where presentations are greyed out because that road
+leads to `.docx`/`.odt`.)*
 
 **If you reach for "Openen…" instead, OciDeck points you the right way.**
 *(Added 2026-08-03, #1175.)* "Openen…" is for Markdown and `.ocideck` files, so

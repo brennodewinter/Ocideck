@@ -6,6 +6,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/state/tabs_provider.dart';
+import 'package:ocideck/state/import_module_provider.dart';
 import 'package:ocideck/state/procesverbetering_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:ocideck/widgets/panels/slide_list_panel.dart';
@@ -76,6 +77,48 @@ void main() {
       expect(find.textContaining('Doorlopende tekst'), findsOneWidget);
     },
   );
+
+  testWidgets(
+    'het openscherm biedt de presentatie-import aan als de module aan staat',
+    (tester) async {
+      // Zonder deze knop liep 'ik wil mijn PowerPoint binnenhalen' dood op het
+      // openscherm: de enige zichtbare importknop was 'Document importeren…',
+      // en daar staat een .pptx grijs omdat die weg naar .docx/.odt leidt. De
+      // import zat alleen in het menu van de werkruimte — dat eerst een open
+      // presentatie vraagt, terwijl de import er juist zelf een oplevert.
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [importModuleRevealProvider.overrideWithValue(true)],
+          child: const OciDeckApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Presentaties importeren…'), findsOneWidget);
+      // En hij hoort bij de presentatieweg: bóven de documentknop, niet
+      // onderaan tussen het openen van bestaand werk.
+      final importY = tester
+          .getTopLeft(find.text('Presentaties importeren…'))
+          .dy;
+      expect(
+        importY,
+        lessThan(tester.getTopLeft(find.text('Nieuw document')).dy),
+      );
+    },
+  );
+
+  testWidgets('een uitstaande importmodule laat die knop weg', (tester) async {
+    // Dezelfde poort als het menu-item en als de OpenKAT-knop: een module die
+    // uit staat, blijft uit — de knop mag hem niet stilletjes omzeilen.
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [importModuleRevealProvider.overrideWithValue(false)],
+        child: const OciDeckApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Presentaties importeren…'), findsNothing);
+    expect(find.text('Nieuwe presentatie'), findsOneWidget);
+  });
 
   testWidgets(
     'procesverbetering voegt geen losse aanmaakknop aan het openscherm toe',

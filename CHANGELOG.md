@@ -90,6 +90,15 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Het openscherm bood geen weg naar de presentatie-import. Wie met een
+  PowerPoint, Keynote of Impress-bestand binnenkwam, vond daar alleen
+  *Document importeren…* — en in die kiezer staat een `.pptx` grijs, want die
+  weg leidt naar `.docx`/`.odt`. *Presentaties importeren…* bestond wel, maar
+  alleen in het menu van een geopende werkruimte, terwijl de import er juist
+  zelf een oplevert. De knop staat nu pal onder *Nieuwe presentatie*, op
+  dezelfde plek die *Document importeren…* onder *Nieuw document* inneemt, en
+  achter dezelfde modulepoort als het menu-item.
+
 - Slepen werkte niet in de browserversie: een `.pptx` (of een `.md`, een
   pakket, een afbeelding) op het venster gooien deed niets — geen import, geen
   melding, niets om op te volgen. Een gesleept bestand komt in de browser
