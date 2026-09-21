@@ -417,7 +417,17 @@ cmd_status() {
   elif [ "$pr_merged" -eq 1 ]; then prdesc="release-PR #$prnum gemerged"
   else prdesc="release-PR #$prnum ($prstate — nog niet gemerged)"; fi
 
-  mark "$has_branch" "release-branch $BRANCH op origin"
+  # De release-branch wordt bij de merge verwijderd. Ná de merge is "weg" dus de
+  # goede afloop en "staat er nog" de afwijking; daarvóór is hij juist
+  # voortgang. Eén vaste regel liet op een afgeronde release altijd een leeg
+  # vakje achter — een open punt dat geen open punt was.
+  if [ "$pr_merged" -eq 0 ]; then
+    mark "$has_branch" "release-branch $BRANCH op origin"
+  elif [ "$has_branch" -eq 1 ]; then
+    mark 0 "release-branch $BRANCH staat nog op origin (de merge hoort 'm te verwijderen)"
+  else
+    mark 1 "release-branch $BRANCH opgeruimd bij de merge"
+  fi
   mark "$pr_merged" "$prdesc"
   mark "$has_tag_o" "tag $TAG op origin (start de Forgejo-release-CI)"
   [ "$has_mirror" -eq 1 ] && mark "$has_tag_m" "tag $TAG op mirror (start de Windows-build)"
@@ -434,8 +444,8 @@ cmd_status() {
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
   elif [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
     log "Alles is uitgebracht en getekend, maar de webdemo draait ${live:-een onleesbare versie} in plaats van $NEW_VERSION."
-    log "Zet hem live vanaf de tag:  git checkout $TAG && make deploy-web"
-    log "(of, in de keten:  scripts/release_auto.sh --resume $TAG)"
+    log "Zet hem live met:  scripts/release_auto.sh --resume $TAG"
+    log "(die checkt de tag zelf uit; met de hand is het:  git checkout $TAG && make deploy-web)"
   elif [ "$has_tag_o" -eq 1 ]; then
     log "De tag staat vast, maar de release is nog niet af (mirror-tag / tekenen / deploy)."
     log "Maak DEZELFDE tag af met:  scripts/release_auto.sh --resume $TAG"
@@ -875,9 +885,41 @@ preflight() {
 # ── FASE 3 — verspreiden (gedeeld door de normale keten én --resume) ────────────
 # De webdemo alleen lokaal bouwen en deployen als hij nog niet live staat, en
 # dan alleen vanaf de commit die de tag draagt.
+
+# `make deploy-web` bouwt uit de wérkboom, en die staat na fase 2 nooit op de tag:
+# de release-PR landt met een merge-commit, de tag gaat op díe commit, en de
+# werkboom blijft op de release-branch staan — de tweede ouder ervan. Twee
+# verschillende commits, doorgaans met exact dezelfde inhoud.
 #
-# Dat "nog niet live staat" is bewust geen jobstatus. De CI-job *Webversie live
-# zetten* meldt `success` óók wanneer hij niets deed: ontbreken
+# Fase 3 eiste alleen dat HEAD de tag-commit wás en stierf anders. Dat maakte van
+# een terechte voorwaarde een onhaalbare: zolang de PR met een merge-commit landt
+# (v0.6.5 t/m v0.6.8 deden dat alle vier) kán HEAD de tag niet zijn, dus strandde
+# élke verse release hier en moest de operator met de hand uitchecken en
+# hervatten. De voorwaarde blijft — er mag geen andere code als $TAG live gaan —
+# maar het script haalt 'm nu zelf, in plaats van de operator ernaartoe te sturen.
+ensure_worktree_on_tag() {
+  STEP="werkboom op de tag zetten"
+  # Op een andere machine, of na opruiming, kan de tag lokaal ontbreken; --resume
+  # moet ook vanaf een verse kloon kunnen deployen.
+  if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
+    git fetch --quiet --force origin "refs/tags/$TAG:refs/tags/$TAG" \
+      || die "kon tag $TAG niet lokaal krijgen — zonder de tag-commit zou deploy-web andere code als $TAG publiceren. Is origin bereikbaar?"
+  fi
+  local tag_sha
+  tag_sha="$(git rev-list -n 1 "$TAG")"
+  [ "$tag_sha" != "$(git rev-parse HEAD)" ] || return 0
+  # Nooit andermans werk onder de checkout vandaan trekken: liever stoppen met een
+  # melding dan een niet-gecommitte wijziging meenemen of weggooien.
+  if ! git diff --quiet || ! git diff --cached --quiet; then
+    die "werkboom niet schoon — fase 3 zet 'm daarom niet op $TAG (nooit 'git stash' in deze repo delen). Commit of herstel de wijzigingen en hervat: scripts/release_auto.sh --resume $TAG"
+  fi
+  git checkout --quiet --detach "$TAG" \
+    || die "kon $TAG niet uitchecken — ligt er een niet-gevolgd bestand in de weg? Ruim dat op en hervat: scripts/release_auto.sh --resume $TAG"
+  log "Werkboom op $TAG gezet; deploy-web bouwt nu precies de code van de tag."
+}
+
+# Of de demo "nog niet live staat" is bewust geen jobstatus. De CI-job *Webversie
+# live zetten* meldt `success` óók wanneer hij niets deed: ontbreken
 # `DEPLOY_SSH_KEY`/`DEPLOY_KNOWN_HOSTS` — en die ontbreken met opzet, de demo
 # gaat met de hand live — dan slaat de job de deploy over en eindigt groen,
 # zodat een echte tag geen rode job en faalmail geeft. Deze functie las die
@@ -895,10 +937,15 @@ deploy_web_if_needed() {
   else
     log "Kon de versie op $DEPLOY_URL niet lezen; deploy-web draait, de verificatie hieronder beslist."
   fi
+  ensure_worktree_on_tag
+  # Naconditie, geen instructie meer aan de operator: ensure_worktree_on_tag is
+  # hierboven geslaagd of gestorven, dus dit hóórt te kloppen. Het blijft staan
+  # omdat "wat we publiceren is de tag" de enige bewering is die deze stap doet,
+  # en die meet je liever dan dat je 'm aanneemt.
   tag_sha="$(git rev-list -n 1 "$TAG" 2>/dev/null || true)"
   head_sha="$(git rev-parse HEAD 2>/dev/null || true)"
   if [ -z "$tag_sha" ] || [ "$tag_sha" != "$head_sha" ]; then
-    die "de webdemo draait ${live:-een onbekende versie} en de werkboom staat niet op $TAG (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Check de tag uit (git checkout $TAG) en hervat: scripts/release_auto.sh --resume $TAG"
+    die "de werkboom staat ná het uitchecken nog steeds niet op $TAG (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Onderzoek de repotoestand en hervat: scripts/release_auto.sh --resume $TAG"
   fi
   make deploy-web
   # Meten, niet aannemen: `deploy_web.sh` verifieert zijn eigen bundel, maar
@@ -1040,9 +1087,27 @@ phase3() {
   fi
 }
 
+# Fase 3 bouwt de webdemo vanaf de tag en laat de werkboom dus op een losse HEAD
+# achter. Dat is een slechte plek om de volgende ochtend verder te werken: een
+# commit erop hangt aan geen enkele tak en is met een checkout zo weg. Zet 'm
+# terug waar de release vandaan vertrok. Dit mag nooit een geslaagde release laten
+# vallen, dus een mislukking is hier een melding en geen fout.
+restore_start_branch() {
+  [ -n "${START_BRANCH:-}" ] || return 0
+  # Alleen een losse HEAD verzetten; staat de operator al op een tak, dan is dat
+  # zijn keuze en niet aan ons.
+  [ "$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" = "HEAD" ] || return 0
+  if git checkout --quiet "$START_BRANCH" 2>/dev/null; then
+    log "Werkboom terug op $START_BRANCH."
+  else
+    log "LET OP: de werkboom staat los van elke tak (op $TAG); ga zelf terug met 'git checkout $START_BRANCH'."
+  fi
+}
+
 finish() {
   STEP="klaar"
   section "Klaar — $TAG in $(elapsed)"
+  restore_start_branch
   log "OciDeck $TAG is uitgebracht, getekend en live."
   log ""
   log "Release-pagina : ${RELEASE_BASE_URL%/download}/tag/$TAG"

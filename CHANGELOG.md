@@ -90,6 +90,17 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- De releaseketen strandde elke keer op de webdemo. Fase 3 bouwt de webbundel
+  uit de werkboom en eiste daarom dat `HEAD` de tag-commit was — een terechte
+  eis, maar een onhaalbare: de release-PR landt met een merge-commit, de tag
+  gaat op díe commit en de werkboom blijft staan op de release-branch die erin
+  gemerged is. Twee verschillende commits, dezelfde inhoud. Zo moest v0.6.5 tot
+  en met v0.6.8 met de hand worden uitgecheckt en hervat voordat
+  `ocideck.librekat.nl` de nieuwe versie kreeg. De keten checkt de tag nu zelf
+  uit (en haalt hem zo nodig eerst van origin), weigert alleen nog wanneer dat
+  níet kan — een vuile werkboom of een niet-gevolgd bestand in de weg — en zet
+  de werkboom na afloop terug op de tak waar de release vertrok.
+
 - Het openscherm bood geen weg naar de presentatie-import. Wie met een
   PowerPoint, Keynote of Impress-bestand binnenkwam, vond daar alleen
   *Document importeren…* — en in die kiezer staat een `.pptx` grijs, want die

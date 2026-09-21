@@ -170,7 +170,10 @@ cmd_status
   // --status rapporteerde de webdemo niet; het advies zei "controleer nog de
   // live web-versie", en dat deed niemand. v0.6.5 en v0.6.6 stonden compleet in
   // het rapport terwijl de demo op 0.6.4 bleef staan.
-  ProcessResult runStatus({required String liveVersion}) {
+  ProcessResult runStatus({
+    required String liveVersion,
+    String pullsJson = '[]',
+  }) {
     final live = File(
       '${Directory.systemTemp.path}/ocideck-status-live-$pid.txt',
     )..writeAsStringSync(liveVersion);
@@ -194,7 +197,7 @@ git() {
 }
 api() {
   case "\$2" in
-    '/pulls?state=all&limit=50') printf '%s\\n' '[]' ;;
+    '/pulls?state=all&limit=50') printf '%s\\n' '$pullsJson' ;;
     '/releases/tags/v9.9.9')
       printf '%s\\n' '{"id":41,"assets":[{"name":"SHA256SUMS"},{"name":"SHA256SUMS.minisig"}]}'
       ;;
@@ -241,6 +244,34 @@ cmd_status
     final output = '${r.stdout}\n${r.stderr}';
     expect(output, contains('mark 1 webdemo'), reason: output);
     expect(output, contains('De release lijkt compleet'));
+  }, skip: skipOnWindows);
+
+  // De merge verwijdert de release-branch. Eén vast vakje "branch op origin"
+  // bleef daardoor op élke afgeronde release leeg staan en las als een open
+  // punt in een lijst waarin alles afgevinkt hoort te zijn.
+  test('--status ziet een opgeruimde release-branch als de goede afloop', () {
+    final r = runStatus(
+      liveVersion: '9.9.9',
+      pullsJson:
+          '[{"title":"chore(release): versie 9.9.9","number":7,'
+          '"state":"closed","merged":true}]',
+    );
+    final output = '${r.stdout}\n${r.stderr}';
+    expect(output, contains('mark 1 release-branch'), reason: output);
+    expect(output, contains('opgeruimd bij de merge'));
+    expect(output, isNot(contains('mark 0 release-branch')));
+  }, skip: skipOnWindows);
+
+  test('--status meldt een nog openstaande release-branch als voortgang', () {
+    final r = runStatus(liveVersion: '9.9.9');
+    final output = '${r.stdout}\n${r.stderr}';
+    expect(
+      output,
+      contains('mark 0 release-branch release/v9.9.9 op origin'),
+      reason:
+          'zonder gemergede PR is de branch juist het teken van voortgang'
+          '\n$output',
+    );
   }, skip: skipOnWindows);
 
   test('een actieve release-CI mag na de wachttijd niet stil doorlopen', () {
@@ -413,13 +444,23 @@ echo "DOOR"
     expect(r.stdout, contains('draait 9.9.9'));
   }, skip: skipOnWindows);
 
-  test('een oude demo naast de tag weigert fase 3 te deployen', () {
-    final r = runDeployWeb(liveVersion: '0.6.4', headSha: 'ergens-op-main');
-    expect(r.exitCode, 1);
-    expect(r.stderr, contains('DIE:'));
-    expect(r.stderr, contains('git checkout v9.9.9'));
-    expect(r.stderr, isNot(contains('make deploy-web')));
-  }, skip: skipOnWindows);
+  // Sinds fase 3 de werkboom zélf op de tag zet (de release-PR landt met een
+  // merge-commit, dus HEAD kán de tag niet zijn) is "HEAD is niet de tag" geen
+  // reden meer om te stoppen — mislukken van die verhuizing wél. Deze stub-git
+  // weigert `diff` en `checkout`, precies het geval waarin niets gepubliceerd mag
+  // worden. De geslaagde route staat in release_auto_deploy_tag_test.dart, op een
+  // echte repo met een echte merge-commit.
+  test(
+    'fase 3 publiceert niets als de werkboom niet op de tag te krijgen is',
+    () {
+      final r = runDeployWeb(liveVersion: '0.6.4', headSha: 'ergens-op-main');
+      expect(r.exitCode, 1);
+      expect(r.stderr, contains('DIE:'));
+      expect(r.stderr, contains('--resume v9.9.9'));
+      expect(r.stderr, isNot(contains('make deploy-web')));
+    },
+    skip: skipOnWindows,
+  );
 
   test('een onleesbare site laat fase 3 vanaf de tag deployen', () {
     final r = runDeployWeb(liveVersion: '', headSha: 'tagsha000');
