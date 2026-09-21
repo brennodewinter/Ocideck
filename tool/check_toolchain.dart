@@ -159,6 +159,8 @@ const versionClaimPatterns = <String, String>{
   '.github/workflows/release.yml': r'flutter-version: (\d+\.\d+\.\d+)',
   '.github/workflows/windows-native-check.yml':
       r'flutter-version: (\d+\.\d+\.\d+)',
+  '.github/workflows/windows-test-check.yml':
+      r'flutter-version: (\d+\.\d+\.\d+)',
 };
 
 /// Alle versie-eisen in [content] volgens [pattern].

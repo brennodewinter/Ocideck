@@ -22,6 +22,12 @@
 //   * No raw control bytes — write the escape (\u0000), never the
 //     byte itself. See [controlByteBaseline]: this is a review hazard, not a
 //     nitpick.
+//   * No hand-joined `'${x.path}/file'` literal as the expected value of an
+//     `expect` in test/ — the code under test joins with p.join, so the
+//     literal only breaks on Windows, and the first Windows run is the
+//     release-tag pipeline on the GitHub mirror (v0.6.3–v0.6.5). Hard zero.
+//   * No `mktemp -t` in scripts/ — the BSD-only form that GNU coreutils
+//     rejects; it broke the Linux gate on tag v0.6.8. Hard zero.
 //   * Layer direction — a model may not import state/ or widgets/, a service may
 //     not import state/, and state/ may not import widgets/. Hard zero; see
 //     [layerRules]. Kept the layers acyclic on discipline alone until now.
@@ -1135,6 +1141,122 @@ Map<String, List<int>> _snackBarActionWithoutPersist() {
   return snackBarActionWithoutPersistIn(sources);
 }
 
+// ── Handgeplakte paden in expect() — POSIX-aanname in een test ─────────────
+//
+// Drie release-tags op rij lieten de GitHub-spiegel rood worden op tests die
+// lokaal en op de Forgejo-poort (beiden macOS) groen waren: een `expect` die
+// een door de code opgebouwd pad vergelijkt met `'${map.path}/bestand'`
+// staat groen overal waar `/` het scheidingsteken is, en breekt op Windows —
+// de code joint met `p.join` en levert daar `map\bestand`. De enige plek waar
+// die tests Windows zagen was de tag-run, dus de breuk landde precies op het
+// moment van uitbrengen (image_carousel_add_image, open_multiple_files,
+// callout_export_frame).
+//
+// De regel is bewust smal: ze kijkt alleen naar de verwachte waarde van een
+// `expect` en alleen als daar een interpolatie op `…path` of `…dir` eindigt
+// mét een `/` in dezelfde literal. `'images/photo.png'` als verwachting is
+// goed — dat is een project-relatief Markdownpad, dat per definitie `/` is.
+// `File('${x.path}/y')` in de arrange-stap is ook goed: Dart en Windows
+// accepteren `/` in paden; alleen de *vergelijking* breekt.
+class _HandJoinedPathExpectVisitor extends RecursiveAstVisitor<void> {
+  final List<int> hits = [];
+
+  static final _pathAnchor = RegExp(r'\.(path|dir)\s*$');
+
+  @override
+  void visitMethodInvocation(MethodInvocation node) {
+    if (node.methodName.name == 'expect') {
+      final positionals = [
+        for (final arg in node.argumentList.arguments)
+          if (arg is! NamedArgument) arg,
+      ];
+      if (positionals.length >= 2 &&
+          positionals[1] is StringInterpolation &&
+          _isHandJoinedPath(positionals[1] as StringInterpolation)) {
+        hits.add(positionals[1].offset);
+      }
+    }
+    super.visitMethodInvocation(node);
+  }
+
+  bool _isHandJoinedPath(StringInterpolation lit) {
+    var hasSlash = false;
+    var hasPathAnchor = false;
+    for (final el in lit.elements) {
+      if (el is InterpolationString && el.value.contains('/')) {
+        hasSlash = true;
+      }
+      if (el is InterpolationExpression &&
+          _pathAnchor.hasMatch(el.expression.toSource())) {
+        hasPathAnchor = true;
+      }
+    }
+    return hasSlash && hasPathAnchor;
+  }
+}
+
+/// [handJoinedPathExpectsIn] als pure functie over pad → bron, zodat de regel
+/// in een test met verzonnen bestanden te voeren is.
+Map<String, List<int>> handJoinedPathExpectsIn(Map<String, String> sources) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    if (!raw.contains('expect')) return;
+    final parsed = parseString(
+      content: raw,
+      featureSet: FeatureSet.latestLanguageVersion(),
+      throwIfDiagnostics: false,
+    );
+    if (parsed.errors.isNotEmpty) return;
+    final visitor = _HandJoinedPathExpectVisitor();
+    parsed.unit.accept(visitor);
+    if (visitor.hits.isEmpty) return;
+    perFile[path] = [
+      for (final offset in visitor.hits)
+        parsed.lineInfo.getLocation(offset).lineNumber,
+    ]..sort();
+  });
+  return perFile;
+}
+
+/// De regelnummers per testbestand waar een `expect` een pad met de hand aan
+/// `/` vastplakt in plaats van `p.join` te gebruiken.
+Map<String, List<int>> _handJoinedPathExpects() {
+  final sources = <String, String>{};
+  for (final file in _dartFiles(Directory('test'))) {
+    sources[file.path.replaceAll(r'\', '/')] = file.readAsStringSync();
+  }
+  return handJoinedPathExpectsIn(sources);
+}
+
+// ── `mktemp -t` in scripts — BSD-vorm die GNU breekt ────────────────────────
+//
+// `mktemp -t naam` zonder X's werkt op macOS (BSD) en faalt onder GNU
+// coreutils met "too few X's in template". Dat kostte de Gate (Linux)-job op
+// tag v0.6.8 vier testen: `notarize_opstartproef_test` draait de échte
+// scriptfuncties onder bash, en op die runner is mktemp de GNU-versie.
+// Met X's is `-t` op GNU alsnog verouderd. De vorm die op beide werkt is de
+// uitdrukkelijke: `mktemp "${TMPDIR:-/tmp}/naam.XXXXXX"` (of `mktemp -d`).
+final _bsdMktemp = RegExp(r'mktemp\s+-t\b');
+
+/// Regelnummers per shellscript met een BSD-`mktemp -t`. Pure functie over
+/// pad → bron, zodat de regel in een test met verzonnen bestanden te voeren is.
+Map<String, List<int>> bsdMktempIn(Map<String, String> sources) {
+  final perFile = <String, List<int>>{};
+  sources.forEach((path, raw) {
+    if (!raw.contains('mktemp')) return;
+    final hits = <int>[];
+    final lines = raw.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      // Een commentaarregel die de vorm vermeldt (zoals de uitleg in
+      // notarize_macos.sh) is geen aanroep.
+      if (lines[i].trimLeft().startsWith('#')) continue;
+      if (_bsdMktemp.hasMatch(lines[i])) hits.add(i + 1);
+    }
+    if (hits.isNotEmpty) perFile[path] = hits;
+  });
+  return perFile;
+}
+
 /// Tests die binnen een `runAsync` op een vaste klok wachten.
 _DelayScan _fixedDelayInRunAsync() {
   final sources = <String, String>{};
@@ -1565,6 +1687,46 @@ void main() {
     );
   }
 
+  final handJoinedPaths = _handJoinedPathExpects();
+  if (handJoinedPaths.isNotEmpty) {
+    final sites = [
+      for (final entry in handJoinedPaths.entries)
+        for (final line in entry.value) '${entry.key}:$line',
+    ];
+    failures.add(
+      '${sites.length} expect(s) vergelijken een pad met een handgeplakte '
+      "'\${map.path}/bestand'-literal. Die staat groen op macOS en Linux en "
+      'breekt op Windows, waar de code met `p.join` een `\\` levert — en de '
+      'enige Windows-run is de tag-pijplijn op de GitHub-spiegel, dus de '
+      'breuk landt precies bij het uitbrengen (v0.6.3–v0.6.5). Vergelijk met '
+      '`p.join(map.path, \'bestand\')`:\n'
+      '    ${sites.join('\n    ')}',
+    );
+  }
+
+  final mktempSources = <String, String>{};
+  for (final entity in Directory('scripts').listSync()) {
+    if (entity is File && entity.path.endsWith('.sh')) {
+      mktempSources[entity.path.replaceAll(r'\', '/')] = entity
+          .readAsStringSync();
+    }
+  }
+  final bsdMktemp = bsdMktempIn(mktempSources);
+  if (bsdMktemp.isNotEmpty) {
+    final sites = [
+      for (final entry in bsdMktemp.entries)
+        for (final line in entry.value) '${entry.key}:$line',
+    ];
+    failures.add(
+      '`mktemp -t` in ${sites.length} scriptregel(s) is de BSD-vorm: GNU '
+      'coreutils (Linux, Git Bash) weigert een sjabloon zonder X\'s. Dat '
+      'kostte de Gate (Linux)-job op tag v0.6.8 vier testen die de echte '
+      'scriptfuncties onder bash draaien. Gebruik de uitdrukkelijke padvorm: '
+      'mktemp "\${TMPDIR:-/tmp}/naam.XXXXXX" (of `mktemp -d`):\n'
+      '    ${sites.join('\n    ')}',
+    );
+  }
+
   final pickerHits = _filePickerPathViolations();
   if (pickerHits.isNotEmpty) {
     failures.add(
@@ -1716,7 +1878,8 @@ void main() {
       'ceilings; class sizes within ceilings (max $maxClassLines, '
       '${classSizeBaseline.length} baselined); FilePicker paths gated '
       '(baseline ${filePickerPathBaseline.length}); vaste wachtpunten in '
-      'test/ binnen de basislijn (${fixedDelayBaseline.length} bestand(en)).',
+      'test/ binnen de basislijn (${fixedDelayBaseline.length} bestand(en)); '
+      'geen handgeplakte paden in expects; geen BSD-mktemp in scripts/.',
     );
     if (serviceUiImports.length < serviceUiImportBaseline) {
       stdout.writeln(
