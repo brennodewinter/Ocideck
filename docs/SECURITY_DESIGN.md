@@ -123,15 +123,24 @@ The web build is designed to pull **zero third-party origins** at runtime.
   `default-src 'self'`; `script-src 'self' 'wasm-unsafe-eval'` (no `unsafe-eval`
   / `unsafe-inline`; the wasm token is only for CanvasKit); `style-src 'self'
   'unsafe-inline'` (the Flutter engine injects styles); `img-src`/`media-src`/
-  `font-src` first-party plus `data:`/`blob:` only; `connect-src 'self' https:`;
-  `object-src 'none'`; `base-uri 'self'`; `frame-ancestors 'none'`
-  (`web/index.html:51`). Note a meta-delivered CSP cannot enforce
+  `font-src` first-party plus `data:`/`blob:` only; `connect-src 'self'
+  https: blob:`; `object-src 'none'`; `base-uri 'self'`; `frame-ancestors 'none'`
+  (in the `<head>`). Note a meta-delivered CSP cannot enforce
   `frame-ancestors` — serve it as a real HTTP header to control embedding (see
   [`HOSTING.md`](HOSTING.md)).
 - **`img-src`/`media-src` block remote deck media by design.** On web there is
   no `net_guard` SSRF check (unlike desktop), so restricting these to
   `'self' data: blob:` is what closes that hole. To allow remote media, add
   `https:` to both directives in `web/index.html`.
+- **`connect-src` accepts `blob:` so the app can read back a dropped file.**
+  A file dragged onto the window arrives as a blob URL, and reading its bytes is
+  an XHR to that URL — which this directive governs. Without the token the
+  browser blocks the read and drag-and-drop fails silently: no deck opens, no
+  image lands, no import starts, and nothing is reported. It adds no
+  exfiltration surface. A blob URL is local by construction, only this origin
+  can mint one, and no byte leaves the machine over it — strictly narrower than
+  the `https:` standing beside it. `tool/check_web_hardening.dart` requires the
+  token rather than merely tolerating it, so the silent breakage cannot return.
 - **`connect-src` accepts `https:` (not `http:`) for user-initiated URL import,
   and that is a one-way write channel, not just a read one.** The scheme is
   restricted to `https:` so a plaintext, only-internally-reachable host stays

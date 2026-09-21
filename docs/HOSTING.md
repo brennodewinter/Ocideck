@@ -151,7 +151,7 @@ as a real response header. A good baseline mirrors the meta policy and adds an
 enforceable `frame-ancestors`:
 
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https: blob:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
 ```
 
 Copy it exactly, `child-src` and `frame-src` included. A header CSP and a meta
@@ -165,7 +165,12 @@ relies on stop loading.
   `frame-ancestors https://your-nextcloud.example` instead of `'none'`.
 - `connect-src` includes `https:` so the user-initiated **URL import** can reach
   arbitrary HTTPS sources. If you don't want that in your deployment, tighten
-  `connect-src` to `'self'`.
+  `connect-src` to `'self' blob:`.
+- `connect-src` also includes `blob:`, and that one is **not** optional. A file
+  dragged onto the window arrives as a blob URL and the app reads its bytes back
+  over it; drop the token and drag-and-drop stops working — silently, with no
+  error for the user. It opens nothing outward: a blob URL is local to the page
+  that minted it and carries no byte off the machine.
 
 Recommended companion headers: `Referrer-Policy: no-referrer`,
 `X-Content-Type-Options: nosniff`, and (for embedding control on old browsers)

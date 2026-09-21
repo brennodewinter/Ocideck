@@ -1401,7 +1401,9 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Covers:** three things about the built `build/web`.
 
   *Hardening* — a strict CSP in `index.html` (`script-src 'self'
-  'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`, `connect-src 'self'`,
+  'wasm-unsafe-eval'`, no `unsafe-inline`/`unsafe-eval`, `connect-src 'self'
+  https: blob:` — `blob:` is *required*, not tolerated: without it a dropped
+  file cannot be read back and drag-and-drop dies silently,
   `object-src 'none'`, `form-action 'none'` — that last one does *not* fall back
   to `default-src`, so it is asserted separately), CanvasKit **self-hosted**
   (local wasm + the `useLocalCanvasKit` flag), and the UI font **bundled** — so
