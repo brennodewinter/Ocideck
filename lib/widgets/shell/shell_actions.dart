@@ -58,10 +58,16 @@ extension _DropActions on _AppShellState {
     final tabs = ref.read(tabsProvider.notifier);
     final images = <String>[];
     final presentations = <PickedPresentation>[];
+    var unreadable = 0;
     for (final file in files) {
-      final ext = p.extension(file.name.toLowerCase());
-      if (ext == '.md' || ext == '.ocideck' || ext == '.zip') {
-        final bytes = await file.readAsBytes();
+      final kind = droppedKind(file.name);
+      if (kind == null) continue;
+      final bytes = await readDroppedBytes(file);
+      if (bytes == null) {
+        unreadable++;
+        continue;
+      }
+      if (kind == DroppedKind.deck) {
         final result = await tabs.openDeckFromBytes(bytes, file.name);
         if (mounted) {
           _reportOpenFailure(
@@ -71,10 +77,9 @@ extension _DropActions on _AppShellState {
             reason: ref.read(openFailureProvider),
           );
         }
-      } else if (isImportablePresentationName(file.name)) {
-        presentations.add((bytes: await file.readAsBytes(), name: file.name));
-      } else if (_AppShellState._imageExtensions.contains(ext)) {
-        final bytes = await file.readAsBytes();
+      } else if (kind == DroppedKind.presentation) {
+        presentations.add((bytes: bytes, name: file.name));
+      } else {
         if (bytes.isEmpty ||
             bytes.length > ImageService.maxImageBytes ||
             !ImageService.looksLikeImage(bytes)) {
@@ -102,6 +107,17 @@ extension _DropActions on _AppShellState {
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
     if (presentations.isNotEmpty && mounted) {
       await importDroppedPresentations(context, ref, presentations);
+    }
+    // Zeggen dát het misging is het minste. Zonder deze melding is een drop die
+    // niets oplevert niet te onderscheiden van een drop die niet aankwam, en
+    // dat is precies de toestand waarin niemand kan nagaan waarom er niets
+    // gebeurt — zie [readDroppedBytes].
+    if (unreadable > 0 && mounted) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        context.l10n.d('Kon dit bestand niet openen.'),
+      );
     }
   }
 }
