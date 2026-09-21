@@ -179,6 +179,19 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.8] — 2026-09-21
+
+### Changed
+
+- docs: leg de route naar een lokaal AI-model uit, en spreek de MCP-aanname tegen (#2151)
+
+### Fixed
+
+- fix(afbeeldingen): sidecars verhuizen mee, AI-skips krijgen een reden, meldingen zijn sluitbaar (#2147 #2148 #2149)
+- fix(welkom): zet de presentatie-import op het openscherm, waar de PowerPoint-weg doodliep (#2152)
+- fix(web): slepen werkte niet in de browserversie — de CSP blokkeerde het teruglezen van het bestand (#2150)
+- fix(release): laat de release-keten niet omvallen op machinebelasting en een vergrendeld scherm (#2146)
+
 ## [0.6.7] — 2026-09-21
 
 ### Changed
