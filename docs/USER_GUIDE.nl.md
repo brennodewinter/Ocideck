@@ -4044,6 +4044,15 @@ Vóór het versturen verkleint OciDeck de afbeelding en hercodeert hem als JPEG,
 zodat een foto van 12 megapixel geen verzoek van 16 MB wordt. Alt-tekstconcepten
 worden met opzet kort afgekapt (WCAG 1.1.1 wil een beknopte beschrijving, geen alinea).
 
+**Waar de gewichten vandaan komen, en onder welke licentie.** OciDeck levert geen
+model mee en haalt er geen op. `ollama pull` praat met de eigen registry van de
+runtime — een partij die jij besluit te vertrouwen, buiten de app om en buiten
+zijn toestemmingspoorten. Kijk de licentie na van wat je ophaalt, want ze
+verschillen sterk en verschillende populaire modellen zijn geen open source:
+Ollama zelf is MIT, `qwen2.5vl` en `moondream` staan onder Apache-2.0, terwijl de
+Gemma- en Llama-families onder leveranciersvoorwaarden vallen waar beperkingen aan
+hangen. Waar een strikt open-source-licentie telt, weegt die zwaarder dan gemak.
+
 ### De drie backend-tiers
 
 | Tier | Wat het is | Wat het je kost |

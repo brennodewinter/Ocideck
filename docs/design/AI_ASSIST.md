@@ -426,6 +426,16 @@ model. Document the recommended local runtimes (Ollama/LM Studio, their licences
 and the fact that model outputs are unverified drafts in the
 [`USER_GUIDE.md`](../USER_GUIDE.md) and an about/AI screen when this lands.
 
+*(2026-09-21 — half done, so that the other half is not mistaken for shipped.)*
+The `USER_GUIDE.md` half now exists: *AI assistance (optional)* names the
+runtimes, states that `ollama pull` reaches the runtime's own registry — a party
+the user trusts outside the app and outside its consent gates — and warns that
+model licences diverge, several popular ones not being open source. Drafts being
+unverified is said throughout, and carried by the **AI-concept** badge. **Still
+open: the about/AI screen.** Nothing in the app itself repeats the licence and
+provenance point at the moment the user configures a backend; today it lives only
+in the guide.
+
 ---
 
 ## 10. MCP server surface — external agents drive OciDeck (optional, additive)
