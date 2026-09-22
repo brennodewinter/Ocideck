@@ -437,6 +437,54 @@ void main() {
     });
   });
 
+  group('packBulletsIntoPages', () {
+    List<String> gen(int n) => [for (var i = 0; i < n; i++) 'bullet $i'];
+
+    test('spreidt een korte staart gelijkmatig als beide helften passen', () {
+      final pages = packBulletsIntoPages(
+        gen(9),
+        fits: (_, _) => true,
+        maxBullets: (_) => 8,
+      );
+      expect(pages.map((p) => p.length), [5, 4]);
+      expect(pages.expand((p) => p), gen(9));
+    });
+
+    test(
+      'trekt zo veel mogelijk naar een korte staart als spreiden niet past',
+      () {
+        final pages = packBulletsIntoPages(
+          gen(7),
+          fits: (page, candidate) => page == 0 || candidate.length <= 2,
+          maxBullets: (_) => 6,
+        );
+        // De gelijkmatige 4/3-verdeling past niet op pagina twee. Eén punt kan
+        // wel mee; een tweede niet, dus 6/1 wordt 5/2 zonder inhoudsverlies.
+        expect(pages.map((p) => p.length), [5, 2]);
+        expect(pages.expand((p) => p), gen(7));
+      },
+    );
+
+    test('laat de korte staart staan als zelfs één verplaatsing niet past', () {
+      final pages = packBulletsIntoPages(
+        gen(7),
+        fits: (page, candidate) => page == 0 || candidate.length <= 1,
+        maxBullets: (_) => 6,
+      );
+      expect(pages.map((p) => p.length), [6, 1]);
+      expect(pages.expand((p) => p), gen(7));
+    });
+
+    test('overschrijdt het pagina-afhankelijke aantalplafond niet', () {
+      final pages = packBulletsIntoPages(
+        gen(5),
+        fits: (_, _) => true,
+        maxBullets: (page) => page == 0 ? 4 : 1,
+      );
+      expect(pages.map((p) => p.length), [4, 1]);
+    });
+  });
+
   group('chunkBullets', () {
     test('knipt strikt op size, zonder helften-uitzondering', () {
       final pages = chunkBullets([for (var i = 0; i < 5; i++) 'b'], 8);

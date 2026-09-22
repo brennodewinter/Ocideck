@@ -121,7 +121,9 @@ List<List<String>> packBulletsIntoPages(
     } else {
       final last = pages[lastIndex];
       final prev = pages[lastIndex - 1];
-      while (last.length < kMinPageBullets && prev.length > kMinPageBullets) {
+      while (last.length < kMinPageBullets &&
+          last.length < maxBullets(lastIndex) &&
+          prev.length > kMinPageBullets) {
         final moved = prev.removeLast();
         last.insert(0, moved);
         if (!fits(lastIndex, last)) {

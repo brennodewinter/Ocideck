@@ -424,8 +424,10 @@ void main() {
 
   test('splitSlide laat een heel lange lijst niet in minipaginas vallen', () {
     // De melding: "ik zie nu heel veel slides ontstaan". Lange bullets sturen
-    // het aantal pagina's wel aan — elke pagina vult op de leesbare doelschaal
-    // — maar een pagina mag nooit een flinter van één of twee bullets worden.
+    // het aantal pagina's wel aan — elke pagina vult op de leesbare doelschaal.
+    // In dit realistische geval kan de staart tot minstens drie worden
+    // herverdeeld; als zelfs verplaatsen niet past, mag de pure pagineerder
+    // bewust een kortere laatste pagina laten staan.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
     final long = List.generate(
