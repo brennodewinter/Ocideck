@@ -25,6 +25,8 @@ import '../../models/playback.dart';
 import '../../models/slide.dart';
 import '../../models/video_source.dart';
 import '../../services/markdown_service.dart';
+import '../../services/mic_monitor.dart';
+import '../../services/mic_monitor_webrtc.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/quality_autofix.dart';
 import '../../services/question_round_builder.dart';
@@ -72,6 +74,7 @@ part 'parts/presenter_content.dart';
 part 'parts/presenter_views.dart';
 part 'parts/presenter_support.dart';
 part 'parts/presenter_timed_mode.dart';
+part 'parts/presenter_mic.dart';
 
 /// Blanco-schermstand tijdens het presenteren (zoals B/W in PowerPoint).
 enum _Blank { none, black, white }
@@ -210,6 +213,11 @@ class FullscreenPresenter extends StatefulWidget {
   /// Deck-level Y-01 metric for resolve-at-draw on improvement charts.
   final ImprovementY01Metric improvementY01;
 
+  /// Test-seam voor de microfoon-doorvoer (#2158): productie laat dit leeg en
+  /// krijgt bij de eerste aan-zet een [WebrtcMicMonitor]; een widget-test
+  /// steekt een fake in, want de echte binding kan niet headless draaien.
+  final MicMonitor? micMonitor;
+
   const FullscreenPresenter({
     super.key,
     required this.slides,
@@ -238,6 +246,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.initialUserNotes = const {},
     this.onUserNotesChanged,
     this.improvementY01 = ImprovementY01Metric.empty,
+    this.micMonitor,
   });
 
   /// Entry point used by the app: pick dual-screen mode when a second display is
@@ -691,6 +700,14 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Met M te wisselen.
   bool _advanceOnMediaEnd = true;
 
+  /// Microfoon-doorvoer (#2158): mic-invoer rechtstreeks naar de audio-uitvoer,
+  /// als kleine versterker tijdens het presenteren. Luie aanmaak in
+  /// `_toggleMicMonitor` — de OS-machtigingsprompt hoort op het moment dat de
+  /// presentator hem aanzet, niet bij het openen van de presentatie.
+  /// [_micBusy] dekt de opbouwtijd (de prompt kan seconden open staan).
+  MicMonitor? _micMonitor;
+  bool _micBusy = false;
+
   /// Known displays for moving the fullscreen presentation window. This is not
   /// a second presenter window; it keeps the current output movable between
   /// screens with S or the presenter-view button.
@@ -903,6 +920,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _focusNode.dispose();
     _userNotesFocusNode.dispose();
     _userNoteCtrl?.dispose();
+    _stopMicMonitor(this);
     if (_dual) presenterChannel.setMethodCallHandler(null);
     super.dispose();
   }

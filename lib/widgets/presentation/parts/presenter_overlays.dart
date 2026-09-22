@@ -8,7 +8,10 @@ part of '../fullscreen_presenter.dart';
 /// Top-level en geen lid van de extension: het is enkel tekst, en de
 /// klasse-plafondratchet telt élk extension-lid mee bij
 /// _FullscreenPresenterState.
-List<(String, String)> _helpOverlayRows(AppLocalizations l10n) => [
+List<(String, String)> _helpOverlayRows(
+  AppLocalizations l10n, {
+  required bool micSupported,
+}) => [
   (
     '→ · ${l10n.d('spatie')} · ${l10n.d('klik')}',
     l10n.d('Volgende slide of pagina'),
@@ -33,6 +36,7 @@ List<(String, String)> _helpOverlayRows(AppLocalizations l10n) => [
   ('A', l10n.d('Automatische modus aan/uit')),
   ('L', l10n.d('Herhalen (loop) aan/uit')),
   ('M', l10n.d('Na media automatisch doorgaan')),
+  if (micSupported) ('V', l10n.d('Microfoon-doorvoer')),
   ('H', l10n.d('Deze legenda')),
   ('Esc · ${shortcutLabel(l10n, 'W')}', l10n.d('Terug / afsluiten')),
 ];
@@ -137,29 +141,32 @@ Widget _buildFixBadge(BuildContext context, String message) {
   );
 }
 
+/// Klok-/tijdsopmaak voor de cockpit. Top-level, net als [_helpOverlayRows]:
+/// het is pure omrekening zonder state, en de klasse-plafondratchet telt elk
+/// extension-lid mee bij _FullscreenPresenterState.
+String _fmtClock(DateTime t) {
+  final h = t.hour.toString().padLeft(2, '0');
+  final m = t.minute.toString().padLeft(2, '0');
+  return '$h:$m';
+}
+
+String _fmtElapsed(Duration d) {
+  final mm = (d.inMinutes % 60).toString().padLeft(2, '0');
+  final ss = (d.inSeconds % 60).toString().padLeft(2, '0');
+  return d.inHours > 0 ? '${d.inHours}:$mm:$ss' : '$mm:$ss';
+}
+
+/// Resterende tijd, met minteken zodra je over de doeltijd gaat.
+String _fmtRemaining(Duration d) {
+  final body = _fmtElapsed(d.abs());
+  return d.isNegative ? '-$body' : body;
+}
+
 extension _PresenterOverlays on _FullscreenPresenterState {
-  String _fmtClock(DateTime t) {
-    final h = t.hour.toString().padLeft(2, '0');
-    final m = t.minute.toString().padLeft(2, '0');
-    return '$h:$m';
-  }
-
-  String _fmtElapsed(Duration d) {
-    final mm = (d.inMinutes % 60).toString().padLeft(2, '0');
-    final ss = (d.inSeconds % 60).toString().padLeft(2, '0');
-    return d.inHours > 0 ? '${d.inHours}:$mm:$ss' : '$mm:$ss';
-  }
-
-  /// Resterende tijd, met minteken zodra je over de doeltijd gaat.
-  String _fmtRemaining(Duration d) {
-    final body = _fmtElapsed(d.abs());
-    return d.isNegative ? '-$body' : body;
-  }
-
   /// Sneltoets-overzicht (cheatsheet).
   Widget _buildHelpOverlay() {
     final l10n = context.l10n;
-    final rows = _helpOverlayRows(l10n);
+    final rows = _helpOverlayRows(l10n, micSupported: isDesktopNative);
     return GestureDetector(
       onTap: _toggleHelp,
       child: Container(
@@ -408,6 +415,12 @@ extension _PresenterOverlays on _FullscreenPresenterState {
               onTap: _cycleDisplay,
             ),
           ),
+        ],
+        // Microfoon-doorvoer (#2158): desktop-only, want de WebRTC-loopback is
+        // daar de gedragen route; web heeft zijn eigen afweging (apart issue).
+        if (isDesktopNative) ...[
+          const SizedBox(width: 8),
+          _micButton(this, l10n),
         ],
         const SizedBox(width: 16),
         Text(

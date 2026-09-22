@@ -178,6 +178,9 @@ extension _PresenterPlayback on _FullscreenPresenterState {
     if (_exiting) return;
     _exiting = true;
     _advanceTimer?.cancel();
+    // De mic vrijgeven vóór het eindscherm: het oefenoverzicht kan even open
+    // blijven staan en de doorvoer hoort dan al stil te zijn (#2158).
+    _stopMicMonitor(this);
     final run = _rehearsal.finish();
     await _reportPlayback(widget.onPlaybackFinished, run, completed: completed);
     await _maybeShowRehearsalSummary(run);
