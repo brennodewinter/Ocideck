@@ -1657,6 +1657,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Microfoon-doorvoer': 'Trí-tharchur micreafóin',
+  'Microfoon-doorvoer (V)': 'Trí-tharchur micreafóin (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Níorbh fhéidir an micreafón a chasadh air. Seiceáil an cead agus an gléas ionchuir.',
   'Vat samen met AI…': 'Déan achoimre le AI…',
   'Tekst inkorten met AI': 'Giorraigh an téacs le AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

@@ -1639,6 +1639,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Microfoon-doorvoer': 'Podsłuch mikrofonu',
+  'Microfoon-doorvoer (V)': 'Podsłuch mikrofonu (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Nie można włączyć mikrofonu. Sprawdź uprawnienie i urządzenie wejściowe.',
   'Vat samen met AI…': 'Streść za pomocą AI…',
   'Tekst inkorten met AI': 'Skróć tekst za pomocą AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

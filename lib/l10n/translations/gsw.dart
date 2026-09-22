@@ -1630,6 +1630,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Microfoon-doorvoer': 'Mikrofon-Durchleitig',
+  'Microfoon-doorvoer (V)': 'Mikrofon-Durchleitig (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'S Mikrofon hät nöd chöne aktiviert wärde. Prüef d Berechtigung und s Iigabgerät.',
   'Vat samen met AI…': 'Mit KI zämmefasse…',
   'Tekst inkorten met AI': 'Täxt mit KI chürze',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

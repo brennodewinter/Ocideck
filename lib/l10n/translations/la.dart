@@ -1642,6 +1642,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Microfoon-doorvoer': 'Microphoni transmissio',
+  'Microfoon-doorvoer (V)': 'Microphoni transmissio (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Microphonum accendi non potuit. Licentiam et instrumentum ingressus inspice.',
   'Vat samen met AI…': 'Per IA contrahe…',
   'Tekst inkorten met AI': 'Textum per IA contrahe',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

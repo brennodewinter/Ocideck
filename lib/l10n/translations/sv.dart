@@ -1626,6 +1626,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Microfoon-doorvoer': 'Mikrofonmonitorering',
+  'Microfoon-doorvoer (V)': 'Mikrofonmonitorering (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Mikrofonen kunde inte aktiveras. Kontrollera behörigheten och ingångsenheten.',
   'Vat samen met AI…': 'Sammanfatta med AI…',
   'Tekst inkorten met AI': 'Korta texten med AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

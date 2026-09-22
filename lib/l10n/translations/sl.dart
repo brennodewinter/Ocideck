@@ -1627,6 +1627,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Microfoon-doorvoer': 'Prenos mikrofona',
+  'Microfoon-doorvoer (V)': 'Prenos mikrofona (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Mikrofona ni bilo mogoče vklopiti. Preverite dovoljenje in vhodno napravo.',
   'Vat samen met AI…': 'Povzemi z AI…',
   'Tekst inkorten met AI': 'Skrajšaj besedilo z AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

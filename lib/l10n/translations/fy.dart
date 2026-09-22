@@ -667,6 +667,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Microfoon-doorvoer': 'Mikrofoan-trochfiering',
+  'Microfoon-doorvoer (V)': 'Mikrofoan-trochfiering (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'De mikrofoan koe net ynskeakele wurde. Kontrolearje de tastimming en it ynfier-apparaat.',
   'Vat samen met AI…': 'Gearfetsje mei AI…',
   'Tekst inkorten met AI': 'Tekst ynkoarte mei AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

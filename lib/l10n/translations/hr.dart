@@ -1631,6 +1631,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Microfoon-doorvoer': 'Propuštanje mikrofona',
+  'Microfoon-doorvoer (V)': 'Propuštanje mikrofona (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Mikrofon se nije mogao uključiti. Provjerite dopuštenje i ulazni uređaj.',
   'Vat samen met AI…': 'Sažmi uz AI…',
   'Tekst inkorten met AI': 'Skrati tekst uz AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

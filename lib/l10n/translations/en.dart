@@ -827,6 +827,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Microfoon-doorvoer': 'Microphone pass-through',
+  'Microfoon-doorvoer (V)': 'Microphone pass-through (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'The microphone could not be turned on. Check the permission and the input device.',
   'Vat samen met AI…': 'Condense with AI…',
   'Tekst inkorten met AI': 'Shorten text with AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

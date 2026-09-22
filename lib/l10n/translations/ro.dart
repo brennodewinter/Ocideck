@@ -1643,6 +1643,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Microfoon-doorvoer': 'Monitorizare microfon',
+  'Microfoon-doorvoer (V)': 'Monitorizare microfon (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Microfonul nu a putut fi activat. Verificați permisiunea și dispozitivul de intrare.',
   'Vat samen met AI…': 'Rezumă cu AI…',
   'Tekst inkorten met AI': 'Scurtează textul cu AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

@@ -2538,6 +2538,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Microfoon-doorvoer': 'Mikrofon geçişi',
+  'Microfoon-doorvoer (V)': 'Mikrofon geçişi (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Mikrofon açılamadı. İzni ve giriş aygıtını kontrol edin.',
   'Vat samen met AI…': 'AI ile özetle…',
   'Tekst inkorten met AI': 'Metni AI ile kısalt',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
