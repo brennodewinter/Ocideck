@@ -227,7 +227,7 @@ Widget _resolvedImage(
   final maxEdge = SlideLinkScope.decodeMaxEdgeOf(context);
   final version = imageVersionOf(resolved);
   return styled(
-    Image(
+    RetryingImage(
       image: maxEdge == null
           ? cappedFileImage(File(resolved), version: version)
           : boundedFileImage(File(resolved), maxEdge, version: version),
@@ -270,7 +270,7 @@ Widget _resolvedRemoteImage(
         return _remoteBlockedPlaceholder(context, imagePath);
       }
       return styled(
-        Image(
+        RetryingImage(
           image: guardedNetworkImage(imagePath),
           fit: fit,
           alignment: alignment,

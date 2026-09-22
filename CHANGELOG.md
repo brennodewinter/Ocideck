@@ -90,6 +90,17 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Presentatiemodus: een dia-afbeelding die één keer mislukte bleef op het
+  presentatorscherm de hele sessie grijs, terwijl het publieksscherm hem wel
+  toonde (#2159). De eigen afbeeldingsprovider (`CappedImage`) ruimde een
+  gefaalde lading — anders dan Flutter's ingebouwde providers — niet uit de
+  beeldcache, dus elke latere resolve op die sleutel kreeg meteen de oude fout
+  terug; het beamervenster heeft een aparte engine met een eigen cache en liep
+  er daarom niet tegenaan. De provider ruimt zijn sleutel nu zelf op bij een
+  fout, dia-afbeeldingen proberen een mislukte lading opnieuw via een nieuwe
+  `RetryingImage`, en de presentator-voorlezer warmt dezelfde versiesleutel als
+  de render en logt fouten in plaats van ze stil te slikken.
+
 - De releaseketen strandde elke keer op de webdemo. Fase 3 bouwt de webbundel
   uit de werkboom en eiste daarom dat `HEAD` de tag-commit was — een terechte
   eis, maar een onhaalbare: de release-PR landt met een merge-commit, de tag

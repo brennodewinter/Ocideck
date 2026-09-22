@@ -7,7 +7,7 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   /// ahead of time. Because a precached [FileImage] resolves synchronously, the
   /// next slide paints its picture on the very first frame instead of flashing
   /// the black Scaffold behind it while the file decodes — essential for a clean
-  /// recording. Best-effort: decode errors are swallowed.
+  /// recording. Best-effort: decode errors are logged, not fatal.
   void _precacheNeighbours() {
     if (!mounted) return;
     final logo = widget.themeProfile.logoPath;
@@ -25,21 +25,26 @@ extension _PresenterPlayback on _FullscreenPresenterState {
   }
 
   void _precachePath(String path, {bool trusted = false}) {
+    // Best-effort: een mislukte voorlezing mag de navigatie niet breken, maar
+    // wordt wél gelogd — een stille hik was onzichtbaar terwijl hij vroeger
+    // de cachesleutel voor de hele sessie vergiftigde (#2159).
+    void precache(ImageProvider provider) => precacheImage(
+      provider,
+      context,
+      onError: (Object e, StackTrace? s) =>
+          logWarning('presenter precache: afbeelding niet gelezen', e),
+    );
     // Gebundelde (asset:) en in-memory (mem:) paden hebben geen
     // bestandsresolutie; op web bestaan File-paden sowieso niet.
     if (isBundledAssetPath(path)) {
-      precacheImage(
-        cappedBundledAssetImage(bundledAssetKey(path)),
-        context,
-        onError: (_, _) {},
-      );
+      precache(cappedBundledAssetImage(bundledAssetKey(path)));
       return;
     }
     final memBytes = WebAssetStore.isMemPath(path)
         ? WebAssetStore.bytesFor(path)
         : null;
     if (memBytes != null) {
-      precacheImage(cappedMemoryImage(memBytes), context, onError: (_, _) {});
+      precache(cappedMemoryImage(memBytes));
       return;
     }
     if (kIsWeb) return;
@@ -47,9 +52,12 @@ extension _PresenterPlayback on _FullscreenPresenterState {
         ? resolveTrustedAssetPath(path, widget.projectPath)
         : resolveSlideAssetPath(path, widget.projectPath);
     if (resolved == null) return;
-    // Capped provider (same cache key as display) so the precached frame is
-    // reused and an animated image is decoded animation-preserving, not frozen.
-    precacheImage(cappedFileImage(File(resolved)), context, onError: (_, _) {});
+    // Capped provider met dezelfde versie-key als de render, zodat het
+    // voorlezen ook echt de getoonde decode warmt — een gedraaide of
+    // bijgesneden afbeelding kreeg voorheen een dode versie-0 sleutel.
+    precache(
+      cappedFileImage(File(resolved), version: imageVersionOf(resolved)),
+    );
   }
 
   void _scheduleAdvance() {
