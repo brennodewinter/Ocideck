@@ -1652,6 +1652,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Microfoon-doorvoer': 'Αναπαραγωγή μικροφώνου',
+  'Microfoon-doorvoer (V)': 'Αναπαραγωγή μικροφώνου (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Δεν ήταν δυνατή η ενεργοποίηση του μικροφώνου. Ελέγξτε την άδεια και τη συσκευή εισόδου.',
   'Vat samen met AI…': 'Σύνοψη με ΤΝ…',
   'Tekst inkorten met AI': 'Σύντμηση κειμένου με ΤΝ',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

@@ -60,6 +60,14 @@ const Set<String> uncoveredBaseline = {
   // and no decision logic hides here. Keep this list to genuine such bindings,
   // not a hiding place for logic testable via a fake.
   'lib/meetings/meeting_media_core_webrtc.dart',
+  // UNTESTABLE NATIVE BINDING (#2158): `mic_monitor_webrtc.dart` is de dunne
+  // binding achter de MicMonitor-naad voor microfoon-doorvoer. Zelfde categorie
+  // als meeting_media_core_webrtc hierboven: libwebrtc vraagt een echt
+  // apparaat (mic, ICE), dus dit kan niet headless draaien en wordt live
+  // geverifieerd. De beslissingen (start/stop-cyclus, busy-guard, foutpad)
+  // wonen in mic_monitor.dart en presenter_mic.dart en zijn getest met een
+  // fake in mic_monitor_presenter_test.dart.
+  'lib/services/mic_monitor_webrtc.dart',
   // UNTESTABLE NATIVE BINDING (#1741): `native_window_io.dart` en
   // `presenter_displays.dart` praten met nativeapi via FFI. Onder `flutter
   // test` is geen native library geladen, dus de FFI-calls throwen en worden

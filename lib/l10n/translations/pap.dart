@@ -666,6 +666,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Microfoon-doorvoer': 'Monitor di mikrofon',
+  'Microfoon-doorvoer (V)': 'Monitor di mikrofon (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'No por a activá e mikròfono. Verifiká e permiso i e aparato di entrada.',
   'Vat samen met AI…': 'Resumí ku AI…',
   'Tekst inkorten met AI': 'Kortá teksto ku AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

@@ -4,6 +4,19 @@
 // extension — same library, same members, no behaviour change.
 part of '../fullscreen_presenter.dart';
 
+/// Of [slide] een online afbeelding of video bevat die geblokkeerd wordt
+/// wanneer `allowRemoteMedia` uit staat.
+///
+/// Top-level, net als [_helpOverlayRows]: pure lezing van een dia zonder
+/// state, en de klasse-plafondratchet telt elk extension-lid mee bij
+/// _FullscreenPresenterState.
+bool _slideHasRemoteMedia(Slide slide) {
+  if (VideoSource.looksLikeUrl(slide.imagePath)) return true;
+  if (VideoSource.looksLikeUrl(slide.imagePath2)) return true;
+  if (VideoSource.parse(slide.videoPath).isRemote) return true;
+  return false;
+}
+
 extension _PresenterViews on _FullscreenPresenterState {
   /// A 16:9 slide sized to fit within the given constraints.
   Widget _slideCanvas(Slide slide) {
@@ -323,15 +336,6 @@ extension _PresenterViews on _FullscreenPresenterState {
         ],
       ),
     );
-  }
-
-  /// Of [slide] een online afbeelding of video bevat die geblokkeerd wordt
-  /// wanneer `allowRemoteMedia` uit staat.
-  bool _slideHasRemoteMedia(Slide slide) {
-    if (VideoSource.looksLikeUrl(slide.imagePath)) return true;
-    if (VideoSource.looksLikeUrl(slide.imagePath2)) return true;
-    if (VideoSource.parse(slide.videoPath).isRemote) return true;
-    return false;
   }
 
   /// De hint-knop in de presenter-cockpit (dual-screen) die online media

@@ -252,6 +252,11 @@ extension _PresenterKeys on _FullscreenPresenterState {
       case LogicalKeyboardKey.keyM:
         _toggleMediaAdvance();
         return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyV:
+        // Desktop-only (#2158): op web staat de knop er ook niet.
+        if (!isDesktopNative) return KeyEventResult.ignored;
+        _toggleMicMonitor(this);
+        return KeyEventResult.handled;
       case LogicalKeyboardKey.keyS:
         _cycleDisplay();
         return KeyEventResult.handled;

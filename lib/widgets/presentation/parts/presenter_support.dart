@@ -121,13 +121,24 @@ class _SectionLabel extends StatelessWidget {
 class _NavButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onTap;
-  const _NavButton({required this.icon, required this.onTap});
+
+  /// "Live"-staat (microfoon-doorvoer): opvallend rood, want een lopende
+  /// doorvoer moet in één blik zichtbaar zijn — stille magie is hier
+  /// onbetrouwbaarheid.
+  final bool active;
+  const _NavButton({
+    required this.icon,
+    required this.onTap,
+    this.active = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final enabled = onTap != null;
     return Material(
-      color: enabled ? PresenterPalette.surface : PresenterPalette.bg,
+      color: active
+          ? AppTheme.danger500
+          : (enabled ? PresenterPalette.surface : PresenterPalette.bg),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       child: InkWell(
         onTap: onTap,
@@ -137,7 +148,9 @@ class _NavButton extends StatelessWidget {
           height: 36,
           child: Icon(
             icon,
-            color: enabled ? PresenterPalette.text : PresenterPalette.surface4,
+            color: active
+                ? Colors.white
+                : (enabled ? PresenterPalette.text : PresenterPalette.surface4),
             size: 24,
           ),
         ),

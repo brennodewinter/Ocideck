@@ -664,6 +664,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Microfoon-doorvoer': 'Monitorización del micrófono',
+  'Microfoon-doorvoer (V)': 'Monitorización del micrófono (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'No se pudo activar el micrófono. Comprueba el permiso y el dispositivo de entrada.',
   'Vat samen met AI…': 'Resumir con IA…',
   'Tekst inkorten met AI': 'Acortar el texto con IA',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

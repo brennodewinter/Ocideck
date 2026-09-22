@@ -1627,6 +1627,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Microfoon-doorvoer': 'Monitor mikrofon',
+  'Microfoon-doorvoer (V)': 'Monitor mikrofon (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Mikrofon tidak dapat diaktifkan. Periksa izin dan perangkat input.',
   'Vat samen met AI…': 'Ringkas dengan AI…',
   'Tekst inkorten met AI': 'Persingkat teks dengan AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

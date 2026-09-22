@@ -1627,6 +1627,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Microfoon-doorvoer': 'Mikrofonin läpivienti',
+  'Microfoon-doorvoer (V)': 'Mikrofonin läpivienti (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Mikrofonia ei voitu ottaa käyttöön. Tarkista lupa ja tulolaite.',
   'Vat samen met AI…': 'Tiivistä tekoälyllä…',
   'Tekst inkorten met AI': 'Lyhennä tekstiä tekoälyllä',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

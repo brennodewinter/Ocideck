@@ -1645,6 +1645,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Microfoon-doorvoer': 'Trażmissjoni tal-mikrofon',
+  'Microfoon-doorvoer (V)': 'Trażmissjoni tal-mikrofon (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Il-mikrofonu ma setax jiġi mixgħul. Iċċekkja l-permess u l-apparat tad-dħul.',
   'Vat samen met AI…': 'Ġemme\' bl-AI…',
   'Tekst inkorten met AI': 'Iqsar it-test bl-AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

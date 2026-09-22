@@ -1620,6 +1620,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Microfoon-doorvoer': 'Mikrofoni läbilaskmine',
+  'Microfoon-doorvoer (V)': 'Mikrofoni läbilaskmine (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Mikrofoni ei õnnestunud sisse lülitada. Kontrolli luba ja sisendseadet.',
   'Vat samen met AI…': 'Võta AI-ga kokku…',
   'Tekst inkorten met AI': 'Lühenda teksti AI-ga',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

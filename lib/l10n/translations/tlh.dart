@@ -1604,6 +1604,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Microfoon-doorvoer': 'ghogh wab lIS',
+  'Microfoon-doorvoer (V)': 'ghogh wab lIS (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'ghogh wab chenlaHbe\'. chaw\' \'ej wab DevwI\' yI\'bej.',
   'Vat samen met AI…': 'ngabmoH AI…',
   'Tekst inkorten met AI': 'mu\' pIqmoH AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

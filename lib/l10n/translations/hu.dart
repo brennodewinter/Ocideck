@@ -1629,6 +1629,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Microfoon-doorvoer': 'Mikrofon-monitorozás',
+  'Microfoon-doorvoer (V)': 'Mikrofon-monitorozás (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'A mikrofont nem sikerült bekapcsolni. Ellenőrizze az engedélyt és a bemeneti eszközt.',
   'Vat samen met AI…': 'Összefoglalás AI-val…',
   'Tekst inkorten met AI': 'Szöveg rövidítése AI-val',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

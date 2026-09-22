@@ -1647,6 +1647,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Microfoon-doorvoer': 'Пропускане на микрофона',
+  'Microfoon-doorvoer (V)': 'Пропускане на микрофона (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Микрофонът не можа да се включи. Проверете разрешението и входното устройство.',
   'Vat samen met AI…': 'Обобщи с ИИ…',
   'Tekst inkorten met AI': 'Съкрати текста с ИИ',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

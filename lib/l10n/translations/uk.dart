@@ -1642,6 +1642,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Microfoon-doorvoer': 'Моніторинг мікрофона',
+  'Microfoon-doorvoer (V)': 'Моніторинг мікрофона (V)',
+  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
+      'Не вдалося ввімкнути мікрофон. Перевірте дозвіл і пристрій введення.',
   'Vat samen met AI…': 'Стиснути за допомогою ШІ…',
   'Tekst inkorten met AI': 'Скоротити текст за допомогою ШІ',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
