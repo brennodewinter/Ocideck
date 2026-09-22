@@ -270,7 +270,8 @@ const Map<String, int> fileSizeBaseline = {
   // Flutter de State van de vorige grafiekdia, inclusief de markering die daar
   // aan stond; de sleutel is het gedrag, er valt niets uit te halen.
   'lib/widgets/slides/slide_preview.dart':
-      1073, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
+      1074, // +20 (#1999): eLearning-preview­cases (freeMarkdown + question hergebruikt).
+  // +1 (#2159): import van RetryingImage voor media_previews_image.
   // +57 (#1240): LibrePlan-connector — setLibreplanPassword/deleteLibreplanPassword/
   // readLibreplanPassword methodes op SettingsNotifier (keychain-toegang).
   // +3: `setShowOpenPreview` — de zetter van de instelling "Voorbeeld tonen bij
@@ -414,7 +415,9 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3481,
+      3486, // +5 (#2159): precache-helper die fouten logt en de versiesleutel
+  // van de render deelt — de duplicatie van drie precacheImage-aanroepen is er
+  // al uit, wat overbleef is de uitleg waarom deze tak bestaat.
   // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,
   // versleutelde-zip-streaming via writeContent(capped), en automatische
   // zegelverificatie bij openen. Security-fixes die in het open-pad landen

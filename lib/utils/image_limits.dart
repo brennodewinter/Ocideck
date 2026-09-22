@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
@@ -71,7 +72,24 @@ class CappedImage extends ImageProvider<CappedImage> {
 
   @override
   ImageStreamCompleter loadImage(CappedImage key, ImageDecoderCallback decode) {
-    return MultiFrameImageStreamCompleter(codec: _decode(decode), scale: scale);
+    final completer = MultiFrameImageStreamCompleter(
+      codec: _decode(decode),
+      scale: scale,
+    );
+    // Dezelfde terugval als FileImage/NetworkImage/ResizeImage: bij een lees-
+    // of decodefout de cache-entry weggooien. Zonder dit blijft de gefaalde
+    // completer in `ImageCache._pendingImages` staan en krijgt elke latere
+    // resolve op deze key díé fout opnieuw — één transiënte hik (een sync-map
+    // die het bestand net herschrijft, een netwerkschijf) zette de afbeelding
+    // dan voor de rest van de sessie op de placeholder, terwijl het
+    // beamervenster — een aparte engine met een eigen cache — hem wel toonde
+    // (#2159). De microtask geeft de cache de kans de key eerst te registreren.
+    completer.addEphemeralErrorListener((Object exception, StackTrace? stack) {
+      scheduleMicrotask(() {
+        PaintingBinding.instance.imageCache.evict(key);
+      });
+    });
+    return completer;
   }
 
   Future<ui.Codec> _decode(ImageDecoderCallback decode) async {
