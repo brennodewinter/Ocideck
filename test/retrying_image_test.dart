@@ -6,8 +6,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/image_callout.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/utils/image_limits.dart';
+import 'package:ocideck/widgets/slides/previews/callout_overlay.dart';
 import 'package:ocideck/widgets/slides/previews/retrying_image.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
@@ -209,6 +212,63 @@ void main() {
         tester,
         _hasDecodedImage,
         reason: 'de dia herstelde niet toen het bestand arriveerde',
+      );
+    });
+  });
+
+  group('callout-overlay (#2162)', () {
+    testWidgets('markeringen verschijnen alsnog als het bestand arriveert', (
+      tester,
+    ) async {
+      // De overlay lost de intrinsieke beeldmaat één keer op bij mount; faalde
+      // die in het transiënte venster, dan bleven de callouts weg terwijl het
+      // beeld wél herstelde — presentator zonder markeringen, publiek mét.
+      final dir = await tester.runAsync(
+        () => Directory.systemTemp.createTemp('ocideck-callout'),
+      );
+      if (dir == null) return;
+      addTearDown(() => deleteTempDir(dir));
+      final projectPath = dir.resolveSymbolicLinksSync();
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Center(
+            child: SizedBox(
+              width: 400,
+              height: 300,
+              child: CalloutOverlay(
+                slide: Slide(
+                  id: 'c',
+                  type: SlideType.bulletsImage,
+                  imagePath: 'foto.png',
+                  callouts: const [
+                    ImageCallout(
+                      reference: 'A',
+                      targets: [CalloutPoint(0.5, 0.5)],
+                    ),
+                  ],
+                ),
+                projectPath: projectPath,
+                profile: const ThemeProfile(),
+                slotWidth: 400,
+                slotHeight: 300,
+              ),
+            ),
+          ),
+        ),
+      );
+      // De eerste poging loopt over de echte lus: het bestand ontbreekt, dus
+      // de resolve faalt en er staat nog geen markering.
+      await tester.runAsync(() => pumpEventQueue());
+      expect(find.text('A'), findsNothing);
+
+      await tester.runAsync(
+        () => File('$projectPath/foto.png').writeAsBytes(_png()),
+      );
+      await pumpUntil(
+        tester,
+        () => find.text('A').evaluate().isNotEmpty,
+        reason: 'de markering verscheen niet nadat het bestand arriveerde',
       );
     });
   });

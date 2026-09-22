@@ -90,6 +90,13 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Callout-markeringen op een dia-afbeelding herstellen nu mee als het beeld
+  een transiënte leesfout had (#2162). De overlay loste de intrinsieke
+  beeldmaat één keer op bij het tonen; mislukte dat, dan bleven de
+  markeringen weg tot de gebruiker heen-en-weer navigeerde — terwijl het
+  beeld zelf al hersteld was. De overlay probeert zijn maat nu opnieuw met
+  dezelfde cadans als de afbeelding zelf.
+
 - Presentatiemodus: een dia-afbeelding die één keer mislukte bleef op het
   presentatorscherm de hele sessie grijs, terwijl het publieksscherm hem wel
   toonde (#2159). De eigen afbeeldingsprovider (`CappedImage`) ruimde een
