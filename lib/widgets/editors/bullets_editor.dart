@@ -11,6 +11,7 @@ import '../../utils/markdown_paste_cleanup.dart';
 import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'editor_text_controller.dart';
+import 'ai_condense_button.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
 import 'split_continuation_switch.dart';
@@ -417,6 +418,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
           const SizedBox(height: 16),
           const SectionLabel('Tekst'),
           if (widget.onSplitChapters != null) _chapterSplitHint(l10n),
+          AiCondenseButton(slide: widget.slide),
           SizedBox(
             height: 320,
             child: MarkdownNotesEditor.legacy(

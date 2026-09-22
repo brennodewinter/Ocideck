@@ -2538,6 +2538,16 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Vat samen met AI…': 'AI ile özetle…',
+  'Tekst inkorten met AI': 'Metni AI ile kısalt',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Tam metin konuşmacı notlarına taşınır — hiçbir şey kaybolmaz.',
+  'Korte samenvatting': 'Kısa özet',
+  'Eén alinea die op één dia past.': 'Tek slayta sığan tek paragraf.',
+  'Kernpunten (max. 8)': 'Ana noktalar (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Ana noktaların kısa bir listesi.',
+  'Genereer': 'Oluştur',
+  'Oorspronkelijke tekst': 'Orijinal metin',
   'niet leesbaar': 'okunamıyor',
   'niet decodeerbaar': 'çözümlenemiyor',
   'model gaf niets bruikbaars terug': 'model kullanılabilir bir şey döndürmedi',

@@ -1620,6 +1620,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Vat samen met AI…': 'Võta AI-ga kokku…',
+  'Tekst inkorten met AI': 'Lühenda teksti AI-ga',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Kogu tekst liigub esineja märkustesse — midagi ei lähe kaotsi.',
+  'Korte samenvatting': 'Lühike kokkuvõte',
+  'Eén alinea die op één dia past.': 'Üks lõik, mis mahub ühele slaidile.',
+  'Kernpunten (max. 8)': 'Põhipunktid (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Põhipunktide kompaktne loend.',
+  'Genereer': 'Genereeri',
+  'Oorspronkelijke tekst': 'Algne tekst',
   'niet leesbaar': 'loetamatu',
   'niet decodeerbaar': 'mitte dekodeeritav',
   'model gaf niets bruikbaars terug': 'mudel ei tagastanud midagi kasulikku',

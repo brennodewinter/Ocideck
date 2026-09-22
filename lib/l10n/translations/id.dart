@@ -1627,6 +1627,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Vat samen met AI…': 'Ringkas dengan AI…',
+  'Tekst inkorten met AI': 'Persingkat teks dengan AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Seluruh teks dipindahkan ke catatan pembicara — tidak ada yang hilang.',
+  'Korte samenvatting': 'Ringkasan singkat',
+  'Eén alinea die op één dia past.': 'Satu paragraf yang muat di satu slide.',
+  'Kernpunten (max. 8)': 'Poin utama (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Daftar ringkas poin-poin utama.',
+  'Genereer': 'Buat',
+  'Oorspronkelijke tekst': 'Teks asli',
   'niet leesbaar': 'tidak terbaca',
   'niet decodeerbaar': 'tidak dapat didekode',
   'model gaf niets bruikbaars terug':

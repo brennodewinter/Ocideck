@@ -1657,6 +1657,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Vat samen met AI…': 'Déan achoimre le AI…',
+  'Tekst inkorten met AI': 'Giorraigh an téacs le AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Bogann an téacs iomlán chuig nótaí an chainteora — ní chailleann tada.',
+  'Korte samenvatting': 'Achoimre ghearr',
+  'Eén alinea die op één dia past.':
+      'Alt amháin a fhreastalaíonn ar shleamhnán amháin.',
+  'Kernpunten (max. 8)': 'Príomhphointí (uasmh. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Liosta dlúth de na príomhphointí.',
+  'Genereer': 'Gin',
+  'Oorspronkelijke tekst': 'Téacs bunaidh',
   'niet leesbaar': 'do-léite',
   'niet decodeerbaar': 'neamh-dhíchódaithe',
   'model gaf niets bruikbaars terug':

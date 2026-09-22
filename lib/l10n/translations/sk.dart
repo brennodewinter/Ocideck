@@ -1633,6 +1633,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Vat samen met AI…': 'Zhrnúť pomocou AI…',
+  'Tekst inkorten met AI': 'Skrátiť text pomocou AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Celý text sa presunie do poznámok rečníka — nič sa nestratí.',
+  'Korte samenvatting': 'Krátke zhrnutie',
+  'Eén alinea die op één dia past.':
+      'Jeden odsek, ktorý sa zmestí na jednu snímku.',
+  'Kernpunten (max. 8)': 'Kľúčové body (max. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Zhuštený zoznam hlavných bodov.',
+  'Genereer': 'Generovať',
+  'Oorspronkelijke tekst': 'Pôvodný text',
   'niet leesbaar': 'nečitateľné',
   'niet decodeerbaar': 'nedekódovateľné',
   'model gaf niets bruikbaars terug': 'model nevrátil nič použiteľné',

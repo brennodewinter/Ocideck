@@ -1625,6 +1625,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Vat samen met AI…': 'Apkopot ar AI…',
+  'Tekst inkorten met AI': 'Saīsināt tekstu ar AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Viss teksts pārceļas uz runātāja piezīmēm — nekas nepazūd.',
+  'Korte samenvatting': 'Īss kopsavilkums',
+  'Eén alinea die op één dia past.':
+      'Viena rindkopa, kas ietilpst vienā slaidā.',
+  'Kernpunten (max. 8)': 'Galvenie punkti (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Kompakts galveno punktu saraksts.',
+  'Genereer': 'Ģenerēt',
+  'Oorspronkelijke tekst': 'Sākotnējais teksts',
   'niet leesbaar': 'nelasāms',
   'niet decodeerbaar': 'nedekodējams',
   'model gaf niets bruikbaars terug': 'modelis neatgrieza neko lietojamu',

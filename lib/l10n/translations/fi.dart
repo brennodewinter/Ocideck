@@ -1627,6 +1627,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Vat samen met AI…': 'Tiivistä tekoälyllä…',
+  'Tekst inkorten met AI': 'Lyhennä tekstiä tekoälyllä',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Koko teksti siirtyy puhujan muistiinpanoihin — mitään ei katoa.',
+  'Korte samenvatting': 'Lyhyt tiivistelmä',
+  'Eén alinea die op één dia past.':
+      'Yksi kappale, joka mahtuu yhdelle dialle.',
+  'Kernpunten (max. 8)': 'Pääkohdat (enint. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Tiivis luettelo pääkohdista.',
+  'Genereer': 'Luo',
+  'Oorspronkelijke tekst': 'Alkuperäinen teksti',
   'niet leesbaar': 'ei luettavissa',
   'niet decodeerbaar': 'ei dekoodattavissa',
   'model gaf niets bruikbaars terug':

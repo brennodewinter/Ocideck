@@ -827,6 +827,17 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Vat samen met AI…': 'Condense with AI…',
+  'Tekst inkorten met AI': 'Shorten text with AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'The full text moves to the speaker notes — nothing is lost.',
+  'Korte samenvatting': 'Short summary',
+  'Eén alinea die op één dia past.': 'One paragraph that fits on one slide.',
+  'Kernpunten (max. 8)': 'Key points (max. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'A compact list of the main points.',
+  'Genereer': 'Generate',
+  'Oorspronkelijke tekst': 'Original text',
   'niet leesbaar': 'not readable',
   'niet decodeerbaar': 'not decodable',
   'model gaf niets bruikbaars terug': 'the model returned nothing usable',

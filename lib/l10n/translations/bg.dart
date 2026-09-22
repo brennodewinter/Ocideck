@@ -1647,6 +1647,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Vat samen met AI…': 'Обобщи с ИИ…',
+  'Tekst inkorten met AI': 'Съкрати текста с ИИ',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Целият текст се премества в бележките на говорителя — нищо не се губи.',
+  'Korte samenvatting': 'Кратко резюме',
+  'Eén alinea die op één dia past.':
+      'Един абзац, който се побира на един слайд.',
+  'Kernpunten (max. 8)': 'Ключови точки (макс. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Сбит списък с основните точки.',
+  'Genereer': 'Генерирай',
+  'Oorspronkelijke tekst': 'Оригинален текст',
   'niet leesbaar': 'нечетливо',
   'niet decodeerbaar': 'не може да се декодира',
   'model gaf niets bruikbaars terug': 'моделът не върна нищо използваемо',

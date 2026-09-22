@@ -1645,6 +1645,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Vat samen met AI…': 'Ġemme\' bl-AI…',
+  'Tekst inkorten met AI': 'Iqsar it-test bl-AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'It-test kollu jimxiet għan-noti tal-kelliem — xejn ma jitlef.',
+  'Korte samenvatting': 'Sommarju qasir',
+  'Eén alinea die op één dia past.':
+      'Paragrafu wieħed li jaqbad f\'slide waħda.',
+  'Kernpunten (max. 8)': 'Punti ewlenin (mass. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'Lista kompatta tal-punti prinċipali.',
+  'Genereer': 'Ġenera',
+  'Oorspronkelijke tekst': 'Test oriġinali',
   'niet leesbaar': 'mhux jinqara',
   'niet decodeerbaar': 'mhux dekodifikabbli',
   'model gaf niets bruikbaars terug': 'il-mudell ma ritorna xejn utli',

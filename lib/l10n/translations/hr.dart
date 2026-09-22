@@ -1631,6 +1631,16 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Vat samen met AI…': 'Sažmi uz AI…',
+  'Tekst inkorten met AI': 'Skrati tekst uz AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Cijeli tekst seli u bilješke govornika — ništa se ne gubi.',
+  'Korte samenvatting': 'Kratak sažetak',
+  'Eén alinea die op één dia past.': 'Jedan odlomak koji stane na jedan slajd.',
+  'Kernpunten (max. 8)': 'Ključne točke (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Sažeti popis glavnih točaka.',
+  'Genereer': 'Generiraj',
+  'Oorspronkelijke tekst': 'Izvorni tekst',
   'niet leesbaar': 'nečitljivo',
   'niet decodeerbaar': 'nedekodirajuće',
   'model gaf niets bruikbaars terug': 'model nije vratio ništa korisno',

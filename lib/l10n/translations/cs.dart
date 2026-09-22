@@ -1628,6 +1628,17 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Vat samen met AI…': 'Zhuštit pomocí AI…',
+  'Tekst inkorten met AI': 'Zkrátit text pomocí AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Celý text se přesune do poznámek řečníka — nic se neztratí.',
+  'Korte samenvatting': 'Krátké shrnutí',
+  'Eén alinea die op één dia past.':
+      'Jeden odstavec, který se vejde na jeden snímek.',
+  'Kernpunten (max. 8)': 'Klíčové body (max. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Stručný seznam hlavních bodů.',
+  'Genereer': 'Vygenerovat',
+  'Oorspronkelijke tekst': 'Původní text',
   'niet leesbaar': 'nečitelné',
   'niet decodeerbaar': 'nedekódovatelné',
   'model gaf niets bruikbaars terug': 'model nevrátil nic použitelného',

@@ -1627,6 +1627,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Vat samen met AI…': 'Kondensér med AI…',
+  'Tekst inkorten met AI': 'Forkort tekst med AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Hele teksten flytter til talerens noter — intet går tabt.',
+  'Korte samenvatting': 'Kort resumé',
+  'Eén alinea die op één dia past.': 'Et afsnit, der passer på én slide.',
+  'Kernpunten (max. 8)': 'Kernepunkter (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'En kompakt liste over hovedpunkterne.',
+  'Genereer': 'Generér',
+  'Oorspronkelijke tekst': 'Oprindelig tekst',
   'niet leesbaar': 'ikke læsbar',
   'niet decodeerbaar': 'kan ikke afkodes',
   'model gaf niets bruikbaars terug': 'modellen returnerede intet brugbart',

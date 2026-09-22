@@ -1627,6 +1627,16 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Vat samen met AI…': 'Povzemi z AI…',
+  'Tekst inkorten met AI': 'Skrajšaj besedilo z AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Celotno besedilo se prestavi v opombe govornika — nič se ne izgubi.',
+  'Korte samenvatting': 'Kratek povzetek',
+  'Eén alinea die op één dia past.': 'En odstavek, ki gre na en prosojnik.',
+  'Kernpunten (max. 8)': 'Bistvene točke (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Zgoščen seznam glavnih točk.',
+  'Genereer': 'Ustvari',
+  'Oorspronkelijke tekst': 'Izvirno besedilo',
   'niet leesbaar': 'neberljivo',
   'niet decodeerbaar': 'nedekodirno',
   'model gaf niets bruikbaars terug': 'model ni vrnil ničesar uporabnega',

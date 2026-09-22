@@ -1626,6 +1626,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Vat samen met AI…': 'Sammanfatta med AI…',
+  'Tekst inkorten met AI': 'Korta texten med AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Hela texten flyttas till talaranteckningarna — inget går förlorat.',
+  'Korte samenvatting': 'Kort sammanfattning',
+  'Eén alinea die op één dia past.': 'Ett stycke som får plats på en bild.',
+  'Kernpunten (max. 8)': 'Kärnpunkter (max. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'En kompakt lista med huvudpunkterna.',
+  'Genereer': 'Generera',
+  'Oorspronkelijke tekst': 'Ursprungstext',
   'niet leesbaar': 'ej läsbar',
   'niet decodeerbaar': 'ej avkodbar',
   'model gaf niets bruikbaars terug': 'modellen returnerade inget användbart',

@@ -1639,6 +1639,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Vat samen met AI…': 'Streść za pomocą AI…',
+  'Tekst inkorten met AI': 'Skróć tekst za pomocą AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Pełny tekst trafia do notatek prelegenta — nic nie ginie.',
+  'Korte samenvatting': 'Krótkie streszczenie',
+  'Eén alinea die op één dia past.':
+      'Jeden akapit mieszczący się na jednym slajdzie.',
+  'Kernpunten (max. 8)': 'Punkty kluczowe (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Zwięzła lista głównych punktów.',
+  'Genereer': 'Generuj',
+  'Oorspronkelijke tekst': 'Tekst oryginalny',
   'niet leesbaar': 'nieczytelny',
   'niet decodeerbaar': 'nie do zdekodowania',
   'model gaf niets bruikbaars terug': 'model nie zwrócił niczego użytecznego',
