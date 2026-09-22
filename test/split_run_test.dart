@@ -72,6 +72,20 @@ void main() {
       expect(splitRunRange(slides, 0), (0, 0));
     });
 
+    test('een bulletslide zet een bullets+afbeelding-reeks voort', () {
+      // "Splits slide" laat het beeld op de eerste pagina en maakt de
+      // vervolgpagina's gewone bulletslides — die overgang is dezelfde run.
+      final slides = [
+        Slide.create(
+          SlideType.bulletsImage,
+        ).copyWith(bullets: ['a'], imagePath: 'x.png'),
+        bullets(['b'], continuesSplit: true),
+        bullets(['c'], continuesSplit: true),
+      ];
+      expect(splitRunRange(slides, 0), (0, 2));
+      expect(splitRunRange(slides, 2), (0, 2));
+    });
+
     test('een niet-splitsbaar type zit nooit in een run', () {
       final slides = [
         bullets(['a']),

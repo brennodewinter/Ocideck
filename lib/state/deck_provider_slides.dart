@@ -92,14 +92,17 @@ extension DeckNotifierSlides on DeckNotifier {
     _mutate(deck.copyWith(slides: slides));
   }
 
-  /// Splitst de bulletslide op [index] in pagina's van hooguit de leesbaarheids-
-  /// drempel, met de overgebleven bullets op een laatste, kortere pagina; de
-  /// vervolgpagina's komen er direct achter. Doet niets als de slide geen
-  /// (genoeg) bullets heeft om te splitsen.
+  /// Splitst de bulletslide op [index] in pagina's die op de leesbare
+  /// doelschaal nog passen, met de leesbaarheidsdrempel als aantal-bovengrens;
+  /// de vervolgpagina's komen er direct achter. Bij een bullets+afbeelding-slide
+  /// blijft het beeld op de eerste pagina — vervolgpagina's krijgen de volle
+  /// tekstbreedte. Doet niets als de slide geen (genoeg) bullets heeft om te
+  /// splitsen.
   void splitSlide(int index) {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
-    final pages = splitBulletSlidePages(deck.slides[index]);
+    final slide = deck.slides[index];
+    final pages = splitThemedBulletSlidePages(slide, deck.themeProfile);
     if (pages == null) return;
     final slides = List<Slide>.from(deck.slides)
       ..removeAt(index)

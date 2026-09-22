@@ -232,7 +232,7 @@ void main() {
     const analyzer = SlideQualityAnalyzer();
 
     test('de meldingen exploderen niet meer per deelpagina', () {
-      final pages = splitBulletSlidePages(overfull)!;
+      final pages = splitBulletSlidePages(overfull, font: 'Roboto')!;
       expect(pages.length, greaterThan(2));
       final raw = analyzer.analyze(Deck(title: 'T', slides: pages)).issues;
 
@@ -281,6 +281,7 @@ void main() {
         // samenvatting — de collapse pakt uitsluitend echte split-reeksen.
         final pages = splitBulletSlidePages(
           overfull,
+          font: 'Roboto',
         )!.map((s) => s.copyWith(continuesSplit: false)).toList();
         final raw = analyzer.analyze(Deck(title: 'T', slides: pages)).issues;
         final collapsed = collapseSplitRunDensity(pages, raw);

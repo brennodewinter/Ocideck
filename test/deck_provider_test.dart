@@ -16,6 +16,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_integrity.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
+import 'package:ocideck/services/bullet_pagination.dart' show kMinPageBullets;
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/slide_quality_analyzer.dart'
     show kSingleColumnBulletWarningCount;
@@ -354,11 +355,12 @@ void main() {
     expect(n.state.deck!.slides, hasLength(1));
   });
 
-  test('splitSlide keeps the image on both halves of a bullets+image slide', () {
+  test('splitSlide splits a bullets+image slide in two, image on page one', () {
     // De gemelde casus: weinig bullets náást een afbeelding. Het tekstvlak is
     // smal, en de gebruiker wil toch in tweeën knippen; dan splitsen we
-    // doormidden in plaats van een dode klik. Beide helften erven de afbeelding,
-    // zodat de vervolgpagina niet plots full-width tekst wordt.
+    // doormidden in plaats van een dode klik. De vervolgpagina wordt een gewone
+    // bulletslide op volle breedte — het beeld herhalen zou op elke pagina een
+    // derde van de tekstbreedte onbenut laten.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
     final bullets = List.generate(6, (i) => 'Bullet $i');
@@ -372,11 +374,12 @@ void main() {
 
     final slides = n.state.deck!.slides;
     expect(slides, hasLength(3));
-    // Beide helften blijven een bulletsImage met dezelfde afbeelding.
     expect(slides[1].type, SlideType.bulletsImage);
     expect(slides[1].imagePath, 'foto.png');
-    expect(slides[2].type, SlideType.bulletsImage);
-    expect(slides[2].imagePath, 'foto.png');
+    // Alleen de eerste pagina houdt het beeld; de vervolgpagina is een
+    // bulletslide op volle breedte maar blijft wel in dezelfde run.
+    expect(slides[2].type, SlideType.bullets);
+    expect(slides[2].imagePath, isEmpty);
     expect(slides[2].continuesSplit, isTrue);
     expect(slides[1].bullets, isNotEmpty);
     expect(slides[2].bullets, isNotEmpty);
@@ -420,8 +423,11 @@ void main() {
   });
 
   test('splitSlide laat een heel lange lijst niet in minipaginas vallen', () {
-    // De melding: "ik zie nu heel veel slides ontstaan". Lange bullets mogen het
-    // aantal pagina's niet meer opdrijven.
+    // De melding: "ik zie nu heel veel slides ontstaan". Lange bullets sturen
+    // het aantal pagina's wel aan — elke pagina vult op de leesbare doelschaal.
+    // In dit realistische geval kan de staart tot minstens drie worden
+    // herverdeeld; als zelfs verplaatsen niet past, mag de pure pagineerder
+    // bewust een kortere laatste pagina laten staan.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
     final long = List.generate(
@@ -435,7 +441,11 @@ void main() {
 
     n.splitSlide(1);
 
-    expect(n.state.deck!.slides.skip(1).map((p) => p.bullets.length), [5, 5]);
+    final sizes = n.state.deck!.slides.skip(1).map((p) => p.bullets.length);
+    for (final size in sizes) {
+      expect(size, greaterThanOrEqualTo(kMinPageBullets));
+    }
+    expect(sizes.fold<int>(0, (a, b) => a + b), 10);
   });
 
   test('insertSlides duplicates with fresh ids and returns insert index', () {

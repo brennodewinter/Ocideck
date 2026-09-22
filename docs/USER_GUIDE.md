@@ -3734,18 +3734,16 @@ Theme-wide contrast issues are listed once for the whole deck; slide-specific
 issues name the slide number.
 
 A too-dense bullet slide offers a one-click **Split slide** fix (also available
-from the slide thumbnail's menu). It spreads the bullets over as many evenly-sized
-pages as needed so no page is left over-full: a list twice the readable optimum
-splits in two, a longer one into three or more, and a list whose bullets barely
-fit (only a couple at full size) into pages of just those few. Page breaks land on
-group headings, so whole **tussenkoppen** groups stay together on a page rather
-than being cut in half. Splitting a **bullets + image** slide keeps the image on
-every continuation page too, so all pages match and share one font size; because
-the text column next to the image is narrower, the split also makes
-proportionally smaller pages (at 40% image width about five bullets instead of
-eight), so the shared font size grows to fill the column instead of being pinned
-down by an over-full page. Swap a
-follow-up to a plain bullets page via the slide **type** picker if you prefer.
+from the slide thumbnail's menu). It fills each page with as many bullets as fit
+at 80% of the design size, up to the readable bullet-count limit. A list twice
+the readable optimum splits in two, a longer one into three or more, and long
+prose bullets produce shorter pages before they can shrink the whole run. Page
+breaks land on group headings, so whole **tussenkoppen** groups stay together on
+a page rather than being cut in half. When splitting a **bullets + image** slide,
+the image stays on the first page; continuation pages become plain, full-width
+bullet slides. The first page therefore observes the narrower text column (at
+40% image width, at most about five bullets rather than eight), while later
+pages use the released width. They remain one split run and share one font size.
 Two-column slides spread both columns across the same set of pages. Each page of a
 split run shows a small, dimmed **`page/total`** counter beside its title (`1/3`,
 `2/3`, `3/3`), so a listener knows the list continues and where they are; a

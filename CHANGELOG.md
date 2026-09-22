@@ -90,6 +90,14 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- **Dia splitsen benut de vervolgpagina's van een opsommingen-met-afbeelding-dia volledig.**
+  De afbeelding blijft voortaan alleen op de eerste pagina; vervolgpagina's
+  worden gewone opsommingsdia's op volle breedte maar blijven deel van dezelfde
+  splitsreeks en delen dus één lettergrootte. De paginering meet daarnaast per
+  pagina hoeveel tekst op 80% van de ontwerpgrootte past, met het bestaande
+  bulletaantal als bovengrens. Lange volzinnen drukken daardoor niet langer de
+  hele reeks klein, terwijl korte opsommingen voorspelbaar begrensd blijven.
+
 - Callout-markeringen op een dia-afbeelding herstellen nu mee als het beeld
   een transiënte leesfout had (#2162). De overlay loste de intrinsieke
   beeldmaat één keer op bij het tonen; mislukte dat, dan bleven de
