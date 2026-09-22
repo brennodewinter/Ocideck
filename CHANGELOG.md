@@ -216,6 +216,26 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.9] — 2026-09-22
+
+### Added
+
+- feat(presenter): microfoon-doorvoer tijdens presenteren (#2158) (#2160)
+- feat(ai): vrije-tekstdia's verdichten — samenvatting of kernpunten, origineel naar notities (#2157)
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- test(golden): ververs referenties voor Flutter 3.47.5
+- ci: platformtestfalen terugdringen — mktemp portable, conventie-ratchet, wekelijkse Windows-run (#2156)
+
+### Fixed
+
+- fix(slides): benut ruimte na splitsen van beeldbullets
+- fix(presentatie): callout-markeringen herstellen na transiënte beeldfout (#2162) (#2163)
+- fix(presentatie): mislukte beeldlading vergiftigt de cache niet meer (#2159) (#2161)
+- fix(release): fase 3 checkt de tag zelf uit, zodat een release niet elke keer strandt op de webdemo (#2155)
+
 ## [0.6.8] — 2026-09-21
 
 ### Changed
