@@ -1604,6 +1604,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Vat samen met AI…': 'ngabmoH AI…',
+  'Tekst inkorten met AI': 'mu\' pIqmoH AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Hoch mu\' notesDaq jaH — pagh luj.',
+  'Korte samenvatting': 'pum ngeD',
+  'Eén alinea die op één dia past.': 'wa\' paragraph wa\' slideDaq.',
+  'Kernpunten (max. 8)': 'mu\'mey porgh (8 max)',
+  'Een compacte lijst met de hoofdpunten.': 'porghmey tetlh.',
+  'Genereer': 'chenmoH',
+  'Oorspronkelijke tekst': 'mu\'mey wa\'DIch',
   'niet leesbaar': 'laDlaHbe\'lu\'',
   'niet decodeerbaar': 'vunlaHbe\'lu\'',
   'model gaf niets bruikbaars terug': 'mIw pagh lo\'laHghach nob',

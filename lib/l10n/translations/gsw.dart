@@ -1630,6 +1630,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Vat samen met AI…': 'Mit KI zämmefasse…',
+  'Tekst inkorten met AI': 'Täxt mit KI chürze',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'De gsamt Täxt wandert i d\'Sprechernotize — nüt goot verlore.',
+  'Korte samenvatting': 'Churzi Zämmefassig',
+  'Eén alinea die op één dia past.': 'Ei Absatz, wo uf ei Folie passt.',
+  'Kernpunten (max. 8)': 'Chärnpünkt (max. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'E kompakti Lischte vo de Hauptpünkt.',
+  'Genereer': 'Generierä',
+  'Oorspronkelijke tekst': 'Originaltäxt',
   'niet leesbaar': 'nid lesbar',
   'niet decodeerbaar': 'nid dekodierbar',
   'model gaf niets bruikbaars terug': 's Modäll het nüt Bruuchbars zrugggee',

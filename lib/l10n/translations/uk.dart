@@ -1642,6 +1642,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Vat samen met AI…': 'Стиснути за допомогою ШІ…',
+  'Tekst inkorten met AI': 'Скоротити текст за допомогою ШІ',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Повний текст переноситься до нотаток доповідача — нічого не втрачається.',
+  'Korte samenvatting': 'Короткий підсумок',
+  'Eén alinea die op één dia past.':
+      'Один абзац, що вміщується на одному слайді.',
+  'Kernpunten (max. 8)': 'Ключові тези (макс. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Стислий перелік основних тез.',
+  'Genereer': 'Згенерувати',
+  'Oorspronkelijke tekst': 'Оригінальний текст',
   'niet leesbaar': 'не читається',
   'niet decodeerbaar': 'не декодується',
   'model gaf niets bruikbaars terug': 'модель не повернула нічого корисного',

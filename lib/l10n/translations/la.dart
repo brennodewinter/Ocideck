@@ -1642,6 +1642,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Vat samen met AI…': 'Per IA contrahe…',
+  'Tekst inkorten met AI': 'Textum per IA contrahe',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Textus integer in notas oratoris transfertur — nihil perditur.',
+  'Korte samenvatting': 'Summarium breve',
+  'Eén alinea die op één dia past.':
+      'Unus paragraphus qui in una imagine congruit.',
+  'Kernpunten (max. 8)': 'Puncta praccipua (max. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'Brevis enumeratio punctorum principalium.',
+  'Genereer': 'Genera',
+  'Oorspronkelijke tekst': 'Textus originalis',
   'niet leesbaar': 'non legibilis',
   'niet decodeerbaar': 'non decodificabilis',
   'model gaf niets bruikbaars terug': 'exemplar nihil utile reddidit',

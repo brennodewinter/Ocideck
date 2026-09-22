@@ -667,6 +667,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Vat samen met AI…': 'Gearfetsje mei AI…',
+  'Tekst inkorten met AI': 'Tekst ynkoarte mei AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'De folsleine tekst ferhuist nei de sprekernotysjes — der giet neat ferlern.',
+  'Korte samenvatting': 'Koarte gearfetting',
+  'Eén alinea die op één dia past.': 'Ien alinea dy\'t op ien dia past.',
+  'Kernpunten (max. 8)': 'Kernpunten (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'In kompakte list mei de haadpunten.',
+  'Genereer': 'Genearje',
+  'Oorspronkelijke tekst': 'Oarspronklike tekst',
   'niet leesbaar': 'net lêsber',
   'niet decodeerbaar': 'net te dekodearjen',
   'model gaf niets bruikbaars terug': 'it model joech neat brûkbers werom',

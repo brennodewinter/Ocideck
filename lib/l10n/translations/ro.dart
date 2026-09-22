@@ -1643,6 +1643,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Vat samen met AI…': 'Rezumă cu AI…',
+  'Tekst inkorten met AI': 'Scurtează textul cu AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Textul complet se mută în notițele vorbitorului — nimic nu se pierde.',
+  'Korte samenvatting': 'Rezumat scurt',
+  'Eén alinea die op één dia past.':
+      'Un paragraf care încape pe un singur slide.',
+  'Kernpunten (max. 8)': 'Puncte-cheie (max. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'O listă compactă a punctelor principale.',
+  'Genereer': 'Generează',
+  'Oorspronkelijke tekst': 'Text original',
   'niet leesbaar': 'necitibil',
   'niet decodeerbaar': 'nedecodificabil',
   'model gaf niets bruikbaars terug': 'modelul nu a returnat nimic utilizabil',

@@ -1634,6 +1634,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Vat samen met AI…': 'Apibendrinti su DI…',
+  'Tekst inkorten met AI': 'Sutrumpinti tekstą su DI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Visas tekstas perkeliamas į pranešėjo pastabas — niekas neprarandama.',
+  'Korte samenvatting': 'Trumpa santrauka',
+  'Eén alinea die op één dia past.':
+      'Viena pastraipa, telpanti vienoje skaidrėje.',
+  'Kernpunten (max. 8)': 'Pagrindiniai punktai (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'Glaustas pagrindinių punktų sąrašas.',
+  'Genereer': 'Generuoti',
+  'Oorspronkelijke tekst': 'Pradinis tekstas',
   'niet leesbaar': 'neįskaitoma',
   'niet decodeerbaar': 'nedekoduojama',
   'model gaf niets bruikbaars terug': 'modelis negrąžino nieko naudingo',

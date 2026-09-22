@@ -1629,6 +1629,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Vat samen met AI…': 'Összefoglalás AI-val…',
+  'Tekst inkorten met AI': 'Szöveg rövidítése AI-val',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'A teljes szöveg a jegyzetekbe költözik — semmi sem vész el.',
+  'Korte samenvatting': 'Rövid összefoglaló',
+  'Eén alinea die op één dia past.': 'Egy bekezdés, ami elfér egy dián.',
+  'Kernpunten (max. 8)': 'Fő pontok (max. 8)',
+  'Een compacte lijst met de hoofdpunten.': 'Tömör lista a fő pontokról.',
+  'Genereer': 'Generálás',
+  'Oorspronkelijke tekst': 'Eredeti szöveg',
   'niet leesbaar': 'nem olvasható',
   'niet decodeerbaar': 'nem dekódolható',
   'model gaf niets bruikbaars terug':

@@ -664,6 +664,17 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Vat samen met AI…': 'Riassumi con l\'IA…',
+  'Tekst inkorten met AI': 'Accorcia il testo con l\'IA',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Il testo completo viene spostato nelle note del relatore — non si perde nulla.',
+  'Korte samenvatting': 'Breve riepilogo',
+  'Eén alinea die op één dia past.': 'Un paragrafo che sta in una diapositiva.',
+  'Kernpunten (max. 8)': 'Punti chiave (max. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'Un elenco compatto dei punti principali.',
+  'Genereer': 'Genera',
+  'Oorspronkelijke tekst': 'Testo originale',
   'niet leesbaar': 'non leggibile',
   'niet decodeerbaar': 'non decodificabile',
   'model gaf niets bruikbaars terug':

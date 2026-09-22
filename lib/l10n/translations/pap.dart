@@ -666,6 +666,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Vat samen met AI…': 'Resumí ku AI…',
+  'Tekst inkorten met AI': 'Kortá teksto ku AI',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'E teksto kompleto ta bai pa e notanan di e orador — no ta perde nada.',
+  'Korte samenvatting': 'Resumen kòrtiku',
+  'Eén alinea die op één dia past.': 'Un parát ku ta kabí riba un diapositiva.',
+  'Kernpunten (max. 8)': 'Puntonan esensial (maks. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'Un lista kompakto ku e puntonan prinsipal.',
+  'Genereer': 'Genera',
+  'Oorspronkelijke tekst': 'Teksto original',
   'niet leesbaar': 'no lesabel',
   'niet decodeerbaar': 'no dekodifikabel',
   'model gaf niets bruikbaars terug': 'e modelo no a devolvé nada usabel',

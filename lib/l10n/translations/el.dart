@@ -1652,6 +1652,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Vat samen met AI…': 'Σύνοψη με ΤΝ…',
+  'Tekst inkorten met AI': 'Σύντμηση κειμένου με ΤΝ',
+  'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
+      'Ολόκληρο το κείμενο μεταφέρεται στις σημειώσεις ομιλητή — τίποτα δεν χάνεται.',
+  'Korte samenvatting': 'Σύντομη περίληψη',
+  'Eén alinea die op één dia past.':
+      'Μία παράγραφος που χωρά σε μία διαφάνεια.',
+  'Kernpunten (max. 8)': 'Βασικά σημεία (μέχ. 8)',
+  'Een compacte lijst met de hoofdpunten.':
+      'Συνοπτική λίστα με τα κύρια σημεία.',
+  'Genereer': 'Δημιουργία',
+  'Oorspronkelijke tekst': 'Αρχικό κείμενο',
   'niet leesbaar': 'μη αναγνώσιμο',
   'niet decodeerbaar': 'μη αποκωδικοποιήσιμο',
   'model gaf niets bruikbaars terug':
