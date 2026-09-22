@@ -3822,18 +3822,17 @@ Themabrede contrastproblemen worden één keer voor het hele deck vermeld; dia-s
 problemen noemen het dianummer.
 
 Een te dichte opsommingsdia biedt een **Dia splitsen**-oplossing-met-één-klik (ook beschikbaar
-vanuit het menu van de diaminiatuur). Hij spreidt de opsommingen over zo veel gelijkgrote
-pagina's als nodig zodat geen pagina overvol blijft: een lijst die twee keer het leesbare optimum is
-splitst in twee, een langere in drie of meer, en een lijst waarvan de opsommingen nauwelijks
-passen (maar een paar op volledige grootte) in pagina's van alleen die paar. Paginaovergangen landen op
-groepskoppen, zodat hele **tussenkoppen**-groepen op een pagina bij elkaar blijven in plaats van
-doormidden gesneden te worden. Een **opsommingen + afbeelding**-dia splitsen houdt de afbeelding op
-elke vervolgpagina, zodat alle pagina's overeenkomen en één lettergrootte delen; omdat
-de tekstkolom naast de afbeelding smaller is, maakt de splitsing ook evenredig kleinere
-pagina's (bij 40% afbeeldingsbreedte ongeveer vijf opsommingen in plaats van acht),
-zodat de gedeelde lettergrootte groeit om de kolom te vullen in plaats van te worden
-vastgepind door een overvolle pagina. Wissel een
-vervolg naar een gewone opsommingspagina via de dia**type**kiezer als je dat liever hebt.
+vanuit het menu van de diaminiatuur). Hij vult elke pagina met zo veel opsommingen als op 80%
+van de ontwerpgrootte passen, tot aan de leesbare bovengrens voor het aantal opsommingen. Een
+lijst die twee keer het leesbare optimum is splitst in twee, een langere in drie of meer, en
+lange volzinnen leveren kortere pagina's op voordat ze de hele reeks klein kunnen trekken.
+Paginaovergangen landen op groepskoppen, zodat hele **tussenkoppen**-groepen op een pagina bij
+elkaar blijven in plaats van doormidden gesneden te worden. Bij het splitsen van een
+**opsommingen + afbeelding**-dia blijft de afbeelding op de eerste pagina; vervolgpagina's
+worden gewone opsommingsdia's op volle breedte. De eerste pagina houdt dus rekening met de
+smallere tekstkolom (bij 40% afbeeldingsbreedte hooguit ongeveer vijf opsommingen in plaats
+van acht), terwijl latere pagina's de vrijgekomen breedte benutten. Ze blijven één
+splitsreeks en delen één lettergrootte.
 Tweekolomsdia's spreiden beide kolommen over dezelfde set pagina's. Elke pagina van een
 splitsrun toont een kleine, gedimde **`pagina/totaal`**-teller naast zijn titel (`1/3`,
 `2/3`, `3/3`), zodat een luisteraar weet dat de lijst doorloopt en waar hij is; een
