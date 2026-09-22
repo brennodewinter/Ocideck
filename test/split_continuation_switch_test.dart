@@ -57,6 +57,26 @@ void main() {
         isFalse,
       );
     });
+
+    test('een bulletslide kan een bullets+afbeelding-slide voortzetten', () {
+      // Zo ziet een gesplitste split-slide er uit: beeld op de eerste pagina,
+      // gewone bulletslides als vervolg — die overgang vormt één reeks.
+      expect(
+        canContinueSplitFrom([
+          Slide.create(SlideType.bulletsImage).copyWith(imagePath: 'x.png'),
+          bullets(),
+        ], 1),
+        isTrue,
+      );
+      // Andersom niet: een split-slide begint een eigen deel met eigen beeld.
+      expect(
+        canContinueSplitFrom([
+          bullets(),
+          Slide.create(SlideType.bulletsImage),
+        ], 1),
+        isFalse,
+      );
+    });
   });
 
   testWidgets('bullets: de schakelaar zet en wist continuesSplit', (

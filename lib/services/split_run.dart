@@ -26,33 +26,42 @@ bool isSplitRunType(SlideType type) =>
     type == SlideType.twoBullets ||
     type == SlideType.bulletsImage;
 
+/// Of [next] de gesplitste lijst van [prev] kan voortzetten qua vorm: dezelfde
+/// lijststijl en hetzelfde type — of een gewone bulletslide ná een
+/// bullets+afbeelding-slide. "Splits slide" laat het beeld op de eerste pagina
+/// en maakt vervolgpagina's van het ruimere bullettype; die overgang hoort dus
+/// bij één run. De omgekeerde richting (bulletsImage ná bullets) is dat niet:
+/// zo'n pagina begint een eigen deel met eigen beeld.
+bool isSplitRunContinuation(Slide prev, Slide next) =>
+    next.listStyle == prev.listStyle &&
+    (next.type == prev.type ||
+        (prev.type == SlideType.bulletsImage &&
+            next.type == SlideType.bullets));
+
 /// Of de slide op [index] een voortzetting van zijn voorganger *kan* zijn: er is
-/// een vorige slide, en die vormt met deze een reeks (zelfde type, zelfde
-/// liststyle). Zegt niets over of de vlag aan staat — dit is de vraag of het
-/// aanbieden van die keuze zinnig is.
+/// een vorige slide, en die vormt met deze een reeks. Zegt niets over of de vlag
+/// aan staat — dit is de vraag of het aanbieden van die keuze zinnig is.
 ///
 /// Zelfde regel als [splitRunRange] gebruikt om een reeks af te bakenen, zodat
 /// de schakelaar in de editor niet iets anders belooft dan de opmaak doet.
 bool canContinueSplitFrom(List<Slide> slides, int index) {
   if (index <= 0 || index >= slides.length) return false;
   final slide = slides[index];
-  final previous = slides[index - 1];
   return isSplitRunType(slide.type) &&
-      previous.type == slide.type &&
-      previous.listStyle == slide.listStyle;
+      isSplitRunContinuation(slides[index - 1], slide);
 }
 
 /// De grenzen `(start, eind)` van de split-run waar de slide op [index] in zit,
 /// beide inclusief. Een slide die geen deel van een reeks is levert
 /// `(index, index)` — de aanroeper leest dat als "geen run".
 ///
-/// Een run is een maximale groep slides van hetzelfde type en dezelfde
-/// liststyle waarbij elke pagina ná de eerste [Slide.continuesSplit] draagt.
+/// Een run is een maximale groep slides van aansluitende vorm en dezelfde
+/// liststyle ([isSplitRunContinuation]) waarbij elke pagina ná de eerste
+/// [Slide.continuesSplit] draagt.
 (int, int) splitRunRange(List<Slide> slides, int index) {
   if (index < 0 || index >= slides.length) return (index, index);
   if (!isSplitRunType(slides[index].type)) return (index, index);
-  bool sameRun(Slide a, Slide b) =>
-      a.type == b.type && a.listStyle == b.listStyle;
+  bool sameRun(Slide a, Slide b) => isSplitRunContinuation(a, b);
 
   var start = index;
   while (start > 0 &&
@@ -219,9 +228,7 @@ SplitRunLayoutIndex buildSplitRunLayoutIndex(
     var end = start;
     while (end + 1 < slides.length) {
       final next = slides[end + 1];
-      if (!next.continuesSplit ||
-          next.type != slides[end].type ||
-          next.listStyle != slides[end].listStyle) {
+      if (!next.continuesSplit || !isSplitRunContinuation(slides[end], next)) {
         break;
       }
       end++;

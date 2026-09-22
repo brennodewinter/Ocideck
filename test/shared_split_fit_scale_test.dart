@@ -117,11 +117,15 @@ void main() {
     test(
       'a continuation whose type differs from its predecessor shares nothing',
       () {
-        // Wisselt de gebruiker de vervolgpagina naar een gewone bulletslide (geen
-        // afbeelding), dan verschillen de types en vormen ze geen gedeelde run.
+        // Wisselt de gebruiker de vervolgpagina naar een tweekoloms slide, dan
+        // past die vorm niet bij de voorganger en is er geen gedeelde run.
+        // (Bullets ná bullets+afbeelding is wél een run: zo ziet een gesplitste
+        // split-slide er uit — beeld op pagina één, tekst op volle breedte.)
         final slides = [
           bulletsImage(['a', 'b']),
-          bullets(['c', 'd'], continuesSplit: true),
+          Slide.create(
+            SlideType.twoBullets,
+          ).copyWith(bullets: ['c'], bullets2: ['d'], continuesSplit: true),
         ];
         expect(sharedSplitFitScale(slides, 1, profile, font), isNull);
       },

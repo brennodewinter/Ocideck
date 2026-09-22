@@ -1,7 +1,12 @@
+import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/bullet_pagination.dart';
+import '../services/rich_text_layout.dart' show logoSafeReserveEdges;
 import '../services/slide_layout_metrics.dart'
-    show bulletsImageTextColumnFraction;
+    show
+        bulletsImageTextColumnFraction,
+        bulletsPageFitsAtScale,
+        kReferenceSlideWidth;
 import '../services/slide_quality_analyzer.dart'
     show
         kChecklistBulletWarningCount,
@@ -83,21 +88,30 @@ int visibleContentBulletCount(Slide slide) =>
 bool hasBulletsForFontEnlargingSplit(Slide slide) =>
     visibleContentBulletCount(slide) >= 2 * kMinPageBullets;
 
-/// De pagina's waarin "Splits slide" [slide] verdeelt — pagina's van hooguit de
-/// leesbaarheidsdrempel (acht bullets, twaalf voor een checklist, zeven per
-/// kolom; naast een afbeelding naar rato van de smallere tekstkolom), met de
-/// rest op een laatste, kortere pagina. `null` als splitsen niet kan (geen
-/// bullettype, of te weinig bullets).
+/// De pagina's waarin "Splits slide" [slide] verdeelt. `null` als splitsen niet
+/// kan (geen bullettype, of te weinig bullets).
 ///
-/// De eerste pagina erft type/afbeelding en de continuesSplit-vlag van [slide]
-/// (want [Slide.duplicate] kopieert imagePath/-caption/-size); elke vervolgpagina
-/// is een continuation die de fontgrootte deelt.
+/// Eénkoloms-slides worden op hoogte gepakt: elke pagina vult tot de
+/// eerstvolgende bullet er op [kSplitPageTargetScale] niet meer bij past, met
+/// de leesbaarheidsdrempel als aantal-bovengrens (acht bullets, twaalf voor een
+/// checklist; de eerste pagina van een split-slide naar rato van zijn smallere
+/// tekstkolom). Zo vullen de pagina's de beschikbare ruimte in plaats van dat
+/// een vaste verdeling bij lange bullets de gedeelde run-schaal omlaag drukt.
+///
+/// De eerste pagina erft type/afbeelding en de continuesSplit-vlag van [slide].
+/// Elke vervolgpagina wordt een gewone bulletslide op volle breedte — de
+/// afbeelding herhalen zou op elke pagina ~40% van de tekstbreedte onbenut
+/// laten, precies de ruimteverspilling die splitsen moet wegnemen.
 ///
 /// Gedeeld door [DeckNotifier.splitSlide], de fix-alles-motor en de live-fix in
 /// de presenter, zodat "splitsen" overal exact hetzelfde doet. Het aantal
 /// bulletkolommen komt uit de registry naast de enum ([SlideTypeMeta.bulletColumns]),
 /// zodat een nieuw bullettype hier vanzelf splitsbaar wordt.
-List<Slide>? splitBulletSlidePages(Slide slide) {
+List<Slide>? splitBulletSlidePages(
+  Slide slide, {
+  required String font,
+  ThemeProfile? theme,
+}) {
   List<Slide> build(List<(List<String>, List<String>)> pages) => [
     for (var i = 0; i < pages.length; i++)
       (i == 0 ? slide : Slide.duplicate(slide)).copyWith(
@@ -119,18 +133,55 @@ List<Slide>? splitBulletSlidePages(Slide slide) {
       // Naast een afbeelding is de tekstkolom smal: hetzelfde aantal bullets
       // dat op volle breedte comfortabel leest, drukt daar de gedeelde
       // run-schaal omlaag en laat de deel-slides klein renderen (#1279).
-      // Schaal het paginadoel mee met de kolombreedte, zodat de splitsing
-      // pagina's oplevert die de vrijgekomen ruimte ook werkelijk vullen.
-      final size = slide.type == SlideType.bulletsImage
+      // Schaal het aantal-plafond van de eerste pagina mee met de kolombreedte.
+      final firstMax =
+          slide.type == SlideType.bulletsImage && slide.imagePath.isNotEmpty
           ? (base * bulletsImageTextColumnFraction(slide)).round().clamp(
               kMinPageBullets,
               base,
             )
           : base;
-      return build([
-        for (final p in splitBulletsIntoPages(slide.bullets, size))
-          (p, const <String>[]),
-      ]);
+      // De vervolgpagina in de vorm waarin hij straks rendert: een gewone
+      // bulletslide zonder beeld, op volle breedte. De paginering meet daar
+      // tegenaan zodat wat past ook echt past.
+      final continuationProto = _asContinuation(slide);
+      double vReserve(Slide pageSlide) {
+        if (theme == null || !pageSlide.showLogo) return 0;
+        final (top, bottom) = logoSafeReserveEdges(
+          kReferenceSlideWidth,
+          theme,
+          splitText: pageSlide.type == SlideType.bulletsImage,
+        );
+        return top + bottom;
+      }
+
+      var pages = packBulletsIntoPages(
+        slide.bullets,
+        maxBullets: (i) => i == 0 ? firstMax : base,
+        fits: (i, candidate) {
+          final pageSlide = i == 0 ? slide : continuationProto;
+          return bulletsPageFitsAtScale(
+            slide: pageSlide,
+            pageBullets: candidate,
+            scale: kSplitPageTargetScale,
+            font: font,
+            extraVReserve: vReserve(pageSlide),
+          );
+        },
+      );
+      // Paste alles al op één pagina, dan was splitsen een bewuste handeling
+      // ("In tweeën splitsen") en geen overloop: verdeel in twee helften.
+      if (pages.length < 2) {
+        pages = splitBulletsIntoPages(slide.bullets, slide.bullets.length);
+      }
+      return [
+        for (var i = 0; i < pages.length; i++)
+          (i == 0 ? slide : _asContinuation(Slide.duplicate(slide))).copyWith(
+            bullets: pages[i],
+            bullets2: const <String>[],
+            continuesSplit: i == 0 ? slide.continuesSplit : true,
+          ),
+      ];
     case BulletColumns.two:
       if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
       const perColumn = kTwoColumnBulletWarningCount ~/ 2;
@@ -139,6 +190,26 @@ List<Slide>? splitBulletSlidePages(Slide slide) {
       );
   }
 }
+
+/// [slide] als vervolgpagina van een splitsing: een gewone bulletslide op volle
+/// breedte. De afbeelding en alles wat daarop betrekking heeft (bijschrift,
+/// alt-tekst, callouts) blijft op de eerste pagina; het 'split'-klassetoken gaat
+/// mee weg zodat de pagina niet bij serialiseren weer als bullets+afbeelding
+/// terugleest.
+Slide _asContinuation(Slide slide) => slide.copyWith(
+  type: SlideType.bullets,
+  imagePath: '',
+  imagePath2: '',
+  imageCaption: '',
+  imageCaption2: '',
+  imageAltText: '',
+  imageAltText2: '',
+  callouts: const [],
+  cssClass: slide.cssClass
+      .split(' ')
+      .where((t) => t.isNotEmpty && t != SlideType.bulletsImage.marpClass)
+      .join(' '),
+);
 
 bool _isMultiSentence(String bullet) =>
     _splitSentences(_plainText(bullet)).length > 1;

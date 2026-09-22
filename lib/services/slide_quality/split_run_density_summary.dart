@@ -41,7 +41,7 @@ const Set<SlideQualityIssueKind> kLengthDrivenRunDensityKinds = {
 /// blijven ingrijpen.
 ///
 /// Samenvatten gebeurt alleen bij een echte split-run: een keten van
-/// [Slide.continuesSplit]-pagina's van hetzelfde type ([splitRunRange]). Los
+/// [Slide.continuesSplit]-pagina's van aansluitende vorm ([splitRunRange]). Los
 /// geschreven bullet-dia's die toevallig op elkaar volgen vormen geen run en
 /// blijven onaangeraakt. Eén losse treffer (bijvoorbeeld de volste pagina die
 /// zijn buren meetrekt) wordt niet samengevat — pas vanaf twee pagina's is het

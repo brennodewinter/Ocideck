@@ -374,6 +374,111 @@ double bulletsBlockHeight({
   return height;
 }
 
+/// De meetgeometrie van een éénkoloms bulletpagina op referentiebreedte:
+/// beschikbare breedte en hoogte plus de corpsmaten die de preview bij schaal
+/// 1.0 gebruikt.
+///
+/// Gedeeld door de fit-schalen ([bulletsSlideFitScale],
+/// [bulletsImageSlideFitScale]) én door de pagineringsmeting
+/// [bulletsPageFitsAtScale], zodat "Splits slide" zijn paginagrenzen legt tegen
+/// precies de maat waarmee de pagina's straks renderen.
+typedef BulletPageSpec = ({
+  double availW,
+  double availH,
+  double titleSize,
+  double subtitleSize,
+  double bulletSize,
+  double spacing,
+  double bulletGap,
+  double maxScale,
+});
+
+/// De spec voor [slide]'s éénkoloms-layout: de smalle tekstkolom naast een
+/// afbeelding voor [SlideType.bulletsImage], anders de gewone bulletslide-
+/// geometrie (inclusief de ruimte die een checklist-voortgangsbalk afneemt).
+///
+/// [extraVReserve] (bijv. een logostrook) is een fractie van
+/// [kReferenceSlideWidth] en schaalt daardoor mee zoals elke maat hier.
+BulletPageSpec bulletPageSpec(
+  Slide slide, {
+  double extraVReserve = 0,
+  bool includeChecklistProgress = true,
+}) {
+  final w = kReferenceSlideWidth;
+  final slideHeight = w * 9 / 16;
+  if (slide.type == SlideType.bulletsImage) {
+    final leftPad = w * 0.038;
+    final verticalPad = w * 0.042;
+    final imgFraction = (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40)
+        .clamp(0.1, 0.70);
+    final bulletSize = w * 0.031;
+    return (
+      availW: (w - w * imgFraction - leftPad * 2).clamp(w * 0.12, w),
+      availH: slideHeight - verticalPad * 2 - extraVReserve,
+      titleSize: w * 0.042,
+      subtitleSize: 0.0,
+      bulletSize: bulletSize,
+      spacing: verticalPad * 0.32,
+      bulletGap: w * 0.005,
+      maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
+    );
+  }
+  final pad = w * 0.07;
+  final vPad = w * 0.05;
+  final bulletSize = w * 0.026;
+  final availW = (w - pad * 2).clamp(w * 0.12, w);
+  final bullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
+  final showProgress =
+      includeChecklistProgress &&
+      slide.listStyle == ListStyle.checklist &&
+      slide.showChecklistProgress &&
+      bullets.isNotEmpty;
+  return (
+    availW: showProgress
+        ? (availW - w * 0.025 - w * 0.34).clamp(w * 0.12, availW)
+        : availW,
+    availH: (slideHeight - vPad * 2 - extraVReserve).clamp(1.0, slideHeight),
+    titleSize: w * 0.042,
+    subtitleSize: w * 0.030,
+    bulletSize: bulletSize,
+    spacing: pad * 0.5,
+    bulletGap: w * 0.006,
+    maxScale: bulletScaleCap(w, bulletSize, kSplitBulletsMaxScale),
+  );
+}
+
+/// Of een pagina met [pageBullets] in de layout van [slide] op [scale] nog
+/// binnen het beeldvlak past — één hoogtemeting tegen hetzelfde budget dat de
+/// fit-schaal hanteert, zonder diens bisectie. "Splits slide" gebruikt dit om
+/// te beslissen waar een paginagrens valt.
+bool bulletsPageFitsAtScale({
+  required Slide slide,
+  required List<String> pageBullets,
+  required double scale,
+  required String font,
+  double extraVReserve = 0,
+}) {
+  final spec = bulletPageSpec(slide, extraVReserve: extraVReserve);
+  return bulletsBlockHeight(
+        scale: scale,
+        availW: spec.availW,
+        hasTitle: slide.title.isNotEmpty,
+        title: slide.title,
+        bullets: pageBullets.where((b) => b.trimLeft().isNotEmpty).toList(),
+        titleSize: spec.titleSize,
+        bulletSize: spec.bulletSize,
+        spacing: spec.spacing,
+        bulletGap: spec.bulletGap,
+        font: font,
+        // De split-layout rendert geen subtitel in zijn tekstkolom; de gewone
+        // bulletslide wel. Spiegelt de twee fit-schalen hieronder.
+        subtitle: slide.type == SlideType.bulletsImage ? '' : slide.subtitle,
+        subtitleSize: spec.subtitleSize,
+        listStyle: slide.listStyle,
+      ) <=
+      spec.availH * 0.98;
+}
+
 /// Layout metrics for a standard bullets slide at [kReferenceSlideWidth].
 double bulletsSlideFitScale({
   required Slide slide,
@@ -381,49 +486,26 @@ double bulletsSlideFitScale({
   bool includeChecklistProgress = true,
   double extraVReserve = 0,
 }) {
-  final w = kReferenceSlideWidth;
-  final pad = w * 0.07;
-  final vPad = w * 0.05;
-  final titleSize = w * 0.042;
-  final subtitleSize = w * 0.030;
-  final bulletSize = w * 0.026;
-  final spacing = pad * 0.5;
-  final bulletGap = w * 0.006;
-  final bullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
-  final showProgress =
-      includeChecklistProgress &&
-      slide.listStyle == ListStyle.checklist &&
-      slide.showChecklistProgress &&
-      bullets.isNotEmpty;
-
-  final slideHeight = w * 9 / 16;
-  final availW = (w - pad * 2).clamp(w * 0.12, w);
-  final progressGap = w * 0.025;
-  final progressW = w * 0.34;
-  final textAvailW = showProgress
-      ? (availW - progressGap - progressW).clamp(w * 0.12, availW)
-      : availW;
-  // [extraVReserve] (e.g. a logo strip) is a fraction of [kReferenceSlideWidth],
-  // so it scales with the reference geometry like every other measure here.
-  final availH = (slideHeight - vPad * 2 - extraVReserve).clamp(
-    1.0,
-    slideHeight,
+  final spec = bulletPageSpec(
+    slide,
+    extraVReserve: extraVReserve,
+    includeChecklistProgress: includeChecklistProgress,
   );
-
+  final bullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
   return bulletsFitScale(
-    availW: textAvailW,
-    availH: availH,
+    availW: spec.availW,
+    availH: spec.availH,
     hasTitle: slide.title.isNotEmpty,
     title: slide.title,
     bullets: bullets,
-    titleSize: titleSize,
-    bulletSize: bulletSize,
-    spacing: spacing,
-    bulletGap: bulletGap,
+    titleSize: spec.titleSize,
+    bulletSize: spec.bulletSize,
+    spacing: spec.spacing,
+    bulletGap: spec.bulletGap,
     font: font,
     subtitle: slide.subtitle,
-    subtitleSize: subtitleSize,
-    maxScale: bulletScaleCap(w, bulletSize, kSplitBulletsMaxScale),
+    subtitleSize: spec.subtitleSize,
+    maxScale: spec.maxScale,
     listStyle: slide.listStyle,
   );
 }
@@ -726,35 +808,20 @@ double bulletsImageSlideFitScale({
   required String font,
   double extraVReserve = 0,
 }) {
-  final w = kReferenceSlideWidth;
-  final leftPad = w * 0.038;
-  final verticalPad = w * 0.042;
-  final gap = leftPad;
-  final imgFraction = (slide.imageSize > 0 ? slide.imageSize / 100.0 : 0.40)
-      .clamp(0.1, 0.70);
-  final imgWidth = w * imgFraction;
-  final bulletSize = w * 0.031;
-  final titleSize = w * 0.042;
-  final spacing = verticalPad * 0.32;
-  final bulletGap = w * 0.005;
+  final spec = bulletPageSpec(slide, extraVReserve: extraVReserve);
   final bullets = slide.bullets.where((b) => b.trimLeft().isNotEmpty).toList();
-
-  final slideHeight = w * 9 / 16;
-  final availW = (w - imgWidth - gap - leftPad).clamp(w * 0.12, w);
-  final availH = slideHeight - verticalPad * 2 - extraVReserve;
-
   return bulletsFitScale(
-    availW: availW,
-    availH: availH,
+    availW: spec.availW,
+    availH: spec.availH,
     hasTitle: slide.title.isNotEmpty,
     title: slide.title,
     bullets: bullets,
-    titleSize: titleSize,
-    bulletSize: bulletSize,
-    spacing: spacing,
-    bulletGap: bulletGap,
+    titleSize: spec.titleSize,
+    bulletSize: spec.bulletSize,
+    spacing: spec.spacing,
+    bulletGap: spec.bulletGap,
     font: font,
-    maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
+    maxScale: spec.maxScale,
     listStyle: slide.listStyle,
   );
 }
