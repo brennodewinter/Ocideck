@@ -191,6 +191,10 @@ List<Slide>? splitBulletSlidePages(
   }
 }
 
+/// [splitBulletSlidePages] met de lettertype- en logo-inpassing van [theme].
+List<Slide>? splitThemedBulletSlidePages(Slide slide, ThemeProfile theme) =>
+    splitBulletSlidePages(slide, font: theme.fontFamily, theme: theme);
+
 /// [slide] als vervolgpagina van een splitsing: een gewone bulletslide op volle
 /// breedte. De afbeelding en alles wat daarop betrekking heeft (bijschrift,
 /// alt-tekst, callouts) blijft op de eerste pagina; het 'split'-klassetoken gaat

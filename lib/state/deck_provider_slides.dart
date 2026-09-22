@@ -101,11 +101,8 @@ extension DeckNotifierSlides on DeckNotifier {
   void splitSlide(int index) {
     final deck = currentState.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
-    final pages = splitBulletSlidePages(
-      deck.slides[index],
-      font: deck.themeProfile.fontFamily,
-      theme: deck.themeProfile,
-    );
+    final slide = deck.slides[index];
+    final pages = splitThemedBulletSlidePages(slide, deck.themeProfile);
     if (pages == null) return;
     final slides = List<Slide>.from(deck.slides)
       ..removeAt(index)

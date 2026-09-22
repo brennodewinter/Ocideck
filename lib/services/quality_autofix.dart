@@ -233,7 +233,7 @@ List<Slide>? safeFixForSlide(
     (i) =>
         _splitClearableKinds.contains(i.kind) && _shouldSplitFor(slide, i.kind),
   )) {
-    return splitBulletSlidePages(slide, font: theme.fontFamily, theme: theme);
+    return splitThemedBulletSlidePages(slide, theme);
   }
   return null;
 }
@@ -265,11 +265,7 @@ Deck? _applyNextFix(Deck deck, SlideQualityAnalyzer analyzer) {
     final slide = _slideAt(deck, issue.slideIndex);
     if (slide == null) continue;
     if (!_shouldSplitFor(slide, issue.kind)) continue;
-    final pages = splitBulletSlidePages(
-      slide,
-      font: deck.themeProfile.fontFamily,
-      theme: deck.themeProfile,
-    );
+    final pages = splitThemedBulletSlidePages(slide, deck.themeProfile);
     if (pages == null) continue;
     return _replaceSlide(deck, issue.slideIndex, pages);
   }
