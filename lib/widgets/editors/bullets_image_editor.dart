@@ -8,6 +8,7 @@ import '../slides/image_crop_dialog.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
+import 'ai_condense_button.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
 import 'split_continuation_switch.dart';
@@ -397,17 +398,8 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         if (_listStyle == ListStyle.richText) ...[
           const SizedBox(height: 16),
           const SectionLabel('Tekst (links)'),
-          SizedBox(
-            height: 320,
-            child: MarkdownNotesEditor.legacy(
-              controller: _richText,
-              baseStyle: const TextStyle(fontSize: 14, height: 1.45),
-              linkColor: AppTheme.accentFg,
-              hintText: l10n.d('Tekst...'),
-              expand: true,
-              minLines: 8,
-            ),
-          ),
+          AiCondenseButton(slide: widget.slide),
+          _richTextField(),
         ] else ...[
           const SizedBox(height: 16),
           const SectionLabel('Bullets (links)'),
@@ -491,6 +483,23 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
           ),
         ],
       ],
+    );
+  }
+
+  /// Het vrije-tekstveld (listStyle richText). Aparte methode om `build`
+  /// binnen de lengtegrens te houden.
+  Widget _richTextField() {
+    final l10n = context.l10n;
+    return SizedBox(
+      height: 320,
+      child: MarkdownNotesEditor.legacy(
+        controller: _richText,
+        baseStyle: const TextStyle(fontSize: 14, height: 1.45),
+        linkColor: AppTheme.accentFg,
+        hintText: l10n.d('Tekst...'),
+        expand: true,
+        minLines: 8,
+      ),
     );
   }
 
