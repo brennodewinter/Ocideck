@@ -3,6 +3,7 @@
 // slot pixels, so the overlay stays aligned with the painted image
 // regardless of cover/zoom/focal.
 
+import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
 
@@ -17,6 +18,7 @@ import '../../../theme/app_theme.dart';
 import '../../../utils/bundled_asset.dart';
 import '../../../utils/image_limits.dart';
 import '../../../utils/project_path.dart';
+import 'retrying_image.dart';
 
 /// Creates an [ImageProvider] from an image path, mirroring the resolution
 /// logic in `_cropProvider` (image_crop_dialog.dart) without taking a
@@ -197,6 +199,8 @@ class CalloutOverlay extends StatefulWidget {
 class _CalloutOverlayState extends State<CalloutOverlay> {
   Size? _intrinsic;
   bool _resolving = false;
+  Timer? _resolveRetry;
+  int _resolveAttempts = 0;
 
   @override
   void initState() {
@@ -210,8 +214,17 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
     if (oldWidget.slide.imagePath != widget.slide.imagePath ||
         oldWidget.projectPath != widget.projectPath) {
       _intrinsic = null;
+      _resolveRetry?.cancel();
+      _resolveRetry = null;
+      _resolveAttempts = 0;
       _resolveIntrinsic();
     }
+  }
+
+  @override
+  void dispose() {
+    _resolveRetry?.cancel();
+    super.dispose();
   }
 
   /// Zoek de intrinsieke beeldmaat op. Staat het beeld al in de imagecache, dan
@@ -235,6 +248,16 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
     _resolving = true;
     resolveIntrinsicSize(provider, (size, synchronous) {
       _resolving = false;
+      if (size == null) {
+        // Een transiënte lees-/decodefout liet de markeringen voorheen
+        // definitief weg — de overlay tekent niets, dus niemand zag dat de
+        // callouts ontbraken terwijl het beeld zelf wél herstelde (#2162).
+        // Zelfde herstel als RetryingImage: opnieuw proberen tot de dia
+        // weggaat of de maat er is. De cachesleutel opruimen hoeft niet —
+        // CappedImage doet dat zelf bij een fout.
+        _scheduleResolveRetry();
+        return;
+      }
       if (synchronous) {
         // Nog binnen initState/didUpdateWidget: setState mag hier niet, en
         // hoeft ook niet — de build die hierop volgt ziet de maat al.
@@ -243,6 +266,20 @@ class _CalloutOverlayState extends State<CalloutOverlay> {
       }
       if (mounted) setState(() => _intrinsic = size);
     });
+  }
+
+  void _scheduleResolveRetry() {
+    if (!mounted) return;
+    _resolveRetry ??= Timer(
+      _resolveAttempts == 0
+          ? RetryingImage.firstRetry
+          : RetryingImage.retryInterval,
+      () {
+        _resolveRetry = null;
+        _resolveAttempts++;
+        _resolveIntrinsic();
+      },
+    );
   }
 
   @override
