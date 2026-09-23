@@ -126,6 +126,26 @@ Future<bool> saveDeckWithDestination(
     return false;
   }
 
+  // Marp-compatibiliteit vóór élke opslaanroute (ook terug-naar-herkomst):
+  // alleen harde fouten vragen om bevestiging. Aandachtspunten — geaccepteerd
+  // of niet — slaan zonder dialoog op, en bij een uitgeschakelde controle
+  // valt deze stap helemaal weg.
+  final compatDeck = deckNotifier.currentState.deck;
+  if (compatDeck != null &&
+      ref.read(settingsProvider).marpCompatChecksEnabled) {
+    final report = MarpCompatibility().check(
+      MarkdownService().generateDeck(compatDeck, inlineChartData: true),
+      context: supportsLocalProjectFolders && compatDeck.projectPath != null
+          ? MarpCompatContext.project
+          : MarpCompatContext.bareFile,
+    );
+    if (report.status == MarpCompatStatus.incompatible) {
+      if (!context.mounted) return false;
+      final proceed = await confirmMarpIncompatibleSave(context, report);
+      if (!proceed || !context.mounted) return false;
+    }
+  }
+
   // Waar het vandaan komt, gaat het naartoe terug. Een deck dat van WebDAV, S3
   // of git is geopend, hoort met de gewone opslaanknop niet ineens als lokaal
   // bestand te landen: dan staat de bewerkte versie op de laptop en blijft de
