@@ -183,7 +183,7 @@ jobs:
       # `haal`: zie de toelichting bij de gitleaks-stap hierboven.
       - name: trufflehog volgens de pin
         env:
-          TRUFFLEHOG_VERSION: 3.97.6
+          TRUFFLEHOG_VERSION: 3.97.7
         run: |
           set -euo pipefail
           haal() {

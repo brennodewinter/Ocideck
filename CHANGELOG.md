@@ -216,6 +216,21 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.10] — 2026-09-23
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- chore(ios): CocoaPods-integratie verwijderd, SPM is de enige route (#2174)
+- chore(macos): CocoaPods-integratie verwijderd, SPM is de enige route (#2171)
+
+### Fixed
+
+- fix(presentatie): beamer respecteert de logo-opt-out van een dia (#2173)
+- fix(docs): kleur taaklijst-vinkjes met de gekozen documentstijl (#2170)
+- fix(presentatie): mic-doorvoer vindbaar én herstelbaar (#2167)
+- fix(docs): maak checklist-markdown bruikbaar in de documenteditor (#2168)
+
 ## [0.6.9] — 2026-09-22
 
 ### Added
