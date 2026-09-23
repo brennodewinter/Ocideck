@@ -57,6 +57,51 @@ void main() {
     );
   });
 
+  testWidgets('documenttijdlijn draagt de gekozen LibreKAT-stijl', (
+    tester,
+  ) async {
+    const size = Size(760, 720);
+    tester.view.physicalSize = size;
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    final baseTheme = AppTheme.fromProfile(AppAppearanceProfile.basic);
+    await tester.pumpWidget(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: baseTheme,
+        home: Scaffold(
+          backgroundColor: AppTheme.slate100,
+          body: RepaintBoundary(
+            key: _surfaceKey,
+            child: ColoredBox(
+              color: AppTheme.slate100,
+              child: const Padding(
+                padding: EdgeInsets.all(28),
+                child: DocumentMarkdownView(
+                  '''<!-- timeline -->
+| Datum | Gebeurtenis | Status |
+| --- | --- | --- |
+| 2026-09-21 | Verdacht verkeer ontdekt tijdens de dagelijkse controle | Onderzoek gestart |
+| 2026-09-22T07:15:00.000Z | Analyse bevestigt misbruik van een beheerdersaccount | Bevestigd |
+| 2026-09-23 | Onafhankelijke nacontrole toont geen nieuwe afwijkingen | Afgerond |''',
+                  themeProfile: ThemeProfile.libreKat,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 50));
+
+    await expectLater(
+      find.byKey(_surfaceKey),
+      matchesGoldenFile('goldens/document_timeline_librekat.png'),
+    );
+  });
+
   testWidgets('rail op een tijdlijnvervolgpagina', (tester) async {
     const size = Size(620, 760);
     tester.view.physicalSize = size;

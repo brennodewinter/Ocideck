@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/services/document_export_service.dart';
+import 'package:ocideck/services/document_timeline.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/document_deck_bridge.dart';
 import 'package:ocideck/services/latex/markdown_to_latex.dart';
@@ -62,8 +63,17 @@ void main() {
       );
       expect(html, contains("list.className='ocideck-timeline'"));
       expect(html, contains("timeLabel.className='ocideck-timeline-label'"));
+      expect(html, contains('function ocideckTimelineMoment(value)'));
+      expect(html, contains('timeValue.textContent=localMoment'));
       expect(html, contains("eventLabel.className='ocideck-timeline-label'"));
       expect(html, contains('ocideck-timeline-card::before'));
+      expect(html, contains('ocideck-timeline-card::after'));
+      expect(
+        html,
+        contains(
+          'background:linear-gradient(90deg,color-mix(in srgb,var(--ocideck-accent',
+        ),
+      );
       expect(
         html,
         contains(
@@ -91,6 +101,19 @@ void main() {
       expect(latex, contains('Feit $index'));
       expect(latex, contains('Bron: Bron $index'));
     }
+  });
+
+  test('LaTeX projecteert UTC-tijdstippen met de lokale offset', () {
+    const instant = '2026-09-23T12:30:00.000Z';
+    const source = '''<!-- timeline -->
+| Datum | Gebeurtenis |
+| --- | --- |
+| $instant | Start |''';
+
+    final latex = markdownToLatex(source);
+
+    expect(latex, contains(formatDocumentTimelineMarker(instant)));
+    expect(latex, isNot(contains(instant)));
   });
 
   group('OciWacht houdt marker en tabel atomair per tekstexport', () {

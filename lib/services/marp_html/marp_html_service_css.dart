@@ -79,16 +79,17 @@ html,body{margin:0;padding:0}
 .document pre.mermaid{background:transparent;border:0;text-align:center}
 .document table{border-collapse:collapse;width:100%}
 .document .ocideck-timeline{list-style:none;margin:1.2em 0 1.8em;padding:0}
-.document .ocideck-timeline li{display:grid;grid-template-columns:7.25rem 1fr;gap:1rem;position:relative;break-inside:avoid;page-break-inside:avoid;padding-bottom:.9rem}
-.document .ocideck-timeline li::before{content:"";position:absolute;left:6.55rem;top:1.05rem;bottom:-.2rem;width:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 24%,transparent)}
+.document .ocideck-timeline li{display:grid;grid-template-columns:8rem 1fr;gap:1rem;position:relative;break-inside:avoid;page-break-inside:avoid;padding-bottom:.9rem}
+.document .ocideck-timeline li::before{content:"";position:absolute;left:7.3rem;top:1.05rem;bottom:-.2rem;width:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 28%,transparent)}
 .document .ocideck-timeline li:last-child::before{bottom:calc(100% - 1.1rem)}
-.document .ocideck-timeline li::after{content:"";position:absolute;left:6.22rem;top:.75rem;width:.7rem;height:.7rem;border-radius:50%;background:#fff;border:3px solid var(--ocideck-accent,#2563eb);box-shadow:0 0 0 4px color-mix(in srgb,var(--ocideck-accent,#2563eb) 12%,transparent)}
+.document .ocideck-timeline li::after{content:"";position:absolute;left:6.93rem;top:.72rem;width:.78rem;height:.78rem;border-radius:50%;background:radial-gradient(circle,var(--ocideck-accent,#2563eb) 0 22%,#fff 24% 100%);border:3px solid var(--ocideck-accent,#2563eb);box-shadow:0 0 0 5px color-mix(in srgb,var(--ocideck-accent,#2563eb) 13%,transparent)}
 .document .ocideck-timeline-time{position:relative;text-align:right;padding-right:1rem;font-size:.78em;font-weight:700;color:var(--ocideck-accent,#2563eb);font-variant-numeric:tabular-nums}
 .document .ocideck-timeline li:last-child .ocideck-timeline-time::after{content:"";position:absolute;right:.3rem;top:1.65rem;width:.75rem;height:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 24%,transparent)}
 .document .ocideck-timeline-label{font-size:.74em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ocideck-accent,#2563eb)}
-.document .ocideck-timeline-card{position:relative;border:1px solid rgba(100,116,139,.25);border-radius:.7rem;padding:.8rem 1rem;background:rgba(148,163,184,.045);box-shadow:0 4px 14px rgba(15,23,42,.05)}
-.document .ocideck-timeline-card::before{content:"";position:absolute;left:-1.8rem;top:1.05rem;width:1.8rem;height:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 24%,transparent)}
-.document .ocideck-timeline-meta{display:inline-block;margin-top:.55rem;padding:.18rem .55rem;border:1px solid rgba(100,116,139,.22);border-radius:999px;font-size:.72em;background:rgba(148,163,184,.09)}
+.document .ocideck-timeline-card{position:relative;border:1px solid color-mix(in srgb,var(--ocideck-accent,#2563eb) 20%,rgba(100,116,139,.25));border-radius:.7rem;padding:.8rem 1rem .8rem 1.2rem;background:linear-gradient(90deg,color-mix(in srgb,var(--ocideck-accent,#2563eb) 7.5%,#fff),color-mix(in srgb,var(--ocideck-accent,#2563eb) 1.8%,#fff));box-shadow:0 5px 18px color-mix(in srgb,var(--ocideck-accent,#2563eb) 7%,transparent)}
+.document .ocideck-timeline-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:.22rem;background:var(--ocideck-accent,#2563eb)}
+.document .ocideck-timeline-card::after{content:"";position:absolute;left:-1.8rem;top:1.05rem;width:1.8rem;height:2px;background:color-mix(in srgb,var(--ocideck-accent,#2563eb) 28%,transparent)}
+.document .ocideck-timeline-meta{display:inline-block;margin-top:.55rem;padding:.22rem .62rem;border:1px solid color-mix(in srgb,var(--ocideck-accent,#2563eb) 24%,transparent);border-radius:999px;font-size:.72em;background:linear-gradient(90deg,color-mix(in srgb,var(--ocideck-accent,#2563eb) 13%,transparent),color-mix(in srgb,var(--ocideck-accent,#2563eb) 6.5%,transparent))}
 .document hr{border:0;border-top:1px solid rgba(100,116,139,.35);margin:1.6em 0}
 /* Voetnoten: kleiner dan de tekst en met een korte lijn erboven — een noot is
    een terzijde, en zo laat papier dat al eeuwen zien. Achteraan, want een
