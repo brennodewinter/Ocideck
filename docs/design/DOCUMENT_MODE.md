@@ -740,9 +740,11 @@ already the behaviour and the minimal one:
   the `resolveContainedRealPath` containment guard, sidecar machinery.
 - **Web parity stays deliberately weaker** (save = `.md` download only; no
   sidecars/assets). The honesty must **land in-interface, not only here**: a
-  warning at *insert time* (a chart/image into an unsaved-on-web document) and
-  again at *web export*, so a user never silently ships an `.md` that references
-  `images/`/`data/` files the download does not contain (guardian finding).
+  warning at *insert time* (a chart/image into an unsaved-on-web document —
+  covered by the web-asset lifecycle warning above) and again at *web export* —
+  landed: a `.md`/`.tex` export on web whose body references `images/`,
+  `data/` or `mem:` files asks before shipping, so a user never silently
+  sends a download with dead references (guardian finding).
 - `RecentFile.kind` carries document|presentation so the recent list shows the
   right icon/label (done); no on-disk `kind:` marker — recognition stays the
   *absence* of `marp: true` (red line §2).

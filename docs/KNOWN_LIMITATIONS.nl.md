@@ -100,12 +100,15 @@ hem. *(Toegevoegd 2026-09-02.)*
 
 ## Een document exporteren komt in de webversie als download, niet als opgeslagen bestand
 
-Alle zes formaten exporteren in de browser, maar je kunt ze geen map aanwijzen: de
+Elk formaat exporteert in de browser, maar je kunt het geen map aanwijzen: de
 bestandskiezer in de browser wil de bytes vooraf in plaats van een opslagplek, dus de
 klaargemaakte bytes worden als gewone download aan de browser gegeven en belanden waar
-je browser downloads neerzet. Let op de PDF — in de webversie is er geen verborgen
-renderer voor Mermaid-diagrammen en formules, dus die drukken hun bron af in plaats van
-getekend te worden (de regel hieronder).
+je browser downloads neerzet. Een .md- of .tex-export houdt verwijzingen naar
+afbeeldingen en grafiekdata in plaats van ze in te sluiten — die bestanden reizen niet
+mee in een losse download, dus de export vraagt het voordat hij er een verstuurt; HTML,
+PDF en DOCX sluiten alles in het ene bestand in. Let op de PDF — in de webversie is er
+geen verborgen renderer voor Mermaid-diagrammen en formules, dus die drukken hun bron
+af in plaats van getekend te worden (de regel hieronder).
 
 *(Toegevoegd 2026-08-20 als "een document exporteren werkt niet in de webversie" — toen
 meldde de export dat het niet gelukt was en liet hij het document ongemoeid. Gecorrigeerd
