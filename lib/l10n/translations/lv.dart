@@ -1625,6 +1625,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Attēli un diagrammu dati netiek iekļauti',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Šis dokuments atsaucas uz attēliem vai diagrammu datiem atsevišķos failos. Tīra .md vai .tex lejupielāde satur tikai tekstu — atsauces saņēmējam ir mirušas. Izvēlieties HTML, PDF vai DOCX, lai visu piegādātu vienā failā, vai turpiniet, ja svarīgs ir tikai teksts.',
   'Microfoon-doorvoer aan': 'Mikrofona monitorings ieslēgts',
   'Microfoon-doorvoer uit': 'Mikrofona monitorings izslēgts',
   'Microfoon-doorvoer aan (V)': 'Mikrofona monitorings ieslēgts (V)',

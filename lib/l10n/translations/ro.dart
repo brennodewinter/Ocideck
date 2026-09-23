@@ -1643,6 +1643,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Imaginile și datele graficelor nu sunt incluse',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Acest document trimite la imagini sau date de grafice din fișiere separate. O descărcare .md sau .tex goală conține doar textul — referințele sunt moarte pentru destinatar. Alegeți HTML, PDF sau DOCX pentru a livra totul într-un singur fișier, sau continuați dacă contează doar textul.',
   'Microfoon-doorvoer aan': 'Monitorizarea microfonului activată',
   'Microfoon-doorvoer uit': 'Monitorizarea microfonului dezactivată',
   'Microfoon-doorvoer aan (V)': 'Monitorizarea microfonului activată (V)',

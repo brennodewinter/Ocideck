@@ -1627,6 +1627,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Billeder og diagramdata følger ikke med',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Dette dokument henviser til billeder eller diagramdata i separate filer. En ren .md- eller .tex-download indeholder kun teksten — referencerne er døde for modtageren. Vælg HTML, PDF eller DOCX for at levere alt i én fil, eller fortsæt, hvis kun teksten betyder noget.',
   'Microfoon-doorvoer aan': 'Mikrofon-monitorering slået til',
   'Microfoon-doorvoer uit': 'Mikrofon-monitorering slået fra',
   'Microfoon-doorvoer aan (V)': 'Mikrofon-monitorering slået til (V)',

@@ -664,6 +664,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Las imágenes y los datos de los gráficos no se incluyen',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Este documento hace referencia a imágenes o datos de gráficos en archivos separados. Una descarga .md o .tex simple contiene solo el texto — las referencias quedan muertas para el destinatario. Elija HTML, PDF o DOCX para entregar todo en un solo archivo, o continúe si solo importa el texto.',
   'Microfoon-doorvoer aan': 'Monitorización de micrófono activada',
   'Microfoon-doorvoer uit': 'Monitorización de micrófono desactivada',
   'Microfoon-doorvoer aan (V)': 'Monitorización de micrófono activada (V)',

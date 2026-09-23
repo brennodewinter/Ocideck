@@ -1628,6 +1628,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Obrázky a data grafů se nepřenášejí',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Tento dokument odkazuje na obrázky nebo data grafů v samostatných souborech. Pouhé stažení .md nebo .tex obsahuje jen text — odkazy jsou pro příjemce mrtvé. Zvolte HTML, PDF nebo DOCX, abyste vše dodali v jednom souboru, nebo pokračujte, pokud jde jen o text.',
   'Microfoon-doorvoer aan': 'Odposlech mikrofonu zapnutý',
   'Microfoon-doorvoer uit': 'Odposlech mikrofonu vypnutý',
   'Microfoon-doorvoer aan (V)': 'Odposlech mikrofonu zapnutý (V)',

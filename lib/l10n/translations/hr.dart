@@ -1631,6 +1631,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Slike i podaci grafikona ne idu uz datoteku',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Ovaj dokument upućuje na slike ili podatke grafikona u zasebnim datotekama. Golo preuzimanje .md ili .tex sadrži samo tekst — reference su za primatelja mrtve. Odaberite HTML, PDF ili DOCX da sve isporučite u jednoj datoteci, ili nastavite ako je važan samo tekst.',
   'Microfoon-doorvoer aan': 'Propuštanje mikrofona uključeno',
   'Microfoon-doorvoer uit': 'Propuštanje mikrofona isključeno',
   'Microfoon-doorvoer aan (V)': 'Propuštanje mikrofona uključeno (V)',

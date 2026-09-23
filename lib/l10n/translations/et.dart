@@ -1620,6 +1620,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Pildid ja diagrammiandmed ei kaasa',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'See dokument viitab piltidele või diagrammiandmetele eraldi failides. Paljas .md- või .tex-allalaadimine sisaldab ainult teksti — viited on adressaadi jaoks surnud. Valige HTML, PDF või DOCX, et kõik ühes failis edastada, või jätkake, kui loeb ainult tekst.',
   'Microfoon-doorvoer aan': 'Mikrofoni läbilask sisse lülitatud',
   'Microfoon-doorvoer uit': 'Mikrofoni läbilask välja lülitatud',
   'Microfoon-doorvoer aan (V)': 'Mikrofoni läbilask sisse lülitatud (V)',

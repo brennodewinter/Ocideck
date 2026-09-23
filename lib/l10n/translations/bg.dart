@@ -1647,6 +1647,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Изображенията и данните на диаграмите не се включват',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Този документ препраща към изображения или данни на диаграми в отделни файлове. Чистото изтегляне .md или .tex съдържа само текста — за получателя препратките са мъртви. Изберете HTML, PDF или DOCX, за да доставите всичко в един файл, или продължете, ако е важен само текстът.',
   'Microfoon-doorvoer aan': 'Мониторингът на микрофона е включен',
   'Microfoon-doorvoer uit': 'Мониторингът на микрофона е изключен',
   'Microfoon-doorvoer aan (V)': 'Мониторингът на микрофона е включен (V)',

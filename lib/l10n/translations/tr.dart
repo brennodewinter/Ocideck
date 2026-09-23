@@ -2538,6 +2538,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Görüntüler ve grafik verileri dahil edilmez',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Bu belge, ayrı dosyalardaki görüntülere veya grafik verilerine atıfta bulunur. Sade bir .md veya .tex indirmesi yalnızca metni içerir — atıflar alıcı için ölüdür. Her şeyi tek dosyada sunmak için HTML, PDF veya DOCX seçin ya da yalnızca metin önemliyse devam edin.',
   'Microfoon-doorvoer aan': 'Mikrofon geçişi açık',
   'Microfoon-doorvoer uit': 'Mikrofon geçişi kapalı',
   'Microfoon-doorvoer aan (V)': 'Mikrofon geçişi açık (V)',

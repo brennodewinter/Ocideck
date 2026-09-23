@@ -1642,6 +1642,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Imagines et data chartarum non adferuntur',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Hoc documentum ad imagines vel data chartarum in fasciculis separatis refert. Deductio .md vel .tex mera solum textum continet — relationes recipienti mortuae sunt. Elige HTML, PDF vel DOCX ut omnia in uno fasciculo tradas, aut perge si solus textus refert.',
   'Microfoon-doorvoer aan': 'Microphoni transmissio activa',
   'Microfoon-doorvoer uit': 'Microphoni transmissio inactiva',
   'Microfoon-doorvoer aan (V)': 'Microphoni transmissio activa (V)',

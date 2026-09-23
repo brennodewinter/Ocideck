@@ -1630,6 +1630,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Bilder und Grafikdate gahnd nöd mit',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Das Dokument verwyset uf Bilder oder Grafikdate in separaten Dateie. E blöße .md- oder .tex-Download hät nur de Teggst — d Verwys sind für de Empfänger tot. Wähl HTML, PDF oder DOCX, zum alles in ere Datei z liefern, oder fahr fort, wenn nume de Teggst zählt.',
   'Microfoon-doorvoer aan': 'Mikrofon-Durchleitig aa',
   'Microfoon-doorvoer uit': 'Mikrofon-Durchleitig ab',
   'Microfoon-doorvoer aan (V)': 'Mikrofon-Durchleitig aa (V)',

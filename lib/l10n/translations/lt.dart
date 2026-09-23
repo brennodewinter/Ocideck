@@ -1634,6 +1634,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Vaizdai ir diagramų duomenys nepridedami',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Šis dokumentas nurodo į vaizdus arba diagramų duomenis atskiruose failuose. Paprastas .md arba .tex atsisiuntimas turi tik tekstą — nuorodos gavėjui negyvos. Pasirinkite HTML, PDF arba DOCX, kad viską pristatytumėte viename faile, arba tęskite, jei svarbus tik tekstas.',
   'Microfoon-doorvoer aan': 'Mikrofono perdavimas įjungtas',
   'Microfoon-doorvoer uit': 'Mikrofono perdavimas išjungtas',
   'Microfoon-doorvoer aan (V)': 'Mikrofono perdavimas įjungtas (V)',
