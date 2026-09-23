@@ -99,6 +99,7 @@ List<String> ownedFrontMatterLines(
     out.add('ocideck_show_rehearsal_summary: true');
   }
   if (deck.playOnly) out.add('ocideck_play_only: true');
+  if (deck.marpCompatAccepted) out.add('$kMarpCompatAcceptedKey: true');
   if (deck.improvementFramework.isNotEmpty) {
     out.add(
       'ocideck_improvement_framework: '

@@ -94,6 +94,7 @@ const Set<String> kOwnedFrontMatterKeys = {
   'ocideck_target_seconds',
   'ocideck_show_rehearsal_summary',
   'ocideck_play_only',
+  kMarpCompatAcceptedKey,
   'ocideck_improvement_framework',
   'ocideck_improvement_y01',
   'ocideck_improvement_y01_unit',

@@ -449,6 +449,52 @@ ocideck_marp_compat_accepted: true
     });
   });
 
+  group('vlag round-trip', () {
+    test('geaccepteerd deck schrijft en leest de sleutel terug', () {
+      final service = MarkdownService();
+      final deck = Deck(
+        title: 'Demo',
+        marpCompatAccepted: true,
+        slides: [Slide.create(SlideType.title)],
+      );
+      final markdown = service.generateDeck(deck);
+      expect(markdown, contains('ocideck_marp_compat_accepted: true'));
+
+      final parsed = service.parseDeck(markdown);
+      expect(parsed?.marpCompatAccepted, isTrue);
+
+      // En de checker leest dezelfde vlag uit de tekst.
+      expect(checker.check(markdown).accepted, isTrue);
+    });
+
+    test('niet-geaccepteerd deck schrijft de sleutel niet', () {
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(markdown, isNot(contains('ocideck_marp_compat_accepted')));
+    });
+
+    test('een handgeschreven bestand zonder sleutel is niet geaccepteerd', () {
+      final parsed = MarkdownService().parseDeck(cleanDeck);
+      expect(parsed?.marpCompatAccepted, isFalse);
+    });
+
+    test('open → save → open houdt de vlag', () {
+      final service = MarkdownService();
+      const md = '''
+---
+marp: true
+ocideck_marp_compat_accepted: true
+---
+
+# Dia
+''';
+      final once = service.parseDeck(md);
+      final twice = service.parseDeck(service.generateDeck(once!));
+      expect(twice?.marpCompatAccepted, isTrue);
+    });
+  });
+
   group('findings-kwaliteit', () {
     test('elke bevinding heeft een regelnummer voor jump-to-line', () {
       const md = '''
