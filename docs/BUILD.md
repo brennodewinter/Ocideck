@@ -28,7 +28,7 @@ How to build OciDeck from source and produce distributable apps.
   In short: *build* with 3.44 or newer if you must, but *pass the gate* with
   3.47.5. The two are different requirements and only the second is enforced.
 - A desktop toolchain for your target:
-  - **macOS**: Xcode + CocoaPods.
+  - **macOS**: Xcode.
   - **Windows**: Visual Studio with the "Desktop development with C++" workload.
   - **Linux**: see Flutter's Linux desktop prerequisites (GTK, clang, ninja, etc.).
 - Enable the desktop target once if needed, e.g. `flutter config --enable-macos-desktop`.
@@ -336,67 +336,14 @@ release](#cutting-a-release)). Artifacts land under `build/<platform>/`.
 
 ### macOS notes
 
-- **Swift Package Manager is enabled** for this project (since #1733); it is
-  Flutter's default and `pubspec.yaml` no longer turns it off. The vendored
-  `desktop_multi_window` fork is based on upstream 0.3.1 and includes its
-  SwiftPM layout, so every current macOS plugin can be resolved as a Swift
-  package. The CocoaPods project remains for now because `macos/Podfile` has
-  project-specific fallback-build corrections; removing that integration is a
-  separate migration, not part of plugin adoption.
-- **The remaining `Podfile` corrections are fallback-only.** SwiftPM targets
-  are not modified by CocoaPods' `post_install` hook. If the CocoaPods
-  integration is removed later, remove these corrections and their
-  documentation in the same change.
-- **The `DartCvMacOS` link is silenced on purpose when CocoaPods supplies that
-  target.** That pod (pulled in by
-  `dartcv4`) vendors OpenCV as a quarter-gigabyte prebuilt universal
-  `libopencv.a`. Most of its x86_64 half is Intel IPP object code assembled
-  without a platform load command, and the pod adds a second `-lc++` on top of
-  the one the toolchain already links, so linking that single target used to
-  emit over ten thousand lines of `ld: warning: no platform load command found
-  in '…libopencv.a[x86_64][…]', assuming: macOS` plus `ld: warning: ignoring
-  duplicate libraries: '-lc++'`. None of it is our code and none of it is
-  fixable from here, so the `post_install` hook in `macos/Podfile` gives *only*
-  the `DartCvMacOS` target `OTHER_LDFLAGS = -Wl,-w` (silences that target's
-  linker) plus `GCC_WARN_INHIBIT_ALL_WARNINGS`, which also drops the
-  `-Wshorten-64-to-32` warnings from the pod's own `dartcv/core/mat.cpp` — the
-  same treatment `video_player_avfoundation` already gets. Every other target,
-  `Runner` first among them, still reports its warnings in full. If you ever need
-  to inspect that pod's own build, drop the settings temporarily rather than
-  widening them to the project.
-- **The Metal toolchain path is stripped from the generated xcconfigs.**
-  Since Xcode 26 the Metal shader compiler ships as a separately downloaded
-  toolchain cryptex, and while that is loaded `TOOLCHAIN_DIR` resolves to the
-  cryptex instead of `XcodeDefault.xctoolchain`. It holds only shader tools
-  (`metal`, `metallib`, `air-*` under `usr/bin`) and no `usr/lib`, so the Swift
-  runtime search path that CocoaPods and Flutter's podhelper hang off it does
-  not exist. Every build printed `ld: warning: search path
-  '…/Metal.xctoolchain/usr/lib/swift/macosx' not found`, and the same path also
-  sat in `LD_RUNPATH_SEARCH_PATHS`, which baked a dead `LC_RPATH` — cryptex
-  asset id and all — into the built app. The `post_install` hook in
-  `macos/Podfile` removes that entry from the `LIBRARY_SEARCH_PATHS` and
-  `LD_RUNPATH_SEARCH_PATHS` lines of every generated `.xcconfig`, in both the
-  `${…}` and `$(…)` spellings — `Pods-Runner.debug.xcconfig` carries both on one
-  line. Nothing in the bundle links `@rpath/libswift*`, `/usr/lib/swift` stays on
-  both lines, and Xcode's own defaults still supply the SDK's Swift directory —
-  Debug and Release both link clean with the entry gone. Redirecting to
-  `DT_TOOLCHAIN_DIR` looks tidier but Xcode rejects it
-  outright (`error: DT_TOOLCHAIN_DIR cannot be used to evaluate
-  LD_RUNPATH_SEARCH_PATHS, use TOOLCHAIN_DIR instead`). The hook prints how many
-  files it touched, so a zero is visible the day CocoaPods writes those lines
-  differently. `SWIFT_STDLIB_PATH` in `Pods-Runner-frameworks.sh` keeps the old
-  spelling and is left alone: it sits behind an `XCODE_VERSION_MAJOR -lt 7`
-  guard and never runs.
-- **CocoaPods + Ruby locale**: on some setups `pod install` (run by
-  `flutter build macos`) fails with `Encoding::CompatibilityError` /
-  "Unicode Normalization not appropriate for ASCII-8BIT". This is a Ruby/CocoaPods
-  locale issue, not a project problem. Fix it by forcing a UTF-8 locale:
-
-  ```sh
-  export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
-  flutter build macos --release
-  ```
-
+- **Swift Package Manager is the only plugin integration** for this project
+  (SPM since #1733); it is Flutter's default and `pubspec.yaml` no longer turns
+  it off. The vendored `desktop_multi_window` fork is based on upstream 0.3.1
+  and includes its SwiftPM layout, so every current macOS plugin resolves as a
+  Swift package. There is no CocoaPods integration: `macos/Podfile`, the `Pods`
+  project and the `post_install` corrections it carried (the `DartCvMacOS`
+  linker silencing and the Metal-toolchain search-path strip) are gone —
+  `pod install` is no longer part of a macOS build.
 - **Distribution**: a `.app` that opens on *other* Macs without a Gatekeeper
   warning must be Developer-ID-signed and notarised. That whole chain is
   automated — run `make notarize-macos`. See [Signing and notarising the macOS
