@@ -201,4 +201,114 @@ void main() {
     expect(styles.h1!.style.color, scheme.onSurface);
     expect(styles.h2!.style.color, scheme.primary);
   });
+
+  // Het taaklijst-vinkje kleurde uit de ambient colorScheme (het app-thema),
+  // niet uit de gekozen documentstijl — op een profiel met eigen
+  // checklistkleuren viel het vinkje uit de toon. De builder hoort dezelfde
+  // profielkleuren te gebruiken als `_checkMarker` in de lezer.
+  testWidgets('taaklijst-vinkjes volgen de checklistkleuren van het profiel', (
+    tester,
+  ) async {
+    const scheme = ColorScheme.light();
+    const profile = ThemeProfile.vigilis;
+    final editorTheme = MarkdownEditorTheme.documentSurface(
+      scheme: scheme,
+      profile: profile,
+      fontFamily: profile.fontFamily,
+    );
+    final controller = QuillController(
+      document: MarkdownQuillCodec.documentFromMarkdown('- [x] af\n- [ ] open'),
+      selection: const TextSelection.collapsed(offset: 0),
+    );
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+          FlutterQuillLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: SizedBox(
+            width: 600,
+            height: 400,
+            child: WysiwygNotesField(
+              controller: controller,
+              scrollController: ScrollController(),
+              focusNode: FocusNode(),
+              editorTheme: editorTheme,
+              hintText: '',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    final checked = tester.widget<Icon>(find.byIcon(Icons.check_box_outlined));
+    expect(
+      checked.color,
+      const Color(0xFF15803D),
+      reason: 'afgevinkt vinkje volgt checklistCheckedColor van het profiel',
+    );
+    final unchecked = tester.widget<Icon>(
+      find.byIcon(Icons.check_box_outline_blank),
+    );
+    expect(
+      unchecked.color,
+      const Color(0xFF64748B),
+      reason: 'open vinkje volgt checklistUncheckedColor van het profiel',
+    );
+  });
+
+  // Een eigen builder mag de tik niet doodslaan: het vinkje in de schrijfstand
+  // is interactief, anders dan het vinkje in de alleen-lezen weergave.
+  testWidgets('tik op het vinkje schrijft de nieuwe stand terug', (
+    tester,
+  ) async {
+    const scheme = ColorScheme.light();
+    final editorTheme = MarkdownEditorTheme.documentSurface(scheme: scheme);
+    final controller = QuillController(
+      document: MarkdownQuillCodec.documentFromMarkdown('- [ ] open'),
+      selection: const TextSelection.collapsed(offset: 0),
+    );
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+          FlutterQuillLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: SizedBox(
+            width: 600,
+            height: 400,
+            child: WysiwygNotesField(
+              controller: controller,
+              scrollController: ScrollController(),
+              focusNode: FocusNode(),
+              editorTheme: editorTheme,
+              hintText: '',
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(find.byIcon(Icons.check_box_outline_blank));
+    await tester.pump();
+
+    final line = controller.document.queryChild(0).node!;
+    expect(
+      line.style.attributes[Attribute.list.key],
+      Attribute.checked,
+      reason: 'de tik zet de regel op checked, de bron schrijft `- [x]` terug',
+    );
+  });
 }

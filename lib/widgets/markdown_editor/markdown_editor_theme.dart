@@ -37,6 +37,14 @@ class MarkdownEditorTheme {
   /// eigen code-inkt kiezen. Alleen gezet door [documentSurface].
   final Color codeText;
 
+  /// Kleur van het vinkje bij een afgevinkt taaklijstitem. Alleen gezet door
+  /// [documentSurface]; `null` valt bij gebruik terug op [accent].
+  final Color? checkboxChecked;
+
+  /// Kleur van het lege vinkje van een open taaklijstitem. Alleen gezet door
+  /// [documentSurface]; `null` valt bij gebruik terug op [hint].
+  final Color? checkboxEmpty;
+
   const MarkdownEditorTheme({
     required this.surface,
     required this.text,
@@ -57,6 +65,8 @@ class MarkdownEditorTheme {
     this.quoteBg = Colors.transparent,
     this.quoteBar = Colors.transparent,
     this.codeText = Colors.transparent,
+    this.checkboxChecked,
+    this.checkboxEmpty,
   });
 
   /// Schrijf je op een pagina, dan schrijf je in de lettermaten van die
@@ -207,6 +217,15 @@ class MarkdownEditorTheme {
       codeText: profile?.codeTextColor == null
           ? scheme.onSurface
           : AppTheme.parseHexColor(profile!.codeTextColor, fallback: text),
+      // Taaklijst-vinkjes: de profielkleuren die ook de lezer en de export
+      // gebruiken. Quill's eigen checkbox trok ze uit de ambient colorScheme —
+      // het app-thema — en viel daarmee uit de toon van de documentstijl.
+      checkboxChecked: profile == null
+          ? null
+          : AppTheme.parseHexColor(profile.checklistCheckedColor),
+      checkboxEmpty: profile == null
+          ? null
+          : AppTheme.parseHexColor(profile.checklistUncheckedColor),
     );
   }
 
