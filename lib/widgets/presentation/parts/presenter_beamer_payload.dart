@@ -218,6 +218,10 @@ String _audienceWindowArguments({
 String buildBeamerMarkdown({
   required List<Slide> slides,
   required String? projectPath,
+  // Het profiel staat óók in het Deck: zonder logoPath schrijft de serialisator
+  // nooit `no-logo`, en zou het publieksvenster de per-dia logo-opt-out
+  // verliezen terwijl de presentator hem wel toepast (#2172).
+  required ThemeProfile themeProfile,
   TlpLevel tlp = TlpLevel.none,
   String organization = '',
   String reportLanguage = '',
@@ -227,6 +231,7 @@ String buildBeamerMarkdown({
     title: 'Presentatie',
     slides: slides,
     projectPath: projectPath,
+    themeProfile: themeProfile,
     tlp: tlp,
     organization: organization,
     language: reportLanguage,
@@ -322,6 +327,7 @@ String _dualWindowArguments({
   markdown: buildBeamerMarkdown(
     slides: slides,
     projectPath: projectPath,
+    themeProfile: themeProfile,
     tlp: tlp,
     organization: organization,
     reportLanguage: reportLanguage,
