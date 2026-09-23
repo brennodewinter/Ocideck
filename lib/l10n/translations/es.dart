@@ -664,6 +664,18 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Kies een naam en waar het document komt te staan.':
+      'Elija un nombre y dónde se guardará el documento.',
+  'Bijv. Vergadernotities': 'P. ej. Notas de la reunión',
+  'Vul een naam in': 'Introduzca un nombre',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Ya existe un archivo con este nombre en esta carpeta.',
+  'Nog niet opslaan': 'No guardar todavía',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Solo en memoria, hasta que lo guarde usted.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'El archivo no se guarda; el documento sigue siendo un borrador.',
+  'Kon het bestand niet aanmaken.': 'No se pudo crear el archivo.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Las imágenes y los datos de los gráficos no se incluyen',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

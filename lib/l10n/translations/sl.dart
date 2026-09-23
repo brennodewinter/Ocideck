@@ -1627,6 +1627,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Izberite ime in mesto shranjevanja dokumenta.',
+  'Bijv. Vergadernotities': 'Npr. Zapisnik sestanka',
+  'Vul een naam in': 'Vnesite ime',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Datoteka s tem imenom v tej mapi že obstaja.',
+  'Nog niet opslaan': 'Ne shrani še',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Samo v pomnilniku, dokler ga ne shranite sami.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Datoteka se ne shrani; dokument ostane osnutek.',
+  'Kon het bestand niet aanmaken.': 'Datoteke ni bilo mogoče ustvariti.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Slike in podatki grafov se ne prenašajo',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

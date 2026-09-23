@@ -1626,6 +1626,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Välj ett namn och var dokumentet ska sparas.',
+  'Bijv. Vergadernotities': 'T.ex. Mötesanteckningar',
+  'Vul een naam in': 'Ange ett namn',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'En fil med det här namnet finns redan i den här mappen.',
+  'Nog niet opslaan': 'Spara inte än',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Bara i minnet, tills du sparar det själv.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Filen sparas inte; dokumentet förblir ett utkast.',
+  'Kon het bestand niet aanmaken.': 'Filen kunde inte skapas.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Bilder och diagramdata följer inte med',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

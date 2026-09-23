@@ -1639,6 +1639,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Wybierz nazwę i miejsce zapisu dokumentu.',
+  'Bijv. Vergadernotities': 'Np. Notatki ze spotkania',
+  'Vul een naam in': 'Wpisz nazwę',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Plik o tej nazwie już istnieje w tym folderze.',
+  'Nog niet opslaan': 'Nie zapisuj jeszcze',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Tylko w pamięci, dopóki sam nie zapiszesz.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Plik nie zostanie zapisany; dokument pozostanie szkicem.',
+  'Kon het bestand niet aanmaken.': 'Nie można utworzyć pliku.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Obrazy i dane wykresów nie są dołączane',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

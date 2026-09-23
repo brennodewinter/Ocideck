@@ -1652,6 +1652,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Επιλέξτε όνομα και πού θα αποθηκευτεί το έγγραφο.',
+  'Bijv. Vergadernotities': 'Π.χ. Σημειώσεις συνάντησης',
+  'Vul een naam in': 'Εισαγάγετε ένα όνομα',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Ένα αρχείο με αυτό το όνομα υπάρχει ήδη σε αυτόν τον φάκελο.',
+  'Nog niet opslaan': 'Να μην αποθηκευτεί ακόμη',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Μόνο στη μνήμη, μέχρι να το αποθηκεύσετε εσείς.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Το αρχείο δεν θα αποθηκευτεί· το έγγραφο παραμένει πρόχειρο.',
+  'Kon het bestand niet aanmaken.': 'Δεν ήταν δυνατή η δημιουργία του αρχείου.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Οι εικόνες και τα δεδομένα γραφημάτων δεν περιλαμβάνονται',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

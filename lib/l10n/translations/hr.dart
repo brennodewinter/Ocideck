@@ -1631,6 +1631,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Odaberite naziv i mjesto spremanja dokumenta.',
+  'Bijv. Vergadernotities': 'Npr. Bilješke sa sastanka',
+  'Vul een naam in': 'Unesite naziv',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Datoteka s ovim nazivom već postoji u ovoj mapi.',
+  'Nog niet opslaan': 'Još nemoj spremati',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Samo u memoriji, dok ga sami ne spremite.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Datoteka se neće spremiti; dokument ostaje skica.',
+  'Kon het bestand niet aanmaken.': 'Datoteku nije bilo moguće stvoriti.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Slike i podaci grafikona ne idu uz datoteku',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

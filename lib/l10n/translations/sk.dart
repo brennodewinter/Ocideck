@@ -1633,6 +1633,18 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Vyberte názov a miesto uloženia dokumentu.',
+  'Bijv. Vergadernotities': 'Napr. Poznámky zo schôdze',
+  'Vul een naam in': 'Zadajte názov',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Súbor s týmto názvom už v tomto priečinku existuje.',
+  'Nog niet opslaan': 'Zatiaľ neukladať',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Len v pamäti, kým ho sami neuložíte.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Súbor sa neuloží; dokument zostane konceptom.',
+  'Kon het bestand niet aanmaken.': 'Súbor sa nepodarilo vytvoriť.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Obrázky a údaje grafov sa neprenášajú',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

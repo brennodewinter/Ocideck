@@ -1657,6 +1657,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Roghnaigh ainm agus an áit a sábhálfar an doiciméad.',
+  'Bijv. Vergadernotities': 'M.sh. Nótaí cruinnithe',
+  'Vul een naam in': 'Iontráil ainm',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Tá comhad leis an ainm seo ann cheana san fhillteán seo.',
+  'Nog niet opslaan': 'Ná sábháil go fóil',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Sa chuimhne amháin, go dtí go sábhálann tú féin é.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Ní shábhálfar an comhad; fanfaidh an doiciméad ina dhreacht.',
+  'Kon het bestand niet aanmaken.': 'Níorbh fhéidir an comhad a chruthú.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Ní théann íomhánna agus sonraí cairteacha san áireamh',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

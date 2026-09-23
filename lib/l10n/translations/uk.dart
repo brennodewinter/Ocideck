@@ -1642,6 +1642,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Виберіть назву та місце збереження документа.',
+  'Bijv. Vergadernotities': 'Напр. Нотатки наради',
+  'Vul een naam in': 'Введіть назву',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Файл із такою назвою вже існує в цій папці.',
+  'Nog niet opslaan': 'Поки не зберігати',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Лише в пам\'яті, доки ви не збережете його.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Файл не буде збережено; документ лишиться чернеткою.',
+  'Kon het bestand niet aanmaken.': 'Не вдалося створити файл.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Зображення та дані діаграм не включаються',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

@@ -1627,6 +1627,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Pilih nama dan lokasi penyimpanan dokumen.',
+  'Bijv. Vergadernotities': 'Mis. Catatan rapat',
+  'Vul een naam in': 'Masukkan nama',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Berkas dengan nama ini sudah ada di folder ini.',
+  'Nog niet opslaan': 'Jangan simpan dulu',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Hanya di memori, sampai Anda menyimpannya sendiri.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Berkas tidak disimpan; dokumen tetap menjadi draf.',
+  'Kon het bestand niet aanmaken.': 'Berkas tidak dapat dibuat.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Gambar dan data grafik tidak ikut',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
