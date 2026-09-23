@@ -615,7 +615,7 @@ class _WelcomeScreen extends ConsumerWidget {
       subtitle: Text(
         l10n.d("Doorlopende tekst, pagina's, exporteren naar PDF of Word"),
       ),
-      onPressed: () => ref.read(tabsProvider.notifier).newDocument(),
+      onPressed: () => newDocumentFromDialog(context),
     ),
     const SizedBox(height: 8),
     // De terugweg vanuit Word/LibreOffice: een bestaand document inlezen als

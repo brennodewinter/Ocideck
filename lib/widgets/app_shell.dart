@@ -153,6 +153,7 @@ import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
 import 'shell/document_save_actions.dart';
 import 'shell/document_import_action.dart';
+import 'shell/new_document_action.dart';
 import 'shell/openkat_import_action.dart';
 import 'shell/dropped_files.dart';
 import 'shell/presentation_import_action.dart';
@@ -885,7 +886,7 @@ class _AppShellState extends ConsumerState<AppShell> {
   /// De menubalk-handelingen die geen open presentatie nodig hebben.
   AppMenuActions _menuActions(AppLocalizations l10n) => AppMenuActions(
     newDeck: () => ref.read(tabsProvider.notifier).newEmptyTab(),
-    newDocument: () => ref.read(tabsProvider.notifier).newDocument(),
+    newDocument: () => newDocumentFromDialog(context),
     open: _openActive,
     save: _saveActive,
     find: ref.watch(tabsProvider).current?.documentNotifier == null
