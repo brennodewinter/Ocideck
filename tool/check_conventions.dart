@@ -1304,8 +1304,8 @@ _DelayScan _fixedDelayInRunAsync() {
 /// Dit telt bewust in `check_conventions` en niet in semgrep zelf. De reden
 /// dáárvoor is sinds #778 een andere dan er stond. Het argument was dat `make
 /// sast` nergens automatisch draaide, dus dat een onderdrukking alleen
-/// zichtbaar zou zijn voor wie semgrep toevallig geïnstalleerd had; dat is niet
-/// meer zo, want `scans.yml` draait semgrep bij elke PR.
+/// zichtbaar zou zijn voor wie semgrep toevallig geïnstalleerd had. Inmiddels
+/// is `make sast` onderdeel van de verplichte lokale `make check-full`.
 ///
 /// Wat overblijft is het echte argument, en dat is sterker: semgrep telt zijn
 /// eigen onderdrukkingen niet. Een `// nosemgrep` maakt de bevinding weg én

@@ -59,10 +59,9 @@
 # tussen. Wat je niet inlevert is de detectie zelf; `main` kan nog steeds niet
 # stil rood staan.
 #
-# **Wat de preventie per PR blijft doen.** `static-gate.yml` is de required
-# check en draait óók op `push: main`, in minuten op de capacity-4-baan. Die
-# vangt de merge-drift (twee PR's die apart groen zijn en samen over een plafond
-# gaan) binnen minuten in plaats van na deze suite.
+# **Wat de preventie doet.** De maintainer draait `make check-full` lokaal op de
+# exacte PR-head en legt die commit vast in de PR. `static-gate.yml` blijft een
+# handmatige diagnose op Linux, niet een tweede automatische poort.
 #
 # **Serialisatie blijft.** `linux-serial` (capacity 1) staat nog steeds: een
 # handmatige dispatch en de nachtelijke run mogen niet tegelijk draaien, en

@@ -1067,9 +1067,8 @@ check-l10n-parity:
 #
 # WAAROM NU IN check. Bij invoering vond deze tekstheuristiek 394 regels en kon
 # zij niet rood aan de gewone poort worden toegevoegd. De opruimronde (#1526
-# e.v.) bracht de basislijn naar nul. Vanaf dat moment is uitstel tot
-# `check-full` juist riskant: de per-PR static-gate kan een letterlijke
-# Nederlandse bron dan naar main laten gaan en pas tijdens een release stoppen.
+# e.v.) bracht de basislijn naar nul. Vanaf dat moment hoort de controle in
+# `make check` zelf: zo kan een letterlijke Nederlandse bron niet naar main gaan.
 # De grens van drie woorden en de beargumenteerde [loanKeys] houden de bekende
 # valse positieven buiten; elke nieuwe treffer vraagt voortaan vóór samenvoegen
 # om een vertaling of een expliciete, gedocumenteerde uitzondering.
@@ -1402,13 +1401,9 @@ check-no-coverage: $(STATIC_GATES) test
 	@echo "NOT validated here: the coverage floor and the per-file coverage floor — those run in 'make check'."
 
 # De snelle statische deelverzameling van de poort: alleen $(STATIC_GATES), geen
-# test-suite en geen dekkingsmeting. Bedoeld als per-PR-poort op de server
-# (`.forgejo/workflows/static-gate.yml`). Zonder zo'n poort draaien deze
-# controles pas op een `v*`-tag, en dan stapelt `main` tussen releases stille
-# overschrijdingen op — precies wat #1118 blootlegde. Dezelfde $(STATIC_GATES)
-# als `check`, dus geen tweede lijst die kan uiteenlopen. De dekkingsvloer, de
-# per-bestandsvloer en de volledige suite blijven in `make check`, op de machine
-# van de committer vóór main; die vangt dit doel bewust niet.
+# test-suite en geen dekkingsmeting. Bedoeld voor een gerichte lokale run en de
+# handmatig startbare diagnoseworkflow (`.forgejo/workflows/static-gate.yml`).
+# Dezelfde $(STATIC_GATES) als `check`, dus geen tweede lijst die kan uiteenlopen.
 check-static: $(STATIC_GATES)
 	@echo "== OciDeck static gate complete =="
 	@echo "Validated: formatting, static analysis, the toolchain, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, and improvement templates."
@@ -1416,7 +1411,7 @@ check-static: $(STATIC_GATES)
 
 # De registratie-invarianten: de handvol *snelle* tests die betrappen wanneer een
 # nieuw bestand, docs-pagina, afhankelijkheid of UI-string niet geregistreerd is.
-# Bedoeld als aanvulling op $(STATIC_GATES) in de per-PR-poort
+# Bedoeld als aanvulling op $(STATIC_GATES) in de handmatige diagnoseworkflow
 # (`static-gate.yml`): $(STATIC_GATES) vangt de statische drift (bestands-/klasse-/
 # methodegrootte, opmaak, hardgecodeerde tekst), maar deze poorten zíjn tests en
 # draaiden dus nergens vóór de merge — precies waardoor #1123 (source_map) stil

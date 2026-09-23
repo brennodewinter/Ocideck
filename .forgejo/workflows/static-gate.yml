@@ -1,14 +1,10 @@
-# De statische poort van OciDeck, per pull request (#1118).
+# De statische poort van OciDeck, op afroep.
 #
-# **Waarom deze workflow bestaat.** De uitbrengpoort (`ci.yml`) vuurt alleen op
-# een `v*`-tag en de Linux-poort (`linux-gate.yml`) alleen op afroep, dus tussen
-# releases houdt niets de statische poorten tegen op een PR. Zo dreef `main` stil
-# rood: een reeks merges duwde bestanden, klassen, een methode en registraties
-# over hun plafond zonder dat een poort het per PR ving, en dat kwam pas boven
-# toen iemand er een fix op wilde landen (#1118). Deze workflow zet dezelfde
-# snelle statische controles die `make check` lokaal draait óók op elke PR neer,
-# op het moment dat een overschrijding nog een wijziging is in plaats van
-# historie op `main`.
+# **Waarom alleen handmatig.** De maintainer draait `make check-full` lokaal op
+# de exacte commit die wordt gemerged en vermeldt die commit in de PR. Deze job
+# zou daaruit alleen `make check-static` en de registratie-invarianten opnieuw
+# uitvoeren, op tragere gedeelde hardware. `workflow_dispatch` blijft als
+# diagnose- en herstelroute wanneer een tweede omgeving bewust gewenst is.
 #
 # **Waarom alleen de statische deelverzameling en niet de hele poort.** De
 # volledige suite en de dekkingsmeting kosten op deze container tientallen
@@ -20,8 +16,8 @@
 # op de machine van de committer, vóór main — die twee vangt deze workflow
 # bewust niet, en dat staat ook in docs/CHECKS.md.
 #
-# **Waarom op het voorgebakken CI-image en niet op een kaal ubuntu.** Deze
-# workflow vuurt bij élke PR, en bouwde de omgeving voorheen per run opnieuw op
+# **Waarom op het voorgebakken CI-image en niet op een kaal ubuntu.** Toen deze
+# workflow bij elke PR vuurde, bouwde hij de omgeving per run opnieuw op
 # (apt-toolchain + Flutter-download). Dat is nu voorgebakken in
 # `pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>` (zie
 # `.forgejo/ci-image/Dockerfile` en `docs/CHECKS.md`): OS, node, de
@@ -43,29 +39,8 @@
 name: static-gate
 
 on:
-  pull_request:
-  # Ook ná de merge, en dat is geen dubbelop. Een PR-run toetst de *voorvertoning*
-  # van die ene samenvoeging met `main` zoals die er op dát moment bijstond. Loopt
-  # er een tweede PR mee die hetzelfde bestand raakt, dan zijn beide runs groen en
-  # is de uitkomst het toch niet: zo dreef `main` op 21-08-2026 vijf keer rood op
-  # de regel- en klasseplafonds, telkens één of twee regels over de rand.
-  #
-  # Tot nu toe was `linux-gate.yml` het eerste dat de échte samenvoeging zag, en
-  # dat is de dure poort op de serieruimte — de uitslag komt tientallen minuten
-  # later. In de tussentijd merget de volgende sessie eroverheen en rapporteert
-  # dezelfde rode poort nog eens. Deze trigger zet dezelfde snelle controles op
-  # `main` neer, zodat een botsing binnen minuten zichtbaar is in plaats van na
-  # de suite. Voorkómen doet hij het niet; dat kan alleen door élke PR vlak vóór
-  # de merge opnieuw tegen de actuele `main` te draaien.
-  push:
-    branches: [main]
   workflow_dispatch:
 
-# Duwt iemand een nieuwe commit op een PR terwijl de vorige poortrun nog loopt,
-# dan zet die de lopende run opzij. Afbreken kost hier niets: de statische poort
-# bekijkt de héle boom op de nieuwste commit, dus de latere run dekt onverkort
-# wat de afgebroken run zou hebben gezien. Een afgebroken run meldt zich als
-# `failure` en kan mailen; dat het er bijna geen zijn, is de bedoeling.
 concurrency:
   group: static-gate-${{ github.ref }}
   cancel-in-progress: true
@@ -140,8 +115,7 @@ jobs:
 
       # De registratie-invarianten (#1123): een handvol snelle tests die betrappen
       # wanneer een nieuw bestand/docs/afhankelijkheid/UI-string niet geregistreerd
-      # is. Die poorten zíjn tests, dus `check-static` ziet ze niet — en zonder deze
-      # stap kon zulke drift (bv. source_map) tóch per PR passeren. Zelfde job, dus
-      # dezelfde status-check-context; alleen deze stap erbij, geen tweede lijst.
+      # is. Die poorten zíjn tests, dus `check-static` ziet ze niet. Zelfde job,
+      # alleen deze stap erbij, geen tweede lijst.
       - name: De registratie-invarianten
         run: make check-registrations

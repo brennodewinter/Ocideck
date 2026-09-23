@@ -40,7 +40,7 @@
 // whole point: an accidental bump has no entry there and fails; a conscious one
 // is written down, in the diff, with a reason. It is empty by default.
 //
-// Runs in the per-PR static gate (`make check-static`). When no tag is
+// Runs in the local gate and the on-demand static gate. When no tag is
 // reachable (a shallow scratch clone, or git absent) it cannot know the
 // baseline, so it prints a note and passes rather than fail on a machine that
 // simply lacks the history — the release runner and a normal clone both have
