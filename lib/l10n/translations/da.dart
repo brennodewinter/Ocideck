@@ -1643,6 +1643,13 @@ const _dutchSourceAddDa = <String, String>{
       'Billeder og diagramdata følger ikke med',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Dette dokument henviser til billeder eller diagramdata i separate filer. En ren .md- eller .tex-download indeholder kun teksten — referencerne er døde for modtageren. Vælg HTML, PDF eller DOCX for at levere alt i én fil, eller fortsæt, hvis kun teksten betyder noget.',
+  'Datum en tijd kiezen': 'Vælg dato og klokkeslæt',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Dette lokale klokkeslæt findes ikke på grund af overgangen til sommertid. Vælg et andet klokkeslæt.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Dette lokale klokkeslæt forekommer to gange. Vælg den korrekte UTC-forskydning.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'En dato forbliver en dato. Hvis du også vælger et klokkeslæt, gemmer OciDeck tidspunktet i UTC og viser det med den lokale UTC-forskydning.',
   'Microfoon-doorvoer aan': 'Mikrofon-monitorering slået til',
   'Microfoon-doorvoer uit': 'Mikrofon-monitorering slået fra',
   'Microfoon-doorvoer aan (V)': 'Mikrofon-monitorering slået til (V)',

@@ -1645,6 +1645,13 @@ const _dutchSourceAddHu = <String, String>{
       'A képek és a diagramadatok nem kerülnek átadásra',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Ez a dokumentum képekre vagy diagramadatokra hivatkozik külön fájlokban. A puszta .md vagy .tex letöltés csak a szöveget tartalmazza — a hivatkozások a címzett számára holtak. Válassza a HTML, PDF vagy DOCX formátumot, hogy mindent egy fájlban adjon át, vagy folytassa, ha csak a szöveg számít.',
+  'Datum en tijd kiezen': 'Dátum és idő kiválasztása',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Ez a helyi idő a nyári időszámításra való átállás miatt nem létezik. Válasszon másik időpontot.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Ez a helyi idő kétszer fordul elő. Válassza ki a megfelelő UTC-eltolást.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'A dátum dátum marad. Ha időpontot is választ, az OciDeck UTC-ben tárolja az időpillanatot, és a helyi UTC-eltolással jeleníti meg.',
   'Microfoon-doorvoer aan': 'Mikrofon-figyelés bekapcsolva',
   'Microfoon-doorvoer uit': 'Mikrofon-figyelés kikapcsolva',
   'Microfoon-doorvoer aan (V)': 'Mikrofon-figyelés bekapcsolva (V)',

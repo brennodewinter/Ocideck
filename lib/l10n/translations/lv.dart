@@ -1641,6 +1641,13 @@ const _dutchSourceAddLv = <String, String>{
       'Attēli un diagrammu dati netiek iekļauti',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Šis dokuments atsaucas uz attēliem vai diagrammu datiem atsevišķos failos. Tīra .md vai .tex lejupielāde satur tikai tekstu — atsauces saņēmējam ir mirušas. Izvēlieties HTML, PDF vai DOCX, lai visu piegādātu vienā failā, vai turpiniet, ja svarīgs ir tikai teksts.',
+  'Datum en tijd kiezen': 'Izvēlieties datumu un laiku',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Šis vietējais laiks nepastāv, jo notiek pāreja uz vasaras laiku. Izvēlieties citu laiku.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Šis vietējais laiks iestājas divreiz. Izvēlieties pareizo UTC nobīdi.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Datums paliek datums. Ja izvēlaties arī laiku, OciDeck saglabā laika momentu UTC formātā un parāda to ar vietējo UTC nobīdi.',
   'Microfoon-doorvoer aan': 'Mikrofona monitorings ieslēgts',
   'Microfoon-doorvoer uit': 'Mikrofona monitorings izslēgts',
   'Microfoon-doorvoer aan (V)': 'Mikrofona monitorings ieslēgts (V)',

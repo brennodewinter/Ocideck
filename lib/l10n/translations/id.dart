@@ -1643,6 +1643,13 @@ const _dutchSourceAddId = <String, String>{
       'Gambar dan data grafik tidak ikut',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Dokumen ini merujuk ke gambar atau data grafik dalam berkas terpisah. Unduhan .md atau .tex biasa hanya berisi teks — rujukannya mati bagi penerima. Pilih HTML, PDF atau DOCX untuk mengirim semuanya dalam satu berkas, atau lanjutkan jika hanya teks yang penting.',
+  'Datum en tijd kiezen': 'Pilih tanggal dan waktu',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Waktu lokal ini tidak ada karena peralihan ke waktu musim panas. Pilih waktu lain.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Waktu lokal ini terjadi dua kali. Pilih offset UTC yang benar.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Tanggal tetaplah tanggal. Jika Anda juga memilih waktu, OciDeck menyimpan titik waktunya dalam UTC dan menampilkannya dengan offset UTC setempat.',
   'Microfoon-doorvoer aan': 'Penerusan mikrofon aktif',
   'Microfoon-doorvoer uit': 'Penerusan mikrofon nonaktif',
   'Microfoon-doorvoer aan (V)': 'Penerusan mikrofon aktif (V)',

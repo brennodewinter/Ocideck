@@ -1668,6 +1668,13 @@ const _dutchSourceAddEl = <String, String>{
       'Οι εικόνες και τα δεδομένα γραφημάτων δεν περιλαμβάνονται',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Αυτό το έγγραφο παραπέμπει σε εικόνες ή δεδομένα γραφημάτων σε ξεχωριστά αρχεία. Ένα απλό κατέβασμα .md ή .tex περιέχει μόνο το κείμενο — οι αναφορές είναι νεκρές για τον παραλήπτη. Επιλέξτε HTML, PDF ή DOCX για να παραδώσετε τα πάντα σε ένα αρχείο, ή συνεχίστε αν μετράει μόνο το κείμενο.',
+  'Datum en tijd kiezen': 'Επιλογή ημερομηνίας και ώρας',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Αυτή η τοπική ώρα δεν υπάρχει λόγω της μετάβασης στη θερινή ώρα. Επιλέξτε άλλη ώρα.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Αυτή η τοπική ώρα εμφανίζεται δύο φορές. Επιλέξτε τη σωστή μετατόπιση UTC.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Μια ημερομηνία παραμένει ημερομηνία. Αν επιλέξετε και ώρα, το OciDeck αποθηκεύει τη χρονική στιγμή σε UTC και την εμφανίζει με την τοπική μετατόπιση UTC.',
   'Microfoon-doorvoer aan': 'Η ακρόαση μικροφώνου ενεργή',
   'Microfoon-doorvoer uit': 'Η ακρόαση μικροφώνου ανενεργή',
   'Microfoon-doorvoer aan (V)': 'Η ακρόαση μικροφώνου ενεργή (V)',

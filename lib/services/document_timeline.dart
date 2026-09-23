@@ -9,6 +9,94 @@ export '../models/document_timeline.dart';
 /// gewone tabel in iedere Markdown-lezer.
 const documentTimelineMarker = '<!-- timeline -->';
 
+final RegExp _dateOnlyMarker = RegExp(r'^(\d{4})-(\d{2})-(\d{2})$');
+final RegExp _zonedInstantMarker = RegExp(
+  r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,6})?)?(?:Z|[+-]\d{2}:\d{2})$',
+  caseSensitive: false,
+);
+
+/// Schrijft een kalenderdatum zonder tijd of tijdzone. Zo'n datum is geen
+/// moment op de UTC-tijdlijn en mag bij openen in een andere zone nooit een
+/// dag opschuiven.
+String canonicalDocumentTimelineDate(DateTime date) =>
+    '${date.year.toString().padLeft(4, '0')}-'
+    '${date.month.toString().padLeft(2, '0')}-'
+    '${date.day.toString().padLeft(2, '0')}';
+
+/// Schrijft een echt tijdstip canoniek als ISO-8601 UTC.
+String canonicalDocumentTimelineInstant(DateTime instant) =>
+    instant.toUtc().toIso8601String();
+
+/// Menselijk, maar ondubbelzinnig label voor een UTC-offset.
+String formatDocumentTimelineUtcOffset(Duration offset) {
+  final totalMinutes = offset.inMinutes;
+  final sign = totalMinutes < 0 ? '-' : '+';
+  final absolute = totalMinutes.abs();
+  final hours = (absolute ~/ 60).toString().padLeft(2, '0');
+  final minutes = (absolute % 60).toString().padLeft(2, '0');
+  return 'UTC$sign$hours:$minutes';
+}
+
+/// Projecteert alleen expliciet gezoneerde ISO-tijdstippen naar de lokale
+/// klok. Datum-zonder-tijd en oude vrije markeringen blijven bytegetrouw.
+/// [toLocal] maakt de tijdzone in tests en andere projecties injecteerbaar.
+String formatDocumentTimelineMarker(
+  String source, {
+  DateTime Function(DateTime utc)? toLocal,
+}) {
+  final value = source.trim();
+  if (_dateOnlyMarker.hasMatch(value)) return source;
+  if (!_zonedInstantMarker.hasMatch(value)) return source;
+  final parsed = DateTime.tryParse(value);
+  if (parsed == null) return source;
+  final local = (toLocal ?? (utc) => utc.toLocal())(parsed.toUtc());
+  final date = canonicalDocumentTimelineDate(local);
+  final hour = local.hour.toString().padLeft(2, '0');
+  final minute = local.minute.toString().padLeft(2, '0');
+  return '$date $hour:$minute '
+      '${formatDocumentTimelineUtcOffset(local.timeZoneOffset)}';
+}
+
+/// Geeft alle echte momenten terug die bij een lokale wandklok passen.
+///
+/// Normale tijden leveren één kandidaat, een zomertijdgat geen en een
+/// teruggezette klok twee. Daardoor hoeft de invoer geen niet-bestaande tijd te
+/// normaliseren of bij een dubbel uur stil één van beide te raden.
+List<DateTime> documentTimelineInstantCandidates(
+  DateTime wallClock, {
+  DateTime Function(DateTime utc)? toLocal,
+}) {
+  final project = toLocal ?? (utc) => utc.toLocal();
+  // [wallClock] draagt kalendercomponenten, geen tijdzone. UTC voorkomt dat de
+  // DateTime-constructor een niet-bestaand lokaal zomertijduur al normaliseert
+  // vóór wij het kunnen afwijzen.
+  final seed = DateTime.utc(
+    wallClock.year,
+    wallClock.month,
+    wallClock.day,
+    wallClock.hour,
+    wallClock.minute,
+  );
+  bool sameWallClock(DateTime value) =>
+      value.year == wallClock.year &&
+      value.month == wallClock.month &&
+      value.day == wallClock.day &&
+      value.hour == wallClock.hour &&
+      value.minute == wallClock.minute;
+  final candidates = <DateTime>[];
+  // UTC−12…UTC+14 vallen ruim binnen dit venster, ook wanneer tests of een
+  // import een andere zone projecteren dan de zone van dit apparaat.
+  for (var minutes = -1080; minutes <= 1080; minutes++) {
+    final instant = seed.add(Duration(minutes: minutes));
+    if (!sameWallClock(project(instant))) continue;
+    if (candidates.every((candidate) => candidate != instant)) {
+      candidates.add(instant);
+    }
+  }
+  candidates.sort();
+  return candidates;
+}
+
 /// Of drie opeenvolgende regels de draagbare tijdlijn-envelop openen.
 ///
 /// Dit zegt alleen dat marker en GFM-tabel atomair bij elkaar horen. Of de
@@ -73,7 +161,8 @@ TimelineTableAnalysis analyzeTimelineTable(String tableSource) {
   final events = [
     for (final row in body)
       DocumentTimelineEvent(
-        marker: row.isNotEmpty ? row[0] : '',
+        sourceMarker: row.isNotEmpty ? row[0] : '',
+        marker: row.isNotEmpty ? formatDocumentTimelineMarker(row[0]) : '',
         event: row.length > 1 ? row[1] : '',
         metadata: columns == 3 && row.length > 2 ? row[2] : null,
       ),

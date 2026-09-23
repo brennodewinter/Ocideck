@@ -1671,6 +1671,13 @@ const _dutchSourceAddPt = <String, String>{
       'As imagens e os dados dos gráficos não são incluídos',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Este documento faz referência a imagens ou dados de gráficos em ficheiros separados. Uma transferência .md ou .tex simples contém apenas o texto — as referências ficam mortas para o destinatário. Escolha HTML, PDF ou DOCX para entregar tudo num só ficheiro, ou continue se apenas o texto importa.',
+  'Datum en tijd kiezen': 'Escolher data e hora',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Esta hora local não existe devido à transição para o horário de verão. Escolha outra hora.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Esta hora local ocorre duas vezes. Escolha o desvio UTC correto.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Uma data continua sendo uma data. Se também escolher uma hora, o OciDeck armazena o instante em UTC e o apresenta com o desvio UTC local.',
   'Microfoon-doorvoer aan': 'Monitorização do microfone ativada',
   'Microfoon-doorvoer uit': 'Monitorização do microfone desativada',
   'Microfoon-doorvoer aan (V)': 'Monitorização do microfone ativada (V)',

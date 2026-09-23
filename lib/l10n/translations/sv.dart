@@ -1642,6 +1642,13 @@ const _dutchSourceAddSv = <String, String>{
       'Bilder och diagramdata följer inte med',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Det här dokumentet hänvisar till bilder eller diagramdata i separata filer. En ren .md- eller .tex-nedladdning innehåller bara texten — referenserna är döda för mottagaren. Välj HTML, PDF eller DOCX för att leverera allt i en fil, eller fortsätt om bara texten räknas.',
+  'Datum en tijd kiezen': 'Välj datum och tid',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Den här lokala tiden finns inte på grund av övergången till sommartid. Välj en annan tid.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Den här lokala tiden förekommer två gånger. Välj rätt UTC-förskjutning.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Ett datum förblir ett datum. Om du även väljer en tid lagrar OciDeck tidpunkten i UTC och visar den med den lokala UTC-förskjutningen.',
   'Microfoon-doorvoer aan': 'Mikrofonmonitorering på',
   'Microfoon-doorvoer uit': 'Mikrofonmonitorering av',
   'Microfoon-doorvoer aan (V)': 'Mikrofonmonitorering på (V)',

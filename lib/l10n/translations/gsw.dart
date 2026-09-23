@@ -1646,6 +1646,13 @@ const _dutchSourceAddGsw = <String, String>{
       'Bilder und Grafikdate gahnd nöd mit',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Das Dokument verwyset uf Bilder oder Grafikdate in separaten Dateie. E blöße .md- oder .tex-Download hät nur de Teggst — d Verwys sind für de Empfänger tot. Wähl HTML, PDF oder DOCX, zum alles in ere Datei z liefern, oder fahr fort, wenn nume de Teggst zählt.',
+  'Datum en tijd kiezen': 'Datum und Zyt uswähle',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Die Ortszyt git’s wäge dr Umstellig uf d’Summerzyt nöd. Wähle Sie e anderi Zyt.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Die Ortszyt chunnt zweimal vor. Wähle Sie dr richtig UTC-Versatz.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Es Datum bliibt es Datum. Wenn Sie au e Zyt uswähle, speicheret OciDeck de Zytpunkt in UTC und zeigt en mit em lokale UTC-Versatz aa.',
   'Microfoon-doorvoer aan': 'Mikrofon-Durchleitig aa',
   'Microfoon-doorvoer uit': 'Mikrofon-Durchleitig ab',
   'Microfoon-doorvoer aan (V)': 'Mikrofon-Durchleitig aa (V)',

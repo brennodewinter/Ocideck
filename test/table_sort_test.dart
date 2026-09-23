@@ -76,6 +76,10 @@ void main() {
     expect(kindFor(['b', 'a']), TableParseKind.text);
     expect(kindFor(['10', '2']), TableParseKind.number);
     expect(kindFor(['2025-02-01', '2024-12-31']), TableParseKind.date);
+    expect(
+      kindFor(['2025-02-01T12:30:00.000Z', '2024-12-31T14:30:00+02:00']),
+      TableParseKind.date,
+    );
     expect(kindFor(['13:10', '09:30']), TableParseKind.time);
   });
 
@@ -142,6 +146,23 @@ void main() {
       ['| 2 |', '| 3-5 |', '| 10–12 |'],
     );
   });
+
+  test(
+    'UTC-tijdstippen sorteren chronologisch en niet op hun zichtbare offset',
+    () {
+      const instants = [
+        '| Moment |',
+        '| --- |',
+        '| 2026-09-23T13:00:00+02:00 |',
+        '| 2026-09-23T10:30:00Z |',
+      ];
+
+      expect(service.sort(instants, columnIndex: 0).lines.skip(2), [
+        '| 2026-09-23T10:30:00Z |',
+        '| 2026-09-23T13:00:00+02:00 |',
+      ]);
+    },
+  );
 
   test('analysis explains confidence, rows and monotonicity', () {
     const table = [

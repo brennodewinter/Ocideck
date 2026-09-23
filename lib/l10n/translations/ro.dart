@@ -1659,6 +1659,13 @@ const _dutchSourceAddRo = <String, String>{
       'Imaginile și datele graficelor nu sunt incluse',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Acest document trimite la imagini sau date de grafice din fișiere separate. O descărcare .md sau .tex goală conține doar textul — referințele sunt moarte pentru destinatar. Alegeți HTML, PDF sau DOCX pentru a livra totul într-un singur fișier, sau continuați dacă contează doar textul.',
+  'Datum en tijd kiezen': 'Alegeți data și ora',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Această oră locală nu există din cauza trecerii la ora de vară. Alegeți o altă oră.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Această oră locală apare de două ori. Alegeți decalajul UTC corect.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'O dată rămâne o dată. Dacă alegeți și o oră, OciDeck stochează momentul în UTC și îl afișează cu decalajul UTC local.',
   'Microfoon-doorvoer aan': 'Monitorizarea microfonului activată',
   'Microfoon-doorvoer uit': 'Monitorizarea microfonului dezactivată',
   'Microfoon-doorvoer aan (V)': 'Monitorizarea microfonului activată (V)',

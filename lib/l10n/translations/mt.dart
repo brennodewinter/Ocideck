@@ -1661,6 +1661,13 @@ const _dutchSourceAddMt = <String, String>{
       'L-immaġini u d-data tal-graffs ma jiġux inklużi',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Dan id-dokument jirreferi għal immaġini jew data ta\' graffs f\'fajls separati. Download sempliċi .md jew .tex fih biss it-test — ir-referenzi jibqgħu mejta għar-riċevitur. Agħżel HTML, PDF jew DOCX biex twassal kollox f\'fajl wieħed, jew kompli jekk biss it-test jaqbeż.',
+  'Datum en tijd kiezen': 'Agħżel id-data u l-ħin',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Dan il-ħin lokali ma jeżistix minħabba l-bidla għall-ħin tas-sajf. Agħżel ħin ieħor.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Dan il-ħin lokali jseħħ darbtejn. Agħżel id-differenza UTC korretta.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Data tibqa’ data. Jekk tagħżel ukoll ħin, OciDeck jaħżen il-mument f’UTC u jurih bid-differenza UTC lokali.',
   'Microfoon-doorvoer aan': 'Għeď il-mikrofonu mixgħul',
   'Microfoon-doorvoer uit': 'Għeď il-mikrofonu mitfi',
   'Microfoon-doorvoer aan (V)': 'Għeď il-mikrofonu mixgħul (V)',

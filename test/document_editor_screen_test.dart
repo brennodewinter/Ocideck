@@ -616,7 +616,7 @@ void main() {
     expect(find.text('Toepassen'), findsNothing);
     expect(
       n.currentState.document!.source,
-      contains('<!-- timeline -->\n| Tijd | Gebeurtenis | Status |'),
+      contains('<!-- timeline -->\n| Datum | Gebeurtenis | Status |'),
     );
   });
 

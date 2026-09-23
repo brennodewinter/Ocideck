@@ -156,6 +156,109 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
     }
   }
 
+  DateTime _initialDateFor(String source) {
+    final parsed = DateTime.tryParse(source.trim());
+    return parsed == null
+        ? DateTime.now()
+        : parsed.isUtc
+        ? parsed.toLocal()
+        : parsed;
+  }
+
+  Future<DateTime?> _pickDate(int row) => showDatePicker(
+    context: context,
+    initialDate: _initialDateFor(_editor.cellController(row, 0).text),
+    firstDate: DateTime(1),
+    lastDate: DateTime(9999, 12, 31),
+  );
+
+  void _setMarker(int row, String value) {
+    final controller = _editor.cellController(row, 0);
+    controller
+      ..text = value
+      ..selection = TextSelection.collapsed(offset: value.length);
+    _editor.keepEditing(row, 0);
+  }
+
+  Future<void> _chooseDate(int row) async {
+    final date = await _pickDate(row);
+    if (!mounted || date == null) return;
+    _setMarker(row, canonicalDocumentTimelineDate(date));
+  }
+
+  Future<void> _chooseDateTime(int row) async {
+    final date = await _pickDate(row);
+    if (!mounted || date == null) return;
+    final initial = _initialDateFor(_editor.cellController(row, 0).text);
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(initial),
+    );
+    if (!mounted || time == null) return;
+    final wallClock = DateTime.utc(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    final candidates = documentTimelineInstantCandidates(wallClock);
+    if (candidates.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.',
+            ),
+          ),
+        ),
+      );
+      return;
+    }
+    var instant = candidates.length == 1 ? candidates.single : null;
+    instant ??= await _chooseRepeatedClockTime(candidates);
+    if (!mounted || instant == null) return;
+    _setMarker(row, canonicalDocumentTimelineInstant(instant));
+  }
+
+  Future<DateTime?> _chooseRepeatedClockTime(
+    List<DateTime> candidates,
+  ) => showDialog<DateTime>(
+    context: context,
+    builder: (dialogContext) => SimpleDialog(
+      title: Text(
+        context.l10n.d(
+          'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.',
+        ),
+      ),
+      children: [
+        for (final instant in candidates)
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(dialogContext, instant),
+            child: Text(
+              formatDocumentTimelineUtcOffset(instant.toLocal().timeZoneOffset),
+            ),
+          ),
+      ],
+    ),
+  );
+
+  List<Widget> _momentToolbar(BuildContext context, ({int row, int col}) at) {
+    if (at.row == 0 || at.col != 0) return const [];
+    return [
+      IconButton(
+        tooltip: context.l10n.d('Datum kiezen'),
+        onPressed: () => _chooseDate(at.row),
+        icon: const Icon(Icons.calendar_today_outlined),
+      ),
+      IconButton(
+        tooltip: context.l10n.d('Datum en tijd kiezen'),
+        onPressed: () => _chooseDateTime(at.row),
+        icon: const Icon(Icons.schedule_outlined),
+      ),
+    ];
+  }
+
   @override
   void dispose() {
     _editor.dispose();
@@ -213,17 +316,32 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
           ),
         ),
         if (_editing)
-          DocumentMarkdownView(
-            _tableSource,
-            maxTextWidth: null,
-            themeProfile: widget.profile,
-            chartTheme: widget.profile,
-            tableEditController: _editor,
-            onSortTableColumn: (column, intent) => switch (intent) {
-              TableSortIntent.ascending => _sort(column, true),
-              TableSortIntent.descending => _sort(column, false),
-              TableSortIntent.choose => _sortAs(column),
-            },
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 6),
+                child: Text(
+                  l10n.d(
+                    'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.',
+                  ),
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+              DocumentMarkdownView(
+                _tableSource,
+                maxTextWidth: null,
+                themeProfile: widget.profile,
+                chartTheme: widget.profile,
+                tableEditController: _editor,
+                tableToolbarExtras: _momentToolbar,
+                onSortTableColumn: (column, intent) => switch (intent) {
+                  TableSortIntent.ascending => _sort(column, true),
+                  TableSortIntent.descending => _sort(column, false),
+                  TableSortIntent.choose => _sortAs(column),
+                },
+              ),
+            ],
           )
         else
           GestureDetector(
