@@ -99,6 +99,15 @@ document.querySelectorAll('section.document > .content').forEach(function(conten
 // Een tijdlijn blijft in de bron een gewone tabel. Pas na de veilige Markdown-
 // render wordt alleen een expliciet gemarkeerde tabel naar semantische HTML
 // geprojecteerd; alle celinhoud is dan al door DOMPurify gegaan.
+function ocideckTimelineMoment(value){
+  var source=(value||'').trim();
+  if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,6})?)?(?:Z|[+-]\d{2}:\d{2})$/i.test(source))return null;
+  var instant=new Date(source);if(Number.isNaN(instant.getTime()))return null;
+  function pad(n){return String(n).padStart(2,'0');}
+  var offset=-instant.getTimezoneOffset();
+  var sign=offset<0?'-':'+';var absolute=Math.abs(offset);
+  return instant.getFullYear()+'-'+pad(instant.getMonth()+1)+'-'+pad(instant.getDate())+' '+pad(instant.getHours())+':'+pad(instant.getMinutes())+' UTC'+sign+pad(Math.floor(absolute/60))+':'+pad(absolute%60);
+}
 document.querySelectorAll('.document .ocideck-timeline-marker').forEach(function(marker){
   var table=marker.nextElementSibling;
   if(!table||table.tagName!=='TABLE')return;
@@ -110,7 +119,7 @@ document.querySelectorAll('.document .ocideck-timeline-marker').forEach(function
     var item=document.createElement('li');
     var time=document.createElement('div');time.className='ocideck-timeline-time';
     var timeLabel=document.createElement('div');timeLabel.className='ocideck-timeline-label';timeLabel.textContent=headers[0].textContent||'';time.appendChild(timeLabel);
-    var timeValue=document.createElement('div');timeValue.innerHTML=cells[0].innerHTML;time.appendChild(timeValue);
+    var timeValue=document.createElement('div');var localMoment=ocideckTimelineMoment(cells[0].textContent);if(localMoment===null){timeValue.innerHTML=cells[0].innerHTML;}else{timeValue.textContent=localMoment;}time.appendChild(timeValue);
     var card=document.createElement('article');card.className='ocideck-timeline-card';
     var eventLabel=document.createElement('div');eventLabel.className='ocideck-timeline-label';eventLabel.textContent=headers[1].textContent||'';card.appendChild(eventLabel);
     var event=document.createElement('div');event.className='ocideck-timeline-event';event.innerHTML=cells[1].innerHTML;card.appendChild(event);

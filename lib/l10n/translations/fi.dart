@@ -1643,6 +1643,13 @@ const _dutchSourceAddFi = <String, String>{
       'Kuvat ja kaaviotiedot eivät tule mukaan',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Tämä asiakirja viittaa kuviin tai kaaviotietoihin erillisissä tiedostoissa. Pelkkä .md- tai .tex-lataus sisältää vain tekstin — viittaukset ovat vastaanottajalle kuolleita. Valitse HTML, PDF tai DOCX toimittaaksesi kaiken yhdessä tiedostossa, tai jatka, jos vain tekstillä on väliä.',
+  'Datum en tijd kiezen': 'Valitse päivämäärä ja aika',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Tätä paikallista kellonaikaa ei ole olemassa kesäaikaan siirtymisen vuoksi. Valitse toinen aika.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Tämä paikallinen kellonaika esiintyy kahdesti. Valitse oikea UTC-poikkeama.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Päivämäärä pysyy päivämääränä. Jos valitset myös ajan, OciDeck tallentaa ajanhetken UTC-muodossa ja näyttää sen paikallisen UTC-poikkeaman mukaisesti.',
   'Microfoon-doorvoer aan': 'Mikrofonin läpikuuntelu päällä',
   'Microfoon-doorvoer uit': 'Mikrofonin läpikuuntelu pois päältä',
   'Microfoon-doorvoer aan (V)': 'Mikrofonin läpikuuntelu päällä (V)',

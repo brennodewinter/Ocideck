@@ -6,11 +6,17 @@ enum TimelineTableIssue { noTable, wrongColumnCount, noEvents }
 /// Een gebeurtenis zoals de documentweergave hem nodig heeft.
 class DocumentTimelineEvent {
   const DocumentTimelineEvent({
+    required this.sourceMarker,
     required this.marker,
     required this.event,
     this.metadata,
   });
 
+  /// De waarde zoals die in de draagbare Markdown-tabel staat.
+  final String sourceMarker;
+
+  /// De marker voor lezen en export. Een UTC-tijdstip is hier naar de lokale
+  /// klok geprojecteerd; vrije tekst en datum-zonder-tijd blijven gelijk.
   final String marker;
   final String event;
   final String? metadata;

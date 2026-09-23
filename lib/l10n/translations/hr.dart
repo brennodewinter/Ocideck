@@ -1647,6 +1647,13 @@ const _dutchSourceAddHr = <String, String>{
       'Slike i podaci grafikona ne idu uz datoteku',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Ovaj dokument upućuje na slike ili podatke grafikona u zasebnim datotekama. Golo preuzimanje .md ili .tex sadrži samo tekst — reference su za primatelja mrtve. Odaberite HTML, PDF ili DOCX da sve isporučite u jednoj datoteci, ili nastavite ako je važan samo tekst.',
+  'Datum en tijd kiezen': 'Odaberite datum i vrijeme',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Ovo lokalno vrijeme ne postoji zbog prijelaza na ljetno računanje vremena. Odaberite drugo vrijeme.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Ovo lokalno vrijeme pojavljuje se dvaput. Odaberite ispravan UTC pomak.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Datum ostaje datum. Ako odaberete i vrijeme, OciDeck sprema vremenski trenutak u UTC-u i prikazuje ga s lokalnim UTC pomakom.',
   'Microfoon-doorvoer aan': 'Propuštanje mikrofona uključeno',
   'Microfoon-doorvoer uit': 'Propuštanje mikrofona isključeno',
   'Microfoon-doorvoer aan (V)': 'Propuštanje mikrofona uključeno (V)',

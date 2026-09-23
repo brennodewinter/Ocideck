@@ -1649,6 +1649,13 @@ const _dutchSourceAddSk = <String, String>{
       'Obrázky a údaje grafov sa neprenášajú',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Tento dokument odkazuje na obrázky alebo údaje grafov v samostatných súboroch. Obyčajné stiahnutie .md alebo .tex obsahuje len text — odkazy sú pre príjemcu mŕtve. Vyberte HTML, PDF alebo DOCX, aby ste všetko dodali v jednom súbore, alebo pokračujte, ak ide len o text.',
+  'Datum en tijd kiezen': 'Vyberte dátum a čas',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Tento miestny čas neexistuje z dôvodu prechodu na letný čas. Vyberte iný čas.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Tento miestny čas sa vyskytuje dvakrát. Vyberte správny posun UTC.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Dátum zostáva dátumom. Ak vyberiete aj čas, OciDeck uloží časový okamih v UTC a zobrazí ho s miestnym posunom UTC.',
   'Microfoon-doorvoer aan': 'Odpočúvanie mikrofónu zapnuté',
   'Microfoon-doorvoer uit': 'Odpočúvanie mikrofónu vypnuté',
   'Microfoon-doorvoer aan (V)': 'Odpočúvanie mikrofónu zapnuté (V)',

@@ -40,6 +40,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Documenttijdlijnen beginnen voortaan met **Datum** in plaats van **Tijd** en
+  bieden in de eerste kolom aparte keuzes voor een datum of een datum met tijd.
+  Een datum blijft zonevrij; een exact tijdstip wordt als ISO-8601 UTC bewaard
+  en lokaal met expliciete UTC-offset getoond. Niet-bestaande zomertijden worden
+  geweigerd, dubbele herfsturen vragen om de bedoelde offset en oude vrije
+  markeringen blijven ongewijzigd werken. De leesweergave en HTML-/PDF-uitvoer
+  dragen nu ook zichtbaar de gekozen documentstijl: accentrail, knooppunten,
+  kaartverloop en metadatachips volgen het profiel, terwijl datum, klok en
+  UTC-offset als een rustige hiërarchie leesbaar blijven.
 - De documentatie legt nu uit hoe je een eigen AI-model aanhaakt, en spreekt de
   aanname tegen dat dat via MCP gaat. `USER_GUIDE` kreeg een sectie
   *AI-assistentie (optioneel)*: de twee schakelaars, een stap-voor-stap route met

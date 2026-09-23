@@ -5,8 +5,11 @@ import 'package:ocideck/services/document_timeline.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/utils/timeline_table_embed_syntax.dart';
 import 'package:ocideck/widgets/reader/document_markdown_view.dart';
+import 'package:timezone/data/latest_all.dart' as tzdata;
+import 'package:timezone/timezone.dart' as tz;
 
 void main() {
+  setUpAll(tzdata.initializeTimeZones);
   const table = '''| Tijd | Gebeurtenis | Status |
 | :--- | --- | ---: |
 | 13:41 | Herstelclaim weerlegd | Vastgesteld |
@@ -48,6 +51,80 @@ void main() {
         .toList();
     expect(embeds, [EmbeddableTimelineTable.timelineType]);
     expect(MarkdownQuillCodec.markdownFromDocument(document), marked);
+  });
+
+  group('tijdlijnmomenten', () {
+    test('een datum zonder tijd blijft een kalenderdatum', () {
+      expect(
+        canonicalDocumentTimelineDate(DateTime(2026, 9, 23)),
+        '2026-09-23',
+      );
+      expect(formatDocumentTimelineMarker('2026-09-23'), '2026-09-23');
+    });
+
+    test('een tijdstip wordt canoniek als UTC opgeslagen', () {
+      final withOffset = DateTime.parse('2026-09-23T14:30:00+02:00');
+
+      expect(
+        canonicalDocumentTimelineInstant(withOffset),
+        '2026-09-23T12:30:00.000Z',
+      );
+    });
+
+    test('UTC-opslag wordt lokaal en met expliciete offset weergegeven', () {
+      const stored = '2026-09-23T12:30:00.000Z';
+      final local = DateTime.parse(stored).toLocal();
+      final expectedOffset = formatDocumentTimelineUtcOffset(
+        local.timeZoneOffset,
+      );
+
+      expect(
+        formatDocumentTimelineMarker(stored),
+        '${canonicalDocumentTimelineDate(local)} '
+        '${local.hour.toString().padLeft(2, '0')}:'
+        '${local.minute.toString().padLeft(2, '0')} $expectedOffset',
+      );
+    });
+
+    test('oude en vrije markeringen blijven bytegetrouw zichtbaar', () {
+      expect(formatDocumentTimelineMarker('13:41'), '13:41');
+      expect(formatDocumentTimelineMarker('Q3 2026'), 'Q3 2026');
+      expect(
+        formatDocumentTimelineMarker('2026-09-23T12:30:00'),
+        '2026-09-23T12:30:00',
+        reason:
+            'een tijd zonder zone mag niet stil als lokale of UTC-tijd gelden',
+      );
+    });
+
+    test('een niet-bestaande zomertijdklok wordt geweigerd', () {
+      final amsterdam = tz.getLocation('Europe/Amsterdam');
+      DateTime project(DateTime utc) => tz.TZDateTime.from(utc, amsterdam);
+
+      final candidates = documentTimelineInstantCandidates(
+        DateTime.utc(2026, 3, 29, 2, 30),
+        toLocal: project,
+      );
+      expect(candidates, isEmpty);
+    });
+
+    test('een dubbel herfstuur biedt beide UTC-momenten aan', () {
+      final amsterdam = tz.getLocation('Europe/Amsterdam');
+      DateTime project(DateTime utc) => tz.TZDateTime.from(utc, amsterdam);
+
+      final candidates = documentTimelineInstantCandidates(
+        DateTime.utc(2026, 10, 25, 2, 30),
+        toLocal: project,
+      );
+
+      expect(candidates, hasLength(2));
+      expect(candidates[0].toIso8601String(), '2026-10-25T00:30:00.000Z');
+      expect(candidates[1].toIso8601String(), '2026-10-25T01:30:00.000Z');
+      expect(
+        candidates.map((instant) => project(instant).timeZoneOffset).toSet(),
+        {const Duration(hours: 2), const Duration(hours: 1)},
+      );
+    });
   });
 
   test('document-deck-document houdt marker direct tegen raw tabel', () {
@@ -92,6 +169,29 @@ $rows''';
       );
     }
     expect(DocumentMarkdownView.blockTexts(source), hasLength(19));
+  });
+
+  testWidgets('een UTC-tijdstip wordt lokaal met expliciete offset getoond', (
+    tester,
+  ) async {
+    const instant = '2026-09-23T12:30:00.000Z';
+    final expected = formatDocumentTimelineMarker(instant);
+    const source = '''$documentTimelineMarker
+| Datum | Gebeurtenis |
+| --- | --- |
+| $instant | Start |''';
+
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: DocumentMarkdownView(source))),
+    );
+
+    final parts = expected.split(' ');
+    expect(find.text('DATUM'), findsOneWidget);
+    expect(find.text(parts[0]), findsOneWidget);
+    expect(find.text(parts[1]), findsOneWidget);
+    expect(find.text(parts[2]), findsOneWidget);
+    expect(find.textContaining('UTC'), findsOneWidget);
+    expect(find.textContaining(instant), findsNothing);
   });
 
   testWidgets('tijdlijn blijft leesbaar en in bronvolgorde bij 200% tekst', (

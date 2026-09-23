@@ -1636,6 +1636,13 @@ const _dutchSourceAddEt = <String, String>{
       'Pildid ja diagrammiandmed ei kaasa',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'See dokument viitab piltidele või diagrammiandmetele eraldi failides. Paljas .md- või .tex-allalaadimine sisaldab ainult teksti — viited on adressaadi jaoks surnud. Valige HTML, PDF või DOCX, et kõik ühes failis edastada, või jätkake, kui loeb ainult tekst.',
+  'Datum en tijd kiezen': 'Vali kuupäev ja kellaaeg',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Seda kohalikku kellaaega suveajale ülemineku tõttu ei eksisteeri. Vali teine kellaaeg.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'See kohalik kellaaeg esineb kaks korda. Vali õige UTC nihe.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Kuupäev jääb kuupäevaks. Kui valid ka kellaaja, salvestab OciDeck ajahetke UTC-s ja kuvab selle kohaliku UTC nihkega.',
   'Microfoon-doorvoer aan': 'Mikrofoni läbilask sisse lülitatud',
   'Microfoon-doorvoer uit': 'Mikrofoni läbilask välja lülitatud',
   'Microfoon-doorvoer aan (V)': 'Mikrofoni läbilask sisse lülitatud (V)',

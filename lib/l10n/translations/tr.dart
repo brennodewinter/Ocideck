@@ -2554,6 +2554,13 @@ const _dutchSourceAddTr = <String, String>{
       'Görüntüler ve grafik verileri dahil edilmez',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Bu belge, ayrı dosyalardaki görüntülere veya grafik verilerine atıfta bulunur. Sade bir .md veya .tex indirmesi yalnızca metni içerir — atıflar alıcı için ölüdür. Her şeyi tek dosyada sunmak için HTML, PDF veya DOCX seçin ya da yalnızca metin önemliyse devam edin.',
+  'Datum en tijd kiezen': 'Tarih ve saat seçin',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Bu yerel saat, yaz saati uygulamasına geçiş nedeniyle mevcut değil. Başka bir saat seçin.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Bu yerel saat iki kez gerçekleşir. Doğru UTC farkını seçin.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Tarih, tarih olarak kalır. Ayrıca bir saat seçerseniz OciDeck zaman noktasını UTC olarak kaydeder ve yerel UTC farkıyla gösterir.',
   'Microfoon-doorvoer aan': 'Mikrofon geçişi açık',
   'Microfoon-doorvoer uit': 'Mikrofon geçişi kapalı',
   'Microfoon-doorvoer aan (V)': 'Mikrofon geçişi açık (V)',

@@ -1658,6 +1658,13 @@ const _dutchSourceAddUk = <String, String>{
       'Зображення та дані діаграм не включаються',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Цей документ посилається на зображення або дані діаграм в окремих файлах. Просте завантаження .md або .tex містить лише текст — для отримувача посилання будуть мертвими. Виберіть HTML, PDF або DOCX, щоб надати все в одному файлі, або продовжуйте, якщо важливий лише текст.',
+  'Datum en tijd kiezen': 'Виберіть дату й час',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Цього місцевого часу не існує через перехід на літній час. Виберіть інший час.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Цей місцевий час трапляється двічі. Виберіть правильне зміщення відносно UTC.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Дата залишається датою. Якщо ви також виберете час, OciDeck збереже момент часу в UTC і покаже його з місцевим зміщенням відносно UTC.',
   'Microfoon-doorvoer aan': 'Моніторинг мікрофона увімкнено',
   'Microfoon-doorvoer uit': 'Моніторинг мікрофона вимкнено',
   'Microfoon-doorvoer aan (V)': 'Моніторинг мікрофона увімкнено (V)',

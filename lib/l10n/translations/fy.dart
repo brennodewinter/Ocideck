@@ -683,6 +683,13 @@ const _dutchSourceAddFy = {
       'Ôfbyldingen en grafykgegevens gean net mei',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Dit dokumint ferwiist nei ôfbyldingen of grafykgegevens yn losse triemen. In suvere .md- of .tex-download hat allinnich de tekst — de ferwizingen binne by de ûntfanger dea. Kies HTML, PDF of DOCX om alles yn ien triem te leverjen, of gean troch as allinnich de tekst telt.',
+  'Datum en tijd kiezen': 'Kies datum en tiid',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Dizze lokale tiid bestiet net troch de oergong nei simmertiid. Kies in oare tiid.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Dizze lokale tiid komt twa kear foar. Kies de juste UTC-offset.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'In datum bliuwt in datum. Kiesst ek in tiid, dan bewarret OciDeck it tiidstip yn UTC en toant it mei de lokale UTC-offset.',
   'Microfoon-doorvoer aan': 'Mikrofoan-trochfeuring oan',
   'Microfoon-doorvoer uit': 'Mikrofoan-trochfeuring út',
   'Microfoon-doorvoer aan (V)': 'Mikrofoan-trochfeuring oan (V)',

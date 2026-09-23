@@ -5229,10 +5229,21 @@ does not rewrite their cell contents. With the caret in a cell, keyboard users
 can sort the active column with `Alt+Shift+↑` or `Alt+Shift+↓`, and open
 **Sorteren als…** with `Alt+Shift+S`.
 
-**Insert → Timeline** drops a marked table with `Tijd`, `Gebeurtenis` and
-`Status` on the cursor — an empty event row is valid; you fill it in afterwards,
-the same as a normal table. **Insert → Table** drops an empty 2×2 grid the same
-way: no dialog, and Undo takes the block away.
+**Insert → Timeline** drops a marked table with `Datum`, `Gebeurtenis` and
+`Status` on the cursor. While editing, click the first column: **Datum kiezen**
+stores only `yyyy-mm-dd`, while **Datum en tijd kiezen** converts the chosen
+local date and time to an ISO-8601 UTC instant. Reading and export project that
+instant back to the local clock and always show its UTC offset. A date therefore
+stays the same calendar day on every computer, while an exact time stays
+unambiguous. OciDeck rejects a wall-clock time skipped by daylight-saving time;
+when the clock repeats an hour, it asks which offset was intended. Existing free
+markers such as `13:41`, `Phase 2` and `unknown` remain unchanged text. An empty
+event row is valid; fill it in afterwards, like a normal table. The timeline
+inherits the selected style's accent, type and document colours; date, clock
+and UTC offset each get their own line so that wider brand typefaces never
+split the digits. **Insert →
+Table** drops an empty 2×2 grid the same way: no dialog, and Undo takes the
+block away.
 A table with two or three columns also offers **Als tijdlijn weergeven**. This
 is an explicit choice: a table is never promoted because its headers happen to
 say “time” or “event”. Before creating it, OciDeck previews the first column as

@@ -42,14 +42,15 @@ extension _DocumentEditorInserts on _DocumentEditorScreenState {
     );
   }
 
-  /// Voeg een tijdlijn in als gemarkeerde tabel met de drie koppen. Een lege
-  /// gebeurtenisrij is geldig: je vult hem later, net als een gewone tabel.
+  /// Voeg een tijdlijn in als gemarkeerde tabel met de drie koppen. Een datum
+  /// is de veilige standaard: tijd is optioneel en wordt pas bij het kiezen van
+  /// een echt tijdstip als UTC opgeslagen.
   void _insertTimeline() {
     final l10n = context.l10n;
     _insertBlock(
       markTableAsTimeline(
         encodeMarkdownTable([
-          [l10n.d('Tijd'), l10n.d('Gebeurtenis'), l10n.d('Status')],
+          [l10n.d('Datum'), l10n.d('Gebeurtenis'), l10n.d('Status')],
           ['', '', ''],
         ]),
       ),

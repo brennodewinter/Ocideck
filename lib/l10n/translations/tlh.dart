@@ -1620,6 +1620,13 @@ const _dutchSourceAddTlh = <String, String>{
       'mIlloghmey \'ej chart De\' Sambe\'',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Filevam mIlloghmey pagh chart De\' \'oS files pIndependents. .md pagh .tex download patlhmo\' text neH ghaj — linksmey Hegh recipientvaD. HTML, PDF, pagh DOCX yIwIv: Hoch single fileDaq. pagh continue, text neH important chu\'.',
+  'Datum en tijd kiezen': 'jaj poH je yIwIv',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Daq poHvam tu’lu’be’, poH tuj lo’choHlu’mo’. poH latlh yIwIv.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Daq poHvam cha’logh qaS. UTC poH pIm lugh yIwIv.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'jaj’e’ taH jaj. poH DAwIvchugh je, UTC lo’taHvIS poH wanI’ pol OciDeck ’ej Daq UTC poH pIm lo’taHvIS ’ang.',
   'Microfoon-doorvoer aan': 'mIq law\' DuQmoH',
   'Microfoon-doorvoer uit': 'mIq law\' DuQmoHbe\'',
   'Microfoon-doorvoer aan (V)': 'mIq law\' DuQmoH (V)',

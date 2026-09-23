@@ -272,6 +272,14 @@ double? _parseNumber(String value) {
 
 int? _parseDate(String value) {
   final input = _withoutQualifier(value);
+  final instant = DateTime.tryParse(input);
+  final hasExplicitZone = RegExp(
+    r'T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})$',
+    caseSensitive: false,
+  ).hasMatch(input);
+  if (instant != null && hasExplicitZone) {
+    return instant.toUtc().millisecondsSinceEpoch;
+  }
   final date = RegExp(
     r'^(\d{4})-(\d{2})-(\d{2})(?:\s*(?:–|—|\.\.|\s-\s)\s*\d{4}-\d{2}-\d{2})?$',
   ).firstMatch(input);

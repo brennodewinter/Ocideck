@@ -683,6 +683,13 @@ const _dutchSourceAddDe = {
       'Bilder und Diagrammdaten werden nicht mitgeliefert',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Dieses Dokument verweist auf Bilder oder Diagrammdaten in separaten Dateien. Ein reiner .md- oder .tex-Download enthält nur den Text — die Verweise sind für den Empfänger tot. Wählen Sie HTML, PDF oder DOCX, um alles in einer Datei zu liefern, oder fahren Sie fort, wenn nur der Text zählt.',
+  'Datum en tijd kiezen': 'Datum und Uhrzeit auswählen',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Diese Ortszeit existiert aufgrund der Umstellung auf die Sommerzeit nicht. Wählen Sie eine andere Uhrzeit.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Diese Ortszeit kommt zweimal vor. Wählen Sie den richtigen UTC-Versatz.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Ein Datum bleibt ein Datum. Wenn Sie zusätzlich eine Uhrzeit wählen, speichert OciDeck den Zeitpunkt in UTC und zeigt ihn mit dem lokalen UTC-Versatz an.',
   'Microfoon-doorvoer aan': 'Mikrofon-Durchschleifung an',
   'Microfoon-doorvoer uit': 'Mikrofon-Durchschleifung aus',
   'Microfoon-doorvoer aan (V)': 'Mikrofon-Durchschleifung an (V)',

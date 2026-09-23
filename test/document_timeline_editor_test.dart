@@ -78,6 +78,11 @@ void main() {
     await tester.pump();
     expect(find.byType(Table), findsOneWidget);
 
+    await tester.showKeyboard(find.widgetWithText(TextField, '12:02'));
+    await tester.pump();
+    expect(find.byTooltip('Datum kiezen'), findsOneWidget);
+    expect(find.byTooltip('Datum en tijd kiezen'), findsOneWidget);
+
     final eventCell = find.widgetWithText(TextField, 'Melding ontvangen');
     expect(eventCell, findsOneWidget);
     await tester.enterText(eventCell, 'Melding gevalideerd');

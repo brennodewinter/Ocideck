@@ -32,16 +32,21 @@ pw.Widget buildDocumentPdfTimeline(
       // tijd (CEST, UTC+02:00)" was dat vijftig keer dezelfde regel in acht
       // bladzijden (#1793). Eén keer, boven de kolom waar hij over gaat.
       if (block.headers.first.isNotEmpty) ...[
-        pw.SizedBox(
-          width: size * 8.2,
-          child: pw.Padding(
-            padding: pw.EdgeInsets.only(right: size * 2.5),
-            child: pw.Text(
-              block.headers.first,
-              style: headerStyle,
-              textAlign: pw.TextAlign.right,
+        pw.Row(
+          children: [
+            pw.SizedBox(
+              width: size * 9.4,
+              child: pw.Padding(
+                padding: pw.EdgeInsets.only(right: size * 2.5),
+                child: pw.Text(
+                  block.headers.first,
+                  style: headerStyle,
+                  textAlign: pw.TextAlign.right,
+                ),
+              ),
             ),
-          ),
+            pw.Expanded(child: pw.SizedBox()),
+          ],
         ),
         pw.SizedBox(height: size * 0.4),
       ],
@@ -79,7 +84,10 @@ pw.Widget _event(
   // in een Column werkt hier niet omdat MultiPage onbegrenste hoogte geeft;
   // pw.Positioned met top+bottom wél, omdat de Stack zijn hoogte haalt uit
   // het niet-positioneerde kind (de Row met de kaart).
-  final labelWidth = size * 8.2;
+  // Een gezoneerd tijdstip krijgt genoeg lucht voor datum, klok en UTC-offset.
+  // De oude breedte dwong vooral bredere huisstijlletters tot rafelige
+  // cijferafbrekingen, terwijl de gebeurteniskaart nog ruim genoeg blijft.
+  final labelWidth = size * 9.4;
   final railWidth = size * 2.2;
   final railX = labelWidth + size * 0.55;
   final dotSize = size * 0.86;
@@ -158,41 +166,62 @@ pw.Widget _eventCard(
       pw.SizedBox(width: railWidth),
       pw.Expanded(
         child: pw.Container(
-          padding: pw.EdgeInsets.all(size * 0.85),
           decoration: pw.BoxDecoration(
             color: style.quoteBackground,
             border: pw.Border.all(color: style.tableBorderColor, width: 0.7),
             borderRadius: pw.BorderRadius.circular(size * 0.65),
           ),
-          child: pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
+          child: pw.Stack(
             children: [
-              if (block.headers.length > 1 && block.headers[1].isNotEmpty) ...[
-                pw.Text(block.headers[1].toUpperCase(), style: labelStyle),
-                pw.SizedBox(height: size * 0.3),
-              ],
-              text(event.event, baseStyle),
-              if (event.metadata != null) ...[
-                pw.SizedBox(height: size * 0.55),
-                pw.Container(
-                  padding: pw.EdgeInsets.symmetric(
-                    horizontal: size * 0.55,
-                    vertical: size * 0.25,
-                  ),
-                  decoration: pw.BoxDecoration(
-                    border: pw.Border.all(
-                      color: style.tableBorderColor,
-                      width: 0.6,
-                    ),
-                    borderRadius: pw.BorderRadius.circular(size),
-                  ),
-                  child: text([
-                    if (block.headers.length > 2)
-                      PdfSpan('${block.headers[2]}: ', bold: true),
-                    ...event.metadata!,
-                  ], baseStyle.copyWith(fontSize: size * 0.74)),
+              pw.Padding(
+                padding: pw.EdgeInsets.fromLTRB(
+                  size * 1.05,
+                  size * 0.85,
+                  size * 0.85,
+                  size * 0.85,
                 ),
-              ],
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    if (block.headers.length > 1 &&
+                        block.headers[1].isNotEmpty) ...[
+                      pw.Text(
+                        block.headers[1].toUpperCase(),
+                        style: labelStyle,
+                      ),
+                      pw.SizedBox(height: size * 0.3),
+                    ],
+                    text(event.event, baseStyle),
+                    if (event.metadata != null) ...[
+                      pw.SizedBox(height: size * 0.55),
+                      pw.Container(
+                        padding: pw.EdgeInsets.symmetric(
+                          horizontal: size * 0.55,
+                          vertical: size * 0.25,
+                        ),
+                        decoration: pw.BoxDecoration(
+                          border: pw.Border.all(
+                            color: style.tableBorderColor,
+                            width: 0.6,
+                          ),
+                          borderRadius: pw.BorderRadius.circular(size),
+                        ),
+                        child: text([
+                          if (block.headers.length > 2)
+                            PdfSpan('${block.headers[2]}: ', bold: true),
+                          ...event.metadata!,
+                        ], baseStyle.copyWith(fontSize: size * 0.74)),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              pw.Positioned(
+                left: 0,
+                top: 0,
+                bottom: 0,
+                child: pw.Container(width: 2.4, color: style.accentColor),
+              ),
             ],
           ),
         ),

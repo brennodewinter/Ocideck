@@ -1673,6 +1673,13 @@ const _dutchSourceAddGa = <String, String>{
       'Ní théann íomhánna agus sonraí cairteacha san áireamh',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'Tagraíonn an doiciméad seo d\'íomhánna nó do shonraí cairteacha i gcomhaid ar leith. Níl ach an téacs i nioslódáil .md nó .tex lom — bíonn na tagairtí marbh ag an bhfaighteoir. Roghnaigh HTML, PDF nó DOCX chun gach rud a sheachadadh in aon chomhad amháin, nó lean ar aghaidh mura bhfuil ach an téacs ag teastáil.',
+  'Datum en tijd kiezen': 'Roghnaigh dáta agus am',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'Ní ann don am áitiúil seo mar gheall ar an aistriú go ham coigilte sholas an lae. Roghnaigh am eile.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'Tarlaíonn an t-am áitiúil seo faoi dhó. Roghnaigh an fritháireamh UTC ceart.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Fanann dáta ina dháta. Má roghnaíonn tú am freisin, stórálann OciDeck an pointe ama in UTC agus taispeánann sé é leis an bhfritháireamh UTC áitiúil.',
   'Microfoon-doorvoer aan': 'Monatóireacht an mhicreafóin ar siúl',
   'Microfoon-doorvoer uit': 'Monatóireacht an mhicreafóin múchta',
   'Microfoon-doorvoer aan (V)': 'Monatóireacht an mhicreafóin ar siúl (V)',

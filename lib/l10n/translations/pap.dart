@@ -682,6 +682,13 @@ const _dutchSourceAddPap = {
       'E imágenan i datanan di gráfika no ta bini ku e',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
       'E dokumento aki ta referí na imágenan òf datanan di gráfika den fèlnan separá. Un download .md òf .tex simplemente ta kontené solamente e teksto — e referensianan ta muri pa e risibidó. Skohe HTML, PDF òf DOCX pa entregá tur kos den un fèl, òf sigui si solamente e teksto konta.',
+  'Datum en tijd kiezen': 'Skohe fecha i ora',
+  'Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.':
+      'E ora lokal aki no ta eksistí pa motibu di e transishon pa ora di verano. Skohe un otro ora.',
+  'Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.':
+      'E ora lokal aki ta sosodé dos biaha. Skohe e offset UTC korekto.',
+  'Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.':
+      'Un fecha ta keda un fecha. Si bo skohe un ora tambe, OciDeck ta warda e momento na UTC i ta mustr’é ku e offset UTC lokal.',
   'Microfoon-doorvoer aan': 'Monitoreo di mikrofonu aktivo',
   'Microfoon-doorvoer uit': 'Monitoreo di mikrofonu inaktivo',
   'Microfoon-doorvoer aan (V)': 'Monitoreo di mikrofonu aktivo (V)',
