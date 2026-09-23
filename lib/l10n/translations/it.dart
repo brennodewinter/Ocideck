@@ -664,6 +664,18 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kies een naam en waar het document komt te staan.':
+      'Scegli un nome e dove verrà salvato il documento.',
+  'Bijv. Vergadernotities': 'Ad es. Appunti della riunione',
+  'Vul een naam in': 'Inserisci un nome',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'In questa cartella esiste già un file con questo nome.',
+  'Nog niet opslaan': 'Non salvare ancora',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Solo in memoria, finché non lo salvi tu.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Il file non viene salvato; il documento resta una bozza.',
+  'Kon het bestand niet aanmaken.': 'Impossibile creare il file.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Immagini e dati dei grafici non sono inclusi',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

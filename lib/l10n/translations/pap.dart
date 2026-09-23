@@ -666,6 +666,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kies een naam en waar het document komt te staan.':
+      'Skohe un nòmber i kaminda e dokumento ta wordu wardá.',
+  'Bijv. Vergadernotities': 'P.e. Nota di reunion',
+  'Vul een naam in': 'Hinka un nòmber',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Ya eksistí un fèl ku e nòmber aki den e map aki.',
+  'Nog niet opslaan': 'Ainda no warda',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Solamente den memoria, te ora bo ward\'é bo mes.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'E fèl no ta wordu wardá; e dokumento ta keda un klad.',
+  'Kon het bestand niet aanmaken.': 'No por a krea e fèl.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'E imágenan i datanan di gráfika no ta bini ku e',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

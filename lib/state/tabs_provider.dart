@@ -527,29 +527,6 @@ class TabsNotifier extends StateNotifier<TabsState> {
     return OpenResult.opened;
   }
 
-  /// Maak een nieuw, leeg document in een nieuw tabblad. Op desktop staat het
-  /// meteen op schijf — in de ingestelde thuismap (de eerste bibliotheek) —
-  /// zodat het een echte naam en herkomst heeft in plaats van aaneengesloten
-  /// naamloze tabbladen, en de eerste Cmd/Ctrl+S in-place opslaat in plaats van
-  /// 'Opslaan als…' te vragen. Zonder ingestelde bibliotheek (verse
-  /// installatie, web) blijft het in het geheugen; de eerste opslaan kiest dan
-  /// alsnog een pad. Spiegel van [newDeckInNewTab] voor de documentmodus.
-  Future<void> newDocument() async {
-    final document = MarkdownDocument.parse('');
-    final settings = _ref.read(settingsProvider);
-    if (!supportsLocalProjectFolders ||
-        settings.homeDirectory == null ||
-        settings.homeDirectory!.isEmpty) {
-      _placeDocumentTab(document);
-      return;
-    }
-    final path = await _createNewDocumentFile(settings);
-    _placeDocumentTab(document, filePath: path);
-    if (path != null) {
-      await _settings.addRecentFile(path, kind: MarkdownKind.document);
-    }
-  }
-
   /// Open [source] als plat document in een NIEUW tabblad — een kopie, nog
   /// zonder bestandspad. Voor de conversie presentatie → document
   /// (DOCUMENT_MODE.md §11.3): het originele deck blijft ongemoeid, en er reist

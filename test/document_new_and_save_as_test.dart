@@ -101,10 +101,14 @@ void main() {
     });
 
     test(
-      'maakt meteen een bestand op schijf en opent het met een pad',
+      'maakt meteen een bestand op de gekozen plek en opent het met dat pad',
       () async {
         final container = await containerWithLibrary(home);
-        await container.read(tabsProvider.notifier).newDocument();
+        final chosen = p.join(home.path, 'mijn_document.md');
+        final created = await container
+            .read(tabsProvider.notifier)
+            .newDocument(filePath: chosen);
+        expect(created, isTrue);
 
         final tabs = container.read(tabsProvider).tabs;
         expect(container.read(tabsProvider).selectedIndex, tabs.length - 1);
@@ -116,7 +120,7 @@ void main() {
           '',
         );
         final path = current.documentNotifier!.currentState.filePath!;
-        expect(p.isWithin(home.path, path), isTrue);
+        expect(path, chosen);
         expect(File(path).existsSync(), isTrue);
         expect(File(path).readAsStringSync(), '');
         // Schoon: het bestand staat op schijf, dus de tab is niet vuil en de
@@ -125,34 +129,61 @@ void main() {
       },
     );
 
-    test('twee nieuwe documenten krijgen elk een eigen bestandsnaam', () async {
-      final container = await containerWithLibrary(home);
-      await container.read(tabsProvider.notifier).newDocument();
-      await container.read(tabsProvider.notifier).newDocument();
+    test(
+      'een bestaand bestand wordt niet overschreven en geeft geen tabblad',
+      () async {
+        final container = await containerWithLibrary(home);
+        final chosen = p.join(home.path, 'mijn_document.md');
+        expect(
+          await container
+              .read(tabsProvider.notifier)
+              .newDocument(filePath: chosen),
+          isTrue,
+        );
+        File(chosen).writeAsStringSync('bestaand werk');
+        final tabCount = container.read(tabsProvider).tabs.length;
 
-      final tabs = container.read(tabsProvider).tabs;
-      final path1 =
-          tabs[tabs.length - 2].documentNotifier!.currentState.filePath!;
-      final path2 = tabs.last.documentNotifier!.currentState.filePath!;
-      expect(path1, isNot(path2));
-      expect(p.basename(path1), 'document.md');
-      expect(p.basename(path2), 'document 2.md');
-      expect(File(path1).existsSync(), isTrue);
-      expect(File(path2).existsSync(), isTrue);
+        // Hetzelfde pad opnieuw: de naam is al geclaimd — false, geen tab,
+        // en het bestaande bestand blijft byte-identiek staan (O_EXCL).
+        expect(
+          await container
+              .read(tabsProvider.notifier)
+              .newDocument(filePath: chosen),
+          isFalse,
+        );
+        expect(container.read(tabsProvider).tabs.length, tabCount);
+        expect(File(chosen).readAsStringSync(), 'bestaand werk');
+
+        // Een andere naam lukt wel.
+        final other = p.join(home.path, 'ander_document.md');
+        expect(
+          await container
+              .read(tabsProvider.notifier)
+              .newDocument(filePath: other),
+          isTrue,
+        );
+        expect(File(other).existsSync(), isTrue);
+      },
+    );
+
+    test('zonder pad blijft het document een naamloos klad', () async {
+      final container = await containerWithLibrary(home);
+      final created = await container.read(tabsProvider.notifier).newDocument();
+      expect(created, isTrue);
+
+      final current = container.read(tabsProvider).current!;
+      expect(current.kind, MarkdownKind.document);
+      expect(current.documentNotifier!.currentState.filePath, isNull);
+      expect(current.documentNotifier!.currentState.isDirty, isFalse);
     });
 
     test('het nieuwe bestand komt bovenaan de recente lijst', () async {
       final container = await containerWithLibrary(home);
-      await container.read(tabsProvider.notifier).newDocument();
-      final path = container
-          .read(tabsProvider)
-          .current!
-          .documentNotifier!
-          .currentState
-          .filePath!;
+      final chosen = p.join(home.path, 'mijn_document.md');
+      await container.read(tabsProvider.notifier).newDocument(filePath: chosen);
 
       final recents = container.read(settingsProvider).recentFiles;
-      expect(recents.first.path, path);
+      expect(recents.first.path, chosen);
       expect(recents.first.kind, MarkdownKind.document);
     });
   });

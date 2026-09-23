@@ -1627,6 +1627,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Valitse nimi ja tallennuspaikka asiakirjalle.',
+  'Bijv. Vergadernotities': 'Esim. Kokousmuistiinpanot',
+  'Vul een naam in': 'Anna nimi',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Tämän niminen tiedosto on jo tässä kansiossa.',
+  'Nog niet opslaan': 'Älä tallenna vielä',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Vain muistissa, kunnes tallennat sen itse.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Tiedostoa ei tallenneta; asiakirja jää luonnokseksi.',
+  'Kon het bestand niet aanmaken.': 'Tiedostoa ei voitu luoda.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Kuvat ja kaaviotiedot eivät tule mukaan',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

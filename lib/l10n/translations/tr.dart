@@ -2538,6 +2538,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Bir ad ve belgenin kaydedileceği yeri seçin.',
+  'Bijv. Vergadernotities': 'Örn. Toplantı notları',
+  'Vul een naam in': 'Bir ad girin',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Bu klasörde bu adla bir dosya zaten var.',
+  'Nog niet opslaan': 'Henüz kaydetme',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Siz kaydedene kadar yalnızca bellekte.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Dosya kaydedilmez; belge taslak olarak kalır.',
+  'Kon het bestand niet aanmaken.': 'Dosya oluşturulamadı.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Görüntüler ve grafik verileri dahil edilmez',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

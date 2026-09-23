@@ -1625,6 +1625,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Izvēlieties nosaukumu un vietu, kur dokuments tiks saglabāts.',
+  'Bijv. Vergadernotities': 'Piem. Sapulces piezīmes',
+  'Vul een naam in': 'Ievadiet nosaukumu',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Fails ar šādu nosaukumu šajā mapē jau pastāv.',
+  'Nog niet opslaan': 'Vēl nesaglabāt',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Tikai atmiņā, līdz pats to saglabājat.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Fails netiks saglabāts; dokuments paliks melnraksts.',
+  'Kon het bestand niet aanmaken.': 'Failu neizdevās izveidot.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Attēli un diagrammu dati netiek iekļauti',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

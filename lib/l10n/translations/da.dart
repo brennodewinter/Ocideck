@@ -1627,6 +1627,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Vælg et navn, og hvor dokumentet skal gemmes.',
+  'Bijv. Vergadernotities': 'F.eks. Mødenoter',
+  'Vul een naam in': 'Indtast et navn',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Der findes allerede en fil med dette navn i denne mappe.',
+  'Nog niet opslaan': 'Gem ikke endnu',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Kun i hukommelsen, indtil du selv gemmer det.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Filen gemmes ikke; dokumentet forbliver et udkast.',
+  'Kon het bestand niet aanmaken.': 'Filen kunne ikke oprettes.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Billeder og diagramdata følger ikke med',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

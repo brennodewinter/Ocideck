@@ -1620,6 +1620,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Valige nimi ja koht, kuhu dokument salvestatakse.',
+  'Bijv. Vergadernotities': 'Nt Koosoleku märkmed',
+  'Vul een naam in': 'Sisestage nimi',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Selle nimega fail on selles kaustas juba olemas.',
+  'Nog niet opslaan': 'Ära veel salvesta',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Ainult mälus, kuni salvestate selle ise.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Faili ei salvestata; dokument jääb mustandiks.',
+  'Kon het bestand niet aanmaken.': 'Faili ei saanud luua.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Pildid ja diagrammiandmed ei kaasa',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

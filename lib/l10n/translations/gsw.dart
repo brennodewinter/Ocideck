@@ -1630,6 +1630,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Wähl en Name und wohin s Dokument gspeicheret wird.',
+  'Bijv. Vergadernotities': 'Z. B. Sitzigsnotize',
+  'Vul een naam in': 'Gib en Name i',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Es git scho e Datei mit däm Name i dämm Ordner.',
+  'Nog niet opslaan': 'Nonig speichere',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Nur im Spicher, bis du\'s säuber speichersch.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'D Datei wird nöd gspeicheret; s Dokument blibt es Konzept.',
+  'Kon het bestand niet aanmaken.': 'D Datei hät nöd chöne aaglait wärde.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Bilder und Grafikdate gahnd nöd mit',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

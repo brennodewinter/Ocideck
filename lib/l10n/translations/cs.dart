@@ -1628,6 +1628,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Vyberte název a místo uložení dokumentu.',
+  'Bijv. Vergadernotities': 'Např. Poznámky ze schůzky',
+  'Vul een naam in': 'Zadejte název',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Soubor s tímto názvem již v této složce existuje.',
+  'Nog niet opslaan': 'Zatím neukládat',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Pouze v paměti, dokud ho sami neuložíte.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Soubor se neuloží; dokument zůstane konceptem.',
+  'Kon het bestand niet aanmaken.': 'Soubor se nepodařilo vytvořit.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Obrázky a data grafů se nepřenášejí',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

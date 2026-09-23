@@ -1642,6 +1642,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Elige nomen et locum ubi documentum servabitur.',
+  'Bijv. Vergadernotities': 'E.g. Notae conventus',
+  'Vul een naam in': 'Nomen inscribe',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Fasciculus hoc nomine in hac capsula iam est.',
+  'Nog niet opslaan': 'Nondum serva',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'In memoria solum, donec ipse serves.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Fasciculus non servatur; documentum hariolum manet.',
+  'Kon het bestand niet aanmaken.': 'Fasciculus creari non potuit.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Imagines et data chartarum non adferuntur',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

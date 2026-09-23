@@ -309,6 +309,13 @@ Small required changes:
   `images/`; the existing "you will lose this image" warning already covers it.
 - **First save = fewest steps:** default filename from the first H1, like a word
   processor names a document after its heading.
+- **New document = name + location chosen up front (#2177).** On desktop the
+  *New document* action asks for a name and a destination folder (a library, or
+  another folder) and creates the empty `.md` there atomically (O_EXCL — an
+  existing file is never overwritten), so the file's identity is the user's
+  choice rather than an auto-numbered `document N.md` in the first library.
+  *Nog niet opslaan* — or web — gives an in-memory scratch tab whose first save
+  still asks.
 - **Web parity** stays deliberately weaker (save = `.md` download only; no
   sidecars/assets) — accepted for now, communicated honestly.
 - **Save and crash recovery are kind-agnostic (delivered 2026-08-08).** The

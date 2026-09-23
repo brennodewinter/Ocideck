@@ -1647,6 +1647,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Изберете име и място за запазване на документа.',
+  'Bijv. Vergadernotities': 'Напр. Бележки от срещата',
+  'Vul een naam in': 'Въведете име',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Файл с това име вече съществува в тази папка.',
+  'Nog niet opslaan': 'Все още не запазвай',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Само в паметта, докато го запазите сами.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Файлът няма да бъде запазен; документът остава чернова.',
+  'Kon het bestand niet aanmaken.': 'Файлът не можа да бъде създаден.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Изображенията и данните на диаграмите не се включват',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

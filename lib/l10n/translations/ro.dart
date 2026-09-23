@@ -1643,6 +1643,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Alegeți un nume și locul unde va fi salvat documentul.',
+  'Bijv. Vergadernotities': 'De ex. Notițe de ședință',
+  'Vul een naam in': 'Introduceți un nume',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Un fișier cu acest nume există deja în acest folder.',
+  'Nog niet opslaan': 'Nu salva încă',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Doar în memorie, până îl salvați dvs.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Fișierul nu va fi salvat; documentul rămâne o ciornă.',
+  'Kon het bestand niet aanmaken.': 'Fișierul nu a putut fi creat.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Imaginile și datele graficelor nu sunt incluse',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

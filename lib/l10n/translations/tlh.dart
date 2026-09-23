@@ -1604,6 +1604,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'pong yIwIv \'ej document pollu\'bogh Daq yIwIv.',
+  'Bijv. Vergadernotities': 'mup: qevas ghItlhmey',
+  'Vul een naam in': 'pong yIghItlh',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'pongvam ghajbogh file foldervamDaq paw\' tu\'lu\'.',
+  'Nog niet opslaan': 'wej pol',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'qawHaq neH, pollu\'pa\' SoH.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'file polbe\'; document Draft jottaH.',
+  'Kon het bestand niet aanmaken.': 'file chenmoHlaHbe\'.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'mIlloghmey \'ej chart De\' Sambe\'',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

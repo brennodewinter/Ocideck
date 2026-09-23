@@ -667,6 +667,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kies een naam en waar het document komt te staan.':
+      'Kies in namme en wêr\'t it dokumint bewarre wurdt.',
+  'Bijv. Vergadernotities': 'Byg. Gearkomstenotysen',
+  'Vul een naam in': 'Fol in namme yn',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Der bestiet al in triem mei dizze namme yn dizze map.',
+  'Nog niet opslaan': 'Noch net bewarje',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Allinnich yn it ûnthâld, oantsto it sels bewarst.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'De triem wurdt net bewarre; it dokumint bliuwt in klad.',
+  'Kon het bestand niet aanmaken.': 'De triem koe net oanmakke wurde.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Ôfbyldingen en grafykgegevens gean net mei',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

@@ -1634,6 +1634,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Pasirinkite pavadinimą ir vietą, kur bus išsaugotas dokumentas.',
+  'Bijv. Vergadernotities': 'Pvz. Susirinkimo užrašai',
+  'Vul een naam in': 'Įveskite pavadinimą',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Failas su tokiu pavadinimu šiame aplanke jau yra.',
+  'Nog niet opslaan': 'Dar neišsaugoti',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Tik atmintyje, kol patys jį išsaugosite.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Failas nebus išsaugotas; dokumentas liks juodraščiu.',
+  'Kon het bestand niet aanmaken.': 'Failo nepavyko sukurti.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'Vaizdai ir diagramų duomenys nepridedami',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

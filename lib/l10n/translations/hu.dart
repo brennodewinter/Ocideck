@@ -1629,6 +1629,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Válasszon nevet és helyet a dokumentum mentéséhez.',
+  'Bijv. Vergadernotities': 'Pl. Értekezleti jegyzetek',
+  'Vul een naam in': 'Adjon meg egy nevet',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Ilyen nevű fájl már létezik ebben a mappában.',
+  'Nog niet opslaan': 'Még ne mentse',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Csak a memóriában, amíg saját maga nem menti.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'A fájl nem lesz mentve; a dokumentum vázlat marad.',
+  'Kon het bestand niet aanmaken.': 'A fájlt nem sikerült létrehozni.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'A képek és a diagramadatok nem kerülnek átadásra',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':

@@ -1645,6 +1645,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kies een naam en waar het document komt te staan.':
+      'Agħżel isem u fejn se jisseħħ id-dokument.',
+  'Bijv. Vergadernotities': 'Eż. Noti tal-laqgħa',
+  'Vul een naam in': 'Daħħal isem',
+  'Er bestaat al een bestand met deze naam in deze map.':
+      'Fajl b\'dan l-isem diġà jeżisti f\'dan il-folder.',
+  'Nog niet opslaan': 'Ħadd ma jisseħħ għad',
+  'Alleen in het geheugen, tot je het zelf opslaat.':
+      'Fil-memorja biss, sakemm isseħħu inti.',
+  'Het bestand wordt niet opgeslagen; het document blijft een klad.':
+      'Il-fajl ma jiġix salvat; id-dokument jibqa\' abbozz.',
+  'Kon het bestand niet aanmaken.': 'Il-fajl ma setax jinħoloq.',
   'Afbeeldingen en grafiekdata gaan niet mee':
       'L-immaġini u d-data tal-graffs ma jiġux inklużi',
   'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
