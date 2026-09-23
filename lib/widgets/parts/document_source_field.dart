@@ -115,6 +115,9 @@ class _DocumentSourceFieldState extends State<_DocumentSourceField> {
               controller: widget.controller,
               focusNode: widget.focusNode,
               scrollController: _scroll,
+              // Dezelfde typ-hulp als de deck-broneditor: lijstjes (ook
+              // taaklijsten) zetten door bij Enter en haken sluiten zichzelf.
+              inputFormatters: const [MarkdownSmartInputFormatter()],
               maxLines: null,
               expands: true,
               textAlignVertical: TextAlignVertical.top,

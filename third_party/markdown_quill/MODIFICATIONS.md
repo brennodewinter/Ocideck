@@ -22,3 +22,14 @@ Vendoring gives us control over bug fixes and compatibility with future
    unnecessary library name (`markdown_quill.dart`), added `const` to
    `CodeBlockLanguageAttribute` constructor, renamed local variables
    `_leadingSpacesPattern`/`_softLineBreak` to avoid leading underscores.
+
+4. **Preserved `h4`–`h6` headings.** Upstream's `_elementToBlockAttr` mapped
+   only `h1`–`h3`; a `####` heading silently became a plain paragraph and the
+   level was lost on the next save. Added `h4`/`h5`/`h6` → `Attribute.h4`/`h5`/`h6`.
+
+5. **Task-list checkbox survives loose lists.** The `li` handler read
+   `element.children!.first` as the `<input>` checkbox, but `package:markdown`
+   nests the checkbox inside the `<p>` child when a list is loose (blank line
+   between items) — so `- [x]` read back as unchecked. The handler now finds
+   the `input` element anywhere in the item subtree
+   (`_firstDescendantWithTag`).

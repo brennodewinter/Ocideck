@@ -264,4 +264,58 @@ Tekst.
       expect(restored, contains('2. Stap twee'));
     });
   });
+
+  group('taaklijsten en diepe koppen', () {
+    String roundTrip(String markdown) =>
+        MarkdownQuillCodec.markdownFromDocument(
+          MarkdownQuillCodec.documentFromMarkdown(markdown),
+        );
+
+    test('een taaklijst wordt checked/unchecked en komt er weer uit', () {
+      const source = '- [ ] Te doen\n- [x] Klaar\n- Gewoon\n';
+
+      final document = MarkdownQuillCodec.documentFromMarkdown(source);
+      final attrs = document
+          .toDelta()
+          .toList()
+          .map((op) => op.attributes?['list'])
+          .toList();
+      expect(attrs, containsAllInOrder(['unchecked', 'checked', 'bullet']));
+
+      final restored = roundTrip(source);
+      expect(restored, contains('- [ ] Te doen'));
+      expect(restored, contains('- [x] Klaar'));
+      expect(restored, contains('- Gewoon'));
+    });
+
+    test('een losse taaklijst (lege regels) behoudt het vinkje', () {
+      // Regressie: in een "loose" lijst nest de markdown-parser het
+      // <input>-vinkje in het <p>-kind van het item; de codec las alleen het
+      // eerste kind en verloor daardoor elke afgevinkte status.
+      const source = '- [x] Klaar\n\n- [ ] Te doen\n';
+
+      final document = MarkdownQuillCodec.documentFromMarkdown(source);
+      final attrs = document
+          .toDelta()
+          .toList()
+          .map((op) => op.attributes?['list'])
+          .toList();
+      expect(attrs, containsAllInOrder(['checked', 'unchecked']));
+
+      final restored = roundTrip(source);
+      expect(restored, contains('- [x] Klaar'));
+      expect(restored, contains('- [ ] Te doen'));
+    });
+
+    test('h4 t/m h6 behouden hun niveau door de brug heen', () {
+      // Regressie: de codec kende alleen h1-h3, waardoor `####` stil een kale
+      // alinea werd en het kopniveau bij de eerste visuele bewerking wegviel.
+      const source = '# Een\n#### Vier\n###### Zes\n';
+
+      final restored = roundTrip(source);
+      expect(restored, contains('# Een'));
+      expect(restored, contains('#### Vier'));
+      expect(restored, contains('###### Zes'));
+    });
+  });
 }
