@@ -106,7 +106,7 @@ de OciDeck-targets:
 | Target | Native-crypto-route | Rust nodig bij de bouw? |
 |---|---|---|
 | macOS / iOS (via Swift Package Manager) | voorgebouwd `flutter_vodozemac.xcframework` | Nee |
-| macOS / iOS (via CocoaPods) | cargokit-bronbouw | Ja |
+| iOS (via CocoaPods) | cargokit-bronbouw | Ja |
 | Windows | cargokit-bronbouw | **Ja** |
 | Linux | cargokit-bronbouw | **Ja** |
 | Web | handmatige WASM-bouw (`cargo` + `flutter_rust_bridge_codegen`) | **Ja** |

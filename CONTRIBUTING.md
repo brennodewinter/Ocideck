@@ -73,7 +73,7 @@ relies on when it says contributors keep copyright in their own work.)*
 - `make` (the `Makefile` is the entry point for all quality checks).
 
 See [`docs/BUILD.md`](docs/BUILD.md) for platform-specific build notes (including
-the macOS CocoaPods locale caveat and the vendored plugin forks).
+the vendored plugin forks).
 
 ## Setup
 

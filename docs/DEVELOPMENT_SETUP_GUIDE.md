@@ -62,7 +62,7 @@ Setting up a proper development environment is crucial for contributing to OciDe
 # Install Xcode command line tools  
 xcode-select --install
 
-# Install CocoaPods (required for iOS/Mac builds)
+# Install CocoaPods (required for iOS builds; macOS uses Swift Package Manager)
 sudo gem install cocoapods
 
 # Install cmake — the dartcv4 native-assets build hook needs it on every

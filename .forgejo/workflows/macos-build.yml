@@ -19,7 +19,7 @@ name: macos-build
 # draait `flutter test`. Op Linux kostte dat de release van v0.4.9 — een plugin
 # eiste een systeembibliotheek die niemand installeerde, en de eerste machine
 # die het merkte was de releaseketen. Hier kan hetzelfde: een Flutter-bump die
-# de Podfile, een plugin of de gegenereerde Xcode-config raakt, breekt de build
+# een plugin of de gegenereerde Xcode-config raakt, breekt de build
 # pas bij de tag.
 #
 # Dus bouwt hij weer na een merge, maar alleen wanneer er iets veranderde dat de
