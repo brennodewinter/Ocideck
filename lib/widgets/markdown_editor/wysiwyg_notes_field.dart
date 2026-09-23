@@ -99,18 +99,7 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
     // Bullet/numbered list **item text**: the body colour, not Quill's ambient
     // default (a link/brand colour in the light theme). Spacing mirrors Quill's
     // own list defaults.
-    lists: DefaultListBlockStyle(
-      body,
-      HorizontalSpacing.zero,
-      doc
-          ? const VerticalSpacing(0, kDocumentParagraphGap)
-          : const VerticalSpacing(6, 0),
-      doc
-          ? const VerticalSpacing(0, kDocumentListRowGap)
-          : const VerticalSpacing(0, 6),
-      null,
-      null,
-    ),
+    lists: _listStylesFor(theme),
     // The list **marker** (bullet dot / number) is coloured from `leading`, not
     // `lists`. Pin it to the body colour too, else the dot stays on the ambient
     // blue while its own item text is on-surface (visible under Europa).
@@ -190,6 +179,72 @@ DefaultStyles defaultStylesFor(MarkdownEditorTheme theme) {
       null,
     ),
   );
+}
+
+/// De stijl van lijstblokken, incl. het taaklijst-vinkje. Los van
+/// [defaultStylesFor] om die onder de methodenlengte-limiet te houden.
+DefaultListBlockStyle _listStylesFor(MarkdownEditorTheme theme) {
+  final doc = theme.documentTypography;
+  return DefaultListBlockStyle(
+    theme.bodyStyle,
+    HorizontalSpacing.zero,
+    doc
+        ? const VerticalSpacing(0, kDocumentParagraphGap)
+        : const VerticalSpacing(6, 0),
+    doc
+        ? const VerticalSpacing(0, kDocumentListRowGap)
+        : const VerticalSpacing(0, 6),
+    null,
+    // Vinkje in de kleuren van de documentstijl: Quill's eigen checkbox
+    // kleurt uit de ambient colorScheme (het app-thema) en viel daarmee
+    // uit de toon van een gekozen profiel. Dezelfde kleuren als `_checkMarker`
+    // in de lezer, zodat schrijven en lezen er gelijk uitzien.
+    _ThemedCheckboxBuilder(
+      checkedColor: theme.checkboxChecked ?? theme.accent,
+      uncheckedColor: theme.checkboxEmpty ?? theme.hint,
+      size: theme.fontSize + 2,
+    ),
+  );
+}
+
+/// Tekent het vinkje van een taaklijstitem met de kleuren van het
+/// [MarkdownEditorTheme] in plaats van de ambient `colorScheme`. Vorm en
+/// maat volgen `_checkMarker` in de lezer: een outline-icoon in de
+/// checklistkleur van het profiel.
+class _ThemedCheckboxBuilder extends QuillCheckboxBuilder {
+  _ThemedCheckboxBuilder({
+    required this.checkedColor,
+    required this.uncheckedColor,
+    required this.size,
+  });
+
+  final Color checkedColor;
+  final Color uncheckedColor;
+  final double size;
+
+  @override
+  Widget build({
+    required BuildContext context,
+    required bool isChecked,
+    required ValueChanged<bool> onChanged,
+  }) {
+    return Semantics(
+      checked: isChecked,
+      child: GestureDetector(
+        onTap: () => onChanged(!isChecked),
+        child: Padding(
+          padding: EdgeInsetsDirectional.only(end: size / 2),
+          child: Icon(
+            isChecked
+                ? Icons.check_box_outlined
+                : Icons.check_box_outline_blank,
+            size: size,
+            color: isChecked ? checkedColor : uncheckedColor,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class WysiwygNotesField extends StatefulWidget {
