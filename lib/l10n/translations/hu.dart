@@ -1629,10 +1629,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofon-figyelés bekapcsolva',
+  'Microfoon-doorvoer uit': 'Mikrofon-figyelés kikapcsolva',
+  'Microfoon-doorvoer aan (V)': 'Mikrofon-figyelés bekapcsolva (V)',
+  'De microfoon kon niet worden aangeschakeld': 'A mikrofon nem kapcsolható be',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Engedélyezze az OciDeck számára a mikrofonhozzáférést a rendszerbeállításokban, és ellenőrizze, hogy csatlakoztatva van-e bemeneti eszköz.',
+  'Open systeeminstellingen': 'Rendszerbeállítások megnyitása',
   'Microfoon-doorvoer': 'Mikrofon-monitorozás',
   'Microfoon-doorvoer (V)': 'Mikrofon-monitorozás (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'A mikrofont nem sikerült bekapcsolni. Ellenőrizze az engedélyt és a bemeneti eszközt.',
   'Vat samen met AI…': 'Összefoglalás AI-val…',
   'Tekst inkorten met AI': 'Szöveg rövidítése AI-val',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

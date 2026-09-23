@@ -667,10 +667,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Microfoon-doorvoer aan': 'Mikrofoan-trochfeuring oan',
+  'Microfoon-doorvoer uit': 'Mikrofoan-trochfeuring út',
+  'Microfoon-doorvoer aan (V)': 'Mikrofoan-trochfeuring oan (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'De mikrofoan koe net ynskeakele wurde',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Jou OciDeck tagong ta de mikrofoan yn de systeemynstellings, en kontrolearje dat der in ynfierapparaat oansletten is.',
+  'Open systeeminstellingen': 'Systeemynstellings iepenje',
   'Microfoon-doorvoer': 'Mikrofoan-trochfiering',
   'Microfoon-doorvoer (V)': 'Mikrofoan-trochfiering (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'De mikrofoan koe net ynskeakele wurde. Kontrolearje de tastimming en it ynfier-apparaat.',
   'Vat samen met AI…': 'Gearfetsje mei AI…',
   'Tekst inkorten met AI': 'Tekst ynkoarte mei AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

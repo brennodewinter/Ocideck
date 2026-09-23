@@ -1631,10 +1631,16 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Microfoon-doorvoer aan': 'Propuštanje mikrofona uključeno',
+  'Microfoon-doorvoer uit': 'Propuštanje mikrofona isključeno',
+  'Microfoon-doorvoer aan (V)': 'Propuštanje mikrofona uključeno (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Mikrofon se nije mogao uključiti',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Dopusti OciDecku pristup mikrofonu u postavkama sustava i provjeri je li ulazni uređaj povezan.',
+  'Open systeeminstellingen': 'Otvori postavke sustava',
   'Microfoon-doorvoer': 'Propuštanje mikrofona',
   'Microfoon-doorvoer (V)': 'Propuštanje mikrofona (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofon se nije mogao uključiti. Provjerite dopuštenje i ulazni uređaj.',
   'Vat samen met AI…': 'Sažmi uz AI…',
   'Tekst inkorten met AI': 'Skrati tekst uz AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

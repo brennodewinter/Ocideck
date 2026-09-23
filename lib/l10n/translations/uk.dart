@@ -1642,10 +1642,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Microfoon-doorvoer aan': 'Моніторинг мікрофона увімкнено',
+  'Microfoon-doorvoer uit': 'Моніторинг мікрофона вимкнено',
+  'Microfoon-doorvoer aan (V)': 'Моніторинг мікрофона увімкнено (V)',
+  'De microfoon kon niet worden aangeschakeld': 'Не вдалося ввімкнути мікрофон',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Надайте OciDeck доступ до мікрофона в системних налаштуваннях і перевірте, чи підключено пристрій введення.',
+  'Open systeeminstellingen': 'Відкрити системні налаштування',
   'Microfoon-doorvoer': 'Моніторинг мікрофона',
   'Microfoon-doorvoer (V)': 'Моніторинг мікрофона (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Не вдалося ввімкнути мікрофон. Перевірте дозвіл і пристрій введення.',
   'Vat samen met AI…': 'Стиснути за допомогою ШІ…',
   'Tekst inkorten met AI': 'Скоротити текст за допомогою ШІ',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

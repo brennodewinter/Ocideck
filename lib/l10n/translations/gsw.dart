@@ -1630,10 +1630,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofon-Durchleitig aa',
+  'Microfoon-doorvoer uit': 'Mikrofon-Durchleitig ab',
+  'Microfoon-doorvoer aan (V)': 'Mikrofon-Durchleitig aa (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'S Mikrofon het nöd chöne aktiviert wärde',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Gib OciDeck i de Systemystellige Zuegriff ufs Mikrofon und lueg, ob en Ygabegrät aagschlosse isch.',
+  'Open systeeminstellingen': 'Systemystellige ufmache',
   'Microfoon-doorvoer': 'Mikrofon-Durchleitig',
   'Microfoon-doorvoer (V)': 'Mikrofon-Durchleitig (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'S Mikrofon hät nöd chöne aktiviert wärde. Prüef d Berechtigung und s Iigabgerät.',
   'Vat samen met AI…': 'Mit KI zämmefasse…',
   'Tekst inkorten met AI': 'Täxt mit KI chürze',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

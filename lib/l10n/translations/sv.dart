@@ -1626,10 +1626,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofonmonitorering på',
+  'Microfoon-doorvoer uit': 'Mikrofonmonitorering av',
+  'Microfoon-doorvoer aan (V)': 'Mikrofonmonitorering på (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Mikrofonen kunde inte aktiveras',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Ge OciDeck åtkomst till mikrofonen i systeminställningarna och kontrollera att en inmatningsenhet är ansluten.',
+  'Open systeeminstellingen': 'Öppna systeminställningar',
   'Microfoon-doorvoer': 'Mikrofonmonitorering',
   'Microfoon-doorvoer (V)': 'Mikrofonmonitorering (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofonen kunde inte aktiveras. Kontrollera behörigheten och ingångsenheten.',
   'Vat samen met AI…': 'Sammanfatta med AI…',
   'Tekst inkorten met AI': 'Korta texten med AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

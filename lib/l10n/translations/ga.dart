@@ -1657,10 +1657,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Microfoon-doorvoer aan': 'Monatóireacht an mhicreafóin ar siúl',
+  'Microfoon-doorvoer uit': 'Monatóireacht an mhicreafóin múchta',
+  'Microfoon-doorvoer aan (V)': 'Monatóireacht an mhicreafóin ar siúl (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Níorbh fhéidir an micreafón a chumasú',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Tabhair rochtain ar an micreafón do OciDeck i socruithe an chórais, agus seiceáil go bhfuil gléas ionchuir ceangailte.',
+  'Open systeeminstellingen': 'Oscail socruithe an chórais',
   'Microfoon-doorvoer': 'Trí-tharchur micreafóin',
   'Microfoon-doorvoer (V)': 'Trí-tharchur micreafóin (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Níorbh fhéidir an micreafón a chasadh air. Seiceáil an cead agus an gléas ionchuir.',
   'Vat samen met AI…': 'Déan achoimre le AI…',
   'Tekst inkorten met AI': 'Giorraigh an téacs le AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

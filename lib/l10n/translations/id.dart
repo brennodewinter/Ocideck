@@ -1627,10 +1627,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Microfoon-doorvoer aan': 'Penerusan mikrofon aktif',
+  'Microfoon-doorvoer uit': 'Penerusan mikrofon nonaktif',
+  'Microfoon-doorvoer aan (V)': 'Penerusan mikrofon aktif (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Mikrofon tidak dapat diaktifkan',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Berikan OciDeck akses ke mikrofon di pengaturan sistem, dan periksa bahwa ada perangkat input yang terhubung.',
+  'Open systeeminstellingen': 'Buka pengaturan sistem',
   'Microfoon-doorvoer': 'Monitor mikrofon',
   'Microfoon-doorvoer (V)': 'Monitor mikrofon (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofon tidak dapat diaktifkan. Periksa izin dan perangkat input.',
   'Vat samen met AI…': 'Ringkas dengan AI…',
   'Tekst inkorten met AI': 'Persingkat teks dengan AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

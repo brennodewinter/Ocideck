@@ -1652,10 +1652,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Microfoon-doorvoer aan': 'Η ακρόαση μικροφώνου ενεργή',
+  'Microfoon-doorvoer uit': 'Η ακρόαση μικροφώνου ανενεργή',
+  'Microfoon-doorvoer aan (V)': 'Η ακρόαση μικροφώνου ενεργή (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Δεν ήταν δυνατή η ενεργοποίηση του μικροφώνου',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Παραχωρήστε στο OciDeck πρόσβαση στο μικρόφωνο στις ρυθμίσεις συστήματος και ελέγξτε ότι είναι συνδεδεμένη μια συσκευή εισόδου.',
+  'Open systeeminstellingen': 'Άνοιγμα ρυθμίσεων συστήματος',
   'Microfoon-doorvoer': 'Αναπαραγωγή μικροφώνου',
   'Microfoon-doorvoer (V)': 'Αναπαραγωγή μικροφώνου (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Δεν ήταν δυνατή η ενεργοποίηση του μικροφώνου. Ελέγξτε την άδεια και τη συσκευή εισόδου.',
   'Vat samen met AI…': 'Σύνοψη με ΤΝ…',
   'Tekst inkorten met AI': 'Σύντμηση κειμένου με ΤΝ',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

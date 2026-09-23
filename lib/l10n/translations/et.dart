@@ -1620,10 +1620,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofoni läbilask sisse lülitatud',
+  'Microfoon-doorvoer uit': 'Mikrofoni läbilask välja lülitatud',
+  'Microfoon-doorvoer aan (V)': 'Mikrofoni läbilask sisse lülitatud (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Mikrofoni ei saanud sisse lülitada',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Anna OciDeckile mikrofonile juurdepääs süsteemi seadetes ja kontrolli, et sisendseade on ühendatud.',
+  'Open systeeminstellingen': 'Ava süsteemi seaded',
   'Microfoon-doorvoer': 'Mikrofoni läbilaskmine',
   'Microfoon-doorvoer (V)': 'Mikrofoni läbilaskmine (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofoni ei õnnestunud sisse lülitada. Kontrolli luba ja sisendseadet.',
   'Vat samen met AI…': 'Võta AI-ga kokku…',
   'Tekst inkorten met AI': 'Lühenda teksti AI-ga',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

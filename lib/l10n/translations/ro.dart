@@ -1643,10 +1643,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Microfoon-doorvoer aan': 'Monitorizarea microfonului activată',
+  'Microfoon-doorvoer uit': 'Monitorizarea microfonului dezactivată',
+  'Microfoon-doorvoer aan (V)': 'Monitorizarea microfonului activată (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Microfonul nu a putut fi activat',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Acordați OciDeck acces la microfon din setările de sistem și verificați dacă este conectat un dispozitiv de intrare.',
+  'Open systeeminstellingen': 'Deschide setările de sistem',
   'Microfoon-doorvoer': 'Monitorizare microfon',
   'Microfoon-doorvoer (V)': 'Monitorizare microfon (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Microfonul nu a putut fi activat. Verificați permisiunea și dispozitivul de intrare.',
   'Vat samen met AI…': 'Rezumă cu AI…',
   'Tekst inkorten met AI': 'Scurtează textul cu AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

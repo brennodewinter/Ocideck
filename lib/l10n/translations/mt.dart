@@ -1645,10 +1645,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Microfoon-doorvoer aan': 'Għeď il-mikrofonu mixgħul',
+  'Microfoon-doorvoer uit': 'Għeď il-mikrofonu mitfi',
+  'Microfoon-doorvoer aan (V)': 'Għeď il-mikrofonu mixgħul (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Il-mikrofonu ma setax jiġi mixgħul',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Agħti lill-OciDeck aċċess għall-mikrofonu fis-settings tas-sistema, u iċċekkja li hemm apparat ta\' input imqabbad.',
+  'Open systeeminstellingen': 'Iftaħ is-settings tas-sistema',
   'Microfoon-doorvoer': 'Trażmissjoni tal-mikrofon',
   'Microfoon-doorvoer (V)': 'Trażmissjoni tal-mikrofon (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Il-mikrofonu ma setax jiġi mixgħul. Iċċekkja l-permess u l-apparat tad-dħul.',
   'Vat samen met AI…': 'Ġemme\' bl-AI…',
   'Tekst inkorten met AI': 'Iqsar it-test bl-AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

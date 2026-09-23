@@ -1604,10 +1604,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Microfoon-doorvoer aan': 'mIq law\' DuQmoH',
+  'Microfoon-doorvoer uit': 'mIq law\' DuQmoHbe\'',
+  'Microfoon-doorvoer aan (V)': 'mIq law\' DuQmoH (V)',
+  'De microfoon kon niet worden aangeschakeld': 'mIq law\' cholHa\'',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'OciDeck mIq law\' chav ghom\'a\' chaw\', \'ej input SeH yenpu\' patlhchu\'.',
+  'Open systeeminstellingen': 'SeH patlh poSmoH',
   'Microfoon-doorvoer': 'ghogh wab lIS',
   'Microfoon-doorvoer (V)': 'ghogh wab lIS (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'ghogh wab chenlaHbe\'. chaw\' \'ej wab DevwI\' yI\'bej.',
   'Vat samen met AI…': 'ngabmoH AI…',
   'Tekst inkorten met AI': 'mu\' pIqmoH AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

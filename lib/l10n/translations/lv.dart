@@ -1625,10 +1625,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofona monitorings ieslēgts',
+  'Microfoon-doorvoer uit': 'Mikrofona monitorings izslēgts',
+  'Microfoon-doorvoer aan (V)': 'Mikrofona monitorings ieslēgts (V)',
+  'De microfoon kon niet worden aangeschakeld': 'Mikrofonu neizdevās ieslēgt',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Piešķiriet OciDeck piekļuvi mikrofonam sistēmas iestatījumos un pārbaudiet, vai ir pievienota ievades ierīce.',
+  'Open systeeminstellingen': 'Atvērt sistēmas iestatījumus',
   'Microfoon-doorvoer': 'Mikrofona monitorings',
   'Microfoon-doorvoer (V)': 'Mikrofona monitorings (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofonu neizdevās ieslēgt. Pārbaudiet atļauju un ievades ierīci.',
   'Vat samen met AI…': 'Apkopot ar AI…',
   'Tekst inkorten met AI': 'Saīsināt tekstu ar AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
