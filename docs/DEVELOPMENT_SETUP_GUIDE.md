@@ -62,9 +62,6 @@ Setting up a proper development environment is crucial for contributing to OciDe
 # Install Xcode command line tools  
 xcode-select --install
 
-# Install CocoaPods (required for iOS builds; macOS uses Swift Package Manager)
-sudo gem install cocoapods
-
 # Install cmake — the dartcv4 native-assets build hook needs it on every
 # `flutter test`/`make check`, not just for release builds (see docs/CHECKS.md)
 brew install cmake
@@ -285,7 +282,6 @@ The development workflow enforces:
 ### Platform-Specific Issues
 
 #### macOS
-- CocoaPods issues: `pod install` in `ios/` directory if needed  
 - Xcode permissions: Ensure full disk access for Flutter apps
 
 #### Windows
