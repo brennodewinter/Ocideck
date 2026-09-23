@@ -176,6 +176,9 @@ extension _PresenterViews on _FullscreenPresenterState {
           ? _next
           : null,
       onExit: _exit,
+      // Mic ook in de hover-balk (#2167): op één scherm is de cockpit weg.
+      onMicToggle: isDesktopNative ? () => _toggleMicMonitor(this) : null,
+      micActive: _micMonitorRunning(this),
       child: GestureDetector(
         onTap: _tableEditMode || _timedManualAdvanceBlocked(this)
             ? null
@@ -189,6 +192,7 @@ extension _PresenterViews on _FullscreenPresenterState {
             // Bij een quiz is "we wachten op een antwoord" ook voor de zaal
             // zinvolle informatie; zonder badge lijkt auto-play vastgelopen.
             if (_showQuestionWaitBadge) _buildQuestionWaitBadge(context),
+            ..._micBadgeIfRunning(this),
           ],
         ),
       ),

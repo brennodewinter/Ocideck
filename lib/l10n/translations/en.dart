@@ -827,10 +827,16 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Microfoon-doorvoer aan': 'Microphone pass-through on',
+  'Microfoon-doorvoer uit': 'Microphone pass-through off',
+  'Microfoon-doorvoer aan (V)': 'Microphone pass-through on (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'The microphone could not be enabled',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Grant OciDeck access to the microphone in the system settings, and check that an input device is connected.',
+  'Open systeeminstellingen': 'Open system settings',
   'Microfoon-doorvoer': 'Microphone pass-through',
   'Microfoon-doorvoer (V)': 'Microphone pass-through (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'The microphone could not be turned on. Check the permission and the input device.',
   'Vat samen met AI…': 'Condense with AI…',
   'Tekst inkorten met AI': 'Shorten text with AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

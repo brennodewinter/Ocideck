@@ -667,10 +667,16 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Microfoon-doorvoer aan': 'Retour micro activé',
+  'Microfoon-doorvoer uit': 'Retour micro désactivé',
+  'Microfoon-doorvoer aan (V)': 'Retour micro activé (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Le micro n\'a pas pu être activé',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Autorisez OciDeck à accéder au micro dans les réglages système et vérifiez qu\'un périphérique d\'entrée est connecté.',
+  'Open systeeminstellingen': 'Ouvrir les réglages système',
   'Microfoon-doorvoer': 'Retour du microphone',
   'Microfoon-doorvoer (V)': 'Retour du microphone (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Le microphone n\'a pas pu être activé. Vérifiez l\'autorisation et le périphérique d\'entrée.',
   'Vat samen met AI…': 'Condenser avec l\'IA…',
   'Tekst inkorten met AI': 'Raccourcir le texte avec l\'IA',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

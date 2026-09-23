@@ -664,10 +664,16 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Microfoon-doorvoer aan': 'Monitoraggio microfono attivo',
+  'Microfoon-doorvoer uit': 'Monitoraggio microfono disattivo',
+  'Microfoon-doorvoer aan (V)': 'Monitoraggio microfono attivo (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Impossibile attivare il microfono',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Concedi a OciDeck l\'accesso al microfono nelle impostazioni di sistema e verifica che sia collegato un dispositivo di ingresso.',
+  'Open systeeminstellingen': 'Apri impostazioni di sistema',
   'Microfoon-doorvoer': 'Monitoraggio del microfono',
   'Microfoon-doorvoer (V)': 'Monitoraggio del microfono (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Impossibile attivare il microfono. Controlla l\'autorizzazione e il dispositivo di input.',
   'Vat samen met AI…': 'Riassumi con l\'IA…',
   'Tekst inkorten met AI': 'Accorcia il testo con l\'IA',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

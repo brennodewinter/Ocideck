@@ -1633,10 +1633,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Microfoon-doorvoer aan': 'Odpočúvanie mikrofónu zapnuté',
+  'Microfoon-doorvoer uit': 'Odpočúvanie mikrofónu vypnuté',
+  'Microfoon-doorvoer aan (V)': 'Odpočúvanie mikrofónu zapnuté (V)',
+  'De microfoon kon niet worden aangeschakeld': 'Mikrofón sa nepodarilo zapnúť',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Udeľte OciDecku prístup k mikrofónu v nastaveniach systému a skontrolujte, či je pripojené vstupné zariadenie.',
+  'Open systeeminstellingen': 'Otvoriť nastavenia systému',
   'Microfoon-doorvoer': 'Monitorovanie mikrofónu',
   'Microfoon-doorvoer (V)': 'Monitorovanie mikrofónu (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofón sa nepodarilo zapnúť. Skontrolujte povolenie a vstupné zariadenie.',
   'Vat samen met AI…': 'Zhrnúť pomocou AI…',
   'Tekst inkorten met AI': 'Skrátiť text pomocou AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

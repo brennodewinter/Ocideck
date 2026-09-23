@@ -1655,10 +1655,16 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Microfoon-doorvoer aan': 'Monitorização do microfone ativada',
+  'Microfoon-doorvoer uit': 'Monitorização do microfone desativada',
+  'Microfoon-doorvoer aan (V)': 'Monitorização do microfone ativada (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Não foi possível ativar o microfone',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Conceda ao OciDeck acesso ao microfone nas definições do sistema e verifique se há um dispositivo de entrada ligado.',
+  'Open systeeminstellingen': 'Abrir definições do sistema',
   'Microfoon-doorvoer': 'Monitorização do microfone',
   'Microfoon-doorvoer (V)': 'Monitorização do microfone (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Não foi possível ativar o microfone. Verifique a permissão e o dispositivo de entrada.',
   'Vat samen met AI…': 'Resumir com IA…',
   'Tekst inkorten met AI': 'Encurtar o texto com IA',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

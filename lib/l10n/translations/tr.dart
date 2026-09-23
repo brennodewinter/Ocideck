@@ -2538,10 +2538,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofon geçişi açık',
+  'Microfoon-doorvoer uit': 'Mikrofon geçişi kapalı',
+  'Microfoon-doorvoer aan (V)': 'Mikrofon geçişi açık (V)',
+  'De microfoon kon niet worden aangeschakeld': 'Mikrofon açılamadı',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Sistem ayarlarında OciDeck\'e mikrofon erişimi verin ve bir giriş aygıtının bağlı olduğunu denetleyin.',
+  'Open systeeminstellingen': 'Sistem ayarlarını aç',
   'Microfoon-doorvoer': 'Mikrofon geçişi',
   'Microfoon-doorvoer (V)': 'Mikrofon geçişi (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofon açılamadı. İzni ve giriş aygıtını kontrol edin.',
   'Vat samen met AI…': 'AI ile özetle…',
   'Tekst inkorten met AI': 'Metni AI ile kısalt',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

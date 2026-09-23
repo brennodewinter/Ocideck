@@ -45,6 +45,7 @@ import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
 import '../../utils/shortcut_label.dart';
 import '../../utils/table_cell_navigation.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/inline_markdown.dart';

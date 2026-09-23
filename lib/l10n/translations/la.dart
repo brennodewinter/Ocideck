@@ -1642,10 +1642,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Microfoon-doorvoer aan': 'Microphoni transmissio activa',
+  'Microfoon-doorvoer uit': 'Microphoni transmissio inactiva',
+  'Microfoon-doorvoer aan (V)': 'Microphoni transmissio activa (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Microphonum activari non potuit',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Da OciDeck aditum ad microphonum in constitutionibus systematis, et comproba instrumentum ingressus esse coniunctum.',
+  'Open systeeminstellingen': 'Constitutiones systematis aperi',
   'Microfoon-doorvoer': 'Microphoni transmissio',
   'Microfoon-doorvoer (V)': 'Microphoni transmissio (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Microphonum accendi non potuit. Licentiam et instrumentum ingressus inspice.',
   'Vat samen met AI…': 'Per IA contrahe…',
   'Tekst inkorten met AI': 'Textum per IA contrahe',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

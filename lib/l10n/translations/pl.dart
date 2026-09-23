@@ -1639,10 +1639,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Microfoon-doorvoer aan': 'Podsłuch mikrofonu włączony',
+  'Microfoon-doorvoer uit': 'Podsłuch mikrofonu wyłączony',
+  'Microfoon-doorvoer aan (V)': 'Podsłuch mikrofonu włączony (V)',
+  'De microfoon kon niet worden aangeschakeld': 'Nie można włączyć mikrofonu',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Przyznaj OciDeck dostęp do mikrofonu w ustawieniach systemowych i sprawdź, czy podłączone jest urządzenie wejściowe.',
+  'Open systeeminstellingen': 'Otwórz ustawienia systemowe',
   'Microfoon-doorvoer': 'Podsłuch mikrofonu',
   'Microfoon-doorvoer (V)': 'Podsłuch mikrofonu (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Nie można włączyć mikrofonu. Sprawdź uprawnienie i urządzenie wejściowe.',
   'Vat samen met AI…': 'Streść za pomocą AI…',
   'Tekst inkorten met AI': 'Skróć tekst za pomocą AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

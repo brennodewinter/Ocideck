@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/settings.dart';
@@ -75,7 +76,13 @@ Widget _host(MicMonitor micMonitor) {
   );
 }
 
-Future<void> _openPresenter(WidgetTester tester, MicMonitor monitor) async {
+/// Opent de presenter. [presenterView] bepaalt of met P de cockpit wordt
+/// aangezet — laat hem uit en de test ziet wat een enkel scherm toont (#2167).
+Future<void> _openPresenter(
+  WidgetTester tester,
+  MicMonitor monitor, {
+  bool presenterView = true,
+}) async {
   // De cockpit met zijbalk past niet op het standaard 800×600-testscherm —
   // zelfde maat als de overige presenter-tests.
   tester.view.physicalSize = const Size(1400, 800);
@@ -85,10 +92,21 @@ Future<void> _openPresenter(WidgetTester tester, MicMonitor monitor) async {
   await tester.pumpWidget(_host(monitor));
   await tester.tap(find.text('open'));
   await tester.pumpAndSettle();
-  // De cockpit is zichtbaar zodra de presenter-view aan staat; P schakelt hem
-  // aan in enkel-scherm-modus.
-  await tester.sendKeyEvent(LogicalKeyboardKey.keyP);
-  await tester.pumpAndSettle();
+  if (presenterView) {
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyP);
+    await tester.pumpAndSettle();
+  }
+}
+
+/// Laat de muis over de publieksweergave zweven zodat de bedieningsbalk
+/// verschijnt — de enige manier waarop de mic-knop op één scherm tevoorschijn
+/// komt.
+Future<void> _hoverAudienceView(WidgetTester tester) async {
+  final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+  addTearDown(gesture.removePointer);
+  await gesture.addPointer(location: Offset.zero);
+  await gesture.moveTo(tester.getCenter(find.byType(Scaffold).last));
+  await tester.pump();
 }
 
 Future<void> _tapMicButton(WidgetTester tester) async {
@@ -143,7 +161,13 @@ void main() {
 
     await _tapMicButton(tester);
     expect(monitor.running, isFalse);
+    // De dialoog noemt de fout én de route eruit (#2167): een snackbar zonder
+    // vervolgstap liet de presentator bij een geweigerde machtiging vastzitten.
     expect(find.textContaining('microfoon kon niet'), findsOneWidget);
+    expect(find.textContaining('systeeminstellingen'), findsWidgets);
+    await tester.tap(find.text('Sluiten'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('microfoon kon niet'), findsNothing);
   });
 
   testWidgets('dubbele tik tijdens een hangende start blijft één start', (
@@ -192,5 +216,51 @@ void main() {
 
     expect(monitor.stopCalls, greaterThan(0));
     expect(monitor.running, isFalse);
+  });
+
+  // ── Enkel scherm (#2167): de cockpit is uit, de knop moet toch bereikbaar ──
+
+  testWidgets('enkel scherm: mic-knop in de hover-balk, badge als hij loopt', (
+    tester,
+  ) async {
+    final monitor = _FakeMicMonitor();
+    await _openPresenter(tester, monitor, presenterView: false);
+
+    // Zonder hover staat er geen bediening op het projectiebeeld.
+    await _hoverAudienceView(tester);
+    await tester.tap(find.byIcon(Icons.mic_none_outlined));
+    await tester.pumpAndSettle();
+    expect(monitor.startCalls, 1);
+    expect(monitor.running, isTrue);
+
+    // De doorvoer blijft zichtbaar als rood live-badge (icoon size 22), ook
+    // als de balk weer weg is — een open microfoon mag nooit onzichtbaar zijn.
+    final badge = find.byWidgetPredicate(
+      (w) => w is Icon && w.icon == Icons.mic && w.size == 22,
+    );
+    expect(badge, findsOneWidget);
+
+    // Het badge is tevens de uit-knop.
+    await tester.tap(badge);
+    await tester.pumpAndSettle();
+    expect(monitor.stopCalls, 1);
+    expect(monitor.running, isFalse);
+  });
+
+  testWidgets('enkel scherm: V werkt en meldt de wissel met een toast', (
+    tester,
+  ) async {
+    final monitor = _FakeMicMonitor();
+    await _openPresenter(tester, monitor, presenterView: false);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+    await tester.pumpAndSettle();
+    expect(monitor.running, isTrue);
+    expect(find.text('Microfoon-doorvoer aan'), findsOneWidget);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+    await tester.pumpAndSettle();
+    expect(monitor.running, isFalse);
+    expect(find.text('Microfoon-doorvoer uit'), findsOneWidget);
   });
 }

@@ -1627,10 +1627,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofonin läpikuuntelu päällä',
+  'Microfoon-doorvoer uit': 'Mikrofonin läpikuuntelu pois päältä',
+  'Microfoon-doorvoer aan (V)': 'Mikrofonin läpikuuntelu päällä (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Mikrofonia ei voitu ottaa käyttöön',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Anna OciDeckille oikeus käyttää mikrofonia järjestelmäasetuksissa ja tarkista, että syöttölaite on kytketty.',
+  'Open systeeminstellingen': 'Avaa järjestelmäasetukset',
   'Microfoon-doorvoer': 'Mikrofonin läpivienti',
   'Microfoon-doorvoer (V)': 'Mikrofonin läpivienti (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofonia ei voitu ottaa käyttöön. Tarkista lupa ja tulolaite.',
   'Vat samen met AI…': 'Tiivistä tekoälyllä…',
   'Tekst inkorten met AI': 'Lyhennä tekstiä tekoälyllä',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../theme/app_theme.dart';
 
 /// De bedieningsbalk van de publieksweergave: hoe kom ik verder, en hoe kom ik
 /// eruit.
@@ -29,6 +30,8 @@ class AudienceControlsBar extends StatelessWidget {
     required this.onPrev,
     required this.onNext,
     required this.onExit,
+    this.onMicToggle,
+    this.micActive = false,
   });
 
   final bool visible;
@@ -38,6 +41,13 @@ class AudienceControlsBar extends StatelessWidget {
   final VoidCallback? onPrev;
   final VoidCallback? onNext;
   final VoidCallback onExit;
+
+  /// Microfoon-doorvoer (#2167): null op platforms zonder de functie — dan
+  /// staat de knop er helemaal niet, want een uitgegrijsde knop voor iets dat
+  /// er nooit komt is ruis. Anders schakelt de knop de doorvoer en kleurt hij
+  /// rood zolang die loopt.
+  final VoidCallback? onMicToggle;
+  final bool micActive;
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +86,15 @@ class AudienceControlsBar extends StatelessWidget {
                       color: Colors.white,
                       disabledColor: Colors.white24,
                     ),
+                    if (onMicToggle != null)
+                      IconButton(
+                        tooltip: l10n.d('Microfoon-doorvoer (V)'),
+                        onPressed: onMicToggle,
+                        icon: Icon(
+                          micActive ? Icons.mic : Icons.mic_none_outlined,
+                        ),
+                        color: micActive ? AppTheme.danger500 : Colors.white,
+                      ),
                     const SizedBox(width: 4),
                     // De sluitknop noemt Escape in zijn tooltip: dat is de
                     // sneltoets die nergens stond en die je de tweede keer
@@ -111,12 +130,16 @@ class AudienceSurface extends StatefulWidget {
     required this.onPrev,
     required this.onNext,
     required this.onExit,
+    this.onMicToggle,
+    this.micActive = false,
   });
 
   final Widget child;
   final VoidCallback? onPrev;
   final VoidCallback? onNext;
   final VoidCallback onExit;
+  final VoidCallback? onMicToggle;
+  final bool micActive;
 
   @override
   State<AudienceSurface> createState() => _AudienceSurfaceState();
@@ -159,6 +182,8 @@ class _AudienceSurfaceState extends State<AudienceSurface> {
           onPrev: widget.onPrev,
           onNext: widget.onNext,
           onExit: widget.onExit,
+          onMicToggle: widget.onMicToggle,
+          micActive: widget.micActive,
         ),
       ],
     ),

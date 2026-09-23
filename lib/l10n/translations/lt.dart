@@ -1634,10 +1634,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Microfoon-doorvoer aan': 'Mikrofono perdavimas įjungtas',
+  'Microfoon-doorvoer uit': 'Mikrofono perdavimas išjungtas',
+  'Microfoon-doorvoer aan (V)': 'Mikrofono perdavimas įjungtas (V)',
+  'De microfoon kon niet worden aangeschakeld': 'Mikrofono įjungti nepavyko',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Suteikite OciDeck prieigą prie mikrofono sistemos nustatymuose ir patikrinkite, ar prijungtas įvesties įrenginys.',
+  'Open systeeminstellingen': 'Atidaryti sistemos nustatymus',
   'Microfoon-doorvoer': 'Mikrofono praleidimas',
   'Microfoon-doorvoer (V)': 'Mikrofono praleidimas (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Nepavyko įjungti mikrofono. Patikrinkite leidimą ir įvesties įrenginį.',
   'Vat samen met AI…': 'Apibendrinti su DI…',
   'Tekst inkorten met AI': 'Sutrumpinti tekstą su DI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

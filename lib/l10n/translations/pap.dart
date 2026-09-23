@@ -666,10 +666,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Microfoon-doorvoer aan': 'Monitoreo di mikrofonu aktivo',
+  'Microfoon-doorvoer uit': 'Monitoreo di mikrofonu inaktivo',
+  'Microfoon-doorvoer aan (V)': 'Monitoreo di mikrofonu aktivo (V)',
+  'De microfoon kon niet worden aangeschakeld': 'No por a activá e mikrofonu',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'Duna OciDeck akseso na e mikrofonu den e konfigurashonnan di sistema, i verifiká ku tin un aparato di entrada konektá.',
+  'Open systeeminstellingen': 'Abrí konfigurashonnan di sistema',
   'Microfoon-doorvoer': 'Monitor di mikrofon',
   'Microfoon-doorvoer (V)': 'Monitor di mikrofon (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'No por a activá e mikròfono. Verifiká e permiso i e aparato di entrada.',
   'Vat samen met AI…': 'Resumí ku AI…',
   'Tekst inkorten met AI': 'Kortá teksto ku AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':

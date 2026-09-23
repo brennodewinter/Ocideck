@@ -1627,10 +1627,16 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Microfoon-doorvoer aan': 'Spremljanje mikrofona vključeno',
+  'Microfoon-doorvoer uit': 'Spremljanje mikrofona izključeno',
+  'Microfoon-doorvoer aan (V)': 'Spremljanje mikrofona vključeno (V)',
+  'De microfoon kon niet worden aangeschakeld':
+      'Mikrofona ni bilo mogoče vključiti',
+  'Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.':
+      'V sistemske nastavitve dovoli OciDecku dostop do mikrofona in preveri, ali je priključena vhodna naprava.',
+  'Open systeeminstellingen': 'Odpri sistemske nastavitve',
   'Microfoon-doorvoer': 'Prenos mikrofona',
   'Microfoon-doorvoer (V)': 'Prenos mikrofona (V)',
-  'De microfoon kon niet worden aangeschakeld. Controleer de machtiging en het invoerapparaat.':
-      'Mikrofona ni bilo mogoče vklopiti. Preverite dovoljenje in vhodno napravo.',
   'Vat samen met AI…': 'Povzemi z AI…',
   'Tekst inkorten met AI': 'Skrajšaj besedilo z AI',
   'De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.':
