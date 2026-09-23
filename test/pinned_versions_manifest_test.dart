@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// answer "is the number in this manifest still the number the workflow uses",
 /// because it never opens a workflow — and that second question is the one that
 /// goes wrong quietly. The three scanner versions are written out in **two**
-/// workflow files (`.forgejo/workflows/scans.yml` runs on every pull request,
+/// workflow files (`.forgejo/workflows/scans.yml` is the on-demand route,
 /// `.github/workflows/ci.yml` is the mirror definition), so a bump has three
 /// places to land and two of them are easy to forget.
 ///

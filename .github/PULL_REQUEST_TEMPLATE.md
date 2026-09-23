@@ -12,7 +12,9 @@
 
 - [ ] Every commit is **signed off** (`git commit -s`) per the
       [DCO](../dco.txt), with my real name and a reachable email.
-- [ ] `make check` passes (format-check, analyze, full test suite).
+- [ ] Maintainer: `make check-full` passes locally on the exact commit named in
+      the PR before merge (format, analysis, tests, coverage, secrets, SAST,
+      licences and web hardening). Tested commit: `__________`.
 - [ ] Added/updated tests for the behaviour I changed. **If this fixes a bug,
       the test is on the reported behaviour and was red once against the
       unfixed code** — or I explained in the summary why a test cannot prove

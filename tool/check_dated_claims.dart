@@ -148,16 +148,16 @@ const List<GemetenBewering> gemetenBeweringen = [
 /// de volgende ongedateerde belofte binnenkomt.
 const Map<String, Map<String, int>> looptijdBasislijn = {
   'docs/CHECKS.md': {
-    '13 minutes': 2,
+    '13 minutes': 1,
     '17.5 minutes': 2,
     '19 seconds': 1,
-    '2 seconds': 2,
+    '2 seconds': 0,
     '2.5 minutes': 1,
     '21 min': 1,
-    '22 minutes': 2,
+    '22 minutes': 0,
     '29 minutes': 1,
     '33 min': 2,
-    '46 minute': 3,
+    '46 minute': 2,
     '46 minutes': 1,
     '51 minutes': 2,
     '54 minutes': 1,

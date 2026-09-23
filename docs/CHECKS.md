@@ -1,74 +1,24 @@
 # OciDeck — Checks & CI
 
-> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-08-30 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current, with a dated result under *Latest result* · **Status last reviewed:** 2026-09-24 · **Published by:** Stichting LibreKAT
 
 Every automated check OciDeck runs, what it covers, what a failure means, and how
-to fix it. The **`Makefile` is the single entry point** and the **real gate**:
-`make check`, run by the committer before pushing, is what actually enforces
-these checks. The Forgejo remote has an Actions runner since 2026-07-23, and
-`.forgejo/workflows/ci.yml` runs [`make check-no-coverage`](#make-check-no-coverage)
-**on a `v*` tag, on the Mac runner** — not per pull request
-(#741/#751/#790/#797). That is `make check`
-with the full test suite intact but without the coverage instrumentation —
-worth roughly 13 minutes off a 46-minute gate on that runner. Since #1118 the
-**static gates** — `$(STATIC_GATES)`, seconds each — run on **every pull
-request** (`.forgejo/workflows/static-gate.yml`, [`make check-static`](#make-check-static)),
-and since #1123 that same per-PR job also runs `make check-registrations` — the
-fast registration/invariant tests (`SOURCE_MAP`, docs, SBOM, l10n, and the
-Windows installer) that are *tests* and so escaped the static subset. **Since #1123 that `static-gate` check
-is a required status check** (branch protection on `main`): a PR does not merge
-until it passes, via the web UI or the REST/`tea` merge API. That is the
-prevention layer — drift is stopped at the PR instead of landing. Two things it
-still does **not** hard-block, on purpose: the **coverage floors** and the
-**full test suite**. The full test suite runs **once a night on the tip of
-`main`** — `linux-gate.yml`, `make check-no-coverage` — as a detection smoke
-alarm: a Linux-specific or load-sensitive test (path separators, subprocess
-timeouts, I/O races) can be green on the fast maintainer Mac and red only on
-the Linux runner. It is **detection, not prevention**: the merge is not
-blocked, and a red night points at a handful of commits rather than at one
-merge.
+to fix it. The **`Makefile` is the single entry point** and the **real gate**.
+Before merging, the maintainer runs `make check-full` locally on the exact commit
+named in the pull request. That includes the static checks, full suite, coverage,
+goldens on macOS, secret and SAST scans, licences, SBOM and the real web build.
 
-That trigger has moved twice, both times because this gate is the most
-expensive tenant of the slowest runner. #1123 also ran it per PR; that doubled
-the suite per change and was reverted. What remained was one full run per merge,
-and measured over 24 days that did not earn its keep either — see
-[`linux-gate.yml`](#forgejoworkflowslinux-gateyml--nightly-schedule-and-on-demand-workflow_dispatch)
-for the numbers and what was given up. The per-PR prevention layer is
-`static-gate`, the required check, which also runs on `push` to `main` and
-catches merge drift within minutes on the capacity-4 lane.
+The former automatic `static-gate`, `scans` and `web-gate` workflows remain
+available through `workflow_dispatch`, but no longer repeat that same work on
+every pull request or merge. Branch protection still forbids direct pushes,
+limits merges to the maintainer and requires an up-to-date branch; it no longer
+waits for duplicated status checks.
 
-The heavy gate is **serialized**: it runs on a dedicated **`linux-serial` runner
-with capacity 1**, so a manual dispatch and the nightly run never run at once,
-while `static-gate`/`scans` keep the capacity-4 lane. The coverage floors still
-run nowhere but in `make check` on your own machine. So: the per-PR static gate
-blocks, the nightly run alarms, the tag is the release gate, and you are still
-the coverage gate.
-
-> **Escape hatch.** If the runner is down or saturated and a green PR cannot
-> merge because its required `static-gate` check never ran, a repo admin removes
-> or edits the branch-protection rule (Settings → Branches, or the
-> `branch_protections` API) — the rule is server state, not in a commit, so
-> lifting it is immediate and reversible.
-
-**Three workflows run per pull request, each for its own deliberate
-reason** — two unconditionally, one only when the change can reach the web
-bundle. The oldest is `.forgejo/workflows/scans.yml`, which runs the
-secret and SAST scans (`make check-secrets`, `make sast`) on **every pull
-request** (#778). Those take 17 and 2 seconds locally against the 22 minutes per
-pull request that moved the gate to a tag, so the timing argument that moved the
-gate to a tag does not reach them — and for a secret the moment is not
-interchangeable. Found before the merge it is an edit; found after, it is in the
-history and revoking is the only real remedy. It scanned pushes to `main` as
-well until the redundant post-merge run — re-reading the same full history the
-pull request had just cleared — proved to be the one real source of failure
-mail; that trigger was dropped. The third is
-`.forgejo/workflows/web-gate.yml` (#1888-tail), which *builds* the web bundle
-and runs [`make check-web`](#make-check-web) on it — but only on a pull request
-that touches something able to break it. It is the one per-PR workflow with a
-**path filter**, and therefore deliberately **not** a required check: a required
-context that stays silent on an unrelated PR would leave that PR pending
-forever. See
-[Continuous integration](#continuous-integration).
+Server automation remains where it adds different evidence: the fast Mac golden
+gate checks the actual `main` after each merge, the Linux suite runs nightly,
+native builds run after relevant changes, time-degrading checks run on a
+schedule, a toolchain change rehearses all platforms, and tags run the release
+gate. See [Continuous integration](#continuous-integration).
 Run `make help` for a one-line summary of every target.
 
 ## The one command
@@ -428,38 +378,38 @@ now the only passing state.
 
 | Check | Verifies | In `make check` | In `check-full` | In CI workflow † | Blocks merge? |
 | --- | --- | :---: | :---: | :---: | --- |
-| [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size, FilePicker-gate & fixed-delay ratchets | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — | required (via `static-gate`) |
-| [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — | required (via `static-gate`) |
-| [`make check-dated-claims`](#make-check-dated-claims) | Every registered measurement in the docs still has its anchor, and no unregistered duration claim was added (`looptijdBasislijn` ratchet). Staleness itself runs daily, not here | ✅ | ✅ | — | required (via `static-gate`) |
-| [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — | required (via `static-gate`) |
-| [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — | required (via `static-gate`) |
-| [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ | required (via `static-gate`) |
-| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ | required (via `static-gate`) |
+| [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering, file-size, class-size, FilePicker-gate & fixed-delay ratchets | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-audience-boundary`](#make-check-audience-boundary) | Every output channel classified: audience surface (needs `AudienceDeck`) or deliberately source-faithful | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-hardcoded-text`](#make-check-hardcoded-text) | No visible string in `lib/` bypasses `l10n.d()` | ✅ | ✅ | — | local (`check-full`) |
+| [`make check-comment-language`](#make-check-comment-language) | No plain comment in `lib/` switches language halfway (`mixedCommentBaseline` ratchet) | ✅ | ✅ | — | local (`check-full`) |
+| [`make check-dated-claims`](#make-check-dated-claims) | Every registered measurement in the docs still has its anchor, and no unregistered duration claim was added (`looptijdBasislijn` ratchet). Staleness itself runs daily, not here | ✅ | ✅ | — | local (`check-full`) |
+| [`make check-toolchain`](#make-check-toolchain) | The running Flutter is the pinned official stable, and is recorded here | ✅ | ✅ | — | local (`check-full`) |
+| [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — | local (`check-full`) |
+| [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make translate-docs-check`](#make-translate-docs-check) | Every shipped doc variant (`shippedDocLanguages`) exists, is registered and carries the same section structure as its English source; no variant drifts or dangles, and no excluded document was translated | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ | local only (nightly on `main`) |
 | [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) | local only |
 | [`make coverage-per-file`](#make-coverage-per-file) | No `lib/` file runs under 34% of its own lines | ✅ | ✅ | — | local only |
-| [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-l10n-parity`](#make-check-l10n-parity) | Every key present in one language table exists in all of them (no baseline) | ✅ | ✅ | — | local (`check-full`) |
 | [`make check-l10n-orphans`](#make-check-l10n-orphans) | No growth in translation keys nothing looks up any more (`orphanBaseline` ratchet) | — | ✅ | — | local only (`check-full`) |
-| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | ✅ | ✅ | — | required (via `static-gate`) |
+| [`make check-l10n-passthrough`](#make-check-l10n-passthrough) | No growth in translations that pass the Dutch source through verbatim (`passthroughBaseline` ratchet) | ✅ | ✅ | — | local (`check-full`) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ | local only (`check-full`) |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ | local only (`check-full`) |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ | local only (`check-full`) |
-| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ | conditional (via `web-gate`, #1888-tail) |
+| [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ | local (`check-full`) |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — | advisory |
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — | advisory |
 | [`make check-owasp-catalog-sources`](#make-check-owasp-catalog-sources) | Stable and development OWASP source layout, schema, commit identity and licence | — | — | ✅ | local release gate |
-| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ | required (via `scans`, #1891) |
-| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ | required (via `scans`, #1891) |
+| [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | ✅ | local (`check-full`) |
+| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | ✅ | local (`check-full`) |
 | [`make shellcheck`](#make-shellcheck) | ShellCheck over the committed shell scripts | — | ✅ | — | local only (`check-full`) |
 | [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — | advisory |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) | advisory |
@@ -469,32 +419,20 @@ now the only passing state.
 not what runs. That workflow does not execute: Forgejo reads
 `.forgejo/workflows/` instead of `.github/workflows/` once the former exists
 (see [Continuous integration](#continuous-integration)). What *does* run in CI
-is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner, on a
-`v*` tag (#790/#796/#797), plus
-[`make check-secrets`](#make-check-secrets) and [`make sast`](#make-sast) on
-every pull request (#778), and — since #1118 — the static gates
-(`$(STATIC_GATES)`) via [`make check-static`](#make-check-static) on every pull
-request too (`.forgejo/workflows/static-gate.yml`), plus — since #1888-tail —
-[`make check-web`](#make-check-web) on a pull request that can reach the web
-bundle (`.forgejo/workflows/web-gate.yml`, path-filtered). Those are the checks in this
-table that a forge actually runs before a merge; the full test suite and the two
-coverage floors still run only in your local `make check`.
+is [`make check-no-coverage`](#make-check-no-coverage) on the Mac runner on a
+`v*` tag (#790/#796/#797). Before a merge the authoritative result is local
+`make check-full` on the named head commit. The static, scan and web workflows
+remain manually startable when a second environment is useful.
 
-‡ The **Blocks merge?** column says whether a failing check prevents a PR from
-merging into `main`. **required** = a required status check on branch protection
-(`static-gate` since #1118, `scans` since #1891). **conditional** = runs on a
-pull request, but only when the change touches the paths that can break it, and
-so cannot be a required context — a filtered check that never reports would hang
-every unrelated PR on a status that never arrives. Red still stops a merge in
-practice; it is simply not the mechanism branch protection waits for.
-**local only** = runs in
-`make check` on the committer's machine, not on the forge. **post-merge** = runs
+‡ The **Blocks merge?** column says where the decision is made. **local** means
+the maintainer records a green `make check-full` for the exact commit before
+merging; Forgejo does not repeat or attest it. **post-merge** = runs
 after the merge, as detection not prevention. **advisory** = never blocks.
 
 Note that `make
-check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
-`check-web` — those live in `check-full`. Run `make check-full` before a
-dependency or web-facing change.
+check` alone does **not** include `licenses`, `sbom-verify`, `deps-check`, the
+security scans or `check-web` — those live in `check-full`. Run
+`make check-full` before every merge.
 
 The workflow additionally declares `flutter pub get --enforce-lockfile`
 (reproducible dependencies) and a **Markdown link check** (`lychee --offline`).
@@ -1008,7 +946,7 @@ also declares them, but see the [CI note](#continuous-integration).)
 
 ### OciServe contractpoort (`test/ociserve_api_drift_test.dart`)
 - **Runs:** `flutter test test/ociserve_api_drift_test.dart` (in
-  `make check-registrations`, dus in de per-PR `static-gate`).
+  `make check-registrations` en de handmatige `static-gate`).
 - **Covers:** dat elke route die `ociserve_gateway.dart` aanroept bestaat in
   de gepinde OpenAPI-spec van OciServe, met de juiste methode en de
   responsvelden die OciDeck uitleest. Een verwijderde, hernoemde of
@@ -1441,14 +1379,12 @@ also declares them, but see the [CI note](#continuous-integration).)
   `test/pack_web_release_test.dart`, which runs in `make check` — so a broken
   checksum list surfaces without waiting for a web build. That file also mirrors
   the real `web/` tree into a stand-in bundle and asserts nothing from it is
-  swept away, which puts the invariant above on the **per-PR** gate: no web
-  build runs there, and #1888 merged green precisely because its own test used a
+  swept away, which puts the invariant in the ordinary local gate. #1888 merged
+  green precisely because its own test used a
   hand-built bundle that happened to contain none of the files it broke.
-  Since #1888-tail there is a second, higher layer:
-  [`web-gate.yml`](#forgejoworkflowsweb-gateyml--the-web-bundle-per-pull-request-that-can-break-it)
-  runs this whole target — a real `flutter build web` — on a pull request that
-  touches the source, the packing step or the toolchain. The test stays the
-  cheap per-commit layer; the workflow is the one that actually builds.
+  `make check-full` runs the whole target — a real `flutter build web` — locally;
+  [`web-gate.yml`](#forgejoworkflowsweb-gateyml--the-web-bundle-on-demand)
+  can repeat it on Linux when deliberately requested.
 
 ### `make deps-outdated` (advisory)
 - **Runs:** `flutter pub outdated`
@@ -1931,12 +1867,10 @@ that reaches beyond `build/test_cache`.
 > `windows-native-check.yml`, a post-merge build check on the same platform
 > gap; and `windows-test-check.yml`, a weekly suite run over `main` for the
 > same reason. Most of
-> `make check-full` (the dependency/web checks) still runs only locally; run it
-> before a dependency or web-facing change. Its two *security* scans are the
-> exception since #778 —
-> see [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request).
-> Since #1118 the **static gates** run per pull request as well — see
-> [`static-gate.yml`](#forgejoworkflowsstatic-gateyml--the-static-gate-per-pull-request).
+> `make check-full` is the authoritative pre-merge gate and runs locally on the
+> exact commit recorded in the pull request. The static, scan and web workflows
+> are manual fallback and diagnosis routes; branch protection does not wait for
+> them.
 > Since #797 the release gate runs on a registered **Mac**
 > runner rather than on the server, and the Linux gate moved to an on-demand
 > workflow — see below for what that buys and what it costs. The sections below
@@ -1964,7 +1898,7 @@ that reaches beyond `build/test_cache`.
   Better than a gate nobody waits for, but this is not a server-class
   arrangement and should not be read as one.
 
-### `.forgejo/workflows/scans.yml` — secrets and SAST, per pull request
+### `.forgejo/workflows/scans.yml` — secrets and SAST, on demand
 - **scans** — runs on the prebaked scan image
   (`pawprint.vigilis.online/librekat/ocideck-scans:<pins>`, see the
   `ci-image-scans.yml` section) with the three scanners baked in, then runs
@@ -1975,11 +1909,10 @@ that reaches beyond `build/test_cache`.
 - **Why it is its own workflow rather than a second job in `ci.yml`.** `on:` is
   per workflow, and `ci.yml` fires on a `v*` tag. A job there would first scan
   once the secret was already on `main` with a tag around it.
-- **Why it may run per pull request when the gate no longer does.** The reason
-  for #790 was the clock — 22 minutes per pull request against a `make check`
-  that already ran before every push. These two take 17 and 2 seconds locally,
-  so that argument does not reach them, and for a secret the moment is not
-  interchangeable.
+- **Why it is manual.** `make check-full` runs both scans locally before merge,
+  including full-history secret detection. Repeating them automatically on the
+  same commit adds cost rather than evidence. Manual dispatch remains useful
+  for incident investigation or a deliberately independent environment.
 - **What it used to cost, and why it is now prebaked.** The first runs (#778)
   measured about three minutes, against 19 seconds of actual scanning — nearly
   all of it *installing* the scanners into a bare image. The obvious lever, an
@@ -2012,12 +1945,8 @@ that reaches beyond `build/test_cache`.
   per-run download to fail; a superseded run still cancels rather than reporting
   failure. Both matter for one reason: a red tick on a security gate that is not a
   finding teaches you to ignore the next one.
-- **Why on the Linux runner rather than the Mac.** The Mac has all three
-  scanners installed already, so nothing would need downloading. But since #797
-  that Mac is both the release gate and the committer's own working machine, and
-  this is the one workflow that fires on every pull request — it would
-  take cores from the machine currently running `make check`. The server has
-  been idle since that same move.
+- **Why the manual route uses Linux.** The Mac has all three scanners installed
+  already; the value of an on-demand rerun is precisely a different environment.
 - **Two things here are load-bearing and easy to lose.** It checks out with
   `fetch-depth: 0`: `actions/checkout` clones one commit deep by default, and
   both history passes then look at almost nothing and report green. Measured
@@ -2041,7 +1970,7 @@ that reaches beyond `build/test_cache`.
   the same pair only in history and the working tree clean, both history passes
   still fail.
 
-### `.forgejo/workflows/static-gate.yml` — the static gate, per pull request
+### `.forgejo/workflows/static-gate.yml` — the static gate, on demand
 - **static-gate** — runs on the prebaked CI image
   (`pawprint.vigilis.online/librekat/ocideck-ci:flutter-<pin>`, same as
   `linux-gate.yml`), so the OS, node, build-toolchain and the pinned,
@@ -2065,22 +1994,16 @@ that reaches beyond `build/test_cache`.
   The list in `REGISTRATION_TESTS` is hand-maintained: a new invariant *test*
   must be added there or it is a silent gap again. The full suite and the
   coverage floors still stay in `make check`.
-- **Why it exists (#1118).** The release gate runs on a `v*` tag and the Linux
-  gate only on demand, so between releases nothing held the static ratchets on a
-  pull request. `main` drifted silently red — a run of merges pushed files,
-  classes, a method and doc/coverage registrations past their ceilings, and it
-  only surfaced when a later fix could not land on a green gate. This puts the
-  fast half of the gate on the pull request, where an overrun is still an edit
-  rather than history.
+- **Why it remains.** It is a reproducible second environment for diagnosing a
+  local/static discrepancy without copying commands out of the Makefile. Normal
+  prevention is local `make check-full` on the PR head.
 - **Why only the static subset.** The full suite and the coverage floors cost
   tens of minutes on this container — the very reason the gate moved to a tag
   (#796) — while the static gates are seconds each. The coverage floor and the
   per-file floor stay in `make check` on the committer's machine, before `main`;
   this workflow deliberately does not run them, and says so in its own header.
-- **Why the Linux container, not the Mac.** Same trade as `scans.yml`: it fires
-  on every pull request, and since #797 the Mac is both the release gate and the
-  committer's working machine. In a container on the otherwise-idle server it
-  takes no cores from a `make check` running on the Mac. `check-toolchain` runs
+- **Why the Linux container, not the Mac.** A manual diagnostic is most useful
+  in a second environment. `check-toolchain` runs
   unchanged inside `make check-static`, so the pinned official stable is enforced
   here too — a prebuilt Flutter image with channel `[user-branch]` would fail it,
   exactly as in `linux-gate.yml`.
@@ -2088,7 +2011,7 @@ that reaches beyond `build/test_cache`.
   reads the whole tree at the newest commit, so a later run covers everything an
   aborted one would have seen.
 
-### `.forgejo/workflows/web-gate.yml` — the web bundle, per pull request that can break it
+### `.forgejo/workflows/web-gate.yml` — the web bundle, on demand
 - **web-gate** — on the prebaked CI image, same container and same two caches as
   `static-gate.yml`: `flutter pub get`, then [`make check-web`](#make-check-web).
   That is a real `flutter build web --release --no-web-resources-cdn --csp`
@@ -2109,33 +2032,8 @@ that reaches beyond `build/test_cache`.
 - **Two layers, on purpose.** `test/pack_web_release_test.dart` mirrors the real
   `web/` tree into a stand-in bundle and runs in `make check` — cheap, per
   commit, but still a simulation of building. This workflow does the real thing
-  once, on the changes that can break it, with the same command the tag will
-  run. Neither replaces the other: the test catches the logic, the workflow
-  catches what only a build shows (an asset that does not survive, a plugin with
-  no web implementation, a loader the pin changed).
-- **Why a path filter, and what is on it.** The build costs minutes and an
-  ordinary Dart change cannot reach the bundle. It fires on `web/**`, the three
-  `tool/` scripts `check-web` runs, the `Makefile` (it holds the hardening
-  flags), `pubspec.yaml`/`pubspec.lock`, `.tool-versions` and
-  `.forgejo/ci-image/**` — and on itself, so a change to the gate re-runs it.
-  `docs/**` is deliberately **absent**: the bundled-docs check exists for
-  *incremental* builds, and CI always builds clean.
-- **The filter is itself guarded.** `test/web_gate_triggers_test.dart` parses
-  this file and asserts, per trigger, that every input is on the list — with the
-  reason for each one, so a later reader can judge before removing it. A gate
-  that no longer fires guards nothing, and that is exactly how `.tool-versions`
-  once fell off `linux-build.yml`'s filter. It checks `pull_request` and `push`
-  **separately**, and that the two lists have not drifted apart: a substring
-  search over the file would pass while one trigger had quietly lost an entry.
-- **Deliberately not a required check.** Branch protection waits for every
-  context it requires. A required check with a path filter never reports on a
-  pull request that does not match it, so that PR hangs pending forever. Keep
-  `web-gate` out of `status_check_contexts`; `static-gate` and `scans` are the
-  required, unfiltered gates. Red here still stops a merge in practice — it is
-  simply not the mechanism branch protection blocks on.
-- **It also fires on `push` to `main`**, for the same reason `static-gate` does:
-  a PR run tests the *preview* of one merge, and two bundle-touching PRs landing
-  together can each be green while the result is not.
+  in local `make check-full`; the workflow offers the same real build on the
+  Linux runner when deliberately requested. Neither replaces the release build.
 - **A superseded run cancels** (`concurrency`, `cancel-in-progress`): it builds
   the whole bundle at the newest commit, so a later run covers everything an
   aborted one would have seen.
@@ -2309,8 +2207,8 @@ project's own Forgejo registry from `.forgejo/ci-image/scans.Dockerfile`.
   **not** run on the commit that introduces it, so merging the PR that adds this
   image (or bumps the pin so the tag changes) does not build the image. Until you
   **dispatch `ci-image-scans.yml` manually** (or run `make ci-image-scans-publish`),
-  the tag `scans.yml` references does not exist, and every pull request built on
-  that `main` fails in seconds with `docker pull … not found`. This is exactly how
+  the tag `scans.yml` references does not exist, and a manual scan dispatch
+  fails in seconds with `docker pull … not found`. This is exactly how
   #1150 left the scan gate red for a day — branches predating it still ran the old
   per-run install and passed, which disguised a hard breakage as a ~50% flake
   (#1168). After the first publish, pin bumps *do* rebuild automatically, because
@@ -2439,10 +2337,8 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   seven-job pipeline below fired on every commit to every branch and every
   pull request on the mirror, regardless of what changed. That made the
   mirror a **second failure-mail source** for work the forge already did: the
-  real merge gate is `make check` on the committer's own machine, and
-  [`.forgejo/workflows/scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request)
-  already runs `check-secrets`/`sast` on every pull request there. Per PR, this
-  mirror added load without adding signal. Brought in line with
+  real merge gate is `make check-full` on the committer's own machine. Per PR,
+  this mirror added load without adding signal. Brought in line with
   [`.forgejo/workflows/ci.yml`](#forgejoworkflowsciyml--the-release-gate-on-a-v-tag)
   (#790): CI is a release gate, not a merge gate. `workflow_dispatch` stays, so
   a branch can still go through the full pipeline by hand without cutting a
@@ -2466,7 +2362,7 @@ plain `curl`, so no GitHub credential is stored on the self-hosted runner.
   gained `fetch-depth: 0`: two of the four passes in `make check-secrets` read
   *history*, and a one-commit clone lets them report green on almost nothing.
   Both were already right in
-  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-per-pull-request)
+  [`scans.yml`](#forgejoworkflowsscansyml--secrets-and-sast-on-demand)
   (#799); only this mirror definition lagged.
 - **Test matrix (macOS + Windows)** — runs `flutter test
   --test-randomize-ordering-seed random` on the other two desktop OSes to catch

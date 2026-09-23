@@ -124,10 +124,10 @@ something has to move:
 | `make deps-outdated`, `make catalogs-outdated` | **No** | Freshness of packages and of the bundled standards. A newer upstream is not a defect in what you built. |
 
 **The rhythm.** `make check-full` — which is where the gates above live — is run
-before any dependency or web-facing change, and before a build meant for anyone
-else. There is no scheduled scan, because there is no runner to schedule it on:
-the Forgejo remote has none, so the CI workflow that declares these checks is
-written but never fires. Whoever commits is the scan.
+on the exact commit before every merge. Forgejo does not automatically repeat
+its secret or SAST scans; their workflow remains available on demand. Scheduled
+freshness checks and release/platform jobs still run on the forge because they
+measure time drift or another environment. Whoever merges is the pre-merge scan.
 
 **How urgency is decided.** In descending order, and this is the whole of it:
 

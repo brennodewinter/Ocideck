@@ -1,4 +1,4 @@
-# Bouwt de webbundel op een PR die hem kan breken, en draait er de harding op.
+# Bouwt de webbundel op afroep en draait er de harding op.
 #
 # **Waarom deze workflow bestaat.** `make check-web` bouwt echt
 # (`flutter build web --release --no-web-resources-cdn --csp`) en controleert
@@ -31,13 +31,10 @@
 # verdwijnen (zoals `.tool-versions` ooit uit het filter van `linux-build.yml`
 # ontbrak).
 #
-# **Bewust géén vereiste check.** Branch-bescherming leest de combined status en
-# wacht op elke context die zij eist. Een vereiste check met een padfilter meldt
-# zich niet op een PR die die paden niet raakt, en dan blijft die PR eeuwig
-# `pending` hangen. Zet `web-gate` dus niet in `status_check_contexts` —
-# `static-gate` en `scans` zijn de vereiste, filterloze poorten. Deze is
-# blokkerend in de praktijk (rood is rood, je merget er niet overheen) zonder
-# het mechanisme te zijn dat op elke PR moet vuren.
+# **Waarom alleen handmatig.** `make check-full` bouwt en controleert dezelfde
+# webbundel lokaal op de commit die de maintainer in de PR vastlegt. Een tweede
+# automatische bouw voegt dan geen bewijs toe. De handmatige trekker blijft voor
+# diagnose op de Linux-runner en voor een bewust onafhankelijke herbouwing.
 #
 # **Waarom op het voorgebakken CI-image.** Zelfde redenering als `static-gate`:
 # OS, node, de build-toolchain en de gepinde, sha256-geverifieerde Flutter zitten
@@ -48,41 +45,8 @@
 name: web-gate
 
 on:
-  pull_request:
-    paths:
-      - 'web/**'
-      - 'tool/pack_web_release.dart'
-      - 'tool/check_web_hardening.dart'
-      - 'tool/check_bundled_docs_fresh.dart'
-      - 'Makefile'
-      - 'pubspec.yaml'
-      - 'pubspec.lock'
-      - '.tool-versions'
-      - '.forgejo/ci-image/**'
-      - '.forgejo/workflows/web-gate.yml'
-  # Ook ná de merge, en dat is geen dubbelop. Een PR-run toetst de
-  # *voorvertoning* van die ene samenvoeging met `main` zoals die er op dát
-  # moment bijstond. Landen er twee PR's vlak na elkaar die allebei de bundel
-  # raken, dan zijn beide runs groen en is de uitkomst het toch niet.
-  push:
-    branches: [main]
-    paths:
-      - 'web/**'
-      - 'tool/pack_web_release.dart'
-      - 'tool/check_web_hardening.dart'
-      - 'tool/check_bundled_docs_fresh.dart'
-      - 'Makefile'
-      - 'pubspec.yaml'
-      - 'pubspec.lock'
-      - '.tool-versions'
-      - '.forgejo/ci-image/**'
-      - '.forgejo/workflows/web-gate.yml'
   workflow_dispatch:
 
-# Duwt iemand een nieuwe commit op een PR terwijl de vorige bouw nog loopt, dan
-# zet die de lopende run opzij. Afbreken kost hier niets: deze poort bouwt de
-# héle bundel op de nieuwste commit, dus de latere run dekt onverkort wat de
-# afgebroken run zou hebben gezien.
 concurrency:
   group: web-gate-${{ github.ref }}
   cancel-in-progress: true

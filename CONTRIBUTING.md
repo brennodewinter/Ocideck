@@ -84,24 +84,22 @@ flutter run -d macos  # or -d windows / -d linux
 
 ## The quality gate
 
-Run this before every push — it is the enforced quality gate. The Forgejo remote
+Run this on the exact commit before every merge — it is the enforced quality gate. The Forgejo remote
 *has* an Actions runner, but since #790 it runs the *full* gate on a `v*` tag
 rather than per pull request: a CI run cost 22 minutes there against 2.5 minutes
 here. So the full gate — the test suite and the two coverage floors — runs
 nowhere for you between your branch and `main`. If it fails at tag time, the
 problem already landed.
 
-Two things *do* run on every pull request. The secret and SAST scans
-(`.forgejo/workflows/scans.yml`, #778) take seconds, and for a credential the
-moment is not interchangeable — found before the merge it is an edit, found
-after it is in the history. And since #1118 the **static gates** run too
-(`.forgejo/workflows/static-gate.yml` → `make check-static`, the fast static
-half of `make check`), because otherwise those ratchets drift silently red on
-`main` between releases. Both are additions to your local run, not a replacement
-for it — the coverage floors still run only here.
+The maintainer records the tested commit in the pull request. Forgejo does not
+automatically repeat the static gates, secret/SAST scans or web build: all are
+already in `make check-full`. Their workflows remain manually startable for
+diagnosis. The fast Mac golden gate still runs after a merge, while Linux,
+native-build, scheduled-freshness and release jobs remain where they provide
+different evidence.
 
 ```sh
-make check            # format-check + analyze + conventions + full test suite + coverage floor
+make check-full       # complete pre-merge gate, including scans and web build
 ```
 
 Individual steps:
@@ -260,7 +258,7 @@ Targeted test groups for focused work:
    fork route is the one an outside contributor takes.)
 2. Write clear commit messages (imperative subject, a short body explaining the
    *why*).
-3. Make sure `make check` is green.
+3. Make sure `make check-full` is green and record the tested commit in the PR.
 4. Open a pull request describing the change and linking any related issue. Fill
    in the PR template checklist.
 
@@ -272,8 +270,8 @@ distrust the rows that are true.*
 
 **There is one active maintainer.** [`AUTHORS.md`](AUTHORS.md) lists one person
 under Contributors, and that is accurate. Changes are merged by their author.
-There is no CI runner on the forge, so the checks below run on the maintainer's
-machine and nowhere else. That is a bus factor of one, and it is the largest
+The forge has runners for release, scheduled and platform-specific checks, but
+the pre-merge gate runs on the maintainer's machine. That is a bus factor of one, and it is the largest
 single risk in this project — larger than anything a scanner has reported.
 
 **When a change starts as someone else's contribution, the credit is explicit.**

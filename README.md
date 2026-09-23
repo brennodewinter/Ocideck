@@ -296,16 +296,12 @@ list is maintained in one place so it cannot go stale in two.
 | **Issues and pull requests** | [the tracker there](https://pawprint.vigilis.online/LibreKAT/Ocideck/issues) — registration is open to anyone |
 | **Security reports** | `security@librekat.nl` — see [`SECURITY.md`](SECURITY.md) |
 
-The forge has an Actions runner (since 2026-07-23). It runs the quality gate on
-a `v*` tag (`.forgejo/workflows/ci.yml`) — not per pull request, and on a Mac
-runner rather than the server, because the same gate took 46 minutes there
-against 2.5 minutes on the Mac. It runs `make check-no-coverage`: the whole test
-suite, without the coverage floors. **So run `make check` locally before you
-push: it is very nearly the only thing standing between a change and `main`, and
-the only place the coverage floors run at all.** The one exception is
-`.forgejo/workflows/scans.yml` (#778), which runs the secret and SAST scans on
-every pull request and push — seconds rather than minutes, and for a credential
-the moment it is found is not interchangeable. The Linux gate
+The forge has Actions runners (since 2026-07-23). Before a merge, the maintainer
+runs `make check-full` locally on the exact commit recorded in the pull request.
+Forgejo does not automatically repeat its static checks, scans or web build;
+those workflows remain available on demand. Branch protection still prevents
+direct pushes, restricts merges and requires an up-to-date branch. The fast Mac
+golden gate runs after each merge. The Linux gate
 (`.forgejo/workflows/linux-gate.yml`) runs nightly on the tip of `main` and on
 demand; the desktop bundles (`linux-build.yml`, `macos-build.yml`) run after a
 merge that can break them, and on demand. See
@@ -321,7 +317,7 @@ the workflow files under `.github/` are reference definitions; Forgejo reads
 ## Contributing
 
 Contributions are welcome! Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and our
-[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). In short: `make check` must pass, new
+[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). In short: `make check-full` must pass, new
 UI strings must be translated in all languages, and file-format changes must be
 reflected in `docs/FILE_FORMAT.md`. For security issues, see
 [`SECURITY.md`](SECURITY.md).

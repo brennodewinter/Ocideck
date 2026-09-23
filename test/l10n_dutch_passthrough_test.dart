@@ -160,7 +160,7 @@ void main() {
         staticGates,
         contains('check-l10n-passthrough'),
         reason:
-            'de per-PR static-gate moet Nederlandse doorlaat vóór main stoppen, '
+            'de lokale poort moet Nederlandse doorlaat vóór main stoppen, '
             'niet pas tijdens make check-release',
       );
       expect(
