@@ -31,6 +31,7 @@ import '../services/document_export_service.dart';
 import 'parts/document_export_pdf_support.dart';
 import '../services/document_footnote_setup.dart';
 import '../services/document_style.dart';
+import '../services/export_bundle.dart';
 import '../services/export_metadata.dart';
 import '../services/file_service.dart';
 import '../services/html_image_embedder.dart';
@@ -820,6 +821,11 @@ Future<String?> _writeDocumentExport(
     return null;
   }
 
+  if (!context.mounted) return null;
+  if (!await _confirmWebExportAssetLoss(context, bundle, format)) {
+    return null;
+  }
+
   // Op web kan de bestandskiezer geen pad vragen zonder de bytes al te hebben
   // — de browser wil de bytes up front als download. Op desktop kiezen we eerst
   // een pad, dan schrijft writeDocumentExport daar atomisch naartoe.
@@ -902,6 +908,31 @@ Future<String?> _writeDocumentExport(
     );
   }
   return delivered;
+}
+
+/// Waarschuwt bij een web-export van `.md` of `.tex` die verwijzingen naar
+/// losse bestanden bevat — media en grafiekdata die naast het document horen
+/// reizen niet mee in één losse download en worden dood paden bij de ontvanger
+/// (DOCUMENT_MODE.md §11.4). De insluitende formaten (HTML, PDF, DOCX, ePub,
+/// ODT) nemen de bytes wel mee en komen hier nooit langs. Waarschuwen, niet
+/// blokkeren: een kale tekstexport kan bewust de bedoeling zijn. `false` als
+/// de gebruiker afbreekt. Top-level zodat [_writeDocumentExport] onder zijn
+/// regelplafond blijft.
+Future<bool> _confirmWebExportAssetLoss(
+  BuildContext context,
+  ExportBundle bundle,
+  DocumentExportFormat format,
+) async {
+  if (!deliversByDownload) return true;
+  if (format != DocumentExportFormat.md &&
+      format != DocumentExportFormat.latex) {
+    return true;
+  }
+  if (!documentMarkdownHasExternalAssetRefs(projectedDocumentBody(bundle))) {
+    return true;
+  }
+  if (!context.mounted) return false;
+  return await confirmDocumentExportWebAssetLoss(context) == true;
 }
 
 /// Kiest het uitvoerpad voor een documentexport. De extensie én het profiel

@@ -5,12 +5,14 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:path/path.dart' as p;
 
+import '../models/chart.dart';
 import '../models/privacy_disposition.dart';
 import '../models/deck.dart';
 import '../models/settings.dart' show ThemeProfile;
 import '../models/page_size.dart';
 import 'table_of_contents.dart';
 import '../utils/atomic_file.dart';
+import '../utils/markdown_blocks.dart';
 import 'document_chart_hydration.dart';
 import 'classification_enforcement_policy.dart';
 import 'document_deck_bridge.dart';
@@ -161,6 +163,35 @@ Future<ExportBundle> buildDocumentExportBundle(
 /// naait die weer aaneen tot één vloeiend document.
 String projectedDocumentBody(ExportBundle bundle) =>
     DocumentDeckBridge.deckToDocumentMarkdown(bundle.audience.deck);
+
+/// True wanneer [markdown] verwijzingen bevat naar bestanden die naast het
+/// document horen — een relatief of absoluut mediapad, een `mem:`-asset, of
+/// grafiekdata achter een `source:`-sleutel in een ` ```chart `-blok. In een
+/// kale `.md`- of `.tex`-download reizen die niet mee; de verwijzing is bij de
+/// ontvanger een dood pad (DOCUMENT_MODE.md §11.4). URL's en `data:`-URI's
+/// tellen niet: die staan zelf in de tekst of lossen overal op.
+bool documentMarkdownHasExternalAssetRefs(String markdown) {
+  bool external(String target) =>
+      !target.startsWith('http://') &&
+      !target.startsWith('https://') &&
+      !target.startsWith('data:');
+  for (final m in _markdownImageTarget.allMatches(markdown)) {
+    if (external(m.group(1)!)) return true;
+  }
+  for (final m in _htmlMediaTarget.allMatches(markdown)) {
+    if (external(m.group(1)!)) return true;
+  }
+  for (final m in chartFencePattern.allMatches(markdown)) {
+    if (ChartSpec.parse(m.group(1)!).source != null) return true;
+  }
+  return false;
+}
+
+final _markdownImageTarget = RegExp(r'!\[[^\]]*\]\(\s*([^\s)]+)');
+final _htmlMediaTarget = RegExp(
+  "<(?:img|video|audio|source)\\b[^>]*?\\bsrc\\s*=\\s*[\"']([^\"']+)",
+  caseSensitive: false,
+);
 
 /// Bouwt de bytes voor een document-export in [format]. Headless: geen IO.
 ///

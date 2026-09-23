@@ -470,3 +470,36 @@ const _formatOptions = [
     Icons.science_outlined,
   ),
 ];
+
+/// Waarschuwt dat een kale `.md`- of `.tex`-download de verwijzingen naar
+/// losse bestanden niet meeneemt, en vraagt of de gebruiker toch wil doorgaan
+/// (DOCUMENT_MODE.md §11.4). De spiegel van de bevestiging die deck-opslag op
+/// web al had: geen blokkade — een tekstueel bestand kan bewust de bedoeling
+/// zijn — maar nooit stilzwijgend.
+Future<bool?> confirmDocumentExportWebAssetLoss(BuildContext context) {
+  final l10n = context.l10n;
+  return showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.d('Afbeeldingen en grafiekdata gaan niet mee')),
+      content: Text(
+        // Eén stringliteral: de l10n-extractie leest naast-elkaar-geplaatste
+        // literals als losse sleutels, en dan matcht de vertaling niet.
+        // ignore: lines_longer_than_80_chars
+        l10n.d(
+          'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, false),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(ctx, true),
+          child: Text(l10n.d('Doorgaan')),
+        ),
+      ],
+    ),
+  );
+}
