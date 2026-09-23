@@ -9,6 +9,7 @@ import 'package:flutter_quill/quill_delta.dart';
 import '../../utils/footnote_embed_syntax.dart';
 import '../../utils/markdown_caret_map.dart';
 import '../../utils/markdown_quill_codec.dart';
+import '../../utils/markdown_typing_shortcuts.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_visual_compatibility.dart';
 import '../../l10n/app_localizations.dart';
@@ -558,6 +559,10 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (_syncingMarkdown) return;
     final quill = _quillController;
     if (quill == null) return;
+    // Een getypte Markdown-regeltrigger (`- [ ] `, `> `, `## `, …) wordt meteen
+    // echte opmaak; de compose roept deze listener opnieuw aan en die ronde
+    // doet dan de gewone sync.
+    if (applyMarkdownLineShortcut(quill)) return;
     final plain = quill.document.toPlainText();
     final caret = quill.selection.isValid ? quill.selection.baseOffset : 0;
     widget.onVisualCaret?.call(plain, caret.clamp(0, plain.length));

@@ -62,9 +62,15 @@ class MarkdownToDelta extends Converter<String, Delta>
     'ol': (_) => [Attribute.ol],
     'li': (element) {
       if (element.attributes['class'] != 'task-list-item') return [];
-      final input = element.children!.first as md.Element;
+      // In een "loose" lijst (lege regels tussen items) houdt de parser het
+      // <p>-kind van het lijstitem staan en zit het <input>-vinkje daarbinnen
+      // in plaats van als eerste kind van de <li>. De eerste-worp-las `first`
+      // las dan het <p>-element — waarop `checked` nooit staat — en elke
+      // afgevinkte status ging stil verloren. Zoek het vinkje daarom in de
+      // hele subboom in plaats van op een vaste positie.
+      final input = _firstDescendantWithTag(element, 'input');
       return [
-        if (input.attributes['checked'] == 'true')
+        if (input?.attributes['checked'] == 'true')
           Attribute.checked
         else
           Attribute.unchecked
@@ -87,7 +93,25 @@ class MarkdownToDelta extends Converter<String, Delta>
     'h1': (_) => [Attribute.h1],
     'h2': (_) => [Attribute.h2],
     'h3': (_) => [Attribute.h3],
+    // H4–H6 liet de upstream weg; daardoor viel `#### Kop` terug op een kale
+    // alinea en verdween het kopniveau stil bij de eerste visuele bewerking.
+    'h4': (_) => [Attribute.h4],
+    'h5': (_) => [Attribute.h5],
+    'h6': (_) => [Attribute.h6],
   };
+
+  /// Vindt het eerste element met [tag] in de subboom van [element], in
+  /// documentvolgorde. Nodig omdat de markdown-parser het `input`-vinkje van
+  /// een taaklijstitem soms in een <p>-kind nest (zie de `li`-handler).
+  static md.Element? _firstDescendantWithTag(md.Element element, String tag) {
+    for (final child in element.children ?? const <md.Node>[]) {
+      if (child is! md.Element) continue;
+      if (child.tag == tag) return child;
+      final found = _firstDescendantWithTag(child, tag);
+      if (found != null) return found;
+    }
+    return null;
+  }
 
   final _elementToInlineAttr = <String, ElementToAttributeConvertor>{
     'em': (_) => [Attribute.italic],

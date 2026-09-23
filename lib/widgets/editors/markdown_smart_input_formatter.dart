@@ -65,9 +65,18 @@ class MarkdownSmartInputFormatter extends TextInputFormatter {
     final oldCursor = oldValue.selection.extentOffset;
     final lineStart = oldValue.text.lastIndexOf('\n', oldCursor - 1) + 1;
     final line = oldValue.text.substring(lineStart, oldCursor);
-    final match = RegExp(r'^(\s*)([-*+] |(\d+)\. |> )').firstMatch(line);
+    // De taakmarkering `- [ ] ` staat vóór de kale `- `, anders wint die en
+    // zet Enter na een taak een gewone bullet voort i.p.v. een nieuwe taak.
+    final match = RegExp(
+      r'^(\s*)([-*+] \[[ xX]\] |[-*+] |(\d+)\. |> )',
+    ).firstMatch(line);
     if (match == null) return newValue;
-    final prefix = '${match.group(1)}${match.group(2)}';
+    var prefix = '${match.group(1)}${match.group(2)}';
+    // Een nieuwe taak begint open: het `[x]` van de afgevinkte voorganger
+    // wordt `[ ]`, zoals GitHub dat ook doet.
+    if (prefix.contains('[')) {
+      prefix = prefix.replaceFirst(RegExp(r'\[[ xX]\]'), '[ ]');
+    }
     if (line.substring(match.end).trim().isEmpty) {
       final text = newValue.text.replaceRange(lineStart, oldCursor, '');
       return TextEditingValue(

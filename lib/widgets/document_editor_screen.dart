@@ -81,6 +81,7 @@ import 'editors/chart_editor.dart';
 import 'editors/embed_editor_dialog.dart';
 import 'editors/find_replace_session.dart';
 import 'editors/markdown_find_bar.dart';
+import 'editors/markdown_smart_input_formatter.dart';
 import 'editors/markdown_source_controller.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'markdown_editor/table_embed_builder.dart';

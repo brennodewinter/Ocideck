@@ -65,7 +65,9 @@ class WysiwygNotesToolbar extends StatelessWidget {
         showColorButton: false,
         showBackgroundColorButton: false,
         showClearFormat: !compact,
-        showListCheck: false,
+        // GFM-taaklijsten (`- [ ]`/`- [x]`) round-trippen via de codec en de
+        // knop is de enige visuele weg ernaar — wie ze typte zag kale brackets.
+        showListCheck: true,
         showCodeBlock: !compact,
         showQuote: !compact,
         showIndent: false,

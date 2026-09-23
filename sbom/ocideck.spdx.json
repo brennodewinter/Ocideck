@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ocideck-0.6.9+35",
-  "documentNamespace": "https://ocideck.app/spdx/abaf6d9e-c358-5fde-84d8-1c9e749f7ec1",
+  "documentNamespace": "https://ocideck.app/spdx/395f78ed-9ce6-5d6b-8880-765483aa53f3",
   "creationInfo": {
-    "created": "2026-09-22T20:14:51.510413Z",
+    "created": "2026-09-23T07:09:52.265299Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -4917,7 +4917,7 @@
       "checksums": [
         {
           "algorithm": "SHA256",
-          "checksumValue": "9602fc9984df4a08c1de25b4326225ef3806c8fb8f1635c83604656fe97a92a1"
+          "checksumValue": "d98eccee97b86b09f9a8bc34510fa9b33972b34115a0183d3a2ba715c42d2020"
         }
       ],
       "sourceInfo": "Vendored from https://github.com/TarekkMA/markdown_quill/tree/49641654bd584c6f0fc398c2c91383cf13a3424b at commit 49641654bd584c6f0fc398c2c91383cf13a3424b.",
