@@ -5222,9 +5222,20 @@ merkteken, de tweede de gebeurteniskaart en de eventuele derde een neutrale
 metadata-chip. Alle rijen blijven zichtbaar, zonder de itemlimiet of de
 statuskleuren van een presentatietijdlijn. **Als tabel weergeven** draait de
 weergave terug zonder één cel kwijt te raken. **Invoegen → Tijdlijn** zet dezelfde
-draagbare structuur er direct in — een lege gebeurtenisrij is geldig; je vult
-hem daarna in. **Invoegen → Tabel** zet een leeg 2×2-raster op de cursor, zonder
-dialoog.
+draagbare structuur er direct in, met **Datum** in plaats van het beperktere
+**Tijd**. Klik tijdens het bewerken in de eerste kolom: **Datum kiezen** bewaart
+alleen `jjjj-mm-dd`, terwijl **Datum en tijd kiezen** de lokale datum en tijd
+omzet naar een ISO-8601-tijdstip in UTC. In de leesweergave en export ziet u
+weer de lokale kloktijd, altijd met de UTC-offset erbij. Daardoor blijft een
+kalenderdatum op elke computer dezelfde dag en is een exact tijdstip
+ondubbelzinnig. Bij een niet-bestaand zomertijduur vraagt OciDeck een andere
+tijd; bij een dubbel herfstuur kiest u expliciet de bedoelde offset. Oude vrije
+markeringen zoals `13:41`, `Fase 2` en `onbekend` blijven gewone, ongewijzigde
+tekst. De tijdlijn neemt het accent, de letter en de documentkleuren van de
+gekozen stijl over; datum, klok en UTC-offset krijgen daarbij elk een eigen
+regel, zodat ook een bredere huisstijlletter de cijfers niet doormidden breekt.
+Een lege gebeurtenisrij is geldig; u vult hem daarna in. **Invoegen →
+Tabel** zet een leeg 2×2-raster op de cursor, zonder dialoog.
 
 Begint een nieuwe pagina met het vervolg van een tijdlijn, dan herhaalt de
 bovenmarge naast **Tijdlijn · vervolg** ook het merkteken van de eerste zichtbare
@@ -5239,9 +5250,10 @@ tabel:
 
 ```markdown
 <!-- timeline -->
-| Tijd | Gebeurtenis | Status |
+| Datum | Gebeurtenis | Status |
 | --- | --- | --- |
-| 13:41 | Herstelclaim weerlegd | Vastgesteld |
+| 2026-09-23 | Onderzoek gestart | Vastgesteld |
+| 2026-09-23T12:30:00.000Z | Herstelclaim weerlegd | Afgerond |
 ```
 
 #### Wanneer Visueel terugvalt op de bron *(toegevoegd 2026-08-20)*

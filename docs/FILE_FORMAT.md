@@ -4116,9 +4116,10 @@ table immediately preceded by one marker on a line of its own:
 
 ```markdown
 <!-- timeline -->
-| Tijd | Gebeurtenis | Status |
+| Datum | Gebeurtenis | Status |
 | --- | --- | --- |
-| 12:02 | Eerste melding | Gemeld |
+| 2026-09-23 | Onderzoek gestart | Gemeld |
+| 2026-09-23T12:30:00.000Z | Herstel voltooid | Afgerond |
 ```
 
 The comment applies only to the directly following table. A blank line breaks
@@ -4126,6 +4127,20 @@ the association. Two columns mean marker and event; a third is displayed as
 neutral metadata under its original header. Header names have no prescribed
 meaning and values are never converted into red/amber/green status. Tables with
 another column count remain ordinary tables.
+
+The first column remains ordinary Markdown text, with two optional portable
+conventions for values created by the timeline editor:
+
+- a calendar date is `YYYY-MM-DD` and deliberately has no time zone;
+- an exact instant is ISO 8601 in UTC, with a trailing `Z` (OciDeck writes
+  millisecond precision).
+
+OciDeck projects the second form to the device's local clock for reading and
+export and includes the explicit `UTC±HH:MM` offset. It never converts the
+date-only form. All other first-column values — including legacy clock-only,
+phase and prose markers — remain opaque text and are neither migrated nor
+guessed. Thus older files stay readable and editable, while new exact times are
+unambiguous on disk.
 
 Removing only `<!-- timeline -->` is the complete inverse operation: the table
 bytes and all cells stay in place. Older or different Markdown readers ignore

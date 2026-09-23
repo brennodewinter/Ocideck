@@ -4126,9 +4126,10 @@ twee of drie kolommen met daar direct boven één marker op een eigen regel:
 
 ```markdown
 <!-- timeline -->
-| Tijd | Gebeurtenis | Status |
+| Datum | Gebeurtenis | Status |
 | --- | --- | --- |
-| 12:02 | Eerste melding | Gemeld |
+| 2026-09-23 | Onderzoek gestart | Gemeld |
+| 2026-09-23T12:30:00.000Z | Herstel voltooid | Afgerond |
 ```
 
 Het commentaar geldt alleen voor de tabel die er direct op volgt; een lege regel
@@ -4137,6 +4138,21 @@ gebeurtenis; een derde wordt als neutrale metadata onder zijn eigen kopnaam
 getoond. Kopnamen hebben geen voorgeschreven betekenis en waarden worden nooit
 omgezet in een stoplichtkleur. Een tabel met een ander aantal kolommen blijft een
 gewone tabel.
+
+De eerste kolom blijft gewone Markdown-tekst, met twee optionele, draagbare
+conventies voor waarden die de tijdlijnbewerker maakt:
+
+- een kalenderdatum is `JJJJ-MM-DD` en heeft bewust geen tijdzone;
+- een exact tijdstip is ISO 8601 in UTC, met een afsluitende `Z` (OciDeck
+  schrijft millisecondeprecisie).
+
+OciDeck projecteert de tweede vorm bij lezen en exporteren naar de lokale klok
+van het apparaat en zet de expliciete `UTC±UU:MM`-offset erbij. De datumvorm
+wordt nooit omgerekend. Alle andere waarden in de eerste kolom — waaronder oude
+markeringen met alleen een kloktijd, een fase of vrije tekst — blijven
+ondoorzichtige tekst en worden niet gemigreerd of geraden. Oude bestanden
+blijven zo leesbaar en bewerkbaar, terwijl nieuwe exacte tijdstippen op schijf
+ondubbelzinnig zijn.
 
 Alleen de regel `<!-- timeline -->` weghalen is de volledige omkering: de
 tabelbytes en alle cellen blijven staan. Oudere of andere Markdown-lezers negeren
