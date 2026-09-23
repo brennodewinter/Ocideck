@@ -61,6 +61,7 @@ void sendDeckReplaceToAudience(
   AudienceWindowHandle? audience, {
   required List<Slide> slides,
   required String? projectPath,
+  required ThemeProfile themeProfile,
   required TlpLevel tlp,
   required String organization,
   required String reportLanguage,
@@ -70,6 +71,7 @@ void sendDeckReplaceToAudience(
   final markdown = buildBeamerMarkdown(
     slides: slides,
     projectPath: projectPath,
+    themeProfile: themeProfile,
     tlp: tlp,
     organization: organization,
     reportLanguage: reportLanguage,
@@ -166,8 +168,7 @@ extension _PresenterContent on _FullscreenPresenterState {
   /// (dan houdt een klik je op de slide). Vervangt `_timelineHasMoreSteps`.
   bool get _planHasMoreSteps {
     final plan = _planFor(_currentSlide);
-    if (!plan.hasSteps) return false;
-    return _stepIndex < plan.remainingSteps;
+    return plan.hasSteps && _stepIndex < plan.remainingSteps;
   }
 
   /// Hoeveel tijdlijn-gebeurtenissen nu zichtbaar moeten zijn, of null als de
@@ -260,6 +261,7 @@ extension _PresenterContent on _FullscreenPresenterState {
         widget.audience,
         slides: widget.slides,
         projectPath: widget.projectPath,
+        themeProfile: widget.themeProfile,
         tlp: widget.tlp,
         organization: widget.organization,
         reportLanguage: widget.reportLanguage,

@@ -7,6 +7,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
@@ -31,6 +32,7 @@ void main() {
       final markdown = buildBeamerMarkdown(
         slides: [_linkedChartSlide()],
         projectPath: '/decks/demo',
+        themeProfile: const ThemeProfile(),
       );
 
       // The beamer resolves nothing relative to disk, so the numbers themselves
@@ -66,8 +68,32 @@ void main() {
       final markdown = buildBeamerMarkdown(
         slides: [Slide.create(SlideType.bullets)],
         projectPath: null,
+        themeProfile: const ThemeProfile(),
       );
       expect(markdown, isNot(contains('ocideck_style_profile')));
+    });
+
+    // #2172: de beamer-payload verloor de per-dia logo-opt-out. Zonder
+    // themeProfile op het tussen-Deck schreef de serialisator `no-logo` nooit,
+    // en las het publieksvenster `showLogo: true` terug — het logo stond wél op
+    // het publieksscherm terwijl de presentator het uit had gezet.
+    test('carries the per-slide logo opt-out to the audience window', () {
+      final markdown = buildBeamerMarkdown(
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Met', bullets: ['a']),
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Zonder', bullets: ['b'], showLogo: false),
+        ],
+        projectPath: null,
+        themeProfile: const ThemeProfile(logoPath: 'images/logo.png'),
+      );
+
+      final slides = MarkdownService().parseDeck(markdown)!.slides;
+      expect(slides[0].showLogo, isTrue);
+      expect(slides[1].showLogo, isFalse);
     });
   });
 }
