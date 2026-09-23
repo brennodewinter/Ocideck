@@ -1633,6 +1633,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Obrázky a údaje grafov sa neprenášajú',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Tento dokument odkazuje na obrázky alebo údaje grafov v samostatných súboroch. Obyčajné stiahnutie .md alebo .tex obsahuje len text — odkazy sú pre príjemcu mŕtve. Vyberte HTML, PDF alebo DOCX, aby ste všetko dodali v jednom súbore, alebo pokračujte, ak ide len o text.',
   'Microfoon-doorvoer aan': 'Odpočúvanie mikrofónu zapnuté',
   'Microfoon-doorvoer uit': 'Odpočúvanie mikrofónu vypnuté',
   'Microfoon-doorvoer aan (V)': 'Odpočúvanie mikrofónu zapnuté (V)',

@@ -666,6 +666,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'E imágenan i datanan di gráfika no ta bini ku e',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'E dokumento aki ta referí na imágenan òf datanan di gráfika den fèlnan separá. Un download .md òf .tex simplemente ta kontené solamente e teksto — e referensianan ta muri pa e risibidó. Skohe HTML, PDF òf DOCX pa entregá tur kos den un fèl, òf sigui si solamente e teksto konta.',
   'Microfoon-doorvoer aan': 'Monitoreo di mikrofonu aktivo',
   'Microfoon-doorvoer uit': 'Monitoreo di mikrofonu inaktivo',
   'Microfoon-doorvoer aan (V)': 'Monitoreo di mikrofonu aktivo (V)',

@@ -1627,6 +1627,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Kuvat ja kaaviotiedot eivät tule mukaan',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Tämä asiakirja viittaa kuviin tai kaaviotietoihin erillisissä tiedostoissa. Pelkkä .md- tai .tex-lataus sisältää vain tekstin — viittaukset ovat vastaanottajalle kuolleita. Valitse HTML, PDF tai DOCX toimittaaksesi kaiken yhdessä tiedostossa, tai jatka, jos vain tekstillä on väliä.',
   'Microfoon-doorvoer aan': 'Mikrofonin läpikuuntelu päällä',
   'Microfoon-doorvoer uit': 'Mikrofonin läpikuuntelu pois päältä',
   'Microfoon-doorvoer aan (V)': 'Mikrofonin läpikuuntelu päällä (V)',

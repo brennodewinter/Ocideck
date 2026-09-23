@@ -1652,6 +1652,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Οι εικόνες και τα δεδομένα γραφημάτων δεν περιλαμβάνονται',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Αυτό το έγγραφο παραπέμπει σε εικόνες ή δεδομένα γραφημάτων σε ξεχωριστά αρχεία. Ένα απλό κατέβασμα .md ή .tex περιέχει μόνο το κείμενο — οι αναφορές είναι νεκρές για τον παραλήπτη. Επιλέξτε HTML, PDF ή DOCX για να παραδώσετε τα πάντα σε ένα αρχείο, ή συνεχίστε αν μετράει μόνο το κείμενο.',
   'Microfoon-doorvoer aan': 'Η ακρόαση μικροφώνου ενεργή',
   'Microfoon-doorvoer uit': 'Η ακρόαση μικροφώνου ανενεργή',
   'Microfoon-doorvoer aan (V)': 'Η ακρόαση μικροφώνου ενεργή (V)',

@@ -1627,6 +1627,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Slike in podatki grafov se ne prenašajo',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Ta dokument se sklicuje na slike ali podatke grafov v ločenih datotekah. Goli prenos .md ali .tex vsebuje samo besedilo — sklici so za prejemnika mrtvi. Izberite HTML, PDF ali DOCX, da vse dobavite v eni datoteki, ali pa nadaljujte, če šteje samo besedilo.',
   'Microfoon-doorvoer aan': 'Spremljanje mikrofona vključeno',
   'Microfoon-doorvoer uit': 'Spremljanje mikrofona izključeno',
   'Microfoon-doorvoer aan (V)': 'Spremljanje mikrofona vključeno (V)',

@@ -1626,6 +1626,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Bilder och diagramdata följer inte med',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Det här dokumentet hänvisar till bilder eller diagramdata i separata filer. En ren .md- eller .tex-nedladdning innehåller bara texten — referenserna är döda för mottagaren. Välj HTML, PDF eller DOCX för att leverera allt i en fil, eller fortsätt om bara texten räknas.',
   'Microfoon-doorvoer aan': 'Mikrofonmonitorering på',
   'Microfoon-doorvoer uit': 'Mikrofonmonitorering av',
   'Microfoon-doorvoer aan (V)': 'Mikrofonmonitorering på (V)',

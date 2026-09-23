@@ -1629,6 +1629,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'A képek és a diagramadatok nem kerülnek átadásra',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Ez a dokumentum képekre vagy diagramadatokra hivatkozik külön fájlokban. A puszta .md vagy .tex letöltés csak a szöveget tartalmazza — a hivatkozások a címzett számára holtak. Válassza a HTML, PDF vagy DOCX formátumot, hogy mindent egy fájlban adjon át, vagy folytassa, ha csak a szöveg számít.',
   'Microfoon-doorvoer aan': 'Mikrofon-figyelés bekapcsolva',
   'Microfoon-doorvoer uit': 'Mikrofon-figyelés kikapcsolva',
   'Microfoon-doorvoer aan (V)': 'Mikrofon-figyelés bekapcsolva (V)',

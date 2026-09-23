@@ -95,10 +95,13 @@ byte-faithful through a visual edit, and every other view draws it. *(Added
 
 ## Exporting a document on the web build arrives as a download, not a saved file
 
-All six formats export in the browser, but you cannot point them at a folder: the
+Every format exports in the browser, but you cannot point it at a folder: the
 browser file dialog wants the bytes up front rather than a save location, so the
 finished bytes are handed to the browser as an ordinary download and land wherever
-your browser puts downloads. The PDF is the one to watch — on the web build there
+your browser puts downloads. A `.md` or `.tex` export keeps references to images
+and chart data instead of embedding them — those files do not travel in a lone
+download, so the export asks before shipping one; HTML, PDF and DOCX embed
+everything in the single file. The PDF is the one to watch — on the web build there
 is no hidden renderer for Mermaid diagrams and formulas, so those print their
 source instead of being drawn (the row below).
 

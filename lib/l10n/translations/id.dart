@@ -1627,6 +1627,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Gambar dan data grafik tidak ikut',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Dokumen ini merujuk ke gambar atau data grafik dalam berkas terpisah. Unduhan .md atau .tex biasa hanya berisi teks — rujukannya mati bagi penerima. Pilih HTML, PDF atau DOCX untuk mengirim semuanya dalam satu berkas, atau lanjutkan jika hanya teks yang penting.',
   'Microfoon-doorvoer aan': 'Penerusan mikrofon aktif',
   'Microfoon-doorvoer uit': 'Penerusan mikrofon nonaktif',
   'Microfoon-doorvoer aan (V)': 'Penerusan mikrofon aktif (V)',

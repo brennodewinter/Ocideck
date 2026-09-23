@@ -667,6 +667,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Ôfbyldingen en grafykgegevens gean net mei',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Dit dokumint ferwiist nei ôfbyldingen of grafykgegevens yn losse triemen. In suvere .md- of .tex-download hat allinnich de tekst — de ferwizingen binne by de ûntfanger dea. Kies HTML, PDF of DOCX om alles yn ien triem te leverjen, of gean troch as allinnich de tekst telt.',
   'Microfoon-doorvoer aan': 'Mikrofoan-trochfeuring oan',
   'Microfoon-doorvoer uit': 'Mikrofoan-trochfeuring út',
   'Microfoon-doorvoer aan (V)': 'Mikrofoan-trochfeuring oan (V)',

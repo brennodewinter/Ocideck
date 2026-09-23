@@ -1639,6 +1639,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Obrazy i dane wykresów nie są dołączane',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Ten dokument odwołuje się do obrazów lub danych wykresów w osobnych plikach. Pobrany plik .md lub .tex zawiera tylko tekst — odniesienia są dla odbiorcy martwe. Wybierz HTML, PDF lub DOCX, aby dostarczyć wszystko w jednym pliku, albo kontynuuj, jeśli liczy się tylko tekst.',
   'Microfoon-doorvoer aan': 'Podsłuch mikrofonu włączony',
   'Microfoon-doorvoer uit': 'Podsłuch mikrofonu wyłączony',
   'Microfoon-doorvoer aan (V)': 'Podsłuch mikrofonu włączony (V)',

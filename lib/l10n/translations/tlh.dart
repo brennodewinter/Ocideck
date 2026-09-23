@@ -1604,6 +1604,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'mIlloghmey \'ej chart De\' Sambe\'',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Filevam mIlloghmey pagh chart De\' \'oS files pIndependents. .md pagh .tex download patlhmo\' text neH ghaj — linksmey Hegh recipientvaD. HTML, PDF, pagh DOCX yIwIv: Hoch single fileDaq. pagh continue, text neH important chu\'.',
   'Microfoon-doorvoer aan': 'mIq law\' DuQmoH',
   'Microfoon-doorvoer uit': 'mIq law\' DuQmoHbe\'',
   'Microfoon-doorvoer aan (V)': 'mIq law\' DuQmoH (V)',

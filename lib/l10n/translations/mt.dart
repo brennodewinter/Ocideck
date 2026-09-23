@@ -1645,6 +1645,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'L-immaġini u d-data tal-graffs ma jiġux inklużi',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Dan id-dokument jirreferi għal immaġini jew data ta\' graffs f\'fajls separati. Download sempliċi .md jew .tex fih biss it-test — ir-referenzi jibqgħu mejta għar-riċevitur. Agħżel HTML, PDF jew DOCX biex twassal kollox f\'fajl wieħed, jew kompli jekk biss it-test jaqbeż.',
   'Microfoon-doorvoer aan': 'Għeď il-mikrofonu mixgħul',
   'Microfoon-doorvoer uit': 'Għeď il-mikrofonu mitfi',
   'Microfoon-doorvoer aan (V)': 'Għeď il-mikrofonu mixgħul (V)',

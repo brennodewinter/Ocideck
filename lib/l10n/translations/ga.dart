@@ -1657,6 +1657,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeeldingen en grafiekdata gaan niet mee':
+      'Ní théann íomhánna agus sonraí cairteacha san áireamh',
+  'Dit document verwijst naar afbeeldingen of grafiekdata in losse bestanden. Een kale .md- of .tex-download bevat alleen de tekst — bij de ontvanger zijn de verwijzingen dood. Kies HTML, PDF of DOCX om alles in één bestand te leveren, of ga door als alleen de tekst telt.':
+      'Tagraíonn an doiciméad seo d\'íomhánna nó do shonraí cairteacha i gcomhaid ar leith. Níl ach an téacs i nioslódáil .md nó .tex lom — bíonn na tagairtí marbh ag an bhfaighteoir. Roghnaigh HTML, PDF nó DOCX chun gach rud a sheachadadh in aon chomhad amháin, nó lean ar aghaidh mura bhfuil ach an téacs ag teastáil.',
   'Microfoon-doorvoer aan': 'Monatóireacht an mhicreafóin ar siúl',
   'Microfoon-doorvoer uit': 'Monatóireacht an mhicreafóin múchta',
   'Microfoon-doorvoer aan (V)': 'Monatóireacht an mhicreafóin ar siúl (V)',
