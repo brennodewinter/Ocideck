@@ -60,6 +60,8 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         const SizedBox(height: 16),
         ..._exportQualitySettings(),
         const SizedBox(height: 16),
+        ..._marpCompatSettings(),
+        const SizedBox(height: 16),
         ..._documentStyleSection(ref, l10n),
       ],
     );
@@ -167,6 +169,35 @@ extension _SettingsGeneralTab on _SettingsDialogState {
         onChanged: (value) => ref
             .read(settingsProvider.notifier)
             .setQualityBlockExportOnErrors(value),
+      ),
+    ];
+  }
+
+  /// Marp-compatibiliteit: de controle die toetst of dit deck ook in andere
+  /// Marp-tools goed rendert. Eigen kop naast Exportkwaliteit — die gaat over
+  /// slide-kwaliteit bij export, deze over uitwisselbaarheid van de bron.
+  List<Widget> _marpCompatSettings() {
+    final l10n = context.l10n;
+    return [
+      _sectionTitle(l10n.d('Marp-compatibiliteit')),
+      SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          l10n.d('Controleer Marp-compatibiliteit'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        subtitle: Text(
+          l10n.d(
+            'Toont in de markdown-modus en bij het opslaan of dit deck ook in andere Marp-tools goed rendert.',
+          ),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+        ),
+        value: ref.watch(
+          settingsProvider.select((s) => s.marpCompatChecksEnabled),
+        ),
+        onChanged: (value) => ref
+            .read(settingsProvider.notifier)
+            .setMarpCompatChecksEnabled(value),
       ),
     ];
   }

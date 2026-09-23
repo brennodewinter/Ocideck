@@ -301,6 +301,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       qualityWarningsOnExport: prefs.getBool('qualityWarningsOnExport') ?? true,
       qualityBlockExportOnErrors:
           prefs.getBool('qualityBlockExportOnErrors') ?? false,
+      // Standaard AAN, zelfde reden als privacyChecksEnabled: wie niet weet
+      // dat zijn deck bij een andere tool degradeert, zet de controle die
+      // hem dat vertelt ook niet aan.
+      marpCompatChecksEnabled:
+          prefs.getBool('marpCompatChecksEnabled') ?? true,
       contrastMinRatio: (prefs.getDouble('contrastMinRatio') ?? 4.5).clamp(
         1.0,
         7.0,
@@ -574,6 +579,17 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setQualityBlockExportOnErrors',
       (prefs) => prefs.setBool('qualityBlockExportOnErrors', enabled),
+    );
+  }
+
+  /// Zet de Marp-compatibiliteitscontrole aan of uit. Uit is echt uit: de
+  /// markdown-modus toont geen balk en de opslaan-poort slaat de controle
+  /// over — niet alleen de meldingen verbergen.
+  Future<void> setMarpCompatChecksEnabled(bool enabled) async {
+    state = state.copyWith(marpCompatChecksEnabled: enabled);
+    await _persist(
+      'setMarpCompatChecksEnabled',
+      (prefs) => prefs.setBool('marpCompatChecksEnabled', enabled),
     );
   }
 
