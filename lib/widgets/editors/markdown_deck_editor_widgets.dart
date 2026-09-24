@@ -522,6 +522,144 @@ class _ValidationSummaryBar extends StatelessWidget {
   }
 }
 
+/// De Marp-compatibiliteitsuitslag, als tweede balk onder de syntaxbalk.
+///
+/// Vier staten: groen (compatibel), oranje (compatibel met verlies), een
+/// ingetogen "geaccepteerd" — bewust niet groen, want geaccepteerd is niet
+/// hetzelfde als schoon — en rood (niet compatibel). De acceptatie-actie
+/// schrijft `ocideck_marp_compat_accepted` in de front matter van de buffer;
+/// terugnemen haalt hem eruit. Alleen zichtbaar als de instelling aan staat.
+class _MarpCompatBar extends StatelessWidget {
+  final MarpCompatReport report;
+  final bool pending;
+  final bool expanded;
+  final VoidCallback onToggle;
+  final ValueChanged<int> onJumpToLine;
+  final VoidCallback? onAccept;
+  final VoidCallback? onRevoke;
+
+  const _MarpCompatBar({
+    required this.report,
+    required this.pending,
+    required this.expanded,
+    required this.onToggle,
+    required this.onJumpToLine,
+    this.onAccept,
+    this.onRevoke,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final (bg, fg, icon, summary) = switch (report.status) {
+      MarpCompatStatus.compatible => (
+        AppTheme.successBg,
+        AppTheme.successFg,
+        Icons.check_circle_outline,
+        l10n.d('Marp-compatibel'),
+      ),
+      MarpCompatStatus.degraded => (
+        AppTheme.warningBg,
+        AppTheme.warningFg,
+        Icons.warning_amber_outlined,
+        'Marp: ${report.warningCount} ${l10n.d('aandachtspunt(en)')} '
+            '${l10n.d('— inhoud degradeert in andere tools')}',
+      ),
+      MarpCompatStatus.accepted => (
+        AppTheme.slate100,
+        AppTheme.slate600,
+        Icons.task_alt,
+        '${l10n.d('Marp-aandachtspunten')} (${report.warningCount}): '
+            '${l10n.d('geaccepteerd')}',
+      ),
+      MarpCompatStatus.incompatible => (
+        AppTheme.dangerBg,
+        AppTheme.dangerFg,
+        Icons.error_outline,
+        '${l10n.d('Niet Marp-compatibel')} — '
+            '${report.errorCount} ${l10n.d('fout(en)')}',
+      ),
+    };
+
+    final hasFindings = report.findings.isNotEmpty;
+    return Semantics(
+      liveRegion: true,
+      label: summary,
+      child: Material(
+        color: bg,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            InkWell(
+              onTap: hasFindings ? onToggle : null,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                child: Row(
+                  children: [
+                    Icon(pending ? Icons.sync : icon, size: 14, color: fg),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        pending ? l10n.d('Controleren…') : summary,
+                        style: TextStyle(fontSize: 11, color: fg),
+                      ),
+                    ),
+                    if (onAccept != null)
+                      TextButton(
+                        onPressed: onAccept,
+                        style: TextButton.styleFrom(
+                          foregroundColor: fg,
+                          visualDensity: VisualDensity.compact,
+                          textStyle: const TextStyle(fontSize: 11),
+                        ),
+                        child: Text(l10n.d('Accepteren voor dit deck')),
+                      ),
+                    if (onRevoke != null)
+                      TextButton(
+                        onPressed: onRevoke,
+                        style: TextButton.styleFrom(
+                          foregroundColor: fg,
+                          visualDensity: VisualDensity.compact,
+                          textStyle: const TextStyle(fontSize: 11),
+                        ),
+                        child: Text(l10n.d('Acceptatie terugnemen')),
+                      ),
+                    if (hasFindings)
+                      Icon(
+                        expanded ? Icons.expand_less : Icons.expand_more,
+                        size: 18,
+                        color: fg,
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            if (expanded && hasFindings)
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 160),
+                child: ListView.separated(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                  itemCount: report.findings.length,
+                  separatorBuilder: (_, _) => const SizedBox(height: 4),
+                  itemBuilder: (context, index) {
+                    final issue = report.findings[index];
+                    return _IssueTile(
+                      issue: issue,
+                      onTap: () => onJumpToLine(issue.line),
+                    );
+                  },
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _IssueTile extends StatelessWidget {
   final MarkdownValidationIssue issue;
   final VoidCallback onTap;

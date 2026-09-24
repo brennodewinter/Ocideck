@@ -56,6 +56,14 @@ extension DeckNotifierMarkdown on DeckNotifier {
           : const <String, List<InkStroke>>{};
       deck = deck.copyWith(annotations: remapped);
     }
+    // De Marp-compat-acceptatie is sticky: een vlag die via de
+    // presentatiegegevens-dialoog op het model is gezet overleeft het
+    // toepassen van een buffer die de sleutel nog niet bevat. Terugnemen
+    // gaat via dezelfde UI, niet via het schrappen van de regel in de bron —
+    // bewuste asymmetrie, net als de notitie-/annotatie-overdracht hierboven.
+    if (current != null && current.marpCompatAccepted) {
+      deck = deck.copyWith(marpCompatAccepted: true);
+    }
     // De MIAUW-dispositie staat sinds 0.1.0 niet meer in de markdown (ze ligt
     // in de `.miauw.json`-sidecar). Zonder dit zou één keer schakelen naar de
     // markdown-weergave de uitsluitingen en klantbevestigingen wissen, en de

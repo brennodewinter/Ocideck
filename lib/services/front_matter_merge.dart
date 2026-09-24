@@ -24,6 +24,15 @@ const int kOldestFormatVersion = 1;
 /// De front-matter-sleutel die [kOciDeckFormatVersion] draagt.
 const String kFormatVersionKey = 'ocideck_format';
 
+/// De front-matter-sleutel waarmee een deck zijn Marp-aandachtspunten
+/// (oranje bevindingen van de compatibiliteitscontrole) accepteert.
+///
+/// Één vlag, geen per-bevinding-granulariteit: voor decks waar wegvallen in
+/// andere tools bewust geen probleem is (bijv. cursusmateriaal). Marp kent de
+/// sleutel niet en negeert hem; een OciDeck-versie die hem niet kent laat hem
+/// via [mergeFrontMatter] ongemoeid staan.
+const String kMarpCompatAcceptedKey = 'ocideck_marp_compat_accepted';
+
 /// De versie die het bestand declareert, uit de ruwe `ocideck_format`-waarde.
 ///
 /// Alles wat geen bruikbaar versienummer is telt als [kOldestFormatVersion]. Een
@@ -85,6 +94,7 @@ const Set<String> kOwnedFrontMatterKeys = {
   'ocideck_target_seconds',
   'ocideck_show_rehearsal_summary',
   'ocideck_play_only',
+  kMarpCompatAcceptedKey,
   'ocideck_improvement_framework',
   'ocideck_improvement_y01',
   'ocideck_improvement_y01_unit',
