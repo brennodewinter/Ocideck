@@ -21,6 +21,16 @@ import 'package:flutter_test/flutter_test.dart';
 /// string-guard volstaat: de vlaggen moeten er staan, en achter een Darwin-poort.
 void main() {
   final script = File('scripts/deploy_web.sh').readAsStringSync();
+  final releaseScript = File('scripts/release_auto.sh').readAsStringSync();
+
+  test('deployscripts wijzen standaard naar de huidige webserver', () {
+    const host = 'ubuntu@vps-7f36cc7e.vps.ovh.net';
+    expect(script, contains(r'OCIDECK_DEPLOY_HOST:-' + host));
+    expect(releaseScript, contains(r'OCIDECK_DEPLOY_HOST:-' + host));
+    expect(script, contains(r'OCIDECK_DEPLOY_OWNER:-ubuntu:ubuntu'));
+    expect(script, isNot(contains('ubuntu@braniebananie.nl')));
+    expect(releaseScript, isNot(contains('ubuntu@braniebananie.nl')));
+  });
 
   test('de macOS-tar strips Apple-metadata (geen pax-ruis op de server)', () {
     for (final flag in const [

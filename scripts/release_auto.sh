@@ -95,7 +95,7 @@ TOKEN_KEYCHAIN_SERVICE="${OCIDECK_TOKEN_SERVICE:-forgejo-pawprint-api}"
 APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
 # Zelfde standaard-doel als scripts/deploy_web.sh; de pre-flight toetst dat het
 # bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
-DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@braniebananie.nl}"
+DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-7f36cc7e.vps.ovh.net}"
 DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de liveverificatie
 # De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
 # serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
