@@ -1677,6 +1677,18 @@ const _dutchSourceAddBg = <String, String>{
       'Преведеното копие е отворено в нов раздел.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'слайда пропуснати — оригиналният текст е запазен.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Изберете бекенда в раздела Интеграции. Докато там няма нищо, нищо не се случва.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Настройте сървъра в раздела Интеграции. Докато там няма нищо, нищо не се случва.',
+  'eLearning volgen': 'Следване на eLearning',
+  'eLearning maken': 'Създаване на eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Връзки с други системи. Всяка връзка е изключена по подразбиране; включете я в Разширения, изключете я тук.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Тази връзка е изключена. Включете я в Разширения.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Конфигурирайте я в раздела Интеграции.',
   'Kies een naam en waar het document komt te staan.':
       'Изберете име и място за запазване на документа.',
   'Bijv. Vergadernotities': 'Напр. Бележки от срещата',
@@ -3150,8 +3162,6 @@ const _dutchSourceAddBg = <String, String>{
   'Alle integraties': 'Всички интеграции',
   'Alles inschakelen': 'Включи всичко',
   'Alles uitschakelen': 'Изключи всичко',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Връзки с други системи. Всяка връзка е изключена по подразбиране и остава неактивна, докато не я включите.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Внасяне на презентации от PowerPoint (.pptx), Keynote (.key) и Impress (.odp) като редактируемо тесте. Връзките с други системи, като OpenKAT, се намират в Интеграции.',
   'Media (WebRTC)': 'Медия (WebRTC)',
@@ -4222,8 +4232,6 @@ const _dutchSourceAddBg = <String, String>{
       'Модулът AI помощ е изключен, затова тук нищо не се случва. Включете го в Разширения. Това, което сте настроили по-долу, се запазва.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Помощ при алтернативни текстове, описания и формулировки. Включването все още не изпраща нищо: това става едва след като сами изберете бекенд и, при облачна услуга, изрично потвърдите. При локален бекенд нищо не напуска компютъра ви.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Изберете бекенда в раздела AI помощ. Докато там няма нищо, нищо не се случва.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Примерните слайдове на шаблона са на английски. Името и описанието следват вашия език; съдържанието променяте след създаването.',
   'Meer': 'Още',
@@ -5455,8 +5463,6 @@ const _dutchSourceAddBg = <String, String>{
   "dia's geïmporteerd.": 'слайда са импортирани.',
   'Import mislukt: ': 'Импортирането е неуспешно: ',
   'Checklists': 'Контролни списъци',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Настройте сървъра в раздела Конектор LibrePlan. Докато там няма нищо, нищо не се случва.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Импортирайте моментна снимка на проект от инстанция на LibrePlan като слайдове: Gantt, WBS, натоварване на ресурсите, времеви отчет и още. Само за четене, при поискване — нищо не излиза навън, докато не настроите сървър и не стартирате импортиране.',
   'Vul server-URL en gebruikersnaam in.':

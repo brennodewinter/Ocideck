@@ -11,6 +11,7 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/widgets/dialogs/settings/integration_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/shell/openkat_import_action.dart';
 import 'package:path/path.dart' as p;
@@ -111,8 +112,6 @@ void main() {
         SettingsSection.navItems(
           infoSafetyRevealed: false,
           hasChecklists: false,
-          aiRevealed: false,
-          libreplanRevealed: false,
           integrationsAvailable: integrationsAvailable,
           collaborationRevealed: false,
         );
@@ -174,20 +173,41 @@ void main() {
       expect(find.text('Integraties'), findsWidgets);
     });
 
-    testWidgets('de OpenKAT-schakelaar onthult de map-instellingen', (
-      tester,
-    ) async {
-      // Uit: alleen de schakelkaart, geen mapkiezer.
-      await open(tester);
-      expect(find.text('Map kiezen…'), findsNothing);
+    testWidgets(
+      'de OpenKAT-kaart onthult de map-instellingen als hij aan staat',
+      (tester) async {
+        // Uit: alleen de kaart met grijze schakelaar, geen mapkiezer — aanzetten
+        // hoort sinds #2185 bij Uitbreidingen.
+        await open(tester);
+        expect(find.text('Map kiezen…'), findsNothing);
+        final kaart = find.widgetWithText(SwitchListTile, 'OpenKAT');
+        expect(tester.widget<SwitchListTile>(kaart).onChanged, isNull);
 
-      final schakelaar = find.byType(SwitchListTile).first;
-      await tester.ensureVisible(schakelaar);
-      await tester.pumpAndSettle();
-      await tester.tap(schakelaar);
-      await tester.pumpAndSettle();
-      expect(find.text('Map kiezen…'), findsOneWidget);
-    });
+        // De route: via de inschakelkaart op Uitbreidingen. Navigeren via de
+        // tooltip van de zijbalkknop: de sectiekop van een ander tabblad deelt
+        // het opschrift en staat offstage in dezelfde boom (IndexedStack).
+        // ensureVisible: het item kan onder de merkvoet door schuiven, en een
+        // tik daar raakt dan de verkeerde knop.
+        await tester.ensureVisible(find.byTooltip('Uitbreidingen'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byTooltip('Uitbreidingen'));
+        await tester.pumpAndSettle();
+        final inschakelkaart = find.descendant(
+          of: find.byType(IntegrationModuleCard),
+          matching: find.widgetWithText(SwitchListTile, 'OpenKAT'),
+        );
+        await tester.ensureVisible(inschakelkaart);
+        await tester.pumpAndSettle();
+        await tester.tap(inschakelkaart);
+        await tester.pumpAndSettle();
+
+        await tester.ensureVisible(find.byTooltip('Integraties'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.byTooltip('Integraties'));
+        await tester.pumpAndSettle();
+        expect(find.text('Map kiezen…'), findsOneWidget);
+      },
+    );
 
     testWidgets('Integraties toont de rapportagemap', (tester) async {
       await open(
@@ -233,14 +253,14 @@ void main() {
       expect(knop.onPressed, isNull);
     });
 
-    testWidgets('"Alles inschakelen" zet de koppeling aan', (tester) async {
-      // De bulkbediening (#1158): met alles uit is "Alles inschakelen" de weg om
-      // in één handeling elke integratie aan te zetten.
+    testWidgets('"Alles inschakelen" staat er niet meer (#2185)', (
+      tester,
+    ) async {
+      // Aanzetten hoort bij Uitbreidingen; een bulkknop "aan" op Integraties
+      // zou de verkeerde plek blijven aanbieden. Uitzetten mag hier wél.
       await open(tester);
-      expect(find.text('Map kiezen…'), findsNothing);
-      await tester.tap(find.widgetWithText(TextButton, 'Alles inschakelen'));
-      await tester.pumpAndSettle();
-      expect(find.text('Map kiezen…'), findsOneWidget);
+      expect(find.text('Alles inschakelen'), findsNothing);
+      expect(find.text('Alles uitschakelen'), findsOneWidget);
     });
 
     testWidgets('"Alles uitschakelen" zet de koppeling uit', (tester) async {

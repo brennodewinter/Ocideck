@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../state/asset_rights_module_provider.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 class AssetRightsModuleCard extends ConsumerWidget {
@@ -20,7 +22,7 @@ class AssetRightsModuleCard extends ConsumerWidget {
             ? null
             : ref.read(assetRightsModuleProvider.notifier).setEnabled,
         title: Text(
-          l10n.d('Afbeeldingsrechten'),
+          moduleCardTitle(ModuleId.assetRights, l10n),
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
         subtitle: Text(

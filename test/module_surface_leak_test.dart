@@ -24,15 +24,11 @@ void main() {
   List<SettingsSection> nav({
     required bool revealed,
     required bool hasChecklists,
-    bool aiRevealed = false,
-    bool libreplanRevealed = false,
     bool integrationsAvailable = true,
     bool collaborationRevealed = false,
   }) => SettingsSection.navItems(
     infoSafetyRevealed: revealed,
     hasChecklists: hasChecklists,
-    aiRevealed: aiRevealed,
-    libreplanRevealed: libreplanRevealed,
     integrationsAvailable: integrationsAvailable,
     collaborationRevealed: collaborationRevealed,
   );
@@ -94,32 +90,18 @@ void main() {
     }
   });
 
-  test('het AI-tabblad volgt dezelfde regel als de checklists (#731)', () {
-    // `aiRevealed` is bij de aanroeper al `enabled || hasBackend`, dus de
-    // tonen-zodra-er-inhoud-is-helft zit in die vlag; hier bewaken we dat de
-    // lijst hem ook echt volgt.
-    expect(
-      nav(revealed: false, hasChecklists: false),
-      isNot(contains(SettingsSection.ai)),
-    );
-    expect(
-      nav(revealed: false, hasChecklists: false, aiRevealed: true),
-      contains(SettingsSection.ai),
-    );
-  });
-
   test('de twee modules staan los van elkaar (#731)', () {
     // Ze delen sinds #731 het tabblad Uitbreidingen, en dat is precies waarom
     // dit een eigen toets verdient: één `where` met twee vlaggen erin is een
     // plek waar een verkeerde `||` beide kanten tegelijk opent. De toets
     // hierboven zet ze nooit tegen elkaar in, dus die zou dat niet zien.
-    final infoAan = nav(revealed: true, hasChecklists: true, aiRevealed: false);
+    final infoAan = nav(revealed: true, hasChecklists: true);
     expect(infoAan, contains(SettingsSection.checklists));
-    expect(infoAan, isNot(contains(SettingsSection.ai)));
+    expect(infoAan, contains(SettingsSection.integrations));
 
-    final aiAan = nav(revealed: false, hasChecklists: false, aiRevealed: true);
-    expect(aiAan, isNot(contains(SettingsSection.checklists)));
-    expect(aiAan, contains(SettingsSection.ai));
+    final infoUit = nav(revealed: false, hasChecklists: false);
+    expect(infoUit, isNot(contains(SettingsSection.checklists)));
+    expect(infoUit, contains(SettingsSection.integrations));
   });
 
   test('een leeg sjabloon telt als aanwezig werk', () {

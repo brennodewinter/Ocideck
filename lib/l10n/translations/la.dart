@@ -1673,6 +1673,18 @@ const _dutchSourceAddLa = <String, String>{
       'Exemplar versum in scheda nova apertum.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'imagines omissae — textus originalis servatus.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Backend in tabula Integrationum elige. Dum ibi nihil positum est, nihil fit.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Servitorem in pagella Integrationum constitue. Dum ibi nihil est, nihil fit.',
+  'eLearning volgen': 'eLearning sequi',
+  'eLearning maken': 'eLearning creare',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Nexus cum aliis systematibus. Omnis nexus praedefinite exstinctus est; accende apud Extensiones, exstingue hic.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Hic nexus exstinctus est. Accende eum apud Extensiones.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Configura in tabula Integrationum.',
   'Kies een naam en waar het document komt te staan.':
       'Elige nomen et locum ubi documentum servabitur.',
   'Bijv. Vergadernotities': 'E.g. Notae conventus',
@@ -3150,8 +3162,6 @@ const _dutchSourceAddLa = <String, String>{
   'Alle integraties': 'Omnes integrationes',
   'Alles inschakelen': 'Omnia activare',
   'Alles uitschakelen': 'Omnia deactivare',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Coniunctiones cum aliis systematibus. Quaeque coniunctio ex more inactiva est et inactiva manet donec eam actives.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Praesentationes ex PowerPoint (.pptx), Keynote (.key) et Impress (.odp) ut fasciculum mutabilem inferre. Coniunctiones cum aliis systematibus, ut OpenKAT, sub Integrationibus sunt.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -4212,8 +4222,6 @@ const _dutchSourceAddLa = <String, String>{
       'Modulus Auxilii IA exstinctus est, itaque hic nihil fit. Eum apud Extensiones accende. Quae infra statuisti, manent.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Auxilium in textibus alternativis, descriptionibus et formulis. Accendere nihil adhuc mittit: id demum fit postquam ipse backend elegisti et, apud servitium nubis, expresse confirmavisti. Cum backend locali nihil computatrum tuum relinquit.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Backend in tabula Auxilii IA elige. Dum ibi nihil positum est, nihil fit.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Laminae exempli exemplaris Anglice scriptae sunt. Nomen et descriptio linguam tuam sequuntur; contentum post creationem accommodas.',
   'Meer': 'Plura',
@@ -5433,8 +5441,6 @@ const _dutchSourceAddLa = <String, String>{
   "dia's geïmporteerd.": 'scidae importatae.',
   'Import mislukt: ': 'Importatio defecit: ',
   'Checklists': 'Indices',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Servitorem in pagella Coniunctio LibrePlan constitue. Dum ibi nihil est, nihil fit.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Imaginem status proiecti ex instantia LibrePlan ut paginas importa: Gantt, WBS, onus opum, tabula temporum et plura. Tantum legendum, ad petitionem — nihil exit donec servitorem constituas et importationem incipias.',
   'Vul server-URL en gebruikersnaam in.':

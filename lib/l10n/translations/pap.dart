@@ -696,6 +696,18 @@ const _dutchSourceAddPap = {
       'Kopia tradusí a habri den un tab nobo.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'diapositivanan a salta — teksto original a keda.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Skohe e backend riba e tab Integrashonnan. Tanten ku no tin nada ei, nada no ta pasa.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Konfigurá e server na e tab Integrashonnan. Miéntras no tin nada einan, no ta pasa nada.',
+  'eLearning volgen': 'Sigui eLearning',
+  'eLearning maken': 'Krea eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Konekshonnan ku otro sistemanan. Kada konekshon ta pagá pa default; hiba\'é na Ekstenshonnan, paga\'é aki.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'E konekshon aki ta pagá. Hiba\'é na Ekstenshonnan.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Konfigurá\'é na e tab Integrashonnan.',
   'Kies een naam en waar het document komt te staan.':
       'Skohe un nòmber i kaminda e dokumento ta wordu wardá.',
   'Bijv. Vergadernotities': 'P.e. Nota di reunion',
@@ -2168,8 +2180,6 @@ const _dutchSourceAddPap = {
   'Alle integraties': 'Tur integrashon',
   'Alles inschakelen': 'Aktivá tur',
   'Alles uitschakelen': 'Desaktivá tur',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Konekshon ku otro sistemanan. Kada konekshon ta paga pa defekto i ta keda inaktivo te ora bo aktivé.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Trese presentashonnan for di PowerPoint (.pptx), Keynote (.key) i Impress (.odp) komo deck editabel. Konekshonnan ku otro sistemanan, manera OpenKAT, ta bou di Integrashonnan.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -3239,8 +3249,6 @@ const _dutchSourceAddPap = {
       'E módulo Asistensia di IA ta pagá, pues nada no ta pasa akí. Sende é bou di Ekstenshonnan. Loke bo a konfigurá akí bou ta keda.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Yudansa ku tekstonan alternativo, deskripshonnan i formulashonnan. Sende é no ta manda nada ainda: esei ta sosodé so despues ku bo mes a skohe un backend i, den kaso di un servisio di nubia, a konfirmá esplísitamente. Ku un backend lokal nada no ta sali for di bo komputer.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Skohe e backend riba e tab Asistensia di IA. Tanten ku no tin nada ei, nada no ta pasa.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'E dianan di ehèmpel di un plantia ta na ingles. Nòmber i deskripshon ta sigui bo mes idioma; e kontenido bo ta adaptá despues di krea e presentashon.',
   'Meer': 'Mas',
@@ -5449,8 +5457,6 @@ const _dutchSourceAddPap = {
   "dia's geïmporteerd.": 'lámina importá.',
   'Import mislukt: ': 'Importashon a faya: ',
   'Checklists': 'Lista di kontrol',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Konfigurá e server na e tab Konektor LibrePlan. Miéntras no tin nada einan, no ta pasa nada.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importá un snapshot di proyekto for di un instansia LibrePlan komo lámina: Gantt, WBS, karga di rekurso, timesheet i mas. Solamente pa lesa, riba petishon — nada no ta sali pafó te ora bo konfigurá un server i kuminsá un importashon.',
   'Vul server-URL en gebruikersnaam in.':

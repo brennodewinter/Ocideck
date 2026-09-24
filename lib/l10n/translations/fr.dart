@@ -698,6 +698,18 @@ const _dutchSourceAddFr = {
       'Copie traduite ouverte dans un nouvel onglet.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'diapositives ignorées — texte original conservé.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Choisissez le backend dans l\'onglet Intégrations. Tant que rien n\'y est défini, rien ne se passe.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Configurez le serveur dans l\'onglet Intégrations. Tant qu\'il n\'y a rien, rien ne se passe.',
+  'eLearning volgen': 'Suivre un eLearning',
+  'eLearning maken': 'Créer un eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Connexions à d\'autres systèmes. Chaque connexion est désactivée par défaut ; activez-la dans Extensions, désactivez-la ici.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Cette connexion est désactivée. Activez-la dans Extensions.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Configurez-la dans l\'onglet Intégrations.',
   'Kies een naam en waar het document komt te staan.':
       'Choisissez un nom et l\'emplacement où le document sera enregistré.',
   'Bijv. Vergadernotities': 'Par ex. Notes de réunion',
@@ -2191,8 +2203,6 @@ const _dutchSourceAddFr = {
   'Alle integraties': 'Toutes les intégrations',
   'Alles inschakelen': 'Tout activer',
   'Alles uitschakelen': 'Tout désactiver',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Connexions avec d\'autres systèmes. Chaque connexion est désactivée par défaut et reste inactive jusqu\'à ce que vous l\'activiez.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Faire entrer les présentations depuis PowerPoint (.pptx), Keynote (.key) et Impress (.odp) sous forme de deck modifiable. Les connexions avec d\'autres systèmes, comme OpenKAT, se trouvent sous Intégrations.',
   'Media (WebRTC)': 'Médias (WebRTC)',
@@ -3268,8 +3278,6 @@ const _dutchSourceAddFr = {
       'Le module Assistance IA est désactivé, donc rien ne se passe ici. Activez-le dans Extensions. Ce que vous avez réglé ci-dessous est conservé.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Aide pour les textes alternatifs, les descriptions et les formulations. L\'activer n\'envoie encore rien : cela ne se produit qu\'après que vous avez choisi vous-même un backend et, pour un service cloud, confirmé explicitement. Avec un backend local, rien ne quitte votre ordinateur.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Choisissez le backend dans l\'onglet Assistance IA. Tant que rien n\'y est défini, rien ne se passe.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Les diapositives d\'exemple d\'un modèle sont en anglais. Le nom et la description suivent votre propre langue ; le contenu, vous l\'adaptez après la création.',
   'Meer': 'Plus',
@@ -5511,8 +5519,6 @@ const _dutchSourceAddFr = {
   "dia's geïmporteerd.": 'diapositives importées.',
   'Import mislukt: ': 'Échec de l’import : ',
   'Checklists': 'Checklists',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configurez le serveur dans l\'onglet Connecteur LibrePlan. Tant qu\'il n\'y a rien, rien ne se passe.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importez un instantané de projet d\'une instance LibrePlan sous forme de diapositives : Gantt, WBS, charge des ressources, feuille de temps et plus. Lecture seule, à la demande — rien ne sort tant que vous n\'avez pas configuré un serveur et lancé un import.',
   'Vul server-URL en gebruikersnaam in.':

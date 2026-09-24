@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../state/import_module_provider.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 /// De modulekaart voor Importeren op het tabblad Uitbreidingen (#772, B1).
@@ -25,7 +27,7 @@ class ImportModuleCard extends ConsumerWidget {
         value: enabled,
         onChanged: (v) => ref.read(importModuleProvider.notifier).setEnabled(v),
         title: Text(
-          l10n.d('Importeren'),
+          moduleCardTitle(ModuleId.imports, l10n),
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
         subtitle: Text(

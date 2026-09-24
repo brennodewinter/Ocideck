@@ -21,12 +21,31 @@ extension _SettingsModules on _SettingsDialogState {
           style: TextStyle(fontSize: 12, color: AppTheme.slate600),
         ),
         const SizedBox(height: 16),
-        // De kaarten komen letterlijk uit het register (#570): de volgorde
-        // dáár is de volgorde hier, en een module zonder kaart valt om op de
-        // switch hieronder in plaats van stil te ontbreken.
-        for (final (index, entry) in moduleRegistry.indexed) ...[
-          if (index > 0) const SizedBox(height: 12),
-          switch (entry.id) {
+        // De kaarten komen letterlijk uit de registers: modulekaarten uit
+        // `moduleRegistry` (#570) — een module zonder kaart valt om op de
+        // switch hieronder in plaats van stil te ontbreken — plus een
+        // inschakelkaart per integratie (#2185: aanzetten hoort hier). De
+        // getoonde volgorde is alfabetisch op de vertaalde titel (#2187), uit
+        // `card_titles.dart` zodat sleutel en opschrift dezelfde bron delen.
+        for (final (index, entry) in _sortedModuleCards(
+          l10n,
+          module,
+        ).indexed) ...[if (index > 0) const SizedBox(height: 12), entry.card],
+      ],
+    );
+  }
+
+  /// De kaarten op dit tabblad als (titel, kaart)-paren, gesorteerd op de
+  /// vertaalde titel.
+  List<({String title, Widget card})> _sortedModuleCards(
+    AppLocalizations l10n,
+    InfoSafetyState module,
+  ) {
+    final cards = <({String title, Widget card})>[
+      for (final entry in moduleRegistry)
+        (
+          title: moduleCardTitle(entry.id, l10n),
+          card: switch (entry.id) {
             ModuleId.infoSafety => _informationSecurityCard(l10n, module),
             ModuleId.ai => _aiAssistCard(l10n),
             ModuleId.onlineStorage => const OnlineStorageModuleCard(),
@@ -42,9 +61,19 @@ extension _SettingsModules on _SettingsDialogState {
               onChanged: (v) => _rebuild(() => _libreplanEnabled = v),
             ),
           },
-        ],
-      ],
-    );
+        ),
+      // De inschakelkaarten van integraties horen bij "aanzetten", dus op
+      // Uitbreidingen. Op web zijn ze allemaal desktop-only — daar tonen is
+      // dan ruis in plaats van een keuze.
+      if (!isWebPlatform)
+        for (final entry in integrationRegistry)
+          (
+            title: integrationCardTitle(entry.id, l10n),
+            card: IntegrationModuleCard(entry: entry),
+          ),
+    ];
+    sortCardsByTitle(cards);
+    return cards;
   }
 
   Widget _informationSecurityCard(
@@ -65,7 +94,7 @@ extension _SettingsModules on _SettingsDialogState {
             value: module.enabled,
             onChanged: (v) => _toggleInfoSafety(v),
             title: Text(
-              l10n.d('Informatieveiligheid'),
+              moduleCardTitle(ModuleId.infoSafety, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(

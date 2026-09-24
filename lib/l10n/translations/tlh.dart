@@ -1631,6 +1631,18 @@ const _dutchSourceAddTlh = <String, String>{
       'mugh De\' tab chu\'Daq poSmoHlu\'.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'jIyImej — original ghItlh pollu\'.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'muvmoHmeHDaq backend yIwIv. pa\' pagh tu\'lu\'taHvIS, qaSbe\' vay\'.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'muvmoHmeHDaq De\'wI\' yIcher. pa\' pagh tu\'lu\'taHvIS, pagh qaS.',
+  'eLearning volgen': 'eLearning yItlha\'',
+  'eLearning maken': 'eLearning chenmoH',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'latlh patmey boq. Hoch boq motlhbe\' Qot; chelwI\'meyDaq peQchu\', naDev peQbe\'.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'boqvam Qot. chelwI\'meyDaq peQ.',
+  'Instellen doet u op het tabblad Integraties.':
+      'muvmoHmeH \'echletDaq yIcher.',
   'Kies een naam en waar het document komt te staan.':
       'pong yIwIv \'ej document pollu\'bogh Daq yIwIv.',
   'Bijv. Vergadernotities': 'mup: qevas ghItlhmey',
@@ -3082,8 +3094,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Alle integraties': 'Hoch muvmoHghachmey',
   'Alles inschakelen': 'Hoch tIchu\'moH',
   'Alles uitschakelen': 'Hoch tIchu\'Ha\'moH',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'latlh patmey muvmoHghachmey. muvmoHghach chu\'Ha\'lu\'pu\' motlh, \'ej Dachu\'moHpa\' lo\'laHbe\' taH.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'PowerPoint (.pptx), Keynote (.key), Impress (.odp) je nge\'wI\'mey cha\'nav choH laH tIqem. latlh patmey muvmoHghachmey, OpenKAT rurbogh, muvmoHmeH bIngDaq tu\'lu\'.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -4143,8 +4153,6 @@ const _dutchSourceAddTlh = <String, String>{
       'chu\'be\' AI QaH module, vaj naDev qaSbe\' vay\'. chelwI\'meyDaq yIchu\'. bIngDaq Dacherpu\'bogh Dochmey ratlh.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'alt-ghItlhmey, QIjmey, mu\'tlheghmey je QaH. chu\'lu\'DI\' pagh ngeHlu\': backend DawIvpu\'DI\' \'ej, cloud Qu\' Dalo\'chugh, DachIDchu\'pu\'DI\' neH qaS. backend naDev lo\'lu\'chugh, De\' ngeHbe\'lu\'.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'AI QaH \'echletDaq backend yIwIv. pa\' pagh tu\'lu\'taHvIS, qaSbe\' vay\'.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'ghItlh\'a\' \'echletHommey: DIvI\' Hol lu\'. per QIn je: Hol lIj lu\'. chenpu\'DI\', qech yIchoH.',
   'Meer': 'latlh',
@@ -5342,8 +5350,6 @@ const _dutchSourceAddTlh = <String, String>{
   "dia's geïmporteerd.": '\'echletHommey kII\'lu\'pu\'.',
   'Import mislukt: ': 'kII\' Qaghpu\': ',
   'Checklists': 'checklistmey',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'LibrePlan rarwI\' perDaq De\'wI\' yIcher. pa\' pagh tu\'lu\'taHvIS, pagh qaS.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'LibrePlan De\'wI\'vo\' Qu\' velqa\' \'echletHommey rur yIkII\': Gantt, WBS, jo \'ugh, poH nav, latlh je. laD neH, poQlu\'DI\' neH — De\'wI\' Dacherpa\' \'ej kII\'ghach Dataghpa\', pagh mej De\'.',
   'Vul server-URL en gebruikersnaam in.':

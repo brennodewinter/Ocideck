@@ -1689,6 +1689,18 @@ const _dutchSourceAddGa = <String, String>{
       'Cóip aistrithe oscailte i gcluaisín nua.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'sleamhnáin scipeáilte — téacs bunaidh coinnithe.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Roghnaigh an t-inneall ar an táb Comhtháthuithe. Fad is nach bhfuil aon rud socraithe ansin, ní tharlaíonn aon rud.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Cumraigh an freastalaí sa chluaisín Comhtháthuithe. Fad is nach bhfuil aon rud ann, ní tharlaíonn aon rud.',
+  'eLearning volgen': 'eLearning a leanúint',
+  'eLearning maken': 'eLearning a chruthú',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Naisc le córais eile. Tá gach nasc múchta de réir réamhshocraithe; cas é faoi Bhreisínteachtaí, múch anseo é.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Tá an nasc seo múchta. Cas é faoi Bhreisínteachtaí.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Cumraigh é sa chluaisín Comhtháthuithe.',
   'Kies een naam en waar het document komt te staan.':
       'Roghnaigh ainm agus an áit a sábhálfar an doiciméad.',
   'Bijv. Vergadernotities': 'M.sh. Nótaí cruinnithe',
@@ -3175,8 +3187,6 @@ const _dutchSourceAddGa = <String, String>{
   'Alle integraties': 'Gach comhtháthú',
   'Alles inschakelen': 'Cumasaigh gach ceann',
   'Alles uitschakelen': 'Díchumasaigh gach ceann',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Naisc le córais eile. Tá gach nasc múchta de réir réamhshocraithe agus fanann sé neamhghníomhach go dtí go gcumasaíonn tú é.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Láithreoireachtaí a thabhairt isteach ó PowerPoint (.pptx), Keynote (.key) agus Impress (.odp) mar deck ineagarthóireachta. Tá naisc le córais eile, ar nós OpenKAT, faoi Chomhtháthuithe.',
   'Media (WebRTC)': 'Meáin (WebRTC)',
@@ -4254,8 +4264,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tá an modúl Cúnamh II múchta, mar sin ní tharlaíonn aon rud anseo. Cuir ar siúl é faoi Breiseáin. Fanann a bhfuil socraithe agat thíos mar atá.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Cabhair le téacsanna malartacha, cur síos agus friotal. Ní sheolann é a chur ar siúl aon rud go fóill: ní tharlaíonn sé sin ach amháin tar éis duit inneall a roghnú tú féin agus, i gcás seirbhís néil, é a dheimhniú go sainráite. Le hinneall áitiúil ní fhágann aon rud do ríomhaire.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Roghnaigh an t-inneall ar an táb Cúnamh II. Fad is nach bhfuil aon rud socraithe ansin, ní tharlaíonn aon rud.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Tá sleamhnáin shamplacha teimpléid i mBéarla. Leanann an t-ainm agus an cur síos do theanga féin; cuireann tú an t-ábhar in oiriúint tar éis é a chruthú.',
   'Meer': 'Tuilleadh',
@@ -5492,8 +5500,6 @@ const _dutchSourceAddGa = <String, String>{
   "dia's geïmporteerd.": 'sleamhnáin iompórtáilte.',
   'Import mislukt: ': 'Theip ar an iompórtáil: ',
   'Checklists': 'Seicliostaí',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Cumraigh an freastalaí sa chluaisín Nascóir LibrePlan. Fad is nach bhfuil aon rud ann, ní tharlaíonn aon rud.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Iompórtáil léargas ar staid tionscadail ó ásc LibrePlan mar sleamhnáin: Gantt, WBS, ualach acmhainní, bileog ama agus tuilleadh. Léamh amháin, ar iarratas — ní théann aon rud amach go dtí go gcumraíonn tú freastalaí agus go dtosaíonn tú iompórtáil.',
   'Vul server-URL en gebruikersnaam in.':

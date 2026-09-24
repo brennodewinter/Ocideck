@@ -10,7 +10,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../state/collaboration_provider.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 class CollaborationModuleCard extends ConsumerWidget {
@@ -29,7 +31,7 @@ class CollaborationModuleCard extends ConsumerWidget {
             onChanged: (v) =>
                 ref.read(collaborationProvider.notifier).setEnabled(v),
             title: Text(
-              l10n.d('Realtime samenwerken'),
+              moduleCardTitle(ModuleId.collaboration, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(

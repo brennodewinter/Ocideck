@@ -2568,6 +2568,18 @@ const _dutchSourceAddTr = <String, String>{
       'Çevrilen kopya yeni sekmede açıldı.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'slayt atlandı — orijinal metin korundu.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Arka ucu Entegrasyonlar sekmesinde seçin. Orada bir şey seçili olmadığı sürece hiçbir şey olmaz.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Sunucuyu Entegrasyonlar sekmesinde yapılandırın. Orada bir şey olmadığı sürece hiçbir şey olmaz.',
+  'eLearning volgen': 'eLearning takip et',
+  'eLearning maken': 'eLearning oluştur',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Diğer sistemlerle bağlantılar. Her bağlantı varsayılan olarak kapalıdır; Eklentiler bölümünden açın, buradan kapatın.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Bu bağlantı kapalı. Eklentiler bölümünden açın.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Entegrasyonlar sekmesinde ayarlayın.',
   'Kies een naam en waar het document komt te staan.':
       'Bir ad ve belgenin kaydedileceği yeri seçin.',
   'Bijv. Vergadernotities': 'Örn. Toplantı notları',
@@ -4024,8 +4036,6 @@ const _dutchSourceAddTr = <String, String>{
   'Alle integraties': 'Tüm entegrasyonlar',
   'Alles inschakelen': 'Tümünü etkinleştir',
   'Alles uitschakelen': 'Tümünü devre dışı bırak',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Diğer sistemlerle bağlantılar. Her bağlantı varsayılan olarak kapalıdır ve siz etkinleştirene kadar etkin olmadan kalır.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'PowerPoint (.pptx), Keynote (.key) ve Impress (.odp) sunumlarını düzenlenebilir deck olarak içeri alma. Diğer sistemlerle bağlantılar, örneğin OpenKAT, Entegrasyonlar altında bulunur.',
   'Media (WebRTC)': 'Medya (WebRTC)',
@@ -5079,8 +5089,6 @@ const _dutchSourceAddTr = <String, String>{
       'AI yardımı modülü kapalı, bu yüzden burada hiçbir şey olmaz. Eklentiler bölümünden açın. Aşağıda ayarladıklarınız olduğu gibi kalır.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Alternatif metinler, açıklamalar ve ifadeler için yardım. Açmak henüz hiçbir şey göndermez: bu ancak kendiniz bir arka uç seçtikten ve bir bulut hizmetinde açıkça onayladıktan sonra gerçekleşir. Yerel bir arka uçla hiçbir şey bilgisayarınızdan çıkmaz.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Arka ucu AI yardımı sekmesinde seçin. Orada bir şey seçili olmadığı sürece hiçbir şey olmaz.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Bir şablonun örnek slaytları İngilizcedir. Ad ve açıklama kendi dilinizi izler; içeriği oluşturduktan sonra kendiniz düzenlersiniz.',
   'Meer': 'Daha fazla',
@@ -5390,8 +5398,6 @@ const _dutchSourceAddTr = <String, String>{
   "dia's geïmporteerd.": 'slayt içe aktarıldı.',
   'Import mislukt: ': 'İçe aktarma başarısız: ',
   'Checklists': 'Kontrol listeleri',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Sunucuyu LibrePlan bağlayıcısı sekmesinde yapılandırın. Orada bir şey olmadığı sürece hiçbir şey olmaz.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Bir LibrePlan örneğinden proje anlık görüntüsünü slayt olarak içe aktarın: Gantt, WBS, kaynak yükü, zaman çizelgesi ve daha fazlası. Salt okunur, istek üzerine — siz bir sunucu yapılandırıp içe aktarma başlatana kadar dışarı hiçbir şey gitmez.',
   'Vul server-URL en gebruikersnaam in.':

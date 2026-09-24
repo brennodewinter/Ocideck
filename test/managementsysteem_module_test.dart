@@ -5,6 +5,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/managementsysteem_provider.dart';
+import 'package:ocideck/state/integration_registry.dart';
 import 'package:ocideck/state/module_registry.dart';
 import 'package:ocideck/widgets/dialogs/settings/managementsysteem_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
@@ -112,8 +113,12 @@ void main() {
       await tester.tap(find.text('open'));
       await tester.pumpAndSettle();
       expect(find.byType(ManagementsysteemModuleCard), findsOneWidget);
-      // One switch per registered module card.
-      expect(find.byType(SwitchListTile), findsNWidgets(moduleRegistry.length));
+      // One switch per registered module card, plus one per integration
+      // activation card (#2185: aanzetten hoort hier).
+      expect(
+        find.byType(SwitchListTile),
+        findsNWidgets(moduleRegistry.length + integrationRegistry.length),
+      );
     });
   });
 }

@@ -1658,6 +1658,18 @@ const _dutchSourceAddCs = <String, String>{
       'Přeložená kopie otevřena na nové kartě.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'snímky přeskočeny — původní text zachován.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Backend zvolte na kartě Integrace. Dokud tam nic není nastaveno, nic se neděje.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Nastavte server na kartě Integrace. Dokud tam nic není, nic se neděje.',
+  'eLearning volgen': 'Sledování eLearningu',
+  'eLearning maken': 'Vytváření eLearningu',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Propojení s jinými systémy. Každé propojení je ve výchozím stavu vypnuté; zapněte ho v Rozšířeních, vypněte tady.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Toto propojení je vypnuté. Zapněte ho v Rozšířeních.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Nastavte ho na kartě Integrace.',
   'Kies een naam en waar het document komt te staan.':
       'Vyberte název a místo uložení dokumentu.',
   'Bijv. Vergadernotities': 'Např. Poznámky ze schůzky',
@@ -3118,8 +3130,6 @@ const _dutchSourceAddCs = <String, String>{
   'Alle integraties': 'Všechny integrace',
   'Alles inschakelen': 'Zapnout vše',
   'Alles uitschakelen': 'Vypnout vše',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Propojení s jinými systémy. Každé propojení je ve výchozím nastavení vypnuté a zůstává neaktivní, dokud ho nezapnete.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Vtažení prezentací z PowerPoint (.pptx), Keynote (.key) a Impress (.odp) jako upravitelný deck. Propojení s jinými systémy, jako je OpenKAT, najdete v Integracích.',
   'Media (WebRTC)': 'Média (WebRTC)',
@@ -4174,8 +4184,6 @@ const _dutchSourceAddCs = <String, String>{
       'Modul Asistence AI je vypnutý, takže se zde nic neděje. Zapněte ho v Rozšířeních. Co jste níže nastavili, zůstává zachováno.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Pomoc s alternativními texty, popisy a formulacemi. Zapnutí zatím nic neodesílá: k tomu dojde až poté, co sami zvolíte backend a u cloudové služby to výslovně potvrdíte. S lokálním backendem nic neopustí váš počítač.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Backend zvolte na kartě Asistence AI. Dokud tam nic není nastaveno, nic se neděje.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Ukázkové snímky šablony jsou v angličtině. Název a popis se řídí tvým jazykem; obsah upravíš po vytvoření.',
   'Meer': 'Více',
@@ -5391,8 +5399,6 @@ const _dutchSourceAddCs = <String, String>{
   "dia's geïmporteerd.": 'snímků importováno.',
   'Import mislukt: ': 'Import selhal: ',
   'Checklists': 'Kontrolní seznamy',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Nastavte server na kartě Konektor LibrePlan. Dokud tam nic není, nic se neděje.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Naimportujte momentku projektu z instance LibrePlan jako snímky: Gantt, WBS, vytížení zdrojů, výkaz práce a další. Pouze pro čtení, na vyžádání — nic neodchází ven, dokud nenastavíte server a nespustíte import.',
   'Vul server-URL en gebruikersnaam in.':

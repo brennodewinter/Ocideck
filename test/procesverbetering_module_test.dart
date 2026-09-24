@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/state/integration_registry.dart';
 import 'package:ocideck/state/module_registry.dart';
 import 'package:ocideck/state/procesverbetering_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings/procesverbetering_module_card.dart';
@@ -108,7 +109,10 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(ProcesverbeteringModuleCard), findsOneWidget);
       expect(find.text('Procesverbetering'), findsWidgets);
-      expect(find.byType(SwitchListTile), findsNWidgets(moduleRegistry.length));
+      expect(
+        find.byType(SwitchListTile),
+        findsNWidgets(moduleRegistry.length + integrationRegistry.length),
+      );
     });
   });
 }

@@ -1659,6 +1659,18 @@ const _dutchSourceAddHu = <String, String>{
       'A lefordított másolat új lapon nyílt meg.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'dia kihagyva — az eredeti szöveg megmaradt.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Válaszd ki a háttérrendszert az Integrációk lapon. Amíg ott nincs beállítva semmi, semmi sem történik.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Állítsa be a kiszolgálót a Integrációk lapon. Amíg ott nincs semmi, nem történik semmi.',
+  'eLearning volgen': 'eLearning követése',
+  'eLearning maken': 'eLearning létrehozása',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Kapcsolatok más rendszerekkel. Minden kapcsolat alapértelmezetten ki van kapcsolva; kapcsolja be a Bővítményeknél, kapcsolja ki itt.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Ez a kapcsolat ki van kapcsolva. Kapcsolja be a Bővítményeknél.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Állítsa be az Integrációk lapon.',
   'Kies een naam en waar het document komt te staan.':
       'Válasszon nevet és helyet a dokumentum mentéséhez.',
   'Bijv. Vergadernotities': 'Pl. Értekezleti jegyzetek',
@@ -3132,8 +3144,6 @@ const _dutchSourceAddHu = <String, String>{
   'Alle integraties': 'Összes integráció',
   'Alles inschakelen': 'Összes bekapcsolása',
   'Alles uitschakelen': 'Összes kikapcsolása',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Kapcsolatok más rendszerekkel. Minden kapcsolat alapértelmezetten ki van kapcsolva, és inaktív marad, amíg be nem kapcsolja.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'A PowerPoint (.pptx), Keynote (.key) és Impress (.odp) programból származó bemutatók behozatala szerkeszthető deckként. A más rendszerekkel való kapcsolatok, például az OpenKAT, az Integrációk alatt találhatók.',
   'Media (WebRTC)': 'Média (WebRTC)',
@@ -4197,8 +4207,6 @@ const _dutchSourceAddHu = <String, String>{
       'Az MI-segítség modul ki van kapcsolva, így itt semmi sem történik. Kapcsold be a Bővítmények alatt. Amit lent beállítottál, megmarad.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Segítség alternatív szövegekhez, leírásokhoz és megfogalmazásokhoz. A bekapcsolás még semmit sem küld el: ez csak azután történik meg, hogy magad választottál háttérrendszert, és felhőszolgáltatás esetén kifejezetten megerősítetted. Helyi háttérrendszer esetén semmi sem hagyja el a számítógépedet.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Válaszd ki a háttérrendszert az MI-segítség lapon. Amíg ott nincs beállítva semmi, semmi sem történik.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'A sablon példadiái angolul vannak. A név és a leírás a saját nyelvedet követi; a tartalmat a létrehozás után igazítod hozzá.',
   'Meer': 'Több',
@@ -5427,8 +5435,6 @@ const _dutchSourceAddHu = <String, String>{
   "dia's geïmporteerd.": 'dia importálva.',
   'Import mislukt: ': 'Az importálás nem sikerült: ',
   'Checklists': 'Ellenőrzőlisták',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Állítsa be a kiszolgálót a LibrePlan-csatoló lapon. Amíg ott nincs semmi, nem történik semmi.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importáljon egy projektpillanatképet egy LibrePlan-példányból diákként: Gantt, WBS, erőforrás-terhelés, munkaidő-kimutatás és más. Csak olvasható, kérésre — semmi nem megy ki, amíg be nem állít egy kiszolgálót, és el nem indít egy importot.',
   'Vul server-URL en gebruikersnaam in.':

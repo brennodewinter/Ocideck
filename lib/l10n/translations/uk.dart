@@ -1672,6 +1672,18 @@ const _dutchSourceAddUk = <String, String>{
       'Перекладену копію відкрито в новій вкладці.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'слайдів пропущено — оригінальний текст збережено.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Оберіть бекенд на вкладці Інтеграції. Поки там нічого не вибрано, нічого не відбувається.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Налаштуйте сервер на вкладці Інтеграції. Доки там нічого немає, нічого не відбувається.',
+  'eLearning volgen': 'Проходження eLearning',
+  'eLearning maken': 'Створення eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'З\'єднання з іншими системами. Кожне з\'єднання вимкнено за замовчуванням; увімкніть у Розширеннях, вимкніть тут.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Це з\'єднання вимкнено. Увімкніть його в Розширеннях.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Налаштуйте на вкладці Інтеграції.',
   'Kies een naam en waar het document komt te staan.':
       'Виберіть назву та місце збереження документа.',
   'Bijv. Vergadernotities': 'Напр. Нотатки наради',
@@ -3139,8 +3151,6 @@ const _dutchSourceAddUk = <String, String>{
   'Alle integraties': 'Усі інтеграції',
   'Alles inschakelen': 'Увімкнути все',
   'Alles uitschakelen': 'Вимкнути все',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'З\'єднання з іншими системами. Кожне з\'єднання типово вимкнене й лишається неактивним, доки ви його не ввімкнете.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Втягування презентацій з PowerPoint (.pptx), Keynote (.key) та Impress (.odp) як редагована колода. З\'єднання з іншими системами, як-от OpenKAT, розміщені в Інтеграціях.',
   'Media (WebRTC)': 'Медіа (WebRTC)',
@@ -4201,8 +4211,6 @@ const _dutchSourceAddUk = <String, String>{
       'Модуль «Підтримка ШІ» вимкнено, тому тут нічого не відбувається. Увімкніть його в Розширеннях. Те, що ви налаштували нижче, зберігається.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Допомога з альтернативними текстами, описами та формулюваннями. Увімкнення поки нічого не надсилає: це станеться лише після того, як ви самі оберете бекенд і, у випадку хмарного сервісу, явно підтвердите. З локальним бекендом ніщо не покидає ваш комп\'ютер.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Оберіть бекенд на вкладці «Підтримка ШІ». Поки там нічого не вибрано, нічого не відбувається.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Приклади слайдів у шаблоні — англійською. Назва й опис відповідають вашій мові; вміст ви зміните після створення.',
   'Meer': 'Більше',
@@ -5429,8 +5437,6 @@ const _dutchSourceAddUk = <String, String>{
   "dia's geïmporteerd.": 'слайдів імпортовано.',
   'Import mislukt: ': 'Не вдалося імпортувати: ',
   'Checklists': 'Контрольні списки',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Налаштуйте сервер на вкладці Конектор LibrePlan. Доки там нічого немає, нічого не відбувається.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Імпортуйте знімок проєкту з інстанції LibrePlan як слайди: Gantt, WBS, завантаження ресурсів, табель робочого часу тощо. Лише для читання, на запит — нічого не виходить назовні, доки ви не налаштуєте сервер і не запустите імпорт.',
   'Vul server-URL en gebruikersnaam in.':

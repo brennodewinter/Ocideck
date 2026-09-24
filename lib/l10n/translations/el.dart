@@ -1684,6 +1684,18 @@ const _dutchSourceAddEl = <String, String>{
       'Το μεταφρασμένο αντίγραφο άνοιξε σε νέα καρτέλα.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'διαφάνειες παραλείφθηκαν — το αρχικό κείμενο διατηρήθηκε.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Επιλέξτε το backend στην καρτέλα Ενσωματώσεις. Όσο δεν έχει οριστεί τίποτα εκεί, δεν συμβαίνει τίποτα.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Ρυθμίστε τον διακομιστή στην καρτέλα Ενσωματώσεις. Όσο εκεί δεν υπάρχει τίποτα, δεν συμβαίνει τίποτα.',
+  'eLearning volgen': 'Παρακολούθηση eLearning',
+  'eLearning maken': 'Δημιουργία eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Συνδέσεις με άλλα συστήματα. Κάθε σύνδεση είναι απενεργοποιημένη από προεπιλογή· ενεργοποιήστε την στις Επεκτάσεις, απενεργοποιήστε την εδώ.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Αυτή η σύνδεση είναι απενεργοποιημένη. Ενεργοποιήστε την στις Επεκτάσεις.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Ρυθμίστε την στην καρτέλα Ενσωματώσεις.',
   'Kies een naam en waar het document komt te staan.':
       'Επιλέξτε όνομα και πού θα αποθηκευτεί το έγγραφο.',
   'Bijv. Vergadernotities': 'Π.χ. Σημειώσεις συνάντησης',
@@ -3172,8 +3184,6 @@ const _dutchSourceAddEl = <String, String>{
   'Alle integraties': 'Όλες οι ενσωματώσεις',
   'Alles inschakelen': 'Ενεργοποίηση όλων',
   'Alles uitschakelen': 'Απενεργοποίηση όλων',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Συνδέσεις με άλλα συστήματα. Κάθε σύνδεση είναι εξ ορισμού απενεργοποιημένη και παραμένει ανενεργή μέχρι να την ενεργοποιήσετε.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Εισαγωγή παρουσιάσεων από PowerPoint (.pptx), Keynote (.key) και Impress (.odp) ως επεξεργάσιμο deck. Οι συνδέσεις με άλλα συστήματα, όπως το OpenKAT, βρίσκονται στις Ενσωματώσεις.',
   'Media (WebRTC)': 'Πολυμέσα (WebRTC)',
@@ -4250,8 +4260,6 @@ const _dutchSourceAddEl = <String, String>{
       'Η μονάδα Υποστήριξη AI είναι απενεργοποιημένη, οπότε εδώ δεν συμβαίνει τίποτα. Ενεργοποιήστε την στις Επεκτάσεις. Ό,τι έχετε ρυθμίσει παρακάτω παραμένει.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Βοήθεια με εναλλακτικά κείμενα, περιγραφές και διατυπώσεις. Η ενεργοποίηση δεν στέλνει ακόμη τίποτα: αυτό συμβαίνει μόνο αφού επιλέξετε οι ίδιοι ένα backend και, σε περίπτωση υπηρεσίας cloud, το επιβεβαιώσετε ρητά. Με ένα τοπικό backend τίποτα δεν φεύγει από τον υπολογιστή σας.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Επιλέξτε το backend στην καρτέλα Υποστήριξη AI. Όσο δεν έχει οριστεί τίποτα εκεί, δεν συμβαίνει τίποτα.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Οι διαφάνειες παραδείγματος ενός προτύπου είναι στα αγγλικά. Το όνομα και η περιγραφή ακολουθούν τη δική σας γλώσσα· το περιεχόμενο το προσαρμόζετε μετά τη δημιουργία.',
   'Meer': 'Περισσότερα',
@@ -5493,8 +5501,6 @@ const _dutchSourceAddEl = <String, String>{
   "dia's geïmporteerd.": 'διαφάνειες εισήχθησαν.',
   'Import mislukt: ': 'Η εισαγωγή απέτυχε: ',
   'Checklists': 'Λίστες ελέγχου',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Ρυθμίστε τον διακομιστή στην καρτέλα Σύνδεσμος LibrePlan. Όσο εκεί δεν υπάρχει τίποτα, δεν συμβαίνει τίποτα.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Εισαγάγετε ένα στιγμιότυπο έργου από μια εγκατάσταση LibrePlan ως διαφάνειες: Gantt, WBS, φόρτο πόρων, φύλλο χρόνου και άλλα. Μόνο για ανάγνωση, κατόπιν αιτήματος — τίποτα δεν φεύγει προς τα έξω μέχρι να ρυθμίσετε διακομιστή και να ξεκινήσετε εισαγωγή.',
   'Vul server-URL en gebruikersnaam in.':

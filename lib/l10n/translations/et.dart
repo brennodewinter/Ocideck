@@ -1650,6 +1650,18 @@ const _dutchSourceAddEt = <String, String>{
       'Tõlgitud koopia avati uuel vahekaardil.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'slaidi vahele jäetud — originaaltekst säilitatud.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Valige taustsüsteem vahekaardil Integratsioonid. Kuni seal pole midagi määratud, ei toimu midagi.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Seadistage server vahekaardil Integratsioonid. Kuni seal pole midagi, ei juhtu midagi.',
+  'eLearning volgen': 'eLearningi jälgimine',
+  'eLearning maken': 'eLearningi loomine',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Ühendused teiste süsteemidega. Iga ühendus on vaikimisi välja lülitatud; lülitage see sisse jaotises Laiendused, välja siin.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'See ühendus on välja lülitatud. Lülitage see sisse jaotises Laiendused.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Seadistage see vahekaardil Integratsioonid.',
   'Kies een naam en waar het document komt te staan.':
       'Valige nimi ja koht, kuhu dokument salvestatakse.',
   'Bijv. Vergadernotities': 'Nt Koosoleku märkmed',
@@ -3117,8 +3129,6 @@ const _dutchSourceAddEt = <String, String>{
   'Alle integraties': 'Kõik integratsioonid',
   'Alles inschakelen': 'Luba kõik',
   'Alles uitschakelen': 'Keela kõik',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Ühendused teiste süsteemidega. Iga ühendus on vaikimisi välja lülitatud ja jääb passiivseks, kuni te selle sisse lülitate.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Esitluste toomine programmidest PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muudetava deck\'ina. Ühendused teiste süsteemidega, näiteks OpenKAT, on jaotises Integratsioonid.',
   'Media (WebRTC)': 'Meedia (WebRTC)',
@@ -4177,8 +4187,6 @@ const _dutchSourceAddEt = <String, String>{
       'Moodul Tehisintellekti abi on välja lülitatud, seega siin midagi ei toimu. Lülitage see sisse jaotises Laiendused. See, mille olete allpool seadistanud, jääb alles.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Abi alt-tekstide, kirjelduste ja sõnastuste juures. Sisselülitamine ei saada veel midagi: see juhtub alles pärast seda, kui olete ise taustsüsteemi valinud ja pilveteenuse puhul sõnaselgelt kinnitanud. Kohaliku taustsüsteemi puhul ei lahku midagi teie arvutist.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Valige taustsüsteem vahekaardil Tehisintellekti abi. Kuni seal pole midagi määratud, ei toimu midagi.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Malli näidisslaidid on inglise keeles. Nimi ja kirjeldus järgivad sinu enda keelt; sisu kohandad pärast loomist.',
   'Meer': 'Rohkem',
@@ -5402,8 +5410,6 @@ const _dutchSourceAddEt = <String, String>{
   "dia's geïmporteerd.": 'slaidi imporditud.',
   'Import mislukt: ': 'Import ebaõnnestus: ',
   'Checklists': 'Kontrollnimekirjad',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Seadistage server vahekaardil LibrePlani konnektor. Kuni seal pole midagi, ei juhtu midagi.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importige projekti hetktõmmis LibrePlani eksemplarist slaididena: Gantt, WBS, ressursikoormus, tööajatabel ja muud. Ainult lugemiseks, nõudmisel — midagi ei lähe välja enne, kui seadistate serveri ja käivitate impordi.',
   'Vul server-URL en gebruikersnaam in.':

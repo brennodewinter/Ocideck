@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../state/meeting_session_provider.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import '../xmpp_test_connection_dialog.dart';
 import 'media_preflight_tile.dart';
 import 'module_card.dart';
@@ -32,7 +34,7 @@ class VideoCallsModuleCard extends ConsumerWidget {
                 ? null
                 : ref.read(videoCallsModuleProvider.notifier).setEnabled,
             title: Text(
-              l10n.d('Videovergaderingen'),
+              moduleCardTitle(ModuleId.videoCalls, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(

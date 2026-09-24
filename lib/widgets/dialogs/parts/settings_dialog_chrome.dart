@@ -334,13 +334,6 @@ List<SettingsSection> _visibleNavSections(
 ) => SettingsSection.navItems(
   infoSafetyRevealed: state.ref.watch(infoSafetyRevealProvider),
   hasChecklists: state.ref.watch(settingsProvider).customChecklists.isNotEmpty,
-  // Uit het formulier en niet uit de opgeslagen instelling: zet je de
-  // module op Uitbreidingen aan, dan hoort het tabblad meteen te
-  // verschijnen en niet pas na Opslaan.
-  aiRevealed: state._ai.revealsTab,
-  // LibrePlan-connector: zichtbaar zodra de module aan staat (uit het
-  // formulier, niet uit de opgeslagen instelling — zelfde truc als AI).
-  libreplanRevealed: state._libreplanEnabled,
   // Het tabblad Integraties hangt sinds #1158 aan de beschikbaarheid van een
   // koppeling, niet aan de schakelaar: de schakelaar per integratie leeft
   // óp dat tabblad, dus het moet er zijn zodra er iets aan te zetten valt.

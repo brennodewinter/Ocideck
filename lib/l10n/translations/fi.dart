@@ -1657,6 +1657,18 @@ const _dutchSourceAddFi = <String, String>{
       'Käännetty kopio avattu uuteen välilehteen.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'diaa ohitettiin — alkuperäinen teksti säilyi.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Valitse taustajärjestelmä Integraatiot-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Määritä palvelin Integraatiot-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
+  'eLearning volgen': 'eLearningin seuraaminen',
+  'eLearning maken': 'eLearningin luominen',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Yhteydet muihin järjestelmiin. Jokainen yhteys on oletuksena pois päältä; laita päälle kohdassa Laajennukset, sammuta täällä.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Tämä yhteys on pois päältä. Laita se päälle kohdassa Laajennukset.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Määritä se Integraatiot-välilehdellä.',
   'Kies een naam en waar het document komt te staan.':
       'Valitse nimi ja tallennuspaikka asiakirjalle.',
   'Bijv. Vergadernotities': 'Esim. Kokousmuistiinpanot',
@@ -3124,8 +3136,6 @@ const _dutchSourceAddFi = <String, String>{
   'Alle integraties': 'Kaikki integraatiot',
   'Alles inschakelen': 'Ota kaikki käyttöön',
   'Alles uitschakelen': 'Poista kaikki käytöstä',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Yhteydet muihin järjestelmiin. Jokainen yhteys on oletuksena pois päältä ja pysyy passiivisena, kunnes otat sen käyttöön.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Esitysten tuominen ohjelmista PowerPoint (.pptx), Keynote (.key) ja Impress (.odp) muokattavaksi deckiksi. Yhteydet muihin järjestelmiin, kuten OpenKAT, ovat kohdassa Integraatiot.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -4185,8 +4195,6 @@ const _dutchSourceAddFi = <String, String>{
       'Tekoälyavustus-moduuli on pois päältä, joten täällä ei tapahdu mitään. Kytke se päälle Laajennuksissa. Alla tekemäsi asetukset säilyvät.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Apua alt-teksteihin, kuvauksiin ja muotoiluihin. Päälle kytkeminen ei vielä lähetä mitään: se tapahtuu vasta, kun olet itse valinnut taustajärjestelmän ja pilvipalvelun tapauksessa nimenomaisesti vahvistanut. Paikallisen taustajärjestelmän kanssa mikään ei poistu tietokoneeltasi.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Valitse taustajärjestelmä Tekoälyavustus-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Mallin esimerkkidiat ovat englanniksi. Nimi ja kuvaus noudattavat omaa kieltäsi; sisällön muokkaat luonnin jälkeen.',
   'Meer': 'Lisää',
@@ -5415,8 +5423,6 @@ const _dutchSourceAddFi = <String, String>{
   "dia's geïmporteerd.": 'diaa tuotu.',
   'Import mislukt: ': 'Tuonti epäonnistui: ',
   'Checklists': 'Tarkistuslistat',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Määritä palvelin LibrePlan-liitin-välilehdellä. Niin kauan kuin siellä ei ole mitään, mitään ei tapahdu.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Tuo projektin tilannevedos LibrePlan-instanssista dioina: Gantt, WBS, resurssikuormitus, tuntikirjaukset ja muuta. Vain luku, pyynnöstä — mitään ei lähde ulos, ennen kuin määrität palvelimen ja käynnistät tuonnin.',
   'Vul server-URL en gebruikersnaam in.':

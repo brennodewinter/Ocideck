@@ -858,6 +858,18 @@ const _dutchSourceAddEn = {
       'Translated copy opened in a new tab.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'slides skipped — original text kept.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Choose the backend on the Integrations tab. As long as nothing is set there, nothing happens.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Configure the server on the Integrations tab. Until you do, nothing happens.',
+  'eLearning volgen': 'Follow eLearning',
+  'eLearning maken': 'Create eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Connections to other systems. Each connection is off by default; turn it on under Extensions, turn it off here.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'This connection is off. Turn it on under Extensions.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Configure it on the Integrations tab.',
   'Kies een naam en waar het document komt te staan.':
       'Choose a name and where the document will be saved.',
   'Bijv. Vergadernotities': 'E.g. Meeting notes',
@@ -2329,8 +2341,6 @@ const _dutchSourceAddEn = {
   'Alle integraties': 'All integrations',
   'Alles inschakelen': 'Enable all',
   'Alles uitschakelen': 'Disable all',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Connections with other systems. Each connection is off by default and stays inactive until you enable it.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Bring in presentations from PowerPoint (.pptx), Keynote (.key) and Impress (.odp) as an editable deck. Connections with other systems, such as OpenKAT, are under Integrations.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -3394,8 +3404,6 @@ const _dutchSourceAddEn = {
       'The AI assistance module is off, so nothing happens here. Turn it on under Extensions. What you have set below stays in place.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Help with alt texts, descriptions and wording. Turning this on sends nothing yet: that only happens once you have chosen a backend yourself and, for a cloud service, explicitly confirmed. With a local backend, nothing leaves your computer.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Choose the backend on the AI assistance tab. As long as nothing is set there, nothing happens.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'A template\'s example slides are in English. The name and description follow your own language; you adapt the content after creating it.',
   'Meer': 'More',
@@ -5417,8 +5425,6 @@ const _dutchSourceAddEn = {
   "dia's geïmporteerd.": 'slides imported.',
   'Import mislukt: ': 'Import failed: ',
   'Checklists': 'Checklists',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configure the server on the LibrePlan connector tab. Until you do, nothing happens.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Import a project snapshot from a LibrePlan instance as slides: Gantt, WBS, resource load, timesheet and more. Read-only, on request — nothing leaves until you configure a server and start an import.',
   'Vul server-URL en gebruikersnaam in.': 'Enter server URL and username.',

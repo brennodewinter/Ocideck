@@ -1658,6 +1658,18 @@ const _dutchSourceAddId = <String, String>{
       'Salinan terjemahan dibuka di tab baru.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'slide dilewati — teks asli dipertahankan.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Pilih backend di tab Integrasi. Selama belum ada yang diatur di sana, tidak ada yang terjadi.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Atur server di tab Integrasi. Selama di sana belum ada apa-apa, tidak terjadi apa-apa.',
+  'eLearning volgen': 'Mengikuti eLearning',
+  'eLearning maken': 'Membuat eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Koneksi ke sistem lain. Setiap koneksi nonaktif secara default; aktifkan di Ekstensi, nonaktifkan di sini.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Koneksi ini nonaktif. Aktifkan di Ekstensi.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Konfigurasikan di tab Integrasi.',
   'Kies een naam en waar het document komt te staan.':
       'Pilih nama dan lokasi penyimpanan dokumen.',
   'Bijv. Vergadernotities': 'Mis. Catatan rapat',
@@ -3126,8 +3138,6 @@ const _dutchSourceAddId = <String, String>{
   'Alle integraties': 'Semua integrasi',
   'Alles inschakelen': 'Aktifkan semua',
   'Alles uitschakelen': 'Nonaktifkan semua',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Koneksi dengan sistem lain. Setiap koneksi mati secara bawaan dan tetap tidak aktif sampai Anda mengaktifkannya.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Membawa masuk presentasi dari PowerPoint (.pptx), Keynote (.key), dan Impress (.odp) sebagai deck yang dapat diedit. Koneksi dengan sistem lain, seperti OpenKAT, ada di Integrasi.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -4196,8 +4206,6 @@ const _dutchSourceAddId = <String, String>{
       'Modul Bantuan AI mati, jadi tidak ada yang terjadi di sini. Aktifkan di Ekstensi. Apa yang Anda atur di bawah tetap tersimpan.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Bantuan untuk teks alternatif, deskripsi, dan rumusan kalimat. Mengaktifkannya belum mengirim apa pun: itu baru terjadi setelah Anda sendiri memilih backend dan, untuk layanan cloud, mengonfirmasi secara tegas. Dengan backend lokal, tidak ada yang keluar dari komputer Anda.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Pilih backend di tab Bantuan AI. Selama belum ada yang diatur di sana, tidak ada yang terjadi.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Slide contoh dari sebuah templat berbahasa Inggris. Nama dan deskripsi mengikuti bahasa Anda sendiri; isinya Anda sesuaikan setelah dibuat.',
   'Meer': 'Lainnya',
@@ -5421,8 +5429,6 @@ const _dutchSourceAddId = <String, String>{
   "dia's geïmporteerd.": 'slide diimpor.',
   'Import mislukt: ': 'Impor gagal: ',
   'Checklists': 'Daftar periksa',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Atur server di tab Konektor LibrePlan. Selama di sana belum ada apa-apa, tidak terjadi apa-apa.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Impor cuplikan proyek dari instansi LibrePlan sebagai slide: Gantt, WBS, beban sumber daya, timesheet, dan lainnya. Hanya-baca, atas permintaan — tidak ada yang keluar sampai Anda mengatur server dan memulai impor.',
   'Vul server-URL en gebruikersnaam in.': 'Isi URL server dan nama pengguna.',

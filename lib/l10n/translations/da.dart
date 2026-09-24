@@ -1657,6 +1657,18 @@ const _dutchSourceAddDa = <String, String>{
       'Oversat kopi åbnet i en ny fane.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'slides sprunget over — originaltekst bevaret.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Vælg backend på fanen Integrationer. Så længe der ikke står noget der, sker der ikke noget.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Opsæt serveren under fanen Integrationer. Så længe der ikke står noget, sker der ingenting.',
+  'eLearning volgen': 'Følg eLearning',
+  'eLearning maken': 'Opret eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Forbindelser til andre systemer. Hver forbindelse er slået fra som standard; slå den til under Udvidelser, slå den fra her.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Denne forbindelse er slået fra. Slå den til under Udvidelser.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Konfigurer den under fanen Integrationer.',
   'Kies een naam en waar het document komt te staan.':
       'Vælg et navn, og hvor dokumentet skal gemmes.',
   'Bijv. Vergadernotities': 'F.eks. Mødenoter',
@@ -3124,8 +3136,6 @@ const _dutchSourceAddDa = <String, String>{
   'Alle integraties': 'Alle integrationer',
   'Alles inschakelen': 'Aktivér alt',
   'Alles uitschakelen': 'Deaktivér alt',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Forbindelser med andre systemer. Hver forbindelse er som standard slået fra og forbliver inaktiv, indtil du slår den til.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Præsentationer fra PowerPoint (.pptx), Keynote (.key) og Impress (.odp) hentes ind som et redigerbart deck. Forbindelser med andre systemer, som OpenKAT, findes under Integrationer.',
   'Media (WebRTC)': 'Medier (WebRTC)',
@@ -4185,8 +4195,6 @@ const _dutchSourceAddDa = <String, String>{
       'Modulet AI-assistance er slået fra, så der sker ikke noget her. Slå det til under Udvidelser. Det, du har indstillet nedenfor, bliver stående.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Hjælp til alt-tekster, beskrivelser og formuleringer. At slå det til sender endnu ikke noget: det sker først, når du selv har valgt en backend og, ved en skytjeneste, udtrykkeligt har bekræftet. Med en lokal backend forlader intet din computer.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Vælg backend på fanen AI-assistance. Så længe der ikke står noget der, sker der ikke noget.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'En skabelons eksempeldias er på engelsk. Navn og beskrivelse følger dit eget sprog; indholdet tilpasser du efter oprettelsen.',
   'Meer': 'Mere',
@@ -5407,8 +5415,6 @@ const _dutchSourceAddDa = <String, String>{
   "dia's geïmporteerd.": 'slides importeret.',
   'Import mislukt: ': 'Import mislykkedes: ',
   'Checklists': 'Tjeklister',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Opsæt serveren under fanen LibrePlan-konnektor. Så længe der ikke står noget, sker der ingenting.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importér et projektøjebliksbillede fra en LibrePlan-instans som slides: Gantt, WBS, ressourcebelastning, timeseddel og mere. Skrivebeskyttet, efter anmodning — intet forlader enheden, før du opsætter en server og starter en import.',
   'Vul server-URL en gebruikersnaam in.': 'Udfyld server-URL og brugernavn.',

@@ -62,8 +62,11 @@ import '../reader/documentation_search_tab.dart';
 import '../slides/image_zoom_dialog.dart';
 import 'hex_color_dialog.dart';
 import 'settings/ai_form.dart';
+import 'settings/ai_integration_card.dart';
 import 'settings/ai_module_card.dart';
+import 'settings/card_titles.dart';
 import 'settings/collaboration_module_card.dart';
+import 'settings/integration_module_card.dart';
 import 'settings/online_storage_module_card.dart';
 import 'settings/integrations_panel.dart';
 import 'settings/import_module_card.dart';
@@ -72,6 +75,7 @@ import 'settings/asset_rights_module_card.dart';
 import 'settings/video_calls_module_card.dart';
 import 'settings/managementsysteem_module_card.dart';
 import 'settings/elearning_module_card.dart';
+import 'settings/libreplan_integration_card.dart';
 import 'settings/libreplan_module_card.dart';
 import 'libreplan_import_dialog.dart';
 import 'settings/appearance_legibility.dart';
@@ -865,11 +869,26 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           SettingsSection.presentation => _presentationStyleTab(profiles),
           SettingsSection.privacy => _privacyTab(),
           SettingsSection.security => _securityTab(),
-          SettingsSection.ai => _aiTab(),
-          SettingsSection.libreplan => _libreplanTab(),
           SettingsSection.checklists => _checklistsTab(),
           SettingsSection.modules => _modulesTab(),
-          SettingsSection.integrations => const IntegrationsPanel(),
+          SettingsSection.integrations => IntegrationsPanel(
+            // AI en LibrePlan zijn koppelingen met een formulier dat bij
+            // Opslaan wegschrijft; hun kaarten bouwt het venster daarom zelf.
+            aiCard: AiIntegrationCard(
+              form: _ai,
+              onEnabledChanged: (v) => _rebuild(() {
+                _ai.enabled = v;
+                _ai.testOk = null;
+                _ai.testMessage = null;
+              }),
+              config: _aiConfigSection(l10n),
+            ),
+            libreplanCard: LibreplanIntegrationCard(
+              enabled: _libreplanEnabled,
+              onEnabledChanged: (v) => _rebuild(() => _libreplanEnabled = v),
+              config: [_libreplanForm(l10n)],
+            ),
+          ),
           SettingsSection.documentation => _documentationTab(),
           SettingsSection.about => _aboutTab(),
         }),
