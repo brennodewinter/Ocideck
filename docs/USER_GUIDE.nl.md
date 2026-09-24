@@ -2321,10 +2321,10 @@ persoon. Iemand die van achteren, en profil, of met het hoofd buiten de uitsnede
 is gefotografeerd, wordt gemist. Omdat hij daardoor onderschat en nooit overschat,
 zegt de melding "ten minste N" in plaats van een getal dat exact klinkt.
 
-En een afbeelding in een formaat dat de controle niet kan lezen — **HEIC**, de
-standaard van de iPhone — wordt gemeld als *niet gecontroleerd*, nooit als *niets
-gevonden*. Een groen resultaat mag nooit worden aangezien voor "er staat niemand
-op deze foto".
+En een afbeelding in een formaat dat de controle niet kan lezen — het
+**HEIC-bestandsformaat voor afbeeldingen**, de standaard van de iPhone — wordt
+gemeld als *niet gecontroleerd*, nooit als *niets gevonden*. Een groen resultaat
+mag nooit worden aangezien voor "er staat niemand op deze foto".
 
 Dit is de zwaarste controle die OciDeck uitvoert, dus hij heeft zijn eigen
 schakelaar onder *Instellingen → Beveiliging*, naast de hoofdschakelaar. Hem

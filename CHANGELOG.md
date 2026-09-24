@@ -11228,8 +11228,8 @@ read a book to find out.
   profiel, met zonnebril omlaag kijkend of met het hoofd buiten de uitsnede wordt
   gemist. Omdat hij daardoor structureel ondertelt en nooit overtelt, staat er
   "minstens N" in plaats van een exact klinkend getal. En een afbeelding in een
-  formaat dat niet te lezen is — HEIC, de iPhone-standaard — meldt *niet
-  gecontroleerd*, nooit *niets gevonden*.
+  formaat dat niet te lezen is — het HEIC-bestandsformaat voor afbeeldingen, de
+  iPhone-standaard — meldt *niet gecontroleerd*, nooit *niets gevonden*.
 
   Eigen schakelaar onder *Instellingen → Veiligheid*: dit is de zwaarste controle,
   en hem uitzetten laat de tekstcontrole gewoon draaien.
