@@ -1238,6 +1238,45 @@ void main() {
     expect(find.text('Gebruikte inschrijfcodes'), findsOneWidget);
   });
 
+  testWidgets('Mijn gegevens verklaart afgeschermde gegevens op veldniveau', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          schemaVersion: 'privacy-data/v2',
+          participantId: 'participant-omission',
+          generatedAt: DateTime.utc(2026, 9, 24),
+          data: const {
+            'evidence_uploads': [
+              {'uploaded_by_subject': null, 'rejection_reason': null},
+            ],
+          },
+          omissions: const [
+            OciServePrivacyOmission(
+              path: '/data/evidence_uploads/0/uploaded_by_subject',
+              reason: 'third_party_data',
+            ),
+          ],
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sommige waarden zijn niet getoond'), findsOneWidget);
+    await tester.tap(await _scrollToDataCategory(tester, 'evidence_uploads'));
+    await tester.pumpAndSettle();
+    expect(
+      find.text('Niet getoond omdat dit gegeven ook over iemand anders gaat'),
+      findsOneWidget,
+    );
+    expect(find.text('Niet opgenomen in dit overzicht'), findsOneWidget);
+  });
+
   testWidgets('Mijn gegevens herstelt van een laadfout', (tester) async {
     final notifier = _FixedOciServeNotifier(_authenticated, privacyFailures: 1);
     await _pumpApp(tester, notifier);

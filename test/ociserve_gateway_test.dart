@@ -487,6 +487,61 @@ void main() {
     expect(transport.caps.single, 32 * 1024 * 1024);
   });
 
+  test(
+    'preserves privacy-data contract version and omission reasons',
+    () async {
+      transport.responses.add(
+        _json({
+          'schema_version': 'privacy-data/v2',
+          'participant_id': 'participant-1',
+          'generated_at': '2026-09-24T10:00:00Z',
+          'data': {
+            'evidence_uploads': [
+              {'uploaded_by_subject': null},
+            ],
+          },
+          'omissions': [
+            {
+              'path': '/data/evidence_uploads/0/uploaded_by_subject',
+              'reason': 'third_party_data',
+            },
+          ],
+        }),
+      );
+
+      final value = await gateway.privacyData(
+        accessToken: 'access',
+        organizationId: 'org',
+      );
+
+      expect(value.schemaVersion, 'privacy-data/v2');
+      expect(value.omissions, hasLength(1));
+      expect(
+        value.omissions.single.path,
+        '/data/evidence_uploads/0/uploaded_by_subject',
+      );
+      expect(value.omissions.single.reason, 'third_party_data');
+    },
+  );
+
+  test('keeps a legacy privacy-data response compatible', () async {
+    transport.responses.add(
+      _json({
+        'participant_id': 'participant-1',
+        'generated_at': '2026-09-24T10:00:00Z',
+        'data': <String, Object?>{},
+      }),
+    );
+
+    final value = await gateway.privacyData(
+      accessToken: 'access',
+      organizationId: 'org',
+    );
+
+    expect(value.schemaVersion, 'privacy-data/v1');
+    expect(value.omissions, isEmpty);
+  });
+
   test('refuses personal data without a generation timestamp', () async {
     transport.responses.add(
       _json({'participant_id': 'participant-1', 'data': <String, Object?>{}}),

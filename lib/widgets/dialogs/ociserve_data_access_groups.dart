@@ -1,19 +1,9 @@
 part of 'ociserve_data_access.dart';
 
-enum _DataGroupKind {
-  profile,
-  learning,
-  assessment,
-  results,
-  privacy,
-  security,
-  other,
-}
-
 class _DataGroup {
   const _DataGroup(this.kind, this.categories);
 
-  final _DataGroupKind kind;
+  final OciServePrivacyGroup kind;
   final List<_FilteredCategory> categories;
 
   int get recordCount =>
@@ -21,58 +11,31 @@ class _DataGroup {
 }
 
 List<_DataGroup> _groupsFor(List<_FilteredCategory> categories) {
-  final grouped = <_DataGroupKind, List<_FilteredCategory>>{};
+  final grouped = <OciServePrivacyGroup, List<_FilteredCategory>>{};
   for (final category in categories) {
     grouped
         .putIfAbsent(_groupForCategory(category.sourceKey), () => [])
         .add(category);
   }
   return [
-    for (final kind in _DataGroupKind.values)
+    for (final kind in OciServePrivacyGroup.values)
       if (grouped[kind] case final categories?) _DataGroup(kind, categories),
   ];
 }
 
-_DataGroupKind _groupForCategory(String key) => switch (key) {
-  'participant' || 'accounts' || 'memberships' => _DataGroupKind.profile,
-  'enrollments' ||
-  'lesson_progress' ||
-  'playback_sessions' ||
-  'participations' ||
-  'session_bookings' ||
-  'requirement_waivers' ||
-  'voucher_redemptions' => _DataGroupKind.learning,
-  'attempts' || 'attempt_items' || 'answers' => _DataGroupKind.assessment,
-  'evidence_uploads' ||
-  'qualifications' ||
-  'qualification_events' ||
-  'pe_awards' ||
-  'pe_award_events' ||
-  'certificates' => _DataGroupKind.results,
-  'privacy_requests' ||
-  'access_audit_events' ||
-  'participant_data_access_history' ||
-  'participant_data_access_history_metadata' ||
-  'retention_policies' ||
-  'deletion_ledger' => _DataGroupKind.privacy,
-  'identity_operations' ||
-  'installation_requests' ||
-  'claim_attempts' ||
-  'api_idempotency_requests' ||
-  'installation_audit_events' ||
-  'installation_ownership' ||
-  'access_policy_changes' ||
-  'invitations' ||
-  'email_messages' ||
-  'web_sessions' => _DataGroupKind.security,
-  _ => _DataGroupKind.other,
-};
+OciServePrivacyGroup _groupForCategory(String key) =>
+    ociservePrivacyCategories[key]?.group ?? OciServePrivacyGroup.other;
 
 class _DataGroupCard extends StatelessWidget {
-  const _DataGroupCard({required this.group, required this.searching});
+  const _DataGroupCard({
+    required this.group,
+    required this.searching,
+    required this.omissionReasons,
+  });
 
   final _DataGroup group;
   final bool searching;
+  final Map<String, String> omissionReasons;
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +74,7 @@ class _DataGroupCard extends StatelessWidget {
               sourceKey: category.sourceKey,
               records: category.records,
               searching: searching,
+              omissionReasons: omissionReasons,
             ),
             const SizedBox(height: 8),
           ],
@@ -120,39 +84,47 @@ class _DataGroupCard extends StatelessWidget {
   }
 }
 
-String _groupLabel(BuildContext context, _DataGroupKind kind) => switch (kind) {
-  _DataGroupKind.profile => context.l10n.d('Profiel en organisatie'),
-  _DataGroupKind.learning => context.l10n.d('Cursussen en deelname'),
-  _DataGroupKind.assessment => context.l10n.d('Toetsen en antwoorden'),
-  _DataGroupKind.results => context.l10n.d('Resultaten en bewijsstukken'),
-  _DataGroupKind.privacy => context.l10n.d('Privacy en toegang'),
-  _DataGroupKind.security => context.l10n.d('Aanmelden en beveiliging'),
-  _DataGroupKind.other => context.l10n.d('Overige gegevens'),
+String _groupLabel(
+  BuildContext context,
+  OciServePrivacyGroup kind,
+) => switch (kind) {
+  OciServePrivacyGroup.profile => context.l10n.d('Profiel en organisatie'),
+  OciServePrivacyGroup.learning => context.l10n.d('Cursussen en deelname'),
+  OciServePrivacyGroup.assessment => context.l10n.d('Toetsen en antwoorden'),
+  OciServePrivacyGroup.results => context.l10n.d('Resultaten en bewijsstukken'),
+  OciServePrivacyGroup.privacy => context.l10n.d('Privacy en toegang'),
+  OciServePrivacyGroup.security => context.l10n.d('Aanmelden en beveiliging'),
+  OciServePrivacyGroup.other => context.l10n.d('Overige gegevens'),
 };
 
-String _groupDescription(BuildContext context, _DataGroupKind kind) =>
-    switch (kind) {
-      _DataGroupKind.profile => _categoryDescription(context, 'participant'),
-      _DataGroupKind.learning => _categoryDescription(context, 'enrollments'),
-      _DataGroupKind.assessment => _categoryDescription(context, 'attempts'),
-      _DataGroupKind.results => _categoryDescription(context, 'qualifications'),
-      _DataGroupKind.privacy => _categoryDescription(
-        context,
-        'privacy_requests',
-      ),
-      _DataGroupKind.security => _categoryDescription(
-        context,
-        'identity_operations',
-      ),
-      _DataGroupKind.other => _categoryDescription(context, ''),
-    };
+String _groupDescription(
+  BuildContext context,
+  OciServePrivacyGroup kind,
+) => switch (kind) {
+  OciServePrivacyGroup.profile => _categoryDescription(context, 'participant'),
+  OciServePrivacyGroup.learning => _categoryDescription(context, 'enrollments'),
+  OciServePrivacyGroup.assessment => _categoryDescription(context, 'attempts'),
+  OciServePrivacyGroup.results => _categoryDescription(
+    context,
+    'qualifications',
+  ),
+  OciServePrivacyGroup.privacy => _categoryDescription(
+    context,
+    'privacy_requests',
+  ),
+  OciServePrivacyGroup.security => _categoryDescription(
+    context,
+    'identity_operations',
+  ),
+  OciServePrivacyGroup.other => _categoryDescription(context, ''),
+};
 
-IconData _groupIcon(_DataGroupKind kind) => switch (kind) {
-  _DataGroupKind.profile => Icons.person_outline,
-  _DataGroupKind.learning => Icons.school_outlined,
-  _DataGroupKind.assessment => Icons.quiz_outlined,
-  _DataGroupKind.results => Icons.workspace_premium_outlined,
-  _DataGroupKind.privacy => Icons.policy_outlined,
-  _DataGroupKind.security => Icons.security_outlined,
-  _DataGroupKind.other => Icons.more_horiz,
+IconData _groupIcon(OciServePrivacyGroup kind) => switch (kind) {
+  OciServePrivacyGroup.profile => Icons.person_outline,
+  OciServePrivacyGroup.learning => Icons.school_outlined,
+  OciServePrivacyGroup.assessment => Icons.quiz_outlined,
+  OciServePrivacyGroup.results => Icons.workspace_premium_outlined,
+  OciServePrivacyGroup.privacy => Icons.policy_outlined,
+  OciServePrivacyGroup.security => Icons.security_outlined,
+  OciServePrivacyGroup.other => Icons.more_horiz,
 };

@@ -1,10 +1,23 @@
 part of 'ociserve_data_access.dart';
 
-List<Object?> _recordsFor(Object? value) => switch (value) {
-  List<Object?> list => list,
-  Map<Object?, Object?> map => [map],
-  _ => [value],
+class _IndexedRecord {
+  const _IndexedRecord(this.sourceIndex, this.value);
+
+  final int sourceIndex;
+  final Object? value;
+}
+
+List<_IndexedRecord> _recordsFor(Object? value) => switch (value) {
+  List<Object?> list => [
+    for (var index = 0; index < list.length; index++)
+      _IndexedRecord(index, list[index]),
+  ],
+  Map<Object?, Object?> map => [_IndexedRecord(0, map)],
+  _ => [_IndexedRecord(0, value)],
 };
+
+String _jsonPointerSegment(Object? value) =>
+    '$value'.replaceAll('~', '~0').replaceAll('/', '~1');
 
 String _searchText(BuildContext context, Object? value) {
   final parts = <String>[];
