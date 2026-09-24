@@ -4838,7 +4838,11 @@ values. A `null` value is neutrally displayed as
 **Niet opgenomen in dit overzicht**: it does not say whether the information is
 absent, unavailable, or otherwise not registered. Open **Begrippen uitgelegd**
 for the meaning of a category, a registration and an ID, and for an explanation
-of the displayed dates and technical names. *(Updated 2026-09-24.)*
+of the displayed dates and technical names. When a version 2 server deliberately
+withholds a value because it also concerns another person, OciDeck shows that
+reason beside the exact field instead of presenting the value as ordinarily
+missing. Older servers remain supported, but cannot provide that distinction.
+*(Updated 2026-09-24.)*
 
 Nested objects and lists are shown as labelled fields and numbered parts rather
 than as a JSON block. The generic viewer still shows categories and fields

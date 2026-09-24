@@ -4929,7 +4929,10 @@ staat neutraal als **Niet opgenomen in dit overzicht**: daaruit volgt niet of
 informatie ontbreekt, niet beschikbaar is of om een andere reden niet is
 geregistreerd. Open **Begrippen uitgelegd** voor de betekenis van een categorie,
 een registratie en een ID, en voor uitleg over de getoonde datums en technische
-namen. *(Bijgewerkt 2026-09-24.)*
+namen. Als een server met contractversie 2 een waarde bewust afschermt omdat die
+ook over iemand anders gaat, toont OciDeck die reden bij precies dat veld in
+plaats van de waarde als gewoon ontbrekend te presenteren. Oudere servers blijven
+werken, maar kunnen dat onderscheid niet aanleveren. *(Bijgewerkt 2026-09-24.)*
 
 Geneste objecten en lijsten worden als gelabelde velden en genummerde onderdelen
 getoond, niet als een JSON-blok. De algemene weergave toont ook categorieën en
