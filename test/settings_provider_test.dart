@@ -972,4 +972,31 @@ void main() {
       },
     );
   });
+
+  group('marpCompatChecksEnabled', () {
+    test('staat standaard aan', () async {
+      final notifier = await _loadedNotifier();
+      expect(notifier.state.marpCompatChecksEnabled, isTrue);
+    });
+
+    test('uitzetten persist en overleeft een reload', () async {
+      SharedPreferences.setMockInitialValues({});
+      final notifier = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+
+      await notifier.setMarpCompatChecksEnabled(false);
+      expect(notifier.state.marpCompatChecksEnabled, isFalse);
+
+      final reloaded = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded.state.marpCompatChecksEnabled, isFalse);
+
+      // En terug naar aan, zodat een per ongeluk uitgezette controle weer
+      // aankan zonder de prefs handmatig te wissen.
+      await reloaded.setMarpCompatChecksEnabled(true);
+      final reloaded2 = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded2.state.marpCompatChecksEnabled, isTrue);
+    });
+  });
 }

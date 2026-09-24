@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/presentation_timing.dart';
+import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/widgets/dialogs/presentation_info_dialog.dart';
@@ -33,6 +34,41 @@ void main() {
     );
     await tester.pumpAndSettle();
   }
+
+  /// Een chart-slide degradeert in Marp (grafiek → codeblok).
+  Deck degradedDeck() =>
+      Deck(title: 'Test', slides: [Slide.create(SlideType.chart)]);
+
+  testWidgets('Marp-sectie toont de status', (tester) async {
+    await pumpDialog(tester, reveal: false, deck: degradedDeck());
+
+    expect(find.textContaining('waarschuwing'), findsWidgets);
+    expect(find.textContaining('geaccepteerd'), findsNothing);
+  });
+
+  testWidgets('controle uit in instellingen verbergt de Marp-sectie', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({'marpCompatChecksEnabled': false});
+    await pumpDialog(tester, reveal: false, deck: degradedDeck());
+    // De instelling laadt asynchroon; geef _load de kans te ronden.
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Marp ·'), findsNothing);
+  });
+
+  testWidgets('schoon deck toont de groene status', (tester) async {
+    // Het standaardthema 'ocideck' is geen ingebouwd Marp-thema en zou als los
+    // bestand een warning geven; 'default' is Marp-zuiver.
+    await pumpDialog(
+      tester,
+      reveal: false,
+      deck: const Deck(title: 'Test', theme: 'default'),
+    );
+
+    expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsOneWidget);
+  });
 
   testWidgets('MIAUW-velden blijven weg als de module uitstaat', (
     tester,

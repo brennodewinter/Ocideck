@@ -35,6 +35,7 @@ class _FrontMatter {
       PresentationTimingConfig.disabled;
   bool showRehearsalSummary = false;
   bool playOnly = false;
+
   String improvementFramework = '';
   String improvementY01 = '';
   String improvementY01Unit = '';

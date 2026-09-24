@@ -186,7 +186,7 @@ in. It round-trips as an extra `_class` token beside `menu`
 after a round trip, and an unknown token reads as `grid` rather than failing.
 `Slide.menuLayout` holds it; `menuOptionTokens` is what the parser filters out of
 `cssClass`. The structure checker accepts the same three tokens but lists them
-literally in `markdown_validator_vocabulary.dart` instead of reading this set, so
+literally in `deck_vocabulary.dart` instead of reading this set, so
 a fourth layout means editing both.
 
 `MenuBlock` (`label`, `description`, `targetAnchor`, `imagePath`, all defaulting to

@@ -1,9 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
+import '../../models/marp_compatibility.dart';
 import '../../models/presentation_timing.dart';
 import '../../l10n/app_localizations.dart';
+import '../../services/markdown_service.dart';
+import '../../services/marp_compatibility.dart';
 import '../../state/deck_provider.dart';
 import '../../state/info_safety_provider.dart';
 import '../../state/settings_provider.dart';
@@ -164,6 +168,7 @@ class _PresentationInfoDialogState
   late final TextEditingController _customMinutes;
   late bool _showRehearsalSummary;
   late bool _playOnly;
+  MarpCompatReport? _marpCompat;
   late String _profileName;
 
   @override
@@ -325,6 +330,8 @@ class _PresentationInfoDialogState
                   onChanged: (v) => setState(() => _playOnly = v),
                 ),
                 const SizedBox(height: 8),
+                _marpCompatSection(l10n),
+                const SizedBox(height: 8),
                 Text(
                   l10n.d(
                     'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.',
@@ -343,6 +350,55 @@ class _PresentationInfoDialogState
           ElevatedButton(onPressed: _save, child: Text(l10n.t('save'))),
         ],
       ),
+    );
+  }
+
+  /// Marp-compatibiliteit van het huidige deck. De sectie ontbreekt wanneer de
+  /// controle uit staat; waarschuwingen blijven zichtbaar en worden niet als
+  /// workflowstatus in het Markdown-bestand opgeslagen.
+  Widget _marpCompatSection(AppLocalizations l10n) {
+    // Watch, niet read: de instelling laadt asynchroon en de sectie moet
+    // verdwijnen als hij onderweg uitgaat.
+    if (!ref.watch(settingsProvider.select((s) => s.marpCompatChecksEnabled))) {
+      return const SizedBox.shrink();
+    }
+    final report = _marpCompat ??= MarpCompatibility().check(
+      MarkdownService().generateDeck(widget.deck, inlineChartData: true),
+      context: !kIsWeb && widget.deck.projectPath != null
+          ? MarpCompatContext.project
+          : MarpCompatContext.bareFile,
+    );
+    final (icon, color, label) = switch (report.status) {
+      MarpCompatStatus.compatible => (
+        Icons.check_circle_outline,
+        AppTheme.successFg,
+        'Marp · ${l10n.d('Geen syntaxproblemen gevonden')}',
+      ),
+      MarpCompatStatus.degraded => (
+        Icons.warning_amber_outlined,
+        AppTheme.warningFg,
+        'Marp · ${report.warningCount} ${l10n.d('waarschuwing(en)')}',
+      ),
+      MarpCompatStatus.incompatible => (
+        Icons.error_outline,
+        AppTheme.dangerFg,
+        'Marp · ${l10n.d('Probleem')} — '
+            '${report.errorCount} ${l10n.d('fout(en)')}',
+      ),
+    };
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, size: 16, color: color),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(label, style: TextStyle(fontSize: 12, color: color)),
+            ),
+          ],
+        ),
+      ],
     );
   }
 

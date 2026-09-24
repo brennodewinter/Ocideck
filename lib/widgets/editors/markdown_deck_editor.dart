@@ -6,12 +6,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/marp_compatibility_localization.dart';
 import '../../models/markdown_outline.dart';
 import '../../models/markdown_source_document.dart';
 import '../../models/markdown_writing_suggestion.dart';
 import '../../models/markdown_validation.dart';
+import '../../models/marp_compatibility.dart';
 import '../../services/markdown_validator.dart';
+import '../../services/marp_compatibility.dart';
+import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../utils/text_search.dart';
 import '../markdown_editor/markdown_editor_actions.dart';
 import '../markdown_editor/markdown_editor_theme.dart';
@@ -96,10 +101,15 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
   /// balk mag juist niet leeglopen: die verdween dan uit de [Column] en trok de
   /// bovenrand van de editor 28 px mee (#1555).
   MarkdownValidationResult? _lastValidation;
+
+  /// Laatste Marp-compatibiliteitsoordeel — zelfde "blijft staan"-regel als
+  /// [_lastValidation], zodat de tweede balk niet springt tijdens het typen.
+  MarpCompatReport? _lastCompat;
   bool _validationPending = false;
   bool _syncingExternalContent = false;
   int? _lastReportedSlide;
   bool _showIssues = false;
+  bool _showCompatIssues = false;
 
   /// Zoek-/vervangbalk. De stand zelf leeft in [FindReplaceSession], gedeeld
   /// met de documenteditor; dit scherm levert alleen de controller en waar de
@@ -130,8 +140,30 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     // alsnog een keer omhoog en weer terug (#1555). De markeringen in de code
     // wachten wel op de gewone ronde, zoals altijd.
     _lastValidation = _validator.validate(widget.initialContent);
+    if (_marpCompatEnabled) _lastCompat = _computeCompat();
     _scheduleValidation();
   }
+
+  /// Of de Marp-compatibiliteitscontrole aan staat (instelling). Uit is weg:
+  /// geen grijze tussenstand, de balk ontbreekt dan helemaal.
+  bool get _marpCompatEnabled =>
+      ref.read(settingsProvider).marpCompatChecksEnabled;
+
+  /// Een deck met een projectmap op desktop krijgt `.marprc.yml`/`themes/`/
+  /// `images/` naast de .md; alles anders (web, nog-nooit-opgeslagen, remote
+  /// flat save) is een los bestand waar de tekst zelf moet kloppen.
+  MarpCompatContext get _compatContext {
+    final deck = ref.read(deckProvider).deck;
+    return !kIsWeb && deck?.projectPath != null
+        ? MarpCompatContext.project
+        : MarpCompatContext.bareFile;
+  }
+
+  MarpCompatReport _computeCompat() => MarpCompatibility().check(
+    _ctrl.text,
+    context: _compatContext,
+    deckScope: widget.scope == MarkdownScope.deck,
+  );
 
   @override
   void didUpdateWidget(MarkdownDeckEditor oldWidget) {
@@ -164,6 +196,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       setState(() {
         _validation = null;
         _lastValidation = _validator.validate(widget.initialContent);
+        if (_marpCompatEnabled) _lastCompat = _computeCompat();
         _showIssues = false;
       });
       // De balk blijft staan; alleen de gevonden plekken slaan nergens meer op.
@@ -252,6 +285,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       setState(() {
         _validation = result;
         _lastValidation = result;
+        if (_marpCompatEnabled) _lastCompat = _computeCompat();
         _validationPending = false;
       });
     });
@@ -266,6 +300,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     setState(() {
       _validation = result;
       _lastValidation = result;
+      if (_marpCompatEnabled) _lastCompat = _computeCompat();
       _validationPending = false;
       _showIssues = result.hasIssues;
     });
@@ -610,8 +645,18 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         _openFind(showReplace: next.markdownFindShowReplace);
       }
     });
+    ref.listen<bool>(
+      settingsProvider.select((s) => s.marpCompatChecksEnabled),
+      (previous, enabled) {
+        if (!mounted || previous == enabled) return;
+        setState(() => _lastCompat = enabled ? _computeCompat() : null);
+      },
+    );
 
     final l10n = context.l10n;
+    final marpCompatEnabled = ref.watch(
+      settingsProvider.select((s) => s.marpCompatChecksEnabled),
+    );
     final lineCount = '\n'.allMatches(_ctrl.text).length + 1;
     final validationIssues =
         _validation?.issues ?? const <MarkdownValidationIssue>[];
@@ -665,6 +710,15 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 onToggle: () => setState(() => _showIssues = !_showIssues),
                 onJumpToLine: _jumpToLine,
                 quickFixFor: _quickFixFor,
+              ),
+            if (marpCompatEnabled && _lastCompat != null)
+              _MarpCompatBar(
+                report: _lastCompat!,
+                pending: _validationPending,
+                expanded: _showCompatIssues,
+                onToggle: () =>
+                    setState(() => _showCompatIssues = !_showCompatIssues),
+                onJumpToLine: _jumpToLine,
               ),
             if (widget.parseError)
               Container(

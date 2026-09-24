@@ -1,12 +1,17 @@
-// Part of markdown_validator.dart — the vocabulary the checker validates
-// against, split out to keep the validator itself under the file-size ratchet.
-// Plain data: the class tokens, front-matter keys and comment directives that
-// `MarkdownService`'s parser actually understands. Keep these in step with the
-// parser — a name missing here makes the checker warn about something that
-// really does work.
-part of 'markdown_validator.dart';
+/// Gedeelde deck-vocabulaire: de class-tokens, fence-types, Marp-thema's en
+/// comment-directives die de structuurcontrole ([MarkdownValidator]) én de
+/// Marp-compatibiliteitscontrole ([MarpCompatibility]) allebei nodig hebben.
+///
+/// Deze lijsten stonden eerst verspreid als private consts; met twee checkers
+/// die over dezelfde schrijfwijze oordelen zou elke kopie uit de pas lopen —
+/// een token dat de parser kent maar hier mist, geeft een vals alarm. Keep
+/// them in step with the parser in `markdown_service.dart`.
+library;
 
-const _knownClassTokens = {
+/// Alle class-tokens die de OciDeck-parser kent: slidetypes, layout-varianten
+/// en opgeheven namen die we nog teruglezen. Een token buiten deze set krijgt
+/// in de structuurcontrole een "onbekende class"-waarschuwing.
+const kKnownClassTokens = {
   'title',
   'section',
   'two-bullets',
@@ -67,10 +72,54 @@ const _knownClassTokens = {
   'image-title-above',
 };
 
-const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
+/// De subset van [kKnownClassTokens] die een OciDeck-slidetype draagt en bij
+/// Marp nergens op staat: Marp negeert de class en rendert de platte
+/// markdown-inhoud (tabel, bullets, codeblok). De overige bekende tokens zijn
+/// pure CSS uit het meegeleverde thema en werken in Marp mee zodra het thema
+/// resolveert — die krijgen dus geen eigen compat-bevinding.
+const kOciDeckOnlyClassTokens = {
+  'chart',
+  'cockpit',
+  'question',
+  'timeline',
+  'scorecard',
+  'actions',
+  'menu',
+  'assets',
+  'discoveries',
+  'finding',
+  'findings-summary',
+  'checklist',
+  'scope-matrix',
+  'sign-off',
+  'matrix',
+  'canvas',
+  'tree',
+  'flow',
+  'phase-gate',
+  'control-status',
+  'gantt',
+  'objective',
+  'module',
+  'feedback',
+  'assessment-summary',
+  'kennischeck',
+};
+
+/// Fenced codeblokken die OciDeck als slide-inhoud interpreteert (grafiek,
+/// cockpit, quiz) of als diagram rendert (mermaid). Marp kent ze niet en
+/// toont ze als letterlijk codeblok.
+const kOciDeckFenceTypes = {'chart', 'cockpit', 'question', 'mermaid'};
+
+/// De drie thema's die in elke marp-cli zitten. Een andere `theme:`-waarde
+/// werkt alleen wanneer de schrijver het thema meelevert (`.marprc.yml` +
+/// `themes/` in de projectmap); in een los .md-bestand is hij onbekend.
+const kMarpBuiltinThemes = {'default', 'gaia', 'uncover'};
+
+const kValidListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
 
 // De front-matter-sleutels staan niet hier maar in `front_matter_merge.dart`
-// ([kOwnedFrontMatterKeys]) — de checker leest diezelfde lijst.
+// ([kOwnedFrontMatterKeys]) — de checkers lezen diezelfde lijst.
 //
 // Dat is geen gemakzucht maar een gelijkheid die uit het formaatcontract volgt:
 // een sleutel die OciDeck schrijft, leest hij ook (anders zou hij hem bij het
@@ -79,11 +128,11 @@ const _validListStyles = {'bullets', 'numbered', 'checklist', 'richText'};
 // dezelfde, en twee kopieën ervan lopen alleen maar uit de pas. Deze stond
 // eerder los en miste toen precies zeven sleutels die de parser wél las.
 
-// Comment directives `_parseBlockDirectives` understands. A comment that looks
-// like a directive (`_key:` / `ocideck_key:`) but is not one of these is
-// passed through without visual effect — e.g. Marp's per-slide `_paginate`,
-// `_header`, `_footer`, `_color` — so the validator explains the limitation.
-const _supportedCommentDirectives = {
+/// Comment directives `_parseBlockDirectives` understands. A comment that looks
+/// like a directive (`_key:` / `ocideck_key:`) but is not one of these is
+/// passed through without visual effect — e.g. Marp's per-slide `_paginate`,
+/// `_header`, `_footer`, `_color` — so the validator explains the limitation.
+const kSupportedCommentDirectives = {
   '_class',
   '_style',
   '_color',
