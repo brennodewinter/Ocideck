@@ -313,11 +313,15 @@ class OciServePrivacyData {
     required this.participantId,
     required this.generatedAt,
     required this.data,
+    this.schemaVersion = 'privacy-data/v1',
+    this.omissions = const [],
   });
 
   final String participantId;
   final DateTime generatedAt;
   final Map<String, Object?> data;
+  final String schemaVersion;
+  final List<OciServePrivacyOmission> omissions;
 
   factory OciServePrivacyData.fromJson(Map<String, Object?> json) {
     final participantId = (json['participant_id'] as String? ?? '').trim();
@@ -325,14 +329,48 @@ class OciServePrivacyData {
       json['generated_at'] as String? ?? '',
     );
     final data = json['data'];
+    final schemaVersion = (json['schema_version'] as String? ?? '').trim();
+    final omissionsValue = json['omissions'];
     if (participantId.isEmpty || generatedAt == null || data is! Map) {
       throw const FormatException('incomplete OciServe privacy data');
+    }
+    if (omissionsValue != null && omissionsValue is! List) {
+      throw const FormatException('invalid OciServe privacy omissions');
     }
     return OciServePrivacyData(
       participantId: participantId,
       generatedAt: generatedAt,
       data: Map.unmodifiable(Map<String, Object?>.from(data)),
+      schemaVersion: schemaVersion.isEmpty ? 'privacy-data/v1' : schemaVersion,
+      omissions: List.unmodifiable(
+        (omissionsValue as List? ?? const []).map(
+          (value) => OciServePrivacyOmission.fromJson(
+            Map<String, Object?>.from(value as Map),
+          ),
+        ),
+      ),
     );
+  }
+}
+
+/// A server-declared reason why one value in [OciServePrivacyData.data] is
+/// intentionally unavailable. [path] is an RFC 6901 JSON Pointer into the
+/// complete response, so future reason codes remain visible without guessing
+/// their meaning in the client.
+@immutable
+class OciServePrivacyOmission {
+  const OciServePrivacyOmission({required this.path, required this.reason});
+
+  final String path;
+  final String reason;
+
+  factory OciServePrivacyOmission.fromJson(Map<String, Object?> json) {
+    final path = (json['path'] as String? ?? '').trim();
+    final reason = (json['reason'] as String? ?? '').trim();
+    if (!path.startsWith('/data/') || reason.isEmpty) {
+      throw const FormatException('invalid OciServe privacy omission');
+    }
+    return OciServePrivacyOmission(path: path, reason: reason);
   }
 }
 

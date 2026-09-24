@@ -664,6 +664,35 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Sommige waarden zijn niet getoond': 'Alcuni valori non sono mostrati',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe nasconde un valore quando riguarda anche un\'altra persona. Il campo interessato indica perché il valore non è presente.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Non mostrato perché questo dato riguarda anche un\'altra persona',
+  'Niet getoond door de server (reden: {reden})':
+      'Non mostrato dal server (motivo: {reden})',
+  '1 onderdeel': '1 sezione',
+  '{aantal} onderdelen': '{aantal} sezioni',
+  'Profiel en organisatie': 'Profilo e organizzazione',
+  'Cursussen en deelname': 'Corsi e partecipazione',
+  'Toetsen en antwoorden': 'Verifiche e risposte',
+  'Resultaten en bewijsstukken': 'Risultati e documenti giustificativi',
+  'Privacy en toegang': 'Privacy e accesso',
+  'Aanmelden en beveiliging': 'Accesso e sicurezza',
+  'Overige gegevens': 'Altri dati',
+  'Lege onderdelen verbergen': 'Nascondi le sezioni vuote',
+  '{aantal} lege onderdelen tonen': 'Mostra {aantal} sezioni vuote',
+  'Uitzonderingen op deelname-eisen':
+      'Eccezioni ai requisiti di partecipazione',
+  'Gebruikte inschrijfcodes': 'Codici di iscrizione utilizzati',
+  'Nummer van de deelname-eis': 'Numero del requisito di partecipazione',
+  'Nummer van de inschrijfcode': 'Numero del codice di iscrizione',
+  'Gebruikt op': 'Utilizzato il',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Eccezioni concesse a tuo favore ai requisiti per partecipare a un corso.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Dati sui codici di iscrizione che hai utilizzato per partecipare a un corso.',
+  'Niet opgenomen in dit overzicht': 'Non incluso in questa panoramica',
   'AI: functioneert': 'IA: funzionante',
   'AI: wordt gecontroleerd…': 'IA: verifica in corso…',
   'AI: server niet bereikbaar': 'IA: server non raggiungibile',

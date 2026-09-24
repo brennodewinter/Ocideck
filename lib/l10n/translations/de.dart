@@ -667,6 +667,34 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Sommige waarden zijn niet getoond': 'Einige Werte werden nicht angezeigt',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe blendet einen Wert aus, wenn er auch eine andere Person betrifft. Beim betreffenden Feld steht, warum der Wert fehlt.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nicht angezeigt, weil diese Angabe auch eine andere Person betrifft',
+  'Niet getoond door de server (reden: {reden})':
+      'Vom Server nicht angezeigt (Grund: {reden})',
+  '1 onderdeel': '1 Abschnitt',
+  '{aantal} onderdelen': '{aantal} Abschnitte',
+  'Profiel en organisatie': 'Profil und Organisation',
+  'Cursussen en deelname': 'Kurse und Teilnahme',
+  'Toetsen en antwoorden': 'Prüfungen und Antworten',
+  'Resultaten en bewijsstukken': 'Ergebnisse und Nachweise',
+  'Privacy en toegang': 'Datenschutz und Zugriff',
+  'Aanmelden en beveiliging': 'Anmeldung und Sicherheit',
+  'Overige gegevens': 'Weitere Daten',
+  'Lege onderdelen verbergen': 'Leere Abschnitte ausblenden',
+  '{aantal} lege onderdelen tonen': '{aantal} leere Abschnitte anzeigen',
+  'Uitzonderingen op deelname-eisen': 'Ausnahmen von Teilnahmevoraussetzungen',
+  'Gebruikte inschrijfcodes': 'Verwendete Anmeldecodes',
+  'Nummer van de deelname-eis': 'Nummer der Teilnahmevoraussetzung',
+  'Nummer van de inschrijfcode': 'Nummer des Anmeldecodes',
+  'Gebruikt op': 'Verwendet am',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Ausnahmen, die für Sie von den Voraussetzungen für die Teilnahme an einem Kurs gemacht wurden.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Angaben zu Anmeldecodes, die Sie für die Teilnahme an einem Kurs verwendet haben.',
+  'Niet opgenomen in dit overzicht': 'In dieser Übersicht nicht enthalten',
   'AI: functioneert': 'KI: funktioniert',
   'AI: wordt gecontroleerd…': 'KI: wird geprüft…',
   'AI: server niet bereikbaar': 'KI: Server nicht erreichbar',

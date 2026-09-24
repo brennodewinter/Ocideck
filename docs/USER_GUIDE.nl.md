@@ -4912,15 +4912,27 @@ is geen bewijs van aandacht, actieve studietijd, leren of beheersing.
 
 Kies vanuit **Mijn cursussen** in de zijbalk **Mijn gegevens**. Open in een smal
 venster eerst **Mijn voortgang** en kies daarna **Bekijk mijn gegevens**. OciDeck
-haalt voor de gekozen organisatie een actueel overzicht op en toont elke
-categorie en elk veld dat haar eLearning-server aanlevert. Categorieën blijven
-dicht totdat je ze opent; lange lijsten verschijnen per 50 registraties. De
-bekende categorieën hebben een begrijpelijke naam en een korte toelichting op
-het soort gegevens dat erin staat. Veelgebruikte veldnamen, datums, ja/nee-
-waarden en termen uit het inzagelogboek verschijnen als leesbare labels en
-waarden. Open **Begrippen uitgelegd** voor de betekenis van een categorie, een
-registratie en een ID, en voor uitleg over de getoonde datums en technische
-namen.
+haalt voor de gekozen organisatie een actueel overzicht op. Bekende
+servercategorieën zijn gegroepeerd onder begrijpelijke onderwerpen, zoals
+profiel en organisatie, cursussen en deelname, resultaten en bewijsstukken,
+privacy en toegang, en aanmelden en beveiliging. Categorieën en hun registraties
+blijven dicht totdat je ze opent; lange lijsten verschijnen per 50 registraties.
+Lege categorieën zijn standaard verborgen om het overzicht bruikbaar te houden.
+Zijn er lege onderdelen, kies dan **Lege onderdelen tonen** om ze toch in te
+zien.
+
+Bekende categorieën hebben een begrijpelijke naam en een korte toelichting op
+het soort gegevens dat erin staat. Bekende veldnamen, datums, ja/nee-waarden,
+termen uit het inzagelogboek en herkende gecodeerde waarden verschijnen als
+leesbare labels en waarden. Een `null`-waarde
+staat neutraal als **Niet opgenomen in dit overzicht**: daaruit volgt niet of
+informatie ontbreekt, niet beschikbaar is of om een andere reden niet is
+geregistreerd. Open **Begrippen uitgelegd** voor de betekenis van een categorie,
+een registratie en een ID, en voor uitleg over de getoonde datums en technische
+namen. Als een server met contractversie 2 een waarde bewust afschermt omdat die
+ook over iemand anders gaat, toont OciDeck die reden bij precies dat veld in
+plaats van de waarde als gewoon ontbrekend te presenteren. Oudere servers blijven
+werken, maar kunnen dat onderscheid niet aanleveren. *(Bijgewerkt 2026-09-24.)*
 
 Geneste objecten en lijsten worden als gelabelde velden en genummerde onderdelen
 getoond, niet als een JSON-blok. De algemene weergave toont ook categorieën en
@@ -4953,10 +4965,12 @@ afwegen. Eigen inzage staat herkenbaar los van inzage door een medewerker. Het
 overzicht vermeldt ook sinds wanneer deze registratie beschikbaar is; oudere
 toegang kan niet achteraf worden gereconstrueerd.
 
-Het overzicht helpt je de geregistreerde waarden in te zien, maar is op zichzelf
-geen volledig antwoord op alle AVG-eisen aan inzage. Vraag de gekozen organisatie
-naar verwerkingsdoelen, ontvangers, herkomst, bewaartermijnen, een eventuele
-nadere beoordeling van de handelende persoon en je overige privacyrechten.
+Het overzicht helpt je de voor dit overzicht aangeleverde waarden in te zien,
+maar is geen volledig AVG-antwoord. Het stelt niet vast dat de server alle
+persoonsgegevens heeft aangeleverd en vervult niet elke inzage-eis. Vraag de
+gekozen organisatie naar verwerkingsdoelen, ontvangers, herkomst,
+bewaartermijnen, een eventuele nadere beoordeling van de handelende persoon en
+je overige privacyrechten.
 
 Een les kan een selectie uit een grotere presentatie zijn. OciDeck gebruikt
 daarvoor dezelfde duurzame markeringen **Overslaan** als bij gewoon

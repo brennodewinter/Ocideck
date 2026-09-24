@@ -1629,6 +1629,34 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Egyes értékek nem jelennek meg',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'Az OciServe elrejti az értéket, ha az más személyre is vonatkozik. Az érintett mezőnél látható, miért hiányzik az érték.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nem jelenik meg, mert ez az adat más személyre is vonatkozik',
+  'Niet getoond door de server (reden: {reden})':
+      'A kiszolgáló nem jeleníti meg (ok: {reden})',
+  '1 onderdeel': '1 szakasz',
+  '{aantal} onderdelen': '{aantal} szakasz',
+  'Profiel en organisatie': 'Profil és szervezet',
+  'Cursussen en deelname': 'Tanfolyamok és részvétel',
+  'Toetsen en antwoorden': 'Tesztfeladatok és válaszok',
+  'Resultaten en bewijsstukken': 'Eredmények és igazoló dokumentumok',
+  'Privacy en toegang': 'Adatvédelem és hozzáférés',
+  'Aanmelden en beveiliging': 'Bejelentkezés és biztonság',
+  'Overige gegevens': 'Egyéb adatok',
+  'Lege onderdelen verbergen': 'Üres szakaszok elrejtése',
+  '{aantal} lege onderdelen tonen': '{aantal} üres szakasz megjelenítése',
+  'Uitzonderingen op deelname-eisen': 'Kivételek a részvételi feltételek alól',
+  'Gebruikte inschrijfcodes': 'Felhasznált jelentkezési kódok',
+  'Nummer van de deelname-eis': 'Részvételi feltétel száma',
+  'Nummer van de inschrijfcode': 'Jelentkezési kód száma',
+  'Gebruikt op': 'Felhasználva:',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Az Ön számára engedélyezett kivételek a tanfolyamon való részvétel feltételei alól.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Az Ön által tanfolyami részvételhez használt jelentkezési kódok adatai.',
+  'Niet opgenomen in dit overzicht': 'Nem szerepel ebben az áttekintésben',
   'AI: functioneert': 'AI: működik',
   'AI: wordt gecontroleerd…': 'AI: ellenőrzés…',
   'AI: server niet bereikbaar': 'AI: a kiszolgáló nem érhető el',

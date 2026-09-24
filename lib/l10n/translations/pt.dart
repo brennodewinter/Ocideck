@@ -1655,6 +1655,34 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Alguns valores não são apresentados',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'O OciServe oculta um valor quando este também diz respeito a outra pessoa. O campo correspondente indica por que motivo o valor está em falta.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Não apresentado porque este dado também diz respeito a outra pessoa',
+  'Niet getoond door de server (reden: {reden})':
+      'Não apresentado pelo servidor (motivo: {reden})',
+  '1 onderdeel': '1 secção',
+  '{aantal} onderdelen': '{aantal} secções',
+  'Profiel en organisatie': 'Perfil e organização',
+  'Cursussen en deelname': 'Cursos e participação',
+  'Toetsen en antwoorden': 'Avaliações e respostas',
+  'Resultaten en bewijsstukken': 'Resultados e comprovativos',
+  'Privacy en toegang': 'Privacidade e acesso',
+  'Aanmelden en beveiliging': 'Início de sessão e segurança',
+  'Overige gegevens': 'Outros dados',
+  'Lege onderdelen verbergen': 'Ocultar secções vazias',
+  '{aantal} lege onderdelen tonen': 'Mostrar {aantal} secções vazias',
+  'Uitzonderingen op deelname-eisen': 'Exceções aos requisitos de participação',
+  'Gebruikte inschrijfcodes': 'Códigos de inscrição utilizados',
+  'Nummer van de deelname-eis': 'Número do requisito de participação',
+  'Nummer van de inschrijfcode': 'Número do código de inscrição',
+  'Gebruikt op': 'Utilizado em',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Exceções concedidas aos requisitos para participar num curso.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Dados sobre os códigos de inscrição que utilizou para participar num curso.',
+  'Niet opgenomen in dit overzicht': 'Não incluído nesta vista geral',
   'AI: functioneert': 'IA: a funcionar',
   'AI: wordt gecontroleerd…': 'IA: a verificar…',
   'AI: server niet bereikbaar': 'IA: servidor inacessível',

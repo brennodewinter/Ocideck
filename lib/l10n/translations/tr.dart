@@ -2538,6 +2538,34 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Bazı değerler gösterilmiyor',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe, bir değer başka bir kişiyle de ilgili olduğunda bu değeri gizler. İlgili alanda değerin neden eksik olduğu belirtilir.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Bu veri başka bir kişiyle de ilgili olduğu için gösterilmiyor',
+  'Niet getoond door de server (reden: {reden})':
+      'Sunucu tarafından gösterilmiyor (neden: {reden})',
+  '1 onderdeel': '1 bölüm',
+  '{aantal} onderdelen': '{aantal} bölüm',
+  'Profiel en organisatie': 'Profil ve kuruluş',
+  'Cursussen en deelname': 'Kurslar ve katılım',
+  'Toetsen en antwoorden': 'Sınavlar ve yanıtlar',
+  'Resultaten en bewijsstukken': 'Sonuçlar ve kanıt belgeleri',
+  'Privacy en toegang': 'Gizlilik ve erişim',
+  'Aanmelden en beveiliging': 'Oturum açma ve güvenlik',
+  'Overige gegevens': 'Diğer veriler',
+  'Lege onderdelen verbergen': 'Boş bölümleri gizle',
+  '{aantal} lege onderdelen tonen': '{aantal} boş bölümü göster',
+  'Uitzonderingen op deelname-eisen': 'Katılım koşullarına ilişkin istisnalar',
+  'Gebruikte inschrijfcodes': 'Kullanılan kayıt kodları',
+  'Nummer van de deelname-eis': 'Katılım koşulu numarası',
+  'Nummer van de inschrijfcode': 'Kayıt kodu numarası',
+  'Gebruikt op': 'Kullanılma tarihi',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Bir kursa katılma koşullarında sizin için yapılan istisnalar.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Bir kursa katılmak için kullandığınız kayıt kodlarına ilişkin bilgiler.',
+  'Niet opgenomen in dit overzicht': 'Bu genel bakışa dahil edilmedi',
   'AI: functioneert': 'YZ: çalışıyor',
   'AI: wordt gecontroleerd…': 'YZ: denetleniyor…',
   'AI: server niet bereikbaar': 'YZ: sunucuya ulaşılamıyor',

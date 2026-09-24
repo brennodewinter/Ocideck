@@ -667,6 +667,36 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Sommige waarden zijn niet getoond':
+      'Certaines valeurs ne sont pas affichées',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe masque une valeur lorsqu\'elle concerne également une autre personne. Le champ concerné indique pourquoi la valeur est absente.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Non affiché, car cette donnée concerne également une autre personne',
+  'Niet getoond door de server (reden: {reden})':
+      'Non affiché par le serveur (motif : {reden})',
+  '1 onderdeel': '1 rubrique',
+  '{aantal} onderdelen': '{aantal} rubriques',
+  'Profiel en organisatie': 'Profil et organisation',
+  'Cursussen en deelname': 'Cours et participation',
+  'Toetsen en antwoorden': 'Évaluations et réponses',
+  'Resultaten en bewijsstukken': 'Résultats et justificatifs',
+  'Privacy en toegang': 'Confidentialité et accès',
+  'Aanmelden en beveiliging': 'Connexion et sécurité',
+  'Overige gegevens': 'Autres données',
+  'Lege onderdelen verbergen': 'Masquer les sections vides',
+  '{aantal} lege onderdelen tonen': 'Afficher {aantal} sections vides',
+  'Uitzonderingen op deelname-eisen':
+      'Dérogations aux conditions de participation',
+  'Gebruikte inschrijfcodes': 'Codes d\'inscription utilisés',
+  'Nummer van de deelname-eis': 'Numéro de la condition de participation',
+  'Nummer van de inschrijfcode': 'Numéro du code d\'inscription',
+  'Gebruikt op': 'Utilisé le',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Dérogations qui vous ont été accordées aux conditions de participation à un cours.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Informations sur les codes d\'inscription que vous avez utilisés pour participer à un cours.',
+  'Niet opgenomen in dit overzicht': 'Non inclus dans cet aperçu',
   'AI: functioneert': 'IA : fonctionne',
   'AI: wordt gecontroleerd…': 'IA : vérification…',
   'AI: server niet bereikbaar': 'IA : serveur inaccessible',

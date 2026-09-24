@@ -1627,6 +1627,34 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Nogle værdier vises ikke',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skjuler en værdi, når den også vedrører en anden person. Ved det relevante felt står der, hvorfor værdien mangler.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Vises ikke, fordi denne oplysning også vedrører en anden person',
+  'Niet getoond door de server (reden: {reden})':
+      'Vises ikke af serveren (årsag: {reden})',
+  '1 onderdeel': '1 afsnit',
+  '{aantal} onderdelen': '{aantal} afsnit',
+  'Profiel en organisatie': 'Profil og organisation',
+  'Cursussen en deelname': 'Kurser og deltagelse',
+  'Toetsen en antwoorden': 'Prøver og svar',
+  'Resultaten en bewijsstukken': 'Resultater og dokumentation',
+  'Privacy en toegang': 'Privatliv og adgang',
+  'Aanmelden en beveiliging': 'Login og sikkerhed',
+  'Overige gegevens': 'Andre oplysninger',
+  'Lege onderdelen verbergen': 'Skjul tomme afsnit',
+  '{aantal} lege onderdelen tonen': 'Vis {aantal} tomme afsnit',
+  'Uitzonderingen op deelname-eisen': 'Undtagelser fra deltagelseskrav',
+  'Gebruikte inschrijfcodes': 'Brugte tilmeldingskoder',
+  'Nummer van de deelname-eis': 'Nummer på deltagelseskrav',
+  'Nummer van de inschrijfcode': 'Nummer på tilmeldingskode',
+  'Gebruikt op': 'Brugt den',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Undtagelser fra kravene om deltagelse i et kursus, som er givet til dig.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Oplysninger om tilmeldingskoder, du har brugt til at deltage i et kursus.',
+  'Niet opgenomen in dit overzicht': 'Ikke medtaget i denne oversigt',
   'AI: functioneert': 'AI: fungerer',
   'AI: wordt gecontroleerd…': 'AI: kontrolleres…',
   'AI: server niet bereikbaar': 'AI: serveren kan ikke nås',

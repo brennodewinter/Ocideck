@@ -582,7 +582,10 @@ write the response to disk or to the clipboard. The eLearning server derives the
 learner from the authenticated account. The selected organisation remains the
 place to ask about purposes, recipients, sources, retention periods and other
 rights: the in-app value overview does not by itself guarantee a complete GDPR
-access response.
+access response. A server using the additive `privacy-data/v2` contract can mark
+an exact `null` field as withheld because it also concerns another person.
+OciDeck explains that reason at the field; it does not infer a reason for other
+missing values or for responses from older servers.
 
 That live overview also includes the eLearning server's participant-directed
 access history from the moment that facility was enabled: time, view or change,

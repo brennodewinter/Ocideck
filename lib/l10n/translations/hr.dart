@@ -1631,6 +1631,34 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Neke vrijednosti nisu prikazane',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skriva vrijednost kada se ona odnosi i na drugu osobu. Uz odgovarajuće polje navedeno je zašto vrijednost nedostaje.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nije prikazano jer se ovaj podatak odnosi i na drugu osobu',
+  'Niet getoond door de server (reden: {reden})':
+      'Poslužitelj nije prikazao (razlog: {reden})',
+  '1 onderdeel': '1 odjeljak',
+  '{aantal} onderdelen': 'Odjeljaka: {aantal}',
+  'Profiel en organisatie': 'Profil i organizacija',
+  'Cursussen en deelname': 'Tečajevi i sudjelovanje',
+  'Toetsen en antwoorden': 'Provjere i odgovori',
+  'Resultaten en bewijsstukken': 'Rezultati i dokazni dokumenti',
+  'Privacy en toegang': 'Privatnost i pristup',
+  'Aanmelden en beveiliging': 'Prijava i sigurnost',
+  'Overige gegevens': 'Ostali podaci',
+  'Lege onderdelen verbergen': 'Sakrij prazne odjeljke',
+  '{aantal} lege onderdelen tonen': 'Prikaži prazne odjeljke: {aantal}',
+  'Uitzonderingen op deelname-eisen': 'Iznimke od uvjeta sudjelovanja',
+  'Gebruikte inschrijfcodes': 'Iskorišteni kodovi za upis',
+  'Nummer van de deelname-eis': 'Broj uvjeta sudjelovanja',
+  'Nummer van de inschrijfcode': 'Broj koda za upis',
+  'Gebruikt op': 'Iskorišteno dana',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Iznimke od uvjeta za sudjelovanje u tečaju koje su vam odobrene.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Podaci o kodovima za upis koje ste iskoristili za sudjelovanje u tečaju.',
+  'Niet opgenomen in dit overzicht': 'Nije uključeno u ovaj pregled',
   'AI: functioneert': 'AI: radi',
   'AI: wordt gecontroleerd…': 'AI: provjera u tijeku…',
   'AI: server niet bereikbaar': 'AI: poslužitelj nije dostupan',

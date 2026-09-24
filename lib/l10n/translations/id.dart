@@ -1627,6 +1627,34 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Beberapa nilai tidak ditampilkan',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe menyembunyikan nilai jika nilai tersebut juga berkaitan dengan orang lain. Kolom terkait menjelaskan alasan nilai tersebut tidak ada.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Tidak ditampilkan karena data ini juga berkaitan dengan orang lain',
+  'Niet getoond door de server (reden: {reden})':
+      'Tidak ditampilkan oleh server (alasan: {reden})',
+  '1 onderdeel': '1 bagian',
+  '{aantal} onderdelen': '{aantal} bagian',
+  'Profiel en organisatie': 'Profil dan organisasi',
+  'Cursussen en deelname': 'Kursus dan partisipasi',
+  'Toetsen en antwoorden': 'Penilaian dan jawaban',
+  'Resultaten en bewijsstukken': 'Hasil dan dokumen bukti',
+  'Privacy en toegang': 'Privasi dan akses',
+  'Aanmelden en beveiliging': 'Masuk dan keamanan',
+  'Overige gegevens': 'Data lainnya',
+  'Lege onderdelen verbergen': 'Sembunyikan bagian kosong',
+  '{aantal} lege onderdelen tonen': 'Tampilkan {aantal} bagian kosong',
+  'Uitzonderingen op deelname-eisen': 'Pengecualian persyaratan keikutsertaan',
+  'Gebruikte inschrijfcodes': 'Kode pendaftaran yang digunakan',
+  'Nummer van de deelname-eis': 'Nomor persyaratan keikutsertaan',
+  'Nummer van de inschrijfcode': 'Nomor kode pendaftaran',
+  'Gebruikt op': 'Digunakan pada',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Pengecualian yang diberikan kepada Anda atas persyaratan mengikuti kursus.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Data tentang kode pendaftaran yang Anda gunakan untuk mengikuti kursus.',
+  'Niet opgenomen in dit overzicht': 'Tidak disertakan dalam ringkasan ini',
   'AI: functioneert': 'AI: berfungsi',
   'AI: wordt gecontroleerd…': 'AI: sedang diperiksa…',
   'AI: server niet bereikbaar': 'AI: server tidak dapat dijangkau',

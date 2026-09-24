@@ -1627,6 +1627,34 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Nekatere vrednosti niso prikazane',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skrije vrednost, kadar se ta nanaša tudi na drugo osebo. Pri ustreznem polju je navedeno, zakaj vrednost manjka.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Ni prikazano, ker se ta podatek nanaša tudi na drugo osebo',
+  'Niet getoond door de server (reden: {reden})':
+      'Strežnik ni prikazal (razlog: {reden})',
+  '1 onderdeel': '1 razdelek',
+  '{aantal} onderdelen': '{aantal} razdelkov',
+  'Profiel en organisatie': 'Profil in organizacija',
+  'Cursussen en deelname': 'Tečaji in udeležba',
+  'Toetsen en antwoorden': 'Preverjanja in odgovori',
+  'Resultaten en bewijsstukken': 'Rezultati in dokazila',
+  'Privacy en toegang': 'Zasebnost in dostop',
+  'Aanmelden en beveiliging': 'Prijava in varnost',
+  'Overige gegevens': 'Drugi podatki',
+  'Lege onderdelen verbergen': 'Skrij prazne razdelke',
+  '{aantal} lege onderdelen tonen': 'Prikaži {aantal} praznih razdelkov',
+  'Uitzonderingen op deelname-eisen': 'Izjeme od pogojev za udeležbo',
+  'Gebruikte inschrijfcodes': 'Uporabljene vpisne kode',
+  'Nummer van de deelname-eis': 'Številka pogoja za udeležbo',
+  'Nummer van de inschrijfcode': 'Številka vpisne kode',
+  'Gebruikt op': 'Uporabljeno dne',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Izjeme od pogojev za udeležbo na tečaju, ki so vam bile odobrene.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Podatki o vpisnih kodah, ki ste jih uporabili za udeležbo na tečaju.',
+  'Niet opgenomen in dit overzicht': 'Ni vključeno v ta pregled',
   'AI: functioneert': 'AI: deluje',
   'AI: wordt gecontroleerd…': 'AI: preverjanje…',
   'AI: server niet bereikbaar': 'AI: strežnik ni dosegljiv',

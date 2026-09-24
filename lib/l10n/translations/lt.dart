@@ -1634,6 +1634,34 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Kai kurios reikšmės nerodomos',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe paslepia reikšmę, kai ji taip pat susijusi su kitu asmeniu. Prie atitinkamo lauko nurodyta, kodėl reikšmės nėra.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nerodoma, nes šie duomenys taip pat susiję su kitu asmeniu',
+  'Niet getoond door de server (reden: {reden})':
+      'Serveris nerodo (priežastis: {reden})',
+  '1 onderdeel': '1 skyrius',
+  '{aantal} onderdelen': 'Skyrių: {aantal}',
+  'Profiel en organisatie': 'Profilis ir organizacija',
+  'Cursussen en deelname': 'Kursai ir dalyvavimas',
+  'Toetsen en antwoorden': 'Testai ir atsakymai',
+  'Resultaten en bewijsstukken': 'Rezultatai ir patvirtinamieji dokumentai',
+  'Privacy en toegang': 'Privatumas ir prieiga',
+  'Aanmelden en beveiliging': 'Prisijungimas ir saugumas',
+  'Overige gegevens': 'Kiti duomenys',
+  'Lege onderdelen verbergen': 'Slėpti tuščius skyrius',
+  '{aantal} lege onderdelen tonen': 'Rodyti tuščius skyrius: {aantal}',
+  'Uitzonderingen op deelname-eisen': 'Dalyvavimo reikalavimų išimtys',
+  'Gebruikte inschrijfcodes': 'Panaudoti registracijos kodai',
+  'Nummer van de deelname-eis': 'Dalyvavimo reikalavimo numeris',
+  'Nummer van de inschrijfcode': 'Registracijos kodo numeris',
+  'Gebruikt op': 'Panaudota',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Jums suteiktos išimtys iš dalyvavimo kurse reikalavimų.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Duomenys apie registracijos kodus, kuriuos panaudojote dalyvauti kurse.',
+  'Niet opgenomen in dit overzicht': 'Neįtraukta į šią apžvalgą',
   'AI: functioneert': 'DI: veikia',
   'AI: wordt gecontroleerd…': 'DI: tikrinama…',
   'AI: server niet bereikbaar': 'DI: serveris nepasiekiamas',

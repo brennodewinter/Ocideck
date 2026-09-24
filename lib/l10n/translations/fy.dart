@@ -667,6 +667,34 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Sommige waarden zijn niet getoond': 'Guon wearden wurde net toand',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skermet in wearde ôf as dy ek oer in oar giet. By it oanbelangjende fjild stiet wêrom\'t de wearde ûntbrekt.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Net toand omdat dit gegeven ek oer in oar giet',
+  'Niet getoond door de server (reden: {reden})':
+      'Net toand troch de server (reden: {reden})',
+  '1 onderdeel': '1 ûnderdiel',
+  '{aantal} onderdelen': '{aantal} ûnderdielen',
+  'Profiel en organisatie': 'Profyl en organisaasje',
+  'Cursussen en deelname': 'Kursussen en dielname',
+  'Toetsen en antwoorden': 'Toetsen en antwurden',
+  'Resultaten en bewijsstukken': 'Resultaten en bewiisstikken',
+  'Privacy en toegang': 'Privacy en tagong',
+  'Aanmelden en beveiliging': 'Oanmelde en befeiliging',
+  'Overige gegevens': 'Oare gegevens',
+  'Lege onderdelen verbergen': 'Lege ûnderdielen ferbergje',
+  '{aantal} lege onderdelen tonen': '{aantal} lege ûnderdielen sjen litte',
+  'Uitzonderingen op deelname-eisen': 'Útsûnderings op dielname-easken',
+  'Gebruikte inschrijfcodes': 'Brûkte ynskriuwkoades',
+  'Nummer van de deelname-eis': 'Nûmer fan de dielname-eask',
+  'Nummer van de inschrijfcode': 'Nûmer fan de ynskriuwkoade',
+  'Gebruikt op': 'Brûkt op',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Útsûnderings dy\'t foar jo makke binne op de easken foar dielname oan in kursus.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Gegevens oer ynskriuwkoades dy\'t jo brûkt hawwe om oan in kursus mei te dwaan.',
+  'Niet opgenomen in dit overzicht': 'Net opnommen yn dit oersjoch',
   'AI: functioneert': 'AI: wurket',
   'AI: wordt gecontroleerd…': 'AI: wurdt kontrolearre…',
   'AI: server niet bereikbaar': 'AI: server net berikber',

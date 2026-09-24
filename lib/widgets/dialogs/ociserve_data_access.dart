@@ -2,6 +2,11 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_models.dart';
+import '../../utils/json_pointer.dart';
+import '../../models/ociserve_privacy_dictionary.dart';
+
+part 'ociserve_data_access_groups.dart';
+part 'ociserve_data_access_search.dart';
 
 class OciServeDataAccess extends StatefulWidget {
   const OciServeDataAccess({
@@ -20,6 +25,7 @@ class OciServeDataAccess extends StatefulWidget {
 class _OciServeDataAccessState extends State<OciServeDataAccess> {
   final _searchController = TextEditingController();
   String _query = '';
+  bool _showEmptyCategories = false;
 
   @override
   void dispose() {
@@ -35,6 +41,14 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
       context,
     ).formatFullDate(widget.data.generatedAt.toLocal());
     final categories = _filteredCategories(context);
+    final groups = _groupsFor(categories);
+    final omissionReasons = {
+      for (final omission in widget.data.omissions)
+        omission.path: omission.reason,
+    };
+    final emptyCategoryCount = widget.data.data.values
+        .where((value) => _recordsFor(value).isEmpty)
+        .length;
     return CustomScrollView(
       key: const Key('ociserve-data-access'),
       slivers: [
@@ -43,6 +57,10 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
           sliver: SliverList.list(
             children: [
               _buildIntroduction(context, date),
+              if (widget.data.omissions.isNotEmpty) ...[
+                const SizedBox(height: 10),
+                _buildOmissionNotice(context),
+              ],
               const SizedBox(height: 14),
               Card(
                 margin: EdgeInsets.zero,
@@ -126,6 +144,9 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
                   key: const Key('privacy-data-search-count'),
                   style: theme.textTheme.bodySmall,
                 ),
+              ] else if (emptyCategoryCount > 0) ...[
+                const SizedBox(height: 8),
+                _buildEmptyCategoriesToggle(context, emptyCategoryCount),
               ],
               const SizedBox(height: 18),
               if (categories.isEmpty)
@@ -149,11 +170,11 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
                   ),
                 )
               else
-                for (final category in categories) ...[
-                  _DataCategory(
-                    sourceKey: category.sourceKey,
-                    records: category.records,
+                for (final group in groups) ...[
+                  _DataGroupCard(
+                    group: group,
                     searching: _query.isNotEmpty,
+                    omissionReasons: omissionReasons,
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -161,6 +182,30 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildEmptyCategoriesToggle(BuildContext context, int count) {
+    final l10n = context.l10n;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: TextButton.icon(
+        key: const Key('privacy-data-empty-toggle'),
+        onPressed: () =>
+            setState(() => _showEmptyCategories = !_showEmptyCategories),
+        icon: Icon(
+          _showEmptyCategories
+              ? Icons.visibility_off_outlined
+              : Icons.visibility_outlined,
+        ),
+        label: Text(
+          _showEmptyCategories
+              ? l10n.d('Lege onderdelen verbergen')
+              : l10n
+                    .d('{aantal} lege onderdelen tonen')
+                    .replaceAll('{aantal}', '$count'),
+        ),
+      ),
     );
   }
 
@@ -221,12 +266,29 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
     );
   }
 
+  Widget _buildOmissionNotice(BuildContext context) => Card(
+    margin: EdgeInsets.zero,
+    child: ListTile(
+      leading: const Icon(Icons.visibility_off_outlined),
+      title: Text(context.l10n.d('Sommige waarden zijn niet getoond')),
+      subtitle: Text(
+        context.l10n.d(
+          'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.',
+        ),
+      ),
+    ),
+  );
+
   List<_FilteredCategory> _filteredCategories(BuildContext context) {
     final query = _query.toLowerCase();
     return widget.data.data.entries
         .expand((entry) {
           final records = _recordsFor(entry.value);
-          if (query.isEmpty) return [_FilteredCategory(entry.key, records)];
+          if (query.isEmpty) {
+            return !_showEmptyCategories && records.isEmpty
+                ? const <_FilteredCategory>[]
+                : [_FilteredCategory(entry.key, records)];
+          }
           final categoryText = [
             entry.key,
             _categoryLabel(context, entry.key),
@@ -236,7 +298,9 @@ class _OciServeDataAccessState extends State<OciServeDataAccess> {
             return [_FilteredCategory(entry.key, records)];
           }
           final matching = records
-              .where((record) => _searchText(context, record).contains(query))
+              .where(
+                (record) => _searchText(context, record.value).contains(query),
+              )
               .toList(growable: false);
           return matching.isEmpty
               ? const <_FilteredCategory>[]
@@ -250,25 +314,21 @@ class _FilteredCategory {
   const _FilteredCategory(this.sourceKey, this.records);
 
   final String sourceKey;
-  final List<Object?> records;
+  final List<_IndexedRecord> records;
 }
-
-List<Object?> _recordsFor(Object? value) => switch (value) {
-  List<Object?> list => list,
-  Map<Object?, Object?> map => [map],
-  _ => [value],
-};
 
 class _DataCategory extends StatefulWidget {
   const _DataCategory({
     required this.sourceKey,
     required this.records,
     required this.searching,
+    required this.omissionReasons,
   });
 
   final String sourceKey;
-  final List<Object?> records;
+  final List<_IndexedRecord> records;
   final bool searching;
+  final Map<String, String> omissionReasons;
 
   @override
   State<_DataCategory> createState() => _DataCategoryState();
@@ -278,6 +338,12 @@ class _DataCategoryState extends State<_DataCategory> {
   static const _pageSize = 50;
   bool _expanded = false;
   int _visible = _pageSize;
+
+  @override
+  void initState() {
+    super.initState();
+    _expanded = widget.searching;
+  }
 
   @override
   void didUpdateWidget(covariant _DataCategory oldWidget) {
@@ -328,7 +394,11 @@ class _DataCategoryState extends State<_DataCategory> {
                   )
                 else
                   for (var index = 0; index < shown; index++)
-                    _DataRecord(index: index, value: widget.records[index]),
+                    _DataRecord(
+                      categoryKey: widget.sourceKey,
+                      record: widget.records[index],
+                      omissionReasons: widget.omissionReasons,
+                    ),
                 if (shown < widget.records.length)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
@@ -356,16 +426,26 @@ class _DataCategoryState extends State<_DataCategory> {
 }
 
 class _DataRecord extends StatelessWidget {
-  const _DataRecord({required this.index, required this.value});
+  const _DataRecord({
+    required this.categoryKey,
+    required this.record,
+    required this.omissionReasons,
+  });
 
-  final int index;
-  final Object? value;
+  final String categoryKey;
+  final _IndexedRecord record;
+  final Map<String, String> omissionReasons;
 
   @override
   Widget build(BuildContext context) {
-    final fields = value is Map
-        ? Map<Object?, Object?>.from(value! as Map)
-        : <Object?, Object?>{'value': value};
+    final fields = record.value is Map
+        ? Map<Object?, Object?>.from(record.value! as Map)
+        : <Object?, Object?>{'value': record.value};
+    final recordPath = jsonPointerFromSegments([
+      'data',
+      categoryKey,
+      record.sourceIndex,
+    ]);
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 14),
       child: DecoratedBox(
@@ -379,18 +459,23 @@ class _DataRecord extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (index > 0)
+              if (record.sourceIndex > 0)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Text(
                     context.l10n
                         .d('Registratie {nummer}')
-                        .replaceAll('{nummer}', '${index + 1}'),
+                        .replaceAll('{nummer}', '${record.sourceIndex + 1}'),
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
               for (final field in fields.entries)
-                _DataField(sourceKey: '${field.key}', value: field.value),
+                _DataField(
+                  sourceKey: '${field.key}',
+                  value: field.value,
+                  path: appendJsonPointerSegment(recordPath, field.key),
+                  omissionReasons: omissionReasons,
+                ),
             ],
           ),
         ),
@@ -400,10 +485,17 @@ class _DataRecord extends StatelessWidget {
 }
 
 class _DataField extends StatelessWidget {
-  const _DataField({required this.sourceKey, required this.value});
+  const _DataField({
+    required this.sourceKey,
+    required this.value,
+    required this.path,
+    required this.omissionReasons,
+  });
 
   final String sourceKey;
   final Object? value;
+  final String path;
+  final Map<String, String> omissionReasons;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -423,17 +515,29 @@ class _DataField extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
         const SizedBox(height: 3),
-        _ReadableValue(sourceKey: sourceKey, value: value),
+        _ReadableValue(
+          sourceKey: sourceKey,
+          value: value,
+          path: path,
+          omissionReasons: omissionReasons,
+        ),
       ],
     ),
   );
 }
 
 class _ReadableValue extends StatelessWidget {
-  const _ReadableValue({required this.sourceKey, required this.value});
+  const _ReadableValue({
+    required this.sourceKey,
+    required this.value,
+    required this.path,
+    required this.omissionReasons,
+  });
 
   final String sourceKey;
   final Object? value;
+  final String path;
+  final Map<String, String> omissionReasons;
 
   @override
   Widget build(BuildContext context) => switch (value) {
@@ -443,7 +547,12 @@ class _ReadableValue extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (final entry in Map<Object?, Object?>.from(value! as Map).entries)
-            _DataField(sourceKey: '${entry.key}', value: entry.value),
+            _DataField(
+              sourceKey: '${entry.key}',
+              value: entry.value,
+              path: appendJsonPointerSegment(path, entry.key),
+              omissionReasons: omissionReasons,
+            ),
         ],
       ),
     ),
@@ -463,6 +572,8 @@ class _ReadableValue extends StatelessWidget {
             _ReadableValue(
               sourceKey: sourceKey,
               value: (value! as List)[index],
+              path: appendJsonPointerSegment(path, index),
+              omissionReasons: omissionReasons,
             ),
             const SizedBox(height: 8),
           ],
@@ -470,54 +581,23 @@ class _ReadableValue extends StatelessWidget {
       ),
     ),
     _ => SelectableText(
-      _display(context, sourceKey, value),
+      _display(
+        context,
+        sourceKey,
+        value,
+        omissionReason: omissionReasons[path],
+      ),
       style: Theme.of(context).textTheme.bodyMedium,
     ),
   };
 }
 
-String _categoryLabel(BuildContext context, String value) => switch (value) {
-  'participant' => context.l10n.d('Cursistprofiel'),
-  'accounts' => context.l10n.d('Accountgegevens'),
-  'memberships' => context.l10n.d('Lidmaatschappen'),
-  'enrollments' => context.l10n.d('Inschrijvingen'),
-  'lesson_progress' => context.l10n.d('Lesvoortgang'),
-  'playback_sessions' => context.l10n.d('Bekeken lessen'),
-  'attempts' => context.l10n.d('Toetspogingen'),
-  'attempt_items' => context.l10n.d('Vragen in toetspogingen'),
-  'answers' => context.l10n.d('Antwoorden'),
-  'evidence_uploads' => context.l10n.d('Bewijsstukken'),
-  'qualifications' => context.l10n.d('Kwalificaties'),
-  'qualification_events' => context.l10n.d('Wijzigingen aan kwalificaties'),
-  'participations' => context.l10n.d('Deelnames'),
-  'session_bookings' => context.l10n.d('Lesreserveringen'),
-  'pe_awards' => context.l10n.d('PE-punten'),
-  'pe_award_events' => context.l10n.d('Wijzigingen aan PE-punten'),
-  'certificates' => context.l10n.d('Certificaten'),
-  'privacy_requests' => context.l10n.d('Privacyverzoeken'),
-  'access_audit_events' => context.l10n.d('Technisch toegangslogboek'),
-  'participant_data_access_history' => context.l10n.d('Inzage en wijzigingen'),
-  'participant_data_access_history_metadata' => context.l10n.d(
-    'Beschikbaarheid van het inzagespoor',
-  ),
-  'identity_operations' => context.l10n.d('Accountbewerkingen'),
-  'installation_requests' => context.l10n.d('Installatieverzoeken'),
-  'claim_attempts' => context.l10n.d('Beheerpogingen'),
-  'api_idempotency_requests' => context.l10n.d('Verwerkte verzoeken'),
-  'installation_audit_events' => context.l10n.d(
-    'Installatiebeveiligingslogboek',
-  ),
-  'installation_ownership' => context.l10n.d('Beheer van de installatie'),
-  'access_policy_changes' => context.l10n.d(
-    'Wijzigingen in aanmeldbeveiliging',
-  ),
-  'invitations' => context.l10n.d('Uitnodigingen'),
-  'email_messages' => context.l10n.d('E-mailberichten'),
-  'web_sessions' => context.l10n.d('Aanmeldsessies'),
-  'retention_policies' => context.l10n.d('Bewaarregels'),
-  'deletion_ledger' => context.l10n.d('Verwijderingsregister'),
-  _ => _fallbackLabel(value),
-};
+String _categoryLabel(BuildContext context, String value) {
+  final definition = ociservePrivacyCategories[value];
+  return definition == null
+      ? _fallbackLabel(value)
+      : context.l10n.d(definition.dutchLabel);
+}
 
 String _label(BuildContext context, String value) =>
     _knownLabel(context, value) ?? _fallbackLabel(value);
@@ -558,6 +638,10 @@ String? _knownLearningLabel(
   'revoked_at' => context.l10n.d('Ingetrokken op'),
   'course_version_id' => context.l10n.d('Cursusversienummer'),
   'course_offering_id' => context.l10n.d('Cursusaanbodnummer'),
+  'offering_id' => context.l10n.d('Cursusaanbodnummer'),
+  'requirement_id' => context.l10n.d('Nummer van de deelname-eis'),
+  'voucher_id' => context.l10n.d('Nummer van de inschrijfcode'),
+  'redeemed_at' => context.l10n.d('Gebruikt op'),
   'enrollment_source' => context.l10n.d('Herkomst van inschrijving'),
   'version_policy' => context.l10n.d('Regels voor de cursusversie'),
   'enrolled_at' => context.l10n.d('Ingeschreven op'),
@@ -725,59 +809,32 @@ String _fallbackLabel(String value) {
 String _fieldLabel(BuildContext context, String value) =>
     _label(context, value);
 
-String _categoryDescription(BuildContext context, String key) => switch (key) {
-  'participant' || 'accounts' || 'memberships' => context.l10n.d(
-    'Gegevens over uw profiel, account en plaats binnen de organisatie.',
-  ),
-  'enrollments' ||
-  'lesson_progress' ||
-  'playback_sessions' ||
-  'participations' ||
-  'session_bookings' => context.l10n.d(
-    'Gegevens over uw inschrijving, deelname en voortgang in lessen.',
-  ),
-  'attempts' || 'attempt_items' => context.l10n.d(
-    'Gegevens over uw toetsmomenten en de vragen die daarbij zijn aangeboden.',
-  ),
-  'answers' => context.l10n.d(
-    'De antwoorden die u bij toetsvragen heeft gegeven.',
-  ),
-  'evidence_uploads' ||
-  'qualifications' ||
-  'qualification_events' ||
-  'pe_awards' ||
-  'pe_award_events' ||
-  'certificates' => context.l10n.d(
-    'Gegevens over bewijsstukken, behaalde resultaten en certificaten.',
-  ),
-  'privacy_requests' ||
-  'access_audit_events' ||
-  'participant_data_access_history' ||
-  'participant_data_access_history_metadata' => context.l10n.d(
-    'Gegevens over privacyverzoeken en wie uw gegevens bekeek of wijzigde.',
-  ),
-  'retention_policies' || 'deletion_ledger' => context.l10n.d(
-    'Gegevens over bewaartermijnen en het verwijderen van uw gegevens.',
-  ),
-  'identity_operations' ||
-  'installation_requests' ||
-  'claim_attempts' ||
-  'api_idempotency_requests' ||
-  'installation_audit_events' ||
-  'installation_ownership' ||
-  'access_policy_changes' ||
-  'invitations' ||
-  'email_messages' ||
-  'web_sessions' => context.l10n.d(
-    'Technische gegevens die nodig zijn voor aanmelden, beveiligen en betrouwbaar verwerken.',
-  ),
-  _ => context.l10n.d(
-    'Deze categorie is door de server aangeleverd. De technische namen blijven zichtbaar voor navraag bij uw organisatie.',
-  ),
-};
+String _categoryDescription(BuildContext context, String key) {
+  final definition = ociservePrivacyCategories[key];
+  return definition == null
+      ? context.l10n.d(
+          'Deze categorie is door de server aangeleverd. De technische namen blijven zichtbaar voor navraag bij uw organisatie.',
+        )
+      : context.l10n.d(definition.dutchDescription);
+}
 
-String _display(BuildContext context, String key, Object? value) {
-  if (value == null) return context.l10n.d('Niet geregistreerd');
+String _display(
+  BuildContext context,
+  String key,
+  Object? value, {
+  String? omissionReason,
+}) {
+  if (omissionReason == 'third_party_data') {
+    return context.l10n.d(
+      'Niet getoond omdat dit gegeven ook over iemand anders gaat',
+    );
+  }
+  if (omissionReason != null) {
+    return context.l10n
+        .d('Niet getoond door de server (reden: {reden})')
+        .replaceAll('{reden}', omissionReason);
+  }
+  if (value == null) return context.l10n.d('Niet opgenomen in dit overzicht');
   if (value is bool) {
     return value ? context.l10n.d('Ja') : context.l10n.d('Nee');
   }
@@ -807,6 +864,10 @@ String _display(BuildContext context, String key, Object? value) {
     'status:quarantined' => context.l10n.d('In quarantaine'),
     'status:booked' => context.l10n.d('Gereserveerd'),
     'status:cancelled' => context.l10n.d('Geannuleerd'),
+    'status:waitlisted' => context.l10n.d('Op de wachtlijst'),
+    'status:no_show' => context.l10n.d('Niet verschenen'),
+    'status:succeeded' => context.l10n.d('Geslaagd'),
+    'status:expired' => context.l10n.d('Verlopen'),
     'result:success' => context.l10n.d('Gelukt'),
     'result:failed' => context.l10n.d('Mislukt'),
     'attendance_kind:attended' => context.l10n.d('Aanwezig'),
@@ -818,6 +879,20 @@ String _display(BuildContext context, String key, Object? value) {
     'request_type:restriction' => context.l10n.d('Beperking'),
     'request_type:portability' => context.l10n.d('Overdraagbaarheid'),
     'request_type:objection' => context.l10n.d('Bezwaar'),
+    'request_type:delete' => context.l10n.d('Verwijdering'),
+    'role:owner' => context.l10n.d('Eigenaar'),
+    'role:instructor' => context.l10n.d('Docent'),
+    'role:author' => context.l10n.d('Auteur'),
+    'role:assessor' => context.l10n.d('Beoordelaar'),
+    'role:participant' => context.l10n.d('Cursist'),
+    'role:organization_admin' => context.l10n.d('Organisatiebeheerder'),
+    'event_type:rejected' => context.l10n.d('Afgewezen'),
+    'event_type:revoked' => context.l10n.d('Ingetrokken'),
+    'action_on_expiry:delete' => context.l10n.d('Verwijderen'),
+    'provider_result:pending' => context.l10n.d('In afwachting'),
+    'provider_result:succeeded' => context.l10n.d('Gelukt'),
+    'provider_result:failed' => context.l10n.d('Mislukt'),
+    'provider_result:unavailable' => context.l10n.d('Niet beschikbaar'),
     'ground:contract' => context.l10n.d('Overeenkomst'),
     'ground:legal_obligation' => context.l10n.d('Wettelijke verplichting'),
     'ground:legitimate_interest' => context.l10n.d('Gerechtvaardigd belang'),
@@ -867,29 +942,4 @@ String _display(BuildContext context, String key, Object? value) {
   if (known != null) return known;
   if (value is String && value.contains('_')) return _label(context, value);
   return '$value';
-}
-
-String _searchText(BuildContext context, Object? value) {
-  final parts = <String>[];
-  void collect(Object? item, [String sourceKey = '']) {
-    switch (item) {
-      case Map():
-        for (final entry in Map<Object?, Object?>.from(item).entries) {
-          final key = '${entry.key}';
-          parts.add(key);
-          parts.add(_fieldLabel(context, key));
-          collect(entry.value, key);
-        }
-      case List():
-        for (final child in item) {
-          collect(child, sourceKey);
-        }
-      default:
-        parts.add('$item');
-        parts.add(_display(context, sourceKey, item));
-    }
-  }
-
-  collect(value);
-  return parts.join(' ').toLowerCase();
 }

@@ -672,10 +672,15 @@ The privacy-data GET follows the same self-scoped identity rule: the server
 derives the participant from the authenticated user. `OciServePrivacyData`
 requires `participant_id`, `generated_at` and a `data` object, but deliberately
 keeps the contents of `data` generic so categories and fields added by OciServe
-remain visible without a matching OciDeck release. The client caps this response
-at 32 MiB. The dialog expands categories lazily and reveals list records in
-batches of 50; it holds the parsed response only in dialog state and does not
-automatically persist or copy it.
+remain visible without a matching OciDeck release. The additive
+`privacy-data/v2` response also carries `schema_version` and an `omissions`
+array. Each omission contains an RFC 6901 `path` to an existing null field and
+a stable reason code; `third_party_data` means the value was withheld because
+it also concerns another person. OciDeck accepts the legacy response without
+these properties and never guesses an omission reason. The client caps this
+response at 32 MiB. The dialog expands categories lazily and reveals list
+records in batches of 50; it holds the parsed response only in dialog state and
+does not automatically persist or copy it.
 
 Two server-defined categories form the learner-facing audit view.
 `participant_data_access_history_metadata` states when complete recording

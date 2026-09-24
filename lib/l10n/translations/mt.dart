@@ -1645,6 +1645,35 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Xi valuri mhumiex murija',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe jaħbi valur meta dan ikun jikkonċerna wkoll persuna oħra. Il-kaxxa rilevanti tindika għaliex il-valur huwa nieqes.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Mhux muri għax din id-dejta tikkonċerna wkoll persuna oħra',
+  'Niet getoond door de server (reden: {reden})':
+      'Mhux muri mis-server (raġuni: {reden})',
+  '1 onderdeel': 'taqsima 1',
+  '{aantal} onderdelen': '{aantal} taqsimiet',
+  'Profiel en organisatie': 'Profil u organizzazzjoni',
+  'Cursussen en deelname': 'Korsijiet u parteċipazzjoni',
+  'Toetsen en antwoorden': 'Testijiet u tweġibiet',
+  'Resultaten en bewijsstukken': 'Riżultati u dokumenti ta’ prova',
+  'Privacy en toegang': 'Privatezza u aċċess',
+  'Aanmelden en beveiliging': 'Dħul u sigurtà',
+  'Overige gegevens': 'Dejta oħra',
+  'Lege onderdelen verbergen': 'Aħbi t-taqsimiet vojta',
+  '{aantal} lege onderdelen tonen': 'Uri {aantal} taqsimiet vojta',
+  'Uitzonderingen op deelname-eisen':
+      'Eċċezzjonijiet mir-rekwiżiti tal-parteċipazzjoni',
+  'Gebruikte inschrijfcodes': 'Kodiċijiet ta’ reġistrazzjoni użati',
+  'Nummer van de deelname-eis': 'Numru tar-rekwiżit tal-parteċipazzjoni',
+  'Nummer van de inschrijfcode': 'Numru tal-kodiċi ta’ reġistrazzjoni',
+  'Gebruikt op': 'Użat fi',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Eċċezzjonijiet mogħtija lilek mir-rekwiżiti biex tipparteċipa f’kors.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Dejta dwar il-kodiċijiet ta’ reġistrazzjoni li użajt biex tipparteċipa f’kors.',
+  'Niet opgenomen in dit overzicht': 'Mhux inkluż f’din il-ħarsa ġenerali',
   'AI: functioneert': 'AI: jaħdem',
   'AI: wordt gecontroleerd…': 'AI: qed jiċċekkja…',
   'AI: server niet bereikbaar': 'AI: is-server ma jilħaqx',

@@ -1643,6 +1643,35 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Unele valori nu sunt afișate',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe ascunde o valoare atunci când aceasta privește și o altă persoană. Câmpul corespunzător indică motivul pentru care valoarea lipsește.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nu este afișat deoarece această informație privește și o altă persoană',
+  'Niet getoond door de server (reden: {reden})':
+      'Nu este afișat de server (motiv: {reden})',
+  '1 onderdeel': '1 secțiune',
+  '{aantal} onderdelen': '{aantal} secțiuni',
+  'Profiel en organisatie': 'Profil și organizație',
+  'Cursussen en deelname': 'Cursuri și participare',
+  'Toetsen en antwoorden': 'Teste și răspunsuri',
+  'Resultaten en bewijsstukken': 'Rezultate și documente justificative',
+  'Privacy en toegang': 'Confidențialitate și acces',
+  'Aanmelden en beveiliging': 'Autentificare și securitate',
+  'Overige gegevens': 'Alte date',
+  'Lege onderdelen verbergen': 'Ascunde secțiunile goale',
+  '{aantal} lege onderdelen tonen': 'Afișează {aantal} secțiuni goale',
+  'Uitzonderingen op deelname-eisen': 'Excepții de la cerințele de participare',
+  'Gebruikte inschrijfcodes': 'Coduri de înscriere utilizate',
+  'Nummer van de deelname-eis': 'Numărul cerinței de participare',
+  'Nummer van de inschrijfcode': 'Numărul codului de înscriere',
+  'Gebruikt op': 'Utilizat la',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Excepțiile acordate pentru dvs. de la cerințele de participare la un curs.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Date despre codurile de înscriere pe care le-ați folosit pentru a participa la un curs.',
+  'Niet opgenomen in dit overzicht':
+      'Nu este inclus în această prezentare generală',
   'AI: functioneert': 'AI: funcționează',
   'AI: wordt gecontroleerd…': 'AI: se verifică…',
   'AI: server niet bereikbaar': 'AI: serverul nu este accesibil',

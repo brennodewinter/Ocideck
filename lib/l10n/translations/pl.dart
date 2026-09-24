@@ -1639,6 +1639,34 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Niektóre wartości nie są wyświetlane',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe ukrywa wartość, jeśli dotyczy ona również innej osoby. Przy odpowiednim polu podano, dlaczego brakuje wartości.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nie wyświetlono, ponieważ ta informacja dotyczy również innej osoby',
+  'Niet getoond door de server (reden: {reden})':
+      'Nie wyświetlono przez serwer (powód: {reden})',
+  '1 onderdeel': '1 sekcja',
+  '{aantal} onderdelen': 'Sekcje: {aantal}',
+  'Profiel en organisatie': 'Profil i organizacja',
+  'Cursussen en deelname': 'Kursy i uczestnictwo',
+  'Toetsen en antwoorden': 'Testy i odpowiedzi',
+  'Resultaten en bewijsstukken': 'Wyniki i dokumenty potwierdzające',
+  'Privacy en toegang': 'Prywatność i dostęp',
+  'Aanmelden en beveiliging': 'Logowanie i bezpieczeństwo',
+  'Overige gegevens': 'Pozostałe dane',
+  'Lege onderdelen verbergen': 'Ukryj puste sekcje',
+  '{aantal} lege onderdelen tonen': 'Pokaż puste sekcje: {aantal}',
+  'Uitzonderingen op deelname-eisen': 'Wyjątki od warunków uczestnictwa',
+  'Gebruikte inschrijfcodes': 'Użyte kody zapisów',
+  'Nummer van de deelname-eis': 'Numer warunku uczestnictwa',
+  'Nummer van de inschrijfcode': 'Numer kodu zapisów',
+  'Gebruikt op': 'Użyto dnia',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Wyjątki przyznane Ci od warunków uczestnictwa w kursie.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Dane o kodach zapisów użytych przez Ciebie do udziału w kursie.',
+  'Niet opgenomen in dit overzicht': 'Nie uwzględniono w tym zestawieniu',
   'AI: functioneert': 'AI: działa',
   'AI: wordt gecontroleerd…': 'AI: sprawdzanie…',
   'AI: server niet bereikbaar': 'AI: serwer nieosiągalny',

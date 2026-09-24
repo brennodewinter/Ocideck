@@ -1657,6 +1657,35 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Ní thaispeántar roinnt luachanna',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'Cuireann OciServe luach i bhfolach nuair a bhaineann sé le duine eile freisin. Luaitear sa réimse ábhartha cén fáth a bhfuil an luach ar iarraidh.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Ní thaispeántar é mar go mbaineann na sonraí seo le duine eile freisin',
+  'Niet getoond door de server (reden: {reden})':
+      'Ní thaispeánann an freastalaí é (cúis: {reden})',
+  '1 onderdeel': '1 rannóg',
+  '{aantal} onderdelen': '{aantal} rannóg',
+  'Profiel en organisatie': 'Próifíl agus eagraíocht',
+  'Cursussen en deelname': 'Cúrsaí agus rannpháirtíocht',
+  'Toetsen en antwoorden': 'Measúnuithe agus freagraí',
+  'Resultaten en bewijsstukken': 'Torthaí agus doiciméid tacaíochta',
+  'Privacy en toegang': 'Príobháideachas agus rochtain',
+  'Aanmelden en beveiliging': 'Síniú isteach agus slándáil',
+  'Overige gegevens': 'Sonraí eile',
+  'Lege onderdelen verbergen': 'Folaigh rannóga folmha',
+  '{aantal} lege onderdelen tonen': 'Taispeáin {aantal} rannóg fholmha',
+  'Uitzonderingen op deelname-eisen':
+      'Eisceachtaí ar riachtanais rannpháirtíochta',
+  'Gebruikte inschrijfcodes': 'Cóid chlárúcháin a úsáideadh',
+  'Nummer van de deelname-eis': 'Uimhir an riachtanais rannpháirtíochta',
+  'Nummer van de inschrijfcode': 'Uimhir an chóid chlárúcháin',
+  'Gebruikt op': 'Úsáideadh ar',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Eisceachtaí a ceadaíodh duit ó na riachtanais le páirt a ghlacadh i gcúrsa.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Sonraí faoi na cóid chlárúcháin a d\'úsáid tú chun páirt a ghlacadh i gcúrsa.',
+  'Niet opgenomen in dit overzicht': 'Níl sé san áireamh san fhorbhreathnú seo',
   'AI: functioneert': 'AI: ag feidhmiú',
   'AI: wordt gecontroleerd…': 'AI: á sheiceáil…',
   'AI: server niet bereikbaar': 'AI: níl an freastalaí le bhaint amach',

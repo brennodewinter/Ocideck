@@ -1625,6 +1625,34 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Dažas vērtības netiek rādītas',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe paslēpj vērtību, ja tā attiecas arī uz citu personu. Pie attiecīgā lauka ir norādīts, kāpēc vērtības nav.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Netiek rādīts, jo šie dati attiecas arī uz citu personu',
+  'Niet getoond door de server (reden: {reden})':
+      'Serveris nerāda (iemesls: {reden})',
+  '1 onderdeel': '1 sadaļa',
+  '{aantal} onderdelen': 'Sadaļas: {aantal}',
+  'Profiel en organisatie': 'Profils un organizācija',
+  'Cursussen en deelname': 'Kursi un dalība',
+  'Toetsen en antwoorden': 'Pārbaudījumi un atbildes',
+  'Resultaten en bewijsstukken': 'Rezultāti un apliecinošie dokumenti',
+  'Privacy en toegang': 'Privātums un piekļuve',
+  'Aanmelden en beveiliging': 'Pieteikšanās un drošība',
+  'Overige gegevens': 'Citi dati',
+  'Lege onderdelen verbergen': 'Paslēpt tukšās sadaļas',
+  '{aantal} lege onderdelen tonen': 'Rādīt tukšās sadaļas: {aantal}',
+  'Uitzonderingen op deelname-eisen': 'Izņēmumi no dalības prasībām',
+  'Gebruikte inschrijfcodes': 'Izmantotie reģistrācijas kodi',
+  'Nummer van de deelname-eis': 'Dalības prasības numurs',
+  'Nummer van de inschrijfcode': 'Reģistrācijas koda numurs',
+  'Gebruikt op': 'Izmantots',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Jums piešķirtie izņēmumi no prasībām dalībai kursā.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Dati par reģistrācijas kodiem, ko izmantojāt dalībai kursā.',
+  'Niet opgenomen in dit overzicht': 'Nav iekļauts šajā pārskatā',
   'AI: functioneert': 'AI: darbojas',
   'AI: wordt gecontroleerd…': 'AI: notiek pārbaude…',
   'AI: server niet bereikbaar': 'AI: serveris nav sasniedzams',

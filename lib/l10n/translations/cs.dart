@@ -1628,6 +1628,34 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Některé hodnoty nejsou zobrazeny',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skryje hodnotu, pokud se týká také jiné osoby. U příslušného pole je uvedeno, proč hodnota chybí.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nezobrazeno, protože tento údaj se týká také jiné osoby',
+  'Niet getoond door de server (reden: {reden})':
+      'Server nezobrazil (důvod: {reden})',
+  '1 onderdeel': '1 oddíl',
+  '{aantal} onderdelen': 'Počet oddílů: {aantal}',
+  'Profiel en organisatie': 'Profil a organizace',
+  'Cursussen en deelname': 'Kurzy a účast',
+  'Toetsen en antwoorden': 'Testy a odpovědi',
+  'Resultaten en bewijsstukken': 'Výsledky a doklady',
+  'Privacy en toegang': 'Soukromí a přístup',
+  'Aanmelden en beveiliging': 'Přihlášení a zabezpečení',
+  'Overige gegevens': 'Další údaje',
+  'Lege onderdelen verbergen': 'Skrýt prázdné oddíly',
+  '{aantal} lege onderdelen tonen': 'Zobrazit prázdné oddíly: {aantal}',
+  'Uitzonderingen op deelname-eisen': 'Výjimky z podmínek účasti',
+  'Gebruikte inschrijfcodes': 'Použité přihlašovací kódy',
+  'Nummer van de deelname-eis': 'Číslo podmínky účasti',
+  'Nummer van de inschrijfcode': 'Číslo přihlašovacího kódu',
+  'Gebruikt op': 'Použito dne',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Výjimky z podmínek účasti v kurzu, které vám byly uděleny.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Údaje o přihlašovacích kódech, které jste použili k účasti v kurzu.',
+  'Niet opgenomen in dit overzicht': 'Není zahrnuto v tomto přehledu',
   'AI: functioneert': 'AI: funguje',
   'AI: wordt gecontroleerd…': 'AI: kontroluje se…',
   'AI: server niet bereikbaar': 'AI: server není dosažitelný',

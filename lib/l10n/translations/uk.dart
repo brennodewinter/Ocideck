@@ -1642,6 +1642,34 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Деякі значення не показано',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe приховує значення, якщо воно також стосується іншої особи. Біля відповідного поля зазначено, чому значення відсутнє.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Не показано, оскільки ці дані також стосуються іншої особи',
+  'Niet getoond door de server (reden: {reden})':
+      'Не показано сервером (причина: {reden})',
+  '1 onderdeel': '1 розділ',
+  '{aantal} onderdelen': 'Розділів: {aantal}',
+  'Profiel en organisatie': 'Профіль і організація',
+  'Cursussen en deelname': 'Курси та участь',
+  'Toetsen en antwoorden': 'Тести та відповіді',
+  'Resultaten en bewijsstukken': 'Результати та підтвердні документи',
+  'Privacy en toegang': 'Приватність і доступ',
+  'Aanmelden en beveiliging': 'Вхід і безпека',
+  'Overige gegevens': 'Інші дані',
+  'Lege onderdelen verbergen': 'Приховати порожні розділи',
+  '{aantal} lege onderdelen tonen': 'Показати порожні розділи: {aantal}',
+  'Uitzonderingen op deelname-eisen': 'Винятки з вимог до участі',
+  'Gebruikte inschrijfcodes': 'Використані коди реєстрації',
+  'Nummer van de deelname-eis': 'Номер вимоги до участі',
+  'Nummer van de inschrijfcode': 'Номер коду реєстрації',
+  'Gebruikt op': 'Використано',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Винятки з вимог до участі в курсі, надані вам.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Дані про коди реєстрації, які ви використали для участі в курсі.',
+  'Niet opgenomen in dit overzicht': 'Не включено до цього огляду',
   'AI: functioneert': 'ШІ: працює',
   'AI: wordt gecontroleerd…': 'ШІ: перевірка…',
   'AI: server niet bereikbaar': 'ШІ: сервер недоступний',

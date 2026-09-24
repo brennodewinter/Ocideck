@@ -4,7 +4,7 @@
 // a route, this test goes red — *before* a user hits a broken endpoint.
 //
 // Pinned spec:  test/fixtures/ociserve_openapi.yaml
-// OciServe commit:  d6625dd74139cdcdecc051c74b16df57e65cab54
+// OciServe commit:  b137c0604b3a3d780d5ffe3fb8ae4c296b6f922a
 //
 // Updaten:  zie docs/CHECKS.md → "OciServe contractpoort".
 
@@ -12,9 +12,10 @@ import 'dart:io';
 
 import 'package:yaml/yaml.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/ociserve_privacy_dictionary.dart';
 
 /// The OciServe commit the pinned spec was copied from.
-const pinnedOciServeCommit = '69147a084daf85cc4b573617aaa9f946ec08c841';
+const pinnedOciServeCommit = 'b137c0604b3a3d780d5ffe3fb8ae4c296b6f922a';
 
 /// One route the gateway calls, with the response fields OciDeck reads.
 /// Fields are dot-paths into the JSON response (after $ref resolution).
@@ -103,8 +104,14 @@ const gatewayRoutes = <GatewayRoute>[
   GatewayRoute(
     method: 'GET',
     path: '/api/v1/organizations/{}/me/privacy-data',
-    responseSchema: 'PrivacyData',
-    responseFields: ['participant_id', 'generated_at', 'data'],
+    responseSchema: 'SelfPrivacyDataResponse',
+    responseFields: [
+      'schema_version',
+      'participant_id',
+      'generated_at',
+      'data',
+      'omissions',
+    ],
   ),
   GatewayRoute(
     method: 'POST',
@@ -397,6 +404,28 @@ void main() {
       complete!['headers']['Cache-Control']['schema']['const'],
       'private, no-store',
     );
+  });
+
+  test('privacy-data v2 categories and omission reason stay understood', () {
+    final schemas = spec['components']['schemas'] as Map<String, dynamic>;
+    final response = schemas['SelfPrivacyDataResponse'] as Map<String, dynamic>;
+    final responseProperties = response['properties'] as Map<String, dynamic>;
+    expect(responseProperties['schema_version']['const'], 'privacy-data/v2');
+
+    final omission = schemas['PrivacyDataOmission'] as Map<String, dynamic>;
+    final omissionProperties = omission['properties'] as Map<String, dynamic>;
+    expect(omissionProperties['reason']['enum'], ['third_party_data']);
+
+    final privacyData = schemas['PrivacyData'] as Map<String, dynamic>;
+    final categories = (privacyData['properties'] as Map<String, dynamic>).keys
+        .toSet();
+    expect(
+      categories,
+      ociservePrivacyCategories.keys.toSet(),
+      reason:
+          'Every server-declared privacy category needs an understandable OciDeck group and label',
+    );
+    expect(privacyData['additionalProperties'], true);
   });
 
   group('every gateway route exists in the pinned spec', () {

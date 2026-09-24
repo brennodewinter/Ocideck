@@ -17,9 +17,9 @@ Future<void> _match(
   required bool dark,
   Locale locale = const Locale('nl'),
   TextScaler textScaler = TextScaler.noScaling,
+  Size size = const Size(920, 760),
   String? expandCategory,
 }) async {
-  const size = Size(920, 760);
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
@@ -41,7 +41,7 @@ Future<void> _match(
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       home: MediaQuery(
-        data: const MediaQueryData(
+        data: MediaQueryData(
           size: size,
           disableAnimations: true,
         ).copyWith(textScaler: textScaler),
@@ -53,8 +53,15 @@ Future<void> _match(
               child: OciServeDataAccess(
                 organizationName: 'Voorbeeldorganisatie',
                 data: OciServePrivacyData(
+                  schemaVersion: 'privacy-data/v2',
                   participantId: '00000000-0000-0000-0000-000000000001',
                   generatedAt: DateTime.utc(2026, 9, 9),
+                  omissions: const [
+                    OciServePrivacyOmission(
+                      path: '/data/evidence_uploads/0/uploaded_by_subject',
+                      reason: 'third_party_data',
+                    ),
+                  ],
                   data: const {
                     'participant': {
                       'display_name': 'Voorbeeldcursist',
@@ -62,6 +69,9 @@ Future<void> _match(
                     },
                     'lesson_progress': [
                       {'completed_at': '2026-02-03T12:00:00Z'},
+                    ],
+                    'evidence_uploads': [
+                      {'uploaded_by_subject': null},
                     ],
                     'participant_data_access_history_metadata': {
                       'available_from': '2026-09-01T08:30:00Z',
@@ -90,6 +100,19 @@ Future<void> _match(
   );
   await tester.pump(const Duration(milliseconds: 50));
   if (expandCategory != null) {
+    final scrollable = find
+        .descendant(
+          of: find.byKey(const Key('ociserve-data-access')),
+          matching: find.byType(Scrollable),
+        )
+        .first;
+    final group = find.byKey(
+      Key('data-group-${_dataGroupFor(expandCategory)}'),
+    );
+    await tester.scrollUntilVisible(group, 240, scrollable: scrollable);
+    await tester.pumpAndSettle();
+    await tester.tap(group);
+    await tester.pumpAndSettle();
     final category = find.byKey(Key('data-category-$expandCategory'));
     await tester.ensureVisible(category);
     await tester.pumpAndSettle();
@@ -101,6 +124,31 @@ Future<void> _match(
     matchesGoldenFile('goldens/$name.png'),
   );
 }
+
+String _dataGroupFor(String key) => switch (key) {
+  'participant' || 'accounts' || 'memberships' => 'profile',
+  'enrollments' ||
+  'lesson_progress' ||
+  'playback_sessions' ||
+  'participations' ||
+  'session_bookings' ||
+  'requirement_waivers' ||
+  'voucher_redemptions' => 'learning',
+  'attempts' || 'attempt_items' || 'answers' => 'assessment',
+  'evidence_uploads' ||
+  'qualifications' ||
+  'qualification_events' ||
+  'pe_awards' ||
+  'pe_award_events' ||
+  'certificates' => 'results',
+  'privacy_requests' ||
+  'access_audit_events' ||
+  'participant_data_access_history' ||
+  'participant_data_access_history_metadata' ||
+  'retention_policies' ||
+  'deletion_ledger' => 'privacy',
+  _ => 'other',
+};
 
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));
@@ -117,6 +165,18 @@ void main() {
       name: 'ociserve_data_access_dark',
       dark: true,
       expandCategory: 'participant_data_access_history',
+    );
+  });
+
+  testWidgets('gegevensinzage blijft bruikbaar bij 200 procent tekst', (
+    tester,
+  ) async {
+    await _match(
+      tester,
+      name: 'ociserve_data_access_large_text',
+      dark: false,
+      size: const Size(640, 1000),
+      textScaler: const TextScaler.linear(2),
     );
   });
 }

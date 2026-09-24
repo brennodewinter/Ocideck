@@ -827,6 +827,35 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Sommige waarden zijn niet getoond': 'Some values are not shown',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe hides a value when it also concerns someone else. The relevant field states why the value is missing.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Not shown because this data also concerns someone else',
+  'Niet getoond door de server (reden: {reden})':
+      'Not shown by the server (reason: {reden})',
+  '1 onderdeel': '1 section',
+  '{aantal} onderdelen': '{aantal} sections',
+  'Profiel en organisatie': 'Profile and organization',
+  'Cursussen en deelname': 'Courses and participation',
+  'Toetsen en antwoorden': 'Assessments and answers',
+  'Resultaten en bewijsstukken': 'Results and supporting documents',
+  'Privacy en toegang': 'Privacy and access',
+  'Aanmelden en beveiliging': 'Sign-in and security',
+  'Overige gegevens': 'Other data',
+  'Lege onderdelen verbergen': 'Hide empty sections',
+  '{aantal} lege onderdelen tonen': 'Show {aantal} empty sections',
+  'Uitzonderingen op deelname-eisen':
+      'Exceptions to participation requirements',
+  'Gebruikte inschrijfcodes': 'Enrollment codes used',
+  'Nummer van de deelname-eis': 'Participation requirement number',
+  'Nummer van de inschrijfcode': 'Enrollment code number',
+  'Gebruikt op': 'Used on',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Exceptions made for you to the requirements for participating in a course.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Details of enrollment codes you used to participate in a course.',
+  'Niet opgenomen in dit overzicht': 'Not included in this overview',
   'AI: functioneert': 'AI: working',
   'AI: wordt gecontroleerd…': 'AI: checking…',
   'AI: server niet bereikbaar': 'AI: server unreachable',

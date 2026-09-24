@@ -342,6 +342,20 @@ Future<Finder> _scrollToDataCategory(
   String sourceKey,
 ) async {
   final finder = find.byKey(Key('data-category-$sourceKey'));
+  if (finder.evaluate().isEmpty) {
+    final group = find.byKey(Key('data-group-${_dataGroupFor(sourceKey)}'));
+    final scrollable = find
+        .descendant(
+          of: find.byKey(const Key('ociserve-data-access')),
+          matching: find.byType(Scrollable),
+        )
+        .first;
+    await tester.scrollUntilVisible(group, 250, scrollable: scrollable);
+    await tester.drag(scrollable, const Offset(0, -120));
+    await tester.pumpAndSettle();
+    await tester.tap(group);
+    await tester.pumpAndSettle();
+  }
   await tester.scrollUntilVisible(
     finder,
     250,
@@ -355,6 +369,41 @@ Future<Finder> _scrollToDataCategory(
   await tester.pumpAndSettle();
   return finder;
 }
+
+String _dataGroupFor(String key) => switch (key) {
+  'participant' || 'accounts' || 'memberships' => 'profile',
+  'enrollments' ||
+  'lesson_progress' ||
+  'playback_sessions' ||
+  'participations' ||
+  'session_bookings' ||
+  'requirement_waivers' ||
+  'voucher_redemptions' => 'learning',
+  'attempts' || 'attempt_items' || 'answers' => 'assessment',
+  'evidence_uploads' ||
+  'qualifications' ||
+  'qualification_events' ||
+  'pe_awards' ||
+  'pe_award_events' ||
+  'certificates' => 'results',
+  'privacy_requests' ||
+  'access_audit_events' ||
+  'participant_data_access_history' ||
+  'participant_data_access_history_metadata' ||
+  'retention_policies' ||
+  'deletion_ledger' => 'privacy',
+  'identity_operations' ||
+  'installation_requests' ||
+  'claim_attempts' ||
+  'api_idempotency_requests' ||
+  'installation_audit_events' ||
+  'installation_ownership' ||
+  'access_policy_changes' ||
+  'invitations' ||
+  'email_messages' ||
+  'web_sessions' => 'security',
+  _ => 'other',
+};
 
 Future<void> _actUntil(
   WidgetTester tester,
@@ -1088,7 +1137,7 @@ void main() {
     expect(find.byKey(const Key('ociserve-learning-profile')), findsOneWidget);
   });
 
-  testWidgets('Mijn gegevens toont ook lege en onbekende servercategorieën', (
+  testWidgets('Mijn gegevens groepeert inhoud en verbergt lege onderdelen', (
     tester,
   ) async {
     await _pumpApp(
@@ -1115,6 +1164,15 @@ void main() {
 
     expect(find.byKey(const Key('ociserve-data-access')), findsOneWidget);
     expect(find.text('Uw geregistreerde gegevens'), findsOneWidget);
+    expect(find.text('Profiel en organisatie'), findsOneWidget);
+    expect(find.text('Overige gegevens'), findsNothing);
+    expect(
+      find.byKey(const Key('data-category-future_category')),
+      findsNothing,
+    );
+    await tester.tap(find.byKey(const Key('privacy-data-empty-toggle')));
+    await tester.pumpAndSettle();
+    expect(find.text('Overige gegevens'), findsOneWidget);
     await _scrollToDataCategory(tester, 'future_category');
     expect(find.text('Future category'), findsOneWidget);
     expect(find.text('Geen gegevens geregistreerd'), findsOneWidget);
@@ -1123,6 +1181,100 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('blijft zichtbaar'), findsOneWidget);
     expect(find.textContaining('future_field'), findsOneWidget);
+  });
+
+  testWidgets('Mijn gegevens herkent nieuwe OciServe-onderdelen', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          participantId: 'participant-contract',
+          generatedAt: DateTime.utc(2026, 9, 24),
+          data: const {
+            'memberships': [
+              {'role': 'organization_admin'},
+            ],
+            'session_bookings': [
+              {'status': 'waitlisted'},
+            ],
+            'requirement_waivers': [
+              {
+                'offering_id': 'aanbod-1',
+                'requirement_id': 'eis-1',
+                'reason': null,
+              },
+            ],
+            'voucher_redemptions': [
+              {'voucher_id': 'code-1', 'redeemed_at': '2026-09-24T08:30:00Z'},
+            ],
+          },
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(await _scrollToDataCategory(tester, 'memberships'));
+    await tester.pumpAndSettle();
+    expect(find.text('Organisatiebeheerder'), findsOneWidget);
+
+    await tester.tap(await _scrollToDataCategory(tester, 'session_bookings'));
+    await tester.pumpAndSettle();
+    expect(find.text('Op de wachtlijst'), findsOneWidget);
+
+    await tester.tap(
+      await _scrollToDataCategory(tester, 'requirement_waivers'),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Uitzonderingen op deelname-eisen'), findsOneWidget);
+    expect(find.text('Cursusaanbodnummer'), findsOneWidget);
+    expect(find.text('Nummer van de deelname-eis'), findsOneWidget);
+    expect(find.text('Niet opgenomen in dit overzicht'), findsOneWidget);
+    await _scrollToDataCategory(tester, 'voucher_redemptions');
+    expect(find.text('Gebruikte inschrijfcodes'), findsOneWidget);
+  });
+
+  testWidgets('Mijn gegevens verklaart afgeschermde gegevens op veldniveau', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        _authenticated,
+        privacyData: OciServePrivacyData(
+          schemaVersion: 'privacy-data/v2',
+          participantId: 'participant-omission',
+          generatedAt: DateTime.utc(2026, 9, 24),
+          data: const {
+            'evidence_uploads': [
+              {'uploaded_by_subject': null, 'rejection_reason': null},
+            ],
+          },
+          omissions: const [
+            OciServePrivacyOmission(
+              path: '/data/evidence_uploads/0/uploaded_by_subject',
+              reason: 'third_party_data',
+            ),
+          ],
+        ),
+      ),
+    );
+    await _openCourses(tester);
+    await tester.tap(find.text('Mijn gegevens'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sommige waarden zijn niet getoond'), findsOneWidget);
+    await tester.tap(await _scrollToDataCategory(tester, 'evidence_uploads'));
+    await tester.pumpAndSettle();
+    expect(
+      find.text('Niet getoond omdat dit gegeven ook over iemand anders gaat'),
+      findsOneWidget,
+    );
+    expect(find.text('Niet opgenomen in dit overzicht'), findsOneWidget);
   });
 
   testWidgets('Mijn gegevens herstelt van een laadfout', (tester) async {
@@ -1294,6 +1446,7 @@ void main() {
     await tester.tap(find.text('Mijn gegevens'));
     await tester.pumpAndSettle();
 
+    await _scrollToDataCategory(tester, 'answers');
     expect(find.text('Antwoorden'), findsOneWidget);
     expect(
       find.text('De antwoorden die u bij toetsvragen heeft gegeven.'),
