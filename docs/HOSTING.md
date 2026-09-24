@@ -1,6 +1,6 @@
 # OciDeck — Hosting & Deployment Guide
 
-> **Status:** procedure, current — for whoever serves the web build · **Status last reviewed:** 2026-07-22 · **Published by:** Stichting LibreKAT
+> **Status:** procedure, current — for whoever serves the web build · **Status last reviewed:** 2026-09-24 · **Published by:** Stichting LibreKAT
 
 How to build and serve the OciDeck **web** build safely. The desktop apps are
 built as native binaries and need no hosting; this guide is about the web
@@ -99,7 +99,7 @@ forge (Settings → Actions → Secrets):
 
   ```bash
   ssh-keygen -t ed25519 -f ~/.ssh/ocideck-deploy -C "ocideck-deploy" -N ""
-  ssh-copy-id -i ~/.ssh/ocideck-deploy.pub ubuntu@braniebananie.nl
+  ssh-copy-id -i ~/.ssh/ocideck-deploy.pub ubuntu@vps-7f36cc7e.vps.ovh.net
   ```
 
   Paste the contents of `~/.ssh/ocideck-deploy` (the file **without** `.pub`)
@@ -108,16 +108,16 @@ forge (Settings → Actions → Secrets):
 - **`DEPLOY_KNOWN_HOSTS`** — the host's public key, pinned ahead of time:
 
   ```bash
-  ssh-keyscan -t ed25519 braniebananie.nl
+  ssh-keyscan -t ed25519 vps-7f36cc7e.vps.ovh.net
   ```
 
   Run this from a machine you trust, look at it once, and paste the line.
   The workflow will not run `ssh-keyscan` itself: trusting whatever key answers
   at deploy time is precisely the assumption a man-in-the-middle needs.
 
-The account behind that key needs write access to the web root — on the
-reference deployment it is `ubuntu`, and the web root is owned by `brenno`, so
-the script uses `sudo` for the unpack and swap.
+The account behind that key needs write access to the web root. On the
+reference deployment both the SSH account and deployed files are owned by
+`ubuntu`; the script still uses `sudo` for the atomic unpack and swap.
 
 Missing either secret makes the `deploy-web` job **skip** the live step — it does
 not fail, so a tag produces no red job or failure mail. The release itself still
