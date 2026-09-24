@@ -479,13 +479,7 @@ paths:
           description: Current registered personal data.
           content:
             application/json:
-              schema:
-                type: object
-                required: [participant_id, generated_at, data]
-                properties:
-                  participant_id: { type: string, format: uuid }
-                  generated_at: { type: string, format: date-time }
-                  data: { type: object, additionalProperties: true }
+              schema: { $ref: '#/components/schemas/SelfPrivacyDataResponse' }
         "403": { $ref: '#/components/responses/ProblemResponse' }
         "404": { $ref: '#/components/responses/ProblemResponse' }
 
@@ -7082,6 +7076,53 @@ paths:
         "403": { $ref: '#/components/responses/ProblemResponse' }
         "404": { $ref: '#/components/responses/ProblemResponse' }
 
+  /api/v1/organizations/{organization_id}/course-offerings/{offering_id}:
+    get:
+      tags: [Planning]
+      summary: Get one course offering
+      description: The ETag header is required for If-Match on PATCH.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: The offering.
+          headers:
+            ETag: { schema: { type: string }, description: Strong entity tag for optimistic concurrency. }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CourseOfferingResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+    patch:
+      tags: [Planning]
+      summary: Modify an offering's enrollment policy or status
+      description: Merge-patch semantics — explicit null clears a nullable field. Status only moves forward through draft → open → closed → archived; a backward move answers 409. Every applied change is audited.
+      parameters:
+        - { name: organization_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: offering_id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CourseOfferingPatchRequest' }
+      responses:
+        "200":
+          description: The updated offering.
+          headers:
+            ETag: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CourseOfferingResponse' }
+        "400": { $ref: '#/components/responses/ProblemResponse' }
+        "401": { $ref: '#/components/responses/ProblemResponse' }
+        "403": { $ref: '#/components/responses/ProblemResponse' }
+        "404": { $ref: '#/components/responses/ProblemResponse' }
+        "409": { $ref: '#/components/responses/ProblemResponse' }
+        "412": { $ref: '#/components/responses/ProblemResponse' }
+
   /api/v1/organizations/{organization_id}/course-offerings/{offering_id}/sessions:
     get:
       tags: [Planning]
@@ -8267,6 +8308,498 @@ paths:
 
 components:
   schemas:
+    SelfPrivacyDataResponse:
+      type: object
+      additionalProperties: false
+      required: [schema_version, participant_id, generated_at, data, omissions]
+      properties:
+        schema_version: { type: string, const: privacy-data/v2 }
+        participant_id: { type: string, format: uuid }
+        generated_at: { type: string, format: date-time }
+        data: { $ref: '#/components/schemas/PrivacyData' }
+        omissions:
+          type: array
+          items: { $ref: '#/components/schemas/PrivacyDataOmission' }
+    PrivacyDataOmission:
+      type: object
+      additionalProperties: false
+      required: [path, reason]
+      properties:
+        path:
+          type: string
+          pattern: '^/data/'
+          description: RFC 6901 JSON Pointer to an existing null field in data.
+        reason:
+          type: string
+          enum: [third_party_data]
+    PrivacyData:
+      type: object
+      description: |
+        Known personal-data categories. Additional categories and fields remain
+        allowed so older clients never silently discard newly exported data.
+      additionalProperties: true
+      required: [participant]
+      properties:
+        participant: { $ref: '#/components/schemas/PrivacyParticipant' }
+        participant_data_access_history_metadata: { $ref: '#/components/schemas/PrivacyAccessHistoryMetadata' }
+        accounts: { type: array, items: { $ref: '#/components/schemas/PrivacyAccount' } }
+        memberships: { type: array, items: { $ref: '#/components/schemas/PrivacyMembership' } }
+        enrollments: { type: array, items: { $ref: '#/components/schemas/PrivacyEnrollment' } }
+        lesson_progress: { type: array, items: { $ref: '#/components/schemas/PrivacyLessonProgress' } }
+        playback_sessions: { type: array, items: { $ref: '#/components/schemas/PrivacyPlaybackSession' } }
+        attempts: { type: array, items: { $ref: '#/components/schemas/PrivacyAttempt' } }
+        attempt_items: { type: array, items: { $ref: '#/components/schemas/PrivacyAttemptItem' } }
+        answers: { type: array, items: { $ref: '#/components/schemas/PrivacyAnswer' } }
+        evidence_uploads: { type: array, items: { $ref: '#/components/schemas/PrivacyEvidenceUpload' } }
+        qualifications: { type: array, items: { $ref: '#/components/schemas/PrivacyQualification' } }
+        qualification_events: { type: array, items: { $ref: '#/components/schemas/PrivacyQualificationEvent' } }
+        participations: { type: array, items: { $ref: '#/components/schemas/PrivacyParticipation' } }
+        session_bookings: { type: array, items: { $ref: '#/components/schemas/PrivacySessionBooking' } }
+        requirement_waivers: { type: array, items: { $ref: '#/components/schemas/PrivacyRequirementWaiver' } }
+        voucher_redemptions: { type: array, items: { $ref: '#/components/schemas/PrivacyVoucherRedemption' } }
+        pe_awards: { type: array, items: { $ref: '#/components/schemas/PrivacyPEAward' } }
+        pe_award_events: { type: array, items: { $ref: '#/components/schemas/PrivacyPEAwardEvent' } }
+        certificates: { type: array, items: { $ref: '#/components/schemas/PrivacyCertificate' } }
+        privacy_requests: { type: array, items: { $ref: '#/components/schemas/PrivacyRequestRecord' } }
+        access_audit_events: { type: array, items: { $ref: '#/components/schemas/PrivacyAccessAuditEvent' } }
+        participant_data_access_history: { type: array, items: { $ref: '#/components/schemas/PrivacyAccessHistoryEvent' } }
+        identity_operations: { type: array, items: { $ref: '#/components/schemas/PrivacyIdentityOperation' } }
+        installation_requests: { type: array, items: { $ref: '#/components/schemas/PrivacyInstallationRequest' } }
+        claim_attempts: { type: array, items: { $ref: '#/components/schemas/PrivacyClaimAttempt' } }
+        api_idempotency_requests: { type: array, items: { $ref: '#/components/schemas/PrivacyAPIIdempotencyRequest' } }
+        installation_audit_events: { type: array, items: { $ref: '#/components/schemas/PrivacyInstallationAuditEvent' } }
+        installation_ownership: { type: array, items: { $ref: '#/components/schemas/PrivacyInstallationOwnership' } }
+        access_policy_changes: { type: array, items: { $ref: '#/components/schemas/PrivacyAccessPolicyChange' } }
+        invitations: { type: array, items: { $ref: '#/components/schemas/PrivacyInvitation' } }
+        email_messages: { type: array, items: { $ref: '#/components/schemas/PrivacyEmailMessage' } }
+        web_sessions: { type: array, items: { $ref: '#/components/schemas/PrivacyWebSession' } }
+        retention_policies: { type: array, items: { $ref: '#/components/schemas/PrivacyRetentionPolicy' } }
+        deletion_ledger: { type: array, items: { $ref: '#/components/schemas/PrivacyDeletionLedgerEntry' } }
+    PrivacyParticipant:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        display_name: { type: string }
+        account_id: { type: [string, 'null'], format: uuid }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    PrivacyAccessHistoryMetadata:
+      type: object
+      additionalProperties: true
+      properties:
+        available_from: { type: string, format: date-time }
+        earlier_history: { type: string, enum: [not_available] }
+    PrivacyAccount:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        oidc_subject: { type: string }
+        oidc_issuer: { type: string, format: uri }
+        display_name: { type: string }
+        email: { type: [string, 'null'], format: email }
+        avatar_blob_hash: { type: [string, 'null'] }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    PrivacyMembership:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        organization_id: { type: string, format: uuid }
+        account_id: { type: string, format: uuid }
+        role: { type: string, enum: [owner, instructor, author, assessor, examiner, participant, organization_admin] }
+        status: { type: string, enum: [active, suspended, revoked] }
+        created_at: { type: string, format: date-time }
+    PrivacyEnrollment:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        course_version_id: { type: string, format: uuid }
+        course_offering_id: { type: [string, 'null'], format: uuid }
+        status: { type: string, enum: [active, completed, withdrawn] }
+        enrollment_source: { type: string, enum: [self, staff] }
+        version_policy: { type: string, enum: [pinned, follow_latest, manual_upgrade] }
+        enrolled_at: { type: string, format: date-time }
+    PrivacyLessonProgress:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        course_version_id: { type: string, format: uuid }
+        lesson_id: { type: string }
+        completed_at: { type: [string, 'null'], format: date-time }
+        completion_source: { type: [string, 'null'], enum: [self_report, attendance, null] }
+        source_id: { type: [string, 'null'] }
+        revoked_at: { type: [string, 'null'], format: date-time }
+        revocation_reason: { type: [string, 'null'] }
+    PrivacyPlaybackSession:
+      type: object
+      additionalProperties: true
+      properties:
+        client_session_id: { type: string, format: uuid }
+        course_version_id: { type: string, format: uuid }
+        lesson_id: { type: string }
+        started_at: { type: string, format: date-time }
+        ended_at: { type: [string, 'null'], format: date-time }
+        last_slide_anchor: { type: [string, 'null'] }
+        completed: { type: boolean }
+        slide_milliseconds: { type: object, additionalProperties: true }
+        updated_at: { type: string, format: date-time }
+    PrivacyAttempt:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        blueprint_version_id: { type: string, format: uuid }
+        status: { type: string, enum: [in_progress, paused, invalidated, submitted, scored, released] }
+        started_at: { type: string, format: date-time }
+        deadline_at: { type: [string, 'null'], format: date-time }
+        submitted_at: { type: [string, 'null'], format: date-time }
+        scored_at: { type: [string, 'null'], format: date-time }
+        released_at: { type: [string, 'null'], format: date-time }
+        score: { type: [object, 'null'], additionalProperties: true }
+        created_at: { type: string, format: date-time }
+    PrivacyAttemptItem:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        attempt_id: { type: string, format: uuid }
+        item_version_id: { type: string, format: uuid }
+        position: { type: integer }
+        content: { type: object, additionalProperties: true }
+        option_order: { type: [array, 'null'], items: {} }
+        randomization_context: { type: [object, 'null'], additionalProperties: true }
+    PrivacyAnswer:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        attempt_id: { type: string, format: uuid }
+        attempt_item_id: { type: string, format: uuid }
+        answer_data: { type: object, additionalProperties: true }
+        client_request_id: { type: string }
+        revision: { type: integer }
+        created_at: { type: string, format: date-time }
+    PrivacyEvidenceUpload:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        uploaded_by_subject: { type: [string, 'null'], format: uuid }
+        filename: { type: string }
+        declared_type: { type: string }
+        declared_size: { type: integer }
+        declared_hash: { type: [string, 'null'] }
+        blob_hash: { type: [string, 'null'] }
+        blob_size: { type: [integer, 'null'] }
+        status: { type: string, enum: [pending, uploaded, clean, rejected, failed] }
+        rejection_reason: { type: [string, 'null'] }
+        verification_attempts: { type: integer }
+        max_verification_attempts: { type: integer }
+        claimed_at: { type: [string, 'null'], format: date-time }
+        next_attempt_at: { type: [string, 'null'], format: date-time }
+        created_at: { type: string, format: date-time }
+        completed_at: { type: [string, 'null'], format: date-time }
+        verified_at: { type: [string, 'null'], format: date-time }
+    PrivacyQualification:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        skill_version_id: { type: string, format: uuid }
+        status: { type: string, enum: [pending, approved, rejected, revoked] }
+        issued_at: { type: [string, 'null'], format: date-time }
+        expires_at: { type: [string, 'null'], format: date-time }
+        snapshot: { type: object, additionalProperties: true }
+        created_at: { type: string, format: date-time }
+    PrivacyQualificationEvent:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        qualification_id: { type: string, format: uuid }
+        event_type: { type: string, enum: [created, approved, rejected, revoked] }
+        reason: { type: string }
+        evidence_hashes: { type: array, items: { type: string } }
+        created_at: { type: string, format: date-time }
+    PrivacyParticipation:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        type: { type: string, enum: [physical, online, manual] }
+        activity_id: { type: string }
+        activity_label: { type: string }
+        minutes: { type: integer }
+        confirmed: { type: boolean }
+        confirmed_at: { type: [string, 'null'], format: date-time }
+        confirmation_reason: { type: [string, 'null'] }
+        training_session_id: { type: [string, 'null'], format: uuid }
+        enrollment_id: { type: [string, 'null'], format: uuid }
+        attendance_kind: { type: [string, 'null'], enum: [full, partial, absent, null] }
+        created_at: { type: string, format: date-time }
+    PrivacySessionBooking:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        session_id: { type: string, format: uuid }
+        enrollment_id: { type: string, format: uuid }
+        status: { type: string, enum: [booked, waitlisted, offered, cancelled, no_show, attended] }
+        booked_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        lesson_id: { type: string }
+        session_title: { type: string }
+        starts_at: { type: string, format: date-time }
+        ends_at: { type: string, format: date-time }
+        timezone: { type: string }
+        location: { type: string }
+        session_status: { type: string, enum: [scheduled, cancelled, completed] }
+    PrivacyRequirementWaiver:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        offering_id: { type: string, format: uuid }
+        requirement_id: { type: string, format: uuid }
+        reason: { type: string }
+        expires_at: { type: [string, 'null'], format: date-time }
+        created_at: { type: string, format: date-time }
+    PrivacyVoucherRedemption:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        voucher_id: { type: string, format: uuid }
+        enrollment_id: { type: string, format: uuid }
+        redeemed_at: { type: string, format: date-time }
+    PrivacyPEAward:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        participation_id: { type: string, format: uuid }
+        pe_rule_version_id: { type: string, format: uuid }
+        points: { type: number }
+        status: { type: string, enum: [active, corrected, revoked] }
+        idempotency_key: { type: string }
+        calculated_at: { type: [string, 'null'], format: date-time }
+        created_at: { type: string, format: date-time }
+    PrivacyPEAwardEvent:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        pe_award_id: { type: string, format: uuid }
+        event_type: { type: string, enum: [created, corrected, revoked] }
+        reason: { type: string }
+        created_at: { type: string, format: date-time }
+    PrivacyCertificate:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        qualification_id: { type: [string, 'null'], format: uuid }
+        pe_award_id: { type: [string, 'null'], format: uuid }
+        title: { type: string }
+        description: { type: string }
+        certificate_number: { type: string }
+        pdf_blob_key: { type: [string, 'null'] }
+        pdf_blob_hash: { type: [string, 'null'] }
+        decision_snapshot: { type: object, additionalProperties: true }
+        status: { type: string, enum: [issued, revoked] }
+        issued_at: { type: [string, 'null'], format: date-time }
+        revoked_at: { type: [string, 'null'], format: date-time }
+        revocation_reason: { type: [string, 'null'] }
+        created_at: { type: string, format: date-time }
+    PrivacyRequestRecord:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        request_type: { type: string, enum: [export, delete, anonymize] }
+        status: { type: string, enum: [pending, in_progress, completed, failed] }
+        requested_by_subject: { type: [string, 'null'], format: uuid }
+        completed_at: { type: [string, 'null'], format: date-time }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    PrivacyAccessAuditEvent:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        actor_account_id: { type: [string, 'null'], format: uuid }
+        target_account_id: { type: [string, 'null'], format: uuid }
+        target_participant_id: { type: [string, 'null'], format: uuid }
+        action: { type: string }
+        result: { type: string, enum: [success, denied, error] }
+        request_id: { type: string }
+        policy_version: { type: integer }
+        identity_op_id: { type: [string, 'null'], format: uuid }
+        step_up_level: { type: string, enum: [none, phr, phrh] }
+        provider_result: { type: string, enum: ['', pending, succeeded, failed, unavailable] }
+        detail: { type: string }
+        authentication_time: { type: [string, 'null'], format: date-time }
+        created_at: { type: string, format: date-time }
+        retain_until: { type: string, format: date-time }
+    PrivacyAccessHistoryEvent:
+      type: object
+      additionalProperties: true
+      properties:
+        time: { type: string, format: date-time }
+        operation: { type: string, enum: [viewed, edited] }
+        data_category: { type: string }
+        purpose: { type: string, enum: [data_subject_access, assessment_and_certification, learning_delivery, learner_administration] }
+        actor_type: { type: string, enum: [self, system, staff] }
+        actor_role: { type: string }
+        retain_until: { type: string, format: date-time }
+    PrivacyIdentityOperation:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        subject_account_id: { type: [string, 'null'], format: uuid }
+        actor_account_id: { type: [string, 'null'], format: uuid }
+        op_type: { type: string, enum: [prepare_identity, set_account_active, revoke_sessions, start_recovery, delete_unactivated_identity] }
+        subject_payload: { type: [object, 'null'], additionalProperties: true }
+        status: { type: string, enum: [pending, running, succeeded, failed_retryable, failed_final] }
+        attempt: { type: integer }
+        max_attempts: { type: integer }
+        provider_op_id: { type: [string, 'null'] }
+        last_error: { type: [string, 'null'] }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        retain_until: { type: string, format: date-time }
+    PrivacyInstallationRequest:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        response_status: { type: integer }
+        response_location: { type: string }
+        organization_id: { type: [string, 'null'], format: uuid }
+        account_id: { type: [string, 'null'], format: uuid }
+        created_at: { type: string, format: date-time }
+        expires_at: { type: string, format: date-time }
+    PrivacyClaimAttempt:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        challenge_id: { type: string }
+        result: { type: string, enum: [success, failed_code, failed_stepup, failed_state, failed_rate_limit, failed_conflict, lockout, error] }
+        attempted_at: { type: string, format: date-time }
+    PrivacyAPIIdempotencyRequest:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        response_status: { type: integer }
+        response_location: { type: string }
+        expires_at: { type: string, format: date-time }
+        created_at: { type: string, format: date-time }
+    PrivacyInstallationAuditEvent:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        seq: { type: integer }
+        action: { type: string }
+        object: { type: string }
+        result: { type: string }
+        request_id: { type: string }
+        remote_addr: { type: string }
+        created_at: { type: string, format: date-time }
+    PrivacyInstallationOwnership:
+      type: object
+      additionalProperties: true
+      properties:
+        singleton_id: { type: integer, const: 1 }
+        state: { type: string, enum: [uninitialized, claimable, initialized] }
+        canonical_origin: { type: string }
+        organization_id: { type: [string, 'null'], format: uuid }
+        initialized_at: { type: [string, 'null'], format: date-time }
+        revision: { type: integer }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    PrivacyAccessPolicyChange:
+      type: object
+      additionalProperties: true
+      properties:
+        organization_id: { type: string, format: uuid }
+        required_acr: { type: string }
+        required_amr: { type: array, items: { type: string } }
+        max_auth_age: { type: integer }
+        strict_mode: { type: boolean }
+        updated_at: { type: string, format: date-time }
+    PrivacyInvitation:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        invited_email: { type: string, format: email }
+        role: { type: string, enum: [owner, instructor, author, assessor, examiner, participant, organization_admin] }
+        status: { type: string, enum: [pending, accepted, expired, revoked, delivery_failed] }
+        expires_at: { type: string, format: date-time }
+        max_attempts: { type: integer }
+        attempts: { type: integer }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+        accepted_at: { type: [string, 'null'], format: date-time }
+        accepted_account_id: { type: [string, 'null'], format: uuid }
+    PrivacyEmailMessage:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        to_address: { type: string, format: email }
+        subject: { type: string }
+        body: { type: string }
+        status: { type: string, enum: [pending, claimed, sent, failed] }
+        attempts: { type: integer }
+        max_attempts: { type: integer }
+        last_error: { type: [string, 'null'] }
+        claimed_at: { type: [string, 'null'], format: date-time }
+        sent_at: { type: [string, 'null'], format: date-time }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    PrivacyWebSession:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        oidc_issuer: { type: string, format: uri }
+        oidc_subject: { type: string }
+        created_at: { type: string, format: date-time }
+        last_active_at: { type: string, format: date-time }
+        idle_expires_at: { type: string, format: date-time }
+        absolute_expires_at: { type: string, format: date-time }
+        revoked_at: { type: [string, 'null'], format: date-time }
+    PrivacyRetentionPolicy:
+      type: object
+      additionalProperties: true
+      properties:
+        category: { type: string }
+        retention_period: { type: string }
+        ground: { type: string }
+        action_on_expiry: { type: string, enum: [delete, anonymize, archive] }
+        legal_hold: { type: boolean }
+        legal_hold_reason: { type: string }
+        updated_at: { type: string, format: date-time }
+    PrivacyDeletionLedgerEntry:
+      type: object
+      additionalProperties: true
+      properties:
+        id: { type: string, format: uuid }
+        table_name: { type: string }
+        subject_record_id: { type: [string, 'null'] }
+        deleted_at: { type: string, format: date-time }
+        reason: { type: string }
+        actor_account_id_subject: { type: [string, 'null'], format: uuid }
     SecurePlaybackGrant:
       type: object
       additionalProperties: false
@@ -8474,6 +9007,10 @@ components:
           type: boolean
           default: false
           description: When true, every registration must redeem a valid voucher code.
+        status:
+          type: string
+          enum: [draft, open]
+          description: An offering may start as draft to prepare it before publication; defaults to open.
         enrollment_opens_at: { type: string, format: date-time, nullable: true }
         enrollment_closes_at: { type: string, format: date-time, nullable: true }
         cancellation_notice_hours:
@@ -8519,6 +9056,33 @@ components:
           type: array
           items: { $ref: '#/components/schemas/CourseOfferingResponse' }
         next_cursor: { type: string }
+
+    CourseOfferingPatchRequest:
+      type: object
+      description: Merge-patch. Absent keys stay unchanged; explicit null clears the nullable fields.
+      properties:
+        name: { type: string, minLength: 1 }
+        image_hash:
+          type: string
+          nullable: true
+          pattern: '^[0-9a-f]{64}$'
+          description: Organization-owned PNG, JPEG, or WebP image; explicit null detaches it.
+        self_enrollment_enabled: { type: boolean }
+        voucher_required:
+          type: boolean
+          description: When true, every registration must redeem a valid voucher code.
+        status:
+          type: string
+          enum: [draft, open, closed, archived]
+          description: Only forward through the lifecycle draft → open → closed → archived.
+        enrollment_opens_at: { type: string, format: date-time, nullable: true }
+        enrollment_closes_at: { type: string, format: date-time, nullable: true }
+        cancellation_notice_hours:
+          type: integer
+          minimum: 0
+          nullable: true
+          description: Self-cancellation is refused within this many hours before the session; explicit null lifts the restriction.
+        max_self_enrollments_per_participant: { type: integer, minimum: 1 }
 
     TrainingSessionCreateRequest:
       type: object
@@ -9067,11 +9631,12 @@ components:
 
     SessionRosterEntry:
       type: object
-      required: [participant_id, display_name, booking_status, minutes, confirmed, lesson_completed]
+      required: [booking_id, participant_id, display_name, booking_status, minutes, confirmed, lesson_completed]
       properties:
+        booking_id: { type: string, format: uuid }
         participant_id: { type: string, format: uuid }
         display_name: { type: string }
-        booking_status: { type: string, enum: [booked, waitlisted, cancelled] }
+        booking_status: { type: string, enum: [booked, waitlisted, offered, cancelled] }
         attendance_kind: { type: string, enum: [full, partial, absent] }
         minutes: { type: integer, minimum: 0 }
         confirmed: { type: boolean }
