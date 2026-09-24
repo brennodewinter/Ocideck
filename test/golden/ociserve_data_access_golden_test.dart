@@ -90,6 +90,22 @@ Future<void> _match(
   );
   await tester.pump(const Duration(milliseconds: 50));
   if (expandCategory != null) {
+    final group = find.byKey(
+      Key('data-group-${_dataGroupFor(expandCategory)}'),
+    );
+    await tester.ensureVisible(group);
+    await tester.drag(
+      find
+          .descendant(
+            of: find.byKey(const Key('ociserve-data-access')),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+      const Offset(0, -100),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(group);
+    await tester.pumpAndSettle();
     final category = find.byKey(Key('data-category-$expandCategory'));
     await tester.ensureVisible(category);
     await tester.pumpAndSettle();
@@ -101,6 +117,31 @@ Future<void> _match(
     matchesGoldenFile('goldens/$name.png'),
   );
 }
+
+String _dataGroupFor(String key) => switch (key) {
+  'participant' || 'accounts' || 'memberships' => 'profile',
+  'enrollments' ||
+  'lesson_progress' ||
+  'playback_sessions' ||
+  'participations' ||
+  'session_bookings' ||
+  'requirement_waivers' ||
+  'voucher_redemptions' => 'learning',
+  'attempts' || 'attempt_items' || 'answers' => 'assessment',
+  'evidence_uploads' ||
+  'qualifications' ||
+  'qualification_events' ||
+  'pe_awards' ||
+  'pe_award_events' ||
+  'certificates' => 'results',
+  'privacy_requests' ||
+  'access_audit_events' ||
+  'participant_data_access_history' ||
+  'participant_data_access_history_metadata' ||
+  'retention_policies' ||
+  'deletion_ledger' => 'privacy',
+  _ => 'other',
+};
 
 void main() {
   setUp(() => AppLocalizations.setActiveLanguageCode('nl'));

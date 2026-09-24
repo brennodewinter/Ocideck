@@ -1629,6 +1629,27 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  '1 onderdeel': '1 szakasz',
+  '{aantal} onderdelen': '{aantal} szakasz',
+  'Profiel en organisatie': 'Profil és szervezet',
+  'Cursussen en deelname': 'Tanfolyamok és részvétel',
+  'Toetsen en antwoorden': 'Tesztfeladatok és válaszok',
+  'Resultaten en bewijsstukken': 'Eredmények és igazoló dokumentumok',
+  'Privacy en toegang': 'Adatvédelem és hozzáférés',
+  'Aanmelden en beveiliging': 'Bejelentkezés és biztonság',
+  'Overige gegevens': 'Egyéb adatok',
+  'Lege onderdelen verbergen': 'Üres szakaszok elrejtése',
+  '{aantal} lege onderdelen tonen': '{aantal} üres szakasz megjelenítése',
+  'Uitzonderingen op deelname-eisen': 'Kivételek a részvételi feltételek alól',
+  'Gebruikte inschrijfcodes': 'Felhasznált jelentkezési kódok',
+  'Nummer van de deelname-eis': 'Részvételi feltétel száma',
+  'Nummer van de inschrijfcode': 'Jelentkezési kód száma',
+  'Gebruikt op': 'Felhasználva:',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Az Ön számára engedélyezett kivételek a tanfolyamon való részvétel feltételei alól.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Az Ön által tanfolyami részvételhez használt jelentkezési kódok adatai.',
+  'Niet opgenomen in dit overzicht': 'Nem szerepel ebben az áttekintésben',
   'AI: functioneert': 'AI: működik',
   'AI: wordt gecontroleerd…': 'AI: ellenőrzés…',
   'AI: server niet bereikbaar': 'AI: a kiszolgáló nem érhető el',

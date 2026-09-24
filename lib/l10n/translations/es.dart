@@ -664,6 +664,28 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  '1 onderdeel': '1 sección',
+  '{aantal} onderdelen': '{aantal} secciones',
+  'Profiel en organisatie': 'Perfil y organización',
+  'Cursussen en deelname': 'Cursos y participación',
+  'Toetsen en antwoorden': 'Evaluaciones y respuestas',
+  'Resultaten en bewijsstukken': 'Resultados y documentos justificativos',
+  'Privacy en toegang': 'Privacidad y acceso',
+  'Aanmelden en beveiliging': 'Inicio de sesión y seguridad',
+  'Overige gegevens': 'Otros datos',
+  'Lege onderdelen verbergen': 'Ocultar secciones vacías',
+  '{aantal} lege onderdelen tonen': 'Mostrar {aantal} secciones vacías',
+  'Uitzonderingen op deelname-eisen':
+      'Excepciones a los requisitos de participación',
+  'Gebruikte inschrijfcodes': 'Códigos de inscripción utilizados',
+  'Nummer van de deelname-eis': 'Número del requisito de participación',
+  'Nummer van de inschrijfcode': 'Número del código de inscripción',
+  'Gebruikt op': 'Utilizado el',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Excepciones concedidas para usted a los requisitos de participación en un curso.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Datos sobre los códigos de inscripción que utilizó para participar en un curso.',
+  'Niet opgenomen in dit overzicht': 'No incluido en este resumen',
   'AI: functioneert': 'IA: funciona',
   'AI: wordt gecontroleerd…': 'IA: comprobando…',
   'AI: server niet bereikbaar': 'IA: servidor inaccesible',

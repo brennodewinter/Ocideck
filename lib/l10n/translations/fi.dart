@@ -1627,6 +1627,27 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '1 onderdeel': '1 osio',
+  '{aantal} onderdelen': '{aantal} osiota',
+  'Profiel en organisatie': 'Profiili ja organisaatio',
+  'Cursussen en deelname': 'Kurssit ja osallistuminen',
+  'Toetsen en antwoorden': 'Kokeet ja vastaukset',
+  'Resultaten en bewijsstukken': 'Tulokset ja todistusaineisto',
+  'Privacy en toegang': 'Yksityisyys ja pääsy',
+  'Aanmelden en beveiliging': 'Kirjautuminen ja turvallisuus',
+  'Overige gegevens': 'Muut tiedot',
+  'Lege onderdelen verbergen': 'Piilota tyhjät osiot',
+  '{aantal} lege onderdelen tonen': 'Näytä {aantal} tyhjää osiota',
+  'Uitzonderingen op deelname-eisen': 'Poikkeukset osallistumisvaatimuksista',
+  'Gebruikte inschrijfcodes': 'Käytetyt ilmoittautumiskoodit',
+  'Nummer van de deelname-eis': 'Osallistumisvaatimuksen numero',
+  'Nummer van de inschrijfcode': 'Ilmoittautumiskoodin numero',
+  'Gebruikt op': 'Käytetty',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Sinulle myönnetyt poikkeukset kurssille osallistumisen vaatimuksista.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Tiedot ilmoittautumiskoodeista, joita käytit kurssille osallistumiseen.',
+  'Niet opgenomen in dit overzicht': 'Ei sisälly tähän yhteenvetoon',
   'AI: functioneert': 'AI: toimii',
   'AI: wordt gecontroleerd…': 'AI: tarkistetaan…',
   'AI: server niet bereikbaar': 'AI: palvelin ei tavoitettavissa',

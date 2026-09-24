@@ -666,6 +666,28 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '1 onderdeel': '1 parti',
+  '{aantal} onderdelen': '{aantal} parti',
+  'Profiel en organisatie': 'Profíl i organisashon',
+  'Cursussen en deelname': 'Kurso i partisipashon',
+  'Toetsen en antwoorden': 'Prueba i kontesta',
+  'Resultaten en bewijsstukken': 'Resultado i dokumentonan di prueba',
+  'Privacy en toegang': 'Privasidat i akseso',
+  'Aanmelden en beveiliging': 'Login i siguridat',
+  'Overige gegevens': 'Otro dato',
+  'Lege onderdelen verbergen': 'Skonde partinan bashí',
+  '{aantal} lege onderdelen tonen': 'Mustra {aantal} parti bashí',
+  'Uitzonderingen op deelname-eisen':
+      'Eksepshonnan riba eksigensianan di partisipashon',
+  'Gebruikte inschrijfcodes': 'Kódigonan di inskripshon usá',
+  'Nummer van de deelname-eis': 'Number di eksigensia di partisipashon',
+  'Nummer van de inschrijfcode': 'Number di kódigo di inskripshon',
+  'Gebruikt op': 'Usá riba',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Eksepshonnan ku a hasi pa bo riba e eksigensianan pa partisipá na un kurso.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Dato tokante kódigonan di inskripshon ku bo a usa pa partisipá na un kurso.',
+  'Niet opgenomen in dit overzicht': 'No inkluí den e resúmen aki',
   'AI: functioneert': 'AI: ta funshoná',
   'AI: wordt gecontroleerd…': 'AI: ta kontrolando…',
   'AI: server niet bereikbaar': 'AI: sirbidó no alkanzabel',

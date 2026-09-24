@@ -4823,14 +4823,22 @@ not evidence of attention, active study time, learning or mastery.
 
 From **Mijn cursussen**, select **Mijn gegevens** in the sidebar. In a narrow
 window, first open **Mijn voortgang** and then select **Bekijk mijn gegevens**.
-OciDeck retrieves a current overview for the selected organisation and shows
-every category and field supplied by its eLearning server. Categories are
-collapsed until you open them, and long lists appear in batches of 50 records.
+OciDeck retrieves a current overview for the selected organisation. Known
+server categories are gathered under understandable topics, such as profile
+and organisation, courses and participation, results and evidence, privacy and
+access, and sign-in and security. The categories and their records stay closed
+until you open them; long lists appear in batches of 50 records. Empty
+categories are hidden by default to keep the overview useful. If there are any,
+select **Toon lege onderdelen** to inspect them too.
+
 Known categories have a plain-language name and a short description of the
-kind of information they contain. Common field names, dates, yes/no values and
-audit terms are translated into readable labels and values. Open **Begrippen
-uitgelegd** for the meaning of a category, a registration and an ID, and for an
-explanation of the displayed dates and technical names.
+kind of information they contain. Known field names, dates, yes/no values,
+audit terms and recognised coded values are shown as readable labels and
+values. A `null` value is neutrally displayed as
+**Niet opgenomen in dit overzicht**: it does not say whether the information is
+absent, unavailable, or otherwise not registered. Open **Begrippen uitgelegd**
+for the meaning of a category, a registration and an ID, and for an explanation
+of the displayed dates and technical names. *(Updated 2026-09-24.)*
 
 Nested objects and lists are shown as labelled fields and numbered parts rather
 than as a JSON block. The generic viewer still shows categories and fields
@@ -4861,8 +4869,9 @@ own access is clearly distinguished from staff access. The overview also states
 since when this recording is available; earlier access cannot be reconstructed
 after the fact.
 
-The overview is a way to inspect the registered values, not by itself a complete
-response to every GDPR access requirement. Ask the selected organisation about
+The overview is a way to inspect the values supplied for it, not a complete GDPR
+access response. It does not establish that the server supplied all personal
+data or fulfil every access requirement. Ask the selected organisation about
 processing purposes, recipients, sources, retention periods, any further review
 of the person who acted, and your other privacy rights.
 

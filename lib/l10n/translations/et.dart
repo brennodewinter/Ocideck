@@ -1620,6 +1620,27 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  '1 onderdeel': '1 jaotis',
+  '{aantal} onderdelen': '{aantal} jaotist',
+  'Profiel en organisatie': 'Profiil ja organisatsioon',
+  'Cursussen en deelname': 'Kursused ja osalemine',
+  'Toetsen en antwoorden': 'Testid ja vastused',
+  'Resultaten en bewijsstukken': 'Tulemused ja tõendusdokumendid',
+  'Privacy en toegang': 'Privaatsus ja juurdepääs',
+  'Aanmelden en beveiliging': 'Sisselogimine ja turvalisus',
+  'Overige gegevens': 'Muud andmed',
+  'Lege onderdelen verbergen': 'Peida tühjad jaotised',
+  '{aantal} lege onderdelen tonen': 'Kuva {aantal} tühja jaotist',
+  'Uitzonderingen op deelname-eisen': 'Erandid osalemisnõuetest',
+  'Gebruikte inschrijfcodes': 'Kasutatud registreerimiskoodid',
+  'Nummer van de deelname-eis': 'Osalemisnõude number',
+  'Nummer van de inschrijfcode': 'Registreerimiskoodi number',
+  'Gebruikt op': 'Kasutatud',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Sulle tehtud erandid kursusel osalemise nõuetest.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Andmed registreerimiskoodide kohta, mida kasutasid kursusel osalemiseks.',
+  'Niet opgenomen in dit overzicht': 'Ei sisaldu selles ülevaates',
   'AI: functioneert': 'AI: töötab',
   'AI: wordt gecontroleerd…': 'AI: kontrollimine…',
   'AI: server niet bereikbaar': 'AI: server ei ole kättesaadav',

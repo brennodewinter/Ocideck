@@ -1626,6 +1626,27 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  '1 onderdeel': '1 avsnitt',
+  '{aantal} onderdelen': '{aantal} avsnitt',
+  'Profiel en organisatie': 'Profil och organisation',
+  'Cursussen en deelname': 'Kurser och deltagande',
+  'Toetsen en antwoorden': 'Prov och svar',
+  'Resultaten en bewijsstukken': 'Resultat och intyg',
+  'Privacy en toegang': 'Integritet och åtkomst',
+  'Aanmelden en beveiliging': 'Inloggning och säkerhet',
+  'Overige gegevens': 'Övriga uppgifter',
+  'Lege onderdelen verbergen': 'Dölj tomma avsnitt',
+  '{aantal} lege onderdelen tonen': 'Visa {aantal} tomma avsnitt',
+  'Uitzonderingen op deelname-eisen': 'Undantag från deltagandekrav',
+  'Gebruikte inschrijfcodes': 'Använda anmälningskoder',
+  'Nummer van de deelname-eis': 'Nummer för deltagandekrav',
+  'Nummer van de inschrijfcode': 'Nummer för anmälningskod',
+  'Gebruikt op': 'Använd den',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Undantag som gjorts för dig från kraven för att delta i en kurs.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Uppgifter om anmälningskoder som du har använt för att delta i en kurs.',
+  'Niet opgenomen in dit overzicht': 'Ingår inte i den här översikten',
   'AI: functioneert': 'AI: fungerar',
   'AI: wordt gecontroleerd…': 'AI: kontrolleras…',
   'AI: server niet bereikbaar': 'AI: servern är inte nåbar',

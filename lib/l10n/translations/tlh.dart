@@ -1604,6 +1604,27 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  '1 onderdeel': '1 \'ay\'',
+  '{aantal} onderdelen': '{aantal} \'ay\'mey',
+  'Profiel en organisatie': 'ghot De\' je tay\'',
+  'Cursussen en deelname': 'ghojmeH mIw je jeS',
+  'Toetsen en antwoorden': 'qaDmey je jangmey',
+  'Resultaten en bewijsstukken': 'ta\'mey je tobmeH De\'mey',
+  'Privacy en toegang': 'De\' pegh je naw\'',
+  'Aanmelden en beveiliging': 'mI\' pegh ngeH je Hung',
+  'Overige gegevens': 'latlh De\'mey',
+  'Lege onderdelen verbergen': 'pagh ghajbogh \'ay\'mey So\'',
+  '{aantal} lege onderdelen tonen': '{aantal} pagh ghajbogh \'ay\'mey cha\'',
+  'Uitzonderingen op deelname-eisen': 'jeSmeH poQmeyvo\' ngeDmoHghachmey',
+  'Gebruikte inschrijfcodes': 'qIghmeH mI\'ghommey lo\'lu\'pu\'bogh',
+  'Nummer van de deelname-eis': 'jeSmeH poQ mI\'',
+  'Nummer van de inschrijfcode': 'qIghmeH mI\'ghom mI\'',
+  'Gebruikt op': 'lo\'lu\'pu\' jaj',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'ghojmeH mIw DaSovmeH poQmeyvo\' SoHvaD ngeDmoHghachmey chenmoHlu\'pu\'.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'ghojmeH mIw DaSovmeH qIghmeH mI\'ghommey Dalo\'pu\'bogh bop De\'mey.',
+  'Niet opgenomen in dit overzicht': 'naDev cha\'bogh De\'meyDaq tu\'be\'lu\'',
   'AI: functioneert': 'AI: Qap',
   'AI: wordt gecontroleerd…': 'AI: nuDlutaH',
   'AI: server niet bereikbaar': 'AI: waw\' Hutlh',

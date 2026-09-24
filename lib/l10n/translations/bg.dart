@@ -1647,6 +1647,27 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  '1 onderdeel': '1 раздел',
+  '{aantal} onderdelen': 'Раздели: {aantal}',
+  'Profiel en organisatie': 'Профил и организация',
+  'Cursussen en deelname': 'Курсове и участие',
+  'Toetsen en antwoorden': 'Тестове и отговори',
+  'Resultaten en bewijsstukken': 'Резултати и доказателства',
+  'Privacy en toegang': 'Поверителност и достъп',
+  'Aanmelden en beveiliging': 'Вход и сигурност',
+  'Overige gegevens': 'Други данни',
+  'Lege onderdelen verbergen': 'Скриване на празните раздели',
+  '{aantal} lege onderdelen tonen': 'Показване на празни раздели: {aantal}',
+  'Uitzonderingen op deelname-eisen': 'Изключения от изискванията за участие',
+  'Gebruikte inschrijfcodes': 'Използвани кодове за записване',
+  'Nummer van de deelname-eis': 'Номер на изискването за участие',
+  'Nummer van de inschrijfcode': 'Номер на кода за записване',
+  'Gebruikt op': 'Използван на',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Изключения от изискванията за участие в курс, направени за вас.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Данни за кодовете за записване, които сте използвали, за да участвате в курс.',
+  'Niet opgenomen in dit overzicht': 'Не е включено в този преглед',
   'AI: functioneert': 'ИИ: работи',
   'AI: wordt gecontroleerd…': 'ИИ: проверява се…',
   'AI: server niet bereikbaar': 'ИИ: сървърът е недостъпен',

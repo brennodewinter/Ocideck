@@ -1630,6 +1630,27 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '1 onderdeel': '1 Abschnitt',
+  '{aantal} onderdelen': '{aantal} Abschnitt',
+  'Profiel en organisatie': 'Profil und Organisation',
+  'Cursussen en deelname': 'Kurs und Teilnahm',
+  'Toetsen en antwoorden': 'Prüefige und Antworte',
+  'Resultaten en bewijsstukken': 'Ergebnis und Nachwiis',
+  'Privacy en toegang': 'Dateschutz und Zuegang',
+  'Aanmelden en beveiliging': 'Aamäldig und Sicherheit',
+  'Overige gegevens': 'Anderi Date',
+  'Lege onderdelen verbergen': 'Leeri Abschnitt uusblände',
+  '{aantal} lege onderdelen tonen': '{aantal} leeri Abschnitt aazeige',
+  'Uitzonderingen op deelname-eisen': 'Usnahme vo de Teilnahmevoraussetzige',
+  'Gebruikte inschrijfcodes': 'Bruuchti Aamäldecode',
+  'Nummer van de deelname-eis': 'Nummere vo de Teilnahmevoraussetzig',
+  'Nummer van de inschrijfcode': 'Nummere vom Aamäldecode',
+  'Gebruikt op': 'Bruucht am',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Usnahme, wo für Si vo de Voraussetzung für d\'Teilnahm a mene Kurs gmacht worde sind.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Date über Aamäldecode, wo Si für d\'Teilnahm a mene Kurs bruucht händ.',
+  'Niet opgenomen in dit overzicht': 'I dere Übersicht nöd dinne',
   'AI: functioneert': 'KI: funktioniert',
   'AI: wordt gecontroleerd…': 'KI: wird prüeft…',
   'AI: server niet bereikbaar': 'KI: Server nöd erreichbar',

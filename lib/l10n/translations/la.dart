@@ -1642,6 +1642,28 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '1 onderdeel': '1 pars',
+  '{aantal} onderdelen': '{aantal} partes',
+  'Profiel en organisatie': 'Descriptio personalis et institutio',
+  'Cursussen en deelname': 'Cursus et participatio',
+  'Toetsen en antwoorden': 'Probationes et responsa',
+  'Resultaten en bewijsstukken': 'Eventus et documenta probantia',
+  'Privacy en toegang': 'Privata et accessus',
+  'Aanmelden en beveiliging': 'Authenticatio et securitas',
+  'Overige gegevens': 'Alia data',
+  'Lege onderdelen verbergen': 'Partes vacuas cela',
+  '{aantal} lege onderdelen tonen': '{aantal} partes vacuas ostende',
+  'Uitzonderingen op deelname-eisen':
+      'Exceptiones a condicionibus participationis',
+  'Gebruikte inschrijfcodes': 'Codices inscriptionis adhibiti',
+  'Nummer van de deelname-eis': 'Numerus condicionis participationis',
+  'Nummer van de inschrijfcode': 'Numerus codicis inscriptionis',
+  'Gebruikt op': 'Adhibitus die',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Exceptiones tibi concessae a condicionibus quibus cursus participatur.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Data de codicibus inscriptionis quibus usus es ut cursui interessēs.',
+  'Niet opgenomen in dit overzicht': 'In hac conspectu non continetur',
   'AI: functioneert': 'AI: operatur',
   'AI: wordt gecontroleerd…': 'AI: probatur…',
   'AI: server niet bereikbaar': 'AI: servitorium inaccessibile',

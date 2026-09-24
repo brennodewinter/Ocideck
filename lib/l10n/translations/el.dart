@@ -1652,6 +1652,29 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '1 onderdeel': '1 ενότητα',
+  '{aantal} onderdelen': '{aantal} ενότητες',
+  'Profiel en organisatie': 'Προφίλ και οργανισμός',
+  'Cursussen en deelname': 'Μαθήματα και συμμετοχή',
+  'Toetsen en antwoorden': 'Αξιολογήσεις και απαντήσεις',
+  'Resultaten en bewijsstukken': 'Αποτελέσματα και δικαιολογητικά',
+  'Privacy en toegang': 'Απόρρητο και πρόσβαση',
+  'Aanmelden en beveiliging': 'Σύνδεση και ασφάλεια',
+  'Overige gegevens': 'Άλλα δεδομένα',
+  'Lege onderdelen verbergen': 'Απόκρυψη κενών ενοτήτων',
+  '{aantal} lege onderdelen tonen': 'Εμφάνιση {aantal} κενών ενοτήτων',
+  'Uitzonderingen op deelname-eisen':
+      'Εξαιρέσεις από τις προϋποθέσεις συμμετοχής',
+  'Gebruikte inschrijfcodes': 'Κωδικοί εγγραφής που χρησιμοποιήθηκαν',
+  'Nummer van de deelname-eis': 'Αριθμός προϋπόθεσης συμμετοχής',
+  'Nummer van de inschrijfcode': 'Αριθμός κωδικού εγγραφής',
+  'Gebruikt op': 'Χρησιμοποιήθηκε στις',
+  'Uitzonderingen die voor u zijn gemaakt op eisen voor deelname aan een cursus.':
+      'Εξαιρέσεις που έγιναν για εσάς από τις προϋποθέσεις συμμετοχής σε μάθημα.',
+  'Gegevens over inschrijfcodes die u heeft gebruikt om aan een cursus deel te nemen.':
+      'Στοιχεία για τους κωδικούς εγγραφής που χρησιμοποιήσατε για να συμμετάσχετε σε μάθημα.',
+  'Niet opgenomen in dit overzicht':
+      'Δεν περιλαμβάνεται σε αυτή την επισκόπηση',
   'AI: functioneert': 'ΤΝ: λειτουργεί',
   'AI: wordt gecontroleerd…': 'ΤΝ: γίνεται έλεγχος…',
   'AI: server niet bereikbaar': 'ΤΝ: ο διακομιστής δεν είναι προσβάσιμος',
