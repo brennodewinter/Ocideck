@@ -650,7 +650,6 @@ class DeckNotifier extends StateNotifier<DeckState> {
     PresentationTimingConfig? presentationTiming,
     bool? showRehearsalSummary,
     bool? playOnly,
-    bool? marpCompatAccepted,
   }) {
     final deck = state.deck;
     if (deck == null) return;
@@ -671,7 +670,6 @@ class DeckNotifier extends StateNotifier<DeckState> {
         presentationTiming: presentationTiming,
         showRehearsalSummary: showRehearsalSummary,
         playOnly: playOnly,
-        marpCompatAccepted: marpCompatAccepted,
       ),
       coalesceKey: 'info',
     );

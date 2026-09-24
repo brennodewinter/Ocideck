@@ -26,6 +26,8 @@ class MarpCompatibility {
   static final _reVideoAudio = RegExp(r'<(video|audio)\b');
   static final _reTaskItem = RegExp(r'^\s*[-*+]\s+\[[ xX]\]\s');
   static final _reAbsolutePath = RegExp(r'^(/|~/|file://|[A-Za-z]:[\\/])');
+  static final _reManualRedaction = RegExp(r'\[\[.+?\]\]');
+  static final _reUnclosedYamlQuote = RegExp(r'''^(?:"[^"]*|'[^']*)$''');
 
   /// Marp CLI leest deze sleutels voor HTML-meta — ze zijn niet "genegeerd".
   static const _marpMetaKeys = {
@@ -52,7 +54,7 @@ class MarpCompatibility {
     // zijn over regelgrenzen.
     markdown = markdown.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
     final findings = <MarkdownValidationIssue>[];
-    var accepted = false;
+    var deckTlp = 'none';
 
     var body = markdown;
     var bodyStartLine = 1;
@@ -61,51 +63,42 @@ class MarpCompatibility {
       final lines = markdown.split('\n');
       if (lines.isEmpty || lines.first != '---') {
         findings.add(
-          const MarkdownValidationIssue(
+          _finding(
             line: 1,
             severity: MarkdownValidationSeverity.error,
-            message:
-                'Front matter met `marp: true` ontbreekt: Marp-tools renderen dit als gewoon document, geen slides.',
+            code: 'marp.frontMatter',
           ),
         );
       } else {
         final closeIndex = _frontMatterClose(lines);
         if (closeIndex == -1) {
           findings.add(
-            const MarkdownValidationIssue(
+            _finding(
               line: 1,
               severity: MarkdownValidationSeverity.error,
-              message:
-                  'Front matter is niet afgesloten met `---`; Marp kan de sleutels niet lezen.',
+              code: 'marp.frontMatter',
             ),
           );
           // Het hele document geldt dan als inhoud: de `---`-regels leest de
           // body-check als scheidingen, net als Marp dat zou doen.
         } else {
-          accepted = _checkFrontMatter(lines, closeIndex, context, findings);
+          deckTlp = _checkFrontMatter(lines, closeIndex, context, findings);
           body = lines.sublist(closeIndex + 1).join('\n');
           bodyStartLine = closeIndex + 2;
         }
       }
     }
 
-    _checkBody(body, bodyStartLine, context, findings);
+    _checkBody(body, bodyStartLine, context, deckTlp, findings);
     findings.sort((a, b) => a.line.compareTo(b.line));
 
-    final status = findings.any(
-      (f) => f.severity == MarkdownValidationSeverity.error,
-    )
+    final status =
+        findings.any((f) => f.severity == MarkdownValidationSeverity.error)
         ? MarpCompatStatus.incompatible
-        : findings.any(
-            (f) => f.severity == MarkdownValidationSeverity.warning,
-          )
-        ? (accepted ? MarpCompatStatus.accepted : MarpCompatStatus.degraded)
+        : findings.any((f) => f.severity == MarkdownValidationSeverity.warning)
+        ? MarpCompatStatus.degraded
         : MarpCompatStatus.compatible;
-    return MarpCompatReport(
-      status: status,
-      findings: findings,
-      accepted: accepted,
-    );
+    return MarpCompatReport(status: status, findings: findings);
   }
 
   int _frontMatterClose(List<String> lines) {
@@ -115,16 +108,15 @@ class MarpCompatibility {
     return -1;
   }
 
-  /// Toetst de front-matter-regels. Geeft terug of de acceptatievlag aan
-  /// staat; bevindingen gaan in [findings].
-  bool _checkFrontMatter(
+  /// Toetst de front matter en geeft het deckbrede TLP-niveau terug.
+  String _checkFrontMatter(
     List<String> lines,
     int closeIndex,
     MarpCompatContext context,
     List<MarkdownValidationIssue> findings,
   ) {
     var marpKey = false;
-    var accepted = false;
+    var deckTlp = 'none';
     var hasCallouts = false;
     final seenKeys = <String>{};
     final ignoredKeys = <String>[];
@@ -138,11 +130,10 @@ class MarpCompatibility {
 
       if (line.contains('\t')) {
         findings.add(
-          MarkdownValidationIssue(
+          _finding(
             line: i + 1,
             severity: MarkdownValidationSeverity.error,
-            message:
-                'Tab in de front matter: YAML staat geen tabs toe, Marp faalt hierop.',
+            code: 'marp.yaml',
           ),
         );
         continue;
@@ -152,10 +143,10 @@ class MarpCompatibility {
       if (key == null) {
         if (trimmed.contains(':')) {
           findings.add(
-            MarkdownValidationIssue(
+            _finding(
               line: i + 1,
               severity: MarkdownValidationSeverity.warning,
-              message: 'Front matter-regel heeft geen sleutel:waarde-vorm.',
+              code: 'marp.yaml',
             ),
           );
         }
@@ -163,10 +154,10 @@ class MarpCompatibility {
       }
       if (!seenKeys.add(key)) {
         findings.add(
-          MarkdownValidationIssue(
+          _finding(
             line: i + 1,
             severity: MarkdownValidationSeverity.error,
-            message: 'Front-matter sleutel "$key" staat er dubbel in; YAML weigert dat.',
+            code: 'marp.yaml',
           ),
         );
         continue;
@@ -180,11 +171,10 @@ class MarpCompatibility {
           marpKey = true;
           if (value != 'true') {
             findings.add(
-              MarkdownValidationIssue(
+              _finding(
                 line: i + 1,
                 severity: MarkdownValidationSeverity.error,
-                message:
-                    '`marp: $value` schakelt Marp uit; gebruik `marp: true` voor slides.',
+                code: 'marp.frontMatter',
               ),
             );
           }
@@ -193,37 +183,44 @@ class MarpCompatibility {
           if (!kMarpBuiltinThemes.contains(theme) &&
               context == MarpCompatContext.bareFile) {
             findings.add(
-              MarkdownValidationIssue(
+              _finding(
                 line: i + 1,
                 severity: MarkdownValidationSeverity.warning,
-                message:
-                    'Thema "$theme" is geen ingebouwd Marp-thema; als los .md-bestand mist de theme-definitie.',
+                code: 'marp.theme',
               ),
             );
           }
         case 'headingDivider':
           findings.add(
-            MarkdownValidationIssue(
+            _finding(
               line: i + 1,
               severity: MarkdownValidationSeverity.warning,
-              message:
-                  '`headingDivider` laat Marp extra slides splitsen op koppen; het deck rendert dan anders dan OciDeck toont.',
+              code: 'marp.layout',
             ),
           );
         case 'size':
           final size = parseMarkdownYamlScalar(value);
           if (size != '16:9' && size != '4:3') {
             findings.add(
-              MarkdownValidationIssue(
+              _finding(
                 line: i + 1,
                 severity: MarkdownValidationSeverity.warning,
-                message:
-                    '`size: $size` werkt alleen als het thema die maat definieert.',
+                code: 'marp.layout',
               ),
             );
           }
-        case kMarpCompatAcceptedKey:
-          accepted = value == 'true';
+        case 'tlp':
+          deckTlp = parseMarkdownYamlScalar(value).toLowerCase();
+        case 'privacy':
+          if (parseMarkdownYamlScalar(value).toLowerCase() == 'redact') {
+            findings.add(
+              _finding(
+                line: i + 1,
+                severity: MarkdownValidationSeverity.error,
+                code: 'marp.privacy',
+              ),
+            );
+          }
         case 'ocideck_callouts':
           hasCallouts = true;
         default:
@@ -238,37 +235,50 @@ class MarpCompatibility {
       }
     }
 
-    if (!marpKey) {
+    _addFrontMatterSummaries(
+      findings,
+      hasMarpKey: marpKey,
+      hasCallouts: hasCallouts,
+      ignoredKeys: ignoredKeys,
+      firstIgnoredLine: firstIgnoredLine,
+    );
+    return deckTlp;
+  }
+
+  void _addFrontMatterSummaries(
+    List<MarkdownValidationIssue> findings, {
+    required bool hasMarpKey,
+    required bool hasCallouts,
+    required List<String> ignoredKeys,
+    required int firstIgnoredLine,
+  }) {
+    if (!hasMarpKey) {
       findings.add(
-        const MarkdownValidationIssue(
+        _finding(
           line: 1,
           severity: MarkdownValidationSeverity.error,
-          message:
-              '`marp: true` ontbreekt in de front matter: Marp-tools renderen dit als gewoon document, geen slides. OciDeck schrijft de sleutel bij het opslaan terug.',
+          code: 'marp.frontMatter',
         ),
       );
     }
     if (hasCallouts) {
       findings.add(
-        const MarkdownValidationIssue(
+        _finding(
           line: 1,
-          severity: MarkdownValidationSeverity.informational,
-          message:
-              '`ocideck_callouts` markeert afbeeldings-annotaties die Marp niet rendert.',
+          severity: MarkdownValidationSeverity.warning,
+          code: 'marp.ocideckFeature',
         ),
       );
     }
     if (ignoredKeys.isNotEmpty) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: firstIgnoredLine,
           severity: MarkdownValidationSeverity.informational,
-          message:
-              'Marp negeert ${ignoredKeys.length} sleutel(s) (${ignoredKeys.join(', ')}); bijbehorend gedrag vervalt in andere tools.',
+          code: 'marp.ocideckFeature',
         ),
       );
     }
-    return accepted;
   }
 
   /// Scalar-niveau YAML-toetsen waar js-yaml (en dus marp-cli) op faalt.
@@ -281,23 +291,20 @@ class MarpCompatibility {
     if (value.isEmpty) return;
     if (value.startsWith('*') || value.startsWith('&')) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: line,
           severity: MarkdownValidationSeverity.error,
-          message:
-              'Waarde begint met een YAML-sigil ($value); js-yaml faalt hierop.',
+          code: 'marp.yaml',
         ),
       );
       return;
     }
-    final quote = value[0];
-    if ((quote == '"' || quote == "'") &&
-        (value.length < 2 || !value.endsWith(quote))) {
+    if (_reUnclosedYamlQuote.hasMatch(value)) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: line,
           severity: MarkdownValidationSeverity.error,
-          message: 'Onafgesloten quote in de front matter-waarde.',
+          code: 'marp.yaml',
         ),
       );
     }
@@ -307,6 +314,7 @@ class MarpCompatibility {
     String body,
     int bodyStartLine,
     MarpCompatContext context,
+    String deckTlp,
     List<MarkdownValidationIssue> findings,
   ) {
     final blocks = MarkdownService.splitSlideBlocks(body);
@@ -320,7 +328,7 @@ class MarpCompatibility {
     var firstVideoAudioLine = 0;
     var taskItemCount = 0;
     var firstTaskItemLine = 0;
-    final unknownDirectives = <String>[];
+    final unknownDirectives = <String>{};
     var firstUnknownDirectiveLine = 0;
 
     for (var i = 0; i < blocks.length; i++) {
@@ -328,7 +336,6 @@ class MarpCompatibility {
       final blockLines = block.split('\n');
       int lineNo(int index) => blockStartLine + index;
       final fenced = _fencedLineIndexes(blockLines);
-      final slideNumber = i + 1;
 
       // _class-tokens die buiten OciDeck niets betekenen.
       final classMatch = _reClassDirective.firstMatch(block);
@@ -345,11 +352,10 @@ class MarpCompatibility {
             (l) => l.contains('<!-- _class:'),
           );
           findings.add(
-            MarkdownValidationIssue(
+            _finding(
               line: lineNo(classLine >= 0 ? classLine : 0),
               severity: MarkdownValidationSeverity.warning,
-              message:
-                  'Slide $slideNumber: class "${ocideckOnly.join(', ')}" bestaat niet in Marp; de inhoud rendert als platte markdown zonder dit type.',
+              code: 'marp.ocideckFeature',
             ),
           );
         }
@@ -364,16 +370,25 @@ class MarpCompatibility {
           final info = fenceMatch.group(2) ?? '';
           if (kOciDeckFenceTypes.contains(info)) {
             findings.add(
-              MarkdownValidationIssue(
+              _finding(
                 line: lineNo(j),
                 severity: MarkdownValidationSeverity.warning,
-                message:
-                    'Slide $slideNumber: ```$info-blok toont in Marp als letterlijk codeblok.',
+                code: 'marp.ocideckFeature',
               ),
             );
           }
         }
         if (fenced.contains(j)) continue;
+
+        if (_reManualRedaction.hasMatch(trimmed)) {
+          findings.add(
+            _finding(
+              line: lineNo(j),
+              severity: MarkdownValidationSeverity.error,
+              code: 'marp.privacy',
+            ),
+          );
+        }
 
         if (_reTaskItem.hasMatch(trimmed)) {
           taskItemCount++;
@@ -384,22 +399,10 @@ class MarpCompatibility {
           if (videoAudioCount == 1) firstVideoAudioLine = lineNo(j);
         }
         for (final match in _reImage.allMatches(trimmed)) {
-          _checkMediaUri(
-            match.group(1)!,
-            lineNo(j),
-            slideNumber,
-            context,
-            findings,
-          );
+          _checkMediaUri(match.group(1)!, lineNo(j), context, findings);
         }
         for (final match in _reSrcAttr.allMatches(trimmed)) {
-          _checkMediaUri(
-            match.group(1)!,
-            lineNo(j),
-            slideNumber,
-            context,
-            findings,
-          );
+          _checkMediaUri(match.group(1)!, lineNo(j), context, findings);
         }
 
         for (final match in _reHtmlComment.allMatches(trimmed)) {
@@ -408,7 +411,7 @@ class MarpCompatibility {
           _checkComment(
             content,
             lineNo(j),
-            slideNumber,
+            deckTlp,
             findings,
             onOcideckComment: () {
               ocideckCommentCount++;
@@ -417,8 +420,7 @@ class MarpCompatibility {
               }
             },
             onUnknownDirective: (key) {
-              if (!unknownDirectives.contains(key)) unknownDirectives.add(key);
-              if (unknownDirectives.length == 1) {
+              if (unknownDirectives.add(key) && unknownDirectives.length == 1) {
                 firstUnknownDirectiveLine = lineNo(j);
               }
             },
@@ -434,43 +436,63 @@ class MarpCompatibility {
     // zélf de bevinding is.
     _checkSetextSeparators(body, bodyStartLine, findings);
 
+    _addBodySummaries(
+      findings,
+      ocideckCommentCount: ocideckCommentCount,
+      firstOcideckCommentLine: firstOcideckCommentLine,
+      unknownDirectives: unknownDirectives,
+      firstUnknownDirectiveLine: firstUnknownDirectiveLine,
+      videoAudioCount: videoAudioCount,
+      firstVideoAudioLine: firstVideoAudioLine,
+      taskItemCount: taskItemCount,
+      firstTaskItemLine: firstTaskItemLine,
+    );
+  }
+
+  void _addBodySummaries(
+    List<MarkdownValidationIssue> findings, {
+    required int ocideckCommentCount,
+    required int firstOcideckCommentLine,
+    required Set<String> unknownDirectives,
+    required int firstUnknownDirectiveLine,
+    required int videoAudioCount,
+    required int firstVideoAudioLine,
+    required int taskItemCount,
+    required int firstTaskItemLine,
+  }) {
     if (ocideckCommentCount > 0) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: firstOcideckCommentLine,
           severity: MarkdownValidationSeverity.informational,
-          message:
-              '$ocideckCommentCount OciDeck-directive(s) (advance, ocideck_*) negeert Marp.',
+          code: 'marp.ocideckFeature',
         ),
       );
     }
     if (unknownDirectives.isNotEmpty) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: firstUnknownDirectiveLine,
           severity: MarkdownValidationSeverity.informational,
-          message:
-              'Onbekende directive(s) ${unknownDirectives.join(', ')} doen in Marp niets.',
+          code: 'marp.ocideckFeature',
         ),
       );
     }
     if (videoAudioCount > 0) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: firstVideoAudioLine,
           severity: MarkdownValidationSeverity.informational,
-          message:
-              '<video>/<audio> speelt in HTML-export, niet in de PDF/PPTX-export van marp-cli.',
+          code: 'marp.ocideckFeature',
         ),
       );
     }
     if (taskItemCount > 0) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: firstTaskItemLine,
           severity: MarkdownValidationSeverity.informational,
-          message:
-              '$taskItemCount tasklist-item(s) (- [ ]): Marp rendert die zonder checkbox-gedrag.',
+          code: 'marp.ocideckFeature',
         ),
       );
     }
@@ -483,29 +505,43 @@ class MarpCompatibility {
   void _checkComment(
     String content,
     int line,
-    int slideNumber,
+    String deckTlp,
     List<MarkdownValidationIssue> findings, {
     required void Function() onOcideckComment,
     required void Function(String key) onUnknownDirective,
   }) {
     if (content == 'skip') {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: line,
           severity: MarkdownValidationSeverity.warning,
-          message:
-              'Slide $slideNumber: `<!-- skip -->` bestaat niet in Marp; deze dia toont daar gewoon.',
+          code: 'marp.skip',
         ),
       );
       return;
     }
     if (content.startsWith('tlp:')) {
+      final slideTlp = content.substring('tlp:'.length).trim().toLowerCase();
+      final withheld = _tlpRank(slideTlp) > _tlpRank(deckTlp);
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: line,
-          severity: MarkdownValidationSeverity.warning,
-          message:
-              'Slide $slideNumber: `<!-- tlp: -->` houdt de dia in OciDeck achter; Marp toont hem gewoon.',
+          severity: withheld
+              ? MarkdownValidationSeverity.error
+              : MarkdownValidationSeverity.warning,
+          code: withheld ? 'marp.tlpExposure' : 'marp.ocideckFeature',
+        ),
+      );
+      return;
+    }
+    if (content.startsWith('ocideck_privacy:') &&
+        content.substring('ocideck_privacy:'.length).trim().toLowerCase() ==
+            'redact') {
+      findings.add(
+        _finding(
+          line: line,
+          severity: MarkdownValidationSeverity.error,
+          code: 'marp.privacy',
         ),
       );
       return;
@@ -535,18 +571,16 @@ class MarpCompatibility {
   void _checkMediaUri(
     String uri,
     int line,
-    int slideNumber,
     MarpCompatContext context,
     List<MarkdownValidationIssue> findings,
   ) {
     if (uri.startsWith('mem:')) {
       if (context == MarpCompatContext.bareFile) {
         findings.add(
-          MarkdownValidationIssue(
+          _finding(
             line: line,
             severity: MarkdownValidationSeverity.warning,
-            message:
-                'Slide $slideNumber: `mem:`-media resolveert alleen binnen deze OciDeck-sessie; in een los .md-bestand is de afbeelding weg.',
+            code: 'marp.media',
           ),
         );
       }
@@ -554,11 +588,10 @@ class MarpCompatibility {
     }
     if (_reAbsolutePath.hasMatch(uri)) {
       findings.add(
-        MarkdownValidationIssue(
+        _finding(
           line: line,
           severity: MarkdownValidationSeverity.warning,
-          message:
-              'Slide $slideNumber: mediapad "$uri" werkt alleen op deze machine.',
+          code: 'marp.media',
         ),
       );
     }
@@ -569,16 +602,21 @@ class MarpCompatibility {
   Set<int> _fencedLineIndexes(List<String> lines) {
     final inside = <int>{};
     String? fenceChar;
+    var fenceLength = 0;
     for (var i = 0; i < lines.length; i++) {
       final trimmed = lines[i].trimLeft();
       if (fenceChar == null) {
         if (trimmed.startsWith('```')) {
           fenceChar = '`';
+          fenceLength = _fenceRunLength(trimmed, '`');
         } else if (trimmed.startsWith('~~~')) {
           fenceChar = '~';
+          fenceLength = _fenceRunLength(trimmed, '~');
         }
-      } else if (MarkdownService.isBareFence(trimmed, fenceChar)) {
+      } else if (MarkdownService.isBareFence(trimmed, fenceChar) &&
+          _fenceRunLength(trimmed, fenceChar) >= fenceLength) {
         fenceChar = null;
+        fenceLength = 0;
       } else {
         inside.add(i);
       }
@@ -596,17 +634,17 @@ class MarpCompatibility {
   ) {
     final lines = body.split('\n');
     String? fenceChar;
+    var fenceLength = 0;
     var previousTextLine = false;
     for (var i = 0; i < lines.length; i++) {
       final trimmed = lines[i].trimLeft();
       if (fenceChar == null) {
         if (lines[i] == '---' && previousTextLine) {
           findings.add(
-            MarkdownValidationIssue(
+            _finding(
               line: bodyStartLine + i,
               severity: MarkdownValidationSeverity.warning,
-              message:
-                  '`---` direct onder tekst: Marp kan dit als kop (setext) lezen in plaats van slide-scheiding; zet een lege regel ervoor.',
+              code: 'marp.layout',
             ),
           );
           previousTextLine = false;
@@ -614,15 +652,17 @@ class MarpCompatibility {
         }
         if (trimmed.startsWith('```')) {
           fenceChar = '`';
+          fenceLength = _fenceRunLength(trimmed, '`');
         } else if (trimmed.startsWith('~~~')) {
           fenceChar = '~';
+          fenceLength = _fenceRunLength(trimmed, '~');
         }
-      } else if (MarkdownService.isBareFence(trimmed, fenceChar)) {
+      } else if (MarkdownService.isBareFence(trimmed, fenceChar) &&
+          _fenceRunLength(trimmed, fenceChar) >= fenceLength) {
         fenceChar = null;
+        fenceLength = 0;
       }
-      previousTextLine =
-          fenceChar == null &&
-          _isParagraphLine(lines[i]);
+      previousTextLine = fenceChar == null && _isParagraphLine(lines[i]);
     }
   }
 
@@ -636,4 +676,27 @@ class MarpCompatibility {
         trimmed != '---' &&
         !_reBlockStart.hasMatch(line);
   }
+
+  int _fenceRunLength(String line, String fenceChar) {
+    var length = 0;
+    while (length < line.length && line[length] == fenceChar) {
+      length++;
+    }
+    return length;
+  }
+
+  int _tlpRank(String value) => switch (value) {
+    'clear' => 1,
+    'green' => 2,
+    'amber' => 3,
+    'amber+strict' => 4,
+    'red' => 5,
+    _ => 0,
+  };
+
+  MarkdownValidationIssue _finding({
+    required int line,
+    required MarkdownValidationSeverity severity,
+    required String code,
+  }) => MarkdownValidationIssue(line: line, severity: severity, code: code);
 }

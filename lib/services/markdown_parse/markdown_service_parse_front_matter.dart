@@ -36,9 +36,6 @@ class _FrontMatter {
   bool showRehearsalSummary = false;
   bool playOnly = false;
 
-  /// De Marp-compat-acceptatievlag ([kMarpCompatAcceptedKey]): de auteur
-  /// heeft de oranje aandachtspunten voor dit deck bewust geaccepteerd.
-  bool marpCompatAccepted = false;
   String improvementFramework = '';
   String improvementY01 = '';
   String improvementY01Unit = '';
@@ -169,8 +166,6 @@ extension _MarkdownParseFrontMatter on MarkdownService {
               fm.showRehearsalSummary = value == 'true';
             case 'ocideck_play_only':
               fm.playOnly = value == 'true';
-            case kMarpCompatAcceptedKey:
-              fm.marpCompatAccepted = value == 'true';
             case 'ocideck_improvement_framework':
               fm.improvementFramework = parseMarkdownYamlScalar(value);
             case 'ocideck_improvement_y01':

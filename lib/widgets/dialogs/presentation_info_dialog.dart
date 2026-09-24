@@ -43,10 +43,6 @@ class PresentationInfo {
   /// 'Alleen afspelen'-vergrendeling. Zie [Deck.playOnly].
   final bool playOnly;
 
-  /// Deckbrede acceptatie van Marp-aandachtspunten. Zie
-  /// [Deck.marpCompatAccepted].
-  final bool marpCompatAccepted;
-
   /// Naam van het gekozen stijlprofiel (null = ongewijzigd laten).
   final String? styleProfileName;
 
@@ -65,7 +61,6 @@ class PresentationInfo {
     this.presentationTiming = PresentationTimingConfig.disabled,
     this.showRehearsalSummary = true,
     this.playOnly = false,
-    this.marpCompatAccepted = false,
     this.styleProfileName,
   });
 }
@@ -98,7 +93,6 @@ Future<void> editPresentationInfo(BuildContext context, WidgetRef ref) async {
     presentationTiming: info.presentationTiming,
     showRehearsalSummary: info.showRehearsalSummary,
     playOnly: info.playOnly,
-    marpCompatAccepted: info.marpCompatAccepted,
   );
   // Een hier gekozen stijlprofiel geldt app-breed (profielen zijn globaal) en
   // wordt meteen op het open deck toegepast.
@@ -174,7 +168,6 @@ class _PresentationInfoDialogState
   late final TextEditingController _customMinutes;
   late bool _showRehearsalSummary;
   late bool _playOnly;
-  late bool _marpCompatAccepted;
   MarpCompatReport? _marpCompat;
   late String _profileName;
 
@@ -206,7 +199,6 @@ class _PresentationInfoDialogState
     );
     _showRehearsalSummary = widget.deck.showRehearsalSummary;
     _playOnly = widget.deck.playOnly;
-    _marpCompatAccepted = widget.deck.marpCompatAccepted;
     _profileName = widget.deck.themeProfile.name;
   }
 
@@ -247,7 +239,6 @@ class _PresentationInfoDialogState
         presentationTiming: _presentationTiming,
         showRehearsalSummary: _showRehearsalSummary,
         playOnly: _playOnly,
-        marpCompatAccepted: _marpCompatAccepted,
         styleProfileName: _profileName,
       ),
     );
@@ -362,18 +353,13 @@ class _PresentationInfoDialogState
     );
   }
 
-  /// Marp-compatibiliteit: de huidige status plus de schakelaar waarmee de
-  /// auteur aandachtspunten deckbreed accepteert. De sectie ontbreekt helemaal
-  /// wanneer de controle uit staat (instelling) — geen grijze tussenstand —
-  /// en de schakelaar is alleen zetbaar als er warnings zijn om te accepteren
-  /// of om terug te nemen; fouten en een schoon deck zijn niet acceptabel.
+  /// Marp-compatibiliteit van het huidige deck. De sectie ontbreekt wanneer de
+  /// controle uit staat; waarschuwingen blijven zichtbaar en worden niet als
+  /// workflowstatus in het Markdown-bestand opgeslagen.
   Widget _marpCompatSection(AppLocalizations l10n) {
-    // De controle staat uit → hele sectie weg; de bewaarde vlag in het bestand
-    // blijft dan bewust ongemoeid. Watch, niet read: de instelling laadt
-    // asynchroon en de sectie moet verdwijnen als hij onderweg uitgaat.
-    if (!ref.watch(
-      settingsProvider.select((s) => s.marpCompatChecksEnabled),
-    )) {
+    // Watch, niet read: de instelling laadt asynchroon en de sectie moet
+    // verdwijnen als hij onderweg uitgaat.
+    if (!ref.watch(settingsProvider.select((s) => s.marpCompatChecksEnabled))) {
       return const SizedBox.shrink();
     }
     final report = _marpCompat ??= MarpCompatibility().check(
@@ -382,42 +368,24 @@ class _PresentationInfoDialogState
           ? MarpCompatContext.project
           : MarpCompatContext.bareFile,
     );
-    // De zichtbare status volgt de keuze in deze dialoog mee, zodat de
-    // gebruiker vooraf ziet wat opslaan oplevert.
-    final effective = switch (report.status) {
-      MarpCompatStatus.degraded when _marpCompatAccepted =>
-        MarpCompatStatus.accepted,
-      MarpCompatStatus.accepted when !_marpCompatAccepted =>
-        MarpCompatStatus.degraded,
-      _ => report.status,
-    };
-    final (icon, color, label) = switch (effective) {
+    final (icon, color, label) = switch (report.status) {
       MarpCompatStatus.compatible => (
         Icons.check_circle_outline,
         AppTheme.successFg,
-        l10n.d('Marp-compatibel'),
+        'Marp · ${l10n.d('Geen syntaxproblemen gevonden')}',
       ),
       MarpCompatStatus.degraded => (
         Icons.warning_amber_outlined,
         AppTheme.warningFg,
-        'Marp: ${report.warningCount} ${l10n.d('aandachtspunt(en)')}',
-      ),
-      MarpCompatStatus.accepted => (
-        Icons.task_alt,
-        AppTheme.slate600,
-        '${l10n.d('Marp-aandachtspunten')} (${report.warningCount}): '
-            '${l10n.d('geaccepteerd')}',
+        'Marp · ${report.warningCount} ${l10n.d('waarschuwing(en)')}',
       ),
       MarpCompatStatus.incompatible => (
         Icons.error_outline,
         AppTheme.dangerFg,
-        '${l10n.d('Niet Marp-compatibel')} — '
+        'Marp · ${l10n.d('Probleem')} — '
             '${report.errorCount} ${l10n.d('fout(en)')}',
       ),
     };
-    final canToggle =
-        report.status == MarpCompatStatus.degraded ||
-        report.status == MarpCompatStatus.accepted;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -426,34 +394,9 @@ class _PresentationInfoDialogState
             Icon(icon, size: 16, color: color),
             const SizedBox(width: 6),
             Expanded(
-              child: Text(
-                label,
-                style: TextStyle(fontSize: 12, color: color),
-              ),
+              child: Text(label, style: TextStyle(fontSize: 12, color: color)),
             ),
           ],
-        ),
-        SwitchListTile(
-          contentPadding: EdgeInsets.zero,
-          dense: true,
-          secondary: const Icon(Icons.handshake_outlined, size: 20),
-          title: Text(l10n.d('Marp-aandachtspunten geaccepteerd')),
-          subtitle: Text(
-            canToggle
-                ? l10n.d(
-                    'Aandachtspunten (zoals inhoud die in andere tools wegvalt) tellen voor dit deck niet als waarschuwing. Wordt in het bestand bewaard.',
-                  )
-                : report.status == MarpCompatStatus.incompatible
-                ? l10n.d(
-                    'Fouten zijn niet acceptabel: Marp kan dit deck niet goed weergeven.',
-                  )
-                : l10n.d('Er is niets om te accepteren.'),
-            style: const TextStyle(fontSize: 11),
-          ),
-          value: canToggle && _marpCompatAccepted,
-          onChanged: canToggle
-              ? (v) => setState(() => _marpCompatAccepted = v)
-              : null,
         ),
       ],
     );

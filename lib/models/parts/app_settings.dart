@@ -269,9 +269,7 @@ class AppSettings {
   ///
   /// Staat standaard **aan** — een controle die je eerst moet aanzetten helpt
   /// precies de mensen niet die niet weten dat hun deck bij een andere tool
-  /// degradeert. Uit is echt uit: geen balk, geen opslaan-controle, en de
-  /// `ocideck_marp_compat_accepted`-vlag in bestaande bestanden doet niets
-  /// (maar blijft wel bewaard).
+  /// degradeert. Uit is echt uit: geen balk en geen opslaan-controle.
   final bool marpCompatChecksEnabled;
 
   /// Minimale contrastverhouding voor normale tekst waaronder de

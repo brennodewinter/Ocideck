@@ -524,19 +524,14 @@ class _ValidationSummaryBar extends StatelessWidget {
 
 /// De Marp-compatibiliteitsuitslag, als tweede balk onder de syntaxbalk.
 ///
-/// Vier staten: groen (compatibel), oranje (compatibel met verlies), een
-/// ingetogen "geaccepteerd" — bewust niet groen, want geaccepteerd is niet
-/// hetzelfde als schoon — en rood (niet compatibel). De acceptatie-actie
-/// schrijft `ocideck_marp_compat_accepted` in de front matter van de buffer;
-/// terugnemen haalt hem eruit. Alleen zichtbaar als de instelling aan staat.
+/// Drie staten: groen (compatibel), oranje (compatibel met verlies) en rood
+/// (niet compatibel). Alleen zichtbaar als de instelling aan staat.
 class _MarpCompatBar extends StatelessWidget {
   final MarpCompatReport report;
   final bool pending;
   final bool expanded;
   final VoidCallback onToggle;
   final ValueChanged<int> onJumpToLine;
-  final VoidCallback? onAccept;
-  final VoidCallback? onRevoke;
 
   const _MarpCompatBar({
     required this.report,
@@ -544,8 +539,6 @@ class _MarpCompatBar extends StatelessWidget {
     required this.expanded,
     required this.onToggle,
     required this.onJumpToLine,
-    this.onAccept,
-    this.onRevoke,
   });
 
   @override
@@ -556,35 +549,28 @@ class _MarpCompatBar extends StatelessWidget {
         AppTheme.successBg,
         AppTheme.successFg,
         Icons.check_circle_outline,
-        l10n.d('Marp-compatibel'),
+        'Marp · ${l10n.d('Geen syntaxproblemen gevonden')}',
       ),
       MarpCompatStatus.degraded => (
         AppTheme.warningBg,
         AppTheme.warningFg,
         Icons.warning_amber_outlined,
-        'Marp: ${report.warningCount} ${l10n.d('aandachtspunt(en)')} '
-            '${l10n.d('— inhoud degradeert in andere tools')}',
-      ),
-      MarpCompatStatus.accepted => (
-        AppTheme.slate100,
-        AppTheme.slate600,
-        Icons.task_alt,
-        '${l10n.d('Marp-aandachtspunten')} (${report.warningCount}): '
-            '${l10n.d('geaccepteerd')}',
+        'Marp · ${report.warningCount} ${l10n.d('waarschuwing(en)')}',
       ),
       MarpCompatStatus.incompatible => (
         AppTheme.dangerBg,
         AppTheme.dangerFg,
         Icons.error_outline,
-        '${l10n.d('Niet Marp-compatibel')} — '
+        'Marp · ${l10n.d('Probleem')} — '
             '${report.errorCount} ${l10n.d('fout(en)')}',
       ),
     };
 
     final hasFindings = report.findings.isNotEmpty;
+    final displaySummary = pending ? l10n.d('Controleren…') : summary;
     return Semantics(
       liveRegion: true,
-      label: summary,
+      label: displaySummary,
       child: Material(
         color: bg,
         child: Column(
@@ -603,30 +589,10 @@ class _MarpCompatBar extends StatelessWidget {
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
-                        pending ? l10n.d('Controleren…') : summary,
+                        displaySummary,
                         style: TextStyle(fontSize: 11, color: fg),
                       ),
                     ),
-                    if (onAccept != null)
-                      TextButton(
-                        onPressed: onAccept,
-                        style: TextButton.styleFrom(
-                          foregroundColor: fg,
-                          visualDensity: VisualDensity.compact,
-                          textStyle: const TextStyle(fontSize: 11),
-                        ),
-                        child: Text(l10n.d('Accepteren voor dit deck')),
-                      ),
-                    if (onRevoke != null)
-                      TextButton(
-                        onPressed: onRevoke,
-                        style: TextButton.styleFrom(
-                          foregroundColor: fg,
-                          visualDensity: VisualDensity.compact,
-                          textStyle: const TextStyle(fontSize: 11),
-                        ),
-                        child: Text(l10n.d('Acceptatie terugnemen')),
-                      ),
                     if (hasFindings)
                       Icon(
                         expanded ? Icons.expand_less : Icons.expand_more,
@@ -686,7 +652,8 @@ class _IssueTile extends StatelessWidget {
             const SizedBox(width: 6),
             Expanded(
               child: Text(
-                '${context.l10n.d('Regel')} ${issue.line}: ${issue.message}',
+                '${context.l10n.d('Regel')} ${issue.line}: '
+                '${issue.code == null ? issue.message : localizeMarpCompatibilityIssue(context.l10n, issue)}',
                 style: TextStyle(
                   fontSize: 11,
                   color: isError ? AppTheme.dangerFg : AppTheme.warningFg,

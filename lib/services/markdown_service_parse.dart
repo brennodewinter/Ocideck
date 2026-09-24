@@ -281,7 +281,6 @@ extension _MarkdownParse on MarkdownService {
       presentationTiming: fm.presentationTiming,
       showRehearsalSummary: fm.showRehearsalSummary,
       playOnly: fm.playOnly,
-      marpCompatAccepted: fm.marpCompatAccepted,
       improvementFramework: fm.improvementFramework,
       improvementY01Metric: ImprovementY01Metric(
         name: fm.improvementY01,

@@ -6,12 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/marp_compatibility_localization.dart';
 import '../../models/markdown_outline.dart';
 import '../../models/markdown_source_document.dart';
 import '../../models/markdown_writing_suggestion.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/marp_compatibility.dart';
-import '../../services/front_matter_merge.dart';
 import '../../services/markdown_validator.dart';
 import '../../services/marp_compatibility.dart';
 import '../../state/deck_provider.dart';
@@ -305,92 +305,6 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
       _showIssues = result.hasIssues;
     });
     return result;
-  }
-
-  /// Zet of haal `ocideck_marp_compat_accepted` in de front matter van de
-  /// buffer — een tekstwijziging als elke andere: de balk hertekent via de
-  /// debounce, en bij "Toepassen" parset het deck de sleutel terug.
-  ///
-  /// Staat er geen front matter, dan maken we een minimaal blok aan. Die
-  /// buffer gaf zonder kop toch al een `marp: true`-fout, dus het blok voegt
-  /// geen nieuwe verrassing toe.
-  void _setMarpCompatAccepted(bool accepted) {
-    const flagLine = '$kMarpCompatAcceptedKey: true';
-    final text = _ctrl.text;
-    final lines = text.split('\n');
-    var editOffset = 0;
-
-    if (lines.isEmpty || lines.first != '---') {
-      if (!accepted) return; // niets om weg te halen
-      _replaceTextPreservingSelection(
-        '---\n$flagLine\n---\n\n$text',
-        editOffset: 0,
-      );
-      return;
-    }
-
-    var close = -1;
-    for (var i = 1; i < lines.length; i++) {
-      if (lines[i] == '---') {
-        close = i;
-        break;
-      }
-    }
-    // Kapotte front matter: de syntaxbalk meldt dat al; niet aan rommelen.
-    if (close == -1) return;
-
-    var flagIndex = -1;
-    for (var i = 1; i < close; i++) {
-      if (frontMatterKeyOf(lines[i]) == kMarpCompatAcceptedKey) {
-        flagIndex = i;
-        break;
-      }
-    }
-
-    if (accepted) {
-      if (flagIndex >= 0) {
-        if (lines[flagIndex].trim() == flagLine) return;
-        lines[flagIndex] = flagLine;
-        editOffset = _lineStartOffset(lines, flagIndex);
-      } else {
-        lines.insert(close, flagLine);
-        editOffset = _lineStartOffset(lines, close + 1);
-      }
-    } else {
-      if (flagIndex < 0) return;
-      editOffset = _lineStartOffset(lines, flagIndex);
-      lines.removeAt(flagIndex);
-    }
-    _replaceTextPreservingSelection(lines.join('\n'), editOffset: editOffset);
-  }
-
-  int _lineStartOffset(List<String> lines, int lineIndex) {
-    var offset = 0;
-    for (var i = 0; i < lineIndex && i < lines.length; i++) {
-      offset += lines[i].length + 1;
-    }
-    return offset;
-  }
-
-  /// Vervang de buffertekst en schuif de cursor mee als de wijziging ervoor
-  /// lag — de acceptatieregel staat bovenin, dus de gebruiker blijft staan
-  /// waar hij stond.
-  void _replaceTextPreservingSelection(
-    String newText, {
-    required int editOffset,
-  }) {
-    final delta = newText.length - _ctrl.text.length;
-    var extent = _ctrl.selection.isValid ? _ctrl.selection.extentOffset : 0;
-    if (extent > editOffset) extent += delta;
-    _ctrl.value = TextEditingValue(
-      text: newText,
-      selection: TextSelection.collapsed(
-        offset: extent.clamp(0, newText.length),
-      ),
-    );
-    if (_marpCompatEnabled) {
-      setState(() => _lastCompat = _computeCompat());
-    }
   }
 
   VoidCallback? _quickFixFor(MarkdownValidationIssue issue) {
@@ -731,8 +645,18 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
         _openFind(showReplace: next.markdownFindShowReplace);
       }
     });
+    ref.listen<bool>(
+      settingsProvider.select((s) => s.marpCompatChecksEnabled),
+      (previous, enabled) {
+        if (!mounted || previous == enabled) return;
+        setState(() => _lastCompat = enabled ? _computeCompat() : null);
+      },
+    );
 
     final l10n = context.l10n;
+    final marpCompatEnabled = ref.watch(
+      settingsProvider.select((s) => s.marpCompatChecksEnabled),
+    );
     final lineCount = '\n'.allMatches(_ctrl.text).length + 1;
     final validationIssues =
         _validation?.issues ?? const <MarkdownValidationIssue>[];
@@ -787,12 +711,7 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 onJumpToLine: _jumpToLine,
                 quickFixFor: _quickFixFor,
               ),
-            if (ref.watch(
-                  settingsProvider.select(
-                    (s) => s.marpCompatChecksEnabled,
-                  ),
-                ) &&
-                _lastCompat != null)
+            if (marpCompatEnabled && _lastCompat != null)
               _MarpCompatBar(
                 report: _lastCompat!,
                 pending: _validationPending,
@@ -800,19 +719,6 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
                 onToggle: () =>
                     setState(() => _showCompatIssues = !_showCompatIssues),
                 onJumpToLine: _jumpToLine,
-                // De vlag is een deck-eigenschap in de front matter; de
-                // slide-buffer draagt geen front matter en krijgt de actie
-                // daarom niet.
-                onAccept:
-                    widget.scope == MarkdownScope.deck &&
-                        _lastCompat!.status == MarpCompatStatus.degraded
-                    ? () => _setMarpCompatAccepted(true)
-                    : null,
-                onRevoke:
-                    widget.scope == MarkdownScope.deck &&
-                        _lastCompat!.status == MarpCompatStatus.accepted
-                    ? () => _setMarpCompatAccepted(false)
-                    : null,
               ),
             if (widget.parseError)
               Container(

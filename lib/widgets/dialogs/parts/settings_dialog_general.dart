@@ -179,17 +179,15 @@ extension _SettingsGeneralTab on _SettingsDialogState {
   List<Widget> _marpCompatSettings() {
     final l10n = context.l10n;
     return [
-      _sectionTitle(l10n.d('Marp-compatibiliteit')),
+      _sectionTitle('Marp · Markdown'),
       SwitchListTile(
         contentPadding: EdgeInsets.zero,
         title: Text(
-          l10n.d('Controleer Marp-compatibiliteit'),
+          'Marp · ${l10n.d('Controleren')}',
           style: const TextStyle(fontSize: 13),
         ),
         subtitle: Text(
-          l10n.d(
-            'Toont in de markdown-modus en bij het opslaan of dit deck ook in andere Marp-tools goed rendert.',
-          ),
+          'Marp · ${l10n.d('Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.')}',
           style: TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
         value: ref.watch(

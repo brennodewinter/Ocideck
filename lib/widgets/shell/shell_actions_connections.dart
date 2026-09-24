@@ -141,8 +141,22 @@ Future<bool> saveDeckWithDestination(
     );
     if (report.status == MarpCompatStatus.incompatible) {
       if (!context.mounted) return false;
-      final proceed = await confirmMarpIncompatibleSave(context, report);
-      if (!proceed || !context.mounted) return false;
+      final decision = await confirmMarpIncompatibleSave(context, report);
+      if (!context.mounted) return false;
+      if (decision == MarpSaveDecision.review) {
+        final editor = ref.read(editorProvider);
+        final editorNotifier = ref.read(editorProvider.notifier);
+        if (editor.mode != EditorMode.markdown ||
+            editor.markdownScope != MarkdownScope.deck) {
+          editorNotifier.setMarkdownScope(MarkdownScope.deck);
+          editorNotifier.setMode(
+            EditorMode.markdown,
+            initialMarkdown: deckNotifier.generateMarkdown(),
+          );
+        }
+        return false;
+      }
+      if (decision != MarpSaveDecision.saveAnyway) return false;
     }
   }
 

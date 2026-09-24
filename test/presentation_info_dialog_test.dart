@@ -35,113 +35,30 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  /// Een chart-slide degradeert in Marp (grafiek → codeblok): genoeg om de
-  /// acceptatiepaden in de sectie te laten zien.
-  Deck degradedDeck({bool accepted = false}) => Deck(
-    title: 'Test',
-    marpCompatAccepted: accepted,
-    slides: [Slide.create(SlideType.chart)],
-  );
+  /// Een chart-slide degradeert in Marp (grafiek → codeblok).
+  Deck degradedDeck() =>
+      Deck(title: 'Test', slides: [Slide.create(SlideType.chart)]);
 
-  SwitchListTile acceptSwitch(WidgetTester tester) =>
-      tester.widget<SwitchListTile>(
-        find.ancestor(
-          of: find.text('Marp-aandachtspunten geaccepteerd'),
-          matching: find.byType(SwitchListTile),
-        ),
-      );
-
-  testWidgets('Marp-sectie toont status en acceptatieschakelaar', (
-    tester,
-  ) async {
+  testWidgets('Marp-sectie toont de status', (tester) async {
     await pumpDialog(tester, reveal: false, deck: degradedDeck());
 
-    expect(find.textContaining('aandachtspunt'), findsWidgets);
-    expect(acceptSwitch(tester).value, isFalse);
-    expect(acceptSwitch(tester).onChanged, isNotNull);
-  });
-
-  testWidgets('acceptatie via de schakelaar komt in het resultaat', (
-    tester,
-  ) async {
-    tester.view.physicalSize = const Size(1200, 2600);
-    tester.view.devicePixelRatio = 1.0;
-    addTearDown(tester.view.reset);
-
-    Future<PresentationInfo?>? result;
-    await tester.pumpWidget(
-      ProviderScope(
-        child: MaterialApp(
-          home: Builder(
-            builder: (context) => Scaffold(
-              body: ElevatedButton(
-                onPressed: () => result = PresentationInfoDialog.show(
-                  context,
-                  degradedDeck(),
-                ),
-                child: const Text('open'),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-    await tester.tap(find.text('open'));
-    await tester.pump(const Duration(milliseconds: 100));
-    await tester.pumpAndSettle();
-
-    await tester.scrollUntilVisible(
-      find.text('Marp-aandachtspunten geaccepteerd'),
-      100,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.tap(find.text('Marp-aandachtspunten geaccepteerd'));
-    await tester.pumpAndSettle();
-    // De statusregel volgt de keuze mee, nog voor opslaan.
-    expect(find.textContaining('geaccepteerd'), findsWidgets);
-
-    await tester.tap(find.text('Opslaan'));
-    await tester.pumpAndSettle();
-
-    final info = await result!;
-    expect(info, isNotNull);
-    expect(info!.marpCompatAccepted, isTrue);
-  });
-
-  testWidgets('geaccepteerd deck toont de terugneembare schakelaar aan', (
-    tester,
-  ) async {
-    await pumpDialog(
-      tester,
-      reveal: false,
-      deck: degradedDeck(accepted: true),
-    );
-
-    expect(find.textContaining('geaccepteerd'), findsWidgets);
-    expect(acceptSwitch(tester).value, isTrue);
+    expect(find.textContaining('waarschuwing'), findsWidgets);
+    expect(find.textContaining('geaccepteerd'), findsNothing);
   });
 
   testWidgets('controle uit in instellingen verbergt de Marp-sectie', (
     tester,
   ) async {
-    SharedPreferences.setMockInitialValues({
-      'marpCompatChecksEnabled': false,
-    });
+    SharedPreferences.setMockInitialValues({'marpCompatChecksEnabled': false});
     await pumpDialog(tester, reveal: false, deck: degradedDeck());
     // De instelling laadt asynchroon; geef _load de kans te ronden.
     await tester.pump(const Duration(milliseconds: 100));
     await tester.pumpAndSettle();
 
-    expect(
-      find.text('Marp-aandachtspunten geaccepteerd'),
-      findsNothing,
-    );
-    expect(find.text('Marp-compatibel'), findsNothing);
+    expect(find.textContaining('Marp ·'), findsNothing);
   });
 
-  testWidgets('schoon deck toont status maar geen zetbare schakelaar', (
-    tester,
-  ) async {
+  testWidgets('schoon deck toont de groene status', (tester) async {
     // Het standaardthema 'ocideck' is geen ingebouwd Marp-thema en zou als los
     // bestand een warning geven; 'default' is Marp-zuiver.
     await pumpDialog(
@@ -150,8 +67,7 @@ void main() {
       deck: const Deck(title: 'Test', theme: 'default'),
     );
 
-    expect(find.text('Marp-compatibel'), findsOneWidget);
-    expect(acceptSwitch(tester).onChanged, isNull);
+    expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsOneWidget);
   });
 
   testWidgets('MIAUW-velden blijven weg als de module uitstaat', (

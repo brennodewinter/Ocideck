@@ -346,7 +346,6 @@ style: |
           showRehearsalSummary:
               true, // #607: true is nu de niet-standaard, dus geschreven
           playOnly: true,
-          marpCompatAccepted: true,
           improvementFramework: 'dmaic',
           marpStyle: const MarpStyle(
             color: '#112233',

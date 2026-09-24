@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../l10n/marp_compatibility_localization.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/marp_compatibility.dart';
 import '../../theme/app_theme.dart';
@@ -10,16 +11,17 @@ import '../../theme/app_theme.dart';
 /// aandachtspunten slaan zonder vraag op, want daarvoor bestaat de
 /// deckbrede acceptatievlag.
 ///
-/// Geeft `true` bij "Toch opslaan", `false` bij "Terug" of sluiten.
-Future<bool> confirmMarpIncompatibleSave(
+enum MarpSaveDecision { review, saveAnyway }
+
+/// Geeft de gekozen vervolgstap terug; sluiten annuleert het opslaan.
+Future<MarpSaveDecision?> confirmMarpIncompatibleSave(
   BuildContext context,
   MarpCompatReport report,
 ) async {
-  final result = await showDialog<bool>(
+  return showDialog<MarpSaveDecision>(
     context: context,
     builder: (ctx) => _MarpIncompatibleDialog(report: report),
   );
-  return result ?? false;
 }
 
 class _MarpIncompatibleDialog extends StatelessWidget {
@@ -40,7 +42,7 @@ class _MarpIncompatibleDialog extends StatelessWidget {
           const SizedBox(width: 8),
           Flexible(
             child: Text(
-              l10n.d('Niet Marp-compatibel'),
+              'Marp · ${l10n.d('Probleem')}',
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -54,7 +56,7 @@ class _MarpIncompatibleDialog extends StatelessWidget {
           children: [
             Text(
               l10n.d(
-                'Dit bestand kan Marp niet goed weergeven. In Marp of een andere tool opent het niet zoals bedoeld — controleer de bevindingen of sla toch op.',
+                'Markdown kon niet worden verwerkt. Controleer de syntax.',
               ),
             ),
             const SizedBox(height: 12),
@@ -73,7 +75,7 @@ class _MarpIncompatibleDialog extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        issue.message,
+                        localizeMarpCompatibilityIssue(l10n, issue),
                         style: const TextStyle(fontSize: 12),
                       ),
                     ),
@@ -82,7 +84,7 @@ class _MarpIncompatibleDialog extends StatelessWidget {
               ),
             if (errors.length > 3)
               Text(
-                '+${errors.length - 3} ${l10n.d('meer — zie de compatibiliteitsbalk in de markdown-modus')}',
+                '+${errors.length - 3} ${l10n.d('Meer')}',
                 style: TextStyle(fontSize: 11, color: AppTheme.slate400),
               ),
           ],
@@ -90,12 +92,12 @@ class _MarpIncompatibleDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context, false),
-          child: Text(l10n.d('Terug')),
+          onPressed: () => Navigator.pop(context, MarpSaveDecision.review),
+          child: Text('Markdown · ${l10n.d('Openen')}'),
         ),
         ElevatedButton(
-          onPressed: () => Navigator.pop(context, true),
-          child: Text(l10n.d('Toch opslaan')),
+          onPressed: () => Navigator.pop(context, MarpSaveDecision.saveAnyway),
+          child: Text(l10n.d('Opslaan')),
         ),
       ],
     );

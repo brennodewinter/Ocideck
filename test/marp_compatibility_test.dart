@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/marp_compatibility.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -32,9 +31,7 @@ Tekst.
     String markdown, {
     MarpCompatContext context = MarpCompatContext.project,
     bool deckScope = true,
-  }) => checker
-      .check(markdown, context: context, deckScope: deckScope)
-      .status;
+  }) => checker.check(markdown, context: context, deckScope: deckScope).status;
 
   int warningsOf(
     String markdown, {
@@ -93,8 +90,10 @@ ocideck_target_seconds: 300
 
   group('status: incompatible', () {
     test('geen front matter = geen Marp', () {
-      expect(statusOf('# Gewone tekst\n\nGeen slides.'), 
-          MarpCompatStatus.incompatible);
+      expect(
+        statusOf('# Gewone tekst\n\nGeen slides.'),
+        MarpCompatStatus.incompatible,
+      );
     });
 
     test('marp: true ontbreekt', () {
@@ -229,7 +228,7 @@ marp: true
       expect(statusOf(md), MarpCompatStatus.degraded);
     });
 
-    test('tlp-holdback valt weg', () {
+    test('werkelijk achtergehouden TLP-dia is incompatibel', () {
       const md = '''
 ---
 marp: true
@@ -238,6 +237,33 @@ marp: true
 <!-- tlp: red -->
 
 # Intern
+''';
+      expect(statusOf(md), MarpCompatStatus.incompatible);
+    });
+
+    test('TLP-dia binnen deckniveau blijft een waarschuwing', () {
+      const md = '''
+---
+marp: true
+tlp: red
+---
+
+<!-- tlp: red -->
+
+# Intern
+''';
+      expect(statusOf(md), MarpCompatStatus.degraded);
+    });
+
+    test('afbeeldingscallouts degraderen', () {
+      const md = '''
+---
+marp: true
+ocideck_callouts:
+  slide-1: marker
+---
+
+# Dia
 ''';
       expect(statusOf(md), MarpCompatStatus.degraded);
     });
@@ -346,68 +372,6 @@ marp: true
     });
   });
 
-  group('acceptatievlag', () {
-    const degradedDeck = '''
----
-marp: true
----
-
-<!-- _class: chart -->
-
-```chart
-{}
-```
-''';
-
-    test('warnings + vlag = geaccepteerd', () {
-      const md = '''
----
-marp: true
-ocideck_marp_compat_accepted: true
----
-
-<!-- _class: chart -->
-
-```chart
-{}
-```
-''';
-      final report = checker.check(md);
-      expect(report.status, MarpCompatStatus.accepted);
-      expect(report.accepted, isTrue);
-      // De bevindingen blijven bestaan — geaccepteerd is niet verdwenen.
-      expect(report.warningCount, greaterThan(0));
-    });
-
-    test('fouten blijven rood ook met vlag', () {
-      const md = '''
----
-marp: false
-ocideck_marp_compat_accepted: true
----
-
-# Dia
-''';
-      expect(statusOf(md), MarpCompatStatus.incompatible);
-    });
-
-    test('vlag zonder warnings blijft groen', () {
-      const md = '''
----
-marp: true
-ocideck_marp_compat_accepted: true
----
-
-# Dia
-''';
-      expect(statusOf(md), MarpCompatStatus.compatible);
-    });
-
-    test('zonder vlag is dezelfde bron oranje', () {
-      expect(statusOf(degradedDeck), MarpCompatStatus.degraded);
-    });
-  });
-
   group('scope', () {
     test('slide-scope eist geen front matter', () {
       expect(
@@ -434,9 +398,12 @@ ocideck_marp_compat_accepted: true
             Slide.create(
               SlideType.bullets,
             ).copyWith(title: 'Punten', bullets: const ['een', 'twee']),
-            Slide.create(
-              SlideType.table,
-            ).copyWith(title: 'Tabel', tableRows: const [['a', 'b']]),
+            Slide.create(SlideType.table).copyWith(
+              title: 'Tabel',
+              tableRows: const [
+                ['a', 'b'],
+              ],
+            ),
           ],
         ),
       );
@@ -449,49 +416,40 @@ ocideck_marp_compat_accepted: true
     });
   });
 
-  group('vlag round-trip', () {
-    test('geaccepteerd deck schrijft en leest de sleutel terug', () {
-      final service = MarkdownService();
-      final deck = Deck(
-        title: 'Demo',
-        marpCompatAccepted: true,
-        slides: [Slide.create(SlideType.title)],
-      );
-      final markdown = service.generateDeck(deck);
-      expect(markdown, contains('ocideck_marp_compat_accepted: true'));
-
-      final parsed = service.parseDeck(markdown);
-      expect(parsed?.marpCompatAccepted, isTrue);
-
-      // En de checker leest dezelfde vlag uit de tekst.
-      expect(checker.check(markdown).accepted, isTrue);
-    });
-
-    test('niet-geaccepteerd deck schrijft de sleutel niet', () {
-      final markdown = MarkdownService().generateDeck(
-        Deck(title: 'Demo', slides: [Slide.create(SlideType.title)]),
-      );
-      expect(markdown, isNot(contains('ocideck_marp_compat_accepted')));
-    });
-
-    test('een handgeschreven bestand zonder sleutel is niet geaccepteerd', () {
-      final parsed = MarkdownService().parseDeck(cleanDeck);
-      expect(parsed?.marpCompatAccepted, isFalse);
-    });
-
-    test('open → save → open houdt de vlag', () {
-      final service = MarkdownService();
+  group('privacygrenzen', () {
+    test('deckbrede redactie is incompatibel', () {
       const md = '''
 ---
 marp: true
-ocideck_marp_compat_accepted: true
+privacy: redact
 ---
 
-# Dia
+# Dossier
 ''';
-      final once = service.parseDeck(md);
-      final twice = service.parseDeck(service.generateDeck(once!));
-      expect(twice?.marpCompatAccepted, isTrue);
+      expect(statusOf(md), MarpCompatStatus.incompatible);
+    });
+
+    test('redactie per dia is incompatibel', () {
+      const md = '''
+---
+marp: true
+---
+
+<!-- ocideck_privacy: redact -->
+# Dossier
+''';
+      expect(statusOf(md), MarpCompatStatus.incompatible);
+    });
+
+    test('handmatige redactiemarkering is incompatibel', () {
+      const md = '''
+---
+marp: true
+---
+
+# Dossier [[geheim]]
+''';
+      expect(statusOf(md), MarpCompatStatus.incompatible);
     });
   });
 
@@ -528,6 +486,35 @@ marp: true
 ```
 ''';
       expect(warningsOf(md), 0);
+    });
+
+    test('vier backticks sluiten niet op drie backticks', () {
+      const md = '''
+---
+marp: true
+---
+
+````markdown
+```
+<!-- skip -->
+tekst
+---
+````
+''';
+      expect(statusOf(md), MarpCompatStatus.compatible);
+    });
+
+    test('redactiemarkering in fenced code is een voorbeeld', () {
+      const md = '''
+---
+marp: true
+---
+
+```markdown
+[[voorbeeld]]
+```
+''';
+      expect(statusOf(md), MarpCompatStatus.compatible);
     });
   });
 }

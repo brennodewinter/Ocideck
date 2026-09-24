@@ -11,9 +11,12 @@ import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/state/editor_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'support/pump_until.dart';
 
 /// De opslaan-poort uit `saveDeckWithDestination`: alleen een rode status
 /// (Marp kan het deck niet weergeven) vraagt om bevestiging. Aandachtspunten
@@ -61,7 +64,7 @@ void main() {
 
   Deck cleanDeck() => const Deck(title: 'Test', theme: 'default');
 
-  var _saved = false;
+  var saved = false;
 
   /// Knop die de echte opslaantrechter aanroept. De `watch` op settings trapt
   /// `_load` al bij de eerste build af, zodat de instelling geladen is vóór
@@ -74,7 +77,7 @@ void main() {
             ref.watch(settingsProvider);
             return ElevatedButton(
               onPressed: () async {
-                _saved = await saveDeckWithDestination(context, ref, n);
+                saved = await saveDeckWithDestination(context, ref, n);
               },
               child: const Text('save'),
             );
@@ -85,92 +88,92 @@ void main() {
   );
 
   /// De opslagketen schrijft echt naar schijf — dat loopt alleen door in
-  /// `runAsync`. Wacht tot [until] waar is (dialoog zichtbaar óf `_saved`
+  /// `runAsync`. Wacht tot [until] waar is (dialoog zichtbaar óf [saved]
   /// gezet), met een royale grens.
   Future<bool> waitFor(
     WidgetTester tester,
     bool Function() until, {
     Future<void> Function()? start,
   }) async {
-    var reached = false;
     await tester.runAsync(() async {
       if (start != null) {
         await start();
-        await tester.pump();
-      }
-      final deadline = DateTime.now().add(const Duration(seconds: 15));
-      while (DateTime.now().isBefore(deadline)) {
-        if (until()) {
-          reached = true;
-          break;
-        }
-        await tester.pump();
-        await Future<void>.delayed(const Duration(milliseconds: 10));
-      }
-      reached = reached || until();
-      for (var i = 0; i < 10; i++) {
-        await tester.pump();
-        await Future<void>.delayed(const Duration(milliseconds: 5));
       }
     });
+    await pumpUntil(
+      tester,
+      until,
+      timeout: const Duration(seconds: 15),
+      reason: 'de Marp-opslagroute rondde niet af',
+    );
     await tester.pumpAndSettle();
-    return reached;
+    return true;
   }
 
-  bool dialogUp() => find.text('Niet Marp-compatibel').evaluate().isNotEmpty;
+  bool dialogUp() => find.text('Marp · Probleem').evaluate().isNotEmpty;
 
-  testWidgets('rode status vraagt om bevestiging; Terug breekt af', (
-    tester,
-  ) async {
-    _saved = true;
+  testWidgets('rode status kan in Markdown worden bekeken', (tester) async {
+    saved = true;
     await tester.pumpWidget(host(notifier(redDeck())));
     await tester.pumpAndSettle();
 
-    // De controle is synchronis en "Terug" doet geen I/O: de hele route loopt
-    // in fake-async, zonder runAsync.
+    // De controle is synchroon en de herstelactie doet geen I/O.
     await tester.tap(find.text('save'));
     await tester.pumpAndSettle();
 
     expect(dialogUp(), isTrue);
-    expect(find.text('Toch opslaan'), findsOneWidget);
-    expect(find.text('Terug'), findsOneWidget);
+    expect(find.text('Opslaan'), findsOneWidget);
+    expect(find.text('Markdown · Openen'), findsOneWidget);
 
-    await tester.tap(find.text('Terug'));
+    await tester.tap(find.text('Markdown · Openen'));
     await tester.pumpAndSettle();
 
-    expect(_saved, isFalse);
+    expect(saved, isFalse);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(MaterialApp)),
+    );
+    expect(container.read(editorProvider).mode, EditorMode.markdown);
+    expect(container.read(editorProvider).markdownScope, MarkdownScope.deck);
     // Niets weggeschreven: het doelbestand bestaat niet eens.
     expect(File('${tmp.path}/deck.md').existsSync(), isFalse);
   });
 
-  testWidgets('"Toch opslaan" schrijft het bestand alsnog', (tester) async {
-    _saved = false;
+  testWidgets('"Opslaan" schrijft het bestand alsnog', (tester) async {
+    saved = false;
     await tester.pumpWidget(host(notifier(redDeck())));
     await tester.pumpAndSettle();
 
     expect(
-      await waitFor(tester, dialogUp, start: () => tester.tap(find.text('save'))),
+      await waitFor(
+        tester,
+        dialogUp,
+        start: () => tester.tap(find.text('save')),
+      ),
       isTrue,
     );
     expect(
       await waitFor(
         tester,
-        () => _saved,
-        start: () => tester.tap(find.text('Toch opslaan')),
+        () => saved,
+        start: () => tester.tap(find.text('Opslaan')),
       ),
       isTrue,
-      reason: 'de opslag na "Toch opslaan" liep niet door',
+      reason: 'de opslag na "Opslaan" liep niet door',
     );
     expect(File('${tmp.path}/deck.md').readAsStringSync(), contains("'x"));
   });
 
   testWidgets('aandachtspunten slaan zonder dialoog op', (tester) async {
-    _saved = false;
+    saved = false;
     await tester.pumpWidget(host(notifier(degradedDeck())));
     await tester.pumpAndSettle();
 
     expect(
-      await waitFor(tester, () => _saved, start: () => tester.tap(find.text('save'))),
+      await waitFor(
+        tester,
+        () => saved,
+        start: () => tester.tap(find.text('save')),
+      ),
       isTrue,
       reason: 'de opslag met aandachtspunten liep niet door',
     );
@@ -179,12 +182,16 @@ void main() {
   });
 
   testWidgets('schoon deck slaat zonder dialoog op', (tester) async {
-    _saved = false;
+    saved = false;
     await tester.pumpWidget(host(notifier(cleanDeck())));
     await tester.pumpAndSettle();
 
     expect(
-      await waitFor(tester, () => _saved, start: () => tester.tap(find.text('save'))),
+      await waitFor(
+        tester,
+        () => saved,
+        start: () => tester.tap(find.text('save')),
+      ),
       isTrue,
     );
     expect(dialogUp(), isFalse);
@@ -193,26 +200,26 @@ void main() {
   testWidgets('controle uit → rood deck slaat toch zonder vraag op', (
     tester,
   ) async {
-    SharedPreferences.setMockInitialValues({
-      'marpCompatChecksEnabled': false,
-    });
-    _saved = false;
+    SharedPreferences.setMockInitialValues({'marpCompatChecksEnabled': false});
+    saved = false;
     await tester.pumpWidget(host(notifier(redDeck())));
     // De instelling laadt asynchroon (echte prefs-IO) — wacht er echt op.
-    await tester.runAsync(() async {
-      final container = ProviderScope.containerOf(
-        tester.element(find.byType(MaterialApp)),
-      );
-      final deadline = DateTime.now().add(const Duration(seconds: 5));
-      while (container.read(settingsProvider).marpCompatChecksEnabled &&
-          DateTime.now().isBefore(deadline)) {
-        await Future<void>.delayed(const Duration(milliseconds: 10));
-      }
-    });
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(MaterialApp)),
+    );
+    await pumpUntil(
+      tester,
+      () => !container.read(settingsProvider).marpCompatChecksEnabled,
+      reason: 'de Marp-instelling bleef ingeschakeld',
+    );
     await tester.pumpAndSettle();
 
     expect(
-      await waitFor(tester, () => _saved, start: () => tester.tap(find.text('save'))),
+      await waitFor(
+        tester,
+        () => saved,
+        start: () => tester.tap(find.text('save')),
+      ),
       isTrue,
       reason: 'de opslag met uitgeschakelde controle liep niet door',
     );

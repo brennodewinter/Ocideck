@@ -5837,6 +5837,16 @@ Gebruik dit voor bulkbewerkingen, kopiëren-plakken vanuit een ander gereedschap
 zijn in ruwe tekst. Ga terug met **Apply** (om de tekst terug te parsen naar getypeerde slides)
 of **Cancel** (je bewerkingen weggooien en terugkeren naar de visuele bewerker).
 
+Met **Marp · Controleren** in Instellingen (standaard aan) toetst een tweede
+statusbalk of de bron ook bruikbaar is in Marp, het gereedschap dat van Markdown
+een presentatie maakt. Groen betekent geen bekende afwijking, oranje dat Marp
+het bestand kan weergeven maar OciDeck-gedrag verandert, en rood dat Marp het
+niet veilig kan overnemen. Onder rood vallen ook privacyredactie en een door TLP
+achtergehouden dia, omdat de oorspronkelijke Markdown die inhoud nog bevat. De
+controle is regelgebaseerd en geen tweede renderer; bevindingen wijzen met een
+regelnummer naar de bron. Bij het opslaan van een rood deck kun je de volledige
+Markdown openen of bewust doorgaan. Oranje bevindingen blokkeren opslaan niet.
+
 Een **Source**-chip (code-icoon) in de header van de gestructureerde bewerker doet hetzelfde,
 maar springt meteen naar de scope *This slide* (hieronder) zodat je op de ruwe
 markdown belandt van de slide die je aan het bewerken was. Het is een snelkoppeling naar de bestaande

@@ -34,21 +34,6 @@ theme: default
 ```
 ''';
 
-/// Datzelfde deck, met de acceptatievlag.
-const _acceptedDeck = '''
----
-marp: true
-theme: default
-ocideck_marp_compat_accepted: true
----
-
-<!-- _class: chart -->
-
-```chart
-{"kind":"bar"}
-```
-''';
-
 /// Geen Marp: geen front matter.
 const _brokenDeck = '# Titel\n\nGeen front matter.';
 
@@ -92,82 +77,80 @@ void main() {
   testWidgets('schoon deck toont groene Marp-compatibel-balk', (tester) async {
     await tester.pumpWidget(_host(_cleanDeck));
     await _settle(tester);
-    expect(find.text('Marp-compatibel'), findsOneWidget);
+    expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsOneWidget);
     expect(find.text('Accepteren voor dit deck'), findsNothing);
   });
 
-  testWidgets('gedegradeerd deck toont oranje balk met acceptatieknop', (
-    tester,
-  ) async {
+  testWidgets('gedegradeerd deck toont oranje balk', (tester) async {
     await tester.pumpWidget(_host(_degradedDeck));
     await _settle(tester);
-    expect(find.textContaining('aandachtspunt'), findsOneWidget);
-    expect(find.text('Accepteren voor dit deck'), findsOneWidget);
-  });
-
-  testWidgets('accepteren schrijft de vlag in de front matter', (tester) async {
-    await tester.pumpWidget(_host(_degradedDeck));
-    await _settle(tester);
-
-    await tester.tap(find.text('Accepteren voor dit deck'));
-    await _settle(tester);
-
-    final field = tester.widget<TextField>(find.byType(TextField));
-    expect(
-      field.controller?.text,
-      contains('ocideck_marp_compat_accepted: true'),
-    );
-    // De balk toont meteen de geaccepteerde staat.
-    expect(find.textContaining('geaccepteerd'), findsOneWidget);
-    expect(find.text('Acceptatie terugnemen'), findsOneWidget);
-  });
-
-  testWidgets('terugnemen haalt de vlag weg en de oranje keert terug', (
-    tester,
-  ) async {
-    await tester.pumpWidget(_host(_acceptedDeck));
-    await _settle(tester);
-    expect(find.textContaining('geaccepteerd'), findsOneWidget);
-
-    await tester.tap(find.text('Acceptatie terugnemen'));
-    await _settle(tester);
-
-    expect(find.textContaining('aandachtspunt'), findsOneWidget);
+    expect(find.textContaining('waarschuwing'), findsOneWidget);
     expect(find.textContaining('geaccepteerd'), findsNothing);
   });
 
   testWidgets('rood deck biedt geen acceptatie aan', (tester) async {
     await tester.pumpWidget(_host(_brokenDeck));
     await _settle(tester);
-    expect(find.textContaining('Niet Marp-compatibel'), findsOneWidget);
+    expect(find.textContaining('Marp · Probleem'), findsOneWidget);
     expect(find.text('Accepteren voor dit deck'), findsNothing);
   });
 
   testWidgets('uitgeklapte bevindingen springen naar de regel', (tester) async {
     await tester.pumpWidget(_host(_degradedDeck));
     await _settle(tester);
-    await tester.tap(find.textContaining('aandachtspunt'));
+    await tester.tap(find.textContaining('waarschuwing'));
     await _settle(tester);
-    // De chart-fence en de class-token staan als bevindingen in de lijst.
-    expect(find.textContaining('codeblok'), findsWidgets);
+    expect(find.textContaining('Niet overgenomen'), findsWidgets);
   });
 
   testWidgets('controle uit in instellingen → geen balk', (tester) async {
-    SharedPreferences.setMockInitialValues({
-      'marpCompatChecksEnabled': false,
-    });
+    SharedPreferences.setMockInitialValues({'marpCompatChecksEnabled': false});
     await tester.pumpWidget(_host(_degradedDeck));
     // De instelling laadt asynchroon; geef _load de kans te ronden.
     await _settle(tester);
     final container = ProviderScope.containerOf(
       tester.element(find.byType(MarkdownDeckEditor)),
     );
-    expect(
-      container.read(settingsProvider).marpCompatChecksEnabled,
-      isFalse,
-    );
+    expect(container.read(settingsProvider).marpCompatChecksEnabled, isFalse);
     await _settle(tester);
-    expect(find.textContaining('aandachtspunt'), findsNothing);
-    expect(find.text('Marp-compatibel'), findsNothing);
+    expect(find.textContaining('waarschuwing'), findsNothing);
+    expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsNothing);
+  });
+
+  testWidgets('live inschakelen toont de balk zonder tekstwijziging', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({'marpCompatChecksEnabled': false});
+    await tester.pumpWidget(_host(_cleanDeck));
+    await _settle(tester);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(MarkdownDeckEditor)),
+    );
+    expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsNothing);
+
+    await container
+        .read(settingsProvider.notifier)
+        .setMarpCompatChecksEnabled(true);
+    await _settle(tester);
+
+    expect(find.text('Marp · Geen syntaxproblemen gevonden'), findsOneWidget);
+  });
+
+  testWidgets('lopende hercontrole kondigt niet de oude uitslag aan', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await tester.pumpWidget(_host(_cleanDeck));
+    await _settle(tester);
+
+    await tester.enterText(find.byType(TextField), '$_cleanDeck\n');
+    await tester.pump();
+
+    expect(find.bySemanticsLabel(RegExp('Controleren…')), findsWidgets);
+    expect(
+      find.bySemanticsLabel('Marp · Geen syntaxproblemen gevonden'),
+      findsNothing,
+    );
+    semantics.dispose();
   });
 }

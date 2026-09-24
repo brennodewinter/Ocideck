@@ -268,13 +268,6 @@ class Deck {
   /// front-matter-sleutel `ocideck_play_only` uit het bestand te halen.
   final bool playOnly;
 
-  /// Acceptatie van de oranje Marp-compatibiliteitsbevindingen voor dit deck
-  /// (`ocideck_marp_compat_accepted` in de front matter). Één vlag voor het
-  /// hele deck: voor materiaal waar wegvallen in andere Marp-tools bewust
-  /// geen probleem is (bijv. een cursus). Zwijgt alleen warnings — fouten
-  /// (rood) zijn nooit acceptabel.
-  final bool marpCompatAccepted;
-
   /// LSS-/Lean-kader voor dit deck (`dmaic`, `dmadv`, `kaizen`, `a3`, `8d`).
   /// Leeg wanneer geen kader gekozen. Round-trips als
   /// `ocideck_improvement_framework` in de front matter.
@@ -446,7 +439,6 @@ class Deck {
     this.presentationTiming = PresentationTimingConfig.disabled,
     this.showRehearsalSummary = false,
     this.playOnly = false,
-    this.marpCompatAccepted = false,
     this.improvementFramework = '',
     this.improvementY01Metric = ImprovementY01Metric.empty,
     this.finalized = false,
@@ -492,7 +484,6 @@ class Deck {
     PresentationTimingConfig? presentationTiming,
     bool? showRehearsalSummary,
     bool? playOnly,
-    bool? marpCompatAccepted,
     String? improvementFramework,
     ImprovementY01Metric? improvementY01Metric,
     String? improvementY01,
@@ -540,7 +531,6 @@ class Deck {
       presentationTiming: presentationTiming ?? this.presentationTiming,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,
       playOnly: playOnly ?? this.playOnly,
-      marpCompatAccepted: marpCompatAccepted ?? this.marpCompatAccepted,
       improvementFramework: improvementFramework ?? this.improvementFramework,
       improvementY01Metric:
           improvementY01Metric ??
