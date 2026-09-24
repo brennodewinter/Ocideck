@@ -1629,6 +1629,36 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'AI: functioneert': 'AI: működik',
+  'AI: wordt gecontroleerd…': 'AI: ellenőrzés…',
+  'AI: server niet bereikbaar': 'AI: a kiszolgáló nem érhető el',
+  'AI: niet volledig ingesteld': 'AI: nincs teljesen beállítva',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: a helyi kiszolgálónak ezen az eszközön kell futnia',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: a kiszolgáló nincs megbízhatóként jelölve',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: kimenő forgalom engedélye szükséges',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: a külső szolgáltatás még nincs megerősítve',
+  'AI: niet beschikbaar in de webversie': 'AI: nem érhető el a webes verzióban',
+  'eLearning: ingelogd': 'eLearning: bejelentkezve',
+  'eLearning: aanmelden loopt…': 'eLearning: bejelentkezés…',
+  'eLearning: server niet bereikbaar': 'eLearning: a kiszolgáló nem érhető el',
+  'eLearning: aanmelden mislukt': 'eLearning: a bejelentkezés sikertelen',
+  'eLearning: niet ingelogd': 'eLearning: nincs bejelentkezve',
+  'Vertaal met AI': 'Fordítás AI-val',
+  'Vertaal met AI…': 'Fordítás AI-val…',
+  'Doeltaal': 'Célnyelv',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Minden látható szöveg és előadói jegyzet lefordításra kerül. A fordítás másolatként nyílik meg új lapon — az eredeti változatlan marad.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Használat előtt ellenőrizd a fordítást: az AI-fordítások vázlatok.',
+  'Vertalen': 'Fordítás',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'A lefordított másolat új lapon nyílt meg.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'dia kihagyva — az eredeti szöveg megmaradt.',
   'Kies een naam en waar het document komt te staan.':
       'Válasszon nevet és helyet a dokumentum mentéséhez.',
   'Bijv. Vergadernotities': 'Pl. Értekezleti jegyzetek',

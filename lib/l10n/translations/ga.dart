@@ -1657,6 +1657,38 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'AI: functioneert': 'AI: ag feidhmiú',
+  'AI: wordt gecontroleerd…': 'AI: á sheiceáil…',
+  'AI: server niet bereikbaar': 'AI: níl an freastalaí le bhaint amach',
+  'AI: niet volledig ingesteld': 'AI: nach bhfuil sé cumraithe go hiomlán',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: ní mór don fhreastalaí áitiúil a bheith ag rith ar an ngléas seo',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: níl an freastalaí marcáilte mar iontaofa',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: teastaíonn cead tráchta amach',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: seirbhís sheachtrach nach bhfuil deimhnithe fós',
+  'AI: niet beschikbaar in de webversie':
+      'AI: níl sé ar fáil sa leagan gréasáin',
+  'eLearning: ingelogd': 'eLearning: logáilte isteach',
+  'eLearning: aanmelden loopt…': 'eLearning: ag logáil isteach…',
+  'eLearning: server niet bereikbaar':
+      'eLearning: níl an freastalaí le bhaint amach',
+  'eLearning: aanmelden mislukt': 'eLearning: theip ar an logáil isteach',
+  'eLearning: niet ingelogd': 'eLearning: nach bhfuil tú logáilte isteach',
+  'Vertaal met AI': 'Aistrigh le AI',
+  'Vertaal met AI…': 'Aistrigh le AI…',
+  'Doeltaal': 'Teanga sprice',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Aistrítear gach téacs infheicthe agus nótaí cainteora. Osclaítear an t-aistriúchán mar chóip i gcluaisín nua — fanann an bunleagan gan athrú.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Seiceáil an t-aistriúchán sula n-úsáideann tú é: is dréachtaí iad aistriúcháin AI.',
+  'Vertalen': 'Aistrigh',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Cóip aistrithe oscailte i gcluaisín nua.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'sleamhnáin scipeáilte — téacs bunaidh coinnithe.',
   'Kies een naam en waar het document komt te staan.':
       'Roghnaigh ainm agus an áit a sábhálfar an doiciméad.',
   'Bijv. Vergadernotities': 'M.sh. Nótaí cruinnithe',

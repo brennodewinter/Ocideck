@@ -1655,6 +1655,36 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'AI: functioneert': 'IA: a funcionar',
+  'AI: wordt gecontroleerd…': 'IA: a verificar…',
+  'AI: server niet bereikbaar': 'IA: servidor inacessível',
+  'AI: niet volledig ingesteld': 'IA: não totalmente configurada',
+  'AI: lokale server moet op dit apparaat draaien':
+      'IA: o servidor local tem de estar em execução neste dispositivo',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'IA: servidor não marcado como fiável',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'IA: é necessária autorização para tráfego de saída',
+  'AI: externe dienst nog niet bevestigd':
+      'IA: serviço externo ainda não confirmado',
+  'AI: niet beschikbaar in de webversie': 'IA: não disponível na versão web',
+  'eLearning: ingelogd': 'eLearning: sessão iniciada',
+  'eLearning: aanmelden loopt…': 'eLearning: a iniciar sessão…',
+  'eLearning: server niet bereikbaar': 'eLearning: servidor inacessível',
+  'eLearning: aanmelden mislukt': 'eLearning: falha ao iniciar sessão',
+  'eLearning: niet ingelogd': 'eLearning: sessão não iniciada',
+  'Vertaal met AI': 'Traduzir com IA',
+  'Vertaal met AI…': 'Traduzir com IA…',
+  'Doeltaal': 'Idioma de destino',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Todos os textos visíveis e notas do orador são traduzidos. A tradução abre como cópia num novo separador — o original permanece inalterado.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Verifique a tradução antes de a usar: as traduções de IA são rascunhos.',
+  'Vertalen': 'Traduzir',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Cópia traduzida aberta num novo separador.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'diapositivos ignorados — texto original mantido.',
   'Kies een naam en waar het document komt te staan.':
       'Escolha um nome e onde o documento será guardado.',
   'Bijv. Vergadernotities': 'P. ex. Notas da reunião',

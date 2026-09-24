@@ -1630,6 +1630,36 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'AI: functioneert': 'KI: funktioniert',
+  'AI: wordt gecontroleerd…': 'KI: wird prüeft…',
+  'AI: server niet bereikbaar': 'KI: Server nöd erreichbar',
+  'AI: niet volledig ingesteld': 'KI: nöd vollständig iigrichtet',
+  'AI: lokale server moet op dit apparaat draaien':
+      'KI: lokale Server mues uf däm Gerät laufe',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'KI: Server nöd als vertrouenswürdig markiert',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'KI: Zuestimmig für usgände Verkehr nötig',
+  'AI: externe dienst nog niet bevestigd':
+      'KI: externe Dienscht no nöd bstätigt',
+  'AI: niet beschikbaar in de webversie': 'KI: i de Webversion nöd verfüegbar',
+  'eLearning: ingelogd': 'eLearning: aagmäldet',
+  'eLearning: aanmelden loopt…': 'eLearning: Aamäldig lauft…',
+  'eLearning: server niet bereikbaar': 'eLearning: Server nöd erreichbar',
+  'eLearning: aanmelden mislukt': 'eLearning: Aamäldig fählgschlaa',
+  'eLearning: niet ingelogd': 'eLearning: nöd aagmäldet',
+  'Vertaal met AI': 'Mit KI übersetze',
+  'Vertaal met AI…': 'Mit KI übersetze…',
+  'Doeltaal': 'Ziilspraach',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Alli sichtbare Täxte und Referäntsnotize wärde übersetzt. D Übersetzig gaat als Kopii in eme nöie Tab uuf — s Original blibt uveränderet.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Prüef d Übersetzig vorem Bruuche: KI-Übersetzige sind Entwürf.',
+  'Vertalen': 'Übersetze',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Übersetzti Kopii in eme nöie Tab uufgmaacht.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'Folie übersprunge — Originaltäxt b\'halte.',
   'Kies een naam en waar het document komt te staan.':
       'Wähl en Name und wohin s Dokument gspeicheret wird.',
   'Bijv. Vergadernotities': 'Z. B. Sitzigsnotize',

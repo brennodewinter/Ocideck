@@ -1627,6 +1627,36 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'AI: functioneert': 'AI: deluje',
+  'AI: wordt gecontroleerd…': 'AI: preverjanje…',
+  'AI: server niet bereikbaar': 'AI: strežnik ni dosegljiv',
+  'AI: niet volledig ingesteld': 'AI: ni v celoti nastavljeno',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokalni strežnik mora delovati na tej napravi',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: strežnik ni označen kot zaupanja vreden',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: potrebno je dovoljenje za odhodni promet',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: zunanja storitev še ni potrjena',
+  'AI: niet beschikbaar in de webversie': 'AI: ni na voljo v spletni različici',
+  'eLearning: ingelogd': 'eLearning: prijavljeno',
+  'eLearning: aanmelden loopt…': 'eLearning: prijava poteka…',
+  'eLearning: server niet bereikbaar': 'eLearning: strežnik ni dosegljiv',
+  'eLearning: aanmelden mislukt': 'eLearning: prijava ni uspela',
+  'eLearning: niet ingelogd': 'eLearning: niste prijavljeni',
+  'Vertaal met AI': 'Prevedi z AI',
+  'Vertaal met AI…': 'Prevedi z AI…',
+  'Doeltaal': 'Ciljni jezik',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Vsa vidna besedila in govornikove opombe se prevedejo. Prevod se odpre kot kopija v novem zavihku — izvirnik ostane nespremenjen.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Pred uporabo preverite prevod: AI-prevodi so osnutki.',
+  'Vertalen': 'Prevedi',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Prevedena kopija odprta v novem zavihku.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'preskočeni diapozitivi — izvirno besedilo ohranjeno.',
   'Kies een naam en waar het document komt te staan.':
       'Izberite ime in mesto shranjevanja dokumenta.',
   'Bijv. Vergadernotities': 'Npr. Zapisnik sestanka',

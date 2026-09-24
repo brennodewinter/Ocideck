@@ -664,6 +664,37 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'AI: functioneert': 'IA: funzionante',
+  'AI: wordt gecontroleerd…': 'IA: verifica in corso…',
+  'AI: server niet bereikbaar': 'IA: server non raggiungibile',
+  'AI: niet volledig ingesteld': 'IA: configurazione incompleta',
+  'AI: lokale server moet op dit apparaat draaien':
+      'IA: il server locale deve essere in esecuzione su questo dispositivo',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'IA: server non contrassegnato come attendibile',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'IA: serve il consenso al traffico in uscita',
+  'AI: externe dienst nog niet bevestigd':
+      'IA: servizio esterno non ancora confermato',
+  'AI: niet beschikbaar in de webversie':
+      'IA: non disponibile nella versione web',
+  'eLearning: ingelogd': 'eLearning: accesso effettuato',
+  'eLearning: aanmelden loopt…': 'eLearning: accesso in corso…',
+  'eLearning: server niet bereikbaar': 'eLearning: server non raggiungibile',
+  'eLearning: aanmelden mislukt': 'eLearning: accesso non riuscito',
+  'eLearning: niet ingelogd': 'eLearning: non hai effettuato l\'accesso',
+  'Vertaal met AI': 'Traduci con l\'IA',
+  'Vertaal met AI…': 'Traduci con l\'IA…',
+  'Doeltaal': 'Lingua di destinazione',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Tutti i testi visibili e le note del relatore vengono tradotti. La traduzione si apre come copia in una nuova scheda — l\'originale resta invariato.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Controlla la traduzione prima di usarla: le traduzioni IA sono bozze.',
+  'Vertalen': 'Traduci',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Copia tradotta aperta in una nuova scheda.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'diapositive saltate — testo originale mantenuto.',
   'Kies een naam en waar het document komt te staan.':
       'Scegli un nome e dove verrà salvato il documento.',
   'Bijv. Vergadernotities': 'Ad es. Appunti della riunione',

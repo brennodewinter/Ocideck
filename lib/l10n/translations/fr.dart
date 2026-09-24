@@ -667,6 +667,37 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'AI: functioneert': 'IA : fonctionne',
+  'AI: wordt gecontroleerd…': 'IA : vérification…',
+  'AI: server niet bereikbaar': 'IA : serveur inaccessible',
+  'AI: niet volledig ingesteld': 'IA : configuration incomplète',
+  'AI: lokale server moet op dit apparaat draaien':
+      'IA : le serveur local doit fonctionner sur cet appareil',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'IA : serveur non marqué comme fiable',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'IA : autorisation du trafic sortant requise',
+  'AI: externe dienst nog niet bevestigd':
+      'IA : service externe pas encore confirmé',
+  'AI: niet beschikbaar in de webversie':
+      'IA : non disponible dans la version web',
+  'eLearning: ingelogd': 'eLearning : connecté',
+  'eLearning: aanmelden loopt…': 'eLearning : connexion en cours…',
+  'eLearning: server niet bereikbaar': 'eLearning : serveur inaccessible',
+  'eLearning: aanmelden mislukt': 'eLearning : échec de la connexion',
+  'eLearning: niet ingelogd': 'eLearning : non connecté',
+  'Vertaal met AI': 'Traduire avec l\'IA',
+  'Vertaal met AI…': 'Traduire avec l\'IA…',
+  'Doeltaal': 'Langue cible',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Tous les textes visibles et les notes du présentateur sont traduits. La traduction s\'ouvre en copie dans un nouvel onglet — l\'original reste inchangé.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Vérifiez la traduction avant de l\'utiliser : les traductions IA sont des brouillons.',
+  'Vertalen': 'Traduire',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Copie traduite ouverte dans un nouvel onglet.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'diapositives ignorées — texte original conservé.',
   'Kies een naam en waar het document komt te staan.':
       'Choisissez un nom et l\'emplacement où le document sera enregistré.',
   'Bijv. Vergadernotities': 'Par ex. Notes de réunion',

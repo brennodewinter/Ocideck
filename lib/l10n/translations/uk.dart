@@ -1642,6 +1642,36 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'AI: functioneert': 'ШІ: працює',
+  'AI: wordt gecontroleerd…': 'ШІ: перевірка…',
+  'AI: server niet bereikbaar': 'ШІ: сервер недоступний',
+  'AI: niet volledig ingesteld': 'ШІ: не повністю налаштовано',
+  'AI: lokale server moet op dit apparaat draaien':
+      'ШІ: локальний сервер має працювати на цьому пристрої',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'ШІ: сервер не позначено як довірений',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'ШІ: потрібен дозвіл на вихідний трафік',
+  'AI: externe dienst nog niet bevestigd':
+      'ШІ: зовнішній сервіс ще не підтверджено',
+  'AI: niet beschikbaar in de webversie': 'ШІ: недоступний у вебверсії',
+  'eLearning: ingelogd': 'eLearning: вхід виконано',
+  'eLearning: aanmelden loopt…': 'eLearning: триває вхід…',
+  'eLearning: server niet bereikbaar': 'eLearning: сервер недоступний',
+  'eLearning: aanmelden mislukt': 'eLearning: не вдалося ввійти',
+  'eLearning: niet ingelogd': 'eLearning: вхід не виконано',
+  'Vertaal met AI': 'Перекласти за допомогою ШІ',
+  'Vertaal met AI…': 'Перекласти за допомогою ШІ…',
+  'Doeltaal': 'Цільова мова',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Усі видимі тексти та нотатки доповідача перекладаються. Переклад відкривається копією в новій вкладці — оригінал залишається незмінним.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Перевірте переклад перед використанням: переклади ШІ — це чернетки.',
+  'Vertalen': 'Перекласти',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Перекладену копію відкрито в новій вкладці.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'слайдів пропущено — оригінальний текст збережено.',
   'Kies een naam en waar het document komt te staan.':
       'Виберіть назву та місце збереження документа.',
   'Bijv. Vergadernotities': 'Напр. Нотатки наради',

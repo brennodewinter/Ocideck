@@ -1643,6 +1643,37 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'AI: functioneert': 'AI: funcționează',
+  'AI: wordt gecontroleerd…': 'AI: se verifică…',
+  'AI: server niet bereikbaar': 'AI: serverul nu este accesibil',
+  'AI: niet volledig ingesteld': 'AI: nu este configurat complet',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: serverul local trebuie să ruleze pe acest dispozitiv',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: serverul nu este marcat ca de încredere',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: este necesară permisiunea pentru traficul de ieșire',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: serviciul extern nu este încă confirmat',
+  'AI: niet beschikbaar in de webversie':
+      'AI: nu este disponibil în versiunea web',
+  'eLearning: ingelogd': 'eLearning: autentificat',
+  'eLearning: aanmelden loopt…': 'eLearning: se autentifică…',
+  'eLearning: server niet bereikbaar': 'eLearning: serverul nu este accesibil',
+  'eLearning: aanmelden mislukt': 'eLearning: autentificarea a eșuat',
+  'eLearning: niet ingelogd': 'eLearning: nu ești autentificat',
+  'Vertaal met AI': 'Traduce cu AI',
+  'Vertaal met AI…': 'Traduce cu AI…',
+  'Doeltaal': 'Limba țintă',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Toate textele vizibile și notițele vorbitorului sunt traduse. Traducerea se deschide ca o copie într-o filă nouă — originalul rămâne neschimbat.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Verifică traducerea înainte de utilizare: traducerile AI sunt schițe.',
+  'Vertalen': 'Traduce',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Copia tradusă a fost deschisă într-o filă nouă.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'diapozitive omise — textul original păstrat.',
   'Kies een naam en waar het document komt te staan.':
       'Alegeți un nume și locul unde va fi salvat documentul.',
   'Bijv. Vergadernotities': 'De ex. Notițe de ședință',

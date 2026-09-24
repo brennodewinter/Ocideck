@@ -1626,6 +1626,37 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'AI: functioneert': 'AI: fungerar',
+  'AI: wordt gecontroleerd…': 'AI: kontrolleras…',
+  'AI: server niet bereikbaar': 'AI: servern är inte nåbar',
+  'AI: niet volledig ingesteld': 'AI: inte helt konfigurerad',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokal server måste köras på den här enheten',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: servern är inte markerad som betrodd',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: tillstånd för utgående trafik krävs',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: extern tjänst ännu inte bekräftad',
+  'AI: niet beschikbaar in de webversie':
+      'AI: inte tillgänglig i webbversionen',
+  'eLearning: ingelogd': 'eLearning: inloggad',
+  'eLearning: aanmelden loopt…': 'eLearning: loggar in…',
+  'eLearning: server niet bereikbaar': 'eLearning: servern är inte nåbar',
+  'eLearning: aanmelden mislukt': 'eLearning: inloggningen misslyckades',
+  'eLearning: niet ingelogd': 'eLearning: inte inloggad',
+  'Vertaal met AI': 'Översätt med AI',
+  'Vertaal met AI…': 'Översätt med AI…',
+  'Doeltaal': 'Målspråk',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Alla synliga texter och talaranteckningar översätts. Översättningen öppnas som en kopia i en ny flik — originalet förblir oförändrat.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Kontrollera översättningen före användning: AI-översättningar är utkast.',
+  'Vertalen': 'Översätt',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Översatt kopia öppnad i en ny flik.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'bilder hoppades över — originaltexten behölls.',
   'Kies een naam en waar het document komt te staan.':
       'Välj ett namn och var dokumentet ska sparas.',
   'Bijv. Vergadernotities': 'T.ex. Mötesanteckningar',

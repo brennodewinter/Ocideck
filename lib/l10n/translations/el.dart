@@ -1652,6 +1652,38 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'AI: functioneert': 'ΤΝ: λειτουργεί',
+  'AI: wordt gecontroleerd…': 'ΤΝ: γίνεται έλεγχος…',
+  'AI: server niet bereikbaar': 'ΤΝ: ο διακομιστής δεν είναι προσβάσιμος',
+  'AI: niet volledig ingesteld': 'ΤΝ: δεν έχει ρυθμιστεί πλήρως',
+  'AI: lokale server moet op dit apparaat draaien':
+      'ΤΝ: ο τοπικός διακομιστής πρέπει να εκτελείται σε αυτή τη συσκευή',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'ΤΝ: ο διακομιστής δεν έχει επισημανθεί ως αξιόπιστος',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'ΤΝ: απαιτείται άδεια για εξερχόμενη κυκλοφορία',
+  'AI: externe dienst nog niet bevestigd':
+      'ΤΝ: η εξωτερική υπηρεσία δεν έχει επιβεβαιωθεί ακόμη',
+  'AI: niet beschikbaar in de webversie':
+      'ΤΝ: δεν είναι διαθέσιμο στην έκδοση web',
+  'eLearning: ingelogd': 'eLearning: συνδεδεμένος',
+  'eLearning: aanmelden loopt…': 'eLearning: σύνδεση σε εξέλιξη…',
+  'eLearning: server niet bereikbaar':
+      'eLearning: ο διακομιστής δεν είναι προσβάσιμος',
+  'eLearning: aanmelden mislukt': 'eLearning: η σύνδεση απέτυχε',
+  'eLearning: niet ingelogd': 'eLearning: δεν έχει γίνει σύνδεση',
+  'Vertaal met AI': 'Μετάφραση με ΤΝ',
+  'Vertaal met AI…': 'Μετάφραση με ΤΝ…',
+  'Doeltaal': 'Γλώσσα-στόχος',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Όλα τα ορατά κείμενα και οι σημειώσεις του ομιλητή μεταφράζονται. Η μετάφραση ανοίγει ως αντίγραφο σε νέα καρτέλα — το πρωτότυπο παραμένει αμετάβλητο.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Ελέγξτε τη μετάφραση πριν τη χρησιμοποιήσετε: οι μεταφράσεις ΤΝ είναι προσχέδια.',
+  'Vertalen': 'Μετάφραση',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Το μεταφρασμένο αντίγραφο άνοιξε σε νέα καρτέλα.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'διαφάνειες παραλείφθηκαν — το αρχικό κείμενο διατηρήθηκε.',
   'Kies een naam en waar het document komt te staan.':
       'Επιλέξτε όνομα και πού θα αποθηκευτεί το έγγραφο.',
   'Bijv. Vergadernotities': 'Π.χ. Σημειώσεις συνάντησης',

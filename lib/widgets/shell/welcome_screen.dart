@@ -513,6 +513,9 @@ class _WelcomeScreen extends ConsumerWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             _VersionTag(palette: palette),
+            // Het statuscentrum: subtiele lampjes voor de ingestelde
+            // verbindingen (AI, eLearning), uitleg via hover-ballon.
+            const _WelcomeStatusCenter(),
             OutlinedButton.icon(
               style: buttonStyle,
               onPressed: () => DocumentReaderScreen.open(

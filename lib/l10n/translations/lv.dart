@@ -1625,6 +1625,36 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'AI: functioneert': 'AI: darbojas',
+  'AI: wordt gecontroleerd…': 'AI: notiek pārbaude…',
+  'AI: server niet bereikbaar': 'AI: serveris nav sasniedzams',
+  'AI: niet volledig ingesteld': 'AI: nav pilnībā iestatīts',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokālajam serverim jāstrādā šajā ierīcē',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: serveris nav atzīmēts kā uzticams',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: nepieciešama atļauja izejošam trafikam',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: ārējais pakalpojums vēl nav apstiprināts',
+  'AI: niet beschikbaar in de webversie': 'AI: nav pieejams tīmekļa versijā',
+  'eLearning: ingelogd': 'eLearning: pieteicies',
+  'eLearning: aanmelden loopt…': 'eLearning: notiek pieteikšanās…',
+  'eLearning: server niet bereikbaar': 'eLearning: serveris nav sasniedzams',
+  'eLearning: aanmelden mislukt': 'eLearning: pieteikšanās neizdevās',
+  'eLearning: niet ingelogd': 'eLearning: nav pieteikts',
+  'Vertaal met AI': 'Tulkot ar AI',
+  'Vertaal met AI…': 'Tulkot ar AI…',
+  'Doeltaal': 'Mērķvaloda',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Visi redzamie teksti un runātāja piezīmes tiek tulkoti. Tulkojums atveras kā kopija jaunā cilnē — oriģināls paliek nemainīts.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Pirms lietošanas pārbaudiet tulkojumu: AI tulkojumi ir melnraksti.',
+  'Vertalen': 'Tulkot',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Tulkotā kopija atvērta jaunā cilnē.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'slaidi izlaisti — oriģinālais teksts saglabāts.',
   'Kies een naam en waar het document komt te staan.':
       'Izvēlieties nosaukumu un vietu, kur dokuments tiks saglabāts.',
   'Bijv. Vergadernotities': 'Piem. Sapulces piezīmes',

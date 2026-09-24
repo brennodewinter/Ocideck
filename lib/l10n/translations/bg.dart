@@ -1647,6 +1647,36 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'AI: functioneert': 'ИИ: работи',
+  'AI: wordt gecontroleerd…': 'ИИ: проверява се…',
+  'AI: server niet bereikbaar': 'ИИ: сървърът е недостъпен',
+  'AI: niet volledig ingesteld': 'ИИ: не е напълно настроен',
+  'AI: lokale server moet op dit apparaat draaien':
+      'ИИ: локалният сървър трябва да работи на това устройство',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'ИИ: сървърът не е маркиран като доверен',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'ИИ: необходимо е разрешение за изходящ трафик',
+  'AI: externe dienst nog niet bevestigd':
+      'ИИ: външната услуга още не е потвърдена',
+  'AI: niet beschikbaar in de webversie': 'ИИ: не е наличен в уеб версията',
+  'eLearning: ingelogd': 'eLearning: вписан',
+  'eLearning: aanmelden loopt…': 'eLearning: вписване…',
+  'eLearning: server niet bereikbaar': 'eLearning: сървърът е недостъпен',
+  'eLearning: aanmelden mislukt': 'eLearning: вписването е неуспешно',
+  'eLearning: niet ingelogd': 'eLearning: не сте вписани',
+  'Vertaal met AI': 'Преведи с ИИ',
+  'Vertaal met AI…': 'Преведи с ИИ…',
+  'Doeltaal': 'Целеви език',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Всички видими текстове и бележки на лектора се превеждат. Преводът се отваря като копие в нов раздел — оригиналът остава непроменен.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Проверете превода преди употреба: преводите с ИИ са чернови.',
+  'Vertalen': 'Преведи',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Преведеното копие е отворено в нов раздел.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'слайда пропуснати — оригиналният текст е запазен.',
   'Kies een naam en waar het document komt te staan.':
       'Изберете име и място за запазване на документа.',
   'Bijv. Vergadernotities': 'Напр. Бележки от срещата',

@@ -1634,6 +1634,37 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'AI: functioneert': 'DI: veikia',
+  'AI: wordt gecontroleerd…': 'DI: tikrinama…',
+  'AI: server niet bereikbaar': 'DI: serveris nepasiekiamas',
+  'AI: niet volledig ingesteld': 'DI: nevisiškai sukonfigūruota',
+  'AI: lokale server moet op dit apparaat draaien':
+      'DI: vietinis serveris turi veikti šiame įrenginyje',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'DI: serveris nepažymėtas kaip patikimas',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'DI: reikalingas leidimas išeinančiam srautui',
+  'AI: externe dienst nog niet bevestigd':
+      'DI: išorinė paslauga dar nepatvirtinta',
+  'AI: niet beschikbaar in de webversie':
+      'DI: neprieinama žiniatinklio versijoje',
+  'eLearning: ingelogd': 'eLearning: prisijungta',
+  'eLearning: aanmelden loopt…': 'eLearning: vyksta prisijungimas…',
+  'eLearning: server niet bereikbaar': 'eLearning: serveris nepasiekiamas',
+  'eLearning: aanmelden mislukt': 'eLearning: prisijungti nepavyko',
+  'eLearning: niet ingelogd': 'eLearning: neprisijungta',
+  'Vertaal met AI': 'Išversti su DI',
+  'Vertaal met AI…': 'Išversti su DI…',
+  'Doeltaal': 'Tikslinė kalba',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Visi matomi tekstai ir pranešėjo pastabos išverčiami. Vertimas atidaromas kaip kopija naujame skirtuke — originalas lieka nepakeistas.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Prieš naudodami patikrinkite vertimą: DI vertimai yra juodraščiai.',
+  'Vertalen': 'Išversti',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Išversta kopija atidaryta naujame skirtuke.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'skaidrės praleistos — originalus tekstas išliko.',
   'Kies een naam en waar het document komt te staan.':
       'Pasirinkite pavadinimą ir vietą, kur bus išsaugotas dokumentas.',
   'Bijv. Vergadernotities': 'Pvz. Susirinkimo užrašai',

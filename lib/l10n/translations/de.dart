@@ -667,6 +667,37 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'AI: functioneert': 'KI: funktioniert',
+  'AI: wordt gecontroleerd…': 'KI: wird geprüft…',
+  'AI: server niet bereikbaar': 'KI: Server nicht erreichbar',
+  'AI: niet volledig ingesteld': 'KI: nicht vollständig eingerichtet',
+  'AI: lokale server moet op dit apparaat draaien':
+      'KI: lokaler Server muss auf diesem Gerät laufen',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'KI: Server nicht als vertrauenswürdig markiert',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'KI: Zustimmung für ausgehenden Verkehr erforderlich',
+  'AI: externe dienst nog niet bevestigd':
+      'KI: externer Dienst noch nicht bestätigt',
+  'AI: niet beschikbaar in de webversie':
+      'KI: in der Webversion nicht verfügbar',
+  'eLearning: ingelogd': 'eLearning: angemeldet',
+  'eLearning: aanmelden loopt…': 'eLearning: Anmeldung läuft…',
+  'eLearning: server niet bereikbaar': 'eLearning: Server nicht erreichbar',
+  'eLearning: aanmelden mislukt': 'eLearning: Anmeldung fehlgeschlagen',
+  'eLearning: niet ingelogd': 'eLearning: nicht angemeldet',
+  'Vertaal met AI': 'Mit KI übersetzen',
+  'Vertaal met AI…': 'Mit KI übersetzen…',
+  'Doeltaal': 'Zielsprache',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Alle sichtbaren Texte und Sprechernotizen werden übersetzt. Die Übersetzung öffnet als Kopie in einem neuen Tab — das Original bleibt unverändert.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Prüfe die Übersetzung vor der Verwendung: KI-Übersetzungen sind Entwürfe.',
+  'Vertalen': 'Übersetzen',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Übersetzte Kopie in neuem Tab geöffnet.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'Folien übersprungen — Originaltext beibehalten.',
   'Kies een naam en waar het document komt te staan.':
       'Wählen Sie einen Namen und den Ort, an dem das Dokument gespeichert wird.',
   'Bijv. Vergadernotities': 'Z. B. Sitzungsnotizen',

@@ -444,6 +444,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               presentDeck(context, ref, fromStart: true, rehearsalMode: true);
             case 'convert_to_document':
               convertDeckToDocument(context, ref);
+            case 'translate_ai':
+              translateDeckWithAi(context, ref);
             case 'finalize':
               _finalizeAndSeal();
             case 'settings':

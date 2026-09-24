@@ -1628,6 +1628,36 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'AI: functioneert': 'AI: funguje',
+  'AI: wordt gecontroleerd…': 'AI: kontroluje se…',
+  'AI: server niet bereikbaar': 'AI: server není dosažitelný',
+  'AI: niet volledig ingesteld': 'AI: není plně nastaveno',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: místní server musí běžet na tomto zařízení',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: server není označen jako důvěryhodný',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: vyžadován souhlas s odchozím provozem',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: externí služba ještě nebyla potvrzena',
+  'AI: niet beschikbaar in de webversie': 'AI: není dostupné ve webové verzi',
+  'eLearning: ingelogd': 'eLearning: přihlášeno',
+  'eLearning: aanmelden loopt…': 'eLearning: probíhá přihlašování…',
+  'eLearning: server niet bereikbaar': 'eLearning: server není dosažitelný',
+  'eLearning: aanmelden mislukt': 'eLearning: přihlášení se nezdařilo',
+  'eLearning: niet ingelogd': 'eLearning: nepřihlášeno',
+  'Vertaal met AI': 'Přeložit pomocí AI',
+  'Vertaal met AI…': 'Přeložit pomocí AI…',
+  'Doeltaal': 'Cílový jazyk',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Všechny viditelné texty a poznámky řečníka se přeloží. Překlad se otevře jako kopie na nové kartě — originál zůstane beze změny.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Před použitím překlad zkontrolujte: AI překlady jsou koncepty.',
+  'Vertalen': 'Přeložit',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Přeložená kopie otevřena na nové kartě.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'snímky přeskočeny — původní text zachován.',
   'Kies een naam en waar het document komt te staan.':
       'Vyberte název a místo uložení dokumentu.',
   'Bijv. Vergadernotities': 'Např. Poznámky ze schůzky',

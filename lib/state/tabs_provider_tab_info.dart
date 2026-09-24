@@ -47,6 +47,21 @@ void _placeDeckInTab(
   notifier._maybePromptImprovementModule(deck);
 }
 
+/// Open [deck] als onopgeslagen kopie in een nieuw tabblad — bijvoorbeeld een
+/// AI-vertaling van het actieve deck. Er is bewust géén `filePath` of
+/// `remoteOrigin`: het eerste opslaan wordt een 'Opslaan als', zodat de kopie
+/// nooit stil over het origineel heen schrijft. `Deck.projectPath` reist wel
+/// mee, dus relatieve afbeeldingspaden blijven resolven. De kopie is `dirty`
+/// vanaf het begin: hij wijkt af van alles wat op schijf staat.
+///
+/// Top-level (niet op [TabsNotifier]) omdat hij verder niets van de notifier
+/// nodig heeft dan [_placeDeckInTab] — en het klasseplafond telt alleen
+/// members, geen functies.
+void openDeckCopyInTab(TabsNotifier notifier, Deck deck) {
+  _placeDeckInTab(notifier, deck);
+  notifier.currentState.current?.deckNotifierOrNull?.markDirty();
+}
+
 // ── Per-tab data ──────────────────────────────────────────────────────────────
 
 /// De inhoud van een tabblad: óf een presentatie (deck) óf een document.
