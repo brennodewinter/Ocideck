@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/ociserve_models.dart';
+import '../../utils/json_pointer.dart';
 import '../../models/ociserve_privacy_dictionary.dart';
 
 part 'ociserve_data_access_groups.dart';
@@ -440,8 +441,11 @@ class _DataRecord extends StatelessWidget {
     final fields = record.value is Map
         ? Map<Object?, Object?>.from(record.value! as Map)
         : <Object?, Object?>{'value': record.value};
-    final recordPath =
-        '/data/${_jsonPointerSegment(categoryKey)}/${record.sourceIndex}';
+    final recordPath = jsonPointerFromSegments([
+      'data',
+      categoryKey,
+      record.sourceIndex,
+    ]);
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 14),
       child: DecoratedBox(
@@ -469,7 +473,7 @@ class _DataRecord extends StatelessWidget {
                 _DataField(
                   sourceKey: '${field.key}',
                   value: field.value,
-                  path: '$recordPath/${_jsonPointerSegment(field.key)}',
+                  path: appendJsonPointerSegment(recordPath, field.key),
                   omissionReasons: omissionReasons,
                 ),
             ],
@@ -546,7 +550,7 @@ class _ReadableValue extends StatelessWidget {
             _DataField(
               sourceKey: '${entry.key}',
               value: entry.value,
-              path: '$path/${_jsonPointerSegment(entry.key)}',
+              path: appendJsonPointerSegment(path, entry.key),
               omissionReasons: omissionReasons,
             ),
         ],
@@ -568,7 +572,7 @@ class _ReadableValue extends StatelessWidget {
             _ReadableValue(
               sourceKey: sourceKey,
               value: (value! as List)[index],
-              path: '$path/$index',
+              path: appendJsonPointerSegment(path, index),
               omissionReasons: omissionReasons,
             ),
             const SizedBox(height: 8),

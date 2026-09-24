@@ -16,9 +16,6 @@ List<_IndexedRecord> _recordsFor(Object? value) => switch (value) {
   _ => [_IndexedRecord(0, value)],
 };
 
-String _jsonPointerSegment(Object? value) =>
-    '$value'.replaceAll('~', '~0').replaceAll('/', '~1');
-
 String _searchText(BuildContext context, Object? value) {
   final parts = <String>[];
   void collect(Object? item, [String sourceKey = '']) {
