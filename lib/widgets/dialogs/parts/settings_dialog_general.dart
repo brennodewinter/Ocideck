@@ -183,11 +183,11 @@ extension _SettingsGeneralTab on _SettingsDialogState {
       SwitchListTile(
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Marp · ${l10n.d('Controleren')}',
+          '${l10n.d('Marp')} · ${l10n.d('Controleren')}',
           style: const TextStyle(fontSize: 13),
         ),
         subtitle: Text(
-          'Marp · ${l10n.d('Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.')}',
+          '${l10n.d('Marp')} · ${l10n.d('Ruwe Markdown met koppen, code, wiskundige LaTeX-formules en mermaid-diagrammen.')}',
           style: TextStyle(fontSize: 11, color: AppTheme.slate400),
         ),
         value: ref.watch(

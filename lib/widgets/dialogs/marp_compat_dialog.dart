@@ -42,7 +42,7 @@ class _MarpIncompatibleDialog extends StatelessWidget {
           const SizedBox(width: 8),
           Flexible(
             child: Text(
-              'Marp · ${l10n.d('Probleem')}',
+              '${l10n.d('Marp')} · ${l10n.d('Probleem')}',
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -93,7 +93,7 @@ class _MarpIncompatibleDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, MarpSaveDecision.review),
-          child: Text('Markdown · ${l10n.d('Openen')}'),
+          child: Text('${l10n.d('Markdown')} · ${l10n.d('Openen')}'),
         ),
         ElevatedButton(
           onPressed: () => Navigator.pop(context, MarpSaveDecision.saveAnyway),
