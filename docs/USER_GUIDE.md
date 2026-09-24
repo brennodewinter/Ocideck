@@ -5789,6 +5789,16 @@ Use this for bulk edits, copy-paste from another tool, or tweaks that are faster
 in raw text. Switch back with **Apply** (to parse the text back into typed slides)
 or **Cancel** (discard your edits and return to the visual editor).
 
+With **Marp · Check syntax** enabled in Settings (the default), a second status
+bar checks whether the source can also be used by Marp, the Markdown
+presentation tool. Green means no known difference, amber means Marp can render
+the file but some OciDeck behaviour changes, and red means Marp cannot safely
+represent it. Red includes privacy redaction and a slide withheld by TLP,
+because the original Markdown still contains that material. The check is
+rule-based rather than a second renderer; line-numbered findings explain where
+to inspect the source. Saving a red deck asks for confirmation and can open the
+full-deck Markdown view. Amber findings do not block saving.
+
 A **Source** chip (code icon) in the structured editor's header does the same
 thing, but jumps straight to the *This slide* scope (below) so you land on the raw
 markdown of the slide you were editing. It is a shortcut into the existing

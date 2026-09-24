@@ -264,6 +264,14 @@ class AppSettings {
   /// Blokkeer export volledig wanneer de kwaliteitscontrole fouten vindt.
   final bool qualityBlockExportOnErrors;
 
+  /// Of de Marp-compatibiliteitscontrole draait: de balk in de
+  /// markdown-modus en de controle bij het opslaan.
+  ///
+  /// Staat standaard **aan** — een controle die je eerst moet aanzetten helpt
+  /// precies de mensen niet die niet weten dat hun deck bij een andere tool
+  /// degradeert. Uit is echt uit: geen balk en geen opslaan-controle.
+  final bool marpCompatChecksEnabled;
+
   /// Minimale contrastverhouding voor normale tekst waaronder de
   /// kwaliteitscontrole markeert. Standaard WCAG AA (4.5); lager = toleranter
   /// (bijv. 3.5 accepteert een 3.6:1-verhouding). Begrensd tot 1.0–7.0.
@@ -370,6 +378,7 @@ class AppSettings {
     this.docReaderTextScale = 1.0,
     this.qualityWarningsOnExport = true,
     this.qualityBlockExportOnErrors = false,
+    this.marpCompatChecksEnabled = true,
     this.contrastMinRatio = 4.5,
     this.showOpenPreview = false,
     this.allowRemoteMedia = false,
@@ -467,6 +476,7 @@ class AppSettings {
     double? docReaderTextScale,
     bool? qualityWarningsOnExport,
     bool? qualityBlockExportOnErrors,
+    bool? marpCompatChecksEnabled,
     double? contrastMinRatio,
     bool? showOpenPreview,
     bool? allowRemoteMedia,
@@ -554,6 +564,8 @@ class AppSettings {
           qualityWarningsOnExport ?? this.qualityWarningsOnExport,
       qualityBlockExportOnErrors:
           qualityBlockExportOnErrors ?? this.qualityBlockExportOnErrors,
+      marpCompatChecksEnabled:
+          marpCompatChecksEnabled ?? this.marpCompatChecksEnabled,
       contrastMinRatio: contrastMinRatio ?? this.contrastMinRatio,
       showOpenPreview: showOpenPreview ?? this.showOpenPreview,
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,

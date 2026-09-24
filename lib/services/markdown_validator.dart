@@ -3,12 +3,11 @@ import 'dart:convert';
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
 import '../models/privacy_disposition.dart';
+import 'deck_vocabulary.dart';
 import 'front_matter_merge.dart';
 import 'markdown_service.dart';
 import 'marp_source_preservation.dart';
 import '../utils/log.dart';
-
-part 'markdown_validator_vocabulary.dart';
 
 /// Validates deck markdown against what [MarkdownService] can parse reliably.
 class MarkdownValidator {
@@ -338,7 +337,7 @@ class MarkdownValidator {
       final keyMatch = _reDirectiveKey.firstMatch(content);
       if (keyMatch == null) continue;
       final key = keyMatch.group(1)!;
-      if (_supportedCommentDirectives.contains(key)) continue;
+      if (kSupportedCommentDirectives.contains(key)) continue;
       issues.add(
         MarkdownValidationIssue(
           line: line,
@@ -426,7 +425,7 @@ class MarkdownValidator {
         .toList();
 
     for (final token in classTokens) {
-      if (!_knownClassTokens.contains(token)) {
+      if (!kKnownClassTokens.contains(token)) {
         final classLine = blockLines.indexWhere(
           (line) => line.contains('<!-- _class:'),
         );
@@ -558,7 +557,7 @@ class MarkdownValidator {
       _validateSlideDirective(
         trimmed: trimmed,
         prefix: '<!-- ocideck_list_style:',
-        isValid: _validListStyles.contains,
+        isValid: kValidListStyles.contains,
         issueMessage: (v) =>
             'Slide $slideNumber: onbekende lijststijl "$v". Gebruik bullets, numbered, checklist of richText.',
         line: lineNo(i),

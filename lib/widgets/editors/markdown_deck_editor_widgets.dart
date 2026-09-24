@@ -522,6 +522,110 @@ class _ValidationSummaryBar extends StatelessWidget {
   }
 }
 
+/// De Marp-compatibiliteitsuitslag, als tweede balk onder de syntaxbalk.
+///
+/// Drie staten: groen (compatibel), oranje (compatibel met verlies) en rood
+/// (niet compatibel). Alleen zichtbaar als de instelling aan staat.
+class _MarpCompatBar extends StatelessWidget {
+  final MarpCompatReport report;
+  final bool pending;
+  final bool expanded;
+  final VoidCallback onToggle;
+  final ValueChanged<int> onJumpToLine;
+
+  const _MarpCompatBar({
+    required this.report,
+    required this.pending,
+    required this.expanded,
+    required this.onToggle,
+    required this.onJumpToLine,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final (bg, fg, icon, summary) = switch (report.status) {
+      MarpCompatStatus.compatible => (
+        AppTheme.successBg,
+        AppTheme.successFg,
+        Icons.check_circle_outline,
+        'Marp · ${l10n.d('Geen syntaxproblemen gevonden')}',
+      ),
+      MarpCompatStatus.degraded => (
+        AppTheme.warningBg,
+        AppTheme.warningFg,
+        Icons.warning_amber_outlined,
+        'Marp · ${report.warningCount} ${l10n.d('waarschuwing(en)')}',
+      ),
+      MarpCompatStatus.incompatible => (
+        AppTheme.dangerBg,
+        AppTheme.dangerFg,
+        Icons.error_outline,
+        'Marp · ${l10n.d('Probleem')} — '
+            '${report.errorCount} ${l10n.d('fout(en)')}',
+      ),
+    };
+
+    final hasFindings = report.findings.isNotEmpty;
+    final displaySummary = pending ? l10n.d('Controleren…') : summary;
+    return Semantics(
+      liveRegion: true,
+      label: displaySummary,
+      child: Material(
+        color: bg,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            InkWell(
+              onTap: hasFindings ? onToggle : null,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                child: Row(
+                  children: [
+                    Icon(pending ? Icons.sync : icon, size: 14, color: fg),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        displaySummary,
+                        style: TextStyle(fontSize: 11, color: fg),
+                      ),
+                    ),
+                    if (hasFindings)
+                      Icon(
+                        expanded ? Icons.expand_less : Icons.expand_more,
+                        size: 18,
+                        color: fg,
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            if (expanded && hasFindings)
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 160),
+                child: ListView.separated(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                  itemCount: report.findings.length,
+                  separatorBuilder: (_, _) => const SizedBox(height: 4),
+                  itemBuilder: (context, index) {
+                    final issue = report.findings[index];
+                    return _IssueTile(
+                      issue: issue,
+                      onTap: () => onJumpToLine(issue.line),
+                    );
+                  },
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _IssueTile extends StatelessWidget {
   final MarkdownValidationIssue issue;
   final VoidCallback onTap;
@@ -548,7 +652,8 @@ class _IssueTile extends StatelessWidget {
             const SizedBox(width: 6),
             Expanded(
               child: Text(
-                '${context.l10n.d('Regel')} ${issue.line}: ${issue.message}',
+                '${context.l10n.d('Regel')} ${issue.line}: '
+                '${issue.code == null ? issue.message : localizeMarpCompatibilityIssue(context.l10n, issue)}',
                 style: TextStyle(
                   fontSize: 11,
                   color: isError ? AppTheme.dangerFg : AppTheme.warningFg,

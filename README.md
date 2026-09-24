@@ -45,8 +45,9 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 > **Independent of Marp.** OciDeck reads and writes Marp-compatible Markdown,
 > but it is not affiliated with, endorsed by, or a product of the Marp Team, and
 > it does not embed Marp Core. The renderer is its own, built on `marked` — see
-> [ARCHITECTURE.md](docs/ARCHITECTURE.md). Compatibility with the Marp CLI is a
-> design goal that has not yet been verified against the real tool.
+> [ARCHITECTURE.md](docs/ARCHITECTURE.md). The shared Markdown contract is
+> checked against a pinned real Marp CLI by `make check-marp`; the editor also
+> reports known differences that a rule-based check can identify.
 
 > **Runs on your device, not on a server.** No application backend for editing,
 > no general telemetry or analytics; the privacy scan runs on your device too.

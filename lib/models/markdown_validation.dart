@@ -5,14 +5,19 @@ class MarkdownValidationIssue {
   final MarkdownValidationSeverity severity;
   final String message;
 
+  /// Stable machine-readable code for callers that localize the finding.
+  /// Generic Markdown validation keeps using [message] directly.
+  final String? code;
+
   const MarkdownValidationIssue({
     required this.line,
     required this.severity,
-    required this.message,
+    this.message = '',
+    this.code,
   });
 
   @override
-  String toString() => 'L$line: $message';
+  String toString() => 'L$line: ${code ?? message}';
 }
 
 class MarkdownValidationResult {

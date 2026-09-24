@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De standaard ingeschakelde Marp-controle laat in de Markdown-modus en bij
+  Presentatiegegevens zien of een deck in Marp hetzelfde blijft, met regels om
+  bekende afwijkingen terug te vinden. Opslaan waarschuwt bij harde fouten of
+  wanneer Marp een OciDeck-privacy- of TLP-grens zou omzeilen; vanuit die
+  waarschuwing opent de volledige Markdown-bron voor herstel.
 - PechaKucha en Ignite zijn volwaardige vaste presentatieformats: respectievelijk
   20×20 en 20×15 (vijf minuten), met live terugkoppeling over het aantal dia's,
   een compact storyboard, startaftelling, driftvast
