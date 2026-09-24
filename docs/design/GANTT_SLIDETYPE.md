@@ -286,7 +286,7 @@ fails silently. The full checklist, per the `nieuw-slidetype` skill:
   `slideTypeByMarpClass` which reads `slideTypeMeta`, and the table content
   flows through `backedByTable`. This is the whole point of the registry
   refactor — a new table-backed type costs no parser code.
-- `markdown_validator_vocabulary.dart` — add `gantt` to the known `_class`
+- `deck_vocabulary.dart` — add `gantt` to the known `_class`
   tokens, else the structure checker warns in Markdown mode.
 - `ocideck_gantt_scale` and `ocideck_gantt_sections` comments must be added
   to the known-comment list in the validator.

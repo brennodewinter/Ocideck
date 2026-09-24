@@ -169,12 +169,11 @@ const Set<String> uncoveredBaseline = {
   // improvement_template_catalog_test.dart), maar lcov ziet niets om uit te
   // voeren. Bron: tool/build_improvement_templates.dart.
   'lib/services/improvement/improvement_templates_floor.g.dart',
-  // NO EXECUTABLE LINES: de woordenlijst van de markdown-checker — een `part`
-  // met alleen const sets (class-tokens, front-matter sleutels, directives).
-  // Ruim gedekt via markdown_validator_test.dart, maar lcov ziet niets om uit
-  // te voeren. Afgesplitst omdat de validator anders de 1000-regel-ratchet
-  // overschrijdt.
-  'lib/services/markdown_validator_vocabulary.dart',
+  // NO EXECUTABLE LINES: de gedeelde woordenlijst van de Markdown- en
+  // Marp-checkers bevat alleen const sets (front-matter en directives).
+  // Ruim gedekt via markdown_validator_test.dart en
+  // marp_compatibility_test.dart, maar lcov ziet niets om uit te voeren.
+  'lib/services/deck_vocabulary.dart',
   // PLATFORM: entrypoint — runApp() never executes under the test runner.
   'lib/main.dart',
   // PLATFORM: conditional-import facades + their io/web halves. De io-helft van

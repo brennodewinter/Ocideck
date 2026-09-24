@@ -151,7 +151,8 @@ void main() {
       // Eerst de meting, dan pas het label: het gebrek is dat er iets beweegt.
       // Struikelt de test over de tekst, dan wijst hij de verkeerde kant op.
       expect(tester.getTopLeft(field).dy, atRest);
-      expect(find.text('Controleren…'), findsOneWidget);
+      // Zowel de syntax- als de Marp-balk blijft staan tijdens de hercontrole.
+      expect(find.text('Controleren…'), findsNWidgets(2));
 
       await tester.pumpAndSettle(const Duration(milliseconds: 600));
       expect(find.text('Geen syntaxproblemen gevonden'), findsOneWidget);

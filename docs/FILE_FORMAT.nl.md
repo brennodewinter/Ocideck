@@ -3327,7 +3327,7 @@ Marp-syntaxis die OciDeck niet modelleert, wordt niet gemeld.
 > `table-overdue` (§4) is een token dat OciDeck wél **schrijft** maar dat niet in
 > de woordenlijst van de controle staat, dus de structuurcontrole waarschuwt over
 > een slide die de app zelf heeft gemaakt. Vastgesteld 2026-08-18; het is een gat
-> in `markdown_validator_vocabulary.dart`, niet in het bestandsformaat — het token
+> in `deck_vocabulary.dart`, niet in het bestandsformaat — het token
 > werkt gewoon.
 
 Implementatie: `lib/services/markdown_validator.dart`; tests:
