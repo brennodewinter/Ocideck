@@ -1627,6 +1627,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Nogle værdier vises ikke',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skjuler en værdi, når den også vedrører en anden person. Ved det relevante felt står der, hvorfor værdien mangler.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Vises ikke, fordi denne oplysning også vedrører en anden person',
+  'Niet getoond door de server (reden: {reden})':
+      'Vises ikke af serveren (årsag: {reden})',
   '1 onderdeel': '1 afsnit',
   '{aantal} onderdelen': '{aantal} afsnit',
   'Profiel en organisatie': 'Profil og organisation',

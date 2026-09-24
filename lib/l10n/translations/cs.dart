@@ -1628,6 +1628,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Některé hodnoty nejsou zobrazeny',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skryje hodnotu, pokud se týká také jiné osoby. U příslušného pole je uvedeno, proč hodnota chybí.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nezobrazeno, protože tento údaj se týká také jiné osoby',
+  'Niet getoond door de server (reden: {reden})':
+      'Server nezobrazil (důvod: {reden})',
   '1 onderdeel': '1 oddíl',
   '{aantal} onderdelen': 'Počet oddílů: {aantal}',
   'Profiel en organisatie': 'Profil a organizace',

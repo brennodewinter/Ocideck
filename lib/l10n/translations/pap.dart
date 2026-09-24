@@ -666,6 +666,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Sommige waarden zijn niet getoond': 'Algun balornan no ta wordu mustrá',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe ta skonde un balor ora e ta trata tambe di un otro persona. E campo konserní ta indiká dikon e balor ta falta.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'No mustrá pasobra e dato aki ta trata tambe di un otro persona',
+  'Niet getoond door de server (reden: {reden})':
+      'No mustrá dor di e server (motibu: {reden})',
   '1 onderdeel': '1 parti',
   '{aantal} onderdelen': '{aantal} parti',
   'Profiel en organisatie': 'Profíl i organisashon',

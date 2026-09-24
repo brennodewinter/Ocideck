@@ -1639,6 +1639,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Niektóre wartości nie są wyświetlane',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe ukrywa wartość, jeśli dotyczy ona również innej osoby. Przy odpowiednim polu podano, dlaczego brakuje wartości.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nie wyświetlono, ponieważ ta informacja dotyczy również innej osoby',
+  'Niet getoond door de server (reden: {reden})':
+      'Nie wyświetlono przez serwer (powód: {reden})',
   '1 onderdeel': '1 sekcja',
   '{aantal} onderdelen': 'Sekcje: {aantal}',
   'Profiel en organisatie': 'Profil i organizacja',

@@ -1645,6 +1645,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Xi valuri mhumiex murija',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe jaħbi valur meta dan ikun jikkonċerna wkoll persuna oħra. Il-kaxxa rilevanti tindika għaliex il-valur huwa nieqes.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Mhux muri għax din id-dejta tikkonċerna wkoll persuna oħra',
+  'Niet getoond door de server (reden: {reden})':
+      'Mhux muri mis-server (raġuni: {reden})',
   '1 onderdeel': 'taqsima 1',
   '{aantal} onderdelen': '{aantal} taqsimiet',
   'Profiel en organisatie': 'Profil u organizzazzjoni',

@@ -1633,6 +1633,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Niektoré hodnoty nie sú zobrazené',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skryje hodnotu, ak sa týka aj inej osoby. Pri príslušnom poli je uvedené, prečo hodnota chýba.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nie je zobrazené, pretože tento údaj sa týka aj inej osoby',
+  'Niet getoond door de server (reden: {reden})':
+      'Server nezobrazil (dôvod: {reden})',
   '1 onderdeel': '1 časť',
   '{aantal} onderdelen': '{aantal} častí',
   'Profiel en organisatie': 'Profil a organizácia',

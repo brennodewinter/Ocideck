@@ -1631,6 +1631,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Neke vrijednosti nisu prikazane',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skriva vrijednost kada se ona odnosi i na drugu osobu. Uz odgovarajuće polje navedeno je zašto vrijednost nedostaje.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nije prikazano jer se ovaj podatak odnosi i na drugu osobu',
+  'Niet getoond door de server (reden: {reden})':
+      'Poslužitelj nije prikazao (razlog: {reden})',
   '1 onderdeel': '1 odjeljak',
   '{aantal} onderdelen': 'Odjeljaka: {aantal}',
   'Profiel en organisatie': 'Profil i organizacija',

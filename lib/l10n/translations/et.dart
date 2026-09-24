@@ -1620,6 +1620,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Mõnda väärtust ei kuvata',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe peidab väärtuse, kui see puudutab ka teist inimest. Vastava välja juures on kirjas, miks väärtus puudub.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Ei kuvata, sest need andmed puudutavad ka teist inimest',
+  'Niet getoond door de server (reden: {reden})':
+      'Server ei kuva (põhjus: {reden})',
   '1 onderdeel': '1 jaotis',
   '{aantal} onderdelen': '{aantal} jaotist',
   'Profiel en organisatie': 'Profiil ja organisatsioon',

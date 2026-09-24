@@ -1627,6 +1627,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Joitakin arvoja ei näytetä',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe piilottaa arvon, kun se koskee myös toista henkilöä. Kyseisen kentän kohdalla kerrotaan, miksi arvo puuttuu.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Ei näytetä, koska tämä tieto koskee myös toista henkilöä',
+  'Niet getoond door de server (reden: {reden})':
+      'Palvelin ei näytä arvoa (syy: {reden})',
   '1 onderdeel': '1 osio',
   '{aantal} onderdelen': '{aantal} osiota',
   'Profiel en organisatie': 'Profiili ja organisaatio',

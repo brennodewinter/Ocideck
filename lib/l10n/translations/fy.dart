@@ -667,6 +667,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Sommige waarden zijn niet getoond': 'Guon wearden wurde net toand',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe skermet in wearde ôf as dy ek oer in oar giet. By it oanbelangjende fjild stiet wêrom\'t de wearde ûntbrekt.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Net toand omdat dit gegeven ek oer in oar giet',
+  'Niet getoond door de server (reden: {reden})':
+      'Net toand troch de server (reden: {reden})',
   '1 onderdeel': '1 ûnderdiel',
   '{aantal} onderdelen': '{aantal} ûnderdielen',
   'Profiel en organisatie': 'Profyl en organisaasje',

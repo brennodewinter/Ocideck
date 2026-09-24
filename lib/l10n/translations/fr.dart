@@ -667,6 +667,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Sommige waarden zijn niet getoond':
+      'Certaines valeurs ne sont pas affichées',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe masque une valeur lorsqu\'elle concerne également une autre personne. Le champ concerné indique pourquoi la valeur est absente.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Non affiché, car cette donnée concerne également une autre personne',
+  'Niet getoond door de server (reden: {reden})':
+      'Non affiché par le serveur (motif : {reden})',
   '1 onderdeel': '1 rubrique',
   '{aantal} onderdelen': '{aantal} rubriques',
   'Profiel en organisatie': 'Profil et organisation',

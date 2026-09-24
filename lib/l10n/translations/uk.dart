@@ -1642,6 +1642,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Деякі значення не показано',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe приховує значення, якщо воно також стосується іншої особи. Біля відповідного поля зазначено, чому значення відсутнє.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Не показано, оскільки ці дані також стосуються іншої особи',
+  'Niet getoond door de server (reden: {reden})':
+      'Не показано сервером (причина: {reden})',
   '1 onderdeel': '1 розділ',
   '{aantal} onderdelen': 'Розділів: {aantal}',
   'Profiel en organisatie': 'Профіль і організація',

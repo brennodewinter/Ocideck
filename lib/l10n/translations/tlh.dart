@@ -1604,6 +1604,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Sommige waarden zijn niet getoond': '\'op De\' lojmItmey cha\'lu\'be\'',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'latlh ghot\'e\' je bopDI\' De\', De\' lojmIt So\' OciServe. De\' lojmItDaq qatlh Hutlh De\' net QIj.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'latlh ghot\'e\' je bopmo\' De\'vam cha\'lu\'be\'',
+  'Niet getoond door de server (reden: {reden})':
+      'De\'wI\' toy\'wI\' cha\'be\' (meq: {reden})',
   '1 onderdeel': '1 \'ay\'',
   '{aantal} onderdelen': '{aantal} \'ay\'mey',
   'Profiel en organisatie': 'ghot De\' je tay\'',

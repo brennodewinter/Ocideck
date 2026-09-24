@@ -1642,6 +1642,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Nonnulli valores non ostenduntur',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe valorem celat cum etiam ad aliam personam pertinet. Apud campum pertinentem indicatur cur valor desit.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Non ostenditur quia hoc datum etiam ad aliam personam pertinet',
+  'Niet getoond door de server (reden: {reden})':
+      'A ministro non ostenditur (causa: {reden})',
   '1 onderdeel': '1 pars',
   '{aantal} onderdelen': '{aantal} partes',
   'Profiel en organisatie': 'Descriptio personalis et institutio',

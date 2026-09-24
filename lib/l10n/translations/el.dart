@@ -1652,6 +1652,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Ορισμένες τιμές δεν εμφανίζονται',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'Το OciServe αποκρύπτει μια τιμή όταν αφορά και κάποιο άλλο άτομο. Στο σχετικό πεδίο αναφέρεται γιατί λείπει η τιμή.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Δεν εμφανίζεται επειδή αυτό το δεδομένο αφορά και κάποιο άλλο άτομο',
+  'Niet getoond door de server (reden: {reden})':
+      'Δεν εμφανίζεται από τον διακομιστή (αιτία: {reden})',
   '1 onderdeel': '1 ενότητα',
   '{aantal} onderdelen': '{aantal} ενότητες',
   'Profiel en organisatie': 'Προφίλ και οργανισμός',

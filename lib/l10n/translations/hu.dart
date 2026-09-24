@@ -1629,6 +1629,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Egyes értékek nem jelennek meg',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'Az OciServe elrejti az értéket, ha az más személyre is vonatkozik. Az érintett mezőnél látható, miért hiányzik az érték.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nem jelenik meg, mert ez az adat más személyre is vonatkozik',
+  'Niet getoond door de server (reden: {reden})':
+      'A kiszolgáló nem jeleníti meg (ok: {reden})',
   '1 onderdeel': '1 szakasz',
   '{aantal} onderdelen': '{aantal} szakasz',
   'Profiel en organisatie': 'Profil és szervezet',

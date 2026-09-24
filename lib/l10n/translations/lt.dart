@@ -1634,6 +1634,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Kai kurios reikšmės nerodomos',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe paslepia reikšmę, kai ji taip pat susijusi su kitu asmeniu. Prie atitinkamo lauko nurodyta, kodėl reikšmės nėra.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nerodoma, nes šie duomenys taip pat susiję su kitu asmeniu',
+  'Niet getoond door de server (reden: {reden})':
+      'Serveris nerodo (priežastis: {reden})',
   '1 onderdeel': '1 skyrius',
   '{aantal} onderdelen': 'Skyrių: {aantal}',
   'Profiel en organisatie': 'Profilis ir organizacija',

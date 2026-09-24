@@ -1626,6 +1626,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Vissa värden visas inte',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe döljer ett värde när det även gäller någon annan. Vid det berörda fältet anges varför värdet saknas.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Visas inte eftersom uppgiften även gäller någon annan',
+  'Niet getoond door de server (reden: {reden})':
+      'Visas inte av servern (orsak: {reden})',
   '1 onderdeel': '1 avsnitt',
   '{aantal} onderdelen': '{aantal} avsnitt',
   'Profiel en organisatie': 'Profil och organisation',

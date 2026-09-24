@@ -1647,6 +1647,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Някои стойности не са показани',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe скрива стойност, когато тя се отнася и за друго лице. При съответното поле е посочено защо стойността липсва.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Не е показано, защото тези данни се отнасят и за друго лице',
+  'Niet getoond door de server (reden: {reden})':
+      'Не е показано от сървъра (причина: {reden})',
   '1 onderdeel': '1 раздел',
   '{aantal} onderdelen': 'Раздели: {aantal}',
   'Profiel en organisatie': 'Профил и организация',

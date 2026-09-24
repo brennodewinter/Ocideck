@@ -1627,6 +1627,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Beberapa nilai tidak ditampilkan',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe menyembunyikan nilai jika nilai tersebut juga berkaitan dengan orang lain. Kolom terkait menjelaskan alasan nilai tersebut tidak ada.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Tidak ditampilkan karena data ini juga berkaitan dengan orang lain',
+  'Niet getoond door de server (reden: {reden})':
+      'Tidak ditampilkan oleh server (alasan: {reden})',
   '1 onderdeel': '1 bagian',
   '{aantal} onderdelen': '{aantal} bagian',
   'Profiel en organisatie': 'Profil dan organisasi',

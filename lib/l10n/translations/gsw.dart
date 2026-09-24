@@ -1630,6 +1630,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Einigi Wärt wärde nöd aazeigt',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe blendet en Wärt us, wenn er au e anderi Person betrifft. Bim betreffende Fäld stoht, warum de Wärt fählt.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nöd aazeigt, will die Aagab au e anderi Person betrifft',
+  'Niet getoond door de server (reden: {reden})':
+      'Vom Server nöd aazeigt (Grund: {reden})',
   '1 onderdeel': '1 Abschnitt',
   '{aantal} onderdelen': '{aantal} Abschnitt',
   'Profiel en organisatie': 'Profil und Organisation',

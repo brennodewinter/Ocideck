@@ -1643,6 +1643,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Unele valori nu sunt afișate',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe ascunde o valoare atunci când aceasta privește și o altă persoană. Câmpul corespunzător indică motivul pentru care valoarea lipsește.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Nu este afișat deoarece această informație privește și o altă persoană',
+  'Niet getoond door de server (reden: {reden})':
+      'Nu este afișat de server (motiv: {reden})',
   '1 onderdeel': '1 secțiune',
   '{aantal} onderdelen': '{aantal} secțiuni',
   'Profiel en organisatie': 'Profil și organizație',

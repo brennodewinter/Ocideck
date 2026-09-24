@@ -1625,6 +1625,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Sommige waarden zijn niet getoond': 'Dažas vērtības netiek rādītas',
+  'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
+      'OciServe paslēpj vērtību, ja tā attiecas arī uz citu personu. Pie attiecīgā lauka ir norādīts, kāpēc vērtības nav.',
+  'Niet getoond omdat dit gegeven ook over iemand anders gaat':
+      'Netiek rādīts, jo šie dati attiecas arī uz citu personu',
+  'Niet getoond door de server (reden: {reden})':
+      'Serveris nerāda (iemesls: {reden})',
   '1 onderdeel': '1 sadaļa',
   '{aantal} onderdelen': 'Sadaļas: {aantal}',
   'Profiel en organisatie': 'Profils un organizācija',
