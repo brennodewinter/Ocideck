@@ -391,23 +391,50 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     section: 'Uitbreidingen',
     keywords: ['ai', 'assistent', 'llm', 'model', 'inschakelen', 'module'],
   ),
+  // De backend-velden wonen sinds #2184 op de AI-kaart onder Integraties.
   SettingsSearchEntry(
-    tab: SettingsSection.ai,
+    tab: SettingsSection.integrations,
     label: 'AI-backend',
+    section: 'Integraties',
     keywords: ['ai', 'backend', 'ollama', 'cloud', 'server'],
     aiOnly: true,
   ),
   SettingsSearchEntry(
-    tab: SettingsSection.ai,
+    tab: SettingsSection.integrations,
     label: 'Modelnaam',
+    section: 'Integraties',
     keywords: ['ai', 'model'],
     aiOnly: true,
   ),
   SettingsSearchEntry(
-    tab: SettingsSection.ai,
+    tab: SettingsSection.integrations,
     label: 'API-sleutel (optioneel)',
+    section: 'Integraties',
     keywords: ['ai', 'api', 'sleutel', 'key', 'token'],
     aiOnly: true,
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.integrations,
+    label: 'LibrePlan-connector',
+    section: 'Integraties',
+    integrationsOnly: true,
+    keywords: ['libreplan', 'connector', 'project', 'planning', 'voortgang'],
+  ),
+  // De inschakelkaart staat op Uitbreidingen (#2185) — wie "libreplan" zoekt
+  // om hem áán te zetten, komt daar uit.
+  SettingsSearchEntry(
+    tab: SettingsSection.modules,
+    label: 'LibrePlan-connector',
+    section: 'Uitbreidingen',
+    keywords: [
+      'libreplan',
+      'connector',
+      'project',
+      'planning',
+      'voortgang',
+      'module',
+      'inschakelen',
+    ],
   ),
 
   // ── Opslag ────────────────────────────────────────────────────────────────
@@ -522,9 +549,10 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.modules,
-    label: 'eLearning',
+    label: 'eLearning maken',
     section: 'Uitbreidingen',
     keywords: [
+      'elearning',
       'lesmateriaal',
       'auteursmodule',
       'dia',
@@ -535,25 +563,49 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
       'olx',
     ],
   ),
-  // Wie "openkat" zoekt terwijl de module uit staat, moet uitkomen waar hij
-  // hem aanzet — precies zoals bij Online opslag hierboven. Deze ingang wijst
-  // daarom naar Uitbreidingen en niet naar Integraties, want dat tabblad
-  // bestaat dan nog niet. Het label is de moduletitel; de namen van de
-  // afzonderlijke importeurs staan in de zoektermen, zodat "openkat" hier
-  // uitkomt zonder dat de kaart per bron een eigen ingang nodig heeft.
+  // De inschakelkaarten van de integraties staan sinds #2185 hier — wie een
+  // koppeling zoekt om hem áán te zetten, komt op Uitbreidingen uit.
+  SettingsSearchEntry(
+    tab: SettingsSection.modules,
+    label: 'OpenKAT',
+    section: 'Uitbreidingen',
+    keywords: [
+      'openkat',
+      'kat',
+      'rapportage',
+      'scan',
+      'module',
+      'integratie',
+      'inschakelen',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.modules,
+    label: 'eLearning volgen',
+    section: 'Uitbreidingen',
+    keywords: [
+      'ociserve',
+      'elearning',
+      'cursus',
+      'opleiding',
+      'leren',
+      'training',
+      'integratie',
+      'inschakelen',
+    ],
+  ),
   SettingsSearchEntry(
     tab: SettingsSection.modules,
     label: 'Importeren',
     section: 'Uitbreidingen',
     keywords: [
-      'openkat',
-      'kat',
       'import',
       'importeren',
-      'rapportage',
-      'scan',
+      'presentatie',
+      'powerpoint',
+      'keynote',
+      'impress',
       'module',
-      'integratie',
     ],
   ),
   // Wie "dmaic", "sipoc" of "six sigma" zoekt terwijl de module uit staat,
@@ -602,7 +654,7 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.integrations,
-    label: 'eLearning',
+    label: 'eLearning volgen',
     section: 'Integraties',
     integrationsOnly: true,
     keywords: [

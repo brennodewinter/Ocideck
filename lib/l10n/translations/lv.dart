@@ -1655,6 +1655,18 @@ const _dutchSourceAddLv = <String, String>{
       'Tulkotā kopija atvērta jaunā cilnē.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'slaidi izlaisti — oriģinālais teksts saglabāts.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Izvēlieties aizmugursistēmu cilnē Integrācijas. Kamēr tur nekas nav iestatīts, nekas nenotiek.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Iestatiet serveri cilnē Integrācijas. Kamēr tur nekā nav, nekas nenotiek.',
+  'eLearning volgen': 'Sekot eLearning',
+  'eLearning maken': 'Izveidot eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Savienojumi ar citām sistēmām. Katrs savienojums pēc noklusējuma ir izslēgts; ieslēdziet to sadaļā Paplašinājumi, izslēdziet šeit.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Šis savienojums ir izslēgts. Ieslēdziet to sadaļā Paplašinājumi.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Konfigurējiet to cilnē Integrācijas.',
   'Kies een naam en waar het document komt te staan.':
       'Izvēlieties nosaukumu un vietu, kur dokuments tiks saglabāts.',
   'Bijv. Vergadernotities': 'Piem. Sapulces piezīmes',
@@ -3124,8 +3136,6 @@ const _dutchSourceAddLv = <String, String>{
   'Alle integraties': 'Visas integrācijas',
   'Alles inschakelen': 'Ieslēgt visu',
   'Alles uitschakelen': 'Izslēgt visu',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Savienojumi ar citām sistēmām. Katrs savienojums pēc noklusējuma ir izslēgts un paliek neaktīvs, līdz to ieslēdzat.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Prezentāciju ievilkšana no PowerPoint (.pptx), Keynote (.key) un Impress (.odp) kā rediģējams deks. Savienojumi ar citām sistēmām, piemēram, OpenKAT, atrodas sadaļā Integrācijas.',
   'Media (WebRTC)': 'Multivide (WebRTC)',
@@ -4187,8 +4197,6 @@ const _dutchSourceAddLv = <String, String>{
       'Modulis MI palīdzība ir izslēgts, tāpēc šeit nekas nenotiek. Ieslēdziet to sadaļā Paplašinājumi. Tas, ko esat iestatījis zemāk, saglabājas.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Palīdzība ar alternatīvajiem tekstiem, aprakstiem un formulējumiem. Ieslēgšana vēl neko nenosūta: tas notiek tikai pēc tam, kad pats esat izvēlējies aizmugursistēmu un mākoņpakalpojuma gadījumā skaidri apstiprinājis. Ar lokālu aizmugursistēmu nekas neatstāj jūsu datoru.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Izvēlieties aizmugursistēmu cilnē MI palīdzība. Kamēr tur nekas nav iestatīts, nekas nenotiek.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Veidnes paraugslaidi ir angļu valodā. Nosaukums un apraksts seko tavai valodai; saturu pielāgo pēc izveides.',
   'Meer': 'Vairāk',
@@ -5410,8 +5418,6 @@ const _dutchSourceAddLv = <String, String>{
   "dia's geïmporteerd.": 'slaidi importēti.',
   'Import mislukt: ': 'Imports neizdevās: ',
   'Checklists': 'Kontrolsaraksti',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Iestatiet serveri cilnē LibrePlan savienotājs. Kamēr tur nekā nav, nekas nenotiek.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importējiet projekta momentuzņēmumu no LibrePlan instances kā slaidus: Gantt, WBS, resursu noslodze, darba laika uzskaite un vairāk. Tikai lasīšanai, pēc pieprasījuma — nekas neaiziet ārā, kamēr neiestatāt serveri un nesākat importu.',
   'Vul server-URL en gebruikersnaam in.':

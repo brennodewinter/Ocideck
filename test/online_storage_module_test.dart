@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
+import 'package:ocideck/state/integration_registry.dart';
 import 'package:ocideck/state/module_registry.dart';
 import 'package:ocideck/state/online_storage_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
@@ -224,11 +225,12 @@ void main() {
       'het Uitbreidingen-tabblad toont elke module uit het register',
       (tester) async {
         await open(tester, section: SettingsSection.modules);
-        // Eén kaart per registermodule, elk met één schakelaar. Een module
-        // zonder kaart laat deze telling vallen.
+        // Eén kaart per registermodule plus één inschakelkaart per integratie
+        // (#2185), elk met één schakelaar. Een ontbrekende kaart laat deze
+        // telling vallen.
         expect(
           find.byType(SwitchListTile),
-          findsNWidgets(moduleRegistry.length),
+          findsNWidgets(moduleRegistry.length + integrationRegistry.length),
         );
       },
     );

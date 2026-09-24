@@ -1674,6 +1674,18 @@ const _dutchSourceAddRo = <String, String>{
       'Copia tradusă a fost deschisă într-o filă nouă.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'diapozitive omise — textul original păstrat.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Alege backend-ul în fila Integrări. Cât timp acolo nu este setat nimic, nu se întâmplă nimic.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Configurați serverul în fila Integrări. Cât timp acolo nu este nimic, nu se întâmplă nimic.',
+  'eLearning volgen': 'Urmărire eLearning',
+  'eLearning maken': 'Creare eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Conexiuni cu alte sisteme. Fiecare conexiune este oprită implicit; porniți-o la Extensii, opriți-o aici.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Această conexiune este oprită. Porniți-o la Extensii.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Configurați-o în fila Integrări.',
   'Kies een naam en waar het document komt te staan.':
       'Alegeți un nume și locul unde va fi salvat documentul.',
   'Bijv. Vergadernotities': 'De ex. Notițe de ședință',
@@ -3158,8 +3170,6 @@ const _dutchSourceAddRo = <String, String>{
   'Alle integraties': 'Toate integrările',
   'Alles inschakelen': 'Activează tot',
   'Alles uitschakelen': 'Dezactivează tot',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Conexiuni cu alte sisteme. Fiecare conexiune este dezactivată în mod implicit și rămâne inactivă până când o activați.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Aducerea prezentărilor din PowerPoint (.pptx), Keynote (.key) și Impress (.odp) ca deck editabil. Conexiunile cu alte sisteme, precum OpenKAT, se află la Integrări.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -4230,8 +4240,6 @@ const _dutchSourceAddRo = <String, String>{
       'Modulul Asistență IA este dezactivat, așa că aici nu se întâmplă nimic. Activează-l la Extensii. Ce ai setat mai jos rămâne neschimbat.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Ajutor pentru texte alternative, descrieri și formulări. Activarea nu trimite încă nimic: asta se întâmplă abia după ce alegi tu însuți un backend și, în cazul unui serviciu cloud, confirmi explicit. Cu un backend local, nimic nu părăsește computerul tău.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Alege backend-ul în fila Asistență IA. Cât timp acolo nu este setat nimic, nu se întâmplă nimic.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Slide-urile de exemplu ale unui șablon sunt în engleză. Numele și descrierea urmează limba ta; conținutul îl adaptezi după creare.',
   'Meer': 'Mai mult',
@@ -5469,8 +5477,6 @@ const _dutchSourceAddRo = <String, String>{
   "dia's geïmporteerd.": 'slide-uri importate.',
   'Import mislukt: ': 'Importul a eșuat: ',
   'Checklists': 'Liste de verificare',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configurați serverul în fila Conector LibrePlan. Cât timp acolo nu este nimic, nu se întâmplă nimic.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importați un instantaneu de proiect dintr-o instanță LibrePlan ca slide-uri: Gantt, WBS, încărcarea resurselor, pontaj și altele. Doar citire, la cerere — nu iese nimic până când nu configurați un server și nu porniți un import.',
   'Vul server-URL en gebruikersnaam in.':

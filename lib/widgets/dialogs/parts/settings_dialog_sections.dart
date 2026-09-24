@@ -26,8 +26,6 @@ enum SettingsSection {
   presentation(Icons.slideshow_outlined),
   privacy(Icons.privacy_tip_outlined),
   security(Icons.shield_outlined),
-  ai(Icons.smart_toy_outlined),
-  libreplan(Icons.cloud_download_outlined),
   checklists(Icons.checklist_outlined),
   modules(Icons.extension_outlined),
   integrations(Icons.hub_outlined),
@@ -50,8 +48,6 @@ enum SettingsSection {
     SettingsSection.presentation => l10n.d('Uiterlijk van dia\'s'),
     SettingsSection.privacy => l10n.d('Privacy en classificatie'),
     SettingsSection.security => l10n.d('Beveiliging'),
-    SettingsSection.ai => l10n.d('AI-assistentie'),
-    SettingsSection.libreplan => l10n.d('LibrePlan-connector'),
     SettingsSection.checklists => l10n.d('Checklists'),
     SettingsSection.modules => l10n.d('Uitbreidingen'),
     SettingsSection.integrations => l10n.d('Integraties'),
@@ -75,10 +71,6 @@ enum SettingsSection {
   /// inhoud er is.** Wie sjablonen heeft gemaakt en daarna de module uitzet,
   /// ziet ze nog steeds staan en kan ze weghalen. Dezelfde truc als bij de
   /// MIAUW-velden in `presentation_info_dialog.dart`.
-  /// [aiRevealed] is dezelfde afweging voor AI-assistentie (#731): die is een
-  /// module geworden en woont onder Uitbreidingen. Wie hem uit laat, ziet er
-  /// niets van — behalve wanneer er al een backend is ingevuld, want ook daar
-  /// geldt "tonen zodra de inhoud er is".
   /// [integrationsAvailable] is of dit platform überhaupt een integratie kan
   /// gebruiken (`anyIntegrationAvailableProvider`). Sinds #1158 leeft de
   /// schakelaar per integratie óp het tabblad Integraties zelf, dus het tabblad
@@ -89,8 +81,6 @@ enum SettingsSection {
   static List<SettingsSection> navItems({
     required bool infoSafetyRevealed,
     required bool hasChecklists,
-    required bool aiRevealed,
-    required bool libreplanRevealed,
     required bool integrationsAvailable,
     required bool collaborationRevealed,
   }) => values.where((s) {
@@ -98,8 +88,6 @@ enum SettingsSection {
     if (s == SettingsSection.checklists) {
       return infoSafetyRevealed || hasChecklists;
     }
-    if (s == SettingsSection.ai) return aiRevealed;
-    if (s == SettingsSection.libreplan) return libreplanRevealed;
     if (s == SettingsSection.collaboration) return collaborationRevealed;
     if (s == SettingsSection.integrations) return integrationsAvailable;
     return true;

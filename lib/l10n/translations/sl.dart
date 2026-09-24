@@ -1657,6 +1657,18 @@ const _dutchSourceAddSl = <String, String>{
       'Prevedena kopija odprta v novem zavihku.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'preskočeni diapozitivi — izvirno besedilo ohranjeno.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Zaledje izberite na zavihku Integracije. Dokler tam ni nič nastavljeno, se nič ne zgodi.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Nastavite strežnik na zavihku Integracije. Dokler tam ni ničesar, se ne zgodi nič.',
+  'eLearning volgen': 'Spremljanje eLearninga',
+  'eLearning maken': 'Ustvarjanje eLearninga',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Povezave z drugimi sistemi. Vsaka povezava je privzeto izklopljena; vklopite jo pri Razširitvah, izklopite tukaj.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Ta povezava je izklopljena. Vklopite jo pri Razširitvah.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Nastavite jo na zavihku Integracije.',
   'Kies een naam en waar het document komt te staan.':
       'Izberite ime in mesto shranjevanja dokumenta.',
   'Bijv. Vergadernotities': 'Npr. Zapisnik sestanka',
@@ -3122,8 +3134,6 @@ const _dutchSourceAddSl = <String, String>{
   'Alle integraties': 'Vse integracije',
   'Alles inschakelen': 'Omogoči vse',
   'Alles uitschakelen': 'Onemogoči vse',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Povezave z drugimi sistemi. Vsaka povezava je privzeto izklopljena in ostane neaktivna, dokler je ne vklopite.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Uvoz predstavitev iz PowerPoint (.pptx), Keynote (.key) in Impress (.odp) kot uredljiv komplet. Povezave z drugimi sistemi, kot je OpenKAT, so pod Integracije.',
   'Media (WebRTC)': 'Predstavnost (WebRTC)',
@@ -4184,8 +4194,6 @@ const _dutchSourceAddSl = <String, String>{
       'Modul Pomoč UI je izklopljen, zato se tukaj nič ne zgodi. Vklopite ga pod Razširitve. Kar ste nastavili spodaj, ostane.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Pomoč pri nadomestnih besedilih, opisih in formulacijah. Vklop še ničesar ne pošlje: to se zgodi šele, ko sami izberete zaledje in pri storitvi v oblaku izrecno potrdite. Pri lokalnem zaledju nič ne zapusti vašega računalnika.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Zaledje izberite na zavihku Pomoč UI. Dokler tam ni nič nastavljeno, se nič ne zgodi.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Vzorčni diapozitivi predloge so v angleščini. Ime in opis sledita tvojemu jeziku; vsebino prilagodiš po ustvarjanju.',
   'Meer': 'Več',
@@ -5411,8 +5419,6 @@ const _dutchSourceAddSl = <String, String>{
   "dia's geïmporteerd.": 'diapozitivov uvoženih.',
   'Import mislukt: ': 'Uvoz ni uspel: ',
   'Checklists': 'Kontrolni seznami',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Nastavite strežnik na zavihku Konektor LibrePlan. Dokler tam ni ničesar, se ne zgodi nič.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Uvozite posnetek projekta z instance LibrePlan kot diapozitive: Gantt, WBS, obremenitev virov, evidenca dela in več. Samo za branje, na zahtevo — nič ne gre ven, dokler ne nastavite strežnika in ne zaženete uvoza.',
   'Vul server-URL en gebruikersnaam in.':

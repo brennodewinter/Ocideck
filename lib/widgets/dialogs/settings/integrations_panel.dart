@@ -4,60 +4,80 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../platform/platform_features.dart';
 import '../../../state/integration_registry.dart';
+import '../../../state/module_registry.dart';
 import '../../../state/ociserve_provider.dart';
 import '../../../state/openkat_provider.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'ociserve_module_card.dart';
 import 'openkat_integration_panel.dart';
 import 'settings_section_title.dart';
 
-/// Het tabblad Integraties: koppelingen met andere systemen, elk met een eigen
-/// schakelaar, plus een bediening om ze allemaal tegelijk aan of uit te zetten
-/// (#1158).
+/// Het tabblad Integraties: koppelingen met andere systemen, elk met de
+/// configuratie van die koppeling (#1158), plus de kaarten voor AI-assistentie
+/// en de LibrePlan-connector (#2184) die het instellingenvenster meegeeft —
+/// die twee schrijven hun formulier bij Opslaan weg in plaats van direct, dus
+/// hun schakelaar en inhoud komen als widget binnen.
 ///
-/// De secties komen letterlijk uit [availableIntegrationsProvider]: de volgorde
-/// dáár is de volgorde hier, en een integratie die dit platform niet aankan valt
-/// vanzelf weg. Een tweede integratie erbij zetten is één regel in
-/// `integration_registry.dart` — dit paneel en de "alles aan/uit"-knoppen lopen
-/// dan mee.
+/// **Aanzetten hoort bij Uitbreidingen** (#2185): de schakelaar op een kaart
+/// hier kan een koppeling alleen uitzetten. Staat hij uit, dan is hij
+/// grijs met een verwijzing naar Uitbreidingen — een schakelaar die je niet
+/// om kunt zetten zonder te zeggen waarom is een doodlopende straat.
+///
+/// De kaarten staan alfabetisch op hun vertaalde titel (#2187); de titels
+/// komen uit `card_titles.dart`, dezelfde bron als de kaarten zelf gebruiken.
 ///
 /// Een losse widget en geen `part` van het instellingenvenster (#631): die
 /// klasse zit tegen haar plafond, en dit paneel leest alleen het
 /// integratieregister.
 class IntegrationsPanel extends ConsumerWidget {
-  const IntegrationsPanel({super.key});
+  const IntegrationsPanel({super.key, this.aiCard, this.libreplanCard});
+
+  /// De AI-assistentie-kaart, gebouwd door het venster omdat hij aan het
+  /// formulier hangt dat bij Opslaan wordt weggeschreven.
+  final Widget? aiCard;
+
+  /// Idem voor de LibrePlan-connector.
+  final Widget? libreplanCard;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final integrations = ref.watch(availableIntegrationsProvider);
+    final cards = <({String title, Widget card})>[
+      for (final entry in integrations)
+        (
+          title: integrationCardTitle(entry.id, l10n),
+          card: _IntegrationCard(entry: entry),
+        ),
+      if (aiCard case final card?)
+        (title: moduleCardTitle(ModuleId.ai, l10n), card: card),
+      if (libreplanCard case final card?)
+        (title: moduleCardTitle(ModuleId.libreplan, l10n), card: card),
+    ];
+    sortCardsByTitle(cards);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SettingsSectionTitle(l10n.d('Integraties')),
         Text(
           l10n.d(
-            'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.',
+            'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.',
           ),
           style: TextStyle(fontSize: 12, color: AppTheme.slate600),
         ),
         const SizedBox(height: 16),
         const _BulkControls(),
-        for (final entry in integrations) ...[
-          const SizedBox(height: 12),
-          _IntegrationCard(entry: entry),
-        ],
+        for (final entry in cards) ...[const SizedBox(height: 12), entry.card],
       ],
     );
   }
 }
 
-/// De "alles aan/uit"-bediening. Twee knoppen en geen tweede grote schakelaar:
-/// met één integratie zou een master-switch een verwarrende kopie van de
-/// schakelaar eronder zijn, terwijl twee bulkknoppen leesbaar een handeling-op-
-/// alles zijn. "Alles inschakelen" is uit zodra alles al aan staat, "Alles
-/// uitschakelen" zodra alles al uit staat — zo zegt de knop zelf of er nog iets
-/// te doen valt.
+/// De "alles uit"-bediening. Eén knop: aanzetten hoort bij Uitbreidingen
+/// (#2185), dus "alles inschakelen" staat hier bewust niet meer. "Alles
+/// uitschakelen" is uit zodra alles al uit staat — zo zegt de knop zelf of er
+/// nog iets te doen valt.
 class _BulkControls extends ConsumerWidget {
   const _BulkControls();
 
@@ -65,7 +85,6 @@ class _BulkControls extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final integrations = ref.watch(availableIntegrationsProvider);
-    final allOn = ref.watch(allIntegrationsEnabledProvider);
     final anyOn = ref.watch(anyIntegrationEnabledProvider);
     final eLearningLoading = ref.watch(
       ociServeProvider.select((state) => state.loading),
@@ -78,9 +97,9 @@ class _BulkControls extends ConsumerWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppTheme.iceBlue),
       ),
-      // Een [Wrap]: bij 200% interface-tekst passen het opschrift en de twee
-      // knoppen niet meer op één regel, dan vallen ze netjes onder elkaar in
-      // plaats van de rij te laten overlopen.
+      // Een [Wrap]: bij 200% interface-tekst passen het opschrift en de knop
+      // niet meer op één regel, dan vallen ze netjes onder elkaar in plaats
+      // van de rij te laten overlopen.
       child: Wrap(
         spacing: 8,
         runSpacing: 4,
@@ -95,12 +114,6 @@ class _BulkControls extends ConsumerWidget {
             ),
           ),
           const SizedBox(width: 4),
-          TextButton(
-            onPressed: web || eLearningLoading || allOn
-                ? null
-                : () => _setAll(ref, integrations, true),
-            child: Text(l10n.d('Alles inschakelen')),
-          ),
           TextButton(
             onPressed: !web && !eLearningLoading && anyOn
                 ? () => _setAll(ref, integrations, false)
@@ -121,6 +134,10 @@ class _BulkControls extends ConsumerWidget {
 
 /// Eén integratie als schakelkaart: de schakelaar met kop bovenaan, en de
 /// instellingen eronder zodra de koppeling aan staat of er al inhoud is.
+///
+/// De schakelaar kan alleen úít: aanzetten hoort bij Uitbreidingen (#2185).
+/// Staat de koppeling uit, dan is de schakelaar grijs en legt een regel uit
+/// waar hij wel aangaat.
 class _IntegrationCard extends ConsumerWidget {
   const _IntegrationCard({required this.entry});
 
@@ -147,9 +164,13 @@ class _IntegrationCard extends ConsumerWidget {
         children: [
           SwitchListTile(
             value: !web && enabled,
-            onChanged: web || loading ? null : (v) => entry.setEnabled(ref, v),
+            // Alleen uitzetten (#2185): wie aan staat kan hier uitschakelen,
+            // wie uit staat vindt de schakelaar bij Uitbreidingen.
+            onChanged: web || loading || !enabled
+                ? null
+                : (v) => entry.setEnabled(ref, v),
             title: Text(
-              _title(l10n),
+              integrationCardTitle(entry.id, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(
@@ -164,11 +185,22 @@ class _IntegrationCard extends ConsumerWidget {
               child: _body(),
             )
           else if (!web && _hasContent(ref))
-            // Uit, maar er is al inhoud: de vaste regel van dit project in beeld.
+            // Uit, maar er is al inhoud: de vaste regel van dit project in
+            // beeld.
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
               child: Text(
                 _contentNote(l10n),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+              ),
+            ),
+          if (!web && !enabled)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+              child: Text(
+                l10n.d(
+                  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.',
+                ),
                 style: TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
             ),
@@ -180,11 +212,6 @@ class _IntegrationCard extends ConsumerWidget {
   bool _hasContent(WidgetRef ref) => switch (entry.id) {
     IntegrationId.openKat => ref.watch(openKatHasContentProvider),
     IntegrationId.ociServe => false,
-  };
-
-  String _title(AppLocalizations l10n) => switch (entry.id) {
-    IntegrationId.openKat => l10n.d('OpenKAT'),
-    IntegrationId.ociServe => l10n.d('eLearning'),
   };
 
   String _subtitle(AppLocalizations l10n, {required bool web}) {

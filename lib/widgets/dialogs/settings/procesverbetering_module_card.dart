@@ -5,12 +5,14 @@ import '../../../l10n/app_localizations.dart';
 import '../../../services/improvement/improvement_analysis_helpers.dart';
 import '../../../services/improvement/stats/stats.dart';
 import '../../../services/scene/scene.dart';
+import '../../../state/module_registry.dart';
 import '../../../state/procesverbetering_provider.dart';
 import '../../../theme/app_theme.dart';
 import '../../slides/previews/scene_painter.dart';
 import '../improvement_inference_dialog.dart';
 import '../improvement_msa_dialog.dart';
 import '../improvement_regression_dialog.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 /// Module card for Procesverbetering on Settings → Uitbreidingen
@@ -54,7 +56,7 @@ class ProcesverbeteringModuleCard extends ConsumerWidget {
             onChanged: (v) =>
                 ref.read(procesverbeteringProvider.notifier).setEnabled(v),
             title: Text(
-              l10n.d('Procesverbetering'),
+              moduleCardTitle(ModuleId.procesverbetering, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(

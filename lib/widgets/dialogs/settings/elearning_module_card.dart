@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../state/elearning_provider.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 /// Module card for eLearning on Settings → Uitbreidingen (#1999).
@@ -28,7 +30,7 @@ class ElearningModuleCard extends ConsumerWidget {
             onChanged: (v) =>
                 ref.read(elearningProvider.notifier).setEnabled(v),
             title: Text(
-              l10n.d('eLearning'),
+              moduleCardTitle(ModuleId.elearning, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(

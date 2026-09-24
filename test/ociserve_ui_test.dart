@@ -19,6 +19,7 @@ import 'package:ocideck/state/openkat_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/app_shell.dart';
+import 'package:ocideck/widgets/dialogs/settings/integration_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings/ociserve_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings/integrations_panel.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
@@ -450,30 +451,55 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(OciServeIntegrationBody), findsNothing);
-    final integrationsTab = find.text('Integraties');
+    // De tooltip raakt alleen de zijbalkknop; de sectiekop in de IndexedStack
+    // deelt het opschrift maar staat offstage.
+    final integrationsTab = find.byTooltip('Integraties');
     await tester.ensureVisible(integrationsTab);
     await tester.pumpAndSettle();
     await tester.tap(integrationsTab);
     await tester.pumpAndSettle();
 
-    expect(find.text('eLearning'), findsWidgets);
+    // "volgen" onderscheidt de integratie van de uitbreiding "eLearning
+    // maken" (#2186); de technische naam OciServe blijft achter de schermen.
+    expect(find.text('eLearning volgen'), findsWidgets);
     expect(find.text('OciServe'), findsNothing);
     expect(find.byType(OciServeIntegrationBody), findsNothing);
-
-    final eLearningCard = find.ancestor(
+    // De schakelaar op Integraties kan alleen úít (#2185): aanzetten doet de
+    // inschakelkaart op Uitbreidingen.
+    final integratieSchakelaar = find.ancestor(
       of: find.descendant(
         of: find.byType(IntegrationsPanel),
-        matching: find.text('eLearning'),
+        matching: find.text('eLearning volgen'),
       ),
       matching: find.byType(SwitchListTile),
     );
-    await tester.ensureVisible(eLearningCard);
+    expect(
+      tester.widget<SwitchListTile>(integratieSchakelaar).onChanged,
+      isNull,
+    );
+
+    await tester.ensureVisible(find.byTooltip('Uitbreidingen'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Uitbreidingen'));
+    await tester.pumpAndSettle();
+    final inschakelkaart = find.ancestor(
+      of: find.descendant(
+        of: find.byType(IntegrationModuleCard),
+        matching: find.text('eLearning volgen'),
+      ),
+      matching: find.byType(SwitchListTile),
+    );
+    await tester.ensureVisible(inschakelkaart);
     await tester.pumpAndSettle();
     await tester.tap(
-      find.descendant(of: eLearningCard, matching: find.byType(Switch)),
+      find.descendant(of: inschakelkaart, matching: find.byType(Switch)),
     );
     await tester.pumpAndSettle();
 
+    await tester.ensureVisible(find.byTooltip('Integraties'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Integraties'));
+    await tester.pumpAndSettle();
     expect(find.byType(OciServeIntegrationBody), findsOneWidget);
     expect(find.text('eLearning-server'), findsOneWidget);
   });
@@ -499,10 +525,13 @@ void main() {
     await tester.pump();
 
     expect(tester.widget<Switch>(find.byType(Switch)).onChanged, isNull);
+    // "Alles inschakelen" bestaat niet meer (#2185); de enige bulkknop is
+    // uitschakelen, en die is uit zolang er niets aan staat.
+    expect(find.text('Alles inschakelen'), findsNothing);
     expect(
       tester
           .widget<TextButton>(
-            find.widgetWithText(TextButton, 'Alles inschakelen'),
+            find.widgetWithText(TextButton, 'Alles uitschakelen'),
           )
           .onPressed,
       isNull,

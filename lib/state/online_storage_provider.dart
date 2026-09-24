@@ -63,7 +63,7 @@ final onlineStorageEnabledProvider = Provider<bool>((ref) {
 
 /// De poort waar de opslag-oppervlakken op kijken: aan, óf de inhoud is er al.
 ///
-/// Dezelfde vaste regel als bij de checklists (#648) en het AI-tabblad (#731):
+/// Dezelfde vaste regel als bij de checklists (#648) en de AI-kaart (#731):
 /// tonen zodra er inhoud is. Wie verbindingen heeft en de module uitzet, houdt
 /// zijn verbindingen, het git-menu en de outbox — uitzetten mag bestaand werk
 /// en wachtend werk niet onbereikbaar maken. Wat er dan wél verdwijnt is

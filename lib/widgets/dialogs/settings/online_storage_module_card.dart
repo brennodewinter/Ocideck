@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../platform/platform_features.dart';
 import '../../../state/online_storage_provider.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 /// De modulekaart voor Online opslag op het tabblad Uitbreidingen (#570).
@@ -43,7 +45,7 @@ class OnlineStorageModuleCard extends ConsumerWidget {
                 ? null
                 : (v) => ref.read(onlineStorageProvider.notifier).setEnabled(v),
             title: Text(
-              l10n.d('Online opslag'),
+              moduleCardTitle(ModuleId.onlineStorage, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(

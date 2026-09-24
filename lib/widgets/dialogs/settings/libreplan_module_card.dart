@@ -2,7 +2,9 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../platform/platform_features.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 /// De modulekaart voor de LibrePlan-connector op het tabblad Uitbreidingen
@@ -10,15 +12,15 @@ import 'module_card.dart';
 /// netwerkuitgang die je bewust aanzet.
 ///
 /// **De schakelaar zet het formulierveld om, niet de opgeslagen instelling.**
-/// Het LibrePlan-tabblad schrijft zijn hele formulier bij Opslaan weg,
-/// inclusief `enabled`; zou deze kaart rechtstreeks naar de voorkeuren
+/// De integratiekaart op Integraties schrijft zijn hele formulier bij Opslaan
+/// weg, inclusief `enabled`; zou deze kaart rechtstreeks naar de voorkeuren
 /// schrijven, dan draaide die Opslaan het weer terug. Eén schakelaar, één
 /// opslagpad — vandaar dat [enabled] en [onChanged] hier binnenkomen in plaats
 /// van een provider.
 ///
 /// Desktop-only: op web is de keychain niet veilig (sleutel en ciphertext in
 /// dezelfde localStorage), dus de kaart is zichtbaar maar uitgeschakeld, met
-/// dezelfde melding die het AI-tabblad op web toont.
+/// dezelfde melding die de AI-kaart op web toont.
 class LibreplanModuleCard extends StatelessWidget {
   const LibreplanModuleCard({
     super.key,
@@ -44,7 +46,7 @@ class LibreplanModuleCard extends StatelessWidget {
             value: !web && enabled,
             onChanged: web ? null : onChanged,
             title: Text(
-              l10n.d('LibrePlan-connector'),
+              moduleCardTitle(ModuleId.libreplan, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(
@@ -64,7 +66,7 @@ class LibreplanModuleCard extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
               child: Text(
                 l10n.d(
-                  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.',
+                  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.',
                 ),
                 style: TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),

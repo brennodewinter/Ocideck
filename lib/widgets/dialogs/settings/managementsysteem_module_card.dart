@@ -5,7 +5,9 @@ import '../../../l10n/app_localizations.dart';
 import '../../../models/management_system.dart';
 import '../../../services/management_system_catalog.dart';
 import '../../../state/managementsysteem_provider.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 /// Module card for Managementsysteem on Settings → Uitbreidingen
@@ -36,7 +38,7 @@ class ManagementsysteemModuleCard extends ConsumerWidget {
             onChanged: (v) =>
                 ref.read(managementsysteemProvider.notifier).setEnabled(v),
             title: Text(
-              l10n.d('Managementsysteem'),
+              moduleCardTitle(ModuleId.managementsysteem, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(

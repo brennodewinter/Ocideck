@@ -2,7 +2,9 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../platform/platform_features.dart';
+import '../../../state/module_registry.dart';
 import '../../../theme/app_theme.dart';
+import 'card_titles.dart';
 import 'module_card.dart';
 
 /// De modulekaart voor AI-assistentie op het tabblad Uitbreidingen (#731).
@@ -12,7 +14,7 @@ import 'module_card.dart';
 /// tabblad in de zijbalk suggereerde het een vaste functie.
 ///
 /// **De schakelaar zet het formulierveld om, niet de opgeslagen instelling.**
-/// Het AI-tabblad schrijft zijn hele formulier bij Opslaan weg, inclusief
+/// Het AI-formulier op Integraties schrijft bij Opslaan weg, inclusief
 /// `enabled`; zou deze kaart rechtstreeks naar de voorkeuren schrijven, dan
 /// draaide die Opslaan het weer terug. Eén schakelaar, één opslagpad — vandaar
 /// dat [enabled] en [onChanged] hier binnenkomen in plaats van een provider.
@@ -31,7 +33,7 @@ class AiModuleCard extends StatelessWidget {
   final bool enabled;
 
   /// Wordt op web genegeerd: daar is de kaart zichtbaar maar uitgeschakeld,
-  /// met dezelfde melding die het AI-tabblad op web toont.
+  /// met dezelfde melding die de integratiekaart op web toont.
   final ValueChanged<bool> onChanged;
 
   @override
@@ -46,7 +48,7 @@ class AiModuleCard extends StatelessWidget {
             value: !web && enabled,
             onChanged: web ? null : onChanged,
             title: Text(
-              l10n.d('AI-assistentie'),
+              moduleCardTitle(ModuleId.ai, l10n),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(
@@ -66,7 +68,7 @@ class AiModuleCard extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
               child: Text(
                 l10n.d(
-                  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.',
+                  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.',
                 ),
                 style: TextStyle(fontSize: 11, color: AppTheme.slate500),
               ),
@@ -77,10 +79,10 @@ class AiModuleCard extends StatelessWidget {
   }
 }
 
-/// Wat er op het AI-tabblad boven de configuratie staat wanneer de module uit
-/// staat.
+/// Wat er op de AI-integratiekaart boven de configuratie staat wanneer de
+/// module uit staat.
 ///
-/// Zonder deze regel leest het tabblad als een werkende instelling terwijl er
+/// Zonder deze regel leest de kaart als een werkende instelling terwijl er
 /// niets gebeurt — en dat is precies de knop die liegt. Ze wijst naar de plek
 /// waar de schakelaar wél zit.
 class AiModuleOffNotice extends StatelessWidget {

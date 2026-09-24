@@ -1665,6 +1665,18 @@ const _dutchSourceAddLt = <String, String>{
       'Išversta kopija atidaryta naujame skirtuke.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'skaidrės praleistos — originalus tekstas išliko.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Vidinę sistemą pasirinkite kortelėje Integracijos. Kol ten nieko nenustatyta, niekas nevyksta.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Sukonfigūruokite serverį kortelėje Integracijos. Kol ten nieko nėra, nieko ir nevyksta.',
+  'eLearning volgen': 'Sekti eLearning',
+  'eLearning maken': 'Kurti eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Ryšiai su kitomis sistemomis. Kiekvienas ryšys pagal numatymą išjungtas; įjunkite skiltyje Plėtiniai, išjunkite čia.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Šis ryšys išjungtas. Įjunkite jį skiltyje Plėtiniai.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Konfigūruokite skirtuke Integracijos.',
   'Kies een naam en waar het document komt te staan.':
       'Pasirinkite pavadinimą ir vietą, kur bus išsaugotas dokumentas.',
   'Bijv. Vergadernotities': 'Pvz. Susirinkimo užrašai',
@@ -3131,8 +3143,6 @@ const _dutchSourceAddLt = <String, String>{
   'Alle integraties': 'Visos integracijos',
   'Alles inschakelen': 'Įjungti viską',
   'Alles uitschakelen': 'Išjungti viską',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Ryšiai su kitomis sistemomis. Kiekvienas ryšys pagal numatytuosius nustatymus išjungtas ir lieka neaktyvus, kol jį įjungiate.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Pristatymų įtraukimas iš PowerPoint (.pptx), Keynote (.key) ir Impress (.odp) kaip redaguojamas dekas. Ryšiai su kitomis sistemomis, pavyzdžiui, „OpenKAT“, yra skiltyje Integracijos.',
   'Media (WebRTC)': 'Medija (WebRTC)',
@@ -4199,8 +4209,6 @@ const _dutchSourceAddLt = <String, String>{
       'Modulis DI pagalba išjungtas, todėl čia nieko nevyksta. Įjunkite jį skiltyje Plėtiniai. Tai, ką nustatėte žemiau, išlieka.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Pagalba dėl alternatyviųjų tekstų, aprašymų ir formuluočių. Įjungimas dar nieko nesiunčia: tai įvyksta tik tada, kai patys pasirenkate vidinę sistemą ir, debesijos paslaugos atveju, aiškiai patvirtinate. Naudojant vietinę vidinę sistemą niekas nepalieka jūsų kompiuterio.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Vidinę sistemą pasirinkite kortelėje DI pagalba. Kol ten nieko nenustatyta, niekas nevyksta.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Šablono pavyzdinės skaidrės yra anglų kalba. Pavadinimas ir aprašymas atitinka tavo kalbą; turinį pritaikai jį sukūręs.',
   'Meer': 'Daugiau',
@@ -5425,8 +5433,6 @@ const _dutchSourceAddLt = <String, String>{
   "dia's geïmporteerd.": 'skaidrės importuotos.',
   'Import mislukt: ': 'Importuoti nepavyko: ',
   'Checklists': 'Kontroliniai sąrašai',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Sukonfigūruokite serverį kortelėje LibrePlan jungtis. Kol ten nieko nėra, nieko ir nevyksta.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importuokite projekto momentinę kopiją iš LibrePlan egzemplioriaus kaip skaidres: Gantt, WBS, išteklių apkrova, darbo laiko apskaita ir daugiau. Tik skaitymui, pagal pageidavimą — niekas neišeina į išorę, kol nesukonfigūruojate serverio ir nepaleidžiate importo.',
   'Vul server-URL en gebruikersnaam in.':

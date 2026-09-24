@@ -21,37 +21,8 @@ extension _SettingsLibreplan on _SettingsDialogState {
     });
   }
 
-  Widget _libreplanTab() {
-    final l10n = context.l10n;
-    if (isWebPlatform) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _sectionTitle(l10n.d('LibrePlan-connector')),
-          Text(
-            l10n.d(
-              'De LibrePlan-connector is alleen beschikbaar in de desktopversie.',
-            ),
-            style: const TextStyle(fontSize: 12, height: 1.4),
-          ),
-        ],
-      );
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          l10n.d(
-            'LibrePlan-connector is optioneel en staat standaard uit. Er wordt niets opgehaald totdat u dit inschakelt en zelf een server configureert. Alleen-lezen: de connector schrijft niets terug naar LibrePlan. Het wachtwoord wordt in de sleutelhanger van uw besturingssysteem opgeslagen, niet in het deck.',
-          ),
-          style: const TextStyle(fontSize: 12, height: 1.4),
-        ),
-        const SizedBox(height: 16),
-        _libreplanForm(l10n),
-      ],
-    );
-  }
-
+  /// Het LibrePlan-formulier voor de integratiekaart op Integraties (#2184):
+  /// server, gebruiker, wachtwoord, vertrouwde-server en de testknop.
   Widget _libreplanForm(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

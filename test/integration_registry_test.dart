@@ -52,33 +52,33 @@ void main() {
     });
   });
 
-  group('alles aan/uit leest de stand', () {
-    test('alles aan wanneer beide integraties aan staan', () {
+  group('alles uit leest de stand', () {
+    // Sinds #2185 kan Integraties alleen nog uitzetten — aanzetten hoort bij
+    // Uitbreidingen — dus de "alles aan"-stand heeft geen afnemer meer; wat
+    // over is, is "is er minstens één aan" voor de uitschakelknop.
+    test('beide integraties aan telt als "er is iets aan"', () {
       final c = maak(
         openKatAvailable: true,
         openKatEnabled: true,
         ociServeEnabled: true,
       );
-      expect(c.read(allIntegrationsEnabledProvider), isTrue);
       expect(c.read(anyIntegrationEnabledProvider), isTrue);
     });
 
-    test('één actieve integratie is niet alles, maar wel minstens één', () {
+    test('één actieve integratie is minstens één', () {
       final c = maak(openKatAvailable: true, ociServeEnabled: true);
-      expect(c.read(allIntegrationsEnabledProvider), isFalse);
       expect(c.read(anyIntegrationEnabledProvider), isTrue);
     });
 
-    test('een lege lijst telt niet als "alles aan"', () {
-      // Niets beschikbaar is niet hetzelfde als alles ingeschakeld: dan valt er
-      // niets aan te zetten, en "Alles inschakelen" hoort bruikbaar te blijven.
+    test('een lege lijst telt niet als "er is iets aan"', () {
+      // Niets beschikbaar is niet hetzelfde als iets ingeschakeld: dan valt er
+      // niets uit te zetten, en "Alles uitschakelen" hoort grijs te staan.
       final c = maak(
         openKatAvailable: false,
         openKatEnabled: true,
         ociServeAvailable: false,
         ociServeEnabled: true,
       );
-      expect(c.read(allIntegrationsEnabledProvider), isFalse);
       expect(c.read(anyIntegrationEnabledProvider), isFalse);
     });
   });

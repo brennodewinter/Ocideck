@@ -37,42 +37,10 @@ extension _SettingsAi on _SettingsDialogState {
     });
   }
 
-  Widget _aiTab() {
-    final l10n = context.l10n;
-    if (isWebPlatform) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _sectionTitle(l10n.d('AI-assistentie')),
-          Text(
-            l10n.d('AI-assistentie is alleen beschikbaar in de desktopversie.'),
-            style: const TextStyle(fontSize: 12, height: 1.4),
-          ),
-        ],
-      );
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          l10n.d(
-            'AI-assistentie is optioneel en staat standaard uit. Er wordt niets verstuurd totdat je dit inschakelt en zelf een backend kiest. Deze functie werkt alleen op de desktopversie.',
-          ),
-          style: const TextStyle(fontSize: 12, height: 1.4),
-        ),
-        // De aan/uit-schakelaar staat op Uitbreidingen, bij de modulekaart
-        // (#731). Twee knoppen die bijna hetzelfde zeggen is één te veel; wie
-        // hier komt, komt om te configureren.
-        //
-        // De configuratie blijft ook zichtbaar met de module uit, zolang er een
-        // backend staat: anders maakt de schakelaar bestaand werk onbereikbaar
-        // (#648). Zie [_aiModuleOffNotice] voor wat er dan boven staat.
-        if (!_ai.enabled) const AiModuleOffNotice(),
-        if (_ai.revealsTab) ..._aiConfigSection(l10n),
-      ],
-    );
-  }
-
+  /// De AI-configuratievelden voor de integratiekaart op Integraties (#2184).
+  /// De aan/uit-schakelaar staat op Uitbreidingen, bij de modulekaart (#731);
+  /// de kaart zelf ([AiIntegrationCard]) toont bij "uit" de verwijzing
+  /// daarheen en houdt een bestaande backend zichtbaar (#648).
   List<Widget> _aiConfigSection(AppLocalizations l10n) {
     return [
       const SizedBox(height: 12),

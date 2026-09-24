@@ -1661,6 +1661,18 @@ const _dutchSourceAddHr = <String, String>{
       'Prevedena kopija otvorena u novoj kartici.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'preskočeni slajdovi — izvorni tekst zadržan.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Odaberite pozadinski sustav na kartici Integracije. Dok tamo ništa nije postavljeno, ništa se ne događa.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Postavite poslužitelj na kartici Integracije. Dok ondje ništa ne piše, ništa se ne događa.',
+  'eLearning volgen': 'Praćenje eLearninga',
+  'eLearning maken': 'Izrada eLearninga',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Poveznice s drugim sustavima. Svaka je poveznica zadano isključena; uključite je u Proširenja, isključite ovdje.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Ova je poveznica isključena. Uključite je u Proširenja.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Postavite je na kartici Integracije.',
   'Kies een naam en waar het document komt te staan.':
       'Odaberite naziv i mjesto spremanja dokumenta.',
   'Bijv. Vergadernotities': 'Npr. Bilješke sa sastanka',
@@ -3123,8 +3135,6 @@ const _dutchSourceAddHr = <String, String>{
   'Alle integraties': 'Sve integracije',
   'Alles inschakelen': 'Uključi sve',
   'Alles uitschakelen': 'Isključi sve',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Veze s drugim sustavima. Svaka je veza zadano isključena i ostaje neaktivna dok je ne uključite.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Unos prezentacija iz PowerPoint (.pptx), Keynote (.key) i Impress (.odp) kao uredljiv deck. Veze s drugim sustavima, poput OpenKAT-a, nalaze se pod Integracije.',
   'Media (WebRTC)': 'Mediji (WebRTC)',
@@ -4184,8 +4194,6 @@ const _dutchSourceAddHr = <String, String>{
       'Modul AI pomoć je isključen, pa se ovdje ništa ne događa. Uključite ga pod Proširenja. Ono što ste postavili u nastavku ostaje sačuvano.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Pomoć pri alternativnim tekstovima, opisima i formulacijama. Uključivanje još ništa ne šalje: to se događa tek nakon što sami odaberete pozadinski sustav i, kod usluge u oblaku, izričito potvrdite. S lokalnim pozadinskim sustavom ništa ne napušta vaše računalo.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Odaberite pozadinski sustav na kartici AI pomoć. Dok tamo ništa nije postavljeno, ništa se ne događa.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Primjeri slajdova u predlošku su na engleskom. Naziv i opis prate tvoj jezik; sadržaj prilagođavaš nakon stvaranja.',
   'Meer': 'Više',
@@ -5407,8 +5415,6 @@ const _dutchSourceAddHr = <String, String>{
   "dia's geïmporteerd.": 'slajdova uvezeno.',
   'Import mislukt: ': 'Uvoz nije uspio: ',
   'Checklists': 'Kontrolni popisi',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Postavite poslužitelj na kartici Konektor LibrePlan. Dok ondje ništa ne piše, ništa se ne događa.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Uvezite snimku projekta s instance LibrePlan kao slajdove: Gantt, WBS, opterećenje resursa, evidencija rada i više. Samo za čitanje, na zahtjev — ništa ne izlazi van dok ne postavite poslužitelj i ne pokrenete uvoz.',
   'Vul server-URL en gebruikersnaam in.':

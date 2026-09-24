@@ -1660,6 +1660,18 @@ const _dutchSourceAddGsw = <String, String>{
       'Übersetzti Kopii in eme nöie Tab uufgmaacht.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'Folie übersprunge — Originaltäxt b\'halte.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Wähl s Backend im Tab Integratione. Solang det nüt staht, passiert nüt.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Richt de Server im Tab Integratione ii. So lang det nüt staat, passiert nüt.',
+  'eLearning volgen': 'eLearning folge',
+  'eLearning maken': 'eLearning erstelle',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Verbindige mit andere System. Jede Verbindig isch standardmässig us; iischalte bi Erwyterige, usschalte da.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Die Verbindig isch us. Schalt sie bi Erwyterige ii.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Istelle tuesch ufem Tab Integratione.',
   'Kies een naam en waar het document komt te staan.':
       'Wähl en Name und wohin s Dokument gspeicheret wird.',
   'Bijv. Vergadernotities': 'Z. B. Sitzigsnotize',
@@ -3135,8 +3147,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Alle integraties': 'Alli Integratione',
   'Alles inschakelen': 'Alles iischalte',
   'Alles uitschakelen': 'Alles usschalte',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Verbindige mit anderne Systeem. Jedi Verbindig isch standardmässig us und bliibt inaktiv, bis du sie iischaltisch.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Präsentatione us PowerPoint (.pptx), Keynote (.key) und Impress (.odp) as bearbeitbars Deck inehole. Verbindige mit anderne Systeem, wie OpenKAT, findsch under Integratione.',
   'Media (WebRTC)': 'Medie (WebRTC)',
@@ -4200,8 +4210,6 @@ const _dutchSourceAddGsw = <String, String>{
       'S Modul KI-Unterstützig isch us, drum passiert da nüt. Schalt s bi de Erwyterige y. Was du unde ygstellt hesch, blybt erhalte.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Hilf bi Alt-Text, Beschrybige und Formulierige. S Yschalte schickt no nüt: das passiert erst, wänn du sälber es Backend gwählt hesch und bi eme Cloud-Dienscht usdrücklich bestätigt hesch. Bi eme lokale Backend verlaat nüt dyn Computer.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Wähl s Backend im Tab KI-Unterstützig. Solang det nüt staht, passiert nüt.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'D Bispilfolie vo ere Vorlag sind uf Änglisch. Name und Beschriibig folged dinere eigete Sprooch; de Inhalt passisch nach em Aalege aa.',
   'Meer': 'Meh',
@@ -5425,8 +5433,6 @@ const _dutchSourceAddGsw = <String, String>{
   "dia's geïmporteerd.": 'Slides importiert.',
   'Import mislukt: ': 'Import fählgschlage: ',
   'Checklists': 'Checkliste',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Richt de Server im Tab LibrePlan-Konnektor ii. So lang det nüt staat, passiert nüt.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importier e Projekt-Momentufnahm vo ere LibrePlan-Instanz als Slides: Gantt, WBS, Ressourcebelastig, Timesheet und meh. Nume läsend, uf Aafrog — s gaht nüt use, bis du en Server iirichtisch und en Import startisch.',
   'Vul server-URL en gebruikersnaam in.': 'Server-URL und Benutzername iigäh.',

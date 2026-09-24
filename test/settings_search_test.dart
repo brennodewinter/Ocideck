@@ -74,7 +74,7 @@ void main() {
     await openSettings(tester);
     await search(tester, 'ociserve');
 
-    expect(find.text('eLearning'), findsWidgets);
+    expect(find.text('eLearning volgen'), findsWidgets);
     expect(find.text('Integraties › Integraties'), findsOneWidget);
 
     await tester.tap(find.text('Integraties › Integraties'));
@@ -82,7 +82,7 @@ void main() {
     await tester.pump(const Duration(seconds: 4));
 
     expect(find.text('Integraties › Integraties'), findsNothing);
-    expect(find.text('eLearning'), findsWidgets);
+    expect(find.text('eLearning volgen'), findsWidgets);
   });
 
   testWidgets('een stijlprofiel delen is vindbaar zonder de term te kennen', (
@@ -180,17 +180,11 @@ void main() {
   test('sectieloze ingangen staan alleen op tabbladen zonder bruikbaar anker', () {
     // Zonder `section` landt een treffer bovenaan het tabblad in plaats van bij
     // de instelling zelf. Dat mag alleen waar er niets is om naartoe te scrollen:
-    //   ai            — op desktop geen sectiekoppen (alleen de web-variant
-    //                   toont er één, met de "niet beschikbaar"-melding);
     //   documentation — werkt met DocSection in plaats van _sectionTitle;
     //   about         — werkt met _aboutHeading.
     // Komt hier een tabblad bij, vraag je dan af of de instelling niet gewoon
     // een sectie verdient.
-    const allowed = {
-      SettingsSection.ai,
-      SettingsSection.documentation,
-      SettingsSection.about,
-    };
+    const allowed = {SettingsSection.documentation, SettingsSection.about};
 
     final sectionless = kSettingsSearchIndex
         .where((e) => e.section == null && e.sectionKey == null)

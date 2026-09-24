@@ -1669,6 +1669,18 @@ const _dutchSourceAddPl = <String, String>{
       'Przetłumaczona kopia otwarta w nowej karcie.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'pominięte slajdy — zachowano tekst oryginalny.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Wybierz backend na karcie Integracje. Dopóki nic tam nie ustawiono, nic się nie dzieje.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Skonfiguruj serwer na karcie Integracje. Dopóki nic tam nie ma, nic się nie dzieje.',
+  'eLearning volgen': 'Śledzenie eLearning',
+  'eLearning maken': 'Tworzenie eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Połączenia z innymi systemami. Każde połączenie jest domyślnie wyłączone; włącz je w Rozszerzeniach, wyłącz tutaj.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'To połączenie jest wyłączone. Włącz je w Rozszerzeniach.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Skonfiguruj na karcie Integracje.',
   'Kies een naam en waar het document komt te staan.':
       'Wybierz nazwę i miejsce zapisu dokumentu.',
   'Bijv. Vergadernotities': 'Np. Notatki ze spotkania',
@@ -3141,8 +3153,6 @@ const _dutchSourceAddPl = <String, String>{
   'Alle integraties': 'Wszystkie integracje',
   'Alles inschakelen': 'Włącz wszystko',
   'Alles uitschakelen': 'Wyłącz wszystko',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Połączenia z innymi systemami. Każde połączenie jest domyślnie wyłączone i pozostaje nieaktywne, dopóki go nie włączysz.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Wciąganie prezentacji z PowerPoint (.pptx), Keynote (.key) i Impress (.odp) jako edytowalny deck. Połączenia z innymi systemami, takie jak OpenKAT, znajdują się w Integracjach.',
   'Media (WebRTC)': 'Multimedia (WebRTC)',
@@ -4211,8 +4221,6 @@ const _dutchSourceAddPl = <String, String>{
       'Moduł Wsparcie AI jest wyłączony, więc nic się tutaj nie dzieje. Włącz go w sekcji Rozszerzenia. Twoje ustawienia poniżej pozostają zachowane.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Pomoc przy tekstach alternatywnych, opisach i sformułowaniach. Włączenie niczego jeszcze nie wysyła: dzieje się to dopiero po tym, jak samodzielnie wybierzesz backend i, w przypadku usługi chmurowej, wyraźnie to potwierdzisz. Przy lokalnym backendzie nic nie opuszcza Twojego komputera.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Wybierz backend na karcie Wsparcie AI. Dopóki nic tam nie ustawiono, nic się nie dzieje.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Przykładowe slajdy szablonu są po angielsku. Nazwa i opis podążają za Twoim językiem; treść dostosujesz po utworzeniu.',
   'Meer': 'Więcej',
@@ -5437,8 +5445,6 @@ const _dutchSourceAddPl = <String, String>{
   "dia's geïmporteerd.": 'slajdy zaimportowane.',
   'Import mislukt: ': 'Import nie powiódł się: ',
   'Checklists': 'Listy kontrolne',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Skonfiguruj serwer na karcie Łącznik LibrePlan. Dopóki nic tam nie ma, nic się nie dzieje.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Zaimportuj migawkę projektu z instancji LibrePlan jako slajdy: Gantt, WBS, obciążenie zasobów, karta pracy i więcej. Tylko do odczytu, na żądanie — nic nie wychodzi na zewnątrz, dopóki nie skonfigurujesz serwera i nie uruchomisz importu.',
   'Vul server-URL en gebruikersnaam in.':

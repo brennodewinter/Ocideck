@@ -695,6 +695,18 @@ const _dutchSourceAddIt = {
       'Copia tradotta aperta in una nuova scheda.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'diapositive saltate — testo originale mantenuto.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Scegli il backend nella scheda Integrazioni. Finché lì non è impostato nulla, non succede nulla.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Configurate il server nella scheda Integrazioni. Finché lì non c\'è nulla, non succede niente.',
+  'eLearning volgen': 'Seguire eLearning',
+  'eLearning maken': 'Creare eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Collegamenti con altri sistemi. Ogni collegamento è disattivato per impostazione predefinita; attivalo in Estensioni, disattivalo qui.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Questo collegamento è disattivato. Attivalo in Estensioni.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Configura nella scheda Integrazioni.',
   'Kies een naam en waar het document komt te staan.':
       'Scegli un nome e dove verrà salvato il documento.',
   'Bijv. Vergadernotities': 'Ad es. Appunti della riunione',
@@ -2179,8 +2191,6 @@ const _dutchSourceAddIt = {
   'Alle integraties': 'Tutte le integrazioni',
   'Alles inschakelen': 'Attiva tutto',
   'Alles uitschakelen': 'Disattiva tutto',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Collegamenti con altri sistemi. Ogni collegamento è disattivato per impostazione predefinita e resta inattivo finché non lo attivi.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Portare dentro le presentazioni da PowerPoint (.pptx), Keynote (.key) e Impress (.odp) come deck modificabile. I collegamenti con altri sistemi, come OpenKAT, si trovano in Integrazioni.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -3262,8 +3272,6 @@ const _dutchSourceAddIt = {
       'Il modulo Assistenza IA è disattivato, quindi qui non succede nulla. Attivalo in Estensioni. Ciò che hai impostato qui sotto resta invariato.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Aiuto per testi alternativi, descrizioni e formulazioni. Attivarlo non invia ancora nulla: succede solo dopo che hai scelto tu stesso un backend e, per un servizio cloud, hai confermato esplicitamente. Con un backend locale nulla lascia il tuo computer.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Scegli il backend nella scheda Assistenza IA. Finché lì non è impostato nulla, non succede nulla.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Le diapositive di esempio di un modello sono in inglese. Nome e descrizione seguono la tua lingua; il contenuto lo adatti dopo la creazione.',
   'Meer': 'Altro',
@@ -5494,8 +5502,6 @@ const _dutchSourceAddIt = {
   "dia's geïmporteerd.": 'diapositive importate.',
   'Import mislukt: ': 'Importazione non riuscita: ',
   'Checklists': 'Checklist',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Configurate il server nella scheda Connettore LibrePlan. Finché lì non c\'è nulla, non succede niente.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importate un\'istantanea di progetto da un\'istanza LibrePlan come diapositive: Gantt, WBS, carico delle risorse, timesheet e altro. Sola lettura, su richiesta — non esce nulla finché non configurate un server e avviate un\'importazione.',
   'Vul server-URL en gebruikersnaam in.':

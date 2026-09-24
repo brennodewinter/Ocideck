@@ -6,11 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/ai_settings.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/widgets/dialogs/settings/ai_integration_card.dart';
 import 'package:ocideck/widgets/dialogs/settings/ai_module_card.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Het AI-tabblad van de instellingen (`parts/settings_dialog_ai.dart`).
+/// De AI-configuratie van de instellingen (`parts/settings_dialog_ai.dart`).
+/// Tot #2184 was dit een eigen tabblad in de zijbalk; AI is een koppeling met
+/// een backend en hoort daarom als kaart op Integraties. De inschakelschakelaar
+/// staat op Uitbreidingen (#731, #2185).
 ///
 /// De regel die hier het meeste weegt staat niet in de UI maar in
 /// `_initAiFields`: verandert de bestemming, dan vervalt de bevestiging én de
@@ -18,7 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// daarna alleen de URL naar B wijzigde, zijn tekst naar een bestemming die hij
 /// nooit heeft goedgekeurd — mét de sleutel van A in de `Authorization`-kop.
 ///
-/// Verder is dit tabblad één lange keten van "wat je kiest bepaalt wat je te
+/// Verder is deze kaart één lange keten van "wat je kiest bepaalt wat je te
 /// zien krijgt", en elke stap daarin hoort een eerdere testuitslag te laten
 /// vervallen: die uitslag gold voor een andere opstelling.
 void main() {
@@ -39,9 +43,8 @@ void main() {
   }
 
   /// Opent het instellingenvenster op **Uitbreidingen**, want daar staat sinds
-  /// #731 de schakelaar. Het AI-tabblad bestaat pas zodra de module aan is of er
-  /// een backend staat, dus dit is de enige ingang die met verse voorkeuren
-  /// werkt.
+  /// #731 de schakelaar. De configuratiekaart staat sinds #2184 op
+  /// Integraties; dit is de enige ingang die met verse voorkeuren werkt.
   Future<void> openAiTab(
     WidgetTester tester, {
     Map<String, Object> prefs = const {},
@@ -90,24 +93,41 @@ void main() {
 
   /// De moduleschakelaar op Uitbreidingen. Heette tot #731
   /// "AI-assistentie inschakelen" en stond op het AI-tabblad zelf.
-  Finder aanZetten() => find.widgetWithText(SwitchListTile, 'AI-assistentie');
+  /// Gescope op de modulekaart: de integratiekaart op Integraties toont
+  /// dezelfde titel, met een schakelaar die alleen uit kan (#2185).
+  Finder aanZetten() => find.descendant(
+    of: find.byType(AiModuleCard),
+    matching: find.byType(SwitchListTile),
+  );
 
-  /// Het tabblad in de zijbalk. Bestaat alleen wanneer de module aan staat.
-  Finder aiTabblad() => find.byTooltip('AI-assistentie');
+  /// Het tabblad Integraties in de zijbalk — daar staat sinds #2184 de kaart
+  /// met de backend-configuratie.
+  Finder integratiesTabblad() => find.byTooltip('Integraties');
 
-  /// Zet de module aan en ga naar het AI-tabblad — de gewone route van een
+  /// Zet de module aan en ga naar Integraties — de gewone route van een
   /// gebruiker, en de opstelling waar de meeste toetsen hieronder vanuit gaan.
   Future<void> moduleAanEnNaarTab(WidgetTester tester) async {
     await tapIn(tester, aanZetten());
-    await tapIn(tester, aiTabblad());
+    await tapIn(tester, integratiesTabblad());
   }
 
-  Finder cloudBevestiging() => find.widgetWithText(
-    SwitchListTile,
-    'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd',
+  /// De AI-kaart op Integraties. Veldlabels als "Server-URL" en "Verbinding
+  /// testen" staan sinds #2184 óók op de LibrePlan-kaart, dus alle finders
+  /// op de configuratie scopen op deze kaart.
+  Finder aiKaart() => find.byType(AiIntegrationCard);
+
+  Finder cloudBevestiging() => find.descendant(
+    of: aiKaart(),
+    matching: find.widgetWithText(
+      SwitchListTile,
+      'Ik begrijp dat gegevens naar deze externe dienst worden verstuurd',
+    ),
   );
 
-  Finder veld(String label) => find.widgetWithText(TextField, label);
+  Finder veld(String label) => find.descendant(
+    of: aiKaart(),
+    matching: find.widgetWithText(TextField, label),
+  );
 
   Future<void> kiesBackend(WidgetTester tester, String label) async {
     await tapIn(tester, find.byType(DropdownButtonFormField<AiBackendMode>));
@@ -118,38 +138,51 @@ void main() {
   bool switchAan(WidgetTester tester, Finder finder) =>
       tester.widget<SwitchListTile>(finder).value;
 
-  testWidgets('uit is er geen tabblad en valt er niets in te stellen', (
-    tester,
-  ) async {
+  testWidgets('uit valt er niets in te stellen', (tester) async {
     await openAiTab(tester);
 
     expect(find.byType(AiModuleCard), findsOneWidget);
     expect(switchAan(tester, aanZetten()), isFalse, reason: 'standaard uit');
-    // Sinds #731 verdwijnt het tabblad zelf, niet alleen zijn inhoud: AI is een
-    // module, en de zijbalk hoort niet te suggereren dat het een vaste functie
-    // is. Wie hem niet gebruikt — de meerderheid, gegeven standaard-uit — heeft
-    // er een tabblad minder.
-    expect(aiTabblad(), findsNothing);
+    // Sinds #2184 is er geen eigen AI-tabblad meer: de backend-configuratie
+    // is een kaart op Integraties, en die toont zonder backend niets om in
+    // te vullen.
+    await tapIn(tester, integratiesTabblad());
     expect(
       find.byType(DropdownButtonFormField<AiBackendMode>),
       findsNothing,
       reason: 'zonder inschakelen valt er niets te kiezen',
     );
+    // De kaart zelf staat er wél, met een schakelaar die alleen uit kan —
+    // aanzetten hoort bij Uitbreidingen (#2185).
+    final integratieSchakelaar = find.descendant(
+      of: find.byType(AiIntegrationCard),
+      matching: find.byType(SwitchListTile),
+    );
+    expect(integratieSchakelaar, findsOneWidget);
+    expect(
+      tester.widget<SwitchListTile>(integratieSchakelaar).onChanged,
+      isNull,
+    );
   });
 
-  testWidgets('aanzetten laat het tabblad verschijnen', (tester) async {
+  testWidgets('aanzetten onthult de configuratie op Integraties', (
+    tester,
+  ) async {
     await openAiTab(tester);
-    expect(aiTabblad(), findsNothing);
+    await tapIn(tester, integratiesTabblad());
+    expect(find.byType(DropdownButtonFormField<AiBackendMode>), findsNothing);
 
+    await tapIn(tester, find.byTooltip('Uitbreidingen'));
     await tapIn(tester, aanZetten());
-    expect(aiTabblad(), findsOneWidget);
+    await tapIn(tester, integratiesTabblad());
+    expect(find.byType(DropdownButtonFormField<AiBackendMode>), findsOneWidget);
   });
 
   testWidgets(
-    'een ingestelde backend houdt het tabblad, ook met de module uit',
+    'een ingestelde backend houdt de kaart gevuld, ook met de module uit',
     (tester) async {
-      // De vaste regel uit #648: tonen zodra de inhoud er is. Zou het tabblad
-      // op alléén de schakelaar verdwijnen, dan maakt uitzetten de backend en
+      // De vaste regel uit #648: tonen zodra de inhoud er is. Zou de kaart
+      // op alléén de schakelaar leeglopen, dan maakt uitzetten de backend en
       // de sleutel onbereikbaar — werk dat er al ligt, weg achter een knop.
       await openAiTab(
         tester,
@@ -164,13 +197,12 @@ void main() {
       );
 
       expect(switchAan(tester, aanZetten()), isFalse);
-      expect(aiTabblad(), findsOneWidget);
 
-      await tapIn(tester, aiTabblad());
+      await tapIn(tester, integratiesTabblad());
       expect(
         find.textContaining('De module AI-assistentie staat uit'),
         findsOneWidget,
-        reason: 'anders leest het tabblad als een werkende instelling',
+        reason: 'anders leest de kaart als een werkende instelling',
       );
       expect(
         find.byType(DropdownButtonFormField<AiBackendMode>),
@@ -206,7 +238,13 @@ void main() {
     // Lokaal: geen sleutel, geen LAN-schakelaar, geen cloudbevestiging.
     expect(veld('API-sleutel (optioneel)'), findsNothing);
     expect(
-      find.widgetWithText(SwitchListTile, 'Vertrouwde interne server'),
+      find.descendant(
+        of: aiKaart(),
+        matching: find.widgetWithText(
+          SwitchListTile,
+          'Vertrouwde interne server',
+        ),
+      ),
       findsNothing,
     );
     expect(cloudBevestiging(), findsNothing);
@@ -221,7 +259,13 @@ void main() {
 
     expect(veld('API-sleutel (optioneel)'), findsOneWidget);
     expect(
-      find.widgetWithText(SwitchListTile, 'Vertrouwde interne server'),
+      find.descendant(
+        of: aiKaart(),
+        matching: find.widgetWithText(
+          SwitchListTile,
+          'Vertrouwde interne server',
+        ),
+      ),
       findsOneWidget,
       reason: 'zonder deze keuze is een LAN-adres niet te bereiken',
     );
@@ -316,9 +360,9 @@ void main() {
     );
 
     expect(switchAan(tester, aanZetten()), isTrue);
-    // De velden staan op het AI-tabblad; de dialoog opent sinds #731 op
-    // Uitbreidingen, dus daar eerst heen.
-    await tapIn(tester, aiTabblad());
+    // De velden staan op de kaart op Integraties; de dialoog opent sinds #731
+    // op Uitbreidingen, dus daar eerst heen.
+    await tapIn(tester, integratiesTabblad());
     expect(
       tester.widget<TextField>(veld('Server-URL')).controller!.text,
       'https://eigen.server.intern/v1',
@@ -330,7 +374,13 @@ void main() {
     expect(
       switchAan(
         tester,
-        find.widgetWithText(SwitchListTile, 'Vertrouwde interne server'),
+        find.descendant(
+          of: aiKaart(),
+          matching: find.widgetWithText(
+            SwitchListTile,
+            'Vertrouwde interne server',
+          ),
+        ),
       ),
       isTrue,
     );
@@ -343,7 +393,10 @@ void main() {
 
     await tapIn(
       tester,
-      find.widgetWithText(ElevatedButton, 'Verbinding testen'),
+      find.descendant(
+        of: aiKaart(),
+        matching: find.widgetWithText(ElevatedButton, 'Verbinding testen'),
+      ),
     );
 
     // Onder `flutter test` is er geen server op 127.0.0.1:11434, dus dit hoort

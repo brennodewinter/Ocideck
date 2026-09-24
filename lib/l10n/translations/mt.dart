@@ -1676,6 +1676,18 @@ const _dutchSourceAddMt = <String, String>{
       'Kopja tradotta miftuħa f\'tab ġdida.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'slajds maħlula — it-test oriġinali żamm.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Agħżel il-backend fit-tab Integrazzjonijiet. Sakemm m\'hemm xejn hemmhekk, ma jiġri xejn.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Ikkonfigura s-server fit-tab Integrazzjonijiet. Sakemm hemmhekk ma jkun hemm xejn, ma jiġri xejn.',
+  'eLearning volgen': 'Segwi eLearning',
+  'eLearning maken': 'Oħloq eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Konnessjonijiet ma\' sistemi oħra. Kull konnessjoni hija mitfija awtomatikament; ixgħelha fl-Estensjonijiet, itfiha hawn.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Din il-konnessjoni hija mitfija. Ixgħelha fl-Estensjonijiet.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Ikkonfiguraha fit-tab Integrazzjonijiet.',
   'Kies een naam en waar het document komt te staan.':
       'Agħżel isem u fejn se jisseħħ id-dokument.',
   'Bijv. Vergadernotities': 'Eż. Noti tal-laqgħa',
@@ -3162,8 +3174,6 @@ const _dutchSourceAddMt = <String, String>{
   'Alle integraties': 'L-integrazzjonijiet kollha',
   'Alles inschakelen': 'Attiva kollox',
   'Alles uitschakelen': 'Iddiżattiva kollox',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Konnessjonijiet ma\' sistemi oħra. Kull konnessjoni hija mitfija b\'mod awtomatiku u tibqa\' inattiva sakemm int tixgħelha.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Iddaħħal preżentazzjonijiet minn PowerPoint (.pptx), Keynote (.key) u Impress (.odp) bħala deck editabbli. Il-konnessjonijiet ma\' sistemi oħra, bħal OpenKAT, jinsabu taħt Integrazzjonijiet.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -4238,8 +4248,6 @@ const _dutchSourceAddMt = <String, String>{
       'Il-modulu Assistenza AI huwa mitfi, għalhekk hawnhekk ma jiġri xejn. Ixegħlu taħt Estensjonijiet. Dak li ssettjajt hawn taħt jibqa\' kif inhu.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Għajnuna b\'testi alternattivi, deskrizzjonijiet u formulazzjonijiet. Meta tixgħlu xorta ma jintbagħat xejn: dan iseħħ biss wara li tagħżel backend int stess u, fil-każ ta\' servizz cloud, tikkonferma espliċitament. B\'backend lokali xejn ma joħroġ mill-kompjuter tiegħek.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Agħżel il-backend fit-tab Assistenza AI. Sakemm m\'hemm xejn hemmhekk, ma jiġri xejn.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'Is-slides ta\' eżempju ta\' mudell huma bl-Ingliż. L-isem u d-deskrizzjoni jsegwu l-lingwa tiegħek; il-kontenut taddattah wara l-ħolqien.',
   'Meer': 'Aktar',
@@ -5476,8 +5484,6 @@ const _dutchSourceAddMt = <String, String>{
   "dia's geïmporteerd.": 'slides impurtati.',
   'Import mislukt: ': 'L-importazzjoni falliet: ',
   'Checklists': 'Listi ta\' kontroll',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Ikkonfigura s-server fit-tab Konnettur LibrePlan. Sakemm hemmhekk ma jkun hemm xejn, ma jiġri xejn.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importa ritratt tal-istat ta\' proġett minn istanza LibrePlan bħala slides: Gantt, WBS, tagħbija tar-riżorsi, timesheet u aktar. Qari biss, fuq talba — xejn ma joħroġ barra sakemm ma tikkonfigurax server u tibda importazzjoni.',
   'Vul server-URL en gebruikersnaam in.':

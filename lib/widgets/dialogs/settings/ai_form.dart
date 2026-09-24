@@ -9,7 +9,7 @@ import '../../../models/ai_settings.dart';
 import '../../../state/settings_provider.dart';
 import 'keychain_secret.dart';
 
-/// Wat het AI-tabblad aan het bewerken is, tot Opslaan of Annuleren.
+/// Wat de AI-kaart op Integraties aan het bewerken is, tot Opslaan of Annuleren.
 class AiForm {
   final TextEditingController baseUrl = TextEditingController();
   final TextEditingController model = TextEditingController();
@@ -41,24 +41,25 @@ class AiForm {
   /// Of er in dit formulier een backend staat, los van de schakelaar.
   ///
   /// Spiegelt [AiSettings.hasBackend], maar leest de velden zoals ze nú op het
-  /// scherm staan: het tabblad en de modulekaart horen meteen te reageren, niet
+  /// scherm staan: de kaart en de zoekindex horen meteen te reageren, niet
   /// pas na Opslaan.
   bool get hasBackend =>
       mode != AiBackendMode.none && baseUrl.text.trim().isNotEmpty;
 
-  /// Of het tabblad AI-assistentie zichtbaar hoort te zijn (#731).
+  /// Of de backend-configuratie op de integratiekaart zichtbaar hoort te zijn
+  /// (#731, #2184).
   ///
   /// Aan zodra de module aan staat, óf er al een backend ligt: de vaste regel
   /// uit #648 — verbergen zolang er niets is, tónen zodra er wél iets is, want
   /// een schakelaar die je eigen werk onbereikbaar maakt is erger dan een
-  /// tabblad te veel.
+  /// kaart te veel.
   ///
-  /// Staat hier en niet drie keer los bij de aanroepers (zijbalk, zoekindex en
-  /// het tabblad zelf). Die drie moeten hetzelfde antwoord geven; als ze het
-  /// elk voor zich uitrekenen, verschuift er ooit één mee en de andere twee
-  /// niet — en dan is het tabblad zichtbaar terwijl zoeken zegt dat het er niet
-  /// is.
-  bool get revealsTab => enabled || hasBackend;
+  /// Staat hier en niet twee keer los bij de aanroepers (de kaart op
+  /// Integraties en de zoekindex). Die twee moeten hetzelfde antwoord geven;
+  /// als ze het elk voor zich uitrekenen, verschuift er ooit één mee en de
+  /// andere niet — en dan is de configuratie zichtbaar terwijl zoeken zegt
+  /// dat hij er niet is.
+  bool get revealsConfig => enabled || hasBackend;
 
   /// De instellingen zoals ze nu in de velden staan (zonder API-sleutel).
   AiSettings get settings {

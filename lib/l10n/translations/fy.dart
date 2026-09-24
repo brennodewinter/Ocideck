@@ -697,6 +697,18 @@ const _dutchSourceAddFy = {
       'Oersette kopy iepene yn nij ljepblêd.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'dia\'s oerslein — orizjinele tekst beholden.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Kies de backend op it ljepblêd Yntegraasjes. Salang\'t dêr neat stiet, bart der neat.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Stel de server yn op it ljepblêd Yntegraasjes. Salang\'t dêr neat stiet, bart der neat.',
+  'eLearning volgen': 'eLearning folgje',
+  'eLearning maken': 'eLearning meitsje',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Keppelings mei oare systemen. Elke keppeling stiet standert út; oan dwaan kin by Utwreidingen, útsette kin hjir.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Dizze keppeling stiet út. Set him oan by Utwreidingen.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Ynstellings dochst op it ljepblêd Yntegraasjes.',
   'Kies een naam en waar het document komt te staan.':
       'Kies in namme en wêr\'t it dokumint bewarre wurdt.',
   'Bijv. Vergadernotities': 'Byg. Gearkomstenotysen',
@@ -2168,8 +2180,6 @@ const _dutchSourceAddFy = {
   'Alle integraties': 'Alle yntegraasjes',
   'Alles inschakelen': 'Alles ynskeakelje',
   'Alles uitschakelen': 'Alles útskeakelje',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Keppelings mei oare systemen. Eltse keppeling stiet standert út en bliuwt ynaktyf oant jo har ynskeakelje.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Presintaasjes út PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhelje as bewurkber deck. Keppelings mei oare systemen, lykas OpenKAT, steane ûnder Yntegraasjes.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -3232,8 +3242,6 @@ const _dutchSourceAddFy = {
       'De module AI-stipe stiet út, dus hjir bart neat. Set him oan by Utwreidingen. Wat do hjirûnder ynsteld hast, bliuwt stean.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Help by alt-teksten, beskriuwingen en formulearringen. Oansette ferstjoert noch neat: dat bart pas neidat do sels in backend keazen hast en, by in clouddienst, útdruklik befêstige hast. By in lokale backend ferlit neat dyn kompjûter.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Kies de backend op it ljepblêd AI-stipe. Salang\'t dêr neat stiet, bart der neat.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'De foarbylddia\'s fan in sjabloan steane yn it Ingelsk. Namme en omskriuwing folgje dyn eigen taal; de ynhâld kinst nei it oanmeitsjen oanpasse.',
   'Meer': 'Mear',
@@ -5426,8 +5434,6 @@ const _dutchSourceAddFy = {
   "dia's geïmporteerd.": 'dia\'s ymportearre.',
   'Import mislukt: ': 'Ymport mislearre: ',
   'Checklists': 'Kontrôlelisten',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Stel de server yn op it ljepblêd LibrePlan-keppeling. Salang\'t dêr neat stiet, bart der neat.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Helje in projektmomintopname fan in LibrePlan-ynstânsje binnen as dia\'s: Gantt, WBS, boarnebelesting, timesheet en mear. Allinne-lêze, op fersyk — der giet neat nei bûten oant jo in server ynstelle en in ymport starte.',
   'Vul server-URL en gebruikersnaam in.':

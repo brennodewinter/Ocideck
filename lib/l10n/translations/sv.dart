@@ -1657,6 +1657,18 @@ const _dutchSourceAddSv = <String, String>{
       'Översatt kopia öppnad i en ny flik.',
   'dia\'s overgeslagen — originele tekst behouden.':
       'bilder hoppades över — originaltexten behölls.',
+  'Kies de backend op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Välj backend på fliken Integrationer. Så länge inget är valt där händer ingenting.',
+  'Configureer de server op het tabblad Integraties. Zolang daar niets staat, gebeurt er niets.':
+      'Ställ in servern på fliken Integrationer. Så länge inget står där händer ingenting.',
+  'eLearning volgen': 'Följ eLearning',
+  'eLearning maken': 'Skapa eLearning',
+  'Koppelingen met andere systemen. Elke koppeling staat standaard uit; aanzetten doet u bij Uitbreidingen, uitzetten kan hier.':
+      'Kopplingar till andra system. Varje koppling är av som standard; slå på den under Tillägg, slå av den här.',
+  'Deze koppeling staat uit. Zet hem aan bij Uitbreidingen.':
+      'Den här kopplingen är av. Slå på den under Tillägg.',
+  'Instellen doet u op het tabblad Integraties.':
+      'Konfigurera den på fliken Integrationer.',
   'Kies een naam en waar het document komt te staan.':
       'Välj ett namn och var dokumentet ska sparas.',
   'Bijv. Vergadernotities': 'T.ex. Mötesanteckningar',
@@ -3128,8 +3140,6 @@ const _dutchSourceAddSv = <String, String>{
   'Alle integraties': 'Alla integrationer',
   'Alles inschakelen': 'Aktivera alla',
   'Alles uitschakelen': 'Inaktivera alla',
-  'Koppelingen met andere systemen. Elke koppeling staat standaard uit en blijft inactief tot u haar inschakelt.':
-      'Anslutningar med andra system. Varje anslutning är avstängd som standard och förblir inaktiv tills du aktiverar den.',
   'Presentaties uit PowerPoint (.pptx), Keynote (.key) en Impress (.odp) binnenhalen als bewerkbaar deck. Koppelingen met andere systemen, zoals OpenKAT, staan onder Integraties.':
       'Hämta in presentationer från PowerPoint (.pptx), Keynote (.key) och Impress (.odp) som ett redigerbart deck. Anslutningar med andra system, som OpenKAT, finns under Integrationer.',
   'Media (WebRTC)': 'Media (WebRTC)',
@@ -4189,8 +4199,6 @@ const _dutchSourceAddSv = <String, String>{
       'Modulen AI-assistans är avstängd, så här händer ingenting. Slå på den under Tillägg. Det du har ställt in nedan finns kvar.',
   'Hulp bij alt-teksten, beschrijvingen en formuleringen. Aanzetten verstuurt nog niets: dat gebeurt pas nadat je zelf een backend hebt gekozen en, bij een clouddienst, uitdrukkelijk hebt bevestigd. Een lokale backend verlaat je computer niet.':
       'Hjälp med alt-texter, beskrivningar och formuleringar. Att slå på skickar ännu ingenting: det sker först när du själv har valt en backend och, vid en molntjänst, uttryckligen har bekräftat. Med en lokal backend lämnar ingenting din dator.',
-  'Kies de backend op het tabblad AI-assistentie. Zolang daar niets staat, gebeurt er niets.':
-      'Välj backend på fliken AI-assistans. Så länge inget är valt där händer ingenting.',
   'De voorbeelddia\'s van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.':
       'En malls exempelbilder är på engelska. Namn och beskrivning följer ditt eget språk; innehållet anpassar du efter att du har skapat den.',
   'Meer': 'Mer',
@@ -5412,8 +5420,6 @@ const _dutchSourceAddSv = <String, String>{
   "dia's geïmporteerd.": 'bilder importerade.',
   'Import mislukt: ': 'Importen misslyckades: ',
   'Checklists': 'Checklistor',
-  'Configureer de server op het tabblad LibrePlan-connector. Zolang daar niets staat, gebeurt er niets.':
-      'Ställ in servern på fliken LibrePlan-koppling. Så länge inget står där händer ingenting.',
   'Importeer een projectsnapshot van een LibrePlan-instantie als slides: Gantt, WBS, resourcebelasting, timesheet en meer. Alleen-lezen, op verzoek — er gaat niets naar buiten tot u een server configureert en een import start.':
       'Importera en ögonblicksbild av ett projekt från en LibrePlan-instans som bilder: Gantt, WBS, resursbelastning, tidrapport och mer. Skrivskyddad, på begäran — inget lämnar enheten förrän du ställer in en server och startar en import.',
   'Vul server-URL en gebruikersnaam in.': 'Fyll i server-URL och användarnamn.',
