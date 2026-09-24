@@ -165,8 +165,8 @@ Article 9 protects most strictly.
 It finds **faces, not people** — someone photographed from behind, in profile,
 wearing a mask, or with their head outside the crop is missed, and the message
 says "recognisable face" for that reason. Images in a format the check cannot
-read (HEIC, for instance) are reported as *not checked* rather than as *nothing
-found*.
+read (the HEIC image file format, for instance) are reported as *not checked*
+rather than as *nothing found*.
 
 This is the most expensive check OciDeck runs, so it has its own switch under
 *Settings → Security*, separate from the main privacy switch.

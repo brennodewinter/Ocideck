@@ -2244,9 +2244,9 @@ Someone photographed from behind, in profile, or with their head outside the cro
 is missed. Because it therefore undercounts and never overcounts, the message says
 "at least N" rather than a number that sounds exact.
 
-And an image in a format the check cannot read — **HEIC**, the iPhone default —
-is reported as *not checked*, never as *nothing found*. A green result must never
-be mistaken for "there is nobody in this picture".
+And an image in a format the check cannot read — the **HEIC image file format**,
+the iPhone default — is reported as *not checked*, never as *nothing found*. A
+green result must never be mistaken for "there is nobody in this picture".
 
 This is the heaviest check OciDeck runs, so it has its own switch under
 *Settings → Security*, next to the main one. Turning it off leaves the text check

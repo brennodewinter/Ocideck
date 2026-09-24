@@ -2047,8 +2047,10 @@ niet; daar degradeert de controle en zegt ze dat via `isSupported`.
 **Twee dingen die de meting op veertien echte foto's opleverde**, en die allebei
 het gedrag vertoonden waar deze controle tegen ontworpen is:
 
-*HEIC meldde nul.* OpenCV kent HEIC niet, `imdecode` geeft een lege matrix, en de
-code rapporteerde dat als "geen gezichten". iPhone-foto's zijn standaard HEIC.
+*HEIC-bestanden leverden nul op.* HEIC is een bestandsformaat voor afbeeldingen
+dat OpenCV niet kent. `imdecode` geeft daarom een lege matrix, en de code
+rapporteerde dat als "geen gezichten". iPhone-foto's gebruiken dit formaat
+standaard.
 `ImageFaceScanResult` scheidt daarom `faces` van `readable`, en een onleesbare
 afbeelding levert een eigen informatieve melding op.
 
@@ -2107,9 +2109,10 @@ volgt niet het slate-palet: dat keert om in donkere modus, en een redactievlak
 dat daar bijna wit wordt, is geen redactie.
 
 Alleen het gezicht zwart maken zou aantrekkelijker lijken, en is precies de val.
-De detector vindt *gezichten* en mist er aantoonbaar; hij leest geen HEIC, ziet
-geen tekst in beeld (een gefotografeerd formulier met een BSN erop dus niet), en de
-gebruiker mag hem uitzetten. Het resultaat zou een afbeelding zijn die eruitziet
+De detector vindt *gezichten* en mist er aantoonbaar; hij leest het
+HEIC-bestandsformaat voor afbeeldingen niet, ziet geen tekst in beeld (een
+gefotografeerd formulier met een BSN erop dus niet), en de gebruiker mag hem
+uitzetten. Het resultaat zou een afbeelding zijn die eruitziet
 alsof ze is afgehandeld, met een gemist gezicht er nog op — dezelfde fout als het
 zwarte blok op "diagnose" dat niets verborg. De afweging uit `statementSpan` geldt
 onverkort: *te ruim redigeren is hinderlijk, te krap redigeren is een lek*.
