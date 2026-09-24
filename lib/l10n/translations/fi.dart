@@ -1627,6 +1627,36 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'AI: functioneert': 'AI: toimii',
+  'AI: wordt gecontroleerd…': 'AI: tarkistetaan…',
+  'AI: server niet bereikbaar': 'AI: palvelin ei tavoitettavissa',
+  'AI: niet volledig ingesteld': 'AI: ei täysin määritetty',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: paikallisen palvelimen on oltava käynnissä tällä laitteella',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: palvelinta ei ole merkitty luotetuksi',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: lähtevään liikenteeseen tarvitaan lupa',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: ulkoista palvelua ei ole vielä vahvistettu',
+  'AI: niet beschikbaar in de webversie': 'AI: ei saatavilla verkkoversiossa',
+  'eLearning: ingelogd': 'eLearning: kirjautunut',
+  'eLearning: aanmelden loopt…': 'eLearning: kirjaudutaan…',
+  'eLearning: server niet bereikbaar': 'eLearning: palvelin ei tavoitettavissa',
+  'eLearning: aanmelden mislukt': 'eLearning: kirjautuminen epäonnistui',
+  'eLearning: niet ingelogd': 'eLearning: ei kirjautunut',
+  'Vertaal met AI': 'Käännä tekoälyllä',
+  'Vertaal met AI…': 'Käännä tekoälyllä…',
+  'Doeltaal': 'Kohdekieli',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Kaikki näkyvät tekstit ja puhujan muistiinpanot käännetään. Käännös avautuu kopiona uuteen välilehteen — alkuperäinen säilyy muuttumattomana.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Tarkista käännös ennen käyttöä: tekoälykäännökset ovat luonnoksia.',
+  'Vertalen': 'Käännä',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Käännetty kopio avattu uuteen välilehteen.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'diaa ohitettiin — alkuperäinen teksti säilyi.',
   'Kies een naam en waar het document komt te staan.':
       'Valitse nimi ja tallennuspaikka asiakirjalle.',
   'Bijv. Vergadernotities': 'Esim. Kokousmuistiinpanot',

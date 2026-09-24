@@ -260,6 +260,9 @@ extension _MainLayoutMenu on _MainLayoutState {
         Icons.article_outlined,
         l10n.d('Converteer naar document…'),
       ),
+      // Net als de document-conversie een kopie in een nieuw tabblad — het
+      // origineel blijft ongemoeid.
+      ...aiShellMenuEntries(ref, l10n),
       // Hoort bij "invoegen in dit deck", niet bij git: het stond daar alleen
       // omdat het er ooit tussen is geschoven. De bijlage is MIAUW-vastlegging
       // (EIS 4.8.2), dus alleen met de informatieveiligheidsmodule aan — zonder

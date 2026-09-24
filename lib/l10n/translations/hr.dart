@@ -1631,6 +1631,36 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'AI: functioneert': 'AI: radi',
+  'AI: wordt gecontroleerd…': 'AI: provjera u tijeku…',
+  'AI: server niet bereikbaar': 'AI: poslužitelj nije dostupan',
+  'AI: niet volledig ingesteld': 'AI: nije potpuno postavljeno',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokalni poslužitelj mora raditi na ovom uređaju',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: poslužitelj nije označen kao pouzdan',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: potrebna je dozvola za odlazni promet',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: vanjska usluga još nije potvrđena',
+  'AI: niet beschikbaar in de webversie': 'AI: nije dostupno u web-verziji',
+  'eLearning: ingelogd': 'eLearning: prijavljeno',
+  'eLearning: aanmelden loopt…': 'eLearning: prijava u tijeku…',
+  'eLearning: server niet bereikbaar': 'eLearning: poslužitelj nije dostupan',
+  'eLearning: aanmelden mislukt': 'eLearning: prijava nije uspjela',
+  'eLearning: niet ingelogd': 'eLearning: niste prijavljeni',
+  'Vertaal met AI': 'Prevedi pomoću AI',
+  'Vertaal met AI…': 'Prevedi pomoću AI…',
+  'Doeltaal': 'Ciljni jezik',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Svi vidljivi tekstovi i bilješke govornika prevode se. Prijevod se otvara kao kopija u novoj kartici — izvornik ostaje nepromijenjen.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Provjerite prijevod prije uporabe: AI prijevodi su nacrti.',
+  'Vertalen': 'Prevedi',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Prevedena kopija otvorena u novoj kartici.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'preskočeni slajdovi — izvorni tekst zadržan.',
   'Kies een naam en waar het document komt te staan.':
       'Odaberite naziv i mjesto spremanja dokumenta.',
   'Bijv. Vergadernotities': 'Npr. Bilješke sa sastanka',

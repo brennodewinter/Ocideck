@@ -667,6 +667,36 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'AI: functioneert': 'AI: wurket',
+  'AI: wordt gecontroleerd…': 'AI: wurdt kontrolearre…',
+  'AI: server niet bereikbaar': 'AI: server net berikber',
+  'AI: niet volledig ingesteld': 'AI: net folslein ynsteld',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokale server moat op dit apparaat rinne',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: server net as fertroud markearre',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: tastimming foar útgeand ferkear nedich',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: eksterne tsjinst noch net befêstige',
+  'AI: niet beschikbaar in de webversie': 'AI: net beskikber yn de webfersy',
+  'eLearning: ingelogd': 'eLearning: oanmeld',
+  'eLearning: aanmelden loopt…': 'eLearning: oanmelde rint…',
+  'eLearning: server niet bereikbaar': 'eLearning: server net berikber',
+  'eLearning: aanmelden mislukt': 'eLearning: oanmelde mislearre',
+  'eLearning: niet ingelogd': 'eLearning: net oanmeld',
+  'Vertaal met AI': 'Oersette mei AI',
+  'Vertaal met AI…': 'Oersette mei AI…',
+  'Doeltaal': 'Doeltaal',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Alle sichtbere teksten en speakernotysjes wurde oerset. De oersetting iepenet as kopy yn in nij ljepblêd — it orizjineel bliuwt ûnferoare.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Kontrolearje de oersetting foar gebrûk: AI-oersettingen binne konsepten.',
+  'Vertalen': 'Oersette',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Oersette kopy iepene yn nij ljepblêd.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'dia\'s oerslein — orizjinele tekst beholden.',
   'Kies een naam en waar het document komt te staan.':
       'Kies in namme en wêr\'t it dokumint bewarre wurdt.',
   'Bijv. Vergadernotities': 'Byg. Gearkomstenotysen',

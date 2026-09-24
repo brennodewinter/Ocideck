@@ -2538,6 +2538,36 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'AI: functioneert': 'YZ: çalışıyor',
+  'AI: wordt gecontroleerd…': 'YZ: denetleniyor…',
+  'AI: server niet bereikbaar': 'YZ: sunucuya ulaşılamıyor',
+  'AI: niet volledig ingesteld': 'YZ: tam olarak yapılandırılmadı',
+  'AI: lokale server moet op dit apparaat draaien':
+      'YZ: yerel sunucu bu cihazda çalışmalı',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'YZ: sunucu güvenilir olarak işaretlenmedi',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'YZ: giden trafik izni gerekli',
+  'AI: externe dienst nog niet bevestigd':
+      'YZ: harici hizmet henüz onaylanmadı',
+  'AI: niet beschikbaar in de webversie': 'YZ: web sürümünde kullanılamaz',
+  'eLearning: ingelogd': 'eLearning: giriş yapıldı',
+  'eLearning: aanmelden loopt…': 'eLearning: giriş yapılıyor…',
+  'eLearning: server niet bereikbaar': 'eLearning: sunucuya ulaşılamıyor',
+  'eLearning: aanmelden mislukt': 'eLearning: giriş başarısız',
+  'eLearning: niet ingelogd': 'eLearning: giriş yapılmadı',
+  'Vertaal met AI': 'AI ile çevir',
+  'Vertaal met AI…': 'AI ile çevir…',
+  'Doeltaal': 'Hedef dil',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Tüm görünür metinler ve konuşmacı notları çevrilir. Çeviri, yeni bir sekmede kopya olarak açılır — orijinal değişmez.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Kullanmadan önce çeviriyi kontrol edin: AI çevirileri taslaktır.',
+  'Vertalen': 'Çevir',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Çevrilen kopya yeni sekmede açıldı.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'slayt atlandı — orijinal metin korundu.',
   'Kies een naam en waar het document komt te staan.':
       'Bir ad ve belgenin kaydedileceği yeri seçin.',
   'Bijv. Vergadernotities': 'Örn. Toplantı notları',

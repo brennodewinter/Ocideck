@@ -1645,6 +1645,37 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'AI: functioneert': 'AI: jaħdem',
+  'AI: wordt gecontroleerd…': 'AI: qed jiċċekkja…',
+  'AI: server niet bereikbaar': 'AI: is-server ma jilħaqx',
+  'AI: niet volledig ingesteld': 'AI: mhux ikkonfigurat għal kollox',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: is-server lokali għandu jkun qed jaħdem fuq dan l-apparat',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: is-server mhuwiex mmarkat bħala affidabbli',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: hemm bżonn permess għal traffiku li joħroġ',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: is-servizz estern għadu mhux ikkonfermat',
+  'AI: niet beschikbaar in de webversie':
+      'AI: mhux disponibbli fil-verżjoni web',
+  'eLearning: ingelogd': 'eLearning: illoggjat',
+  'eLearning: aanmelden loopt…': 'eLearning: qed tilloggja…',
+  'eLearning: server niet bereikbaar': 'eLearning: is-server ma jilħaqx',
+  'eLearning: aanmelden mislukt': 'eLearning: il-login falla',
+  'eLearning: niet ingelogd': 'eLearning: mhux illoggjat',
+  'Vertaal met AI': 'Ittraduċi bl-AI',
+  'Vertaal met AI…': 'Ittraduċi bl-AI…',
+  'Doeltaal': 'Lingwa fil-mira',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'It-testi kollha viżibbli u n-noti tal-preżentatur jiġu tradotti. It-traduzzjoni tinfetaħ bħala kopja f\'tab ġdida — l-oriġinal jibqa\' l-istess.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Iċċekkja t-traduzzjoni qabel tużaha: it-traduzzjonijiet tal-AI huma abbozzi.',
+  'Vertalen': 'Ittraduċi',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Kopja tradotta miftuħa f\'tab ġdida.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'slajds maħlula — it-test oriġinali żamm.',
   'Kies een naam en waar het document komt te staan.':
       'Agħżel isem u fejn se jisseħħ id-dokument.',
   'Bijv. Vergadernotities': 'Eż. Noti tal-laqgħa',

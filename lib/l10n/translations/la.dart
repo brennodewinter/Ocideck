@@ -1642,6 +1642,37 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'AI: functioneert': 'AI: operatur',
+  'AI: wordt gecontroleerd…': 'AI: probatur…',
+  'AI: server niet bereikbaar': 'AI: servitorium inaccessibile',
+  'AI: niet volledig ingesteld': 'AI: non plene configurata',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: servitorium locale in hoc machina currere debet',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: servitorium non ut fidum notatum',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: venia egressus necessaria',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: ministerium externum nondum confirmatum',
+  'AI: niet beschikbaar in de webversie':
+      'AI: in versione textrina non praesto',
+  'eLearning: ingelogd': 'eLearning: inscriptum',
+  'eLearning: aanmelden loopt…': 'eLearning: inscriptio currit…',
+  'eLearning: server niet bereikbaar': 'eLearning: servitorium inaccessibile',
+  'eLearning: aanmelden mislukt': 'eLearning: inscriptio defecit',
+  'eLearning: niet ingelogd': 'eLearning: non inscriptum',
+  'Vertaal met AI': 'Per AI verte',
+  'Vertaal met AI…': 'Per AI verte…',
+  'Doeltaal': 'Lingua scopita',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Omnes textus visibiles et annotationes oratoris vertuntur. Versio ut exemplar in scheda nova aperitur — originale immutatum manet.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Versionem ante usum recognosce: versiones AI concepta sunt.',
+  'Vertalen': 'Verte',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Exemplar versum in scheda nova apertum.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'imagines omissae — textus originalis servatus.',
   'Kies een naam en waar het document komt te staan.':
       'Elige nomen et locum ubi documentum servabitur.',
   'Bijv. Vergadernotities': 'E.g. Notae conventus',

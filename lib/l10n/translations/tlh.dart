@@ -1604,6 +1604,33 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'AI: functioneert': 'AI: Qap',
+  'AI: wordt gecontroleerd…': 'AI: nuDlutaH',
+  'AI: server niet bereikbaar': 'AI: waw\' Hutlh',
+  'AI: niet volledig ingesteld': 'AI: qeywlhbe\'',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: De\'wI\' waw\' De\'wI\'vamDaq QapnIS',
+  'AI: server niet als vertrouwd gemarkeerd': 'AI: waw\' voqmoHpu\'be\'',
+  'AI: toestemming voor uitgaand verkeer nodig': 'AI: chelQo\' poQlu\'',
+  'AI: externe dienst nog niet bevestigd': 'AI: servIs confirm pagh',
+  'AI: niet beschikbaar in de webversie': 'AI: web DawI\' ghaHbe\'',
+  'eLearning: ingelogd': 'eLearning: ngev\'',
+  'eLearning: aanmelden loopt…': 'eLearning: ngev\'taH',
+  'eLearning: server niet bereikbaar': 'eLearning: waw\' Hutlh',
+  'eLearning: aanmelden mislukt': 'eLearning: ngev\' QIH',
+  'eLearning: niet ingelogd': 'eLearning: ngev\'be\'',
+  'Vertaal met AI': 'AI mugh\'',
+  'Vertaal met AI…': 'AI mugh\'…',
+  'Doeltaal': 'Hol wIv',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Hoch ghItlh le\'lu\'bogh je jatlhwI\' qay\'mey mughlu\'. mugh De\' tab chu\'Daq DuqchoH — mughbe\' De\' le\'be\'.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'mugh Dalo\'pa\' yIbuq — AI mugh Du\'na\'be\'.',
+  'Vertalen': 'mugh',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'mugh De\' tab chu\'Daq poSmoHlu\'.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'jIyImej — original ghItlh pollu\'.',
   'Kies een naam en waar het document komt te staan.':
       'pong yIwIv \'ej document pollu\'bogh Daq yIwIv.',
   'Bijv. Vergadernotities': 'mup: qevas ghItlhmey',

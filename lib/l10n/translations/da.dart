@@ -1627,6 +1627,36 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'AI: functioneert': 'AI: fungerer',
+  'AI: wordt gecontroleerd…': 'AI: kontrolleres…',
+  'AI: server niet bereikbaar': 'AI: serveren kan ikke nås',
+  'AI: niet volledig ingesteld': 'AI: ikke fuldt konfigureret',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokal server skal køre på denne enhed',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: server ikke markeret som tillidt',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: tilladelse til udgående trafik kræves',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: ekstern tjeneste endnu ikke bekræftet',
+  'AI: niet beschikbaar in de webversie': 'AI: ikke tilgængelig i webversionen',
+  'eLearning: ingelogd': 'eLearning: logget ind',
+  'eLearning: aanmelden loopt…': 'eLearning: logger ind…',
+  'eLearning: server niet bereikbaar': 'eLearning: serveren kan ikke nås',
+  'eLearning: aanmelden mislukt': 'eLearning: login mislykkedes',
+  'eLearning: niet ingelogd': 'eLearning: ikke logget ind',
+  'Vertaal met AI': 'Oversæt med AI',
+  'Vertaal met AI…': 'Oversæt med AI…',
+  'Doeltaal': 'Målsprog',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Alle synlige tekster og talenoter oversættes. Oversættelsen åbnes som en kopi i en ny fane — originalen forbliver uændret.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Kontrollér oversættelsen før brug: AI-oversættelser er udkast.',
+  'Vertalen': 'Oversæt',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Oversat kopi åbnet i en ny fane.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'slides sprunget over — originaltekst bevaret.',
   'Kies een naam en waar het document komt te staan.':
       'Vælg et navn, og hvor dokumentet skal gemmes.',
   'Bijv. Vergadernotities': 'F.eks. Mødenoter',

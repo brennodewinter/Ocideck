@@ -1620,6 +1620,36 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'AI: functioneert': 'AI: töötab',
+  'AI: wordt gecontroleerd…': 'AI: kontrollimine…',
+  'AI: server niet bereikbaar': 'AI: server ei ole kättesaadav',
+  'AI: niet volledig ingesteld': 'AI: pole täielikult seadistatud',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: kohalik server peab töötama selles seadmes',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: serverit pole märgitud usaldusväärseks',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: vajalik on väljuva liikluse luba',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: välisteenust pole veel kinnitatud',
+  'AI: niet beschikbaar in de webversie': 'AI: pole veebiversioonis saadaval',
+  'eLearning: ingelogd': 'eLearning: sisse logitud',
+  'eLearning: aanmelden loopt…': 'eLearning: sisselogimine…',
+  'eLearning: server niet bereikbaar': 'eLearning: server ei ole kättesaadav',
+  'eLearning: aanmelden mislukt': 'eLearning: sisselogimine ebaõnnestus',
+  'eLearning: niet ingelogd': 'eLearning: pole sisse logitud',
+  'Vertaal met AI': 'Tõlgi AI-ga',
+  'Vertaal met AI…': 'Tõlgi AI-ga…',
+  'Doeltaal': 'Sihtkeel',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Kõik nähtavad tekstid ja esineja märkused tõlgitakse. Tõlge avaneb koopiana uuel vahekaardil — originaal jääb muutmata.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Kontrolli tõlget enne kasutamist: AI-tõlked on mustandid.',
+  'Vertalen': 'Tõlgi',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Tõlgitud koopia avati uuel vahekaardil.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'slaidi vahele jäetud — originaaltekst säilitatud.',
   'Kies een naam en waar het document komt te staan.':
       'Valige nimi ja koht, kuhu dokument salvestatakse.',
   'Bijv. Vergadernotities': 'Nt Koosoleku märkmed',

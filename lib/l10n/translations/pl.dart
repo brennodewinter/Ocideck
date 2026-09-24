@@ -1639,6 +1639,36 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'AI: functioneert': 'AI: działa',
+  'AI: wordt gecontroleerd…': 'AI: sprawdzanie…',
+  'AI: server niet bereikbaar': 'AI: serwer nieosiągalny',
+  'AI: niet volledig ingesteld': 'AI: nie w pełni skonfigurowane',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokalny serwer musi działać na tym urządzeniu',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: serwer nieoznaczony jako zaufany',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: wymagana zgoda na ruch wychodzący',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: usługa zewnętrzna jeszcze niepotwierdzona',
+  'AI: niet beschikbaar in de webversie': 'AI: niedostępne w wersji webowej',
+  'eLearning: ingelogd': 'eLearning: zalogowano',
+  'eLearning: aanmelden loopt…': 'eLearning: logowanie…',
+  'eLearning: server niet bereikbaar': 'eLearning: serwer nieosiągalny',
+  'eLearning: aanmelden mislukt': 'eLearning: logowanie nie powiodło się',
+  'eLearning: niet ingelogd': 'eLearning: niezalogowano',
+  'Vertaal met AI': 'Przetłumacz za pomocą AI',
+  'Vertaal met AI…': 'Przetłumacz za pomocą AI…',
+  'Doeltaal': 'Język docelowy',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Wszystkie widoczne teksty i notatki prelegenta są tłumaczone. Tłumaczenie otwiera się jako kopia w nowej karcie — oryginał pozostaje bez zmian.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Sprawdź tłumaczenie przed użyciem: tłumaczenia AI to szkice.',
+  'Vertalen': 'Przetłumacz',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Przetłumaczona kopia otwarta w nowej karcie.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'pominięte slajdy — zachowano tekst oryginalny.',
   'Kies een naam en waar het document komt te staan.':
       'Wybierz nazwę i miejsce zapisu dokumentu.',
   'Bijv. Vergadernotities': 'Np. Notatki ze spotkania',

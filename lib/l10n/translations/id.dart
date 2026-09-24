@@ -1627,6 +1627,37 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'AI: functioneert': 'AI: berfungsi',
+  'AI: wordt gecontroleerd…': 'AI: sedang diperiksa…',
+  'AI: server niet bereikbaar': 'AI: server tidak dapat dijangkau',
+  'AI: niet volledig ingesteld': 'AI: belum dikonfigurasi lengkap',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: server lokal harus berjalan di perangkat ini',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: server tidak ditandai sebagai tepercaya',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: izin lalu lintas keluar diperlukan',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: layanan eksternal belum dikonfirmasi',
+  'AI: niet beschikbaar in de webversie': 'AI: tidak tersedia di versi web',
+  'eLearning: ingelogd': 'eLearning: masuk',
+  'eLearning: aanmelden loopt…': 'eLearning: sedang masuk…',
+  'eLearning: server niet bereikbaar':
+      'eLearning: server tidak dapat dijangkau',
+  'eLearning: aanmelden mislukt': 'eLearning: gagal masuk',
+  'eLearning: niet ingelogd': 'eLearning: belum masuk',
+  'Vertaal met AI': 'Terjemahkan dengan AI',
+  'Vertaal met AI…': 'Terjemahkan dengan AI…',
+  'Doeltaal': 'Bahasa tujuan',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Semua teks yang terlihat dan catatan pembicara diterjemahkan. Terjemahan dibuka sebagai salinan di tab baru — aslinya tidak berubah.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Periksa terjemahan sebelum digunakan: terjemahan AI adalah draf.',
+  'Vertalen': 'Terjemahkan',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Salinan terjemahan dibuka di tab baru.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'slide dilewati — teks asli dipertahankan.',
   'Kies een naam en waar het document komt te staan.':
       'Pilih nama dan lokasi penyimpanan dokumen.',
   'Bijv. Vergadernotities': 'Mis. Catatan rapat',

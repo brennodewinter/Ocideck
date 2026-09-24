@@ -666,6 +666,36 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'AI: functioneert': 'AI: ta funshoná',
+  'AI: wordt gecontroleerd…': 'AI: ta kontrolando…',
+  'AI: server niet bereikbaar': 'AI: sirbidó no alkanzabel',
+  'AI: niet volledig ingesteld': 'AI: no a konfigurá kompletamente',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: e sirbidó lokal mester ta na e aparato aki',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: sirbidó no marká komo konfiabel',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: mester di permiso pa tráfiko saliente',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: servisio eksterno ainda no konfirmá',
+  'AI: niet beschikbaar in de webversie': 'AI: no disponibel na e vershon web',
+  'eLearning: ingelogd': 'eLearning: a login',
+  'eLearning: aanmelden loopt…': 'eLearning: ta login…',
+  'eLearning: server niet bereikbaar': 'eLearning: sirbidó no alkanzabel',
+  'eLearning: aanmelden mislukt': 'eLearning: login a faya',
+  'eLearning: niet ingelogd': 'eLearning: no a login',
+  'Vertaal met AI': 'Tradusí ku AI',
+  'Vertaal met AI…': 'Tradusí ku AI…',
+  'Doeltaal': 'Idioma di destinashon',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Tur teksto bisibel i notanan di e oradó ta wordu tradusí. E tradukshon ta habri komo kopia den un tab nobo — e original ta keda sin kambio.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Kontrolá e tradukshon promé di us\'é: tradukshonnan di AI ta borrador.',
+  'Vertalen': 'Tradusí',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Kopia tradusí a habri den un tab nobo.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'diapositivanan a salta — teksto original a keda.',
   'Kies een naam en waar het document komt te staan.':
       'Skohe un nòmber i kaminda e dokumento ta wordu wardá.',
   'Bijv. Vergadernotities': 'P.e. Nota di reunion',

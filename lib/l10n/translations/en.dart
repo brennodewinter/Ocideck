@@ -827,6 +827,37 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'AI: functioneert': 'AI: working',
+  'AI: wordt gecontroleerd…': 'AI: checking…',
+  'AI: server niet bereikbaar': 'AI: server unreachable',
+  'AI: niet volledig ingesteld': 'AI: not fully configured',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: local server must run on this device',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: server not marked as trusted',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: outbound traffic permission required',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: external service not yet confirmed',
+  'AI: niet beschikbaar in de webversie':
+      'AI: not available in the web version',
+  'eLearning: ingelogd': 'eLearning: signed in',
+  'eLearning: aanmelden loopt…': 'eLearning: signing in…',
+  'eLearning: server niet bereikbaar': 'eLearning: server unreachable',
+  'eLearning: aanmelden mislukt': 'eLearning: sign-in failed',
+  'eLearning: niet ingelogd': 'eLearning: not signed in',
+  'Vertaal met AI': 'Translate with AI',
+  'Vertaal met AI…': 'Translate with AI…',
+  'Doeltaal': 'Target language',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'All visible texts and speaker notes are translated. The translation opens as a copy in a new tab — the original remains unchanged.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Check the translation before using it: AI translations are drafts.',
+  'Vertalen': 'Translate',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Translated copy opened in a new tab.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'slides skipped — original text kept.',
   'Kies een naam en waar het document komt te staan.':
       'Choose a name and where the document will be saved.',
   'Bijv. Vergadernotities': 'E.g. Meeting notes',

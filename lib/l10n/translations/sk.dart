@@ -1633,6 +1633,37 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'AI: functioneert': 'AI: funguje',
+  'AI: wordt gecontroleerd…': 'AI: kontroluje sa…',
+  'AI: server niet bereikbaar': 'AI: server nie je dostupný',
+  'AI: niet volledig ingesteld': 'AI: nie je úplne nastavené',
+  'AI: lokale server moet op dit apparaat draaien':
+      'AI: lokálny server musí bežať na tomto zariadení',
+  'AI: server niet als vertrouwd gemarkeerd':
+      'AI: server nie je označený ako dôveryhodný',
+  'AI: toestemming voor uitgaand verkeer nodig':
+      'AI: vyžaduje sa súhlas s odchádzajúcou prevádzkou',
+  'AI: externe dienst nog niet bevestigd':
+      'AI: externá služba zatiaľ nie je potvrdená',
+  'AI: niet beschikbaar in de webversie':
+      'AI: nie je dostupné vo webovej verzii',
+  'eLearning: ingelogd': 'eLearning: prihlásené',
+  'eLearning: aanmelden loopt…': 'eLearning: prebieha prihlasovanie…',
+  'eLearning: server niet bereikbaar': 'eLearning: server nie je dostupný',
+  'eLearning: aanmelden mislukt': 'eLearning: prihlásenie zlyhalo',
+  'eLearning: niet ingelogd': 'eLearning: nie ste prihlásení',
+  'Vertaal met AI': 'Preložiť pomocou AI',
+  'Vertaal met AI…': 'Preložiť pomocou AI…',
+  'Doeltaal': 'Cieľový jazyk',
+  'Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.':
+      'Všetky viditeľné texty a poznámky rečníka sa preložia. Preklad sa otvorí ako kópia na novej karte — originál zostane nezmenený.',
+  'Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.':
+      'Pred použitím skontrolujte preklad: AI preklady sú návrhy.',
+  'Vertalen': 'Preložiť',
+  'Vertaalde kopie geopend in nieuw tabblad.':
+      'Preložená kópia otvorená na novej karte.',
+  'dia\'s overgeslagen — originele tekst behouden.':
+      'snímky preskočené — pôvodný text zachovaný.',
   'Kies een naam en waar het document komt te staan.':
       'Vyberte názov a miesto uloženia dokumentu.',
   'Bijv. Vergadernotities': 'Napr. Poznámky zo schôdze',
