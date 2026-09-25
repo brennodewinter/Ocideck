@@ -230,6 +230,26 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.11] — 2026-09-25
+
+### Added
+
+- feat: statuscentrum op welkomscherm + deckvertaling via AI (#2188)
+- feat(documenten): maak tijdlijnen datum- en UTC-bewust
+- feat(documenten): naam- en mapkeuze bij Nieuw document (#2177) (#2178)
+- feat(export): waarschuwing voor losse bestandsverwijzingen bij .md/.tex-export op web
+
+### Changed
+
+- ci: scanner-pins bijwerken naar de laatste upstream
+- Maak eLearning-gegevensinzage begrijpelijk
+- Voeg veilige Marp-compatibiliteitscontrole toe
+- Verduidelijk HEIC als afbeeldingsbestandsformaat
+- Instellingen-IA: koppelingen instellen op Integraties, aanzetten op Uitbreidingen (#2190)
+- test: dekkingsproef voor het welkomscherm-statuscentrum (#2189)
+- Richt webdeploy op nieuwe VPS
+- ci: stop met dubbele automatische PR-poorten
+
 ## [0.6.10] — 2026-09-23
 
 ### Changed
