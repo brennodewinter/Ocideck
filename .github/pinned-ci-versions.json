@@ -39,7 +39,7 @@
     {
       "name": "trufflehog",
       "env": "TRUFFLEHOG_VERSION",
-      "version": "3.97.7",
+      "version": "3.97.9",
       "workflows": [
         ".forgejo/workflows/scans.yml",
         ".github/workflows/ci.yml"
@@ -51,7 +51,7 @@
     {
       "name": "semgrep",
       "env": "SEMGREP_VERSION",
-      "version": "1.177.0",
+      "version": "1.178.0",
       "workflows": [
         ".forgejo/workflows/scans.yml",
         ".github/workflows/ci.yml"

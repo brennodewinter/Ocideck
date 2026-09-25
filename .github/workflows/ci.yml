@@ -182,7 +182,7 @@ jobs:
       # `haal`: zie de toelichting bij de gitleaks-stap hierboven.
       - name: trufflehog volgens de pin
         env:
-          TRUFFLEHOG_VERSION: 3.97.7
+          TRUFFLEHOG_VERSION: 3.97.9
         run: |
           set -euo pipefail
           haal() {
@@ -211,7 +211,7 @@ jobs:
       # plaats van stil gelaten.
       - name: semgrep volgens de pin
         env:
-          SEMGREP_VERSION: 1.177.0
+          SEMGREP_VERSION: 1.178.0
         run: |
           set -euo pipefail
           python3 -m venv /opt/semgrep-venv
