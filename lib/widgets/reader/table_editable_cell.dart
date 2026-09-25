@@ -29,6 +29,8 @@ class TableEditableCell extends StatelessWidget {
     required this.caretColor,
     required this.linkColor,
     this.codeBackground,
+    this.contentPadding,
+    this.activeBackgroundColor,
     this.textAlign = TextAlign.start,
   });
 
@@ -41,8 +43,11 @@ class TableEditableCell extends StatelessWidget {
   final Color caretColor;
   final Color linkColor;
   final Color? codeBackground;
+  final EdgeInsets? contentPadding;
+  final Color? activeBackgroundColor;
 
   EdgeInsets get _padding =>
+      contentPadding ??
       EdgeInsets.symmetric(horizontal: pad + 4, vertical: pad * 0.6);
 
   @override
@@ -63,7 +68,7 @@ class TableEditableCell extends StatelessWidget {
         // de knipperende cursor, maar de hele cel als aangegeven gebied.
         child: ColoredBox(
           color: editing
-              ? caretColor.withValues(alpha: 0.12)
+              ? activeBackgroundColor ?? caretColor.withValues(alpha: 0.12)
               : Colors.transparent,
           child: Stack(
             // Beide lagen krijgen dezelfde breedte als de cel, en de cel wordt zo

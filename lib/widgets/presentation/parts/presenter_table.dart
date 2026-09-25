@@ -8,15 +8,19 @@ extension _PresenterTable on _FullscreenPresenterState {
   /// Of de huidige dia een tabel is die de auteur in de bouwer als
   /// "bewerkbaar tijdens presenteren" heeft aangemerkt. Alleen dan mag de
   /// live-bewerking aangezet worden (standaard staan tabellen op alleen-lezen).
+  /// Een weergavelimiet is een afgeleide projectie zonder veilige één-op-één
+  /// rijmapping naar de bron; die blijft tijdens presenteren alleen-lezen.
   bool get _currentSlideTableEditable =>
-      _currentSlideIsTable && _currentSlide.tableEditable;
+      _currentSlideIsTable &&
+      _currentSlide.tableEditable &&
+      !(_currentSlide.viewLimit?.isActive ?? false);
 
   void _exitTableEditMode() {
     if (!_tableEditMode) return;
     _rebuild(() {
       _tableEditMode = false;
-      _tableEditRow = null;
-      _tableEditCol = null;
+      _tableEditor?.dispose();
+      _tableEditor = null;
     });
     _focusNode.requestFocus();
   }
@@ -29,55 +33,46 @@ extension _PresenterTable on _FullscreenPresenterState {
       _exitTableEditMode();
       return;
     }
+    final slideIndex = _index.clamp(0, widget.slides.length - 1);
+    final slide = widget.slides[slideIndex];
+    final editor = TableEditController(
+      rows: slide.tableRows.where((row) => row.isNotEmpty).toList(),
+      alignments: slide.tableColumnAlignments,
+      onChanged: (rows, alignments) => _applyTableEdit(
+        slideIndex: slideIndex,
+        rows: rows,
+        alignments: alignments,
+      ),
+    );
     _rebuild(() {
       _tableEditMode = true;
-      _tableEditRow = 0;
-      _tableEditCol = 0;
+      _tableEditor = editor;
       _tool = null;
     });
     _advanceTimer?.cancel();
     _onLaserMove(null);
-    // Geen focus naar de root: dan kan de geselecteerde cel zelf focus pakken
-    // en vangen de pijltjes de tekstcursor op i.p.v. de presentatie. De
-    // toetsenbordevents bereiken [_handleKey] nog steeds via bubbling vanuit de
-    // cel. Bij het verlaten zet [_exitTableEditMode] de focus terug op de root.
-  }
-
-  void _selectTableCell(int row, int col) {
-    if (!_tableEditMode) return;
-    _rebuild(() {
-      _tableEditRow = row;
-      _tableEditCol = col;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _tableEditor == editor) editor.focusCell(0, 0);
     });
   }
 
-  void _updateTableCell({
+  void _applyTableEdit({
     required int slideIndex,
-    required int row,
-    required int col,
-    required String value,
+    required List<List<String>> rows,
+    required List<TableAlign> alignments,
   }) {
     if (slideIndex < 0 || slideIndex >= widget.slides.length) return;
     final slide = widget.slides[slideIndex];
     if (slide.type != SlideType.table) return;
-    final rows = slide.tableRows.map((r) => List<String>.from(r)).toList();
-    if (rows.isEmpty) return;
-    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
-    while (rows.length <= row) {
-      rows.add(List<String>.filled(colCount, ''));
-    }
-    while (rows[row].length <= col) {
-      rows[row].add('');
-    }
-    rows[row][col] = value;
-    final updated = slide.copyWith(tableRows: rows);
+    final updated = slide.copyWith(
+      tableRows: [for (final row in rows) List<String>.from(row)],
+      tableColumnAlignments: alignments,
+    );
     _rebuild(() => _replaceSlide(widget.slides, slideIndex, updated));
     widget.onSessionEdit?.call(updated);
     _pushTableToAudience(slideIndex, updated);
   }
 
-  /// Vult vanaf cel (row, col) een geplakte tabel in en laat het raster
-  /// meegroeien, zodat plakken net als in de editor rijen/kolommen toevoegt.
   /// Spiegel een tabelwijziging naar het publieksscherm (alleen bij dual).
   void _pushTableToAudience(int slideIndex, Slide updated) {
     if (!_dual) return;
@@ -94,90 +89,14 @@ extension _PresenterTable on _FullscreenPresenterState {
         });
   }
 
-  /// Voegt onderaan de tabel een lege rij toe en selecteert de eerste cel
-  /// ervan. Werkt ook terwijl een cel in bewerking is, zodat Tab op de laatste
-  /// cel een rij kan aanmaken.
-  void _addTableRow() {
-    if (!_tableEditMode) return;
-    final slideIndex = _index.clamp(0, widget.slides.length - 1);
-    final slide = widget.slides[slideIndex];
-    if (slide.type != SlideType.table) return;
-    final rows = slide.tableRows.map((r) => List<String>.from(r)).toList();
-    final colCount = rows.fold<int>(1, (m, r) => r.length > m ? r.length : m);
-    rows.add(List<String>.filled(colCount, ''));
-    final updated = slide.copyWith(tableRows: rows);
-    _rebuild(() {
-      _replaceSlide(widget.slides, slideIndex, updated);
-      _tableEditRow = rows.length - 1;
-      _tableEditCol = 0;
-    });
-    widget.onSessionEdit?.call(updated);
-    _pushTableToAudience(slideIndex, updated);
-  }
-
-  /// Tab loopt door de cellen: aan het einde van een rij naar de volgende
-  /// rij, en op de allerlaatste cel voegt het onderaan een nieuwe rij toe.
-  /// Shift+Tab loopt terug en stopt bij de eerste cel. De cursor-wiskunde
-  /// staat in [nextTableCell]/[prevTableCell] — gedeeld met de bouwer, zodat
-  /// "volgende cel" hier en daar hetzelfde betekent.
-  void _tabTableCell({required bool backwards}) {
-    if (!_tableEditMode) return;
-    final slide = _currentSlide;
-    if (slide.type != SlideType.table) return;
-    final rows = slide.tableRows.where((r) => r.isNotEmpty).toList();
-    if (rows.isEmpty) return;
-    final rowCount = rows.length;
-    final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
-    final row = _tableEditRow ?? 0;
-    final col = _tableEditCol ?? 0;
-    if (backwards) {
-      final prev = prevTableCell(row, col, colCount);
-      if (prev == null) return;
-      _selectTableCell(prev.row, prev.col);
-    } else {
-      final next = nextTableCell(row, col, rowCount, colCount);
-      if (next == null) {
-        _addTableRow();
-        return;
-      }
-      _selectTableCell(next.row, next.col);
-    }
-  }
-
   /// Toetsen tijdens live tabelbewerking.
   ///
-  /// Tijdens het bewerken mogen letters (incl. 'e'), cijfers, spatie en
-  /// leestekens géén presentatie- of toggle-rol hebben: ze horen in de cel
-  /// thuis. Daarom vangen we hier alléén de navigatie (pijltjes/Tab) en het
-  /// afsluiten (Esc) af; al het overige laten we los zodat het naar het
-  /// tekstveld gaat. We leunen bewust niet op [_textFieldFocused] om dit te
-  /// bepalen — die focusstatus is niet altijd betrouwbaar, waardoor een letter
-  /// je vroeger soms uit de bewerking gooide. Pijltjes verplaatsen de celkeuze
-  /// alleen als er geen tekstveld focus heeft; staat de cursor in een cel, dan
-  /// vangt het veld ze zelf op om de tekstcursor te bewegen.
-  KeyEventResult _handleTableEditKey(
-    LogicalKeyboardKey key, {
-    bool shift = false,
-  }) {
-    switch (key) {
-      case LogicalKeyboardKey.escape:
-        _exitTableEditMode();
-        return KeyEventResult.handled;
-      case LogicalKeyboardKey.tab:
-        _tabTableCell(backwards: shift);
-        return KeyEventResult.handled;
-      case LogicalKeyboardKey.arrowRight:
-      case LogicalKeyboardKey.arrowLeft:
-      case LogicalKeyboardKey.arrowDown:
-      case LogicalKeyboardKey.arrowUp:
-        // Pijltjes bewegen de tekstcursor binnen de cel, niet tussen cellen of
-        // slides. We geven het event vrij (ignored) zodat het naar de tekst-
-        // bewerkingsacties van het geselecteerde celveld doorvloeit. Tussen
-        // cellen wissel je met Tab, afsluiten doe je met Esc.
-        return KeyEventResult.ignored;
-      default:
-        return KeyEventResult.ignored;
-    }
+  /// De gedeelde [TableEditController] handelt alle celtoetsen af. Alleen Esc
+  /// hoort nog bij de presentator zelf: die sluit de live-bewerking.
+  KeyEventResult _handleTableEditKey(LogicalKeyboardKey key) {
+    if (key != LogicalKeyboardKey.escape) return KeyEventResult.ignored;
+    _exitTableEditMode();
+    return KeyEventResult.handled;
   }
 
   /// Zwevende banner tijdens live tabelbewerking.

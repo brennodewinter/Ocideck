@@ -67,33 +67,7 @@ void main() {
     ]);
   });
 
-  testWidgets('documentContext verbergt de dia-woordenschat (titel)', (
-    tester,
-  ) async {
-    final slide = Slide.create(SlideType.table);
-    await tester.pumpWidget(
-      ProviderScope(
-        child: MaterialApp(
-          home: Scaffold(
-            body: TableEditor(
-              slide: slide,
-              onUpdate: (_) {},
-              documentContext: true,
-            ),
-          ),
-        ),
-      ),
-    );
-    await tester.pump();
-    // In een plat document bestaat geen dia: geen 'Slide titel'-veld —
-    // alleen het tabelraster.
-    expect(find.text('Slide titel'), findsNothing);
-    expect(find.text('Tabel'), findsOneWidget);
-  });
-
-  testWidgets('zonder documentContext blijft de dia-woordenschat zichtbaar', (
-    tester,
-  ) async {
+  testWidgets('de dia-woordenschat blijft zichtbaar', (tester) async {
     final slide = Slide.create(SlideType.table);
     await tester.pumpWidget(
       ProviderScope(

@@ -415,7 +415,7 @@ const Map<String, int> classSizeBaseline = {
   // stale-check in _applyBeamerChartHover (presenter_beamer_payload.dart),
   // zodat buiten-volgorde hoverberichten de weergave niet terugzetten.
   'lib/widgets/presentation/fullscreen_presenter.dart#_FullscreenPresenterState':
-      3486, // +5 (#2159): precache-helper die fouten logt en de versiesleutel
+      3429, // +5 (#2159): precache-helper die fouten logt en de versiesleutel
   // van de render deelt — de duplicatie van drie precacheImage-aanroepen is er
   // al uit, wat overbleef is de uitleg waarom deze tak bestaat.
   // +34 (#1350, #1351, #1355): truncatie-check in openDeckFromContent,

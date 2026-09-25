@@ -21,17 +21,11 @@ class TableEditor extends StatefulWidget {
   final ValueChanged<Slide> onUpdate;
   final bool nestedInScrollView;
 
-  /// In een plat document bestaat er geen dia: dan verbergt de editor de
-  /// dia-specifieke onderdelen (het 'Slide titel'-veld), zodat er geen
-  /// presentatie-woordenschat in een documentcontext lekt.
-  final bool documentContext;
-
   const TableEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
     this.nestedInScrollView = false,
-    this.documentContext = false,
   });
 
   @override
@@ -46,14 +40,14 @@ class _TableEditorState extends State<TableEditor> {
   void initState() {
     super.initState();
     _title = EditorTextController(text: widget.slide.title);
-    _title.addTextListener(_emitTitle);
+    _title.addTextListener(_emit);
     _grid = _makeGrid(widget.slide);
   }
 
   TableEditController _makeGrid(Slide slide) => TableEditController(
     rows: slide.tableRows,
     alignments: slide.tableColumnAlignments,
-    onChanged: _onGrid,
+    onChanged: (rows, alignments) => _emit(rows, alignments),
   );
 
   @override
@@ -72,22 +66,12 @@ class _TableEditorState extends State<TableEditor> {
     super.dispose();
   }
 
-  void _onGrid(List<List<String>> rows, List<TableAlign> alignments) {
+  void _emit([List<List<String>>? rows, List<TableAlign>? alignments]) {
     widget.onUpdate(
       widget.slide.copyWith(
         title: _title.text,
-        tableRows: rows,
-        tableColumnAlignments: alignments,
-      ),
-    );
-  }
-
-  void _emitTitle() {
-    widget.onUpdate(
-      widget.slide.copyWith(
-        title: _title.text,
-        tableRows: _grid.rows,
-        tableColumnAlignments: _grid.alignments,
+        tableRows: rows ?? _grid.rows,
+        tableColumnAlignments: alignments ?? _grid.alignments,
       ),
     );
   }
@@ -102,7 +86,6 @@ class _TableEditorState extends State<TableEditor> {
   }
 
   List<Widget> _numberToolbar(BuildContext context, ({int row, int col}) at) {
-    if (widget.documentContext) return const [];
     final l10n = context.l10n;
     final selected =
         at.col < widget.slide.tableNumberColumns.length &&
@@ -167,16 +150,14 @@ class _TableEditorState extends State<TableEditor> {
             );
           },
         ),
-        if (!widget.documentContext) ...[
-          EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
-          const SizedBox(height: 16),
-        ],
+        EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
+        const SizedBox(height: 16),
         const SectionLabel('Tabel'),
         DocumentMarkdownView(
           gfm,
           maxTextWidth: null,
           tableEditController: _grid,
-          tableToolbarExtras: widget.documentContext ? null : _numberToolbar,
+          tableToolbarExtras: _numberToolbar,
         ),
       ],
     );

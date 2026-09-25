@@ -19,6 +19,7 @@ import 'markdown_editor_theme.dart';
 import 'mermaid_embed_builder.dart';
 import 'pentest_block_embed_builder.dart';
 import 'table_embed_builder.dart';
+import 'table_embed_binding.dart';
 import 'toc_embed_builder.dart';
 import 'timeline_table_embed_builder.dart';
 
@@ -368,6 +369,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   const ImageEmbedBuilder(),
                   TimelineTableEmbedBuilder(
                     onDiscreteEdit: widget.onDiscreteVisualEdit,
+                    controllerStore: _tableEditors,
                   ),
                   TableEmbedBuilder(
                     onDiscreteEdit: widget.onDiscreteVisualEdit,

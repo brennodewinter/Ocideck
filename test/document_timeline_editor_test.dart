@@ -96,6 +96,81 @@ void main() {
     expect(markdown, contains('Melding gevalideerd'));
   });
 
+  for (final (position, start, edits) in [
+    ('midden', 8, ['Melding Xontvangen', 'Melding XYontvangen']),
+    (
+      'eind',
+      'Melding ontvangen'.length,
+      ['Melding ontvangenX', 'Melding ontvangenXY'],
+    ),
+  ]) {
+    testWidgets(
+      'typen $position in een tijdlijncel houdt focus en cursor vast',
+      (tester) async {
+        final document = await pumpEditor(tester);
+        await tester.tap(find.text('Gebeurtenissen bewerken'));
+        await tester.pump();
+
+        final cell = find.widgetWithText(TextField, 'Melding ontvangen');
+        await tester.tap(cell);
+        await tester.pump(const Duration(milliseconds: 300));
+        final originalField = tester.widget<TextField>(cell);
+        final cellController = originalField.controller!;
+        final cellFocus = originalField.focusNode!;
+        expect(cellFocus.hasPrimaryFocus, isTrue);
+
+        // Elke invoer schrijft de tijdlijn terug naar het Quill-document.
+        cellController.selection = TextSelection.collapsed(offset: start);
+        for (var i = 0; i < edits.length; i++) {
+          final text = edits[i];
+          final offset = start + i + 1;
+          tester.testTextInput.updateEditingValue(
+            TextEditingValue(
+              text: text,
+              selection: TextSelection.collapsed(offset: offset),
+            ),
+          );
+          await tester.pump();
+          await tester.pump();
+          await tester.pump();
+
+          final updated = tester.widget<TextField>(
+            find.widgetWithText(TextField, text),
+          );
+          expect(updated.controller, same(cellController));
+          expect(updated.focusNode, same(cellFocus));
+          expect(cellFocus.hasPrimaryFocus, isTrue);
+          expect(
+            cellController.selection,
+            TextSelection.collapsed(offset: offset),
+          );
+          expect(
+            MarkdownQuillCodec.markdownFromDocument(document.document),
+            contains(text),
+          );
+        }
+
+        // Terugtypen naar de oorspronkelijke inhoud is óók een wijziging ten
+        // opzichte van het laatst opgeslagen raster, niet een reden om de
+        // terugschrijving over te slaan wegens de oude widgetbron.
+        const original = 'Melding ontvangen';
+        tester.testTextInput.updateEditingValue(
+          TextEditingValue(
+            text: original,
+            selection: TextSelection.collapsed(offset: start),
+          ),
+        );
+        await tester.pump();
+        await tester.pump();
+        await tester.pump();
+        expect(
+          MarkdownQuillCodec.markdownFromDocument(document.document),
+          contains('| 12:02 | $original | Gemeld |'),
+        );
+      },
+    );
+  }
+
   testWidgets('als tabel weergeven verwijdert alleen de marker', (
     tester,
   ) async {
@@ -135,6 +210,83 @@ void main() {
     expect(
       MarkdownQuillCodec.markdownFromDocument(controller.document),
       before,
+    );
+  });
+
+  testWidgets('een gewone tabel sorteert terug als één Quill-undo', (
+    tester,
+  ) async {
+    const regular = '''
+| Naam | Score |
+| --- | ---: |
+| Ada | 8 |
+| Bob | 9 |
+''';
+    final controller = await pumpEditor(tester, markdown: regular);
+    final before = MarkdownQuillCodec.markdownFromDocument(controller.document);
+
+    await tester.showKeyboard(find.widgetWithText(TextField, 'Naam'));
+    await tester.pump(const Duration(milliseconds: 350));
+    await tester.tap(find.byTooltip('Kolom aflopend sorteren'));
+    await tester.pump(const Duration(milliseconds: 350));
+
+    final sorted = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(sorted.indexOf('Bob'), lessThan(sorted.indexOf('Ada')));
+    expect(controller.hasUndo, isTrue);
+
+    controller.undo();
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(
+      MarkdownQuillCodec.markdownFromDocument(controller.document),
+      before,
+    );
+  });
+
+  testWidgets('meerdere visuele tabellen houden hun controllers gescheiden', (
+    tester,
+  ) async {
+    const multiple = '''
+| Eerste | Rol |
+| --- | --- |
+| Aap | Tester |
+
+Tussenstuk.
+
+| Tweede | Rol |
+| --- | --- |
+| Noot | Bouwer |
+''';
+    final document = await pumpEditor(tester, markdown: multiple);
+    final firstBefore = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Aap'),
+    );
+    final secondBefore = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Noot'),
+    );
+
+    await tester.enterText(find.widgetWithText(TextField, 'Noot'), 'Nootmus');
+    await tester.pump();
+    await tester.pump();
+    final firstAfterSecondEdit = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Aap'),
+    );
+    final secondAfter = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Nootmus'),
+    );
+    expect(firstAfterSecondEdit.controller, same(firstBefore.controller));
+    expect(secondAfter.controller, same(secondBefore.controller));
+
+    await tester.enterText(find.widgetWithText(TextField, 'Aap'), 'Aapje');
+    await tester.pump();
+    await tester.pump();
+    final markdown = MarkdownQuillCodec.markdownFromDocument(document.document);
+    expect(markdown, contains('| Aapje | Tester |'));
+    expect(markdown, contains('| Nootmus | Bouwer |'));
+    expect(
+      tester
+          .widget<TextField>(find.widgetWithText(TextField, 'Nootmus'))
+          .controller,
+      same(secondBefore.controller),
     );
   });
 

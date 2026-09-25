@@ -99,6 +99,8 @@ import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
 import '../../utils/title_contrast.dart'
     show kTitleOverlayAlpha, kTitleSubtitleAlpha;
+import '../reader/table_edit_controller.dart';
+import '../reader/table_editable_cell.dart';
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import '../privacy_badge.dart' show privacyKatSvg;
 import '../../utils/inline_markdown.dart';
@@ -351,12 +353,8 @@ class SlidePreviewWidget extends StatelessWidget {
   /// terug. Null (slidestrook, beamervenster) = alleen tonen.
   final ValueChanged<int>? onMenuCategoryChanged;
 
-  /// Live tabelbewerking tijdens presenteren (toets E op een tabeldia).
-  final bool tableEditMode;
-  final int? tableEditRow;
-  final int? tableEditCol;
-  final void Function(int row, int col)? onTableCellSelected;
-  final void Function(int row, int col, String value)? onTableCellChanged;
+  /// De gedeelde tabelbewerker tijdens presenteren (toets E op een tabeldia).
+  final TableEditController? tableEditController;
 
   /// Wordt aangeroepen wanneer de audio van deze slide klaar is (voor de
   /// automatische modus van de presenter).
@@ -478,11 +476,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.onMenuBlockTap,
     this.menuCategory = 0,
     this.onMenuCategoryChanged,
-    this.tableEditMode = false,
-    this.tableEditRow,
-    this.tableEditCol,
-    this.onTableCellSelected,
-    this.onTableCellChanged,
+    this.tableEditController,
     this.onAudioComplete,
     this.onVideoComplete,
     this.richTextPage = 0,
@@ -527,14 +521,9 @@ class SlidePreviewWidget extends StatelessWidget {
       interactive: mermaidInteractive,
       child: MediaQuery.withNoTextScaling(
         child: _TableEditHost(
-          enabled:
-              presentationMode &&
-              slide.type == SlideType.table &&
-              tableEditMode,
-          selectedRow: tableEditRow,
-          selectedCol: tableEditCol,
-          onCellSelected: onTableCellSelected,
-          onCellChanged: onTableCellChanged,
+          controller: presentationMode && slide.type == SlideType.table
+              ? tableEditController
+              : null,
           child: _ChecklistInteractionHost(
             // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
             // schrijft de hele (zwartgelakte) slide terug. Zie

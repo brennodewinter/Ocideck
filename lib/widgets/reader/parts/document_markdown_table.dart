@@ -30,7 +30,7 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
     // Controller loopt voor op de bron: die volgt pas ná de celwijziging.
     final editor =
         tableEditorFor?.call(tableOrdinal) ??
-        (tableOrdinal == tableEditOrdinal ? tableEditController : null);
+        (tableOrdinal == 0 ? tableEditController : null);
     if (editor != null) {
       // Geen potlood: je klikt in de cel. Hertekenen houdt de kolombreedtes bij.
       return TableEditScaffold(
@@ -40,18 +40,11 @@ extension _DocumentMarkdownTable on DocumentMarkdownView {
         builder: (_) => _tableBody(t, editor.rows, editor.alignments, editor),
       );
     }
-    final table = _tableBody(
+    return _tableBody(
       t,
       rows.map(splitMarkdownTableRow).toList(),
       sourceAligns,
       null,
-    );
-    final onEdit = onEditTable;
-    if (onEdit == null) return table;
-    // In de editor: dubbelklik óf het potlood-knopje opent de tabel-editor.
-    return _EditableEmbed(
-      onEdit: () => onEdit(tableOrdinal, rows),
-      child: table,
     );
   }
 

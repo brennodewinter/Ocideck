@@ -44,7 +44,6 @@ import '../../utils/log.dart';
 import '../../utils/page_scoped_notes.dart';
 import '../../utils/project_path.dart';
 import '../../utils/shortcut_label.dart';
-import '../../utils/table_cell_navigation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
@@ -60,6 +59,7 @@ import 'audience_window.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
 import '../editors/editor_text_controller.dart';
+import '../reader/table_edit_controller.dart';
 
 part 'parts/presenter_beamer_payload.dart';
 part 'parts/presenter_questions.dart';
@@ -686,8 +686,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   /// Live tabelbewerking op een tabeldia (toets E).
   bool _tableEditMode = false;
-  int? _tableEditRow;
-  int? _tableEditCol;
+  TableEditController? _tableEditor;
 
   /// Automatische modus: slides wisselen vanzelf (op tijd of na audio). Staat
   /// standaard aan zodat ingestelde tijdwissels meteen werken; met A te pauzeren.
@@ -921,6 +920,7 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
     _focusNode.dispose();
     _userNotesFocusNode.dispose();
     _userNoteCtrl?.dispose();
+    _tableEditor?.dispose();
     _stopMicMonitor(this);
     if (_dual) presenterChannel.setMethodCallHandler(null);
     super.dispose();

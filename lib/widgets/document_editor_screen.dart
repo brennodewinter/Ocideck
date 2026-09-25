@@ -85,7 +85,7 @@ import 'editors/markdown_find_bar.dart';
 import 'editors/markdown_smart_input_formatter.dart';
 import 'editors/markdown_source_controller.dart';
 import 'markdown_editor/markdown_editor.dart';
-import 'markdown_editor/table_embed_builder.dart';
+import 'markdown_editor/table_embed_binding.dart';
 import 'reader/document_markdown_view.dart';
 import 'reader/table_edit_controller.dart';
 import 'reader/paged_document_view.dart';

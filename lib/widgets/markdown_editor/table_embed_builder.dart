@@ -3,15 +3,14 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:markdown_quill/markdown_quill.dart';
 
 import '../../models/settings.dart' show ThemeProfile;
-import '../../models/slide.dart';
 import '../../services/markdown_table_codec.dart';
 import '../../services/document_timeline.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/timeline_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
-import '../reader/table_edit_scaffold.dart' show TableSortIntent;
 import 'markdown_editor_theme.dart';
+import 'table_embed_binding.dart';
 import 'table_sort_actions.dart';
 
 /// Tekent een `x-embed-table`-blok in de visuele (Quill) editor als een échte,
@@ -93,7 +92,9 @@ class _EditableTableEmbed extends StatefulWidget {
 }
 
 class _EditableTableEmbedState extends State<_EditableTableEmbed> {
-  late TableEditController _editor;
+  late TableEmbedBinding _binding;
+
+  TableEditController get _editor => _binding.editor;
 
   bool get _canBecomeTimeline =>
       _editor.rows.isNotEmpty && _editor.rows.first.length >= 2;
@@ -101,111 +102,42 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
   @override
   void initState() {
     super.initState();
-    _editor = _obtainController();
+    _binding = TableEmbedBinding(
+      controllerStore: widget.controllerStore,
+      embedContext: widget.embedContext,
+      source: widget.gfm,
+      unwrapSource: _identity,
+      wrapTable: _identity,
+      makeEmbed: EmbeddableTable.new,
+      isMounted: () => mounted,
+    );
   }
 
   @override
   void didUpdateWidget(_EditableTableEmbed old) {
     super.didUpdateWidget(old);
-    _editor = _obtainController();
+    _binding.reconnect(widget.embedContext, widget.gfm);
   }
 
-  TableEditController _obtainController() => widget.controllerStore.obtain(
-    widget.embedContext.node.documentOffset,
-    widget.gfm,
-    onChanged: _writeBack,
-    onCellFocused: () =>
-        widget.embedContext.controller.skipRequestKeyboard = true,
-  );
-
-  /// De tabel die nog naar het document moet; `null` als er niets wacht.
-  String? _pending;
-  bool _flushScheduled = false;
-
-  /// Plant het terugschrijven ná deze frame in plaats van er middenin.
-  ///
-  /// Terugschrijven vervángt de embed-knoop, en koppelt daarmee de knoop los
-  /// waar dit blok aan hangt. Twee schrijfacties in dezelfde frame zouden de
-  /// tweede dus op een losgekoppelde knoop laten landen: die heeft
-  /// `documentOffset` 0, en de tabel werd bovenaan het document geplakt, dwars
-  /// door de tekst heen. Eén schrijfactie per frame, met de laatste stand,
-  /// houdt de knoop heel — en scheelt bovendien een ongedaan-stap per aanslag.
-  void _writeBack(List<List<String>> rows, List<TableAlign> alignments) {
-    _pending = encodeMarkdownTable(rows, alignments: alignments);
-    if (_flushScheduled) return;
-    _flushScheduled = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _flushScheduled = false;
-      if (mounted) _flush();
-    });
-  }
-
-  void _flush() {
-    final gfm = _pending;
-    _pending = null;
-    if (gfm == null || gfm == widget.gfm) return;
-    final node = widget.embedContext.node;
-    if (node.parent == null) return;
-    widget.controllerStore.remember(node.documentOffset, _editor, gfm);
-    // De embed heeft lengte 1 in het Quill-document: dit vervangt exact dit
-    // blok en laat de rest van de tekst — en de cursor daarbuiten — met rust.
-    widget.embedContext.controller.replaceText(
-      node.documentOffset,
-      1,
-      EmbeddableTable(gfm),
-      widget.embedContext.controller.selection,
-      // De inhoud van de cel heeft haar eigen tekstverbinding. Als Quill bij
-      // het vervangen van de embed opnieuw focus vraagt, steelt het die
-      // verbinding en trekt het de lange tabel naar het begin.
-      ignoreFocus: true,
-    );
-  }
-
-  Future<void> _sort(int column, bool ascending) async {
-    final current = _pending ?? widget.gfm;
-    final sorted = await smartSortTable(
+  Future<void> _sort(int column, TableSortIntent intent) async {
+    final sorted = await sortTableForIntent(
       context,
-      current,
+      _binding.tableSource,
       column: column,
-      ascending: ascending,
+      intent: intent,
     );
     if (mounted && sorted != null) {
-      _pending = null;
-      _replaceRaw(sorted);
+      _binding.clearPending();
+      _binding.replaceTable(
+        sorted,
+        discrete: true,
+        onDiscreteEdit: widget.onDiscreteEdit,
+      );
     }
-  }
-
-  Future<void> _sortAs(int column) async {
-    final choice = await chooseExplicitSort(context);
-    if (!mounted || choice == null) return;
-    final sorted = await smartSortTable(
-      context,
-      _pending ?? widget.gfm,
-      column: column,
-      ascending: choice.ascending,
-      kind: choice.kind,
-    );
-    if (mounted && sorted != null) {
-      _pending = null;
-      _replaceRaw(sorted);
-    }
-  }
-
-  void _replaceRaw(String gfm) {
-    final node = widget.embedContext.node;
-    if (node.parent == null || gfm == widget.gfm) return;
-    widget.onDiscreteEdit?.call();
-    widget.embedContext.controller.replaceText(
-      node.documentOffset,
-      1,
-      EmbeddableTable(gfm),
-      widget.embedContext.controller.selection,
-      ignoreFocus: true,
-    );
   }
 
   Future<void> _asTimeline() async {
-    final current = _pending ?? widget.gfm;
+    final current = _binding.tableSource;
     final lines = current.trimRight().split('\n');
     final decoded = decodeMarkdownTableRows(lines);
     if (decoded.isEmpty) {
@@ -275,19 +207,19 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
       if (!mounted || sorted == null) return;
       table = sorted;
     }
-    final node = widget.embedContext.node;
-    if (node.parent == null) return;
-    widget.onDiscreteEdit?.call();
-    widget.embedContext.controller.replaceText(
-      node.documentOffset,
-      1,
-      EmbeddableTimelineTable(markTableAsTimeline(table)),
-      null,
+    _binding.clearPending();
+    final source = markTableAsTimeline(table);
+    _binding.replaceSource(
+      source,
+      discrete: true,
+      onDiscreteEdit: widget.onDiscreteEdit,
+      embed: EmbeddableTimelineTable(source),
     );
   }
 
   @override
   void dispose() {
+    _binding.dispose();
     super.dispose();
   }
 
@@ -310,66 +242,13 @@ class _EditableTableEmbedState extends State<_EditableTableEmbed> {
         themeProfile: widget.profile,
         chartTheme: widget.profile,
         tableEditController: _editor,
-        onSortTableColumn: (column, intent) => switch (intent) {
-          TableSortIntent.ascending => _sort(column, true),
-          TableSortIntent.descending => _sort(column, false),
-          TableSortIntent.choose => _sortAs(column),
-        },
+        onSortTableColumn: _sort,
       ),
     ],
   );
 }
 
-/// Bewaart de celcontrollers buiten de Quill-embed-widget.
-///
-/// Quill maakt die widget opnieuw zodra de Markdown in de embed wijzigt. De
-/// controllers en focusnodes horen bij de tabel, niet bij die vluchtige
-/// widget; zo blijven cursor, selectie en actieve cel per aanslag intact.
-class TableEmbedControllerStore {
-  final Map<int, ({TableEditController controller, String gfm})> _entries = {};
-
-  TableEditController obtain(
-    int documentOffset,
-    String gfm, {
-    required void Function(List<List<String>>, List<TableAlign>) onChanged,
-    required VoidCallback? onCellFocused,
-  }) {
-    final entry = _entries[documentOffset];
-    final current = entry?.controller;
-    final encoded = current == null
-        ? null
-        : encodeMarkdownTable(current.rows, alignments: current.alignments);
-    if (current != null && (entry!.gfm == gfm || encoded == gfm)) {
-      current.reconnect(onChanged: onChanged, onCellFocused: onCellFocused);
-      return current;
-    }
-    current?.dispose();
-    final decoded = decodeMarkdownTableWithAlignment(gfm.split('\n'));
-    final controller = TableEditController(
-      rows: decoded.rows,
-      alignments: decoded.alignments,
-      onChanged: onChanged,
-      onCellFocused: onCellFocused,
-    );
-    _entries[documentOffset] = (controller: controller, gfm: gfm);
-    return controller;
-  }
-
-  void remember(
-    int documentOffset,
-    TableEditController controller,
-    String gfm,
-  ) {
-    _entries[documentOffset] = (controller: controller, gfm: gfm);
-  }
-
-  void dispose() {
-    for (final entry in _entries.values) {
-      entry.controller.dispose();
-    }
-    _entries.clear();
-  }
-}
+String _identity(String source) => source;
 
 enum _TimelineActivationChoice { keepOrder, sort }
 
@@ -433,17 +312,7 @@ Future<_TimelineActivationChoice?> _confirmTimelineActivation(
 }
 
 /// De kolommen die de gebruiker voor de tijdlijn heeft gekozen.
-class _TimelineColumnSelection {
-  const _TimelineColumnSelection({
-    required this.marker,
-    required this.event,
-    this.metadata,
-  });
-
-  final int marker;
-  final int event;
-  final int? metadata;
-}
+typedef _TimelineColumnSelection = ({int marker, int event, int? metadata});
 
 /// Toont een dialoog waarin de gebruiker kiest welke 2-3 kolommen van een brede
 /// tabel de tijdlijn worden (volgorde, gebeurtenis, optioneel toelichting).
@@ -514,14 +383,11 @@ Future<_TimelineColumnSelection?> _pickTimelineColumns(
             child: Text(l10n.d('Annuleren')),
           ),
           FilledButton(
-            onPressed: () => Navigator.pop(
-              ctx,
-              _TimelineColumnSelection(
-                marker: marker,
-                event: event,
-                metadata: metadata,
-              ),
-            ),
+            onPressed: () => Navigator.pop(ctx, (
+              marker: marker,
+              event: event,
+              metadata: metadata,
+            )),
             child: Text(l10n.d('Tijdlijn maken')),
           ),
         ],

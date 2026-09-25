@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
@@ -5,6 +7,13 @@ import '../../models/slide.dart' show TableAlign;
 import '../../utils/table_cell_navigation.dart';
 import '../../utils/table_clipboard.dart';
 import '../editors/editor_text_controller.dart';
+
+/// Ruim genoeg voor echte werkbladen, begrensd voordat klembordinvoer voor
+/// iedere cel een tekstcontroller, focusnode en widget kan laten ontstaan.
+const int kMaxTablePasteCharacters = 250000;
+const int kMaxTablePasteRows = 1000;
+const int kMaxTablePasteColumns = 100;
+const int kMaxTablePasteCells = 10000;
 
 /// De bewerkstaat van één tabel die *in de weergave zelf* wordt ingevuld —
 /// cel voor cel, op de plek waar de tabel straks ook staat, zoals in een
@@ -206,8 +215,6 @@ class TableEditController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _emitAndRebuild() => _emit();
-
   /// Vraagt de opbouw om cel ([r], [c]) te focussen zodra ze bestaat. De
   /// weergave haalt dit op met [takePendingFocus].
   void _focusAfterRebuild(int r, int c) {
@@ -399,13 +406,15 @@ class TableEditController extends ChangeNotifier {
   /// rekenbladselectie, CSV, een Markdown-tabel), dan groeit het raster mee en
   /// wordt hij cel voor cel gevuld; anders is het gewoon tekst in deze cel.
   void pasteAt(int r, int c, String text) {
+    if (text.length > kMaxTablePasteCharacters) return;
+    var table = parseClipboardTable(text);
+    if (table != null && !_pasteFitsBudget(table, row: r, column: c)) return;
     // Een vergrendelde kop niet overschrijven: tabelplak begint op de eerste
     // body-rij, losse tekst in de kop blijft staan.
     if (lockHeader && r == 0) {
-      if (parseClipboardTable(text) != null) pasteAt(1, c, text);
+      if (table != null) pasteAt(1, c, text);
       return;
     }
-    var table = parseClipboardTable(text);
     if (table == null) {
       final ctrl = _cells[r][c];
       final value = ctrl.text;
@@ -435,13 +444,31 @@ class TableEditController extends ChangeNotifier {
       for (var j = 0; j < table[i].length; j++) {
         if (c + j >= colCount) break;
         final ctrl = _cells[r + i][c + j];
-        // Zonder tussentijdse melding; één [_emitAndRebuild] sluit het af.
+        // Zonder tussentijdse melding; één [_emit] sluit het af.
         ctrl.removeTextListener(_emit);
         ctrl.text = table[i][j];
         ctrl.addTextListener(_emit);
       }
     }
-    _emitAndRebuild();
+    _emit();
+  }
+
+  bool _pasteFitsBudget(
+    List<List<String>> table, {
+    required int row,
+    required int column,
+  }) {
+    final pastedColumns = table.fold<int>(
+      0,
+      (largest, row) => row.length > largest ? row.length : largest,
+    );
+    final resultingRows = math.max(rowCount, row + table.length);
+    final resultingColumns = lockColumns
+        ? colCount
+        : math.max(colCount, column + pastedColumns);
+    return resultingRows <= kMaxTablePasteRows &&
+        resultingColumns <= kMaxTablePasteColumns &&
+        resultingRows * resultingColumns <= kMaxTablePasteCells;
   }
 
   void insertRowAt(int at, {bool silent = false}) {
@@ -457,7 +484,7 @@ class TableEditController extends ChangeNotifier {
         final row = active.row >= index ? active.row + 1 : active.row;
         _retainActiveAfterStructure((row: row, col: active.col));
       }
-      _emitAndRebuild();
+      _emit();
     }
   }
 
@@ -480,7 +507,7 @@ class TableEditController extends ChangeNotifier {
           : (active.row == r ? (r - 1).clamp(1, rowCount - 1) : active.row);
       _retainActiveAfterStructure((row: row, col: active.col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   void insertColumnAt(int at, {bool silent = false}) {
@@ -498,7 +525,7 @@ class TableEditController extends ChangeNotifier {
         final col = active.col >= index ? active.col + 1 : active.col;
         _retainActiveAfterStructure((row: active.row, col: col));
       }
-      _emitAndRebuild();
+      _emit();
     }
   }
 
@@ -519,7 +546,7 @@ class TableEditController extends ChangeNotifier {
           : (active.col == c ? c.clamp(0, colCount - 1) : active.col);
       _retainActiveAfterStructure((row: active.row, col: col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   /// Verplaatst rij [r] met [delta] (−1 omhoog, +1 omlaag). De koprij blijft de
@@ -536,7 +563,7 @@ class TableEditController extends ChangeNotifier {
           : (active.row == target ? r : active.row);
       _retainActiveAfterStructure((row: row, col: active.col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   void moveColumn(int c, int delta) {
@@ -557,7 +584,7 @@ class TableEditController extends ChangeNotifier {
           : (active.col == target ? c : active.col);
       _retainActiveAfterStructure((row: active.row, col: col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   /// Vervangt het hele raster, bijvoorbeeld na een kolomsort. De oude
@@ -574,7 +601,7 @@ class TableEditController extends ChangeNotifier {
         col: active.col.clamp(0, colCount - 1),
       ));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   void setAlignment(int c, TableAlign align) {
@@ -585,7 +612,7 @@ class TableEditController extends ChangeNotifier {
     next[c] = align;
     _alignments = next;
     _retainActiveAfterStructure(_activeCell);
-    _emitAndRebuild();
+    _emit();
   }
 
   void _disposeInternals() {
