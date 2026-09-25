@@ -412,7 +412,7 @@ TableEditController? _sourceTableFor(
   if (range == null) return null;
   final gfm = body.split('\n').sublist(range[0], range[1]).join('\n');
   return s._sourceTables.obtain(
-    ordinal,
+    (surface: 'source-preview', ordinal: ordinal),
     gfm,
     onChanged: (rows, alignments) {
       final next = replaceNthTableBlock(

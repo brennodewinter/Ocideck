@@ -10,8 +10,6 @@ import '../../services/markdown_table_codec.dart';
 import '../markdown_editor/table_sort_actions.dart';
 import 'table_edit_controller.dart';
 
-enum TableSortIntent { ascending, descending, choose }
-
 /// Zet de invulbare tabel in zijn omhulsel: hij tekent opnieuw wanneer de
 /// structuur wijzigt, en toont een werkbalk zodra de cursor in een cel staat.
 ///
@@ -390,32 +388,12 @@ Future<void> _applyDefaultTableSort(
   TableSortIntent intent,
 ) async {
   final gfm = encodeMarkdownTable(editor.rows, alignments: editor.alignments);
-  final String? sorted;
-  if (intent == TableSortIntent.choose) {
-    final choice = await chooseExplicitSort(context);
-    if (!context.mounted || choice == null) return;
-    sorted = await smartSortTable(
-      context,
-      gfm,
-      column: column,
-      ascending: choice.ascending,
-      kind: choice.kind,
-    );
-  } else if (intent == TableSortIntent.ascending) {
-    sorted = await smartSortTable(
-      context,
-      gfm,
-      column: column,
-      ascending: true,
-    );
-  } else {
-    sorted = await smartSortTable(
-      context,
-      gfm,
-      column: column,
-      ascending: false,
-    );
-  }
+  final sorted = await sortTableForIntent(
+    context,
+    gfm,
+    column: column,
+    intent: intent,
+  );
   if (!context.mounted || sorted == null) return;
   final decoded = decodeMarkdownTableWithAlignment(sorted.split('\n'));
   editor.replaceRows(decoded.rows, decoded.alignments);

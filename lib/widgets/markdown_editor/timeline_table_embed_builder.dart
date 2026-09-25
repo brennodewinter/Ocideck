@@ -4,15 +4,12 @@ import 'package:markdown_quill/markdown_quill.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/settings.dart' show ThemeProfile;
-import '../../models/slide.dart' show TableAlign;
 import '../../services/document_timeline.dart';
-import '../../services/markdown_table_codec.dart';
 import '../../utils/timeline_table_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
-import '../reader/table_edit_scaffold.dart' show TableSortIntent;
 import 'markdown_editor_theme.dart';
-import 'table_embed_builder.dart' show TableEmbedControllerStore;
+import 'table_embed_binding.dart';
 import 'table_sort_actions.dart';
 
 /// Tekent marker en tabel als één verliesvrij tijdlijnblok in de visuele editor.
@@ -75,119 +72,48 @@ class _EditableTimelineEmbed extends StatefulWidget {
 }
 
 class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
-  late TableEditController _editor;
-  late int _documentOffset;
-  late String _source;
+  late TableEmbedBinding _binding;
   bool _editing = false;
-  String? _pending;
-  bool _flushScheduled = false;
 
-  String get _currentSource => _pending ?? _source;
-  String get _tableSource => unmarkTimeline(_currentSource);
+  TableEditController get _editor => _binding.editor;
+  String get _currentSource => _binding.currentSource;
+  String get _tableSource => _binding.tableSource;
 
   @override
   void initState() {
     super.initState();
-    _documentOffset = widget.embedContext.node.documentOffset;
-    _source = widget.source;
-    _editor = _obtainController();
-    _editing = !analyzeMarkedTimeline(_source).isUsable;
+    _binding = TableEmbedBinding(
+      controllerStore: widget.controllerStore,
+      embedContext: widget.embedContext,
+      source: widget.source,
+      unwrapSource: unmarkTimeline,
+      wrapTable: markTableAsTimeline,
+      makeEmbed: EmbeddableTimelineTable.new,
+      isMounted: () => mounted,
+    );
+    _editing = !analyzeMarkedTimeline(_currentSource).isUsable;
   }
 
   @override
   void didUpdateWidget(_EditableTimelineEmbed oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final node = widget.embedContext.node;
-    if (node.parent != null) _documentOffset = node.documentOffset;
-    _source = widget.source;
-    _editor = _obtainController();
+    _binding.reconnect(widget.embedContext, widget.source);
   }
 
-  TableEditController _obtainController() => widget.controllerStore.obtain(
-    _documentOffset,
-    _tableSource,
-    onChanged: _writeBack,
-    // Zie table_embed_builder.dart: Quill's _TransparentTapGestureRecognizer
-    // kaapt de TextInputConnection terug na een tap op de cel (#1718).
-    onCellFocused: () =>
-        widget.embedContext.controller.skipRequestKeyboard = true,
-  );
-
-  void _writeBack(List<List<String>> rows, List<TableAlign> alignments) {
-    _pending = markTableAsTimeline(
-      encodeMarkdownTable(rows, alignments: alignments),
+  Future<void> _sort(int column, TableSortIntent intent) async {
+    final sorted = await sortTableForIntent(
+      context,
+      _tableSource,
+      column: column,
+      intent: intent,
     );
-    if (_flushScheduled) return;
-    _flushScheduled = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _flushScheduled = false;
-      if (mounted) _flush();
-    });
-  }
-
-  void _flush() {
-    final source = _pending;
-    _pending = null;
-    if (source == null) return;
-    _replace(source, preserveEditor: true);
-  }
-
-  void _replace(
-    String source, {
-    bool asTable = false,
-    bool discrete = false,
-    bool preserveEditor = false,
-  }) {
-    if (source == _source) return;
-    if (discrete) widget.onDiscreteEdit?.call();
-    if (preserveEditor) {
-      widget.controllerStore.remember(
-        _documentOffset,
-        _editor,
-        unmarkTimeline(source),
+    if (mounted && sorted != null) {
+      _binding.clearPending();
+      _binding.replaceTable(
+        sorted,
+        discrete: true,
+        onDiscreteEdit: widget.onDiscreteEdit,
       );
-    }
-    _source = source;
-    widget.embedContext.controller.replaceText(
-      // De embedknoop zelf wordt door de eerste vervanging losgekoppeld. Zijn
-      // vastgelegde positie blijft wél geldig: een embed heeft lengte 1 en we
-      // vervangen hem hier steeds door precies één nieuwe embed.
-      _documentOffset,
-      1,
-      asTable ? EmbeddableTable(source) : EmbeddableTimelineTable(source),
-      widget.embedContext.controller.selection,
-      // De cel beheert haar eigen tekstverbinding. Laat Quill die tijdens het
-      // vervangen van de embed niet overnemen of naar het blokbegin scrollen.
-      ignoreFocus: true,
-    );
-  }
-
-  Future<void> _sort(int column, bool ascending) async {
-    final sorted = await smartSortTable(
-      context,
-      _tableSource,
-      column: column,
-      ascending: ascending,
-    );
-    if (mounted && sorted != null) {
-      _pending = null;
-      _replace(markTableAsTimeline(sorted), discrete: true);
-    }
-  }
-
-  Future<void> _sortAs(int column) async {
-    final choice = await chooseExplicitSort(context);
-    if (!mounted || choice == null) return;
-    final sorted = await smartSortTable(
-      context,
-      _tableSource,
-      column: column,
-      ascending: choice.ascending,
-      kind: choice.kind,
-    );
-    if (mounted && sorted != null) {
-      _pending = null;
-      _replace(markTableAsTimeline(sorted), discrete: true);
     }
   }
 
@@ -336,8 +262,12 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
               ),
               _timelineActionButton(
                 maxWidth: constraints.maxWidth,
-                onPressed: () =>
-                    _replace(_tableSource, asTable: true, discrete: true),
+                onPressed: () => _binding.replaceSource(
+                  _tableSource,
+                  discrete: true,
+                  onDiscreteEdit: widget.onDiscreteEdit,
+                  embed: EmbeddableTable(_tableSource),
+                ),
                 icon: Icons.table_chart_outlined,
                 label: l10n.d('Als tabel weergeven'),
               ),
@@ -364,11 +294,7 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
                 chartTheme: widget.profile,
                 tableEditController: _editor,
                 tableToolbarExtras: _momentToolbar,
-                onSortTableColumn: (column, intent) => switch (intent) {
-                  TableSortIntent.ascending => _sort(column, true),
-                  TableSortIntent.descending => _sort(column, false),
-                  TableSortIntent.choose => _sortAs(column),
-                },
+                onSortTableColumn: _sort,
               ),
             ],
           )
@@ -384,6 +310,12 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
           ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _binding.dispose();
+    super.dispose();
   }
 
   String _timelineIssueMessage(

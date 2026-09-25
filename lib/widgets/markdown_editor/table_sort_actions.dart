@@ -6,6 +6,35 @@ import '../../services/table_sort.dart';
 
 typedef ExplicitSortChoice = ({TableSortKind kind, bool ascending});
 
+enum TableSortIntent { ascending, descending, choose }
+
+/// Voert één van de drie tabelsorteerhandelingen uit en geeft alleen een
+/// gewijzigde bron terug. Alle oppervlakken delen zo dezelfde dialoogroute.
+Future<String?> sortTableForIntent(
+  BuildContext context,
+  String gfm, {
+  required int column,
+  required TableSortIntent intent,
+}) async {
+  if (intent == TableSortIntent.choose) {
+    final choice = await chooseExplicitSort(context);
+    if (!context.mounted || choice == null) return null;
+    return smartSortTable(
+      context,
+      gfm,
+      column: column,
+      ascending: choice.ascending,
+      kind: choice.kind,
+    );
+  }
+  return smartSortTable(
+    context,
+    gfm,
+    column: column,
+    ascending: intent == TableSortIntent.ascending,
+  );
+}
+
 /// De gedeelde gebruikershandeling achter sorteren in gewone tabellen en
 /// tijdlijnen. Analyse, waarschuwing en bevestiging blijven daardoor op beide
 /// oppervlakken gelijk; alleen de aanroeper schrijft het resultaat terug.
