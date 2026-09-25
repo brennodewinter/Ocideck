@@ -211,4 +211,24 @@ deploy_web_if_needed
       reason: 'zonder deploy is er geen reden van tak te wisselen',
     );
   }, skip: skipOnWindows);
+
+  test('een falende deploy wordt als deploy-web gemeld, niet als checkout', () {
+    final repo = releaseRepoAfterMerge();
+
+    final result = runInRepo(repo, r'''
+TAG_PUSHED=1
+BRANCH_PUSHED=0
+trap 'on_err $LINENO' ERR
+live_web_version() { printf '9.9.8'; }
+make() { return 1; }
+deploy_web_if_needed
+''');
+
+    expect(result.exitCode, isNot(0));
+    expect(result.stderr, contains('FOUT in stap "deploy-web"'));
+    expect(
+      result.stderr,
+      isNot(contains('FOUT in stap "werkboom op de tag zetten"')),
+    );
+  }, skip: skipOnWindows);
 }

@@ -24,12 +24,17 @@ void main() {
   final releaseScript = File('scripts/release_auto.sh').readAsStringSync();
 
   test('deployscripts wijzen standaard naar de huidige webserver', () {
-    const host = 'ubuntu@vps-7f36cc7e.vps.ovh.net';
+    const host = 'ubuntu@vps-40edd80f.vps.ovh.net';
     expect(script, contains(r'OCIDECK_DEPLOY_HOST:-' + host));
     expect(releaseScript, contains(r'OCIDECK_DEPLOY_HOST:-' + host));
     expect(script, contains(r'OCIDECK_DEPLOY_OWNER:-ubuntu:ubuntu'));
-    expect(script, isNot(contains('ubuntu@braniebananie.nl')));
-    expect(releaseScript, isNot(contains('ubuntu@braniebananie.nl')));
+    for (final staleHost in const [
+      'ubuntu@braniebananie.nl',
+      'ubuntu@vps-7f36cc7e.vps.ovh.net',
+    ]) {
+      expect(script, isNot(contains(staleHost)));
+      expect(releaseScript, isNot(contains(staleHost)));
+    }
   });
 
   test('de macOS-tar strips Apple-metadata (geen pax-ruis op de server)', () {

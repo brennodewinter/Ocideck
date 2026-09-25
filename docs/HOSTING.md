@@ -99,7 +99,7 @@ forge (Settings → Actions → Secrets):
 
   ```bash
   ssh-keygen -t ed25519 -f ~/.ssh/ocideck-deploy -C "ocideck-deploy" -N ""
-  ssh-copy-id -i ~/.ssh/ocideck-deploy.pub ubuntu@vps-7f36cc7e.vps.ovh.net
+  ssh-copy-id -i ~/.ssh/ocideck-deploy.pub ubuntu@vps-40edd80f.vps.ovh.net
   ```
 
   Paste the contents of `~/.ssh/ocideck-deploy` (the file **without** `.pub`)
@@ -108,7 +108,7 @@ forge (Settings → Actions → Secrets):
 - **`DEPLOY_KNOWN_HOSTS`** — the host's public key, pinned ahead of time:
 
   ```bash
-  ssh-keyscan -t ed25519 vps-7f36cc7e.vps.ovh.net
+  ssh-keyscan -t ed25519 vps-40edd80f.vps.ovh.net
   ```
 
   Run this from a machine you trust, look at it once, and paste the line.
