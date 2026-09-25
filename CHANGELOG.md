@@ -230,6 +230,12 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.12] — 2026-09-25
+
+### Changed
+
+- Maak tabelbewerking vloeiend en gedeeld
+
 ## [0.6.11] — 2026-09-25
 
 ### Added
