@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
@@ -406,7 +408,7 @@ class TableEditController extends ChangeNotifier {
   void pasteAt(int r, int c, String text) {
     if (text.length > kMaxTablePasteCharacters) return;
     var table = parseClipboardTable(text);
-    if (table != null && !_pasteFitsBudget(table)) return;
+    if (table != null && !_pasteFitsBudget(table, row: r, column: c)) return;
     // Een vergrendelde kop niet overschrijven: tabelplak begint op de eerste
     // body-rij, losse tekst in de kop blijft staan.
     if (lockHeader && r == 0) {
@@ -451,14 +453,22 @@ class TableEditController extends ChangeNotifier {
     _emit();
   }
 
-  bool _pasteFitsBudget(List<List<String>> table) {
-    if (table.length > kMaxTablePasteRows) return false;
-    final columns = table.fold<int>(
+  bool _pasteFitsBudget(
+    List<List<String>> table, {
+    required int row,
+    required int column,
+  }) {
+    final pastedColumns = table.fold<int>(
       0,
       (largest, row) => row.length > largest ? row.length : largest,
     );
-    return columns <= kMaxTablePasteColumns &&
-        table.length * columns <= kMaxTablePasteCells;
+    final resultingRows = math.max(rowCount, row + table.length);
+    final resultingColumns = lockColumns
+        ? colCount
+        : math.max(colCount, column + pastedColumns);
+    return resultingRows <= kMaxTablePasteRows &&
+        resultingColumns <= kMaxTablePasteColumns &&
+        resultingRows * resultingColumns <= kMaxTablePasteCells;
   }
 
   void insertRowAt(int at, {bool silent = false}) {

@@ -461,6 +461,34 @@ void main() {
 
       editor.pasteAt(1, 0, 'x' * (kMaxTablePasteCharacters + 1));
       expect(editor.rows, before);
+
+      final tooManyColumns = List.filled(
+        kMaxTablePasteColumns + 1,
+        'x',
+      ).join('\t');
+      editor.pasteAt(1, 0, tooManyColumns);
+      expect(editor.rows, before);
+
+      final tooManyCells = List.generate(
+        101,
+        (_) => List.filled(100, 'x').join('\t'),
+      ).join('\n');
+      editor.pasteAt(1, 0, tooManyCells);
+      expect(editor.rows, before);
+    });
+
+    test('het plakbudget telt ook bestaande kolommen mee', () {
+      final wide = TableEditController(
+        rows: [List.filled(100, 'kop'), List.filled(100, '')],
+        alignments: List.filled(100, TableAlign.left),
+        onChanged: (_, _) {},
+      );
+      addTearDown(wide.dispose);
+      final before = wide.rows;
+      final narrowButTall = List.generate(101, (i) => '$i\twaarde').join('\n');
+
+      wide.pasteAt(1, 0, narrowButTall);
+      expect(wide.rows, before);
     });
 
     test('lockHeader bewaart de kop en knipt extra kolommen af', () {
