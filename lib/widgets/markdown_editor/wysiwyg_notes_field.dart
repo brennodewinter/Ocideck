@@ -368,6 +368,7 @@ class _WysiwygNotesFieldState extends State<WysiwygNotesField> {
                   const ImageEmbedBuilder(),
                   TimelineTableEmbedBuilder(
                     onDiscreteEdit: widget.onDiscreteVisualEdit,
+                    controllerStore: _tableEditors,
                   ),
                   TableEmbedBuilder(
                     onDiscreteEdit: widget.onDiscreteVisualEdit,

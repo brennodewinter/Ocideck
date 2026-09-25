@@ -12,13 +12,18 @@ import '../reader/document_markdown_view.dart';
 import '../reader/table_edit_controller.dart';
 import '../reader/table_edit_scaffold.dart' show TableSortIntent;
 import 'markdown_editor_theme.dart';
+import 'table_embed_builder.dart' show TableEmbedControllerStore;
 import 'table_sort_actions.dart';
 
 /// Tekent marker en tabel als één verliesvrij tijdlijnblok in de visuele editor.
 class TimelineTableEmbedBuilder extends EmbedBuilder {
-  const TimelineTableEmbedBuilder({this.onDiscreteEdit});
+  const TimelineTableEmbedBuilder({
+    required this.controllerStore,
+    this.onDiscreteEdit,
+  });
 
   final VoidCallback? onDiscreteEdit;
+  final TableEmbedControllerStore controllerStore;
 
   @override
   String get key => EmbeddableTimelineTable.timelineType;
@@ -39,26 +44,31 @@ class TimelineTableEmbedBuilder extends EmbedBuilder {
       );
     }
     return _EditableTimelineEmbed(
+      key: ValueKey('document-timeline-${embedContext.node.documentOffset}'),
       source: source,
       profile: profile,
       embedContext: embedContext,
       onDiscreteEdit: onDiscreteEdit,
+      controllerStore: controllerStore,
     );
   }
 }
 
 class _EditableTimelineEmbed extends StatefulWidget {
   const _EditableTimelineEmbed({
+    super.key,
     required this.source,
     required this.profile,
     required this.embedContext,
     required this.onDiscreteEdit,
+    required this.controllerStore,
   });
 
   final String source;
   final ThemeProfile? profile;
   final EmbedContext embedContext;
   final VoidCallback? onDiscreteEdit;
+  final TableEmbedControllerStore controllerStore;
 
   @override
   State<_EditableTimelineEmbed> createState() => _EditableTimelineEmbedState();
@@ -66,41 +76,42 @@ class _EditableTimelineEmbed extends StatefulWidget {
 
 class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
   late TableEditController _editor;
+  late int _documentOffset;
+  late String _source;
   bool _editing = false;
   String? _pending;
   bool _flushScheduled = false;
 
-  String get _currentSource => _pending ?? widget.source;
+  String get _currentSource => _pending ?? _source;
   String get _tableSource => unmarkTimeline(_currentSource);
 
   @override
   void initState() {
     super.initState();
-    _editor = _makeController();
-    _editing = !analyzeMarkedTimeline(widget.source).isUsable;
+    _documentOffset = widget.embedContext.node.documentOffset;
+    _source = widget.source;
+    _editor = _obtainController();
+    _editing = !analyzeMarkedTimeline(_source).isUsable;
   }
 
   @override
   void didUpdateWidget(_EditableTimelineEmbed oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.source != widget.source) {
-      _editor.dispose();
-      _editor = _makeController();
-    }
+    final node = widget.embedContext.node;
+    if (node.parent != null) _documentOffset = node.documentOffset;
+    _source = widget.source;
+    _editor = _obtainController();
   }
 
-  TableEditController _makeController() {
-    final decoded = decodeMarkdownTableWithAlignment(_tableSource.split('\n'));
-    return TableEditController(
-      rows: decoded.rows,
-      alignments: decoded.alignments,
-      onChanged: _writeBack,
-      // Zie table_embed_builder.dart: Quill's _TransparentTapGestureRecognizer
-      // kaapt de TextInputConnection terug na een tap op de cel (#1718).
-      onCellFocused: () =>
-          widget.embedContext.controller.skipRequestKeyboard = true,
-    );
-  }
+  TableEditController _obtainController() => widget.controllerStore.obtain(
+    _documentOffset,
+    _tableSource,
+    onChanged: _writeBack,
+    // Zie table_embed_builder.dart: Quill's _TransparentTapGestureRecognizer
+    // kaapt de TextInputConnection terug na een tap op de cel (#1718).
+    onCellFocused: () =>
+        widget.embedContext.controller.skipRequestKeyboard = true,
+  );
 
   void _writeBack(List<List<String>> rows, List<TableAlign> alignments) {
     _pending = markTableAsTimeline(
@@ -110,20 +121,44 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
     _flushScheduled = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _flushScheduled = false;
-      if (mounted && _pending != null) _replace(_pending!);
-      _pending = null;
+      if (mounted) _flush();
     });
   }
 
-  void _replace(String source, {bool asTable = false, bool discrete = false}) {
-    final node = widget.embedContext.node;
-    if (node.parent == null || source == widget.source) return;
+  void _flush() {
+    final source = _pending;
+    _pending = null;
+    if (source == null) return;
+    _replace(source, preserveEditor: true);
+  }
+
+  void _replace(
+    String source, {
+    bool asTable = false,
+    bool discrete = false,
+    bool preserveEditor = false,
+  }) {
+    if (source == _source) return;
     if (discrete) widget.onDiscreteEdit?.call();
+    if (preserveEditor) {
+      widget.controllerStore.remember(
+        _documentOffset,
+        _editor,
+        unmarkTimeline(source),
+      );
+    }
+    _source = source;
     widget.embedContext.controller.replaceText(
-      node.documentOffset,
+      // De embedknoop zelf wordt door de eerste vervanging losgekoppeld. Zijn
+      // vastgelegde positie blijft wél geldig: een embed heeft lengte 1 en we
+      // vervangen hem hier steeds door precies één nieuwe embed.
+      _documentOffset,
       1,
       asTable ? EmbeddableTable(source) : EmbeddableTimelineTable(source),
-      null,
+      widget.embedContext.controller.selection,
+      // De cel beheert haar eigen tekstverbinding. Laat Quill die tijdens het
+      // vervangen van de embed niet overnemen of naar het blokbegin scrollen.
+      ignoreFocus: true,
     );
   }
 
@@ -260,12 +295,6 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
   }
 
   @override
-  void dispose() {
-    _editor.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final analysis = analyzeMarkedTimeline(_currentSource);
@@ -347,7 +376,7 @@ class _EditableTimelineEmbedState extends State<_EditableTimelineEmbed> {
           GestureDetector(
             onDoubleTap: () => setState(() => _editing = true),
             child: DocumentMarkdownView(
-              widget.source,
+              _currentSource,
               maxTextWidth: null,
               themeProfile: widget.profile,
               chartTheme: widget.profile,

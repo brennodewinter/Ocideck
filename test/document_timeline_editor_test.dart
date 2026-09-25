@@ -96,6 +96,81 @@ void main() {
     expect(markdown, contains('Melding gevalideerd'));
   });
 
+  for (final (position, start, edits) in [
+    ('midden', 8, ['Melding Xontvangen', 'Melding XYontvangen']),
+    (
+      'eind',
+      'Melding ontvangen'.length,
+      ['Melding ontvangenX', 'Melding ontvangenXY'],
+    ),
+  ]) {
+    testWidgets(
+      'typen $position in een tijdlijncel houdt focus en cursor vast',
+      (tester) async {
+        final document = await pumpEditor(tester);
+        await tester.tap(find.text('Gebeurtenissen bewerken'));
+        await tester.pump();
+
+        final cell = find.widgetWithText(TextField, 'Melding ontvangen');
+        await tester.tap(cell);
+        await tester.pump(const Duration(milliseconds: 300));
+        final originalField = tester.widget<TextField>(cell);
+        final cellController = originalField.controller!;
+        final cellFocus = originalField.focusNode!;
+        expect(cellFocus.hasPrimaryFocus, isTrue);
+
+        // Elke invoer schrijft de tijdlijn terug naar het Quill-document.
+        cellController.selection = TextSelection.collapsed(offset: start);
+        for (var i = 0; i < edits.length; i++) {
+          final text = edits[i];
+          final offset = start + i + 1;
+          tester.testTextInput.updateEditingValue(
+            TextEditingValue(
+              text: text,
+              selection: TextSelection.collapsed(offset: offset),
+            ),
+          );
+          await tester.pump();
+          await tester.pump();
+          await tester.pump();
+
+          final updated = tester.widget<TextField>(
+            find.widgetWithText(TextField, text),
+          );
+          expect(updated.controller, same(cellController));
+          expect(updated.focusNode, same(cellFocus));
+          expect(cellFocus.hasPrimaryFocus, isTrue);
+          expect(
+            cellController.selection,
+            TextSelection.collapsed(offset: offset),
+          );
+          expect(
+            MarkdownQuillCodec.markdownFromDocument(document.document),
+            contains(text),
+          );
+        }
+
+        // Terugtypen naar de oorspronkelijke inhoud is óók een wijziging ten
+        // opzichte van het laatst opgeslagen raster, niet een reden om de
+        // terugschrijving over te slaan wegens de oude widgetbron.
+        const original = 'Melding ontvangen';
+        tester.testTextInput.updateEditingValue(
+          TextEditingValue(
+            text: original,
+            selection: TextSelection.collapsed(offset: start),
+          ),
+        );
+        await tester.pump();
+        await tester.pump();
+        await tester.pump();
+        expect(
+          MarkdownQuillCodec.markdownFromDocument(document.document),
+          contains('| 12:02 | $original | Gemeld |'),
+        );
+      },
+    );
+  }
+
   testWidgets('als tabel weergeven verwijdert alleen de marker', (
     tester,
   ) async {
