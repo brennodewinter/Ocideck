@@ -3,20 +3,9 @@
 part of '../slide_preview.dart';
 
 class _TableEditScope extends InheritedWidget {
-  final bool enabled;
-  final int? selectedRow;
-  final int? selectedCol;
-  final void Function(int row, int col)? onCellSelected;
-  final void Function(int row, int col, String value)? onCellChanged;
+  final TableEditController? controller;
 
-  const _TableEditScope({
-    required this.enabled,
-    required this.selectedRow,
-    required this.selectedCol,
-    required this.onCellSelected,
-    required this.onCellChanged,
-    required super.child,
-  });
+  const _TableEditScope({required this.controller, required super.child});
 
   static _TableEditScope? maybeOf(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<_TableEditScope>();
@@ -24,199 +13,18 @@ class _TableEditScope extends InheritedWidget {
 
   @override
   bool updateShouldNotify(_TableEditScope oldWidget) =>
-      oldWidget.enabled != enabled ||
-      oldWidget.selectedRow != selectedRow ||
-      oldWidget.selectedCol != selectedCol ||
-      oldWidget.onCellSelected != onCellSelected ||
-      oldWidget.onCellChanged != onCellChanged;
+      oldWidget.controller != controller;
 }
 
 class _TableEditHost extends StatelessWidget {
-  final bool enabled;
-  final int? selectedRow;
-  final int? selectedCol;
-  final void Function(int row, int col)? onCellSelected;
-  final void Function(int row, int col, String value)? onCellChanged;
+  final TableEditController? controller;
   final Widget child;
 
-  const _TableEditHost({
-    required this.enabled,
-    required this.selectedRow,
-    required this.selectedCol,
-    required this.onCellSelected,
-    required this.onCellChanged,
-    required this.child,
-  });
+  const _TableEditHost({required this.controller, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return _TableEditScope(
-      enabled: enabled,
-      selectedRow: selectedRow,
-      selectedCol: selectedCol,
-      onCellSelected: onCellSelected,
-      onCellChanged: onCellChanged,
-      child: child,
-    );
-  }
-}
-
-class _TableEditCell extends StatefulWidget {
-  final String value;
-  final bool selected;
-  final bool header;
-  final int row;
-  final int col;
-  final double w;
-  final double cellSize;
-  final double extraVPad;
-  final String font;
-  final Color accent;
-  final Color textColor;
-  final Color headerTextColor;
-  final Color headerBackground;
-  final void Function(int row, int col)? onSelected;
-  final void Function(int row, int col, String value)? onChanged;
-
-  const _TableEditCell({
-    required this.value,
-    required this.selected,
-    required this.header,
-    required this.row,
-    required this.col,
-    required this.w,
-    required this.cellSize,
-    required this.extraVPad,
-    required this.font,
-    required this.accent,
-    required this.textColor,
-    required this.headerTextColor,
-    required this.headerBackground,
-    required this.onSelected,
-    required this.onChanged,
-  });
-
-  @override
-  State<_TableEditCell> createState() => _TableEditCellState();
-}
-
-class _TableEditCellState extends State<_TableEditCell> {
-  late final TextEditingController _controller;
-  final FocusNode _focusNode = FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: widget.value);
-    if (widget.selected) _requestFocusSoon();
-  }
-
-  @override
-  void didUpdateWidget(_TableEditCell oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.value != oldWidget.value && widget.value != _controller.text) {
-      _controller.text = widget.value;
-    }
-    // Zodra deze cel geselecteerd raakt (via Tab, klik of de toggle) pakt het
-    // tekstveld expliciet focus, zodat de pijltjes de tekstcursor sturen in
-    // plaats van de presentatie. Enkel `autofocus` is onbetrouwbaar wanneer de
-    // root-focusnode de focus nog vasthield.
-    if (widget.selected && !oldWidget.selected) _requestFocusSoon();
-  }
-
-  /// Vraag focus ná de frame waarin het tekstveld is opgebouwd, zodat de
-  /// [FocusNode] daadwerkelijk aan een veld hangt voordat we hem focussen.
-  void _requestFocusSoon() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted && widget.selected) _focusNode.requestFocus();
-    });
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final padding = EdgeInsets.symmetric(
-      horizontal: widget.cellSize * kTableCellHPadFactor,
-      vertical: widget.cellSize * kTableCellVPadFactor + widget.extraVPad,
-    );
-    final fieldStyle = _applyFont(
-      widget.font,
-      TextStyle(
-        fontSize: widget.cellSize,
-        color: widget.header ? widget.headerTextColor : widget.textColor,
-        fontWeight: widget.header ? FontWeight.bold : FontWeight.normal,
-        height: 1.25,
-      ),
-    );
-
-    return GestureDetector(
-      key: ValueKey('table-edit-cell-${widget.row}-${widget.col}'),
-      behavior: HitTestBehavior.opaque,
-      onTap: () => widget.onSelected?.call(widget.row, widget.col),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 160),
-        curve: Curves.easeOut,
-        padding: padding,
-        decoration: BoxDecoration(
-          color: widget.selected
-              ? (widget.header
-                    ? widget.headerBackground.withValues(alpha: 0.92)
-                    : Colors.white.withValues(alpha: 0.96))
-              : (widget.header
-                    ? widget.headerBackground.withValues(alpha: 0.55)
-                    : widget.accent.withValues(alpha: 0.04)),
-          border: Border.all(
-            color: widget.selected
-                ? widget.accent
-                : widget.accent.withValues(alpha: widget.header ? 0.25 : 0.14),
-            width: widget.selected ? widget.w * 0.0028 : widget.w * 0.001,
-          ),
-          boxShadow: widget.selected
-              ? [
-                  BoxShadow(
-                    color: widget.accent.withValues(alpha: 0.28),
-                    blurRadius: widget.w * 0.012,
-                    spreadRadius: widget.w * 0.001,
-                  ),
-                ]
-              : null,
-        ),
-        child: widget.selected
-            ? TextField(
-                controller: _controller,
-                focusNode: _focusNode,
-                maxLines: null,
-                style: fieldStyle,
-                decoration: const InputDecoration(
-                  isDense: true,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.zero,
-                ),
-                onChanged: (v) =>
-                    widget.onChanged?.call(widget.row, widget.col, v),
-              )
-            : _md(
-                context,
-                widget.value.isEmpty ? ' ' : widget.value,
-                fieldStyle.copyWith(
-                  color: widget.value.isEmpty
-                      ? widget.textColor.withValues(alpha: 0.35)
-                      : (widget.header
-                            ? widget.headerTextColor
-                            : widget.textColor),
-                ),
-                linkColor: widget.header
-                    ? widget.headerTextColor
-                    : widget.accent,
-              ),
-      ),
-    );
+    return _TableEditScope(controller: controller, child: child);
   }
 }
 
@@ -241,14 +49,29 @@ class _TablePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final edit = _TableEditScope.maybeOf(context);
+    final editor = _TableEditScope.maybeOf(context)?.controller;
+    if (editor == null) return _build(context, null);
+    return ListenableBuilder(
+      listenable: editor,
+      builder: (context, _) => _build(context, editor),
+    );
+  }
+
+  Widget _build(BuildContext context, TableEditController? editor) {
+    final pending = editor?.takePendingFocus();
+    if (pending != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        editor?.focusCell(pending.row, pending.col);
+      });
+    }
     final pad = w * 0.06;
     // A table fills the slide's full width and remaining height, so a corner
     // logo overlaps edge cells unless we reserve the whole logo box — the
     // reduced strip only clears the inset *behind* the logo (#2091).
     final safe = _shownLogoInsets(w, slide, profile, occupancy: true);
     final titleSize = w * 0.038;
-    final (rows, caption) = _rowsAndCaption(slide);
+    final (slideRows, caption) = _rowsAndCaption(slide);
+    final rows = editor?.rows ?? slideRows;
     final colCount = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
 
     final fit = _fit(
@@ -270,7 +93,7 @@ class _TablePreview extends StatelessWidget {
       profile.tableHeaderBackgroundColor,
     );
     final borderColor = accent.withValues(alpha: 0.35);
-    final editing = edit?.enabled == true;
+    final editing = editor != null;
     // Tegen de dag waarop het deck getoond wordt, niet tegen een opgeslagen
     // vlag: een presentatie die twee maanden later opnieuw langskomt, markeert
     // haar eigen verlopen deadlines in plaats van te blijven beweren dat alles
@@ -321,23 +144,56 @@ class _TablePreview extends StatelessWidget {
         );
       }
 
-      final selected = edit!.selectedRow == row && edit.selectedCol == col;
-      return _TableEditCell(
-        value: value,
-        selected: selected,
-        header: header,
-        row: row,
-        col: col,
-        w: w,
-        cellSize: cellSize,
-        extraVPad: fit.extraVPad,
-        font: font,
-        accent: accent,
-        textColor: textColor,
-        headerTextColor: headerTextColor,
-        headerBackground: headerBackground,
-        onSelected: edit.onCellSelected,
-        onChanged: edit.onCellChanged,
+      final active = editor.activeCell == (row: row, col: col);
+      final style = _applyFont(
+        font,
+        TextStyle(
+          fontSize: cellSize,
+          color: header ? headerTextColor : textColor,
+          fontWeight: header ? FontWeight.bold : FontWeight.normal,
+          height: 1.25,
+        ),
+      );
+      return AnimatedContainer(
+        key: ValueKey('table-edit-cell-$row-$col'),
+        duration: const Duration(milliseconds: 160),
+        curve: Curves.easeOut,
+        decoration: BoxDecoration(
+          color: active
+              ? (header
+                    ? headerBackground.withValues(alpha: 0.92)
+                    : Colors.white.withValues(alpha: 0.96))
+              : (header
+                    ? headerBackground.withValues(alpha: 0.55)
+                    : accent.withValues(alpha: 0.04)),
+          border: Border.all(
+            color: active
+                ? accent
+                : accent.withValues(alpha: header ? 0.25 : 0.14),
+            width: active ? w * 0.0028 : w * 0.001,
+          ),
+          boxShadow: active
+              ? [
+                  BoxShadow(
+                    color: accent.withValues(alpha: 0.28),
+                    blurRadius: w * 0.012,
+                    spreadRadius: w * 0.001,
+                  ),
+                ]
+              : null,
+        ),
+        child: TableEditableCell(
+          editor: editor,
+          row: row,
+          column: col,
+          style: style,
+          pad: 0,
+          contentPadding: padding,
+          caretColor: accent,
+          linkColor: header ? headerTextColor : accent,
+          activeBackgroundColor: Colors.transparent,
+          textAlign: _tableAlign(slide, col),
+        ),
       );
     }
 

@@ -155,7 +155,7 @@ extension _PresenterKeys on _FullscreenPresenterState {
     if (_gridOpen) return _handleGridKey(key);
 
     // Tabelbewerking: navigatie-toetsen voor celkeuze; tekstinvoer blijft intact.
-    if (_tableEditMode) return _handleTableEditKey(key, shift: shift);
+    if (_tableEditMode) return _handleTableEditKey(key);
 
     final timedResult = _handleTimedPresentationKey(this, key);
     if (timedResult != null) return timedResult;

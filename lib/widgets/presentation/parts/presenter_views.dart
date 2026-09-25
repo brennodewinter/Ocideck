@@ -104,18 +104,10 @@ extension _PresenterViews on _FullscreenPresenterState {
                     // Typen gebeurt op het presentatorscherm; het beamervenster
                     // spiegelt alleen mee (zie [SlidePreviewWidget.onAnswerTextChanged]).
                     onAnswerTextChanged: _onAnswerTextChanged,
-                    tableEditMode:
-                        _tableEditMode && slide.type == SlideType.table,
-                    tableEditRow: _tableEditRow,
-                    tableEditCol: _tableEditCol,
-                    onTableCellSelected: (row, col) =>
-                        _selectTableCell(row, col),
-                    onTableCellChanged: (row, col, value) => _updateTableCell(
-                      slideIndex: _index,
-                      row: row,
-                      col: col,
-                      value: value,
-                    ),
+                    tableEditController:
+                        _tableEditMode && slide.type == SlideType.table
+                        ? _tableEditor
+                        : null,
                     // Tijdens het presenteren speelt media en starten audio/video
                     // vanzelf; het media-einde stuurt auto-advance aan. In dual-
                     // schermmodus speelt de media op het beamervenster, niet hier,

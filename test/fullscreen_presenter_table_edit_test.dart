@@ -74,7 +74,7 @@ void main() {
   ) async {
     Slide? updated;
     await openTable(tester, onSessionEdit: (slide) => updated = slide);
-    await tester.tap(find.text('Omzet'));
+    await tester.tap(find.widgetWithText(TextField, 'Omzet'));
     await tester.pump();
 
     final before = controllerWith(tester, 'Omzet');
@@ -116,7 +116,7 @@ void main() {
   ) async {
     Slide? updated;
     await openTable(tester, onSessionEdit: (slide) => updated = slide);
-    await tester.tap(find.text('100'));
+    await tester.tap(find.widgetWithText(TextField, '100'));
     await tester.pump();
 
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
@@ -156,7 +156,7 @@ void main() {
   ) async {
     Slide? updated;
     await openTable(tester, onSessionEdit: (slide) => updated = slide);
-    await tester.tap(find.text('100'));
+    await tester.tap(find.widgetWithText(TextField, '100'));
     await tester.pump();
 
     final value = controllerWith(tester, '100');
@@ -243,7 +243,7 @@ void main() {
           closeImpl: (_) async {},
         ),
       );
-      await tester.tap(find.text('100'));
+      await tester.tap(find.widgetWithText(TextField, '100'));
       await tester.pump();
       await tester.enterText(find.widgetWithText(TextField, '100'), '250');
       await tester.pump();

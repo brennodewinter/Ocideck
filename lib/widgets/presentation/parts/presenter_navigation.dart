@@ -229,8 +229,8 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _blank = _Blank.none;
       _gridOpen = false;
       _tableEditMode = false;
-      _tableEditRow = null;
-      _tableEditCol = null;
+      _tableEditor?.dispose();
+      _tableEditor = null;
       // Een expliciete teleport breekt de route: "terug" is daarna lineair (#1162).
       _jumpHistory.clear();
     });
@@ -258,8 +258,8 @@ extension _PresenterNavigation on _FullscreenPresenterState {
       _menuCategory = 0;
       _stepIndex = 0;
       _tableEditMode = false;
-      _tableEditRow = null;
-      _tableEditCol = null;
+      _tableEditor?.dispose();
+      _tableEditor = null;
       // Een expliciete teleport breekt de route: "terug" is daarna lineair (#1162).
       _jumpHistory.clear();
     });
