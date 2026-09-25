@@ -124,8 +124,6 @@ const Map<String, int> methodLengthBaseline = {
   // Verlaagd van 188 naar 186, en daarna naar 183: de methode meet 183.
   'lib/widgets/panels/editor_panel_slide_settings.dart::_SlideSettingsBody._groups':
       183,
-  // +2: reportLanguage-parameter + getalnotatie in cell().
-  'lib/widgets/slides/previews/table_preview.dart::_TablePreview.build': 152,
   // +8: tabel-split actie bij tableDensityMinimum-warning.
   'lib/widgets/panels/slide_quality_actions.dart::buildSlideQualityActions':
       158,

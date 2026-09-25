@@ -101,102 +101,6 @@ class _TablePreview extends StatelessWidget {
     // historische datums kleurt niet vanzelf rood.
     final today = slide.tableMarkOverdue ? DateTime.now() : null;
 
-    Widget cell(
-      String value, {
-      required bool header,
-      required int row,
-      required int col,
-    }) {
-      final padding = EdgeInsets.symmetric(
-        horizontal: cellSize * kTableCellHPadFactor,
-        vertical: cellSize * kTableCellVPadFactor + fit.extraVPad,
-      );
-
-      if (!editing) {
-        final expired =
-            today != null && !header && isPastDateCell(value, today);
-        // Taalbewuste getalnotatie: als deze kolom gemarkeerd is en de cel
-        // een getal bevat, formatteer het volgens de deck-taal. De ruwe
-        // waarde blijft in de .md; dit is puur visueel.
-        final displayValue = (!header && _isNumberColumn(slide, col))
-            ? formatTableCellNumber(value, reportLanguage)
-            : value;
-        return Padding(
-          padding: padding,
-          child: _md(
-            context,
-            displayValue,
-            _applyFont(
-              font,
-              TextStyle(
-                fontSize: cellSize,
-                color: expired
-                    ? AppTheme.danger700
-                    : (header ? headerTextColor : textColor),
-                fontWeight: header || expired
-                    ? FontWeight.bold
-                    : FontWeight.normal,
-              ),
-            ),
-            linkColor: header ? headerTextColor : accent,
-            textAlign: _tableAlign(slide, col),
-          ),
-        );
-      }
-
-      final active = editor.activeCell == (row: row, col: col);
-      final style = _applyFont(
-        font,
-        TextStyle(
-          fontSize: cellSize,
-          color: header ? headerTextColor : textColor,
-          fontWeight: header ? FontWeight.bold : FontWeight.normal,
-          height: 1.25,
-        ),
-      );
-      return AnimatedContainer(
-        key: ValueKey('table-edit-cell-$row-$col'),
-        duration: const Duration(milliseconds: 160),
-        curve: Curves.easeOut,
-        decoration: BoxDecoration(
-          color: active
-              ? (header
-                    ? headerBackground.withValues(alpha: 0.92)
-                    : Colors.white.withValues(alpha: 0.96))
-              : (header
-                    ? headerBackground.withValues(alpha: 0.55)
-                    : accent.withValues(alpha: 0.04)),
-          border: Border.all(
-            color: active
-                ? accent
-                : accent.withValues(alpha: header ? 0.25 : 0.14),
-            width: active ? w * 0.0028 : w * 0.001,
-          ),
-          boxShadow: active
-              ? [
-                  BoxShadow(
-                    color: accent.withValues(alpha: 0.28),
-                    blurRadius: w * 0.012,
-                    spreadRadius: w * 0.001,
-                  ),
-                ]
-              : null,
-        ),
-        child: TableEditableCell(
-          editor: editor,
-          row: row,
-          column: col,
-          style: style,
-          pad: 0,
-          contentPadding: padding,
-          caretColor: accent,
-          linkColor: header ? headerTextColor : accent,
-          activeBackgroundColor: Colors.transparent,
-          textAlign: _tableAlign(slide, col),
-        ),
-      );
-    }
-
     TableRow buildRow(
       List<String> row, {
       required bool header,
@@ -210,7 +114,21 @@ class _TablePreview extends StatelessWidget {
           final value = c < row.length ? row[c] : '';
           return TableCell(
             verticalAlignment: TableCellVerticalAlignment.middle,
-            child: cell(value, header: header, row: rowIndex, col: c),
+            child: _cell(
+              context,
+              editor: editor,
+              value: value,
+              header: header,
+              row: rowIndex,
+              col: c,
+              cellSize: cellSize,
+              extraVPad: fit.extraVPad,
+              accent: accent,
+              textColor: textColor,
+              headerTextColor: headerTextColor,
+              headerBackground: headerBackground,
+              today: today,
+            ),
           );
         }),
       );
@@ -244,6 +162,106 @@ class _TablePreview extends StatelessWidget {
       rows: rows,
       colCount: colCount,
       caption: caption,
+    );
+  }
+
+  Widget _cell(
+    BuildContext context, {
+    required TableEditController? editor,
+    required String value,
+    required bool header,
+    required int row,
+    required int col,
+    required double cellSize,
+    required double extraVPad,
+    required Color accent,
+    required Color textColor,
+    required Color headerTextColor,
+    required Color headerBackground,
+    required DateTime? today,
+  }) {
+    final padding = EdgeInsets.symmetric(
+      horizontal: cellSize * kTableCellHPadFactor,
+      vertical: cellSize * kTableCellVPadFactor + extraVPad,
+    );
+    if (editor == null) {
+      final expired = today != null && !header && isPastDateCell(value, today);
+      final displayValue = (!header && _isNumberColumn(slide, col))
+          ? formatTableCellNumber(value, reportLanguage)
+          : value;
+      return Padding(
+        padding: padding,
+        child: _md(
+          context,
+          displayValue,
+          _applyFont(
+            font,
+            TextStyle(
+              fontSize: cellSize,
+              color: expired
+                  ? AppTheme.danger700
+                  : (header ? headerTextColor : textColor),
+              fontWeight: header || expired
+                  ? FontWeight.bold
+                  : FontWeight.normal,
+            ),
+          ),
+          linkColor: header ? headerTextColor : accent,
+          textAlign: _tableAlign(slide, col),
+        ),
+      );
+    }
+
+    final active = editor.activeCell == (row: row, col: col);
+    final style = _applyFont(
+      font,
+      TextStyle(
+        fontSize: cellSize,
+        color: header ? headerTextColor : textColor,
+        fontWeight: header ? FontWeight.bold : FontWeight.normal,
+        height: 1.25,
+      ),
+    );
+    return AnimatedContainer(
+      key: ValueKey('table-edit-cell-$row-$col'),
+      duration: const Duration(milliseconds: 160),
+      curve: Curves.easeOut,
+      decoration: BoxDecoration(
+        color: active
+            ? (header
+                  ? headerBackground.withValues(alpha: 0.92)
+                  : Colors.white.withValues(alpha: 0.96))
+            : (header
+                  ? headerBackground.withValues(alpha: 0.55)
+                  : accent.withValues(alpha: 0.04)),
+        border: Border.all(
+          color: active
+              ? accent
+              : accent.withValues(alpha: header ? 0.25 : 0.14),
+          width: active ? w * 0.0028 : w * 0.001,
+        ),
+        boxShadow: active
+            ? [
+                BoxShadow(
+                  color: accent.withValues(alpha: 0.28),
+                  blurRadius: w * 0.012,
+                  spreadRadius: w * 0.001,
+                ),
+              ]
+            : null,
+      ),
+      child: TableEditableCell(
+        editor: editor,
+        row: row,
+        column: col,
+        style: style,
+        pad: 0,
+        contentPadding: padding,
+        caretColor: accent,
+        linkColor: header ? headerTextColor : accent,
+        activeBackgroundColor: Colors.transparent,
+        textAlign: _tableAlign(slide, col),
+      ),
     );
   }
 

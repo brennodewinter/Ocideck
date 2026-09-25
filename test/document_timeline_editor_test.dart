@@ -213,6 +213,83 @@ void main() {
     );
   });
 
+  testWidgets('een gewone tabel sorteert terug als één Quill-undo', (
+    tester,
+  ) async {
+    const regular = '''
+| Naam | Score |
+| --- | ---: |
+| Ada | 8 |
+| Bob | 9 |
+''';
+    final controller = await pumpEditor(tester, markdown: regular);
+    final before = MarkdownQuillCodec.markdownFromDocument(controller.document);
+
+    await tester.showKeyboard(find.widgetWithText(TextField, 'Naam'));
+    await tester.pump(const Duration(milliseconds: 350));
+    await tester.tap(find.byTooltip('Kolom aflopend sorteren'));
+    await tester.pump(const Duration(milliseconds: 350));
+
+    final sorted = MarkdownQuillCodec.markdownFromDocument(controller.document);
+    expect(sorted.indexOf('Bob'), lessThan(sorted.indexOf('Ada')));
+    expect(controller.hasUndo, isTrue);
+
+    controller.undo();
+    await tester.pump(const Duration(milliseconds: 350));
+    expect(
+      MarkdownQuillCodec.markdownFromDocument(controller.document),
+      before,
+    );
+  });
+
+  testWidgets('meerdere visuele tabellen houden hun controllers gescheiden', (
+    tester,
+  ) async {
+    const multiple = '''
+| Eerste | Rol |
+| --- | --- |
+| Aap | Tester |
+
+Tussenstuk.
+
+| Tweede | Rol |
+| --- | --- |
+| Noot | Bouwer |
+''';
+    final document = await pumpEditor(tester, markdown: multiple);
+    final firstBefore = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Aap'),
+    );
+    final secondBefore = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Noot'),
+    );
+
+    await tester.enterText(find.widgetWithText(TextField, 'Noot'), 'Nootmus');
+    await tester.pump();
+    await tester.pump();
+    final firstAfterSecondEdit = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Aap'),
+    );
+    final secondAfter = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Nootmus'),
+    );
+    expect(firstAfterSecondEdit.controller, same(firstBefore.controller));
+    expect(secondAfter.controller, same(secondBefore.controller));
+
+    await tester.enterText(find.widgetWithText(TextField, 'Aap'), 'Aapje');
+    await tester.pump();
+    await tester.pump();
+    final markdown = MarkdownQuillCodec.markdownFromDocument(document.document);
+    expect(markdown, contains('| Aapje | Tester |'));
+    expect(markdown, contains('| Nootmus | Bouwer |'));
+    expect(
+      tester
+          .widget<TextField>(find.widgetWithText(TextField, 'Nootmus'))
+          .controller,
+      same(secondBefore.controller),
+    );
+  });
+
   testWidgets('ongeldige tijdlijnmarker valt terug op een bewerkbare tabel', (
     tester,
   ) async {

@@ -35,8 +35,6 @@ import '../../services/rehearsal_controller.dart';
 import '../../services/timed_presentation_controller.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/finding_context_score.dart';
-import '../../services/display_window_service.dart'
-    show viewLimitCaptionRowIndex;
 import '../../services/slide_layout_metrics.dart';
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';

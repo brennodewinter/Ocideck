@@ -6,6 +6,13 @@ import '../../utils/table_cell_navigation.dart';
 import '../../utils/table_clipboard.dart';
 import '../editors/editor_text_controller.dart';
 
+/// Ruim genoeg voor echte werkbladen, begrensd voordat klembordinvoer voor
+/// iedere cel een tekstcontroller, focusnode en widget kan laten ontstaan.
+const int kMaxTablePasteCharacters = 250000;
+const int kMaxTablePasteRows = 1000;
+const int kMaxTablePasteColumns = 100;
+const int kMaxTablePasteCells = 10000;
+
 /// De bewerkstaat van één tabel die *in de weergave zelf* wordt ingevuld —
 /// cel voor cel, op de plek waar de tabel straks ook staat, zoals in een
 /// rekenblad.
@@ -397,13 +404,15 @@ class TableEditController extends ChangeNotifier {
   /// rekenbladselectie, CSV, een Markdown-tabel), dan groeit het raster mee en
   /// wordt hij cel voor cel gevuld; anders is het gewoon tekst in deze cel.
   void pasteAt(int r, int c, String text) {
+    if (text.length > kMaxTablePasteCharacters) return;
+    var table = parseClipboardTable(text);
+    if (table != null && !_pasteFitsBudget(table)) return;
     // Een vergrendelde kop niet overschrijven: tabelplak begint op de eerste
     // body-rij, losse tekst in de kop blijft staan.
     if (lockHeader && r == 0) {
-      if (parseClipboardTable(text) != null) pasteAt(1, c, text);
+      if (table != null) pasteAt(1, c, text);
       return;
     }
-    var table = parseClipboardTable(text);
     if (table == null) {
       final ctrl = _cells[r][c];
       final value = ctrl.text;
@@ -440,6 +449,16 @@ class TableEditController extends ChangeNotifier {
       }
     }
     _emit();
+  }
+
+  bool _pasteFitsBudget(List<List<String>> table) {
+    if (table.length > kMaxTablePasteRows) return false;
+    final columns = table.fold<int>(
+      0,
+      (largest, row) => row.length > largest ? row.length : largest,
+    );
+    return columns <= kMaxTablePasteColumns &&
+        table.length * columns <= kMaxTablePasteCells;
   }
 
   void insertRowAt(int at, {bool silent = false}) {

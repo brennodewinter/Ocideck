@@ -2,6 +2,7 @@ import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:ocideck/models/display_window_spec.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/presentation/fullscreen_presenter.dart';
@@ -21,6 +22,7 @@ void main() {
     List<Slide>? slides,
     ValueChanged<Slide>? onSessionEdit,
     AudienceWindowHandle? audience,
+    bool activate = true,
   }) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -35,9 +37,11 @@ void main() {
       ),
     );
     await tester.pump();
-    await tester.tap(find.byTooltip('Tabel bewerken (E)'));
-    await tester.pump();
-    await tester.pump();
+    if (activate) {
+      await tester.tap(find.byTooltip('Tabel bewerken (E)'));
+      await tester.pump();
+      await tester.pump();
+    }
   }
 
   TextEditingController controllerWith(WidgetTester tester, String text) =>
@@ -67,6 +71,35 @@ void main() {
       const TextSelection(baseOffset: 0, extentOffset: 5),
       reason: 'doortypen na activeren hoort de geselecteerde cel te vervangen',
     );
+  });
+
+  testWidgets('een begrensde projectietabel blijft veilig alleen-lezen', (
+    tester,
+  ) async {
+    final edits = <Slide>[];
+    final slide = editableTable().copyWith(
+      tableRows: [
+        ['Kolom', 'Waarde'],
+        ['Zichtbaar', '1'],
+        ['Verborgen', '2'],
+      ],
+      viewLimit: const DisplayWindowSpec(limit: 1),
+    );
+    await openTable(
+      tester,
+      slides: [slide],
+      onSessionEdit: edits.add,
+      activate: false,
+    );
+
+    expect(find.byTooltip('Tabel bewerken (E)'), findsNothing);
+    expect(find.text('Zichtbaar'), findsOneWidget);
+    expect(find.text('Verborgen'), findsNothing);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+    await tester.pump();
+    expect(find.byType(TextField), findsNothing);
+    expect(edits, isEmpty);
   });
 
   testWidgets('typen midden in een cel bewaart cursor en focus', (

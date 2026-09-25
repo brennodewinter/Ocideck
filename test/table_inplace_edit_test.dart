@@ -450,6 +450,19 @@ void main() {
       expect(editor.rows[1][0], contains('losse tekst'));
     });
 
+    test('een raster buiten het plakbudget verandert de tabel niet', () {
+      final before = editor.rows;
+      final tooManyRows = List.generate(
+        kMaxTablePasteRows + 1,
+        (i) => '$i\twaarde',
+      ).join('\n');
+      editor.pasteAt(1, 0, tooManyRows);
+      expect(editor.rows, before);
+
+      editor.pasteAt(1, 0, 'x' * (kMaxTablePasteCharacters + 1));
+      expect(editor.rows, before);
+    });
+
     test('lockHeader bewaart de kop en knipt extra kolommen af', () {
       final locked = TableEditController(
         rows: const [

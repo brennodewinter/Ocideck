@@ -8,8 +8,12 @@ extension _PresenterTable on _FullscreenPresenterState {
   /// Of de huidige dia een tabel is die de auteur in de bouwer als
   /// "bewerkbaar tijdens presenteren" heeft aangemerkt. Alleen dan mag de
   /// live-bewerking aangezet worden (standaard staan tabellen op alleen-lezen).
+  /// Een weergavelimiet is een afgeleide projectie zonder veilige één-op-één
+  /// rijmapping naar de bron; die blijft tijdens presenteren alleen-lezen.
   bool get _currentSlideTableEditable =>
-      _currentSlideIsTable && _currentSlide.tableEditable;
+      _currentSlideIsTable &&
+      _currentSlide.tableEditable &&
+      !(_currentSlide.viewLimit?.isActive ?? false);
 
   void _exitTableEditMode() {
     if (!_tableEditMode) return;
@@ -31,13 +35,8 @@ extension _PresenterTable on _FullscreenPresenterState {
     }
     final slideIndex = _index.clamp(0, widget.slides.length - 1);
     final slide = widget.slides[slideIndex];
-    final allRows = slide.tableRows.where((row) => row.isNotEmpty).toList();
-    final captionIndex = viewLimitCaptionRowIndex(slide, allRows);
-    final editableRows = captionIndex == null
-        ? allRows
-        : allRows.sublist(0, captionIndex);
     final editor = TableEditController(
-      rows: editableRows,
+      rows: slide.tableRows.where((row) => row.isNotEmpty).toList(),
       alignments: slide.tableColumnAlignments,
       onChanged: (rows, alignments) => _applyTableEdit(
         slideIndex: slideIndex,
@@ -65,14 +64,8 @@ extension _PresenterTable on _FullscreenPresenterState {
     if (slideIndex < 0 || slideIndex >= widget.slides.length) return;
     final slide = widget.slides[slideIndex];
     if (slide.type != SlideType.table) return;
-    final previous = slide.tableRows.where((row) => row.isNotEmpty).toList();
-    final captionIndex = viewLimitCaptionRowIndex(slide, previous);
-    final updatedRows = [
-      for (final row in rows) List<String>.from(row),
-      if (captionIndex != null) List<String>.from(previous[captionIndex]),
-    ];
     final updated = slide.copyWith(
-      tableRows: updatedRows,
+      tableRows: [for (final row in rows) List<String>.from(row)],
       tableColumnAlignments: alignments,
     );
     _rebuild(() => _replaceSlide(widget.slides, slideIndex, updated));
