@@ -99,7 +99,9 @@ DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-7f36cc7e.vps.ovh.net}"
 DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de liveverificatie
 # De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
 # serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
-# stuk. Zie wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
+# stuk. De release start de drie handmatige workflows zelf en volgt hun taken;
+# sinds #2194 leveren ze bewust geen automatische PR-statuscontexten meer. Zie
+# wait_gate. Overschrijfbaar via OCIDECK_GATE_TIMEOUT_MIN.
 GATE_TIMEOUT_MIN="${OCIDECK_GATE_TIMEOUT_MIN:-75}"
 # De wachttijd op de release-CI ná de tag (minuten). Die keten duurt ruim twee
 # uur: v0.6.4 2u05 en v0.6.5 2u14 (gate ~12 → Poort ~12 → macOS ~15 naast
@@ -1223,36 +1225,81 @@ ensure_scans_image() {
   publish_scans_image "$image_tag"
 }
 
-# Wacht tot de PR-poort groen is. De combined status wordt pas 'success' als ÁLLE
-# contexts groen zijn — en linux-gate draait de volledige suite per-PR op een
-# capacity-1 serial-runner (~27 min, langer als er iets vóór in de wachtrij staat).
-# Vandaar GATE_TIMEOUT_MIN (75) mét voortgang i.p.v. de oude 30 min die precies op
-# linux-gate stuk liep. Curl-hikjes tellen niet als falen: dan blijven we pollen.
+# De drie releasepoorten zijn sinds b3e182044 bewust alleen handmatig startbaar:
+# lokaal `make check-full` is de primaire poort, deze runs zijn de onafhankelijke
+# Linux-/scannercontrole vóór de tag. Een PR openen maakt daarom geen
+# statuscontexten meer. #2194 bleef toch de lege combined status pollen en kon
+# uitsluitend na 75 minuten stoppen. Start ontbrekende workflows hier zelf en
+# volg hun Forgejo-taken op exact de PR-head.
+gate_task_snapshot() { # gate_task_snapshot SHA
+  local sha="$1"
+  api GET '/actions/tasks?limit=100' 2>/dev/null \
+    | jq -r --arg sha "$sha" '
+        [(.workflow_runs // .tasks // [])[]
+          | select(.head_sha == $sha)
+          | select(.workflow_id == "static-gate.yml"
+              or .workflow_id == "scans.yml"
+              or .workflow_id == "linux-gate.yml")]
+        | group_by(.workflow_id)
+        | map(max_by(.id))[]
+        | "\(.workflow_id)|\(.status)|\(.name)|\(.id)"' 2>/dev/null
+}
+
+ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
+  local sha="$1" pr="$2" snap workflow
+  snap="$(gate_task_snapshot "$sha" || true)"
+  for workflow in static-gate.yml scans.yml linux-gate.yml; do
+    if printf '%s\n' "$snap" | grep -q "^${workflow}|"; then
+      continue
+    fi
+    api POST "/actions/workflows/$workflow/dispatches" \
+      -H 'Content-Type: application/json' \
+      -d "$(jq -n --arg r "$BRANCH" '{ref:$r}')" -o /dev/null \
+      || die "kon $workflow voor PR #$pr niet starten — niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
+    log "$workflow gestart op $BRANCH (head ${sha:0:10})."
+  done
+}
+
+# linux-gate draait de volledige suite op de capacity-1 serial-runner (~27 min,
+# langer als er iets vóór in de wachtrij staat). Vandaar GATE_TIMEOUT_MIN (75)
+# mét voortgang. Een geaccepteerde dispatch die na vijf minuten nog geen taak
+# opleverde is een registratieprobleem, geen reden om de overige zeventig
+# minuten uit te zitten. Losse API-hikjes binnen dat venster blijven zacht.
 wait_gate() { # wait_gate SHA PR_NUMBER
   local sha="$1" pr="$2"
   STEP="poort bewaken"
   local polls=$(( GATE_TIMEOUT_MIN * 2 ))   # elke iteratie ~30s
-  log "Wachten op de poort (static-gate, scans, linux-gate) — max ${GATE_TIMEOUT_MIN} min."
+  ensure_gate_tasks "$sha" "$pr"
+  log "Wachten op de handmatige poorten (static-gate, scans, linux-gate) — max ${GATE_TIMEOUT_MIN} min."
   log "linux-gate draait de volledige suite op de serial-runner; dat duurt het langst."
-  local st="" resp="" i
+  local snap="" count=0 success=0 failed="" i workflow line
   for i in $(seq 1 "$polls"); do
-    resp="$(api GET "/commits/$sha/status" 2>/dev/null || true)"
-    st="$(printf '%s' "$resp" | jq -r '.state' 2>/dev/null || true)"
-    [ -n "$st" ] || st="pending"
-    case "$st" in
-      success) break ;;
-      failure|error) die "poort faalde op $sha — zie PR #$pr. Niets getagd. Herstel en hervat met: scripts/release_auto.sh --resume $TAG" ;;
-    esac
+    snap="$(gate_task_snapshot "$sha" || true)"
+    count="$(printf '%s\n' "$snap" | grep -c '^[^|]*|' || true)"
+    success="$(printf '%s\n' "$snap" | awk -F'|' '$2 == "success" { n++ } END { print n+0 }')"
+    failed="$(printf '%s\n' "$snap" | awk -F'|' '$2 ~ /^(failure|error|cancelled)$/ { print }')"
+    if [ -n "$failed" ]; then
+      printf '%s\n' "$failed" | awk -F'|' '{ printf "     %s: %s (%s)\n", $1, $2, $3 }' >&2
+      die "minstens één handmatige poort faalde op $sha — zie PR #$pr. Niets getagd. Herstel en hervat met: scripts/release_auto.sh --resume $TAG"
+    fi
+    [ "$count" -eq 3 ] && [ "$success" -eq 3 ] && break
+    if [ "$count" -lt 3 ] && [ "$i" -ge 10 ]; then
+      die "niet alle handmatige poorten zijn binnen vijf minuten als taak geregistreerd voor $sha — zie PR #$pr. Niets getagd. Hervat later met: scripts/release_auto.sh --resume $TAG"
+    fi
     if [ $(( (i - 1) % 6 )) -eq 0 ]; then
-      printf '%s' "$resp" \
-        | jq -r '.statuses[]? | (.status // .state) as $s | select($s != "success")
-                  | "     wacht op \(.context): \(.description // $s)"' \
-        2>/dev/null | sort -u || true
+      for workflow in static-gate.yml scans.yml linux-gate.yml; do
+        line="$(printf '%s\n' "$snap" | grep "^${workflow}|" | head -1 || true)"
+        if [ -z "$line" ]; then
+          printf '     wacht op %s: taakregistratie\n' "$workflow"
+        elif [ "$(printf '%s' "$line" | cut -d'|' -f2)" != "success" ]; then
+          printf '     wacht op %s: %s\n' "$workflow" "$(printf '%s' "$line" | cut -d'|' -f2)"
+        fi
+      done
       log "… $(( (i - 1) / 2 )) min verstreken"
     fi
     sleep 30
   done
-  [ "$st" = "success" ] \
+  [ "$count" -eq 3 ] && [ "$success" -eq 3 ] \
     || die "poort werd niet groen binnen ${GATE_TIMEOUT_MIN} min — zie PR #$pr. Hervat later met: scripts/release_auto.sh --resume $TAG"
   log "Poort groen."
 }
