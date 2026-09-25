@@ -206,8 +206,6 @@ class TableEditController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _emitAndRebuild() => _emit();
-
   /// Vraagt de opbouw om cel ([r], [c]) te focussen zodra ze bestaat. De
   /// weergave haalt dit op met [takePendingFocus].
   void _focusAfterRebuild(int r, int c) {
@@ -435,13 +433,13 @@ class TableEditController extends ChangeNotifier {
       for (var j = 0; j < table[i].length; j++) {
         if (c + j >= colCount) break;
         final ctrl = _cells[r + i][c + j];
-        // Zonder tussentijdse melding; één [_emitAndRebuild] sluit het af.
+        // Zonder tussentijdse melding; één [_emit] sluit het af.
         ctrl.removeTextListener(_emit);
         ctrl.text = table[i][j];
         ctrl.addTextListener(_emit);
       }
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   void insertRowAt(int at, {bool silent = false}) {
@@ -457,7 +455,7 @@ class TableEditController extends ChangeNotifier {
         final row = active.row >= index ? active.row + 1 : active.row;
         _retainActiveAfterStructure((row: row, col: active.col));
       }
-      _emitAndRebuild();
+      _emit();
     }
   }
 
@@ -480,7 +478,7 @@ class TableEditController extends ChangeNotifier {
           : (active.row == r ? (r - 1).clamp(1, rowCount - 1) : active.row);
       _retainActiveAfterStructure((row: row, col: active.col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   void insertColumnAt(int at, {bool silent = false}) {
@@ -498,7 +496,7 @@ class TableEditController extends ChangeNotifier {
         final col = active.col >= index ? active.col + 1 : active.col;
         _retainActiveAfterStructure((row: active.row, col: col));
       }
-      _emitAndRebuild();
+      _emit();
     }
   }
 
@@ -519,7 +517,7 @@ class TableEditController extends ChangeNotifier {
           : (active.col == c ? c.clamp(0, colCount - 1) : active.col);
       _retainActiveAfterStructure((row: active.row, col: col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   /// Verplaatst rij [r] met [delta] (−1 omhoog, +1 omlaag). De koprij blijft de
@@ -536,7 +534,7 @@ class TableEditController extends ChangeNotifier {
           : (active.row == target ? r : active.row);
       _retainActiveAfterStructure((row: row, col: active.col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   void moveColumn(int c, int delta) {
@@ -557,7 +555,7 @@ class TableEditController extends ChangeNotifier {
           : (active.col == target ? c : active.col);
       _retainActiveAfterStructure((row: active.row, col: col));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   /// Vervangt het hele raster, bijvoorbeeld na een kolomsort. De oude
@@ -574,7 +572,7 @@ class TableEditController extends ChangeNotifier {
         col: active.col.clamp(0, colCount - 1),
       ));
     }
-    _emitAndRebuild();
+    _emit();
   }
 
   void setAlignment(int c, TableAlign align) {
@@ -585,7 +583,7 @@ class TableEditController extends ChangeNotifier {
     next[c] = align;
     _alignments = next;
     _retainActiveAfterStructure(_activeCell);
-    _emitAndRebuild();
+    _emit();
   }
 
   void _disposeInternals() {

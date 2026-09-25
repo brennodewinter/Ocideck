@@ -75,9 +75,7 @@ class DocumentMarkdownView extends StatelessWidget {
     this.chartTheme,
     this.themeProfile,
     this.onEditChart,
-    this.onEditTable,
     this.tableEditController,
-    this.tableEditOrdinal = 0,
     this.onSortTableColumn,
     this.tableToolbarExtras,
     this.tableEditorFor,
@@ -152,15 +150,8 @@ class DocumentMarkdownView extends StatelessWidget {
   /// de editor de juiste fence in de bron kan vervangen. `null` → geen bewerking.
   final void Function(int chartOrdinal, String chartBlock)? onEditChart;
 
-  /// Dubbelklik op een tabel. `null` op alleen-lezen oppervlakken; editor
-  /// gebruikt [tableEditorFor] / [tableEditController].
-  final void Function(int tableOrdinal, List<String> tableRows)? onEditTable;
-
-  /// Ter plekke invulbaar in dezelfde gerenderde tabel. `null` = alleen-lezen.
-  /// Geldt voor [tableEditOrdinal]; andere tabellen in het document blijven
-  /// gerenderd.
+  /// De eerste tabel ter plekke invulbaar. `null` = alleen-lezen.
   final TableEditController? tableEditController;
-  final int tableEditOrdinal;
   final void Function(int column, TableSortIntent intent)? onSortTableColumn;
 
   /// Extra knoppen op de tabelwerkbalk (bijv. getalnotatie op een dia).
@@ -168,7 +159,7 @@ class DocumentMarkdownView extends StatelessWidget {
   tableToolbarExtras;
 
   /// Bron-weergave: elke GFM-tabel ter plekke invulbaar. Wint van
-  /// [tableEditController] / [tableEditOrdinal].
+  /// [tableEditController].
   final TableEditController? Function(int ordinal)? tableEditorFor;
 
   /// Tekent een `---` niet als streep.
