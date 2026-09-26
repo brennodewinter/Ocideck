@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../models/git_settings.dart';
 import '../../../services/git/git_forge.dart';
+import '../../../services/git/git_forge_factory.dart';
 import '../../../state/git_provider.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/log.dart';
