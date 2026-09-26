@@ -11,13 +11,16 @@ All notable changes to OciDeck are documented in this file.
 ### Added
 
 - Een versiecheck meldt subtiel wanneer er een nieuwere OciDeck-release is:
-  het versienummer op het openscherm krijgt dan een indicator die bij hover de
-  nieuwe versie noemt en de releasepagina opent. De automatische controle
-  staat standaard **uit** — uitgaand verkeer loopt alleen waar de gebruiker
-  het aanzet (Instellingen → Over → "Nieuwe versies"), maximaal één ping per
-  dag naar de release-index van de forge. Een handmatige "Controleer nu" op
-  datzelfde tabblad is altijd beschikbaar. Op web is er geen controle: de
-  webversie draait al de gedeployde release.
+  het versienummer op het openscherm krijgt dan een amber indicator die bij
+  hover de nieuwe versie noemt en de releasepagina opent. Zolang er nog nooit
+  een controle is geslaagd staat er een grijs lampje — zo zie je dat die
+  informatie ontbreekt — waarvan een tik het Over-tabblad opent waar de
+  controle in te stellen is. De automatische controle staat standaard **uit**
+  — uitgaand verkeer loopt alleen waar de gebruiker het aanzet
+  (Instellingen → Over → "Nieuwe versies"), maximaal één ping per dag naar de
+  release-index van de forge. Een handmatige "Controleer nu" op datzelfde
+  tabblad is altijd beschikbaar. Op web is er geen controle: de webversie
+  draait al de gedeployde release.
 - De standaard ingeschakelde Marp-controle laat in de Markdown-modus en bij
   Presentatiegegevens zien of een deck in Marp hetzelfde blijft, met regels om
   bekende afwijkingen terug te vinden. Opslaan waarschuwt bij harde fouten of
