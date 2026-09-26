@@ -2,9 +2,12 @@ import 'dart:convert';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/state/settings_provider.dart';
+import 'package:ocideck/state/storage_status_provider.dart';
+import 'package:ocideck/widgets/connection_status.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -79,11 +82,13 @@ void main() {
   Future<void> openSettings(
     WidgetTester tester, {
     SettingsSection section = SettingsSection.storage,
+    List<Override> overrides = const [],
   }) async {
     await tester.binding.setSurfaceSize(const Size(1500, 1100));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(
       ProviderScope(
+        overrides: overrides,
         child: MaterialApp(
           home: Scaffold(
             body: Consumer(
@@ -569,6 +574,41 @@ void main() {
       find.widgetWithText(TextField, 'Server-URL'),
       findsOneWidget,
       reason: 'precies één paneel open, dat van de bovenste verbinding',
+    );
+  });
+
+  testWidgets('de verbindingsrij toont de live-status als stip', (
+    tester,
+  ) async {
+    // Eén lokale map (altijd bereikbaar) en één remote die de nep-probe
+    // onbereikbaar vindt: twee rijen, twee kleuren uit dezelfde provider als
+    // het lampje op het openscherm.
+    seedConnections([
+      local('l1', 'Schijf', '/tmp/decks'),
+      webdav('w1', 'Kantoor', 'cloud.example'),
+    ]);
+    await openSettings(
+      tester,
+      overrides: [
+        storageProbeProvider.overrideWithValue(
+          (c, secrets) async => c.id != 'w1',
+        ),
+      ],
+    );
+
+    final dots = tester.widgetList<StatusDot>(find.byType(StatusDot)).toList();
+    // De lokale map staat meteen groen; de remote is geprobed en rood.
+    expect(
+      dots.map((d) => d.level),
+      containsAllInOrder([StatusLevel.ok, StatusLevel.unreachable]),
+    );
+    expect(
+      find.byWidgetPredicate(
+        (w) =>
+            w is Tooltip &&
+            (w.message ?? '').contains('Kantoor: niet bereikbaar'),
+      ),
+      findsOneWidget,
     );
   });
 }
