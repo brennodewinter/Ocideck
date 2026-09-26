@@ -136,13 +136,16 @@ void main() {
   );
 
   testWidgets(
-    'het openscherm toont het versienummer, en een tik erop opent Over OciDeck',
+    'het openscherm toont het versienummer; niet-gecheckt lampje opent Over OciDeck',
     (tester) async {
       // Vóór deze tag stond het versienummer nergens op het openscherm — een
       // melder moest drie klikken diep in Instellingen om op te zoeken welke
       // versie SECURITY.md vraagt te vermelden. De tag woont nu in de
       // voettekstband onderaan, die in de nauwe (smal-scherm) layout onder de
       // kolommen schuift — vandaar eerst zichtbaar scrollen vóór de tik.
+      // Het nummer zelf is bewust geen knop (daarvoor staat 'Instellingen'
+      // ernaast); het grijze lampje zonder check-uitslag wijst naar het
+      // Over-tabblad waar de controle in te stellen is.
       await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
       await tester.pumpAndSettle();
 
@@ -152,6 +155,16 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tap(versionFinder);
+      await tester.pumpAndSettle();
+      expect(find.text('Over OciDeck'), findsNothing);
+
+      final badgeFinder = find.byWidgetPredicate(
+        (w) =>
+            w is Icon &&
+            w.icon == Icons.arrow_circle_up_outlined &&
+            w.size == 11,
+      );
+      await tester.tap(badgeFinder);
       await tester.pumpAndSettle();
 
       expect(find.text('Over OciDeck'), findsOneWidget);
