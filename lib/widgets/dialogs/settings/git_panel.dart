@@ -4,6 +4,8 @@
 // gedeelde `part`-scope. Nu een gewone widget met dezelfde expliciete API als
 // [S3Panel] en [WebdavPanel]; het is een ConsumerStatefulWidget omdat het de
 // detectie van native git leest.
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,6 +46,53 @@ class GitPanel extends ConsumerStatefulWidget {
 
 class _GitPanelState extends ConsumerState<GitPanel> {
   GitForm get _form => widget.form;
+
+  /// Uitstelklok voor de automatische hertest: een ingestelde verbinding
+  /// wordt getest bij het openen én nadat de velden tot rust zijn gekomen —
+  /// "niet getest" mocht een kreet zijn, geen permanente staat.
+  Timer? _retestTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    for (final field in [
+      _form.url,
+      _form.owner,
+      _form.repo,
+      _form.branch,
+      _form.token.field,
+    ]) {
+      field.addListener(_scheduleRetest);
+    }
+    _scheduleRetest();
+  }
+
+  @override
+  void dispose() {
+    _retestTimer?.cancel();
+    for (final field in [
+      _form.url,
+      _form.owner,
+      _form.repo,
+      _form.branch,
+      _form.token.field,
+    ]) {
+      field.removeListener(_scheduleRetest);
+    }
+    super.dispose();
+  }
+
+  /// Hertest 1,5 seconde na de laatste wijziging — kort genoeg om live te
+  /// voelen, ruim genoeg om niet per aanslag te pingen. Alleen testen wat
+  /// compleet genoeg is om tegen aan te schrijven.
+  void _scheduleRetest() {
+    _retestTimer?.cancel();
+    _retestTimer = Timer(const Duration(milliseconds: 1500), () {
+      if (mounted && _form.config.isConfigured && !_form.testing) {
+        _testConnection();
+      }
+    });
+  }
 
   void _update(VoidCallback fn) {
     setState(fn);
@@ -92,8 +141,10 @@ class _GitPanelState extends ConsumerState<GitPanel> {
                 child: Text(l10n.d('GitLab')),
               ),
             ],
-            onChanged: (v) =>
-                _update(() => _form.provider = v ?? GitProvider.gitea),
+            onChanged: (v) {
+              _update(() => _form.provider = v ?? GitProvider.gitea);
+              _scheduleRetest();
+            },
           ),
         ),
         SettingsTextField(
@@ -124,12 +175,15 @@ class _GitPanelState extends ConsumerState<GitPanel> {
         _tokenScopeHelp(l10n, _form.provider),
         CheckboxListTile(
           value: _form.trusted,
-          onChanged: (v) => _update(() {
-            _form.trusted = v ?? false;
-            // De vlag bepaalt of de host überhaupt gebeld mag worden, dus een
-            // eerdere uitslag zegt niets meer.
-            _form.clearTestResult();
-          }),
+          onChanged: (v) {
+            _update(() {
+              _form.trusted = v ?? false;
+              // De vlag bepaalt of de host überhaupt gebeld mag worden, dus een
+              // eerdere uitslag zegt niets meer.
+              _form.clearTestResult();
+            });
+            _scheduleRetest();
+          },
           contentPadding: EdgeInsets.zero,
           controlAffinity: ListTileControlAffinity.leading,
           dense: true,

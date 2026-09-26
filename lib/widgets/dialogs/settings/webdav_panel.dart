@@ -4,6 +4,8 @@
 // gedeelde `part`-scope, waar het bij élk veld van de andere parts kon —
 // inclusief de inloggegevens van de andere bronnen. Nu een gewone widget met
 // dezelfde expliciete API als [S3Panel].
+import 'dart:async';
+
 import 'package:material_ui/material_ui.dart';
 
 import '../../../l10n/app_localizations.dart';
@@ -43,6 +45,51 @@ class WebdavPanel extends StatefulWidget {
 class _WebdavPanelState extends State<WebdavPanel> {
   WebdavForm get _form => widget.form;
 
+  /// Uitstelklok voor de automatische hertest: een ingestelde verbinding
+  /// wordt getest bij het openen én nadat de velden tot rust zijn gekomen —
+  /// "niet getest" mocht een kreet zijn, geen permanente staat.
+  Timer? _retestTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    for (final field in [
+      _form.url,
+      _form.user,
+      _form.root,
+      _form.password.field,
+    ]) {
+      field.addListener(_scheduleRetest);
+    }
+    _scheduleRetest();
+  }
+
+  @override
+  void dispose() {
+    _retestTimer?.cancel();
+    for (final field in [
+      _form.url,
+      _form.user,
+      _form.root,
+      _form.password.field,
+    ]) {
+      field.removeListener(_scheduleRetest);
+    }
+    super.dispose();
+  }
+
+  /// Hertest 1,5 seconde na de laatste wijziging — kort genoeg om live te
+  /// voelen, ruim genoeg om niet per aanslag te pingen. Alleen testen wat
+  /// compleet genoeg is om tegen aan te schrijven.
+  void _scheduleRetest() {
+    _retestTimer?.cancel();
+    _retestTimer = Timer(const Duration(milliseconds: 1500), () {
+      if (mounted && _form.server.isConfigured && !_form.testing) {
+        _testConnection();
+      }
+    });
+  }
+
   void _update(VoidCallback fn) {
     setState(fn);
     widget.onChanged();
@@ -81,6 +128,7 @@ class _WebdavPanelState extends State<WebdavPanel> {
             _form.testOk = null;
             _form.testMessage = null;
           });
+          _scheduleRetest();
         },
       ),
     );
@@ -156,11 +204,14 @@ class _WebdavPanelState extends State<WebdavPanel> {
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           value: _form.trusted,
-          onChanged: (value) => _update(() {
-            _form.trusted = value;
-            _form.testOk = null;
-            _form.testMessage = null;
-          }),
+          onChanged: (value) {
+            _update(() {
+              _form.trusted = value;
+              _form.testOk = null;
+              _form.testMessage = null;
+            });
+            _scheduleRetest();
+          },
         ),
         ConnectionTestSection(
           state: _form,
