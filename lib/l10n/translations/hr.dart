@@ -1631,6 +1631,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  '{naam}: bereikbaar': '{naam}: dostupan',
+  '{naam}: wordt gecontroleerd…': '{naam}: provjerava se…',
+  '{naam}: niet bereikbaar': '{naam}: nedostupan',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nove verzije još nisu provjeravane — dodirni za postavljanje provjere.',
   'Nieuwe versies': 'Nove verzije',

@@ -54,6 +54,7 @@ import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/privacy_disposition.dart';
+import '../connection_status.dart';
 import '../editors/advanced_section.dart';
 import '../document_page_chrome.dart';
 import '../language_flag.dart';

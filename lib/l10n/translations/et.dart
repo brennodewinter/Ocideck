@@ -1620,6 +1620,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  '{naam}: bereikbaar': '{naam}: kättesaadav',
+  '{naam}: wordt gecontroleerd…': '{naam}: kontrollimine…',
+  '{naam}: niet bereikbaar': '{naam}: kättesaamatu',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Uusi versioone pole veel kontrollitud — puuduta kontrolli seadistamiseks.',
   'Nieuwe versies': 'Uued versioonid',

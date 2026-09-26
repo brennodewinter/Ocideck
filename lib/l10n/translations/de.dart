@@ -667,6 +667,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  '{naam}: bereikbaar': '{naam}: erreichbar',
+  '{naam}: wordt gecontroleerd…': '{naam}: wird geprüft…',
+  '{naam}: niet bereikbaar': '{naam}: nicht erreichbar',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Noch nicht auf neue Versionen geprüft — tippen, um die Prüfung einzurichten.',
   'Nieuwe versies': 'Neue Versionen',

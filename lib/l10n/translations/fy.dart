@@ -667,6 +667,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  '{naam}: bereikbaar': '{naam}: berikber',
+  '{naam}: wordt gecontroleerd…': '{naam}: wurdt kontrolearre…',
+  '{naam}: niet bereikbaar': '{naam}: net berikber',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Noch net op nije ferzjes kontrolearre — tik om de kontrôle yn te stellen.',
   'Nieuwe versies': 'Nije ferzjes',

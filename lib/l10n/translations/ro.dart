@@ -1643,6 +1643,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  '{naam}: bereikbaar': '{naam}: accesibil',
+  '{naam}: wordt gecontroleerd…': '{naam}: se verifică…',
+  '{naam}: niet bereikbaar': '{naam}: inaccesibil',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nu s-a verificat încă dacă există versiuni noi — atinge pentru a configura verificarea.',
   'Nieuwe versies': 'Versiuni noi',

@@ -666,6 +666,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '{naam}: bereikbaar': '{naam}: alkanzabel',
+  '{naam}: wordt gecontroleerd…': '{naam}: ta kontrolando…',
+  '{naam}: niet bereikbaar': '{naam}: no alkanzabel',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Ainda no a kontrolá pa versionnan nobo — toka pa instala e kontrol.',
   'Nieuwe versies': 'Vershonnan nobo',

@@ -1627,6 +1627,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '{naam}: bereikbaar': '{naam}: tavoitettavissa',
+  '{naam}: wordt gecontroleerd…': '{naam}: tarkistetaan…',
+  '{naam}: niet bereikbaar': '{naam}: ei tavoitettavissa',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Uusia versioita ei ole vielä tarkistettu — napauta määrittääksesi tarkistuksen.',
   'Nieuwe versies': 'Uudet versiot',

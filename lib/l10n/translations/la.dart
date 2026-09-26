@@ -1642,6 +1642,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '{naam}: bereikbaar': '{naam}: pervius',
+  '{naam}: wordt gecontroleerd…': '{naam}: probatur…',
+  '{naam}: niet bereikbaar': '{naam}: non pervius',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nondum de versionibus novis quaesitum est — tange ut quaestionem instituas.',
   'Nieuwe versies': 'Versiones novae',

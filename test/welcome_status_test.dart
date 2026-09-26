@@ -8,11 +8,14 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/ai_settings.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
+import 'package:ocideck/models/storage_connection.dart';
+import 'package:ocideck/models/webdav_settings.dart';
 import 'package:ocideck/services/ai_client_service.dart';
 import 'package:ocideck/services/ai_security_gate.dart';
 import 'package:ocideck/state/ai_status_provider.dart';
 import 'package:ocideck/state/elearning_provider.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
+import 'package:ocideck/state/storage_status_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Nep-transport: nooit netwerk, alleen een programmeerbare uitkomst voor
@@ -46,11 +49,30 @@ Finder _tip(String prefix) => find.byWidgetPredicate(
   (w) => w is Tooltip && (w.message ?? '').startsWith(prefix),
 );
 
+/// Nep-probe voor de opslaglampjes: de uitkomst is een parameter, nooit
+/// netwerk. `calls` bewijst of een verbinding überhaupt getest is.
+class _StorageProbe {
+  _StorageProbe(this.result);
+
+  final bool result;
+  final calls = <String>[];
+
+  Future<bool> call(StorageConnection c, dynamic secrets) async {
+    calls.add(c.id);
+    return result;
+  }
+}
+
+Map<String, Object> _connectionPrefs(List<StorageConnection> connections) => {
+  'storageConnections': StorageConnection.encodeList(connections),
+};
+
 Future<void> _pumpWelcome(
   WidgetTester tester, {
   Map<String, Object> prefs = const {},
   bool elearningEnabled = false,
   OciServeState? ociServeState,
+  _StorageProbe? storageProbe,
 }) async {
   // Consent al geaccepteerd, anders staat _ConsentWelcomePane voor het
   // welkomscherm (met ook een "Welkom bij OciDeck"-titel — valkuil).
@@ -69,6 +91,10 @@ Future<void> _pumpWelcome(
         elearningEnabledProvider.overrideWithValue(elearningEnabled),
         if (ociServeState != null)
           ociServeProvider.overrideWith(() => _FixedOciServe(ociServeState)),
+        if (storageProbe != null)
+          storageProbeProvider.overrideWithValue(
+            (c, secrets) => storageProbe.call(c, secrets),
+          ),
       ],
       child: const OciDeckApp(),
     ),
@@ -165,5 +191,84 @@ void main() {
 
       expect(_tip('eLearning:'), findsNothing);
     });
+
+    testWidgets('lokale opslag → meteen groen, zonder probe', (tester) async {
+      final probe = _StorageProbe(true);
+      await _pumpWelcome(
+        tester,
+        prefs: _connectionPrefs([
+          const LocalConnection(id: 'l1', name: 'Schijf', path: '/tmp/decks'),
+        ]),
+        storageProbe: probe,
+      );
+
+      expect(_tip('Schijf: bereikbaar'), findsOneWidget);
+      expect(probe.calls, isEmpty);
+    });
+
+    testWidgets('remote opslag + probe geslaagd → groen lampje op naam', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        prefs: _connectionPrefs([
+          const WebdavConnection(
+            id: 'w1',
+            name: 'Kantoor',
+            server: WebdavServer(
+              baseUrl: 'https://cloud.example',
+              username: 'aisha',
+            ),
+          ),
+        ]),
+        storageProbe: _StorageProbe(true),
+      );
+
+      expect(_tip('Kantoor: bereikbaar'), findsOneWidget);
+    });
+
+    testWidgets('remote opslag + probe mislukt → niet-bereikbaar lampje', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        prefs: _connectionPrefs([
+          const WebdavConnection(
+            id: 'w1',
+            name: 'Kantoor',
+            server: WebdavServer(
+              baseUrl: 'https://cloud.example',
+              username: 'aisha',
+            ),
+          ),
+        ]),
+        storageProbe: _StorageProbe(false),
+      );
+
+      expect(_tip('Kantoor: niet bereikbaar'), findsOneWidget);
+    });
+
+    testWidgets(
+      'remote opslag zonder naam → afgeleide omschrijving als label',
+      (tester) async {
+        await _pumpWelcome(
+          tester,
+          prefs: _connectionPrefs([
+            const WebdavConnection(
+              id: 'w1',
+              name: '',
+              server: WebdavServer(
+                baseUrl: 'https://cloud.example',
+                username: 'aisha',
+              ),
+            ),
+          ]),
+          storageProbe: _StorageProbe(true),
+        );
+
+        // fallbackLabel is de host — zelfde weergave als het opslag-tabblad.
+        expect(_tip('cloud.example: bereikbaar'), findsOneWidget);
+      },
+    );
   });
 }

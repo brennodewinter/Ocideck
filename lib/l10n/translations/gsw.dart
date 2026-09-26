@@ -1630,6 +1630,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '{naam}: bereikbaar': '{naam}: erreichbar',
+  '{naam}: wordt gecontroleerd…': '{naam}: wird prüeft…',
+  '{naam}: niet bereikbaar': '{naam}: nöd erreichbar',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nonig uf nöji Versione prüeft — tippe zum d Prüefig iiriche.',
   'Nieuwe versies': 'Nöji Versione',

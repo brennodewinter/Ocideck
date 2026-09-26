@@ -1642,6 +1642,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  '{naam}: bereikbaar': '{naam}: доступний',
+  '{naam}: wordt gecontroleerd…': '{naam}: перевіряється…',
+  '{naam}: niet bereikbaar': '{naam}: недоступний',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Наявність нових версій ще не перевірялася — торкніться, щоб налаштувати перевірку.',
   'Nieuwe versies': 'Нові версії',

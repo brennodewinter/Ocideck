@@ -1633,6 +1633,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  '{naam}: bereikbaar': '{naam}: dostupný',
+  '{naam}: wordt gecontroleerd…': '{naam}: kontroluje sa…',
+  '{naam}: niet bereikbaar': '{naam}: nedostupný',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nové verzie sa zatiaľ nekontrolovali — klepnutím kontrolu nastavíte.',
   'Nieuwe versies': 'Nové verzie',

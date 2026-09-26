@@ -1627,6 +1627,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  '{naam}: bereikbaar': '{naam}: tilgængelig',
+  '{naam}: wordt gecontroleerd…': '{naam}: kontrolleres…',
+  '{naam}: niet bereikbaar': '{naam}: ikke tilgængelig',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Der er endnu ikke søgt efter nye versioner — tryk for at indstille tjekket.',
   'Nieuwe versies': 'Nye versioner',

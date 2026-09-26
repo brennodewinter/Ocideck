@@ -664,6 +664,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  '{naam}: bereikbaar': '{naam}: raggiungibile',
+  '{naam}: wordt gecontroleerd…': '{naam}: controllo in corso…',
+  '{naam}: niet bereikbaar': '{naam}: non raggiungibile',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nessun controllo delle nuove versioni ancora eseguito — tocca per configurarlo.',
   'Nieuwe versies': 'Nuove versioni',

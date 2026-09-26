@@ -9,9 +9,7 @@ import '../services/git/deck_mirror.dart';
 import '../services/git/git_cli.dart';
 import '../services/git/git_cli_factory.dart';
 import '../services/git/git_forge.dart';
-import '../services/git/gitea_forge.dart';
-import '../services/git/github_forge.dart';
-import '../services/git/gitlab_forge.dart';
+import '../services/git/git_forge_factory.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/git/native_git_mirror_factory.dart';
 import '../services/git/outbox.dart';
@@ -61,20 +59,6 @@ final gitForgeProvider = FutureProvider.family<GitForge?, String>((
   ref.onDispose(forge.close);
   return forge;
 });
-
-/// Bouw de adapter die bij [config] hoort.
-///
-/// Losstaand van [gitForgeProvider] omdat de settings-dialoog een verbinding
-/// moet kunnen testen die nog niet is opgeslagen — er is dan geen
-/// connectionId om een provider op te draaien. De aanroeper sluit hem zelf.
-GitForge createGitForge({
-  required GitRepoConfig config,
-  required String token,
-}) => switch (config.provider) {
-  GitProvider.gitea => GiteaForge(config: config, token: token),
-  GitProvider.github => GitHubForge(config: config, token: token),
-  GitProvider.gitlab => GitLabForge(config: config, token: token),
-};
 
 /// Hoeveel decks er over alle git-verbindingen samen nog in een wachtrij
 /// staan.

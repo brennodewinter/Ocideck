@@ -1627,6 +1627,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  '{naam}: bereikbaar': '{naam}: dosegljiv',
+  '{naam}: wordt gecontroleerd…': '{naam}: preverjanje…',
+  '{naam}: niet bereikbaar': '{naam}: nedosegljiv',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Novih različic še ni bilo preverjenih — tapni za nastavitev preverjanja.',
   'Nieuwe versies': 'Nove različice',

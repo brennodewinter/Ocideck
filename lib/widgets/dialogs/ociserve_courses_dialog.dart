@@ -9,6 +9,7 @@ import '../../state/tabs_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/image_limits.dart';
 import '../../utils/log.dart';
+import '../connection_status.dart';
 import 'ociserve_account_avatar.dart';
 import 'ociserve_bookings_view.dart';
 import 'ociserve_course_summary.dart';
@@ -22,6 +23,7 @@ import 'ociserve_offerings_view.dart';
 part 'parts/ociserve_courses_dialog_privacy.dart';
 part 'parts/ociserve_courses_dialog_evidence.dart';
 part 'parts/ociserve_courses_dialog_courses.dart';
+part 'parts/ociserve_courses_dialog_status.dart';
 
 class OciServeCoursesDialog extends ConsumerStatefulWidget {
   const OciServeCoursesDialog({super.key});
@@ -171,6 +173,7 @@ class _OciServeCoursesDialogState extends ConsumerState<OciServeCoursesDialog> {
                       children: [
                         _header(theme, palette, memberships, compact),
                         Expanded(child: _body(context.l10n, theme, palette)),
+                        _OciServeConnectionFooter(onReload: _load),
                       ],
                     ),
                   ),
