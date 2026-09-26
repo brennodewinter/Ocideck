@@ -31,6 +31,7 @@ import '../../../../utils/image_signature.dart';
 import '../../../../utils/markdown_blocks.dart';
 import '../../models/document_conversion.dart';
 import '../../utils/archive_utils.dart';
+import '../../utils/document_markdown.dart';
 import '../../utils/import_budget.dart';
 import '../../utils/safe_extensions.dart';
 import '../../utils/xml_utils.dart';
@@ -72,7 +73,7 @@ DocumentConversion convertDocxDetailed(
     _emitBlock(ctx, child, buf, indent: '');
   }
   return DocumentConversion(
-    markdown: _trimTrailingBlank(buf.toString()),
+    markdown: finishDocumentMarkdown(buf.toString()),
     images: ctx.images,
     notImported: ctx.notImported,
     style: _extractDocxStyle(ctx),
@@ -166,13 +167,7 @@ void _emitTable(_DocxContext ctx, XmlElement tbl, StringBuffer buf) {
   }
   if (rows.isEmpty) return;
 
-  final header = rows.first;
-  final body = rows.length > 1 ? rows.sublist(1) : const <List<String>>[];
-  buf.writeln('| ${header.join(' | ')} |');
-  buf.writeln('| ${header.map((_) => '---').join(' | ')} |');
-  for (final row in body) {
-    buf.writeln('| ${row.join(' | ')} |');
-  }
+  writeDocumentMarkdownTable(buf, rows);
 }
 
 String _cellText(_DocxContext ctx, XmlElement tc) {
@@ -216,7 +211,7 @@ void _walkInline(
       buf.write(prefix);
       for (final child in el.children) {
         if (child is XmlText) {
-          buf.write(_escapeMarkdown(child.value));
+          buf.write(escapeDocumentMarkdown(child.value));
         } else if (child is XmlElement) {
           _walkRunChild(ctx, child, buf, bold: b, italic: i, strike: s);
         }
@@ -239,7 +234,7 @@ void _walkInline(
         buf.write(text);
       }
     case 't':
-      buf.write(_escapeText(el.innerText));
+      buf.write(escapeDocumentMarkdown(el.innerText));
     case 'tab':
       buf.write(' ');
     case 'br':
@@ -294,7 +289,7 @@ void _walkRunChild(
 }) {
   switch (el.name.local) {
     case 't':
-      buf.write(_escapeText(el.innerText));
+      buf.write(escapeDocumentMarkdown(el.innerText));
     case 'tab':
       buf.write(' ');
     case 'br':
@@ -396,24 +391,6 @@ String _drawingAlt(XmlElement drawing) {
       ? ''
       : (_attr(docPr, 'descr') ?? _attr(docPr, 'name') ?? '');
   return markdownImageAlt(raw.replaceAll(RegExp(r'\s+'), ' ').trim());
-}
-
-String _escapeText(String s) => s
-    .replaceAll('\\', '\\\\')
-    .replaceAll('*', '\\*')
-    .replaceAll('_', '\\_')
-    .replaceAll('[', '\\[')
-    .replaceAll(']', '\\]')
-    .replaceAll('`', '\\`')
-    .replaceAll('#', '\\#')
-    .replaceAll('|', '\\|');
-
-String _escapeMarkdown(String s) => _escapeText(s);
-
-String _trimTrailingBlank(String s) {
-  var out = s.trimRight();
-  if (out.isNotEmpty) out += '\n';
-  return out;
 }
 
 // --- Namespace-agnostic XML helpers (local-name based) ----------------------

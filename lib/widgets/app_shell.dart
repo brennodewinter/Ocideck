@@ -219,6 +219,7 @@ class AppShell extends ConsumerStatefulWidget {
 class _AppShellState extends ConsumerState<AppShell> {
   late final OpenFileChannel _openFileChannel;
   late final NativeShortcutChannel _nativeShortcuts;
+  bool _closeInProgress = false;
 
   /// Het tabblad waar de zichtbare Informatieveiligheid-melding bij hoort, of
   /// null als er geen staat. De melding is niet zomaar een mededeling maar een
@@ -437,11 +438,15 @@ class _AppShellState extends ConsumerState<AppShell> {
   }
 
   void _onWillClose() {
-    // De willClose-hook is synchroon, maar het bewaken van onopgeslagen werk
-    // vraagt om dialogen en opslaan — dus start het in een fire-and-forget
-    // Future. Wil de bewaking doorgaan, dan roept ze [quitApp]; wil ze
-    // afbreken, dan doet ze niets en het venster blijft open.
-    _handleClose();
+    // De synchrone native hook start de asynchrone afsluitroute precies eenmaal;
+    // bij annuleren blijft het venster open, bij doorgaan roept die [quitApp].
+    if (_closeInProgress) return;
+    _closeInProgress = true;
+    unawaited(
+      _handleClose().whenComplete(() {
+        _closeInProgress = false;
+      }),
+    );
   }
 
   Future<void> _handleClose() async {
@@ -478,6 +483,7 @@ class _AppShellState extends ConsumerState<AppShell> {
     for (final session in sessions) {
       await ref.read(ociServeProvider.notifier).closeLessonSession(session);
     }
+    if (mounted) await settleUiBeforeNativeQuit(context);
     await quitApp();
   }
 
@@ -947,4 +953,23 @@ class _AppShellState extends ConsumerState<AppShell> {
       canRedo: commands.canRedo,
     );
   }
+}
+
+/// Bouwt tijdelijke Flutter-oppervlakken af voordat het native venster sluit.
+///
+/// Een oorspronkelijke macOS-close vernietigt de renderboom onmiddellijk. Als
+/// er dan nog een exportdialoog, tooltipanimatie of scrollpositie aan hangt,
+/// krijgen die geen normaal dispose-frame meer en volgen assertions uit de
+/// semantics- en tickerlagen. Eerst terug naar de wortelroute en één frame
+/// laten landen geeft elk tijdelijk oppervlak zijn gewone afbouwpad.
+@visibleForTesting
+Future<void> settleUiBeforeNativeQuit(BuildContext context) async {
+  if (!context.mounted) return;
+  FocusManager.instance.primaryFocus?.unfocus();
+  Tooltip.dismissAllToolTips();
+  ScaffoldMessenger.maybeOf(context)?.clearSnackBars();
+  Navigator.of(context, rootNavigator: true).popUntil((route) => route.isFirst);
+  WidgetsBinding.instance.ensureVisualUpdate();
+  await WidgetsBinding.instance.endOfFrame;
+  await Future<void>.delayed(Duration.zero);
 }

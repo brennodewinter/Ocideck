@@ -37,7 +37,7 @@ const Map<String, int> methodLengthBaseline = {
   // +12 (#1879): de "paneelvullend"-checkbox voor bulletsImage. De methode
   // stond al op de limiet.
   'lib/widgets/editors/bullets_image_editor.dart::_BulletsImageEditorState.build':
-      162,
+      127,
   // +13 (#1655, #1654): voetnoot-clip met ConstrainedBox + RepaintBoundary
   // in het documentvenster. De methode stond al op de limiet.
   'lib/widgets/reader/paged_document_view.dart::_PagedDocumentViewState._sheet':

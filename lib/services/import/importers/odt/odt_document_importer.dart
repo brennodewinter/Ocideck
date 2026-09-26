@@ -28,6 +28,7 @@ import '../../../../utils/image_signature.dart';
 import '../../../../utils/markdown_blocks.dart';
 import '../../models/document_conversion.dart';
 import '../../utils/archive_utils.dart';
+import '../../utils/document_markdown.dart';
 import '../../utils/import_budget.dart';
 import '../../utils/safe_extensions.dart';
 import '../../utils/xml_utils.dart';
@@ -72,7 +73,7 @@ DocumentConversion convertOdtDetailed(
     _emitBlock(ctx, child, buf, indent: '');
   }
   return DocumentConversion(
-    markdown: _trimTrailingBlank(buf.toString()),
+    markdown: finishDocumentMarkdown(buf.toString()),
     images: ctx.images,
     notImported: ctx.notImported,
     style: _extractOdtStyle(ctx),
@@ -182,14 +183,7 @@ void _emitTable(_OdtContext ctx, XmlElement tbl, StringBuffer buf) {
   }
   if (rows.isEmpty) return;
 
-  // GFM-tabel: eerste rij is de header, tweede rij is de scheidingsrij.
-  final header = rows.first;
-  final body = rows.length > 1 ? rows.sublist(1) : const <List<String>>[];
-  buf.writeln('| ${header.join(' | ')} |');
-  buf.writeln('| ${header.map((_) => '---').join(' | ')} |');
-  for (final row in body) {
-    buf.writeln('| ${row.join(' | ')} |');
-  }
+  writeDocumentMarkdownTable(buf, rows);
 }
 
 String _cellText(_OdtContext ctx, XmlElement cell) {
@@ -217,7 +211,7 @@ void _walkInline(
 }) {
   for (final child in node.children) {
     if (child is XmlText) {
-      buf.write(_escapeMarkdown(child.value));
+      buf.write(escapeDocumentMarkdown(child.value));
     } else if (child is XmlElement) {
       switch (child.name.local) {
         case 'tab':
@@ -366,24 +360,6 @@ bool _emitImage(
   );
   buf.write('![$alt]($path)');
   return true;
-}
-
-/// Ontsnapt Markdown-magische tekens in platte tekst zodat de uitvoer niet
-/// per ongeluk opmaak of HTML introduceert.
-String _escapeMarkdown(String s) => s
-    .replaceAll('\\', '\\\\')
-    .replaceAll('*', '\\*')
-    .replaceAll('_', '\\_')
-    .replaceAll('[', '\\[')
-    .replaceAll(']', '\\]')
-    .replaceAll('`', '\\`')
-    .replaceAll('#', '\\#')
-    .replaceAll('|', '\\|');
-
-String _trimTrailingBlank(String s) {
-  var out = s.trimRight();
-  if (out.isNotEmpty) out += '\n';
-  return out;
 }
 
 String? _attr(XmlElement el, String local) {

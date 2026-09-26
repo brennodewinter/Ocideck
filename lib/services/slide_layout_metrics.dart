@@ -510,15 +510,35 @@ double bulletsSlideFitScale({
   );
 }
 
-/// Layout metrics for a two-column bullets slide.
-double twoBulletsSlideFitScale({
+typedef TwoBulletsLayout = ({
+  double bulletGap,
+  double bulletSize,
+  double columnGap,
+  double columnScale,
+  double columnW,
+  String col1Title,
+  String col2Title,
+  bool hasColumnTitles,
+  double headingGap,
+  double headingSize,
+  List<String> leftBullets,
+  double maxHeadingH,
+  List<String> rightBullets,
+  double spacing,
+  double titleSize,
+});
+
+/// Shared geometry and fit calculation for the two-column bullets renderer and
+/// its quality checks. Keeping this in one place prevents the preview and the
+/// overflow warning from silently using different padding or text scales.
+TwoBulletsLayout twoBulletsLayout({
   required Slide slide,
   required String font,
-  double extraVReserve = 0,
+  required double width,
+  required double contentW,
+  required double layoutH,
 }) {
-  final w = kReferenceSlideWidth;
-  final pad = w * 0.07;
-  final vPad = w * 0.05;
+  final w = width;
   final leftBullets = slide.bullets
       .where((b) => b.trimLeft().isNotEmpty)
       .toList();
@@ -528,7 +548,7 @@ double twoBulletsSlideFitScale({
   final dense = math.max(leftBullets.length, rightBullets.length) > 12;
   final titleSize = w * (dense ? 0.034 : 0.04);
   final bulletSize = w * 0.024;
-  final spacing = pad * (dense ? 0.28 : 0.38);
+  final spacing = w * 0.065 * (dense ? 0.28 : 0.38);
   final bulletGap = w * (dense ? 0.0036 : 0.0055);
   final columnGap = w * 0.055;
   final col1Title = slide.columnTitle1.trim();
@@ -537,64 +557,125 @@ double twoBulletsSlideFitScale({
   final headingSize = w * (dense ? 0.023 : 0.03);
   final headingGap = w * (dense ? 0.007 : 0.012);
 
-  final slideHeight = w * 9 / 16;
-  final contentW = (w - pad * 2).clamp(w * 0.12, w);
-  final columnW = ((contentW - columnGap) / 2).clamp(w * 0.12, w);
-  var availH = slideHeight - vPad * 2 - extraVReserve;
-  if (slide.title.isNotEmpty) {
-    availH -= measureTextHeight(
-      slide.title,
-      titleSize,
-      contentW,
-      bold: true,
-      fontFamily: font,
-    );
-    availH -= spacing;
-  }
-  double headingHeight(String t) => t.isEmpty
-      ? 0
-      : measureTextHeight(
-          t,
-          headingSize,
-          columnW,
+  return memoizedRenderLayout<TwoBulletsLayout>(
+    slide: slide,
+    font: font,
+    width: w,
+    availW: contentW,
+    availH: layoutH,
+    compute: () {
+      final columnW = math.max(
+        1.0,
+        ((contentW - columnGap) / 2).clamp(math.min(w * 0.12, w), w).toDouble(),
+      );
+      var availH = layoutH;
+      if (slide.title.isNotEmpty) {
+        availH -= measureTextHeight(
+          slide.title,
+          titleSize,
+          contentW,
           bold: true,
           fontFamily: font,
         );
-  final maxHeadingH = math.max(
-    headingHeight(col1Title),
-    headingHeight(col2Title),
-  );
-  if (hasColumnTitles) availH -= maxHeadingH + headingGap;
+        availH -= spacing;
+      }
+      double headingHeight(String title) => title.isEmpty
+          ? 0
+          : measureTextHeight(
+              title,
+              headingSize,
+              columnW,
+              bold: true,
+              fontFamily: font,
+            );
+      final maxHeadingH = math.max(
+        headingHeight(col1Title),
+        headingHeight(col2Title),
+      );
+      if (hasColumnTitles) availH -= maxHeadingH + headingGap;
 
-  final leftScale = bulletsFitScale(
-    availW: columnW,
-    availH: availH,
-    hasTitle: false,
-    title: '',
-    bullets: leftBullets,
-    titleSize: titleSize,
-    bulletSize: bulletSize,
-    spacing: spacing,
-    bulletGap: bulletGap,
-    font: font,
-    maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
-    listStyle: slide.listStyle,
+      double fit(List<String> bullets) => bulletsFitScale(
+        availW: columnW,
+        availH: availH,
+        hasTitle: false,
+        title: '',
+        bullets: bullets,
+        titleSize: titleSize,
+        bulletSize: bulletSize,
+        spacing: spacing,
+        bulletGap: bulletGap,
+        font: font,
+        maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
+        listStyle: slide.listStyle,
+      );
+      var columnScale = math.min(fit(leftBullets), fit(rightBullets));
+      columnScale = tightenVerticalFitScale(
+        scale: columnScale,
+        availH: availH,
+        measure: (scale) => math.max(
+          bulletsBlockHeight(
+            scale: scale,
+            availW: columnW,
+            hasTitle: false,
+            title: '',
+            bullets: leftBullets,
+            titleSize: titleSize,
+            bulletSize: bulletSize,
+            spacing: spacing,
+            bulletGap: bulletGap,
+            font: font,
+            listStyle: slide.listStyle,
+          ),
+          bulletsBlockHeight(
+            scale: scale,
+            availW: columnW,
+            hasTitle: false,
+            title: '',
+            bullets: rightBullets,
+            titleSize: titleSize,
+            bulletSize: bulletSize,
+            spacing: spacing,
+            bulletGap: bulletGap,
+            font: font,
+            listStyle: slide.listStyle,
+          ),
+        ),
+      );
+      return (
+        bulletGap: bulletGap,
+        bulletSize: bulletSize,
+        columnGap: columnGap,
+        columnScale: columnScale,
+        columnW: columnW,
+        col1Title: col1Title,
+        col2Title: col2Title,
+        hasColumnTitles: hasColumnTitles,
+        headingGap: headingGap,
+        headingSize: headingSize,
+        leftBullets: leftBullets,
+        maxHeadingH: maxHeadingH,
+        rightBullets: rightBullets,
+        spacing: spacing,
+        titleSize: titleSize,
+      );
+    },
   );
-  final rightScale = bulletsFitScale(
-    availW: columnW,
-    availH: availH,
-    hasTitle: false,
-    title: '',
-    bullets: rightBullets,
-    titleSize: titleSize,
-    bulletSize: bulletSize,
-    spacing: spacing,
-    bulletGap: bulletGap,
+}
+
+/// Layout metrics for a two-column bullets slide.
+double twoBulletsSlideFitScale({
+  required Slide slide,
+  required String font,
+  double extraVReserve = 0,
+}) {
+  final width = kReferenceSlideWidth;
+  return twoBulletsLayout(
+    slide: slide,
     font: font,
-    maxScale: bulletScaleCap(w, bulletSize, kBulletsMaxScale),
-    listStyle: slide.listStyle,
-  );
-  return math.min(leftScale, rightScale);
+    width: width,
+    contentW: width - width * 0.065 * 2,
+    layoutH: width * 9 / 16 - width * 0.045 * 2 - extraVReserve,
+  ).columnScale;
 }
 
 /// Total height of a rich-text bullets slide body at [scale].

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -337,6 +338,48 @@ void main() {
 
       expect(find.byType(FullscreenPresenter), findsOneWidget);
       expect(find.text('Rapport gemaakt.'), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'native afsluiten bouwt dialoog focus en snackbar eerst ordelijk af',
+    (tester) async {
+      await pumpShell(tester, deckOf([bullets('Eerste')]));
+      final shellContext = tester.element(find.byType(AppShell));
+      final fieldFocus = FocusNode();
+      addTearDown(fieldFocus.dispose);
+
+      unawaited(
+        showDialog<void>(
+          context: shellContext,
+          builder: (context) => AlertDialog(
+            content: SingleChildScrollView(
+              child: Tooltip(
+                message: 'tijdelijk',
+                child: TextField(focusNode: fieldFocus),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      fieldFocus.requestFocus();
+      ScaffoldMessenger.of(
+        shellContext,
+      ).showSnackBar(const SnackBar(content: Text('Tijdelijke melding')));
+      await tester.pump();
+      expect(find.byType(AlertDialog), findsOneWidget);
+      expect(find.text('Tijdelijke melding'), findsOneWidget);
+      expect(fieldFocus.hasFocus, isTrue);
+
+      final settled = settleUiBeforeNativeQuit(shellContext);
+      await tester.pumpAndSettle();
+      await settled;
+
+      expect(find.byType(AlertDialog), findsNothing);
+      expect(find.text('Tijdelijke melding'), findsNothing);
+      expect(fieldFocus.hasFocus, isFalse);
       expect(tester.takeException(), isNull);
     },
   );

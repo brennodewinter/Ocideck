@@ -604,8 +604,11 @@ DocumentLogoCandidate? _readDrawing(
   if (mediaPath == null) return null;
   final bytes = ctx.readPartBytes(mediaPath);
   if (bytes == null || bytes.length > _maxLogoBytes) return null;
-  final ext = _rasterExtension(bytes);
-  if (ext == null) return null;
+  final mime = imageMimeFromBytes(bytes);
+  if (mime == null) return null;
+  // Het profiel gebruikte historisch `jpeg`; houd dat opgeslagen contract
+  // stabiel terwijl de magic-byteherkenning centraal staat.
+  final ext = mime == 'image/jpeg' ? 'jpeg' : extensionForImageMime(mime);
 
   final extent = _findLocal(drawing, 'extent');
   final cx = double.tryParse(extent == null ? '' : _attr(extent, 'cx') ?? '');
@@ -640,29 +643,6 @@ DocumentLogoCandidate? _readDrawing(
 /// Links of rechts, plus of het beeld eigenlijk gecentreerd stond — dat kent
 /// het profiel niet, dus het wordt links, met een melding.
 typedef _Placement = ({DocumentLogoSide side, bool centred});
-
-/// De bestandsextensie van een rasterbeeld op zijn magische bytes, of `null`
-/// voor SVG en al het andere dat geen logo kan zijn.
-String? _rasterExtension(List<int> b) {
-  if (b.length < 12) return null;
-  if (b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47) {
-    return 'png';
-  }
-  if (b[0] == 0xFF && b[1] == 0xD8 && b[2] == 0xFF) return 'jpeg';
-  if (b[0] == 0x47 && b[1] == 0x49 && b[2] == 0x46) return 'gif';
-  if (b[0] == 0x42 && b[1] == 0x4D) return 'bmp';
-  if (b[0] == 0x52 &&
-      b[1] == 0x49 &&
-      b[2] == 0x46 &&
-      b[3] == 0x46 &&
-      b[8] == 0x57 &&
-      b[9] == 0x45 &&
-      b[10] == 0x42 &&
-      b[11] == 0x50) {
-    return 'webp';
-  }
-  return null;
-}
 
 /// De kant van een inline beeld volgt de uitlijning van zijn alinea.
 _Placement _inlinePlacement(XmlElement drawing) {
