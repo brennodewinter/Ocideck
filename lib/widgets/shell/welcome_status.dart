@@ -1,27 +1,31 @@
 // Part of the app_shell library — see ../app_shell.dart.
 // Het statuscentrum linksonder op het welkomscherm: subtiele lampjes voor de
-// optionele verbindingen (AI-backend, eLearning), met de uitleg in een
+// optionele verbindingen (AI-backend, eLearning, opslag), met de uitleg in een
 // hover-ballon. Losgetrokken uit welcome_screen.dart voor de groottegrens.
+// Het lampje zelf — StatusChip met StatusLevel — staat gedeeld in
+// connection_status.dart; de leeromgeving gebruikt hetzelfde.
 part of '../app_shell.dart';
-
-/// Eén statuskleur, drie betekenissen — dezelfde voor elk lampje:
-/// groen = werkt, oranje = aandacht/actie nodig (of controle loopt),
-/// rood = server niet bereikbaar.
-enum _WelcomeStatusLevel { ok, attention, unreachable }
 
 /// De statuslampjes in de voettekst van het welkomscherm. Alleen de
 /// verbindingen die de gebruiker daadwerkelijk heeft ingesteld verschijnen —
-/// wie AI of eLearning niet gebruikt, ziet geen doodgeknipte lampjes maar
-/// gewoon niets.
+/// wie AI, eLearning of een externe opslagplek niet gebruikt, ziet geen
+/// doodgeknipte lampjes maar gewoon niets.
 class _WelcomeStatusCenter extends ConsumerWidget {
   const _WelcomeStatusCenter();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    // De chip gate intern ook, maar zou hier dan als leeg kind toch een
+    // tussenruimte in de Wrap opeten.
+    final elearningOn =
+        ref.watch(elearningEnabledProvider) &&
+        ref.watch(ociServeProvider.select((s) => s.settings.enabled));
     final items = <Widget>[
       ..._aiStatusItem(context, ref, l10n),
-      ..._elearningStatusItem(context, ref, l10n),
+      if (elearningOn)
+        OciServeStatusChip(onTap: () => _openOciServeFromStatus(context, ref)),
+      ..._storageStatusItems(context, ref, l10n),
     ];
     if (items.isEmpty) return const SizedBox.shrink();
     return Wrap(
@@ -43,29 +47,25 @@ class _WelcomeStatusCenter extends ConsumerWidget {
     final status = ref.watch(aiStatusProvider);
     if (status.availability == AiAvailability.hidden) return const [];
     final (level, message) = switch (status.availability) {
-      AiAvailability.reachable => (
-        _WelcomeStatusLevel.ok,
-        l10n.d('AI: functioneert'),
-      ),
+      AiAvailability.reachable => (StatusLevel.ok, l10n.d('AI: functioneert')),
       AiAvailability.checking => (
-        _WelcomeStatusLevel.attention,
+        StatusLevel.attention,
         l10n.d('AI: wordt gecontroleerd…'),
       ),
       AiAvailability.unreachable => (
-        _WelcomeStatusLevel.unreachable,
+        StatusLevel.unreachable,
         l10n.d('AI: server niet bereikbaar'),
       ),
       AiAvailability.denied => (
-        _WelcomeStatusLevel.attention,
+        StatusLevel.attention,
         _aiDenialMessage(l10n, status.denial),
       ),
       // Onmogelijk: hidden keerde hierboven al terug. De switch is exhaustief,
       // dus de arm moet er staan — de waarde doet er niet toe.
-      AiAvailability.hidden => (_WelcomeStatusLevel.attention, ''),
+      AiAvailability.hidden => (StatusLevel.attention, ''),
     };
     return [
-      _statusChip(
-        context,
+      StatusChip(
         icon: Icons.auto_awesome_outlined,
         level: level,
         message: message,
@@ -100,52 +100,53 @@ class _WelcomeStatusCenter extends ConsumerWidget {
     };
   }
 
-  /// Het eLearning-lampje is pure afleiding van de sessiestate — de OciServe-
-  /// notifier bewaakt de verbinding al, hier komt geen eigen netwerk bij.
-  /// Een tik opent dezelfde inlog-/cursusflow als de knop in de startkolom.
-  List<Widget> _elearningStatusItem(
+  /// Eén lampje per ingestelde opslagverbinding. Een lokale map is per
+  /// afspraak bereikbaar en staat meteen groen; remote soorten (WebDAV, S3,
+  /// git) volgt [storageStatusProvider] live — dezelfde probe als de
+  /// testknop op het opslag-tabblad. Een tik hertikt.
+  List<Widget> _storageStatusItems(
     BuildContext context,
     WidgetRef ref,
     AppLocalizations l10n,
   ) {
-    final ociServe = ref.watch(ociServeProvider);
-    if (!ref.watch(elearningEnabledProvider) || !ociServe.settings.enabled) {
-      return const [];
-    }
-    final (level, message) = switch (ociServe.status) {
-      OciServeStatus.authenticated => (
-        _WelcomeStatusLevel.ok,
-        l10n.d('eLearning: ingelogd'),
-      ),
-      OciServeStatus.loading || OciServeStatus.authenticating => (
-        _WelcomeStatusLevel.attention,
-        l10n.d('eLearning: aanmelden loopt…'),
-      ),
-      OciServeStatus.signedOut =>
-        ociServe.serverUnavailable
-            ? (
-                _WelcomeStatusLevel.unreachable,
-                l10n.d('eLearning: server niet bereikbaar'),
-              )
-            : ociServe.errorCode != null
-            ? (
-                _WelcomeStatusLevel.attention,
-                l10n.d('eLearning: aanmelden mislukt'),
-              )
-            : (
-                _WelcomeStatusLevel.attention,
-                l10n.d('eLearning: niet ingelogd'),
-              ),
-    };
+    final statuses = ref.watch(storageStatusProvider);
+    final connections = ref.watch(
+      settingsProvider.select((s) => s.connections),
+    );
     return [
-      _statusChip(
-        context,
-        icon: Icons.school_outlined,
-        level: level,
-        message: message,
-        onTap: () => _openOciServeFromStatus(context, ref),
-      ),
+      for (final c in connections)
+        if (statuses[c.id] case final reach?)
+          StatusChip(
+            icon: c.kind.icon,
+            level: switch (reach) {
+              StorageReach.reachable => StatusLevel.ok,
+              StorageReach.checking => StatusLevel.attention,
+              StorageReach.unreachable => StatusLevel.unreachable,
+            },
+            message: switch (reach) {
+              StorageReach.reachable =>
+                l10n
+                    .d('{naam}: bereikbaar')
+                    .replaceAll('{naam}', _connectionName(c)),
+              StorageReach.checking =>
+                l10n
+                    .d('{naam}: wordt gecontroleerd…')
+                    .replaceAll('{naam}', _connectionName(c)),
+              StorageReach.unreachable =>
+                l10n
+                    .d('{naam}: niet bereikbaar')
+                    .replaceAll('{naam}', _connectionName(c)),
+            },
+            onTap: () => ref.read(storageStatusProvider.notifier).recheck(c.id),
+          ),
     ];
+  }
+
+  /// De naam die de gebruiker gaf, of de afgeleide omschrijving als die leeg
+  /// is — dezelfde terugval als de lijst op het opslag-tabblad.
+  String _connectionName(StorageConnection c) {
+    final name = c.name.trim();
+    return name.isEmpty ? c.fallbackLabel : name;
   }
 
   /// Dezelfde flow als [_WelcomeScreen._openOciServe]: eerst aanmelden als dat
@@ -163,49 +164,5 @@ class _WelcomeStatusCenter extends ConsumerWidget {
       if (!loggedIn || !context.mounted) return;
     }
     await OciServeCoursesDialog.show(context);
-  }
-
-  /// Eén lampje: icoon in gedempte kleur met een gekleurde statusstip ernaast.
-  /// De betekenis zit in de tooltip én in het Semantics-label, zodat de kleur
-  /// nooit de enige drager is (WCAG: kleur alleen is geen informatie).
-  Widget _statusChip(
-    BuildContext context, {
-    required IconData icon,
-    required _WelcomeStatusLevel level,
-    required String message,
-    required VoidCallback onTap,
-  }) {
-    final dot = switch (level) {
-      _WelcomeStatusLevel.ok => AppTheme.success700,
-      _WelcomeStatusLevel.attention => AppTheme.amber600,
-      _WelcomeStatusLevel.unreachable => AppTheme.danger600,
-    };
-    final muted = Theme.of(context).colorScheme.onSurfaceVariant;
-    return Tooltip(
-      message: message,
-      child: Semantics(
-        label: message,
-        button: true,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(4),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(icon, size: 14, color: muted),
-                const SizedBox(width: 5),
-                Container(
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(color: dot, shape: BoxShape.circle),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
