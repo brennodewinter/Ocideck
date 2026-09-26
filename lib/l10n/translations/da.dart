@@ -1627,6 +1627,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Der er endnu ikke søgt efter nye versioner — tryk for at indstille tjekket.',
   'Nieuwe versies': 'Nye versioner',
   'Controleer automatisch op nieuwe versies':
       'Søg automatisk efter nye versioner',

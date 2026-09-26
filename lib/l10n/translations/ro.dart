@@ -1643,6 +1643,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Nu s-a verificat încă dacă există versiuni noi — atinge pentru a configura verificarea.',
   'Nieuwe versies': 'Versiuni noi',
   'Controleer automatisch op nieuwe versies': 'Verifică automat versiunile noi',
   'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':

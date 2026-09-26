@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Nonig uf nöji Versione prüeft — tippe zum d Prüefig iiriche.',
   'Nieuwe versies': 'Nöji Versione',
   'Controleer automatisch op nieuwe versies':
       'Automatisch nach nöije Versione luege',

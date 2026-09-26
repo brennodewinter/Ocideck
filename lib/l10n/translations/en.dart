@@ -827,6 +827,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Not yet checked for new versions — tap to set up the check.',
   'Nieuwe versies': 'New versions',
   'Controleer automatisch op nieuwe versies':
       'Check for new versions automatically',

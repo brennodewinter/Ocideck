@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Ainda no a kontrolá pa versionnan nobo — toka pa instala e kontrol.',
   'Nieuwe versies': 'Vershonnan nobo',
   'Controleer automatisch op nieuwe versies':
       'Kontrolá outomatikamente pa vershonnan nobo',

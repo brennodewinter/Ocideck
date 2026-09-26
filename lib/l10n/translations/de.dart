@@ -667,6 +667,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Noch nicht auf neue Versionen geprüft — tippen, um die Prüfung einzurichten.',
   'Nieuwe versies': 'Neue Versionen',
   'Controleer automatisch op nieuwe versies':
       'Automatisch nach neuen Versionen suchen',

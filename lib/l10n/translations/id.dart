@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Belum diperiksa untuk versi baru — ketuk untuk mengatur pemeriksaan.',
   'Nieuwe versies': 'Versi baru',
   'Controleer automatisch op nieuwe versies':
       'Periksa versi baru secara otomatis',

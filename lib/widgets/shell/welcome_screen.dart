@@ -741,9 +741,12 @@ class _WelcomeScreen extends ConsumerWidget {
 }
 
 /// Het draaiende versienummer, in de hoek van het openscherm. Dezelfde
-/// `kOciDeckVersion` als op het About-tabblad — een tik erop opent dat
-/// tabblad meteen, want dat is precies het nummer dat bij een
-/// beveiligingsmelding hoort (zie settings_dialog_about.dart).
+/// `kOciDeckVersion` als op het About-tabblad (zie settings_dialog_about.dart).
+/// Het nummer zelf is geen knop — daarvoor staat 'Instellingen' ernaast — maar
+/// het lampje ernaast wél: amber als een nieuwere release bekend is (tik →
+/// releasepagina), grijs zolang nog geen enkele controle is geslaagd (tik →
+/// het Over-tabblad, waar de automatische controle aan kan). Zegt de check
+/// "actueel", dan is er bewust niets te zien.
 class _VersionTag extends ConsumerWidget {
   final AppPalette palette;
 
@@ -752,57 +755,82 @@ class _VersionTag extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    // De laatst bekende nieuwste release — óók die van een eerdere sessie,
-    // dus de indicator kan zichtbaar zijn zonder dat deze start al een ping
-    // is gegaan. Alleen een strikt nieuwere versie toont iets.
-    final latest = ref.watch(
-      updateCheckProvider.select(
-        (s) => s.updateAvailable ? s.latestVersion : null,
-      ),
+    // `latestVersion` kan uit een eerdere sessie bewaard zijn — de badge is
+    // dus zichtbaar zonder dat deze start al een ping is gegaan.
+    final (latest, available) = ref.watch(
+      updateCheckProvider.select((s) => (s.latestVersion, s.updateAvailable)),
     );
-    final message = latest == null
-        ? l10n.t('settings')
-        : l10n
-              .d(
-                'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.',
-              )
-              .replaceAll('{versie}', latest);
-    return Tooltip(
-      message: message,
-      child: InkWell(
-        onTap: () => latest == null
-            ? SettingsDialog.show(
-                context,
-                initialSection: SettingsSection.about,
-              )
-            : unawaited(openExternalUrl(releasesPageUri.toString())),
-        borderRadius: BorderRadius.circular(3),
-        child: Semantics(
-          label: message,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'v$kOciDeckVersion',
-                  style: TextStyle(fontSize: 10.5, color: palette.mutedText),
-                ),
-                if (latest != null) ...[
-                  const SizedBox(width: 3),
-                  const Icon(
-                    Icons.arrow_circle_up_outlined,
-                    size: 11,
-                    color: AppTheme.amber700,
-                  ),
-                ],
-              ],
+    final badge = available
+        ? _VersionBadge(
+            color: AppTheme.amber700,
+            message: l10n
+                .d(
+                  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.',
+                )
+                .replaceAll('{versie}', latest!),
+            onTap: () => unawaited(openExternalUrl(releasesPageUri.toString())),
+          )
+        // Op web draait iedereen de gedeployde versie; de grijze badge zou
+        // daar naar een kaart wijzen die bewust niet bestaat.
+        : latest == null && !isWebPlatform
+        ? _VersionBadge(
+            color: palette.mutedText,
+            message: l10n.d(
+              'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.',
             ),
+            onTap: () => SettingsDialog.show(
+              context,
+              initialSection: SettingsSection.about,
+            ),
+          )
+        : null;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'v$kOciDeckVersion',
+            style: TextStyle(fontSize: 10.5, color: palette.mutedText),
           ),
-        ),
+          if (badge != null) ...[const SizedBox(width: 3), badge],
+        ],
       ),
     );
   }
+}
+
+/// Het klikbare lampje naast het versienummer: één vorm, twee betekenissen —
+/// kleur en ballon dragen het verschil (amber = er is iets nieuws, grijs = we
+/// weten het niet). Klikbaar én als knop aangekondigd, want allebei de
+/// toestanden vragen een handeling van de gebruiker.
+class _VersionBadge extends StatelessWidget {
+  final Color color;
+  final String message;
+  final VoidCallback onTap;
+
+  const _VersionBadge({
+    required this.color,
+    required this.message,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) => Tooltip(
+    message: message,
+    child: InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(3),
+      child: Semantics(
+        label: message,
+        button: true,
+        child: Padding(
+          padding: const EdgeInsets.all(2),
+          child: Icon(Icons.arrow_circle_up_outlined, size: 11, color: color),
+        ),
+      ),
+    ),
+  );
 }
 
 /// Het OciDeck-merk als alpha-masker, met een hover-wissel van inktkleur. In

@@ -1629,6 +1629,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Még nem történt ellenőrzés új verziókra — koppints a beállításához.',
   'Nieuwe versies': 'Új verziók',
   'Controleer automatisch op nieuwe versies':
       'Új verziók automatikus ellenőrzése',

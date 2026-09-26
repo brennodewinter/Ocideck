@@ -667,6 +667,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Noch net op nije ferzjes kontrolearre — tik om de kontrôle yn te stellen.',
   'Nieuwe versies': 'Nije ferzjes',
   'Controleer automatisch op nieuwe versies':
       'Automatysk kontr olearje op nije ferzjes',

@@ -1628,6 +1628,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Nové verze zatím nebyly zkontrolovány — klepnutím kontrolu nastavíte.',
   'Nieuwe versies': 'Nové verze',
   'Controleer automatisch op nieuwe versies':
       'Automaticky kontrolovat nové verze',

@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Uusia versioita ei ole vielä tarkistettu — napauta määrittääksesi tarkistuksen.',
   'Nieuwe versies': 'Uudet versiot',
   'Controleer automatisch op nieuwe versies':
       'Tarkista uudet versiot automaattisesti',

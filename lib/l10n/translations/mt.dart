@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Għad ma ġiet iċċekkjata l-ebda verżjoni ġdida — agħfas biex tissettja l-kontroll.',
   'Nieuwe versies': 'Verżjonijiet ġodda',
   'Controleer automatisch op nieuwe versies':
       'Iċċekkja awtomatikament għal verżjonijiet ġodda',

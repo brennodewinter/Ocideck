@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Nondum de versionibus novis quaesitum est — tange ut quaestionem instituas.',
   'Nieuwe versies': 'Versiones novae',
   'Controleer automatisch op nieuwe versies': 'Versiones novas sponte quaere',
   'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':

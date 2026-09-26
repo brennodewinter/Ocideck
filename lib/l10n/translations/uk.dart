@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Наявність нових версій ще не перевірялася — торкніться, щоб налаштувати перевірку.',
   'Nieuwe versies': 'Нові версії',
   'Controleer automatisch op nieuwe versies':
       'Автоматично перевіряти наявність нових версій',

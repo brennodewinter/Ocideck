@@ -1620,6 +1620,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Uusi versioone pole veel kontrollitud — puuduta kontrolli seadistamiseks.',
   'Nieuwe versies': 'Uued versioonid',
   'Controleer automatisch op nieuwe versies':
       'Kontrolli automaatselt uusi versioone',

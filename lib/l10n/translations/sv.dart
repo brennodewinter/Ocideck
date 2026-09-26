@@ -1626,6 +1626,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Ingen kontroll av nya versioner har gjorts ännu — tryck för att ställa in kontrollen.',
   'Nieuwe versies': 'Nya versioner',
   'Controleer automatisch op nieuwe versies':
       'Sök automatiskt efter nya versioner',
