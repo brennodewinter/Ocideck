@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Tidak ada versi yang lebih baru — ketuk untuk membuka pemeriksaan.',
   '{naam}: bereikbaar': '{naam}: dapat dijangkau',
   '{naam}: wordt gecontroleerd…': '{naam}: sedang diperiksa…',
   '{naam}: niet bereikbaar': '{naam}: tidak dapat dijangkau',
@@ -1688,8 +1690,6 @@ const _dutchSourceAddId = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: tidak tersedia di versi web',
   'eLearning: ingelogd': 'eLearning: masuk',
   'eLearning: aanmelden loopt…': 'eLearning: sedang masuk…',
-  'eLearning: server niet bereikbaar':
-      'eLearning: server tidak dapat dijangkau',
   'eLearning: aanmelden mislukt': 'eLearning: gagal masuk',
   'eLearning: niet ingelogd': 'eLearning: belum masuk',
   'Vertaal met AI': 'Terjemahkan dengan AI',

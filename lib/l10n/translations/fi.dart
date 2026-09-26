@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Uudempaa versiota ei ole — napauta avataksesi tarkistuksen.',
   '{naam}: bereikbaar': '{naam}: tavoitettavissa',
   '{naam}: wordt gecontroleerd…': '{naam}: tarkistetaan…',
   '{naam}: niet bereikbaar': '{naam}: ei tavoitettavissa',
@@ -1688,7 +1690,6 @@ const _dutchSourceAddFi = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: ei saatavilla verkkoversiossa',
   'eLearning: ingelogd': 'eLearning: kirjautunut',
   'eLearning: aanmelden loopt…': 'eLearning: kirjaudutaan…',
-  'eLearning: server niet bereikbaar': 'eLearning: palvelin ei tavoitettavissa',
   'eLearning: aanmelden mislukt': 'eLearning: kirjautuminen epäonnistui',
   'eLearning: niet ingelogd': 'eLearning: ei kirjautunut',
   'Vertaal met AI': 'Käännä tekoälyllä',

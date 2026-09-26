@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Nulla versio recentior est — tange ut quaestionem aperias.',
   '{naam}: bereikbaar': '{naam}: pervius',
   '{naam}: wordt gecontroleerd…': '{naam}: probatur…',
   '{naam}: niet bereikbaar': '{naam}: non pervius',
@@ -1704,7 +1706,6 @@ const _dutchSourceAddLa = <String, String>{
       'AI: in versione textrina non praesto',
   'eLearning: ingelogd': 'eLearning: inscriptum',
   'eLearning: aanmelden loopt…': 'eLearning: inscriptio currit…',
-  'eLearning: server niet bereikbaar': 'eLearning: servitorium inaccessibile',
   'eLearning: aanmelden mislukt': 'eLearning: inscriptio defecit',
   'eLearning: niet ingelogd': 'eLearning: non inscriptum',
   'Vertaal met AI': 'Per AI verte',

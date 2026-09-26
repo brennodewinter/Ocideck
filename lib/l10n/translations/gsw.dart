@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Es git kei neuere Version — tippe zum d Prüefig öffne.',
   '{naam}: bereikbaar': '{naam}: erreichbar',
   '{naam}: wordt gecontroleerd…': '{naam}: wird prüeft…',
   '{naam}: niet bereikbaar': '{naam}: nöd erreichbar',
@@ -1691,7 +1693,6 @@ const _dutchSourceAddGsw = <String, String>{
   'AI: niet beschikbaar in de webversie': 'KI: i de Webversion nöd verfüegbar',
   'eLearning: ingelogd': 'eLearning: aagmäldet',
   'eLearning: aanmelden loopt…': 'eLearning: Aamäldig lauft…',
-  'eLearning: server niet bereikbaar': 'eLearning: Server nöd erreichbar',
   'eLearning: aanmelden mislukt': 'eLearning: Aamäldig fählgschlaa',
   'eLearning: niet ingelogd': 'eLearning: nöd aagmäldet',
   'Vertaal met AI': 'Mit KI übersetze',

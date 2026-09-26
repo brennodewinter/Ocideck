@@ -1627,6 +1627,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Der er ingen nyere version — tryk for at åbne tjekket.',
   '{naam}: bereikbaar': '{naam}: tilgængelig',
   '{naam}: wordt gecontroleerd…': '{naam}: kontrolleres…',
   '{naam}: niet bereikbaar': '{naam}: ikke tilgængelig',
@@ -1688,7 +1690,6 @@ const _dutchSourceAddDa = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: ikke tilgængelig i webversionen',
   'eLearning: ingelogd': 'eLearning: logget ind',
   'eLearning: aanmelden loopt…': 'eLearning: logger ind…',
-  'eLearning: server niet bereikbaar': 'eLearning: serveren kan ikke nås',
   'eLearning: aanmelden mislukt': 'eLearning: login mislykkedes',
   'eLearning: niet ingelogd': 'eLearning: ikke logget ind',
   'Vertaal met AI': 'Oversæt med AI',

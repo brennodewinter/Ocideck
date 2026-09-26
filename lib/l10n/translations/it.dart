@@ -664,6 +664,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Non è disponibile una versione più recente — tocca per aprire il controllo.',
   '{naam}: bereikbaar': '{naam}: raggiungibile',
   '{naam}: wordt gecontroleerd…': '{naam}: controllo in corso…',
   '{naam}: niet bereikbaar': '{naam}: non raggiungibile',
@@ -727,7 +729,6 @@ const _dutchSourceAddIt = {
       'IA: non disponibile nella versione web',
   'eLearning: ingelogd': 'eLearning: accesso effettuato',
   'eLearning: aanmelden loopt…': 'eLearning: accesso in corso…',
-  'eLearning: server niet bereikbaar': 'eLearning: server non raggiungibile',
   'eLearning: aanmelden mislukt': 'eLearning: accesso non riuscito',
   'eLearning: niet ingelogd': 'eLearning: non hai effettuato l\'accesso',
   'Vertaal met AI': 'Traduci con l\'IA',

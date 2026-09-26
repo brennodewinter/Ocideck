@@ -2538,6 +2538,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Daha yeni bir sürüm yok — denetimi açmak için dokun.',
   '{naam}: bereikbaar': '{naam}: erişilebilir',
   '{naam}: wordt gecontroleerd…': '{naam}: denetleniyor…',
   '{naam}: niet bereikbaar': '{naam}: erişilemez',
@@ -2598,7 +2600,6 @@ const _dutchSourceAddTr = <String, String>{
   'AI: niet beschikbaar in de webversie': 'YZ: web sürümünde kullanılamaz',
   'eLearning: ingelogd': 'eLearning: giriş yapıldı',
   'eLearning: aanmelden loopt…': 'eLearning: giriş yapılıyor…',
-  'eLearning: server niet bereikbaar': 'eLearning: sunucuya ulaşılamıyor',
   'eLearning: aanmelden mislukt': 'eLearning: giriş başarısız',
   'eLearning: niet ingelogd': 'eLearning: giriş yapılmadı',
   'Vertaal met AI': 'AI ile çevir',

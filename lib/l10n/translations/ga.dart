@@ -1657,6 +1657,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Níl aon leagan níos nuaí ann — tapáil chun an tseiceáil a oscailt.',
   '{naam}: bereikbaar': '{naam}: inrochtana',
   '{naam}: wordt gecontroleerd…': '{naam}: á sheiceáil…',
   '{naam}: niet bereikbaar': '{naam}: neamh-inrochtana',
@@ -1720,8 +1722,6 @@ const _dutchSourceAddGa = <String, String>{
       'AI: níl sé ar fáil sa leagan gréasáin',
   'eLearning: ingelogd': 'eLearning: logáilte isteach',
   'eLearning: aanmelden loopt…': 'eLearning: ag logáil isteach…',
-  'eLearning: server niet bereikbaar':
-      'eLearning: níl an freastalaí le bhaint amach',
   'eLearning: aanmelden mislukt': 'eLearning: theip ar an logáil isteach',
   'eLearning: niet ingelogd': 'eLearning: nach bhfuil tú logáilte isteach',
   'Vertaal met AI': 'Aistrigh le AI',

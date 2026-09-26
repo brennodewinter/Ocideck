@@ -1628,6 +1628,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Novější verze není k dispozici — klepnutím kontrolu otevřete.',
   '{naam}: bereikbaar': '{naam}: dostupný',
   '{naam}: wordt gecontroleerd…': '{naam}: kontroluje se…',
   '{naam}: niet bereikbaar': '{naam}: nedostupný',
@@ -1689,7 +1691,6 @@ const _dutchSourceAddCs = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: není dostupné ve webové verzi',
   'eLearning: ingelogd': 'eLearning: přihlášeno',
   'eLearning: aanmelden loopt…': 'eLearning: probíhá přihlašování…',
-  'eLearning: server niet bereikbaar': 'eLearning: server není dosažitelný',
   'eLearning: aanmelden mislukt': 'eLearning: přihlášení se nezdařilo',
   'eLearning: niet ingelogd': 'eLearning: nepřihlášeno',
   'Vertaal met AI': 'Přeložit pomocí AI',

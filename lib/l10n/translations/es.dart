@@ -664,6 +664,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'No hay una versión más reciente — toca para abrir la comprobación.',
   '{naam}: bereikbaar': '{naam}: accesible',
   '{naam}: wordt gecontroleerd…': '{naam}: comprobando…',
   '{naam}: niet bereikbaar': '{naam}: no accesible',
@@ -726,7 +728,6 @@ const _dutchSourceAddEs = {
   'AI: niet beschikbaar in de webversie': 'IA: no disponible en la versión web',
   'eLearning: ingelogd': 'eLearning: sesión iniciada',
   'eLearning: aanmelden loopt…': 'eLearning: iniciando sesión…',
-  'eLearning: server niet bereikbaar': 'eLearning: servidor inaccesible',
   'eLearning: aanmelden mislukt': 'eLearning: error al iniciar sesión',
   'eLearning: niet ingelogd': 'eLearning: no has iniciado sesión',
   'Vertaal met AI': 'Traducir con IA',

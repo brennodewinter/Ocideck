@@ -1633,6 +1633,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Novšia verzia nie je k dispozícii — klepnutím kontrolu otvoríte.',
   '{naam}: bereikbaar': '{naam}: dostupný',
   '{naam}: wordt gecontroleerd…': '{naam}: kontroluje sa…',
   '{naam}: niet bereikbaar': '{naam}: nedostupný',
@@ -1695,7 +1697,6 @@ const _dutchSourceAddSk = <String, String>{
       'AI: nie je dostupné vo webovej verzii',
   'eLearning: ingelogd': 'eLearning: prihlásené',
   'eLearning: aanmelden loopt…': 'eLearning: prebieha prihlasovanie…',
-  'eLearning: server niet bereikbaar': 'eLearning: server nie je dostupný',
   'eLearning: aanmelden mislukt': 'eLearning: prihlásenie zlyhalo',
   'eLearning: niet ingelogd': 'eLearning: nie ste prihlásení',
   'Vertaal met AI': 'Preložiť pomocou AI',

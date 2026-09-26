@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Новішої версії немає — торкніться, щоб відкрити перевірку.',
   '{naam}: bereikbaar': '{naam}: доступний',
   '{naam}: wordt gecontroleerd…': '{naam}: перевіряється…',
   '{naam}: niet bereikbaar': '{naam}: недоступний',
@@ -1703,7 +1705,6 @@ const _dutchSourceAddUk = <String, String>{
   'AI: niet beschikbaar in de webversie': 'ШІ: недоступний у вебверсії',
   'eLearning: ingelogd': 'eLearning: вхід виконано',
   'eLearning: aanmelden loopt…': 'eLearning: триває вхід…',
-  'eLearning: server niet bereikbaar': 'eLearning: сервер недоступний',
   'eLearning: aanmelden mislukt': 'eLearning: не вдалося ввійти',
   'eLearning: niet ingelogd': 'eLearning: вхід не виконано',
   'Vertaal met AI': 'Перекласти за допомогою ШІ',

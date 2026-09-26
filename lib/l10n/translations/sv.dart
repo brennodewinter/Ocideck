@@ -1626,6 +1626,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Det finns ingen nyare version — tryck för att öppna kontrollen.',
   '{naam}: bereikbaar': '{naam}: nåbar',
   '{naam}: wordt gecontroleerd…': '{naam}: kontrolleras…',
   '{naam}: niet bereikbaar': '{naam}: inte nåbar',
@@ -1688,7 +1690,6 @@ const _dutchSourceAddSv = <String, String>{
       'AI: inte tillgänglig i webbversionen',
   'eLearning: ingelogd': 'eLearning: inloggad',
   'eLearning: aanmelden loopt…': 'eLearning: loggar in…',
-  'eLearning: server niet bereikbaar': 'eLearning: servern är inte nåbar',
   'eLearning: aanmelden mislukt': 'eLearning: inloggningen misslyckades',
   'eLearning: niet ingelogd': 'eLearning: inte inloggad',
   'Vertaal met AI': 'Översätt med AI',

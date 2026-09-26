@@ -1655,6 +1655,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Não existe uma versão mais recente — toca para abrir a verificação.',
   '{naam}: bereikbaar': '{naam}: acessível',
   '{naam}: wordt gecontroleerd…': '{naam}: a verificar…',
   '{naam}: niet bereikbaar': '{naam}: inacessível',
@@ -1716,7 +1718,6 @@ const _dutchSourceAddPt = <String, String>{
   'AI: niet beschikbaar in de webversie': 'IA: não disponível na versão web',
   'eLearning: ingelogd': 'eLearning: sessão iniciada',
   'eLearning: aanmelden loopt…': 'eLearning: a iniciar sessão…',
-  'eLearning: server niet bereikbaar': 'eLearning: servidor inacessível',
   'eLearning: aanmelden mislukt': 'eLearning: falha ao iniciar sessão',
   'eLearning: niet ingelogd': 'eLearning: sessão não iniciada',
   'Vertaal met AI': 'Traduzir com IA',

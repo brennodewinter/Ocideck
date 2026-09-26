@@ -667,6 +667,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Es gibt keine neuere Version — tippen, um die Prüfung zu öffnen.',
   '{naam}: bereikbaar': '{naam}: erreichbar',
   '{naam}: wordt gecontroleerd…': '{naam}: wird geprüft…',
   '{naam}: niet bereikbaar': '{naam}: nicht erreichbar',
@@ -729,7 +731,6 @@ const _dutchSourceAddDe = {
       'KI: in der Webversion nicht verfügbar',
   'eLearning: ingelogd': 'eLearning: angemeldet',
   'eLearning: aanmelden loopt…': 'eLearning: Anmeldung läuft…',
-  'eLearning: server niet bereikbaar': 'eLearning: Server nicht erreichbar',
   'eLearning: aanmelden mislukt': 'eLearning: Anmeldung fehlgeschlagen',
   'eLearning: niet ingelogd': 'eLearning: nicht angemeldet',
   'Vertaal met AI': 'Mit KI übersetzen',

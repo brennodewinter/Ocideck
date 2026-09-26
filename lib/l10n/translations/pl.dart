@@ -1639,6 +1639,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Brak nowszej wersji — dotknij, aby otworzyć sprawdzanie.',
   '{naam}: bereikbaar': '{naam}: osiągalny',
   '{naam}: wordt gecontroleerd…': '{naam}: sprawdzanie…',
   '{naam}: niet bereikbaar': '{naam}: nieosiągalny',
@@ -1700,7 +1702,6 @@ const _dutchSourceAddPl = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: niedostępne w wersji webowej',
   'eLearning: ingelogd': 'eLearning: zalogowano',
   'eLearning: aanmelden loopt…': 'eLearning: logowanie…',
-  'eLearning: server niet bereikbaar': 'eLearning: serwer nieosiągalny',
   'eLearning: aanmelden mislukt': 'eLearning: logowanie nie powiodło się',
   'eLearning: niet ingelogd': 'eLearning: niezalogowano',
   'Vertaal met AI': 'Przetłumacz za pomocą AI',

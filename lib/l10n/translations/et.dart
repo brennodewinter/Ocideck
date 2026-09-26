@@ -1620,6 +1620,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Uuemat versiooni pole — puuduta kontrolli avamiseks.',
   '{naam}: bereikbaar': '{naam}: kättesaadav',
   '{naam}: wordt gecontroleerd…': '{naam}: kontrollimine…',
   '{naam}: niet bereikbaar': '{naam}: kättesaamatu',
@@ -1681,7 +1683,6 @@ const _dutchSourceAddEt = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: pole veebiversioonis saadaval',
   'eLearning: ingelogd': 'eLearning: sisse logitud',
   'eLearning: aanmelden loopt…': 'eLearning: sisselogimine…',
-  'eLearning: server niet bereikbaar': 'eLearning: server ei ole kättesaadav',
   'eLearning: aanmelden mislukt': 'eLearning: sisselogimine ebaõnnestus',
   'eLearning: niet ingelogd': 'eLearning: pole sisse logitud',
   'Vertaal met AI': 'Tõlgi AI-ga',

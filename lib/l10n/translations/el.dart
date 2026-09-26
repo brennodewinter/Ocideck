@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Δεν υπάρχει νεότερη έκδοση — πάτησε για να ανοίξεις τον έλεγχο.',
   '{naam}: bereikbaar': '{naam}: προσβάσιμος',
   '{naam}: wordt gecontroleerd…': '{naam}: γίνεται έλεγχος…',
   '{naam}: niet bereikbaar': '{naam}: μη προσβάσιμος',
@@ -1716,8 +1718,6 @@ const _dutchSourceAddEl = <String, String>{
       'ΤΝ: δεν είναι διαθέσιμο στην έκδοση web',
   'eLearning: ingelogd': 'eLearning: συνδεδεμένος',
   'eLearning: aanmelden loopt…': 'eLearning: σύνδεση σε εξέλιξη…',
-  'eLearning: server niet bereikbaar':
-      'eLearning: ο διακομιστής δεν είναι προσβάσιμος',
   'eLearning: aanmelden mislukt': 'eLearning: η σύνδεση απέτυχε',
   'eLearning: niet ingelogd': 'eLearning: δεν έχει γίνει σύνδεση',
   'Vertaal met AI': 'Μετάφραση με ΤΝ',
