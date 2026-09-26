@@ -16,6 +16,7 @@ import 'package:ocideck/state/ai_status_provider.dart';
 import 'package:ocideck/state/elearning_provider.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/storage_status_provider.dart';
+import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Nep-transport: nooit netwerk, alleen een programmeerbare uitkomst voor
@@ -270,5 +271,55 @@ void main() {
         expect(_tip('cloud.example: bereikbaar'), findsOneWidget);
       },
     );
+
+    testWidgets('twee verbindingen → één lampje met beide regels in de tip', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        prefs: _connectionPrefs([
+          const LocalConnection(id: 'l1', name: 'Schijf', path: '/tmp/decks'),
+          const WebdavConnection(
+            id: 'w1',
+            name: 'Kantoor',
+            server: WebdavServer(
+              baseUrl: 'https://cloud.example',
+              username: 'aisha',
+            ),
+          ),
+        ]),
+        storageProbe: _StorageProbe(true),
+      );
+
+      // Eén tooltip, niet twee lampjes — beide regels in dezelfde ballon.
+      final tips = tester
+          .widgetList<Tooltip>(find.byType(Tooltip))
+          .where(
+            (t) =>
+                (t.message ?? '').contains('Schijf: bereikbaar') &&
+                (t.message ?? '').contains('Kantoor: bereikbaar'),
+          )
+          .toList();
+      expect(tips, hasLength(1));
+    });
+
+    testWidgets('tik op het opslaglampje opent Instellingen op Opslag', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        prefs: _connectionPrefs([
+          const LocalConnection(id: 'l1', name: 'Schijf', path: '/tmp/decks'),
+        ]),
+        storageProbe: _StorageProbe(true),
+      );
+
+      await tester.tap(_tip('Schijf: bereikbaar'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SettingsDialog), findsOneWidget);
+      // Het opslag-tabblad is geselecteerd: de verbindingslijst staat er.
+      expect(find.text('Opslag'), findsWidgets);
+    });
   });
 }

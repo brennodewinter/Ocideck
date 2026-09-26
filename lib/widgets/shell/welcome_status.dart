@@ -25,7 +25,7 @@ class _WelcomeStatusCenter extends ConsumerWidget {
       ..._aiStatusItem(context, ref, l10n),
       if (elearningOn)
         OciServeStatusChip(onTap: () => _openOciServeFromStatus(context, ref)),
-      ..._storageStatusItems(context, ref, l10n),
+      ?_storageStatusItem(context, ref, l10n),
     ];
     if (items.isEmpty) return const SizedBox.shrink();
     return Wrap(
@@ -100,46 +100,57 @@ class _WelcomeStatusCenter extends ConsumerWidget {
     };
   }
 
-  /// Eén lampje per ingestelde opslagverbinding. Een lokale map is per
-  /// afspraak bereikbaar en staat meteen groen; remote soorten (WebDAV, S3,
-  /// git) volgt [storageStatusProvider] live — dezelfde probe als de
-  /// testknop op het opslag-tabblad. Een tik hertikt.
-  List<Widget> _storageStatusItems(
+  /// Één lampje voor álle opslag — bij veel schijven wil je niet even
+  /// veel lampjes. De kleur is de slechtste toestand van de ingestelde
+  /// verbindingen; de hover-ballon somt ze één voor één op. Een tik
+  /// opent het opslag-tabblad, waar dezelfde status per verbinding
+  /// naast de testknop staat.
+  Widget? _storageStatusItem(
     BuildContext context,
     WidgetRef ref,
     AppLocalizations l10n,
   ) {
     final statuses = ref.watch(storageStatusProvider);
-    final connections = ref.watch(
-      settingsProvider.select((s) => s.connections),
-    );
-    return [
+    final connections = ref
+        .watch(settingsProvider.select((s) => s.connections))
+        .where((c) => statuses.containsKey(c.id))
+        .toList();
+    if (connections.isEmpty) return null;
+    final lines = <String>[
       for (final c in connections)
-        if (statuses[c.id] case final reach?)
-          StatusChip(
-            icon: c.kind.icon,
-            level: switch (reach) {
-              StorageReach.reachable => StatusLevel.ok,
-              StorageReach.checking => StatusLevel.attention,
-              StorageReach.unreachable => StatusLevel.unreachable,
-            },
-            message: switch (reach) {
-              StorageReach.reachable =>
-                l10n
-                    .d('{naam}: bereikbaar')
-                    .replaceAll('{naam}', _connectionName(c)),
-              StorageReach.checking =>
-                l10n
-                    .d('{naam}: wordt gecontroleerd…')
-                    .replaceAll('{naam}', _connectionName(c)),
-              StorageReach.unreachable =>
-                l10n
-                    .d('{naam}: niet bereikbaar')
-                    .replaceAll('{naam}', _connectionName(c)),
-            },
-            onTap: () => ref.read(storageStatusProvider.notifier).recheck(c.id),
-          ),
+        switch (statuses[c.id]!) {
+          StorageReach.reachable =>
+            l10n
+                .d('{naam}: bereikbaar')
+                .replaceAll('{naam}', _connectionName(c)),
+          StorageReach.checking =>
+            l10n
+                .d('{naam}: wordt gecontroleerd…')
+                .replaceAll('{naam}', _connectionName(c)),
+          StorageReach.unreachable =>
+            l10n
+                .d('{naam}: niet bereikbaar')
+                .replaceAll('{naam}', _connectionName(c)),
+        },
     ];
+    var level = StatusLevel.ok;
+    for (final c in connections) {
+      switch (statuses[c.id]!) {
+        case StorageReach.unreachable:
+          level = StatusLevel.unreachable;
+        case StorageReach.checking:
+          if (level == StatusLevel.ok) level = StatusLevel.attention;
+        case StorageReach.reachable:
+          break;
+      }
+    }
+    return StatusChip(
+      icon: Icons.inventory_2_outlined,
+      level: level,
+      message: lines.join('\n'),
+      onTap: () =>
+          SettingsDialog.show(context, initialSection: SettingsSection.storage),
+    );
   }
 
   /// De naam die de gebruiker gaf, of de afgeleide omschrijving als die leeg
