@@ -25,7 +25,7 @@
 #   scripts/deploy_web.sh --keep-backup      ruim de vorige versie niet op
 #
 # Instelbaar via de omgeving (de standaarden zijn de publieke webdemo):
-#   OCIDECK_DEPLOY_HOST   ssh-doel                     ubuntu@vps-7f36cc7e.vps.ovh.net
+#   OCIDECK_DEPLOY_HOST   ssh-doel                     ubuntu@vps-40edd80f.vps.ovh.net
 #   OCIDECK_DEPLOY_ROOT   webroot op die host          /var/www/ocideck
 #   OCIDECK_DEPLOY_OWNER  eigenaar van de bestanden    ubuntu:ubuntu
 #   OCIDECK_DEPLOY_URL    URL voor de liveverificatie  https://ocideck.librekat.nl
@@ -34,7 +34,7 @@ set -Eeuo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-7f36cc7e.vps.ovh.net}"
+HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-40edd80f.vps.ovh.net}"
 WEBROOT="${OCIDECK_DEPLOY_ROOT:-/var/www/ocideck}"
 OWNER="${OCIDECK_DEPLOY_OWNER:-ubuntu:ubuntu}"
 LIVE_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"

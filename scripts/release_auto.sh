@@ -95,7 +95,7 @@ TOKEN_KEYCHAIN_SERVICE="${OCIDECK_TOKEN_SERVICE:-forgejo-pawprint-api}"
 APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
 # Zelfde standaard-doel als scripts/deploy_web.sh; de pre-flight toetst dat het
 # bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
-DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-7f36cc7e.vps.ovh.net}"
+DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-40edd80f.vps.ovh.net}"
 DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de liveverificatie
 # De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
 # serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
@@ -856,8 +856,25 @@ preflight() {
     || die "forge-token werkt niet tegen $REPO_SLUG (keychain '$TOKEN_KEYCHAIN_SERVICE')."
   git ls-remote mirror >/dev/null 2>&1 \
     || die "mirror-remote onbereikbaar — de Windows-build op de spiegel hangt eraan."
-  ssh -o BatchMode=yes -o ConnectTimeout=8 "$DEPLOY_HOST" true >/dev/null 2>&1 \
+  # Bereikbaar alleen is niet genoeg: v0.6.12 werd keurig naar een oude VPS
+  # geschreven nadat DNS naar zijn opvolger was verhuisd. `index.html` was
+  # toevallig bytegelijk, zodat pas SHA256SUMS na de tag het verkeerde doel
+  # ontdekte. Vergelijk daarom vóór de tag het publieke IPv4-adres met de
+  # adressen die de SSH-host zelf draagt. De referentiehosting is rechtstreeks;
+  # een inzet met proxy/CDN moet deze poort bewust passend maken.
+  local deploy_host_ips live_ip
+  deploy_host_ips="$(ssh -o BatchMode=yes -o ConnectTimeout=8 \
+    "$DEPLOY_HOST" 'hostname -I' 2>/dev/null)" \
     || die "deploy-host $DEPLOY_HOST onbereikbaar via ssh — deploy-web zou ná de tag stranden."
+  [ -n "$deploy_host_ips" ] \
+    || die "deploy-host $DEPLOY_HOST meldt geen eigen IP-adressen — niet bewijsbaar dat hij $DEPLOY_URL bedient."
+  live_ip="$(curl -4 -fsS --max-time 15 -o /dev/null -w '%{remote_ip}' \
+    "$DEPLOY_URL/version.json")" \
+    || die "publieke webdemo $DEPLOY_URL niet bereikbaar — deploydoel vóór de tag niet verifieerbaar."
+  case " $deploy_host_ips " in
+    *" $live_ip "*) ;;
+    *) die "deploy-host $DEPLOY_HOST draagt [$deploy_host_ips], maar $DEPLOY_URL gaat naar $live_ip — deploy-web zou naar de verkeerde server schrijven." ;;
+  esac
   # Proef-tekening: valideert sleutel én wachtwoord vóór de lange build/tag,
   # zodat een fout wachtwoord niet pas aan het eind (na de tag) opduikt.
   local t; t="$(mktemp -d)"
@@ -949,6 +966,10 @@ deploy_web_if_needed() {
   if [ -z "$tag_sha" ] || [ "$tag_sha" != "$head_sha" ]; then
     die "de werkboom staat ná het uitchecken nog steeds niet op $TAG (HEAD ${head_sha:0:9}, tag ${tag_sha:0:9}) — een lokale deploy-web zou andere code als $TAG publiceren. Onderzoek de repotoestand en hervat: scripts/release_auto.sh --resume $TAG"
   fi
+  # ensure_worktree_on_tag gebruikt voor zijn eigen melding tijdelijk een
+  # specifiekere stapnaam. Zet de buitenste stap terug, zodat een echte
+  # deployfout niet opnieuw als "werkboom op de tag zetten" wordt gemeld.
+  STEP="deploy-web"
   make deploy-web
   # Meten, niet aannemen: `deploy_web.sh` verifieert zijn eigen bundel, maar
   # alleen dit zegt dat de bezoeker de nieuwe versie krijgt.
