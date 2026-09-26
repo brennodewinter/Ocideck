@@ -1655,6 +1655,19 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nieuwe versies': 'Novas versões',
+  'Controleer automatisch op nieuwe versies':
+      'Verificar automaticamente se há novas versões',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'O OciDeck pergunta então, no máximo uma vez por dia, ao pawprint.vigilis.online se existe uma versão mais recente.',
+  'Controleer nu': 'Verificar agora',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'A verificação falhou — tente novamente mais tarde.',
+  'Er is geen nieuwere versie.': 'Não existe uma versão mais recente.',
+  'OciDeck {versie} is beschikbaar.': 'O OciDeck {versie} está disponível.',
+  'Download': 'Descarregar',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'O OciDeck {versie} está disponível — toque para abrir a página da versão.',
   'Sommige waarden zijn niet getoond': 'Alguns valores não são apresentados',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'O OciServe oculta um valor quando este também diz respeito a outra pessoa. O campo correspondente indica por que motivo o valor está em falta.',

@@ -1625,6 +1625,19 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nieuwe versies': 'Jaunās versijas',
+  'Controleer automatisch op nieuwe versies':
+      'Automātiski pārbaudīt jaunās versijas',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck tad ne vairāk kā reizi dienā jautā pawprint.vigilis.online, vai ir pieejama jaunāka versija.',
+  'Controleer nu': 'Pārbaudīt tagad',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Pārbaude neizdevās — mēģiniet vēlāk vēlreiz.',
+  'Er is geen nieuwere versie.': 'Nav jaunākas versijas.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} ir pieejams.',
+  'Download': 'Lejupielādēt',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} ir pieejams — pieskarieties, lai atvērtu laidienu lapu.',
   'Sommige waarden zijn niet getoond': 'Dažas vērtības netiek rādītas',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe paslēpj vērtību, ja tā attiecas arī uz citu personu. Pie attiecīgā lauka ir norādīts, kāpēc vērtības nav.',

@@ -744,25 +744,60 @@ class _WelcomeScreen extends ConsumerWidget {
 /// `kOciDeckVersion` als op het About-tabblad — een tik erop opent dat
 /// tabblad meteen, want dat is precies het nummer dat bij een
 /// beveiligingsmelding hoort (zie settings_dialog_about.dart).
-class _VersionTag extends StatelessWidget {
+class _VersionTag extends ConsumerWidget {
   final AppPalette palette;
 
   const _VersionTag({required this.palette});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    // De laatst bekende nieuwste release — óók die van een eerdere sessie,
+    // dus de indicator kan zichtbaar zijn zonder dat deze start al een ping
+    // is gegaan. Alleen een strikt nieuwere versie toont iets.
+    final latest = ref.watch(
+      updateCheckProvider.select(
+        (s) => s.updateAvailable ? s.latestVersion : null,
+      ),
+    );
+    final message = latest == null
+        ? l10n.t('settings')
+        : l10n
+              .d(
+                'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.',
+              )
+              .replaceAll('{versie}', latest);
     return Tooltip(
-      message: l10n.t('settings'),
+      message: message,
       child: InkWell(
-        onTap: () =>
-            SettingsDialog.show(context, initialSection: SettingsSection.about),
+        onTap: () => latest == null
+            ? SettingsDialog.show(
+                context,
+                initialSection: SettingsSection.about,
+              )
+            : unawaited(openExternalUrl(releasesPageUri.toString())),
         borderRadius: BorderRadius.circular(3),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-          child: Text(
-            'v$kOciDeckVersion',
-            style: TextStyle(fontSize: 10.5, color: palette.mutedText),
+        child: Semantics(
+          label: message,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'v$kOciDeckVersion',
+                  style: TextStyle(fontSize: 10.5, color: palette.mutedText),
+                ),
+                if (latest != null) ...[
+                  const SizedBox(width: 3),
+                  const Icon(
+                    Icons.arrow_circle_up_outlined,
+                    size: 11,
+                    color: AppTheme.amber700,
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
       ),

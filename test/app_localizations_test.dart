@@ -70,6 +70,11 @@ const unchangedInEnglish = {
   // (Duits Dokument, Fins asiakirja, Grieks έγγραφο, …), dus alleen op de
   // Engelse witte lijst — niet op unchangedInAllLanguages.
   'document',
+  // De downloadlink op het Over-tabblad: het Engels houdt het leenwoord
+  // 'Download' identiek aan het Nederlands, maar andere talen vertalen het wél
+  // (Frans Télécharger, Fins Lataa, Grieks Λήψη, …), dus alleen op de Engelse
+  // witte lijst.
+  'Download',
   'https://matrix.to/#/…',
   'https://matrix.example.org',
   '@jij:matrix.example.org',

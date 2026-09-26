@@ -294,6 +294,10 @@ extension _SettingsAbout on _SettingsDialogState {
         _aboutVersion(l10n),
         const SizedBox(height: 18),
 
+        // ── Versiecheck: opt-in ping + handmatige controle (web draait altijd
+        // de gedeployde versie, dus daar staat deze kaart niet) ──────────────
+        if (!isWebPlatform) ...const [_UpdateCheckCard(), SizedBox(height: 18)],
+
         // ── Origin: the Pilot Informatieautonomie ────────────────────────────
         _aboutOrigin(l10n),
         const SizedBox(height: 18),
@@ -598,48 +602,6 @@ extension _SettingsAbout on _SettingsDialogState {
     ),
   );
 
-  Widget _aboutHeading(IconData icon, String text) => Padding(
-    padding: const EdgeInsets.only(bottom: 8),
-    child: Row(
-      children: [
-        Icon(icon, size: 18, color: AppTheme.blue500),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Text(
-            text,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-          ),
-        ),
-      ],
-    ),
-  );
-
-  // `AppTheme.paper` and not `Colors.white`: these cards are chrome, not slide
-  // content, so they follow the appearance profile. Hardcoded white kept the
-  // whole pane bright in dark mode — and, being white, hid that the LibreKAT
-  // and Vigilis marks on it were dark ink that would vanish the moment it went
-  // dark (#735).
-  Widget _aboutCard(Widget child) => Container(
-    width: double.infinity,
-    padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(
-      color: AppTheme.paper,
-      border: Border.all(color: AppTheme.slate300),
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: child,
-  );
-
-  Widget _aboutLink(String label, String url) => TextButton.icon(
-    onPressed: () => openExternalUrl(url),
-    style: TextButton.styleFrom(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      minimumSize: const Size(0, 32),
-    ),
-    icon: const Icon(Icons.open_in_new, size: 15),
-    label: Text(label),
-  );
-
   Widget _catCard(_CatMascot cat) {
     return Container(
       decoration: BoxDecoration(
@@ -714,4 +676,166 @@ extension _SettingsAbout on _SettingsDialogState {
       ),
     );
   }
+}
+
+Widget _aboutHeading(IconData icon, String text) => Padding(
+  padding: const EdgeInsets.only(bottom: 8),
+  child: Row(
+    children: [
+      Icon(icon, size: 18, color: AppTheme.blue500),
+      const SizedBox(width: 8),
+      Expanded(
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+        ),
+      ),
+    ],
+  ),
+);
+
+// `AppTheme.paper` and not `Colors.white`: these cards are chrome, not slide
+// content, so they follow the appearance profile. Hardcoded white kept the
+// whole pane bright in dark mode — and, being white, hid that the LibreKAT
+// and Vigilis marks on it were dark ink that would vanish the moment it went
+// dark (#735).
+Widget _aboutCard(Widget child) => Container(
+  width: double.infinity,
+  padding: const EdgeInsets.all(14),
+  decoration: BoxDecoration(
+    color: AppTheme.paper,
+    border: Border.all(color: AppTheme.slate300),
+    borderRadius: BorderRadius.circular(10),
+  ),
+  child: child,
+);
+
+Widget _aboutLink(String label, String url) => TextButton.icon(
+  onPressed: () => openExternalUrl(url),
+  style: TextButton.styleFrom(
+    padding: const EdgeInsets.symmetric(horizontal: 4),
+    minimumSize: const Size(0, 32),
+  ),
+  icon: const Icon(Icons.open_in_new, size: 15),
+  label: Text(label),
+);
+
+/// De versiecheck-kaart op het Over-tabblad: een opt-in automatische controle
+/// (maximaal één ping per dag naar de forge) plus een handmatige knop — die is
+/// zelf de actie van de gebruiker en mag dus altijd, óók als de automatische
+/// uit staat.
+///
+/// Een eigen widget in plaats van een methode op _SettingsDialogState: de
+/// klasse-omvangratchet telt elk extension-member mee en deze kaart heeft
+/// verder niets van de dialoogstate nodig.
+class _UpdateCheckCard extends ConsumerWidget {
+  const _UpdateCheckCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final update = ref.watch(updateCheckProvider);
+    final enabled = ref.watch(
+      settingsProvider.select((s) => s.updateChecksEnabled),
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _aboutHeading(Icons.update, l10n.d('Nieuwe versies')),
+        _aboutCard(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.d('Controleer automatisch op nieuwe versies'),
+                          style: _SettingsAbout._aboutLabelStyle,
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          l10n.d(
+                            'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.',
+                          ),
+                          style: _SettingsAbout._aboutBodyStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Switch(
+                    value: enabled,
+                    onChanged: (v) => unawaited(
+                      ref
+                          .read(settingsProvider.notifier)
+                          .setUpdateChecksEnabled(v),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 10,
+                runSpacing: 6,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  OutlinedButton(
+                    onPressed: update.checking
+                        ? null
+                        : () => unawaited(
+                            ref.read(updateCheckProvider.notifier).checkNow(),
+                          ),
+                    child: Text(l10n.d('Controleer nu')),
+                  ),
+                  _updateCheckStatus(l10n, update),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// De statusregel naast "Controleer nu": spinner-tekst tijdens de check,
+/// een mislukt-melding alleen na een handmatige poging, en anders de
+/// uitkomst — een nieuwere versie met downloadlink, of "geen nieuwere
+/// versie". Zonder ooit geslaagde check blijft de plek leeg.
+Widget _updateCheckStatus(AppLocalizations l10n, UpdateCheckState update) {
+  if (update.checking) {
+    return Text(l10n.d('Controleren…'), style: _SettingsAbout._aboutBodyStyle);
+  }
+  if (update.checkFailed) {
+    return Text(
+      l10n.d('De controle is mislukt — probeer het later opnieuw.'),
+      style: _SettingsAbout._aboutBodyStyle,
+    );
+  }
+  final latest = update.latestVersion;
+  if (latest == null) return const SizedBox.shrink();
+  if (!update.updateAvailable) {
+    return Text(
+      l10n.d('Er is geen nieuwere versie.'),
+      style: _SettingsAbout._aboutBodyStyle,
+    );
+  }
+  return Wrap(
+    spacing: 8,
+    runSpacing: 4,
+    crossAxisAlignment: WrapCrossAlignment.center,
+    children: [
+      Text(
+        l10n
+            .d('OciDeck {versie} is beschikbaar.')
+            .replaceAll('{versie}', latest),
+        style: _SettingsAbout._aboutBodyStyle,
+      ),
+      _aboutLink(l10n.d('Download'), releasesPageUri.toString()),
+    ],
+  );
 }

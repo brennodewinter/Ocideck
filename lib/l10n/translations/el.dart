@@ -1652,6 +1652,19 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nieuwe versies': 'Νέες εκδόσεις',
+  'Controleer automatisch op nieuwe versies':
+      'Αυτόματος έλεγχος για νέες εκδόσεις',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'Το OciDeck ρωτά τότε το πολύ μία φορά την ημέρα το pawprint.vigilis.online αν υπάρχει νεότερη έκδοση.',
+  'Controleer nu': 'Έλεγχος τώρα',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Ο έλεγχος απέτυχε — δοκιμάστε ξανά αργότερα.',
+  'Er is geen nieuwere versie.': 'Δεν υπάρχει νεότερη έκδοση.',
+  'OciDeck {versie} is beschikbaar.': 'Το OciDeck {versie} είναι διαθέσιμο.',
+  'Download': 'Λήψη',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'Το OciDeck {versie} είναι διαθέσιμο — πατήστε για να ανοίξετε τη σελίδα έκδοσης.',
   'Sommige waarden zijn niet getoond': 'Ορισμένες τιμές δεν εμφανίζονται',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'Το OciServe αποκρύπτει μια τιμή όταν αφορά και κάποιο άλλο άτομο. Στο σχετικό πεδίο αναφέρεται γιατί λείπει η τιμή.',

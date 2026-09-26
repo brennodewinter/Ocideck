@@ -301,6 +301,14 @@ class AppSettings {
   /// gebruiken. Leeg = de standaard ([defaultCveApiBaseUrl]).
   final String cveApiBaseUrl;
 
+  /// Of de app bij het opstarten zelf mag controleren of er een nieuwere
+  /// release op de forge staat (maximaal eenmaal per dag). Standaard uit:
+  /// uitgaand verkeer staat uit tenzij de gebruiker het aanzet — de ping
+  /// verraadt metagegevens ("deze machine draait OciDeck, op dit tijdstip").
+  /// De handmatige controle op het Over-tabblad is gebruiker-geïnitieerd en
+  /// mag daarom altijd, óók als dit uit staat.
+  final bool updateChecksEnabled;
+
   /// De standaard-WebDAV-bron: de bovenste bruikbare WebDAV-verbinding, of
   /// `null` wanneer er geen is. Afgeleid uit [connections] — de plekken die
   /// zonder keuze van de gebruiker één server nodig hebben lezen hier.
@@ -384,6 +392,7 @@ class AppSettings {
     this.allowRemoteMedia = false,
     this.allowCveLookup = false,
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
+    this.updateChecksEnabled = false,
     this.aiSettings = const AiSettings(),
     this.libreplanSettings = const LibreplanSettings(),
   });
@@ -482,6 +491,7 @@ class AppSettings {
     bool? allowRemoteMedia,
     bool? allowCveLookup,
     String? cveApiBaseUrl,
+    bool? updateChecksEnabled,
     AiSettings? aiSettings,
     LibreplanSettings? libreplanSettings,
     bool clearExportDirectory = false,
@@ -571,6 +581,7 @@ class AppSettings {
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
       allowCveLookup: allowCveLookup ?? this.allowCveLookup,
       cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,
+      updateChecksEnabled: updateChecksEnabled ?? this.updateChecksEnabled,
       aiSettings: aiSettings ?? this.aiSettings,
       libreplanSettings: libreplanSettings ?? this.libreplanSettings,
     );

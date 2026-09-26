@@ -2538,6 +2538,18 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nieuwe versies': 'Yeni sürümler',
+  'Controleer automatisch op nieuwe versies': 'Yeni sürümleri otomatik denetle',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck daha sonra günde en fazla bir kez pawprint.vigilis.online\'a daha yeni bir sürüm olup olmadığını sorar.',
+  'Controleer nu': 'Şimdi denetle',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Denetim başarısız oldu — daha sonra yeniden deneyin.',
+  'Er is geen nieuwere versie.': 'Daha yeni bir sürüm yok.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} kullanılabilir.',
+  'Download': 'İndir',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} kullanılabilir — sürüm sayfasını açmak için dokunun.',
   'Sommige waarden zijn niet getoond': 'Bazı değerler gösterilmiyor',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe, bir değer başka bir kişiyle de ilgili olduğunda bu değeri gizler. İlgili alanda değerin neden eksik olduğu belirtilir.',

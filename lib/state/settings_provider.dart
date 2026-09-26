@@ -24,6 +24,7 @@ part 'parts/settings_provider_document_style.dart';
 part 'parts/settings_provider_git.dart';
 part 'parts/settings_provider_privacy.dart';
 part 'parts/settings_provider_traces.dart';
+part 'parts/settings_provider_update_check.dart';
 
 /// Vaste startwaarde voor de testsuite, in plaats van de taal van de machine.
 ///
@@ -314,6 +315,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       allowCveLookup: prefs.getBool('allowCveLookup') ?? false,
       cveApiBaseUrl:
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
+      updateChecksEnabled: prefs.getBool('updateChecksEnabled') ?? false,
       aiSettings: ai,
       libreplanSettings: libreplan,
     );
@@ -591,6 +593,10 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       (prefs) => prefs.setBool('marpCompatChecksEnabled', enabled),
     );
   }
+
+  /// Zet de automatische versiecheck aan of uit (opt-in; zie `_apply…`).
+  Future<void> setUpdateChecksEnabled(bool enabled) =>
+      _applyUpdateChecksEnabled(this, enabled);
 
   Future<void> setContrastMinRatio(double ratio) async {
     final clamped = ratio.clamp(1.0, 7.0).toDouble();

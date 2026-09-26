@@ -1630,6 +1630,19 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nieuwe versies': 'Nöji Versione',
+  'Controleer automatisch op nieuwe versies':
+      'Automatisch nach nöije Versione luege',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck fragt denn höchstens einmol pro Tag bi pawprint.vigilis.online aa, öb\'s e nöijeri Version git.',
+  'Controleer nu': 'Jetzt prüefe',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'D\'Prüüfig isch fählgschlage — versuech\'s spööter noöis.',
+  'Er is geen nieuwere versie.': 'S\'git kei nöijeri Version.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} isch verfüegbar.',
+  'Download': 'Abelade',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} isch verfüegbar — tipp zum d\'Release-Siite uufmache.',
   'Sommige waarden zijn niet getoond': 'Einigi Wärt wärde nöd aazeigt',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe blendet en Wärt us, wenn er au e anderi Person betrifft. Bim betreffende Fäld stoht, warum de Wärt fählt.',

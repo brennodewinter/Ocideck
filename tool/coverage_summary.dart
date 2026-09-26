@@ -186,6 +186,11 @@ const Set<String> uncoveredBaseline = {
   'lib/platform/presenter_fullscreen_web.dart',
   'lib/services/cve_transport_factory.dart',
   'lib/services/cve_transport_web.dart',
+  // PLATFORM: `update_check_fetch.dart` is de conditional-importnaad van de
+  // versiecheck — één const-binding, niets om uit te voeren. De webhelft
+  // (altijd-weigeren) wordt rechtstreeks gedekt in update_check_test.dart,
+  // de io-helft via de service onder de VM.
+  'lib/services/update_check_fetch.dart',
   // PLATFORM: de twee OciServe-fabrieken zijn kale conditional-importnaden;
   // hun io-helften worden rechtstreeks gedekt door ociserve_platform_io_test.
   // De webhelften weigeren alleen fail-closed en worden rechtstreeks geladen
