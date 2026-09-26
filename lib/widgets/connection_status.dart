@@ -108,6 +108,10 @@ extension StorageConnectionKindIcon on StorageConnectionKind {
 /// notifier bewaakt de verbinding al, hier komt geen eigen netwerk bij.
 /// Zelfde lampje op het openscherm én onderaan de leeromgeving: de cursist
 /// ziet op beide plekken of de server bereikbaar is en of hij is ingelogd.
+/// De ballon somt de twee checks onder elkaar op — server én account —
+/// zoals het opslaglampje dat per verbinding doet. Over de server is alleen
+/// iets bekend ná een poging: wie nog nooit aanmeldde, krijgt geen
+/// serverregel en dus geen schijnzekerheid.
 class OciServeStatusChip extends ConsumerWidget {
   final VoidCallback? onTap;
 
@@ -120,29 +124,47 @@ class OciServeStatusChip extends ConsumerWidget {
     if (!ref.watch(elearningEnabledProvider) || !ociServe.settings.enabled) {
       return const SizedBox.shrink();
     }
-    final (level, message) = switch (ociServe.status) {
+    // De serverregel hergebruikt de opslag-templates: 'eLearning-server'
+    // is daar gewoon een naam als elke andere.
+    String serverLine(String template) =>
+        l10n.d(template).replaceAll('{naam}', 'eLearning-server');
+    final (level, lines) = switch (ociServe.status) {
       OciServeStatus.authenticated => (
         StatusLevel.ok,
-        l10n.d('eLearning: ingelogd'),
+        [serverLine('{naam}: bereikbaar'), l10n.d('eLearning: ingelogd')],
       ),
       OciServeStatus.loading || OciServeStatus.authenticating => (
         StatusLevel.attention,
-        l10n.d('eLearning: aanmelden loopt…'),
+        [
+          serverLine('{naam}: wordt gecontroleerd…'),
+          l10n.d('eLearning: aanmelden loopt…'),
+        ],
       ),
       OciServeStatus.signedOut =>
         ociServe.serverUnavailable
             ? (
                 StatusLevel.unreachable,
-                l10n.d('eLearning: server niet bereikbaar'),
+                [
+                  serverLine('{naam}: niet bereikbaar'),
+                  l10n.d('eLearning: niet ingelogd'),
+                ],
               )
             : ociServe.errorCode != null
-            ? (StatusLevel.attention, l10n.d('eLearning: aanmelden mislukt'))
-            : (StatusLevel.attention, l10n.d('eLearning: niet ingelogd')),
+            // Een geweigerde aanmelding bewijst juist dat de server
+            // antwoordde — de serverregel zegt dan "bereikbaar".
+            ? (
+                StatusLevel.attention,
+                [
+                  serverLine('{naam}: bereikbaar'),
+                  l10n.d('eLearning: aanmelden mislukt'),
+                ],
+              )
+            : (StatusLevel.attention, [l10n.d('eLearning: niet ingelogd')]),
     };
     return StatusChip(
       icon: Icons.school_outlined,
       level: level,
-      message: message,
+      message: lines.join('\n'),
       onTap: onTap,
     );
   }

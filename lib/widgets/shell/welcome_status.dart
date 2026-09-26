@@ -24,7 +24,12 @@ class _WelcomeStatusCenter extends ConsumerWidget {
     final items = <Widget>[
       ..._aiStatusItem(context, ref, l10n),
       if (elearningOn)
-        OciServeStatusChip(onTap: () => _openOciServeFromStatus(context, ref)),
+        OciServeStatusChip(
+          onTap: () => SettingsDialog.show(
+            context,
+            initialSection: SettingsSection.integrations,
+          ),
+        ),
       ?_storageStatusItem(context, ref, l10n),
     ];
     if (items.isEmpty) return const SizedBox.shrink();
@@ -158,22 +163,5 @@ class _WelcomeStatusCenter extends ConsumerWidget {
   String _connectionName(StorageConnection c) {
     final name = c.name.trim();
     return name.isEmpty ? c.fallbackLabel : name;
-  }
-
-  /// Dezelfde flow als [_WelcomeScreen._openOciServe]: eerst aanmelden als dat
-  /// moet, dan de cursusdialoog. Gedupliceerd als top-level helper zodat deze
-  /// widget niet aan de welkomscherm-klasse hoeft te hangen.
-  Future<void> _openOciServeFromStatus(
-    BuildContext context,
-    WidgetRef ref,
-  ) async {
-    if (ref.read(ociServeProvider).status == OciServeStatus.authenticating) {
-      return;
-    }
-    if (!ref.read(ociServeAuthenticatedProvider)) {
-      final loggedIn = await ref.read(ociServeProvider.notifier).login();
-      if (!loggedIn || !context.mounted) return;
-    }
-    await OciServeCoursesDialog.show(context);
   }
 }
