@@ -1657,6 +1657,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '{naam}: bereikbaar': '{naam}: inrochtana',
+  '{naam}: wordt gecontroleerd…': '{naam}: á sheiceáil…',
+  '{naam}: niet bereikbaar': '{naam}: neamh-inrochtana',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Níor seiceáladh leaganacha nua fós — tapáil chun an tseiceáil a shocrú.',
   'Nieuwe versies': 'Leaganacha nua',

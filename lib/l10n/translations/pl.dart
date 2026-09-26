@@ -1639,6 +1639,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  '{naam}: bereikbaar': '{naam}: osiągalny',
+  '{naam}: wordt gecontroleerd…': '{naam}: sprawdzanie…',
+  '{naam}: niet bereikbaar': '{naam}: nieosiągalny',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nie sprawdzono jeszcze nowych wersji — dotknij, aby skonfigurować sprawdzanie.',
   'Nieuwe versies': 'Nowe wersje',

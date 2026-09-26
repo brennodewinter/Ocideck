@@ -1629,6 +1629,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  '{naam}: bereikbaar': '{naam}: elérhető',
+  '{naam}: wordt gecontroleerd…': '{naam}: ellenőrzés…',
+  '{naam}: niet bereikbaar': '{naam}: nem érhető el',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Még nem történt ellenőrzés új verziókra — koppints a beállításához.',
   'Nieuwe versies': 'Új verziók',

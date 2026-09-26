@@ -664,6 +664,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  '{naam}: bereikbaar': '{naam}: accesible',
+  '{naam}: wordt gecontroleerd…': '{naam}: comprobando…',
+  '{naam}: niet bereikbaar': '{naam}: no accesible',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Aún no se ha comprobado si hay nuevas versiones — toca para configurar la comprobación.',
   'Nieuwe versies': 'Nuevas versiones',

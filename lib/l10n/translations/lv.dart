@@ -1625,6 +1625,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '{naam}: bereikbaar': '{naam}: sasniedzams',
+  '{naam}: wordt gecontroleerd…': '{naam}: notiek pārbaude…',
+  '{naam}: niet bereikbaar': '{naam}: nav sasniedzams',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Jaunās versijas vēl nav pārbaudītas — pieskaries, lai iestatītu pārbaudi.',
   'Nieuwe versies': 'Jaunās versijas',

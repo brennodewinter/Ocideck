@@ -1604,6 +1604,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  '{naam}: bereikbaar': '{naam}: Qap',
+  '{naam}: wordt gecontroleerd…': '{naam}: nuDlutaH',
+  '{naam}: niet bereikbaar': '{naam}: waw\' Hutlh',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'De\' chu\' luleghbe\'ta\' — leghmey yIchen.',
   'Nieuwe versies': 'version De\' chu\'',

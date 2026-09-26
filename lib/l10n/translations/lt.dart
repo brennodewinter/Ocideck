@@ -1634,6 +1634,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  '{naam}: bereikbaar': '{naam}: pasiekiamas',
+  '{naam}: wordt gecontroleerd…': '{naam}: tikrinama…',
+  '{naam}: niet bereikbaar': '{naam}: nepasiekiamas',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Naujų versijų dar netikrinta — paliesk, kad nustatytum tikrinimą.',
   'Nieuwe versies': 'Naujos versijos',

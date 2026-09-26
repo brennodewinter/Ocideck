@@ -1628,6 +1628,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  '{naam}: bereikbaar': '{naam}: dostupný',
+  '{naam}: wordt gecontroleerd…': '{naam}: kontroluje se…',
+  '{naam}: niet bereikbaar': '{naam}: nedostupný',
   'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
       'Nové verze zatím nebyly zkontrolovány — klepnutím kontrolu nastavíte.',
   'Nieuwe versies': 'Nové verze',
