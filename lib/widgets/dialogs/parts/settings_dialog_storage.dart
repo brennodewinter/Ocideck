@@ -77,15 +77,12 @@ extension _SettingsStorageTab on _SettingsDialogState {
       children: [
         ..._connectionsSection(l10n),
         // Het openscherm doorzoekt diezelfde verbindingen; de voorbeeldweergave
-        // hoort daarom hier en niet bij "Weergave" — je zoekt hem waar je het
-        // zoeken zelf instelt.
+        // hoort daarom hier en niet bij "Weergave". De exportmap stuurt het
+        // bestandssysteem aan — op web bestaat dat niet (export =
+        // browser-download), dus dan zijn beide secties zinloos.
         if (supportsLocalProjectFolders) ...[
           const SizedBox(height: 20),
           ..._openPreviewSection(l10n),
-        ],
-        // De exportmap stuurt het bestandssysteem aan. Op web bestaat dat niet
-        // (export = browser-download), dus dan is de mapkeuze zinloos.
-        if (supportsLocalProjectFolders) ...[
           const SizedBox(height: 20),
           ..._exportFolderSection(l10n),
         ],
@@ -222,6 +219,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
                   const SizedBox(width: 10),
                   Expanded(child: _connectionNameField(connection, l10n)),
                   const SizedBox(width: 8),
+                  StorageStatusDot(connection: connection),
                   _connectionStatusLine(connection, l10n),
                   IconButton(
                     onPressed: () => _removeConnection(connection.id),

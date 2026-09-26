@@ -5,12 +5,45 @@ import '../l10n/app_localizations.dart';
 import '../models/storage_connection.dart';
 import '../state/elearning_provider.dart';
 import '../state/ociserve_provider.dart';
+import '../state/storage_status_provider.dart';
 import '../theme/app_theme.dart';
 
 /// Eén statuskleur, drie betekenissen — dezelfde voor elk lampje:
 /// groen = werkt, oranje = aandacht/actie nodig (of controle loopt),
 /// rood = server niet bereikbaar.
 enum StatusLevel { ok, attention, unreachable }
+
+/// De drie betekeniskleuren — gedeeld door chip en stip, zodat een nieuwe
+/// statuskleur maar één plek heeft.
+Color statusLevelColor(StatusLevel level) => switch (level) {
+  StatusLevel.ok => AppTheme.success700,
+  StatusLevel.attention => AppTheme.amber600,
+  StatusLevel.unreachable => AppTheme.danger600,
+};
+
+/// Alleen de gekleurde stip — voor rijen waar het icoon er al staat, zoals
+/// de verbindingslijst op het opslag-tabblad. De uitleg hoort in de
+/// [tooltip] (en in de Semantics van het geheel eromheen).
+class StatusDot extends StatelessWidget {
+  final StatusLevel level;
+  final String? tooltip;
+
+  const StatusDot({super.key, required this.level, this.tooltip});
+
+  @override
+  Widget build(BuildContext context) {
+    final dot = Container(
+      width: 8,
+      height: 8,
+      decoration: BoxDecoration(
+        color: statusLevelColor(level),
+        shape: BoxShape.circle,
+      ),
+    );
+    final message = tooltip;
+    return message == null ? dot : Tooltip(message: message, child: dot);
+  }
+}
 
 /// Eén statuslampje: icoon in gedempte kleur met een gekleurde statusstip
 /// ernaast. De betekenis zit in de tooltip én in het Semantics-label, zodat
@@ -33,11 +66,6 @@ class StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dot = switch (level) {
-      StatusLevel.ok => AppTheme.success700,
-      StatusLevel.attention => AppTheme.amber600,
-      StatusLevel.unreachable => AppTheme.danger600,
-    };
     final muted = Theme.of(context).colorScheme.onSurfaceVariant;
     return Tooltip(
       message: message,
@@ -54,11 +82,7 @@ class StatusChip extends StatelessWidget {
               children: [
                 Icon(icon, size: 14, color: muted),
                 const SizedBox(width: 5),
-                Container(
-                  width: 8,
-                  height: 8,
-                  decoration: BoxDecoration(color: dot, shape: BoxShape.circle),
-                ),
+                StatusDot(level: level),
               ],
             ),
           ),
@@ -120,6 +144,46 @@ class OciServeStatusChip extends ConsumerWidget {
       level: level,
       message: message,
       onTap: onTap,
+    );
+  }
+}
+
+/// De live-bereikbaarheid van één opslagverbinding als enkele stip — dezelfde
+/// provider en kleuren als het geaggregeerde lampje op het openscherm, voor
+/// de rijen op het opslag-tabblad waar icoon en naam er al staan. Niets voor
+/// wat de provider overslaat (niet ingesteld, remote op web): dan ontbreekt
+/// de stip gewoon, zoals het lampje dan ook ontbreekt.
+class StorageStatusDot extends ConsumerWidget {
+  final StorageConnection connection;
+
+  const StorageStatusDot({super.key, required this.connection});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reach = ref.watch(
+      storageStatusProvider.select((m) => m[connection.id]),
+    );
+    if (reach == null) return const SizedBox.shrink();
+    final l10n = context.l10n;
+    final name = connection.name.trim();
+    final label = name.isEmpty ? connection.fallbackLabel : name;
+    final (level, message) = switch (reach) {
+      StorageReach.reachable => (
+        StatusLevel.ok,
+        l10n.d('{naam}: bereikbaar').replaceAll('{naam}', label),
+      ),
+      StorageReach.checking => (
+        StatusLevel.attention,
+        l10n.d('{naam}: wordt gecontroleerd…').replaceAll('{naam}', label),
+      ),
+      StorageReach.unreachable => (
+        StatusLevel.unreachable,
+        l10n.d('{naam}: niet bereikbaar').replaceAll('{naam}', label),
+      ),
+    };
+    return Padding(
+      padding: const EdgeInsets.only(right: 5),
+      child: StatusDot(level: level, tooltip: message),
     );
   }
 }
