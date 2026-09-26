@@ -1627,6 +1627,19 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nieuwe versies': 'Uudet versiot',
+  'Controleer automatisch op nieuwe versies':
+      'Tarkista uudet versiot automaattisesti',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck kysyy sitten enintään kerran päivässä palvelusta pawprint.vigilis.online, onko uudempaa versiota olemassa.',
+  'Controleer nu': 'Tarkista nyt',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Tarkistus epäonnistui — yritä myöhemmin uudelleen.',
+  'Er is geen nieuwere versie.': 'Uudempaa versiota ei ole.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} on saatavilla.',
+  'Download': 'Lataa',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} on saatavilla — avaa julkaisusivu napauttamalla.',
   'Sommige waarden zijn niet getoond': 'Joitakin arvoja ei näytetä',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe piilottaa arvon, kun se koskee myös toista henkilöä. Kyseisen kentän kohdalla kerrotaan, miksi arvo puuttuu.',

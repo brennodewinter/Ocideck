@@ -1629,6 +1629,19 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nieuwe versies': 'Új verziók',
+  'Controleer automatisch op nieuwe versies':
+      'Új verziók automatikus ellenőrzése',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'Az OciDeck ekkor legfeljebb naponta egyszer kérdezi meg a pawprint.vigilis.online-t, hogy van-e újabb verzió.',
+  'Controleer nu': 'Ellenőrzés most',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Az ellenőrzés nem sikerült — próbálja később újra.',
+  'Er is geen nieuwere versie.': 'Nincs újabb verzió.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} elérhető.',
+  'Download': 'Letöltés',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} elérhető — koppintson a kiadási oldal megnyitásához.',
   'Sommige waarden zijn niet getoond': 'Egyes értékek nem jelennek meg',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'Az OciServe elrejti az értéket, ha az más személyre is vonatkozik. Az érintett mezőnél látható, miért hiányzik az érték.',

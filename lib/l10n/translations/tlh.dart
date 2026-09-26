@@ -1604,6 +1604,19 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nieuwe versies': 'version De\' chu\'',
+  'Controleer automatisch op nieuwe versies':
+      'version De\' chu\' tInlu\' \'e\' ra\'',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'pawprint.vigilis.online vIghel OciDeck jaj wa\'logh neH — version De\' chu\' tu\'lu\'\'a\'?',
+  'Controleer nu': 'yIlegh',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'luleghpu\' \'ach luj — qaSpa\' yInIDqa\'.',
+  'Er is geen nieuwere versie.': 'version De\' chu\' pagh.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} lutu\'lu\'.',
+  'Download': 'yIqem',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} lutu\'lu\' — release page yIpoSmoHmeH yIchov.',
   'Sommige waarden zijn niet getoond': '\'op De\' lojmItmey cha\'lu\'be\'',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'latlh ghot\'e\' je bopDI\' De\', De\' lojmIt So\' OciServe. De\' lojmItDaq qatlh Hutlh De\' net QIj.',

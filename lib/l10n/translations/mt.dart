@@ -1645,6 +1645,19 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nieuwe versies': 'Verżjonijiet ġodda',
+  'Controleer automatisch op nieuwe versies':
+      'Iċċekkja awtomatikament għal verżjonijiet ġodda',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck imbagħad jistaqsi lil pawprint.vigilis.online mill-aktar darba kuljum jekk teżistix verżjoni iktar ġdida.',
+  'Controleer nu': 'Iċċekkja issa',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Il-kontroll falla — erġa\' pprova iktar tard.',
+  'Er is geen nieuwere versie.': 'M\'hemmx verżjoni iktar ġdida.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} huwa disponibbli.',
+  'Download': 'Niżżel',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} huwa disponibbli — agħfas biex tiftaħ il-paġna tal-ħruġ.',
   'Sommige waarden zijn niet getoond': 'Xi valuri mhumiex murija',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe jaħbi valur meta dan ikun jikkonċerna wkoll persuna oħra. Il-kaxxa rilevanti tindika għaliex il-valur huwa nieqes.',

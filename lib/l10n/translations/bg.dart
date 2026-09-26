@@ -1647,6 +1647,19 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nieuwe versies': 'Нови версии',
+  'Controleer automatisch op nieuwe versies':
+      'Автоматична проверка за нови версии',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck тогава пита най-много веднъж дневно pawprint.vigilis.online дали има по-нова версия.',
+  'Controleer nu': 'Провери сега',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Проверката не успя — опитайте отново по-късно.',
+  'Er is geen nieuwere versie.': 'Няма по-нова версия.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} е наличен.',
+  'Download': 'Изтегли',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} е наличен — докоснете, за да отворите страницата на изданието.',
   'Sommige waarden zijn niet getoond': 'Някои стойности не са показани',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe скрива стойност, когато тя се отнася и за друго лице. При съответното поле е посочено защо стойността липсва.',

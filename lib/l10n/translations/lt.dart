@@ -1634,6 +1634,19 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nieuwe versies': 'Naujos versijos',
+  'Controleer automatisch op nieuwe versies':
+      'Automatiškai tikrinti, ar yra naujų versijų',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck tuomet ne dažniau kaip kartą per dieną klausia pawprint.vigilis.online, ar yra naujesnė versija.',
+  'Controleer nu': 'Tikrinti dabar',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Patikrinimas nepavyko — pabandykite vėliau dar kartą.',
+  'Er is geen nieuwere versie.': 'Nėra naujesnės versijos.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} yra prieinama.',
+  'Download': 'Atsisiųsti',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} yra prieinama — palieskite, kad atidarytumėte leidimo puslapį.',
   'Sommige waarden zijn niet getoond': 'Kai kurios reikšmės nerodomos',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe paslepia reikšmę, kai ji taip pat susijusi su kitu asmeniu. Prie atitinkamo lauko nurodyta, kodėl reikšmės nėra.',

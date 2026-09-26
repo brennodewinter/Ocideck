@@ -667,6 +667,19 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nieuwe versies': 'Nije ferzjes',
+  'Controleer automatisch op nieuwe versies':
+      'Automatysk kontr olearje op nije ferzjes',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck freget dan maksimaal ienris deis oan pawprint.vigilis.online oft der in nijere ferzje is.',
+  'Controleer nu': 'Kontr olearje no',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'De kontrôle is mislearre — probear it letter nochris.',
+  'Er is geen nieuwere versie.': 'Der is gjin nijere ferzje.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} is beskikber.',
+  'Download': 'Downloade',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} is beskikber — tik om de útjefteside te iepenjen.',
   'Sommige waarden zijn niet getoond': 'Guon wearden wurde net toand',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe skermet in wearde ôf as dy ek oer in oar giet. By it oanbelangjende fjild stiet wêrom\'t de wearde ûntbrekt.',

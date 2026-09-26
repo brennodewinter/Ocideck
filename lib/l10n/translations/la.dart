@@ -1642,6 +1642,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nieuwe versies': 'Versiones novae',
+  'Controleer automatisch op nieuwe versies': 'Versiones novas sponte quaere',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck tum semel in die ad summum pawprint.vigilis.online interrogat num versio recentior existat.',
+  'Controleer nu': 'Nunc quaere',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Quaestio frustrata est — postea iterum conare.',
+  'Er is geen nieuwere versie.': 'Nulla versio recentior est.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} praesto est.',
+  'Download': 'Deprome',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} praesto est — tange ut paginam editionis aperias.',
   'Sommige waarden zijn niet getoond': 'Nonnulli valores non ostenduntur',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe valorem celat cum etiam ad aliam personam pertinet. Apud campum pertinentem indicatur cur valor desit.',

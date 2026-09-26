@@ -1657,6 +1657,19 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nieuwe versies': 'Leaganacha nua',
+  'Controleer automatisch op nieuwe versies':
+      'Seiceáil go huathoibríoch leaganacha nua',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'Fiafraíonn OciDeck de pawprint.vigilis.online uair sa lá ar a mhéid ansin an bhfuil leagan níos nuaí ann.',
+  'Controleer nu': 'Seiceáil anois',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Theip ar an seiceáil — bain triail eile as níos déanaí.',
+  'Er is geen nieuwere versie.': 'Níl aon leagan níos nuaí ann.',
+  'OciDeck {versie} is beschikbaar.': 'Tá OciDeck {versie} ar fáil.',
+  'Download': 'Íoslódáil',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'Tá OciDeck {versie} ar fáil — tapáil chun an leathanach eisiúna a oscailt.',
   'Sommige waarden zijn niet getoond': 'Ní thaispeántar roinnt luachanna',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'Cuireann OciServe luach i bhfolach nuair a bhaineann sé le duine eile freisin. Luaitear sa réimse ábhartha cén fáth a bhfuil an luach ar iarraidh.',

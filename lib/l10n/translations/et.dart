@@ -1620,6 +1620,19 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nieuwe versies': 'Uued versioonid',
+  'Controleer automatisch op nieuwe versies':
+      'Kontrolli automaatselt uusi versioone',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck küsib siis kõige rohkem kord päevas serverilt pawprint.vigilis.online, kas on olemas uuem versioon.',
+  'Controleer nu': 'Kontrolli nüüd',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Kontroll ebaõnnestus — proovi hiljem uuesti.',
+  'Er is geen nieuwere versie.': 'Uuemat versiooni pole.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} on saadaval.',
+  'Download': 'Laadi alla',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} on saadaval — versioonilehe avamiseks puudutage.',
   'Sommige waarden zijn niet getoond': 'Mõnda väärtust ei kuvata',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe peidab väärtuse, kui see puudutab ka teist inimest. Vastava välja juures on kirjas, miks väärtus puudub.',

@@ -1633,6 +1633,19 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nieuwe versies': 'Nové verzie',
+  'Controleer automatisch op nieuwe versies':
+      'Automaticky kontrolovať nové verzie',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck sa potom maximálne raz denne pýta na pawprint.vigilis.online, či existuje novšia verzia.',
+  'Controleer nu': 'Skontrolovať teraz',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Kontrola zlyhala — skúste to neskôr znova.',
+  'Er is geen nieuwere versie.': 'Nie je k dispozícii novšia verzia.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} je k dispozícii.',
+  'Download': 'Stiahnuť',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} je k dispozícii — klepnutím otvoríte stránku vydania.',
   'Sommige waarden zijn niet getoond': 'Niektoré hodnoty nie sú zobrazené',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe skryje hodnotu, ak sa týka aj inej osoby. Pri príslušnom poli je uvedené, prečo hodnota chýba.',

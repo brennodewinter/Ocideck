@@ -666,6 +666,19 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nieuwe versies': 'Vershonnan nobo',
+  'Controleer automatisch op nieuwe versies':
+      'Kontrolá outomatikamente pa vershonnan nobo',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck ta puntra pawprint.vigilis.online maksimo un biaha pa dia si tin un vershon mas nobo.',
+  'Controleer nu': 'Kontrolá awor',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'E kontrol a faya — purba di nobo mas lat.',
+  'Er is geen nieuwere versie.': 'No tin un vershon mas nobo.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} ta disponibel.',
+  'Download': 'Deskarga',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} ta disponibel — toka pa habri e página di e vershon.',
   'Sommige waarden zijn niet getoond': 'Algun balornan no ta wordu mustrá',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe ta skonde un balor ora e ta trata tambe di un otro persona. E campo konserní ta indiká dikon e balor ta falta.',

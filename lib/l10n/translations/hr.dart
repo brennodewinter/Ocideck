@@ -1631,6 +1631,19 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nieuwe versies': 'Nove verzije',
+  'Controleer automatisch op nieuwe versies':
+      'Automatski provjeravaj nove verzije',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck tada najviše jednom dnevno pita pawprint.vigilis.online postoji li novija verzija.',
+  'Controleer nu': 'Provjeri sada',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Provjera nije uspjela — pokušajte ponovno kasnije.',
+  'Er is geen nieuwere versie.': 'Nema novije verzije.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} je dostupan.',
+  'Download': 'Preuzmi',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} je dostupan — dodirnite za otvaranje stranice izdanja.',
   'Sommige waarden zijn niet getoond': 'Neke vrijednosti nisu prikazane',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe skriva vrijednost kada se ona odnosi i na drugu osobu. Uz odgovarajuće polje navedeno je zašto vrijednost nedostaje.',

@@ -1643,6 +1643,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nieuwe versies': 'Versiuni noi',
+  'Controleer automatisch op nieuwe versies': 'Verifică automat versiunile noi',
+  'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':
+      'OciDeck întreabă atunci cel mult o dată pe zi pawprint.vigilis.online dacă există o versiune mai nouă.',
+  'Controleer nu': 'Verifică acum',
+  'De controle is mislukt — probeer het later opnieuw.':
+      'Verificarea a eșuat — încearcă din nou mai târziu.',
+  'Er is geen nieuwere versie.': 'Nu există o versiune mai nouă.',
+  'OciDeck {versie} is beschikbaar.': 'OciDeck {versie} este disponibil.',
+  'Download': 'Descarcă',
+  'OciDeck {versie} is beschikbaar — tik om de releasepagina te openen.':
+      'OciDeck {versie} este disponibil — atinge pentru a deschide pagina versiunii.',
   'Sommige waarden zijn niet getoond': 'Unele valori nu sunt afișate',
   'OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.':
       'OciServe ascunde o valoare atunci când aceasta privește și o altă persoană. Câmpul corespunzător indică motivul pentru care valoarea lipsește.',
