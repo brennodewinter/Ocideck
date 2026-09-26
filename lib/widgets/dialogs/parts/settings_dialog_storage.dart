@@ -29,17 +29,12 @@ Future<String?> _pickDirectoryGated({
   );
 }
 
-/// Presentatie-eigenschappen per soort verbinding: het pictogram in de rij en
-/// de teksten in het "toevoegen"-menu. De configuratie zelf zit in het model
-/// ([StorageConnection]); dit is puur wat het scherm ervan laat zien.
+/// Presentatie-eigenschappen per soort verbinding: de teksten in het
+/// "toevoegen"-menu (het pictogram staat gedeeld in connection_status.dart,
+/// ook de lampjes op het openscherm gebruiken die). De configuratie zelf zit
+/// in het model ([StorageConnection]); dit is puur wat het scherm ervan laat
+/// zien.
 extension StorageConnectionKindUi on StorageConnectionKind {
-  IconData get icon => switch (this) {
-    StorageConnectionKind.local => Icons.folder_outlined,
-    StorageConnectionKind.webdav => Icons.cloud_outlined,
-    StorageConnectionKind.s3 => Icons.inventory_2_outlined,
-    StorageConnectionKind.git => Icons.account_tree_outlined,
-  };
-
   String label(AppLocalizations l10n) => switch (this) {
     StorageConnectionKind.local => l10n.d('Map op deze computer'),
     StorageConnectionKind.webdav => l10n.d('WebDAV-server'),
