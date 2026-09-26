@@ -380,7 +380,11 @@ const Map<String, int> classSizeBaseline = {
       // (−3), exportkwaliteit verhuisd van Toegankelijkheid naar eigen kop
       // (+10), classificatie-handhaving verhuisd van Algemeen naar Privacy
       // (+3), cockpit verhuisd naar presentatie als AdvancedSection (+6).
-      6263, // +1 (#1999): eLearning-module­kaart in settings_dialog_modules.
+      // +1 (#1999): eLearning-module­kaart in settings_dialog_modules.
+      // −54: versiecheck-kaart is een eigen ConsumerWidget (_UpdateCheckCard)
+      // en _aboutHeading/_aboutCard/_aboutLink staan top-level — gedrag uit de
+      // klasse gehaald in plaats van het plafond op te rekken.
+      6209,
   // Verlaagd van het tijdelijke plafond 3465 (in aa25ce2e opgerekt om main te
   // deblokkeren nadat #865 en #872 deze klasse over 3412 duwden) naar 3310: het
   // trekken van een vraagronde — welke antwoorden meedoen en in welke volgorde —
