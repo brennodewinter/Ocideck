@@ -21,6 +21,17 @@ All notable changes to OciDeck are documented in this file.
   release-index van de forge. Een handmatige "Controleer nu" op datzelfde
   tabblad is altijd beschikbaar. Op web is er geen controle: de webversie
   draait al de gedeployde release.
+- Het statuscentrum op het openscherm toont nu ook een lampje per ingestelde
+  opslagverbinding: een lokale map is per afspraak bereikbaar en staat meteen
+  groen, remote opslag (WebDAV, S3, git) wordt live geprobeerd met dezelfde
+  test als de knop op het opslag-tabblad — groen bereikbaar, oranje
+  "wordt gecontroleerd", rood niet bereikbaar. Een tik op het lampje hertikt.
+  Dezelfde test draait automatisch wanneer het opslag-tabblad opent en na een
+  wijziging in de velden (met een korte uitstel, niet per aanslag), zodat
+  "niet getest" geen permanente staat meer is. In de leeromgeving staat
+  onderaan het cursusvenster het eLearning-lampje — server bereikbaar én
+  ingelogd — dat al op het openscherm zat; een tik logt opnieuw in of
+  ververst de lijst.
 - De standaard ingeschakelde Marp-controle laat in de Markdown-modus en bij
   Presentatiegegevens zien of een deck in Marp hetzelfde blijft, met regels om
   bekende afwijkingen terug te vinden. Opslaan waarschuwt bij harde fouten of
