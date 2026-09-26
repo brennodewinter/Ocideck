@@ -50,10 +50,10 @@ Future<void> _pumpWelcome(WidgetTester tester, {String? latestSeen}) async {
 }
 
 /// Het lampje naast het versienummer — identificeerbaar aan het icoon in zijn
-/// eigen formaat (de pijl komt op het scherm niet anders voor).
-Finder _badge() => find.byWidgetPredicate(
-  (w) => w is Icon && w.icon == Icons.arrow_circle_up_outlined && w.size == 11,
-);
+/// eigen formaat (pijl voor amber/grijs, vink voor groen; beide komen op het
+/// scherm niet anders voor in dat formaat).
+Finder _badge([IconData icon = Icons.arrow_circle_up_outlined]) =>
+    find.byWidgetPredicate((w) => w is Icon && w.icon == icon && w.size == 11);
 
 Finder _tip(String prefix) => find.byWidgetPredicate(
   (w) => w is Tooltip && (w.message ?? '').startsWith(prefix),
@@ -83,12 +83,20 @@ void main() {
       expect(_tip('OciDeck 99.0.0 is beschikbaar'), findsOneWidget);
     });
 
-    testWidgets('actueel → bewust geen lampje', (tester) async {
+    testWidgets('actueel → groen vinkje dat naar Over wijst', (tester) async {
       await _pumpWelcome(tester, latestSeen: '0.0.1');
 
-      expect(_badge(), findsNothing);
+      expect(_badge(Icons.check_circle_outline), findsOneWidget);
+      expect(_tip('Er is geen nieuwere versie'), findsOneWidget);
       expect(_tip('Nog niet gecontroleerd'), findsNothing);
       expect(_tip('OciDeck'), findsNothing);
+
+      // Tik op het groene vinkje: de instellingen openen op het Over-tabblad,
+      // waar de uitkomst en 'Controleer nu' staan.
+      await tester.tap(_badge(Icons.check_circle_outline));
+      await tester.pumpAndSettle();
+      expect(find.text('Nieuwe versies'), findsOneWidget);
+      expect(find.text('Er is geen nieuwere versie.'), findsOneWidget);
     });
   });
 }

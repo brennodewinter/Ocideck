@@ -1625,6 +1625,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Jaunākas versijas nav — pieskaries, lai atvērtu pārbaudi.',
   '{naam}: bereikbaar': '{naam}: sasniedzams',
   '{naam}: wordt gecontroleerd…': '{naam}: notiek pārbaude…',
   '{naam}: niet bereikbaar': '{naam}: nav sasniedzams',
@@ -1686,7 +1688,6 @@ const _dutchSourceAddLv = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: nav pieejams tīmekļa versijā',
   'eLearning: ingelogd': 'eLearning: pieteicies',
   'eLearning: aanmelden loopt…': 'eLearning: notiek pieteikšanās…',
-  'eLearning: server niet bereikbaar': 'eLearning: serveris nav sasniedzams',
   'eLearning: aanmelden mislukt': 'eLearning: pieteikšanās neizdevās',
   'eLearning: niet ingelogd': 'eLearning: nav pieteikts',
   'Vertaal met AI': 'Tulkot ar AI',

@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'No tin un vershon mas nobo — toka pa habri e kontrol.',
   '{naam}: bereikbaar': '{naam}: alkanzabel',
   '{naam}: wordt gecontroleerd…': '{naam}: ta kontrolando…',
   '{naam}: niet bereikbaar': '{naam}: no alkanzabel',
@@ -728,7 +730,6 @@ const _dutchSourceAddPap = {
   'AI: niet beschikbaar in de webversie': 'AI: no disponibel na e vershon web',
   'eLearning: ingelogd': 'eLearning: a login',
   'eLearning: aanmelden loopt…': 'eLearning: ta login…',
-  'eLearning: server niet bereikbaar': 'eLearning: sirbidó no alkanzabel',
   'eLearning: aanmelden mislukt': 'eLearning: login a faya',
   'eLearning: niet ingelogd': 'eLearning: no a login',
   'Vertaal met AI': 'Tradusí ku AI',

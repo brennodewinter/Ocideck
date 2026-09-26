@@ -1647,6 +1647,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Няма по-нова версия — докосни, за да отвориш проверката.',
   '{naam}: bereikbaar': '{naam}: достъпен',
   '{naam}: wordt gecontroleerd…': '{naam}: проверява се…',
   '{naam}: niet bereikbaar': '{naam}: недостъпен',
@@ -1708,7 +1710,6 @@ const _dutchSourceAddBg = <String, String>{
   'AI: niet beschikbaar in de webversie': 'ИИ: не е наличен в уеб версията',
   'eLearning: ingelogd': 'eLearning: вписан',
   'eLearning: aanmelden loopt…': 'eLearning: вписване…',
-  'eLearning: server niet bereikbaar': 'eLearning: сървърът е недостъпен',
   'eLearning: aanmelden mislukt': 'eLearning: вписването е неуспешно',
   'eLearning: niet ingelogd': 'eLearning: не сте вписани',
   'Vertaal met AI': 'Преведи с ИИ',

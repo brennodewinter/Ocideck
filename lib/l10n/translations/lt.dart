@@ -1634,6 +1634,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Naujesnės versijos nėra — paliesk, kad atidarytum tikrinimą.',
   '{naam}: bereikbaar': '{naam}: pasiekiamas',
   '{naam}: wordt gecontroleerd…': '{naam}: tikrinama…',
   '{naam}: niet bereikbaar': '{naam}: nepasiekiamas',
@@ -1696,7 +1698,6 @@ const _dutchSourceAddLt = <String, String>{
       'DI: neprieinama žiniatinklio versijoje',
   'eLearning: ingelogd': 'eLearning: prisijungta',
   'eLearning: aanmelden loopt…': 'eLearning: vyksta prisijungimas…',
-  'eLearning: server niet bereikbaar': 'eLearning: serveris nepasiekiamas',
   'eLearning: aanmelden mislukt': 'eLearning: prisijungti nepavyko',
   'eLearning: niet ingelogd': 'eLearning: neprisijungta',
   'Vertaal met AI': 'Išversti su DI',

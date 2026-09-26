@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'M\'hemm l-ebda verżjoni iġġed — agħfas biex tiftaħ il-kontroll.',
   '{naam}: bereikbaar': '{naam}: jilħaq',
   '{naam}: wordt gecontroleerd…': '{naam}: qed jiċċekkja…',
   '{naam}: niet bereikbaar': '{naam}: ma jilħaqx',
@@ -1708,7 +1710,6 @@ const _dutchSourceAddMt = <String, String>{
       'AI: mhux disponibbli fil-verżjoni web',
   'eLearning: ingelogd': 'eLearning: illoggjat',
   'eLearning: aanmelden loopt…': 'eLearning: qed tilloggja…',
-  'eLearning: server niet bereikbaar': 'eLearning: is-server ma jilħaqx',
   'eLearning: aanmelden mislukt': 'eLearning: il-login falla',
   'eLearning: niet ingelogd': 'eLearning: mhux illoggjat',
   'Vertaal met AI': 'Ittraduċi bl-AI',

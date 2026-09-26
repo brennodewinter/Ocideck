@@ -15,7 +15,9 @@ All notable changes to OciDeck are documented in this file.
   hover de nieuwe versie noemt en de releasepagina opent. Zolang er nog nooit
   een controle is geslaagd staat er een grijs lampje — zo zie je dat die
   informatie ontbreekt — waarvan een tik het Over-tabblad opent waar de
-  controle in te stellen is. De automatische controle staat standaard **uit**
+  controle in te stellen is. Zegt de laatste geslaagde controle "geen
+  nieuwere versie", dan staat er een groen vinkje met dezelfde tik naar
+  het Over-tabblad. De automatische controle staat standaard **uit**
   — uitgaand verkeer loopt alleen waar de gebruiker het aanzet
   (Instellingen → Over → "Nieuwe versies"), maximaal één ping per dag naar de
   release-index van de forge. Een handmatige "Controleer nu" op datzelfde
@@ -31,8 +33,11 @@ All notable changes to OciDeck are documented in this file.
   opent en na een wijziging in de velden (met een korte uitstel, niet per
   aanslag), zodat "niet getest" geen permanente staat meer is. In de
   leeromgeving staat onderaan het cursusvenster het eLearning-lampje —
-  server bereikbaar én ingelogd — dat al op het openscherm zat; een tik
-  logt opnieuw in of ververst de lijst.
+  server bereikbaar én ingelogd — dat al op het openscherm zat; daar
+  somt de hover nu de twee checks onder elkaar op en een tik opent
+  Instellingen → Integraties (de kaart met de aanmeldknop en de
+  foutmelding). In het cursusvenster zelf houdt een tik de oude
+  betekenis: opnieuw aanmelden of de lijst verversen.
 - De standaard ingeschakelde Marp-controle laat in de Markdown-modus en bij
   Presentatiegegevens zien of een deck in Marp hetzelfde blijft, met regels om
   bekende afwijkingen terug te vinden. Opslaan waarschuwt bij harde fouten of

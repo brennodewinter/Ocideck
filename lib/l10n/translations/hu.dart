@@ -1629,6 +1629,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Nincs újabb verzió — koppints az ellenőrzés megnyitásához.',
   '{naam}: bereikbaar': '{naam}: elérhető',
   '{naam}: wordt gecontroleerd…': '{naam}: ellenőrzés…',
   '{naam}: niet bereikbaar': '{naam}: nem érhető el',
@@ -1690,7 +1692,6 @@ const _dutchSourceAddHu = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: nem érhető el a webes verzióban',
   'eLearning: ingelogd': 'eLearning: bejelentkezve',
   'eLearning: aanmelden loopt…': 'eLearning: bejelentkezés…',
-  'eLearning: server niet bereikbaar': 'eLearning: a kiszolgáló nem érhető el',
   'eLearning: aanmelden mislukt': 'eLearning: a bejelentkezés sikertelen',
   'eLearning: niet ingelogd': 'eLearning: nincs bejelentkezve',
   'Vertaal met AI': 'Fordítás AI-val',

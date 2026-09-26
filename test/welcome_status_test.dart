@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/ai_settings.dart';
+import 'package:ocideck/models/ociserve_models.dart';
 import 'package:ocideck/models/ociserve_settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/models/webdav_settings.dart';
@@ -191,6 +192,73 @@ void main() {
       );
 
       expect(_tip('eLearning:'), findsNothing);
+    });
+
+    /// De tip van het eLearning-lampje die álle verwachte regels bevat.
+    Finder elearningTip({required String server, required String account}) =>
+        find.byWidgetPredicate(
+          (w) =>
+              w is Tooltip &&
+              (w.message ?? '').contains('eLearning-server: $server') &&
+              (w.message ?? '').contains('eLearning: $account'),
+        );
+
+    testWidgets('eLearning ingelogd → server- én accountregel in de tip', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        elearningEnabled: true,
+        ociServeState: const OciServeState(
+          settings: OciServeSettings(enabled: true),
+          status: OciServeStatus.authenticated,
+          account: OciServeAccount(id: 'u1'),
+        ),
+      );
+
+      expect(
+        elearningTip(server: 'bereikbaar', account: 'ingelogd'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('eLearning server weg → beide regels vertellen dat', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        elearningEnabled: true,
+        ociServeState: const OciServeState(
+          settings: OciServeSettings(enabled: true),
+          status: OciServeStatus.signedOut,
+          errorCode: 'network',
+        ),
+      );
+
+      expect(
+        elearningTip(server: 'niet bereikbaar', account: 'niet ingelogd'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('tik op eLearning-lampje opent Instellingen op Integraties', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        elearningEnabled: true,
+        ociServeState: const OciServeState(
+          settings: OciServeSettings(enabled: true),
+          status: OciServeStatus.signedOut,
+        ),
+      );
+
+      await tester.tap(_tip('eLearning: niet ingelogd'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SettingsDialog), findsOneWidget);
+      // Het integraties-tabblad is geselecteerd: de eLearning-kaart staat er.
+      expect(find.text('Integraties'), findsWidgets);
     });
 
     testWidgets('lokale opslag → meteen groen, zonder probe', (tester) async {

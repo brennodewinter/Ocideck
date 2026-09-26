@@ -744,9 +744,10 @@ class _WelcomeScreen extends ConsumerWidget {
 /// `kOciDeckVersion` als op het About-tabblad (zie settings_dialog_about.dart).
 /// Het nummer zelf is geen knop — daarvoor staat 'Instellingen' ernaast — maar
 /// het lampje ernaast wél: amber als een nieuwere release bekend is (tik →
-/// releasepagina), grijs zolang nog geen enkele controle is geslaagd (tik →
-/// het Over-tabblad, waar de automatische controle aan kan). Zegt de check
-/// "actueel", dan is er bewust niets te zien.
+/// releasepagina), groen als de laatste geslaagde check "geen nieuwere versie"
+/// zei (tik → het Over-tabblad, waar de uitkomst en de knop staan), grijs
+/// zolang nog geen enkele controle is geslaagd (tik → datzelfde tabblad, waar
+/// de automatische controle aan kan).
 class _VersionTag extends ConsumerWidget {
   final AppPalette palette;
 
@@ -770,13 +771,25 @@ class _VersionTag extends ConsumerWidget {
                 .replaceAll('{versie}', latest!),
             onTap: () => unawaited(openExternalUrl(releasesPageUri.toString())),
           )
-        // Op web draait iedereen de gedeployde versie; de grijze badge zou
-        // daar naar een kaart wijzen die bewust niet bestaat.
-        : latest == null && !isWebPlatform
+        // Op web draait iedereen de gedeployde versie; de badges zouden daar
+        // naar een kaart wijzen die bewust niet bestaat.
+        : !isWebPlatform && latest == null
         ? _VersionBadge(
             color: palette.mutedText,
             message: l10n.d(
               'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.',
+            ),
+            onTap: () => SettingsDialog.show(
+              context,
+              initialSection: SettingsSection.about,
+            ),
+          )
+        : !isWebPlatform && latest != null
+        ? _VersionBadge(
+            icon: Icons.check_circle_outline,
+            color: AppTheme.successFg,
+            message: l10n.d(
+              'Er is geen nieuwere versie — tik om de controle te openen.',
             ),
             onTap: () => SettingsDialog.show(
               context,
@@ -800,16 +813,18 @@ class _VersionTag extends ConsumerWidget {
   }
 }
 
-/// Het klikbare lampje naast het versienummer: één vorm, twee betekenissen —
-/// kleur en ballon dragen het verschil (amber = er is iets nieuws, grijs = we
-/// weten het niet). Klikbaar én als knop aangekondigd, want allebei de
-/// toestanden vragen een handeling van de gebruiker.
+/// Het klikbare lampje naast het versienummer: kleur, vorm en ballon dragen
+/// het verschil (amber-pijl = er is iets nieuws, groene vink = de check zegt
+/// actueel, grijs = we weten het niet). Klikbaar én als knop aangekondigd:
+/// elke toestand leidt naar de plek waar je ermee verder kunt.
 class _VersionBadge extends StatelessWidget {
   final Color color;
   final String message;
   final VoidCallback onTap;
+  final IconData icon;
 
   const _VersionBadge({
+    this.icon = Icons.arrow_circle_up_outlined,
     required this.color,
     required this.message,
     required this.onTap,
@@ -826,7 +841,7 @@ class _VersionBadge extends StatelessWidget {
         button: true,
         child: Padding(
           padding: const EdgeInsets.all(2),
-          child: Icon(Icons.arrow_circle_up_outlined, size: 11, color: color),
+          child: Icon(icon, size: 11, color: color),
         ),
       ),
     ),

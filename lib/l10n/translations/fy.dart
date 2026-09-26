@@ -667,6 +667,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Der is gjin nijere ferzje — tik om de kontrôle te iepenjen.',
   '{naam}: bereikbaar': '{naam}: berikber',
   '{naam}: wordt gecontroleerd…': '{naam}: wurdt kontrolearre…',
   '{naam}: niet bereikbaar': '{naam}: net berikber',
@@ -728,7 +730,6 @@ const _dutchSourceAddFy = {
   'AI: niet beschikbaar in de webversie': 'AI: net beskikber yn de webfersy',
   'eLearning: ingelogd': 'eLearning: oanmeld',
   'eLearning: aanmelden loopt…': 'eLearning: oanmelde rint…',
-  'eLearning: server niet bereikbaar': 'eLearning: server net berikber',
   'eLearning: aanmelden mislukt': 'eLearning: oanmelde mislearre',
   'eLearning: niet ingelogd': 'eLearning: net oanmeld',
   'Vertaal met AI': 'Oersette mei AI',

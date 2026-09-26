@@ -1604,6 +1604,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'De\' chu\' tu\'lu\'be\' — legh Qu\' yIpoSmoH.',
   '{naam}: bereikbaar': '{naam}: Qap',
   '{naam}: wordt gecontroleerd…': '{naam}: nuDlutaH',
   '{naam}: niet bereikbaar': '{naam}: waw\' Hutlh',
@@ -1662,7 +1664,6 @@ const _dutchSourceAddTlh = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: web DawI\' ghaHbe\'',
   'eLearning: ingelogd': 'eLearning: ngev\'',
   'eLearning: aanmelden loopt…': 'eLearning: ngev\'taH',
-  'eLearning: server niet bereikbaar': 'eLearning: waw\' Hutlh',
   'eLearning: aanmelden mislukt': 'eLearning: ngev\' QIH',
   'eLearning: niet ingelogd': 'eLearning: ngev\'be\'',
   'Vertaal met AI': 'AI mugh\'',

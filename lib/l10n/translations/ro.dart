@@ -1643,6 +1643,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Nu există o versiune mai nouă — atinge pentru a deschide verificarea.',
   '{naam}: bereikbaar': '{naam}: accesibil',
   '{naam}: wordt gecontroleerd…': '{naam}: se verifică…',
   '{naam}: niet bereikbaar': '{naam}: inaccesibil',
@@ -1705,7 +1707,6 @@ const _dutchSourceAddRo = <String, String>{
       'AI: nu este disponibil în versiunea web',
   'eLearning: ingelogd': 'eLearning: autentificat',
   'eLearning: aanmelden loopt…': 'eLearning: se autentifică…',
-  'eLearning: server niet bereikbaar': 'eLearning: serverul nu este accesibil',
   'eLearning: aanmelden mislukt': 'eLearning: autentificarea a eșuat',
   'eLearning: niet ingelogd': 'eLearning: nu ești autentificat',
   'Vertaal met AI': 'Traduce cu AI',

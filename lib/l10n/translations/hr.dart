@@ -1631,6 +1631,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Er is geen nieuwere versie — tik om de controle te openen.':
+      'Nema novije verzije — dodirni za otvaranje provjere.',
   '{naam}: bereikbaar': '{naam}: dostupan',
   '{naam}: wordt gecontroleerd…': '{naam}: provjerava se…',
   '{naam}: niet bereikbaar': '{naam}: nedostupan',
@@ -1692,7 +1694,6 @@ const _dutchSourceAddHr = <String, String>{
   'AI: niet beschikbaar in de webversie': 'AI: nije dostupno u web-verziji',
   'eLearning: ingelogd': 'eLearning: prijavljeno',
   'eLearning: aanmelden loopt…': 'eLearning: prijava u tijeku…',
-  'eLearning: server niet bereikbaar': 'eLearning: poslužitelj nije dostupan',
   'eLearning: aanmelden mislukt': 'eLearning: prijava nije uspjela',
   'eLearning: niet ingelogd': 'eLearning: niste prijavljeni',
   'Vertaal met AI': 'Prevedi pomoću AI',
