@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Δεν έχει γίνει ακόμη έλεγχος για νέες εκδόσεις — πάτησε για να ρυθμίσεις τον έλεγχο.',
   'Nieuwe versies': 'Νέες εκδόσεις',
   'Controleer automatisch op nieuwe versies':
       'Αυτόματος έλεγχος για νέες εκδόσεις',

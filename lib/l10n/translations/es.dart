@@ -664,6 +664,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Aún no se ha comprobado si hay nuevas versiones — toca para configurar la comprobación.',
   'Nieuwe versies': 'Nuevas versiones',
   'Controleer automatisch op nieuwe versies':
       'Buscar nuevas versiones automáticamente',

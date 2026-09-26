@@ -1634,6 +1634,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Naujų versijų dar netikrinta — paliesk, kad nustatytum tikrinimą.',
   'Nieuwe versies': 'Naujos versijos',
   'Controleer automatisch op nieuwe versies':
       'Automatiškai tikrinti, ar yra naujų versijų',

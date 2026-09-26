@@ -1655,6 +1655,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Ainda não foi verificado se há novas versões — toca para configurar a verificação.',
   'Nieuwe versies': 'Novas versões',
   'Controleer automatisch op nieuwe versies':
       'Verificar automaticamente se há novas versões',

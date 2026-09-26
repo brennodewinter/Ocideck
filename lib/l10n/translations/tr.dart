@@ -2538,6 +2538,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Yeni sürümler henüz denetlenmedi — denetimi ayarlamak için dokun.',
   'Nieuwe versies': 'Yeni sürümler',
   'Controleer automatisch op nieuwe versies': 'Yeni sürümleri otomatik denetle',
   'OciDeck vraagt dan maximaal eenmaal per dag aan pawprint.vigilis.online of er een nieuwere versie is.':

@@ -1625,6 +1625,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Jaunās versijas vēl nav pārbaudītas — pieskaries, lai iestatītu pārbaudi.',
   'Nieuwe versies': 'Jaunās versijas',
   'Controleer automatisch op nieuwe versies':
       'Automātiski pārbaudīt jaunās versijas',

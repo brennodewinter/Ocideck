@@ -1657,6 +1657,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Níor seiceáladh leaganacha nua fós — tapáil chun an tseiceáil a shocrú.',
   'Nieuwe versies': 'Leaganacha nua',
   'Controleer automatisch op nieuwe versies':
       'Seiceáil go huathoibríoch leaganacha nua',

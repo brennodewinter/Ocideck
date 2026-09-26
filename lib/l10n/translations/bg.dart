@@ -1647,6 +1647,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Все още не е проверявано за нови версии — докосни, за да настроиш проверката.',
   'Nieuwe versies': 'Нови версии',
   'Controleer automatisch op nieuwe versies':
       'Автоматична проверка за нови версии',

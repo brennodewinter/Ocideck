@@ -1631,6 +1631,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Nove verzije još nisu provjeravane — dodirni za postavljanje provjere.',
   'Nieuwe versies': 'Nove verzije',
   'Controleer automatisch op nieuwe versies':
       'Automatski provjeravaj nove verzije',

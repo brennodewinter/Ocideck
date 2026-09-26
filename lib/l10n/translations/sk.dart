@@ -1633,6 +1633,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Nové verzie sa zatiaľ nekontrolovali — klepnutím kontrolu nastavíte.',
   'Nieuwe versies': 'Nové verzie',
   'Controleer automatisch op nieuwe versies':
       'Automaticky kontrolovať nové verzie',

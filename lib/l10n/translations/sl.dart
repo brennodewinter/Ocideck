@@ -1627,6 +1627,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Nog niet gecontroleerd op nieuwe versies — tik om de controle in te stellen.':
+      'Novih različic še ni bilo preverjenih — tapni za nastavitev preverjanja.',
   'Nieuwe versies': 'Nove različice',
   'Controleer automatisch op nieuwe versies':
       'Samodejno preverjaj nove različice',
