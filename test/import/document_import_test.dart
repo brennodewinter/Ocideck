@@ -100,6 +100,21 @@ void main() {
       final md = convertDocxToMarkdown(bytes);
       expect(md, contains('## Subtitel'));
     });
+
+    test('houdt een pijp en regeleinde binnen dezelfde tabelcel', () {
+      final body =
+          '<w:tbl>'
+          '<w:tr><w:tc><w:p><w:r><w:t>Kop</w:t></w:r></w:p></w:tc>'
+          '<w:tc><w:p><w:r><w:t>Waarde</w:t></w:r></w:p></w:tc></w:tr>'
+          '<w:tr><w:tc><w:p><w:r><w:t>A|B</w:t><w:br/>'
+          '<w:t>vervolg</w:t></w:r></w:p></w:tc>'
+          '<w:tc><w:p><w:r><w:t>1</w:t></w:r></w:p></w:tc></w:tr>'
+          '</w:tbl>';
+
+      final md = convertDocxToMarkdown(docxFixture(body: body));
+
+      expect(md, contains(r'| A\|B<br>vervolg | 1 |'));
+    });
   });
 
   group('ODT → Markdown', () {
@@ -129,6 +144,25 @@ void main() {
       final bytes = odtFixture(body: '');
       final md = convertOdtToMarkdown(bytes);
       expect(md, '');
+    });
+
+    test('houdt een pijp en regeleinde binnen dezelfde tabelcel', () {
+      final body =
+          '<table:table table:name="T1">'
+          '<table:table-row>'
+          '<table:table-cell><text:p>Kop</text:p></table:table-cell>'
+          '<table:table-cell><text:p>Waarde</text:p></table:table-cell>'
+          '</table:table-row>'
+          '<table:table-row>'
+          '<table:table-cell><text:p>A|B<text:line-break/>vervolg</text:p>'
+          '</table:table-cell>'
+          '<table:table-cell><text:p>1</text:p></table:table-cell>'
+          '</table:table-row>'
+          '</table:table>';
+
+      final md = convertOdtToMarkdown(odtFixture(body: body));
+
+      expect(md, contains(r'| A\|B<br>vervolg | 1 |'));
     });
   });
 

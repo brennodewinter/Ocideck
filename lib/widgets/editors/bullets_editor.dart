@@ -1,5 +1,4 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -10,6 +9,7 @@ import '../../l10n/app_localizations.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
+import 'bullet_editor_items.dart';
 import 'editor_text_controller.dart';
 import 'ai_condense_button.dart';
 import 'bullet_marker_selector.dart';
@@ -52,19 +52,13 @@ class BulletsEditor extends ConsumerStatefulWidget {
 class _BulletsEditorState extends ConsumerState<BulletsEditor> {
   late final EditorTextController _title;
   late final EditorTextController _subtitle;
-  late List<EditorTextController> _bullets;
-  late List<int> _levels;
-  late List<bool> _checked;
-  late List<bool> _isHeading;
-  late List<FocusNode> _focusNodes;
+  late final BulletSet _bullets;
   late ListStyle _listStyle;
   BulletMarker? _bulletMarkerOverride;
   late bool _showChecklistProgress;
   late bool _continueNumbering;
   late bool _continuesSplit;
   late final EditorTextController _richText;
-
-  static const _maxLevel = kMaxIndentButtonLevel;
 
   @override
   void initState() {
@@ -82,7 +76,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
       text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
     );
     _richText.addTextListener(_emit);
-    _initBullets(widget.slide.bullets);
+    _bullets = BulletSet(widget.slide.bullets, _emit);
     WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
   }
 
@@ -96,10 +90,10 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
     final editor = ref.read(editorProvider);
     if (editor.focusQualityField != 'bullets') return;
     final index = editor.focusQualitySpan?.fragmentIndex ?? 0;
-    if (index < 0 || index >= _bullets.length) return;
-    _focusNodes[index].requestFocus();
+    if (index < 0 || index >= _bullets.controllers.length) return;
+    _bullets.focusNodes[index].requestFocus();
     applyQualitySpanSelection(
-      _bullets[index],
+      _bullets.controllers[index],
       _spanInController(index, editor.focusQualitySpan),
     );
     ref.read(editorProvider.notifier).clearFocusQualityField();
@@ -119,7 +113,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
   SlideQualitySpan? _spanInController(int index, SlideQualitySpan? span) {
     if (span == null || index >= widget.slide.bullets.length) return null;
     final raw = widget.slide.bullets[index];
-    final stripped = _bullets[index].text;
+    final stripped = _bullets.controllers[index].text;
     if (!raw.endsWith(stripped)) return null;
     final shift = raw.length - stripped.length;
     if (span.start - shift < 0) return null;
@@ -128,29 +122,6 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
       end: span.end - shift,
       fragmentIndex: index,
     );
-  }
-
-  void _initBullets(List<String> raw) {
-    final list = raw.isEmpty ? [''] : raw;
-    _isHeading = list.map(isGroupHeading).toList();
-    _levels = list.map((b) => isGroupHeading(b) ? 0 : bulletLevel(b)).toList();
-    _checked = list
-        .map((b) => isGroupHeading(b) ? false : checklistItemChecked(b))
-        .toList();
-    _bullets = list
-        .map(
-          (b) => _makeCtrl(
-            isGroupHeading(b) ? groupHeadingText(b) : checklistItemText(b),
-          ),
-        )
-        .toList();
-    _focusNodes = List.generate(_bullets.length, (_) => FocusNode());
-  }
-
-  EditorTextController _makeCtrl(String text) {
-    final c = EditorTextController(text: text);
-    c.addTextListener(_emit);
-    return c;
   }
 
   void _emit() {
@@ -175,149 +146,9 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
             : widget.slide.customMarkdown,
         bullets: _listStyle == ListStyle.richText
             ? widget.slide.bullets
-            : List.generate(_bullets.length, (i) {
-                if (_isHeading[i]) return groupHeadingBullet(_bullets[i].text);
-                return _listStyle == ListStyle.checklist
-                    ? checklistBullet(
-                        level: _levels[i],
-                        text: _bullets[i].text,
-                        checked: _checked[i],
-                      )
-                    : '\t' * _levels[i] + _bullets[i].text;
-              }),
+            : _bullets.values(_listStyle),
       ),
     );
-  }
-
-  void _reorderItem(int oldIndex, int newIndex) {
-    _moveBullet(oldIndex, newIndex);
-  }
-
-  void _moveBullet(int oldIndex, int newIndex) {
-    setState(() {
-      final ctrl = _bullets.removeAt(oldIndex);
-      final level = _levels.removeAt(oldIndex);
-      final checked = _checked.removeAt(oldIndex);
-      final heading = _isHeading.removeAt(oldIndex);
-      final focus = _focusNodes.removeAt(oldIndex);
-      _bullets.insert(newIndex, ctrl);
-      _levels.insert(newIndex, level);
-      _checked.insert(newIndex, checked);
-      _isHeading.insert(newIndex, heading);
-      _focusNodes.insert(newIndex, focus);
-    });
-    _emit();
-  }
-
-  void _addBulletAfter(int i) {
-    // A new item inherits the row's indent, but never its heading-ness — Enter
-    // after a heading starts an ordinary bullet in the group it introduces.
-    final newLevel = _isHeading[i] ? 0 : _levels[i];
-    _insertItemAfter(i, level: newLevel, heading: false);
-  }
-
-  /// Inserts a wordless group heading below row [i] and focuses it.
-  void _addHeadingAfter(int i) => _insertItemAfter(i, level: 0, heading: true);
-
-  void _insertItemAfter(int i, {required int level, required bool heading}) {
-    setState(() {
-      _bullets.insert(i + 1, _makeCtrl(''));
-      _levels.insert(i + 1, level);
-      _checked.insert(i + 1, false);
-      _isHeading.insert(i + 1, heading);
-      _focusNodes.insert(i + 1, FocusNode());
-    });
-    _emit();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (i + 1 < _focusNodes.length) _focusNodes[i + 1].requestFocus();
-    });
-  }
-
-  /// Flips row [i] between an ordinary bullet and a group heading. A heading is
-  /// always level 0 and unchecked.
-  void _toggleHeading(int i) {
-    setState(() {
-      _isHeading[i] = !_isHeading[i];
-      if (_isHeading[i]) {
-        _levels[i] = 0;
-        _checked[i] = false;
-      }
-    });
-    _emit();
-    _focusNodes[i].requestFocus();
-  }
-
-  void _removeBulletAndFocus(int i) {
-    if (_bullets.length == 1) {
-      setState(() {
-        _bullets[i].removeTextListener(_emit);
-        _bullets[i].clear();
-        _bullets[i].addTextListener(_emit);
-        _levels[i] = 0;
-        _checked[i] = false;
-        _isHeading[i] = false;
-      });
-      _emit();
-      _focusNodes[i].requestFocus();
-      return;
-    }
-    final target = (i - 1).clamp(0, _bullets.length - 2);
-    setState(() {
-      _bullets[i].removeTextListener(_emit);
-      _bullets[i].dispose();
-      _bullets.removeAt(i);
-      _levels.removeAt(i);
-      _checked.removeAt(i);
-      _isHeading.removeAt(i);
-      _focusNodes[i].dispose();
-      _focusNodes.removeAt(i);
-    });
-    _emit();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (target < _focusNodes.length) _focusNodes[target].requestFocus();
-    });
-  }
-
-  Future<void> _handlePaste(int i) async {
-    final data = await Clipboard.getData(Clipboard.kTextPlain);
-    if (data?.text == null) return;
-    final lines = data!.text!
-        .split('\n')
-        .map((l) => l.trim().replaceAll(RegExp(r'^[-*•◦▪▫]\s*'), ''))
-        .where((l) => l.isNotEmpty)
-        .toList();
-    if (lines.isEmpty) return;
-
-    if (lines.length == 1) {
-      final ctrl = _bullets[i];
-      final sel = ctrl.selection;
-      final start = sel.isValid ? sel.start : ctrl.text.length;
-      final end = sel.isValid ? sel.end : ctrl.text.length;
-      ctrl.value = TextEditingValue(
-        text: ctrl.text.replaceRange(start, end, lines[0]),
-        selection: TextSelection.collapsed(offset: start + lines[0].length),
-      );
-      return;
-    }
-
-    setState(() {
-      _bullets[i].removeTextListener(_emit);
-      _bullets[i].dispose();
-      _bullets[i] = _makeCtrl(lines[0]);
-      _isHeading[i] = false;
-      for (int j = 1; j < lines.length; j++) {
-        _bullets.insert(i + j, _makeCtrl(lines[j]));
-        _levels.insert(i + j, _levels[i]);
-        _checked.insert(i + j, false);
-        _isHeading.insert(i + j, false);
-        _focusNodes.insert(i + j, FocusNode());
-      }
-    });
-    _emit();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final last = i + lines.length - 1;
-      if (last < _focusNodes.length) _focusNodes[last].requestFocus();
-    });
   }
 
   @override
@@ -325,12 +156,7 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
     _title.dispose();
     _subtitle.dispose();
     _richText.dispose();
-    for (final c in _bullets) {
-      c.dispose();
-    }
-    for (final f in _focusNodes) {
-      f.dispose();
-    }
+    _bullets.dispose();
     super.dispose();
   }
 
@@ -437,9 +263,21 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             buildDefaultDragHandles: false,
-            onReorderItem: _reorderItem,
+            onReorderItem: (oldIndex, newIndex) => _bullets.reorder(
+              (mutation) => setState(mutation),
+              oldIndex,
+              newIndex,
+            ),
             children: [
-              for (int i = 0; i < _bullets.length; i++) _buildBulletRow(i),
+              for (int i = 0; i < _bullets.controllers.length; i++)
+                BulletEditorRow(
+                  key: ValueKey(_bullets.controllers[i]),
+                  bullets: _bullets,
+                  index: i,
+                  listStyle: _listStyle,
+                  mutate: (mutation) => setState(mutation),
+                  reorderable: true,
+                ),
             ],
           ),
           const SizedBox(height: 4),
@@ -449,12 +287,19 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
               spacing: 4,
               children: [
                 TextButton.icon(
-                  onPressed: () => _addBulletAfter(_bullets.length - 1),
+                  onPressed: () => _bullets.addAfter(
+                    (mutation) => setState(mutation),
+                    _bullets.controllers.length - 1,
+                  ),
                   icon: const Icon(Icons.add, size: 16),
                   label: Text(l10n.d('Bullet toevoegen')),
                 ),
                 TextButton.icon(
-                  onPressed: () => _addHeadingAfter(_bullets.length - 1),
+                  onPressed: () => _bullets.addAfter(
+                    (mutation) => setState(mutation),
+                    _bullets.controllers.length - 1,
+                    heading: true,
+                  ),
                   icon: const Icon(Icons.horizontal_split, size: 16),
                   label: Text(l10n.d('Tussenkop toevoegen')),
                 ),
@@ -501,150 +346,5 @@ class _BulletsEditorState extends ConsumerState<BulletsEditor> {
         ],
       ),
     );
-  }
-
-  Widget _buildBulletRow(int i) {
-    final l10n = context.l10n;
-    final heading = _isHeading[i];
-    final level = heading ? 0 : _levels[i];
-    return Padding(
-      key: ValueKey(_bullets[i]),
-      padding: EdgeInsets.only(left: level * 20.0, top: 4, bottom: 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ReorderableDragStartListener(
-            index: i,
-            child: Icon(
-              Icons.drag_indicator,
-              size: 16,
-              color: AppTheme.slate300,
-            ),
-          ),
-          const SizedBox(width: 4),
-          // Toggle a row between an ordinary bullet and a group heading.
-          IconButton(
-            key: ValueKey('toggle-heading-$i'),
-            icon: Icon(
-              Icons.horizontal_split,
-              size: 18,
-              color: heading ? AppTheme.accentFg : AppTheme.slate300,
-            ),
-            onPressed: () => _toggleHeading(i),
-            tooltip: heading
-                ? l10n.d('Maak er weer een bullet van')
-                : l10n.d('Maak een tussenkop'),
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            constraints: const BoxConstraints(minWidth: 28),
-            visualDensity: VisualDensity.compact,
-          ),
-          const SizedBox(width: 4),
-          if (!heading) ...[
-            if (_listStyle == ListStyle.checklist)
-              SizedBox(
-                width: 24,
-                height: 24,
-                child: Checkbox(
-                  key: ValueKey('checklist-item-$i'),
-                  value: _checked[i],
-                  onChanged: (value) {
-                    setState(() => _checked[i] = value ?? false);
-                    _emit();
-                  },
-                  visualDensity: VisualDensity.compact,
-                ),
-              )
-            else
-              Text(
-                _markerForItem(i),
-                style: TextStyle(fontSize: 16, color: AppTheme.slate500),
-              ),
-            const SizedBox(width: 8),
-          ],
-          Expanded(
-            child: Focus(
-              onKeyEvent: (_, event) {
-                if (event is! KeyDownEvent) return KeyEventResult.ignored;
-                // Enter → nieuwe bullet
-                if (event.logicalKey == LogicalKeyboardKey.enter) {
-                  _addBulletAfter(i);
-                  return KeyEventResult.handled;
-                }
-                // Backspace op lege bullet → verwijder
-                if (event.logicalKey == LogicalKeyboardKey.backspace &&
-                    _bullets[i].text.isEmpty &&
-                    _bullets.length > 1) {
-                  _removeBulletAndFocus(i);
-                  return KeyEventResult.handled;
-                }
-                // Tab → inspringing (niet op een tussenkop; die staat vast op
-                // niveau 0)
-                if (event.logicalKey == LogicalKeyboardKey.tab && !heading) {
-                  if (HardwareKeyboard.instance.isShiftPressed) {
-                    if (_levels[i] > 0) setState(() => _levels[i]--);
-                  } else {
-                    if (_levels[i] < _maxLevel) setState(() => _levels[i]++);
-                  }
-                  _emit();
-                  return KeyEventResult.handled;
-                }
-                // Cmd/Ctrl+V → slim plakken
-                if (event.logicalKey == LogicalKeyboardKey.keyV &&
-                    (HardwareKeyboard.instance.isMetaPressed ||
-                        HardwareKeyboard.instance.isControlPressed)) {
-                  _handlePaste(i);
-                  return KeyEventResult.handled;
-                }
-                return KeyEventResult.ignored;
-              },
-              child: TextField(
-                controller: _bullets[i],
-                focusNode: _focusNodes[i],
-                style: heading
-                    ? const TextStyle(fontWeight: FontWeight.bold)
-                    : null,
-                decoration: InputDecoration(
-                  hintText: heading
-                      ? l10n.d('Tussenkop (leeg = alleen een scheidingslijn)')
-                      : '${l10n.d('Bullet')} ${i + 1}',
-                  isDense: true,
-                ),
-              ),
-            ),
-          ),
-          IconButton(
-            key: ValueKey('remove-bullet-$i'),
-            icon: Icon(
-              Icons.remove_circle_outline,
-              size: 18,
-              color: AppTheme.slate500,
-            ),
-            onPressed: () => _removeBulletAndFocus(i),
-            tooltip: l10n.d('Verwijder'),
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            constraints: const BoxConstraints(minWidth: 28),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String _markerForLevel(int level) {
-    const markers = ['•', '◦', '▪', '▫', '–'];
-    return markers[level.clamp(0, markers.length - 1)];
-  }
-
-  String _markerForItem(int index) {
-    if (_listStyle == ListStyle.bullets) {
-      return _markerForLevel(_levels[index]);
-    }
-    if (_listStyle == ListStyle.checklist) return '';
-    final level = _levels[index];
-    var number = 0;
-    for (var i = 0; i <= index; i++) {
-      if (_levels[i] == level) number++;
-      if (_levels[i] < level) number = 0;
-    }
-    return '$number.';
   }
 }

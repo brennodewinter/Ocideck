@@ -417,10 +417,12 @@ DocumentLogoCandidate? _readOdtFrame(
     if (href == null) continue;
     final candidate = ctx.readPartBytes(href);
     if (candidate == null || candidate.length > _maxLogoBytes) continue;
-    final raster = _rasterExtension(candidate);
-    if (raster == null) continue;
+    final mime = imageMimeFromBytes(candidate);
+    if (mime == null) continue;
     bytes = candidate;
-    ext = raster;
+    // Het profiel gebruikte historisch `jpeg`; houd dat opgeslagen contract
+    // stabiel terwijl de magic-byteherkenning centraal staat.
+    ext = mime == 'image/jpeg' ? 'jpeg' : extensionForImageMime(mime);
     name = href.split('/').last;
     break;
   }
@@ -507,28 +509,6 @@ DocumentLogoEdge? _odtEdge(XmlElement frame, double heightMm, _OdtPage page) {
   return y + heightMm / 2 < page.heightMm / 2
       ? DocumentLogoEdge.top
       : DocumentLogoEdge.bottom;
-}
-
-/// De bestandsextensie van een rasterbeeld op zijn magische bytes.
-String? _rasterExtension(List<int> b) {
-  if (b.length < 12) return null;
-  if (b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47) {
-    return 'png';
-  }
-  if (b[0] == 0xFF && b[1] == 0xD8 && b[2] == 0xFF) return 'jpeg';
-  if (b[0] == 0x47 && b[1] == 0x49 && b[2] == 0x46) return 'gif';
-  if (b[0] == 0x42 && b[1] == 0x4D) return 'bmp';
-  if (b[0] == 0x52 &&
-      b[1] == 0x49 &&
-      b[2] == 0x46 &&
-      b[3] == 0x46 &&
-      b[8] == 0x57 &&
-      b[9] == 0x45 &&
-      b[10] == 0x42 &&
-      b[11] == 0x50) {
-    return 'webp';
-  }
-  return null;
 }
 
 /// Beelden die met de hand op elke bladzijde geplakt zijn: aan de bladzijde
