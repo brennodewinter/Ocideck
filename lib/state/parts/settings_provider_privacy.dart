@@ -19,6 +19,9 @@ extension SettingsPrivacy on SettingsNotifier {
       'setPrivacyChecksEnabled',
       (prefs) => prefs.setBool('privacyChecksEnabled', enabled),
     );
+    if (enabled) {
+      await adoptPrivacyOwnIdentity(await SharedPreferences.getInstance());
+    }
   }
 
   /// Zet de beeldcontrole aan of uit.
@@ -110,6 +113,8 @@ extension SettingsPrivacy on SettingsNotifier {
   /// uitzonderingslijst, en begint de scanner zijn eigen naam als bevinding te
   /// melden.
   Future<void> adoptPrivacyOwnIdentity(SharedPreferences prefs) async {
+    // De uitzondering hoort bij de scanner — uit = sleutelbos met rust.
+    if (!currentState.privacyChecksEnabled) return;
     final legacy = prefs.getString(legacyOwnIdentityKey);
     if (legacy != null) {
       // De staat draagt hem al: hij kwam rechtstreeks uit prefs.
