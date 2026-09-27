@@ -32,10 +32,12 @@ All notable changes to OciDeck are documented in this file.
   het opslag-tabblad — die test draait automatisch wanneer het tabblad
   opent en na een wijziging in de velden (met een korte uitstel, niet per
   aanslag), zodat "niet getest" geen permanente staat meer is. In de
-  leeromgeving staat onderaan het cursusvenster het eLearning-lampje —
-  server bereikbaar én ingelogd — dat al op het openscherm zat; daar
-  somt de hover nu de twee checks onder elkaar op en een tik opent
-  Instellingen → Integraties (de kaart met de aanmeldknop en de
+  leeromgeving staat onderaan het cursusvenster het eLearning-lampje dat
+  al op het openscherm zat. Dat lampje is er zodra de module aan staat
+  — ook als er nog niets is ingericht — en de hover somt de hele
+  ketting onder elkaar op: server ingesteld, account ingesteld, server
+  bereikbaar (alleen als er een poging is geweest), ingelogd. Een tik
+  opent Instellingen → Integraties (de kaart met de aanmeldknop en de
   foutmelding). In het cursusvenster zelf houdt een tik de oude
   betekenis: opnieuw aanmelden of de lijst verversen.
 - De standaard ingeschakelde Marp-controle laat in de Markdown-modus en bij
@@ -131,6 +133,11 @@ All notable changes to OciDeck are documented in this file.
   bijvoorbeeld datum, locatie of versie bevatten; bestaande titeldia's blijven
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
+
+- De uitlegballon van het versienummer op het openscherm hing alleen aan
+  het indicatorlampje; hover over het nummer zelf liet niets zien. De
+  ballon omarmt nu de hele tag — nummer én lampje. Klikken blijft
+  bewust alleen op het lampje: het nummer is geen knop.
 
 - **Dia splitsen benut de vervolgpagina's van een opsommingen-met-afbeelding-dia volledig.**
   De afbeelding blijft voortaan alleen op de eerste pagina; vervolgpagina's

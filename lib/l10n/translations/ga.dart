@@ -1657,6 +1657,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '{naam}: ingesteld': '{naam}: cumraithe',
+  '{naam}: niet ingesteld': '{naam}: gan chumrú',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Níl aon leagan níos nuaí ann — tapáil chun an tseiceáil a oscailt.',
   '{naam}: bereikbaar': '{naam}: inrochtana',

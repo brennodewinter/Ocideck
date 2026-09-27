@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '{naam}: ingesteld': '{naam}: konfigurá',
+  '{naam}: niet ingesteld': '{naam}: no konfigurá',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'No tin un vershon mas nobo — toka pa habri e kontrol.',
   '{naam}: bereikbaar': '{naam}: alkanzabel',

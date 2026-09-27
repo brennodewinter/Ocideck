@@ -69,6 +69,20 @@ void main() {
       expect(_badge(), findsOneWidget);
       expect(_tip('Nog niet gecontroleerd'), findsOneWidget);
 
+      // De ballon hangt om de hele tag: ook hover op het nummer zelf toont
+      // de uitleg. Klikken blijft alleen op het lampje.
+      expect(
+        find.ancestor(
+          of: find.text('v0.6.12'),
+          matching: find.byWidgetPredicate(
+            (w) =>
+                w is Tooltip &&
+                (w.message ?? '').startsWith('Nog niet gecontroleerd'),
+          ),
+        ),
+        findsOneWidget,
+      );
+
       // Tik op het grijze lampje: de instellingen openen op het Over-tabblad,
       // waar de automatische controle aan kan.
       await tester.tap(_badge());

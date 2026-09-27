@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '{naam}: ingesteld': '{naam}: iigrichtet',
+  '{naam}: niet ingesteld': '{naam}: nöd iigrichtet',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Es git kei neuere Version — tippe zum d Prüefig öffne.',
   '{naam}: bereikbaar': '{naam}: erreichbar',

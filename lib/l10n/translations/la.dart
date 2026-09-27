@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '{naam}: ingesteld': '{naam}: institutus',
+  '{naam}: niet ingesteld': '{naam}: non institutus',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Nulla versio recentior est — tange ut quaestionem aperias.',
   '{naam}: bereikbaar': '{naam}: pervius',

@@ -1626,6 +1626,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  '{naam}: ingesteld': '{naam}: konfigurerad',
+  '{naam}: niet ingesteld': '{naam}: inte konfigurerad',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Det finns ingen nyare version — tryck för att öppna kontrollen.',
   '{naam}: bereikbaar': '{naam}: nåbar',

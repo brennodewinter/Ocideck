@@ -667,6 +667,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  '{naam}: ingesteld': '{naam} : configuré',
+  '{naam}: niet ingesteld': '{naam} : non configuré',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Il n\'existe pas de version plus récente — touchez pour ouvrir la vérification.',
   '{naam}: bereikbaar': '{naam} : accessible',

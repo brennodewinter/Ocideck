@@ -2538,6 +2538,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  '{naam}: ingesteld': '{naam}: ayarlandı',
+  '{naam}: niet ingesteld': '{naam}: ayarlanmadı',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Daha yeni bir sürüm yok — denetimi açmak için dokun.',
   '{naam}: bereikbaar': '{naam}: erişilebilir',

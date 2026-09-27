@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '{naam}: ingesteld': '{naam}: issettjat',
+  '{naam}: niet ingesteld': '{naam}: mhux issettjat',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'M\'hemm l-ebda verżjoni iġġed — agħfas biex tiftaħ il-kontroll.',
   '{naam}: bereikbaar': '{naam}: jilħaq',

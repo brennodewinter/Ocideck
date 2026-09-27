@@ -827,6 +827,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  '{naam}: ingesteld': '{naam}: set up',
+  '{naam}: niet ingesteld': '{naam}: not set up',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'There is no newer version — tap to open the check.',
   '{naam}: bereikbaar': '{naam}: reachable',

@@ -797,7 +797,7 @@ class _VersionTag extends ConsumerWidget {
             ),
           )
         : null;
-    return Padding(
+    final tag = Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -810,13 +810,17 @@ class _VersionTag extends ConsumerWidget {
         ],
       ),
     );
+    // De ballon omarmt de hele tag: ook over het nummer zelf moet de
+    // betekenis leesbaar zijn, niet alleen over de badge. Klikken blijft
+    // bewust alleen op de badge — het nummer is geen knop.
+    return badge == null ? tag : Tooltip(message: badge.message, child: tag);
   }
 }
 
 /// Het klikbare lampje naast het versienummer: kleur, vorm en ballon dragen
 /// het verschil (amber-pijl = er is iets nieuws, groene vink = de check zegt
-/// actueel, grijs = we weten het niet). Klikbaar én als knop aangekondigd:
-/// elke toestand leidt naar de plek waar je ermee verder kunt.
+/// actueel, grijs = we weten het niet). De ballon zelf hangt aan de hele tag
+/// in [_VersionTag]; hier blijven de tik en de Semantics-aankondiging.
 class _VersionBadge extends StatelessWidget {
   final Color color;
   final String message;
@@ -831,18 +835,15 @@ class _VersionBadge extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Tooltip(
-    message: message,
-    child: InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(3),
-      child: Semantics(
-        label: message,
-        button: true,
-        child: Padding(
-          padding: const EdgeInsets.all(2),
-          child: Icon(icon, size: 11, color: color),
-        ),
+  Widget build(BuildContext context) => InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(3),
+    child: Semantics(
+      label: message,
+      button: true,
+      child: Padding(
+        padding: const EdgeInsets.all(2),
+        child: Icon(icon, size: 11, color: color),
       ),
     ),
   );
