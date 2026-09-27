@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  '{naam}: ingesteld': '{naam}: terkonfigurasi',
+  '{naam}: niet ingesteld': '{naam}: belum terkonfigurasi',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Tidak ada versi yang lebih baru — ketuk untuk membuka pemeriksaan.',
   '{naam}: bereikbaar': '{naam}: dapat dijangkau',

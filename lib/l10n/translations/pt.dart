@@ -1655,6 +1655,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  '{naam}: ingesteld': '{naam}: configurado',
+  '{naam}: niet ingesteld': '{naam}: não configurado',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Não existe uma versão mais recente — toca para abrir a verificação.',
   '{naam}: bereikbaar': '{naam}: acessível',

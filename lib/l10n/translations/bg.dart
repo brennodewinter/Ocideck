@@ -1647,6 +1647,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  '{naam}: ingesteld': '{naam}: настроен',
+  '{naam}: niet ingesteld': '{naam}: не е настроен',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Няма по-нова версия — докосни, за да отвориш проверката.',
   '{naam}: bereikbaar': '{naam}: достъпен',

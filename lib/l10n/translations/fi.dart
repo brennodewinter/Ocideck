@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '{naam}: ingesteld': '{naam}: määritetty',
+  '{naam}: niet ingesteld': '{naam}: ei määritetty',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Uudempaa versiota ei ole — napauta avataksesi tarkistuksen.',
   '{naam}: bereikbaar': '{naam}: tavoitettavissa',

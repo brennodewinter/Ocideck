@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  '{naam}: ingesteld': '{naam}: налаштовано',
+  '{naam}: niet ingesteld': '{naam}: не налаштовано',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Новішої версії немає — торкніться, щоб відкрити перевірку.',
   '{naam}: bereikbaar': '{naam}: доступний',

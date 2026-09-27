@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '{naam}: ingesteld': '{naam}: έχει ρυθμιστεί',
+  '{naam}: niet ingesteld': '{naam}: δεν έχει ρυθμιστεί',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Δεν υπάρχει νεότερη έκδοση — πάτησε για να ανοίξεις τον έλεγχο.',
   '{naam}: bereikbaar': '{naam}: προσβάσιμος',

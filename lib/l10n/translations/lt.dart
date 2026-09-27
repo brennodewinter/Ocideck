@@ -1634,6 +1634,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  '{naam}: ingesteld': '{naam}: sukonfigūruotas',
+  '{naam}: niet ingesteld': '{naam}: nesukonfigūruotas',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Naujesnės versijos nėra — paliesk, kad atidarytum tikrinimą.',
   '{naam}: bereikbaar': '{naam}: pasiekiamas',
