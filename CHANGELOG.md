@@ -276,6 +276,27 @@ with `0.1.0` on 2026-07-25; each `## [x.y.z]` section below is a tagged release,
 newest first. The **Development log** further down is the entry-by-entry diary,
 in Dutch, and it keeps growing on `main` between releases.
 
+## [0.6.13] — 2026-09-27
+
+### Added
+
+- feat: eLearning-lamp met hele ketting, versieballon om de hele tag
+- feat: eLearning-lamp met per-check hover, groene versiebadge bij actueel (#2204)
+- feat: één opslaglampje in statuscentrum, detailstippen op opslag-tabblad (#2203)
+- feat: verbindingsstatussen — opslaglampjes, eLearning in leeromgeving, auto-test opslag
+- feat: grijs 'nog niet gecheckt'-lampje naast het versienummer (#2201)
+- feat: subtiele versiecheck — indicator op openscherm, opt-in automatisch + handmatig (#2199)
+
+### Changed
+
+- test: versiebadge-test volgt kOciDeckVersion, geen vast nummer (#2207)
+- Merge pull request #2198: refactor shared editor and import logic
+
+### Fixed
+
+- fix: geen sleutelhanger-reads voor uitgeschakelde diensten
+- fix(release): verify the public deploy host (#2200)
+
 ## [0.6.12] — 2026-09-25
 
 ### Changed
