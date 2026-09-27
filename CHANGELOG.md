@@ -134,6 +134,17 @@ All notable changes to OciDeck are documented in this file.
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
 ### Fixed
 
+- Met de eLearning-module **uit** zocht OciDeck bij het opstarten toch de
+  bewaarde OciServe-aanmelding in de sleutelhanger — zichtbaar als een
+  sleutelhanger-vraag zonder aanleiding. De sessie-restore laat nu eerst de
+  moduleschakelaar gelden: pas als de module aan staat wordt er een
+  credential gezocht; zet je de module later aan, dan herstelt de
+  aanmelding op dat moment alsnog. Hetzelfde gold voor de bewaarde
+  eigen-naam-uitzondering van de privacyscanner: die read liep bij elke
+  start, ook met de controle uit. Nu alleen als de scanner aan staat —
+  en zet je hem halverwege aan, dan wordt de bewaarde waarde alsnog
+  geadopteerd.
+
 - De uitlegballon van het versienummer op het openscherm hing alleen aan
   het indicatorlampje; hover over het nummer zelf liet niets zien. De
   ballon omarmt nu de hele tag — nummer én lampje. Klikken blijft
