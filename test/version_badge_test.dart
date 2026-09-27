@@ -6,6 +6,7 @@ import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/ai_client_service.dart';
 import 'package:ocideck/services/ai_security_gate.dart';
+import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/state/ai_status_provider.dart';
 import 'package:ocideck/state/elearning_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -73,7 +74,10 @@ void main() {
       // de uitleg. Klikken blijft alleen op het lampje.
       expect(
         find.ancestor(
-          of: find.text('v0.6.12'),
+          // Niet de versie letterlijk: de releaseketen bumpet die vóór
+          // make check-release, en dan zou deze test elk uitgebracht nummer
+          // rood maken. 'v$kOciDeckVersion' is wat het scherm toont.
+          of: find.text('v$kOciDeckVersion'),
           matching: find.byWidgetPredicate(
             (w) =>
                 w is Tooltip &&
