@@ -107,11 +107,13 @@ extension StorageConnectionKindIcon on StorageConnectionKind {
 /// Het eLearning-lampje, pure afleiding van de sessiestate — de OciServe-
 /// notifier bewaakt de verbinding al, hier komt geen eigen netwerk bij.
 /// Zelfde lampje op het openscherm én onderaan de leeromgeving: de cursist
-/// ziet op beide plekken of de server bereikbaar is en of hij is ingelogd.
-/// De ballon somt de twee checks onder elkaar op — server én account —
-/// zoals het opslaglampje dat per verbinding doet. Over de server is alleen
-/// iets bekend ná een poging: wie nog nooit aanmeldde, krijgt geen
-/// serverregel en dus geen schijnzekerheid.
+/// ziet op beide plekken de hele ketting — server ingesteld, account
+/// ingesteld, server bereikbaar, ingelogd. De ballon somt die checks onder
+/// elkaar op, zoals het opslaglampje dat per verbinding doet. Zichtbaar
+/// zodra de module aan staat — óók zonder ingestelde server, want juist dán
+/// is er wat te melden. Over bereikbaarheid is alleen iets bekend ná een
+/// poging: wie nog nooit aanmeldde, krijgt geen bereikbaarheidsregel en dus
+/// geen schijnzekerheid.
 class OciServeStatusChip extends ConsumerWidget {
   final VoidCallback? onTap;
 
@@ -121,23 +123,45 @@ class OciServeStatusChip extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final ociServe = ref.watch(ociServeProvider);
-    if (!ref.watch(elearningEnabledProvider) || !ociServe.settings.enabled) {
+    if (!ref.watch(elearningEnabledProvider)) {
       return const SizedBox.shrink();
     }
-    // De serverregel hergebruikt de opslag-templates: 'eLearning-server'
-    // is daar gewoon een naam als elke andere.
-    String serverLine(String template) =>
-        l10n.d(template).replaceAll('{naam}', 'eLearning-server');
+    // De regels hergebruiken de opslag-templates: 'eLearning-server' en
+    // 'eLearning-account' zijn daar gewoon namen als elke andere.
+    String line(String template, String naam) =>
+        l10n.d(template).replaceAll('{naam}', naam);
+    final serverSet =
+        ociServe.settings.enabled && ociServe.settings.isConfigured;
+    final accountSet = ociServe.authenticated || ociServe.hasStoredLogin;
+    String accountLine() => line(
+      accountSet ? '{naam}: ingesteld' : '{naam}: niet ingesteld',
+      'eLearning-account',
+    );
     final (level, lines) = switch (ociServe.status) {
-      OciServeStatus.authenticated => (
-        StatusLevel.ok,
-        [serverLine('{naam}: bereikbaar'), l10n.d('eLearning: ingelogd')],
+      // Zonder ingestelde server is er niets om te laden of aan te melden —
+      // de ketting begint daar al stuk.
+      _ when !serverSet => (
+        StatusLevel.attention,
+        [
+          line('{naam}: niet ingesteld', 'eLearning-server'),
+          line('{naam}: niet ingesteld', 'eLearning-account'),
+          l10n.d('eLearning: niet ingelogd'),
+        ],
       ),
+      // Tijdens laden/aanmelden is over geen enkele schakel iets bekend.
       OciServeStatus.loading || OciServeStatus.authenticating => (
         StatusLevel.attention,
         [
-          serverLine('{naam}: wordt gecontroleerd…'),
+          line('{naam}: wordt gecontroleerd…', 'eLearning-server'),
           l10n.d('eLearning: aanmelden loopt…'),
+        ],
+      ),
+      OciServeStatus.authenticated => (
+        StatusLevel.ok,
+        [
+          line('{naam}: bereikbaar', 'eLearning-server'),
+          accountLine(),
+          l10n.d('eLearning: ingelogd'),
         ],
       ),
       OciServeStatus.signedOut =>
@@ -145,7 +169,8 @@ class OciServeStatusChip extends ConsumerWidget {
             ? (
                 StatusLevel.unreachable,
                 [
-                  serverLine('{naam}: niet bereikbaar'),
+                  line('{naam}: niet bereikbaar', 'eLearning-server'),
+                  accountLine(),
                   l10n.d('eLearning: niet ingelogd'),
                 ],
               )
@@ -155,11 +180,21 @@ class OciServeStatusChip extends ConsumerWidget {
             ? (
                 StatusLevel.attention,
                 [
-                  serverLine('{naam}: bereikbaar'),
+                  line('{naam}: bereikbaar', 'eLearning-server'),
+                  accountLine(),
                   l10n.d('eLearning: aanmelden mislukt'),
                 ],
               )
-            : (StatusLevel.attention, [l10n.d('eLearning: niet ingelogd')]),
+            : (
+                StatusLevel.attention,
+                [
+                  // Bereikt zonder poging: de server is wel ingesteld maar
+                  // over bereikbaarheid is (nog) niets bekend.
+                  line('{naam}: ingesteld', 'eLearning-server'),
+                  accountLine(),
+                  l10n.d('eLearning: niet ingelogd'),
+                ],
+              ),
     };
     return StatusChip(
       icon: Icons.school_outlined,

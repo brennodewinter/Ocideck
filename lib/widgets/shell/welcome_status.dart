@@ -17,10 +17,10 @@ class _WelcomeStatusCenter extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     // De chip gate intern ook, maar zou hier dan als leeg kind toch een
-    // tussenruimte in de Wrap opeten.
-    final elearningOn =
-        ref.watch(elearningEnabledProvider) &&
-        ref.watch(ociServeProvider.select((s) => s.settings.enabled));
+    // tussenruimte in de Wrap opeten. De module-schakelaar alleen is de
+    // grens: juist als de verbinding nog niet is ingericht heeft de cursist
+    // iets aan het lampje.
+    final elearningOn = ref.watch(elearningEnabledProvider);
     final items = <Widget>[
       ..._aiStatusItem(context, ref, l10n),
       if (elearningOn)

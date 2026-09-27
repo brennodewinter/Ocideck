@@ -86,6 +86,9 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         generation != _generation) {
       return;
     }
+    // Er ligt een bewaarde aanmelding — ook als de refresh hieronder faalt
+    // blijft "account ingesteld" waar, want de sleutel is er wél.
+    state = state.copyWith(hasStoredLogin: true);
     try {
       state = state.copyWith(status: OciServeStatus.authenticating);
       final connection = await _connect(settings);
@@ -169,6 +172,10 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
       status: settings.enabled && state.authenticated && !serverChanged
           ? OciServeStatus.authenticated
           : OciServeStatus.signedOut,
+      // De bewaarde login is weg bij een andere server of als "ingelogd
+      // blijven" uitgaat — hieronder wordt hij dan ook echt verwijderd.
+      hasStoredLogin:
+          !serverChanged && settings.rememberLogin && state.hasStoredLogin,
       // Uitschakelen loopt hieronder via logout. Tot die cleanup klaar is,
       // blijft het account alleen intern beschikbaar om lessessies te sluiten.
       clearAccount: serverChanged,
@@ -250,6 +257,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
       state = state.copyWith(
         status: OciServeStatus.authenticated,
         account: account,
+        hasStoredLogin: resolvedSettings.rememberLogin,
       );
       _flushInBackground();
       return true;
@@ -318,6 +326,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
       status: OciServeStatus.signedOut,
       clearAccount: true,
       clearError: true,
+      hasStoredLogin: false,
     );
     try {
       await _secretWriteInFlight;
@@ -785,6 +794,9 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         await _persistRefreshToken(settings, tokens);
         if (generation != _generation) {
           throw const OciServeException('not_authenticated');
+        }
+        if (!state.hasStoredLogin) {
+          state = state.copyWith(hasStoredLogin: true);
         }
       }
       return tokens.accessToken;

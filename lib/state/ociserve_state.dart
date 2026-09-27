@@ -53,6 +53,7 @@ class OciServeState {
     this.warningCode,
     this.identityProviderHost,
     this.pendingReports = 0,
+    this.hasStoredLogin = false,
   });
 
   final OciServeSettings settings;
@@ -62,6 +63,13 @@ class OciServeState {
   final String? warningCode;
   final String? identityProviderHost;
   final int pendingReports;
+
+  /// Er ligt een bewaarde aanmelding ("ingelogd blijven") voor deze server in
+  /// de sleutelhanger — het "account ingesteld"-feit in het statuslampje.
+  /// Niet hetzelfde als [authenticated]: die sessie kan verlopen zijn terwijl
+  /// de bewaarde login gewoon bestaat, en andersom is een sessie zonder
+  /// rememberLogin nooit bewaard.
+  final bool hasStoredLogin;
 
   bool get authenticated =>
       settings.enabled &&
@@ -93,6 +101,7 @@ class OciServeState {
     String? identityProviderHost,
     bool clearIdentityProviderHost = false,
     int? pendingReports,
+    bool? hasStoredLogin,
   }) => OciServeState(
     settings: settings ?? this.settings,
     status: status ?? this.status,
@@ -103,5 +112,6 @@ class OciServeState {
         ? null
         : identityProviderHost ?? this.identityProviderHost,
     pendingReports: pendingReports ?? this.pendingReports,
+    hasStoredLogin: hasStoredLogin ?? this.hasStoredLogin,
   );
 }
