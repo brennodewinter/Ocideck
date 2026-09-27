@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/learning_session.dart';
@@ -15,6 +16,7 @@ import 'package:ocideck/models/rehearsal.dart';
 import 'package:ocideck/services/ociserve/ociserve_auth.dart';
 import 'package:ocideck/services/ociserve/ociserve_gateway.dart';
 import 'package:ocideck/services/ociserve/ociserve_http.dart';
+import 'package:ocideck/state/elearning_provider.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/secret_store_provider.dart';
 import 'package:ocideck/services/secret_store.dart';
@@ -428,8 +430,12 @@ ProviderContainer _container(
   SecretStore secrets, {
   _FakeAuth? auth,
   OciServeGatewayFactory? gatewayFactory,
+  // De eLearning-moduleschakelaar staat in deze tests aan, tenzij een test
+  // expliciet anders override't — de provider mag dan geen secrets lezen.
+  bool elearningEnabled = true,
 }) => ProviderContainer(
   overrides: [
+    elearningEnabledProvider.overrideWithValue(elearningEnabled),
     secretStoreProvider.overrideWithValue(secrets),
     ociServeGatewayFactoryProvider.overrideWithValue(
       gatewayFactory ?? (_) => api,
@@ -530,6 +536,92 @@ void main() {
     expect(container.read(ociServeProvider).authenticated, isTrue);
     expect(auth.refreshes, 1);
     expect(api.discoveries, 1);
+  });
+
+  test(
+    'leest geen credentials en herstelt niets als de module uit staat',
+    () async {
+      SharedPreferences.setMockInitialValues({
+        kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+      });
+      await secrets.writeOciServeRefreshToken(
+        _settings.baseUrl,
+        jsonEncode({
+          'version': 1,
+          'refresh_token': 'refresh',
+          'issuer': _oidc.issuer.toString(),
+          'client_id': _installation.clientId,
+          'token_endpoint': _oidc.tokenEndpoint.toString(),
+        }),
+      );
+      final auth = _FakeAuth();
+      final container = _container(
+        api,
+        secrets,
+        auth: auth,
+        elearningEnabled: false,
+      );
+      addTearDown(container.dispose);
+
+      container.read(ociServeProvider);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      // De module staat uit: geen sleutelhanger-read (hasStoredLogin blijft
+      // onwaar) en helemaal geen verbindingspoging.
+      final state = container.read(ociServeProvider);
+      expect(state.hasStoredLogin, isFalse);
+      expect(state.status, OciServeStatus.signedOut);
+      expect(auth.refreshes, 0);
+      expect(api.discoveries, 0);
+    },
+  );
+
+  test('aanzetten van de module herstelt de bewaarde login alsnog', () async {
+    final moduleOn = StateProvider<bool>((ref) => false);
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+    });
+    await secrets.writeOciServeRefreshToken(
+      _settings.baseUrl,
+      jsonEncode({
+        'version': 1,
+        'refresh_token': 'refresh',
+        'issuer': _oidc.issuer.toString(),
+        'client_id': _installation.clientId,
+        'token_endpoint': _oidc.tokenEndpoint.toString(),
+      }),
+    );
+    final auth = _FakeAuth();
+    final container = ProviderContainer(
+      overrides: [
+        elearningEnabledProvider.overrideWith((ref) => ref.watch(moduleOn)),
+        secretStoreProvider.overrideWithValue(secrets),
+        ociServeGatewayFactoryProvider.overrideWithValue((_) => api),
+        ociServeAuthenticatorFactoryProvider.overrideWithValue((_) => auth),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    container.read(ociServeProvider);
+    await Future<void>.delayed(const Duration(milliseconds: 20));
+    expect(auth.refreshes, 0);
+
+    // De gebruiker zet de module aan: build loopt opnieuw en de bewaarde
+    // aanmelding wordt dan pas gezocht én hersteld.
+    container.read(moduleOn.notifier).state = true;
+    // De rebuild laat _initialize opnieuw lopen: settings, sleutelhanger,
+    // connect, OIDC-discovery, refresh en /me — een aaneenschakeling van
+    // async stappen, dus even wachten tot de microtasks uitgespeeld zijn.
+    for (
+      var i = 0;
+      i < 50 && !container.read(ociServeProvider).authenticated;
+      i++
+    ) {
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
+
+    expect(container.read(ociServeProvider).authenticated, isTrue);
+    expect(auth.refreshes, 1);
   });
 
   test('remembered login checks known ports before showing offline', () async {

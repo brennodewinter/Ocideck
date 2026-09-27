@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class _FakeKeychain implements FlutterSecureStorage {
   final Map<String, String> entries = {};
   bool weiger = false;
+  int reads = 0;
 
   @override
   Future<String?> read({
@@ -20,6 +21,7 @@ class _FakeKeychain implements FlutterSecureStorage {
     Object? mOptions,
     Object? wOptions,
   }) async {
+    reads++;
     if (weiger) throw Exception('keychain dicht');
     return entries[key];
   }
@@ -140,5 +142,31 @@ void main() {
     final second = await loaded();
 
     expect(second.state.privacyOwnIdentity, 'bram@voorbeeld.test');
+  });
+
+  test('met de scanner uit blijft de sleutelbos onaangeroerd', () async {
+    SharedPreferences.setMockInitialValues({'privacyChecksEnabled': false});
+    keychain.entries[SecretStore.privacyOwnIdentityKey] = 'Bram de Vries';
+
+    final notifier = await loaded();
+
+    expect(keychain.reads, 0);
+    expect(
+      notifier.state.privacyOwnIdentity,
+      '',
+      reason: 'de uitzondering is alleen voor de scanner van belang',
+    );
+  });
+
+  test('scanner aanzetten haalt de bewaarde identiteit alsnog op', () async {
+    SharedPreferences.setMockInitialValues({'privacyChecksEnabled': false});
+    keychain.entries[SecretStore.privacyOwnIdentityKey] = 'Bram de Vries';
+    final notifier = await loaded();
+    expect(keychain.reads, 0);
+
+    await notifier.setPrivacyChecksEnabled(true);
+
+    expect(notifier.state.privacyOwnIdentity, 'Bram de Vries');
+    expect(keychain.reads, 1);
   });
 }

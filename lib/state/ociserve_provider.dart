@@ -18,6 +18,7 @@ import '../services/ociserve/ociserve_gateway.dart';
 import '../services/ociserve/ociserve_http.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
+import 'elearning_provider.dart';
 import 'secret_store_provider.dart';
 
 part 'ociserve_state.dart';
@@ -52,6 +53,12 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   @override
   OciServeState build() {
     ref.onDispose(() => ++_generation);
+    // De module-schakelaar bepaalt of deze dienst überhaupt iets mag: uit =
+    // geen sessie-restore en geen sleutelhanger-read. Watch (niet read) zodat
+    // omschakelen build opnieuw laat lopen — aan = alsnog herstellen, uit =
+    // schone state. Ook nodig omdat de modulevlag pas na de eerste build uit
+    // de voorkeuren geladen is.
+    ref.watch(elearningEnabledProvider);
     _initialize(++_generation);
     return const OciServeState();
   }
@@ -72,10 +79,16 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     }
     if (generation != _generation) return;
     state = OciServeState(settings: settings, status: OciServeStatus.signedOut);
-    if (!settings.enabled ||
+    if (!ref.read(elearningEnabledProvider) ||
+        !settings.enabled ||
         !settings.isConfigured ||
         !settings.rememberLogin ||
         !_secrets.canStore) {
+      // De module staat uit (of de verbinding is onvolledig): in ieder geval
+      // geen achtergebleven sessiemateriaal laten liggen.
+      _tokens = null;
+      _installation = null;
+      _configuration = null;
       return;
     }
     final storedRefresh = await _secrets.readOciServeRefreshToken(
@@ -198,7 +211,10 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
   Future<bool> _restoreCachedLogin() async {
     if (state.authenticated) return true;
     final settings = state.settings;
-    if (!settings.enabled || !settings.isConfigured || !_secrets.canStore) {
+    if (!ref.read(elearningEnabledProvider) ||
+        !settings.enabled ||
+        !settings.isConfigured ||
+        !_secrets.canStore) {
       return false;
     }
     final stored = await _secrets.readOciServeRefreshToken(
