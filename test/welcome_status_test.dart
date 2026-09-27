@@ -155,12 +155,29 @@ void main() {
         tester,
         elearningEnabled: true,
         ociServeState: const OciServeState(
-          settings: OciServeSettings(enabled: true),
+          settings: OciServeSettings(
+            enabled: true,
+            baseUrl: 'https://learn.example',
+          ),
           status: OciServeStatus.signedOut,
         ),
       );
 
-      expect(_tip('eLearning: niet ingelogd'), findsOneWidget);
+      // Nog nooit aangemeld: server wel ingesteld, account niet, niet
+      // ingelogd — en geen bereikbaarheidsclaim, want daarover is niets
+      // bekend.
+      final tips = tester
+          .widgetList<Tooltip>(find.byType(Tooltip))
+          .where(
+            (t) =>
+                (t.message ?? '').contains(
+                  'eLearning-account: niet ingesteld',
+                ) &&
+                (t.message ?? '').contains('eLearning: niet ingelogd'),
+          )
+          .toList();
+      expect(tips, hasLength(1));
+      expect(tips.single.message, isNot(contains('bereikbaar')));
       expect(_tip('AI:'), findsNothing);
     });
 
@@ -171,15 +188,18 @@ void main() {
         tester,
         elearningEnabled: false,
         ociServeState: const OciServeState(
-          settings: OciServeSettings(enabled: true),
+          settings: OciServeSettings(
+            enabled: true,
+            baseUrl: 'https://learn.example',
+          ),
           status: OciServeStatus.signedOut,
         ),
       );
 
-      expect(_tip('eLearning:'), findsNothing);
+      expect(_tip('eLearning'), findsNothing);
     });
 
-    testWidgets('eLearning-module aan maar server uit → lampje weg', (
+    testWidgets('eLearning-module aan maar server uit → lampje met ketting', (
       tester,
     ) async {
       await _pumpWelcome(
@@ -191,7 +211,48 @@ void main() {
         ),
       );
 
-      expect(_tip('eLearning:'), findsNothing);
+      // De module staat aan maar de verbinding is niet ingericht: juist dan
+      // toont het lampje waar het hapert — beide "niet ingesteld"-regels.
+      final tips = tester
+          .widgetList<Tooltip>(find.byType(Tooltip))
+          .where(
+            (t) =>
+                (t.message ?? '').contains(
+                  'eLearning-server: niet ingesteld',
+                ) &&
+                (t.message ?? '').contains(
+                  'eLearning-account: niet ingesteld',
+                ) &&
+                (t.message ?? '').contains('eLearning: niet ingelogd'),
+          )
+          .toList();
+      expect(tips, hasLength(1));
+    });
+
+    testWidgets('eLearning bewaarde login → account ingesteld in de tip', (
+      tester,
+    ) async {
+      await _pumpWelcome(
+        tester,
+        elearningEnabled: true,
+        ociServeState: const OciServeState(
+          settings: OciServeSettings(
+            enabled: true,
+            baseUrl: 'https://learn.example',
+          ),
+          status: OciServeStatus.signedOut,
+          hasStoredLogin: true,
+        ),
+      );
+
+      expect(
+        find.byWidgetPredicate(
+          (w) =>
+              w is Tooltip &&
+              (w.message ?? '').contains('eLearning-account: ingesteld'),
+        ),
+        findsOneWidget,
+      );
     });
 
     /// De tip van het eLearning-lampje die álle verwachte regels bevat.
@@ -210,7 +271,10 @@ void main() {
         tester,
         elearningEnabled: true,
         ociServeState: const OciServeState(
-          settings: OciServeSettings(enabled: true),
+          settings: OciServeSettings(
+            enabled: true,
+            baseUrl: 'https://learn.example',
+          ),
           status: OciServeStatus.authenticated,
           account: OciServeAccount(id: 'u1'),
         ),
@@ -229,7 +293,10 @@ void main() {
         tester,
         elearningEnabled: true,
         ociServeState: const OciServeState(
-          settings: OciServeSettings(enabled: true),
+          settings: OciServeSettings(
+            enabled: true,
+            baseUrl: 'https://learn.example',
+          ),
           status: OciServeStatus.signedOut,
           errorCode: 'network',
         ),
@@ -253,7 +320,9 @@ void main() {
         ),
       );
 
-      await tester.tap(_tip('eLearning: niet ingelogd'));
+      await tester.tap(
+        elearningTip(server: 'niet ingesteld', account: 'niet ingelogd'),
+      );
       await tester.pumpAndSettle();
 
       expect(find.byType(SettingsDialog), findsOneWidget);
