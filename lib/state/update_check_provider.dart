@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +10,11 @@ import '../services/update_check_service.dart';
 import '../utils/log.dart';
 import '../utils/version_compare.dart';
 import 'settings_provider.dart';
+
+/// Of deze build een ontwikkelversie is (`flutter run`, debug) in plaats van
+/// een geïnstalleerde release. Losse provider zodat tests het verschil beide
+/// kanten op kunnen afdwingen — `flutter test` draait zelf in debug.
+final ociDeckDevBuildProvider = Provider<bool>((_) => kDebugMode);
 
 /// Wat de UI over de versiecheck weet. `latestVersion` is de laatst bekende
 /// nieuwste release — óók de waarde die een eerdere sessie bewaarde, zodat de

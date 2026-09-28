@@ -760,7 +760,19 @@ class _VersionTag extends ConsumerWidget {
     final (latest, available) = ref.watch(
       updateCheckProvider.select((s) => (s.latestVersion, s.updateAvailable)),
     );
-    final badge = available
+    // Een debug-build is nooit een release — het blauwe lampje zegt dat
+    // direct, vóórdat de updatecheck-badges iets anders zouden claimen.
+    final badge = ref.watch(ociDeckDevBuildProvider)
+        ? _VersionBadge(
+            icon: Icons.terminal,
+            color: AppTheme.infoAccent,
+            message: l10n.d('Ontwikkelversie (debug-build) — geen release.'),
+            onTap: () => SettingsDialog.show(
+              context,
+              initialSection: SettingsSection.about,
+            ),
+          )
+        : available
         ? _VersionBadge(
             color: AppTheme.amber700,
             message: l10n
