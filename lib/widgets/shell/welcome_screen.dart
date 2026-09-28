@@ -388,10 +388,9 @@ class _WelcomeScreen extends ConsumerWidget {
     ButtonStyle secondaryStyle,
   ) {
     final ociServeState = ref.watch(ociServeProvider);
-    // Bewaarde serverinstellingen mogen de hoofdschakelaar voor de uitbreiding
-    // niet omzeilen.
-    if (!ref.watch(elearningEnabledProvider) ||
-        !ociServeState.settings.enabled) {
+    // "eLearning volgen" (de koppeling) is de schakelaar achter deze knop —
+    // zonder die dienst kan aanmelden nooit slagen.
+    if (!ociServeState.settings.enabled) {
       return const [];
     }
     return [
