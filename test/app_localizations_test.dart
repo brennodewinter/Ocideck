@@ -39,6 +39,8 @@ const unchangedInEnglish = {
   'Week',
   // Toetsnaam: 'Esc' blijft 'Esc', ook in het Engels (zie unchangedInAllLanguages).
   'Esc',
+  // 'dev' is in het Engels dezelfde afkorting (zie unchangedInAllLanguages).
+  'dev',
   'A.5.1',
   '2026-Q4',
   'ABCD-EFGH-…',
@@ -295,6 +297,9 @@ const unchangedInAllLanguages = {
   // Toetsnaam, geen tekst: de 'Esc'-sneltoetshint in de vergroot-markdown-dialoog
   // is een identifier die in elke taal 'Esc' blijft (zie shortcut_label.dart).
   'Esc',
+  // Build-label bij het versienummer van een debug-build: 'dev' is in elke
+  // taal de gebruikelijke aanduiding.
+  'dev',
   'A.5.1',
   '2026-Q4',
   'ABCD-EFGH-…',
