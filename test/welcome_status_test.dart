@@ -181,7 +181,7 @@ void main() {
       expect(_tip('AI:'), findsNothing);
     });
 
-    testWidgets('eLearning-module uit → lampje weg, ook met server ingesteld', (
+    testWidgets('eLearning volgen aan zonder maken-module → lampje', (
       tester,
     ) async {
       await _pumpWelcome(
@@ -192,6 +192,22 @@ void main() {
             enabled: true,
             baseUrl: 'https://learn.example',
           ),
+          status: OciServeStatus.signedOut,
+        ),
+      );
+
+      // De gebruiker hoeft alleen "eLearning volgen" aan te zetten — de
+      // maken-module is een aparte schakelaar en mag het lampje niet
+      // tegenhouden.
+      expect(_tip('eLearning-server: ingesteld'), findsOneWidget);
+    });
+
+    testWidgets('beide eLearning-schakelaars uit → lampje weg', (tester) async {
+      await _pumpWelcome(
+        tester,
+        elearningEnabled: false,
+        ociServeState: const OciServeState(
+          settings: OciServeSettings(enabled: false),
           status: OciServeStatus.signedOut,
         ),
       );
