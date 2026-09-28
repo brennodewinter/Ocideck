@@ -20,6 +20,7 @@ import '../services/secret_store.dart';
 import '../utils/log.dart';
 import 'secret_store_provider.dart';
 
+part 'ociserve_activation.dart';
 part 'ociserve_state.dart';
 part 'ociserve_provider_planning.dart';
 part 'ociserve_provider_exams.dart';
@@ -72,76 +73,13 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
     }
     if (generation != _generation) return;
     state = OciServeState(settings: settings, status: OciServeStatus.signedOut);
-    // "eLearning volgen" uit (settings.enabled) = de dienst uit: dan mag de
-    // sleutelhanger met rust. Ook geen achtergebleven sessiemateriaal
-    // laten liggen als de verbinding allesbehalve compleet is.
-    if (!settings.enabled ||
-        !settings.isConfigured ||
-        !settings.rememberLogin ||
-        !_secrets.canStore) {
-      _tokens = null;
-      _installation = null;
-      _configuration = null;
-      return;
-    }
-    final storedRefresh = await _secrets.readOciServeRefreshToken(
-      settings.normalizedBaseUrl,
-    );
-    if (storedRefresh == null ||
-        storedRefresh.isEmpty ||
-        generation != _generation) {
-      return;
-    }
-    // Er ligt een bewaarde aanmelding — ook als de refresh hieronder faalt
-    // blijft "account ingesteld" waar, want de sleutel is er wél.
-    state = state.copyWith(hasStoredLogin: true);
-    try {
-      state = state.copyWith(status: OciServeStatus.authenticating);
-      final connection = await _connect(settings);
-      settings = connection.settings;
-      final gateway = connection.gateway;
-      final installation = connection.installation;
-      if (generation != _generation) return;
-      await _storeResolvedSettings(settings);
-      _requireAcceptedIdentityProvider(settings, installation);
-      final configuration = await gateway.discoverOidc(installation);
-      if (generation != _generation) return;
-      final refresh = _boundRefreshToken(
-        storedRefresh,
-        installation,
-        configuration,
-      );
-      final tokens = await _authFactory(
-        settings,
-      ).refresh(installation, configuration, refresh);
-      final account = await gateway.me(tokens.accessToken);
-      if (account.activeMemberships.isEmpty) {
-        throw const OciServeException('no_active_membership');
-      }
-      if (generation != _generation) return;
-      _installation = installation;
-      _configuration = configuration;
-      _tokens = tokens;
-      await _persistRefreshToken(settings, tokens);
-      if (generation != _generation) return;
-      state = state.copyWith(
-        status: OciServeStatus.authenticated,
-        account: account,
-        clearError: true,
-      );
-      _flushInBackground();
-    } catch (error, stack) {
-      logError('OciServe: sessie herstellen', error.runtimeType, stack);
-      if (generation != _generation) return;
-      _tokens = null;
-      final errorCode = _safeErrorCode(error);
-      state = state.copyWith(
-        status: OciServeStatus.signedOut,
-        clearAccount: true,
-        errorCode: _restoreErrorCode(errorCode),
-      );
-    }
+    await _activateSession(settings, generation);
   }
+
+  /// Sessie-activering voor "eLearning volgen": bewaarde aanmelding
+  /// herstellen of de bereikbaarheid testen — implementatie in
+  /// ociserve_activation.dart.
+  Future<void> _activateSession(OciServeSettings settings, int generation);
 
   Future<void> saveSettings(
     OciServeSettings settings, {
@@ -182,6 +120,9 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
       // blijven" uitgaat — hieronder wordt hij dan ook echt verwijderd.
       hasStoredLogin:
           !serverChanged && settings.rememberLogin && state.hasStoredLogin,
+      // Bij een andere server is een eerdere bereikbaarheidsuitslag
+      // niets meer waard.
+      serverReachable: serverChanged ? false : state.serverReachable,
       // Uitschakelen loopt hieronder via logout. Tot die cleanup klaar is,
       // blijft het account alleen intern beschikbaar om lessessies te sluiten.
       clearAccount: serverChanged,
@@ -195,7 +136,15 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
       await _secretWriteInFlight;
       await _secrets.deleteOciServeRefreshToken(settings.normalizedBaseUrl);
     }
-    if (!settings.enabled) await logout();
+    if (!settings.enabled) {
+      await logout();
+    } else if (!old.enabled) {
+      // "eLearning volgen" net aangezet: meteen activeren — de bewaarde
+      // aanmelding herstellen of de bereikbaarheid testen, zodat het
+      // lampje niet tot herstart of een handmatige login op "ingesteld"
+      // blijft staan.
+      unawaited(_activateSession(settings, ++_generation));
+    }
   }
 
   Future<void> setEnabled(bool enabled) =>
@@ -264,6 +213,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
         status: OciServeStatus.authenticated,
         account: account,
         hasStoredLogin: resolvedSettings.rememberLogin,
+        serverReachable: true,
       );
       _flushInBackground();
       return true;
@@ -962,4 +912,7 @@ abstract class OciServeNotifierBase extends Notifier<OciServeState> {
 /// De concrete notifier: de kern uit [OciServeNotifierBase] plus de
 /// planning-methoden uit [_OciServePlanningMethods].
 class OciServeNotifier extends OciServeNotifierBase
-    with _OciServePlanningMethods, _OciServeExamMethods {}
+    with
+        _OciServeActivationMethods,
+        _OciServePlanningMethods,
+        _OciServeExamMethods {}

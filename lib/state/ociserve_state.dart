@@ -54,6 +54,7 @@ class OciServeState {
     this.identityProviderHost,
     this.pendingReports = 0,
     this.hasStoredLogin = false,
+    this.serverReachable = false,
   });
 
   final OciServeSettings settings;
@@ -70,6 +71,11 @@ class OciServeState {
   /// de bewaarde login gewoon bestaat, en andersom is een sessie zonder
   /// rememberLogin nooit bewaard.
   final bool hasStoredLogin;
+
+  /// De server antwoordde op de laatste bereikbaarheidstest — los van of er
+  /// een sessie of bewaarde aanmelding is. Alleen de bewuste test zet dit;
+  /// [serverUnavailable] zegt het omgekeerde.
+  final bool serverReachable;
 
   bool get authenticated =>
       settings.enabled &&
@@ -102,6 +108,7 @@ class OciServeState {
     bool clearIdentityProviderHost = false,
     int? pendingReports,
     bool? hasStoredLogin,
+    bool? serverReachable,
   }) => OciServeState(
     settings: settings ?? this.settings,
     status: status ?? this.status,
@@ -113,5 +120,6 @@ class OciServeState {
         : identityProviderHost ?? this.identityProviderHost,
     pendingReports: pendingReports ?? this.pendingReports,
     hasStoredLogin: hasStoredLogin ?? this.hasStoredLogin,
+    serverReachable: serverReachable ?? this.serverReachable,
   );
 }
