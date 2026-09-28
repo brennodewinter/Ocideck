@@ -1647,6 +1647,9 @@ const _dutchSourceAddRo = <String, String>{
   '{naam}: niet ingesteld': '{naam}: neconfigurat',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Nu există o versiune mai nouă — atinge pentru a deschide verificarea.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Versiune de dezvoltare (build de depanare) — nu este o lansare.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: accesibil',
   '{naam}: wordt gecontroleerd…': '{naam}: se verifică…',
   '{naam}: niet bereikbaar': '{naam}: inaccesibil',

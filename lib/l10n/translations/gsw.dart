@@ -1634,6 +1634,9 @@ const _dutchSourceAddGsw = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nöd iigrichtet',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Es git kei neuere Version — tippe zum d Prüefig öffne.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Entwickligsversion (Debug-Build) — kei Release.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: erreichbar',
   '{naam}: wordt gecontroleerd…': '{naam}: wird prüeft…',
   '{naam}: niet bereikbaar': '{naam}: nöd erreichbar',

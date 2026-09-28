@@ -1608,6 +1608,9 @@ const _dutchSourceAddTlh = <String, String>{
   '{naam}: niet ingesteld': '{naam}: \'oprabbe\'',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'De\' chu\' tu\'lu\'be\' — legh Qu\' yIpoSmoH.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Dev vItlhutlh moD — release qarbe\'.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: Qap',
   '{naam}: wordt gecontroleerd…': '{naam}: nuDlutaH',
   '{naam}: niet bereikbaar': '{naam}: waw\' Hutlh',

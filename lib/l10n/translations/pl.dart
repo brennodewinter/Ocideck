@@ -1643,6 +1643,9 @@ const _dutchSourceAddPl = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nieskonfigurowany',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Brak nowszej wersji — dotknij, aby otworzyć sprawdzanie.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Wersja deweloperska (kompilacja debugowania) — nie jest to wydanie.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: osiągalny',
   '{naam}: wordt gecontroleerd…': '{naam}: sprawdzanie…',
   '{naam}: niet bereikbaar': '{naam}: nieosiągalny',

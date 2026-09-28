@@ -1629,6 +1629,9 @@ const _dutchSourceAddLv = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nav iestatīts',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Jaunākas versijas nav — pieskaries, lai atvērtu pārbaudi.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Izstrādes versija (atkļūdošanas būve) — nav izlaidums.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: sasniedzams',
   '{naam}: wordt gecontroleerd…': '{naam}: notiek pārbaude…',
   '{naam}: niet bereikbaar': '{naam}: nav sasniedzams',

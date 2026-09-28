@@ -671,6 +671,9 @@ const _dutchSourceAddFr = {
   '{naam}: niet ingesteld': '{naam} : non configuré',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Il n\'existe pas de version plus récente — touchez pour ouvrir la vérification.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Version de développement (build de débogage) — pas une version publiée.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam} : accessible',
   '{naam}: wordt gecontroleerd…': '{naam} : vérification en cours…',
   '{naam}: niet bereikbaar': '{naam} : inaccessible',

@@ -1638,6 +1638,9 @@ const _dutchSourceAddLt = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nesukonfigūruotas',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Naujesnės versijos nėra — paliesk, kad atidarytum tikrinimą.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Kūrimo versija (derinimo kūrinys) — ne leidimas.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: pasiekiamas',
   '{naam}: wordt gecontroleerd…': '{naam}: tikrinama…',
   '{naam}: niet bereikbaar': '{naam}: nepasiekiamas',

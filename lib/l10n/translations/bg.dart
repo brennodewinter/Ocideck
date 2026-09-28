@@ -1651,6 +1651,9 @@ const _dutchSourceAddBg = <String, String>{
   '{naam}: niet ingesteld': '{naam}: не е настроен',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Няма по-нова версия — докосни, за да отвориш проверката.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Версия за разработка (debug-компилация) — не е издание.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: достъпен',
   '{naam}: wordt gecontroleerd…': '{naam}: проверява се…',
   '{naam}: niet bereikbaar': '{naam}: недостъпен',

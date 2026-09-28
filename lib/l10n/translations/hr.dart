@@ -1635,6 +1635,9 @@ const _dutchSourceAddHr = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nije postavljen',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Nema novije verzije — dodirni za otvaranje provjere.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Razvojna verzija (debug-gradnja) — nije izdanje.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: dostupan',
   '{naam}: wordt gecontroleerd…': '{naam}: provjerava se…',
   '{naam}: niet bereikbaar': '{naam}: nedostupan',

@@ -1630,6 +1630,9 @@ const _dutchSourceAddSv = <String, String>{
   '{naam}: niet ingesteld': '{naam}: inte konfigurerad',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Det finns ingen nyare version — tryck för att öppna kontrollen.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Utvecklingsversion (debug-bygge) — ingen release.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: nåbar',
   '{naam}: wordt gecontroleerd…': '{naam}: kontrolleras…',
   '{naam}: niet bereikbaar': '{naam}: inte nåbar',

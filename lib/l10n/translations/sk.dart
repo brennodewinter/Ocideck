@@ -1637,6 +1637,9 @@ const _dutchSourceAddSk = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nenastavené',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Novšia verzia nie je k dispozícii — klepnutím kontrolu otvoríte.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Vývojová verzia (ladiaca zostava) — nejde o vydanie.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: dostupný',
   '{naam}: wordt gecontroleerd…': '{naam}: kontroluje sa…',
   '{naam}: niet bereikbaar': '{naam}: nedostupný',

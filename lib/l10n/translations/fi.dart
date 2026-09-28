@@ -1631,6 +1631,9 @@ const _dutchSourceAddFi = <String, String>{
   '{naam}: niet ingesteld': '{naam}: ei määritetty',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Uudempaa versiota ei ole — napauta avataksesi tarkistuksen.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Kehitysversio (debug-käännös) — ei julkaisu.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: tavoitettavissa',
   '{naam}: wordt gecontroleerd…': '{naam}: tarkistetaan…',
   '{naam}: niet bereikbaar': '{naam}: ei tavoitettavissa',

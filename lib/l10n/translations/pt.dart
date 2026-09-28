@@ -1659,6 +1659,9 @@ const _dutchSourceAddPt = <String, String>{
   '{naam}: niet ingesteld': '{naam}: não configurado',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Não existe uma versão mais recente — toca para abrir a verificação.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Versão de desenvolvimento (build de depuração) — não é uma versão publicada.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: acessível',
   '{naam}: wordt gecontroleerd…': '{naam}: a verificar…',
   '{naam}: niet bereikbaar': '{naam}: inacessível',

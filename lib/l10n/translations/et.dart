@@ -1624,6 +1624,9 @@ const _dutchSourceAddEt = <String, String>{
   '{naam}: niet ingesteld': '{naam}: seadistamata',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Uuemat versiooni pole — puuduta kontrolli avamiseks.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Arendusversioon (silumiskoost) — mitte väljalase.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: kättesaadav',
   '{naam}: wordt gecontroleerd…': '{naam}: kontrollimine…',
   '{naam}: niet bereikbaar': '{naam}: kättesaamatu',

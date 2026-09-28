@@ -1631,6 +1631,9 @@ const _dutchSourceAddSl = <String, String>{
   '{naam}: niet ingesteld': '{naam}: ni nastavljen',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Novejše različice ni — tapni za odprtje preverjanja.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Razvojna različica (debug-graditev) — ni izdaja.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: dosegljiv',
   '{naam}: wordt gecontroleerd…': '{naam}: preverjanje…',
   '{naam}: niet bereikbaar': '{naam}: nedosegljiv',

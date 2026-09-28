@@ -670,6 +670,9 @@ const _dutchSourceAddPap = {
   '{naam}: niet ingesteld': '{naam}: no konfigurá',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'No tin un vershon mas nobo — toka pa habri e kontrol.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Vershon di desaroyo (build di debug) — no ta un release.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: alkanzabel',
   '{naam}: wordt gecontroleerd…': '{naam}: ta kontrolando…',
   '{naam}: niet bereikbaar': '{naam}: no alkanzabel',
