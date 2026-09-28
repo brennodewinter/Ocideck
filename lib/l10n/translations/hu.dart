@@ -1629,6 +1629,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Downloaden…': 'Letöltés…',
+  'Afbeelding opgeslagen als': 'Kép elmentve mint',
   '{naam}: ingesteld': '{naam}: beállítva',
   '{naam}: niet ingesteld': '{naam}: nincs beállítva',
   'Er is geen nieuwere versie — tik om de controle te openen.':

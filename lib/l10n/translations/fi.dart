@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Downloaden…': 'Lataa…',
+  'Afbeelding opgeslagen als': 'Kuva tallennettu nimellä',
   '{naam}: ingesteld': '{naam}: määritetty',
   '{naam}: niet ingesteld': '{naam}: ei määritetty',
   'Er is geen nieuwere versie — tik om de controle te openen.':

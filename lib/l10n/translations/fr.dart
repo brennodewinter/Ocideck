@@ -667,6 +667,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Downloaden…': 'Télécharger…',
+  'Afbeelding opgeslagen als': 'Image enregistrée sous',
   '{naam}: ingesteld': '{naam} : configuré',
   '{naam}: niet ingesteld': '{naam} : non configuré',
   'Er is geen nieuwere versie — tik om de controle te openen.':

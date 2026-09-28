@@ -827,6 +827,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Downloaden…': 'Download…',
+  'Afbeelding opgeslagen als': 'Image saved as',
   '{naam}: ingesteld': '{naam}: set up',
   '{naam}: niet ingesteld': '{naam}: not set up',
   'Er is geen nieuwere versie — tik om de controle te openen.':

@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Downloaden…': 'Λήψη…',
+  'Afbeelding opgeslagen als': 'Η εικόνα αποθηκεύτηκε ως',
   '{naam}: ingesteld': '{naam}: έχει ρυθμιστεί',
   '{naam}: niet ingesteld': '{naam}: δεν έχει ρυθμιστεί',
   'Er is geen nieuwere versie — tik om de controle te openen.':

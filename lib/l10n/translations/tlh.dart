@@ -1604,6 +1604,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Downloaden…': 'mIllogh qotlh',
+  'Afbeelding opgeslagen als': 'mIllogh pollu\'pu\' \'oSDaq',
   '{naam}: ingesteld': '{naam}: \'oprab',
   '{naam}: niet ingesteld': '{naam}: \'oprabbe\'',
   'Er is geen nieuwere versie — tik om de controle te openen.':

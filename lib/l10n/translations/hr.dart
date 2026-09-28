@@ -1631,6 +1631,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Downloaden…': 'Preuzmi…',
+  'Afbeelding opgeslagen als': 'Slika spremljena kao',
   '{naam}: ingesteld': '{naam}: postavljen',
   '{naam}: niet ingesteld': '{naam}: nije postavljen',
   'Er is geen nieuwere versie — tik om de controle te openen.':

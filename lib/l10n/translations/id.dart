@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Downloaden…': 'Unduh…',
+  'Afbeelding opgeslagen als': 'Gambar disimpan sebagai',
   '{naam}: ingesteld': '{naam}: terkonfigurasi',
   '{naam}: niet ingesteld': '{naam}: belum terkonfigurasi',
   'Er is geen nieuwere versie — tik om de controle te openen.':

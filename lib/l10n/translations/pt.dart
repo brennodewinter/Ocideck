@@ -1655,6 +1655,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Downloaden…': 'Descarregar…',
+  'Afbeelding opgeslagen als': 'Imagem guardada como',
   '{naam}: ingesteld': '{naam}: configurado',
   '{naam}: niet ingesteld': '{naam}: não configurado',
   'Er is geen nieuwere versie — tik om de controle te openen.':

@@ -38,6 +38,7 @@ NEW_VERSION=9.9.9
 ROOT_DIR=${Directory.current.path}
 RELEASE_BASE_URL=https://releases.invalid/download
 DEPLOY_URL=https://demo.invalid
+WEBSITE_URL=https://website.invalid/nl/ocideck/
 FORGE_API=https://forge.invalid/api/v1
 REPO_SLUG=LibreKAT/Ocideck
 TOKEN=test-token
@@ -69,7 +70,7 @@ read_token() { :; }
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
 git() {
-  if [ "\$1 \$2" = 'remote get-url' ]; then return 1; fi
+  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then return 0; fi
   case "\${*: -1}" in
     refs/heads/*) return 1 ;;
     refs/tags/*) return 0 ;;
@@ -172,23 +173,33 @@ cmd_status
   // het rapport terwijl de demo op 0.6.4 bleef staan.
   ProcessResult runStatus({
     required String liveVersion,
+    String websiteVersion = '9.9.9',
     String pullsJson = '[]',
   }) {
-    final live = File(
-      '${Directory.systemTemp.path}/ocideck-status-live-$pid.txt',
-    )..writeAsStringSync(liveVersion);
-    addTearDown(() {
-      if (live.existsSync()) live.deleteSync();
-    });
+    final state = Directory.systemTemp.createTempSync('ocideck-status-');
+    final live = File('${state.path}/live.txt')..writeAsStringSync(liveVersion);
+    final website = File('${state.path}/website.html')
+      ..writeAsStringSync(
+        '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
+        'ocideck-linux-amd64-$websiteVersion.deb">deb</a>\n'
+        '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
+        'ocideck-linux-x86_64-$websiteVersion.AppImage">appimage</a>\n'
+        '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
+        'ocideck-macos-$websiteVersion.zip">mac</a>\n'
+        '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
+        'ocideck-windows-x64-setup-$websiteVersion.exe">windows</a>\n',
+      );
+    addTearDown(() => state.deleteSync(recursive: true));
     return runReleaseHarness('''
 LIVE=${live.path}
+WEBSITE=${website.path}
 BRANCH=release/v9.9.9
 read_token() { :; }
 section() { printf '== %s ==\\n' "\$1"; }
 log() { printf '%s\\n' "\$1"; }
 mark() { printf 'mark %s %s\\n' "\$1" "\$2"; }
 git() {
-  if [ "\$1 \$2" = 'remote get-url' ]; then return 1; fi
+  if [ "\$1 \$2 \$3" = 'remote get-url mirror' ]; then return 0; fi
   case "\${*: -1}" in
     refs/heads/*) return 1 ;;
     refs/tags/*) return 0 ;;
@@ -197,6 +208,9 @@ git() {
 }
 api() {
   case "\$2" in
+    '/actions/tasks?limit=100')
+      printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
+      ;;
     '/pulls?state=all&limit=50') printf '%s\\n' '$pullsJson' ;;
     '/releases/tags/v9.9.9')
       printf '%s\\n' '{"id":41,"assets":[{"name":"SHA256SUMS"},{"name":"SHA256SUMS.minisig"}]}'
@@ -211,13 +225,20 @@ curl() {
     previous="\$arg"; url="\$arg"
   done
   case "\$url" in
+    https://website.invalid/nl/ocideck/)
+      command cat "\$WEBSITE"
+      ;;
     */version.json)
       v="\$(cat "\$LIVE")"
       [ -n "\$v" ] || return 22
       printf '{"version":"%s"}\\n' "\$v"
       ;;
     */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;
-    */SHA256SUMS) printf 'manifest-A\\n' >"\$out" ;;
+    */SHA256SUMS)
+      for asset in \$(expected_release_assets); do
+        printf '%064d  ./%s\\n' 0 "\$asset"
+      done >"\$out"
+      ;;
     *) return 22 ;;
   esac
 }
@@ -239,11 +260,25 @@ cmd_status
     skip: skipOnWindows,
   );
 
-  test('--status noemt een release met een live webdemo compleet', () {
-    final r = runStatus(liveVersion: '9.9.9');
+  test(
+    '--status noemt een release met een live demo en downloadpagina compleet',
+    () {
+      final r = runStatus(liveVersion: '9.9.9');
+      final output = '${r.stdout}\n${r.stderr}';
+      expect(output, contains('mark 1 webdemo'), reason: output);
+      expect(output, contains('mark 1 downloadpagina'), reason: output);
+      expect(output, contains('De release is publiek compleet'));
+    },
+    skip: skipOnWindows,
+  );
+
+  test('--status noemt een achtergebleven downloadpagina niet compleet', () {
+    final r = runStatus(liveVersion: '9.9.9', websiteVersion: '9.9.8');
     final output = '${r.stdout}\n${r.stderr}';
-    expect(output, contains('mark 1 webdemo'), reason: output);
-    expect(output, contains('De release lijkt compleet'));
+    expect(output, contains('mark 0 downloadpagina'), reason: output);
+    expect(output, contains('(nu: v9.9.8'));
+    expect(output, isNot(contains('De release is publiek compleet')));
+    expect(output, contains('--resume controleert daarna de publieke pagina'));
   }, skip: skipOnWindows);
 
   // De merge verwijdert de release-branch. Eén vast vakje "branch op origin"
@@ -342,8 +377,8 @@ echo "KLAAR"
     expect(int.parse(counter.readAsStringSync()), greaterThanOrEqualTo(150));
     // Een hartslag om de tien minuten laat zien dat er gewacht wordt, niet gehangen.
     expect(result.stdout, contains('nog bezig na'));
-    // De rode ci.yml-poort is een testuitslag naast de keten, geen releasejob.
-    expect(result.stdout, contains('losse ci.yml-poort (gate)'));
+    // De losse ci.yml-poort hoort niet eens in de release.yml-snapshot.
+    expect(result.stdout, isNot(contains('losse ci.yml-poort (gate)')));
     expect(result.stdout, isNot(contains('minstens één release-job faalde')));
   }, skip: skipOnWindows);
 
@@ -517,75 +552,7 @@ phase3
     expect(result.exitCode, isNot(0));
   }, skip: skipOnWindows);
 
-  test(
-    'verdwenen baseline-task is geen bewijs van een nieuwe herdispatch-run',
-    () {
-      final result = runReleaseHarness('''
-sleep() { :; }
-die() { printf '%s\\n' "\$1" >&2; exit 1; }
-release_ci_task_ids() { printf '%s\\n' 102; }
-wait_for_redispatch_registration "\$(printf '101\\n102')"
-''');
-
-      expect(
-        result.exitCode,
-        isNot(0),
-        reason:
-            'de overgang [101, 102] → [102] bevat geen nieuwe task-id. Een '
-            'simpele ongelijkheidscontrole ziet het verdwijnen van 101 ten '
-            'onrechte als registratie van de herstel-run.',
-      );
-    },
-    skip: skipOnWindows,
-  );
-
-  test('een lege baseline-opvraag stopt vóór de herstel-dispatch', () {
-    final state = Directory.systemTemp.createTempSync(
-      'ocideck-release-empty-baseline-',
-    );
-    addTearDown(() => state.deleteSync(recursive: true));
-    final calls = File('${state.path}/calls')..writeAsStringSync('0');
-    final mutations = File('${state.path}/mutations');
-
-    final result = runReleaseHarness('''
-CALLS=${calls.path}
-MUTATIONS=${mutations.path}
-section() { :; }
-log() { :; }
-sleep() { :; }
-make() { return 0; }
-curl() { return 22; }
-die() { printf '%s\\n' "\$1" >&2; exit 1; }
-api() {
-  local method="\$1" path="\$2" count
-  if [ "\$method \$path" = 'GET /actions/tasks?limit=100' ]; then
-    count=\$(( \$(cat "\$CALLS") + 1 ))
-    printf '%s' "\$count" >"\$CALLS"
-    if [ "\$count" -eq 1 ]; then
-      printf '%s\\n' '{"workflow_runs":[{"id":101,"head_branch":"v9.9.9","status":"failure","name":"Publiceren"}]}'
-      return 0
-    fi
-    return 1
-  fi
-  if [ "\$method" != GET ]; then
-    printf '%s %s\\n' "\$method" "\$path" >>"\$MUTATIONS"
-  fi
-  printf '%s\\n' '{}'
-}
-phase3
-''');
-
-    expect(result.exitCode, isNot(0));
-    expect(
-      mutations.existsSync() ? mutations.readAsStringSync() : '',
-      isEmpty,
-      reason:
-          'zonder betrouwbare baseline kan de keten na POST niet bewijzen '
-          'welke tasks nieuw zijn; zij moet daarom vóór POST stoppen.',
-    );
-  }, skip: skipOnWindows);
-
-  test('herstel wacht op een nieuwe terminale CI-run vóór het tekenen', () {
+  test('terminale releasefout wordt niet blind opnieuw gedispatcht', () {
     final state = Directory.systemTemp.createTempSync(
       'ocideck-release-redispatch-',
     );
@@ -622,6 +589,12 @@ curl() {
   # De webdemo draait de release al; deze toets gaat over tekenen, niet over
   # deployen. Zonder dit antwoord valt fase 3 al bij deploy_web_if_needed.
   case "\$url" in */version.json) printf '{"version":"9.9.9"}\\n'; return 0 ;; esac
+  case "\$url" in
+    https://website.invalid/nl/ocideck/)
+      printf '<a href="https://forge.invalid/releases/download/v9.9.9/ocideck.zip">download</a>\\n'
+      return 0
+      ;;
+  esac
   [ -f "\$DISPATCHED" ] || return 22
   case "\$url" in
     */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;
@@ -659,25 +632,13 @@ phase3
 ''');
 
     final events = trace.existsSync() ? trace.readAsLinesSync() : <String>[];
-    expect(
-      events.where((event) => event == 'dispatch').length,
-      1,
-      reason: 'een terminale mislukking krijgt exact één herstel-dispatch.',
-    );
+    expect(events.where((event) => event == 'dispatch'), isEmpty);
     final signEvents = events
         .where((event) => event.startsWith('sign-after-'))
         .toList();
-    expect(signEvents, hasLength(1));
-    final pollsAtSigning = int.parse(signEvents.single.split('-').last);
-    expect(
-      pollsAtSigning,
-      greaterThanOrEqualTo(5),
-      reason:
-          'de oude terminale task 101 bewijst niet dat de herdispatch klaar '
-          'is. Fase 3 moet eerst task 202 zien en terminaal afwachten.\n'
-          'stdout: ${result.stdout}\nstderr: ${result.stderr}',
-    );
-    expect(result.exitCode, 0);
+    expect(signEvents, isEmpty);
+    expect(result.exitCode, isNot(0));
+    expect(result.stderr, contains('failure/cancelled/skipped/error'));
   }, skip: skipOnWindows);
 
   test('fase 3 wijst een na tekenen vervangen publiek manifest af', () {
@@ -717,11 +678,10 @@ curl() {
     */SHA256SUMS)
       SUM_DOWNLOADS=\$((SUM_DOWNLOADS + 1))
       printf 'sums-download-%s\\n' "\$SUM_DOWNLOADS" >>"\$TRACE"
-      if [ "\$SUM_DOWNLOADS" -eq 1 ]; then
-        printf 'manifest-A\\n' >"\$out"
-      else
-        printf 'manifest-B\\n' >"\$out"
-      fi
+      for asset in \$(expected_release_assets); do
+        if [ "\$SUM_DOWNLOADS" -eq 1 ]; then hash=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa; else hash=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb; fi
+        printf '%s  ./%s\\n' "\$hash" "\$asset"
+      done >"\$out"
       ;;
     *) return 22 ;;
   esac
@@ -733,7 +693,9 @@ api() {
       printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Release publiceren"},{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
       ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
-    'GET /releases/41/assets') printf '%s\\n' '[]' ;;
+    'GET /releases/41/assets')
+      printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS"}]'
+      ;;
     POST*) printf '%s\\n' '{"id":42}' ;;
     *) printf '%s\\n' '{}' ;;
   esac

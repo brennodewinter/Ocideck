@@ -203,8 +203,15 @@ The web build is designed to pull **zero third-party origins** at runtime.
   SBOM, so the CRA artefact can never silently drift.
 - **License compliance.** `tool/check_licenses.dart` (`make licenses`) fails if
   any resolved package uses an unrecognised or non-open-source license.
-- **Pinned CI versions.** One third-party CI Action and the three security
-  scanners are pinned to an exact version and tracked in
+- **Downstream package metadata.** The Homebrew, AUR and WinGet generators
+  consume release checksums only after `SHA256SUMS.minisig` verifies against the
+  repository's `minisign.pub`. Public downloads and explicitly supplied local
+  manifests use the same fail-closed gate; there is no unsigned fallback.
+- **Pinned CI versions.** The release workflow pins `actions/checkout`,
+  `actions/cache`, `actions/upload-artifact` and `actions/download-artifact` to
+  immutable commit SHAs (with their release version alongside for review), and
+  pins every container image to an OCI digest. The Action SHAs, one further
+  third-party CI Action and the three security scanners are tracked in
   `.github/pinned-ci-versions.json` (`aquasecurity/trivy-action`, plus
   `gitleaks`, `trufflehog` and `semgrep`, which the workflows download by version
   and verify by sha256 against the published manifest);
@@ -214,20 +221,15 @@ The web build is designed to pull **zero third-party origins** at runtime.
   pin the manifest never listed. *(Extended 2026-07-24, #802: the scanners were
   pinned in #799/#800 but nothing watched them for staleness, and a secret
   scanner that stands still reports green while missing credential shapes
-  invented after it.)* The other four Actions (`actions/checkout`,
-  `subosito/flutter-action`, `lycheeverse/lychee-action`,
-  `actions/upload-artifact`) follow their major tag deliberately, so they pick
-  up fixes within that major without a commit here. Note that a tag is mutable:
-  this is drift *monitoring*, not the immutability a commit-SHA pin would give.
-  *(Corrected 2026-07-22: this said all third-party Actions were pinned to
-  exact versions, while the `_comment` in that same file said the opposite.)* The workflows declare least-privilege
+  invented after it.)* Outside the publication boundary some Actions still
+  follow their major tag deliberately, so they pick up fixes within that major.
+  In `release.yml`, where third-party code handles publishable bytes, the
+  commit/digest is immutable and `make check-pins` watches the corresponding
+  upstream major ref for movement. The workflows declare least-privilege
   (`persist-credentials: false`) and a reproducible dependency set (`flutter pub
-  get --enforce-lockfile`). Of these files only `release.yml` executes — the
-  Windows build lane on the mirror, which needs `permissions: contents: write`
-  to publish its release asset and reads nothing else; `ci.yml` is a reference
-  definition, because the runner attached on 2026-07-23 runs
-  `.forgejo/workflows/`, which shadows it. *(Amended 2026-07-24: before that
-  date none of these files executed.)*
+  get --enforce-lockfile`). The Forgejo release lane also rejects a tag that is
+  not canonical `v<semver>` or whose version (excluding Flutter's `+build`
+  suffix) differs from `pubspec.yaml`, before any build begins.
 
 ## 3. Network security (NetGuard + pinned transports)
 

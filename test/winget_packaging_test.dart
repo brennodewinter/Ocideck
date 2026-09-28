@@ -7,6 +7,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support/release_manifest_test_support.dart';
+
 /// Guards the WinGet manifest generator and the sovereignty boundary around it:
 /// WinGet indexes the exact installer on the canonical forge, while direct
 /// downloads remain available independently of Microsoft's catalog.
@@ -17,6 +19,7 @@ void main() {
   setUp(() {
     repoRoot = Directory.current.path;
     temp = Directory.systemTemp.createTempSync('winget_manifest');
+    writeFakeMinisign(temp);
   });
   tearDown(() => temp.deleteSync(recursive: true));
 
@@ -37,7 +40,10 @@ void main() {
     'bash',
     ['scripts/update_winget_manifest.sh', tag, out.path],
     workingDirectory: repoRoot,
-    environment: {'SHA256SUMS_FILE': sums.path},
+    environment: {
+      'SHA256SUMS_FILE': sums.path,
+      'PATH': '${temp.path}:${Platform.environment['PATH']}',
+    },
   );
 
   Directory versionDir(Directory out, String version) =>
@@ -45,7 +51,9 @@ void main() {
 
   test('writes the three-file community manifest at the required path', () {
     final out = Directory('${temp.path}/out');
-    final result = run('v0.6.3', out, writeSums('0.6.3'));
+    final sums = writeSums('0.6.3');
+    signTestManifest(sums);
+    final result = run('v0.6.3', out, sums);
     expect(result.exitCode, 0, reason: '${result.stderr}');
 
     final dir = versionDir(out, '0.6.3');
@@ -58,7 +66,9 @@ void main() {
 
   test('pins the canonical Forgejo installer and its published hash', () {
     final out = Directory('${temp.path}/out');
-    expect(run('0.6.3', out, writeSums('0.6.3')).exitCode, 0);
+    final sums = writeSums('0.6.3');
+    signTestManifest(sums);
+    expect(run('0.6.3', out, sums).exitCode, 0);
 
     final installer = File(
       '${versionDir(out, '0.6.3').path}/LibreKAT.OciDeck.installer.yaml',
@@ -95,7 +105,9 @@ void main() {
 
   test('keeps the fixed Inno upgrade identity in the manifest', () {
     final out = Directory('${temp.path}/out');
-    expect(run('v1.2.3', out, writeSums('1.2.3')).exitCode, 0);
+    final sums = writeSums('1.2.3');
+    signTestManifest(sums);
+    expect(run('v1.2.3', out, sums).exitCode, 0);
     final installer = File(
       '${versionDir(out, '1.2.3').path}/LibreKAT.OciDeck.installer.yaml',
     ).readAsStringSync();
@@ -117,12 +129,52 @@ void main() {
 
   test('fails closed when the release does not list the installer', () {
     final out = Directory('${temp.path}/out');
-    final result = run(
-      'v0.6.3',
-      out,
-      writeSums('0.6.3', includeInstaller: false),
-    );
+    final sums = writeSums('0.6.3', includeInstaller: false);
+    signTestManifest(sums);
+    final result = run('v0.6.3', out, sums);
     expect(result.exitCode, isNot(0));
     expect(out.existsSync(), isFalse);
+  });
+
+  test('fails closed when SHA256SUMS has no signature', () {
+    final out = Directory('${temp.path}/out');
+    final result = run('v0.6.3', out, writeSums('0.6.3'));
+
+    expect(result.exitCode, isNot(0));
+    expect(out.existsSync(), isFalse);
+  });
+
+  test('fails closed when SHA256SUMS changed after signing', () {
+    final sums = writeSums('0.6.3');
+    signTestManifest(sums);
+    sums.writeAsStringSync(
+      '${'0' * 64}  ./ocideck-windows-x64-setup-0.6.3.exe\n',
+    );
+    final out = Directory('${temp.path}/out');
+
+    final result = run('v0.6.3', out, sums);
+
+    expect(result.exitCode, isNot(0));
+    expect(out.existsSync(), isFalse);
+  });
+
+  test('downloads and verifies the public manifest pair', () {
+    final sums = writeSums('0.6.3');
+    signTestManifest(sums);
+    writeFakeCurl(temp);
+    final out = Directory('${temp.path}/out');
+
+    final result = Process.runSync(
+      'bash',
+      ['scripts/update_winget_manifest.sh', 'v0.6.3', out.path],
+      workingDirectory: repoRoot,
+      environment: {
+        'PATH': '${temp.path}:${Platform.environment['PATH']}',
+        'FAKE_RELEASE_DIR': temp.path,
+      },
+    );
+
+    expect(result.exitCode, 0, reason: '${result.stderr}');
+    expect(versionDir(out, '0.6.3').existsSync(), isTrue);
   });
 }

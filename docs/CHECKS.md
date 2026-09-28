@@ -2303,25 +2303,33 @@ every list because a *bare* pin bump touches neither pubspec file.
   workflow that names one.
 
 ### `.forgejo/workflows/release.yml` — on a version tag (`v*`)
-One tag, one release. Not a gate: everything here assumes `make check` was
-already green on `main`.
+One canonical SemVer tag, one release. The `gate` job first requires an exact
+`v<major>.<minor>.<patch>` tag (optionally with a canonical SemVer prerelease),
+checks it against `pubspec.yaml` while ignoring only Flutter's `+build` number,
+resolves with `--enforce-lockfile`, and runs `make check-no-coverage`. No build
+job starts before that gate is green.
 
 | Job | Runner | Result |
 | --- | --- | --- |
 | `web` | docker | `make check-web` — hardened bundle **and** its verification |
 | `deploy-web` | docker | that same artifact live on the static host, via `scripts/deploy_web.sh` |
 | `linux` | docker | `ocideck-linux-x64-<versie>.tar.gz` |
-| `macos` | macos | `ocideck-macos-<versie>.zip` (`ditto`, not a plain zip) |
+| `macos` | macos | signed, notarised and Gatekeeper-verified `ocideck-macos-<versie>.zip` (`ditto`, not a plain zip); a stable tag fails closed without signing/notary configuration |
 | `windows-ophalen` | docker | waits for the mirror's public release asset and `curl`s it |
 | `publiceren` | docker | a Forgejo release with all four, both SBOM formats and `SHA256SUMS` |
 
 `deploy-web` unpacks the *downloaded artifact* rather than rebuilding: what goes
 live is then byte-identical to what hangs off the release. It needs the
 `DEPLOY_SSH_KEY` and `DEPLOY_KNOWN_HOSTS` secrets ([HOSTING.md](HOSTING.md#automatic-deployment-on-a-tag));
-without them that job fails and the release still publishes.
+without them the live step is visibly skipped while the downloadable release
+continues.
 
 Publishing needs no secret: Forgejo injects a per-run token that may create
 releases. A `RELEASE_TOKEN` secret overrides it if that ever changes.
+Every external Action is commit-SHA-pinned and every build container is
+digest-pinned. On a rerun, an existing asset is reused only when its downloaded
+SHA-256 matches; a changed asset is uploaded and verified before the old id is
+removed. The final audit requires exactly one copy of every expected asset.
 
 ### `.github/workflows/release.yml` — the Windows lane, on a version tag (`v*`)
 The only file on the mirror that executes. Builds `flutter build windows

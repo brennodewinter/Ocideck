@@ -97,6 +97,10 @@ APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
 # bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
 DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-40edd80f.vps.ovh.net}"
 DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de liveverificatie
+# De productpagina is een tweede publieke uitkomst van dezelfde release. De
+# website-workflow kan groen zijn terwijl rsync naar een host gaat waar DNS niet
+# naar wijst; daarom is ook hier de pagina die bezoekers krijgen de waarheid.
+WEBSITE_URL="${OCIDECK_WEBSITE_URL:-https://librekat.nl/nl/ocideck/}"
 # De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
 # serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
 # stuk. De release start de drie handmatige workflows zelf en volgt hun taken;
@@ -120,6 +124,8 @@ PREFLIGHT_ONLY=0
 IGNORE_FIXES=0  # --ondanks-fixes: bekend herstelwerk bewust buiten deze release laten
 LEVEL=""
 RESUME_TAG=""   # --resume vX.Y.Z: sla fase 1+2 over, maak alleen fase 3 af
+BRANCH_OWNED=0  # alleen een door déze run gemaakte lokale branch mag worden opgeruimd
+PENDING_APP=""  # verse build wordt pas ná een volledig publieke release geïnstalleerd
 
 # ── Kleine hulpjes ──────────────────────────────────────────────────────────────
 # RUN_T0 stempelt de start; elke sectiekop toont sindsdien verstreken tijd, zodat je
@@ -129,7 +135,7 @@ RUN_T0="$(date +%s)"
 elapsed() { local d=$(( $(date +%s) - RUN_T0 )); printf '%d:%02d' "$((d / 60))" "$((d % 60))"; }
 section() { printf '\n== [%s] %s ==\n' "$(elapsed)" "$1"; }
 log()     { printf '   %s\n' "$1"; }
-die()     { printf '\nrelease-auto: %s\n' "$1" >&2; exit 1; }
+die()     { printf '\nrelease-auto: %s\n' "$1" >&2; cleanup_branch 2>/dev/null || true; exit 1; }
 need_cmd() { command -v "$1" >/dev/null 2>&1 || die "ontbrekend commando: $1"; }
 
 # ── Fail-safe: waar zijn we, en is de tag al onherroepelijk de deur uit? ─────────
@@ -150,12 +156,20 @@ cleanup_failed() {
   printf '  takt er een nieuwe branch van af, dan erft die de bump:\n' >&2
   printf '      git checkout %s && git branch -D %s\n' "${CLEANUP_BACK:-main}" "$BRANCH" >&2
 }
+rollback_release_edits() {
+  [ "$BRANCH_OWNED" -eq 1 ] || return 0
+  git restore --staged --worktree -- pubspec.yaml CHANGELOG.md \
+    lib/services/export_metadata.dart sbom 2>/dev/null || true
+  git clean -fd -- sbom >/dev/null 2>&1 || true
+}
 cleanup_branch() {
   # BRANCH wordt vroeg gezet (voor --resume), dus ruim alleen op wat fase 1 écht
   # lokaal aanmaakte — anders zou een fout tijdens de pre-flight ongevraagd van
   # branch wisselen.
+  [ "$BRANCH_OWNED" -eq 1 ] || return 0
   [ -n "$BRANCH" ] || return 0
   git rev-parse -q --verify "refs/heads/$BRANCH" >/dev/null 2>&1 || return 0
+  rollback_release_edits
   # Hier niets stilhouden. Beide commando's stonden op '2>/dev/null || true', en
   # dat maakte de opruiming een bewering in plaats van een feit: faalt de checkout
   # (een werkboom die een bestand draagt dat tussen de branches verschilt is al
@@ -210,17 +224,26 @@ trap 'on_err $LINENO' ERR
 # ── Argumenten ──────────────────────────────────────────────────────────────────
 RESUME=0
 STATUS=0
+MODE_COUNT=0
+LEVEL_COUNT=0
+TAG_COUNT=0
 for arg in "$@"; do
   case "$arg" in
-    --dry-run) DRY_RUN=1 ;;
-    --preflight) PREFLIGHT_ONLY=1 ;;
+    --dry-run) DRY_RUN=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
+    --preflight) PREFLIGHT_ONLY=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
     --skip-install) SKIP_INSTALL=1 ;;
     --ondanks-fixes) IGNORE_FIXES=1 ;;
-    --print-version) PRINT_VERSION=1 ;;
-    --resume) RESUME=1 ;;
-    --status) STATUS=1 ;;
-    patch|minor|major) LEVEL="$arg" ;;
-    v[0-9]*.[0-9]*.[0-9]*) RESUME_TAG="$arg" ;;
+    --print-version) PRINT_VERSION=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
+    --resume) RESUME=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
+    --status) STATUS=1; MODE_COUNT=$((MODE_COUNT + 1)) ;;
+    patch|minor|major) LEVEL="$arg"; LEVEL_COUNT=$((LEVEL_COUNT + 1)) ;;
+    v*)
+      if [[ "$arg" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+        RESUME_TAG="$arg"; TAG_COUNT=$((TAG_COUNT + 1))
+      else
+        die "ongeldige release-tag '$arg' — verwacht exact vX.Y.Z zonder voorloopnullen of suffix."
+      fi
+      ;;
     -h|--help)
       # Alles wat na de shebang aan commentaar staat, tot de eerste code-regel.
       # Stond hier een geteld bereik ('2,66p'), en dat klopte niet meer zodra de
@@ -231,6 +254,16 @@ for arg in "$@"; do
     *) die "onbekend argument: $arg (verwacht: --dry-run, --preflight, --skip-install, --ondanks-fixes, --status vX.Y.Z, --resume vX.Y.Z, patch, minor of major)" ;;
   esac
 done
+
+[ "$MODE_COUNT" -le 1 ] \
+  || die "combineer niet meerdere modi (--dry-run, --preflight, --print-version, --resume, --status)."
+[ "$LEVEL_COUNT" -le 1 ] || die "geef precies één niveau: patch, minor of major."
+[ "$TAG_COUNT" -le 1 ] || die "geef precies één release-tag."
+[ -z "$RESUME_TAG" ] || [ -z "$LEVEL" ] \
+  || die "combineer een release-tag niet met patch, minor of major."
+case "$GATE_TIMEOUT_MIN:$RELEASE_CI_TIMEOUT_MIN" in
+  *[!0-9:]*|0:*|*:0|:*) die "wachttijden moeten positieve gehele minuten zijn." ;;
+esac
 
 # --resume hervat een onderbroken release vanaf het punt waar het bleef. Het kijkt
 # wat er al op de forge staat (tag, gemergede PR, open PR of branch) en doet alleen
@@ -256,7 +289,13 @@ fi
 # ── Voorwaarden ─────────────────────────────────────────────────────────────────
 STEP="voorwaarden"
 if [ "$PRINT_VERSION" -eq 0 ]; then
-  for c in git curl jq python3 make flutter minisign codesign ditto; do need_cmd "$c"; done
+  for c in git curl jq sed awk grep sort cmp minisign security; do need_cmd "$c"; done
+  if [ "$STATUS" -eq 0 ]; then
+    for c in python3 make ssh; do need_cmd "$c"; done
+  fi
+  if [ "$STATUS" -eq 0 ] && [ -z "$RESUME_TAG" ]; then
+    for c in flutter codesign ditto; do need_cmd "$c"; done
+  fi
 fi
 
 TOKEN=""
@@ -273,22 +312,31 @@ api() { # api METHOD PATH [curl-args…]
   local tries=1 i rc=0
   [ "$method" = "GET" ] && tries=4
   for i in $(seq 1 "$tries"); do
-    curl -sf -X "$method" "$FORGE_API/repos/$REPO_SLUG$path" \
-      -H "Authorization: token $TOKEN" "$@" && return 0
+    # --config via een pipe houdt het token uit de procesargumenten (`ps`).
+    curl -sf --connect-timeout 10 --max-time 90 -X "$method" \
+      --config <(printf 'header = "Authorization: token %s"\n' "$TOKEN") \
+      "$FORGE_API/repos/$REPO_SLUG$path" "$@" && return 0
     rc=$?
     [ "$i" -lt "$tries" ] && sleep "$(( i * 2 ))"
   done
   return "$rc"
 }
 
+RELEASE_CI_MIN_ID=0
+
 # Eén bron voor de actuele toestand van deze tag. Zowel de gewone route als
 # --resume en fase 3 gebruiken hem, zodat geen van die paden een nog schrijvende
 # release-run voor "klaar" kan aanzien.
 release_ci_snapshot() {
   api GET '/actions/tasks?limit=100' 2>/dev/null \
-    | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
-        | select(.head_branch==$ref) | "\(.status)|\(.name)"' 2>/dev/null \
-    | sort -u
+    | jq -r --arg ref "$TAG" --argjson min "${RELEASE_CI_MIN_ID:-0}" '
+        [(.workflow_runs // .tasks // [])[]
+          | select(.head_branch==$ref)
+          | select(.workflow_id=="release.yml" or
+              ((.workflow_id // "")=="" and (.name | IN("Poort (vóór het bouwen)", "Web bouwen", "Webversie live zetten", "Linux bouwen", "macOS bouwen", "Windows ophalen van de spiegel", "Release publiceren", "Website-downloads bijwerken"))))
+          | select((.id // 0) > $min or ($min == 0 and .id == null))]
+        | group_by(.name) | map(max_by(.id))[]
+        | "\(.status)|\(.name)|\(.id)"' 2>/dev/null
 }
 
 # Forgejo's tasks-endpoint toont alleen jobs waarvoor al een runner-taak bestaat.
@@ -303,30 +351,49 @@ release_ci_completion_seen() { # release_ci_completion_seen SNAPSHOT
   # release.yml komt. De losse ci.yml-job heet simpelweg `gate` en telt hier dus
   # uitdrukkelijk niet als bewijs dat de releaseketen terminaal is.
   printf '%s\n' "$snapshot" \
-    | grep -qE '^(success|failure|cancelled|skipped|error)\|Website-downloads bijwerken$' \
+    | grep -qE '^(success|failure|cancelled|skipped|error)\|Website-downloads bijwerken(\|([0-9]+|null))?$' \
     && return 0
   printf '%s\n' "$snapshot" \
-    | grep -qE '^(failure|cancelled|skipped|error)\|(Poort \(vóór het bouwen\)|Web bouwen|Webversie live zetten|Linux bouwen|macOS bouwen|Windows ophalen van de spiegel|Release publiceren)$'
+    | grep -qE '^(failure|cancelled|skipped|error)\|(Poort \(vóór het bouwen\)|Web bouwen|Webversie live zetten|Linux bouwen|macOS bouwen|Windows ophalen van de spiegel|Release publiceren)(\|([0-9]+|null))?$'
 }
 
-release_ci_task_ids() {
-  api GET '/actions/tasks?limit=100' 2>/dev/null \
-    | jq -r --arg ref "$TAG" '(.workflow_runs // .tasks // [])[]
-        | select(.head_branch==$ref) | (.id // empty)' 2>/dev/null \
-    | sort -n
+release_ci_has_failure() { # release_ci_has_failure SNAPSHOT
+  printf '%s\n' "$1" | grep -qE '^(failure|cancelled|skipped|error)\|'
 }
 
-wait_for_redispatch_registration() {
-  local previous_ids="$1" current_ids="" id _
-  for _ in $(seq 1 60); do
-    current_ids="$(release_ci_task_ids || true)"
-    while IFS= read -r id; do
-      [ -n "$id" ] || continue
-      if ! printf '%s\n' "$previous_ids" | grep -qxF "$id"; then return 0; fi
-    done <<<"$current_ids"
-    sleep 5
-  done
-  die "de herdispatch voor $TAG is niet als nieuwe Forgejo-taak verschenen — teken niet op basis van de oude terminale taken."
+expected_release_assets() {
+  printf '%s\n' \
+    "ocideck-web-$NEW_VERSION.tar.gz" \
+    "ocideck-linux-x64-$NEW_VERSION.tar.gz" \
+    "ocideck-linux-amd64-$NEW_VERSION.deb" \
+    "ocideck-linux-x86_64-$NEW_VERSION.rpm" \
+    "ocideck-linux-x86_64-$NEW_VERSION.AppImage" \
+    "ocideck-macos-$NEW_VERSION.zip" \
+    "ocideck-windows-x64-$NEW_VERSION.zip" \
+    "ocideck-windows-x64-setup-$NEW_VERSION.exe" \
+    "ocideck-$NEW_VERSION.cdx.json" \
+    "ocideck-$NEW_VERSION.spdx.json"
+}
+
+verify_release_manifest() { # verify_release_manifest FILE
+  local file="$1" actual expected
+  awk 'NF != 2 || $1 !~ /^[[:xdigit:]]{64}$/ || $2 !~ /^\.\/[A-Za-z0-9._+-]+$/ { exit 1 }
+       { print substr($2, 3) }' "$file" >"$file.names" || return 1
+  [ "$(wc -l <"$file.names" | tr -d ' ')" -eq "$(sort -u "$file.names" | wc -l | tr -d ' ')" ] \
+    || return 1
+  actual="$(sort "$file.names")"
+  expected="$(expected_release_assets | sort)"
+  rm -f "$file.names"
+  [ "$actual" = "$expected" ]
+}
+
+website_has_expected_downloads() {
+  local html asset
+  html="$(curl -fsSL --connect-timeout 10 --max-time 20 "$WEBSITE_URL" 2>/dev/null)" || return 1
+  while IFS= read -r asset; do
+    printf '%s' "$html" | grep -Fq "/releases/download/$TAG/$asset" || return 1
+  done < <(expected_release_assets \
+    | grep -E 'linux-amd64.*\.deb$|linux-x86_64.*\.AppImage$|macos-.*\.zip$|windows-x64-setup-.*\.exe$')
 }
 
 assert_release_ci_terminal() {
@@ -357,9 +424,23 @@ mark() { if [ "$1" -eq 1 ]; then printf '   [x] %s\n' "$2"; else printf '   [ ] 
 # programma met die naam. Op de MacPorts-bash van deze machine eindigt dat niet
 # in "command not found" maar in een segfault in CoreFoundation.
 live_web_version() { # → de versie op de live demo, leeg als die niet te lezen is
-  curl -fsSL --max-time 20 "$DEPLOY_URL/version.json" 2>/dev/null \
+  curl -fsSL --connect-timeout 10 --max-time 20 "$DEPLOY_URL/version.json" 2>/dev/null \
     | sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
     | head -n 1
+}
+
+# Lees de versie uit de release-downloadlinks die bezoekers daadwerkelijk op
+# librekat.nl krijgen. Een groene job bewijst alleen dat het publicatiescript met
+# status 0 eindigde; bij een verkeerde deployhost of achterlopende DNS kan dat
+# nog steeds de verkeerde website zijn (zoals bij v0.6.11 t/m v0.6.13).
+live_website_version() {
+  curl -fsSL --connect-timeout 10 --max-time 20 "$WEBSITE_URL" 2>/dev/null \
+    | awk 'match($0, /releases\/download\/v[0-9]+\.[0-9]+\.[0-9]+/) {
+        version = substr($0, RSTART, RLENGTH)
+        sub(/^.*\/v/, "", version)
+        print version
+        exit
+      }'
 }
 
 # --status vX.Y.Z: read-only overzicht van waar een release staat — geen mutatie,
@@ -370,8 +451,9 @@ cmd_status() {
   read_token
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
-  local has_rel=0 has_sums=0 has_sig=0 sig_valid=0 web_live=0 live=""
-  local prnum="" prstate="" pr rel assets
+  local has_rel=0 has_sums=0 manifest_complete=0 has_sig=0 sig_valid=0 web_live=0 website_live=0 ci_stable=0
+  local live="" website_version=""
+  local prnum="" prstate="" pr rel assets status_snap
 
   git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1 && has_branch=1
 
@@ -399,20 +481,31 @@ cmd_status() {
     if [ "$has_sums" -eq 1 ] && [ "$has_sig" -eq 1 ]; then
       local verify_tmp
       verify_tmp="$(mktemp -d)"
-      if curl -fsSL -o "$verify_tmp/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
-          && curl -fsSL -o "$verify_tmp/SHA256SUMS.minisig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
+      if curl -fsSL --connect-timeout 10 --max-time 30 -o "$verify_tmp/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
+          && curl -fsSL --connect-timeout 10 --max-time 30 -o "$verify_tmp/SHA256SUMS.minisig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
           && minisign -Vm "$verify_tmp/SHA256SUMS" \
-            -x "$verify_tmp/SHA256SUMS.minisig" -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
+            -x "$verify_tmp/SHA256SUMS.minisig" -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1 \
+          && verify_release_manifest "$verify_tmp/SHA256SUMS"; then
+        manifest_complete=1
         sig_valid=1
       fi
       rm -rf "$verify_tmp"
     fi
   fi
+  status_snap="$(release_ci_snapshot || true)"
+  if [ -n "$status_snap" ] \
+      && ! printf '%s\n' "$status_snap" | grep -qE '^(running|waiting|pending)\|' \
+      && release_ci_completion_seen "$status_snap" \
+      && ! release_ci_has_failure "$status_snap"; then
+    ci_stable=1
+  fi
 
   # De webdemo hoort bij de release en werd tot v0.6.6 nergens gemeten: het
   # advies zei "controleer nog de live web-versie", en dat deed niemand.
-  live="$(live_web_version)"
+  live="$(live_web_version || true)"
   [ "$live" = "$NEW_VERSION" ] && web_live=1
+  website_version="$(live_website_version || true)"
+  website_has_expected_downloads && website_live=1
 
   local prdesc
   if [ "$has_pr" -eq 0 ]; then prdesc="release-PR aangemaakt"
@@ -432,19 +525,34 @@ cmd_status() {
   fi
   mark "$pr_merged" "$prdesc"
   mark "$has_tag_o" "tag $TAG op origin (start de Forgejo-release-CI)"
-  [ "$has_mirror" -eq 1 ] && mark "$has_tag_m" "tag $TAG op mirror (start de Windows-build)"
+  if [ "$has_mirror" -eq 1 ]; then
+    mark "$has_tag_m" "tag $TAG op mirror (start de Windows-build)"
+  else
+    mark 0 "mirror-remote beschikbaar (nodig voor de Windows-build)"
+  fi
   mark "$has_rel" "release aangemaakt op de forge"
+  mark "$ci_stable" "release-CI terminaal groen; geen actieve schrijver"
   mark "$has_sums" "SHA256SUMS aanwezig (van de publiceren-job)"
+  mark "$manifest_complete" "SHA256SUMS bevat exact alle verwachte releasebestanden"
   mark "$sig_valid" "publieke SHA256SUMS.minisig cryptografisch geldig"
   local webdesc="webdemo op $DEPLOY_URL draait $NEW_VERSION"
   [ "$web_live" -eq 1 ] || webdesc="$webdesc (nu: ${live:-niet te lezen})"
   mark "$web_live" "$webdesc"
+  local websitedesc="downloadpagina op $WEBSITE_URL verwijst naar $TAG"
+  [ "$website_live" -eq 1 ] \
+    || websitedesc="$websitedesc (nu: ${website_version:+v$website_version}${website_version:-niet te lezen})"
+  mark "$website_live" "$websitedesc"
 
   section "Advies"
-  if [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
-    log "De release lijkt compleet. Controleer nog de downloadpagina."
+  if [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
+      && [ "$website_live" -eq 1 ] && [ "$has_mirror" -eq 1 ] && [ "$has_tag_m" -eq 1 ]; then
+    log "De release is publiek compleet: artefacten, handtekening, webdemo en downloadpagina kloppen."
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
-  elif [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
+  elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
+      && [ "$website_live" -eq 0 ]; then
+    log "Alles is uitgebracht en getekend, maar de publieke downloadpagina toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG."
+    log "Controleer de deployhost/DNS en publiceer de website opnieuw; --resume controleert daarna de publieke pagina."
+  elif [ "$has_tag_o" -eq 1 ] && [ "$ci_stable" -eq 1 ] && [ "$manifest_complete" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
     log "Alles is uitgebracht en getekend, maar de webdemo draait ${live:-een onleesbare versie} in plaats van $NEW_VERSION."
     log "Zet hem live met:  scripts/release_auto.sh --resume $TAG"
     log "(die checkt de tag zelf uit; met de hand is het:  git checkout $TAG && make deploy-web)"
@@ -534,6 +642,15 @@ fi
 
 # De release-branch hoort bij de tag; zowel de verse run als --resume gebruiken 'm.
 BRANCH="release/$TAG"
+
+# Een op main gemergede versiebump zonder tag is een half afgemaakte release. Een
+# volgende patch starten zou die toestand overslaan en onherstelbaar verhullen.
+if [ -z "$RESUME_TAG" ]; then
+  current_tag_refs="$(git ls-remote origin "refs/tags/v$CUR_VERSION" "refs/tags/v$CUR_VERSION^{}")" \
+    || die "kon niet bewijzen dat de huidige main-versie v$CUR_VERSION is uitgebracht."
+  [ -n "$current_tag_refs" ] \
+    || die "origin/main draagt $CUR_VERSION, maar tag v$CUR_VERSION ontbreekt — rond eerst die release af met --resume v$CUR_VERSION."
+fi
 
 # --status vX.Y.Z: alleen rapporteren waar de release staat, dan stoppen. Read-only,
 # dus vóór het plan, de voorwaarden, het wachtwoord en de pre-flight.
@@ -775,7 +892,7 @@ if [ "$PREFLIGHT_ONLY" -eq 0 ]; then
 fi
 
 STEP="voorwaarden"
-if ! git diff --quiet || ! git diff --cached --quiet; then
+if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
   die "working tree niet schoon — commit eerst (nooit 'git stash' in deze repo delen)."
 fi
 git remote get-url mirror >/dev/null 2>&1 \
@@ -786,6 +903,9 @@ git remote get-url mirror >/dev/null 2>&1 \
 # --resume verder, niet met een tweede verse build. In --resume is de branch normaal.
 if [ -z "$RESUME_TAG" ] && git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1; then
   die "release-branch $BRANCH staat al op origin van een eerdere, afgebroken poging — maak die af met 'scripts/release_auto.sh --resume $TAG' i.p.v. een verse run."
+fi
+if [ -z "$RESUME_TAG" ] && git rev-parse -q --verify "refs/heads/$BRANCH" >/dev/null 2>&1; then
+  die "lokale release-branch $BRANCH bestaat al — overschrijf geen mogelijk werk; maak hem af of ruim hem bewust op."
 fi
 
 # De verouderingsgate hoort bij een échte build (fase 1); in resume bouwen we niet.
@@ -864,8 +984,8 @@ preflight() {
   # een inzet met proxy/CDN moet deze poort bewust passend maken.
   local deploy_host_ips live_ip
   deploy_host_ips="$(ssh -o BatchMode=yes -o ConnectTimeout=8 \
-    "$DEPLOY_HOST" 'hostname -I' 2>/dev/null)" \
-    || die "deploy-host $DEPLOY_HOST onbereikbaar via ssh — deploy-web zou ná de tag stranden."
+    "$DEPLOY_HOST" 'command -v flock python3 sudo tar >/dev/null && sudo -n true && python3 -c '\''import ctypes; assert hasattr(ctypes.CDLL(None), "renameat2")'\'' && hostname -I' 2>/dev/null)" \
+    || die "deploy-host $DEPLOY_HOST mist bereikbaarheid, flock, python3, sudo, tar of atomaire renameat2 — deploy-web zou ná de tag stranden."
   [ -n "$deploy_host_ips" ] \
     || die "deploy-host $DEPLOY_HOST meldt geen eigen IP-adressen — niet bewijsbaar dat hij $DEPLOY_URL bedient."
   live_ip="$(curl -4 -fsS --max-time 15 -o /dev/null -w '%{remote_ip}' \
@@ -929,7 +1049,8 @@ ensure_worktree_on_tag() {
   [ "$tag_sha" != "$(git rev-parse HEAD)" ] || return 0
   # Nooit andermans werk onder de checkout vandaan trekken: liever stoppen met een
   # melding dan een niet-gecommitte wijziging meenemen of weggooien.
-  if ! git diff --quiet || ! git diff --cached --quiet; then
+  if ! git diff --quiet || ! git diff --cached --quiet \
+      || [ -n "$(git ls-files --others --exclude-standard)" ]; then
     die "werkboom niet schoon — fase 3 zet 'm daarom niet op $TAG (nooit 'git stash' in deze repo delen). Commit of herstel de wijzigingen en hervat: scripts/release_auto.sh --resume $TAG"
   fi
   git checkout --quiet --detach "$TAG" \
@@ -946,7 +1067,7 @@ ensure_worktree_on_tag() {
 # op 0.6.4 lieten staan terwijl de keten "klaar" meldde.
 deploy_web_if_needed() {
   local tag_sha head_sha live
-  live="$(live_web_version)"
+  live="$(live_web_version || true)"
   if [ "$live" = "$NEW_VERSION" ]; then
     log "De webdemo op $DEPLOY_URL draait al $NEW_VERSION; lokaal deploy-web overgeslagen."
     return 0
@@ -973,7 +1094,7 @@ deploy_web_if_needed() {
   make deploy-web
   # Meten, niet aannemen: `deploy_web.sh` verifieert zijn eigen bundel, maar
   # alleen dit zegt dat de bezoeker de nieuwe versie krijgt.
-  live="$(live_web_version)"
+  live="$(live_web_version || true)"
   [ "$live" = "$NEW_VERSION" ] \
     || die "deploy-web is gedraaid, maar $DEPLOY_URL meldt ${live:-geen leesbare versie} in plaats van $NEW_VERSION — kijk op de host voor de wissel en hervat daarna: scripts/release_auto.sh --resume $TAG"
   log "deploy-web klaar; $DEPLOY_URL draait $NEW_VERSION."
@@ -984,6 +1105,9 @@ phase3() {
   # --resume doet dat eveneens. Toch weigert fase 3 zelf ook wanneer een job nog
   # schrijft; precies die ontbrekende grens liet v0.6.2 tweemaal publiceren.
   assert_release_ci_terminal || return $?
+  if release_ci_has_failure "$snap"; then
+    die "release-CI voor $TAG eindigde met failure/cancelled/skipped/error — deploy of teken niets; herstel de job en hervat daarna dezelfde tag."
+  fi
 
   # #10: eerst de webdemo. Die hangt alleen aan de web-bundel, niet aan de
   # platform-artefacten of de handtekening — dus een teken- of platformfout mag
@@ -1008,43 +1132,45 @@ phase3() {
     if curl -fsSL -o "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null; then got=1; break; fi
     sleep 15
   done
-  # #8: verschijnt SHA256SUMS niet, dan faalde publiceren waarschijnlijk (vaak omdat
-  # een upstream-job als windows-ophalen struikelde). Dispatch de hele release-CI
-  # éénmalig opnieuw — de jobs zijn idempotent (uploads clobberen) — en wacht daarna
-  # ruimer, want een volledige herbouw duurt langer dan de eerste propagatie. Pas als
-  # dat óók niet lukt, escaleren we.
-  if [ "$got" -eq 0 ]; then
-    # Alleen een terminale fout rechtvaardigt een herstel-run. Bij een volledig
-    # groene CI maar ontbrekend manifest is de toestand tegenstrijdig; opnieuw
-    # bouwen zou dan zonder bewezen oorzaak een tweede schrijver introduceren.
-    if ! printf '%s\n' "$snap" | grep -q '^failure|'; then
-      die "release-CI voor $TAG is terminaal en groen, maar SHA256SUMS ontbreekt — dispatch niet automatisch; onderzoek de publiceren-job en hervat daarna."
-    fi
-    STEP="release-CI opnieuw dispatchen"
-    section "Fase 3 — SHA256SUMS ontbreekt; release-CI éénmalig opnieuw dispatchen (#8)"
-    local previous_task_ids
-    if ! previous_task_ids="$(release_ci_task_ids)" || [ -z "$previous_task_ids" ]; then
-      die "kon de bestaande taak-id's voor $TAG niet betrouwbaar vastleggen — dispatch niet zonder bewijs waarmee een nieuwe run herkenbaar is."
-    fi
-    api POST "/actions/workflows/release.yml/dispatches" -H 'Content-Type: application/json' \
-      -d "$(jq -n --arg r "$TAG" '{ref:$r}')" -o /dev/null \
-      || die "kon release.yml niet opnieuw dispatchen — ga de release-CI na en hervat: scripts/release_auto.sh --resume $TAG"
-    log "release.yml opnieuw gedispatcht op $TAG — wachten tot de nieuwe taken zichtbaar en daarna terminaal zijn…"
-    wait_for_redispatch_registration "$previous_task_ids"
-    follow_ci
-    assert_release_ci_terminal
-    # Download pas ná de terminale herstel-run. Een eerder verschenen manifest
-    # kan nog door de publiceren-job worden vervangen en mag dus nooit al worden
-    # getekend.
-    if curl -fsSL -o "$TMP/SHA256SUMS" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null; then got=1; fi
-  fi
+  # Nooit zelf opnieuw dispatchen. Een mislukte releasejob heeft een oorzaak die
+  # eerst onderzocht moet worden; blind herhalen introduceert een tweede schrijver
+  # en kan bestaande assets vervangen. De operator herstart de bewezen falende job
+  # op de forge en hervat daarna dezelfde tag.
   [ "$got" -eq 1 ] \
-    || die "SHA256SUMS staat ook na een her-dispatch niet op de release voor $TAG — een upstream release-job blijft falen (bv. windows-ophalen kan de mirror niet bereiken). Ga de release-CI na en maak daarna DEZELFDE tag af: scripts/release_auto.sh --resume $TAG."
+    || die "release-CI voor $TAG is terminaal groen, maar SHA256SUMS ontbreekt — dispatch niet automatisch; onderzoek de publiceren-job en hervat daarna dezelfde tag."
+  verify_release_manifest "$TMP/SHA256SUMS" \
+    || die "SHA256SUMS bevat niet exact de tien verwachte artefacten voor $TAG — teken geen onvolledige of onverwachte release."
+  local rid release_assets expected_asset
+  rid="$(api GET "/releases/tags/$TAG" | jq -er '.id')" \
+    || die "kon de release-id voor $TAG niet betrouwbaar bepalen."
+  release_assets="$(api GET "/releases/$rid/assets" | jq -er '.[].name')" \
+    || die "kon de release-assets voor $TAG niet betrouwbaar lezen."
+  while IFS= read -r expected_asset; do
+    printf '%s\n' "$release_assets" | grep -qxF "$expected_asset" \
+      || die "release $TAG mist $expected_asset — teken geen onvolledige release."
+  done < <(expected_release_assets)
+  printf '%s\n' "$release_assets" | grep -qxF SHA256SUMS \
+    || die "release $TAG mist SHA256SUMS als asset."
+
+  # Een hervatting van een al getekende release hoort read-only te zijn. Controleer
+  # eerst de publiek aangeboden combinatie en raak de assets alleen aan als die niet
+  # exact bij het zojuist gevalideerde manifest hoort.
+  local public_sums="$TMP/SHA256SUMS.public"
+  local public_sig="$TMP/SHA256SUMS.minisig.public"
+  local signature_current=0
+  if curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sums" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
+      && curl -fsSL --connect-timeout 10 --max-time 30 -o "$public_sig" "$RELEASE_BASE_URL/$TAG/SHA256SUMS.minisig" 2>/dev/null \
+      && cmp -s "$TMP/SHA256SUMS" "$public_sums" \
+      && minisign -Vm "$public_sums" -x "$public_sig" \
+        -p "$ROOT_DIR/minisign.pub" >/dev/null 2>&1; then
+    signature_current=1
+    log "Bestaande publieke handtekening past al exact bij SHA256SUMS; upload overgeslagen."
+  fi
+  if [ "$signature_current" -eq 0 ]; then
   printf '%s\n' "$MINISIGN_PW" \
     | make sign-release SHA256SUMS="$TMP/SHA256SUMS" >/dev/null || true
   [ -f "$TMP/SHA256SUMS.minisig" ] || die "minisign leverde geen handtekening — controleer het sleutelwachtwoord."
-  local rid old_asset new_asset
-  rid="$(api GET "/releases/tags/$TAG" | jq -r '.id')"
+  local old_asset new_asset existing_tmp existing_url downloaded_tmp signature_sha
   # Upload-first-then-replace (#1600): upload de nieuwe handtekening onder een
   # tijdelijke naam vóór de oude verwijderd wordt. De vorige volgorde (DELETE
   # dan POST) liet bij een gefaalde POST de release zonder handtekening achter,
@@ -1053,11 +1179,25 @@ phase3() {
   #   2. DELETE de oude — faalt dit, dan staan er twee bijlagen (oude + .new);
   #      de oude is handmatig te verwijderen, de inhoud is er in ieder geval.
   #   3. PATCH hernoem .new naar de definitieve naam.
-  local tmp_name="SHA256SUMS.minisig.new"
-  new_asset="$(api POST "/releases/$rid/assets?name=$tmp_name" \
-    -F "attachment=@$TMP/SHA256SUMS.minisig" \
-    | jq -r '.id' 2>/dev/null)" \
-    || die "kon SHA256SUMS.minisig niet uploaden — de oude handtekening staat nog op de release."
+  signature_sha="$(shasum -a 256 "$TMP/SHA256SUMS.minisig" | awk '{print $1}')"
+  local tmp_name="SHA256SUMS.minisig.new.$signature_sha"
+  existing_tmp="$(api GET "/releases/$rid/assets" \
+    | jq -er --arg n "$tmp_name" '[.[] | select(.name==$n)] | if length > 1 then error("duplicate") else .[0] // empty end | "\(.id)|\(.browser_download_url)"' 2>/dev/null)" || true
+  if [ -n "$existing_tmp" ]; then
+    new_asset="${existing_tmp%%|*}"
+    existing_url="${existing_tmp#*|}"
+    downloaded_tmp="$TMP/existing.minisig"
+    if ! curl -fsSL --connect-timeout 10 --max-time 30 -o "$downloaded_tmp" "$existing_url" \
+        || ! cmp -s "$downloaded_tmp" "$TMP/SHA256SUMS.minisig"; then
+      die "tijdelijke handtekening $tmp_name bestaat, maar de inhoud wijkt af — verwijder hem niet automatisch."
+    fi
+    log "Eerder geüploade tijdelijke handtekening hervat."
+  else
+    new_asset="$(api POST "/releases/$rid/assets?name=$tmp_name" \
+      -F "attachment=@$TMP/SHA256SUMS.minisig" \
+      | jq -er '.id' 2>/dev/null)" \
+      || die "kon SHA256SUMS.minisig niet uploaden — de oude handtekening staat nog op de release."
+  fi
   [ -n "$new_asset" ] && [ "$new_asset" != "null" ] \
     || die "upload van SHA256SUMS.minisig gaf geen asset-id — controleer de release-pagina."
   old_asset="$(api GET "/releases/$rid/assets" 2>/dev/null \
@@ -1070,12 +1210,11 @@ phase3() {
     -H 'Content-Type: application/json' \
     -d '{"name":"SHA256SUMS.minisig"}' -o /dev/null \
     || die "kon $tmp_name niet hernoemen naar SHA256SUMS.minisig — hernoem handmatig op de release-pagina."
+  fi
 
   # Vertrouw niet op een geslaagde uploadstatus. Lees precies wat ontvangers
   # krijgen opnieuw terug en verifieer die combinatie. Zo kan finish() nooit een
   # oude handtekening naast een later vervangen manifest als "getekend" melden.
-  local public_sums="$TMP/SHA256SUMS.public"
-  local public_sig="$TMP/SHA256SUMS.minisig.public"
   local public_valid=0
   for _ in $(seq 1 12); do
     if curl -fsSL -o "$public_sums" "$RELEASE_BASE_URL/$TAG/SHA256SUMS" 2>/dev/null \
@@ -1108,6 +1247,23 @@ phase3() {
       log "Website-downloads-job groen."
     fi
   fi
+
+  # De website-repo publiceert asynchroon na de bovenstaande job. Wacht daarom
+  # begrensd op de publieke naconditie. Status 0 van beide workflows is niet
+  # genoeg: v0.6.11 t/m v0.6.13 werden groen naar een nieuwe VPS gekopieerd,
+  # terwijl librekat.nl via DNS nog de oude VPS en v0.6.10 bediende.
+  local website_version="" website_live=0
+  for _ in $(seq 1 24); do
+    website_version="$(live_website_version || true)"
+    if website_has_expected_downloads; then
+      website_live=1
+      break
+    fi
+    sleep 15
+  done
+  [ "$website_live" -eq 1 ] \
+    || die "de website-jobs zijn klaar, maar $WEBSITE_URL toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG — controleer naar welke host librekat.nl wijst, publiceer de website daar en hervat: scripts/release_auto.sh --resume $TAG"
+  log "Publieke downloadpagina gecontroleerd: $WEBSITE_URL verwijst naar $TAG."
 }
 
 # Fase 3 bouwt de webdemo vanaf de tag en laat de werkboom dus op een losse HEAD
@@ -1127,7 +1283,47 @@ restore_start_branch() {
   fi
 }
 
+install_macos_app() { # install_macos_app SOURCE_APP
+  local source_app="$1" target="$APPLICATIONS_DIR/OciDeck.app"
+  local stage backup had_old=0
+  stage="$(mktemp -d "$APPLICATIONS_DIR/.ocideck-install.XXXXXX")" \
+    || die "kon geen tijdelijke installatiemap in $APPLICATIONS_DIR maken."
+  backup="$APPLICATIONS_DIR/.OciDeck.app.backup.$$"
+  if ! ditto "$source_app" "$stage/OciDeck.app" \
+      || ! codesign --verify --deep --strict "$stage/OciDeck.app"; then
+    rm -rf "$stage"
+    die "kopiëren of verifiëren van de tijdelijke OciDeck.app mislukte; de bestaande app is ongemoeid."
+  fi
+  if pgrep -x OciDeck >/dev/null 2>&1; then
+    osascript -e 'quit app "OciDeck"' >/dev/null 2>&1 || true
+    for _ in 1 2 3 4 5; do pgrep -x OciDeck >/dev/null 2>&1 || break; sleep 1; done
+    if pgrep -x OciDeck >/dev/null 2>&1; then
+      rm -rf "$stage"
+      die "OciDeck draait na vijf seconden nog; bestaande installatie niet vervangen."
+    fi
+  fi
+  if [ -e "$target" ]; then
+    mv "$target" "$backup" || { rm -rf "$stage"; die "kon de bestaande OciDeck.app niet veilig apart zetten."; }
+    had_old=1
+  fi
+  if ! mv "$stage/OciDeck.app" "$target"; then
+    [ "$had_old" -eq 0 ] || mv "$backup" "$target" 2>/dev/null || true
+    rm -rf "$stage"
+    die "installatiewissel mislukte; de vorige app is teruggezet waar mogelijk."
+  fi
+  rm -rf "$stage"
+  [ "$had_old" -eq 0 ] || rm -rf "$backup"
+  codesign --verify --deep --strict "$target" \
+    || die "de geïnstalleerde app faalt de zegelcontrole; stop en onderzoek $target."
+}
+
 finish() {
+  STEP="klaar"
+  if [ -n "${PENDING_APP:-}" ] && [ "$SKIP_INSTALL" -eq 0 ]; then
+    STEP="/Applications vervangen"
+    install_macos_app "$PENDING_APP"
+    log "$APPLICATIONS_DIR/OciDeck.app vervangen door de uitgebrachte, genotariseerde build."
+  fi
   STEP="klaar"
   section "Klaar — $TAG in $(elapsed)"
   restore_start_branch
@@ -1148,11 +1344,18 @@ finish() {
 # branchnaam is dan weg. Echoot "nummer|state|merged|head_sha|merge_commit_sha"
 # of niets als er (nog) geen PR is.
 find_release_pr() {
-  api GET "/pulls?state=all&limit=50" 2>/dev/null \
-    | jq -r --arg t "chore(release): versie $NEW_VERSION" \
-        '[.[] | select(.title == $t)][0] // empty
-         | "\(.number)|\(.state)|\(.merged)|\(.head.sha)|\(.merge_commit_sha // "")"' \
-    2>/dev/null || true
+  local json matches count
+  json="$(api GET "/pulls?state=all&limit=100")" \
+    || die "kon bestaande release-PR's niet betrouwbaar lezen — maak geen duplicaat."
+  matches="$(printf '%s' "$json" | jq -cer --arg t "chore(release): versie $NEW_VERSION" --arg b "$BRANCH" \
+    '[.[] | select(.title == $t)
+      | select(.merged == true or .head.ref == $b or .head.label == $b)]')" \
+    || die "ongeldig antwoord bij het zoeken naar de release-PR — maak geen duplicaat."
+  count="$(printf '%s' "$matches" | jq 'length')"
+  [ "$count" -le 1 ] \
+    || die "meerdere release-PR's voor $NEW_VERSION gevonden — kies niet automatisch de verkeerde."
+  [ "$count" -eq 1 ] || return 0
+  printf '%s' "$matches" | jq -r '.[0] | "\(.number)|\(.state)|\(.merged)|\(.head.sha)|\(.merge_commit_sha // "")"'
 }
 
 # Zorg dat er een open PR is en echoot het nummer; hergebruikt een bestaande i.p.v.
@@ -1268,7 +1471,8 @@ gate_task_snapshot() { # gate_task_snapshot SHA
 
 ensure_gate_tasks() { # ensure_gate_tasks SHA PR_NUMBER
   local sha="$1" pr="$2" snap workflow
-  snap="$(gate_task_snapshot "$sha" || true)"
+  snap="$(gate_task_snapshot "$sha")" \
+    || die "kon bestaande poorttaken niet betrouwbaar lezen — dispatch geen duplicaten."
   for workflow in static-gate.yml scans.yml linux-gate.yml; do
     if printf '%s\n' "$snap" | grep -q "^${workflow}|"; then
       continue
@@ -1346,6 +1550,20 @@ merge_commit_of_pr() { # merge_commit_of_pr PR_NUMBER
   api GET "/pulls/$1" | jq -r '.merge_commit_sha // empty'
 }
 
+remote_tag_commit() { # remote_tag_commit REMOTE
+  local remote="$1" refs
+  refs="$(git ls-remote "$remote" "refs/tags/$TAG" "refs/tags/$TAG^{}")" || return 2
+  [ -n "$refs" ] || return 1
+  printf '%s\n' "$refs" | awk '$2 ~ /\^\{\}$/ { peeled=$1 } $2 !~ /\^\{\}$/ { direct=$1 }
+    END { print peeled != "" ? peeled : direct }'
+}
+
+assert_tag_commit() { # assert_tag_commit LABEL ACTUAL EXPECTED
+  local label="$1" actual="$2" expected="$3"
+  [ -n "$actual" ] && [ "$actual" = "$expected" ] \
+    || die "tag $TAG op $label wijst naar ${actual:-onbekend}, verwacht $expected — verplaats of overschrijf een releasetag nooit."
+}
+
 # De mirror-tag (GitHub-spiegel) is een eigen faalpunt naast origin: de origin-push
 # start de Forgejo-CI, maar de Windows-build op de spiegel start pas als de tag ÓÓK
 # op de mirror staat (windows-ophalen dispatcht met --ref $TAG). Idempotent: staat de
@@ -1354,9 +1572,15 @@ merge_commit_of_pr() { # merge_commit_of_pr PR_NUMBER
 # mirror-push oversloeg en de Windows-build eeuwig liet wachten).
 ensure_mirror_tag() {
   git remote get-url mirror >/dev/null 2>&1 || return 0
-  if git ls-remote --exit-code mirror "refs/tags/$TAG" >/dev/null 2>&1; then
+  local expected mirror_sha rc=0
+  expected="$(git rev-list -n 1 "$TAG" 2>/dev/null)" \
+    || die "lokale tag $TAG kan niet tot een commit worden herleid."
+  mirror_sha="$(remote_tag_commit mirror)" || rc=$?
+  if [ "$rc" -eq 0 ]; then
+    assert_tag_commit mirror "$mirror_sha" "$expected"
     return 0
   fi
+  [ "$rc" -eq 1 ] || die "kon niet betrouwbaar vaststellen of $TAG al op de mirror staat."
   STEP="mirror-tag zetten"
   # Zorg dat we de tag lokaal hebben: na een verse tag bestaat hij al; op een andere
   # machine (of na opruiming) halen we 'm exact van origin.
@@ -1364,8 +1588,15 @@ ensure_mirror_tag() {
     git fetch --quiet --force origin "refs/tags/$TAG:refs/tags/$TAG" \
       || die "kon tag $TAG niet lokaal krijgen voor de mirror-push — is origin bereikbaar?"
   fi
-  git push --quiet mirror "$TAG" \
-    || die "mirror-push van $TAG faalde — de Windows-build op de spiegel start pas mét de mirror-tag. Herstel de mirror en hervat: scripts/release_auto.sh --resume $TAG"
+  if ! git push --quiet mirror "$TAG"; then
+    mirror_sha="$(remote_tag_commit mirror)" || true
+    assert_tag_commit mirror "$mirror_sha" "$expected"
+    log "Mirror-push meldde een fout, maar de teruglezing bewijst dat $TAG correct staat."
+  else
+    mirror_sha="$(remote_tag_commit mirror)" \
+      || die "mirror-push meldde succes, maar $TAG is niet terug te lezen."
+    assert_tag_commit mirror "$mirror_sha" "$expected"
+  fi
   log "Tag $TAG naar de mirror gepusht — de Windows-build kan starten."
 }
 
@@ -1375,14 +1606,17 @@ ensure_mirror_tag() {
 # mirror-push faalde, en --resume moet een ontbrekende mirror-tag alsnog kunnen
 # zetten. De 8-seconden-bail vóór de origin-push is het punt-van-geen-terugkeer.
 tag_and_push() { # tag_and_push MERGE_SHA
-  local mergesha="$1" i
+  local mergesha="$1" i origin_sha rc=0
   STEP="tag pushen"
-  if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
+  origin_sha="$(remote_tag_commit origin)" || rc=$?
+  if [ "$rc" -eq 0 ]; then
+    assert_tag_commit origin "$origin_sha" "$mergesha"
     log "Tag $TAG stond al op origin — niet opnieuw taggen."
     TAG_PUSHED=1
     ensure_mirror_tag
     return 0
   fi
+  [ "$rc" -eq 1 ] || die "kon niet betrouwbaar vaststellen of $TAG al op origin staat."
   # De merge-commit is server-side gemaakt (REST-merge in merge_pr) en zit dus nog
   # niet in onze lokale objectdatabase; 'git tag -a' zou er anders op stuklopen met
   # 'fatal: bad object type' — precies waarop de v0.4.1-release brak. Haal 'm op
@@ -1405,7 +1639,16 @@ tag_and_push() { # tag_and_push MERGE_SHA
   for i in 8 7 6 5 4 3 2 1; do printf '\r   %s… ' "$i"; sleep 1; done; printf '\r          \n'
   git tag -d "$TAG" >/dev/null 2>&1 || true   # een stale lokale tag van een vorige poging opruimen
   git tag -a "$TAG" -m "OciDeck $TAG" "$mergesha"
-  git push --quiet origin "$TAG"
+  assert_tag_commit lokaal "$(git rev-list -n 1 "$TAG")" "$mergesha"
+  if ! git push --quiet origin "$TAG"; then
+    origin_sha="$(remote_tag_commit origin)" || true
+    assert_tag_commit origin "$origin_sha" "$mergesha"
+    log "Origin-push meldde een fout, maar de teruglezing bewijst dat $TAG correct staat."
+  else
+    origin_sha="$(remote_tag_commit origin)" \
+      || die "origin-push meldde succes, maar $TAG is niet terug te lezen."
+    assert_tag_commit origin "$origin_sha" "$mergesha"
+  fi
   TAG_PUSHED=1   # origin heeft de tag: de release-CI is gestart, ongeacht de mirror
   log "Tag $TAG gepusht naar origin."
   ensure_mirror_tag
@@ -1470,17 +1713,26 @@ resume_release() {
   # Wat we hervatten staat al op origin; een fout onderweg hoort dus ook hier
   # naar --resume te wijzen en niet naar een verse run.
   BRANCH_PUSHED=1
-  if git ls-remote --exit-code origin "refs/tags/$TAG" >/dev/null 2>&1; then
+  local origin_tag rc=0 tagged_version
+  origin_tag="$(remote_tag_commit origin)" || rc=$?
+  if [ "$rc" -eq 0 ]; then
     TAG_PUSHED=1
+    if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1; then
+      assert_tag_commit lokaal "$(git rev-list -n 1 "$TAG")" "$origin_tag"
+    else
+      git fetch --quiet origin "refs/tags/$TAG:refs/tags/$TAG" \
+        || die "kon bestaande tag $TAG niet lokaal ophalen."
+    fi
+    tagged_version="$(git show "$origin_tag:pubspec.yaml" 2>/dev/null \
+      | sed -n 's/^version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p')"
+    [ "$tagged_version" = "$NEW_VERSION" ] \
+      || die "tag $TAG op origin draagt versie ${tagged_version:-onbekend}, niet $NEW_VERSION."
     log "Tag $TAG staat al op origin — mirror-tag borgen, dan fase 3 (deploy-web + tekenen)."
     ensure_mirror_tag
     follow_ci
     phase3; finish; return 0
   fi
-  # Een eerdere run kan precies tussen het pushen van de release-branch en het
-  # publiceren van het nieuwe scanner-image zijn gestopt. Borg het artefact bij
-  # élke hervatting vóór een bestaande of nieuw te openen PR verder kan.
-  ensure_scans_image
+  [ "$rc" -eq 1 ] || die "kon niet betrouwbaar vaststellen of $TAG op origin staat."
   local st num merged headsha mergesha
   st="$(find_release_pr)"
   if [ -n "$st" ]; then
@@ -1491,13 +1743,17 @@ resume_release() {
     if [ "$merged" = "true" ]; then
       log "PR #$num is gemerged, maar de tag ontbreekt — taggen en verder."
       MERGE_SHA="$mergesha"
+    elif [ "$(printf '%s' "$st" | cut -d'|' -f2)" = "closed" ]; then
+      die "release-PR #$num is gesloten zonder merge — hervat hem niet automatisch; heropen of ruim branch en PR bewust op."
     else
+      ensure_scans_image
       log "PR #$num staat open — poort afwachten, mergen en verder."
       wait_gate "$headsha" "$num"
       merge_pr "$num" "$headsha"
       MERGE_SHA="$(merge_commit_of_pr "$num")"
     fi
   elif git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1; then
+    ensure_scans_image
     headsha="$(git ls-remote origin "refs/heads/$BRANCH" | awk 'NR==1{print $1}')"
     log "Branch $BRANCH staat gepusht zonder PR — PR openen en verder."
     num="$(open_or_find_pr)"
@@ -1534,23 +1790,36 @@ assert_workspace_idle
 # keuze staat dan zwart op wit in het releaselogboek. --resume slaat dit over: de
 # inhoud van een lopende release ligt al vast.
 unmerged_fix_branches() {
-  git fetch origin --quiet 2>/dev/null || true
-  git ls-remote --heads origin 'refs/heads/fix/*' 2>/dev/null \
-    | while read -r sha ref; do
-        git merge-base --is-ancestor "$sha" origin/main 2>/dev/null \
-          || printf '%s\n' "${ref#refs/heads/}"
-      done
+  local refs sha ref rc
+  git fetch origin --quiet || return 2
+  refs="$(git ls-remote --heads origin 'refs/heads/fix/*')" || return 2
+  while read -r sha ref; do
+    [ -n "$sha" ] || continue
+    rc=0
+    git merge-base --is-ancestor "$sha" origin/main 2>/dev/null || rc=$?
+    if [ "$rc" -eq 0 ]; then
+      continue
+    elif [ "$rc" -eq 1 ]; then
+      printf '%s\n' "${ref#refs/heads/}"
+    else
+      return 2
+    fi
+  done <<<"$refs"
 }
 open_release_blockers() {
-  api GET '/issues?state=open&labels=release-blocker&limit=50' 2>/dev/null \
-    | jq -r '.[] | "#\(.number) \(.title)"' 2>/dev/null
+  local json
+  json="$(api GET '/issues?state=open&labels=release-blocker&limit=100')" || return 1
+  printf '%s' "$json" | jq -e 'type == "array"' >/dev/null || return 1
+  printf '%s' "$json" | jq -r '.[] | "#\(.number) \(.title)"'
 }
 assert_no_pending_fixes() {
   STEP="bekend herstelwerk"
   [ -z "$RESUME_TAG" ] || return 0
   local branches blockers
-  branches="$(unmerged_fix_branches || true)"
-  blockers="$(open_release_blockers || true)"
+  branches="$(unmerged_fix_branches)" \
+    || die "kon fix/*-takken niet betrouwbaar vergelijken met origin/main — releaseblokkers zijn onbekend."
+  blockers="$(open_release_blockers)" \
+    || die "kon open release-blockers niet betrouwbaar lezen — releaseblokkers zijn onbekend."
   [ -n "$branches$blockers" ] || return 0
   section "Bekend herstelwerk dat nog niet in main zit"
   [ -z "$blockers" ] || { log "open met label release-blocker:"; printf '%s\n' "$blockers" | sed 's/^/     /'; }
@@ -1609,7 +1878,8 @@ fi
 STEP="voorbereiden"
 section "Fase 1 — voorbereiden"
 git fetch origin --quiet
-git checkout -B "$BRANCH" origin/main --quiet
+git checkout -b "$BRANCH" origin/main --quiet
+BRANCH_OWNED=1
 log "Branch $BRANCH van origin/main."
 
 # Aan het begin van élke release: scanner-pins naar de laatste upstream. Idempotent
@@ -1769,17 +2039,7 @@ STEP="zegel verifiëren"
 codesign --verify --deep --strict "$APP"
 log "Zegel geverifieerd: $APP"
 
-if [ "$SKIP_INSTALL" -eq 0 ]; then
-  STEP="/Applications vervangen"
-  # Sluit de draaiende app eerst; toets op pgrep, niet op osascript's exitstatus.
-  if pgrep -x OciDeck >/dev/null 2>&1; then
-    osascript -e 'quit app "OciDeck"' >/dev/null 2>&1 || true
-    for _ in 1 2 3 4 5; do pgrep -x OciDeck >/dev/null 2>&1 || break; sleep 1; done
-  fi
-  rm -rf "$APPLICATIONS_DIR/OciDeck.app"
-  ditto "$APP" "$APPLICATIONS_DIR/OciDeck.app"
-  log "$APPLICATIONS_DIR/OciDeck.app vervangen door de nieuwe, genotariseerde build."
-fi
+PENDING_APP="$APP"
 
 # ════════════════════════════ FASE 2 — CI-straat ═══════════════════════════════
 STEP="PR openen"

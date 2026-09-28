@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Downloaden…': 'Baha…',
+  'Afbeelding opgeslagen als': 'Imagen warda komo',
   '{naam}: ingesteld': '{naam}: konfigurá',
   '{naam}: niet ingesteld': '{naam}: no konfigurá',
   'Er is geen nieuwere versie — tik om de controle te openen.':

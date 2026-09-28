@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Downloaden…': 'Abelade…',
+  'Afbeelding opgeslagen als': 'Bild gschpeicheret als',
   '{naam}: ingesteld': '{naam}: iigrichtet',
   '{naam}: niet ingesteld': '{naam}: nöd iigrichtet',
   'Er is geen nieuwere versie — tik om de controle te openen.':

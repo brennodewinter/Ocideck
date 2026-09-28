@@ -12,14 +12,15 @@
 // It covers two kinds of pin, because they rot the same way while looking
 // nothing alike in the workflow (#802):
 //
-//   actions — `uses: owner/repo@vX.Y.Z`
+//   actions — `uses: owner/repo@vX.Y.Z`, or an immutable commit SHA whose
+//             moving major ref is monitored through GitHub's refs API
 //   tools   — a binary a `run:` block downloads by version (the three scanners)
 //
 // The scanners are the reason this exists. A secret scanner that stands still
 // keeps exiting 0 while missing the credential shapes invented after it, and
 // "green" then means "it did not know what to look for" — the same failure as a
-// history scan on a shallow clone. Floating major-tag Actions (…@v4) auto-update
-// and are out of scope here by design.
+// history scan on a shallow clone. Floating major-tag Actions (…@v4) outside
+// the release workflow auto-update and are out of scope here by design.
 //
 // This tool answers "is there something newer". That the pins in the manifest
 // actually MATCH the workflows is a different question, checked offline and
@@ -49,12 +50,14 @@ class _Pin {
     required this.source,
     required this.api,
     this.tagRegex,
+    this.sha,
   });
 
   final String label;
   final String version;
   final String source;
   final String api;
+  final String? sha;
 
   /// Optional pattern that lifts a plain version out of an upstream tag whose
   /// shape is not `1.2.3` or `v1.2.3`. Inno Setup tags its releases `is-6_7_3`,
@@ -118,7 +121,10 @@ Future<void> main(List<String> args) async {
       if (latest == null) {
         status = 'UPSTREAM UNREACHABLE';
         networkFailed = true;
-      } else if (_isBehind(pin.version, latest)) {
+      } else if (pin.source == 'github_ref' && pin.sha != latest) {
+        status = 'BEHIND — monitored ref now points to $latest';
+        behind.add('${pin.label}@${pin.sha} → $latest');
+      } else if (pin.source != 'github_ref' && _isBehind(pin.version, latest)) {
         status = 'BEHIND — latest is $latest';
         behind.add('${pin.label}@${pin.version} → $latest');
       } else {
@@ -127,6 +133,7 @@ Future<void> main(List<String> args) async {
     }
 
     stdout.writeln('  ${pin.label}@${pin.version}');
+    if (pin.sha != null) stdout.writeln('      commit : ${pin.sha}');
     stdout.writeln('      latest : $status');
   }
 
@@ -180,12 +187,14 @@ List<_Pin> _readPins(Map<String, dynamic> manifest) {
   for (final entry
       in (manifest['actions'] as List? ?? const [])
           .cast<Map<String, dynamic>>()) {
+    final source = field(entry, 'source', 'actions');
     pins.add(
       _Pin(
         label: field(entry, 'uses', 'actions'),
         version: field(entry, 'version', 'actions'),
-        source: field(entry, 'source', 'actions'),
+        source: source,
         api: field(entry, 'api', 'actions'),
+        sha: source == 'github_ref' ? field(entry, 'sha', 'actions') : null,
       ),
     );
   }
@@ -208,10 +217,12 @@ List<_Pin> _readPins(Map<String, dynamic> manifest) {
     throw const FormatException('no pins listed at all');
   }
   for (final pin in pins) {
-    if (pin.source != 'github_release' && pin.source != 'pypi') {
+    if (pin.source != 'github_release' &&
+        pin.source != 'github_ref' &&
+        pin.source != 'pypi') {
       throw FormatException(
         '${pin.label} has an unknown source "${pin.source}" '
-        '(expected github_release or pypi)',
+        '(expected github_release, github_ref or pypi)',
       );
     }
   }
@@ -243,6 +254,9 @@ Future<String?> _latestVersion(String source, String api) async {
     final data = jsonDecode(body) as Map<String, dynamic>;
     if (source == 'pypi') {
       return (data['info'] as Map<String, dynamic>?)?['version'] as String?;
+    }
+    if (source == 'github_ref') {
+      return (data['object'] as Map<String, dynamic>?)?['sha'] as String?;
     }
     return data['tag_name'] as String?;
   } on Object {
