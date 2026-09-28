@@ -17,6 +17,7 @@ import 'package:ocideck/state/ai_status_provider.dart';
 import 'package:ocideck/state/elearning_provider.dart';
 import 'package:ocideck/state/ociserve_provider.dart';
 import 'package:ocideck/state/storage_status_provider.dart';
+import 'package:ocideck/widgets/connection_status.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -322,7 +323,37 @@ void main() {
         elearningTip(server: 'niet bereikbaar', account: 'niet ingelogd'),
         findsOneWidget,
       );
+      // Een dode leeromgeving is rood, geen aandachts-oranje.
+      final chip = tester.widget<StatusChip>(
+        find.byWidgetPredicate(
+          (w) => w is StatusChip && w.icon == Icons.school_outlined,
+        ),
+      );
+      expect(chip.level, StatusLevel.unreachable);
     });
+
+    testWidgets(
+      'eLearning server bereikt zonder login → bereikbaar in de tip',
+      (tester) async {
+        await _pumpWelcome(
+          tester,
+          elearningEnabled: true,
+          ociServeState: const OciServeState(
+            settings: OciServeSettings(
+              enabled: true,
+              baseUrl: 'https://learn.example',
+            ),
+            status: OciServeStatus.signedOut,
+            serverReachable: true,
+          ),
+        );
+
+        expect(
+          elearningTip(server: 'bereikbaar', account: 'niet ingelogd'),
+          findsOneWidget,
+        );
+      },
+    );
 
     testWidgets('tik op eLearning-lampje opent Instellingen op Integraties', (
       tester,

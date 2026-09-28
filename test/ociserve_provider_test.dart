@@ -75,16 +75,23 @@ class _FakeApi implements OciServeApi {
   Completer<OciServeAccount>? meCompleter;
   Completer<void>? reportCompleter;
   OciServeInstallation installationValue = _installation;
+  Object? installationError;
   OciServeOidcConfiguration oidcValue = _oidc;
   OciServeAccount account = _account;
   bool failReports = false;
   int reports = 0;
   int discoveries = 0;
+  int installationCalls = 0;
   final lessonLifecycle = <String>[];
   OciServePlaybackSnapshot? lastSnapshot;
 
   @override
-  Future<OciServeInstallation> installation() async => installationValue;
+  Future<OciServeInstallation> installation() async {
+    installationCalls++;
+    final error = installationError;
+    if (error != null) throw error;
+    return installationValue;
+  }
 
   @override
   Future<OciServeOidcConfiguration> discoverOidc(
@@ -557,12 +564,14 @@ void main() {
       await Future<void>.delayed(const Duration(milliseconds: 20));
 
       // "eLearning volgen" staat uit: geen sleutelhanger-read
-      // (hasStoredLogin blijft onwaar) en helemaal geen verbindingspoging.
+      // (hasStoredLogin blijft onwaar) en helemaal geen verbindingspoging —
+      // ook geen anonieme bereikbaarheidstest.
       final state = container.read(ociServeProvider);
       expect(state.hasStoredLogin, isFalse);
       expect(state.status, OciServeStatus.signedOut);
       expect(auth.refreshes, 0);
       expect(api.discoveries, 0);
+      expect(api.installationCalls, 0);
     },
   );
 
@@ -601,6 +610,82 @@ void main() {
 
     expect(container.read(ociServeProvider).authenticated, isTrue);
     expect(auth.refreshes, 1);
+  });
+
+  test('volgen aan zonder bewaarde login test de server anoniem', () async {
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+    });
+    final auth = _FakeAuth();
+    final container = _container(api, secrets, auth: auth);
+    addTearDown(container.dispose);
+
+    container.read(ociServeProvider);
+    for (
+      var i = 0;
+      i < 50 && !container.read(ociServeProvider).serverReachable;
+      i++
+    ) {
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
+
+    // Er was niets te herstellen maar "volgen" staat aan: de bereikbaarheid
+    // is dan wél getest — anoniem, zonder sleutelhanger of OIDC-discovery.
+    final state = container.read(ociServeProvider);
+    expect(state.serverReachable, isTrue);
+    expect(state.errorCode, isNull);
+    expect(api.installationCalls, greaterThan(0));
+    expect(api.discoveries, 0);
+    expect(auth.refreshes, 0);
+  });
+
+  test('een dode server kleurt rood zonder login-poging', () async {
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(_settings.toJson()),
+    });
+    api.installationError = const OciServeException('connection_failed');
+    final container = _container(api, secrets);
+    addTearDown(container.dispose);
+
+    container.read(ociServeProvider);
+    for (
+      var i = 0;
+      i < 50 && !container.read(ociServeProvider).serverUnavailable;
+      i++
+    ) {
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
+
+    final state = container.read(ociServeProvider);
+    expect(state.serverUnavailable, isTrue);
+    expect(state.errorCode, 'connection_failed');
+    expect(state.serverReachable, isFalse);
+  });
+
+  test('aanzetten van volgen test de server meteen', () async {
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(
+        _settings.copyWith(enabled: false).toJson(),
+      ),
+    });
+    final container = _container(api, secrets);
+    addTearDown(container.dispose);
+
+    container.read(ociServeProvider);
+    await Future<void>.delayed(const Duration(milliseconds: 20));
+    expect(api.installationCalls, 0);
+
+    await container.read(ociServeProvider.notifier).setEnabled(true);
+    for (
+      var i = 0;
+      i < 50 && !container.read(ociServeProvider).serverReachable;
+      i++
+    ) {
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
+
+    expect(api.installationCalls, greaterThan(0));
+    expect(container.read(ociServeProvider).serverReachable, isTrue);
   });
 
   test('remembered login checks known ports before showing offline', () async {
@@ -661,6 +746,14 @@ void main() {
   });
 
   test('login tries known ports and stores the working address', () async {
+    // "Volgen" staat al aan maar is niet ingericht: geen opstartprobe en
+    // saveSettings is geen uit→aan-transitie — anders test de provider de
+    // kandidaten al vooraf en staat de telling van login-attempts op tilt.
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(
+        const OciServeSettings(enabled: true).toJson(),
+      ),
+    });
     final attempts = <String>[];
     api.installationValue = OciServeInstallation(
       clientId: 'desktop',
@@ -687,6 +780,13 @@ void main() {
     );
     addTearDown(container.dispose);
     final notifier = container.read(ociServeProvider.notifier);
+    // Eerst _initialize laten landen: anders leest saveSettings de
+    // uit→aan-transitie anders af en test de provider de kandidaten al
+    // vooraf, wat de telling hieronder op tilt brengt.
+    for (var i = 0; i < 50; i++) {
+      if (container.read(ociServeProvider).settings.enabled) break;
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
     await notifier.saveSettings(
       _settings.copyWith(baseUrl: 'https://localhost:9999'),
     );
@@ -705,6 +805,13 @@ void main() {
   });
 
   test('login tries every known port before reporting no connection', () async {
+    // Zelfde afspraak als hierboven: aan maar niet ingericht — geen
+    // opstartprobe, geen uit→aan-transitie in saveSettings.
+    SharedPreferences.setMockInitialValues({
+      kOciServeSettingsKey: jsonEncode(
+        const OciServeSettings(enabled: true).toJson(),
+      ),
+    });
     final attempts = <String>[];
     final container = _container(
       api,
@@ -716,6 +823,10 @@ void main() {
     );
     addTearDown(container.dispose);
     final notifier = container.read(ociServeProvider.notifier);
+    for (var i = 0; i < 50; i++) {
+      if (container.read(ociServeProvider).settings.enabled) break;
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
     await notifier.saveSettings(
       _settings.copyWith(baseUrl: 'https://localhost:9999'),
     );

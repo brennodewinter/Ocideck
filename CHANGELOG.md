@@ -140,7 +140,10 @@ All notable changes to OciDeck are documented in this file.
   de maken-module. Wie alleen "volgen" aanzette kreeg geen lampje en geen
   herstelde aanmelding. Nu geldt: het lampje en de ketting erachter horen
   bij beide schakelaars, de knop en de credential-restore bij "volgen" —
-  en zonder die dienst blijft de sleutelhanger met rust. Hetzelfde gold
+  en zonder die dienst blijft de sleutelhanger met rust. Ook test OciDeck
+  nu de bereikbaarheid van een ingestelde eLearning-server zodra "volgen"
+  aan staat — anoniem, zonder login — zodat een dode leeromgeving eerlijk
+  rood kleurt in plaats van eeuwig oranje "ingesteld". Hetzelfde gold
   voor de bewaarde eigen-naam-uitzondering van de privacyscanner: die read
   liep bij elke start, ook met de controle uit. Nu alleen als de scanner
   aan staat — en zet je hem halverwege aan, dan wordt de bewaarde waarde

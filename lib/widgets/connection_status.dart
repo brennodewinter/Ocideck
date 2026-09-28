@@ -188,6 +188,17 @@ class OciServeStatusChip extends ConsumerWidget {
                   l10n.d('eLearning: aanmelden mislukt'),
                 ],
               )
+            : ociServe.serverReachable
+            // De bereikbaarheidstest zonder login slaagde: de server
+            // leeft, de cursist moet alleen nog aanmelden.
+            ? (
+                StatusLevel.attention,
+                [
+                  line('{naam}: bereikbaar', 'eLearning-server'),
+                  accountLine(),
+                  l10n.d('eLearning: niet ingelogd'),
+                ],
+              )
             : (
                 StatusLevel.attention,
                 [
