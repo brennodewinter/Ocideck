@@ -6,6 +6,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/state/tabs_provider.dart';
+import 'package:ocideck/state/update_check_provider.dart';
 import 'package:ocideck/state/import_module_provider.dart';
 import 'package:ocideck/state/procesverbetering_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
@@ -146,7 +147,14 @@ void main() {
       // Het nummer zelf is bewust geen knop (daarvoor staat 'Instellingen'
       // ernaast); het grijze lampje zonder check-uitslag wijst naar het
       // Over-tabblad waar de controle in te stellen is.
-      await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+      // `flutter test` is zelf een debug-build: deze test beschrijft de
+      // release-semantiek, dus dwingen we de dev-markering af.
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [ociDeckDevBuildProvider.overrideWithValue(false)],
+          child: const OciDeckApp(),
+        ),
+      );
       await tester.pumpAndSettle();
 
       final versionFinder = find.text('v$kOciDeckVersion');

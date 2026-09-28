@@ -673,6 +673,9 @@ const _dutchSourceAddFy = {
   '{naam}: niet ingesteld': '{naam}: net ynsteld',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Der is gjin nijere ferzje — tik om de kontrôle te iepenjen.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Untwikkelingsferzje (debug-build) — gjin release.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: berikber',
   '{naam}: wordt gecontroleerd…': '{naam}: wurdt kontrolearre…',
   '{naam}: niet bereikbaar': '{naam}: net berikber',

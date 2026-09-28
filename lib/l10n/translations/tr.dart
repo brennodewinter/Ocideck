@@ -2544,6 +2544,9 @@ const _dutchSourceAddTr = <String, String>{
   '{naam}: niet ingesteld': '{naam}: ayarlanmadı',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Daha yeni bir sürüm yok — denetimi açmak için dokun.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Geliştirme sürümü (hata ayıklama derlemesi) — sürüm değil.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: erişilebilir',
   '{naam}: wordt gecontroleerd…': '{naam}: denetleniyor…',
   '{naam}: niet bereikbaar': '{naam}: erişilemez',

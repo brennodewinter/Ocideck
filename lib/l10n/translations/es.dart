@@ -670,6 +670,9 @@ const _dutchSourceAddEs = {
   '{naam}: niet ingesteld': '{naam}: no configurado',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'No hay una versión más reciente — toca para abrir la comprobación.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Versión de desarrollo (build de depuración) — no es una versión publicada.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: accesible',
   '{naam}: wordt gecontroleerd…': '{naam}: comprobando…',
   '{naam}: niet bereikbaar': '{naam}: no accesible',

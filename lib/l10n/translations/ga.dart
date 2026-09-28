@@ -1663,6 +1663,9 @@ const _dutchSourceAddGa = <String, String>{
   '{naam}: niet ingesteld': '{naam}: gan chumrú',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Níl aon leagan níos nuaí ann — tapáil chun an tseiceáil a oscailt.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Leagan forbartha (toghchán dífhabhtaithe) — ní eisiúint í.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: inrochtana',
   '{naam}: wordt gecontroleerd…': '{naam}: á sheiceáil…',
   '{naam}: niet bereikbaar': '{naam}: neamh-inrochtana',

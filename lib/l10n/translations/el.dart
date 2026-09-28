@@ -1658,6 +1658,9 @@ const _dutchSourceAddEl = <String, String>{
   '{naam}: niet ingesteld': '{naam}: δεν έχει ρυθμιστεί',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Δεν υπάρχει νεότερη έκδοση — πάτησε για να ανοίξεις τον έλεγχο.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Έκδοση ανάπτυξης (debug-build) — όχι επίσημη έκδοση.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: προσβάσιμος',
   '{naam}: wordt gecontroleerd…': '{naam}: γίνεται έλεγχος…',
   '{naam}: niet bereikbaar': '{naam}: μη προσβάσιμος',

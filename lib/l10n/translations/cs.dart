@@ -1634,6 +1634,9 @@ const _dutchSourceAddCs = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nenastaveno',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Novější verze není k dispozici — klepnutím kontrolu otevřete.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Vývojová verze (ladicí sestavení) — nejedná se o vydání.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: dostupný',
   '{naam}: wordt gecontroleerd…': '{naam}: kontroluje se…',
   '{naam}: niet bereikbaar': '{naam}: nedostupný',

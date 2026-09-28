@@ -1633,6 +1633,9 @@ const _dutchSourceAddId = <String, String>{
   '{naam}: niet ingesteld': '{naam}: belum terkonfigurasi',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Tidak ada versi yang lebih baru — ketuk untuk membuka pemeriksaan.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Versi pengembangan (build debug) — bukan rilis.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: dapat dijangkau',
   '{naam}: wordt gecontroleerd…': '{naam}: sedang diperiksa…',
   '{naam}: niet bereikbaar': '{naam}: tidak dapat dijangkau',

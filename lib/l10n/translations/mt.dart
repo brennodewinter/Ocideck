@@ -1651,6 +1651,9 @@ const _dutchSourceAddMt = <String, String>{
   '{naam}: niet ingesteld': '{naam}: mhux issettjat',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'M\'hemm l-ebda verżjoni iġġed — agħfas biex tiftaħ il-kontroll.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Verżjoni ta\' żvilupp (build ta\' debug) — mhix rilaxx.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: jilħaq',
   '{naam}: wordt gecontroleerd…': '{naam}: qed jiċċekkja…',
   '{naam}: niet bereikbaar': '{naam}: ma jilħaqx',

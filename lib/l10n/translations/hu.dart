@@ -1635,6 +1635,9 @@ const _dutchSourceAddHu = <String, String>{
   '{naam}: niet ingesteld': '{naam}: nincs beállítva',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Nincs újabb verzió — koppints az ellenőrzés megnyitásához.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Fejlesztői verzió (debug-build) — nem kiadás.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: elérhető',
   '{naam}: wordt gecontroleerd…': '{naam}: ellenőrzés…',
   '{naam}: niet bereikbaar': '{naam}: nem érhető el',

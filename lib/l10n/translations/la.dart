@@ -1648,6 +1648,9 @@ const _dutchSourceAddLa = <String, String>{
   '{naam}: niet ingesteld': '{naam}: non institutus',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Nulla versio recentior est — tange ut quaestionem aperias.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Versio evolutionis (aedificatio depurationis) — non editio.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: pervius',
   '{naam}: wordt gecontroleerd…': '{naam}: probatur…',
   '{naam}: niet bereikbaar': '{naam}: non pervius',

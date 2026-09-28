@@ -1633,6 +1633,9 @@ const _dutchSourceAddDa = <String, String>{
   '{naam}: niet ingesteld': '{naam}: ikke konfigureret',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Der er ingen nyere version — tryk for at åbne tjekket.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Udviklingsversion (debug-build) — ikke en udgivelse.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: tilgængelig',
   '{naam}: wordt gecontroleerd…': '{naam}: kontrolleres…',
   '{naam}: niet bereikbaar': '{naam}: ikke tilgængelig',

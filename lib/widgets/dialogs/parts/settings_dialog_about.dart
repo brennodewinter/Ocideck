@@ -569,6 +569,7 @@ extension _SettingsAbout on _SettingsDialogState {
                 fontFamily: 'monospace',
               ),
             ),
+            if (ref.watch(ociDeckDevBuildProvider)) _devBuildLabel(l10n),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
@@ -839,3 +840,18 @@ Widget _updateCheckStatus(AppLocalizations l10n, UpdateCheckState update) {
     ],
   );
 }
+
+/// Blauw `dev`-label achter het versienummer voor een debug-build; de ballon
+/// legt uit waarom deze build geen release is. Top-level, niet op de state:
+/// `_SettingsDialogState` zit op zijn klasseplafond.
+Widget _devBuildLabel(AppLocalizations l10n) => Tooltip(
+  message: l10n.d('Ontwikkelversie (debug-build) — geen release.'),
+  child: Text(
+    l10n.d('dev'),
+    style: const TextStyle(
+      fontSize: 11,
+      fontWeight: FontWeight.w700,
+      color: AppTheme.infoAccent,
+    ),
+  ),
+);

@@ -9,6 +9,8 @@ import 'package:ocideck/services/ai_security_gate.dart';
 import 'package:ocideck/services/export_metadata.dart';
 import 'package:ocideck/state/ai_status_provider.dart';
 import 'package:ocideck/state/elearning_provider.dart';
+import 'package:ocideck/state/update_check_provider.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Nep-transport: nooit netwerk. Dezelfde seam als in
@@ -27,7 +29,14 @@ class _FakeTransport implements AiHttpTransport {
   }) async => const AiHttpResult(200, '{}');
 }
 
-Future<void> _pumpWelcome(WidgetTester tester, {String? latestSeen}) async {
+/// `devBuild` dwingt de ontwikkelversie-markering af — `flutter test` draait
+/// zelf in debug, dus zonder expliciete override zou elke test een debug-build
+/// zien. `false` = de release-semantiek die de badge-tests beschrijven.
+Future<void> _pumpWelcome(
+  WidgetTester tester, {
+  String? latestSeen,
+  bool devBuild = false,
+}) async {
   SharedPreferences.setMockInitialValues({
     'app_consent_accepted': true,
     'updateCheckLatestSeen': ?latestSeen,
@@ -41,6 +50,7 @@ Future<void> _pumpWelcome(WidgetTester tester, {String? latestSeen}) async {
       overrides: [
         aiHttpTransportProvider.overrideWithValue(_FakeTransport()),
         elearningEnabledProvider.overrideWithValue(false),
+        ociDeckDevBuildProvider.overrideWithValue(devBuild),
       ],
       child: const OciDeckApp(),
     ),
@@ -115,6 +125,31 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Nieuwe versies'), findsOneWidget);
       expect(find.text('Er is geen nieuwere versie.'), findsOneWidget);
+    });
+
+    testWidgets('ontwikkelbuild → blauw lampje, geen updateclaim', (
+      tester,
+    ) async {
+      await _pumpWelcome(tester, latestSeen: '99.0.0', devBuild: true);
+
+      // Blauw terminal-icoon in infoAccent; de amber updateclaim mag een
+      // debug-build niet overnemen — dit is nooit een release.
+      final badge = find.byWidgetPredicate(
+        (w) =>
+            w is Icon &&
+            w.icon == Icons.terminal &&
+            w.size == 11 &&
+            w.color == AppTheme.infoAccent,
+      );
+      expect(badge, findsOneWidget);
+      expect(_badge(), findsNothing);
+      expect(_tip('Ontwikkelversie'), findsOneWidget);
+      expect(_tip('OciDeck 99.0.0 is beschikbaar'), findsNothing);
+
+      // Tik: geen release-pagina maar het Over-tabblad.
+      await tester.tap(badge);
+      await tester.pumpAndSettle();
+      expect(find.text('Nieuwe versies'), findsOneWidget);
     });
   });
 }

@@ -1648,6 +1648,9 @@ const _dutchSourceAddUk = <String, String>{
   '{naam}: niet ingesteld': '{naam}: не налаштовано',
   'Er is geen nieuwere versie — tik om de controle te openen.':
       'Новішої версії немає — торкніться, щоб відкрити перевірку.',
+  'Ontwikkelversie (debug-build) — geen release.':
+      'Версія для розробки (debug-збірка) — не реліз.',
+  'dev': 'dev',
   '{naam}: bereikbaar': '{naam}: доступний',
   '{naam}: wordt gecontroleerd…': '{naam}: перевіряється…',
   '{naam}: niet bereikbaar': '{naam}: недоступний',
