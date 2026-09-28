@@ -1,6 +1,7 @@
 import '../../utils/image_limits.dart' show boundedFileImage;
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pasteboard/pasteboard.dart';
@@ -10,6 +11,7 @@ import 'package:path/path.dart' as p;
 import '../../services/ai_client_service.dart';
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
+import '../../services/download_delivery.dart';
 import '../../services/image_library_scanner.dart';
 import '../../services/image_alt_ai_service.dart';
 import '../../services/image_dedup_service.dart';
