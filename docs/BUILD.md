@@ -810,8 +810,11 @@ never satisfy — the tag sits on the merge, the working tree on the release
 branch merged into it — so every fresh run stranded here and had to be checked
 out and resumed by hand. After the deploy, sign `SHA256SUMS`, attach `SHA256SUMS.minisig`
 (waiting quietly for `publiceren` to attach it rather than printing every expected
-404), read both public files back and verify them with `minisign`, and watch the
-website-downloads job. Because checking the tag out leaves the working tree on a
+404), read both public files back and verify them with `minisign`, watch the
+website-downloads job, and then poll the public LibreKAT download page until its
+release links really point at the new tag. The job status alone is deliberately
+not accepted as proof: a deploy can return success while writing to a server
+that public DNS does not serve. Because checking the tag out leaves the working tree on a
 detached `HEAD`, the chain puts it back on the branch the release started from
 when it finishes — a failure there is reported, never fatal to a release that is
 already out. Phase 3 refuses to start while any job for the tag is still
@@ -921,7 +924,10 @@ Each non-prerelease tag also updates a Homebrew **cask**, so macOS users can
 `brew install --cask librekat/ocideck/ocideck` after tapping our forge. The cask
 is only a pointer: it
 carries the release's download URL and the SHA-256 read straight from the
-published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. It is
+published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. The
+updater first downloads `SHA256SUMS.minisig` and verifies the list against the
+repository's `minisign.pub`; a missing or invalid signature stops the update
+before a hash is read or a cask is written. It is
 **macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
 tracked separately (#1227).
 
@@ -995,7 +1001,9 @@ tracked separately (#1227).
 The WinGet Community Repository is an optional index over the existing Inno
 Setup installer. It does not host a different build: the manifest points to the
 versioned asset on the canonical Forgejo release and pins its SHA-256 from that
-release's own `SHA256SUMS`. Direct download remains available if Microsoft is
+release's own `SHA256SUMS`. The generator accepts that hash only after the
+matching `SHA256SUMS.minisig` verifies against the repository's `minisign.pub`.
+Direct download remains available if Microsoft is
 unreachable or its review is delayed.
 
 Only generate a manifest after the stable release is final:
@@ -1059,7 +1067,10 @@ feature-flag) are in
 ### AUR package
 
 `packaging/aur/PKGBUILD` is `ocideck-bin`: it installs the release tarball on
-Arch/Manjaro, verified against the published `SHA256SUMS`. Publishing is a
+Arch/Manjaro, verified against the published `SHA256SUMS`. The updater verifies
+the release's `SHA256SUMS.minisig` against `minisign.pub` before it reads that
+list; missing tooling, key, signature, or a failed verification leaves the
+PKGBUILD unchanged. Publishing is a
 maintainer step — it needs an AUR account and a registered SSH key, like the
 Homebrew tap, so it is **not** wired into the release chain. Per release:
 
@@ -1103,13 +1114,16 @@ the tag and the release afterwards; the real tag then behaves normally.
 The OciDeck page on **librekat.nl** carries a per-platform download panel
 (version, date, size, and the Linux verification hash) pointing at this release's
 assets. The `website-downloads` job keeps it current automatically: after
-`publiceren`, on the Mac runner, it clones the website repository, runs
+`publiceren`, on the Mac runner, it clones the website repository and runs
 `scripts/bump-ocideck.sh <version>` there — which reads the new verification hash
 and the release date straight from the published release, so nothing is retyped —
-then commits, pushes, and runs `./publiceersite` to put it live. Prereleases are
-skipped, and a failure here cannot affect the already-published release: it only
-means the site needs the manual fallback, `scripts/bump-ocideck.sh <version>`
-followed by `./publiceersite` in the website repository.
+then commits and pushes. That push starts the website repository's own deploy
+workflow, which runs `./publiceersite`. Prereleases are skipped. Finally,
+`release_auto.sh` reads the public OciDeck page back and accepts completion only
+when its download links contain the new tag. A failure cannot undo the published
+release, but it does stop the script from calling the whole release complete; the
+manual fallback is `scripts/bump-ocideck.sh <version>`, commit and push, then
+`./publiceersite` in the website repository.
 
 The README download line and the librekat.nl download panel themselves were added
 when the first release (`0.1.0`) existed; nothing one-time is left here.
@@ -1255,6 +1269,12 @@ Per release, after the workflow has published the tag:
 
 A recipient verifies with `minisign -Vm SHA256SUMS -p minisign.pub`.
 `OCIDECK_RELEASE_KEY` overrides the key path for a different signer.
+
+The Homebrew, AUR and WinGet metadata generators apply this same check before
+copying a checksum into downstream package metadata. For an offline/local run,
+set `SHA256SUMS_FILE` to the manifest; its signature is expected next to it as
+`<path>.minisig`, or can be named explicitly with
+`SHA256SUMS_SIGNATURE_FILE`. There is no unsigned mode.
 
 ##### Backing up and escrowing the key
 

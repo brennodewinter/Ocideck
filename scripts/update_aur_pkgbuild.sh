@@ -10,7 +10,9 @@
 # `makepkg --printsrcinfo > .SRCINFO` and push to ssh://aur@aur.archlinux.org.
 # See docs/BUILD.md, "AUR package".
 #
-# Set SHA256SUMS_FILE to read a local list instead of fetching one (the test does).
+# SHA256SUMS is consumed only after SHA256SUMS.minisig verifies against the
+# repository's minisign.pub. Set SHA256SUMS_FILE (and, optionally,
+# SHA256SUMS_SIGNATURE_FILE) to verify a local pair instead of fetching one.
 set -euo pipefail
 
 TAG="${1:-}"
@@ -21,12 +23,16 @@ fi
 
 case "$TAG" in
   v*) VERSION="${TAG#v}" ;;
-  *)  VERSION="$TAG" ;;
+  *)  VERSION="$TAG"; TAG="v$TAG" ;;
 esac
 
-if [[ "$TAG" == *-* ]]; then
+if [[ "$VERSION" == *-* ]]; then
   echo "Skipping prerelease tag $TAG for the AUR package." >&2
   exit 0
+fi
+if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "AUR version must be a stable x.y.z release, got '$VERSION'." >&2
+  exit 1
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -44,19 +50,49 @@ TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
 
 if [ -n "${SHA256SUMS_FILE:-}" ]; then
-  SUMS="$SHA256SUMS_FILE"
+  SOURCE_SUMS="$SHA256SUMS_FILE"
+  SOURCE_SIGNATURE="${SHA256SUMS_SIGNATURE_FILE:-${SHA256SUMS_FILE}.minisig}"
+  [ -f "$SOURCE_SUMS" ] || {
+    echo "SHA256SUMS file not found: $SOURCE_SUMS" >&2
+    exit 1
+  }
+  [ -f "$SOURCE_SIGNATURE" ] || {
+    echo "SHA256SUMS signature not found: $SOURCE_SIGNATURE" >&2
+    exit 1
+  }
+  cp "$SOURCE_SUMS" "$TMPDIR/SHA256SUMS"
+  cp "$SOURCE_SIGNATURE" "$TMPDIR/SHA256SUMS.minisig"
 else
-  curl -fsSLo "$TMPDIR/SHA256SUMS" "$RELEASE_BASE_URL/SHA256SUMS"
-  SUMS="$TMPDIR/SHA256SUMS"
+  curl -fsSL --retry 2 --connect-timeout 10 --max-time 60 \
+    -o "$TMPDIR/SHA256SUMS" "$RELEASE_BASE_URL/SHA256SUMS"
+  curl -fsSL --retry 2 --connect-timeout 10 --max-time 60 \
+    -o "$TMPDIR/SHA256SUMS.minisig" "$RELEASE_BASE_URL/SHA256SUMS.minisig"
+fi
+SUMS="$TMPDIR/SHA256SUMS"
+SIGNATURE="$TMPDIR/SHA256SUMS.minisig"
+PUBKEY="$REPO_ROOT/minisign.pub"
+
+command -v minisign >/dev/null 2>&1 || {
+  echo "minisign verifier not found" >&2
+  exit 1
+}
+[ -f "$PUBKEY" ] || {
+  echo "minisign public key not found: $PUBKEY" >&2
+  exit 1
+}
+if ! minisign -Vm "$SUMS" -x "$SIGNATURE" -p "$PUBKEY" -q; then
+  echo "SHA256SUMS.minisig verification failed; refusing to update PKGBUILD." >&2
+  exit 1
 fi
 
 # Match the tarball by its bare name, tolerating the leading "./" that
 # `sha256sum ./*` writes into the list.
 SHA="$(awk -v f="$ASSET" '{ n = $2; sub(/^\.\//, "", n); if (n == f) print $1 }' "$SUMS")"
-if [ -z "$SHA" ]; then
-  echo "No sha256 for $ASSET found in SHA256SUMS." >&2
+if ! printf '%s\n' "$SHA" | grep -Eq '^[0-9A-Fa-f]{64}$'; then
+  echo "No unique, valid SHA-256 for $ASSET found in verified SHA256SUMS." >&2
   exit 1
 fi
+SHA="$(printf '%s' "$SHA" | tr '[:upper:]' '[:lower:]')"
 
 sed -i.bak \
   -e "s|^pkgver=.*|pkgver=$VERSION|" \

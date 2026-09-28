@@ -9,6 +9,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support/release_manifest_test_support.dart';
+
 /// De Homebrew-caskgenerator (`scripts/update_homebrew_cask.sh`).
 ///
 /// Bewaakt de vier eigenschappen waar de cask op moet kunnen rekenen, en die
@@ -28,6 +30,7 @@ void main() {
   setUp(() {
     repoRoot = Directory.current.path;
     temp = Directory.systemTemp.createTempSync('brew_cask');
+    writeFakeMinisign(temp);
   });
   tearDown(() => temp.deleteSync(recursive: true));
 
@@ -51,13 +54,16 @@ void main() {
     workingDirectory: repoRoot,
     environment: {
       'SHA256SUMS_FILE': sums.path,
+      'PATH': '${temp.path}:${Platform.environment['PATH']}',
       'TEMPLATE_FILE': '$repoRoot/homebrew/ocideck.rb.tmpl',
     },
   );
 
   test('vult een geldige macOS-cask met de hash uit SHA256SUMS', () {
     final out = '${temp.path}/ocideck.rb';
-    final r = run('v0.3.0', out, writeSums('0.3.0'));
+    final sums = writeSums('0.3.0');
+    signTestManifest(sums);
+    final r = run('v0.3.0', out, sums);
     expect(r.exitCode, 0, reason: '${r.stderr}');
 
     final cask = File(out).readAsStringSync();
@@ -75,7 +81,9 @@ void main() {
 
   test('is macOS-only: geen Linux-arm, geen auto_updates', () {
     final out = '${temp.path}/ocideck.rb';
-    expect(run('v1.4.0', out, writeSums('1.4.0')).exitCode, 0);
+    final sums = writeSums('1.4.0');
+    signTestManifest(sums);
+    expect(run('v1.4.0', out, sums).exitCode, 0);
 
     final cask = File(out).readAsStringSync();
     expect(cask, isNot(contains('on_linux')));
@@ -85,7 +93,9 @@ void main() {
 
   test('sluit een draaiende app af vóór een upgrade', () {
     final out = '${temp.path}/ocideck.rb';
-    expect(run('v0.6.5', out, writeSums('0.6.5')).exitCode, 0);
+    final sums = writeSums('0.6.5');
+    signTestManifest(sums);
+    expect(run('v0.6.5', out, sums).exitCode, 0);
 
     final cask = File(out).readAsStringSync();
     expect(cask, contains('uninstall quit: "com.dewinter.ocideck"'));
@@ -98,10 +108,80 @@ void main() {
     expect(File(out).existsSync(), isFalse);
   });
 
+  test('normaliseert een versie zonder v naar de echte releasetag', () {
+    final sums = writeSums('1.4.0');
+    signTestManifest(sums);
+    final out = '${temp.path}/ocideck.rb';
+
+    final result = run('1.4.0', out, sums);
+
+    expect(result.exitCode, 0, reason: '${result.stderr}');
+    expect(
+      File(out).readAsStringSync(),
+      contains('/download/v1.4.0/ocideck-macos-1.4.0.zip'),
+    );
+  });
+
+  test(
+    'weigert een ongeldige stabiele versie vóór uitvoer wordt geschreven',
+    () {
+      final out = '${temp.path}/ocideck.rb';
+      final result = run('not_a_version', out, writeSums('not_a_version'));
+
+      expect(result.exitCode, isNot(0));
+      expect(File(out).existsSync(), isFalse);
+    },
+  );
+
   test('faalt als de macOS-hash ontbreekt in SHA256SUMS', () {
     final sums = File('${temp.path}/SHA256SUMS')
       ..writeAsStringSync('bbbb  ./ocideck-linux-x64-2.0.0.tar.gz\n');
+    signTestManifest(sums);
     final r = run('v2.0.0', '${temp.path}/ocideck.rb', sums);
     expect(r.exitCode, isNot(0));
+  });
+
+  test('weigert een niet-ondertekend lokaal SHA256SUMS', () {
+    final out = '${temp.path}/ocideck.rb';
+    final result = run('v2.0.0', out, writeSums('2.0.0'));
+
+    expect(result.exitCode, isNot(0));
+    expect(File(out).existsSync(), isFalse);
+  });
+
+  test('weigert een gewijzigd SHA256SUMS vóór de cask wordt geschreven', () {
+    final sums = writeSums('2.0.0');
+    signTestManifest(sums);
+    sums.writeAsStringSync(
+      '$macSha  ./ocideck-macos-2.0.0.zip\n',
+      mode: FileMode.append,
+    );
+    final out = '${temp.path}/ocideck.rb';
+
+    final result = run('v2.0.0', out, sums);
+
+    expect(result.exitCode, isNot(0));
+    expect(File(out).existsSync(), isFalse);
+  });
+
+  test('haalt én verifieert het publieke manifest en de handtekening', () {
+    final sums = writeSums('2.0.0');
+    signTestManifest(sums);
+    writeFakeCurl(temp);
+    final out = '${temp.path}/ocideck.rb';
+
+    final result = Process.runSync(
+      'bash',
+      ['scripts/update_homebrew_cask.sh', 'v2.0.0', out],
+      workingDirectory: repoRoot,
+      environment: {
+        'PATH': '${temp.path}:${Platform.environment['PATH']}',
+        'FAKE_RELEASE_DIR': temp.path,
+        'TEMPLATE_FILE': '$repoRoot/homebrew/ocideck.rb.tmpl',
+      },
+    );
+
+    expect(result.exitCode, 0, reason: '${result.stderr}');
+    expect(File(out).readAsStringSync(), contains('sha256 "$macSha"'));
   });
 }

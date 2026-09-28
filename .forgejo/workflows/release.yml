@@ -20,10 +20,10 @@
 #              zet zichzelf live met een eigen deploy-workflow
 #
 # Ondertekening: de macOS-app wordt op de Mac-runner getekend en genotariseerd
-# (Developer ID + notarytool; zie de macos-job en docs/BUILD.md), mits het
-# certificaat en het notarytool-profiel daar in de keychain staan — anders valt
-# die job terug op een ongetekende build met een luide waarschuwing. Windows en
-# Linux worden (nog) niet getekend; voor Windows klaagt SmartScreen. Daarom
+# (Developer ID + notarytool; zie de macos-job en docs/BUILD.md). Een stabiele
+# release faalt gesloten wanneer identiteit of notary-profiel ontbreekt; alleen
+# een expliciete prerelease mag als oefenbouw ongetekend zijn. Windows en Linux
+# worden (nog) niet getekend; voor Windows klaagt SmartScreen. Daarom
 # houdt de releasetekst (.forgejo/release-body.md) de openen-instructie per
 # platform aan, zolang dat platform ongetekend is.
 name: release
@@ -47,10 +47,35 @@ jobs:
     name: Poort (vóór het bouwen)
     runs-on: macos
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Release-invoer valideren
+        run: |
+          set -eu
+          TAG="$GITHUB_REF_NAME"
+          SEMVER_RE='^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(\.(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?$'
+          if [ "${GITHUB_REF_TYPE:-}" != "tag" ] || ! printf '%s\n' "$TAG" | grep -Eq "$SEMVER_RE"; then
+            echo "Ongeldige release-ref '$TAG': verwacht v<major>.<minor>.<patch> met optionele SemVer-prerelease." >&2
+            exit 1
+          fi
+
+          PUBSPEC_VERSION="$(sed -n 's/^version:[[:space:]]*//p' pubspec.yaml)"
+          test -n "$PUBSPEC_VERSION" || {
+            echo "Geen version: in pubspec.yaml gevonden." >&2
+            exit 1
+          }
+          PUBSPEC_SEMVER="${PUBSPEC_VERSION%%+*}"
+          TAG_VERSION="${TAG#v}"
+          if [ "$TAG_VERSION" != "$PUBSPEC_SEMVER" ]; then
+            echo "Tag $TAG komt niet overeen met pubspec.yaml ($PUBSPEC_VERSION; verwacht v$PUBSPEC_SEMVER)." >&2
+            exit 1
+          fi
+          echo "Release-invoer klopt: $TAG (pubspec $PUBSPEC_VERSION)."
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: De poort
         run: make check-no-coverage
@@ -67,9 +92,11 @@ jobs:
     # afdrijft. De web-engine-artefacten zijn niet voorgebakken (`--no-web` in het
     # image) en worden bij `flutter build web` opgehaald — een kleine download.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
       - name: Alleen op een tag
         run: |
@@ -94,7 +121,7 @@ jobs:
       # sleutel, dan bouwt de stap gewoon opnieuw — precies het gedrag van nu.
       - name: Pub-pakketten uit de cache
         continue-on-error: true
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.pub-cache
           key: pub-linux-${{ hashFiles('pubspec.lock') }}
@@ -102,7 +129,7 @@ jobs:
             pub-linux-
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: dartcv4-versie uit pubspec.lock
         id: dartcv
@@ -111,7 +138,7 @@ jobs:
           echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
       - name: dartcv4 native OpenCV-build uit de cache
         continue-on-error: true
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: |
             .dart_tool/hooks_runner
@@ -133,7 +160,7 @@ jobs:
       # v4 van deze actie weigert elke niet-GitHub-server ("GHES not
       # supported"); v3 spreekt het artifact-API dat Forgejo implementeert.
       - name: Artifact bewaren
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: ocideck-web
           path: ocideck-web-${{ env.VERSIE }}.tar.gz
@@ -148,7 +175,7 @@ jobs:
     if: ${{ !contains(github.ref_name, '-') }}
     runs-on: docker
     container:
-      image: ubuntu:24.04
+      image: ubuntu:24.04@sha256:008173c23f95b170204355c12626cb5a965d779a7e1283b09e9cffbb1bf33ca3
     steps:
       # Eerst kijken of de deploy-secrets er zijn. Zo niet, dan slaat deze job
       # netjes over — hij faalt er NIET op. Dat is nu de bedoeling: de webversie
@@ -193,10 +220,12 @@ jobs:
           apt-get install -y --no-install-recommends \
             nodejs make git curl ca-certificates xz-utils jq openssh-client
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         if: steps.check.outputs.deploy == 'true'
+        with:
+          persist-credentials: false
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         if: steps.check.outputs.deploy == 'true'
         with:
           name: ocideck-web
@@ -220,7 +249,7 @@ jobs:
 
       - name: Afhankelijkheden ophalen
         if: steps.check.outputs.deploy == 'true'
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: Sleutel klaarzetten
         if: steps.check.outputs.deploy == 'true'
@@ -252,7 +281,7 @@ jobs:
     # hieronder aan. De rest (clang/cmake/ninja/pkg-config/libgtk-3-dev/
     # build-essential/node) is ingebakken.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
     steps:
       # liblzma-dev + libsecret-1-dev + libayatana-appindicator3-dev: nodig voor
       # `make build-linux` (flutter_secure_storage linkt libsecret; lzma voor
@@ -272,7 +301,9 @@ jobs:
           apt-get update
           apt-get install -y --no-install-recommends liblzma-dev libsecret-1-dev libayatana-appindicator3-dev rpm file
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
       - name: De werkkopie vertrouwen
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -283,7 +314,7 @@ jobs:
       # → mist de cache, dan bouwt het gewoon opnieuw, als vanouds.
       - name: Pub-pakketten uit de cache
         continue-on-error: true
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.pub-cache
           key: pub-linux-${{ hashFiles('pubspec.lock') }}
@@ -291,7 +322,7 @@ jobs:
             pub-linux-
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: dartcv4-versie uit pubspec.lock
         id: dartcv
@@ -300,7 +331,7 @@ jobs:
           echo "versie=$VERSIE" >> "$GITHUB_OUTPUT"
       - name: dartcv4 native OpenCV-build uit de cache
         continue-on-error: true
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: |
             .dart_tool/hooks_runner
@@ -343,7 +374,7 @@ jobs:
         run: make package-linux VERSION="$VERSIE"
 
       - name: Artifact bewaren
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: ocideck-linux
           # Alle vier de Linux-assets in één artifact. De gemeenschappelijke
@@ -363,28 +394,56 @@ jobs:
     # dan wacht deze job tot hij er weer is.
     runs-on: macos
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
       - name: Afhankelijkheden ophalen
-        run: flutter pub get
+        run: flutter pub get --enforce-lockfile
 
       - name: macOS-release bouwen, tekenen en notariseren
-        # Op de aangemelde Mac (mac-brenno) staan een Developer ID-certificaat en
-        # het notarytool-profiel 'ocideck-notary' in de login-keychain. Staan ze
-        # er, dan tekent, notariseert en stapelt deze stap de app zodat hij op
-        # elke Mac opent zonder Gatekeeper-waarschuwing. Ontbreekt de identiteit
-        # (bijvoorbeeld een andere runner), dan valt hij terug op een ongetekende
-        # build met een luide waarschuwing — hetzelfde patroon als deploy-web bij
-        # missende secrets: een release blijft mogelijk, maar niemand denkt per
-        # ongeluk dat hij getekend is. Het certificaat verlaat de machine nooit;
-        # er is dus geen enkel signing-secret in deze repo nodig.
+        # Een stabiele release mag nooit terugvallen op ongetekende bytes:
+        # identiteit, notary-profiel en Apple-verbinding worden eerst read-only
+        # getoetst. Alleen een prerelease is een oefenroute die bij ontbrekende
+        # signing als expliciet ongetekende build verder mag.
         run: |
-          if security find-identity -v -p codesigning | grep -q "Developer ID Application"; then
-            echo "Developer ID gevonden — tekenen en notariseren."
+          set -eu
+          case "$GITHUB_REF_NAME" in
+            *-*) STABIEL=false ;;
+            *)   STABIEL=true ;;
+          esac
+
+          if scripts/notarize_macos.sh --preflight; then
+            echo "Signing-preflight geslaagd — tekenen en notariseren."
             scripts/notarize_macos.sh --no-package
+            echo "MACOS_SIGNED=true" >> "$GITHUB_ENV"
+          elif [ "$STABIEL" = true ]; then
+            echo "Stabiele macOS-release geweigerd: Developer ID of notary-profiel ontbreekt/werkt niet." >&2
+            echo "Herstel de runner volgens docs/BUILD.md; publiceer nooit een ongetekende stabiele build." >&2
+            exit 1
           else
-            echo "::warning title=Ongetekende macOS-build::Geen Developer ID op deze runner; er wordt een ONGETEKENDE app gepubliceerd. Richt voor een echte release het certificaat en het notarytool-profiel op de runner in (zie docs/BUILD.md)."
+            echo "::warning title=Ongetekende macOS-prerelease::Signing-preflight faalde; alleen omdat dit een prerelease is, wordt een ONGETEKENDE oefenbuild gepubliceerd."
             make build-macos
+            echo "MACOS_SIGNED=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: macOS-publicatie verifiëren
+        # Onafhankelijke grens vlak vóór verpakken/uploaden. Het notariseerscript
+        # toetst dit ook, maar een latere wijziging daar mag deze poort niet stil
+        # laten verdwijnen.
+        run: |
+          set -eu
+          APP=$(find build/macos/Build/Products/Release -maxdepth 1 -type d -name '*.app' -print -quit)
+          test -n "$APP" || { echo "Geen gebouwde macOS-app gevonden." >&2; exit 1; }
+          if [ "${MACOS_SIGNED:-false}" != true ]; then
+            case "$GITHUB_REF_NAME" in
+              *-*) echo "Ongetekende prerelease: signingcontroles niet van toepassing." ;;
+              *) echo "Stabiele macOS-build is niet als getekend gemarkeerd." >&2; exit 1 ;;
+            esac
+          else
+            codesign --verify --deep --strict --verbose=2 "$APP"
+            xcrun stapler validate "$APP"
+            spctl -a -t exec -vvv "$APP"
           fi
 
       - name: Bundel inpakken
@@ -398,7 +457,7 @@ jobs:
           echo "VERSIE=$VERSIE" >> "$GITHUB_ENV"
 
       - name: Artifact bewaren
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: ocideck-macos
           path: ocideck-macos-${{ env.VERSIE }}.zip
@@ -416,7 +475,7 @@ jobs:
     # op de runner al warm van de bouw-jobs, dus de "Gereedschap installeren"-stap
     # (4-6 min apt) vervalt. #11 van het releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
     steps:
       # Waarom een release-asset en niet het build-artifact van die run: een
       # GitHub-*artifact* vraagt een token, óók bij een publieke repo, en
@@ -555,7 +614,7 @@ jobs:
       # vangt test/windows_packaging_test.dart het verschil tussen wat de
       # spiegel maakt en wat hier meekomt.
       - name: Artifact bewaren
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5 # v3.2.1
         with:
           name: ocideck-windows
           path: ocideck-windows-x64-*
@@ -569,9 +628,11 @@ jobs:
     # image staat door de bouw-jobs al warm op de runner. #11 van het
     # releaseketen-verhardingsplan.
     container:
-      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5
+      image: pawprint.vigilis.online/librekat/ocideck-ci:flutter-3.47.5@sha256:e616f65ddbeb0f90f4326b93b1e359b5ffd20beb474dda1b811c94ff441f5855
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
       # Downloaden naar `dist`, niet `assets`: de checkout hierboven brengt de
       # repo mee, en die heeft een top-level `assets/` met submappen (fonts,
@@ -579,13 +640,13 @@ jobs:
       # struikelt de `sha256sum ./*` in de Checksums-stap over die mappen
       # ("Is a directory", exit 1) en wordt er niets gepubliceerd. `dist`
       # bestaat niet in de repo en botst dus met niets. Niet terugdraaien.
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-web, path: dist }
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-linux, path: dist }
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-macos, path: dist }
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with: { name: ocideck-windows, path: dist }
 
       # De SBOM hoort bij de exacte build die je uitlevert (CRA, Verordening
@@ -639,6 +700,10 @@ jobs:
           set -eu
           TOKEN="${RELEASE_TOKEN:-$RUN_TOKEN}"
           API="${GITHUB_SERVER_URL}/api/v1/repos/${GITHUB_REPOSITORY}"
+          test -n "$TOKEN" || {
+            echo "Geen GITHUB_TOKEN of RELEASE_TOKEN beschikbaar om de release te publiceren." >&2
+            exit 1
+          }
 
           # Een streepje in de tag betekent semver-voorloper (`v0.1.0-rc1`), en
           # die hoort als prerelease gemarkeerd te staan: Forgejo laat hem dan
@@ -678,30 +743,119 @@ jobs:
             echo "Bestaande release hergebruikt (id $ID)."
           fi
 
-          # Bijlagen van een vorige poging eerst weg: Forgejo weigert een
-          # tweede bijlage met dezelfde naam niet, hij zet hem ernaast — en dan
-          # staan er twee bestanden waarvan niemand weet welke de goede is.
-          curl -s -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
+          # Een rerun mag een werkend asset nooit verwijderen vóór de vervanger
+          # aantoonbaar compleet bij Forgejo staat. Bij gelijke bytes hergebruiken
+          # we het bestaande asset. Bij andere of dubbele bytes uploaden we eerst
+          # onder een unieke kandidaatnaam, downloaden en hashen die kandidaat,
+          # hernoemen hem daarna naar de definitieve naam en ruimen pas dan de
+          # oude ids op. Een fout laat dus altijd óf het oude asset óf een reeds
+          # geverifieerde kandidaat achter.
+          curl -fsS -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
             > /tmp/bijlagen.json
-          for BESTAND in dist/*; do
-            NAAM="$(basename "$BESTAND")"
-            OUD=$(jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .id' /tmp/bijlagen.json)
-            if [ -n "$OUD" ]; then
-              curl -s -o /dev/null -X DELETE -H "Authorization: token $TOKEN" \
-                "$API/releases/$ID/assets/$OUD"
-              echo "  - $NAAM (oude versie verwijderd)"
+          VERSIE="${GITHUB_REF_NAME#v}"
+          printf '%s\n' \
+            SHA256SUMS \
+            "ocideck-$VERSIE.cdx.json" \
+            "ocideck-$VERSIE.spdx.json" \
+            "ocideck-web-$VERSIE.tar.gz" \
+            "ocideck-linux-x64-$VERSIE.tar.gz" \
+            "ocideck-linux-amd64-$VERSIE.deb" \
+            "ocideck-linux-x86_64-$VERSIE.rpm" \
+            "ocideck-linux-x86_64-$VERSIE.AppImage" \
+            "ocideck-macos-$VERSIE.zip" \
+            "ocideck-windows-x64-$VERSIE.zip" \
+            "ocideck-windows-x64-setup-$VERSIE.exe" \
+            | LC_ALL=C sort > /tmp/verwachte-assets
+          find dist -maxdepth 1 -type f -exec basename {} \; \
+            | LC_ALL=C sort > /tmp/werkelijke-assets
+          if ! diff -u /tmp/verwachte-assets /tmp/werkelijke-assets; then
+            echo "dist/ bevat niet exact de elf verwachte release-assets; publicatie geweigerd." >&2
+            exit 1
+          fi
+
+          while IFS= read -r NAAM; do
+            BESTAND="dist/$NAAM"
+            LOKAAL_SHA="$(sha256sum "$BESTAND" | awk '{print $1}')"
+            OUD_AANTAL="$(jq -r --arg n "$NAAM" '[.[] | select(.name==$n)] | length' /tmp/bijlagen.json)"
+
+            # Eén bestaand asset met exact dezelfde bytes is al de gewenste
+            # eindtoestand. Downloaden toetst de serverbytes, niet metadata.
+            if [ "$OUD_AANTAL" = 1 ]; then
+              OUD_URL="$(jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .browser_download_url' /tmp/bijlagen.json)"
+              curl -fsSL -H "Authorization: token $TOKEN" "$OUD_URL" -o /tmp/bestaand-asset
+              OUD_SHA="$(sha256sum /tmp/bestaand-asset | awk '{print $1}')"
+              if [ "$OUD_SHA" = "$LOKAAL_SHA" ]; then
+                echo "  = $NAAM (bestaande, identieke bytes hergebruikt)"
+                continue
+              fi
             fi
+
+            KANDIDAAT=".$NAAM.kandidaat-${GITHUB_RUN_ID:-handmatig}-${GITHUB_RUN_ATTEMPT:-1}"
             CODE=$(curl -s -o /tmp/asset.json -w '%{http_code}' -X POST \
-              "$API/releases/$ID/assets?name=$NAAM" \
+              "$API/releases/$ID/assets?name=$KANDIDAAT" \
               -H "Authorization: token $TOKEN" \
               -F "attachment=@$BESTAND")
             if [ "$CODE" != "201" ]; then
-              echo "Bijlage $NAAM gaf HTTP $CODE:" >&2
+              echo "Kandidaat voor $NAAM gaf HTTP $CODE:" >&2
               cat /tmp/asset.json >&2
               exit 1
             fi
-            echo "  + $NAAM"
-          done
+            KANDIDAAT_ID="$(jq -r '.id' /tmp/asset.json)"
+            KANDIDAAT_URL="$(jq -r '.browser_download_url' /tmp/asset.json)"
+            test -n "$KANDIDAAT_ID" && test "$KANDIDAAT_ID" != null
+            test -n "$KANDIDAAT_URL" && test "$KANDIDAAT_URL" != null
+            curl -fsSL -H "Authorization: token $TOKEN" "$KANDIDAAT_URL" -o /tmp/kandidaat-asset
+            KANDIDAAT_SHA="$(sha256sum /tmp/kandidaat-asset | awk '{print $1}')"
+            if [ "$KANDIDAAT_SHA" != "$LOKAAL_SHA" ]; then
+              echo "Geüploade kandidaat voor $NAAM heeft SHA256 $KANDIDAAT_SHA, verwacht $LOKAAL_SHA; oude asset(s) blijven staan." >&2
+              exit 1
+            fi
+
+            jq -n --arg name "$NAAM" '{name:$name}' > /tmp/asset-naam.json
+            CODE=$(curl -s -o /tmp/hernoemd.json -w '%{http_code}' -X PATCH \
+              "$API/releases/$ID/assets/$KANDIDAAT_ID" \
+              -H "Authorization: token $TOKEN" -H "Content-Type: application/json" \
+              -d @/tmp/asset-naam.json)
+            # Forgejo documenteert 201 voor deze PATCH; 200 wordt door oudere
+            # Gitea-compatibele versies gebruikt. Beide betekenen dat de
+            # kandidaat nu de definitieve naam draagt.
+            if [ "$CODE" != 200 ] && [ "$CODE" != 201 ]; then
+              echo "Geverifieerde kandidaat voor $NAAM kon niet worden hernoemd (HTTP $CODE); oude asset(s) blijven staan." >&2
+              cat /tmp/hernoemd.json >&2
+              exit 1
+            fi
+
+            jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .id' /tmp/bijlagen.json \
+              | while IFS= read -r OUD_ID; do
+                  [ -n "$OUD_ID" ] || continue
+                  curl -fsS -o /dev/null -X DELETE -H "Authorization: token $TOKEN" \
+                    "$API/releases/$ID/assets/$OUD_ID"
+                done
+            echo "  + $NAAM (kandidaat geverifieerd, oude versie veilig vervangen)"
+          done < /tmp/verwachte-assets
+
+          # Unieke verwachte bijlagen controleren. Extra handmatige bijlagen
+          # zoals SHA256SUMS.minisig zijn toegestaan, maar elk door deze run
+          # geproduceerd bestand moet exact één keer bestaan én dezelfde bytes
+          # bevatten als dist/.
+          echo "Unieke verwachte bijlagen controleren…"
+          curl -fsS -H "Authorization: token $TOKEN" "$API/releases/$ID/assets" \
+            > /tmp/bijlagen-na-upload.json
+          while IFS= read -r NAAM; do
+            AANTAL="$(jq -r --arg n "$NAAM" '[.[] | select(.name==$n)] | length' /tmp/bijlagen-na-upload.json)"
+            if [ "$AANTAL" != 1 ]; then
+              echo "Release bevat $AANTAL bijlagen met verwachte naam '$NAAM' (verwacht exact 1)." >&2
+              exit 1
+            fi
+            URL="$(jq -r --arg n "$NAAM" '.[] | select(.name==$n) | .browser_download_url' /tmp/bijlagen-na-upload.json)"
+            curl -fsSL -H "Authorization: token $TOKEN" "$URL" -o /tmp/eind-asset
+            SERVER_SHA="$(sha256sum /tmp/eind-asset | awk '{print $1}')"
+            LOKAAL_SHA="$(sha256sum "dist/$NAAM" | awk '{print $1}')"
+            if [ "$SERVER_SHA" != "$LOKAAL_SHA" ]; then
+              echo "Definitieve bijlage $NAAM heeft SHA256 $SERVER_SHA, verwacht $LOKAAL_SHA." >&2
+              exit 1
+            fi
+          done < /tmp/verwachte-assets
 
           echo
           echo "Klaar: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${GITHUB_REF_NAME}"

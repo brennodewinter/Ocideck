@@ -1,6 +1,42 @@
 {
-  "_comment": "Inventory of every third-party CI version this repository writes out IN FULL somewhere in a workflow, rather than letting it float. Two kinds, because they age identically but are pinned in different syntax: `actions` are `uses: owner/repo@vX.Y.Z` lines, `tools` are binaries a `run:` block downloads by version. `make check-pins` (tool/check_pinned_versions.dart) reads this list and asks each upstream whether a newer version exists — advisory, the same monitor pattern as the vendored-JS MANIFEST.json + `make deps-check`. A pin without such a monitor rots silently, and for the scanners that is not cosmetic: one that stands still keeps reporting green while missing the key shapes invented after it (#802). THREE THINGS ARE DELIBERATELY ABSENT. (1) Actions pinned to a floating major tag (actions/checkout@v5, subosito/flutter-action@v2, lycheeverse/lychee-action@v2, actions/upload-artifact@v5) auto-update within their major, so there is nothing to go stale. (2) Flutter: the workflow reads its version from .tool-versions and `make check-toolchain` guards it, so it already has exactly one source. (3) semgrep's transitive dependencies: the version is pinned, the dependency tree is not — hash-pinning it would mean a requirements file with hundreds of hashes, which is a bigger promise than this repo keeps. Noted rather than left silent. THIS FILE LIVES UNDER .github/ FOR HISTORY, but it governs .forgejo/workflows/ just as much — and the file that keeps the two from drifting apart is test/pinned_versions_manifest_test.dart, which runs in `make check` and fails if a workflow gains a *_VERSION pin that is not listed here. When you bump anything below, change the workflow(s) AND the version here in the same commit; the test fails otherwise.",
+  "_comment": "Inventory of every third-party CI version this repository pins exactly. Actions may use a release tag (`version`) or an immutable commit (`sha` plus the human-readable `version` comment); tools carry an explicit version variable. `make check-pins` asks the primary upstream whether a newer release exists or, for `github_ref`, whether the monitored major ref moved to a newer commit. A pin without such a monitor rots silently. Floating-major Actions elsewhere remain deliberately absent because they auto-update within their major. Flutter is also absent: .tool-versions plus make check-toolchain is its single source. Semgrep's transitive dependencies remain un-hashed because that would require hundreds of hashes. THIS FILE LIVES UNDER .github/ FOR HISTORY, but governs .forgejo/workflows too; test/pinned_versions_manifest_test.dart keeps workflow and manifest aligned.",
   "actions": [
+    {
+      "uses": "actions/checkout",
+      "version": "v4.4.0",
+      "sha": "11d5960a326750d5838078e36cf38b85af677262",
+      "workflows": [".forgejo/workflows/release.yml"],
+      "purpose": "Checks out release source without trusting a mutable major tag.",
+      "source": "github_ref",
+      "api": "https://api.github.com/repos/actions/checkout/git/ref/tags/v4"
+    },
+    {
+      "uses": "actions/cache",
+      "version": "v4.3.0",
+      "sha": "0057852bfaa89a56745cba8c7296529d2fc39830",
+      "workflows": [".forgejo/workflows/release.yml"],
+      "purpose": "Restores release caches without trusting a mutable major tag.",
+      "source": "github_ref",
+      "api": "https://api.github.com/repos/actions/cache/git/ref/tags/v4"
+    },
+    {
+      "uses": "actions/upload-artifact",
+      "version": "v3.2.1",
+      "sha": "ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5",
+      "workflows": [".forgejo/workflows/release.yml"],
+      "purpose": "Uploads build artifacts through the Forgejo-compatible v3 protocol without trusting its mutable major tag.",
+      "source": "github_ref",
+      "api": "https://api.github.com/repos/actions/upload-artifact/git/ref/tags/v3"
+    },
+    {
+      "uses": "actions/download-artifact",
+      "version": "v3.0.2",
+      "sha": "9bc31d5ccc31df68ecc42ccf4149144866c47d8a",
+      "workflows": [".forgejo/workflows/release.yml"],
+      "purpose": "Downloads build artifacts through the Forgejo-compatible v3 protocol without trusting its mutable major tag.",
+      "source": "github_ref",
+      "api": "https://api.github.com/repos/actions/download-artifact/git/ref/tags/v3"
+    },
     {
       "uses": "aquasecurity/trivy-action",
       "version": "v0.36.0",

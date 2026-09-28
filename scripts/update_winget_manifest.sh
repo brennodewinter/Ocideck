@@ -5,7 +5,9 @@
 #
 # The hash comes from the release's own SHA256SUMS, rather than from a fresh
 # download, so the manifest describes exactly what the release says it shipped.
-# Set SHA256SUMS_FILE to a local list for an offline run (and for tests).
+# The list is consumed only after SHA256SUMS.minisig verifies against the
+# repository's minisign.pub. Set SHA256SUMS_FILE (and, optionally,
+# SHA256SUMS_SIGNATURE_FILE) to verify a local pair for an offline run.
 set -euo pipefail
 
 if [ "$#" -lt 1 ]; then
@@ -41,15 +43,44 @@ TMP_WORK="$(mktemp -d)"
 trap 'rm -rf "$TMP_WORK"' EXIT
 
 if [ -n "${SHA256SUMS_FILE:-}" ]; then
-  SUMS="$SHA256SUMS_FILE"
+  SOURCE_SUMS="$SHA256SUMS_FILE"
+  SOURCE_SIGNATURE="${SHA256SUMS_SIGNATURE_FILE:-${SHA256SUMS_FILE}.minisig}"
+  [ -f "$SOURCE_SUMS" ] || {
+    echo "SHA256SUMS file not found: $SOURCE_SUMS" >&2
+    exit 1
+  }
+  [ -f "$SOURCE_SIGNATURE" ] || {
+    echo "SHA256SUMS signature not found: $SOURCE_SIGNATURE" >&2
+    exit 1
+  }
+  cp "$SOURCE_SUMS" "$TMP_WORK/SHA256SUMS"
+  cp "$SOURCE_SIGNATURE" "$TMP_WORK/SHA256SUMS.minisig"
 else
-  curl -fsSLo "$TMP_WORK/SHA256SUMS" "$RELEASE_BASE_URL/SHA256SUMS"
-  SUMS="$TMP_WORK/SHA256SUMS"
+  curl -fsSL --retry 2 --connect-timeout 10 --max-time 60 \
+    -o "$TMP_WORK/SHA256SUMS" "$RELEASE_BASE_URL/SHA256SUMS"
+  curl -fsSL --retry 2 --connect-timeout 10 --max-time 60 \
+    -o "$TMP_WORK/SHA256SUMS.minisig" "$RELEASE_BASE_URL/SHA256SUMS.minisig"
+fi
+SUMS="$TMP_WORK/SHA256SUMS"
+SIGNATURE="$TMP_WORK/SHA256SUMS.minisig"
+PUBKEY="$REPO_ROOT/minisign.pub"
+
+command -v minisign >/dev/null 2>&1 || {
+  echo "minisign verifier not found" >&2
+  exit 1
+}
+[ -f "$PUBKEY" ] || {
+  echo "minisign public key not found: $PUBKEY" >&2
+  exit 1
+}
+if ! minisign -Vm "$SUMS" -x "$SIGNATURE" -p "$PUBKEY" -q; then
+  echo "SHA256SUMS.minisig verification failed; refusing to write a WinGet manifest." >&2
+  exit 1
 fi
 
 SHA="$(awk -v f="$ASSET" '{ n = $2; sub(/^\.\//, "", n); if (n == f) print toupper($1) }' "$SUMS")"
 if ! [[ "$SHA" =~ ^[0-9A-F]{64}$ ]]; then
-  echo "No valid SHA-256 for $ASSET found in SHA256SUMS." >&2
+  echo "No unique, valid SHA-256 for $ASSET found in verified SHA256SUMS." >&2
   exit 1
 fi
 
