@@ -22,7 +22,12 @@ All notable changes to OciDeck are documented in this file.
   (Instellingen → Over → "Nieuwe versies"), maximaal één ping per dag naar de
   release-index van de forge. Een handmatige "Controleer nu" op datzelfde
   tabblad is altijd beschikbaar. Op web is er geen controle: de webversie
-  draait al de gedeployde release.
+  draait al de gedeployde release. Een ontwikkelbuild (`flutter run`,
+  debug) maakt dat meteen zichtbaar: het lampje naast het versienummer is
+  dan blauw met een terminal-icoon en een ballon die zegt dat dit geen
+  release is — zo kan een debug-build nooit als "oude" of "actuele"
+  release worden gelezen. Ook het Over-tabblad markeert zo'n build met
+  een blauw `dev`-label.
 - Het statuscentrum op het openscherm toont één opslaglampje voor alle
   ingestelde verbindingen samen: de kleur is de slechtste toestand, de
   hover-ballon somt per verbinding de uitslag op. Een tik opent
