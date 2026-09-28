@@ -123,7 +123,10 @@ class OciServeStatusChip extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final ociServe = ref.watch(ociServeProvider);
-    if (!ref.watch(elearningEnabledProvider)) {
+    // Beide eLearning-schakelaars tellen: "maken" (module) én "volgen"
+    // (de OciServe-koppeling — settings.enabled). Zonder één van beide is
+    // er niets om naar een server te laten verwijzen.
+    if (!ref.watch(elearningEnabledProvider) && !ociServe.settings.enabled) {
       return const SizedBox.shrink();
     }
     // De regels hergebruiken de opslag-templates: 'eLearning-server' en
