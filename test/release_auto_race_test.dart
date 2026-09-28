@@ -38,6 +38,7 @@ NEW_VERSION=9.9.9
 ROOT_DIR=${Directory.current.path}
 RELEASE_BASE_URL=https://releases.invalid/download
 DEPLOY_URL=https://demo.invalid
+WEBSITE_URL=https://website.invalid/nl/ocideck/
 FORGE_API=https://forge.invalid/api/v1
 REPO_SLUG=LibreKAT/Ocideck
 TOKEN=test-token
@@ -172,16 +173,20 @@ cmd_status
   // het rapport terwijl de demo op 0.6.4 bleef staan.
   ProcessResult runStatus({
     required String liveVersion,
+    String websiteVersion = '9.9.9',
     String pullsJson = '[]',
   }) {
-    final live = File(
-      '${Directory.systemTemp.path}/ocideck-status-live-$pid.txt',
-    )..writeAsStringSync(liveVersion);
-    addTearDown(() {
-      if (live.existsSync()) live.deleteSync();
-    });
+    final state = Directory.systemTemp.createTempSync('ocideck-status-');
+    final live = File('${state.path}/live.txt')..writeAsStringSync(liveVersion);
+    final website = File('${state.path}/website.html')
+      ..writeAsStringSync(
+        '<a href="https://forge.invalid/releases/download/v$websiteVersion/'
+        'ocideck-linux-amd64-$websiteVersion.deb">download</a>\n',
+      );
+    addTearDown(() => state.deleteSync(recursive: true));
     return runReleaseHarness('''
 LIVE=${live.path}
+WEBSITE=${website.path}
 BRANCH=release/v9.9.9
 read_token() { :; }
 section() { printf '== %s ==\\n' "\$1"; }
@@ -211,6 +216,9 @@ curl() {
     previous="\$arg"; url="\$arg"
   done
   case "\$url" in
+    https://website.invalid/nl/ocideck/)
+      command cat "\$WEBSITE"
+      ;;
     */version.json)
       v="\$(cat "\$LIVE")"
       [ -n "\$v" ] || return 22
@@ -239,11 +247,25 @@ cmd_status
     skip: skipOnWindows,
   );
 
-  test('--status noemt een release met een live webdemo compleet', () {
-    final r = runStatus(liveVersion: '9.9.9');
+  test(
+    '--status noemt een release met een live demo en downloadpagina compleet',
+    () {
+      final r = runStatus(liveVersion: '9.9.9');
+      final output = '${r.stdout}\n${r.stderr}';
+      expect(output, contains('mark 1 webdemo'), reason: output);
+      expect(output, contains('mark 1 downloadpagina'), reason: output);
+      expect(output, contains('De release is publiek compleet'));
+    },
+    skip: skipOnWindows,
+  );
+
+  test('--status noemt een achtergebleven downloadpagina niet compleet', () {
+    final r = runStatus(liveVersion: '9.9.9', websiteVersion: '9.9.8');
     final output = '${r.stdout}\n${r.stderr}';
-    expect(output, contains('mark 1 webdemo'), reason: output);
-    expect(output, contains('De release lijkt compleet'));
+    expect(output, contains('mark 0 downloadpagina'), reason: output);
+    expect(output, contains('(nu: v9.9.8'));
+    expect(output, isNot(contains('De release is publiek compleet')));
+    expect(output, contains('--resume controleert daarna de publieke pagina'));
   }, skip: skipOnWindows);
 
   // De merge verwijdert de release-branch. Eén vast vakje "branch op origin"
@@ -622,6 +644,12 @@ curl() {
   # De webdemo draait de release al; deze toets gaat over tekenen, niet over
   # deployen. Zonder dit antwoord valt fase 3 al bij deploy_web_if_needed.
   case "\$url" in */version.json) printf '{"version":"9.9.9"}\\n'; return 0 ;; esac
+  case "\$url" in
+    https://website.invalid/nl/ocideck/)
+      printf '<a href="https://forge.invalid/releases/download/v9.9.9/ocideck.zip">download</a>\\n'
+      return 0
+      ;;
+  esac
   [ -f "\$DISPATCHED" ] || return 22
   case "\$url" in
     */SHA256SUMS.minisig) printf 'signature:manifest-A\\n' >"\$out" ;;

@@ -97,6 +97,10 @@ APPLICATIONS_DIR="${OCIDECK_APPLICATIONS_DIR:-/Applications}"
 # bereikbaar is vóór de tag, zodat deploy-web niet ná de tag strandt.
 DEPLOY_HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-40edd80f.vps.ovh.net}"
 DEPLOY_URL="${OCIDECK_DEPLOY_URL:-https://ocideck.librekat.nl}"  # voor de liveverificatie
+# De productpagina is een tweede publieke uitkomst van dezelfde release. De
+# website-workflow kan groen zijn terwijl rsync naar een host gaat waar DNS niet
+# naar wijst; daarom is ook hier de pagina die bezoekers krijgen de waarheid.
+WEBSITE_URL="${OCIDECK_WEBSITE_URL:-https://librekat.nl/nl/ocideck/}"
 # De poort-wachttijd (minuten). Ruim boven linux-gate (~27 min, capacity-1
 # serial-runner, kan in de wachtrij staan); de oude 30 min liep daar precies op
 # stuk. De release start de drie handmatige workflows zelf en volgt hun taken;
@@ -362,6 +366,20 @@ live_web_version() { # → de versie op de live demo, leeg als die niet te lezen
     | head -n 1
 }
 
+# Lees de versie uit de release-downloadlinks die bezoekers daadwerkelijk op
+# librekat.nl krijgen. Een groene job bewijst alleen dat het publicatiescript met
+# status 0 eindigde; bij een verkeerde deployhost of achterlopende DNS kan dat
+# nog steeds de verkeerde website zijn (zoals bij v0.6.11 t/m v0.6.13).
+live_website_version() {
+  curl -fsSL --max-time 20 "$WEBSITE_URL" 2>/dev/null \
+    | awk 'match($0, /releases\/download\/v[0-9]+\.[0-9]+\.[0-9]+/) {
+        version = substr($0, RSTART, RLENGTH)
+        sub(/^.*\/v/, "", version)
+        print version
+        exit
+      }'
+}
+
 # --status vX.Y.Z: read-only overzicht van waar een release staat — geen mutatie,
 # geen wachtwoord, geen poort. Beantwoordt "waar ben ik?" na een afbreking en zegt
 # wat --resume nu zou doen. Leunt op TAG/NEW_VERSION/BRANCH die hierboven al bepaald
@@ -370,7 +388,8 @@ cmd_status() {
   read_token
   section "Status van $TAG"
   local has_branch=0 has_pr=0 pr_merged=0 has_tag_o=0 has_mirror=0 has_tag_m=0
-  local has_rel=0 has_sums=0 has_sig=0 sig_valid=0 web_live=0 live=""
+  local has_rel=0 has_sums=0 has_sig=0 sig_valid=0 web_live=0 website_live=0
+  local live="" website_version=""
   local prnum="" prstate="" pr rel assets
 
   git ls-remote --exit-code origin "refs/heads/$BRANCH" >/dev/null 2>&1 && has_branch=1
@@ -413,6 +432,8 @@ cmd_status() {
   # advies zei "controleer nog de live web-versie", en dat deed niemand.
   live="$(live_web_version)"
   [ "$live" = "$NEW_VERSION" ] && web_live=1
+  website_version="$(live_website_version)"
+  [ "$website_version" = "$NEW_VERSION" ] && website_live=1
 
   local prdesc
   if [ "$has_pr" -eq 0 ]; then prdesc="release-PR aangemaakt"
@@ -439,11 +460,20 @@ cmd_status() {
   local webdesc="webdemo op $DEPLOY_URL draait $NEW_VERSION"
   [ "$web_live" -eq 1 ] || webdesc="$webdesc (nu: ${live:-niet te lezen})"
   mark "$web_live" "$webdesc"
+  local websitedesc="downloadpagina op $WEBSITE_URL verwijst naar $TAG"
+  [ "$website_live" -eq 1 ] \
+    || websitedesc="$websitedesc (nu: ${website_version:+v$website_version}${website_version:-niet te lezen})"
+  mark "$website_live" "$websitedesc"
 
   section "Advies"
-  if [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
-    log "De release lijkt compleet. Controleer nog de downloadpagina."
+  if [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
+      && [ "$website_live" -eq 1 ] && { [ "$has_mirror" -eq 0 ] || [ "$has_tag_m" -eq 1 ]; }; then
+    log "De release is publiek compleet: artefacten, handtekening, webdemo en downloadpagina kloppen."
     log "Release: ${RELEASE_BASE_URL%/download}/tag/$TAG"
+  elif [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 1 ] \
+      && [ "$website_live" -eq 0 ]; then
+    log "Alles is uitgebracht en getekend, maar de publieke downloadpagina toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG."
+    log "Controleer de deployhost/DNS en publiceer de website opnieuw; --resume controleert daarna de publieke pagina."
   elif [ "$has_tag_o" -eq 1 ] && [ "$sig_valid" -eq 1 ] && [ "$web_live" -eq 0 ]; then
     log "Alles is uitgebracht en getekend, maar de webdemo draait ${live:-een onleesbare versie} in plaats van $NEW_VERSION."
     log "Zet hem live met:  scripts/release_auto.sh --resume $TAG"
@@ -1108,6 +1138,23 @@ phase3() {
       log "Website-downloads-job groen."
     fi
   fi
+
+  # De website-repo publiceert asynchroon na de bovenstaande job. Wacht daarom
+  # begrensd op de publieke naconditie. Status 0 van beide workflows is niet
+  # genoeg: v0.6.11 t/m v0.6.13 werden groen naar een nieuwe VPS gekopieerd,
+  # terwijl librekat.nl via DNS nog de oude VPS en v0.6.10 bediende.
+  local website_version="" website_live=0
+  for _ in $(seq 1 24); do
+    website_version="$(live_website_version)"
+    if [ "$website_version" = "$NEW_VERSION" ]; then
+      website_live=1
+      break
+    fi
+    sleep 15
+  done
+  [ "$website_live" -eq 1 ] \
+    || die "de website-jobs zijn klaar, maar $WEBSITE_URL toont ${website_version:+v$website_version}${website_version:-geen leesbare versie} in plaats van $TAG — controleer naar welke host librekat.nl wijst, publiceer de website daar en hervat: scripts/release_auto.sh --resume $TAG"
+  log "Publieke downloadpagina gecontroleerd: $WEBSITE_URL verwijst naar $TAG."
 }
 
 # Fase 3 bouwt de webdemo vanaf de tag en laat de werkboom dus op een losse HEAD
