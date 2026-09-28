@@ -261,10 +261,10 @@ void main() {
     final body = functionBody('ensure_mirror_tag');
     expect(
       body,
-      matches(RegExp(r'ls-remote[^\n]*\bmirror\b')),
+      contains('remote_tag_commit mirror'),
       reason:
-          'ensure_mirror_tag moet eerst toetsen of de tag al op de mirror staat '
-          '(idempotent), anders is een tweede run niet veilig.',
+          'ensure_mirror_tag moet de gepelde commit achter de mirror-tag toetsen '
+          '(naam alleen is onvoldoende en kan naar andere code wijzen).',
     );
     expect(
       body,
@@ -487,33 +487,14 @@ void main() {
     );
   });
 
-  // #8: verschijnt SHA256SUMS niet (publiceren faalde), dan dispatcht fase 3 de
-  // release-CI éénmalig opnieuw vóór het escaleren — geen directe dood meer.
-  test(
-    'fase 3 dispatcht de release-CI opnieuw als SHA256SUMS ontbreekt (#8)',
-    () {
-      final body = functionBody('phase3');
-      final redispatchIdx = body.indexOf('workflows/release.yml/dispatches');
-      final escalateIdx = body.indexOf('ook na een her-dispatch');
-      expect(
-        redispatchIdx,
-        isNonNegative,
-        reason:
-            'fase 3 moet release.yml opnieuw dispatchen als SHA256SUMS ontbreekt, '
-            'i.p.v. meteen te sterven.',
-      );
-      expect(
-        escalateIdx,
-        isNonNegative,
-        reason: 'verwacht een escalatie-melding ná de her-dispatch.',
-      );
-      expect(
-        redispatchIdx,
-        lessThan(escalateIdx),
-        reason: 'de her-dispatch moet vóór de escalatie staan.',
-      );
-    },
-  );
+  // Een ontbrekend manifest is een tegenstrijdige toestand. Automatisch de hele
+  // workflow herstarten kan dan bestaande assets vervangen en een tweede schrijver
+  // introduceren; fase 3 moet stoppen tot de oorzaak onderzocht is.
+  test('fase 3 dispatcht nooit blind opnieuw als SHA256SUMS ontbreekt', () {
+    final body = functionBody('phase3');
+    expect(body, isNot(contains('workflows/release.yml/dispatches')));
+    expect(body, contains('dispatch niet automatisch'));
+  });
 
   // Regressie: de notary-pre-flight gebruikte 'notarytool history --limit 1', maar
   // notarytool kent geen --limit (exit 64 = usage error) — daardoor blokkeerde de
@@ -768,6 +749,7 @@ void main() {
   test('cleanup_branch ruimt op, of zegt eerlijk dat het niet lukte', () {
     final snippet =
         'cleanup_failed() {\n${functionBody('cleanup_failed')}\n}\n'
+        'rollback_release_edits() {\n${functionBody('rollback_release_edits')}\n}\n'
         'cleanup_branch() {\n${functionBody('cleanup_branch')}\n}\n';
 
     ({String out, bool branchLeft, String head}) play({
@@ -797,7 +779,7 @@ void main() {
       }
       File('${dir.path}/run.sh').writeAsStringSync(
         'set -Eeuo pipefail\n'
-        'START_BRANCH=$startBranch\nBRANCH=rel\nCLEANUP_BACK=""\n'
+        'START_BRANCH=$startBranch\nBRANCH=rel\nBRANCH_OWNED=1\nCLEANUP_BACK=""\n'
         '$snippet\ncleanup_branch\n',
       );
       final r = Process.runSync('bash', [

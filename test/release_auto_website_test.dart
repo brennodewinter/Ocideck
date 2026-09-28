@@ -37,6 +37,9 @@ void main() {
 <a href="https://forge.invalid/releases/download/v$websiteVersion/ocideck-linux-amd64-$websiteVersion.deb">
   OciDeck $websiteVersion downloaden
 </a>
+<a href="https://forge.invalid/releases/download/v$websiteVersion/ocideck-linux-x86_64-$websiteVersion.AppImage">AppImage</a>
+<a href="https://forge.invalid/releases/download/v$websiteVersion/ocideck-macos-$websiteVersion.zip">macOS</a>
+<a href="https://forge.invalid/releases/download/v$websiteVersion/ocideck-windows-x64-setup-$websiteVersion.exe">Windows</a>
 ''');
     final harness = File('${dir.path}/harness.sh');
     harness.writeAsStringSync('''
@@ -75,9 +78,11 @@ api() {
     'GET /actions/tasks?limit=100')
       printf '%s\\n' '{"workflow_runs":[{"head_branch":"v9.9.9","status":"success","name":"Website-downloads bijwerken"}]}'
       ;;
-    'GET /releases/41/assets') printf '%s\\n' '[]' ;;
+    'GET /releases/41/assets')
+      printf '%s\\n' '[{"name":"ocideck-web-9.9.9.tar.gz"},{"name":"ocideck-linux-x64-9.9.9.tar.gz"},{"name":"ocideck-linux-amd64-9.9.9.deb"},{"name":"ocideck-linux-x86_64-9.9.9.rpm"},{"name":"ocideck-linux-x86_64-9.9.9.AppImage"},{"name":"ocideck-macos-9.9.9.zip"},{"name":"ocideck-windows-x64-9.9.9.zip"},{"name":"ocideck-windows-x64-setup-9.9.9.exe"},{"name":"ocideck-9.9.9.cdx.json"},{"name":"ocideck-9.9.9.spdx.json"},{"name":"SHA256SUMS"}]'
+      ;;
     'GET /releases/tags/v9.9.9') printf '%s\\n' '{"id":41}' ;;
-    'POST /releases/41/assets?name=SHA256SUMS.minisig.new')
+    POST\\ /releases/41/assets?name=SHA256SUMS.minisig.new.*)
       printf '%s\\n' '{"id":77}'
       ;;
     *) printf '%s\\n' '{}' ;;
@@ -101,7 +106,9 @@ curl() {
       printf 'signature\\n' >"\$out"
       ;;
     */SHA256SUMS)
-      printf 'manifest\\n' >"\$out"
+      for asset in \$(expected_release_assets); do
+        printf '%064d  ./%s\\n' 0 "\$asset"
+      done >"\$out"
       ;;
     *) return 22 ;;
   esac

@@ -99,6 +99,9 @@ log() { printf '%s\\n' "\$1"; }
 make() { printf 'MAKE %s op %s\\n' "\$*" "\$(git rev-parse HEAD)"; }
 $mocksAndCall
 ''');
+    File(
+      '${repo.path}/.git/info/exclude',
+    ).writeAsStringSync('.harness.sh\n.al-gedeployd\n', mode: FileMode.append);
     return Process.runSync('bash', [harness.path], workingDirectory: repo.path);
   }
 

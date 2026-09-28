@@ -924,7 +924,10 @@ Each non-prerelease tag also updates a Homebrew **cask**, so macOS users can
 `brew install --cask librekat/ocideck/ocideck` after tapping our forge. The cask
 is only a pointer: it
 carries the release's download URL and the SHA-256 read straight from the
-published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. It is
+published `SHA256SUMS`, so `brew` fetches our own artifact and verifies it. The
+updater first downloads `SHA256SUMS.minisig` and verifies the list against the
+repository's `minisign.pub`; a missing or invalid signature stops the update
+before a hash is read or a cask is written. It is
 **macOS-only** — Homebrew Cask has no Linux equivalent; a Linux install path is
 tracked separately (#1227).
 
@@ -998,7 +1001,9 @@ tracked separately (#1227).
 The WinGet Community Repository is an optional index over the existing Inno
 Setup installer. It does not host a different build: the manifest points to the
 versioned asset on the canonical Forgejo release and pins its SHA-256 from that
-release's own `SHA256SUMS`. Direct download remains available if Microsoft is
+release's own `SHA256SUMS`. The generator accepts that hash only after the
+matching `SHA256SUMS.minisig` verifies against the repository's `minisign.pub`.
+Direct download remains available if Microsoft is
 unreachable or its review is delayed.
 
 Only generate a manifest after the stable release is final:
@@ -1062,7 +1067,10 @@ feature-flag) are in
 ### AUR package
 
 `packaging/aur/PKGBUILD` is `ocideck-bin`: it installs the release tarball on
-Arch/Manjaro, verified against the published `SHA256SUMS`. Publishing is a
+Arch/Manjaro, verified against the published `SHA256SUMS`. The updater verifies
+the release's `SHA256SUMS.minisig` against `minisign.pub` before it reads that
+list; missing tooling, key, signature, or a failed verification leaves the
+PKGBUILD unchanged. Publishing is a
 maintainer step — it needs an AUR account and a registered SSH key, like the
 Homebrew tap, so it is **not** wired into the release chain. Per release:
 
@@ -1261,6 +1269,12 @@ Per release, after the workflow has published the tag:
 
 A recipient verifies with `minisign -Vm SHA256SUMS -p minisign.pub`.
 `OCIDECK_RELEASE_KEY` overrides the key path for a different signer.
+
+The Homebrew, AUR and WinGet metadata generators apply this same check before
+copying a checksum into downstream package metadata. For an offline/local run,
+set `SHA256SUMS_FILE` to the manifest; its signature is expected next to it as
+`<path>.minisig`, or can be named explicitly with
+`SHA256SUMS_SIGNATURE_FILE`. There is no unsigned mode.
 
 ##### Backing up and escrowing the key
 

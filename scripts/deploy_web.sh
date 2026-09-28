@@ -15,9 +15,10 @@
 #      uit te gaan;
 #   2. uitpakken gebeurt náást de live map, niet erin — een `rsync` over de
 #      draaiende site laat bezoekers een mengsel van oud en nieuw zien;
-#   3. de wissel is een `mv` van twee mappen, dus ondeelbaar voor de webserver;
+#   3. één hostbrede lock voorkomt twee gelijktijdige deploys; Linux
+#      `renameat2(RENAME_EXCHANGE)` wisselt oud en nieuw in één syscall;
 #   4. de oude map blijft als `.bak-<datum>` staan tot de liveverificatie
-#      groen is, zodat terugdraaien één `mv` is en geen herbouw.
+#      groen is; bij elke fout wordt hij automatisch teruggezet.
 #
 # Gebruik:
 #   make build-web && scripts/deploy_web.sh
@@ -33,6 +34,11 @@ set -Eeuo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
+
+for cmd in dart git shasum tar du cut uname scp ssh curl cmp; do
+  command -v "$cmd" >/dev/null 2>&1 \
+    || { echo "Ontbrekend commando: $cmd" >&2; exit 1; }
+done
 
 HOST="${OCIDECK_DEPLOY_HOST:-ubuntu@vps-40edd80f.vps.ovh.net}"
 WEBROOT="${OCIDECK_DEPLOY_ROOT:-/var/www/ocideck}"
@@ -57,10 +63,8 @@ log() { printf '\n== %s ==\n' "$1"; }
 # in een container nooit komt — en dan hangt de job tot de timeout van drie uur
 # in plaats van meteen te zeggen wat er mis is. Met de hand juist níet: daar
 # hoort een sleutel met wachtwoord uit de ssh-agent gewoon te werken.
-SSH_OPTS=()
-if [[ -n "${CI:-}" ]]; then
-  SSH_OPTS=(-o BatchMode=yes -o StrictHostKeyChecking=yes)
-fi
+SSH_OPTS=(-o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+  -o ServerAliveInterval=15 -o ServerAliveCountMax=2)
 
 # --- 1. Is er iets te deployen, en klopt het? --------------------------------
 
@@ -116,6 +120,12 @@ if (( DRY_RUN )); then
   exit 0
 fi
 
+# De wissel mag niet pas halverwege ontdekken dat de host een vereiste mist.
+# Deze proef verandert niets op de host en loopt vóór uploaden en uitpakken.
+ssh "${SSH_OPTS[@]}" "$HOST" \
+  "command -v flock python3 sudo tar >/dev/null && sudo -n true && python3 -c 'import ctypes; assert hasattr(ctypes.CDLL(None), \"renameat2\")'" \
+  || { echo "Deploy-host mist wachtwoordloze sudo, flock, python3, tar of renameat2." >&2; exit 1; }
+
 # --- 2. Uploaden ------------------------------------------------------------
 
 log "Uploaden naar $HOST"
@@ -138,29 +148,63 @@ OWNER="$2"
 TARBALL="$3"
 STAMP="$4"
 
-NEW="$WEBROOT.new"
 BAK="$WEBROOT.bak-$STAMP"
+NEW="$WEBROOT.new-$STAMP-$$"
+LOCK="$WEBROOT.deploy.lock"
 
-sudo rm -rf "$NEW"
-sudo mkdir -p "$NEW"
-sudo tar -C "$NEW" -xzf "$TARBALL"
+sudo -n touch "$LOCK"
+sudo -n chown "${OWNER%%:*}" "$LOCK"
+exec 9>"$LOCK"
+flock -n 9 || { echo "Er draait al een deploy voor $WEBROOT." >&2; exit 1; }
+
+rollback() {
+  local ec=$?
+  trap - ERR INT TERM
+  if [ -d "$BAK" ] && [ -f "$WEBROOT/.ocideck-deploy-id" ] \
+      && [ "$(cat "$WEBROOT/.ocideck-deploy-id")" = "$STAMP" ]; then
+    sudo -n python3 - "$WEBROOT" "$BAK" <<'PY'
+import ctypes, os, sys
+libc = ctypes.CDLL(None, use_errno=True)
+if libc.renameat2(-100, os.fsencode(sys.argv[1]), -100, os.fsencode(sys.argv[2]), 2) != 0:
+    raise OSError(ctypes.get_errno(), "renameat2 rollback failed")
+PY
+    echo "Deploy teruggerold naar de vorige versie." >&2
+  fi
+  sudo -n rm -rf "$NEW"
+  exit "$ec"
+}
+trap rollback ERR INT TERM
+
+sudo -n mkdir -p "$NEW"
+sudo -n tar -C "$NEW" -xzf "$TARBALL"
 rm -f "$TARBALL"
+printf '%s\n' "$STAMP" | sudo -n tee "$NEW/.ocideck-deploy-id" >/dev/null
 
 # Bestandsrechten worden al door `make build-web` genormaliseerd (644/755);
 # hier gaat het om het eigendom, want de tarball draagt de uid van de
 # bouwmachine mee en die bestaat op de server niet.
-sudo chown -R "$OWNER" "$NEW"
+sudo -n chown -R "$OWNER" "$NEW"
 
 if [ -d "$WEBROOT" ]; then
-  sudo mv "$WEBROOT" "$BAK"
+  # Linux renameat2(RENAME_EXCHANGE) wisselt beide mappen in één syscall: er is
+  # nooit een moment zonder live webroot. Daarna bevat NEW de vorige versie.
+  sudo -n python3 - "$WEBROOT" "$NEW" <<'PY'
+import ctypes, os, sys
+libc = ctypes.CDLL(None, use_errno=True)
+if libc.renameat2(-100, os.fsencode(sys.argv[1]), -100, os.fsencode(sys.argv[2]), 2) != 0:
+    raise OSError(ctypes.get_errno(), "renameat2 exchange failed")
+PY
+  sudo -n mv "$NEW" "$BAK"
   echo "Vorige versie bewaard als $BAK"
+else
+  sudo -n mv "$NEW" "$WEBROOT"
 fi
-sudo mv "$NEW" "$WEBROOT"
 
 # De topmap zelf hoort aan de webservergroep, anders leest nginx/Caddy er niet
 # in wanneer de eigenaar restrictiever staat dan de bestanden eronder.
-sudo chown "${OWNER%%:*}:www-data" "$WEBROOT"
+sudo -n chown "${OWNER%%:*}:www-data" "$WEBROOT"
 echo "Live: $WEBROOT"
+trap - ERR INT TERM
 REMOTE
 
 # --- 4. Liveverificatie -----------------------------------------------------
@@ -173,27 +217,48 @@ REMOTE
 log "Liveverificatie op $LIVE_URL"
 REMOTE_INDEX="$WERKMAP/index.html.live"
 
-if ! curl -fsSL --max-time 30 "$LIVE_URL/index.html" -o "$REMOTE_INDEX"; then
+rollback_remote() {
+  ssh "${SSH_OPTS[@]}" "$HOST" bash -s -- "$WEBROOT" "$STAMP" <<'REMOTE'
+set -euo pipefail
+WEBROOT="$1"; STAMP="$2"; BAK="$WEBROOT.bak-$STAMP"; LOCK="$WEBROOT.deploy.lock"
+exec 9>"$LOCK"; flock -w 30 9
+[ -d "$BAK" ] || exit 0
+[ -f "$WEBROOT/.ocideck-deploy-id" ] || exit 0
+[ "$(cat "$WEBROOT/.ocideck-deploy-id")" = "$STAMP" ] || exit 0
+sudo -n python3 - "$WEBROOT" "$BAK" <<'PY'
+import ctypes, os, sys
+libc = ctypes.CDLL(None, use_errno=True)
+if libc.renameat2(-100, os.fsencode(sys.argv[1]), -100, os.fsencode(sys.argv[2]), 2) != 0:
+    raise OSError(ctypes.get_errno(), "renameat2 rollback failed")
+PY
+sudo -n rm -rf "$BAK"
+REMOTE
+}
+
+if ! curl -fsSL --connect-timeout 10 --max-time 30 "$LIVE_URL/index.html" -o "$REMOTE_INDEX"; then
   echo "Kon $LIVE_URL/index.html niet ophalen. De wissel is wél gedaan;" >&2
-  echo "controleer de site met de hand voordat je de backup opruimt." >&2
+  echo "de nieuwe versie wordt automatisch teruggerold." >&2
+  rollback_remote
   exit 1
 fi
 
 if ! cmp -s "$REMOTE_INDEX" build/web/index.html; then
   echo "De live index.html verschilt van de bundel die net is neergezet." >&2
   echo "Waarschijnlijk een cache ertussen. De backup blijft staan; controleer" >&2
-  echo "de site en ruim pas op als het klopt." >&2
+  echo "de site; de live map wordt nu teruggerold." >&2
+  rollback_remote
   exit 1
 fi
 echo "index.html live en identiek aan de bundel."
 
 # De SHA256SUMS-lijst reist mee in de bundel, dus die is óók op te halen. Dat
 # is de sterkere controle: hij dekt elk bestand, niet alleen de pagina.
-if curl -fsSL --max-time 30 "$LIVE_URL/SHA256SUMS" | cmp -s - build/web/SHA256SUMS; then
+if curl -fsSL --connect-timeout 10 --max-time 30 "$LIVE_URL/SHA256SUMS" | cmp -s - build/web/SHA256SUMS; then
   echo "SHA256SUMS live en identiek — de hele bundel staat er goed op."
 else
   echo "Let op: /SHA256SUMS wijkt af of is niet bereikbaar." >&2
-  echo "De backup blijft staan." >&2
+  echo "De live map wordt teruggerold." >&2
+  rollback_remote
   exit 1
 fi
 
@@ -209,7 +274,7 @@ else
   log "Backup opruimen"
   ssh "${SSH_OPTS[@]}" "$HOST" bash -s -- "$WEBROOT.bak-$STAMP" <<'REMOTE'
 set -euo pipefail
-sudo rm -rf "$1"
+sudo -n rm -rf "$1"
 REMOTE
   echo "Opgeruimd: $WEBROOT.bak-$STAMP"
 fi

@@ -87,9 +87,14 @@ void main() {
       for (final action in actions) {
         final uses = action['uses'] as String;
         final version = action['version'] as String;
+        final sha = action['sha'] as String?;
+        final pin = sha ?? version;
         for (final path in (action['workflows'] as List).cast<String>()) {
-          if (!workflows[path]!.contains('uses: $uses@$version')) {
-            wrong.add('$path is missing `uses: $uses@$version`');
+          if (!workflows[path]!.contains('uses: $uses@$pin')) {
+            wrong.add('$path is missing `uses: $uses@$pin`');
+          }
+          if (sha != null && !workflows[path]!.contains('# $version')) {
+            wrong.add('$path does not document `$uses@$sha` as `$version`');
           }
         }
       }
@@ -165,6 +170,12 @@ void main() {
           'source',
           'api',
         ], 'action ${action['uses']}');
+        if (action['source'] == 'github_ref') {
+          final sha = action['sha'];
+          if (sha is! String || !RegExp(r'^[0-9a-f]{40}$').hasMatch(sha)) {
+            broken.add('action ${action['uses']} has no 40-hex `sha`');
+          }
+        }
       }
       for (final tool in tools) {
         require(tool, [
@@ -184,7 +195,7 @@ void main() {
       // An unknown source would make `make check-pins` exit 2 rather than
       // report a stale pin — a monitor that cannot run is a monitor that says
       // nothing, so it fails here instead, in the gate everyone runs.
-      const known = {'github_release', 'pypi'};
+      const known = {'github_release', 'github_ref', 'pypi'};
       final unknown = [
         for (final entry in [...actions, ...tools])
           if (!known.contains(entry['source']))
