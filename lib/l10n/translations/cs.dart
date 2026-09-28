@@ -1628,6 +1628,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Downloaden…': 'Stáhnout…',
+  'Afbeelding opgeslagen als': 'Obrázek uložen jako',
   '{naam}: ingesteld': '{naam}: nastaveno',
   '{naam}: niet ingesteld': '{naam}: nenastaveno',
   'Er is geen nieuwere versie — tik om de controle te openen.':

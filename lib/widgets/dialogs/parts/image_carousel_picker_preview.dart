@@ -114,57 +114,13 @@ extension _CarouselPreview on _ImageCarouselPickerState {
               onChanged: (value) => _descriptions[_selected!] = value.trim(),
             ),
             const SizedBox(height: 10),
-            // Wrap i.p.v. Row: op de smalle previewkolom stapelen de knoppen
-            // netjes onder elkaar in plaats van de Row te laten overlopen.
-            Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              runSpacing: 4,
-              children: [
-                TextButton.icon(
-                  onPressed: _justCopied ? null : _copySelectedToClipboard,
-                  icon: Icon(
-                    _justCopied ? Icons.check : Icons.content_copy_outlined,
-                    size: 16,
-                  ),
-                  label: Text(
-                    _justCopied ? l10n.d('Gekopieerd') : l10n.d('Kopiëren'),
-                  ),
-                  style: TextButton.styleFrom(
-                    foregroundColor: _justCopied
-                        ? ImagePickerPalette.success
-                        : ImagePickerPalette.textMuted,
-                    disabledForegroundColor: ImagePickerPalette.success,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                  ),
-                ),
-                TextButton.icon(
-                  onPressed: _renameSelected,
-                  icon: const Icon(Icons.edit_outlined, size: 16),
-                  label: Text(l10n.d('Hernoemen')),
-                  style: TextButton.styleFrom(
-                    foregroundColor: ImagePickerPalette.textMuted,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                  ),
-                ),
-                TextButton.icon(
-                  onPressed: _deleteSelected,
-                  icon: const Icon(Icons.delete_outline, size: 16),
-                  label: Text(l10n.d('Verwijderen')),
-                  style: TextButton.styleFrom(
-                    foregroundColor: ImagePickerPalette.dangerSoft,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                  ),
-                ),
-              ],
+            _previewActions(
+              justCopied: _justCopied,
+              onCopy: _copySelectedToClipboard,
+              onDownload: _downloadSelected,
+              onRename: _renameSelected,
+              onDelete: _deleteSelected,
+              l10n: l10n,
             ),
           ],
         ),
@@ -355,6 +311,75 @@ extension _CarouselPreview on _ImageCarouselPickerState {
     }
     return path;
   }
+}
+
+/// De actieknoppen onder de metadatavelden: klembord, download, hernoemen en
+/// verwijderen. Wrap i.p.v. Row: op de smalle previewkolom stapelen de knoppen
+/// netjes onder elkaar in plaats van de Row te laten overlopen.
+///
+/// Top-level zoals [_metaField]: de knoppen krijgen hun toestand en acties als
+/// parameters mee, dus ze horen niet op de State en tellen niet mee voor de
+/// klassegrootte-ratchet.
+Widget _previewActions({
+  required bool justCopied,
+  required VoidCallback onCopy,
+  required VoidCallback onDownload,
+  required VoidCallback onRename,
+  required VoidCallback onDelete,
+  required AppLocalizations l10n,
+}) {
+  TextButton action({
+    required VoidCallback? onPressed,
+    required IconData icon,
+    required String label,
+    required Color color,
+    Color? disabledColor,
+  }) {
+    return TextButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon, size: 16),
+      label: Text(label),
+      style: TextButton.styleFrom(
+        foregroundColor: color,
+        disabledForegroundColor: disabledColor,
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      ),
+    );
+  }
+
+  return Wrap(
+    alignment: WrapAlignment.spaceBetween,
+    runSpacing: 4,
+    children: [
+      action(
+        onPressed: justCopied ? null : onCopy,
+        icon: justCopied ? Icons.check : Icons.content_copy_outlined,
+        label: justCopied ? l10n.d('Gekopieerd') : l10n.d('Kopiëren'),
+        color: justCopied
+            ? ImagePickerPalette.success
+            : ImagePickerPalette.textMuted,
+        disabledColor: ImagePickerPalette.success,
+      ),
+      action(
+        onPressed: onDownload,
+        icon: Icons.download_outlined,
+        label: l10n.d('Downloaden…'),
+        color: ImagePickerPalette.textMuted,
+      ),
+      action(
+        onPressed: onRename,
+        icon: Icons.edit_outlined,
+        label: l10n.d('Hernoemen'),
+        color: ImagePickerPalette.textMuted,
+      ),
+      action(
+        onPressed: onDelete,
+        icon: Icons.delete_outline,
+        label: l10n.d('Verwijderen'),
+        color: ImagePickerPalette.dangerSoft,
+      ),
+    ],
+  );
 }
 
 /// Een metadata-tekstveld (caption/beschrijving) in de donkere previewstijl.

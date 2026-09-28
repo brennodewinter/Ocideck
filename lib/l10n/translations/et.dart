@@ -1620,6 +1620,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Downloaden…': 'Laadi alla…',
+  'Afbeelding opgeslagen als': 'Pilt salvestatud nimega',
   '{naam}: ingesteld': '{naam}: seadistatud',
   '{naam}: niet ingesteld': '{naam}: seadistamata',
   'Er is geen nieuwere versie — tik om de controle te openen.':

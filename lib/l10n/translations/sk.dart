@@ -1633,6 +1633,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Downloaden…': 'Stiahnuť…',
+  'Afbeelding opgeslagen als': 'Obrázok uložený ako',
   '{naam}: ingesteld': '{naam}: nastavené',
   '{naam}: niet ingesteld': '{naam}: nenastavené',
   'Er is geen nieuwere versie — tik om de controle te openen.':

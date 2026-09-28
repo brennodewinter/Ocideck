@@ -726,6 +726,44 @@ extension _CarouselActions on _ImageCarouselPickerState {
     }
   }
 
+  /// Sla een kopie van de geselecteerde afbeelding op een plek naar keuze op:
+  /// op desktop via het systeem-bewaarvenster, op web als browserdownload —
+  /// daar is geen map om naar te wijzen, dus de bytes gaan uit zoals bij elke
+  /// export (#1902). De bron blijft ongemoeid in het archief staan.
+  Future<void> _downloadSelected() async {
+    final path = _selected;
+    if (path == null) return;
+    final l10n = context.l10n;
+    final name = p.basename(path);
+    if (deliversByDownload) {
+      final bytes = await ImageService().readSlideImageBytes(path);
+      if (!mounted) return;
+      if (bytes == null ||
+          deliverAsDownload([(name: name, bytes: bytes)], bundleName: name) ==
+              null) {
+        _showSnack(
+          l10n.d(
+            'De browser heeft de download niet aangenomen. Sta downloads voor deze site toe en probeer het opnieuw.',
+          ),
+        );
+        return;
+      }
+      _showSnack(l10n.d('Opgeslagen als download in je map met downloads.'));
+      return;
+    }
+    final target = await pickImageDownloadDestination(fileName: name);
+    if (target == null || !mounted) return;
+    try {
+      await File(path).copy(target);
+    } on FileSystemException catch (e) {
+      logWarning('ImageCarouselPicker._downloadSelected: copy', e);
+      if (!mounted) return;
+      _showSnack(l10n.d('Kon de afbeelding niet opslaan.'));
+      return;
+    }
+    _showSnack('${l10n.d('Afbeelding opgeslagen als')} ${p.basename(target)}');
+  }
+
   /// Filter de deckbestanden op schijf die niet in een tab geopend zijn
   /// (open decks zijn al gedekt door [ImageCarouselPicker.usageOf]).
   List<String> _withoutOpenDecks(List<String> deckFiles) {
@@ -929,4 +967,20 @@ Future<String?> adoptImageBytesIntoArchive(
     logWarning('adoptImageBytesIntoArchive: write', e);
     return null;
   }
+}
+
+/// Test-seam: het systeem-bewaarvenster bestaat niet onder `flutter test` —
+/// precies de reden dat [SaveDestinationPicker] bij FileService bestaat. Een
+/// test zet hem in `setUp` en herstelt hem in `tearDown`.
+@visibleForTesting
+Future<String?> Function({String? fileName})? debugImageDownloadDestination;
+
+/// Vraagt de gebruiker om een bestemmingspad voor een kopie van een
+/// archiefafbeelding. `getSaveLocation` levert alleen het pad — de kopie zelf
+/// gaat daarna via `File.copy`, zodat de schrijfwijze in eigen hand blijft
+/// (dezelfde werkwijze als bij een document-export). Null bij annuleren.
+Future<String?> pickImageDownloadDestination({required String fileName}) async {
+  final pick = debugImageDownloadDestination;
+  if (pick != null) return pick(fileName: fileName);
+  return (await getSaveLocation(suggestedName: fileName))?.path;
 }

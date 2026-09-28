@@ -664,6 +664,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Downloaden…': 'Scarica…',
+  'Afbeelding opgeslagen als': 'Immagine salvata come',
   '{naam}: ingesteld': '{naam}: configurato',
   '{naam}: niet ingesteld': '{naam}: non configurato',
   'Er is geen nieuwere versie — tik om de controle te openen.':

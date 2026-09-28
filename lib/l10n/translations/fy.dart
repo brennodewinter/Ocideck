@@ -667,6 +667,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Downloaden…': 'Downloade…',
+  'Afbeelding opgeslagen als': 'Ofbylding opslein as',
   '{naam}: ingesteld': '{naam}: ynsteld',
   '{naam}: niet ingesteld': '{naam}: net ynsteld',
   'Er is geen nieuwere versie — tik om de controle te openen.':

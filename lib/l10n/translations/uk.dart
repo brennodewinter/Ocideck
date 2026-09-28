@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Downloaden…': 'Завантажити…',
+  'Afbeelding opgeslagen als': 'Зображення збережено як',
   '{naam}: ingesteld': '{naam}: налаштовано',
   '{naam}: niet ingesteld': '{naam}: не налаштовано',
   'Er is geen nieuwere versie — tik om de controle te openen.':

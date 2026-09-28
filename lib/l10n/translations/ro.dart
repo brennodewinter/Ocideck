@@ -1643,6 +1643,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Downloaden…': 'Descarcă…',
+  'Afbeelding opgeslagen als': 'Imagine salvată ca',
   '{naam}: ingesteld': '{naam}: configurat',
   '{naam}: niet ingesteld': '{naam}: neconfigurat',
   'Er is geen nieuwere versie — tik om de controle te openen.':
