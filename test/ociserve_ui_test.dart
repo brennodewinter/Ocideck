@@ -612,15 +612,18 @@ void main() {
     expect(find.text('Mijn leeromgeving'), findsOneWidget);
   });
 
-  testWidgets('welkomstscherm verbergt eLearning als de uitbreiding uitstaat', (
+  testWidgets('welkomstscherm verbergt eLearning als volgen uitstaat', (
     tester,
   ) async {
+    // "eLearning volgen" uit is de schakelaar achter de knop — de
+    // maken-module staat hier bewust aan.
     await _pumpApp(
       tester,
       _FixedOciServeNotifier(
-        _authenticated.copyWith(errorCode: 'connection_failed'),
+        _authenticated.copyWith(
+          settings: const OciServeSettings(enabled: false),
+        ),
       ),
-      elearningEnabled: false,
     );
 
     expect(find.text('Inloggen'), findsNothing);
@@ -630,6 +633,23 @@ void main() {
       find.textContaining('Aanmelden bij eLearning is niet gelukt'),
       findsNothing,
     );
+  });
+
+  testWidgets('volgen aan zonder maken-module toont de inlogknop', (
+    tester,
+  ) async {
+    await _pumpApp(
+      tester,
+      _FixedOciServeNotifier(
+        const OciServeState(
+          settings: OciServeSettings(enabled: true),
+          status: OciServeStatus.signedOut,
+        ),
+      ),
+      elearningEnabled: false,
+    );
+
+    expect(find.text('Inloggen'), findsOneWidget);
   });
 
   testWidgets('een aanmeldfout wordt niet als verbindingsfout aangeduid', (
