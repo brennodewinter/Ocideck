@@ -1626,6 +1626,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Downloaden…': 'Ladda ned…',
+  'Afbeelding opgeslagen als': 'Bild sparad som',
   '{naam}: ingesteld': '{naam}: konfigurerad',
   '{naam}: niet ingesteld': '{naam}: inte konfigurerad',
   'Er is geen nieuwere versie — tik om de controle te openen.':

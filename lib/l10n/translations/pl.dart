@@ -1639,6 +1639,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Downloaden…': 'Pobierz…',
+  'Afbeelding opgeslagen als': 'Obraz zapisano jako',
   '{naam}: ingesteld': '{naam}: skonfigurowany',
   '{naam}: niet ingesteld': '{naam}: nieskonfigurowany',
   'Er is geen nieuwere versie — tik om de controle te openen.':

@@ -1634,6 +1634,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Downloaden…': 'Atsisiųsti…',
+  'Afbeelding opgeslagen als': 'Vaizdas išsaugotas kaip',
   '{naam}: ingesteld': '{naam}: sukonfigūruotas',
   '{naam}: niet ingesteld': '{naam}: nesukonfigūruotas',
   'Er is geen nieuwere versie — tik om de controle te openen.':

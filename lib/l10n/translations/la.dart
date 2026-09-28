@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Downloaden…': 'Deprome…',
+  'Afbeelding opgeslagen als': 'Imago servata ut',
   '{naam}: ingesteld': '{naam}: institutus',
   '{naam}: niet ingesteld': '{naam}: non institutus',
   'Er is geen nieuwere versie — tik om de controle te openen.':

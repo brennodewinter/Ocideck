@@ -664,6 +664,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Downloaden…': 'Descargar…',
+  'Afbeelding opgeslagen als': 'Imagen guardada como',
   '{naam}: ingesteld': '{naam}: configurado',
   '{naam}: niet ingesteld': '{naam}: no configurado',
   'Er is geen nieuwere versie — tik om de controle te openen.':

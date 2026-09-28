@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Downloaden…': 'Niżżel…',
+  'Afbeelding opgeslagen als': 'Immaġini ssejvjata bħala',
   '{naam}: ingesteld': '{naam}: issettjat',
   '{naam}: niet ingesteld': '{naam}: mhux issettjat',
   'Er is geen nieuwere versie — tik om de controle te openen.':

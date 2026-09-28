@@ -1625,6 +1625,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Downloaden…': 'Lejupielādēt…',
+  'Afbeelding opgeslagen als': 'Attēls saglabāts kā',
   '{naam}: ingesteld': '{naam}: iestatīts',
   '{naam}: niet ingesteld': '{naam}: nav iestatīts',
   'Er is geen nieuwere versie — tik om de controle te openen.':
