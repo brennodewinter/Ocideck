@@ -30,7 +30,6 @@
       "ro": "Monitorizarea microfonului activată",
       "sl": "Spremljanje mikrofona vključeno",
       "sk": "Odpočúvanie mikrofónu zapnuté",
-      "tlh": "mIq law' DuQmoH",
       "tr": "Mikrofon geçişi açık"
     },
     "Microfoon-doorvoer uit": {
@@ -63,7 +62,6 @@
       "ro": "Monitorizarea microfonului dezactivată",
       "sl": "Spremljanje mikrofona izključeno",
       "sk": "Odpočúvanie mikrofónu vypnuté",
-      "tlh": "mIq law' DuQmoHbe'",
       "tr": "Mikrofon geçişi kapalı"
     },
     "Microfoon-doorvoer aan (V)": {
@@ -96,7 +94,6 @@
       "ro": "Monitorizarea microfonului activată (V)",
       "sl": "Spremljanje mikrofona vključeno (V)",
       "sk": "Odpočúvanie mikrofónu zapnuté (V)",
-      "tlh": "mIq law' DuQmoH (V)",
       "tr": "Mikrofon geçişi açık (V)"
     },
     "De microfoon kon niet worden aangeschakeld": {
@@ -129,7 +126,6 @@
       "ro": "Microfonul nu a putut fi activat",
       "sl": "Mikrofona ni bilo mogoče vključiti",
       "sk": "Mikrofón sa nepodarilo zapnúť",
-      "tlh": "mIq law' cholHa'",
       "tr": "Mikrofon açılamadı"
     },
     "Geef OciDeck toegang tot de microfoon in de systeeminstellingen, en controleer dat er een invoerapparaat is aangesloten.": {
@@ -162,7 +158,6 @@
       "ro": "Acordați OciDeck acces la microfon din setările de sistem și verificați dacă este conectat un dispozitiv de intrare.",
       "sl": "V sistemske nastavitve dovoli OciDecku dostop do mikrofona in preveri, ali je priključena vhodna naprava.",
       "sk": "Udeľte OciDecku prístup k mikrofónu v nastaveniach systému a skontrolujte, či je pripojené vstupné zariadenie.",
-      "tlh": "OciDeck mIq law' chav ghom'a' chaw', 'ej input SeH yenpu' patlhchu'.",
       "tr": "Sistem ayarlarında OciDeck'e mikrofon erişimi verin ve bir giriş aygıtının bağlı olduğunu denetleyin."
     },
     "Open systeeminstellingen": {
@@ -195,7 +190,6 @@
       "ro": "Deschide setările de sistem",
       "sl": "Odpri sistemske nastavitve",
       "sk": "Otvoriť nastavenia systému",
-      "tlh": "SeH patlh poSmoH",
       "tr": "Sistem ayarlarını aç"
     }
   }

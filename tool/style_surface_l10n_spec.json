@@ -30,7 +30,6 @@
       "ro": "Se aplică documentelor și prezentărilor",
       "sl": "Velja za dokumente in predstavitve",
       "sk": "Platí pre dokumenty aj prezentácie",
-      "tlh": "ghItlhmey cha'navmey je",
       "tr": "Belgeler ve sunumlar için geçerlidir"
     },
     "Alleen voor documenten": {
@@ -63,7 +62,6 @@
       "ro": "Doar pentru documente",
       "sl": "Samo za dokumente",
       "sk": "Len pre dokumenty",
-      "tlh": "ghItlhmey neH",
       "tr": "Yalnızca belgeler için"
     },
     "Alleen voor presentaties": {
@@ -96,7 +94,6 @@
       "ro": "Doar pentru prezentări",
       "sl": "Samo za predstavitve",
       "sk": "Len pre prezentácie",
-      "tlh": "cha'navmey neH",
       "tr": "Yalnızca sunumlar için"
     }
   }

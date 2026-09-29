@@ -30,7 +30,6 @@
       "ro": "Zi",
       "sl": "Dan",
       "sk": "Deň",
-      "tlh": "jaj",
       "tr": "Gün"
     },
     "Week": {
@@ -63,7 +62,6 @@
       "ro": "Săptămână",
       "sl": "Teden",
       "sk": "Týždeň",
-      "tlh": "Hogh",
       "tr": "Hafta"
     },
     "Maand": {
@@ -96,7 +94,6 @@
       "ro": "Lună",
       "sl": "Mesec",
       "sk": "Mesiac",
-      "tlh": "tera'",
       "tr": "Ay"
     },
     "Tijdschaal": {
@@ -129,7 +126,6 @@
       "ro": "Scară de timp",
       "sl": "Časovna lestvica",
       "sk": "Časová mierka",
-      "tlh": "poH ngogh",
       "tr": "Zaman ölçeği"
     },
     "De as-granulariteit van het Gantt-diagram. \u201cAuto\u201d kiest op basis van het datumbereik van de taken.": {
@@ -162,7 +158,6 @@
       "ro": "Granularitatea axei diagramei Gantt. \u201cAuto\u201d alege în funcție de intervalul de date al sarcinilor.",
       "sl": "Granularnost osi Ganttovega diagrama. \u201cAuto\u201d izbere na podlagi obsega datumov nalog.",
       "sk": "Granularita osi Ganttovho diagramu. \u201cAuto\u201d vyberá na základe rozsahu dátumov úloh.",
-      "tlh": "Gantt mIl chuq nIq. \u201cAuto\u201d wuvchoH mI'mey Segh.",
       "tr": "Gantt diyagramının eksen granülaritesi. \u201cAuto\u201d, görevlerin tarih aralığına göre seçer."
     },
     "Sectiedelingen": {
@@ -195,7 +190,6 @@
       "ro": "Diviziuni de secțiune",
       "sl": "Razdelitve odsekov",
       "sk": "Rozdelenia sekcií",
-      "tlh": "naymey chuq",
       "tr": "Bölüm ayırmaları"
     },
     "Behandel een taaknaam die met \u201c## \u201d begint als een sectiekop in het diagram.": {
@@ -228,7 +222,6 @@
       "ro": "Tratați un nume de sarcină care începe cu \u201c## \u201d ca titlu de secțiune în diagramă.",
       "sl": "Obravnavajte ime naloge, ki se začne z \u201c## \u201d, kot naslov odseka v diagramu.",
       "sk": "Považujte názov úlohy začínajúci na \u201c## \u201d za nadpis sekcie v diagrame.",
-      "tlh": "yIlo' \u201c## \u201d bI'reS De'vam nay mI' Degh.",
       "tr": "\u201c## \u201d ile başlayan bir görev adını diyagramda bölüm başlığı olarak ele alın."
     },
     "Secties": {
@@ -261,7 +254,6 @@
       "ro": "Secțiuni",
       "sl": "Odseki",
       "sk": "Sekcie",
-      "tlh": "naymey",
       "tr": "Bölümler"
     },
     "Een projectschema als Gantt-diagram. Vul de tabel met taak, start, duur, voortgang en afhankelijkheden; het diagram wordt afgeleid. Een taaknaam die met \u201cMilestone:\u201d begint is een nulduur-mijlpaal.": {
@@ -294,7 +286,6 @@
       "ro": "Un calendar de proiect ca diagramă Gantt. Completați tabelul cu sarcină, început, durată, progres și dependențe; diagrama este derivată. Un nume de sarcină care începe cu \u201cMilestone:\u201d este o piatră de hotar de durată zero.",
       "sl": "Razpored projekta kot Ganttov diagram. Izpolnite tabelo z nalogo, začetkom, trajanjem, napredkom in odvisnostmi; diagram je izpeljan. Ime naloge, ki se začne z \u201cMilestone:\u201d, je mejnik ničelne trajnosti.",
       "sk": "Plán projektu ako Ganttov diagram. Vyplňte tabuľku úlohou, začiatkom, trvaním, pokrokom a závislosťami; diagram je odvodený. Názov úlohy začínajúci na \u201cMilestone:\u201d je míľnik s nulovým trvaním.",
-      "tlh": "Gantt mIl chuq. nav nav nav, bI'reS, poH, ghur 'ej DIvI'; mIl chuq. \u201cMilestone:\u201d bI'reS De'vam nul poH.",
       "tr": "Gantt diyagramı olarak bir proje zaman çizelgesi. Tabloyu görev, başlangıç, süre, ilerleme ve bağımlılıklarla doldurun; diyagram türetilir. \u201cMilestone:\u201d ile başlayan bir görev adı, sıfır süreli bir dönüm noktasıdır."
     }
   },

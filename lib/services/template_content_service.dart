@@ -5,7 +5,6 @@ import '../models/deck_template.dart';
 import '../models/improvement_y01.dart';
 import '../models/slide.dart';
 import '../utils/log.dart';
-import '../l10n/app_localizations.dart';
 import 'markdown_service.dart';
 
 /// Loads the example content of a deck template from its bundled document.
@@ -23,17 +22,6 @@ class TemplateContentService {
     : _loadAsset = loadAsset ?? rootBundle.loadString;
 
   final Future<String> Function(String key) _loadAsset;
-
-  /// Languages for which the "content is in English" notice should not be shown.
-  ///
-  /// Klingon remains on the English fallback until its template corpus has had
-  /// a reliable human translation. Missing template content falls back to
-  /// English through [loadSlides].
-  static final Set<String> languagesWithContent = Set.of(
-    AppLocalizations.supportedLocales
-        .map((l) => l.languageCode)
-        .where((languageCode) => languageCode != 'tlh'),
-  );
 
   /// Returns the fresh slides for a new deck from template [templateId], with
   /// the first (title) slide carrying [deckTitle]. Falls back to a bare title

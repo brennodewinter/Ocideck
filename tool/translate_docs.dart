@@ -5,7 +5,7 @@
 // language": the docs are authored in English and shipped in Dutch, and a reader
 // in any other interface language gets the English base with a "you are reading
 // the source" notice. So this tool targets a short, explicit set
-// ([shippedDocLanguages]), not all 31 languages. The app resolves
+// ([shippedDocLanguages]), not all 30 languages. The app resolves
 // `docs/NAME.<lang>.md` when it is bundled and falls back to the English base
 // otherwise (see [DocumentationService]).
 //

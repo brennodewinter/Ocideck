@@ -30,7 +30,6 @@
       "ro": "Un tabel nu încape pe lățimea paginii, nici la cel mai mic corp de literă.",
       "sl": "Ena tabela ne gre na širino strani niti pri najmanjši velikosti pisave.",
       "sk": "Jedna tabuľka sa nezmestí na šírku strany ani pri najmenšom stupni písma.",
-      "tlh": "wa' pat'IH 'oH nagh beQ 'ab qaS'e'; mach ghItlh 'ach not chuv.",
       "tr": "Bir tablo, en küçük punto boyutunda bile sayfa genişliğine sığmıyor."
     },
     "{n} tabellen passen niet op de bladbreedte, ook niet op de kleinste letter.": {
@@ -63,7 +62,6 @@
       "ro": "{n} tabele nu încap pe lățimea paginii, nici la cel mai mic corp de literă.",
       "sl": "{n} tabel ne gre na širino strani niti pri najmanjši velikosti pisave.",
       "sk": "{n} tabuliek sa nezmestí na šírku strany ani pri najmenšom stupni písma.",
-      "tlh": "{n} pat'IH 'oH nagh beQ 'ab qaS'e'; mach ghItlh 'ach not chuv.",
       "tr": "{n} tablo, en küçük punto boyutunda bile sayfa genişliğine sığmıyor."
     },
     "Lange woorden en waarden zoals hashes of IP-adressen zijn daardoor middenin afgebroken.": {
@@ -96,7 +94,6 @@
       "ro": "De aceea, cuvintele și valorile lungi precum amprentele sau adresele IP au fost rupte la mijloc.",
       "sl": "Zato so dolge besede in vrednosti, kot so zgoščene vrednosti ali naslovi IP, prelomljene na sredini.",
       "sk": "Dlhé slová a hodnoty ako odtlačky či IP adresy sú preto zalomené uprostred.",
-      "tlh": "vaj mI' tIq je per tIq — hash, IP nuq — botlh luchevlu'.",
       "tr": "Bu yüzden karma değerleri veya IP adresleri gibi uzun sözcükler ortadan bölündü."
     },
     "Splits de tabel, of zet lange waarden onder elkaar in plaats van naast elkaar.": {
@@ -129,7 +126,6 @@
       "ro": "Împărțiți tabelul sau așezați valorile lungi una sub alta în loc de una lângă alta.",
       "sl": "Razdelite tabelo ali dolge vrednosti postavite eno pod drugo namesto eno ob drugo.",
       "sk": "Rozdeľte tabuľku alebo umiestnite dlhé hodnoty pod seba namiesto vedľa seba.",
-      "tlh": "pat'IH yIchev, pagh per tIq bIng yIlan, retlh yIlanQo'.",
       "tr": "Tabloyu bölün ya da uzun değerleri yan yana değil alt alta yerleştirin."
     }
   }

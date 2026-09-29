@@ -77,7 +77,7 @@ De genomen beslissingen staan in §11; die zijn niet meer open.
 3. **Vals-positieven zijn duurder dan vals-negatieven.** Een scanner die bij elk
    ordernummer "BSN!" roept, wordt binnen een week uitgezet, en dan detecteert hij niets
    meer. Het FP-budget is daarom een expliciet ontwerpdoel (§5), geen bijzaak.
-4. **Internationaal by default.** Ocideck draait in 31 talen. De regels zijn opgedeeld in
+4. **Internationaal by default.** Ocideck draait in 30 talen. De regels zijn opgedeeld in
    *universele* regels (IBAN, creditcard, e-mail, secrets, MRZ) die altijd draaien, en
    *landpakketten* die per regio aan/uit gaan. Zonder die scheiding lopen we bij 40
    landnummerformaten tegelijk vast in de FP's.
@@ -1357,7 +1357,7 @@ uitleg hoe het te verifiëren valt, is een rapport dat een auditor niet kan aann
 `<naam>-redaction-keys.json` (mét salts, blijft bij de bron). De namen zijn sinds 2026-07-21
 Engels; ze heetten `-redacties.json` en `-redacties-verificatiesleutels.json`, twee Nederlandse
 namen die op elkaar lijken terwijl ze precies tegengesteld behandeld moeten worden, in een app
-met 32 talen en ontvangers in evenzovele. Beide dragen bovenaan een `notice`-veld dat in één
+met 31 talen en ontvangers in evenzovele. Beide dragen bovenaan een `notice`-veld dat in één
 zin zegt wat het bestand is en of het mee mag, want een bestandsnaam overleeft geen hernoeming
 en geen zip — de eerste regel van de JSON wel. `ExportDialog` noemt beide bestanden bij naam
 vóór de export; tot dan schreef OciDeck de sleutel naast de deur zonder het te zeggen.
@@ -1611,7 +1611,7 @@ Vastgesteld, niet meer open:
 | `docs/FILE_FORMAT.md` | De frontmatter-sleutels `privacy:`, `privacy_disclosure:`, `privacy_ignore:`, de `<!-- ocideck_privacy* -->`-directives, de `[[…]]`-markering, en het redactiemanifest |
 | `docs/CHECKS.md` | Rij in de "at a glance"-tabel + een `###`-sectie in de vorm Runs / Covers / Failure means |
 | `docs/SOURCE_MAP.md` | Eén regel per nieuw `lib/`-bestand |
-| `docs/design/OCIWACHT.md` | Dit document. Design-docs vormen een eigen klasse in `docs_registration_test.dart`, maar worden nog steeds gecontroleerd: het bestand moet als asset in `pubspec.yaml` staan **en** een `_docTile` krijgen in `settings_dialog_docs.dart`, met een titel die in alle 31 talen vertaald is |
+| `docs/design/OCIWACHT.md` | Dit document. Design-docs vormen een eigen klasse in `docs_registration_test.dart`, maar worden nog steeds gecontroleerd: het bestand moet als asset in `pubspec.yaml` staan **en** een `_docTile` krijgen in `settings_dialog_docs.dart`, met een titel die in alle 30 talen vertaald is |
 | `CHANGELOG.md` | Per fase |
 
 ### 12.2 De privacyverklaring
@@ -1780,7 +1780,7 @@ nummer?"). Reken op de helft, niet op negentig procent.
 
 ### 13.3 Meertaligheid
 
-De interface draait in 30 talen, de detectie in één tot zes per regel. Adres en
+De interface draait in 31 talen, de detectie in één tot zes per regel. Adres en
 BSN-context: alleen NL. Art. 9: vijf talen.
 
 **Niemand lost dit systematisch op.** Microsoft stelt in eigen documentatie:
@@ -1804,7 +1804,7 @@ Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB tegenover Bulgaars 57,5 GiB.
    e-mail, IP, secrets, genetische notatie, ICD-codes, nationale nummers met
    checksum. Microsofts INSEE-definitie geeft de ijking: patroon + checksum alleen
    = confidence 75; het trefwoord voegt 10 toe.
-2. **Lokale taal + Engels**, niet 30 talen. Dat is wat Microsoft feitelijk doet, en
+2. **Lokale taal + Engels**, niet 31 talen. Dat is wat Microsoft feitelijk doet, en
    het past bij gemengd taalgebruik in zakelijke decks.
 3. **Bulk waar het kan** — zie de correctie hieronder: van de bronnen die hier
    stonden is er één gebundeld en één afgevallen. CLDR en OpenCage
@@ -1948,9 +1948,9 @@ Fins, Grieks, Hongaars en meer — gedekt heten op grond van uitsluitend
 EuroVoc-termen, terwijl er voor gezondheid geen enkele naam is. Dat is precies de
 leugen waartegen deze meter bestaat.
 
-Stand voor de 31 app-talen: **9 volledig** (nl/en/de/fr/es/it/pl/pt/cs), **15
-gedeeltelijk** (wel overtuigingen, geen ziektenamen), **7 zonder lexicon** (fy,
-gsw, id, la, pap, tlh, uk).
+Stand per app-taal: **9 volledig** (nl/en/de/fr/es/it/pl/pt/cs), **15
+gedeeltelijk** (wel overtuigingen, geen ziektenamen), **6 zonder lexicon** (fy,
+gsw, id, la, pap, uk).
 
 **De vormen die geen enkele bron levert.** EuroVoc geeft zelfstandige
 naamwoorden op `-isme`: `katholicisme`, `socialisme`, `jodendom`. Zo schrijft
@@ -1990,7 +1990,7 @@ Wat per taalfamilie verschilt is hoevéél ingangen één begrip kost.
 | Slavisch | pl, cs, sk, sl, hr, bg | Naamvallen én palatalisatie (`katolicki` → `katoliccy`); reken op meer ingangen per begrip |
 | Fins-Oegrisch | fi, et, hu | Agglutinerend mét stamwisseling; `compound` is ervoor bedoeld, maar de stam verandert mee |
 | Baltisch | lv, lt | Zware naamvalsverbuiging, vergelijkbaar met het Slavisch |
-| Overig | el, ga, mt, uk, id, pap, tlh | Per taal bekijken |
+| Overig | el, ga, mt, uk, id, pap | Per taal bekijken |
 
 Eén taal springt eruit en verdient een waarschuwing: **het Iers muteert het
 woordbegin** (`Caitliceach` → `gCaitliceach`). Voorvoegselmatching is daar
@@ -2507,7 +2507,7 @@ Realistisch honderd entries met de hand.
 **Er is geen erkende meertalige PII-benchmark voor de EU-talen.** TAB is Engels,
 de Kaggle-set Engels, n2c2 Engels, MEDDOCAN Spaans en klinisch, ai4privacy zes
 talen en synthetisch, MultiCoNER twaalf talen maar generieke NER. De claim
-"detecteert persoonsgegevens in 30 talen" is door niemand te valideren.
+"detecteert persoonsgegevens in 31 talen" is door niemand te valideren.
 
 **ML is geen uitweg voor kleine talen.** Zero-shot transfer verliest bij XLM-R
 gemiddeld 9,3 F1 op de makkelijke West-Europese talen; XTREME's NER-kloof blijft

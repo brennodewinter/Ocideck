@@ -290,7 +290,6 @@ const Set<String> uncoveredBaseline = {
   'lib/services/finding_templates/sk.dart',
   'lib/services/finding_templates/sl.dart',
   'lib/services/finding_templates/sv.dart',
-  'lib/services/finding_templates/tlh.dart',
   'lib/services/finding_templates/tr.dart',
   'lib/services/finding_templates/uk.dart',
   // NO EXECUTABLE LINES: const data table — the settings search index. The

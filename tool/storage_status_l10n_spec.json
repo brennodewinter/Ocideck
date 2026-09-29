@@ -30,7 +30,6 @@
       "sk": "{naam}: dostupný",
       "sl": "{naam}: dosegljiv",
       "sv": "{naam}: nåbar",
-      "tlh": "{naam}: Qap",
       "tr": "{naam}: erişilebilir"
     },
     "{naam}: wordt gecontroleerd…": {
@@ -63,7 +62,6 @@
       "sk": "{naam}: kontroluje sa…",
       "sl": "{naam}: preverjanje…",
       "sv": "{naam}: kontrolleras…",
-      "tlh": "{naam}: nuDlutaH",
       "tr": "{naam}: denetleniyor…"
     },
     "{naam}: niet bereikbaar": {
@@ -96,7 +94,6 @@
       "sk": "{naam}: nedostupný",
       "sl": "{naam}: nedosegljiv",
       "sv": "{naam}: inte nåbar",
-      "tlh": "{naam}: waw' Hutlh",
       "tr": "{naam}: erişilemez"
     }
   }

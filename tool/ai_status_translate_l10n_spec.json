@@ -30,7 +30,6 @@
       "ro": "AI: funcționează",
       "sl": "AI: deluje",
       "sk": "AI: funguje",
-      "tlh": "AI: Qap",
       "tr": "YZ: çalışıyor"
     },
     "AI: wordt gecontroleerd…": {
@@ -63,7 +62,6 @@
       "ro": "AI: se verifică…",
       "sl": "AI: preverjanje…",
       "sk": "AI: kontroluje sa…",
-      "tlh": "AI: nuDlutaH",
       "tr": "YZ: denetleniyor…"
     },
     "AI: server niet bereikbaar": {
@@ -96,7 +94,6 @@
       "ro": "AI: serverul nu este accesibil",
       "sl": "AI: strežnik ni dosegljiv",
       "sk": "AI: server nie je dostupný",
-      "tlh": "AI: waw' Hutlh",
       "tr": "YZ: sunucuya ulaşılamıyor"
     },
     "AI: niet volledig ingesteld": {
@@ -129,7 +126,6 @@
       "ro": "AI: nu este configurat complet",
       "sl": "AI: ni v celoti nastavljeno",
       "sk": "AI: nie je úplne nastavené",
-      "tlh": "AI: qeywlhbe'",
       "tr": "YZ: tam olarak yapılandırılmadı"
     },
     "AI: lokale server moet op dit apparaat draaien": {
@@ -162,7 +158,6 @@
       "ro": "AI: serverul local trebuie să ruleze pe acest dispozitiv",
       "sl": "AI: lokalni strežnik mora delovati na tej napravi",
       "sk": "AI: lokálny server musí bežať na tomto zariadení",
-      "tlh": "AI: De'wI' waw' De'wI'vamDaq QapnIS",
       "tr": "YZ: yerel sunucu bu cihazda çalışmalı"
     },
     "AI: server niet als vertrouwd gemarkeerd": {
@@ -195,7 +190,6 @@
       "ro": "AI: serverul nu este marcat ca de încredere",
       "sl": "AI: strežnik ni označen kot zaupanja vreden",
       "sk": "AI: server nie je označený ako dôveryhodný",
-      "tlh": "AI: waw' voqmoHpu'be'",
       "tr": "YZ: sunucu güvenilir olarak işaretlenmedi"
     },
     "AI: toestemming voor uitgaand verkeer nodig": {
@@ -228,7 +222,6 @@
       "ro": "AI: este necesară permisiunea pentru traficul de ieșire",
       "sl": "AI: potrebno je dovoljenje za odhodni promet",
       "sk": "AI: vyžaduje sa súhlas s odchádzajúcou prevádzkou",
-      "tlh": "AI: chelQo' poQlu'",
       "tr": "YZ: giden trafik izni gerekli"
     },
     "AI: externe dienst nog niet bevestigd": {
@@ -261,7 +254,6 @@
       "ro": "AI: serviciul extern nu este încă confirmat",
       "sl": "AI: zunanja storitev še ni potrjena",
       "sk": "AI: externá služba zatiaľ nie je potvrdená",
-      "tlh": "AI: servIs confirm pagh",
       "tr": "YZ: harici hizmet henüz onaylanmadı"
     },
     "AI: niet beschikbaar in de webversie": {
@@ -294,7 +286,6 @@
       "ro": "AI: nu este disponibil în versiunea web",
       "sl": "AI: ni na voljo v spletni različici",
       "sk": "AI: nie je dostupné vo webovej verzii",
-      "tlh": "AI: web DawI' ghaHbe'",
       "tr": "YZ: web sürümünde kullanılamaz"
     },
     "eLearning: ingelogd": {
@@ -327,7 +318,6 @@
       "ro": "eLearning: autentificat",
       "sl": "eLearning: prijavljeno",
       "sk": "eLearning: prihlásené",
-      "tlh": "eLearning: ngev'",
       "tr": "eLearning: giriş yapıldı"
     },
     "eLearning: aanmelden loopt…": {
@@ -360,7 +350,6 @@
       "ro": "eLearning: se autentifică…",
       "sl": "eLearning: prijava poteka…",
       "sk": "eLearning: prebieha prihlasovanie…",
-      "tlh": "eLearning: ngev'taH",
       "tr": "eLearning: giriş yapılıyor…"
     },
     "eLearning: server niet bereikbaar": {
@@ -393,7 +382,6 @@
       "ro": "eLearning: serverul nu este accesibil",
       "sl": "eLearning: strežnik ni dosegljiv",
       "sk": "eLearning: server nie je dostupný",
-      "tlh": "eLearning: waw' Hutlh",
       "tr": "eLearning: sunucuya ulaşılamıyor"
     },
     "eLearning: aanmelden mislukt": {
@@ -426,7 +414,6 @@
       "ro": "eLearning: autentificarea a eșuat",
       "sl": "eLearning: prijava ni uspela",
       "sk": "eLearning: prihlásenie zlyhalo",
-      "tlh": "eLearning: ngev' QIH",
       "tr": "eLearning: giriş başarısız"
     },
     "eLearning: niet ingelogd": {
@@ -459,7 +446,6 @@
       "ro": "eLearning: nu ești autentificat",
       "sl": "eLearning: niste prijavljeni",
       "sk": "eLearning: nie ste prihlásení",
-      "tlh": "eLearning: ngev'be'",
       "tr": "eLearning: giriş yapılmadı"
     },
     "Vertaal met AI": {
@@ -492,7 +478,6 @@
       "ro": "Traduce cu AI",
       "sl": "Prevedi z AI",
       "sk": "Preložiť pomocou AI",
-      "tlh": "AI mugh'",
       "tr": "AI ile çevir"
     },
     "Vertaal met AI…": {
@@ -525,7 +510,6 @@
       "ro": "Traduce cu AI…",
       "sl": "Prevedi z AI…",
       "sk": "Preložiť pomocou AI…",
-      "tlh": "AI mugh'…",
       "tr": "AI ile çevir…"
     },
     "Doeltaal": {
@@ -558,7 +542,6 @@
       "ro": "Limba țintă",
       "sl": "Ciljni jezik",
       "sk": "Cieľový jazyk",
-      "tlh": "Hol wIv",
       "tr": "Hedef dil"
     },
     "Alle zichtbare teksten en speakernotities worden vertaald. De vertaling opent als kopie in een nieuw tabblad — het origineel blijft ongewijzigd.": {
@@ -591,7 +574,6 @@
       "ro": "Toate textele vizibile și notițele vorbitorului sunt traduse. Traducerea se deschide ca o copie într-o filă nouă — originalul rămâne neschimbat.",
       "sl": "Vsa vidna besedila in govornikove opombe se prevedejo. Prevod se odpre kot kopija v novem zavihku — izvirnik ostane nespremenjen.",
       "sk": "Všetky viditeľné texty a poznámky rečníka sa preložia. Preklad sa otvorí ako kópia na novej karte — originál zostane nezmenený.",
-      "tlh": "Hoch ghItlh le'lu'bogh je jatlhwI' qay'mey mughlu'. mugh De' tab chu'Daq DuqchoH — mughbe' De' le'be'.",
       "tr": "Tüm görünür metinler ve konuşmacı notları çevrilir. Çeviri, yeni bir sekmede kopya olarak açılır — orijinal değişmez."
     },
     "Controleer de vertaling voordat je hem gebruikt: AI-vertalingen zijn concepten.": {
@@ -624,7 +606,6 @@
       "ro": "Verifică traducerea înainte de utilizare: traducerile AI sunt schițe.",
       "sl": "Pred uporabo preverite prevod: AI-prevodi so osnutki.",
       "sk": "Pred použitím skontrolujte preklad: AI preklady sú návrhy.",
-      "tlh": "mugh Dalo'pa' yIbuq — AI mugh Du'na'be'.",
       "tr": "Kullanmadan önce çeviriyi kontrol edin: AI çevirileri taslaktır."
     },
     "Vertalen": {
@@ -657,7 +638,6 @@
       "ro": "Traduce",
       "sl": "Prevedi",
       "sk": "Preložiť",
-      "tlh": "mugh",
       "tr": "Çevir"
     },
     "Vertaalde kopie geopend in nieuw tabblad.": {
@@ -690,7 +670,6 @@
       "ro": "Copia tradusă a fost deschisă într-o filă nouă.",
       "sl": "Prevedena kopija odprta v novem zavihku.",
       "sk": "Preložená kópia otvorená na novej karte.",
-      "tlh": "mugh De' tab chu'Daq poSmoHlu'.",
       "tr": "Çevrilen kopya yeni sekmede açıldı."
     },
     "dia's overgeslagen — originele tekst behouden.": {
@@ -723,7 +702,6 @@
       "ro": "diapozitive omise — textul original păstrat.",
       "sl": "preskočeni diapozitivi — izvirno besedilo ohranjeno.",
       "sk": "snímky preskočené — pôvodný text zachovaný.",
-      "tlh": "jIyImej — original ghItlh pollu'.",
       "tr": "slayt atlandı — orijinal metin korundu."
     }
   }

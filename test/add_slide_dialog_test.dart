@@ -223,7 +223,7 @@ void main() {
   });
 
   testWidgets('de uitleg staat waar de keuze wordt gemaakt', (tester) async {
-    // De volledige uitleg per slidetype lag al klaar in 32 talen, maar
+    // De volledige uitleg per slidetype lag al klaar in 31 talen, maar
     // verscheen pas ná het invoegen, achter een dichtgeklapte "Wat kan ik
     // hier?". Wie moest kiezen, koos op een draadframe en een woord.
     await openDialog(tester)();

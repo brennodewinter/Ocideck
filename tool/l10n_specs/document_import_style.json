@@ -30,7 +30,6 @@
    "ro": "(afișat ca {vervanger}, păstrat pentru export)",
    "sl": "(prikazano kot {vervanger}, ohranjeno za izvoz)",
    "sk": "(zobrazené ako {vervanger}, zachované pre export)",
-   "tlh": "({vervanger} rur 'anglu', DoQmeH ngeHvaD pollu')",
    "tr": "({vervanger} olarak gösterilir, dışa aktarma için saklanır)"
   },
   "Accent": {
@@ -63,7 +62,6 @@
    "ro": "Accent",
    "sl": "Poudarek",
    "sk": "Akcent",
-   "tlh": "DuD",
    "tr": "Vurgu"
   },
   "Alleen letters, cijfers, spaties, punten en koppeltekens.": {
@@ -96,7 +94,6 @@
    "ro": "Doar litere, cifre, spații, puncte și cratime.",
    "sl": "Samo črke, števke, presledki, pike in vezaji.",
    "sk": "Iba písmená, číslice, medzery, bodky a pomlčky.",
-   "tlh": "ghItmey, mI'mey, chImmey, lurDechmey, ghItlhmey je neH.",
    "tr": "Yalnızca harf, rakam, boşluk, nokta ve tire."
   },
   "Alleen tekst": {
@@ -129,7 +126,6 @@
    "ro": "Doar text",
    "sl": "Samo besedilo",
    "sk": "Iba text",
-   "tlh": "mu' neH",
    "tr": "Yalnızca metin"
   },
   "Als documentlogo gebruiken": {
@@ -162,7 +158,6 @@
    "ro": "Folosește ca siglă a documentului",
    "sl": "Uporabi kot logotip dokumenta",
    "sk": "Použiť ako logo dokumentu",
-   "tlh": "ghItlh Degh rur yIlo'",
    "tr": "Belge logosu olarak kullan"
   },
   "Bestaande stijl gebruiken": {
@@ -195,7 +190,6 @@
    "ro": "Folosește stilul existent",
    "sl": "Uporabi obstoječi slog",
    "sk": "Použiť existujúci štýl",
-   "tlh": "motlhghach tu'lu'bogh yIlo'",
    "tr": "Mevcut stili kullan"
   },
   "De letter die Word, LibreOffice of een browser gebruikt als die hem heeft; hierboven staat wat OciDeck zelf toont.": {
@@ -228,7 +222,6 @@
    "ro": "Fontul pe care Word, LibreOffice sau un browser îl folosește dacă îl are; mai sus este ceea ce afișează OciDeck însuși.",
    "sl": "Pisava, ki jo Word, LibreOffice ali brskalnik uporabi, če jo ima; zgoraj je to, kar prikazuje sam OciDeck.",
    "sk": "Písmo, ktoré Word, LibreOffice alebo prehliadač použije, ak ho má; vyššie je to, čo zobrazuje samotný OciDeck.",
-   "tlh": "Word, LibreOffice pagh browser ghajchugh ghItlh Segh lo'lu'bogh; OciDeck'e' 'anglu'bogh Dung 'ang.",
    "tr": "Word, LibreOffice veya bir tarayıcının, varsa kullanacağı yazı tipi; yukarıda OciDeck'in kendisinin gösterdiği yer alır."
   },
   "Deze huisstijl bestaat al als de stijl {naam}.": {
@@ -261,7 +254,6 @@
    "ro": "Acest stil instituțional există deja ca stilul {naam}.",
    "sl": "Ta celostna grafična podoba že obstaja kot slog {naam}.",
    "sk": "Tento firemný štýl už existuje ako štýl {naam}.",
-   "tlh": "motlhghach {naam} rur qorDu' SEGH nabvam tu'lu'.",
    "tr": "Bu kurumsal stil zaten {naam} stili olarak mevcut."
   },
   "Document geïmporteerd; {n} afbeelding(en) in de tekst niet overgenomen.": {
@@ -294,7 +286,6 @@
    "ro": "Document importat; {n} imagine(i) din text nu au fost preluate.",
    "sl": "Dokument uvožen; {n} slika/slik v besedilu ni prenesenih.",
    "sk": "Dokument importovaný; {n} obrázok/obrázkov v texte nebolo prevzatých.",
-   "tlh": "Degh loppu'; mu'Daq {n} mIllogh(mey) lopbe'lu'.",
    "tr": "Belge içe aktarıldı; metindeki {n} görsel aktarılmadı."
   },
   "Een afbeelding in de kop- of voettekst is alleen vectorbeeld (SVG) en kan geen logo worden.": {
@@ -327,7 +318,6 @@
    "ro": "O imagine din antet sau subsol este doar vectorială (SVG) și nu poate deveni siglă.",
    "sl": "Slika v glavi ali nogi je samo vektorska (SVG) in ne more postati logotip.",
    "sk": "Obrázok v hlavičke alebo päte je iba vektorový (SVG) a nemôže sa stať logom.",
-   "tlh": "nav Dung pagh bIngDaq mIllogh vector (SVG) neH 'oH; Degh mojlaHbe'.",
    "tr": "Üstbilgi veya altbilgideki bir görsel yalnızca vektörel (SVG) olduğundan logo olamaz."
   },
   "Een afbeelding op alleen het titelblad; die is geen documentlogo.": {
@@ -360,7 +350,6 @@
    "ro": "O imagine doar pe pagina de titlu; aceasta nu este siglă a documentului.",
    "sl": "Slika samo na naslovni strani; to ni logotip dokumenta.",
    "sk": "Obrázok iba na titulnej strane; to nie je logo dokumentu.",
-   "tlh": "per navDaq neH mIllogh; ghItlh Degh 'oHbe'.",
    "tr": "Yalnızca kapak sayfasında bir görsel; bu bir belge logosu değildir."
   },
   "Gewenst lettertype (export)": {
@@ -393,7 +382,6 @@
    "ro": "Font dorit (export)",
    "sl": "Želena pisava (izvoz)",
    "sk": "Požadované písmo (export)",
-   "tlh": "ghItlh Segh neHlu'bogh (DoQmeH ngeH)",
    "tr": "İstenen yazı tipi (dışa aktarma)"
   },
   "Gewenste kopletter (export)": {
@@ -426,7 +414,6 @@
    "ro": "Font dorit pentru titluri (export)",
    "sl": "Želena pisava naslovov (izvoz)",
    "sk": "Požadované písmo nadpisov (export)",
-   "tlh": "nach ghItlh Segh neHlu'bogh (DoQmeH ngeH)",
    "tr": "İstenen başlık yazı tipi (dışa aktarma)"
   },
   "Het document draagt een eigen huisstijl. OciDeck kan die als stijl bewaren en op dit document toepassen.": {
@@ -459,7 +446,6 @@
    "ro": "Documentul are un stil instituțional propriu. OciDeck îl poate salva ca stil și îl poate aplica acestui document.",
    "sl": "Dokument nosi lastno celostno grafično podobo. OciDeck jo lahko shrani kot slog in uporabi na tem dokumentu.",
    "sk": "Dokument nesie vlastný firemný štýl. OciDeck ho môže uložiť ako štýl a použiť na tento dokument.",
-   "tlh": "qorDu' SEGH nab ghaj ghItlhvam. motlhghach rur pollaH OciDeck 'ej ghItlhvamDaq lo'laH.",
    "tr": "Belge kendi kurumsal stilini taşıyor. OciDeck bunu stil olarak kaydedip bu belgeye uygulayabilir."
   },
   "Het logo kon niet blijvend worden bewaard; het blijft alleen deze sessie beschikbaar.": {
@@ -492,7 +478,6 @@
    "ro": "Sigla nu a putut fi salvată permanent; rămâne disponibilă doar în această sesiune.",
    "sl": "Logotipa ni bilo mogoče trajno shraniti; na voljo ostane samo v tej seji.",
    "sk": "Logo sa nepodarilo natrvalo uložiť; zostáva dostupné len v tejto relácii.",
-   "tlh": "Degh poltaHlaHbe'; Qu'vamDaq neH lo'laH.",
    "tr": "Logo kalıcı olarak kaydedilemedi; yalnızca bu oturumda kullanılabilir."
   },
   "Het logo stond gecentreerd; de stijl kent links en rechts, het komt links.": {
@@ -525,7 +510,6 @@
    "ro": "Sigla era centrată; stilul cunoaște doar stânga și dreapta, așa că va fi la stânga.",
    "sl": "Logotip je bil na sredini; slog pozna samo levo in desno, zato bo levo.",
    "sk": "Logo bolo na stred; štýl pozná len vľavo a vpravo, pôjde vľavo.",
-   "tlh": "botlhDaq Degh; poS nIH je neH Sov motlhghach, poSDaq ghoS.",
    "tr": "Logo ortalanmıştı; stil yalnızca sol ve sağı bilir, sola gelecek."
   },
   "Kop- en voettekst": {
@@ -558,7 +542,6 @@
    "ro": "Antet și subsol",
    "sl": "Glava in noga",
    "sk": "Hlavička a päta",
-   "tlh": "nav Dung bIng je ghItlh",
    "tr": "Üstbilgi ve altbilgi"
   },
   "Kopletter": {
@@ -591,7 +574,6 @@
    "ro": "Font pentru titluri",
    "sl": "Pisava naslovov",
    "sk": "Písmo nadpisov",
-   "tlh": "nach ghItlh Segh",
    "tr": "Başlık yazı tipi"
   },
   "Kopniveau {niveau} heeft een eigen kleur ({kleur}); de stijl kent één kopkleur.": {
@@ -624,7 +606,6 @@
    "ro": "Nivelul de titlu {niveau} are propria culoare ({kleur}); stilul cunoaște o singură culoare pentru titluri.",
    "sl": "Raven naslova {niveau} ima svojo barvo ({kleur}); slog pozna samo eno barvo naslovov.",
    "sk": "Úroveň nadpisu {niveau} má vlastnú farbu ({kleur}); štýl pozná len jednu farbu nadpisov.",
-   "tlh": "nach patlh {niveau} rItlh ghaj ({kleur}); wa' nach rItlh neH Sov motlhghach.",
    "tr": "{niveau}. başlık düzeyinin kendi rengi var ({kleur}); stil tek bir başlık rengi bilir."
   },
   "Koppen": {
@@ -657,7 +638,6 @@
    "ro": "Titluri",
    "sl": "Naslovi",
    "sk": "Nadpisy",
-   "tlh": "nachmey",
    "tr": "Başlıklar"
   },
   "Leeg: de koppen volgen bij export het gewenste lettertype van de tekst.": {
@@ -690,7 +670,6 @@
    "ro": "Gol: la export, titlurile urmează fontul dorit al textului.",
    "sl": "Prazno: pri izvozu naslovi sledijo želeni pisavi besedila.",
    "sk": "Prázdne: pri exporte nadpisy preberajú požadované písmo textu.",
-   "tlh": "chIm: DoQmeH ngeHDI', mu' ghItlh Segh neHlu'bogh tlha' nachmey.",
    "tr": "Boş: dışa aktarmada başlıklar metnin istenen yazı tipini izler."
   },
   "Niet overgenomen": {
@@ -723,7 +702,6 @@
    "ro": "Nepreluat",
    "sl": "Ni preneseno",
    "sk": "Neprenesené",
-   "tlh": "lo'lu'be'",
    "tr": "Alınmadı"
   },
   "Nieuwe stijl toevoegen": {
@@ -756,7 +734,6 @@
    "ro": "Adaugă stil nou",
    "sl": "Dodaj nov slog",
    "sk": "Pridať nový štýl",
-   "tlh": "motlhghach chu' chel",
    "tr": "Yeni stil ekle"
   },
   "Op het web blijft het logo alleen deze sessie bewaard.": {
@@ -789,7 +766,6 @@
    "ro": "Pe web, sigla se păstrează doar în această sesiune.",
    "sl": "Na spletu logotip ostane shranjen samo v tej seji.",
    "sk": "Na webe zostane logo uložené len v tejto relácii.",
-   "tlh": "webDaq Qu'vamDaq neH Degh pollu'.",
    "tr": "Web'de logo yalnızca bu oturum için saklanır."
   },
   "Paginanummers": {
@@ -822,7 +798,6 @@
    "ro": "Numere de pagină",
    "sl": "Številke strani",
    "sk": "Čísla strán",
-   "tlh": "nav mI'mey",
    "tr": "Sayfa numaraları"
   },
   "Staat {plaats} op elke bladzijde, {mm} mm breed.": {
@@ -855,7 +830,6 @@
    "ro": "Apare {plaats} pe fiecare pagină, {mm} mm lățime.",
    "sl": "Stoji {plaats} na vsaki strani, širine {mm} mm.",
    "sk": "Je {plaats} na každej strane, šírka {mm} mm.",
-   "tlh": "Hoch navDaq {plaats} Qam, {mm} mm juch.",
    "tr": "Her sayfada {plaats} yer alır, {mm} mm genişliğinde."
   },
   "Stijl overnemen": {
@@ -888,7 +862,6 @@
    "ro": "Preia stilul",
    "sl": "Prevzemi slog",
    "sk": "Prevziať štýl",
-   "tlh": "motlhghach yItlhap",
    "tr": "Stili devral"
   },
   "Stijl overnemen?": {
@@ -921,7 +894,6 @@
    "ro": "Preiei stilul?",
    "sl": "Prevzamem slog?",
    "sk": "Prevziať štýl?",
-   "tlh": "motlhghach tlhap'a'?",
    "tr": "Stil devralınsın mı?"
   },
   "Voettekst": {
@@ -954,7 +926,6 @@
    "ro": "Subsol",
    "sl": "Noga",
    "sk": "Päta",
-   "tlh": "bIng mu'mey",
    "tr": "Altbilgi"
   },
   "Zelfde als de tekst ({letter})": {
@@ -987,7 +958,6 @@
    "ro": "La fel ca textul ({letter})",
    "sl": "Enako kot besedilo ({letter})",
    "sk": "Rovnaké ako text ({letter})",
-   "tlh": "mu' rur ({letter})",
    "tr": "Metinle aynı ({letter})"
   },
   "gecentreerd bovenaan": {
@@ -1020,7 +990,6 @@
    "ro": "centrat sus",
    "sl": "na sredini zgoraj",
    "sk": "hore na stred",
-   "tlh": "Dung botlhDaq",
    "tr": "üstte ortalanmış"
   },
   "gecentreerd onderaan": {
@@ -1053,7 +1022,6 @@
    "ro": "centrat jos",
    "sl": "na sredini spodaj",
    "sk": "dole na stred",
-   "tlh": "bIng botlhDaq",
    "tr": "altta ortalanmış"
   },
   "linksboven": {
@@ -1086,7 +1054,6 @@
    "ro": "în stânga sus",
    "sl": "zgoraj levo",
    "sk": "vľavo hore",
-   "tlh": "poS DungDaq",
    "tr": "sol üstte"
   },
   "linksonder": {
@@ -1119,7 +1086,6 @@
    "ro": "în stânga jos",
    "sl": "spodaj levo",
    "sk": "vľavo dole",
-   "tlh": "poS bIngDaq",
    "tr": "sol altta"
   },
   "rechtsboven": {
@@ -1152,7 +1118,6 @@
    "ro": "în dreapta sus",
    "sl": "zgoraj desno",
    "sk": "vpravo hore",
-   "tlh": "nIH DungDaq",
    "tr": "sağ üstte"
   },
   "rechtsonder": {
@@ -1185,7 +1150,6 @@
    "ro": "în dreapta jos",
    "sl": "spodaj desno",
    "sk": "vpravo dole",
-   "tlh": "nIH bIngDaq",
    "tr": "sağ altta"
   },
   "Kopniveaus {niveau} hebben elk een eigen kleur ({kleur}); de stijl kent één kopkleur.": {
@@ -1218,7 +1182,6 @@
    "ro": "Nivelurile de titlu {niveau} au fiecare propria culoare ({kleur}); stilul cunoaște o singură culoare de titlu.",
    "sl": "Ravni naslovov {niveau} imajo vsaka svojo barvo ({kleur}); slog pozna le eno barvo naslova.",
    "sk": "Úrovne nadpisov {niveau} majú každá vlastnú farbu ({kleur}); štýl pozná len jednu farbu nadpisu.",
-   "tlh": "nach patlh {niveau} Hoch nguv ghaj ({kleur}); wa' nach nguv neH Sov motlhghach.",
    "tr": "{niveau} başlık düzeylerinin her birinin kendi rengi var ({kleur}); stil yalnızca bir başlık rengi tanır."
   }
  },

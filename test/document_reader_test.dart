@@ -711,7 +711,7 @@ void main() {
     );
 
     // #626: de gebundelde documenten bestaan alleen in het Engels, terwijl hun
-    // titels in 32 talen staan. Wie de app op Pools zet, ziet een Poolse titel
+    // titels in 31 talen staan. Wie de app op Pools zet, ziet een Poolse titel
     // en krijgt Engels — en de app wekte die verwachting zelf.
     group('de melding dat een document alleen in het Engels bestaat', () {
       Future<void> open(

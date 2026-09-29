@@ -13,8 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 ///
 /// This test names the offending file, map and key directly. It parses Dart
 /// string literals properly (respecting `\'` escapes) so a value that itself
-/// contains `:` or `,` — e.g. a Klingon translation — is never mistaken for a
-/// key.
+/// contains `:` or `,` is never mistaken for a key.
 void main() {
   test('no translation map has duplicate keys', () {
     final dir = Directory('lib/l10n/translations');
@@ -112,8 +111,8 @@ void main() {
     });
 
     test('handles multi-line entries and escaped quotes in the value', () {
-      // Mirrors the real tlh.dart shape: a Dutch key containing ": " whose
-      // Klingon value (on the next line) also contains ": " and escaped quotes.
+      // Mirrors the real table shape: a Dutch key containing ": " whose
+      // value (on the next line) also contains ": " and escaped quotes.
       const body = r'''
       'Veel tekst: verkleind tot ':
           '\'echletHomvamDaq mu\'ghom law\': value ',

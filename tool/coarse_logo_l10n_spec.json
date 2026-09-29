@@ -30,7 +30,6 @@
       "ro": "Logo-ul va ieși granulat la tipărire: fișierul are {breed}×{hoog} px, ceea ce dă {dpi} dpi la această dimensiune.",
       "sl": "Logotip se bo natisnil zrnato: datoteka meri {breed}×{hoog} px, kar pri tej velikosti pomeni {dpi} dpi.",
       "sk": "Logo sa vytlačí zrnito: súbor má {breed}×{hoog} px, čo pri tejto veľkosti dáva {dpi} dpi.",
-      "tlh": "Degh SoQ 'oH vI'Iqmey: De' {breed}×{hoog} px 'oH, 'ej lo'laHghach vam {dpi} dpi.",
       "tr": "Logo baskıda taneli çıkacak: dosya {breed}×{hoog} px ve bu boyutta {dpi} dpi ediyor."
     },
     "Kies een logo van minstens {px} px breed, of zet de logomaat kleiner.": {
@@ -63,7 +62,6 @@
       "ro": "Alegeți un logo de cel puțin {px} px lățime sau micșorați dimensiunea logo-ului.",
       "sl": "Izberite logotip, širok vsaj {px} px, ali zmanjšajte velikost logotipa.",
       "sk": "Vyberte logo široké aspoň {px} px alebo zmenšite veľkosť loga.",
-      "tlh": "Degh {px} px 'ar juch yIwIv, pagh Degh lo'laHghach yImach'moH.",
       "tr": "En az {px} px genişliğinde bir logo seçin veya logo boyutunu küçültün."
     }
   }

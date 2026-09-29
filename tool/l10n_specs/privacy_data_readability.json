@@ -30,7 +30,6 @@
       "ro": "1 categorie găsită",
       "sl": "Najdena je 1 kategorija",
       "sk": "Našla sa 1 kategória",
-      "tlh": "1 De' ghom tu'lu'",
       "tr": "1 kategori bulundu"
     },
     "1 registratie": {
@@ -63,7 +62,6 @@
       "ro": "1 înregistrare",
       "sl": "1 registracija",
       "sk": "1 registrácia",
-      "tlh": "1 ghItlh tu'lu'",
       "tr": "1 kayıt"
     },
     "Aangemaakt op": {
@@ -96,7 +94,6 @@
       "ro": "Creat pe",
       "sl": "Ustvarjeno dne",
       "sk": "Vytvorené dňa",
-      "tlh": "chenmoHlu'pu' jaj",
       "tr": "Oluşturulma tarihi"
     },
     "Aanmeldprovider": {
@@ -129,7 +126,6 @@
       "ro": "Furnizor de conectare",
       "sl": "Ponudnik prijave",
       "sk": "Poskytovateľ prihlásenia",
-      "tlh": "Login provider De'",
       "tr": "Giriş sağlayıcı"
     },
     "Aanmeldsessies": {
@@ -162,7 +158,6 @@
       "ro": "Sesiuni de înregistrare",
       "sl": "Registracijske seje",
       "sk": "Registračné sedenia",
-      "tlh": "rarmeH poHmey",
       "tr": "Kayıt oturumları"
     },
     "Aantal controles": {
@@ -195,7 +190,6 @@
       "ro": "Numărul de verificări",
       "sl": "Število pregledov",
       "sk": "Počet kontrol",
-      "tlh": "Number of checks De'",
       "tr": "Çek sayısı"
     },
     "Aantal minuten": {
@@ -228,7 +222,6 @@
       "ro": "Numărul de minute",
       "sl": "Število minut",
       "sk": "Počet minút",
-      "tlh": "Number of minutes De'",
       "tr": "Dakika sayısı"
     },
     "Aantal pogingen": {
@@ -261,7 +254,6 @@
       "ro": "Numărul de încercări",
       "sl": "Število poskusov",
       "sk": "Počet pokusov",
-      "tlh": "Number of attempts De'",
       "tr": "Deneme sayısı"
     },
     "Aanwezig": {
@@ -294,7 +286,6 @@
       "ro": "Prezent",
       "sl": "Prisotno",
       "sk": "Prítomné",
-      "tlh": "tu'lu'",
       "tr": "Mevcut"
     },
     "Accountbewerkingen": {
@@ -327,7 +318,6 @@
       "ro": "Operațiuni de cont",
       "sl": "Poslovanje z računi",
       "sk": "Operácie s účtom",
-      "tlh": "account choHmey",
       "tr": "Hesap işlemleri"
     },
     "Accountgegevens": {
@@ -360,7 +350,6 @@
       "ro": "Informații despre cont",
       "sl": "Podatki o računu",
       "sk": "Informácie o účte",
-      "tlh": "account De'",
       "tr": "Hesap bilgileri"
     },
     "Accountnummer": {
@@ -393,7 +382,6 @@
       "ro": "Numărul contului",
       "sl": "Številka računa",
       "sk": "Číslo účtu",
-      "tlh": "Account number De'",
       "tr": "Hesap numarası"
     },
     "Accountnummer waarop de actie gericht was": {
@@ -426,7 +414,6 @@
       "ro": "Numărul de cont vizat de acțiune",
       "sl": "Številka računa, na katerega cilja dejanje",
       "sk": "Číslo účtu, na ktorý je akcia zameraná",
-      "tlh": "Account number targeted by the action De'",
       "tr": "İşlemin hedeflediği hesap numarası"
     },
     "Actie": {
@@ -459,7 +446,6 @@
       "ro": "Acțiune",
       "sl": "Ukrep",
       "sk": "Akcia",
-      "tlh": "vang",
       "tr": "Eylem"
     },
     "Actief": {
@@ -492,7 +478,6 @@
       "ro": "Activ",
       "sl": "Aktivno",
       "sk": "Aktívne",
-      "tlh": "vang",
       "tr": "Etkin"
     },
     "Activiteitnummer": {
@@ -525,7 +510,6 @@
       "ro": "Numărul activității",
       "sl": "Številka dejavnosti",
       "sk": "Číslo aktivity",
-      "tlh": "Activity number De'",
       "tr": "Faaliyet numarası"
     },
     "Afgerond": {
@@ -558,7 +542,6 @@
       "ro": "Finalizat",
       "sl": "Zaključeno",
       "sk": "Hotovo",
-      "tlh": "rIn",
       "tr": "Tamamlandı"
     },
     "Afgerond op": {
@@ -591,7 +574,6 @@
       "ro": "Rotunjit la",
       "sl": "Zaokroženo na",
       "sk": "Zaokrúhlené na",
-      "tlh": "rInpu' jaj",
       "tr": "Şuna yuvarlandı:"
     },
     "Afgewezen": {
@@ -624,7 +606,6 @@
       "ro": "Respins",
       "sl": "Zavrnjeno",
       "sk": "Odmietnuté",
-      "tlh": "Rejected De'",
       "tr": "Reddedildi"
     },
     "Afspeelsessienummer": {
@@ -657,7 +638,6 @@
       "ro": "Numărul sesiunii de redare",
       "sl": "Številka seje predvajanja",
       "sk": "Číslo relácie prehrávania",
-      "tlh": "Playback session number De'",
       "tr": "Oynatma oturumu numarası"
     },
     "Afwezig": {
@@ -690,7 +670,6 @@
       "ro": "absent",
       "sl": "odsoten",
       "sk": "Neprítomný",
-      "tlh": "Absent De'",
       "tr": "yok"
     },
     "Antwoorden": {
@@ -723,7 +702,6 @@
       "ro": "Răspunsuri",
       "sl": "Odgovori",
       "sk": "Odpovede",
-      "tlh": "jangmey",
       "tr": "Yanıtlar"
     },
     "Antwoordgegevens": {
@@ -756,7 +734,6 @@
       "ro": "Detalii de răspuns",
       "sl": "Podrobnosti odgovora",
       "sk": "Podrobnosti odpovede",
-      "tlh": "jangmeH De'",
       "tr": "Yanıt ayrıntıları"
     },
     "Antwoordstatus": {
@@ -789,7 +766,6 @@
       "ro": "Starea răspunsului",
       "sl": "Stanje odgovora",
       "sk": "Stav odpovede",
-      "tlh": "Reply status De'",
       "tr": "Yanıt durumu"
     },
     "Begint op": {
@@ -822,7 +798,6 @@
       "ro": "Începe",
       "sl": "Začne se na",
       "sk": "Začína sa",
-      "tlh": "Starts on De'",
       "tr": "Başlıyor"
     },
     "Begrippen uitgelegd": {
@@ -855,7 +830,6 @@
       "ro": "Concepte explicate",
       "sl": "Razloženi koncepti",
       "sk": "Vysvetlené pojmy",
-      "tlh": "mu'mey QIjlu'",
       "tr": "Kavramlar açıklandı"
     },
     "Beheer van de installatie": {
@@ -888,7 +862,6 @@
       "ro": "Managementul instalatiei",
       "sl": "Upravljanje namestitve",
       "sk": "Riadenie inštalácie",
-      "tlh": "jomlu'pu' Doch loH",
       "tr": "Kurulum yönetimi"
     },
     "Beheerpogingen": {
@@ -921,7 +894,6 @@
       "ro": "Eforturile de management",
       "sl": "Vodstvena prizadevanja",
       "sk": "Úsilie manažmentu",
-      "tlh": "loH nIDmey",
       "tr": "Yönetim çabaları"
     },
     "Bekeken lessen": {
@@ -954,7 +926,6 @@
       "ro": "Lecții vizualizate",
       "sl": "Ogledane lekcije",
       "sk": "Prezreté lekcie",
-      "tlh": "ghojmoHghachmey leghlu'pu'",
       "tr": "Görüntülenen dersler"
     },
     "Beleidsversie": {
@@ -987,7 +958,6 @@
       "ro": "Versiunea politicii",
       "sl": "Različica pravilnika",
       "sk": "Verzia zásad",
-      "tlh": "Policy version De'",
       "tr": "Politika sürümü"
     },
     "Beoordeeld": {
@@ -1020,7 +990,6 @@
       "ro": "Evaluat",
       "sl": "Ocenjeno",
       "sk": "Ohodnotené",
-      "tlh": "Rated De'",
       "tr": "derecelendirildi"
     },
     "Beoordeeld op": {
@@ -1053,7 +1022,6 @@
       "ro": "Evaluat de",
       "sl": "Ocenil",
       "sk": "Hodnotenie",
-      "tlh": "Rated by De'",
       "tr": "Tarafından derecelendirildi"
     },
     "Beperking": {
@@ -1086,7 +1054,6 @@
       "ro": "Restricție",
       "sl": "Omejitev",
       "sk": "Obmedzenie",
-      "tlh": "Restriction De'",
       "tr": "Kısıtlama"
     },
     "Berekend op": {
@@ -1119,7 +1086,6 @@
       "ro": "Calculat pe",
       "sl": "Preračunano na",
       "sk": "Vypočítané na",
-      "tlh": "Calculated on De'",
       "tr": "Hesaplanma tarihi"
     },
     "Bericht": {
@@ -1152,7 +1118,6 @@
       "ro": "Mesaj",
       "sl": "Sporočilo",
       "sk": "Správa",
-      "tlh": "QIn",
       "tr": "Mesaj"
     },
     "Beschrijving": {
@@ -1185,7 +1150,6 @@
       "ro": "Descriere",
       "sl": "Opis",
       "sk": "Popis",
-      "tlh": "QIj",
       "tr": "Açıklama"
     },
     "Bestandsnaam": {
@@ -1218,7 +1182,6 @@
       "ro": "Nume fișier",
       "sl": "Ime datoteke",
       "sk": "Názov súboru",
-      "tlh": "De' ngaSwi' pong",
       "tr": "Dosya adı"
     },
     "Beveiligingsvraagnummer": {
@@ -1251,7 +1214,6 @@
       "ro": "Numărul întrebării de securitate",
       "sl": "Številka varnostnega vprašanja",
       "sk": "Číslo bezpečnostnej otázky",
-      "tlh": "Security Question Number De'",
       "tr": "Güvenlik Soru Numarası"
     },
     "Bevestigd": {
@@ -1284,7 +1246,6 @@
       "ro": "Confirmat",
       "sl": "Potrjeno",
       "sk": "Potvrdené",
-      "tlh": "Confirmed De'",
       "tr": "Onaylandı"
     },
     "Bevestigd op": {
@@ -1317,7 +1278,6 @@
       "ro": "Confirmat pe",
       "sl": "Potrjeno dne",
       "sk": "Potvrdené dňa",
-      "tlh": "Confirmed on De'",
       "tr": "Onaylanma tarihi"
     },
     "Bewaarregels": {
@@ -1350,7 +1310,6 @@
       "ro": "Reguli de reținere",
       "sl": "Pravila hrambe",
       "sk": "Pravidlá uchovávania",
-      "tlh": "polmeH chutmey",
       "tr": "Saklama kuralları"
     },
     "Bewaartermijn": {
@@ -1383,7 +1342,6 @@
       "ro": "Perioada de păstrare",
       "sl": "Obdobje hrambe",
       "sk": "Doba uchovávania",
-      "tlh": "Retention period De'",
       "tr": "Saklama süresi"
     },
     "Bewaren wegens een juridische verplichting": {
@@ -1416,7 +1374,6 @@
       "ro": "Reținut din cauza unei obligații legale",
       "sl": "Zadržano zaradi zakonske obveznosti",
       "sk": "Ponechané z dôvodu zákonnej povinnosti",
-      "tlh": "Retained due to a legal obligation De'",
       "tr": "Yasal zorunluluk nedeniyle tutuldu"
     },
     "Bewerkingnummer bij aanmeldprovider": {
@@ -1449,7 +1406,6 @@
       "ro": "Numărul operațiunii la furnizorul de înregistrare",
       "sl": "Številka operacije pri ponudniku registracije",
       "sk": "Číslo operácie u poskytovateľa registrácie",
-      "tlh": "Operation number at registration provider De'",
       "tr": "Kayıt sağlayıcısındaki işlem numarası"
     },
     "Bewijsstukken": {
@@ -1482,7 +1438,6 @@
       "ro": "Dovezi",
       "sl": "Dokazi",
       "sk": "Dôkazy",
-      "tlh": "bIQoy'meH De' ngaSwI'mey",
       "tr": "Kanıt"
     },
     "Bezwaar": {
@@ -1515,7 +1470,6 @@
       "ro": "Obiecție",
       "sl": "Ugovor",
       "sk": "Námietka",
-      "tlh": "Objection De'",
       "tr": "İtiraz"
     },
     "Beëindigd op": {
@@ -1548,7 +1502,6 @@
       "ro": "S-a terminat pe",
       "sl": "Končano dne",
       "sk": "Skončené dňa",
-      "tlh": "mevpu' jaj",
       "tr": "Bitiş tarihi"
     },
     "Bijeenkomstnummer": {
@@ -1581,7 +1534,6 @@
       "ro": "Numărul întâlnirii",
       "sl": "Številka sestanka",
       "sk": "Číslo stretnutia",
-      "tlh": "Meeting number De'",
       "tr": "Toplantı numarası"
     },
     "Certificaatnummer": {
@@ -1614,7 +1566,6 @@
       "ro": "Numărul certificatului",
       "sl": "Številka potrdila",
       "sk": "Číslo certifikátu",
-      "tlh": "Certificate number De'",
       "tr": "Sertifika numarası"
     },
     "Certificaten": {
@@ -1647,7 +1598,6 @@
       "ro": "Certificate",
       "sl": "Certifikati",
       "sk": "Certifikáty",
-      "tlh": "laH navmey",
       "tr": "Sertifikalar"
     },
     "Controlecode van de PDF": {
@@ -1680,7 +1630,6 @@
       "ro": "Codul de control al PDF-ului",
       "sl": "Nadzorna koda PDF",
       "sk": "Kontrolný kód PDF",
-      "tlh": "Control code of the PDF De'",
       "tr": "PDF'nin kontrol kodu"
     },
     "Controlecode van profielfoto": {
@@ -1713,7 +1662,6 @@
       "ro": "Cod de verificare a fotografiei de profil",
       "sl": "Koda za preverjanje fotografije profila",
       "sk": "Overovací kód profilovej fotky",
-      "tlh": "Profile photo verification code De'",
       "tr": "Profil fotoğrafı doğrulama kodu"
     },
     "Controlecodes van bewijsstukken": {
@@ -1746,7 +1694,6 @@
       "ro": "Codurile de control ale documentelor justificative",
       "sl": "Kontrolne kode spremnih dokumentov",
       "sk": "Kontrolné kódy podporných dokumentov",
-      "tlh": "Control codes of supporting documents De'",
       "tr": "Destekleyici belgelerin kontrol kodları"
     },
     "Correctie": {
@@ -1779,7 +1726,6 @@
       "ro": "Corectare",
       "sl": "Popravek",
       "sk": "Oprava",
-      "tlh": "Correction De'",
       "tr": "Düzeltme"
     },
     "Cursistnummer waarop de actie gericht was": {
@@ -1812,7 +1758,6 @@
       "ro": "Numărul de student către care a fost vizată acțiunea",
       "sl": "Študentska številka, ki ji je bila akcija namenjena",
       "sk": "Číslo študenta, na ktoré bola akcia zameraná",
-      "tlh": "Student number to which the action was aimed De'",
       "tr": "Eylemin hedeflendiği öğrenci numarası"
     },
     "Cursusaanbodnummer": {
@@ -1845,7 +1790,6 @@
       "ro": "Numărul ofertei de curs",
       "sl": "Številka ponudbe tečaja",
       "sk": "Číslo ponuky kurzu",
-      "tlh": "Course offering number De'",
       "tr": "Kurs teklif numarası"
     },
     "Cursusversienummer": {
@@ -1878,7 +1822,6 @@
       "ro": "Numărul versiunii cursului",
       "sl": "Številka različice tečaja",
       "sk": "Číslo verzie kurzu",
-      "tlh": "Course version number De'",
       "tr": "Kurs sürüm numarası"
     },
     "Datums en tijden worden in uw lokale tijd getoond. Technische namen blijven zichtbaar wanneer de server een nog onbekend veld aanlevert.": {
@@ -1911,7 +1854,6 @@
       "ro": "Datele și orele sunt afișate în ora dvs. locală. Numele tehnice rămân vizibile atunci când serverul oferă un câmp necunoscut.",
       "sl": "Datumi in ure so prikazani po vašem lokalnem času. Tehnična imena ostanejo vidna, ko strežnik zagotovi neznano polje.",
       "sk": "Dátumy a časy sa zobrazujú vo vašom miestnom čase. Technické názvy zostanú viditeľné, keď server poskytne neznáme pole.",
-      "tlh": "Daq poHlIj lo'lu'taHvIS jajmey poHmey je cha'lu'. De' chelDI' server \\`ej pong Sovbe'lu', De' cham pong cha'lu'qa'.",
       "tr": "Tarihler ve saatler yerel saatinize göre gösterilir. Sunucu bilinmeyen bir alan sağladığında teknik adlar görünür kalır."
     },
     "De antwoorden die u bij toetsvragen heeft gegeven.": {
@@ -1944,7 +1886,6 @@
       "ro": "Răspunsurile pe care le-ați dat la întrebările de testare.",
       "sl": "Odgovori, ki ste jih dali na testna vprašanja.",
       "sk": "Odpovede, ktoré ste dali na testovacie otázky.",
-      "tlh": "DuHmey Da'oghbogh DaH De'vam ngaS.",
       "tr": "Test sorularına verdiğiniz cevaplar."
     },
     "Deelnamenummer": {
@@ -1977,7 +1918,6 @@
       "ro": "Numar de participare",
       "sl": "Številka udeležbe",
       "sk": "Účastnícke číslo",
-      "tlh": "Participation number De'",
       "tr": "Katılım numarası"
     },
     "Deelnames": {
@@ -2010,7 +1950,6 @@
       "ro": "Participari",
       "sl": "Udeležbe",
       "sk": "Účasti",
-      "tlh": "jeSghachmey",
       "tr": "Katılımlar"
     },
     "Details": {
@@ -2043,7 +1982,6 @@
       "ro": "Detalii",
       "sl": "Podrobnosti",
       "sk": "Podrobnosti",
-      "tlh": "Details De'",
       "tr": "Ayrıntılar"
     },
     "Deze categorie is door de server aangeleverd. De technische namen blijven zichtbaar voor navraag bij uw organisatie.": {
@@ -2076,7 +2014,6 @@
       "ro": "Această categorie a fost furnizată de server. Numele tehnice rămân vizibile pentru întrebări din partea organizației dvs.",
       "sl": "To kategorijo je zagotovil strežnik. Tehnična imena ostanejo vidna za poizvedbe vaše organizacije.",
       "sk": "Túto kategóriu poskytol server. Technické názvy zostávajú viditeľné pre otázky vašej organizácie.",
-      "tlh": "De' ghomvam nob server. tlhobmeH organizationlIj, De' cham pongmey cha'lu'.",
       "tr": "Bu kategori sunucu tarafından sağlanmıştır. Kuruluşunuzdan gelen sorular için teknik adlar görünür durumda kalır."
     },
     "Door uzelf aangevraagd": {
@@ -2109,7 +2046,6 @@
       "ro": "Solicitat de tine",
       "sl": "Zahtevali ste sami",
       "sk": "Vyžiadané vami",
-      "tlh": "Requested by yourself De'",
       "tr": "Kendiniz tarafından talep edildi"
     },
     "E-mailadres": {
@@ -2142,7 +2078,6 @@
       "ro": "Adresă de e-mail",
       "sl": "E-poštni naslov",
       "sk": "E-mailová adresa",
-      "tlh": "jabbI'ID Quv",
       "tr": "E-posta adresi"
     },
     "E-mailberichten": {
@@ -2175,7 +2110,6 @@
       "ro": "Mesaje prin e-mail",
       "sl": "E-poštna sporočila",
       "sk": "E-mailové správy",
-      "tlh": "jabbI'ID QInmey",
       "tr": "E-posta mesajları"
     },
     "Een ID is een uniek technisch nummer waarmee eLearning gegevens aan elkaar koppelt. Het is geen beoordeling of status.": {
@@ -2208,7 +2142,6 @@
       "ro": "Un ID este un număr tehnic unic pe care eLearning îl folosește pentru a lega datele între ele. Nu este o evaluare sau un statut.",
       "sl": "ID je edinstvena tehnična številka, ki jo eLearning uporablja za povezovanje podatkov. To ni ocena ali status.",
       "sk": "ID je jedinečné technické číslo, ktoré eLearning používa na prepojenie údajov. Nie je to hodnotenie ani status.",
-      "tlh": "ID ghaH mI' cham le''e'; De' rarmeH eLearning lo'. pojbe' \\`ej Dotlhbe'.",
       "tr": "Kimlik, e-Öğrenimin verileri birbirine bağlamak için kullandığı benzersiz bir teknik numaradır. Bu bir derecelendirme veya durum değildir."
     },
     "Een categorie groepeert gegevens over hetzelfde onderwerp. Een registratie is één bewaard gegeven of één gebeurtenis.": {
@@ -2241,7 +2174,6 @@
       "ro": "O categorie grupează date pe același subiect. O înregistrare este o bucată de date salvată sau un eveniment.",
       "sl": "Kategorija združuje podatke o isti temi. Registracija je en shranjen podatek ali en dogodek.",
       "sk": "Kategória zoskupuje údaje na rovnakú tému. Registrácia je jeden uložený údaj alebo jedna udalosť.",
-      "tlh": "wa' qech De' tay'moH De' ghom. wa' De' pollu'bogh pagh wa' wanI' ghaH ghItlh'e'.",
       "tr": "Bir kategori aynı konudaki verileri gruplandırır. Kayıt, kaydedilmiş bir veri parçası veya bir olaydır."
     },
     "Eindigt op": {
@@ -2274,7 +2206,6 @@
       "ro": "se termină în",
       "sl": "Konča se v",
       "sk": "Končí o",
-      "tlh": "Ends in De'",
       "tr": "Bitiş tarihi"
     },
     "Geaccepteerd": {
@@ -2307,7 +2238,6 @@
       "ro": "Acceptat",
       "sl": "Sprejeto",
       "sk": "Prijaté",
-      "tlh": "lulaj",
       "tr": "Kabul edildi"
     },
     "Geaccepteerd op": {
@@ -2340,7 +2270,6 @@
       "ro": "Acceptat pe",
       "sl": "Sprejeto dne",
       "sk": "Prijaté dňa",
-      "tlh": "Accepted on De'",
       "tr": "Kabul tarihi"
     },
     "Geannuleerd": {
@@ -2373,7 +2302,6 @@
       "ro": "Anulat",
       "sl": "Preklicano",
       "sk": "Zrušené",
-      "tlh": "Canceled De'",
       "tr": "İptal edildi"
     },
     "Gecontroleerd": {
@@ -2406,7 +2334,6 @@
       "ro": "Verificat",
       "sl": "Preverjeno",
       "sk": "Skontrolované",
-      "tlh": "Checked De'",
       "tr": "İşaretlendi"
     },
     "Gecontroleerd op": {
@@ -2439,7 +2366,6 @@
       "ro": "Verificat",
       "sl": "Preverjeno",
       "sk": "Začiarknuté",
-      "tlh": "Checked on De'",
       "tr": "Kontrol edildi"
     },
     "Geen gegevens gevonden": {
@@ -2472,7 +2398,6 @@
       "ro": "Nu s-au găsit date",
       "sl": "Ni podatkov",
       "sk": "Nenašli sa žiadne údaje",
-      "tlh": "De' tu'be'lu'",
       "tr": "Veri bulunamadı"
     },
     "Gegevens over bewaartermijnen en het verwijderen van uw gegevens.": {
@@ -2505,7 +2430,6 @@
       "ro": "Informații despre perioadele de păstrare și ștergerea datelor dvs.",
       "sl": "Informacije o rokih hrambe in izbrisu vaših podatkov.",
       "sk": "Informácie o dobách uchovávania a vymazaní vašich údajov.",
-      "tlh": "De' polmeH poHmey De'lIj teqlu'ghach je.",
       "tr": "Saklama süreleri ve verilerinizin silinmesine ilişkin bilgiler."
     },
     "Gegevens over bewijsstukken, behaalde resultaten en certificaten.": {
@@ -2538,7 +2462,6 @@
       "ro": "Informații despre documente justificative, rezultate obținute și certificate.",
       "sl": "Podatki o dokazilih, doseženih rezultatih in potrdilih.",
       "sk": "Informácie o podporných dokumentoch, dosiahnutých výsledkoch a certifikátoch.",
-      "tlh": "bIQoy'meH De', chavmey laH navmey je.",
       "tr": "Destekleyici belgeler, elde edilen sonuçlar ve sertifikalar hakkında bilgi."
     },
     "Gegevens over privacyverzoeken en wie uw gegevens bekeek of wijzigde.": {
@@ -2571,7 +2494,6 @@
       "ro": "Informații despre solicitările de confidențialitate și cine v-a vizualizat sau modificat informațiile.",
       "sl": "Informacije o zahtevah glede zasebnosti in kdo si je ogledal ali spremenil vaše podatke.",
       "sk": "Informácie o žiadostiach o ochranu osobných údajov a o tom, kto si prezeral alebo zmenil vaše informácie.",
-      "tlh": "privacy tlhobghachmey, De'lIj leghbogh pagh choHbogh ghotpu' je.",
       "tr": "Gizlilik talepleri ve bilgilerinizi kimin görüntülediği veya değiştirdiği hakkında bilgiler."
     },
     "Gegevens over uw accountbewerking": {
@@ -2604,7 +2526,6 @@
       "ro": "Informații despre funcționarea contului dvs",
       "sl": "Informacije o poslovanju vašega računa",
       "sk": "Informácie o prevádzke vášho účtu",
-      "tlh": "Information about your account operation De'",
       "tr": "Hesabınızın işleyişine ilişkin bilgiler"
     },
     "Gegevens over uw inschrijving, deelname en voortgang in lessen.": {
@@ -2637,7 +2558,6 @@
       "ro": "Informații despre înregistrarea, participarea și progresul dvs. la lecții.",
       "sl": "Informacije o vaši prijavi, udeležbi in napredku pri lekcijah.",
       "sk": "Informácie o vašej registrácii, účasti a pokroku na lekciách.",
-      "tlh": "ghojmoHghachmeyDaq qI'ghachlIj, jeSghachlIj tlhetlhlIj je.",
       "tr": "Kaydınız, katılımınız ve derslerdeki ilerlemeniz hakkında bilgi."
     },
     "Gegevens over uw profiel, account en plaats binnen de organisatie.": {
@@ -2670,7 +2590,6 @@
       "ro": "Informații despre profilul, contul și poziția dvs. în cadrul organizației.",
       "sl": "Informacije o vašem profilu, računu in položaju v organizaciji.",
       "sk": "Informácie o vašom profile, účte a pozícii v rámci organizácie.",
-      "tlh": "ghot De'lIj, accountlIj, organizationDaq Daq'lIj je.",
       "tr": "Profiliniz, hesabınız ve kuruluş içindeki pozisyonunuz hakkında bilgiler."
     },
     "Gegevens over uw toetsmomenten en de vragen die daarbij zijn aangeboden.": {
@@ -2703,7 +2622,6 @@
       "ro": "Informații despre momentele de testare și întrebările prezentate.",
       "sl": "Informacije o vaših preizkusnih trenutkih in predstavljenih vprašanjih.",
       "sk": "Informácie o vašich testovacích momentoch a predložených otázkach.",
-      "tlh": "DuD poHmeylIj, poHmeyvetlhDaq DuHmey noblu'bogh je.",
       "tr": "Test anlarınız ve sunulan sorular hakkında bilgiler."
     },
     "Gegevens over willekeurige volgorde": {
@@ -2736,7 +2654,6 @@
       "ro": "Date ale comenzii aleatorii",
       "sl": "Podatki o naključnem vrstnem redu",
       "sk": "Údaje o náhodnej objednávke",
-      "tlh": "Random order data De'",
       "tr": "Rastgele sıra verileri"
     },
     "Gegevenscategorie": {
@@ -2769,7 +2686,6 @@
       "ro": "Categoria de date",
       "sl": "Kategorija podatkov",
       "sk": "Kategória údajov",
-      "tlh": "Data category De'",
       "tr": "Veri kategorisi"
     },
     "Gekoppeld accountnummer": {
@@ -2802,7 +2718,6 @@
       "ro": "Numărul de cont conectat",
       "sl": "Številka povezanega računa",
       "sk": "Číslo prepojeného účtu",
-      "tlh": "Linked account number De'",
       "tr": "Bağlı hesap numarası"
     },
     "Gekozen antwoorden": {
@@ -2835,7 +2750,6 @@
       "ro": "Răspunsuri selectate",
       "sl": "Izbrani odgovori",
       "sk": "Vybrané odpovede",
-      "tlh": "DuHmey wIvlu'bogh",
       "tr": "Seçilen yanıtlar"
     },
     "Gelukt": {
@@ -2868,7 +2782,6 @@
       "ro": "Succes",
       "sl": "Uspeh",
       "sk": "Úspech",
-      "tlh": "Success De'",
       "tr": "Başarı"
     },
     "Geprobeerd op": {
@@ -2901,7 +2814,6 @@
       "ro": "A încercat",
       "sl": "Preizkušeno",
       "sk": "Vyskúšané",
-      "tlh": "Tried on De'",
       "tr": "Denendi"
     },
     "Gerechtvaardigd belang": {
@@ -2934,7 +2846,6 @@
       "ro": "Interes legitim",
       "sl": "Zakonit interes",
       "sk": "Oprávnený záujem",
-      "tlh": "Legitimate interest De'",
       "tr": "Meşru menfaat"
     },
     "Gereserveerd": {
@@ -2967,7 +2878,6 @@
       "ro": "Rezervat",
       "sl": "Rezervirano",
       "sk": "Rezervované",
-      "tlh": "Reserved De'",
       "tr": "Ayrılmış"
     },
     "Gereserveerd op": {
@@ -3000,7 +2910,6 @@
       "ro": "Rezervat pe",
       "sl": "Rezervirano dne",
       "sk": "Rezervované dňa",
-      "tlh": "Reserved on De'",
       "tr": "Rezerve tarihi"
     },
     "Geslaagd": {
@@ -3033,7 +2942,6 @@
       "ro": "A trecut",
       "sl": "opravljeno",
       "sk": "Prešiel",
-      "tlh": "Qap",
       "tr": "Geçti"
     },
     "Gestart op": {
@@ -3066,7 +2974,6 @@
       "ro": "A început pe",
       "sl": "Začelo dne",
       "sk": "Začalo sa dňa",
-      "tlh": "taghpu' jaj",
       "tr": "Başlangıç tarihi"
     },
     "Getoonde tijd per dia in milliseconden": {
@@ -3099,7 +3006,6 @@
       "ro": "Timpul afișat pe diapozitiv în milisecunde",
       "sl": "Čas, prikazan na diapozitiv v milisekundah",
       "sk": "Čas zobrazený na snímku v milisekundách",
-      "tlh": "Time shown per slide in milliseconds De'",
       "tr": "Milisaniye cinsinden slayt başına gösterilen süre"
     },
     "Herkomst van inschrijving": {
@@ -3132,7 +3038,6 @@
       "ro": "Originea înregistrării",
       "sl": "Izvor registracije",
       "sk": "Pôvod registrácie",
-      "tlh": "Origin of registration De'",
       "tr": "Kayıt menşei"
     },
     "Hoogst haalbare score": {
@@ -3165,7 +3070,6 @@
       "ro": "Cel mai mare scor posibil",
       "sl": "Najvišji možni rezultat",
       "sk": "Najvyššie možné skóre",
-      "tlh": "mI'vam jen law' Hoch jen puS",
       "tr": "Mümkün olan en yüksek puan"
     },
     "Identificatienummer bij aanmeldprovider": {
@@ -3198,7 +3102,6 @@
       "ro": "Număr de identificare pentru furnizorul de înregistrare",
       "sl": "Identifikacijska številka ponudnika registracije",
       "sk": "Identifikačné číslo poskytovateľa registrácie",
-      "tlh": "Identification number for registration provider De'",
       "tr": "Kayıt sağlayıcının kimlik numarası"
     },
     "Identiteitsbewerkingnummer": {
@@ -3231,7 +3134,6 @@
       "ro": "Numărul operațiunii de identitate",
       "sl": "Številka identifikacijske operacije",
       "sk": "Číslo identifikačnej operácie",
-      "tlh": "Identity operation number De'",
       "tr": "Kimlik işlem numarası"
     },
     "In afwachting": {
@@ -3264,7 +3166,6 @@
       "ro": "În așteptare",
       "sl": "V teku",
       "sk": "Čaká na spracovanie",
-      "tlh": "Pending De'",
       "tr": "Beklemede"
     },
     "In behandeling": {
@@ -3297,7 +3198,6 @@
       "ro": "În curs",
       "sl": "V teku",
       "sk": "Prebieha",
-      "tlh": "In progress De'",
       "tr": "Devam ediyor"
     },
     "In behandeling genomen op": {
@@ -3330,7 +3230,6 @@
       "ro": "Procesat pe",
       "sl": "Obdelano dne",
       "sk": "Spracované dňa",
-      "tlh": "Processed on De'",
       "tr": "İşlenme tarihi"
     },
     "In quarantaine": {
@@ -3363,7 +3262,6 @@
       "ro": "În carantină",
       "sl": "V karanteni",
       "sk": "V karanténe",
-      "tlh": "In quarantine De'",
       "tr": "Karantinada"
     },
     "Ingeleverd": {
@@ -3396,7 +3294,6 @@
       "ro": "Trimis",
       "sl": "Oddano",
       "sk": "Predložené",
-      "tlh": "Submitted De'",
       "tr": "Gönderildi"
     },
     "Ingeleverd op": {
@@ -3429,7 +3326,6 @@
       "ro": "Trimis pe",
       "sl": "Oddano dne",
       "sk": "Odoslané dňa",
-      "tlh": "Submitted on De'",
       "tr": "Gönderilme tarihi"
     },
     "Ingericht op": {
@@ -3462,7 +3358,6 @@
       "ro": "Decorat pe",
       "sl": "Okrašeno na",
       "sk": "Zdobené na",
-      "tlh": "Decorated on De'",
       "tr": "Dekore edilmiş"
     },
     "Ingeschreven op": {
@@ -3495,7 +3390,6 @@
       "ro": "Înregistrat pe",
       "sl": "Registriran dne",
       "sk": "Registrovaný dňa",
-      "tlh": "Registered on De'",
       "tr": "Kayıt tarihi"
     },
     "Ingetrokken": {
@@ -3528,7 +3422,6 @@
       "ro": "Retras",
       "sl": "umaknjen",
       "sk": "Stiahnuté",
-      "tlh": "Withdrawn De'",
       "tr": "Geri çekildi"
     },
     "Ingetrokken op": {
@@ -3561,7 +3454,6 @@
       "ro": "Retras pe",
       "sl": "Umaknjeno dne",
       "sk": "Stiahnuté na",
-      "tlh": "qIlpu' jaj",
       "tr": "Geri çekilme tarihi"
     },
     "Inhoud": {
@@ -3594,7 +3486,6 @@
       "ro": "Conținut",
       "sl": "Vsebina",
       "sk": "Obsah",
-      "tlh": "ngaSbogh",
       "tr": "İçerik"
     },
     "Inschrijvingen": {
@@ -3627,7 +3518,6 @@
       "ro": "Înregistrări",
       "sl": "Registracije",
       "sk": "Registrácie",
-      "tlh": "qI'ghachmey",
       "tr": "Kayıtlar"
     },
     "Inschrijvingsnummer": {
@@ -3660,7 +3550,6 @@
       "ro": "Număr de înregistrare",
       "sl": "Registrska številka",
       "sk": "Registračné číslo",
-      "tlh": "Registration number De'",
       "tr": "Kayıt numarası"
     },
     "Installatiebeveiligingslogboek": {
@@ -3693,7 +3582,6 @@
       "ro": "Jurnal de securitate de instalare",
       "sl": "Varnostni dnevnik namestitve",
       "sk": "Protokol zabezpečenia inštalácie",
-      "tlh": "jomlu'pu' Doch Hung QonoS",
       "tr": "Kurulum güvenliği günlüğü"
     },
     "Installatienummer": {
@@ -3726,7 +3614,6 @@
       "ro": "Numărul de instalare",
       "sl": "Številka namestitve",
       "sk": "Číslo inštalácie",
-      "tlh": "Installation number De'",
       "tr": "Kurulum numarası"
     },
     "Installatieverzoeken": {
@@ -3759,7 +3646,6 @@
       "ro": "Cereri de instalare",
       "sl": "Zahteve za namestitev",
       "sk": "Požiadavky na inštaláciu",
-      "tlh": "jomlu'meH tlhobghachmey",
       "tr": "Kurulum istekleri"
     },
     "Inzage": {
@@ -3792,7 +3678,6 @@
       "ro": "Inspecție",
       "sl": "Inšpekcija",
       "sk": "Inšpekcia",
-      "tlh": "Inspection De'",
       "tr": "Muayene"
     },
     "Ja": {
@@ -3825,7 +3710,6 @@
       "ro": "Da",
       "sl": "ja",
       "sk": "áno",
-      "tlh": "HIja'",
       "tr": "Evet"
     },
     "Kwalificatienummer": {
@@ -3858,7 +3742,6 @@
       "ro": "Numărul de calificare",
       "sl": "Kvalifikacijska številka",
       "sk": "Kvalifikačné číslo",
-      "tlh": "Qualification number De'",
       "tr": "Yeterlilik numarası"
     },
     "Kwalificaties": {
@@ -3891,7 +3774,6 @@
       "ro": "Calificări",
       "sl": "Kvalifikacije",
       "sk": "Kvalifikácia",
-      "tlh": "laHmey",
       "tr": "Nitelikler"
     },
     "Laatst actief op": {
@@ -3924,7 +3806,6 @@
       "ro": "Ultima activitate pe",
       "sl": "Nazadnje aktiven dne",
       "sk": "Naposledy aktívny",
-      "tlh": "Last active on De'",
       "tr": "Son etkin olma tarihi"
     },
     "Laatst bekeken dia": {
@@ -3957,7 +3838,6 @@
       "ro": "Ultimul diapozitiv vizualizat",
       "sl": "Zadnji ogledani diapozitiv",
       "sk": "Naposledy zobrazená snímka",
-      "tlh": "Last viewed slide De'",
       "tr": "Son görüntülenen slayt"
     },
     "Laatst gewijzigd op": {
@@ -3990,7 +3870,6 @@
       "ro": "Ultima modificare pe",
       "sl": "Nazadnje spremenjeno dne",
       "sk": "Naposledy upravené dňa",
-      "tlh": "choH Qav jaj",
       "tr": "Son değiştirilme tarihi"
     },
     "Laatste fout": {
@@ -4023,7 +3902,6 @@
       "ro": "Ultima greseala",
       "sl": "Zadnja napaka",
       "sk": "Posledná chyba",
-      "tlh": "Last mistake De'",
       "tr": "Son hata"
     },
     "Lesnummer": {
@@ -4056,7 +3934,6 @@
       "ro": "Numărul lecției",
       "sl": "Številka lekcije",
       "sk": "Číslo lekcie",
-      "tlh": "Lesson number De'",
       "tr": "Ders numarası"
     },
     "Lesreserveringen": {
@@ -4089,7 +3966,6 @@
       "ro": "Rezervări pentru lecții",
       "sl": "Rezervacije lekcij",
       "sk": "Rezervácie lekcií",
-      "tlh": "ghojmoHghach poH qI'ghachmey",
       "tr": "Ders rezervasyonları"
     },
     "Lesvoortgang": {
@@ -4122,7 +3998,6 @@
       "ro": "Progresul lecției",
       "sl": "Napredek lekcije",
       "sk": "Pokrok v lekcii",
-      "tlh": "ghojmoHghach tlhetlh",
       "tr": "Ders ilerlemesi"
     },
     "Lidmaatschappen": {
@@ -4155,7 +4030,6 @@
       "ro": "Membrii",
       "sl": "Članstva",
       "sk": "Členstvá",
-      "tlh": "ghom jeSwI' Dotlhmey",
       "tr": "Üyelikler"
     },
     "Locatie": {
@@ -4188,7 +4062,6 @@
       "ro": "Locație",
       "sl": "Lokacija",
       "sk": "Poloha",
-      "tlh": "Location De'",
       "tr": "Konum"
     },
     "Manier van afronden": {
@@ -4221,7 +4094,6 @@
       "ro": "Mod de rotunjire",
       "sl": "Način zaokroževanja",
       "sk": "Spôsob zaokrúhľovania",
-      "tlh": "Way of rounding De'",
       "tr": "Yuvarlama yolu"
     },
     "Maximaal aantal controles": {
@@ -4254,7 +4126,6 @@
       "ro": "Numărul maxim de verificări",
       "sl": "Največje število pregledov",
       "sk": "Maximálny počet kontrol",
-      "tlh": "Maximum number of checks De'",
       "tr": "Maksimum çek sayısı"
     },
     "Maximaal aantal pogingen": {
@@ -4287,7 +4158,6 @@
       "ro": "Numărul maxim de încercări",
       "sl": "Največje število poskusov",
       "sk": "Maximálny počet pokusov",
-      "tlh": "Maximum number of attempts De'",
       "tr": "Maksimum deneme sayısı"
     },
     "Maximale leeftijd van de aanmelding": {
@@ -4320,7 +4190,6 @@
       "ro": "Vârsta maximă de înregistrare",
       "sl": "Najvišja starost za registracijo",
       "sk": "Maximálny vek registrácie",
-      "tlh": "Maximum age of registration De'",
       "tr": "Maksimum kayıt yaşı"
     },
     "Mislukt": {
@@ -4353,7 +4222,6 @@
       "ro": "A eșuat",
       "sl": "Ni uspelo",
       "sk": "Nepodarilo sa",
-      "tlh": "Failed De'",
       "tr": "Başarısız"
     },
     "Naam": {
@@ -4386,7 +4254,6 @@
       "ro": "Nume",
       "sl": "Ime",
       "sk": "Meno",
-      "tlh": "pong",
       "tr": "Ad"
     },
     "Naam van de activiteit": {
@@ -4419,7 +4286,6 @@
       "ro": "Denumirea activității",
       "sl": "Ime dejavnosti",
       "sk": "Názov aktivity",
-      "tlh": "Name of the activity De'",
       "tr": "Etkinliğin adı"
     },
     "Naam van de bijeenkomst": {
@@ -4452,7 +4318,6 @@
       "ro": "Numele întâlnirii",
       "sl": "Ime sestanka",
       "sk": "Názov stretnutia",
-      "tlh": "Name of the meeting De'",
       "tr": "Toplantının adı"
     },
     "Nee": {
@@ -4485,7 +4350,6 @@
       "ro": "Nu",
       "sl": "št",
       "sk": "Nie",
-      "tlh": "ghobe'",
       "tr": "Hayır"
     },
     "Netwerkadres": {
@@ -4518,7 +4382,6 @@
       "ro": "Adresa de rețea",
       "sl": "Omrežni naslov",
       "sk": "Sieťová adresa",
-      "tlh": "Network address De'",
       "tr": "Ağ adresi"
     },
     "Niet actief": {
@@ -4551,7 +4414,6 @@
       "ro": "Nu este activ",
       "sl": "Ni aktivno",
       "sk": "Nie je aktívny",
-      "tlh": "Not active De'",
       "tr": "Aktif değil"
     },
     "Niet geregistreerd": {
@@ -4584,7 +4446,6 @@
       "ro": "Neînregistrat",
       "sl": "Ni registriran",
       "sk": "Neregistrovaný",
-      "tlh": "ghItlhbe'lu'",
       "tr": "Kayıtlı değil"
     },
     "Niet ingevuld": {
@@ -4617,7 +4478,6 @@
       "ro": "Nu completat",
       "sl": "Ni izpolnjeno",
       "sk": "Nevyplnené",
-      "tlh": "naQmoHbe'lu'",
       "tr": "Doldurulmadı"
     },
     "Niet verschenen": {
@@ -4650,7 +4510,6 @@
       "ro": "Nepublicat",
       "sl": "Ni objavljeno",
       "sk": "Nezverejnené",
-      "tlh": "Not published De'",
       "tr": "Yayınlanmadı"
     },
     "Niveau van extra aanmeldcontrole": {
@@ -4683,7 +4542,6 @@
       "ro": "Nivelul de control suplimentar al înregistrării",
       "sl": "Stopnja dodatne registracijske kontrole",
       "sk": "Úroveň dodatočnej kontroly registrácie",
-      "tlh": "Level of additional registration control De'",
       "tr": "Ek kayıt kontrolü düzeyi"
     },
     "Nummer van de toetsopzet": {
@@ -4716,7 +4574,6 @@
       "ro": "Numărul planului de testare",
       "sl": "Številka testnega načrta",
       "sk": "Číslo skúšobného plánu",
-      "tlh": "Number of the test plan De'",
       "tr": "Test planının numarası"
     },
     "Nummer van het brongegeven": {
@@ -4749,7 +4606,6 @@
       "ro": "Numărul datelor sursă",
       "sl": "Številka izvornih podatkov",
       "sk": "Číslo zdrojových údajov",
-      "tlh": "Number of the source data De'",
       "tr": "Kaynak veri sayısı"
     },
     "Nummer van uw verwijderde gegeven": {
@@ -4782,7 +4638,6 @@
       "ro": "Numărul datelor dvs. șterse",
       "sl": "Število vaših izbrisanih podatkov",
       "sk": "Počet vymazaných údajov",
-      "tlh": "Number of your deleted data De'",
       "tr": "Silinen verilerinizin sayısı"
     },
     "Onderdeel {nummer}": {
@@ -4815,7 +4670,6 @@
       "ro": "Piesa {nummer}",
       "sl": "Del {nummer}",
       "sk": "Diel {nummer}",
-      "tlh": "ay' {nummer}",
       "tr": "Parça {nummer}"
     },
     "Onderwerp": {
@@ -4848,7 +4702,6 @@
       "ro": "Subiect",
       "sl": "Predmet",
       "sk": "Predmet",
-      "tlh": "OpenKAT ja'chuq: Thema",
       "tr": "Ders"
     },
     "Onderwerp van de actie": {
@@ -4881,7 +4734,6 @@
       "ro": "Obiectul actiunii",
       "sl": "Predmet tožbe",
       "sk": "Predmet akcie",
-      "tlh": "Subject of the action De'",
       "tr": "Eylemin konusu"
     },
     "Ontvanger": {
@@ -4914,7 +4766,6 @@
       "ro": "Destinatar",
       "sl": "Prejemnik",
       "sk": "Príjemca",
-      "tlh": "Recipient De'",
       "tr": "Alıcı"
     },
     "Opgegeven bestandsgrootte": {
@@ -4947,7 +4798,6 @@
       "ro": "Dimensiunea specificată a fișierului",
       "sl": "Določena velikost datoteke",
       "sk": "Zadaná veľkosť súboru",
-      "tlh": "Specified file size De'",
       "tr": "Belirtilen dosya boyutu"
     },
     "Opgegeven bestandstype": {
@@ -4980,7 +4830,6 @@
       "ro": "Tipul de fișier specificat",
       "sl": "Določena vrsta datoteke",
       "sk": "Zadaný typ súboru",
-      "tlh": "Specified file type De'",
       "tr": "Belirtilen dosya türü"
     },
     "Opgegeven controlecode": {
@@ -5013,7 +4862,6 @@
       "ro": "Cod de control specificat",
       "sl": "Določena kontrolna koda",
       "sk": "Zadaný riadiaci kód",
-      "tlh": "Specified control code De'",
       "tr": "Belirtilen kontrol kodu"
     },
     "Opgeslagen bestandsgrootte": {
@@ -5046,7 +4894,6 @@
       "ro": "Dimensiunea fișierului salvat",
       "sl": "Velikost shranjene datoteke",
       "sk": "Veľkosť uloženého súboru",
-      "tlh": "Saved file size De'",
       "tr": "Kaydedilen dosya boyutu"
     },
     "Opgeslagen controlecode": {
@@ -5079,7 +4926,6 @@
       "ro": "Cod de control stocat",
       "sl": "Shranjena kontrolna koda",
       "sk": "Uložený riadiaci kód",
-      "tlh": "Stored control code De'",
       "tr": "Saklanan kontrol kodu"
     },
     "Organisatienummer": {
@@ -5112,7 +4958,6 @@
       "ro": "Numărul organizației",
       "sl": "Številka organizacije",
       "sk": "Číslo organizácie",
-      "tlh": "Organization number De'",
       "tr": "Organizasyon numarası"
     },
     "Overdraagbaarheid": {
@@ -5145,7 +4990,6 @@
       "ro": "Transferabilitate",
       "sl": "Prenosljivost",
       "sk": "Prenosnosť",
-      "tlh": "Transferability De'",
       "tr": "Aktarılabilirlik"
     },
     "Overeenkomst": {
@@ -5178,7 +5022,6 @@
       "ro": "Potrivire",
       "sl": "Ujemanje",
       "sk": "Zhoda",
-      "tlh": "rapghach",
       "tr": "Benzerlik"
     },
     "PE-toekenningnummer": {
@@ -5211,7 +5054,6 @@
       "ro": "Numărul premiului PE",
       "sl": "Številka nagrade PE",
       "sk": "Číslo ocenenia PE",
-      "tlh": "PE award number De'",
       "tr": "PE ödül numarası"
     },
     "Poging": {
@@ -5244,7 +5086,6 @@
       "ro": "încercare",
       "sl": "Poskus",
       "sk": "Pokus",
-      "tlh": "Attempt De'",
       "tr": "deneme"
     },
     "Positie": {
@@ -5277,7 +5118,6 @@
       "ro": "Poziție",
       "sl": "Položaj",
       "sk": "pozícia",
-      "tlh": "Position De'",
       "tr": "Pozisyon"
     },
     "Privacyverzoeken": {
@@ -5310,7 +5150,6 @@
       "ro": "Solicitări de confidențialitate",
       "sl": "Zahteve glede zasebnosti",
       "sk": "Žiadosti o ochranu osobných údajov",
-      "tlh": "privacy tlhobghachmey",
       "tr": "Gizlilik talepleri"
     },
     "Probeer een andere zoekterm.": {
@@ -5343,7 +5182,6 @@
       "ro": "Încercați un alt termen de căutare.",
       "sl": "Poskusite z drugim iskalnim izrazom.",
       "sk": "Skúste iný hľadaný výraz.",
-      "tlh": "latlh mu' yInej.",
       "tr": "Farklı bir arama terimi deneyin."
     },
     "Punten": {
@@ -5376,7 +5214,6 @@
       "ro": "Puncte",
       "sl": "Točke",
       "sk": "Body",
-      "tlh": "mInmey",
       "tr": "Noktalar"
     },
     "Reden": {
@@ -5409,7 +5246,6 @@
       "ro": "Motivul",
       "sl": "Razlog",
       "sk": "Dôvod",
-      "tlh": "meq",
       "tr": "Sebep"
     },
     "Reden of grondslag": {
@@ -5442,7 +5278,6 @@
       "ro": "Motivul sau temeiul",
       "sl": "Razlog ali osnova",
       "sk": "Dôvod alebo základ",
-      "tlh": "Reason or basis De'",
       "tr": "Sebep veya temel"
     },
     "Reden van afwijzing": {
@@ -5475,7 +5310,6 @@
       "ro": "Motivul respingerii",
       "sl": "Razlog za zavrnitev",
       "sk": "Dôvod odmietnutia",
-      "tlh": "Reason for rejection De'",
       "tr": "Reddedilme nedeni"
     },
     "Reden van bevestiging": {
@@ -5508,7 +5342,6 @@
       "ro": "Motivul confirmării",
       "sl": "Razlog za potrditev",
       "sk": "Dôvod potvrdenia",
-      "tlh": "Reason for confirmation De'",
       "tr": "Onaylanma nedeni"
     },
     "Reden van intrekking": {
@@ -5541,7 +5374,6 @@
       "ro": "Motivul retragerii",
       "sl": "Razlog za umik",
       "sk": "Dôvod stiahnutia",
-      "tlh": "Reason for withdrawal De'",
       "tr": "Geri çekilme nedeni"
     },
     "Reden voor langer bewaren": {
@@ -5574,7 +5406,6 @@
       "ro": "Motiv pentru depozitare mai lungă",
       "sl": "Razlog za daljše shranjevanje",
       "sk": "Dôvod dlhšieho skladovania",
-      "tlh": "Reason for longer storage De'",
       "tr": "Daha uzun depolama nedeni"
     },
     "Regels voor de cursusversie": {
@@ -5607,7 +5438,6 @@
       "ro": "Reguli pentru versiunea cursului",
       "sl": "Pravila za različico tečaja",
       "sk": "Pravidlá pre verziu kurzu",
-      "tlh": "Rules for the course version De'",
       "tr": "Kurs sürümü için kurallar"
     },
     "Registratie {nummer}": {
@@ -5640,7 +5470,6 @@
       "ro": "Înregistrare {nummer}",
       "sl": "Registracija {nummer}",
       "sk": "Registrácia {nummer}",
-      "tlh": "Registration {nummer} De'",
       "tr": "Kayıt {nummer}"
     },
     "Resultaat": {
@@ -5673,7 +5502,6 @@
       "ro": "Rezultat",
       "sl": "Rezultat",
       "sk": "Výsledok",
-      "tlh": "wanI'",
       "tr": "Sonuç"
     },
     "Resultaat bij de aanmeldprovider": {
@@ -5706,7 +5534,6 @@
       "ro": "Rezultat la furnizorul de înregistrare",
       "sl": "Rezultat pri ponudniku registracije",
       "sk": "Výsledok u poskytovateľa registrácie",
-      "tlh": "Result at the registration provider De'",
       "tr": "Kayıt sağlayıcısındaki sonuç"
     },
     "Rol": {
@@ -5739,7 +5566,6 @@
       "ro": "Roll",
       "sl": "Roll",
       "sk": "Roll",
-      "tlh": "Qu'",
       "tr": "Rulo"
     },
     "Score": {
@@ -5772,7 +5598,6 @@
       "ro": "Scor",
       "sl": "rezultat",
       "sk": "skóre",
-      "tlh": "mI'",
       "tr": "Puan"
     },
     "Soort": {
@@ -5805,7 +5630,6 @@
       "ro": "Tip",
       "sl": "Vrsta",
       "sk": "Druh",
-      "tlh": "Segh",
       "tr": "Tür"
     },
     "Soort aanwezigheid": {
@@ -5838,7 +5662,6 @@
       "ro": "Un fel de prezență",
       "sl": "Vrsta prisotnosti",
       "sk": "Druh prítomnosti",
-      "tlh": "Kind of presence De'",
       "tr": "Bir çeşit mevcudiyet"
     },
     "Soort accountbewerking": {
@@ -5871,7 +5694,6 @@
       "ro": "Tipul operațiunii contului",
       "sl": "Vrsta operacije računa",
       "sk": "Typ operácie s účtom",
-      "tlh": "Type of account operation De'",
       "tr": "Hesap işlemi türü"
     },
     "Soort gebeurtenis": {
@@ -5904,7 +5726,6 @@
       "ro": "Tipul evenimentului",
       "sl": "Vrsta dogodka",
       "sk": "Typ udalosti",
-      "tlh": "Type of event De'",
       "tr": "Etkinlik türü"
     },
     "Soort privacyverzoek": {
@@ -5937,7 +5758,6 @@
       "ro": "Tipul cererii de confidențialitate",
       "sl": "Vrsta zahteve glede zasebnosti",
       "sk": "Typ žiadosti o ochranu osobných údajov",
-      "tlh": "Type of privacy request De'",
       "tr": "Gizlilik isteği türü"
     },
     "Status": {
@@ -5970,7 +5790,6 @@
       "ro": "Stare",
       "sl": "Stanje",
       "sk": "Stav",
-      "tlh": "Dotlh",
       "tr": "Durum"
     },
     "Status van de bijeenkomst": {
@@ -6003,7 +5822,6 @@
       "ro": "Starea întâlnirii",
       "sl": "Status sestanka",
       "sk": "Stav stretnutia",
-      "tlh": "Status of the meeting De'",
       "tr": "Toplantının durumu"
     },
     "Strenge beveiligingsmodus": {
@@ -6036,7 +5854,6 @@
       "ro": "Mod de înaltă securitate",
       "sl": "Način visoke varnosti",
       "sk": "Režim vysokého zabezpečenia",
-      "tlh": "High security mode De'",
       "tr": "Yüksek güvenlik modu"
     },
     "Technisch toegangslogboek": {
@@ -6069,7 +5886,6 @@
       "ro": "Jurnal de acces tehnic",
       "sl": "Dnevnik tehničnih dostopov",
       "sk": "Technický denník prístupu",
-      "tlh": "De' cham legh QonoS",
       "tr": "Teknik erişim günlüğü"
     },
     "Technische gegevens die nodig zijn voor aanmelden, beveiligen en betrouwbaar verwerken.": {
@@ -6102,7 +5918,6 @@
       "ro": "Date tehnice necesare pentru înregistrare, securitate și procesare fiabilă.",
       "sl": "Tehnični podatki, potrebni za registracijo, varnost in zanesljivo obdelavo.",
       "sk": "Technické údaje potrebné na registráciu, bezpečnosť a spoľahlivé spracovanie.",
-      "tlh": "rarmeH, HungmeH \\`ej De' lIngbogh wI' yInmeH De' cham poQlu'.",
       "tr": "Kayıt, güvenlik ve güvenilir işleme için gerekli teknik veriler."
     },
     "Technische naam: {naam}": {
@@ -6135,7 +5950,6 @@
       "ro": "Denumire tehnică: {naam}",
       "sl": "Tehnično ime: {naam}",
       "sk": "Technický názov: {naam}",
-      "tlh": "De' cham pong: {naam}",
       "tr": "Teknik ad: {naam}"
     },
     "Technische opslagcategorie": {
@@ -6168,7 +5982,6 @@
       "ro": "Categoria tehnică de depozitare",
       "sl": "Kategorija tehničnega skladiščenja",
       "sk": "Kategória technického skladovania",
-      "tlh": "Technical storage category De'",
       "tr": "Teknik depolama kategorisi"
     },
     "Technische opslaglocatie van de PDF": {
@@ -6201,7 +6014,6 @@
       "ro": "Locația de stocare tehnică a PDF-ului",
       "sl": "Lokacija tehničnega shranjevanja PDF-ja",
       "sk": "Technické miesto uloženia PDF",
-      "tlh": "Technical storage location of the PDF De'",
       "tr": "PDF'nin teknik saklama konumu"
     },
     "Tijdstip van aanmelding": {
@@ -6234,7 +6046,6 @@
       "ro": "Ora inregistrarii",
       "sl": "Čas registracije",
       "sk": "Čas registrácie",
-      "tlh": "Time of registration De'",
       "tr": "Kayıt zamanı"
     },
     "Tijdzone": {
@@ -6267,7 +6078,6 @@
       "ro": "Fus orar",
       "sl": "Časovni pas",
       "sk": "Časové pásmo",
-      "tlh": "Time zone De'",
       "tr": "Saat dilimi"
     },
     "Titel": {
@@ -6300,7 +6110,6 @@
       "ro": "Titlu",
       "sl": "Naslov",
       "sk": "Názov",
-      "tlh": "per",
       "tr": "Başlık"
     },
     "Toestand": {
@@ -6333,7 +6142,6 @@
       "ro": "Stare",
       "sl": "Pogoj",
       "sk": "Podmienka",
-      "tlh": "Condition De'",
       "tr": "Durum"
     },
     "Toestemming": {
@@ -6366,7 +6174,6 @@
       "ro": "Consimțământ",
       "sl": "Soglasje",
       "sk": "Súhlas",
-      "tlh": "chaw'",
       "tr": "Rıza"
     },
     "Toetspogingen": {
@@ -6399,7 +6206,6 @@
       "ro": "Încercări de testare",
       "sl": "Testni poskusi",
       "sk": "Testovacie pokusy",
-      "tlh": "DuD nIDmey",
       "tr": "Test denemeleri"
     },
     "Toetspogingnummer": {
@@ -6432,7 +6238,6 @@
       "ro": "Numărul încercării de testare",
       "sl": "Številka testnega poskusa",
       "sk": "Číslo pokusu o test",
-      "tlh": "Test attempt number De'",
       "tr": "Test denemesi numarası"
     },
     "Uiterste inlevermoment": {
@@ -6465,7 +6270,6 @@
       "ro": "Termenul limită de depunere",
       "sl": "Rok za oddajo",
       "sk": "Termín odovzdania",
-      "tlh": "Deadline for submission De'",
       "tr": "Gönderim için son tarih"
     },
     "Uitgegeven op": {
@@ -6498,7 +6302,6 @@
       "ro": "Publicat pe",
       "sl": "Objavljeno dne",
       "sk": "Zverejnené dňa",
-      "tlh": "noblu'pu' jaj",
       "tr": "Yayınlandığı tarih"
     },
     "Uitgenodigd e-mailadres": {
@@ -6531,7 +6334,6 @@
       "ro": "Adresă de e-mail invitată",
       "sl": "E-poštni naslov povabljenca",
       "sk": "Pozvaná e-mailová adresa",
-      "tlh": "Invited email address De'",
       "tr": "Davet edilen e-posta adresi"
     },
     "Uitnodigingen": {
@@ -6564,7 +6366,6 @@
       "ro": "Invitații",
       "sl": "Vabila",
       "sk": "Pozvánky",
-      "tlh": "rItmeH QInmey",
       "tr": "Davetiyeler"
     },
     "Uniek nummer (ID)": {
@@ -6597,7 +6398,6 @@
       "ro": "Număr unic (ID)",
       "sl": "Enolična številka (ID)",
       "sk": "Jedinečné číslo (ID)",
-      "tlh": "mI' le' (ID)",
       "tr": "Benzersiz numara (ID)"
     },
     "Uniek verwerkingskenmerk": {
@@ -6630,7 +6430,6 @@
       "ro": "Caracteristica unică de procesare",
       "sl": "Edinstvena funkcija obdelave",
       "sk": "Jedinečná funkcia spracovania",
-      "tlh": "Unique processing feature De'",
       "tr": "Benzersiz işleme özelliği"
     },
     "Uw accountnummer": {
@@ -6663,7 +6462,6 @@
       "ro": "Numărul de cont",
       "sl": "Vaša številka računa",
       "sk": "Číslo vášho účtu",
-      "tlh": "Your account number De'",
       "tr": "Hesap numaranız"
     },
     "Uw accountnummer als uitvoerder": {
@@ -6696,7 +6494,6 @@
       "ro": "Numărul de cont ca executor",
       "sl": "Številka vašega računa kot izvršitelja",
       "sk": "Číslo vášho účtu ako exekútora",
-      "tlh": "Your account number as executor De'",
       "tr": "Yönetici olarak hesap numaranız"
     },
     "Uzelf als uploader": {
@@ -6729,7 +6526,6 @@
       "ro": "Tu însuți în calitate de încărcător",
       "sl": "Sebe kot nalagalca",
       "sk": "Vy ako používateľ, ktorý nahral video",
-      "tlh": "Yourself as an uploader De'",
       "tr": "Yükleyici olarak kendiniz"
     },
     "Vaardigheidsversienummer": {
@@ -6762,7 +6558,6 @@
       "ro": "Numărul versiunii de calificare",
       "sl": "Številka različice spretnosti",
       "sk": "Číslo verzie zručnosti",
-      "tlh": "Skill version number De'",
       "tr": "Beceri sürüm numarası"
     },
     "Vast internetadres van de installatie": {
@@ -6795,7 +6590,6 @@
       "ro": "Adresa de internet fixă a instalării",
       "sl": "Fiksni internetni naslov namestitve",
       "sk": "Pevná internetová adresa inštalácie",
-      "tlh": "Fixed internet address of the installation De'",
       "tr": "Kurulumun sabit internet adresi"
     },
     "Vastgelegde beslisgegevens": {
@@ -6828,7 +6622,6 @@
       "ro": "Date de decizie înregistrate",
       "sl": "Zapisani podatki o odločitvi",
       "sk": "Zaznamenané rozhodovacie údaje",
-      "tlh": "Recorded decision data De'",
       "tr": "Kaydedilen karar verileri"
     },
     "Vastgelegde gegevens": {
@@ -6861,7 +6654,6 @@
       "ro": "Date înregistrate",
       "sl": "Zapisani podatki",
       "sk": "Zaznamenané údaje",
-      "tlh": "Recorded data De'",
       "tr": "Kaydedilen veriler"
     },
     "Vereist niveau van aanmeldzekerheid": {
@@ -6894,7 +6686,6 @@
       "ro": "Nivelul necesar de certitudine a înregistrării",
       "sl": "Zahtevana stopnja varnosti registracije",
       "sk": "Požadovaná úroveň istoty registrácie",
-      "tlh": "Required level of registration certainty De'",
       "tr": "Gerekli kayıt kesinliği düzeyi"
     },
     "Vereiste aanmeldmethoden": {
@@ -6927,7 +6718,6 @@
       "ro": "Metode de conectare necesare",
       "sl": "Zahtevani načini prijave",
       "sk": "Požadované spôsoby prihlásenia",
-      "tlh": "Required login methods De'",
       "tr": "Gerekli giriş yöntemleri"
     },
     "Verloopt bij inactiviteit op": {
@@ -6960,7 +6750,6 @@
       "ro": "Expiră când este inactiv",
       "sl": "Poteče, ko ni aktiven",
       "sk": "Platnosť vyprší pri nečinnosti",
-      "tlh": "Expires when inactive De'",
       "tr": "Etkin olmadığında sona erer"
     },
     "Verloopt definitief op": {
@@ -6993,7 +6782,6 @@
       "ro": "Expiră definitiv",
       "sl": "Trajno poteče",
       "sk": "Platnosť vyprší natrvalo",
-      "tlh": "Expires permanently De'",
       "tr": "Kalıcı olarak sona eriyor"
     },
     "Verloopt op": {
@@ -7026,7 +6814,6 @@
       "ro": "Expiră",
       "sl": "poteče",
       "sk": "Platnosť vyprší",
-      "tlh": "rIn jaj",
       "tr": "Süresi doluyor"
     },
     "Versie": {
@@ -7059,7 +6846,6 @@
       "ro": "Versiune",
       "sl": "Različica",
       "sk": "Verzia",
-      "tlh": "mo'",
       "tr": "Sürüm"
     },
     "Versienummer van de PE-regel": {
@@ -7092,7 +6878,6 @@
       "ro": "Numărul versiunii regulii PE",
       "sl": "Številka različice pravila PE",
       "sk": "Číslo verzie pravidla PE",
-      "tlh": "Version number of the PE rule De'",
       "tr": "PE kuralının sürüm numarası"
     },
     "Verwerkte verzoeken": {
@@ -7125,7 +6910,6 @@
       "ro": "Cereri procesate",
       "sl": "Obdelane zahteve",
       "sk": "Spracované žiadosti",
-      "tlh": "tlhobghachmey vanglu'pu'bogh",
       "tr": "İşlenen istekler"
     },
     "Verwijderd op": {
@@ -7158,7 +6942,6 @@
       "ro": "Eliminat pe",
       "sl": "Odstranjeno dne",
       "sk": "Odstránené dňa",
-      "tlh": "Removed on De'",
       "tr": "Kaldırıldı"
     },
     "Verwijdering": {
@@ -7191,7 +6974,6 @@
       "ro": "Îndepărtarea",
       "sl": "Odstranitev",
       "sk": "Odstránenie",
-      "tlh": "Removal De'",
       "tr": "Kaldırma"
     },
     "Verwijderingsregister": {
@@ -7224,7 +7006,6 @@
       "ro": "Registrul de eliminare",
       "sl": "Register odstranitve",
       "sk": "Register odstránenia",
-      "tlh": "teqlu'ghach QonoS",
       "tr": "Kaldırma Kaydı"
     },
     "Verwijzing naar het antwoord": {
@@ -7257,7 +7038,6 @@
       "ro": "Referire la răspuns",
       "sl": "Sklicevanje na odgovor",
       "sk": "Odkaz na odpoveď",
-      "tlh": "Reference to the answer De'",
       "tr": "Cevaba referans"
     },
     "Verzoeknummer": {
@@ -7290,7 +7070,6 @@
       "ro": "Numărul cererii",
       "sl": "Številka zahteve",
       "sk": "Číslo žiadosti",
-      "tlh": "Request number De'",
       "tr": "Talep numarası"
     },
     "Verzoeknummer van de app": {
@@ -7323,7 +7102,6 @@
       "ro": "Numărul solicitării aplicației",
       "sl": "Številka zahteve aplikacije",
       "sk": "Číslo žiadosti o aplikáciu",
-      "tlh": "App request number De'",
       "tr": "Uygulama istek numarası"
     },
     "Verzonden op": {
@@ -7356,7 +7134,6 @@
       "ro": "Trimis mai departe",
       "sl": "Poslano naprej",
       "sk": "Odoslané ďalej",
-      "tlh": "Sent on De'",
       "tr": "Gönderildi"
     },
     "Volgende controle op": {
@@ -7389,7 +7166,6 @@
       "ro": "Următorul control",
       "sl": "Naslednji pregled",
       "sk": "Ďalšia kontrola",
-      "tlh": "Next check up De'",
       "tr": "Sonraki kontrol"
     },
     "Volgnummer": {
@@ -7422,7 +7198,6 @@
       "ro": "Numărul de ordine",
       "sl": "Zaporedna številka",
       "sk": "Poradové číslo",
-      "tlh": "Sequence number De'",
       "tr": "Sıra numarası"
     },
     "Volgorde van antwoordopties": {
@@ -7455,7 +7230,6 @@
       "ro": "Ordinea opțiunilor de răspuns",
       "sl": "Vrstni red možnosti odgovora",
       "sk": "Poradie možností odpovedí",
-      "tlh": "Order of answer options De'",
       "tr": "Yanıt seçeneklerinin sırası"
     },
     "Vraagnummer binnen de toetspoging": {
@@ -7488,7 +7262,6 @@
       "ro": "Numărul întrebării în încercarea de testare",
       "sl": "Številka vprašanja v preizkusnem poskusu",
       "sk": "Číslo otázky v rámci pokusu o test",
-      "tlh": "Question number within the test attempt De'",
       "tr": "Test denemesindeki soru numarası"
     },
     "Vraagversienummer": {
@@ -7521,7 +7294,6 @@
       "ro": "Numărul versiunii întrebării",
       "sl": "Številka različice vprašanja",
       "sk": "Číslo verzie otázky",
-      "tlh": "Question version number De'",
       "tr": "Soru sürüm numarası"
     },
     "Vragen in toetspogingen": {
@@ -7554,7 +7326,6 @@
       "ro": "Întrebări în încercările de testare",
       "sl": "Vprašanja v testnih poskusih",
       "sk": "Otázky v pokusoch o test",
-      "tlh": "DuD nIDmeyDaq DuHmey",
       "tr": "Test denemelerindeki sorular"
     },
     "Vrijgegeven": {
@@ -7587,7 +7358,6 @@
       "ro": "Eliberat",
       "sl": "Izpuščen",
       "sk": "Vydané",
-      "tlh": "Released De'",
       "tr": "Yayınlandı"
     },
     "Vrijgegeven op": {
@@ -7620,7 +7390,6 @@
       "ro": "Eliberat pe",
       "sl": "Izdano dne",
       "sk": "Vydané dňa",
-      "tlh": "Released on De'",
       "tr": "Yayınlandığı tarih"
     },
     "Waarde": {
@@ -7653,7 +7422,6 @@
       "ro": "Valoare",
       "sl": "Vrednost",
       "sk": "Hodnota",
-      "tlh": "Ha'DIbaH Segh",
       "tr": "Değer"
     },
     "Wat gebeurt na de bewaartermijn": {
@@ -7686,7 +7454,6 @@
       "ro": "Ce se întâmplă după perioada de păstrare",
       "sl": "Kaj se zgodi po obdobju hrambe",
       "sk": "Čo sa stane po období uchovávania",
-      "tlh": "What happens after the retention period De'",
       "tr": "Saklama süresinden sonra ne olur?"
     },
     "Wettelijke verplichting": {
@@ -7719,7 +7486,6 @@
       "ro": "Obligație legală",
       "sl": "Zakonska obveznost",
       "sk": "Zákonná povinnosť",
-      "tlh": "Legal obligation De'",
       "tr": "Yasal yükümlülük"
     },
     "Wijzigingen aan PE-punten": {
@@ -7752,7 +7518,6 @@
       "ro": "Modificări ale punctelor PE",
       "sl": "Spremembe PE točk",
       "sk": "Zmeny bodov PE",
-      "tlh": "PE mI'mey choHmey",
       "tr": "PE puanlarındaki değişiklikler"
     },
     "Wijzigingen aan kwalificaties": {
@@ -7785,7 +7550,6 @@
       "ro": "Modificări ale calificărilor",
       "sl": "Spremembe kvalifikacij",
       "sk": "Zmeny kvalifikácií",
-      "tlh": "laHmey choHmey",
       "tr": "Yeterliliklerdeki değişiklikler"
     },
     "Wijzigingen in aanmeldbeveiliging": {
@@ -7818,7 +7582,6 @@
       "ro": "Modificări ale securității de conectare",
       "sl": "Spremembe varnosti prijave",
       "sk": "Zmeny zabezpečenia prihlásenia",
-      "tlh": "rarmeH Hung choHmey",
       "tr": "Giriş güvenliğindeki değişiklikler"
     },
     "Zekerheid": {
@@ -7851,7 +7614,6 @@
       "ro": "certitudine",
       "sl": "Gotovost",
       "sk": "Istota",
-      "tlh": "bejtaHghach",
       "tr": "kesinlik"
     },
     "Zoek bijvoorbeeld op cursus, datum of status": {
@@ -7884,7 +7646,6 @@
       "ro": "De exemplu, căutați după curs, dată sau stare",
       "sl": "Iščite na primer po tečaju, datumu ali statusu",
       "sk": "Hľadajte napríklad podľa kurzu, dátumu alebo stavu",
-      "tlh": "ghojmoHghach, jaj pagh Dotlh yInej",
       "tr": "Örneğin kursa, tarihe veya duruma göre arama yapın"
     },
     "Zoeken in uw gegevens": {
@@ -7917,7 +7678,6 @@
       "ro": "Căutați datele dvs",
       "sl": "Poiščite svoje podatke",
       "sk": "Vyhľadajte svoje údaje",
-      "tlh": "De'lIjDaq yInej",
       "tr": "Verilerinizi arayın"
     },
     "Zoekopdracht wissen": {
@@ -7950,7 +7710,6 @@
       "ro": "Șterge căutarea",
       "sl": "Počisti iskanje",
       "sk": "Vymazať vyhľadávanie",
-      "tlh": "Sam woD",
       "tr": "Aramayı temizle"
     },
     "{aantal} categorieën gevonden": {
@@ -7983,7 +7742,6 @@
       "ro": "S-au găsit categorii {aantal}",
       "sl": "Najdene kategorije {aantal}",
       "sk": "Nájdené kategórie {aantal}",
-      "tlh": "{aantal} De' ghom tu'lu'",
       "tr": "{aantal} kategorileri bulundu"
     }
   },

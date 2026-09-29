@@ -30,7 +30,6 @@
       "ro": "Toate",
       "sl": "Vse",
       "sk": "Všetko",
-      "tlh": "Hoch",
       "tr": "Tümü"
     },
     "Presentaties": {
@@ -63,7 +62,6 @@
       "ro": "Prezentări",
       "sl": "Predstavitve",
       "sk": "Prezentácie",
-      "tlh": "cha'navmey",
       "tr": "Sunumlar"
     },
     "Documenten": {
@@ -96,7 +94,6 @@
       "ro": "Documente",
       "sl": "Dokumenti",
       "sk": "Dokumenty",
-      "tlh": "ghItlhmey",
       "tr": "Belgeler"
     },
     "Voorbeeld": {
@@ -129,7 +126,6 @@
       "ro": "Previzualizare",
       "sl": "Predogled",
       "sk": "Náhľad",
-      "tlh": "nughantlh",
       "tr": "Önizleme"
     },
     "Voorbeeld tonen": {
@@ -162,7 +158,6 @@
       "ro": "Arată previzualizarea",
       "sl": "Pokaži predogled",
       "sk": "Zobraziť náhľad",
-      "tlh": "nughantlh yI'agh",
       "tr": "Önizlemeyi göster"
     },
     "Voorbeeld tonen bij openen": {
@@ -195,7 +190,6 @@
       "ro": "Arată previzualizarea la deschidere",
       "sl": "Pokaži predogled pri odpiranju",
       "sk": "Zobraziť náhľad pri otváraní",
-      "tlh": "poSDI' nughantlh yI'agh",
       "tr": "Açarken önizleme göster"
     },
     "Wijs een bestand aan om er hier een voorbeeld van te zien.": {
@@ -228,7 +222,6 @@
       "ro": "Indică un fișier pentru a vedea aici o previzualizare.",
       "sl": "Pokažite na datoteko, da tukaj vidite predogled.",
       "sk": "Ukážte na súbor, aby ste tu videli náhľad.",
-      "tlh": "teywI' yI'agh; naDev nughantlh yIlegh.",
       "tr": "Burada önizlemesini görmek için bir dosyayı işaret et."
     },
     "Dit bestand kan niet worden getoond. Openen weigert het ook — de inhoud is onveilig, beschadigd of onleesbaar.": {
@@ -261,7 +254,6 @@
       "ro": "Acest fișier nu poate fi afișat. Și deschiderea îl refuză — conținutul este nesigur, deteriorat sau ilizibil.",
       "sl": "Te datoteke ni mogoče prikazati. Tudi odpiranje jo zavrne — vsebina je nevarna, poškodovana ali neberljiva.",
       "sk": "Tento súbor nemožno zobraziť. Otvorenie ho tiež odmieta — obsah je nebezpečný, poškodený alebo nečitateľný.",
-      "tlh": "teywI' vam 'anglu'laHbe'. poSlu'laHbe' je — nab QobHa'be', 'oy'moHlu', pagh laDlu'laHbe'.",
       "tr": "Bu dosya gösterilemiyor. Açma da reddediyor — içerik güvensiz, bozuk veya okunamıyor."
     },
     "Dit document is leeg.": {
@@ -294,7 +286,6 @@
       "ro": "Acest document este gol.",
       "sl": "Ta dokument je prazen.",
       "sk": "Tento dokument je prázdny.",
-      "tlh": "ghItlh vam chIm.",
       "tr": "Bu belge boş."
     },
     "Deze presentatie heeft nog geen dia.": {
@@ -327,7 +318,6 @@
       "ro": "Această prezentare nu are încă niciun slide.",
       "sl": "Ta predstavitev še nima diapozitivov.",
       "sk": "Táto prezentácia zatiaľ nemá žiadnu snímku.",
-      "tlh": "cha'nav vam 'echletHom ghajbe'.",
       "tr": "Bu sunumda henüz slayt yok."
     },
     "Alleen het begin van het document wordt getoond.": {
@@ -360,7 +350,6 @@
       "ro": "Se afișează doar începutul documentului.",
       "sl": "Prikazan je samo začetek dokumenta.",
       "sk": "Zobrazuje sa iba začiatok dokumentu.",
-      "tlh": "ghItlh tagh neH 'anglu'.",
       "tr": "Yalnızca belgenin başı gösteriliyor."
     },
     "Bestanden zoeken op deze computer": {
@@ -393,7 +382,6 @@
       "ro": "Găsește fișiere pe acest computer",
       "sl": "Poišči datoteke na tem računalniku",
       "sk": "Nájsť súbory v tomto počítači",
-      "tlh": "De'wI' vamDaq ghItlhmey yISam",
       "tr": "Bu bilgisayarda dosya ara"
     },
     "Dubbele bestanden opruimen": {
@@ -426,7 +414,6 @@
       "ro": "Curăță fișierele duplicate",
       "sl": "Počisti podvojene datoteke",
       "sk": "Upratať duplicitné súbory",
-      "tlh": "ghItlhmey nIb Say'moH",
       "tr": "Yinelenen dosyaları temizle"
     },
     "bestand(en) gevonden": {
@@ -459,7 +446,6 @@
       "ro": "fișier(e) găsit(e)",
       "sl": "datotek najdenih",
       "sk": "súbor(y) nájdený(é)",
-      "tlh": "ghItlh(mey) tu'lu'",
       "tr": "dosya bulundu"
     },
     "Geen presentaties of documenten gevonden.": {
@@ -492,7 +478,6 @@
       "ro": "Nu s-au găsit prezentări sau documente.",
       "sl": "Ni najdenih predstavitev ali dokumentov.",
       "sk": "Nenašli sa žiadne prezentácie ani dokumenty.",
-      "tlh": "cha'navmey ghItlhmey je tu'be'lu'.",
       "tr": "Sunum veya belge bulunamadı."
     },
     "Geen presentaties of documenten gevonden in de bekende mappen.": {
@@ -525,7 +510,6 @@
       "ro": "Nicio prezentare sau document găsit în folderele cunoscute.",
       "sl": "V znanih mapah ni bilo najdenih predstavitev ali dokumentov.",
       "sk": "V známych priečinkoch sa nenašli žiadne prezentácie ani dokumenty.",
-      "tlh": "Sovlu' ghommeyDaq cha'navmey ghItlhmey je tu'be'lu'.",
       "tr": "Bilinen klasörlerde sunum veya belge bulunamadı."
     },
     "Zoek op bestandsnaam, titel of tekst in het bestand…": {
@@ -558,7 +542,6 @@
       "ro": "Caută după numele fișierului, titlu sau text din fișier…",
       "sl": "Iščite po imenu datoteke, naslovu ali besedilu v datoteki…",
       "sk": "Hľadať podľa názvu súboru, nadpisu alebo textu v súbore…",
-      "tlh": "teywI' pong, per, pagh teywI' mu' yISam…",
       "tr": "Dosya adına, başlığa veya dosyadaki metne göre ara…"
     },
     "Toont in het openscherm een gerenderd voorbeeld van het bestand dat je aanwijst, zodat je ziet wat erin staat voordat je het opent.": {
@@ -591,7 +574,6 @@
       "ro": "Afișează în fereastra de deschidere o previzualizare a fișierului indicat, ca să vezi conținutul înainte de a-l deschide.",
       "sl": "V oknu za odpiranje pokaže izrisan predogled datoteke, na katero pokažete, da vidite vsebino, preden jo odprete.",
       "sk": "V okne otvárania zobrazí vykreslený náhľad súboru, na ktorý ukazujete, aby ste videli obsah pred otvorením.",
-      "tlh": "poS Qub'a'Daq teywI' Da'oghbogh nughantlh 'ang; poSpa' nab yIlegh.",
       "tr": "Açma penceresinde işaret ettiğin dosyanın işlenmiş bir önizlemesini gösterir; böylece açmadan önce içinde ne olduğunu görürsün."
     }
   }

@@ -30,7 +30,6 @@
       "ro": "Fișier mare",
       "sl": "Velika datoteka",
       "sk": "Veľký súbor",
-      "tlh": "tIn mIch",
       "tr": "Büyük dosya"
     },
     "Dit bestand is {grootte} groot. Dat is meer dan de aanbevolen limiet van {limiet}. Importeren kan traag zijn en veel geheugen vragen — op een kleiner apparaat kan de app vastlopen.": {
@@ -63,7 +62,6 @@
       "ro": "Acest fișier are {grootte}. Asta este mai mult decât limita recomandată de {limiet}. Importul poate fi lent și poate folosi multă memorie — pe un dispozitiv mai mic aplicația se poate bloca.",
       "sl": "Ta datoteka je velika {grootte}. To je več kot priporočena omejitev {limiet}. Uvoz je lahko počasen in zahtevati veliko pomnilnika — na manjši napravi se aplikacija lahko zatakne.",
       "sk": "Tento súbor je veľký {grootte}. To je viac ako odporúčaný limit {limiet}. Importovanie môže byť pomalé a vyžadovať veľa pamäte — na menšom zariadení sa aplikácia môže zaseknúť.",
-      "tlh": "mIchvam {grootte} 'ab. {limiet} lunq Dotlh chIm. De'Qo may qeylIS 'ej nIteQHa' — DI' veS nIH DI' De' Qup.",
       "tr": "Bu dosya {grootte} boyutunda. Bu, önerilen {limiet} sınırından daha fazla. İçe aktarma yavaş olabilir ve çok bellek kullanabilir — daha küçük bir cihazda uygulama donabilir."
     },
     "Toch importeren": {
@@ -96,7 +94,6 @@
       "ro": "Importă oricum",
       "sl": "Uvozi vseeno",
       "sk": "Importovať napriek tomu",
-      "tlh": "De'Qo qaS",
       "tr": "Yine de içe aktar"
     }
   }

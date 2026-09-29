@@ -237,7 +237,7 @@ class AppearanceLegibility extends StatelessWidget {
 
   /// Eén zakkend paar: waar het over gaat, wat het haalt, en wat het moest
   /// halen. Geen zin eromheen — het label plus twee getallen leest sneller, en
-  /// scheelt een geïnterpoleerde bronstring in 31 talen.
+  /// scheelt een geïnterpoleerde bronstring in 30 talen.
   Widget _row(BuildContext context, AppearanceContrastFinding finding) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),

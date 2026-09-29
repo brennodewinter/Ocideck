@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -338,29 +336,6 @@ void main() {
       );
       expect(find.byType(Image), findsNothing);
       expect(find.text('🇬🇧'), findsOneWidget);
-    });
-
-    testWidgets('Klingon shows a neutral letter badge, not an emblem', (
-      tester,
-    ) async {
-      // `assets/images/flag_tlh.png` was the Klingon trefoil — a third-party
-      // emblem from the Star Trek franchise, carried in every binary. Naming a
-      // product is nominative use; reproducing its mark as artwork is not. The
-      // language stays, the mark does not.
-      await tester.pumpWidget(
-        MaterialApp(home: Scaffold(body: languageFlag('tlh'))),
-      );
-      expect(find.byType(Image), findsNothing);
-      expect(find.text('tlh'), findsOneWidget);
-      expect(find.text('🖖'), findsNothing);
-    });
-
-    test('the Klingon emblem is gone from the repository and the bundle', () {
-      expect(File('assets/images/flag_tlh.png').existsSync(), isFalse);
-      expect(
-        File('pubspec.yaml').readAsStringSync().contains('flag_tlh'),
-        isFalse,
-      );
     });
 
     testWidgets('an option row shows the flag beside the name', (tester) async {

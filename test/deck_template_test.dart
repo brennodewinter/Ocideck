@@ -48,11 +48,10 @@ const improvementTemplateIds = [
   'procesverbetering-sipoc',
 ];
 
-/// De inhoudstalen van de sjabloondocumenten. Klingon valt voorlopig terug op
-/// Engels totdat de inhoud betrouwbaar door een mens is vertaald.
+/// De inhoudstalen van de sjabloondocumenten: elke ondersteunde taal heeft een
+/// eigen document.
 final contentLanguages = AppLocalizations.supportedLocales
     .map((locale) => locale.languageCode)
-    .where((languageCode) => languageCode != 'tlh')
     .toList(growable: false);
 
 /// De sjablonen die een document meebrengen. Het lege deck hoort er niet bij:
@@ -1190,12 +1189,10 @@ void main() {
       //
       // Er wordt op twee plekken gekeken, want ze kunnen los van elkaar
       // afdwalen: de `title:` in de front matter (die `Deck.title` wordt) en de
-      // kop van de titeldia. Geteld over elk bestand dat er ligt, dus ook de
-      // vier Klingon-documenten — die dragen Engelse inhoud, maar wél de titel
-      // die de kiezer belooft.
+      // kop van de titeldia. Geteld over elk bestand dat er ligt.
       final afwijkend = <String>[];
       for (final template in documentTemplates) {
-        for (final language in [...contentLanguages, 'tlh']) {
+        for (final language in contentLanguages) {
           final file = File('assets/templates/${template.id}.$language.md');
           if (!file.existsSync()) continue;
           final want = AppLocalizations.sourceFor(language, template.title);

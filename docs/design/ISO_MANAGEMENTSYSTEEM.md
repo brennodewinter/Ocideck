@@ -376,7 +376,7 @@ managementsamenvatting-render.
 
 **Blok D — Trend & afronding. *(Nog te doen.)*** Deck-per-periode-delta's +
 provenance/sign-off-hergebruik. De docs (USER_GUIDE / SOURCE_MAP / FILE_FORMAT /
-API / CHANGELOG) zijn voor Blok A–C bijgewerkt; l10n (31 talen), tests en poorten
+API / CHANGELOG) zijn voor Blok A–C bijgewerkt; l10n (30 talen), tests en poorten
 lopen mee met de code.
 
 ### Nog te doen

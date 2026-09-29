@@ -7,7 +7,7 @@
 // Spec format:
 //   {
 //     "additions": {
-//       "<Dutch source string>": { "en": "…", "de": "…", … all 31 non-nl … },
+//       "<Dutch source string>": { "en": "…", "de": "…", … all 30 non-nl … },
 //       …
 //     },
 //     "unchanged": ["Heatmap", "Combo"]   // optional: loanwords kept identical
@@ -54,7 +54,6 @@ const langs = [
   'ro',
   'sl',
   'sk',
-  'tlh',
   'tr',
 ];
 

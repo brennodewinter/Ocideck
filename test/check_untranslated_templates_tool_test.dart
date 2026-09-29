@@ -126,14 +126,6 @@ void main() {
       expect(lines, contains('<li>Ask for a specific example</li>'));
     });
 
-    test('slaat het Klingon over — dat staat op de Engelse terugval', () {
-      write('demo', 'en', '# Executive summary');
-      write('demo', 'nl', '# Managementsamenvatting');
-      write('demo', 'tlh', '# Executive summary');
-
-      expect(findUntranslated(temp.path), isEmpty);
-    });
-
     test('slaat een sjabloon zonder Nederlandse bron over', () {
       // Zonder bron is er geen maatlat; melden zou raden zijn.
       write('demo', 'en', '# Executive summary');

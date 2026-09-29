@@ -311,6 +311,6 @@ class TabsState {
 
 /// Het opschrift van een tabblad zonder deck. Volgt de actieve interfacetaal
 /// via [AppLocalizations.active] — niet de kale literal `'Nieuw'` die in alle
-/// 32 talen Nederlands gaf (#576), en niet `const AppLocalizations(Locale('nl'))`,
+/// 31 talen Nederlands gaf (#576), en niet `const AppLocalizations(Locale('nl'))`,
 /// waarvan de `Locale('nl')` een misleidend handvat is (#1251).
 String get _newTabLabel => AppLocalizations.active.d('Nieuw');

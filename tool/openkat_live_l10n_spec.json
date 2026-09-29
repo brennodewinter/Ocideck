@@ -30,7 +30,6 @@
       "ro": "De pe un server OpenKAT",
       "sl": "Z OpenKAT strežnika",
       "sk": "Z OpenKAT servera",
-      "tlh": "OpenKAT De'wI'vo'",
       "tr": "Bir OpenKAT sunucusundan"
     },
     "Vanuit een map": {
@@ -63,7 +62,6 @@
       "ro": "Dintr-un folder",
       "sl": "Iz mape",
       "sk": "Z priečinka",
-      "tlh": "Doch",
       "tr": "Bir klasörden"
     },
     "Sluit één of meer OpenKAT-omgevingen aan (bijvoorbeeld productie en acceptatie). OciDeck toont beschikbare rapportages; de inhoud haalt u binnen via een JSON-export uit OpenKAT.": {
@@ -96,7 +94,6 @@
       "ro": "Conectați unul sau mai multe medii OpenKAT (de exemplu producție și acceptare). OciDeck afișează rapoartele disponibile; importați conținutul printr-un export JSON din OpenKAT.",
       "sl": "Povežite eno ali več OpenKAT okolij (npr. produkcijo in sprejem). OciDeck prikaže razpoložljiva poročila; vsebino uvozite prek JSON izvoza iz OpenKAT.",
       "sk": "Pripojte jedno alebo viac prostredí OpenKAT (napr. produkciu a akceptáciu). OciDeck zobrazí dostupné reporty; obsah naimportujete cez JSON export z OpenKAT.",
-      "tlh": "wa' OpenKAT De'wI' ghom qIj, ghom law'. OciDeck report chu' legh; OpenKAT JSON exportvo' De' lI'.",
       "tr": "Bir veya daha fazla OpenKAT ortamı bağlayın (örneğin üretim ve kabul). OciDeck kullanılabilir raporları gösterir; içeriği OpenKAT'tan JSON dışa aktarımıyla içe aktarın."
     },
     "Server toevoegen…": {
@@ -129,7 +126,6 @@
       "ro": "Adaugă server…",
       "sl": "Dodaj strežnik…",
       "sk": "Pridať server…",
-      "tlh": "De'wI' chel…",
       "tr": "Sunucu ekle…"
     },
     "Rapportage van server…": {
@@ -162,7 +158,6 @@
       "ro": "Raport de pe server…",
       "sl": "Poročilo s strežnika…",
       "sk": "Report zo servera…",
-      "tlh": "De'wI' report…",
       "tr": "Sunucudan rapor…"
     },
     "Nog geen OpenKAT-server aangesloten.": {
@@ -195,7 +190,6 @@
       "ro": "Niciun server OpenKAT conectat încă.",
       "sl": "Še ni povezanega OpenKAT strežnika.",
       "sk": "Zatiaľ nie je pripojený žiadny OpenKAT server.",
-      "tlh": "pagh OpenKAT De'wI' rar.",
       "tr": "Henüz OpenKAT sunucusu bağlanmadı."
     },
     "Bezig…": {
@@ -228,7 +222,6 @@
       "ro": "Se lucrează…",
       "sl": "Poteka…",
       "sk": "Prebieha…",
-      "tlh": "taH…",
       "tr": "İşleniyor…"
     },
     "OpenKAT-server bewerken": {
@@ -261,7 +254,6 @@
       "ro": "Editează serverul OpenKAT",
       "sl": "Uredi OpenKAT strežnik",
       "sk": "Upraviť OpenKAT server",
-      "tlh": "OpenKAT De'wI' choH",
       "tr": "OpenKAT sunucusunu düzenle"
     },
     "OpenKAT-server toevoegen": {
@@ -294,7 +286,6 @@
       "ro": "Adaugă server OpenKAT",
       "sl": "Dodaj OpenKAT strežnik",
       "sk": "Pridať OpenKAT server",
-      "tlh": "OpenKAT De'wI' chel",
       "tr": "OpenKAT sunucusu ekle"
     },
     "OpenKAT-server toevoegen…": {
@@ -327,7 +318,6 @@
       "ro": "Adaugă server OpenKAT…",
       "sl": "Dodaj OpenKAT strežnik…",
       "sk": "Pridať OpenKAT server…",
-      "tlh": "OpenKAT De'wI' chel…",
       "tr": "OpenKAT sunucusu ekle…"
     },
     "OpenKAT-server verwijderen?": {
@@ -360,7 +350,6 @@
       "ro": "Eliminați serverul OpenKAT?",
       "sl": "Odstraniti OpenKAT strežnik?",
       "sk": "Odstrániť OpenKAT server?",
-      "tlh": "OpenKAT De'wI' teq?",
       "tr": "OpenKAT sunucusu kaldırılsın mı?"
     },
     "Dit verwijdert “{name}” en het bijbehorende toegangstoken van dit apparaat. Dat kunt u niet ongedaan maken.": {
@@ -393,7 +382,6 @@
       "ro": "Aceasta elimină “{name}” și tokenul de acces asociat de pe acest dispozitiv. Nu puteți anula.",
       "sl": "To odstrani “{name}” in pripadajoči žeton za dostop iz te naprave. Tega ni mogoče razveljaviti.",
       "sk": "Tým sa z tohto zariadenia odstráni “{name}” a súvisiaci prístupový token. Nedá sa to vrátiť späť.",
-      "tlh": "vaj “{name}” je' token teq. vajHa' vIghoSlaHbe'.",
       "tr": "Bu, “{name}” ve ilişkili erişim belirtecini bu cihazdan kaldırır. Geri alınamaz."
     },
     "Weergavenaam": {
@@ -426,7 +414,6 @@
       "ro": "Nume afișat",
       "sl": "Prikazno ime",
       "sk": "Zobrazovaný názov",
-      "tlh": "pong",
       "tr": "Görünen ad"
     },
     "Bijvoorbeeld Productie of Acceptatie": {
@@ -459,7 +446,6 @@
       "ro": "De exemplu Producție sau Acceptare",
       "sl": "Npr. Produkcija ali Sprejem",
       "sk": "Napr. Produkcia alebo Akceptácia",
-      "tlh": "Production ghom Accept ghom",
       "tr": "Örneğin Üretim veya Kabul"
     },
     "Adres van OpenKAT": {
@@ -492,7 +478,6 @@
       "ro": "Adresă OpenKAT",
       "sl": "Naslov OpenKAT",
       "sk": "Adresa OpenKAT",
-      "tlh": "OpenKAT qach",
       "tr": "OpenKAT adresi"
     },
     "Verbinding met: {host}": {
@@ -525,7 +510,6 @@
       "ro": "Conexiune la: {host}",
       "sl": "Povezava z: {host}",
       "sk": "Pripojenie k: {host}",
-      "tlh": "rarlu' {host}",
       "tr": "Bağlantı: {host}"
     },
     "Eigen netwerk (LAN)": {
@@ -558,7 +542,6 @@
       "ro": "Rețea locală (LAN)",
       "sl": "Lastno omrežje (LAN)",
       "sk": "Vlastná sieť (LAN)",
-      "tlh": "LAN",
       "tr": "Yerel ağ (LAN)"
     },
     "Alleen voor OpenKAT op het eigen netwerk. Staat HTTP toe en laat privé-adressen toe. Uitgeschakeld: alleen HTTPS.": {
@@ -591,7 +574,6 @@
       "ro": "Doar pentru OpenKAT în rețeaua locală. Permite HTTP și adrese private. Dezactivat: doar HTTPS.",
       "sl": "Samo za OpenKAT v lokalnem omrežju. Dovoli HTTP in zasebne naslove. Izklopljeno: samo HTTPS.",
       "sk": "Len pre OpenKAT v lokálnej sieti. Povolí HTTP a súkromné adresy. Vypnuté: len HTTPS.",
-      "tlh": "LAN OpenKAT neH. HTTP chaw'. yImeH: HTTPS neH.",
       "tr": "Yalnızca yerel ağdaki OpenKAT için. HTTP ve özel adreslere izin verir. Kapalı: yalnızca HTTPS."
     },
     "Toegangstoken": {
@@ -624,7 +606,6 @@
       "ro": "Token de acces",
       "sl": "Žeton za dostop",
       "sk": "Prístupový token",
-      "tlh": "token",
       "tr": "Erişim belirteci"
     },
     "Laat leeg om het opgeslagen token te behouden": {
@@ -657,7 +638,6 @@
       "ro": "Lăsați gol pentru a păstra tokenul salvat",
       "sl": "Pustite prazno, da ohranite shranjeni žeton",
       "sk": "Nechajte prázdne na zachovanie uloženého tokenu",
-      "tlh": "token yIlan",
       "tr": "Kayıtlı belirteci korumak için boş bırakın"
     },
     "Plak het token hier": {
@@ -690,7 +670,6 @@
       "ro": "Lipiți tokenul aici",
       "sl": "Prilepite žeton sem",
       "sk": "Vložte token sem",
-      "tlh": "token yIlan",
       "tr": "Belirteci buraya yapıştırın"
     },
     "Vraag uw OpenKAT-beheerder om een API-token in het beheerdersscherm. Het token blijft op dit apparaat, in de sleutelhanger van uw besturingssysteem — niet in het deck.": {
@@ -723,7 +702,6 @@
       "ro": "Cereți administratorului OpenKAT un token API în ecranul de administrare. Tokenul rămâne pe acest dispozitiv, în keychain-ul sistemului — nu în deck.",
       "sl": "Prosite OpenKAT skrbnika za API žeton na skrbniškem zaslonu. Žeton ostane na tej napravi v keychainu OS — ne v decku.",
       "sk": "Požiadajte správcu OpenKAT o API token na administračnej obrazovke. Token zostane na tomto zariadení v keychain OS — nie v decku.",
-      "tlh": "OpenKAT vav ra' API token. vaj De'wI'vo' token — deckvo' ghobe'.",
       "tr": "OpenKAT yöneticinizden yönetim ekranında bir API belirteci isteyin. Belirteç bu cihazda, işletim sisteminin anahtarlığında kalır — deck'te değil."
     },
     "Verbinding wordt getest…": {
@@ -756,7 +734,6 @@
       "ro": "Se testează conexiunea…",
       "sl": "Preverjanje povezave…",
       "sk": "Testuje sa pripojenie…",
-      "tlh": "rarlu' tetlh…",
       "tr": "Bağlantı test ediliyor…"
     },
     "Test de verbinding voordat u opslaat, zodat u weet dat naam, adres en token kloppen.": {
@@ -789,7 +766,6 @@
       "ro": "Testați conexiunea înainte de salvare, ca să confirmați că numele, adresa și tokenul sunt corecte.",
       "sl": "Preizkusite povezavo pred shranjevanjem, da preverite ime, naslov in žeton.",
       "sk": "Otestujte pripojenie pred uložením, aby ste overili názov, adresu a token.",
-      "tlh": "choHqa' rarlu' tetlh, pong qach token lugh.",
       "tr": "Kaydetmeden önce bağlantıyı test edin; ad, adres ve belirtecin doğru olduğundan emin olun."
     },
     "De OpenKAT-koppeling is alleen beschikbaar in de desktopversie.": {
@@ -822,7 +798,6 @@
       "ro": "Conexiunea OpenKAT este disponibilă doar în versiunea desktop.",
       "sl": "OpenKAT povezava je na voljo samo v namizni različici.",
       "sk": "Pripojenie OpenKAT je k dispozícii len v desktopovej verzii.",
-      "tlh": "OpenKAT rarlu' De'wI' neH.",
       "tr": "OpenKAT bağlantısı yalnızca masaüstü sürümünde kullanılabilir."
     },
     "Lees OpenKAT-rapportages in als één managementoverzicht — vanuit een map of vanaf een server.": {
@@ -855,7 +830,6 @@
       "ro": "Importați rapoarte OpenKAT ca o singură privire de management — din folder sau de pe server.",
       "sl": "Uvozite OpenKAT poročila kot en pregled vodenja — iz mape ali strežnika.",
       "sk": "Importujte reporty OpenKAT ako jeden manažérsky prehľad — z priečinka alebo zo servera.",
-      "tlh": "OpenKAT report lI' — Dochvo' De'wI'vo'.",
       "tr": "OpenKAT raporlarını tek bir yönetim özeti olarak içe aktarın — klasörden veya sunucudan."
     },
     "Er staat al een OpenKAT-bron ingesteld; de koppeling blijft daarom bereikbaar, zodat een bestaand OpenKAT-deck bij te werken blijft.": {
@@ -888,7 +862,6 @@
       "ro": "Există deja o sursă OpenKAT configurată; conexiunea rămâne disponibilă pentru a actualiza un deck OpenKAT existent.",
       "sl": "OpenKAT vir je že nastavljen; povezava ostane na voljo za posodabljanje obstoječega OpenKAT decka.",
       "sk": "OpenKAT zdroj je už nastavený; pripojenie zostane dostupné na aktualizáciu existujúceho OpenKAT decku.",
-      "tlh": "OpenKAT Hal chu'lu'. rarlu' taH, deck choHlaH.",
       "tr": "Bir OpenKAT kaynağı zaten yapılandırılmış; mevcut OpenKAT deck'i güncelleyebilmeniz için bağlantı erişilebilir kalır."
     },
     "Rapportage van OpenKAT-server": {
@@ -921,7 +894,6 @@
       "ro": "Raport de pe serverul OpenKAT",
       "sl": "Poročilo z OpenKAT strežnika",
       "sk": "Report z OpenKAT servera",
-      "tlh": "OpenKAT De'wI' report",
       "tr": "OpenKAT sunucusundan rapor"
     },
     "Rapportage van OpenKAT-server…": {
@@ -954,7 +926,6 @@
       "ro": "Raport de pe serverul OpenKAT…",
       "sl": "Poročilo z OpenKAT strežnika…",
       "sk": "Report z OpenKAT servera…",
-      "tlh": "OpenKAT De'wI' report…",
       "tr": "OpenKAT sunucusundan rapor…"
     },
     "Server: {name}": {
@@ -987,7 +958,6 @@
       "ro": "Server: {name}",
       "sl": "Strežnik: {name}",
       "sk": "Server: {name}",
-      "tlh": "De'wI': {name}",
       "tr": "Sunucu: {name}"
     },
     "Organisaties worden opgehaald…": {
@@ -1020,7 +990,6 @@
       "ro": "Se preiau organizațiile…",
       "sl": "Pridobivanje organizacij…",
       "sk": "Načítavajú sa organizácie…",
-      "tlh": "ghom lI'…",
       "tr": "Kuruluşlar alınıyor…"
     },
     "Rapportages worden opgehaald…": {
@@ -1053,7 +1022,6 @@
       "ro": "Se preiau rapoartele…",
       "sl": "Pridobivanje poročil…",
       "sk": "Načítavajú sa reporty…",
-      "tlh": "report lI'…",
       "tr": "Raporlar alınıyor…"
     },
     "Er zijn geen organisaties zichtbaar voor dit token. Vraag uw beheerder om toegang, of kies een andere server.": {
@@ -1086,7 +1054,6 @@
       "ro": "Nu există organizații vizibile pentru acest token. Cereți acces administratorului sau alegeți alt server.",
       "sl": "Za ta žeton ni vidnih organizacij. Prosite skrbnika za dostop ali izberite drug strežnik.",
       "sk": "Pre tento token nie sú viditeľné žiadne organizácie. Požiadajte správcu o prístup alebo zvoľte iný server.",
-      "tlh": "tokenDaq pagh ghom legh. vavvo' naw' pagh latlh De'wI' wIv.",
       "tr": "Bu belirteç için görünür kuruluş yok. Yöneticinizden erişim isteyin veya başka bir sunucu seçin."
     },
     "Er staan geen organisatierapportages klaar op deze server. Maak in OpenKAT eerst een aggregaat-organisatierapport, of kies een andere organisatie.": {
@@ -1119,7 +1086,6 @@
       "ro": "Nu există rapoarte de organizație pregătite pe acest server. Creați mai întâi un raport agregat de organizație în OpenKAT sau alegeți altă organizație.",
       "sl": "Na tem strežniku ni pripravljenih organizacijskih poročil. Najprej ustvarite agregirano organizacijsko poročilo v OpenKAT ali izberite drugo organizacijo.",
       "sk": "Na tomto serveri nie sú pripravené žiadne organizačné reporty. Najprv vytvorte v OpenKAT agregovaný organizačný report alebo zvoľte inú organizáciu.",
-      "tlh": "De'wI'vam report pagh. OpenKATDaq wa' ghom report chenmoH pagh latlh ghom wIv.",
       "tr": "Bu sunucuda hazır kuruluş raporu yok. Önce OpenKAT'ta birleşik kuruluş raporu oluşturun veya başka bir kuruluş seçin."
     },
     "JSON-export uit OpenKAT": {
@@ -1152,7 +1118,6 @@
       "ro": "Export JSON din OpenKAT",
       "sl": "JSON izvoz iz OpenKAT",
       "sk": "JSON export z OpenKAT",
-      "tlh": "OpenKAT JSON export",
       "tr": "OpenKAT'tan JSON dışa aktarım"
     },
     "OpenKAT levert de rapportage-inhoud als JSON-bestand. Exporteer in OpenKAT het gekozen rapport als JSON, en wijs dat bestand of de map hieraan.": {
@@ -1185,7 +1150,6 @@
       "ro": "OpenKAT furnizează conținutul raportului ca fișier JSON. Exportați raportul ales ca JSON în OpenKAT, apoi indicați aici acel fișier sau folder.",
       "sl": "OpenKAT zagotovi vsebino poročila kot JSON datoteko. Izvozite izbrano poročilo kot JSON v OpenKAT in tukaj navedite to datoteko ali mapo.",
       "sk": "OpenKAT poskytuje obsah reportu ako JSON súbor. Exportujte vybraný report ako JSON v OpenKAT a tu ukážte na tento súbor alebo priečinok.",
-      "tlh": "OpenKAT report De' JSON. OpenKATDaq JSON export, vaj De' pagh Doch wIv.",
       "tr": "OpenKAT rapor içeriğini JSON dosyası olarak sağlar. Seçilen raporu OpenKAT'ta JSON olarak dışa aktarın ve burada o dosyayı veya klasörü gösterin."
     },
     "Gekozen: {reportName} · {orgName} · {serverName}": {
@@ -1218,7 +1182,6 @@
       "ro": "Selectat: {reportName} · {orgName} · {serverName}",
       "sl": "Izbrano: {reportName} · {orgName} · {serverName}",
       "sk": "Vybrané: {reportName} · {orgName} · {serverName}",
-      "tlh": "wIvlu': {reportName} · {orgName} · {serverName}",
       "tr": "Seçilen: {reportName} · {orgName} · {serverName}"
     },
     "JSON-bestand kiezen…": {
@@ -1251,7 +1214,6 @@
       "ro": "Alegeți fișier JSON…",
       "sl": "Izberi JSON datoteko…",
       "sk": "Vybrať JSON súbor…",
-      "tlh": "JSON De' wIv…",
       "tr": "JSON dosyası seç…"
     },
     "Map met exports kiezen…": {
@@ -1284,7 +1246,6 @@
       "ro": "Alegeți folder de export…",
       "sl": "Izberi mapo izvozov…",
       "sk": "Vybrať priečinok exportov…",
-      "tlh": "export Doch wIv…",
       "tr": "Dışa aktarım klasörü seç…"
     },
     "Vul een weergavenaam in, bijvoorbeeld Productie.": {
@@ -1317,7 +1278,6 @@
       "ro": "Introduceți un nume afișat, de exemplu Producție.",
       "sl": "Vnesite prikazno ime, npr. Produkcija.",
       "sk": "Zadajte zobrazovaný názov, napr. Produkcia.",
-      "tlh": "pong yIqon, Production.",
       "tr": "Görünen ad girin, örneğin Üretim."
     },
     "Vul een weergavenaam en een adres in.": {
@@ -1350,7 +1310,6 @@
       "ro": "Introduceți un nume afișat și o adresă.",
       "sl": "Vnesite prikazno ime in naslov.",
       "sk": "Zadajte zobrazovaný názov a adresu.",
-      "tlh": "pong qach yIqon.",
       "tr": "Görünen ad ve adres girin."
     },
     "Plak een toegangstoken om verder te gaan.": {
@@ -1383,7 +1342,6 @@
       "ro": "Lipiți un token de acces pentru a continua.",
       "sl": "Prilepite žeton za dostop za nadaljevanje.",
       "sk": "Vložte prístupový token na pokračovanie.",
-      "tlh": "token yIlan, yIghoS.",
       "tr": "Devam etmek için erişim belirteci yapıştırın."
     },
     "Vul een adres in, bijvoorbeeld https://openkat.voorbeeld.nl": {
@@ -1416,7 +1374,6 @@
       "ro": "Introduceți o adresă, de exemplu https://openkat.voorbeeld.nl",
       "sl": "Vnesite naslov, npr. https://openkat.voorbeeld.nl",
       "sk": "Zadajte adresu, napr. https://openkat.voorbeeld.nl",
-      "tlh": "qach yIqon, https://openkat.voorbeeld.nl",
       "tr": "Adres girin, örneğin https://openkat.voorbeeld.nl"
     },
     "Dit adres is niet geldig. Controleer of u een volledige URL heeft ingevuld.": {
@@ -1449,7 +1406,6 @@
       "ro": "Această adresă nu este validă. Verificați dacă ați introdus un URL complet.",
       "sl": "Ta naslov ni veljaven. Preverite, ali ste vnesli celoten URL.",
       "sk": "Táto adresa nie je platná. Skontrolujte, či ste zadali úplnú URL.",
-      "tlh": "qach lo'. URL buqmoH.",
       "tr": "Bu adres geçerli değil. Tam bir URL girdiğinizi kontrol edin."
     },
     "Het adres moet met https:// beginnen, of zet Eigen netwerk aan voor HTTP op het eigen netwerk.": {
@@ -1482,7 +1438,6 @@
       "ro": "Adresa trebuie să înceapă cu https://, sau activați Rețea locală pentru HTTP în rețeaua locală.",
       "sl": "Naslov se mora začeti z https:// ali vklopite Lastno omrežje za HTTP v lokalnem omrežju.",
       "sk": "Adresa musí začínať https://, alebo zapnite Vlastnú sieť pre HTTP v lokálnej sieti.",
-      "tlh": "qach https:// bIreQ, pagh LAN yImeH HTTP.",
       "tr": "Adres https:// ile başlamalı veya yerel ağda HTTP için Yerel ağ'ı açın."
     },
     "Verbonden met {host}. Er zijn nog geen organisaties zichtbaar voor dit token.": {
@@ -1515,7 +1470,6 @@
       "ro": "Conectat la {host}. Nu există organizații vizibile pentru acest token.",
       "sl": "Povezano z {host}. Za ta žeton ni vidnih organizacij.",
       "sk": "Pripojené k {host}. Pre tento token nie sú viditeľné žiadne organizácie.",
-      "tlh": "rarlu' {host}. tokenDaq pagh ghom legh.",
       "tr": "{host} ile bağlandı. Bu belirteç için görünür kuruluş yok."
     },
     "Verbonden met {host}. {n} organisatie(s) bereikbaar.": {
@@ -1548,7 +1502,6 @@
       "ro": "Conectat la {host}. {n} organizație/organizații accesibile.",
       "sl": "Povezano z {host}. Dosegljivih organizacij: {n}.",
       "sk": "Pripojené k {host}. Dosiahnuteľných organizácií: {n}.",
-      "tlh": "rarlu' {host}. {n} ghom.",
       "tr": "{host} ile bağlandı. {n} kuruluş erişilebilir."
     },
     "De verbinding met OpenKAT is mislukt. Controleer het adres en uw netwerk, en probeer opnieuw.": {
@@ -1581,7 +1534,6 @@
       "ro": "Conexiunea la OpenKAT a eșuat. Verificați adresa și rețeaua, apoi încercați din nou.",
       "sl": "Povezava z OpenKAT ni uspela. Preverite naslov in omrežje ter poskusite znova.",
       "sk": "Pripojenie k OpenKAT zlyhalo. Skontrolujte adresu a sieť a skúste znova.",
-      "tlh": "OpenKAT rarlu' luj. qach HeH yIlegh, yIqaS.",
       "tr": "OpenKAT bağlantısı başarısız oldu. Adresi ve ağınızı kontrol edip tekrar deneyin."
     },
     "Er is geen toegangstoken. Plak het token van uw beheerder en probeer opnieuw.": {
@@ -1614,7 +1566,6 @@
       "ro": "Lipsește tokenul de acces. Lipiți tokenul de la administrator și încercați din nou.",
       "sl": "Manjka žeton za dostop. Prilepite žeton skrbnika in poskusite znova.",
       "sk": "Chýba prístupový token. Vložte token od správcu a skúste znova.",
-      "tlh": "pagh token. vav token yIlan, yIqaS.",
       "tr": "Erişim belirteci yok. Yöneticinizin belirtecini yapıştırıp tekrar deneyin."
     },
     "Alleen HTTPS is toegestaan, tenzij Eigen netwerk aan staat.": {
@@ -1647,7 +1598,6 @@
       "ro": "Este permis doar HTTPS, exceptând când Rețea locală este activă.",
       "sl": "Dovoljen je le HTTPS, razen če je vklopljeno Lastno omrežje.",
       "sk": "Povolené je len HTTPS, pokiaľ nie je zapnutá Vlastná sieť.",
-      "tlh": "HTTPS neH, LAN yImeH chaw'.",
       "tr": "Yerel ağ açık değilse yalnızca HTTPS'e izin verilir."
     },
     "OpenKAT weigerde het token. Vraag uw beheerder om een geldig API-token en plak het opnieuw.": {
@@ -1680,7 +1630,6 @@
       "ro": "OpenKAT a respins tokenul. Cereți administratorului un token API valid și lipiți-l din nou.",
       "sl": "OpenKAT je zavrnil žeton. Prosite skrbnika za veljaven API žeton in ga prilepite znova.",
       "sk": "OpenKAT odmietol token. Požiadajte správcu o platný API token a vložte ho znova.",
-      "tlh": "OpenKAT token luj. vavvo' API token yIlan.",
       "tr": "OpenKAT belirteci reddetti. Yöneticinizden geçerli bir API belirteci isteyip tekrar yapıştırın."
     },
     "OpenKAT reageerde niet op tijd. Controleer of de server bereikbaar is en probeer opnieuw.": {
@@ -1713,7 +1662,6 @@
       "ro": "OpenKAT nu a răspuns la timp. Verificați dacă serverul este accesibil și încercați din nou.",
       "sl": "OpenKAT ni pravočasno odgovoril. Preverite, ali je strežnik dosegljiv, in poskusite znova.",
       "sk": "OpenKAT neodpovedal včas. Skontrolujte, či je server dosiahnuteľný, a skúste znova.",
-      "tlh": "OpenKAT jup. De'wI' lughbe', yIqaS.",
       "tr": "OpenKAT zamanında yanıt vermedi. Sunucunun erişilebilir olduğunu kontrol edip tekrar deneyin."
     },
     "Dit adres is niet bereikbaar. Controleer de spelling van de hostnaam en of u op het juiste netwerk zit.": {
@@ -1746,7 +1694,6 @@
       "ro": "Această adresă nu este accesibilă. Verificați scrierea numelui gazdei și rețeaua corectă.",
       "sl": "Ta naslov ni dosegljiv. Preverite črkovanje imena gostitelja in pravilno omrežje.",
       "sk": "Táto adresa nie je dosiahnuteľná. Skontrolujte pravopis názvu hostiteľa a správnu sieť.",
-      "tlh": "qach lughbe'. De'wI' pong yIlegh.",
       "tr": "Bu adrese ulaşılamıyor. Ana bilgisayar adının yazımını ve doğru ağda olup olmadığınızı kontrol edin."
     },
     "OpenKAT gaf een onverwacht groot antwoord. Probeer later opnieuw of vraag uw beheerder om hulp.": {
@@ -1779,7 +1726,6 @@
       "ro": "OpenKAT a returnat un răspuns neașteptat de mare. Încercați mai târziu sau cereți ajutor administratorului.",
       "sl": "OpenKAT je vrnil nepričakovano velik odgovor. Poskusite pozneje ali prosite skrbnika za pomoč.",
       "sk": "OpenKAT vrátil neočakávane veľkú odpoveď. Skúste neskôr alebo požiadajte správcu o pomoc.",
-      "tlh": "OpenKAT jach jang. qaS yIqaS pagh vavvo' naw'.",
       "tr": "OpenKAT beklenmedik derecede büyük bir yanıt döndürdü. Daha sonra tekrar deneyin veya yöneticinizden yardım isteyin."
     },
     "Verbonden": {
@@ -1812,7 +1758,6 @@
       "ro": "Conectat",
       "sl": "Povezano",
       "sk": "Pripojené",
-      "tlh": "rarlu'",
       "tr": "Bağlandı"
     },
     "Token ontbreekt": {
@@ -1845,7 +1790,6 @@
       "ro": "Token lipsă",
       "sl": "Manjka žeton",
       "sk": "Chýba token",
-      "tlh": "pagh token",
       "tr": "Belirteç eksik"
     },
     "Laatst gecontroleerd mislukt": {
@@ -1878,7 +1822,6 @@
       "ro": "Ultima verificare a eșuat",
       "sl": "Zadnje preverjanje ni uspelo",
       "sk": "Posledná kontrola zlyhala",
-      "tlh": "potlh tetlh luj",
       "tr": "Son denetim başarısız"
     },
     "Nog niet gecontroleerd": {
@@ -1911,7 +1854,6 @@
       "ro": "Încă neverificat",
       "sl": "Še ni preverjeno",
       "sk": "Zatiaľ neoverené",
-      "tlh": "pagh tetlh",
       "tr": "Henüz denetlenmedi"
     },
     "OpenKAT gaf een onverwacht antwoord ({code}). Probeer later opnieuw of vraag uw beheerder om hulp.": {
@@ -1944,7 +1886,6 @@
       "ro": "OpenKAT a returnat un răspuns neașteptat ({code}). Încercați mai târziu sau cereți ajutor administratorului.",
       "sl": "OpenKAT je vrnil nepričakovan odgovor ({code}). Poskusite pozneje ali prosite skrbnika za pomoč.",
       "sk": "OpenKAT vrátil neočakávanú odpoveď ({code}). Skúste neskôr alebo požiadajte správcu o pomoc.",
-      "tlh": "OpenKAT jang ({code}). qaS yIqaS pagh vavvo' naw'.",
       "tr": "OpenKAT beklenmedik bir yanıt döndürdü ({code}). Daha sonra tekrar deneyin veya yöneticinizden yardım isteyin."
     }
   },

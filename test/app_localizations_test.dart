@@ -136,11 +136,11 @@ const unchangedInEnglish = {
   'Stichting LibreKAT',
   // 'slides' is in het Engels hetzelfde woord als in het Nederlands. Het staat
   // hier omdat het óók een `t()`-sleutel is: `add_l10n` keek bestandsbreed en
-  // sloeg de `d()`-variant daardoor in alle 31 talen over.
+  // sloeg de `d()`-variant daardoor in alle talen over.
   'slides',
   // Net als 'slides': in het Engels hetzelfde woord. Kwam pas boven toen het
   // woord in de kwaliteitsmelding door `d()` ging in plaats van hardgecodeerd
-  // in de zin te staan (#677) — de andere 31 talen vertalen het wél.
+  // in de zin te staan (#677) — de andere 30 talen vertalen het wél.
   'bullets',
   'GitHub',
   'GitLab',
@@ -229,14 +229,14 @@ const unchangedInEnglish = {
   'was',
   // Het Help-menu in de macOS-menubalk. Nederlands en Engels schrijven dit
   // menu identiek, dus valt de Engelse vertaling samen met de bronstring.
-  // Alleen hier: de overige dertig talen dragen hun eigen woord — Duits
-  // 'Hilfe', Frans 'Aide', Tsjechisch 'Nápověda', Klingon 'QaH' — en die
+  // Alleen hier: de overige talen dragen hun eigen woord — Duits
+  // 'Hilfe', Frans 'Aide', Tsjechisch 'Nápověda' — en die
   // dekking blijft door `unchangedInAllLanguages` bewust ongemoeid.
   'Help',
   // Toetskappen en de minuut-afkorting: het Nederlandse toetsenbord draagt de
   // Engelse opschriften, dus de bronstring ís al Engels. Elders wel echt
   // vertaald — Frans zet 'échap' en 'Entrée', Spaans 'Intro', Italiaans
-  // 'Invio', Turks 'dk', Klingon 'tup'.
+  // 'Invio', Turks 'dk'.
   'esc',
   'Enter',
   'OK',

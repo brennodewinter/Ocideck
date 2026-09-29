@@ -30,7 +30,6 @@
    "ro": "Ofertă",
    "sl": "Ponudba",
    "sk": "Ponuka",
-   "tlh": "pong",
    "tr": "Teklif"
   },
   "Aanwezig geweest": {
@@ -63,7 +62,6 @@
    "ro": "A fost prezent",
    "sl": "Bil je prisoten",
    "sk": "Bol prítomný",
-   "tlh": "pa' 'oH",
    "tr": "Katıldı"
   },
   "Afmelden": {
@@ -96,7 +94,6 @@
    "ro": "Anulează înscrierea",
    "sl": "Odjavi se",
    "sk": "Odhlásiť sa",
-   "tlh": "nga'",
    "tr": "Kaydı iptal et"
   },
   "Afmelden voor bijeenkomst": {
@@ -129,7 +126,6 @@
    "ro": "Anulare înscriere la sesiune",
    "sl": "Odjava z dogodka",
    "sk": "Odhlásiť sa z lekcie",
-   "tlh": "qab vI'",
    "tr": "Oturum kaydını iptal et"
   },
   "Afzien": {
@@ -162,7 +158,6 @@
    "ro": "Zavrni",
    "sl": "Zavrni",
    "sk": "Zamietnuť",
-   "tlh": "qu'",
    "tr": "Reddet"
   },
   "Bekijk mijn inschrijvingen": {
@@ -195,7 +190,6 @@
    "ro": "Vezi înscrierile mele",
    "sl": "Poglej moje prijave",
    "sk": "Zobraziť moje prihlášky",
-   "tlh": "jI'emDaq",
    "tr": "Kayıtlarımı görüntüle"
   },
   "Bekijk welke bewijsstukken u heeft ingediend.": {
@@ -228,7 +222,6 @@
    "ro": "Vedeți ce dovezi ați depus.",
    "sl": "Oglejte si, katere dokaze ste oddali.",
    "sk": "Pozrite sa, aké dôkazy ste odoslali.",
-   "tlh": "qeylIS lIj'e'",
    "tr": "Gönderdiğiniz kanıtları görün."
   },
   "Binnenkort": {
@@ -261,7 +254,6 @@
    "ro": "În curând",
    "sl": "Kmalu",
    "sk": "Čoskoro",
-   "tlh": "tuq",
    "tr": "Yakında"
   },
   "De code wordt niet opgeslagen en alleen bij inschrijven verstuurd.": {
@@ -294,7 +286,6 @@
    "ro": "Codul nu este stocat și este trimis doar la înscriere.",
    "sl": "Koda se ne shranjuje in se pošlje samo ob prijavi.",
    "sk": "Kód sa neukladá a odosiela sa iba pri prihlásení.",
-   "tlh": "mu' rarbe' net wIvbe'",
    "tr": "Kod saklanmaz ve yalnızca kayıt sırasında gönderilir."
   },
   "De gekozen sessie is vol. Kies een andere sessie of plaats u op de wachtlijst.": {
@@ -327,7 +318,6 @@
    "ro": "Sesiunea aleasă este completă. Alegeți alta sau înscrieți-vă pe lista de așteptare.",
    "sl": "Izbrana seja je polna. Izberite drugo ali se vpišite na čakalno listo.",
    "sk": "Vybraná lekcia je plná. Vyberte inú alebo sa zapíšte na čakaciu listinu.",
-   "tlh": "Dutlhe' wa' qab. latlh wIv pagh qab poHlIj Daq",
    "tr": "Seçilen oturum dolu. Başka bir oturum seçin veya bekleme listesine katılın."
   },
   "De wijziging is niet gelukt. Probeer het opnieuw.": {
@@ -360,7 +350,6 @@
    "ro": "Modificarea nu a reușit. Încercați din nou.",
    "sl": "Sprememba ni uspela. Poskusite znova.",
    "sk": "Zmena sa nepodarila. Skúste to znova.",
-   "tlh": "choH lulujpu'. jatlhqa'",
    "tr": "Değişiklik başarısız oldu. Tekrar deneyin."
   },
   "Deze code klopt niet — controleer de code op typefouten.": {
@@ -393,7 +382,6 @@
    "ro": "Acest cod nu este corect — verificați erorile de tastare.",
    "sl": "Ta koda ni pravilna — preverite tipkarske napake.",
    "sk": "Tento kód nie je správny — skontrolujte preklepy.",
-   "tlh": "mu'vam rarbe'be' — Qaghmey yIbuq",
    "tr": "Bu kod doğru değil — yazım hatalarını kontrol edin."
   },
   "Deze sessie overlapt met een bestaande afspraak in uw agenda.": {
@@ -426,7 +414,6 @@
    "ro": "Această sesiune se suprapune cu o întâlnire existentă din calendarul dvs.",
    "sl": "Ta seja se prekriva z obstoječim sestankom v vašem koledarju.",
    "sk": "Táto lekcia sa prekrýva s existujúcim stretnutím vo vašom kalendári.",
-   "tlh": "qabvam Daq nuHwI' DuH",
    "tr": "Bu oturum takviminizdeki mevcut bir randevuyla çakışıyor."
   },
   "Deze vouchercode is niet geldig voor deze uitvoering.": {
@@ -459,7 +446,6 @@
    "ro": "Acest cod de voucher nu este valabil pentru această ediție.",
    "sl": "Ta koda bona ni veljavna za to izvedbo.",
    "sk": "Tento kód voucheru nie je platný pre túto realizáciu.",
-   "tlh": "vam Dotlh pong",
    "tr": "Bu kupon kodu bu düzenleme için geçerli değil."
   },
   "Dit aanbod is niet meer geldig. De lijst is ververst.": {
@@ -492,7 +478,6 @@
    "ro": "Această ofertă nu mai este valabilă. Lista a fost actualizată.",
    "sl": "Ta ponudba ni več veljavna. Seznam je bil osvežen.",
    "sk": "Táto ponuka už neplatí. Zoznam bol aktualizovaný.",
-   "tlh": "pongvam vIl. tetlh choHpu'",
    "tr": "Bu teklif artık geçerli değil. Liste yenilendi."
   },
   "Er is een plaats vrij": {
@@ -525,7 +510,6 @@
    "ro": "Există un loc liber",
    "sl": "Prosto je mesto",
    "sk": "Je voľné miesto",
-   "tlh": "Daq vul",
    "tr": "Yer var"
   },
   "Er is een plaats vrij voor u. Bevestig zo snel mogelijk — het aanbod vervalt uiterlijk {deadline}.": {
@@ -558,7 +542,6 @@
    "ro": "Există un loc liber pentru dvs. Confirmați cât mai curând — oferta expiră cel târziu la {deadline}.",
    "sl": "Za vas je prosto mesto. Potrdite čim prej — ponudba poteče najpozneje {deadline}.",
    "sk": "Pre vás je voľné miesto. Potvrďte čo najskôr — ponuka vyprší najneskôr {deadline}.",
-   "tlh": "Daq vul SoHvaD. nom nom — pong qu' {deadline}.",
    "tr": "Sizin için bir yer var. En kısa sürede onaylayın — teklif en geç {deadline} tarihinde sona eriyor."
   },
   "Er is nu geen aanbod om u voor in te schrijven.": {
@@ -591,7 +574,6 @@
    "ro": "Momentan nu există nicio ofertă pentru înscriere.",
    "sl": "Trenutno ni ponudbe, na katero bi se lahko vpisali.",
    "sk": "Momentálne nie je žiadna ponuka na prihlásenie.",
-   "tlh": "pong 'oHbe'.",
    "tr": "Şu anda kaydolabileceğiniz bir teklif yok."
   },
   "Geen sessies gepland.": {
@@ -624,7 +606,6 @@
    "ro": "Nicio sesiune programată.",
    "sl": "Ni načrtovanih sej.",
    "sk": "Žiadne naplánované lekcie.",
-   "tlh": "qabmey nISbe'",
    "tr": "Planlanmış oturum yok."
   },
   "Geweest": {
@@ -657,7 +638,6 @@
    "ro": "Pretekle",
    "sl": "Pretekle",
    "sk": "Minulé",
-   "tlh": "ret",
    "tr": "Geçmiş"
   },
   "Het aanbod kon niet worden opgehaald.": {
@@ -690,7 +670,6 @@
    "ro": "Oferta nu a putut fi încărcată.",
    "sl": "Ponudbe ni bilo mogoče pridobiti.",
    "sk": "Ponuku sa nepodarilo načítať.",
-   "tlh": "pong jonlaHbe'",
    "tr": "Teklif alınamadı."
   },
   "In uw tijdzone: {datum} · {van}–{tot}": {
@@ -723,7 +702,6 @@
    "ro": "În fusul orar al dvs.: {datum} · {van}–{tot}",
    "sl": "V vašem časovnem pasu: {datum} · {van}–{tot}",
    "sk": "Vo vašom časovom pásme: {datum} · {van}–{tot}",
-   "tlh": "poHlIjDaq: {datum} · {van}–{tot}",
    "tr": "Saat diliminizde: {datum} · {van}–{tot}"
   },
   "Ingeschreven": {
@@ -756,7 +734,6 @@
    "ro": "Înscris",
    "sl": "Vpisan",
    "sk": "Prihlásený",
-   "tlh": "qab qoQ",
    "tr": "Kayıtlı"
   },
   "Inschrijven": {
@@ -789,7 +766,6 @@
    "ro": "Înscrie-te",
    "sl": "Vpiši se",
    "sk": "Prihlásiť sa",
-   "tlh": "lI'",
    "tr": "Kaydol"
   },
   "Inschrijven is niet gelukt. Probeer het opnieuw.": {
@@ -822,7 +798,6 @@
    "ro": "Înscrierea nu a reușit. Încercați din nou.",
    "sl": "Vpis ni uspel. Poskusite znova.",
    "sk": "Prihlásenie sa nepodarilo. Skúste to znova.",
-   "tlh": "qab lujpu'. jatlhqa'",
    "tr": "Kayıt başarısız oldu. Tekrar deneyin."
   },
   "Inschrijven kan pas als u aan alle toelatingseisen voldoet.": {
@@ -855,7 +830,6 @@
    "ro": "Vă puteți înscrie abia după ce îndepliniți toate cerințele de admitere.",
    "sl": "Vpisate se lahko šele, ko izpolnite vse pogoje za sprejem.",
    "sk": "Prihlásiť sa môžete až po splnení všetkých podmienok prijatia.",
-   "tlh": "DaH SoH qab qach neH",
    "tr": "Kayıt ancak tüm kabul koşullarını karşıladığınızda mümkündür."
   },
   "Inschrijven voor deze uitvoering is gesloten.": {
@@ -888,7 +862,6 @@
    "ro": "Înscrierea pentru această ediție este închisă.",
    "sl": "Vpis za to izvedbo je zaprt.",
    "sk": "Prihlasovanie na túto realizáciu je uzavreté.",
-   "tlh": "pongvam qoQ",
    "tr": "Bu düzenleme için kayıt kapandı."
   },
   "Kies per les precies één sessie.": {
@@ -921,7 +894,6 @@
    "ro": "Alegeți exact o sesiune pentru fiecare lecție.",
    "sl": "Izberite natanko eno sejo na uro.",
    "sk": "Vyberte presne jednu lekciu na hodinu.",
-   "tlh": "qab wa'Daq",
    "tr": "Her ders için tam olarak bir oturum seçin."
   },
   "Mijn inschrijvingen": {
@@ -954,7 +926,6 @@
    "ro": "Înscrierile mele",
    "sl": "Moje prijave",
    "sk": "Moje prihlášky",
-   "tlh": "jI'em",
    "tr": "Kayıtlarım"
   },
   "Niet aanwezig geweest": {
@@ -987,7 +958,6 @@
    "ro": "A fost absent",
    "sl": "Ni bil prisoten",
    "sk": "Nebol prítomný",
-   "tlh": "pa' 'oHbe'",
    "tr": "Katılmadı"
   },
   "Onbekende status": {
@@ -1020,7 +990,6 @@
    "ro": "Stare necunoscută",
    "sl": "Neznano stanje",
    "sk": "Neznámy stav",
-   "tlh": "Dotlh Sovbe'",
    "tr": "Bilinmeyen durum"
   },
   "Op de wachtlijst": {
@@ -1053,7 +1022,6 @@
    "ro": "Pe lista de așteptare",
    "sl": "Na čakalni listi",
    "sk": "Na čakacej listine",
-   "tlh": "poH",
    "tr": "Bekleme listesinde"
   },
   "Op de wachtlijst, plaats {plaats} van {totaal}": {
@@ -1086,7 +1054,6 @@
    "ro": "Pe lista de așteptare, locul {plaats} din {totaal}",
    "sl": "Na čakalni listi, mesto {plaats} od {totaal}",
    "sk": "Na čakacej listine, miesto {plaats} z {totaal}",
-   "tlh": "poH, Daq {plaats} {totaal}Daq",
    "tr": "Bekleme listesinde, {totaal} içinden {plaats}. sıra"
   },
   "Plaats mij op de wachtlijst voor de volle sessie(s)": {
@@ -1119,7 +1086,6 @@
    "ro": "Puneți-mă pe lista de așteptare pentru sesiunea(sesionile) completă(e)",
    "sl": "Vpišite me na čakalno listo za polno(e) sejo(e)",
    "sk": "Prihláste ma na čakaciu listinu pre plnú(é) lekciu(e)",
-   "tlh": "qabDotlhDaq jIH",
    "tr": "Dolu oturum(lar) için beni bekleme listesine al"
   },
   "Schrijf u zelf in voor een uitvoering van deze organisatie.": {
@@ -1152,7 +1118,6 @@
    "ro": "Înscrieți-vă singur la o ediție a acestei organizații.",
    "sl": "Sami se vpišite v izvedbo te organizacije.",
    "sk": "Prihláste sa sami na realizáciu tejto organizácie.",
-   "tlh": "pongDaq bI'",
    "tr": "Bu kuruluşun bir düzenlemesine kendiniz kaydolun."
   },
   "Sessie": {
@@ -1185,7 +1150,6 @@
    "ro": "Sesiune",
    "sl": "Seja",
    "sk": "Lekcia",
-   "tlh": "qab",
    "tr": "Oturum"
   },
   "Te veel pogingen — probeer het over {seconden} seconden opnieuw.": {
@@ -1218,7 +1182,6 @@
    "ro": "Prea multe încercări — încercați din nou în {seconden} secunde.",
    "sl": "Preveč poskusov — poskusite znova čez {seconden} sekund.",
    "sk": "Príliš veľa pokusov — skúste to znova za {seconden} s.",
-   "tlh": "tlhoy Doch — {seconden} qaS retlh",
    "tr": "Çok fazla deneme — {seconden} saniye sonra tekrar deneyin."
   },
   "Toelatingseisen": {
@@ -1251,7 +1214,6 @@
    "ro": "Cerințe de admitere",
    "sl": "Pogoji za sprejem",
    "sk": "Podmienky prijatia",
-   "tlh": "qabDaq",
    "tr": "Kabul koşulları"
   },
   "U bent al ingeschreven voor deze uitvoering.": {
@@ -1284,7 +1246,6 @@
    "ro": "Sunteți deja înscris la această ediție.",
    "sl": "Za to izvedbo ste že vpisani.",
    "sk": "Na túto realizáciu ste už prihlásený.",
-   "tlh": "pongvamDaq qabpu'",
    "tr": "Bu düzenlemeye zaten kayıtlısınız."
   },
   "U bent nog niet ingeschreven voor een bijeenkomst.": {
@@ -1317,7 +1278,6 @@
    "ro": "Nu sunteți încă înscris la nicio sesiune.",
    "sl": "Za nobeno sejo še niste vpisani.",
    "sk": "Zatiaľ nie ste prihlásený na žiadnu lekciu.",
-   "tlh": "qabDaq qabbe'",
    "tr": "Henüz bir oturuma kayıtlı değilsiniz."
   },
   "U heeft het maximum aantal inschrijvingen voor deze uitvoering bereikt.": {
@@ -1350,7 +1310,6 @@
    "ro": "Ați atins numărul maxim de înscrieri pentru această ediție.",
    "sl": "Dosegli ste največje število vpisov za to izvedbo.",
    "sk": "Dosiahli ste maximálny počet prihlášok na túto realizáciu.",
-   "tlh": "pongvam qabDotlh maximum Daq",
    "tr": "Bu düzenleme için azami kayıt sayısına ulaştınız."
   },
   "U voldoet nog niet aan de toelatingseisen.": {
@@ -1383,7 +1342,6 @@
    "ro": "Încă nu îndepliniți cerințele de admitere.",
    "sl": "Še ne izpolnjujete pogojev za sprejem.",
    "sk": "Zatiaľ nespĺňate podmienky prijatia.",
-   "tlh": "qabDaq Daqbe'",
    "tr": "Kabul koşullarını henüz karşılamıyorsunuz."
   },
   "Uitvoering": {
@@ -1416,7 +1374,6 @@
    "ro": "Ediție",
    "sl": "Izvedba",
    "sk": "Realizácia",
-   "tlh": "pong",
    "tr": "Düzenleme"
   },
   "Uw inschrijving": {
@@ -1449,7 +1406,6 @@
    "ro": "Înscrierea dvs.",
    "sl": "Vaš vpis",
    "sk": "Vaša prihláška",
-   "tlh": "qablIj",
    "tr": "Kaydınız"
   },
   "Uw inschrijving is verwerkt.": {
@@ -1482,7 +1438,6 @@
    "ro": "Înscrierea dvs. a fost procesată.",
    "sl": "Vaš vpis je bil obdelan.",
    "sk": "Vaša prihláška bola spracovaná.",
-   "tlh": "qablIj qaSpu'",
    "tr": "Kaydınız işlendi."
   },
   "Uw inschrijvingen konden niet worden opgehaald.": {
@@ -1515,7 +1470,6 @@
    "ro": "Înscrierile dvs. nu au putut fi încărcate.",
    "sl": "Vaših vpisov ni bilo mogoče pridobiti.",
    "sk": "Vaše prihlášky sa nepodarilo načítať.",
-   "tlh": "qablIjmey jonlaHbe'",
    "tr": "Kayıtlarınız alınamadı."
   },
   "Uw klassikale bijeenkomsten: binnenkort en geweest.": {
@@ -1548,7 +1502,6 @@
    "ro": "Sesurile dvs. față în față: viitoare și trecute.",
    "sl": "Vaše klasične seje: prihajajoče in pretekle.",
    "sk": "Vaše prezenčné lekcie: nadchádzajúce a minulé",
-   "tlh": "qabmeylIj: tuq 'ej ret",
    "tr": "Yüz yüze oturumlarınız: yaklaşan ve geçmiş."
   },
   "Vol": {
@@ -1581,7 +1534,6 @@
    "ro": "Completă",
    "sl": "Polna",
    "sk": "Plná",
-   "tlh": "vul",
    "tr": "Dolu"
   },
   "Voldoet u bijna? Vraag uw organisatie of een ontheffing mogelijk is.": {
@@ -1614,7 +1566,6 @@
    "ro": "Aproape? Întrebați organizația dacă este posibilă o derogare.",
    "sl": "Skoraj? Vprašajte svojo organizacijo, ali je izjema možna.",
    "sk": "Skoro? Opýtajte sa svojej organizácie, či je možné oslobodenie.",
-   "tlh": "law' '? pongwIjDaq SuD",
    "tr": "Neredeyse? Kuruluşunuza muafiyet mümkün olup olmadığını sorun."
   },
   "Voor deze uitvoering is een vouchercode vereist.": {
@@ -1647,7 +1598,6 @@
    "ro": "Pentru această ediție este necesar un cod de voucher.",
    "sl": "Za to izvedbo je potrebna koda bona.",
    "sk": "Pre túto realizáciu sa vyžaduje kód voucheru.",
-   "tlh": "pongvam Dotlh poQ",
    "tr": "Bu düzenleme için kupon kodu gereklidir."
   },
   "Vouchercode": {
@@ -1680,7 +1630,6 @@
    "ro": "Cod de voucher",
    "sl": "Koda bona",
    "sk": "Kód voucheru",
-   "tlh": "Dotlh",
    "tr": "Kupon kodu"
   },
   "Vouchercode vereist": {
@@ -1713,7 +1662,6 @@
    "ro": "Cod de voucher necesar",
    "sl": "Potrebna koda bona",
    "sk": "Vyžaduje sa kód voucheru",
-   "tlh": "Dotlh poQ",
    "tr": "Kupon kodu gerekli"
   },
   "Wilt u zich afmelden voor {titel} op {datum}? Een eventuele plaats op de wachtlijst gaat dan naar de volgende.": {
@@ -1746,7 +1694,6 @@
    "ro": "Doriți să vă anulați înscrierea la {titel} din {datum}? Un eventual loc pe lista de așteptare va trece la următorul.",
    "sl": "Želite preklicati vpis za {titel} dne {datum}? Morebitno mesto na čakalni listi gre naprej.",
    "sk": "Chcete sa odhlásiť z {titel} dňa {datum}? Prípadné miesto na čakacej listine prejde na ďalšieho.",
-   "tlh": "{titel} {datum}Daq bI' vIneH'a'? poH Daq botlh",
    "tr": "{titel} ({datum}) kaydınızı iptal etmek istiyor musunuz? Bekleme listesindeki yer sıradaki kişiye geçer."
   },
   "Zelf afmelden kon tot {deadline}. Daarna afmelden kan alleen nog via {organisatie}.": {
@@ -1779,7 +1726,6 @@
    "ro": "Anularea individuală era posibilă până la {deadline}. După aceea, doar prin {organisatie}.",
    "sl": "Preklic samostojno je bil mogoč do {deadline}. Nato le prek {organisatie}.",
    "sk": "Samo-odhlásenie bolo možné do {deadline}. Potom len cez {organisatie}.",
-   "tlh": "{deadline}Daq bI' lI'. choH {organisatie} neH",
    "tr": "Kendi iptaliniz {deadline} tarihine kadar mümkündü. Sonrasında yalnızca {organisatie} aracılığıyla iptal edilebilir."
   },
   "ingeschreven": {
@@ -1812,7 +1758,6 @@
    "ro": "înscris",
    "sl": "vpisan",
    "sk": "prihlásený",
-   "tlh": "qab qoQ",
    "tr": "kayıtlı"
   },
   "nog niet voldaan": {
@@ -1845,7 +1790,6 @@
    "ro": "încă neîndeplinit",
    "sl": "še ni izpolnjeno",
    "sk": "zatiaľ nesplnené",
-   "tlh": "Dotlhbe'",
    "tr": "henüz karşılanmadı"
   },
   "ontheffing verleend": {
@@ -1878,7 +1822,6 @@
    "ro": "derogare acordată",
    "sl": "izjema odobrena",
    "sk": "oslobodenie udelené",
-   "tlh": "qu' Dotlh",
    "tr": "muafiyet verildi"
   },
   "op de wachtlijst": {
@@ -1911,7 +1854,6 @@
    "ro": "pe lista de așteptare",
    "sl": "na čakalni listi",
    "sk": "na čakacej listine",
-   "tlh": "poH",
    "tr": "bekleme listesinde"
   },
   "verloopt vóór de start": {
@@ -1944,7 +1886,6 @@
    "ro": "expiră înainte de început",
    "sl": "poteče pred začetkom",
    "sk": "vyprší pred začiatkom",
-   "tlh": "qaSpu'",
    "tr": "başlangıçtan önce sona eriyor"
   },
   "voldaan": {
@@ -1977,7 +1918,6 @@
    "ro": "îndeplinit",
    "sl": "izpolnjeno",
    "sk": "splnené",
-   "tlh": "Dotlh",
    "tr": "karşılandı"
   },
   "wachtlijst": {
@@ -2010,7 +1950,6 @@
    "ro": "listă de așteptare",
    "sl": "čakalna lista",
    "sk": "čakacia listina",
-   "tlh": "poH",
    "tr": "bekleme listesi"
   },
   "{lessen} klassikale lessen · {sessies} sessies": {
@@ -2043,7 +1982,6 @@
    "ro": "{lessen} lecții față în față · {sessies} sesiuni",
    "sl": "{lessen} klasičnih ur · {sessies} sej",
    "sk": "{lessen} prezenčných hodín · {sessies} lekcií",
-   "tlh": "{lessen} qabmey · {sessies} qab",
    "tr": "{lessen} yüz yüze ders · {sessies} oturum"
   },
   "{vrij} plaatsen vrij": {
@@ -2076,7 +2014,6 @@
    "ro": "{vrij} locuri libere",
    "sl": "{vrij} prostih mest",
    "sk": "{vrij} voľných miest",
-   "tlh": "{vrij} Daq vul",
    "tr": "{vrij} boş yer"
   }
  }

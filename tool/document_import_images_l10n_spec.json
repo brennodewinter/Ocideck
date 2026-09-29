@@ -30,7 +30,6 @@
       "ro": "Document importat — nepreluat: {lijst}",
       "sl": "Dokument uvožen — ni preneseno: {lijst}",
       "sk": "Dokument importovaný — neprenesené: {lijst}",
-      "tlh": "Deq lanpu — tlhaplu'be': {lijst}",
       "tr": "Belge içe aktarıldı — taşınmadı: {lijst}"
     },
     "{n} tekstkader": {
@@ -63,7 +62,6 @@
       "ro": "{n} cadru de text",
       "sl": "{n} besedilni okvir",
       "sk": "{n} textový rám",
-      "tlh": "{n} ghItlh wot",
       "tr": "{n} metin çerçevesi"
     },
     "{n} tekstkaders": {
@@ -96,7 +94,6 @@
       "ro": "{n} cadre de text",
       "sl": "{n} besedilnih okvirjev",
       "sk": "{n} textových rámov",
-      "tlh": "{n} ghItlh wotmey",
       "tr": "{n} metin çerçevesi"
     },
     "{n} groep": {
@@ -129,7 +126,6 @@
       "ro": "{n} grup",
       "sl": "{n} skupina",
       "sk": "{n} skupina",
-      "tlh": "{n} ghom",
       "tr": "{n} grup"
     },
     "{n} groepen": {
@@ -162,7 +158,6 @@
       "ro": "{n} grupuri",
       "sl": "{n} skupin",
       "sk": "{n} skupín",
-      "tlh": "{n} ghommey",
       "tr": "{n} grup"
     },
     "{n} object": {
@@ -195,7 +190,6 @@
       "ro": "{n} obiect",
       "sl": "{n} predmet",
       "sk": "{n} objekt",
-      "tlh": "{n} Doch",
       "tr": "{n} nesne"
     },
     "{n} objecten": {
@@ -228,7 +222,6 @@
       "ro": "{n} obiecte",
       "sl": "{n} predmetov",
       "sk": "{n} objektov",
-      "tlh": "{n} Dochmey",
       "tr": "{n} nesne"
     }
   }

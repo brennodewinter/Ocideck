@@ -33,7 +33,6 @@ part 'translations/pt.dart';
 part 'translations/ro.dart';
 part 'translations/sl.dart';
 part 'translations/sk.dart';
-part 'translations/tlh.dart';
 part 'translations/tr.dart';
 
 class AppLocalizations {
@@ -72,7 +71,6 @@ class AppLocalizations {
     Locale('ro'),
     Locale('sl'),
     Locale('sk'),
-    Locale('tlh'),
     Locale('tr'),
   ];
 
@@ -116,10 +114,6 @@ class AppLocalizations {
     'ro': '🇷🇴',
     'sl': '🇸🇮',
     'sk': '🇸🇰',
-    // Klingon has no country flag. The picker shows a neutral `tlh` letter
-    // badge instead (see languageFlag()); this emoji is only a text fallback
-    // for places that render a flag as plain text.
-    'tlh': '🖖',
     'tr': '🇹🇷',
   };
 
@@ -198,8 +192,8 @@ class AppLocalizations {
     'bg': Locale('bg'),
     'lv': Locale('lv'),
     'lt': Locale('lt'),
-    // Maltese, Irish and Klingon have no Material localization; borrow English
-    // for the framework widgets while the app UI is in the chosen language.
+    // Maltese and Irish have no Material localization; borrow English for the
+    // framework widgets while the app UI is in the chosen language.
     'mt': Locale('en'),
     'et': Locale('et'),
     'hu': Locale('hu'),
@@ -208,7 +202,6 @@ class AppLocalizations {
     'ro': Locale('ro'),
     'sl': Locale('sl'),
     'sk': Locale('sk'),
-    'tlh': Locale('en'),
     'tr': Locale('tr'),
   };
 
@@ -366,7 +359,6 @@ const _strings = {
   'ro': _stringsRo,
   'sl': _stringsSl,
   'sk': _stringsSk,
-  'tlh': _stringsTlh,
   'tr': _stringsTr,
 };
 
@@ -400,7 +392,6 @@ const _dutchSourceStrings = {
   'ro': _dutchSourceRo,
   'sl': _dutchSourceSl,
   'sk': _dutchSourceSk,
-  'tlh': _dutchSourceTlh,
   'tr': _dutchSourceTr,
 };
 
@@ -434,6 +425,5 @@ const _dutchSourceStringAdditions = {
   'ro': _dutchSourceAddRo,
   'sl': _dutchSourceAddSl,
   'sk': _dutchSourceAddSk,
-  'tlh': _dutchSourceAddTlh,
   'tr': _dutchSourceAddTr,
 };

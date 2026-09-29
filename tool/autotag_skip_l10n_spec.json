@@ -30,7 +30,6 @@
       "ro": "necitibil",
       "sl": "neberljivo",
       "sk": "nečitateľné",
-      "tlh": "laDlaHbe'lu'",
       "tr": "okunamıyor"
     },
     "niet decodeerbaar": {
@@ -63,7 +62,6 @@
       "ro": "nedecodificabil",
       "sl": "nedekodirno",
       "sk": "nedekódovateľné",
-      "tlh": "vunlaHbe'lu'",
       "tr": "çözümlenemiyor"
     },
     "model gaf niets bruikbaars terug": {
@@ -96,7 +94,6 @@
       "ro": "modelul nu a returnat nimic utilizabil",
       "sl": "model ni vrnil ničesar uporabnega",
       "sk": "model nevrátil nič použiteľné",
-      "tlh": "mIw pagh lo'laHghach nob",
       "tr": "model kullanılabilir bir şey döndürmedi"
     }
   }

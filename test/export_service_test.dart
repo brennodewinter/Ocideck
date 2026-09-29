@@ -247,7 +247,7 @@ void main() {
 
   test('de bestandsnamen zijn taalonafhankelijk en niet te verwisselen', () {
     // Ze heetten `-redacties.json` en `-redacties-verificatiesleutels.json`:
-    // twee Nederlandse namen die op elkaar lijken, in een app met 32 talen en
+    // twee Nederlandse namen die op elkaar lijken, in een app met 31 talen en
     // ontvangers in evenzovele. De scheiding tussen die twee bestanden ís de
     // beveiliging, dus ze moet leesbaar zijn zonder Nederlands te kennen.
     expect(kRedactionManifestSuffix, isNot(contains('redacties')));

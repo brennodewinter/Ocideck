@@ -30,7 +30,6 @@
       "ro": "Adaugă imagine…",
       "sl": "Dodaj sliko…",
       "sk": "Pridať obrázok…",
-      "tlh": "mIllogh chel…",
       "tr": "Resim ekle…"
     },
     "Geen schrijfbare bibliotheekmap gevonden. Voeg een map toe of pas Opslag aan onder Instellingen.": {
@@ -63,7 +62,6 @@
       "ro": "Nu s-a găsit un folder de bibliotecă inscripționabil. Adaugă un folder sau ajustează Stocare în Setări.",
       "sl": "Ni zapisljive mape knjižnice. Dodajte mapo ali prilagodite Shrambo v Nastavitve.",
       "sk": "Nenašiel sa zapisovateľný priečinok knižnice. Pridajte priečinok alebo upravte Úložisko v Nastavenia.",
-      "tlh": "De' Qul mIw ghItlhlaHbe' tu'lu'be'. Daq yIchel pagh Segh chu' yIchoH.",
       "tr": "Yazılabilir kitaplık klasörü bulunamadı. Klasör ekleyin veya Ayarlar altında Depolama'yı düzenleyin."
     },
     "Ctrl/Cmd+V plakt een afbeelding in het archief": {
@@ -96,7 +94,6 @@
       "ro": "Ctrl/Cmd+V lipește o imagine în arhivă",
       "sl": "Ctrl/Cmd+V prilepi sliko v arhiv",
       "sk": "Ctrl/Cmd+V prilepí obrázok do archívu",
-      "tlh": "Ctrl/Cmd+V mIllogh De' Qul mIwDaq chel",
       "tr": "Ctrl/Cmd+V arşive bir resim yapıştırır"
     }
   }

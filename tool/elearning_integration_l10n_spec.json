@@ -30,7 +30,6 @@
       "ro": "Urmați cursuri din mediul dumneavoastră eLearning. Fișierele de curs se deschid numai în modul de redare; progresul este sincronizat numai după autentificare.",
       "sl": "Opravljajte tečaje iz svojega okolja eLearning. Datoteke tečajev se odprejo le v načinu predvajanja; napredek se sinhronizira le po prijavi.",
       "sk": "Absolvujte kurzy zo svojho prostredia eLearning. Súbory kurzov sa otvárajú len v režime prehrávania; postup sa synchronizuje až po prihlásení.",
-      "tlh": "eLearning environmentlIjDaq course yIghoS. course file playback modeDaq neH poSlu'; log inDI' neH progress synclu'.",
       "tr": "eLearning ortamınızdaki kursları takip edin. Kurs dosyaları yalnızca oynatma modunda açılır; ilerleme yalnızca oturum açıldıktan sonra eşitlenir."
     },
     "eLearning-aanmelding is alleen beschikbaar in de desktop-app, omdat de webversie geen veilige sleutelbos heeft.": {
@@ -63,7 +62,6 @@
       "ro": "Autentificarea în eLearning este disponibilă doar în aplicația pentru desktop, deoarece versiunea web nu are un breloc securizat.",
       "sl": "Prijava v eLearning je na voljo le v namizni aplikaciji, saj spletna različica nima varnega obeska ključev.",
       "sk": "Prihlásenie do eLearning je dostupné len v desktopovej aplikácii, pretože webová verzia nemá bezpečnú kľúčenku.",
-      "tlh": "desktop appDaq neH eLearning log in tu'lu', web versionDaq secure keychain tu'lu'be'mo'.",
       "tr": "eLearning oturumu yalnızca masaüstü uygulamasında kullanılabilir; web sürümünde güvenli anahtarlık yoktur."
     },
     "eLearning-server": {
@@ -96,7 +94,6 @@
       "ro": "Server eLearning",
       "sl": "Strežnik eLearning",
       "sk": "Server eLearning",
-      "tlh": "eLearning De'wI'",
       "tr": "eLearning sunucusu"
     },
     "Bij het volgen van een cursus stuurt OciDeck uw laatste dia, voltooiing en getoonde tijd per dia naar de gekozen eLearning-organisatie. Antwoorden, notities en cursusinhoud worden niet als voortgang verstuurd.": {
@@ -129,7 +126,6 @@
       "ro": "Când urmați un curs, OciDeck trimite organizației eLearning alese ultimul diapozitiv, finalizarea și timpul afișat pentru fiecare diapozitiv. Răspunsurile, notițele și conținutul cursului nu sunt trimise ca progres.",
       "sl": "Med opravljanjem tečaja OciDeck izbrani organizaciji eLearning pošlje vaš zadnji diapozitiv, dokončanje in prikazani čas na diapozitiv. Odgovori, opombe in vsebina tečaja se ne pošiljajo kot napredek.",
       "sk": "Pri absolvovaní kurzu OciDeck odošle vybranej organizácii eLearning vašu poslednú snímku, dokončenie a zobrazený čas na snímku. Odpovede, poznámky a obsah kurzu sa ako postup neodosielajú.",
-      "tlh": "courseDaq ghoSmeH, OciDeckDaq last slide, rIn, slide Hoch cha'bogh poH je wI'be' eLearning organizationDaq ngeH. jangmeH, note, course De' je progress mojmeH ngeHbe'.",
       "tr": "Bir kursu takip ederken OciDeck, son slaydınızı, tamamlanmayı ve slayt başına gösterilen süreyi seçilen eLearning kuruluşuna gönderir. Yanıtlar, notlar ve kurs içeriği ilerleme olarak gönderilmez."
     },
     "Ingelogd bij eLearning": {
@@ -162,7 +158,6 @@
       "ro": "Autentificat în eLearning",
       "sl": "Prijavljeni v eLearning",
       "sk": "Prihlásený do eLearning",
-      "tlh": "eLearningDaq log in",
       "tr": "eLearning'de oturum açıldı"
     },
     "Deze eLearning-server gebruikt {host} voor het aanmelden. Er worden pas gegevens met die identiteitsprovider uitgewisseld nadat u dit toestaat.": {
@@ -195,7 +190,6 @@
       "ro": "Acest server eLearning folosește {host} pentru autentificare. Datele sunt schimbate cu acel furnizor de identitate numai după ce permiteți acest lucru.",
       "sl": "Ta strežnik eLearning za prijavo uporablja {host}. Podatki se s tem ponudnikom identitete izmenjajo šele, ko to dovolite.",
       "sk": "Tento server eLearning používa {host} na prihlásenie. Údaje sa s týmto poskytovateľom identity vymieňajú až po vašom povolení.",
-      "tlh": "eLearning servervamvaD {host} lo’lu’ ‘elmeH. lujatlhDI’ qawHaq, identity providervamvaD De’ ngevlu’.",
       "tr": "Bu eLearning sunucusu oturum açmak için {host} kullanır. Veriler, bu kimlik sağlayıcıyla yalnızca izin verdikten sonra paylaşılır."
     },
     "Gebruik een HTTPS-adres voor eLearning.": {
@@ -228,7 +222,6 @@
       "ro": "Folosiți o adresă HTTPS pentru eLearning.",
       "sl": "Za eLearning uporabite naslov HTTPS.",
       "sk": "Pre eLearning použite adresu HTTPS.",
-      "tlh": "eLearningvaD HTTPS address yIlo'.",
       "tr": "eLearning için bir HTTPS adresi kullanın."
     },
     "Vul een geldig eLearning-adres in.": {
@@ -261,7 +254,6 @@
       "ro": "Introduceți o adresă eLearning validă.",
       "sl": "Vnesite veljaven naslov eLearning.",
       "sk": "Zadajte platnú adresu eLearning.",
-      "tlh": "eLearning address lugh yIghItlh.",
       "tr": "Geçerli bir eLearning adresi girin."
     },
     "Aanmelden bij eLearning is niet gelukt. Controleer de server en probeer opnieuw.": {
@@ -294,7 +286,6 @@
       "ro": "Autentificarea în eLearning a eșuat. Verificați serverul și încercați din nou.",
       "sl": "Prijava v eLearning ni uspela. Preverite strežnik in poskusite znova.",
       "sk": "Prihlásenie do eLearning zlyhalo. Skontrolujte server a skúste to znova.",
-      "tlh": "eLearningDaq log in Qapbe'. De'wI' yIlegh; yIqIlqa'.",
       "tr": "eLearning oturumu açılamadı. Sunucuyu kontrol edin ve yeniden deneyin."
     },
     "eLearning-organisatie": {
@@ -327,7 +318,6 @@
       "ro": "Organizație eLearning",
       "sl": "Organizacija eLearning",
       "sk": "Organizácia eLearning",
-      "tlh": "eLearning DIvI'",
       "tr": "eLearning kuruluşu"
     }
   }

@@ -30,7 +30,6 @@
       "ro": "Acces și modificări",
       "sl": "Dostop in spremembe",
       "sk": "Prístup a zmeny",
-      "tlh": "leghlu'ghach choHmey je",
       "tr": "Erişim ve değişiklikler"
     },
     "Beschikbaarheid van het inzagespoor": {
@@ -63,7 +62,6 @@
       "ro": "Disponibilitatea jurnalului de acces",
       "sl": "Razpoložljivost dnevnika dostopov",
       "sk": "Dostupnosť prístupového denníka",
-      "tlh": "legh QonoS lutu'lu'",
       "tr": "Erişim günlüğünün kullanılabilirliği"
     },
     "Beschikbaar vanaf": {
@@ -96,7 +94,6 @@
       "ro": "Disponibil de la",
       "sl": "Na voljo od",
       "sk": "Dostupné od",
-      "tlh": "taghDI' tu'lu'",
       "tr": "Şu tarihten itibaren mevcut:"
     },
     "Historie vóór deze datum": {
@@ -129,7 +126,6 @@
       "ro": "Istoric înainte de această dată",
       "sl": "Zgodovina pred tem datumom",
       "sk": "História pred týmto dátumom",
-      "tlh": "jajvam nungbogh qun",
       "tr": "Bu tarihten önceki tarih"
     },
     "Tijdstip": {
@@ -162,7 +158,6 @@
       "ro": "Data și ora",
       "sl": "Datum in čas",
       "sk": "Dátum a čas",
-      "tlh": "jaj poH je",
       "tr": "Tarih ve saat"
     },
     "Handeling": {
@@ -195,7 +190,6 @@
       "ro": "Acțiune",
       "sl": "Akcija",
       "sk": "Akcia",
-      "tlh": "mIw",
       "tr": "Eylem"
     },
     "Gegevensonderdeel": {
@@ -228,7 +222,6 @@
       "ro": "Categoria de date",
       "sl": "Kategorija podatkov",
       "sk": "Kategória údajov",
-      "tlh": "De' Segh",
       "tr": "Veri kategorisi"
     },
     "Handelde als": {
@@ -261,7 +254,6 @@
       "ro": "A acţionat ca",
       "sl": "Deloval kot",
       "sk": "Konal ako",
-      "tlh": "Qu'Daj",
       "tr": "Olarak hareket etti"
     },
     "Organisatorische rol": {
@@ -294,7 +286,6 @@
       "ro": "Rolul organizatoric",
       "sl": "Organizacijska vloga",
       "sk": "Organizačná úloha",
-      "tlh": "ghom Qu'",
       "tr": "Organizasyonel rol"
     },
     "Bekeken": {
@@ -327,7 +318,6 @@
       "ro": "Vizualizat",
       "sl": "Ogledano",
       "sk": "Zobrazené",
-      "tlh": "leghlu'",
       "tr": "Görüntülendi"
     },
     "Gewijzigd": {
@@ -360,7 +350,6 @@
       "ro": "Schimbat",
       "sl": "Spremenjeno",
       "sk": "Zmenené",
-      "tlh": "choHlu'",
       "tr": "Değiştirildi"
     },
     "Uzelf": {
@@ -393,7 +382,6 @@
       "ro": "tu",
       "sl": "Ti",
       "sk": "vy",
-      "tlh": "SoH",
       "tr": "sen"
     },
     "Medewerker": {
@@ -426,7 +414,6 @@
       "ro": "Membru al personalului",
       "sl": "Član osebja",
       "sk": "Zamestnanec",
-      "tlh": "vumwI'",
       "tr": "Personel"
     },
     "Systeem": {
@@ -459,7 +446,6 @@
       "ro": "Sistem",
       "sl": "Sistem",
       "sk": "Systém",
-      "tlh": "pat",
       "tr": "Sistem"
     },
     "Onbekend": {
@@ -492,7 +478,6 @@
       "ro": "Necunoscut",
       "sl": "Neznano",
       "sk": "Neznámy",
-      "tlh": "Sovbe'lu'",
       "tr": "Bilinmiyor"
     },
     "Docent": {
@@ -525,7 +510,6 @@
       "ro": "Instructor",
       "sl": "Inštruktor",
       "sk": "Inštruktor",
-      "tlh": "ghojmoHwI'",
       "tr": "eğitmen"
     },
     "Beoordelaar": {
@@ -558,7 +542,6 @@
       "ro": "Evaluator",
       "sl": "Ocenjevalec",
       "sk": "posudzovateľ",
-      "tlh": "waHwI'",
       "tr": "Değerlendirici"
     },
     "Organisatiebeheerder": {
@@ -591,7 +574,6 @@
       "ro": "Administrator organizatie",
       "sl": "Skrbnik organizacije",
       "sk": "Správca organizácie",
-      "tlh": "ghom loHwI'",
       "tr": "Kuruluş yöneticisi"
     },
     "Niet beschikbaar": {
@@ -624,7 +606,6 @@
       "ro": "Nu este disponibil",
       "sl": "Ni na voljo",
       "sk": "Nie je k dispozícii",
-      "tlh": "tu'lu'be'",
       "tr": "Mevcut değil"
     },
     "Uitoefening van privacyrechten": {
@@ -657,7 +638,6 @@
       "ro": "Exercitarea drepturilor la confidențialitate",
       "sl": "Uveljavljanje pravic do zasebnosti",
       "sk": "Uplatňovanie práv na súkromie",
-      "tlh": "pegh DIbmey lo'",
       "tr": "Gizlilik haklarının kullanılması"
     },
     "Beoordeling en certificering": {
@@ -690,7 +670,6 @@
       "ro": "Evaluare și certificare",
       "sl": "Ocenjevanje in certificiranje",
       "sk": "Posudzovanie a certifikácia",
-      "tlh": "waHghach naD De' je",
       "tr": "Değerlendirme ve sertifikasyon"
     },
     "Uitvoering van het leertraject": {
@@ -723,7 +702,6 @@
       "ro": "Livrarea programului de învățare",
       "sl": "Izvedba učnega programa",
       "sk": "Dodanie vzdelávacieho programu",
-      "tlh": "ghojmeH nab ta'meH",
       "tr": "Öğrenme programının teslimi"
     },
     "Cursistenadministratie": {
@@ -756,7 +734,6 @@
       "ro": "Administrarea cursantului",
       "sl": "Administracija učencev",
       "sk": "Správa študentov",
-      "tlh": "ghojwI' loH",
       "tr": "Öğrenci yönetimi"
     },
     "Cursistprofiel": {
@@ -789,7 +766,6 @@
       "ro": "Profilul cursantului",
       "sl": "Profil učenca",
       "sk": "Profil študenta",
-      "tlh": "ghojwI' De'",
       "tr": "Öğrenci profili"
     },
     "Leerstatistieken": {
@@ -822,7 +798,6 @@
       "ro": "Statistici de învățare",
       "sl": "Statistika učenja",
       "sk": "Štatistika učenia",
-      "tlh": "ghojmeH mI' De'",
       "tr": "Öğrenme istatistikleri"
     },
     "Inschrijving": {
@@ -855,7 +830,6 @@
       "ro": "Înscriere",
       "sl": "Vpis",
       "sk": "Zápis",
-      "tlh": "muvghach",
       "tr": "Kayıt"
     },
     "Toetspoging": {
@@ -888,7 +862,6 @@
       "ro": "Încercarea de evaluare",
       "sl": "Poskus ocenjevanja",
       "sk": "Pokus o hodnotenie",
-      "tlh": "waHmeH nID",
       "tr": "Değerlendirme girişimi"
     },
     "Beoordeling": {
@@ -921,7 +894,6 @@
       "ro": "Evaluare",
       "sl": "Ocenjevanje",
       "sk": "Hodnotenie",
-      "tlh": "waHghach",
       "tr": "Değerlendirme"
     },
     "Bewijsstuk": {
@@ -954,7 +926,6 @@
       "ro": "Dovezi",
       "sl": "Dokazi",
       "sk": "Dôkazy",
-      "tlh": "SovmoHbogh Doch",
       "tr": "Kanıt"
     },
     "Kwalificatie": {
@@ -987,7 +958,6 @@
       "ro": "Calificare",
       "sl": "Kvalifikacija",
       "sk": "Kvalifikácia",
-      "tlh": "laH",
       "tr": "Yeterlilik"
     },
     "Deelname": {
@@ -1020,7 +990,6 @@
       "ro": "Participarea",
       "sl": "Sodelovanje",
       "sk": "Účasť",
-      "tlh": "jeSghach",
       "tr": "Katılım"
     },
     "PE-punten": {
@@ -1053,7 +1022,6 @@
       "ro": "Puncte de formare continuă",
       "sl": "Točke nadaljnjega izobraževanja",
       "sk": "Body ďalšieho vzdelávania",
-      "tlh": "ghojtaHmeH mI'",
       "tr": "Sürekli eğitim puanları"
     },
     "Certificaat": {
@@ -1086,7 +1054,6 @@
       "ro": "Certificat",
       "sl": "Certifikat",
       "sk": "Certifikát",
-      "tlh": "naD De'",
       "tr": "Sertifika"
     },
     "Privacyverzoek": {
@@ -1119,7 +1086,6 @@
       "ro": "Cerere de confidențialitate",
       "sl": "Zahteva za zasebnost",
       "sk": "Žiadosť o ochranu osobných údajov",
-      "tlh": "pegh tlhob",
       "tr": "Gizlilik talebi"
     },
     "Bewaard tot": {
@@ -1152,14 +1118,13 @@
       "ro": "Reţinut până la",
       "sl": "Hrani se do",
       "sk": "Zachované do",
-      "tlh": "polmeH jaj",
       "tr": "Şu tarihe kadar tutuldu:"
     },
     "Aanwezigheid": {
-      "en": "Attendance", "it": "Presenza", "de": "Anwesenheit", "fr": "Présence", "es": "Asistencia", "fy": "Oanwêzigens", "pap": "Presensia", "la": "Praesentia", "id": "Kehadiran", "pl": "Obecność", "uk": "Відвідування", "gsw": "Awäseheit", "el": "Παρουσία", "da": "Fremmøde", "sv": "Närvaro", "hr": "Prisutnost", "cs": "Docházka", "fi": "Läsnäolo", "bg": "Присъствие", "lv": "Apmeklējums", "lt": "Dalyvavimas", "mt": "Attendenza", "et": "Osalemine", "hu": "Jelenlét", "ga": "Tinreamh", "pt": "Presença", "ro": "Prezență", "sl": "Prisotnost", "sk": "Účasť", "tlh": "SaHghach", "tr": "Katılım"
+      "en": "Attendance", "it": "Presenza", "de": "Anwesenheit", "fr": "Présence", "es": "Asistencia", "fy": "Oanwêzigens", "pap": "Presensia", "la": "Praesentia", "id": "Kehadiran", "pl": "Obecność", "uk": "Відвідування", "gsw": "Awäseheit", "el": "Παρουσία", "da": "Fremmøde", "sv": "Närvaro", "hr": "Prisutnost", "cs": "Docházka", "fi": "Läsnäolo", "bg": "Присъствие", "lv": "Apmeklējums", "lt": "Dalyvavimas", "mt": "Attendenza", "et": "Osalemine", "hu": "Jelenlét", "ga": "Tinreamh", "pt": "Presença", "ro": "Prezență", "sl": "Prisotnost", "sk": "Účasť", "tr": "Katılım"
     },
     "Lidmaatschap": {
-      "en": "Membership", "it": "Appartenenza", "de": "Mitgliedschaft", "fr": "Adhésion", "es": "Membresía", "fy": "Lidmaatskip", "pap": "Membresia", "la": "Sodalicium", "id": "Keanggotaan", "pl": "Członkostwo", "uk": "Членство", "gsw": "Mitgliedschaft", "el": "Ιδιότητα μέλους", "da": "Medlemskab", "sv": "Medlemskap", "hr": "Članstvo", "cs": "Členství", "fi": "Jäsenyys", "bg": "Членство", "lv": "Dalība", "lt": "Narystė", "mt": "Sħubija", "et": "Liikmesus", "hu": "Tagság", "ga": "Ballraíocht", "pt": "Adesão", "ro": "Calitate de membru", "sl": "Članstvo", "sk": "Členstvo", "tlh": "ghom jeSwI' Dotlh", "tr": "Üyelik"
+      "en": "Membership", "it": "Appartenenza", "de": "Mitgliedschaft", "fr": "Adhésion", "es": "Membresía", "fy": "Lidmaatskip", "pap": "Membresia", "la": "Sodalicium", "id": "Keanggotaan", "pl": "Członkostwo", "uk": "Членство", "gsw": "Mitgliedschaft", "el": "Ιδιότητα μέλους", "da": "Medlemskab", "sv": "Medlemskap", "hr": "Članstvo", "cs": "Členství", "fi": "Jäsenyys", "bg": "Членство", "lv": "Dalība", "lt": "Narystė", "mt": "Sħubija", "et": "Liikmesus", "hu": "Tagság", "ga": "Ballraíocht", "pt": "Adesão", "ro": "Calitate de membru", "sl": "Članstvo", "sk": "Členstvo", "tr": "Üyelik"
     }
   }
 }

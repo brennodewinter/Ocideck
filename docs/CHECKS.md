@@ -139,7 +139,7 @@ belong in the same pre-tag ritual but are **not** automated here — run
 
 ## Localisation helpers
 
-Every translatable string must exist in all 32 languages, so adding one used to
+Every translatable string must exist in all 31 languages, so adding one used to
 mean editing 31 files by hand. Two helpers remove that toil:
 
 ```sh
@@ -159,7 +159,7 @@ iterating on translations.
 - **Runs:** `dart run tool/check_l10n_orphans.dart` (`--list` prints every
   finding with its line in `lib/l10n/translations/en.dart`)
 - **Covers:** the *other* direction of the translation promise. `l10n-check` and
-  `app_localizations_test.dart` guard that every key in use exists in all 32
+  `app_localizations_test.dart` guard that every key in use exists in all 31
   languages; nothing asked whether a key is still looked up at all. Each orphan
   costs 32 lines of upkeep for text no one ever sees.
 - **How it measures:** the keys come from the three maps in
@@ -258,7 +258,7 @@ iterating on translations.
   English phrase Dutch itself borrowed untranslated (`Access key ID`,
   `Sprint review / demo`, `P {pitch}  B {bank}`). Only then is equality evidence
   that the translator picked the right term rather than evidence that he did
-  nothing. An exception phrased per language ("tlh may have this") says something
+  nothing. An exception phrased per language ("xx may have this") says something
   about the translator and covers up the next mistake in that same language; an
   exception per key says something about the *source sentence*, and that stays
   true. What that costs is stated too: a key listed there is silent for every
@@ -437,7 +437,7 @@ security scans or `check-web` — those live in `check-full`. Run
 The workflow additionally declares `flutter pub get --enforce-lockfile`
 (reproducible dependencies) and a **Markdown link check** (`lychee --offline`).
 
-Enforced inside `make test`: **localization in all 32 languages**, the
+Enforced inside `make test`: **localization in all 31 languages**, the
 **path/SSRF guards**, the **HTML-export sanitisation** invariants (strict
 export CSP + injected-`</script>` neutralisation; see
 [below](#enforced-behaviours-worth-calling-out)), and **documentation
@@ -770,7 +770,7 @@ also declares them, but see the [CI note](#continuous-integration).)
   inventory per area, for clean-up batches)
 - **Covers:** the first half of the localisation promise — that every visible
   string actually passes through `l10n.d('…')`. `test/app_localizations_test.dart`
-  guards the second half (every `d('…')` exists in all 32 languages), but nothing
+  guards the second half (every `d('…')` exists in all 31 languages), but nothing
   guarded that a string reached `d()` at all. The gap sat in the indirect
   hand-offs: `EditorField` calls `l10n.d(widget.label)`, so
   `EditorField(label: 'Titel (H1)')` at the call site is invisible to a scanner
@@ -1023,10 +1023,8 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Covers:** every `assets/templates/<id>.<lang>.md`. A line counts as
   untranslated when it stands verbatim in the English base **and** does not stand
   verbatim in the Dutch source, and carries at least `minimumWords` (currently
-  **2**) words of three or more Latin letters. Klingon is skipped
-  (`skippedLanguages`): `TemplateContentService.languagesWithContent` deliberately
-  keeps it on the English fallback. Ratchet: `untranslatedBaseline` (currently
-  **0**).
+  **2**) words of three or more Latin letters. Ratchet: `untranslatedBaseline`
+  (currently **0**).
 - **Why it exists:** `tool/template_l10n_po.dart` peels only five things out of a
   template — `title:`, `# `, `## `, bullets and table rows. Everything else
   travels along as a `raw` segment, so whatever the English base said the

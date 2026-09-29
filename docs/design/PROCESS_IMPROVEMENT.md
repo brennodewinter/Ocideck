@@ -127,7 +127,7 @@ it is a decade.
 
 | # | Option | Cost | Verdict |
 |---|---|---|---|
-| **A** | **One `SlideType` per tool** (the MIAUW way, scaled) | `SlideType` 16 → ~60. ~45 × 7,000 ≈ **300k lines**. Every one of the 16 add-a-type sites (§16.2) × 45. Picker becomes a phone book. l10n × 31 languages × 45. | **Rejected.** Cost is linear in an unbounded list. |
+| **A** | **One `SlideType` per tool** (the MIAUW way, scaled) | `SlideType` 16 → ~60. ~45 × 7,000 ≈ **300k lines**. Every one of the 16 add-a-type sites (§16.2) × 45. Picker becomes a phone book. l10n × 30 languages × 45. | **Rejected.** Cost is linear in an unbounded list. |
 | **B** | **Engines × templates** — few *rendering primitives* as slide types; each artefact is declarative **data** | ~5 slide types + ~10 chart types. A new artefact ("add Kano") = a template file. **Zero Dart, zero l10n.** | **Recommended.** Cost is linear in primitives (bounded ≈7), constant in artefacts. |
 | **C** | **Free Markdown + a CSS theme** | ~0 | **Rejected as the answer**, kept as the **escape hatch**: any artefact no engine covers stays authorable as free Markdown/Mermaid. But it cannot compute Cpk, cannot derive limits, cannot lint. Fails the brief. |
 | **D** | **Extend the existing chart engine** for the statistical plots | Reuses `ChartSpec`, CSV linking, the data grid, the SVG exporter, chart a11y read-out | **Recommended as a sub-decision** — this is option B applied to charts, and it is the cheapest real value in the whole plan. |
@@ -785,7 +785,7 @@ Two rules carried over from the privacy bridge, both learned the hard way:
 
 ## 13. Localisation
 
-- UI chrome: `d('Nederlandse brontekst')` — all 31 languages, enforced by
+- UI chrome: `d('Nederlandse brontekst')` — all 30 languages, enforced by
   `test/app_localizations_test.dart`. On `main`, use `make add-l10n SPEC=…`.
 - **Template labels, guidance, catalog terms: data with `nl`/`en` fields, not
   `d()` strings** (§2). This is the MIAUW precedent and it is what makes ~45

@@ -30,7 +30,6 @@
       "ro": "Redenumește",
       "sl": "Preimenuj",
       "sk": "Premenovať",
-      "tlh": "pong DIvI' Hol",
       "tr": "Yeniden adlandır"
     },
     "Naam wijzigen": {
@@ -63,7 +62,6 @@
       "ro": "Schimbă numele",
       "sl": "Spremeni ime",
       "sk": "Zmeniť názov",
-      "tlh": "pong choH",
       "tr": "Adı değiştir"
     },
     "De extensie blijft vast — het bestandsformaat verandert niet door de naam.": {
@@ -96,7 +94,6 @@
       "ro": "Extensia rămâne fixă — redenumirea nu schimbă formatul fișierului.",
       "sl": "Končnica ostane fiksna — preimenovanje ne spremeni oblike datoteke.",
       "sk": "Prípona zostáva pevná — premenovanie nemení formát súboru.",
-      "tlh": "tlhegh luy chaqbe — pong choHbe' tlhIngan Hol tey.",
       "tr": "Uzantı sabit kalır — yeniden adlandırmak dosya biçimini değiştirmez."
     },
     "De naam mag geen mappen of bijzondere tekens bevatten.": {
@@ -129,7 +126,6 @@
       "ro": "Numele nu poate conține dosare sau caractere speciale.",
       "sl": "Ime ne sme vsebovati map ali posebnih znakov.",
       "sk": "Názov nesmie obsahovať priečinky alebo špeciálne znaky.",
-      "tlh": "pong mI' DIvI' Hol veHbe' chaH tlhIngan.",
       "tr": "Ad klasörler veya özel karakterler içeremez."
     },
     "Hernoemd naar": {
@@ -162,7 +158,6 @@
       "ro": "Redenumit în",
       "sl": "Preimenovano v",
       "sk": "Premenované na",
-      "tlh": "pong choHpu'",
       "tr": "Yeniden adlandırıldı:"
     },
     "Kon de afbeelding niet hernoemen. Bestaat er al een bestand met die naam?": {
@@ -195,7 +190,6 @@
       "ro": "Nu s-a putut redenumi imaginea. Există deja un fișier cu acel nume?",
       "sl": "Slike ni mogoče preimenovati. Ali že obstaja datoteka s tem imenom?",
       "sk": "Obrázok sa nepodarilo premenovať. Už existuje súbor s týmto názvom?",
-      "tlh": "pong choHlaHbe' mI' pong. pong tu'lu''a'",
       "tr": "Görsel yeniden adlandırılamadı. Bu adda bir dosya zaten mevcut mu?"
     }
   }

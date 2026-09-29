@@ -48,7 +48,6 @@ const Map<String, String> kLanguageNames = {
   'ro': 'Română',
   'sl': 'Slovenščina',
   'sk': 'Slovenčina',
-  'tlh': 'tlhIngan Hol',
   'tr': 'Türkçe',
 };
 

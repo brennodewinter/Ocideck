@@ -29,7 +29,6 @@
       "la": "Elige nomen et locum ubi documentum servabitur.",
       "id": "Pilih nama dan lokasi penyimpanan dokumen.",
       "tr": "Bir ad ve belgenin kaydedileceği yeri seçin.",
-      "tlh": "pong yIwIv 'ej document pollu'bogh Daq yIwIv.",
       "pap": "Skohe un nòmber i kaminda e dokumento ta wordu wardá.",
       "gsw": "Wähl en Name und wohin s Dokument gspeicheret wird."
     },
@@ -62,7 +61,6 @@
       "la": "E.g. Notae conventus",
       "id": "Mis. Catatan rapat",
       "tr": "Örn. Toplantı notları",
-      "tlh": "mup: qevas ghItlhmey",
       "pap": "P.e. Nota di reunion",
       "gsw": "Z. B. Sitzigsnotize"
     },
@@ -95,7 +93,6 @@
       "la": "Nomen inscribe",
       "id": "Masukkan nama",
       "tr": "Bir ad girin",
-      "tlh": "pong yIghItlh",
       "pap": "Hinka un nòmber",
       "gsw": "Gib en Name i"
     },
@@ -128,7 +125,6 @@
       "la": "Fasciculus hoc nomine in hac capsula iam est.",
       "id": "Berkas dengan nama ini sudah ada di folder ini.",
       "tr": "Bu klasörde bu adla bir dosya zaten var.",
-      "tlh": "pongvam ghajbogh file foldervamDaq paw' tu'lu'.",
       "pap": "Ya eksistí un fèl ku e nòmber aki den e map aki.",
       "gsw": "Es git scho e Datei mit däm Name i dämm Ordner."
     },
@@ -161,7 +157,6 @@
       "la": "Nondum serva",
       "id": "Jangan simpan dulu",
       "tr": "Henüz kaydetme",
-      "tlh": "wej pol",
       "pap": "Ainda no warda",
       "gsw": "Nonig speichere"
     },
@@ -194,7 +189,6 @@
       "la": "In memoria solum, donec ipse serves.",
       "id": "Hanya di memori, sampai Anda menyimpannya sendiri.",
       "tr": "Siz kaydedene kadar yalnızca bellekte.",
-      "tlh": "qawHaq neH, pollu'pa' SoH.",
       "pap": "Solamente den memoria, te ora bo ward'é bo mes.",
       "gsw": "Nur im Spicher, bis du's säuber speichersch."
     },
@@ -227,7 +221,6 @@
       "la": "Fasciculus non servatur; documentum hariolum manet.",
       "id": "Berkas tidak disimpan; dokumen tetap menjadi draf.",
       "tr": "Dosya kaydedilmez; belge taslak olarak kalır.",
-      "tlh": "file polbe'; document Draft jottaH.",
       "pap": "E fèl no ta wordu wardá; e dokumento ta keda un klad.",
       "gsw": "D Datei wird nöd gspeicheret; s Dokument blibt es Konzept."
     },
@@ -260,7 +253,6 @@
       "la": "Fasciculus creari non potuit.",
       "id": "Berkas tidak dapat dibuat.",
       "tr": "Dosya oluşturulamadı.",
-      "tlh": "file chenmoHlaHbe'.",
       "pap": "No por a krea e fèl.",
       "gsw": "D Datei hät nöd chöne aaglait wärde."
     }

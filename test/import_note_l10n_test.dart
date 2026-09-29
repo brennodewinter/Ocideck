@@ -25,7 +25,7 @@ import 'package:path/path.dart' as p;
 /// in zijn bestand houden, onopgemerkt.
 ///
 /// Deze poort haalt de strings via de AST uit de bron en eist dat elk in alle
-/// 31 talen bestaat. Zo dwingt hij niet alleen de vertaling af, maar ook dat een
+/// 30 talen bestaat. Zo dwingt hij niet alleen de vertaling af, maar ook dat een
 /// **nieuwe** notitie- of voortgangsstring niet stilletjes onvertaald ontsnapt.
 void main() {
   test(
