@@ -44,7 +44,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// uitzondering hier: `allowed` gaat per (taal, waarde). Een Franse `Image 1`
 /// vrijstellen zegt niets over het Grieks, waar `Image 1` wél fout zou zijn.
 /// De zusterpoort in tool/check_l10n_dutch_passthrough.dart kan dat niet — daar
-/// gaat de uitzondering per sleutel en dekt ze meteen alle 31 talen — en dáárom
+/// gaat de uitzondering per sleutel en dekt ze meteen alle 30 talen — en dáárom
 /// blijft de drempel dáár op drie staan. Zie de kop van dat bestand voor die
 /// meting.
 ///
@@ -55,19 +55,6 @@ void main() {
   const allowed = <(String, String)>{
     // Een lettertypevoorbeeld. De pangram is het punt; vertalen zou hem breken.
     ('id', 'The quick brown fox jumps over the lazy dog.'),
-    // Vakterm uit de CVSS-standaard, die geen Klingon-vorm heeft.
-    ('tlh', 'CVSS 4.0 vector'),
-    // Klingon heeft geen vakwoord voor paginaopmaak of marges; de melding
-    // over ongeldige geometry (#1681) staat er in het Engels.
-    (
-      'tlh',
-      'The page setup in this document contains invalid values and was ignored. Your settings are used instead.',
-    ),
-    // Klingon heeft geen gangbare vertaling voor deze conflictmelding.
-    ('tlh', 'The file has been modified by another program.'),
-    // Klingon heeft geen woord voor "presentaties" of "server" in deze
-    // context; de welkomstscherm-sectie staat er in het Engels (#1986).
-    ('tlh', 'Presentations on this server'),
     // Deense interfaceterm die letterlijk zo geleend is.
     ('da', 'Look and feel'),
 

@@ -30,7 +30,6 @@
       "ro": "Formatul prezentării",
       "sl": "Oblika predstavitve",
       "sk": "Formát prezentácie",
-      "tlh": "much ngIq Segh",
       "tr": "Sunum biçimi"
     },
     "Kies hoe de dia's tijdens het presenteren doorgaan.": {
@@ -63,7 +62,6 @@
       "ro": "Alege cum avansează diapozitivele în timpul prezentării.",
       "sl": "Izberite, kako se diapozitivi pomikajo med predstavitvijo.",
       "sk": "Vyberte, ako sa budú snímky počas prezentácie posúvať.",
-      "tlh": "muchtaHvIS Qorwaghmey vIHmeH mIw yIwIv.",
       "tr": "Sunum sırasında slaytların nasıl ilerleyeceğini seçin."
     },
     "Vrij presenteren": {
@@ -96,7 +94,6 @@
       "ro": "Prezentare liberă",
       "sl": "Prosto predstavljanje",
       "sk": "Voľná prezentácia",
-      "tlh": "tlhabtaHvIS yImuch",
       "tr": "Serbest sunum"
     },
     "Zelf doorgaan": {
@@ -129,7 +126,6 @@
       "ro": "Avansare manuală",
       "sl": "Ročno nadaljevanje",
       "sk": "Ručný posun",
-      "tlh": "nIteb yIvangqa'",
       "tr": "Elle ilerle"
     },
     "Je bepaalt zelf wanneer de volgende dia verschijnt.": {
@@ -162,7 +158,6 @@
       "ro": "Tu decizi când apare următorul diapozitiv.",
       "sl": "Sami določite, kdaj se prikaže naslednji diapozitiv.",
       "sk": "Sami určíte, kedy sa zobrazí ďalšia snímka.",
-      "tlh": "Qorwagh veb narghmeH poH Dangu' SoH.",
       "tr": "Sonraki slaydın ne zaman görüneceğine siz karar verirsiniz."
     },
     "Twintig dia's gaan automatisch door.": {
@@ -195,7 +190,6 @@
       "ro": "Douăzeci de diapozitive avansează automat.",
       "sl": "Dvajset diapozitivov se samodejno pomika naprej.",
       "sk": "Dvadsať snímok sa posúva automaticky.",
-      "tlh": "cha'maH Qorwaghmey'e' leghlu'be'lu'taHvIS vIH.",
       "tr": "Yirmi slayt otomatik olarak ilerler."
     },
     "Twintig dia's in een stevig tempo.": {
@@ -228,7 +222,6 @@
       "ro": "Douăzeci de diapozitive într-un ritm alert.",
       "sl": "Dvajset diapozitivov v živahnem tempu.",
       "sk": "Dvadsať snímok v svižnom tempe.",
-      "tlh": "nom muchlu'taHvIS cha'maH Qorwaghmey.",
       "tr": "Tempoyu yüksek tutan yirmi slayt."
     },
     "Aangepaste timing": {
@@ -261,7 +254,6 @@
       "ro": "Temporizare personalizată",
       "sl": "Čas po meri",
       "sk": "Vlastné časovanie",
-      "tlh": "poH SeHmeH mIw le'",
       "tr": "Özel zamanlama"
     },
     "In de bron ingesteld": {
@@ -294,7 +286,6 @@
       "ro": "Setată în sursă",
       "sl": "Nastavljeno v izvorni kodi",
       "sk": "Nastavené v zdroji",
-      "tlh": "HalDaq cherlu'",
       "tr": "Kaynakta ayarlandı"
     },
     "Blijft behouden totdat je een andere vorm kiest.": {
@@ -327,7 +318,6 @@
       "ro": "Se păstrează până când alegi alt format.",
       "sl": "Ostane ohranjeno, dokler ne izberete druge oblike.",
       "sk": "Zostane zachované, kým nevyberiete iný formát.",
-      "tlh": "ngIq Segh latlh DawIvpa' poltaHlu'.",
       "tr": "Başka bir biçim seçene kadar korunur."
     }
   }

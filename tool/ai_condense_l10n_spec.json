@@ -30,7 +30,6 @@
       "ro": "Rezumă cu AI…",
       "sl": "Povzemi z AI…",
       "sk": "Zhrnúť pomocou AI…",
-      "tlh": "ngabmoH AI…",
       "tr": "AI ile özetle…"
     },
     "Tekst inkorten met AI": {
@@ -63,7 +62,6 @@
       "ro": "Scurtează textul cu AI",
       "sl": "Skrajšaj besedilo z AI",
       "sk": "Skrátiť text pomocou AI",
-      "tlh": "mu' pIqmoH AI",
       "tr": "Metni AI ile kısalt"
     },
     "De volledige tekst verhuist naar de speakernotities — er gaat niets verloren.": {
@@ -96,7 +94,6 @@
       "ro": "Textul complet se mută în notițele vorbitorului — nimic nu se pierde.",
       "sl": "Celotno besedilo se prestavi v opombe govornika — nič se ne izgubi.",
       "sk": "Celý text sa presunie do poznámok rečníka — nič sa nestratí.",
-      "tlh": "Hoch mu' notesDaq jaH — pagh luj.",
       "tr": "Tam metin konuşmacı notlarına taşınır — hiçbir şey kaybolmaz."
     },
     "Korte samenvatting": {
@@ -129,7 +126,6 @@
       "ro": "Rezumat scurt",
       "sl": "Kratek povzetek",
       "sk": "Krátke zhrnutie",
-      "tlh": "pum ngeD",
       "tr": "Kısa özet"
     },
     "Eén alinea die op één dia past.": {
@@ -162,7 +158,6 @@
       "ro": "Un paragraf care încape pe un singur slide.",
       "sl": "En odstavek, ki gre na en prosojnik.",
       "sk": "Jeden odsek, ktorý sa zmestí na jednu snímku.",
-      "tlh": "wa' paragraph wa' slideDaq.",
       "tr": "Tek slayta sığan tek paragraf."
     },
     "Kernpunten (max. 8)": {
@@ -195,7 +190,6 @@
       "ro": "Puncte-cheie (max. 8)",
       "sl": "Bistvene točke (maks. 8)",
       "sk": "Kľúčové body (max. 8)",
-      "tlh": "mu'mey porgh (8 max)",
       "tr": "Ana noktalar (maks. 8)"
     },
     "Een compacte lijst met de hoofdpunten.": {
@@ -228,7 +222,6 @@
       "ro": "O listă compactă a punctelor principale.",
       "sl": "Zgoščen seznam glavnih točk.",
       "sk": "Zhuštený zoznam hlavných bodov.",
-      "tlh": "porghmey tetlh.",
       "tr": "Ana noktaların kısa bir listesi."
     },
     "Genereer": {
@@ -261,7 +254,6 @@
       "ro": "Generează",
       "sl": "Ustvari",
       "sk": "Generovať",
-      "tlh": "chenmoH",
       "tr": "Oluştur"
     },
     "Oorspronkelijke tekst": {
@@ -294,7 +286,6 @@
       "ro": "Text original",
       "sl": "Izvirno besedilo",
       "sk": "Pôvodný text",
-      "tlh": "mu'mey wa'DIch",
       "tr": "Orijinal metin"
     }
   }

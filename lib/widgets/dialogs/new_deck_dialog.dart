@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck_template.dart';
 import '../../models/settings.dart';
-import '../../services/template_content_service.dart';
 import '../../state/info_safety_provider.dart';
 import '../../state/procesverbetering_provider.dart';
 import '../../state/settings_provider.dart';
@@ -174,44 +173,6 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
     super.dispose();
   }
 
-  /// Zegt in welke taal de voorbeelddia's staan, als dat niet de taal is die de
-  /// gebruiker leest.
-  ///
-  /// De titel en de omschrijving van een sjabloon lopen door `l10n.d()` en
-  /// verschijnen dus in de eigen taal; de dia-inhoud niet. Die is
-  /// **deck-inhoud**: een document per taal in `assets/templates/` (nl en en,
-  /// #622), geladen door `TemplateContentService`. Vertalen via l10n zou de
-  /// inhoud van een document laten afhangen van de menutaal waarin het
-  /// toevallig is aangemaakt — twee mensen die hetzelfde sjabloon kiezen,
-  /// kregen dan onvergelijkbare bestanden.
-  ///
-  /// Nederlands en Engels krijgen dus hun eigen inhoud; elke andere taal krijgt
-  /// de Engelse variant, en dát is wat deze regel meldt. Voor wie hem niet
-  /// nodig heeft is hij ruis, en een melding die niets toevoegt leert mensen
-  /// meldingen overslaan — daarom zwijgt hij in het Nederlands en het Engels.
-  Widget _templateLanguageNotice(BuildContext context, AppLocalizations l10n) {
-    if (TemplateContentService.languagesWithContent.contains(
-      l10n.languageCode,
-    )) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      // Sleutel zodat een test op de aanwezigheid kan toetsen zonder de tekst in
-      // 32 talen te hoeven kennen.
-      key: const ValueKey('templateLanguageNotice'),
-      padding: const EdgeInsets.only(top: 4),
-      child: Text(
-        l10n.d(
-          "De voorbeelddia's van een sjabloon staan in het Engels. Naam en omschrijving volgen je eigen taal; de inhoud pas je na het aanmaken aan.",
-        ),
-        style: TextStyle(
-          fontSize: 11,
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-        ),
-      ),
-    );
-  }
-
   /// The catalogue narrowed by the search box and sorted for display. Matches
   /// the localised title, description and module badge, plus the Dutch source
   /// strings, so a term in either language finds the template.
@@ -342,7 +303,6 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
                     l10n.d('Sjabloon'),
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
-                  _templateLanguageNotice(context, l10n),
                   const SizedBox(height: 6),
                   TextField(
                     key: const ValueKey('templateSearchField'),

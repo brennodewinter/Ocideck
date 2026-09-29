@@ -30,7 +30,6 @@
       "ro": "Informații suplimentare",
       "sl": "Dodatne informacije",
       "sk": "Doplňujúce informácie",
-      "tlh": "De' chelbogh",
       "tr": "Ek bilgiler"
     },
     "Bijvoorbeeld datum, locatie of versie": {
@@ -63,7 +62,6 @@
       "ro": "De exemplu, dată, locație sau versiune",
       "sl": "Na primer datum, kraj ali različica",
       "sk": "Napríklad dátum, miesto alebo verzia",
-      "tlh": "ghantoH: poH, Daq pagh ghantoH mI'",
       "tr": "Örneğin tarih, konum veya sürüm"
     },
     "De stijl kon niet blijvend worden bewaard. De merkstrook wordt alleen in deze presentatie gebruikt.": {
@@ -96,7 +94,6 @@
       "ro": "Stilul nu a putut fi salvat permanent. Banda de marcă va fi folosită doar în această prezentare.",
       "sl": "Sloga ni bilo mogoče trajno shraniti. Trak blagovne znamke bo uporabljen samo v tej predstavitvi.",
       "sk": "Štýl sa nepodarilo natrvalo uložiť. Pruh značky sa použije iba v tejto prezentácii.",
-      "tlh": "le'Ha'ghach poltaHlaHbe'. muchvamDaq neH malja' betleH lo'lu'.",
       "tr": "Stil kalıcı olarak kaydedilemedi. Marka şeridi yalnızca bu sunumda kullanılacak."
     },
     "een ingesloten stijlafbeelding kon niet worden teruggezet": {
@@ -129,7 +126,6 @@
       "ro": "o imagine de stil încorporată nu a putut fi restaurată",
       "sl": "vdelane slike sloga ni bilo mogoče obnoviti",
       "sk": "vložený obrázok štýlu sa nepodarilo obnoviť",
-      "tlh": "Segh nagh chellu'bogh choqlu'laHbe'",
       "tr": "gömülü bir stil görseli geri yüklenemedi"
     },
     "Stijlprofiel geëxporteerd — een eigen stijlafbeelding kon niet worden meegenomen": {
@@ -162,7 +158,6 @@
       "ro": "Profilul de stil a fost exportat — o imagine de stil proprie nu a putut fi inclusă",
       "sl": "Profil sloga je izvožen — lastne slike sloga ni bilo mogoče vključiti",
       "sk": "Profil štýlu bol exportovaný — vlastný obrázok štýlu sa nepodarilo zahrnúť",
-      "tlh": "Segh nab ngeHlu'pu' — Segh nagh tlhoS chellaHbe'",
       "tr": "Stil profili dışa aktarıldı — özel bir stil görseli dahil edilemedi"
     }
   }

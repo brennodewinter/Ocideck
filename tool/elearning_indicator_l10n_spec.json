@@ -30,7 +30,6 @@
       "la": "{naam}: institutus",
       "id": "{naam}: terkonfigurasi",
       "tr": "{naam}: ayarlandı",
-      "tlh": "{naam}: 'oprab",
       "pap": "{naam}: konfigurá"
     },
     "{naam}: niet ingesteld": {
@@ -63,7 +62,6 @@
       "la": "{naam}: non institutus",
       "id": "{naam}: belum terkonfigurasi",
       "tr": "{naam}: ayarlanmadı",
-      "tlh": "{naam}: 'oprabbe'",
       "pap": "{naam}: no konfigurá"
     }
   }

@@ -47,7 +47,6 @@ const supportedLangs = [
   'ro',
   'sl',
   'sk',
-  'tlh',
   'tr',
 ];
 

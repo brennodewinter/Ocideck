@@ -121,7 +121,7 @@ void main() {
     // De `t()`-map `_strings<Lang>` staat daar ook in en heeft een eigen
     // sleutelruimte — `t('slides')` en `d('slides')` zijn twee verschillende
     // dingen. Een bronstring die toevallig zo heet als een bestaande t()-sleutel
-    // werd daardoor in alle 31 talen overgeslagen, en `make l10n-check` bleef
+    // werd daardoor in alle talen overgeslagen, en `make l10n-check` bleef
     // rood zonder dat `make add-l10n` er nog iets aan kon doen.
     const source =
         'const _stringsTr = {\n'

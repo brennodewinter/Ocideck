@@ -198,7 +198,7 @@ lib/
               # (docs/design/NATIVE_CALLS.md)
   platform/   # conditional-import platform abstraction (io/web halves)
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
-  l10n/       # AppLocalizations + translations/<lang>.dart (32 languages)
+  l10n/       # AppLocalizations + translations/<lang>.dart (31 languages)
   theme/      # app theming
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```
@@ -1144,7 +1144,7 @@ Dutch is the source language: UI code calls `d('Nederlandse brontekst')` (litera
 source) or `t('key')` (keyed). `l10n/app_localizations.dart` keeps only the
 `AppLocalizations` class and delegate, and **assembles** the three lookup maps
 (`_strings`, `_dutchSourceStrings`, `_dutchSourceStringAdditions`) from one file
-per language. The translation data lives in `l10n/translations/<lang>.dart` (32
+per language. The translation data lives in `l10n/translations/<lang>.dart` (31
 languages), each a `part of '../app_localizations.dart'` that declares
 `_strings<Lang>`, `_dutchSource<Lang>`, and (for the languages that need later
 additions) `_dutchSourceAdd<Lang>` (Dutch only needs `_stringsNl`, being the

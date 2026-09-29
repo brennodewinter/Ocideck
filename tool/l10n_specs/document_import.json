@@ -30,7 +30,6 @@
       "ro": "Importă document…",
       "sl": "Uvozi dokument…",
       "sk": "Importovať dokument…",
-      "tlh": "Degh lop…",
       "tr": "Belge içe aktar…"
     },
     "Document kiezen": {
@@ -63,7 +62,6 @@
       "ro": "Alege documentul",
       "sl": "Izberi dokument",
       "sk": "Vyberte dokument",
-      "tlh": "Degh wIv",
       "tr": "Belge seç"
     },
     "Document geïmporteerd.": {
@@ -96,7 +94,6 @@
       "ro": "Document importat.",
       "sl": "Dokument uvožen.",
       "sk": "Dokument importovaný.",
-      "tlh": "Degh loppu'.",
       "tr": "Belge içe aktarıldı."
     },
     "Importeren uit Word of LibreOffice…": {
@@ -129,7 +126,6 @@
       "ro": "Importă din Word sau LibreOffice…",
       "sl": "Uvozi iz Worda ali LibreOffice…",
       "sk": "Importovať z Wordu alebo LibreOffice…",
-      "tlh": "Word pagh LibreOfficevo' lop…",
       "tr": "Word veya LibreOffice'den içe aktar…"
     }
   }

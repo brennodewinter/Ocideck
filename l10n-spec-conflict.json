@@ -30,7 +30,6 @@
       "ro": "Fișierul a fost modificat de alt program.",
       "sl": "Datoteko je spremenil drug program.",
       "sk": "Súbor upravil iný program.",
-      "tlh": "The file has been modified by another program.",
       "tr": "Dosya başka bir program tarafından değiştirildi."
     },
     "Herladen": {
@@ -63,7 +62,6 @@
       "ro": "Reîncarcă",
       "sl": "Ponovno naloži",
       "sk": "Znova načítať",
-      "tlh": "Reload",
       "tr": "Yeniden yükle"
     },
     "Overschrijven": {
@@ -96,7 +94,6 @@
       "ro": "Suprascrie",
       "sl": "Prepiši",
       "sk": "Prepísať",
-      "tlh": "Overwrite",
       "tr": "Üzerine yaz"
     }
   }

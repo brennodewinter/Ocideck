@@ -328,7 +328,7 @@ class _AppShellState extends ConsumerState<AppShell> {
                 // is neutraal ("bestanden") omdat er beide soorten in kunnen
                 // zitten. Eén string met een plaatshouder, niet drie stukken
                 // met het getal ertussen — dat legde de Nederlandse woordvolgorde
-                // op aan 31 talen (#1614).
+                // op aan 30 talen (#1614).
                 snapshots.length == 1
                     ? (snapshots.single.kind.isDocument
                           ? l10n.d(

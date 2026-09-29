@@ -79,7 +79,7 @@
 //
 // Zestien procent raak dus. Dat alleen zou nog te verdedigen zijn; de reden dat
 // drie blijft staan is de VORM van de uitzondering hier. [loanKeys] gaat per
-// SLEUTEL en dekt daarmee meteen alle 31 talen — zie de afweging daar. `Titel
+// SLEUTEL en dekt daarmee meteen alle 30 talen — zie de afweging daar. `Titel
 // (H1)` vrijstellen omdat het Deens toevallig `Titel` zegt, maakt diezelfde
 // sleutel ook stil voor het Grieks en het Bulgaars, waar een Nederlandse waarde
 // onmiskenbaar fout is. Verlagen naar twee zou de lijst van 17 naar 44 sleutels
@@ -99,7 +99,7 @@
 //
 // ── Waarom de uitzonderingen per SLEUTEL gaan ────────────────────────────────
 //
-// Zie [loanKeys]. Kort: een taal-uitzondering ("tlh mag dit") verbergt de
+// Zie [loanKeys]. Kort: een taal-uitzondering ("xx mag dit") verbergt de
 // volgende fout in diezelfde taal; een sleutel-uitzondering zegt iets over de
 // bronzin zelf en blijft daarom houdbaar.
 //
@@ -141,7 +141,7 @@ const String keyedFamily = 'strings';
 /// Drie. Zie de kop van dit bestand voor de meting achter dat getal, inclusief
 /// waarom de zusterpoort in test/l10n_untranslated_test.dart bij #1534 wél naar
 /// twee ging en deze niet: daar gaat de uitzondering per (taal, waarde), hier
-/// per sleutel en dus meteen over alle 31 talen.
+/// per sleutel en dus meteen over alle 30 talen.
 const int minimumWords = 3;
 
 /// Hoeveel doorgelaten bronzinnen er nog staan. RATCHET: mag dalen, nooit
@@ -164,7 +164,7 @@ const int passthroughBaseline = 0;
 /// bewijs dat de vertaler de juiste term koos in plaats van het bewijs dat hij
 /// niets deed.
 ///
-/// **Waarom per sleutel en niet per taal.** Een uitzondering "tlh mag deze
+/// **Waarom per sleutel en niet per taal.** Een uitzondering "xx mag deze
 /// waarde" zegt iets over de vertaler en dekt de volgende fout in diezelfde
 /// taal toe. Een uitzondering per sleutel zegt iets over de BRONZIN — dat er
 /// niets in zit om te vertalen — en die uitspraak blijft waar, ongeacht wie
@@ -242,7 +242,7 @@ class DutchPassthrough {
     required this.family,
   });
 
-  /// De taal waarin het staat (`tlh`, `da`, …).
+  /// De taal waarin het staat (`da`, `fy`, …).
   final String language;
 
   /// De sleutel: een Nederlandse bronzin ([dutchSourceFamily]) of een

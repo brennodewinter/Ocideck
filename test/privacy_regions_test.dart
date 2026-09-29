@@ -132,7 +132,6 @@ void main() {
       // triggerwoorden geeft bijna nul recall, en niemand merkt het.
       expect(privacyLexiconCoverage('pl'), PrivacyLexiconCoverage.none);
       expect(privacyLexiconCoverage('fy'), PrivacyLexiconCoverage.none);
-      expect(privacyLexiconCoverage('tlh'), PrivacyLexiconCoverage.none);
     });
 
     test('een dun gevulde taal heet gedeeltelijk, niet gedekt', () {

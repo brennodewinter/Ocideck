@@ -13,7 +13,7 @@ import '../l10n/app_localizations.dart';
 /// Zo kost een nieuwe sneltoets géén 31 vertalingen: de twee vertaalbare woorden
 /// staan één keer in het systeem, en de aanduiding wordt hier samengesteld.
 /// `+` en de plaatsing van de modificatietoets vóór de toets zijn notatie, geen
-/// taal — geen van de 32 talen schrijft dat anders.
+/// taal — geen van de 31 talen schrijft dat anders.
 String shortcutLabel(AppLocalizations l10n, String key, {bool shift = false}) {
   final modifiers = shift
       ? '${l10n.d('Ctrl/Cmd')}+${l10n.d('Shift')}'

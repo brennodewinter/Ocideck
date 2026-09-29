@@ -77,7 +77,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 - **Traffic Light Protocol** — deck-wide and per-slide classification, WYSIWYG marking, and optional export policy that fails closed.
 - **Import and export** — round-trips Marp Markdown, and exports to PDF, PPTX with speaker notes, OpenDocument (ODP), LaTeX/Beamer, and a self-contained offline HTML deck.
 - **Storage** — local project folders, a portable `.ocideck` package, Nextcloud/WebDAV, S3, or a git repository with history and releases.
-- **Theming, 32 languages and accessibility** — style profiles that travel as a file, a dark interface, and interface text scaling to 200%.
+- **Theming, 31 languages and accessibility** — style profiles that travel as a file, a dark interface, and interface text scaling to 200%.
 
 The full account of each — every slide type, every option, and the limits — is
 in the [User Guide](docs/USER_GUIDE.md).
@@ -217,7 +217,7 @@ lib/
   meetings/   # Call session: typed events, participants, media core
   platform/   # Conditional-import platform abstraction (io/web halves)
   widgets/    # UI: app shell, panels, dialogs, per-type editors, presenter
-  l10n/       # AppLocalizations (32 languages)
+  l10n/       # AppLocalizations (31 languages)
   theme/      # App theming
   utils/      # Small shared helpers (clipboard table parsing, URL launching)
 ```
@@ -323,11 +323,11 @@ UI strings must be translated in all languages, and file-format changes must be
 reflected in `docs/FILE_FORMAT.md`. For security issues, see
 [`SECURITY.md`](SECURITY.md).
 
-**About the 32 languages:** the interface runs in Dutch, English, German,
+**About the 31 languages:** the interface runs in Dutch, English, German,
 French, Italian, Spanish, Portuguese, Polish, Czech, Slovak, Slovenian,
 Croatian, Bulgarian, Romanian, Hungarian, Greek, Danish, Swedish, Finnish,
 Estonian, Latvian, Lithuanian, Maltese, Irish, Ukrainian, Turkish, Indonesian,
-Frisian, Swiss German, Latin, Papiamento, and Klingon. That is roughly 71,500
+Frisian, Swiss German, Latin, and Papiamento. That is roughly 69,000
 translations, and they were produced during AI-assisted development — 289 of the
 314 commits touching `lib/l10n/translations/` carry an AI co-author trailer.
 **No native speaker has reviewed them word by word.** Two tests fail the build:
@@ -336,7 +336,7 @@ one if a string is missing in any language, and one — since #677 — if a
 most visible form of neglect, not quality. Corrections for a single language are
 among the most useful contributions this project can receive.
 
-**The 32 languages are the interface. The documentation is English.** Every
+**The 31 languages are the interface. The documentation is English.** Every
 bundled document — user guide, privacy, security and the rest of the curated
 in-app set — exists only in English, and the reader says so above any document
 you open in another language. The machinery for a translation is already there:

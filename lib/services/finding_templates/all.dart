@@ -46,7 +46,6 @@ import 'ro.dart';
 import 'sk.dart';
 import 'sl.dart';
 import 'sv.dart';
-import 'tlh.dart';
 import 'tr.dart';
 import 'uk.dart';
 
@@ -82,7 +81,6 @@ const Map<String, Map<String, String>> findingTemplateSources = {
   'sk': findingTemplatesSk,
   'sl': findingTemplatesSl,
   'sv': findingTemplatesSv,
-  'tlh': findingTemplatesTlh,
   'tr': findingTemplatesTr,
   'uk': findingTemplatesUk,
 };

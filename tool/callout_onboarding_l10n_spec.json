@@ -30,7 +30,6 @@
       "ro": "Faceți clic pe imaginea unde acest punct face referire.",
       "sl": "Kliknite na sliko, kamor se ta točka nanaša.",
       "sk": "Kliknite na obrázok, kam tento bod odkazuje.",
-      "tlh": "mIllogh naDev yIvan, 'ej nugh point referrer.",
       "tr": "Bu noktanın başvurduğu yeri görselde tıklayın."
     },
     "Sleep op de afbeelding om een gebied te markeren.": {
@@ -63,7 +62,6 @@
       "ro": "Trageți pe imagine pentru a marca o zonă.",
       "sl": "Povlecite po sliki za označevanje območja.",
       "sk": "Potiahnite na obrázku pre označenie oblasti.",
-      "tlh": "mIllogh yIchev, 'ej area yImark.",
       "tr": "Bir alanı işaretlemek için görselde sürükleyin."
     },
     "Geldt voor de hele dia — bepaalt hoe verwijzingen tijdens de presentatie worden getekend, niet hoe je ze bewerkt.": {
@@ -96,7 +94,6 @@
       "ro": "Se aplică întregului slide — determină cum sunt desenate referințele în timpul prezentării, nu cum le editați.",
       "sl": "Velja za cel diapozitiv — določa, kako se reference rišejo med predstavitvijo, ne kako jih urejate.",
       "sk": "Platí pre celý snímku — určuje, ako sa referencie kreslia počas prezentácie, nie ako ich upravujete.",
-      "tlh": "Hoch slide va — qaH presentation callouts mIllogh, edit nagh.",
       "tr": "Tüm slayt için geçerlidir — sunum sırasında referansların nasıl çizileceğini belirler, nasıl düzenlediğinizi değil."
     }
   }

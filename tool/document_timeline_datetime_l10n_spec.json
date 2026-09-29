@@ -30,7 +30,6 @@
       "ro": "Alegeți data și ora",
       "sl": "Izberite datum in čas",
       "sk": "Vyberte dátum a čas",
-      "tlh": "jaj poH je yIwIv",
       "tr": "Tarih ve saat seçin"
     },
     "Deze lokale tijd bestaat niet door de overgang naar zomertijd. Kies een andere tijd.": {
@@ -63,7 +62,6 @@
       "ro": "Această oră locală nu există din cauza trecerii la ora de vară. Alegeți o altă oră.",
       "sl": "Ta lokalni čas zaradi prehoda na poletni čas ne obstaja. Izberite drug čas.",
       "sk": "Tento miestny čas neexistuje z dôvodu prechodu na letný čas. Vyberte iný čas.",
-      "tlh": "Daq poHvam tu’lu’be’, poH tuj lo’choHlu’mo’. poH latlh yIwIv.",
       "tr": "Bu yerel saat, yaz saati uygulamasına geçiş nedeniyle mevcut değil. Başka bir saat seçin."
     },
     "Deze lokale tijd komt twee keer voor. Kies de juiste UTC-offset.": {
@@ -96,7 +94,6 @@
       "ro": "Această oră locală apare de două ori. Alegeți decalajul UTC corect.",
       "sl": "Ta lokalni čas se pojavi dvakrat. Izberite pravilen odmik UTC.",
       "sk": "Tento miestny čas sa vyskytuje dvakrát. Vyberte správny posun UTC.",
-      "tlh": "Daq poHvam cha’logh qaS. UTC poH pIm lugh yIwIv.",
       "tr": "Bu yerel saat iki kez gerçekleşir. Doğru UTC farkını seçin."
     },
     "Een datum blijft een datum. Kies je ook een tijd, dan slaat OciDeck het tijdstip op in UTC en toont het met de lokale UTC-offset.": {
@@ -129,7 +126,6 @@
       "ro": "O dată rămâne o dată. Dacă alegeți și o oră, OciDeck stochează momentul în UTC și îl afișează cu decalajul UTC local.",
       "sl": "Datum ostane datum. Če izberete tudi čas, OciDeck shrani časovni trenutek v UTC in ga prikaže z lokalnim odmikom UTC.",
       "sk": "Dátum zostáva dátumom. Ak vyberiete aj čas, OciDeck uloží časový okamih v UTC a zobrazí ho s miestnym posunom UTC.",
-      "tlh": "jaj’e’ taH jaj. poH DAwIvchugh je, UTC lo’taHvIS poH wanI’ pol OciDeck ’ej Daq UTC poH pIm lo’taHvIS ’ang.",
       "tr": "Tarih, tarih olarak kalır. Ayrıca bir saat seçerseniz OciDeck zaman noktasını UTC olarak kaydeder ve yerel UTC farkıyla gösterir."
     }
   }

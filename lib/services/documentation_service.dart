@@ -33,7 +33,7 @@ class DocumentationService {
   /// Hetzelfde, plus of dit de basisversie is in plaats van een vertaling.
   ///
   /// De lezer heeft dat nodig om het te kúnnen zeggen. Alle 24 gebundelde
-  /// documenten bestaan alleen in het Engels, terwijl hun titels in 32 talen
+  /// documenten bestaan alleen in het Engels, terwijl hun titels in 31 talen
   /// staan — dus wie de app op Pools zet, ziet een Poolse titel en krijgt
   /// Engels. De machinerie voor een `.pl.md` ernaast is er al; wat ontbrak was
   /// dat het scherm er iets over zei (#626).

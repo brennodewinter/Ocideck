@@ -452,38 +452,4 @@ void main() {
     expect(harness.choice!.template.id, 'bobCrisis');
     expect(harness.choice!.title, 'Crisis 12:00');
   });
-
-  group('taal van de sjablooninhoud', () {
-    // Titel en omschrijving lopen door l10n.d(), de dia-inhoud niet: die is
-    // een document per taal. Elke door de UI ondersteunde taal wordt geprobeerd;
-    // ontbrekende content valt terug naar het Engels.
-    tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
-
-    // Op de sleutel en niet op de tekst: de melding bestaat in 30 talen, en de
-    // vertaling opzoeken zou de test laten meebewegen met wat hij bewaakt.
-    final notice = find.byKey(const ValueKey('templateLanguageNotice'));
-
-    testWidgets('meldt de Engelse fallback voor Klingon', (tester) async {
-      AppLocalizations.setActiveLanguageCode('tlh');
-      final harness = _Harness();
-      await harness.open(tester);
-      expect(notice, findsOneWidget);
-    });
-
-    testWidgets('zwijgt in het Nederlands', (tester) async {
-      // Een melding die niets toevoegt leert mensen meldingen overslaan.
-      AppLocalizations.setActiveLanguageCode('nl');
-      final harness = _Harness();
-      await harness.open(tester);
-      expect(notice, findsNothing);
-    });
-
-    testWidgets('zwijgt in het Engels', (tester) async {
-      // Engels heeft zijn eigen inhoudsdocumenten; er valt niets te melden.
-      AppLocalizations.setActiveLanguageCode('en');
-      final harness = _Harness();
-      await harness.open(tester);
-      expect(notice, findsNothing);
-    });
-  });
 }

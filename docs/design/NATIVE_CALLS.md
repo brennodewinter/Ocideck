@@ -566,5 +566,5 @@ host; run any crypto in an isolate with static helpers.
   and (later) Matrix adapters and asserts the UI knows nothing provider-specific.
 - **Projection boundary:** a test that the slide→call channel demands an
   `AudienceDeck` (a raw `Deck` fails the build).
-- **Gates:** `make check` green (l10n 31 languages, SBOM/licences, coverage,
+- **Gates:** `make check` green (l10n 30 languages, SBOM/licences, coverage,
   ratchets, docs); the chain-review document adopted.

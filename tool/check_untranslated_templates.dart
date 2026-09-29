@@ -43,14 +43,6 @@
 // Measured on the tree of this change: threshold 1 finds 340 lines and is wrong
 // about most of them; threshold 2 finds the 4 in [allowedCognates].
 //
-// ── Klingon ─────────────────────────────────────────────────────────────────
-//
-// `tlh` is skipped. `TemplateContentService.languagesWithContent` deliberately
-// leaves Klingon on the English fallback until its template corpus has had a
-// reliable human translation, and the four `.tlh.md` files that do exist are
-// English copies. Including it would mean a permanently red gate for a decision
-// that was made on purpose.
-//
 // Usage:
 //   dart run tool/check_untranslated_templates.dart          # the gate
 //   dart run tool/check_untranslated_templates.dart --list   # every hit
@@ -69,11 +61,6 @@ const String sourceLanguage = 'nl';
 
 /// The language the translator translates *from*.
 const String baseLanguage = 'en';
-
-/// Languages that do not ship translated template content.
-///
-/// See the header: Klingon is on the English fallback by design.
-const Set<String> skippedLanguages = {'tlh'};
 
 /// From how many words an identical line counts as untranslated.
 const int minimumWords = 2;
@@ -201,7 +188,6 @@ List<String> translatedLanguages(String root, String id) {
     final middle = name.substring(id.length + 1, name.length - 3);
     if (middle.contains('.')) continue; // a different template with a longer id
     if (middle == baseLanguage || middle == sourceLanguage) continue;
-    if (skippedLanguages.contains(middle)) continue;
     languages.add(middle);
   }
   final sorted = languages.toList()..sort();

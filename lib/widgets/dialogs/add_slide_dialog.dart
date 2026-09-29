@@ -385,7 +385,7 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
 
   /// De uitleg bij het aangewezen slidetype, onder het rooster.
   ///
-  /// Deze tekst bestond al — volledig, in 32 talen — maar verscheen pas ná het
+  /// Deze tekst bestond al — volledig, in 31 talen — maar verscheen pas ná het
   /// invoegen, achter een dichtgeklapte "Wat kan ik hier?". Wie moest kiezen,
   /// koos dus op een draadframe en een woord. Nu staat het antwoord waar de
   /// vraag gesteld wordt.

@@ -6079,7 +6079,7 @@ find it.
   app settings, not fields stored in the `.md` file. See
   [Cockpit dashboards](#cockpit-dashboards) for the instruments and power-on
   sequence.
-- The interface is available in 32 languages — among them Dutch, English,
+- The interface is available in 31 languages — among them Dutch, English,
   German, French, Spanish, Italian, Portuguese, Polish, Ukrainian, Turkish,
   Greek, the Nordic and Baltic languages, Frisian and Papiamento. *Settings →
   General → Language* has the full list.

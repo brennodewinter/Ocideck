@@ -2980,8 +2980,8 @@ judged. That is a deliberate difference from §6.2 and needs its write path in
 
 #### Cost, before anyone starts
 
-Two new interface strings — which means 31 translations beside the Dutch
-source, 32 languages in all — one new sidecar reader/writer, a second
+Two new interface strings — which means 30 translations beside the Dutch
+source, 31 languages in all — one new sidecar reader/writer, a second
 action on the finding card plus the set-aside list, the git write path, and the
 merge. The scanner itself does not change.
 

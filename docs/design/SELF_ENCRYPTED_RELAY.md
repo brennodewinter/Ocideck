@@ -599,7 +599,7 @@ path is added **beside** it, sharing the controller/session/tab seam:
   class-size ratchet (use top-level helpers, as the collab core does), no
   `catch(_)`/`print` (use `logWarning`/`logError`), atomic writes only, UI-imports-in-
   services ratchet, coverage gate (**every new `lib/` file must appear in a test**),
-  and the l10n gate (**every new `l10n.d('…')` needs all 31 languages, single string
+  and the l10n gate (**every new `l10n.d('…')` needs all 30 languages, single string
   literal**; use `make add-l10n`).
 - **External crypto review (bouwvoorwaarde 1)** before user-facing release — tracked
   as an assurance follow-up, not a code gate.

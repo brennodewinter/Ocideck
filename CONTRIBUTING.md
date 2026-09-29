@@ -148,7 +148,7 @@ Targeted test groups for focused work:
 - **Localization is enforced.** UI strings go through `context.l10n.d('Nederlandse
   brontekst')`. The test `test/app_localizations_test.dart` fails if a literal
   `.d('…')` string lacks a translation in **every** supported language (Dutch is
-  the source; all 31 other languages need an entry). Rather than hand-editing 31
+  the source; all 30 other languages need an entry). Rather than hand-editing 30
   files, write the translations into a small JSON spec and run
   `make add-l10n SPEC=…` — it inserts them into each language's additions overlay,
   `dart format`s the result, skips anything already present, and whitelists any
@@ -156,20 +156,19 @@ Targeted test groups for focused work:
   `make l10n-check`. A loanword kept identical in every language (e.g. `Heatmap`)
   goes in the spec's `unchanged` list instead of being translated.
 
-  **If you are not the maintainer, you are not expected to produce 31
-  translations.** The list includes Maltese, Irish, Frisian, Papiamento, Latin
-  and Klingon; nobody has all of those. **Supply Dutch and English, leave the
-  other 30 blank, and say so in the pull request — the maintainer fills them in
+  **If you are not the maintainer, you are not expected to produce 30
+  translations.** The list includes Maltese, Irish, Frisian, Papiamento and
+  Latin; nobody has all of those. **Supply Dutch and English, leave the
+  other 29 blank, and say so in the pull request — the maintainer fills them in
   before merge.** The gate is non-negotiable about the *end state*, not about
   who does which part of it. *(Added 2026-07-22: this was the single rule most
   likely to turn a first contribution into a last one, because a contributor met
-  it as a failing build rather than as a stated division of labour. The count
-  "30 other languages" was also stale since the 32nd language landed.)*
+  it as a failing build rather than as a stated division of labour.)*
 
   **Correcting one language is a different job, and it has its own route.**
   Everything above is about *adding* a string. If you are a native speaker who
   wants to fix wording that is wrong, clumsy or machine-flavoured, you do not
-  need Dart and you do not need the other 30 languages:
+  need Dart and you do not need the other 29 languages:
 
   ```bash
   make l10n-export LANG_=ga OUT=my-irish.json   # 2,261 strings, flat JSON
@@ -184,11 +183,11 @@ Targeted test groups for focused work:
   A pull request that touches **one** language file and adds no keys is welcome
   on its own; it does not need to wait for anything else. The importer refuses a
   file that introduces an unknown key, on purpose — a new string belongs with
-  the code that uses it and must land in all 31 languages at once, which is what
-  `add_l10n.dart` enforces. *(Added 2026-07-22, #633: the strings live in 32
+  the code that uses it and must land in all 30 languages at once, which is what
+  `add_l10n.dart` enforces. *(Added 2026-07-22, #633: the strings live in 31
   Dart `part` files of roughly 3,000 lines each, and that was the whole barrier
   — it pushed away exactly the contribution this project needs most, native
-  review of 31 languages, and toward more machine translation.)*
+  review of 30 languages, and toward more machine translation.)*
 - **Comment language: Dutch or English, but never both in one comment.**
   *(Gated since 2026-07-23, #518: `make check-comment-language`, a ratchet
   (`mixedCommentBaseline`). It covers plain `//` comments only — see below for

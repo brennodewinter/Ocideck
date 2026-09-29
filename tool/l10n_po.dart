@@ -9,7 +9,7 @@
 // ~3.000 regels. Een Ierse of Maltese moedertaalspreker die één slechte zin wil
 // verbeteren moest daarvoor Dart-syntaxis, een `part`-bestand en `make check`
 // overleven. Die drempel duwt precies de bijdrage weg die dit project het
-// hardst nodig heeft — moedertaalcontrole op 31 talen — en duwt richting
+// hardst nodig heeft — moedertaalcontrole op 30 talen — en duwt richting
 // machinevertaling (#633).
 //
 // Het formaat is JSON en geen PO. PO is de standaard in vertaalland, maar het
@@ -23,7 +23,7 @@
 //
 //   * sleutels toevoegen of weghalen. Een `import` die een onbekende sleutel
 //     tegenkomt weigert het hele bestand. Nieuwe strings horen bij de code die
-//     ze introduceert en gaan via `add_l10n.dart`, dat ze in álle 31 talen
+//     ze introduceert en gaan via `add_l10n.dart`, dat ze in álle 30 talen
 //     afdwingt. Zou import wél toevoegen, dan kon een vertaalronde stilletjes
 //     een string in 30 talen laten ontbreken;
 //   * de `t()`-map aanraken. Die heeft een eigen sleutelruimte — `t('slides')`
@@ -36,7 +36,7 @@ import 'dart:io';
 const langs = [
   'en', 'it', 'de', 'fr', 'es', 'fy', 'pap', 'la', 'id', 'pl', 'uk', 'gsw',
   'el', 'da', 'sv', 'hr', 'cs', 'fi', 'bg', 'lv', 'lt', 'mt', 'et', 'hu',
-  'ga', 'pt', 'ro', 'sl', 'sk', 'tlh', 'tr', //
+  'ga', 'pt', 'ro', 'sl', 'sk', 'tr', //
 ];
 
 String cap(String code) => code[0].toUpperCase() + code.substring(1);

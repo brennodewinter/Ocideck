@@ -383,7 +383,7 @@ class ExportService {
   /// dan is het enige wat de houder nog kan lezen de inhoud. De namen zijn
   /// daarnaast Engels geworden — ze heetten `-redacties.json` en
   /// `-redacties-verificatiesleutels.json`, twee Nederlandse namen die op
-  /// elkaar lijken, in een app met 32 talen en ontvangers in evenzovele.
+  /// elkaar lijken, in een app met 31 talen en ontvangers in evenzovele.
   /// [ExportDialog] noemt beide bestanden nu ook bij naam vóór de export, want
   /// tot dan schreef OciDeck de sleutel naast de deur zonder het te zeggen.
   static Future<void> _writeRedactionManifest(

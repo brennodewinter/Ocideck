@@ -225,7 +225,7 @@ class _DocumentReaderScreenState extends ConsumerState<DocumentReaderScreen> {
               _ensureAnchorVisible();
             }
           }
-          // De titel van dit document staat in 32 talen, de inhoud vaak in één.
+          // De titel van dit document staat in 31 talen, de inhoud vaak in één.
           // Dat verschil hoort de lezer te horen vóór hij begint te lezen, niet
           // halverwege te ontdekken (#626). De basis is Engels, dus de melding
           // hoort bij iederéén die géén Engels leest en op de basis terugvalt —

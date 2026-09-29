@@ -829,7 +829,7 @@ check-dead-code:
 	dart run tool/check_dead_code.dart
 
 # De andere helft van de vertaalbelofte. app_localizations_test controleert dat
-# elke bronstring in alle 31 talen bestaat; deze poort controleert dat een
+# elke bronstring in alle 30 talen bestaat; deze poort controleert dat een
 # zichtbare string ook DÓÓR `d()` gaat. Het gat zat in de doorgeefluiken —
 # `EditorField(label: 'Titel (H1)')` gaat via `l10n.d(widget.label)` en was voor
 # een letterlijke scanner onzichtbaar. De poort splitst die twee gevallen:
@@ -988,8 +988,7 @@ check-untranslated-templates:
 	@echo "Command: dart run tool/check_untranslated_templates.dart"
 	@echo "Covers: elke assets/templates/<id>.<taal>.md — een regel die letterlijk"
 	@echo "        in de Engelse bron staat en NIET in de Nederlandse is een"
-	@echo "        vertaalgat. Vanaf twee woorden; Klingon staat bewust op de"
-	@echo "        Engelse terugval (TemplateContentService.languagesWithContent)."
+	@echo "        vertaalgat. Vanaf twee woorden."
 	@echo "Failure means: vertaal de regel ter plekke, of — als het Engelse woord"
 	@echo "        het woord ván die taal is — zet het paar (taal, regel) in"
 	@echo "        allowedCognates in tool/check_untranslated_templates.dart"
@@ -998,7 +997,7 @@ check-untranslated-templates:
 	dart run tool/check_untranslated_templates.dart
 
 # De ANDERE kant van de vertaalpoorten. `l10n-check` en app_localizations_test
-# bewaken dat elke gebruikte sleutel in alle 32 talen bestaat; niets vroeg of
+# bewaken dat elke gebruikte sleutel in alle 30 talen bestaat; niets vroeg of
 # een sleutel nog wordt opgehaald. Elke wees kost 32 regels onderhoud voor
 # tekst die geen mens ooit ziet.
 #
@@ -1106,7 +1105,7 @@ add-l10n:
 # (the exact failures that used to slip through by hand).
 # Eén taal eruit en er weer in, via plat JSON — zodat een moedertaalspreker die
 # één zin wil verbeteren geen Dart hoeft aan te raken (#633). Voegt bewust geen
-# sleutels toe: nieuwe strings gaan via add-l10n, dat alle 31 talen afdwingt.
+# sleutels toe: nieuwe strings gaan via add-l10n, dat alle 30 talen afdwingt.
 #
 # De variabele heet LANG_ en niet LANG, omdat make de omgeving erft: op vrijwel
 # elke shell staat LANG al gezet (nl_NL.UTF-8), en dan draait `make l10n-export`

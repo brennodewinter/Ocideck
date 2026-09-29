@@ -2944,8 +2944,8 @@ beoordeeld heeft. Dat is een bewust verschil met §6.2 en heeft zijn schrijfpad 
 
 #### Kosten, voordat iemand begint
 
-Twee nieuwe interfaceteksten — wat 31 vertalingen naast de Nederlandse
-bron betekent, 32 talen in totaal — één nieuwe sidecar-lezer/schrijver, een tweede
+Twee nieuwe interfaceteksten — wat 30 vertalingen naast de Nederlandse
+bron betekent, 31 talen in totaal — één nieuwe sidecar-lezer/schrijver, een tweede
 actie op de bevindingkaart plus de terzijdelegging-lijst, het git-schrijfpad, en de
 samenvoeging. De scanner zelf verandert niet.
 

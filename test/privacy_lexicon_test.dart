@@ -181,7 +181,7 @@ void main() {
       // opvraagbaar, niet dat hij compleet is.
       expect(privacyLexiconLanguages, contains('nl'));
       expect(privacyLexiconLanguages, contains('en'));
-      // De interface draait in 30 talen; het lexicon dekt er een handvol.
+      // De interface draait in 31 talen; het lexicon dekt er een handvol.
       expect(privacyLexiconLanguages.length, lessThan(10));
     });
 

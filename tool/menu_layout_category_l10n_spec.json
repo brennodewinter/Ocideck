@@ -30,7 +30,6 @@
       "ro": "Listă",
       "sl": "Seznam",
       "sk": "Zoznam",
-      "tlh": "tetlh",
       "tr": "Liste"
     },
     "Categorie": {
@@ -63,7 +62,6 @@
       "ro": "Categorie",
       "sl": "Kategorija",
       "sk": "Kategória",
-      "tlh": "Segh",
       "tr": "Kategori"
     },
     "Categorie toevoegen": {
@@ -96,7 +94,6 @@
       "ro": "Adaugă categorie",
       "sl": "Dodaj kategorijo",
       "sk": "Pridať kategóriu",
-      "tlh": "Segh yIchel",
       "tr": "Kategori ekle"
     },
     "Categorie opheffen (blokken blijven behouden)": {
@@ -129,7 +126,6 @@
       "ro": "Elimină categoria (blocurile sunt păstrate)",
       "sl": "Odstrani kategorijo (bloki ostanejo)",
       "sk": "Zrušiť kategóriu (bloky zostanú zachované)",
-      "tlh": "Segh yIteq (taH blockmey)",
       "tr": "Kategoriyi kaldır (bloklar korunur)"
     },
     "Uitleg": {
@@ -162,7 +158,6 @@
       "ro": "Descriere",
       "sl": "Opis",
       "sk": "Vysvetlenie",
-      "tlh": "QIjmeH mu'mey",
       "tr": "Açıklama"
     },
     "Een keuzemenu: elk blok springt bij aanklikken naar een andere dia. Typ per blok een label en een uitleg, kies de doeldia en eventueel een afbeelding. Kies de indeling: raster, onder elkaar of in een cirkel. Met categorieën wissel je tijdens het presenteren tussen groepen blokken. Een blok zonder doel is gewone tekst.": {
@@ -195,7 +190,6 @@
       "ro": "Un meniu de opțiuni: fiecare bloc trece la altă diapozitivă atunci când este apăsat. Introduceți o etichetă și o descriere pentru fiecare bloc, alegeți diapozitivul țintă și, opțional, o imagine. Alegeți aranjarea: grilă, listă sau cerc. Cu ajutorul categoriilor comutați între grupuri de blocuri în timpul prezentării. Un bloc fără țintă este text obișnuit.",
       "sl": "Izbirni meni: vsak blok ob kliku preskoči na drug diapozitiv. Za vsak blok vnesite oznako in opis, izberite ciljni diapozitiv in po želji sliko. Izberite postavitev: mreža, seznam ali krog. S kategorijami med predstavitvijo preklapljate med skupinami blokov. Blok brez cilja je navadno besedilo.",
       "sk": "Ponuka volieb: každý blok po kliknutí prejde na iný snímok. Pre každý blok zadajte označenie a vysvetlenie, vyberte cieľový snímok a prípadne obrázok. Zvoľte rozloženie: mriežka, zoznam alebo kruh. Pomocou kategórií počas prezentácie prepínate medzi skupinami blokov. Blok bez cieľa je bežný text.",
-      "tlh": "wIvmeH menu: 'uylu'DI' latlh 'echletHom Sup Hoch 'ay'. Hoch 'ay'vaD per QIjmeH mu'mey je yIghItlh, HemtIq 'echletHom yIwIv, DaneHchugh mIllogh je. lol-lam yIwIv: beQ'och, tetlh, 'ID ghap. cha'taHvIS 'ay' ghommey choHmeH Seghmey yIlo'. HemtIq Hutlhbogh 'ay' ghItlh nap 'oH.",
       "tr": "Bir seçim menüsü: her blok tıklandığında başka bir slayda atlar. Her blok için bir etiket ve bir açıklama girin, hedef slaydı ve isteğe bağlı olarak bir resim seçin. Düzeni seçin: ızgara, liste veya daire. Kategorilerle sunum sırasında blok grupları arasında geçiş yaparsınız. Hedefi olmayan bir blok düz metindir."
     }
   },

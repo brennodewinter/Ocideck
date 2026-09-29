@@ -9,7 +9,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 ///
 /// De oude sleutel moet bovendien overal wég blijven: een merge=union-rebase
 /// van twee l10n-takken kan een verwijderde sleutel stil laten herrijzen, en
-/// dan liegt de melding opnieuw in 31 talen.
+/// dan liegt de melding opnieuw in 30 talen.
 void main() {
   const nieuw =
       'niet elk gekoppeld bestand kon mee (onleesbaar of buiten het project)';

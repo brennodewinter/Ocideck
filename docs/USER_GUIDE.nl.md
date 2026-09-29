@@ -6081,7 +6081,7 @@ vinden.
   app-instellingen, geen velden opgeslagen in het `.md`-bestand. Zie
   [Cockpit dashboards](#cockpit-dashboards) voor de instrumenten en power-on-
   sequentie.
-- De interface is beschikbaar in 32 talen — daaronder Nederlands, Engels,
+- De interface is beschikbaar in 31 talen — daaronder Nederlands, Engels,
   Duits, Frans, Spaans, Italiaans, Portugees, Pools, Oekraïens, Turks,
   Grieks, de Noordse en Baltische talen, Fries en Papiaments. *Settings →
   General → Language* heeft de volledige lijst.

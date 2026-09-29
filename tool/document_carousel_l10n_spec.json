@@ -30,7 +30,6 @@
       "ro": "Imagine lipită",
       "sl": "Slika prilepljena",
       "sk": "Obrázok vložený",
-      "tlh": "nagh bej ghop",
       "tr": "Görsel yapıştırıldı"
     },
     "Bibliotheekmap niet bereikbaar": {
@@ -63,7 +62,6 @@
       "ro": "Folderul bibliotecii nu poate fi accesat",
       "sl": "Mapa knjižnice ni dosegljiva",
       "sk": "Priečinok knižnice nedostupný",
-      "tlh": "De' Qul mIw lughajbe'",
       "tr": "Kitaplık klasörüne ulaşılamıyor"
     },
     "De bibliotheekmap is niet bereikbaar. Kies een map hieronder of pas Opslag aan onder ⋮ → Instellingen.": {
@@ -96,7 +94,6 @@
       "ro": "Folderul bibliotecii nu poate fi accesat. Alege un folder mai jos sau ajustează Stocare în ⋮ → Setări.",
       "sl": "Mapa knjižnice ni dosegljiva. Izberite mapo spodaj ali prilagodite Shrambo v ⋮ → Nastavitve.",
       "sk": "Priečinok knižnice nie je dostupný. Vyberte priečinok nižšie alebo upravte Úložisko v ⋮ → Nastavenia.",
-      "tlh": "De' Qul mIw lughajbe'. yIHoH mIw 'e' 'e' pagh ⋮ → Segh chu' yIchoH.",
       "tr": "Kitaplık klasörüne ulaşılamıyor. Aşağıdan bir klasör seçin veya ⋮ → Ayarlar altında Depolama'yı düzenleyin."
     },
     "De map uit Instellingen is offline of verplaatst. Kies hier een map met afbeeldingen.": {
@@ -129,7 +126,6 @@
       "ro": "Folderul din Setări este offline sau mutat. Alege aici un folder cu imagini.",
       "sl": "Mapa iz Nastavitev je brez povezave ali premaknjena. Izberite tukaj mapo s slikami.",
       "sk": "Priečinok z Nastavení je offline alebo presunutý. Vyberte tu priečinok s obrázkami.",
-      "tlh": "Seghvo' mIw offline 'ej pagh vIH. naDev nagh legh mIw yIHoH.",
       "tr": "Ayarlar'daki klasör çevrimdışı veya taşınmış. Burada görselleri olan bir klasör seçin."
     },
     "Kies een map met afbeeldingen": {
@@ -162,7 +158,6 @@
       "ro": "Alege un folder cu imagini",
       "sl": "Izberite mapo s slikami",
       "sk": "Vyberte priečinok s obrázkami",
-      "tlh": "nagh legh mIw yIHoH",
       "tr": "Görselleri olan bir klasör seçin"
     },
     "Map toevoegen…": {
@@ -195,7 +190,6 @@
       "ro": "Adaugă folder…",
       "sl": "Dodaj mapo…",
       "sk": "Pridať priečinok…",
-      "tlh": "Daq chel…",
       "tr": "Klasör ekle…"
     },
     "Overzicht inklappen": {
@@ -228,7 +222,6 @@
       "ro": "Restrânge prezentarea generală",
       "sl": "Strni pregled",
       "sk": "Zbaliť prehľad",
-      "tlh": "Hoch legh yISoQmoH",
       "tr": "Genel bakışı daralt"
     },
     "Overzicht uitklappen": {
@@ -261,7 +254,6 @@
       "ro": "Extinde prezentarea generală",
       "sl": "Razširi pregled",
       "sk": "Rozbaliť prehľad",
-      "tlh": "Hoch legh yIpoSmoH",
       "tr": "Genel bakışı genişlet"
     },
     "Pakket (.ocideck)": {
@@ -294,7 +286,6 @@
       "ro": "Pachet (.ocideck)",
       "sl": "Paket (.ocideck)",
       "sk": "Balík (.ocideck)",
-      "tlh": "Hom (.ocideck)",
       "tr": "Paket (.ocideck)"
     },
     "Tabel geplakt": {
@@ -327,7 +318,6 @@
       "ro": "Tabel lipit",
       "sl": "Tabela prilepljena",
       "sk": "Tabuľka vložená",
-      "tlh": "taH bej ghop",
       "tr": "Tablo yapıştırıldı"
     },
     "Voeg een map toe of gebruik \"Bladeren\" voor één bestand.": {
@@ -360,7 +350,6 @@
       "ro": "Adaugă un folder sau folosește \"Răsfoiește\" pentru un singur fișier.",
       "sl": "Dodajte mapo ali uporabite \"Prebrskaj\" za eno datoteko.",
       "sk": "Pridajte priečinok alebo použite \"Prehľadávať\" pre jeden súbor.",
-      "tlh": "Daq yIchel pagh wa' De' vIneH yISam.",
       "tr": "Bir klasör ekleyin veya tek bir dosya için \"Gözat\"ı kullanın."
     },
     "Zelfstandig pakket met markdown én afbeeldingen — optioneel versleuteld (AES-256), te openen in OciDeck.": {
@@ -393,7 +382,6 @@
       "ro": "Pachet independent cu markdown și imagini — opțional criptat (AES-256), se deschide în OciDeck.",
       "sl": "Samostojni paket z markdownom in slikami — po želji šifriran (AES-256), se odpre v OciDeck.",
       "sk": "Samostatný balík s markdownom a obrázkami — voliteľne šifrovaný (AES-256), otvorí sa v OciDeck.",
-      "tlh": "Hom tam je markdown 'ej nagh — vaj 'e' rIn (AES-256), OciDeckDaq yIghaj.",
       "tr": "Markdown ve görseller içeren bağımsız paket — isteğe bağlı şifreli (AES-256), OciDeck'te açılır."
     }
   }

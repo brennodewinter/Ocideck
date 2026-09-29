@@ -30,8 +30,7 @@
       "pap": "Ariba (mm)",
       "la": "Supra (mm)",
       "gsw": "Obe (mm)",
-      "id": "Atas (mm)",
-      "tlh": "Dung (mm)"
+      "id": "Atas (mm)"
     },
     "Onder (mm)": {
       "en": "Bottom (mm)",
@@ -63,8 +62,7 @@
       "pap": "Abou (mm)",
       "la": "Infra (mm)",
       "gsw": "Une (mm)",
-      "id": "Bawah (mm)",
-      "tlh": "bIng (mm)"
+      "id": "Bawah (mm)"
     },
     "Links (mm)": {
       "en": "Left (mm)",
@@ -96,8 +94,7 @@
       "pap": "Robes (mm)",
       "la": "Sinistra (mm)",
       "gsw": "Links (mm)",
-      "id": "Kiri (mm)",
-      "tlh": "poS (mm)"
+      "id": "Kiri (mm)"
     },
     "Rechts (mm)": {
       "en": "Right (mm)",
@@ -129,8 +126,7 @@
       "pap": "Drechi (mm)",
       "la": "Dextra (mm)",
       "gsw": "Rächts (mm)",
-      "id": "Kanan (mm)",
-      "tlh": "nIH (mm)"
+      "id": "Kanan (mm)"
     },
     "Smal (860 px)": {
       "en": "Narrow (860 px)",
@@ -162,8 +158,7 @@
       "pap": "Smal (860 px)",
       "la": "Angustus (860 px)",
       "gsw": "Schmal (860 px)",
-      "id": "Sempit (860 px)",
-      "tlh": "'ob (860 px)"
+      "id": "Sempit (860 px)"
     },
     "Standaard (1100 px)": {
       "en": "Default (1100 px)",
@@ -195,8 +190,7 @@
       "pap": "Standard (1100 px)",
       "la": "Praedefinitum (1100 px)",
       "gsw": "Standard (1100 px)",
-      "id": "Bawaan (1100 px)",
-      "tlh": "motlh (1100 px)"
+      "id": "Bawaan (1100 px)"
     },
     "Breed (1400 px)": {
       "en": "Wide (1400 px)",
@@ -228,8 +222,7 @@
       "pap": "Hanchu (1400 px)",
       "la": "Latus (1400 px)",
       "gsw": "Breit (1400 px)",
-      "id": "Lebar (1400 px)",
-      "tlh": "'aD (1400 px)"
+      "id": "Lebar (1400 px)"
     },
     "Volledige breedte": {
       "en": "Full width",
@@ -261,8 +254,7 @@
       "pap": "Hanchura kompletu",
       "la": "Tota latitudo",
       "gsw": "Volli Breiti",
-      "id": "Lebar penuh",
-      "tlh": "'aD naQ"
+      "id": "Lebar penuh"
     },
     "Paginamaat": {
       "en": "Page size",
@@ -294,8 +286,7 @@
       "pap": "Tamaño di página",
       "la": "Magnitudo paginae",
       "gsw": "Sitegrössi",
-      "id": "Ukuran halaman",
-      "tlh": "nav 'aD"
+      "id": "Ukuran halaman"
     },
     "Randstijl": {
       "en": "Border style",
@@ -327,8 +318,7 @@
       "pap": "Stil di rand",
       "la": "Stilus marginis",
       "gsw": "Rahmestil",
-      "id": "Gaya batas",
-      "tlh": "HeH Segh"
+      "id": "Gaya batas"
     },
     "Tabelstijl": {
       "en": "Table style",
@@ -360,8 +350,7 @@
       "pap": "Stil di tabel",
       "la": "Stilus tabulae",
       "gsw": "Tabällestil",
-      "id": "Gaya tabel",
-      "tlh": "romuS Segh"
+      "id": "Gaya tabel"
     },
     "Geen randen": {
       "en": "No borders",
@@ -393,8 +382,7 @@
       "pap": "Sin rand",
       "la": "Sine marginibus",
       "gsw": "Kei Rahme",
-      "id": "Tanpa batas",
-      "tlh": "HeH Hutlh"
+      "id": "Tanpa batas"
     },
     "Lijnen (horizontaal)": {
       "en": "Lines (horizontal)",
@@ -426,8 +414,7 @@
       "pap": "Liñanan (horizontal)",
       "la": "Lineae (horizontales)",
       "gsw": "Linie (horizontal)",
-      "id": "Garis (horizontal)",
-      "tlh": "tlhegh (yor)"
+      "id": "Garis (horizontal)"
     },
     "Omrand (volledig)": {
       "en": "Boxed (full)",
@@ -459,8 +446,7 @@
       "pap": "Ku rand (kompletu)",
       "la": "Cinctum (plene)",
       "gsw": "Iigrahmt (voll)",
-      "id": "Berbingkai (penuh)",
-      "tlh": "HeH naQ"
+      "id": "Berbingkai (penuh)"
     },
     "Zebrastrepen (om en om)": {
       "en": "Zebra stripes (alternating)",
@@ -492,8 +478,7 @@
       "pap": "Rayanan zebra (alternando)",
       "la": "Lineae zebrinae (alternae)",
       "gsw": "Zebrastreife (abwächslend)",
-      "id": "Garis zebra (berselang)",
-      "tlh": "tlhegh Hutlhbe' (rIn'a')"
+      "id": "Garis zebra (berselang)"
     },
     "Accentlijn onder koprij": {
       "en": "Accent line under header row",
@@ -525,8 +510,7 @@
       "pap": "Liña di akséntu bou di e fila di kabes",
       "la": "Linea accentus sub capite",
       "gsw": "Akzäntlinie under dr Chopfziile",
-      "id": "Garis aksen di bawah baris kepala",
-      "tlh": "nach tlhegh bIng"
+      "id": "Garis aksen di bawah baris kepala"
     },
     "Tabel randkleur": {
       "en": "Table border colour",
@@ -558,8 +542,7 @@
       "pap": "Koló di rand di tabel",
       "la": "Color marginis tabulae",
       "gsw": "Tabällerahmefarb",
-      "id": "Warna batas tabel",
-      "tlh": "romuS HeH rItlh"
+      "id": "Warna batas tabel"
     },
     "Tabel zebrakleur": {
       "en": "Table zebra colour",
@@ -591,8 +574,7 @@
       "pap": "Koló di raya di tabel",
       "la": "Color linearum tabulae",
       "gsw": "Tabällezebrafarb",
-      "id": "Warna zebra tabel",
-      "tlh": "romuS tlhegh rItlh"
+      "id": "Warna zebra tabel"
     },
     "Celopvulling: {px} px": {
       "en": "Cell padding: {px} px",
@@ -624,8 +606,7 @@
       "pap": "Yenamentu di selda: {px} px",
       "la": "Fartura cellae: {px} px",
       "gsw": "Zällefüllig: {px} px",
-      "id": "Padding sel: {px} px",
-      "tlh": "yotlh Sar: {px} px"
+      "id": "Padding sel: {px} px"
     },
     "Inhoudsopgave": {
       "en": "Table of contents",
@@ -657,8 +638,7 @@
       "pap": "Indeks",
       "la": "Index",
       "gsw": "Inhaltsverzeichnis",
-      "id": "Daftar isi",
-      "tlh": "meyQ"
+      "id": "Daftar isi"
     },
     "Inhoudsopgave — voeg koppen toe om de inhoudsopgave te vullen.": {
       "en": "Table of contents — add headings to fill it.",
@@ -690,8 +670,7 @@
       "pap": "Indeks — agregá kabesnan pa yen’é.",
       "la": "Index — adde titulos ut impleatur.",
       "gsw": "Inhaltsverzeichnis — füeg Überschrifte zue zum s fülle.",
-      "id": "Daftar isi — tambahkan judul untuk mengisinya.",
-      "tlh": "meyQ — nav tlhIHmey chel 'e' yIchel."
+      "id": "Daftar isi — tambahkan judul untuk mengisinya."
     },
     "Schrijfbreedte editor": {
       "en": "Editor writing width",
@@ -723,8 +702,7 @@
       "pap": "Hanchura di skirbi den editor",
       "la": "Latitudo scribendi editoris",
       "gsw": "Schriibbreiti vom Editor",
-      "id": "Lebar penulisan editor",
-      "tlh": "ghItlhwI' 'aD"
+      "id": "Lebar penulisan editor"
     },
     "Hoe breed het schrijfoppervlak in de visuele modus is. Smal leest rustig, breed gebruikt meer van het scherm.": {
       "en": "How wide the writing area is in visual mode. Narrow reads calmly, wide uses more of the screen.",
@@ -756,8 +734,7 @@
       "pap": "Kon hanchu e área di skirbi ta den modo visual. Estrecho ta lesa trankil, hanchu ta usa mas di e pantaya.",
       "la": "Quam lata sit area scribendi in modo visuali. Angusta placide legitur, lata plus monitorii adhibet.",
       "gsw": "Wie breit s Schriibfäld im visuelle Modus isch. Schmal liest sich ruhig, breit bruucht meh vom Bildschirm.",
-      "id": "Seberapa lebar area menulis dalam mode visual. Sempit terbaca tenang, lebar memakai lebih banyak layar.",
-      "tlh": "nuq 'aD ghItlhmeH Daq visual mode. 'ob tam ja'chuq, 'aD law' jIH lo'."
+      "id": "Seberapa lebar area menulis dalam mode visual. Sempit terbaca tenang, lebar memakai lebih banyak layar."
     },
     "Pagina-instellingen export": {
       "en": "Page settings for export",
@@ -789,8 +766,7 @@
       "pap": "Konfigurashon di página pa eksportá",
       "la": "Optiones paginae ad exportandum",
       "gsw": "Siteiistellige für dr Export",
-      "id": "Pengaturan halaman untuk ekspor",
-      "tlh": "nav choH ngeH"
+      "id": "Pengaturan halaman untuk ekspor"
     },
     "Paginamaat (ISO-216) en marges voor HTML-print, LaTeX en PDF-export.": {
       "en": "Page size (ISO 216) and margins for HTML print, LaTeX and PDF export.",
@@ -822,8 +798,7 @@
       "pap": "Tamaño di página (ISO 216) i marge pa imprimí HTML, LaTeX i eksportá PDF.",
       "la": "Magnitudo paginae (ISO 216) et margines ad HTML imprimendum, LaTeX et PDF exportandum.",
       "gsw": "Sitegrössi (ISO 216) und Ränder für HTML-Druck, LaTeX und PDF-Export.",
-      "id": "Ukuran halaman (ISO 216) dan margin untuk cetak HTML, LaTeX, dan ekspor PDF.",
-      "tlh": "nav 'aD (ISO 216) je HeH ngeH HTML, LaTeX je PDF."
+      "id": "Ukuran halaman (ISO 216) dan margin untuk cetak HTML, LaTeX, dan ekspor PDF."
     },
     "{maat} (liggend)": {
       "en": "{maat} (landscape)",
@@ -855,8 +830,7 @@
       "pap": "{maat} (horizontal)",
       "la": "{maat} (transversa)",
       "gsw": "{maat} (Querformat)",
-      "id": "{maat} (lanskap)",
-      "tlh": "{maat} (yor)"
+      "id": "{maat} (lanskap)"
     },
     "Mermaid": {
       "en": "Mermaid",
@@ -888,8 +862,7 @@
       "pap": "Mermaid",
       "la": "Mermaid",
       "gsw": "Mermaid",
-      "id": "Mermaid",
-      "tlh": "Mermaid"
+      "id": "Mermaid"
     }
   }
 }

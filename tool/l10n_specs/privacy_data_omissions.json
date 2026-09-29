@@ -30,7 +30,6 @@
       "ro": "Unele valori nu sunt afișate",
       "sl": "Nekatere vrednosti niso prikazane",
       "sk": "Niektoré hodnoty nie sú zobrazené",
-      "tlh": "'op De' lojmItmey cha'lu'be'",
       "tr": "Bazı değerler gösterilmiyor"
     },
     "OciServe schermt een waarde af wanneer deze ook over iemand anders gaat. Bij het betreffende veld staat waarom de waarde ontbreekt.": {
@@ -63,7 +62,6 @@
       "ro": "OciServe ascunde o valoare atunci când aceasta privește și o altă persoană. Câmpul corespunzător indică motivul pentru care valoarea lipsește.",
       "sl": "OciServe skrije vrednost, kadar se ta nanaša tudi na drugo osebo. Pri ustreznem polju je navedeno, zakaj vrednost manjka.",
       "sk": "OciServe skryje hodnotu, ak sa týka aj inej osoby. Pri príslušnom poli je uvedené, prečo hodnota chýba.",
-      "tlh": "latlh ghot'e' je bopDI' De', De' lojmIt So' OciServe. De' lojmItDaq qatlh Hutlh De' net QIj.",
       "tr": "OciServe, bir değer başka bir kişiyle de ilgili olduğunda bu değeri gizler. İlgili alanda değerin neden eksik olduğu belirtilir."
     },
     "Niet getoond omdat dit gegeven ook over iemand anders gaat": {
@@ -96,7 +94,6 @@
       "ro": "Nu este afișat deoarece această informație privește și o altă persoană",
       "sl": "Ni prikazano, ker se ta podatek nanaša tudi na drugo osebo",
       "sk": "Nie je zobrazené, pretože tento údaj sa týka aj inej osoby",
-      "tlh": "latlh ghot'e' je bopmo' De'vam cha'lu'be'",
       "tr": "Bu veri başka bir kişiyle de ilgili olduğu için gösterilmiyor"
     },
     "Niet getoond door de server (reden: {reden})": {
@@ -129,7 +126,6 @@
       "ro": "Nu este afișat de server (motiv: {reden})",
       "sl": "Strežnik ni prikazal (razlog: {reden})",
       "sk": "Server nezobrazil (dôvod: {reden})",
-      "tlh": "De'wI' toy'wI' cha'be' (meq: {reden})",
       "tr": "Sunucu tarafından gösterilmiyor (neden: {reden})"
     }
   }

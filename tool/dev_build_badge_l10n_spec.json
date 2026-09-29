@@ -30,7 +30,6 @@
       "la": "Versio evolutionis (aedificatio depurationis) — non editio.",
       "id": "Versi pengembangan (build debug) — bukan rilis.",
       "tr": "Geliştirme sürümü (hata ayıklama derlemesi) — sürüm değil.",
-      "tlh": "Dev vItlhutlh moD — release qarbe'.",
       "pap": "Vershon di desaroyo (build di debug) — no ta un release."
     },
     "dev": {
@@ -63,7 +62,6 @@
       "la": "dev",
       "id": "dev",
       "tr": "dev",
-      "tlh": "dev",
       "pap": "dev"
     }
   }

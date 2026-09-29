@@ -42,7 +42,7 @@
 // veld doet intern `l10n.d(widget.label)`, dus de literal ís het argument van
 // `d()`, alleen een aanroep verderop. Dat is geen overtreding en mag niet naar
 // `context.l10n.d('Titel')` herschreven worden — de eigenaar heeft daar bewust
-// tegen gekozen. Wat wél moet: de string bestaat in alle 31 talen, net als een
+// tegen gekozen. Wat wél moet: de string bestaat in alle 30 talen, net als een
 // letterlijke `d('…')`. Dat dwingt `test/app_localizations_test.dart` af, dat
 // hier `sourceKeysIn('lib')` voor gebruikt; het deelt de whitelist
 // `unchangedInAllLanguages` met de letterlijke variant, zodat een identifier
@@ -383,7 +383,7 @@ class Violation {
   /// Of de literal onderweg gegarandeerd door `l10n.d('…')` gaat.
   ///
   /// `true` betekent BRONSLEUTEL: geen overtreding, maar hij moet wel in alle
-  /// 31 talen bestaan. `false` betekent een echte overtreding: zichtbare tekst
+  /// 30 talen bestaan. `false` betekent een echte overtreding: zichtbare tekst
   /// die niemand vertaalt.
   final bool isSourceKey;
 
@@ -449,7 +449,7 @@ List<Violation> scanForHardcodedText(String root) {
 /// De Nederlandse bronstrings die via een doorgeefluik in `l10n.d('…')` landen.
 ///
 /// `test/app_localizations_test.dart` gebruikt dit om af te dwingen dat ze in
-/// alle 31 talen bestaan — dezelfde eis die daar al voor een letterlijke
+/// alle 30 talen bestaan — dezelfde eis die daar al voor een letterlijke
 /// `d('…')` geldt. De literals die er rechtstreeks in staan zitten er níet in
 /// (die vindt de test zelf met haar eigen scan op de bron).
 Set<String> sourceKeysIn(String root) => {
@@ -612,7 +612,7 @@ String renderList(List<Violation> found) {
   );
   _renderSection(
     buffer,
-    'BRONSLEUTELS — gaan door d(), moeten in alle 31 talen bestaan',
+    'BRONSLEUTELS — gaan door d(), moeten in alle 30 talen bestaan',
     [
       for (final v in found)
         if (v.isSourceKey) v,

@@ -137,6 +137,15 @@ All notable changes to OciDeck are documented in this file.
 - Titeldia's kunnen nu naast titel en ondertitel gewone Markdown-regels voor
   bijvoorbeeld datum, locatie of versie bevatten; bestaande titeldia's blijven
   ongewijzigd werken en een huisstijl kan de ondertitel in een merkstrook zetten.
+### Removed
+
+- Klingon is geen interfacetaal meer. De keuze in de taalkeuzers, de
+  vertaaltabel `tlh`, de zoektemplates (`finding_templates`) en de vier
+  sjabloondocumenten vallen weg; de toegestane Engelse terugval voor
+  Klingse sjablooninhoud en de bijbehorende toelichting in het
+  nieuwe-dek-scherm verdwijnen mee. Decks die met `tlh` als uitgangstaal
+  zijn aangemaakt openen zoals de naam van de taal aangeeft; het
+  interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
 - De eLearning-onderdelen hingen aan de verkeerde schakelaar. "eLearning

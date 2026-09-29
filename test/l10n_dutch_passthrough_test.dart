@@ -56,8 +56,8 @@ void main() {
       // antwoord en geen vergeten vertaling.
       const loan = 'Sprint review / demo';
       expect(loanKeys, contains(loan));
-      giveLanguage('tlh', {
-        '_dutchSourceTlh': {loan: loan},
+      giveLanguage('de', {
+        '_dutchSourceDe': {loan: loan},
       });
       expect(findDutchPassthroughs(root.path), isEmpty);
     });
@@ -76,13 +76,16 @@ void main() {
   group('een geplante Nederlandse zin', () {
     test('wordt gemeld als hij als d()-vertaling doorgaat', () {
       const dutch = 'Kies welke slides u uit het project wilt halen.';
-      giveLanguage('tlh', {
-        '_dutchSourceTlh': {dutch: dutch, 'Verbinding geslaagd': 'yIchel wej'},
+      giveLanguage('de', {
+        '_dutchSourceDe': {
+          dutch: dutch,
+          'Verbinding geslaagd': 'Verbindung hergestellt',
+        },
       });
 
       final found = findDutchPassthroughs(root.path);
       expect(found.map((f) => f.key), [dutch]);
-      expect(found.single.language, 'tlh');
+      expect(found.single.language, 'de');
       expect(found.single.family, dutchSourceFamily);
     });
 
@@ -90,8 +93,8 @@ void main() {
       // `make add-l10n` schrijft nieuwe bronstrings in `_dutchSourceAdd*`;
       // een poort die alleen de basistabel las, keek langs al het jonge werk.
       const dutch = 'Geen slides gevonden in dit project.';
-      giveLanguage('tlh', {
-        '_dutchSourceAddTlh': {dutch: dutch},
+      giveLanguage('de', {
+        '_dutchSourceAddDe': {dutch: dutch},
       });
       expect(findDutchPassthroughs(root.path).single.key, dutch);
     });
@@ -101,21 +104,21 @@ void main() {
       giveLanguage('nl', {
         '_stringsNl': {'connectOk': 'De verbinding is tot stand gebracht'},
       });
-      giveLanguage('tlh', {
-        '_stringsTlh': {'connectOk': 'De verbinding is tot stand gebracht'},
+      giveLanguage('de', {
+        '_stringsDe': {'connectOk': 'De verbinding is tot stand gebracht'},
       });
 
       final found = findDutchPassthroughs(root.path);
       expect(found.single.key, 'connectOk');
       expect(found.single.family, keyedFamily);
-      expect(found.single.language, 'tlh');
+      expect(found.single.language, 'de');
     });
 
     test('wordt in elke taal apart geteld', () {
       // Het beeld uit #1526: hetzelfde blok staat in tientallen talen. Eén
       // melding per taal, want elke taal moet hem apart oplossen.
       const dutch = 'De connector is alleen beschikbaar op de desktop.';
-      for (final language in ['da', 'el', 'tlh']) {
+      for (final language in ['da', 'de', 'el']) {
         giveLanguage(language, {
           '_dutchSource${language[0].toUpperCase()}${language.substring(1)}': {
             dutch: dutch,
@@ -124,8 +127,8 @@ void main() {
       }
       expect(findDutchPassthroughs(root.path).map((f) => f.language), [
         'da',
+        'de',
         'el',
-        'tlh',
       ]);
     });
   });
@@ -139,7 +142,7 @@ void main() {
 
     test('elke sleutel in loanKeys draagt geen vertaalbaar Nederlands', () {
       // Geen automatische toets — wel een grendel op de vorm: de lijst gaat
-      // over SLEUTELS, niet over talen. Een paar als ('tlh', '…') hoort hier
+      // over SLEUTELS, niet over talen. Een paar als ('da', '…') hoort hier
       // niet in en zou de volgende fout in die taal toedekken.
       expect(loanKeys, isNotEmpty);
       for (final key in loanKeys) {
@@ -179,7 +182,7 @@ void main() {
       final tables = translationEntries('.');
       expect(tables.length, greaterThan(30));
       expect(tables['nl']?[keyedFamily], isNotEmpty);
-      expect(tables['tlh']?[dutchSourceFamily], isNotEmpty);
+      expect(tables['de']?[dutchSourceFamily], isNotEmpty);
     });
 
     test('blijft op of onder de basislijn', () {
