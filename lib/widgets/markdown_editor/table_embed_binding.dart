@@ -54,6 +54,11 @@ class TableEmbedBinding {
   final bool Function() _isMounted;
 
   late TableEditController editor;
+
+  /// De eigenaarstoken die de store bij onze laatste [TableEmbedControllerStore.obtain]
+  /// uitgaf. [dispose] geeft hem mee aan [TableEmbedControllerStore.release],
+  /// zodat die weet of de entry inmiddels een andere eigenaar heeft.
+  late Object _ownerToken;
   int _documentOffset;
   String _source;
   String? _pending;
@@ -70,12 +75,16 @@ class TableEmbedBinding {
     editor = _obtainController();
   }
 
-  TableEditController _obtainController() => _controllerStore.obtain(
-    _documentOffset,
-    tableSource,
-    onChanged: _tableChanged,
-    onCellFocused: () => _embedContext.controller.skipRequestKeyboard = true,
-  );
+  TableEditController _obtainController() {
+    final acquired = _controllerStore.obtain(
+      _documentOffset,
+      tableSource,
+      onChanged: _tableChanged,
+      onCellFocused: () => _embedContext.controller.skipRequestKeyboard = true,
+    );
+    _ownerToken = acquired.token;
+    return acquired.controller;
+  }
 
   void _tableChanged(List<List<String>> rows, List<TableAlign> alignments) {
     _pending = _wrapTable(encodeMarkdownTable(rows, alignments: alignments));
@@ -132,22 +141,28 @@ class TableEmbedBinding {
     );
   }
 
-  void dispose() => _controllerStore.release(_documentOffset, editor);
+  void dispose() =>
+      _controllerStore.release(_documentOffset, editor, _ownerToken);
 }
 
 /// Bewaart tabelcontrollers buiten de vluchtige widgets die ze tekenen.
 class TableEmbedControllerStore {
-  final Map<Object, ({TableEditController controller, String gfm})> _entries =
-      {};
-  final Map<Object, Object> _releaseTokens = {};
+  final Map<
+    Object,
+    ({TableEditController controller, String gfm, Object token})
+  >
+  _entries = {};
 
-  TableEditController obtain(
+  /// Neemt de entry op [tableKey] over en geeft een verse eigenaarstoken
+  /// terug. [release] van een oudere eigenaar is daarna werkloos: diens token
+  /// past niet meer op de entry.
+  ({TableEditController controller, Object token}) obtain(
     Object tableKey,
     String gfm, {
     required void Function(List<List<String>>, List<TableAlign>) onChanged,
     required VoidCallback? onCellFocused,
   }) {
-    _releaseTokens.remove(tableKey);
+    final token = Object();
     final entry = _entries[tableKey];
     final current = entry?.controller;
     final encoded = current == null
@@ -155,9 +170,15 @@ class TableEmbedControllerStore {
         : encodeMarkdownTable(current.rows, alignments: current.alignments);
     if (current != null && (entry!.gfm == gfm || encoded == gfm)) {
       current.reconnect(onChanged: onChanged, onCellFocused: onCellFocused);
-      return current;
+      _entries[tableKey] = (controller: current, gfm: entry.gfm, token: token);
+      return (controller: current, token: token);
     }
-    current?.dispose();
+    if (current != null) {
+      // De verdrongen controller kan deze frame nog aan cellen hangen die
+      // pas aan het einde van de frame ontmanteld worden; opruimen na de
+      // layout, niet middenin.
+      WidgetsBinding.instance.addPostFrameCallback((_) => current.dispose());
+    }
     final decoded = decodeMarkdownTableWithAlignment(gfm.split('\n'));
     final controller = TableEditController(
       rows: decoded.rows,
@@ -165,34 +186,44 @@ class TableEmbedControllerStore {
       onChanged: onChanged,
       onCellFocused: onCellFocused,
     );
-    _entries[tableKey] = (controller: controller, gfm: gfm);
-    return controller;
+    _entries[tableKey] = (controller: controller, gfm: gfm, token: token);
+    return (controller: controller, token: token);
   }
 
   void remember(Object tableKey, TableEditController controller, String gfm) {
-    _entries[tableKey] = (controller: controller, gfm: gfm);
+    _entries[tableKey] = (
+      controller: controller,
+      gfm: gfm,
+      // Bewaar de lopende eigenaarstoken: een verse zou een al geplande
+      // [release] van díé binding alsnog doen doorwerken.
+      token: _entries[tableKey]?.token ?? Object(),
+    );
   }
 
-  /// Verwijdert een controller pas na de huidige frame.
+  /// Verwijdert een controller pas na de huidige frame, en alleen als de
+  /// entry dan nog toebehoort aan degene die [token] meegaf.
   ///
   /// Een Quill-update ruimt de oude embedwidget op en bouwt haar meteen weer
-  /// op. [obtain] annuleert deze vrijgave dan; bij een werkelijk verwijderde
-  /// tabel blijft er niemand over en wordt de entry wel opgeruimd.
-  void release(Object tableKey, TableEditController controller) {
-    final token = Object();
-    _releaseTokens[tableKey] = token;
+  /// op; [obtain] adopteert de entry dan onder een nieuwe token en deze
+  /// vrijgave doet niets meer. Datzelfde geldt wanneer de embed van
+  /// widgettype wisselt (tabel ↔ tijdlijn): de opvolger obtaint vóórdat de
+  /// voorganger ontmanteld is — diens [release] zou zonder de token de net
+  /// geadopteerde controller opruimen en de levende cellen met gedode
+  /// focusnodes achterlaten.
+  void release(Object tableKey, TableEditController controller, Object token) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_releaseTokens[tableKey] != token) return;
-      _releaseTokens.remove(tableKey);
       final entry = _entries[tableKey];
-      if (entry?.controller != controller) return;
+      if (entry == null ||
+          entry.controller != controller ||
+          entry.token != token) {
+        return;
+      }
       _entries.remove(tableKey);
       controller.dispose();
     });
   }
 
   void dispose() {
-    _releaseTokens.clear();
     for (final entry in _entries.values) {
       entry.controller.dispose();
     }

@@ -411,21 +411,27 @@ TableEditController? _sourceTableFor(
   final range = DocumentMarkdownView.nthTableBlockRange(body, ordinal);
   if (range == null) return null;
   final gfm = body.split('\n').sublist(range[0], range[1]).join('\n');
-  return s._sourceTables.obtain(
-    (surface: 'source-preview', ordinal: ordinal),
-    gfm,
-    onChanged: (rows, alignments) {
-      final next = replaceNthTableBlock(
-        s._controller.text,
-        ordinal,
-        encodeMarkdownTable(rows, alignments: alignments),
-      );
-      if (next != s._controller.text) {
-        _commitDocumentBody(s.ref, next, coalesceKey: 'source-table-$ordinal');
-      }
-    },
-    onCellFocused: null,
-  );
+  return s._sourceTables
+      .obtain(
+        (surface: 'source-preview', ordinal: ordinal),
+        gfm,
+        onChanged: (rows, alignments) {
+          final next = replaceNthTableBlock(
+            s._controller.text,
+            ordinal,
+            encodeMarkdownTable(rows, alignments: alignments),
+          );
+          if (next != s._controller.text) {
+            _commitDocumentBody(
+              s.ref,
+              next,
+              coalesceKey: 'source-table-$ordinal',
+            );
+          }
+        },
+        onCellFocused: null,
+      )
+      .controller;
 }
 
 /// Plakt [markdown] als tekst op de Quill-caret van de visuele editor en
