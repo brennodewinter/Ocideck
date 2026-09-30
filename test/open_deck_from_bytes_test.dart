@@ -92,6 +92,38 @@ theme: ocideck
     },
   );
 
+  test('een document met BOM onthoudt de BOM, buiten de bron (§3.1)', () async {
+    final (container, tabs) = build();
+
+    final result = await tabs.openDeckFromBytes(
+      Uint8List.fromList([0xEF, 0xBB, 0xBF, ...utf8.encode('# Memo\r\n')]),
+      'memo.md',
+    );
+
+    expect(result, OpenResult.opened);
+    final doc = container
+        .read(tabsProvider)
+        .current!
+        .documentNotifier!
+        .currentState
+        .document!;
+    expect(doc.source, '# Memo\r\n');
+    expect(doc.hasUtf8Bom, isTrue);
+    expect(doc.toBytes(), [0xEF, 0xBB, 0xBF, ...utf8.encode('# Memo\r\n')]);
+  });
+
+  test('een deck met BOM opent als deck, niet als document', () async {
+    final (container, tabs) = build();
+
+    final result = await tabs.openDeckFromBytes(
+      Uint8List.fromList([0xEF, 0xBB, 0xBF, ...utf8.encode(validDeck)]),
+      'deck.md',
+    );
+
+    expect(result, OpenResult.opened);
+    expect(container.read(tabsProvider).current!.deckNotifierOrNull, isNotNull);
+  });
+
   test(
     'uitvoerbare inhoud wordt geblokkeerd en zet het security-alarm',
     () async {

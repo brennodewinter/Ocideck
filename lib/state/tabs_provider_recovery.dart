@@ -53,6 +53,7 @@ RecoverySnapshot _documentRecoverySnapshot(TabInfo tab, DocumentState st) =>
       label: tab.label,
       markdown: st.document!.source,
       kind: MarkdownKind.document,
+      utf8Bom: st.document!.hasUtf8Bom,
     );
 
 /// Niet-toegepaste bron die afwijkt van het laatste geldige deck. Alleen voor

@@ -24,6 +24,12 @@ class RecoverySnapshot {
   /// en vallen terug op [MarkdownKind.presentation] — backward compatible.
   final MarkdownKind kind;
 
+  /// Of het document op schijf met een UTF-8-BOM begon. Reist mee omdat [markdown]
+  /// er zonder komt: zonder dit herstelde een crash het document zonder BOM, en
+  /// de eerstvolgende opslag schreef het zo over het origineel heen. Oude
+  /// herstelbestanden dragen geen sleutel en vallen terug op `false`.
+  final bool utf8Bom;
+
   /// Unapplied source-editor text. Kept separate from [markdown], which must
   /// remain parseable so recovery can always reopen the last valid deck.
   final String? markdownDraft;
@@ -63,6 +69,7 @@ class RecoverySnapshot {
     required this.label,
     required this.markdown,
     this.kind = MarkdownKind.presentation,
+    this.utf8Bom = false,
     this.markdownDraft,
     this.markdownDraftScope,
     this.markdownDraftSlideIndex,
@@ -79,6 +86,7 @@ class RecoverySnapshot {
     'label': label,
     'markdown': markdown,
     'kind': kind.key,
+    if (utf8Bom) 'utf8Bom': true,
     if (markdownDraft != null) 'markdownDraft': markdownDraft,
     if (markdownDraftScope != null) 'markdownDraftScope': markdownDraftScope,
     if (markdownDraftSlideIndex != null)
@@ -98,6 +106,7 @@ class RecoverySnapshot {
       label: (json['label'] as String?) ?? 'Presentatie',
       markdown: (json['markdown'] as String?) ?? '',
       kind: MarkdownKindX.fromKey(json['kind'] as String?),
+      utf8Bom: json['utf8Bom'] == true,
       markdownDraft: json['markdownDraft'] as String?,
       markdownDraftScope: json['markdownDraftScope'] as String?,
       markdownDraftSlideIndex: json['markdownDraftSlideIndex'] as int?,

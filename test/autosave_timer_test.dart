@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -131,6 +133,35 @@ void main() {
       expect(doc, isNotNull);
       expect(doc!.currentState.document!.source, '# Memo\n\nNiet opgeslagen.');
       expect(doc.currentState.isDirty, isTrue);
+    });
+  });
+
+  test('een document met BOM komt na een crash nog steeds met BOM terug', () {
+    fakeAsync((async) {
+      final recovery = _RecordingRecovery();
+      final tabs = _tabs(recovery);
+      addTearDown(tabs.dispose);
+
+      unawaited(
+        tabs.openDeckFromBytes(
+          Uint8List.fromList([0xEF, 0xBB, 0xBF, ...utf8.encode('# Memo\r\n')]),
+          'memo.md',
+        ),
+      );
+      tabs.state.current!.documentNotifier!.edit('# Memo\r\n\r\nNieuw.');
+
+      async.elapse(const Duration(seconds: 30));
+      final snap = recovery.saved.last;
+      // De tekst draagt de BOM niet (die is weggedecodeerd); de vlag wel.
+      expect(snap.markdown, '# Memo\r\n\r\nNieuw.');
+      expect(snap.utf8Bom, isTrue);
+
+      final restored = _tabs(_RecordingRecovery());
+      addTearDown(restored.dispose);
+      expect(restored.restoreRecovered([snap]), 0);
+      final doc = restored.state.current!.documentNotifier!.currentState;
+      expect(doc.document!.hasUtf8Bom, isTrue);
+      expect(doc.document!.toBytes().take(3), [0xEF, 0xBB, 0xBF]);
     });
   });
 
