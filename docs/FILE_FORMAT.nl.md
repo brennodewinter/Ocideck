@@ -3589,6 +3589,15 @@ ondergaan. Het `.md` dat je opslaat is het byte-getrouwe origineel dat je bewaar
 back-upt en uiteindelijk opschoont — dezelfde rol die §9 beschrijft voor de
 Markdown van een deck, gehouden aan een strengere regel van geen normalisatie.
 
+Dat geldt ook voor een voorafgaande **UTF-8-byte-order-mark** (`EF BB BF`): een
+document dat met een BOM opende, wordt met een BOM opgeslagen, en een document dat
+zonder opende krijgt er nooit een bij. De markering wordt naast de tekst onthouden
+en maakt er geen deel van uit, zodat de front matter op de eerste regel gewoon
+herkend blijft. Alleen de eerste `EF BB BF` is de markering; een tweede is gewone
+tekst en blijft staan. Een *deck* doet deze belofte niet — dat wordt bij het
+opslaan gedeconstrueerd en opnieuw gegenereerd en zonder BOM geschreven, de vorm
+die OciDeck voor een deck kiest, geen eis van Marp.
+
 Wat het documentpad wél in de front matter kan schrijven is een korte, gesloten
 verzameling sleutels — de **stijl** van het document (`theme:`), de
 **paginaopmaak** (`papersize:`, `geometry:`), de ene documentbrede

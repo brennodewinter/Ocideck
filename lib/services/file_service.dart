@@ -755,8 +755,9 @@ class FileService {
       hydrated = await _attachSidecars(hydrated, filePath, skipped);
     }
     // Automatische zegelverificatie bij het openen: na hydratatie van de
-    // seal-sidecar (die sealHash zet) de fileHash berekenen uit de raw bytes
-    // en verifiëren. Read-only — een veranderd deck mag nog steeds openen,
+    // seal-sidecar (die sealHash zet) de fileHash berekenen uit de gedecodeerde
+    // tekst (`raw`: zonder een eventuele BOM, dus een BOM voor het bestand valt
+    // hier buiten de hash) en verifiëren. Read-only — een veranderd deck mag nog steeds openen,
     // maar de gebruiker moet weten dat het zegel niet meer klopt.
     IntegrityStatus? integrity;
     if (content == null) {

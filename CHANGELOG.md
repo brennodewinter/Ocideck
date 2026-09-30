@@ -159,15 +159,22 @@ All notable changes to OciDeck are documented in this file.
   regel één. Alleen de eerste `EF BB BF` is de markering; een tweede is inhoud
   en blijft staan. Dezelfde vlag reist mee door opslaan vanuit Visueel,
   crashherstel en het openen uit bytes (web, slepen, URL).
+  Ook het herschrijven van een afbeeldingsverwijzing (hernoemen of ontdubbelen
+  in de carrousel) gooide de BOM weg uit élk `.md` onder de zoekmap — documenten
+  inbegrepen — terwijl het juist alleen het pad binnen `![…](…)` mag veranderen;
+  dat leest en schrijft nu bytes.
   Drie dingen die hiermee meekwamen: (1) een BOM-bestand gaf bij de eerste
   opslag ten onrechte "Het bestand is gewijzigd door een ander programma",
   omdat de onthouden hash over de tekst liep en de hash op schijf over de
   bytes — beide lopen nu over de bytes. (2) "Herladen" in die dialoog las de
   bytes als losse tekens in (`é` werd `Ã©`, een BOM werd `ï»¿`) en sloeg de
   veiligheidsscan over; het herladen loopt nu door dezelfde openpoort als elk
-  ander document. (3) Een deck wordt gedeconstrueerd en opnieuw gegenereerd en
+  ander document, en zegt het wanneer het bestand geweigerd wordt (het
+  veiligheidsalarm bij onveilige inhoud, anders dezelfde melding als een gewone
+  open) in plaats van stil niets te doen. (3) Een deck wordt gedeconstrueerd en opnieuw gegenereerd en
   heeft geen byte-identiteitsbelofte; een BOM wordt daar, zoals altijd, bij het
-  opslaan weggelaten — Marp-BOM-loos is de canonieke vorm.
+  opslaan weggelaten; dat is de vorm die OciDeck voor een deck kiest, geen eis van
+  Marp (Marp CLI en Pandoc lezen beide vormen gelijk).
 
 - De eLearning-onderdelen hingen aan de verkeerde schakelaar. "eLearning
   volgen" (de OciServe-koppeling) is de dienst van de cursist, maar het

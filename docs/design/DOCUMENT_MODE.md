@@ -204,11 +204,15 @@ string — front-matter detection, the outline and the editor must still see `--
 on line one — and written back in front of the first byte
 (`MarkdownDocument.toBytes`). Only the first `EF BB BF` is the marker; a second is
 ordinary text and stays. The flag travels through every route that rebuilds a
-document: visual save, crash recovery, reload-from-disk and open-from-bytes. The
+document: visual save, crash recovery, reload-from-disk and open-from-bytes — and
+the one surgical rewrite that touches a `.md` from outside the editor, renaming or
+de-duplicating an image reference (`ImageReferenceService`), which reads and writes
+bytes for the same reason. The
 conflict hash is taken over the same bytes (`DocumentIntegrity.hashDocument`), so
 a BOM file does not look "modified by another program" on its first save. The deck
-path carries no such promise: a deck is deconstructed and regenerated, and its
-BOM-less form is canonical Marp. Decided against the alternative — stripping the
+path carries no such promise: a deck is deconstructed and regenerated, and it is
+written without a BOM — the form OciDeck chooses for a deck, not one Marp demands
+(Marp CLI and Pandoc read both forms alike, measured 2026-09-30). Decided against the alternative — stripping the
 BOM and documenting it as a normalisation — because that is exactly the
 byte-changing step §3 rules out, and the flag costs one field.
 
