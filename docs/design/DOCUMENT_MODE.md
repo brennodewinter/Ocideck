@@ -193,6 +193,25 @@ survives open→save unchanged. This is the mirror image of the existing
 which *documents* what the deck path loses — the document path must lose
 **nothing**.
 
+**The gate is measured through a real file, not a string fixture.** The loss it
+guards against sits on the byte↔string boundary: Dart's `File.readAsString()` and
+`utf8.decode` drop a leading UTF-8 byte-order mark (`EF BB BF`), and `utf8.encode`
+does not write one back — so `parse('\uFEFF…')` on a string fixture passes while
+the same bytes on disk lost three of them (measured 2026-09-30). The contract is
+therefore: a leading BOM is **remembered, not normalised away**. It is held as a
+flag beside the source (`MarkdownDocument.hasUtf8Bom`), kept *out* of the source
+string — front-matter detection, the outline and the editor must still see `---`
+on line one — and written back in front of the first byte
+(`MarkdownDocument.toBytes`). Only the first `EF BB BF` is the marker; a second is
+ordinary text and stays. The flag travels through every route that rebuilds a
+document: visual save, crash recovery, reload-from-disk and open-from-bytes. The
+conflict hash is taken over the same bytes (`DocumentIntegrity.hashDocument`), so
+a BOM file does not look "modified by another program" on its first save. The deck
+path carries no such promise: a deck is deconstructed and regenerated, and its
+BOM-less form is canonical Marp. Decided against the alternative — stripping the
+BOM and documenting it as a normalisation — because that is exactly the
+byte-changing step §3 rules out, and the flag costs one field.
+
 ---
 
 ## 4. Rich content in a document
