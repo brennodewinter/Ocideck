@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -230,6 +231,43 @@ void main() {
       expect(changed, isFalse);
       expect(File(deck).readAsStringSync(), '![](images/anders.png)\n');
       expect(File(deck).lastModifiedSync(), before);
+    });
+
+    test(
+      'a leading UTF-8 BOM and CRLF survive the rewrite byte for byte',
+      () async {
+        // DOCUMENT_MODE §3.1: readAsString + writeStringAtomic dropped the BOM of
+        // any .md under the search folder — documents included — the moment one
+        // of its image references was renamed or de-duplicated.
+        final from = p.join(tmp.path, 'project', 'images', 'kopie.png');
+        final to = p.join(tmp.path, 'project', 'images', 'origineel.png');
+        final deck = write('project/doc.md', '');
+        File(deck).writeAsBytesSync([
+          0xEF, 0xBB, 0xBF, // BOM
+          ...utf8.encode('# Één\r\n![](images/kopie.png)\r\n'),
+        ]);
+
+        final changed = await service.replaceReferences(deck, from, to);
+
+        expect(changed, isTrue);
+        expect(File(deck).readAsBytesSync(), [
+          0xEF,
+          0xBB,
+          0xBF,
+          ...utf8.encode('# Één\r\n![](images/origineel.png)\r\n'),
+        ]);
+      },
+    );
+
+    test('a file without a BOM does not gain one', () async {
+      final from = p.join(tmp.path, 'project', 'images', 'kopie.png');
+      final to = p.join(tmp.path, 'project', 'images', 'origineel.png');
+      final deck = write('project/doc.md', '![](images/kopie.png)\n');
+
+      await service.replaceReferences(deck, from, to);
+
+      expect(File(deck).readAsBytesSync().take(3), isNot([0xEF, 0xBB, 0xBF]));
+      expect(File(deck).readAsStringSync(), '![](images/origineel.png)\n');
     });
 
     test(
