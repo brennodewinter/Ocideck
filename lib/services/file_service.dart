@@ -24,6 +24,7 @@ import '../utils/archive_limits.dart';
 import '../utils/asset_destination.dart';
 import '../utils/atomic_file.dart';
 import '../utils/safe_filename.dart';
+import '../utils/utf8_bom.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/log.dart';
 import '../utils/markdown_files.dart';

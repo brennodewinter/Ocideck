@@ -1,5 +1,6 @@
 import '../models/deck.dart';
 import '../models/document_signature.dart';
+import '../models/markdown_document.dart';
 import '../models/redaction_manifest.dart';
 import '../models/seal_record.dart';
 import '../utils/content_hash.dart';
@@ -83,6 +84,14 @@ class DocumentIntegrity {
   /// enige bewerking. OciDeck schrijft elke `.md` met `utf8.encode` van precies
   /// deze tekst, dus dit is de hash van het bestand op schijf.
   static String hashMarkdown(String markdown) => sha512HexOfText(markdown);
+
+  /// De hash van het bestand dat [document] op schijf geeft — over
+  /// [MarkdownDocument.toBytes], dus mét een BOM wanneer het bestand er een had.
+  /// Het conflictpad van een document vergelijkt deze met de hash van de bytes op
+  /// schijf; over alleen de tekst (zoals [hashMarkdown]) gaf een BOM-bestand bij
+  /// de eerste opslag een vals "gewijzigd door een ander programma".
+  static String hashDocument(MarkdownDocument document) =>
+      hashBytes(document.toBytes());
 
   /// De hash zoals een deck van vóór 0.1.0 hem droeg: over de uitvoer van
   /// [MarkdownService.canonicalContentForSeal]. Alleen nog gebruikt om zo'n oud

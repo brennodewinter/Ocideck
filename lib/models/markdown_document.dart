@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import '../utils/document_front_matter.dart';
+import '../utils/utf8_bom.dart';
 import 'deck.dart';
 import 'markdown_kind.dart';
 import 'markdown_outline.dart';
@@ -15,18 +18,30 @@ import 'markdown_source_document.dart';
 /// structurele bereiken en een koppenoverzicht uit afleidt (voor navigatie en
 /// blok-bewerkingen) zonder ook maar één byte te wijzigen.
 class MarkdownDocument {
-  MarkdownDocument._(this._source, this._frontMatterMetadata);
+  MarkdownDocument._(this._source, this._frontMatterMetadata, this.hasUtf8Bom);
 
   final MarkdownSourceDocument _source;
   final DocumentFrontMatterMetadata _frontMatterMetadata;
 
+  /// Of het bestand met een UTF-8-BOM (`EF BB BF`) begon. De BOM zit bewust
+  /// **niet** in [source] — dan zag de front-matter-detectie geen `---` meer op
+  /// regel één en stond er een onzichtbaar teken in de editor — maar reist als
+  /// vlag mee en gaat in [toBytes] terug voor de eerste byte. Zonder die vlag
+  /// verloor open → opslaan de BOM stil (DOCUMENT_MODE.md §3.1).
+  final bool hasUtf8Bom;
+
   /// Leest een document uit de ruwe bytes van een `.md`. Normaliseert niets:
   /// regeleindes, onzichtbare tekens en een ontbrekende slot-newline blijven
   /// exact staan.
-  factory MarkdownDocument.parse(String source) => MarkdownDocument._(
-    MarkdownSourceDocument.parse(source),
-    documentFrontMatterMetadata(source),
-  );
+  ///
+  /// [hasUtf8Bom] is iets wat alleen de aanroeper weet die de *bytes* las: in de
+  /// string is de BOM al weggedecodeerd. Zie `decodeUtf8KeepingBomFlag`.
+  factory MarkdownDocument.parse(String source, {bool hasUtf8Bom = false}) =>
+      MarkdownDocument._(
+        MarkdownSourceDocument.parse(source),
+        documentFrontMatterMetadata(source),
+        hasUtf8Bom,
+      );
 
   /// De soort is per definitie [MarkdownKind.document]; een presentatie loopt
   /// via `Deck`. Bedoeld voor plekken die generiek over een geopend bestand
@@ -96,9 +111,16 @@ class MarkdownDocument {
   MarkdownDocument withFields(Map<String, String> fields) =>
       withSource(withDocumentFields(source, fields));
 
-  /// Wat naar schijf gaat: exact de bron. Nooit her-serialiseren — dat is de
-  /// rode lijn die een plat document plat en maximaal uitwisselbaar houdt.
+  /// De tekst die naar schijf gaat: exact de bron. Nooit her-serialiseren — dat
+  /// is de rode lijn die een plat document plat en maximaal uitwisselbaar houdt.
+  /// Let op: dit is de *tekst*; een eventuele BOM zit er niet in, zie [toBytes].
   String toMarkdown() => _source.source;
+
+  /// De bytes die naar schijf gaan: [toMarkdown] als UTF-8, met de BOM ervoor
+  /// wanneer het bestand er een had ([hasUtf8Bom]). Schrijven en hashen lopen
+  /// hierlangs, nooit langs `utf8.encode(toMarkdown())`, anders klopt de hash
+  /// niet met het bestand.
+  Uint8List toBytes() => encodeUtf8WithBom(source, hasBom: hasUtf8Bom);
 
   /// De koppenstructuur (voor de Overzicht-rail), afgeleid zonder te reparsen.
   List<MarkdownOutlineEntry> get outline => _source.outline;
@@ -121,6 +143,7 @@ class MarkdownDocument {
       keepsFrontMatter
           ? _frontMatterMetadata
           : documentFrontMatterMetadata(next),
+      hasUtf8Bom,
     );
   }
 }

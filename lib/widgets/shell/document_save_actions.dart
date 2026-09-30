@@ -50,7 +50,7 @@ Future<bool> saveDocumentWithDestination(
   // echte bewerkingen op de originele bron (savedSource) in plaats van de
   // hele genormaliseerde bron weg te schrijven (#1613).
   final documentToSave = state.visualEdited && state.savedSource != null
-      ? _patchVisualSave(state.savedSource!, document.source)
+      ? _patchVisualSave(document, state.savedSource!)
       : document;
 
   final path = state.filePath;
@@ -68,7 +68,7 @@ Future<bool> saveDocumentWithDestination(
       final choice = await _showConflictDialog(context);
       if (choice == _ConflictChoice.cancel) return false;
       if (choice == _ConflictChoice.reload) {
-        await _reloadFromDisk(notifier, path);
+        await _reloadFromDisk(ref, notifier, path);
         return false;
       }
       // overwrite: ga door met opslaan.
@@ -83,7 +83,7 @@ Future<bool> saveDocumentWithDestination(
       }
       notifier.markSaved(
         filePath: path,
-        savedFileHash: DocumentIntegrity.hashMarkdown(written.source),
+        savedFileHash: DocumentIntegrity.hashDocument(written),
       );
       // Werk de recente-bestanden-lijst bij, net als bij openen en
       // Opslaan-als — een in-place save liet de lijst ongemoeid (#1676).
@@ -107,7 +107,7 @@ Future<bool> saveDocumentWithDestination(
   }
   notifier.markSaved(
     filePath: saved.path,
-    savedFileHash: DocumentIntegrity.hashMarkdown(saved.document.source),
+    savedFileHash: DocumentIntegrity.hashDocument(saved.document),
   );
   await ref
       .read(settingsProvider.notifier)
@@ -117,14 +117,21 @@ Future<bool> saveDocumentWithDestination(
 
 /// Patcht de bewerkingen uit de visuele editor op de originele bron.
 ///
-/// [savedSource] is de bron zoals die op schijf stond. [currentSource] is de
-/// genormaliseerde round-trip mét gebruikersbewerkingen. We berekenen de
+/// [savedSource] is de bron zoals die op schijf stond. De bron van [document] is
+/// de genormaliseerde round-trip mét gebruikersbewerkingen. We berekenen de
 /// baseline (round-trip zónder bewerkingen) via dezelfde weg als de visuele
 /// editor — `normalizeRichTextMarkdown` → `documentFromMarkdown` →
-/// `markdownFromDocument` — en diff'en die tegen currentSource om de echte
+/// `markdownFromDocument` — en diff'en die tegen die bron om de echte
 /// bewerkingen te isoleren. Die diff toegepast op savedSource levert de
 /// byte-getrouwe versie op.
-MarkdownDocument _patchVisualSave(String savedSource, String currentSource) {
+///
+/// Het resultaat komt uit [document] en niet uit een verse parse, zodat wat het
+/// document naast zijn tekst meedraagt — de BOM-vlag — niet onderweg verdwijnt.
+MarkdownDocument _patchVisualSave(
+  MarkdownDocument document,
+  String savedSource,
+) {
+  final currentSource = document.source;
   // De codec kent geen YAML-frontmatter: `theme: rvs\n---` parseert als een
   // setext-kop en de baseline vermangelt het blok, waarna de regel-diff het
   // frontmatter-verschil als een gebruikersbewerking midden in de body plant
@@ -144,7 +151,7 @@ MarkdownDocument _patchVisualSave(String savedSource, String currentSource) {
   );
   // Neem het huidige blok terug, niet het opgeslagen: zo overleeft een
   // tussentijdse stijl-/TLP-wijziging de opslag.
-  return MarkdownDocument.parse(currSplit.block + patched);
+  return document.withSource(currSplit.block + patched);
 }
 
 /// De keuzes uit de conflict-dialoog (#1699).
@@ -193,13 +200,20 @@ Future<_ConflictChoice> _showConflictDialog(BuildContext context) async {
 }
 
 /// Herlaadt het document van schijf en laadt het in de notifier.
-Future<void> _reloadFromDisk(DocumentNotifier notifier, String path) async {
-  try {
-    final bytes = await File(path).readAsBytes();
-    final source = String.fromCharCodes(bytes);
-    final doc = MarkdownDocument.parse(source);
-    notifier.loadDocument(doc, filePath: path);
-  } on FileSystemException {
-    // Bestand verdween — laat de notifier ongemoeid.
-  }
+///
+/// Loopt door dezelfde poort als elk ander openen ([FileService.openDocumentDetailed]):
+/// grootte-cap, UTF-8-decodering, veiligheidsscan en BOM-vlag. Hier stond een
+/// eigen `String.fromCharCodes(bytes)`, dat elke UTF-8-byte als een los teken las
+/// (een `é` werd `Ã©`, een BOM werd `ï»¿`) en de scan oversloeg. Weigert de poort
+/// het bestand, dan blijft de notifier ongemoeid — net als wanneer het bestand
+/// verdwenen is; de reden is door de poort gelogd.
+Future<void> _reloadFromDisk(
+  WidgetRef ref,
+  DocumentNotifier notifier,
+  String path,
+) async {
+  final result = await ref.read(fileServiceProvider).openDocumentDetailed(path);
+  final doc = result.document;
+  if (doc == null) return;
+  notifier.loadDocument(doc, filePath: path);
 }

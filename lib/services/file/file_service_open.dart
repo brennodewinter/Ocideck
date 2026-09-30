@@ -86,7 +86,9 @@ extension FileServiceDocumentOpen on FileService {
     if (read.failure != null) {
       return DocumentOpenResult.failed(read.failure!);
     }
-    return DocumentOpenResult(document: MarkdownDocument.parse(read.raw!));
+    return DocumentOpenResult(
+      document: MarkdownDocument.parse(read.raw!, hasUtf8Bom: read.hasUtf8Bom),
+    );
   }
 
   /// Vraagt de gebruiker waar het document naartoe moet en schrijft het daar
@@ -128,8 +130,9 @@ Future<({String path, MarkdownDocument document})?> _writeDocumentToPicked(
 
 /// Schrijf een document naar [filePath]: de bron, geen deck-scaffold, geen
 /// `marp:`-kop, geen normalisatie (DOCUMENT_MODE.md §3). Atomair via
-/// [writeStringAtomic], zodat een onderbroken schrijfactie nooit een half
-/// bestand achterlaat.
+/// [writeBytesAtomic], zodat een onderbroken schrijfactie nooit een half
+/// bestand achterlaat. Een BOM waarmee het bestand geopend werd, gaat mee terug
+/// ([MarkdownDocument.toBytes]).
 ///
 /// Twee afwijkingen op "byte-getrouw", beide aan de afbeeldingskant (#2120):
 /// `mem:`-verwijzingen (uit een import of plak-actie) worden als echt
@@ -158,7 +161,7 @@ Future<MarkdownDocument?> saveDocument(
               p.dirname(filePath),
             ),
           );
-    await writeStringAtomic(File(filePath), written.toMarkdown());
+    await writeBytesAtomic(File(filePath), written.toBytes());
     return written;
   } catch (e) {
     logWarning('FileService.saveDocument: not writable', e);
@@ -215,23 +218,29 @@ bool _providedContentOverCap(String content) {
 /// (een bestand op schijf kan tussen twee lezingen verwisseld worden). Levert de
 /// bron óf de reden van een weigering; nooit allebei.
 ///
+/// `hasUtf8Bom` zegt of het bestand met een UTF-8-BOM begon. `raw` is er altijd
+/// zonder: `File.readAsString` gooit die BOM stilzwijgend weg, en wie hem niet
+/// onthoudt schrijft hem bij opslaan niet terug — dan is open → opslaan niet meer
+/// byte-identiek (DOCUMENT_MODE.md §3.1). Daarom leest dit bytes en decodeert het
+/// zelf. Alleen het documentpad bewaart de vlag; een deck wordt gedeconstrueerd
+/// en kent geen byte-identiteit.
+///
 /// Top-level en niet op [FileService]: hij raakt geen enkel veld van die klasse
 /// aan, en de klasse zit tegen haar plafond.
-Future<({String? raw, OpenFailure? failure})> _readAndScanMarkdown(
-  String filePath,
-  String? content,
-) async {
+Future<({String? raw, OpenFailure? failure, bool hasUtf8Bom})>
+_readAndScanMarkdown(String filePath, String? content) async {
   String raw;
+  var hasUtf8Bom = false;
   if (content != null) {
     // Provided content bypasses the on-disk stat, so apply an equivalent cap.
     if (_providedContentOverCap(content)) {
-      return (raw: null, failure: OpenFailure.tooLarge);
+      return (raw: null, failure: OpenFailure.tooLarge, hasUtf8Bom: false);
     }
     raw = content;
   } else {
     final file = File(filePath);
     if (!await file.exists()) {
-      return (raw: null, failure: OpenFailure.notFound);
+      return (raw: null, failure: OpenFailure.notFound, hasUtf8Bom: false);
     }
     // Plain text (images/media are sidecar files), so a huge .md is
     // pathological. Cap it to avoid loading/parsing an attacker-sized file.
@@ -241,18 +250,20 @@ Future<({String? raw, OpenFailure? failure})> _readAndScanMarkdown(
           'FileService.open: file exceeds '
           '${FileService.maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
         );
-        return (raw: null, failure: OpenFailure.tooLarge);
+        return (raw: null, failure: OpenFailure.tooLarge, hasUtf8Bom: false);
       }
     } catch (e) {
       logWarning('FileService.open: cannot stat file', e);
-      return (raw: null, failure: OpenFailure.unreadable);
+      return (raw: null, failure: OpenFailure.unreadable, hasUtf8Bom: false);
     }
     try {
-      raw = await file.readAsString();
+      final decoded = decodeUtf8KeepingBomFlag(await file.readAsBytes());
+      raw = decoded.text;
+      hasUtf8Bom = decoded.hasBom;
     } catch (e) {
       // Non-UTF8 / unreadable bytes must not crash the open flow.
       logWarning('FileService.open: file not readable as UTF-8', e);
-      return (raw: null, failure: OpenFailure.unreadable);
+      return (raw: null, failure: OpenFailure.unreadable, hasUtf8Bom: false);
     }
   }
   // Fail-closed: never open content that carries executable markup. Scanning
@@ -265,9 +276,9 @@ Future<({String? raw, OpenFailure? failure})> _readAndScanMarkdown(
       '(${findings.length} finding(s))',
       filePath,
     );
-    return (raw: null, failure: OpenFailure.unsafe);
+    return (raw: null, failure: OpenFailure.unsafe, hasUtf8Bom: false);
   }
-  return (raw: raw, failure: null);
+  return (raw: raw, failure: null, hasUtf8Bom: hasUtf8Bom);
 }
 
 extension _FileServiceOpen on FileService {

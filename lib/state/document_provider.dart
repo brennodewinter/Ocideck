@@ -184,7 +184,7 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       isDirty: false,
       savedSource: document.source,
       visualEdited: false,
-      savedFileHash: DocumentIntegrity.hashMarkdown(document.source),
+      savedFileHash: DocumentIntegrity.hashDocument(document),
       projectPath: projectPath,
     );
   }
@@ -288,7 +288,9 @@ class DocumentNotifier extends StateNotifier<DocumentState> {
       visualEdited: false,
       savedFileHash:
           savedFileHash ??
-          DocumentIntegrity.hashMarkdown(state.document?.source ?? ''),
+          (state.document == null
+              ? DocumentIntegrity.hashMarkdown('')
+              : DocumentIntegrity.hashDocument(state.document!)),
     );
   }
 
