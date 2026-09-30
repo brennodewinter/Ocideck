@@ -10,12 +10,16 @@ import '../../services/document_integrity.dart';
 import '../../services/file_service.dart';
 import '../../state/deck_provider.dart' show fileServiceProvider;
 import '../../state/document_provider.dart';
+import '../../state/tabs_provider.dart'
+    show ImportSecurityAlarm, importSecurityAlarmProvider;
 import '../../state/settings_provider.dart'
     show settingsProvider, SettingsTraces;
 import '../../utils/document_front_matter.dart';
+import '../../utils/error_snackbar.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/markdown_quill_codec.dart';
 import '../../utils/source_patcher.dart';
+import 'open_failure_message.dart';
 
 /// Saves the document held by [notifier], the single way every save route lands:
 /// the app-wide Ctrl/Cmd+S, the document editor's own shortcut, and save-on-quit.
@@ -68,7 +72,8 @@ Future<bool> saveDocumentWithDestination(
       final choice = await _showConflictDialog(context);
       if (choice == _ConflictChoice.cancel) return false;
       if (choice == _ConflictChoice.reload) {
-        await _reloadFromDisk(ref, notifier, path);
+        if (!context.mounted) return false;
+        await _reloadFromDisk(context, ref, notifier, path);
         return false;
       }
       // overwrite: ga door met opslaan.
@@ -204,16 +209,37 @@ Future<_ConflictChoice> _showConflictDialog(BuildContext context) async {
 /// Loopt door dezelfde poort als elk ander openen ([FileService.openDocumentDetailed]):
 /// grootte-cap, UTF-8-decodering, veiligheidsscan en BOM-vlag. Hier stond een
 /// eigen `String.fromCharCodes(bytes)`, dat elke UTF-8-byte als een los teken las
-/// (een `é` werd `Ã©`, een BOM werd `ï»¿`) en de scan oversloeg. Weigert de poort
-/// het bestand, dan blijft de notifier ongemoeid — net als wanneer het bestand
-/// verdwenen is; de reden is door de poort gelogd.
+/// (een `é` werd `Ã©`, een BOM werd `ï»¿`) en de scan oversloeg.
+///
+/// Weigert de poort het bestand, dan blijft de notifier ongemoeid — maar dat mag
+/// niet stil: wie op "Herladen" tikt en niets ziet gebeuren, zit vast. Een
+/// onveilig bestand zet het veiligheidsalarm, net als bij het openen van een
+/// tabblad; elke andere weigering krijgt dezelfde woorden als een gewone open.
 Future<void> _reloadFromDisk(
+  BuildContext context,
   WidgetRef ref,
   DocumentNotifier notifier,
   String path,
 ) async {
-  final result = await ref.read(fileServiceProvider).openDocumentDetailed(path);
+  final files = ref.read(fileServiceProvider);
+  final result = await files.openDocumentDetailed(path);
   final doc = result.document;
-  if (doc == null) return;
-  notifier.loadDocument(doc, filePath: path);
+  if (doc != null) {
+    notifier.loadDocument(doc, filePath: path);
+    return;
+  }
+  if (result.failure == OpenFailure.unsafe) {
+    final findings = await files.scanForUnsafeMarkdown(path);
+    ref.read(importSecurityAlarmProvider.notifier).state = ImportSecurityAlarm(
+      path: path,
+      findings: findings,
+    );
+    return;
+  }
+  if (!context.mounted) return;
+  showErrorSnackBar(
+    ScaffoldMessenger.of(context),
+    context.l10n,
+    openFailureMessage(context.l10n, result.failure),
+  );
 }

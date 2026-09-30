@@ -15,6 +15,8 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/state/deck_provider.dart' show fileServiceProvider;
 import 'package:ocideck/state/document_provider.dart';
+import 'package:ocideck/state/tabs_provider.dart'
+    show importSecurityAlarmProvider;
 import 'package:ocideck/utils/markdown_paste_cleanup.dart';
 import 'package:ocideck/utils/markdown_quill_codec.dart';
 import 'package:ocideck/utils/utf8_bom.dart';
@@ -34,6 +36,8 @@ import 'support/pump_until.dart';
 /// verlies zit in de byte↔string-grens, en die bestaat alleen met een bestand.
 FileService _service() =>
     FileService(MarkdownService(), ImageService(), () => ThemeProfile());
+
+const _host = Key('host');
 
 const _bom = [0xEF, 0xBB, 0xBF];
 
@@ -147,11 +151,14 @@ void main() {
               FlutterQuillLocalizations.delegate,
             ],
             supportedLocales: AppLocalizations.supportedLocales,
-            home: Consumer(
-              builder: (context, r, _) {
-                ref = r;
-                return const SizedBox.shrink();
-              },
+            // Een Scaffold, anders toont de ScaffoldMessenger zijn snackbar niet.
+            home: Scaffold(
+              body: Consumer(
+                builder: (context, r, _) {
+                  ref = r;
+                  return const SizedBox.shrink(key: _host);
+                },
+              ),
             ),
           ),
         ),
@@ -169,7 +176,7 @@ void main() {
       bool? result;
       unawaited(
         saveDocumentWithDestination(
-          tester.element(find.byType(SizedBox)),
+          tester.element(find.byKey(_host)),
           ref,
           notifier,
         ).then((v) => result = v),
@@ -261,7 +268,7 @@ void main() {
       bool? result;
       unawaited(
         saveDocumentWithDestination(
-          tester.element(find.byType(SizedBox)),
+          tester.element(find.byKey(_host)),
           ref,
           notifier,
         ).then((v) => result = v),
@@ -289,6 +296,78 @@ void main() {
         DocumentIntegrity.hashBytes(File(path).readAsBytesSync()),
       );
     });
+
+    /// Laat "Herladen" lopen na een extern conflict waarbij het bestand door een
+    /// ander programma is overschreven met [external].
+    Future<DocumentNotifier> reloadAfterConflict(
+      WidgetTester tester,
+      List<int> external,
+    ) async {
+      final path = p.join(temp.path, 'geweigerd.md');
+      File(path).writeAsBytesSync(utf8.encode('# Mijn werk\n'));
+      final doc = (await tester.runAsync(() => open(path)))!;
+      final notifier = DocumentNotifier()..loadDocument(doc, filePath: path);
+      notifier.edit('# Mijn werk, bewerkt\n');
+      File(path).writeAsBytesSync(external);
+
+      final ref = await pump(tester, notifier);
+      unawaited(
+        saveDocumentWithDestination(
+          tester.element(find.byKey(_host)),
+          ref,
+          notifier,
+        ),
+      );
+      await pumpUntil(
+        tester,
+        () => find.text('Herladen').evaluate().isNotEmpty,
+        reason: 'de conflictdialoog verscheen niet',
+      );
+      await tester.tap(find.text('Herladen'));
+      return notifier;
+    }
+
+    testWidgets('een geweigerde herlaad meldt dat, en laat het werk staan', (
+      tester,
+    ) async {
+      // Een ander programma slaat het bestand als UTF-16 op: geen geldige UTF-8.
+      final notifier = await reloadAfterConflict(tester, [
+        0xFF,
+        0xFE,
+        0x23,
+        0x00,
+      ]);
+      await pumpUntil(
+        tester,
+        () => find
+            .text('Dit bestand is geen leesbare tekst. OciDeck opent Markdown.')
+            .evaluate()
+            .isNotEmpty,
+        reason: 'de melding verscheen niet: Herladen deed stil niets',
+      );
+      // Het werk van de gebruiker is niet overschreven.
+      expect(notifier.currentState.document!.source, '# Mijn werk, bewerkt\n');
+      expect(notifier.currentState.isDirty, isTrue);
+    });
+
+    testWidgets('een onveilig bestand bij Herladen zet het veiligheidsalarm', (
+      tester,
+    ) async {
+      final notifier = await reloadAfterConflict(
+        tester,
+        utf8.encode('# Titel\n\n<script>alert(1)</script>\n'),
+      );
+      final container = ProviderScope.containerOf(
+        tester.element(find.byKey(_host)),
+      );
+      await pumpUntil(
+        tester,
+        () => container.read(importSecurityAlarmProvider) != null,
+        reason: 'het alarm werd niet gezet: onveilige inhoud kwam stil binnen',
+      );
+      expect(container.read(importSecurityAlarmProvider)!.findings, isNotEmpty);
+      expect(notifier.currentState.document!.source, '# Mijn werk, bewerkt\n');
+    });
   });
 
   group('het deckpad (gedeconstrueerd: geen byte-identiteitsbelofte)', () {
@@ -306,7 +385,7 @@ void main() {
       'opslaan schrijft het deck zonder BOM, zoals een deck zonder BOM',
       () async {
         // Een deck wordt bij het openen tot slides gedeconstrueerd en bij het
-        // opslaan opnieuw gegenereerd; BOM-loos is daar de canonieke vorm. Dit
+        // opslaan opnieuw gegenereerd; zonder BOM is daar de gekozen vorm. Dit
         // pint het gemeten gedrag vast (2026-09-30) — het is bewust *anders* dan
         // het documentpad, dat de BOM wél teruggeeft.
         final withBom = p.join(temp.path, 'met.md');

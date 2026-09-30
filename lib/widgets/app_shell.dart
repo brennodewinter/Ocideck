@@ -166,6 +166,7 @@ import 'dialogs/s3_browser_dialog.dart';
 import 'dialogs/webdav_browser_dialog.dart';
 import '../services/trash_service.dart';
 import 'shell/document_save_actions.dart';
+import 'shell/open_failure_message.dart';
 import 'shell/document_import_action.dart';
 import 'shell/new_document_action.dart';
 import 'shell/openkat_import_action.dart';
