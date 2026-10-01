@@ -2671,7 +2671,10 @@ $ sha512sum rapport.md
 ```
 
 Compare that to `hash` in `rapport.seal.json`. Equal means the report is
-byte-for-byte what was sealed; different means it changed. `shasum -a 512`,
+byte-for-byte what was sealed; different means it changed. That includes a
+leading UTF-8 byte-order mark (`EF BB BF`): invisible in an editor, but
+`sha512sum` counts it, so a sealed deck that another program re-saved with a BOM
+reads as changed — in OciDeck as much as on the command line. `shasum -a 512`,
 `openssl dgst -sha512`, `certutil -hashfile … SHA512` and any other SHA-512
 implementation give the same answer, because there is nothing to reproduce
 beyond the hash function itself.

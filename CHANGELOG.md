@@ -176,6 +176,19 @@ All notable changes to OciDeck are documented in this file.
   opslaan weggelaten; dat is de vorm die OciDeck voor een deck kiest, geen eis van
   Marp (Marp CLI en Pandoc lezen beide vormen gelijk).
 
+- **Een verzegeld deck waar een UTF-8-BOM voor is gezet, leest niet langer als
+  intact.** Het zegel belooft dat `sha512sum` over de `.md` de vastgelegde hash
+  geeft, en dat élke wijziging aan het bestand het breekt. Bij het openen werd de
+  hash echter berekend over de gedecodeerde tekst, en de decoder haalt een
+  leidende BOM (`EF BB BF`) eraf — dus een deck dat een ander programma met een
+  BOM had opgeslagen meldde zich als `intact` terwijl `sha512sum` een andere hash
+  gaf. De hash (`Deck.fileHash`) gaat nu over de bytes zoals ze binnenkwamen, BOM
+  inbegrepen, op elk openpad: van schijf, uit bytes (web-picker, slepen, URL),
+  uit een pakket en uit git. Zo'n deck opent nog steeds, maar meldt zich als
+  gewijzigd; dat is volgens het zegelcontract juist, ook al ziet de lezer niets
+  aan de tekst veranderen. Een deck dat OciDeck zelf opslaat heeft nooit een BOM
+  en blijft intact.
+
 - De eLearning-onderdelen hingen aan de verkeerde schakelaar. "eLearning
   volgen" (de OciServe-koppeling) is de dienst van de cursist, maar het
   statuslampje, de "Mijn cursussen"-knop en de sessie-restore keken naar

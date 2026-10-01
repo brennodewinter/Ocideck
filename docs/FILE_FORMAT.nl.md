@@ -2635,7 +2635,11 @@ $ sha512sum rapport.md
 ```
 
 Vergelijk dat met `hash` in `rapport.seal.json`. Gelijk betekent dat het rapport
-byte-voor-byte is wat verzegeld werd; verschillend betekent dat het veranderd is. `shasum -a 512`,
+byte-voor-byte is wat verzegeld werd; verschillend betekent dat het veranderd is. Dat
+geldt ook voor een leidende UTF-8-byte-order-mark (`EF BB BF`): onzichtbaar in een
+editor, maar `sha512sum` telt hem mee, dus een verzegeld deck dat een ander programma
+met een BOM opnieuw opsloeg leest als gewijzigd — in OciDeck net zo goed als op de
+opdrachtregel. `shasum -a 512`,
 `openssl dgst -sha512`, `certutil -hashfile … SHA512` en elke andere SHA-512-
 implementatie geven hetzelfde antwoord, omdat er niets te reproduceren is
 buiten de hashfunctie zelf.

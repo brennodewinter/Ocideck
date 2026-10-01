@@ -4401,7 +4401,9 @@ another route — the audit dossier, an email, a timestamp token.
 
 **What the seal covers, precisely** *(stated 2026-07-22)*: the bytes of the
 stored `.md`. A recipient can re-check it with `sha512sum` and needs nothing from
-us to do so. It does **not** cover the files beside it — the drawings
+us to do so. That is strict on purpose: even an invisible byte-order mark that
+another program added in front of the file makes the seal read as *changed*. It
+does **not** cover the files beside it — the drawings
 (`.ink.json`), the speaker notes, chart data under `data/`, the evidence images,
 or the seal sidecar itself. Replace a chart's CSV or an evidence screenshot and
 the seal stays green.
