@@ -38,8 +38,11 @@
 > [`../CHECKS.md`](../CHECKS.md#make-check-packages)); it so far holds only the
 > rule-semantics version of §4.7/§4.8 and, since the parser step, **`parseForm`**
 > (§4.3, §4.4): the marker grammar, the ten field types with their rules, and the
-> three-state result. Answers, validation, the package, sealing and the app surfaces
-> are still design.
+> three-state result — and, since the answers step, **answers and validation**: the
+> word and character counters with their shared vector file, the named patterns, the
+> safety rules for answers (§4.6), `parseAnswer`/`extractAnswers`,
+> `validateAnswer`/`validateForm` and the comparison of template-owned text. The
+> package, sealing and the app surfaces are still design.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
@@ -507,6 +510,42 @@ not borrowed from another function.
   OciDeck" (§4.8). The manifest records the version the respondent's client used
   (§5.3) and it is not removable by a build flag.
 
+**How the rules are applied** (pinned by tests; the vector file holds the counters and
+the patterns):
+
+- **Empty means unanswered**: blank text, no checked option, no item, no data row, no
+  image. A field that is not `required` and is empty has **no rule applied** (so
+  `words=150..300` on an optional field is not violated by silence); a `required` empty
+  field is `required-empty` and nothing else. A consent box is never "empty".
+- **Per field, the order is fixed**: problems with the answer's *shape*
+  (`answer-malformed`), then the safety rules of §4.6, then the field's rules. A
+  malformed answer gets no rule issues, because its value cannot be read.
+- **Shape reasons** (`answer-malformed`, with the offending line): `one-line` (text,
+  number, date, choice), `not-a-task-list` (multichoice), `not-a-list`,
+  `ordered-item` / `unordered-item` (list), `not-a-table`, `header-mismatch` (the header
+  must be exactly the declared `columns`), `rule-row`, `row-shape` (table),
+  `not-an-image`, `duplicate-image`, `consent-box`, `consent-box-missing`.
+- **Dates** outside `min`/`max` are `bad-date` with a `reason` (`before-min`,
+  `after-max`); there is no separate code. A **`step`** is counted from `min` (or from
+  zero) in exact decimal arithmetic, and a value off the step is `number-out-of-range`
+  with reason `step`.
+- **Named patterns**: `email` (one `@`, a dotted domain, no blanks or `,;<>`), `url`
+  (`http(s)://`, a dotted host, optional port and path), `phone` (digits, blanks,
+  `()-.` and an optional leading `+`; 7–15 digits; no blank at either end),
+  `postcode-nl` (`1234 AB`, not starting with 0, not `SA`, `SD`, `SS`). They are
+  pragmatic rather than RFC-perfect, linear in the input, and an unknown name matches
+  nothing.
+- **`list`**: `items=` counts the non-empty items and `item-words=` judges each item
+  (`too-few-words`/`too-many-words` with the item number). **`table`**: `rows=` counts
+  the data rows that are not entirely empty.
+- **`image`**: the rules `alt` and `credit` mean that every image must have alt text /
+  a credit (the title). `formats=` is judged by extension *and* by content: a file whose
+  magic bytes disagree with its name is `image-format` (reason `mismatch`). Everything
+  that needs the file — existence, width, size, format, faces — arrives as **input**
+  (`FormImageFact`, §4.10); without a fact an image is `image-unchecked`. A HEIC marked
+  `unverified` (kept as-is, §5.5) is the warning `image-heic-unverified` and is not
+  measured. `min-width` is `image-too-small`, a warning unless the field says `strict`.
+  `faces` compares only when a face count is known, and only as information.
 ### 4.8 Versioning and forward compatibility
 
 The hard rule for any format change: **an older file is always readable and can be
@@ -572,11 +611,16 @@ same code. (Revision 1 put it under `lib/` and claimed "same code on both sides"
 that is impossible, because the app package depends on the Flutter SDK.)
 
 ```dart
-FormParseResult parseForm(String markdown);                      // §4.4
-FormAnswers extractAnswers(FormSpec spec, String markdown);
-Future<FormImageFacts> probeFormImages(...);                     // I/O, off the UI isolate
-List<FormIssue> validateForm(FormSpec spec, FormAnswers a, FormImageFacts f); // pure, sync
+FormParseResult parseForm(String markdown);                                  // §4.4
+FormAnswer parseAnswer(FormFieldSpec field, String zone, {int firstLine});    // one field, shape only
+FormAnswers extractAnswers(FormSpec published, String markdown);              // §4.11 step 3
+List<FormProblem> validateAnswer(FormFieldSpec, FormAnswer, {Map<String, FormImageFact>? imageFacts});
+List<FormProblem> validateForm(FormSpec, FormAnswers, {Map<String, FormImageFact>? imageFacts});
+List<FormProblem> templateTextIssues(String published, String submission);   // §4.6
+Future<Map<String, FormImageFact>> probeFormImages(...);   // I/O, off the UI isolate — to build (app side)
 ```
+
+(`FormProblem` is the type the document calls an *issue* when it comes from an answer.)
 
 - **`FormFieldSpec`**, not `FormField` (that name collides with Flutter's
   `FormField<T>`).
@@ -608,9 +652,9 @@ List<FormIssue> validateForm(FormSpec spec, FormAnswers a, FormImageFacts f); //
 `too-few-words`, `too-many-words`, `too-short`, `too-long`, `not-an-option`,
 `count-out-of-range`, `bad-number`, `number-out-of-range`, `bad-date`, `bad-pattern`,
 `image-too-small` (warning), `image-too-large`, `image-format`, `image-missing-file`,
-`image-missing-alt`, `image-unchecked`, `image-heic-unverified` (warning),
+`image-missing-alt`, `image-missing-credit`, `image-unchecked`, `image-heic-unverified` (warning),
 `image-unexpected-faces` (advisory),
-`consent-not-given`, `structure-damaged`, `answer-contains-marker`,
+`consent-not-given`, `structure-damaged`, `answer-malformed`, `answer-contains-marker`,
 `answer-contains-html`, `answer-unclosed-fence`, `answer-bad-image`, `answer-bad-link`,
 `template-text-altered`, `template-unknown` (hash matches no published version),
 `field-not-in-form`, `field-missing`, `form-version-mismatch` (warning),
@@ -1658,15 +1702,20 @@ The review asked that the cost be written down, not discovered.
 ## 16. File map (new + changed) — pick-up-cold
 
 *New package (`packages/ocideck_form_core`, pure Dart, no Flutter).* **Built** (the reading
-side, §4.3–§4.5, §4.7): `form_blocks.dart` (the marker grammar — sole owner),
+side and the answers, §4.3–§4.7): `form_blocks.dart` (the marker grammar — sole owner),
 `form_source.dart` (lines with offsets, front matter, fenced code), `form_issue.dart`
 (`FormIssueCode`, `FormProblem`), `form_rule_values.dart` (ranges, numbers, dates, lists),
 `form_field_types.dart` (one descriptor per type, in one file for now), `form_spec.dart`
 (`FormSpec`, `FormFieldSpec`, `FormParseResult`), `form_parser.dart` (`parseForm`),
-`rules_version.dart`. **Still to build:** `form_answers.dart`, `form_validator.dart`
-(`FormIssue` for answers), `form_words.dart` (`countFormWords`), `form_package.dart` (zip +
-manifest + name grammars), `form_seal.dart` (age; the only file touching the primitives),
-`form_bundle.dart` (bundle, JCS, signing), `test/fixtures/form_vectors.json`.
+`form_words.dart` (`countFormWords`, `countFormChars`), `form_patterns.dart` (the named
+patterns), `form_answer_safety.dart` (§4.6 rules 1–5), `form_answers.dart`
+(`parseAnswer`, `extractAnswers`), `form_validator.dart` (`validateAnswer`,
+`validateForm`, `FormImageFact`), `form_template_text.dart` (`templateTextIssues`),
+`rules_version.dart`, and `test/fixtures/form_vectors.json` (words, characters and
+patterns; the range, number and date vectors still live in the engine's own tests).
+**Still to build:** `probeFormImages` (app side), `form_package.dart` (zip + manifest + name
+grammars), `form_seal.dart` (age; the only file touching the primitives), `form_bundle.dart`
+(bundle, JCS, signing).
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
