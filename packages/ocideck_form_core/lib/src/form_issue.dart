@@ -32,6 +32,7 @@ enum FormIssueCode {
   imageUnexpectedFaces('image-unexpected-faces', FormSeverity.info),
   consentNotGiven('consent-not-given', FormSeverity.error),
   structureDamaged('structure-damaged', FormSeverity.error),
+  answerMalformed('answer-malformed', FormSeverity.error),
   answerContainsMarker('answer-contains-marker', FormSeverity.error),
   answerContainsHtml('answer-contains-html', FormSeverity.error),
   answerUnclosedFence('answer-unclosed-fence', FormSeverity.error),
