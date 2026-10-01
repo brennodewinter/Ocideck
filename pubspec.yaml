@@ -73,6 +73,12 @@ dependencies:
   # third_party/markdown_quill/MODIFICATIONS.md en issue #1743.
   markdown_quill:
     path: third_party/markdown_quill
+  # First-party, Flutter-free core of form documents: marker grammar, rule engine
+  # and submission package (docs/design/FORM_INTAKE.md). A package of its own so
+  # that a standalone Dart server can depend on the same code without the Flutter
+  # SDK; the app consumes it like any other path dependency.
+  ocideck_form_core:
+    path: packages/ocideck_form_core
   markdown: ^7.3.1
   xml: ^7.0.1
   # Wachtwoord voor de WebDAV/Nextcloud-bron versleuteld in de OS-keychain

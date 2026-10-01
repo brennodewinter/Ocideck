@@ -199,6 +199,7 @@ make test-presenter    # Presenter functionality tests
 # Run quality gate checks
 make check             # format-check + analyze + conventions + method-length + dead-code + coverage
 make check-full        # Plus license, SBOM freshness, bundled-JS CVEs, web hardening, deps report
+make test-packages      # tests + coverage floor of the first-party packages under packages/ (also part of `make check`)
 ```
 
 ### Test Environment Requirements

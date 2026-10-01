@@ -44,6 +44,20 @@ branches enriched the same line and the merge kept both copies.
 - `app.dart` — `OciDeckApp` root `MaterialApp` (theme, localization delegates) and
   the `_ConsentGate` that blocks the UI until consent is given.
 
+## `packages/` — first-party packages
+
+Flutter-free code that the app *and* something else (a standalone Dart server, a
+command-line tool) must be able to share; consumed as path dependencies. Entries
+are written with their full path and in bold, because the line-by-line check of
+this file (`test/source_map_coverage_test.dart`) reads every ``- `x.dart` `` line as
+a file under the app's `lib/`. Rules in
+[`CHECKS.md`](CHECKS.md#make-check-packages), rationale in
+[`ARCHITECTURE.md`](ARCHITECTURE.md#first-party-packages-packages).
+
+### `packages/ocideck_form_core/` — core of form documents (design: `docs/design/FORM_INTAKE.md` §4.10)
+- **`packages/ocideck_form_core/lib/ocideck_form_core.dart`** — the package's public library (barrel): re-exports `src/`.
+- **`packages/ocideck_form_core/lib/src/rules_version.dart`** — `kFormRulesVersion` and `supportsFormRules`: the newest rule-semantics version this engine implements (`rules=` on the `form` marker, FORM_INTAKE.md §4.7) and whether it can judge a form that declares a given one. A form needing a newer client is refused instead of silently judged by older rules (§4.8).
+
 ## `lib/models/` — data model
 
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.

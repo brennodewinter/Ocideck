@@ -37,8 +37,17 @@ void main() {
 
   group('completeness', () {
     test('every direct dependency appears in the notices', () {
-      final deps = (pubspec['dependencies'] as YamlMap).keys
-          .map((k) => k.toString())
+      // Our own packages under packages/ are part of OciDeck (EUPL-1.2), not a
+      // third party; the SBOM lists them in their own `first-party` group. A
+      // vendored fork under third_party/ is someone else's code and stays in.
+      final dependencies = pubspec['dependencies'] as YamlMap;
+      final deps = dependencies.entries
+          .where((e) {
+            final spec = e.value;
+            final path = spec is YamlMap ? spec['path']?.toString() : null;
+            return path == null || !path.startsWith('packages/');
+          })
+          .map((e) => e.key.toString())
           .toList();
       final missing = deps.where((d) => !mentions(d)).toList()..sort();
       expect(
