@@ -27,6 +27,7 @@ enum FormIssueCode {
   imageFormat('image-format', FormSeverity.error),
   imageMissingFile('image-missing-file', FormSeverity.error),
   imageMissingAlt('image-missing-alt', FormSeverity.error),
+  imageMissingCredit('image-missing-credit', FormSeverity.error),
   imageUnchecked('image-unchecked', FormSeverity.error),
   imageHeicUnverified('image-heic-unverified', FormSeverity.warning),
   imageUnexpectedFaces('image-unexpected-faces', FormSeverity.info),

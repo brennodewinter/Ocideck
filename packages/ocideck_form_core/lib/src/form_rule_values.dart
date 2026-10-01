@@ -94,6 +94,19 @@ int compareNumberText(String a, String b) {
   return left.compareTo(right);
 }
 
+/// Whether `value - base` is a whole multiple of [step], in exact decimal
+/// arithmetic: `0,3` is a multiple of `0,1` here, although it is not in doubles.
+/// All three must be valid number text and [step] must be positive.
+bool isMultipleOfStep(String value, String base, String step) {
+  final v = _scaled(value);
+  final b = _scaled(base);
+  final s = _scaled(step);
+  final scale = [v.$2, b.$2, s.$2].reduce((a, c) => a > c ? a : c);
+  BigInt up(BigInt n, int from) => n * BigInt.from(10).pow(scale - from);
+  final diff = up(v.$1, v.$2) - up(b.$1, b.$2);
+  return diff % up(s.$1, s.$2) == BigInt.zero;
+}
+
 (BigInt, int) _scaled(String s) {
   final m = _numberText.firstMatch(s)!;
   final negative = s.startsWith('-');
