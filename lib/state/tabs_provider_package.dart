@@ -266,8 +266,11 @@ Future<OpenResult> _openPackageFromBytes(
   final mdEntry = FileService.mainMarkdownEntry(entries);
   if (mdEntry == null) return OpenResult.notAPresentation;
   final String raw;
+  final bool hasBom;
   try {
-    raw = utf8.decode(mdEntry.bytes);
+    final decoded = decodeUtf8KeepingBomFlag(mdEntry.bytes);
+    raw = decoded.text;
+    hasBom = decoded.hasBom;
   } on FormatException catch (e) {
     logWarning('TabsNotifier._openPackageFromBytes: md not UTF-8', e);
     return OpenResult.unreadable;
@@ -275,6 +278,7 @@ Future<OpenResult> _openPackageFromBytes(
   final gated = notifier._gateAndParseContent(
     raw,
     sourceName: '$name → ${mdEntry.name}',
+    hasUtf8Bom: hasBom,
   );
   var deck = gated.deck;
   if (deck == null) return gated.failure;

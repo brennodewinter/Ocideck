@@ -13,6 +13,7 @@ import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/seal_codec.dart';
 import 'package:ocideck/services/trash_service.dart';
+import 'package:ocideck/utils/utf8_bom.dart';
 import 'package:path/path.dart' as p;
 
 /// Het zegel en de handtekening gaan over het document in plaats van erin, en
@@ -199,6 +200,72 @@ void main() {
       );
       final terug = (await dienst.openDeck(pad))!;
       expect(deckIntegrityStatus(terug), IntegrityStatus.changed);
+    });
+
+    group('een BOM voor het bestand', () {
+      // Het zegel is een belofte over de bytes: `sha512sum deck.md` moet de
+      // vastgelegde hash geven. Een leidende UTF-8-BOM (`EF BB BF`) — door een
+      // editor of een export van een ander programma erbij gezet — verandert die
+      // bytes, ook al ziet de lezer er niets van.
+      Future<String> verzegeldMetBom(FileService dienst, Directory map) async {
+        final pad = p.join(map.path, 'deck.md');
+        await dienst.saveDeck(
+          DocumentIntegrity(MarkdownService()).seal(_deck()),
+          pad,
+        );
+        final bestand = File(pad);
+        await bestand.writeAsBytes([
+          ...utf8Bom,
+          ...await bestand.readAsBytes(),
+        ]);
+        return pad;
+      }
+
+      test('maakt het zegel gewijzigd, ook al is de tekst gelijk', () async {
+        final map = await _tijdelijkeMap();
+        final dienst = _dienst();
+        final pad = await verzegeldMetBom(dienst, map);
+
+        final terug = (await dienst.openDeck(pad))!;
+        expect(deckIntegrityStatus(terug), IntegrityStatus.changed);
+      });
+
+      test(
+        'de hash op het deck is die van sha512sum over het bestand',
+        () async {
+          final map = await _tijdelijkeMap();
+          final dienst = _dienst();
+          final pad = await verzegeldMetBom(dienst, map);
+
+          final terug = (await dienst.openDeck(pad))!;
+          expect(
+            terug.fileHash,
+            DocumentIntegrity.hashBytes(await File(pad).readAsBytes()),
+          );
+          expect(terug.fileHash, isNot(terug.sealHash));
+        },
+      );
+
+      test('meldt het ook via openDeckDetailed.integrity', () async {
+        final map = await _tijdelijkeMap();
+        final dienst = _dienst();
+        final pad = await verzegeldMetBom(dienst, map);
+
+        final uitkomst = await dienst.openDeckDetailed(pad);
+        expect(uitkomst.integrity, IntegrityStatus.changed);
+      });
+
+      test('zonder BOM blijft het zegel intact (tegenproef)', () async {
+        final map = await _tijdelijkeMap();
+        final dienst = _dienst();
+        final pad = p.join(map.path, 'deck.md');
+        await dienst.saveDeck(
+          DocumentIntegrity(MarkdownService()).seal(_deck()),
+          pad,
+        );
+        final terug = (await dienst.openDeck(pad))!;
+        expect(deckIntegrityStatus(terug), IntegrityStatus.intact);
+      });
     });
 
     test('een onverzegeld deck laat geen zegelbestand achter', () async {

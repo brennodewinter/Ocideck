@@ -222,8 +222,9 @@ bool _providedContentOverCap(String content) {
 /// zonder: `File.readAsString` gooit die BOM stilzwijgend weg, en wie hem niet
 /// onthoudt schrijft hem bij opslaan niet terug — dan is open → opslaan niet meer
 /// byte-identiek (DOCUMENT_MODE.md §3.1). Daarom leest dit bytes en decodeert het
-/// zelf. Alleen het documentpad bewaart de vlag; een deck wordt gedeconstrueerd
-/// en kent geen byte-identiteit.
+/// zelf. Het documentpad bewaart de vlag om hem terug te schrijven; het deckpad
+/// wordt gedeconstrueerd en kent geen byte-identiteit, maar gebruikt hem voor de
+/// zegelhash: die gaat over de bytes van het bestand, en een BOM hoort daarbij.
 ///
 /// Top-level en niet op [FileService]: hij raakt geen enkel veld van die klasse
 /// aan, en de klasse zit tegen haar plafond.

@@ -716,7 +716,13 @@ class FileService {
       );
       return const DeckOpenResult.failed(OpenFailure.notPresentation);
     }
-    final parsed = _md.parseDeck(raw, filePath: filePath);
+    // [hasUtf8Bom] gaat mee omdat de `fileHash` die [parseDeck] zet over de
+    // bytes van het bestand moet gaan, en de BOM zit niet in `raw`.
+    final parsed = _md.parseDeck(
+      raw,
+      filePath: filePath,
+      hasUtf8Bom: read.hasUtf8Bom,
+    );
     if (parsed == null) {
       return const DeckOpenResult.failed(OpenFailure.corrupt);
     }
@@ -755,16 +761,14 @@ class FileService {
       hydrated = await _attachSidecars(hydrated, filePath, skipped);
     }
     // Automatische zegelverificatie bij het openen: na hydratatie van de
-    // seal-sidecar (die sealHash zet) de fileHash berekenen uit de gedecodeerde
-    // tekst (`raw`: zonder een eventuele BOM, dus een BOM voor het bestand valt
-    // hier buiten de hash) en verifiëren. Read-only — een veranderd deck mag nog steeds openen,
-    // maar de gebruiker moet weten dat het zegel niet meer klopt.
+    // seal-sidecar (die sealHash zet) verifiëren tegen de `fileHash` die
+    // [parseDeck] over de bytes van het bestand zette — mét een eventuele BOM,
+    // want die staat wel in het bestand en `sha512sum` rekent hem mee.
+    // Read-only — een veranderd deck mag nog steeds openen, maar de gebruiker
+    // moet weten dat het zegel niet meer klopt.
     IntegrityStatus? integrity;
     if (content == null) {
-      final fileHash = DocumentIntegrity.hashMarkdown(raw);
-      integrity = DocumentIntegrity(
-        _md,
-      ).verify(hydrated.copyWith(fileHash: fileHash));
+      integrity = DocumentIntegrity(_md).verify(hydrated);
       if (integrity == IntegrityStatus.notSealed ||
           integrity == IntegrityStatus.notVerifiable) {
         integrity = null;
@@ -919,9 +923,15 @@ class FileService {
   /// web-URL-import: achter een URL zitten geen sidecars, projectmap of
   /// chart-databestanden, dus die hydratatie wordt bewust overgeslagen. [sourceName]
   /// labelt alleen de logregels.
+  ///
+  /// [hasUtf8Bom]: de bytes waaruit [raw] gedecodeerd is begonnen met een
+  /// UTF-8-BOM. Zonder die vlag hasht [Deck.fileHash] het bestand zonder BOM en
+  /// meldt een verzegeld deck waar een ander programma een BOM voor zette zich
+  /// ten onrechte als intact.
   ({Deck? deck, OpenFailure? failure}) openDeckFromContent(
     String raw, {
     String? sourceName,
+    bool hasUtf8Bom = false,
   }) {
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
@@ -940,7 +950,7 @@ class FileService {
       );
       return (deck: null, failure: OpenFailure.notPresentation);
     }
-    final parsed = _md.parseDeck(raw);
+    final parsed = _md.parseDeck(raw, hasUtf8Bom: hasUtf8Bom);
     if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
     // Geen truncatie-check meer, om dezelfde reden als op het schijf-pad: een
     // lege body is een lege presentatie (#1909). Dit pad opende ook decks die
