@@ -32,6 +32,13 @@
 > (phase 3)**, and a default of *no identity kept* after deletion. Their consequences are
 > threaded through §4.3, §4.5, §5.4, §5.5, §7.2, §7.3, §8, §9, §12 and §14.
 >
+> **Phase 1 has started (2026-10-01):** the standalone package
+> `packages/ocideck_form_core` exists with its gates (`make check-packages`,
+> `make test-packages`, a first-party SBOM group — see
+> [`../CHECKS.md`](../CHECKS.md#make-check-packages)); it so far holds only the
+> rule-semantics version of §4.7/§4.8. Everything else in this document is still
+> design.
+>
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
 > Reference code by **file + symbol name**, never a line number.

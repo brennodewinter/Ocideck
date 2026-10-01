@@ -391,6 +391,8 @@ now the only passing state.
 | [`make check-linux-deps`](#make-check-linux-deps) | Every pkg-config module a plugin requires on Linux has a package that every build environment installs, and the linked ones are runtime dependencies of the `.deb`/PKGBUILD | ✅ | ✅ | — | local (`check-full`) |
 | [`make check-version-bump`](#make-check-version-bump) | The version in `pubspec.yaml` is at most one canonical semver step above the last release tag | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make check-packages`](#make-check-packages) | Every package under `packages/` is unpublished, named like its directory, free of Flutter and of platform imports (`dart:io`/`ui`/`html`/`js`), on the root's SDK constraint, carries a copy of `LICENSE.md`, is used by the app, and stays under the file-size ceiling with no bare `catch (_)` | ✅ | ✅ | ✅ | local (`check-full`) |
+| [`make test-packages`](#make-test-packages) | The tests of every first-party package, in random order, plus its coverage floors (average, every `lib/` file in a test, per file) | ✅ | ✅ | — | local (`check`) |
 | [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ | local (`check-full`) |
@@ -943,6 +945,59 @@ also declares them, but see the [CI note](#continuous-integration).)
   three-part version would let a stale SBOM through.
 - **Failure means:** regenerate the SBOM and commit it — `make sbom` then
   `git add sbom/`.
+
+### `make check-packages`
+- **Runs:** `dart run tool/check_packages.dart`
+- **Covers:** every package under `packages/` (first-party code that something
+  other than the app must be able to share — today `ocideck_form_core`, the
+  Flutter-free core of form documents, `docs/design/FORM_INTAKE.md` §4.10):
+  `publish_to: none`; the package name equals its directory; **no dependency on
+  the Flutter SDK** in any section; `environment.sdk` equals the root's; `LICENSE`
+  is a byte copy of `LICENSE.md`; `lib/` imports or exports none of `dart:io`,
+  `dart:ui`, `dart:html`, `dart:js*` or `package:flutter`; the app depends on the
+  package via `path: packages/<name>`; no `lib/` file above the repo-wide
+  1000-line ceiling (`maxFileLines`, imported from `check_conventions.dart`); no
+  bare `catch (_)`.
+- **Why it exists:** a shared core is only shareable if that is *checked*. One
+  `import 'dart:io'` and the web form shell stops compiling; one `sdk: flutter`
+  and a standalone Dart server cannot resolve it. `flutter analyze` at the root
+  already fails a `package:flutter` import inside a package (the package's own
+  pubspec does not offer it), and `dart format .` already reaches `packages/`, so
+  neither is repeated. The conventions that `check_conventions.dart` applies to
+  the app's `lib/` do not look under `packages/`, so the two that matter for a
+  pure engine are repeated here.
+- **Not covered, on purpose:** `print()` (the `avoid_print` lint in
+  `package:lints/recommended` fails analysis), method length (files are small by
+  design: one descriptor per field type) and user-visible text (the engine returns
+  issue *codes*; the sentences live in the app's l10n).
+- **Proof that it guards anything:** `test/check_packages_tool_test.dart` plants
+  each violation and the boundary cases, and is silent on the real repository;
+  every rule was also checked against a mutant that disables it.
+- **Failure means:** a shared core stopped being shareable — the output names the
+  package, the file and the rule.
+
+### `make test-packages`
+- **Runs:** per package under `packages/`: `dart pub get --enforce-lockfile`,
+  `dart test --test-randomize-ordering-seed random --coverage=coverage`,
+  `coverage:format_coverage` to `coverage/lcov.info`, then
+  `dart run tool/package_coverage.dart --package=<dir> --min=90 --per-file-floor=60`
+  (`PACKAGE_COVERAGE_MIN` and `PACKAGE_PER_FILE_FLOOR` override the floors).
+- **Covers:** the package's own tests (the app's `flutter test` does not run them),
+  and three floors: the **average** line coverage; **every `lib/` file is in at
+  least one test** — lcov omits a file no test imports, so such a file is not 0%, it
+  is outside the fraction and no percentage can see it (a barrel file of only
+  `library`/`export` has nothing to execute and is exempt); and a **floor per file**,
+  because a file a test imports but never calls hides inside a healthy average.
+- **Why a tool of its own:** `tool/coverage_summary.dart` is tied to the app's
+  `lib/` and carries a ratchet of historical exceptions; a new package starts with
+  none. The pure function `packageCoverageProblems` is tested by
+  `test/package_coverage_tool_test.dart` (planted violations, boundaries, and four
+  mutants — one of which revealed a missing test).
+- **Wired into:** `make check` and `make check-no-coverage`. It is a *test*
+  target (it needs `pub get` and a compile), so it is not in `check-static`; the
+  static half is `check-packages`.
+- **Failure means:** a package test failed, the package's `pubspec.lock` drifted
+  (run `dart pub get` in the package and commit it), or coverage fell below a floor.
 
 ### OciServe contractpoort (`test/ociserve_api_drift_test.dart`)
 - **Runs:** `flutter test test/ociserve_api_drift_test.dart` (in

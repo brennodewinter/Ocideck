@@ -80,6 +80,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Changed
 
+- Voor de formulierdocumenten (ontwerp: `docs/design/FORM_INTAKE.md`) staat er nu
+  een eerste pakket onder `packages/`: `ocideck_form_core`, puur Dart zonder
+  Flutter, zodat de app, een webvormschil en een losse server dezelfde engine
+  kunnen delen. Nog geen zichtbare functie — het pakket bevat alleen de
+  rules-versie. Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
+  regels voor `packages/`) en `make test-packages` (tests + dekkingsvloer; onderdeel
+  van `make check`), en de SBOM kent voortaan een eigen groep voor first-party
+  pakketten.
 - Documenttijdlijnen beginnen voortaan met **Datum** in plaats van **Tijd** en
   bieden in de eerste kolom aparte keuzes voor een datum of een datum met tijd.
   Een datum blijft zonevrij; een exact tijdstip wordt als ISO-8601 UTC bewaard
