@@ -18,6 +18,13 @@ bool startsWithUtf8Bom(List<int> bytes) =>
 /// precies één BOM van de tekst afhaalt.
 final bool _decoderDropsBom = utf8.decode(utf8Bom).isEmpty;
 
+/// De tekst van een UTF-8-bestand zonder BOM, plus of er een BOM voorop stond.
+///
+/// Houd ze bij elkaar: wie alleen de tekst doorgeeft, verliest de BOM, en dan
+/// gaat een hash over "het bestand" stilzwijgend over iets anders dan de bytes
+/// op schijf — zo las een verzegeld deck met een BOM ervoor als intact.
+typedef DecodedUtf8 = ({String text, bool hasBom});
+
 /// Decodeert [bytes] als UTF-8 en onthoudt of er een BOM voorop stond.
 ///
 /// De tekst is altijd **zonder** die ene BOM: zo zien de front-matter-detectie,
@@ -30,7 +37,7 @@ final bool _decoderDropsBom = utf8.decode(utf8Bom).isEmpty;
 /// eraf: de decoder zou dan de tweede BOM alsnog als "de eerste" opeten.
 ///
 /// Gooit een [FormatException] bij ongeldige UTF-8, net als `utf8.decode`.
-({String text, bool hasBom}) decodeUtf8KeepingBomFlag(List<int> bytes) {
+DecodedUtf8 decodeUtf8KeepingBomFlag(List<int> bytes) {
   final hasBom = startsWithUtf8Bom(bytes);
   final text = utf8.decode(bytes);
   return (

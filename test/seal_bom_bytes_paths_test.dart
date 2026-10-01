@@ -100,7 +100,7 @@ void main() {
       final md = MarkdownService();
 
       final zonder = md.parseDeck(tekst)!;
-      final met = md.parseDeck(tekst, hasUtf8Bom: true)!;
+      final met = md.parseDeck(tekst, hasBom: true)!;
 
       expect(zonder.fileHash, DocumentIntegrity.hashBytes(utf8.encode(tekst)));
       expect(

@@ -658,21 +658,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (bytes.length > FileService.maxDeckMarkdownBytes) {
       return _failOpen(_ref, mounted, OpenFailure.tooLarge);
     }
-    final String raw;
-    final bool hasBom;
+    final DecodedUtf8 decoded;
     try {
-      final decoded = decodeUtf8KeepingBomFlag(bytes);
-      raw = decoded.text;
-      hasBom = decoded.hasBom;
+      decoded = decodeUtf8KeepingBomFlag(bytes);
     } on FormatException catch (e) {
       logWarning('TabsNotifier.openDeckFromBytes: not valid UTF-8', e);
       return _failOpen(_ref, mounted, OpenFailure.unreadable);
     }
-    final gated = _gateAndParseContent(
-      raw,
-      sourceName: name,
-      hasUtf8Bom: hasBom,
-    );
+    final gated = _gateAndParseContent(decoded, sourceName: name);
     final deck = gated.deck;
     if (deck == null) {
       // Geen Marp-deck? Router, geen muur — spiegelt [openFileByPath]: een
@@ -681,8 +674,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
       // [_gateAndParseContent] (anders was dit [OpenResult.blocked]).
       if (gated.failure == OpenResult.notAPresentation) {
         if (!mounted) return OpenResult.unreadable;
-        // De BOM is uit [raw] gedecodeerd; hier reist hij als vlag mee (§3.1).
-        _placeDocumentTab(MarkdownDocument.parse(raw, hasUtf8Bom: hasBom));
+        // De BOM is uit de tekst gedecodeerd; hier reist hij als vlag mee (§3.1).
+        _placeDocumentTab(
+          MarkdownDocument.parse(decoded.text, hasUtf8Bom: decoded.hasBom),
+        );
         return OpenResult.opened;
       }
       return gated.failure;
@@ -697,17 +692,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// treffers, dan [OpenResult.blocked]) en daarna de contentpoort van
   /// [FileService]. Bij succes draagt het record het deck; anders het
   /// [OpenResult] dat de UI moet melden.
-  ///
-  /// [hasUtf8Bom]: de bytes waaruit [raw] gedecodeerd is begonnen met een
-  /// UTF-8-BOM. Elke aanroeper die bytes heeft moet hem meegeven, anders hasht
-  /// [Deck.fileHash] het bestand zonder BOM en leest een verzegeld deck met een
-  /// BOM erbij als intact.
   ({Deck? deck, OpenResult failure}) _gateAndParseContent(
-    String raw, {
+    DecodedUtf8 decoded, {
     required String sourceName,
-    bool hasUtf8Bom = false,
   }) {
-    final findings = MarkdownSafetyScanner.scan(raw);
+    final findings = MarkdownSafetyScanner.scan(decoded.text);
     if (findings.isNotEmpty) {
       // Ook vastleggen, niet alleen tonen. De twee andere poorten op deze
       // scanner (`FileService.openDeck` en `openDeckFromContent`) loggen hun
@@ -730,11 +719,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       }
       return (deck: null, failure: OpenResult.blocked);
     }
-    final outcome = _file.openDeckFromContent(
-      raw,
-      sourceName: sourceName,
-      hasUtf8Bom: hasUtf8Bom,
-    );
+    final outcome = _file.openDecodedDeck(decoded, sourceName: sourceName);
     final deck = outcome.deck;
     if (deck == null) {
       return (

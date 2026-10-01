@@ -43,23 +43,16 @@ extension TabsNotifierGitNative on TabsNotifier {
       return OpenResult.unreadable;
     }
 
-    final String raw;
-    final bool hasBom;
+    final DecodedUtf8 decoded;
     try {
-      final decoded = decodeUtf8KeepingBomFlag(bytes);
-      raw = decoded.text;
-      hasBom = decoded.hasBom;
+      decoded = decodeUtf8KeepingBomFlag(bytes);
     } on FormatException catch (e) {
       logWarning('openDeckFromGitNative: deck.md is geen geldige UTF-8', e);
       return OpenResult.unreadable;
     }
 
     final label = '${config.slug} · $deckName';
-    final gated = _gateAndParseContent(
-      raw,
-      sourceName: label,
-      hasUtf8Bom: hasBom,
-    );
+    final gated = _gateAndParseContent(decoded, sourceName: label);
     final parsed = gated.deck;
     if (parsed == null) return gated.failure;
     if (!mounted) return OpenResult.unreadable;
@@ -224,11 +217,7 @@ extension TabsNotifierGitNative on TabsNotifier {
       if (bytes == null) return null;
       try {
         final decoded = decodeUtf8KeepingBomFlag(bytes);
-        return _gateAndParseContent(
-          decoded.text,
-          sourceName: label,
-          hasUtf8Bom: decoded.hasBom,
-        ).deck;
+        return _gateAndParseContent(decoded, sourceName: label).deck;
       } on FormatException {
         return null;
       }

@@ -265,20 +265,16 @@ Future<OpenResult> _openPackageFromBytes(
   if (entries == null) return OpenResult.unreadable;
   final mdEntry = FileService.mainMarkdownEntry(entries);
   if (mdEntry == null) return OpenResult.notAPresentation;
-  final String raw;
-  final bool hasBom;
+  final DecodedUtf8 decoded;
   try {
-    final decoded = decodeUtf8KeepingBomFlag(mdEntry.bytes);
-    raw = decoded.text;
-    hasBom = decoded.hasBom;
+    decoded = decodeUtf8KeepingBomFlag(mdEntry.bytes);
   } on FormatException catch (e) {
     logWarning('TabsNotifier._openPackageFromBytes: md not UTF-8', e);
     return OpenResult.unreadable;
   }
   final gated = notifier._gateAndParseContent(
-    raw,
+    decoded,
     sourceName: '$name → ${mdEntry.name}',
-    hasUtf8Bom: hasBom,
   );
   var deck = gated.deck;
   if (deck == null) return gated.failure;

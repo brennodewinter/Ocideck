@@ -79,11 +79,8 @@ Uint8List _bytes(String s) => Uint8List.fromList(utf8.encode(s));
 /// hij zijn eigen fouten afvangt.
 class _FailingMarkdown extends MarkdownService {
   @override
-  Deck? parseDeck(
-    String markdown, {
-    String? filePath,
-    bool hasUtf8Bom = false,
-  }) => null;
+  Deck? parseDeck(String markdown, {String? filePath, bool hasBom = false}) =>
+      null;
 }
 
 void main() {

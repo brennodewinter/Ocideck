@@ -721,7 +721,7 @@ class FileService {
     final parsed = _md.parseDeck(
       raw,
       filePath: filePath,
-      hasUtf8Bom: read.hasUtf8Bom,
+      hasBom: read.hasUtf8Bom,
     );
     if (parsed == null) {
       return const DeckOpenResult.failed(OpenFailure.corrupt);
@@ -924,15 +924,21 @@ class FileService {
   /// chart-databestanden, dus die hydratatie wordt bewust overgeslagen. [sourceName]
   /// labelt alleen de logregels.
   ///
-  /// [hasUtf8Bom]: de bytes waaruit [raw] gedecodeerd is begonnen met een
-  /// UTF-8-BOM. Zonder die vlag hasht [Deck.fileHash] het bestand zonder BOM en
-  /// meldt een verzegeld deck waar een ander programma een BOM voor zette zich
-  /// ten onrechte als intact.
+  /// Zonder BOM-vlag: wie bytes heeft, gebruikt [openDecodedDeck].
   ({Deck? deck, OpenFailure? failure}) openDeckFromContent(
     String raw, {
     String? sourceName,
-    bool hasUtf8Bom = false,
+  }) => openDecodedDeck((text: raw, hasBom: false), sourceName: sourceName);
+
+  /// Als [openDeckFromContent], voor tekst die uit bytes gedecodeerd is. De BOM
+  /// reist mee in [decoded]: [Deck.fileHash] gaat over de bytes van het bestand,
+  /// en zonder die vlag leest een verzegeld deck waar een ander programma een BOM
+  /// voor zette ten onrechte als intact.
+  ({Deck? deck, OpenFailure? failure}) openDecodedDeck(
+    DecodedUtf8 decoded, {
+    String? sourceName,
   }) {
+    final raw = decoded.text;
     final findings = MarkdownSafetyScanner.scan(raw);
     if (findings.isNotEmpty) {
       logWarning(
@@ -950,7 +956,7 @@ class FileService {
       );
       return (deck: null, failure: OpenFailure.notPresentation);
     }
-    final parsed = _md.parseDeck(raw, hasUtf8Bom: hasUtf8Bom);
+    final parsed = _md.parseDeck(raw, hasBom: decoded.hasBom);
     if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
     // Geen truncatie-check meer, om dezelfde reden als op het schijf-pad: een
     // lege body is een lege presentatie (#1909). Dit pad opende ook decks die

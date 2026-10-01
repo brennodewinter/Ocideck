@@ -403,28 +403,19 @@ class MarkdownService {
 
   /// Best-effort parse of Marp markdown into a Deck. Returns null if the
   /// content cannot be parsed at all.
-  ///
-  /// [hasUtf8Bom] zegt dat de bytes waaruit [markdown] gedecodeerd is met een
-  /// UTF-8-BOM begonnen. De BOM zit niet in de tekst (de decoder haalt hem er
-  /// af), maar wél in het bestand — en de zegelhash gaat over het bestand.
-  Deck? parseDeck(
-    String markdown, {
-    String? filePath,
-    bool hasUtf8Bom = false,
-  }) {
+  Deck? parseDeck(String markdown, {String? filePath, bool hasBom = false}) {
     // Normalise line endings up front. A Windows (CRLF) or classic-Mac (CR)
     // file would otherwise miss the `---\n` frontmatter start and the
     // `\n---\n` slide separators, collapsing the whole deck into one block.
     final normalized = markdown.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
     try {
       // De zegelhash gaat over de bytes zoals ze binnenkwamen, niet over de
-      // genormaliseerde tekst: een `.md` met CRLF is een ánder bestand, en het
-      // zegel hoort dat te zeggen in plaats van het weg te poetsen. Voor een
-      // BOM geldt hetzelfde: hij is onzichtbaar, maar `sha512sum` ziet hem.
+      // genormaliseerde tekst: CRLF en een BOM ([hasBom], niet in [markdown])
+      // maken een ánder bestand, en het zegel hoort dat te zeggen.
       return _doParse(
         normalized,
         filePath: filePath,
-        fileHash: sha512Hex(encodeUtf8WithBom(markdown, hasBom: hasUtf8Bom)),
+        fileHash: sha512Hex(encodeUtf8WithBom(markdown, hasBom: hasBom)),
       );
     } catch (e, s) {
       logError('MarkdownService.parseDeck: parse markdown', e, s);
