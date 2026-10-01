@@ -76,3 +76,6 @@ dist/
 # (waaronder Chromium via puppeteer). `package.json` en `package-lock.json` zijn
 # wél geversioneerd (de pin); `node_modules/` is een lokaal artefact, geen bron.
 tool/marp-check/node_modules/
+
+# Per-package coverage written by `make test-packages`
+packages/*/coverage/
