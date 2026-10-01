@@ -529,5 +529,385 @@
    "count": 2,
    "why": "Chinese characters"
   }
- ]
+ ],
+ "patterns": {
+  "email": [
+   {
+    "text": "a@b.nl",
+    "valid": true,
+    "why": "minimal"
+   },
+   {
+    "text": "sari.voorbeeld@example.org",
+    "valid": true,
+    "why": "dots in the local part"
+   },
+   {
+    "text": "a+tag@sub.domain.co.uk",
+    "valid": true,
+    "why": "plus tag, several labels"
+   },
+   {
+    "text": "\u00e9@\u00fc.nl",
+    "valid": true,
+    "why": "non-ASCII is allowed"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   },
+   {
+    "text": "a",
+    "valid": false,
+    "why": "no @"
+   },
+   {
+    "text": "a@",
+    "valid": false,
+    "why": "no domain"
+   },
+   {
+    "text": "@b.nl",
+    "valid": false,
+    "why": "no local part"
+   },
+   {
+    "text": "a@b",
+    "valid": false,
+    "why": "a domain needs a dot"
+   },
+   {
+    "text": "a b@c.nl",
+    "valid": false,
+    "why": "a space"
+   },
+   {
+    "text": "a@@b.nl",
+    "valid": false,
+    "why": "two @"
+   },
+   {
+    "text": "a@b@c.nl",
+    "valid": false,
+    "why": "two @, again"
+   },
+   {
+    "text": "a@b..nl",
+    "valid": false,
+    "why": "an empty label"
+   },
+   {
+    "text": "a@.nl",
+    "valid": false,
+    "why": "a leading dot in the domain"
+   },
+   {
+    "text": "a@b.",
+    "valid": false,
+    "why": "a trailing dot"
+   },
+   {
+    "text": " a@b.nl",
+    "valid": false,
+    "why": "leading space"
+   },
+   {
+    "text": "a@b.nl ",
+    "valid": false,
+    "why": "trailing space"
+   },
+   {
+    "text": "a@b,nl",
+    "valid": false,
+    "why": "a comma instead of a dot"
+   },
+   {
+    "text": "a@b.nl\n",
+    "valid": false,
+    "why": "a trailing newline"
+   },
+   {
+    "text": "a,b@c.nl",
+    "valid": false,
+    "why": "a comma in the local part"
+   }
+  ],
+  "url": [
+   {
+    "text": "https://example.org",
+    "valid": true,
+    "why": "https"
+   },
+   {
+    "text": "http://example.org/pad?x=1#y",
+    "valid": true,
+    "why": "path, query and fragment"
+   },
+   {
+    "text": "https://sub.example.org:8080/a",
+    "valid": true,
+    "why": "port"
+   },
+   {
+    "text": "https://example.org/a b",
+    "valid": false,
+    "why": "a space in the path"
+   },
+   {
+    "text": "example.org",
+    "valid": false,
+    "why": "no scheme"
+   },
+   {
+    "text": "ftp://example.org",
+    "valid": false,
+    "why": "only http and https"
+   },
+   {
+    "text": "javascript:alert(1)",
+    "valid": false,
+    "why": "a script URL"
+   },
+   {
+    "text": "data:text/html,x",
+    "valid": false,
+    "why": "a data URL"
+   },
+   {
+    "text": "//example.org",
+    "valid": false,
+    "why": "scheme-relative"
+   },
+   {
+    "text": "https://",
+    "valid": false,
+    "why": "no host"
+   },
+   {
+    "text": "https://x",
+    "valid": false,
+    "why": "a host needs a dot"
+   },
+   {
+    "text": "https:// x.nl",
+    "valid": false,
+    "why": "a space after the scheme"
+   },
+   {
+    "text": "https://x.nl:99999999",
+    "valid": false,
+    "why": "a port of more than five digits"
+   },
+   {
+    "text": "HTTPS://example.org",
+    "valid": false,
+    "why": "the scheme is lower-case"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   }
+  ],
+  "phone": [
+   {
+    "text": "+31 6 12345678",
+    "valid": true,
+    "why": "international with spaces"
+   },
+   {
+    "text": "06-12345678",
+    "valid": true,
+    "why": "a hyphen"
+   },
+   {
+    "text": "(020) 123 4567",
+    "valid": true,
+    "why": "parentheses"
+   },
+   {
+    "text": "0612345678",
+    "valid": true,
+    "why": "plain digits"
+   },
+   {
+    "text": "+31612345678",
+    "valid": true,
+    "why": "international, no spaces"
+   },
+   {
+    "text": "+1 (555) 123-4567",
+    "valid": true,
+    "why": "North American style"
+   },
+   {
+    "text": "020.123.4567",
+    "valid": true,
+    "why": "dots"
+   },
+   {
+    "text": "abc",
+    "valid": false,
+    "why": "letters"
+   },
+   {
+    "text": "123",
+    "valid": false,
+    "why": "too short"
+   },
+   {
+    "text": "123456",
+    "valid": false,
+    "why": "six digits are too few"
+   },
+   {
+    "text": "1234567",
+    "valid": true,
+    "why": "seven digits are enough"
+   },
+   {
+    "text": "123456789012345",
+    "valid": true,
+    "why": "fifteen digits are the limit"
+   },
+   {
+    "text": "1234567890123456",
+    "valid": false,
+    "why": "sixteen digits are too many"
+   },
+   {
+    "text": "++31612345678",
+    "valid": false,
+    "why": "two plus signs"
+   },
+   {
+    "text": "0031+612345678",
+    "valid": false,
+    "why": "a plus that is not first"
+   },
+   {
+    "text": "06/12345678",
+    "valid": false,
+    "why": "a slash"
+   },
+   {
+    "text": "06 1234 abc",
+    "valid": false,
+    "why": "letters among digits"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   },
+   {
+    "text": "+",
+    "valid": false,
+    "why": "a plus alone"
+   },
+   {
+    "text": " 0612345678",
+    "valid": false,
+    "why": "leading space"
+   }
+  ],
+  "postcode-nl": [
+   {
+    "text": "1234 AB",
+    "valid": true,
+    "why": "with a space"
+   },
+   {
+    "text": "1234AB",
+    "valid": true,
+    "why": "without a space"
+   },
+   {
+    "text": "1234 ab",
+    "valid": true,
+    "why": "lower-case letters"
+   },
+   {
+    "text": "9999 ZZ",
+    "valid": true,
+    "why": "the highest"
+   },
+   {
+    "text": "1000 AA",
+    "valid": true,
+    "why": "the lowest"
+   },
+   {
+    "text": "0123 AB",
+    "valid": false,
+    "why": "may not start with 0"
+   },
+   {
+    "text": "1234 A",
+    "valid": false,
+    "why": "one letter"
+   },
+   {
+    "text": "1234 ABC",
+    "valid": false,
+    "why": "three letters"
+   },
+   {
+    "text": "123 AB",
+    "valid": false,
+    "why": "three digits"
+   },
+   {
+    "text": "12345 AB",
+    "valid": false,
+    "why": "five digits"
+   },
+   {
+    "text": "1234  AB",
+    "valid": false,
+    "why": "two spaces"
+   },
+   {
+    "text": " 1234 AB",
+    "valid": false,
+    "why": "leading space"
+   },
+   {
+    "text": "1234 SA",
+    "valid": false,
+    "why": "SA is not issued"
+   },
+   {
+    "text": "1234 SD",
+    "valid": false,
+    "why": "SD is not issued"
+   },
+   {
+    "text": "1234 SS",
+    "valid": false,
+    "why": "SS is not issued"
+   },
+   {
+    "text": "1234 sd",
+    "valid": false,
+    "why": "SD in lower case is not issued either"
+   },
+   {
+    "text": "1234 SB",
+    "valid": true,
+    "why": "SB is fine"
+   },
+   {
+    "text": "1234 AS",
+    "valid": true,
+    "why": "AS is fine"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   }
+  ]
+ }
 }
