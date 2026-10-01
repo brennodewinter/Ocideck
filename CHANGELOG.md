@@ -83,8 +83,9 @@ All notable changes to OciDeck are documented in this file.
 - Voor de formulierdocumenten (ontwerp: `docs/design/FORM_INTAKE.md`) staat er nu
   een eerste pakket onder `packages/`: `ocideck_form_core`, puur Dart zonder
   Flutter, zodat de app, een webvormschil en een losse server dezelfde engine
-  kunnen delen. Nog geen zichtbare functie — het pakket bevat alleen de
-  rules-versie. Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
+  kunnen delen. Nog geen zichtbare functie — het pakket kan een formulier-
+  sjabloon lezen (`parseForm`: markers, tien veldtypen met hun regels, alle
+  auteursfouten tegelijk) maar nog niet invullen of valideren. Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
   regels voor `packages/`) en `make test-packages` (tests + dekkingsvloer; onderdeel
   van `make check`), en de SBOM kent voortaan een eigen groep voor first-party
   pakketten.
