@@ -36,8 +36,10 @@
 > `packages/ocideck_form_core` exists with its gates (`make check-packages`,
 > `make test-packages`, a first-party SBOM group — see
 > [`../CHECKS.md`](../CHECKS.md#make-check-packages)); it so far holds only the
-> rule-semantics version of §4.7/§4.8. Everything else in this document is still
-> design.
+> rule-semantics version of §4.7/§4.8 and, since the parser step, **`parseForm`**
+> (§4.3, §4.4): the marker grammar, the ten field types with their rules, and the
+> three-state result. Answers, validation, the package, sealing and the app surfaces
+> are still design.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
@@ -299,6 +301,9 @@ A field is three markers around ordinary Markdown:
    the only text a respondent edits. The closing marker repeats the field's id so a
    deleted or duplicated marker is detected at the field it belongs to.
 
+(The example is an excerpt: its `overview=` names fields the excerpt does not show, and
+the parser requires every field named by `overview=` and `keep-record=` to exist.)
+
 Text *outside* any field — chapter headings, the introduction, the `notice` region —
 is ordinary template-owned content. The text before the first field is the
 introduction the web landing page shows (§8).
@@ -349,6 +354,14 @@ range      := N | N ".." M | N ".." | ".." M      ; inclusive, N and M non-negat
 - Markers **never nest**; `notice` and `field` regions do not overlap.
 - **Unknown attributes** on a known marker are preserved and ignored (info note) —
   *unless* the form's `rules=` is higher than the client supports (§4.8).
+- **A line that is almost a marker is reported, never silently ignored**, because a
+  typo that turns a rule into a plain comment would quietly weaken the form:
+  trailing text after `-->`, a comment that does not close on its line, the old colon
+  style (`<!-- field: … -->`), a malformed attribute, a duplicate key, attributes on
+  a marker that takes none (`answer`, `notice`, `/notice`; `/field` takes exactly
+  `id`) are `marker-malformed`; a wrong-case name (`<!-- Field … -->`) is
+  `unknown-marker`. An *unrelated* comment (`<!-- toc -->`, `<!-- a note -->`) is none
+  of our business.
 - A marker-shaped line **inside fenced code in template-owned text** is content,
   not a marker. **Inside an answer zone a marker-shaped line is never allowed, even
   in a fence** (§4.6): structure must be deterministic however the answer is written.
@@ -366,8 +379,34 @@ class BrokenForm extends FormParseResult { List<FormProblem> problems; }   // ha
     // `form` marker, but e.g. duplicate id, unpaired /field, words=300..150
 ```
 
+How the three states are decided, exactly:
+
+- **`NotAForm`** — no `form` marker, and no sign that one was meant: no `field`,
+  `answer` or `/field` marker either. A `notice` marker alone is not a form.
+- **`BrokenForm`** — a `form` marker is present, or a structural marker is, or a
+  wrong-case `Form` marker is the only trace. `problems` lists **every** error found,
+  in order, plus any `unknown-marker` warning, capped at **100**; the completeness
+  warnings below are left out until the errors are fixed.
+- **`ParsedForm`** — usable. `notes` hold what is worth telling an author but does not
+  block: `unknown-rule` (info), `unknown-marker` (warning), and the completeness
+  warnings `notice-missing` and `form-attribute-missing` (for `controller`, `contact`,
+  `retain-unused`, §7.7).
+- A form whose `rules=` is **higher than the engine supports** is not judged at all:
+  the result is a `ParsedForm` whose spec carries only the header, with
+  `fields` empty and a single error note `rules-too-new` (`canFill` is false). Its
+  header must still be valid; a malformed header is `BrokenForm` whatever the version.
+- `version=` and `rules=` default to 1 when absent.
+- The `form` marker must be the first marker in the file (after an optional BOM and
+  front matter); a second `form` marker, a `form` after another marker, a structural
+  marker before it, and a second `notice` are `marker-misplaced`. A `notice` open at the
+  end of the file or interrupted by a field is `unpaired-marker`
+  (`notice-not-closed`).
+- A field whose close marker is missing is reported **at the field**
+  (`unpaired-marker`, `unclosed-field`) with how many marker lines its zone swallowed
+  and which `/field id=…` markers it saw instead.
+
 Author-level problems (`rule-malformed`, `duplicate-field-id`, `unpaired-marker`,
-`unknown-type`) **block publishing**. A *respondent's* client given a published
+`unknown-type`, `marker-malformed`, `marker-misplaced`) **block publishing**. A *respondent's* client given a published
 bundle never meets them, because publishing refused; if it does, the field is shown
 as unverifiable and the organiser's re-validation (§4.11 step 3) reports an error.
 
@@ -576,7 +615,9 @@ List<FormIssue> validateForm(FormSpec spec, FormAnswers a, FormImageFacts f); //
 `template-text-altered`, `template-unknown` (hash matches no published version),
 `field-not-in-form`, `field-missing`, `form-version-mismatch` (warning),
 `rules-too-new`, and the author-level `rule-malformed`, `duplicate-field-id`,
-`unpaired-marker`, `unknown-type`, `notice-missing` (warning).
+`unpaired-marker`, `unknown-type`, `marker-malformed`, `marker-misplaced`,
+`notice-missing` (warning), `form-attribute-missing` (warning), `unknown-marker`
+(warning) and `unknown-rule` (info).
 
 **Severity:** *error* blocks sending; *warning* asks for confirmation; *info*
 informs. Every code has a **message catalogue entry** that says what is wrong and
@@ -1616,13 +1657,16 @@ The review asked that the cost be written down, not discovered.
 
 ## 16. File map (new + changed) — pick-up-cold
 
-*New package (`packages/ocideck_form_core`, pure Dart, no Flutter):*
-`form_blocks.dart` (the marker grammar — sole owner), `form_spec.dart`
-(`FormSpec`, `FormFieldSpec`, `FormParseResult`, `FormIssue`, codes),
-`form_parser.dart`, `form_answers.dart`, `form_validator.dart`, `form_field_types/`
-(one descriptor per type), `form_words.dart` (`countFormWords`), `form_package.dart`
-(zip + manifest + name grammars), `form_seal.dart` (age; the only file touching the
-primitives), `form_bundle.dart` (bundle, JCS, signing), `test/fixtures/form_vectors.json`.
+*New package (`packages/ocideck_form_core`, pure Dart, no Flutter).* **Built** (the reading
+side, §4.3–§4.5, §4.7): `form_blocks.dart` (the marker grammar — sole owner),
+`form_source.dart` (lines with offsets, front matter, fenced code), `form_issue.dart`
+(`FormIssueCode`, `FormProblem`), `form_rule_values.dart` (ranges, numbers, dates, lists),
+`form_field_types.dart` (one descriptor per type, in one file for now), `form_spec.dart`
+(`FormSpec`, `FormFieldSpec`, `FormParseResult`), `form_parser.dart` (`parseForm`),
+`rules_version.dart`. **Still to build:** `form_answers.dart`, `form_validator.dart`
+(`FormIssue` for answers), `form_words.dart` (`countFormWords`), `form_package.dart` (zip +
+manifest + name grammars), `form_seal.dart` (age; the only file touching the primitives),
+`form_bundle.dart` (bundle, JCS, signing), `test/fixtures/form_vectors.json`.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
