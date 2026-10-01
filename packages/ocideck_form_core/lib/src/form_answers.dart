@@ -347,6 +347,37 @@ bool? _readConsent(
 
 // ── extractAnswers ──────────────────────────────────────────────────────────
 
+/// A submission read as far as its structure goes: its [spec] when it is a form
+/// this engine can read, otherwise the `structure-damaged` problem that says why.
+/// Exactly one of the two is set.
+typedef SubmissionStructure = ({FormSpec? spec, FormProblem? damaged});
+
+/// Parses [markdown] and says whether it is a readable form (FORM_INTAKE.md §4.4).
+SubmissionStructure readSubmissionStructure(String markdown) {
+  FormProblem damaged(String reason, [Map<String, Object?> facts = const {}]) =>
+      FormProblem(
+        FormIssueCode.structureDamaged,
+        facts: {'reason': reason, ...facts},
+      );
+
+  switch (parseForm(markdown)) {
+    case NotAForm():
+      return (spec: null, damaged: damaged('not-a-form'));
+    case BrokenForm(:final problems):
+      return (
+        spec: null,
+        damaged: damaged('broken', {
+          'problems': problems.take(5).map((p) => p.code.wireName).join(','),
+          'line': problems.first.line,
+        }),
+      );
+    case ParsedForm(canFill: false):
+      return (spec: null, damaged: damaged('rules-too-new'));
+    case ParsedForm(:final spec):
+      return (spec: spec, damaged: null);
+  }
+}
+
 /// Reads the answers of [markdown] — a draft or a submission — against the
 /// **published** form [spec].
 ///
@@ -357,72 +388,55 @@ bool? _readConsent(
 /// exception: `structure-damaged` when it is not a form this engine can read,
 /// `field-missing`, `field-not-in-form`, and the warning `form-version-mismatch`.
 FormAnswers extractAnswers(FormSpec spec, String markdown) {
-  final structure = <FormProblem>[];
-  FormProblem damaged(String reason, [Map<String, Object?> facts = const {}]) =>
+  final read = readSubmissionStructure(markdown);
+  final submission = read.spec;
+  if (submission == null) return FormAnswers(const {}, [read.damaged!]);
+
+  if (submission.id != spec.id) {
+    return FormAnswers(const {}, [
       FormProblem(
         FormIssueCode.structureDamaged,
-        facts: {'reason': reason, ...facts},
-      );
-
-  final parsed = parseForm(markdown);
-  switch (parsed) {
-    case NotAForm():
-      return FormAnswers(const {}, [damaged('not-a-form')]);
-    case BrokenForm(:final problems):
-      return FormAnswers(const {}, [
-        damaged('broken', {
-          'problems': problems.take(5).map((p) => p.code.wireName).join(','),
-          'line': problems.first.line,
-        }),
-      ]);
-    case ParsedForm(canFill: false):
-      return FormAnswers(const {}, [damaged('rules-too-new')]);
-    case ParsedForm(spec: final submission):
-      if (submission.id != spec.id) {
-        return FormAnswers(const {}, [
-          damaged('form-id', {
-            'published': spec.id,
-            'submission': submission.id,
-          }),
-        ]);
-      }
-      if (submission.version != spec.version) {
-        structure.add(
-          FormProblem(
-            FormIssueCode.formVersionMismatch,
-            facts: {
-              'published': spec.version,
-              'submission': submission.version,
-            },
-          ),
-        );
-      }
-      final answers = <String, FormAnswer>{};
-      for (final field in spec.fields) {
-        final theirs = submission.fieldById(field.id);
-        if (theirs == null) {
-          structure.add(
-            FormProblem(FormIssueCode.fieldMissing, fieldId: field.id),
-          );
-          continue;
-        }
-        answers[field.id] = parseAnswer(
-          field,
-          markdown.substring(theirs.zone.start, theirs.zone.end),
-          firstLine: theirs.answer.line + 1,
-        );
-      }
-      for (final theirs in submission.fields) {
-        if (spec.fieldById(theirs.id) == null) {
-          structure.add(
-            FormProblem(
-              FormIssueCode.fieldNotInForm,
-              line: theirs.open.line,
-              fieldId: theirs.id,
-            ),
-          );
-        }
-      }
-      return FormAnswers(answers, structure);
+        facts: {
+          'reason': 'form-id',
+          'published': spec.id,
+          'submission': submission.id,
+        },
+      ),
+    ]);
   }
+
+  final structure = <FormProblem>[];
+  if (submission.version != spec.version) {
+    structure.add(
+      FormProblem(
+        FormIssueCode.formVersionMismatch,
+        facts: {'published': spec.version, 'submission': submission.version},
+      ),
+    );
+  }
+  final answers = <String, FormAnswer>{};
+  for (final field in spec.fields) {
+    final theirs = submission.fieldById(field.id);
+    if (theirs == null) {
+      structure.add(FormProblem(FormIssueCode.fieldMissing, fieldId: field.id));
+      continue;
+    }
+    answers[field.id] = parseAnswer(
+      field,
+      markdown.substring(theirs.zone.start, theirs.zone.end),
+      firstLine: theirs.answer.line + 1,
+    );
+  }
+  for (final theirs in submission.fields) {
+    if (spec.fieldById(theirs.id) == null) {
+      structure.add(
+        FormProblem(
+          FormIssueCode.fieldNotInForm,
+          line: theirs.open.line,
+          fieldId: theirs.id,
+        ),
+      );
+    }
+  }
+  return FormAnswers(answers, structure);
 }
