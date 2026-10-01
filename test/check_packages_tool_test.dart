@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../tool/check_conventions.dart' show maxFileLines;
 import '../tool/check_packages.dart';
 
 /// Guards the gate that guards packages/ (FORM_INTAKE.md §4.10, §16).
@@ -159,6 +160,52 @@ dev_dependencies:
           'src/a.dart':
               "// import 'dart:io';\nconst a = \"import 'dart:ui';\";\n",
         },
+      );
+      expect(problems(), isEmpty);
+    });
+  });
+
+  group('conventions the rest of the repo already holds', () {
+    test('a file longer than the repo-wide ceiling is refused', () {
+      final long = List.generate(maxFileLines + 1, (i) => '// $i').join('\n');
+      writePackage('good_pkg', lib: {'src/long.dart': '$long\n'});
+      final found = problems();
+      expect(found.single, contains('src/long.dart'));
+      expect(found.single, contains('${maxFileLines + 1}'));
+    });
+
+    test('a file exactly at the ceiling is fine', () {
+      final exact = List.generate(maxFileLines, (i) => '// $i').join('\n');
+      writePackage('good_pkg', lib: {'src/exact.dart': '$exact\n'});
+      expect(problems(), isEmpty);
+    });
+
+    test('a bare catch (_) is refused: failures must not vanish silently', () {
+      writePackage(
+        'good_pkg',
+        lib: {'src/a.dart': 'void f() {\n  try {} catch (_) {}\n}\n'},
+      );
+      final found = problems();
+      expect(found.single, contains('src/a.dart:2'));
+      expect(found.single, contains('catch'));
+    });
+
+    test('catching a named error, or on-clauses, is fine', () {
+      writePackage(
+        'good_pkg',
+        lib: {
+          'src/a.dart':
+              'void f() {\n  try {} on FormatException catch (e) {print(e);}\n'
+              '  try {} catch (e) {print(e);}\n}\n',
+        },
+      );
+      expect(problems(), isEmpty);
+    });
+
+    test('a comment that talks about catch (_) is not a violation', () {
+      writePackage(
+        'good_pkg',
+        lib: {'src/a.dart': '// never write catch (_) here\nconst a = 1;\n'},
       );
       expect(problems(), isEmpty);
     });

@@ -19,6 +19,17 @@
 //      or package:flutter — the core must also run in a browser tab.
 //   7. The app depends on every package, via `path: packages/<name>`. A package
 //      nobody uses is dead code the root's dead-code gate cannot see.
+//   8. No file in `lib/` is longer than the repo-wide ceiling
+//      ([maxFileLines], 1000) — the same rule `check_conventions.dart` applies
+//      to the app, which does not look under packages/.
+//   9. No bare `catch (_)`: a pure engine that "never throws on bad input" must
+//      not swallow the failures it did not expect either.
+//
+// Not covered here, on purpose: print() (the `avoid_print` lint in
+// `package:lints/recommended` already fails analysis), method length (the files
+// are small by design — one descriptor per field type, FORM_INTAKE.md §4.10) and
+// user-visible text (the engine returns issue *codes*; the sentences live in the
+// app's l10n).
 //
 // The checks are a pure function over file contents so a test can plant each
 // violation (test/check_packages_tool_test.dart) — a gate nobody has watched
@@ -28,9 +39,14 @@ import 'dart:io';
 
 import 'package:yaml/yaml.dart';
 
+import 'check_conventions.dart' show maxFileLines;
+
 /// Libraries a shared core must not import: each one ties the code to a
 /// platform. `dart:io` is VM-only, `dart:ui` and `package:flutter` need the
 /// Flutter engine, `dart:html` and `dart:js*` are browser-only.
+/// `catch (_)`, with any spacing; an `on X catch (_)` is just as silent.
+final RegExp _bareCatch = RegExp(r'catch\s*\(\s*_\s*\)');
+
 final RegExp _forbiddenImport = RegExp(
   r'''^\s*(?:import|export)\s+['"](?:dart:(?:io|ui|html|js|js_util|js_interop|js_interop_unsafe)|package:flutter(?:_[a-z_]+)?/)''',
 );
@@ -129,13 +145,27 @@ List<String> packageProblems({
             ..sort((a, b) => a.path.compareTo(b.path));
       for (final file in files) {
         final rel = file.path.substring(dir.path.length + 1);
-        for (final line in file.readAsLinesSync()) {
+        final lines = file.readAsLinesSync();
+        for (var i = 0; i < lines.length; i++) {
+          final line = lines[i];
           if (_forbiddenImport.hasMatch(line)) {
             problems.add(
               '$where/$rel: platform import (${line.trim()}) — the core must '
               'also run in a browser tab and on a Flutter-free server.',
             );
           }
+          if (!line.trimLeft().startsWith('//') && _bareCatch.hasMatch(line)) {
+            problems.add(
+              '$where/$rel:${i + 1}: bare catch (_) swallows failures '
+              'silently — catch a named error or an exception type.',
+            );
+          }
+        }
+        // 8
+        if (lines.length > maxFileLines) {
+          problems.add(
+            '$where/$rel: ${lines.length} lines (max $maxFileLines) — split it.',
+          );
         }
       }
     }
