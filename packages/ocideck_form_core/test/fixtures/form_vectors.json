@@ -1,0 +1,913 @@
+{
+ "version": 1,
+ "about": "Shared test vectors for the form engine (FORM_INTAKE.md \u00a74.7, \u00a717). Read by the engine's tests, the app's widget tests and the import pipeline, so the counters of the respondent and the organiser cannot drift. Never edit a vector to make a test pass: a change here is a change of semantics.",
+ "words": [
+  {
+   "text": "",
+   "count": 0,
+   "why": "empty"
+  },
+  {
+   "text": "   \n\n\t ",
+   "count": 0,
+   "why": "blank only"
+  },
+  {
+   "text": "\u00e9\u00e9n twee drie",
+   "count": 3,
+   "why": "plain words, accents"
+  },
+  {
+   "text": "word word\n\nword",
+   "count": 3,
+   "why": "blank lines between"
+  },
+  {
+   "text": "sambal-ketjap",
+   "count": 1,
+   "why": "a hyphenated word is one word"
+  },
+  {
+   "text": "sambal - ketjap",
+   "count": 2,
+   "why": "a lone hyphen is not a word"
+  },
+  {
+   "text": "d'r zo'n oma's",
+   "count": 3,
+   "why": "apostrophes stay inside words"
+  },
+  {
+   "text": "**vet** en *schuin*",
+   "count": 3,
+   "why": "emphasis markers do not split or add words"
+  },
+  {
+   "text": "~~weg~~ hier",
+   "count": 2,
+   "why": "strikethrough"
+  },
+  {
+   "text": "- een\n- twee\n- drie",
+   "count": 3,
+   "why": "bullet markers are not words"
+  },
+  {
+   "text": "* ster\n+ plus",
+   "count": 2,
+   "why": "other bullet markers"
+  },
+  {
+   "text": "1. ui\n2. knoflook",
+   "count": 2,
+   "why": "ordered markers are not words (computeDocumentStats counts them)"
+  },
+  {
+   "text": "1) ui",
+   "count": 1,
+   "why": "ordered marker with a parenthesis"
+  },
+  {
+   "text": "- [x] ui",
+   "count": 1,
+   "why": "a checked task box is not a word (computeDocumentStats counts it)"
+  },
+  {
+   "text": "- [ ] ui",
+   "count": 1,
+   "why": "an unchecked task box is not a word"
+  },
+  {
+   "text": "- [X] ui",
+   "count": 1,
+   "why": "uppercase X"
+  },
+  {
+   "text": "  - genest item",
+   "count": 2,
+   "why": "an indented bullet"
+  },
+  {
+   "text": "- - x",
+   "count": 1,
+   "why": "only the first marker is a list marker"
+  },
+  {
+   "text": "> drie woorden hier",
+   "count": 3,
+   "why": "a blockquote marker is not a word"
+  },
+  {
+   "text": "> > genest citaat",
+   "count": 2,
+   "why": "nested blockquote"
+  },
+  {
+   "text": "# Titel",
+   "count": 1,
+   "why": "a heading marker is not a word"
+  },
+  {
+   "text": "### Titel ###",
+   "count": 1,
+   "why": "closing hashes are not words"
+  },
+  {
+   "text": "#hashtag",
+   "count": 1,
+   "why": "no space after #: not a heading, the token counts"
+  },
+  {
+   "text": "2024. Het jaar",
+   "count": 2,
+   "why": "a number followed by a dot at line start IS an ordered marker, as in Markdown"
+  },
+  {
+   "text": "**1.** eerste",
+   "count": 2,
+   "why": "bold number is not a list marker, so it counts"
+  },
+  {
+   "text": "zie [de pagina](https://x.nl) nu",
+   "count": 4,
+   "why": "link text counts, the destination does not"
+  },
+  {
+   "text": "[site](https://x.nl \"Mijn titel\")",
+   "count": 1,
+   "why": "a link title does not count"
+  },
+  {
+   "text": "![alt tekst](images/foo-1.jpg)",
+   "count": 0,
+   "why": "an image is removed entirely, alt text included"
+  },
+  {
+   "text": "![alt](images/foo(1).jpg) daarna",
+   "count": 1,
+   "why": "parentheses inside an image destination"
+  },
+  {
+   "text": "[a](b) [c](d)",
+   "count": 2,
+   "why": "two links"
+  },
+  {
+   "text": "`code` tekst",
+   "count": 2,
+   "why": "inline code counts as text"
+  },
+  {
+   "text": "```\nlet x = 1;\n```",
+   "count": 3,
+   "why": "fence lines are not words, the code inside is"
+  },
+  {
+   "text": "~~~\n- niet een lijst\n~~~",
+   "count": 3,
+   "why": "inside a fence there is no Markdown: the raw line counts"
+  },
+  {
+   "text": "voor\n```\nin\n```\nna",
+   "count": 3,
+   "why": "text around a fence"
+  },
+  {
+   "text": "a\u00a0b",
+   "count": 2,
+   "why": "a no-break space separates words"
+  },
+  {
+   "text": "a\u200bb",
+   "count": 2,
+   "why": "a zero-width space separates words (computeDocumentStats does not)"
+  },
+  {
+   "text": "a\u2003b",
+   "count": 2,
+   "why": "an em space separates words"
+  },
+  {
+   "text": "a\tb\nc",
+   "count": 3,
+   "why": "tabs and newlines"
+  },
+  {
+   "text": "een\r\ntwee",
+   "count": 2,
+   "why": "CRLF"
+  },
+  {
+   "text": "een\rtwee",
+   "count": 2,
+   "why": "a lone CR is white space"
+  },
+  {
+   "text": "tekst met 25 gram",
+   "count": 4,
+   "why": "numbers are words"
+  },
+  {
+   "text": "25",
+   "count": 1,
+   "why": "a bare number"
+  },
+  {
+   "text": "1.5 kg",
+   "count": 2,
+   "why": "a decimal"
+  },
+  {
+   "text": "...",
+   "count": 0,
+   "why": "punctuation only"
+  },
+  {
+   "text": "\u2014",
+   "count": 0,
+   "why": "a dash only"
+  },
+  {
+   "text": "ja \u2014 nee",
+   "count": 2,
+   "why": "a spaced dash is not a word"
+  },
+  {
+   "text": "\ud83c\udf36 pittig",
+   "count": 1,
+   "why": "an emoji is not a letter or digit"
+  },
+  {
+   "text": "https://example.org/pad",
+   "count": 1,
+   "why": "a bare URL is one token"
+  },
+  {
+   "text": "e-mail: test@x.nl",
+   "count": 2,
+   "why": "punctuation inside tokens"
+  },
+  {
+   "text": "| a | b |\n|---|---|\n| c | d |",
+   "count": 4,
+   "why": "a table: the pipes and the rule row are not words"
+  },
+  {
+   "text": "---",
+   "count": 0,
+   "why": "a thematic break"
+  },
+  {
+   "text": "====",
+   "count": 0,
+   "why": "a setext underline"
+  },
+  {
+   "text": "\u4f60\u597d\u4e16\u754c test",
+   "count": 2,
+   "why": "scripts written without spaces are not segmented (known limit)"
+  },
+  {
+   "text": "```dart\nx\n```",
+   "count": 1,
+   "why": "an opening fence's info string is not a word"
+  },
+  {
+   "text": "```\n1. ui\n```",
+   "count": 2,
+   "why": "inside a fence the raw line counts: the number is a word"
+  },
+  {
+   "text": "```\n- [x] ui\n```",
+   "count": 2,
+   "why": "inside a fence a task box is plain text"
+  },
+  {
+   "text": "> > 1. ui",
+   "count": 1,
+   "why": "a list marker after nested quote markers"
+  },
+  {
+   "text": "> - [x] ui",
+   "count": 1,
+   "why": "a task box inside a quote"
+  },
+  {
+   "text": "a![x](images/y.jpg)b",
+   "count": 2,
+   "why": "an image separates the text around it"
+  },
+  {
+   "text": "x\r1. y",
+   "count": 3,
+   "why": "a lone CR is white space, not a line break, so `1.` is no list marker here"
+  },
+  {
+   "text": "# 1. x",
+   "count": 2,
+   "why": "a number inside a heading is a word (a heading is not a list)"
+  },
+  {
+   "text": "1.\r\n2.\r\nx",
+   "count": 1,
+   "why": "CRLF must not turn a bare list marker into a word"
+  },
+  {
+   "text": "a\tb",
+   "count": 2,
+   "why": "U+0009 separates words"
+  },
+  {
+   "text": "a\nb",
+   "count": 2,
+   "why": "U+000A separates words"
+  },
+  {
+   "text": "a\u000bb",
+   "count": 2,
+   "why": "U+000B separates words"
+  },
+  {
+   "text": "a\fb",
+   "count": 2,
+   "why": "U+000C separates words"
+  },
+  {
+   "text": "a\rb",
+   "count": 2,
+   "why": "U+000D separates words"
+  },
+  {
+   "text": "a b",
+   "count": 2,
+   "why": "U+0020 separates words"
+  },
+  {
+   "text": "a\u0085b",
+   "count": 2,
+   "why": "U+0085 separates words"
+  },
+  {
+   "text": "a\u00a0b",
+   "count": 2,
+   "why": "U+00A0 separates words"
+  },
+  {
+   "text": "a\u1680b",
+   "count": 2,
+   "why": "U+1680 separates words"
+  },
+  {
+   "text": "a\u2000b",
+   "count": 2,
+   "why": "U+2000 separates words"
+  },
+  {
+   "text": "a\u2001b",
+   "count": 2,
+   "why": "U+2001 separates words"
+  },
+  {
+   "text": "a\u2002b",
+   "count": 2,
+   "why": "U+2002 separates words"
+  },
+  {
+   "text": "a\u2003b",
+   "count": 2,
+   "why": "U+2003 separates words"
+  },
+  {
+   "text": "a\u2004b",
+   "count": 2,
+   "why": "U+2004 separates words"
+  },
+  {
+   "text": "a\u2005b",
+   "count": 2,
+   "why": "U+2005 separates words"
+  },
+  {
+   "text": "a\u2006b",
+   "count": 2,
+   "why": "U+2006 separates words"
+  },
+  {
+   "text": "a\u2007b",
+   "count": 2,
+   "why": "U+2007 separates words"
+  },
+  {
+   "text": "a\u2008b",
+   "count": 2,
+   "why": "U+2008 separates words"
+  },
+  {
+   "text": "a\u2009b",
+   "count": 2,
+   "why": "U+2009 separates words"
+  },
+  {
+   "text": "a\u200ab",
+   "count": 2,
+   "why": "U+200A separates words"
+  },
+  {
+   "text": "a\u2028b",
+   "count": 2,
+   "why": "U+2028 separates words"
+  },
+  {
+   "text": "a\u2029b",
+   "count": 2,
+   "why": "U+2029 separates words"
+  },
+  {
+   "text": "a\u202fb",
+   "count": 2,
+   "why": "U+202F separates words"
+  },
+  {
+   "text": "a\u205fb",
+   "count": 2,
+   "why": "U+205F separates words"
+  },
+  {
+   "text": "a\u3000b",
+   "count": 2,
+   "why": "U+3000 separates words"
+  },
+  {
+   "text": "a\u200bb",
+   "count": 2,
+   "why": "U+200B separates words"
+  },
+  {
+   "text": "a\ufeffb",
+   "count": 1,
+   "why": "U+FEFF (a BOM) is not White_Space: it does not separate words"
+  }
+ ],
+ "chars": [
+  {
+   "text": "",
+   "count": 0,
+   "why": "empty"
+  },
+  {
+   "text": "abc",
+   "count": 3,
+   "why": "ascii"
+  },
+  {
+   "text": "  abc  ",
+   "count": 3,
+   "why": "surrounding spaces are trimmed"
+  },
+  {
+   "text": "\n\nabc\n",
+   "count": 3,
+   "why": "surrounding blank lines are trimmed"
+  },
+  {
+   "text": "a b",
+   "count": 3,
+   "why": "inner space counts"
+  },
+  {
+   "text": "Ren\u00e9",
+   "count": 4,
+   "why": "precomposed accent"
+  },
+  {
+   "text": "Rene\u0301",
+   "count": 4,
+   "why": "decomposed accent: one grapheme"
+  },
+  {
+   "text": "n\u0303",
+   "count": 1,
+   "why": "a combining tilde"
+  },
+  {
+   "text": "\ud83c\udf36",
+   "count": 1,
+   "why": "an emoji outside the BMP is one character, not two UTF-16 units"
+  },
+  {
+   "text": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67",
+   "count": 1,
+   "why": "a ZWJ family is one character"
+  },
+  {
+   "text": "\ud83c\uddf3\ud83c\uddf1",
+   "count": 1,
+   "why": "a flag is one character"
+  },
+  {
+   "text": "a\nb",
+   "count": 3,
+   "why": "a newline is one character"
+  },
+  {
+   "text": "a\r\nb",
+   "count": 3,
+   "why": "CRLF counts like LF (a file's line endings must not change its length)"
+  },
+  {
+   "text": "a\tb",
+   "count": 3,
+   "why": "a tab"
+  },
+  {
+   "text": "\u0645\u0631\u062d\u0628\u0627",
+   "count": 5,
+   "why": "Arabic letters"
+  },
+  {
+   "text": "\u4f60\u597d",
+   "count": 2,
+   "why": "Chinese characters"
+  }
+ ],
+ "patterns": {
+  "email": [
+   {
+    "text": "a@b.nl",
+    "valid": true,
+    "why": "minimal"
+   },
+   {
+    "text": "sari.voorbeeld@example.org",
+    "valid": true,
+    "why": "dots in the local part"
+   },
+   {
+    "text": "a+tag@sub.domain.co.uk",
+    "valid": true,
+    "why": "plus tag, several labels"
+   },
+   {
+    "text": "\u00e9@\u00fc.nl",
+    "valid": true,
+    "why": "non-ASCII is allowed"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   },
+   {
+    "text": "a",
+    "valid": false,
+    "why": "no @"
+   },
+   {
+    "text": "a@",
+    "valid": false,
+    "why": "no domain"
+   },
+   {
+    "text": "@b.nl",
+    "valid": false,
+    "why": "no local part"
+   },
+   {
+    "text": "a@b",
+    "valid": false,
+    "why": "a domain needs a dot"
+   },
+   {
+    "text": "a b@c.nl",
+    "valid": false,
+    "why": "a space"
+   },
+   {
+    "text": "a@@b.nl",
+    "valid": false,
+    "why": "two @"
+   },
+   {
+    "text": "a@b@c.nl",
+    "valid": false,
+    "why": "two @, again"
+   },
+   {
+    "text": "a@b..nl",
+    "valid": false,
+    "why": "an empty label"
+   },
+   {
+    "text": "a@.nl",
+    "valid": false,
+    "why": "a leading dot in the domain"
+   },
+   {
+    "text": "a@b.",
+    "valid": false,
+    "why": "a trailing dot"
+   },
+   {
+    "text": " a@b.nl",
+    "valid": false,
+    "why": "leading space"
+   },
+   {
+    "text": "a@b.nl ",
+    "valid": false,
+    "why": "trailing space"
+   },
+   {
+    "text": "a@b,nl",
+    "valid": false,
+    "why": "a comma instead of a dot"
+   },
+   {
+    "text": "a@b.nl\n",
+    "valid": false,
+    "why": "a trailing newline"
+   },
+   {
+    "text": "a,b@c.nl",
+    "valid": false,
+    "why": "a comma in the local part"
+   }
+  ],
+  "url": [
+   {
+    "text": "https://example.org",
+    "valid": true,
+    "why": "https"
+   },
+   {
+    "text": "http://example.org/pad?x=1#y",
+    "valid": true,
+    "why": "path, query and fragment"
+   },
+   {
+    "text": "https://sub.example.org:8080/a",
+    "valid": true,
+    "why": "port"
+   },
+   {
+    "text": "https://example.org/a b",
+    "valid": false,
+    "why": "a space in the path"
+   },
+   {
+    "text": "example.org",
+    "valid": false,
+    "why": "no scheme"
+   },
+   {
+    "text": "ftp://example.org",
+    "valid": false,
+    "why": "only http and https"
+   },
+   {
+    "text": "javascript:alert(1)",
+    "valid": false,
+    "why": "a script URL"
+   },
+   {
+    "text": "data:text/html,x",
+    "valid": false,
+    "why": "a data URL"
+   },
+   {
+    "text": "//example.org",
+    "valid": false,
+    "why": "scheme-relative"
+   },
+   {
+    "text": "https://",
+    "valid": false,
+    "why": "no host"
+   },
+   {
+    "text": "https://x",
+    "valid": false,
+    "why": "a host needs a dot"
+   },
+   {
+    "text": "https:// x.nl",
+    "valid": false,
+    "why": "a space after the scheme"
+   },
+   {
+    "text": "https://x.nl:99999999",
+    "valid": false,
+    "why": "a port of more than five digits"
+   },
+   {
+    "text": "HTTPS://example.org",
+    "valid": false,
+    "why": "the scheme is lower-case"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   }
+  ],
+  "phone": [
+   {
+    "text": "+31 6 12345678",
+    "valid": true,
+    "why": "international with spaces"
+   },
+   {
+    "text": "06-12345678",
+    "valid": true,
+    "why": "a hyphen"
+   },
+   {
+    "text": "(020) 123 4567",
+    "valid": true,
+    "why": "parentheses"
+   },
+   {
+    "text": "0612345678",
+    "valid": true,
+    "why": "plain digits"
+   },
+   {
+    "text": "+31612345678",
+    "valid": true,
+    "why": "international, no spaces"
+   },
+   {
+    "text": "+1 (555) 123-4567",
+    "valid": true,
+    "why": "North American style"
+   },
+   {
+    "text": "020.123.4567",
+    "valid": true,
+    "why": "dots"
+   },
+   {
+    "text": "abc",
+    "valid": false,
+    "why": "letters"
+   },
+   {
+    "text": "123",
+    "valid": false,
+    "why": "too short"
+   },
+   {
+    "text": "123456",
+    "valid": false,
+    "why": "six digits are too few"
+   },
+   {
+    "text": "1234567",
+    "valid": true,
+    "why": "seven digits are enough"
+   },
+   {
+    "text": "123456789012345",
+    "valid": true,
+    "why": "fifteen digits are the limit"
+   },
+   {
+    "text": "1234567890123456",
+    "valid": false,
+    "why": "sixteen digits are too many"
+   },
+   {
+    "text": "++31612345678",
+    "valid": false,
+    "why": "two plus signs"
+   },
+   {
+    "text": "0031+612345678",
+    "valid": false,
+    "why": "a plus that is not first"
+   },
+   {
+    "text": "06/12345678",
+    "valid": false,
+    "why": "a slash"
+   },
+   {
+    "text": "06 1234 abc",
+    "valid": false,
+    "why": "letters among digits"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   },
+   {
+    "text": "+",
+    "valid": false,
+    "why": "a plus alone"
+   },
+   {
+    "text": " 0612345678",
+    "valid": false,
+    "why": "leading space"
+   }
+  ],
+  "postcode-nl": [
+   {
+    "text": "1234 AB",
+    "valid": true,
+    "why": "with a space"
+   },
+   {
+    "text": "1234AB",
+    "valid": true,
+    "why": "without a space"
+   },
+   {
+    "text": "1234 ab",
+    "valid": true,
+    "why": "lower-case letters"
+   },
+   {
+    "text": "9999 ZZ",
+    "valid": true,
+    "why": "the highest"
+   },
+   {
+    "text": "1000 AA",
+    "valid": true,
+    "why": "the lowest"
+   },
+   {
+    "text": "0123 AB",
+    "valid": false,
+    "why": "may not start with 0"
+   },
+   {
+    "text": "1234 A",
+    "valid": false,
+    "why": "one letter"
+   },
+   {
+    "text": "1234 ABC",
+    "valid": false,
+    "why": "three letters"
+   },
+   {
+    "text": "123 AB",
+    "valid": false,
+    "why": "three digits"
+   },
+   {
+    "text": "12345 AB",
+    "valid": false,
+    "why": "five digits"
+   },
+   {
+    "text": "1234  AB",
+    "valid": false,
+    "why": "two spaces"
+   },
+   {
+    "text": " 1234 AB",
+    "valid": false,
+    "why": "leading space"
+   },
+   {
+    "text": "1234 SA",
+    "valid": false,
+    "why": "SA is not issued"
+   },
+   {
+    "text": "1234 SD",
+    "valid": false,
+    "why": "SD is not issued"
+   },
+   {
+    "text": "1234 SS",
+    "valid": false,
+    "why": "SS is not issued"
+   },
+   {
+    "text": "1234 sd",
+    "valid": false,
+    "why": "SD in lower case is not issued either"
+   },
+   {
+    "text": "1234 SB",
+    "valid": true,
+    "why": "SB is fine"
+   },
+   {
+    "text": "1234 AS",
+    "valid": true,
+    "why": "AS is fine"
+   },
+   {
+    "text": "",
+    "valid": false,
+    "why": "empty"
+   }
+  ]
+ }
+}

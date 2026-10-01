@@ -22,9 +22,22 @@ switch (result) {
 }
 ```
 
-The reading side only: the marker grammar, the ten field types with their rules, and
-the three-state result. Answers, validation, the package and sealing follow
-(FORM_INTAKE.md §12).
+Answers and validation work on top of that:
+
+```dart
+final answers = extractAnswers(published, submissionText);   // against the PUBLISHED form
+final issues = [
+  ...validateForm(published, answers, imageFacts: facts),     // pure, synchronous
+  ...templateTextIssues(publishedText, submissionText),       // consent text etc. intact?
+];
+if (formIssuesBlock(issues)) { /* an error: do not send / needs fixing */ }
+```
+
+Images are the one thing that needs I/O, so what is known about a file arrives as
+input (`FormImageFact`); without it an image is `image-unchecked`, never silently fine.
+The counters and patterns are pinned by `test/fixtures/form_vectors.json`.
+
+The package, sealing and the image probe follow (FORM_INTAKE.md §12).
 
 ## Working on it
 

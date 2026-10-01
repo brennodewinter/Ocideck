@@ -163,6 +163,34 @@ void main() {
     });
   });
 
+  group('isMultipleOfStep', () {
+    test('exact decimal arithmetic, counted from the base', () {
+      expect(
+        isMultipleOfStep('0,3', '0', '0,1'),
+        isTrue,
+        reason: 'not so in doubles',
+      );
+      expect(isMultipleOfStep('0.35', '0', '0.1'), isFalse);
+      expect(isMultipleOfStep('5', '1', '2'), isTrue);
+      expect(isMultipleOfStep('4', '1', '2'), isFalse);
+      expect(
+        isMultipleOfStep('1', '1', '2'),
+        isTrue,
+        reason: 'the base itself',
+      );
+      expect(isMultipleOfStep('-10', '0', '5'), isTrue);
+      expect(isMultipleOfStep('-12', '0', '5'), isFalse);
+      expect(
+        isMultipleOfStep('-1', '1', '2'),
+        isTrue,
+        reason: 'below the base',
+      );
+      expect(isMultipleOfStep('0', '0', '7'), isTrue);
+      expect(isMultipleOfStep('1,5', '0,5', '0,5'), isTrue);
+      expect(isMultipleOfStep('0,0000001', '0', '0,0000001'), isTrue);
+    });
+  });
+
   group('isValidCalendarDate (§4.7)', () {
     test('real dates in the canonical shape', () {
       for (final ok in [

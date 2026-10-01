@@ -3,15 +3,24 @@
 /// desktop app, the web form shell and a standalone Dart server can share it.
 ///
 /// Design: `docs/design/FORM_INTAKE.md` in the OciDeck repository. What exists so
-/// far is the reading side: [parseForm] turns a template into a [FormSpec] (§4.3,
-/// §4.4); answers, validation and the package come next.
+/// far: [parseForm] turns a template into a [FormSpec] (§4.3, §4.4); [parseAnswer]
+/// and [extractAnswers] read answers out of their zones; [validateAnswer] and
+/// [validateForm] judge them; [templateTextIssues] checks that the template-owned
+/// text of a submission is still the published one. The package, sealing and the
+/// image probe come next.
 library;
 
+export 'src/form_answer_safety.dart';
+export 'src/form_answers.dart';
 export 'src/form_blocks.dart';
 export 'src/form_field_types.dart';
 export 'src/form_issue.dart';
 export 'src/form_parser.dart' show parseForm;
+export 'src/form_patterns.dart';
 export 'src/form_rule_values.dart';
 export 'src/form_source.dart';
 export 'src/form_spec.dart';
+export 'src/form_template_text.dart';
+export 'src/form_validator.dart';
+export 'src/form_words.dart';
 export 'src/rules_version.dart';

@@ -85,7 +85,11 @@ All notable changes to OciDeck are documented in this file.
   Flutter, zodat de app, een webvormschil en een losse server dezelfde engine
   kunnen delen. Nog geen zichtbare functie — het pakket kan een formulier-
   sjabloon lezen (`parseForm`: markers, tien veldtypen met hun regels, alle
-  auteursfouten tegelijk) maar nog niet invullen of valideren. Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
+  auteursfouten tegelijk), antwoorden uitlezen en valideren (woord- en
+  tekentelling met een gedeeld vectorbestand, benoemde patronen, de
+  veiligheidsregels voor antwoorden, een inzending tegen het *gepubliceerde*
+  formulier) en controleren of de sjabloontekst van een inzending nog de
+  gepubliceerde is. Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
   regels voor `packages/`) en `make test-packages` (tests + dekkingsvloer; onderdeel
   van `make check`), en de SBOM kent voortaan een eigen groep voor first-party
   pakketten.
