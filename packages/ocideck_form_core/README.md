@@ -83,6 +83,20 @@ review.images;            // the photos as they are to be kept — cleaned again
 review.strippedAgain;     // where the client had left something in
 ```
 
+What the organiser keeps about each submission is one Markdown table, `overview.md`
+(§7.3). The register never loses what a person wrote in it — a table it cannot read is
+reported as damaged and left alone:
+
+```dart
+final register = FormRegister.empty(spec)
+    .withSubmission(review, received: '2026-10-05')!;   // null: already in it
+File('overview.md').writeAsStringSync(register.toMarkdown());
+switch (FormRegister.parse(text)) {
+  case FormRegisterParsed(:final register): // rows, status, withdrawal, deletion
+  case FormRegisterDamaged(:final reason, :final line): // do not write over it
+}
+```
+
 Sealing (`age`) and the signed bundle follow (FORM_INTAKE.md §12).
 
 ## Working on it
