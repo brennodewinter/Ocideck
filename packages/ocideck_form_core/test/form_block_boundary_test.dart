@@ -10,6 +10,7 @@ int? length(List<String> lines) =>
     formBlockLength((i) => i < lines.length ? lines[i] : null);
 
 void main() {
+  splitTests();
   group('formBlockKind', () {
     test('the three kinds that start a block', () {
       expect(formBlockKind('<!-- form id=f -->'), FormBlockKind.header);
@@ -256,6 +257,74 @@ Label
         b.write('<!-- /field id=f$i -->\n');
       }
       expectAgreement(b.toString());
+    });
+  });
+}
+
+void splitTests() {
+  group('splitFieldBlock', () {
+    test('label and answer, without the three marker lines', () {
+      final parts = splitFieldBlock(
+        '<!-- field id=a type=prose -->\n**Naam**\n> uitleg\n<!-- answer -->\nregel een\n\nregel twee\n<!-- /field id=a -->',
+      );
+      expect(parts.label, '**Naam**\n> uitleg');
+      expect(parts.answer, 'regel een\n\nregel twee');
+    });
+
+    test('an empty answer and an empty label', () {
+      final a = splitFieldBlock(
+        '<!-- field id=a type=text -->\nL\n<!-- answer -->\n<!-- /field id=a -->',
+      );
+      expect(a.label, 'L');
+      expect(a.answer, '');
+      final b = splitFieldBlock(
+        '<!-- field id=a type=text -->\n<!-- answer -->\nx\n<!-- /field id=a -->',
+      );
+      expect(b.label, '');
+      expect(b.answer, 'x');
+    });
+
+    test('an answer marker inside a fence in the label is label text', () {
+      final parts = splitFieldBlock(
+        '<!-- field id=a type=text -->\n```\n<!-- answer -->\n```\n<!-- answer -->\nx\n<!-- /field id=a -->',
+      );
+      expect(parts.label, '```\n<!-- answer -->\n```');
+      expect(parts.answer, 'x');
+    });
+
+    test('markers inside the answer stay in the answer', () {
+      final parts = splitFieldBlock(
+        '<!-- field id=a type=prose -->\nL\n<!-- answer -->\na\n<!-- answer -->\nb\n<!-- /field id=a -->',
+      );
+      expect(parts.answer, 'a\n<!-- answer -->\nb');
+    });
+
+    test('no answer marker: everything between the markers is label', () {
+      final parts = splitFieldBlock(
+        '<!-- field id=a type=text -->\nL\n<!-- /field id=a -->',
+      );
+      expect(parts.label, 'L');
+      expect(parts.answer, '');
+    });
+
+    test(
+      'a block without a closing marker still splits, and nothing throws',
+      () {
+        final parts = splitFieldBlock(
+          '<!-- field id=a type=text -->\nL\n<!-- answer -->\nx',
+        );
+        expect(parts.label, 'L');
+        expect(parts.answer, 'x');
+        expect(splitFieldBlock('').label, '');
+        expect(splitFieldBlock('<!-- field id=a type=text -->').answer, '');
+      },
+    );
+
+    test('CRLF', () {
+      final parts = splitFieldBlock(
+        '<!-- field id=a type=text -->\r\nL\r\n<!-- answer -->\r\nx\r\n<!-- /field id=a -->',
+      );
+      expect(parts.answer, 'x\r');
     });
   });
 }

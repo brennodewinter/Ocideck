@@ -11,6 +11,8 @@
 /// and attributes, or says precisely why the line is not one.
 library;
 
+import 'form_source.dart' show FormFenceTracker;
+
 /// The six marker names. [wire] is the spelling on disk.
 enum FormMarkerName {
   form('form'),
@@ -314,3 +316,40 @@ int? _lengthUntil(
 
 String _withoutCr(String line) =>
     line.endsWith('\r') ? line.substring(0, line.length - 1) : line;
+
+/// A field block taken apart for display: the template-owned [label] (label,
+/// guidance, and for a consent field the consent text) and the [answer] zone.
+typedef FormFieldBlockParts = ({String label, String answer});
+
+/// Splits the text of one field block — the lines from its `field` marker to its
+/// `/field` marker — into label and answer, without the three marker lines.
+///
+/// The answer marker is the first `answer` marker that is not inside fenced code
+/// (a fence in the label hides it, as everywhere else); an answer zone is
+/// everything after it up to the closing marker. A block with no answer marker
+/// has an empty answer. Never throws.
+FormFieldBlockParts splitFieldBlock(String block) {
+  final lines = block.split('\n');
+  var end = lines.length;
+  if (end > 1) {
+    final last = scanMarkerLine(_withoutCr(lines.last));
+    if (last is FoundMarker && last.name == FormMarkerName.fieldEnd) end--;
+  }
+  final fence = FormFenceTracker();
+  var answerAt = -1;
+  for (var i = 1; i < end; i++) {
+    if (fence.isCode(_withoutCr(lines[i]))) continue;
+    final scan = scanMarkerLine(_withoutCr(lines[i]));
+    if (scan is FoundMarker && scan.name == FormMarkerName.answer) {
+      answerAt = i;
+      break;
+    }
+  }
+  if (answerAt < 0) {
+    return (label: lines.sublist(1.clamp(0, end), end).join('\n'), answer: '');
+  }
+  return (
+    label: lines.sublist(1, answerAt).join('\n'),
+    answer: lines.sublist(answerAt + 1, end).join('\n'),
+  );
+}
