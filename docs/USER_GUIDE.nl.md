@@ -5873,6 +5873,12 @@ schreef. **Ongedaan maken** draait per vraag een heel woord terug, en **Visueel*
 sluitmarker is weg — kan niet worden ingevuld; de pagina zegt waarom en biedt aan
 naar de bron te gaan.
 
+**Wil je het proberen?** In de repository staat een voorbeeldformulier in `examples/forms/`
+(`recept.nl.md`, `recept.en.md`): een receptinzending met elk soort vraag, ook foto's en een
+toestemmingsvakje. Kopieer het, open de kopie en hij opent op **Invullen**. Open eerst één keer het
+lege origineel (in dezelfde sessie), zodat OciDeck het gepubliceerde formulier onthoudt voor de
+volgende stap.
+
 **Je inzending opslaan.** Onderaan de pagina maakt **Inzending opslaan als zip…** één zipbestand
 met je antwoorden en foto's, dat je naar de organisator mailt. De knop is er altijd: staat er nog
 iets open, dan laat hij zien wat in plaats van op te slaan. In de zip zitten `submission.md` (je

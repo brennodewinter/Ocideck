@@ -10,6 +10,10 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Een **voorbeeldformulier** om de formulierfunctie mee uit te proberen: `examples/forms/recept.nl.md` en
+  `recept.en.md` (een receptinzending met alle soorten vragen, foto's en toestemming). Een test houdt ze
+  bruikbaar — geen fouten of waarschuwingen, invulbaar tot en met de poort — en de twee talen op dezelfde
+  regels.
 - Een organisator kan **inzendingen binnenhalen**: de nieuwe uitbreiding *Formulieren en inzendingen*
   (Instellingen → Uitbreidingen, standaard uit) geeft het beginscherm een knop **Inzendingen**. Daar kies je
   een werkmap, voeg je het formulier toe zoals je het publiceerde en haal je de `.zip`-pakketten binnen die
