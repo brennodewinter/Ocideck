@@ -72,6 +72,17 @@ switch (readFormPackage(zip)) {
 }
 ```
 
+The organiser judges what arrives against the **published** form, never the rules in the
+submission itself (FORM_INTAKE.md §4.11 run 3, §7.2):
+
+```dart
+final review = reviewFormPackage(opened, publishedTexts);   // opened: FormPackageOpened
+review.acceptable;        // no error; warnings only inform
+review.problems;          // the form, the template text, the consent record, each field
+review.images;            // the photos as they are to be kept — cleaned again
+review.strippedAgain;     // where the client had left something in
+```
+
 Sealing (`age`) and the signed bundle follow (FORM_INTAKE.md §12).
 
 ## Working on it

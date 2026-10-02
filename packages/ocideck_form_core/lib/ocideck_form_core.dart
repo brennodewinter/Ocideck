@@ -23,6 +23,7 @@ export 'src/form_issue.dart';
 export 'src/form_parser.dart' show parseForm;
 export 'src/form_package.dart';
 export 'src/form_patterns.dart';
+export 'src/form_review.dart';
 export 'src/form_rule_values.dart';
 export 'src/form_source.dart';
 export 'src/form_spec.dart';
