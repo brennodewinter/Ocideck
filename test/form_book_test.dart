@@ -124,8 +124,9 @@ void main() {
         'laid-out',
       ]);
     }
-    if (withdrawn)
+    if (withdrawn) {
       await setSubmissionWithdrawal(workspace, sidOf(n), '2026-11-02');
+    }
   }
 
   Future<FormBookOutcome> compile({
