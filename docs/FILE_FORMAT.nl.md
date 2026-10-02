@@ -4301,3 +4301,69 @@ dezelfde allow-list-opschoning als elke andere tekening:
   geen platformimplementatie kent; macOS, Android, iOS en de webversie (die via
   de gebundelde `mermaid.min.js` rechtstreeks tekent) tekenen allemaal. Voor de
   **PDF** ligt die verzameling weer anders — zie KNOWN_LIMITATIONS.nl.md.
+
+
+### 14.14 Formulier — de markers `<!-- form -->`, `<!-- field -->` en `<!-- notice -->` *(toegevoegd 2026-10-02)*
+
+Een formulier is ook geen nieuw soort bestand. Het is een gewoon document — platte
+`.md`, geen front-matter-sleutel, geen `kind:`-marker — waarin HTML-commentaar de
+regels draagt en de plekken waar een antwoord komt:
+
+````markdown
+<!-- form id=kookboek version=1 -->
+# Inzending
+
+<!-- notice -->
+We bewaren je gegevens tot de oproep sluit.
+<!-- /notice -->
+
+<!-- field id=naam type=text required max-chars=60 -->
+**Naam**
+<!-- answer -->
+Sari
+<!-- /field id=naam -->
+````
+
+Dit is de positie van §14.10, en het is de eerlijke: de **syntaxis** (een
+HTML-commentaar) is niet van OciDeck, de **betekenis** wel, en **geen enkele
+sleutel draagt de naam van OciDeck** — de markers hebben geen voorvoegsel, net als
+`<!-- toc -->`. Elke andere Markdown-lezer toont het label, de aanwijzing en het
+antwoord als gewone tekst en ziet nooit een marker; wat hij mist is *de
+controle*, nooit de tekst. De regel van §14.1 over vocabulaires wordt niet
+verbogen: niets hier wordt voorgesteld als uitwisselbaar met Pandoc of Quarto.
+
+- **Markernamen:** `form` (één keer, de eerste marker van het bestand), `field` met
+  zijn afsluiting `/field id=…`, `answer` (begint de antwoordzone), `notice` met
+  `/notice`. Hoofdlettergevoelig, geen dubbele punt, één commentaar per regel,
+  hoogstens drie spaties inspringing. Een regel die *bijna* een marker is, meldt de
+  controle in plaats van hem te negeren — een tikfout die een regel tot gewoon
+  commentaar maakt, zou het formulier ongemerkt verzwakken.
+- **Veldtypen en regels** (`text`, `prose`, `number`, `date`, `choice`,
+  `multichoice`, `list`, `table`, `image`, `consent`; `required`, woord- en
+  tekenlimieten, opties, beeldregels) zijn attributen van de `field`-marker.
+- **De antwoordzone** is wat tussen `<!-- answer -->` en bijbehorende
+  `<!-- /field id=… -->` staat; alleen dat deel verandert een invuller. Alles
+  daarbuiten — de inleiding, de notice, elk label, **de toestemmingstekst** en de
+  markers zelf — hoort bij het sjabloon en wordt bij het controleren van een
+  inzending byte voor byte vergeleken met het gepubliceerde formulier.
+- **Een formulier dat niet ontleedt is geen formulier.** Een niet-gesloten veld of
+  een dubbele id levert helemaal geen formulierblokken op: OciDeck toont dan de
+  ruwe markers en valt terug op de bronmodus, zodat de auteur ziet wat er mis is
+  in plaats van tekst te verliezen.
+
+**In OciDeck's eigen oppervlakken** zouden de commentaren niet vanzelf verdwijnen —
+de lezer tekende elke `<!-- field … -->` als alinea en de visuele editor ging uit
+(`rawHtml`). Een geldig formulier doorloopt daarom dezelfde keten als de
+pentestblokken: de lezer en elke export behalve `.md` laten de markerregels weg en
+houden label en antwoord; de visuele editor draagt de `form`-regel, een notice en
+een heel veld elk als **één atomaire embed**, alleen-lezen getoond, met hun bron
+byte-gelijk door een rondgang door de rijke-tekstlaag (ook voor een antwoord met
+`##`, `1.` of een backslash — de uitvoernormalisatie slaat die regels over); de
+`.md`-export houdt de markers, want die zijn bron. De visuele editor bewaart de
+lege regels rond een blok **niet** (hij schrijft er eigen), dus een formulier daar
+opslaan telt als het wijzigen van sjabloontekst; de invulweergave, die alleen binnen
+antwoordzones schrijft, is de weg om er een te beantwoorden.
+
+Ontwerp, grammatica, veldtypen, regelsemantiek en de validatiecodes:
+`docs/design/FORM_INTAKE.md` §4. De referentieparser is het losse pakket
+`packages/ocideck_form_core`.

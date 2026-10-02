@@ -93,6 +93,19 @@ All notable changes to OciDeck are documented in this file.
   regels voor `packages/`) en `make test-packages` (tests + dekkingsvloer; onderdeel
   van `make check`), en de SBOM kent voortaan een eigen groep voor first-party
   pakketten.
+- Een formulierdocument (ontwerp: `docs/design/FORM_INTAKE.md`) is nu in OciDeck
+  zelf leesbaar zonder dat de markers zichtbaar zijn. Voor andere Markdown-lezers
+  waren `<!-- form -->`, `<!-- field -->` en `<!-- notice -->` al onzichtbaar
+  commentaar; OciDeck's eigen lezer toonde ze als alinea en de visuele editor
+  viel er terug op brontekst. Nu laat de lezer label, antwoord en notice zien
+  zonder marker, tekent de visuele editor de kop, de notice en elk veld als één
+  alleen-lezen blok waarvan de bron byte-gelijk door een rondgang komt (ook een
+  antwoord met `##`, `1.` of een backslash), en laten alle exports behalve `.md`
+  de markers weg — `.md` bewaart ze, want die zijn bron. Een formulier dat niet
+  klopt (een veld zonder sluitmarker) blijft zichtbaar kapot in plaats van stil
+  iets te verliezen. De rijke-tekstlaag schrijft de lege regels om een blok
+  zelf; een formulier daar opslaan telt daarom als het wijzigen van sjabloontekst.
+  Het formaat staat in FILE_FORMAT.md §14.14. Het invullen zelf volgt.
 - Documenttijdlijnen beginnen voortaan met **Datum** in plaats van **Tijd** en
   bieden in de eerste kolom aparte keuzes voor een datum of een datum met tijd.
   Een datum blijft zonevrij; een exact tijdstip wordt als ISO-8601 UTC bewaard
