@@ -2,7 +2,9 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_quill/markdown_quill.dart';
 
+import '../services/form_document_blocks.dart';
 import 'footnote_embed_syntax.dart';
+import 'form_block_embed_syntax.dart';
 import 'image_embed_syntax.dart';
 import 'list_block_embed_syntax.dart';
 import 'markdown_paste_cleanup.dart';
@@ -51,6 +53,9 @@ class MarkdownQuillCodec {
       // slokt die het commentaar op.
       PentestFindingHeadSyntax(),
       PentestWholeBlockSyntax(),
+      // Een formulierblok (kop, notice, heel veld) is één atomaire embed; de
+      // grens woont in `packages/ocideck_form_core`. Ook vóór de HTML-regel.
+      FormBlockSyntax(),
       TocMarkerSyntax(),
       // Vóór de standaard-fenceregel: zonder deze regel werd een
       // ```mermaid-fence een gewoon codeblok en tekende de visuele editor
@@ -72,6 +77,7 @@ class MarkdownQuillCodec {
       EmbeddableTimelineTable.timelineType:
           EmbeddableTimelineTable.fromMdSyntax,
       EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.fromMdSyntax,
+      EmbeddableFormBlock.blockType: EmbeddableFormBlock.fromMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.fromMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.fromMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.fromMdSyntax,
@@ -84,6 +90,7 @@ class MarkdownQuillCodec {
     customEmbedHandlers: {
       EmbeddableTimelineTable.timelineType: EmbeddableTimelineTable.toMdSyntax,
       EmbeddablePentestBlock.blockType: EmbeddablePentestBlock.toMdSyntax,
+      EmbeddableFormBlock.blockType: EmbeddableFormBlock.toMdSyntax,
       EmbeddableTable.tableType: EmbeddableTable.toMdSyntax,
       EmbeddableToc.tocType: EmbeddableToc.toMdSyntax,
       EmbeddableMermaid.mermaidType: EmbeddableMermaid.toMdSyntax,
@@ -132,7 +139,39 @@ class MarkdownQuillCodec {
 /// structuur: de backslash verwijderen splitst één cel in twee. Tabelregels
 /// reizen daarom via de opslagnormalisatie, alle andere regels via de bestaande
 /// schermnormalisatie.
+///
+/// De regels van een formulierblok (FORM_INTAKE.md §4.9) gaan er helemaal
+/// buiten: die zijn atomair en horen byte-gelijk terug te komen. Zonder die
+/// uitzondering maakte deze normalisatie van een antwoord `\*` een `*`, haalde ze
+/// een zachte koppelteken uit een label en schreef ze een CRLF om — en een label
+/// dat verandert is sjabloontekst die niet meer overeenkomt met het gepubliceerde
+/// formulier, dus een inzending die de organisator afwijst.
 String _normalizeQuillOutput(String raw) {
+  final scan = scanFormBlocks(raw);
+  if (scan.isEmpty) return _normalizeProse(raw);
+
+  final lines = raw.split('\n');
+  final out = <String>[];
+  final prose = <String>[];
+  void flushProse() {
+    if (prose.isEmpty) return;
+    out.add(_normalizeProse(prose.join('\n')));
+    prose.clear();
+  }
+
+  for (var i = 0; i < lines.length; i++) {
+    if (scan.isAtomicLine(i)) {
+      flushProse();
+      out.add(lines[i]);
+    } else {
+      prose.add(lines[i]);
+    }
+  }
+  flushProse();
+  return out.join('\n');
+}
+
+String _normalizeProse(String raw) {
   final stored = normalizeRichTextMarkdownForStorage(raw);
   return stored
       .split('\n')
