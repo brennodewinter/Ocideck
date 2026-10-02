@@ -827,6 +827,38 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Status gewijzigd naar {status}.': 'Status changed to {status}.',
+  'Intrekking opgeslagen.': 'Withdrawal saved.',
+  'Intrekking ongedaan gemaakt.': 'Withdrawal undone.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Submission deleted; the record remains.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Submission deleted, but the register could not be updated. Edit overview.md by hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'The submission was not found in the workspace.',
+  'De inzending kon niet worden verwijderd.':
+      'The submission could not be deleted.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'The register cannot be read. Repair overview.md; nothing was changed.',
+  'Het register kon niet worden bijgewerkt.':
+      'The register could not be updated.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'This change could not be made: the submission is not in the register.',
+  'Status wijzigen': 'Change status',
+  'Intrekking ongedaan maken': 'Undo withdrawal',
+  'Intrekken…': 'Withdraw…',
+  'Verwijderen…': 'Delete…',
+  'Inzending intrekken': 'Withdraw submission',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Enter the day on which the respondent withdrew the submission. A withdrawn submission never goes into the book.',
+  'Dag (jjjj-mm-dd)': 'Day (yyyy-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Invalid day. Use year-month-day, for example {voorbeeld}.',
+  'Inzending verwijderen': 'Delete submission',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'The answers, the working copy and the photos of this submission are erased from the workspace. Only a minimal record remains: the number, the days of receipt and consent, and the status. This cannot be undone.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Also kept, as the form announced beforehand: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'There is something wrong with this submission.',
   'Verplicht, maar leeg gelaten.': 'Required, but left empty.',

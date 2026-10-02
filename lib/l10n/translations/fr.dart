@@ -667,6 +667,38 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Status gewijzigd naar {status}.': 'Statut changé en {status}.',
+  'Intrekking opgeslagen.': 'Retrait enregistré.',
+  'Intrekking ongedaan gemaakt.': 'Retrait annulé.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Envoi supprimé ; la trace reste.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Envoi supprimé, mais le registre n’a pas pu être mis à jour. Modifiez overview.md à la main.',
+  'De inzending is niet gevonden in de werkmap.':
+      'L’envoi n’a pas été trouvé dans le dossier de travail.',
+  'De inzending kon niet worden verwijderd.':
+      'L’envoi n’a pas pu être supprimé.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Le registre ne peut pas être lu. Réparez overview.md ; rien n’a été modifié.',
+  'Het register kon niet worden bijgewerkt.':
+      'Le registre n’a pas pu être mis à jour.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Cette modification n’a pas pu être faite : l’envoi n’est pas dans le registre.',
+  'Status wijzigen': 'Changer le statut',
+  'Intrekking ongedaan maken': 'Annuler le retrait',
+  'Intrekken…': 'Retirer…',
+  'Verwijderen…': 'Supprimer…',
+  'Inzending intrekken': 'Retirer l’envoi',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Saisissez le jour où l’expéditeur a retiré l’envoi. Un envoi retiré n’entre jamais dans le livre.',
+  'Dag (jjjj-mm-dd)': 'Jour (aaaa-mm-jj)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Jour non valide. Utilisez année-mois-jour, par exemple {voorbeeld}.',
+  'Inzending verwijderen': 'Supprimer l’envoi',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Les réponses, la copie de travail et les photos de cet envoi sont effacées du dossier de travail. Il ne reste qu’une trace minimale : le numéro, les jours de réception et de consentement, et le statut. Cette action est irréversible.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Reste aussi ce que le formulaire avait annoncé d’avance : {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Il y a un problème avec cet envoi.',
   'Verplicht, maar leeg gelaten.': 'Obligatoire, mais laissé vide.',

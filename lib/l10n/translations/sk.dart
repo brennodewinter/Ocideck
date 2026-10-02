@@ -1633,6 +1633,37 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Status gewijzigd naar {status}.': 'Stav zmenený na {status}.',
+  'Intrekking opgeslagen.': 'Stiahnutie uložené.',
+  'Intrekking ongedaan gemaakt.': 'Stiahnutie vrátené späť.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Odoslanie zmazané; záznam zostáva.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Odoslanie zmazané, ale register sa nepodarilo aktualizovať. Upravte overview.md ručne.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Odoslanie sa v pracovnom priečinku nenašlo.',
+  'De inzending kon niet worden verwijderd.': 'Odoslanie sa nepodarilo zmazať.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Register nemožno prečítať. Opravte overview.md; nič sa nezmenilo.',
+  'Het register kon niet worden bijgewerkt.':
+      'Register sa nepodarilo aktualizovať.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Túto zmenu sa nepodarilo vykonať: odoslanie nie je v registri.',
+  'Status wijzigen': 'Zmeniť stav',
+  'Intrekking ongedaan maken': 'Vrátiť stiahnutie späť',
+  'Intrekken…': 'Stiahnuť…',
+  'Verwijderen…': 'Zmazať…',
+  'Inzending intrekken': 'Stiahnuť odoslanie',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Zadajte deň, keď odosielateľ odoslanie stiahol. Stiahnuté odoslanie sa nikdy nedostane do knihy.',
+  'Dag (jjjj-mm-dd)': 'Deň (rrrr-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Neplatný deň. Použite rok-mesiac-deň, napríklad {voorbeeld}.',
+  'Inzending verwijderen': 'Zmazať odoslanie',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Odpovede, pracovná kópia a fotky tohto odoslania sa z pracovného priečinka zmažú. Zostane len minimálny záznam: číslo, dni prijatia a súhlasu a stav. Nedá sa to vrátiť späť.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Zostáva aj to, čo formulár vopred oznámil: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'S týmto odoslaním nie je niečo v poriadku.',
   'Verplicht, maar leeg gelaten.': 'Povinné, ale ponechané prázdne.',

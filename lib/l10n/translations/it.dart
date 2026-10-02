@@ -664,6 +664,38 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Status gewijzigd naar {status}.': 'Stato cambiato in {status}.',
+  'Intrekking opgeslagen.': 'Ritiro salvato.',
+  'Intrekking ongedaan gemaakt.': 'Ritiro annullato.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Invio eliminato; il record resta.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Invio eliminato, ma non è stato possibile aggiornare il registro. Modifica overview.md a mano.',
+  'De inzending is niet gevonden in de werkmap.':
+      'L’invio non è stato trovato nella cartella di lavoro.',
+  'De inzending kon niet worden verwijderd.':
+      'Non è stato possibile eliminare l’invio.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Il registro non può essere letto. Ripara overview.md; non è stato cambiato nulla.',
+  'Het register kon niet worden bijgewerkt.':
+      'Non è stato possibile aggiornare il registro.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Non è stato possibile applicare la modifica: l’invio non è nel registro.',
+  'Status wijzigen': 'Cambia stato',
+  'Intrekking ongedaan maken': 'Annulla il ritiro',
+  'Intrekken…': 'Ritira…',
+  'Verwijderen…': 'Elimina…',
+  'Inzending intrekken': 'Ritira l’invio',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Inserisci il giorno in cui chi ha inviato ha ritirato l’invio. Un invio ritirato non entra mai nel libro.',
+  'Dag (jjjj-mm-dd)': 'Giorno (aaaa-mm-gg)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Giorno non valido. Usa anno-mese-giorno, per esempio {voorbeeld}.',
+  'Inzending verwijderen': 'Elimina l’invio',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Le risposte, la copia di lavoro e le foto di questo invio vengono cancellate dalla cartella di lavoro. Resta solo un record minimo: il numero, i giorni di ricezione e di consenso e lo stato. Non si può annullare.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Resta anche quanto il modulo aveva annunciato in anticipo: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'C’è qualcosa che non va in questo invio.',
   'Verplicht, maar leeg gelaten.': 'Obbligatorio, ma lasciato vuoto.',

@@ -1630,6 +1630,38 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Status gewijzigd naar {status}.': 'Status gänderet uf {status}.',
+  'Intrekking opgeslagen.': 'Zrugzieh gspeicheret.',
+  'Intrekking ongedaan gemaakt.': 'Zrugzieh rückgängig gmacht.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Iischickig glöscht; dr Iitrag blibt.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Iischickig glöscht, aber s Register het nid chönne aktualisiert wärde. Bearbeit overview.md vo Hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'D Iischickig isch im Arbeitsordner nid gfunde worde.',
+  'De inzending kon niet worden verwijderd.':
+      'D Iischickig het nid chönne glöscht wärde.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'S Register cha nid gläse wärde. Reparier overview.md; es isch nüt gänderet worde.',
+  'Het register kon niet worden bijgewerkt.':
+      'S Register het nid chönne aktualisiert wärde.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Die Änderig isch nid möglech gsi: D Iischickig staht nid im Register.',
+  'Status wijzigen': 'Status ändere',
+  'Intrekking ongedaan maken': 'Zrugzieh rückgängig mache',
+  'Intrekken…': 'Zrugzieh…',
+  'Verwijderen…': 'Lösche…',
+  'Inzending intrekken': 'Iischickig zrugzieh',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Gib dr Tag y, a däm dr Iisänder d Iischickig zrugzoge het. E zrugzogeni Iischickig chunnt nie is Buech.',
+  'Dag (jjjj-mm-dd)': 'Tag (jjjj-mm-tt)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Ungültige Tag. Bruuch Johr-Monet-Tag, zum Byspil {voorbeeld}.',
+  'Inzending verwijderen': 'Iischickig lösche',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'D Antworte, d Arbeitskopie und d Foti vo dere Iischickig wärde us em Arbeitsordner glöscht. Nume e minimale Iitrag blibt: d Nummere, d Täg vom Iigang und vo dr Iiwilligung und dr Status. Das cha me nid rückgängig mache.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Au blibt stah, was s Formular vorhär aagkündigt het: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Mit dere Iischickig stimmt öppis nid.',
   'Verplicht, maar leeg gelaten.': 'Pflicht, aber läär glah.',

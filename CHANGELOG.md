@@ -10,6 +10,11 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- In de Inbox kun je een inzending nu **een andere status geven**, **intrekken** (met een dag; ongedaan maken kan)
+  en **verwijderen**. Verwijderen zegt eerst wat er wordt gewist en wat blijft — het minimale record plus de velden
+  die het formulier vooraf aankondigde — en kan niet ongedaan worden gemaakt. Een register dat niet te lezen is
+  wordt nooit overschreven, en verwijderen wacht er niet op: wat persoonlijk is gaat weg, en de melding zegt dat
+  de rij met de hand moet. 21 nieuwe zinnen in 30 talen.
 - De **Inbox** toont nu elke inzending als een regel — naam uit de overzichtskolommen van het formulier, status,
   dag van ontvangst en eventuele intrekking — en klapt open tot **wat er mis mee is**, in gewone woorden over de
   inzender ("90 woorden; minstens 150 nodig") en onder de naam van het veld. De punten worden telkens opnieuw

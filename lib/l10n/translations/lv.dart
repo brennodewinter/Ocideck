@@ -1625,6 +1625,36 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Status gewijzigd naar {status}.': 'Statuss nomainīts uz {status}.',
+  'Intrekking opgeslagen.': 'Atsaukums saglabāts.',
+  'Intrekking ongedaan gemaakt.': 'Atsaukums atcelts.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Iesūtījums dzēsts; ieraksts paliek.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Iesūtījums dzēsts, bet reģistru neizdevās atjaunināt. Pārlabojiet overview.md ar roku.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Iesūtījums darba mapē netika atrasts.',
+  'De inzending kon niet worden verwijderd.': 'Iesūtījumu neizdevās dzēst.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Reģistru nevar nolasīt. Salabojiet overview.md; nekas nav mainīts.',
+  'Het register kon niet worden bijgewerkt.': 'Reģistru neizdevās atjaunināt.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Šo izmaiņu neizdevās veikt: iesūtījuma nav reģistrā.',
+  'Status wijzigen': 'Mainīt statusu',
+  'Intrekking ongedaan maken': 'Atcelt atsaukumu',
+  'Intrekken…': 'Atsaukt…',
+  'Verwijderen…': 'Dzēst…',
+  'Inzending intrekken': 'Atsaukt iesūtījumu',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Ievadiet dienu, kad iesūtītājs atsauca iesūtījumu. Atsaukts iesūtījums nekad neiekļūst grāmatā.',
+  'Dag (jjjj-mm-dd)': 'Diena (gggg-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Nederīga diena. Izmantojiet gads-mēnesis-diena, piemēram, {voorbeeld}.',
+  'Inzending verwijderen': 'Dzēst iesūtījumu',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Šī iesūtījuma atbildes, darba kopija un fotoattēli tiek dzēsti no darba mapes. Paliek tikai minimāls ieraksts: numurs, saņemšanas un piekrišanas dienas un statuss. To nevar atcelt.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Paliek arī tas, ko veidlapa iepriekš paziņoja: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Ar šo iesūtījumu kaut kas nav kārtībā.',
   'Verplicht, maar leeg gelaten.': 'Obligāts, bet atstāts tukšs.',

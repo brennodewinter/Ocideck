@@ -1639,6 +1639,38 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Status gewijzigd naar {status}.': 'Status zmieniono na {status}.',
+  'Intrekking opgeslagen.': 'Wycofanie zapisano.',
+  'Intrekking ongedaan gemaakt.': 'Wycofanie cofnięto.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Zgłoszenie usunięto; zapis pozostaje.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Zgłoszenie usunięto, ale nie udało się zaktualizować rejestru. Zmień overview.md ręcznie.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Nie znaleziono zgłoszenia w folderze roboczym.',
+  'De inzending kon niet worden verwijderd.':
+      'Nie udało się usunąć zgłoszenia.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Nie można odczytać rejestru. Napraw overview.md; nic nie zmieniono.',
+  'Het register kon niet worden bijgewerkt.':
+      'Nie udało się zaktualizować rejestru.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Nie udało się wprowadzić tej zmiany: zgłoszenia nie ma w rejestrze.',
+  'Status wijzigen': 'Zmień status',
+  'Intrekking ongedaan maken': 'Cofnij wycofanie',
+  'Intrekken…': 'Wycofaj…',
+  'Verwijderen…': 'Usuń…',
+  'Inzending intrekken': 'Wycofaj zgłoszenie',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Wpisz dzień, w którym zgłaszający wycofał zgłoszenie. Wycofane zgłoszenie nigdy nie trafia do książki.',
+  'Dag (jjjj-mm-dd)': 'Dzień (rrrr-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Nieprawidłowy dzień. Użyj formatu rok-miesiąc-dzień, na przykład {voorbeeld}.',
+  'Inzending verwijderen': 'Usuń zgłoszenie',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Odpowiedzi, kopia robocza i zdjęcia tego zgłoszenia zostaną usunięte z folderu roboczego. Zostanie tylko minimalny zapis: numer, dni otrzymania i zgody oraz status. Tego nie można cofnąć.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Pozostaje też to, co formularz zapowiedział wcześniej: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Coś jest nie tak z tym zgłoszeniem.',
   'Verplicht, maar leeg gelaten.': 'Wymagane, ale pozostawione puste.',

@@ -1620,6 +1620,38 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Status gewijzigd naar {status}.': 'Olek muudetud: {status}.',
+  'Intrekking opgeslagen.': 'Tagasivõtmine salvestatud.',
+  'Intrekking ongedaan gemaakt.': 'Tagasivõtmine tühistatud.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Esitus kustutatud; kirje jääb alles.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Esitus kustutatud, kuid registrit ei õnnestunud uuendada. Muuda overview.md käsitsi.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Esitust ei leitud töökaustast.',
+  'De inzending kon niet worden verwijderd.':
+      'Esitust ei õnnestunud kustutada.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registrit ei saa lugida. Paranda overview.md; midagi ei muudetud.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registrit ei õnnestunud uuendada.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Seda muudatust ei saanud teha: esitust ei ole registris.',
+  'Status wijzigen': 'Muuda olekut',
+  'Intrekking ongedaan maken': 'Tühista tagasivõtmine',
+  'Intrekken…': 'Võta tagasi…',
+  'Verwijderen…': 'Kustuta…',
+  'Inzending intrekken': 'Võta esitus tagasi',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Sisesta päev, mil esitaja esituse tagasi võttis. Tagasi võetud esitus ei jõua kunagi raamatusse.',
+  'Dag (jjjj-mm-dd)': 'Päev (aaaa-kk-pp)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Kehtetu päev. Kasuta kujul aasta-kuu-päev, näiteks {voorbeeld}.',
+  'Inzending verwijderen': 'Kustuta esitus',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Selle esituse vastused, töökoopia ja fotod kustutatakse töökaustast. Alles jääb ainult minimaalne kirje: number, saabumise ja nõusoleku päevad ning olek. Seda ei saa tagasi võtta.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Alles jääb ka see, mida vorm ette teatas: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Selle esitusega on midagi valesti.',
   'Verplicht, maar leeg gelaten.': 'Kohustuslik, kuid jäetud tühjaks.',

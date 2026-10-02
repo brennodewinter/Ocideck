@@ -1629,6 +1629,38 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Status gewijzigd naar {status}.': 'Az állapot módosítva: {status}.',
+  'Intrekking opgeslagen.': 'A visszavonás mentve.',
+  'Intrekking ongedaan gemaakt.': 'A visszavonás visszavonva.',
+  'Inzending verwijderd; het record blijft staan.':
+      'A beküldés törölve; a bejegyzés megmarad.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'A beküldés törölve, de a nyilvántartást nem sikerült frissíteni. Szerkeszd az overview.md fájlt kézzel.',
+  'De inzending is niet gevonden in de werkmap.':
+      'A beküldés nem található a munkamappában.',
+  'De inzending kon niet worden verwijderd.':
+      'A beküldést nem sikerült törölni.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'A nyilvántartás nem olvasható. Javítsd az overview.md fájlt; semmi sem változott.',
+  'Het register kon niet worden bijgewerkt.':
+      'A nyilvántartást nem sikerült frissíteni.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Ezt a módosítást nem sikerült végrehajtani: a beküldés nincs a nyilvántartásban.',
+  'Status wijzigen': 'Állapot módosítása',
+  'Intrekking ongedaan maken': 'Visszavonás visszavonása',
+  'Intrekken…': 'Visszavonás…',
+  'Verwijderen…': 'Törlés…',
+  'Inzending intrekken': 'Beküldés visszavonása',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Add meg a napot, amikor a beküldő visszavonta a beküldést. A visszavont beküldés soha nem kerül be a könyvbe.',
+  'Dag (jjjj-mm-dd)': 'Nap (éééé-hh-nn)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Érvénytelen nap. Használd az év-hónap-nap alakot, például {voorbeeld}.',
+  'Inzending verwijderen': 'Beküldés törlése',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'A beküldés válaszai, munkapéldánya és fotói törlődnek a munkamappából. Csak egy minimális bejegyzés marad: a szám, a beérkezés és a hozzájárulás napja és az állapot. Ez nem vonható vissza.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Az is megmarad, amit az űrlap előre bejelentett: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Valami nincs rendben ezzel a beküldéssel.',
   'Verplicht, maar leeg gelaten.': 'Kötelező, de üresen hagyták.',

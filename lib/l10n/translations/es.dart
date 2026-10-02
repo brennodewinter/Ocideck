@@ -664,6 +664,37 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Status gewijzigd naar {status}.': 'Estado cambiado a {status}.',
+  'Intrekking opgeslagen.': 'Retirada guardada.',
+  'Intrekking ongedaan gemaakt.': 'Retirada deshecha.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Envío eliminado; el registro permanece.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Envío eliminado, pero no se pudo actualizar el registro. Edita overview.md a mano.',
+  'De inzending is niet gevonden in de werkmap.':
+      'No se encontró el envío en la carpeta de trabajo.',
+  'De inzending kon niet worden verwijderd.': 'No se pudo eliminar el envío.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'No se puede leer el registro. Repara overview.md; no se cambió nada.',
+  'Het register kon niet worden bijgewerkt.':
+      'No se pudo actualizar el registro.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'No se pudo hacer este cambio: el envío no está en el registro.',
+  'Status wijzigen': 'Cambiar estado',
+  'Intrekking ongedaan maken': 'Deshacer la retirada',
+  'Intrekken…': 'Retirar…',
+  'Verwijderen…': 'Eliminar…',
+  'Inzending intrekken': 'Retirar envío',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Introduce el día en que quien envió retiró el envío. Un envío retirado nunca entra en el libro.',
+  'Dag (jjjj-mm-dd)': 'Día (aaaa-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Día no válido. Usa año-mes-día, por ejemplo {voorbeeld}.',
+  'Inzending verwijderen': 'Eliminar envío',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Las respuestas, la copia de trabajo y las fotos de este envío se borran de la carpeta de trabajo. Solo queda un registro mínimo: el número, los días de recepción y consentimiento y el estado. No se puede deshacer.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'También permanece lo que el formulario anunció de antemano: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Hay algo que no va bien en este envío.',
   'Verplicht, maar leeg gelaten.': 'Obligatorio, pero se dejó vacío.',

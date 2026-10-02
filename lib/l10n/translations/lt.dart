@@ -1634,6 +1634,36 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Status gewijzigd naar {status}.': 'Būsena pakeista į {status}.',
+  'Intrekking opgeslagen.': 'Atsiėmimas išsaugotas.',
+  'Intrekking ongedaan gemaakt.': 'Atsiėmimas atšauktas.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Pateikimas ištrintas; įrašas lieka.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Pateikimas ištrintas, bet registro nepavyko atnaujinti. Redaguokite overview.md rankiniu būdu.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Pateikimo darbo aplanke nerasta.',
+  'De inzending kon niet worden verwijderd.': 'Pateikimo nepavyko ištrinti.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registro nepavyksta perskaityti. Pataisykite overview.md; niekas nepakeista.',
+  'Het register kon niet worden bijgewerkt.': 'Registro nepavyko atnaujinti.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Šio pakeitimo nepavyko atlikti: pateikimo nėra registre.',
+  'Status wijzigen': 'Keisti būseną',
+  'Intrekking ongedaan maken': 'Atšaukti atsiėmimą',
+  'Intrekken…': 'Atsiimti…',
+  'Verwijderen…': 'Ištrinti…',
+  'Inzending intrekken': 'Atsiimti pateikimą',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Įveskite dieną, kurią pateikėjas atsiėmė pateikimą. Atsiimtas pateikimas niekada nepatenka į knygą.',
+  'Dag (jjjj-mm-dd)': 'Diena (mmmm-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Netinkama diena. Naudokite metai-mėnuo-diena, pavyzdžiui, {voorbeeld}.',
+  'Inzending verwijderen': 'Ištrinti pateikimą',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Šio pateikimo atsakymai, darbo kopija ir nuotraukos ištrinami iš darbo aplanko. Lieka tik minimalus įrašas: numeris, gavimo ir sutikimo dienos bei būsena. To negalima atšaukti.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Taip pat lieka tai, ką forma paskelbė iš anksto: {velden}.',
   'Er klopt iets niet aan deze inzending.': 'Su šiuo pateikimu kažkas negerai.',
   'Verplicht, maar leeg gelaten.': 'Privaloma, bet palikta tuščia.',
   '{actual} woorden; minstens {min} nodig.':

@@ -1645,6 +1645,38 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Status gewijzigd naar {status}.': 'L-istatus inbidel għal {status}.',
+  'Intrekking opgeslagen.': 'L-irtirar inżamm.',
+  'Intrekking ongedaan gemaakt.': 'L-irtirar ġie mħassar.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Is-sottomissjoni tħassret; ir-rekord jibqa’.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Is-sottomissjoni tħassret, iżda r-reġistru ma setax jiġi aġġornat. Editja overview.md bl-idejn.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Is-sottomissjoni ma nstabitx fil-cartella tax-xogħol.',
+  'De inzending kon niet worden verwijderd.':
+      'Is-sottomissjoni ma setgħetx titħassar.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Ir-reġistru ma jistax jinqara. Irranġa overview.md; ma nbidel xejn.',
+  'Het register kon niet worden bijgewerkt.':
+      'Ir-reġistru ma setax jiġi aġġornat.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Din il-bidla ma setgħetx issir: is-sottomissjoni mhijiex fir-reġistru.',
+  'Status wijzigen': 'Biddel l-istatus',
+  'Intrekking ongedaan maken': 'Ħassar l-irtirar',
+  'Intrekken…': 'Irtira…',
+  'Verwijderen…': 'Ħassar…',
+  'Inzending intrekken': 'Irtira s-sottomissjoni',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Daħħal il-jum li fih min bagħat irtira s-sottomissjoni. Sottomissjoni rtirata qatt ma tidħol fil-ktieb.',
+  'Dag (jjjj-mm-dd)': 'Jum (ssss-xx-jj)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Jum invalidu. Uża sena-xahar-jum, pereżempju {voorbeeld}.',
+  'Inzending verwijderen': 'Ħassar is-sottomissjoni',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'It-tweġibiet, il-kopja tax-xogħol u r-ritratti ta’ din is-sottomissjoni jitħassru mill-cartella tax-xogħol. Jibqa’ biss rekord minimu: in-numru, il-jiem tal-wasla u tal-kunsens, u l-istatus. Dan ma jistax jitreġġa’ lura.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Jibqa’ wkoll dak li l-formola ħabbret minn qabel: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Hemm xi ħaġa żbaljata b’din is-sottomissjoni.',
   'Verplicht, maar leeg gelaten.': 'Meħtieġ, imma ħalla vojt.',

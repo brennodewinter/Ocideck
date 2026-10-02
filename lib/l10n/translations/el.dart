@@ -1652,6 +1652,38 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Status gewijzigd naar {status}.': 'Η κατάσταση άλλαξε σε {status}.',
+  'Intrekking opgeslagen.': 'Η απόσυρση αποθηκεύτηκε.',
+  'Intrekking ongedaan gemaakt.': 'Η απόσυρση ακυρώθηκε.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Η υποβολή διαγράφηκε· η εγγραφή παραμένει.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Η υποβολή διαγράφηκε, αλλά το μητρώο δεν ήταν δυνατό να ενημερωθεί. Επεξεργαστείτε το overview.md με το χέρι.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Η υποβολή δεν βρέθηκε στον φάκελο εργασίας.',
+  'De inzending kon niet worden verwijderd.':
+      'Η υποβολή δεν ήταν δυνατό να διαγραφεί.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Το μητρώο δεν μπορεί να διαβαστεί. Διορθώστε το overview.md· δεν άλλαξε τίποτα.',
+  'Het register kon niet worden bijgewerkt.':
+      'Το μητρώο δεν ήταν δυνατό να ενημερωθεί.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Η αλλαγή δεν ήταν δυνατή: η υποβολή δεν υπάρχει στο μητρώο.',
+  'Status wijzigen': 'Αλλαγή κατάστασης',
+  'Intrekking ongedaan maken': 'Αναίρεση απόσυρσης',
+  'Intrekken…': 'Απόσυρση…',
+  'Verwijderen…': 'Διαγραφή…',
+  'Inzending intrekken': 'Απόσυρση υποβολής',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Εισαγάγετε την ημέρα που ο αποστολέας απέσυρε την υποβολή. Μια αποσυρμένη υποβολή δεν μπαίνει ποτέ στο βιβλίο.',
+  'Dag (jjjj-mm-dd)': 'Ημέρα (εεεε-μμ-ηη)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Μη έγκυρη ημέρα. Χρησιμοποιήστε έτος-μήνας-ημέρα, για παράδειγμα {voorbeeld}.',
+  'Inzending verwijderen': 'Διαγραφή υποβολής',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Οι απαντήσεις, το αντίγραφο εργασίας και οι φωτογραφίες αυτής της υποβολής σβήνονται από τον φάκελο εργασίας. Μένει μόνο μια ελάχιστη εγγραφή: ο αριθμός, οι ημέρες παραλαβής και συγκατάθεσης και η κατάσταση. Αυτό δεν αναιρείται.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Μένει επίσης ό,τι η φόρμα είχε ανακοινώσει εκ των προτέρων: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Κάτι δεν πάει καλά με αυτή την υποβολή.',
   'Verplicht, maar leeg gelaten.': 'Υποχρεωτικό, αλλά αφέθηκε κενό.',

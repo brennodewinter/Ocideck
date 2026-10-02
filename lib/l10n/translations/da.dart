@@ -1627,6 +1627,37 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Status gewijzigd naar {status}.': 'Status ændret til {status}.',
+  'Intrekking opgeslagen.': 'Tilbagetrækning gemt.',
+  'Intrekking ongedaan gemaakt.': 'Tilbagetrækning fortrudt.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Indsendelse slettet; optegnelsen bliver.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Indsendelse slettet, men registret kunne ikke opdateres. Ret overview.md i hånden.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Indsendelsen blev ikke fundet i arbejdsmappen.',
+  'De inzending kon niet worden verwijderd.':
+      'Indsendelsen kunne ikke slettes.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registret kan ikke læses. Ret overview.md; intet er ændret.',
+  'Het register kon niet worden bijgewerkt.': 'Registret kunne ikke opdateres.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Denne ændring kunne ikke gennemføres: indsendelsen er ikke i registret.',
+  'Status wijzigen': 'Skift status',
+  'Intrekking ongedaan maken': 'Fortryd tilbagetrækning',
+  'Intrekken…': 'Træk tilbage…',
+  'Verwijderen…': 'Slet…',
+  'Inzending intrekken': 'Træk indsendelse tilbage',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Skriv den dag, hvor afsenderen trak indsendelsen tilbage. En tilbagetrukket indsendelse kommer aldrig i bogen.',
+  'Dag (jjjj-mm-dd)': 'Dag (åååå-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Ugyldig dag. Brug år-måned-dag, for eksempel {voorbeeld}.',
+  'Inzending verwijderen': 'Slet indsendelse',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Svarene, arbejdskopien og fotos fra denne indsendelse slettes fra arbejdsmappen. Kun en minimal optegnelse bliver: nummeret, dagene for modtagelse og samtykke og status. Det kan ikke fortrydes.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Det, formularen på forhånd annoncerede, bliver også stående: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Der er noget galt med denne indsendelse.',
   'Verplicht, maar leeg gelaten.': 'Påkrævet, men lader stå tomt.',

@@ -1627,6 +1627,36 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Status gewijzigd naar {status}.': 'Tilaksi vaihdettu {status}.',
+  'Intrekking opgeslagen.': 'Peruutus tallennettu.',
+  'Intrekking ongedaan gemaakt.': 'Peruutus kumottu.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Lähetys poistettu; tietue säilyy.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Lähetys poistettu, mutta rekisteriä ei voitu päivittää. Muokkaa overview.md käsin.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Lähetystä ei löytynyt työkansiosta.',
+  'De inzending kon niet worden verwijderd.': 'Lähetystä ei voitu poistaa.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Rekisteriä ei voi lukea. Korjaa overview.md; mitään ei muutettu.',
+  'Het register kon niet worden bijgewerkt.': 'Rekisteriä ei voitu päivittää.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Muutosta ei voitu tehdä: lähetys ei ole rekisterissä.',
+  'Status wijzigen': 'Vaihda tila',
+  'Intrekking ongedaan maken': 'Kumoa peruutus',
+  'Intrekken…': 'Peruuta…',
+  'Verwijderen…': 'Poista…',
+  'Inzending intrekken': 'Peruuta lähetys',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Anna päivä, jona lähettäjä peruutti lähetyksen. Peruutettu lähetys ei koskaan päädy kirjaan.',
+  'Dag (jjjj-mm-dd)': 'Päivä (vvvv-kk-pp)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Virheellinen päivä. Käytä muotoa vuosi-kuukausi-päivä, esimerkiksi {voorbeeld}.',
+  'Inzending verwijderen': 'Poista lähetys',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Tämän lähetyksen vastaukset, työkopio ja valokuvat poistetaan työkansiosta. Jäljelle jää vain minimaalinen tietue: numero, vastaanotto- ja suostumuspäivät sekä tila. Tätä ei voi kumota.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Myös se säilyy, minkä lomake ilmoitti etukäteen: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Tässä lähetyksessä on jotain vialla.',
   'Verplicht, maar leeg gelaten.': 'Pakollinen, mutta jätetty tyhjäksi.',

@@ -1626,6 +1626,37 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Status gewijzigd naar {status}.': 'Status ändrad till {status}.',
+  'Intrekking opgeslagen.': 'Återkallelsen sparades.',
+  'Intrekking ongedaan gemaakt.': 'Återkallelsen ångrades.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Inlämning raderad; posten finns kvar.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Inlämning raderad, men registret kunde inte uppdateras. Ändra overview.md för hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Inlämningen hittades inte i arbetsmappen.',
+  'De inzending kon niet worden verwijderd.': 'Inlämningen kunde inte raderas.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registret kan inte läsas. Reparera overview.md; inget ändrades.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registret kunde inte uppdateras.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Ändringen kunde inte göras: inlämningen finns inte i registret.',
+  'Status wijzigen': 'Ändra status',
+  'Intrekking ongedaan maken': 'Ångra återkallelsen',
+  'Intrekken…': 'Återkalla…',
+  'Verwijderen…': 'Radera…',
+  'Inzending intrekken': 'Återkalla inlämning',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Ange dagen då den som skickade in återkallade inlämningen. En återkallad inlämning kommer aldrig med i boken.',
+  'Dag (jjjj-mm-dd)': 'Dag (åååå-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Ogiltig dag. Använd år-månad-dag, till exempel {voorbeeld}.',
+  'Inzending verwijderen': 'Radera inlämning',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Svaren, arbetskopian och fotona från den här inlämningen raderas från arbetsmappen. Bara en minimal post finns kvar: numret, dagarna för mottagande och samtycke samt statusen. Det går inte att ångra.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Det formuläret kungjorde i förväg finns också kvar: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Något är fel med den här inlämningen.',
   'Verplicht, maar leeg gelaten.': 'Obligatoriskt, men lämnat tomt.',

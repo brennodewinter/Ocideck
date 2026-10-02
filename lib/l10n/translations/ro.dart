@@ -1643,6 +1643,38 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Status gewijzigd naar {status}.': 'Starea a fost schimbată în {status}.',
+  'Intrekking opgeslagen.': 'Retragerea a fost salvată.',
+  'Intrekking ongedaan gemaakt.': 'Retragerea a fost anulată.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Trimitere ștearsă; înregistrarea rămâne.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Trimitere ștearsă, dar registrul nu a putut fi actualizat. Editează overview.md manual.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Trimiterea nu a fost găsită în folderul de lucru.',
+  'De inzending kon niet worden verwijderd.':
+      'Trimiterea nu a putut fi ștearsă.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registrul nu poate fi citit. Repară overview.md; nu s-a modificat nimic.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registrul nu a putut fi actualizat.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Această modificare nu a putut fi făcută: trimiterea nu este în registru.',
+  'Status wijzigen': 'Schimbă starea',
+  'Intrekking ongedaan maken': 'Anulează retragerea',
+  'Intrekken…': 'Retrage…',
+  'Verwijderen…': 'Șterge…',
+  'Inzending intrekken': 'Retrage trimiterea',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Introdu ziua în care cel care a trimis a retras trimiterea. O trimitere retrasă nu ajunge niciodată în carte.',
+  'Dag (jjjj-mm-dd)': 'Zi (aaaa-ll-zz)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Zi nevalidă. Folosește an-lună-zi, de exemplu {voorbeeld}.',
+  'Inzending verwijderen': 'Șterge trimiterea',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Răspunsurile, copia de lucru și fotografiile acestei trimiteri sunt șterse din folderul de lucru. Rămâne doar o înregistrare minimă: numărul, zilele primirii și consimțământului și starea. Acest lucru nu poate fi anulat.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Rămâne și ceea ce formularul a anunțat dinainte: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Este ceva în neregulă cu această trimitere.',
   'Verplicht, maar leeg gelaten.': 'Obligatoriu, dar lăsat gol.',

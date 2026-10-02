@@ -1631,6 +1631,38 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Status gewijzigd naar {status}.': 'Status promijenjen u {status}.',
+  'Intrekking opgeslagen.': 'Povlačenje spremljeno.',
+  'Intrekking ongedaan gemaakt.': 'Povlačenje poništeno.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Prijava izbrisana; zapis ostaje.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Prijava izbrisana, ali registar nije bilo moguće ažurirati. Uredite overview.md ručno.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Prijava nije pronađena u radnoj mapi.',
+  'De inzending kon niet worden verwijderd.':
+      'Prijavu nije bilo moguće izbrisati.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registar se ne može pročitati. Popravite overview.md; ništa nije promijenjeno.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registar nije bilo moguće ažurirati.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Ova promjena nije mogla biti provedena: prijave nema u registru.',
+  'Status wijzigen': 'Promijeni status',
+  'Intrekking ongedaan maken': 'Poništi povlačenje',
+  'Intrekken…': 'Povuci…',
+  'Verwijderen…': 'Izbriši…',
+  'Inzending intrekken': 'Povuci prijavu',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Unesite dan kada je pošiljatelj povukao prijavu. Povučena prijava nikada ne ulazi u knjigu.',
+  'Dag (jjjj-mm-dd)': 'Dan (gggg-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Neispravan dan. Koristite godina-mjesec-dan, na primjer {voorbeeld}.',
+  'Inzending verwijderen': 'Izbriši prijavu',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Odgovori, radna kopija i fotografije ove prijave brišu se iz radne mape. Ostaje samo minimalni zapis: broj, dani primitka i privole te status. Ovo se ne može poništiti.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Ostaje i ono što je obrazac unaprijed najavio: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'S ovom prijavom nešto nije u redu.',
   'Verplicht, maar leeg gelaten.': 'Obavezno, ali ostavljeno prazno.',

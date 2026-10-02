@@ -5920,6 +5920,18 @@ van zijn veld, met een pictogram voor de ernst, en tegen welk formulier en welke
 De punten worden elke keer opnieuw uitgerekend uit wat in de werkmap staat: verbeter de werkkopie
 (`submission.edit.md`) en het punt is weg, met de melding dat de beoordeling over de werkkopie gaat.
 
+Onder een opengeklapte inzending staan de **acties**:
+- **Status wijzigen** — een keuze uit de eigen lijst van het formulier (`received`, `edited`, …). Een status
+  die het formulier niet noemt kun je niet kiezen, en een verwijderde inzending heeft er geen.
+- **Intrekken…** — vul de dag in waarop de inzender hem introk (vandaag wordt voorgesteld). Een ingetrokken
+  inzending komt nooit in het boek. **Intrekking ongedaan maken** neemt het terug.
+- **Verwijderen…** — wist de antwoorden, de werkkopie en de foto's uit de werkmap. Eerst zegt een
+  bevestiging wat er wordt gewist en wat blijft: een **minimaal record** (het nummer, de dagen van ontvangst
+  en toestemming en de status — en de velden die het formulier vooraf in zijn notice aankondigde,
+  `keep-record`). Het kan niet ongedaan worden gemaakt. Is het register niet te lezen, dan wordt de inhoud
+  toch gewist en zegt OciDeck dat de rij met de hand moet worden aangepast.
+Elke actie zegt hoe het ging. Een register dat niet te lezen is wordt nooit overschreven.
+
 Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor
 byte zoals ze aankwamen plus de foto's, in één stap: een crash laat nooit een halve inzending achter,
 en een inzending die er al is wordt nooit overschreven. Eén met een fout komt er wel in, met de status
