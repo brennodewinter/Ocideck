@@ -5948,6 +5948,19 @@ Onder een opengeklapte inzending staan de **acties**:
   welke foto maakte — staat ernaast in `<naam>.compile.json`, niet in de tekst. De zin erna zegt hoeveel hoofdstukken
   en foto's erin gingen en hoeveel inzendingen waren ingetrokken of overgeslagen (andere versie van het formulier, of
   niet te lezen), en biedt aan het boek te openen.
+- **Controle door de maker…** — voordat een bijdrage verschijnt ziet de maker hoe ze eruit komt te zien en zegt of ze
+  klopt (FORM_INTAKE.md §7.4). Het is een **integriteitscontrole**: een anonieme inzender is niet te authenticeren,
+  dus alleen een antwoord vanaf het adres dat de inzending opgaf bevestigt dat de bijdrage van die persoon is. Drie
+  stappen, elk op zichzelf: **Controledocument maken en openen** maakt het hoofdstuk van *deze ene inzending* uit een
+  hoofdstuksjabloon — dezelfde maker als het boek, dus de maker ziet wat er gedrukt wordt — en opent het in een
+  tabblad (de Inbox sluit); je exporteert het met de gewone export als pdf (kies het **volledige** profiel: de inhoud
+  is die van de maker zelf). **Mail schrijven** opent een concept in je mailprogramma, aan het adres dat de maker in
+  het formulier opgaf (het eerste e-mailveld dat is ingevuld; je kunt een ander typen), met een korte tekst en de dag
+  waarop het antwoord er moet zijn (twee weken, aan te passen); de pdf voeg je zelf toe. **Controle verstuurd** zet
+  de status op `maker-check-sent`. Antwoordt de maker ‘akkoord’, zet de status dan zelf op `maker-approved` — het
+  samenstellen neemt standaard alleen die status. Het concept staat in de taal van je interface; pas het aan in je
+  mailprogramma. Niet voor een ingetrokken of verwijderde inzending, en **Controle verstuurd** alleen als het
+  formulier die status kent.
 Elke actie zegt hoe het ging. Een register dat niet te lezen is wordt nooit overschreven.
 
 Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor

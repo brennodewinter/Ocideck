@@ -1630,6 +1630,33 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Die Iischickig isch zruggzoge worde und chunnt drum i kes Kapitel.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Die Iischickig cha nid gläse wärde, oder s Formular, wo si dezue iigreicht worde isch, isch nid im Arbeitsordner.',
+  'Het controledocument kon niet worden geschreven.':
+      'S Prüefdokumänt het nid chöne gschribe wärde.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Dä Biitrag fürs Buech: bitte churz prüefe',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Do isch dä Biitrag, so win er im Buech chunnt (lueg dr Aahang). Stimmt alles? Antwort ‚iiverstande‘ oder mit dine Korrektur vor em {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'D Mail lit i dim Mailprogramm parat. Häng s PDF aa und schick si ab.',
+  'Controle door de maker…': 'Prüefig dur d Person, wo dr Biitrag gmacht het…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'S Prüefdokumänt isch s Kapitel vo dere einte Iischickig. Exportier es als PDF (wähl s vollständige Profil), häng s PDF a d Mail aa und schick si ab. Antwortet d Person ‚iiverstande‘, stell dr Status sälber uf maker-approved: Die Antwort bestätigt au, dass dr Biitrag würkli vo dere Person chunnt.',
+  'Controledocument maken en openen': 'Prüefdokumänt erstelle und ufmache',
+  'E-mailadres van de maker':
+      'E-Mail-Adrässe vo dr Person, wo dr Biitrag gmacht het',
+  'Antwoord vóór (jjjj-mm-dd)': 'Antwort vor em (JJJJ-MM-TT)',
+  'Mail schrijven': 'Mail schribe',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Das Formular kennt dr Status maker-check-sent nid, drum cha er do nid gsetzt wärde.',
+  'Controle verstuurd': 'Prüefig verschickt',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Macht s Kapitel vo dere Iischickig und bereitet d Mail vor, womit d Person, wo dr Biitrag gmacht het, en prüeft.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Die Iischickig staat nid im Register. Reparier overview.md und probier s nomal.',
   'Kies het hoofdstuksjabloon': 'Kapitelvorlag uswähle',
   'Kies eerst een hoofdstuksjabloon.': 'Wähl zersch e Kapitelvorlag us.',
   'Kies minstens één status.': 'Wähl mindeschtens ein Status us.',

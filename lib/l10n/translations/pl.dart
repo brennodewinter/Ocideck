@@ -1639,6 +1639,33 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'To zgłoszenie zostało wycofane, więc nie trafia do żadnego rozdziału.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Tego zgłoszenia nie można odczytać albo formularza, którego dotyczy, nie ma w folderze roboczym.',
+  'Het controledocument kon niet worden geschreven.':
+      'Nie udało się zapisać dokumentu do sprawdzenia.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Twój wkład do książki: prosimy o sprawdzenie',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Oto Twój wkład w takiej postaci, w jakiej pojawi się w książce (zobacz załącznik). Czy wszystko się zgadza? Odpowiedz ‘zgoda’ albo prześlij poprawki przed {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Wiadomość czeka w Twoim programie pocztowym. Dołącz plik PDF i wyślij ją.',
+  'Controle door de maker…': 'Sprawdzenie przez autora wkładu…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Dokument do sprawdzenia to rozdział tego jednego zgłoszenia. Wyeksportuj go jako PDF (wybierz pełny profil), dołącz PDF do wiadomości i wyślij ją. Jeśli autor odpowie ‘zgoda’, sam ustaw status maker-approved: ta odpowiedź jest też potwierdzeniem, że wkład naprawdę pochodzi od tej osoby.',
+  'Controledocument maken en openen':
+      'Utwórz dokument do sprawdzenia i otwórz go',
+  'E-mailadres van de maker': 'Adres e-mail autora wkładu',
+  'Antwoord vóór (jjjj-mm-dd)': 'Odpowiedź przed (rrrr-mm-dd)',
+  'Mail schrijven': 'Napisz wiadomość',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ten formularz nie zna statusu maker-check-sent, więc nie można go tu ustawić.',
+  'Controle verstuurd': 'Sprawdzenie wysłane',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Tworzy rozdział z tego zgłoszenia i przygotowuje wiadomość, w której autor wkładu go sprawdza.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Tego zgłoszenia nie ma w rejestrze. Napraw overview.md i spróbuj ponownie.',
   'Kies het hoofdstuksjabloon': 'Wybierz szablon rozdziału',
   'Kies eerst een hoofdstuksjabloon.': 'Najpierw wybierz szablon rozdziału.',
   'Kies minstens één status.': 'Wybierz co najmniej jeden status.',

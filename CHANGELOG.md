@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- In de Inbox opent **Controle door de maker…** de controle van §7.4: drie losse stappen. Het **controledocument** is het
+  hoofdstuk van die ene inzending, gemaakt met dezelfde samensteller als het boek (dus de maker ziet wat er gedrukt
+  wordt) en geopend in een tabblad, waar je het met de gewone export als pdf wegschrijft — de export die het
+  privacyprofiel, de classificatie en de lettertypen al kent, geen tweede. **Mail schrijven** opent een concept aan het
+  adres dat de maker opgaf (het eerste ingevulde e-mailveld; aan te passen) met de uiterste antwoorddag; het adres wordt
+  percent-gecodeerd, zodat wat een inzender als adres intikt geen `bcc` of onderwerp aan jouw concept kan toevoegen.
+  **Controle verstuurd** zet de status op `maker-check-sent`. Een document krijgt een nieuw nummer en overschrijft nooit
+  een eerder. 17 nieuwe zinnen in 30 talen.
 - In de Inbox maakt **Boek samenstellen…** van de goedgekeurde inzendingen één document (formaat §7.5). Je kiest het
   formulier, een hoofdstuksjabloon, welke statussen erin komen (`maker-approved` staat al aan als het formulier die kent),
   eventueel een veld om op te ordenen en een om op te groeperen, en een naam. Het boek komt als **nieuw document** in de

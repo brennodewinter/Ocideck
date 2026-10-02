@@ -21,7 +21,9 @@ import 'form_text_helpers.dart' show formTextOf;
 typedef FormTemplatePick =
     Future<({String name, String text})?> Function(String title);
 
-Future<({String name, String text})?> _systemTemplatePick(String title) async {
+/// De kiezer van het systeem: een bestand van het type `.md`, alleen waar de app
+/// lokale mappen kent.
+Future<({String name, String text})?> pickFormTemplateFile(String title) async {
   if (!supportsLocalProjectFolders) return null;
   final file = await FilePicker.pickFile(
     dialogTitle: title,
@@ -128,7 +130,7 @@ class _FormBookDialogState extends State<FormBookDialog> {
 
   Future<void> _chooseTemplate() async {
     final l10n = context.l10n;
-    final picked = await (widget.pickTemplate ?? _systemTemplatePick)(
+    final picked = await (widget.pickTemplate ?? pickFormTemplateFile)(
       l10n.d('Kies het hoofdstuksjabloon'),
     );
     if (picked == null || !mounted) return;

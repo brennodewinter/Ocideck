@@ -1642,6 +1642,33 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Це надсилання відкликано, тому воно не потрапляє в жоден розділ.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Це надсилання неможливо прочитати, або форми, для якої його надіслано, немає в робочій папці.',
+  'Het controledocument kon niet worden geschreven.':
+      'Документ для перевірки не вдалося записати.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Ваш внесок до книги: просимо перевірити',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Ось ваш внесок у тому вигляді, в якому він з’явиться в книзі (див. вкладення). Усе правильно? Дайте відповідь ‘згоден’ або надішліть свої виправлення до {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Лист готовий у вашій поштовій програмі. Додайте PDF і надішліть його.',
+  'Controle door de maker…': 'Перевірка автором…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Документ для перевірки — це розділ цього одного надсилання. Експортуйте його як PDF (виберіть повний профіль), додайте PDF до листа й надішліть. Якщо автор відповість ‘згоден’, самі змініть статус на maker-approved: ця відповідь також підтверджує, що внесок справді від цієї особи.',
+  'Controledocument maken en openen':
+      'Створити документ для перевірки й відкрити',
+  'E-mailadres van de maker': 'Електронна адреса автора',
+  'Antwoord vóór (jjjj-mm-dd)': 'Відповісти до (рррр-мм-дд)',
+  'Mail schrijven': 'Написати лист',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ця форма не знає статусу maker-check-sent, тому його тут не можна встановити.',
+  'Controle verstuurd': 'Перевірку надіслано',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Створює розділ із цього надсилання та готує лист, яким автор його перевіряє.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Цього надсилання немає в реєстрі. Виправте overview.md і спробуйте ще раз.',
   'Kies het hoofdstuksjabloon': 'Вибрати шаблон розділу',
   'Kies eerst een hoofdstuksjabloon.': 'Спершу виберіть шаблон розділу.',
   'Kies minstens één status.': 'Виберіть принаймні один статус.',

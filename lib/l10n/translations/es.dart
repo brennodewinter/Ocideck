@@ -664,6 +664,33 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Este envío se ha retirado y por tanto no entra en ningún capítulo.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Este envío no se puede leer, o el formulario para el que se hizo no está en la carpeta de trabajo.',
+  'Het controledocument kon niet worden geschreven.':
+      'No se pudo escribir el documento de revisión.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Tu aportación al libro: por favor, revísala',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Aquí tienes tu aportación tal como aparecerá en el libro (mira el adjunto). ¿Está todo bien? Responde «de acuerdo» o con tus correcciones antes del {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'El correo está listo en tu programa de correo. Adjunta el PDF y envíalo.',
+  'Controle door de maker…': 'Revisión por la persona autora…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'El documento de revisión es el capítulo de este envío. Expórtalo como PDF (elige el perfil completo), adjunta el PDF al correo y envíalo. Si la persona autora responde «de acuerdo», cambia tú el estado a maker-approved: esa respuesta es también la confirmación de que la aportación realmente viene de esa persona.',
+  'Controledocument maken en openen':
+      'Crear el documento de revisión y abrirlo',
+  'E-mailadres van de maker': 'Correo electrónico de la persona autora',
+  'Antwoord vóór (jjjj-mm-dd)': 'Responder antes del (aaaa-mm-dd)',
+  'Mail schrijven': 'Escribir el correo',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Este formulario no conoce el estado maker-check-sent, así que no se puede establecer aquí.',
+  'Controle verstuurd': 'Revisión enviada',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Crea el capítulo de este envío y prepara el correo con el que la persona autora lo revisa.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Este envío no está en el registro. Repara overview.md e inténtalo de nuevo.',
   'Kies het hoofdstuksjabloon': 'Elegir la plantilla de capítulo',
   'Kies eerst een hoofdstuksjabloon.':
       'Elige primero una plantilla de capítulo.',

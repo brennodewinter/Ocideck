@@ -1620,6 +1620,32 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'See esitus on tagasi võetud ja satub seetõttu ühtegi peatükki.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Seda esitust ei saa lugeda või vormi, mille jaoks see esitati, pole töökaustas.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrolldokumenti ei õnnestunud kirjutada.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Sinu panus raamatusse: palun vaata see üle',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Siin on sinu panus sellisena, nagu see raamatus ilmub (vaata manust). Kas kõik on õige? Vasta ‘nõus’ või oma parandustega enne kuupäeva {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Kiri ootab sinu meiliprogrammis. Lisa PDF ja saada see ära.',
+  'Controle door de maker…': 'Autori kontroll…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrolldokument on selle ühe esituse peatükk. Ekspordi see PDF-ina (vali täielik profiil), lisa PDF kirjale ja saada kiri ära. Kui autor vastab ‘nõus’, sea olek ise väärtusele maker-approved: see vastus kinnitab ka, et panus tõesti pärineb sellelt inimeselt.',
+  'Controledocument maken en openen': 'Loo kontrolldokument ja ava see',
+  'E-mailadres van de maker': 'Autori e-posti aadress',
+  'Antwoord vóór (jjjj-mm-dd)': 'Vasta enne (aaaa-kk-pp)',
+  'Mail schrijven': 'Kirjuta kiri',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'See vorm ei tunne olekut maker-check-sent, seega ei saa seda siin seada.',
+  'Controle verstuurd': 'Kontroll saadetud',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Teeb selle esituse peatüki ja valmistab ette kirja, millega autor selle üle vaatab.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Seda esitust pole registris. Paranda overview.md ja proovi uuesti.',
   'Kies het hoofdstuksjabloon': 'Vali peatüki mall',
   'Kies eerst een hoofdstuksjabloon.': 'Vali kõigepealt peatüki mall.',
   'Kies minstens één status.': 'Vali vähemalt üks olek.',

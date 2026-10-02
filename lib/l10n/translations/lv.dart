@@ -1625,6 +1625,33 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Šis iesūtījums ir atsaukts, tāpēc tas neiekļūst nevienā nodaļā.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Šo iesūtījumu nevar nolasīt, vai arī veidlapas, kurai tas iesniegts, nav darba mapē.',
+  'Het controledocument kon niet worden geschreven.':
+      'Pārbaudes dokumentu nevarēja ierakstīt.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Jūsu ieguldījums grāmatā: lūdzu, pārbaudiet to',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Lūk, jūsu ieguldījums tādā veidā, kādā tas parādīsies grāmatā (skatiet pielikumu). Vai viss ir pareizi? Atbildiet ‘piekrītu’ vai ar saviem labojumiem līdz {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Ziņojums ir gatavs jūsu pasta programmā. Pievienojiet PDF un nosūtiet to.',
+  'Controle door de maker…': 'Autora pārbaude…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Pārbaudes dokuments ir šī viena iesūtījuma nodaļa. Eksportējiet to kā PDF (izvēlieties pilno profilu), pievienojiet PDF ziņojumam un nosūtiet to. Ja autors atbild ‘piekrītu’, pats iestatiet statusu maker-approved: šī atbilde arī apliecina, ka ieguldījums patiešām ir no šīs personas.',
+  'Controledocument maken en openen':
+      'Izveidot pārbaudes dokumentu un atvērt to',
+  'E-mailadres van de maker': 'Autora e-pasta adrese',
+  'Antwoord vóór (jjjj-mm-dd)': 'Atbildēt līdz (gggg-mm-dd)',
+  'Mail schrijven': 'Rakstīt ziņojumu',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Šī veidlapa nepazīst statusu maker-check-sent, tāpēc to šeit nevar iestatīt.',
+  'Controle verstuurd': 'Pārbaude nosūtīta',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Izveido šī iesūtījuma nodaļu un sagatavo ziņojumu, ar kuru autors to pārbauda.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Šī iesūtījuma nav reģistrā. Salabojiet overview.md un mēģiniet vēlreiz.',
   'Kies het hoofdstuksjabloon': 'Izvēlēties nodaļas veidni',
   'Kies eerst een hoofdstuksjabloon.': 'Vispirms izvēlieties nodaļas veidni.',
   'Kies minstens één status.': 'Izvēlieties vismaz vienu statusu.',

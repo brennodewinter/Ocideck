@@ -1629,6 +1629,33 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Ezt a beküldést visszavonták, ezért egyik fejezetbe sem kerül be.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Ez a beküldés nem olvasható, vagy az űrlap, amelyhez beküldték, nincs a munkamappában.',
+  'Het controledocument kon niet worden geschreven.':
+      'Az ellenőrző dokumentumot nem sikerült megírni.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'A hozzájárulásod a könyvhöz: kérjük, nézd át',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Itt a hozzájárulásod úgy, ahogy a könyvben meg fog jelenni (lásd a mellékletet). Minden rendben van? Válaszolj ‘egyetértek’ szöveggel, vagy a javításaiddal ennyi előtt: {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'A levél kész a levelezőprogramodban. Csatold a PDF-et, és küldd el.',
+  'Controle door de maker…': 'Ellenőrzés a szerzővel…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Az ellenőrző dokumentum ennek az egy beküldésnek a fejezete. Exportáld PDF-ként (válaszd a teljes profilt), csatold a PDF-et a levélhez, és küldd el. Ha a szerző azt válaszolja, hogy ‘egyetértek’, állítsd magad az állapotot maker-approved értékre: ez a válasz egyben megerősíti, hogy a hozzájárulás valóban ettől a személytől származik.',
+  'Controledocument maken en openen':
+      'Ellenőrző dokumentum létrehozása és megnyitása',
+  'E-mailadres van de maker': 'A szerző e-mail-címe',
+  'Antwoord vóór (jjjj-mm-dd)': 'Válasz ennyi előtt (éééé-hh-nn)',
+  'Mail schrijven': 'Levél írása',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ez az űrlap nem ismeri a maker-check-sent állapotot, ezért itt nem állítható be.',
+  'Controle verstuurd': 'Ellenőrzés elküldve',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Elkészíti ennek a beküldésnek a fejezetét, és előkészíti a levelet, amellyel a szerző ellenőrzi.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Ez a beküldés nincs a nyilvántartásban. Javítsd meg az overview.md fájlt, és próbáld újra.',
   'Kies het hoofdstuksjabloon': 'Fejezetsablon kiválasztása',
   'Kies eerst een hoofdstuksjabloon.': 'Először válassz fejezetsablont.',
   'Kies minstens één status.': 'Válassz legalább egy állapotot.',

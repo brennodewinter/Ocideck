@@ -9,6 +9,23 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/form/form_submission_actions.dart';
 import '../../services/form/form_workspace.dart';
+import 'form_maker_check_dialog.dart';
+
+/// De zin bij een actie op het register die niet is gelukt.
+String formActionFailedMessage(
+  AppLocalizations l10n,
+  FormActionOutcome outcome,
+) => switch (outcome) {
+  FormActionOutcome.registerDamaged => l10n.d(
+    'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.',
+  ),
+  FormActionOutcome.notSaved => l10n.d(
+    'Het register kon niet worden bijgewerkt.',
+  ),
+  _ => l10n.d(
+    'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.',
+  ),
+};
 
 class FormInboxActions extends StatelessWidget {
   const FormInboxActions({
@@ -22,6 +39,7 @@ class FormInboxActions extends StatelessWidget {
     this.delete = deleteSubmission,
     this.onOpenFile,
     this.canEdit = false,
+    this.makerCheck,
   });
 
   final FormWorkspace workspace;
@@ -57,6 +75,11 @@ class FormInboxActions extends StatelessWidget {
   /// De inzending is te lezen, dus er is iets om een werkkopie van te maken.
   final bool canEdit;
 
+  /// Het venster voor de controle door de maker. Een naad voor de test: dat wat het
+  /// meegeeft goed wordt afgehandeld is te bewijzen zonder het venster te doorlopen.
+  final Future<FormMakerCheckResult?> Function(BuildContext context)?
+  makerCheck;
+
   bool get _deleted => row?.isDeleted ?? false;
 
   /// Maakt de werkkopie als ze er nog niet is en opent haar. Nooit wat binnenkwam:
@@ -74,6 +97,29 @@ class FormInboxActions extends StatelessWidget {
     }
   }
 
+  Future<FormMakerCheckResult?> _showMakerCheck(BuildContext context) =>
+      showFormMakerCheckDialog(
+        context,
+        workspace: workspace,
+        sid: sid,
+        spec: spec!,
+        now: now,
+      );
+
+  /// De controle door de maker: het venster maakt het hoofdstuk, schrijft de mail en
+  /// zet de status; wat het meegeeft handelt de Inbox af.
+  Future<void> _makerCheck(BuildContext context) async {
+    final result = await (makerCheck ?? _showMakerCheck)(context);
+    switch (result) {
+      case FormMakerCheckOpened(:final path):
+        onOpenFile!(path);
+      case FormMakerCheckStatusSet(:final message):
+        onDone(message);
+      case null:
+        break;
+    }
+  }
+
   Future<void> _status(BuildContext context, String status) async {
     final l10n = context.l10n;
     final outcome = await setSubmissionStatus(
@@ -87,7 +133,7 @@ class FormInboxActions extends StatelessWidget {
           ? l10n
                 .d('Status gewijzigd naar {status}.')
                 .replaceAll('{status}', status)
-          : _failed(l10n, outcome),
+          : formActionFailedMessage(l10n, outcome),
     );
   }
 
@@ -103,7 +149,7 @@ class FormInboxActions extends StatelessWidget {
     onDone(
       outcome == FormActionOutcome.done
           ? l10n.d('Intrekking opgeslagen.')
-          : _failed(l10n, outcome),
+          : formActionFailedMessage(l10n, outcome),
     );
   }
 
@@ -113,7 +159,7 @@ class FormInboxActions extends StatelessWidget {
     onDone(
       outcome == FormActionOutcome.done
           ? l10n.d('Intrekking ongedaan gemaakt.')
-          : _failed(l10n, outcome),
+          : formActionFailedMessage(l10n, outcome),
     );
   }
 
@@ -141,21 +187,6 @@ class FormInboxActions extends StatelessWidget {
       ),
     });
   }
-
-  String _failed(
-    AppLocalizations l10n,
-    FormActionOutcome outcome,
-  ) => switch (outcome) {
-    FormActionOutcome.registerDamaged => l10n.d(
-      'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.',
-    ),
-    FormActionOutcome.notSaved => l10n.d(
-      'Het register kon niet worden bijgewerkt.',
-    ),
-    _ => l10n.d(
-      'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.',
-    ),
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -191,6 +222,20 @@ class FormInboxActions extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: () => _openWorkingCopy(context),
                 child: Text(l10n.d('Werkkopie openen')),
+              ),
+            ),
+          if (canEdit &&
+              onOpenFile != null &&
+              spec != null &&
+              !_deleted &&
+              !(current?.isWithdrawn ?? false))
+            Tooltip(
+              message: l10n.d(
+                'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.',
+              ),
+              child: OutlinedButton(
+                onPressed: () => _makerCheck(context),
+                child: Text(l10n.d('Controle door de maker…')),
               ),
             ),
           if (current != null)

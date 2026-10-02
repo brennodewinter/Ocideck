@@ -1627,6 +1627,32 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Tämä lähetys on peruttu, joten se ei päädy mihinkään lukuun.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Tätä lähetystä ei voi lukea tai lomaketta, johon se on tehty, ei ole työkansiossa.',
+  'Het controledocument kon niet worden geschreven.':
+      'Tarkistusasiakirjaa ei voitu kirjoittaa.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Panoksesi kirjaan: tarkista se, kiitos',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Tässä panoksesi sellaisena kuin se tulee kirjaan (katso liite). Onko kaikki oikein? Vastaa ‘hyväksyn’ tai korjauksineen ennen päivämäärää {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Viesti odottaa sähköpostiohjelmassasi. Liitä PDF ja lähetä se.',
+  'Controle door de maker…': 'Tekijän tarkistus…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Tarkistusasiakirja on tämän yhden lähetyksen luku. Vie se PDF-tiedostoksi (valitse täysi profiili), liitä PDF viestiin ja lähetä se. Jos tekijä vastaa ‘hyväksyn’, aseta tila itse arvoon maker-approved: vastaus vahvistaa myös, että panos todella on tältä henkilöltä.',
+  'Controledocument maken en openen': 'Luo tarkistusasiakirja ja avaa se',
+  'E-mailadres van de maker': 'Tekijän sähköpostiosoite',
+  'Antwoord vóór (jjjj-mm-dd)': 'Vastaa ennen (vvvv-kk-pp)',
+  'Mail schrijven': 'Kirjoita viesti',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Tämä lomake ei tunne tilaa maker-check-sent, joten sitä ei voi asettaa tässä.',
+  'Controle verstuurd': 'Tarkistus lähetetty',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Tekee tämän lähetyksen luvun ja valmistelee viestin, jolla tekijä tarkistaa sen.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Tämä lähetys ei ole rekisterissä. Korjaa overview.md ja yritä uudelleen.',
   'Kies het hoofdstuksjabloon': 'Valitse lukumalli',
   'Kies eerst een hoofdstuksjabloon.': 'Valitse ensin lukumalli.',
   'Kies minstens één status.': 'Valitse vähintään yksi tila.',

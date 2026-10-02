@@ -1627,6 +1627,33 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Ta oddaja je bila umaknjena in zato ne pride v nobeno poglavje.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Te oddaje ni mogoče prebrati ali pa obrazca, za katerega je bila oddana, ni v delovni mapi.',
+  'Het controledocument kon niet worden geschreven.':
+      'Dokumenta za preverjanje ni bilo mogoče zapisati.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Vaš prispevek h knjigi: prosimo, preverite ga',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Tukaj je vaš prispevek, kot se bo pojavil v knjigi (glejte prilogo). Ali je vse prav? Odgovorite ‘se strinjam’ ali s svojimi popravki pred {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Sporočilo je pripravljeno v vašem poštnem programu. Priložite PDF in ga pošljite.',
+  'Controle door de maker…': 'Preverjanje pri avtorju…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Dokument za preverjanje je poglavje te ene oddaje. Izvozite ga kot PDF (izberite poln profil), priložite PDF sporočilu in ga pošljite. Če avtor odgovori ‘se strinjam’, sami nastavite status na maker-approved: ta odgovor hkrati potrjuje, da prispevek res prihaja od te osebe.',
+  'Controledocument maken en openen':
+      'Ustvari dokument za preverjanje in ga odpri',
+  'E-mailadres van de maker': 'E-poštni naslov avtorja',
+  'Antwoord vóór (jjjj-mm-dd)': 'Odgovor pred (llll-mm-dd)',
+  'Mail schrijven': 'Napiši sporočilo',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ta obrazec ne pozna statusa maker-check-sent, zato ga tu ni mogoče nastaviti.',
+  'Controle verstuurd': 'Preverjanje poslano',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Ustvari poglavje te oddaje in pripravi sporočilo, s katerim ga avtor preveri.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Te oddaje ni v registru. Popravi overview.md in poskusi znova.',
   'Kies het hoofdstuksjabloon': 'Izberi predlogo poglavja',
   'Kies eerst een hoofdstuksjabloon.': 'Najprej izberi predlogo poglavja.',
   'Kies minstens één status.': 'Izberi vsaj en status.',

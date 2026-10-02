@@ -667,6 +667,32 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Dizze ynstjoering is weromlutsen en komt dus yn gjin inkeld haadstik.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Dizze ynstjoering is net te lêzen, of it formulier wêrfoar\'t se ynstjoerd is stiet net yn de wurkmap.',
+  'Het controledocument kon niet worden geschreven.':
+      'It kontrôledokumint koe net skreaun wurde.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Dyn bydrage foar it boek: graach efkes neisjen',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Hjir is dyn bydrage sa\'t dy yn it boek komt (sjoch de bylage). Klopt alles? Antwurdzje ‘akkoard’ of mei dyn korreksjes foar {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'De mail stiet klear yn dyn mailprogramma. Foegje de pdf ta en ferstjoer him.',
+  'Controle door de maker…': 'Kontrôle troch de makker…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'It kontrôledokumint is it haadstik fan dizze ien ynstjoering. Eksportearje it as pdf (kies it folsleine profyl), foegje de pdf ta oan de mail en ferstjoer dy. Antwurdet de makker ‘akkoard’, set de status dan sels op maker-approved: dat antwurd is ek de befêstiging dat de bydrage echt fan dizze persoan komt.',
+  'Controledocument maken en openen': 'Kontrôledokumint meitsje en iepenje',
+  'E-mailadres van de maker': 'E-mailadres fan de makker',
+  'Antwoord vóór (jjjj-mm-dd)': 'Antwurd foar (jjjj-mm-dd)',
+  'Mail schrijven': 'Mail skriuwe',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Dit formulier kin de status maker-check-sent net, dus dy kin hjir net set wurde.',
+  'Controle verstuurd': 'Kontrôle ferstjoerd',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Makket it haadstik fan dizze ynstjoering en makket de mail klear wêrmei\'t de makker it kontrolearret.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Dizze ynstjoering stiet net yn it register. Herstel overview.md en besykje it opnij.',
   'Kies het hoofdstuksjabloon': 'Haadstiksjabloan kieze',
   'Kies eerst een hoofdstuksjabloon.': 'Kies earst in haadstiksjabloan.',
   'Kies minstens één status.': 'Kies teminsten ien status.',
