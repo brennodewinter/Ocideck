@@ -16,6 +16,7 @@ import '../../models/slide.dart' show TableAlign;
 import '../../services/marp_html_service.dart';
 import '../../services/markdown_table_codec.dart';
 import '../../services/document_timeline.dart';
+import '../../services/form_document_blocks.dart';
 import '../../services/table_layout_metrics.dart';
 import '../../services/table_of_contents.dart';
 import '../../services/web_asset_store.dart';
@@ -504,7 +505,9 @@ class DocumentMarkdownView extends StatelessWidget {
     // Hier eruit, zodat élke ingang (weergave, zoektekst, pagina-einden,
     // koppen) dezelfde blokken ziet en de indices nooit uiteenlopen.
     final lines = stripFootnoteDefinitions(
-      markdown,
+      // De markers van een geldig formulier zijn bron, geen tekst: zonder dit
+      // verscheen elke `<!-- field … -->` als alinea (FORM_INTAKE.md §4.9).
+      stripFormMarkers(markdown),
     ).replaceAll('\r\n', '\n').split('\n');
     final blocks = <_Block>[];
 
