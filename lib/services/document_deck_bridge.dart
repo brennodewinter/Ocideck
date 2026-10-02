@@ -4,6 +4,7 @@ import '../models/deck.dart';
 import '../models/slide.dart';
 import '../utils/markdown_blocks.dart';
 import 'markdown_table_codec.dart';
+import 'form_document_blocks.dart';
 import 'pentest_blocks.dart';
 import 'document_timeline.dart';
 
@@ -49,6 +50,7 @@ class DocumentDeckBridge {
     // Eén pas voor het hele document; de grensregel woont in `pentest_blocks`
     // en niet hier (PENTEST_DOCUMENT.md §6.1).
     final pentest = scanPentestBlocks(body);
+    final form = scanFormBlocks(body);
 
     final slides = <Slide>[];
     final flow = <String>[];
@@ -105,6 +107,23 @@ class DocumentDeckBridge {
         flushFlow();
         slides.add(_pentestEnvelopeSlide(block, rawLines, lines));
         i = block.end;
+        continue;
+      }
+
+      // Een formulierblok (de kop, een notice of een heel veld) is óók één
+      // dia, om dezelfde reden: een veld heeft vaak zelf een kop als label
+      // (`## Het verhaal`), en de kopsplitsing zou het label van zijn antwoord
+      // scheiden. De scanner leest dan een antwoord zonder te weten welke
+      // vraag erbij hoort (FORM_INTAKE.md §4.9, rij 8).
+      final formBlock = form.blockAt(i);
+      if (formBlock != null && formBlock.start == i) {
+        flushFlow();
+        slides.add(
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            customMarkdown: rawLines.slice(formBlock.start, formBlock.end),
+          ),
+        );
+        i = formBlock.end;
         continue;
       }
 
