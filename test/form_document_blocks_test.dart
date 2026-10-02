@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/form_document_blocks.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
@@ -231,5 +233,23 @@ x
       final kapot = formulier.replaceFirst('<!-- /field id=naam -->\n', '');
       expect(stripFormMarkers(kapot), kapot);
     });
+  });
+
+  test('het voorbeeld in FILE_FORMAT §14.14 is een geldig formulier', () {
+    // Een beschrijving van het formaat die zelf niet ontleedt is een belofte
+    // die niemand heeft nagelopen.
+    final doc = File('docs/FILE_FORMAT.md').readAsStringSync();
+    final section = doc.substring(doc.indexOf('### 14.14 Form'));
+    final example = RegExp(
+      r'````markdown\n(.*?)````',
+      dotAll: true,
+    ).firstMatch(section)!.group(1)!;
+
+    expect(parseForm(example), isA<ParsedForm>());
+    expect(scanFormBlocks(example).blocks.map((b) => b.kind), [
+      FormBlockKind.header,
+      FormBlockKind.notice,
+      FormBlockKind.field,
+    ]);
   });
 }

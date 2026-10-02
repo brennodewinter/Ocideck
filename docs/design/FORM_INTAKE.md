@@ -44,6 +44,19 @@
 > `validateAnswer`/`validateForm` and the comparison of template-owned text. The
 > package, sealing and the app surfaces are still design.
 >
+> **The document block is in (2026-10-02):** a valid form now travels OciDeck's own
+> reader, visual editor, deck bridge and exports as §4.9 prescribes (rows 1–6, 8 and
+> 10 of the chain; row 7, pagination, follows from the reader's single parse, and row
+> 9, the answer scan, belongs to the fill view). FILE_FORMAT §14.14 holds the format in
+> §14.10's terms. One finding from building it, which §4.9 did not foresee: the
+> rich-text round trip *normalises the text outside the atomic blocks and used to
+> normalise inside them too* (it un-escapes `\*`, drops a soft hyphen, rewrites a
+> non-breaking space) — a label that changes is template text that no longer matches the
+> published form, so the output normalisation now skips the lines of a form block; and
+> the editor writes its own blank lines around a block, so **saving a form in the visual
+> editor counts as changing template text**: answers are written by the fill view, which
+> touches only answer zones.
+>
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
 > Reference code by **file + symbol name**, never a line number.
