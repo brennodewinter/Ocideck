@@ -827,6 +827,98 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Something is wrong with this form. Please contact whoever made it.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'This field is required. Fill it in to be able to send.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'You wrote {actual} words; at least {min} are needed.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'You wrote {actual} words; no more than {max} are allowed.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'You wrote {actual} characters; at least {min} are needed.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'You wrote {actual} characters; no more than {max} are allowed.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” is not in the list. Choose one of the options.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” is not a number. Use digits only, optionally with a comma or period for decimals.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'This photo is {actual} pixels wide; {min} are requested here. It was probably shrunk when it was sent through a messaging app. If you still have the original, use that. If not, send it anyway: the organisers will get in touch with you.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'This photo is {actual} MB; the maximum is {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'The content of this file does not match its file type.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'This file type is not allowed here.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'The file for this photo can no longer be found. Add the photo again.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Describe in a short sentence what can be seen in the photo.',
+  'Geef aan van wie de foto is.': 'Say who the photo is by.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'This photo has not been checked yet. Wait a moment or add it again.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'This photo is a HEIC file. OciDeck cannot check or clean it here, so it is sent as it is. It may contain where the photo was taken. If you would rather not share that, choose “Most Compatible” in your camera settings or share the photo as a JPEG, then add it again.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'This photo shows {actual} faces; {expected} were expected. This is only a reminder.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Tick the box to agree; without consent you cannot send.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'This form needs a newer version of OciDeck. Update the app to fill it in.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Something in the form itself was changed by accident. Restore the form; your answers stay.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'This line looks like a control code of the form and may not appear in an answer. Change it.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML is not allowed in an answer. Use plain text and simple formatting.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'A code block is not closed. Close it with ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Only photos you add in this form can go in an answer; an image from the internet cannot.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Only links that start with https:// and email addresses are allowed in an answer.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'This file was made with a different version of the form (version {submission}; version {published} applies now). Check your answers.',
+  'Punt {item}: {bericht}': 'Item {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'The count is now {actual}; it must be between {min} and {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'The count is now {actual}; it may be at most {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'The count is now {actual}; it must be at least {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'The number must be a multiple of {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'The number must be between {min} and {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'The number may be at most {max}.',
+  'Het getal moet minstens {min} zijn.': 'The number must be at least {min}.',
+  'De datum moet op of na {min} liggen.': 'The date must be on or after {min}.',
+  'De datum moet op of vóór {max} liggen.':
+      'The date must be on or before {max}.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” is not a date. Write the date as year-month-day, for example 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'This is not a valid email address.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'This is not a valid web address. Start with https://.',
+  'Dit is geen geldig telefoonnummer.': 'This is not a valid phone number.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'This is not a valid Dutch postcode, such as 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Only one line fits here. Remove the line breaks.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Use only the checkboxes of this question: one box per option.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Write each item on its own line, with a dash or a number in front.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'The table is no longer correct: keep the header row as it was and give every row the same number of columns.',
+  'Dezelfde foto staat hier twee keer.': 'The same photo appears here twice.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Only photos belong in this field, no loose text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'The box for your consent is damaged. Restore the form.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'This answer does not have the shape that belongs to this question.',
   'Downloaden…': 'Download…',
   'Afbeelding opgeslagen als': 'Image saved as',
   '{naam}: ingesteld': '{naam}: set up',

@@ -1627,6 +1627,101 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Der er noget galt med denne formular. Kontakt den, der har lavet den.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Dette felt er påkrævet. Udfyld det for at kunne sende.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Du har skrevet {actual} ord; der skal mindst være {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Du har skrevet {actual} ord; der må højst være {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Du har skrevet {actual} tegn; der skal mindst være {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Du har skrevet {actual} tegn; der må højst være {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” står ikke på listen. Vælg en af mulighederne.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” er ikke et tal. Brug kun cifre, evt. med komma eller punktum til decimaler.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Dette foto er {actual} pixel bredt; her kræves {min}. Det er sandsynligvis blevet mindre, da det blev sendt via en beskedapp. Har du stadig originalen, så brug den. Hvis ikke, så send det alligevel: Arrangøren kontakter dig.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Dette foto er {actual} MB; maksimum er {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Indholdet af denne fil passer ikke til filtypen.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Denne filtype er ikke tilladt her.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Filen til dette foto kan ikke længere findes. Tilføj fotoet igen.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Beskriv i en kort sætning, hvad der kan ses på fotoet.',
+  'Geef aan van wie de foto is.': 'Angiv, hvem fotoet er fra.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Dette foto er ikke kontrolleret endnu. Vent et øjeblik, eller tilføj det igen.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Dette foto er en HEIC-fil. OciDeck kan ikke kontrollere eller rense den her, så den sendes, som den er. Den kan indeholde, hvor fotoet er taget. Vil du ikke dele det, så vælg “Mest kompatibel” i kameraindstillingerne, eller del fotoet som JPEG og tilføj det igen.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'På dette foto kan der ses {actual} ansigter; der var forventet {expected}. Det er kun en påmindelse.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Sæt flueben for at give samtykke; uden samtykke kan du ikke sende.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Denne formular kræver en nyere version af OciDeck. Opdater appen for at udfylde den.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Noget i selve formularen er ved en fejl blevet ændret. Gendan formularen; dine svar bliver stående.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Denne linje ligner en styrekode i formularen og må ikke stå i et svar. Ret den.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML er ikke tilladt i et svar. Brug almindelig tekst og enkel formatering.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'En kodeblok er ikke lukket. Luk den med ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'I et svar kan der kun være fotos, du tilføjer i denne formular; et billede fra internettet kan ikke bruges.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'I et svar er kun links, der begynder med https://, og e-mailadresser tilladt.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Denne fil er lavet med en anden version af formularen (version {submission}; nu gælder version {published}). Kontrollér dine svar.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Antallet er nu {actual}; det skal være mellem {min} og {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Antallet er nu {actual}; det må højst være {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Antallet er nu {actual}; det skal mindst være {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Tallet skal være et multiplum af {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Tallet skal være mellem {min} og {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Tallet må højst være {max}.',
+  'Het getal moet minstens {min} zijn.': 'Tallet skal mindst være {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Datoen skal være den {min} eller senere.',
+  'De datum moet op of vóór {max} liggen.':
+      'Datoen skal være den {max} eller tidligere.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” er ikke en dato. Skriv datoen som år-måned-dag, for eksempel 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Dette er ikke en gyldig e-mailadresse.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Dette er ikke en gyldig webadresse. Begynd med https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Dette er ikke et gyldigt telefonnummer.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Dette er ikke et gyldigt hollandsk postnummer, som 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Her er der kun plads til én linje. Fjern linjeskiftene.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Brug kun afkrydsningsfelterne i dette spørgsmål: ét felt pr. mulighed.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Skriv hvert punkt på sin egen linje med en bindestreg eller et nummer foran.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabellen er ikke længere korrekt: lad overskriftsrækken være, som den var, og giv hver række lige mange kolonner.',
+  'Dezelfde foto staat hier twee keer.':
+      'Det samme foto optræder to gange her.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'I dette felt hører kun fotos hjemme, ikke løs tekst.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Feltet til dit samtykke er beskadiget. Gendan formularen.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Dette svar har ikke den form, der hører til dette spørgsmål.',
   'Downloaden…': 'Download…',
   'Afbeelding opgeslagen als': 'Billede gemt som',
   '{naam}: ingesteld': '{naam}: konfigureret',

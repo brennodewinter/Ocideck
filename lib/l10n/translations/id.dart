@@ -1627,6 +1627,100 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Ada yang salah pada formulir ini. Hubungi orang yang membuatnya.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Kolom ini wajib diisi. Isilah agar Anda dapat mengirim.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Anda menulis {actual} kata; dibutuhkan minimal {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Anda menulis {actual} kata; maksimal yang diizinkan {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Anda menulis {actual} karakter; dibutuhkan minimal {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Anda menulis {actual} karakter; maksimal yang diizinkan {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” tidak ada dalam daftar. Pilih salah satu opsi.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” bukan angka. Gunakan hanya angka, jika perlu dengan koma atau titik untuk desimal.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Foto ini lebarnya {actual} piksel; di sini diminta {min}. Kemungkinan foto mengecil saat dikirim lewat aplikasi pesan. Jika Anda masih punya aslinya, gunakan yang asli. Jika tidak, kirim saja: penyelenggara akan menghubungi Anda.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Foto ini berukuran {actual} MB; batas maksimalnya {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Isi berkas ini tidak sesuai dengan jenis berkasnya.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Jenis berkas ini tidak diizinkan di sini.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Berkas foto ini tidak ditemukan lagi. Tambahkan fotonya lagi.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Jelaskan dalam satu kalimat singkat apa yang terlihat di foto.',
+  'Geef aan van wie de foto is.': 'Sebutkan siapa pemilik foto ini.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Foto ini belum diperiksa. Tunggu sebentar atau tambahkan lagi.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Foto ini berkas HEIC. OciDeck tidak dapat memeriksa atau membersihkannya di sini, jadi dikirim apa adanya. Mungkin berisi lokasi pengambilan foto. Jika Anda tidak ingin membagikannya, pilih “Paling kompatibel” di pengaturan kamera atau bagikan foto sebagai JPEG, lalu tambahkan lagi.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Foto ini menampilkan {actual} wajah; yang diharapkan {expected}. Ini hanya pengingat.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Centang kotaknya untuk menyetujui; tanpa persetujuan Anda tidak dapat mengirim.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Formulir ini membutuhkan OciDeck versi yang lebih baru. Perbarui aplikasi untuk mengisinya.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Ada bagian dalam formulir itu sendiri yang berubah tanpa sengaja. Pulihkan formulir; jawaban Anda tetap ada.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Baris ini tampak seperti kode kontrol formulir dan tidak boleh ada dalam jawaban. Ubahlah.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML tidak diizinkan dalam jawaban. Gunakan teks biasa dan format sederhana.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kode belum ditutup. Tutup dengan ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Dalam jawaban hanya foto yang Anda tambahkan di formulir ini yang bisa dipakai; gambar dari internet tidak bisa.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Dalam jawaban hanya tautan yang diawali https:// dan alamat email yang diizinkan.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Berkas ini dibuat dengan versi formulir yang lain (versi {submission}; kini berlaku versi {published}). Periksa jawaban Anda.',
+  'Punt {item}: {bericht}': 'Butir {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Jumlahnya sekarang {actual}; harus antara {min} dan {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Jumlahnya sekarang {actual}; maksimal {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Jumlahnya sekarang {actual}; minimal {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Angka harus merupakan kelipatan {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Angka harus antara {min} dan {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Angka maksimal {max}.',
+  'Het getal moet minstens {min} zijn.': 'Angka minimal {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Tanggal harus pada atau setelah {min}.',
+  'De datum moet op of vóór {max} liggen.':
+      'Tanggal harus pada atau sebelum {max}.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” bukan tanggal. Tulis tanggal sebagai tahun-bulan-hari, misalnya 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Ini bukan alamat email yang valid.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Ini bukan alamat web yang valid. Awali dengan https://.',
+  'Dit is geen geldig telefoonnummer.': 'Ini bukan nomor telepon yang valid.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Ini bukan kode pos Belanda yang valid, seperti 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Di sini hanya muat satu baris. Hapus pemisah barisnya.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Gunakan hanya kotak centang pertanyaan ini: satu kotak per opsi.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Tulis setiap butir pada barisnya sendiri, diawali tanda hubung atau nomor.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabel tidak lagi benar: biarkan baris judul seperti semula dan beri setiap baris jumlah kolom yang sama.',
+  'Dezelfde foto staat hier twee keer.':
+      'Foto yang sama muncul dua kali di sini.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Kolom ini hanya untuk foto, bukan teks lepas.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Kotak persetujuan Anda rusak. Pulihkan formulir.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Jawaban ini tidak berbentuk seperti yang dibutuhkan pertanyaan ini.',
   'Downloaden…': 'Unduh…',
   'Afbeelding opgeslagen als': 'Gambar disimpan sebagai',
   '{naam}: ingesteld': '{naam}: terkonfigurasi',

@@ -1655,6 +1655,100 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Há algo errado com este formulário. Entre em contato com quem o criou.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Este campo é obrigatório. Preencha-o para poder enviar.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Você escreveu {actual} palavras; são necessárias pelo menos {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Você escreveu {actual} palavras; são permitidas no máximo {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Você escreveu {actual} caracteres; são necessários pelo menos {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Você escreveu {actual} caracteres; são permitidos no máximo {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” não está na lista. Escolha uma das opções.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” não é um número. Use apenas dígitos, se necessário com vírgula ou ponto para as casas decimais.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Esta foto tem {actual} pixels de largura; aqui são pedidos {min}. Provavelmente ela diminuiu ao ser enviada por um aplicativo de mensagens. Se você ainda tem o original, use-o. Se não, envie-a mesmo assim: a organização entrará em contato com você.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Esta foto tem {actual} MB; o máximo é {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'O conteúdo deste arquivo não corresponde ao seu tipo de arquivo.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Este tipo de arquivo não é permitido aqui.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'O arquivo desta foto não foi mais encontrado. Adicione a foto novamente.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Descreva em uma frase curta o que se vê na foto.',
+  'Geef aan van wie de foto is.': 'Indique de quem é a foto.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Esta foto ainda não foi verificada. Aguarde um momento ou adicione-a novamente.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Esta foto é um arquivo HEIC. O OciDeck não consegue verificá-lo nem limpá-lo aqui, então ele é enviado como está. Pode conter o local onde a foto foi tirada. Se você prefere não compartilhar isso, escolha “Mais compatível” nas configurações da câmera ou compartilhe a foto como JPEG e adicione-a novamente.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Nesta foto aparecem {actual} rostos; eram esperados {expected}. É apenas um lembrete.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Marque a caixa para concordar; sem consentimento você não pode enviar.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Este formulário exige uma versão mais recente do OciDeck. Atualize o aplicativo para preenchê-lo.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Algo no próprio formulário foi alterado por engano. Restaure o formulário; suas respostas permanecem.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Esta linha parece um código de controle do formulário e não pode aparecer em uma resposta. Altere-a.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML não é permitido em uma resposta. Use texto simples e formatação simples.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Um bloco de código não foi fechado. Feche-o com ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Em uma resposta só podem entrar fotos que você adiciona neste formulário; uma imagem da internet não.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Em uma resposta só são permitidos links que começam com https:// e endereços de e-mail.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Este arquivo foi criado com outra versão do formulário (versão {submission}; agora vale a versão {published}). Verifique suas respostas.',
+  'Punt {item}: {bericht}': 'Ponto {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Agora há {actual}; deve haver entre {min} e {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Agora há {actual}; pode haver no máximo {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Agora há {actual}; deve haver pelo menos {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'O número deve ser múltiplo de {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'O número deve estar entre {min} e {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'O número pode ser no máximo {max}.',
+  'Het getal moet minstens {min} zijn.': 'O número deve ser pelo menos {min}.',
+  'De datum moet op of na {min} liggen.': 'A data deve ser {min} ou posterior.',
+  'De datum moet op of vóór {max} liggen.':
+      'A data deve ser {max} ou anterior.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” não é uma data. Escreva a data como ano-mês-dia, por exemplo 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Este não é um endereço de e-mail válido.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Este não é um endereço da web válido. Comece com https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Este não é um número de telefone válido.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Este não é um código postal holandês válido, como 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Aqui cabe apenas uma linha. Remova as quebras de linha.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Use apenas as caixas de seleção desta pergunta: uma caixa por opção.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Escreva cada ponto em uma linha própria, com um traço ou um número na frente.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'A tabela não está mais correta: deixe a linha de cabeçalho como estava e dê a cada linha o mesmo número de colunas.',
+  'Dezelfde foto staat hier twee keer.':
+      'A mesma foto aparece aqui duas vezes.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Neste campo só entram fotos, nenhum texto solto.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'A caixa do seu consentimento está danificada. Restaure o formulário.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Esta resposta não tem a forma que cabe a esta pergunta.',
   'Downloaden…': 'Descarregar…',
   'Afbeelding opgeslagen als': 'Imagem guardada como',
   '{naam}: ingesteld': '{naam}: configurado',

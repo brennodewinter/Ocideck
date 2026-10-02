@@ -2538,6 +2538,101 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Bu formda bir sorun var. Formu hazırlayan kişiyle iletişime geçin.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Bu alan zorunludur. Gönderebilmek için doldurun.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      '{actual} sözcük yazdınız; en az {min} gerekiyor.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} sözcük yazdınız; en fazla {max} sözcüğe izin verilir.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      '{actual} karakter yazdınız; en az {min} gerekiyor.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} karakter yazdınız; en fazla {max} karaktere izin verilir.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” listede yok. Seçeneklerden birini seçin.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” bir sayı değil. Yalnızca rakam kullanın, gerekirse ondalık için virgül veya nokta ile.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Bu fotoğrafın genişliği {actual} piksel; burada {min} isteniyor. Büyük olasılıkla bir mesajlaşma uygulamasıyla gönderilirken küçüldü. Orijinali hâlâ elinizdeyse onu kullanın. Değilse yine de gönderin: organizasyon sizinle iletişime geçecektir.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Bu fotoğraf {actual} MB; en fazla {max} MB olabilir.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Bu dosyanın içeriği dosya türüyle uyuşmuyor.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Bu dosya türüne burada izin verilmiyor.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Bu fotoğrafın dosyası artık bulunamıyor. Fotoğrafı yeniden ekleyin.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Fotoğrafta ne göründüğünü kısa bir cümleyle anlatın.',
+  'Geef aan van wie de foto is.': 'Fotoğrafın kime ait olduğunu belirtin.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Bu fotoğraf henüz denetlenmedi. Biraz bekleyin ya da yeniden ekleyin.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Bu fotoğraf bir HEIC dosyası. OciDeck burada onu denetleyemez veya temizleyemez, bu yüzden olduğu gibi gönderilir. Fotoğrafın nerede çekildiği bilgisi içinde olabilir. Bunu paylaşmak istemiyorsanız kamera ayarlarında “En uyumlu” seçeneğini seçin ya da fotoğrafı JPEG olarak paylaşıp yeniden ekleyin.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Bu fotoğrafta {actual} yüz görünüyor; {expected} bekleniyordu. Bu yalnızca bir hatırlatmadır.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Onay vermek için kutuyu işaretleyin; onay olmadan gönderemezsiniz.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Bu form OciDeck’in daha yeni bir sürümünü gerektiriyor. Doldurmak için uygulamayı güncelleyin.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Formun kendisinde yanlışlıkla bir şey değiştirilmiş. Formu geri yükleyin; yanıtlarınız korunur.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Bu satır formun bir denetim koduna benziyor ve bir yanıtta bulunamaz. Değiştirin.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'Bir yanıtta HTML’ye izin verilmez. Düz metin ve basit biçimlendirme kullanın.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Bir kod bloğu kapatılmamış. ``` ile kapatın.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Bir yanıtta yalnızca bu forma eklediğiniz fotoğraflar yer alabilir; internetten bir görsel olmaz.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Bir yanıtta yalnızca https:// ile başlayan bağlantılara ve e-posta adreslerine izin verilir.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Bu dosya formun başka bir sürümüyle oluşturulmuş (sürüm {submission}; şu an geçerli olan sürüm {published}). Yanıtlarınızı kontrol edin.',
+  'Punt {item}: {bericht}': 'Madde {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Şu an {actual} var; {min} ile {max} arasında olmalı.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Şu an {actual} var; en fazla {max} olabilir.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Şu an {actual} var; en az {min} olmalı.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Sayı {step} sayısının katı olmalı.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Sayı {min} ile {max} arasında olmalı.',
+  'Het getal mag hoogstens {max} zijn.': 'Sayı en fazla {max} olabilir.',
+  'Het getal moet minstens {min} zijn.': 'Sayı en az {min} olmalı.',
+  'De datum moet op of na {min} liggen.':
+      'Tarih {min} veya daha sonrası olmalı.',
+  'De datum moet op of vóór {max} liggen.':
+      'Tarih {max} veya daha öncesi olmalı.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” bir tarih değil. Tarihi yıl-ay-gün biçiminde yazın, örneğin 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Bu geçerli bir e-posta adresi değil.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Bu geçerli bir web adresi değil. https:// ile başlayın.',
+  'Dit is geen geldig telefoonnummer.':
+      'Bu geçerli bir telefon numarası değil.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Bu geçerli bir Hollanda posta kodu değil, örneğin 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Buraya yalnızca tek satır sığar. Satır sonlarını kaldırın.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Yalnızca bu sorunun onay kutularını kullanın: seçenek başına bir kutu.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Her maddeyi kendi satırına, başına bir çizgi ya da numara koyarak yazın.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tablo artık doğru değil: başlık satırını olduğu gibi bırakın ve her satıra aynı sayıda sütun verin.',
+  'Dezelfde foto staat hier twee keer.':
+      'Aynı fotoğraf burada iki kez yer alıyor.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Bu alana yalnızca fotoğraflar girer, serbest metin girmez.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Onay kutunuz hasar görmüş. Formu geri yükleyin.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Bu yanıt, bu soruya uygun biçimde değil.',
   'Downloaden…': 'İndir…',
   'Afbeelding opgeslagen als': 'Görsel şu adla kaydedildi:',
   '{naam}: ingesteld': '{naam}: ayarlandı',

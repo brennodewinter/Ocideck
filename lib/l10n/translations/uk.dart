@@ -1642,6 +1642,97 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Із цією формою щось не так. Зверніться до того, хто її створив.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Це поле обов’язкове. Заповніть його, щоб мати змогу надіслати.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Ви написали {actual} слів; потрібно щонайменше {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Ви написали {actual} слів; дозволено щонайбільше {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Ви написали {actual} символів; потрібно щонайменше {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Ви написали {actual} символів; дозволено щонайбільше {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '«{value}» немає в списку. Виберіть один із варіантів.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '«{value}» не є числом. Використовуйте лише цифри, за потреби з комою або крапкою для десяткових.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ця фотографія має ширину {actual} пікселів; тут потрібно {min}. Ймовірно, її зменшили під час надсилання через месенджер. Якщо оригінал у вас ще є, використайте його. Якщо ні, усе одно надішліть її: організація зв’яжеться з вами.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Ця фотографія важить {actual} МБ; максимум — {max} МБ.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Вміст цього файлу не відповідає його типу.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Цей тип файлу тут не дозволений.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Файл цієї фотографії більше не знайдено. Додайте фотографію знову.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Опишіть одним коротким реченням, що зображено на фотографії.',
+  'Geef aan van wie de foto is.': 'Вкажіть, чия це фотографія.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Цю фотографію ще не перевірено. Зачекайте трохи або додайте її знову.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ця фотографія — файл HEIC. OciDeck не може перевірити чи очистити його тут, тому його буде надіслано як є. У ньому може бути вказано, де зроблено фото. Якщо не хочете цим ділитися, виберіть у налаштуваннях камери «Максимальна сумісність» або поділіться фотографією у форматі JPEG і додайте її знову.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'На цій фотографії {actual} облич; очікувалося {expected}. Це лише нагадування.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Поставте позначку, щоб погодитися; без згоди надіслати не можна.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ця форма потребує новішої версії OciDeck. Оновіть застосунок, щоб її заповнити.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'У самій формі щось випадково змінено. Відновіть форму; ваші відповіді залишаться.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Цей рядок схожий на службовий код форми й не може бути у відповіді. Змініть його.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML у відповіді не дозволено. Використовуйте звичайний текст і просте форматування.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Блок коду не закрито. Закрийте його за допомогою ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'У відповіді можуть бути лише фотографії, які ви додали в цій формі; зображення з інтернету — ні.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'У відповіді дозволені лише посилання, що починаються з https://, та адреси електронної пошти.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Цей файл створено в іншій версії форми (версія {submission}; тепер діє версія {published}). Перевірте свої відповіді.',
+  'Punt {item}: {bericht}': 'Пункт {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Зараз їх {actual}; має бути від {min} до {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Зараз їх {actual}; може бути щонайбільше {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Зараз їх {actual}; має бути щонайменше {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Число має бути кратним {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Число має бути від {min} до {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Число може бути щонайбільше {max}.',
+  'Het getal moet minstens {min} zijn.': 'Число має бути щонайменше {min}.',
+  'De datum moet op of na {min} liggen.': 'Дата має бути {min} або пізніше.',
+  'De datum moet op of vóór {max} liggen.': 'Дата має бути {max} або раніше.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '«{value}» не є датою. Запишіть дату як рік-місяць-день, наприклад 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Це не дійсна адреса електронної пошти.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Це не дійсна веб-адреса. Почніть з https://.',
+  'Dit is geen geldig telefoonnummer.': 'Це не дійсний номер телефону.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Це не дійсний нідерландський поштовий індекс, наприклад 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Тут поміщається лише один рядок. Приберіть розриви рядків.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Використовуйте лише прапорці цього запитання: один прапорець на варіант.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Пишіть кожен пункт в окремому рядку, зі знаком «—» або номером попереду.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Таблиця вже не правильна: залиште рядок заголовка таким, яким він був, і зробіть в усіх рядках однакову кількість стовпців.',
+  'Dezelfde foto staat hier twee keer.': 'Та сама фотографія тут двічі.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'У це поле належать лише фотографії, без окремого тексту.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Прапорець вашої згоди пошкоджено. Відновіть форму.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ця відповідь не має форми, яка відповідає цьому запитанню.',
   'Downloaden…': 'Завантажити…',
   'Afbeelding opgeslagen als': 'Зображення збережено як',
   '{naam}: ingesteld': '{naam}: налаштовано',

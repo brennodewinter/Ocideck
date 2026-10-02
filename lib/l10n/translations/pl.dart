@@ -1639,6 +1639,102 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Coś jest nie tak z tym formularzem. Skontaktuj się z osobą, która go przygotowała.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'To pole jest wymagane. Wypełnij je, aby móc wysłać.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Wpisano {actual} słów; potrzeba ich co najmniej {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Wpisano {actual} słów; dozwolone jest najwyżej {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Wpisano {actual} znaków; potrzeba ich co najmniej {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Wpisano {actual} znaków; dozwolone jest najwyżej {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” nie ma na liście. Wybierz jedną z opcji.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” nie jest liczbą. Używaj wyłącznie cyfr, ewentualnie z przecinkiem lub kropką dla części dziesiętnych.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'To zdjęcie ma {actual} pikseli szerokości; tutaj wymagane jest {min}. Prawdopodobnie zostało zmniejszone podczas wysyłania przez komunikator. Jeśli nadal masz oryginał, użyj go. Jeśli nie, mimo to je wyślij: organizator skontaktuje się z Tobą.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'To zdjęcie ma {actual} MB; maksimum to {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Zawartość tego pliku nie pasuje do jego typu.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ten typ pliku nie jest tu dozwolony.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Nie można już znaleźć pliku tego zdjęcia. Dodaj zdjęcie ponownie.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Opisz jednym krótkim zdaniem, co widać na zdjęciu.',
+  'Geef aan van wie de foto is.': 'Podaj, czyje jest to zdjęcie.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'To zdjęcie nie zostało jeszcze sprawdzone. Poczekaj chwilę lub dodaj je ponownie.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'To zdjęcie jest plikiem HEIC. OciDeck nie może go tu sprawdzić ani oczyścić, więc zostanie wysłane w takiej postaci, w jakiej jest. Może zawierać informację, gdzie zdjęcie zrobiono. Jeśli nie chcesz jej udostępniać, wybierz w ustawieniach aparatu „Najbardziej zgodne” albo udostępnij zdjęcie jako JPEG i dodaj je ponownie.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Na tym zdjęciu widać {actual} twarzy; oczekiwano {expected}. To tylko przypomnienie.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Zaznacz pole, aby wyrazić zgodę; bez zgody nie możesz wysłać.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ten formularz wymaga nowszej wersji OciDeck. Zaktualizuj aplikację, aby go wypełnić.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'W samym formularzu przypadkowo coś zmieniono. Przywróć formularz; Twoje odpowiedzi zostaną zachowane.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ten wiersz wygląda jak kod sterujący formularza i nie może znajdować się w odpowiedzi. Zmień go.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML nie jest dozwolony w odpowiedzi. Użyj zwykłego tekstu i prostego formatowania.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kodu nie jest zamknięty. Zamknij go za pomocą ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'W odpowiedzi mogą być tylko zdjęcia dodane w tym formularzu; obrazu z internetu nie można użyć.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'W odpowiedzi dozwolone są tylko linki zaczynające się od https:// oraz adresy e-mail.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Ten plik utworzono w innej wersji formularza (wersja {submission}; obecnie obowiązuje wersja {published}). Sprawdź swoje odpowiedzi.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Obecnie jest ich {actual}; musi być od {min} do {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Obecnie jest ich {actual}; może być najwyżej {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Obecnie jest ich {actual}; musi być co najmniej {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Liczba musi być wielokrotnością {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Liczba musi mieścić się między {min} a {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Liczba może wynosić najwyżej {max}.',
+  'Het getal moet minstens {min} zijn.':
+      'Liczba musi wynosić co najmniej {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Data musi przypadać w dniu {min} lub później.',
+  'De datum moet op of vóór {max} liggen.':
+      'Data musi przypadać w dniu {max} lub wcześniej.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” nie jest datą. Zapisz datę jako rok-miesiąc-dzień, na przykład 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'To nie jest prawidłowy adres e-mail.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'To nie jest prawidłowy adres internetowy. Zacznij od https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'To nie jest prawidłowy numer telefonu.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'To nie jest prawidłowy holenderski kod pocztowy, taki jak 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Zmieści się tu tylko jeden wiersz. Usuń podziały wierszy.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Używaj tylko pól wyboru tego pytania: jedno pole na opcję.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Zapisz każdy punkt w osobnym wierszu, z myślnikiem lub numerem na początku.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabela nie jest już poprawna: zostaw wiersz nagłówka bez zmian i daj każdemu wierszowi tyle samo kolumn.',
+  'Dezelfde foto staat hier twee keer.':
+      'To samo zdjęcie występuje tu dwa razy.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'W tym polu mogą być tylko zdjęcia, bez luźnego tekstu.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Pole Twojej zgody jest uszkodzone. Przywróć formularz.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ta odpowiedź nie ma formy właściwej dla tego pytania.',
   'Downloaden…': 'Pobierz…',
   'Afbeelding opgeslagen als': 'Obraz zapisano jako',
   '{naam}: ingesteld': '{naam}: skonfigurowany',

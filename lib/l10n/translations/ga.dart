@@ -1657,6 +1657,102 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Tá rud éigin cearr leis an bhfoirm seo. Téigh i dteagmháil leis an duine a rinne í.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Tá an réimse seo riachtanach. Líon isteach é chun a bheith in ann a sheoladh.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Scríobh tú {actual} focal; tá {min} ar a laghad ag teastáil.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Scríobh tú {actual} focal; ní cheadaítear níos mó ná {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Scríobh tú {actual} carachtar; tá {min} ar a laghad ag teastáil.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Scríobh tú {actual} carachtar; ní cheadaítear níos mó ná {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      'Níl “{value}” ar an liosta. Roghnaigh ceann de na roghanna.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      'Ní uimhir é “{value}”. Úsáid digití amháin, le camóg nó le pointe do na deachúlacha más gá.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Tá an grianghraf seo {actual} picteilín ar leithead; iarrtar {min} anseo. Is dócha gur laghdaíodh é nuair a seoladh trí aip teachtaireachtaí é. Má tá an bunleagan agat fós, úsáid sin. Mura bhfuil, seol mar sin féin é: déanfaidh an eagraíocht teagmháil leat.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Tá an grianghraf seo {actual} MB; is é {max} MB an uasmhéid.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Ní chomhoireann ábhar an chomhaid seo lena chineál comhaid.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ní cheadaítear an cineál comhaid seo anseo.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Ní féidir comhad an ghrianghraif seo a aimsiú a thuilleadh. Cuir an grianghraf leis arís.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Déan cur síos i bhfocal gearr ar a bhfuil le feiceáil sa ghrianghraf.',
+  'Geef aan van wie de foto is.': 'Luaigh cé leis an grianghraf.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Níor seiceáladh an grianghraf seo go fóill. Fan nóiméad nó cuir leis arís é.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Is comhad HEIC é an grianghraf seo. Ní féidir le OciDeck é a sheiceáil ná a ghlanadh anseo, mar sin seoltar mar atá sé é. D\'fhéadfadh sé a bheith ann cá ndearnadh an grianghraf. Mura mian leat é sin a roinnt, roghnaigh “Is comhoiriúnaí” i socruithe an cheamara nó roinn an grianghraf mar JPEG agus cuir leis arís é.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Tá {actual} aghaidh le feiceáil sa ghrianghraf seo; bhíothas ag súil le {expected}. Is meabhrúchán amháin é seo.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Cuir tic sa bhosca chun toiliú; gan toiliú ní féidir leat a sheoladh.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Teastaíonn leagan níos nuaí de OciDeck leis an bhfoirm seo. Nuashonraigh an aip chun í a líonadh.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Athraíodh rud éigin san fhoirm féin de thaisme. Athchóirigh an fhoirm; fanann do chuid freagraí.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Is cosúil leis an líne seo cód rialaithe na foirme agus ní cheadaítear í i bhfreagra. Athraigh í.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'Ní cheadaítear HTML i bhfreagra. Úsáid gnáth-théacs agus formáidiú simplí.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Níl bloc cóid dúnta. Dún é le ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'I bhfreagra, ní féidir ach grianghraif a chuireann tú leis san fhoirm seo a úsáid; ní féidir íomhá ón idirlíon.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'I bhfreagra, ní cheadaítear ach naisc a thosaíonn le https:// agus seoltaí r-phoist.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Rinneadh an comhad seo le leagan eile den fhoirm (leagan {submission}; is é leagan {published} atá i bhfeidhm anois). Seiceáil do chuid freagraí.',
+  'Punt {item}: {bericht}': 'Pointe {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Is é {actual} an líon anois; caithfidh sé a bheith idir {min} agus {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Is é {actual} an líon anois; féadfaidh sé a bheith {max} ar a mhéad.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Is é {actual} an líon anois; caithfidh sé a bheith {min} ar a laghad.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Caithfidh an uimhir a bheith ina iolraí de {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Caithfidh an uimhir a bheith idir {min} agus {max}.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Féadfaidh an uimhir a bheith {max} ar a mhéad.',
+  'Het getal moet minstens {min} zijn.':
+      'Caithfidh an uimhir a bheith {min} ar a laghad.',
+  'De datum moet op of na {min} liggen.':
+      'Caithfidh an dáta a bheith {min} nó níos déanaí.',
+  'De datum moet op of vóór {max} liggen.':
+      'Caithfidh an dáta a bheith {max} nó níos luaithe.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      'Ní dáta é “{value}”. Scríobh an dáta mar bhliain-mí-lá, mar shampla 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Ní seoladh r-phoist bailí é seo.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Ní seoladh gréasáin bailí é seo. Tosaigh le https://.',
+  'Dit is geen geldig telefoonnummer.': 'Ní uimhir ghutháin bhailí í seo.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Ní cód poist bailí Ollannach é seo, mar 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Ní fhóireann ach líne amháin anseo. Bain na bristeacha líne.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Úsáid na boscaí ticéala den cheist seo amháin: bosca amháin in aghaidh an rogha.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Scríobh gach pointe ar a líne féin, le fleasc nó uimhir roimhe.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Níl an tábla ceart a thuilleadh: fág an líne chinn mar a bhí agus tabhair an líon céanna colún do gach líne.',
+  'Dezelfde foto staat hier twee keer.':
+      'Tá an grianghraf céanna anseo faoi dhó.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Ní bhaineann ach grianghraif leis an réimse seo, gan téacs scaoilte.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Tá bosca do thoilithe damáistithe. Athchóirigh an fhoirm.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Níl an cruth ag an bhfreagra seo a bhaineann leis an gceist seo.',
   'Downloaden…': 'Íoslódáil…',
   'Afbeelding opgeslagen als': 'Íomhá sábháilte mar',
   '{naam}: ingesteld': '{naam}: cumraithe',

@@ -1627,6 +1627,98 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Nekaj ni v redu s tem obrazcem. Obrnite se na osebo, ki ga je ustvarila.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'To polje je obvezno. Izpolnite ga, da boste lahko poslali.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Napisali ste {actual} besed; potrebnih je vsaj {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Napisali ste {actual} besed; dovoljenih je največ {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Napisali ste {actual} znakov; potrebnih je vsaj {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Napisali ste {actual} znakov; dovoljenih je največ {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '»{value}« ni na seznamu. Izberite eno od možnosti.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '»{value}« ni število. Uporabite samo števke, po potrebi z vejico ali piko za decimalke.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ta fotografija je široka {actual} slikovnih pik; tukaj se zahteva {min}. Verjetno se je zmanjšala, ko je bila poslana prek aplikacije za sporočila. Če imate izvirnik še vedno, uporabite tega. Če ne, jo vseeno pošljite: organizator se vam bo oglasil.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Ta fotografija ima {actual} MB; največ je {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Vsebina te datoteke se ne ujema z njeno vrsto.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ta vrsta datoteke tukaj ni dovoljena.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Datoteke te fotografije ni več mogoče najti. Fotografijo dodajte znova.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'V enem kratkem stavku opišite, kaj je videti na fotografiji.',
+  'Geef aan van wie de foto is.': 'Navedite, čigava je fotografija.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Ta fotografija še ni preverjena. Počakajte trenutek ali jo dodajte znova.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ta fotografija je datoteka HEIC. OciDeck je tukaj ne more preveriti ali počistiti, zato se pošlje takšna, kot je. Morda vsebuje, kje je bila fotografija posneta. Če tega ne želite deliti, v nastavitvah kamere izberite »Najbolj združljivo« ali fotografijo delite kot JPEG in jo dodajte znova.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Na tej fotografiji je videti {actual} obrazov; pričakovanih je bilo {expected}. To je le opomnik.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Označite polje, da se strinjate; brez soglasja ne morete poslati.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ta obrazec zahteva novejšo različico OciDeck. Posodobite aplikacijo, da ga izpolnite.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'V samem obrazcu je bilo nekaj pomotoma spremenjeno. Obnovite obrazec; vaši odgovori ostanejo.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ta vrstica je videti kot nadzorna koda obrazca in ne sme biti v odgovoru. Spremenite jo.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML v odgovoru ni dovoljen. Uporabite navadno besedilo in preprosto oblikovanje.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kode ni zaprt. Zaprite ga z ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'V odgovoru so lahko samo fotografije, ki jih dodate v tem obrazcu; slika z interneta ne more.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'V odgovoru so dovoljene samo povezave, ki se začnejo s https://, in e-poštni naslovi.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Ta datoteka je bila ustvarjena z drugo različico obrazca (različica {submission}; zdaj velja različica {published}). Preverite svoje odgovore.',
+  'Punt {item}: {bericht}': 'Točka {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Zdaj jih je {actual}; biti jih mora med {min} in {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Zdaj jih je {actual}; lahko jih je največ {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Zdaj jih je {actual}; biti jih mora vsaj {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Število mora biti večkratnik števila {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Število mora biti med {min} in {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Število je lahko največ {max}.',
+  'Het getal moet minstens {min} zijn.': 'Število mora biti vsaj {min}.',
+  'De datum moet op of na {min} liggen.': 'Datum mora biti {min} ali pozneje.',
+  'De datum moet op of vóór {max} liggen.': 'Datum mora biti {max} ali prej.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '»{value}« ni datum. Datum zapišite kot leto-mesec-dan, na primer 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'To ni veljaven e-poštni naslov.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'To ni veljaven spletni naslov. Začnite s https://.',
+  'Dit is geen geldig telefoonnummer.': 'To ni veljavna telefonska številka.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'To ni veljavna nizozemska poštna številka, kot je 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Tukaj je prostora samo za eno vrstico. Odstranite prelome vrstic.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Uporabite samo potrditvena polja tega vprašanja: eno polje na možnost.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Vsako točko napišite v svojo vrstico, spredaj s pomišljajem ali številko.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabela ni več pravilna: pustite vrstico z naslovi, kakršna je bila, in vsaki vrstici dajte enako število stolpcev.',
+  'Dezelfde foto staat hier twee keer.':
+      'Ista fotografija se tukaj pojavi dvakrat.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'V to polje spadajo samo fotografije, brez posameznega besedila.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Polje vašega soglasja je poškodovano. Obnovite obrazec.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ta odgovor nima oblike, ki spada k temu vprašanju.',
   'Downloaden…': 'Prenesi…',
   'Afbeelding opgeslagen als': 'Slika shranjena kot',
   '{naam}: ingesteld': '{naam}: nastavljen',

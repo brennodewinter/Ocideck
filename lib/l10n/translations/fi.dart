@@ -1627,6 +1627,101 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Tässä lomakkeessa on jotain vialla. Ota yhteyttä sen tekijään.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Tämä kenttä on pakollinen. Täytä se, jotta voit lähettää.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Kirjoitit {actual} sanaa; vähintään {min} tarvitaan.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjoitit {actual} sanaa; enintään {max} sallitaan.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Kirjoitit {actual} merkkiä; vähintään {min} tarvitaan.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjoitit {actual} merkkiä; enintään {max} sallitaan.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '”{value}” ei ole luettelossa. Valitse jokin vaihtoehdoista.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '”{value}” ei ole luku. Käytä vain numeroita, tarvittaessa pilkulla tai pisteellä desimaaleille.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Tämä valokuva on {actual} pikseliä leveä; tässä vaaditaan {min}. Se on luultavasti pienentynyt, kun se lähetettiin viestisovelluksen kautta. Jos sinulla on vielä alkuperäinen, käytä sitä. Jos ei, lähetä se silti: järjestäjä ottaa yhteyttä.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Tämä valokuva on {actual} Mt; enimmäiskoko on {max} Mt.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Tämän tiedoston sisältö ei vastaa sen tiedostotyyppiä.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Tämä tiedostotyyppi ei ole sallittu täällä.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Tämän valokuvan tiedostoa ei enää löydy. Lisää valokuva uudelleen.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Kuvaile yhdellä lyhyellä lauseella, mitä valokuvassa näkyy.',
+  'Geef aan van wie de foto is.': 'Kerro, kenen valokuva on.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Tätä valokuvaa ei ole vielä tarkistettu. Odota hetki tai lisää se uudelleen.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Tämä valokuva on HEIC-tiedosto. OciDeck ei voi tarkistaa tai puhdistaa sitä täällä, joten se lähetetään sellaisenaan. Se voi sisältää tiedon siitä, missä valokuva on otettu. Jos et halua jakaa sitä, valitse kameran asetuksista ”Yhteensopivin” tai jaa valokuva JPEG-muodossa ja lisää se uudelleen.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Tässä valokuvassa näkyy {actual} kasvoa; odotettiin {expected}. Tämä on vain muistutus.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Rastita ruutu antaaksesi suostumuksen; ilman suostumusta et voi lähettää.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Tämä lomake vaatii OciDeckin uudemman version. Päivitä sovellus täyttääksesi sen.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Itse lomakkeessa on vahingossa muutettu jotain. Palauta lomake; vastauksesi säilyvät.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Tämä rivi näyttää lomakkeen ohjauskoodilta eikä saa olla vastauksessa. Muuta se.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML ei ole sallittu vastauksessa. Käytä tavallista tekstiä ja yksinkertaista muotoilua.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Koodilohkoa ei ole suljettu. Sulje se merkinnällä ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Vastaukseen voi liittää vain valokuvia, jotka lisäät tähän lomakkeeseen; kuva internetistä ei käy.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Vastauksessa sallitaan vain https://-alkuiset linkit ja sähköpostiosoitteet.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Tämä tiedosto on tehty lomakkeen toisella versiolla (versio {submission}; nyt on voimassa versio {published}). Tarkista vastauksesi.',
+  'Punt {item}: {bericht}': 'Kohta {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Määrä on nyt {actual}; sen pitää olla {min}–{max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Määrä on nyt {actual}; se saa olla enintään {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Määrä on nyt {actual}; sen pitää olla vähintään {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Luvun pitää olla luvun {step} monikerta.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Luvun pitää olla {min}–{max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Luku saa olla enintään {max}.',
+  'Het getal moet minstens {min} zijn.': 'Luvun pitää olla vähintään {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Päivämäärän pitää olla {min} tai sen jälkeen.',
+  'De datum moet op of vóór {max} liggen.':
+      'Päivämäärän pitää olla {max} tai sitä ennen.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '”{value}” ei ole päivämäärä. Kirjoita päivämäärä muodossa vuosi-kuukausi-päivä, esimerkiksi 2026-11-01.',
+  'Dit is geen geldig e-mailadres.':
+      'Tämä ei ole kelvollinen sähköpostiosoite.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Tämä ei ole kelvollinen verkko-osoite. Aloita merkinnällä https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Tämä ei ole kelvollinen puhelinnumero.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Tämä ei ole kelvollinen hollantilainen postinumero, esimerkiksi 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Tähän mahtuu vain yksi rivi. Poista rivinvaihdot.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Käytä vain tämän kysymyksen valintaruutuja: yksi ruutu vaihtoehtoa kohti.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Kirjoita jokainen kohta omalle rivilleen, viiva tai numero edessä.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Taulukko ei enää ole oikein: jätä otsikkorivi ennalleen ja anna jokaiselle riville yhtä monta saraketta.',
+  'Dezelfde foto staat hier twee keer.': 'Sama valokuva on tässä kahdesti.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Tähän kenttään kuuluvat vain valokuvat, ei irrallista tekstiä.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Suostumuksesi ruutu on vioittunut. Palauta lomake.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Tällä vastauksella ei ole sitä muotoa, joka kuuluu tähän kysymykseen.',
   'Downloaden…': 'Lataa…',
   'Afbeelding opgeslagen als': 'Kuva tallennettu nimellä',
   '{naam}: ingesteld': '{naam}: määritetty',

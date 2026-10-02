@@ -1629,6 +1629,100 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Valami nincs rendben ezzel az űrlappal. Vegye fel a kapcsolatot azzal, aki készítette.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Ez a mező kötelező. Töltse ki, hogy küldeni tudjon.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      '{actual} szót írt; legalább {min} szükséges.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} szót írt; legfeljebb {max} megengedett.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      '{actual} karaktert írt; legalább {min} szükséges.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} karaktert írt; legfeljebb {max} megengedett.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” nincs a listán. Válasszon az opciók közül.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” nem szám. Csak számjegyeket használjon, szükség esetén vesszővel vagy ponttal a tizedesekhez.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ez a fotó {actual} képpont széles; itt {min} szükséges. Valószínűleg lekicsinyítették, amikor üzenetküldő alkalmazáson keresztül küldték. Ha még megvan az eredeti, azt használja. Ha nem, küldje el így is: a szervező felveszi Önnel a kapcsolatot.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Ez a fotó {actual} MB; a maximum {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'A fájl tartalma nem egyezik a fájltípusával.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ez a fájltípus itt nem engedélyezett.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'A fotó fájlja már nem található. Adja hozzá újra a fotót.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Írja le egyetlen rövid mondatban, mi látható a fotón.',
+  'Geef aan van wie de foto is.': 'Adja meg, kié a fotó.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Ezt a fotót még nem ellenőrizték. Várjon egy pillanatot, vagy adja hozzá újra.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ez a fotó HEIC-fájl. Az OciDeck itt nem tudja ellenőrizni vagy megtisztítani, ezért úgy küldi el, ahogy van. Tartalmazhatja, hol készült a fotó. Ha ezt nem szeretné megosztani, válassza a kamera beállításaiban a „Legkompatibilisebb” lehetőséget, vagy ossza meg a fotót JPEG-ként, és adja hozzá újra.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Ezen a fotón {actual} arc látható; {expected} volt várható. Ez csak emlékeztető.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Jelölje be a négyzetet a hozzájáruláshoz; hozzájárulás nélkül nem küldhet.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ehhez az űrlaphoz az OciDeck újabb verziója szükséges. Frissítse az alkalmazást a kitöltéséhez.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Magán az űrlapon véletlenül módosítottak valamit. Állítsa vissza az űrlapot; a válaszai megmaradnak.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ez a sor az űrlap vezérlőkódjára hasonlít, és nem szerepelhet válaszban. Módosítsa.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'A HTML nem engedélyezett a válaszban. Használjon egyszerű szöveget és egyszerű formázást.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Egy kódblokk nincs lezárva. Zárja le ezzel: ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'A válaszban csak az ebben az űrlapban hozzáadott fotók szerepelhetnek; az internetről származó kép nem.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'A válaszban csak a https://-sel kezdődő hivatkozások és az e-mail-címek engedélyezettek.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Ez a fájl az űrlap egy másik verziójával készült ({submission}. verzió; most a(z) {published}. verzió érvényes). Ellenőrizze a válaszait.',
+  'Punt {item}: {bericht}': '{item}. pont: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'A darabszám most {actual}; {min} és {max} között kell lennie.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'A darabszám most {actual}; legfeljebb {max} lehet.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'A darabszám most {actual}; legalább {min} kell legyen.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'A számnak a(z) {step} többszörösének kell lennie.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'A számnak {min} és {max} között kell lennie.',
+  'Het getal mag hoogstens {max} zijn.': 'A szám legfeljebb {max} lehet.',
+  'Het getal moet minstens {min} zijn.':
+      'A számnak legalább {min} kell lennie.',
+  'De datum moet op of na {min} liggen.':
+      'A dátumnak {min} vagy későbbinek kell lennie.',
+  'De datum moet op of vóór {max} liggen.':
+      'A dátumnak {max} vagy korábbinak kell lennie.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” nem dátum. A dátumot év-hónap-nap formában írja, például 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Ez nem érvényes e-mail-cím.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Ez nem érvényes webcím. Kezdje így: https://.',
+  'Dit is geen geldig telefoonnummer.': 'Ez nem érvényes telefonszám.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Ez nem érvényes holland irányítószám, például 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Ide csak egy sor fér. Távolítsa el a sortöréseket.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Csak a kérdés jelölőnégyzeteit használja: opciónként egy négyzetet.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Minden pontot külön sorba írjon, elöl kötőjellel vagy számmal.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'A táblázat már nem helyes: hagyja a fejlécsort úgy, ahogy volt, és minden sorban ugyanannyi oszlop legyen.',
+  'Dezelfde foto staat hier twee keer.': 'Ugyanaz a fotó kétszer szerepel itt.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Ebbe a mezőbe csak fotók valók, önálló szöveg nem.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'A hozzájárulásának négyzete megsérült. Állítsa vissza az űrlapot.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ez a válasz nem olyan alakú, mint amilyen ehhez a kérdéshez tartozik.',
   'Downloaden…': 'Letöltés…',
   'Afbeelding opgeslagen als': 'Kép elmentve mint',
   '{naam}: ingesteld': '{naam}: beállítva',

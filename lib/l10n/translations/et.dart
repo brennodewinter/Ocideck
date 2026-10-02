@@ -1620,6 +1620,99 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Selle vormiga on midagi valesti. Võtke ühendust selle koostajaga.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'See väli on kohustuslik. Täitke see, et saaksite saata.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Kirjutasite {actual} sõna; vaja on vähemalt {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjutasite {actual} sõna; lubatud on kuni {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Kirjutasite {actual} märki; vaja on vähemalt {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjutasite {actual} märki; lubatud on kuni {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” ei ole loendis. Valige üks valikutest.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” ei ole arv. Kasutage ainult numbreid, vajaduse korral koma või punktiga kümnendmurru jaoks.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'See foto on {actual} pikslit lai; siin nõutakse {min}. Tõenäoliselt vähenes see sõnumirakenduse kaudu saatmisel. Kui teil on originaal alles, kasutage seda. Kui ei, saatke see siiski: korraldaja võtab teiega ühendust.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'See foto on {actual} MB; maksimum on {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Selle faili sisu ei vasta selle failitüübile.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'See failitüüp ei ole siin lubatud.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Selle foto faili ei leita enam. Lisage foto uuesti.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Kirjeldage ühe lühikese lausega, mis fotol on näha.',
+  'Geef aan van wie de foto is.': 'Märkige, kelle foto see on.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Seda fotot ei ole veel kontrollitud. Oodake hetk või lisage see uuesti.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'See foto on HEIC-fail. OciDeck ei saa seda siin kontrollida ega puhastada, mistõttu see saadetakse sellisena, nagu see on. See võib sisaldada teavet, kus foto tehti. Kui te ei soovi seda jagada, valige kaamera sätetes „Kõige ühilduvam” või jagage foto JPEG-vormingus ja lisage see uuesti.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Sellel fotol on näha {actual} nägu; oodati {expected}. See on ainult meeldetuletus.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Märkige ruut, et nõustuda; ilma nõusolekuta ei saa saata.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'See vorm nõuab OciDecki uuemat versiooni. Värskendage rakendust, et seda täita.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Vormis endas on kogemata midagi muudetud. Taastage vorm; teie vastused jäävad alles.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'See rida näeb välja nagu vormi juhtkood ega tohi vastuses olla. Muutke seda.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML ei ole vastuses lubatud. Kasutage tavalist teksti ja lihtsat vormindust.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Koodiplokk on sulgemata. Sulgege see märgendiga ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Vastuses võivad olla ainult fotod, mille lisate sellesse vormi; pilti internetist ei saa kasutada.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Vastuses on lubatud ainult lingid, mis algavad https://, ja e-posti aadressid.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'See fail on tehtud vormi teise versiooniga (versioon {submission}; nüüd kehtib versioon {published}). Kontrollige oma vastuseid.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Praegu on neid {actual}; peab olema {min} kuni {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Praegu on neid {actual}; võib olla kuni {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Praegu on neid {actual}; peab olema vähemalt {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Arv peab olema arvu {step} kordne.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Arv peab olema {min} kuni {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Arv võib olla kuni {max}.',
+  'Het getal moet minstens {min} zijn.': 'Arv peab olema vähemalt {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Kuupäev peab olema {min} või hilisem.',
+  'De datum moet op of vóór {max} liggen.':
+      'Kuupäev peab olema {max} või varasem.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” ei ole kuupäev. Kirjutage kuupäev kujul aasta-kuu-päev, näiteks 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'See ei ole kehtiv e-posti aadress.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'See ei ole kehtiv veebiaadress. Alustage https://.',
+  'Dit is geen geldig telefoonnummer.': 'See ei ole kehtiv telefoninumber.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'See ei ole kehtiv Hollandi sihtnumber, näiteks 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Siia mahub ainult üks rida. Eemaldage reavahetused.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Kasutage ainult selle küsimuse märkeruute: üks ruut valiku kohta.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Kirjutage iga punkt eraldi reale, ees kriips või number.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabel ei ole enam õige: jätke päisrida samaks ja andke igale reale sama palju veerge.',
+  'Dezelfde foto staat hier twee keer.': 'Sama foto on siin kaks korda.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Sellesse välja kuuluvad ainult fotod, mitte eraldiseisev tekst.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Teie nõusoleku ruut on kahjustatud. Taastage vorm.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Sellel vastusel ei ole vormi, mis sellele küsimusele sobib.',
   'Downloaden…': 'Laadi alla…',
   'Afbeelding opgeslagen als': 'Pilt salvestatud nimega',
   '{naam}: ingesteld': '{naam}: seadistatud',

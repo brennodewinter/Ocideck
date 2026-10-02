@@ -1642,6 +1642,99 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Aliquid in hac forma non recte se habet. Cum eo qui eam fecit communica.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Hic ager necessarius est. Imple eum ut mittere possis.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      '{actual} verba scripsisti; saltem {min} necessaria sunt.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} verba scripsisti; non plus quam {max} permittuntur.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      '{actual} litteras scripsisti; saltem {min} necessariae sunt.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} litteras scripsisti; non plus quam {max} permittuntur.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '«{value}» in indice non est. Unam ex optionibus elige.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '«{value}» numerus non est. Numeris tantum utere, si opus est cum comma vel puncto pro decimalibus.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Haec imago {actual} pixela lata est; hic {min} petuntur. Verisimiliter minor facta est cum per applicationem nuntiorum missa est. Si adhuc exemplar originale habes, eo utere. Sin minus, nihilominus mitte: ordo tecum communicabit.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Haec imago {actual} MB est; maximum est {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Contentum huius fasciculi cum genere fasciculi non congruit.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Hoc genus fasciculi hic non permittitur.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Fasciculus huius imaginis iam inveniri non potest. Imaginem iterum adde.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Brevi sententia describe quid in imagine videatur.',
+  'Geef aan van wie de foto is.': 'Indica cuius sit imago.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Haec imago nondum examinata est. Paulisper exspecta vel iterum adde.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Haec imago fasciculus HEIC est. OciDeck eum hic neque examinare neque purgare potest; itaque sicut est mittitur. Fieri potest ut contineat ubi imago capta sit. Si id communicare non vis, in optionibus camerae «Maxime compatibile» elige vel imaginem ut JPEG communica et iterum adde.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'In hac imagine {actual} facies sunt; exspectabantur {expected}. Haec monitio tantum est.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Signum appone ut consentias; sine consensu mittere non potes.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Haec forma recentiorem OciDeck versionem requirit. Applicationem renova ut eam impleas.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Aliquid in ipsa forma casu mutatum est. Formam restitue; responsa tua manent.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Haec linea similis est codici regendi formae et in responso poni non potest. Muta eam.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML in responso non permittitur. Textu simplici et forma simplici utere.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Truncus codicis non clausus est. Claude eum cum ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'In responso tantum imagines poni possunt quas in hac forma addis; imago ex interrete non potest.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'In responso tantum nexus qui cum https:// incipiunt et inscriptiones electronicae permittuntur.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Hic fasciculus alia versione formae factus est (versio {submission}; nunc valet versio {published}). Responsa tua inspice.',
+  'Punt {item}: {bericht}': 'Punctum {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Nunc sunt {actual}; inter {min} et {max} esse debent.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Nunc sunt {actual}; non plus quam {max} esse possunt.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Nunc sunt {actual}; saltem {min} esse debent.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Numerus multiplum numeri {step} esse debet.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Numerus inter {min} et {max} esse debet.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Numerus non plus quam {max} esse potest.',
+  'Het getal moet minstens {min} zijn.': 'Numerus saltem {min} esse debet.',
+  'De datum moet op of na {min} liggen.': 'Dies {min} vel post eum esse debet.',
+  'De datum moet op of vóór {max} liggen.':
+      'Dies {max} vel ante eum esse debet.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '«{value}» dies non est. Diem scribe ut annus-mensis-dies, exempli gratia 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Haec inscriptio electronica non valet.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Haec inscriptio interretialis non valet. Incipe cum https://.',
+  'Dit is geen geldig telefoonnummer.': 'Hic numerus telephonicus non valet.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Hic codex postalis Nederlandicus non valet, ut 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Hic una tantum linea capit. Remove fines linearum.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Utere tantum capsulis huius quaestionis: una capsula pro optione.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Scribe quodque punctum in sua linea, cum lineola vel numero ante.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabula iam recta non est: lineam capitis serva ut erat et cuique lineae eundem columnarum numerum da.',
+  'Dezelfde foto staat hier twee keer.': 'Eadem imago hic bis apparet.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'In hunc agrum imagines tantum pertinent, non textus solutus.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Capsula consensus tui laesa est. Formam restitue.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Hoc responsum formam quae ad hanc quaestionem pertinet non habet.',
   'Downloaden…': 'Deprome…',
   'Afbeelding opgeslagen als': 'Imago servata ut',
   '{naam}: ingesteld': '{naam}: institutus',

@@ -1625,6 +1625,99 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Ar šo veidlapu kaut kas nav kārtībā. Sazinieties ar to, kurš to izveidoja.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Šis lauks ir obligāts. Aizpildiet to, lai varētu nosūtīt.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Jūs uzrakstījāt {actual} vārdus; nepieciešami vismaz {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Jūs uzrakstījāt {actual} vārdus; atļauti ne vairāk kā {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Jūs uzrakstījāt {actual} rakstzīmes; nepieciešamas vismaz {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Jūs uzrakstījāt {actual} rakstzīmes; atļautas ne vairāk kā {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” nav sarakstā. Izvēlieties vienu no iespējām.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” nav skaitlis. Izmantojiet tikai ciparus, vajadzības gadījumā ar komatu vai punktu decimāldaļām.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Šīs fotogrāfijas platums ir {actual} pikseļi; šeit tiek prasīti {min}. Visticamāk, tā tika samazināta, sūtot caur ziņojumapmaiņas lietotni. Ja jums joprojām ir oriģināls, izmantojiet to. Ja nav, tomēr nosūtiet to: organizators sazināsies ar jums.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Šī fotogrāfija ir {actual} MB; maksimums ir {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Šī faila saturs neatbilst tā tipam.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Šis faila tips šeit nav atļauts.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Šīs fotogrāfijas failu vairs nevar atrast. Pievienojiet fotogrāfiju vēlreiz.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Vienā īsā teikumā aprakstiet, kas redzams fotogrāfijā.',
+  'Geef aan van wie de foto is.': 'Norādiet, kam pieder fotogrāfija.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Šī fotogrāfija vēl nav pārbaudīta. Mazliet uzgaidiet vai pievienojiet to vēlreiz.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Šī fotogrāfija ir HEIC fails. OciDeck to šeit nevar ne pārbaudīt, ne notīrīt, tāpēc tas tiek nosūtīts tāds, kāds tas ir. Tajā var būt norādīts, kur fotogrāfija uzņemta. Ja nevēlaties to dalīties, kameras iestatījumos izvēlieties “Visvairāk saderīgs” vai kopīgojiet fotogrāfiju kā JPEG un pievienojiet to vēlreiz.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Šajā fotogrāfijā redzamas {actual} sejas; tika gaidītas {expected}. Tas ir tikai atgādinājums.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Atzīmējiet rūtiņu, lai piekristu; bez piekrišanas nosūtīt nevar.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Šai veidlapai nepieciešama jaunāka OciDeck versija. Atjauniniet lietotni, lai to aizpildītu.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Pašā veidlapā kaut kas nejauši mainīts. Atjaunojiet veidlapu; jūsu atbildes paliek.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Šī rinda izskatās pēc veidlapas vadības koda, un tai nedrīkst būt atbildē. Mainiet to.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML atbildē nav atļauts. Izmantojiet parastu tekstu un vienkāršu formatējumu.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Koda bloks nav aizvērts. Aizveriet to ar ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Atbildē var būt tikai fotogrāfijas, ko pievienojat šajā veidlapā; attēls no interneta nav atļauts.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Atbildē atļautas tikai saites, kas sākas ar https://, un e-pasta adreses.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Šis fails izveidots ar citu veidlapas versiju ({submission}. versija; tagad ir spēkā {published}. versija). Pārbaudiet savas atbildes.',
+  'Punt {item}: {bericht}': 'Punkts {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Pašlaik to ir {actual}; jābūt no {min} līdz {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Pašlaik to ir {actual}; drīkst būt ne vairāk kā {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Pašlaik to ir {actual}; jābūt vismaz {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Skaitlim jābūt skaitļa {step} daudzkārtnim.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Skaitlim jābūt no {min} līdz {max}.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Skaitlis drīkst būt ne lielāks par {max}.',
+  'Het getal moet minstens {min} zijn.': 'Skaitlim jābūt vismaz {min}.',
+  'De datum moet op of na {min} liggen.': 'Datumam jābūt {min} vai vēlākam.',
+  'De datum moet op of vóór {max} liggen.': 'Datumam jābūt {max} vai agrākam.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” nav datums. Ierakstiet datumu kā gads-mēnesis-diena, piemēram, 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Šī nav derīga e-pasta adrese.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Šī nav derīga tīmekļa adrese. Sāciet ar https://.',
+  'Dit is geen geldig telefoonnummer.': 'Šis nav derīgs tālruņa numurs.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Šis nav derīgs Nīderlandes pasta indekss, piemēram, 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Šeit der tikai viena rinda. Noņemiet rindu pārtraukumus.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Izmantojiet tikai šī jautājuma izvēles rūtiņas: viena rūtiņa katrai iespējai.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Rakstiet katru punktu savā rindā, ar domuzīmi vai numuru priekšā.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabula vairs nav pareiza: atstājiet galvenes rindu tādu, kāda tā bija, un katrā rindā liciet vienādu skaitu kolonnu.',
+  'Dezelfde foto staat hier twee keer.':
+      'Tā pati fotogrāfija šeit parādās divreiz.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Šajā laukā pieder tikai fotogrāfijas, nevis atsevišķs teksts.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Jūsu piekrišanas rūtiņa ir bojāta. Atjaunojiet veidlapu.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Šai atbildei nav tās formas, kas atbilst šim jautājumam.',
   'Downloaden…': 'Lejupielādēt…',
   'Afbeelding opgeslagen als': 'Attēls saglabāts kā',
   '{naam}: ingesteld': '{naam}: iestatīts',

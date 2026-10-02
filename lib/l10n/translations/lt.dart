@@ -1634,6 +1634,99 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Su šia forma kažkas negerai. Susisiekite su tuo, kas ją sukūrė.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Šis laukas privalomas. Užpildykite jį, kad galėtumėte siųsti.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Parašėte {actual} žodžių; reikia bent {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Parašėte {actual} žodžių; leidžiama daugiausia {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Parašėte {actual} ženklų; reikia bent {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Parašėte {actual} ženklų; leidžiama daugiausia {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ nėra sąraše. Pasirinkite vieną iš parinkčių.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ nėra skaičius. Naudokite tik skaitmenis, prireikus kableliu ar tašku dešimtainėms dalims.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ši nuotrauka {actual} pikselių pločio; čia reikalaujama {min}. Tikriausiai ji sumažėjo siunčiant per žinučių programėlę. Jei dar turite originalą, naudokite jį. Jei ne, vis tiek ją siųskite: organizatorius susisieks su jumis.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Šios nuotraukos dydis {actual} MB; didžiausias leidžiamas {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Šio failo turinys neatitinka jo tipo.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Šio tipo failas čia neleidžiamas.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Šios nuotraukos failo nebegalima rasti. Pridėkite nuotrauką iš naujo.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Vienu trumpu sakiniu aprašykite, kas matyti nuotraukoje.',
+  'Geef aan van wie de foto is.': 'Nurodykite, kieno nuotrauka.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Ši nuotrauka dar nepatikrinta. Šiek tiek luktelėkite arba pridėkite ją iš naujo.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ši nuotrauka yra HEIC failas. OciDeck čia negali jo nei patikrinti, nei išvalyti, todėl jis siunčiamas toks, koks yra. Jame gali būti nurodyta, kur nuotrauka padaryta. Jei nenorite to dalytis, fotoaparato nustatymuose pasirinkite „Labiausiai suderinama“ arba pasidalykite nuotrauka kaip JPEG ir pridėkite ją iš naujo.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Šioje nuotraukoje matyti {actual} veidų; tikėtasi {expected}. Tai tik priminimas.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Pažymėkite langelį, kad sutiktumėte; be sutikimo siųsti negalite.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Šiai formai reikia naujesnės OciDeck versijos. Atnaujinkite programą, kad ją užpildytumėte.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Pačioje formoje kažkas netyčia pakeista. Atkurkite formą; jūsų atsakymai išlieka.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ši eilutė panaši į formos valdymo kodą ir negali būti atsakyme. Pakeiskite ją.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML atsakyme neleidžiamas. Naudokite paprastą tekstą ir paprastą formatavimą.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Kodo blokas neuždarytas. Uždarykite jį su ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Atsakyme gali būti tik nuotraukos, kurias pridedate šioje formoje; paveikslėlio iš interneto negalima.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Atsakyme leidžiamos tik nuorodos, prasidedančios https://, ir el. pašto adresai.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Šis failas sukurtas su kita formos versija (versija {submission}; dabar galioja versija {published}). Patikrinkite savo atsakymus.',
+  'Punt {item}: {bericht}': 'Punktas {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Dabar jų yra {actual}; turi būti nuo {min} iki {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Dabar jų yra {actual}; gali būti daugiausia {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Dabar jų yra {actual}; turi būti bent {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Skaičius turi būti skaičiaus {step} kartotinis.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Skaičius turi būti nuo {min} iki {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Skaičius gali būti daugiausia {max}.',
+  'Het getal moet minstens {min} zijn.': 'Skaičius turi būti bent {min}.',
+  'De datum moet op of na {min} liggen.': 'Data turi būti {min} arba vėlesnė.',
+  'De datum moet op of vóór {max} liggen.':
+      'Data turi būti {max} arba ankstesnė.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ nėra data. Įrašykite datą kaip metai-mėnuo-diena, pavyzdžiui, 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Tai nėra tinkamas el. pašto adresas.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Tai nėra tinkamas interneto adresas. Pradėkite nuo https://.',
+  'Dit is geen geldig telefoonnummer.': 'Tai nėra tinkamas telefono numeris.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Tai nėra tinkamas Nyderlandų pašto kodas, pavyzdžiui, 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Čia telpa tik viena eilutė. Pašalinkite eilučių lūžius.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Naudokite tik šio klausimo žymimuosius langelius: vienas langelis kiekvienai parinkčiai.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Kiekvieną punktą rašykite savo eilutėje, su brūkšniu ar numeriu priekyje.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Lentelė nebėra teisinga: palikite antraštės eilutę tokią, kokia buvo, ir kiekvienoje eilutėje palikite tiek pat stulpelių.',
+  'Dezelfde foto staat hier twee keer.':
+      'Ta pati nuotrauka čia pasirodo du kartus.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Į šį lauką tinka tik nuotraukos, jokio laisvo teksto.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Jūsų sutikimo langelis pažeistas. Atkurkite formą.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Šis atsakymas neturi formos, kuri tinka šiam klausimui.',
   'Downloaden…': 'Atsisiųsti…',
   'Afbeelding opgeslagen als': 'Vaizdas išsaugotas kaip',
   '{naam}: ingesteld': '{naam}: sukonfigūruotas',

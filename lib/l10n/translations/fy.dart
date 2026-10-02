@@ -667,6 +667,99 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Der is wat mis mei dit formulier. Nim kontakt op mei wa\'t it makke hat.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Dit fjild is ferplicht. Folje it yn om te kinnen ferstjoere.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Do hast {actual} wurden skreaun; der binne teminsten {min} nedich.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Do hast {actual} wurden skreaun; der meie heechút {max} wêze.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Do hast {actual} tekens skreaun; der binne teminsten {min} nedich.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Do hast {actual} tekens skreaun; der meie heechút {max} wêze.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” stiet net yn de list. Kies ien fan de opsjes.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” is gjin getal. Brûk allinnich sifers, mooglik mei in komma of punt foar de desimalen.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Dizze foto is {actual} piksels breed; hjir wurde der {min} frege. Wierskynlik is er lytser wurden doe\'t er troch in berjochtenapp ferstjoerd is. Hast it orizjineel noch, brûk dat dan. As net, stjoer him dan dochs mei: de organisaasje nimt kontakt mei dy op.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Dizze foto is {actual} MB; it maksimum is {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'De ynhâld fan dit bestân past net by it bestânstype.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Dit bestânstype is hjir net tastien.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'It bestân fan dizze foto is net mear te finen. Foegje de foto opnij ta.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Beskriuw yn in koarte sin wat der op de foto te sjen is.',
+  'Geef aan van wie de foto is.': 'Jou oan fan wa\'t de foto is.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Dizze foto is noch net kontrolearre. Wachtsje efkes of foegje him opnij ta.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Dizze foto is in HEIC-bestân. OciDeck kin dat hjir net kontrolearje of skjinmeitsje, dus it wurdt ferstjoerd sa\'t it is. Der kin yn stean wêr\'t de foto makke is. Wolst dat net diele, kies dan yn de kamera-ynstellingen “Meast kompatibel” of diel de foto as JPEG en foegje him opnij ta.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Op dizze foto steane {actual} gesichten; ferwachte waard {expected}. Dit is mar in herinnering.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Set it finkje om akkoart te gean; sûnder tastimming kinst net ferstjoere.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Dit formulier freget in nijere ferzje fan OciDeck. Wurkje de app by om it yn te foljen.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Der is per ûngelok wat feroare yn it formulier sels. Werstel it formulier; dyn antwurden bliuwe stean.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Dizze rigel liket op in stjoerkoade fan it formulier en mei net yn in antwurd stean. Pas him oan.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML mei net yn in antwurd. Brûk gewoane tekst en ienfâldige opmaak.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'In koadeblok is net ôfsluten. Slút him ôf mei ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Allinnich foto\'s dy\'t do yn dit formulier tafoegest kinne yn in antwurd; in ôfbylding fan it ynternet net.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Allinnich links dy\'t mei https:// begjinne en e-mailadressen meie yn in antwurd.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Dit bestân is makke mei in oare ferzje fan it formulier (ferzje {submission}; no jildt ferzje {published}). Kontrolearje dyn antwurden.',
+  'Punt {item}: {bericht}': 'Ûnderdiel {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'It oantal is no {actual}; it moat tusken {min} en {max} lizze.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'It oantal is no {actual}; it mei heechút {max} wêze.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'It oantal is no {actual}; it moat teminsten {min} wêze.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'It getal moat in mearfâld fan {step} wêze.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'It getal moat tusken {min} en {max} lizze.',
+  'Het getal mag hoogstens {max} zijn.': 'It getal mei heechút {max} wêze.',
+  'Het getal moet minstens {min} zijn.': 'It getal moat teminsten {min} wêze.',
+  'De datum moet op of na {min} liggen.':
+      'De datum moat op of nei {min} lizze.',
+  'De datum moet op of vóór {max} liggen.':
+      'De datum moat op of foar {max} lizze.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” is gjin datum. Skriuw de datum as jier-moanne-dei, bygelyks 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Dit is gjin jildich e-mailadres.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Dit is gjin jildich webadres. Begjin mei https://.',
+  'Dit is geen geldig telefoonnummer.': 'Dit is gjin jildich telefoannûmer.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Dit is gjin jildige Nederlânske postkoade, lykas 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Hjir past mar ien rigel. Helje de rigelskeidings fuort.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Brûk allinnich de karfakjes fan dizze fraach: ien fakje per opsje.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Skriuw elk punt op in eigen rigel, mei in streepke of in nûmer derfoar.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'De tabel klopt net mear: lit de koprigel sa\'t er wie en jou elke rige like folle kolommen.',
+  'Dezelfde foto staat hier twee keer.': 'Deselde foto stiet hjir twa kear.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Yn dit fjild hearre allinnich foto\'s, gjin losse tekst.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'It fakje foar dyn tastimming is skansearre. Werstel it formulier.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Dit antwurd hat net de foarm dy\'t by dizze fraach heart.',
   'Downloaden…': 'Downloade…',
   'Afbeelding opgeslagen als': 'Ofbylding opslein as',
   '{naam}: ingesteld': '{naam}: ynsteld',
