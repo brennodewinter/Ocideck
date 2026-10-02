@@ -7,6 +7,35 @@
 // op zijn regelplafond zit.
 part of '../document_editor_screen.dart';
 
+/// De invulpagina met wat ze van het document nodig heeft: de map voor foto's, de
+/// front matter en de kiezers voor het opslaan van de inzending. Een losse functie en
+/// geen methode: de staat zit tegen zijn regelplafond.
+FormFillView _formFillView(
+  BuildContext context,
+  WidgetRef ref, {
+  required String body,
+  required void Function(String body, String fieldId) onChanged,
+  required VoidCallback onShowSource,
+}) {
+  final l10n = context.l10n;
+  final projectPath = _documentProjectPath(ref);
+  return FormFillView(
+    body: body,
+    onChanged: onChanged,
+    onShowSource: onShowSource,
+    images: formImageSupportFor(
+      projectPath: projectPath,
+      dialogTitle: l10n.d('Kies een afbeelding'),
+    ),
+    export: formExportSupportFor(
+      projectPath: projectPath,
+      frontMatter: ref.read(documentProvider).document?.frontMatter ?? '',
+      pickTitle: l10n.d('Kies het formulier zoals je het kreeg'),
+      saveTitle: l10n.d('Inzending opslaan'),
+    ),
+  );
+}
+
 extension _DocumentEditorForm on _DocumentEditorScreenState {
   /// De invulpagina, in de stijl van het document.
   Widget _fillLayout(
@@ -17,14 +46,12 @@ extension _DocumentEditorForm on _DocumentEditorScreenState {
     _styleProfile,
     DocumentStyleScope(
       profile: _styleProfile,
-      child: FormFillView(
+      child: _formFillView(
+        context,
+        ref,
         body: source,
         onChanged: _onFillChanged,
         onShowSource: () => _changeViewMode(_DocViewMode.source),
-        images: formImageSupportFor(
-          projectPath: _documentProjectPath(ref),
-          dialogTitle: context.l10n.d('Kies een afbeelding'),
-        ),
       ),
     ),
     tlp: tlp,

@@ -1657,6 +1657,21 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Inzending opslaan als zip…': 'Sábháil an aighneacht mar zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Comhad zip le do chuid freagraí agus grianghraf, le seoladh trí ríomhphost chuig an eagraí.',
+  'Inzending opgeslagen als {naam}.': 'Sábháladh an aighneacht mar {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Roghnaigh an fhoirm mar a fuair tú í',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Ní hí seo an fhoirm lena mbaineann do chuid freagraí. Roghnaigh an comhad a fuair tú ón eagraí.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Níorbh fhéidir grianghraf a léamh: {pad}. Cuir arís é.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Ní luíonn an aighneacht i bpacáiste amháin: an iomarca grianghraf, nó grianghraf atá rómhór.',
+  'De inzending kon niet worden opgeslagen.':
+      'Níorbh fhéidir an aighneacht a shábháil.',
+  'Inzending opslaan': 'Sábháil aighneacht',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Baineadh na sonraí suímh den ghrianghraf seo.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

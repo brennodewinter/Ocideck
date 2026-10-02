@@ -5820,6 +5820,17 @@ answer markers changes, everything else stays byte for byte as the author wrote 
 show the same document. A form that is damaged — a closing marker is gone — cannot
 be filled in; the page says why and offers to go to the source.
 
+**Saving your submission.** At the bottom of the page, **Save submission as zip…** makes
+one zip file with your answers and photos, which you email to the organiser. The button is
+always there: while something is still open it shows what, instead of saving. The zip holds
+`submission.md` (your filled-in form), the photos and a small `manifest.json` that says which
+form and version the answers belong to and carries a checksum of every file, so the organiser
+can verify it with `sha256sum`. Nothing about your device goes in it. The photos are cleaned
+once more on the way out, even if you placed a file in the `images` folder yourself. The
+organiser needs the form exactly as it was published: OciDeck remembers it from the moment
+you opened the empty form; if you reopen a half-filled document later, it asks you to choose
+the original file you received. It refuses a form whose text outside the answers was changed.
+
 ### Converting between a presentation and a document
 
 You can convert either way, and the result is **always a copy in a new tab** —

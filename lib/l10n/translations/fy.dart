@@ -667,6 +667,21 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Inzending opslaan als zip…': 'Ynstjoering bewarje as zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'In zipbestân mei dyn antwurden en foto’s, om nei de organisator te mailen.',
+  'Inzending opgeslagen als {naam}.': 'Ynstjoering bewarre as {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Kies it formulier sa’t jo it krigen',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Dit is net it formulier dêr’t dyn antwurden by hearre. Kies it bestân dat jo fan de organisator krigen.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'In foto koe net lêzen wurde: {pad}. Foegje him opnij ta.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'De ynstjoering past net yn in pakket: tefolle foto’s, of in foto dy’t te grut is.',
+  'De inzending kon niet worden opgeslagen.':
+      'De ynstjoering koe net bewarre wurde.',
+  'Inzending opslaan': 'Ynstjoering bewarje',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'De lokaasjegegevens binne út dizze foto fuortsmiten.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

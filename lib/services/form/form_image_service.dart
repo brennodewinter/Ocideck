@@ -243,6 +243,24 @@ Future<FormImageBatch> addFormImages({
   return FormImageBatch(stored, refused);
 }
 
+/// De bytes van de foto op [path] in de map van het document, of `null` als hij er
+/// niet is, buiten die map ligt (ook via een symbolische verwijzing) of te groot is
+/// om te verwerken. Voor het pakket: wat daar uit komt gaat nog door `cleanImage`.
+Future<Uint8List?> readFormImage(
+  String path, {
+  required String projectPath,
+}) async {
+  final resolved = resolveContainedRealPath(path, projectPath);
+  if (resolved == null) return null;
+  try {
+    final file = File(resolved);
+    if (await file.length() > kFormMaxImageBytes) return null;
+    return await file.readAsBytes();
+  } on FileSystemException {
+    return null;
+  }
+}
+
 /// Wat bekend is van de foto's die al in een document staan: bestaat het bestand,
 /// wat is het écht, hoe breed. Alleen de kop wordt gelezen en gemeten
 /// (`cleanImage`), niet gedecodeerd — de zware controle gebeurde bij het toevoegen,

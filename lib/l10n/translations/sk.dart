@@ -1633,6 +1633,20 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Inzending opslaan als zip…': 'Uložiť prihlášku ako zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Súbor zip s vašimi odpoveďami a fotkami, ktorý pošlete e-mailom organizátorovi.',
+  'Inzending opgeslagen als {naam}.': 'Prihláška bola uložená ako {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Vyberte formulár tak, ako ste ho dostali',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Toto nie je formulár, ku ktorému patria vaše odpovede. Vyberte súbor, ktorý ste dostali od organizátora.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotku sa nepodarilo prečítať: {pad}. Pridajte ju znova.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Prihláška sa nezmestí do jedného balíka: príliš veľa fotiek alebo príliš veľká fotka.',
+  'De inzending kon niet worden opgeslagen.': 'Prihlášku sa nepodarilo uložiť.',
+  'Inzending opslaan': 'Uložiť prihlášku',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Údaje o polohe boli z tejto fotografie odstránené.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

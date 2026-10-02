@@ -20,6 +20,8 @@ import '../../services/form/form_image_service.dart' show FormImageRefusal;
 import '../../models/settings.dart' show ThemeProfile;
 import '../markdown_editor/markdown_editor_theme.dart' show DocumentStyleScope;
 import '../reader/document_markdown_view.dart';
+import 'form_export_bar.dart';
+import 'form_export_support.dart';
 import 'form_field_card.dart';
 import 'form_image_support.dart';
 import 'form_text_helpers.dart';
@@ -31,6 +33,7 @@ class FormFillView extends StatefulWidget {
     required this.onChanged,
     this.onShowSource,
     this.images,
+    this.export,
   });
 
   /// De tekst van het document (zonder front matter).
@@ -46,6 +49,9 @@ class FormFillView extends StatefulWidget {
   /// Wat nodig is om met foto's te werken (kiezen, zuiveren, meten); `null` als dat
   /// niet kan, bijvoorbeeld omdat het document nog nergens is opgeslagen.
   final FormImageSupport? images;
+
+  /// Wat nodig is om de inzending als pakket op te slaan; `null` laat de knop weg.
+  final FormExportSupport? export;
 
   @override
   State<FormFillView> createState() => _FormFillViewState();
@@ -74,6 +80,7 @@ class _FormFillViewState extends State<FormFillView> {
   void initState() {
     super.initState();
     _load(widget.body);
+    _rememberPublished();
     _probeMissing();
   }
 
@@ -101,6 +108,34 @@ class _FormFillViewState extends State<FormFillView> {
       case FormFillUnavailable(:final problem):
         _fill = null;
         _unavailable = problem;
+    }
+  }
+
+  /// Een formulier waar nog niets in staat is het formulier zoals de organisator het
+  /// publiceerde; zodra er een antwoord in staat is dat niet meer te zien. Het pakket
+  /// heeft het gepubliceerde formulier nodig, dus dit is het moment om het te
+  /// onthouden: het eerste van de sessie waarop de pagina opent.
+  void _rememberPublished() {
+    final support = widget.export;
+    final fill = _fill;
+    if (support == null || fill == null) return;
+    if (fill.spec.fields.every((f) => fill.answerOf(f.id).isEmpty)) {
+      support.remember(fill.spec, support.frontMatter + fill.text);
+    }
+  }
+
+  /// Er staat nog iets open als de invuller opslaan kiest: elk open veld toont zijn
+  /// fout en de pagina gaat naar de lijst bovenaan.
+  void _showOpen() {
+    final fill = _fill;
+    if (fill == null) return;
+    setState(() => _touched.addAll(fill.openFieldIds));
+    if (_scroll.hasClients) {
+      _scroll.animateTo(
+        0,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -254,6 +289,12 @@ class _FormFillViewState extends State<FormFillView> {
                 _Summary(fill: fill, onJump: _jumpTo),
                 const SizedBox(height: 8),
                 for (final item in fill.items) _item(context, fill, item),
+                if (widget.export case final support?)
+                  FormExportBar(
+                    fill: fill,
+                    support: support,
+                    onBlocked: _showOpen,
+                  ),
               ],
             ),
           ),

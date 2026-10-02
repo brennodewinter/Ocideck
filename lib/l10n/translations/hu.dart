@@ -1629,6 +1629,21 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Inzending opslaan als zip…': 'Beküldés mentése zipként…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Egy zip-fájl a válaszaiddal és a fotóiddal, amelyet e-mailben elküldhetsz a szervezőnek.',
+  'Inzending opgeslagen als {naam}.': 'A beküldés mentve ezen a néven: {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Válaszd ki az űrlapot úgy, ahogy megkaptad',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Ez nem az az űrlap, amelyhez a válaszaid tartoznak. Válaszd ki a szervezőtől kapott fájlt.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Egy fotót nem sikerült beolvasni: {pad}. Add hozzá újra.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'A beküldés nem fér el egy csomagban: túl sok fotó, vagy egy túl nagy fotó.',
+  'De inzending kon niet worden opgeslagen.':
+      'A beküldést nem sikerült menteni.',
+  'Inzending opslaan': 'Beküldés mentése',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'A helyadatok el lettek távolítva erről a fotóról.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

@@ -1652,6 +1652,21 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Inzending opslaan als zip…': 'Αποθήκευση της υποβολής ως zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Ένα αρχείο zip με τις απαντήσεις και τις φωτογραφίες σας, για να το στείλετε με email στον διοργανωτή.',
+  'Inzending opgeslagen als {naam}.': 'Η υποβολή αποθηκεύτηκε ως {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Επιλέξτε τη φόρμα όπως την παραλάβατε',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Αυτή δεν είναι η φόρμα στην οποία ανήκουν οι απαντήσεις σας. Επιλέξτε το αρχείο που λάβατε από τον διοργανωτή.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Μια φωτογραφία δεν ήταν δυνατό να διαβαστεί: {pad}. Προσθέστε την ξανά.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Η υποβολή δεν χωράει σε ένα πακέτο: πάρα πολλές φωτογραφίες ή μια φωτογραφία που είναι πολύ μεγάλη.',
+  'De inzending kon niet worden opgeslagen.':
+      'Η υποβολή δεν ήταν δυνατό να αποθηκευτεί.',
+  'Inzending opslaan': 'Αποθήκευση υποβολής',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Τα δεδομένα τοποθεσίας αφαιρέθηκαν από αυτή τη φωτογραφία.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

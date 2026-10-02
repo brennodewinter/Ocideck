@@ -1627,6 +1627,19 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Inzending opslaan als zip…': 'Gem indsendelsen som zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'En zip-fil med dine svar og fotos, som du kan maile til arrangøren.',
+  'Inzending opgeslagen als {naam}.': 'Indsendelsen er gemt som {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Vælg formularen, som du modtog den',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Det er ikke den formular, dine svar hører til. Vælg den fil, du modtog fra arrangøren.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Et foto kunne ikke læses: {pad}. Tilføj det igen.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Indsendelsen kan ikke være i én pakke: for mange fotos eller et foto, der er for stort.',
+  'De inzending kon niet worden opgeslagen.': 'Indsendelsen kunne ikke gemmes.',
+  'Inzending opslaan': 'Gem indsendelse',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Placeringsdata er fjernet fra dette foto.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

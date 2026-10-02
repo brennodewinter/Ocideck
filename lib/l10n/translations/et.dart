@@ -1620,6 +1620,21 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Inzending opslaan als zip…': 'Salvesta saadetis zip-failina…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip-fail sinu vastuste ja fotodega, mille saadad e-kirjaga korraldajale.',
+  'Inzending opgeslagen als {naam}.': 'Saadetis salvestati nimega {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Vali vorm sellisena, nagu sa selle said',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'See ei ole vorm, kuhu sinu vastused kuuluvad. Vali fail, mille said korraldajalt.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotot ei õnnestunud lugeda: {pad}. Lisa see uuesti.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Saadetis ei mahu ühte pakki: liiga palju fotosid või liiga suur foto.',
+  'De inzending kon niet worden opgeslagen.':
+      'Saadetist ei õnnestunud salvestada.',
+  'Inzending opslaan': 'Salvesta saadetis',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Asukohaandmed on sellelt fotolt eemaldatud.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

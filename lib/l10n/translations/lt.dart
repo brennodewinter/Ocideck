@@ -1634,6 +1634,20 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Inzending opslaan als zip…': 'Išsaugoti siuntinį kaip zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip failas su jūsų atsakymais ir nuotraukomis, kurį el. paštu išsiųsite organizatoriui.',
+  'Inzending opgeslagen als {naam}.': 'Siuntinys išsaugotas kaip {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Pasirinkite formą tokią, kokią gavote',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Tai ne ta forma, kuriai priklauso jūsų atsakymai. Pasirinkite failą, kurį gavote iš organizatoriaus.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Nepavyko perskaityti nuotraukos: {pad}. Pridėkite ją dar kartą.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Siuntinys netelpa į vieną paketą: per daug nuotraukų arba per didelė nuotrauka.',
+  'De inzending kon niet worden opgeslagen.': 'Nepavyko išsaugoti siuntinio.',
+  'Inzending opslaan': 'Išsaugoti siuntinį',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Vietos duomenys pašalinti iš šios nuotraukos.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

@@ -1647,6 +1647,21 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Inzending opslaan als zip…': 'Запази изпращането като zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip файл с вашите отговори и снимки, който да изпратите по имейл на организатора.',
+  'Inzending opgeslagen als {naam}.': 'Изпращането е запазено като {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Изберете формуляра така, както сте го получили',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Това не е формулярът, към който принадлежат вашите отговори. Изберете файла, който сте получили от организатора.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Снимка не можа да бъде прочетена: {pad}. Добавете я отново.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Изпращането не се побира в един пакет: твърде много снимки или твърде голяма снимка.',
+  'De inzending kon niet worden opgeslagen.':
+      'Изпращането не можа да бъде запазено.',
+  'Inzending opslaan': 'Запази изпращане',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Данните за местоположението са премахнати от тази снимка.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
