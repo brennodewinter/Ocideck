@@ -57,6 +57,17 @@
 > editor counts as changing template text**: answers are written by the fill view, which
 > touches only answer zones.
 >
+> **The plain package can be saved (2026-10-02):** the fill page has **Save submission
+> as zip…**, which checks that the text outside the answers is still the published
+> form's (the check the organiser repeats), cleans every photo once more, and writes the
+> §5.2 package. The published form is the one thing the document no longer holds once an
+> answer is in it, so the page *remembers* it from the first moment the form was opened
+> empty (per form id and version, for the session) and otherwise asks the respondent to
+> choose the file they received. That is a **phase-1 stopgap**: a respondent who fills in
+> the template in place and reopens it after a restart has to find the original again.
+> The landing page and drafts of §6.6/§8 (a fill *session* that keeps the published form
+> beside the draft) replace it. Sealing and the organiser side are still design.
+>
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
 > Reference code by **file + symbol name**, never a line number.

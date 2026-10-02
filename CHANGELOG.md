@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Een ingevuld formulier kun je nu **opslaan als inzendpakket**: onderaan de invulpagina maakt
+  **Inzending opslaan als zip…** één zip met je antwoorden, de foto's en een manifest, om naar de
+  organisator te mailen. De knop is altijd te bedienen — staat er nog iets open, dan laat de pagina
+  zien wat — en de foto's worden onderweg nog een keer gezuiverd. OciDeck onthoudt het formulier zoals
+  het gepubliceerd werd vanaf het moment dat je het leeg opent; een half ingevuld document dat je
+  later opent vraagt om het originele bestand, en een formulier waarvan de tekst buiten de antwoorden
+  is veranderd wordt geweigerd (dezelfde controle als die van de organisator).
 - Het **inzendpakket** van een formulier (formaat §5.2–§5.4, eerste fase: een gewone zip
   met `submission.md`, `manifest.json` en de foto's) heeft zijn motor in
   `ocideck_form_core`. Het bouwen is deterministisch — dezelfde invoer geeft dezelfde

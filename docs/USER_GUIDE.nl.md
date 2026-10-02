@@ -5873,6 +5873,18 @@ schreef. **Ongedaan maken** draait per vraag een heel woord terug, en **Visueel*
 sluitmarker is weg — kan niet worden ingevuld; de pagina zegt waarom en biedt aan
 naar de bron te gaan.
 
+**Je inzending opslaan.** Onderaan de pagina maakt **Inzending opslaan als zip…** één zipbestand
+met je antwoorden en foto's, dat je naar de organisator mailt. De knop is er altijd: staat er nog
+iets open, dan laat hij zien wat in plaats van op te slaan. In de zip zitten `submission.md` (je
+ingevulde formulier), de foto's en een klein `manifest.json` dat zegt bij welk formulier en welke
+versie de antwoorden horen en een controlegetal van elk bestand bevat, zodat de organisator het met
+`sha256sum` kan nalopen. Er staat niets over je apparaat in. De foto's worden onderweg nog een keer
+gezuiverd, ook als je zelf een bestand in de map `images` hebt gezet. De organisator heeft het
+formulier nodig zoals het gepubliceerd is: OciDeck onthoudt het vanaf het moment dat je het lege
+formulier opende; open je later een half ingevuld document opnieuw, dan vraagt het je het originele
+bestand te kiezen dat je kreeg. Een formulier waarvan de tekst buiten de antwoorden is veranderd
+wordt geweigerd.
+
 ### Omzetten tussen een presentatie en een document
 
 Je kunt beide kanten op omzetten, en het resultaat is **altijd een kopie in een
