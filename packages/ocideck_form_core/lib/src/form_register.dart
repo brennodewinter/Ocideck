@@ -37,6 +37,12 @@ const List<String> kDefaultFormStates = [
 /// What a row says after its submission was deleted: the minimal record (§7.3).
 const String kFormStateDeleted = 'deleted';
 
+/// What a row says while its submission has an error against the published form
+/// (§4.11, §7.2): it is in the collection — the editors can work on it in
+/// `submission.edit.md` — but nothing is accepted silently, and compile selects only
+/// what an editor has moved on to a state of the form's own.
+const String kFormStateNeedsFixing = 'needs-fixing';
+
 /// The fixed columns, by the name in the table's header.
 const String _sid = 'sid';
 const String _received = 'received';
@@ -179,7 +185,8 @@ class FormRegister {
   /// never overwritten.
   ///
   /// The overview columns take the first line of the answer, as plain text; the
-  /// state is the first of the form's; the consent day is the one the manifest records.
+  /// state is the first of the form's — or `needs-fixing` when the review found an
+  /// error; the consent day is the one the manifest records.
   FormRegister? withSubmission(
     FormReview review, {
     required String received,
@@ -196,7 +203,9 @@ class FormRegister {
       _sid: sid,
       for (final id in spec.overview) id: _flat(_summary(answers.byId[id])),
       _received: received,
-      _status: formStatesOf(spec).first,
+      _status: review.acceptable
+          ? formStatesOf(spec).first
+          : kFormStateNeedsFixing,
       _consent: consent.isEmpty ? '' : consent.first.accepted,
       _deleteAfter: deleteAfter,
     };
