@@ -46,3 +46,58 @@ Uint8List jpegPhoto({int width = 40, int height = 20, bool gps = false}) {
     ...jpg.sublist(2),
   ]);
 }
+
+List<int> _marker(int marker, List<int> body) => [
+  0xFF,
+  marker,
+  ..._u16(body.length + 2),
+  ...body,
+];
+
+/// A JPEG whose segments walk — header, frame, scan, end — but whose picture is not
+/// there: `cleanImage` reads it, a real decode refuses it. What a polyglot looks like
+/// to a header-only probe.
+Uint8List fakeJpeg({int width = 2400, int height = 1800}) =>
+    Uint8List.fromList([
+      0xFF,
+      0xD8,
+      ..._marker(0xDB, [0, ...List.filled(64, 3)]),
+      ..._marker(0xC0, [
+        8,
+        ..._u16(height),
+        ..._u16(width),
+        3,
+        1,
+        0x22,
+        0,
+        2,
+        0x11,
+        1,
+        3,
+        0x11,
+        1,
+      ]),
+      ..._marker(0xDA, [3, 1, 0, 2, 0x11, 3, 0x11, 0, 63, 0]),
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      0xFF,
+      0xD9,
+    ]);
+
+/// A HEIC container as far as `cleanImage` looks: an `ftyp` box with a HEIC brand.
+Uint8List heicPhoto() => Uint8List.fromList([
+  ..._u32(24),
+  ...'ftyp'.codeUnits,
+  ...'heic'.codeUnits,
+  ..._u32(0),
+  ...'mif1'.codeUnits,
+  ...'heic'.codeUnits,
+  1,
+  2,
+  3,
+  4,
+]);

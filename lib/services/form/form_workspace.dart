@@ -1,0 +1,349 @@
+// De werkmap van een organisator (FORM_INTAKE.md §7.1): gewone bestanden, met
+// Engelse structuurnamen, die ook zonder OciDeck te lezen zijn.
+//
+//   <werkmap>/
+//   ├── forms/<form-id>/v<versie>/template.<taal>.md   het gepubliceerde formulier
+//   ├── submissions/<sid>/
+//   │   ├── submission.md        zoals ontvangen — nooit bewerkt
+//   │   ├── submission.edit.md   de werkkopie waarin geredigeerd wordt (optioneel)
+//   │   ├── images/              de foto's, nog eens gezuiverd bij het binnenhalen
+//   │   └── manifest.json        zoals ontvangen; blijft ook na verwijderen staan
+//   └── overview.md              het register (§7.3)
+//
+// Wat hier staat is bestandsbeheer en niets anders: wat een pakket waard is beslist
+// `reviewFormPackage`, wat in het register komt de `FormRegister`. Drie regels dragen
+// de rest. Een map onder `submissions/` krijgt zijn naam van een **gevalideerd
+// inzendnummer**, nooit van een antwoord. Er wordt nooit overschreven: een inzending
+// die er al is, is er al. En een inzending verschijnt in één stap (eerst een
+// tijdelijke map, dan een hernoeming), zodat een crash nooit een halve inzending
+// achterlaat waar de Inbox hem voor een hele houdt.
+library;
+
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:ocideck_form_core/ocideck_form_core.dart';
+import 'package:path/path.dart' as p;
+
+import '../../utils/atomic_file.dart';
+
+/// Een gepubliceerd formulier zoals de organisator het bewaart.
+class PublishedForm {
+  const PublishedForm({
+    required this.id,
+    required this.version,
+    required this.lang,
+    required this.text,
+    required this.path,
+  });
+
+  final String id;
+  final int version;
+
+  /// De taal van deze tekst (`nl`), of `null` voor een formulier zonder.
+  final String? lang;
+
+  /// De hele tekst van het bestand.
+  final String text;
+  final String path;
+}
+
+/// Wat [FormWorkspace.publishForm] deed.
+sealed class FormPublishOutcome {
+  const FormPublishOutcome();
+}
+
+/// Het formulier is bewaard.
+class FormPublished extends FormPublishOutcome {
+  const FormPublished(this.form);
+
+  final PublishedForm form;
+}
+
+/// Dezelfde tekst stond er al.
+class FormPublishedAlready extends FormPublishOutcome {
+  const FormPublishedAlready(this.form);
+
+  final PublishedForm form;
+}
+
+/// Er staat al een andere tekst onder dit formulier, deze versie en deze taal. Een
+/// gepubliceerde versie verandert niet meer: "beoordeeld tegen de versie die ze
+/// noemt" heeft die tekst nodig (§5.1). Een andere tekst is een nieuwe versie.
+class FormPublishConflict extends FormPublishOutcome {
+  const FormPublishConflict(this.existing);
+
+  final PublishedForm existing;
+}
+
+/// De tekst is geen formulier dat gepubliceerd kan worden: geen formulier, een
+/// auteursfout, regels van een nieuwere versie, of een taal die niet als bestandsnaam
+/// kan.
+class FormPublishRefused extends FormPublishOutcome {
+  const FormPublishRefused();
+}
+
+/// Het bewaren is mislukt (schijf vol, geen schrijfrechten).
+class FormPublishFailed extends FormPublishOutcome {
+  const FormPublishFailed();
+}
+
+/// Wat [FormWorkspace.land] deed.
+enum FormLandOutcome {
+  /// De inzending staat in de werkmap.
+  landed,
+
+  /// Er was al een inzending met dit nummer; er is niets overschreven.
+  exists,
+
+  /// De beoordeling kent het formulier niet (er is niets om tegen te houden), of
+  /// een bestandsnaam viel buiten de grammatica.
+  refused,
+
+  /// Schrijven mislukte; er is niets achtergebleven.
+  failed,
+}
+
+final RegExp _formId = RegExp(r'^[a-z][a-z0-9-]*$');
+final RegExp _versionDir = RegExp(r'^v([0-9]+)$');
+final RegExp _templateName = RegExp(
+  r'^template(?:\.([a-z]{2,3}(?:-[a-z0-9]{2,8})*))?\.md$',
+);
+
+class FormWorkspace {
+  const FormWorkspace(this.root);
+
+  final String root;
+
+  String get registerPath => p.join(root, kFormRegisterFile);
+  String get _formsDir => p.join(root, 'forms');
+  String get _submissionsDir => p.join(root, 'submissions');
+
+  /// De map van de inzending [sid]; alleen voor een geldig nummer.
+  String submissionPath(String sid) {
+    if (!isValidFormId(sid)) {
+      throw ArgumentError.value(sid, 'sid', 'not a submission id');
+    }
+    return p.join(_submissionsDir, sid);
+  }
+
+  // ── gepubliceerde formulieren ─────────────────────────────────────────────
+
+  /// Alle formulieren onder `forms/`, en de paden van wat er stond maar niet te
+  /// lezen was (geen UTF-8, geen formulier): die verdwijnen niet stil.
+  Future<({List<PublishedForm> forms, List<String> unreadable})>
+  publishedForms() async {
+    final forms = <PublishedForm>[];
+    final unreadable = <String>[];
+    final root = Directory(_formsDir);
+    if (!await root.exists()) return (forms: forms, unreadable: unreadable);
+    await for (final formDir in root.list(followLinks: false)) {
+      if (formDir is! Directory ||
+          !_formId.hasMatch(p.basename(formDir.path))) {
+        continue;
+      }
+      await for (final versionDir in formDir.list(followLinks: false)) {
+        final version = _versionDir.firstMatch(p.basename(versionDir.path));
+        if (versionDir is! Directory || version == null) continue;
+        await for (final file in versionDir.list(followLinks: false)) {
+          final name = _templateName.firstMatch(p.basename(file.path));
+          if (file is! File || name == null) continue;
+          final text = await _readText(file);
+          final spec = text == null ? null : _specOf(text);
+          // Het formulier hoort in de map die zijn eigen id en versie draagt; een
+          // bestand dat ergens anders is neergezet kan niet bewijzen welke versie
+          // het is.
+          if (spec == null ||
+              spec.id != p.basename(formDir.path) ||
+              'v${spec.version}' != p.basename(versionDir.path)) {
+            unreadable.add(file.path);
+            continue;
+          }
+          forms.add(
+            PublishedForm(
+              id: spec.id,
+              version: spec.version,
+              lang: name.group(1),
+              text: text!,
+              path: file.path,
+            ),
+          );
+        }
+      }
+    }
+    forms.sort((a, b) => a.path.compareTo(b.path));
+    return (forms: forms, unreadable: unreadable);
+  }
+
+  /// Bewaart [text] als gepubliceerd formulier onder `forms/<id>/v<versie>/`.
+  Future<FormPublishOutcome> publishForm(String text) async {
+    final spec = _specOf(text);
+    final lang = spec?.lang?.toLowerCase();
+    if (spec == null || (lang != null && !_langOk(lang))) {
+      return const FormPublishRefused();
+    }
+    final file = File(
+      p.join(
+        _formsDir,
+        spec.id,
+        'v${spec.version}',
+        lang == null ? 'template.md' : 'template.$lang.md',
+      ),
+    );
+    final form = PublishedForm(
+      id: spec.id,
+      version: spec.version,
+      lang: lang,
+      text: text,
+      path: file.path,
+    );
+    try {
+      if (await file.exists()) {
+        final existing = await _readText(file);
+        return existing == text
+            ? FormPublishedAlready(form)
+            : FormPublishConflict(
+                PublishedForm(
+                  id: spec.id,
+                  version: spec.version,
+                  lang: lang,
+                  text: existing ?? '',
+                  path: file.path,
+                ),
+              );
+      }
+      await file.parent.create(recursive: true);
+      await writeStringAtomic(file, text);
+      return FormPublished(form);
+    } on FileSystemException {
+      return const FormPublishFailed();
+    }
+  }
+
+  // ── inzendingen ───────────────────────────────────────────────────────────
+
+  /// De nummers van de inzendingen in de werkmap, gesorteerd. Een map die geen
+  /// geldig nummer heeft (een tijdelijke map van een onderbroken landing) telt niet.
+  Future<List<String>> submissionIds() async {
+    final dir = Directory(_submissionsDir);
+    if (!await dir.exists()) return const [];
+    return [
+      await for (final e in dir.list(followLinks: false))
+        if (e is Directory && isValidFormId(p.basename(e.path)))
+          p.basename(e.path),
+    ]..sort();
+  }
+
+  /// Zet de inzending van [package] in de werkmap: `submission.md` en
+  /// `manifest.json` zoals ze aankwamen, de foto's zoals [review] ze bewaart.
+  /// Nooit over een bestaande inzending heen.
+  Future<FormLandOutcome> land(
+    FormPackageOpened package,
+    FormReview review,
+  ) async {
+    final sid = package.manifest.submissionId;
+    if (review.spec == null || !isValidFormId(sid)) {
+      return FormLandOutcome.refused;
+    }
+    final target = Directory(submissionPath(sid));
+    final images = review.images;
+    if (images.keys.any((name) => !kFormImagePath.hasMatch(name))) {
+      return FormLandOutcome.refused;
+    }
+    final staging = Directory(
+      p.join(_submissionsDir, '.landing-$sid-${_landings++}'),
+    );
+    try {
+      await staging.create(recursive: true);
+      await _write(staging, 'submission.md', package.submissionBytes);
+      await _write(staging, 'manifest.json', package.manifestBytes);
+      for (final MapEntry(key: name, value: bytes) in images.entries) {
+        await _write(staging, name, bytes);
+      }
+      await staging.rename(target.path);
+      return FormLandOutcome.landed;
+    } on FileSystemException {
+      // De hernoeming is de scheidsrechter: staat er al een inzending onder dit
+      // nummer (ook van een landing die ons net vóór was), dan is het geen mislukking.
+      return await target.exists()
+          ? FormLandOutcome.exists
+          : FormLandOutcome.failed;
+    } finally {
+      if (await staging.exists()) await staging.delete(recursive: true);
+    }
+  }
+
+  /// Verwijdert wat persoonlijk is van de inzending [sid] — `submission.md`, de
+  /// werkkopie en de foto's — en laat `manifest.json` staan: het minimale record
+  /// (§7.3). Geeft `false` als de inzending er niet is.
+  Future<bool> deleteSubmissionFiles(String sid) async {
+    final dir = Directory(submissionPath(sid));
+    if (!await dir.exists()) return false;
+    for (final name in ['submission.md', 'submission.edit.md', 'images']) {
+      final path = p.join(dir.path, name);
+      // Een verwijzing naar een map wordt zelf verwijderd, nooit gevolgd: wat erachter
+      // ligt is niet van de werkmap (de test hieronder bewaakt dat).
+      if (await FileSystemEntity.isDirectory(path)) {
+        await Directory(path).delete(recursive: true);
+      } else if (await File(path).exists()) {
+        await File(path).delete();
+      }
+    }
+    return true;
+  }
+
+  // ── register ──────────────────────────────────────────────────────────────
+
+  /// Het register zoals het op schijf staat, of `null` als er nog geen is.
+  Future<FormRegisterRead?> readRegister() async {
+    final file = File(registerPath);
+    if (!await file.exists()) return null;
+    final text = await _readText(file);
+    if (text == null) return const FormRegisterDamaged('not UTF-8');
+    return FormRegister.parse(text);
+  }
+
+  /// Bewaart [register]. Een register dat er al is maar niet te lezen valt wordt niet
+  /// overschreven (`false`): wat iemand daar schreef gaat niet verloren omdat een
+  /// programma er niets van begrijpt.
+  Future<bool> saveRegister(FormRegister register) async {
+    if (await readRegister() case FormRegisterDamaged()) return false;
+    try {
+      await Directory(root).create(recursive: true);
+      await writeStringAtomic(File(registerPath), register.toMarkdown());
+      return true;
+    } on FileSystemException {
+      return false;
+    }
+  }
+
+  // ── intern ────────────────────────────────────────────────────────────────
+
+  static int _landings = 0;
+
+  Future<void> _write(Directory base, String relative, Uint8List bytes) async {
+    final file = File(p.join(base.path, relative));
+    await file.parent.create(recursive: true);
+    await writeBytesAtomic(file, bytes);
+  }
+}
+
+FormSpec? _specOf(String text) => switch (parseForm(text)) {
+  ParsedForm(:final spec, canFill: true) => spec,
+  _ => null,
+};
+
+/// Een taalcode die als bestandsnaamdeel kan: `nl`, `en`, `pt-br`.
+bool _langOk(String lang) =>
+    RegExp(r'^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$').hasMatch(lang);
+
+Future<String?> _readText(File file) async {
+  try {
+    return const Utf8Decoder().convert(await file.readAsBytes());
+  } on FormatException {
+    return null;
+  } on FileSystemException {
+    return null;
+  }
+}
