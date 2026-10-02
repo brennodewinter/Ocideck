@@ -1645,6 +1645,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Il-kopja tax-xogħol ma setgħetx tinħoloq.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Jiftaħ kopja tas-sottomissjoni biex titjieb. Dak li wasal jibqa’ mhux mibdul.',
+  'Werkkopie openen': 'Iftaħ il-kopja tax-xogħol',
   'Status gewijzigd naar {status}.': 'L-istatus inbidel għal {status}.',
   'Intrekking opgeslagen.': 'L-irtirar inżamm.',
   'Intrekking ongedaan gemaakt.': 'L-irtirar ġie mħassar.',

@@ -1652,6 +1652,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Το αντίγραφο εργασίας δεν ήταν δυνατό να δημιουργηθεί.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Ανοίγει ένα αντίγραφο της υποβολής για βελτίωση. Ό,τι παραλήφθηκε μένει αναλλοίωτο.',
+  'Werkkopie openen': 'Άνοιγμα αντιγράφου εργασίας',
   'Status gewijzigd naar {status}.': 'Η κατάσταση άλλαξε σε {status}.',
   'Intrekking opgeslagen.': 'Η απόσυρση αποθηκεύτηκε.',
   'Intrekking ongedaan gemaakt.': 'Η απόσυρση ακυρώθηκε.',

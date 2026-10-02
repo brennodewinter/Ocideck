@@ -5930,6 +5930,13 @@ Onder een opengeklapte inzending staan de **acties**:
   en toestemming en de status — en de velden die het formulier vooraf in zijn notice aankondigde,
   `keep-record`). Het kan niet ongedaan worden gemaakt. Is het register niet te lezen, dan wordt de inhoud
   toch gewist en zegt OciDeck dat de rij met de hand moet worden aangepast.
+- **Werkkopie openen** — verbeter een inzending zonder aan te raken wat binnenkwam. OciDeck maakt
+  `submission.edit.md`, een letterlijke kopie, en opent *die* in een tabblad (de Inbox sluit). Herstel een
+  antwoord, laat een naam weg; het formulier opent op **Invullen** zoals elk formulier. Wat binnenkwam
+  (`submission.md`) wordt nooit geopend om te bewerken. Terug in de Inbox wordt de inzending opnieuw beoordeeld
+  op de werkkopie — een punt dat je herstelde is weg, en de regel zegt dat de beoordeling over de werkkopie
+  gaat — en kun je haar status verder zetten. Verander je in de werkkopie de eigen tekst van het formulier, dan
+  zegt de Inbox dat: dat is geen antwoord.
 Elke actie zegt hoe het ging. Een register dat niet te lezen is wordt nooit overschreven.
 
 Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor

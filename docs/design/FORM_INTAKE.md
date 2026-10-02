@@ -81,8 +81,9 @@
 > submission with an error. The Inbox lists every submission and opens up to **what is wrong with it** in plain
 > words about the respondent (`formOrganiserMessage`), re-judged from the workspace each time. Plain zips only
 > (phase 2). From the Inbox an organiser can **change the status, withdraw and delete** a submission (deleting
-> leaves the minimal record and does not wait for a broken register); redaction in a working copy, the maker
-> check and compile (§7.3–§7.5) are still to build.
+> leaves the minimal record and does not wait for a broken register), and **open a working copy**
+> (`submission.edit.md`, §7.1) to improve one — what arrived is never opened for editing, and the Inbox judges
+> the working copy from then on; the maker check and compile (§7.4–§7.5) are still to build.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.

@@ -1639,6 +1639,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Nie udało się utworzyć kopii roboczej.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Otwiera kopię zgłoszenia do poprawienia. To, co przyszło, pozostaje bez zmian.',
+  'Werkkopie openen': 'Otwórz kopię roboczą',
   'Status gewijzigd naar {status}.': 'Status zmieniono na {status}.',
   'Intrekking opgeslagen.': 'Wycofanie zapisano.',
   'Intrekking ongedaan gemaakt.': 'Wycofanie cofnięto.',

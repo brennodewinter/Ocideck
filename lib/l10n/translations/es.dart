@@ -664,6 +664,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De werkkopie kon niet worden aangemaakt.':
+      'No se pudo crear la copia de trabajo.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Abre una copia del envío para mejorarla. Lo que llegó permanece sin cambios.',
+  'Werkkopie openen': 'Abrir la copia de trabajo',
   'Status gewijzigd naar {status}.': 'Estado cambiado a {status}.',
   'Intrekking opgeslagen.': 'Retirada guardada.',
   'Intrekking ongedaan gemaakt.': 'Retirada deshecha.',

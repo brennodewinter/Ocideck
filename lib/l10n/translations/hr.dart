@@ -1631,6 +1631,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Radnu kopiju nije bilo moguće izraditi.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Otvara kopiju prijave za poboljšanje. Ono što je stiglo ostaje nepromijenjeno.',
+  'Werkkopie openen': 'Otvori radnu kopiju',
   'Status gewijzigd naar {status}.': 'Status promijenjen u {status}.',
   'Intrekking opgeslagen.': 'Povlačenje spremljeno.',
   'Intrekking ongedaan gemaakt.': 'Povlačenje poništeno.',

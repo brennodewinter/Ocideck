@@ -667,6 +667,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'De werkkopie kon niet worden aangemaakt.':
+      'La copie de travail n’a pas pu être créée.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Ouvre une copie de l’envoi à corriger. Ce qui est arrivé reste inchangé.',
+  'Werkkopie openen': 'Ouvrir la copie de travail',
   'Status gewijzigd naar {status}.': 'Statut changé en {status}.',
   'Intrekking opgeslagen.': 'Retrait enregistré.',
   'Intrekking ongedaan gemaakt.': 'Retrait annulé.',

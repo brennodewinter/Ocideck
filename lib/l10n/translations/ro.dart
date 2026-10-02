@@ -1643,6 +1643,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Copia de lucru nu a putut fi creată.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Deschide o copie a trimiterii pentru îmbunătățit. Ce a sosit rămâne neschimbat.',
+  'Werkkopie openen': 'Deschide copia de lucru',
   'Status gewijzigd naar {status}.': 'Starea a fost schimbată în {status}.',
   'Intrekking opgeslagen.': 'Retragerea a fost salvată.',
   'Intrekking ongedaan gemaakt.': 'Retragerea a fost anulată.',

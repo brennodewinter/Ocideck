@@ -1657,6 +1657,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Níorbh fhéidir an chóip oibre a chruthú.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Osclaíonn sé cóip den aighneacht le feabhsú. Fanann an méid a tháinig gan athrú.',
+  'Werkkopie openen': 'Oscail an chóip oibre',
   'Status gewijzigd naar {status}.': 'Athraíodh an stádas go {status}.',
   'Intrekking opgeslagen.': 'Sábháladh an tarraingt siar.',
   'Intrekking ongedaan gemaakt.': 'Cuireadh an tarraingt siar ar ceal.',

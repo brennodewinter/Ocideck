@@ -1655,6 +1655,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Não foi possível criar a cópia de trabalho.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Abre uma cópia do envio para melhorar. O que chegou permanece inalterado.',
+  'Werkkopie openen': 'Abrir a cópia de trabalho',
   'Status gewijzigd naar {status}.': 'Estado alterado para {status}.',
   'Intrekking opgeslagen.': 'Retirada guardada.',
   'Intrekking ongedaan gemaakt.': 'Retirada anulada.',

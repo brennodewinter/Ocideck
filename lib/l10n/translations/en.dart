@@ -827,6 +827,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De werkkopie kon niet worden aangemaakt.':
+      'The working copy could not be created.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Opens a copy of the submission to improve. What arrived stays unchanged.',
+  'Werkkopie openen': 'Open working copy',
   'Status gewijzigd naar {status}.': 'Status changed to {status}.',
   'Intrekking opgeslagen.': 'Withdrawal saved.',
   'Intrekking ongedaan gemaakt.': 'Withdrawal undone.',

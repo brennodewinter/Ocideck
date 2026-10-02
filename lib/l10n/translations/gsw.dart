@@ -1630,6 +1630,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'D Arbeitskopie het nid chönne erstellt wärde.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Macht e Kopie vo dr Iischickig uf zum Verbessere. Was iigange isch, blibt unveränderet.',
+  'Werkkopie openen': 'Arbeitskopie ufmache',
   'Status gewijzigd naar {status}.': 'Status gänderet uf {status}.',
   'Intrekking opgeslagen.': 'Zrugzieh gspeicheret.',
   'Intrekking ongedaan gemaakt.': 'Zrugzieh rückgängig gmacht.',

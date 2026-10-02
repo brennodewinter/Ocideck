@@ -1627,6 +1627,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.': 'Työkopiota ei voitu luoda.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Avaa lähetyksen kopion parannettavaksi. Saapunut pysyy muuttumattomana.',
+  'Werkkopie openen': 'Avaa työkopio',
   'Status gewijzigd naar {status}.': 'Tilaksi vaihdettu {status}.',
   'Intrekking opgeslagen.': 'Peruutus tallennettu.',
   'Intrekking ongedaan gemaakt.': 'Peruutus kumottu.',

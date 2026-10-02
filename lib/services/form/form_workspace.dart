@@ -131,6 +131,31 @@ class FormStoredUnavailable extends FormStoredReviewResult {
   final bool deleted;
 }
 
+/// Wat [FormWorkspace.workingCopy] opleverde.
+sealed class FormWorkingCopyResult {
+  const FormWorkingCopyResult();
+}
+
+/// De werkkopie van een inzending: `submission.edit.md`.
+class FormWorkingCopy extends FormWorkingCopyResult {
+  const FormWorkingCopy(this.path, {required this.created});
+
+  final String path;
+
+  /// De kopie is nu gemaakt; `false` als ze er al was (en dan met rust is gelaten).
+  final bool created;
+}
+
+/// Er is niets om een kopie van te maken: de inzending is er niet of is verwijderd.
+class FormWorkingCopyUnavailable extends FormWorkingCopyResult {
+  const FormWorkingCopyUnavailable();
+}
+
+/// Het maken van de kopie mislukte (schijf vol, geen schrijfrechten).
+class FormWorkingCopyFailed extends FormWorkingCopyResult {
+  const FormWorkingCopyFailed();
+}
+
 final RegExp _formId = RegExp(r'^[a-z][a-z0-9-]*$');
 final RegExp _versionDir = RegExp(r'^v([0-9]+)$');
 final RegExp _templateName = RegExp(
@@ -349,6 +374,29 @@ class FormWorkspace {
       if (bytes != null) images[name] = bytes;
     }
     return images;
+  }
+
+  /// De werkkopie van [sid] (`submission.edit.md`), die [reviewStored] voortaan
+  /// beoordeelt: wat de redactie wil verbeteren — een fout herstellen, een naam
+  /// weglaten — gebeurt daar, nooit in wat binnenkwam (§7.1).
+  ///
+  /// Is er nog geen kopie, dan wordt ze gemaakt als een letterlijke kopie van
+  /// `submission.md`. Is er al een, dan blijft ze zoals ze is: werk dat iemand erin
+  /// stak wordt nooit overschreven.
+  Future<FormWorkingCopyResult> workingCopy(String sid) async {
+    final dir = submissionPath(sid);
+    final copy = File(p.join(dir, 'submission.edit.md'));
+    try {
+      if (await copy.exists()) {
+        return FormWorkingCopy(copy.path, created: false);
+      }
+      final received = await _readBytes(File(p.join(dir, 'submission.md')));
+      if (received == null) return const FormWorkingCopyUnavailable();
+      await writeBytesAtomic(copy, received);
+      return FormWorkingCopy(copy.path, created: true);
+    } on FileSystemException {
+      return const FormWorkingCopyFailed();
+    }
   }
 
   /// Verwijdert wat persoonlijk is van de inzending [sid] — `submission.md`, de

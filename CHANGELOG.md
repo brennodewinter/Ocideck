@@ -10,6 +10,10 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- In de Inbox opent **Werkkopie openen** een inzending om te verbeteren zonder aan te raken wat binnenkwam: OciDeck
+  maakt `submission.edit.md` (een letterlijke kopie, nooit over een bestaande heen) en opent die in een tabblad. De
+  inzending wordt daarna opnieuw beoordeeld op de werkkopie, dus een herstelde fout verdwijnt uit de lijst. 3 nieuwe
+  zinnen in 30 talen.
 - In de Inbox kun je een inzending nu **een andere status geven**, **intrekken** (met een dag; ongedaan maken kan)
   en **verwijderen**. Verwijderen zegt eerst wat er wordt gewist en wat blijft — het minimale record plus de velden
   die het formulier vooraf aankondigde — en kan niet ongedaan worden gemaakt. Een register dat niet te lezen is

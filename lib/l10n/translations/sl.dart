@@ -1627,6 +1627,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Delovne kopije ni bilo mogoče ustvariti.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Odpre kopijo oddaje za izboljšavo. Kar je prispelo, ostane nespremenjeno.',
+  'Werkkopie openen': 'Odpri delovno kopijo',
   'Status gewijzigd naar {status}.': 'Stanje spremenjeno v {status}.',
   'Intrekking opgeslagen.': 'Umik shranjen.',
   'Intrekking ongedaan gemaakt.': 'Umik razveljavljen.',

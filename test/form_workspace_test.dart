@@ -443,6 +443,96 @@ void main() {
     });
   });
 
+  group('de werkkopie', () {
+    Future<File> landed() async {
+      final package = packageOf(kook);
+      await workspace.land(package, reviewOf(package, kook));
+      return File(p.join(workspace.submissionPath(sid), 'submission.md'));
+    }
+
+    File copyFile() =>
+        File(p.join(workspace.submissionPath(sid), 'submission.edit.md'));
+
+    test(
+      'is een letterlijke kopie van wat binnenkwam, en ze is nieuw',
+      () async {
+        final received = await landed();
+        final result = await workspace.workingCopy(sid) as FormWorkingCopy;
+        expect(result.created, isTrue);
+        expect(result.path, copyFile().path);
+        expect(await copyFile().readAsBytes(), await received.readAsBytes());
+      },
+    );
+
+    test(
+      'een tweede keer laat de kopie met rust, ook als er in is gewerkt',
+      () async {
+        await landed();
+        await workspace.workingCopy(sid);
+        await copyFile().writeAsString('Verbeterd door de redactie.');
+        final again = await workspace.workingCopy(sid) as FormWorkingCopy;
+        expect(again.created, isFalse);
+        expect(await copyFile().readAsString(), 'Verbeterd door de redactie.');
+      },
+    );
+
+    test('wat binnenkwam blijft ongewijzigd', () async {
+      final received = await landed();
+      final before = await received.readAsBytes();
+      await workspace.workingCopy(sid);
+      await copyFile().writeAsString('anders');
+      expect(await received.readAsBytes(), before);
+    });
+
+    test(
+      'een verwijderde of ontbrekende inzending heeft niets om te kopiëren',
+      () async {
+        await landed();
+        await workspace.deleteSubmissionFiles(sid);
+        expect(
+          await workspace.workingCopy(sid),
+          isA<FormWorkingCopyUnavailable>(),
+        );
+        expect(copyFile().existsSync(), isFalse);
+        expect(
+          await workspace.workingCopy('abcdefghijklmnopqrstuvwxyz'),
+          isA<FormWorkingCopyUnavailable>(),
+        );
+      },
+    );
+
+    test(
+      'een schijf waar niet in te schrijven valt meldt dat het mislukte',
+      () async {
+        if (Platform.isWindows) return;
+        await landed();
+        final folder = workspace.submissionPath(sid);
+        await Process.run('chmod', ['555', folder]);
+        addTearDown(() => Process.run('chmod', ['755', folder]));
+        expect(await workspace.workingCopy(sid), isA<FormWorkingCopyFailed>());
+      },
+    );
+
+    test('een nummer buiten de grammatica is een programmeerfout', () {
+      expect(() => workspace.workingCopy('../x'), throwsArgumentError);
+    });
+
+    test('de beoordeling gaat daarna over de kopie', () async {
+      await workspace.publishForm(kook);
+      final package = packageOf(kook, naam: '');
+      await workspace.land(package, reviewOf(package, kook));
+      await workspace.workingCopy(sid);
+      final same = await workspace.reviewStored(sid) as FormStoredReview;
+      expect(same.edited, isTrue);
+      expect(same.review.problems.map((p) => p.code), [
+        FormIssueCode.requiredEmpty,
+      ]);
+      await copyFile().writeAsString(filled(kook, 'Sari'));
+      final fixed = await workspace.reviewStored(sid) as FormStoredReview;
+      expect(fixed.review.problems, isEmpty);
+    });
+  });
+
   group('verwijderen laat het minimale record', () {
     Future<String> landed() async {
       final package = packageOf(kook);

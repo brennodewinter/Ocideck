@@ -1620,6 +1620,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.': 'Töökoopiat ei õnnestunud luua.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Avab esituse koopia parandamiseks. Saabunu jääb muutmata.',
+  'Werkkopie openen': 'Ava töökoopia',
   'Status gewijzigd naar {status}.': 'Olek muudetud: {status}.',
   'Intrekking opgeslagen.': 'Tagasivõtmine salvestatud.',
   'Intrekking ongedaan gemaakt.': 'Tagasivõtmine tühistatud.',
