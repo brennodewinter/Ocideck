@@ -5863,6 +5863,18 @@ with an icon for how serious it is, and which form and version it was judged aga
 worked out again every time from what is in the workspace: correct the working copy
 (`submission.edit.md`) and the point is gone, with a note that the judgement is about the working copy.
 
+Under an opened submission are its **actions**:
+- **Change status** — a choice from the form's own list of states (`received`, `edited`, …). You cannot
+  choose a state the form does not name, and a deleted submission has none.
+- **Withdraw…** — enter the day the respondent withdrew it (today is proposed). A withdrawn submission never
+  goes into the book. **Undo withdrawal** takes it back.
+- **Delete…** — erases the answers, the working copy and the photos from the workspace. First a
+  confirmation says what is erased and what stays: a **minimal record** (the number, the days of receipt
+  and consent and the status — and the fields the form announced beforehand in its notice, `keep-record`).
+  It cannot be undone. If the register cannot be read, the content is still erased, and OciDeck says the
+  row has to be adjusted by hand.
+Each action says how it went. A register that cannot be read is never written over.
+
 A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it
 arrived plus its photos, in one step: a crash never leaves half a submission, and a submission that
 is already there is never overwritten. One with an error still lands, with the status `needs-fixing`,

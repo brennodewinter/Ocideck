@@ -667,6 +667,38 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Status gewijzigd naar {status}.': 'Status feroare nei {status}.',
+  'Intrekking opgeslagen.': 'Weromlutsen bewarre.',
+  'Intrekking ongedaan gemaakt.': 'Weromlutsen ûngedien makke.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Ynstjoering wiske; it rekord bliuwt stean.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Ynstjoering wiske, mar it register koe net bywurke wurde. Wizigje overview.md mei de hân.',
+  'De inzending is niet gevonden in de werkmap.':
+      'De ynstjoering is net fûn yn de wurkmap.',
+  'De inzending kon niet worden verwijderd.':
+      'De ynstjoering koe net wiske wurde.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'It register kin net lêzen wurde. Herstelle overview.md; der is neat wizige.',
+  'Het register kon niet worden bijgewerkt.':
+      'It register koe net bywurke wurde.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Dizze wiziging koe net trochfierd wurde: de ynstjoering stiet net yn it register.',
+  'Status wijzigen': 'Status wizigje',
+  'Intrekking ongedaan maken': 'Weromlutsen ûngedien meitsje',
+  'Intrekken…': 'Weromlûke…',
+  'Verwijderen…': 'Wiskje…',
+  'Inzending intrekken': 'Ynstjoering weromlûke',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Folje de dei yn dêr’t de ynstjoerder de ynstjoering op weromlutsen hat. In weromlutsen ynstjoering komt nea yn it boek.',
+  'Dag (jjjj-mm-dd)': 'Dei (jjjj-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Unjildige dei. Brûk jier-moanne-dei, bygelyks {voorbeeld}.',
+  'Inzending verwijderen': 'Ynstjoering wiskje',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'De antwurden, de wurkkopy en de foto’s fan dizze ynstjoering wurde út de wurkmap wiske. Allinnich in minimaal rekord bliuwt oer: it nûmer, de dagen fan ûntfangst en tastimming en de status. Dit kin net ûngedien makke wurde.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Ek bliuwt stean wat it formulier foarôf oankundige hie: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Der is wat mis mei dizze ynstjoering.',
   'Verplicht, maar leeg gelaten.': 'Ferplicht, mar leech litten.',

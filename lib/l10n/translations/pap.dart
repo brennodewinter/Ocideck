@@ -666,6 +666,37 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Status gewijzigd naar {status}.': 'Status kambiá pa {status}.',
+  'Intrekking opgeslagen.': 'Retiro warda.',
+  'Intrekking ongedaan gemaakt.': 'Retiro desfèt.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Envio eliminá; e rekord ta keda.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Envio eliminá, ma no a por a aktualisá e rehistro. Edità overview.md ku man.',
+  'De inzending is niet gevonden in de werkmap.':
+      'No a hañ e envio den e mapa di trabou.',
+  'De inzending kon niet worden verwijderd.': 'No a por a eliminá e envio.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'No por lesa e rehistro. Drecha overview.md; nada no a kambia.',
+  'Het register kon niet worden bijgewerkt.':
+      'No a por a aktualisá e rehistro.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'No a por a hasi e kambio aki: e envio no ta den e rehistro.',
+  'Status wijzigen': 'Kambia status',
+  'Intrekking ongedaan maken': 'Desfé retiro',
+  'Intrekken…': 'Retirá…',
+  'Verwijderen…': 'Eliminá…',
+  'Inzending intrekken': 'Retirá envio',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Yena e dia ku esun ku a manda a retirá e envio. Un envio retirá nunka ta drenta e buki.',
+  'Dag (jjjj-mm-dd)': 'Dia (aaaa-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Dia inválido. Usa aña-luna-dia, por ehèmpel {voorbeeld}.',
+  'Inzending verwijderen': 'Eliminá envio',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'E repsuestanan, e kopia di trabou i e potretnan di e envio aki ta wòrdu borá for di e mapa di trabou. Solamente un rekord mínimo ta keda: e número, e dianan di risibimentu i konsentimentu i e status. Esaki no por wòrdu desfèt.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Tambe ta keda loke e formulario a anunsiá di promé: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Tin algu cos ku no ta bon ku e envio aki.',
   'Verplicht, maar leeg gelaten.': 'Obligatorio, ma a laga bashí.',

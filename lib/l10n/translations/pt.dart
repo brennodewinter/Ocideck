@@ -1655,6 +1655,38 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Status gewijzigd naar {status}.': 'Estado alterado para {status}.',
+  'Intrekking opgeslagen.': 'Retirada guardada.',
+  'Intrekking ongedaan gemaakt.': 'Retirada anulada.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Envio eliminado; o registo permanece.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Envio eliminado, mas não foi possível atualizar o registo. Edite overview.md à mão.',
+  'De inzending is niet gevonden in de werkmap.':
+      'O envio não foi encontrado na pasta de trabalho.',
+  'De inzending kon niet worden verwijderd.':
+      'Não foi possível eliminar o envio.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Não é possível ler o registo. Repare overview.md; nada foi alterado.',
+  'Het register kon niet worden bijgewerkt.':
+      'Não foi possível atualizar o registo.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Não foi possível fazer esta alteração: o envio não está no registo.',
+  'Status wijzigen': 'Alterar estado',
+  'Intrekking ongedaan maken': 'Anular a retirada',
+  'Intrekken…': 'Retirar…',
+  'Verwijderen…': 'Eliminar…',
+  'Inzending intrekken': 'Retirar envio',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Introduza o dia em que quem enviou retirou o envio. Um envio retirado nunca entra no livro.',
+  'Dag (jjjj-mm-dd)': 'Dia (aaaa-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Dia inválido. Use ano-mês-dia, por exemplo {voorbeeld}.',
+  'Inzending verwijderen': 'Eliminar envio',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'As respostas, a cópia de trabalho e as fotografias deste envio são apagadas da pasta de trabalho. Resta apenas um registo mínimo: o número, os dias de receção e de consentimento e o estado. Isto não pode ser anulado.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Também permanece o que o formulário anunciou de antemão: {velden}.',
   'Er klopt iets niet aan deze inzending.': 'Há algo errado com este envio.',
   'Verplicht, maar leeg gelaten.': 'Obrigatório, mas deixado vazio.',
   '{actual} woorden; minstens {min} nodig.':

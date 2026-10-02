@@ -1642,6 +1642,36 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Status gewijzigd naar {status}.': 'Status mutatus in {status}.',
+  'Intrekking opgeslagen.': 'Revocatio servata est.',
+  'Intrekking ongedaan gemaakt.': 'Revocatio infecta facta est.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Missum deletum; monumentum manet.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Missum deletum, sed index renovari non potuit. Overview.md manu muta.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Missum in fasciculo operis inventum non est.',
+  'De inzending kon niet worden verwijderd.': 'Missum deleri non potuit.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Index legi non potest. Repara overview.md; nihil mutatum est.',
+  'Het register kon niet worden bijgewerkt.': 'Index renovari non potuit.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Haec mutatio fieri non potuit: missum in indice non est.',
+  'Status wijzigen': 'Statum mutare',
+  'Intrekking ongedaan maken': 'Revocationem infectam facere',
+  'Intrekken…': 'Revocare…',
+  'Verwijderen…': 'Delere…',
+  'Inzending intrekken': 'Missum revocare',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Diem inscribe quo qui misit missum revocavit. Missum revocatum numquam in librum venit.',
+  'Dag (jjjj-mm-dd)': 'Dies (aaaa-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Dies invalidus. Utere annus-mensis-dies, exempli gratia {voorbeeld}.',
+  'Inzending verwijderen': 'Missum delere',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Responsa, exemplar operis et imagines huius missi ex fasciculo operis delentur. Tantum monumentum minimum manet: numerus, dies acceptionis et consensus, et status. Hoc infectum fieri non potest.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Manet etiam quod formula antea nuntiavit: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Aliquid in hoc missu non recte se habet.',
   'Verplicht, maar leeg gelaten.': 'Necessarium, sed vacuum relictum.',

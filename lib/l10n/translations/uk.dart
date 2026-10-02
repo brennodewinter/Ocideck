@@ -1642,6 +1642,36 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Status gewijzigd naar {status}.': 'Статус змінено на {status}.',
+  'Intrekking opgeslagen.': 'Відкликання збережено.',
+  'Intrekking ongedaan gemaakt.': 'Відкликання скасовано.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Надсилання видалено; запис залишається.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Надсилання видалено, але реєстр не вдалося оновити. Змініть overview.md вручну.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Надсилання не знайдено в робочій папці.',
+  'De inzending kon niet worden verwijderd.': 'Не вдалося видалити надсилання.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Реєстр не вдається прочитати. Виправте overview.md; нічого не змінено.',
+  'Het register kon niet worden bijgewerkt.': 'Не вдалося оновити реєстр.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Не вдалося внести цю зміну: надсилання немає в реєстрі.',
+  'Status wijzigen': 'Змінити статус',
+  'Intrekking ongedaan maken': 'Скасувати відкликання',
+  'Intrekken…': 'Відкликати…',
+  'Verwijderen…': 'Видалити…',
+  'Inzending intrekken': 'Відкликати надсилання',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Введіть день, коли той, хто надіслав, відкликав надсилання. Відкликане надсилання ніколи не потрапляє до книги.',
+  'Dag (jjjj-mm-dd)': 'День (рррр-мм-дд)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Недійсний день. Використайте рік-місяць-день, наприклад {voorbeeld}.',
+  'Inzending verwijderen': 'Видалити надсилання',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Відповіді, робоча копія та фото цього надсилання буде стерто з робочої папки. Залишиться лише мінімальний запис: номер, дні отримання й згоди та статус. Це неможливо скасувати.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Також залишається те, що форма оголосила заздалегідь: {velden}.',
   'Er klopt iets niet aan deze inzending.': 'З цим надсиланням щось не так.',
   'Verplicht, maar leeg gelaten.': 'Обов’язково, але залишено порожнім.',
   '{actual} woorden; minstens {min} nodig.':

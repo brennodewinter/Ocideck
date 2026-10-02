@@ -1647,6 +1647,38 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Status gewijzigd naar {status}.': 'Статусът е променен на {status}.',
+  'Intrekking opgeslagen.': 'Оттеглянето е запазено.',
+  'Intrekking ongedaan gemaakt.': 'Оттеглянето е отменено.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Изпращането е изтрито; записът остава.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Изпращането е изтрито, но регистърът не можа да бъде обновен. Редактирайте overview.md ръчно.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Изпращането не е намерено в работната папка.',
+  'De inzending kon niet worden verwijderd.':
+      'Изпращането не можа да бъде изтрито.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Регистърът не може да бъде прочетен. Поправете overview.md; нищо не е променено.',
+  'Het register kon niet worden bijgewerkt.':
+      'Регистърът не можа да бъде обновен.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Тази промяна не можа да бъде направена: изпращането го няма в регистъра.',
+  'Status wijzigen': 'Промяна на статуса',
+  'Intrekking ongedaan maken': 'Отмяна на оттеглянето',
+  'Intrekken…': 'Оттегляне…',
+  'Verwijderen…': 'Изтриване…',
+  'Inzending intrekken': 'Оттегляне на изпращане',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Въведете деня, в който изпращащият е оттеглил изпращането. Оттеглено изпращане никога не влиза в книгата.',
+  'Dag (jjjj-mm-dd)': 'Ден (гггг-мм-дд)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Невалиден ден. Използвайте година-месец-ден, например {voorbeeld}.',
+  'Inzending verwijderen': 'Изтриване на изпращане',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Отговорите, работното копие и снимките на това изпращане се изтриват от работната папка. Остава само минимален запис: номерът, дните на получаване и съгласие и статусът. Това не може да бъде отменено.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Остава и това, което формулярът е обявил предварително: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Има нещо нередно с това изпращане.',
   'Verplicht, maar leeg gelaten.': 'Задължително, но оставено празно.',

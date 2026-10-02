@@ -80,8 +80,9 @@
 > against the published form, land in one step, register row — with `needs-fixing` as the status of a landed
 > submission with an error. The Inbox lists every submission and opens up to **what is wrong with it** in plain
 > words about the respondent (`formOrganiserMessage`), re-judged from the workspace each time. Plain zips only
-> (phase 2); changing the status, withdrawing and deleting from the interface, redaction in a working copy, the
-> maker check and compile (§7.3–§7.5) are still to build.
+> (phase 2). From the Inbox an organiser can **change the status, withdraw and delete** a submission (deleting
+> leaves the minimal record and does not wait for a broken register); redaction in a working copy, the maker
+> check and compile (§7.3–§7.5) are still to build.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.

@@ -667,6 +667,38 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Status gewijzigd naar {status}.': 'Status geändert auf {status}.',
+  'Intrekking opgeslagen.': 'Zurückziehung gespeichert.',
+  'Intrekking ongedaan gemaakt.': 'Zurückziehung rückgängig gemacht.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Einsendung gelöscht; der Eintrag bleibt.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Einsendung gelöscht, aber das Register konnte nicht aktualisiert werden. Bearbeite overview.md von Hand.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Die Einsendung wurde im Arbeitsordner nicht gefunden.',
+  'De inzending kon niet worden verwijderd.':
+      'Die Einsendung konnte nicht gelöscht werden.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Das Register kann nicht gelesen werden. Repariere overview.md; es wurde nichts geändert.',
+  'Het register kon niet worden bijgewerkt.':
+      'Das Register konnte nicht aktualisiert werden.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Diese Änderung war nicht möglich: Die Einsendung steht nicht im Register.',
+  'Status wijzigen': 'Status ändern',
+  'Intrekking ongedaan maken': 'Zurückziehung rückgängig machen',
+  'Intrekken…': 'Zurückziehen…',
+  'Verwijderen…': 'Löschen…',
+  'Inzending intrekken': 'Einsendung zurückziehen',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Gib den Tag ein, an dem die einsendende Person die Einsendung zurückgezogen hat. Eine zurückgezogene Einsendung kommt nie ins Buch.',
+  'Dag (jjjj-mm-dd)': 'Tag (jjjj-mm-tt)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Ungültiger Tag. Verwende Jahr-Monat-Tag, zum Beispiel {voorbeeld}.',
+  'Inzending verwijderen': 'Einsendung löschen',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Die Antworten, die Arbeitskopie und die Fotos dieser Einsendung werden aus dem Arbeitsordner gelöscht. Nur ein minimaler Eintrag bleibt: die Nummer, die Tage von Eingang und Einwilligung und der Status. Das lässt sich nicht rückgängig machen.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Ebenfalls bleibt stehen, was das Formular vorab angekündigt hat: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Mit dieser Einsendung stimmt etwas nicht.',
   'Verplicht, maar leeg gelaten.': 'Pflichtfeld, aber leer gelassen.',

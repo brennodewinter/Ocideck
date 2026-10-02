@@ -1627,6 +1627,38 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Status gewijzigd naar {status}.': 'Stanje spremenjeno v {status}.',
+  'Intrekking opgeslagen.': 'Umik shranjen.',
+  'Intrekking ongedaan gemaakt.': 'Umik razveljavljen.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Oddaja izbrisana; zapis ostane.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Oddaja izbrisana, vendar registra ni bilo mogoče posodobiti. Uredite overview.md ročno.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Oddaje ni bilo mogoče najti v delovni mapi.',
+  'De inzending kon niet worden verwijderd.':
+      'Oddaje ni bilo mogoče izbrisati.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registra ni mogoče prebrati. Popravite overview.md; nič ni bilo spremenjeno.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registra ni bilo mogoče posodobiti.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Te spremembe ni bilo mogoče izvesti: oddaje ni v registru.',
+  'Status wijzigen': 'Spremeni stanje',
+  'Intrekking ongedaan maken': 'Razveljavi umik',
+  'Intrekken…': 'Umakni…',
+  'Verwijderen…': 'Izbriši…',
+  'Inzending intrekken': 'Umakni oddajo',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Vnesite dan, ko je oddajalec umaknil oddajo. Umaknjena oddaja nikoli ne pride v knjigo.',
+  'Dag (jjjj-mm-dd)': 'Dan (llll-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Neveljaven dan. Uporabite leto-mesec-dan, na primer {voorbeeld}.',
+  'Inzending verwijderen': 'Izbriši oddajo',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Odgovori, delovna kopija in fotografije te oddaje se izbrišejo iz delovne mape. Ostane le minimalen zapis: številka, dneva prejema in privolitve ter stanje. Tega ni mogoče razveljaviti.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Ostane tudi tisto, kar je obrazec vnaprej napovedal: {velden}.',
   'Er klopt iets niet aan deze inzending.': 'S to oddajo je nekaj narobe.',
   'Verplicht, maar leeg gelaten.': 'Obvezno, a pustili prazno.',
   '{actual} woorden; minstens {min} nodig.':

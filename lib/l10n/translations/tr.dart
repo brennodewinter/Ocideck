@@ -2538,6 +2538,36 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Status gewijzigd naar {status}.': 'Durum {status} olarak değiştirildi.',
+  'Intrekking opgeslagen.': 'Geri çekme kaydedildi.',
+  'Intrekking ongedaan gemaakt.': 'Geri çekme geri alındı.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Gönderi silindi; kayıt duruyor.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Gönderi silindi, ancak kayıt güncellenemedi. overview.md dosyasını elle düzenleyin.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Gönderi çalışma klasöründe bulunamadı.',
+  'De inzending kon niet worden verwijderd.': 'Gönderi silinemedi.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Kayıt okunamıyor. overview.md dosyasını onarın; hiçbir şey değişmedi.',
+  'Het register kon niet worden bijgewerkt.': 'Kayıt güncellenemedi.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Bu değişiklik yapılamadı: gönderi kayıtta yok.',
+  'Status wijzigen': 'Durumu değiştir',
+  'Intrekking ongedaan maken': 'Geri çekmeyi geri al',
+  'Intrekken…': 'Geri çek…',
+  'Verwijderen…': 'Sil…',
+  'Inzending intrekken': 'Gönderiyi geri çek',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Gönderenin gönderiyi geri çektiği günü girin. Geri çekilen bir gönderi asla kitaba girmez.',
+  'Dag (jjjj-mm-dd)': 'Gün (yyyy-aa-gg)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Geçersiz gün. Yıl-ay-gün biçimini kullanın, örneğin {voorbeeld}.',
+  'Inzending verwijderen': 'Gönderiyi sil',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Bu gönderinin cevapları, çalışma kopyası ve fotoğrafları çalışma klasöründen silinir. Yalnızca asgari bir kayıt kalır: numara, alınma ve onay günleri ve durum. Bu geri alınamaz.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Formun önceden duyurduğu şey de kalır: {velden}.',
   'Er klopt iets niet aan deze inzending.': 'Bu gönderide bir sorun var.',
   'Verplicht, maar leeg gelaten.': 'Zorunlu, ama boş bırakılmış.',
   '{actual} woorden; minstens {min} nodig.':

@@ -1627,6 +1627,37 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Status gewijzigd naar {status}.': 'Status diubah menjadi {status}.',
+  'Intrekking opgeslagen.': 'Penarikan disimpan.',
+  'Intrekking ongedaan gemaakt.': 'Penarikan dibatalkan.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Kiriman dihapus; catatannya tetap ada.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Kiriman dihapus, tetapi register tidak dapat diperbarui. Ubah overview.md secara manual.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Kiriman tidak ditemukan di folder kerja.',
+  'De inzending kon niet worden verwijderd.': 'Kiriman tidak dapat dihapus.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Register tidak dapat dibaca. Perbaiki overview.md; tidak ada yang diubah.',
+  'Het register kon niet worden bijgewerkt.':
+      'Register tidak dapat diperbarui.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Perubahan ini tidak dapat dilakukan: kiriman tidak ada di register.',
+  'Status wijzigen': 'Ubah status',
+  'Intrekking ongedaan maken': 'Batalkan penarikan',
+  'Intrekken…': 'Tarik…',
+  'Verwijderen…': 'Hapus…',
+  'Inzending intrekken': 'Tarik kiriman',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Masukkan hari ketika pengirim menarik kiriman. Kiriman yang ditarik tidak pernah masuk ke buku.',
+  'Dag (jjjj-mm-dd)': 'Hari (tttt-bb-hh)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Hari tidak valid. Gunakan tahun-bulan-hari, misalnya {voorbeeld}.',
+  'Inzending verwijderen': 'Hapus kiriman',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Jawaban, salinan kerja, dan foto kiriman ini dihapus dari folder kerja. Hanya catatan minimal yang tersisa: nomor, hari penerimaan dan persetujuan, serta status. Ini tidak dapat dibatalkan.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Yang juga tetap ada, seperti diumumkan formulir sebelumnya: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Ada yang salah dengan kiriman ini.',
   'Verplicht, maar leeg gelaten.': 'Wajib, tetapi dibiarkan kosong.',

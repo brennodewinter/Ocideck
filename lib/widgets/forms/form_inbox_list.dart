@@ -12,7 +12,10 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../l10n/form_issue_localization.dart';
+import '../../services/form/form_submission_actions.dart'
+    show FormDeleteOutcome, deleteSubmission;
 import '../../services/form/form_workspace.dart';
+import 'form_inbox_actions.dart';
 import 'form_text_helpers.dart' show formFieldTitle;
 
 /// Een inzending in de lijst: haar nummer en, als het register haar kent, haar rij.
@@ -32,9 +35,26 @@ class _Loaded {
 }
 
 class FormInboxList extends StatefulWidget {
-  const FormInboxList({super.key, required this.workspace, this.version = 0});
+  const FormInboxList({
+    super.key,
+    required this.workspace,
+    this.version = 0,
+    this.now,
+    this.delete = deleteSubmission,
+  });
 
   final FormWorkspace workspace;
+
+  /// Het verwijderen zelf; een naad voor de test (zie [FormInboxActions.delete]).
+  final Future<FormDeleteOutcome> Function(
+    FormWorkspace workspace,
+    String sid, {
+    List<String> keep,
+  })
+  delete;
+
+  /// De klok voor de voorgestelde dag bij intrekken; in een test een vaste waarde.
+  final DateTime Function()? now;
 
   /// Verandert als er iets is binnengekomen: dan wordt de lijst opnieuw gelezen.
   final int version;
@@ -45,6 +65,9 @@ class FormInboxList extends StatefulWidget {
 
 class _FormInboxListState extends State<FormInboxList> {
   Future<_Loaded>? _loaded;
+
+  /// De zin over wat de organisator het laatst deed ("Status gewijzigd naar …").
+  String? _notice;
 
   /// De beoordelingen die al zijn opgevraagd, zodat openklappen niet elke keer
   /// opnieuw leest. Ze gaan weg als de lijst opnieuw wordt gelezen.
@@ -82,6 +105,16 @@ class _FormInboxListState extends State<FormInboxList> {
     ], registerDamaged: register is FormRegisterDamaged);
   }
 
+  /// Er is iets gedaan met een inzending: zeg hoe het ging en lees de lijst opnieuw.
+  void _done(String message) {
+    if (!mounted) return;
+    setState(() {
+      _notice = message;
+      _reviews.clear();
+      _loaded = _load();
+    });
+  }
+
   Future<FormStoredReviewResult> _review(String sid) =>
       _reviews.putIfAbsent(sid, () => widget.workspace.reviewStored(sid));
 
@@ -96,6 +129,11 @@ class _FormInboxListState extends State<FormInboxList> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (_notice != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Semantics(liveRegion: true, child: Text(_notice!)),
+              ),
             if (loaded.registerDamaged)
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
@@ -110,7 +148,14 @@ class _FormInboxListState extends State<FormInboxList> {
               Text(l10n.d('Nog geen inzendingen.'))
             else
               for (final entry in loaded.entries)
-                _EntryTile(entry: entry, review: () => _review(entry.sid)),
+                _EntryTile(
+                  entry: entry,
+                  workspace: widget.workspace,
+                  review: () => _review(entry.sid),
+                  onDone: _done,
+                  now: widget.now,
+                  delete: widget.delete,
+                ),
           ],
         );
       },
@@ -119,10 +164,26 @@ class _FormInboxListState extends State<FormInboxList> {
 }
 
 class _EntryTile extends StatelessWidget {
-  const _EntryTile({required this.entry, required this.review});
+  const _EntryTile({
+    required this.entry,
+    required this.workspace,
+    required this.review,
+    required this.onDone,
+    required this.delete,
+    this.now,
+  });
 
   final _Entry entry;
+  final FormWorkspace workspace;
   final Future<FormStoredReviewResult> Function() review;
+  final ValueChanged<String> onDone;
+  final DateTime Function()? now;
+  final Future<FormDeleteOutcome> Function(
+    FormWorkspace workspace,
+    String sid, {
+    List<String> keep,
+  })
+  delete;
 
   static const _fixed = {
     'sid',
@@ -182,7 +243,16 @@ class _EntryTile extends StatelessWidget {
       subtitle: Text(subtitle),
       childrenPadding: const EdgeInsets.fromLTRB(40, 0, 0, 12),
       expandedCrossAxisAlignment: CrossAxisAlignment.start,
-      children: [_Detail(review: review)],
+      children: [
+        _Detail(
+          review: review,
+          workspace: workspace,
+          entry: entry,
+          onDone: onDone,
+          now: now,
+          delete: delete,
+        ),
+      ],
     );
   }
 }
@@ -190,9 +260,26 @@ class _EntryTile extends StatelessWidget {
 /// Wat er tegen het gepubliceerde formulier mis is met één inzending. Wordt pas
 /// gebouwd — en dus pas gelezen — als de regel wordt opengeklapt.
 class _Detail extends StatelessWidget {
-  const _Detail({required this.review});
+  const _Detail({
+    required this.review,
+    required this.workspace,
+    required this.entry,
+    required this.onDone,
+    required this.delete,
+    this.now,
+  });
 
   final Future<FormStoredReviewResult> Function() review;
+  final FormWorkspace workspace;
+  final _Entry entry;
+  final ValueChanged<String> onDone;
+  final DateTime Function()? now;
+  final Future<FormDeleteOutcome> Function(
+    FormWorkspace workspace,
+    String sid, {
+    List<String> keep,
+  })
+  delete;
 
   @override
   Widget build(BuildContext context) {
@@ -200,26 +287,43 @@ class _Detail extends StatelessWidget {
     return FutureBuilder<FormStoredReviewResult>(
       future: review(),
       builder: (context, snapshot) {
-        return switch (snapshot.data) {
-          null => const Padding(
+        final result = snapshot.data;
+        if (result == null) {
+          return const Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
             child: LinearProgressIndicator(),
-          ),
-          FormStoredUnavailable(deleted: true) => Text(
-            l10n.d(
-              'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.',
+          );
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            switch (result) {
+              FormStoredUnavailable(deleted: true) => Text(
+                l10n.d(
+                  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.',
+                ),
+              ),
+              FormStoredUnavailable() => Text(
+                l10n.d(
+                  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.',
+                ),
+              ),
+              FormStoredReview(:final review, :final edited) => FormReviewView(
+                review: review,
+                edited: edited,
+              ),
+            },
+            FormInboxActions(
+              workspace: workspace,
+              sid: entry.sid,
+              row: entry.row,
+              spec: result is FormStoredReview ? result.review.spec : null,
+              onDone: onDone,
+              now: now,
+              delete: delete,
             ),
-          ),
-          FormStoredUnavailable() => Text(
-            l10n.d(
-              'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.',
-            ),
-          ),
-          FormStoredReview(:final review, :final edited) => FormReviewView(
-            review: review,
-            edited: edited,
-          ),
-        };
+          ],
+        );
       },
     );
   }

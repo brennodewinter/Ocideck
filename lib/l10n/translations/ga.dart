@@ -1657,6 +1657,38 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Status gewijzigd naar {status}.': 'Athraíodh an stádas go {status}.',
+  'Intrekking opgeslagen.': 'Sábháladh an tarraingt siar.',
+  'Intrekking ongedaan gemaakt.': 'Cuireadh an tarraingt siar ar ceal.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Scriosadh an aighneacht; fanann an taifead.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Scriosadh an aighneacht, ach níorbh fhéidir an clár a nuashonrú. Cuir overview.md in eagar de láimh.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Níor aimsíodh an aighneacht sa fhillteán oibre.',
+  'De inzending kon niet worden verwijderd.':
+      'Níorbh fhéidir an aighneacht a scriosadh.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Ní féidir an clár a léamh. Deisigh overview.md; níor athraíodh aon rud.',
+  'Het register kon niet worden bijgewerkt.':
+      'Níorbh fhéidir an clár a nuashonrú.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Níorbh fhéidir an t-athrú seo a dhéanamh: níl an aighneacht sa chlár.',
+  'Status wijzigen': 'Athraigh an stádas',
+  'Intrekking ongedaan maken': 'Cealaigh an tarraingt siar',
+  'Intrekken…': 'Tarraing siar…',
+  'Verwijderen…': 'Scrios…',
+  'Inzending intrekken': 'Tarraing an aighneacht siar',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Cuir isteach an lá ar tharraing an seoltóir an aighneacht siar. Ní théann aighneacht tarraingthe siar isteach sa leabhar choíche.',
+  'Dag (jjjj-mm-dd)': 'Lá (bbbb-mm-ll)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Lá neamhbhailí. Úsáid bliain-mí-lá, mar shampla {voorbeeld}.',
+  'Inzending verwijderen': 'Scrios an aighneacht',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Scriostar freagraí, cóip oibre agus grianghraif na haighneachta seo ón bhfillteán oibre. Ní fhanann ach taifead íosta: an uimhir, laethanta an fhaighte agus an toilithe, agus an stádas. Ní féidir é seo a chealú.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Fanann freisin an méid a d’fhógair an fhoirm roimh ré: {velden}.',
   'Er klopt iets niet aan deze inzending.':
       'Tá rud éigin cearr leis an aighneacht seo.',
   'Verplicht, maar leeg gelaten.': 'Riachtanach, ach fágadh folamh é.',
