@@ -60,6 +60,17 @@ void main() {
     expect(find.textContaining('<!--'), findsNothing);
   });
 
+  testWidgets('de invulpagina van een tabblad kan de inzending opslaan', (
+    tester,
+  ) async {
+    final doc = '---\ntitle: Kook\n---\n$formulier';
+    await open(tester, doc);
+    final view = tester.widget<FormFillView>(find.byType(FormFillView));
+    expect(view.export, isNotNull);
+    expect(view.export!.frontMatter, '---\ntitle: Kook\n---\n');
+    expect(find.text('Inzending opslaan als zip…'), findsOneWidget);
+  });
+
   testWidgets('een gewoon document krijgt de stand niet', (tester) async {
     await open(tester, '# Kop\n\nTekst.\n');
     expect(find.byType(FormFillView), findsNothing);
