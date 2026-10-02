@@ -626,6 +626,31 @@ void main() {
     );
   });
 
+  group('normalizeAnswerValue', () {
+    test('is what the document would say after the value is written', () {
+      final field = fieldOf(text);
+      expect(
+        normalizeAnswerValue(field, const FormAnswerValue(text: '  a\n b ')),
+        const FormAnswerValue(text: 'a b'),
+      );
+      final list = fieldOf('<!-- field id=x type=list -->');
+      expect(
+        normalizeAnswerValue(
+          list,
+          const FormAnswerValue(items: ['x ', '', ' y']),
+        ),
+        const FormAnswerValue(items: ['x', 'y']),
+      );
+    });
+
+    test('is idempotent and agrees with the fuzz of the writer', () {
+      final field = fieldOf(prose);
+      const value = FormAnswerValue(text: '  # a\n\n\n  b  \n');
+      final once = normalizeAnswerValue(field, value);
+      expect(normalizeAnswerValue(field, once), once);
+    });
+  });
+
   group('formLineEnding', () {
     test('is CRLF only when the first line break is one', () {
       expect(formLineEnding('a\r\nb\n'), '\r\n');

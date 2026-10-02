@@ -148,6 +148,16 @@ String _creditOf(String? credit) {
   return clean.isEmpty ? '' : ' "$clean"';
 }
 
+/// What [value] is once it has been written into a zone and read back: trimmed,
+/// single-line types on one line, blank list items gone. A fill view that keeps a
+/// *draft* while the respondent types compares it with the document's answer
+/// through this, so that its own normalised echo is not mistaken for a change made
+/// somewhere else (an undo, another window).
+FormAnswerValue normalizeAnswerValue(
+  FormFieldSpec field,
+  FormAnswerValue value,
+) => parseAnswer(field, formatAnswer(field, value)).value;
+
 // ── applyAnswer ─────────────────────────────────────────────────────────────
 
 /// The outcome of [applyAnswer].
