@@ -117,6 +117,14 @@ void main() {
           ]),
           isNull,
         );
+        expect(
+          length([
+            '<!-- field id="" type=text -->',
+            '<!-- answer -->',
+            '<!-- /field id="" -->',
+          ]),
+          isNull,
+        );
       },
     );
 
