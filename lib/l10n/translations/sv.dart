@@ -1626,6 +1626,19 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Inzending opslaan als zip…': 'Spara inlämningen som zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'En zip-fil med dina svar och foton, att mejla till arrangören.',
+  'Inzending opgeslagen als {naam}.': 'Inlämningen sparades som {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Välj formuläret som du fick det',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Det här är inte formuläret som dina svar hör till. Välj filen som du fick av arrangören.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Ett foto kunde inte läsas: {pad}. Lägg till det igen.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Inlämningen ryms inte i ett paket: för många foton eller ett foto som är för stort.',
+  'De inzending kon niet worden opgeslagen.': 'Inlämningen kunde inte sparas.',
+  'Inzending opslaan': 'Spara inlämning',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Platsuppgifterna har tagits bort från det här fotot.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

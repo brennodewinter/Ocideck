@@ -1627,6 +1627,20 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Inzending opslaan als zip…': 'Tallenna lähetys zip-tiedostona…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip-tiedosto, jossa ovat vastauksesi ja valokuvasi ja jonka lähetät sähköpostilla järjestäjälle.',
+  'Inzending opgeslagen als {naam}.': 'Lähetys tallennettiin nimellä {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Valitse lomake sellaisena kuin sait sen',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Tämä ei ole lomake, johon vastauksesi kuuluvat. Valitse tiedosto, jonka sait järjestäjältä.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Valokuvaa ei voitu lukea: {pad}. Lisää se uudelleen.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Lähetys ei mahdu yhteen pakettiin: liian monta valokuvaa tai liian suuri valokuva.',
+  'De inzending kon niet worden opgeslagen.': 'Lähetystä ei voitu tallentaa.',
+  'Inzending opslaan': 'Tallenna lähetys',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Sijaintitiedot on poistettu tästä valokuvasta.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

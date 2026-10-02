@@ -2538,6 +2538,19 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Inzending opslaan als zip…': 'Gönderiyi zip olarak kaydet…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Cevaplarınızı ve fotoğraflarınızı içeren, organizatöre e-postayla göndereceğiniz bir zip dosyası.',
+  'Inzending opgeslagen als {naam}.': 'Gönderi {naam} olarak kaydedildi.',
+  'Kies het formulier zoals je het kreeg': 'Formu size ulaştığı haliyle seçin',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Bu, cevaplarınızın ait olduğu form değil. Organizatörden aldığınız dosyayı seçin.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Bir fotoğraf okunamadı: {pad}. Yeniden ekleyin.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Gönderi tek bir pakete sığmıyor: çok fazla fotoğraf ya da çok büyük bir fotoğraf var.',
+  'De inzending kon niet worden opgeslagen.': 'Gönderi kaydedilemedi.',
+  'Inzending opslaan': 'Gönderiyi kaydet',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Konum verileri bu fotoğraftan kaldırıldı.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

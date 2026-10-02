@@ -1645,6 +1645,21 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Inzending opslaan als zip…': 'Issejvja s-sottomissjoni bħala zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Fajl zip bit-tweġibiet u r-ritratti tiegħek, biex tibgħatu bl-email lill-organizzatur.',
+  'Inzending opgeslagen als {naam}.':
+      'Is-sottomissjoni tissejvja bħala {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Agħżel il-formola kif irċevejtha',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Din mhijiex il-formola li għaliha jappartjenu t-tweġibiet tiegħek. Agħżel il-fajl li rċevejt mingħand l-organizzatur.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Ritratt ma setax jinqara: {pad}. Żidu mill-ġdid.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Is-sottomissjoni ma tidħolx f’pakkett wieħed: wisq ritratti, jew ritratt kbir wisq.',
+  'De inzending kon niet worden opgeslagen.':
+      'Is-sottomissjoni ma setgħetx tissejvja.',
+  'Inzending opslaan': 'Issejvja s-sottomissjoni',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Id-data tal-pożizzjoni tneħħiet minn dan ir-ritratt.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

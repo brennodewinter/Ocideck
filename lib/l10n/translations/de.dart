@@ -667,6 +667,21 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Inzending opslaan als zip…': 'Einsendung als ZIP speichern…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Eine ZIP-Datei mit deinen Antworten und Fotos, die du per E-Mail an die Organisatoren schickst.',
+  'Inzending opgeslagen als {naam}.': 'Einsendung gespeichert als {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Wähle das Formular so, wie du es bekommen hast',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Das ist nicht das Formular, zu dem deine Antworten gehören. Wähle die Datei, die du vom Organisator bekommen hast.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Ein Foto konnte nicht gelesen werden: {pad}. Füge es erneut hinzu.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Die Einsendung passt nicht in ein Paket: zu viele Fotos oder ein zu großes Foto.',
+  'De inzending kon niet worden opgeslagen.':
+      'Die Einsendung konnte nicht gespeichert werden.',
+  'Inzending opslaan': 'Einsendung speichern',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Die Standortdaten wurden aus diesem Foto entfernt.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

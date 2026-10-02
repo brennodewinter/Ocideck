@@ -1631,6 +1631,21 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Inzending opslaan als zip…': 'Spremi prijavu kao zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip datoteka s vašim odgovorima i fotografijama, koju šaljete e-poštom organizatoru.',
+  'Inzending opgeslagen als {naam}.': 'Prijava je spremljena kao {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Odaberite obrazac onakav kakav ste ga primili',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Ovo nije obrazac kojem pripadaju vaši odgovori. Odaberite datoteku koju ste primili od organizatora.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotografiju nije bilo moguće pročitati: {pad}. Dodajte je ponovno.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Prijava ne stane u jedan paket: previše fotografija ili prevelika fotografija.',
+  'De inzending kon niet worden opgeslagen.':
+      'Prijavu nije bilo moguće spremiti.',
+  'Inzending opslaan': 'Spremi prijavu',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Podaci o lokaciji uklonjeni su s ove fotografije.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

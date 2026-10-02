@@ -1630,6 +1630,21 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Inzending opslaan als zip…': 'Iischicku als zip speichere…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Es zip-Fäil mit dine Antworte und Foti, zum em Organisator per Mail schicke.',
+  'Inzending opgeslagen als {naam}.': 'Iischicku gspeicheret als {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Wähl s Formular so, win du s becho hesch',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Das isch nid s Formular, zu däm dini Antworte ghöre. Wähl s Fäil, wo du vom Organisator becho hesch.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Es Foti het nid chönne glese wärde: {pad}. Füeg es nomal dezue.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'S Iischicku passt nid i es Paket: z vil Foti, oder es z grosses Foti.',
+  'De inzending kon niet worden opgeslagen.':
+      'S Iischicku het nid chönne gspeicheret wärde.',
+  'Inzending opslaan': 'Iischicku speichere',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'D Standortdate sind us dem Foti entfernt worde.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

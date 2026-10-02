@@ -1643,6 +1643,21 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Inzending opslaan als zip…': 'Salvează trimiterea ca zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Un fișier zip cu răspunsurile și fotografiile tale, pe care îl trimiți prin e-mail organizatorului.',
+  'Inzending opgeslagen als {naam}.': 'Trimiterea a fost salvată ca {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Alege formularul așa cum l-ai primit',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Acesta nu este formularul căruia îi aparțin răspunsurile tale. Alege fișierul primit de la organizator.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'O fotografie nu a putut fi citită: {pad}. Adaug-o din nou.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Trimiterea nu încape într-un pachet: prea multe fotografii sau o fotografie prea mare.',
+  'De inzending kon niet worden opgeslagen.':
+      'Trimiterea nu a putut fi salvată.',
+  'Inzending opslaan': 'Salvează trimiterea',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Datele de locație au fost eliminate din această fotografie.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

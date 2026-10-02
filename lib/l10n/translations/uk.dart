@@ -1642,6 +1642,20 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Inzending opslaan als zip…': 'Зберегти заявку як zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Файл zip з вашими відповідями та фото, щоб надіслати організаторові електронною поштою.',
+  'Inzending opgeslagen als {naam}.': 'Заявку збережено як {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Виберіть форму такою, якою ви її отримали',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Це не та форма, до якої належать ваші відповіді. Виберіть файл, який ви отримали від організатора.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Не вдалося прочитати фото: {pad}. Додайте його ще раз.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Заявка не вміщується в один пакет: забагато фото або фото завелике.',
+  'De inzending kon niet worden opgeslagen.': 'Не вдалося зберегти заявку.',
+  'Inzending opslaan': 'Зберегти заявку',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Дані про місцезнаходження видалено з цієї фотографії.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

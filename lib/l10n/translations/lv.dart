@@ -1625,6 +1625,20 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Inzending opslaan als zip…': 'Saglabāt iesūtījumu kā zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip fails ar jūsu atbildēm un fotoattēliem, ko nosūtīt organizatoram pa e-pastu.',
+  'Inzending opgeslagen als {naam}.': 'Iesūtījums saglabāts kā {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Izvēlieties veidlapu tādu, kādu to saņēmāt',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Šī nav veidlapa, kurai pieder jūsu atbildes. Izvēlieties failu, ko saņēmāt no organizatora.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotoattēlu nevarēja nolasīt: {pad}. Pievienojiet to vēlreiz.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Iesūtījums neietilpst vienā pakotnē: pārāk daudz fotoattēlu vai pārāk liels fotoattēls.',
+  'De inzending kon niet worden opgeslagen.': 'Iesūtījumu nevarēja saglabāt.',
+  'Inzending opslaan': 'Saglabāt iesūtījumu',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Atrašanās vietas dati ir noņemti no šīs fotogrāfijas.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

@@ -1642,6 +1642,19 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Inzending opslaan als zip…': 'Missum ut zip servare…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Fasciculus zip cum responsis et imaginibus tuis, ad ordinatorem epistula electronica mittendus.',
+  'Inzending opgeslagen als {naam}.': 'Missum servatum est ut {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Formulam elige ut accepisti',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Haec non est formula ad quam responsa tua pertinent. Fasciculum elige quem ab ordinatore accepisti.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Imago legi non potuit: {pad}. Iterum adde.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Missum in fasciculum non capitur: nimis multae imagines, aut imago nimis magna.',
+  'De inzending kon niet worden opgeslagen.': 'Missum servari non potuit.',
+  'Inzending opslaan': 'Missum servare',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Data locorum ex hac imagine remota sunt.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

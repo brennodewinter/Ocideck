@@ -666,6 +666,20 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Inzending opslaan als zip…': 'Warda e envio komo zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Un archivo zip ku bo repsuestanan i potret, pa manda pa email na e organisadó.',
+  'Inzending opgeslagen als {naam}.': 'Envio warda komo {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Skohe e formulario manera bo a risibié',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Esaki no ta e formulario kaminda bo repsuestanan ta pertenesé. Skohe e archivo ku bo a risibí di e organisadó.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'No a por a lesa un potret: {pad}. Agregé di nobo.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'E envio no ta kaba den un pakete: demasiado potret, òf un potret ku ta demasiado grandi.',
+  'De inzending kon niet worden opgeslagen.': 'No a por a warda e envio.',
+  'Inzending opslaan': 'Warda envio',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Ku a kita e datonan di lokalisashon for di e potret aki.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

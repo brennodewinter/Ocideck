@@ -1639,6 +1639,21 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Inzending opslaan als zip…': 'Zapisz zgłoszenie jako zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Plik zip z Twoimi odpowiedziami i zdjęciami, do wysłania e-mailem organizatorowi.',
+  'Inzending opgeslagen als {naam}.': 'Zgłoszenie zapisano jako {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Wybierz formularz taki, jaki go otrzymałeś',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'To nie jest formularz, do którego należą Twoje odpowiedzi. Wybierz plik, który otrzymałeś od organizatora.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Nie udało się odczytać zdjęcia: {pad}. Dodaj je ponownie.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Zgłoszenie nie mieści się w jednej paczce: za dużo zdjęć lub zbyt duże zdjęcie.',
+  'De inzending kon niet worden opgeslagen.':
+      'Nie udało się zapisać zgłoszenia.',
+  'Inzending opslaan': 'Zapisz zgłoszenie',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Dane lokalizacji zostały usunięte z tego zdjęcia.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':

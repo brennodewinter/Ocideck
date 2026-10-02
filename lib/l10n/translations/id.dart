@@ -1627,6 +1627,20 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Inzending opslaan als zip…': 'Simpan kiriman sebagai zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Berkas zip berisi jawaban dan foto Anda, untuk dikirim lewat email ke penyelenggara.',
+  'Inzending opgeslagen als {naam}.': 'Kiriman disimpan sebagai {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Pilih formulir seperti yang Anda terima',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Ini bukan formulir yang dimiliki jawaban Anda. Pilih berkas yang Anda terima dari penyelenggara.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Sebuah foto tidak dapat dibaca: {pad}. Tambahkan lagi.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Kiriman tidak muat dalam satu paket: terlalu banyak foto, atau ada foto yang terlalu besar.',
+  'De inzending kon niet worden opgeslagen.': 'Kiriman tidak dapat disimpan.',
+  'Inzending opslaan': 'Simpan kiriman',
   'Locatiegegevens zijn uit deze foto verwijderd.':
       'Data lokasi telah dihapus dari foto ini.',
   'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
