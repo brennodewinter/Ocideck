@@ -827,6 +827,45 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Inzendingen': 'Submissions',
+  'Werkmap': 'Workspace',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'No workspace chosen yet. Choose a folder where the submissions and the register will be kept.',
+  'Werkmap kiezen…': 'Choose workspace…',
+  'Kies de werkmap voor inzendingen': 'Choose the workspace for submissions',
+  'Formulieren': 'Forms',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'No form added yet. Add the form as you published it: a submission is checked against it.',
+  'Formulier toevoegen…': 'Add form…',
+  'Kies het formulier om toe te voegen': 'Choose the form to add',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'This file is not a form that can be published.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'This form is already there with different text. Different text is a new version: give the form a higher version number.',
+  'Formulier toegevoegd: {naam}.': 'Form added: {naam}.',
+  'Dit formulier stond er al.': 'This form was already there.',
+  'Het formulier kon niet worden opgeslagen.': 'The form could not be saved.',
+  'Inzendingen in de werkmap: {n}': 'Submissions in the workspace: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'A plain zip is not encrypted in transit.',
+  'Pakketten binnenhalen…': 'Import packages…',
+  'Kies de pakketten om binnen te halen': 'Choose the packages to import',
+  'Register openen': 'Open register',
+  '{naam}: binnengehaald.': '{naam}: imported.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: imported, but there are points to review.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: imported, but the register could not be updated. Check overview.md.',
+  '{naam}: stond er al.': '{naam}: was already there.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: not a submission package OciDeck can read.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: this form has not been added, or not in this version. Add the form first.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: could not be saved in the workspace.',
+  'Formulieren en inzendingen': 'Forms and submissions',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Import submissions of a form, check them against the published form and keep them with a register. Filling in a form also works when this is off. Off by default.',
   'Inzending opslaan als zip…': 'Save submission as zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'A zip file with your answers and photos, to email to the organiser.',

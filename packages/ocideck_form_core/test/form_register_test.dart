@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:test/test.dart';
 
+import 'support/image_fixtures.dart';
 import 'support/manifest_fixtures.dart';
 
 const String published =
@@ -66,12 +69,13 @@ FormReview reviewOf({
   int n = 0,
   String from = published,
   DateTime? created,
+  Map<String, Uint8List> images = const {},
 }) {
   final bytes = buildFormPackage(
     submission: submission ?? fill(from: from),
     template: from,
     spec: specOf(from),
-    images: const {},
+    images: images,
     submissionId: sidOf(n),
     created: created ?? DateTime.utc(2026, 10, 4),
     clientRules: kFormRulesVersion,
@@ -162,6 +166,46 @@ void main() {
         named,
       ).withSubmission(reviewOf(from: named), received: '2026-10-05')!;
       expect(register.rows.single.status, 'nieuw');
+    });
+
+    test('as needs-fixing when the review found an error', () {
+      final register = emptyRegister().withSubmission(
+        reviewOf(submission: fill(naam: '')),
+        received: 'd',
+      )!;
+      expect(register.rows.single.status, kFormStateNeedsFixing);
+      expect(register.rows.single.valueOf('naam'), isEmpty);
+      expect(register.rows.single.sid, sidOf(0));
+    });
+
+    test('and from there an editor moves it to a state of the form', () {
+      final fixing = emptyRegister().withSubmission(
+        reviewOf(submission: fill(naam: '')),
+        received: 'd',
+      )!;
+      final moved = fixing.withStatus(sidOf(0), 'edited', kDefaultFormStates)!;
+      expect(moved.rows.single.status, 'edited');
+    });
+
+    test('a warning alone is not an error', () {
+      final photo = published.replaceFirst(
+        '<!-- field id=akkoord',
+        '<!-- field id=foto type=image count=0..2 min-width=2000 -->\n**Foto**\n<!-- answer -->\n<!-- /field id=foto -->\n\n<!-- field id=akkoord',
+      );
+      final submission = fill(from: photo).replaceFirst(
+        '<!-- answer -->\n<!-- /field id=foto',
+        '<!-- answer -->\n![](images/foto-1.jpg)\n<!-- /field id=foto',
+      );
+      final review = reviewOf(
+        from: photo,
+        submission: submission,
+        images: {'images/foto-1.jpg': jpegClean(width: 640)},
+      );
+      expect(review.problems.map((p) => p.code), [FormIssueCode.imageTooSmall]);
+      final register = emptyRegister(
+        photo,
+      ).withSubmission(review, received: 'd')!;
+      expect(register.rows.single.status, 'received');
     });
 
     test('with the reminder it is given', () {

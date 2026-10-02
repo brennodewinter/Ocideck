@@ -1627,6 +1627,46 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Inzendingen': 'Oddaje',
+  'Werkmap': 'Delovna mapa',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Delovna mapa še ni izbrana. Izberite mapo, v kateri bodo shranjene oddaje in register.',
+  'Werkmap kiezen…': 'Izberi delovno mapo…',
+  'Kies de werkmap voor inzendingen': 'Izberite delovno mapo za oddaje',
+  'Formulieren': 'Obrazci',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Obrazec še ni dodan. Dodajte obrazec, kakršnega ste objavili: oddaja se preverja glede nanj.',
+  'Formulier toevoegen…': 'Dodaj obrazec…',
+  'Kies het formulier om toe te voegen': 'Izberite obrazec za dodajanje',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ta datoteka ni obrazec, ki bi ga bilo mogoče objaviti.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ta obrazec že obstaja z drugačnim besedilom. Drugačno besedilo je nova različica: obrazcu dajte višjo številko različice.',
+  'Formulier toegevoegd: {naam}.': 'Obrazec dodan: {naam}.',
+  'Dit formulier stond er al.': 'Ta obrazec je že bil.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Obrazca ni bilo mogoče shraniti.',
+  'Inzendingen in de werkmap: {n}': 'Oddaje v delovni mapi: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Navaden zip med prenosom ni šifriran.',
+  'Pakketten binnenhalen…': 'Uvozi pakete…',
+  'Kies de pakketten om binnen te halen': 'Izberite pakete za uvoz',
+  'Register openen': 'Odpri register',
+  '{naam}: binnengehaald.': '{naam}: uvoženo.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: uvoženo, vendar je nekaj točk za pregled.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: uvoženo, vendar registra ni bilo mogoče posodobiti. Preverite overview.md.',
+  '{naam}: stond er al.': '{naam}: je že bilo.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ni paket oddaje, ki bi ga OciDeck lahko prebral.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ta obrazec ni dodan ali ni v tej različici. Najprej dodajte obrazec.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ni bilo mogoče shraniti v delovno mapo.',
+  'Formulieren en inzendingen': 'Obrazci in oddaje',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Uvozite oddaje obrazca, preverite jih glede na objavljeni obrazec in jih hranite z registrom. Izpolnjevanje obrazca deluje tudi, ko je to izklopljeno. Privzeto izklopljeno.',
   'Inzending opslaan als zip…': 'Shrani prijavo kot zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Datoteka zip z vašimi odgovori in fotografijami, ki jo po e-pošti pošljete organizatorju.',

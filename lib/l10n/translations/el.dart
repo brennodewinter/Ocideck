@@ -1652,6 +1652,47 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Inzendingen': 'Υποβολές',
+  'Werkmap': 'Φάκελος εργασίας',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Δεν έχει επιλεγεί ακόμη φάκελος εργασίας. Επιλέξτε έναν φάκελο όπου θα φυλάσσονται οι υποβολές και το μητρώο.',
+  'Werkmap kiezen…': 'Επιλογή φακέλου εργασίας…',
+  'Kies de werkmap voor inzendingen':
+      'Επιλέξτε τον φάκελο εργασίας για τις υποβολές',
+  'Formulieren': 'Φόρμες',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Δεν έχει προστεθεί ακόμη φόρμα. Προσθέστε τη φόρμα όπως τη δημοσιεύσατε: μια υποβολή ελέγχεται σε σχέση με αυτήν.',
+  'Formulier toevoegen…': 'Προσθήκη φόρμας…',
+  'Kies het formulier om toe te voegen': 'Επιλέξτε τη φόρμα προς προσθήκη',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Αυτό το αρχείο δεν είναι φόρμα που μπορεί να δημοσιευθεί.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Αυτή η φόρμα υπάρχει ήδη με διαφορετικό κείμενο. Διαφορετικό κείμενο είναι νέα έκδοση: δώστε στη φόρμα υψηλότερο αριθμό έκδοσης.',
+  'Formulier toegevoegd: {naam}.': 'Η φόρμα προστέθηκε: {naam}.',
+  'Dit formulier stond er al.': 'Αυτή η φόρμα υπήρχε ήδη.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Η φόρμα δεν ήταν δυνατό να αποθηκευτεί.',
+  'Inzendingen in de werkmap: {n}': 'Υποβολές στον φάκελο εργασίας: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Ένα απλό zip δεν είναι κρυπτογραφημένο κατά τη μεταφορά.',
+  'Pakketten binnenhalen…': 'Εισαγωγή πακέτων…',
+  'Kies de pakketten om binnen te halen': 'Επιλέξτε τα πακέτα προς εισαγωγή',
+  'Register openen': 'Άνοιγμα μητρώου',
+  '{naam}: binnengehaald.': '{naam}: εισήχθη.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: εισήχθη, αλλά υπάρχουν σημεία προς έλεγχο.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: εισήχθη, αλλά το μητρώο δεν ήταν δυνατό να ενημερωθεί. Ελέγξτε το overview.md.',
+  '{naam}: stond er al.': '{naam}: υπήρχε ήδη.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: δεν είναι πακέτο υποβολής που μπορεί να διαβάσει το OciDeck.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: αυτή η φόρμα δεν έχει προστεθεί, ή όχι σε αυτή την έκδοση. Προσθέστε πρώτα τη φόρμα.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: δεν ήταν δυνατό να αποθηκευτεί στον φάκελο εργασίας.',
+  'Formulieren en inzendingen': 'Φόρμες και υποβολές',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Εισαγάγετε υποβολές μιας φόρμας, ελέγξτε τις σε σχέση με τη δημοσιευμένη φόρμα και κρατήστε τις με ένα μητρώο. Η συμπλήρωση φόρμας λειτουργεί και όταν αυτό είναι ανενεργό. Ανενεργό από προεπιλογή.',
   'Inzending opslaan als zip…': 'Αποθήκευση της υποβολής ως zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Ένα αρχείο zip με τις απαντήσεις και τις φωτογραφίες σας, για να το στείλετε με email στον διοργανωτή.',

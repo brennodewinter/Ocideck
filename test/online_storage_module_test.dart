@@ -126,6 +126,7 @@ void main() {
         ModuleId.managementsysteem,
         ModuleId.libreplan,
         ModuleId.elearning,
+        ModuleId.forms,
       ]);
     });
   });

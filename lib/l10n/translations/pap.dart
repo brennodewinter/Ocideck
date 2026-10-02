@@ -666,6 +666,45 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Inzendingen': 'Envionan',
+  'Werkmap': 'Mapa di trabou',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Ainda no a skohe un mapa di trabou. Skohe un mapa kaminda e envionan i e rehistro lo keda warda.',
+  'Werkmap kiezen…': 'Skohe mapa di trabou…',
+  'Kies de werkmap voor inzendingen': 'Skohe e mapa di trabou pa envionan',
+  'Formulieren': 'Formularionan',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Ainda no a agregá ningun formulario. Agregá e formulario manera bo a publik’é: un envio ta wòrdu verifiká kontra dje.',
+  'Formulier toevoegen…': 'Agregá formulario…',
+  'Kies het formulier om toe te voegen': 'Skohe e formulario pa agregá',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'E archivo aki no ta un formulario ku por wòrdu publiká.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'E formulario aki ta eksistí kaba ku un otro teksto. Un otro teksto ta un vershon nobo: duna e formulario un número di vershon mas haltu.',
+  'Formulier toegevoegd: {naam}.': 'Formulario agregá: {naam}.',
+  'Dit formulier stond er al.': 'E formulario aki tabata eksistí kaba.',
+  'Het formulier kon niet worden opgeslagen.': 'No a por a warda e formulario.',
+  'Inzendingen in de werkmap: {n}': 'Envionan den e mapa di trabou: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Un zip simpel no ta kodifiká durante e transporte.',
+  'Pakketten binnenhalen…': 'Importá paketenan…',
+  'Kies de pakketten om binnen te halen': 'Skohe e paketenan pa importá',
+  'Register openen': 'Habri rehistro',
+  '{naam}: binnengehaald.': '{naam}: importá.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importá, ma tin punto pa revisá.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importá, ma no a por a aktualisá e rehistro. Kontrolá overview.md.',
+  '{naam}: stond er al.': '{naam}: tabata eksistí kaba.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: no ta un paket di envio ku OciDeck por lesa.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: e formulario aki no a wòrdu agregá, of no den e vershon aki. Agregá e formulario promé.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: no a por a warda den e mapa di trabou.',
+  'Formulieren en inzendingen': 'Formularionan i envionan',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importá envionan di un formulario, verifiká nan kontra e formulario publiká i warda nan ku un rehistro. Yena un formulario tambe ta funshoná ora esaki ta paga. Paga pa default.',
   'Inzending opslaan als zip…': 'Warda e envio komo zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Un archivo zip ku bo repsuestanan i potret, pa manda pa email na e organisadó.',

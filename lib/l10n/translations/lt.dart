@@ -1634,6 +1634,45 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Inzendingen': 'Pateikimai',
+  'Werkmap': 'Darbo aplankas',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Darbo aplankas dar nepasirinktas. Pasirinkite aplanką, kuriame bus saugomi pateikimai ir registras.',
+  'Werkmap kiezen…': 'Pasirinkti darbo aplanką…',
+  'Kies de werkmap voor inzendingen': 'Pasirinkite darbo aplanką pateikimams',
+  'Formulieren': 'Formos',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Dar nepridėta jokia forma. Pridėkite formą tokią, kokią ją paskelbėte: pateikimas tikrinamas pagal ją.',
+  'Formulier toevoegen…': 'Pridėti formą…',
+  'Kies het formulier om toe te voegen': 'Pasirinkite pridedamą formą',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Šis failas nėra forma, kurią galima paskelbti.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ši forma jau yra su kitu tekstu. Kitas tekstas yra nauja versija: suteikite formai aukštesnį versijos numerį.',
+  'Formulier toegevoegd: {naam}.': 'Forma pridėta: {naam}.',
+  'Dit formulier stond er al.': 'Ši forma jau buvo.',
+  'Het formulier kon niet worden opgeslagen.': 'Formos nepavyko išsaugoti.',
+  'Inzendingen in de werkmap: {n}': 'Pateikimai darbo aplanke: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Paprastas zip perduodant nešifruojamas.',
+  'Pakketten binnenhalen…': 'Importuoti paketus…',
+  'Kies de pakketten om binnen te halen': 'Pasirinkite importuojamus paketus',
+  'Register openen': 'Atidaryti registrą',
+  '{naam}: binnengehaald.': '{naam}: importuota.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importuota, bet yra punktų, kuriuos reikia peržiūrėti.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importuota, bet registro nepavyko atnaujinti. Patikrinkite overview.md.',
+  '{naam}: stond er al.': '{naam}: jau buvo.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: tai nėra pateikimo paketas, kurį OciDeck gali perskaityti.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ši forma nepridėta arba nėra šioje versijoje. Pirmiausia pridėkite formą.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nepavyko išsaugoti darbo aplanke.',
+  'Formulieren en inzendingen': 'Formos ir pateikimai',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importuokite formos pateikimus, tikrinkite juos pagal paskelbtą formą ir saugokite su registru. Formos užpildymas veikia ir tada, kai tai išjungta. Pagal numatytąją išjungta.',
   'Inzending opslaan als zip…': 'Išsaugoti siuntinį kaip zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Zip failas su jūsų atsakymais ir nuotraukomis, kurį el. paštu išsiųsite organizatoriui.',

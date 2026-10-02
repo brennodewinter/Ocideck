@@ -1627,6 +1627,45 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Inzendingen': 'Lähetykset',
+  'Werkmap': 'Työkansio',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Työkansiota ei ole vielä valittu. Valitse kansio, johon lähetykset ja rekisteri tallennetaan.',
+  'Werkmap kiezen…': 'Valitse työkansio…',
+  'Kies de werkmap voor inzendingen': 'Valitse lähetysten työkansio',
+  'Formulieren': 'Lomakkeet',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Lomaketta ei ole vielä lisätty. Lisää lomake sellaisena kuin julkaisit sen: lähetystä verrataan siihen.',
+  'Formulier toevoegen…': 'Lisää lomake…',
+  'Kies het formulier om toe te voegen': 'Valitse lisättävä lomake',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Tämä tiedosto ei ole julkaistavissa oleva lomake.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Tämä lomake on jo olemassa eri tekstillä. Eri teksti on uusi versio: anna lomakkeelle korkeampi versionumero.',
+  'Formulier toegevoegd: {naam}.': 'Lomake lisätty: {naam}.',
+  'Dit formulier stond er al.': 'Tämä lomake oli jo olemassa.',
+  'Het formulier kon niet worden opgeslagen.': 'Lomaketta ei voitu tallentaa.',
+  'Inzendingen in de werkmap: {n}': 'Lähetyksiä työkansiossa: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Tavallista zipiä ei salata siirron aikana.',
+  'Pakketten binnenhalen…': 'Tuo paketteja…',
+  'Kies de pakketten om binnen te halen': 'Valitse tuotavat paketit',
+  'Register openen': 'Avaa rekisteri',
+  '{naam}: binnengehaald.': '{naam}: tuotu.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: tuotu, mutta tarkistettavia kohtia on.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: tuotu, mutta rekisteriä ei voitu päivittää. Tarkista overview.md.',
+  '{naam}: stond er al.': '{naam}: oli jo olemassa.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ei ole lähetyspaketti, jonka OciDeck osaa lukea.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: tätä lomaketta ei ole lisätty tai ei tässä versiossa. Lisää lomake ensin.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ei voitu tallentaa työkansioon.',
+  'Formulieren en inzendingen': 'Lomakkeet ja lähetykset',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Tuo lomakkeen lähetyksiä, vertaa niitä julkaistuun lomakkeeseen ja pidä niistä rekisteriä. Lomakkeen täyttäminen toimii myös silloin, kun tämä on pois päältä. Oletuksena pois päältä.',
   'Inzending opslaan als zip…': 'Tallenna lähetys zip-tiedostona…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Zip-tiedosto, jossa ovat vastauksesi ja valokuvasi ja jonka lähetät sähköpostilla järjestäjälle.',

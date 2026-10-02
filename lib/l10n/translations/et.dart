@@ -1620,6 +1620,46 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Inzendingen': 'Esitused',
+  'Werkmap': 'Töökaust',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Töökausta pole veel valitud. Vali kaust, kuhu esitused ja register salvestatakse.',
+  'Werkmap kiezen…': 'Vali töökaust…',
+  'Kies de werkmap voor inzendingen': 'Vali esituste töökaust',
+  'Formulieren': 'Vormid',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Vormi pole veel lisatud. Lisa vorm sellisena, nagu sa selle avaldasid: esitust kontrollitakse selle vastu.',
+  'Formulier toevoegen…': 'Lisa vorm…',
+  'Kies het formulier om toe te voegen': 'Vali lisatav vorm',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'See fail ei ole vorm, mida saaks avaldada.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'See vorm on juba olemas teistsuguse tekstiga. Teistsugune tekst on uus versioon: anna vormile suurem versiooninumber.',
+  'Formulier toegevoegd: {naam}.': 'Vorm lisatud: {naam}.',
+  'Dit formulier stond er al.': 'See vorm oli juba olemas.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Vormi ei õnnestunud salvestada.',
+  'Inzendingen in de werkmap: {n}': 'Esitusi töökaustas: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Tavalist zip-faili ei krüpteerita edastamise ajal.',
+  'Pakketten binnenhalen…': 'Impordi pakid…',
+  'Kies de pakketten om binnen te halen': 'Vali imporditavad pakid',
+  'Register openen': 'Ava register',
+  '{naam}: binnengehaald.': '{naam}: imporditud.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: imporditud, kuid on punkte, mida üle vaadata.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: imporditud, kuid registrit ei õnnestunud uuendada. Kontrolli overview.md.',
+  '{naam}: stond er al.': '{naam}: oli juba olemas.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ei ole esituspakk, mida OciDeck suudab lugeda.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: seda vormi ei ole lisatud või mitte selles versioonis. Lisa kõigepealt vorm.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ei õnnestunud töökausta salvestada.',
+  'Formulieren en inzendingen': 'Vormid ja esitused',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Impordi vormi esitusi, kontrolli neid avaldatud vormi vastu ja hoia neid registriga. Vormi täitmine töötab ka siis, kui see on välja lülitatud. Vaikimisi väljas.',
   'Inzending opslaan als zip…': 'Salvesta saadetis zip-failina…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Zip-fail sinu vastuste ja fotodega, mille saadad e-kirjaga korraldajale.',

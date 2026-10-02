@@ -56,6 +56,7 @@ extension _SettingsModules on _SettingsDialogState {
             ModuleId.assetRights => const AssetRightsModuleCard(),
             ModuleId.managementsysteem => const ManagementsysteemModuleCard(),
             ModuleId.elearning => const ElearningModuleCard(),
+            ModuleId.forms => const FormsModuleCard(),
             ModuleId.libreplan => LibreplanModuleCard(
               enabled: _libreplanEnabled,
               onChanged: (v) => _rebuild(() => _libreplanEnabled = v),

@@ -1627,6 +1627,45 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Inzendingen': 'Kiriman',
+  'Werkmap': 'Folder kerja',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Belum ada folder kerja yang dipilih. Pilih folder untuk menyimpan kiriman dan register.',
+  'Werkmap kiezen…': 'Pilih folder kerja…',
+  'Kies de werkmap voor inzendingen': 'Pilih folder kerja untuk kiriman',
+  'Formulieren': 'Formulir',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Belum ada formulir yang ditambahkan. Tambahkan formulir seperti yang Anda terbitkan: kiriman diperiksa terhadapnya.',
+  'Formulier toevoegen…': 'Tambah formulir…',
+  'Kies het formulier om toe te voegen': 'Pilih formulir yang akan ditambahkan',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Berkas ini bukan formulir yang dapat diterbitkan.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Formulir ini sudah ada dengan teks yang berbeda. Teks yang berbeda adalah versi baru: beri formulir nomor versi yang lebih tinggi.',
+  'Formulier toegevoegd: {naam}.': 'Formulir ditambahkan: {naam}.',
+  'Dit formulier stond er al.': 'Formulir ini sudah ada.',
+  'Het formulier kon niet worden opgeslagen.': 'Formulir tidak dapat disimpan.',
+  'Inzendingen in de werkmap: {n}': 'Kiriman di folder kerja: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zip biasa tidak dienkripsi selama pengiriman.',
+  'Pakketten binnenhalen…': 'Impor paket…',
+  'Kies de pakketten om binnen te halen': 'Pilih paket yang akan diimpor',
+  'Register openen': 'Buka register',
+  '{naam}: binnengehaald.': '{naam}: diimpor.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: diimpor, tetapi ada hal yang perlu diperiksa.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: diimpor, tetapi register tidak dapat diperbarui. Periksa overview.md.',
+  '{naam}: stond er al.': '{naam}: sudah ada.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: bukan paket kiriman yang dapat dibaca OciDeck.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: formulir ini belum ditambahkan, atau tidak dalam versi ini. Tambahkan formulirnya terlebih dahulu.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: tidak dapat disimpan di folder kerja.',
+  'Formulieren en inzendingen': 'Formulir dan kiriman',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Impor kiriman dari sebuah formulir, periksa terhadap formulir yang diterbitkan, dan simpan dengan register. Mengisi formulir tetap bisa saat ini mati. Mati secara default.',
   'Inzending opslaan als zip…': 'Simpan kiriman sebagai zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Berkas zip berisi jawaban dan foto Anda, untuk dikirim lewat email ke penyelenggara.',

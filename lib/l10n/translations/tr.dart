@@ -2538,6 +2538,45 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Inzendingen': 'Gönderiler',
+  'Werkmap': 'Çalışma klasörü',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Henüz bir çalışma klasörü seçilmedi. Gönderilerin ve kaydın tutulacağı bir klasör seçin.',
+  'Werkmap kiezen…': 'Çalışma klasörü seç…',
+  'Kies de werkmap voor inzendingen': 'Gönderiler için çalışma klasörünü seçin',
+  'Formulieren': 'Formlar',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Henüz form eklenmedi. Formu yayımladığınız haliyle ekleyin: bir gönderi ona karşı denetlenir.',
+  'Formulier toevoegen…': 'Form ekle…',
+  'Kies het formulier om toe te voegen': 'Eklenecek formu seçin',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Bu dosya yayımlanabilecek bir form değil.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Bu form zaten başka bir metinle var. Başka bir metin yeni bir sürümdür: forma daha yüksek bir sürüm numarası verin.',
+  'Formulier toegevoegd: {naam}.': 'Form eklendi: {naam}.',
+  'Dit formulier stond er al.': 'Bu form zaten vardı.',
+  'Het formulier kon niet worden opgeslagen.': 'Form kaydedilemedi.',
+  'Inzendingen in de werkmap: {n}': 'Çalışma klasöründeki gönderiler: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Düz bir zip yolda şifrelenmez.',
+  'Pakketten binnenhalen…': 'Paketleri içe aktar…',
+  'Kies de pakketten om binnen te halen': 'İçe aktarılacak paketleri seçin',
+  'Register openen': 'Kaydı aç',
+  '{naam}: binnengehaald.': '{naam}: içe aktarıldı.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: içe aktarıldı, ancak gözden geçirilecek noktalar var.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: içe aktarıldı, ancak kayıt güncellenemedi. overview.md dosyasını kontrol edin.',
+  '{naam}: stond er al.': '{naam}: zaten vardı.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: OciDeck’in okuyabileceği bir gönderi paketi değil.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: bu form eklenmemiş ya da bu sürümde değil. Önce formu ekleyin.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: çalışma klasörüne kaydedilemedi.',
+  'Formulieren en inzendingen': 'Formlar ve gönderiler',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Bir formun gönderilerini içe aktarın, yayımlanan forma karşı denetleyin ve bir kayıtla saklayın. Bu kapalıyken de form doldurulabilir. Varsayılan olarak kapalı.',
   'Inzending opslaan als zip…': 'Gönderiyi zip olarak kaydet…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Cevaplarınızı ve fotoğraflarınızı içeren, organizatöre e-postayla göndereceğiniz bir zip dosyası.',

@@ -1630,6 +1630,46 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Inzendingen': 'Iischickige',
+  'Werkmap': 'Arbeitsordner',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Es isch no ke Arbeitsordner gwählt. Wähl en Ordner, wo d Iischickige und s Register drin lige.',
+  'Werkmap kiezen…': 'Arbeitsordner wähle…',
+  'Kies de werkmap voor inzendingen': 'Wähl dr Arbeitsordner für d Iischickige',
+  'Formulieren': 'Formulare',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'No ke Formular zuegfüegt. Füeg s Formular zue, wie du s veröffentlicht hesch: E Iischickig wird dergäge prüeft.',
+  'Formulier toevoegen…': 'Formular zuefüege…',
+  'Kies het formulier om toe te voegen': 'Wähl s Formular zum Zuefüege',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Die Datei isch ke Formular, wo me cha veröffentliche.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Das Formular het s scho mit emene andere Text. En andere Text isch e neui Version: Gib em Formular e höcheri Versionsnummere.',
+  'Formulier toegevoegd: {naam}.': 'Formular zuegfüegt: {naam}.',
+  'Dit formulier stond er al.': 'Das Formular isch scho da gsi.',
+  'Het formulier kon niet worden opgeslagen.':
+      'S Formular het nid chönne gspeicheret wärde.',
+  'Inzendingen in de werkmap: {n}': 'Iischickige im Arbeitsordner: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Es eifachs Zip isch uf em Wäg nid verschlüsslet.',
+  'Pakketten binnenhalen…': 'Pakete importiere…',
+  'Kies de pakketten om binnen te halen': 'Wähl d Pakete zum Importiere',
+  'Register openen': 'Register öffne',
+  '{naam}: binnengehaald.': '{naam}: importiert.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importiert, aber es hät Punkt zum Prüefe.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importiert, aber s Register het nid chönne aktualisiert wärde. Prüef overview.md.',
+  '{naam}: stond er al.': '{naam}: isch scho da gsi.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ke Iischickigspaket, wo OciDeck cha läse.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: Das Formular isch nid zuegfüegt, oder nid i dere Version. Füeg zersch s Formular zue.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: het nid chönne im Arbeitsordner gspeicheret wärde.',
+  'Formulieren en inzendingen': 'Formulare und Iischickige',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importier Iischickige vo emene Formular, prüef si gäge s veröffentlichte Formular und füehr si mit emene Register. S Formular uusfülle goht au, wenn das uus isch. Standardmässig uus.',
   'Inzending opslaan als zip…': 'Iischicku als zip speichere…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Es zip-Fäil mit dine Antworte und Foti, zum em Organisator per Mail schicke.',

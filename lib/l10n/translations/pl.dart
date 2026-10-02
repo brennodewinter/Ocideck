@@ -1639,6 +1639,46 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Inzendingen': 'Zgłoszenia',
+  'Werkmap': 'Folder roboczy',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Nie wybrano jeszcze folderu roboczego. Wybierz folder, w którym będą przechowywane zgłoszenia i rejestr.',
+  'Werkmap kiezen…': 'Wybierz folder roboczy…',
+  'Kies de werkmap voor inzendingen': 'Wybierz folder roboczy dla zgłoszeń',
+  'Formulieren': 'Formularze',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Nie dodano jeszcze formularza. Dodaj formularz tak, jak go opublikowałeś: zgłoszenie jest z nim porównywane.',
+  'Formulier toevoegen…': 'Dodaj formularz…',
+  'Kies het formulier om toe te voegen': 'Wybierz formularz do dodania',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ten plik nie jest formularzem, który można opublikować.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ten formularz już istnieje z innym tekstem. Inny tekst to nowa wersja: nadaj formularzowi wyższy numer wersji.',
+  'Formulier toegevoegd: {naam}.': 'Dodano formularz: {naam}.',
+  'Dit formulier stond er al.': 'Ten formularz już tu był.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Nie udało się zapisać formularza.',
+  'Inzendingen in de werkmap: {n}': 'Zgłoszenia w folderze roboczym: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zwykły zip nie jest szyfrowany w drodze.',
+  'Pakketten binnenhalen…': 'Importuj paczki…',
+  'Kies de pakketten om binnen te halen': 'Wybierz paczki do zaimportowania',
+  'Register openen': 'Otwórz rejestr',
+  '{naam}: binnengehaald.': '{naam}: zaimportowano.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: zaimportowano, ale są punkty do sprawdzenia.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: zaimportowano, ale nie udało się zaktualizować rejestru. Sprawdź overview.md.',
+  '{naam}: stond er al.': '{naam}: już tu było.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: to nie jest paczka zgłoszenia, którą OciDeck potrafi odczytać.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ten formularz nie został dodany lub nie w tej wersji. Najpierw dodaj formularz.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nie udało się zapisać w folderze roboczym.',
+  'Formulieren en inzendingen': 'Formularze i zgłoszenia',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importuj zgłoszenia z formularza, sprawdzaj je z opublikowanym formularzem i prowadź rejestr. Wypełnianie formularza działa także, gdy to jest wyłączone. Domyślnie wyłączone.',
   'Inzending opslaan als zip…': 'Zapisz zgłoszenie jako zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Plik zip z Twoimi odpowiedziami i zdjęciami, do wysłania e-mailem organizatorowi.',

@@ -1631,6 +1631,46 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Inzendingen': 'Prijave',
+  'Werkmap': 'Radna mapa',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Radna mapa još nije odabrana. Odaberite mapu u kojoj će se čuvati prijave i registar.',
+  'Werkmap kiezen…': 'Odaberi radnu mapu…',
+  'Kies de werkmap voor inzendingen': 'Odaberite radnu mapu za prijave',
+  'Formulieren': 'Obrasci',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Još nije dodan nijedan obrazac. Dodajte obrazac onako kako ste ga objavili: prijava se provjerava prema njemu.',
+  'Formulier toevoegen…': 'Dodaj obrazac…',
+  'Kies het formulier om toe te voegen': 'Odaberite obrazac koji želite dodati',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ova datoteka nije obrazac koji se može objaviti.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ovaj obrazac već postoji s drugim tekstom. Drugi tekst je nova verzija: dajte obrascu viši broj verzije.',
+  'Formulier toegevoegd: {naam}.': 'Obrazac dodan: {naam}.',
+  'Dit formulier stond er al.': 'Ovaj obrazac već je postojao.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Obrazac nije bilo moguće spremiti.',
+  'Inzendingen in de werkmap: {n}': 'Prijave u radnoj mapi: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Običan zip nije šifriran tijekom prijenosa.',
+  'Pakketten binnenhalen…': 'Uvezi pakete…',
+  'Kies de pakketten om binnen te halen': 'Odaberite pakete za uvoz',
+  'Register openen': 'Otvori registar',
+  '{naam}: binnengehaald.': '{naam}: uvezeno.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: uvezeno, ali ima točaka za provjeru.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: uvezeno, ali registar nije bilo moguće ažurirati. Provjerite overview.md.',
+  '{naam}: stond er al.': '{naam}: već je postojalo.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nije paket prijave koji OciDeck može pročitati.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ovaj obrazac nije dodan ili nije u ovoj verziji. Najprije dodajte obrazac.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nije bilo moguće spremiti u radnu mapu.',
+  'Formulieren en inzendingen': 'Obrasci i prijave',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Uvezite prijave obrasca, provjerite ih prema objavljenom obrascu i čuvajte ih s registrom. Ispunjavanje obrasca radi i kad je ovo isključeno. Prema zadanim postavkama isključeno.',
   'Inzending opslaan als zip…': 'Spremi prijavu kao zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Zip datoteka s vašim odgovorima i fotografijama, koju šaljete e-poštom organizatoru.',

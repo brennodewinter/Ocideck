@@ -1642,6 +1642,45 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Inzendingen': 'Missa',
+  'Werkmap': 'Fasciculus operis',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Nondum fasciculus operis electus est. Fasciculum elige in quo missa et index servabuntur.',
+  'Werkmap kiezen…': 'Fasciculum operis eligere…',
+  'Kies de werkmap voor inzendingen': 'Fasciculum operis pro missis elige',
+  'Formulieren': 'Formulae',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Nondum ulla formula addita est. Formulam adde ut eam edidisti: missum contra eam probatur.',
+  'Formulier toevoegen…': 'Formulam addere…',
+  'Kies het formulier om toe te voegen': 'Formulam addendam elige',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Hic fasciculus non est formula quae edi possit.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Haec formula iam adest cum alio textu. Alius textus est nova versio: formulae numerum versionis altiorem da.',
+  'Formulier toegevoegd: {naam}.': 'Formula addita: {naam}.',
+  'Dit formulier stond er al.': 'Haec formula iam aderat.',
+  'Het formulier kon niet worden opgeslagen.': 'Formula servari non potuit.',
+  'Inzendingen in de werkmap: {n}': 'Missa in fasciculo operis: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zip simplex in itinere non cryptatur.',
+  'Pakketten binnenhalen…': 'Fasciculos importare…',
+  'Kies de pakketten om binnen te halen': 'Fasciculos importandos elige',
+  'Register openen': 'Indicem aperire',
+  '{naam}: binnengehaald.': '{naam}: importatum.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importatum, sed sunt puncta recognoscenda.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importatum, sed index renovari non potuit. Inspice overview.md.',
+  '{naam}: stond er al.': '{naam}: iam aderat.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: non est fasciculus missi quem OciDeck legere possit.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: haec formula addita non est, aut non in hac versione. Formulam prius adde.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: in fasciculo operis servari non potuit.',
+  'Formulieren en inzendingen': 'Formulae et missa',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Missa formulae importa, contra formulam editam proba et cum indice serva. Formulam implere etiam licet cum hoc exstinctum est. Sponte exstinctum.',
   'Inzending opslaan als zip…': 'Missum ut zip servare…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Fasciculus zip cum responsis et imaginibus tuis, ad ordinatorem epistula electronica mittendus.',

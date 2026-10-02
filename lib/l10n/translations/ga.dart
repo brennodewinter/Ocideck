@@ -1657,6 +1657,48 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Inzendingen': 'Aighneachtaí',
+  'Werkmap': 'Fillteán oibre',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Níor roghnaíodh fillteán oibre fós. Roghnaigh fillteán ina gccoimeádfar na haighneachtaí agus an clár.',
+  'Werkmap kiezen…': 'Roghnaigh fillteán oibre…',
+  'Kies de werkmap voor inzendingen':
+      'Roghnaigh an fillteán oibre le haghaidh aighneachtaí',
+  'Formulieren': 'Foirmeacha',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Níor cuireadh foirm leis fós. Cuir an fhoirm leis mar a d’fhoilsigh tú í: seiceáiltear aighneacht ina choinne.',
+  'Formulier toevoegen…': 'Cuir foirm leis…',
+  'Kies het formulier om toe te voegen': 'Roghnaigh an fhoirm le cur leis',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ní foirm é an comhad seo is féidir a fhoilsiú.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Tá an fhoirm seo ann cheana le téacs difriúil. Is leagan nua é téacs difriúil: tabhair uimhir leagain níos airde don fhoirm.',
+  'Formulier toegevoegd: {naam}.': 'Cuireadh foirm leis: {naam}.',
+  'Dit formulier stond er al.': 'Bhí an fhoirm seo ann cheana.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Níorbh fhéidir an fhoirm a shábháil.',
+  'Inzendingen in de werkmap: {n}': 'Aighneachtaí sa fhillteán oibre: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Ní chriptítear zip simplí le linn aistrithe.',
+  'Pakketten binnenhalen…': 'Iompórtáil pacáistí…',
+  'Kies de pakketten om binnen te halen':
+      'Roghnaigh na pacáistí le hiompórtáil',
+  'Register openen': 'Oscail an clár',
+  '{naam}: binnengehaald.': '{naam}: iompórtáilte.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: iompórtáilte, ach tá pointí le hathbhreithniú.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: iompórtáilte, ach níorbh fhéidir an clár a nuashonrú. Seiceáil overview.md.',
+  '{naam}: stond er al.': '{naam}: bhí ann cheana.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ní pacáiste aighneachta é a bhfuil OciDeck in ann a léamh.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: níor cuireadh an fhoirm seo leis, nó ní sa leagan seo. Cuir an fhoirm leis ar dtús.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: níorbh fhéidir a shábháil sa fhillteán oibre.',
+  'Formulieren en inzendingen': 'Foirmeacha agus aighneachtaí',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Iompórtáil aighneachtaí foirme, seiceáil iad i gcomparáid leis an bhfoirm fhoilsithe agus coimeád iad le clár. Oibríonn foirm a líonadh freisin nuair atá seo múchta. Múchta de réir réamhshocraithe.',
   'Inzending opslaan als zip…': 'Sábháil an aighneacht mar zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Comhad zip le do chuid freagraí agus grianghraf, le seoladh trí ríomhphost chuig an eagraí.',

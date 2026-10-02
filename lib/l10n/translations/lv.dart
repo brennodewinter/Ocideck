@@ -1625,6 +1625,45 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Inzendingen': 'Iesūtījumi',
+  'Werkmap': 'Darba mape',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Darba mape vēl nav izvēlēta. Izvēlieties mapi, kurā glabāsies iesūtījumi un reģistrs.',
+  'Werkmap kiezen…': 'Izvēlēties darba mapi…',
+  'Kies de werkmap voor inzendingen': 'Izvēlieties darba mapi iesūtījumiem',
+  'Formulieren': 'Veidlapas',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Veidlapa vēl nav pievienota. Pievienojiet veidlapu tādu, kādu to publicējāt: iesūtījums tiek pārbaudīts pret to.',
+  'Formulier toevoegen…': 'Pievienot veidlapu…',
+  'Kies het formulier om toe te voegen': 'Izvēlieties pievienojamo veidlapu',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Šis fails nav veidlapa, ko varētu publicēt.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Šī veidlapa jau ir ar citu tekstu. Cits teksts ir jauna versija: piešķiriet veidlapai augstāku versijas numuru.',
+  'Formulier toegevoegd: {naam}.': 'Veidlapa pievienota: {naam}.',
+  'Dit formulier stond er al.': 'Šī veidlapa jau bija.',
+  'Het formulier kon niet worden opgeslagen.': 'Veidlapu neizdevās saglabāt.',
+  'Inzendingen in de werkmap: {n}': 'Iesūtījumi darba mapē: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Parasts zip pārsūtīšanas laikā netiek šifrēts.',
+  'Pakketten binnenhalen…': 'Importēt pakotnes…',
+  'Kies de pakketten om binnen te halen': 'Izvēlieties importējamās pakotnes',
+  'Register openen': 'Atvērt reģistru',
+  '{naam}: binnengehaald.': '{naam}: importēts.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importēts, bet ir punkti, kas jāpārbauda.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importēts, bet reģistru neizdevās atjaunināt. Pārbaudiet overview.md.',
+  '{naam}: stond er al.': '{naam}: jau bija.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nav iesūtījuma pakotne, ko OciDeck var nolasīt.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: šī veidlapa nav pievienota vai nav šajā versijā. Vispirms pievienojiet veidlapu.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: neizdevās saglabāt darba mapē.',
+  'Formulieren en inzendingen': 'Veidlapas un iesūtījumi',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importējiet veidlapas iesūtījumus, pārbaudiet tos pret publicēto veidlapu un glabājiet ar reģistru. Veidlapas aizpildīšana darbojas arī tad, ja tas ir izslēgts. Pēc noklusējuma izslēgts.',
   'Inzending opslaan als zip…': 'Saglabāt iesūtījumu kā zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Zip fails ar jūsu atbildēm un fotoattēliem, ko nosūtīt organizatoram pa e-pastu.',

@@ -1,5 +1,8 @@
 // Kleine tekstfuncties voor de invulweergave van een formulier.
 
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/widgets.dart'
     show TextEditingController, TextEditingValue, TextSelection;
 
@@ -39,4 +42,15 @@ void syncController(TextEditingController controller, String text) {
     text: text,
     selection: TextSelection.collapsed(offset: text.length),
   );
+}
+
+/// De tekst van een gekozen formulierbestand, of `null` als het geen UTF-8 is: een
+/// formulier is Markdown, en wat niet te lezen valt kan ook niet het gepubliceerde
+/// formulier zijn.
+String? formTextOf(Uint8List bytes) {
+  try {
+    return const Utf8Decoder().convert(bytes);
+  } on FormatException {
+    return null;
+  }
 }

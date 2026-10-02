@@ -1626,6 +1626,45 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Inzendingen': 'Inlämningar',
+  'Werkmap': 'Arbetsmapp',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Ingen arbetsmapp vald ännu. Välj en mapp där inlämningarna och registret ska ligga.',
+  'Werkmap kiezen…': 'Välj arbetsmapp…',
+  'Kies de werkmap voor inzendingen': 'Välj arbetsmapp för inlämningar',
+  'Formulieren': 'Formulär',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Inget formulär har lagts till ännu. Lägg till formuläret så som du publicerade det: en inlämning kontrolleras mot det.',
+  'Formulier toevoegen…': 'Lägg till formulär…',
+  'Kies het formulier om toe te voegen': 'Välj formuläret som ska läggas till',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Den här filen är inte ett formulär som kan publiceras.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Det här formuläret finns redan med en annan text. En annan text är en ny version: ge formuläret ett högre versionsnummer.',
+  'Formulier toegevoegd: {naam}.': 'Formulär tillagt: {naam}.',
+  'Dit formulier stond er al.': 'Det här formuläret fanns redan.',
+  'Het formulier kon niet worden opgeslagen.': 'Formuläret kunde inte sparas.',
+  'Inzendingen in de werkmap: {n}': 'Inlämningar i arbetsmappen: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'En vanlig zip är inte krypterad under överföringen.',
+  'Pakketten binnenhalen…': 'Importera paket…',
+  'Kies de pakketten om binnen te halen': 'Välj paketen som ska importeras',
+  'Register openen': 'Öppna registret',
+  '{naam}: binnengehaald.': '{naam}: importerad.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importerad, men det finns punkter att granska.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importerad, men registret kunde inte uppdateras. Kontrollera overview.md.',
+  '{naam}: stond er al.': '{naam}: fanns redan.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: inte ett inlämningspaket som OciDeck kan läsa.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: det här formuläret har inte lagts till, eller inte i den här versionen. Lägg till formuläret först.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: kunde inte sparas i arbetsmappen.',
+  'Formulieren en inzendingen': 'Formulär och inlämningar',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importera inlämningar från ett formulär, kontrollera dem mot det publicerade formuläret och förvara dem med ett register. Att fylla i ett formulär fungerar även när detta är av. Av som standard.',
   'Inzending opslaan als zip…': 'Spara inlämningen som zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'En zip-fil med dina svar och foton, att mejla till arrangören.',

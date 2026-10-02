@@ -75,6 +75,12 @@
 > to build. **The register's table is in too** (`form_register.dart`, §7.3): a pure model
 > of `overview.md` that never loses what a person wrote in it.
 >
+> **Importing is in (2026-10-02):** the extension *Formulieren en inzendingen* has an Inbox, first form:
+> workspace (§7.1) as files, published forms under `forms/`, and `importFormPackage` — read, really decode, review
+> against the published form, land in one step, register row — with `needs-fixing` as the status of a landed
+> submission with an error. Plain zips only (phase 2); the status list, redaction, maker check and compile of
+> §7.3–§7.5 are still to build.
+>
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
 > Reference code by **file + symbol name**, never a line number.
