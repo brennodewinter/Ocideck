@@ -501,6 +501,218 @@ void main() {
     });
   });
 
+  group('een inzending opnieuw beoordelen', () {
+    const photoPath = 'images/foto-1.jpg';
+    final withPhoto = kook.replaceFirst(
+      '<!-- field id=naam',
+      '<!-- field id=foto type=image count=0..2 -->\n**Foto**\n<!-- answer -->\n<!-- /field id=foto -->\n\n<!-- field id=naam',
+    );
+
+    Future<FormStoredReview> reviewed(String id) async =>
+        await workspace.reviewStored(id) as FormStoredReview;
+
+    Future<void> landIn(
+      FormWorkspace target,
+      FormPackageOpened package,
+      String template,
+    ) async {
+      await target.publishForm(template);
+      final review = reviewFormPackage(package, [template]);
+      expect(await target.land(package, review), FormLandOutcome.landed);
+    }
+
+    test('een goede inzending heeft niets om na te lopen', () async {
+      await landIn(workspace, packageOf(kook), kook);
+      final result = await reviewed(sid);
+      expect(result.edited, isFalse);
+      expect(result.review.problems, isEmpty);
+      expect(result.review.acceptable, isTrue);
+      expect(result.review.answers!.byId['naam']!.text, 'Sari');
+    });
+
+    test('een fout blijft een fout, tot de werkkopie hem herstelt', () async {
+      await landIn(workspace, packageOf(kook, naam: ''), kook);
+      final first = await reviewed(sid);
+      expect(first.review.problems.map((p) => p.code), [
+        FormIssueCode.requiredEmpty,
+      ]);
+      final folder = workspace.submissionPath(sid);
+      await File(
+        p.join(folder, 'submission.edit.md'),
+      ).writeAsString(filled(kook, 'Sari'));
+      final fixed = await reviewed(sid);
+      expect(fixed.edited, isTrue);
+      expect(fixed.review.problems, isEmpty);
+      expect(
+        await File(p.join(folder, 'submission.md')).readAsString(),
+        filled(kook, ''),
+        reason: 'wat binnenkwam is niet aangeraakt',
+      );
+    });
+
+    test(
+      'een werkkopie waarin de tekst van het formulier is veranderd, valt op',
+      () async {
+        await landIn(workspace, packageOf(kook), kook);
+        await File(
+          p.join(workspace.submissionPath(sid), 'submission.edit.md'),
+        ).writeAsString(
+          filled(kook.replaceFirst('# Inzending', '# Anders'), 'Sari'),
+        );
+        final result = await reviewed(sid);
+        expect(result.review.problems.map((p) => p.code), [
+          FormIssueCode.templateTextAltered,
+        ]);
+      },
+    );
+
+    test('een verwijderde inzending laat alleen het record over', () async {
+      await landIn(workspace, packageOf(kook), kook);
+      await workspace.deleteSubmissionFiles(sid);
+      final result = await workspace.reviewStored(sid);
+      expect(result, isA<FormStoredUnavailable>());
+      expect((result as FormStoredUnavailable).deleted, isTrue);
+    });
+
+    test(
+      'bestanden die er niet meer of niet kloppen zijn niet te beoordelen',
+      () async {
+        await landIn(workspace, packageOf(kook), kook);
+        final folder = workspace.submissionPath(sid);
+
+        Future<void> expectUnavailable(String why) async {
+          final result = await workspace.reviewStored(sid);
+          expect(result, isA<FormStoredUnavailable>(), reason: why);
+          expect(
+            (result as FormStoredUnavailable).deleted,
+            isFalse,
+            reason: why,
+          );
+        }
+
+        final submission = File(p.join(folder, 'submission.md'));
+        final good = await submission.readAsBytes();
+        await submission.writeAsBytes([0xFF, 0xFE, 0x41]);
+        await expectUnavailable('geen UTF-8');
+        await submission.writeAsBytes(good);
+
+        final edit = File(p.join(folder, 'submission.edit.md'));
+        await edit.writeAsBytes([0xFF, 0xFE, 0x41]);
+        await expectUnavailable('werkkopie geen UTF-8');
+        await edit.delete();
+
+        final manifest = File(p.join(folder, 'manifest.json'));
+        final manifestGood = await manifest.readAsBytes();
+        await manifest.writeAsString('geen json');
+        await expectUnavailable('manifest kapot');
+        await manifest.writeAsBytes(manifestGood);
+        expect(await workspace.reviewStored(sid), isA<FormStoredReview>());
+
+        await manifest.delete();
+        await expectUnavailable('geen manifest');
+      },
+    );
+
+    test('een werkkopie die niet te lezen is, is niet "verwijderd"', () async {
+      if (Platform.isWindows) return; // geen chmod
+      await landIn(workspace, packageOf(kook), kook);
+      final edit = File(
+        p.join(workspace.submissionPath(sid), 'submission.edit.md'),
+      );
+      await edit.writeAsString('werkkopie');
+      await Process.run('chmod', ['000', edit.path]);
+      addTearDown(() => Process.run('chmod', ['644', edit.path]));
+      final result = await workspace.reviewStored(sid);
+      expect(result, isA<FormStoredUnavailable>());
+      expect((result as FormStoredUnavailable).deleted, isFalse);
+    });
+
+    test(
+      'een manifest van een andere inzending hoort niet in deze map',
+      () async {
+        await landIn(workspace, packageOf(kook), kook);
+        final other = 'abcdefghijklmnopqrstuvwxyb';
+        await Directory(
+          workspace.submissionPath(sid),
+        ).rename(workspace.submissionPath(other));
+        final result = await workspace.reviewStored(other);
+        expect(result, isA<FormStoredUnavailable>());
+      },
+    );
+
+    test(
+      'zonder het formulier in de werkmap is het formulier onbekend',
+      () async {
+        final elsewhere = FormWorkspace(p.join(dir.path, 'elders'));
+        await landIn(elsewhere, packageOf(kook), kook);
+        await Directory(
+          p.join(elsewhere.root, 'forms'),
+        ).delete(recursive: true);
+        final result = await elsewhere.reviewStored(sid) as FormStoredReview;
+        expect(result.review.problems.map((p) => p.code), [
+          FormIssueCode.templateUnknown,
+        ]);
+        expect(result.review.acceptable, isFalse);
+      },
+    );
+
+    test(
+      'de foto\'s komen mee, en een foto die ontbreekt wordt gemeld',
+      () async {
+        final photo = jpegPhoto();
+        final package =
+            readFormPackage(
+                  buildFormPackage(
+                    submission: filled(withPhoto, 'Sari').replaceFirst(
+                      '<!-- answer -->\n<!-- /field id=foto',
+                      '<!-- answer -->\n![]($photoPath)\n<!-- /field id=foto',
+                    ),
+                    template: withPhoto,
+                    spec: (parseForm(withPhoto) as ParsedForm).spec,
+                    images: {photoPath: photo},
+                    submissionId: sid,
+                    created: DateTime.utc(2026, 10, 4),
+                    clientRules: kFormRulesVersion,
+                  ),
+                )
+                as FormPackageOpened;
+        await landIn(workspace, package, withPhoto);
+        final ok = await reviewed(sid);
+        expect(ok.review.problems, isEmpty);
+        expect(ok.review.images.keys, [photoPath]);
+
+        final folder = workspace.submissionPath(sid);
+        // Wat niet in de naamgrammatica past, telt niet mee.
+        await File(p.join(folder, 'images', 'nul.jpg')).writeAsBytes([1]);
+        await File(p.join(folder, 'images', 'x y.jpg')).writeAsBytes([1]);
+        await File(p.join(folder, photoPath)).delete();
+        final missing = await reviewed(sid);
+        expect(missing.review.images, isEmpty);
+        expect(missing.review.problems.map((p) => p.code), [
+          FormIssueCode.imageMissingFile,
+        ]);
+      },
+    );
+
+    test('een verwijzing in images/ wordt niet gevolgd', () async {
+      await landIn(workspace, packageOf(kook), kook);
+      final folder = workspace.submissionPath(sid);
+      final outside = File(p.join(dir.path, 'buiten.jpg'))
+        ..writeAsBytesSync([1, 2]);
+      await Directory(p.join(folder, 'images')).create(recursive: true);
+      try {
+        await Link(p.join(folder, 'images', 'foto-9.jpg')).create(outside.path);
+      } on FileSystemException {
+        return; // Windows zonder rechten om te koppelen
+      }
+      expect((await reviewed(sid)).review.images, isEmpty);
+    });
+
+    test('een nummer buiten de grammatica is een programmeerfout', () {
+      expect(() => workspace.reviewStored('../x'), throwsArgumentError);
+    });
+  });
+
   group('het register', () {
     FormRegister fresh() =>
         FormRegister.empty((parseForm(kook) as ParsedForm).spec);

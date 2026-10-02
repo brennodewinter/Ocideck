@@ -1652,6 +1652,84 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Κάτι δεν πάει καλά με αυτή την υποβολή.',
+  'Verplicht, maar leeg gelaten.': 'Υποχρεωτικό, αλλά αφέθηκε κενό.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} λέξεις· χρειάζονται τουλάχιστον {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} λέξεις· επιτρέπονται το πολύ {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} χαρακτήρες· χρειάζονται τουλάχιστον {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} χαρακτήρες· επιτρέπονται το πολύ {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      'Το «{value}» δεν υπάρχει στη λίστα επιλογών.',
+  '“{value}” is geen getal.': 'Το «{value}» δεν είναι αριθμός.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      'Το «{value}» δεν είναι ημερομηνία της μορφής έτος-μήνας-ημέρα.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Φωτογραφία πλάτους {actual} pixel· ζητήθηκαν {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Το αρχείο της φωτογραφίας λείπει από την υποβολή.',
+  'De beschrijving van de foto ontbreekt.':
+      'Λείπει η περιγραφή της φωτογραφίας.',
+  'De maker van de foto ontbreekt.': 'Λείπει ο δημιουργός της φωτογραφίας.',
+  'De foto is niet gecontroleerd.': 'Η φωτογραφία δεν ελέγχθηκε.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Φωτογραφία HEIC: δεν ελέγχθηκε ούτε καθαρίστηκε· μπορεί να περιέχει τοποθεσία.',
+  'Toestemming niet gegeven.': 'Δεν δόθηκε συγκατάθεση.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Η απάντηση περιέχει γραμμή που μοιάζει με κωδικό ελέγχου της φόρμας.',
+  'Het antwoord bevat HTML.': 'Η απάντηση περιέχει HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Η απάντηση περιέχει μη κλεισμένο μπλοκ κώδικα.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Η απάντηση παραπέμπει σε εικόνα που δεν ανήκει σε αυτή την υποβολή.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Η απάντηση περιέχει σύνδεσμο που δεν επιτρέπεται.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Αυτή η φόρμα ή αυτή η έκδοση δεν είναι στον φάκελο εργασίας.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Ο αποστολέας δούλεψε με διαφορετικό κείμενο της φόρμας από το δημοσιευμένο.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Η συγκατάθεση στο μανιφέστο δεν ταιριάζει με τη δημοσιευμένη φόρμα.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Το κείμενο της φόρμας άλλαξε εκτός των απαντήσεων.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Το κείμενο της φόρμας άλλαξε σε αυτό το πεδίο.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Αυτό το πεδίο δεν υπάρχει στη δημοσιευμένη φόρμα.',
+  'Dit veld ontbreekt in de inzending.':
+      'Αυτό το πεδίο λείπει από την υποβολή.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Υποβολή της έκδοσης {submission}· δημοσιευμένη είναι η έκδοση {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Η φόρμα χρειάζεται νεότερη έκδοση του OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Η δημοσιευμένη φόρμα στον φάκελο εργασίας δεν είναι χρησιμοποιήσιμη.',
+  'De inzending hoort bij een ander formulier.':
+      'Η υποβολή ανήκει σε άλλη φόρμα.',
+  'De opbouw van de inzending is beschadigd.':
+      'Η δομή της υποβολής είναι κατεστραμμένη.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Το μητρώο δεν μπορεί να διαβαστεί. Διορθώστε το overview.md· οι υποβολές εμφανίζονται παρακάτω χωρίς στοιχεία από το μητρώο.',
+  'Nog geen inzendingen.': 'Δεν υπάρχουν ακόμη υποβολές.',
+  'Om na te lopen': 'Προς έλεγχο',
+  'Verwijderd': 'Διαγράφηκε',
+  'Zonder regel in het register': 'Χωρίς γραμμή στο μητρώο',
+  'Ontvangen {datum}': 'Παραλήφθηκε {datum}',
+  'Ingetrokken {datum}': 'Αποσύρθηκε {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Το περιεχόμενο αυτής της υποβολής διαγράφηκε· μένει μόνο η εγγραφή.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Αυτή η υποβολή δεν μπορεί να διαβαστεί. Ελέγξτε τα αρχεία στον φάκελο εργασίας.',
+  'Beoordeeld tegen {formulier}.': 'Αξιολογήθηκε με βάση {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Η αξιολόγηση αφορά το αντίγραφο εργασίας (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Κανένα σημείο προς έλεγχο.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Φωτογραφίες που καμία απάντηση δεν αναφέρει: {n}.',
   'Inzendingen': 'Υποβολές',
   'Werkmap': 'Φάκελος εργασίας',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

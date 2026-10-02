@@ -1625,6 +1625,82 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Ar šo iesūtījumu kaut kas nav kārtībā.',
+  'Verplicht, maar leeg gelaten.': 'Obligāts, bet atstāts tukšs.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} vārdi; vajag vismaz {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} vārdi; atļauti ne vairāk kā {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} rakstzīmes; vajag vismaz {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} rakstzīmes; atļautas ne vairāk kā {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” nav opciju sarakstā.',
+  '“{value}” is geen getal.': '“{value}” nav skaitlis.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” nav datums formā gads-mēnesis-diena.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotoattēls {actual} pikseļu platumā; prasīti {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Iesūtījumā trūkst fotoattēla faila.',
+  'De beschrijving van de foto ontbreekt.': 'Trūkst fotoattēla apraksta.',
+  'De maker van de foto ontbreekt.': 'Trūkst fotoattēla autora.',
+  'De foto is niet gecontroleerd.': 'Fotoattēls netika pārbaudīts.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC fotoattēls: nav pārbaudīts vai attīrīts; tajā var būt atrašanās vieta.',
+  'Toestemming niet gegeven.': 'Piekrišana nav dota.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Atbilde satur rindu, kas izskatās pēc veidlapas vadības koda.',
+  'Het antwoord bevat HTML.': 'Atbilde satur HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Atbilde satur neaizvērtu koda bloku.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Atbilde norāda uz attēlu, kas nepieder šim iesūtījumam.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Atbilde satur saiti, kas nav atļauta.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Šīs veidlapas vai šīs versijas nav darba mapē.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Iesūtītājs strādāja ar citu veidlapas tekstu nekā publicēto.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Piekrišana manifestā neatbilst publicētajai veidlapai.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Veidlapas teksts mainīts ārpus atbildēm.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Veidlapas teksts mainīts pie šī lauka.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Šī lauka publicētajā veidlapā nav.',
+  'Dit veld ontbreekt in de inzending.': 'Šī lauka iesūtījumā trūkst.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Iesūtījums no versijas {submission}; publicēta ir versija {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Veidlapai vajadzīga jaunāka OciDeck versija.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Publicētā veidlapa darba mapē nav lietojama.',
+  'De inzending hoort bij een ander formulier.':
+      'Iesūtījums pieder citai veidlapai.',
+  'De opbouw van de inzending is beschadigd.':
+      'Iesūtījuma struktūra ir bojāta.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Reģistru nevar nolasīt. Salabojiet overview.md; iesūtījumi zemāk redzami bez reģistra datiem.',
+  'Nog geen inzendingen.': 'Iesūtījumu vēl nav.',
+  'Om na te lopen': 'Jāpārbauda',
+  'Verwijderd': 'Dzēsts',
+  'Zonder regel in het register': 'Bez rindas reģistrā',
+  'Ontvangen {datum}': 'Saņemts {datum}',
+  'Ingetrokken {datum}': 'Atsaukts {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Šī iesūtījuma saturs ir dzēsts; palicis tikai ieraksts.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Šo iesūtījumu nevar nolasīt. Pārbaudiet failus darba mapē.',
+  'Beoordeeld tegen {formulier}.': 'Novērtēts attiecībā pret {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Novērtējums attiecas uz darba kopiju (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nav punktu, ko pārbaudīt.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotoattēli, ko neviena atbilde nemin: {n}.',
   'Inzendingen': 'Iesūtījumi',
   'Werkmap': 'Darba mape',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

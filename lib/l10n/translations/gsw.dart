@@ -1630,6 +1630,81 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Mit dere Iischickig stimmt öppis nid.',
+  'Verplicht, maar leeg gelaten.': 'Pflicht, aber läär glah.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} Wörter; mindestens {min} nötig.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} Wörter; höchstens {max} erlaubt.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} Zeiche; mindestens {min} nötig.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} Zeiche; höchstens {max} erlaubt.',
+  '“{value}” staat niet in de lijst met opties.':
+      '«{value}» staht nid i dr Lischte vo de Optione.',
+  '“{value}” is geen getal.': '«{value}» isch kei Zahl.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '«{value}» isch kes Datum i dr Form Johr-Monet-Tag.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foti mit {actual} Pixel Breiti; gfragt gsi sind {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'D Datei vom Foti fählt i dr Iischickig.',
+  'De beschrijving van de foto ontbreekt.': 'D Beschrybig vom Foti fählt.',
+  'De maker van de foto ontbreekt.': 'Dr Urhäber vom Foti fählt.',
+  'De foto is niet gecontroleerd.': 'S Foti isch nid prüeft worde.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-Foti: nid prüeft oder putzt; es cha en Ort enthalte.',
+  'Toestemming niet gegeven.': 'Iiwilligung nid gä.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'D Antwort enthaltet e Zile, wo wie e Steuerzeiche vom Formular uusgseht.',
+  'Het antwoord bevat HTML.': 'D Antwort enthaltet HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'D Antwort enthaltet e nid abgschlossene Codeblock.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'D Antwort verwiist uf es Bild, wo nid zu dere Iischickig ghört.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'D Antwort enthaltet e nid erlaubte Link.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Das Formular oder die Version isch nid im Arbeitsordner.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Dr Iisänder het mit emene andere Text vom Formular gschafft as mit em veröffentlichte.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'D Iiwilligung im Manifest passt nid zum veröffentlichte Formular.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Dr Text vom Formular isch usserhalb vo de Antworte gänderet worde.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Dr Text vom Formular isch bi däm Fäld gänderet worde.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Das Fäld git s im veröffentlichte Formular nid.',
+  'Dit veld ontbreekt in de inzending.': 'Das Fäld fählt i dr Iischickig.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Iischickig vo dr Version {submission}; veröffentlicht isch d Version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'S Formular bruucht e nöiere Version vo OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'S veröffentlichte Formular im Arbeitsordner isch nid bruchbar.',
+  'De inzending hoort bij een ander formulier.':
+      'D Iischickig ghört zu emene andere Formular.',
+  'De opbouw van de inzending is beschadigd.':
+      'Dr Ufbau vo dr Iischickig isch beschädigt.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'S Register cha nid gläse wärde. Reparier overview.md; d Iischickige stöh unde ohni Aagabe us em Register.',
+  'Nog geen inzendingen.': 'No kei Iischickige.',
+  'Om na te lopen': 'Z prüefe',
+  'Verwijderd': 'Glöscht',
+  'Zonder regel in het register': 'Ohni Zile im Register',
+  'Ontvangen {datum}': 'Becho {datum}',
+  'Ingetrokken {datum}': 'Zrugzoge {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Dr Inhalt vo dere Iischickig isch glöscht worde; nume dr Iitrag blibt.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Die Iischickig cha nid gläse wärde. Prüef d Dateie im Arbeitsordner.',
+  'Beoordeeld tegen {formulier}.': 'Beurteilt gäge {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'D Beurteilig betrifft d Arbeitskopie (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Kei Punkt z prüefe.',
+  'Foto’s die geen antwoord noemt: {n}.': 'Foti, won e Antwort nid nennt: {n}.',
   'Inzendingen': 'Iischickige',
   'Werkmap': 'Arbeitsordner',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

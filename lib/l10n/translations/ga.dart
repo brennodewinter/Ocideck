@@ -1657,6 +1657,84 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Tá rud éigin cearr leis an aighneacht seo.',
+  'Verplicht, maar leeg gelaten.': 'Riachtanach, ach fágadh folamh é.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} focal; ar a laghad {min} de dhíth.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} focal; ar a mhéad {max} ceadaithe.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} carachtar; ar a laghad {min} de dhíth.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} carachtar; ar a mhéad {max} ceadaithe.',
+  '“{value}” staat niet in de lijst met opties.':
+      'Níl “{value}” sa liosta roghanna.',
+  '“{value}” is geen getal.': 'Ní uimhir é “{value}”.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      'Ní dáta é “{value}” san fhoirm bliain-mí-lá.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Grianghraf {actual} picteilín ar leithead; iarradh {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Tá comhad an ghrianghraif ar iarraidh san aighneacht.',
+  'De beschrijving van de foto ontbreekt.':
+      'Tá cur síos an ghrianghraif ar iarraidh.',
+  'De maker van de foto ontbreekt.': 'Tá déantóir an ghrianghraif ar iarraidh.',
+  'De foto is niet gecontroleerd.': 'Níor seiceáladh an grianghraf.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Grianghraf HEIC: gan seiceáil ná glanadh; d’fhéadfadh suíomh a bheith ann.',
+  'Toestemming niet gegeven.': 'Níor tugadh toiliú.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Tá líne sa fhreagra a fhéachann cosúil le cód rialaithe na foirme.',
+  'Het antwoord bevat HTML.': 'Tá HTML sa fhreagra.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Tá bloc cóid gan dúnadh sa fhreagra.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Tagraíonn an freagra do íomhá nach mbaineann leis an aighneacht seo.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Tá nasc sa fhreagra nach bhfuil ceadaithe.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Níl an fhoirm seo nó an leagan seo sa fhillteán oibre.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'D’oibrigh an seoltóir le téacs eile den fhoirm seachas an téacs foilsithe.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Ní chomhoireann an toiliú sa léiriú leis an bhfoirm fhoilsithe.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Athraíodh téacs na foirme lasmuigh de na freagraí.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Athraíodh téacs na foirme ag an réimse seo.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Níl an réimse seo sa bhfoirm fhoilsithe.',
+  'Dit veld ontbreekt in de inzending.':
+      'Tá an réimse seo ar iarraidh san aighneacht.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Aighneacht de leagan {submission}; is é leagan {published} atá foilsithe.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Teastaíonn leagan níos nuaí d’OciDeck ón bhfoirm.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Níl an fhoirm fhoilsithe sa fhillteán oibre inúsáidte.',
+  'De inzending hoort bij een ander formulier.':
+      'Baineann an aighneacht le foirm eile.',
+  'De opbouw van de inzending is beschadigd.':
+      'Tá struchtúr na haighneachta damáistithe.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Ní féidir an clár a léamh. Deisigh overview.md; léirítear na haighneachtaí thíos gan sonraí as an gclár.',
+  'Nog geen inzendingen.': 'Gan aighneachtaí fós.',
+  'Om na te lopen': 'Le hathbhreithniú',
+  'Verwijderd': 'Scriosta',
+  'Zonder regel in het register': 'Gan sraith sa chlár',
+  'Ontvangen {datum}': 'Faighte {datum}',
+  'Ingetrokken {datum}': 'Tarraingthe siar {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Scriosadh ábhar na haighneachta seo; níl fágtha ach an taifead.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Ní féidir an aighneacht seo a léamh. Seiceáil na comhaid sa fhillteán oibre.',
+  'Beoordeeld tegen {formulier}.': 'Measúnaithe i gcomparáid le {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Baineann an mheasúnacht leis an gcóip oibre (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Gan pointí le hathbhreithniú.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Grianghraif nach luann aon fhreagra: {n}.',
   'Inzendingen': 'Aighneachtaí',
   'Werkmap': 'Fillteán oibre',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

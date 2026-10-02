@@ -666,6 +666,83 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Er klopt iets niet aan deze inzending.':
+      'Tin algu cos ku no ta bon ku e envio aki.',
+  'Verplicht, maar leeg gelaten.': 'Obligatorio, ma a laga bashí.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} palabranan; mínimo {min} ta nesesario.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} palabranan; máksimo {max} ta pèrmití.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakternan; mínimo {min} ta nesesario.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakternan; máksimo {max} ta pèrmití.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” no ta den e lista di opshonnan.',
+  '“{value}” is geen getal.': '“{value}” no ta un número.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” no ta un fecha den e forma aña-luna-dia.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Potret di {actual} pixel di ancho; a pidi {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'E archivo di e potret ta falta den e envio.',
+  'De beschrijving van de foto ontbreekt.':
+      'E deskripshon di e potret ta falta.',
+  'De maker van de foto ontbreekt.': 'E hasi di e potret ta falta.',
+  'De foto is niet gecontroleerd.': 'E potret no a wòrdu verifiká.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Potret HEIC: no verifiká ni limpiá; por kontené un lokalisashon.',
+  'Toestemming niet gegeven.': 'Konsentimentu no duná.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'E repsuesta ta kontené un reglon ku ta parse un kódigo di kontròl di e formulario.',
+  'Het antwoord bevat HTML.': 'E repsuesta ta kontené HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'E repsuesta ta kontené un blòkki di kódigo no serrá.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'E repsuesta ta referí na un imágen ku no ta pertenesé na e envio aki.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'E repsuesta ta kontené un link ku no ta pèrmití.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'E formulario of e vershon aki no ta den e mapa di trabou.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Esun ku a manda a traha ku un teksto di e formulario ku no ta e un publiká.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'E konsentimentu den e manifesto no ta konkordá ku e formulario publiká.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'A kambia e teksto di e formulario for di e repsuestanan.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'A kambia e teksto di e formulario na e kampo aki.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'E kampo aki no ta eksistí den e formulario publiká.',
+  'Dit veld ontbreekt in de inzending.': 'E kampo aki ta falta den e envio.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Envio di vershon {submission}; publiká ta vershon {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'E formulario ta nesesitá un vershon mas nobo di OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'E formulario publiká den e mapa di trabou no ta útil.',
+  'De inzending hoort bij een ander formulier.':
+      'E envio ta pertenesé na un otro formulario.',
+  'De opbouw van de inzending is beschadigd.':
+      'E struktura di e envio ta daña.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'No por lesa e rehistro. Drecha overview.md; e envionan ta mustrá abou sin datonan di e rehistro.',
+  'Nog geen inzendingen.': 'Ainda no tin envionan.',
+  'Om na te lopen': 'Pa revisá',
+  'Verwijderd': 'Eliminá',
+  'Zonder regel in het register': 'Sin reglon den e rehistro',
+  'Ontvangen {datum}': 'Risibí {datum}',
+  'Ingetrokken {datum}': 'Retirá {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'A eliminá e kontenido di e envio aki; so e rekord ta keda.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'No por lesa e envio aki. Kontrolá e archivonan den e mapa di trabou.',
+  'Beoordeeld tegen {formulier}.': 'Evaluá kontra {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'E evaluashon ta tokante e kopia di trabou (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ningun punto pa revisá.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Potretnan ku ningun repsuesta no menshoná: {n}.',
   'Inzendingen': 'Envionan',
   'Werkmap': 'Mapa di trabou',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

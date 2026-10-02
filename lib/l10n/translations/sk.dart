@@ -1633,6 +1633,82 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'S týmto odoslaním nie je niečo v poriadku.',
+  'Verplicht, maar leeg gelaten.': 'Povinné, ale ponechané prázdne.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} slov; je potrebných aspoň {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} slov; povolených je najviac {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} znakov; je potrebných aspoň {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} znakov; povolených je najviac {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ nie je v zozname možností.',
+  '“{value}” is geen getal.': '„{value}“ nie je číslo.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ nie je dátum v tvare rok-mesiac-deň.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotka široká {actual} pixelov; požadovaných bolo {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'V odoslaní chýba súbor fotky.',
+  'De beschrijving van de foto ontbreekt.': 'Chýba popis fotky.',
+  'De maker van de foto ontbreekt.': 'Chýba autor fotky.',
+  'De foto is niet gecontroleerd.': 'Fotka nebola skontrolovaná.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Fotka HEIC: neskontrolovaná ani nevyčistená; môže obsahovať polohu.',
+  'Toestemming niet gegeven.': 'Súhlas nebol udelený.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Odpoveď obsahuje riadok, ktorý vyzerá ako riadiaci kód formulára.',
+  'Het antwoord bevat HTML.': 'Odpoveď obsahuje HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Odpoveď obsahuje neuzavretý blok kódu.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Odpoveď odkazuje na obrázok, ktorý k tomuto odoslaniu nepatrí.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Odpoveď obsahuje odkaz, ktorý nie je povolený.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Tento formulár alebo táto verzia nie je v pracovnom priečinku.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Odosielateľ pracoval s iným textom formulára, než je zverejnený.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Súhlas v manifeste nezodpovedá zverejnenému formuláru.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Text formulára bol zmenený mimo odpovedí.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Text formulára bol zmenený pri tomto poli.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Toto pole vo zverejnenom formulári neexistuje.',
+  'Dit veld ontbreekt in de inzending.': 'Toto pole v odoslaní chýba.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Odoslanie verzie {submission}; zverejnená je verzia {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formulár vyžaduje novšiu verziu OciDecku.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Zverejnený formulár v pracovnom priečinku nie je použiteľný.',
+  'De inzending hoort bij een ander formulier.':
+      'Odoslanie patrí k inému formuláru.',
+  'De opbouw van de inzending is beschadigd.':
+      'Štruktúra odoslania je poškodená.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Register nemožno prečítať. Opravte overview.md; odoslania sú nižšie zobrazené bez údajov z registra.',
+  'Nog geen inzendingen.': 'Zatiaľ žiadne odoslania.',
+  'Om na te lopen': 'Na kontrolu',
+  'Verwijderd': 'Zmazané',
+  'Zonder regel in het register': 'Bez riadku v registri',
+  'Ontvangen {datum}': 'Prijaté {datum}',
+  'Ingetrokken {datum}': 'Stiahnuté {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Obsah tohto odoslania bol zmazaný; zostal len záznam.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Toto odoslanie nemožno prečítať. Skontrolujte súbory v pracovnom priečinku.',
+  'Beoordeeld tegen {formulier}.': 'Posúdené voči {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Posúdenie sa týka pracovnej kópie (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Žiadne body na kontrolu.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotky, ktoré žiadna odpoveď nespomína: {n}.',
   'Inzendingen': 'Odoslania',
   'Werkmap': 'Pracovný priečinok',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

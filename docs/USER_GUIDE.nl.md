@@ -5911,6 +5911,15 @@ invullen heeft het nooit nodig). Het beginscherm heeft dan een knop **Inzendinge
    opgeslagen*. Elke foto wordt opnieuw gezuiverd en echt gedecodeerd; een bestand dat zich alleen
    als foto voordoet wordt aangemerkt.
 
+Onder de knoppen staat **elke inzending** in het venster, de nieuwste bovenaan: de kolommen die het
+formulier in `overview=` noemt (een naam, een gerecht) als titel, dan de status — *Om na te lopen* als er
+een fout in zit, *Verwijderd* als alleen het record er nog is, anders de status uit het formulier — de
+dag van ontvangst en, als die er is, de dag van intrekking. Klap een regel open om te zien **wat er mis
+mee is**, in gewone woorden over de inzender ("90 woorden; minstens 150 nodig"), elk punt onder de naam
+van zijn veld, met een pictogram voor de ernst, en tegen welk formulier en welke versie hij is beoordeeld.
+De punten worden elke keer opnieuw uitgerekend uit wat in de werkmap staat: verbeter de werkkopie
+(`submission.edit.md`) en het punt is weg, met de melding dat de beoordeling over de werkkopie gaat.
+
 Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor
 byte zoals ze aankwamen plus de foto's, in één stap: een crash laat nooit een halve inzending achter,
 en een inzending die er al is wordt nooit overschreven. Eén met een fout komt er wel in, met de status

@@ -1642,6 +1642,81 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Aliquid in hoc missu non recte se habet.',
+  'Verplicht, maar leeg gelaten.': 'Necessarium, sed vacuum relictum.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} verba; minimum {min} necessaria.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} verba; maximum {max} permissa.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} litterae; minimum {min} necessariae.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} litterae; maximum {max} permissae.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” in indice optionum non est.',
+  '“{value}” is geen getal.': '“{value}” numerus non est.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” non est dies in forma annus-mensis-dies.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Imago {actual} pixelorum lata; {min} petita.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fasciculus imaginis in missu deest.',
+  'De beschrijving van de foto ontbreekt.': 'Descriptio imaginis deest.',
+  'De maker van de foto ontbreekt.': 'Auctor imaginis deest.',
+  'De foto is niet gecontroleerd.': 'Imago non probata est.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Imago HEIC: non probata nec purgata; locum continere potest.',
+  'Toestemming niet gegeven.': 'Consensus non datus.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Responsum lineam continet quae signo regendi formulae similis est.',
+  'Het antwoord bevat HTML.': 'Responsum HTML continet.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Responsum truncum codicis non clausum continet.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Responsum imaginem nominat quae ad hoc missum non pertinet.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Responsum nexum continet qui non permittitur.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Haec formula aut haec versio in fasciculo operis non est.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Qui misit cum alio formulae textu quam edito laboravit.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Consensus in manifesto cum formula edita non congruit.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Textus formulae extra responsa mutatus est.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Textus formulae ad hunc campum mutatus est.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Hic campus in formula edita non exstat.',
+  'Dit veld ontbreekt in de inzending.': 'Hic campus in missu deest.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Missum versionis {submission}; edita est versio {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formula recentiorem versionem OciDeck requirit.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Formula edita in fasciculo operis usui non est.',
+  'De inzending hoort bij een ander formulier.':
+      'Missum ad aliam formulam pertinet.',
+  'De opbouw van de inzending is beschadigd.': 'Structura missi laesa est.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Index legi non potest. Repara overview.md; missa infra sine datis indicis ostenduntur.',
+  'Nog geen inzendingen.': 'Nondum ulla missa.',
+  'Om na te lopen': 'Recognoscendum',
+  'Verwijderd': 'Deletum',
+  'Zonder regel in het register': 'Sine linea in indice',
+  'Ontvangen {datum}': 'Acceptum {datum}',
+  'Ingetrokken {datum}': 'Revocatum {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Contentum huius missi deletum est; tantum monumentum manet.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Hoc missum legi non potest. Fasciculos in fasciculo operis inspice.',
+  'Beoordeeld tegen {formulier}.': 'Aestimatum contra {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Aestimatio de exemplari operis est (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nulla puncta recognoscenda.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Imagines quas nullum responsum nominat: {n}.',
   'Inzendingen': 'Missa',
   'Werkmap': 'Fasciculus operis',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

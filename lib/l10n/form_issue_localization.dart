@@ -19,6 +19,8 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import 'app_localizations.dart';
 
+part 'form_organiser_localization.dart';
+
 /// De zin voor [problem]. Een code die deze catalogus niet bedient krijgt een
 /// algemene zin — beter dan een lege plek of een kale code.
 String formIssueMessage(AppLocalizations l10n, FormProblem problem) =>

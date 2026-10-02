@@ -904,6 +904,35 @@ void main() {
     });
   });
 
+  group('readFormManifest', () {
+    test('reads the manifest of a package on its own', () {
+      final read = opened(build());
+      final manifest = readFormManifest(read.manifestBytes)!;
+      expect(manifest.submissionId, sid);
+      expect(manifest.formId, 'kookboek');
+      expect(manifest.templateSha256, read.manifest.templateSha256);
+      expect(manifest.files.map((f) => f.path), contains('submission.md'));
+    });
+
+    test(
+      'is null for what is not a manifest of this version, never a throw',
+      () {
+        expect(readFormManifest(Uint8List(0)), isNull);
+        expect(readFormManifest(Uint8List.fromList(utf8.encode('{}'))), isNull);
+        expect(
+          readFormManifest(Uint8List.fromList(utf8.encode('[1]'))),
+          isNull,
+        );
+        expect(readFormManifest(Uint8List.fromList([0xFF, 0xFE])), isNull);
+        final other = jsonEncode({...manifestOf(build()), 'v': 2});
+        expect(
+          readFormManifest(Uint8List.fromList(utf8.encode(other))),
+          isNull,
+        );
+      },
+    );
+  });
+
   group('readFormPackage — the manifest', () {
     late Map<String, Object?> good;
     late List<RawEntry> photoEntry;

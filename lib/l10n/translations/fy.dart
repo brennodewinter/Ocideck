@@ -667,6 +667,84 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Er klopt iets niet aan deze inzending.':
+      'Der is wat mis mei dizze ynstjoering.',
+  'Verplicht, maar leeg gelaten.': 'Ferplicht, mar leech litten.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} wurden; teminsten {min} nedich.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} wurden; maksimaal {max} tastien.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} tekens; teminsten {min} nedich.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} tekens; maksimaal {max} tastien.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” stiet net yn de list mei opsjes.',
+  '“{value}” is geen getal.': '“{value}” is gjin getal.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” is gjin datum yn de foarm jier-moanne-dei.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto fan {actual} piksels breed; {min} frege.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'It bestân fan de foto ûntbrekt yn de ynstjoering.',
+  'De beschrijving van de foto ontbreekt.':
+      'De beskriuwing fan de foto ûntbrekt.',
+  'De maker van de foto ontbreekt.': 'De makker fan de foto ûntbrekt.',
+  'De foto is niet gecontroleerd.': 'De foto is net kontrolearre.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-foto: net kontrolearre of skjinmakke; der kin in lokaasje yn stean.',
+  'Toestemming niet gegeven.': 'Tastimming net jûn.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'It antwurd befettet in rigel dy’t lykket op in stjoerkoade fan it formulier.',
+  'Het antwoord bevat HTML.': 'It antwurd befettet HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'It antwurd befettet in net-ôfsluten koadeblok.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'It antwurd ferwiist nei in ôfbylding dy’t net by dizze ynstjoering heart.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'It antwurd befettet in keppeling dy’t net tastien is.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Dit formulier of dizze ferzje stiet net yn de wurkmap.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'De ynstjoerder wurke mei in oare tekst fan it formulier as de publisearre.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'De tastimming yn it manifest komt net oerien mei it publisearre formulier.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'De tekst fan it formulier is feroare bûten de antwurden.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'De tekst fan it formulier is feroare by dit fjild.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Dit fjild bestiet net yn it publisearre formulier.',
+  'Dit veld ontbreekt in de inzending.':
+      'Dit fjild ûntbrekt yn de ynstjoering.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Ynstjoering fan ferzje {submission}; publisearre is ferzje {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'It formulier hat in nijere ferzje fan OciDeck nedich.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'It publisearre formulier yn de wurkmap is net brûkber.',
+  'De inzending hoort bij een ander formulier.':
+      'De ynstjoering heart by in oar formulier.',
+  'De opbouw van de inzending is beschadigd.':
+      'De opbou fan de ynstjoering is skansearre.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'It register kin net lêzen wurde. Herstelle overview.md; de ynstjoeringen steane hjirûnder sûnder gegevens út it register.',
+  'Nog geen inzendingen.': 'Noch gjin ynstjoeringen.',
+  'Om na te lopen': 'Nei te rinnen',
+  'Verwijderd': 'Wiske',
+  'Zonder regel in het register': 'Sûnder rigel yn it register',
+  'Ontvangen {datum}': 'Untfongen {datum}',
+  'Ingetrokken {datum}': 'Weromlutsen {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'De ynhâld fan dizze ynstjoering is wiske; allinnich it rekord stiet der noch.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Dizze ynstjoering kin net lêzen wurde. Kontrolearje de bestannen yn de wurkmap.',
+  'Beoordeeld tegen {formulier}.': 'Beoardiele tsjin {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'De beoardieling giet oer de wurkkopy (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Gjin punten om nei te rinnen.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Foto’s dy’t gjin antwurd neamt: {n}.',
   'Inzendingen': 'Ynstjoeringen',
   'Werkmap': 'Wurkmap',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

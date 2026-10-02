@@ -1627,6 +1627,81 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Ada yang salah dengan kiriman ini.',
+  'Verplicht, maar leeg gelaten.': 'Wajib, tetapi dibiarkan kosong.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} kata; minimal {min} diperlukan.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} kata; maksimal {max} diizinkan.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakter; minimal {min} diperlukan.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakter; maksimal {max} diizinkan.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” tidak ada dalam daftar pilihan.',
+  '“{value}” is geen getal.': '“{value}” bukan angka.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” bukan tanggal dalam bentuk tahun-bulan-hari.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto selebar {actual} piksel; diminta {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Berkas foto tidak ada dalam kiriman.',
+  'De beschrijving van de foto ontbreekt.': 'Deskripsi foto tidak ada.',
+  'De maker van de foto ontbreekt.': 'Pembuat foto tidak ada.',
+  'De foto is niet gecontroleerd.': 'Foto belum diperiksa.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Foto HEIC: tidak diperiksa atau dibersihkan; mungkin berisi lokasi.',
+  'Toestemming niet gegeven.': 'Persetujuan tidak diberikan.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Jawaban berisi baris yang tampak seperti kode kontrol formulir.',
+  'Het antwoord bevat HTML.': 'Jawaban berisi HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Jawaban berisi blok kode yang tidak ditutup.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Jawaban merujuk ke gambar yang bukan bagian dari kiriman ini.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Jawaban berisi tautan yang tidak diizinkan.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Formulir atau versi ini tidak ada di folder kerja.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Pengirim bekerja dengan teks formulir yang berbeda dari yang diterbitkan.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Persetujuan dalam manifes tidak cocok dengan formulir yang diterbitkan.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Teks formulir diubah di luar jawaban.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Teks formulir diubah pada kolom ini.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Kolom ini tidak ada dalam formulir yang diterbitkan.',
+  'Dit veld ontbreekt in de inzending.': 'Kolom ini tidak ada dalam kiriman.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Kiriman versi {submission}; yang diterbitkan adalah versi {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formulir memerlukan OciDeck versi yang lebih baru.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Formulir yang diterbitkan di folder kerja tidak dapat digunakan.',
+  'De inzending hoort bij een ander formulier.':
+      'Kiriman ini milik formulir lain.',
+  'De opbouw van de inzending is beschadigd.': 'Struktur kiriman rusak.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Register tidak dapat dibaca. Perbaiki overview.md; kiriman ditampilkan di bawah tanpa data dari register.',
+  'Nog geen inzendingen.': 'Belum ada kiriman.',
+  'Om na te lopen': 'Perlu diperiksa',
+  'Verwijderd': 'Dihapus',
+  'Zonder regel in het register': 'Tanpa baris di register',
+  'Ontvangen {datum}': 'Diterima {datum}',
+  'Ingetrokken {datum}': 'Ditarik {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Isi kiriman ini telah dihapus; hanya catatannya yang tersisa.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Kiriman ini tidak dapat dibaca. Periksa berkas di folder kerja.',
+  'Beoordeeld tegen {formulier}.': 'Dinilai terhadap {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Penilaian ini tentang salinan kerja (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Tidak ada hal yang perlu diperiksa.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Foto yang tidak disebut jawaban mana pun: {n}.',
   'Inzendingen': 'Kiriman',
   'Werkmap': 'Folder kerja',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

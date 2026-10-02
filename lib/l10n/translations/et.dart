@@ -1620,6 +1620,82 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Selle esitusega on midagi valesti.',
+  'Verplicht, maar leeg gelaten.': 'Kohustuslik, kuid jäetud tühjaks.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} sõna; vaja vähemalt {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} sõna; lubatud kuni {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} tähemärki; vaja vähemalt {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} tähemärki; lubatud kuni {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ ei ole valikute loendis.',
+  '“{value}” is geen getal.': '„{value}“ ei ole arv.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ ei ole kuupäev kujul aasta-kuu-päev.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto laiusega {actual} pikslit; küsiti {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Esitusest puudub foto fail.',
+  'De beschrijving van de foto ontbreekt.': 'Foto kirjeldus puudub.',
+  'De maker van de foto ontbreekt.': 'Foto autor puudub.',
+  'De foto is niet gecontroleerd.': 'Fotot ei kontrollitud.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-foto: kontrollimata ja puhastamata; selles võib olla asukoht.',
+  'Toestemming niet gegeven.': 'Nõusolekut ei antud.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Vastus sisaldab rida, mis näeb välja nagu vormi juhtkood.',
+  'Het antwoord bevat HTML.': 'Vastus sisaldab HTML-i.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Vastus sisaldab sulgemata koodiplokki.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Vastus viitab pildile, mis ei kuulu sellesse esitusse.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Vastus sisaldab linki, mis ei ole lubatud.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Seda vormi või seda versiooni ei ole töökaustas.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Esitaja töötas vormi teistsuguse tekstiga kui avaldatud.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Manifesti nõusolek ei ühti avaldatud vormiga.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Vormi teksti muudeti väljaspool vastuseid.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Vormi teksti muudeti selle välja juures.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Seda välja avaldatud vormis ei ole.',
+  'Dit veld ontbreekt in de inzending.': 'Seda välja esituses ei ole.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Versiooni {submission} esitus; avaldatud on versioon {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Vorm vajab OciDecki uuemat versiooni.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Avaldatud vorm töökaustas ei ole kasutatav.',
+  'De inzending hoort bij een ander formulier.':
+      'Esitus kuulub teise vormi juurde.',
+  'De opbouw van de inzending is beschadigd.':
+      'Esituse ülesehitus on kahjustatud.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registrit ei saa lugida. Paranda overview.md; esitused on allpool näidatud ilma registri andmeteta.',
+  'Nog geen inzendingen.': 'Esitusi veel ei ole.',
+  'Om na te lopen': 'Üle vaadata',
+  'Verwijderd': 'Kustutatud',
+  'Zonder regel in het register': 'Ilma reata registris',
+  'Ontvangen {datum}': 'Saadud {datum}',
+  'Ingetrokken {datum}': 'Tagasi võetud {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Selle esituse sisu on kustutatud; alles on ainult kirje.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Seda esitust ei saa lugida. Kontrolli töökausta faile.',
+  'Beoordeeld tegen {formulier}.': 'Hinnatud vastu {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Hinnang puudutab töökoopiat (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Pole punkte, mida üle vaadata.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotod, mida ükski vastus ei maini: {n}.',
   'Inzendingen': 'Esitused',
   'Werkmap': 'Töökaust',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

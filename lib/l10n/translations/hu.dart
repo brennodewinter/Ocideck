@@ -1629,6 +1629,81 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Valami nincs rendben ezzel a beküldéssel.',
+  'Verplicht, maar leeg gelaten.': 'Kötelező, de üresen hagyták.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} szó; legalább {min} szükséges.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} szó; legfeljebb {max} megengedett.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakter; legalább {min} szükséges.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakter; legfeljebb {max} megengedett.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}” nincs benne a lehetőségek listájában.',
+  '“{value}” is geen getal.': '„{value}” nem szám.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}” nem dátum év-hónap-nap alakban.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      '{actual} pixel széles fotó; {min} volt kérve.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'A fotó fájlja hiányzik a beküldésből.',
+  'De beschrijving van de foto ontbreekt.': 'A fotó leírása hiányzik.',
+  'De maker van de foto ontbreekt.': 'A fotó készítője hiányzik.',
+  'De foto is niet gecontroleerd.': 'A fotót nem ellenőrizték.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-fotó: nem ellenőrizték és nem tisztították meg; helyadatot tartalmazhat.',
+  'Toestemming niet gegeven.': 'A hozzájárulás nem lett megadva.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'A válasz olyan sort tartalmaz, amely az űrlap vezérlőkódjára hasonlít.',
+  'Het antwoord bevat HTML.': 'A válasz HTML-t tartalmaz.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'A válasz lezáratlan kódblokkot tartalmaz.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'A válasz olyan képre hivatkozik, amely nem ehhez a beküldéshez tartozik.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'A válasz nem megengedett hivatkozást tartalmaz.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Ez az űrlap vagy ez a verzió nincs a munkamappában.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'A beküldő az űrlap más szövegével dolgozott, mint a közzétettel.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'A manifestben lévő hozzájárulás nem egyezik a közzétett űrlappal.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Az űrlap szövegét a válaszokon kívül megváltoztatták.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Az űrlap szövegét ennél a mezőnél megváltoztatták.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Ez a mező nem szerepel a közzétett űrlapon.',
+  'Dit veld ontbreekt in de inzending.': 'Ez a mező hiányzik a beküldésből.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'A(z) {submission}. verziójú beküldés; a közzétett verzió a(z) {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Az űrlaphoz az OciDeck újabb verziója kell.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'A munkamappában lévő közzétett űrlap nem használható.',
+  'De inzending hoort bij een ander formulier.':
+      'A beküldés másik űrlaphoz tartozik.',
+  'De opbouw van de inzending is beschadigd.': 'A beküldés felépítése sérült.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'A nyilvántartás nem olvasható. Javítsd az overview.md fájlt; a beküldések alább a nyilvántartás adatai nélkül láthatók.',
+  'Nog geen inzendingen.': 'Még nincs beküldés.',
+  'Om na te lopen': 'Átnézendő',
+  'Verwijderd': 'Törölve',
+  'Zonder regel in het register': 'Sor nélkül a nyilvántartásban',
+  'Ontvangen {datum}': 'Megkapva {datum}',
+  'Ingetrokken {datum}': 'Visszavonva {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'A beküldés tartalmát törölték; csak a bejegyzés maradt.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Ez a beküldés nem olvasható. Ellenőrizd a munkamappa fájljait.',
+  'Beoordeeld tegen {formulier}.': 'Értékelve a(z) {formulier} alapján.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Az értékelés a munkapéldányra vonatkozik (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nincs átnézendő pont.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotók, amelyeket egyik válasz sem említ: {n}.',
   'Inzendingen': 'Beküldések',
   'Werkmap': 'Munkamappa',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

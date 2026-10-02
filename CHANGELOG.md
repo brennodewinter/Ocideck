@@ -10,6 +10,12 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **Inbox** toont nu elke inzending als een regel — naam uit de overzichtskolommen van het formulier, status,
+  dag van ontvangst en eventuele intrekking — en klapt open tot **wat er mis mee is**, in gewone woorden over de
+  inzender ("90 woorden; minstens 150 nodig") en onder de naam van het veld. De punten worden telkens opnieuw
+  uitgerekend uit wat in de werkmap staat, dus een correctie in de werkkopie `submission.edit.md` haalt een punt
+  weg. Een register dat niet te lezen is wordt gemeld en de inzendingen blijven zichtbaar. 46 nieuwe zinnen in 30
+  talen; `readFormManifest` in `ocideck_form_core` leest een bewaard manifest los.
 - Een **voorbeeldformulier** om de formulierfunctie mee uit te proberen: `examples/forms/recept.nl.md` en
   `recept.en.md` (een receptinzending met alle soorten vragen, foto's en toestemming). Een test houdt ze
   bruikbaar — geen fouten of waarschuwingen, invulbaar tot en met de poort — en de twee talen op dezelfde
