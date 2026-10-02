@@ -1629,6 +1629,35 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kies een datum': 'Dátum kiválasztása',
+  'Anders, namelijk:': 'Egyéb, nevezetesen:',
+  'Punt {n}': '{n}. pont',
+  'Punt {n} verwijderen': 'A(z) {n}. pont eltávolítása',
+  'Rij {n} verwijderen': 'A(z) {n}. sor eltávolítása',
+  'Foto {n} verwijderen': 'A(z) {n}. fotó eltávolítása',
+  'Wat is er te zien op de foto?': 'Mi látható a fotón?',
+  'Van wie is de foto?': 'Kié a fotó?',
+  'Foto toevoegen': 'Fotó hozzáadása',
+  'Verplicht': 'Kötelező',
+  'Alles is ingevuld.': 'Minden ki van töltve.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Még {n} teendő van, mielőtt küldhetne:',
+  'klaar': 'kész',
+  '{n} open': '{n} nyitott',
+  'Dit formulier kan niet worden ingevuld.': 'Ez az űrlap nem tölthető ki.',
+  'Naar de bron': 'A forráshoz',
+  'Woorden': 'Szavak',
+  'Tekens': 'Karakterek',
+  'Keuzes': 'Választások',
+  'Rijen': 'Sorok',
+  'Foto’s': 'Fotók',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (legalább {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (legfeljebb {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (legalább {min}, legfeljebb {max})',
+  'Invullen': 'Kitöltés',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Valami nincs rendben ezzel az űrlappal. Vegye fel a kapcsolatot azzal, aki készítette.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

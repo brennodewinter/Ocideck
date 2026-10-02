@@ -667,6 +667,35 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kies een datum': 'Kies in datum',
+  'Anders, namelijk:': 'Oars, nammentlik:',
+  'Punt {n}': 'Ûnderdiel {n}',
+  'Punt {n} verwijderen': 'Ûnderdiel {n} fuortsmite',
+  'Rij {n} verwijderen': 'Rige {n} fuortsmite',
+  'Foto {n} verwijderen': 'Foto {n} fuortsmite',
+  'Wat is er te zien op de foto?': 'Wat is der te sjen op de foto?',
+  'Van wie is de foto?': 'Fan wa is de foto?',
+  'Foto toevoegen': 'Foto tafoegje',
+  'Verplicht': 'Ferplicht',
+  'Alles is ingevuld.': 'Alles is ynfolle.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Noch {n} te dwaan foardat do kinst ferstjoere:',
+  'klaar': 'klear',
+  '{n} open': '{n} iepen',
+  'Dit formulier kan niet worden ingevuld.':
+      'Dit formulier kin net ynfolle wurde.',
+  'Naar de bron': 'Nei de boarne',
+  'Woorden': 'Wurden',
+  'Tekens': 'Karakters',
+  'Keuzes': 'Karren',
+  'Rijen': 'Rigen',
+  'Foto’s': 'Ofbyldingen',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (teminsten {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (heechút {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (teminsten {min}, heechút {max})',
+  'Invullen': 'Ynfolje',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Der is wat mis mei dit formulier. Nim kontakt op mei wa\'t it makke hat.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

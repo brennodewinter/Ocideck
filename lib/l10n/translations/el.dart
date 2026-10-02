@@ -1652,6 +1652,35 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kies een datum': 'Επιλογή ημερομηνίας',
+  'Anders, namelijk:': 'Άλλο, συγκεκριμένα:',
+  'Punt {n}': 'Σημείο {n}',
+  'Punt {n} verwijderen': 'Αφαίρεση σημείου {n}',
+  'Rij {n} verwijderen': 'Αφαίρεση γραμμής {n}',
+  'Foto {n} verwijderen': 'Αφαίρεση φωτογραφίας {n}',
+  'Wat is er te zien op de foto?': 'Τι φαίνεται στη φωτογραφία;',
+  'Van wie is de foto?': 'Ποιανού είναι η φωτογραφία;',
+  'Foto toevoegen': 'Προσθήκη φωτογραφίας',
+  'Verplicht': 'Υποχρεωτικό',
+  'Alles is ingevuld.': 'Όλα έχουν συμπληρωθεί.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Απομένουν {n} πριν μπορέσετε να στείλετε:',
+  'klaar': 'έτοιμο',
+  '{n} open': '{n} ανοιχτά',
+  'Dit formulier kan niet worden ingevuld.':
+      'Αυτή η φόρμα δεν μπορεί να συμπληρωθεί.',
+  'Naar de bron': 'Στην πηγή',
+  'Woorden': 'Λέξεις',
+  'Tekens': 'Χαρακτήρες',
+  'Keuzes': 'Επιλογές',
+  'Rijen': 'Γραμμές',
+  'Foto’s': 'Φωτογραφίες',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (τουλάχιστον {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (το πολύ {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (τουλάχιστον {min}, το πολύ {max})',
+  'Invullen': 'Συμπλήρωση',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Κάτι δεν πάει καλά με αυτή τη φόρμα. Επικοινωνήστε με όποιον την έφτιαξε.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

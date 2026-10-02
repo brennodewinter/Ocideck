@@ -1634,6 +1634,34 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kies een datum': 'Pasirinkti datą',
+  'Anders, namelijk:': 'Kita, būtent:',
+  'Punt {n}': 'Punktas {n}',
+  'Punt {n} verwijderen': 'Pašalinti punktą {n}',
+  'Rij {n} verwijderen': 'Pašalinti eilutę {n}',
+  'Foto {n} verwijderen': 'Pašalinti nuotrauką {n}',
+  'Wat is er te zien op de foto?': 'Kas matyti nuotraukoje?',
+  'Van wie is de foto?': 'Kieno nuotrauka?',
+  'Foto toevoegen': 'Pridėti nuotrauką',
+  'Verplicht': 'Privaloma',
+  'Alles is ingevuld.': 'Viskas užpildyta.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Dar {n} reikia atlikti, kad galėtumėte siųsti:',
+  'klaar': 'atlikta',
+  '{n} open': '{n} atvira',
+  'Dit formulier kan niet worden ingevuld.': 'Šios formos užpildyti negalima.',
+  'Naar de bron': 'Į šaltinį',
+  'Woorden': 'Žodžiai',
+  'Tekens': 'Ženklai',
+  'Keuzes': 'Pasirinkimai',
+  'Rijen': 'Eilutės',
+  'Foto’s': 'Nuotraukos',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (bent {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (daugiausia {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (bent {min}, daugiausia {max})',
+  'Invullen': 'Užpildyti',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Su šia forma kažkas negerai. Susisiekite su tuo, kas ją sukūrė.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

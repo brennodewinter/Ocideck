@@ -667,6 +667,36 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Kies een datum': 'Datum wählen',
+  'Anders, namelijk:': 'Andere, nämlich:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Punkt {n} entfernen',
+  'Rij {n} verwijderen': 'Zeile {n} entfernen',
+  'Foto {n} verwijderen': 'Foto {n} entfernen',
+  'Wat is er te zien op de foto?': 'Was ist auf dem Foto zu sehen?',
+  'Van wie is de foto?': 'Von wem ist das Foto?',
+  'Foto toevoegen': 'Foto hinzufügen',
+  'Verplicht': 'Pflichtfeld',
+  'Alles is ingevuld.': 'Alles ist ausgefüllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Noch {n} zu erledigen, bevor du senden kannst:',
+  'klaar': 'erledigt',
+  '{n} open': '{n} offen',
+  'Dit formulier kan niet worden ingevuld.':
+      'Dieses Formular kann nicht ausgefüllt werden.',
+  'Naar de bron': 'Zur Quelle',
+  'Woorden': 'Wörter',
+  'Tekens': 'Zeichen',
+  'Keuzes': 'Auswahlen',
+  'Rijen': 'Zeilen',
+  'Foto’s': 'Fotos',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mindestens {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (höchstens {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mindestens {min}, höchstens {max})',
+  'Invullen': 'Ausfüllen',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Mit diesem Formular stimmt etwas nicht. Wende dich an die Person, die es erstellt hat.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

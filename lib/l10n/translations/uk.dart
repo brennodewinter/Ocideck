@@ -1642,6 +1642,35 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kies een datum': 'Обрати дату',
+  'Anders, namelijk:': 'Інше, а саме:',
+  'Punt {n}': 'Пункт {n}',
+  'Punt {n} verwijderen': 'Вилучити пункт {n}',
+  'Rij {n} verwijderen': 'Вилучити рядок {n}',
+  'Foto {n} verwijderen': 'Вилучити фотографію {n}',
+  'Wat is er te zien op de foto?': 'Що видно на фотографії?',
+  'Van wie is de foto?': 'Чия це фотографія?',
+  'Foto toevoegen': 'Додати фотографію',
+  'Verplicht': 'Обов’язково',
+  'Alles is ingevuld.': 'Усе заповнено.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Ще {n} до того, як можна буде надіслати:',
+  'klaar': 'готово',
+  '{n} open': '{n} відкрито',
+  'Dit formulier kan niet worden ingevuld.': 'Цю форму не можна заповнити.',
+  'Naar de bron': 'До джерела',
+  'Woorden': 'Слова',
+  'Tekens': 'Символи',
+  'Keuzes': 'Варіанти',
+  'Rijen': 'Рядки',
+  'Foto’s': 'Фотографії',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (щонайменше {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (щонайбільше {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (щонайменше {min}, щонайбільше {max})',
+  'Invullen': 'Заповнити',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Із цією формою щось не так. Зверніться до того, хто її створив.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

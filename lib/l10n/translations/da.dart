@@ -1627,6 +1627,34 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kies een datum': 'Vælg en dato',
+  'Anders, namelijk:': 'Andet, nemlig:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Fjern punkt {n}',
+  'Rij {n} verwijderen': 'Fjern række {n}',
+  'Foto {n} verwijderen': 'Fjern foto {n}',
+  'Wat is er te zien op de foto?': 'Hvad kan ses på fotoet?',
+  'Van wie is de foto?': 'Hvem er fotoet fra?',
+  'Foto toevoegen': 'Tilføj foto',
+  'Verplicht': 'Påkrævet',
+  'Alles is ingevuld.': 'Alt er udfyldt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Der mangler {n}, før du kan sende:',
+  'klaar': 'færdig',
+  '{n} open': '{n} åbne',
+  'Dit formulier kan niet worden ingevuld.':
+      'Denne formular kan ikke udfyldes.',
+  'Naar de bron': 'Til kilden',
+  'Woorden': 'Ord',
+  'Tekens': 'Tegn',
+  'Keuzes': 'Valg',
+  'Rijen': 'Rækker',
+  'Foto’s': 'Fotos',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (mindst {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (højst {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mindst {min}, højst {max})',
+  'Invullen': 'Udfyld',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Der er noget galt med denne formular. Kontakt den, der har lavet den.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

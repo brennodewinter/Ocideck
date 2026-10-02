@@ -1625,6 +1625,34 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kies een datum': 'Izvēlēties datumu',
+  'Anders, namelijk:': 'Cits, proti:',
+  'Punt {n}': 'Punkts {n}',
+  'Punt {n} verwijderen': 'Noņemt punktu {n}',
+  'Rij {n} verwijderen': 'Noņemt rindu {n}',
+  'Foto {n} verwijderen': 'Noņemt fotogrāfiju {n}',
+  'Wat is er te zien op de foto?': 'Kas redzams fotogrāfijā?',
+  'Van wie is de foto?': 'Kam pieder fotogrāfija?',
+  'Foto toevoegen': 'Pievienot fotogrāfiju',
+  'Verplicht': 'Obligāts',
+  'Alles is ingevuld.': 'Viss ir aizpildīts.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Vēl {n} jāizdara, pirms varat nosūtīt:',
+  'klaar': 'gatavs',
+  '{n} open': '{n} atvērti',
+  'Dit formulier kan niet worden ingevuld.': 'Šo veidlapu nevar aizpildīt.',
+  'Naar de bron': 'Uz avotu',
+  'Woorden': 'Vārdi',
+  'Tekens': 'Rakstzīmes',
+  'Keuzes': 'Izvēles',
+  'Rijen': 'Rindas',
+  'Foto’s': 'Fotogrāfijas',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (vismaz {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (ne vairāk kā {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (vismaz {min}, ne vairāk kā {max})',
+  'Invullen': 'Aizpildīt',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Ar šo veidlapu kaut kas nav kārtībā. Sazinieties ar to, kurš to izveidoja.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

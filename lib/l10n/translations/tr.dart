@@ -2538,6 +2538,34 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Kies een datum': 'Tarih seç',
+  'Anders, namelijk:': 'Diğer, yani:',
+  'Punt {n}': 'Madde {n}',
+  'Punt {n} verwijderen': '{n}. maddeyi kaldır',
+  'Rij {n} verwijderen': '{n}. satırı kaldır',
+  'Foto {n} verwijderen': '{n}. fotoğrafı kaldır',
+  'Wat is er te zien op de foto?': 'Fotoğrafta ne görünüyor?',
+  'Van wie is de foto?': 'Fotoğraf kime ait?',
+  'Foto toevoegen': 'Fotoğraf ekle',
+  'Verplicht': 'Zorunlu',
+  'Alles is ingevuld.': 'Her şey dolduruldu.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Göndermeden önce {n} şey daha yapılmalı:',
+  'klaar': 'tamam',
+  '{n} open': '{n} açık',
+  'Dit formulier kan niet worden ingevuld.': 'Bu form doldurulamaz.',
+  'Naar de bron': 'Kaynağa git',
+  'Woorden': 'Sözcükler',
+  'Tekens': 'Karakterler',
+  'Keuzes': 'Seçimler',
+  'Rijen': 'Satırlar',
+  'Foto’s': 'Fotoğraflar',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (en az {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (en fazla {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (en az {min}, en fazla {max})',
+  'Invullen': 'Doldur',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Bu formda bir sorun var. Formu hazırlayan kişiyle iletişime geçin.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

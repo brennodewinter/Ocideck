@@ -664,6 +664,34 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kies een datum': 'Scegli una data',
+  'Anders, namelijk:': 'Altro, cioè:',
+  'Punt {n}': 'Voce {n}',
+  'Punt {n} verwijderen': 'Rimuovi la voce {n}',
+  'Rij {n} verwijderen': 'Rimuovi la riga {n}',
+  'Foto {n} verwijderen': 'Rimuovi la foto {n}',
+  'Wat is er te zien op de foto?': 'Che cosa si vede nella foto?',
+  'Van wie is de foto?': 'Di chi è la foto?',
+  'Foto toevoegen': 'Aggiungi foto',
+  'Verplicht': 'Obbligatorio',
+  'Alles is ingevuld.': 'Tutto è compilato.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Ancora {n} da fare prima di poter inviare:',
+  'klaar': 'fatto',
+  '{n} open': '{n} aperti',
+  'Dit formulier kan niet worden ingevuld.':
+      'Questo modulo non può essere compilato.',
+  'Naar de bron': 'Vai alla sorgente',
+  'Woorden': 'Parole',
+  'Tekens': 'Caratteri',
+  'Keuzes': 'Scelte',
+  'Rijen': 'Righe',
+  'Foto’s': 'Foto',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minimo {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (massimo {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minimo {min}, massimo {max})',
+  'Invullen': 'Compila',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'C\'è qualcosa che non va in questo modulo. Contatta chi lo ha creato.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

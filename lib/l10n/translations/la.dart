@@ -1642,6 +1642,33 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kies een datum': 'Elige diem',
+  'Anders, namelijk:': 'Aliud, scilicet:',
+  'Punt {n}': 'Punctum {n}',
+  'Punt {n} verwijderen': 'Remove punctum {n}',
+  'Rij {n} verwijderen': 'Remove lineam {n}',
+  'Foto {n} verwijderen': 'Remove imaginem {n}',
+  'Wat is er te zien op de foto?': 'Quid in imagine videtur?',
+  'Van wie is de foto?': 'Cuius est imago?',
+  'Foto toevoegen': 'Imaginem adde',
+  'Verplicht': 'Necessarium',
+  'Alles is ingevuld.': 'Omnia completa sunt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Adhuc {n} agenda sunt antequam mittere possis:',
+  'klaar': 'peractum',
+  '{n} open': '{n} aperta',
+  'Dit formulier kan niet worden ingevuld.': 'Haec forma impleri non potest.',
+  'Naar de bron': 'Ad fontem',
+  'Woorden': 'Verba',
+  'Tekens': 'Litterae',
+  'Keuzes': 'Optiones',
+  'Rijen': 'Lineae',
+  'Foto’s': 'Imagines',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minimum {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (maximum {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minimum {min}, maximum {max})',
+  'Invullen': 'Imple',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Aliquid in hac forma non recte se habet. Cum eo qui eam fecit communica.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

@@ -827,6 +827,34 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Kies een datum': 'Choose a date',
+  'Anders, namelijk:': 'Other, namely:',
+  'Punt {n}': 'Item {n}',
+  'Punt {n} verwijderen': 'Remove item {n}',
+  'Rij {n} verwijderen': 'Remove row {n}',
+  'Foto {n} verwijderen': 'Remove photo {n}',
+  'Wat is er te zien op de foto?': 'What can be seen in the photo?',
+  'Van wie is de foto?': 'Who is the photo by?',
+  'Foto toevoegen': 'Add photo',
+  'Verplicht': 'Required',
+  'Alles is ingevuld.': 'Everything is filled in.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      '{n} left to do before you can send:',
+  'klaar': 'done',
+  '{n} open': '{n} to do',
+  'Dit formulier kan niet worden ingevuld.': 'This form cannot be filled in.',
+  'Naar de bron': 'Go to the source',
+  'Woorden': 'Words',
+  'Tekens': 'Characters',
+  'Keuzes': 'Choices',
+  'Rijen': 'Rows',
+  'Foto’s': 'Photos',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (at least {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (at most {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (at least {min}, at most {max})',
+  'Invullen': 'Fill in',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Something is wrong with this form. Please contact whoever made it.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

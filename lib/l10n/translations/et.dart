@@ -1620,6 +1620,34 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kies een datum': 'Vali kuupäev',
+  'Anders, namelijk:': 'Muu, nimelt:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Eemalda punkt {n}',
+  'Rij {n} verwijderen': 'Eemalda rida {n}',
+  'Foto {n} verwijderen': 'Eemalda foto {n}',
+  'Wat is er te zien op de foto?': 'Mis fotol on näha?',
+  'Van wie is de foto?': 'Kelle foto see on?',
+  'Foto toevoegen': 'Lisa foto',
+  'Verplicht': 'Kohustuslik',
+  'Alles is ingevuld.': 'Kõik on täidetud.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Veel {n} teha, enne kui saate saata:',
+  'klaar': 'valmis',
+  '{n} open': '{n} lahti',
+  'Dit formulier kan niet worden ingevuld.': 'Seda vormi ei saa täita.',
+  'Naar de bron': 'Allika juurde',
+  'Woorden': 'Sõnad',
+  'Tekens': 'Märgid',
+  'Keuzes': 'Valikud',
+  'Rijen': 'Read',
+  'Foto’s': 'Fotod',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (vähemalt {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (kuni {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (vähemalt {min}, kuni {max})',
+  'Invullen': 'Täida',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Selle vormiga on midagi valesti. Võtke ühendust selle koostajaga.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

@@ -666,6 +666,34 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kies een datum': 'Skohe un fecha',
+  'Anders, namelijk:': 'Otro, ku ta:',
+  'Punt {n}': 'Punto {n}',
+  'Punt {n} verwijderen': 'Kita punto {n}',
+  'Rij {n} verwijderen': 'Kita fila {n}',
+  'Foto {n} verwijderen': 'Kita potret {n}',
+  'Wat is er te zien op de foto?': 'Kiko ta mira riba e potret?',
+  'Van wie is de foto?': 'Di ken e potret ta?',
+  'Foto toevoegen': 'Agregá potret',
+  'Verplicht': 'Obligatorio',
+  'Alles is ingevuld.': 'Tur kos ta yená.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Ainda {n} pa hasi promé ku bo por manda:',
+  'klaar': 'kla',
+  '{n} open': '{n} habrí',
+  'Dit formulier kan niet worden ingevuld.':
+      'E formulario aki no por wòrdu yená.',
+  'Naar de bron': 'Bai na e fuente',
+  'Woorden': 'Palabranan',
+  'Tekens': 'Karakternan',
+  'Keuzes': 'Opshonnan',
+  'Rijen': 'Filanan',
+  'Foto’s': 'Potretnan',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (mínimo {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (máksimo {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mínimo {min}, máksimo {max})',
+  'Invullen': 'Yena',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Tin algu cos ku no ta bon na e formulario aki. Tuma kontakto ku e persona ku a hasié.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

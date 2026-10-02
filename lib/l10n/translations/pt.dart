@@ -1655,6 +1655,34 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Kies een datum': 'Escolher uma data',
+  'Anders, namelijk:': 'Outro, a saber:',
+  'Punt {n}': 'Ponto {n}',
+  'Punt {n} verwijderen': 'Remover o ponto {n}',
+  'Rij {n} verwijderen': 'Remover a linha {n}',
+  'Foto {n} verwijderen': 'Remover a foto {n}',
+  'Wat is er te zien op de foto?': 'O que se vê na foto?',
+  'Van wie is de foto?': 'De quem é a foto?',
+  'Foto toevoegen': 'Adicionar foto',
+  'Verplicht': 'Obrigatório',
+  'Alles is ingevuld.': 'Tudo está preenchido.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Faltam {n} para você poder enviar:',
+  'klaar': 'pronto',
+  '{n} open': '{n} em aberto',
+  'Dit formulier kan niet worden ingevuld.':
+      'Este formulário não pode ser preenchido.',
+  'Naar de bron': 'Ir para o código-fonte',
+  'Woorden': 'Palavras',
+  'Tekens': 'Caracteres',
+  'Keuzes': 'Escolhas',
+  'Rijen': 'Linhas',
+  'Foto’s': 'Fotos',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (mínimo {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (máximo {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mínimo {min}, máximo {max})',
+  'Invullen': 'Preencher',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Há algo errado com este formulário. Entre em contato com quem o criou.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

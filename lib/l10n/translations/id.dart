@@ -1627,6 +1627,34 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kies een datum': 'Pilih tanggal',
+  'Anders, namelijk:': 'Lainnya, yaitu:',
+  'Punt {n}': 'Butir {n}',
+  'Punt {n} verwijderen': 'Hapus butir {n}',
+  'Rij {n} verwijderen': 'Hapus baris {n}',
+  'Foto {n} verwijderen': 'Hapus foto {n}',
+  'Wat is er te zien op de foto?': 'Apa yang terlihat di foto?',
+  'Van wie is de foto?': 'Foto ini milik siapa?',
+  'Foto toevoegen': 'Tambahkan foto',
+  'Verplicht': 'Wajib',
+  'Alles is ingevuld.': 'Semuanya sudah diisi.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Masih {n} lagi sebelum Anda dapat mengirim:',
+  'klaar': 'selesai',
+  '{n} open': '{n} terbuka',
+  'Dit formulier kan niet worden ingevuld.': 'Formulir ini tidak dapat diisi.',
+  'Naar de bron': 'Ke sumber',
+  'Woorden': 'Kata',
+  'Tekens': 'Karakter',
+  'Keuzes': 'Pilihan',
+  'Rijen': 'Baris',
+  'Foto’s': 'Foto',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minimal {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (maksimal {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minimal {min}, maksimal {max})',
+  'Invullen': 'Isi',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Ada yang salah pada formulir ini. Hubungi orang yang membuatnya.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

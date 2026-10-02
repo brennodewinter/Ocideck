@@ -1647,6 +1647,35 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kies een datum': 'Избор на дата',
+  'Anders, namelijk:': 'Друго, а именно:',
+  'Punt {n}': 'Точка {n}',
+  'Punt {n} verwijderen': 'Премахване на точка {n}',
+  'Rij {n} verwijderen': 'Премахване на ред {n}',
+  'Foto {n} verwijderen': 'Премахване на снимка {n}',
+  'Wat is er te zien op de foto?': 'Какво се вижда на снимката?',
+  'Van wie is de foto?': 'Чия е снимката?',
+  'Foto toevoegen': 'Добавяне на снимка',
+  'Verplicht': 'Задължително',
+  'Alles is ingevuld.': 'Всичко е попълнено.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Остават още {n}, преди да можете да изпратите:',
+  'klaar': 'готово',
+  '{n} open': '{n} отворени',
+  'Dit formulier kan niet worden ingevuld.':
+      'Този формуляр не може да бъде попълнен.',
+  'Naar de bron': 'Към източника',
+  'Woorden': 'Думи',
+  'Tekens': 'Знаци',
+  'Keuzes': 'Избори',
+  'Rijen': 'Редове',
+  'Foto’s': 'Снимки',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (поне {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (най-много {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (поне {min}, най-много {max})',
+  'Invullen': 'Попълване',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Нещо не е наред с този формуляр. Свържете се с този, който го е създал.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

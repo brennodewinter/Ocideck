@@ -1643,6 +1643,36 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kies een datum': 'Alege o dată',
+  'Anders, namelijk:': 'Altul, anume:',
+  'Punt {n}': 'Punctul {n}',
+  'Punt {n} verwijderen': 'Elimină punctul {n}',
+  'Rij {n} verwijderen': 'Elimină rândul {n}',
+  'Foto {n} verwijderen': 'Elimină fotografia {n}',
+  'Wat is er te zien op de foto?': 'Ce se vede în fotografie?',
+  'Van wie is de foto?': 'A cui este fotografia?',
+  'Foto toevoegen': 'Adaugă o fotografie',
+  'Verplicht': 'Obligatoriu',
+  'Alles is ingevuld.': 'Totul este completat.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Mai sunt {n} de făcut înainte de a putea trimite:',
+  'klaar': 'gata',
+  '{n} open': '{n} deschise',
+  'Dit formulier kan niet worden ingevuld.':
+      'Acest formular nu poate fi completat.',
+  'Naar de bron': 'La sursă',
+  'Woorden': 'Cuvinte',
+  'Tekens': 'Caractere',
+  'Keuzes': 'Alegeri',
+  'Rijen': 'Rânduri',
+  'Foto’s': 'Fotografii',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (cel puțin {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (cel mult {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (cel puțin {min}, cel mult {max})',
+  'Invullen': 'Completează',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Ceva nu este în regulă cu acest formular. Contactați persoana care l-a creat.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

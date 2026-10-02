@@ -1628,6 +1628,33 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kies een datum': 'Vybrat datum',
+  'Anders, namelijk:': 'Jiné, a to:',
+  'Punt {n}': 'Bod {n}',
+  'Punt {n} verwijderen': 'Odstranit bod {n}',
+  'Rij {n} verwijderen': 'Odstranit řádek {n}',
+  'Foto {n} verwijderen': 'Odstranit fotografii {n}',
+  'Wat is er te zien op de foto?': 'Co je na fotografii vidět?',
+  'Van wie is de foto?': 'Čí je fotografie?',
+  'Foto toevoegen': 'Přidat fotografii',
+  'Verplicht': 'Povinné',
+  'Alles is ingevuld.': 'Vše je vyplněno.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Zbývá ještě {n}, než budete moci odeslat:',
+  'klaar': 'hotovo',
+  '{n} open': '{n} otevřeno',
+  'Dit formulier kan niet worden ingevuld.': 'Tento formulář nelze vyplnit.',
+  'Naar de bron': 'Ke zdroji',
+  'Woorden': 'Slova',
+  'Tekens': 'Znaky',
+  'Keuzes': 'Volby',
+  'Rijen': 'Řádky',
+  'Foto’s': 'Fotografie',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (alespoň {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (nejvýše {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (alespoň {min}, nejvýše {max})',
+  'Invullen': 'Vyplnit',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'S tímto formulářem není něco v pořádku. Obraťte se na toho, kdo ho vytvořil.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

@@ -1631,6 +1631,35 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kies een datum': 'Odaberi datum',
+  'Anders, namelijk:': 'Drugo, naime:',
+  'Punt {n}': 'Točka {n}',
+  'Punt {n} verwijderen': 'Ukloni točku {n}',
+  'Rij {n} verwijderen': 'Ukloni redak {n}',
+  'Foto {n} verwijderen': 'Ukloni fotografiju {n}',
+  'Wat is er te zien op de foto?': 'Što se vidi na fotografiji?',
+  'Van wie is de foto?': 'Čija je fotografija?',
+  'Foto toevoegen': 'Dodaj fotografiju',
+  'Verplicht': 'Obavezno',
+  'Alles is ingevuld.': 'Sve je ispunjeno.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Još {n} za učiniti prije slanja:',
+  'klaar': 'gotovo',
+  '{n} open': '{n} otvoreno',
+  'Dit formulier kan niet worden ingevuld.':
+      'Ovaj obrazac nije moguće ispuniti.',
+  'Naar de bron': 'Na izvor',
+  'Woorden': 'Riječi',
+  'Tekens': 'Znakovi',
+  'Keuzes': 'Izbori',
+  'Rijen': 'Retci',
+  'Foto’s': 'Fotografije',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (najmanje {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (najviše {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (najmanje {min}, najviše {max})',
+  'Invullen': 'Ispuni',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Nešto nije u redu s ovim obrascem. Obratite se osobi koja ga je izradila.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

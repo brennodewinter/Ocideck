@@ -667,6 +667,36 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Kies een datum': 'Choisir une date',
+  'Anders, namelijk:': 'Autre, à savoir :',
+  'Punt {n}': 'Point {n}',
+  'Punt {n} verwijderen': 'Supprimer le point {n}',
+  'Rij {n} verwijderen': 'Supprimer la ligne {n}',
+  'Foto {n} verwijderen': 'Supprimer la photo {n}',
+  'Wat is er te zien op de foto?': 'Que voit-on sur la photo ?',
+  'Van wie is de foto?': 'De qui est la photo ?',
+  'Foto toevoegen': 'Ajouter une photo',
+  'Verplicht': 'Obligatoire',
+  'Alles is ingevuld.': 'Tout est rempli.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Encore {n} à faire avant de pouvoir envoyer :',
+  'klaar': 'terminé',
+  '{n} open': '{n} à faire',
+  'Dit formulier kan niet worden ingevuld.':
+      'Ce formulaire ne peut pas être rempli.',
+  'Naar de bron': 'Aller à la source',
+  'Woorden': 'Mots',
+  'Tekens': 'Caractères',
+  'Keuzes': 'Choix',
+  'Rijen': 'Lignes',
+  'Foto’s': 'Photos',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid} : {actual} (minimum {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid} : {actual} (maximum {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid} : {actual} (minimum {min}, maximum {max})',
+  'Invullen': 'Remplir',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Quelque chose ne va pas dans ce formulaire. Contactez la personne qui l\'a créé.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

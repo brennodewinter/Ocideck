@@ -1626,6 +1626,34 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kies een datum': 'Välj ett datum',
+  'Anders, namelijk:': 'Annat, nämligen:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Ta bort punkt {n}',
+  'Rij {n} verwijderen': 'Ta bort rad {n}',
+  'Foto {n} verwijderen': 'Ta bort foto {n}',
+  'Wat is er te zien op de foto?': 'Vad syns på fotot?',
+  'Van wie is de foto?': 'Vem har tagit fotot?',
+  'Foto toevoegen': 'Lägg till foto',
+  'Verplicht': 'Obligatoriskt',
+  'Alles is ingevuld.': 'Allt är ifyllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Det återstår {n} innan du kan skicka:',
+  'klaar': 'klart',
+  '{n} open': '{n} öppna',
+  'Dit formulier kan niet worden ingevuld.':
+      'Det här formuläret kan inte fyllas i.',
+  'Naar de bron': 'Till källan',
+  'Woorden': 'Ord',
+  'Tekens': 'Tecken',
+  'Keuzes': 'Val',
+  'Rijen': 'Rader',
+  'Foto’s': 'Foton',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minst {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (högst {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minst {min}, högst {max})',
+  'Invullen': 'Fyll i',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Något är fel med det här formuläret. Kontakta den som har skapat det.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

@@ -1657,6 +1657,36 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kies een datum': 'Roghnaigh dáta',
+  'Anders, namelijk:': 'Eile, eadhon:',
+  'Punt {n}': 'Pointe {n}',
+  'Punt {n} verwijderen': 'Bain pointe {n}',
+  'Rij {n} verwijderen': 'Bain líne {n}',
+  'Foto {n} verwijderen': 'Bain grianghraf {n}',
+  'Wat is er te zien op de foto?': 'Cad atá le feiceáil sa ghrianghraf?',
+  'Van wie is de foto?': 'Cé leis an grianghraf?',
+  'Foto toevoegen': 'Cuir grianghraf leis',
+  'Verplicht': 'Riachtanach',
+  'Alles is ingevuld.': 'Tá gach rud líonta.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      '{n} le déanamh sula mbeidh tú in ann a sheoladh:',
+  'klaar': 'críochnaithe',
+  '{n} open': '{n} oscailte',
+  'Dit formulier kan niet worden ingevuld.':
+      'Ní féidir an fhoirm seo a líonadh.',
+  'Naar de bron': 'Chuig an bhfoinse',
+  'Woorden': 'Focail',
+  'Tekens': 'Carachtair',
+  'Keuzes': 'Roghanna',
+  'Rijen': 'Línte',
+  'Foto’s': 'Grianghraif',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} ({min} ar a laghad)',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} ({max} ar a mhéad)',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} ({min} ar a laghad, {max} ar a mhéad)',
+  'Invullen': 'Líon isteach',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Tá rud éigin cearr leis an bhfoirm seo. Téigh i dteagmháil leis an duine a rinne í.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

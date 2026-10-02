@@ -1645,6 +1645,35 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kies een datum': 'Agħżel data',
+  'Anders, namelijk:': 'Oħra, jiġifieri:',
+  'Punt {n}': 'Element {n}',
+  'Punt {n} verwijderen': 'Neħħi l-element {n}',
+  'Rij {n} verwijderen': 'Neħħi r-ringiela {n}',
+  'Foto {n} verwijderen': 'Neħħi r-ritratt {n}',
+  'Wat is er te zien op de foto?': 'X\'jidher fir-ritratt?',
+  'Van wie is de foto?': 'Ta\' min huwa r-ritratt?',
+  'Foto toevoegen': 'Żid ritratt',
+  'Verplicht': 'Meħtieġ',
+  'Alles is ingevuld.': 'Kollox ġie mimli.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Fadal {n} x\'tagħmel qabel ma tkun tista\' tibgħat:',
+  'klaar': 'lest',
+  '{n} open': '{n} miftuħa',
+  'Dit formulier kan niet worden ingevuld.':
+      'Din il-formola ma tistax tiġi mimlija.',
+  'Naar de bron': 'Mur għas-sors',
+  'Woorden': 'Kelmiet',
+  'Tekens': 'Karattri',
+  'Keuzes': 'Għażliet',
+  'Rijen': 'Ringieli',
+  'Foto’s': 'Ritratti',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mill-inqas {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (l-aktar {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mill-inqas {min}, l-aktar {max})',
+  'Invullen': 'Imla',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Xi ħaġa mhix sewwa f\'din il-formola. Ikkuntattja lil dak li ħarġuha.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

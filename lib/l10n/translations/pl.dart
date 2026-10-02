@@ -1639,6 +1639,35 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kies een datum': 'Wybierz datę',
+  'Anders, namelijk:': 'Inne, mianowicie:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Usuń punkt {n}',
+  'Rij {n} verwijderen': 'Usuń wiersz {n}',
+  'Foto {n} verwijderen': 'Usuń zdjęcie {n}',
+  'Wat is er te zien op de foto?': 'Co widać na zdjęciu?',
+  'Van wie is de foto?': 'Czyje jest to zdjęcie?',
+  'Foto toevoegen': 'Dodaj zdjęcie',
+  'Verplicht': 'Wymagane',
+  'Alles is ingevuld.': 'Wszystko jest wypełnione.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Zostało jeszcze {n} do zrobienia, zanim będzie można wysłać:',
+  'klaar': 'gotowe',
+  '{n} open': '{n} otwartych',
+  'Dit formulier kan niet worden ingevuld.':
+      'Tego formularza nie można wypełnić.',
+  'Naar de bron': 'Do źródła',
+  'Woorden': 'Słowa',
+  'Tekens': 'Znaki',
+  'Keuzes': 'Wybory',
+  'Rijen': 'Wiersze',
+  'Foto’s': 'Zdjęcia',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minimum {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (maksimum {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minimum {min}, maksimum {max})',
+  'Invullen': 'Wypełnij',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Coś jest nie tak z tym formularzem. Skontaktuj się z osobą, która go przygotowała.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

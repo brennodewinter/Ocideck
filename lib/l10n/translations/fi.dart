@@ -1627,6 +1627,35 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kies een datum': 'Valitse päivämäärä',
+  'Anders, namelijk:': 'Muu, nimittäin:',
+  'Punt {n}': 'Kohta {n}',
+  'Punt {n} verwijderen': 'Poista kohta {n}',
+  'Rij {n} verwijderen': 'Poista rivi {n}',
+  'Foto {n} verwijderen': 'Poista valokuva {n}',
+  'Wat is er te zien op de foto?': 'Mitä valokuvassa näkyy?',
+  'Van wie is de foto?': 'Kenen valokuva tämä on?',
+  'Foto toevoegen': 'Lisää valokuva',
+  'Verplicht': 'Pakollinen',
+  'Alles is ingevuld.': 'Kaikki on täytetty.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Vielä {n} tehtävää ennen kuin voit lähettää:',
+  'klaar': 'valmis',
+  '{n} open': '{n} avoinna',
+  'Dit formulier kan niet worden ingevuld.': 'Tätä lomaketta ei voi täyttää.',
+  'Naar de bron': 'Lähteeseen',
+  'Woorden': 'Sanat',
+  'Tekens': 'Merkit',
+  'Keuzes': 'Valinnat',
+  'Rijen': 'Rivit',
+  'Foto’s': 'Valokuvat',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (vähintään {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (enintään {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (vähintään {min}, enintään {max})',
+  'Invullen': 'Täytä',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Tässä lomakkeessa on jotain vialla. Ota yhteyttä sen tekijään.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':

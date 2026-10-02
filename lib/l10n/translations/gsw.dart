@@ -1630,6 +1630,36 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kies een datum': 'Datum uuswähle',
+  'Anders, namelijk:': 'Anders, nämlich:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Punkt {n} entferne',
+  'Rij {n} verwijderen': 'Zile {n} entferne',
+  'Foto {n} verwijderen': 'Foti {n} entferne',
+  'Wat is er te zien op de foto?': 'Was isch uf em Foti z gseh?',
+  'Van wie is de foto?': 'Vo wem isch s Foti?',
+  'Foto toevoegen': 'Foti dezuefüege',
+  'Verplicht': 'Pflicht',
+  'Alles is ingevuld.': 'Alles isch uusgfüllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'No {n} z mache, bevor du chasch schicke:',
+  'klaar': 'erledigt',
+  '{n} open': '{n} offe',
+  'Dit formulier kan niet worden ingevuld.':
+      'Das Formular cha nöd uusgfüllt wärde.',
+  'Naar de bron': 'Zur Quelle',
+  'Woorden': 'Wörter',
+  'Tekens': 'Zeiche',
+  'Keuzes': 'Uswahle',
+  'Rijen': 'Zile',
+  'Foto’s': 'Foti',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mindestens {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (höchstens {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mindestens {min}, höchstens {max})',
+  'Invullen': 'Uusfülle',
   'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
       'Mit dem Formular stimmt öppis nöd. Nimm Kontakt uf mit dem, wo\'s gmacht het.',
   'Dit veld is verplicht. Vul het in om te kunnen versturen.':
