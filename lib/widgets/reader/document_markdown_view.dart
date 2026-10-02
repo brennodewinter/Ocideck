@@ -496,6 +496,12 @@ class DocumentMarkdownView extends StatelessWidget {
 
   // ── Parsing (pure; shared by build and blockTexts) ────────────────────────
 
+  /// De brontekst zoals een lezer hem ziet: zonder de definities van de voetnoten
+  /// en zonder de markers van een geldig formulier. Die zijn bron, geen tekst —
+  /// zonder dit verscheen elke `<!-- field … -->` als alinea (FORM_INTAKE.md §4.9).
+  static String _readableSource(String markdown) =>
+      stripFootnoteDefinitions(stripFormMarkers(markdown));
+
   /// Splits [markdown] into ordered block descriptors. Deterministic and free of
   /// any BuildContext, so [build] (widgets) and [blockTexts] (search text) share
   /// one classification and can never drift apart.
@@ -504,10 +510,8 @@ class DocumentMarkdownView extends StatelessWidget {
     // auteur ze parkeerde, en de noot hoort onderaan het vel of achterin.
     // Hier eruit, zodat élke ingang (weergave, zoektekst, pagina-einden,
     // koppen) dezelfde blokken ziet en de indices nooit uiteenlopen.
-    final lines = stripFootnoteDefinitions(
-      // De markers van een geldig formulier zijn bron, geen tekst: zonder dit
-      // verscheen elke `<!-- field … -->` als alinea (FORM_INTAKE.md §4.9).
-      stripFormMarkers(markdown),
+    final lines = _readableSource(
+      markdown,
     ).replaceAll('\r\n', '\n').split('\n');
     final blocks = <_Block>[];
 

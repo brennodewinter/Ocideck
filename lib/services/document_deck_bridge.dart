@@ -99,31 +99,14 @@ class DocumentDeckBridge {
         continue;
       }
 
-      // Een pentest-envelop is één atomair blok. Deze tak staat vóór de
-      // kop-tak; zie [_pentestEnvelopeSlide] voor waarom die volgorde het punt
-      // is.
-      final block = pentest.blockAt(i);
-      if (block != null && block.start == i) {
+      // Een pentest-envelop of een formulierblok is één atomair blok. Deze tak
+      // staat vóór de kop-tak; zie [_atomicBlockAt] voor waarom die volgorde
+      // het punt is.
+      final atomic = _atomicBlockAt(i, pentest, form, rawLines, lines);
+      if (atomic != null) {
         flushFlow();
-        slides.add(_pentestEnvelopeSlide(block, rawLines, lines));
-        i = block.end;
-        continue;
-      }
-
-      // Een formulierblok (de kop, een notice of een heel veld) is óók één
-      // dia, om dezelfde reden: een veld heeft vaak zelf een kop als label
-      // (`## Het verhaal`), en de kopsplitsing zou het label van zijn antwoord
-      // scheiden. De scanner leest dan een antwoord zonder te weten welke
-      // vraag erbij hoort (FORM_INTAKE.md §4.9, rij 8).
-      final formBlock = form.blockAt(i);
-      if (formBlock != null && formBlock.start == i) {
-        flushFlow();
-        slides.add(
-          Slide.create(SlideType.freeMarkdown).copyWith(
-            customMarkdown: rawLines.slice(formBlock.start, formBlock.end),
-          ),
-        );
-        i = formBlock.end;
+        slides.add(atomic.slide);
+        i = atomic.end;
         continue;
       }
 
@@ -314,6 +297,43 @@ Slide _markedTableSlide(
   customMarkdown: rawLines.slice(start, end),
   tableRows: decodeMarkdownTableRows(lines.sublist(start + 1, end)),
 );
+
+/// De dia en het eindregelnummer van het atomaire blok dat op regel [i] begint:
+/// een pentest-envelop of een formulierblok (de kop, een notice, een heel veld).
+/// `null` wanneer er op [i] geen blok begint — ook niet wanneer [i] midden in
+/// een blok valt, want dan is een andere tak al in dat blok binnengekomen en een
+/// tweede dia zou zijn regels verdubbelen.
+///
+/// **Waarom vóór de kopsplitsing.** Zonder dit knipt die splitsing een bevinding
+/// op elke `#### Description` in stukken, en een formulierveld — dat vaak zelf een
+/// kop als label heeft (`## Het verhaal`) — van zijn antwoord. De scanner leest
+/// dan een antwoord zonder te weten welke vraag erbij hoort (PENTEST_DOCUMENT.md
+/// §6.1, FORM_INTAKE.md §4.9 rij 8).
+({Slide slide, int end})? _atomicBlockAt(
+  int i,
+  PentestBlockScan pentest,
+  FormBlockScan form,
+  _ExactLineRanges rawLines,
+  List<String> lines,
+) {
+  final block = pentest.blockAt(i);
+  if (block != null && block.start == i) {
+    return (
+      slide: _pentestEnvelopeSlide(block, rawLines, lines),
+      end: block.end,
+    );
+  }
+  final formBlock = form.blockAt(i);
+  if (formBlock != null && formBlock.start == i) {
+    return (
+      slide: Slide.create(SlideType.freeMarkdown).copyWith(
+        customMarkdown: rawLines.slice(formBlock.start, formBlock.end),
+      ),
+      end: formBlock.end,
+    );
+  }
+  return null;
+}
 
 /// Eén atomaire dia voor een pentest-envelop (PENTEST_DOCUMENT.md §6).
 ///
