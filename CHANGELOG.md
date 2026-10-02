@@ -100,7 +100,11 @@ All notable changes to OciDeck are documented in this file.
   formulier), een antwoord terugschrijven in zijn zone (alleen de bytes van die
   zone veranderen; een antwoord dat het formulier zelf zou wijzigen wordt
   geweigerd) en controleren of de sjabloontekst van een inzending nog de
-  gepubliceerde is. Een lopende invulsessie (`FormFill`) is één onveranderlijke
+  gepubliceerde is. Een foto kan worden gecontroleerd en schoongemaakt voor hij een
+  inzending in gaat: het bestandstype komt uit de eerste bytes (nooit uit de naam),
+  locatie, tijdstip, apparaat en tekstblokken gaan eruit zonder de foto opnieuw te
+  coderen, het kleurprofiel en de draairichting blijven, en alles na het einde van
+  het beeld wordt afgesneden. Een lopende invulsessie (`FormFill`) is één onveranderlijke
   waarde: de pagina in documentvolgorde, het antwoord en de problemen per veld,
   tellers (woorden, tekens, punten) en of er verstuurd mag worden. Elke melding
   van de validatie heeft nu een zin voor de invuller in alle 31 talen
