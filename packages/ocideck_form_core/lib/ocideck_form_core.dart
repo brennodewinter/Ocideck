@@ -21,6 +21,7 @@ export 'src/form_field_types.dart';
 export 'src/form_fill.dart';
 export 'src/form_image.dart';
 export 'src/form_issue.dart';
+export 'src/form_maker_check.dart';
 export 'src/form_parser.dart' show parseForm;
 export 'src/form_package.dart';
 export 'src/form_patterns.dart';
