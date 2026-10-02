@@ -5885,6 +5885,39 @@ formulier opende; open je later een half ingevuld document opnieuw, dan vraagt h
 bestand te kiezen dat je kreeg. Een formulier waarvan de tekst buiten de antwoorden is veranderd
 wordt geweigerd.
 
+### Inzendingen ontvangen (organisator)
+
+De andere kant van een formulier is ontvangen wat terugkomt. Dat is een optionele uitbreiding: zet
+**Instellingen → Uitbreidingen → Formulieren en inzendingen** aan (standaard uit; een formulier
+invullen heeft het nooit nodig). Het beginscherm heeft dan een knop **Inzendingen**.
+
+1. **Kies een werkmap** — een map waarin de inzendingen en het register komen te staan. OciDeck
+   onthoudt hem. Alles erin is een gewoon bestand dat je ook zonder OciDeck kunt lezen.
+2. **Voeg het formulier toe** zoals je het hebt gepubliceerd (*Formulier toevoegen…*, een `.md`).
+   Elke inzending wordt tegen *deze* tekst gehouden — nooit tegen de regels die de inzending zelf
+   meedraagt, dus een kopie van een invuller waarin een regel is verzwakt verandert niets. Een
+   gepubliceerde versie verandert niet meer: een andere tekst onder hetzelfde id en dezelfde versie
+   wordt geweigerd; verander je het formulier, verander dan het versienummer.
+3. **Haal pakketten binnen** (*Pakketten binnenhalen…*, de `.zip`-bestanden die zijn aangekomen).
+   Een gewone zip is onderweg niet versleuteld; het venster zegt het. Elk bestand krijgt een regel:
+   *binnengehaald*, *binnengehaald, maar er zijn punten om na te lopen*, *stond er al*, *geen
+   inzendpakket dat OciDeck kan lezen*, *formulier niet toegevoegd* (voeg het eerst toe) of *niet
+   opgeslagen*. Elke foto wordt opnieuw gezuiverd en echt gedecodeerd; een bestand dat zich alleen
+   als foto voordoet wordt aangemerkt.
+
+Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor
+byte zoals ze aankwamen plus de foto's, in één stap: een crash laat nooit een halve inzending achter,
+en een inzending die er al is wordt nooit overschreven. Eén met een fout komt er wel in, met de status
+`needs-fixing`, zodat je er in een kopie aan kunt werken; niets wordt stilzwijgend aangenomen of
+weggegooid.
+
+**Het register** (`overview.md`, *Register openen*) is één Markdown-tabel met een rij per inzending:
+het nummer, de kolommen die het formulier in `overview=` noemt, de dag van ontvangst, de status, de dag
+van toestemming, ingetrokken en bewaren-tot. Het is een gewoon document: bewerk het met de
+tabelbewerker, voeg eigen kolommen toe. Maak je het zo stuk dat het niet meer te lezen is, dan meldt
+OciDeck dat en laat het met rust in plaats van over jouw wijzigingen heen te schrijven. Antwoorden
+staan er als gewone tekst in, nooit als link of afbeelding.
+
 ### Omzetten tussen een presentatie en een document
 
 Je kunt beide kanten op omzetten, en het resultaat is **altijd een kopie in een

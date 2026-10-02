@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Een organisator kan **inzendingen binnenhalen**: de nieuwe uitbreiding *Formulieren en inzendingen*
+  (Instellingen → Uitbreidingen, standaard uit) geeft het beginscherm een knop **Inzendingen**. Daar kies je
+  een werkmap, voeg je het formulier toe zoals je het publiceerde en haal je de `.zip`-pakketten binnen die
+  zijn aangekomen. Elk pakket wordt gelezen onder limieten, elke foto echt gedecodeerd en nog eens gezuiverd,
+  en de inzending gehouden tegen het **gepubliceerde** formulier. De inzending komt in één stap in
+  `submissions/<nummer>/` (nooit over een bestaande heen, een crash laat geen halve achter), een rij komt in
+  het register `overview.md`, en één met een fout komt er wel in als `needs-fixing`. Het venster zegt per bestand
+  wat er van geworden is en dat een gewone zip onderweg niet versleuteld is.
 - Het **register van een organisator** (`overview.md`, formaat §7.3) heeft zijn motor in
   `ocideck_form_core`: één Markdown-tabel met een rij per inzending (kolommen uit `overview=` van het
   formulier, dan ontvangen, status, toestemming, ingetrokken en bewaren-tot), die de Inbox bijhoudt en

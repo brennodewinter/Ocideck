@@ -5831,6 +5831,35 @@ organiser needs the form exactly as it was published: OciDeck remembers it from 
 you opened the empty form; if you reopen a half-filled document later, it asks you to choose
 the original file you received. It refuses a form whose text outside the answers was changed.
 
+### Receiving submissions (organiser)
+
+The other side of a form is receiving what comes back. It is an optional extension: switch on
+**Settings → Uitbreidingen (Extensions) → Formulieren en inzendingen** (it is off by default;
+filling in a form never needs it). The welcome screen then has an **Inzendingen** button.
+
+1. **Choose a workspace** — a folder where the submissions and the register will be kept. OciDeck
+   remembers it. Everything in it is a plain file you can also read without OciDeck.
+2. **Add the form** as you published it (*Formulier toevoegen…*, a `.md` file). Every submission is
+   checked against *this* text — never against the rules the submission itself carries, so a
+   respondent's copy that weakened a rule changes nothing. A published version never changes: other
+   text under the same id and version is refused; change the form, change its version number.
+3. **Import packages** (*Pakketten binnenhalen…*, the `.zip` files that arrived). A plain zip is not
+   encrypted in transit; the window says so. Each file gets a line: *imported*, *imported, but there
+   are points to review*, *already there*, *not a package OciDeck can read*, *form not added* (add it
+   first) or *not saved*. Every photo is cleaned again and really decoded; a file that only pretends
+   to be a photo is flagged.
+
+A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it
+arrived plus its photos, in one step: a crash never leaves half a submission, and a submission that
+is already there is never overwritten. One with an error still lands, with the status `needs-fixing`,
+so you can work on it in a copy; nothing is accepted or dropped silently.
+
+**The register** (`overview.md`, *Register openen*) is one Markdown table with a row per submission:
+its id, the columns the form names in `overview=`, the day received, the status, the day of consent,
+withdrawn and delete-after. It is an ordinary document: edit it with the table editor, add columns of
+your own. If you break it so that it can no longer be read, OciDeck reports it and leaves it alone
+instead of writing over your changes. Answers appear in it as plain text, never as links or images.
+
 ### Converting between a presentation and a document
 
 You can convert either way, and the result is **always a copy in a new tab** —

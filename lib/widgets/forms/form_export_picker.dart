@@ -2,7 +2,6 @@
 // wat de invulpagina voor het opslaan van de inzending nodig heeft
 // ([FormExportSupport]).
 
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -17,6 +16,7 @@ import '../../services/file_service.dart' show pickDocumentExportDestination;
 import '../../services/form/form_image_service.dart';
 import '../../utils/atomic_file.dart';
 import 'form_export_support.dart';
+import 'form_text_helpers.dart' show formTextOf;
 
 /// De gepubliceerde formulieren die in deze sessie zijn gezien, per formulier en
 /// versie. Het geheugen van de ondersteuning; een nieuwe sessie begint leeg, en dan
@@ -100,16 +100,4 @@ Future<String?> _pickForm(String dialogTitle) async {
   );
   if (files.isEmpty) return null;
   return formTextOf(await files.first.readAsBytes());
-}
-
-/// De tekst van een gekozen formulierbestand, of `null` als het geen UTF-8 is: een
-/// formulier is Markdown, en wat niet te lezen valt kan ook niet het gepubliceerde
-/// formulier zijn.
-@visibleForTesting
-String? formTextOf(Uint8List bytes) {
-  try {
-    return const Utf8Decoder().convert(bytes);
-  } on FormatException {
-    return null;
-  }
 }

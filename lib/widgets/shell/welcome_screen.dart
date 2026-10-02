@@ -308,6 +308,7 @@ class _WelcomeScreen extends ConsumerWidget {
       Divider(color: scheme.outlineVariant),
       const SizedBox(height: 16),
       ..._elearningEntry(context, ref, l10n, scheme, secondaryStyle),
+      ..._formsEntry(context, ref, l10n, secondaryStyle),
       _wideSecondaryButton(
         style: secondaryStyle,
         icon: Icons.folder_open_outlined,
@@ -377,6 +378,30 @@ class _WelcomeScreen extends ConsumerWidget {
       // heeft.
       ..._imageLibraryButton(context, ref, l10n),
       const SizedBox(height: 4),
+    ];
+  }
+
+  /// De Inbox van een organisator: inzendingen van een formulier binnenhalen. Desktop
+  /// (de werkmap zijn bestanden op schijf) en achter de uitbreiding Formulieren en
+  /// inzendingen. Losse methode zodat [_startColumn] onder de methodelengte-ratchet
+  /// blijft.
+  List<Widget> _formsEntry(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    ButtonStyle secondaryStyle,
+  ) {
+    if (!supportsLocalProjectFolders || !ref.watch(formsRevealProvider)) {
+      return const [];
+    }
+    return [
+      _wideSecondaryButton(
+        style: secondaryStyle,
+        icon: Icons.inbox_outlined,
+        label: Text(l10n.d('Inzendingen')),
+        onPressed: () => showFormInboxDialog(context),
+      ),
+      const SizedBox(height: 10),
     ];
   }
 
