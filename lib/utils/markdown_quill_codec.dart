@@ -3,6 +3,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:markdown_quill/markdown_quill.dart';
 
 import '../services/form_document_blocks.dart';
+import '../services/pentest_blocks.dart';
 import 'footnote_embed_syntax.dart';
 import 'form_block_embed_syntax.dart';
 import 'image_embed_syntax.dart';
@@ -146,9 +147,25 @@ class MarkdownQuillCodec {
 /// een zachte koppelteken uit een label en schreef ze een CRLF om — en een label
 /// dat verandert is sjabloontekst die niet meer overeenkomt met het gepubliceerde
 /// formulier, dus een inzending die de organisator afwijst.
+///
+/// Voor het atomaire bereik van een pentest-envelop (PENTEST_DOCUMENT.md §5.5,
+/// `block.start..block.atomicEnd`) geldt hetzelfde: de kop van een bevinding en
+/// de vier enveloppen die in hun geheel atomair zijn. Een scopeobject met `\*`,
+/// een testnaam met een zacht koppelteken of een NBSP in de ondertekening is
+/// anders na één visuele bewerking een andere tekst dan de tester schreef. De
+/// sectieteksten onder `#### Description` e.d. liggen na `atomicEnd` en blijven
+/// gewone, genormaliseerde Markdown.
+///
+/// Beide scans draaien op de RAUWE uitvoer van `DeltaToMarkdown`. Dat is juist:
+/// een atomaire embed staat daar letterlijk in (marker, kop en veldregels
+/// onaangeroerd), terwijl het proza eromheen nog ontsnapt is en dus nooit voor
+/// een markerregel kan doorgaan. Een regel is atomair als één van de twee scans
+/// hem opeist, zoals ook de visuele poort en de brug doen; hij wordt daarmee
+/// precies één keer geschreven, nooit dubbel.
 String _normalizeQuillOutput(String raw) {
-  final scan = scanFormBlocks(raw);
-  if (scan.isEmpty) return _normalizeProse(raw);
+  final pentest = scanPentestBlocks(raw);
+  final forms = scanFormBlocks(raw);
+  if (pentest.isEmpty && forms.isEmpty) return _normalizeProse(raw);
 
   final lines = raw.split('\n');
   final out = <String>[];
@@ -160,7 +177,7 @@ String _normalizeQuillOutput(String raw) {
   }
 
   for (var i = 0; i < lines.length; i++) {
-    if (scan.isAtomicLine(i)) {
+    if (pentest.isAtomicLine(i) || forms.isAtomicLine(i)) {
       flushProse();
       out.add(lines[i]);
     } else {

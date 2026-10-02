@@ -189,6 +189,18 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- Een pentestrapport kwam na één visuele bewerking niet meer byte-gelijk
+  terug. De kop van een bevinding (scopeobject, hertestnotitie) en de vier
+  enveloppen die in hun geheel atomair zijn (checklist, scope, samenvatting,
+  ondertekening) reizen als één embed door de rijke-tekstlaag, maar de
+  opslagnormalisatie liep daarna alsnog over die tekst: `\*` werd `*`, een
+  NBSP werd een spatie en een zacht koppelteken, dunne spatie of BOM
+  verdween — zo werd `a \* b` in een scopeobject stil `a * b`. Die
+  normalisatie slaat het atomaire bereik nu over, net als sinds het
+  formulierblok al voor formulieren gold; de sectieteksten onder een
+  bevinding blijven gewone, genormaliseerde Markdown. De bestaande
+  rondgangstest gebruikte alleen `<br>` als kanarie en zag dit daarom niet.
+
 - De eLearning-onderdelen hingen aan de verkeerde schakelaar. "eLearning
   volgen" (de OciServe-koppeling) is de dienst van de cursist, maar het
   statuslampje, de "Mijn cursussen"-knop en de sessie-restore keken naar
