@@ -455,6 +455,43 @@ void main() {
     expect(find.byType(Dialog), findsNothing);
   });
 
+  group('boek samenstellen', () {
+    testWidgets('zonder formulier kan het niet', (tester) async {
+      await open(tester, _Picks(), workspace: root);
+      final button = tester.widget<OutlinedButton>(
+        find.ancestor(
+          of: text('Boek samenstellen…'),
+          matching: find.byType(OutlinedButton),
+        ),
+      );
+      expect(button.onPressed, isNull);
+    });
+
+    testWidgets('met een formulier opent het het samenstelvenster', (
+      tester,
+    ) async {
+      await tester.runAsync(() => FormWorkspace(root).publishForm(kook));
+      await open(tester, _Picks(), workspace: root);
+      await pumpUntil(
+        tester,
+        () =>
+            tester
+                .widget<OutlinedButton>(
+                  find.ancestor(
+                    of: text('Boek samenstellen…'),
+                    matching: find.byType(OutlinedButton),
+                  ),
+                )
+                .onPressed !=
+            null,
+      );
+      await tester.tap(text('Boek samenstellen…'));
+      await tester.pumpAndSettle();
+      expect(text('Hoofdstuksjabloon kiezen…'), findsOneWidget);
+      expect(text('Samenstellen'), findsOneWidget);
+    });
+  });
+
   testWidgets('Register openen sluit het venster en opent het register', (
     tester,
   ) async {

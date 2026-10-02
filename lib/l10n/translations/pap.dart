@@ -666,6 +666,46 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kies het hoofdstuksjabloon': 'Skohe e mòdelo di kapítulo',
+  'Kies eerst een hoofdstuksjabloon.': 'Skohe promé un mòdelo di kapítulo.',
+  'Kies minstens één status.': 'Skohe por lo menos un status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buki kompilá. Kapítulonan: {n}. Potonan: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Retirá i p\'esei laga afó: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Saltá (otro versho of no por lesa): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Potonan ku tabata falta den e mapa di trabou: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Usa den e nòmber só lèter, number, strepi i strepi abou (máksimo 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Ya tin un buki ku e nòmber akí. Skohe un otro nòmber.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'E mòdelo ta menshon kampo ku e formulario no tin: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'No tin nada pa pone den e buki: ningun envio ku un status skohé. Retirá: {w}; saltá: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'No por lesa e rehistro. Ripará overview.md.',
+  'Het boek kon niet worden geschreven.': 'No por a skirbi e buki.',
+  'Boek samenstellen…': 'Kompilá buki…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'E buki ta drenta den e mapa book di e mapa di trabou i ta keda un dokumento normal ku bo por edita despues.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'No tin ningun formulario útil den e mapa di trabou.',
+  'Formulier': 'Formulario',
+  'Hoofdstuksjabloon': 'Mòdelo di kapítulo',
+  'Nog geen sjabloon gekozen.': 'Ainda no a skohe ningun mòdelo.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Den e mòdelo, {veld-id} ta paara pa e kontesta riba e kampo ei.',
+  'Hoofdstuksjabloon kiezen…': 'Skohe mòdelo di kapítulo…',
+  'Welke inzendingen?': 'Kua envionan?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Ta solamente envionan ku un di e statusnan aki ta drenta den e buki. Envionan retirá ta keda semper afó.',
+  'Ordenen op': 'Ordená segun',
+  'Groeperen op': 'Agrupá segun',
+  'Naam van het boek': 'Nòmber di e buki',
+  'Boek openen': 'Habri buki',
+  'Samenstellen': 'Kompilá',
   'De werkkopie kon niet worden aangemaakt.':
       'No a por a krea e kopia di trabou.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

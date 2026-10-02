@@ -667,6 +667,46 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kies het hoofdstuksjabloon': 'Haadstiksjabloan kieze',
+  'Kies eerst een hoofdstuksjabloon.': 'Kies earst in haadstiksjabloan.',
+  'Kies minstens één status.': 'Kies teminsten ien status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Boek gearsteld. Haadstikken: {n}. Foto\'s: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Weromlutsen en dêrom weilitten: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Oerslein (oare ferzje of net te lêzen): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foto\'s dy\'t yn de wurkmap ûntbrieken: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Brûk yn de namme allinnich letters, sifers, streepkes en ûnderstreepkes (hast 64 tekens).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Der stiet al in boek mei dizze namme. Kies in oare namme.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'It sjabloan neamt fjilden dy\'t it formulier net hat: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Der is neat om yn it boek te setten: gjin ynstjoering mei in keazen status. Weromlutsen: {w}; oerslein: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'It register kin net lêzen wurde. Herstel overview.md.',
+  'Het boek kon niet worden geschreven.': 'It boek koe net skreaun wurde.',
+  'Boek samenstellen…': 'Boek gearstalle…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'It boek komt yn de map book fan de wurkmap en bliuwt in gewoan dokumint dat jo dernei sels bewurkje kinne.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Der is gjin brûkber formulier yn de wurkmap.',
+  'Formulier': 'Formulier',
+  'Hoofdstuksjabloon': 'Haadstiksjabloan',
+  'Nog geen sjabloon gekozen.': 'Noch gjin sjabloan keazen.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Yn it sjabloan stiet {veld-id} foar it antwurd op dat fjild.',
+  'Hoofdstuksjabloon kiezen…': 'Haadstiksjabloan kieze…',
+  'Welke inzendingen?': 'Hokker ynstjoeringen?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Allinnich ynstjoeringen mei ien fan dizze statussen komme yn it boek. Weromlutsen ynstjoeringen bliuwe der altyd út.',
+  'Ordenen op': 'Oardenje op',
+  'Groeperen op': 'Groepearje op',
+  'Naam van het boek': 'Namme fan it boek',
+  'Boek openen': 'Boek iepenje',
+  'Samenstellen': 'Gearstalle',
   'De werkkopie kon niet worden aangemaakt.':
       'De wurkkopy koe net makke wurde.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

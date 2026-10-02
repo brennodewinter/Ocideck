@@ -1627,6 +1627,47 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Pilih templat bab',
+  'Kies eerst een hoofdstuksjabloon.': 'Pilih templat bab terlebih dahulu.',
+  'Kies minstens één status.': 'Pilih setidaknya satu status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buku disusun. Bab: {n}. Foto: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Ditarik kembali sehingga dilewatkan: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Dilewati (versi lain atau tidak terbaca): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foto yang hilang dari folder kerja: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Pada nama gunakan hanya huruf, angka, tanda hubung, dan garis bawah (paling banyak 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Sudah ada buku dengan nama ini. Pilih nama lain.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Templat menyebut kolom yang tidak dimiliki formulir: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Tidak ada yang bisa dimasukkan ke dalam buku: tidak ada kiriman dengan status yang dipilih. Ditarik kembali: {w}; dilewati: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Register tidak dapat dibaca. Perbaiki overview.md.',
+  'Het boek kon niet worden geschreven.': 'Buku tidak dapat ditulis.',
+  'Boek samenstellen…': 'Susun buku…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Buku masuk ke folder book di dalam folder kerja dan tetap menjadi dokumen biasa yang dapat Anda sunting sesudahnya.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Tidak ada formulir yang dapat dipakai di folder kerja.',
+  'Formulier': 'Formulir',
+  'Hoofdstuksjabloon': 'Templat bab',
+  'Nog geen sjabloon gekozen.': 'Belum ada templat yang dipilih.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Dalam templat, {veld-id} berarti jawaban untuk kolom itu.',
+  'Hoofdstuksjabloon kiezen…': 'Pilih templat bab…',
+  'Welke inzendingen?': 'Kiriman yang mana?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Hanya kiriman dengan salah satu status ini yang masuk ke dalam buku. Kiriman yang ditarik kembali selalu dikecualikan.',
+  'Ordenen op': 'Urutkan menurut',
+  'Groeperen op': 'Kelompokkan menurut',
+  'Naam van het boek': 'Nama buku',
+  'Boek openen': 'Buka buku',
+  'Samenstellen': 'Susun',
   'De werkkopie kon niet worden aangemaakt.':
       'Salinan kerja tidak dapat dibuat.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

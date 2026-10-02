@@ -1643,6 +1643,46 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Alege șablonul de capitol',
+  'Kies eerst een hoofdstuksjabloon.': 'Alege mai întâi un șablon de capitol.',
+  'Kies minstens één status.': 'Alege cel puțin o stare.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Cartea a fost alcătuită. Capitole: {n}. Fotografii: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Retrase și de aceea omise: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Omise (altă versiune sau ilizibile): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotografii care lipseau din folderul de lucru: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'În nume folosește doar litere, cifre, cratime și liniuțe de subliniere (cel mult 64 de caractere).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Există deja o carte cu acest nume. Alege alt nume.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Șablonul menționează câmpuri pe care formularul nu le are: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nu e nimic de pus în carte: nicio trimitere cu o stare aleasă. Retrase: {w}; omise: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registrul nu poate fi citit. Repară overview.md.',
+  'Het boek kon niet worden geschreven.': 'Cartea nu a putut fi scrisă.',
+  'Boek samenstellen…': 'Alcătuiește cartea…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Cartea ajunge în folderul book din folderul de lucru și rămâne un document obișnuit pe care îl poți edita ulterior.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Nu există niciun formular utilizabil în folderul de lucru.',
+  'Formulier': 'Formular',
+  'Hoofdstuksjabloon': 'Șablon de capitol',
+  'Nog geen sjabloon gekozen.': 'Încă nu a fost ales niciun șablon.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'În șablon, {veld-id} reprezintă răspunsul la acel câmp.',
+  'Hoofdstuksjabloon kiezen…': 'Alege șablonul de capitol…',
+  'Welke inzendingen?': 'Care trimiteri?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'În carte intră doar trimiterile cu una dintre aceste stări. Trimiterile retrase rămân mereu pe dinafară.',
+  'Ordenen op': 'Sortează după',
+  'Groeperen op': 'Grupează după',
+  'Naam van het boek': 'Numele cărții',
+  'Boek openen': 'Deschide cartea',
+  'Samenstellen': 'Alcătuiește',
   'De werkkopie kon niet worden aangemaakt.':
       'Copia de lucru nu a putut fi creată.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

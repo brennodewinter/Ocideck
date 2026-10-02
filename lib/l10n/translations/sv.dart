@@ -1626,6 +1626,47 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Välj kapitelmall',
+  'Kies eerst een hoofdstuksjabloon.': 'Välj först en kapitelmall.',
+  'Kies minstens één status.': 'Välj minst en status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Boken är sammanställd. Kapitel: {n}. Foton: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Återkallade och därför utelämnade: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Överhoppade (annan version eller oläsliga): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foton som saknades i arbetsmappen: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Använd bara bokstäver, siffror, bindestreck och understreck i namnet (högst 64 tecken).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Det finns redan en bok med det här namnet. Välj ett annat namn.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Mallen nämner fält som formuläret inte har: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Det finns inget att lägga i boken: ingen inlämning med vald status. Återkallade: {w}; överhoppade: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registret kan inte läsas. Reparera overview.md.',
+  'Het boek kon niet worden geschreven.': 'Boken kunde inte skrivas.',
+  'Boek samenstellen…': 'Sammanställ bok…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Boken hamnar i mappen book i arbetsmappen och förblir ett vanligt dokument som du sedan kan redigera själv.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Det finns inget användbart formulär i arbetsmappen.',
+  'Formulier': 'Formulär',
+  'Hoofdstuksjabloon': 'Kapitelmall',
+  'Nog geen sjabloon gekozen.': 'Ingen mall vald ännu.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'I mallen står {veld-id} för svaret på det fältet.',
+  'Hoofdstuksjabloon kiezen…': 'Välj kapitelmall…',
+  'Welke inzendingen?': 'Vilka inlämningar?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Bara inlämningar med någon av dessa statusar hamnar i boken. Återkallade inlämningar lämnas alltid utanför.',
+  'Ordenen op': 'Sortera efter',
+  'Groeperen op': 'Gruppera efter',
+  'Naam van het boek': 'Bokens namn',
+  'Boek openen': 'Öppna boken',
+  'Samenstellen': 'Sammanställ',
   'De werkkopie kon niet worden aangemaakt.': 'Arbetskopian kunde inte skapas.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
       'Öppnar en kopia av inlämningen att förbättra. Det som kom in förblir oförändrat.',

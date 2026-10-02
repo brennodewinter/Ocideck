@@ -1627,6 +1627,47 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Vælg kapitelskabelon',
+  'Kies eerst een hoofdstuksjabloon.': 'Vælg først en kapitelskabelon.',
+  'Kies minstens één status.': 'Vælg mindst én status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Bogen er sammensat. Kapitler: {n}. Fotos: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Trukket tilbage og derfor udeladt: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Sprunget over (anden version eller ulæselig): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotos der manglede i arbejdsmappen: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Brug kun bogstaver, cifre, bindestreger og understregninger i navnet (højst 64 tegn).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Der findes allerede en bog med dette navn. Vælg et andet navn.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Skabelonen nævner felter, som formularen ikke har: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Der er intet at sætte i bogen: ingen indsendelse med en valgt status. Trukket tilbage: {w}; sprunget over: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registret kan ikke læses. Reparer overview.md.',
+  'Het boek kon niet worden geschreven.': 'Bogen kunne ikke skrives.',
+  'Boek samenstellen…': 'Sammensæt bog…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Bogen kommer i mappen book i arbejdsmappen og forbliver et almindeligt dokument, som du bagefter selv kan redigere.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Der er ingen brugbar formular i arbejdsmappen.',
+  'Formulier': 'Formular',
+  'Hoofdstuksjabloon': 'Kapitelskabelon',
+  'Nog geen sjabloon gekozen.': 'Ingen skabelon valgt endnu.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'I skabelonen står {veld-id} for svaret på det felt.',
+  'Hoofdstuksjabloon kiezen…': 'Vælg kapitelskabelon…',
+  'Welke inzendingen?': 'Hvilke indsendelser?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Kun indsendelser med en af disse statusser kommer i bogen. Tilbagetrukne indsendelser holdes altid ude.',
+  'Ordenen op': 'Sortér efter',
+  'Groeperen op': 'Gruppér efter',
+  'Naam van het boek': 'Bogens navn',
+  'Boek openen': 'Åbn bogen',
+  'Samenstellen': 'Sammensæt',
   'De werkkopie kon niet worden aangemaakt.':
       'Arbejdskopien kunne ikke oprettes.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

@@ -1642,6 +1642,46 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Вибрати шаблон розділу',
+  'Kies eerst een hoofdstuksjabloon.': 'Спершу виберіть шаблон розділу.',
+  'Kies minstens één status.': 'Виберіть принаймні один статус.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Книгу складено. Розділів: {n}. Фото: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Відкликано, тому пропущено: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Пропущено (інша версія або неможливо прочитати): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Фото, яких не було в робочій папці: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'В імені використовуйте лише літери, цифри, дефіси та підкреслення (не більше 64 символів).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Книга з такою назвою вже існує. Виберіть іншу назву.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'У шаблоні згадано поля, яких немає у формі: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Нічого додавати до книги: немає надсилань із вибраним статусом. Відкликано: {w}; пропущено: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Реєстр неможливо прочитати. Виправте overview.md.',
+  'Het boek kon niet worden geschreven.': 'Книгу не вдалося записати.',
+  'Boek samenstellen…': 'Скласти книгу…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Книга потрапляє до папки book у робочій папці й лишається звичайним документом, який ви потім можете редагувати.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'У робочій папці немає придатної форми.',
+  'Formulier': 'Форма',
+  'Hoofdstuksjabloon': 'Шаблон розділу',
+  'Nog geen sjabloon gekozen.': 'Шаблон ще не вибрано.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'У шаблоні {veld-id} означає відповідь на це поле.',
+  'Hoofdstuksjabloon kiezen…': 'Вибрати шаблон розділу…',
+  'Welke inzendingen?': 'Які надсилання?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'До книги потрапляють лише надсилання з одним із цих статусів. Відкликані надсилання завжди залишаються поза нею.',
+  'Ordenen op': 'Сортувати за',
+  'Groeperen op': 'Групувати за',
+  'Naam van het boek': 'Назва книги',
+  'Boek openen': 'Відкрити книгу',
+  'Samenstellen': 'Скласти',
   'De werkkopie kon niet worden aangemaakt.':
       'Не вдалося створити робочу копію.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

@@ -5937,6 +5937,17 @@ Onder een opengeklapte inzending staan de **acties**:
   op de werkkopie — een punt dat je herstelde is weg, en de regel zegt dat de beoordeling over de werkkopie
   gaat — en kun je haar status verder zetten. Verander je in de werkkopie de eigen tekst van het formulier, dan
   zegt de Inbox dat: dat is geen antwoord.
+- **Boek samenstellen…** — maak van de goedgekeurde inzendingen één document. Kies het formulier, een
+  **hoofdstuksjabloon** (een gewoon `.md`-bestand waarin `{veld-id}` staat voor het antwoord op dat veld), welke
+  **statussen** erin komen (kent het formulier `maker-approved`, dan staat die al aan; anders staat er niets aan en
+  kies je zelf), eventueel één veld om op te **ordenen** en één om op te **groeperen**, en een naam. Het boek wordt
+  als **nieuw document** geschreven in de map `book` van de werkmap en nooit over een bestaand heen; de foto's worden
+  ernaast gekopieerd als `images/<id>-<veld>-<n>.<ext>`. Een antwoord gaat erin als de Markdown die het is, heel;
+  **een ingetrokken inzending komt er nooit in**; een sjabloon dat een veld noemt dat het formulier niet heeft wordt
+  geweigerd, met de naam van het veld. Waaruit het boek is gemaakt — welke inzendingen, onder welke toestemming, wie
+  welke foto maakte — staat ernaast in `<naam>.compile.json`, niet in de tekst. De zin erna zegt hoeveel hoofdstukken
+  en foto's erin gingen en hoeveel inzendingen waren ingetrokken of overgeslagen (andere versie van het formulier, of
+  niet te lezen), en biedt aan het boek te openen.
 Elke actie zegt hoe het ging. Een register dat niet te lezen is wordt nooit overschreven.
 
 Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor

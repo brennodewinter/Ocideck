@@ -17,6 +17,7 @@ import '../../services/form/form_import.dart';
 import '../../services/form/form_workspace.dart';
 import '../../state/forms_provider.dart';
 import '../../state/tabs_provider.dart';
+import 'form_book_dialog.dart';
 import 'form_inbox_list.dart';
 import 'form_text_helpers.dart' show formTextOf;
 
@@ -252,6 +253,17 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
     await tabs.openFileByPath(path);
   }
 
+  Future<void> _compileBook() async {
+    final workspace = _workspace;
+    if (workspace == null) return;
+    await showFormBookDialog(
+      context,
+      workspace: workspace,
+      forms: _forms,
+      onOpenFile: _open,
+    );
+  }
+
   Future<void> _openRegister() async {
     final workspace = _workspace;
     if (workspace != null) await _open(workspace.registerPath);
@@ -341,6 +353,12 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
                       OutlinedButton(
                         onPressed: _busy ? null : _openRegister,
                         child: Text(l10n.d('Register openen')),
+                      ),
+                      OutlinedButton(
+                        onPressed: _busy || _forms.isEmpty
+                            ? null
+                            : _compileBook,
+                        child: Text(l10n.d('Boek samenstellen…')),
                       ),
                     ],
                   ),

@@ -1631,6 +1631,46 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Odaberi predložak poglavlja',
+  'Kies eerst een hoofdstuksjabloon.': 'Najprije odaberi predložak poglavlja.',
+  'Kies minstens één status.': 'Odaberi barem jedan status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Knjiga je sastavljena. Poglavlja: {n}. Fotografije: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Povučene i stoga izostavljene: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Preskočene (druga verzija ili nečitljive): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotografije koje su nedostajale u radnoj mapi: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'U nazivu koristi samo slova, znamenke, crtice i podcrte (najviše 64 znaka).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Knjiga s ovim nazivom već postoji. Odaberi drugi naziv.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Predložak navodi polja koja obrazac nema: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nema ničega za staviti u knjigu: nijedna prijava s odabranim statusom. Povučene: {w}; preskočene: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registar se ne može pročitati. Popravi overview.md.',
+  'Het boek kon niet worden geschreven.': 'Knjigu nije bilo moguće zapisati.',
+  'Boek samenstellen…': 'Sastavi knjigu…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Knjiga ide u mapu book unutar radne mape i ostaje obični dokument koji potom možeš sam uređivati.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'U radnoj mapi nema upotrebljivog obrasca.',
+  'Formulier': 'Obrazac',
+  'Hoofdstuksjabloon': 'Predložak poglavlja',
+  'Nog geen sjabloon gekozen.': 'Predložak još nije odabran.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'U predlošku {veld-id} označava odgovor na to polje.',
+  'Hoofdstuksjabloon kiezen…': 'Odaberi predložak poglavlja…',
+  'Welke inzendingen?': 'Koje prijave?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'U knjigu ulaze samo prijave s jednim od ovih statusa. Povučene prijave uvijek ostaju izvan nje.',
+  'Ordenen op': 'Poredaj po',
+  'Groeperen op': 'Grupiraj po',
+  'Naam van het boek': 'Naziv knjige',
+  'Boek openen': 'Otvori knjigu',
+  'Samenstellen': 'Sastavi',
   'De werkkopie kon niet worden aangemaakt.':
       'Radnu kopiju nije bilo moguće izraditi.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

@@ -2538,6 +2538,47 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Bölüm şablonunu seç',
+  'Kies eerst een hoofdstuksjabloon.': 'Önce bir bölüm şablonu seçin.',
+  'Kies minstens één status.': 'En az bir durum seçin.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Kitap derlendi. Bölümler: {n}. Fotoğraflar: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Geri çekildi ve bu yüzden dışarıda bırakıldı: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Atlandı (başka sürüm veya okunamıyor): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Çalışma klasöründe eksik olan fotoğraflar: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Adda yalnızca harf, rakam, tire ve alt çizgi kullanın (en fazla 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Bu adda bir kitap zaten var. Başka bir ad seçin.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Şablon, formda bulunmayan alanlardan söz ediyor: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Kitaba konacak bir şey yok: seçilen durumda hiçbir gönderi yok. Geri çekilen: {w}; atlanan: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Kayıt okunamıyor. overview.md dosyasını onarın.',
+  'Het boek kon niet worden geschreven.': 'Kitap yazılamadı.',
+  'Boek samenstellen…': 'Kitabı derle…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Kitap, çalışma klasörünün book klasörüne gider ve sonradan kendiniz düzenleyebileceğiniz sıradan bir belge olarak kalır.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Çalışma klasöründe kullanılabilir bir form yok.',
+  'Formulier': 'Form',
+  'Hoofdstuksjabloon': 'Bölüm şablonu',
+  'Nog geen sjabloon gekozen.': 'Henüz şablon seçilmedi.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Şablonda {veld-id}, o alanın yanıtını temsil eder.',
+  'Hoofdstuksjabloon kiezen…': 'Bölüm şablonunu seç…',
+  'Welke inzendingen?': 'Hangi gönderiler?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Kitaba yalnızca bu durumlardan birine sahip gönderiler girer. Geri çekilen gönderiler her zaman dışarıda kalır.',
+  'Ordenen op': 'Şuna göre sırala',
+  'Groeperen op': 'Şuna göre grupla',
+  'Naam van het boek': 'Kitabın adı',
+  'Boek openen': 'Kitabı aç',
+  'Samenstellen': 'Derle',
   'De werkkopie kon niet worden aangemaakt.': 'Çalışma kopyası oluşturulamadı.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
       'İyileştirmek için gönderinin bir kopyasını açar. Gelen olduğu gibi kalır.',

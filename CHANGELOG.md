@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- In de Inbox maakt **Boek samenstellen…** van de goedgekeurde inzendingen één document (formaat §7.5). Je kiest het
+  formulier, een hoofdstuksjabloon, welke statussen erin komen (`maker-approved` staat al aan als het formulier die kent),
+  eventueel een veld om op te ordenen en een om op te groeperen, en een naam. Het boek komt als **nieuw document** in de
+  map `book` van de werkmap — nooit over een bestaand heen — met de foto's ernaast onder `images/<id>-<veld>-<n>.<ext>`;
+  wat het boek *over zichzelf* weet (welke inzendingen, onder welke toestemming, wie welke foto maakte) staat in
+  `<naam>.compile.json` ernaast, niet in de tekst. Een ingetrokken inzending komt er nooit in; een inzending van een andere
+  versie of die niet te lezen is wordt overgeslagen en geteld; een sjabloon met een onbekend veld wordt geweigerd bij naam.
+  28 nieuwe zinnen in 30 talen.
 - De **kern van het samenstellen van een boek** (formaat §7.5) staat in `ocideck_form_core`: een hoofdstuksjabloon
   met `{veld-id}`-plaatsvervangers wordt per inzending ingevuld en tot één document samengevoegd. Een antwoord gaat erin
   **als de Markdown die het al is, per veldtype en zonder iets af te kappen** (de oude kop-en-voetresolver kapte op 4096

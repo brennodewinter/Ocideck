@@ -1639,6 +1639,46 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Wybierz szablon rozdziału',
+  'Kies eerst een hoofdstuksjabloon.': 'Najpierw wybierz szablon rozdziału.',
+  'Kies minstens één status.': 'Wybierz co najmniej jeden status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Książka złożona. Rozdziały: {n}. Zdjęcia: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Wycofane, więc pominięte: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Pominięte (inna wersja lub nieczytelne): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Zdjęcia brakujące w folderze roboczym: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'W nazwie używaj tylko liter, cyfr, myślników i podkreślników (najwyżej 64 znaki).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Książka o tej nazwie już istnieje. Wybierz inną nazwę.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Szablon wymienia pola, których formularz nie ma: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nie ma nic do umieszczenia w książce: żadnego zgłoszenia z wybranym statusem. Wycofane: {w}; pominięte: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Nie można odczytać rejestru. Napraw overview.md.',
+  'Het boek kon niet worden geschreven.': 'Nie udało się zapisać książki.',
+  'Boek samenstellen…': 'Złóż książkę…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Książka trafia do folderu book w folderze roboczym i pozostaje zwykłym dokumentem, który możesz potem edytować.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'W folderze roboczym nie ma żadnego użytecznego formularza.',
+  'Formulier': 'Formularz',
+  'Hoofdstuksjabloon': 'Szablon rozdziału',
+  'Nog geen sjabloon gekozen.': 'Nie wybrano jeszcze szablonu.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'W szablonie {veld-id} oznacza odpowiedź na to pole.',
+  'Hoofdstuksjabloon kiezen…': 'Wybierz szablon rozdziału…',
+  'Welke inzendingen?': 'Które zgłoszenia?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Do książki trafiają tylko zgłoszenia z jednym z tych statusów. Wycofane zgłoszenia zawsze zostają poza nią.',
+  'Ordenen op': 'Sortuj według',
+  'Groeperen op': 'Grupuj według',
+  'Naam van het boek': 'Nazwa książki',
+  'Boek openen': 'Otwórz książkę',
+  'Samenstellen': 'Złóż',
   'De werkkopie kon niet worden aangemaakt.':
       'Nie udało się utworzyć kopii roboczej.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

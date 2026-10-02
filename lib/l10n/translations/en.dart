@@ -827,6 +827,47 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Kies het hoofdstuksjabloon': 'Choose the chapter template',
+  'Kies eerst een hoofdstuksjabloon.': 'Choose a chapter template first.',
+  'Kies minstens één status.': 'Choose at least one status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Book compiled. Chapters: {n}. Photos: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Withdrawn and therefore left out: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Skipped (other version or unreadable): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Photos missing from the workspace: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Use only letters, digits, hyphens and underscores in the name (at most 64 characters).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'A book with this name already exists. Choose another name.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'The template mentions fields the form does not have: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'There is nothing to put in the book: no submission with a chosen status. Withdrawn: {w}; skipped: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'The register cannot be read. Repair overview.md.',
+  'Het boek kon niet worden geschreven.': 'The book could not be written.',
+  'Boek samenstellen…': 'Compile book…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'The book goes into the book folder of the workspace and remains an ordinary document that you can edit afterwards.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'There is no usable form in the workspace.',
+  'Formulier': 'Form',
+  'Hoofdstuksjabloon': 'Chapter template',
+  'Nog geen sjabloon gekozen.': 'No template chosen yet.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In the template, {veld-id} stands for the answer to that field.',
+  'Hoofdstuksjabloon kiezen…': 'Choose chapter template…',
+  'Welke inzendingen?': 'Which submissions?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Only submissions with one of these statuses go into the book. Withdrawn submissions are always left out.',
+  'Ordenen op': 'Sort by',
+  'Groeperen op': 'Group by',
+  'Naam van het boek': 'Name of the book',
+  'Boek openen': 'Open book',
+  'Samenstellen': 'Compile',
   'De werkkopie kon niet worden aangemaakt.':
       'The working copy could not be created.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

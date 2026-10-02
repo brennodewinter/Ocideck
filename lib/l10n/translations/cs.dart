@@ -1628,6 +1628,46 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Vybrat šablonu kapitoly',
+  'Kies eerst een hoofdstuksjabloon.': 'Nejprve vyberte šablonu kapitoly.',
+  'Kies minstens één status.': 'Vyberte alespoň jeden stav.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Kniha byla sestavena. Kapitol: {n}. Fotografií: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Stažená, a proto vynechaná: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Přeskočená (jiná verze nebo nečitelná): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotografie, které v pracovní složce chyběly: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'V názvu používejte jen písmena, číslice, pomlčky a podtržítka (nejvýše 64 znaků).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Kniha s tímto názvem už existuje. Zvolte jiný název.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Šablona uvádí pole, která formulář nemá: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Není co vložit do knihy: žádné odeslání s vybraným stavem. Stažená: {w}; přeskočená: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registr nelze přečíst. Opravte overview.md.',
+  'Het boek kon niet worden geschreven.': 'Knihu se nepodařilo zapsat.',
+  'Boek samenstellen…': 'Sestavit knihu…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Kniha přijde do složky book v pracovní složce a zůstane obyčejným dokumentem, který pak můžete sami upravovat.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'V pracovní složce není žádný použitelný formulář.',
+  'Formulier': 'Formulář',
+  'Hoofdstuksjabloon': 'Šablona kapitoly',
+  'Nog geen sjabloon gekozen.': 'Zatím nebyla vybrána žádná šablona.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'V šabloně {veld-id} znamená odpověď na dané pole.',
+  'Hoofdstuksjabloon kiezen…': 'Vybrat šablonu kapitoly…',
+  'Welke inzendingen?': 'Která odeslání?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Do knihy se dostanou jen odeslání s jedním z těchto stavů. Stažená odeslání zůstávají vždy mimo.',
+  'Ordenen op': 'Seřadit podle',
+  'Groeperen op': 'Seskupit podle',
+  'Naam van het boek': 'Název knihy',
+  'Boek openen': 'Otevřít knihu',
+  'Samenstellen': 'Sestavit',
   'De werkkopie kon niet worden aangemaakt.':
       'Pracovní kopii se nepodařilo vytvořit.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
