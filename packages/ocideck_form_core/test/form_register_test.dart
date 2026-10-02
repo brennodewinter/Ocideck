@@ -1,6 +1,8 @@
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:test/test.dart';
 
+import 'support/manifest_fixtures.dart';
+
 const String published =
     '''<!-- form id=kook version=1 overview="naam,soort,diensten" -->
 # Inzending
@@ -208,30 +210,25 @@ void main() {
     });
 
     test('the consent day is the one the manifest records', () {
-      final honest = reviewOf();
-      final m = honest.manifest;
-      final other = FormPackageOpened(
-        manifest: FormPackageManifest(
-          submissionId: m.submissionId,
-          formId: m.formId,
-          formVersion: m.formVersion,
-          formRules: m.formRules,
-          templateSha256: m.templateSha256,
-          created: m.created,
-          clientName: m.clientName,
-          clientVersion: m.clientVersion,
-          clientRules: m.clientRules,
-          files: m.files,
-          consent: [
-            FormManifestConsent(
-              m.consent.single.field,
-              '2026-09-30',
-              m.consent.single.textSha256,
-            ),
-          ],
-        ),
-        submission: fill(),
-        images: const {},
+      final honest =
+          readFormPackage(
+                buildFormPackage(
+                  submission: fill(),
+                  template: published,
+                  spec: specOf(published),
+                  images: const {},
+                  submissionId: sidOf(0),
+                  created: DateTime.utc(2026, 10, 4),
+                  clientRules: kFormRulesVersion,
+                ),
+              )
+              as FormPackageOpened;
+      final consent = honest.manifest.consent.single;
+      final other = withManifest(
+        honest,
+        consent: [
+          FormManifestConsent(consent.field, '2026-09-30', consent.textSha256),
+        ],
       );
       final review = reviewFormPackage(other, [published]);
       expect(review.problems, isEmpty);

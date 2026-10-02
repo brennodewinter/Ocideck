@@ -15,9 +15,18 @@ import 'form_source.dart';
 
 /// The name grammar of an image in an answer (FORM_INTAKE.md §5.4): inside
 /// `images/`, lower-case, one level, a known extension.
-final RegExp kFormImagePath = RegExp(
-  r'^images/[a-z0-9-]{1,64}\.(?:jpg|png|webp|heic)$',
-);
+///
+/// The names Windows keeps for devices (`con`, `prn`, `aux`, `nul`, `com0`–`com9`,
+/// `lpt0`–`lpt9`) are refused whatever their extension: `images/nul.jpg` written on
+/// a Windows organiser's disk is not a file but the null device, and `con.jpg` is
+/// the console. (A name like `con-1.jpg` is fine: only the part before the first dot
+/// counts.)
+const String kFormImagePathPattern =
+    r'images/(?!(?:con|prn|aux|nul|com[0-9]|lpt[0-9])\.)'
+    r'[a-z0-9-]{1,64}\.(?:jpg|png|webp|heic)';
+
+/// [kFormImagePathPattern] as a whole-string test.
+final RegExp kFormImagePath = RegExp('^$kFormImagePathPattern\$');
 
 final RegExp _escape = RegExp(r'\\[!-/:-@\[-`{-~]');
 

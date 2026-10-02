@@ -471,6 +471,27 @@ void main() {
       ]);
     });
 
+    test('the names Windows keeps for devices are refused', () {
+      for (final name in ['con', 'prn', 'aux', 'nul', 'com1', 'lpt9', 'com0']) {
+        final zip = rawZip([
+          RawEntry('submission.md', utf8.encode(filled)),
+          RawEntry('manifest.json', utf8.encode('{}')),
+          RawEntry('images/$name.jpg', [1]),
+        ]);
+        final result = readFormPackage(zip) as FormPackageRefused;
+        expect(result.problems.map((p) => p.path), [
+          'images/$name.jpg',
+        ], reason: name);
+      }
+    });
+
+    test('and a client does not build one', () {
+      expect(
+        () => build(images: {'images/nul.jpg': photo}),
+        throwsArgumentError,
+      );
+    });
+
     test('a directory entry is refused', () {
       expect(
         refusal(
@@ -865,6 +886,21 @@ void main() {
       final zip = ZipDecoder().decodeBytes(build());
       final entry = zip.files.firstWhere((f) => f.name == 'images/foto-1.jpg');
       expect(entry.compression, CompressionType.none);
+    });
+  });
+
+  group('readFormPackage — what is received is kept as received', () {
+    test('the manifest and the submission come back byte for byte', () {
+      final zip = build();
+      final read = opened(zip);
+      final archive = ZipDecoder().decodeBytes(zip);
+      expect(read.manifestBytes, archive.findFile('manifest.json')!.content);
+      expect(read.submissionBytes, utf8.encode(filled));
+    });
+
+    test('a byte order mark is not dropped from the bytes', () {
+      final read = opened(build(submission: '\u{FEFF}$filled'));
+      expect(read.submissionBytes.sublist(0, 3), [0xEF, 0xBB, 0xBF]);
     });
   });
 

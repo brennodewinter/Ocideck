@@ -239,6 +239,12 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- Een inzendpakket (of een antwoord) kan geen foto meer noemen onder een naam die Windows
+  voor apparaten bewaart — `con`, `prn`, `aux`, `nul`, `com0`–`com9`, `lpt0`–`lpt9`, met welke
+  extensie ook (`images/nul.jpg` op de schijf van een Windows-organisator is het nulapparaat, geen
+  bestand). Het ontwerp (§5.4) zei het al; de naamgrammatica liet het door. Een naam die er alleen
+  op begint (`con-1.jpg`) blijft gewoon. Bij het binnenhalen bewaart de lezer ook het manifest en
+  de inzending byte voor byte zoals ze aankwamen, zodat `sha256sum` klopt.
 - Een pentestrapport kwam na één visuele bewerking niet meer byte-gelijk
   terug. De kop van een bevinding (scopeobject, hertestnotitie) en de vier
   enveloppen die in hun geheel atomair zijn (checklist, scope, samenvatting,

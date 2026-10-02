@@ -349,6 +349,11 @@ void main() {
       ]);
     });
 
+    test('a device name is no image, whatever the extension', () {
+      final a = read(marker, '![a](images/nul.jpg)\n![b](images/b-1.jpg)');
+      expect(a.images.map((i) => i.path), ['images/b-1.jpg']);
+    });
+
     test('a bad image line is left to the safety rules, not counted', () {
       final a = read(marker, '![a](http://x/1.png)\n![b](images/b-1.jpg)');
       expect(a.images.map((i) => i.path), ['images/b-1.jpg']);
