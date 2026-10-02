@@ -57,7 +57,22 @@ Images are the one thing that needs I/O, so what is known about a file arrives a
 input (`FormImageFact`); without it an image is `image-unchecked`, never silently fine.
 The counters and patterns are pinned by `test/fixtures/form_vectors.json`.
 
-The package, sealing and the image probe follow (FORM_INTAKE.md §12).
+A filled form travels as a plain zip (FORM_INTAKE.md §5.2–§5.4). `buildFormPackage` writes
+it deterministically; `readFormPackage` is the organiser's strict reader — it never throws,
+and refuses (with every problem named) what is not exactly a package this engine would write:
+
+```dart
+final zip = buildFormPackage(
+  submission: text, template: published, spec: spec, images: photos,
+  submissionId: newFormId(Random.secure()), created: today, clientRules: kFormRulesVersion,
+);
+switch (readFormPackage(zip)) {
+  case FormPackageOpened(:final submission, :final manifest, :final images): // verified
+  case FormPackageRefused(:final problems):                                  // nothing read
+}
+```
+
+Sealing (`age`) and the signed bundle follow (FORM_INTAKE.md §12).
 
 ## Working on it
 

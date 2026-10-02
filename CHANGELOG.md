@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Het **inzendpakket** van een formulier (formaat §5.2–§5.4, eerste fase: een gewone zip
+  met `submission.md`, `manifest.json` en de foto's) heeft zijn motor in
+  `ocideck_form_core`. Het bouwen is deterministisch — dezelfde invoer geeft dezelfde
+  bytes, dus `sha256sum` klopt — en de lezer van de organisator weigert alles wat niet
+  precies zo'n pakket is: zip64, versleuteling, symbolische verwijzingen, dubbele of
+  overlappende bestanden, een kop die een andere naam noemt dan de index, een foute
+  checksum of grootte, een manifest dat iets anders zegt dan het pakket bevat, en een
+  zipbom (de uitpakker stopt bij de opgegeven grootte). Er is nog geen knop in de app
+  voor; die volgt.
 - In een formulier kun je nu **foto's toevoegen** aan een fotoveld (zodra het document is
   opgeslagen). De foto wordt gezuiverd voor hij in het document komt — locatie, tijdstip en
   apparaat eruit, zonder de foto opnieuw te coderen; kleurprofiel en draairichting blijven —

@@ -5,7 +5,7 @@
   "serialNumber": "urn:uuid:300c31cc-bedd-5fcc-8220-aca52ecfed05",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-01T13:14:10.511378Z",
+    "timestamp": "2026-10-02T12:54:41.241943Z",
     "tools": {
       "components": [
         {
@@ -10925,7 +10925,9 @@
     {
       "ref": "first-party:ocideck_form_core@0.0.1",
       "dependsOn": [
-        "pkg:pub/characters@1.4.1"
+        "pkg:pub/archive@4.3.0",
+        "pkg:pub/characters@1.4.1",
+        "pkg:pub/crypto@3.0.7"
       ]
     },
     {
