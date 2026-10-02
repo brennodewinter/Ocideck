@@ -664,6 +664,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck puede importar este archivo a un nuevo documento.',
   'Kies een datum': 'Elegir una fecha',
   'Anders, namelijk:': 'Otro, concretamente:',
   'Punt {n}': 'Punto {n}',

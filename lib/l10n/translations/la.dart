@@ -1642,6 +1642,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck hanc limam in novum documentum inferre potest.',
   'Kies een datum': 'Elige diem',
   'Anders, namelijk:': 'Aliud, scilicet:',
   'Punt {n}': 'Punctum {n}',

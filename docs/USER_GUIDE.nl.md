@@ -5407,9 +5407,20 @@ gewone Markdown.
 ### Een Word- of LibreOffice-document importeren
 
 **Document importeren…** (welkomstscherm, of de documentwerkbalk) opent een
-`.docx` of `.odt` als nieuw document: koppen, alinea's, lijsten, tabellen,
-vet/cursief en links worden Markdown. De import is best-effort en schrijft
-nooit naar het bronbestand. *(Toegevoegd 2026-09-18, #2101.)*
+`.docx`, `.odt`, `.xlsx`, `.ods` of `.csv` als nieuw document: koppen,
+alinea's, lijsten, tabellen, vet/cursief en links worden Markdown. De import
+is best-effort en schrijft nooit naar het bronbestand. *(Toegevoegd
+2026-09-18, #2101.)*
+
+**Spreadsheets.** Sinds 2026-10-02 (#2225) accepteert dezelfde actie ook
+`.xlsx`, `.ods` en `.csv`: elk werkblad wordt een kop met daaronder een
+GFM-tabel waarvan de eerste rij de kop is. Formules landen als de waarde die
+het blad het laatst berekende, datums als `yyyy-mm-dd`; afbeeldingen,
+grafieken, samengevoegde cellen en opmaak hebben geen Markdown-vorm en worden
+in de *niet overgenomen*-telling benoemd in plaats van stil weg te vallen.
+Een spreadsheet die op het venster valt neemt dezelfde route, en een
+spreadsheet die via **Openen** wordt gekozen krijgt een melding die de import
+aanbiedt in plaats van een doodlopende fout.
 
 **De huisstijl meenemen.** Sinds 2026-09-19 (#2119) leest de import ook wat het
 document aan huisstijl draagt, en als er iets te vinden is toont één dialoog —

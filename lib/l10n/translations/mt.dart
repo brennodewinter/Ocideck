@@ -1645,6 +1645,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck jista\' jimporta dan il-fajl f\'dokument ġdid.',
   'Kies een datum': 'Agħżel data',
   'Anders, namelijk:': 'Oħra, jiġifieri:',
   'Punt {n}': 'Element {n}',

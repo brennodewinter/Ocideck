@@ -1634,6 +1634,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck gali importuoti šį failą į naują dokumentą.',
   'Kies een datum': 'Pasirinkti datą',
   'Anders, namelijk:': 'Kita, būtent:',
   'Punt {n}': 'Punktas {n}',

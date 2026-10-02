@@ -1652,6 +1652,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Το OciDeck μπορεί να εισαγάγει αυτό το αρχείο σε ένα νέο έγγραφο.',
   'Kies een datum': 'Επιλογή ημερομηνίας',
   'Anders, namelijk:': 'Άλλο, συγκεκριμένα:',
   'Punt {n}': 'Σημείο {n}',

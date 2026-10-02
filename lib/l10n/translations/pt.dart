@@ -1655,6 +1655,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'O OciDeck pode importar este ficheiro para um novo documento.',
   'Kies een datum': 'Escolher uma data',
   'Anders, namelijk:': 'Outro, a saber:',
   'Punt {n}': 'Ponto {n}',

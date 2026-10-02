@@ -1630,6 +1630,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck cha die Datei als neus Dokumänt importiere.',
   'Kies een datum': 'Datum uuswähle',
   'Anders, namelijk:': 'Anders, nämlich:',
   'Punt {n}': 'Punkt {n}',

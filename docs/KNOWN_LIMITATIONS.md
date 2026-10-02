@@ -228,6 +228,18 @@ asks for is kept by name even when OciDeck cannot show it; the screen uses a
 stand-in and the exports name the real one, except the PDF and LaTeX, which
 only take its serif/sans class (see above). *(Added 2026-09-19, #2119.)*
 
+## A spreadsheet import keeps values, not the sheet
+
+An `.xlsx`/`.ods`/`.csv` import produces one GFM table per worksheet: the
+*values* a reader would see — formulas land as the value the sheet last
+computed, dates as `yyyy-mm-dd`. What has no table shape stays behind:
+formatting, merged cells (flattened), column widths, charts, images and pivot
+tables, and any rows or columns past the import budget (65 536 × 1024, the
+same ceiling Excel draws). Cells lost that way are counted under *niet
+overgenomen* rather than silently dropped. `.xls` (the binary OLE2 format) is
+not recognised at all — the bytes carry no readable structure for a zip+XML
+parser. *(Added 2026-10-02, #2225.)*
+
 ## Left-to-right only
 
 The interface and the slide canvas are left-to-right. None of the 32 interface

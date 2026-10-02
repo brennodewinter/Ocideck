@@ -1620,6 +1620,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck saab selle faili uue dokumendina importida.',
   'Kies een datum': 'Vali kuupäev',
   'Anders, namelijk:': 'Muu, nimelt:',
   'Punt {n}': 'Punkt {n}',

@@ -1657,6 +1657,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Is féidir le OciDeck an comhad seo a allmhairiú mar dhoiciméad nua.',
   'Kies een datum': 'Roghnaigh dáta',
   'Anders, namelijk:': 'Eile, eadhon:',
   'Punt {n}': 'Pointe {n}',

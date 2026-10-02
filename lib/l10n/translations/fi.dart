@@ -1627,6 +1627,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck voi tuoda tämän tiedoston uudeksi asiakirjaksi.',
   'Kies een datum': 'Valitse päivämäärä',
   'Anders, namelijk:': 'Muu, nimittäin:',
   'Punt {n}': 'Kohta {n}',

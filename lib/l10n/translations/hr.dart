@@ -1631,6 +1631,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck može uvesti ovu datoteku u novi dokument.',
   'Kies een datum': 'Odaberi datum',
   'Anders, namelijk:': 'Drugo, naime:',
   'Punt {n}': 'Točka {n}',
