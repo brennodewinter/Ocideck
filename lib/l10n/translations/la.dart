@@ -1642,6 +1642,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Data locorum ex hac imagine remota sunt.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Haec imago addi non potuit. Fasciculum JPEG, PNG, WebP vel HEIC imaginis elige.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Primum documentum serva ut imagines addas.',
   'OciDeck kan dit bestand importeren naar een nieuw document.':
       'OciDeck hanc limam in novum documentum inferre potest.',
   'Kies een datum': 'Elige diem',

@@ -5806,6 +5806,14 @@ jumped to it. At the top the page says how many things are left before you can
 send, with a button for each that takes you to the question; every section heading
 shows whether it is done.
 
+A photo question has an **Add photo** button once the document is saved. The photo is
+cleaned before it goes into the document — its position, time and device are taken out
+without re-encoding the picture, and the page tells you when location data was removed —
+and checked for real, so a file that only pretends to be a photo is refused. It is stored
+as `images/<question>-<number>`, never under its original file name. Where the form asks
+for it you describe what is in the photo and say who it is by. A HEIC photo cannot be
+checked or cleaned here and is sent as it is; the page says so.
+
 Everything you type goes straight into the document: only the part between the
 answer markers changes, everything else stays byte for byte as the author wrote it.
 **Undo** takes back a whole word at a time per question, and **Visual** and **Source**

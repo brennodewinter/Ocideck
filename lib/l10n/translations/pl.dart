@@ -1639,6 +1639,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Dane lokalizacji zostały usunięte z tego zdjęcia.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Nie udało się dodać tego zdjęcia. Wybierz plik JPEG, PNG, WebP lub HEIC ze zdjęciem.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Najpierw zapisz dokument, aby dodać zdjęcia.',
   'OciDeck kan dit bestand importeren naar een nieuw document.':
       'OciDeck może zaimportować ten plik do nowego dokumentu.',
   'Kies een datum': 'Wybierz datę',

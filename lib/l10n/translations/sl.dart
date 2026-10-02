@@ -1627,6 +1627,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Podatki o lokaciji so bili odstranjeni s te fotografije.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Te fotografije ni bilo mogoče dodati. Izberite datoteko JPEG, PNG, WebP ali HEIC s fotografijo.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Najprej shranite dokument, da boste lahko dodajali fotografije.',
   'OciDeck kan dit bestand importeren naar een nieuw document.':
       'OciDeck lahko uvozi to datoteko v nov dokument.',
   'Kies een datum': 'Izberi datum',

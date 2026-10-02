@@ -5857,6 +5857,15 @@ als je er geweest bent of er naartoe sprong. Bovenaan staat hoeveel er nog te do
 is voor je kunt versturen, met per vraag een knop die je erheen brengt; elke
 sectiekop laat zien of hij klaar is.
 
+Een fotovraag heeft een knop **Foto toevoegen** zodra het document is opgeslagen. De foto
+wordt gezuiverd voor hij in het document komt — locatie, tijdstip en apparaat gaan eruit
+zonder de foto opnieuw te coderen, en de pagina zegt het wanneer locatiegegevens zijn
+verwijderd — en echt gecontroleerd, zodat een bestand dat alleen doet alsof het een foto
+is wordt geweigerd. Hij wordt bewaard als `images/<vraag>-<nummer>`, nooit onder zijn
+oorspronkelijke bestandsnaam. Waar het formulier erom vraagt geef je aan wat er op de foto
+staat en van wie hij is. Een HEIC-foto kan hier niet worden gecontroleerd of gezuiverd en
+wordt zoals hij is verstuurd; de pagina zegt dat.
+
 Alles wat je typt gaat direct in het document: alleen het stuk tussen de
 antwoordmarkers verandert, al het andere blijft byte voor byte zoals de auteur het
 schreef. **Ongedaan maken** draait per vraag een heel woord terug, en **Visueel** en

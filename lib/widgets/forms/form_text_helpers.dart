@@ -1,5 +1,8 @@
 // Kleine tekstfuncties voor de invulweergave van een formulier.
 
+import 'package:flutter/widgets.dart'
+    show TextEditingController, TextEditingValue, TextSelection;
+
 /// De korte naam van een veld, voor de samenvatting en de schermlezer: de eerste
 /// niet-lege regel van zijn label zonder Markdown-opmaak. Een label dat geen
 /// leesbare tekst heeft (alleen opmaak) geeft [fallback], de id van het veld —
@@ -26,4 +29,14 @@ String formFieldTitle(String labelMarkdown, String fallback) {
 String formatFormDate(DateTime date) {
   String two(int n) => n.toString().padLeft(2, '0');
   return '${date.year.toString().padLeft(4, '0')}-${two(date.month)}-${two(date.day)}';
+}
+
+/// Houdt een tekstveld en zijn controller gelijk aan de waarde van buitenaf, zonder
+/// de cursor te verplaatsen tijdens het typen.
+void syncController(TextEditingController controller, String text) {
+  if (controller.text == text) return;
+  controller.value = TextEditingValue(
+    text: text,
+    selection: TextSelection.collapsed(offset: text.length),
+  );
 }

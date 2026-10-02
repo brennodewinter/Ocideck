@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- In een formulier kun je nu **foto's toevoegen** aan een fotoveld (zodra het document is
+  opgeslagen). De foto wordt gezuiverd voor hij in het document komt — locatie, tijdstip en
+  apparaat eruit, zonder de foto opnieuw te coderen; kleurprofiel en draairichting blijven —
+  en echt gedecodeerd, zodat een bestand met een geldige kop maar geen foto erachter wordt
+  geweigerd. De foto krijgt een naam zonder persoonsgegevens (`images/<veld>-<nummer>`), de
+  pagina zegt dat de locatiegegevens zijn verwijderd, en per foto vul je een beschrijving en
+  een maker in als het veld daarom vraagt. Een HEIC wordt zoals hij is verstuurd en heet niet
+  gecontroleerd. Foto's die al in het document staan worden gemeten voor de controle van de
+  breedte.
 - Spreadsheets importeren als document (#2225): **Document importeren…** neemt
   naast `.docx`/`.odt` nu ook `.xlsx`, `.ods` en `.csv` — elk werkblad wordt een
   kop met een GFM-tabel (formules als hun laatst berekende waarde, datums als
@@ -107,7 +116,11 @@ All notable changes to OciDeck are documented in this file.
   formulier), een antwoord terugschrijven in zijn zone (alleen de bytes van die
   zone veranderen; een antwoord dat het formulier zelf zou wijzigen wordt
   geweigerd) en controleren of de sjabloontekst van een inzending nog de
-  gepubliceerde is. Een lopende invulsessie (`FormFill`) is één onveranderlijke
+  gepubliceerde is. Een foto kan worden gecontroleerd en schoongemaakt voor hij een
+  inzending in gaat: het bestandstype komt uit de eerste bytes (nooit uit de naam),
+  locatie, tijdstip, apparaat en tekstblokken gaan eruit zonder de foto opnieuw te
+  coderen, het kleurprofiel en de draairichting blijven, en alles na het einde van
+  het beeld wordt afgesneden. Een lopende invulsessie (`FormFill`) is één onveranderlijke
   waarde: de pagina in documentvolgorde, het antwoord en de problemen per veld,
   tellers (woorden, tekens, punten) en of er verstuurd mag worden. Elke melding
   van de validatie heeft nu een zin voor de invuller in alle 31 talen

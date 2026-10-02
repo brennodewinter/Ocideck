@@ -1652,6 +1652,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Τα δεδομένα τοποθεσίας αφαιρέθηκαν από αυτή τη φωτογραφία.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Αυτή η φωτογραφία δεν μπόρεσε να προστεθεί. Επιλέξτε ένα αρχείο JPEG, PNG, WebP ή HEIC μιας φωτογραφίας.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Αποθηκεύστε πρώτα το έγγραφο για να προσθέσετε φωτογραφίες.',
   'OciDeck kan dit bestand importeren naar een nieuw document.':
       'Το OciDeck μπορεί να εισαγάγει αυτό το αρχείο σε ένα νέο έγγραφο.',
   'Kies een datum': 'Επιλογή ημερομηνίας',

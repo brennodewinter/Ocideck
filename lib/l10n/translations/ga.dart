@@ -1657,6 +1657,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Baineadh na sonraí suímh den ghrianghraf seo.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Níorbh fhéidir an grianghraf seo a chur leis. Roghnaigh comhad JPEG, PNG, WebP nó HEIC de ghrianghraf.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Sábháil an doiciméad ar dtús chun grianghraif a chur leis.',
   'OciDeck kan dit bestand importeren naar een nieuw document.':
       'Is féidir le OciDeck an comhad seo a allmhairiú mar dhoiciméad nua.',
   'Kies een datum': 'Roghnaigh dáta',

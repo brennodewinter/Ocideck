@@ -17,6 +17,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import '../../l10n/app_localizations.dart';
+import 'form_image_answer.dart';
 import 'form_text_helpers.dart';
 
 /// Het veld voor [field], met [value] als concept.
@@ -29,6 +30,8 @@ class FormAnswerEditor extends StatelessWidget {
     required this.label,
     this.labelBuilder,
     this.onAddImages,
+    this.scrubbed = const {},
+    this.preview,
   });
 
   final FormFieldSpec field;
@@ -45,6 +48,12 @@ class FormAnswerEditor extends StatelessWidget {
   /// Voegt foto's toe aan een afbeeldingsveld; `null` zolang er geen manier is om
   /// bestanden te kiezen (het web zonder bestandskiezer, of een test).
   final Future<List<FormImageRef>> Function()? onAddImages;
+
+  /// De paden waaruit bij het toevoegen een positie is gehaald.
+  final Set<String> scrubbed;
+
+  /// Een klein voorbeeld van een foto, of `null`.
+  final ImageProvider? Function(String path)? preview;
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +98,14 @@ class FormAnswerEditor extends StatelessWidget {
           label: label,
         );
       case 'image':
-        return _ImageAnswer(
+        return FormImageAnswer(
           field: field,
           value: value,
           onChanged: onChanged,
           label: label,
           onAddImages: onAddImages,
+          scrubbed: scrubbed,
+          preview: preview,
         );
       case 'consent':
         return _ConsentAnswer(
@@ -106,16 +117,6 @@ class FormAnswerEditor extends StatelessWidget {
     }
     return const SizedBox.shrink();
   }
-}
-
-/// Houdt een tekstveld en zijn controller gelijk aan de waarde van buitenaf, zonder
-/// de cursor te verplaatsen tijdens het typen.
-void _syncController(TextEditingController controller, String text) {
-  if (controller.text == text) return;
-  controller.value = TextEditingValue(
-    text: text,
-    selection: TextSelection.collapsed(offset: text.length),
-  );
 }
 
 // ── één regel: tekst, getal, datum ──────────────────────────────────────────
@@ -145,7 +146,7 @@ class _LineAnswerState extends State<_LineAnswer> {
   @override
   void didUpdateWidget(_LineAnswer old) {
     super.didUpdateWidget(old);
-    _syncController(_controller, widget.value.text ?? '');
+    syncController(_controller, widget.value.text ?? '');
   }
 
   @override
@@ -232,7 +233,7 @@ class _ProseAnswerState extends State<_ProseAnswer> {
   @override
   void didUpdateWidget(_ProseAnswer old) {
     super.didUpdateWidget(old);
-    _syncController(_controller, widget.value.text ?? '');
+    syncController(_controller, widget.value.text ?? '');
   }
 
   @override
@@ -306,7 +307,7 @@ class _ChoiceAnswerState extends State<_ChoiceAnswer> {
     super.didUpdateWidget(old);
     final text = widget.value.text ?? '';
     if (_options.contains(text)) _otherChosen = false;
-    if (_otherChosen || _ownText.isNotEmpty) _syncController(_other, _ownText);
+    if (_otherChosen || _ownText.isNotEmpty) syncController(_other, _ownText);
     if (_ownText.isNotEmpty) _otherChosen = true;
   }
 
@@ -413,7 +414,7 @@ class _MultichoiceAnswerState extends State<_MultichoiceAnswer> {
   @override
   void didUpdateWidget(_MultichoiceAnswer old) {
     super.didUpdateWidget(old);
-    _syncController(_other, _ownText);
+    syncController(_other, _ownText);
   }
 
   @override
@@ -526,7 +527,7 @@ class _ListAnswerState extends State<_ListAnswer> {
       _controllers.add(TextEditingController());
     }
     for (var i = 0; i < items.length; i++) {
-      _syncController(_controllers[i], items[i]);
+      syncController(_controllers[i], items[i]);
     }
   }
 
@@ -652,7 +653,7 @@ class _TableAnswerState extends State<_TableAnswer> {
     }
     for (var r = 0; r < rows.length; r++) {
       for (var c = 0; c < _columns.length; c++) {
-        _syncController(
+        syncController(
           _controllers[r][c],
           c < rows[r].length ? rows[r][c] : '',
         );
@@ -752,182 +753,6 @@ class _TableAnswerState extends State<_TableAnswer> {
               ]),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-// ── foto's ──────────────────────────────────────────────────────────────────
-
-class _ImageAnswer extends StatefulWidget {
-  const _ImageAnswer({
-    required this.field,
-    required this.value,
-    required this.onChanged,
-    required this.label,
-    required this.onAddImages,
-  });
-
-  final FormFieldSpec field;
-  final FormAnswerValue value;
-  final ValueChanged<FormAnswerValue> onChanged;
-  final String label;
-  final Future<List<FormImageRef>> Function()? onAddImages;
-
-  @override
-  State<_ImageAnswer> createState() => _ImageAnswerState();
-}
-
-class _ImageAnswerState extends State<_ImageAnswer> {
-  final List<TextEditingController> _alts = [];
-  final List<TextEditingController> _credits = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _align();
-  }
-
-  @override
-  void didUpdateWidget(_ImageAnswer old) {
-    super.didUpdateWidget(old);
-    _align();
-  }
-
-  void _align() {
-    final images = widget.value.images;
-    while (_alts.length > images.length) {
-      _alts.removeLast().dispose();
-      _credits.removeLast().dispose();
-    }
-    while (_alts.length < images.length) {
-      _alts.add(TextEditingController());
-      _credits.add(TextEditingController());
-    }
-    for (var i = 0; i < images.length; i++) {
-      _syncController(_alts[i], images[i].alt);
-      _syncController(_credits[i], images[i].credit ?? '');
-    }
-  }
-
-  @override
-  void dispose() {
-    for (final c in [..._alts, ..._credits]) {
-      c.dispose();
-    }
-    super.dispose();
-  }
-
-  void _emit(List<FormImageRef> images) =>
-      widget.onChanged(FormAnswerValue(images: images));
-
-  Future<void> _add() async {
-    final added = await widget.onAddImages!();
-    if (added.isEmpty) return;
-    _emit([...widget.value.images, ...added]);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final images = widget.value.images;
-    final wantsAlt = widget.field.flag('alt');
-    final wantsCredit = widget.field.flag('credit');
-    final scheme = Theme.of(context).colorScheme;
-    return Semantics(
-      label: widget.label,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (var i = 0; i < images.length; i++)
-            Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                border: Border.all(color: scheme.outlineVariant),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.image_outlined, size: 18),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          images[i].path,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      IconButton(
-                        tooltip: l10n
-                            .d('Foto {n} verwijderen')
-                            .replaceAll('{n}', '${i + 1}'),
-                        icon: const Icon(Icons.close, size: 18),
-                        onPressed: () => _emit([...images]..removeAt(i)),
-                      ),
-                    ],
-                  ),
-                  if (wantsAlt)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: TextField(
-                        controller: _alts[i],
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          isDense: true,
-                          border: const OutlineInputBorder(),
-                          labelText: l10n.d('Wat is er te zien op de foto?'),
-                        ),
-                        onChanged: (text) => _emit([
-                          for (var n = 0; n < images.length; n++)
-                            n == i
-                                ? FormImageRef(
-                                    images[n].path,
-                                    text,
-                                    images[n].credit,
-                                  )
-                                : images[n],
-                        ]),
-                      ),
-                    ),
-                  if (wantsCredit)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6),
-                      child: TextField(
-                        controller: _credits[i],
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          isDense: true,
-                          border: const OutlineInputBorder(),
-                          labelText: l10n.d('Van wie is de foto?'),
-                        ),
-                        onChanged: (text) => _emit([
-                          for (var n = 0; n < images.length; n++)
-                            n == i
-                                ? FormImageRef(
-                                    images[n].path,
-                                    images[n].alt,
-                                    text,
-                                  )
-                                : images[n],
-                        ]),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          if (widget.onAddImages != null)
-            Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: TextButton.icon(
-                icon: const Icon(Icons.add_photo_alternate_outlined, size: 18),
-                label: Text(l10n.d('Foto toevoegen')),
-                onPressed: _add,
-              ),
-            ),
         ],
       ),
     );

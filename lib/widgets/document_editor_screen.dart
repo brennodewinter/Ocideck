@@ -86,6 +86,7 @@ import 'editors/markdown_find_bar.dart';
 import 'editors/markdown_smart_input_formatter.dart';
 import 'editors/markdown_source_controller.dart';
 import 'forms/form_fill_view.dart';
+import 'forms/form_image_picker.dart';
 import 'markdown_editor/markdown_editor.dart';
 import 'markdown_editor/table_embed_binding.dart';
 import 'reader/document_markdown_view.dart';
