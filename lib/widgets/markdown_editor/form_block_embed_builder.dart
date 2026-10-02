@@ -2,6 +2,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../utils/form_block_embed_syntax.dart';
 import '../reader/document_markdown_view.dart';
 import 'markdown_editor_theme.dart';
@@ -123,10 +124,17 @@ class _Header extends StatelessWidget {
     final id = FormBlockEmbedBuilder._attr(markerLine, 'id') ?? '';
     final version = FormBlockEmbedBuilder._attr(markerLine, 'version');
     final scheme = Theme.of(context).colorScheme;
+    // Een opmaak, geen vertaalbare tekst: `unchangedInAllLanguages`.
+    final l10n = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Text(
-        version == null ? id : '$id · v$version',
+        version == null
+            ? id
+            : l10n
+                  .d('{id} · v{versie}')
+                  .replaceAll('{id}', id)
+                  .replaceAll('{versie}', version),
         style: Theme.of(
           context,
         ).textTheme.labelMedium?.copyWith(color: scheme.onSurfaceVariant),
