@@ -295,7 +295,12 @@ class _FormBookDialogState extends State<FormBookDialog> {
         for (final form in _versions)
           DropdownMenuItem(
             value: form,
-            child: Text('${form.id} · v${form.version}'),
+            child: Text(
+              l10n
+                  .d('{id} · v{versie}')
+                  .replaceAll('{id}', form.id)
+                  .replaceAll('{versie}', '${form.version}'),
+            ),
           ),
       ],
       onChanged: _busy ? null : _chooseForm,
