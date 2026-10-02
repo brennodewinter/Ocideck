@@ -1633,6 +1633,8 @@ const _dutchSourceAddId = <String, String>{
       'Foto ini tidak dapat ditambahkan. Pilih berkas JPEG, PNG, WebP, atau HEIC berisi foto.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Simpan dokumen terlebih dahulu untuk menambahkan foto.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck dapat mengimpor berkas ini menjadi dokumen baru.',
   'Kies een datum': 'Pilih tanggal',
   'Anders, namelijk:': 'Lainnya, yaitu:',
   'Punt {n}': 'Butir {n}',

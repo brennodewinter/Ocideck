@@ -1661,6 +1661,8 @@ const _dutchSourceAddPt = <String, String>{
       'Não foi possível adicionar esta foto. Escolha um arquivo JPEG, PNG, WebP ou HEIC de uma foto.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Salve o documento primeiro para adicionar fotos.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'O OciDeck pode importar este ficheiro para um novo documento.',
   'Kies een datum': 'Escolher uma data',
   'Anders, namelijk:': 'Outro, a saber:',
   'Punt {n}': 'Ponto {n}',

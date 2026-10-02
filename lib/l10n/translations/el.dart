@@ -1658,6 +1658,8 @@ const _dutchSourceAddEl = <String, String>{
       'Αυτή η φωτογραφία δεν μπόρεσε να προστεθεί. Επιλέξτε ένα αρχείο JPEG, PNG, WebP ή HEIC μιας φωτογραφίας.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Αποθηκεύστε πρώτα το έγγραφο για να προσθέσετε φωτογραφίες.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Το OciDeck μπορεί να εισαγάγει αυτό το αρχείο σε ένα νέο έγγραφο.',
   'Kies een datum': 'Επιλογή ημερομηνίας',
   'Anders, namelijk:': 'Άλλο, συγκεκριμένα:',
   'Punt {n}': 'Σημείο {n}',

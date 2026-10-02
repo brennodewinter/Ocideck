@@ -1653,6 +1653,8 @@ const _dutchSourceAddBg = <String, String>{
       'Тази снимка не можа да бъде добавена. Изберете JPEG, PNG, WebP или HEIC файл със снимка.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Първо запазете документа, за да добавяте снимки.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck може да импортира този файл в нов документ.',
   'Kies een datum': 'Избор на дата',
   'Anders, namelijk:': 'Друго, а именно:',
   'Punt {n}': 'Точка {n}',

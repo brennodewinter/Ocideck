@@ -1663,6 +1663,8 @@ const _dutchSourceAddGa = <String, String>{
       'Níorbh fhéidir an grianghraf seo a chur leis. Roghnaigh comhad JPEG, PNG, WebP nó HEIC de ghrianghraf.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Sábháil an doiciméad ar dtús chun grianghraif a chur leis.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Is féidir le OciDeck an comhad seo a allmhairiú mar dhoiciméad nua.',
   'Kies een datum': 'Roghnaigh dáta',
   'Anders, namelijk:': 'Eile, eadhon:',
   'Punt {n}': 'Pointe {n}',

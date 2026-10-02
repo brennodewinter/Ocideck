@@ -1636,6 +1636,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Das Foti het nöd chöne zuegfüegt wärde. Wähl e JPEG-, PNG-, WebP- oder HEIC-Datei vomene Foti.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Spichere s Dokumänt zersch, zum Foti zuefüege.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck cha die Datei als neus Dokumänt importiere.',
   'Kies een datum': 'Datum uuswähle',
   'Anders, namelijk:': 'Anders, nämlich:',
   'Punt {n}': 'Punkt {n}',

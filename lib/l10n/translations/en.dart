@@ -833,6 +833,8 @@ const _dutchSourceAddEn = {
       'This photo could not be added. Choose a JPEG, PNG, WebP or HEIC file of a photo.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Save the document first to add photos.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck can import this file into a new document.',
   'Kies een datum': 'Choose a date',
   'Anders, namelijk:': 'Other, namely:',
   'Punt {n}': 'Item {n}',

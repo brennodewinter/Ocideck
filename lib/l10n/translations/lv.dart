@@ -1631,6 +1631,8 @@ const _dutchSourceAddLv = <String, String>{
       'Šo fotogrāfiju neizdevās pievienot. Izvēlieties fotogrāfijas JPEG, PNG, WebP vai HEIC failu.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Vispirms saglabājiet dokumentu, lai pievienotu fotogrāfijas.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck var importēt šo failu kā jaunu dokumentu.',
   'Kies een datum': 'Izvēlēties datumu',
   'Anders, namelijk:': 'Cits, proti:',
   'Punt {n}': 'Punkts {n}',

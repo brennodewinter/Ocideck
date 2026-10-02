@@ -1639,6 +1639,8 @@ const _dutchSourceAddSk = <String, String>{
       'Túto fotografiu sa nepodarilo pridať. Vyberte súbor JPEG, PNG, WebP alebo HEIC s fotografiou.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Najprv uložte dokument, aby ste mohli pridávať fotografie.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck môže tento súbor importovať do nového dokumentu.',
   'Kies een datum': 'Vybrať dátum',
   'Anders, namelijk:': 'Iné, a to:',
   'Punt {n}': 'Bod {n}',

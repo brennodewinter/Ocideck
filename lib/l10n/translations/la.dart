@@ -1648,6 +1648,8 @@ const _dutchSourceAddLa = <String, String>{
       'Haec imago addi non potuit. Fasciculum JPEG, PNG, WebP vel HEIC imaginis elige.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Primum documentum serva ut imagines addas.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck hanc limam in novum documentum inferre potest.',
   'Kies een datum': 'Elige diem',
   'Anders, namelijk:': 'Aliud, scilicet:',
   'Punt {n}': 'Punctum {n}',

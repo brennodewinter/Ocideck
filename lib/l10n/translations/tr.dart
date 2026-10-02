@@ -2544,6 +2544,8 @@ const _dutchSourceAddTr = <String, String>{
       'Bu fotoğraf eklenemedi. Fotoğraf içeren bir JPEG, PNG, WebP veya HEIC dosyası seçin.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Fotoğraf eklemek için önce belgeyi kaydedin.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck bu dosyayı yeni bir belge olarak içe aktarabilir.',
   'Kies een datum': 'Tarih seç',
   'Anders, namelijk:': 'Diğer, yani:',
   'Punt {n}': 'Madde {n}',

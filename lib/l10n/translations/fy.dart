@@ -673,6 +673,8 @@ const _dutchSourceAddFy = {
       'Dizze foto koe net tafoege wurde. Kies in JPEG-, PNG-, WebP- of HEIC-bestân fan in foto.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Bewarje it dokumint earst om foto\'s ta te foegjen.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck kin dit bestân ymportearje nei in nij dokumint.',
   'Kies een datum': 'Kies in datum',
   'Anders, namelijk:': 'Oars, nammentlik:',
   'Punt {n}': 'Ûnderdiel {n}',

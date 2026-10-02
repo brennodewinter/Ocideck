@@ -5067,9 +5067,19 @@ not, and why conversion is deliberately lossy — is written up in
 ### Importing a Word or LibreOffice document
 
 **Document importeren…** (welcome screen, or the document toolbar) opens a
-`.docx` or `.odt` as a new document: headings, paragraphs, lists, tables,
-bold/italic and links become Markdown. The import is best-effort and never
-writes to the source file. *(Added 2026-09-18, #2101.)*
+`.docx`, `.odt`, `.xlsx`, `.ods` or `.csv` as a new document: headings,
+paragraphs, lists, tables, bold/italic and links become Markdown. The import
+is best-effort and never writes to the source file. *(Added 2026-09-18,
+#2101.)*
+
+**Spreadsheets.** Since 2026-10-02 (#2225) the same action also accepts
+`.xlsx`, `.ods` and `.csv`: each worksheet becomes a heading followed by a
+GFM table whose first row is the header. Formulas land as the value the sheet
+last computed, dates as `yyyy-mm-dd`; images, charts, merged cells and
+formatting have no Markdown shape and are reported in the *not taken along*
+count rather than dropped silently. A spreadsheet dropped on the window takes
+the same route, and a spreadsheet picked via **Openen** gets a snackbar
+offering the import instead of a dead end.
 
 **Taking the house style along.** Since 2026-09-19 (#2119) the import also reads
 what the document carries as house style, and when it finds anything, one

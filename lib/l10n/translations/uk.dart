@@ -1648,6 +1648,8 @@ const _dutchSourceAddUk = <String, String>{
       'Цю фотографію не вдалося додати. Виберіть файл фотографії у форматі JPEG, PNG, WebP або HEIC.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Спершу збережіть документ, щоб додавати фотографії.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck може імпортувати цей файл у новий документ.',
   'Kies een datum': 'Обрати дату',
   'Anders, namelijk:': 'Інше, а саме:',
   'Punt {n}': 'Пункт {n}',

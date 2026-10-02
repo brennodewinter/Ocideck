@@ -1626,6 +1626,8 @@ const _dutchSourceAddEt = <String, String>{
       'Seda fotot ei õnnestunud lisada. Valige foto JPEG-, PNG-, WebP- või HEIC-fail.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Fotode lisamiseks salvestage dokument esmalt.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck saab selle faili uue dokumendina importida.',
   'Kies een datum': 'Vali kuupäev',
   'Anders, namelijk:': 'Muu, nimelt:',
   'Punt {n}': 'Punkt {n}',

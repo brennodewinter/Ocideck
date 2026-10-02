@@ -1635,6 +1635,8 @@ const _dutchSourceAddHu = <String, String>{
       'Ezt a fotót nem sikerült hozzáadni. Válasszon egy fotót tartalmazó JPEG-, PNG-, WebP- vagy HEIC-fájlt.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Fotók hozzáadásához először mentse a dokumentumot.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Az OciDeck új dokumentumként tudja importálni ezt a fájlt.',
   'Kies een datum': 'Dátum kiválasztása',
   'Anders, namelijk:': 'Egyéb, nevezetesen:',
   'Punt {n}': '{n}. pont',

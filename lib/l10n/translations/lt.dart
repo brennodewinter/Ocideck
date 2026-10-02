@@ -1640,6 +1640,8 @@ const _dutchSourceAddLt = <String, String>{
       'Šios nuotraukos nepavyko pridėti. Pasirinkite nuotraukos JPEG, PNG, WebP arba HEIC failą.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Pirmiausia išsaugokite dokumentą, kad galėtumėte pridėti nuotraukų.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck gali importuoti šį failą į naują dokumentą.',
   'Kies een datum': 'Pasirinkti datą',
   'Anders, namelijk:': 'Kita, būtent:',
   'Punt {n}': 'Punktas {n}',

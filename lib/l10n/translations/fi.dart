@@ -1633,6 +1633,8 @@ const _dutchSourceAddFi = <String, String>{
       'Tätä valokuvaa ei voitu lisätä. Valitse valokuvan sisältävä JPEG-, PNG-, WebP- tai HEIC-tiedosto.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Tallenna asiakirja ensin lisätäksesi valokuvia.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck voi tuoda tämän tiedoston uudeksi asiakirjaksi.',
   'Kies een datum': 'Valitse päivämäärä',
   'Anders, namelijk:': 'Muu, nimittäin:',
   'Punt {n}': 'Kohta {n}',

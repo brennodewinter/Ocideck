@@ -1649,6 +1649,8 @@ const _dutchSourceAddRo = <String, String>{
       'Această fotografie nu a putut fi adăugată. Alegeți un fișier JPEG, PNG, WebP sau HEIC cu o fotografie.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Salvați mai întâi documentul pentru a adăuga fotografii.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck poate importa acest fișier într-un document nou.',
   'Kies een datum': 'Alege o dată',
   'Anders, namelijk:': 'Altul, anume:',
   'Punt {n}': 'Punctul {n}',

@@ -1633,6 +1633,8 @@ const _dutchSourceAddDa = <String, String>{
       'Dette foto kunne ikke tilføjes. Vælg en JPEG-, PNG-, WebP- eller HEIC-fil med et foto.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Gem dokumentet først for at tilføje fotos.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck kan importere denne fil til et nyt dokument.',
   'Kies een datum': 'Vælg en dato',
   'Anders, namelijk:': 'Andet, nemlig:',
   'Punt {n}': 'Punkt {n}',

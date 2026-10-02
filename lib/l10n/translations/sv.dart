@@ -1632,6 +1632,8 @@ const _dutchSourceAddSv = <String, String>{
       'Det här fotot kunde inte läggas till. Välj en JPEG-, PNG-, WebP- eller HEIC-fil med ett foto.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Spara dokumentet först för att lägga till foton.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck kan importera den här filen till ett nytt dokument.',
   'Kies een datum': 'Välj ett datum',
   'Anders, namelijk:': 'Annat, nämligen:',
   'Punt {n}': 'Punkt {n}',

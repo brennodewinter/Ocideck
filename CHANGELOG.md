@@ -19,6 +19,13 @@ All notable changes to OciDeck are documented in this file.
   een maker in als het veld daarom vraagt. Een HEIC wordt zoals hij is verstuurd en heet niet
   gecontroleerd. Foto's die al in het document staan worden gemeten voor de controle van de
   breedte.
+- Spreadsheets importeren als document (#2225): **Document importeren…** neemt
+  naast `.docx`/`.odt` nu ook `.xlsx`, `.ods` en `.csv` — elk werkblad wordt een
+  kop met een GFM-tabel (formules als hun laatst berekende waarde, datums als
+  `yyyy-mm-dd`). Een via **Openen** gekozen of gesleepte spreadsheet krijgt de
+  import als uitweg; grafieken, afbeeldingen en samengevoegde cellen tellen mee
+  in *niet overgenomen*. Gesleepte `.docx`/`.odt` gaan nu ook de import in.
+
 - Een document met een formulier opent op een nieuw tabblad **Invullen**: de titel, wat
   de auteur boven de vragen schreef, de notice en elke vraag met zijn eigen invoer (regel,
   verhaal, keuze, meerdere keuzes, lijst, tabel, datum, getal, toestemming; foto's volgen).

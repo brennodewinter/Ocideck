@@ -1651,6 +1651,8 @@ const _dutchSourceAddMt = <String, String>{
       'Dan ir-ritratt ma setax jiżdied. Agħżel fajl JPEG, PNG, WebP jew HEIC ta\' ritratt.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Ewwel salva d-dokument biex iżżid ritratti.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck jista\' jimporta dan il-fajl f\'dokument ġdid.',
   'Kies een datum': 'Agħżel data',
   'Anders, namelijk:': 'Oħra, jiġifieri:',
   'Punt {n}': 'Element {n}',

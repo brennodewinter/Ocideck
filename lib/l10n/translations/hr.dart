@@ -1637,6 +1637,8 @@ const _dutchSourceAddHr = <String, String>{
       'Ova fotografija nije mogla biti dodana. Odaberite JPEG, PNG, WebP ili HEIC datoteku s fotografijom.',
   'Sla het document eerst op om foto’s toe te voegen.':
       'Najprije spremite dokument da biste dodali fotografije.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck može uvesti ovu datoteku u novi dokument.',
   'Kies een datum': 'Odaberi datum',
   'Anders, namelijk:': 'Drugo, naime:',
   'Punt {n}': 'Točka {n}',
