@@ -1724,7 +1724,8 @@ side and the answers, §4.3–§4.7): `form_blocks.dart` (the marker grammar —
 patterns), `form_answer_safety.dart` (§4.6 rules 1–5), `form_answers.dart`
 (`parseAnswer`, `extractAnswers`), `form_validator.dart` (`validateAnswer`,
 `validateForm`, `FormImageFact`), `form_template_text.dart` (`templateTextIssues`),
-`rules_version.dart`, and `test/fixtures/form_vectors.json` (words, characters and
+`form_answer_writer.dart` (the write side: `formatAnswer`, `applyAnswer`, which refuses
+an answer that would change the form itself), `rules_version.dart`, and `test/fixtures/form_vectors.json` (words, characters and
 patterns; the range, number and date vectors still live in the engine's own tests).
 **Still to build:** `probeFormImages` (app side), `form_package.dart` (zip + manifest + name
 grammars), `form_seal.dart` (age; the only file touching the primitives), `form_bundle.dart`

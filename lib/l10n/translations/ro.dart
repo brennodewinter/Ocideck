@@ -1643,6 +1643,133 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kies een datum': 'Alege o dată',
+  'Anders, namelijk:': 'Altul, anume:',
+  'Punt {n}': 'Punctul {n}',
+  'Punt {n} verwijderen': 'Elimină punctul {n}',
+  'Rij {n} verwijderen': 'Elimină rândul {n}',
+  'Foto {n} verwijderen': 'Elimină fotografia {n}',
+  'Wat is er te zien op de foto?': 'Ce se vede în fotografie?',
+  'Van wie is de foto?': 'A cui este fotografia?',
+  'Foto toevoegen': 'Adaugă o fotografie',
+  'Verplicht': 'Obligatoriu',
+  'Alles is ingevuld.': 'Totul este completat.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Mai sunt {n} de făcut înainte de a putea trimite:',
+  'klaar': 'gata',
+  '{n} open': '{n} deschise',
+  'Dit formulier kan niet worden ingevuld.':
+      'Acest formular nu poate fi completat.',
+  'Naar de bron': 'La sursă',
+  'Woorden': 'Cuvinte',
+  'Tekens': 'Caractere',
+  'Keuzes': 'Alegeri',
+  'Rijen': 'Rânduri',
+  'Foto’s': 'Fotografii',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (cel puțin {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (cel mult {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (cel puțin {min}, cel mult {max})',
+  'Invullen': 'Completează',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Ceva nu este în regulă cu acest formular. Contactați persoana care l-a creat.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Acest câmp este obligatoriu. Completați-l pentru a putea trimite.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Ați scris {actual} cuvinte; sunt necesare cel puțin {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Ați scris {actual} cuvinte; sunt permise cel mult {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Ați scris {actual} caractere; sunt necesare cel puțin {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Ați scris {actual} caractere; sunt permise cel mult {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” nu se află în listă. Alegeți una dintre opțiuni.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” nu este un număr. Folosiți doar cifre, eventual cu virgulă sau punct pentru zecimale.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Această fotografie are {actual} pixeli lățime; aici se cer {min}. Probabil a fost micșorată când a fost trimisă printr-o aplicație de mesagerie. Dacă mai aveți originalul, folosiți-l. Dacă nu, trimiteți-o oricum: organizația vă va contacta.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Această fotografie are {actual} MB; maximul este {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Conținutul acestui fișier nu corespunde tipului său de fișier.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Acest tip de fișier nu este permis aici.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Fișierul acestei fotografii nu mai poate fi găsit. Adăugați din nou fotografia.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Descrieți într-o propoziție scurtă ce se vede în fotografie.',
+  'Geef aan van wie de foto is.': 'Indicați a cui este fotografia.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Această fotografie nu a fost încă verificată. Așteptați puțin sau adăugați-o din nou.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Această fotografie este un fișier HEIC. OciDeck nu îl poate verifica sau curăța aici, așa că este trimis așa cum este. Poate conține locul unde a fost făcută fotografia. Dacă nu doriți să partajați acest lucru, alegeți „Cel mai compatibil” în setările camerei sau partajați fotografia ca JPEG și adăugați-o din nou.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'În această fotografie se văd {actual} fețe; se așteptau {expected}. Este doar un memento.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Bifați căsuța pentru a fi de acord; fără consimțământ nu puteți trimite.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Acest formular necesită o versiune mai nouă a OciDeck. Actualizați aplicația pentru a-l completa.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Ceva din formularul însuși a fost schimbat din greșeală. Restaurați formularul; răspunsurile dvs. rămân.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Această linie seamănă cu un cod de control al formularului și nu poate apărea într-un răspuns. Modificați-o.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML nu este permis într-un răspuns. Folosiți text simplu și formatare simplă.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Un bloc de cod nu este închis. Închideți-l cu ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Într-un răspuns pot apărea doar fotografiile pe care le adăugați în acest formular; o imagine de pe internet nu.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Într-un răspuns sunt permise doar linkuri care încep cu https:// și adrese de e-mail.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Acest fișier a fost creat cu o altă versiune a formularului (versiunea {submission}; acum se aplică versiunea {published}). Verificați răspunsurile.',
+  'Punt {item}: {bericht}': 'Punctul {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Acum sunt {actual}; trebuie să fie între {min} și {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Acum sunt {actual}; pot fi cel mult {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Acum sunt {actual}; trebuie să fie cel puțin {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Numărul trebuie să fie un multiplu al lui {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Numărul trebuie să fie între {min} și {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Numărul poate fi cel mult {max}.',
+  'Het getal moet minstens {min} zijn.':
+      'Numărul trebuie să fie cel puțin {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Data trebuie să fie {min} sau ulterioară.',
+  'De datum moet op of vóór {max} liggen.':
+      'Data trebuie să fie {max} sau anterioară.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” nu este o dată. Scrieți data ca an-lună-zi, de exemplu 2026-11-01.',
+  'Dit is geen geldig e-mailadres.':
+      'Aceasta nu este o adresă de e-mail validă.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Aceasta nu este o adresă web validă. Începeți cu https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Acesta nu este un număr de telefon valid.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Acesta nu este un cod poștal olandez valid, precum 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Aici încape doar un rând. Eliminați întreruperile de rând.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Folosiți doar casetele acestei întrebări: o casetă pentru fiecare opțiune.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Scrieți fiecare punct pe un rând separat, cu o liniuță sau un număr în față.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabelul nu mai este corect: lăsați rândul de antet așa cum era și dați fiecărui rând același număr de coloane.',
+  'Dezelfde foto staat hier twee keer.':
+      'Aceeași fotografie apare aici de două ori.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'În acest câmp se potrivesc doar fotografii, nu text izolat.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Caseta consimțământului dvs. este deteriorată. Restaurați formularul.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Acest răspuns nu are forma care se potrivește acestei întrebări.',
   'Downloaden…': 'Descarcă…',
   'Afbeelding opgeslagen als': 'Imagine salvată ca',
   '{naam}: ingesteld': '{naam}: configurat',

@@ -667,6 +667,129 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Kies een datum': 'Datum wählen',
+  'Anders, namelijk:': 'Andere, nämlich:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Punkt {n} entfernen',
+  'Rij {n} verwijderen': 'Zeile {n} entfernen',
+  'Foto {n} verwijderen': 'Foto {n} entfernen',
+  'Wat is er te zien op de foto?': 'Was ist auf dem Foto zu sehen?',
+  'Van wie is de foto?': 'Von wem ist das Foto?',
+  'Foto toevoegen': 'Foto hinzufügen',
+  'Verplicht': 'Pflichtfeld',
+  'Alles is ingevuld.': 'Alles ist ausgefüllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Noch {n} zu erledigen, bevor du senden kannst:',
+  'klaar': 'erledigt',
+  '{n} open': '{n} offen',
+  'Dit formulier kan niet worden ingevuld.':
+      'Dieses Formular kann nicht ausgefüllt werden.',
+  'Naar de bron': 'Zur Quelle',
+  'Woorden': 'Wörter',
+  'Tekens': 'Zeichen',
+  'Keuzes': 'Auswahlen',
+  'Rijen': 'Zeilen',
+  'Foto’s': 'Fotos',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mindestens {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (höchstens {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mindestens {min}, höchstens {max})',
+  'Invullen': 'Ausfüllen',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Mit diesem Formular stimmt etwas nicht. Wende dich an die Person, die es erstellt hat.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Dieses Feld ist erforderlich. Fülle es aus, um senden zu können.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Du hast {actual} Wörter geschrieben; es werden mindestens {min} gebraucht.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hast {actual} Wörter geschrieben; erlaubt sind höchstens {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Du hast {actual} Zeichen geschrieben; es werden mindestens {min} gebraucht.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hast {actual} Zeichen geschrieben; erlaubt sind höchstens {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ steht nicht in der Liste. Wähle eine der Optionen.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ ist keine Zahl. Verwende nur Ziffern, gegebenenfalls mit Komma oder Punkt für die Dezimalstellen.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Dieses Foto ist {actual} Pixel breit; hier werden {min} verlangt. Wahrscheinlich wurde es beim Senden über eine Messenger-App verkleinert. Wenn du das Original noch hast, nimm das. Wenn nicht, sende es trotzdem mit: Die Organisation meldet sich bei dir.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Dieses Foto ist {actual} MB groß; das Maximum ist {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Der Inhalt dieser Datei passt nicht zu ihrem Dateityp.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Dieser Dateityp ist hier nicht erlaubt.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Die Datei zu diesem Foto ist nicht mehr zu finden. Füge das Foto erneut hinzu.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Beschreibe in einem kurzen Satz, was auf dem Foto zu sehen ist.',
+  'Geef aan van wie de foto is.': 'Gib an, von wem das Foto ist.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Dieses Foto wurde noch nicht geprüft. Warte einen Moment oder füge es erneut hinzu.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Dieses Foto ist eine HEIC-Datei. OciDeck kann sie hier weder prüfen noch bereinigen, deshalb wird sie so gesendet, wie sie ist. Sie kann enthalten, wo das Foto aufgenommen wurde. Wenn du das nicht teilen möchtest, wähle in den Kameraeinstellungen „Maximale Kompatibilität“ oder teile das Foto als JPEG und füge es erneut hinzu.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Auf diesem Foto sind {actual} Gesichter zu sehen; erwartet wurden {expected}. Das ist nur eine Erinnerung.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Setze das Häkchen, um zuzustimmen; ohne Einwilligung kannst du nicht senden.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Dieses Formular erfordert eine neuere Version von OciDeck. Aktualisiere die App, um es auszufüllen.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Im Formular selbst wurde versehentlich etwas verändert. Stelle das Formular wieder her; deine Antworten bleiben erhalten.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Diese Zeile sieht aus wie ein Steuercode des Formulars und darf nicht in einer Antwort stehen. Ändere sie.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML ist in einer Antwort nicht erlaubt. Verwende normalen Text und einfache Formatierung.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Ein Codeblock ist nicht geschlossen. Schließe ihn mit ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'In einer Antwort sind nur Fotos möglich, die du in diesem Formular hinzufügst; ein Bild aus dem Internet nicht.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'In einer Antwort sind nur Links erlaubt, die mit https:// beginnen, sowie E-Mail-Adressen.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Diese Datei wurde mit einer anderen Version des Formulars erstellt (Version {submission}; jetzt gilt Version {published}). Prüfe deine Antworten.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Es sind jetzt {actual}; es müssen zwischen {min} und {max} sein.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Es sind jetzt {actual}; es dürfen höchstens {max} sein.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Es sind jetzt {actual}; es müssen mindestens {min} sein.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Die Zahl muss ein Vielfaches von {step} sein.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Die Zahl muss zwischen {min} und {max} liegen.',
+  'Het getal mag hoogstens {max} zijn.': 'Die Zahl darf höchstens {max} sein.',
+  'Het getal moet minstens {min} zijn.': 'Die Zahl muss mindestens {min} sein.',
+  'De datum moet op of na {min} liggen.':
+      'Das Datum muss am oder nach dem {min} liegen.',
+  'De datum moet op of vóór {max} liggen.':
+      'Das Datum muss am oder vor dem {max} liegen.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ ist kein Datum. Schreibe das Datum als Jahr-Monat-Tag, zum Beispiel 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Das ist keine gültige E-Mail-Adresse.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Das ist keine gültige Webadresse. Beginne mit https://.',
+  'Dit is geen geldig telefoonnummer.': 'Das ist keine gültige Telefonnummer.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Das ist keine gültige niederländische Postleitzahl, wie 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Hier passt nur eine Zeile. Entferne die Zeilenumbrüche.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Verwende nur die Kontrollkästchen dieser Frage: ein Kästchen pro Option.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Schreibe jeden Punkt in eine eigene Zeile, mit einem Strich oder einer Nummer davor.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Die Tabelle stimmt nicht mehr: Lass die Kopfzeile, wie sie war, und gib jeder Zeile gleich viele Spalten.',
+  'Dezelfde foto staat hier twee keer.': 'Dasselbe Foto steht hier zweimal.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'In dieses Feld gehören nur Fotos, kein loser Text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Das Kästchen für deine Einwilligung ist beschädigt. Stelle das Formular wieder her.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Diese Antwort hat nicht die Form, die zu dieser Frage gehört.',
   'Downloaden…': 'Herunterladen…',
   'Afbeelding opgeslagen als': 'Bild gespeichert als',
   '{naam}: ingesteld': '{naam}: eingerichtet',

@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Een document met een formulier opent op een nieuw tabblad **Invullen**: de titel, wat
+  de auteur boven de vragen schreef, de notice en elke vraag met zijn eigen invoer (regel,
+  verhaal, keuze, meerdere keuzes, lijst, tabel, datum, getal, toestemming; foto's volgen).
+  Onder elke vraag staat in gewone woorden wat er nog mis is en wat je eraan kunt doen, in
+  alle 31 talen, en een teller loopt mee (**Woorden: 90 (minimaal 150, maximaal 300)**).
+  Bovenaan staat hoeveel er nog te doen is, met per vraag een sprong; een verplichte vraag
+  die je niet hebt aangeraakt is niet rood. Alles wat je typt gaat direct in het document en
+  verandert alleen de bytes tussen de antwoordmarkers; ongedaan maken draait een heel woord
+  per vraag terug. Een beschadigd formulier zegt waarom het niet kan en wijst naar de bron.
 - Een versiecheck meldt subtiel wanneer er een nieuwere OciDeck-release is:
   het versienummer op het openscherm krijgt dan een amber indicator die bij
   hover de nieuwe versie noemt en de releasepagina opent. Zolang er nog nooit
@@ -88,8 +97,14 @@ All notable changes to OciDeck are documented in this file.
   auteursfouten tegelijk), antwoorden uitlezen en valideren (woord- en
   tekentelling met een gedeeld vectorbestand, benoemde patronen, de
   veiligheidsregels voor antwoorden, een inzending tegen het *gepubliceerde*
-  formulier) en controleren of de sjabloontekst van een inzending nog de
-  gepubliceerde is. Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
+  formulier), een antwoord terugschrijven in zijn zone (alleen de bytes van die
+  zone veranderen; een antwoord dat het formulier zelf zou wijzigen wordt
+  geweigerd) en controleren of de sjabloontekst van een inzending nog de
+  gepubliceerde is. Een lopende invulsessie (`FormFill`) is één onveranderlijke
+  waarde: de pagina in documentvolgorde, het antwoord en de problemen per veld,
+  tellers (woorden, tekens, punten) en of er verstuurd mag worden. Elke melding
+  van de validatie heeft nu een zin voor de invuller in alle 31 talen
+  (`formIssueMessage`). Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
   regels voor `packages/`) en `make test-packages` (tests + dekkingsvloer; onderdeel
   van `make check`), en de SBOM kent voortaan een eigen groep voor first-party
   pakketten.

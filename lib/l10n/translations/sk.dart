@@ -1633,6 +1633,126 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Kies een datum': 'Vybrať dátum',
+  'Anders, namelijk:': 'Iné, a to:',
+  'Punt {n}': 'Bod {n}',
+  'Punt {n} verwijderen': 'Odstrániť bod {n}',
+  'Rij {n} verwijderen': 'Odstrániť riadok {n}',
+  'Foto {n} verwijderen': 'Odstrániť fotografiu {n}',
+  'Wat is er te zien op de foto?': 'Čo je na fotografii vidieť?',
+  'Van wie is de foto?': 'Čia je fotografia?',
+  'Foto toevoegen': 'Pridať fotografiu',
+  'Verplicht': 'Povinné',
+  'Alles is ingevuld.': 'Všetko je vyplnené.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Zostáva ešte {n}, kým budete môcť odoslať:',
+  'klaar': 'hotovo',
+  '{n} open': '{n} otvorených',
+  'Dit formulier kan niet worden ingevuld.': 'Tento formulár sa nedá vyplniť.',
+  'Naar de bron': 'Ku zdroju',
+  'Woorden': 'Slová',
+  'Tekens': 'Znaky',
+  'Keuzes': 'Voľby',
+  'Rijen': 'Riadky',
+  'Foto’s': 'Fotografie',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (aspoň {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (najviac {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (aspoň {min}, najviac {max})',
+  'Invullen': 'Vyplniť',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'S týmto formulárom nie je niečo v poriadku. Obráťte sa na toho, kto ho vytvoril.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Toto pole je povinné. Vyplňte ho, aby ste mohli odoslať.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Napísali ste {actual} slov; potrebných je aspoň {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Napísali ste {actual} slov; povolených je najviac {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Napísali ste {actual} znakov; potrebných je aspoň {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Napísali ste {actual} znakov; povolených je najviac {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ nie je v zozname. Vyberte jednu z možností.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ nie je číslo. Používajte len číslice, prípadne s čiarkou alebo bodkou pre desatinné miesta.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Táto fotografia je {actual} pixelov široká; tu sa vyžaduje {min}. Pravdepodobne sa zmenšila pri odoslaní cez aplikáciu na správy. Ak máte originál ešte k dispozícii, použite ho. Ak nie, aj tak ju pošlite: organizátor sa vám ozve.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Táto fotografia má {actual} MB; maximum je {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Obsah tohto súboru nezodpovedá jeho typu.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Tento typ súboru tu nie je povolený.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Súbor tejto fotografie sa už nedá nájsť. Pridajte fotografiu znova.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Opíšte jednou krátkou vetou, čo je na fotografii vidieť.',
+  'Geef aan van wie de foto is.': 'Uveďte, čia je fotografia.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Táto fotografia ešte nebola skontrolovaná. Chvíľu počkajte alebo ju pridajte znova.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Táto fotografia je súbor HEIC. OciDeck ho tu nemôže skontrolovať ani vyčistiť, a preto sa odošle taký, aký je. Môže obsahovať miesto, kde bola fotografia nasnímaná. Ak to nechcete zdieľať, vyberte v nastaveniach fotoaparátu „Najkompatibilnejšie“ alebo fotografiu zdieľajte ako JPEG a pridajte ju znova.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Na tejto fotografii je vidieť {actual} tvárí; očakávalo sa {expected}. Je to len pripomienka.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Začiarknite políčko na súhlas; bez súhlasu nemôžete odoslať.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Tento formulár vyžaduje novšiu verziu OciDeck. Aktualizujte aplikáciu, aby ste ho mohli vyplniť.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'V samotnom formulári sa omylom niečo zmenilo. Obnovte formulár; vaše odpovede zostanú.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Tento riadok vyzerá ako riadiaci kód formulára a nesmie byť v odpovedi. Zmeňte ho.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML nie je v odpovedi povolené. Použite obyčajný text a jednoduché formátovanie.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kódu nie je uzavretý. Uzavrite ho pomocou ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'V odpovedi môžu byť len fotografie, ktoré pridáte v tomto formulári; obrázok z internetu nie.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'V odpovedi sú povolené len odkazy začínajúce https:// a e-mailové adresy.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Tento súbor bol vytvorený inou verziou formulára (verzia {submission}; teraz platí verzia {published}). Skontrolujte svoje odpovede.',
+  'Punt {item}: {bericht}': 'Bod {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Teraz ich je {actual}; musí ich byť medzi {min} a {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Teraz ich je {actual}; smie ich byť najviac {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Teraz ich je {actual}; musí ich byť aspoň {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Číslo musí byť násobkom {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Číslo musí byť medzi {min} a {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Číslo smie byť najviac {max}.',
+  'Het getal moet minstens {min} zijn.': 'Číslo musí byť aspoň {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Dátum musí byť {min} alebo neskorší.',
+  'De datum moet op of vóór {max} liggen.':
+      'Dátum musí byť {max} alebo skorší.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ nie je dátum. Napíšte dátum v tvare rok-mesiac-deň, napríklad 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Toto nie je platná e-mailová adresa.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Toto nie je platná webová adresa. Začnite https://.',
+  'Dit is geen geldig telefoonnummer.': 'Toto nie je platné telefónne číslo.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Toto nie je platné holandské PSČ, napríklad 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Sem sa zmestí len jeden riadok. Odstráňte zalomenia riadkov.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Používajte len zaškrtávacie polia tejto otázky: jedno pole na možnosť.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Napíšte každý bod na vlastný riadok, s pomlčkou alebo číslom na začiatku.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabuľka už nie je správna: nechajte riadok hlavičky taký, aký bol, a dajte každému riadku rovnaký počet stĺpcov.',
+  'Dezelfde foto staat hier twee keer.': 'Tá istá fotografia je tu dvakrát.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Do tohto poľa patria len fotografie, žiadny voľný text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Políčko vášho súhlasu je poškodené. Obnovte formulár.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Táto odpoveď nemá podobu, ktorá patrí k tejto otázke.',
   'Downloaden…': 'Stiahnuť…',
   'Afbeelding opgeslagen als': 'Obrázok uložený ako',
   '{naam}: ingesteld': '{naam}: nastavené',

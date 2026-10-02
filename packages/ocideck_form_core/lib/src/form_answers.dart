@@ -35,6 +35,61 @@ class FormImageRef {
   int get hashCode => Object.hash(path, alt, credit);
 }
 
+/// The typed value of one answer — what a field type means, without the text it
+/// was read from. [FormAnswer.value] gives it; `formatAnswer` writes it back.
+///
+/// Which members carry data depends on the type, as for [FormAnswer]. Two values
+/// are equal when all five members are (lists compared element by element).
+class FormAnswerValue {
+  const FormAnswerValue({
+    this.text,
+    this.items = const [],
+    this.rows = const [],
+    this.images = const [],
+    this.consent,
+  });
+
+  final String? text;
+  final List<String> items;
+  final List<List<String>> rows;
+  final List<FormImageRef> images;
+  final bool? consent;
+
+  @override
+  bool operator ==(Object other) =>
+      other is FormAnswerValue &&
+      other.text == text &&
+      other.consent == consent &&
+      _sameList(other.items, items) &&
+      _sameList(other.images, images) &&
+      other.rows.length == rows.length &&
+      [
+        for (var i = 0; i < rows.length; i++) _sameList(other.rows[i], rows[i]),
+      ].every((same) => same);
+
+  @override
+  int get hashCode => Object.hash(
+    text,
+    consent,
+    Object.hashAll(items),
+    Object.hashAll(images),
+    Object.hashAll(rows.map(Object.hashAll)),
+  );
+
+  @override
+  String toString() =>
+      'FormAnswerValue(text: $text, items: $items, rows: $rows, '
+      'images: ${images.length}, consent: $consent)';
+}
+
+bool _sameList<T>(List<T> a, List<T> b) {
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] != b[i]) return false;
+  }
+  return true;
+}
+
 /// The typed content of one answer zone.
 ///
 /// Which members carry data depends on the type: [text] for text, prose,
@@ -80,6 +135,15 @@ class FormAnswer {
   /// `answer-malformed` problems found while reading: each says which `reason`
   /// and on which `line`.
   final List<FormProblem> shape;
+
+  /// The typed value, without the text it was read from.
+  FormAnswerValue get value => FormAnswerValue(
+    text: text,
+    items: items,
+    rows: rows,
+    images: images,
+    consent: consent,
+  );
 }
 
 /// The answers of a submission, and what is wrong with its structure.

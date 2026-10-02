@@ -666,6 +666,129 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kies een datum': 'Skohe un fecha',
+  'Anders, namelijk:': 'Otro, ku ta:',
+  'Punt {n}': 'Punto {n}',
+  'Punt {n} verwijderen': 'Kita punto {n}',
+  'Rij {n} verwijderen': 'Kita fila {n}',
+  'Foto {n} verwijderen': 'Kita potret {n}',
+  'Wat is er te zien op de foto?': 'Kiko ta mira riba e potret?',
+  'Van wie is de foto?': 'Di ken e potret ta?',
+  'Foto toevoegen': 'Agregá potret',
+  'Verplicht': 'Obligatorio',
+  'Alles is ingevuld.': 'Tur kos ta yená.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Ainda {n} pa hasi promé ku bo por manda:',
+  'klaar': 'kla',
+  '{n} open': '{n} habrí',
+  'Dit formulier kan niet worden ingevuld.':
+      'E formulario aki no por wòrdu yená.',
+  'Naar de bron': 'Bai na e fuente',
+  'Woorden': 'Palabranan',
+  'Tekens': 'Karakternan',
+  'Keuzes': 'Opshonnan',
+  'Rijen': 'Filanan',
+  'Foto’s': 'Potretnan',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (mínimo {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (máksimo {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mínimo {min}, máksimo {max})',
+  'Invullen': 'Yena',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Tin algu cos ku no ta bon na e formulario aki. Tuma kontakto ku e persona ku a hasié.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'E kampo aki ta obligatorio. Yena e pa por manda.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Abo a skirbi {actual} palabra; mester di mínimo {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Abo a skirbi {actual} palabra; ta permití máksimo {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Abo a skirbi {actual} karakter; mester di mínimo {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Abo a skirbi {actual} karakter; ta permití máksimo {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” no ta den e lista. Skohe un di e opshonnan.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” no ta un número. Usa sifra so, si ta nesesario ku un komá òf punto pa e desimalnan.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'E potret aki ta {actual} pixel ancho; aki ta pidi {min}. Probablemente e a bira mas chikitu ora e a wòrdu manda via un aplikashon di mensahe. Si abo ainda tin e original, usa esei. Si no, manda e tòg: e organisashon lo tuma kontakto ku abo.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'E potret aki ta {actual} MB; e máksimo ta {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'E kontenido di e archivo aki no ta kuadra ku su tipo di archivo.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'E tipo di archivo aki no ta permití aki.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'No por haña mas e archivo di e potret aki. Agregá e potret di nobo.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Deskribí den un frase kòrtiku kiko ta mira riba e potret.',
+  'Geef aan van wie de foto is.': 'Bisa di ken e potret ta.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'E potret aki ainda no a wòrdu kontrolá. Warda un momentu of agregá e di nobo.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'E potret aki ta un archivo HEIC. OciDeck no por kontrolá of limpia esaki aki, i p\'esei e ta wòrdu manda manera e ta. E por kontené unda e potret a wòrdu tumá. Si bo no ke kompartí esei, skohe “Mas kompatibel” den e konfigurashon di kamera of kompartí e potret komo JPEG i agregá e di nobo.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Riba e potret aki tin {actual} kara; tabata spera {expected}. Esaki ta un rekordatorio so.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Marka e kuadro pa duna bo konsentimentu; sin konsentimentu bo no por manda.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'E formulario aki ta pidi un versho mas nobo di OciDeck. Aktualisá e aplikashon pa yena e.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Algu den e formulario mes a wòrdu kambia pa aksidente. Restaurá e formulario; bo repsuestanan ta keda.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'E liña aki ta parse un kódigo di kontrol di e formulario i no mag aparesé den un repsuesta. Kambia e.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML no ta permití den un repsuesta. Usa teksto normal i formato simpel.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Un blòki di kódigo no ta sera. Sera e ku ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Den un repsuesta por tin solamente potret ku bo agregá den e formulario aki; un imagen di internet no.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Den un repsuesta ta permití solamente link ku ta kuminsá ku https:// i adres di e-mail.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'E archivo aki a wòrdu hasi ku un otro versho di e formulario (versho {submission}; awor ta balidu versho {published}). Kontrolá bo repsuestanan.',
+  'Punt {item}: {bericht}': 'Punto {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Awor tin {actual}; mester ta entre {min} i {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Awor tin {actual}; por ta máksimo {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Awor tin {actual}; mester ta mínimo {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'E número mester ta un múltiplo di {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'E número mester ta entre {min} i {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'E número por ta máksimo {max}.',
+  'Het getal moet minstens {min} zijn.': 'E número mester ta mínimo {min}.',
+  'De datum moet op of na {min} liggen.':
+      'E fecha mester ta riba of despues di {min}.',
+  'De datum moet op of vóór {max} liggen.':
+      'E fecha mester ta riba of promé ku {max}.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” no ta un fecha. Skirbi e fecha komo aña-luna-dia, por ehèmpel 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Esaki no ta un adres di e-mail válido.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Esaki no ta un adres di web válido. Kuminsá ku https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Esaki no ta un número di telefòn válido.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Esaki no ta un kódigo postal hulandes válido, manera 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Aki ta kabe un liña so. Kita e saltunan di liña.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Usa solamente e kuadronan di e pregunta aki: un kuadro pa kada opshon.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Skirbi kada punto riba su mes liña, ku un streepi of un número dilanti.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'E tabèl no ta korekto mas: laga e liña di kabes manera e tabata i duna kada liña e mesun kantidat di kolòm.',
+  'Dezelfde foto staat hier twee keer.':
+      'E mesun potret ta aparesé aki dos biaha.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Den e kampo aki ta pertenesé potret so, no teksto suelto.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'E kuadro pa bo konsentimentu ta daña. Restaurá e formulario.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'E repsuesta aki no tin e forma ku ta pertenesé na e pregunta aki.',
   'Downloaden…': 'Baha…',
   'Afbeelding opgeslagen als': 'Imagen warda komo',
   '{naam}: ingesteld': '{naam}: konfigurá',

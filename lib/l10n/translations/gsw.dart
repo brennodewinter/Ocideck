@@ -1630,6 +1630,129 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kies een datum': 'Datum uuswähle',
+  'Anders, namelijk:': 'Anders, nämlich:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Punkt {n} entferne',
+  'Rij {n} verwijderen': 'Zile {n} entferne',
+  'Foto {n} verwijderen': 'Foti {n} entferne',
+  'Wat is er te zien op de foto?': 'Was isch uf em Foti z gseh?',
+  'Van wie is de foto?': 'Vo wem isch s Foti?',
+  'Foto toevoegen': 'Foti dezuefüege',
+  'Verplicht': 'Pflicht',
+  'Alles is ingevuld.': 'Alles isch uusgfüllt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'No {n} z mache, bevor du chasch schicke:',
+  'klaar': 'erledigt',
+  '{n} open': '{n} offe',
+  'Dit formulier kan niet worden ingevuld.':
+      'Das Formular cha nöd uusgfüllt wärde.',
+  'Naar de bron': 'Zur Quelle',
+  'Woorden': 'Wörter',
+  'Tekens': 'Zeiche',
+  'Keuzes': 'Uswahle',
+  'Rijen': 'Zile',
+  'Foto’s': 'Foti',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mindestens {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (höchstens {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mindestens {min}, höchstens {max})',
+  'Invullen': 'Uusfülle',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Mit dem Formular stimmt öppis nöd. Nimm Kontakt uf mit dem, wo\'s gmacht het.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Das Fäld isch Pflicht. Füll\'s uus, damit du chasch schicke.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Du hesch {actual} Wörter gschribe; es bruucht mindestens {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hesch {actual} Wörter gschribe; erlaubt sind höchstens {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Du hesch {actual} Zeiche gschribe; es bruucht mindestens {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Du hesch {actual} Zeiche gschribe; erlaubt sind höchstens {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '«{value}» staht nöd i de Lischte. Wähl eini vo de Optione.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '«{value}» isch kei Zahl. Bruuch nume Ziffere, wänn nötig mit Komma oder Punkt für d Dezimale.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Das Foti isch {actual} Pixel breit; da wärded {min} verlangt. Wahrschindlich isch es chliiner worde, wo\'s über e Messenger-App gschickt worde isch. Wänn du s Original no hesch, nimm das. Susch schick\'s trotzdem mit: D Organisation meldet sich bi dir.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Das Foti isch {actual} MB gross; s Maximum isch {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'De Inhalt vo dere Datei passt nöd zum Dateityp.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Dä Dateityp isch da nöd erlaubt.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'D Datei vo dem Foti isch nümme z finde. Füeg s Foti nomal dezue.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Beschriib i eim churze Satz, was uf em Foti z gseh isch.',
+  'Geef aan van wie de foto is.': 'Gib a, vo wem s Foti isch.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Das Foti isch na nöd prüeft worde. Wart en Augeblick oder füeg\'s nomal dezue.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Das Foti isch e HEIC-Datei. OciDeck cha si da wedr prüefe no putze, drum wird si so gschickt, wie si isch. Es chan dri stah, wo s Foti gmacht worde isch. Wänn du das nöd wotsch teile, wähl i de Kamera-Istellige «Maximal kompatibel» oder teil s Foti als JPEG und füeg\'s nomal dezue.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Uf dem Foti sind {actual} Gsichter z gseh; erwartet worde sind {expected}. Das isch nume en Erinnerig.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Setz s Häkli, zum zuestimme; ohni Iwilligung chasch nöd schicke.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Das Formular bruucht e neuer Version vo OciDeck. Aktualisier d App, zum s uusfülle.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Im Formular sälber isch us Versehe öppis gänderet worde. Stell s Formular wider här; dini Antworte bliibed.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Die Zile gseht uus wie en Steuercode vom Formular und darf nöd i ere Antwort stah. Ändere sie.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML isch i ere Antwort nöd erlaubt. Bruuch normale Text und eifachi Formatierig.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'En Codeblock isch nöd gschlosse. Schliess en mit ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'I ere Antwort sind nume Foti möglich, wo du i dem Formular dezuefüegsch; es Bild us em Internet nöd.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'I ere Antwort sind nume Links erlaubt, wo mit https:// afanged, und E-Mail-Adresse.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Die Datei isch mit ere andere Version vom Formular gmacht worde (Version {submission}; jetzt gilt Version {published}). Prüef dini Antworte.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Es sind jetzt {actual}; es müend zwüschet {min} und {max} sii.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Es sind jetzt {actual}; es dörfed höchstens {max} sii.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Es sind jetzt {actual}; es müend mindestens {min} sii.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'D Zahl muess es Vilfachs vo {step} sii.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'D Zahl muess zwüschet {min} und {max} lige.',
+  'Het getal mag hoogstens {max} zijn.': 'D Zahl darf höchstens {max} sii.',
+  'Het getal moet minstens {min} zijn.': 'D Zahl muess mindestens {min} sii.',
+  'De datum moet op of na {min} liggen.':
+      'S Datum muess am oder nach em {min} lige.',
+  'De datum moet op of vóór {max} liggen.':
+      'S Datum muess am oder vor em {max} lige.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '«{value}» isch kei Datum. Schrib s Datum als Jahr-Monat-Tag, zum Bispil 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Das isch kei gültigi E-Mail-Adrässe.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Das isch kei gültigi Web-Adrässe. Fang mit https:// aa.',
+  'Dit is geen geldig telefoonnummer.': 'Das isch kei gültigi Telefonnummere.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Das isch kei gültigi niderländischi Poschtleitzahl, wie 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Da passt nume ei Zile. Nimm d Zilebrüch use.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Bruuch nume d Chäschtli vo dere Frag: ei Chäschtli pro Option.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Schrib jede Punkt i en eigeni Zile, mit eme Strich oder ere Nummere vorane.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'D Tabälle stimmt nümme: lah d Chopfzile, wie si gsi isch, und gib jeder Zile gliich viel Spalte.',
+  'Dezelfde foto staat hier twee keer.': 'Dasselbe Foti staht da zwümal.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'I das Fäld ghöred nume Foti, kei lose Text.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'S Chäschtli für dini Iwilligung isch kaputt. Stell s Formular wider här.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Die Antwort hät nöd d Form, wo zu dere Frag ghört.',
   'Downloaden…': 'Abelade…',
   'Afbeelding opgeslagen als': 'Bild gschpeicheret als',
   '{naam}: ingesteld': '{naam}: iigrichtet',

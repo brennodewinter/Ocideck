@@ -1645,6 +1645,129 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kies een datum': 'Agħżel data',
+  'Anders, namelijk:': 'Oħra, jiġifieri:',
+  'Punt {n}': 'Element {n}',
+  'Punt {n} verwijderen': 'Neħħi l-element {n}',
+  'Rij {n} verwijderen': 'Neħħi r-ringiela {n}',
+  'Foto {n} verwijderen': 'Neħħi r-ritratt {n}',
+  'Wat is er te zien op de foto?': 'X\'jidher fir-ritratt?',
+  'Van wie is de foto?': 'Ta\' min huwa r-ritratt?',
+  'Foto toevoegen': 'Żid ritratt',
+  'Verplicht': 'Meħtieġ',
+  'Alles is ingevuld.': 'Kollox ġie mimli.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Fadal {n} x\'tagħmel qabel ma tkun tista\' tibgħat:',
+  'klaar': 'lest',
+  '{n} open': '{n} miftuħa',
+  'Dit formulier kan niet worden ingevuld.':
+      'Din il-formola ma tistax tiġi mimlija.',
+  'Naar de bron': 'Mur għas-sors',
+  'Woorden': 'Kelmiet',
+  'Tekens': 'Karattri',
+  'Keuzes': 'Għażliet',
+  'Rijen': 'Ringieli',
+  'Foto’s': 'Ritratti',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (mill-inqas {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (l-aktar {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (mill-inqas {min}, l-aktar {max})',
+  'Invullen': 'Imla',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Xi ħaġa mhix sewwa f\'din il-formola. Ikkuntattja lil dak li ħarġuha.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Dan il-qasam huwa meħtieġ. Imlieh biex tkun tista\' tibgħat.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Ktibt {actual} kelmiet; meħtieġa mill-inqas {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Ktibt {actual} kelmiet; huma permessi l-aktar {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Ktibt {actual} karattri; meħtieġa mill-inqas {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Ktibt {actual} karattri; huma permessi l-aktar {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” mhuwiex fil-lista. Agħżel waħda mill-għażliet.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” mhuwiex numru. Uża ċifri biss, jekk meħtieġ b\'virgola jew b\'punt għad-deċimali.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Dan ir-ritratt huwa {actual} pixel wiesa\'; hawn jintalbu {min}. Probabbilment sar iżgħar meta intbagħat permezz ta\' app tal-messaġġi. Jekk għad għandek l-oriġinal, uża dak. Jekk le, ibgħatu xorta waħda: l-organizzazzjoni se tikkuntattjak.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Dan ir-ritratt huwa {actual} MB; il-massimu huwa {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Il-kontenut ta\' dan il-fajl ma jaqbilx mat-tip tiegħu.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Dan it-tip ta\' fajl mhuwiex permess hawn.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Il-fajl ta\' dan ir-ritratt ma jinstabx aktar. Żid ir-ritratt mill-ġdid.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Iddeskrivi f\'sentenza qasira x\'jidher fir-ritratt.',
+  'Geef aan van wie de foto is.': 'Indika ta\' min huwa r-ritratt.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Dan ir-ritratt għadu ma ġiex iċċekkjat. Stenna ftit jew żidu mill-ġdid.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Dan ir-ritratt huwa fajl HEIC. OciDeck ma jistax jiċċekkjah jew inaddfu hawn, għalhekk jintbagħat kif inhu. Jista\' jkun fih fejn ittieħed ir-ritratt. Jekk ma tridx taqsam dan, agħżel “L-aktar kompatibbli” fl-issettjar tal-kamera jew aqsam ir-ritratt bħala JPEG u żidu mill-ġdid.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'F\'dan ir-ritratt jidhru {actual} uċuħ; kienu mistennija {expected}. Din hija biss tfakkira.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Immarka l-kaxxa biex taqbel; mingħajr kunsens ma tistax tibgħat.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Din il-formola teħtieġ verżjoni aktar riċenti ta\' OciDeck. Aġġorna l-app biex timlieha.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Xi ħaġa fil-formola nnifisha nbidlet bi żball. Irrestawra l-formola; it-tweġibiet tiegħek jibqgħu.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Din il-linja tidher bħal kodiċi ta\' kontroll tal-formola u ma tistax tidher f\'tweġiba. Biddilha.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'L-HTML mhuwiex permess f\'tweġiba. Uża test sempliċi u formattjar sempliċi.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blokk tal-kodiċi mhuwiex magħluq. Agħlqu b\'```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'F\'tweġiba jistgħu jidhru biss ritratti li żżid f\'din il-formola; stampa mill-internet ma tistax.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'F\'tweġiba huma permessi biss links li jibdew b\'https:// u indirizzi tal-email.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Dan il-fajl inħoloq b\'verżjoni differenti tal-formola (verżjoni {submission}; issa tapplika l-verżjoni {published}). Iċċekkja t-tweġibiet tiegħek.',
+  'Punt {item}: {bericht}': 'Element {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Il-għadd issa huwa {actual}; irid ikun bejn {min} u {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Il-għadd issa huwa {actual}; jista\' jkun l-aktar {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Il-għadd issa huwa {actual}; irid ikun mill-inqas {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'In-numru jrid ikun multiplu ta\' {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'In-numru jrid ikun bejn {min} u {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'In-numru jista\' jkun l-aktar {max}.',
+  'Het getal moet minstens {min} zijn.': 'In-numru jrid ikun mill-inqas {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Id-data trid tkun {min} jew aktar tard.',
+  'De datum moet op of vóór {max} liggen.':
+      'Id-data trid tkun {max} jew aktar kmieni.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” mhijiex data. Ikteb id-data bħala sena-xahar-jum, pereżempju 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Dan mhuwiex indirizz tal-email validu.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Dan mhuwiex indirizz web validu. Ibda b\'https://.',
+  'Dit is geen geldig telefoonnummer.': 'Dan mhuwiex numru tat-telefon validu.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Dan mhuwiex kodiċi postali Olandiż validu, bħal 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Hawn tidħol linja waħda biss. Neħħi l-qsim tal-linji.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Uża biss il-kaxxi ta\' din il-mistoqsija: kaxxa waħda għal kull għażla.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Ikteb kull punt f\'linja tiegħu, b\'sing jew b\'numru quddiemu.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'It-tabella m\'għadhiex korretta: ħalli r-ringiela tat-titlu kif kienet u agħti lil kull ringiela l-istess numru ta\' kolonni.',
+  'Dezelfde foto staat hier twee keer.':
+      'L-istess ritratt jidher hawn darbtejn.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'F\'dan il-qasam jappartjenu ritratti biss, mhux test maħlul.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Il-kaxxa tal-kunsens tiegħek hija mħassra. Irrestawra l-formola.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Din it-tweġiba m\'għandhiex il-forma li tappartjeni għal din il-mistoqsija.',
   'Downloaden…': 'Niżżel…',
   'Afbeelding opgeslagen als': 'Immaġini ssejvjata bħala',
   '{naam}: ingesteld': '{naam}: issettjat',

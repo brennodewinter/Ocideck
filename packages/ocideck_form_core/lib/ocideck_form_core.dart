@@ -4,16 +4,20 @@
 ///
 /// Design: `docs/design/FORM_INTAKE.md` in the OciDeck repository. What exists so
 /// far: [parseForm] turns a template into a [FormSpec] (§4.3, §4.4); [parseAnswer]
-/// and [extractAnswers] read answers out of their zones; [validateAnswer] and
+/// and [extractAnswers] read answers out of their zones and [applyAnswer] writes
+/// one back; [validateAnswer] and
 /// [validateForm] judge them; [templateTextIssues] checks that the template-owned
 /// text of a submission is still the published one. The package, sealing and the
 /// image probe come next.
 library;
 
 export 'src/form_answer_safety.dart';
+export 'src/form_answer_writer.dart';
 export 'src/form_answers.dart';
 export 'src/form_blocks.dart';
+export 'src/form_counts.dart';
 export 'src/form_field_types.dart';
+export 'src/form_fill.dart';
 export 'src/form_issue.dart';
 export 'src/form_parser.dart' show parseForm;
 export 'src/form_patterns.dart';

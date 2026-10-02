@@ -1652,6 +1652,132 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kies een datum': 'Επιλογή ημερομηνίας',
+  'Anders, namelijk:': 'Άλλο, συγκεκριμένα:',
+  'Punt {n}': 'Σημείο {n}',
+  'Punt {n} verwijderen': 'Αφαίρεση σημείου {n}',
+  'Rij {n} verwijderen': 'Αφαίρεση γραμμής {n}',
+  'Foto {n} verwijderen': 'Αφαίρεση φωτογραφίας {n}',
+  'Wat is er te zien op de foto?': 'Τι φαίνεται στη φωτογραφία;',
+  'Van wie is de foto?': 'Ποιανού είναι η φωτογραφία;',
+  'Foto toevoegen': 'Προσθήκη φωτογραφίας',
+  'Verplicht': 'Υποχρεωτικό',
+  'Alles is ingevuld.': 'Όλα έχουν συμπληρωθεί.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Απομένουν {n} πριν μπορέσετε να στείλετε:',
+  'klaar': 'έτοιμο',
+  '{n} open': '{n} ανοιχτά',
+  'Dit formulier kan niet worden ingevuld.':
+      'Αυτή η φόρμα δεν μπορεί να συμπληρωθεί.',
+  'Naar de bron': 'Στην πηγή',
+  'Woorden': 'Λέξεις',
+  'Tekens': 'Χαρακτήρες',
+  'Keuzes': 'Επιλογές',
+  'Rijen': 'Γραμμές',
+  'Foto’s': 'Φωτογραφίες',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (τουλάχιστον {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (το πολύ {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (τουλάχιστον {min}, το πολύ {max})',
+  'Invullen': 'Συμπλήρωση',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Κάτι δεν πάει καλά με αυτή τη φόρμα. Επικοινωνήστε με όποιον την έφτιαξε.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Αυτό το πεδίο είναι υποχρεωτικό. Συμπληρώστε το για να μπορέσετε να στείλετε.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Γράψατε {actual} λέξεις· χρειάζονται τουλάχιστον {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Γράψατε {actual} λέξεις· επιτρέπονται το πολύ {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Γράψατε {actual} χαρακτήρες· χρειάζονται τουλάχιστον {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Γράψατε {actual} χαρακτήρες· επιτρέπονται το πολύ {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      'Το «{value}» δεν υπάρχει στη λίστα. Επιλέξτε μία από τις επιλογές.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      'Το «{value}» δεν είναι αριθμός. Χρησιμοποιήστε μόνο ψηφία, ενδεχομένως με κόμμα ή τελεία για τα δεκαδικά.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Αυτή η φωτογραφία έχει πλάτος {actual} pixel· εδώ ζητούνται {min}. Πιθανότατα μίκρυνε όταν στάλθηκε μέσω εφαρμογής μηνυμάτων. Αν έχετε ακόμη το πρωτότυπο, χρησιμοποιήστε το. Αν όχι, στείλτε την παρ\' όλα αυτά: ο διοργανωτής θα επικοινωνήσει μαζί σας.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Αυτή η φωτογραφία είναι {actual} MB· το μέγιστο είναι {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Το περιεχόμενο αυτού του αρχείου δεν ταιριάζει με τον τύπο του.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Αυτός ο τύπος αρχείου δεν επιτρέπεται εδώ.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Το αρχείο αυτής της φωτογραφίας δεν βρίσκεται πια. Προσθέστε ξανά τη φωτογραφία.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Περιγράψτε με μία σύντομη πρόταση τι φαίνεται στη φωτογραφία.',
+  'Geef aan van wie de foto is.': 'Δηλώστε ποιανού είναι η φωτογραφία.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Αυτή η φωτογραφία δεν έχει ελεγχθεί ακόμη. Περιμένετε λίγο ή προσθέστε την ξανά.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Αυτή η φωτογραφία είναι αρχείο HEIC. Το OciDeck δεν μπορεί να το ελέγξει ή να το καθαρίσει εδώ, οπότε αποστέλλεται ως έχει. Μπορεί να περιέχει πού τραβήχτηκε η φωτογραφία. Αν δεν θέλετε να το μοιραστείτε, επιλέξτε «Μέγιστη συμβατότητα» στις ρυθμίσεις της κάμερας ή μοιραστείτε τη φωτογραφία ως JPEG και προσθέστε την ξανά.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Σε αυτή τη φωτογραφία φαίνονται {actual} πρόσωπα· αναμένονταν {expected}. Είναι μόνο μια υπενθύμιση.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Τσεκάρετε το πλαίσιο για να συμφωνήσετε· χωρίς συναίνεση δεν μπορείτε να στείλετε.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Αυτή η φόρμα απαιτεί νεότερη έκδοση του OciDeck. Ενημερώστε την εφαρμογή για να τη συμπληρώσετε.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Κάτι στην ίδια τη φόρμα άλλαξε κατά λάθος. Επαναφέρετε τη φόρμα· οι απαντήσεις σας παραμένουν.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Αυτή η γραμμή μοιάζει με κωδικό ελέγχου της φόρμας και δεν επιτρέπεται σε απάντηση. Αλλάξτε την.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'Η HTML δεν επιτρέπεται σε μια απάντηση. Χρησιμοποιήστε απλό κείμενο και απλή μορφοποίηση.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Ένα μπλοκ κώδικα δεν έχει κλείσει. Κλείστε το με ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Σε μια απάντηση μπορούν να μπουν μόνο φωτογραφίες που προσθέτετε σε αυτή τη φόρμα· εικόνα από το διαδίκτυο όχι.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Σε μια απάντηση επιτρέπονται μόνο σύνδεσμοι που ξεκινούν με https:// και διευθύνσεις email.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Αυτό το αρχείο δημιουργήθηκε με άλλη έκδοση της φόρμας (έκδοση {submission}· τώρα ισχύει η έκδοση {published}). Ελέγξτε τις απαντήσεις σας.',
+  'Punt {item}: {bericht}': 'Σημείο {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Τώρα είναι {actual}· πρέπει να είναι από {min} έως {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Τώρα είναι {actual}· επιτρέπονται το πολύ {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Τώρα είναι {actual}· πρέπει να είναι τουλάχιστον {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Ο αριθμός πρέπει να είναι πολλαπλάσιο του {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Ο αριθμός πρέπει να είναι από {min} έως {max}.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Ο αριθμός μπορεί να είναι το πολύ {max}.',
+  'Het getal moet minstens {min} zijn.':
+      'Ο αριθμός πρέπει να είναι τουλάχιστον {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Η ημερομηνία πρέπει να είναι η {min} ή μεταγενέστερη.',
+  'De datum moet op of vóór {max} liggen.':
+      'Η ημερομηνία πρέπει να είναι η {max} ή προγενέστερη.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      'Το «{value}» δεν είναι ημερομηνία. Γράψτε την ημερομηνία ως έτος-μήνας-ημέρα, για παράδειγμα 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Αυτή δεν είναι έγκυρη διεύθυνση email.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Αυτή δεν είναι έγκυρη διεύθυνση ιστού. Ξεκινήστε με https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Αυτό δεν είναι έγκυρος αριθμός τηλεφώνου.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Αυτός δεν είναι έγκυρος ολλανδικός ταχυδρομικός κώδικας, όπως 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Εδώ χωράει μόνο μία γραμμή. Αφαιρέστε τις αλλαγές γραμμής.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Χρησιμοποιήστε μόνο τα πλαίσια αυτής της ερώτησης: ένα πλαίσιο ανά επιλογή.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Γράψτε κάθε σημείο σε δική του γραμμή, με παύλα ή αριθμό μπροστά.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Ο πίνακας δεν είναι πια σωστός: αφήστε τη γραμμή κεφαλίδας όπως ήταν και δώστε σε κάθε γραμμή τον ίδιο αριθμό στηλών.',
+  'Dezelfde foto staat hier twee keer.':
+      'Η ίδια φωτογραφία εμφανίζεται εδώ δύο φορές.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Σε αυτό το πεδίο ανήκουν μόνο φωτογραφίες, όχι ελεύθερο κείμενο.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Το πλαίσιο της συναίνεσής σας είναι κατεστραμμένο. Επαναφέρετε τη φόρμα.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Αυτή η απάντηση δεν έχει τη μορφή που ταιριάζει σε αυτή την ερώτηση.',
   'Downloaden…': 'Λήψη…',
   'Afbeelding opgeslagen als': 'Η εικόνα αποθηκεύτηκε ως',
   '{naam}: ingesteld': '{naam}: έχει ρυθμιστεί',

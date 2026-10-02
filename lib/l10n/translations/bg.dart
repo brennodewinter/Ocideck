@@ -1647,6 +1647,129 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kies een datum': 'Избор на дата',
+  'Anders, namelijk:': 'Друго, а именно:',
+  'Punt {n}': 'Точка {n}',
+  'Punt {n} verwijderen': 'Премахване на точка {n}',
+  'Rij {n} verwijderen': 'Премахване на ред {n}',
+  'Foto {n} verwijderen': 'Премахване на снимка {n}',
+  'Wat is er te zien op de foto?': 'Какво се вижда на снимката?',
+  'Van wie is de foto?': 'Чия е снимката?',
+  'Foto toevoegen': 'Добавяне на снимка',
+  'Verplicht': 'Задължително',
+  'Alles is ingevuld.': 'Всичко е попълнено.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Остават още {n}, преди да можете да изпратите:',
+  'klaar': 'готово',
+  '{n} open': '{n} отворени',
+  'Dit formulier kan niet worden ingevuld.':
+      'Този формуляр не може да бъде попълнен.',
+  'Naar de bron': 'Към източника',
+  'Woorden': 'Думи',
+  'Tekens': 'Знаци',
+  'Keuzes': 'Избори',
+  'Rijen': 'Редове',
+  'Foto’s': 'Снимки',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (поне {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (най-много {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (поне {min}, най-много {max})',
+  'Invullen': 'Попълване',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Нещо не е наред с този формуляр. Свържете се с този, който го е създал.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Това поле е задължително. Попълнете го, за да можете да изпратите.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Написахте {actual} думи; необходими са поне {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Написахте {actual} думи; разрешени са най-много {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Написахте {actual} знака; необходими са поне {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Написахте {actual} знака; разрешени са най-много {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ не е в списъка. Изберете една от опциите.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ не е число. Използвайте само цифри, при нужда със запетая или точка за десетични.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Тази снимка е широка {actual} пиксела; тук се изискват {min}. Вероятно е била намалена при изпращане през приложение за съобщения. Ако все още имате оригинала, използвайте него. Ако не, изпратете я все пак: организаторът ще се свърже с вас.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Тази снимка е {actual} MB; максимумът е {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Съдържанието на този файл не съответства на типа му.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Този тип файл не е разрешен тук.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Файлът на тази снимка вече не може да бъде намерен. Добавете снимката отново.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Опишете с едно кратко изречение какво се вижда на снимката.',
+  'Geef aan van wie de foto is.': 'Посочете чия е снимката.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Тази снимка още не е проверена. Изчакайте малко или я добавете отново.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Тази снимка е HEIC файл. OciDeck не може да го провери или почисти тук, затова се изпраща такъв, какъвто е. Може да съдържа къде е направена снимката. Ако не искате да споделяте това, изберете „Най-съвместим“ в настройките на камерата или споделете снимката като JPEG и я добавете отново.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'На тази снимка се виждат {actual} лица; очакваха се {expected}. Това е само напомняне.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Поставете отметка, за да се съгласите; без съгласие не можете да изпратите.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Този формуляр изисква по-нова версия на OciDeck. Обновете приложението, за да го попълните.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Нещо във самия формуляр е променено случайно. Възстановете формуляра; отговорите ви остават.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Този ред прилича на управляващ код на формуляра и не може да бъде в отговор. Променете го.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML не е разрешен в отговор. Използвайте обикновен текст и просто форматиране.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Кодов блок не е затворен. Затворете го с ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'В отговор могат да бъдат само снимки, които добавяте в този формуляр; изображение от интернет не може.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'В отговор са разрешени само връзки, започващи с https://, и имейл адреси.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Този файл е създаден с друга версия на формуляра (версия {submission}; сега важи версия {published}). Проверете отговорите си.',
+  'Punt {item}: {bericht}': 'Точка {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Сега са {actual}; трябва да са между {min} и {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Сега са {actual}; могат да са най-много {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Сега са {actual}; трябва да са поне {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Числото трябва да бъде кратно на {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Числото трябва да е между {min} и {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Числото може да е най-много {max}.',
+  'Het getal moet minstens {min} zijn.': 'Числото трябва да е поне {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Датата трябва да е {min} или по-късна.',
+  'De datum moet op of vóór {max} liggen.':
+      'Датата трябва да е {max} или по-ранна.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ не е дата. Запишете датата като година-месец-ден, например 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Това не е валиден имейл адрес.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Това не е валиден уеб адрес. Започнете с https://.',
+  'Dit is geen geldig telefoonnummer.': 'Това не е валиден телефонен номер.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Това не е валиден нидерландски пощенски код, например 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Тук се събира само един ред. Премахнете новите редове.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Използвайте само квадратчетата на този въпрос: по едно на опция.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Пишете всяка точка на отделен ред, с тире или номер отпред.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Таблицата вече не е правилна: оставете реда със заглавията такъв, какъвто беше, и дайте на всеки ред еднакъв брой колони.',
+  'Dezelfde foto staat hier twee keer.':
+      'Същата снимка се появява тук два пъти.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'В това поле са допустими само снимки, без самостоятелен текст.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Квадратчето за вашето съгласие е повредено. Възстановете формуляра.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Този отговор няма формата, която подхожда на този въпрос.',
   'Downloaden…': 'Изтегляне…',
   'Afbeelding opgeslagen als': 'Изображението е запазено като',
   '{naam}: ingesteld': '{naam}: настроен',
