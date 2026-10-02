@@ -12,8 +12,11 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
+import '../../theme/app_theme.dart';
+
 import '../../l10n/app_localizations.dart';
 import '../../l10n/form_issue_localization.dart';
+import '../../models/settings.dart' show ThemeProfile;
 import '../markdown_editor/markdown_editor_theme.dart' show DocumentStyleScope;
 import '../reader/document_markdown_view.dart';
 import 'form_field_card.dart';
@@ -136,7 +139,28 @@ class _FormFillViewState extends State<FormFillView> {
         onShowSource: widget.onShowSource,
       );
     }
-    final theme = Theme.of(context);
+    final base = Theme.of(context);
+    final scheme = _pageScheme(base, DocumentStyleScope.maybeOf(context));
+    final theme = base.copyWith(
+      colorScheme: scheme,
+      textTheme: base.textTheme.apply(
+        bodyColor: scheme.onSurface,
+        displayColor: scheme.onSurface,
+      ),
+    );
+    // De pagina is papier in de kleur van de documentstijl: dezelfde als de
+    // weergave van de Markdown erin, anders lag elk label als een lichter
+    // vlak op zijn kaart.
+    return Theme(
+      data: theme,
+      child: ColoredBox(
+        color: scheme.surface,
+        child: _page(context, fill, theme),
+      ),
+    );
+  }
+
+  Widget _page(BuildContext context, FormFill fill, ThemeData theme) {
     return Scrollbar(
       controller: _scroll,
       child: SingleChildScrollView(
@@ -218,7 +242,10 @@ class _Summary extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: scheme.surfaceContainerHigh,
+          color: Color.alphaBlend(
+            scheme.onSurface.withValues(alpha: 0.06),
+            scheme.surface,
+          ),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -323,7 +350,10 @@ class _NoticeCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: scheme.secondaryContainer.withValues(alpha: 0.4),
+        color: Color.alphaBlend(
+          scheme.onSurface.withValues(alpha: 0.05),
+          scheme.surface,
+        ),
         border: Border.all(color: scheme.outlineVariant),
         borderRadius: BorderRadius.circular(8),
       ),
@@ -379,4 +409,33 @@ class _Unavailable extends StatelessWidget {
       ),
     );
   }
+}
+
+/// De kleuren van de pagina: die van het thema, of — met een documentstijl — het
+/// papier en de tekstkleur van die stijl, zoals `DocumentMarkdownView` ze zet.
+/// Een lichte stijl in een donkere app moet leesbaar blijven, dus niet alleen het
+/// papier maar ook de inkt volgt de stijl.
+ColorScheme _pageScheme(ThemeData base, ThemeProfile? profile) {
+  final scheme = base.colorScheme;
+  if (profile == null) return scheme;
+  final paper = AppTheme.parseHexColor(
+    profile.slideBackgroundColor,
+    fallback: scheme.surface,
+  );
+  final ink = AppTheme.parseHexColor(
+    profile.textColor,
+    fallback: scheme.onSurface,
+  );
+  final accent = AppTheme.parseHexColor(
+    profile.accentColor,
+    fallback: scheme.primary,
+  );
+  return scheme.copyWith(
+    brightness: ThemeData.estimateBrightnessForColor(paper),
+    surface: paper,
+    onSurface: ink,
+    onSurfaceVariant: ink.withValues(alpha: 0.72),
+    outlineVariant: ink.withValues(alpha: 0.22),
+    primary: accent,
+  );
 }

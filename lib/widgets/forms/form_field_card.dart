@@ -71,6 +71,23 @@ class _FormFieldCardState extends State<FormFieldCard> {
     });
   }
 
+  /// Een eis die pas getoond wordt als het veld is aangeraakt: het veld is leeg, of
+  /// het vakje van de toestemming is nog niet aangevinkt. Dat zijn de dingen die
+  /// een formulier bij het openen al zou moeten tonen zonder dat de invuller iets
+  /// fout deed.
+  static bool _isRequirement(FormProblem p) =>
+      p.code == FormIssueCode.requiredEmpty ||
+      p.code == FormIssueCode.consentNotGiven;
+
+  /// Een teller is pas rood als er iets fout gaat: te veel, of te weinig nadat de
+  /// invuller het veld heeft aangeraakt. Een leeg veld dat nog niet aan de
+  /// minimum toe is, is geen fout maar een begin.
+  bool _counterIsWrong(FormCount count) {
+    final max = count.max;
+    if (max != null && count.actual > max) return true;
+    return widget.showRequired && !count.met;
+  }
+
   /// Het label van het veld als Markdown: wat de auteur tussen de markers zette.
   String get _labelMarkdown {
     final region = _field.label;
@@ -93,7 +110,7 @@ class _FormFieldCardState extends State<FormFieldCard> {
     final problems = [
       ?_refusal,
       for (final p in widget.fill.problemsOf(widget.fieldId))
-        if (p.code != FormIssueCode.requiredEmpty || widget.showRequired) p,
+        if (!_isRequirement(p) || widget.showRequired) p,
     ];
     final hasError = problems.any((p) => p.severity == FormSeverity.error);
     final counts = formCounts(field, _draft);
@@ -105,7 +122,7 @@ class _FormFieldCardState extends State<FormFieldCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Material(
-        color: scheme.surfaceContainerLow,
+        color: scheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
           side: BorderSide(
@@ -150,7 +167,9 @@ class _FormFieldCardState extends State<FormFieldCard> {
                   child: Text(
                     formCountLabel(l10n, count),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: count.met ? scheme.onSurfaceVariant : scheme.error,
+                      color: _counterIsWrong(count)
+                          ? scheme.error
+                          : scheme.onSurfaceVariant,
                     ),
                   ),
                 ),

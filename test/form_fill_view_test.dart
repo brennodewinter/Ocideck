@@ -7,7 +7,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/widgets/forms/form_field_card.dart';
+import 'package:ocideck/widgets/markdown_editor/markdown_editor_theme.dart';
 import 'package:ocideck/widgets/forms/form_fill_view.dart';
 
 const String formulier = '''<!-- form id=kookboek version=2 -->
@@ -633,6 +635,132 @@ void main() {
       await tester.pump();
       expect(bodyOf(host), contains('| 1 | 2 |\n| 5 | 6 |\n'));
       expect(bodyOf(host), isNot(contains('| 3 | 4 |')));
+    });
+  });
+
+  group('wanneer iets rood is', () {
+    Color? kleurVan(WidgetTester tester, String tekst) =>
+        tester.widget<Text>(find.text(tekst)).style?.color;
+
+    testWidgets(
+      'een toestemming die nog niet is gegeven staat er niet bij het openen',
+      (tester) async {
+        await pumpFill(tester, formulier);
+        expect(find.textContaining('Zet het vinkje'), findsNothing);
+      },
+    );
+
+    testWidgets('wie het vakje aanvinkt en weer uitzet krijgt de eis te zien', (
+      tester,
+    ) async {
+      await pumpFill(tester, formulier);
+      await tester.tap(find.byType(Checkbox));
+      await tester.pump();
+      await tester.tap(find.byType(Checkbox));
+      await tester.pump();
+      expect(find.textContaining('Zet het vinkje'), findsOneWidget);
+    });
+
+    testWidgets(
+      'een teller die nog niet aan zijn minimum toe is blijft rustig',
+      (tester) async {
+        await pumpFill(tester, formulier);
+        const tekst = 'Woorden: 0 (minimaal 3, maximaal 6)';
+        final scheme = Theme.of(tester.element(find.text(tekst))).colorScheme;
+        expect(kleurVan(tester, tekst), scheme.onSurfaceVariant);
+      },
+    );
+
+    testWidgets('dezelfde teller wordt rood nadat het veld is aangeraakt', (
+      tester,
+    ) async {
+      await pumpFill(tester, formulier);
+      await tester.enterText(find.byType(TextField).last, 'een');
+      await tester.pump();
+      const tekst = 'Woorden: 1 (minimaal 3, maximaal 6)';
+      final scheme = Theme.of(tester.element(find.text(tekst))).colorScheme;
+      expect(kleurVan(tester, tekst), scheme.error);
+    });
+
+    testWidgets('een teller boven zijn maximum is meteen rood', (tester) async {
+      await pumpFill(
+        tester,
+        formulier.replaceFirst(
+          '<!-- answer -->\n<!-- /field id=verhaal -->',
+          '<!-- answer -->\neen twee drie vier vijf zes zeven\n<!-- /field id=verhaal -->',
+        ),
+      );
+      const tekst = 'Woorden: 7 (minimaal 3, maximaal 6)';
+      final scheme = Theme.of(tester.element(find.text(tekst))).colorScheme;
+      expect(kleurVan(tester, tekst), scheme.error);
+    });
+  });
+
+  group('de stijl van het document', () {
+    testWidgets(
+      'zonder stijl is het papier de oppervlaktekleur van het thema',
+      (tester) async {
+        await pumpFill(tester, formulier);
+        final buitenste = tester.widget<ColoredBox>(
+          find
+              .descendant(
+                of: find.byType(FormFillView),
+                matching: find.byType(ColoredBox),
+              )
+              .first,
+        );
+        final scheme = Theme.of(
+          tester.element(find.byType(FormFillView)),
+        ).colorScheme;
+        expect(buitenste.color, scheme.surface);
+        expect(buitenste.color, isNot(const Color(0xFFFFF3D6)));
+      },
+    );
+
+    testWidgets('het papier en de inkt van de stijl gaan ook voor de invoer', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(900, 3000);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      const stijl = ThemeProfile(
+        name: 'Crème',
+        slideBackgroundColor: '#FFF3D6',
+        textColor: '#1A2B3C',
+      );
+      await tester.pumpWidget(
+        MaterialApp(
+          locale: const Locale('nl'),
+          // Een donkere app met een lichte documentstijl: de inkt moet de stijl
+          // volgen, anders staat er lichte tekst op crème papier.
+          theme: ThemeData(brightness: Brightness.dark),
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: DocumentStyleScope(
+              profile: stijl,
+              child: FormFillView(body: formulier, onChanged: (_, _) {}),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      // De buitenste ondergrond van de pagina zelf — niet die van een Markdown-
+      // blok erin, die hetzelfde papier tekent en dit zou verbergen.
+      final buitenste = tester.widget<ColoredBox>(
+        find
+            .descendant(
+              of: find.byType(FormFillView),
+              matching: find.byType(ColoredBox),
+            )
+            .first,
+      );
+      expect(buitenste.color, const Color(0xFFFFF3D6));
+      final titel = tester.widget<Text>(find.text('Inzending Kookboek'));
+      expect(titel.style?.color, const Color(0xFF1A2B3C));
     });
   });
 }
