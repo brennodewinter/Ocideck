@@ -664,6 +664,82 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Er klopt iets niet aan deze inzending.':
+      'Hay algo que no va bien en este envío.',
+  'Verplicht, maar leeg gelaten.': 'Obligatorio, pero se dejó vacío.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} palabras; se necesitan al menos {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} palabras; se permiten como máximo {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} caracteres; se necesitan al menos {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} caracteres; se permiten como máximo {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '«{value}» no está en la lista de opciones.',
+  '“{value}” is geen getal.': '«{value}» no es un número.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '«{value}» no es una fecha con la forma año-mes-día.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto de {actual} píxeles de ancho; se pedían {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Falta el archivo de la foto en el envío.',
+  'De beschrijving van de foto ontbreekt.': 'Falta la descripción de la foto.',
+  'De maker van de foto ontbreekt.': 'Falta el autor de la foto.',
+  'De foto is niet gecontroleerd.': 'La foto no se comprobó.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Foto HEIC: no comprobada ni limpiada; puede contener una ubicación.',
+  'Toestemming niet gegeven.': 'Consentimiento no dado.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'La respuesta contiene una línea que parece un código de control del formulario.',
+  'Het antwoord bevat HTML.': 'La respuesta contiene HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'La respuesta contiene un bloque de código sin cerrar.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'La respuesta remite a una imagen que no pertenece a este envío.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'La respuesta contiene un enlace no permitido.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Este formulario o esta versión no está en la carpeta de trabajo.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Quien envió trabajó con un texto del formulario distinto del publicado.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'El consentimiento del manifiesto no coincide con el formulario publicado.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'El texto del formulario se cambió fuera de las respuestas.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'El texto del formulario se cambió en este campo.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Este campo no existe en el formulario publicado.',
+  'Dit veld ontbreekt in de inzending.': 'Este campo falta en el envío.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Envío de la versión {submission}; la publicada es la versión {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'El formulario necesita una versión más reciente de OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'El formulario publicado en la carpeta de trabajo no se puede usar.',
+  'De inzending hoort bij een ander formulier.':
+      'El envío pertenece a otro formulario.',
+  'De opbouw van de inzending is beschadigd.':
+      'La estructura del envío está dañada.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'No se puede leer el registro. Repara overview.md; los envíos se muestran abajo sin datos del registro.',
+  'Nog geen inzendingen.': 'Aún no hay envíos.',
+  'Om na te lopen': 'Por revisar',
+  'Verwijderd': 'Eliminado',
+  'Zonder regel in het register': 'Sin fila en el registro',
+  'Ontvangen {datum}': 'Recibido {datum}',
+  'Ingetrokken {datum}': 'Retirado {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'El contenido de este envío se ha eliminado; solo queda el registro.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'No se puede leer este envío. Revisa los archivos de la carpeta de trabajo.',
+  'Beoordeeld tegen {formulier}.': 'Evaluado frente a {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'La evaluación es sobre la copia de trabajo (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ningún punto por revisar.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotos que ninguna respuesta menciona: {n}.',
   'Inzendingen': 'Envíos',
   'Werkmap': 'Carpeta de trabajo',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

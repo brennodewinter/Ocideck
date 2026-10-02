@@ -707,6 +707,18 @@ class _CappedOutput extends OutputMemoryStream {
 
 // ── the manifest, strictly ──────────────────────────────────────────────────
 
+/// Reads `manifest.json` on its own — the organiser keeps the manifest beside a
+/// landed submission and judges it again later — or `null` when it is not a manifest
+/// of this version. Only the manifest is checked, not the files it lists: that was
+/// done when the package was opened.
+FormPackageManifest? readFormManifest(Uint8List bytes) {
+  try {
+    return _parseManifest(bytes);
+  } on _Refuse {
+    return null;
+  }
+}
+
 FormPackageManifest _parseManifest(Uint8List bytes) {
   Never bad(String why) =>
       _fail(FormPackageIssue.badManifest, path: kManifestFileName, detail: why);

@@ -2538,6 +2538,79 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Er klopt iets niet aan deze inzending.': 'Bu gönderide bir sorun var.',
+  'Verplicht, maar leeg gelaten.': 'Zorunlu, ama boş bırakılmış.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} sözcük; en az {min} gerekli.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} sözcük; en fazla {max} izinli.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakter; en az {min} gerekli.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakter; en fazla {max} izinli.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” seçenek listesinde yok.',
+  '“{value}” is geen getal.': '“{value}” bir sayı değil.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” yıl-ay-gün biçiminde bir tarih değil.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      '{actual} piksel genişliğinde fotoğraf; {min} istenmişti.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fotoğrafın dosyası gönderide eksik.',
+  'De beschrijving van de foto ontbreekt.': 'Fotoğrafın açıklaması eksik.',
+  'De maker van de foto ontbreekt.': 'Fotoğrafın yapımcısı eksik.',
+  'De foto is niet gecontroleerd.': 'Fotoğraf denetlenmedi.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC fotoğraf: denetlenmedi veya temizlenmedi; bir konum içerebilir.',
+  'Toestemming niet gegeven.': 'Onay verilmedi.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Cevap, formun bir denetim koduna benzeyen bir satır içeriyor.',
+  'Het antwoord bevat HTML.': 'Cevap HTML içeriyor.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Cevap kapatılmamış bir kod bloğu içeriyor.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Cevap, bu gönderiye ait olmayan bir görsele atıfta bulunuyor.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Cevap izin verilmeyen bir bağlantı içeriyor.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Bu form veya bu sürüm çalışma klasöründe yok.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Gönderen, formun yayımlanandan farklı bir metniyle çalıştı.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Manifestteki onay, yayımlanan formla uyuşmuyor.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Formun metni cevapların dışında değiştirilmiş.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Formun metni bu alanda değiştirilmiş.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Bu alan yayımlanan formda yok.',
+  'Dit veld ontbreekt in de inzending.': 'Bu alan gönderide eksik.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      '{submission} sürümünün gönderisi; yayımlanan sürüm {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Form, OciDeck’in daha yeni bir sürümünü gerektiriyor.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Çalışma klasöründeki yayımlanmış form kullanılamıyor.',
+  'De inzending hoort bij een ander formulier.': 'Gönderi başka bir forma ait.',
+  'De opbouw van de inzending is beschadigd.': 'Gönderinin yapısı hasarlı.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Kayıt okunamıyor. overview.md dosyasını onarın; gönderiler aşağıda kayıttaki bilgiler olmadan gösteriliyor.',
+  'Nog geen inzendingen.': 'Henüz gönderi yok.',
+  'Om na te lopen': 'İncelenecek',
+  'Verwijderd': 'Silindi',
+  'Zonder regel in het register': 'Kayıtta satırı yok',
+  'Ontvangen {datum}': 'Alındı {datum}',
+  'Ingetrokken {datum}': 'Geri çekildi {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Bu gönderinin içeriği silindi; yalnızca kayıt kaldı.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Bu gönderi okunamıyor. Çalışma klasöründeki dosyaları kontrol edin.',
+  'Beoordeeld tegen {formulier}.': '{formulier} karşısında değerlendirildi.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Değerlendirme çalışma kopyası (submission.edit.md) ile ilgili.',
+  'Geen punten om na te lopen.': 'İncelenecek nokta yok.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Hiçbir cevabın anmadığı fotoğraflar: {n}.',
   'Inzendingen': 'Gönderiler',
   'Werkmap': 'Çalışma klasörü',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

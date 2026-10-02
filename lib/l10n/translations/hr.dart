@@ -1631,6 +1631,81 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'S ovom prijavom nešto nije u redu.',
+  'Verplicht, maar leeg gelaten.': 'Obavezno, ali ostavljeno prazno.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} riječi; potrebno je najmanje {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} riječi; dopušteno je najviše {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} znakova; potrebno je najmanje {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} znakova; dopušteno je najviše {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}” nije na popisu opcija.',
+  '“{value}” is geen getal.': '„{value}” nije broj.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}” nije datum u obliku godina-mjesec-dan.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotografija široka {actual} piksela; traženo je {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'U prijavi nedostaje datoteka fotografije.',
+  'De beschrijving van de foto ontbreekt.': 'Nedostaje opis fotografije.',
+  'De maker van de foto ontbreekt.': 'Nedostaje autor fotografije.',
+  'De foto is niet gecontroleerd.': 'Fotografija nije provjerena.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC fotografija: nije provjerena ni očišćena; može sadržavati lokaciju.',
+  'Toestemming niet gegeven.': 'Privola nije dana.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Odgovor sadrži redak koji izgleda kao kontrolni kod obrasca.',
+  'Het antwoord bevat HTML.': 'Odgovor sadrži HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Odgovor sadrži nezatvoreni blok koda.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Odgovor upućuje na sliku koja ne pripada ovoj prijavi.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Odgovor sadrži poveznicu koja nije dopuštena.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Ovog obrasca ili ove verzije nema u radnoj mapi.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Pošiljatelj je radio s drugim tekstom obrasca od objavljenog.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Privola u manifestu ne odgovara objavljenom obrascu.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Tekst obrasca promijenjen je izvan odgovora.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Tekst obrasca promijenjen je kod ovog polja.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Ovo polje ne postoji u objavljenom obrascu.',
+  'Dit veld ontbreekt in de inzending.': 'Ovo polje nedostaje u prijavi.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Prijava verzije {submission}; objavljena je verzija {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Obrazac traži noviju verziju OciDecka.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Objavljeni obrazac u radnoj mapi nije upotrebljiv.',
+  'De inzending hoort bij een ander formulier.':
+      'Prijava pripada drugom obrascu.',
+  'De opbouw van de inzending is beschadigd.': 'Struktura prijave je oštećena.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registar se ne može pročitati. Popravite overview.md; prijave su dolje prikazane bez podataka iz registra.',
+  'Nog geen inzendingen.': 'Još nema prijava.',
+  'Om na te lopen': 'Za provjeru',
+  'Verwijderd': 'Izbrisano',
+  'Zonder regel in het register': 'Bez retka u registru',
+  'Ontvangen {datum}': 'Primljeno {datum}',
+  'Ingetrokken {datum}': 'Povučeno {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Sadržaj ove prijave je izbrisan; ostao je samo zapis.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Ova se prijava ne može pročitati. Provjerite datoteke u radnoj mapi.',
+  'Beoordeeld tegen {formulier}.': 'Ocijenjeno prema {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Ocjena se odnosi na radnu kopiju (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nema točaka za provjeru.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotografije koje nijedan odgovor ne spominje: {n}.',
   'Inzendingen': 'Prijave',
   'Werkmap': 'Radna mapa',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

@@ -1634,6 +1634,80 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Er klopt iets niet aan deze inzending.': 'Su šiuo pateikimu kažkas negerai.',
+  'Verplicht, maar leeg gelaten.': 'Privaloma, bet palikta tuščia.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} žodžiai; reikia bent {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} žodžiai; leidžiama daugiausia {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} simboliai; reikia bent {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} simboliai; leidžiama daugiausia {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ nėra parinkčių sąraše.',
+  '“{value}” is geen getal.': '„{value}“ nėra skaičius.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ nėra data pavidalu metai-mėnuo-diena.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Nuotrauka {actual} pikselių pločio; prašyta {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Pateikime trūksta nuotraukos failo.',
+  'De beschrijving van de foto ontbreekt.': 'Trūksta nuotraukos aprašo.',
+  'De maker van de foto ontbreekt.': 'Trūksta nuotraukos autoriaus.',
+  'De foto is niet gecontroleerd.': 'Nuotrauka nebuvo patikrinta.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC nuotrauka: nepatikrinta ir neišvalyta; joje gali būti vieta.',
+  'Toestemming niet gegeven.': 'Sutikimas nesuteiktas.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Atsakyme yra eilutė, panaši į formos valdymo kodą.',
+  'Het antwoord bevat HTML.': 'Atsakyme yra HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Atsakyme yra neuždarytas kodo blokas.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Atsakyme nurodomas paveikslėlis, kuris nepriklauso šiam pateikimui.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Atsakyme yra nuoroda, kuri neleidžiama.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Šios formos arba šios versijos nėra darbo aplanke.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Pateikėjas dirbo su kitu formos tekstu nei paskelbtasis.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Sutikimas manifeste neatitinka paskelbtos formos.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Formos tekstas pakeistas už atsakymų ribų.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Formos tekstas pakeistas prie šio lauko.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Šio lauko paskelbtoje formoje nėra.',
+  'Dit veld ontbreekt in de inzending.': 'Šio lauko pateikime trūksta.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Pateikimas versijos {submission}; paskelbta versija {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Forma reikalauja naujesnės OciDeck versijos.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Paskelbta forma darbo aplanke netinkama naudoti.',
+  'De inzending hoort bij een ander formulier.':
+      'Pateikimas priklauso kitai formai.',
+  'De opbouw van de inzending is beschadigd.': 'Pateikimo sandara pažeista.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registro nepavyksta perskaityti. Pataisykite overview.md; pateikimai rodomi žemiau be registro duomenų.',
+  'Nog geen inzendingen.': 'Pateikimų dar nėra.',
+  'Om na te lopen': 'Reikia peržiūrėti',
+  'Verwijderd': 'Ištrinta',
+  'Zonder regel in het register': 'Be eilutės registre',
+  'Ontvangen {datum}': 'Gauta {datum}',
+  'Ingetrokken {datum}': 'Atšaukta {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Šio pateikimo turinys ištrintas; liko tik įrašas.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Šio pateikimo nepavyksta perskaityti. Patikrinkite failus darbo aplanke.',
+  'Beoordeeld tegen {formulier}.': 'Įvertinta pagal {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Vertinimas taikomas darbo kopijai (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nėra punktų peržiūrai.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Nuotraukos, kurių nemini joks atsakymas: {n}.',
   'Inzendingen': 'Pateikimai',
   'Werkmap': 'Darbo aplankas',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

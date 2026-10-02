@@ -17,6 +17,7 @@ import '../../services/form/form_import.dart';
 import '../../services/form/form_workspace.dart';
 import '../../state/forms_provider.dart';
 import '../../state/tabs_provider.dart';
+import 'form_inbox_list.dart';
 import 'form_text_helpers.dart' show formTextOf;
 
 /// De kiezers van de Inbox: wat het systeem laat kiezen, als naad voor de test.
@@ -98,6 +99,9 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
 
   List<PublishedForm> _forms = const [];
   int _submissions = 0;
+
+  /// Telt op bij elke verversing, zodat de lijst opnieuw wordt gelezen.
+  int _version = 0;
   bool _busy = false;
   String? _formMessage;
   final List<_Line> _lines = [];
@@ -122,6 +126,7 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
     setState(() {
       _forms = forms;
       _submissions = submissions;
+      _version++;
     });
   }
 
@@ -368,6 +373,11 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
                       ),
                     ),
                   ],
+                  const SizedBox(height: 12),
+                  FormInboxList(
+                    workspace: FormWorkspace(root),
+                    version: _version,
+                  ),
                 ],
                 const SizedBox(height: 20),
                 Align(

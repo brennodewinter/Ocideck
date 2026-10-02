@@ -1626,6 +1626,81 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Något är fel med den här inlämningen.',
+  'Verplicht, maar leeg gelaten.': 'Obligatoriskt, men lämnat tomt.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} ord; minst {min} behövs.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} ord; högst {max} tillåtna.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} tecken; minst {min} behövs.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} tecken; högst {max} tillåtna.',
+  '“{value}” staat niet in de lijst met opties.':
+      '”{value}” finns inte i listan med alternativ.',
+  '“{value}” is geen getal.': '”{value}” är inte ett tal.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '”{value}” är inte ett datum på formen år-månad-dag.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto som är {actual} pixlar brett; {min} efterfrågades.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fotots fil saknas i inlämningen.',
+  'De beschrijving van de foto ontbreekt.': 'Beskrivningen av fotot saknas.',
+  'De maker van de foto ontbreekt.': 'Fotografen saknas.',
+  'De foto is niet gecontroleerd.': 'Fotot kontrollerades inte.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-foto: varken kontrollerat eller rensat; det kan innehålla en plats.',
+  'Toestemming niet gegeven.': 'Samtycke inte givet.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Svaret innehåller en rad som liknar en styrkod i formuläret.',
+  'Het antwoord bevat HTML.': 'Svaret innehåller HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Svaret innehåller ett oavslutat kodblock.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Svaret hänvisar till en bild som inte hör till den här inlämningen.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Svaret innehåller en länk som inte är tillåten.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Det här formuläret eller den här versionen finns inte i arbetsmappen.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Den som skickade in arbetade med en annan text av formuläret än den publicerade.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Samtycket i manifestet stämmer inte med det publicerade formuläret.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Formulärets text har ändrats utanför svaren.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Formulärets text har ändrats vid det här fältet.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Det här fältet finns inte i det publicerade formuläret.',
+  'Dit veld ontbreekt in de inzending.': 'Det här fältet saknas i inlämningen.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Inlämning av version {submission}; publicerad är version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formuläret kräver en nyare version av OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Det publicerade formuläret i arbetsmappen går inte att använda.',
+  'De inzending hoort bij een ander formulier.':
+      'Inlämningen hör till ett annat formulär.',
+  'De opbouw van de inzending is beschadigd.':
+      'Inlämningens uppbyggnad är skadad.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registret kan inte läsas. Reparera overview.md; inlämningarna visas nedan utan uppgifter från registret.',
+  'Nog geen inzendingen.': 'Inga inlämningar än.',
+  'Om na te lopen': 'Att granska',
+  'Verwijderd': 'Raderad',
+  'Zonder regel in het register': 'Utan rad i registret',
+  'Ontvangen {datum}': 'Mottagen {datum}',
+  'Ingetrokken {datum}': 'Återkallad {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Innehållet i den här inlämningen har raderats; bara posten finns kvar.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Den här inlämningen kan inte läsas. Kontrollera filerna i arbetsmappen.',
+  'Beoordeeld tegen {formulier}.': 'Bedömd mot {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Bedömningen gäller arbetskopian (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Inga punkter att granska.',
+  'Foto’s die geen antwoord noemt: {n}.': 'Foton som inget svar nämner: {n}.',
   'Inzendingen': 'Inlämningar',
   'Werkmap': 'Arbetsmapp',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

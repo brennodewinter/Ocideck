@@ -827,6 +827,84 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Er klopt iets niet aan deze inzending.':
+      'There is something wrong with this submission.',
+  'Verplicht, maar leeg gelaten.': 'Required, but left empty.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} words; at least {min} needed.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} words; at most {max} allowed.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} characters; at least {min} needed.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} characters; at most {max} allowed.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” is not in the list of options.',
+  '“{value}” is geen getal.': '“{value}” is not a number.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” is not a date in the form year-month-day.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Photo {actual} pixels wide; {min} requested.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'The photo’s file is missing from the submission.',
+  'De beschrijving van de foto ontbreekt.':
+      'The description of the photo is missing.',
+  'De maker van de foto ontbreekt.': 'The maker of the photo is missing.',
+  'De foto is niet gecontroleerd.': 'The photo was not checked.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC photo: not checked or cleaned; it may contain a location.',
+  'Toestemming niet gegeven.': 'Consent not given.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'The answer contains a line that looks like a control code of the form.',
+  'Het antwoord bevat HTML.': 'The answer contains HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'The answer contains an unclosed code block.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'The answer refers to an image that does not belong to this submission.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'The answer contains a link that is not allowed.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'This form or this version is not in the workspace.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'The respondent worked with a different text of the form than the published one.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'The consent in the manifest does not match the published form.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'The text of the form was changed outside the answers.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'The text of the form was changed at this field.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'This field does not exist in the published form.',
+  'Dit veld ontbreekt in de inzending.':
+      'This field is missing from the submission.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Submission of version {submission}; published is version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'The form needs a newer version of OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'The published form in the workspace is not usable.',
+  'De inzending hoort bij een ander formulier.':
+      'The submission belongs to a different form.',
+  'De opbouw van de inzending is beschadigd.':
+      'The structure of the submission is damaged.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'The register cannot be read. Repair overview.md; the submissions are shown below without data from the register.',
+  'Nog geen inzendingen.': 'No submissions yet.',
+  'Om na te lopen': 'To review',
+  'Verwijderd': 'Deleted',
+  'Zonder regel in het register': 'Without a row in the register',
+  'Ontvangen {datum}': 'Received {datum}',
+  'Ingetrokken {datum}': 'Withdrawn {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'The content of this submission has been deleted; only the record remains.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'This submission cannot be read. Check the files in the workspace.',
+  'Beoordeeld tegen {formulier}.': 'Assessed against {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'The assessment is about the working copy (submission.edit.md).',
+  'Geen punten om na te lopen.': 'No points to review.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Photos that no answer mentions: {n}.',
   'Inzendingen': 'Submissions',
   'Werkmap': 'Workspace',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

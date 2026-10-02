@@ -1643,6 +1643,82 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Este ceva în neregulă cu această trimitere.',
+  'Verplicht, maar leeg gelaten.': 'Obligatoriu, dar lăsat gol.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} cuvinte; sunt necesare cel puțin {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} cuvinte; sunt permise cel mult {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} caractere; sunt necesare cel puțin {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} caractere; sunt permise cel mult {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}” nu se află în lista de opțiuni.',
+  '“{value}” is geen getal.': '„{value}” nu este un număr.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}” nu este o dată de forma an-lună-zi.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotografie lată de {actual} pixeli; s-au cerut {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fișierul fotografiei lipsește din trimitere.',
+  'De beschrijving van de foto ontbreekt.': 'Lipsește descrierea fotografiei.',
+  'De maker van de foto ontbreekt.': 'Lipsește autorul fotografiei.',
+  'De foto is niet gecontroleerd.': 'Fotografia nu a fost verificată.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Fotografie HEIC: neverificată și necurățată; poate conține o locație.',
+  'Toestemming niet gegeven.': 'Consimțământ nedat.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Răspunsul conține o linie care seamănă cu un cod de control al formularului.',
+  'Het antwoord bevat HTML.': 'Răspunsul conține HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Răspunsul conține un bloc de cod neînchis.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Răspunsul trimite la o imagine care nu aparține acestei trimiteri.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Răspunsul conține un link care nu este permis.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Acest formular sau această versiune nu se află în folderul de lucru.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Cel care a trimis a lucrat cu un alt text al formularului decât cel publicat.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Consimțământul din manifest nu corespunde formularului publicat.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Textul formularului a fost modificat în afara răspunsurilor.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Textul formularului a fost modificat la acest câmp.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Acest câmp nu există în formularul publicat.',
+  'Dit veld ontbreekt in de inzending.': 'Acest câmp lipsește din trimitere.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Trimitere din versiunea {submission}; cea publicată este versiunea {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formularul necesită o versiune mai nouă a OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Formularul publicat din folderul de lucru nu este utilizabil.',
+  'De inzending hoort bij een ander formulier.':
+      'Trimiterea aparține altui formular.',
+  'De opbouw van de inzending is beschadigd.':
+      'Structura trimiterii este deteriorată.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registrul nu poate fi citit. Repară overview.md; trimiterile sunt afișate mai jos fără datele din registru.',
+  'Nog geen inzendingen.': 'Încă nu există trimiteri.',
+  'Om na te lopen': 'De revizuit',
+  'Verwijderd': 'Șters',
+  'Zonder regel in het register': 'Fără rând în registru',
+  'Ontvangen {datum}': 'Primit {datum}',
+  'Ingetrokken {datum}': 'Retras {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Conținutul acestei trimiteri a fost șters; a rămas doar înregistrarea.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Această trimitere nu poate fi citită. Verifică fișierele din folderul de lucru.',
+  'Beoordeeld tegen {formulier}.': 'Evaluat față de {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Evaluarea se referă la copia de lucru (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Niciun punct de revizuit.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotografii pe care niciun răspuns nu le menționează: {n}.',
   'Inzendingen': 'Trimiteri',
   'Werkmap': 'Folder de lucru',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

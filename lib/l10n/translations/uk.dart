@@ -1642,6 +1642,81 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Er klopt iets niet aan deze inzending.': 'З цим надсиланням щось не так.',
+  'Verplicht, maar leeg gelaten.': 'Обов’язково, але залишено порожнім.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} слів; потрібно щонайменше {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} слів; дозволено щонайбільше {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} символів; потрібно щонайменше {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} символів; дозволено щонайбільше {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '«{value}» немає у списку варіантів.',
+  '“{value}” is geen getal.': '«{value}» — не число.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '«{value}» — не дата у вигляді рік-місяць-день.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Фото шириною {actual} пікселів; потрібно {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'У надсиланні бракує файлу фото.',
+  'De beschrijving van de foto ontbreekt.': 'Бракує опису фото.',
+  'De maker van de foto ontbreekt.': 'Бракує автора фото.',
+  'De foto is niet gecontroleerd.': 'Фото не перевірено.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Фото HEIC: не перевірено й не очищено; може містити місце знімання.',
+  'Toestemming niet gegeven.': 'Згоду не надано.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Відповідь містить рядок, схожий на керівний код форми.',
+  'Het antwoord bevat HTML.': 'Відповідь містить HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Відповідь містить незакритий блок коду.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Відповідь посилається на зображення, яке не належить до цього надсилання.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Відповідь містить недозволене посилання.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Цієї форми або цієї версії немає в робочій папці.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Той, хто надіслав, працював з іншим текстом форми, ніж опублікований.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Згода в маніфесті не збігається з опублікованою формою.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Текст форми змінено поза відповідями.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Текст форми змінено біля цього поля.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Цього поля немає в опублікованій формі.',
+  'Dit veld ontbreekt in de inzending.': 'Цього поля бракує в надсиланні.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Надсилання версії {submission}; опублікована версія {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Форма потребує новішої версії OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Опублікована форма в робочій папці непридатна.',
+  'De inzending hoort bij een ander formulier.':
+      'Надсилання належить до іншої форми.',
+  'De opbouw van de inzending is beschadigd.':
+      'Структуру надсилання пошкоджено.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Реєстр не вдається прочитати. Виправте overview.md; надсилання показано нижче без даних із реєстру.',
+  'Nog geen inzendingen.': 'Надсилань ще немає.',
+  'Om na te lopen': 'Для перевірки',
+  'Verwijderd': 'Видалено',
+  'Zonder regel in het register': 'Без рядка в реєстрі',
+  'Ontvangen {datum}': 'Отримано {datum}',
+  'Ingetrokken {datum}': 'Відкликано {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Вміст цього надсилання видалено; залишився лише запис.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Це надсилання не вдається прочитати. Перевірте файли в робочій папці.',
+  'Beoordeeld tegen {formulier}.': 'Оцінено щодо {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Оцінка стосується робочої копії (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Немає пунктів для перевірки.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Фото, яких не згадує жодна відповідь: {n}.',
   'Inzendingen': 'Надсилання',
   'Werkmap': 'Робоча папка',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

@@ -1627,6 +1627,82 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Tässä lähetyksessä on jotain vialla.',
+  'Verplicht, maar leeg gelaten.': 'Pakollinen, mutta jätetty tyhjäksi.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} sanaa; vähintään {min} tarvitaan.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} sanaa; enintään {max} sallittu.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} merkkiä; vähintään {min} tarvitaan.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} merkkiä; enintään {max} sallittu.',
+  '“{value}” staat niet in de lijst met opties.':
+      '”{value}” ei ole vaihtoehtojen luettelossa.',
+  '“{value}” is geen getal.': '”{value}” ei ole luku.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '”{value}” ei ole päivämäärä muodossa vuosi-kuukausi-päivä.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Kuva, jonka leveys on {actual} pikseliä; pyydettiin {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Kuvan tiedosto puuttuu lähetyksestä.',
+  'De beschrijving van de foto ontbreekt.': 'Kuvan kuvaus puuttuu.',
+  'De maker van de foto ontbreekt.': 'Kuvan tekijä puuttuu.',
+  'De foto is niet gecontroleerd.': 'Kuvaa ei tarkistettu.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-kuva: ei tarkistettu eikä puhdistettu; siinä voi olla sijainti.',
+  'Toestemming niet gegeven.': 'Suostumusta ei annettu.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Vastaus sisältää rivin, joka näyttää lomakkeen ohjauskoodilta.',
+  'Het antwoord bevat HTML.': 'Vastaus sisältää HTML:ää.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Vastaus sisältää sulkemattoman koodilohkon.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Vastaus viittaa kuvaan, joka ei kuulu tähän lähetykseen.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Vastaus sisältää linkin, jota ei sallita.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Tämä lomake tai tämä versio ei ole työkansiossa.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Lähettäjä työskenteli eri lomaketekstillä kuin julkaistulla.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Manifestin suostumus ei vastaa julkaistua lomaketta.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Lomakkeen tekstiä muutettiin vastausten ulkopuolella.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Lomakkeen tekstiä muutettiin tämän kentän kohdalla.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Tätä kenttää ei ole julkaistussa lomakkeessa.',
+  'Dit veld ontbreekt in de inzending.': 'Tämä kenttä puuttuu lähetyksestä.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Lähetys versiosta {submission}; julkaistu on versio {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Lomake vaatii uudemman OciDeckin version.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Julkaistu lomake työkansiossa ei ole käyttökelpoinen.',
+  'De inzending hoort bij een ander formulier.':
+      'Lähetys kuuluu toiseen lomakkeeseen.',
+  'De opbouw van de inzending is beschadigd.':
+      'Lähetyksen rakenne on vaurioitunut.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Rekisteriä ei voi lukea. Korjaa overview.md; lähetykset näytetään alla ilman rekisterin tietoja.',
+  'Nog geen inzendingen.': 'Ei vielä lähetyksiä.',
+  'Om na te lopen': 'Tarkistettava',
+  'Verwijderd': 'Poistettu',
+  'Zonder regel in het register': 'Ei riviä rekisterissä',
+  'Ontvangen {datum}': 'Vastaanotettu {datum}',
+  'Ingetrokken {datum}': 'Peruttu {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Tämän lähetyksen sisältö on poistettu; vain tietue on jäljellä.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Tätä lähetystä ei voi lukea. Tarkista työkansion tiedostot.',
+  'Beoordeeld tegen {formulier}.': 'Arvioitu suhteessa {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Arvio koskee työkopiota (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ei tarkistettavia kohtia.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Kuvat, joita mikään vastaus ei mainitse: {n}.',
   'Inzendingen': 'Lähetykset',
   'Werkmap': 'Työkansio',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

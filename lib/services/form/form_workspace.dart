@@ -105,6 +105,32 @@ enum FormLandOutcome {
   failed,
 }
 
+/// Een inzending in de werkmap, opnieuw beoordeeld tegen het gepubliceerde formulier.
+sealed class FormStoredReviewResult {
+  const FormStoredReviewResult();
+}
+
+class FormStoredReview extends FormStoredReviewResult {
+  const FormStoredReview(this.review, {required this.edited});
+
+  final FormReview review;
+
+  /// De beoordeling gaat over de werkkopie (`submission.edit.md`), niet over wat
+  /// binnenkwam: de redactie corrigeert daar, en de lijst moet laten zien of het
+  /// gecorrigeerd is.
+  final bool edited;
+}
+
+/// Er is niets te beoordelen: de inhoud is verwijderd (alleen het minimale record
+/// staat er nog), of de bestanden zijn er niet meer of niet te lezen.
+class FormStoredUnavailable extends FormStoredReviewResult {
+  const FormStoredUnavailable({required this.deleted});
+
+  /// `submission.md` ontbreekt maar `manifest.json` is er nog en klopt: wat
+  /// [FormWorkspace.deleteSubmissionFiles] achterlaat.
+  final bool deleted;
+}
+
 final RegExp _formId = RegExp(r'^[a-z][a-z0-9-]*$');
 final RegExp _versionDir = RegExp(r'^v([0-9]+)$');
 final RegExp _templateName = RegExp(
@@ -274,6 +300,57 @@ class FormWorkspace {
     }
   }
 
+  /// Beoordeelt de inzending [sid], zoals ze nu in de werkmap staat, opnieuw tegen
+  /// het gepubliceerde formulier — de werkkopie als die er is, anders wat binnenkwam.
+  ///
+  /// Wat de Inbox toont is zo altijd de stand van nu: een correctie in de werkkopie
+  /// haalt een punt uit de lijst zonder dat iets anders hoeft te worden bijgewerkt.
+  Future<FormStoredReviewResult> reviewStored(String sid) async {
+    final dir = submissionPath(sid);
+    final manifestBytes = await _readBytes(File(p.join(dir, 'manifest.json')));
+    final manifest = manifestBytes == null
+        ? null
+        : readFormManifest(manifestBytes);
+    if (manifestBytes == null ||
+        manifest == null ||
+        manifest.submissionId != sid) {
+      return const FormStoredUnavailable(deleted: false);
+    }
+    final edit = File(p.join(dir, 'submission.edit.md'));
+    final edited = await edit.exists();
+    final submissionBytes = await _readBytes(
+      edited ? edit : File(p.join(dir, 'submission.md')),
+    );
+    final text = submissionBytes == null ? null : _decode(submissionBytes);
+    if (submissionBytes == null || text == null) {
+      return FormStoredUnavailable(deleted: submissionBytes == null && !edited);
+    }
+    final review = reviewFormPackage(
+      FormPackageOpened(
+        manifest: manifest,
+        manifestBytes: manifestBytes,
+        submission: text,
+        submissionBytes: submissionBytes,
+        images: await _storedImages(dir),
+      ),
+      [for (final form in (await publishedForms()).forms) form.text],
+    );
+    return FormStoredReview(review, edited: edited);
+  }
+
+  Future<Map<String, Uint8List>> _storedImages(String submissionDir) async {
+    final images = <String, Uint8List>{};
+    final folder = Directory(p.join(submissionDir, 'images'));
+    if (!await folder.exists()) return images;
+    await for (final entity in folder.list(followLinks: false)) {
+      final name = 'images/${p.basename(entity.path)}';
+      if (entity is! File || !kFormImagePath.hasMatch(name)) continue;
+      final bytes = await _readBytes(entity);
+      if (bytes != null) images[name] = bytes;
+    }
+    return images;
+  }
+
   /// Verwijdert wat persoonlijk is van de inzending [sid] — `submission.md`, de
   /// werkkopie en de foto's — en laat `manifest.json` staan: het minimale record
   /// (§7.3). Geeft `false` als de inzending er niet is.
@@ -339,11 +416,22 @@ bool _langOk(String lang) =>
     RegExp(r'^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$').hasMatch(lang);
 
 Future<String?> _readText(File file) async {
+  final bytes = await _readBytes(file);
+  return bytes == null ? null : _decode(bytes);
+}
+
+Future<Uint8List?> _readBytes(File file) async {
   try {
-    return const Utf8Decoder().convert(await file.readAsBytes());
-  } on FormatException {
-    return null;
+    return await file.readAsBytes();
   } on FileSystemException {
+    return null;
+  }
+}
+
+String? _decode(Uint8List bytes) {
+  try {
+    return const Utf8Decoder().convert(bytes);
+  } on FormatException {
     return null;
   }
 }

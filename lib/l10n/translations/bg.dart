@@ -1647,6 +1647,82 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Има нещо нередно с това изпращане.',
+  'Verplicht, maar leeg gelaten.': 'Задължително, но оставено празно.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} думи; необходими са поне {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} думи; позволени са най-много {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} знака; необходими са поне {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} знака; позволени са най-много {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ не е в списъка с опции.',
+  '“{value}” is geen getal.': '„{value}“ не е число.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ не е дата във вида година-месец-ден.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Снимка, широка {actual} пиксела; поискани са {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Във изпращането липсва файлът на снимката.',
+  'De beschrijving van de foto ontbreekt.': 'Липсва описанието на снимката.',
+  'De maker van de foto ontbreekt.': 'Липсва авторът на снимката.',
+  'De foto is niet gecontroleerd.': 'Снимката не е проверена.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC снимка: непроверена и неизчистена; може да съдържа местоположение.',
+  'Toestemming niet gegeven.': 'Съгласието не е дадено.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Отговорът съдържа ред, който прилича на управляващ код на формуляра.',
+  'Het antwoord bevat HTML.': 'Отговорът съдържа HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Отговорът съдържа незатворен блок с код.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Отговорът сочи изображение, което не принадлежи към това изпращане.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Отговорът съдържа връзка, която не е позволена.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Този формуляр или тази версия не е в работната папка.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Изпращащият е работил с друг текст на формуляра, различен от публикувания.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Съгласието в манифеста не съвпада с публикувания формуляр.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Текстът на формуляра е променен извън отговорите.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Текстът на формуляра е променен при това поле.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Това поле не съществува в публикувания формуляр.',
+  'Dit veld ontbreekt in de inzending.': 'Това поле липсва в изпращането.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Изпращане на версия {submission}; публикувана е версия {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Формулярът изисква по-нова версия на OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Публикуваният формуляр в работната папка не е използваем.',
+  'De inzending hoort bij een ander formulier.':
+      'Изпращането принадлежи към друг формуляр.',
+  'De opbouw van de inzending is beschadigd.':
+      'Структурата на изпращането е повредена.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Регистърът не може да бъде прочетен. Поправете overview.md; изпращанията са показани по-долу без данни от регистъра.',
+  'Nog geen inzendingen.': 'Още няма изпращания.',
+  'Om na te lopen': 'За проверка',
+  'Verwijderd': 'Изтрито',
+  'Zonder regel in het register': 'Без ред в регистъра',
+  'Ontvangen {datum}': 'Получено {datum}',
+  'Ingetrokken {datum}': 'Оттеглено {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Съдържанието на това изпращане е изтрито; остава само записът.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Това изпращане не може да бъде прочетено. Проверете файловете в работната папка.',
+  'Beoordeeld tegen {formulier}.': 'Оценено спрямо {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Оценката е за работното копие (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Няма точки за проверка.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Снимки, които никой отговор не споменава: {n}.',
   'Inzendingen': 'Изпращания',
   'Werkmap': 'Работна папка',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

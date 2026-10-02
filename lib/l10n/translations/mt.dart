@@ -1645,6 +1645,84 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Hemm xi ħaġa żbaljata b’din is-sottomissjoni.',
+  'Verplicht, maar leeg gelaten.': 'Meħtieġ, imma ħalla vojt.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} kliem; mill-inqas {min} meħtieġa.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} kliem; l-aktar {max} permessa.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karattri; mill-inqas {min} meħtieġa.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karattri; l-aktar {max} permessa.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” mhijiex fil-lista tal-għażliet.',
+  '“{value}” is geen getal.': '“{value}” mhuwiex numru.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” mhijiex data fil-forma sena-xahar-jum.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Ritratt wiesa’ {actual} pixel; intalbu {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Il-fajl tar-ritratt jinsab nieqes fis-sottomissjoni.',
+  'De beschrijving van de foto ontbreekt.':
+      'Id-deskrizzjoni tar-ritratt hija nieqsa.',
+  'De maker van de foto ontbreekt.': 'Il-ħallieq tar-ritratt huwa nieqes.',
+  'De foto is niet gecontroleerd.': 'Ir-ritratt ma ġiex ikkontrollat.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Ritratt HEIC: mhux ikkontrollat jew indifni; jista’ jkun fih post.',
+  'Toestemming niet gegeven.': 'Il-kunsens ma ngħatax.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'It-tweġiba fiha linja li tidher bħal kodiċi ta’ kontroll tal-formola.',
+  'Het antwoord bevat HTML.': 'It-tweġiba fiha HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'It-tweġiba fiha blokk ta’ kodiċi mhux magħluq.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'It-tweġiba tirreferi għal immaġni li ma tappartjenix għal din is-sottomissjoni.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'It-tweġiba fiha link li mhuwiex permess.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Din il-formola jew din il-verżjoni mhijiex fil-cartella tax-xogħol.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Min bagħat ħadem b’test differenti tal-formola minn dak ippubblikat.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Il-kunsens fil-manifest ma jaqbilx mal-formola ppubblikata.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'It-test tal-formola nbidel barra mit-tweġibiet.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'It-test tal-formola nbidel f’dan il-qasam.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Dan il-qasam ma jeżistix fil-formola ppubblikata.',
+  'Dit veld ontbreekt in de inzending.':
+      'Dan il-qasam huwa nieqes mis-sottomissjoni.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Sottomissjoni tal-verżjoni {submission}; ippubblikata hija l-verżjoni {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Il-formola teħtieġ verżjoni aktar ġdida ta’ OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Il-formola ppubblikata fil-cartella tax-xogħol mhijiex użabbli.',
+  'De inzending hoort bij een ander formulier.':
+      'Is-sottomissjoni tappartjeni għal formola oħra.',
+  'De opbouw van de inzending is beschadigd.':
+      'L-istruttura tas-sottomissjoni hija bil-ħsara.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Ir-reġistru ma jistax jinqara. Irranġa overview.md; is-sottomissjonijiet jidhru hawn taħt mingħajr data mir-reġistru.',
+  'Nog geen inzendingen.': 'Għad m’hemm l-ebda sottomissjoni.',
+  'Om na te lopen': 'Biex jiġi rivedut',
+  'Verwijderd': 'Imħassar',
+  'Zonder regel in het register': 'Mingħajr ringiela fir-reġistru',
+  'Ontvangen {datum}': 'Riċevut {datum}',
+  'Ingetrokken {datum}': 'Irtirat {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Il-kontenut ta’ din is-sottomissjoni tħassar; fadal biss ir-rekord.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Din is-sottomissjoni ma tistax tinqara. Iċċekkja l-fajls fil-cartella tax-xogħol.',
+  'Beoordeeld tegen {formulier}.': 'Evalwat kontra {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'L-evalwazzjoni hija dwar il-kopja tax-xogħol (submission.edit.md).',
+  'Geen punten om na te lopen.': 'L-ebda punt biex jiġi rivedut.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Ritratti li l-ebda tweġiba ma ssemmi: {n}.',
   'Inzendingen': 'Sottomissjonijiet',
   'Werkmap': 'Cartella tax-xogħol',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

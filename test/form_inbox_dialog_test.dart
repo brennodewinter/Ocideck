@@ -305,6 +305,10 @@ void main() {
         findsOneWidget,
       );
       expect(containing('Inzendingen in de werkmap: 2'), findsOneWidget);
+      // De lijst eronder leest mee: een regel per inzending, de foute als 'om na te lopen'.
+      await settleIo(tester, text('abcdefgh…'));
+      expect(text('abcdefgh…'), findsNWidgets(2));
+      expect(containing('Om na te lopen'), findsOneWidget);
       expect(find.byType(LinearProgressIndicator), findsNothing);
       // Het register is er, met beide rijen.
       final register = (await tester.runAsync(

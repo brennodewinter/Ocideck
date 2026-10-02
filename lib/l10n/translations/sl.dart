@@ -1627,6 +1627,80 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Er klopt iets niet aan deze inzending.': 'S to oddajo je nekaj narobe.',
+  'Verplicht, maar leeg gelaten.': 'Obvezno, a pustili prazno.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} besed; potrebnih je vsaj {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} besed; dovoljenih je največ {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} znakov; potrebnih je vsaj {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} znakov; dovoljenih je največ {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '»{value}« ni na seznamu možnosti.',
+  '“{value}” is geen getal.': '»{value}« ni število.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '»{value}« ni datum v obliki leto-mesec-dan.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotografija široka {actual} slikovnih pik; zahtevanih je bilo {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'V oddaji manjka datoteka fotografije.',
+  'De beschrijving van de foto ontbreekt.': 'Manjka opis fotografije.',
+  'De maker van de foto ontbreekt.': 'Manjka avtor fotografije.',
+  'De foto is niet gecontroleerd.': 'Fotografija ni bila preverjena.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Fotografija HEIC: ni preverjena ali očiščena; lahko vsebuje lokacijo.',
+  'Toestemming niet gegeven.': 'Privolitev ni dana.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Odgovor vsebuje vrstico, ki izgleda kot nadzorna koda obrazca.',
+  'Het antwoord bevat HTML.': 'Odgovor vsebuje HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Odgovor vsebuje nezaprt blok kode.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Odgovor se sklicuje na sliko, ki ne spada k tej oddaji.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Odgovor vsebuje povezavo, ki ni dovoljena.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Tega obrazca ali te različice ni v delovni mapi.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Oddajalec je delal z drugačnim besedilom obrazca, kot je objavljeno.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Privolitev v manifestu ne ustreza objavljenemu obrazcu.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Besedilo obrazca je bilo spremenjeno zunaj odgovorov.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Besedilo obrazca je bilo spremenjeno pri tem polju.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Tega polja v objavljenem obrazcu ni.',
+  'Dit veld ontbreekt in de inzending.': 'Tega polja v oddaji manjka.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Oddaja različice {submission}; objavljena je različica {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Obrazec zahteva novejšo različico OciDecka.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Objavljeni obrazec v delovni mapi ni uporaben.',
+  'De inzending hoort bij een ander formulier.':
+      'Oddaja spada k drugemu obrazcu.',
+  'De opbouw van de inzending is beschadigd.': 'Zgradba oddaje je poškodovana.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registra ni mogoče prebrati. Popravite overview.md; oddaje so spodaj prikazane brez podatkov iz registra.',
+  'Nog geen inzendingen.': 'Še ni oddaj.',
+  'Om na te lopen': 'Za pregled',
+  'Verwijderd': 'Izbrisano',
+  'Zonder regel in het register': 'Brez vrstice v registru',
+  'Ontvangen {datum}': 'Prejeto {datum}',
+  'Ingetrokken {datum}': 'Umaknjeno {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Vsebina te oddaje je izbrisana; ostal je le zapis.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Te oddaje ni mogoče prebrati. Preverite datoteke v delovni mapi.',
+  'Beoordeeld tegen {formulier}.': 'Ocenjeno glede na {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Ocena se nanaša na delovno kopijo (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ni točk za pregled.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotografije, ki jih noben odgovor ne omenja: {n}.',
   'Inzendingen': 'Oddaje',
   'Werkmap': 'Delovna mapa',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

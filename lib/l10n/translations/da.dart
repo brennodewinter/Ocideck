@@ -1627,6 +1627,81 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Er klopt iets niet aan deze inzending.':
+      'Der er noget galt med denne indsendelse.',
+  'Verplicht, maar leeg gelaten.': 'Påkrævet, men lader stå tomt.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} ord; mindst {min} nødvendige.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} ord; højst {max} tilladt.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} tegn; mindst {min} nødvendige.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} tegn; højst {max} tilladt.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” står ikke på listen over valgmuligheder.',
+  '“{value}” is geen getal.': '“{value}” er ikke et tal.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” er ikke en dato på formen år-måned-dag.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto på {actual} pixel i bredden; {min} blev bedt om.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fotoets fil mangler i indsendelsen.',
+  'De beschrijving van de foto ontbreekt.': 'Beskrivelsen af fotoet mangler.',
+  'De maker van de foto ontbreekt.': 'Fotografen mangler.',
+  'De foto is niet gecontroleerd.': 'Fotoet blev ikke kontrolleret.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-foto: hverken kontrolleret eller renset; det kan indeholde en placering.',
+  'Toestemming niet gegeven.': 'Samtykke ikke givet.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Svaret indeholder en linje, der ligner en styrekode i formularen.',
+  'Het antwoord bevat HTML.': 'Svaret indeholder HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Svaret indeholder en ulukket kodeblok.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Svaret henviser til et billede, der ikke hører til denne indsendelse.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Svaret indeholder et link, der ikke er tilladt.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Denne formular eller denne version findes ikke i arbejdsmappen.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Afsenderen arbejdede med en anden tekst af formularen end den offentliggjorte.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Samtykket i manifestet passer ikke til den offentliggjorte formular.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Formularens tekst blev ændret uden for svarene.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Formularens tekst blev ændret ved dette felt.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Dette felt findes ikke i den offentliggjorte formular.',
+  'Dit veld ontbreekt in de inzending.': 'Dette felt mangler i indsendelsen.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Indsendelse af version {submission}; offentliggjort er version {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formularen kræver en nyere version af OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Den offentliggjorte formular i arbejdsmappen kan ikke bruges.',
+  'De inzending hoort bij een ander formulier.':
+      'Indsendelsen hører til en anden formular.',
+  'De opbouw van de inzending is beschadigd.':
+      'Indsendelsens opbygning er beskadiget.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registret kan ikke læses. Ret overview.md; indsendelserne vises nedenfor uden data fra registret.',
+  'Nog geen inzendingen.': 'Ingen indsendelser endnu.',
+  'Om na te lopen': 'Skal gennemgås',
+  'Verwijderd': 'Slettet',
+  'Zonder regel in het register': 'Uden række i registret',
+  'Ontvangen {datum}': 'Modtaget {datum}',
+  'Ingetrokken {datum}': 'Trukket tilbage {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Indholdet af denne indsendelse er slettet; kun optegnelsen er tilbage.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Denne indsendelse kan ikke læses. Tjek filerne i arbejdsmappen.',
+  'Beoordeeld tegen {formulier}.': 'Vurderet mod {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Vurderingen handler om arbejdskopien (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ingen punkter at gennemgå.',
+  'Foto’s die geen antwoord noemt: {n}.': 'Fotos, som intet svar nævner: {n}.',
   'Inzendingen': 'Indsendelser',
   'Werkmap': 'Arbejdsmappe',
   'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':

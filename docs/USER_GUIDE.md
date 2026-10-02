@@ -5854,6 +5854,15 @@ filling in a form never needs it). The welcome screen then has an **Inzendingen*
    first) or *not saved*. Every photo is cleaned again and really decoded; a file that only pretends
    to be a photo is flagged.
 
+Below the buttons the window lists **every submission**, the newest first: the columns the form names
+in `overview=` (a name, a dish) as its title, then its status — *Om na te lopen* (to review) when it has
+an error, *Verwijderd* (deleted) when only the record is left, otherwise the status from the form — the
+day received and, when set, the day withdrawn. Open a line to see **what is wrong with it**, in plain
+words about the respondent ("90 words; at least 150 needed"), each point under the name of its field,
+with an icon for how serious it is, and which form and version it was judged against. The points are
+worked out again every time from what is in the workspace: correct the working copy
+(`submission.edit.md`) and the point is gone, with a note that the judgement is about the working copy.
+
 A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it
 arrived plus its photos, in one step: a crash never leaves half a submission, and a submission that
 is already there is never overwritten. One with an error still lands, with the status `needs-fixing`,
