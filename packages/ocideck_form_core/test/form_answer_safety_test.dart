@@ -171,6 +171,21 @@ void main() {
       }
     });
 
+    test('a name that only starts like a device name is fine', () {
+      for (final ok in [
+        'images/con-1.jpg',
+        'images/console.jpg',
+        'images/nul-1.webp',
+        'images/xnul.jpg',
+        'images/com10.jpg',
+        'images/lpt-3.png',
+        'images/com.heic',
+        'images/a-con.jpg',
+      ]) {
+        expect(found('![x]($ok)'), isEmpty, reason: ok);
+      }
+    });
+
     test('everything else is a bad image', () {
       for (final bad in [
         'http://example.org/x.png',
@@ -190,6 +205,15 @@ void main() {
         'images/.jpg',
         'images/x y.jpg',
         'images/${'a' * 65}.jpg',
+        // The names Windows keeps for devices: on its disks these are not files.
+        for (final device in [
+          'con',
+          'prn',
+          'aux',
+          'nul',
+          for (var n = 0; n <= 9; n++) ...['com$n', 'lpt$n'],
+        ])
+          'images/$device.png',
         'x.jpg',
         'file:///etc/passwd',
         '',

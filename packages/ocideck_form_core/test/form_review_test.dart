@@ -4,6 +4,7 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:test/test.dart';
 
 import 'support/image_fixtures.dart';
+import 'support/manifest_fixtures.dart';
 
 const String published = '''<!-- form id=kookboek version=2 rules=1 -->
 # Inzending
@@ -70,31 +71,6 @@ FormPackageOpened received({
     clientRules: kFormRulesVersion,
   );
   return readFormPackage(bytes) as FormPackageOpened;
-}
-
-FormPackageOpened withManifest(
-  FormPackageOpened p, {
-  List<FormManifestConsent>? consent,
-  String? templateSha256,
-}) {
-  final m = p.manifest;
-  return FormPackageOpened(
-    manifest: FormPackageManifest(
-      submissionId: m.submissionId,
-      formId: m.formId,
-      formVersion: m.formVersion,
-      formRules: m.formRules,
-      templateSha256: templateSha256 ?? m.templateSha256,
-      created: m.created,
-      clientName: m.clientName,
-      clientVersion: m.clientVersion,
-      clientRules: m.clientRules,
-      files: m.files,
-      consent: consent ?? m.consent,
-    ),
-    submission: p.submission,
-    images: p.images,
-  );
 }
 
 FormReview review(FormPackageOpened package, {List<String>? forms}) =>

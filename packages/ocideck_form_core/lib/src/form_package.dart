@@ -396,11 +396,21 @@ sealed class FormPackageRead {
 class FormPackageOpened extends FormPackageRead {
   const FormPackageOpened({
     required this.manifest,
+    required this.manifestBytes,
     required this.submission,
+    required this.submissionBytes,
     required this.images,
   });
 
   final FormPackageManifest manifest;
+
+  /// `manifest.json` exactly as it was received. An organiser keeps these bytes, not
+  /// a rewriting of them: the manifest's hashes make the package verifiable with
+  /// `sha256sum`, and that only stays true for what was never touched (§5.3, §7.1).
+  final Uint8List manifestBytes;
+
+  /// `submission.md` exactly as it was received, for the same reason.
+  final Uint8List submissionBytes;
 
   /// `submission.md`, decoded from UTF-8.
   final String submission;
@@ -519,7 +529,9 @@ FormPackageRead _read(Uint8List b, FormPackageLimits limits) {
   }
   return FormPackageOpened(
     manifest: manifest,
+    manifestBytes: contents[kManifestFileName]!,
     submission: text,
+    submissionBytes: contents[kSubmissionFileName]!,
     images: {
       for (final e in contents.entries)
         if (e.key.startsWith('images/')) e.key: e.value,

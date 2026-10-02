@@ -10,6 +10,7 @@
 /// never consulted.
 library;
 
+import 'form_answer_safety.dart' show kFormImagePathPattern;
 import 'form_issue.dart';
 import 'form_parser.dart';
 import 'form_spec.dart';
@@ -358,8 +359,8 @@ List<List<String>> _readTable(
 final RegExp _anyImage = RegExp(r'!\[[^\]]*\]\([^)]*\)?');
 
 final RegExp _image = RegExp(
-  r'!\[([^\]]*)\]\(\s*<?(images/[a-z0-9-]{1,64}\.(?:jpg|png|webp|heic))>?'
-  r'(?:\s+"([^"]*)")?\s*\)',
+  '!\\[([^\\]]*)\\]\\(\\s*<?($kFormImagePathPattern)>?'
+  '(?:\\s+"([^"]*)")?\\s*\\)',
 );
 
 List<FormImageRef> _readImages(
