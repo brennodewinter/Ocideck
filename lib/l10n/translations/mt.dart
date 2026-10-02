@@ -1645,6 +1645,48 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Inzendingen': 'Sottomissjonijiet',
+  'Werkmap': 'Cartella tax-xogħol',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Għadha ma ntgħażlitx cartella tax-xogħol. Agħżel cartella fejn se jinżammu s-sottomissjonijiet u r-reġistru.',
+  'Werkmap kiezen…': 'Agħżel il-cartella tax-xogħol…',
+  'Kies de werkmap voor inzendingen':
+      'Agħżel il-cartella tax-xogħol għas-sottomissjonijiet',
+  'Formulieren': 'Formoli',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Għadha ma żdiedet l-ebda formola. Żid il-formola kif ippubblikajtha: sottomissjoni tiġi ċċekkjata kontriha.',
+  'Formulier toevoegen…': 'Żid formola…',
+  'Kies het formulier om toe te voegen': 'Agħżel il-formola li trid iżżid',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Dan il-fajl mhuwiex formola li tista’ tiġi ppubblikata.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Din il-formola diġà teżisti b’test differenti. Test differenti huwa verżjoni ġdida: agħti lill-formola numru ta’ verżjoni ogħla.',
+  'Formulier toegevoegd: {naam}.': 'Formola miżjuda: {naam}.',
+  'Dit formulier stond er al.': 'Din il-formola kienet diġà hemm.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Il-formola ma setgħetx tinħażen.',
+  'Inzendingen in de werkmap: {n}':
+      'Sottomissjonijiet fil-cartella tax-xogħol: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zip sempliċi ma jiġix ikkriptat waqt it-trasferiment.',
+  'Pakketten binnenhalen…': 'Importa pakketti…',
+  'Kies de pakketten om binnen te halen': 'Agħżel il-pakketti li trid timporta',
+  'Register openen': 'Iftaħ ir-reġistru',
+  '{naam}: binnengehaald.': '{naam}: importat.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importat, iżda hemm punti x’jiġu riveduti.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importat, iżda r-reġistru ma setax jiġi aġġornat. Iċċekkja overview.md.',
+  '{naam}: stond er al.': '{naam}: kien diġà hemm.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: mhuwiex pakkett ta’ sottomissjoni li OciDeck jista’ jaqra.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: din il-formola ma ġietx miżjuda, jew mhux f’din il-verżjoni. Żid il-formola l-ewwel.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ma setax jinħażen fil-cartella tax-xogħol.',
+  'Formulieren en inzendingen': 'Formoli u sottomissjonijiet',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importa sottomissjonijiet ta’ formola, iċċekkjahom kontra l-formola ppubblikata u żommhom b’reġistru. Il-mili ta’ formola jaħdem ukoll meta dan ikun mitfi. Mitfi awtomatikament.',
   'Inzending opslaan als zip…': 'Issejvja s-sottomissjoni bħala zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Fajl zip bit-tweġibiet u r-ritratti tiegħek, biex tibgħatu bl-email lill-organizzatur.',

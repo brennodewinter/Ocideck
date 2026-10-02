@@ -667,6 +667,46 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Inzendingen': 'Ynstjoeringen',
+  'Werkmap': 'Wurkmap',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Noch gjin wurkmap keazen. Kies in map dêr’t de ynstjoeringen en it register yn komme te stean.',
+  'Werkmap kiezen…': 'Wurkmap kieze…',
+  'Kies de werkmap voor inzendingen': 'Kies de wurkmap foar ynstjoeringen',
+  'Formulieren': 'Formulieren',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Noch gjin formulier tafoege. Foegje it formulier ta sa’t jo it publisearre hawwe: in ynstjoering wurdt dêrtsjin hâlden.',
+  'Formulier toevoegen…': 'Formulier tafoegje…',
+  'Kies het formulier om toe te voegen': 'Kies it formulier om ta te foegjen',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Dit bestân is gjin formulier dat publisearre wurde kin.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Dit formulier stiet der al mei in oare tekst. In oare tekst is in nije ferzje: jou it formulier in heger ferzjenûmer.',
+  'Formulier toegevoegd: {naam}.': 'Formulier tafoege: {naam}.',
+  'Dit formulier stond er al.': 'Dit formulier stie der al.',
+  'Het formulier kon niet worden opgeslagen.':
+      'It formulier koe net bewarre wurde.',
+  'Inzendingen in de werkmap: {n}': 'Ynstjoeringen yn de wurkmap: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'In gewoane zip is ûnderweis net fersifere.',
+  'Pakketten binnenhalen…': 'Pakketten ynhelje…',
+  'Kies de pakketten om binnen te halen': 'Kies de pakketten om yn te heljen',
+  'Register openen': 'Register iepenje',
+  '{naam}: binnengehaald.': '{naam}: ynhelle.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: ynhelle, mar der binne punten om nei te rinnen.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: ynhelle, mar it register koe net bywurke wurde. Kontrolearje overview.md.',
+  '{naam}: stond er al.': '{naam}: stie der al.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: gjin ynstjoeringspakket dat OciDeck lêze kin.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: dit formulier is net tafoege, of net yn dizze ferzje. Foegje it formulier earst ta.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: koe net bewarre wurde yn de wurkmap.',
+  'Formulieren en inzendingen': 'Formulieren en ynstjoeringen',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Helje ynstjoeringen fan in formulier yn, hâld se tsjin it publisearre formulier en bewarje se mei in register. In formulier ynfolje kin ek as dit út stiet. Standert út.',
   'Inzending opslaan als zip…': 'Ynstjoering bewarje as zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'In zipbestân mei dyn antwurden en foto’s, om nei de organisator te mailen.',

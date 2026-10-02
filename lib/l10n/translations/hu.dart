@@ -1629,6 +1629,47 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Inzendingen': 'Beküldések',
+  'Werkmap': 'Munkamappa',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Még nincs munkamappa kiválasztva. Válassz egy mappát, ahol a beküldések és a nyilvántartás lesznek.',
+  'Werkmap kiezen…': 'Munkamappa kiválasztása…',
+  'Kies de werkmap voor inzendingen': 'Válaszd ki a beküldések munkamappáját',
+  'Formulieren': 'Űrlapok',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Még nincs űrlap hozzáadva. Add hozzá az űrlapot úgy, ahogy közzétetted: a beküldést ahhoz hasonlítjuk.',
+  'Formulier toevoegen…': 'Űrlap hozzáadása…',
+  'Kies het formulier om toe te voegen': 'Válaszd ki a hozzáadandó űrlapot',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ez a fájl nem közzétehető űrlap.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ez az űrlap már létezik, más szöveggel. A más szöveg új verzió: adj az űrlapnak magasabb verziószámot.',
+  'Formulier toegevoegd: {naam}.': 'Űrlap hozzáadva: {naam}.',
+  'Dit formulier stond er al.': 'Ez az űrlap már megvolt.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Az űrlapot nem sikerült elmenteni.',
+  'Inzendingen in de werkmap: {n}': 'Beküldések a munkamappában: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'A sima zip átvitel közben nincs titkosítva.',
+  'Pakketten binnenhalen…': 'Csomagok importálása…',
+  'Kies de pakketten om binnen te halen':
+      'Válaszd ki az importálandó csomagokat',
+  'Register openen': 'Nyilvántartás megnyitása',
+  '{naam}: binnengehaald.': '{naam}: importálva.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importálva, de vannak átnézendő pontok.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importálva, de a nyilvántartást nem sikerült frissíteni. Ellenőrizd az overview.md fájlt.',
+  '{naam}: stond er al.': '{naam}: már megvolt.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nem olyan beküldési csomag, amelyet az OciDeck el tudna olvasni.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ez az űrlap nincs hozzáadva, vagy nem ebben a verzióban. Először add hozzá az űrlapot.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nem sikerült elmenteni a munkamappába.',
+  'Formulieren en inzendingen': 'Űrlapok és beküldések',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importáld egy űrlap beküldéseit, ellenőrizd őket a közzétett űrlap alapján, és tartsd őket nyilvántartásban. Az űrlap kitöltése akkor is működik, ha ez ki van kapcsolva. Alapértelmezés szerint kikapcsolva.',
   'Inzending opslaan als zip…': 'Beküldés mentése zipként…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Egy zip-fájl a válaszaiddal és a fotóiddal, amelyet e-mailben elküldhetsz a szervezőnek.',

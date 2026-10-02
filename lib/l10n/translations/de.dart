@@ -667,6 +667,46 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Inzendingen': 'Einsendungen',
+  'Werkmap': 'Arbeitsordner',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Noch kein Arbeitsordner gewählt. Wähle einen Ordner, in dem die Einsendungen und das Register liegen sollen.',
+  'Werkmap kiezen…': 'Arbeitsordner wählen…',
+  'Kies de werkmap voor inzendingen': 'Arbeitsordner für Einsendungen wählen',
+  'Formulieren': 'Formulare',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Noch kein Formular hinzugefügt. Füge das Formular so hinzu, wie du es veröffentlicht hast: Eine Einsendung wird dagegen geprüft.',
+  'Formulier toevoegen…': 'Formular hinzufügen…',
+  'Kies het formulier om toe te voegen': 'Das hinzuzufügende Formular wählen',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Diese Datei ist kein Formular, das veröffentlicht werden kann.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Dieses Formular ist bereits mit anderem Text vorhanden. Ein anderer Text ist eine neue Version: Gib dem Formular eine höhere Versionsnummer.',
+  'Formulier toegevoegd: {naam}.': 'Formular hinzugefügt: {naam}.',
+  'Dit formulier stond er al.': 'Dieses Formular war schon vorhanden.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Das Formular konnte nicht gespeichert werden.',
+  'Inzendingen in de werkmap: {n}': 'Einsendungen im Arbeitsordner: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Ein einfaches ZIP ist auf dem Weg nicht verschlüsselt.',
+  'Pakketten binnenhalen…': 'Pakete importieren…',
+  'Kies de pakketten om binnen te halen': 'Die zu importierenden Pakete wählen',
+  'Register openen': 'Register öffnen',
+  '{naam}: binnengehaald.': '{naam}: importiert.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importiert, aber es gibt Punkte zu prüfen.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importiert, aber das Register konnte nicht aktualisiert werden. Prüfe overview.md.',
+  '{naam}: stond er al.': '{naam}: war schon vorhanden.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: kein Einsendungspaket, das OciDeck lesen kann.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: Dieses Formular wurde nicht hinzugefügt, oder nicht in dieser Version. Füge zuerst das Formular hinzu.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: konnte nicht im Arbeitsordner gespeichert werden.',
+  'Formulieren en inzendingen': 'Formulare und Einsendungen',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importiere Einsendungen eines Formulars, prüfe sie gegen das veröffentlichte Formular und führe sie mit einem Register. Ein Formular auszufüllen geht auch, wenn dies aus ist. Standardmäßig aus.',
   'Inzending opslaan als zip…': 'Einsendung als ZIP speichern…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Eine ZIP-Datei mit deinen Antworten und Fotos, die du per E-Mail an die Organisatoren schickst.',

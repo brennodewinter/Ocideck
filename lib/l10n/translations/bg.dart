@@ -1647,6 +1647,47 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Inzendingen': 'Изпращания',
+  'Werkmap': 'Работна папка',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Все още не е избрана работна папка. Изберете папка, в която ще се съхраняват изпращанията и регистърът.',
+  'Werkmap kiezen…': 'Избор на работна папка…',
+  'Kies de werkmap voor inzendingen':
+      'Изберете работната папка за изпращанията',
+  'Formulieren': 'Формуляри',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Все още не е добавен формуляр. Добавете формуляра така, както сте го публикували: изпращането се проверява спрямо него.',
+  'Formulier toevoegen…': 'Добавяне на формуляр…',
+  'Kies het formulier om toe te voegen': 'Изберете формуляра за добавяне',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Този файл не е формуляр, който може да бъде публикуван.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Този формуляр вече съществува с различен текст. Различен текст е нова версия: дайте на формуляра по-висок номер на версията.',
+  'Formulier toegevoegd: {naam}.': 'Формулярът е добавен: {naam}.',
+  'Dit formulier stond er al.': 'Този формуляр вече беше тук.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Формулярът не можа да бъде запазен.',
+  'Inzendingen in de werkmap: {n}': 'Изпращания в работната папка: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Обикновеният zip не е шифрован по време на пренос.',
+  'Pakketten binnenhalen…': 'Импортиране на пакети…',
+  'Kies de pakketten om binnen te halen': 'Изберете пакетите за импортиране',
+  'Register openen': 'Отваряне на регистъра',
+  '{naam}: binnengehaald.': '{naam}: импортирано.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: импортирано, но има точки за преглед.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: импортирано, но регистърът не можа да бъде обновен. Проверете overview.md.',
+  '{naam}: stond er al.': '{naam}: вече беше тук.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: не е пакет с изпращане, който OciDeck може да прочете.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: този формуляр не е добавен или не е в тази версия. Първо добавете формуляра.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: не можа да бъде запазен в работната папка.',
+  'Formulieren en inzendingen': 'Формуляри и изпращания',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Импортирайте изпращания на формуляр, проверявайте ги спрямо публикувания формуляр и ги пазете с регистър. Попълването на формуляр работи и когато това е изключено. По подразбиране е изключено.',
   'Inzending opslaan als zip…': 'Запази изпращането като zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Zip файл с вашите отговори и снимки, който да изпратите по имейл на организатора.',

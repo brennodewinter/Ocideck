@@ -1642,6 +1642,45 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Inzendingen': 'Надсилання',
+  'Werkmap': 'Робоча папка',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Робочу папку ще не вибрано. Виберіть папку, де зберігатимуться надсилання та реєстр.',
+  'Werkmap kiezen…': 'Вибрати робочу папку…',
+  'Kies de werkmap voor inzendingen': 'Виберіть робочу папку для надсилань',
+  'Formulieren': 'Форми',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Форму ще не додано. Додайте форму так, як ви її опублікували: надсилання перевіряється за нею.',
+  'Formulier toevoegen…': 'Додати форму…',
+  'Kies het formulier om toe te voegen': 'Виберіть форму для додавання',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Цей файл не є формою, яку можна опублікувати.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ця форма вже є з іншим текстом. Інший текст — це нова версія: дайте формі вищий номер версії.',
+  'Formulier toegevoegd: {naam}.': 'Форму додано: {naam}.',
+  'Dit formulier stond er al.': 'Ця форма вже була.',
+  'Het formulier kon niet worden opgeslagen.': 'Не вдалося зберегти форму.',
+  'Inzendingen in de werkmap: {n}': 'Надсилань у робочій папці: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Звичайний zip не шифрується в дорозі.',
+  'Pakketten binnenhalen…': 'Імпортувати пакети…',
+  'Kies de pakketten om binnen te halen': 'Виберіть пакети для імпорту',
+  'Register openen': 'Відкрити реєстр',
+  '{naam}: binnengehaald.': '{naam}: імпортовано.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: імпортовано, але є пункти для перевірки.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: імпортовано, але реєстр не вдалося оновити. Перевірте overview.md.',
+  '{naam}: stond er al.': '{naam}: уже було.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: це не пакет надсилання, який OciDeck може прочитати.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: цю форму не додано або не в цій версії. Спершу додайте форму.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: не вдалося зберегти в робочій папці.',
+  'Formulieren en inzendingen': 'Форми та надсилання',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Імпортуйте надсилання форми, перевіряйте їх за опублікованою формою та зберігайте з реєстром. Заповнювати форму можна й тоді, коли це вимкнено. За замовчуванням вимкнено.',
   'Inzending opslaan als zip…': 'Зберегти заявку як zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Файл zip з вашими відповідями та фото, щоб надіслати організаторові електронною поштою.',

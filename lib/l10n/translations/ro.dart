@@ -1643,6 +1643,47 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Inzendingen': 'Trimiteri',
+  'Werkmap': 'Folder de lucru',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Nu a fost ales încă un folder de lucru. Alege un folder în care vor fi păstrate trimiterile și registrul.',
+  'Werkmap kiezen…': 'Alege folderul de lucru…',
+  'Kies de werkmap voor inzendingen':
+      'Alege folderul de lucru pentru trimiteri',
+  'Formulieren': 'Formulare',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Nu a fost adăugat încă niciun formular. Adaugă formularul așa cum l-ai publicat: o trimitere este verificată față de el.',
+  'Formulier toevoegen…': 'Adaugă formular…',
+  'Kies het formulier om toe te voegen': 'Alege formularul de adăugat',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Acest fișier nu este un formular care să poată fi publicat.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Acest formular există deja cu alt text. Un alt text este o versiune nouă: dă formularului un număr de versiune mai mare.',
+  'Formulier toegevoegd: {naam}.': 'Formular adăugat: {naam}.',
+  'Dit formulier stond er al.': 'Acest formular exista deja.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Formularul nu a putut fi salvat.',
+  'Inzendingen in de werkmap: {n}': 'Trimiteri în folderul de lucru: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Un zip simplu nu este criptat pe parcurs.',
+  'Pakketten binnenhalen…': 'Importă pachete…',
+  'Kies de pakketten om binnen te halen': 'Alege pachetele de importat',
+  'Register openen': 'Deschide registrul',
+  '{naam}: binnengehaald.': '{naam}: importat.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importat, dar există puncte de revizuit.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importat, dar registrul nu a putut fi actualizat. Verifică overview.md.',
+  '{naam}: stond er al.': '{naam}: exista deja.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nu este un pachet de trimitere pe care OciDeck îl poate citi.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: acest formular nu a fost adăugat, sau nu în această versiune. Adaugă mai întâi formularul.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nu a putut fi salvat în folderul de lucru.',
+  'Formulieren en inzendingen': 'Formulare și trimiteri',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importă trimiterile unui formular, verifică-le față de formularul publicat și păstrează-le cu un registru. Completarea unui formular funcționează și când aceasta este oprită. Oprit în mod implicit.',
   'Inzending opslaan als zip…': 'Salvează trimiterea ca zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Un fișier zip cu răspunsurile și fotografiile tale, pe care îl trimiți prin e-mail organizatorului.',

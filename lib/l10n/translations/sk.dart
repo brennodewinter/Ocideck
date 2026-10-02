@@ -1633,6 +1633,47 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Inzendingen': 'Odoslania',
+  'Werkmap': 'Pracovný priečinok',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Zatiaľ nie je vybraný pracovný priečinok. Vyberte priečinok, do ktorého sa uložia odoslania a register.',
+  'Werkmap kiezen…': 'Vybrať pracovný priečinok…',
+  'Kies de werkmap voor inzendingen':
+      'Vyberte pracovný priečinok pre odoslania',
+  'Formulieren': 'Formuláre',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Zatiaľ nebol pridaný žiadny formulár. Pridajte formulár tak, ako ste ho zverejnili: odoslanie sa voči nemu kontroluje.',
+  'Formulier toevoegen…': 'Pridať formulár…',
+  'Kies het formulier om toe te voegen':
+      'Vyberte formulár, ktorý chcete pridať',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Tento súbor nie je formulár, ktorý by sa dal zverejniť.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Tento formulár tu už je s iným textom. Iný text je nová verzia: dajte formuláru vyššie číslo verzie.',
+  'Formulier toegevoegd: {naam}.': 'Formulár pridaný: {naam}.',
+  'Dit formulier stond er al.': 'Tento formulár tu už bol.',
+  'Het formulier kon niet worden opgeslagen.': 'Formulár sa nepodarilo uložiť.',
+  'Inzendingen in de werkmap: {n}': 'Odoslania v pracovnom priečinku: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Obyčajný zip sa pri prenose nešifruje.',
+  'Pakketten binnenhalen…': 'Importovať balíky…',
+  'Kies de pakketten om binnen te halen': 'Vyberte balíky na import',
+  'Register openen': 'Otvoriť register',
+  '{naam}: binnengehaald.': '{naam}: importované.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importované, ale sú tu body na kontrolu.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importované, ale register sa nepodarilo aktualizovať. Skontrolujte overview.md.',
+  '{naam}: stond er al.': '{naam}: už tu bolo.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nie je balík odoslania, ktorý by OciDeck vedel prečítať.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: tento formulár nebol pridaný, alebo nie v tejto verzii. Najprv pridajte formulár.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nepodarilo sa uložiť do pracovného priečinka.',
+  'Formulieren en inzendingen': 'Formuláre a odoslania',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importujte odoslania formulára, kontrolujte ich voči zverejnenému formuláru a uchovávajte ich s registrom. Vypĺňanie formulára funguje aj vtedy, keď je toto vypnuté. Predvolene vypnuté.',
   'Inzending opslaan als zip…': 'Uložiť prihlášku ako zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Súbor zip s vašimi odpoveďami a fotkami, ktorý pošlete e-mailom organizátorovi.',

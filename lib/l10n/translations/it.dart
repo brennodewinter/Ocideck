@@ -664,6 +664,47 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Inzendingen': 'Invii',
+  'Werkmap': 'Cartella di lavoro',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Nessuna cartella di lavoro scelta. Scegli una cartella in cui conservare gli invii e il registro.',
+  'Werkmap kiezen…': 'Scegli la cartella di lavoro…',
+  'Kies de werkmap voor inzendingen':
+      'Scegli la cartella di lavoro per gli invii',
+  'Formulieren': 'Moduli',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Nessun modulo aggiunto. Aggiungi il modulo come lo hai pubblicato: gli invii vengono verificati rispetto ad esso.',
+  'Formulier toevoegen…': 'Aggiungi modulo…',
+  'Kies het formulier om toe te voegen': 'Scegli il modulo da aggiungere',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Questo file non è un modulo che si possa pubblicare.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Questo modulo esiste già con un testo diverso. Un testo diverso è una nuova versione: assegna al modulo un numero di versione più alto.',
+  'Formulier toegevoegd: {naam}.': 'Modulo aggiunto: {naam}.',
+  'Dit formulier stond er al.': 'Questo modulo era già presente.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Non è stato possibile salvare il modulo.',
+  'Inzendingen in de werkmap: {n}': 'Invii nella cartella di lavoro: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Uno zip semplice non è cifrato durante il trasferimento.',
+  'Pakketten binnenhalen…': 'Importa pacchetti…',
+  'Kies de pakketten om binnen te halen': 'Scegli i pacchetti da importare',
+  'Register openen': 'Apri il registro',
+  '{naam}: binnengehaald.': '{naam}: importato.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importato, ma ci sono punti da controllare.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importato, ma non è stato possibile aggiornare il registro. Controlla overview.md.',
+  '{naam}: stond er al.': '{naam}: era già presente.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: non è un pacchetto di invio che OciDeck possa leggere.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: questo modulo non è stato aggiunto, o non in questa versione. Aggiungi prima il modulo.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: non è stato possibile salvarlo nella cartella di lavoro.',
+  'Formulieren en inzendingen': 'Moduli e invii',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importa gli invii di un modulo, verificali rispetto al modulo pubblicato e conservali con un registro. Compilare un modulo funziona anche con questa estensione disattivata. Disattivata per impostazione predefinita.',
   'Inzending opslaan als zip…': 'Salva l’invio come zip…',
   'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
       'Un file zip con le tue risposte e le tue foto, da inviare per e-mail all’organizzatore.',
