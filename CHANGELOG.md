@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Het **register van een organisator** (`overview.md`, formaat §7.3) heeft zijn motor in
+  `ocideck_form_core`: één Markdown-tabel met een rij per inzending (kolommen uit `overview=` van het
+  formulier, dan ontvangen, status, toestemming, ingetrokken en bewaren-tot), die de Inbox bijhoudt en
+  die de redactie ook met de hand mag bewerken. Een tabel die niet te lezen is wordt als beschadigd
+  gemeld en met rust gelaten in plaats van herschreven; tekst eromheen en kolommen die iemand erbij
+  zette blijven staan. Inhoud uit een inzending komt als gewone tekst in een cel — nooit als link,
+  afbeelding of tabelbreuk — en bij verwijderen blijft alleen het minimale record over (§7.3).
 - De **beoordeling van een binnengekomen inzending** (kant van de organisator, formaat §4.11 en
   §7.2) heeft haar motor in `ocideck_form_core`: een pakket wordt gehouden tegen het
   **gepubliceerde** formulier — nooit tegen de regels in de inzending zelf, zodat een client die een

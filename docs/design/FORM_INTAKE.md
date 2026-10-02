@@ -72,7 +72,8 @@
 > turns an opened package into a list of problems against the **published** form (§4.11
 > run 3), the consent cross-check and every photo cleaned again. It is pure; the I/O
 > half of §7.2 (workspace layout, landing the files, the Inbox, the register) is still
-> to build.
+> to build. **The register's table is in too** (`form_register.dart`, §7.3): a pure model
+> of `overview.md` that never loses what a person wrote in it.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
@@ -1744,7 +1745,8 @@ patterns), `form_answer_safety.dart` (§4.6 rules 1–5), `form_answers.dart`
 `form_answer_writer.dart` (the write side: `formatAnswer`, `applyAnswer`, which refuses
 an answer that would change the form itself), `form_package.dart` (the plain zip + manifest +
 name grammars, §5.2–§5.4: `buildFormPackage`, the strict `readFormPackage`), `form_review.dart` (the
-organiser's judgement of a received package against the published form, §4.11 run 3), `rules_version.dart`,
+organiser's judgement of a received package against the published form, §4.11 run 3),
+`form_register.dart` (the `overview.md` table, §7.3), `rules_version.dart`,
 and `test/fixtures/form_vectors.json` (words, characters and patterns; the range, number and date
 vectors still live in the engine's own tests).
 **Still to build:** `form_seal.dart` (age; the only file touching the primitives),
