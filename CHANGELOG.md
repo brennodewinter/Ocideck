@@ -245,6 +245,17 @@ All notable changes to OciDeck are documented in this file.
   bestand). Het ontwerp (§5.4) zei het al; de naamgrammatica liet het door. Een naam die er alleen
   op begint (`con-1.jpg`) blijft gewoon. Bij het binnenhalen bewaart de lezer ook het manifest en
   de inzending byte voor byte zoals ze aankwamen, zodat `sha256sum` klopt.
+- In een pentestrapport groeide het aantal lege regels na de kop van een
+  bevinding en na de ondertekening met elke visuele rondgang — drie
+  regelovergangen erbij per keer, onbegrensd — zodat het bestand opzwol terwijl
+  de gebruiker niets typte. De scanner en de embed-syntaxen namen de lege regels
+  vlak voor de volgende kop of envelop mee in het atomaire blok, en de conversie
+  voegde daar zelf een scheiding aan toe. Ze delen nu één regel
+  (`pentestTrimBlankTail`) en laten die staart bij de scheiding; een tweede
+  rondgang is byte-gelijk aan de eerste, voor elke atomaire envelop even veel
+  lege regels. De tabelenveloppen deden dit al nooit. De rondgangstests
+  vouwden lege-regelruns samen en zagen het daarom niet; ze toetsen nu strikt.
+
 - Een pentestrapport kwam na één visuele bewerking niet meer byte-gelijk
   terug. De kop van een bevinding (scopeobject, hertestnotitie) en de vier
   enveloppen die in hun geheel atomair zijn (checklist, scope, samenvatting,
