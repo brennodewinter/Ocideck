@@ -32,6 +32,7 @@ import '../../utils/error_snackbar.dart';
 import '../../utils/file_extension.dart';
 import '../../utils/log.dart';
 import '../dialogs/import_document_style_dialog.dart';
+import 'presentation_import_action.dart';
 
 /// Importeert een `.docx` of `.odt` als een nieuw Markdown-document: kiest een
 /// bestand, zet het om, vraagt zo nodig naar de huisstijl, en opent het
@@ -275,3 +276,60 @@ Future<({Uint8List bytes, String name})?> _pickDocument(
 /// Het menulabel voor de document-import.
 String documentImportLabel(AppLocalizations l10n) =>
     l10n.d('Document importeren…');
+
+/// De melding-met-uitweg als een mislukte "Openen" een document of spreadsheet
+/// bleek (`.docx`/`.odt`/`.xlsx`/`.ods`), als kant-en-klare [SnackBar] — of
+/// `null` wanneer [sourceName] er geen is (dan blijft de gewone open-fout
+/// staan). Eenvoudiger dan de presentatie-variant: de documentimport zit niet
+/// achter de module Importeren, dus er is maar één uitweg — de knop
+/// [onImport] die het al-gekozen bestand converteert.
+SnackBar? documentOpenRescueSnackBar(
+  AppLocalizations l10n,
+  String sourceName, {
+  required VoidCallback onImport,
+}) {
+  if (!isImportableDocumentName(sourceName)) return null;
+  return SnackBar(
+    content: Text(
+      l10n.d('OciDeck kan dit bestand importeren naar een nieuw document.'),
+    ),
+    duration: const Duration(seconds: 8),
+    persist: false,
+    action: SnackBarAction(label: l10n.d('Importeren'), onPressed: onImport),
+  );
+}
+
+/// Het omgekeerde van de import-gedachte: [name] zelf bepaalt welke importeur
+/// hem oppakt — een document of spreadsheet gaat naar [importDocument], een
+/// presentatie naar [importPresentation]. Gedeeld door elke plek waar de
+/// bestandsnaam de enige verdachte is: de uitweg-snackbar van een mislukte
+/// "Openen" en de bestand-uit-een-drop.
+Future<void> importNamedFile(
+  BuildContext context,
+  WidgetRef ref, {
+  required Uint8List bytes,
+  required String name,
+}) async {
+  if (isImportableDocumentName(name)) {
+    await importDocument(context, fileOverride: (bytes: bytes, name: name));
+  } else {
+    await importPresentation(
+      context,
+      ref,
+      fileOverride: (bytes: bytes, name: name),
+    );
+  }
+}
+
+/// Een stapel gesleepte documenten achter elkaar importeren — elk opent in een
+/// eigen tabblad. Geen wachtrij zoals bij presentaties: de documentimport is
+/// niet module-gated en kent geen doelmapvraag.
+Future<void> importDroppedDocuments(
+  BuildContext context,
+  List<PickedPresentation> documents,
+) async {
+  for (final doc in documents) {
+    if (!context.mounted) return;
+    await importDocument(context, fileOverride: doc);
+  }
+}

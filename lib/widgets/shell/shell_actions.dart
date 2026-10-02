@@ -19,18 +19,26 @@ void _reportOpenFailure(
   VoidCallback? onImport,
   VoidCallback? onOpenSettings,
 }) {
-  // Koos de gebruiker via "Openen" eigenlijk een presentatie, dan is import de
-  // bedoeling: een melding mét uitweg, niet doodlopen op "OciDeck opent Markdown".
+  // Koos de gebruiker via "Openen" eigenlijk een presentatie of een
+  // kantoorbestand, dan is import de bedoeling: een melding mét uitweg, niet
+  // doodlopen op "OciDeck opent Markdown". Dezelfde [onImport] dient beiden —
+  // hij kiest zelf zijn importeur aan de naam.
   if (sourceName != null &&
       (result == OpenResult.unreadable ||
           result == OpenResult.notAPresentation)) {
-    final bar = presentationOpenRescueSnackBar(
-      l10n,
-      sourceName,
-      importModuleAvailable: importModuleAvailable,
-      onImport: onImport ?? () {},
-      onOpenSettings: onOpenSettings ?? () {},
-    );
+    final bar =
+        presentationOpenRescueSnackBar(
+          l10n,
+          sourceName,
+          importModuleAvailable: importModuleAvailable,
+          onImport: onImport ?? () {},
+          onOpenSettings: onOpenSettings ?? () {},
+        ) ??
+        documentOpenRescueSnackBar(
+          l10n,
+          sourceName,
+          onImport: onImport ?? () {},
+        );
     if (bar != null) {
       messenger.showSnackBar(bar);
       return;
@@ -57,7 +65,7 @@ extension _DropActions on _AppShellState {
   Future<void> _onWebFilesDropped(List<DropItem> files) async {
     final tabs = ref.read(tabsProvider.notifier);
     final images = <String>[];
-    final presentations = <PickedPresentation>[];
+    final imports = <PickedPresentation>[];
     var unreadable = 0;
     for (final file in files) {
       final kind = droppedKind(file.name);
@@ -77,8 +85,9 @@ extension _DropActions on _AppShellState {
             reason: ref.read(openFailureProvider),
           );
         }
-      } else if (kind == DroppedKind.presentation) {
-        presentations.add((bytes: bytes, name: file.name));
+      } else if (kind == DroppedKind.presentation ||
+          kind == DroppedKind.document) {
+        imports.add((bytes: bytes, name: file.name));
       } else {
         if (bytes.isEmpty ||
             bytes.length > ImageService.maxImageBytes ||
@@ -105,9 +114,7 @@ extension _DropActions on _AppShellState {
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
-    if (presentations.isNotEmpty && mounted) {
-      await importDroppedPresentations(context, ref, presentations);
-    }
+    if (mounted) await importDroppedFiles(context, ref, imports);
     // Zeggen dát het misging is het minste. Zonder deze melding is een drop die
     // niets oplevert niet te onderscheiden van een drop die niet aankwam, en
     // dat is precies de toestand waarin niemand kan nagaan waarom er niets
@@ -283,15 +290,19 @@ Future<void> _openPickedPaths(
       sourceName: single ? path : null,
       importModuleAvailable: importModuleAvailable,
       // Pad al bekend: importeer zonder de bestandskiezer opnieuw te openen.
+      // De naam bepaalt welke importeur — een `.docx`/`.xlsx` hoort bij de
+      // documentimport, een `.pptx`/`.odp` bij de presentatie-import.
       onImport: single
           ? () async {
               final bytes = await File(path).readAsBytes();
-              if (!context.mounted) return;
-              await importPresentation(
-                context,
-                ref,
-                fileOverride: (bytes: bytes, name: p.basename(path)),
-              );
+              if (context.mounted) {
+                await importNamedFile(
+                  context,
+                  ref,
+                  bytes: bytes,
+                  name: p.basename(path),
+                );
+              }
             }
           : null,
       onOpenSettings: () => SettingsDialog.show(context),
@@ -321,7 +332,8 @@ Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
   // Zelfde laadwacht als het desktop-openpad (#1209) vóór de melding valt.
   final importModuleAvailable = await importModuleRevealedWhenReady(ref);
   if (!context.mounted) return;
-  // Op web zijn de bytes al binnen: een presentatie kan direct de import in.
+  // Op web zijn de bytes al binnen: een presentatie of een kantoorbestand kan
+  // direct de import in; de naam bepaalt welke importeur.
   _reportOpenFailure(
     messenger,
     l10n,
@@ -329,11 +341,8 @@ Future<void> _openWithBytesPicker(BuildContext context, WidgetRef ref) async {
     reason: ref.read(openFailureProvider),
     sourceName: picked.name,
     importModuleAvailable: importModuleAvailable,
-    onImport: () => importPresentation(
-      context,
-      ref,
-      fileOverride: (bytes: picked.bytes, name: picked.name),
-    ),
+    onImport: () =>
+        importNamedFile(context, ref, bytes: picked.bytes, name: picked.name),
     onOpenSettings: () => SettingsDialog.show(context),
   );
 }

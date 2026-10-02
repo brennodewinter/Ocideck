@@ -667,6 +667,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck peut importer ce fichier dans un nouveau document.',
   'Kies een datum': 'Choisir une date',
   'Anders, namelijk:': 'Autre, à savoir :',
   'Punt {n}': 'Point {n}',

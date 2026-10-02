@@ -1627,6 +1627,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck dapat mengimpor berkas ini menjadi dokumen baru.',
   'Kies een datum': 'Pilih tanggal',
   'Anders, namelijk:': 'Lainnya, yaitu:',
   'Punt {n}': 'Butir {n}',

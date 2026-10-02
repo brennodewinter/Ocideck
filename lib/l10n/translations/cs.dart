@@ -1628,6 +1628,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck může tento soubor importovat do nového dokumentu.',
   'Kies een datum': 'Vybrat datum',
   'Anders, namelijk:': 'Jiné, a to:',
   'Punt {n}': 'Bod {n}',

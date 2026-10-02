@@ -1629,6 +1629,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Az OciDeck új dokumentumként tudja importálni ezt a fájlt.',
   'Kies een datum': 'Dátum kiválasztása',
   'Anders, namelijk:': 'Egyéb, nevezetesen:',
   'Punt {n}': '{n}. pont',

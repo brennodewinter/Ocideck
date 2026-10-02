@@ -666,6 +666,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck por importá e archi vo aki pa un dokumento nobo.',
   'Kies een datum': 'Skohe un fecha',
   'Anders, namelijk:': 'Otro, ku ta:',
   'Punt {n}': 'Punto {n}',

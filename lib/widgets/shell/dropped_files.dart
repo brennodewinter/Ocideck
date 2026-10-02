@@ -8,10 +8,15 @@
 import 'dart:typed_data';
 
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart' show BuildContext;
 import 'package:path/path.dart' as p;
 
+import '../../services/import/document_import_service.dart'
+    show isImportableDocumentName;
 import '../../utils/log.dart';
-import 'presentation_import_action.dart' show isImportablePresentationName;
+import 'document_import_action.dart' show importDroppedDocuments;
+import 'presentation_import_action.dart';
 
 /// De extensies die een gesleept bestand als afbeelding laten tellen.
 ///
@@ -38,6 +43,10 @@ enum DroppedKind {
   /// Een presentatie van elders (.pptx/.odp/.key): gaat de import in.
   presentation,
 
+  /// Een document of spreadsheet van elders (.docx/.odt/.xlsx/.ods/.csv):
+  /// gaat de documentimport in.
+  document,
+
   /// Een afbeelding: wordt slide-inhoud.
   image,
 }
@@ -52,6 +61,7 @@ DroppedKind? droppedKind(String name) {
     return DroppedKind.deck;
   }
   if (isImportablePresentationName(name)) return DroppedKind.presentation;
+  if (isImportableDocumentName(name)) return DroppedKind.document;
   if (droppedImageExtensions.contains(ext)) return DroppedKind.image;
   return null;
 }
@@ -75,4 +85,27 @@ Future<Uint8List?> readDroppedBytes(DropItem file) async {
     logError('drop: bytes lezen mislukt voor ${file.name}', e, s);
     return null;
   }
+}
+
+/// De importkant van een drop, gedeeld door de desktop- en webhandler: splitst
+/// [files] op naam en stuurt presentaties via de wachtrijroute (met
+/// modulepoort) en documenten/spreadsheets elk in een eigen tabblad — zie
+/// [importDroppedDocuments]. Een lege lijst is een no-op; [context] wordt pas
+/// aangeraakt als er werk is.
+Future<void> importDroppedFiles(
+  BuildContext context,
+  WidgetRef ref,
+  List<PickedPresentation> files,
+) async {
+  if (files.isEmpty || !context.mounted) return;
+  final presentations = <PickedPresentation>[];
+  final documents = <PickedPresentation>[];
+  for (final file in files) {
+    (isImportableDocumentName(file.name) ? documents : presentations).add(file);
+  }
+  if (presentations.isNotEmpty) {
+    await importDroppedPresentations(context, ref, presentations);
+  }
+  if (!context.mounted) return;
+  await importDroppedDocuments(context, documents);
 }

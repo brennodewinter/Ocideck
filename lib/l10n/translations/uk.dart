@@ -1642,6 +1642,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck може імпортувати цей файл у новий документ.',
   'Kies een datum': 'Обрати дату',
   'Anders, namelijk:': 'Інше, а саме:',
   'Punt {n}': 'Пункт {n}',

@@ -55,6 +55,8 @@ class ImportBudget {
     this.maxSnappyStreamBytes = 256 * _mib,
     this.maxSlides = 2000,
     this.maxIwaObjects = 500000,
+    this.maxSheetRows = 65536,
+    this.maxSheetCols = 1024,
     this.maxDuration = const Duration(minutes: 2),
   });
 
@@ -102,6 +104,14 @@ class ImportBudget {
   /// Begrenst de `objects`-map die tijdens het inlezen groeit.
   final int maxIwaObjects;
 
+  /// Maximale rijen en kolommen per geïmporteerd werkblad (spreadsheet-
+  /// documenten, `.ods`/`.xlsx`). Niet in de onderdelen-grenzen verdisconteerd
+  /// want ODF stelt ze voor via `number-rows-repeated` op één knoop — een leeg
+  /// blad kan daar vier miljard herhalingen zetten zonder één byte kosten. De
+  /// waardes zijn de plafonds die Excel zelf hanteert.
+  final int maxSheetRows;
+  final int maxSheetCols;
+
   /// Maximale wandkloktijd voor één import. De worker toetst dit binnen zijn
   /// eigen isolate bij elke werkeenheid (na het uitpakken, na het parsen, per
   /// dia); een overschrijding eindigt de import als
@@ -131,6 +141,8 @@ class ImportBudget {
     int maxSnappyStreamBytes = 8 * _kib,
     int maxSlides = 4,
     int maxIwaObjects = 16,
+    int maxSheetRows = 8,
+    int maxSheetCols = 4,
     Duration maxDuration = const Duration(minutes: 2),
   }) => ImportBudget(
     maxSourceBytes: maxSourceBytes,
@@ -142,6 +154,8 @@ class ImportBudget {
     maxSnappyStreamBytes: maxSnappyStreamBytes,
     maxSlides: maxSlides,
     maxIwaObjects: maxIwaObjects,
+    maxSheetRows: maxSheetRows,
+    maxSheetCols: maxSheetCols,
     maxDuration: maxDuration,
   );
 }

@@ -1627,6 +1627,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck kan importere denne fil til et nyt dokument.',
   'Kies een datum': 'Vælg en dato',
   'Anders, namelijk:': 'Andet, nemlig:',
   'Punt {n}': 'Punkt {n}',

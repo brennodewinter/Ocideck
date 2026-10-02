@@ -244,6 +244,19 @@ scherm gebruikt een plaatsvervanger en de exports noemen de echte, behalve de
 PDF en LaTeX, die alleen de klasse schreef/schreefloos overnemen (zie
 hierboven). *(Toegevoegd 2026-09-19, #2119.)*
 
+## Een spreadsheet-import bewaart waarden, niet het blad
+
+Een `.xlsx`/`.ods`/`.csv`-import maakt van elk werkblad één GFM-tabel: de
+*waarden* die een lezer zou zien — formules landen als de waarde die het blad
+het laatst berekende, datums als `yyyy-mm-dd`. Wat geen tabelvorm heeft,
+blijft achter: opmaak, samengevoegde cellen (platgeslagen), kolombreedtes,
+grafieken, afbeeldingen en draaitabellen, en rijen of kolommen voorbij het
+importbudget (65 536 × 1024, hetzelfde plafond dat Excel trekt). Cellen die
+zo verloren gaan worden onder *niet overgenomen* geteld in plaats van stil
+weg te vallen. `.xls` (het binaire OLE2-formaat) wordt helemaal niet herkend
+— die bytes dragen geen leesbare structuur voor een zip+XML-parser.
+*(Toegevoegd 2026-10-02, #2225.)*
+
 ## Alleen van links naar rechts
 
 De interface en het diacanvas zijn van links naar rechts. Geen van de 32

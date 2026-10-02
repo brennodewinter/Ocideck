@@ -1643,6 +1643,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck poate importa acest fișier într-un document nou.',
   'Kies een datum': 'Alege o dată',
   'Anders, namelijk:': 'Altul, anume:',
   'Punt {n}': 'Punctul {n}',

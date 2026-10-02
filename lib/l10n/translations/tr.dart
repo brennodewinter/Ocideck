@@ -2538,6 +2538,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck bu dosyayı yeni bir belge olarak içe aktarabilir.',
   'Kies een datum': 'Tarih seç',
   'Anders, namelijk:': 'Diğer, yani:',
   'Punt {n}': 'Madde {n}',

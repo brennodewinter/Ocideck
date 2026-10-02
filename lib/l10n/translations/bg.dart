@@ -1647,6 +1647,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck може да импортира този файл в нов документ.',
   'Kies een datum': 'Избор на дата',
   'Anders, namelijk:': 'Друго, а именно:',
   'Punt {n}': 'Точка {n}',

@@ -1627,6 +1627,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck lahko uvozi to datoteko v nov dokument.',
   'Kies een datum': 'Izberi datum',
   'Anders, namelijk:': 'Drugo, in sicer:',
   'Punt {n}': 'Točka {n}',
