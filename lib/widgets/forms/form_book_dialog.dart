@@ -226,7 +226,6 @@ class _FormBookDialogState extends State<FormBookDialog> {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final spec = _spec;
-    final states = spec == null ? const <String>[] : formStatesOf(spec);
     return Dialog(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 640, maxHeight: 700),
@@ -263,94 +262,8 @@ class _FormBookDialogState extends State<FormBookDialog> {
                             'Er is geen bruikbaar formulier in de werkmap.',
                           ),
                         )
-                      else ...[
-                        _label(theme, l10n.d('Formulier')),
-                        DropdownButton<PublishedForm>(
-                          isExpanded: true,
-                          value: _form,
-                          items: [
-                            for (final form in _versions)
-                              DropdownMenuItem(
-                                value: form,
-                                child: Text('${form.id} · v${form.version}'),
-                              ),
-                          ],
-                          onChanged: _busy ? null : _chooseForm,
-                        ),
-                        const SizedBox(height: 12),
-                        _label(theme, l10n.d('Hoofdstuksjabloon')),
-                        Text(
-                          _templateName ?? l10n.d('Nog geen sjabloon gekozen.'),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          l10n.d(
-                            'In het sjabloon staat {veld-id} voor het antwoord op dat veld.',
-                          ),
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        const SizedBox(height: 8),
-                        OutlinedButton(
-                          onPressed: _busy ? null : _chooseTemplate,
-                          child: Text(l10n.d('Hoofdstuksjabloon kiezen…')),
-                        ),
-                        const SizedBox(height: 16),
-                        _label(theme, l10n.d('Welke inzendingen?')),
-                        Text(
-                          l10n.d(
-                            'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.',
-                          ),
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        const SizedBox(height: 4),
-                        Wrap(
-                          spacing: 8,
-                          children: [
-                            for (final state in states)
-                              FilterChip(
-                                label: Text(state),
-                                selected: _states.contains(state),
-                                onSelected: _busy
-                                    ? null
-                                    : (on) => setState(
-                                        () => _states = on
-                                            ? {..._states, state}
-                                            : ({..._states}..remove(state)),
-                                      ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _fieldChoice(
-                                l10n.d('Ordenen op'),
-                                spec,
-                                _orderBy,
-                                (v) => setState(() => _orderBy = v),
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: _fieldChoice(
-                                l10n.d('Groeperen op'),
-                                spec,
-                                _groupBy,
-                                (v) => setState(() => _groupBy = v),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        TextField(
-                          controller: _name,
-                          enabled: !_busy,
-                          decoration: InputDecoration(
-                            labelText: l10n.d('Naam van het boek'),
-                          ),
-                        ),
-                      ],
+                      else
+                        ..._choices(l10n, theme, spec),
                     ],
                   ),
                 ),
@@ -360,39 +273,130 @@ class _FormBookDialogState extends State<FormBookDialog> {
                 Semantics(liveRegion: true, child: Text(_message!)),
               ],
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text(l10n.d('Sluiten')),
-                  ),
-                  if (_written != null && widget.onOpenFile != null) ...[
-                    const SizedBox(width: 8),
-                    OutlinedButton(
-                      onPressed: () {
-                        final path = _written!;
-                        Navigator.of(context).pop();
-                        widget.onOpenFile!(path);
-                      },
-                      child: Text(l10n.d('Boek openen')),
-                    ),
-                  ],
-                  if (spec != null) ...[
-                    const SizedBox(width: 8),
-                    FilledButton(
-                      onPressed: _busy ? null : _compile,
-                      child: Text(l10n.d('Samenstellen')),
-                    ),
-                  ],
-                ],
-              ),
+              _buttons(l10n, spec != null),
             ],
           ),
         ),
       ),
     );
   }
+
+  /// De keuzes: formulier, sjabloon, statussen, ordenen, groeperen en de naam.
+  List<Widget> _choices(
+    AppLocalizations l10n,
+    ThemeData theme,
+    FormSpec spec,
+  ) => [
+    _label(theme, l10n.d('Formulier')),
+    DropdownButton<PublishedForm>(
+      isExpanded: true,
+      value: _form,
+      items: [
+        for (final form in _versions)
+          DropdownMenuItem(
+            value: form,
+            child: Text('${form.id} · v${form.version}'),
+          ),
+      ],
+      onChanged: _busy ? null : _chooseForm,
+    ),
+    const SizedBox(height: 12),
+    _label(theme, l10n.d('Hoofdstuksjabloon')),
+    Text(_templateName ?? l10n.d('Nog geen sjabloon gekozen.')),
+    const SizedBox(height: 4),
+    Text(
+      l10n.d('In het sjabloon staat {veld-id} voor het antwoord op dat veld.'),
+      style: theme.textTheme.bodySmall,
+    ),
+    const SizedBox(height: 8),
+    OutlinedButton(
+      onPressed: _busy ? null : _chooseTemplate,
+      child: Text(l10n.d('Hoofdstuksjabloon kiezen…')),
+    ),
+    const SizedBox(height: 16),
+    _label(theme, l10n.d('Welke inzendingen?')),
+    Text(
+      l10n.d(
+        'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.',
+      ),
+      style: theme.textTheme.bodySmall,
+    ),
+    const SizedBox(height: 4),
+    Wrap(
+      spacing: 8,
+      children: [
+        for (final state in formStatesOf(spec))
+          FilterChip(
+            label: Text(state),
+            selected: _states.contains(state),
+            onSelected: _busy
+                ? null
+                : (on) => setState(
+                    () => _states = on
+                        ? {..._states, state}
+                        : ({..._states}..remove(state)),
+                  ),
+          ),
+      ],
+    ),
+    const SizedBox(height: 16),
+    Row(
+      children: [
+        Expanded(
+          child: _fieldChoice(
+            l10n.d('Ordenen op'),
+            spec,
+            _orderBy,
+            (v) => setState(() => _orderBy = v),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: _fieldChoice(
+            l10n.d('Groeperen op'),
+            spec,
+            _groupBy,
+            (v) => setState(() => _groupBy = v),
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(height: 12),
+    TextField(
+      controller: _name,
+      enabled: !_busy,
+      decoration: InputDecoration(labelText: l10n.d('Naam van het boek')),
+    ),
+  ];
+
+  /// De knoppen onder het scrollvlak, zodat *Samenstellen* altijd bereikbaar is.
+  Widget _buttons(AppLocalizations l10n, bool hasForm) => Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      TextButton(
+        onPressed: () => Navigator.of(context).pop(),
+        child: Text(l10n.d('Sluiten')),
+      ),
+      if (_written != null && widget.onOpenFile != null) ...[
+        const SizedBox(width: 8),
+        OutlinedButton(
+          onPressed: () {
+            final path = _written!;
+            Navigator.of(context).pop();
+            widget.onOpenFile!(path);
+          },
+          child: Text(l10n.d('Boek openen')),
+        ),
+      ],
+      if (hasForm) ...[
+        const SizedBox(width: 8),
+        FilledButton(
+          onPressed: _busy ? null : _compile,
+          child: Text(l10n.d('Samenstellen')),
+        ),
+      ],
+    ],
+  );
 
   Widget _label(ThemeData theme, String text) => Padding(
     padding: const EdgeInsets.only(bottom: 4),
