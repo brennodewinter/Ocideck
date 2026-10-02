@@ -2538,6 +2538,10 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.': 'Çalışma kopyası oluşturulamadı.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'İyileştirmek için gönderinin bir kopyasını açar. Gelen olduğu gibi kalır.',
+  'Werkkopie openen': 'Çalışma kopyasını aç',
   'Status gewijzigd naar {status}.': 'Durum {status} olarak değiştirildi.',
   'Intrekking opgeslagen.': 'Geri çekme kaydedildi.',
   'Intrekking ongedaan gemaakt.': 'Geri çekme geri alındı.',

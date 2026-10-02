@@ -1628,6 +1628,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Pracovní kopii se nepodařilo vytvořit.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Otevře kopii odeslání k vylepšení. To, co přišlo, zůstává beze změny.',
+  'Werkkopie openen': 'Otevřít pracovní kopii',
   'Status gewijzigd naar {status}.': 'Stav změněn na {status}.',
   'Intrekking opgeslagen.': 'Stažení uloženo.',
   'Intrekking ongedaan gemaakt.': 'Stažení vráceno zpět.',

@@ -5873,6 +5873,12 @@ Under an opened submission are its **actions**:
   and consent and the status — and the fields the form announced beforehand in its notice, `keep-record`).
   It cannot be undone. If the register cannot be read, the content is still erased, and OciDeck says the
   row has to be adjusted by hand.
+- **Open working copy** — improve a submission without touching what arrived. OciDeck makes
+  `submission.edit.md`, a literal copy, and opens *that* in a tab (the Inbox closes). Fix an answer, leave a
+  name out; the form opens on **Fill in** like any form. What arrived (`submission.md`) is never opened for
+  editing. Back in the Inbox the submission is judged again on the working copy — a point you fixed is gone, and
+  the line says the judgement is about the working copy — and you can then move its status on. Change the form's
+  own text in the working copy and the Inbox says so: that is not an answer.
 Each action says how it went. A register that cannot be read is never written over.
 
 A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it

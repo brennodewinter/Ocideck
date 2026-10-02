@@ -1627,6 +1627,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Arbejdskopien kunne ikke oprettes.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Åbner en kopi af indsendelsen til forbedring. Det modtagne forbliver uændret.',
+  'Werkkopie openen': 'Åbn arbejdskopi',
   'Status gewijzigd naar {status}.': 'Status ændret til {status}.',
   'Intrekking opgeslagen.': 'Tilbagetrækning gemt.',
   'Intrekking ongedaan gemaakt.': 'Tilbagetrækning fortrudt.',

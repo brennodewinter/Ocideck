@@ -41,9 +41,14 @@ class FormInboxList extends StatefulWidget {
     this.version = 0,
     this.now,
     this.delete = deleteSubmission,
+    this.onOpenFile,
   });
 
   final FormWorkspace workspace;
+
+  /// Opent een bestand van de werkmap (de werkkopie van een inzending). `null`: de
+  /// knop ontbreekt.
+  final ValueChanged<String>? onOpenFile;
 
   /// Het verwijderen zelf; een naad voor de test (zie [FormInboxActions.delete]).
   final Future<FormDeleteOutcome> Function(
@@ -155,6 +160,7 @@ class _FormInboxListState extends State<FormInboxList> {
                   onDone: _done,
                   now: widget.now,
                   delete: widget.delete,
+                  onOpenFile: widget.onOpenFile,
                 ),
           ],
         );
@@ -170,10 +176,12 @@ class _EntryTile extends StatelessWidget {
     required this.review,
     required this.onDone,
     required this.delete,
+    this.onOpenFile,
     this.now,
   });
 
   final _Entry entry;
+  final ValueChanged<String>? onOpenFile;
   final FormWorkspace workspace;
   final Future<FormStoredReviewResult> Function() review;
   final ValueChanged<String> onDone;
@@ -251,6 +259,7 @@ class _EntryTile extends StatelessWidget {
           onDone: onDone,
           now: now,
           delete: delete,
+          onOpenFile: onOpenFile,
         ),
       ],
     );
@@ -266,9 +275,11 @@ class _Detail extends StatelessWidget {
     required this.entry,
     required this.onDone,
     required this.delete,
+    this.onOpenFile,
     this.now,
   });
 
+  final ValueChanged<String>? onOpenFile;
   final Future<FormStoredReviewResult> Function() review;
   final FormWorkspace workspace;
   final _Entry entry;
@@ -321,6 +332,8 @@ class _Detail extends StatelessWidget {
               onDone: onDone,
               now: now,
               delete: delete,
+              onOpenFile: onOpenFile,
+              canEdit: result is FormStoredReview,
             ),
           ],
         );

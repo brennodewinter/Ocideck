@@ -243,12 +243,18 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
     };
   }
 
-  Future<void> _openRegister() async {
-    final workspace = _workspace;
-    if (workspace == null) return;
+  /// Sluit het venster en opent [path] in een tabblad: wie een bestand van de
+  /// werkmap wil lezen of verbeteren wil het in de editor zien, niet achter een
+  /// venster.
+  Future<void> _open(String path) async {
     final tabs = ref.read(tabsProvider.notifier);
     Navigator.of(context).pop();
-    await tabs.openFileByPath(workspace.registerPath);
+    await tabs.openFileByPath(path);
+  }
+
+  Future<void> _openRegister() async {
+    final workspace = _workspace;
+    if (workspace != null) await _open(workspace.registerPath);
   }
 
   String _label(PublishedForm form) =>
@@ -377,6 +383,7 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
                   FormInboxList(
                     workspace: FormWorkspace(root),
                     version: _version,
+                    onOpenFile: _open,
                   ),
                 ],
                 const SizedBox(height: 20),

@@ -1627,6 +1627,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Salinan kerja tidak dapat dibuat.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Membuka salinan kiriman untuk diperbaiki. Yang diterima tetap tidak berubah.',
+  'Werkkopie openen': 'Buka salinan kerja',
   'Status gewijzigd naar {status}.': 'Status diubah menjadi {status}.',
   'Intrekking opgeslagen.': 'Penarikan disimpan.',
   'Intrekking ongedaan gemaakt.': 'Penarikan dibatalkan.',

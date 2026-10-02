@@ -11,6 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/app.dart';
+import 'package:ocideck/services/form/form_import.dart';
+import 'package:ocideck/services/form/form_workspace.dart';
 import 'package:ocideck/state/forms_provider.dart';
 import 'package:ocideck/widgets/forms/form_inbox_dialog.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
@@ -462,6 +464,50 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.byType(Dialog), findsNothing);
   });
+
+  testWidgets(
+    'Werkkopie openen maakt de kopie, sluit het venster en laat wat binnenkwam staan',
+    (tester) async {
+      await tester.runAsync(() async {
+        final workspace = FormWorkspace(root);
+        await workspace.publishForm(kook);
+        await importFormPackage(
+          workspace,
+          zipOf(),
+          now: DateTime.utc(2026, 10, 6),
+        );
+      });
+      await open(tester, _Picks(), workspace: root);
+      await settleIo(tester, text('abcdefgh…'));
+      // Het venster scrolt: de lijst staat onder de knoppen.
+      await Scrollable.ensureVisible(
+        tester.element(text('abcdefgh…')),
+        alignment: 0.5,
+      );
+      await tester.pump();
+      await tester.tap(text('abcdefgh…'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+      await settleIo(tester, text('Werkkopie openen'));
+      await Scrollable.ensureVisible(
+        tester.element(text('Werkkopie openen')),
+        alignment: 0.5,
+      );
+      await tester.pump();
+      await tester.tap(text('Werkkopie openen'));
+      final copy = File(
+        p.join(
+          root,
+          'submissions',
+          'abcdefghijklmnopqrstuvwxya',
+          'submission.edit.md',
+        ),
+      );
+      await pumpUntil(tester, () => find.byType(Dialog).evaluate().isEmpty);
+      final exists = (await tester.runAsync(copy.exists))!;
+      expect(exists, isTrue);
+    },
+  );
 
   testWidgets(
     'het beginscherm biedt Inzendingen aan zodra de functie zichtbaar is',

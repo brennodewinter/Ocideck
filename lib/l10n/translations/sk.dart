@@ -1633,6 +1633,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Pracovnú kópiu sa nepodarilo vytvoriť.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Otvorí kópiu odoslania na vylepšenie. To, čo prišlo, zostáva nezmenené.',
+  'Werkkopie openen': 'Otvoriť pracovnú kópiu',
   'Status gewijzigd naar {status}.': 'Stav zmenený na {status}.',
   'Intrekking opgeslagen.': 'Stiahnutie uložené.',
   'Intrekking ongedaan gemaakt.': 'Stiahnutie vrátené späť.',

@@ -20,6 +20,8 @@ class FormInboxActions extends StatelessWidget {
     required this.onDone,
     this.now,
     this.delete = deleteSubmission,
+    this.onOpenFile,
+    this.canEdit = false,
   });
 
   final FormWorkspace workspace;
@@ -48,7 +50,29 @@ class FormInboxActions extends StatelessWidget {
   })
   delete;
 
+  /// Opent een bestand van de werkmap in OciDeck. `null`: de knop voor de werkkopie
+  /// ontbreekt.
+  final ValueChanged<String>? onOpenFile;
+
+  /// De inzending is te lezen, dus er is iets om een werkkopie van te maken.
+  final bool canEdit;
+
   bool get _deleted => row?.isDeleted ?? false;
+
+  /// Maakt de werkkopie als ze er nog niet is en opent haar. Nooit wat binnenkwam:
+  /// dat blijft zoals het was, en een bewerking in de editor of de invulpagina zou
+  /// het wijzigen.
+  Future<void> _openWorkingCopy(BuildContext context) async {
+    final l10n = context.l10n;
+    switch (await workspace.workingCopy(sid)) {
+      case FormWorkingCopy(:final path):
+        onOpenFile!(path);
+      case FormWorkingCopyUnavailable():
+        onDone(l10n.d('De inzending is niet gevonden in de werkmap.'));
+      case FormWorkingCopyFailed():
+        onDone(l10n.d('De werkkopie kon niet worden aangemaakt.'));
+    }
+  }
 
   Future<void> _status(BuildContext context, String status) async {
     final l10n = context.l10n;
@@ -158,6 +182,16 @@ class FormInboxActions extends StatelessWidget {
               onChanged: (state) {
                 if (state != null) _status(context, state);
               },
+            ),
+          if (canEdit && onOpenFile != null && !_deleted)
+            Tooltip(
+              message: l10n.d(
+                'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.',
+              ),
+              child: OutlinedButton(
+                onPressed: () => _openWorkingCopy(context),
+                child: Text(l10n.d('Werkkopie openen')),
+              ),
             ),
           if (current != null)
             current.isWithdrawn

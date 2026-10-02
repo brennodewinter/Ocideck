@@ -1647,6 +1647,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Работното копие не можа да бъде създадено.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Отваря копие на изпращането за подобряване. Полученото остава непроменено.',
+  'Werkkopie openen': 'Отваряне на работното копие',
   'Status gewijzigd naar {status}.': 'Статусът е променен на {status}.',
   'Intrekking opgeslagen.': 'Оттеглянето е запазено.',
   'Intrekking ongedaan gemaakt.': 'Оттеглянето е отменено.',

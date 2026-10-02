@@ -1642,6 +1642,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Exemplar operis creari non potuit.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Exemplar missi aperit ad emendandum. Quod advenit immutatum manet.',
+  'Werkkopie openen': 'Exemplar operis aperire',
   'Status gewijzigd naar {status}.': 'Status mutatus in {status}.',
   'Intrekking opgeslagen.': 'Revocatio servata est.',
   'Intrekking ongedaan gemaakt.': 'Revocatio infecta facta est.',

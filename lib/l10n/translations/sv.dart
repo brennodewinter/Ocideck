@@ -1626,6 +1626,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.': 'Arbetskopian kunde inte skapas.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Öppnar en kopia av inlämningen att förbättra. Det som kom in förblir oförändrat.',
+  'Werkkopie openen': 'Öppna arbetskopia',
   'Status gewijzigd naar {status}.': 'Status ändrad till {status}.',
   'Intrekking opgeslagen.': 'Återkallelsen sparades.',
   'Intrekking ongedaan gemaakt.': 'Återkallelsen ångrades.',

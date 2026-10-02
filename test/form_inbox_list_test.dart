@@ -105,6 +105,7 @@ void main() {
   Future<void> pump(
     WidgetTester tester, {
     int version = 0,
+    ValueChanged<String>? onOpenFile,
     Future<FormDeleteOutcome> Function(
       FormWorkspace,
       String, {
@@ -129,6 +130,7 @@ void main() {
               version: version,
               now: () => DateTime.utc(2026, 11, 2),
               delete: delete ?? deleteSubmission,
+              onOpenFile: onOpenFile,
             ),
           ),
         ),
@@ -671,6 +673,171 @@ void main() {
         await tester.pumpWidget(const SizedBox());
       }
     });
+
+    testWidgets(
+      'de werkkopie wordt gemaakt en geopend, en wat binnenkwam blijft',
+      (tester) async {
+        await seed(tester, [zipOf(naam: '')]);
+        final opened = <String>[];
+        await pump(tester, onOpenFile: opened.add);
+        await openFirst(tester, 'abcdefgh…');
+        await tester.tap(text('Werkkopie openen'));
+        await pumpUntil(tester, () => opened.isNotEmpty);
+        final copy = p.join(
+          workspace.submissionPath(first),
+          'submission.edit.md',
+        );
+        expect(opened, [copy]);
+        final bytes = await io(
+          tester,
+          () async => [
+            await File(copy).readAsBytes(),
+            await File(
+              p.join(workspace.submissionPath(first), 'submission.md'),
+            ).readAsBytes(),
+          ],
+        );
+        expect(bytes[0], bytes[1]);
+      },
+    );
+
+    testWidgets('de knop zegt wat hij doet', (tester) async {
+      await seed(tester, [zipOf()]);
+      await pump(tester, onOpenFile: (_) {});
+      await openFirst(tester);
+      expect(
+        find.byTooltip(
+          'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.',
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+      'zonder opener, bij een verwijderde of onleesbare inzending is er geen knop',
+      (tester) async {
+        await seed(tester, [zipOf(), zipOf(id: second, naam: 'Joe')]);
+        await io(tester, () => deleteSubmission(workspace, second));
+        await io(
+          tester,
+          () => File(
+            p.join(workspace.submissionPath(first), 'manifest.json'),
+          ).writeAsString('geen json'),
+        );
+        // Zonder opener.
+        await pump(tester);
+        await pumpUntil(
+          tester,
+          () => find.byType(ExpansionTile).evaluate().length == 2,
+        );
+        await open(tester, 'Sari');
+        await pumpUntil(
+          tester,
+          () => find.byType(FormInboxActions).evaluate().isNotEmpty,
+        );
+        expect(text('Werkkopie openen'), findsNothing);
+        // Met opener: onleesbaar en verwijderd hebben nog steeds geen knop.
+        await pump(tester, onOpenFile: (_) {});
+        await pumpUntil(
+          tester,
+          () => find.byType(FormInboxActions).evaluate().isNotEmpty,
+        );
+        expect(text('Werkkopie openen'), findsNothing);
+        await open(tester, 'abcdefgh…');
+        await pumpUntil(
+          tester,
+          () => find.byType(FormInboxActions).evaluate().length == 2,
+        );
+        expect(text('Werkkopie openen'), findsNothing);
+      },
+    );
+
+    testWidgets(
+      'een rij die verwijderd heet maakt geen werkkopie, ook al staan de bestanden er nog',
+      (tester) async {
+        await seed(tester, [zipOf()]);
+        await io(tester, () async {
+          final register =
+              (await workspace.readRegister() as FormRegisterParsed).register;
+          await workspace.saveRegister(register.withDeletion(first)!);
+        });
+        await pump(tester, onOpenFile: (_) {});
+        await pumpUntil(
+          tester,
+          () => find.byType(ExpansionTile).evaluate().isNotEmpty,
+        );
+        await open(tester, 'abcdefgh…');
+        await pumpUntil(
+          tester,
+          () => find.byType(FormInboxActions).evaluate().isNotEmpty,
+        );
+        expect(text('Werkkopie openen'), findsNothing);
+      },
+    );
+
+    testWidgets(
+      'zonder opener (de lijst kan geen bestand openen) is er geen knop',
+      (tester) async {
+        await seed(tester, [zipOf()]);
+        await pump(tester);
+        await openFirst(tester);
+        expect(text('Werkkopie openen'), findsNothing);
+        expect(text('Intrekken…'), findsOneWidget);
+      },
+    );
+
+    testWidgets('ook zonder bekend formulier is er een werkkopie te maken', (
+      tester,
+    ) async {
+      await seed(tester, [zipOf()]);
+      await io(
+        tester,
+        () =>
+            Directory(p.join(workspace.root, 'forms')).delete(recursive: true),
+      );
+      await pump(tester, onOpenFile: (_) {});
+      await openFirst(tester);
+      expect(text('Werkkopie openen'), findsOneWidget);
+    });
+
+    testWidgets('als de kopie niet te maken is staat dat er', (tester) async {
+      if (Platform.isWindows) return;
+      await seed(tester, [zipOf()]);
+      await pump(tester, onOpenFile: (_) {});
+      await openFirst(tester);
+      final folder = workspace.submissionPath(first);
+      await io(tester, () => Process.run('chmod', ['555', folder]));
+      addTearDown(() => Process.run('chmod', ['755', folder]));
+      await tester.tap(text('Werkkopie openen'));
+      await pumpUntil(
+        tester,
+        () => text(
+          'De werkkopie kon niet worden aangemaakt.',
+        ).evaluate().isNotEmpty,
+      );
+    });
+
+    testWidgets(
+      'verdwenen vlak voor het openen: de inzending is niet gevonden',
+      (tester) async {
+        await seed(tester, [zipOf()]);
+        await pump(tester, onOpenFile: (_) {});
+        await openFirst(tester);
+        await io(
+          tester,
+          () => File(
+            p.join(workspace.submissionPath(first), 'submission.md'),
+          ).delete(),
+        );
+        await tester.tap(text('Werkkopie openen'));
+        await pumpUntil(
+          tester,
+          () => text(
+            'De inzending is niet gevonden in de werkmap.',
+          ).evaluate().isNotEmpty,
+        );
+      },
+    );
 
     testWidgets('dezelfde status kiezen is geen wijziging', (tester) async {
       await seed(tester, [zipOf()]);

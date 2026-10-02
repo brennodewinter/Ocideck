@@ -1642,6 +1642,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Не вдалося створити робочу копію.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Відкриває копію надсилання для виправлення. Те, що надійшло, залишається без змін.',
+  'Werkkopie openen': 'Відкрити робочу копію',
   'Status gewijzigd naar {status}.': 'Статус змінено на {status}.',
   'Intrekking opgeslagen.': 'Відкликання збережено.',
   'Intrekking ongedaan gemaakt.': 'Відкликання скасовано.',

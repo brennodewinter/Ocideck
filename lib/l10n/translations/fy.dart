@@ -667,6 +667,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De werkkopie kon niet worden aangemaakt.':
+      'De wurkkopy koe net makke wurde.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Iepenet in kopy fan de ynstjoering om te ferbetterjen. Wat oankaam is, bliuwt net wizige.',
+  'Werkkopie openen': 'Wurkkopy iepenje',
   'Status gewijzigd naar {status}.': 'Status feroare nei {status}.',
   'Intrekking opgeslagen.': 'Weromlutsen bewarre.',
   'Intrekking ongedaan gemaakt.': 'Weromlutsen ûngedien makke.',

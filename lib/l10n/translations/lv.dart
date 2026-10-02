@@ -1625,6 +1625,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'Darba kopiju neizdevās izveidot.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Atver iesūtījuma kopiju uzlabošanai. Saņemtais paliek nemainīts.',
+  'Werkkopie openen': 'Atvērt darba kopiju',
   'Status gewijzigd naar {status}.': 'Statuss nomainīts uz {status}.',
   'Intrekking opgeslagen.': 'Atsaukums saglabāts.',
   'Intrekking ongedaan gemaakt.': 'Atsaukums atcelts.',

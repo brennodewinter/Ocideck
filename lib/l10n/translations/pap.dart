@@ -666,6 +666,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De werkkopie kon niet worden aangemaakt.':
+      'No a por a krea e kopia di trabou.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Ta habri un kopia di e envio pa mehorá. Loke a yega ta keda sin kambio.',
+  'Werkkopie openen': 'Habri kopia di trabou',
   'Status gewijzigd naar {status}.': 'Status kambiá pa {status}.',
   'Intrekking opgeslagen.': 'Retiro warda.',
   'Intrekking ongedaan gemaakt.': 'Retiro desfèt.',

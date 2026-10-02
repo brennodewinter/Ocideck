@@ -1629,6 +1629,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.':
+      'A munkapéldányt nem sikerült létrehozni.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Megnyitja a beküldés egy másolatát javításra. Ami beérkezett, változatlan marad.',
+  'Werkkopie openen': 'Munkapéldány megnyitása',
   'Status gewijzigd naar {status}.': 'Az állapot módosítva: {status}.',
   'Intrekking opgeslagen.': 'A visszavonás mentve.',
   'Intrekking ongedaan gemaakt.': 'A visszavonás visszavonva.',

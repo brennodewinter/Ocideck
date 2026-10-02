@@ -1634,6 +1634,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De werkkopie kon niet worden aangemaakt.': 'Darbo kopijos nepavyko sukurti.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Atidaro pateikimo kopiją tobulinimui. Tai, kas gauta, lieka nepakeista.',
+  'Werkkopie openen': 'Atidaryti darbo kopiją',
   'Status gewijzigd naar {status}.': 'Būsena pakeista į {status}.',
   'Intrekking opgeslagen.': 'Atsiėmimas išsaugotas.',
   'Intrekking ongedaan gemaakt.': 'Atsiėmimas atšauktas.',
