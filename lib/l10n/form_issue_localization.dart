@@ -28,7 +28,17 @@ String formIssueMessage(AppLocalizations l10n, FormProblem problem) =>
     );
 
 /// De zin voor [problem], of `null` wanneer de code niet voor de invuller is.
-String? formIssueMessageOrNull(AppLocalizations l10n, FormProblem problem) {
+///
+/// Drie groepen, elk een eigen functie: een enkele `switch` over alle codes werd
+/// boven de methodelengte-grens te lang, en de groepen zijn ook de natuurlijke
+/// indeling (de waarde zelf, de foto, de vorm van het antwoord).
+String? formIssueMessageOrNull(AppLocalizations l10n, FormProblem problem) =>
+    _valueMessage(l10n, problem) ??
+    _imageMessage(l10n, problem) ??
+    _answerMessage(l10n, problem);
+
+/// De regels over de waarde: verplicht, woorden, tekens, keuze, aantal, getal, datum, patroon.
+String? _valueMessage(AppLocalizations l10n, FormProblem problem) {
   final f = problem.facts;
   switch (problem.code) {
     case FormIssueCode.requiredEmpty:
@@ -91,6 +101,15 @@ String? formIssueMessageOrNull(AppLocalizations l10n, FormProblem problem) {
       return _fill(_date(l10n, f), f);
     case FormIssueCode.badPattern:
       return _pattern(l10n, f);
+    default:
+      return null;
+  }
+}
+
+/// De regels over een foto.
+String? _imageMessage(AppLocalizations l10n, FormProblem problem) {
+  final f = problem.facts;
+  switch (problem.code) {
     case FormIssueCode.imageTooSmall:
       return _fill(
         l10n.d(
@@ -135,6 +154,15 @@ String? formIssueMessageOrNull(AppLocalizations l10n, FormProblem problem) {
         ),
         f,
       );
+    default:
+      return null;
+  }
+}
+
+/// De vorm en de veiligheid van het antwoord, de toestemming en de versie.
+String? _answerMessage(AppLocalizations l10n, FormProblem problem) {
+  final f = problem.facts;
+  switch (problem.code) {
     case FormIssueCode.consentNotGiven:
       return l10n.d(
         'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.',
@@ -174,21 +202,7 @@ String? formIssueMessageOrNull(AppLocalizations l10n, FormProblem problem) {
         ),
         f,
       );
-    case FormIssueCode.templateTextAltered:
-    case FormIssueCode.templateUnknown:
-    case FormIssueCode.fieldNotInForm:
-    case FormIssueCode.fieldMissing:
-    case FormIssueCode.rulesTooNew:
-    case FormIssueCode.ruleMalformed:
-    case FormIssueCode.duplicateFieldId:
-    case FormIssueCode.unpairedMarker:
-    case FormIssueCode.unknownType:
-    case FormIssueCode.markerMalformed:
-    case FormIssueCode.markerMisplaced:
-    case FormIssueCode.noticeMissing:
-    case FormIssueCode.formAttributeMissing:
-    case FormIssueCode.unknownMarker:
-    case FormIssueCode.unknownRule:
+    default:
       return null;
   }
 }
