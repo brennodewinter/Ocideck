@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **kern van het samenstellen van een boek** (formaat §7.5) staat in `ocideck_form_core`: een hoofdstuksjabloon
+  met `{veld-id}`-plaatsvervangers wordt per inzending ingevuld en tot één document samengevoegd. Een antwoord gaat erin
+  **als de Markdown die het al is, per veldtype en zonder iets af te kappen** (de oude kop-en-voetresolver kapte op 4096
+  tekens af en escapete alle leestekens); elk ingevoegd antwoord krijgt zijn codeblokken in balans, zodat één slecht
+  antwoord niet elk volgend hoofdstuk in een codeblok verandert; een regel waarvan alle plaatsvervangers leeg zijn en
+  die verder alleen opmaak draagt, vervalt; foto's krijgen `images/<nummer>-<veld>-<n>.<ext>`; en **een ingetrokken
+  inzending komt nooit in het boek**. Gesloten vocabulaire: selectie, ordenen op één veld en een kop per groep van één
+  veld. Een sjabloon dat een onbekend veld noemt wordt geweigerd. Het schrijven (werkmap lezen, foto's kopiëren, het boek
+  opslaan) en het dialoogvenster volgen.
 - In de Inbox opent **Werkkopie openen** een inzending om te verbeteren zonder aan te raken wat binnenkwam: OciDeck
   maakt `submission.edit.md` (een letterlijke kopie, nooit over een bestaande heen) en opent die in een tabblad. De
   inzending wordt daarna opnieuw beoordeeld op de werkkopie, dus een herstelde fout verdwijnt uit de lijst. 3 nieuwe

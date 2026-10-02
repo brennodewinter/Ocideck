@@ -15,6 +15,7 @@ export 'src/form_answer_safety.dart';
 export 'src/form_answer_writer.dart';
 export 'src/form_answers.dart';
 export 'src/form_blocks.dart';
+export 'src/form_compile.dart';
 export 'src/form_counts.dart';
 export 'src/form_field_types.dart';
 export 'src/form_fill.dart';

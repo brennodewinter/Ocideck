@@ -83,7 +83,10 @@
 > (phase 2). From the Inbox an organiser can **change the status, withdraw and delete** a submission (deleting
 > leaves the minimal record and does not wait for a broken register), and **open a working copy**
 > (`submission.edit.md`, §7.1) to improve one — what arrived is never opened for editing, and the Inbox judges
-> the working copy from then on; the maker check and compile (§7.4–§7.5) are still to build.
+> the working copy from then on. **Compile's pure core is in** (`form_compile.dart`, §7.5: chapter template,
+> answers inserted whole per field type, balanced fences, empty-line dropping, withdrawn never compiled); its I/O
+> half, the dialog and the maker check (§7.4, which renders one chapter and so needs compile first) are still to
+> build.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
@@ -1756,7 +1759,7 @@ patterns), `form_answer_safety.dart` (§4.6 rules 1–5), `form_answers.dart`
 an answer that would change the form itself), `form_package.dart` (the plain zip + manifest +
 name grammars, §5.2–§5.4: `buildFormPackage`, the strict `readFormPackage`), `form_review.dart` (the
 organiser's judgement of a received package against the published form, §4.11 run 3),
-`form_register.dart` (the `overview.md` table, §7.3), `rules_version.dart`,
+`form_register.dart` (the `overview.md` table, §7.3), `form_compile.dart` (chapter template and book, §7.5), `rules_version.dart`,
 and `test/fixtures/form_vectors.json` (words, characters and patterns; the range, number and date
 vectors still live in the engine's own tests).
 **Still to build:** `form_seal.dart` (age; the only file touching the primitives),
