@@ -5820,6 +5820,11 @@ answer markers changes, everything else stays byte for byte as the author wrote 
 show the same document. A form that is damaged — a closing marker is gone — cannot
 be filled in; the page says why and offers to go to the source.
 
+**Want to try it?** The repository has an example form in `examples/forms/` (`recept.nl.md`,
+`recept.en.md`): a recipe submission with every kind of question, including photos and a consent
+box. Copy it, open the copy and it opens on **Fill in**. Open the empty original once first (in the
+same session) so OciDeck remembers the published form for the next step.
+
 **Saving your submission.** At the bottom of the page, **Save submission as zip…** makes
 one zip file with your answers and photos, which you email to the organiser. The button is
 always there: while something is still open it shows what, instead of saving. The zip holds
