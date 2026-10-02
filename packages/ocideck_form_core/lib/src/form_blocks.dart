@@ -238,3 +238,79 @@ FormMarkerScan _checkAllowedAttrs(FormMarkerName name, List<FormAttr> attrs) {
           : BadMarker(name, 'unexpected-attributes');
   }
 }
+
+// ── Blocks, for the surfaces that treat a form block as one atomic unit ──────
+
+/// The three things OciDeck's reader and visual editor carry as one block:
+/// the `form` marker, a whole field (its markers, label, guidance and answer
+/// zone), and the `notice` region (FORM_INTAKE.md §4.9).
+enum FormBlockKind { header, field, notice }
+
+/// The kind of block that starts at [line], or null when it starts none.
+FormBlockKind? formBlockKind(String line) {
+  final scan = scanMarkerLine(_withoutCr(line));
+  if (scan is! FoundMarker) return null;
+  return switch (scan.name) {
+    FormMarkerName.form => FormBlockKind.header,
+    FormMarkerName.field => FormBlockKind.field,
+    FormMarkerName.notice => FormBlockKind.notice,
+    _ => null,
+  };
+}
+
+/// How many lines the block that opens at `lineAt(0)` spans, or null when that
+/// line opens none or its block never closes (an unclosed block is not a block:
+/// it stays visible as text, so a half-destroyed form looks destroyed).
+///
+/// [lineAt] answers "what is the line [offset] lines further on" and null past
+/// the end, so a caller that holds a list of lines and one that holds a
+/// look-ahead parser (the Markdown parser of the visual editor) use the very same
+/// rule. A field ends at the `/field` marker with **its own id**, whatever
+/// fences or other markers lie in between — exactly where `parseForm` ends its
+/// answer zone. The look-ahead is bounded by [maxLines] so a document full of
+/// unclosed fields cannot cost quadratic time.
+int? formBlockLength(
+  String? Function(int offset) lineAt, {
+  int maxLines = 50000,
+}) {
+  final first = lineAt(0);
+  if (first == null) return null;
+  final scan = scanMarkerLine(_withoutCr(first));
+  if (scan is! FoundMarker) return null;
+
+  switch (scan.name) {
+    case FormMarkerName.form:
+      return 1;
+    case FormMarkerName.field:
+      final id = scan.attr('id');
+      if (id == null || id.isEmpty) return null;
+      return _lengthUntil(lineAt, maxLines, (m) {
+        return m.name == FormMarkerName.fieldEnd && m.attr('id') == id;
+      });
+    case FormMarkerName.notice:
+      return _lengthUntil(
+        lineAt,
+        maxLines,
+        (m) => m.name == FormMarkerName.noticeEnd,
+      );
+    default:
+      return null;
+  }
+}
+
+int? _lengthUntil(
+  String? Function(int offset) lineAt,
+  int maxLines,
+  bool Function(FoundMarker) closes,
+) {
+  for (var offset = 1; offset < maxLines; offset++) {
+    final line = lineAt(offset);
+    if (line == null) return null;
+    final scan = scanMarkerLine(_withoutCr(line));
+    if (scan is FoundMarker && closes(scan)) return offset + 1;
+  }
+  return null;
+}
+
+String _withoutCr(String line) =>
+    line.endsWith('\r') ? line.substring(0, line.length - 1) : line;
