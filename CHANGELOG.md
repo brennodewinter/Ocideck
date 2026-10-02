@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **beoordeling van een binnengekomen inzending** (kant van de organisator, formaat §4.11 en
+  §7.2) heeft haar motor in `ocideck_form_core`: een pakket wordt gehouden tegen het
+  **gepubliceerde** formulier — nooit tegen de regels in de inzending zelf, zodat een client die een
+  regel in zijn eigen kopie verzwakte toch aan de echte regel wordt gehouden — met controle van de
+  tekst buiten de antwoorden, van de toestemmingsregistratie in het manifest en van elk veld. Elke
+  foto wordt opnieuw gezuiverd en de beoordeling meldt waar de client nog iets had laten zitten. Er
+  is nog geen scherm voor; dat volgt.
 - Een ingevuld formulier kun je nu **opslaan als inzendpakket**: onderaan de invulpagina maakt
   **Inzending opslaan als zip…** één zip met je antwoorden, de foto's en een manifest, om naar de
   organisator te mailen. De knop is altijd te bedienen — staat er nog iets open, dan laat de pagina
