@@ -33,6 +33,16 @@ final issues = [
 if (formIssuesBlock(issues)) { /* an error: do not send / needs fixing */ }
 ```
 
+Writing an answer is the inverse, and it changes **only the bytes of the answer zone**:
+
+```dart
+final edited = applyAnswer(text, spec, 'naam', FormAnswerValue(text: 'Sari'));
+switch (edited) {
+  case FormEdited(:final text, :final spec):   // the new document and its new spec
+  case FormEditRefused(:final problem):        // nothing written: the answer would
+}                                              // have changed the form itself
+```
+
 Images are the one thing that needs I/O, so what is known about a file arrives as
 input (`FormImageFact`); without it an image is `image-unchecked`, never silently fine.
 The counters and patterns are pinned by `test/fixtures/form_vectors.json`.
