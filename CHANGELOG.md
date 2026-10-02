@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- In een formulier kun je nu **foto's toevoegen** aan een fotoveld (zodra het document is
+  opgeslagen). De foto wordt gezuiverd voor hij in het document komt — locatie, tijdstip en
+  apparaat eruit, zonder de foto opnieuw te coderen; kleurprofiel en draairichting blijven —
+  en echt gedecodeerd, zodat een bestand met een geldige kop maar geen foto erachter wordt
+  geweigerd. De foto krijgt een naam zonder persoonsgegevens (`images/<veld>-<nummer>`), de
+  pagina zegt dat de locatiegegevens zijn verwijderd, en per foto vul je een beschrijving en
+  een maker in als het veld daarom vraagt. Een HEIC wordt zoals hij is verstuurd en heet niet
+  gecontroleerd. Foto's die al in het document staan worden gemeten voor de controle van de
+  breedte.
 - Een document met een formulier opent op een nieuw tabblad **Invullen**: de titel, wat
   de auteur boven de vragen schreef, de notice en elke vraag met zijn eigen invoer (regel,
   verhaal, keuze, meerdere keuzes, lijst, tabel, datum, getal, toestemming; foto's volgen).

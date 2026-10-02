@@ -1627,6 +1627,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Sijaintitiedot on poistettu tästä valokuvasta.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Tätä valokuvaa ei voitu lisätä. Valitse valokuvan sisältävä JPEG-, PNG-, WebP- tai HEIC-tiedosto.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Tallenna asiakirja ensin lisätäksesi valokuvia.',
   'Kies een datum': 'Valitse päivämäärä',
   'Anders, namelijk:': 'Muu, nimittäin:',
   'Punt {n}': 'Kohta {n}',

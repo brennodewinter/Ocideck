@@ -1643,6 +1643,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Datele de locație au fost eliminate din această fotografie.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Această fotografie nu a putut fi adăugată. Alegeți un fișier JPEG, PNG, WebP sau HEIC cu o fotografie.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Salvați mai întâi documentul pentru a adăuga fotografii.',
   'Kies een datum': 'Alege o dată',
   'Anders, namelijk:': 'Altul, anume:',
   'Punt {n}': 'Punctul {n}',

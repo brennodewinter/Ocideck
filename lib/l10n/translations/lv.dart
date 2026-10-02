@@ -1625,6 +1625,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Atrašanās vietas dati ir noņemti no šīs fotogrāfijas.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Šo fotogrāfiju neizdevās pievienot. Izvēlieties fotogrāfijas JPEG, PNG, WebP vai HEIC failu.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Vispirms saglabājiet dokumentu, lai pievienotu fotogrāfijas.',
   'Kies een datum': 'Izvēlēties datumu',
   'Anders, namelijk:': 'Cits, proti:',
   'Punt {n}': 'Punkts {n}',

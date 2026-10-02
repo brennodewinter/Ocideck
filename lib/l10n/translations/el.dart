@@ -1652,6 +1652,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Τα δεδομένα τοποθεσίας αφαιρέθηκαν από αυτή τη φωτογραφία.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Αυτή η φωτογραφία δεν μπόρεσε να προστεθεί. Επιλέξτε ένα αρχείο JPEG, PNG, WebP ή HEIC μιας φωτογραφίας.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Αποθηκεύστε πρώτα το έγγραφο για να προσθέσετε φωτογραφίες.',
   'Kies een datum': 'Επιλογή ημερομηνίας',
   'Anders, namelijk:': 'Άλλο, συγκεκριμένα:',
   'Punt {n}': 'Σημείο {n}',

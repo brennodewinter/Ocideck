@@ -1620,6 +1620,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Asukohaandmed on sellelt fotolt eemaldatud.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Seda fotot ei õnnestunud lisada. Valige foto JPEG-, PNG-, WebP- või HEIC-fail.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Fotode lisamiseks salvestage dokument esmalt.',
   'Kies een datum': 'Vali kuupäev',
   'Anders, namelijk:': 'Muu, nimelt:',
   'Punt {n}': 'Punkt {n}',

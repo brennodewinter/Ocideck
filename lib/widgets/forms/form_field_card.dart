@@ -28,6 +28,8 @@ class FormFieldCard extends StatefulWidget {
     required this.showRequired,
     required this.onCommit,
     this.onAddImages,
+    this.scrubbed = const {},
+    this.preview,
   });
 
   final FormFill fill;
@@ -43,6 +45,10 @@ class FormFieldCard extends StatefulWidget {
 
   /// Zie [FormAnswerEditor.onAddImages].
   final Future<List<FormImageRef>> Function()? onAddImages;
+
+  /// Zie [FormAnswerEditor.scrubbed] en [FormAnswerEditor.preview].
+  final Set<String> scrubbed;
+  final ImageProvider? Function(String path)? preview;
 
   @override
   State<FormFieldCard> createState() => _FormFieldCardState();
@@ -160,6 +166,8 @@ class _FormFieldCardState extends State<FormFieldCard> {
                 label: title,
                 labelBuilder: consent ? _label : null,
                 onAddImages: widget.onAddImages,
+                scrubbed: widget.scrubbed,
+                preview: widget.preview,
               ),
               for (final count in counts)
                 Padding(

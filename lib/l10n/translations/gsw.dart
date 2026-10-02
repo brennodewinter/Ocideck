@@ -1630,6 +1630,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'D Standortdate sind us dem Foti entfernt worde.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Das Foti het nöd chöne zuegfüegt wärde. Wähl e JPEG-, PNG-, WebP- oder HEIC-Datei vomene Foti.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Spichere s Dokumänt zersch, zum Foti zuefüege.',
   'Kies een datum': 'Datum uuswähle',
   'Anders, namelijk:': 'Anders, nämlich:',
   'Punt {n}': 'Punkt {n}',

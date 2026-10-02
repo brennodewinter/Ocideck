@@ -21,6 +21,10 @@ extension _DocumentEditorForm on _DocumentEditorScreenState {
         body: source,
         onChanged: _onFillChanged,
         onShowSource: () => _changeViewMode(_DocViewMode.source),
+        images: formImageSupportFor(
+          projectPath: _documentProjectPath(ref),
+          dialogTitle: context.l10n.d('Kies een afbeelding'),
+        ),
       ),
     ),
     tlp: tlp,

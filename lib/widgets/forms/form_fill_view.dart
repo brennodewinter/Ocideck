@@ -16,10 +16,12 @@ import '../../theme/app_theme.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../l10n/form_issue_localization.dart';
+import '../../services/form/form_image_service.dart' show FormImageRefusal;
 import '../../models/settings.dart' show ThemeProfile;
 import '../markdown_editor/markdown_editor_theme.dart' show DocumentStyleScope;
 import '../reader/document_markdown_view.dart';
 import 'form_field_card.dart';
+import 'form_image_support.dart';
 import 'form_text_helpers.dart';
 
 class FormFillView extends StatefulWidget {
@@ -28,7 +30,7 @@ class FormFillView extends StatefulWidget {
     required this.body,
     required this.onChanged,
     this.onShowSource,
-    this.onAddImages,
+    this.images,
   });
 
   /// De tekst van het document (zonder front matter).
@@ -41,8 +43,9 @@ class FormFillView extends StatefulWidget {
   /// Naar de bron, voor een formulier dat niet ingevuld kan worden.
   final VoidCallback? onShowSource;
 
-  /// Zie [FormAnswerEditor.onAddImages]; krijgt het id van het veld.
-  final Future<List<FormImageRef>> Function(String fieldId)? onAddImages;
+  /// Wat nodig is om met foto's te werken (kiezen, zuiveren, meten); `null` als dat
+  /// niet kan, bijvoorbeeld omdat het document nog nergens is opgeslagen.
+  final FormImageSupport? images;
 
   @override
   State<FormFillView> createState() => _FormFillViewState();
@@ -57,6 +60,13 @@ class _FormFillViewState extends State<FormFillView> {
   String _loaded = '';
 
   final Set<String> _touched = {};
+
+  /// De foto's waaruit bij het toevoegen een positie is gehaald; de pagina zegt dat.
+  final Set<String> _scrubbed = {};
+
+  /// De paden die al zijn opgevraagd bij het meten, zodat een pad dat niet te
+  /// meten valt niet bij elke wijziging opnieuw wordt geprobeerd.
+  final Set<String> _probed = {};
   final Map<String, GlobalKey> _keys = {};
   final ScrollController _scroll = ScrollController();
 
@@ -64,12 +74,16 @@ class _FormFillViewState extends State<FormFillView> {
   void initState() {
     super.initState();
     _load(widget.body);
+    _probeMissing();
   }
 
   @override
   void didUpdateWidget(FormFillView old) {
     super.didUpdateWidget(old);
-    if (widget.body != _loaded) _load(widget.body);
+    if (widget.body != _loaded) {
+      _load(widget.body);
+      _probeMissing();
+    }
   }
 
   @override
@@ -88,6 +102,63 @@ class _FormFillViewState extends State<FormFillView> {
         _fill = null;
         _unavailable = problem;
     }
+  }
+
+  /// Meet de foto's in het document waarvan nog niets bekend is. Het meten is
+  /// asynchroon (het leest bestanden); het resultaat komt als feiten in de sessie,
+  /// waarna alleen de beeldvelden opnieuw worden beoordeeld.
+  void _probeMissing() {
+    final support = widget.images;
+    final fill = _fill;
+    if (support == null || fill == null) return;
+    final missing = <String>{
+      for (final field in fill.spec.fields)
+        if (field.type == 'image')
+          for (final image in fill.answerOf(field.id).images)
+            if (!fill.imageFacts.containsKey(image.path) &&
+                _probed.add(image.path))
+              image.path,
+    };
+    if (missing.isEmpty) return;
+    () async {
+      final facts = await support.probe(missing);
+      if (!mounted || _fill == null) return;
+      setState(() {
+        _fill = _fill!.withImageFacts({..._fill!.imageFacts, ...facts});
+      });
+    }();
+  }
+
+  /// Laat de invuller foto's kiezen en verwerkt ze. Geeft de antwoordregels van de
+  /// gelukte foto's terug; wat de controle niet door kwam wordt gemeld.
+  Future<List<FormImageRef>> _addImages(String fieldId) async {
+    final fill = _fill;
+    final support = widget.images;
+    if (fill == null || support == null) return const [];
+    final taken = {
+      for (final image in fill.answerOf(fieldId).images) image.path,
+    };
+    final batch = await support.add(fieldId, taken);
+    if (batch == null || !mounted) return const [];
+    setState(() {
+      _fill = _fill!.withImageFacts({..._fill!.imageFacts, ...batch.facts});
+      _scrubbed.addAll(batch.scrubbedPaths);
+    });
+    if (batch.refused.isNotEmpty) _tellRefused(batch.refused);
+    return batch.refs;
+  }
+
+  void _tellRefused(List<FormImageRefusal> refused) {
+    final l10n = context.l10n;
+    ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+      SnackBar(
+        content: Text(
+          l10n.d(
+            'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.',
+          ),
+        ),
+      ),
+    );
   }
 
   FormFillStep _commit(String fieldId, FormAnswerValue value) {
@@ -209,9 +280,9 @@ class _FormFillViewState extends State<FormFillView> {
           fieldId: fieldId,
           showRequired: _touched.contains(fieldId),
           onCommit: _commit,
-          onAddImages: widget.onAddImages == null
-              ? null
-              : () => widget.onAddImages!(fieldId),
+          onAddImages: widget.images == null ? null : () => _addImages(fieldId),
+          scrubbed: _scrubbed,
+          preview: widget.images?.preview,
         );
     }
   }

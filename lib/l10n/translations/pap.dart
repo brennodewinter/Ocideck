@@ -666,6 +666,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Ku a kita e datonan di lokalisashon for di e potret aki.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'No por a agregá e potret aki. Skohe un archivo JPEG, PNG, WebP of HEIC di un potret.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Warda e dokumento promé pa agregá potret.',
   'Kies een datum': 'Skohe un fecha',
   'Anders, namelijk:': 'Otro, ku ta:',
   'Punt {n}': 'Punto {n}',

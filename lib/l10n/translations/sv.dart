@@ -1626,6 +1626,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Platsuppgifterna har tagits bort från det här fotot.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Det här fotot kunde inte läggas till. Välj en JPEG-, PNG-, WebP- eller HEIC-fil med ett foto.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Spara dokumentet först för att lägga till foton.',
   'Kies een datum': 'Välj ett datum',
   'Anders, namelijk:': 'Annat, nämligen:',
   'Punt {n}': 'Punkt {n}',

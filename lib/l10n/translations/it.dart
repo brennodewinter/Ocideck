@@ -664,6 +664,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'I dati di posizione sono stati rimossi da questa foto.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Impossibile aggiungere questa foto. Scegli un file JPEG, PNG, WebP o HEIC di una foto.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Salva prima il documento per aggiungere foto.',
   'Kies een datum': 'Scegli una data',
   'Anders, namelijk:': 'Altro, cioè:',
   'Punt {n}': 'Voce {n}',

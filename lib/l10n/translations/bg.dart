@@ -1647,6 +1647,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Данните за местоположението са премахнати от тази снимка.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Тази снимка не можа да бъде добавена. Изберете JPEG, PNG, WebP или HEIC файл със снимка.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Първо запазете документа, за да добавяте снимки.',
   'Kies een datum': 'Избор на дата',
   'Anders, namelijk:': 'Друго, а именно:',
   'Punt {n}': 'Точка {n}',

@@ -1627,6 +1627,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Data lokasi telah dihapus dari foto ini.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Foto ini tidak dapat ditambahkan. Pilih berkas JPEG, PNG, WebP, atau HEIC berisi foto.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Simpan dokumen terlebih dahulu untuk menambahkan foto.',
   'Kies een datum': 'Pilih tanggal',
   'Anders, namelijk:': 'Lainnya, yaitu:',
   'Punt {n}': 'Butir {n}',

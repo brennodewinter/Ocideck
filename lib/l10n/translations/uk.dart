@@ -1642,6 +1642,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Дані про місцезнаходження видалено з цієї фотографії.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Цю фотографію не вдалося додати. Виберіть файл фотографії у форматі JPEG, PNG, WebP або HEIC.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Спершу збережіть документ, щоб додавати фотографії.',
   'Kies een datum': 'Обрати дату',
   'Anders, namelijk:': 'Інше, а саме:',
   'Punt {n}': 'Пункт {n}',

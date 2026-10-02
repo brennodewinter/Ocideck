@@ -1634,6 +1634,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Vietos duomenys pašalinti iš šios nuotraukos.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Šios nuotraukos nepavyko pridėti. Pasirinkite nuotraukos JPEG, PNG, WebP arba HEIC failą.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Pirmiausia išsaugokite dokumentą, kad galėtumėte pridėti nuotraukų.',
   'Kies een datum': 'Pasirinkti datą',
   'Anders, namelijk:': 'Kita, būtent:',
   'Punt {n}': 'Punktas {n}',

@@ -2538,6 +2538,12 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Konum verileri bu fotoğraftan kaldırıldı.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Bu fotoğraf eklenemedi. Fotoğraf içeren bir JPEG, PNG, WebP veya HEIC dosyası seçin.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Fotoğraf eklemek için önce belgeyi kaydedin.',
   'Kies een datum': 'Tarih seç',
   'Anders, namelijk:': 'Diğer, yani:',
   'Punt {n}': 'Madde {n}',

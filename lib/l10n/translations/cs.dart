@@ -1628,6 +1628,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Údaje o poloze byly z této fotografie odstraněny.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Tuto fotografii se nepodařilo přidat. Vyberte soubor JPEG, PNG, WebP nebo HEIC s fotografií.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Nejprve uložte dokument, abyste mohli přidávat fotografie.',
   'Kies een datum': 'Vybrat datum',
   'Anders, namelijk:': 'Jiné, a to:',
   'Punt {n}': 'Bod {n}',

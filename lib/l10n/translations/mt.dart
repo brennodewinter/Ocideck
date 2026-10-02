@@ -1645,6 +1645,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Id-data tal-pożizzjoni tneħħiet minn dan ir-ritratt.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Dan ir-ritratt ma setax jiżdied. Agħżel fajl JPEG, PNG, WebP jew HEIC ta\' ritratt.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Ewwel salva d-dokument biex iżżid ritratti.',
   'Kies een datum': 'Agħżel data',
   'Anders, namelijk:': 'Oħra, jiġifieri:',
   'Punt {n}': 'Element {n}',

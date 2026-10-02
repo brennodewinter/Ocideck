@@ -1629,6 +1629,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'A helyadatok el lettek távolítva erről a fotóról.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Ezt a fotót nem sikerült hozzáadni. Válasszon egy fotót tartalmazó JPEG-, PNG-, WebP- vagy HEIC-fájlt.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Fotók hozzáadásához először mentse a dokumentumot.',
   'Kies een datum': 'Dátum kiválasztása',
   'Anders, namelijk:': 'Egyéb, nevezetesen:',
   'Punt {n}': '{n}. pont',
