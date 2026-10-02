@@ -91,7 +91,11 @@ All notable changes to OciDeck are documented in this file.
   formulier), een antwoord terugschrijven in zijn zone (alleen de bytes van die
   zone veranderen; een antwoord dat het formulier zelf zou wijzigen wordt
   geweigerd) en controleren of de sjabloontekst van een inzending nog de
-  gepubliceerde is. Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
+  gepubliceerde is. Een lopende invulsessie (`FormFill`) is één onveranderlijke
+  waarde: de pagina in documentvolgorde, het antwoord en de problemen per veld,
+  tellers (woorden, tekens, punten) en of er verstuurd mag worden. Elke melding
+  van de validatie heeft nu een zin voor de invuller in alle 31 talen
+  (`formIssueMessage`). Voor ontwikkelaars: nieuwe poorten `make check-packages` (statische
   regels voor `packages/`) en `make test-packages` (tests + dekkingsvloer; onderdeel
   van `make check`), en de SBOM kent voortaan een eigen groep voor first-party
   pakketten.
