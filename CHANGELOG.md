@@ -10,6 +10,15 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Een document met een formulier opent op een nieuw tabblad **Invullen**: de titel, wat
+  de auteur boven de vragen schreef, de notice en elke vraag met zijn eigen invoer (regel,
+  verhaal, keuze, meerdere keuzes, lijst, tabel, datum, getal, toestemming; foto's volgen).
+  Onder elke vraag staat in gewone woorden wat er nog mis is en wat je eraan kunt doen, in
+  alle 31 talen, en een teller loopt mee (**Woorden: 90 (minimaal 150, maximaal 300)**).
+  Bovenaan staat hoeveel er nog te doen is, met per vraag een sprong; een verplichte vraag
+  die je niet hebt aangeraakt is niet rood. Alles wat je typt gaat direct in het document en
+  verandert alleen de bytes tussen de antwoordmarkers; ongedaan maken draait een heel woord
+  per vraag terug. Een beschadigd formulier zegt waarom het niet kan en wijst naar de bron.
 - Een versiecheck meldt subtiel wanneer er een nieuwere OciDeck-release is:
   het versienummer op het openscherm krijgt dan een amber indicator die bij
   hover de nieuwe versie noemt en de releasepagina opent. Zolang er nog nooit

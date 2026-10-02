@@ -5779,6 +5779,29 @@ the contents itself, with page numbers. The list is generated *after* the privac
 projection, so a heading removed from the redacted copy is absent from that copy's
 contents as well.
 
+### Filling in a form
+
+A document that contains a form (see FILE_FORMAT §14.14) opens on the **Fill in**
+tab instead of the editor. The page shows the title, whatever the author wrote
+above the questions, the notice about your details, and then every question with
+its own input: a line for a short answer, a larger box for a story, radio buttons
+for one choice, checkboxes for several, a list or a table you can add rows to, a
+date with a calendar, and a box you tick to give consent. No markers are visible.
+
+Under each question the page tells you what is still wrong, in plain words and
+saying what to do about it — "You wrote 90 words; at least 150 are needed" — and
+counts as you type (**Words: 90 (at least 150, at most 300)**). A required question
+you have not touched yet is not marked red; it is once you have been there or
+jumped to it. At the top the page says how many things are left before you can
+send, with a button for each that takes you to the question; every section heading
+shows whether it is done.
+
+Everything you type goes straight into the document: only the part between the
+answer markers changes, everything else stays byte for byte as the author wrote it.
+**Undo** takes back a whole word at a time per question, and **Visual** and **Source**
+show the same document. A form that is damaged — a closing marker is gone — cannot
+be filled in; the page says why and offers to go to the source.
+
 ### Converting between a presentation and a document
 
 You can convert either way, and the result is **always a copy in a new tab** —

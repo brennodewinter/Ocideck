@@ -5828,6 +5828,31 @@ de inhoudsopgave zelf opbouwen, mét paginanummers. De lijst wordt gemaakt ná d
 privacyprojectie, dus een kop die uit de geredigeerde kopie is gehaald, staat ook
 niet in de inhoudsopgave van die kopie.
 
+### Een formulier invullen
+
+Een document met een formulier erin (zie FILE_FORMAT §14.14) opent op het tabblad
+**Invullen** in plaats van in de bewerker. De pagina toont de titel, wat de auteur
+boven de vragen schreef, de notice over je gegevens en dan elke vraag met zijn eigen
+invoer: een regel voor een kort antwoord, een groter vak voor een verhaal,
+keuzerondjes voor één keuze, vinkjes voor meerdere, een lijst of tabel waaraan je
+rijen toevoegt, een datum met een kalender en een vakje dat je aanvinkt om
+toestemming te geven. Er zijn geen markers te zien.
+
+Onder elke vraag zegt de pagina wat er nog mis is, in gewone woorden en met wat je
+eraan kunt doen — "Je hebt 90 woorden geschreven; er zijn er minstens 150 nodig" —
+en telt ze mee terwijl je typt (**Woorden: 90 (minimaal 150, maximaal 300)**). Een
+verplichte vraag die je nog niet hebt aangeraakt is niet rood; dat wordt hij pas
+als je er geweest bent of er naartoe sprong. Bovenaan staat hoeveel er nog te doen
+is voor je kunt versturen, met per vraag een knop die je erheen brengt; elke
+sectiekop laat zien of hij klaar is.
+
+Alles wat je typt gaat direct in het document: alleen het stuk tussen de
+antwoordmarkers verandert, al het andere blijft byte voor byte zoals de auteur het
+schreef. **Ongedaan maken** draait per vraag een heel woord terug, en **Visueel** en
+**Bron** tonen hetzelfde document. Een formulier dat beschadigd is — een
+sluitmarker is weg — kan niet worden ingevuld; de pagina zegt waarom en biedt aan
+naar de bron te gaan.
+
 ### Omzetten tussen een presentatie en een document
 
 Je kunt beide kanten op omzetten, en het resultaat is **altijd een kopie in een
