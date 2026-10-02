@@ -1657,6 +1657,48 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Roghnaigh teimpléad an chaibidil',
+  'Kies eerst een hoofdstuksjabloon.': 'Roghnaigh teimpléad caibidil ar dtús.',
+  'Kies minstens één status.': 'Roghnaigh stádas amháin ar a laghad.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Leabhar curtha le chéile. Caibidlí: {n}. Grianghraif: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Tarraingthe siar agus fágtha ar lár dá bhrí sin: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Scipeáilte (leagan eile nó dothuigthe): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Grianghraif a bhí ar iarraidh ón bhfillteán oibre: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'San ainm, ná húsáid ach litreacha, digití, fleiscíní agus fo-línte (64 carachtar ar a mhéad).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Tá leabhar leis an ainm seo ann cheana. Roghnaigh ainm eile.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Luann an teimpléad réimsí nach bhfuil ag an bhfoirm: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Níl aon rud le cur sa leabhar: níl aighneacht ar bith ann a bhfuil stádas roghnaithe aici. Tarraingthe siar: {w}; scipeáilte: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Ní féidir an clár a léamh. Deisigh overview.md.',
+  'Het boek kon niet worden geschreven.':
+      'Níorbh fhéidir an leabhar a scríobh.',
+  'Boek samenstellen…': 'Cuir leabhar le chéile…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Téann an leabhar isteach i bhfillteán book an fhillteáin oibre agus fanann sé ina ghnáthdoiciméad ar féidir leat a chur in eagar ina dhiaidh sin.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Níl aon fhoirm inúsáidte sa bhfillteán oibre.',
+  'Formulier': 'Foirm',
+  'Hoofdstuksjabloon': 'Teimpléad caibidil',
+  'Nog geen sjabloon gekozen.': 'Níor roghnaíodh teimpléad go fóill.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Sa teimpléad seasann {veld-id} don fhreagra ar an réimse sin.',
+  'Hoofdstuksjabloon kiezen…': 'Roghnaigh teimpléad caibidil…',
+  'Welke inzendingen?': 'Cé na haighneachtaí?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Ní théann isteach sa leabhar ach aighneachtaí a bhfuil ceann de na stádais seo acu. Fanann aighneachtaí tarraingthe siar lasmuigh i gcónaí.',
+  'Ordenen op': 'Sórtáil de réir',
+  'Groeperen op': 'Grúpáil de réir',
+  'Naam van het boek': 'Ainm an leabhair',
+  'Boek openen': 'Oscail an leabhar',
+  'Samenstellen': 'Cuir le chéile',
   'De werkkopie kon niet worden aangemaakt.':
       'Níorbh fhéidir an chóip oibre a chruthú.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

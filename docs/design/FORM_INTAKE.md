@@ -83,10 +83,11 @@
 > (phase 2). From the Inbox an organiser can **change the status, withdraw and delete** a submission (deleting
 > leaves the minimal record and does not wait for a broken register), and **open a working copy**
 > (`submission.edit.md`, §7.1) to improve one — what arrived is never opened for editing, and the Inbox judges
-> the working copy from then on. **Compile's pure core is in** (`form_compile.dart`, §7.5: chapter template,
-> answers inserted whole per field type, balanced fences, empty-line dropping, withdrawn never compiled); its I/O
-> half, the dialog and the maker check (§7.4, which renders one chapter and so needs compile first) are still to
-> build.
+> the working copy from then on. **Compile is in** (§7.5): the pure core (`form_compile.dart`: chapter template,
+> answers inserted whole per field type, balanced fences, empty-line dropping, withdrawn never compiled), the
+> writing around it (`form_book.dart`: the register, the submissions as they are now, the photos copied, one new
+> document in `book/` with a `<name>.compile.json` beside it that records what the book was made from) and the
+> Inbox's **Compile book…** dialog. The maker check (§7.4, which renders one chapter) is still to build.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.

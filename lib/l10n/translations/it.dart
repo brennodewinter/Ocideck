@@ -664,6 +664,47 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Kies het hoofdstuksjabloon': 'Scegli il modello di capitolo',
+  'Kies eerst een hoofdstuksjabloon.': 'Scegli prima un modello di capitolo.',
+  'Kies minstens één status.': 'Scegli almeno uno stato.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Libro compilato. Capitoli: {n}. Foto: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Ritirati e quindi esclusi: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Saltati (altra versione o illeggibili): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foto mancanti nella cartella di lavoro: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Nel nome usa solo lettere, cifre, trattini e trattini bassi (al massimo 64 caratteri).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Esiste già un libro con questo nome. Scegli un altro nome.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Il modello cita campi che il modulo non ha: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Non c\'è nulla da inserire nel libro: nessun invio con uno stato scelto. Ritirati: {w}; saltati: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Il registro non può essere letto. Ripara overview.md.',
+  'Het boek kon niet worden geschreven.':
+      'Non è stato possibile scrivere il libro.',
+  'Boek samenstellen…': 'Compila libro…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Il libro va nella cartella book della cartella di lavoro e resta un normale documento che puoi modificare in seguito.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Nella cartella di lavoro non c\'è nessun modulo utilizzabile.',
+  'Formulier': 'Modulo',
+  'Hoofdstuksjabloon': 'Modello di capitolo',
+  'Nog geen sjabloon gekozen.': 'Nessun modello scelto.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Nel modello, {veld-id} sta per la risposta a quel campo.',
+  'Hoofdstuksjabloon kiezen…': 'Scegli il modello di capitolo…',
+  'Welke inzendingen?': 'Quali invii?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Solo gli invii con uno di questi stati finiscono nel libro. Quelli ritirati restano sempre fuori.',
+  'Ordenen op': 'Ordina per',
+  'Groeperen op': 'Raggruppa per',
+  'Naam van het boek': 'Nome del libro',
+  'Boek openen': 'Apri il libro',
+  'Samenstellen': 'Compila',
   'De werkkopie kon niet worden aangemaakt.':
       'Non è stato possibile creare la copia di lavoro.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

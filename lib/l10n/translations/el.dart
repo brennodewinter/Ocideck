@@ -1652,6 +1652,47 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Επιλογή προτύπου κεφαλαίου',
+  'Kies eerst een hoofdstuksjabloon.': 'Επιλέξτε πρώτα ένα πρότυπο κεφαλαίου.',
+  'Kies minstens één status.': 'Επιλέξτε τουλάχιστον μία κατάσταση.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Το βιβλίο συντάχθηκε. Κεφάλαια: {n}. Φωτογραφίες: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Αποσύρθηκαν και επομένως παραλείφθηκαν: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Παραλείφθηκαν (άλλη έκδοση ή μη αναγνώσιμες): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Φωτογραφίες που έλειπαν από τον φάκελο εργασίας: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Στο όνομα χρησιμοποιήστε μόνο γράμματα, ψηφία, παύλες και κάτω παύλες (έως 64 χαρακτήρες).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Υπάρχει ήδη βιβλίο με αυτό το όνομα. Επιλέξτε άλλο όνομα.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Το πρότυπο αναφέρει πεδία που η φόρμα δεν έχει: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Δεν υπάρχει τίποτα να μπει στο βιβλίο: καμία υποβολή με επιλεγμένη κατάσταση. Αποσύρθηκαν: {w}· παραλείφθηκαν: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Το μητρώο δεν μπορεί να διαβαστεί. Επιδιορθώστε το overview.md.',
+  'Het boek kon niet worden geschreven.': 'Το βιβλίο δεν μπόρεσε να γραφτεί.',
+  'Boek samenstellen…': 'Σύνταξη βιβλίου…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Το βιβλίο μπαίνει στον φάκελο book του φακέλου εργασίας και παραμένει ένα συνηθισμένο έγγραφο που μπορείτε να επεξεργαστείτε στη συνέχεια.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Δεν υπάρχει χρησιμοποιήσιμη φόρμα στον φάκελο εργασίας.',
+  'Formulier': 'Φόρμα',
+  'Hoofdstuksjabloon': 'Πρότυπο κεφαλαίου',
+  'Nog geen sjabloon gekozen.': 'Δεν έχει επιλεγεί ακόμη πρότυπο.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Στο πρότυπο, το {veld-id} αντιπροσωπεύει την απάντηση σε εκείνο το πεδίο.',
+  'Hoofdstuksjabloon kiezen…': 'Επιλογή προτύπου κεφαλαίου…',
+  'Welke inzendingen?': 'Ποιες υποβολές;',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Στο βιβλίο μπαίνουν μόνο οι υποβολές με μία από αυτές τις καταστάσεις. Οι αποσυρμένες υποβολές μένουν πάντα έξω.',
+  'Ordenen op': 'Ταξινόμηση κατά',
+  'Groeperen op': 'Ομαδοποίηση κατά',
+  'Naam van het boek': 'Όνομα του βιβλίου',
+  'Boek openen': 'Άνοιγμα βιβλίου',
+  'Samenstellen': 'Σύνταξη',
   'De werkkopie kon niet worden aangemaakt.':
       'Το αντίγραφο εργασίας δεν ήταν δυνατό να δημιουργηθεί.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

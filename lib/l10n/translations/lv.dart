@@ -1625,6 +1625,46 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Izvēlēties nodaļas veidni',
+  'Kies eerst een hoofdstuksjabloon.': 'Vispirms izvēlieties nodaļas veidni.',
+  'Kies minstens één status.': 'Izvēlieties vismaz vienu statusu.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Grāmata sastādīta. Nodaļas: {n}. Fotogrāfijas: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Atsauktie un tāpēc izlaistie: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Izlaistie (cita versija vai nelasāmi): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotogrāfijas, kuru darba mapē trūka: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Nosaukumā izmantojiet tikai burtus, ciparus, defises un pasvītras (ne vairāk kā 64 rakstzīmes).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Grāmata ar šādu nosaukumu jau pastāv. Izvēlieties citu nosaukumu.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Veidnē minēti lauki, kuru veidlapā nav: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Grāmatā nav ko ievietot: nav neviena iesūtījuma ar izvēlēto statusu. Atsauktie: {w}; izlaistie: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Reģistru nevar nolasīt. Salabojiet overview.md.',
+  'Het boek kon niet worden geschreven.': 'Grāmatu nevarēja ierakstīt.',
+  'Boek samenstellen…': 'Sastādīt grāmatu…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Grāmata nonāk darba mapes mapē book un paliek parasts dokuments, ko pēc tam varat rediģēt paši.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Darba mapē nav neviennas izmantojamas veidlapas.',
+  'Formulier': 'Veidlapa',
+  'Hoofdstuksjabloon': 'Nodaļas veidne',
+  'Nog geen sjabloon gekozen.': 'Veidne vēl nav izvēlēta.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Veidnē {veld-id} apzīmē atbildi uz šo lauku.',
+  'Hoofdstuksjabloon kiezen…': 'Izvēlēties nodaļas veidni…',
+  'Welke inzendingen?': 'Kuri iesūtījumi?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Grāmatā nonāk tikai iesūtījumi ar kādu no šiem statusiem. Atsauktie iesūtījumi vienmēr paliek ārpus tās.',
+  'Ordenen op': 'Kārtot pēc',
+  'Groeperen op': 'Grupēt pēc',
+  'Naam van het boek': 'Grāmatas nosaukums',
+  'Boek openen': 'Atvērt grāmatu',
+  'Samenstellen': 'Sastādīt',
   'De werkkopie kon niet worden aangemaakt.':
       'Darba kopiju neizdevās izveidot.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

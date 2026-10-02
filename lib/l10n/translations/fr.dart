@@ -667,6 +667,47 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Kies het hoofdstuksjabloon': 'Choisir le modèle de chapitre',
+  'Kies eerst een hoofdstuksjabloon.':
+      'Choisissez d\'abord un modèle de chapitre.',
+  'Kies minstens één status.': 'Choisissez au moins un statut.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Livre composé. Chapitres : {n}. Photos : {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Retirés et donc écartés : {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Ignorés (autre version ou illisibles) : {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Photos manquantes dans le dossier de travail : {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Dans le nom, utilisez seulement des lettres, des chiffres, des tirets et des tirets bas (64 caractères au maximum).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Un livre portant ce nom existe déjà. Choisissez un autre nom.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Le modèle mentionne des champs que le formulaire n\'a pas : {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Il n\'y a rien à mettre dans le livre : aucun envoi avec un statut choisi. Retirés : {w} ; ignorés : {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Le registre ne peut pas être lu. Réparez overview.md.',
+  'Het boek kon niet worden geschreven.': 'Le livre n\'a pas pu être écrit.',
+  'Boek samenstellen…': 'Composer le livre…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Le livre est placé dans le dossier book du dossier de travail et reste un document ordinaire que vous pouvez modifier ensuite.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Il n\'y a aucun formulaire utilisable dans le dossier de travail.',
+  'Formulier': 'Formulaire',
+  'Hoofdstuksjabloon': 'Modèle de chapitre',
+  'Nog geen sjabloon gekozen.': 'Aucun modèle choisi pour l\'instant.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Dans le modèle, {veld-id} représente la réponse à ce champ.',
+  'Hoofdstuksjabloon kiezen…': 'Choisir le modèle de chapitre…',
+  'Welke inzendingen?': 'Quels envois ?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Seuls les envois ayant l\'un de ces statuts entrent dans le livre. Les envois retirés restent toujours à l\'écart.',
+  'Ordenen op': 'Trier par',
+  'Groeperen op': 'Regrouper par',
+  'Naam van het boek': 'Nom du livre',
+  'Boek openen': 'Ouvrir le livre',
+  'Samenstellen': 'Composer',
   'De werkkopie kon niet worden aangemaakt.':
       'La copie de travail n’a pas pu être créée.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

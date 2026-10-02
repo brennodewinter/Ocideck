@@ -1642,6 +1642,46 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Exemplar capitis eligere',
+  'Kies eerst een hoofdstuksjabloon.': 'Primum exemplar capitis elige.',
+  'Kies minstens één status.': 'Saltem unum statum elige.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Liber compositus. Capita: {n}. Imagines: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Revocata et ideo omissa: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Praetermissa (alia versio vel quae legi non possunt): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Imagines quae in fasciculo operis deerant: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'In nomine litteras, numeros, lineolas et lineolas infimas tantum adhibe (ad summum 64 signa).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Liber hoc nomine iam exstat. Aliud nomen elige.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Exemplar campos nominat quos forma non habet: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nihil est quod in librum ponatur: nulla missio cum statu electo. Revocata: {w}; praetermissa: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Index legi non potest. Overview.md repara.',
+  'Het boek kon niet worden geschreven.': 'Liber scribi non potuit.',
+  'Boek samenstellen…': 'Librum componere…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Liber in fasciculum book fasciculi operis ponitur et manet documentum commune quod postea ipse recensere potes.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'In fasciculo operis nulla forma utilis est.',
+  'Formulier': 'Forma',
+  'Hoofdstuksjabloon': 'Exemplar capitis',
+  'Nog geen sjabloon gekozen.': 'Nondum exemplar electum est.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In exemplari {veld-id} responsum illius campi significat.',
+  'Hoofdstuksjabloon kiezen…': 'Exemplar capitis eligere…',
+  'Welke inzendingen?': 'Quae missa?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Solum missa cum uno ex his statibus in librum veniunt. Missa revocata semper excluduntur.',
+  'Ordenen op': 'Ordinare secundum',
+  'Groeperen op': 'Congregare secundum',
+  'Naam van het boek': 'Nomen libri',
+  'Boek openen': 'Librum aperire',
+  'Samenstellen': 'Componere',
   'De werkkopie kon niet worden aangemaakt.':
       'Exemplar operis creari non potuit.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

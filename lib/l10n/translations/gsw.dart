@@ -1630,6 +1630,47 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Kapitelvorlag uswähle',
+  'Kies eerst een hoofdstuksjabloon.': 'Wähl zersch e Kapitelvorlag us.',
+  'Kies minstens één status.': 'Wähl mindeschtens ein Status us.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buech zämmegstellt. Kapitel: {n}. Foti: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Zruggzoge und drum wäggloh: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Übersprunge (anderi Version oder nid läsbar): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foti, wo im Arbeitsordner gfählt hei: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Bruch im Name nume Buechstabe, Ziffere, Binde- und Understrich (höchschtens 64 Zeiche).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Es git scho es Buech mit däm Name. Wähl en andere Name.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'D Vorlag nennt Fälder, wo s Formular nid het: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Es hät nüt, wo is Buech chunnt: kei Iischickig mit emne gwählte Status. Zruggzoge: {w}; übersprunge: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'S Register cha nid gläse wärde. Reparier overview.md.',
+  'Het boek kon niet worden geschreven.':
+      'S Buech het nid chöne gschribe wärde.',
+  'Boek samenstellen…': 'Buech zämmestelle…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'S Buech chunnt in e Ordner book vom Arbeitsordner und blibt es gwöhnlichs Dokument, wo du nachhär sälber chasch bearbeite.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Im Arbeitsordner het es kei brüchbars Formular.',
+  'Formulier': 'Formular',
+  'Hoofdstuksjabloon': 'Kapitelvorlag',
+  'Nog geen sjabloon gekozen.': 'No kei Vorlag gwählt.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In dr Vorlag staat {veld-id} für d Antwort uf das Fäld.',
+  'Hoofdstuksjabloon kiezen…': 'Kapitelvorlag uswähle…',
+  'Welke inzendingen?': 'Weli Iischickige?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Nume Iischickige mit eim vo dene Status chömme is Buech. Zruggzogeni Iischickige blibe immer dusse.',
+  'Ordenen op': 'Sortiere nach',
+  'Groeperen op': 'Gruppiere nach',
+  'Naam van het boek': 'Name vom Buech',
+  'Boek openen': 'Buech ufmache',
+  'Samenstellen': 'Zämmestelle',
   'De werkkopie kon niet worden aangemaakt.':
       'D Arbeitskopie het nid chönne erstellt wärde.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

@@ -1634,6 +1634,47 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Pasirinkti skyriaus šabloną',
+  'Kies eerst een hoofdstuksjabloon.':
+      'Pirmiausia pasirinkite skyriaus šabloną.',
+  'Kies minstens één status.': 'Pasirinkite bent vieną būseną.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Knyga sudaryta. Skyrių: {n}. Nuotraukų: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Atsiimta, todėl praleista: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Praleista (kita versija arba neįskaitoma): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Nuotraukos, kurių trūko darbo aplanke: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Pavadinime naudokite tik raides, skaitmenis, brūkšnelius ir pabraukimus (daugiausia 64 simboliai).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Knyga tokiu pavadinimu jau yra. Pasirinkite kitą pavadinimą.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Šablone minimi laukai, kurių formoje nėra: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nėra ką dėti į knygą: nėra pateikimo su pasirinkta būsena. Atsiimta: {w}; praleista: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registro nepavyksta perskaityti. Pataisykite overview.md.',
+  'Het boek kon niet worden geschreven.': 'Knygos nepavyko įrašyti.',
+  'Boek samenstellen…': 'Sudaryti knygą…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Knyga patenka į darbo aplanko aplanką book ir lieka paprastu dokumentu, kurį vėliau galite pats redaguoti.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Darbo aplanke nėra tinkamos formos.',
+  'Formulier': 'Forma',
+  'Hoofdstuksjabloon': 'Skyriaus šablonas',
+  'Nog geen sjabloon gekozen.': 'Šablonas dar nepasirinktas.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Šablone {veld-id} reiškia atsakymą į tą lauką.',
+  'Hoofdstuksjabloon kiezen…': 'Pasirinkti skyriaus šabloną…',
+  'Welke inzendingen?': 'Kurie pateikimai?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Į knygą patenka tik pateikimai su viena iš šių būsenų. Atsiimti pateikimai visada lieka už jos ribų.',
+  'Ordenen op': 'Rikiuoti pagal',
+  'Groeperen op': 'Grupuoti pagal',
+  'Naam van het boek': 'Knygos pavadinimas',
+  'Boek openen': 'Atidaryti knygą',
+  'Samenstellen': 'Sudaryti',
   'De werkkopie kon niet worden aangemaakt.': 'Darbo kopijos nepavyko sukurti.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
       'Atidaro pateikimo kopiją tobulinimui. Tai, kas gauta, lieka nepakeista.',

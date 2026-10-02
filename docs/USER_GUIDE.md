@@ -5879,6 +5879,17 @@ Under an opened submission are its **actions**:
   editing. Back in the Inbox the submission is judged again on the working copy — a point you fixed is gone, and
   the line says the judgement is about the working copy — and you can then move its status on. Change the form's
   own text in the working copy and the Inbox says so: that is not an answer.
+- **Compile book…** — turn the accepted submissions into one document. Choose the form, a **chapter template**
+  (an ordinary `.md` file in which `{field-id}` stands for the answer to that field), which **statuses** go in (with
+  the form's `maker-approved` state, that one is already ticked; otherwise nothing is and you choose), optionally
+  one field to **sort** by and one to **group** by, and a name. The book is written as a **new document** in the
+  `book` folder of the workspace and never over an existing one; the photos are copied next to it as
+  `images/<id>-<field>-<n>.<ext>`. An answer goes in as the Markdown it is, whole; **a withdrawn submission never
+  goes in**; a template that names a field the form does not have is refused, naming the field. What the book was
+  made from — which submissions, under which consent, who made which photo — is written next to it in
+  `<name>.compile.json`, not in the text. The sentence afterwards says how many chapters and photos went in and
+  how many submissions were withdrawn or skipped (another form version, or unreadable), and offers to open the
+  book.
 Each action says how it went. A register that cannot be read is never written over.
 
 A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it

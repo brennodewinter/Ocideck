@@ -1629,6 +1629,46 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Fejezetsablon kiválasztása',
+  'Kies eerst een hoofdstuksjabloon.': 'Először válassz fejezetsablont.',
+  'Kies minstens één status.': 'Válassz legalább egy állapotot.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'A könyv összeállítva. Fejezetek: {n}. Fényképek: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Visszavont, ezért kihagyott: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Kihagyva (másik verzió vagy olvashatatlan): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'A munkamappából hiányzó fényképek: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'A névben csak betűket, számjegyeket, kötőjeleket és aláhúzásjeleket használj (legfeljebb 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Ilyen nevű könyv már van. Válassz másik nevet.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'A sablon olyan mezőket említ, amelyek az űrlapon nincsenek: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nincs mit a könyvbe tenni: nincs kiválasztott állapotú beküldés. Visszavont: {w}; kihagyott: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'A nyilvántartás nem olvasható. Javítsd meg az overview.md fájlt.',
+  'Het boek kon niet worden geschreven.': 'A könyvet nem sikerült megírni.',
+  'Boek samenstellen…': 'Könyv összeállítása…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'A könyv a munkamappa book mappájába kerül, és közönséges dokumentum marad, amelyet utána magad szerkeszthetsz.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'A munkamappában nincs használható űrlap.',
+  'Formulier': 'Űrlap',
+  'Hoofdstuksjabloon': 'Fejezetsablon',
+  'Nog geen sjabloon gekozen.': 'Még nincs sablon kiválasztva.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'A sablonban a {veld-id} az adott mezőre adott választ jelenti.',
+  'Hoofdstuksjabloon kiezen…': 'Fejezetsablon kiválasztása…',
+  'Welke inzendingen?': 'Mely beküldések?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'A könyvbe csak az ezen állapotok valamelyikével rendelkező beküldések kerülnek. A visszavont beküldések mindig kimaradnak.',
+  'Ordenen op': 'Rendezés',
+  'Groeperen op': 'Csoportosítás',
+  'Naam van het boek': 'A könyv neve',
+  'Boek openen': 'Könyv megnyitása',
+  'Samenstellen': 'Összeállítás',
   'De werkkopie kon niet worden aangemaakt.':
       'A munkapéldányt nem sikerült létrehozni.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

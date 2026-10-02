@@ -1645,6 +1645,47 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Agħżel mudell tal-kapitlu',
+  'Kies eerst een hoofdstuksjabloon.': 'Agħżel mudell tal-kapitlu qabel xejn.',
+  'Kies minstens één status.': 'Agħżel mill-inqas stat wieħed.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Ktieb ikkompilat. Kapitli: {n}. Ritratti: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Irtirati u għalhekk imħallija barra: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Maqbuża (verżjoni oħra jew mhux li jinqara): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Ritratti li kienu nieqsa mill-cartella tax-xogħol: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Fl-isem uża biss ittri, ċifri, linji u underscores (massimu ta\' 64 karattru).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Diġà jeżisti ktieb b\'dan l-isem. Agħżel isem ieħor.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Il-mudell isemmi oqsma li l-formola m\'għandhiex: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Ma hemm xejn x\'jiddaħħal fil-ktieb: l-ebda sottomissjoni b\'stat magħżul. Irtirati: {w}; maqbuża: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Ir-reġistru ma jistax jinqara. Irranġa overview.md.',
+  'Het boek kon niet worden geschreven.': 'Il-ktieb ma setax jinkiteb.',
+  'Boek samenstellen…': 'Ikkompila ktieb…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Il-ktieb jidħol fil-cartella book tal-cartella tax-xogħol u jibqa\' dokument ordinarju li tista\' wara teditja int stess.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'M\'hemm l-ebda formola li tista\' tintuża fil-cartella tax-xogħol.',
+  'Formulier': 'Formola',
+  'Hoofdstuksjabloon': 'Mudell tal-kapitlu',
+  'Nog geen sjabloon gekozen.': 'Għadu ma ntgħażel l-ebda mudell.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Fil-mudell, {veld-id} tfisser it-tweġiba għal dak il-qasam.',
+  'Hoofdstuksjabloon kiezen…': 'Agħżel mudell tal-kapitlu…',
+  'Welke inzendingen?': 'Liema sottomissjonijiet?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Fil-ktieb jidħlu biss is-sottomissjonijiet b\'wieħed minn dawn l-istati. Is-sottomissjonijiet irtirati dejjem jibqgħu barra.',
+  'Ordenen op': 'Ordna skont',
+  'Groeperen op': 'Igruppa skont',
+  'Naam van het boek': 'Isem il-ktieb',
+  'Boek openen': 'Iftaħ il-ktieb',
+  'Samenstellen': 'Ikkompila',
   'De werkkopie kon niet worden aangemaakt.':
       'Il-kopja tax-xogħol ma setgħetx tinħoloq.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

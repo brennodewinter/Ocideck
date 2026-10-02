@@ -667,6 +667,48 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Kies het hoofdstuksjabloon': 'Kapitelvorlage wählen',
+  'Kies eerst een hoofdstuksjabloon.': 'Wähle zuerst eine Kapitelvorlage.',
+  'Kies minstens één status.': 'Wähle mindestens einen Status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buch zusammengestellt. Kapitel: {n}. Fotos: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Zurückgezogen und daher weggelassen: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Übersprungen (andere Version oder nicht lesbar): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotos, die im Arbeitsordner fehlten: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Verwende im Namen nur Buchstaben, Ziffern, Bindestriche und Unterstriche (höchstens 64 Zeichen).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Es gibt bereits ein Buch mit diesem Namen. Wähle einen anderen Namen.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Die Vorlage nennt Felder, die das Formular nicht hat: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Es gibt nichts, was ins Buch kommt: keine Einsendung mit einem gewählten Status. Zurückgezogen: {w}; übersprungen: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Das Register kann nicht gelesen werden. Repariere overview.md.',
+  'Het boek kon niet worden geschreven.':
+      'Das Buch konnte nicht geschrieben werden.',
+  'Boek samenstellen…': 'Buch zusammenstellen…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Das Buch kommt in den Ordner book des Arbeitsordners und bleibt ein gewöhnliches Dokument, das du danach selbst bearbeiten kannst.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Im Arbeitsordner gibt es kein brauchbares Formular.',
+  'Formulier': 'Formular',
+  'Hoofdstuksjabloon': 'Kapitelvorlage',
+  'Nog geen sjabloon gekozen.': 'Noch keine Vorlage gewählt.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In der Vorlage steht {veld-id} für die Antwort auf dieses Feld.',
+  'Hoofdstuksjabloon kiezen…': 'Kapitelvorlage wählen…',
+  'Welke inzendingen?': 'Welche Einsendungen?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Nur Einsendungen mit einem dieser Status kommen ins Buch. Zurückgezogene Einsendungen bleiben immer draußen.',
+  'Ordenen op': 'Sortieren nach',
+  'Groeperen op': 'Gruppieren nach',
+  'Naam van het boek': 'Name des Buches',
+  'Boek openen': 'Buch öffnen',
+  'Samenstellen': 'Zusammenstellen',
   'De werkkopie kon niet worden aangemaakt.':
       'Die Arbeitskopie konnte nicht erstellt werden.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

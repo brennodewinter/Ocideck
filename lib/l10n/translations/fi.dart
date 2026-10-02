@@ -1627,6 +1627,47 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Valitse lukumalli',
+  'Kies eerst een hoofdstuksjabloon.': 'Valitse ensin lukumalli.',
+  'Kies minstens één status.': 'Valitse vähintään yksi tila.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Kirja koottu. Lukuja: {n}. Valokuvia: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Peruutetut ja siksi jätetyt pois: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Ohitetut (toinen versio tai ei luettavissa): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Valokuvat, jotka puuttuivat työkansiosta: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Käytä nimessä vain kirjaimia, numeroita, yhdysmerkkejä ja alaviivoja (enintään 64 merkkiä).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Tämänniminen kirja on jo olemassa. Valitse toinen nimi.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Malli mainitsee kenttiä, joita lomakkeessa ei ole: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Kirjaan ei ole mitään laitettavaa: ei yhtään lähetystä, jolla on valittu tila. Peruutettu: {w}; ohitettu: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Rekisteriä ei voi lukea. Korjaa overview.md.',
+  'Het boek kon niet worden geschreven.': 'Kirjaa ei voitu kirjoittaa.',
+  'Boek samenstellen…': 'Kokoa kirja…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Kirja tulee työkansion book-kansioon ja pysyy tavallisena asiakirjana, jota voit sen jälkeen muokata itse.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Työkansiossa ei ole käyttökelpoista lomaketta.',
+  'Formulier': 'Lomake',
+  'Hoofdstuksjabloon': 'Lukumalli',
+  'Nog geen sjabloon gekozen.': 'Mallia ei ole vielä valittu.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Mallissa {veld-id} tarkoittaa vastausta siihen kenttään.',
+  'Hoofdstuksjabloon kiezen…': 'Valitse lukumalli…',
+  'Welke inzendingen?': 'Mitkä lähetykset?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Kirjaan tulevat vain lähetykset, joilla on jokin näistä tiloista. Peruutetut lähetykset jäävät aina pois.',
+  'Ordenen op': 'Lajittele',
+  'Groeperen op': 'Ryhmittele',
+  'Naam van het boek': 'Kirjan nimi',
+  'Boek openen': 'Avaa kirja',
+  'Samenstellen': 'Kokoa',
   'De werkkopie kon niet worden aangemaakt.': 'Työkopiota ei voitu luoda.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
       'Avaa lähetyksen kopion parannettavaksi. Saapunut pysyy muuttumattomana.',

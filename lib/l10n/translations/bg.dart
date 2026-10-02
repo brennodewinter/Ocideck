@@ -1647,6 +1647,46 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Избор на шаблон за глава',
+  'Kies eerst een hoofdstuksjabloon.': 'Първо изберете шаблон за глава.',
+  'Kies minstens één status.': 'Изберете поне един статус.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Книгата е съставена. Глави: {n}. Снимки: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Оттеглени и затова пропуснати: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Пропуснати (друга версия или нечетими): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Снимки, които липсваха в работната папка: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'В името използвайте само букви, цифри, тирета и долни черти (най-много 64 знака).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Вече има книга с това име. Изберете друго име.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Шаблонът споменава полета, които формулярът няма: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Няма какво да се сложи в книгата: няма изпращане с избран статус. Оттеглени: {w}; пропуснати: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Регистърът не може да бъде прочетен. Поправете overview.md.',
+  'Het boek kon niet worden geschreven.': 'Книгата не можа да бъде записана.',
+  'Boek samenstellen…': 'Съставяне на книга…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Книгата отива в папката book на работната папка и остава обикновен документ, който можете да редактирате после.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'В работната папка няма използваем формуляр.',
+  'Formulier': 'Формуляр',
+  'Hoofdstuksjabloon': 'Шаблон за глава',
+  'Nog geen sjabloon gekozen.': 'Още не е избран шаблон.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'В шаблона {veld-id} означава отговора на това поле.',
+  'Hoofdstuksjabloon kiezen…': 'Избор на шаблон за глава…',
+  'Welke inzendingen?': 'Кои изпращания?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'В книгата влизат само изпращания с един от тези статуси. Оттеглените изпращания винаги остават извън нея.',
+  'Ordenen op': 'Подреждане по',
+  'Groeperen op': 'Групиране по',
+  'Naam van het boek': 'Име на книгата',
+  'Boek openen': 'Отваряне на книгата',
+  'Samenstellen': 'Съставяне',
   'De werkkopie kon niet worden aangemaakt.':
       'Работното копие не можа да бъде създадено.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':

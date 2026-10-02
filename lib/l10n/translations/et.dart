@@ -1620,6 +1620,47 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kies het hoofdstuksjabloon': 'Vali peatüki mall',
+  'Kies eerst een hoofdstuksjabloon.': 'Vali kõigepealt peatüki mall.',
+  'Kies minstens één status.': 'Vali vähemalt üks olek.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Raamat on koostatud. Peatükke: {n}. Fotosid: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Tagasi võetud ja seetõttu välja jäetud: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Vahele jäetud (muu versioon või loetamatu): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotod, mida töökaustas ei olnud: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Kasuta nimes ainult tähti, numbreid, sidekriipse ja alakriipse (kuni 64 märki).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Selle nimega raamat on juba olemas. Vali mõni teine nimi.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Mall nimetab välju, mida vormil ei ole: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Raamatusse pole midagi panna: ühtegi esitust valitud olekuga pole. Tagasi võetud: {w}; vahele jäetud: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registrit ei saa lugeda. Paranda overview.md.',
+  'Het boek kon niet worden geschreven.': 'Raamatut ei õnnestunud kirjutada.',
+  'Boek samenstellen…': 'Koosta raamat…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Raamat läheb töökausta kausta book ja jääb tavaliseks dokumendiks, mida saad hiljem ise muuta.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Töökaustas pole ühtegi kasutatavat vormi.',
+  'Formulier': 'Vorm',
+  'Hoofdstuksjabloon': 'Peatüki mall',
+  'Nog geen sjabloon gekozen.': 'Malli pole veel valitud.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Mallis tähendab {veld-id} vastust sellele väljale.',
+  'Hoofdstuksjabloon kiezen…': 'Vali peatüki mall…',
+  'Welke inzendingen?': 'Millised esitused?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Raamatusse jõuavad ainult esitused, millel on mõni neist olekutest. Tagasi võetud esitused jäävad alati välja.',
+  'Ordenen op': 'Sorteeri',
+  'Groeperen op': 'Rühmita',
+  'Naam van het boek': 'Raamatu nimi',
+  'Boek openen': 'Ava raamat',
+  'Samenstellen': 'Koosta',
   'De werkkopie kon niet worden aangemaakt.': 'Töökoopiat ei õnnestunud luua.',
   'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
       'Avab esituse koopia parandamiseks. Saabunu jääb muutmata.',
