@@ -1655,6 +1655,32 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Este envio foi retirado e por isso não entra em nenhum capítulo.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Este envio não pode ser lido, ou o formulário para o qual foi feito não está na pasta de trabalho.',
+  'Het controledocument kon niet worden geschreven.':
+      'Não foi possível escrever o documento de revisão.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'A sua contribuição para o livro: por favor, reveja-a',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Aqui está a sua contribuição tal como vai aparecer no livro (veja o anexo). Está tudo certo? Responda ‘de acordo’ ou com as suas correções antes de {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'O e-mail está pronto no seu programa de correio. Anexe o PDF e envie-o.',
+  'Controle door de maker…': 'Revisão pelo autor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'O documento de revisão é o capítulo deste envio. Exporte-o como PDF (escolha o perfil completo), anexe o PDF ao e-mail e envie-o. Se o autor responder ‘de acordo’, defina você mesmo o estado como maker-approved: essa resposta é também a confirmação de que a contribuição vem mesmo desta pessoa.',
+  'Controledocument maken en openen': 'Criar o documento de revisão e abri-lo',
+  'E-mailadres van de maker': 'Endereço de e-mail do autor',
+  'Antwoord vóór (jjjj-mm-dd)': 'Responder antes de (aaaa-mm-dd)',
+  'Mail schrijven': 'Escrever o e-mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Este formulário não conhece o estado maker-check-sent, por isso não pode ser definido aqui.',
+  'Controle verstuurd': 'Revisão enviada',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Cria o capítulo deste envio e prepara o e-mail com que o autor o revê.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Este envio não está no registo. Repare o overview.md e tente de novo.',
   'Kies het hoofdstuksjabloon': 'Escolher o modelo de capítulo',
   'Kies eerst een hoofdstuksjabloon.':
       'Escolha primeiro um modelo de capítulo.',

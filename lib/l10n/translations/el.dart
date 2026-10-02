@@ -1652,6 +1652,33 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Αυτή η υποβολή έχει αποσυρθεί και επομένως δεν μπαίνει σε κανένα κεφάλαιο.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Αυτή η υποβολή δεν μπορεί να διαβαστεί ή η φόρμα για την οποία υποβλήθηκε δεν βρίσκεται στον φάκελο εργασίας.',
+  'Het controledocument kon niet worden geschreven.':
+      'Το έγγραφο ελέγχου δεν μπόρεσε να γραφτεί.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Η συμβολή σας στο βιβλίο: παρακαλούμε ελέγξτε την',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Ιδού η συμβολή σας όπως θα εμφανιστεί στο βιβλίο (δείτε το συνημμένο). Είναι όλα σωστά; Απαντήστε ‘συμφωνώ’ ή με τις διορθώσεις σας πριν από τις {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Το μήνυμα είναι έτοιμο στο πρόγραμμα αλληλογραφίας σας. Επισυνάψτε το PDF και στείλτε το.',
+  'Controle door de maker…': 'Έλεγχος από τον δημιουργό…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Το έγγραφο ελέγχου είναι το κεφάλαιο αυτής της μίας υποβολής. Εξαγάγετέ το ως PDF (επιλέξτε το πλήρες προφίλ), επισυνάψτε το PDF στο μήνυμα και στείλτε το. Αν ο δημιουργός απαντήσει ‘συμφωνώ’, ορίστε μόνοι σας την κατάσταση σε maker-approved: η απάντηση αυτή επιβεβαιώνει επίσης ότι η συμβολή προέρχεται πράγματι από αυτό το πρόσωπο.',
+  'Controledocument maken en openen': 'Δημιουργία εγγράφου ελέγχου και άνοιγμα',
+  'E-mailadres van de maker':
+      'Διεύθυνση ηλεκτρονικού ταχυδρομείου του δημιουργού',
+  'Antwoord vóór (jjjj-mm-dd)': 'Απάντηση πριν από (εεεε-μμ-ηη)',
+  'Mail schrijven': 'Σύνταξη μηνύματος',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Αυτή η φόρμα δεν γνωρίζει την κατάσταση maker-check-sent, επομένως δεν μπορεί να οριστεί εδώ.',
+  'Controle verstuurd': 'Ο έλεγχος στάλθηκε',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Δημιουργεί το κεφάλαιο αυτής της υποβολής και ετοιμάζει το μήνυμα με το οποίο ο δημιουργός το ελέγχει.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Αυτή η υποβολή δεν υπάρχει στο μητρώο. Επιδιορθώστε το overview.md και δοκιμάστε ξανά.',
   'Kies het hoofdstuksjabloon': 'Επιλογή προτύπου κεφαλαίου',
   'Kies eerst een hoofdstuksjabloon.': 'Επιλέξτε πρώτα ένα πρότυπο κεφαλαίου.',
   'Kies minstens één status.': 'Επιλέξτε τουλάχιστον μία κατάσταση.',

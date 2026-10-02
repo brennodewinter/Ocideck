@@ -105,6 +105,10 @@ final RegExp _bookName = RegExp(r'^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$');
 /// [template] is de tekst van het hoofdstuksjabloon. Een inzending van een andere versie
 /// van het formulier, of die niet te lezen is, telt als overgeslagen. [now] is de dag
 /// van samenstellen voor de sidecar.
+///
+/// Met [onlySid] komt alleen die inzending in het boek, wat haar status ook is: dat is
+/// het hoofdstuk voor de controle door de maker (§7.4). Een ingetrokken of verwijderde
+/// inzending komt er ook dan niet in.
 Future<FormBookOutcome> compileFormBook(
   FormWorkspace workspace, {
   required FormSpec form,
@@ -114,6 +118,7 @@ Future<FormBookOutcome> compileFormBook(
   required DateTime now,
   String? orderBy,
   String? groupBy,
+  String? onlySid,
 }) async {
   if (!_bookName.hasMatch(name)) return const FormBookBadName();
   final bookDir = p.join(workspace.root, 'book');
@@ -125,7 +130,11 @@ Future<FormBookOutcome> compileFormBook(
   final rows = register is FormRegisterParsed
       ? [
           for (final row in register.register.rows)
-            if (!row.isDeleted && states.contains(row.status)) row,
+            if (!row.isDeleted &&
+                (onlySid == null
+                    ? states.contains(row.status)
+                    : row.sid == onlySid))
+              row,
         ]
       : const <FormRegisterRow>[];
 

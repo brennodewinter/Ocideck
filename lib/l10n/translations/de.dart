@@ -667,6 +667,32 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Diese Einsendung wurde zurückgezogen und kommt daher in kein Kapitel.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Diese Einsendung kann nicht gelesen werden, oder das Formular, für das sie eingereicht wurde, liegt nicht im Arbeitsordner.',
+  'Het controledocument kon niet worden geschreven.':
+      'Das Prüfdokument konnte nicht geschrieben werden.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Dein Beitrag für das Buch: bitte kurz prüfen',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Hier ist dein Beitrag, so wie er im Buch erscheint (siehe Anhang). Stimmt alles? Antworte ‚einverstanden‘ oder mit deinen Korrekturen vor dem {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Die Mail liegt in deinem Mailprogramm bereit. Hänge das PDF an und sende sie ab.',
+  'Controle door de maker…': 'Prüfung durch die beitragende Person…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Das Prüfdokument ist das Kapitel dieser einen Einsendung. Exportiere es als PDF (wähle das vollständige Profil), hänge das PDF an die Mail an und sende sie ab. Antwortet die beitragende Person ‚einverstanden‘, setze den Status selbst auf maker-approved: Diese Antwort ist auch die Bestätigung, dass der Beitrag wirklich von dieser Person stammt.',
+  'Controledocument maken en openen': 'Prüfdokument erstellen und öffnen',
+  'E-mailadres van de maker': 'E-Mail-Adresse der beitragenden Person',
+  'Antwoord vóór (jjjj-mm-dd)': 'Antwort vor dem (JJJJ-MM-TT)',
+  'Mail schrijven': 'Mail schreiben',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Dieses Formular kennt den Status maker-check-sent nicht, daher lässt er sich hier nicht setzen.',
+  'Controle verstuurd': 'Prüfung verschickt',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Erstellt das Kapitel dieser Einsendung und bereitet die Mail vor, mit der die beitragende Person es prüft.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Diese Einsendung steht nicht im Register. Repariere overview.md und versuche es erneut.',
   'Kies het hoofdstuksjabloon': 'Kapitelvorlage wählen',
   'Kies eerst een hoofdstuksjabloon.': 'Wähle zuerst eine Kapitelvorlage.',
   'Kies minstens één status.': 'Wähle mindestens einen Status.',

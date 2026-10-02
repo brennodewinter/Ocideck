@@ -1645,6 +1645,32 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Din is-sottomissjoni ġiet irtirata u għalhekk ma tidħol fl-ebda kapitlu.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Din is-sottomissjoni ma tistax tinqara jew il-formola li għaliha ntbagħtet mhijiex fil-cartella tax-xogħol.',
+  'Het controledocument kon niet worden geschreven.':
+      'Id-dokument ta\' kontroll ma setax jinkiteb.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Il-kontribuzzjoni tiegħek għall-ktieb: jekk jogħġbok iċċekkjaha',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Hawn il-kontribuzzjoni tiegħek kif se tidher fil-ktieb (ara l-anness). Kollox tajjeb? Wieġeb ‘naqbel’ jew bil-korrezzjonijiet tiegħek qabel il-{datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Il-mejl lest fil-programm tal-mejl tiegħek. Waħħal il-PDF u ibgħat.',
+  'Controle door de maker…': 'Kontroll mill-awtur…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Id-dokument ta\' kontroll huwa l-kapitlu ta\' din is-sottomissjoni waħda. Esportah bħala PDF (agħżel il-profil sħiħ), waħħal il-PDF mal-mejl u ibgħat. Jekk l-awtur iwieġeb ‘naqbel’, issettja int stess l-istat fuq maker-approved: dik it-tweġiba hija wkoll il-konferma li l-kontribuzzjoni tassew tiġi minn din il-persuna.',
+  'Controledocument maken en openen': 'Oħloq id-dokument ta\' kontroll u iftaħ',
+  'E-mailadres van de maker': 'Indirizz elettroniku tal-awtur',
+  'Antwoord vóór (jjjj-mm-dd)': 'Wieġeb qabel (ssss-xx-jj)',
+  'Mail schrijven': 'Ikteb il-mejl',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Din il-formola ma tafx l-istat maker-check-sent, għalhekk ma jistax jiġi ssettjat hawn.',
+  'Controle verstuurd': 'Kontroll mibgħut',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Toħloq il-kapitlu ta\' din is-sottomissjoni u tipprepara l-mejl li bih l-awtur jiċċekkjah.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Din is-sottomissjoni mhijiex fir-reġistru. Irranġa overview.md u erġa\' pprova.',
   'Kies het hoofdstuksjabloon': 'Agħżel mudell tal-kapitlu',
   'Kies eerst een hoofdstuksjabloon.': 'Agħżel mudell tal-kapitlu qabel xejn.',
   'Kies minstens één status.': 'Agħżel mill-inqas stat wieħed.',

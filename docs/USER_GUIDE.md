@@ -5890,6 +5890,18 @@ Under an opened submission are its **actions**:
   `<name>.compile.json`, not in the text. The sentence afterwards says how many chapters and photos went in and
   how many submissions were withdrawn or skipped (another form version, or unreadable), and offers to open the
   book.
+- **Maker check…** — before a contribution is published, the maker sees what it will look like and says whether it
+  is right (FORM_INTAKE.md §7.4). It is an **integrity control**: an anonymous respondent cannot be authenticated,
+  so only an answer from the address the submission gave confirms that the contribution is that person's. Three
+  steps, each on its own: **Create check document and open it** makes the chapter of *this one submission* from a
+  chapter template — the same maker as the book, so the maker sees what will be printed — and opens it in a tab
+  (the Inbox closes); you export it as a PDF with the usual export (choose the **full** profile: the content is the
+  maker's own). **Write mail** opens a draft in your mail program, addressed to the address the maker gave in the
+  form (the first e-mail field that was filled in; you can type another), with a short text and the day to answer
+  by (two weeks, you can change it); attach the PDF yourself. **Check sent** sets the status to
+  `maker-check-sent`. When the maker answers ‘agreed’, set the status to `maker-approved` yourself — compile takes
+  only that status by default. The draft is in your interface language; edit it in your mail program. Not for a
+  withdrawn or deleted submission, and **Check sent** only when the form has that status.
 Each action says how it went. A register that cannot be read is never written over.
 
 A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it

@@ -1627,6 +1627,32 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Kiriman ini telah ditarik kembali sehingga tidak masuk ke bab mana pun.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Kiriman ini tidak dapat dibaca, atau formulir yang dituju kiriman ini tidak ada di folder kerja.',
+  'Het controledocument kon niet worden geschreven.':
+      'Dokumen pemeriksaan tidak dapat ditulis.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Kontribusi Anda untuk buku: mohon diperiksa',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Berikut kontribusi Anda seperti yang akan tampil di buku (lihat lampiran). Apakah semuanya benar? Balas ‘setuju’ atau dengan koreksi Anda sebelum {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Surel sudah siap di program surel Anda. Lampirkan PDF dan kirimkan.',
+  'Controle door de maker…': 'Pemeriksaan oleh kontributor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Dokumen pemeriksaan adalah bab dari satu kiriman ini. Ekspor sebagai PDF (pilih profil lengkap), lampirkan PDF pada surel lalu kirim. Jika kontributor membalas ‘setuju’, ubah sendiri statusnya menjadi maker-approved: balasan itu juga merupakan konfirmasi bahwa kontribusi tersebut memang berasal dari orang ini.',
+  'Controledocument maken en openen': 'Buat dokumen pemeriksaan dan buka',
+  'E-mailadres van de maker': 'Alamat surel kontributor',
+  'Antwoord vóór (jjjj-mm-dd)': 'Balas sebelum (tttt-bb-hh)',
+  'Mail schrijven': 'Tulis surel',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Formulir ini tidak mengenal status maker-check-sent, sehingga status itu tidak dapat diatur di sini.',
+  'Controle verstuurd': 'Pemeriksaan terkirim',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Membuat bab dari kiriman ini dan menyiapkan surel agar kontributor dapat memeriksanya.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Kiriman ini tidak ada di register. Perbaiki overview.md lalu coba lagi.',
   'Kies het hoofdstuksjabloon': 'Pilih templat bab',
   'Kies eerst een hoofdstuksjabloon.': 'Pilih templat bab terlebih dahulu.',
   'Kies minstens één status.': 'Pilih setidaknya satu status.',

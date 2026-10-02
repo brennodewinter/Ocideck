@@ -1647,6 +1647,33 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Това изпращане е оттеглено и затова не влиза в никоя глава.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Това изпращане не може да бъде прочетено или формулярът, за който е изпратено, не е в работната папка.',
+  'Het controledocument kon niet worden geschreven.':
+      'Документът за проверка не можа да бъде записан.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Вашият принос към книгата: моля, проверете го',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Ето вашия принос във вида, в който ще се появи в книгата (вижте прикачения файл). Всичко ли е вярно? Отговорете ‘съгласен’ или с вашите корекции преди {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Съобщението е готово във вашата пощенска програма. Прикачете PDF и го изпратете.',
+  'Controle door de maker…': 'Проверка от автора…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Документът за проверка е главата на това едно изпращане. Експортирайте го като PDF (изберете пълния профил), прикачете PDF към съобщението и го изпратете. Ако авторът отговори ‘съгласен’, сами задайте статуса maker-approved: този отговор потвърждава и че приносът наистина идва от този човек.',
+  'Controledocument maken en openen':
+      'Създаване на документ за проверка и отваряне',
+  'E-mailadres van de maker': 'Имейл адрес на автора',
+  'Antwoord vóór (jjjj-mm-dd)': 'Отговор преди (гггг-мм-дд)',
+  'Mail schrijven': 'Писане на съобщение',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Този формуляр не познава статуса maker-check-sent, затова той не може да бъде зададен тук.',
+  'Controle verstuurd': 'Проверката е изпратена',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Създава главата от това изпращане и подготвя съобщението, с което авторът я проверява.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Това изпращане не е в регистъра. Поправете overview.md и опитайте отново.',
   'Kies het hoofdstuksjabloon': 'Избор на шаблон за глава',
   'Kies eerst een hoofdstuksjabloon.': 'Първо изберете шаблон за глава.',
   'Kies minstens één status.': 'Изберете поне един статус.',

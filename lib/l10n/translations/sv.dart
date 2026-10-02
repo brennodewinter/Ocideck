@@ -1626,6 +1626,32 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Den här inlämningen har återkallats och hamnar därför i inget kapitel.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Den här inlämningen kan inte läsas, eller så finns formuläret den lämnades in till inte i arbetsmappen.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrolldokumentet kunde inte skrivas.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Ditt bidrag till boken: titta gärna igenom det',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Här är ditt bidrag så som det kommer att se ut i boken (se bilagan). Stämmer allt? Svara ‘godkänt’ eller med dina rättelser före {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Mejlet ligger klart i ditt mejlprogram. Bifoga pdf-filen och skicka det.',
+  'Controle door de maker…': 'Kontroll av bidragsgivaren…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrolldokumentet är kapitlet för just den här inlämningen. Exportera det som pdf (välj den fullständiga profilen), bifoga pdf-filen till mejlet och skicka det. Svarar bidragsgivaren ‘godkänt’, ställ då själv in statusen på maker-approved: svaret bekräftar också att bidraget verkligen kommer från den här personen.',
+  'Controledocument maken en openen': 'Skapa kontrolldokument och öppna det',
+  'E-mailadres van de maker': 'Bidragsgivarens e-postadress',
+  'Antwoord vóór (jjjj-mm-dd)': 'Svara före (åååå-mm-dd)',
+  'Mail schrijven': 'Skriv mejl',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Det här formuläret känner inte till statusen maker-check-sent, så den kan inte sättas här.',
+  'Controle verstuurd': 'Kontroll skickad',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Skapar kapitlet för den här inlämningen och gör i ordning mejlet som bidragsgivaren kontrollerar det med.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Den här inlämningen finns inte i registret. Reparera overview.md och försök igen.',
   'Kies het hoofdstuksjabloon': 'Välj kapitelmall',
   'Kies eerst een hoofdstuksjabloon.': 'Välj först en kapitelmall.',
   'Kies minstens één status.': 'Välj minst en status.',

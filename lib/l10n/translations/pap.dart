@@ -666,6 +666,32 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'E envio akí a wòrdu retirá i p\'esei e no ta drenta den ningun kapítulo.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'No por lesa e envio akí, òf e formulario pa kual e a wòrdu mandá no ta den e mapa di trabou.',
+  'Het controledocument kon niet worden geschreven.':
+      'No por a skirbi e dokumento di kontròl.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Bo kontribushon pa e buki: por fabor kontrolá',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Aki ta bo kontribushon manera e ta aparesé den e buki (wak e anekso). Tur kos ta korekto? Kontestá ‘di akuerdo’ òf ku bo korekshonnan promé ku {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'E mail ta kla den bo programa di mail. Anekshá e PDF i mandé.',
+  'Controle door de maker…': 'Kontròl door di e outor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'E dokumento di kontròl ta e kapítulo di e envio akí so. Eksportá e komo PDF (skohe e perfil kompleto), anekshá e PDF na e mail i mandé. Si e outor kontestá ‘di akuerdo’, pone bo mes e status riba maker-approved: e kontesta ei ta tambe e konfirmashon ku e kontribushon realmente ta di e persona akí.',
+  'Controledocument maken en openen': 'Krea e dokumento di kontròl i habri',
+  'E-mailadres van de maker': 'Adrès di e-mail di e outor',
+  'Antwoord vóór (jjjj-mm-dd)': 'Kontestá promé ku (aaaa-mm-dd)',
+  'Mail schrijven': 'Skirbi mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'E formulario akí no konosé e status maker-check-sent, p\'esei no por pone esaki aki.',
+  'Controle verstuurd': 'Kontròl mandá',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Ta krea e kapítulo di e envio akí i ta prepará e mail ku kual e outor ta kontrolá e.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'E envio akí no ta den e rehistro. Ripará overview.md i purba di nobo.',
   'Kies het hoofdstuksjabloon': 'Skohe e mòdelo di kapítulo',
   'Kies eerst een hoofdstuksjabloon.': 'Skohe promé un mòdelo di kapítulo.',
   'Kies minstens één status.': 'Skohe por lo menos un status.',

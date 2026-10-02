@@ -136,6 +136,7 @@ void main() {
     String? orderBy,
     String? groupBy,
     FormSpec? form,
+    String? onlySid,
   }) => compileFormBook(
     workspace,
     form: form ?? spec,
@@ -145,6 +146,7 @@ void main() {
     now: now,
     orderBy: orderBy,
     groupBy: groupBy,
+    onlySid: onlySid,
   );
 
   File book([String name = 'boek']) =>
@@ -209,6 +211,57 @@ void main() {
       await book().readAsString(),
       '## Hartig\n\n# Adi\n\n## Zoet\n\n# Zoë\n\n# Bo\n',
     );
+  });
+
+  group('één inzending (de controle door de maker)', () {
+    test('alleen die inzending, welke status ze ook heeft', () async {
+      await land(
+        0,
+        zip: zipOf(0, naam: 'Sari'),
+        status: 'received',
+      );
+      await land(1, zip: zipOf(1, naam: 'Joe'));
+      final outcome =
+          await compile(onlySid: sidOf(0), states: {}) as FormBookWritten;
+      expect(outcome.chapters, 1);
+      final text = await book().readAsString();
+      expect(text, contains('Sari'));
+      expect(text, isNot(contains('Joe')));
+    });
+
+    test('de gekozen statussen tellen dan niet mee', () async {
+      await land(0, status: 'received');
+      await land(1, zip: zipOf(1, naam: 'Joe'));
+      final outcome =
+          await compile(onlySid: sidOf(0), states: {'maker-approved'})
+              as FormBookWritten;
+      expect(outcome.chapters, 1);
+      expect(await book().readAsString(), isNot(contains('Joe')));
+    });
+
+    test('een ingetrokken inzending komt er ook dan niet in', () async {
+      await land(0, withdrawn: true);
+      final outcome = await compile(onlySid: sidOf(0), states: {});
+      expect(outcome, isA<FormBookEmpty>());
+      expect((outcome as FormBookEmpty).withdrawn, 1);
+    });
+
+    test('een verwijderde inzending ook niet', () async {
+      await land(0);
+      await deleteSubmission(workspace, sidOf(0));
+      expect(
+        await compile(onlySid: sidOf(0), states: {}),
+        isA<FormBookEmpty>(),
+      );
+    });
+
+    test('een nummer dat er niet is geeft geen boek', () async {
+      await land(0);
+      expect(
+        await compile(onlySid: 'zzzzzzzzzzzzzzzzzzzzzzzzzz', states: {}),
+        isA<FormBookEmpty>(),
+      );
+    });
   });
 
   test('wat ingetrokken is staat er niet in en wordt geteld', () async {

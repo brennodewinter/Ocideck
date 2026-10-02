@@ -827,6 +827,32 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'This submission has been withdrawn and so goes into no chapter.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'This submission cannot be read, or the form it was submitted for is not in the workspace.',
+  'Het controledocument kon niet worden geschreven.':
+      'The check document could not be written.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Your contribution to the book: please check it',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Here is your contribution as it will appear in the book (see the attachment). Is everything right? Reply ‘agreed’ or with your corrections before {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'The mail is ready in your mail program. Attach the PDF and send it.',
+  'Controle door de maker…': 'Check by the contributor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'The check document is the chapter of this one submission. Export it as a PDF (choose the full profile), attach the PDF to the mail and send it. If the contributor replies ‘agreed’, set the status to maker-approved yourself: that reply is also the confirmation that the contribution really comes from this person.',
+  'Controledocument maken en openen': 'Create check document and open it',
+  'E-mailadres van de maker': 'Contributor\'s e-mail address',
+  'Antwoord vóór (jjjj-mm-dd)': 'Reply before (yyyy-mm-dd)',
+  'Mail schrijven': 'Write mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'This form does not know the status maker-check-sent, so it cannot be set here.',
+  'Controle verstuurd': 'Check sent',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Makes the chapter of this submission and prepares the mail with which the contributor checks it.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'This submission is not in the register. Repair overview.md and try again.',
   'Kies het hoofdstuksjabloon': 'Choose the chapter template',
   'Kies eerst een hoofdstuksjabloon.': 'Choose a chapter template first.',
   'Kies minstens één status.': 'Choose at least one status.',

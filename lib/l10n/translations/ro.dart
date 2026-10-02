@@ -1643,6 +1643,33 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Această trimitere a fost retrasă și de aceea nu intră în niciun capitol.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Această trimitere nu poate fi citită sau formularul pentru care a fost făcută nu se află în folderul de lucru.',
+  'Het controledocument kon niet worden geschreven.':
+      'Documentul de verificare nu a putut fi scris.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Contribuția ta la carte: te rugăm să o verifici',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Iată contribuția ta așa cum va apărea în carte (vezi atașamentul). Este totul corect? Răspunde ‘de acord’ sau cu corecturile tale înainte de {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Mesajul este pregătit în programul tău de e-mail. Atașează PDF-ul și trimite-l.',
+  'Controle door de maker…': 'Verificare de către autor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Documentul de verificare este capitolul acestei singure trimiteri. Exportă-l ca PDF (alege profilul complet), atașează PDF-ul la mesaj și trimite-l. Dacă autorul răspunde ‘de acord’, setează tu însuți starea pe maker-approved: răspunsul acela confirmă și că aportul vine într-adevăr de la această persoană.',
+  'Controledocument maken en openen':
+      'Creează documentul de verificare și deschide-l',
+  'E-mailadres van de maker': 'Adresa de e-mail a autorului',
+  'Antwoord vóór (jjjj-mm-dd)': 'Răspunde înainte de (aaaa-ll-zz)',
+  'Mail schrijven': 'Scrie mesajul',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Acest formular nu cunoaște starea maker-check-sent, deci nu poate fi setată aici.',
+  'Controle verstuurd': 'Verificare trimisă',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Creează capitolul acestei trimiteri și pregătește mesajul cu care autorul îl verifică.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Această trimitere nu este în registru. Repară overview.md și încearcă din nou.',
   'Kies het hoofdstuksjabloon': 'Alege șablonul de capitol',
   'Kies eerst een hoofdstuksjabloon.': 'Alege mai întâi un șablon de capitol.',
   'Kies minstens één status.': 'Alege cel puțin o stare.',

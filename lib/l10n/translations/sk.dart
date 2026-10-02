@@ -1633,6 +1633,33 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Toto odoslanie bolo stiahnuté, a preto nepríde do žiadnej kapitoly.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Toto odoslanie nemožno prečítať, alebo formulár, pre ktorý bolo odoslané, nie je v pracovnom priečinku.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrolný dokument sa nepodarilo zapísať.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Váš príspevok do knihy: prosíme o kontrolu',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Tu je váš príspevok tak, ako sa objaví v knihe (pozri prílohu). Je všetko v poriadku? Odpovedzte ‘súhlasím’, alebo s opravami do {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'E-mail je pripravený vo vašom poštovom programe. Priložte PDF a odošlite ho.',
+  'Controle door de maker…': 'Kontrola autorom…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrolný dokument je kapitola tohto jedného odoslania. Exportujte ho ako PDF (zvoľte úplný profil), priložte PDF k e-mailu a odošlite ho. Ak autor odpovie ‘súhlasím’, nastavte stav sami na maker-approved: táto odpoveď je zároveň potvrdením, že príspevok skutočne pochádza od tejto osoby.',
+  'Controledocument maken en openen':
+      'Vytvoriť kontrolný dokument a otvoriť ho',
+  'E-mailadres van de maker': 'E-mailová adresa autora',
+  'Antwoord vóór (jjjj-mm-dd)': 'Odpovedať do (rrrr-mm-dd)',
+  'Mail schrijven': 'Napísať e-mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Tento formulár nepozná stav maker-check-sent, takže ho tu nemožno nastaviť.',
+  'Controle verstuurd': 'Kontrola odoslaná',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Vytvorí kapitolu z tohto odoslania a pripraví e-mail, ktorým ju autor skontroluje.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Toto odoslanie nie je v registri. Opravte overview.md a skúste to znova.',
   'Kies het hoofdstuksjabloon': 'Vybrať šablónu kapitoly',
   'Kies eerst een hoofdstuksjabloon.': 'Najprv vyberte šablónu kapitoly.',
   'Kies minstens één status.': 'Vyberte aspoň jeden stav.',

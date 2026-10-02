@@ -1631,6 +1631,32 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Ova prijava je povučena pa ne ulazi ni u jedno poglavlje.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Ova se prijava ne može pročitati ili obrasca za koji je podnesena nema u radnoj mapi.',
+  'Het controledocument kon niet worden geschreven.':
+      'Dokument za provjeru nije bilo moguće zapisati.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Tvoj prilog za knjigu: molimo te da ga provjeriš',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Evo tvog priloga onako kako će se pojaviti u knjizi (vidi privitak). Je li sve u redu? Odgovori ‘slažem se’ ili sa svojim ispravcima prije {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Poruka je spremna u tvom programu za e-poštu. Priloži PDF i pošalji je.',
+  'Controle door de maker…': 'Provjera od strane autora…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Dokument za provjeru je poglavlje ove jedne prijave. Izvezi ga kao PDF (odaberi puni profil), priloži PDF poruci i pošalji je. Ako autor odgovori ‘slažem se’, sam postavi status na maker-approved: taj odgovor ujedno potvrđuje da prilog doista dolazi od te osobe.',
+  'Controledocument maken en openen': 'Izradi dokument za provjeru i otvori ga',
+  'E-mailadres van de maker': 'E-adresa autora',
+  'Antwoord vóór (jjjj-mm-dd)': 'Odgovor prije (gggg-mm-dd)',
+  'Mail schrijven': 'Napiši poruku',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ovaj obrazac ne poznaje status maker-check-sent pa se on ovdje ne može postaviti.',
+  'Controle verstuurd': 'Provjera poslana',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Izrađuje poglavlje ove prijave i priprema poruku kojom autor provjerava prilog.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Ove prijave nema u registru. Popravi overview.md i pokušaj ponovno.',
   'Kies het hoofdstuksjabloon': 'Odaberi predložak poglavlja',
   'Kies eerst een hoofdstuksjabloon.': 'Najprije odaberi predložak poglavlja.',
   'Kies minstens één status.': 'Odaberi barem jedan status.',

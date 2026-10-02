@@ -1657,6 +1657,33 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Tarraingíodh siar an aighneacht seo agus dá bhrí sin ní théann sí isteach in aon chaibidil.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Ní féidir an aighneacht seo a léamh, nó níl an fhoirm ar cuireadh isteach uirthi sa bhfillteán oibre.',
+  'Het controledocument kon niet worden geschreven.':
+      'Níorbh fhéidir an doiciméad seiceála a scríobh.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Do chuidiú leis an leabhar: seiceáil é, le do thoil',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Seo do chuidiú mar a bheidh sé sa leabhar (féach an ceangaltán). An bhfuil gach rud ceart? Freagair ‘aontaím’ nó le do cheartúcháin roimh {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Tá an ríomhphost réidh i do chlár ríomhphoist. Ceangail an PDF leis agus seol é.',
+  'Controle door de maker…': 'Seiceáil ag an údar…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Is é an doiciméad seiceála caibidil na haighneachta amháin seo. Easpórtáil é mar PDF (roghnaigh an próifíl iomlán), ceangail an PDF leis an ríomhphost agus seol é. Má fhreagraíonn an t-údar ‘aontaím’, socraigh an stádas féin ar maker-approved: deimhníonn an freagra sin freisin gur ón duine seo a thagann an cuidiú i ndáiríre.',
+  'Controledocument maken en openen':
+      'Cruthaigh doiciméad seiceála agus oscail é',
+  'E-mailadres van de maker': 'Seoladh ríomhphoist an údair',
+  'Antwoord vóór (jjjj-mm-dd)': 'Freagair roimh (bbbb-mm-lll)',
+  'Mail schrijven': 'Scríobh ríomhphost',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ní aithníonn an fhoirm seo an stádas maker-check-sent, mar sin ní féidir é a shocrú anseo.',
+  'Controle verstuurd': 'Seiceáil seolta',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Cruthaíonn sé caibidil na haighneachta seo agus ullmhaíonn sé an ríomhphost lena seiceálann an t-údar í.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Níl an aighneacht seo sa chlár. Deisigh overview.md agus bain triail eile as.',
   'Kies het hoofdstuksjabloon': 'Roghnaigh teimpléad an chaibidil',
   'Kies eerst een hoofdstuksjabloon.': 'Roghnaigh teimpléad caibidil ar dtús.',
   'Kies minstens één status.': 'Roghnaigh stádas amháin ar a laghad.',

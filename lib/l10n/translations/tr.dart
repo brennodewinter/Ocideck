@@ -2538,6 +2538,32 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Bu gönderi geri çekildi, bu yüzden hiçbir bölüme girmez.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Bu gönderi okunamıyor veya gönderildiği form çalışma klasöründe yok.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrol belgesi yazılamadı.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Kitaba katkınız: lütfen gözden geçirin',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'İşte katkınız, kitapta görüneceği şekliyle (eke bakın). Her şey doğru mu? ‘Onaylıyorum’ diye yanıtlayın ya da düzeltmelerinizi {datum} tarihinden önce iletin.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'E-posta posta programınızda hazır. PDF\'yi ekleyip gönderin.',
+  'Controle door de maker…': 'Katkıda bulunan kişi tarafından kontrol…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrol belgesi, bu tek gönderinin bölümüdür. Onu PDF olarak dışa aktarın (tam profili seçin), PDF\'yi e-postaya ekleyip gönderin. Katkıda bulunan kişi ‘onaylıyorum’ diye yanıtlarsa durumu kendiniz maker-approved yapın: bu yanıt aynı zamanda katkının gerçekten bu kişiden geldiğinin onayıdır.',
+  'Controledocument maken en openen': 'Kontrol belgesini oluştur ve aç',
+  'E-mailadres van de maker': 'Katkıda bulunan kişinin e-posta adresi',
+  'Antwoord vóór (jjjj-mm-dd)': 'Şu tarihten önce yanıtla (yyyy-aa-gg)',
+  'Mail schrijven': 'E-posta yaz',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Bu form maker-check-sent durumunu tanımıyor, bu yüzden burada ayarlanamaz.',
+  'Controle verstuurd': 'Kontrol gönderildi',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Bu gönderinin bölümünü oluşturur ve katkıda bulunan kişinin onu kontrol edeceği e-postayı hazırlar.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Bu gönderi kayıtta yok. overview.md dosyasını onarıp yeniden deneyin.',
   'Kies het hoofdstuksjabloon': 'Bölüm şablonunu seç',
   'Kies eerst een hoofdstuksjabloon.': 'Önce bir bölüm şablonu seçin.',
   'Kies minstens één status.': 'En az bir durum seçin.',

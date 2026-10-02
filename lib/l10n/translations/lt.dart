@@ -1634,6 +1634,33 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Šis pateikimas atsiimtas, todėl į jokį skyrių nepatenka.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Šio pateikimo neįmanoma perskaityti arba formos, kuriai jis pateiktas, nėra darbo aplanke.',
+  'Het controledocument kon niet worden geschreven.':
+      'Patikros dokumento nepavyko įrašyti.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Jūsų indėlis į knygą: maloniai prašome jį peržiūrėti',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Štai jūsų indėlis tokia forma, kokia jis atsiras knygoje (žr. priedą). Ar viskas teisinga? Atsakykite ‘sutinku’ arba su savo pataisomis iki {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Laiškas paruoštas jūsų pašto programoje. Pridėkite PDF ir išsiųskite.',
+  'Controle door de maker…': 'Autoriaus patikra…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Patikros dokumentas yra šio vieno pateikimo skyrius. Eksportuokite jį kaip PDF (pasirinkite visą profilį), pridėkite PDF prie laiško ir išsiųskite. Jei autorius atsako ‘sutinku’, patys nustatykite būseną maker-approved: tas atsakymas taip pat patvirtina, kad indėlis tikrai yra šio asmens.',
+  'Controledocument maken en openen':
+      'Sukurti patikros dokumentą ir jį atidaryti',
+  'E-mailadres van de maker': 'Autoriaus el. pašto adresas',
+  'Antwoord vóór (jjjj-mm-dd)': 'Atsakyti iki (mmmm-mm-dd)',
+  'Mail schrijven': 'Rašyti laišką',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ši forma nežino būsenos maker-check-sent, todėl jos čia nustatyti negalima.',
+  'Controle verstuurd': 'Patikra išsiųsta',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Sukuria šio pateikimo skyrių ir paruošia laišką, kuriuo autorius jį tikrina.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Šio pateikimo nėra registre. Pataisykite overview.md ir bandykite dar kartą.',
   'Kies het hoofdstuksjabloon': 'Pasirinkti skyriaus šabloną',
   'Kies eerst een hoofdstuksjabloon.':
       'Pirmiausia pasirinkite skyriaus šabloną.',

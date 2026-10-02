@@ -1642,6 +1642,33 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Haec missio revocata est et ideo in nullum caput venit.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Haec missio legi non potest, aut forma pro qua missa est in fasciculo operis non est.',
+  'Het controledocument kon niet worden geschreven.':
+      'Documentum recognitionis scribi non potuit.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Tuum munus pro libro: quaeso recognosce',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Hic est tuus contributus ut in libro apparebit (vide adiunctum). Estne omnia recta? Responde ‘convenit’ aut cum correctionibus ante {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Epistula parata est in programmate epistularum tuo. Adiunge PDF et mitte.',
+  'Controle door de maker…': 'Recognitio ab auctore…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Documentum recognitionis est caput huius unius missionis. Exporta id ut PDF (profilum plenum elige), adiunge PDF epistulae et mitte. Si auctor ‘convenit’ respondet, statum ipse in maker-approved muta: responsum illud etiam confirmat contributum vere ab hac persona venire.',
+  'Controledocument maken en openen':
+      'Documentum recognitionis creare et aperire',
+  'E-mailadres van de maker': 'Inscriptio epistularis auctoris',
+  'Antwoord vóór (jjjj-mm-dd)': 'Responde ante (aaaa-mm-dd)',
+  'Mail schrijven': 'Epistulam scribere',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Haec forma statum maker-check-sent non novit, itaque hic poni non potest.',
+  'Controle verstuurd': 'Recognitio missa',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Caput huius missionis creat et epistulam parat qua auctor id recognoscit.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Haec missio in indice non est. Overview.md repara et iterum conare.',
   'Kies het hoofdstuksjabloon': 'Exemplar capitis eligere',
   'Kies eerst een hoofdstuksjabloon.': 'Primum exemplar capitis elige.',
   'Kies minstens één status.': 'Saltem unum statum elige.',

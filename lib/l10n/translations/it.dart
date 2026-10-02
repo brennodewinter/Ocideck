@@ -664,6 +664,32 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Questo invio è stato ritirato e quindi non finisce in nessun capitolo.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Questo invio non può essere letto, oppure il modulo per cui è stato inviato non è nella cartella di lavoro.',
+  'Het controledocument kon niet worden geschreven.':
+      'Non è stato possibile scrivere il documento di controllo.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Il tuo contributo per il libro: ti chiediamo di controllarlo',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Ecco il tuo contributo così come comparirà nel libro (vedi l\'allegato). Va tutto bene? Rispondi ‘d\'accordo’ oppure con le tue correzioni entro il {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'La mail è pronta nel tuo programma di posta. Allega il PDF e inviala.',
+  'Controle door de maker…': 'Controllo da parte dell\'autore…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Il documento di controllo è il capitolo di questo singolo invio. Esportalo come PDF (scegli il profilo completo), allega il PDF alla mail e inviala. Se l\'autore risponde ‘d\'accordo’, imposta tu stesso lo stato su maker-approved: quella risposta è anche la conferma che il contributo viene davvero da questa persona.',
+  'Controledocument maken en openen': 'Crea il documento di controllo e aprilo',
+  'E-mailadres van de maker': 'Indirizzo e-mail dell\'autore',
+  'Antwoord vóór (jjjj-mm-dd)': 'Rispondere entro (aaaa-mm-gg)',
+  'Mail schrijven': 'Scrivi la mail',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Questo modulo non conosce lo stato maker-check-sent, quindi qui non si può impostare.',
+  'Controle verstuurd': 'Controllo inviato',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Crea il capitolo di questo invio e prepara la mail con cui l\'autore lo controlla.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Questo invio non è nel registro. Ripara overview.md e riprova.',
   'Kies het hoofdstuksjabloon': 'Scegli il modello di capitolo',
   'Kies eerst een hoofdstuksjabloon.': 'Scegli prima un modello di capitolo.',
   'Kies minstens één status.': 'Scegli almeno uno stato.',

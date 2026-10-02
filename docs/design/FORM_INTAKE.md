@@ -87,7 +87,11 @@
 > answers inserted whole per field type, balanced fences, empty-line dropping, withdrawn never compiled), the
 > writing around it (`form_book.dart`: the register, the submissions as they are now, the photos copied, one new
 > document in `book/` with a `<name>.compile.json` beside it that records what the book was made from) and the
-> Inbox's **Compile book…** dialog. The maker check (§7.4, which renders one chapter) is still to build.
+> Inbox's **Compile book…** dialog. **The maker check is in** (§7.4): the Inbox's *Maker check…* makes the chapter
+> of one submission with the same compile (`onlySid`), opens it for the usual PDF export, prepares the mail to the
+> address the maker gave (`makerAddressOf`, `makerCheckMailLink` — the address is percent-encoded, so what a
+> respondent typed cannot add a header to the draft) and sets `maker-check-sent`. The PDF is made with the usual
+> document export, not a second one: that export carries the privacy profile, the classification and the fonts.
 >
 > Written to be **picked up cold**: disk contract, grammar, data shapes, protocol,
 > crypto contract, threat model, phases and open questions are all spelled out.
@@ -1760,7 +1764,7 @@ patterns), `form_answer_safety.dart` (§4.6 rules 1–5), `form_answers.dart`
 an answer that would change the form itself), `form_package.dart` (the plain zip + manifest +
 name grammars, §5.2–§5.4: `buildFormPackage`, the strict `readFormPackage`), `form_review.dart` (the
 organiser's judgement of a received package against the published form, §4.11 run 3),
-`form_register.dart` (the `overview.md` table, §7.3), `form_compile.dart` (chapter template and book, §7.5), `rules_version.dart`,
+`form_register.dart` (the `overview.md` table, §7.3), `form_compile.dart` (chapter template and book, §7.5), `form_maker_check.dart` (maker address and mail link, §7.4), `rules_version.dart`,
 and `test/fixtures/form_vectors.json` (words, characters and patterns; the range, number and date
 vectors still live in the engine's own tests).
 **Still to build:** `form_seal.dart` (age; the only file touching the primitives),
