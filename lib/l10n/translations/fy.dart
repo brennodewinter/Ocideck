@@ -667,6 +667,40 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Verzegeld opslaan…': 'Fersegele bewarje…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'In fersifere bestân (.zip.age) dat allinnich de organisator iepenje kin. Dêrfoar hawwe jo it bondelbestân en de fingerôfdruk út de útnoeging nedich.',
+  'Kies het bundelbestand van de organisator':
+      'Kies it bondelbestân fan de organisator',
+  'Vingerafdruk van de organisator': 'Fingerôfdruk fan de organisator',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Typ de fingerôfdruk út de útnoeging. Hy stiet mei opsetsin net yn it bondelbestân: sa kinne jo neigean fan wa’t it komt.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Dat is gjin fingerôfdruk. Hy bestiet út 52 tekens, meastal yn groepkes fan fjouwer.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Dit bestân is gjin bondel dy’t OciDeck lêze kin.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Dit formulier of dizze bondel is fan in nijere ferzje fan OciDeck. Wurkje OciDeck by.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'De fingerôfdruk past net by dizze bondel: it formulier komt net fan wa’t de útnoeging seit. Kontrolearje de fingerôfdruk en it bondelbestân.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'De hantekening fan de bondel klopt net: hy is feroare of net fan wa’t de fingerôfdruk seit. Freegje de organisator om in nije bondel.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Dizze bondel heart net by dit formulier. Brûk it bondelbestân dat by krekt dit formulier heart.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Dizze bondel is ferrûn. Freegje de organisator om in nije.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Dizze bondel is âlder as in bondel dy’t jo earder fan dizze organisator krigen. Freegje de organisator om de nijste.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'De bondel befettet wat net kin. Freegje de organisator om in nije bondel.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Dit formulier is sluten: de lêste dei wie {datum}. Nim kontakt op mei de organisator.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'De ynstjoering is grutter as de organisator talit ({mb} MB). Helje in foto fuort of meitsje der ien lytser.',
+  'De inzending kon niet worden verzegeld.':
+      'De ynstjoering koe net fersegele wurde.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Fersegele bewarre as {naam}, allinnich te iepenjen troch: {organisatoren}.',
   'Bundel publiceren…': 'Bondel publisearje…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'De bondel is wat in ynstjoerder fan jim redaksje leaut: nei hokker kaai hy fersegelet en by hokker tekst it heart. Hy komt njonken it formulier te stean.',

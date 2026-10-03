@@ -1627,6 +1627,39 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Verzegeld opslaan…': 'Tallenna sinetöitynä…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Salattu tiedosto (.zip.age), jonka vain järjestäjä voi avata. Tarvitset siihen bundle-tiedoston ja kutsun sormenjäljen.',
+  'Kies het bundelbestand van de organisator':
+      'Valitse järjestäjän bundle-tiedosto',
+  'Vingerafdruk van de organisator': 'Järjestäjän sormenjälki',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Kirjoita kutsun sormenjälki. Se ei ole tarkoituksella bundle-tiedostossa: näin voit tarkistaa, keneltä se tulee.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Tuo ei ole sormenjälki. Se on 52 merkkiä pitkä, yleensä neljän ryhmissä.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Tämä tiedosto ei ole bundle, jonka OciDeck osaa lukea.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Tämä lomake tai bundle on OciDeckin uudemmasta versiosta. Päivitä OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Sormenjälki ei sovi tähän bundleen: lomake ei tule siltä, jonka kutsu mainitsee. Tarkista sormenjälki ja bundle-tiedosto.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundlen allekirjoitus ei ole oikea: se on muuttunut tai se ei ole sormenjäljen mainitsemalta. Pyydä järjestäjältä uusi bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Tämä bundle ei kuulu tähän lomakkeeseen. Käytä bundle-tiedostoa, joka kuuluu juuri tähän lomakkeeseen.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Tämä bundle on vanhentunut. Pyydä järjestäjältä uusi.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Tämä bundle on vanhempi kuin bundle, jonka sait aiemmin tältä järjestäjältä. Pyydä järjestäjältä uusin.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle sisältää jotain, mikä ei ole sallittua. Pyydä järjestäjältä uusi bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Tämä lomake on suljettu: viimeinen päivä oli {datum}. Ota yhteyttä järjestäjään.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Lähetys on suurempi kuin järjestäjä sallii ({mb} Mt). Poista valokuva tai pienennä yhtä.',
+  'De inzending kon niet worden verzegeld.': 'Lähetystä ei voitu sinetöidä.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Tallennettu sinetöitynä nimellä {naam}, vain nämä voivat avata sen: {organisatoren}.',
   'Bundel publiceren…': 'Julkaise bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle on se, mihin lomakkeen täyttäjä toimituksestanne luottaa: mille avaimelle hän sinetöi ja mihin tekstiin se kuuluu. Se tallennetaan lomakkeen viereen.',

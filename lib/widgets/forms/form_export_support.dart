@@ -21,6 +21,7 @@ class FormExportSupport {
     required this.recall,
     required this.remember,
     this.clientVersion,
+    this.seal,
   });
 
   /// De front matter van het document; de pagina zelf werkt alleen met de tekst
@@ -47,4 +48,44 @@ class FormExportSupport {
 
   /// Het versienummer van OciDeck voor het manifest; `null` laat het weg.
   final String? clientVersion;
+
+  /// Wat het verzegeld opslaan nodig heeft, of `null` waar dat niet kan (het web: de
+  /// age-bibliotheek draait daar nog niet) — dan is er alleen de gewone zip.
+  final FormSealSupport? seal;
+}
+
+/// Wat de invulpagina nodig heeft om een inzending **verzegeld** op te slaan (FORM_INTAKE.md
+/// §5.1, §5.6): het bundelbestand van de organisator, wat de invuller al van zijn bundels zag
+/// (de pins tegen terugval), en wat hij al intikte voor dit formulier. De vingerafdruk zelf
+/// vraagt de pagina in een venster; die komt nooit uit het bundelbestand.
+class FormSealSupport {
+  const FormSealSupport({
+    required this.pickBundle,
+    required this.readPins,
+    required this.writePins,
+    required this.recall,
+    required this.remember,
+    required this.forget,
+  });
+
+  /// Laat de invuller het bundelbestand kiezen; geeft de hele tekst, of `null` als hij
+  /// annuleert of het niet te lezen is.
+  final Future<String?> Function() pickBundle;
+
+  /// Het hoogste volgnummer dat de invuller per formulier en organisator al zag.
+  final Future<FormBundlePins> Function() readPins;
+
+  /// Bewaart de pins na een bundel die is geloofd.
+  final Future<void> Function(FormBundlePins pins) writePins;
+
+  /// De bundel en vingerafdruk die bij [spec] eerder werkten, of `null`: wat de invuller bij
+  /// een volgende keer niet opnieuw hoeft te kiezen en in te typen.
+  final ({String bundle, String fingerprint})? Function(FormSpec spec) recall;
+
+  /// Onthoudt de bundel en vingerafdruk die tot een verzegelde inzending leidden.
+  final void Function(FormSpec spec, String bundle, String fingerprint)
+  remember;
+
+  /// Vergeet wat bij [spec] onthouden was: het werkte niet meer.
+  final void Function(FormSpec spec) forget;
 }

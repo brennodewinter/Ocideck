@@ -1627,6 +1627,39 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Verzegeld opslaan…': 'Simpan tersegel…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Berkas terenkripsi (.zip.age) yang hanya dapat dibuka penyelenggara. Untuk itu Anda memerlukan berkas bundel dan sidik jari dari undangan.',
+  'Kies het bundelbestand van de organisator':
+      'Pilih berkas bundel penyelenggara',
+  'Vingerafdruk van de organisator': 'Sidik jari penyelenggara',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Ketik sidik jari dari undangan. Sidik jari sengaja tidak ada di berkas bundel: dengan begitu Anda dapat memeriksa dari siapa bundel itu berasal.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Itu bukan sidik jari. Panjangnya 52 karakter, biasanya dalam kelompok empat.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Berkas ini bukan bundel yang dapat dibaca OciDeck.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Formulir atau bundel ini berasal dari OciDeck versi yang lebih baru. Perbarui OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Sidik jari tidak cocok dengan bundel ini: formulir tidak berasal dari pihak yang disebut undangan. Periksa sidik jari dan berkas bundel.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Tanda tangan bundel tidak benar: bundel telah diubah atau bukan dari pihak yang disebut sidik jari. Minta penyelenggara membuat bundel baru.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Bundel ini tidak termasuk formulir ini. Gunakan berkas bundel yang tepat untuk formulir ini.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Bundel ini sudah kedaluwarsa. Minta yang baru kepada penyelenggara.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Bundel ini lebih lama daripada bundel yang sebelumnya Anda terima dari penyelenggara ini. Minta yang terbaru kepada penyelenggara.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundel berisi sesuatu yang tidak diizinkan. Minta penyelenggara membuat bundel baru.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Formulir ini sudah ditutup: hari terakhirnya adalah {datum}. Hubungi penyelenggara.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Kiriman lebih besar daripada yang diizinkan penyelenggara ({mb} MB). Hapus satu foto atau perkecil salah satunya.',
+  'De inzending kon niet worden verzegeld.': 'Kiriman tidak dapat disegel.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Disimpan tersegel sebagai {naam}, hanya dapat dibuka oleh: {organisatoren}.',
   'Bundel publiceren…': 'Terbitkan bundel…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundel adalah apa yang dipercayai pengisi tentang redaksi Anda: ke kunci mana ia menyegel dan teks mana yang menjadi miliknya. Bundel disimpan di samping formulir.',

@@ -1625,6 +1625,39 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Verzegeld opslaan…': 'Saglabāt aizzīmogotu…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifrēts fails (.zip.age), ko var atvērt tikai organizators. Tam jums vajadzīgs bundle fails un pirkstu nospiedums no uzaicinājuma.',
+  'Kies het bundelbestand van de organisator':
+      'Izvēlieties organizatora bundle failu',
+  'Vingerafdruk van de organisator': 'Organizatora pirkstu nospiedums',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Ievadiet pirkstu nospiedumu no uzaicinājuma. Tā tīši nav bundle failā: tā varat pārbaudīt, no kā tas nāk.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Tas nav pirkstu nospiedums. Tas sastāv no 52 rakstzīmēm, parasti pa četrām grupās.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Šis fails nav bundle, ko OciDeck var nolasīt.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Šī veidlapa vai šis bundle ir no jaunākas OciDeck versijas. Atjauniniet OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Pirkstu nospiedums neatbilst šim bundle: veidlapa nenāk no tā, ko norāda uzaicinājums. Pārbaudiet pirkstu nospiedumu un bundle failu.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundle paraksts nav pareizs: tas ir mainīts vai nav no tā, ko norāda pirkstu nospiedums. Lūdziet organizatoram jaunu bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Šis bundle nepieder šai veidlapai. Izmantojiet bundle failu, kas pieder tieši šai veidlapai.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Šī bundle derīgums ir beidzies. Lūdziet organizatoram jaunu.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Šis bundle ir vecāks par bundle, ko iepriekš saņēmāt no šī organizatora. Lūdziet organizatoram jaunāko.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle satur kaut ko nepieļaujamu. Lūdziet organizatoram jaunu bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Šī veidlapa ir slēgta: pēdējā diena bija {datum}. Sazinieties ar organizatoru.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Iesūtījums ir lielāks, nekā organizators atļauj ({mb} MB). Noņemiet fotoattēlu vai samaziniet vienu.',
+  'De inzending kon niet worden verzegeld.': 'Iesūtījumu neizdevās aizzīmogot.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Saglabāts aizzīmogots kā {naam}, atvērt var tikai: {organisatoren}.',
   'Bundel publiceren…': 'Publicēt bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle ir tas, kam aizpildītājs tic par jūsu redakciju: kādai atslēgai aizzīmogot un pie kura teksta tas pieder. To saglabā blakus veidlapai.',

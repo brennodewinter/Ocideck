@@ -1645,6 +1645,40 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Verzegeld opslaan…': 'Ħażen issiġillat…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Fajl ikkriptat (.zip.age) li jista’ jinfetaħ biss mill-organizzatur. Għal dan għandek bżonn il-fajl tal-bundle u l-marka tas-swaba’ mill-istedina.',
+  'Kies het bundelbestand van de organisator':
+      'Agħżel il-fajl tal-bundle tal-organizzatur',
+  'Vingerafdruk van de organisator': 'Marka tas-swaba’ tal-organizzatur',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Ittajpja l-marka tas-swaba’ mill-istedina. Ma hijiex fil-fajl tal-bundle apposta: b’hekk tista’ tivverifika minn ħa tiġi.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Din mhijiex marka tas-swaba’. Hija magħmula minn 52 karattru, normalment f’gruppi ta’ erbgħa.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Dan il-fajl mhuwiex bundle li OciDeck jista’ jaqra.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Din il-formola jew dan il-bundle huma minn verżjoni aktar ġdida ta’ OciDeck. Aġġorna OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Il-marka tas-swaba’ ma taqbilx ma’ dan il-bundle: il-formola ma tiġix minn dak li tgħid l-istedina. Iċċekkja l-marka tas-swaba’ u l-fajl tal-bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Il-firma tal-bundle mhijiex tajba: inbidel jew mhuwiex minn dak li tgħid il-marka tas-swaba’. Itlob lill-organizzatur bundle ġdid.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Dan il-bundle ma jappartjenix lil din il-formola. Uża l-fajl tal-bundle li jappartjeni eżattament lil din il-formola.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Dan il-bundle skada. Itlob wieħed ġdid lill-organizzatur.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Dan il-bundle huwa eqdem minn bundle li rċevejt qabel minn dan l-organizzatur. Itlob l-aħħar wieħed lill-organizzatur.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Il-bundle fih xi ħaġa li ma hijiex permessa. Itlob lill-organizzatur bundle ġdid.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Din il-formola magħluqa: l-aħħar jum kien {datum}. Ikkuntattja lill-organizzatur.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Is-sottomissjoni hija akbar milli jippermetti l-organizzatur ({mb} MB). Neħħi ritratt jew żgħir wieħed.',
+  'De inzending kon niet worden verzegeld.':
+      'Is-sottomissjoni ma setgħetx tiġi ssiġillata.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Maħżun issiġillat bħala {naam}, jista’ jinfetaħ biss minn: {organisatoren}.',
   'Bundel publiceren…': 'Ippubblika bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Il-bundle huwa dak li min jimla l-formola jemmen dwar ir-redazzjoni tagħkom: għal liema ċavetta jissiġilla u lil liema test jappartjeni. Jinħażen ħdejn il-formola.',

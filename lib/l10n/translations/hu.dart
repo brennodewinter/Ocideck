@@ -1629,6 +1629,40 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Verzegeld opslaan…': 'Mentés lezártként…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Titkosított fájl (.zip.age), amelyet csak a szervező tud megnyitni. Ehhez szükséged van a bundle fájlra és a meghívóban lévő ujjlenyomatra.',
+  'Kies het bundelbestand van de organisator':
+      'Válaszd ki a szervező bundle fájlját',
+  'Vingerafdruk van de organisator': 'A szervező ujjlenyomata',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Írd be a meghívóban lévő ujjlenyomatot. A bundle fájlban szándékosan nincs benne: így ellenőrizheted, kitől származik.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Ez nem ujjlenyomat. 52 karakterből áll, általában négyes csoportokban.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Ez a fájl nem olyan bundle, amelyet az OciDeck el tud olvasni.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ez az űrlap vagy bundle az OciDeck újabb verziójából való. Frissítsd az OciDeckot.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Az ujjlenyomat nem illik ehhez a bundle-hez: az űrlap nem attól jön, akit a meghívó megnevez. Ellenőrizd az ujjlenyomatot és a bundle fájlt.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'A bundle aláírása nem helyes: megváltoztatták, vagy nem attól való, akit az ujjlenyomat megnevez. Kérj a szervezőtől új bundle-t.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Ez a bundle nem ehhez az űrlaphoz tartozik. Használd azt a bundle fájlt, amely pontosan ehhez az űrlaphoz tartozik.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Ez a bundle lejárt. Kérj a szervezőtől újat.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Ez a bundle régebbi annál, amelyet korábban kaptál ettől a szervezőtől. Kérd a szervezőtől a legújabbat.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'A bundle valami meg nem engedettet tartalmaz. Kérj a szervezőtől új bundle-t.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Ez az űrlap lezárult: az utolsó nap {datum} volt. Fordulj a szervezőhöz.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'A beküldés nagyobb, mint amit a szervező megenged ({mb} MB). Távolíts el egy fotót, vagy kicsinyíts le egyet.',
+  'De inzending kon niet worden verzegeld.':
+      'A beküldést nem sikerült lezárni.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Lezártként mentve {naam} néven, csak ők nyithatják meg: {organisatoren}.',
   'Bundel publiceren…': 'Bundle közzététele…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'A bundle az, amiben a kitöltő hisz a szerkesztőségetekről: melyik kulcsra zár, és melyik szöveghez tartozik. Az űrlap mellett tárolódik.',

@@ -1633,6 +1633,40 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Verzegeld opslaan…': 'Uložiť zapečatené…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Šifrovaný súbor (.zip.age), ktorý môže otvoriť iba organizátor. Na to potrebujete súbor bundle a odtlačok z pozvánky.',
+  'Kies het bundelbestand van de organisator':
+      'Vyberte súbor bundle organizátora',
+  'Vingerafdruk van de organisator': 'Odtlačok organizátora',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Zadajte odtlačok z pozvánky. V súbore bundle zámerne nie je: tak môžete overiť, od koho pochádza.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'To nie je odtlačok. Má 52 znakov, zvyčajne v skupinách po štyri.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Tento súbor nie je bundle, ktorý by OciDeck vedel prečítať.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Tento formulár alebo bundle je z novšej verzie OciDeck. Aktualizujte OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Odtlačok nezodpovedá tomuto bundle: formulár nepochádza od toho, koho uvádza pozvánka. Skontrolujte odtlačok a súbor bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Podpis bundle nie je správny: bol zmenený alebo nepochádza od toho, koho uvádza odtlačok. Požiadajte organizátora o nový bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Tento bundle nepatrí k tomuto formuláru. Použite súbor bundle, ktorý patrí práve k tomuto formuláru.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Platnosť tohto bundle vypršala. Požiadajte organizátora o nový.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Tento bundle je starší ako bundle, ktorý ste skôr dostali od tohto organizátora. Požiadajte organizátora o najnovší.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle obsahuje niečo neprípustné. Požiadajte organizátora o nový bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Tento formulár je uzavretý: posledný deň bol {datum}. Obráťte sa na organizátora.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Prihláška je väčšia, než organizátor povoľuje ({mb} MB). Odstráňte fotku alebo jednu zmenšite.',
+  'De inzending kon niet worden verzegeld.':
+      'Prihlášku sa nepodarilo zapečatiť.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Uložené zapečatené ako {naam}, otvoriť ho môže iba: {organisatoren}.',
   'Bundel publiceren…': 'Zverejniť bundle…',
   'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
       'Bundle je to, čomu ten, kto vypĺňa, verí o vašej redakcii: ku ktorému kľúču pečatiť a ku ktorému textu patrí. Ukladá sa vedľa formulára.',
