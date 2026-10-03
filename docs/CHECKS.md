@@ -393,6 +393,7 @@ now the only passing state.
 | [`make check-sbom-version`](#make-check-sbom-version) | Every committed SBOM file names the current `pubspec.yaml` version (`X.Y.Z+B`) | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-packages`](#make-check-packages) | Every package under `packages/` is unpublished, named like its directory, free of Flutter and of platform imports (`dart:io`/`ui`/`html`/`js`), on the root's SDK constraint, carries a copy of `LICENSE.md`, is used by the app, and stays under the file-size ceiling with no bare `catch (_)` | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make test-packages`](#make-test-packages) | The tests of every first-party package, in random order, plus its coverage floors (average, every `lib/` file in a test, per file) | ✅ | ✅ | — | local (`check`) |
+| [`make test-age-interop`](#make-test-age-interop) | Builds the pinned reference `age` (Go, network) and runs the interoperability test of the sealing layer against it | — | — | — | manual (phase 3 gate) |
 | [`make check-collab-field-parity`](#make-check-collab-field-parity) | Every field on `Slide` is accounted for in the collaboration surface — synced, deliberately excluded with a reason, or on the shrink-only debt baseline | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-translated-mermaid`](#make-check-translated-mermaid) | No machine-translated `docs/NAME.<lang>.md` carries a `mermaid` diagram byte-identical to the English base | ✅ | ✅ | ✅ | local (`check-full`) |
 | [`make check-untranslated-templates`](#make-check-untranslated-templates) | No `assets/templates/<id>.<lang>.md` carries a line that stands in the English base and not in the Dutch source (two-word threshold, `allowedCognates` exemptions) | ✅ | ✅ | ✅ | local (`check-full`) |
@@ -1003,6 +1004,26 @@ also declares them, but see the [CI note](#continuous-integration).)
   static half is `check-packages`.
 - **Failure means:** a package test failed, the package's `pubspec.lock` drifted
   (run `dart pub get` in the package and commit it), or coverage fell below a floor.
+
+### `make test-age-interop`
+- **Runs:** `GOBIN=.dart_tool/age-bin go install filippo.io/age/cmd/age@$(AGE_VERSION)` (default
+  `v1.3.2`, override with `AGE_VERSION=…`), checks that the built binary is that version, then
+  `dart test test/form_seal_interop_test.dart` in `packages/ocideck_form_core` with `AGE_BIN` pointing
+  at it.
+- **Covers:** the phase 3 gate item of `docs/design/FORM_INTAKE.md` §12 — interoperability of the
+  sealing layer with the **reference** `age`: a package sealed here opens there and the other way
+  round (200 KiB, several chunks); two recipients, each opening it on both sides; a key that is not a
+  recipient opens nothing on either side; a changed or cut-short file (a payload bit, the last byte, a
+  header bit, cut short, cut at a chunk boundary) is refused by both; and what the reference seals at
+  every edge of a 64 KiB chunk (0, 1, 65 535, 65 536, 65 537, 131 071, 131 072, 131 073 bytes) opens
+  here.
+- **Needs** Go and the network (the module and, if needed, a newer Go toolchain are fetched). The
+  binary lands in `.dart_tool/`, which git ignores; nothing is installed system-wide.
+- **Not in any other target, on purpose:** the test **reports "NOT RUN" when the binary is absent**
+  (`markTestSkipped`), which is why `make check` — which has no `age` — shows those cases as skipped
+  and never as passed. This target is the way to turn them into a result.
+- **Failure means:** the two implementations disagree. Read the failing case before anything else; the
+  reference is the specification's author's.
 
 ### OciServe contractpoort (`test/ociserve_api_drift_test.dart`)
 - **Runs:** `flutter test test/ociserve_api_drift_test.dart` (in

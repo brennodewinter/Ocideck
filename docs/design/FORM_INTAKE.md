@@ -985,7 +985,8 @@ points.
 - **Verified against the world, not against ourselves.** Phase 3's gate includes the
   public `age` test vectors and an **interoperability test** with the reference `age`
   binary (seal here / open there and back). Where the binary is absent the gate
-  reports "not run" — it does not pass silently.
+  reports "not run" — it does not pass silently. Run on 2026-10-03 against `age` v1.3.2 (all cases pass);
+  `make test-age-interop` builds the pinned binary and repeats it.
 - **Binding the plaintext to its context.** `age` has no associated data; binding is
   done by the content: after opening, the organiser's client requires
   `manifest.submission_id`, `manifest.form.id`/`version` to equal what it asked for
@@ -1955,8 +1956,14 @@ route is phase 4.
 to copy, the card's fingerprint to read out). The team (§7.6): *Team…* in the Inbox adds an editor from their card
 and the fingerprint typed back, removes one, and `publishFormBundle` lists the owner and the team — with the
 two-key rule (recovery key typed back, **or** an editor in the team).
-**Still to build:** the dossier for the external review, the run against the reference `age` binary, and — phase
-4 — the server and the web respondent.
+**Phase 3's file route is built.** The dossier for the external review is `FORM_INTAKE_REVIEW.md`. The
+**interoperability run with the reference `age`** (§5.6) was done on 2026-10-03 against `age` v1.3.2 and
+passes: round trips over several chunks, two recipients, a key that is not a recipient, a changed or cut-short
+file (refused by both), and plaintexts at every edge of a 64 KiB chunk. `make test-age-interop` repeats it
+(it builds the pinned binary; Go and the network are needed, so it is not part of `make check`, where the
+test still reports "NOT RUN").
+**Still to build:** the **external review itself** (a human step, no date — D7), and — phase 4 — the server
+and the web respondent.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
