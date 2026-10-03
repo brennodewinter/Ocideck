@@ -1626,6 +1626,28 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: förseglat paket öppnat och importerat.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: det här paketet är förseglat, och den här plattformen har ingen nyckelring för redaktionsnyckeln.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: det här paketet är förseglat, och det finns ännu ingen redaktionsnyckel att öppna det med. Skapa en under Redaktionsnyckel… eller återställ den från din återställningsnyckel.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: det här paketet är förseglat, och nyckelringen går inte att läsa. Inget har försökts.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: det här paketet är förseglat, och den sparade redaktionsnyckeln går inte att läsa. Ta bort den under Redaktionsnyckel… och återställ den från din återställningsnyckel.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: det här paketet är inte förseglat för din redaktionsnyckel.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: det här paketet har ändrats eller avbrutits och öppnas inte.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: det här paketet är större än en inlämning kan vara.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: den sparade redaktionsnyckeln är inte en nyckel som OciDeck kan använda.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: inte ett förseglat paket som OciDeck kan läsa.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'En förseglad fil (.zip.age) öppnas med din redaktionsnyckel.',
   'Herstelsleutel controleren': 'Kontrollera återställningsnyckeln',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Redaktionsnyckeln har skapats. Skriv nu ner återställningsnyckeln.',

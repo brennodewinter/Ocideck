@@ -1657,6 +1657,28 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: osclaíodh agus iompórtáladh an pacáiste séalaithe.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: tá an pacáiste seo séalaithe agus níl slabhra eochrach ag an ardán seo don eochair eagarthóireachta.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: tá an pacáiste seo séalaithe agus níl eochair eagarthóireachta ann fós chun é a oscailt. Cruthaigh ceann faoi Eochair eagarthóireachta… nó athchóirigh ó d’eochair athshlánaithe é.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: tá an pacáiste seo séalaithe agus ní féidir an slabhra eochrach a léamh. Níor triaileadh tada.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: tá an pacáiste seo séalaithe agus ní féidir an eochair eagarthóireachta stóráilte a léamh. Scrios faoi Eochair eagarthóireachta… í agus athchóirigh ó d’eochair athshlánaithe í.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: níor séalaíodh an pacáiste seo do d’eochair eagarthóireachta.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: athraíodh an pacáiste seo nó gearradh as é agus ní osclófar é.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: tá an pacáiste seo níos mó ná mar a féadfaidh aighneacht a bheith.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: ní eochair í an eochair eagarthóireachta stóráilte ar féidir le OciDeck úsáid a bhaint aisti.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ní pacáiste séalaithe é a bhfuil OciDeck in ann a léamh.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Osclaítear comhad séalaithe (.zip.age) le d’eochair eagarthóireachta.',
   'Herstelsleutel controleren': 'Seiceáil an eochair athshlánaithe',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Cruthaíodh eochair na heagarthóireachta. Scríobh síos an eochair athshlánaithe anois.',

@@ -827,6 +827,28 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: sealed package opened and imported.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: this package is sealed, and this platform has no keychain for the editorial key.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: this package is sealed and there is no editorial key yet to open it. Create one under Editorial key… or restore it from your recovery key.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: this package is sealed and the keychain cannot be read. Nothing was tried.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: this package is sealed and the stored editorial key cannot be read. Delete it under Editorial key… and restore it from your recovery key.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: this package was not sealed for your editorial key.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: this package has been changed or cut short and will not be opened.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: this package is larger than a submission can be.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: the stored editorial key is not a key OciDeck can use.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: not a sealed package OciDeck can read.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'A sealed file (.zip.age) is opened with your editorial key.',
   'Herstelsleutel controleren': 'Check recovery key',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Editorial key created. Now write down the recovery key.',

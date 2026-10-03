@@ -10,6 +10,14 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De Inbox haalt **verzegelde bestanden** (`.zip.age`) binnen (formaat §5.6/§7.2, fase 3): *Pakketten binnenhalen…* kiest nu ook
+  `.zip.age`, herkent het aan de kop (`looksLikeAge` in `ocideck_form_core`), opent het met de redactiesleutel en laat het daarna
+  door dezelfde keten als een gewoon pakket. Elk bestand krijgt een regel; gaat het niet open dan zegt die waarom en wordt er niets
+  binnengehaald: nog geen redactiesleutel, een sleutelhanger die niet te lezen is (er is dan niets geprobeerd), een beschadigde
+  bewaarde sleutel, een pakket voor andermans sleutel, een veranderd of afgebroken pakket, een te groot pakket, een bestand met
+  pantser of anderszins onleesbaar, en een bestand dat opent maar geen pakket bevat. Een bestand met een `age`-kop gaat nooit naar
+  de zip-lezer en een zip nooit naar de sleutel. 11 nieuwe teksten in 30 talen. Daarbij: de Friese knop *Redactiesleutel
+  aanmaken* stond in de verleden tijd.
 - De **redactiesleutel** staat in de app (formaat §5.9, fase 3): Inbox → *Redactiesleutel…* maakt de age-identiteit en het
   Ed25519-ondertekeningszaad aan in de sleutelhanger, in een zichtbare stap die eerst zegt wat verlies kost, en toont dan de
   herstelsleutel, die je terug moet typen (*gecontroleerd* is wat het publiceren straks vraagt). Herstellen uit de

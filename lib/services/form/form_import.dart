@@ -9,7 +9,8 @@
 // niets wordt stilzwijgend aangenomen en niets stilzwijgend weggegooid (§4.11).
 //
 // Een gewone zip is in de fasen 1 en 2 een toegestane invoer; hij is onderweg niet
-// versleuteld en de Inbox zegt dat.
+// versleuteld en de Inbox zegt dat. Een verzegeld bestand (`.zip.age`, §5.6) gaat eerst
+// door de redactiesleutel (§5.9) en is daarna een gewone zip: vanaf daar is er één keten.
 library;
 
 import 'dart:typed_data';
@@ -17,6 +18,7 @@ import 'dart:typed_data';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import 'form_image_service.dart';
+import 'form_keys.dart';
 import 'form_workspace.dart';
 
 /// De uitkomst van het binnenhalen van één pakket.
@@ -26,9 +28,16 @@ sealed class FormImportOutcome {
 
 /// De inzending staat in de werkmap.
 class FormImported extends FormImportOutcome {
-  const FormImported(this.review, {required this.registerSaved});
+  const FormImported(
+    this.review, {
+    required this.registerSaved,
+    required this.wasSealed,
+  });
 
   final FormReview review;
+
+  /// Het kwam verzegeld binnen en is met de redactiesleutel geopend.
+  final bool wasSealed;
 
   /// Of de rij in het register is gezet. `false` bij een register dat niet te lezen
   /// is of niet te schrijven: de inzending staat er dan wel, en het register is met
@@ -69,8 +78,78 @@ class FormImportFailed extends FormImportOutcome {
   const FormImportFailed();
 }
 
-/// Haalt [bytes] binnen in [workspace]. [now] is de dag van ontvangst (de klok als
+/// Waarom er geen redactiesleutel is om een verzegeld bestand mee te openen.
+enum FormImportKeyProblem {
+  /// Dit platform heeft geen sleutelhanger.
+  unavailable,
+
+  /// Er is nog geen redactiesleutel aangemaakt of hersteld.
+  absent,
+
+  /// De sleutelhanger gaf geen antwoord: wat erin staat is onbekend.
+  unreadable,
+
+  /// Er staat iets, maar het is geen redactiesleutel van deze versie.
+  damaged,
+}
+
+/// Het bestand is verzegeld en er is geen sleutel om het mee te openen. Er is niets
+/// geprobeerd en niets geland.
+class FormImportNeedsKey extends FormImportOutcome {
+  const FormImportNeedsKey(this.problem);
+
+  final FormImportKeyProblem problem;
+}
+
+/// Het bestand is verzegeld en ging niet open (of niet voor deze sleutel), zie [issue].
+/// Er is niets geland. Een bestand dat opende maar geen pakket bleek, is een
+/// [FormImportNotAPackage].
+class FormImportNotOpened extends FormImportOutcome {
+  const FormImportNotOpened(this.issue);
+
+  final FormUnsealIssue issue;
+}
+
+/// Haalt het bestand [bytes] binnen: een gewone zip, of een verzegeld bestand dat met de
+/// redactiesleutel uit [keys] wordt geopend. [now] is de dag van ontvangst (de klok als
 /// naad voor de test).
+///
+/// Een verzegeld bestand wordt nooit aan de zip-lezer gegeven en een zip nooit aan de
+/// sleutel: wat er aan de kop uitziet als age, is verzegeld ([looksLikeAge]).
+Future<FormImportOutcome> importFormFile(
+  FormWorkspace workspace,
+  Uint8List bytes, {
+  required DateTime now,
+  required FormKeyService keys,
+}) async {
+  if (!looksLikeAge(bytes)) {
+    return importFormPackage(workspace, bytes, now: now);
+  }
+  final String identity;
+  switch (await keys.read()) {
+    case FormKeyPresent(:final key):
+      identity = key.ageIdentity;
+    case FormKeyUnavailable():
+      return const FormImportNeedsKey(FormImportKeyProblem.unavailable);
+    case FormKeyAbsent():
+      return const FormImportNeedsKey(FormImportKeyProblem.absent);
+    case FormKeyUnreadable():
+      return const FormImportNeedsKey(FormImportKeyProblem.unreadable);
+    case FormKeyDamaged():
+      return const FormImportNeedsKey(FormImportKeyProblem.damaged);
+  }
+  final opened = await openSealedPackage(bytes, identities: [identity]);
+  switch (opened) {
+    case FormUnsealRefused(issue: FormUnsealIssue.notAPackage, :final problems):
+      return FormImportNotAPackage(problems);
+    case FormUnsealRefused(:final issue):
+      return FormImportNotOpened(issue);
+    case FormUnsealed(:final package):
+      return _importOpened(workspace, package, now: now, wasSealed: true);
+  }
+}
+
+/// Haalt [bytes], een gewone zip, binnen in [workspace].
 Future<FormImportOutcome> importFormPackage(
   FormWorkspace workspace,
   Uint8List bytes, {
@@ -78,8 +157,20 @@ Future<FormImportOutcome> importFormPackage(
 }) async {
   final read = readFormPackage(bytes);
   if (read is FormPackageRefused) return FormImportNotAPackage(read.problems);
-  final package = read as FormPackageOpened;
+  return _importOpened(
+    workspace,
+    read as FormPackageOpened,
+    now: now,
+    wasSealed: false,
+  );
+}
 
+Future<FormImportOutcome> _importOpened(
+  FormWorkspace workspace,
+  FormPackageOpened package, {
+  required DateTime now,
+  required bool wasSealed,
+}) async {
   final published = await workspace.publishedForms();
   final review = reviewFormPackage(package, [
     for (final form in published.forms) form.text,
@@ -98,6 +189,7 @@ Future<FormImportOutcome> importFormPackage(
   return FormImported(
     review,
     registerSaved: await _register(workspace, spec, review, now),
+    wasSealed: wasSealed,
   );
 }
 

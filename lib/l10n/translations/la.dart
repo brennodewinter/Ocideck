@@ -1642,6 +1642,28 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: fasciculus obsignatus apertus et importatus est.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: hic fasciculus obsignatus est, et haec platea circulum clavium pro clave redactionis non habet.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: hic fasciculus obsignatus est, et nondum est clavis redactionis qua aperiatur. Unam sub Clavis redactionis… crea, vel ex clave recuperationis tua restitue.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: hic fasciculus obsignatus est, et circulus clavium legi non potest. Nihil temptatum est.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: hic fasciculus obsignatus est, et clavis redactionis servata legi non potest. Eam sub Clavis redactionis… dele et ex clave recuperationis tua restitue.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: hic fasciculus pro clave redactionis tua obsignatus non est.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: hic fasciculus mutatus vel abscissus est et non aperietur.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: hic fasciculus maior est quam missum esse potest.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: clavis redactionis servata non est clavis qua OciDeck uti possit.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: non est fasciculus obsignatus quem OciDeck legere possit.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Fasciculus obsignatus (.zip.age) clave redactionis tua aperitur.',
   'Herstelsleutel controleren': 'Clavem recuperationis probare',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Clavis redactionis creata est. Nunc clavem recuperationis scribe.',

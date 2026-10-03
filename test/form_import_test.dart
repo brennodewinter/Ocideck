@@ -2,15 +2,19 @@
 // lezen, decoderen, beoordelen, landen en registreren, en wat er van elke schakel
 // overblijft als hij weigert.
 
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/form/form_import.dart';
+import 'package:ocideck/services/form/form_keys.dart';
 import 'package:ocideck/services/form/form_workspace.dart';
+import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 
+import 'support/form_key_vault.dart';
 import 'support/form_photo_fixtures.dart';
 import 'support/temp_dir.dart';
 
@@ -268,4 +272,179 @@ void main() {
       );
     },
   );
+
+  group('verzegeld', () {
+    late FormKeyVault vault;
+    late FormKeyService keys;
+    late FormKeyInfo mine;
+    setUp(() async {
+      vault = FormKeyVault();
+      keys = FormKeyService(SecretStore(storage: vault, canStore: true));
+      mine = ((await keys.create()) as FormKeyWritten).info;
+    });
+
+    Future<Uint8List> sealedFor(String recipient, {Uint8List? zip}) async =>
+        (await sealFormPackage(zip ?? zipOf(), recipients: [recipient])
+                as FormSealed)
+            .bytes;
+
+    Future<FormImportOutcome> import(Uint8List bytes, {FormKeyService? use}) =>
+        importFormFile(workspace, bytes, now: now, keys: use ?? keys);
+
+    test(
+      'een pakket voor mijn sleutel opent en komt binnen als een gewoon',
+      () async {
+        final outcome =
+            await import(await sealedFor(mine.recipient)) as FormImported;
+        expect(outcome.wasSealed, isTrue);
+        expect(outcome.sid, sid);
+        expect(outcome.registerSaved, isTrue);
+        expect(await workspace.submissionIds(), [sid]);
+        final row = (await register()).row(sid)!;
+        expect(row.status, 'received');
+        expect(row.valueOf('naam'), 'Sari');
+      },
+    );
+
+    test(
+      'een gewone zip gaat langs de oude weg, zonder sleutel te vragen',
+      () async {
+        final nokey = FormKeyService(
+          SecretStore(storage: FormKeyVault(), canStore: true),
+        );
+        final outcome = await import(zipOf(), use: nokey) as FormImported;
+        expect(outcome.wasSealed, isFalse);
+        expect(await workspace.submissionIds(), [sid]);
+      },
+    );
+
+    test(
+      'een verzegeld pakket met fouten komt er wel in, als needs-fixing',
+      () async {
+        final outcome =
+            await import(await sealedFor(mine.recipient, zip: zipOf(naam: '')))
+                as FormImported;
+        expect(outcome.wasSealed, isTrue);
+        expect(outcome.needsFixing, isTrue);
+        expect((await register()).row(sid)!.status, kFormStateNeedsFixing);
+      },
+    );
+
+    test(
+      'verzegeld voor een ander: niets landt en het zegt dat het de verkeerde sleutel is',
+      () async {
+        final other =
+            (await FormKeyService(
+                      SecretStore(storage: FormKeyVault(), canStore: true),
+                    ).create()
+                    as FormKeyWritten)
+                .info;
+        final outcome = await import(await sealedFor(other.recipient));
+        expect(
+          (outcome as FormImportNotOpened).issue,
+          FormUnsealIssue.noIdentityMatched,
+        );
+        expect(await workspace.submissionIds(), isEmpty);
+        expect(await workspace.readRegister(), isNull);
+      },
+    );
+
+    test('een veranderd pakket gaat niet open en laat niets achter', () async {
+      final bytes = await sealedFor(mine.recipient);
+      bytes[bytes.length - 1] ^= 1;
+      final outcome = await import(bytes);
+      expect((outcome as FormImportNotOpened).issue, FormUnsealIssue.tampered);
+      expect(await workspace.submissionIds(), isEmpty);
+    });
+
+    test('een afgekapt pakket gaat niet open', () async {
+      final bytes = await sealedFor(mine.recipient);
+      final outcome = await import(bytes.sublist(0, bytes.length - 40));
+      expect((outcome as FormImportNotOpened).issue, FormUnsealIssue.tampered);
+    });
+
+    test(
+      'een age-bestand met pantser wordt als zodanig geweigerd, niet als zip',
+      () async {
+        final armored = Uint8List.fromList(
+          '-----BEGIN AGE ENCRYPTED FILE-----\nAAAA\n-----END AGE ENCRYPTED FILE-----\n'
+              .codeUnits,
+        );
+        final outcome = await import(armored);
+        expect((outcome as FormImportNotOpened).issue, FormUnsealIssue.notAge);
+      },
+    );
+
+    test(
+      'een verzegeld bestand dat geen pakket bevat is geen inzendpakket',
+      () async {
+        // Het publieke testbestand van het age-project: voor een bekende sleutel, met als
+        // inhoud geen zip. De sleutel erbij gaat via een herstelsleutel naar de sleutelhanger.
+        final text = latin1.decode(
+          File(
+            'packages/ocideck_form_core/test/fixtures/age_testkit/x25519',
+          ).readAsBytesSync(),
+        );
+        final identity = RegExp(
+          r'^identity: (\S+)$',
+          multiLine: true,
+        ).firstMatch(text)!.group(1)!;
+        final file = Uint8List.fromList(
+          latin1.encode(text.substring(text.indexOf('\n\n') + 2)),
+        );
+        final known = FormKeyService(
+          SecretStore(storage: FormKeyVault(), canStore: true),
+        );
+        await known.restore(
+          encodeFormRecoveryKey(
+            signingSeed: Uint8List(32),
+            ageIdentity: identity,
+          ),
+        );
+        final outcome = await import(file, use: known);
+        expect(outcome, isA<FormImportNotAPackage>());
+        expect((outcome as FormImportNotAPackage).problems, isNotEmpty);
+        expect(await workspace.submissionIds(), isEmpty);
+      },
+    );
+
+    group('zonder bruikbare sleutel is er niets geprobeerd', () {
+      late Uint8List sealed;
+      setUp(() async => sealed = await sealedFor(mine.recipient));
+
+      Future<void> expectNeedsKey(
+        FormKeyService use,
+        FormImportKeyProblem problem,
+      ) async {
+        final outcome = await import(sealed, use: use);
+        expect((outcome as FormImportNeedsKey).problem, problem);
+        expect(await workspace.submissionIds(), isEmpty);
+        expect(await workspace.readRegister(), isNull);
+      }
+
+      test('er is nog geen sleutel', () async {
+        await expectNeedsKey(
+          FormKeyService(SecretStore(storage: FormKeyVault(), canStore: true)),
+          FormImportKeyProblem.absent,
+        );
+      });
+
+      test('dit platform heeft geen sleutelhanger', () async {
+        await expectNeedsKey(
+          FormKeyService(SecretStore(storage: vault, canStore: false)),
+          FormImportKeyProblem.unavailable,
+        );
+      });
+
+      test('de sleutelhanger geeft geen antwoord', () async {
+        vault.failRead = true;
+        await expectNeedsKey(keys, FormImportKeyProblem.unreadable);
+      });
+
+      test('wat er staat is geen sleutel', () async {
+        vault.data[SecretStore.formEditorialKeyKey] = 'geen sleutel';
+        await expectNeedsKey(keys, FormImportKeyProblem.damaged);
+      });
+    });
+  });
 }

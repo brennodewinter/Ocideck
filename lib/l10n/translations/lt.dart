@@ -1634,6 +1634,28 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: užplombuotas paketas atidarytas ir importuotas.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: šis paketas užplombuotas, o šioje platformoje nėra raktų pakabuko redakcijos raktui.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: šis paketas užplombuotas, ir dar nėra redakcijos rakto jam atidaryti. Sukurkite jį skiltyje Redakcijos raktas… arba atkurkite iš atkūrimo rakto.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: šis paketas užplombuotas, o raktų pakabuko nepavyksta perskaityti. Nieko nebuvo bandyta.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: šis paketas užplombuotas, o išsaugoto redakcijos rakto nepavyksta perskaityti. Ištrinkite jį skiltyje Redakcijos raktas… ir atkurkite iš atkūrimo rakto.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: šis paketas nebuvo užplombuotas jūsų redakcijos raktui.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: šis paketas pakeistas arba nutrauktas ir nebus atidarytas.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: šis paketas didesnis, nei gali būti pateikimas.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: išsaugotas redakcijos raktas nėra raktas, kurį gali naudoti OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: tai nėra užplombuotas paketas, kurį OciDeck gali perskaityti.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Užplombuotas failas (.zip.age) atidaromas jūsų redakcijos raktu.',
   'Herstelsleutel controleren': 'Patikrinti atkūrimo raktą',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Redakcijos raktas sukurtas. Dabar užsirašykite atkūrimo raktą.',

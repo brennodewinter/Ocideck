@@ -664,6 +664,28 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pacchetto sigillato aperto e importato.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: questo pacchetto è sigillato e questa piattaforma non ha un portachiavi per la chiave della redazione.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: questo pacchetto è sigillato e non c\'è ancora una chiave della redazione per aprirlo. Creane una in Chiave della redazione… oppure ripristinala dalla tua chiave di ripristino.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: questo pacchetto è sigillato e il portachiavi non è leggibile. Non è stato provato nulla.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: questo pacchetto è sigillato e la chiave della redazione salvata non è leggibile. Eliminala in Chiave della redazione… e ripristinala dalla tua chiave di ripristino.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: questo pacchetto non è stato sigillato per la tua chiave della redazione.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: questo pacchetto è stato modificato o interrotto e non viene aperto.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: questo pacchetto è più grande di quanto possa essere un invio.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: la chiave della redazione salvata non è una chiave che OciDeck possa usare.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: non è un pacchetto sigillato che OciDeck possa leggere.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Un file sigillato (.zip.age) si apre con la tua chiave della redazione.',
   'Herstelsleutel controleren': 'Verifica la chiave di ripristino',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Chiave della redazione creata. Ora scrivi la chiave di ripristino.',

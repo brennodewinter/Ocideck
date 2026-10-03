@@ -1642,6 +1642,28 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: запечатаний пакет відкрито й імпортовано.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: цей пакет запечатано, а ця платформа не має зв’язки ключів для ключа редакції.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: цей пакет запечатано, і ще немає ключа редакції, щоб його відкрити. Створіть його в розділі Ключ редакції… або відновіть із ключа відновлення.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: цей пакет запечатано, а зв’язку ключів не вдається прочитати. Нічого не пробували.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: цей пакет запечатано, а збережений ключ редакції не вдається прочитати. Видаліть його в розділі Ключ редакції… і відновіть із ключа відновлення.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: цей пакет запечатано не для вашого ключа редакції.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: цей пакет змінено або обірвано, тож його не буде відкрито.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: цей пакет більший, ніж може бути надсилання.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: збережений ключ редакції — не той ключ, яким може скористатися OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: це не запечатаний пакет, який OciDeck може прочитати.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Запечатаний файл (.zip.age) відкривається вашим ключем редакції.',
   'Herstelsleutel controleren': 'Перевірити ключ відновлення',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Ключ редакції створено. Тепер запишіть ключ відновлення.',

@@ -5848,8 +5848,13 @@ filling in a form never needs it). The welcome screen then has an **Inzendingen*
    checked against *this* text — never against the rules the submission itself carries, so a
    respondent's copy that weakened a rule changes nothing. A published version never changes: other
    text under the same id and version is refused; change the form, change its version number.
-3. **Import packages** (*Pakketten binnenhalen…*, the `.zip` files that arrived). A plain zip is not
-   encrypted in transit; the window says so. Each file gets a line: *imported*, *imported, but there
+3. **Import packages** (*Pakketten binnenhalen…*, the `.zip` and `.zip.age` files that arrived). A plain zip is not
+   encrypted in transit; the window says so. A **sealed** file (`.zip.age`) is opened with your editorial key
+   (*Editorial key…*, below) and from there on is an ordinary package — the line says *sealed package opened and
+   imported*. When it cannot be opened the line says why, and nothing is imported: there is no editorial key yet
+   (create or restore one), the keychain cannot be read (nothing was tried), the stored key is damaged, the package
+   was sealed for somebody else's key, or it was changed or cut short. A file with an `age` header is never handed
+   to the zip reader, and a zip is never offered to the key. Each file gets a line: *imported*, *imported, but there
    are points to review*, *already there*, *not a package OciDeck can read*, *form not added* (add it
    first) or *not saved*. Every photo is cleaned again and really decoded; a file that only pretends
    to be a photo is flagged.

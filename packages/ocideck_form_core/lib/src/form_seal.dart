@@ -67,6 +67,25 @@ int maxSealedBytes([FormPackageLimits limits = const FormPackageLimits()]) {
       chunks * _tag;
 }
 
+/// Whether [bytes] announce themselves as an age file — the binary header `age-encryption.org/v1`
+/// or the armor line. It says nothing about whether the file opens: it is how a reader that gets
+/// either a plain zip or a sealed file decides which door to try. An armored file is *refused*
+/// by [openAge] (`notAge`), but it still belongs on the sealed side, where the refusal says so,
+/// rather than being handed to the zip reader as garbage.
+bool looksLikeAge(Uint8List bytes) =>
+    _startsWith(bytes, _ageMagic) || _startsWith(bytes, _ageArmor);
+
+final List<int> _ageMagic = 'age-encryption.org/v1\n'.codeUnits;
+final List<int> _ageArmor = '-----BEGIN AGE ENCRYPTED FILE-----'.codeUnits;
+
+bool _startsWith(Uint8List bytes, List<int> prefix) {
+  if (bytes.length < prefix.length) return false;
+  for (var i = 0; i < prefix.length; i++) {
+    if (bytes[i] != prefix[i]) return false;
+  }
+  return true;
+}
+
 // ── keys ────────────────────────────────────────────────────────────────────
 
 /// A fresh age identity: `AGE-SECRET-KEY-1…`, upper case. It is the secret; the

@@ -5904,8 +5904,14 @@ invullen heeft het nooit nodig). Het beginscherm heeft dan een knop **Inzendinge
    meedraagt, dus een kopie van een invuller waarin een regel is verzwakt verandert niets. Een
    gepubliceerde versie verandert niet meer: een andere tekst onder hetzelfde id en dezelfde versie
    wordt geweigerd; verander je het formulier, verander dan het versienummer.
-3. **Haal pakketten binnen** (*Pakketten binnenhalen…*, de `.zip`-bestanden die zijn aangekomen).
-   Een gewone zip is onderweg niet versleuteld; het venster zegt het. Elk bestand krijgt een regel:
+3. **Haal pakketten binnen** (*Pakketten binnenhalen…*, de `.zip`- en `.zip.age`-bestanden die zijn aangekomen).
+   Een gewone zip is onderweg niet versleuteld; het venster zegt het. Een **verzegeld** bestand (`.zip.age`) wordt met je
+   redactiesleutel geopend (*Redactiesleutel…*, hieronder) en is daarna een gewoon pakket — de regel zegt *verzegeld
+   pakket geopend en binnengehaald*. Gaat het niet open, dan zegt de regel waarom en wordt er niets binnengehaald: er is
+   nog geen redactiesleutel (maak of herstel er een), de sleutelhanger is niet te lezen (er is niets geprobeerd), de
+   bewaarde sleutel is beschadigd, het pakket is voor andermans sleutel verzegeld, of het is veranderd of afgebroken.
+   Een bestand met een `age`-kop gaat nooit naar de zip-lezer, en een zip wordt de sleutel nooit voorgelegd. Elk bestand
+   krijgt een regel:
    *binnengehaald*, *binnengehaald, maar er zijn punten om na te lopen*, *stond er al*, *geen
    inzendpakket dat OciDeck kan lezen*, *formulier niet toegevoegd* (voeg het eerst toe) of *niet
    opgeslagen*. Elke foto wordt opnieuw gezuiverd en echt gedecodeerd; een bestand dat zich alleen

@@ -1628,6 +1628,28 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: zapečetěný balíček otevřen a importován.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: tento balíček je zapečetěný a tato platforma nemá klíčenku pro klíč redakce.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: tento balíček je zapečetěný a zatím neexistuje klíč redakce, kterým by se otevřel. Vytvořte ho v Klíč redakce… nebo ho obnovte ze svého klíče pro obnovení.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: tento balíček je zapečetěný a klíčenku nelze přečíst. Nic nebylo zkoušeno.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: tento balíček je zapečetěný a uložený klíč redakce nelze přečíst. Smažte ho v Klíč redakce… a obnovte ho ze svého klíče pro obnovení.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: tento balíček nebyl zapečetěn pro váš klíč redakce.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: tento balíček byl změněn nebo useknut a nebude otevřen.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: tento balíček je větší, než může odeslání být.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: uložený klíč redakce není klíč, který by OciDeck mohl použít.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: není zapečetěný balíček, který by OciDeck uměl přečíst.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Zapečetěný soubor (.zip.age) se otevírá vaším klíčem redakce.',
   'Herstelsleutel controleren': 'Zkontrolovat klíč pro obnovení',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Klíč redakce byl vytvořen. Teď si zapište klíč pro obnovení.',

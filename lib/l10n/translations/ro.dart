@@ -1643,6 +1643,28 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pachet sigilat deschis și importat.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: acest pachet este sigilat, iar această platformă nu are un breloc de chei pentru cheia redacției.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: acest pachet este sigilat și nu există încă o cheie a redacției cu care să fie deschis. Creează una în Cheia redacției… sau restaureaz-o din cheia de recuperare.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: acest pachet este sigilat, iar brelocul de chei nu poate fi citit. Nu s-a încercat nimic.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: acest pachet este sigilat, iar cheia redacției salvată nu poate fi citită. Șterge-o în Cheia redacției… și restaureaz-o din cheia de recuperare.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: acest pachet nu a fost sigilat pentru cheia ta a redacției.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: acest pachet a fost modificat sau întrerupt și nu va fi deschis.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: acest pachet este mai mare decât poate fi o trimitere.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: cheia redacției salvată nu este o cheie pe care OciDeck o poate folosi.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: nu este un pachet sigilat pe care OciDeck îl poate citi.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Un fișier sigilat (.zip.age) se deschide cu cheia ta a redacției.',
   'Herstelsleutel controleren': 'Verifică cheia de recuperare',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Cheia redacției a fost creată. Notează acum cheia de recuperare.',

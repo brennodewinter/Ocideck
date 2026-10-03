@@ -667,6 +667,28 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam} : paquet scellé ouvert et importé.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam} : ce paquet est scellé et cette plateforme n’a pas de trousseau pour la clé de rédaction.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam} : ce paquet est scellé et il n’y a pas encore de clé de rédaction pour l’ouvrir. Créez-en une sous Clé de rédaction… ou restaurez-la depuis votre clé de récupération.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam} : ce paquet est scellé et le trousseau est illisible. Rien n’a été essayé.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam} : ce paquet est scellé et la clé de rédaction enregistrée est illisible. Supprimez-la sous Clé de rédaction… et restaurez-la depuis votre clé de récupération.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam} : ce paquet n’a pas été scellé pour votre clé de rédaction.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam} : ce paquet a été modifié ou interrompu et ne sera pas ouvert.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam} : ce paquet est plus grand qu’un envoi ne peut l’être.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam} : la clé de rédaction enregistrée n’est pas une clé qu’OciDeck peut utiliser.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam} : pas un paquet scellé qu’OciDeck sait lire.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Un fichier scellé (.zip.age) s’ouvre avec votre clé de rédaction.',
   'Herstelsleutel controleren': 'Vérifier la clé de récupération',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Clé de rédaction créée. Notez maintenant la clé de récupération.',

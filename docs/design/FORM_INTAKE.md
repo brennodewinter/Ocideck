@@ -1879,8 +1879,16 @@ cryptographic primitives (Ed25519 from `package:cryptography`).
 **Built since, in the app:** the organiser's editorial key (§5.9: the keychain, the visible creation
 step, the recovery key typed back, restore, export as an age key file, delete) — Inbox → *Editorial
 key…*.
-**Still to build:** the team of organisers and the two-key rule, publishing a bundle, importing and
-sending sealed files, and the dossier for the external review.
+**Built since, in the Inbox:** importing a sealed file (§7.2): `importFormFile` tells a sealed file from
+a zip by its header (`looksLikeAge`), opens a sealed one with the editorial key through
+`openSealedPackage`, and from there runs the one chain of a plain package. What it refuses, and says
+in a line per file: no key yet, an unreadable keychain (nothing is tried), a damaged stored key, a
+package sealed for another key, a package changed or cut short, one that is too large, an armored or
+otherwise unreadable file, and a file that opens but holds no package. The Inbox does not yet record the
+SHA-256 of the sealed file or mark a *replaced* one (§5.6) — a second file for the same `sid` is simply
+*already there*.
+**Still to build:** the team of organisers and the two-key rule, publishing a bundle, sending sealed
+files, and the dossier for the external review.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip

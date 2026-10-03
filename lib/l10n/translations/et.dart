@@ -1620,6 +1620,28 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pitseeritud pakk avatud ja imporditud.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: see pakk on pitseeritud ja sellel platvormil ei ole toimetuse võtme jaoks võtmehoidjat.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: see pakk on pitseeritud ja selle avamiseks ei ole veel toimetuse võtit. Loo see jaotises Toimetuse võti… või taasta see oma taastevõtmest.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: see pakk on pitseeritud ja võtmehoidjat ei saa lugeda. Midagi ei proovitud.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: see pakk on pitseeritud ja salvestatud toimetuse võtit ei saa lugeda. Kustuta see jaotises Toimetuse võti… ja taasta oma taastevõtmest.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: seda pakki ei ole pitseeritud sinu toimetuse võtmele.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: seda pakki on muudetud või see on katkenud ning seda ei avata.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: see pakk on suurem, kui esitus olla saab.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: salvestatud toimetuse võti ei ole võti, mida OciDeck kasutada saab.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ei ole pitseeritud pakk, mida OciDeck suudab lugeda.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Pitseeritud faili (.zip.age) avatakse sinu toimetuse võtmega.',
   'Herstelsleutel controleren': 'Kontrolli taastevõtit',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Toimetuse võti on loodud. Kirjuta nüüd taastevõti üles.',

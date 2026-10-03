@@ -1645,6 +1645,28 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pakkett issiġillat miftuħ u importat.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: dan il-pakkett huwa ssiġillat u din il-pjattaforma m\'għandhiex keychain taċ-ċavetta tar-redazzjoni.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: dan il-pakkett huwa ssiġillat u għad m\'hemmx ċavetta tar-redazzjoni biex jinfetaħ. Oħloq waħda taħt Ċavetta tar-redazzjoni… jew irkuprha miċ-ċavetta tal-irkupru tiegħek.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: dan il-pakkett huwa ssiġillat u l-keychain ma jistax jinqara. Ma ġie ppruvat xejn.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: dan il-pakkett huwa ssiġillat u ċ-ċavetta tar-redazzjoni maħżuna ma tistax tinqara. Neħħiha taħt Ċavetta tar-redazzjoni… u irkuprha miċ-ċavetta tal-irkupru tiegħek.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: dan il-pakkett ma ġiex issiġillat għaċ-ċavetta tar-redazzjoni tiegħek.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: dan il-pakkett inbidel jew inqata’ u mhux se jinfetaħ.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: dan il-pakkett huwa akbar milli tista’ tkun sottomissjoni.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: iċ-ċavetta tar-redazzjoni maħżuna mhijiex ċavetta li OciDeck jista’ juża.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: mhuwiex pakkett issiġillat li OciDeck jista’ jaqra.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Fajl issiġillat (.zip.age) jinfetaħ biċ-ċavetta tar-redazzjoni tiegħek.',
   'Herstelsleutel controleren': 'Ikkontrolla ċ-ċavetta tal-irkupru',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'L-ċavetta tar-redazzjoni ġiet maħluqa. Issa ikteb iċ-ċavetta tal-irkupru.',

@@ -146,6 +146,55 @@ void main() {
     });
   });
 
+  group('telling a sealed file from a zip', () {
+    test('a sealed file looks like age, the zip it holds does not', () async {
+      final zip = build();
+      final file = sealed(
+        await sealFormPackage(zip, recipients: [alice.recipient]),
+      );
+      expect(looksLikeAge(file.bytes), isTrue);
+      expect(looksLikeAge(zip), isFalse);
+    });
+
+    test(
+      'an armored file belongs on the sealed side, where it is refused',
+      () async {
+        final armored = Uint8List.fromList(
+          '-----BEGIN AGE ENCRYPTED FILE-----\nAAAA\n'.codeUnits,
+        );
+        expect(looksLikeAge(armored), isTrue);
+        expect(
+          refused(
+            await openSealedPackage(armored, identities: [alice.identity]),
+          ),
+          FormUnsealIssue.notAge,
+        );
+      },
+    );
+
+    test('the header must be all there, and from the first byte', () {
+      final magic = 'age-encryption.org/v1\n'.codeUnits;
+      expect(looksLikeAge(Uint8List.fromList(magic)), isTrue);
+      expect(
+        looksLikeAge(Uint8List.fromList(magic.sublist(0, magic.length - 1))),
+        isFalse,
+        reason: 'one byte short is not a header',
+      );
+      expect(looksLikeAge(Uint8List.fromList([0, ...magic])), isFalse);
+      expect(
+        looksLikeAge(Uint8List.fromList('Age-encryption.org/v1\n'.codeUnits)),
+        isFalse,
+        reason: 'the first byte counts',
+      );
+      expect(
+        looksLikeAge(Uint8List.fromList('age-encryption.org/v1X'.codeUnits)),
+        isFalse,
+        reason: 'the last byte counts',
+      );
+      expect(looksLikeAge(Uint8List(0)), isFalse);
+    });
+  });
+
   group('sealing', () {
     test(
       'an age file for X25519 recipients, named after the submission',

@@ -1627,6 +1627,28 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: forseglet pakke åbnet og importeret.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: denne pakke er forseglet, og denne platform har ingen nøglering til redaktionsnøglen.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: denne pakke er forseglet, og der er endnu ingen redaktionsnøgle til at åbne den. Opret en under Redaktionsnøgle… eller gendan den fra din gendannelsesnøgle.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: denne pakke er forseglet, og nøgleringen kan ikke læses. Intet er forsøgt.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: denne pakke er forseglet, og den gemte redaktionsnøgle kan ikke læses. Slet den under Redaktionsnøgle… og gendan den fra din gendannelsesnøgle.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: denne pakke er ikke forseglet til din redaktionsnøgle.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: denne pakke er ændret eller afbrudt og bliver ikke åbnet.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: denne pakke er større, end en indsendelse kan være.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: den gemte redaktionsnøgle er ikke en nøgle, som OciDeck kan bruge.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ikke en forseglet pakke, som OciDeck kan læse.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'En forseglet fil (.zip.age) åbnes med din redaktionsnøgle.',
   'Herstelsleutel controleren': 'Kontrollér gendannelsesnøglen',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Redaktionsnøglen er oprettet. Skriv nu gendannelsesnøglen ned.',

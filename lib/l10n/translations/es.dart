@@ -664,6 +664,28 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: paquete sellado abierto e importado.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: este paquete está sellado y esta plataforma no tiene llavero para la clave de la redacción.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: este paquete está sellado y todavía no hay una clave de la redacción para abrirlo. Crea una en Clave de la redacción… o restáurala desde tu clave de recuperación.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: este paquete está sellado y el llavero no se puede leer. No se ha probado nada.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: este paquete está sellado y la clave de la redacción guardada no se puede leer. Elimínala en Clave de la redacción… y restáurala desde tu clave de recuperación.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: este paquete no se selló para tu clave de la redacción.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: este paquete se ha modificado o cortado y no se abrirá.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: este paquete es más grande de lo que puede ser un envío.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: la clave de la redacción guardada no es una clave que OciDeck pueda usar.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: no es un paquete sellado que OciDeck pueda leer.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Un archivo sellado (.zip.age) se abre con tu clave de la redacción.',
   'Herstelsleutel controleren': 'Comprobar la clave de recuperación',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Clave de la redacción creada. Ahora anota la clave de recuperación.',
