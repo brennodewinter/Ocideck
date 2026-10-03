@@ -2538,6 +2538,30 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Versturen…': 'Gönder…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Hiçbir şeyi e-postayla göndermek zorunda kalmamanız için organizatörün sunucusuna şifreli gönderin.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      '{naam} yayın kuruluna gönderilsin mi? Gönderiniz şifreli olarak {host} adresine gider; yalnızca {namen} açabilir.',
+  'De inzending wordt verstuurd…': 'Gönderi gönderiliyor…',
+  'Je inzending is aangekomen.': 'Gönderiniz ulaştı.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      '{tijd} tarihinde ulaştı. Sorularınız varsa {contact} adresine yazın.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Sunucunun aldığı içeriğin sağlama toplamı {hash} ile başlıyor. Bu konuda yazarsanız belirtin.',
+  'Bewijs bewaren…': 'Makbuzu sakla…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Makbuz, gönderiyi geri çekmek için kullanabileceğiniz sırrı içerir. Güvenli bir yerde saklayın.',
+  'Bewijs opgeslagen als {naam}.': 'Makbuz {naam} olarak kaydedildi.',
+  'Het bewijs kon niet worden opgeslagen.': 'Makbuz kaydedilemedi.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Davet artık geçerli değil: organizatör onu geri çekti veya değiştirdi. Yeni bir davet isteyin.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Sunucu bu gönderiyi çok büyük olduğu için kabul etmiyor. Bir fotoğrafı çıkarın veya birini küçültün.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Sunucu, gönderdiğinizden farklı bir şeyi onayladı. Yeniden deneyin ya da mühürlü gönderiyi kaydedip e-postayla gönderin.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Sunucu gönderiyi reddetti. Daha sonra yeniden deneyin ya da mühürlü gönderiyi kaydedip e-postayla gönderin.',
   'Uitnodiging openen…': 'Daveti aç…',
   'Uitnodiging openen': 'Daveti aç',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

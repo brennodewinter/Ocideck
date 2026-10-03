@@ -204,8 +204,14 @@ It is **an arrival note, not proof against the server**: the server holds its ow
 anything, so it is not signed. The respondent sees the hash and can quote it (FORM_INTAKE.md §5.8). The
 client compares `ciphertext_sha256` with the hash of what it sent; a different one is an error.
 
-*Built:* `IntakeArrivalNote`, `parseIntakeArrivalNote`, `newWithdrawalSecret`, `withdrawalSecretHash`.
-The upload itself — the headers and the streaming — belongs to the transport and the server.
+*Built:* `IntakeArrivalNote`, `parseIntakeArrivalNote`, `newWithdrawalSecret`, `withdrawalSecretHash`; in the app
+`IntakeClient.submit` and **Send…** (`form_send_dialog.dart`). The client sends exactly the headers above, believes the
+note only when it is about this `sid` and the hash of these bytes (otherwise `noteMismatch`), and tells a `200` — the server
+already had it — from a `201`. A retry uses the same `sid`, the same secret and the same bytes.
+
+**The receipt.** What the respondent keeps is `<name>.receipt.json`: `{"v": 1, "host", "fid", "withdrawal_secret",
+"note": {…}}`, read strictly (exactly these members, in the grammars of this document). It carries the host so that a
+withdrawal needs nothing else. Built: `IntakeReceipt`, `parseIntakeReceipt`.
 
 ### 4.4 `POST /v1/submissions/{sid}/withdraw`
 

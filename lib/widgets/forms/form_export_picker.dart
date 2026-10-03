@@ -9,7 +9,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, visibleForTesting;
 import 'package:ocideck_form_core/ocideck_form_core.dart'
-    show FormBundlePins, FormSpec;
+    show FormBundlePins, FormSpec, InviteLink;
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +17,8 @@ import '../../services/download_delivery.dart';
 import '../../services/export_metadata.dart' show kOciDeckVersion;
 import '../../services/file_service.dart' show pickDocumentExportDestination;
 import '../../services/form/form_image_service.dart';
+import '../../services/form/intake/intake_client.dart';
+import '../../services/form/intake/intake_http_factory.dart';
 import '../../utils/atomic_file.dart';
 import 'form_export_support.dart';
 import 'form_text_helpers.dart' show formTextOf;
@@ -28,6 +30,10 @@ final Map<String, String> _publishedForms = {};
 /// De bundel en de vingerafdruk die bij een formulier in deze sessie tot een verzegelde
 /// inzending leidden, per formulier, versie en taal: een tweede inzending vraagt er niet opnieuw om.
 final Map<String, ({String bundle, String fingerprint})> _sealMemory = {};
+
+/// De uitnodiging waarmee een formulier in deze sessie kwam, per formulier, versie en taal: de
+/// plek waar de inzending naartoe kan.
+final Map<String, InviteLink> _inviteMemory = {};
 
 /// Waar de pins staan: per formulier en organisator het hoogste volgnummer dat de invuller zag
 /// (FORM_INTAKE.md §5.1). Blijft over sessies bestaan, anders beschermt het tegen niets.
@@ -48,10 +54,12 @@ void rememberInvitedForm({
   required String template,
   required String bundleText,
   required String fingerprint,
+  required InviteLink invite,
 }) {
   final key = _memoryKey(spec);
   _publishedForms[key] = template;
   _sealMemory[key] = (bundle: bundleText, fingerprint: fingerprint);
+  _inviteMemory[key] = invite;
 }
 
 /// Leegt het geheugen van [formExportSupportFor], voor een test.
@@ -59,6 +67,7 @@ void rememberInvitedForm({
 void debugClearPublishedForms() {
   _publishedForms.clear();
   _sealMemory.clear();
+  _inviteMemory.clear();
 }
 
 /// Waar het opslagvenster naartoe schrijft: een pad, of `null` als de invuller
@@ -85,6 +94,7 @@ FormExportSupport formExportSupportFor({
   Future<String?> Function(String dialogTitle)? pick,
   Future<String?> Function(String dialogTitle)? pickBundle,
   FormExportDestination? destination,
+  IntakeClient? client,
 }) {
   return FormExportSupport(
     frontMatter: frontMatter,
@@ -118,6 +128,13 @@ FormExportSupport formExportSupportFor({
                   fingerprint: fingerprint,
                 ),
             forget: (spec) => _sealMemory.remove(_memoryKey(spec)),
+          ),
+    // Er is geen weg naar een server op het web, en ook geen verzegeling.
+    send: kIsWeb || bundleTitle == null
+        ? null
+        : FormSendSupport(
+            recall: (spec) => _inviteMemory[_memoryKey(spec)],
+            client: client ?? IntakeClient(createIntakeHttp()),
           ),
   );
 }

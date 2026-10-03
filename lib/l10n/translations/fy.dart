@@ -667,6 +667,30 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Versturen…': 'Ferstjoere…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Fersifere ferstjoere nei de server fan de organisator, sadat jo neat hoege te mailen.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Ferstjoere nei de redaksje fan {naam}? Jo ynstjoering giet fersifere nei {host}; allinnich {namen} kinne him iepenje.',
+  'De inzending wordt verstuurd…': 'De ynstjoering wurdt ferstjoerd…',
+  'Je inzending is aangekomen.': 'Jo ynstjoering is oankommen.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Oankommen op {tijd}. Ha jo fragen, skriuw dan nei {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'It kontrolenûmer fan wat de server krige begjint mei {hash}. Neam it as jo der oer skriuwe.',
+  'Bewijs bewaren…': 'Bewiis bewarje…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'It bewiis befettet it geheim wêrmei jo de ynstjoering weromtrekke kinne. Bewarje it op in feilige plak.',
+  'Bewijs opgeslagen als {naam}.': 'Bewiis opslein as {naam}.',
+  'Het bewijs kon niet worden opgeslagen.': 'It bewiis koe net opslein wurde.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'De útnoeging is net mear jildich: de organisator hat him weromlutsen of ferfongen. Freegje om in nije útnoeging.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'De server nimt dizze ynstjoering net oan, om’t se te grut is. Hel in foto fuort of meitsje der ien lytser.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'De server befêstige wat oars as wat jo ferstjoerden. Besykje it opnij, of bewarje de fersegele ynstjoering en mail dy.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'De server wegere de ynstjoering. Besykje it letter opnij, of bewarje de fersegele ynstjoering en mail dy.',
   'Uitnodiging openen…': 'Útnoeging iepenje…',
   'Uitnodiging openen': 'Útnoeging iepenje',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

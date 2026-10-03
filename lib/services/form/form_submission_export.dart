@@ -31,7 +31,12 @@ class FormSubmissionBuilt extends FormSubmissionResult {
     required this.bytes,
     required this.fileName,
     required this.photos,
+    required this.sid,
   });
+
+  /// Het inzendnummer uit het manifest: 26 tekens, zonder tijd erin. Ook de naam waaronder de
+  /// server de inzending kent.
+  final String sid;
 
   /// De zip.
   final Uint8List bytes;
@@ -122,6 +127,7 @@ Future<FormSubmissionResult> buildFormSubmission({
       bytes: bytes,
       fileName: '${fill.spec.id}-${sid.substring(0, 6)}.zip',
       photos: images.length,
+      sid: sid,
     );
   } on ArgumentError catch (e) {
     return FormSubmissionRefused('${e.message}');

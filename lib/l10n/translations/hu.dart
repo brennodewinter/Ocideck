@@ -1629,6 +1629,31 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Versturen…': 'Küldés…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Titkosított küldés a szervező szerverére, hogy ne kelljen semmit e-mailben elküldeni.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Elküldöd {naam} szerkesztőségének? A beküldésed titkosítva megy a(z) {host} címre; csak {namen} nyithatja meg.',
+  'De inzending wordt verstuurd…': 'A beküldés küldése folyamatban…',
+  'Je inzending is aangekomen.': 'A beküldésed megérkezett.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Megérkezett: {tijd}. Ha kérdésed van, írj ide: {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'A szerver által kapott tartalom ellenőrző összege így kezdődik: {hash}. Említsd meg, ha erről írsz.',
+  'Bewijs bewaren…': 'Igazolás mentése…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Az igazolás tartalmazza a titkot, amellyel visszavonhatod a beküldést. Őrizd biztos helyen.',
+  'Bewijs opgeslagen als {naam}.': 'Az igazolás mentve: {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Az igazolást nem sikerült elmenteni.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'A meghívó már nem érvényes: a szervező visszavonta vagy lecserélte. Kérj új meghívót.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'A szerver nem fogadja el ezt a beküldést, mert túl nagy. Vegyél ki egy fotót, vagy kicsinyíts egyet.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'A szerver mást erősített meg, mint amit küldtél. Próbáld újra, vagy mentsd el a lepecsételt beküldést, és küldd el e-mailben.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'A szerver elutasította a beküldést. Próbáld újra később, vagy mentsd el a lepecsételt beküldést, és küldd el e-mailben.',
   'Uitnodiging openen…': 'Meghívó megnyitása…',
   'Uitnodiging openen': 'Meghívó megnyitása',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

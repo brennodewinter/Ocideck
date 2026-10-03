@@ -667,6 +667,31 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Versturen…': 'Envoyer…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Envoyer de façon chiffrée au serveur de l’organisateur, pour ne rien avoir à envoyer par e-mail.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Envoyer à la rédaction de {naam} ? Votre envoi part chiffré vers {host} ; seuls {namen} peuvent l’ouvrir.',
+  'De inzending wordt verstuurd…': 'Envoi en cours…',
+  'Je inzending is aangekomen.': 'Votre envoi est bien arrivé.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Arrivé le {tijd}. Si vous avez des questions, écrivez à {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'La somme de contrôle de ce que le serveur a reçu commence par {hash}. Citez-la si vous écrivez à ce sujet.',
+  'Bewijs bewaren…': 'Conserver le reçu…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Le reçu contient le secret qui permet de retirer l’envoi. Conservez-le en lieu sûr.',
+  'Bewijs opgeslagen als {naam}.': 'Reçu enregistré sous {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Le reçu n’a pas pu être enregistré.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'L’invitation n’est plus valide : l’organisateur l’a retirée ou remplacée. Demandez une nouvelle invitation.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Le serveur n’accepte pas cet envoi parce qu’il est trop volumineux. Retirez une photo ou réduisez-en une.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Le serveur a confirmé autre chose que ce que vous avez envoyé. Réessayez, ou enregistrez l’envoi scellé et envoyez-le par e-mail.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Le serveur a refusé l’envoi. Réessayez plus tard, ou enregistrez l’envoi scellé et envoyez-le par e-mail.',
   'Uitnodiging openen…': 'Ouvrir l’invitation…',
   'Uitnodiging openen': 'Ouvrir l’invitation',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

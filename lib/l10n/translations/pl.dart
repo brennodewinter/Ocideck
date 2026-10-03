@@ -1639,6 +1639,31 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Versturen…': 'Wyślij…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Wyślij zaszyfrowane na serwer organizatora, żeby nie trzeba było nic wysyłać e-mailem.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Wysłać do redakcji {naam}? Twoje zgłoszenie trafi zaszyfrowane do {host}; tylko {namen} mogą je otworzyć.',
+  'De inzending wordt verstuurd…': 'Wysyłanie zgłoszenia…',
+  'Je inzending is aangekomen.': 'Twoje zgłoszenie dotarło.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Dotarło {tijd}. Jeśli masz pytania, napisz na {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Suma kontrolna tego, co otrzymał serwer, zaczyna się od {hash}. Podaj ją, jeśli o tym piszesz.',
+  'Bewijs bewaren…': 'Zachowaj potwierdzenie…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Potwierdzenie zawiera sekret, którym możesz wycofać zgłoszenie. Przechowuj je w bezpiecznym miejscu.',
+  'Bewijs opgeslagen als {naam}.': 'Potwierdzenie zapisano jako {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Nie udało się zapisać potwierdzenia.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Zaproszenie nie jest już ważne: organizator je wycofał lub zastąpił. Poproś o nowe zaproszenie.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Serwer nie przyjmuje tego zgłoszenia, bo jest za duże. Usuń zdjęcie lub zmniejsz jedno z nich.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Serwer potwierdził coś innego niż to, co wysłałeś. Spróbuj ponownie lub zapisz zapieczętowane zgłoszenie i wyślij je e-mailem.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Serwer odrzucił zgłoszenie. Spróbuj ponownie później lub zapisz zapieczętowane zgłoszenie i wyślij je e-mailem.',
   'Uitnodiging openen…': 'Otwórz zaproszenie…',
   'Uitnodiging openen': 'Otwórz zaproszenie',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

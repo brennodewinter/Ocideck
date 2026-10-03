@@ -1655,6 +1655,31 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Versturen…': 'Enviar…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Enviar cifrado para o servidor do organizador, para não ter de enviar nada por e-mail.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Enviar à redação de {naam}? A sua submissão vai cifrada para {host}; só {namen} a podem abrir.',
+  'De inzending wordt verstuurd…': 'A enviar a submissão…',
+  'Je inzending is aangekomen.': 'A sua submissão chegou.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Chegou a {tijd}. Se tiver perguntas, escreva para {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'A soma de verificação do que o servidor recebeu começa por {hash}. Indique-a se escrever sobre isto.',
+  'Bewijs bewaren…': 'Guardar o comprovativo…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'O comprovativo contém o segredo com que pode retirar a submissão. Guarde-o num local seguro.',
+  'Bewijs opgeslagen als {naam}.': 'Comprovativo guardado como {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Não foi possível guardar o comprovativo.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'O convite já não é válido: o organizador retirou-o ou substituiu-o. Peça um novo convite.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'O servidor não aceita esta submissão porque é demasiado grande. Retire uma fotografia ou reduza uma.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'O servidor confirmou algo diferente do que enviou. Tente novamente, ou guarde a submissão selada e envie-a por e-mail.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'O servidor recusou a submissão. Tente novamente mais tarde, ou guarde a submissão selada e envie-a por e-mail.',
   'Uitnodiging openen…': 'Abrir convite…',
   'Uitnodiging openen': 'Abrir convite',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

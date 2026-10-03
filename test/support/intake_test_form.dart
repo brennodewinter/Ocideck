@@ -1,12 +1,15 @@
 // Een formulier met zijn sleutels en bundels, voor de toetsen van het inzendverkeer: wat een
 // organisator publiceert en wat een uitnodiging noemt.
 
+import 'dart:typed_data';
+
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
 import 'fake_intake_server.dart';
 
+export 'fake_intake_server.dart' show kTestInvite;
+
 const String kTestFid = 'mfrggzdfmztwq2lknnwg23tpoa';
-const String kTestInvite = 'nvqwy3dpoixxg5dfonzgc3tjnq';
 
 /// Een sjabloon in [lang], met dezelfde regels in elke taal.
 String templateIn(String lang, {String id = 'kook'}) =>
@@ -57,6 +60,7 @@ class IntakeTestOrganiser {
     String host = 'intake.example.org',
     FormSigningKey? signer,
     String expires = '2027-03-01',
+    String closes = '2027-01-31',
     String? templateOverride,
     DateTime? now,
   }) async {
@@ -74,7 +78,7 @@ class IntakeTestOrganiser {
       bundleSeq: seq,
       expires: expires,
       now: now ?? DateTime.utc(2026, 11, 3),
-      policy: FormBundlePolicy(apiHost: host, closes: '2027-01-31'),
+      policy: FormBundlePolicy(apiHost: host, closes: closes),
     );
     final created = result as FormBundleCreated;
     return IntakeVariant(
@@ -82,6 +86,31 @@ class IntakeTestOrganiser {
       template: templateOverride ?? template,
     );
   }
+}
+
+/// Een verzegeld inzendpakket voor [organiser] onder [sid]: een echte zip in een echt age-bestand,
+/// zoals de server het straks krijgt.
+Future<Uint8List> sealedSubmission(
+  IntakeTestOrganiser organiser, {
+  String sid = 'bcdefghijklmnopqrstuvwxyza',
+  String lang = 'nl',
+  String answer = 'Sari',
+}) async {
+  final template = templateIn(lang);
+  final zip = buildFormPackage(
+    submission: template.replaceFirst(
+      '<!-- answer -->\n<!-- /field id=naam -->',
+      '<!-- answer -->\n$answer\n<!-- /field id=naam -->',
+    ),
+    template: template,
+    spec: (parseForm(template) as ParsedForm).spec,
+    images: const {},
+    submissionId: sid,
+    created: DateTime.utc(2026, 11, 2),
+    clientRules: kFormRulesVersion,
+  );
+  final sealed = await sealFormPackage(zip, recipients: [organiser.age]);
+  return (sealed as FormSealed).bytes;
 }
 
 /// Een server met één formulier in de gegeven talen, klaar voor een uitnodiging. **Eén

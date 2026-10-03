@@ -15,7 +15,8 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/form/form_submission_export.dart';
 import '../../services/form/form_submission_seal.dart';
-import 'form_bundle_issue_text.dart';
+import 'form_seal_outcome_text.dart';
+import 'form_send_flow.dart';
 import 'form_export_support.dart';
 import 'form_fingerprint_dialog.dart';
 
@@ -134,6 +135,38 @@ class _FormExportBarState extends State<FormExportBar> {
     }
   }
 
+  /// De inzending naar de server sturen waar het formulier van de uitnodiging vandaan kwam
+  /// (§6.6). Staat er nog iets open, dan wijst de pagina dat aan, zoals bij het opslaan.
+  Future<void> _sendToServer() async {
+    final fill = widget.fill;
+    if (!fill.canSend) {
+      widget.onBlocked();
+      return;
+    }
+    setState(() => _busy = true);
+    try {
+      final result = await _build(fill, widget.support);
+      if (result == null || !mounted) return;
+      final built = result.built;
+      if (built is! FormSubmissionBuilt) {
+        _reportBuildFailure(built);
+        return;
+      }
+      final problem = await sendFormSubmission(
+        context,
+        support: widget.support,
+        spec: fill.spec,
+        built: built,
+        published: result.published,
+        now: (widget.now ?? DateTime.now)(),
+        saveFile: (name, bytes) => widget.support.save(name, bytes),
+      );
+      if (problem != null && mounted) _say(problem);
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
   Future<void> _sealAndSave(
     FormSealSupport seal,
     FormSubmissionBuilt built,
@@ -161,7 +194,7 @@ class _FormExportBarState extends State<FormExportBar> {
           outcome is FormSealBundleRefused) {
         seal.forget(spec);
       }
-      _say(_sealRefusal(context.l10n, outcome));
+      _say(formSealOutcomeText(context.l10n, outcome));
       return;
     }
     await seal.writePins(outcome.pins);
@@ -177,31 +210,6 @@ class _FormExportBarState extends State<FormExportBar> {
           .replaceAll('{organisatoren}', outcome.organisers.join(', ')),
     );
   }
-
-  /// De zin bij een verzegeling die niet doorging.
-  String _sealRefusal(
-    AppLocalizations l10n,
-    FormSealOutcome outcome,
-  ) => switch (outcome) {
-    FormSealBadFingerprint() => l10n.d(
-      'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.',
-    ),
-    FormSealBundleRefused(:final issue) => formBundleIssueText(l10n, issue),
-    FormSealClosed(:final closes) =>
-      l10n
-          .d(
-            'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.',
-          )
-          .replaceAll('{datum}', closes),
-    FormSealTooLarge(:final cap) =>
-      l10n
-          .d(
-            'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.',
-          )
-          .replaceAll('{mb}', (cap / (1024 * 1024)).toStringAsFixed(1)),
-    FormSealFailed() => l10n.d('De inzending kon niet worden verzegeld.'),
-    FormSubmissionSealed() => '',
-  };
 
   /// Het pakket, met het gepubliceerde formulier waarmee het gebouwd is. `null` als
   /// de invuller geen formulier kiest.
@@ -272,6 +280,22 @@ class _FormExportBarState extends State<FormExportBar> {
             icon: const Icon(Icons.folder_zip_outlined),
             label: Text(l10n.d('Inzending opslaan als zip…')),
           ),
+          if (widget.support.send?.recall(widget.fill.spec) != null) ...[
+            const SizedBox(height: 20),
+            Text(
+              l10n.d(
+                'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.',
+              ),
+              style: theme.textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 12),
+            FilledButton.icon(
+              key: const Key('send-to-server'),
+              onPressed: _busy ? null : _sendToServer,
+              icon: const Icon(Icons.send_outlined),
+              label: Text(l10n.d('Versturen…')),
+            ),
+          ],
           if (widget.support.seal != null) ...[
             const SizedBox(height: 20),
             Text(

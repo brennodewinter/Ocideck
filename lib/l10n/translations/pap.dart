@@ -666,6 +666,30 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Versturen…': 'Manda…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Manda enkriptá pa e server di e organisador, pa bo no tin ku manda nada pa e-mail.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Manda pa e redakshon di {naam}? Bo entrega ta bai enkriptá pa {host}; solamente {namen} por habri\'é.',
+  'De inzending wordt verstuurd…': 'E entrega ta wòrdu manda…',
+  'Je inzending is aangekomen.': 'Bo entrega a yega.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'A yega riba {tijd}. Si bo tin pregunta, skirbi pa {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'E número di kontrol di loke e server a risibí ta kuminsá ku {hash}. Menshon\'é si bo skirbi tokante dje.',
+  'Bewijs bewaren…': 'Warda prueba…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'E prueba ta kontené e sekreto ku bo por usa pa retirá e entrega. Warda\'é na un lugá seguro.',
+  'Bewijs opgeslagen als {naam}.': 'Prueba warda komo {naam}.',
+  'Het bewijs kon niet worden opgeslagen.': 'E prueba no por a wòrdu warda.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'E invitashon no ta balido mas: e organisador a retirá of reemplasá. Pidi un invitashon nobo.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'E server no ta aseptá e entrega akí pasobra e ta muchu grandi. Kita un potrèt of hasi un mas chikitu.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'E server a konfirmá algu otro ku loke bo a manda. Purba di nobo, of warda e entrega sera i manda\'é pa e-mail.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'E server a rechasá e entrega. Purba di nobo mas lat, of warda e entrega sera i manda\'é pa e-mail.',
   'Uitnodiging openen…': 'Habri invitashon…',
   'Uitnodiging openen': 'Habri invitashon',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

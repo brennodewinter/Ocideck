@@ -1652,6 +1652,31 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Versturen…': 'Αποστολή…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Αποστολή κρυπτογραφημένα στον διακομιστή του διοργανωτή, ώστε να μη χρειάζεται να στείλετε τίποτα με email.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Αποστολή στη συντακτική ομάδα του {naam}; Η υποβολή σας πηγαίνει κρυπτογραφημένη στο {host}· μόνο {namen} μπορούν να την ανοίξουν.',
+  'De inzending wordt verstuurd…': 'Η υποβολή αποστέλλεται…',
+  'Je inzending is aangekomen.': 'Η υποβολή σας έφτασε.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Έφτασε στις {tijd}. Αν έχετε ερωτήσεις, γράψτε στο {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Το άθροισμα ελέγχου όσων έλαβε ο διακομιστής ξεκινά με {hash}. Αναφέρετέ το αν γράψετε σχετικά.',
+  'Bewijs bewaren…': 'Φύλαξη απόδειξης…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Η απόδειξη περιέχει το μυστικό με το οποίο μπορείτε να αποσύρετε την υποβολή. Φυλάξτε την σε ασφαλές μέρος.',
+  'Bewijs opgeslagen als {naam}.': 'Η απόδειξη αποθηκεύτηκε ως {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Η απόδειξη δεν μπόρεσε να αποθηκευτεί.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Η πρόσκληση δεν ισχύει πια: ο διοργανωτής την απέσυρε ή την αντικατέστησε. Ζητήστε νέα πρόσκληση.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Ο διακομιστής δεν δέχεται αυτή την υποβολή επειδή είναι πολύ μεγάλη. Αφαιρέστε μια φωτογραφία ή μικρύνετε μία.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Ο διακομιστής επιβεβαίωσε κάτι διαφορετικό από όσα στείλατε. Δοκιμάστε ξανά ή αποθηκεύστε τη σφραγισμένη υποβολή και στείλτε την με email.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Ο διακομιστής απέρριψε την υποβολή. Δοκιμάστε ξανά αργότερα ή αποθηκεύστε τη σφραγισμένη υποβολή και στείλτε την με email.',
   'Uitnodiging openen…': 'Άνοιγμα πρόσκλησης…',
   'Uitnodiging openen': 'Άνοιγμα πρόσκλησης',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

@@ -1633,6 +1633,30 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Versturen…': 'Odoslať…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Odoslať šifrovane na server organizátora, aby ste nemuseli nič posielať e-mailom.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Odoslať redakcii {naam}? Váš príspevok ide šifrovane na {host}; otvoriť ho môžu len {namen}.',
+  'De inzending wordt verstuurd…': 'Príspevok sa odosiela…',
+  'Je inzending is aangekomen.': 'Váš príspevok dorazil.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Dorazilo {tijd}. Ak máte otázky, napíšte na {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Kontrolný súčet toho, čo server prijal, začína na {hash}. Uveďte ho, keď o tom budete písať.',
+  'Bewijs bewaren…': 'Uložiť potvrdenie…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Potvrdenie obsahuje tajomstvo, ktorým môžete príspevok stiahnuť. Uložte ho na bezpečné miesto.',
+  'Bewijs opgeslagen als {naam}.': 'Potvrdenie uložené ako {naam}.',
+  'Het bewijs kon niet worden opgeslagen.': 'Potvrdenie sa nepodarilo uložiť.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Pozvánka už neplatí: organizátor ju stiahol alebo nahradil. Požiadajte o novú pozvánku.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Server tento príspevok neprijíma, pretože je príliš veľký. Odstráňte fotografiu alebo jednu zmenšite.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Server potvrdil niečo iné, než čo ste poslali. Skúste to znova, alebo uložte zapečatený príspevok a pošlite ho e-mailom.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Server príspevok odmietol. Skúste to neskôr znova, alebo uložte zapečatený príspevok a pošlite ho e-mailom.',
   'Uitnodiging openen…': 'Otvoriť pozvánku…',
   'Uitnodiging openen': 'Otvoriť pozvánku',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

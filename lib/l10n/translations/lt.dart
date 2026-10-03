@@ -1634,6 +1634,30 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Versturen…': 'Siųsti…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Siųsti užšifruotą į organizatoriaus serverį, kad nieko nereikėtų siųsti el. paštu.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Siųsti {naam} redakcijai? Jūsų pateikimas keliauja užšifruotas į {host}; atidaryti jį gali tik {namen}.',
+  'De inzending wordt verstuurd…': 'Pateikimas siunčiamas…',
+  'Je inzending is aangekomen.': 'Jūsų pateikimas atkeliavo.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Atkeliavo {tijd}. Jei turite klausimų, rašykite {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Serverio gauto turinio kontrolinė suma prasideda {hash}. Paminėkite ją, jei rašote apie tai.',
+  'Bewijs bewaren…': 'Išsaugoti kvitą…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Kvite yra paslaptis, kuria galite atšaukti pateikimą. Laikykite jį saugioje vietoje.',
+  'Bewijs opgeslagen als {naam}.': 'Kvitas išsaugotas kaip {naam}.',
+  'Het bewijs kon niet worden opgeslagen.': 'Kvito išsaugoti nepavyko.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Kvietimas nebegalioja: organizatorius jį atšaukė arba pakeitė. Paprašykite naujo kvietimo.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Serveris šio pateikimo nepriima, nes jis per didelis. Pašalinkite nuotrauką arba sumažinkite vieną.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Serveris patvirtino ką kita, nei išsiuntėte. Bandykite dar kartą arba išsaugokite užantspauduotą pateikimą ir išsiųskite el. paštu.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Serveris atmetė pateikimą. Bandykite vėliau arba išsaugokite užantspauduotą pateikimą ir išsiųskite el. paštu.',
   'Uitnodiging openen…': 'Atidaryti kvietimą…',
   'Uitnodiging openen': 'Atidaryti kvietimą',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
