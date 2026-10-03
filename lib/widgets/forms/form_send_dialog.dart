@@ -30,8 +30,9 @@ import 'form_send_text.dart';
 typedef FormSaveFile =
     Future<String?> Function(String fileName, Uint8List bytes);
 
-/// Toont het venster en geeft terug of de inzending is aangekomen.
-Future<bool> showFormSendDialog(
+/// Toont het venster. Wat er gebeurde zegt het venster zelf; de aanroeper heeft er niets aan terug
+/// te krijgen.
+Future<void> showFormSendDialog(
   BuildContext context, {
   required InviteLink invite,
   required IntakeClient client,
@@ -40,21 +41,19 @@ Future<bool> showFormSendDialog(
   required String fingerprint,
   required FormSaveFile saveFile,
   Random? random,
-}) async =>
-    await showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => FormSendDialog(
-        invite: invite,
-        client: client,
-        built: built,
-        sealed: sealed,
-        fingerprint: fingerprint,
-        saveFile: saveFile,
-        random: random ?? Random.secure(),
-      ),
-    ) ??
-    false;
+}) => showDialog<void>(
+  context: context,
+  barrierDismissible: false,
+  builder: (_) => FormSendDialog(
+    invite: invite,
+    client: client,
+    built: built,
+    sealed: sealed,
+    fingerprint: fingerprint,
+    saveFile: saveFile,
+    random: random ?? Random.secure(),
+  ),
+);
 
 enum _Step { confirm, sending, done, failed }
 
@@ -245,7 +244,7 @@ class _FormSendDialogState extends State<FormSendDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context, false),
+          onPressed: () => Navigator.pop(context),
           child: Text(l10n.d('Annuleren')),
         ),
         FilledButton(
@@ -309,7 +308,7 @@ class _FormSendDialogState extends State<FormSendDialog> {
           child: Text(l10n.d('Bewijs bewaren…')),
         ),
         FilledButton(
-          onPressed: () => Navigator.pop(context, true),
+          onPressed: () => Navigator.pop(context),
           child: Text(l10n.d('Sluiten')),
         ),
       ],
@@ -344,7 +343,7 @@ class _FormSendDialogState extends State<FormSendDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context, false),
+          onPressed: () => Navigator.pop(context),
           child: Text(l10n.d('Sluiten')),
         ),
         TextButton(

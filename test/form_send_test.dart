@@ -5,6 +5,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
@@ -71,6 +73,7 @@ class _Spy {
   final _World world;
   final List<({String name, Uint8List bytes})> saved = [];
   bool saveThrows = false;
+  Completer<void>? saveGate;
   String? saveAs = 'kook-abcdef.receipt.json';
   FormBundlePins pins = const FormBundlePins();
   int pinWrites = 0;
@@ -91,6 +94,7 @@ class _Spy {
       readImage: (_) async => null,
       pickPublished: () async => null,
       save: (name, bytes) async {
+        await saveGate?.future;
         if (saveThrows) throw const FormatException('schijf vol');
         saved.add((name: name, bytes: bytes));
         return saveAs;
@@ -353,6 +357,66 @@ void main() {
       expect(text('Het bewijs kon niet worden opgeslagen.'), findsOneWidget);
     });
 
+    testWidgets(
+      'het controlegetal is het begin van de hash die de server kreeg',
+      (tester) async {
+        await pump(tester, spy.support());
+        await fillAndSend(tester);
+        await waitFor(tester, find.byKey(const Key('send-arrived')));
+        final hash = world.server.submissions.values.single.hash;
+        expect(
+          find.text(
+            'Het controlegetal van wat de server ontving begint met ${hash.substring(0, 12)}. Noem het als je erover schrijft.',
+          ),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'het venster sluit niet door ernaast te tikken, ook niet tijdens het versturen',
+      (tester) async {
+        world.server.gate = Completer<void>();
+        await pump(tester, spy.support());
+        await fillAndSend(tester);
+        await tester.pump();
+        expect(text('De inzending wordt verstuurd…'), findsOneWidget);
+        await tester.tapAt(const Offset(5, 5));
+        await tester.pump();
+        expect(text('De inzending wordt verstuurd…'), findsOneWidget);
+        world.server.gate!.complete();
+        await waitFor(tester, find.byKey(const Key('send-arrived')));
+        await tester.tapAt(const Offset(5, 5));
+        await tester.pump();
+        expect(find.byKey(const Key('send-arrived')), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'zolang het bewijs wordt opgeslagen kan het niet nog een keer; daarna weer wel',
+      (tester) async {
+        spy.saveGate = Completer<void>();
+        await pump(tester, spy.support());
+        await fillAndSend(tester);
+        await waitFor(tester, find.byKey(const Key('send-arrived')));
+        await tester.tap(find.byKey(const Key('send-receipt')));
+        await tester.pump();
+        TextButton button() =>
+            tester.widget<TextButton>(find.byKey(const Key('send-receipt')));
+        expect(button().onPressed, isNull);
+        spy.saveGate!.complete();
+        await waitFor(tester, find.byKey(const Key('send-saved')));
+        expect(button().onPressed, isNotNull);
+        spy.saveGate = null;
+        await tester.tap(find.byKey(const Key('send-receipt')));
+        await pumpUntil(
+          tester,
+          () => spy.saved.length == 2,
+          reason: 'het bewijs werd niet nog een keer opgeslagen',
+        );
+      },
+    );
+
     testWidgets('annuleren in de bevestiging stuurt niets', (tester) async {
       await pump(tester, spy.support());
       await fillAndSend(tester, confirm: false);
@@ -503,6 +567,33 @@ void main() {
         'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.',
       );
     });
+
+    testWidgets(
+      'zolang het verzegelde bestand wordt opgeslagen is de knop uit',
+      (tester) async {
+        world.server.failWith = IntakeHttpFailure.network;
+        await pump(tester, spy.support());
+        await fillAndSend(tester);
+        await waitFor(tester, find.byKey(const Key('send-failure')));
+        spy.saveGate = Completer<void>();
+        await tester.tap(find.byKey(const Key('send-save-sealed')));
+        await tester.pump();
+        expect(
+          tester
+              .widget<TextButton>(find.byKey(const Key('send-save-sealed')))
+              .onPressed,
+          isNull,
+        );
+        spy.saveGate!.complete();
+        await waitFor(tester, find.byKey(const Key('send-saved')));
+        expect(
+          tester
+              .widget<TextButton>(find.byKey(const Key('send-save-sealed')))
+              .onPressed,
+          isNotNull,
+        );
+      },
+    );
 
     testWidgets(
       'de verzegelde inzending bewaren om te mailen: dezelfde bytes die zijn geprobeerd',
