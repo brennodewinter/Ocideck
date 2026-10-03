@@ -1625,6 +1625,48 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Uitnodiging openen…': 'Atvērt uzaicinājumu…',
+  'Uitnodiging openen': 'Atvērt uzaicinājumu',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Ievietojiet uzaicinājuma saiti, ko saņēmāt no organizatora. Veidlapa tiek ielādēta no servera, kas norādīts saitē.',
+  'Uitnodigingslink': 'Uzaicinājuma saite',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Veidlapa tiks ielādēta no {host}.',
+  'Formulier ophalen': 'Ielādēt veidlapu',
+  'Het formulier wordt opgehaald…': 'Veidlapa tiek ielādēta…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Šī saite nav pilnīga. Palūdziet organizatoram pilnu uzaicinājuma saiti.',
+  'De link moet met https beginnen.': 'Saitei jāsākas ar https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Šī nav uzaicinājuma saite, ko OciDeck pazīst. Palūdziet organizatoram pilnu saiti.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck neveido savienojumu ar šo adresi.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Serveris nosūtīja vairāk, nekā OciDeck pieņem.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nav savienojuma ar {host}. Pārbaudiet interneta savienojumu un mēģiniet vēlāk vēlreiz.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} nav iesniegšanas serveris, ko OciDeck saprot.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Šis serveris ir pārāk vecs šai OciDeck versijai.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Šis serveris ir jaunākas versijas. Atjauniniet OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Šīs veidlapas serverī (vairs) nav. Palūdziet organizatoram jaunu uzaicinājumu.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Serveris ir aizņemts. Mēģiniet vēlāk vēlreiz.',
+  'De server weigerde het verzoek.': 'Serveris noraidīja pieprasījumu.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Serveris nosūtīja veidlapu, ko OciDeck nevar nolasīt.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Veidlapa nepieder serverim no uzaicinājuma. Palūdziet organizatoram jaunu uzaicinājumu.',
+  'Formulier van {naam}': 'Veidlapa no {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Šī veidlapa ir slēgta jaunām iesniegšanām. Sazinieties ar organizatoru.',
+  'Server: {host}': 'Serveris: {host}',
+  'Formulier invullen': 'Aizpildīt veidlapu',
+  'Onbekende taal': 'Nezināma valoda',
+  'Formulier geopend.': 'Veidlapa atvērta.',
   'Team…': 'Komanda…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktori bez jums, kas ir katrā bundle, lai arī viņi varētu atvērt iesūtījumus. Jūs pievienojat kādu ar viņa redaktora karti un vēlreiz ievadāt šīs kartes pirkstu nospiedumu.',

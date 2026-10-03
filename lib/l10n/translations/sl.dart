@@ -1627,6 +1627,47 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Uitnodiging openen…': 'Odpri vabilo…',
+  'Uitnodiging openen': 'Odpri vabilo',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Prilepite povezavo do vabila, ki ste jo prejeli od organizatorja. Obrazec se nato prenese s strežnika, navedenega v povezavi.',
+  'Uitnodigingslink': 'Povezava do vabila',
+  'Het formulier wordt opgehaald bij {host}.': 'Obrazec bo prenesen s {host}.',
+  'Formulier ophalen': 'Prenesi obrazec',
+  'Het formulier wordt opgehaald…': 'Prenašanje obrazca…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Ta povezava ni popolna. Prosite organizatorja za popolno povezavo do vabila.',
+  'De link moet met https beginnen.': 'Povezava se mora začeti s https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'To ni povezava do vabila, ki jo OciDeck pozna. Prosite organizatorja za popolno povezavo.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck se ne povezuje s tem naslovom.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Strežnik je poslal več, kot OciDeck sprejme.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Ni povezave s {host}. Preverite internetno povezavo in poskusite znova pozneje.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} ni strežnik za oddajo, ki ga OciDeck razume.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Ta strežnik je prestar za to različico OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Ta strežnik je novejše različice. Posodobite OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Tega obrazca na strežniku (več) ni. Prosite organizatorja za novo vabilo.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Strežnik je zaseden. Poskusite znova pozneje.',
+  'De server weigerde het verzoek.': 'Strežnik je zavrnil zahtevo.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Strežnik je poslal obrazec, ki ga OciDeck ne more prebrati.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Obrazec ne spada na strežnik iz vabila. Prosite organizatorja za novo vabilo.',
+  'Formulier van {naam}': 'Obrazec od {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Ta obrazec je zaprt za nove oddaje. Obrnite se na organizatorja.',
+  'Server: {host}': 'Strežnik: {host}',
+  'Formulier invullen': 'Izpolni obrazec',
+  'Onbekende taal': 'Neznan jezik',
+  'Formulier geopend.': 'Obrazec je odprt.',
   'Team…': 'Ekipa…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Uredniki poleg tebe, ki so v vsakem bundlu, da lahko tudi oni odpirajo oddaje. Nekoga dodaš z njegovo kartico urednika in ponovno vpišeš prstni odtis te kartice.',

@@ -18,6 +18,8 @@ const unchangedInEnglish = {
   // "Team" is in het Engels en het Nederlands hetzelfde woord (de knop en het venster van de redactie).
   'Team',
   'Team…',
+  // "Server: {host}" is in het Engels en het Nederlands hetzelfde; de andere talen noemen hem anders.
+  'Server: {host}',
   'YYYY-MM-DD',
   '{id} · v{versie}',
   'Marp',

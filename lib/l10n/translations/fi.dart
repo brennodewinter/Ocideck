@@ -1627,6 +1627,48 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Uitnodiging openen…': 'Avaa kutsu…',
+  'Uitnodiging openen': 'Avaa kutsu',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Liitä kutsulinkki, jonka sait järjestäjältä. Lomake haetaan sitten linkissä mainitulta palvelimelta.',
+  'Uitnodigingslink': 'Kutsulinkki',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Lomake haetaan osoitteesta {host}.',
+  'Formulier ophalen': 'Hae lomake',
+  'Het formulier wordt opgehaald…': 'Lomaketta haetaan…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Tämä linkki ei ole täydellinen. Pyydä järjestäjältä täydellinen kutsulinkki.',
+  'De link moet met https beginnen.': 'Linkin on alettava https:llä.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Tämä ei ole kutsulinkki, jonka OciDeck tuntee. Pyydä järjestäjältä täydellinen linkki.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck ei yhdistä tähän osoitteeseen.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Palvelin lähetti enemmän kuin OciDeck hyväksyy.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Ei yhteyttä osoitteeseen {host}. Tarkista internet-yhteytesi ja yritä myöhemmin uudelleen.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} ei ole lähetyspalvelin, jota OciDeck ymmärtää.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Tämä palvelin on liian vanha tälle OciDeckin versiolle.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Tämä palvelin on uudempaa versiota. Päivitä OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Tätä lomaketta ei (enää) ole palvelimella. Pyydä järjestäjältä uusi kutsu.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Palvelin on kiireinen. Yritä myöhemmin uudelleen.',
+  'De server weigerde het verzoek.': 'Palvelin hylkäsi pyynnön.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Palvelin lähetti lomakkeen, jota OciDeck ei voi lukea.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Lomake ei kuulu kutsun palvelimelle. Pyydä järjestäjältä uusi kutsu.',
+  'Formulier van {naam}': 'Lomake: {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Tämä lomake on suljettu uusilta lähetyksiltä. Ota yhteyttä järjestäjään.',
+  'Server: {host}': 'Palvelin: {host}',
+  'Formulier invullen': 'Täytä lomake',
+  'Onbekende taal': 'Tuntematon kieli',
+  'Formulier geopend.': 'Lomake avattu.',
   'Team…': 'Tiimi…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Toimittajat sinun lisäksesi, jotka ovat jokaisessa bundlessa, jotta hekin voivat avata lähetykset. Lisäät jonkun hänen toimittajakortillaan ja kirjoitat kortin sormenjäljen uudelleen.',

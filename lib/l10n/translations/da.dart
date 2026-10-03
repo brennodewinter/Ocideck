@@ -1627,6 +1627,47 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Uitnodiging openen…': 'Åbn invitation…',
+  'Uitnodiging openen': 'Åbn invitation',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Indsæt det invitationslink, du fik af arrangøren. Formularen hentes så fra den server, der står i linket.',
+  'Uitnodigingslink': 'Invitationslink',
+  'Het formulier wordt opgehaald bij {host}.': 'Formularen hentes fra {host}.',
+  'Formulier ophalen': 'Hent formular',
+  'Het formulier wordt opgehaald…': 'Formularen hentes…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Dette link er ikke komplet. Bed arrangøren om det fulde invitationslink.',
+  'De link moet met https beginnen.': 'Linket skal begynde med https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Dette er ikke et invitationslink, som OciDeck kender. Bed arrangøren om det fulde link.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck opretter ikke forbindelse til denne adresse.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Serveren sendte mere, end OciDeck accepterer.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Ingen forbindelse til {host}. Kontrollér din internetforbindelse, og prøv igen senere.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} er ikke en indsendelsesserver, som OciDeck forstår.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Denne server er for gammel til denne version af OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Denne server er fra en nyere version. Opdatér OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Denne formular findes ikke (længere) på serveren. Bed arrangøren om en ny invitation.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Serveren er optaget. Prøv igen senere.',
+  'De server weigerde het verzoek.': 'Serveren afviste anmodningen.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Serveren sendte en formular, som OciDeck ikke kan læse.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Formularen hører ikke til serveren i invitationen. Bed arrangøren om en ny invitation.',
+  'Formulier van {naam}': 'Formular fra {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Denne formular er lukket for nye indsendelser. Kontakt arrangøren.',
+  'Server: {host}': 'Server: {host}',
+  'Formulier invullen': 'Udfyld formularen',
+  'Onbekende taal': 'Ukendt sprog',
+  'Formulier geopend.': 'Formularen er åbnet.',
   'Team…': 'Hold…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktørerne ud over dig, som står i hver bundle, så de også kan åbne indsendelserne. Du tilføjer nogen med deres redaktørkort og skriver kortets fingeraftryk igen.',

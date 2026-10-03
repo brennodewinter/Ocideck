@@ -1627,6 +1627,48 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Uitnodiging openen…': 'Buka undangan…',
+  'Uitnodiging openen': 'Buka undangan',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Tempel tautan undangan yang Anda terima dari penyelenggara. Formulir kemudian diambil dari server yang tertera di tautan.',
+  'Uitnodigingslink': 'Tautan undangan',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Formulir akan diambil dari {host}.',
+  'Formulier ophalen': 'Ambil formulir',
+  'Het formulier wordt opgehaald…': 'Formulir sedang diambil…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Tautan ini tidak lengkap. Minta tautan undangan lengkap kepada penyelenggara.',
+  'De link moet met https beginnen.': 'Tautan harus diawali dengan https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Ini bukan tautan undangan yang dikenal OciDeck. Minta tautan lengkap kepada penyelenggara.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck tidak terhubung ke alamat ini.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Server mengirim lebih dari yang diterima OciDeck.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Tidak ada koneksi ke {host}. Periksa koneksi internet Anda dan coba lagi nanti.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} bukan server pengiriman yang dipahami OciDeck.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Server ini terlalu lama untuk versi OciDeck ini.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Server ini berasal dari versi yang lebih baru. Perbarui OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Formulir ini tidak (lagi) ada di server. Minta undangan baru kepada penyelenggara.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Server sedang sibuk. Coba lagi nanti.',
+  'De server weigerde het verzoek.': 'Server menolak permintaan.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Server mengirim formulir yang tidak dapat dibaca OciDeck.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Formulir ini bukan milik server dalam undangan. Minta undangan baru kepada penyelenggara.',
+  'Formulier van {naam}': 'Formulir dari {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Formulir ini ditutup untuk kiriman baru. Hubungi penyelenggara.',
+  'Server: {host}': 'Server: {host}',
+  'Formulier invullen': 'Isi formulir',
+  'Onbekende taal': 'Bahasa tidak dikenal',
+  'Formulier geopend.': 'Formulir dibuka.',
   'Team…': 'Tim…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktur selain Anda yang ada di setiap bundel, agar mereka juga dapat membuka kiriman. Anda menambahkan seseorang dengan kartu redakturnya dan mengetik ulang sidik jari kartu itu.',

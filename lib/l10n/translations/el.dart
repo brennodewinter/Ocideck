@@ -1652,6 +1652,48 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Uitnodiging openen…': 'Άνοιγμα πρόσκλησης…',
+  'Uitnodiging openen': 'Άνοιγμα πρόσκλησης',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Επικολλήστε τον σύνδεσμο πρόσκλησης που λάβατε από τον διοργανωτή. Η φόρμα ανακτάται τότε από τον διακομιστή που αναγράφεται στον σύνδεσμο.',
+  'Uitnodigingslink': 'Σύνδεσμος πρόσκλησης',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Η φόρμα θα ανακτηθεί από το {host}.',
+  'Formulier ophalen': 'Ανάκτηση φόρμας',
+  'Het formulier wordt opgehaald…': 'Ανάκτηση της φόρμας…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Αυτός ο σύνδεσμος δεν είναι πλήρης. Ζητήστε από τον διοργανωτή τον πλήρη σύνδεσμο πρόσκλησης.',
+  'De link moet met https beginnen.': 'Ο σύνδεσμος πρέπει να αρχίζει με https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Αυτός δεν είναι σύνδεσμος πρόσκλησης που γνωρίζει το OciDeck. Ζητήστε από τον διοργανωτή τον πλήρη σύνδεσμο.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'Το OciDeck δεν συνδέεται σε αυτή τη διεύθυνση.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Ο διακομιστής έστειλε περισσότερα από όσα δέχεται το OciDeck.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Δεν υπάρχει σύνδεση με το {host}. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά αργότερα.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      'Το {host} δεν είναι διακομιστής υποβολών που κατανοεί το OciDeck.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Αυτός ο διακομιστής είναι πολύ παλιός για αυτή την έκδοση του OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Αυτός ο διακομιστής είναι από νεότερη έκδοση. Ενημερώστε το OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Αυτή η φόρμα δεν υπάρχει (πια) στον διακομιστή. Ζητήστε από τον διοργανωτή νέα πρόσκληση.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Ο διακομιστής είναι απασχολημένος. Δοκιμάστε ξανά αργότερα.',
+  'De server weigerde het verzoek.': 'Ο διακομιστής απέρριψε το αίτημα.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Ο διακομιστής έστειλε μια φόρμα που το OciDeck δεν μπορεί να διαβάσει.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Η φόρμα δεν ανήκει στον διακομιστή της πρόσκλησης. Ζητήστε από τον διοργανωτή νέα πρόσκληση.',
+  'Formulier van {naam}': 'Φόρμα από {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Αυτή η φόρμα είναι κλειστή για νέες υποβολές. Επικοινωνήστε με τον διοργανωτή.',
+  'Server: {host}': 'Διακομιστής: {host}',
+  'Formulier invullen': 'Συμπλήρωση της φόρμας',
+  'Onbekende taal': 'Άγνωστη γλώσσα',
+  'Formulier geopend.': 'Η φόρμα άνοιξε.',
   'Team…': 'Ομάδα…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Οι συντάκτες εκτός από εσάς που είναι σε κάθε δέσμη, ώστε να μπορούν κι αυτοί να ανοίγουν τις υποβολές. Προσθέτετε κάποιον με την κάρτα συντάκτη του και πληκτρολογείτε ξανά το δακτυλικό αποτύπωμα της κάρτας.',

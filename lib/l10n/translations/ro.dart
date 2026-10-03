@@ -1643,6 +1643,48 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Uitnodiging openen…': 'Deschide invitația…',
+  'Uitnodiging openen': 'Deschide invitația',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Lipește linkul invitației primit de la organizator. Formularul este apoi preluat de pe serverul indicat în link.',
+  'Uitnodigingslink': 'Linkul invitației',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Formularul va fi preluat de pe {host}.',
+  'Formulier ophalen': 'Preia formularul',
+  'Het formulier wordt opgehaald…': 'Se preia formularul…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Acest link nu este complet. Cere organizatorului linkul complet al invitației.',
+  'De link moet met https beginnen.': 'Linkul trebuie să înceapă cu https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Acesta nu este un link de invitație pe care OciDeck îl cunoaște. Cere organizatorului linkul complet.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck nu se conectează la această adresă.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Serverul a trimis mai mult decât acceptă OciDeck.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nicio conexiune cu {host}. Verifică conexiunea la internet și încearcă din nou mai târziu.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} nu este un server de trimiteri pe care OciDeck îl înțelege.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Acest server este prea vechi pentru această versiune de OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Acest server este dintr-o versiune mai nouă. Actualizează OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Acest formular nu (mai) există pe server. Cere organizatorului o nouă invitație.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Serverul este ocupat. Încearcă din nou mai târziu.',
+  'De server weigerde het verzoek.': 'Serverul a refuzat cererea.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Serverul a trimis un formular pe care OciDeck nu îl poate citi.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Formularul nu aparține serverului din invitație. Cere organizatorului o nouă invitație.',
+  'Formulier van {naam}': 'Formular de la {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Acest formular este închis pentru trimiteri noi. Contactează organizatorul.',
+  'Server: {host}': 'Server: {host}',
+  'Formulier invullen': 'Completează formularul',
+  'Onbekende taal': 'Limbă necunoscută',
+  'Formulier geopend.': 'Formular deschis.',
   'Team…': 'Echipă…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redactorii în afară de tine care sunt în fiecare bundle, ca să poată deschide și ei trimiterile. Adaugi pe cineva cu fișa lui de redactor și tastezi din nou amprenta acelei fișe.',
