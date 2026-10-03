@@ -37,6 +37,7 @@ export 'src/form_rule_values.dart';
 export 'src/form_seal.dart';
 export 'src/form_source.dart';
 export 'src/form_spec.dart';
+export 'src/form_team.dart';
 export 'src/form_template_text.dart';
 export 'src/form_validator.dart';
 export 'src/form_words.dart';
