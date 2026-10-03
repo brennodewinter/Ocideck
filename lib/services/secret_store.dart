@@ -390,6 +390,50 @@ class SecretStore {
     }
   }
 
+  /// Keychain key for the organiser's **editorial key** (FORM_INTAKE.md §5.9): the age
+  /// identity that opens sealed submissions and the Ed25519 seed that signs bundles, as one
+  /// JSON text (`form_keys.dart` reads and writes it). One per installation. Never in the
+  /// prefs domain, never on a platform without a keychain: losing it loses every submission
+  /// that was sealed only to it, and leaking it opens them all.
+  static const String formEditorialKeyKey = 'form_editorial_key';
+
+  Future<void> writeFormEditorialKey(String json) async {
+    _requireStorage('writeFormEditorialKey');
+    try {
+      await _storage.write(key: formEditorialKeyKey, value: json);
+    } catch (e) {
+      logError('SecretStore.writeFormEditorialKey: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  /// The editorial key's JSON, or `null` if the keychain holds none (or this platform has
+  /// no keychain). **A failing keychain throws**, unlike every other read in this class:
+  /// those can say "nothing configured" and let a person type a token again, but this key
+  /// cannot be typed again, and a read that failed and was taken for "there is none" would be
+  /// followed by a *new* key written over the one that could not be read.
+  Future<String?> readFormEditorialKey() async {
+    if (!_canStore) return null;
+    try {
+      return await _storage.read(key: formEditorialKeyKey);
+    } catch (e) {
+      logError('SecretStore.readFormEditorialKey: keychain read failed', e);
+      rethrow;
+    }
+  }
+
+  Future<void> deleteFormEditorialKey() async {
+    if (!_canStore) return;
+    try {
+      await _storage.delete(key: formEditorialKeyKey);
+    } catch (e) {
+      logWarning(
+        'SecretStore.deleteFormEditorialKey: keychain delete failed',
+        e,
+      );
+    }
+  }
+
   /// Keychain-sleutel voor het LibrePlan-wachtwoord van [username] op [baseUrl].
   /// Beide worden genormaliseerd zodat een triviale variatie (trailing slash,
   /// hoofdletters in de host) niet stilletjes een tweede entry maakt. Spiegelt
