@@ -290,7 +290,7 @@ class IntakeInfoRefused extends IntakeInfoResult {
 /// The information document in [text], or why it cannot be used. Members this version does not
 /// know are ignored.
 IntakeInfoResult parseIntakeInfo(String text) {
-  final json = _jsonObject(text);
+  final json = intakeJsonObject(text);
   if (json == null) return const IntakeInfoRefused(IntakeInfoIssue.notInfo);
   final protocol = json['protocol'];
   if (protocol is! int || protocol < 0) {
@@ -364,7 +364,7 @@ class IntakeArrivalNote {
 /// The note in [text], or `null` if it is not a well-formed one. A note whose `sid` or hash is
 /// not the one the client asked about is a different matter, for the caller.
 IntakeArrivalNote? parseIntakeArrivalNote(String text) {
-  final json = _jsonObject(text);
+  final json = intakeJsonObject(text);
   if (json == null) return null;
   final sid = json['sid'];
   final at = json['at'];
@@ -420,11 +420,17 @@ enum IntakeErrorCode {
   /// The form is closed for uploads.
   formClosed('form-closed', 403),
 
+  /// No such path: nothing in this protocol answers there.
+  notFound('not-found', 404),
+
   /// No such form.
   formUnknown('form-unknown', 404),
 
   /// No such submission, or one that was already collected.
   submissionUnknown('submission-unknown', 404),
+
+  /// The path exists and does not answer this method.
+  methodNotAllowed('method-not-allowed', 405),
 
   /// Another body was sent under a `sid` that already holds one.
   submissionConflict('submission-conflict', 409),
@@ -496,7 +502,7 @@ class IntakeError {
 /// with an empty message.
 IntakeError parseIntakeError(int status, String body) {
   final fallback = IntakeErrorCode.forStatus(status);
-  final json = _jsonObject(body);
+  final json = intakeJsonObject(body);
   final error = json?['error'];
   if (error is! Map) return IntakeError(fallback, '');
   final code = error['code'];
@@ -510,9 +516,13 @@ IntakeError parseIntakeError(int status, String body) {
 
 // ── shared reading ──────────────────────────────────────────────────────────
 
-/// The JSON object in [text], or `null` if it is too long, not JSON or not an object.
-Map<String, Object?>? _jsonObject(String text) {
-  if (utf8.encode(text).length > kIntakeMaxJsonBytes) return null;
+/// The JSON object in [text], or `null` if it is longer than [maxBytes] (as UTF-8), not JSON or
+/// not an object.
+Map<String, Object?>? intakeJsonObject(
+  String text, {
+  int maxBytes = kIntakeMaxJsonBytes,
+}) {
+  if (utf8.encode(text).length > maxBytes) return null;
   try {
     final decoded = jsonDecode(text);
     return decoded is Map<String, Object?> ? decoded : null;

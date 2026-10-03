@@ -572,6 +572,8 @@ void main() {
       expect(IntakeErrorCode.requestReplayed.status, 401);
       expect(IntakeErrorCode.notAllowed.status, 403);
       expect(IntakeErrorCode.formClosed.status, 403);
+      expect(IntakeErrorCode.notFound.status, 404);
+      expect(IntakeErrorCode.methodNotAllowed.status, 405);
       expect(IntakeErrorCode.formUnknown.status, 404);
       expect(IntakeErrorCode.submissionUnknown.status, 404);
       expect(IntakeErrorCode.bundleRollback.status, 409);
@@ -591,7 +593,8 @@ void main() {
     test('a bare status stands for the first code that has it', () {
       expect(IntakeErrorCode.forStatus(401), IntakeErrorCode.inviteInvalid);
       expect(IntakeErrorCode.forStatus(403), IntakeErrorCode.notAllowed);
-      expect(IntakeErrorCode.forStatus(404), IntakeErrorCode.formUnknown);
+      expect(IntakeErrorCode.forStatus(404), IntakeErrorCode.notFound);
+      expect(IntakeErrorCode.forStatus(405), IntakeErrorCode.methodNotAllowed);
       expect(
         IntakeErrorCode.forStatus(409),
         IntakeErrorCode.submissionConflict,
@@ -637,7 +640,7 @@ void main() {
         final html = parseIntakeError(502, '<html>Bad gateway</html>');
         expect(html.code, IntakeErrorCode.serverError);
         expect(html.message, '');
-        expect(parseIntakeError(404, '').code, IntakeErrorCode.formUnknown);
+        expect(parseIntakeError(404, '').code, IntakeErrorCode.notFound);
         expect(parseIntakeError(429, '[]').code, IntakeErrorCode.rateLimited);
         expect(
           parseIntakeError(429, '{"error":5}').code,
