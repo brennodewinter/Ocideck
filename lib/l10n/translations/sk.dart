@@ -1633,6 +1633,47 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Uitnodiging openen…': 'Otvoriť pozvánku…',
+  'Uitnodiging openen': 'Otvoriť pozvánku',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Vložte odkaz na pozvánku, ktorý ste dostali od organizátora. Formulár sa potom stiahne zo servera uvedeného v odkaze.',
+  'Uitnodigingslink': 'Odkaz na pozvánku',
+  'Het formulier wordt opgehaald bij {host}.': 'Formulár sa stiahne z {host}.',
+  'Formulier ophalen': 'Stiahnuť formulár',
+  'Het formulier wordt opgehaald…': 'Formulár sa sťahuje…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Tento odkaz nie je úplný. Požiadajte organizátora o úplný odkaz na pozvánku.',
+  'De link moet met https beginnen.': 'Odkaz musí začínať https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Toto nie je odkaz na pozvánku, ktorý OciDeck pozná. Požiadajte organizátora o úplný odkaz.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck sa k tejto adrese nepripája.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Server poslal viac, ako OciDeck prijíma.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Žiadne pripojenie k {host}. Skontrolujte pripojenie na internet a skúste to neskôr znova.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} nie je server na odosielanie, ktorému OciDeck rozumie.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Tento server je príliš starý pre túto verziu OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Tento server je novšej verzie. Aktualizujte OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Tento formulár na serveri (už) neexistuje. Požiadajte organizátora o novú pozvánku.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Server je zaneprázdnený. Skúste to neskôr znova.',
+  'De server weigerde het verzoek.': 'Server požiadavku odmietol.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Server poslal formulár, ktorý OciDeck nedokáže prečítať.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Formulár nepatrí k serveru z pozvánky. Požiadajte organizátora o novú pozvánku.',
+  'Formulier van {naam}': 'Formulár od {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Tento formulár je uzavretý pre nové odoslania. Obráťte sa na organizátora.',
+  'Server: {host}': 'Server: {host}',
+  'Formulier invullen': 'Vyplniť formulár',
+  'Onbekende taal': 'Neznámy jazyk',
+  'Formulier geopend.': 'Formulár otvorený.',
   'Team…': 'Tím…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktori okrem vás, ktorí sú v každom bundle, aby aj oni mohli otvárať odoslania. Niekoho pridáte jeho kartou redaktora a znova zadáte odtlačok tejto karty.',

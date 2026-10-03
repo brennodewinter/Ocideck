@@ -1642,6 +1642,47 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Uitnodiging openen…': 'Відкрити запрошення…',
+  'Uitnodiging openen': 'Відкрити запрошення',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Вставте посилання із запрошенням, яке ви отримали від організатора. Тоді форму буде отримано із сервера, вказаного в посиланні.',
+  'Uitnodigingslink': 'Посилання із запрошенням',
+  'Het formulier wordt opgehaald bij {host}.': 'Форму буде отримано з {host}.',
+  'Formulier ophalen': 'Отримати форму',
+  'Het formulier wordt opgehaald…': 'Отримання форми…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Це посилання неповне. Попросіть в організатора повне посилання із запрошенням.',
+  'De link moet met https beginnen.': 'Посилання має починатися з https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Це не посилання із запрошенням, яке знає OciDeck. Попросіть в організатора повне посилання.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck не підключається до цієї адреси.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Сервер надіслав більше, ніж приймає OciDeck.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Немає з’єднання з {host}. Перевірте підключення до інтернету й спробуйте пізніше.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} — не сервер надсилань, який розуміє OciDeck.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Цей сервер надто старий для цієї версії OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Цей сервер новішої версії. Оновіть OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Цієї форми (вже) немає на сервері. Попросіть в організатора нове запрошення.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Сервер завантажений. Спробуйте пізніше.',
+  'De server weigerde het verzoek.': 'Сервер відхилив запит.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Сервер надіслав форму, яку OciDeck не може прочитати.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Форма не належить серверу із запрошення. Попросіть в організатора нове запрошення.',
+  'Formulier van {naam}': 'Форма від {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Ця форма закрита для нових надсилань. Зверніться до організатора.',
+  'Server: {host}': 'Сервер: {host}',
+  'Formulier invullen': 'Заповнити форму',
+  'Onbekende taal': 'Невідома мова',
+  'Formulier geopend.': 'Форму відкрито.',
   'Team…': 'Команда…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Редактори, крім вас, які є в кожному комплекті, щоб і вони могли відкривати заявки. Ви додаєте когось за його карткою редактора й заново вводите відбиток цієї картки.',

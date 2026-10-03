@@ -1980,8 +1980,10 @@ and the web respondent.
 **Phase 4 has started (2026-10-03):** the protocol is written down (`INTAKE_PROTOCOL.md`) and its pure half is in
 `ocideck_form_core` — the invite link, `GET /v1/info`, the arrival note, the withdrawal secret, the error codes and
 **signed organiser requests** (`intake_protocol.dart`, `intake_request.dart`, tested against
-`test/fixtures/intake_protocol_vectors.json`). The server, the transport in the app and the web respondent are not
-built; the server still waits for a named maintainer (D3).
+`test/fixtures/intake_protocol_vectors.json`). The bodies and routes followed (`intake_bodies.dart`, `intake_routes.dart`). **The respondent's first step is in the app:**
+*Open invitation…* (`IntakeClient.openInvitation`, `PinnedIntakeHttp`) fetches and verifies a form from an invitation link.
+Sending, the outbox, the organiser's side of the server, the server itself and the web respondent are not built; the server
+still waits for a named maintainer (D3), and the owner chose to build the client first (2026-10-03).
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip

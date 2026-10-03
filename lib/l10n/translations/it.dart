@@ -664,6 +664,48 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Uitnodiging openen…': 'Apri invito…',
+  'Uitnodiging openen': 'Apri invito',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Incolla il link dell’invito che hai ricevuto dall’organizzatore. Il modulo viene poi scaricato dal server indicato nel link.',
+  'Uitnodigingslink': 'Link dell’invito',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Il modulo verrà scaricato da {host}.',
+  'Formulier ophalen': 'Scarica il modulo',
+  'Het formulier wordt opgehaald…': 'Il modulo viene scaricato…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Questo link non è completo. Chiedi all’organizzatore il link completo dell’invito.',
+  'De link moet met https beginnen.': 'Il link deve iniziare con https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Questo non è un link di invito che OciDeck conosce. Chiedi all’organizzatore il link completo.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck non si collega a questo indirizzo.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Il server ha inviato più di quanto OciDeck accetta.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nessuna connessione a {host}. Controlla la connessione a internet e riprova più tardi.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} non è un server di invio che OciDeck comprende.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Questo server è troppo vecchio per questa versione di OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Questo server è di una versione più recente. Aggiorna OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Questo modulo non esiste (più) sul server. Chiedi all’organizzatore un nuovo invito.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Il server è occupato. Riprova più tardi.',
+  'De server weigerde het verzoek.': 'Il server ha rifiutato la richiesta.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Il server ha inviato un modulo che OciDeck non riesce a leggere.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Il modulo non appartiene al server dell’invito. Chiedi all’organizzatore un nuovo invito.',
+  'Formulier van {naam}': 'Modulo di {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Questo modulo è chiuso a nuovi invii. Contatta l’organizzatore.',
+  'Server: {host}': 'Server: {host}',
+  'Formulier invullen': 'Compila il modulo',
+  'Onbekende taal': 'Lingua sconosciuta',
+  'Formulier geopend.': 'Modulo aperto.',
   'Team…': 'Team…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'I redattori oltre a te che sono in ogni bundle, così anche loro possono aprire gli invii. Aggiungi qualcuno con la sua scheda del redattore e digiti di nuovo l’impronta digitale di quella scheda.',

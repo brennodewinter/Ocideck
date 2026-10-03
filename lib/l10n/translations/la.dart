@@ -1642,6 +1642,47 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Uitnodiging openen…': 'Invitationem aperire…',
+  'Uitnodiging openen': 'Invitationem aperire',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Nexum invitationis, quem ab ordinatore accepisti, insere. Forma tum ab servo in nexu nominato petitur.',
+  'Uitnodigingslink': 'Nexus invitationis',
+  'Het formulier wordt opgehaald bij {host}.': 'Forma ab {host} petetur.',
+  'Formulier ophalen': 'Formam petere',
+  'Het formulier wordt opgehaald…': 'Forma petitur…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Hic nexus non est integer. Ordinatorem roga ut nexum invitationis integrum det.',
+  'De link moet met https beginnen.': 'Nexus a https incipere debet.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Hic non est nexus invitationis quem OciDeck novit. Ordinatorem roga ut nexum integrum det.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck ad hanc inscriptionem non coniungitur.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Servus plus misit quam OciDeck accipit.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nulla coniunctio cum {host}. Coniunctionem interretialem proba et postea iterum conare.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} non est servus missionum quem OciDeck intellegit.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Hic servus nimis vetus est pro hac versione OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Hic servus ex nova versione est. OciDeck renova.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Haec forma in servo iam non exstat. Ordinatorem roga ut novam invitationem det.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Servus occupatus est. Postea iterum conare.',
+  'De server weigerde het verzoek.': 'Servus petitionem recusavit.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Servus formam misit quam OciDeck legere non potest.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Forma ad servum invitationis non pertinet. Ordinatorem roga ut novam invitationem det.',
+  'Formulier van {naam}': 'Forma ab {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Haec forma novis missionibus clausa est. Ordinatorem adi.',
+  'Server: {host}': 'Servus: {host}',
+  'Formulier invullen': 'Formam complere',
+  'Onbekende taal': 'Lingua ignota',
+  'Formulier geopend.': 'Forma aperta.',
   'Team…': 'Manus…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redactores praeter te qui in omni fasce sunt, ut et ipsi missa aperire possint. Aliquem cum charta redactoris addis et vestigium digitale illius chartae rursus scribis.',

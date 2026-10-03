@@ -2538,6 +2538,48 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Uitnodiging openen…': 'Daveti aç…',
+  'Uitnodiging openen': 'Daveti aç',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Organizatörden aldığınız davet bağlantısını yapıştırın. Form daha sonra bağlantıda belirtilen sunucudan alınır.',
+  'Uitnodigingslink': 'Davet bağlantısı',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Form {host} adresinden alınacak.',
+  'Formulier ophalen': 'Formu al',
+  'Het formulier wordt opgehaald…': 'Form alınıyor…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Bu bağlantı eksik. Organizatörden tam davet bağlantısını isteyin.',
+  'De link moet met https beginnen.': 'Bağlantı https ile başlamalıdır.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Bu, OciDeck’in tanıdığı bir davet bağlantısı değil. Organizatörden tam bağlantıyı isteyin.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck bu adrese bağlanmaz.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Sunucu, OciDeck’in kabul ettiğinden fazlasını gönderdi.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      '{host} ile bağlantı yok. İnternet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host}, OciDeck’in anladığı bir gönderim sunucusu değil.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Bu sunucu, OciDeck’in bu sürümü için çok eski.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Bu sunucu daha yeni bir sürümden. OciDeck’i güncelleyin.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Bu form sunucuda artık yok. Organizatörden yeni bir davet isteyin.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Sunucu meşgul. Daha sonra tekrar deneyin.',
+  'De server weigerde het verzoek.': 'Sunucu isteği reddetti.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Sunucu, OciDeck’in okuyamadığı bir form gönderdi.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Form, davetteki sunucuya ait değil. Organizatörden yeni bir davet isteyin.',
+  'Formulier van {naam}': '{naam} tarafından form',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Bu form yeni gönderimlere kapalı. Organizatörle iletişime geçin.',
+  'Server: {host}': 'Sunucu: {host}',
+  'Formulier invullen': 'Formu doldur',
+  'Onbekende taal': 'Bilinmeyen dil',
+  'Formulier geopend.': 'Form açıldı.',
   'Team…': 'Ekip…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Sizin dışınızda her bundle’da bulunan editörler, böylece onlar da gönderileri açabilir. Birini editör kartıyla eklersiniz ve o kartın parmak izini yeniden yazarsınız.',

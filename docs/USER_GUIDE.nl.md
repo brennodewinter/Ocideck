@@ -5906,6 +5906,19 @@ andere tekst hoort, of is verlopen; het formulier is gesloten (de bundel noemt d
 groter is dan de organisator toestaat. De gewone zip blijft ernaast bestaan. **Niet in de webversie:** de
 versleutelbibliotheek draait daar nog niet, dus daar wordt de knop niet getoond.
 
+**Een uitnodiging openen.** Kreeg je van de organisator een **uitnodigingslink** in plaats van een bestand, kies dan op het
+startscherm **Uitnodiging openen…** (op een computer; in de webversie nog niet). Plak de link — OciDeck heeft hem al ingevuld
+als hij op je klembord stond — en het venster laat zien bij welke server het formulier wordt opgehaald, voor er iets wordt
+gevraagd. Een link zonder de vingerafdruk van de organisator is *niet compleet* en gaat niet verder: vraag om de volledige
+link. OciDeck haalt het formulier dan op en toetst alles wat de server zegt aan de vingerafdruk uit de link: dat het
+formulier echt komt van wie de uitnodiging noemt, dat het precies dit formulier is voor precies deze server, dat het niet
+verlopen is en niet ouder is dan een formulier dat je eerder zag. Pas dan staat er *Formulier van* de naam van de
+organisator, met de vingerafdruk onder *Details*. Komt het formulier in meerdere talen, dan kies je er één; een formulier
+dat gesloten is kun je niet openen. **Formulier invullen** opent het als nieuw document op het tabblad **Invullen**, en
+OciDeck kent het gepubliceerde formulier en de bundel al, dus het opslaan van de inzending — ook verzegeld — vraagt om
+geen bestand en geen vingerafdruk. Een uitnodiging openen stuurt de server niets anders dan twee gewone verzoeken; het
+token en de vingerafdruk uit de link verlaten je computer nooit.
+
 ### Inzendingen ontvangen (organisator)
 
 De andere kant van een formulier is ontvangen wat terugkomt. Dat is een optionele uitbreiding: zet

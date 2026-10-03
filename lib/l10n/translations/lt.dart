@@ -1634,6 +1634,47 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Uitnodiging openen…': 'Atidaryti kvietimą…',
+  'Uitnodiging openen': 'Atidaryti kvietimą',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Įklijuokite kvietimo nuorodą, kurią gavote iš organizatoriaus. Forma tada gaunama iš nuorodoje nurodyto serverio.',
+  'Uitnodigingslink': 'Kvietimo nuoroda',
+  'Het formulier wordt opgehaald bij {host}.': 'Forma bus gauta iš {host}.',
+  'Formulier ophalen': 'Gauti formą',
+  'Het formulier wordt opgehaald…': 'Forma gaunama…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Ši nuoroda nepilna. Paprašykite organizatoriaus visos kvietimo nuorodos.',
+  'De link moet met https beginnen.': 'Nuoroda turi prasidėti https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Tai ne kvietimo nuoroda, kurią OciDeck pažįsta. Paprašykite organizatoriaus visos nuorodos.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck nesijungia prie šio adreso.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Serveris atsiuntė daugiau, nei OciDeck priima.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nėra ryšio su {host}. Patikrinkite interneto ryšį ir pabandykite vėliau.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} nėra pateikimo serveris, kurį OciDeck supranta.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Šis serveris per senas šiai OciDeck versijai.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Šis serveris naujesnės versijos. Atnaujinkite OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Šios formos serveryje (jau) nėra. Paprašykite organizatoriaus naujo kvietimo.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Serveris užimtas. Pabandykite vėliau.',
+  'De server weigerde het verzoek.': 'Serveris atmetė užklausą.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Serveris atsiuntė formą, kurios OciDeck neįstengia perskaityti.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Forma nepriklauso kvietime nurodytam serveriui. Paprašykite organizatoriaus naujo kvietimo.',
+  'Formulier van {naam}': 'Forma nuo {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Ši forma uždaryta naujiems pateikimams. Susisiekite su organizatoriumi.',
+  'Server: {host}': 'Serveris: {host}',
+  'Formulier invullen': 'Užpildyti formą',
+  'Onbekende taal': 'Nežinoma kalba',
+  'Formulier geopend.': 'Forma atidaryta.',
   'Team…': 'Komanda…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Redaktoriai, be jūsų, kurie yra kiekviename bundle, kad ir jie galėtų atidaryti pateikimus. Jūs pridedate ką nors su jo redaktoriaus kortele ir dar kartą įvedate tos kortelės kontrolinį kodą.',

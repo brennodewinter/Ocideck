@@ -1631,6 +1631,48 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Uitnodiging openen…': 'Otvori pozivnicu…',
+  'Uitnodiging openen': 'Otvori pozivnicu',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Zalijepite poveznicu pozivnice koju ste dobili od organizatora. Obrazac se tada dohvaća s poslužitelja navedenog u poveznici.',
+  'Uitnodigingslink': 'Poveznica pozivnice',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Obrazac će se dohvatiti s {host}.',
+  'Formulier ophalen': 'Dohvati obrazac',
+  'Het formulier wordt opgehaald…': 'Dohvaćanje obrasca…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Ova poveznica nije potpuna. Zamolite organizatora za potpunu poveznicu pozivnice.',
+  'De link moet met https beginnen.': 'Poveznica mora počinjati s https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Ovo nije poveznica pozivnice koju OciDeck poznaje. Zamolite organizatora za potpunu poveznicu.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck se ne povezuje s ovom adresom.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Poslužitelj je poslao više nego što OciDeck prihvaća.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Nema veze s {host}. Provjerite internetsku vezu i pokušajte ponovno kasnije.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} nije poslužitelj za slanje koji OciDeck razumije.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Ovaj poslužitelj je prestar za ovu inačicu OciDeck-a.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Ovaj poslužitelj je novije inačice. Ažurirajte OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Ovaj obrazac (više) ne postoji na poslužitelju. Zamolite organizatora za novu pozivnicu.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Poslužitelj je zauzet. Pokušajte ponovno kasnije.',
+  'De server weigerde het verzoek.': 'Poslužitelj je odbio zahtjev.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Poslužitelj je poslao obrazac koji OciDeck ne može pročitati.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Obrazac ne pripada poslužitelju iz pozivnice. Zamolite organizatora za novu pozivnicu.',
+  'Formulier van {naam}': 'Obrazac od {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Ovaj je obrazac zatvoren za nova slanja. Obratite se organizatoru.',
+  'Server: {host}': 'Poslužitelj: {host}',
+  'Formulier invullen': 'Ispuni obrazac',
+  'Onbekende taal': 'Nepoznat jezik',
+  'Formulier geopend.': 'Obrazac je otvoren.',
   'Team…': 'Tim…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Urednici osim tebe koji su u svakom bundleu, da i oni mogu otvarati prijave. Dodaješ nekoga njegovom karticom urednika i ponovno upisuješ otisak prsta te kartice.',

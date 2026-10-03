@@ -1657,6 +1657,47 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Uitnodiging openen…': 'Oscail an cuireadh…',
+  'Uitnodiging openen': 'Oscail an cuireadh',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Greamaigh nasc an chuiridh a fuair tú ón eagraí. Ansin faightear an fhoirm ón bhfreastalaí atá luaite sa nasc.',
+  'Uitnodigingslink': 'Nasc an chuiridh',
+  'Het formulier wordt opgehaald bij {host}.': 'Gheobhaidh an fhoirm ó {host}.',
+  'Formulier ophalen': 'Faigh an fhoirm',
+  'Het formulier wordt opgehaald…': 'An fhoirm á fáil…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Níl an nasc seo iomlán. Iarr ar an eagraí nasc iomlán an chuiridh.',
+  'De link moet met https beginnen.': 'Caithfidh an nasc tosú le https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Ní nasc cuiridh é seo a bhfuil aithne ag OciDeck air. Iarr ar an eagraí an nasc iomlán.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'Ní cheanglaíonn OciDeck leis an seoladh seo.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Sheol an freastalaí níos mó ná mar a ghlacann OciDeck leis.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Gan nasc le {host}. Seiceáil do cheangal idirlín agus bain triail eile as níos déanaí.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      'Ní freastalaí aighneachtaí é {host} a thuigeann OciDeck.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Tá an freastalaí seo róshean don leagan seo de OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Is ó leagan níos nuaí an freastalaí seo. Nuashonraigh OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Níl an fhoirm seo ar an bhfreastalaí (a thuilleadh). Iarr cuireadh nua ar an eagraí.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Tá an freastalaí gnóthach. Bain triail eile as níos déanaí.',
+  'De server weigerde het verzoek.': 'Dhiúltaigh an freastalaí don iarraidh.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Sheol an freastalaí foirm nach féidir le OciDeck a léamh.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Ní bhaineann an fhoirm leis an bhfreastalaí sa chuireadh. Iarr cuireadh nua ar an eagraí.',
+  'Formulier van {naam}': 'Foirm ó {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Tá an fhoirm seo dúnta d’aighneachtaí nua. Téigh i dteagmháil leis an eagraí.',
+  'Server: {host}': 'Freastalaí: {host}',
+  'Formulier invullen': 'Líon an fhoirm',
+  'Onbekende taal': 'Teanga anaithnid',
+  'Formulier geopend.': 'Osclaíodh an fhoirm.',
   'Team…': 'Foireann…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'Na heagarthóirí seachas tú atá i ngach bundle, ionas gur féidir leo siúd na haighneachtaí a oscailt freisin. Cuireann tú duine leis lena chárta eagarthóra agus clóscríobhann tú méarlorg an chárta sin arís.',

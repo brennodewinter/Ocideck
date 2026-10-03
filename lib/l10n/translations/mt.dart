@@ -1645,6 +1645,48 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Uitnodiging openen…': 'Iftaħ l-istedina…',
+  'Uitnodiging openen': 'Iftaħ l-istedina',
+  'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
+      'Waħħal il-link tal-istedina li rċevejt mingħand l-organizzatur. Il-formola mbagħad tinġab mis-server imsemmi fil-link.',
+  'Uitnodigingslink': 'Link tal-istedina',
+  'Het formulier wordt opgehaald bij {host}.':
+      'Il-formola se tinġab minn {host}.',
+  'Formulier ophalen': 'Ġib il-formola',
+  'Het formulier wordt opgehaald…': 'Il-formola qed tinġab…',
+  'Deze link is niet compleet. Vraag de organisator om de volledige uitnodigingslink.':
+      'Dan il-link mhuwiex sħiħ. Staqsi lill-organizzatur għal-link sħiħ tal-istedina.',
+  'De link moet met https beginnen.': 'Il-link irid jibda b’https.',
+  'Dit is geen uitnodigingslink die OciDeck kent. Vraag de organisator om de volledige link.':
+      'Dan mhuwiex link ta’ stedina li OciDeck jaf. Staqsi lill-organizzatur għal-link sħiħ.',
+  'OciDeck maakt geen verbinding met dit adres.':
+      'OciDeck ma jikkonnettjax ma’ dan l-indirizz.',
+  'De server stuurde meer dan OciDeck accepteert.':
+      'Is-server bagħat aktar minn dak li OciDeck jaċċetta.',
+  'Geen verbinding met {host}. Controleer je internetverbinding en probeer het later opnieuw.':
+      'Ebda konnessjoni ma’ {host}. Iċċekkja l-konnessjoni tal-internet tiegħek u erġa’ pprova aktar tard.',
+  '{host} is geen inzendserver die OciDeck begrijpt.':
+      '{host} mhuwiex server tal-għoti li OciDeck jifhem.',
+  'Deze server is te oud voor deze versie van OciDeck.':
+      'Dan is-server qadim wisq għal din il-verżjoni ta’ OciDeck.',
+  'Deze server is van een nieuwere versie. Werk OciDeck bij.':
+      'Dan is-server huwa ta’ verżjoni aktar ġdida. Aġġorna OciDeck.',
+  'Dit formulier bestaat niet (meer) op de server. Vraag de organisator om een nieuwe uitnodiging.':
+      'Din il-formola ma teżistix (aktar) fuq is-server. Staqsi lill-organizzatur għal stedina ġdida.',
+  'De server is druk. Probeer het later opnieuw.':
+      'Is-server huwa mqabbad. Erġa’ pprova aktar tard.',
+  'De server weigerde het verzoek.': 'Is-server irrifjuta t-talba.',
+  'De server stuurde een formulier dat OciDeck niet kan lezen.':
+      'Is-server bagħat formola li OciDeck ma jistax jaqra.',
+  'Het formulier hoort niet bij de server uit de uitnodiging. Vraag de organisator om een nieuwe uitnodiging.':
+      'Il-formola ma tappartjenix lis-server tal-istedina. Staqsi lill-organizzatur għal stedina ġdida.',
+  'Formulier van {naam}': 'Formola minn {naam}',
+  'Dit formulier is gesloten voor nieuwe inzendingen. Neem contact op met de organisator.':
+      'Din il-formola magħluqa għal sottomissjonijiet ġodda. Ikkuntattja lill-organizzatur.',
+  'Server: {host}': 'Server: {host}',
+  'Formulier invullen': 'Imla l-formola',
+  'Onbekende taal': 'Lingwa mhux magħrufa',
+  'Formulier geopend.': 'Il-formola nfetħet.',
   'Team…': 'Tim…',
   'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
       'L-edituri minbarra int li jinsabu f’kull bundle, biex huma wkoll ikunu jistgħu jiftħu s-sottomissjonijiet. Tżid lil xi ħadd bil-karta tal-editur tiegħu u terġa’ tittajpja l-marka tas-swaba’ ta’ dik il-karta.',
