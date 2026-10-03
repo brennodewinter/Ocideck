@@ -82,6 +82,8 @@ class FormSealFailed extends FormSealOutcome {
 ///
 /// [published] is het hele gepubliceerde formulier waarmee de inzending is gebouwd — de bundel
 /// moet daarbij horen. [fingerprintText] is wat de invuller intikte; [pins] wat hij eerder zag.
+/// [expectedApiHost] is, bij een uitnodiging, de server uit de link: de bundel moet voor precies
+/// dat adres zijn ondertekend.
 Future<FormSealOutcome> sealFormSubmission({
   required FormSubmissionBuilt built,
   required String bundleText,
@@ -89,6 +91,7 @@ Future<FormSealOutcome> sealFormSubmission({
   required String fingerprintText,
   required FormBundlePins pins,
   required DateTime now,
+  String? expectedApiHost,
 }) async {
   final fingerprint = normalizeFingerprint(fingerprintText);
   if (fingerprint == null) return const FormSealBadFingerprint();
@@ -98,6 +101,7 @@ Future<FormSealOutcome> sealFormSubmission({
     templateText: published,
     fingerprint: fingerprint,
     now: now,
+    expectedApiHost: expectedApiHost,
     pins: pins,
   );
   if (verified is FormBundleRefused) {

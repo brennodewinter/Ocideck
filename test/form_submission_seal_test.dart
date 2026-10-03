@@ -103,6 +103,7 @@ void main() {
       bytes: zip,
       fileName: 'kook-bcdefg.zip',
       photos: 0,
+      sid: sid,
     );
   });
 
@@ -140,6 +141,7 @@ void main() {
                   bytes: built.bytes,
                   fileName: 'zonder-uitgang',
                   photos: 0,
+                  sid: sid,
                 ),
               )
               as FormSubmissionSealed;
@@ -301,6 +303,7 @@ void main() {
           bytes: Uint8List.fromList([1, 2, 3]),
           fileName: 'kook-x.zip',
           photos: 0,
+          sid: sid,
         );
         final outcome = await seal(use: junk);
         expect((outcome as FormSealFailed).issue, FormSealIssue.notAPackage);
