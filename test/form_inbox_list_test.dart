@@ -973,6 +973,252 @@ void main() {
     });
   });
 
+  group('de werkkopie weggooien', () {
+    Future<void> openFirst(WidgetTester tester, [String title = 'Sari']) async {
+      await pumpUntil(
+        tester,
+        () => find.byType(ExpansionTile).evaluate().isNotEmpty,
+      );
+      await open(tester, title);
+      await pumpUntil(
+        tester,
+        () => find.byType(FormInboxActions).evaluate().isNotEmpty,
+      );
+    }
+
+    File copyFile() =>
+        File(p.join(workspace.submissionPath(first), 'submission.edit.md'));
+
+    testWidgets('de knop staat er pas als er een werkkopie is', (tester) async {
+      await seed(tester, [zipOf()]);
+      await pump(tester, onOpenFile: (_) {});
+      await openFirst(tester);
+      expect(text('Werkkopie weggooien…'), findsNothing);
+      await tester.pumpWidget(const SizedBox());
+      await io(tester, () => workspace.workingCopy(first));
+      await pump(tester, onOpenFile: (_) {});
+      await openFirst(tester);
+      await pumpUntil(
+        tester,
+        () => text('Werkkopie weggooien…').evaluate().isNotEmpty,
+      );
+    });
+
+    testWidgets('ook zonder opener: wie een kopie heeft kan haar weggooien', (
+      tester,
+    ) async {
+      await seed(tester, [zipOf()]);
+      await io(tester, () => workspace.workingCopy(first));
+      await pump(tester);
+      await openFirst(tester);
+      await pumpUntil(
+        tester,
+        () => text('Werkkopie weggooien…').evaluate().isNotEmpty,
+      );
+    });
+
+    testWidgets('de knop zegt wat hij doet', (tester) async {
+      await seed(tester, [zipOf()]);
+      await io(tester, () => workspace.workingCopy(first));
+      await pump(tester);
+      await openFirst(tester);
+      await pumpUntil(
+        tester,
+        () => text('Werkkopie weggooien…').evaluate().isNotEmpty,
+      );
+      expect(
+        find.byTooltip(
+          'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.',
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+      'de bevestiging zegt wat gaat en wat blijft; daarna geldt weer wat binnenkwam',
+      (tester) async {
+        await seed(tester, [zipOf(naam: '')]);
+        await io(tester, () async {
+          await workspace.workingCopy(first);
+          await copyFile().writeAsString(
+            kook.replaceFirst(
+              '<!-- answer -->\n<!-- /field id=naam',
+              '<!-- answer -->\nSari\n<!-- /field id=naam',
+            ),
+          );
+        });
+        await pump(tester);
+        await openFirst(tester, 'abcdefgh…');
+        await pumpUntil(
+          tester,
+          () => text('Geen punten om na te lopen.').evaluate().isNotEmpty,
+        );
+        await tester.tap(text('Werkkopie weggooien…'));
+        await tester.pumpAndSettle();
+        expect(text('Werkkopie weggooien'), findsOneWidget);
+        expect(
+          find.textContaining(
+            'Wat binnenkwam blijft staan en wordt weer beoordeeld.',
+          ),
+          findsWidgets,
+        );
+        expect(find.textContaining('sluit die dan eerst'), findsOneWidget);
+        await tester.tap(find.widgetWithText(FilledButton, 'Weggooien'));
+        await pumpUntil(
+          tester,
+          () => text(
+            'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.',
+          ).evaluate().isNotEmpty,
+        );
+        expect(copyFile().existsSync(), isFalse);
+        await pumpUntil(
+          tester,
+          () => text('Geen punten om na te lopen.').evaluate().isEmpty,
+        );
+        expect(
+          text('De beoordeling gaat over de werkkopie (submission.edit.md).'),
+          findsNothing,
+        );
+        expect(text('Werkkopie weggooien…'), findsNothing);
+      },
+    );
+
+    testWidgets('een werkkopie die niet te lezen is kan toch weg', (
+      tester,
+    ) async {
+      await seed(tester, [zipOf()]);
+      await io(tester, () async {
+        await workspace.workingCopy(first);
+        await copyFile().writeAsBytes([0xff, 0xfe, 0x00]);
+      });
+      await pump(tester);
+      await openFirst(tester);
+      await pumpUntil(
+        tester,
+        () => text('Werkkopie weggooien…').evaluate().isNotEmpty,
+      );
+      await tester.tap(text('Werkkopie weggooien…'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Weggooien'));
+      await pumpUntil(
+        tester,
+        () => text(
+          'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.',
+        ).evaluate().isNotEmpty,
+      );
+      expect(copyFile().existsSync(), isFalse);
+    });
+
+    testWidgets('een rij die verwijderd heet laat haar niet weggooien', (
+      tester,
+    ) async {
+      await seed(tester, [zipOf()]);
+      await io(tester, () async {
+        await workspace.workingCopy(first);
+        final register =
+            (await workspace.readRegister() as FormRegisterParsed).register;
+        await workspace.saveRegister(register.withDeletion(first)!);
+      });
+      await pump(tester);
+      await openFirst(tester, 'abcdefgh…');
+      expect(text('Werkkopie weggooien…'), findsNothing);
+    });
+
+    group('de bevestiging zelf', () {
+      Future<void> actions(
+        WidgetTester tester, {
+        required List<String> done,
+        required Future<FormDiscardResult> Function(FormWorkspace, String)
+        discard,
+        bool hasWorkingCopy = true,
+        FormRegisterRow? row,
+      }) => tester.pumpWidget(
+        MaterialApp(
+          locale: const Locale('nl'),
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: FormInboxActions(
+              workspace: workspace,
+              sid: first,
+              row: row,
+              spec: null,
+              onDone: done.add,
+              hasWorkingCopy: hasWorkingCopy,
+              discardCopy: discard,
+            ),
+          ),
+        ),
+      );
+
+      testWidgets('annuleren gooit niets weg en zegt niets', (tester) async {
+        var calls = 0;
+        final done = <String>[];
+        await actions(
+          tester,
+          done: done,
+          discard: (_, _) async {
+            calls++;
+            return FormDiscardResult.discarded;
+          },
+        );
+        await tester.tap(text('Werkkopie weggooien…'));
+        await tester.pumpAndSettle();
+        await tester.tap(text('Annuleren'));
+        await tester.pumpAndSettle();
+        expect(calls, 0);
+        expect(done, isEmpty);
+        expect(find.byType(AlertDialog), findsNothing);
+      });
+
+      testWidgets('de knop ontbreekt zonder werkkopie', (tester) async {
+        await actions(
+          tester,
+          done: [],
+          hasWorkingCopy: false,
+          discard: (_, _) async => FormDiscardResult.discarded,
+        );
+        expect(text('Werkkopie weggooien…'), findsNothing);
+      });
+
+      testWidgets('elke uitkomst zegt wat er gebeurde', (tester) async {
+        for (final (outcome, message) in [
+          (
+            FormDiscardResult.discarded,
+            'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.',
+          ),
+          (FormDiscardResult.none, 'Er is geen werkkopie.'),
+          (
+            FormDiscardResult.failed,
+            'De werkkopie kon niet worden weggegooid.',
+          ),
+        ]) {
+          final done = <String>[];
+          var calls = 0;
+          await actions(
+            tester,
+            done: done,
+            discard: (ws, sid) async {
+              calls++;
+              expect(sid, first);
+              expect(ws, workspace);
+              return outcome;
+            },
+          );
+          await tester.tap(text('Werkkopie weggooien…'));
+          await tester.pumpAndSettle();
+          await tester.tap(find.widgetWithText(FilledButton, 'Weggooien'));
+          await tester.pumpAndSettle();
+          expect(calls, 1);
+          expect(done, [message]);
+        }
+      });
+    });
+  });
+
   group('FormReviewView', () {
     FormReview reviewWith(List<FormProblem> problems, {bool known = true}) {
       final opened = readFormPackage(zipOf()) as FormPackageOpened;

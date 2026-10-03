@@ -827,6 +827,18 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'The working copy was thrown away. What arrived is judged again.',
+  'Er is geen werkkopie.': 'There is no working copy.',
+  'De werkkopie kon niet worden weggegooid.':
+      'The working copy could not be thrown away.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Deletes the working copy. What arrived stays and is judged again.',
+  'Werkkopie weggooien…': 'Throw away working copy…',
+  'Werkkopie weggooien': 'Throw away working copy',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'The working copy with the improvements is deleted and cannot be brought back. What arrived stays and is judged again. If the working copy is still open in a tab, close that first.',
+  'Weggooien': 'Throw away',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'This submission has been withdrawn and so goes into no chapter.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

@@ -22,6 +22,7 @@ import 'dart:typed_data';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 
+import '../../models/asset_rights.dart';
 import '../../utils/atomic_file.dart';
 import 'form_workspace.dart';
 
@@ -223,9 +224,14 @@ Future<({int copied, int missing})> _copyImages(
 }
 
 /// Wat *over* het boek gaat: het formulier, het sjabloon, de hoofdstukken in volgorde
-/// met de toestemming waaronder elke inzending is gedaan, en per foto de maker. Het is
-/// de grondslag voor de rechtenregistratie van de afbeeldingen (§7.5): niets daarvan
-/// hoeft in de tekst.
+/// met de toestemming waaronder elke inzending is gedaan, en per foto haar hash, haar
+/// maker en het bewijs waaronder ze er mag staan. Niets daarvan hoeft in de tekst.
+///
+/// Het bewijs per foto heeft de vorm van [AssetRightsProvenance] (§7.5) en hangt aan de
+/// **sha-256 van de bytes**, niet aan de bestandsnaam: dat is de sleutel waaronder de
+/// rechtencontrole van de assetpool haar bevindingen bewaart, dus wie de foto later in
+/// een pool zet vindt het bewijs terug. Dit boek is een document, en de controle kijkt nog
+/// niet naar documentfoto's — dit legt het bewijs vast, het sluit die controle niet.
 String _sidecar(
   FormSpec spec,
   String template,
@@ -235,9 +241,12 @@ String _sidecar(
 ) {
   final photos = <String, List<Map<String, Object?>>>{};
   for (final image in book.images) {
+    final review = reviews[image.sid]!;
+    final bytes = review.images[image.from];
     photos.putIfAbsent(image.sid, () => []).add({
       'file': image.to,
-      'creator': image.credit,
+      if (bytes != null) 'sha256': sha256Hex(bytes),
+      'provenance': _photoProvenance(spec, image, review).toJson(),
     });
   }
   return '${const JsonEncoder.withIndent('  ').convert({
@@ -253,4 +262,25 @@ String _sidecar(
         },
     ],
   })}\n';
+}
+
+/// De maker van de foto is wat de inzender als titel gaf. De licentie is de toestemming
+/// die de inzender bij het inzenden gaf, met als bewijs welk formulier, welke inzending en
+/// de hash van de tekst waarmee ze instemde: de hash laat zien *welke* tekst dat was. Een
+/// formulier zonder toestemmingsveld levert geen licentie en geen bewijs — dat staat dan
+/// zo in het bestand, en wordt niet aangevuld met iets wat er niet is.
+AssetRightsProvenance _photoProvenance(
+  FormSpec spec,
+  ChapterImage image,
+  FormReview review,
+) {
+  final consent = review.manifest.consent;
+  final credit = image.credit;
+  return AssetRightsProvenance(
+    creator: credit == null || credit.isEmpty ? null : credit,
+    license: consent.isEmpty ? null : 'form-consent',
+    licenseEvidence: consent.isEmpty
+        ? null
+        : '${spec.id}@${spec.version} ${image.sid}: ${[for (final c in consent) '${c.field} ${c.accepted} sha256:${c.textSha256}'].join('; ')}',
+  );
 }

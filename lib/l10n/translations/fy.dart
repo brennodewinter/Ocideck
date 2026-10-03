@@ -667,6 +667,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'De wurkkopy is fuortsmiten. Wat binnenkaam wurdt wer beoardiele.',
+  'Er is geen werkkopie.': 'Der is gjin wurkkopy.',
+  'De werkkopie kon niet worden weggegooid.':
+      'De wurkkopy koe net fuortsmiten wurde.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Wisket de wurkkopy. Wat binnenkaam bliuwt stean en wurdt wer beoardiele.',
+  'Werkkopie weggooien…': 'Wurkkopy fuortsmite…',
+  'Werkkopie weggooien': 'Wurkkopy fuortsmite',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'De wurkkopy mei de ferbetteringen wurdt fuortdien en kin net weromhelle wurde. Wat binnenkaam bliuwt stean en wurdt wer beoardiele. Stiet de wurkkopy noch iepen yn in ljepblêd, slút dy dan earst.',
+  'Weggooien': 'Fuortsmite',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Dizze ynstjoering is weromlutsen en komt dus yn gjin inkeld haadstik.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

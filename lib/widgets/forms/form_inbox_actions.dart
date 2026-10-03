@@ -39,6 +39,8 @@ class FormInboxActions extends StatelessWidget {
     this.delete = deleteSubmission,
     this.onOpenFile,
     this.canEdit = false,
+    this.hasWorkingCopy = false,
+    this.discardCopy = _discardCopy,
     this.makerCheck,
   });
 
@@ -75,12 +77,47 @@ class FormInboxActions extends StatelessWidget {
   /// De inzending is te lezen, dus er is iets om een werkkopie van te maken.
   final bool canEdit;
 
+  /// Er is een werkkopie (`submission.edit.md`): ze is weg te gooien.
+  final bool hasWorkingCopy;
+
+  /// Het weggooien zelf. Een naad voor de test: dat een geannuleerde bevestiging niets
+  /// weggooit is de belangrijkste eigenschap, en een echte schijf laat zich niet op "er is
+  /// niets gebeurd" betrappen zonder te wachten.
+  final Future<FormDiscardResult> Function(FormWorkspace workspace, String sid)
+  discardCopy;
+
   /// Het venster voor de controle door de maker. Een naad voor de test: dat wat het
   /// meegeeft goed wordt afgehandeld is te bewijzen zonder het venster te doorlopen.
   final Future<FormMakerCheckResult?> Function(BuildContext context)?
   makerCheck;
 
   bool get _deleted => row?.isDeleted ?? false;
+
+  static Future<FormDiscardResult> _discardCopy(
+    FormWorkspace workspace,
+    String sid,
+  ) => workspace.discardWorkingCopy(sid);
+
+  /// Gooit de werkkopie weg, na een bevestiging die zegt wat er gaat en wat blijft. Wat
+  /// binnenkwam blijft staan en wordt weer beoordeeld.
+  Future<void> _discard(BuildContext context) async {
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (_) => const _DiscardDialog(),
+    );
+    if (confirmed != true) return;
+    final outcome = await discardCopy(workspace, sid);
+    onDone(switch (outcome) {
+      FormDiscardResult.discarded => l10n.d(
+        'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.',
+      ),
+      FormDiscardResult.none => l10n.d('Er is geen werkkopie.'),
+      FormDiscardResult.failed => l10n.d(
+        'De werkkopie kon niet worden weggegooid.',
+      ),
+    });
+  }
 
   /// Maakt de werkkopie als ze er nog niet is en opent haar. Nooit wat binnenkwam:
   /// dat blijft zoals het was, en een bewerking in de editor of de invulpagina zou
@@ -224,6 +261,16 @@ class FormInboxActions extends StatelessWidget {
                 child: Text(l10n.d('Werkkopie openen')),
               ),
             ),
+          if (hasWorkingCopy && !_deleted)
+            Tooltip(
+              message: l10n.d(
+                'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.',
+              ),
+              child: OutlinedButton(
+                onPressed: () => _discard(context),
+                child: Text(l10n.d('Werkkopie weggooien…')),
+              ),
+            ),
           if (canEdit &&
               onOpenFile != null &&
               spec != null &&
@@ -334,6 +381,39 @@ class _WithdrawDialogState extends State<_WithdrawDialog> {
           child: Text(l10n.d('Annuleren')),
         ),
         FilledButton(onPressed: _submit, child: Text(l10n.d('Intrekken'))),
+      ],
+    );
+  }
+}
+
+/// Zegt wat het weggooien van de werkkopie doet — en wat blijft — voordat het gebeurt.
+class _DiscardDialog extends StatelessWidget {
+  const _DiscardDialog();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final scheme = Theme.of(context).colorScheme;
+    return AlertDialog(
+      title: Text(l10n.d('Werkkopie weggooien')),
+      content: Text(
+        l10n.d(
+          'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(false),
+          child: Text(l10n.d('Annuleren')),
+        ),
+        FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: scheme.error,
+            foregroundColor: scheme.onError,
+          ),
+          onPressed: () => Navigator.of(context).pop(true),
+          child: Text(l10n.d('Weggooien')),
+        ),
       ],
     );
   }

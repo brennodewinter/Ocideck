@@ -1625,6 +1625,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Darba kopija ir izmesta. Tas, kas ienāca, tiek vērtēts no jauna.',
+  'Er is geen werkkopie.': 'Darba kopijas nav.',
+  'De werkkopie kon niet worden weggegooid.': 'Darba kopiju nevarēja izmest.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Dzēš darba kopiju. Tas, kas ienāca, paliek un tiek vērtēts no jauna.',
+  'Werkkopie weggooien…': 'Izmest darba kopiju…',
+  'Werkkopie weggooien': 'Izmest darba kopiju',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Darba kopija ar uzlabojumiem tiek izdzēsta, un to nevar atgūt. Tas, kas ienāca, paliek un tiek vērtēts no jauna. Ja darba kopija vēl ir atvērta cilnē, vispirms aizveriet to.',
+  'Weggooien': 'Izmest',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Šis iesūtījums ir atsaukts, tāpēc tas neiekļūst nevienā nodaļā.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

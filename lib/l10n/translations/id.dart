@@ -1627,6 +1627,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Salinan kerja dibuang. Apa yang masuk dinilai lagi.',
+  'Er is geen werkkopie.': 'Tidak ada salinan kerja.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Salinan kerja tidak dapat dibuang.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Menghapus salinan kerja. Apa yang masuk tetap ada dan dinilai lagi.',
+  'Werkkopie weggooien…': 'Buang salinan kerja…',
+  'Werkkopie weggooien': 'Buang salinan kerja',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Salinan kerja beserta perbaikannya dihapus dan tidak dapat dikembalikan. Apa yang masuk tetap ada dan dinilai lagi. Jika salinan kerja masih terbuka di sebuah tab, tutup dahulu tab itu.',
+  'Weggooien': 'Buang',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Kiriman ini telah ditarik kembali sehingga tidak masuk ke bab mana pun.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

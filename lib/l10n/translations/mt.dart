@@ -1645,6 +1645,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Il-kopja tax-xogħol tilfet. Dak li wasal jerġa\' jiġi vvalutat.',
+  'Er is geen werkkopie.': 'M\'hemm l-ebda kopja tax-xogħol.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Il-kopja tax-xogħol ma setgħetx tintrema.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Tħassar il-kopja tax-xogħol. Dak li wasal jibqa\' u jerġa\' jiġi vvalutat.',
+  'Werkkopie weggooien…': 'Armi l-kopja tax-xogħol…',
+  'Werkkopie weggooien': 'Armi l-kopja tax-xogħol',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Il-kopja tax-xogħol bit-titjib titħassar u ma tistax tinġieb lura. Dak li wasal jibqa\' u jerġa\' jiġi vvalutat. Jekk il-kopja tax-xogħol għadha miftuħa f\'tab, agħlaqha l-ewwel.',
+  'Weggooien': 'Armi',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Din is-sottomissjoni ġiet irtirata u għalhekk ma tidħol fl-ebda kapitlu.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

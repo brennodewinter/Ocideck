@@ -1639,6 +1639,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Kopia robocza została wyrzucona. To, co nadeszło, jest oceniane ponownie.',
+  'Er is geen werkkopie.': 'Nie ma kopii roboczej.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Nie udało się wyrzucić kopii roboczej.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Usuwa kopię roboczą. To, co nadeszło, zostaje i jest oceniane ponownie.',
+  'Werkkopie weggooien…': 'Wyrzuć kopię roboczą…',
+  'Werkkopie weggooien': 'Wyrzuć kopię roboczą',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Kopia robocza z poprawkami zostanie usunięta i nie da się jej przywrócić. To, co nadeszło, zostaje i jest oceniane ponownie. Jeśli kopia robocza jest jeszcze otwarta w karcie, najpierw ją zamknij.',
+  'Weggooien': 'Wyrzuć',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'To zgłoszenie zostało wycofane, więc nie trafia do żadnego rozdziału.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

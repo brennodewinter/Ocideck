@@ -5937,6 +5937,11 @@ Onder een opengeklapte inzending staan de **acties**:
   op de werkkopie — een punt dat je herstelde is weg, en de regel zegt dat de beoordeling over de werkkopie
   gaat — en kun je haar status verder zetten. Verander je in de werkkopie de eigen tekst van het formulier, dan
   zegt de Inbox dat: dat is geen antwoord.
+- **Werkkopie weggooien…** (alleen als die er is) — terug naar wat binnenkwam. De bevestiging zegt wat gaat (de
+  werkkopie met haar verbeteringen, voorgoed) en wat blijft (wat binnenkwam, de foto's, het register), en vraagt de
+  werkkopie eerst te sluiten als ze nog in een tabblad openstaat, anders brengt opslaan haar terug. De inzending wordt
+  daarna weer beoordeeld op wat binnenkwam. Het werkt ook voor een werkkopie die niet te lezen is, en is daarmee de
+  uitweg eruit; nooit voor een verwijderde inzending.
 - **Boek samenstellen…** — maak van de goedgekeurde inzendingen één document. Kies het formulier, een
   **hoofdstuksjabloon** (een gewoon `.md`-bestand waarin `{veld-id}` staat voor het antwoord op dat veld), welke
   **statussen** erin komen (kent het formulier `maker-approved`, dan staat die al aan; anders staat er niets aan en
@@ -5944,8 +5949,10 @@ Onder een opengeklapte inzending staan de **acties**:
   als **nieuw document** geschreven in de map `book` van de werkmap en nooit over een bestaand heen; de foto's worden
   ernaast gekopieerd als `images/<id>-<veld>-<n>.<ext>`. Een antwoord gaat erin als de Markdown die het is, heel;
   **een ingetrokken inzending komt er nooit in**; een sjabloon dat een veld noemt dat het formulier niet heeft wordt
-  geweigerd, met de naam van het veld. Waaruit het boek is gemaakt — welke inzendingen, onder welke toestemming, wie
-  welke foto maakte — staat ernaast in `<naam>.compile.json`, niet in de tekst. De zin erna zegt hoeveel hoofdstukken
+  geweigerd, met de naam van het veld. Waaruit het boek is gemaakt — welke inzendingen, onder welke toestemming, en per
+  foto haar vingerafdruk, haar maker en het bewijs waaronder ze er mag staan (de toestemming van de inzender, met de
+  hash van haar tekst) — staat ernaast in `<naam>.compile.json`, niet in de tekst. De rechtencontrole van afbeeldingen
+  kijkt nog niet naar de foto's van een document; dit legt het bewijs vast, zodat het er is als ze dat wel doet. De zin erna zegt hoeveel hoofdstukken
   en foto's erin gingen en hoeveel inzendingen waren ingetrokken of overgeslagen (andere versie van het formulier, of
   niet te lezen), en biedt aan het boek te openen.
 - **Controle door de maker…** — voordat een bijdrage verschijnt ziet de maker hoe ze eruit komt te zien en zegt of ze

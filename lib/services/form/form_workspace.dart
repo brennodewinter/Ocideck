@@ -124,11 +124,15 @@ class FormStoredReview extends FormStoredReviewResult {
 /// Er is niets te beoordelen: de inhoud is verwijderd (alleen het minimale record
 /// staat er nog), of de bestanden zijn er niet meer of niet te lezen.
 class FormStoredUnavailable extends FormStoredReviewResult {
-  const FormStoredUnavailable({required this.deleted});
+  const FormStoredUnavailable({required this.deleted, this.edited = false});
 
   /// `submission.md` ontbreekt maar `manifest.json` is er nog en klopt: wat
   /// [FormWorkspace.deleteSubmissionFiles] achterlaat.
   final bool deleted;
+
+  /// Er is een werkkopie (`submission.edit.md`), maar die is niet te lezen: de organisator
+  /// moet haar kunnen weggooien om weer bij wat binnenkwam uit te komen.
+  final bool edited;
 }
 
 /// Wat [FormWorkspace.workingCopy] opleverde.
@@ -154,6 +158,18 @@ class FormWorkingCopyUnavailable extends FormWorkingCopyResult {
 /// Het maken van de kopie mislukte (schijf vol, geen schrijfrechten).
 class FormWorkingCopyFailed extends FormWorkingCopyResult {
   const FormWorkingCopyFailed();
+}
+
+/// Wat [FormWorkspace.discardWorkingCopy] opleverde.
+enum FormDiscardResult {
+  /// De werkkopie is verwijderd; de inzending wordt weer beoordeeld zoals ze binnenkwam.
+  discarded,
+
+  /// Er was geen werkkopie.
+  none,
+
+  /// Verwijderen mislukte (geen schrijfrechten); de werkkopie staat er nog.
+  failed,
 }
 
 final RegExp _formId = RegExp(r'^[a-z][a-z0-9-]*$');
@@ -348,7 +364,10 @@ class FormWorkspace {
     );
     final text = submissionBytes == null ? null : _decode(submissionBytes);
     if (submissionBytes == null || text == null) {
-      return FormStoredUnavailable(deleted: submissionBytes == null && !edited);
+      return FormStoredUnavailable(
+        deleted: submissionBytes == null && !edited,
+        edited: edited,
+      );
     }
     final review = reviewFormPackage(
       FormPackageOpened(
@@ -396,6 +415,22 @@ class FormWorkspace {
       return FormWorkingCopy(copy.path, created: true);
     } on FileSystemException {
       return const FormWorkingCopyFailed();
+    }
+  }
+
+  /// Gooit de werkkopie van [sid] weg, zodat [reviewStored] weer wat binnenkwam
+  /// beoordeelt. Alleen `submission.edit.md` gaat: wat binnenkwam, de foto's en het
+  /// register blijven. Een verwijzing wordt zelf verwijderd, nooit gevolgd — wat erachter
+  /// ligt is niet van de werkmap. Wat [reviewStored] niet als werkkopie ziet (een map met
+  /// die naam, een verwijzing naar niets) is er voor dit ook niet.
+  Future<FormDiscardResult> discardWorkingCopy(String sid) async {
+    final copy = File(p.join(submissionPath(sid), 'submission.edit.md'));
+    try {
+      if (!await copy.exists()) return FormDiscardResult.none;
+      await copy.delete();
+      return FormDiscardResult.discarded;
+    } on FileSystemException {
+      return FormDiscardResult.failed;
     }
   }
 

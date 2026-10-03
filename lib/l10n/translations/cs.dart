@@ -1628,6 +1628,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Pracovní kopie byla zahozena. To, co přišlo, se posuzuje znovu.',
+  'Er is geen werkkopie.': 'Žádná pracovní kopie není.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Pracovní kopii se nepodařilo zahodit.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Smaže pracovní kopii. To, co přišlo, zůstane a posuzuje se znovu.',
+  'Werkkopie weggooien…': 'Zahodit pracovní kopii…',
+  'Werkkopie weggooien': 'Zahodit pracovní kopii',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Pracovní kopie s úpravami bude smazána a nelze ji vrátit. To, co přišlo, zůstane a posuzuje se znovu. Je-li pracovní kopie ještě otevřená na kartě, nejprve ji zavřete.',
+  'Weggooien': 'Zahodit',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Toto odeslání bylo staženo, a proto nepřijde do žádné kapitoly.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

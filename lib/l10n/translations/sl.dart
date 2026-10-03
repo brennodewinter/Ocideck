@@ -1627,6 +1627,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Delovna kopija je zavržena. Kar je prispelo, se ponovno ocenjuje.',
+  'Er is geen werkkopie.': 'Delovne kopije ni.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Delovne kopije ni bilo mogoče zavreči.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Izbriše delovno kopijo. Kar je prispelo, ostane in se ponovno ocenjuje.',
+  'Werkkopie weggooien…': 'Zavrzi delovno kopijo…',
+  'Werkkopie weggooien': 'Zavrzi delovno kopijo',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Delovna kopija s popravki bo izbrisana in je ni mogoče povrniti. Kar je prispelo, ostane in se ponovno ocenjuje. Če je delovna kopija še odprta v zavihku, ga najprej zaprite.',
+  'Weggooien': 'Zavrzi',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Ta oddaja je bila umaknjena in zato ne pride v nobeno poglavje.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

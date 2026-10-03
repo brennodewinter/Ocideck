@@ -83,7 +83,7 @@
 > (phase 2). From the Inbox an organiser can **change the status, withdraw and delete** a submission (deleting
 > leaves the minimal record and does not wait for a broken register), and **open a working copy**
 > (`submission.edit.md`, §7.1) to improve one — what arrived is never opened for editing, and the Inbox judges
-> the working copy from then on. **Compile is in** (§7.5): the pure core (`form_compile.dart`: chapter template,
+> the working copy from then on, and **throw it away** again to go back to what arrived. **Compile is in** (§7.5): the pure core (`form_compile.dart`: chapter template,
 > answers inserted whole per field type, balanced fences, empty-line dropping, withdrawn never compiled), the
 > writing around it (`form_book.dart`: the register, the submissions as they are now, the photos copied, one new
 > document in `book/` with a `<name>.compile.json` beside it that records what the book was made from) and the
@@ -1334,7 +1334,13 @@ table would become escaped pipes. Compile therefore has its **own writer**:
   image — `creator` from the image's `credit`, `license`/`license_evidence` from the
   consent field, form version and its text hash — so the asset-rights check does not
   flag every submitted photo as `rights.missing_evidence` while the evidence sits in
-  the submission;
+  the submission. **Built as a record, not yet as a check:** the sidecar
+  `book/<name>.compile.json` carries it per photo, keyed by the **sha-256 of the bytes**
+  (the key of the asset pool's rights store) with `license: form-consent` and as evidence
+  the form, the submission and the hash of every consent text accepted; no consent field
+  means no licence and no evidence. The rights check only scans photos pooled from git-stored
+  decks, never the photos of a document, so nothing flags — or clears — a book's photos
+  until that check learns to read this record;
 - the **publication name** is `{naamvermelding}`, a *separate field* ("name, initials
   or pseudonym", §13), never the contact name: using a contact field for publication
   is a change of purpose, and an error here is irreversible in print.

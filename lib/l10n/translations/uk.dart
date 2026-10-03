@@ -1642,6 +1642,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Робочу копію викинуто. Те, що надійшло, оцінюється знову.',
+  'Er is geen werkkopie.': 'Робочої копії немає.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Не вдалося викинути робочу копію.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Видаляє робочу копію. Те, що надійшло, залишається й оцінюється знову.',
+  'Werkkopie weggooien…': 'Викинути робочу копію…',
+  'Werkkopie weggooien': 'Викинути робочу копію',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Робочу копію з виправленнями буде видалено, і її не можна буде повернути. Те, що надійшло, залишається й оцінюється знову. Якщо робоча копія ще відкрита у вкладці, спершу закрийте її.',
+  'Weggooien': 'Викинути',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Це надсилання відкликано, тому воно не потрапляє в жоден розділ.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

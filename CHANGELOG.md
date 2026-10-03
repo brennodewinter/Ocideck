@@ -10,6 +10,16 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- In de Inbox brengt **Werkkopie weggooien…** een inzending terug naar wat binnenkwam. De bevestiging zegt wat gaat (de
+  werkkopie met haar verbeteringen, voorgoed) en wat blijft (wat binnenkwam, de foto's, het register), en vraagt de
+  werkkopie eerst te sluiten als ze nog openstaat. Daarna wordt de inzending weer op het origineel beoordeeld. Het werkt
+  ook voor een werkkopie die niet te lezen is — daar was tot nu toe geen uitweg uit — en nooit voor een verwijderde
+  inzending. 8 nieuwe zinnen in 30 talen.
+- Het boek legt per foto **het bewijs waaronder ze er mag staan** vast in `<naam>.compile.json`: de sha-256 van de bytes
+  (de sleutel van de rechtenopslag voor afbeeldingen), de maker, en als licentie `form-consent` met als bewijs het
+  formulier, de inzending en de hash van elke toestemmingstekst waarmee de inzender instemde — in de vorm van
+  `AssetRightsProvenance`. Een formulier zonder toestemmingsveld geeft geen licentie en geen bewijs, en dat staat er
+  zo. Dit is een vastlegging, geen controle: de rechtencontrole kijkt nog niet naar de foto's van een document.
 - In de Inbox opent **Controle door de maker…** de controle van §7.4: drie losse stappen. Het **controledocument** is het
   hoofdstuk van die ene inzending, gemaakt met dezelfde samensteller als het boek (dus de maker ziet wat er gedrukt
   wordt) en geopend in een tabblad, waar je het met de gewone export als pdf wegschrijft — de export die het

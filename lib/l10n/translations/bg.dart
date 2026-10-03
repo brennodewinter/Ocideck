@@ -1647,6 +1647,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Работното копие е изхвърлено. Полученото се оценява отново.',
+  'Er is geen werkkopie.': 'Няма работно копие.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Работното копие не можа да бъде изхвърлено.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Изтрива работното копие. Полученото остава и се оценява отново.',
+  'Werkkopie weggooien…': 'Изхвърляне на работното копие…',
+  'Werkkopie weggooien': 'Изхвърляне на работното копие',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Работното копие с подобренията се изтрива и не може да бъде върнато. Полученото остава и се оценява отново. Ако работното копие е все още отворено в раздел, първо го затворете.',
+  'Weggooien': 'Изхвърляне',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Това изпращане е оттеглено и затова не влиза в никоя глава.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

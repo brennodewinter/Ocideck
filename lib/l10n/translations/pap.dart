@@ -666,6 +666,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'A tira e kopia di trabou. Loke a drenta ta wòrdu evaluá di nobo.',
+  'Er is geen werkkopie.': 'No tin kopia di trabou.',
+  'De werkkopie kon niet worden weggegooid.':
+      'No por a tira e kopia di trabou.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Ta kita e kopia di trabou. Loke a drenta ta keda i ta wòrdu evaluá di nobo.',
+  'Werkkopie weggooien…': 'Tira kopia di trabou…',
+  'Werkkopie weggooien': 'Tira kopia di trabou',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'E kopia di trabou ku e mehoransanan ta wòrdu kitá i no por wòrdu rekuperá. Loke a drenta ta keda i ta wòrdu evaluá di nobo. Si e kopia di trabou ainda ta habrí den un tab, sera esei promé.',
+  'Weggooien': 'Tira',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'E envio akí a wòrdu retirá i p\'esei e no ta drenta den ningun kapítulo.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

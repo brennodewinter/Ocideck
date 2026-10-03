@@ -1657,6 +1657,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Caitheadh an cóip oibre amach. Déantar an rud a tháinig isteach a mheas arís.',
+  'Er is geen werkkopie.': 'Níl aon chóip oibre ann.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Níorbh fhéidir an chóip oibre a chaitheamh amach.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Scriostar an chóip oibre. Fanann an rud a tháinig isteach agus déantar é a mheas arís.',
+  'Werkkopie weggooien…': 'Caith an chóip oibre amach…',
+  'Werkkopie weggooien': 'Caith an chóip oibre amach',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Scriostar an chóip oibre leis na feabhsúcháin agus ní féidir í a fháil ar ais. Fanann an rud a tháinig isteach agus déantar é a mheas arís. Má tá an chóip oibre fós oscailte i gcluaisín, dún é sin ar dtús.',
+  'Weggooien': 'Caith amach',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Tarraingíodh siar an aighneacht seo agus dá bhrí sin ní théann sí isteach in aon chaibidil.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

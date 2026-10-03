@@ -1652,6 +1652,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Το αντίγραφο εργασίας απορρίφθηκε. Ό,τι είχε φτάσει κρίνεται ξανά.',
+  'Er is geen werkkopie.': 'Δεν υπάρχει αντίγραφο εργασίας.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Το αντίγραφο εργασίας δεν μπόρεσε να απορριφθεί.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Διαγράφει το αντίγραφο εργασίας. Ό,τι είχε φτάσει μένει και κρίνεται ξανά.',
+  'Werkkopie weggooien…': 'Απόρριψη αντιγράφου εργασίας…',
+  'Werkkopie weggooien': 'Απόρριψη αντιγράφου εργασίας',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Το αντίγραφο εργασίας με τις βελτιώσεις διαγράφεται και δεν μπορεί να ανακτηθεί. Ό,τι είχε φτάσει μένει και κρίνεται ξανά. Αν το αντίγραφο εργασίας είναι ακόμη ανοιχτό σε καρτέλα, κλείστε την πρώτα.',
+  'Weggooien': 'Απόρριψη',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Αυτή η υποβολή έχει αποσυρθεί και επομένως δεν μπαίνει σε κανένα κεφάλαιο.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

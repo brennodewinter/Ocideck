@@ -1643,6 +1643,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Copia de lucru a fost aruncată. Ceea ce a sosit este evaluat din nou.',
+  'Er is geen werkkopie.': 'Nu există o copie de lucru.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Copia de lucru nu a putut fi aruncată.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Șterge copia de lucru. Ceea ce a sosit rămâne și este evaluat din nou.',
+  'Werkkopie weggooien…': 'Aruncă copia de lucru…',
+  'Werkkopie weggooien': 'Aruncă copia de lucru',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Copia de lucru cu îmbunătățirile este ștearsă și nu mai poate fi recuperată. Ceea ce a sosit rămâne și este evaluat din nou. Dacă copia de lucru este încă deschisă într-o filă, închide-o mai întâi.',
+  'Weggooien': 'Aruncă',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Această trimitere a fost retrasă și de aceea nu intră în niciun capitol.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
