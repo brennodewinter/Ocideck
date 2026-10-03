@@ -95,7 +95,9 @@ showed an organiser name taken from the very bundle being verified; a layperson 
 a hostile template would always arrive on that path. **A fingerprint that does not match the bundle's
 signing key stops hard**, with no continue button.
 
-*Built:* `parseInviteLink`, `InviteLink.text`, `newInviteToken`, `inviteTokenHash`.
+*Built:* `parseInviteLink`, `InviteLink.text`, `newInviteToken`, `inviteTokenHash`; in the app *Open invitation…*
+on the start screen (`form_invitation_dialog.dart`), which shows the host before the request and the organiser's name
+(from the signed bundle) after it.
 
 ## 4. Respondent operations
 
@@ -153,7 +155,12 @@ Anyone who knows the `fid`. The published form, in every language it is publishe
 - The body is at most 8 MiB; a template at most 1 MiB; a bundle at most 256 KiB.
 
 *Built:* `parseIntakeFormResponse` (lenient: unknown members ignored, `state` required) and the limits
-`kIntakeMaxVariants`, `kIntakeMaxTemplateBytes`, `kIntakeMaxFormBytes`.
+`kIntakeMaxVariants`, `kIntakeMaxTemplateBytes`, `kIntakeMaxFormBytes`; in the app `IntakeClient.openInvitation`
+(`GET /v1/info`, then the form, then every bundle against the fingerprint from the link, the host and the pins — each
+bundle against the pins as they were **before** the response, and the pins afterwards the highest of those that
+passed). The HTTP layer is `PinnedIntakeHttp`: `https` only, ports 80, 443, 8080 and 8443, the host through
+`NetGuard.safeResolve` (never an internal address — an invitation is input from outside), the socket pinned to that
+address, no redirects, no `User-Agent`.
 
 ### 4.3 `PUT /v1/submissions/{sid}`
 
@@ -304,7 +311,11 @@ any does not. Further:
 - the signer of the bundles is the key that signed the request;
 - no variant's `bundle_seq` is **lower than the highest the server holds** for the form
   (`bundle-rollback`, `409`): equal is accepted, so that a re-publication is idempotent;
-- the set replaces the previous one. Removing an organiser is a new bundle with a higher `bundle_seq`.
+- **all the variants of one publication carry the same `bundle_seq`** (`bundle-invalid` otherwise), and the set
+  replaces the previous one. A respondent pins the highest `bundle_seq` it has seen per form and owner and refuses
+  a lower one, so a language published at a lower number than its sibling would be refused on the next visit by
+  everyone who had seen the higher. The owner's client therefore signs every language again at the new number
+  when it publishes a set. Removing an organiser is a new bundle with a higher `bundle_seq`.
 
 Answers `200 {"fid": "…", "variants": 2, "bundle_seq": 5}`.
 
