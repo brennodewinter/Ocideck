@@ -20,6 +20,7 @@ export 'src/form_blocks.dart';
 export 'src/form_bundle.dart';
 export 'src/form_compile.dart';
 export 'src/form_counts.dart';
+export 'src/form_editor_card.dart';
 export 'src/form_field_types.dart';
 export 'src/form_fill.dart';
 export 'src/form_image.dart';

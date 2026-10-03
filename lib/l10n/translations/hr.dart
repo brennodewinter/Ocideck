@@ -1631,6 +1631,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Redacteurskaart maken…': 'Izradi karticu urednika…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Karticom urednika vlasnik obrasca dodaje te u bundle, tako da i ti možeš otvarati prijave. Karticu se smije poslati e-poštom.',
+  'Jouw naam op de kaart': 'Tvoje ime na kartici',
+  'Kaart maken': 'Izradi karticu',
+  'Kaart kopiëren': 'Kopiraj karticu',
+  'Vingerafdruk van de kaart': 'Otisak prsta kartice',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Daj vlasniku ovaj otisak prsta drugim putem, a ne karticom, na primjer telefonom. On ga ponovno upisuje prije nego što te doda.',
   'Verzegeld opslaan…': 'Spremi zapečaćeno…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Šifrirana datoteka (.zip.age) koju može otvoriti samo organizator. Za to su vam potrebni datoteka bundlea i otisak prsta iz pozivnice.',

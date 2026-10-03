@@ -1647,6 +1647,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Redacteurskaart maken…': 'Създаване на карта на редактора…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'С карта на редактора собственикът на формуляр ви добавя към комплекта, за да можете и вие да отваряте изпращанията. Картата може да се изпрати по имейл.',
+  'Jouw naam op de kaart': 'Вашето име на картата',
+  'Kaart maken': 'Създаване на карта',
+  'Kaart kopiëren': 'Копиране на картата',
+  'Vingerafdruk van de kaart': 'Отпечатък на картата',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Дайте на собственика този отпечатък по друг път, а не с картата, например по телефона. Той го въвежда отново, преди да ви добави.',
   'Verzegeld opslaan…': 'Запазване запечатано…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Шифрован файл (.zip.age), който може да отвори само организаторът. За това са ви нужни файлът на комплекта и отпечатъкът от поканата.',

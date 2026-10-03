@@ -429,6 +429,31 @@ void main() {
     });
   });
 
+  group('de redacteurskaart', () {
+    test('draagt het adres, de sleutel en de kid van deze sleutel', () async {
+      final present = await created();
+      final card = editorCardOf(present.info, 'Tweede redacteur');
+      expect(card.name, 'Tweede redacteur');
+      expect(card.age, present.info.recipient);
+      expect(card.sign, present.info.signPublicKey);
+      expect(card.kid, present.info.kid);
+    });
+
+    test('de naam wordt bijgesneden; een naam die niet kan, werpt', () async {
+      final present = await created();
+      expect(editorCardOf(present.info, '  Team ').name, 'Team');
+      expect(() => editorCardOf(present.info, ''), throwsArgumentError);
+      expect(() => editorCardOf(present.info, 'x' * 81), throwsArgumentError);
+    });
+
+    test('de kaart leest terug, met dezelfde vingerafdruk', () async {
+      final card = editorCardOf((await created()).info, 'Sari');
+      final back =
+          (parseFormEditorCard(card.toText()) as FormEditorCardParsed).card;
+      expect(back.fingerprint, card.fingerprint);
+    });
+  });
+
   group('wissen', () {
     test('haalt de sleutel weg, ook een die niet te lezen is', () async {
       await created();

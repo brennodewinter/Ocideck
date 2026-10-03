@@ -6009,6 +6009,12 @@ dat en biedt het niets aan.
 - **Exporteren als age-sleutelbestand…** — schrijft de sleutel als gewoon `age`-sleutelbestand (leesbaar voor het
   commando `age`), zo gemaakt dat alleen jij het kunt lezen. Daarmee is een verzegeld bestand ook zonder OciDeck te
   openen.
+- **Redacteurskaart maken…** — voor een **redacteur die erbij komt**: de eigenaar van het formulier zet je in de bundel,
+  zodat ook jij de inzendingen kunt openen. Typ je naam en kies **Kaart maken**: het venster toont de kaart (een
+  regel tekst om te **kopiëren** en te sturen, desnoods per mail) en de **vingerafdruk van de kaart**. Geef die
+  vingerafdruk de eigenaar **langs een andere weg dan de kaart** — aan de telefoon, in persoon. De eigenaar typt hem terug
+  voordat hij je toevoegt. De vingerafdruk dekt de hele kaart, niet alleen je ondertekeningssleutel: wie de kaart
+  draagt kan er dus geen ander adres in zetten om jouw inzendingen mee te openen.
 - **Redactiesleutel verwijderen…** — na een bevestiging die nog eens zegt wat er mee verdwijnt.
 
 **Een sleutel wordt nooit overschreven.** Als de sleutelhanger niet te lezen is zegt OciDeck dat en maakt niets aan —

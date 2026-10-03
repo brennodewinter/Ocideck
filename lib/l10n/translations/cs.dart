@@ -1628,6 +1628,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Redacteurskaart maken…': 'Vytvořit kartu redaktora…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Pomocí karty redaktora vás vlastník formuláře přidá do bundle, abyste i vy mohli otevírat odeslání. Kartu lze poslat e-mailem.',
+  'Jouw naam op de kaart': 'Vaše jméno na kartě',
+  'Kaart maken': 'Vytvořit kartu',
+  'Kaart kopiëren': 'Kopírovat kartu',
+  'Vingerafdruk van de kaart': 'Otisk karty',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Předejte vlastníkovi tento otisk jinou cestou než kartu, například telefonem. Před přidáním vás ho znovu zadá.',
   'Verzegeld opslaan…': 'Uložit zapečetěné…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Šifrovaný soubor (.zip.age), který může otevřít jen organizátor. K tomu potřebujete soubor bundle a otisk z pozvánky.',

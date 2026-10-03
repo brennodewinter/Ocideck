@@ -1630,6 +1630,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Redacteurskaart maken…': 'Redaktorekarte erstelle…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Mit ere Redaktorekarte fügt di dr Bsitzer vo emene Formular zum Bundle zue, dass au du d Iischickige chasch ufmache. D Karte darf per E-Mail verschickt wärde.',
+  'Jouw naam op de kaart': 'Din Name uf dr Karte',
+  'Kaart maken': 'Karte erstelle',
+  'Kaart kopiëren': 'Karte kopiere',
+  'Vingerafdruk van de kaart': 'Fingerabdruck vo dr Karte',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Gib em Bsitzer dä Fingerabdruck uf eme andere Wäg as d Karte, zum Bispiil am Telefon. Är tippt ne zrügg, bevor är di zuefüegt.',
   'Verzegeld opslaan…': 'Verschlüsslet speichere…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Es verschlüsslets Fäil (.zip.age), won nume dr Organisator cha ufmache. Dezue bruuchsch du s Bundle-Fäil und dr Fingerabdruck us dr Iiladig.',

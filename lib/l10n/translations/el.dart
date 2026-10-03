@@ -1652,6 +1652,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Redacteurskaart maken…': 'Δημιουργία κάρτας συντάκτη…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Με μια κάρτα συντάκτη, ο κάτοχος μιας φόρμας σας προσθέτει στη δέσμη, ώστε να μπορείτε κι εσείς να ανοίγετε τις υποβολές. Η κάρτα μπορεί να σταλεί με email.',
+  'Jouw naam op de kaart': 'Το όνομά σας στην κάρτα',
+  'Kaart maken': 'Δημιουργία κάρτας',
+  'Kaart kopiëren': 'Αντιγραφή κάρτας',
+  'Vingerafdruk van de kaart': 'Δακτυλικό αποτύπωμα της κάρτας',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Δώστε στον κάτοχο αυτό το δακτυλικό αποτύπωμα με άλλον τρόπο από την κάρτα, π.χ. τηλεφωνικά. Το πληκτρολογεί ξανά πριν σας προσθέσει.',
   'Verzegeld opslaan…': 'Αποθήκευση σφραγισμένου…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Ένα κρυπτογραφημένο αρχείο (.zip.age) που μπορεί να ανοίξει μόνο ο διοργανωτής. Για αυτό χρειάζεστε το αρχείο της δέσμης και το δακτυλικό αποτύπωμα από την πρόσκληση.',

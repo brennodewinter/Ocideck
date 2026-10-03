@@ -1642,6 +1642,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Redacteurskaart maken…': 'Chartam redactoris creare…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Charta redactoris dominus formae te ad fascem addit, ut et tu missa aperire possis. Charta per epistulam electronicam mitti potest.',
+  'Jouw naam op de kaart': 'Nomen tuum in charta',
+  'Kaart maken': 'Chartam creare',
+  'Kaart kopiëren': 'Chartam transcribere',
+  'Vingerafdruk van de kaart': 'Vestigium digitale chartae',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Hoc vestigium digitale domino alia via da quam per chartam, exempli gratia telephono. Id rursus scribit antequam te addat.',
   'Verzegeld opslaan…': 'Obsignatum servare…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Fasciculus cryptatus (.zip.age) quem solus ordinator aperire potest. Ad hoc fasciculum fascis et vestigium digitale ex invitatione necesse est.',

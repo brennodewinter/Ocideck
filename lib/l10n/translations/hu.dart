@@ -1629,6 +1629,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Redacteurskaart maken…': 'Szerkesztői kártya létrehozása…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'A szerkesztői kártyával az űrlap tulajdonosa hozzáad téged a bundle-höz, hogy te is megnyithasd a beküldéseket. A kártya elküldhető e-mailben.',
+  'Jouw naam op de kaart': 'A neved a kártyán',
+  'Kaart maken': 'Kártya létrehozása',
+  'Kaart kopiëren': 'Kártya másolása',
+  'Vingerafdruk van de kaart': 'A kártya ujjlenyomata',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Add át a tulajdonosnak ezt az ujjlenyomatot más úton, mint a kártyát, például telefonon. Ő újra beírja, mielőtt hozzáad téged.',
   'Verzegeld opslaan…': 'Mentés lezártként…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Titkosított fájl (.zip.age), amelyet csak a szervező tud megnyitni. Ehhez szükséged van a bundle fájlra és a meghívóban lévő ujjlenyomatra.',

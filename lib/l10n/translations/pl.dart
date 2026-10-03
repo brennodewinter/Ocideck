@@ -1639,6 +1639,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Redacteurskaart maken…': 'Utwórz kartę redaktora…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Dzięki karcie redaktora właściciel formularza dodaje Cię do bundle, żebyś Ty też mógł otwierać zgłoszenia. Kartę można wysłać e-mailem.',
+  'Jouw naam op de kaart': 'Twoje imię i nazwisko na karcie',
+  'Kaart maken': 'Utwórz kartę',
+  'Kaart kopiëren': 'Kopiuj kartę',
+  'Vingerafdruk van de kaart': 'Odcisk palca karty',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Przekaż właścicielowi ten odcisk palca inną drogą niż kartę, na przykład przez telefon. Wpisze go ponownie, zanim Cię doda.',
   'Verzegeld opslaan…': 'Zapisz zapieczętowane…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Zaszyfrowany plik (.zip.age), który może otworzyć tylko organizator. Potrzebujesz do tego pliku bundle i odcisku palca z zaproszenia.',

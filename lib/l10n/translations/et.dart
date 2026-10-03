@@ -1620,6 +1620,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Redacteurskaart maken…': 'Loo toimetaja kaart…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Toimetaja kaardiga lisab vormi omanik sind bundle’isse, et ka sina saaksid esitusi avada. Kaarti tohib saata e-postiga.',
+  'Jouw naam op de kaart': 'Sinu nimi kaardil',
+  'Kaart maken': 'Loo kaart',
+  'Kaart kopiëren': 'Kopeeri kaart',
+  'Vingerafdruk van de kaart': 'Kaardi sõrmejälg',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Anna omanikule see sõrmejälg muud teed kui kaardiga, näiteks telefonis. Ta sisestab selle uuesti, enne kui sind lisab.',
   'Verzegeld opslaan…': 'Salvesta pitseeritult…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Krüpteeritud fail (.zip.age), mille saab avada ainult korraldaja. Selleks on vaja bundle’i faili ja kutse sõrmejälge.',

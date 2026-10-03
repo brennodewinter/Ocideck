@@ -1645,6 +1645,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Redacteurskaart maken…': 'Oħloq karta tal-editur…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'B’karta tal-editur, is-sid ta’ formola jżiedek mal-bundle, biex int ukoll tkun tista’ tiftaħ is-sottomissjonijiet. Il-karta tista’ tintbagħat bl-email.',
+  'Jouw naam op de kaart': 'Ismek fuq il-karta',
+  'Kaart maken': 'Oħloq karta',
+  'Kaart kopiëren': 'Ikkopja l-karta',
+  'Vingerafdruk van de kaart': 'Marka tas-swaba’ tal-karta',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Agħti lis-sid din il-marka tas-swaba’ b’mod ieħor mhux permezz tal-karta, pereżempju bit-telefon. Hu jittajpjaha mill-ġdid qabel ma jżiedek.',
   'Verzegeld opslaan…': 'Ħażen issiġillat…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Fajl ikkriptat (.zip.age) li jista’ jinfetaħ biss mill-organizzatur. Għal dan għandek bżonn il-fajl tal-bundle u l-marka tas-swaba’ mill-istedina.',

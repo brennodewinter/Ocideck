@@ -163,6 +163,16 @@ FormKeyProblem? keyProblemOf(FormKeyState state) => switch (state) {
   FormKeyDamaged() => FormKeyProblem.damaged,
 };
 
+/// De redacteurskaart van [info] onder [name] (§5.1, §7.6): wat de eigenaar van een formulier nodig
+/// heeft om deze sleutel in een bundel op te nemen. Werpt een [ArgumentError] voor een naam die niet
+/// op een kaart kan; de aanroeper controleert hem met [isValidEditorName] en zegt het de gebruiker.
+FormEditorCard editorCardOf(FormKeyInfo info, String name) =>
+    createFormEditorCard(
+      name: name,
+      age: info.recipient,
+      signPublicKey: base32Decode(info.signPublicKey)!,
+    );
+
 /// Wat de sleutelhanger over de redactiesleutel zegt.
 sealed class FormKeyState {
   const FormKeyState();

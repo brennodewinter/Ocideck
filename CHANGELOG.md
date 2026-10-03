@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **redacteurskaart** (formaat §5.1, fase 3): in *Redactiesleutel…* maakt een nieuwe redacteur een kaart — `{v, name, age, sign, kid}` als canonieke
+  JSON op één regel — met zijn naam, om te kopiëren, en de **vingerafdruk van de kaart** om aan de eigenaar van het formulier door te geven langs een
+  andere weg dan de kaart. De vingerafdruk (`base32(SHA-256("ocideck-editor-card-v1\n" + tekst))`) dekt de **hele kaart**: met een vingerafdruk over de
+  ondertekeningssleutel alleen kon wie de kaart droeg het age-adres verwisselen en bleef de vingerafdruk kloppen. De kaart wordt strikt gelezen (alleen
+  die sleutels, een `kid` die bij het adres hoort, een sleutel van 32 bytes in kleine letters, geen spaties rond de naam) en staat vast in een
+  testvector (CC0), onafhankelijk met `hashlib` nagerekend. Het team zelf (de eigenaar plakt de kaart en typt de vingerafdruk terug) en de
+  twee-sleutelsregel volgen. 7 nieuwe teksten in 30 talen.
 - De invuller kan een inzending **verzegeld opslaan** (formaat §5.1, §5.6, fase 3): *Verzegeld opslaan…* vraagt om het bundelbestand van de
   organisator en om de **vingerafdruk** uit de uitnodiging, gelooft de bundel pas als hij daarmee klopt (handtekening, de eigen tekst van het
   formulier, geldigheid, volgnummer ten opzichte van de bundels die de invuller al zag) en verzegelt dan naar **alle** organisatoren die de bundel

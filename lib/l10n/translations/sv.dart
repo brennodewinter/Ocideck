@@ -1626,6 +1626,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Redacteurskaart maken…': 'Skapa redaktörskort…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Med ett redaktörskort lägger ägaren av ett formulär till dig i bundlen, så att du också kan öppna inlämningarna. Kortet får skickas med e-post.',
+  'Jouw naam op de kaart': 'Ditt namn på kortet',
+  'Kaart maken': 'Skapa kort',
+  'Kaart kopiëren': 'Kopiera kort',
+  'Vingerafdruk van de kaart': 'Kortets fingeravtryck',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Ge ägaren det här fingeravtrycket på ett annat sätt än kortet, till exempel i telefon. Ägaren skriver in det igen innan du läggs till.',
   'Verzegeld opslaan…': 'Spara förseglat…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'En krypterad fil (.zip.age) som bara arrangören kan öppna. För det behöver du bundle-filen och fingeravtrycket från inbjudan.',

@@ -1643,6 +1643,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Redacteurskaart maken…': 'Creează fișa redactorului…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Cu o fișă a redactorului, proprietarul unui formular te adaugă la bundle, ca să poți deschide și tu trimiterile. Fișa poate fi trimisă prin e-mail.',
+  'Jouw naam op de kaart': 'Numele tău pe fișă',
+  'Kaart maken': 'Creează fișa',
+  'Kaart kopiëren': 'Copiază fișa',
+  'Vingerafdruk van de kaart': 'Amprenta fișei',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Dă proprietarului această amprentă pe altă cale decât fișa, de exemplu la telefon. El o scrie din nou înainte să te adauge.',
   'Verzegeld opslaan…': 'Salvează sigilat…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Un fișier criptat (.zip.age) pe care îl poate deschide doar organizatorul. Pentru asta ai nevoie de fișierul bundle și de amprenta din invitație.',

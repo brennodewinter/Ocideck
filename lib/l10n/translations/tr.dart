@@ -2538,6 +2538,15 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Redacteurskaart maken…': 'Editör kartı oluştur…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Editör kartıyla bir formun sahibi sizi bundle’a ekler, böylece siz de gönderileri açabilirsiniz. Kart e-postayla gönderilebilir.',
+  'Jouw naam op de kaart': 'Karttaki adınız',
+  'Kaart maken': 'Kart oluştur',
+  'Kaart kopiëren': 'Kartı kopyala',
+  'Vingerafdruk van de kaart': 'Kartın parmak izi',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Bu parmak izini sahibine kartın dışında başka bir yoldan verin, örneğin telefonla. Sizi eklemeden önce onu yeniden yazar.',
   'Verzegeld opslaan…': 'Mühürlü kaydet…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Yalnızca organizatörün açabileceği şifreli bir dosya (.zip.age). Bunun için bundle dosyasına ve davetiyedeki parmak izine ihtiyacınız var.',

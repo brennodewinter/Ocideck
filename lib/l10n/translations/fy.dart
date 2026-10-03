@@ -667,6 +667,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Redacteurskaart maken…': 'Redakteurkaart meitsje…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Mei in redakteurkaart foeget de eigener fan in formulier dy ta oan de bondel, sadat ek do de ynstjoeringen iepenje kinst. De kaart mei per e-mail.',
+  'Jouw naam op de kaart': 'Dyn namme op de kaart',
+  'Kaart maken': 'Kaart meitsje',
+  'Kaart kopiëren': 'Kaart kopiearje',
+  'Vingerafdruk van de kaart': 'Fingerôfdruk fan de kaart',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Jou de eigener dizze fingerôfdruk op in oare wei as de kaart, bygelyks oan de tillefoan. Hy typt him werom foardat er dy tafoeget.',
   'Verzegeld opslaan…': 'Fersegele bewarje…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'In fersifere bestân (.zip.age) dat allinnich de organisator iepenje kin. Dêrfoar hawwe jo it bondelbestân en de fingerôfdruk út de útnoeging nedich.',

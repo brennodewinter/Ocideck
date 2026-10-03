@@ -1625,6 +1625,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Redacteurskaart maken…': 'Izveidot redaktora karti…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Ar redaktora karti veidlapas īpašnieks pievieno jūs bundle, lai arī jūs varētu atvērt iesūtījumus. Karti drīkst nosūtīt pa e-pastu.',
+  'Jouw naam op de kaart': 'Jūsu vārds kartē',
+  'Kaart maken': 'Izveidot karti',
+  'Kaart kopiëren': 'Kopēt karti',
+  'Vingerafdruk van de kaart': 'Kartes pirkstu nospiedums',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Dodiet īpašniekam šo pirkstu nospiedumu citā ceļā nekā karti, piemēram, pa tālruni. Viņš to ievada vēlreiz, pirms pievieno jūs.',
   'Verzegeld opslaan…': 'Saglabāt aizzīmogotu…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Šifrēts fails (.zip.age), ko var atvērt tikai organizators. Tam jums vajadzīgs bundle fails un pirkstu nospiedums no uzaicinājuma.',
