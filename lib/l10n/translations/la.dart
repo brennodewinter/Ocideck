@@ -1642,6 +1642,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Exemplar operis abiectum est. Quod advenit iterum aestimatur.',
+  'Er is geen werkkopie.': 'Nullum exemplar operis est.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Exemplar operis abici non potuit.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Exemplar operis delet. Quod advenit manet et iterum aestimatur.',
+  'Werkkopie weggooien…': 'Exemplar operis abicere…',
+  'Werkkopie weggooien': 'Exemplar operis abicere',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Exemplar operis cum emendationibus deletur nec recuperari potest. Quod advenit manet et iterum aestimatur. Si exemplar operis adhuc in tabula apertum est, eam prius claude.',
+  'Weggooien': 'Abicere',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Haec missio revocata est et ideo in nullum caput venit.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

@@ -1655,6 +1655,18 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'A cópia de trabalho foi deitada fora. O que chegou é avaliado de novo.',
+  'Er is geen werkkopie.': 'Não há cópia de trabalho.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Não foi possível deitar fora a cópia de trabalho.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Elimina a cópia de trabalho. O que chegou fica e é avaliado de novo.',
+  'Werkkopie weggooien…': 'Deitar fora a cópia de trabalho…',
+  'Werkkopie weggooien': 'Deitar fora a cópia de trabalho',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'A cópia de trabalho com as melhorias é eliminada e não pode ser recuperada. O que chegou fica e é avaliado de novo. Se a cópia de trabalho ainda estiver aberta num separador, feche-o primeiro.',
+  'Weggooien': 'Deitar fora',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Este envio foi retirado e por isso não entra em nenhum capítulo.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

@@ -667,6 +667,18 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'La copie de travail a été jetée. Ce qui est arrivé est de nouveau évalué.',
+  'Er is geen werkkopie.': 'Il n\'y a pas de copie de travail.',
+  'De werkkopie kon niet worden weggegooid.':
+      'La copie de travail n\'a pas pu être jetée.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Supprime la copie de travail. Ce qui est arrivé reste et est de nouveau évalué.',
+  'Werkkopie weggooien…': 'Jeter la copie de travail…',
+  'Werkkopie weggooien': 'Jeter la copie de travail',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'La copie de travail avec les améliorations est supprimée et ne peut pas être récupérée. Ce qui est arrivé reste et est de nouveau évalué. Si la copie de travail est encore ouverte dans un onglet, fermez-le d\'abord.',
+  'Weggooien': 'Jeter',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Cet envoi a été retiré et ne figure donc dans aucun chapitre.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

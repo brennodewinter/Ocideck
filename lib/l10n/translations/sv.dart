@@ -1626,6 +1626,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Arbetskopian är kastad. Det som kom in bedöms på nytt.',
+  'Er is geen werkkopie.': 'Det finns ingen arbetskopia.',
+  'De werkkopie kon niet worden weggegooid.': 'Arbetskopian kunde inte kastas.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Tar bort arbetskopian. Det som kom in finns kvar och bedöms på nytt.',
+  'Werkkopie weggooien…': 'Kasta arbetskopian…',
+  'Werkkopie weggooien': 'Kasta arbetskopian',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Arbetskopian med förbättringarna tas bort och kan inte hämtas tillbaka. Det som kom in finns kvar och bedöms på nytt. Är arbetskopian fortfarande öppen i en flik, stäng den först.',
+  'Weggooien': 'Kasta',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Den här inlämningen har återkallats och hamnar därför i inget kapitel.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

@@ -5937,6 +5937,11 @@ Onder een opengeklapte inzending staan de **acties**:
   op de werkkopie — een punt dat je herstelde is weg, en de regel zegt dat de beoordeling over de werkkopie
   gaat — en kun je haar status verder zetten. Verander je in de werkkopie de eigen tekst van het formulier, dan
   zegt de Inbox dat: dat is geen antwoord.
+- **Werkkopie weggooien…** (alleen als die er is) — terug naar wat binnenkwam. De bevestiging zegt wat gaat (de
+  werkkopie met haar verbeteringen, voorgoed) en wat blijft (wat binnenkwam, de foto's, het register), en vraagt de
+  werkkopie eerst te sluiten als ze nog in een tabblad openstaat, anders brengt opslaan haar terug. De inzending wordt
+  daarna weer beoordeeld op wat binnenkwam. Het werkt ook voor een werkkopie die niet te lezen is, en is daarmee de
+  uitweg eruit; nooit voor een verwijderde inzending.
 - **Boek samenstellen…** — maak van de goedgekeurde inzendingen één document. Kies het formulier, een
   **hoofdstuksjabloon** (een gewoon `.md`-bestand waarin `{veld-id}` staat voor het antwoord op dat veld), welke
   **statussen** erin komen (kent het formulier `maker-approved`, dan staat die al aan; anders staat er niets aan en

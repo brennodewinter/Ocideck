@@ -1630,6 +1630,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'D Arbeitskopie isch verworfe worde. Was iigange isch, wird wider beurteilt.',
+  'Er is geen werkkopie.': 'Es git kei Arbeitskopie.',
+  'De werkkopie kon niet worden weggegooid.':
+      'D Arbeitskopie het nid chöne verworfe wärde.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Lösche d Arbeitskopie. Was iigange isch, blibt und wird wider beurteilt.',
+  'Werkkopie weggooien…': 'Arbeitskopie verwärfe…',
+  'Werkkopie weggooien': 'Arbeitskopie verwärfe',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'D Arbeitskopie mit de Verbesserige wird glöscht und cha nid zrugg gholt wärde. Was iigange isch, blibt und wird wider beurteilt. Isch d Arbeitskopie no iemne Tab offe, schliess dä zersch.',
+  'Weggooien': 'Verwärfe',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Die Iischickig isch zruggzoge worde und chunnt drum i kes Kapitel.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

@@ -1629,6 +1629,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'A munkapéldányt eldobtuk. Ami beérkezett, azt újra elbíráljuk.',
+  'Er is geen werkkopie.': 'Nincs munkapéldány.',
+  'De werkkopie kon niet worden weggegooid.':
+      'A munkapéldányt nem sikerült eldobni.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Törli a munkapéldányt. Ami beérkezett, az megmarad, és újra elbíráljuk.',
+  'Werkkopie weggooien…': 'Munkapéldány eldobása…',
+  'Werkkopie weggooien': 'Munkapéldány eldobása',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'A munkapéldány a javításokkal együtt törlődik, és nem állítható vissza. Ami beérkezett, az megmarad, és újra elbíráljuk. Ha a munkapéldány még nyitva van egy lapon, előbb zárd be.',
+  'Weggooien': 'Eldobás',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Ezt a beküldést visszavonták, ezért egyik fejezetbe sem kerül be.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

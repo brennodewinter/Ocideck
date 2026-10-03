@@ -1631,6 +1631,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Radna kopija je odbačena. Ono što je stiglo ponovno se ocjenjuje.',
+  'Er is geen werkkopie.': 'Nema radne kopije.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Radnu kopiju nije bilo moguće odbaciti.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Briše radnu kopiju. Ono što je stiglo ostaje i ponovno se ocjenjuje.',
+  'Werkkopie weggooien…': 'Odbaci radnu kopiju…',
+  'Werkkopie weggooien': 'Odbaci radnu kopiju',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Radna kopija s poboljšanjima briše se i ne može se vratiti. Ono što je stiglo ostaje i ponovno se ocjenjuje. Ako je radna kopija još otvorena u kartici, najprije je zatvori.',
+  'Weggooien': 'Odbaci',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Ova prijava je povučena pa ne ulazi ni u jedno poglavlje.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

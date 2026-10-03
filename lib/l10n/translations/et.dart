@@ -1620,6 +1620,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Töökoopia visati ära. Saabunut hinnatakse uuesti.',
+  'Er is geen werkkopie.': 'Töökoopiat ei ole.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Töökoopiat ei õnnestunud ära visata.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Kustutab töökoopia. Saabunu jääb alles ja seda hinnatakse uuesti.',
+  'Werkkopie weggooien…': 'Viska töökoopia ära…',
+  'Werkkopie weggooien': 'Viska töökoopia ära',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Töökoopia koos parandustega kustutatakse ja seda ei saa tagasi tuua. Saabunu jääb alles ja seda hinnatakse uuesti. Kui töökoopia on veel vahekaardil avatud, sulge see enne.',
+  'Weggooien': 'Viska ära',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'See esitus on tagasi võetud ja satub seetõttu ühtegi peatükki.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

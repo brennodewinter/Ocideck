@@ -1627,6 +1627,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Työkopio heitettiin pois. Se, mikä saapui, arvioidaan uudelleen.',
+  'Er is geen werkkopie.': 'Työkopiota ei ole.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Työkopiota ei voitu heittää pois.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Poistaa työkopion. Se, mikä saapui, säilyy ja arvioidaan uudelleen.',
+  'Werkkopie weggooien…': 'Heitä työkopio pois…',
+  'Werkkopie weggooien': 'Heitä työkopio pois',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Työkopio parannuksineen poistetaan, eikä sitä voi palauttaa. Se, mikä saapui, säilyy ja arvioidaan uudelleen. Jos työkopio on vielä auki välilehdellä, sulje se ensin.',
+  'Weggooien': 'Heitä pois',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Tämä lähetys on peruttu, joten se ei päädy mihinkään lukuun.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

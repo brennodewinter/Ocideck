@@ -334,6 +334,10 @@ class _Detail extends StatelessWidget {
               delete: delete,
               onOpenFile: onOpenFile,
               canEdit: result is FormStoredReview,
+              hasWorkingCopy: switch (result) {
+                FormStoredReview(:final edited) => edited,
+                FormStoredUnavailable(:final edited) => edited,
+              },
             ),
           ],
         );

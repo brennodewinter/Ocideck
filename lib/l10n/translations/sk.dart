@@ -1633,6 +1633,18 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Pracovná kópia bola zahodená. To, čo prišlo, sa posudzuje znova.',
+  'Er is geen werkkopie.': 'Pracovná kópia neexistuje.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Pracovnú kópiu sa nepodarilo zahodiť.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Zmaže pracovnú kópiu. To, čo prišlo, zostane a posudzuje sa znova.',
+  'Werkkopie weggooien…': 'Zahodiť pracovnú kópiu…',
+  'Werkkopie weggooien': 'Zahodiť pracovnú kópiu',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Pracovná kópia s úpravami sa zmaže a nedá sa vrátiť. To, čo prišlo, zostane a posudzuje sa znova. Ak je pracovná kópia ešte otvorená na karte, najprv ju zatvorte.',
+  'Weggooien': 'Zahodiť',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Toto odoslanie bolo stiahnuté, a preto nepríde do žiadnej kapitoly.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

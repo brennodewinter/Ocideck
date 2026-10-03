@@ -2538,6 +2538,17 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Çalışma kopyası atıldı. Gelen yeniden değerlendirilir.',
+  'Er is geen werkkopie.': 'Çalışma kopyası yok.',
+  'De werkkopie kon niet worden weggegooid.': 'Çalışma kopyası atılamadı.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Çalışma kopyasını siler. Gelen olduğu gibi kalır ve yeniden değerlendirilir.',
+  'Werkkopie weggooien…': 'Çalışma kopyasını at…',
+  'Werkkopie weggooien': 'Çalışma kopyasını at',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'İyileştirmelerle birlikte çalışma kopyası silinir ve geri getirilemez. Gelen olduğu gibi kalır ve yeniden değerlendirilir. Çalışma kopyası hâlâ bir sekmede açıksa önce onu kapatın.',
+  'Weggooien': 'At',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Bu gönderi geri çekildi, bu yüzden hiçbir bölüme girmez.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

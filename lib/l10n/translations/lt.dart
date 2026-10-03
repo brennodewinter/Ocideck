@@ -1634,6 +1634,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Darbinė kopija išmesta. Tai, kas gauta, vertinama iš naujo.',
+  'Er is geen werkkopie.': 'Darbinės kopijos nėra.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Darbinės kopijos nepavyko išmesti.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Ištrina darbinę kopiją. Tai, kas gauta, lieka ir vertinama iš naujo.',
+  'Werkkopie weggooien…': 'Išmesti darbinę kopiją…',
+  'Werkkopie weggooien': 'Išmesti darbinę kopiją',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Darbinė kopija su patobulinimais bus ištrinta ir jos nebus galima atkurti. Tai, kas gauta, lieka ir vertinama iš naujo. Jei darbinė kopija dar atidaryta skirtuke, pirmiausia jį uždarykite.',
+  'Weggooien': 'Išmesti',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Šis pateikimas atsiimtas, todėl į jokį skyrių nepatenka.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

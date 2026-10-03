@@ -5879,6 +5879,11 @@ Under an opened submission are its **actions**:
   editing. Back in the Inbox the submission is judged again on the working copy — a point you fixed is gone, and
   the line says the judgement is about the working copy — and you can then move its status on. Change the form's
   own text in the working copy and the Inbox says so: that is not an answer.
+- **Throw away working copy…** (only when there is one) — back to what arrived. The confirmation says what goes
+  (the working copy and its improvements, for good) and what stays (what arrived, the photos, the register), and
+  asks you to close the working copy first if it is still open in a tab, or saving it would bring it back. The
+  submission is then judged on what arrived again. It also works for a working copy that cannot be read, which is
+  how you get out of one; never for a deleted submission.
 - **Compile book…** — turn the accepted submissions into one document. Choose the form, a **chapter template**
   (an ordinary `.md` file in which `{field-id}` stands for the answer to that field), which **statuses** go in (with
   the form's `maker-approved` state, that one is already ticked; otherwise nothing is and you choose), optionally

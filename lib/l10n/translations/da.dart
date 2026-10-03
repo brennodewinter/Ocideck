@@ -1627,6 +1627,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Arbejdskopien er smidt væk. Det, der kom ind, bedømmes igen.',
+  'Er is geen werkkopie.': 'Der er ingen arbejdskopi.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Arbejdskopien kunne ikke smides væk.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Sletter arbejdskopien. Det, der kom ind, bliver stående og bedømmes igen.',
+  'Werkkopie weggooien…': 'Smid arbejdskopien væk…',
+  'Werkkopie weggooien': 'Smid arbejdskopien væk',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Arbejdskopien med forbedringerne slettes og kan ikke hentes tilbage. Det, der kom ind, bliver stående og bedømmes igen. Er arbejdskopien stadig åben i en fane, så luk den først.',
+  'Weggooien': 'Smid væk',
   'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
       'Denne indsendelse er trukket tilbage og kommer derfor ikke i noget kapitel.',
   'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':

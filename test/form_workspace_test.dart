@@ -517,6 +517,121 @@ void main() {
       expect(() => workspace.workingCopy('../x'), throwsArgumentError);
     });
 
+    group('weggooien', () {
+      test('verwijdert alleen de werkkopie', () async {
+        final received = await landed();
+        final before = await received.readAsBytes();
+        await workspace.workingCopy(sid);
+        await copyFile().writeAsString('Verbeterd door de redactie.');
+        expect(
+          await workspace.discardWorkingCopy(sid),
+          FormDiscardResult.discarded,
+        );
+        expect(copyFile().existsSync(), isFalse);
+        expect(await received.readAsBytes(), before);
+        expect(
+          File(
+            p.join(workspace.submissionPath(sid), 'manifest.json'),
+          ).existsSync(),
+          isTrue,
+        );
+      });
+
+      test('de beoordeling gaat daarna weer over wat binnenkwam', () async {
+        await landed();
+        await workspace.workingCopy(sid);
+        expect(
+          ((await workspace.reviewStored(sid)) as FormStoredReview).edited,
+          isTrue,
+        );
+        await workspace.discardWorkingCopy(sid);
+        expect(
+          ((await workspace.reviewStored(sid)) as FormStoredReview).edited,
+          isFalse,
+        );
+      });
+
+      test('zonder werkkopie is er niets te doen', () async {
+        await landed();
+        expect(await workspace.discardWorkingCopy(sid), FormDiscardResult.none);
+        await workspace.workingCopy(sid);
+        await workspace.discardWorkingCopy(sid);
+        expect(await workspace.discardWorkingCopy(sid), FormDiscardResult.none);
+      });
+
+      test('een verwijzing naar niets is geen werkkopie', () async {
+        if (Platform.isWindows) return;
+        await landed();
+        Link(copyFile().path).createSync(p.join(dir.path, 'bestaat-niet'));
+        expect(await workspace.discardWorkingCopy(sid), FormDiscardResult.none);
+        expect(
+          ((await workspace.reviewStored(sid)) as FormStoredReview).edited,
+          isFalse,
+        );
+      });
+
+      test('een map met die naam is geen werkkopie en blijft staan', () async {
+        await landed();
+        final folder = Directory(copyFile().path)..createSync();
+        expect(await workspace.discardWorkingCopy(sid), FormDiscardResult.none);
+        expect(folder.existsSync(), isTrue);
+      });
+
+      test(
+        'een verwijzing wordt zelf verwijderd, wat erachter ligt blijft',
+        () async {
+          if (Platform.isWindows) return;
+          await landed();
+          final outside = File(p.join(dir.path, 'buiten.md'))
+            ..writeAsStringSync('niet van de werkmap');
+          Link(copyFile().path).createSync(outside.path);
+          expect(
+            await workspace.discardWorkingCopy(sid),
+            FormDiscardResult.discarded,
+          );
+          expect(
+            FileSystemEntity.typeSync(copyFile().path, followLinks: false),
+            FileSystemEntityType.notFound,
+          );
+          expect(outside.readAsStringSync(), 'niet van de werkmap');
+        },
+      );
+
+      test(
+        'een schijf waar niet in te schrijven valt meldt dat het mislukte',
+        () async {
+          if (Platform.isWindows) return;
+          await landed();
+          await workspace.workingCopy(sid);
+          final folder = workspace.submissionPath(sid);
+          await Process.run('chmod', ['555', folder]);
+          addTearDown(() => Process.run('chmod', ['755', folder]));
+          expect(
+            await workspace.discardWorkingCopy(sid),
+            FormDiscardResult.failed,
+          );
+          expect(copyFile().existsSync(), isTrue);
+        },
+      );
+
+      test(
+        'een werkkopie die niet te lezen is staat als bewerkt in de uitkomst',
+        () async {
+          await landed();
+          await workspace.workingCopy(sid);
+          await copyFile().writeAsBytes([0xff, 0xfe, 0x00]);
+          final result =
+              await workspace.reviewStored(sid) as FormStoredUnavailable;
+          expect(result.edited, isTrue);
+          expect(result.deleted, isFalse);
+        },
+      );
+
+      test('een nummer buiten de grammatica is een programmeerfout', () {
+        expect(() => workspace.discardWorkingCopy('../x'), throwsArgumentError);
+      });
+    });
+
     test('de beoordeling gaat daarna over de kopie', () async {
       await workspace.publishForm(kook);
       final package = packageOf(kook, naam: '');
