@@ -32,7 +32,7 @@ void main() {
   );
 
   test(
-    'een bestaand bestand met wijde rechten wordt eerst beperkt, dan overschreven',
+    'een bestaand bestand met wijde rechten wordt vervangen door een met beperkte rechten',
     () async {
       if (Platform.isWindows) return;
       final path = p.join(dir.path, 'sleutel.txt');
@@ -42,6 +42,32 @@ void main() {
       await writeSecretFile(path, 'nieuw geheim\n');
       expect(mode(path), 0x180);
       expect(File(path).readAsStringSync(), 'nieuw geheim\n');
+    },
+  );
+
+  test(
+    'na een geslaagde schrijfbeurt ligt er geen tijdelijk bestand',
+    () async {
+      final path = p.join(dir.path, 'sleutel.txt');
+      await writeSecretFile(path, 'geheim');
+      await writeSecretFile(path, 'geheim twee');
+      expect(dir.listSync().map((e) => p.basename(e.path)), ['sleutel.txt']);
+    },
+  );
+
+  test(
+    'kan het nieuwe bestand niet op zijn plaats, dan blijft er niets met het geheim achter',
+    () async {
+      // Het doel is een map: rename faalt, en het tijdelijke bestand moet weg.
+      final target = Directory(p.join(dir.path, 'sleutel.txt'))..createSync();
+      await expectLater(
+        writeSecretFile(target.path, 'geheim'),
+        throwsA(isA<FileSystemException>()),
+      );
+      expect(target.existsSync(), isTrue);
+      expect(dir.listSync().map((e) => p.basename(e.path)), [
+        'sleutel.txt',
+      ], reason: 'geen .tmp met het geheim erin');
     },
   );
 
