@@ -6021,6 +6021,21 @@ dat en biedt het niets aan.
 een sleutelhanger die niet antwoordt is geen lege sleutelhanger — en hetzelfde als wat er staat niet als sleutel te
 lezen is. Wat je intikt wordt in geen enkele melding herhaald.
 
+**Team…** (onderaan de Inbox; vraagt een werkmap). Het team van een formulier zijn de redacteurs **naast jou** die in elke
+bundel staan die jij ondertekent, zodat ook zij de inzendingen kunnen openen. Het staat in het bestand `team.json` in de
+werkmap, dus een gedeelde werkmap deelt zijn team. **Een redacteur toevoegen**: hij maakt een kaart (*Redacteurskaart
+maken…* in zijn venster *Redactiesleutel…*) en stuurt hem je. Plak hem en kies **Kaart controleren**: het venster toont
+alleen zijn naam. Typ dan **de vingerafdruk van de kaart** die hij je gaf *langs een andere weg dan de kaart* — aan de
+telefoon, in persoon — en kies **Toevoegen**. De vingerafdruk wordt je niet eerst getoond, met opzet: overtikken van het
+scherm controleert niets. Het stopt, en zegt waarom, als de vingerafdruk niet bij de kaart past (de kaart is veranderd of
+niet van wie je denkt), de kaart je eigen kaart is, de redacteur er al in staat, het team vol is (een bundel noemt hooguit
+64 organisatoren, jou meegeteld) of `team.json` niet te lezen is (het blijft met rust). **Verwijderen** vraagt eerst en zegt
+wat blijft: bundels die je eerder publiceerde blijven zoals ze zijn tot je opnieuw publiceert, en wat al voor die persoon
+is verzegeld blijft voor hem leesbaar. Publiceer na elke wijziging opnieuw: de bundel noemt jou eerst en daarna de
+redacteurs in de volgorde waarin ze zijn toegevoegd, en het venster zegt *Naast jou in de bundel: …*.
+
+**Publiceren vraagt een weg terug**: je herstelsleutel teruggetypt, *of* een tweede redacteur in het team.
+
 **Bundel publiceren…** (onder de formulieren in de Inbox). Een invuller neemt een formulier niet zomaar aan: de
 **bundel** zegt naar welke sleutel hij verzegelt en welke tekst erbij hoort, en is ondertekend met je
 redactiesleutel. Kies het formulier — **elke taal is een eigen tekst en krijgt een eigen bundel** —, de *naam voor de
@@ -6031,9 +6046,9 @@ andere weg dan het bundelbestand** — in de uitnodiging, bijvoorbeeld. De bunde
 komt; de vingerafdruk wel. Opnieuw publiceren geeft een bundel met het volgende volgnummer, over de oude heen; het
 nummer loopt door over de talen en versies van één formulier, want een invuller weigert een lager nummer dan hij zag.
 
-Er wordt niets ondertekend, en het venster zegt waarom, als: er geen bruikbare redactiesleutel is; de
-**herstelsleutel niet is teruggetypt** (zonder weg terug is elke inzending onleesbaar als dit apparaat stuk gaat —
-*Redactiesleutel…*); de naam leeg is of langer dan 80 tekens; *geldig tot* geen datum is of vóór de sluitingsdag
+Er wordt niets ondertekend, en het venster zegt waarom, als: er geen bruikbare redactiesleutel is; er **geen weg terug
+is** — de herstelsleutel is niet teruggetypt en het team heeft geen tweede redacteur (zonder een van beide is elke inzending
+onleesbaar als dit apparaat stuk gaat — *Redactiesleutel…*, *Team…*); `team.json` niet te lezen is; de naam leeg is of langer dan 80 tekens; *geldig tot* geen datum is of vóór de sluitingsdag
 ligt; of een bundel van dit formulier in de werkmap niet te lezen is, waardoor het volgende volgnummer niet te weten
 is. Sluitingsdag en bewaartermijn komen uit het formulier zelf.
 

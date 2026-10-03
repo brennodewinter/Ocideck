@@ -1327,6 +1327,7 @@ The organiser's workspace is plain files with **English structure names**
 │   ├── submission.edit.md     # the working copy redaction happens in (optional)
 │   ├── images/                # as received (metadata stripped, §5.5)
 │   └── manifest.json          # kept even after deletion — the minimal record (§9.3)
+├── team.json                  # the editors besides the owner (§7.6, as built)
 ├── overview.md                # the register: one Markdown table (§7.3)
 └── book/                      # compile output: an ordinary document (§7.5)
 ```
@@ -1489,6 +1490,24 @@ would have grown into a programming language.)
   verification the collab design already has.
 - The first editor to fetch and ack must not leave the others with an empty Inbox
   after the purge: see the retention rule (§6.5) and the shared workspace above.
+
+*As built — the team* (`form_team.dart`, `form_team_actions.dart`, `form_team_dialog.dart`; Inbox → **Team…**).
+The owner is whoever holds the editorial key on this machine; the **team** is the other editors, listed in every
+bundle the owner signs so they can open the submissions too. It is `<workspace>/team.json`:
+`{"v": 1, "editors": [card, …]}`, each entry an editor card (§5.1) — so a shared workspace (a storage
+connection) shares the team. **Adding an editor takes two steps, in this order:** the owner pastes the card —
+the window then shows *only the name* — and types back the **fingerprint of the card** that the editor gave by
+another road (read aloud, on the phone). The fingerprint is deliberately not shown before it is typed: whoever
+copies it off the screen checks nothing. `addFormEditor` reads the card text and the typed fingerprint itself and
+reports a wrong fingerprint **before** any other refusal; then refuses the owner's own card (recipient, signing
+key or key id), a repeat of an editor already there, and a team of 63 (a bundle names at most 64 organisers, the
+owner counted). A `team.json` that cannot be read is **never overwritten** and stops publishing, like the register.
+**Removing** an editor takes a confirmation that says what stays: bundles already published stay as they are
+until the owner publishes again (a respondent who still holds the old one keeps sealing to the departed editor
+until it expires or they fetch the new one — the pins of §5.1 protect them against *older* bundles, not this),
+and what was already sealed for that person stays readable to them.
+**The publishing rule of this section is met two ways:** the recovery key typed back, **or** at least one editor
+in the team (two keys). Publishing lists the owner first and the editors in the order they were added.
 
 ### 7.7 The author's side: writing a form
 
@@ -1933,10 +1952,11 @@ web build offers no sealed export: `dartage` does not run under dart2js (a `wasm
 precondition of the web respondent, phase 4). The respondent's side of the file route is done; the server
 route is phase 4.
 **Built since:** the editor card (§5.1): a new editor makes it in *Editorial key…* (their name, the card text
-to copy, the card's fingerprint to read out). Listing editors in the owner's workspace (the team) and the
-two-key rule, which need the card, are next.
-**Still to build:** the team of organisers (add an editor) and the two-key rule, and the dossier for the
-external review.
+to copy, the card's fingerprint to read out). The team (§7.6): *Team…* in the Inbox adds an editor from their card
+and the fingerprint typed back, removes one, and `publishFormBundle` lists the owner and the team — with the
+two-key rule (recovery key typed back, **or** an editor in the team).
+**Still to build:** the dossier for the external review, the run against the reference `age` binary, and — phase
+4 — the server and the web respondent.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
