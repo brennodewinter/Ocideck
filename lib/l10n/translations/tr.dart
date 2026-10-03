@@ -2538,6 +2538,28 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: mühürlü paket açıldı ve içe aktarıldı.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: bu paket mühürlü ve bu platformda yayın kurulu anahtarı için anahtarlık yok.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: bu paket mühürlü ve onu açacak bir yayın kurulu anahtarı henüz yok. Yayın kurulu anahtarı… altında bir tane oluşturun ya da kurtarma anahtarınızdan geri yükleyin.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: bu paket mühürlü ve anahtarlık okunamıyor. Hiçbir şey denenmedi.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: bu paket mühürlü ve kayıtlı yayın kurulu anahtarı okunamıyor. Yayın kurulu anahtarı… altında silin ve kurtarma anahtarınızdan geri yükleyin.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: bu paket sizin yayın kurulu anahtarınız için mühürlenmemiş.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: bu paket değiştirilmiş veya yarıda kesilmiş ve açılmayacak.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: bu paket bir gönderinin olabileceğinden daha büyük.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: kayıtlı yayın kurulu anahtarı, OciDeck’in kullanabileceği bir anahtar değil.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: OciDeck’in okuyabileceği mühürlü bir paket değil.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Mühürlü bir dosya (.zip.age) yayın kurulu anahtarınızla açılır.',
   'Herstelsleutel controleren': 'Kurtarma anahtarını kontrol et',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Yayın kurulu anahtarı oluşturuldu. Şimdi kurtarma anahtarını yazın.',

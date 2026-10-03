@@ -1625,6 +1625,28 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: aizzīmogotā pakotne atvērta un importēta.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: šī pakotne ir aizzīmogota, un šai platformai nav atslēgu saišķa redakcijas atslēgai.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: šī pakotne ir aizzīmogota, un vēl nav redakcijas atslēgas, ar ko to atvērt. Izveidojiet to sadaļā Redakcijas atslēga… vai atjaunojiet no atkopšanas atslēgas.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: šī pakotne ir aizzīmogota, un atslēgu saišķi nevar nolasīt. Nekas netika mēģināts.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: šī pakotne ir aizzīmogota, un saglabāto redakcijas atslēgu nevar nolasīt. Dzēsiet to sadaļā Redakcijas atslēga… un atjaunojiet no atkopšanas atslēgas.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: šī pakotne nav aizzīmogota jūsu redakcijas atslēgai.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: šī pakotne ir mainīta vai pārtraukta, un tā netiks atvērta.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: šī pakotne ir lielāka, nekā var būt iesūtījums.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: saglabātā redakcijas atslēga nav atslēga, ko OciDeck var izmantot.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: nav aizzīmogota pakotne, ko OciDeck var nolasīt.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Aizzīmogotu failu (.zip.age) atver ar jūsu redakcijas atslēgu.',
   'Herstelsleutel controleren': 'Pārbaudīt atkopšanas atslēgu',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Redakcijas atslēga izveidota. Tagad pierakstiet atkopšanas atslēgu.',

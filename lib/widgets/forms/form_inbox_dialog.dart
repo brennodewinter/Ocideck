@@ -10,11 +10,13 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:ocideck_form_core/ocideck_form_core.dart' show FormUnsealIssue;
 
 import '../../l10n/app_localizations.dart';
 import '../../platform/platform_features.dart';
 import '../../services/form/form_import.dart';
 import '../../services/form/form_workspace.dart';
+import '../../state/form_keys_provider.dart';
 import '../../state/forms_provider.dart';
 import '../../state/tabs_provider.dart';
 import 'form_book_dialog.dart';
@@ -60,7 +62,7 @@ final FormInboxPickers systemFormInboxPickers = FormInboxPickers(
     final files = await FilePicker.pickFiles(
       dialogTitle: title,
       type: FileType.custom,
-      allowedExtensions: const ['zip'],
+      allowedExtensions: const ['zip', 'age'],
     );
     return [
       for (final file in files)
@@ -187,10 +189,11 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
       _lines.clear();
     });
     for (final file in files) {
-      final outcome = await importFormPackage(
+      final outcome = await importFormFile(
         workspace,
         file.bytes,
         now: (widget.now ?? DateTime.now)(),
+        keys: ref.read(formKeyServiceProvider),
       );
       if (!mounted) return;
       setState(() => _lines.add(_describe(l10n, file.name, outcome)));
@@ -221,6 +224,10 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
           l10n.d('{naam}: binnengehaald, maar er zijn punten om na te lopen.'),
         ),
       ),
+      FormImported(wasSealed: true) => _Line(
+        true,
+        say(l10n.d('{naam}: verzegeld pakket geopend en binnengehaald.')),
+      ),
       FormImported() => _Line(true, say(l10n.d('{naam}: binnengehaald.'))),
       FormImportDuplicate() => _Line(
         false,
@@ -242,8 +249,58 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
         false,
         say(l10n.d('{naam}: kon niet worden opgeslagen in de werkmap.')),
       ),
+      FormImportNeedsKey(:final problem) => _Line(
+        false,
+        say(_needsKey(l10n, problem)),
+      ),
+      FormImportNotOpened(:final issue) => _Line(
+        false,
+        say(_notOpened(l10n, issue)),
+      ),
     };
   }
+
+  String _needsKey(
+    AppLocalizations l10n,
+    FormImportKeyProblem problem,
+  ) => switch (problem) {
+    FormImportKeyProblem.unavailable => l10n.d(
+      '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.',
+    ),
+    FormImportKeyProblem.absent => l10n.d(
+      '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.',
+    ),
+    FormImportKeyProblem.unreadable => l10n.d(
+      '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.',
+    ),
+    FormImportKeyProblem.damaged => l10n.d(
+      '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.',
+    ),
+  };
+
+  String _notOpened(
+    AppLocalizations l10n,
+    FormUnsealIssue issue,
+  ) => switch (issue) {
+    FormUnsealIssue.noIdentityMatched => l10n.d(
+      '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.',
+    ),
+    FormUnsealIssue.tampered => l10n.d(
+      '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.',
+    ),
+    FormUnsealIssue.tooLarge => l10n.d(
+      '{naam}: dit pakket is groter dan een inzending kan zijn.',
+    ),
+    FormUnsealIssue.badIdentity => l10n.d(
+      '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.',
+    ),
+    FormUnsealIssue.notAge ||
+    FormUnsealIssue.notAPackage ||
+    FormUnsealIssue.wrongSubmission ||
+    FormUnsealIssue.wrongForm => l10n.d(
+      '{naam}: geen verzegeld pakket dat OciDeck kan lezen.',
+    ),
+  };
 
   /// Sluit het venster en opent [path] in een tabblad: wie een bestand van de
   /// werkmap wil lezen of verbeteren wil het in de editor zien, niet achter een
@@ -357,7 +414,7 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    l10n.d('Een gewone zip is onderweg niet versleuteld.'),
+                    '${l10n.d('Een gewone zip is onderweg niet versleuteld.')} ${l10n.d('Een verzegeld bestand (.zip.age) opent met je redactiesleutel.')}',
                     style: theme.textTheme.bodySmall,
                   ),
                   const SizedBox(height: 8),

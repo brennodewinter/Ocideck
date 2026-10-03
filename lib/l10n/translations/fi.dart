@@ -1627,6 +1627,28 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: sinetöity paketti avattu ja tuotu.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: tämä paketti on sinetöity, eikä tällä alustalla ole avainnippua toimituksen avaimelle.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: tämä paketti on sinetöity, eikä toimituksen avainta sen avaamiseen ole vielä. Luo sellainen kohdassa Toimituksen avain… tai palauta se palautusavaimestasi.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: tämä paketti on sinetöity, eikä avainnippua voi lukea. Mitään ei yritetty.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: tämä paketti on sinetöity, eikä tallennettua toimituksen avainta voi lukea. Poista se kohdassa Toimituksen avain… ja palauta se palautusavaimestasi.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: tätä pakettia ei ole sinetöity toimituksen avaimellesi.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: tätä pakettia on muutettu tai se on katkennut, eikä sitä avata.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: tämä paketti on suurempi kuin lähetys voi olla.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: tallennettu toimituksen avain ei ole avain, jota OciDeck voi käyttää.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ei ole sinetöity paketti, jonka OciDeck osaa lukea.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Sinetöity tiedosto (.zip.age) avataan toimituksen avaimellasi.',
   'Herstelsleutel controleren': 'Tarkista palautusavain',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Toimituksen avain luotu. Kirjoita nyt palautusavain muistiin.',

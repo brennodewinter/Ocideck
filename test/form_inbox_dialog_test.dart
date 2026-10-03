@@ -177,7 +177,13 @@ void main() {
     expect(containing('Nog geen formulier toegevoegd'), findsOneWidget);
     expect(containing('Inzendingen in de werkmap: 0'), findsOneWidget);
     expect(
-      text('Een gewone zip is onderweg niet versleuteld.'),
+      containing('Een gewone zip is onderweg niet versleuteld.'),
+      findsOneWidget,
+    );
+    expect(
+      containing(
+        'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.',
+      ),
       findsOneWidget,
     );
   });
@@ -325,6 +331,150 @@ void main() {
       ))!;
       expect(register, contains('abcdefghijklmnopqrstuvwxya'));
       expect(register, contains('needs-fixing'));
+    });
+
+    testWidgets(
+      'verzegelde bestanden: geopend met de sleutel, of de reden waarom niet',
+      (tester) async {
+        final vault = FormKeyVault();
+        final service = FormKeyService(
+          SecretStore(storage: vault, canStore: true),
+        );
+        final other = FormKeyService(
+          SecretStore(storage: FormKeyVault(), canStore: true),
+        );
+        final sealed = (await tester.runAsync(() async {
+          final mine = ((await service.create()) as FormKeyWritten).info;
+          final theirs = ((await other.create()) as FormKeyWritten).info;
+          Future<Uint8List> seal(String to, Uint8List zip) async =>
+              (await sealFormPackage(zip, recipients: [to]) as FormSealed)
+                  .bytes;
+          final changed = await seal(
+            mine.recipient,
+            zipOf(id: 'abcdefghijklmnopqrstuvwxyc'),
+          );
+          changed[changed.length - 1] ^= 1;
+          return (
+            mine: await seal(mine.recipient, zipOf()),
+            theirs: await seal(
+              theirs.recipient,
+              zipOf(id: 'abcdefghijklmnopqrstuvwxyb'),
+            ),
+            changed: changed,
+          );
+        }))!;
+        final picks = _Picks()
+          ..form = kook
+          ..packages = [
+            (name: 'mijn.zip.age', bytes: sealed.mine),
+            (name: 'andermans.zip.age', bytes: sealed.theirs),
+            (name: 'veranderd.zip.age', bytes: sealed.changed),
+            (
+              name: 'pantser.age',
+              bytes: Uint8List.fromList(
+                '-----BEGIN AGE ENCRYPTED FILE-----\nAAAA\n'.codeUnits,
+              ),
+            ),
+          ];
+        await open(
+          tester,
+          picks,
+          workspace: root,
+          extraOverrides: [formKeyServiceProvider.overrideWithValue(service)],
+        );
+        await tapAndWait(
+          tester,
+          text('Formulier toevoegen…'),
+          text('Formulier toegevoegd: kook · v1.'),
+        );
+        await settleIo(tester, text('kook · v1'));
+        await tapAndWait(
+          tester,
+          text('Pakketten binnenhalen…'),
+          containing('Inzendingen in de werkmap: 1'),
+        );
+        expect(
+          text('mijn.zip.age: verzegeld pakket geopend en binnengehaald.'),
+          findsOneWidget,
+        );
+        expect(
+          text(
+            'andermans.zip.age: dit pakket is niet voor jouw redactiesleutel verzegeld.',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          text(
+            'veranderd.zip.age: dit pakket is veranderd of afgebroken en wordt niet geopend.',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          text('pantser.age: geen verzegeld pakket dat OciDeck kan lezen.'),
+          findsOneWidget,
+        );
+        expect(containing('Inzendingen in de werkmap: 1'), findsOneWidget);
+        IconData iconOf(String line) => tester
+            .widget<Icon>(
+              find.descendant(
+                of: find
+                    .ancestor(of: text(line), matching: find.byType(Row))
+                    .first,
+                matching: find.byType(Icon),
+              ),
+            )
+            .icon!;
+        expect(
+          iconOf('mijn.zip.age: verzegeld pakket geopend en binnengehaald.'),
+          Icons.check_circle_outline,
+        );
+        expect(
+          iconOf(
+            'andermans.zip.age: dit pakket is niet voor jouw redactiesleutel verzegeld.',
+          ),
+          Icons.error_outline,
+        );
+      },
+    );
+
+    testWidgets('verzegeld zonder redactiesleutel zegt wat er te doen valt', (
+      tester,
+    ) async {
+      final empty = FormKeyService(
+        SecretStore(storage: FormKeyVault(), canStore: true),
+      );
+      final other = FormKeyService(
+        SecretStore(storage: FormKeyVault(), canStore: true),
+      );
+      final bytes = (await tester.runAsync(() async {
+        final theirs = ((await other.create()) as FormKeyWritten).info;
+        return (await sealFormPackage(zipOf(), recipients: [theirs.recipient])
+                as FormSealed)
+            .bytes;
+      }))!;
+      final picks = _Picks()
+        ..form = kook
+        ..packages = [(name: 'x.zip.age', bytes: bytes)];
+      await open(
+        tester,
+        picks,
+        workspace: root,
+        extraOverrides: [formKeyServiceProvider.overrideWithValue(empty)],
+      );
+      await tapAndWait(
+        tester,
+        text('Formulier toevoegen…'),
+        text('Formulier toegevoegd: kook · v1.'),
+      );
+      await settleIo(tester, text('kook · v1'));
+      await tapAndWait(
+        tester,
+        text('Pakketten binnenhalen…'),
+        containing(
+          'x.zip.age: dit pakket is verzegeld en er is nog geen redactiesleutel',
+        ),
+      );
+      expect(containing('Inzendingen in de werkmap: 0'), findsOneWidget);
     });
 
     testWidgets('een formulier dat niet is toegevoegd wordt benoemd', (

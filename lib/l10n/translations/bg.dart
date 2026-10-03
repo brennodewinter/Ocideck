@@ -1647,6 +1647,28 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: запечатаният пакет е отворен и импортиран.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: този пакет е запечатан, а тази платформа няма връзка с ключове за ключа на редакцията.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: този пакет е запечатан и още няма ключ на редакцията, с който да се отвори. Създайте такъв в Ключ на редакцията… или го възстановете от ключа за възстановяване.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: този пакет е запечатан, а връзката с ключове не може да се прочете. Нищо не е опитано.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: този пакет е запечатан, а запазеният ключ на редакцията не може да се прочете. Изтрийте го в Ключ на редакцията… и го възстановете от ключа за възстановяване.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: този пакет не е запечатан за вашия ключ на редакцията.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: този пакет е променен или прекъснат и няма да бъде отворен.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: този пакет е по-голям, отколкото може да бъде едно изпращане.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: запазеният ключ на редакцията не е ключ, който OciDeck може да използва.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: не е запечатан пакет, който OciDeck може да прочете.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Запечатан файл (.zip.age) се отваря с вашия ключ на редакцията.',
   'Herstelsleutel controleren': 'Проверка на ключа за възстановяване',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Ключът на редакцията е създаден. Сега запишете ключа за възстановяване.',

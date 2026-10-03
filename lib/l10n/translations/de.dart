@@ -667,6 +667,28 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: verschlüsseltes Paket geöffnet und importiert.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: Dieses Paket ist verschlüsselt, und diese Plattform hat keinen Schlüsselbund für den Redaktionsschlüssel.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: Dieses Paket ist verschlüsselt, und es gibt noch keinen Redaktionsschlüssel, um es zu öffnen. Erstelle unter Redaktionsschlüssel… einen oder stelle ihn aus deinem Wiederherstellungsschlüssel wieder her.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: Dieses Paket ist verschlüsselt, und der Schlüsselbund lässt sich nicht lesen. Es wurde nichts versucht.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: Dieses Paket ist verschlüsselt, und der gespeicherte Redaktionsschlüssel lässt sich nicht lesen. Lösche ihn unter Redaktionsschlüssel… und stelle ihn aus deinem Wiederherstellungsschlüssel wieder her.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: Dieses Paket wurde nicht für deinen Redaktionsschlüssel verschlüsselt.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: Dieses Paket wurde verändert oder abgeschnitten und wird nicht geöffnet.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: Dieses Paket ist größer, als eine Einsendung sein kann.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: Der gespeicherte Redaktionsschlüssel ist kein Schlüssel, den OciDeck verwenden kann.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: kein verschlüsseltes Paket, das OciDeck lesen kann.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Eine verschlüsselte Datei (.zip.age) wird mit deinem Redaktionsschlüssel geöffnet.',
   'Herstelsleutel controleren': 'Wiederherstellungsschlüssel prüfen',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Redaktionsschlüssel erstellt. Schreibe jetzt den Wiederherstellungsschlüssel auf.',

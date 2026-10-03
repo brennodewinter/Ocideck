@@ -1627,6 +1627,28 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: paket tersegel dibuka dan diimpor.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: paket ini tersegel dan platform ini tidak punya gantungan kunci untuk kunci redaksi.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: paket ini tersegel dan belum ada kunci redaksi untuk membukanya. Buat satu di Kunci redaksi… atau pulihkan dari kunci pemulihan Anda.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: paket ini tersegel dan gantungan kunci tidak dapat dibaca. Tidak ada yang dicoba.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: paket ini tersegel dan kunci redaksi yang tersimpan tidak dapat dibaca. Hapus di Kunci redaksi… lalu pulihkan dari kunci pemulihan Anda.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: paket ini tidak disegel untuk kunci redaksi Anda.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: paket ini telah diubah atau terpotong dan tidak akan dibuka.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: paket ini lebih besar daripada yang mungkin untuk sebuah kiriman.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: kunci redaksi yang tersimpan bukan kunci yang dapat dipakai OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: bukan paket tersegel yang dapat dibaca OciDeck.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Berkas tersegel (.zip.age) dibuka dengan kunci redaksi Anda.',
   'Herstelsleutel controleren': 'Periksa kunci pemulihan',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Kunci redaksi dibuat. Sekarang tuliskan kunci pemulihan.',

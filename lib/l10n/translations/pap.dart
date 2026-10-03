@@ -666,6 +666,28 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: paket sellá habrí i importá.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: e paket akí ta sellá i e plataforma akí no tin yavero pa e yave di redakshon.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: e paket akí ta sellá i ainda no tin yave di redakshon pa habri e. Krea un bou di Yave di redakshon… òf rekuperá e for di bo yave di rekuperashon.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: e paket akí ta sellá i e yavero no por wòrdu lesá. Nada no a wòrdu purba.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: e paket akí ta sellá i e yave di redakshon warda no por wòrdu lesá. Eliminá e bou di Yave di redakshon… i rekuperá e for di bo yave di rekuperashon.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: e paket akí no a wòrdu sellá pa bo yave di redakshon.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: e paket akí a wòrdu kambia of kortá i e no ta wòrdu habrí.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: e paket akí ta mas grandi ku loke un envio por ta.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: e yave di redakshon warda no ta un yave ku OciDeck por usa.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: no ta un paket sellá ku OciDeck por lesa.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Un archivo sellá (.zip.age) ta habri ku bo yave di redakshon.',
   'Herstelsleutel controleren': 'Verifiká e yave di rekuperashon',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Yave di redakshon krea. Skirbi awor e yave di rekuperashon.',

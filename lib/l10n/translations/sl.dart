@@ -1627,6 +1627,28 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: zapečaten paket odprt in uvožen.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: ta paket je zapečaten, ta platforma pa nima obeska za ključe za ključ uredništva.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: ta paket je zapečaten in ključa uredništva, s katerim bi ga odprli, še ni. Ustvari ga v Ključ uredništva… ali ga obnovi iz obnovitvenega ključa.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: ta paket je zapečaten, obeska za ključe pa ni mogoče prebrati. Nič ni bilo poskušeno.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: ta paket je zapečaten, shranjenega ključa uredništva pa ni mogoče prebrati. Izbriši ga v Ključ uredništva… in ga obnovi iz obnovitvenega ključa.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: ta paket ni bil zapečaten za tvoj ključ uredništva.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: ta paket je bil spremenjen ali prekinjen in se ne bo odprl.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: ta paket je večji, kot je lahko oddaja.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: shranjeni ključ uredništva ni ključ, ki ga lahko uporabi OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ni zapečaten paket, ki bi ga OciDeck lahko prebral.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Zapečatena datoteka (.zip.age) se odpre s tvojim ključem uredništva.',
   'Herstelsleutel controleren': 'Preveri obnovitveni ključ',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Ključ uredništva je ustvarjen. Zdaj zapiši obnovitveni ključ.',

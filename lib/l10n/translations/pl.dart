@@ -1639,6 +1639,28 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: zapieczętowana paczka otwarta i zaimportowana.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: ta paczka jest zapieczętowana, a ta platforma nie ma pęku kluczy na klucz redakcji.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: ta paczka jest zapieczętowana i nie ma jeszcze klucza redakcji, żeby ją otworzyć. Utwórz go w Klucz redakcji… albo przywróć z klucza odzyskiwania.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: ta paczka jest zapieczętowana, a pęku kluczy nie da się odczytać. Niczego nie próbowano.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: ta paczka jest zapieczętowana, a zapisanego klucza redakcji nie da się odczytać. Usuń go w Klucz redakcji… i przywróć z klucza odzyskiwania.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: ta paczka nie została zapieczętowana dla Twojego klucza redakcji.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: ta paczka została zmieniona lub urwana i nie zostanie otwarta.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: ta paczka jest większa, niż może być zgłoszenie.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: zapisany klucz redakcji nie jest kluczem, którego OciDeck może użyć.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: to nie jest zapieczętowana paczka, którą OciDeck potrafi odczytać.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Zapieczętowany plik (.zip.age) otwiera się Twoim kluczem redakcji.',
   'Herstelsleutel controleren': 'Sprawdź klucz odzyskiwania',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Klucz redakcji utworzony. Zapisz teraz klucz odzyskiwania.',

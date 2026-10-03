@@ -1630,6 +1630,28 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: verschlüsslets Paket göffnet und importiert.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: Das Paket isch verschlüsslet, und die Plattform het kei Schlüsselbund für e Redaktionsschlüssel.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: Das Paket isch verschlüsslet, und es git no kei Redaktionsschlüssel zum\'s Uufmache. Erstell under Redaktionsschlüssel… eine oder stell ne us dim Wiederherstelligsschlüssel wieder häre.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: Das Paket isch verschlüsslet, und dr Schlüsselbund lat sich nid läse. Es isch nüt versuecht worde.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: Das Paket isch verschlüsslet, und dr gspeicheret Redaktionsschlüssel lat sich nid läse. Lösch ne under Redaktionsschlüssel… und stell ne us dim Wiederherstelligsschlüssel wieder häre.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: Das Paket isch nid für dy Redaktionsschlüssel verschlüsslet worde.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: Das Paket isch veränderet oder abbroche worde und wird nid göffnet.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: Das Paket isch grösser, als e Iischickig cha si.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: Dr gspeicheret Redaktionsschlüssel isch ke Schlüssel, wo OciDeck cha bruuche.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ke verschlüsslets Paket, wo OciDeck cha läse.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'E verschlüsslet Datei (.zip.age) wird mit dym Redaktionsschlüssel göffnet.',
   'Herstelsleutel controleren': 'Wiederherstelligsschlüssel prüefe',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Redaktionsschlüssel erstellt. Schrib jetz dr Wiederherstelligsschlüssel uf.',

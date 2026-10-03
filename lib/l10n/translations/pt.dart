@@ -1655,6 +1655,28 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pacote selado aberto e importado.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: este pacote está selado e esta plataforma não tem porta-chaves para a chave da redação.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: este pacote está selado e ainda não há chave da redação para o abrir. Crie uma em Chave da redação… ou restaure-a a partir da sua chave de recuperação.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: este pacote está selado e o porta-chaves não pode ser lido. Nada foi tentado.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: este pacote está selado e a chave da redação guardada não pode ser lida. Apague-a em Chave da redação… e restaure-a a partir da sua chave de recuperação.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: este pacote não foi selado para a sua chave da redação.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: este pacote foi alterado ou cortado e não será aberto.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: este pacote é maior do que um envio pode ser.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: a chave da redação guardada não é uma chave que o OciDeck possa usar.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: não é um pacote selado que o OciDeck consiga ler.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Um ficheiro selado (.zip.age) abre-se com a sua chave da redação.',
   'Herstelsleutel controleren': 'Verificar a chave de recuperação',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Chave da redação criada. Agora anote a chave de recuperação.',

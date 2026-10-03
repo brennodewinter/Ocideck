@@ -1629,6 +1629,28 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: a lezárt csomag megnyitva és importálva.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: ez a csomag le van zárva, és ennek a platformnak nincs kulcstartója a szerkesztőségi kulcshoz.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: ez a csomag le van zárva, és még nincs szerkesztőségi kulcs a megnyitásához. Hozz létre egyet a Szerkesztőségi kulcs… alatt, vagy állítsd helyre a helyreállító kulcsodból.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: ez a csomag le van zárva, és a kulcstartó nem olvasható. Semmit nem próbáltunk meg.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: ez a csomag le van zárva, és a tárolt szerkesztőségi kulcs nem olvasható. Töröld a Szerkesztőségi kulcs… alatt, és állítsd helyre a helyreállító kulcsodból.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: ezt a csomagot nem a te szerkesztőségi kulcsodra zárták le.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: ez a csomag megváltozott vagy megszakadt, ezért nem nyitjuk meg.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: ez a csomag nagyobb, mint amekkora egy beküldés lehet.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: a tárolt szerkesztőségi kulcs nem olyan kulcs, amelyet az OciDeck használni tud.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: nem olyan lezárt csomag, amelyet az OciDeck el tud olvasni.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'A lezárt fájlt (.zip.age) a szerkesztőségi kulcsoddal lehet megnyitni.',
   'Herstelsleutel controleren': 'Helyreállító kulcs ellenőrzése',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'A szerkesztőségi kulcs létrejött. Írd le most a helyreállító kulcsot.',

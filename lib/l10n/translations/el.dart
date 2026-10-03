@@ -1652,6 +1652,28 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: το σφραγισμένο πακέτο ανοίχτηκε και εισήχθη.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και αυτή η πλατφόρμα δεν έχει κλειδοθήκη για το κλειδί συντακτικής ομάδας.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και δεν υπάρχει ακόμη κλειδί συντακτικής ομάδας για να ανοίξει. Δημιουργήστε ένα στο Κλειδί συντακτικής ομάδας… ή επαναφέρετέ το από το κλειδί ανάκτησης.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και η κλειδοθήκη δεν μπορεί να διαβαστεί. Δεν δοκιμάστηκε τίποτα.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και το αποθηκευμένο κλειδί συντακτικής ομάδας δεν μπορεί να διαβαστεί. Διαγράψτε το στο Κλειδί συντακτικής ομάδας… και επαναφέρετέ το από το κλειδί ανάκτησης.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: αυτό το πακέτο δεν σφραγίστηκε για το κλειδί συντακτικής ομάδας σας.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: αυτό το πακέτο έχει αλλάξει ή κοπεί και δεν θα ανοιχτεί.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: αυτό το πακέτο είναι μεγαλύτερο από όσο μπορεί να είναι μια υποβολή.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: το αποθηκευμένο κλειδί συντακτικής ομάδας δεν είναι κλειδί που μπορεί να χρησιμοποιήσει το OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: δεν είναι σφραγισμένο πακέτο που μπορεί να διαβάσει το OciDeck.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Ένα σφραγισμένο αρχείο (.zip.age) ανοίγει με το κλειδί συντακτικής ομάδας σας.',
   'Herstelsleutel controleren': 'Έλεγχος κλειδιού ανάκτησης',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Το κλειδί συντακτικής ομάδας δημιουργήθηκε. Γράψτε τώρα το κλειδί ανάκτησης.',

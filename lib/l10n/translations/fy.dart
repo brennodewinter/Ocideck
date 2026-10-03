@@ -667,6 +667,28 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: fersegele pakket iepene en ynhelle.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: dit pakket is fersegele en dit platfoarm hat gjin kaaiering foar de redaksjekaai.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: dit pakket is fersegele en der is noch gjin redaksjekaai om it te iepenjen. Meitsje der ien oan ûnder Redaksjekaai… of herstel him út dyn herstelkaai.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: dit pakket is fersegele en de kaaiering is net te lêzen. Der is neat besocht.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: dit pakket is fersegele en de bewarre redaksjekaai is net te lêzen. Wiskje him ûnder Redaksjekaai… en herstel him út dyn herstelkaai.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: dit pakket is net foar dyn redaksjekaai fersegele.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: dit pakket is feroare of ôfbrutsen en wurdt net iepene.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: dit pakket is grutter as in ynstjoering wêze kin.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: de bewarre redaksjekaai is gjin kaai dy\'t OciDeck brûke kin.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: gjin fersegele pakket dat OciDeck lêze kin.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'In fersegele bestân (.zip.age) giet iepen mei dyn redaksjekaai.',
   'Herstelsleutel controleren': 'Herstelkaai kontrolearje',
   'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
       'Redaksjekaai oanmakke. Skriuw no de herstelkaai op.',
@@ -714,7 +736,7 @@ const _dutchSourceAddFy = {
   'Redactiesleutel verwijderen…': 'Redaksjekaai fuortsmite…',
   'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
       'In redaksjekaai iepenet de fersegele ynstjoeringen en tekent de bondels fan dyn formulieren. Hy stiet yn de kaaiering fan dit bestjoeringssysteem. Ferlieze jo alle kaaien fan de redaksje, dan binne alle noch net ophelle ynstjoeringen net mear te lêzen: dat is de priis fan in tsjinner dy\'t neat lêze kin.',
-  'Redactiesleutel aanmaken': 'Redaksjekaai oanmakke',
+  'Redactiesleutel aanmaken': 'Redaksjekaai oanmeitsje',
   'Herstellen uit herstelsleutel…': 'Herstelle út herstelkaai…',
   'Vingerafdruk': 'Fingerôfdruk',
   'Ontvanger (age)': 'Ûntfanger (age)',
