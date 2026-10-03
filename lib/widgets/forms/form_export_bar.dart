@@ -15,6 +15,7 @@ import 'package:ocideck_form_core/ocideck_form_core.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/form/form_submission_export.dart';
 import '../../services/form/form_submission_seal.dart';
+import 'form_bundle_issue_text.dart';
 import 'form_export_support.dart';
 import 'form_fingerprint_dialog.dart';
 
@@ -185,36 +186,7 @@ class _FormExportBarState extends State<FormExportBar> {
     FormSealBadFingerprint() => l10n.d(
       'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.',
     ),
-    FormSealBundleRefused(:final issue) => switch (issue) {
-      FormBundleIssue.notABundle => l10n.d(
-        'Dit bestand is geen bundel die OciDeck kan lezen.',
-      ),
-      FormBundleIssue.unsupportedVersion ||
-      FormBundleIssue.rulesTooNew => l10n.d(
-        'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.',
-      ),
-      FormBundleIssue.fingerprintMismatch => l10n.d(
-        'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.',
-      ),
-      FormBundleIssue.badSignature => l10n.d(
-        'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.',
-      ),
-      FormBundleIssue.templateMismatch => l10n.d(
-        'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.',
-      ),
-      FormBundleIssue.expired => l10n.d(
-        'Deze bundel is verlopen. Vraag de organisator om een nieuwe.',
-      ),
-      FormBundleIssue.rollback => l10n.d(
-        'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.',
-      ),
-      FormBundleIssue.badStructure ||
-      FormBundleIssue.noFingerprint ||
-      FormBundleIssue.badFingerprint ||
-      FormBundleIssue.hostMismatch => l10n.d(
-        'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.',
-      ),
-    },
+    FormSealBundleRefused(:final issue) => formBundleIssueText(l10n, issue),
     FormSealClosed(:final closes) =>
       l10n
           .d(
