@@ -3601,6 +3601,14 @@ strip) that deck slide bodies go through. The `.md` you save is the byte-faithfu
 master you keep, back up and eventually clean — the same role §9 describes for a
 deck's Markdown, held to a stricter no-normalisation rule.
 
+That includes a leading **UTF-8 byte-order mark** (`EF BB BF`): a document that
+opened with one is saved with one, and a document that opened without one never
+gains one. The mark is remembered beside the text and is not part of it, so the
+front matter is still recognised on the first line. Only the first `EF BB BF` is
+the mark; a second one is ordinary text and is kept. A *deck* does not make this
+promise — it is deconstructed and regenerated on save and written without a BOM,
+which is the form OciDeck chooses for a deck, not one Marp demands.
+
 What the document path can write into the front matter is a short, closed set of
 structural keys — the document **style** (`theme:`), the **page setup** (`papersize:`,
 `geometry:`), the one document-wide **TLP classification** (`tlp:`, §3.1) and

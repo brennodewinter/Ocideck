@@ -72,6 +72,33 @@ void main() {
     expect(restored.markdown, '---\ntheme: LibreKAT\n---\n\n# Memo\n');
   });
 
+  test('save round-trips de BOM-vlag van een document', () async {
+    await service.save(
+      RecoverySnapshot(
+        id: 'bom',
+        savedAt: DateTime(2026, 9, 30),
+        filePath: '/tmp/memo.md',
+        label: 'Memo',
+        markdown: '# Memo\r\n',
+        kind: MarkdownKind.document,
+        utf8Bom: true,
+      ),
+    );
+    expect((await service.loadAll()).single.utf8Bom, isTrue);
+  });
+
+  test('een oud herstelbestand zonder BOM-vlag leest als zonder BOM', () {
+    final snap = RecoverySnapshot.fromJson({
+      'id': 'oud',
+      'savedAt': '2026-01-01T00:00:00.000',
+      'markdown': '# Memo\n',
+      'kind': 'document',
+    });
+    expect(snap.utf8Bom, isFalse);
+    // En een snapshot zonder BOM schrijft de sleutel ook niet.
+    expect(snap.toJson().containsKey('utf8Bom'), isFalse);
+  });
+
   test('een oud herstelbestand zonder soort leest als presentatie', () {
     // Backward compatible: bestanden van vóór deze functie dragen geen 'kind'.
     final snap = RecoverySnapshot.fromJson({

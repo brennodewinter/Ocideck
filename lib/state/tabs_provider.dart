@@ -48,6 +48,7 @@ import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
+import '../utils/utf8_bom.dart';
 import '../utils/zip_encryption.dart';
 import 'deck_provider.dart';
 import 'document_provider.dart';
@@ -335,7 +336,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
           continue;
         }
         final tab = _createDocumentTab(
-          MarkdownDocument.parse(snap.markdown),
+          MarkdownDocument.parse(snap.markdown, hasUtf8Bom: snap.utf8Bom),
           filePath: snap.filePath,
           recoveryId: snap.id,
         );
@@ -673,7 +674,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
       // [_gateAndParseContent] (anders was dit [OpenResult.blocked]).
       if (gated.failure == OpenResult.notAPresentation) {
         if (!mounted) return OpenResult.unreadable;
-        newDocumentFromMarkdown(raw);
+        // De BOM is uit [raw] gedecodeerd; hier reist hij als vlag mee (§3.1).
+        _placeDocumentTab(
+          MarkdownDocument.parse(raw, hasUtf8Bom: startsWithUtf8Bom(bytes)),
+        );
         return OpenResult.opened;
       }
       return gated.failure;

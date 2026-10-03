@@ -24,6 +24,10 @@ String sha256HexOfText(String text) => sha256Hex(utf8.encode(text));
 /// De SHA-512 van [text] als UTF-8, zonder enige normalisatie: geen
 /// regeleinde-omzetting, geen trimmen, geen BOM.
 ///
-/// OciDeck schrijft elk tekstbestand met `utf8.encode` van precies zo'n string
-/// (zie `writeStringAtomic`), dus dit is de hash van het bestand op schijf.
+/// OciDeck schrijft een tekstbestand met `utf8.encode` van precies zo'n string
+/// (zie `writeStringAtomic`), dus dit is de hash van het bestand op schijf —
+/// voor wat OciDeck zélf schrijft. Wat het *inleest* kan een BOM voor de tekst
+/// hebben gehad, die de decoder weggooit: daar is dit niet de hash van de bytes,
+/// en een document dat met BOM opende schrijft hem terug via
+/// `MarkdownDocument.toBytes` (hash: `DocumentIntegrity.hashDocument`).
 String sha512HexOfText(String text) => sha512Hex(utf8.encode(text));

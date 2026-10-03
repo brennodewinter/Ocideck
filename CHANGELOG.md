@@ -391,6 +391,33 @@ All notable changes to OciDeck are documented in this file.
   interfacetaal-veld valt terug op de app-keuze.
 ### Fixed
 
+- **Een document met een UTF-8-BOM blijft na openen en opslaan byte-identiek
+  (§3.1 van DOCUMENT_MODE).** Dart's `readAsString()` en `utf8.decode` gooien
+  een leidende BOM (`EF BB BF`) stilzwijgend weg en `utf8.encode` schrijft hem
+  niet terug, dus een bestand met BOM (Kladblok, Excel-CSV-achtige exports,
+  veel Windows-tools) kwam zonder terug. Het documentpad onthoudt de BOM nu als
+  vlag naast de bron (`MarkdownDocument.hasUtf8Bom`) en zet hem bij het
+  schrijven terug. De BOM zit bewust niet in de tekst zelf: zo zien
+  front-matter-detectie, de koppenlijst en de editor nog steeds het `---` op
+  regel één. Alleen de eerste `EF BB BF` is de markering; een tweede is inhoud
+  en blijft staan. Dezelfde vlag reist mee door opslaan vanuit Visueel,
+  crashherstel en het openen uit bytes (web, slepen, URL).
+  Ook het herschrijven van een afbeeldingsverwijzing (hernoemen of ontdubbelen
+  in de carrousel) gooide de BOM weg uit élk `.md` onder de zoekmap — documenten
+  inbegrepen — terwijl het juist alleen het pad binnen `![…](…)` mag veranderen;
+  dat leest en schrijft nu bytes.
+  Drie dingen die hiermee meekwamen: (1) een BOM-bestand gaf bij de eerste
+  opslag ten onrechte "Het bestand is gewijzigd door een ander programma",
+  omdat de onthouden hash over de tekst liep en de hash op schijf over de
+  bytes — beide lopen nu over de bytes. (2) "Herladen" in die dialoog las de
+  bytes als losse tekens in (`é` werd `Ã©`, een BOM werd `ï»¿`) en sloeg de
+  veiligheidsscan over; het herladen loopt nu door dezelfde openpoort als elk
+  ander document, en zegt het wanneer het bestand geweigerd wordt (het
+  veiligheidsalarm bij onveilige inhoud, anders dezelfde melding als een gewone
+  open) in plaats van stil niets te doen. (3) Een deck wordt gedeconstrueerd en opnieuw gegenereerd en
+  heeft geen byte-identiteitsbelofte; een BOM wordt daar, zoals altijd, bij het
+  opslaan weggelaten; dat is de vorm die OciDeck voor een deck kiest, geen eis van
+  Marp (Marp CLI en Pandoc lezen beide vormen gelijk).
 - Een inzendpakket (of een antwoord) kan geen foto meer noemen onder een naam die Windows
   voor apparaten bewaart — `con`, `prn`, `aux`, `nul`, `com0`–`com9`, `lpt0`–`lpt9`, met welke
   extensie ook (`images/nul.jpg` op de schijf van een Windows-organisator is het nulapparaat, geen

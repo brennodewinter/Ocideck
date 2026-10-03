@@ -3,6 +3,7 @@ import 'package:path/path.dart' as p;
 import '../utils/atomic_file.dart';
 import '../utils/library_scan_limits.dart';
 import '../utils/log.dart';
+import '../utils/utf8_bom.dart';
 
 /// Vindt en herschrijft afbeeldingsverwijzingen (`![…](pad)`) in
 /// Marp-markdownbestanden op schijf. Zo gaan bij het opruimen van duplicaten
@@ -155,8 +156,13 @@ class ImageReferenceService {
     };
     final file = File(deckFile);
     String content;
+    var hasBom = false;
     try {
-      content = await file.readAsString();
+      // Bytes en niet readAsString: die gooit een leidende BOM weg, en dan
+      // schreven we het bestand zonder terug (DOCUMENT_MODE §3.1).
+      final decoded = decodeUtf8KeepingBomFlag(await file.readAsBytes());
+      content = decoded.text;
+      hasBom = decoded.hasBom;
     } catch (e) {
       logWarning(
         'ImageReferenceService.replaceReferencesMulti: read deck file',
@@ -190,7 +196,7 @@ class ImageReferenceService {
     if (!changed) return false;
     try {
       // Atomair: dit herschrijft het deck-bestand van de gebruiker in situ.
-      await writeStringAtomic(file, updated);
+      await writeBytesAtomic(file, encodeUtf8WithBom(updated, hasBom: hasBom));
     } catch (e) {
       logWarning(
         'ImageReferenceService.replaceReferencesMulti: write deck file',
