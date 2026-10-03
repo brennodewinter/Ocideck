@@ -10,6 +10,19 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- Het **bundelbestand** (formaat §5.1, fase 3) staat in `ocideck_form_core`: de eigenaar van een formulier ondertekent met
+  Ed25519 de organisatoren en hun sleutels, de sjabloonhash, het volgnummer, de verloopdag en het beleid; een invuller
+  controleert dat tegen een vingerafdruk die langs een andere weg kwam dan het bundelbestand. **Zonder vingerafdruk wordt een
+  bundel geweigerd** (geen vraag aan de invuller: die kan een naam uit de bundel zelf niet beoordelen). De controle loopt in vaste
+  volgorde — grootte en JSON, vingerafdruk, ondertekenaar, handtekening, strikte structuur, sjabloon, verloop, host, pin — en
+  gelooft niets uit de bundel vóór de handtekening klopt. Een lager volgnummer dan het hoogste dat is gezien is een terugval en
+  wordt geweigerd. `createFormBundle` controleert wat het maakte voor het het teruggeeft. De details die het ontwerp openliet
+  (base32 voor sleutels, handtekening, `kid` en vingerafdruk; de eigenaar is de organisator wiens sleutel de vingerafdruk
+  noemt; `kid` afgeleid van de `age1…`-ontvanger; een JCS-deelverzameling met alleen gehele getallen) staan in §5.1.
+  Een testvector (CC0) legt het formaat byte voor byte vast; zijn handtekening is ook met Node/OpenSSL onafhankelijk
+  gecontroleerd. Nog niet verbonden met de app. Gevonden bij het draaien in de browser: dartage 0.3.0 werkt in een dart2js-build
+  niet (`setUint64` bestaat daar niet) en onder WebAssembly wel; de webinvuller (fase 4) heeft dus een wasm-build of een
+  herstel bovenstrooms nodig.
 - Formulier-inzendingen kunnen nu **verzegeld** worden (formaat §5.6, fase 3): `ocideck_form_core` kent een
   age-bestand (`<sid>.zip.age`) met X25519-ontvangers, gemaakt met de bibliotheek **dartage 0.3.0** (MIT, exact vastgezet;
   besluit D9). Openen controleert eerst de grootte, dan de header-MAC en elk blok, leest dan het pakket en toetst tot slot

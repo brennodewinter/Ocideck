@@ -5,7 +5,7 @@
   "name": "ocideck-0.6.13+39",
   "documentNamespace": "https://ocideck.app/spdx/0804f0ac-80d3-5524-82c6-33aa27b94653",
   "creationInfo": {
-    "created": "2026-10-03T09:06:40.390591Z",
+    "created": "2026-10-03T09:53:16.472978Z",
     "creators": [
       "Tool: ocideck-generate_sbom-1.0"
     ],
@@ -8901,6 +8901,11 @@
       "spdxElementId": "SPDXRef-206-ocideck-form-core",
       "relationshipType": "DEPENDS_ON",
       "relatedSpdxElement": "SPDXRef-20-crypto"
+    },
+    {
+      "spdxElementId": "SPDXRef-206-ocideck-form-core",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-22-cryptography"
     },
     {
       "spdxElementId": "SPDXRef-206-ocideck-form-core",
