@@ -10,6 +10,17 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- De **redactiesleutel** staat in de app (formaat §5.9, fase 3): Inbox → *Redactiesleutel…* maakt de age-identiteit en het
+  Ed25519-ondertekeningszaad aan in de sleutelhanger, in een zichtbare stap die eerst zegt wat verlies kost, en toont dan de
+  herstelsleutel, die je terug moet typen (*gecontroleerd* is wat het publiceren straks vraagt). Herstellen uit de
+  herstelsleutel (alleen waar nog geen sleutel is), de vingerafdruk kopiëren, de sleutel exporteren als gewoon age-sleutelbestand
+  (aangemaakt, `chmod 600`, dán beschreven) en verwijderen achter een bevestiging. **Een sleutel wordt nooit overschreven:**
+  een sleutelhanger die niet te lezen is, geldt niet als leeg (`SecretStore.readFormEditorialKey` gooit de fout door waar elke
+  andere getter hem inslikt), een opgeslagen tekst die niet als sleutel te lezen is evenmin, en een aanmaak leest zichzelf terug
+  zodat niemand een herstelsleutel opschrijft bij een sleutel die er niet is. Op het web biedt het venster niets aan. De keten
+  naar het publiceren van een bundel loopt nog niet door: het team en de twee-sleutelsregel volgen. Gevonden bij het keuren in
+  het Engels: de knop *Controleren* kwam uit een ander venster en luidde daar *Check syntax*; hij heet nu *Herstelsleutel
+  controleren*.
 - De **herstelsleutel van de redactiesleutel** (formaat §5.9) staat in `ocideck_form_core`: de twee geheimen — het Ed25519-zaad
   dat bundels ondertekent en de age-identiteit die inzendingen opent — als één tekst om op te schrijven en elders weer in te
   typen (Crockford-base32 in groepjes van vier, CRC-16, 109 tekens). Hij heeft **een eigen doelbyte**: de herstelsleutel van de
