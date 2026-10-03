@@ -6,8 +6,8 @@
 > **A map for a reviewer, not a claim that the design is secure.** Everything here is a statement
 > about what the code does, checked against the code on the date above; whether it is *enough* is
 > the question this document exists to hand over. Where the design says "decided" it names the
-> section; where something is a known weakness it is in §6, not softened elsewhere. The one
-> phase-3 gate item that has **not** been run is named in §5.4.
+> section; where something is a known weakness it is in §6, not softened elsewhere. The
+> interoperability run against the reference `age` is in §5.4, with what it does and does not show.
 
 ---
 
@@ -330,13 +330,24 @@ not `success` must be refused whatever its kind** — a refusal is never skipped
 - BIP-173 vectors in `form_bech32_test.dart`, and the CCTV identities as round-trip data for the
   `age` identity ↔ scalar conversion.
 
-### 5.4 The gate item not yet run: interoperability with the reference `age`
+### 5.4 Interoperability with the reference `age` (phase 3 gate)
 
-`form_seal_interop_test.dart` seals here and opens with the **reference `age` binary**, and the
-reverse. **It reports "NOT RUN" when the binary is absent, and has not been run:** no `age` binary
-was available on the machine that built this. Phase 3's gate requires it (`FORM_INTAKE.md` §12). We
-would rather a reviewer **run it themselves** than take our word for a skipped test: `age` from
-`filippo.io/age`, then `dart test test/form_seal_interop_test.dart` in the core package.
+`form_seal_interop_test.dart` runs the sealing layer against the **reference `age` binary**
+(`filippo.io/age`) in both directions. **Run on 2026-10-03 against `age` v1.3.2** (built from source
+with Go; `make test-age-interop` repeats it at the pinned version): all cases pass.
+
+| Case | What it shows |
+|---|---|
+| a 200 KiB package sealed here opens in the reference; one sealed by the reference opens here | the basic round trip over several 64 KiB chunks |
+| two recipients: each opens a file sealed here, and one sealed by the reference to both | several recipients, both implementations |
+| a key that is not a recipient opens nothing | `noIdentityMatched` here, a non-zero exit there |
+| a payload bit, the last byte, a header bit, a file cut short, a file cut at a chunk boundary | **refused by both** — the failures agree |
+| plaintexts of 0, 1, 65 535, 65 536, 65 537, 131 071, 131 072 and 131 073 bytes sealed by the reference | the chunk edges, opened here |
+
+Two limits of what this shows. It is **one reference version on one machine**; and it does not run
+inside `make check`, because the binary is not there — **without it the test reports "NOT RUN"**, and
+`make check` shows those cases as skipped. A reviewer can run `make test-age-interop` (it needs Go and
+the network) or point `AGE_BIN` at their own build.
 
 ### 5.5 Mutation testing
 
@@ -361,8 +372,8 @@ dart pub get
 dart test                                  # everything, VM
 dart test -p chrome test/form_bundle_test.dart test/form_editor_card_test.dart
 dart test -p chrome -c dart2wasm test/form_seal_test.dart
-# the one that needs the reference binary:
-dart test test/form_seal_interop_test.dart
+# the one that needs the reference binary (from the repository root: builds it, then runs):
+make test-age-interop
 ```
 
 From the repository root, `make check-packages` runs the static rules for the package (rule 10 is the

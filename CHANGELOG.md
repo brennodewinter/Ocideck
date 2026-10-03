@@ -10,6 +10,13 @@ All notable changes to OciDeck are documented in this file.
 
 ### Added
 
+- **Interoperabiliteit met de referentie-`age`** (fase 3, poortitem): de test draait nu tegen `age` v1.3.2 en slaagt. Naast de heen-en-weerronde (200 KiB, meerdere
+  chunks) zijn er gevallen voor twee ontvangers (elk opent het, aan beide kanten), een sleutel die geen ontvanger is (niets opent), een veranderd of
+  afgekapt bestand (een bit in de inhoud, de laatste byte, een bit in de kop, afgekapt, afgekapt op een chunkgrens: **door beide geweigerd**) en
+  klaartekst van 0, 1, 65.535, 65.536, 65.537, 131.071, 131.072 en 131.073 bytes door de referentie verzegeld en hier geopend (de randen van een chunk van
+  64 KiB). `make test-age-interop` bouwt de vastgepinde binary (Go en netwerk nodig, naar `.dart_tool/`, niets systeembreed) en draait de test; zonder
+  binary meldt de test nog steeds "NOT RUN" in plaats van te slagen. Het dossier voor de externe review (`docs/design/FORM_INTAKE_REVIEW.md`) noemt de
+  uitkomst en wat ze wel en niet laat zien.
 - Het **team van de redactie** (formaat §7.6, fase 3): Inbox → *Team…* beheert `team.json` in de werkmap — de redacteurs naast de eigenaar, in elke bundel
   die de eigenaar ondertekent. **Toevoegen in twee stappen**: de kaart (§5.1) plakken, waarna alleen de naam in beeld staat, en de **vingerafdruk van de
   kaart** terugtypen die de redacteur langs een andere weg gaf — hij wordt bewust niet eerst getoond. Een foute vingerafdruk wordt vóór elke andere
