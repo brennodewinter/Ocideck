@@ -5,7 +5,7 @@
   "serialNumber": "urn:uuid:b29fd6d5-1501-5b86-841a-78134f60b341",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-03T09:06:40.390591Z",
+    "timestamp": "2026-10-03T09:53:16.472978Z",
     "tools": {
       "components": [
         {
@@ -11024,6 +11024,7 @@
         "pkg:pub/archive@4.3.0",
         "pkg:pub/characters@1.4.1",
         "pkg:pub/crypto@3.0.7",
+        "pkg:pub/cryptography@2.9.0",
         "pkg:pub/dartage@0.3.0"
       ]
     },

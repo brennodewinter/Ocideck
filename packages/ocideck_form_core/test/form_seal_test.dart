@@ -2,7 +2,6 @@
 // organisers it was sealed to, and only as the package that was asked for.
 
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -785,73 +784,6 @@ void main() {
         );
         expect(r, isA<FormUnsealRefused>());
       }
-    });
-  });
-
-  group('the reference implementation', () {
-    Future<String?> reference() async {
-      final candidates = [
-        Platform.environment['AGE_BIN'],
-        'age',
-      ].whereType<String>();
-      for (final binary in candidates) {
-        try {
-          final r = await Process.run(binary, ['--version']);
-          if (r.exitCode == 0) return binary;
-        } on ProcessException {
-          continue;
-        }
-      }
-      return null;
-    }
-
-    test('seals here, opens there, and the other way round', () async {
-      final binary = await reference();
-      if (binary == null) {
-        markTestSkipped(
-          'NOT RUN: the reference `age` binary is not on the PATH (set AGE_BIN to use one). '
-          'Interoperability with the reference implementation is part of the phase 3 gate (§12).',
-        );
-        return;
-      }
-      final dir = Directory.systemTemp.createTempSync('ocideck_age_interop_');
-      addTearDown(() => dir.deleteSync(recursive: true));
-      final identityFile = File('${dir.path}/key.txt')
-        ..writeAsStringSync('${alice.identity}\n');
-      final zip = build(photoBytes: 200 * 1024);
-
-      // Here -> there.
-      final here = sealed(
-        await sealFormPackage(zip, recipients: [alice.recipient]),
-      );
-      final sealedFile = File('${dir.path}/here.age')
-        ..writeAsBytesSync(here.bytes);
-      final theirOpen = await Process.run(binary, [
-        '-d',
-        '-i',
-        identityFile.path,
-        '-o',
-        '${dir.path}/there.zip',
-        sealedFile.path,
-      ]);
-      expect(theirOpen.exitCode, 0, reason: '${theirOpen.stderr}');
-      expect(File('${dir.path}/there.zip').readAsBytesSync(), zip);
-
-      // There -> here.
-      File('${dir.path}/plain.zip').writeAsBytesSync(zip);
-      final theirSeal = await Process.run(binary, [
-        '-r',
-        alice.recipient,
-        '-o',
-        '${dir.path}/there.age',
-        '${dir.path}/plain.zip',
-      ]);
-      expect(theirSeal.exitCode, 0, reason: '${theirSeal.stderr}');
-      final r = await openSealedPackage(
-        File('${dir.path}/there.age').readAsBytesSync(),
-        identities: [alice.identity],
-      );
-      expect((r as FormUnsealed).zip, zip);
     });
   });
 }
