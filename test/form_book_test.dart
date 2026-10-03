@@ -6,6 +6,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/asset_rights.dart';
 import 'package:ocideck/services/form/form_book.dart';
 import 'package:ocideck/services/form/form_import.dart';
 import 'package:ocideck/services/form/form_submission_actions.dart';
@@ -60,6 +61,7 @@ Uint8List zipOf(
   String verhaal = 'Een verhaal.',
   Map<String, Uint8List> images = const {},
   String form = kook,
+  String? credit,
 }) {
   var text = form
       .replaceFirst(
@@ -81,7 +83,7 @@ Uint8List zipOf(
   if (images.isNotEmpty) {
     text = text.replaceFirst(
       '<!-- answer -->\n<!-- /field id=foto',
-      '<!-- answer -->\n${images.keys.map((k) => '![Beschrijving $k]($k "Foto: $naam")').join('\n')}\n<!-- /field id=foto',
+      '<!-- answer -->\n${images.keys.map((k) => '![Beschrijving $k]($k "${credit ?? 'Foto: $naam'}")').join('\n')}\n<!-- /field id=foto',
     );
   }
   return buildFormPackage(
@@ -148,6 +150,21 @@ void main() {
     groupBy: groupBy,
     onlySid: onlySid,
   );
+
+  Future<Map<String, Object?>> sidecar([String name = 'boek']) async =>
+      jsonDecode(
+            await File(
+              p.join(workspace.root, 'book', '$name.compile.json'),
+            ).readAsString(),
+          )
+          as Map<String, Object?>;
+
+  List<FormManifestConsent> zipConsent(int n) {
+    final opened = readFormPackage(
+      zipOf(n, images: {'images/foto-1.jpg': jpegPhoto()}),
+    );
+    return (opened as FormPackageOpened).manifest.consent;
+  }
 
   File book([String name = 'boek']) =>
       File(p.join(workspace.root, 'book', '$name.md'));
@@ -392,10 +409,180 @@ void main() {
           containsPair('field', 'akkoord'),
         );
         expect(first['form_sha256'], formTemplateHash(kook));
-        expect(first['images'], [
-          {'file': 'images/${sidOf(0)}-foto-1.jpg', 'creator': 'Foto: Sari'},
-        ]);
+        final images = first['images']! as List;
+        expect(images, hasLength(1));
+        final entry = images.single as Map;
+        expect(entry['file'], 'images/${sidOf(0)}-foto-1.jpg');
+        expect(entry['sha256'], sha256Hex(photo));
         expect((chapters.last as Map)['images'], isEmpty);
+      },
+    );
+
+    test(
+      'legt per foto het bewijs vast in de vorm van de rechtencontrole',
+      () async {
+        final photo = jpegPhoto();
+        await land(0, zip: zipOf(0, images: {'images/foto-1.jpg': photo}));
+        await compile();
+        final side = await sidecar();
+        final entry =
+            ((side['chapters']! as List).single as Map)['images'].single as Map;
+        final provenance = AssetRightsProvenance.fromJson(entry['provenance']);
+        expect(provenance.creator, 'Foto: Sari');
+        expect(provenance.license, 'form-consent');
+        expect(provenance.hasRightsEvidence, isTrue);
+        final consent = (zipConsent(0)).single;
+        expect(
+          provenance.licenseEvidence,
+          'kook@1 ${sidOf(0)}: akkoord ${consent.accepted} sha256:${consent.textSha256}',
+        );
+      },
+    );
+
+    test(
+      'zonder toestemmingsveld is er geen licentie en geen bewijs, en dat staat er zo',
+      () async {
+        const zonder =
+            '''<!-- form id=kook-zonder version=1 states="received|maker-approved" -->
+# Inzending
+
+<!-- field id=naam type=text required -->
+**Naam**
+<!-- answer -->
+<!-- /field id=naam -->
+
+<!-- field id=foto type=image count=0..2 -->
+**Foto**
+<!-- answer -->
+<!-- /field id=foto -->
+''';
+        await workspace.publishForm(zonder);
+        final other = (parseForm(zonder) as ParsedForm).spec;
+        final photo = jpegPhoto();
+        await land(
+          0,
+          zip: zipOf(0, images: {'images/foto-1.jpg': photo}, form: zonder),
+        );
+        await compile(t: '# {naam}\n\n{foto}', form: other);
+        final side = await sidecar();
+        final entry =
+            ((side['chapters']! as List).single as Map)['images'].single as Map;
+        final provenance = entry['provenance'] as Map;
+        expect(provenance, {'creator': 'Foto: Sari'});
+        expect(
+          AssetRightsProvenance.fromJson(provenance).hasRightsEvidence,
+          isFalse,
+        );
+        expect(entry['sha256'], sha256Hex(photo));
+      },
+    );
+
+    test(
+      'alle toestemmingen staan in het bewijs, in de volgorde van het formulier',
+      () async {
+        const twee =
+            '''<!-- form id=kook-twee version=1 states="received|maker-approved" -->
+# Inzending
+
+<!-- field id=naam type=text required -->
+**Naam**
+<!-- answer -->
+<!-- /field id=naam -->
+
+<!-- field id=foto type=image count=0..2 -->
+**Foto**
+<!-- answer -->
+<!-- /field id=foto -->
+
+<!-- field id=akkoord type=consent required -->
+Ik ga akkoord.
+<!-- answer -->
+- [ ]
+<!-- /field id=akkoord -->
+
+<!-- field id=akkoord-foto type=consent required -->
+Mijn foto's mogen erin.
+<!-- answer -->
+- [ ]
+<!-- /field id=akkoord-foto -->
+''';
+        await workspace.publishForm(twee);
+        final specTwee = (parseForm(twee) as ParsedForm).spec;
+        final photo = jpegPhoto();
+        final text = twee
+            .replaceFirst(
+              '<!-- answer -->\n<!-- /field id=naam',
+              '<!-- answer -->\nSari\n<!-- /field id=naam',
+            )
+            .replaceFirst(
+              '<!-- answer -->\n<!-- /field id=foto',
+              '<!-- answer -->\n![B](images/foto-1.jpg "Foto: Sari")\n<!-- /field id=foto',
+            )
+            .replaceAll('- [ ]', '- [x]');
+        final bytes = buildFormPackage(
+          submission: text,
+          template: twee,
+          spec: specTwee,
+          images: {'images/foto-1.jpg': photo},
+          submissionId: sidOf(0),
+          created: DateTime.utc(2026, 10, 4),
+          clientRules: kFormRulesVersion,
+        );
+        await land(0, zip: bytes);
+        await compile(t: '# {naam}\n\n{foto}', form: specTwee);
+        final entry =
+            (((await sidecar())['chapters']! as List).single as Map)['images']
+                    .single
+                as Map;
+        final consent =
+            ((readFormPackage(bytes) as FormPackageOpened).manifest.consent);
+        expect(consent.map((c) => c.field), ['akkoord', 'akkoord-foto']);
+        final evidence = AssetRightsProvenance.fromJson(
+          entry['provenance'],
+        ).licenseEvidence;
+        expect(
+          evidence,
+          'kook-twee@1 ${sidOf(0)}: '
+          'akkoord ${consent[0].accepted} sha256:${consent[0].textSha256}; '
+          'akkoord-foto ${consent[1].accepted} sha256:${consent[1].textSha256}',
+        );
+      },
+    );
+
+    test(
+      'een foto zonder titel heeft geen maker, een lege titel ook niet',
+      () async {
+        final photo = jpegPhoto();
+        await land(
+          0,
+          zip: zipOf(0, images: {'images/foto-1.jpg': photo}, credit: ''),
+        );
+        await compile();
+        final entry =
+            (((await sidecar())['chapters']! as List).single as Map)['images']
+                    .single
+                as Map;
+        expect((entry['provenance'] as Map).containsKey('creator'), isFalse);
+      },
+    );
+
+    test(
+      'een foto die er niet meer is heeft geen hash, wel haar bewijs',
+      () async {
+        await land(
+          0,
+          zip: zipOf(0, images: {'images/foto-1.jpg': jpegPhoto()}),
+        );
+        await File(
+          p.join(workspace.submissionPath(sidOf(0)), 'images', 'foto-1.jpg'),
+        ).delete();
+        await compile();
+        final entry =
+            (((await sidecar())['chapters']! as List).single as Map)['images']
+                    .single
+                as Map;
+        expect(entry.containsKey('sha256'), isFalse);
+        expect((entry['provenance'] as Map)['license'], 'form-consent');
       },
     );
   });

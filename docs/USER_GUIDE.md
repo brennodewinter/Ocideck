@@ -5886,8 +5886,10 @@ Under an opened submission are its **actions**:
   `book` folder of the workspace and never over an existing one; the photos are copied next to it as
   `images/<id>-<field>-<n>.<ext>`. An answer goes in as the Markdown it is, whole; **a withdrawn submission never
   goes in**; a template that names a field the form does not have is refused, naming the field. What the book was
-  made from — which submissions, under which consent, who made which photo — is written next to it in
-  `<name>.compile.json`, not in the text. The sentence afterwards says how many chapters and photos went in and
+  made from — which submissions, under which consent, and per photo its fingerprint, its maker and the evidence
+  it may be there under (the consent the respondent gave, with the hash of its text) — is written next to it in
+  `<name>.compile.json`, not in the text. The asset rights check does not look at the photos of a document yet;
+  this records the evidence so it is there when it does. The sentence afterwards says how many chapters and photos went in and
   how many submissions were withdrawn or skipped (another form version, or unreadable), and offers to open the
   book.
 - **Maker check…** — before a contribution is published, the maker sees what it will look like and says whether it
