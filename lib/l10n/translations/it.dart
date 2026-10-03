@@ -664,6 +664,31 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Versturen…': 'Invia…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Invia in forma cifrata al server dell’organizzatore, senza dover inviare nulla per e-mail.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Inviare alla redazione di {naam}? Il tuo invio va cifrato a {host}; solo {namen} possono aprirlo.',
+  'De inzending wordt verstuurd…': 'Invio in corso…',
+  'Je inzending is aangekomen.': 'Il tuo invio è arrivato.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Arrivato il {tijd}. Se hai domande, scrivi a {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Il codice di controllo di ciò che il server ha ricevuto inizia con {hash}. Citalo se scrivi al riguardo.',
+  'Bewijs bewaren…': 'Conserva la ricevuta…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'La ricevuta contiene il segreto con cui puoi ritirare l’invio. Conservala in un luogo sicuro.',
+  'Bewijs opgeslagen als {naam}.': 'Ricevuta salvata come {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Non è stato possibile salvare la ricevuta.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'L’invito non è più valido: l’organizzatore lo ha ritirato o sostituito. Chiedi un nuovo invito.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Il server non accetta questo invio perché è troppo grande. Togli una foto o rimpiccioliscine una.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Il server ha confermato qualcosa di diverso da ciò che hai inviato. Riprova, oppure salva l’invio sigillato e mandalo per e-mail.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Il server ha rifiutato l’invio. Riprova più tardi, oppure salva l’invio sigillato e mandalo per e-mail.',
   'Uitnodiging openen…': 'Apri invito…',
   'Uitnodiging openen': 'Apri invito',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

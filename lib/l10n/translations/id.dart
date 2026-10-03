@@ -1627,6 +1627,31 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Versturen…': 'Kirim…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Kirim terenkripsi ke server penyelenggara, jadi Anda tidak perlu mengirim apa pun lewat email.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Kirim ke redaksi {naam}? Kiriman Anda dikirim terenkripsi ke {host}; hanya {namen} yang dapat membukanya.',
+  'De inzending wordt verstuurd…': 'Kiriman sedang dikirim…',
+  'Je inzending is aangekomen.': 'Kiriman Anda telah sampai.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Sampai pada {tijd}. Jika ada pertanyaan, tulis ke {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Checksum dari apa yang diterima server diawali {hash}. Sebutkan jika Anda menulis tentang ini.',
+  'Bewijs bewaren…': 'Simpan tanda terima…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Tanda terima berisi rahasia yang dapat Anda pakai untuk menarik kiriman. Simpan di tempat yang aman.',
+  'Bewijs opgeslagen als {naam}.': 'Tanda terima disimpan sebagai {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Tanda terima tidak dapat disimpan.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Undangan tidak lagi berlaku: penyelenggara telah menarik atau menggantinya. Minta undangan baru.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Server tidak menerima kiriman ini karena terlalu besar. Hapus sebuah foto atau perkecil salah satunya.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Server mengonfirmasi hal lain dari yang Anda kirim. Coba lagi, atau simpan kiriman tersegel dan kirim lewat email.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Server menolak kiriman. Coba lagi nanti, atau simpan kiriman tersegel dan kirim lewat email.',
   'Uitnodiging openen…': 'Buka undangan…',
   'Uitnodiging openen': 'Buka undangan',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

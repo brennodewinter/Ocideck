@@ -1657,6 +1657,31 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Versturen…': 'Seol…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Seol criptithe chuig freastalaí an eagraí, ionas nach gcaithfidh tú aon rud a sheoladh trí ríomhphost.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'An seolfar chuig eagarthóirí {naam}? Téann d’aighneacht criptithe chuig {host}; ní féidir ach le {namen} í a oscailt.',
+  'De inzending wordt verstuurd…': 'An aighneacht á seoladh…',
+  'Je inzending is aangekomen.': 'Tá d’aighneacht tagtha.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Tháinig sí ar {tijd}. Má tá ceisteanna agat, scríobh chuig {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Tosaíonn suim sheiceála an ruda a fuair an freastalaí le {hash}. Luaigh í má scríobhann tú faoi.',
+  'Bewijs bewaren…': 'Coinnigh an admháil…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Tá an rún san admháil leis an bhféadfá an aighneacht a tharraingt siar. Coinnigh in áit shábháilte í.',
+  'Bewijs opgeslagen als {naam}.': 'Sábháladh an admháil mar {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Níorbh fhéidir an admháil a shábháil.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Níl an cuireadh bailí a thuilleadh: tharraing an t-eagraí siar é nó d’athraigh sé é. Iarr cuireadh nua.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Ní ghlacann an freastalaí leis an aighneacht seo toisc go bhfuil sí rómhór. Bain grianghraf amach nó laghdaigh ceann.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Dheimhnigh an freastalaí rud éigin eile seachas an rud a sheol tú. Bain triail eile as, nó sábháil an aighneacht séalaithe agus seol trí ríomhphost í.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Dhiúltaigh an freastalaí don aighneacht. Bain triail eile as níos déanaí, nó sábháil an aighneacht séalaithe agus seol trí ríomhphost í.',
   'Uitnodiging openen…': 'Oscail an cuireadh…',
   'Uitnodiging openen': 'Oscail an cuireadh',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

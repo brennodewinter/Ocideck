@@ -1647,6 +1647,31 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Versturen…': 'Изпращане…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Изпратете шифровано до сървъра на организатора, за да не трябва да пращате нищо по имейл.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Да се изпрати ли до редакцията на {naam}? Вашето подаване отива шифровано до {host}; само {namen} могат да го отворят.',
+  'De inzending wordt verstuurd…': 'Подаването се изпраща…',
+  'Je inzending is aangekomen.': 'Вашето подаване пристигна.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Пристигна на {tijd}. Ако имате въпроси, пишете на {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Контролната сума на полученото от сървъра започва с {hash}. Посочете я, ако пишете за това.',
+  'Bewijs bewaren…': 'Запазване на разписката…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Разписката съдържа тайната, с която можете да оттеглите подаването. Пазете я на сигурно място.',
+  'Bewijs opgeslagen als {naam}.': 'Разписката е запазена като {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Разписката не можа да бъде запазена.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Поканата вече не е валидна: организаторът я е оттеглил или заменил. Поискайте нова покана.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Сървърът не приема това подаване, защото е твърде голямо. Махнете снимка или намалете една.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Сървърът потвърди нещо различно от това, което изпратихте. Опитайте отново или запазете запечатаното подаване и го изпратете по имейл.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Сървърът отхвърли подаването. Опитайте отново по-късно или запазете запечатаното подаване и го изпратете по имейл.',
   'Uitnodiging openen…': 'Отваряне на покана…',
   'Uitnodiging openen': 'Отваряне на покана',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

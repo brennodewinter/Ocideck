@@ -1620,6 +1620,30 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Versturen…': 'Saada…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Saada krüpteeritult korraldaja serverisse, et sa ei peaks midagi e-postiga saatma.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Kas saata {naam} toimetusele? Sinu esitus läheb krüpteeritult aadressile {host}; seda saavad avada ainult {namen}.',
+  'De inzending wordt verstuurd…': 'Esitust saadetakse…',
+  'Je inzending is aangekomen.': 'Sinu esitus jõudis kohale.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Jõudis kohale {tijd}. Kui sul on küsimusi, kirjuta aadressile {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Serveri saadud sisu kontrollsumma algab {hash}. Maini seda, kui kirjutad sellest.',
+  'Bewijs bewaren…': 'Salvesta kviitung…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Kviitung sisaldab saladust, millega saad esituse tagasi võtta. Hoia see turvalises kohas.',
+  'Bewijs opgeslagen als {naam}.': 'Kviitung salvestatud nimega {naam}.',
+  'Het bewijs kon niet worden opgeslagen.': 'Kviitungit ei saanud salvestada.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Kutse ei kehti enam: korraldaja on selle tagasi võtnud või asendanud. Palu uut kutset.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Server ei võta seda esitust vastu, sest see on liiga suur. Eemalda foto või tee üks väiksemaks.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Server kinnitas midagi muud kui see, mille saatsid. Proovi uuesti või salvesta pitseeritud esitus ja saada see e-postiga.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Server lükkas esituse tagasi. Proovi hiljem uuesti või salvesta pitseeritud esitus ja saada see e-postiga.',
   'Uitnodiging openen…': 'Ava kutse…',
   'Uitnodiging openen': 'Ava kutse',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

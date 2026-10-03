@@ -1627,6 +1627,30 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Versturen…': 'Pošlji…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Pošlji šifrirano na strežnik organizatorja, da vam ni treba ničesar pošiljati po e-pošti.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Poslati uredništvu {naam}? Vaša oddaja gre šifrirana na {host}; odpreti jo morejo le {namen}.',
+  'De inzending wordt verstuurd…': 'Oddaja se pošilja…',
+  'Je inzending is aangekomen.': 'Vaša oddaja je prispela.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Prispelo {tijd}. Če imate vprašanja, pišite na {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Kontrolna vsota tega, kar je prejel strežnik, se začne z {hash}. Navedite jo, če pišete o tem.',
+  'Bewijs bewaren…': 'Shrani potrdilo…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Potrdilo vsebuje skrivnost, s katero lahko oddajo umaknete. Hranite ga na varnem.',
+  'Bewijs opgeslagen als {naam}.': 'Potrdilo je shranjeno kot {naam}.',
+  'Het bewijs kon niet worden opgeslagen.': 'Potrdila ni bilo mogoče shraniti.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Vabilo ne velja več: organizator ga je umaknil ali zamenjal. Prosite za novo vabilo.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Strežnik te oddaje ne sprejme, ker je prevelika. Odstranite fotografijo ali eno pomanjšajte.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Strežnik je potrdil nekaj drugega, kot ste poslali. Poskusite znova ali shranite zapečateno oddajo in jo pošljite po e-pošti.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Strežnik je oddajo zavrnil. Poskusite znova pozneje ali shranite zapečateno oddajo in jo pošljite po e-pošti.',
   'Uitnodiging openen…': 'Odpri vabilo…',
   'Uitnodiging openen': 'Odpri vabilo',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

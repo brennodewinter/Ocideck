@@ -1631,6 +1631,31 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Versturen…': 'Pošalji…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Pošalji šifrirano na poslužitelj organizatora, da ne moraš ništa slati e-poštom.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Poslati uredništvu {naam}? Tvoj prilog ide šifriran na {host}; samo {namen} mogu ga otvoriti.',
+  'De inzending wordt verstuurd…': 'Prilog se šalje…',
+  'Je inzending is aangekomen.': 'Tvoj prilog je stigao.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Stiglo {tijd}. Ako imaš pitanja, piši na {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Kontrolni zbroj onoga što je poslužitelj primio počinje s {hash}. Navedi ga ako pišeš o tome.',
+  'Bewijs bewaren…': 'Spremi potvrdu…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Potvrda sadrži tajnu kojom možeš povući prilog. Čuvaj je na sigurnom mjestu.',
+  'Bewijs opgeslagen als {naam}.': 'Potvrda je spremljena kao {naam}.',
+  'Het bewijs kon niet worden opgeslagen.':
+      'Potvrdu nije bilo moguće spremiti.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Pozivnica više ne vrijedi: organizator ju je povukao ili zamijenio. Zatraži novu pozivnicu.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Poslužitelj ne prihvaća ovaj prilog jer je prevelik. Ukloni fotografiju ili smanji jednu.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Poslužitelj je potvrdio nešto drugo od onoga što si poslao. Pokušaj ponovno ili spremi zapečaćeni prilog i pošalji ga e-poštom.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Poslužitelj je odbio prilog. Pokušaj ponovno kasnije ili spremi zapečaćeni prilog i pošalji ga e-poštom.',
   'Uitnodiging openen…': 'Otvori pozivnicu…',
   'Uitnodiging openen': 'Otvori pozivnicu',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':

@@ -1626,6 +1626,30 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Versturen…': 'Skicka…',
+  'Versleuteld versturen naar de server van de organisator, zodat je niets hoeft te mailen.':
+      'Skicka krypterat till organisatörens server, så att du inte behöver mejla något.',
+  'Naar de redactie van {naam} versturen? Je inzending gaat versleuteld naar {host}; alleen {namen} kunnen hem openen.':
+      'Skicka till redaktionen hos {naam}? Ditt bidrag går krypterat till {host}; bara {namen} kan öppna det.',
+  'De inzending wordt verstuurd…': 'Bidraget skickas…',
+  'Je inzending is aangekomen.': 'Ditt bidrag har kommit fram.',
+  'Aangekomen op {tijd}. Heb je vragen, schrijf dan naar {contact}.':
+      'Kom fram {tijd}. Har du frågor, skriv till {contact}.',
+  'Het controlegetal van wat de server ontving begint met {hash}. Noem het als je erover schrijft.':
+      'Kontrollsumman för det servern tog emot börjar med {hash}. Nämn den om du skriver om det.',
+  'Bewijs bewaren…': 'Spara kvitto…',
+  'Het bewijs bevat het geheim waarmee je de inzending kunt intrekken. Bewaar het op een veilige plek.':
+      'Kvittot innehåller hemligheten som du kan använda för att dra tillbaka bidraget. Förvara det på en säker plats.',
+  'Bewijs opgeslagen als {naam}.': 'Kvitto sparat som {naam}.',
+  'Het bewijs kon niet worden opgeslagen.': 'Kvittot kunde inte sparas.',
+  'De uitnodiging is niet meer geldig: de organisator heeft hem ingetrokken of vervangen. Vraag om een nieuwe uitnodiging.':
+      'Inbjudan gäller inte längre: organisatören har dragit tillbaka eller ersatt den. Be om en ny inbjudan.',
+  'De server neemt deze inzending niet aan omdat ze te groot is. Haal een foto weg of maak er een kleiner.':
+      'Servern tar inte emot det här bidraget eftersom det är för stort. Ta bort ett foto eller gör ett mindre.',
+  'De server bevestigde iets anders dan wat je verstuurde. Probeer het opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Servern bekräftade något annat än det du skickade. Försök igen, eller spara det förseglade bidraget och mejla det.',
+  'De server weigerde de inzending. Probeer het later opnieuw, of sla de verzegelde inzending op en mail die.':
+      'Servern avvisade bidraget. Försök igen senare, eller spara det förseglade bidraget och mejla det.',
   'Uitnodiging openen…': 'Öppna inbjudan…',
   'Uitnodiging openen': 'Öppna inbjudan',
   'Plak de uitnodigingslink die je van de organisator kreeg. Het formulier wordt dan opgehaald bij de server die in de link staat.':
