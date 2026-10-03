@@ -249,9 +249,11 @@ void main() {
     // dichtgetimmerde omgeving (includeParentEnvironment: false) zodat een
     // GIT_TRACE_* uit de schil van de gebruiker het token niet wegschrijft.
     'lib/services/git/git_cli_io.dart': 1,
-    // `chmod 700` op de datamappen, alleen op Linux: vaste argv, geen schil, en
-    // het pad komt van path_provider. Dart heeft geen permissie-API.
-    'lib/services/disk_traces.dart': 1,
+    // De ene `chmod`: de datamappen op Linux (700) en een bestand met een geheim erin (600),
+    // beide via `lib/utils/chmod.dart`. Vaste argv, geen schil, een octale modus met `--`
+    // ervoor, en het pad komt van `path_provider` of is dat van een bestand dat de aanroeper
+    // zojuist zelf maakte. Dart heeft geen permissie-API.
+    'lib/utils/chmod.dart': 1,
   };
 
   test('een subproces blijft binnen de twee plekken die het mogen', () {
