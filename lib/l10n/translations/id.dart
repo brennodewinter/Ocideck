@@ -1627,6 +1627,79 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Herstelsleutel controleren': 'Periksa kunci pemulihan',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Kunci redaksi dibuat. Sekarang tuliskan kunci pemulihan.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Gantungan kunci tidak menerima kunci itu. Tidak ada yang dibuat.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Sudah ada kunci redaksi. Tidak disentuh.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Gantungan kunci tidak dapat dibaca. Tidak ada yang diasumsikan dan tidak ada yang dibuat.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Ada sesuatu di gantungan kunci yang bukan kunci redaksi. Tidak ditimpa.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Platform ini tidak punya gantungan kunci.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Benar: kunci pemulihan telah diperiksa.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Ini kunci pemulihan yang valid, tetapi bukan milik kunci redaksi ini.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Kunci pemulihan benar, tetapi itu tidak dapat disimpan.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Tidak ada kunci redaksi untuk dicocokkan.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Ini bukan kunci pemulihan dari sebuah kunci redaksi.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Ada salah ketik: checksum tidak cocok.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Kunci pemulihan ini berasal dari versi OciDeck yang lebih baru.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Kunci pemulihan ini dibuat untuk hal lain.',
+  'Hersteld uit de herstelsleutel.': 'Dipulihkan dari kunci pemulihan.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Gantungan kunci tidak menerima kunci itu. Tidak ada yang dipulihkan.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Simpan kunci redaksi sebagai berkas kunci age',
+  'Het bestand kon niet worden opgeslagen.': 'Berkas tidak dapat disimpan.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Disimpan sebagai {pad}. Siapa pun yang memiliki berkas ini dapat membuka semuanya.',
+  'Redactiesleutel verwijderd.': 'Kunci redaksi dihapus.',
+  'Redactiesleutel': 'Kunci redaksi',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Platform ini tidak punya gantungan kunci. Kunci redaksi tidak dapat disimpan di sini; gunakan aplikasi desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Gantungan kunci tidak dapat dibaca (terkunci, atau akses ditolak). Tidak ada yang diasumsikan dan tidak ada yang dibuat.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Ada sesuatu di gantungan kunci yang bukan kunci redaksi. Tidak ditimpa. Hapus itu dan pulihkan kunci dari kunci pemulihan Anda.',
+  'Redactiesleutel verwijderen…': 'Hapus kunci redaksi…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Kunci redaksi membuka kiriman yang disegel dan menandatangani bundel formulir Anda. Kunci itu ada di gantungan kunci sistem operasi ini. Jika Anda kehilangan semua kunci redaksi, semua kiriman yang belum diambil tidak dapat dibaca lagi: itulah harga server yang tidak dapat membaca apa pun.',
+  'Redactiesleutel aanmaken': 'Buat kunci redaksi',
+  'Herstellen uit herstelsleutel…': 'Pulihkan dari kunci pemulihan…',
+  'Vingerafdruk': 'Sidik jari',
+  'Ontvanger (age)': 'Penerima (age)',
+  'Aangemaakt op {datum}.': 'Dibuat pada {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Kunci pemulihan telah diperiksa.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Kunci pemulihan belum diperiksa: tuliskan dan ketik ulang.',
+  'Herstelsleutel tonen…': 'Tampilkan kunci pemulihan…',
+  'Vingerafdruk kopiëren': 'Salin sidik jari',
+  'Exporteren als age-sleutelbestand…': 'Ekspor sebagai berkas kunci age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Tuliskan kunci pemulihan ini dan simpan di tempat aman, di luar perangkat ini. Siapa pun yang memilikinya dapat membuka semua kiriman dan menandatangani bundel atas nama Anda. Jika perangkat ini hilang, hanya ini yang tersisa.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Ketik kunci pemulihan di sini sekali lagi',
+  'Later': 'Nanti',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Ketik atau tempel kunci pemulihan. Yang Anda masukkan disimpan di gantungan kunci sebagai kunci redaksi; tidak ada yang ditimpa.',
+  'Herstelsleutel': 'Kunci pemulihan',
+  'Redactiesleutel verwijderen': 'Hapus kunci redaksi',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Kunci dihapus dari gantungan kunci dan hanya dapat kembali dari kunci pemulihan. Jika Anda tidak memilikinya, kiriman yang disegel hanya untuk kunci ini tidak akan pernah terbaca lagi.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Kunci yang membuka kiriman tersegel dan menandatangani bundel.',
+  'Redactiesleutel…': 'Kunci redaksi…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Salinan kerja dibuang. Apa yang masuk dinilai lagi.',
   'Er is geen werkkopie.': 'Tidak ada salinan kerja.',

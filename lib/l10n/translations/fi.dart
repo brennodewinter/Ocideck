@@ -1627,6 +1627,79 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Herstelsleutel controleren': 'Tarkista palautusavain',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Toimituksen avain luotu. Kirjoita nyt palautusavain muistiin.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Avainnippu ei hyväksynyt avainta. Mitään ei luotu.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Toimituksen avain on jo olemassa. Sitä ei koskettu.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Avainnippua ei voitu lukea. Mitään ei oletettu eikä mitään luotu.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Avainnipussa on jotain, mikä ei ole toimituksen avain. Sitä ei korvattu.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Tällä alustalla ei ole avainnippua.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Oikein: palautusavain on tarkistettu.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Tämä on kelvollinen palautusavain, mutta ei tämän toimituksen avaimen.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Palautusavain on oikea, mutta sitä ei voitu tallentaa.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Ei ole toimituksen avainta, johon verrata.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Tämä ei ole toimituksen avaimen palautusavain.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Siinä on kirjoitusvirhe: tarkistussumma ei täsmää.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tämä palautusavain on peräisin OciDeckin uudemmasta versiosta.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Tämä palautusavain on tehty johonkin muuhun.',
+  'Hersteld uit de herstelsleutel.': 'Palautettu palautusavaimesta.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Avainnippu ei hyväksynyt avainta. Mitään ei palautettu.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Tallenna toimituksen avain age-avaintiedostona',
+  'Het bestand kon niet worden opgeslagen.': 'Tiedostoa ei voitu tallentaa.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Tallennettu nimellä {pad}. Jokainen, jolla on tämä tiedosto, voi avata kaiken.',
+  'Redactiesleutel verwijderd.': 'Toimituksen avain poistettu.',
+  'Redactiesleutel': 'Toimituksen avain',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Tällä alustalla ei ole avainnippua. Toimituksen avainta ei voi säilyttää täällä; käytä työpöytäsovellusta.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Avainnippua ei voitu lukea (lukittu tai pääsy evätty). Mitään ei oletettu eikä mitään luotu.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Avainnipussa on jotain, mikä ei ole toimituksen avain. Sitä ei korvattu. Poista se ja palauta avain palautusavaimestasi.',
+  'Redactiesleutel verwijderen…': 'Poista toimituksen avain…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Toimituksen avain avaa sinetöidyt lähetykset ja allekirjoittaa lomakkeidesi paketit. Se on tämän käyttöjärjestelmän avainnipussa. Jos menetät kaikki toimituksen avaimet, kaikki vielä hakematta olevat lähetykset muuttuvat lukukelvottomiksi: se on hinta palvelimesta, joka ei voi lukea mitään.',
+  'Redactiesleutel aanmaken': 'Luo toimituksen avain',
+  'Herstellen uit herstelsleutel…': 'Palauta palautusavaimesta…',
+  'Vingerafdruk': 'Sormenjälki',
+  'Ontvanger (age)': 'Vastaanottaja (age)',
+  'Aangemaakt op {datum}.': 'Luotu {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Palautusavain on tarkistettu.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Palautusavainta ei ole vielä tarkistettu: kirjoita se muistiin ja kirjoita se uudelleen.',
+  'Herstelsleutel tonen…': 'Näytä palautusavain…',
+  'Vingerafdruk kopiëren': 'Kopioi sormenjälki',
+  'Exporteren als age-sleutelbestand…': 'Vie age-avaintiedostona…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Kirjoita tämä palautusavain muistiin ja säilytä se turvallisessa paikassa, pois tältä laitteelta. Jokainen, jolla se on, voi avata kaikki lähetykset ja allekirjoittaa paketteja teidän nimessänne. Jos menetät tämän laitteen, se on kaikki, mitä jää jäljelle.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Kirjoita palautusavain tähän uudelleen',
+  'Later': 'Myöhemmin',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Kirjoita tai liitä palautusavain. Se, minkä annat, asetetaan avainnippuun toimituksen avaimeksi; mitään ei korvata.',
+  'Herstelsleutel': 'Palautusavain',
+  'Redactiesleutel verwijderen': 'Poista toimituksen avain',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Avain poistetaan avainnipusta, ja se voi palata vain palautusavaimesta. Jos sinulla ei ole sitä, vain tälle avaimelle sinetöidyt lähetykset jäävät lukukelvottomiksi ikuisesti.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Avain, joka avaa sinetöidyt lähetykset ja allekirjoittaa paketit.',
+  'Redactiesleutel…': 'Toimituksen avain…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Työkopio heitettiin pois. Se, mikä saapui, arvioidaan uudelleen.',
   'Er is geen werkkopie.': 'Työkopiota ei ole.',

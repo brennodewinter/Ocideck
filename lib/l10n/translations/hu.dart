@@ -1629,6 +1629,79 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Herstelsleutel controleren': 'Helyreállító kulcs ellenőrzése',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'A szerkesztőségi kulcs létrejött. Írd le most a helyreállító kulcsot.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'A kulcstartó nem fogadta el a kulcsot. Semmi nem jött létre.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Már van szerkesztőségi kulcs. Nem nyúltunk hozzá.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'A kulcstartót nem sikerült beolvasni. Semmit nem feltételeztünk, és semmi nem jött létre.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'A kulcstartóban van valami, ami nem szerkesztőségi kulcs. Nem írtuk felül.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ennek a platformnak nincs kulcstartója.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Helyes: a helyreállító kulcsot ellenőriztük.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Ez érvényes helyreállító kulcs, de nem ennek a szerkesztőségi kulcsnak a kulcsa.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'A helyreállító kulcs helyes, de ezt nem sikerült elmenteni.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nincs szerkesztőségi kulcs, amellyel összehasonlíthatnánk.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Ez nem egy szerkesztőségi kulcs helyreállító kulcsa.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Gépelési hiba van benne: az ellenőrző összeg nem egyezik.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ez a helyreállító kulcs az OciDeck újabb verziójából származik.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Ezt a helyreállító kulcsot valami másra készítették.',
+  'Hersteld uit de herstelsleutel.': 'Visszaállítva a helyreállító kulcsból.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'A kulcstartó nem fogadta el a kulcsot. Semmi nem lett visszaállítva.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'A szerkesztőségi kulcs mentése age kulcsfájlként',
+  'Het bestand kon niet worden opgeslagen.': 'A fájlt nem sikerült elmenteni.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Elmentve {pad} néven. Aki ezt a fájlt birtokolja, mindent megnyithat.',
+  'Redactiesleutel verwijderd.': 'A szerkesztőségi kulcs törölve.',
+  'Redactiesleutel': 'Szerkesztőségi kulcs',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ennek a platformnak nincs kulcstartója. A szerkesztőségi kulcs itt nem tárolható; használd az asztali alkalmazást.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'A kulcstartót nem sikerült beolvasni (zárolt, vagy a hozzáférés megtagadva). Semmit nem feltételeztünk, és semmi nem jött létre.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'A kulcstartóban van valami, ami nem szerkesztőségi kulcs. Nem írtuk felül. Töröld, és állítsd vissza a kulcsot a helyreállító kulcsodból.',
+  'Redactiesleutel verwijderen…': 'Szerkesztőségi kulcs törlése…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'A szerkesztőségi kulcs megnyitja a lezárt beküldéseket, és aláírja az űrlapjaid csomagjait. Az operációs rendszer kulcstartójában van. Ha elveszted a szerkesztőség összes kulcsát, az összes még le nem töltött beküldés olvashatatlanná válik: ez az ára egy olyan szervernek, amely semmit nem tud olvasni.',
+  'Redactiesleutel aanmaken': 'Szerkesztőségi kulcs létrehozása',
+  'Herstellen uit herstelsleutel…': 'Visszaállítás helyreállító kulcsból…',
+  'Vingerafdruk': 'Ujjlenyomat',
+  'Ontvanger (age)': 'Címzett (age)',
+  'Aangemaakt op {datum}.': 'Létrehozva: {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'A helyreállító kulcsot ellenőriztük.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'A helyreállító kulcsot még nem ellenőriztük: írd le, és gépeld be újra.',
+  'Herstelsleutel tonen…': 'Helyreállító kulcs megjelenítése…',
+  'Vingerafdruk kopiëren': 'Ujjlenyomat másolása',
+  'Exporteren als age-sleutelbestand…': 'Exportálás age kulcsfájlként…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Írd le ezt a helyreállító kulcsot, és tartsd biztos helyen, ettől az eszköztől távol. Aki birtokolja, megnyithatja az összes beküldést, és a ti nevetekben csomagokat írhat alá. Ha elveszted ezt az eszközt, ez marad meg mindenből.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Gépeld be ide újra a helyreállító kulcsot',
+  'Later': 'Később',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Gépeld be vagy illeszd be a helyreállító kulcsot. Amit megadsz, szerkesztőségi kulcsként kerül a kulcstartóba; semmi nem íródik felül.',
+  'Herstelsleutel': 'Helyreállító kulcs',
+  'Redactiesleutel verwijderen': 'Szerkesztőségi kulcs törlése',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'A kulcs törlődik a kulcstartóból, és csak a helyreállító kulcsból kerülhet vissza. Ha nincs meg, a csak ehhez a kulcshoz lezárt beküldések örökre olvashatatlanok maradnak.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'A kulcs, amely megnyitja a lezárt beküldéseket, és aláírja a csomagokat.',
+  'Redactiesleutel…': 'Szerkesztőségi kulcs…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'A munkapéldányt eldobtuk. Ami beérkezett, azt újra elbíráljuk.',
   'Er is geen werkkopie.': 'Nincs munkapéldány.',

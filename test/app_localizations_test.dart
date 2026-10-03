@@ -12,6 +12,9 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  // Het Engels heeft hetzelfde woord als het Nederlands ("Later" op de knop die een stap
+  // uitstelt); de andere talen niet, dus alleen hier.
+  'Later',
   'YYYY-MM-DD',
   '{id} · v{versie}',
   'Marp',

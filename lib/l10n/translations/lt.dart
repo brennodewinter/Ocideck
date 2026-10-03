@@ -1634,6 +1634,79 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Herstelsleutel controleren': 'Patikrinti atkūrimo raktą',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redakcijos raktas sukurtas. Dabar užsirašykite atkūrimo raktą.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Raktų pakabukas rakto nepriėmė. Nieko nesukurta.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Redakcijos raktas jau yra. Jis nepaliestas.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Raktų pakabuko nepavyko perskaityti. Nieko nepriimta ir nieko nesukurta.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Raktų pakabuke yra kažkas, kas nėra redakcijos raktas. Tai neperrašyta.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ši platforma neturi raktų pakabuko.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Teisingai: atkūrimo raktas patikrintas.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Tai galiojantis atkūrimo raktas, bet ne šio redakcijos rakto.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Atkūrimo raktas teisingas, bet to nepavyko išsaugoti.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nėra redakcijos rakto, su kuriuo būtų galima palyginti.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Tai nėra redakcijos rakto atkūrimo raktas.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Jame yra rašybos klaida: kontrolinė suma nesutampa.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Šis atkūrimo raktas yra iš naujesnės OciDeck versijos.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Šis atkūrimo raktas sukurtas kažkam kitam.',
+  'Hersteld uit de herstelsleutel.': 'Atkurta iš atkūrimo rakto.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Raktų pakabukas rakto nepriėmė. Nieko neatkurta.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Išsaugoti redakcijos raktą kaip age rakto failą',
+  'Het bestand kon niet worden opgeslagen.': 'Failo nepavyko išsaugoti.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Išsaugota kaip {pad}. Kas turi šį failą, gali atidaryti viską.',
+  'Redactiesleutel verwijderd.': 'Redakcijos raktas ištrintas.',
+  'Redactiesleutel': 'Redakcijos raktas',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ši platforma neturi raktų pakabuko. Redakcijos rakto čia laikyti negalima; naudokite darbalaukio programą.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Raktų pakabuko nepavyko perskaityti (užrakintas arba prieiga uždrausta). Nieko nepriimta ir nieko nesukurta.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Raktų pakabuke yra kažkas, kas nėra redakcijos raktas. Tai neperrašyta. Ištrinkite tai ir atkurkite raktą iš savo atkūrimo rakto.',
+  'Redactiesleutel verwijderen…': 'Ištrinti redakcijos raktą…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Redakcijos raktas atidaro užplombuotus pateikimus ir pasirašo jūsų formų paketus. Jis laikomas šios operacinės sistemos raktų pakabuke. Jei prarasite visus redakcijos raktus, visi dar neparsisiųsti pateikimai taps neperskaitomi: tokia yra serverio, kuris nieko negali perskaityti, kaina.',
+  'Redactiesleutel aanmaken': 'Sukurti redakcijos raktą',
+  'Herstellen uit herstelsleutel…': 'Atkurti iš atkūrimo rakto…',
+  'Vingerafdruk': 'Kontrolinis kodas',
+  'Ontvanger (age)': 'Gavėjas (age)',
+  'Aangemaakt op {datum}.': 'Sukurta {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Atkūrimo raktas patikrintas.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Atkūrimo raktas dar nepatikrintas: užsirašykite jį ir įveskite dar kartą.',
+  'Herstelsleutel tonen…': 'Rodyti atkūrimo raktą…',
+  'Vingerafdruk kopiëren': 'Kopijuoti kontrolinį kodą',
+  'Exporteren als age-sleutelbestand…': 'Eksportuoti kaip age rakto failą…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Užsirašykite šį atkūrimo raktą ir laikykite jį saugioje vietoje, ne šiame įrenginyje. Kas jį turi, gali atidaryti visus pateikimus ir pasirašyti paketus jūsų vardu. Jei prarasite šį įrenginį, tai bus viskas, kas liks.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Įveskite atkūrimo raktą čia dar kartą',
+  'Later': 'Vėliau',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Įveskite arba įklijuokite atkūrimo raktą. Tai, ką įvesite, bus įdėta į raktų pakabuką kaip redakcijos raktas; nieko neperrašoma.',
+  'Herstelsleutel': 'Atkūrimo raktas',
+  'Redactiesleutel verwijderen': 'Ištrinti redakcijos raktą',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Raktas ištrinamas iš raktų pakabuko ir gali sugrįžti tik iš atkūrimo rakto. Jei jo neturite, pateikimai, užplombuoti tik šiam raktui, lieka neperskaitomi visam laikui.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Raktas, kuris atidaro užplombuotus pateikimus ir pasirašo paketus.',
+  'Redactiesleutel…': 'Redakcijos raktas…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Darbinė kopija išmesta. Tai, kas gauta, vertinama iš naujo.',
   'Er is geen werkkopie.': 'Darbinės kopijos nėra.',

@@ -1627,6 +1627,79 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Herstelsleutel controleren': 'Kontrollér gendannelsesnøglen',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redaktionsnøglen er oprettet. Skriv nu gendannelsesnøglen ned.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Nøglering tog ikke imod nøglen. Der blev ikke oprettet noget.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Der findes allerede en redaktionsnøgle. Den er ikke rørt.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Nøgleringen kunne ikke læses. Der blev ikke antaget noget, og der blev ikke oprettet noget.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Der ligger noget i nøgleringen, som ikke er en redaktionsnøgle. Det blev ikke overskrevet.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Denne platform har ingen nøglering.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Korrekt: gendannelsesnøglen er kontrolleret.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Det er en gyldig gendannelsesnøgle, men ikke den til denne redaktionsnøgle.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Gendannelsesnøglen er korrekt, men det kunne ikke gemmes.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Der er ingen redaktionsnøgle at sammenligne med.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Det er ikke gendannelsesnøglen til en redaktionsnøgle.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Der er en tastefejl: kontrolsummen passer ikke.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Denne gendannelsesnøgle stammer fra en nyere version af OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Denne gendannelsesnøgle er lavet til noget andet.',
+  'Hersteld uit de herstelsleutel.': 'Gendannet fra gendannelsesnøglen.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Nøgleringen tog ikke imod nøglen. Der blev ikke gendannet noget.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Gem redaktionsnøglen som age-nøglefil',
+  'Het bestand kon niet worden opgeslagen.': 'Filen kunne ikke gemmes.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Gemt som {pad}. Den, der har denne fil, kan åbne alt.',
+  'Redactiesleutel verwijderd.': 'Redaktionsnøglen er slettet.',
+  'Redactiesleutel': 'Redaktionsnøgle',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Denne platform har ingen nøglering. Redaktionsnøglen kan ikke opbevares her; brug desktop-appen.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Nøgleringen kunne ikke læses (låst, eller adgang nægtet). Der blev ikke antaget noget, og der blev ikke oprettet noget.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Der ligger noget i nøgleringen, som ikke er en redaktionsnøgle. Det blev ikke overskrevet. Slet det og gendan nøglen fra din gendannelsesnøgle.',
+  'Redactiesleutel verwijderen…': 'Slet redaktionsnøglen…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'En redaktionsnøgle åbner de forseglede indsendelser og signerer pakkerne til dine formularer. Den ligger i nøgleringen i dette operativsystem. Mister du alle redaktionens nøgler, er alle endnu ikke hentede indsendelser ulæselige: det er prisen for en server, der ikke kan læse noget.',
+  'Redactiesleutel aanmaken': 'Opret redaktionsnøgle',
+  'Herstellen uit herstelsleutel…': 'Gendan fra gendannelsesnøgle…',
+  'Vingerafdruk': 'Fingeraftryk',
+  'Ontvanger (age)': 'Modtager (age)',
+  'Aangemaakt op {datum}.': 'Oprettet den {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Gendannelsesnøglen er kontrolleret.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Gendannelsesnøglen er ikke kontrolleret endnu: skriv den ned og skriv den ind igen.',
+  'Herstelsleutel tonen…': 'Vis gendannelsesnøglen…',
+  'Vingerafdruk kopiëren': 'Kopiér fingeraftryk',
+  'Exporteren als age-sleutelbestand…': 'Eksportér som age-nøglefil…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Skriv denne gendannelsesnøgle ned og opbevar den et sikkert sted, væk fra denne enhed. Den, der har den, kan åbne alle indsendelser og signere pakker i jeres navn. Mister du denne enhed, er det alt, der er tilbage.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Skriv gendannelsesnøglen ind her igen',
+  'Later': 'Senere',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Skriv eller indsæt gendannelsesnøglen. Det, du skriver, lægges i nøgleringen som redaktionsnøgle; der overskrives intet.',
+  'Herstelsleutel': 'Gendannelsesnøgle',
+  'Redactiesleutel verwijderen': 'Slet redaktionsnøglen',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Nøglen slettes fra nøgleringen og kan kun komme tilbage fra gendannelsesnøglen. Har du den ikke, er indsendelser, der kun er forseglet til denne nøgle, ulæselige for altid.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Nøglen, der åbner forseglede indsendelser og signerer pakker.',
+  'Redactiesleutel…': 'Redaktionsnøgle…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Arbejdskopien er smidt væk. Det, der kom ind, bedømmes igen.',
   'Er is geen werkkopie.': 'Der er ingen arbejdskopi.',

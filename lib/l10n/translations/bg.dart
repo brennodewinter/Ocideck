@@ -1647,6 +1647,79 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Herstelsleutel controleren': 'Проверка на ключа за възстановяване',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Ключът на редакцията е създаден. Сега запишете ключа за възстановяване.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Връзката с ключове не прие ключа. Нищо не е създадено.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Вече има ключ на редакцията. Не е пипан.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Връзката с ключове не можа да бъде прочетена. Нищо не е предполагано и нищо не е създадено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Във връзката с ключове има нещо, което не е ключ на редакцията. Не е презаписано.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Тази платформа няма връзка с ключове.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Правилно: ключът за възстановяване е проверен.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Това е валиден ключ за възстановяване, но не на този ключ на редакцията.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Ключът за възстановяване е правилен, но това не можа да бъде запазено.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Няма ключ на редакцията, с който да се сравни.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Това не е ключ за възстановяване на ключ на редакцията.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Има правописна грешка: контролната сума не съвпада.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Този ключ за възстановяване е от по-нова версия на OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Този ключ за възстановяване е направен за нещо друго.',
+  'Hersteld uit de herstelsleutel.': 'Възстановено от ключа за възстановяване.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Връзката с ключове не прие ключа. Нищо не е възстановено.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Запазване на ключа на редакцията като файл с ключ age',
+  'Het bestand kon niet worden opgeslagen.': 'Файлът не можа да бъде запазен.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Запазено като {pad}. Който има този файл, може да отвори всичко.',
+  'Redactiesleutel verwijderd.': 'Ключът на редакцията е изтрит.',
+  'Redactiesleutel': 'Ключ на редакцията',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Тази платформа няма връзка с ключове. Ключът на редакцията не може да се съхранява тук; използвайте настолното приложение.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Връзката с ключове не можа да бъде прочетена (заключена или отказан достъп). Нищо не е предполагано и нищо не е създадено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Във връзката с ключове има нещо, което не е ключ на редакцията. Не е презаписано. Изтрийте го и възстановете ключа от вашия ключ за възстановяване.',
+  'Redactiesleutel verwijderen…': 'Изтриване на ключа на редакцията…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ключът на редакцията отваря запечатаните изпращания и подписва пакетите на вашите формуляри. Намира се във връзката с ключове на тази операционна система. Ако загубите всички ключове на редакцията, всички още непридобити изпращания стават нечетими: това е цената на сървър, който не може да чете нищо.',
+  'Redactiesleutel aanmaken': 'Създаване на ключ на редакцията',
+  'Herstellen uit herstelsleutel…': 'Възстановяване от ключ за възстановяване…',
+  'Vingerafdruk': 'Отпечатък',
+  'Ontvanger (age)': 'Получател (age)',
+  'Aangemaakt op {datum}.': 'Създаден на {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Ключът за възстановяване е проверен.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Ключът за възстановяване още не е проверен: запишете го и го въведете отново.',
+  'Herstelsleutel tonen…': 'Показване на ключа за възстановяване…',
+  'Vingerafdruk kopiëren': 'Копиране на отпечатъка',
+  'Exporteren als age-sleutelbestand…': 'Експортиране като файл с ключ age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Запишете този ключ за възстановяване и го пазете на сигурно място, извън това устройство. Който го има, може да отвори всички изпращания и да подписва пакети от ваше име. Ако загубите това устройство, това е всичко, което остава.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Въведете ключа за възстановяване тук още веднъж',
+  'Later': 'По-късно',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Въведете или поставете ключа за възстановяване. Каквото въведете, се поставя във връзката с ключове като ключ на редакцията; нищо не се презаписва.',
+  'Herstelsleutel': 'Ключ за възстановяване',
+  'Redactiesleutel verwijderen': 'Изтриване на ключа на редакцията',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Ключът се изтрива от връзката с ключове и може да се върне само от ключа за възстановяване. Ако го нямате, изпращанията, запечатани само за този ключ, остават нечетими завинаги.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Ключът, който отваря запечатаните изпращания и подписва пакетите.',
+  'Redactiesleutel…': 'Ключ на редакцията…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Работното копие е изхвърлено. Полученото се оценява отново.',
   'Er is geen werkkopie.': 'Няма работно копие.',

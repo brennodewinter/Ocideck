@@ -1643,6 +1643,80 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Herstelsleutel controleren': 'Verifică cheia de recuperare',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Cheia redacției a fost creată. Notează acum cheia de recuperare.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Breloul de chei nu a acceptat cheia. Nu s-a creat nimic.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Există deja o cheie a redacției. Nu a fost atinsă.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Breloul de chei nu a putut fi citit. Nu s-a presupus nimic și nu s-a creat nimic.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'În breloul de chei este ceva ce nu este o cheie a redacției. Nu a fost suprascris.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Această platformă nu are un breloc de chei.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Corect: cheia de recuperare a fost verificată.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Aceasta este o cheie de recuperare validă, dar nu cea a acestei chei a redacției.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Cheia de recuperare este corectă, dar nu a putut fi salvată.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nu există nicio cheie a redacției cu care să se compare.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Aceasta nu este cheia de recuperare a unei chei a redacției.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Este o greșeală de tastare: suma de control nu se potrivește.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Această cheie de recuperare provine dintr-o versiune mai nouă a OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Această cheie de recuperare a fost făcută pentru altceva.',
+  'Hersteld uit de herstelsleutel.': 'Restaurată din cheia de recuperare.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Breloul de chei nu a acceptat cheia. Nu s-a restaurat nimic.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Salvează cheia redacției ca fișier de cheie age',
+  'Het bestand kon niet worden opgeslagen.': 'Fișierul nu a putut fi salvat.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Salvat ca {pad}. Cine are acest fișier poate deschide totul.',
+  'Redactiesleutel verwijderd.': 'Cheia redacției a fost ștearsă.',
+  'Redactiesleutel': 'Cheia redacției',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Această platformă nu are un breloc de chei. Cheia redacției nu poate fi păstrată aici; folosește aplicația desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Breloul de chei nu a putut fi citit (blocat sau acces refuzat). Nu s-a presupus nimic și nu s-a creat nimic.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'În breloul de chei este ceva ce nu este o cheie a redacției. Nu a fost suprascris. Șterge-l și restaurează cheia din cheia ta de recuperare.',
+  'Redactiesleutel verwijderen…': 'Șterge cheia redacției…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'O cheie a redacției deschide trimiterile sigilate și semnează pachetele formularelor tale. Se află în breloul de chei al acestui sistem de operare. Dacă pierzi toate cheile redacției, toate trimiterile încă neridicate devin ilizibile: acesta este prețul unui server care nu poate citi nimic.',
+  'Redactiesleutel aanmaken': 'Creează cheia redacției',
+  'Herstellen uit herstelsleutel…': 'Restaurează din cheia de recuperare…',
+  'Vingerafdruk': 'Amprentă',
+  'Ontvanger (age)': 'Destinatar (age)',
+  'Aangemaakt op {datum}.': 'Creată la {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Cheia de recuperare a fost verificată.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Cheia de recuperare nu a fost încă verificată: noteaz-o și tastează-o din nou.',
+  'Herstelsleutel tonen…': 'Arată cheia de recuperare…',
+  'Vingerafdruk kopiëren': 'Copiază amprenta',
+  'Exporteren als age-sleutelbestand…': 'Exportă ca fișier de cheie age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Notează această cheie de recuperare și păstreaz-o într-un loc sigur, în afara acestui dispozitiv. Cine o are poate deschide toate trimiterile și semna pachete în numele vostru. Dacă pierzi acest dispozitiv, este tot ce rămâne.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tastează aici cheia de recuperare încă o dată',
+  'Later': 'Mai târziu',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Tastează sau lipește cheia de recuperare. Ce introduci este pus în breloul de chei ca cheie a redacției; nimic nu este suprascris.',
+  'Herstelsleutel': 'Cheie de recuperare',
+  'Redactiesleutel verwijderen': 'Șterge cheia redacției',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Cheia este ștearsă din breloul de chei și poate reveni doar din cheia de recuperare. Dacă nu o ai, trimiterile sigilate doar pentru această cheie rămân ilizibile pentru totdeauna.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Cheia care deschide trimiterile sigilate și semnează pachetele.',
+  'Redactiesleutel…': 'Cheia redacției…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Copia de lucru a fost aruncată. Ceea ce a sosit este evaluat din nou.',
   'Er is geen werkkopie.': 'Nu există o copie de lucru.',

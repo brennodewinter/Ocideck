@@ -667,6 +667,83 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Herstelsleutel controleren': 'Vérifier la clé de récupération',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Clé de rédaction créée. Notez maintenant la clé de récupération.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Le trousseau n\'a pas accepté la clé. Rien n\'a été créé.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Il existe déjà une clé de rédaction. Elle n\'a pas été touchée.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Le trousseau n\'a pas pu être lu. Rien n\'a été supposé et rien n\'a été créé.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Le trousseau contient quelque chose qui n\'est pas une clé de rédaction. Cela n\'a pas été écrasé.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Cette plateforme n\'a pas de trousseau.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Correct : la clé de récupération a été vérifiée.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'C\'est une clé de récupération valide, mais pas celle de cette clé de rédaction.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'La clé de récupération est correcte, mais cela n\'a pas pu être enregistré.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Il n\'y a pas de clé de rédaction avec laquelle comparer.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Ce n\'est pas la clé de récupération d\'une clé de rédaction.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Il y a une faute de frappe : la somme de contrôle ne correspond pas.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Cette clé de récupération provient d\'une version plus récente d\'OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Cette clé de récupération a été créée pour autre chose.',
+  'Hersteld uit de herstelsleutel.':
+      'Restaurée à partir de la clé de récupération.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Le trousseau n\'a pas accepté la clé. Rien n\'a été restauré.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Enregistrer la clé de rédaction comme fichier de clé age',
+  'Het bestand kon niet worden opgeslagen.':
+      'Le fichier n\'a pas pu être enregistré.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Enregistré sous {pad}. Quiconque possède ce fichier peut tout ouvrir.',
+  'Redactiesleutel verwijderd.': 'Clé de rédaction supprimée.',
+  'Redactiesleutel': 'Clé de rédaction',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Cette plateforme n\'a pas de trousseau. La clé de rédaction ne peut pas être conservée ici ; utilisez l\'application de bureau.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Le trousseau n\'a pas pu être lu (verrouillé ou accès refusé). Rien n\'a été supposé et rien n\'a été créé.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Le trousseau contient quelque chose qui n\'est pas une clé de rédaction. Cela n\'a pas été écrasé. Supprimez-le et restaurez la clé à partir de votre clé de récupération.',
+  'Redactiesleutel verwijderen…': 'Supprimer la clé de rédaction…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Une clé de rédaction ouvre les envois scellés et signe les lots de vos formulaires. Elle se trouve dans le trousseau de ce système d\'exploitation. Si vous perdez toutes les clés de la rédaction, tous les envois pas encore récupérés deviennent illisibles : c\'est le prix d\'un serveur qui ne peut rien lire.',
+  'Redactiesleutel aanmaken': 'Créer la clé de rédaction',
+  'Herstellen uit herstelsleutel…':
+      'Restaurer à partir de la clé de récupération…',
+  'Vingerafdruk': 'Empreinte',
+  'Ontvanger (age)': 'Destinataire (age)',
+  'Aangemaakt op {datum}.': 'Créée le {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'La clé de récupération a été vérifiée.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'La clé de récupération n\'a pas encore été vérifiée : notez-la et saisissez-la à nouveau.',
+  'Herstelsleutel tonen…': 'Afficher la clé de récupération…',
+  'Vingerafdruk kopiëren': 'Copier l\'empreinte',
+  'Exporteren als age-sleutelbestand…': 'Exporter comme fichier de clé age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Notez cette clé de récupération et gardez-la en lieu sûr, hors de cet appareil. Qui la possède peut ouvrir tous les envois et signer des lots en votre nom. Si vous perdez cet appareil, c\'est tout ce qui reste.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Saisissez à nouveau la clé de récupération ici',
+  'Later': 'Plus tard',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Saisissez ou collez la clé de récupération. Ce que vous entrez est placé dans le trousseau comme clé de rédaction ; rien n\'est écrasé.',
+  'Herstelsleutel': 'Clé de récupération',
+  'Redactiesleutel verwijderen': 'Supprimer la clé de rédaction',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'La clé est effacée du trousseau et ne peut revenir que de la clé de récupération. Si vous ne l\'avez pas, les envois scellés uniquement pour cette clé deviennent illisibles pour toujours.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'La clé qui ouvre les envois scellés et signe les lots.',
+  'Redactiesleutel…': 'Clé de rédaction…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'La copie de travail a été jetée. Ce qui est arrivé est de nouveau évalué.',
   'Er is geen werkkopie.': 'Il n\'y a pas de copie de travail.',

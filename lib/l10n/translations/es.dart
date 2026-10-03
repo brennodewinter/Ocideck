@@ -664,6 +664,80 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Herstelsleutel controleren': 'Comprobar la clave de recuperación',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Clave de la redacción creada. Ahora anota la clave de recuperación.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'El llavero no aceptó la clave. No se creó nada.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Ya hay una clave de la redacción. No se ha tocado.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'No se pudo leer el llavero. No se asumió nada y no se creó nada.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Hay algo en el llavero que no es una clave de la redacción. No se sobrescribió.',
+  'Dit platform heeft geen sleutelhanger.': 'Esta plataforma no tiene llavero.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Correcto: la clave de recuperación se ha comprobado.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Esta es una clave de recuperación válida, pero no la de esta clave de la redacción.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'La clave de recuperación es correcta, pero no se pudo guardar.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'No hay ninguna clave de la redacción con la que comparar.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Esta no es la clave de recuperación de una clave de la redacción.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Hay una errata: la suma de comprobación no coincide.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Esta clave de recuperación procede de una versión más reciente de OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Esta clave de recuperación se hizo para otra cosa.',
+  'Hersteld uit de herstelsleutel.':
+      'Restaurada desde la clave de recuperación.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'El llavero no aceptó la clave. No se restauró nada.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Guardar la clave de la redacción como archivo de clave age',
+  'Het bestand kon niet worden opgeslagen.': 'No se pudo guardar el archivo.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Guardado como {pad}. Quien tenga este archivo puede abrirlo todo.',
+  'Redactiesleutel verwijderd.': 'Clave de la redacción eliminada.',
+  'Redactiesleutel': 'Clave de la redacción',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Esta plataforma no tiene llavero. La clave de la redacción no se puede guardar aquí; usa la aplicación de escritorio.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'No se pudo leer el llavero (bloqueado o acceso denegado). No se asumió nada y no se creó nada.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Hay algo en el llavero que no es una clave de la redacción. No se sobrescribió. Elimínalo y restaura la clave desde tu clave de recuperación.',
+  'Redactiesleutel verwijderen…': 'Eliminar la clave de la redacción…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Una clave de la redacción abre los envíos sellados y firma los paquetes de tus formularios. Está en el llavero de este sistema operativo. Si pierdes todas las claves de la redacción, todos los envíos aún no recogidos quedan ilegibles: ese es el precio de un servidor que no puede leer nada.',
+  'Redactiesleutel aanmaken': 'Crear la clave de la redacción',
+  'Herstellen uit herstelsleutel…': 'Restaurar desde la clave de recuperación…',
+  'Vingerafdruk': 'Huella digital',
+  'Ontvanger (age)': 'Destinatario (age)',
+  'Aangemaakt op {datum}.': 'Creada el {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'La clave de recuperación se ha comprobado.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'La clave de recuperación aún no se ha comprobado: anótala y vuelve a escribirla.',
+  'Herstelsleutel tonen…': 'Mostrar la clave de recuperación…',
+  'Vingerafdruk kopiëren': 'Copiar la huella digital',
+  'Exporteren als age-sleutelbestand…': 'Exportar como archivo de clave age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Anota esta clave de recuperación y guárdala en un lugar seguro, fuera de este dispositivo. Quien la tenga puede abrir todos los envíos y firmar paquetes en vuestro nombre. Si pierdes este dispositivo, es lo único que queda.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Vuelve a escribir aquí la clave de recuperación',
+  'Later': 'Más tarde',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Escribe o pega la clave de recuperación. Lo que introduzcas se guarda en el llavero como clave de la redacción; no se sobrescribe nada.',
+  'Herstelsleutel': 'Clave de recuperación',
+  'Redactiesleutel verwijderen': 'Eliminar la clave de la redacción',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'La clave se borra del llavero y solo puede volver desde la clave de recuperación. Si no la tienes, los envíos sellados solo para esta clave quedan ilegibles para siempre.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'La clave que abre los envíos sellados y firma los paquetes.',
+  'Redactiesleutel…': 'Clave de la redacción…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Se descartó la copia de trabajo. Lo que llegó se vuelve a evaluar.',
   'Er is geen werkkopie.': 'No hay ninguna copia de trabajo.',

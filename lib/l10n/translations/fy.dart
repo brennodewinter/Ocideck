@@ -667,6 +667,77 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Herstelsleutel controleren': 'Herstelkaai kontrolearje',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redaksjekaai oanmakke. Skriuw no de herstelkaai op.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'De kaaiering naam de kaai net oan. Der is neat oanmakke.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Der is al in redaksjekaai. Dy is net oanrekke.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'De kaaiering koe net lêzen wurde. Der is neat oannommen en neat oanmakke.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Der sit wat yn de kaaiering dat gjin redaksjekaai is. It is net oerskreaun.',
+  'Dit platform heeft geen sleutelhanger.': 'Dit platfoarm hat gjin kaaiering.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Goed: de herstelkaai is kontrolearre.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Dit is in jildige herstelkaai, mar net dy fan dizze redaksjekaai.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'De herstelkaai is goed, mar dat koe net bewarre wurde.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Der is gjin redaksjekaai om mei te fergelykjen.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Dit is net de herstelkaai fan in redaksjekaai.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Der sit in typfout yn: de kontrolesom komt net oerien.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Dizze herstelkaai komt fan in nijere ferzje fan OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Dizze herstelkaai is foar wat oars makke.',
+  'Hersteld uit de herstelsleutel.': 'Hersteld út de herstelkaai.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'De kaaiering naam de kaai net oan. Der is neat hersteld.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Redaksjekaai bewarje as age-kaaibestân',
+  'Het bestand kon niet worden opgeslagen.': 'It bestân koe net bewarre wurde.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Bewarre as {pad}. Wa\'t dit bestân hat, kin alles iepenje.',
+  'Redactiesleutel verwijderd.': 'Redaksjekaai fuortdien.',
+  'Redactiesleutel': 'Redaksjekaai',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Dit platfoarm hat gjin kaaiering. De redaksjekaai kin hjir net bewarre wurde; brûk de buroblêdapp.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'De kaaiering koe net lêzen wurde (beskoattele, of tagong wegere). Der is neat oannommen en neat oanmakke.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Der sit wat yn de kaaiering dat gjin redaksjekaai is. It is net oerskreaun. Smyt it fuort en herstel de kaai út dyn herstelkaai.',
+  'Redactiesleutel verwijderen…': 'Redaksjekaai fuortsmite…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'In redaksjekaai iepenet de fersegele ynstjoeringen en tekent de bondels fan dyn formulieren. Hy stiet yn de kaaiering fan dit bestjoeringssysteem. Ferlieze jo alle kaaien fan de redaksje, dan binne alle noch net ophelle ynstjoeringen net mear te lêzen: dat is de priis fan in tsjinner dy\'t neat lêze kin.',
+  'Redactiesleutel aanmaken': 'Redaksjekaai oanmakke',
+  'Herstellen uit herstelsleutel…': 'Herstelle út herstelkaai…',
+  'Vingerafdruk': 'Fingerôfdruk',
+  'Ontvanger (age)': 'Ûntfanger (age)',
+  'Aangemaakt op {datum}.': 'Oanmakke op {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'De herstelkaai is kontrolearre.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'De herstelkaai is noch net kontrolearre: skriuw him op en typ him werom.',
+  'Herstelsleutel tonen…': 'Herstelkaai sjen litte…',
+  'Vingerafdruk kopiëren': 'Fingerôfdruk kopiearje',
+  'Exporteren als age-sleutelbestand…': 'Eksportearje as age-kaaibestân…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Skriuw dizze herstelkaai op en bewarje him op in feilige side, bûten dit apparaat. Wa\'t him hat, kin alle ynstjoeringen iepenje en yn jimme namme bondels tekenje. Ferlieze jo dit apparaat, dan is hy alles wat oerbliuwt.',
+  'Typ de herstelsleutel hier opnieuw in': 'Typ de herstelkaai hjir opnij yn',
+  'Later': 'Letter',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Typ of plak de herstelkaai. Wat jo ynfiere wurdt as redaksjekaai yn de kaaiering set; der wurdt neat oerskreaun.',
+  'Herstelsleutel': 'Herstelkaai',
+  'Redactiesleutel verwijderen': 'Redaksjekaai fuortsmite',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'De kaai wurdt út de kaaiering wiske en kin allinnich werom komme út de herstelkaai. Hawwe jo dy net, dan binne ynstjoeringen dy\'t allinnich foar dizze kaai fersegele binne foar altyd net mear te lêzen.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'De kaai dy\'t fersegele ynstjoeringen iepenet en bondels tekenet.',
+  'Redactiesleutel…': 'Redaksjekaai…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'De wurkkopy is fuortsmiten. Wat binnenkaam wurdt wer beoardiele.',
   'Er is geen werkkopie.': 'Der is gjin wurkkopy.',

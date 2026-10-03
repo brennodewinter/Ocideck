@@ -827,6 +827,77 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Herstelsleutel controleren': 'Check recovery key',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Editorial key created. Now write down the recovery key.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'The keychain did not accept the key. Nothing was created.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'There already is an editorial key. It was not touched.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'The keychain could not be read. Nothing was assumed and nothing was created.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'There is something in the keychain that is not an editorial key. It was not overwritten.',
+  'Dit platform heeft geen sleutelhanger.': 'This platform has no keychain.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Correct: the recovery key has been checked.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'This is a valid recovery key, but not the one for this editorial key.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'The recovery key is correct, but that could not be saved.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'There is no editorial key to check against.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'This is not the recovery key of an editorial key.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'There is a typo in it: the checksum does not match.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'This recovery key comes from a newer version of OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'This recovery key was made for something else.',
+  'Hersteld uit de herstelsleutel.': 'Restored from the recovery key.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'The keychain did not accept the key. Nothing was restored.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Save editorial key as age key file',
+  'Het bestand kon niet worden opgeslagen.': 'The file could not be saved.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Saved as {pad}. Whoever has this file can open everything.',
+  'Redactiesleutel verwijderd.': 'Editorial key deleted.',
+  'Redactiesleutel': 'Editorial key',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'This platform has no keychain. The editorial key cannot be kept here; use the desktop app.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'The keychain could not be read (locked, or access denied). Nothing was assumed and nothing was created.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'There is something in the keychain that is not an editorial key. It was not overwritten. Delete it and restore the key from your recovery key.',
+  'Redactiesleutel verwijderen…': 'Delete editorial key…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'An editorial key opens the sealed submissions and signs the bundles of your forms. It lives in this operating system\'s keychain. If you lose all of the team\'s keys, every submission not yet fetched becomes unreadable: that is the price of a server that cannot read anything.',
+  'Redactiesleutel aanmaken': 'Create editorial key',
+  'Herstellen uit herstelsleutel…': 'Restore from recovery key…',
+  'Vingerafdruk': 'Fingerprint',
+  'Ontvanger (age)': 'Recipient (age)',
+  'Aangemaakt op {datum}.': 'Created on {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'The recovery key has been checked.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'The recovery key has not been checked yet: write it down and type it back.',
+  'Herstelsleutel tonen…': 'Show recovery key…',
+  'Vingerafdruk kopiëren': 'Copy fingerprint',
+  'Exporteren als age-sleutelbestand…': 'Export as age key file…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Write this recovery key down and keep it somewhere safe, away from this device. Whoever has it can open all submissions and sign bundles in your name. If you lose this device, it is all that remains.',
+  'Typ de herstelsleutel hier opnieuw in': 'Type the recovery key here again',
+  'Later': 'Later',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Type or paste the recovery key. What you enter is put in the keychain as the editorial key; nothing is overwritten.',
+  'Herstelsleutel': 'Recovery key',
+  'Redactiesleutel verwijderen': 'Delete editorial key',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'The key is erased from the keychain and can only come back from the recovery key. If you do not have it, submissions sealed only to this key become unreadable for good.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'The key that opens sealed submissions and signs bundles.',
+  'Redactiesleutel…': 'Editorial key…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'The working copy was thrown away. What arrived is judged again.',
   'Er is geen werkkopie.': 'There is no working copy.',
