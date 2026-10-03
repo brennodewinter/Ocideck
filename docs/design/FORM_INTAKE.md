@@ -1041,6 +1041,18 @@ key" would pass the checksum and install the wrong X25519 key, after which every
 submission fails as `unknown kid`. **Publishing is blocked until the form has at least
 two organiser keys or a recovery key that has been verified by typing it back** (§7.6).
 
+*As built* (`form_recovery_key.dart`, `form_bech32.dart`): `payload = version(1) ‖ purpose(1) ‖
+ed25519 seed(32) ‖ age identity scalar(32)` (66 bytes) `‖ crc16(2)`, written in Crockford base32
+in groups of four — 109 characters. The purpose byte is `F`. A collaboration recovery key is 67
+bytes with no purpose, so it is **the wrong length** here and — tested from both sides in
+`test/form_recovery_key_collab_test.dart` — an editorial key is the wrong length there. A key of
+this layout with another purpose is refused as such. The age identity travels as its 32 secret
+bytes, not as its 74-character text; that needs the bech32 of age's own key format, which the age
+library keeps private and which is a checksummed alphabet, not a primitive, so it lives in
+`form_bech32.dart` (BIP-173 test vectors, and age's own identities as round-trip data). What the
+decoder says apart: not this key (`format`), a typo (`checksum`), another build (`version`),
+made for something else (`purpose`). It forgives `I`/`L` for `1` and `O` for `0`.
+
 ---
 
 ## 6. Part C — The intake server and protocol
@@ -1836,8 +1848,10 @@ implementation — `check_packages` rule 10 keeps it so).
 `form_bundle.dart` (bundle, signing, verifying, pins), `form_jcs.dart` (RFC 8785 subset) and
 `form_base32.dart`; `form_bundle.dart` is the second file `check_packages` lets touch the
 cryptographic primitives (Ed25519 from `package:cryptography`).
-**Still to build:** the organiser's keys in the app (§5.9), publishing a bundle, importing and
-sending sealed files, and the dossier for the external review.
+`form_recovery_key.dart` and `form_bech32.dart` (the editorial recovery key, §5.9).
+**Still to build:** the organiser's keys in the app (§5.9: the keychain, the visible creation
+step, the two-key rule), publishing a bundle, importing and sending sealed files, and the dossier
+for the external review.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
