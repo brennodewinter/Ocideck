@@ -1150,6 +1150,19 @@ illustrative.
 | `DELETE /v1/submissions/{sid}` | organiser | Remove a server copy **without fetching** it (spam). |
 | `PUT /v1/forms/{fid}/token` | organiser | Rotate or revoke the open invite token. |
 
+*As specified in phase 4 (2026-10-03).* The normative text of this section is now
+[`INTAKE_PROTOCOL.md`](INTAKE_PROTOCOL.md) (CC-BY-4.0, with CC0 vectors); where it says more than the table
+above, it governs. Five things the table left open or got wrong are settled there:
+(1) **`GET /v1/forms/{fid}` returns `variants`**, one `{bundle, template}` per template, because a bundle binds
+one text and each language is its own (§7.1, as amended); the `assets` member is gone — nothing in a form
+references a file in v1. (2) **`PUT /v1/forms/{fid}` publishes the whole set of variants atomically**, and the
+server verifies each bundle itself against the signer of the request. (3) **The invite token travels in a
+header and is stored only as its hash**: the organiser's client makes it and sends `token_sha256`, so the server
+never holds one. (4) **The tombstone keeps the withdrawal hash**, so a withdrawal whose answer was lost can be
+repeated; a withdrawal after the organisers collected the submission has nothing to match and the client sends
+the respondent to the contact line. (5) **`state` (`open`/`closed`) in the form response is advisory**; the
+server enforces it on upload.
+
 **Organiser requests are signed, not bearer-authenticated.** The preimage is
 `["ocideck-intake-req-v1", host, method, path, body_sha256, ts, nonce]`, Ed25519
 over its canonical JSON, with a ±5 minute window and a server-side **nonce cache**
@@ -1964,6 +1977,11 @@ file (refused by both), and plaintexts at every edge of a 64 KiB chunk. `make te
 test still reports "NOT RUN").
 **Still to build:** the **external review itself** (a human step, no date — D7), and — phase 4 — the server
 and the web respondent.
+**Phase 4 has started (2026-10-03):** the protocol is written down (`INTAKE_PROTOCOL.md`) and its pure half is in
+`ocideck_form_core` — the invite link, `GET /v1/info`, the arrival note, the withdrawal secret, the error codes and
+**signed organiser requests** (`intake_protocol.dart`, `intake_request.dart`, tested against
+`test/fixtures/intake_protocol_vectors.json`). The server, the transport in the app and the web respondent are not
+built; the server still waits for a named maintainer (D3).
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
@@ -1983,8 +2001,9 @@ a `form_shell_main.dart` web target; `assets/forms/` (≤ 1 bundled example);
 pins); `l10n` (31 languages per string); `docs/` (USER_GUIDE, FILE_FORMAT §14.x, PRIVACY row,
 SECURITY_DESIGN §, SOURCE_MAP, CHANGELOG, HOSTING for the form shell).
 
-*New (separate repository):* the reference server, `PROTOCOL.md`, a conformance suite any
-alternative server can run.
+*New (separate repository):* the reference server and a conformance suite any alternative server can run
+(the protocol itself is `docs/design/INTAKE_PROTOCOL.md` here, so that the client and the server are reviewed
+against one text).
 
 ---
 
