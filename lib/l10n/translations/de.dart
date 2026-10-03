@@ -667,6 +667,83 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Herstelsleutel controleren': 'Wiederherstellungsschlüssel prüfen',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redaktionsschlüssel erstellt. Schreibe jetzt den Wiederherstellungsschlüssel auf.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Der Schlüsselbund hat den Schlüssel nicht angenommen. Es wurde nichts erstellt.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Es gibt bereits einen Redaktionsschlüssel. Er wurde nicht angerührt.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Der Schlüsselbund konnte nicht gelesen werden. Es wurde nichts angenommen und nichts erstellt.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Im Schlüsselbund liegt etwas, das kein Redaktionsschlüssel ist. Es wurde nicht überschrieben.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Diese Plattform hat keinen Schlüsselbund.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Richtig: Der Wiederherstellungsschlüssel wurde geprüft.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Das ist ein gültiger Wiederherstellungsschlüssel, aber nicht der zu diesem Redaktionsschlüssel.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Der Wiederherstellungsschlüssel stimmt, aber das konnte nicht gespeichert werden.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Es gibt keinen Redaktionsschlüssel zum Vergleichen.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Das ist nicht der Wiederherstellungsschlüssel eines Redaktionsschlüssels.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Da ist ein Tippfehler: Die Prüfsumme stimmt nicht.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Dieser Wiederherstellungsschlüssel stammt aus einer neueren Version von OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Dieser Wiederherstellungsschlüssel wurde für etwas anderes erstellt.',
+  'Hersteld uit de herstelsleutel.':
+      'Aus dem Wiederherstellungsschlüssel wiederhergestellt.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Der Schlüsselbund hat den Schlüssel nicht angenommen. Es wurde nichts wiederhergestellt.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Redaktionsschlüssel als age-Schlüsseldatei speichern',
+  'Het bestand kon niet worden opgeslagen.':
+      'Die Datei konnte nicht gespeichert werden.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Gespeichert als {pad}. Wer diese Datei hat, kann alles öffnen.',
+  'Redactiesleutel verwijderd.': 'Redaktionsschlüssel gelöscht.',
+  'Redactiesleutel': 'Redaktionsschlüssel',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Diese Plattform hat keinen Schlüsselbund. Der Redaktionsschlüssel kann hier nicht aufbewahrt werden; nutze die Desktop-App.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Der Schlüsselbund konnte nicht gelesen werden (gesperrt oder Zugriff verweigert). Es wurde nichts angenommen und nichts erstellt.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Im Schlüsselbund liegt etwas, das kein Redaktionsschlüssel ist. Es wurde nicht überschrieben. Lösche es und stelle den Schlüssel aus deinem Wiederherstellungsschlüssel wieder her.',
+  'Redactiesleutel verwijderen…': 'Redaktionsschlüssel löschen…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ein Redaktionsschlüssel öffnet die verschlüsselten Einsendungen und signiert die Bundles deiner Formulare. Er liegt im Schlüsselbund dieses Betriebssystems. Verlierst du alle Schlüssel der Redaktion, sind alle noch nicht abgeholten Einsendungen unlesbar: das ist der Preis eines Servers, der nichts lesen kann.',
+  'Redactiesleutel aanmaken': 'Redaktionsschlüssel erstellen',
+  'Herstellen uit herstelsleutel…':
+      'Aus Wiederherstellungsschlüssel wiederherstellen…',
+  'Vingerafdruk': 'Fingerabdruck',
+  'Ontvanger (age)': 'Empfänger (age)',
+  'Aangemaakt op {datum}.': 'Erstellt am {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Der Wiederherstellungsschlüssel wurde geprüft.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Der Wiederherstellungsschlüssel wurde noch nicht geprüft: Schreibe ihn auf und tippe ihn erneut ein.',
+  'Herstelsleutel tonen…': 'Wiederherstellungsschlüssel anzeigen…',
+  'Vingerafdruk kopiëren': 'Fingerabdruck kopieren',
+  'Exporteren als age-sleutelbestand…': 'Als age-Schlüsseldatei exportieren…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Schreibe diesen Wiederherstellungsschlüssel auf und bewahre ihn an einem sicheren Ort auf, getrennt von diesem Gerät. Wer ihn hat, kann alle Einsendungen öffnen und in eurem Namen Bundles signieren. Verlierst du dieses Gerät, ist er alles, was bleibt.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tippe den Wiederherstellungsschlüssel hier noch einmal ein',
+  'Later': 'Später',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Tippe oder füge den Wiederherstellungsschlüssel ein. Was du eingibst, wird als Redaktionsschlüssel im Schlüsselbund abgelegt; nichts wird überschrieben.',
+  'Herstelsleutel': 'Wiederherstellungsschlüssel',
+  'Redactiesleutel verwijderen': 'Redaktionsschlüssel löschen',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Der Schlüssel wird aus dem Schlüsselbund gelöscht und kann nur aus dem Wiederherstellungsschlüssel zurückkommen. Hast du ihn nicht, sind Einsendungen, die nur für diesen Schlüssel verschlüsselt wurden, für immer unlesbar.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Der Schlüssel, der verschlüsselte Einsendungen öffnet und Bundles signiert.',
+  'Redactiesleutel…': 'Redaktionsschlüssel…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Die Arbeitskopie wurde verworfen. Was eingegangen ist, wird wieder beurteilt.',
   'Er is geen werkkopie.': 'Es gibt keine Arbeitskopie.',

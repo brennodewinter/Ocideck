@@ -1626,6 +1626,80 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Herstelsleutel controleren': 'Kontrollera återställningsnyckeln',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redaktionsnyckeln har skapats. Skriv nu ner återställningsnyckeln.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Nyckelringen tog inte emot nyckeln. Inget skapades.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Det finns redan en redaktionsnyckel. Den har inte rörts.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Nyckelringen kunde inte läsas. Inget antogs och inget skapades.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Det finns något i nyckelringen som inte är en redaktionsnyckel. Det skrevs inte över.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Den här plattformen har ingen nyckelring.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Rätt: återställningsnyckeln har kontrollerats.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Det här är en giltig återställningsnyckel, men inte den till den här redaktionsnyckeln.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Återställningsnyckeln stämmer, men det gick inte att spara.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Det finns ingen redaktionsnyckel att jämföra med.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Det här är inte återställningsnyckeln till en redaktionsnyckel.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Det finns ett skrivfel: kontrollsumman stämmer inte.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Den här återställningsnyckeln kommer från en nyare version av OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Den här återställningsnyckeln gjordes för något annat.',
+  'Hersteld uit de herstelsleutel.': 'Återställd från återställningsnyckeln.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Nyckelringen tog inte emot nyckeln. Inget återställdes.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Spara redaktionsnyckeln som age-nyckelfil',
+  'Het bestand kon niet worden opgeslagen.': 'Filen kunde inte sparas.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Sparad som {pad}. Den som har den här filen kan öppna allt.',
+  'Redactiesleutel verwijderd.': 'Redaktionsnyckeln har tagits bort.',
+  'Redactiesleutel': 'Redaktionsnyckel',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Den här plattformen har ingen nyckelring. Redaktionsnyckeln kan inte förvaras här; använd skrivbordsappen.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Nyckelringen kunde inte läsas (låst, eller åtkomst nekad). Inget antogs och inget skapades.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Det finns något i nyckelringen som inte är en redaktionsnyckel. Det skrevs inte över. Ta bort det och återställ nyckeln från din återställningsnyckel.',
+  'Redactiesleutel verwijderen…': 'Ta bort redaktionsnyckeln…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'En redaktionsnyckel öppnar de förseglade inlämningarna och signerar paketen för dina formulär. Den finns i nyckelringen i det här operativsystemet. Förlorar du alla redaktionens nycklar blir alla ännu inte hämtade inlämningar oläsliga: det är priset för en server som inte kan läsa något.',
+  'Redactiesleutel aanmaken': 'Skapa redaktionsnyckel',
+  'Herstellen uit herstelsleutel…': 'Återställ från återställningsnyckel…',
+  'Vingerafdruk': 'Fingeravtryck',
+  'Ontvanger (age)': 'Mottagare (age)',
+  'Aangemaakt op {datum}.': 'Skapad {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Återställningsnyckeln har kontrollerats.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Återställningsnyckeln har inte kontrollerats än: skriv ner den och skriv in den igen.',
+  'Herstelsleutel tonen…': 'Visa återställningsnyckeln…',
+  'Vingerafdruk kopiëren': 'Kopiera fingeravtryck',
+  'Exporteren als age-sleutelbestand…': 'Exportera som age-nyckelfil…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Skriv ner den här återställningsnyckeln och förvara den på ett säkert ställe, utanför den här enheten. Den som har den kan öppna alla inlämningar och signera paket i ert namn. Förlorar du den här enheten är det allt som finns kvar.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Skriv in återställningsnyckeln här igen',
+  'Later': 'Senare',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Skriv eller klistra in återställningsnyckeln. Det du anger läggs i nyckelringen som redaktionsnyckel; inget skrivs över.',
+  'Herstelsleutel': 'Återställningsnyckel',
+  'Redactiesleutel verwijderen': 'Ta bort redaktionsnyckeln',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Nyckeln raderas ur nyckelringen och kan bara komma tillbaka från återställningsnyckeln. Har du den inte blir inlämningar som bara förseglats för den här nyckeln oläsliga för alltid.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Nyckeln som öppnar förseglade inlämningar och signerar paket.',
+  'Redactiesleutel…': 'Redaktionsnyckel…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Arbetskopian är kastad. Det som kom in bedöms på nytt.',
   'Er is geen werkkopie.': 'Det finns ingen arbetskopia.',

@@ -5970,6 +5970,31 @@ Onder een opengeklapte inzending staan de **acties**:
   formulier die status kent.
 Elke actie zegt hoe het ging. Een register dat niet te lezen is wordt nooit overschreven.
 
+**De redactiesleutel** (*Redactiesleutel…*, onderaan de Inbox; het opent ook zonder werkmap). Een redacteur heeft één
+sleutel die verzegelde inzendingen opent en de bundels van haar formulieren ondertekent (FORM_INTAKE.md §5.9). Hij
+staat in de sleutelhanger van je besturingssysteem; op het web is er dus niets aan te maken, en dan zegt het venster
+dat en biedt het niets aan.
+
+- **Redactiesleutel aanmaken** — een stap die je bewust zet, nooit stilletjes. Het venster zegt eerst wat de sleutel is
+  en wat verlies kost: elke nog niet binnengehaalde inzending die alleen voor hem was verzegeld is dan onleesbaar.
+  Direct daarna toont het de **herstelsleutel** — 109 tekens in groepjes van vier. Schrijf hem op en bewaar hem
+  ergens anders dan op dit apparaat.
+- **Herstelsleutel tonen…** en **Herstelsleutel controleren** — typ de herstelsleutel opnieuw in. Klopt hij, dan staat
+  de sleutel als *gecontroleerd*; dat is wat het publiceren van een formulier zal vragen. Een sleutel die je niet
+  controleerde zegt dat in het overzicht. Hoofdletters, spaties en streepjes maken niet uit, en `I`/`L` voor `1` en
+  `O` voor `0` worden vergeven; de herstelsleutel van een *samenwerkings*identiteit wordt als zodanig geweigerd.
+- **Herstellen uit herstelsleutel…** — alleen waar nog geen sleutel is. Een herstelde sleutel geldt als gecontroleerd:
+  wie hem intikt, heeft hem.
+- **Vingerafdruk kopiëren** — wat je een invuller langs een andere weg geeft dan het bundelbestand zelf.
+- **Exporteren als age-sleutelbestand…** — schrijft de sleutel als gewoon `age`-sleutelbestand (leesbaar voor het
+  commando `age`), zo gemaakt dat alleen jij het kunt lezen. Daarmee is een verzegeld bestand ook zonder OciDeck te
+  openen.
+- **Redactiesleutel verwijderen…** — na een bevestiging die nog eens zegt wat er mee verdwijnt.
+
+**Een sleutel wordt nooit overschreven.** Als de sleutelhanger niet te lezen is zegt OciDeck dat en maakt niets aan —
+een sleutelhanger die niet antwoordt is geen lege sleutelhanger — en hetzelfde als wat er staat niet als sleutel te
+lezen is. Wat je intikt wordt in geen enkele melding herhaald.
+
 Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor
 byte zoals ze aankwamen plus de foto's, in één stap: een crash laat nooit een halve inzending achter,
 en een inzending die er al is wordt nooit overschreven. Eén met een fout komt er wel in, met de status

@@ -1625,6 +1625,79 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Herstelsleutel controleren': 'Pārbaudīt atkopšanas atslēgu',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Redakcijas atslēga izveidota. Tagad pierakstiet atkopšanas atslēgu.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Atslēgu saišķis atslēgu nepieņēma. Nekas netika izveidots.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Redakcijas atslēga jau pastāv. Tā netika aiztikta.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Atslēgu saišķi nevarēja nolasīt. Nekas netika pieņemts un nekas netika izveidots.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Atslēgu saišķī ir kaut kas, kas nav redakcijas atslēga. Tas netika pārrakstīts.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Šai platformai nav atslēgu saišķa.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Pareizi: atkopšanas atslēga ir pārbaudīta.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Šī ir derīga atkopšanas atslēga, bet ne šīs redakcijas atslēgas atkopšanas atslēga.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Atkopšanas atslēga ir pareiza, bet to nevarēja saglabāt.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nav redakcijas atslēgas, ar ko salīdzināt.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Šī nav redakcijas atslēgas atkopšanas atslēga.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Tajā ir drukas kļūda: kontrolsumma nesakrīt.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Šī atkopšanas atslēga ir no jaunākas OciDeck versijas.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Šī atkopšanas atslēga ir izveidota kaut kam citam.',
+  'Hersteld uit de herstelsleutel.': 'Atjaunots no atkopšanas atslēgas.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Atslēgu saišķis atslēgu nepieņēma. Nekas netika atjaunots.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Saglabāt redakcijas atslēgu kā age atslēgas failu',
+  'Het bestand kon niet worden opgeslagen.': 'Failu nevarēja saglabāt.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Saglabāts kā {pad}. Kam ir šis fails, tas var atvērt visu.',
+  'Redactiesleutel verwijderd.': 'Redakcijas atslēga izdzēsta.',
+  'Redactiesleutel': 'Redakcijas atslēga',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Šai platformai nav atslēgu saišķa. Redakcijas atslēgu šeit nevar glabāt; izmantojiet darbvirsmas lietotni.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Atslēgu saišķi nevarēja nolasīt (bloķēts vai piekļuve liegta). Nekas netika pieņemts un nekas netika izveidots.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Atslēgu saišķī ir kaut kas, kas nav redakcijas atslēga. Tas netika pārrakstīts. Izdzēsiet to un atjaunojiet atslēgu no savas atkopšanas atslēgas.',
+  'Redactiesleutel verwijderen…': 'Dzēst redakcijas atslēgu…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Redakcijas atslēga atver aizzīmogotos iesūtījumus un paraksta jūsu veidlapu pakotnes. Tā atrodas šīs operētājsistēmas atslēgu saišķī. Ja zaudēsiet visas redakcijas atslēgas, visi vēl neiegūtie iesūtījumi kļūs nelasāmi: tā ir cena serverim, kas neko nevar nolasīt.',
+  'Redactiesleutel aanmaken': 'Izveidot redakcijas atslēgu',
+  'Herstellen uit herstelsleutel…': 'Atjaunot no atkopšanas atslēgas…',
+  'Vingerafdruk': 'Pirkstu nospiedums',
+  'Ontvanger (age)': 'Saņēmējs (age)',
+  'Aangemaakt op {datum}.': 'Izveidota {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Atkopšanas atslēga ir pārbaudīta.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Atkopšanas atslēga vēl nav pārbaudīta: pierakstiet to un ievadiet vēlreiz.',
+  'Herstelsleutel tonen…': 'Rādīt atkopšanas atslēgu…',
+  'Vingerafdruk kopiëren': 'Kopēt pirkstu nospiedumu',
+  'Exporteren als age-sleutelbestand…': 'Eksportēt kā age atslēgas failu…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Pierakstiet šo atkopšanas atslēgu un glabājiet to drošā vietā, ārpus šīs ierīces. Kam tā ir, tas var atvērt visus iesūtījumus un parakstīt pakotnes jūsu vārdā. Ja zaudēsiet šo ierīci, tā ir viss, kas paliek.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Ievadiet atkopšanas atslēgu šeit vēlreiz',
+  'Later': 'Vēlāk',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Ievadiet vai ielīmējiet atkopšanas atslēgu. Ko ievadīsiet, tiks ievietots atslēgu saišķī kā redakcijas atslēga; nekas netiek pārrakstīts.',
+  'Herstelsleutel': 'Atkopšanas atslēga',
+  'Redactiesleutel verwijderen': 'Dzēst redakcijas atslēgu',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Atslēga tiek izdzēsta no atslēgu saišķa un var atgriezties tikai no atkopšanas atslēgas. Ja tās jums nav, iesūtījumi, kas aizzīmogoti tikai šai atslēgai, paliek nelasāmi uz visiem laikiem.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Atslēga, kas atver aizzīmogotos iesūtījumus un paraksta pakotnes.',
+  'Redactiesleutel…': 'Redakcijas atslēga…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Darba kopija ir izmesta. Tas, kas ienāca, tiek vērtēts no jauna.',
   'Er is geen werkkopie.': 'Darba kopijas nav.',

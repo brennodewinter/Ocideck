@@ -6,19 +6,24 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/services/form/form_import.dart';
+import 'package:ocideck/services/form/form_keys.dart';
+import 'package:ocideck/services/secret_store.dart';
 import 'package:ocideck/services/form/form_workspace.dart';
+import 'package:ocideck/state/form_keys_provider.dart';
 import 'package:ocideck/state/forms_provider.dart';
 import 'package:ocideck/widgets/forms/form_inbox_dialog.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/form_key_vault.dart';
 import 'support/pump_until.dart';
 import 'support/temp_dir.dart';
 
@@ -110,6 +115,7 @@ void main() {
     WidgetTester tester,
     _Picks picks, {
     String? workspace,
+    List<Override> extraOverrides = const [],
   }) async {
     await tester.binding.setSurfaceSize(const Size(900, 1100));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -117,6 +123,7 @@ void main() {
       ProviderScope(
         overrides: [
           formsWorkspaceProvider.overrideWith(() => _Workspace(workspace)),
+          ...extraOverrides,
         ],
         child: MaterialApp(
           locale: const Locale('nl'),
@@ -446,6 +453,30 @@ void main() {
       expect(containing('binnengehaald'), findsNothing);
       expect(find.byType(LinearProgressIndicator), findsNothing);
     });
+  });
+
+  testWidgets('Redactiesleutel… opent het sleutelvenster, ook zonder werkmap', (
+    tester,
+  ) async {
+    final service = FormKeyService(
+      SecretStore(storage: FormKeyVault(), canStore: true),
+    );
+    await open(
+      tester,
+      _Picks(),
+      extraOverrides: [formKeyServiceProvider.overrideWithValue(service)],
+    );
+    await tester.tap(text('Redactiesleutel…'));
+    await tester.pump();
+    await tester.pump();
+    await pumpUntil(
+      tester,
+      () => text('Redactiesleutel aanmaken').evaluate().isNotEmpty,
+    );
+    expect(
+      find.textContaining('prijs van een server die niets kan lezen'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('Sluiten sluit het venster', (tester) async {

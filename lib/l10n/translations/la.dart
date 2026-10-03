@@ -1642,6 +1642,79 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Herstelsleutel controleren': 'Clavem recuperationis probare',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Clavis redactionis creata est. Nunc clavem recuperationis scribe.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Circulus clavium clavem non accepit. Nihil creatum est.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Iam est clavis redactionis. Non tacta est.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Circulus clavium legi non potuit. Nihil praesumptum et nihil creatum est.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'In circulo clavium est aliquid quod clavis redactionis non est. Non superscriptum est.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Haec platea circulum clavium non habet.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Recte: clavis recuperationis probata est.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Haec clavis recuperationis valida est, sed non huius clavis redactionis.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Clavis recuperationis recta est, sed id servari non potuit.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nulla clavis redactionis est cum qua comparetur.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Haec non est clavis recuperationis clavis redactionis.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Mendum scribendi est: summa probationis non congruit.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Haec clavis recuperationis ex versione recentiore OciDeck est.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Haec clavis recuperationis ad aliud facta est.',
+  'Hersteld uit de herstelsleutel.': 'Ex clave recuperationis restituta.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Circulus clavium clavem non accepit. Nihil restitutum est.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Clavem redactionis ut fasciculum clavis age servare',
+  'Het bestand kon niet worden opgeslagen.': 'Fasciculus servari non potuit.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Servatum ut {pad}. Quicumque hunc fasciculum habet, omnia aperire potest.',
+  'Redactiesleutel verwijderd.': 'Clavis redactionis deleta est.',
+  'Redactiesleutel': 'Clavis redactionis',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Haec platea circulum clavium non habet. Clavis redactionis hic servari non potest; applicatione scrinii utere.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Circulus clavium legi non potuit (clausus aut aditus negatus). Nihil praesumptum et nihil creatum est.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'In circulo clavium est aliquid quod clavis redactionis non est. Non superscriptum est. Dele id et clavem ex clave recuperationis tuae restitue.',
+  'Redactiesleutel verwijderen…': 'Clavem redactionis delere…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Clavis redactionis missa obsignata aperit et fasciculos formarum tuarum subscribit. In circulo clavium huius systematis operativi est. Si omnes claves redactionis amittis, omnia missa nondum recepta illegibilia fiunt: hoc est pretium servi qui nihil legere potest.',
+  'Redactiesleutel aanmaken': 'Clavem redactionis creare',
+  'Herstellen uit herstelsleutel…': 'Ex clave recuperationis restituere…',
+  'Vingerafdruk': 'Vestigium digitale',
+  'Ontvanger (age)': 'Receptor (age)',
+  'Aangemaakt op {datum}.': 'Creata die {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Clavis recuperationis probata est.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Clavis recuperationis nondum probata est: scribe eam et iterum inscribe.',
+  'Herstelsleutel tonen…': 'Clavem recuperationis ostendere…',
+  'Vingerafdruk kopiëren': 'Vestigium digitale exscribere',
+  'Exporteren als age-sleutelbestand…': 'Ut fasciculum clavis age exportare…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Hanc clavem recuperationis scribe et in loco tuto serva, extra hoc instrumentum. Quicumque eam habet, omnia missa aperire et fasciculos vestro nomine subscribere potest. Si hoc instrumentum amittis, id solum manet.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Clavem recuperationis hic iterum inscribe',
+  'Later': 'Postea',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Clavem recuperationis inscribe aut insere. Quod inseris in circulo clavium ut clavis redactionis ponitur; nihil superscribitur.',
+  'Herstelsleutel': 'Clavis recuperationis',
+  'Redactiesleutel verwijderen': 'Clavem redactionis delere',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Clavis ex circulo clavium delebitur et nisi ex clave recuperationis redire non potest. Si eam non habes, missa huic clavi soli obsignata in perpetuum illegibilia fiunt.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Clavis quae missa obsignata aperit et fasciculos subscribit.',
+  'Redactiesleutel…': 'Clavis redactionis…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Exemplar operis abiectum est. Quod advenit iterum aestimatur.',
   'Er is geen werkkopie.': 'Nullum exemplar operis est.',

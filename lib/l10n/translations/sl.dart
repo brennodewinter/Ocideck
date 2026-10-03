@@ -1627,6 +1627,80 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Herstelsleutel controleren': 'Preveri obnovitveni ključ',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Ključ uredništva je ustvarjen. Zdaj zapiši obnovitveni ključ.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Obesek za ključe ni sprejel ključa. Nič ni bilo ustvarjeno.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Ključ uredništva že obstaja. Ni bil dotaknjen.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Obeska za ključe ni bilo mogoče prebrati. Nič ni bilo predpostavljeno in nič ustvarjeno.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'V obesku za ključe je nekaj, kar ni ključ uredništva. Ni bilo prepisano.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ta platforma nima obeska za ključe.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Pravilno: obnovitveni ključ je preverjen.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'To je veljaven obnovitveni ključ, vendar ne za ta ključ uredništva.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Obnovitveni ključ je pravilen, vendar tega ni bilo mogoče shraniti.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Ni ključa uredništva, s katerim bi primerjali.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'To ni obnovitveni ključ ključa uredništva.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'V njem je tipkarska napaka: kontrolna vsota se ne ujema.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ta obnovitveni ključ izvira iz novejše različice OciDecka.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Ta obnovitveni ključ je bil narejen za nekaj drugega.',
+  'Hersteld uit de herstelsleutel.': 'Obnovljeno iz obnovitvenega ključa.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Obesek za ključe ni sprejel ključa. Nič ni bilo obnovljeno.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Shrani ključ uredništva kot datoteko ključa age',
+  'Het bestand kon niet worden opgeslagen.':
+      'Datoteke ni bilo mogoče shraniti.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Shranjeno kot {pad}. Kdor ima to datoteko, lahko odpre vse.',
+  'Redactiesleutel verwijderd.': 'Ključ uredništva je izbrisan.',
+  'Redactiesleutel': 'Ključ uredništva',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ta platforma nima obeska za ključe. Ključa uredništva tu ni mogoče hraniti; uporabi namizno aplikacijo.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Obeska za ključe ni bilo mogoče prebrati (zaklenjen ali dostop zavrnjen). Nič ni bilo predpostavljeno in nič ustvarjeno.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'V obesku za ključe je nekaj, kar ni ključ uredništva. Ni bilo prepisano. Izbriši to in obnovi ključ iz svojega obnovitvenega ključa.',
+  'Redactiesleutel verwijderen…': 'Izbriši ključ uredništva…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ključ uredništva odpre zapečatene oddaje in podpiše pakete tvojih obrazcev. Nahaja se v obesku za ključe tega operacijskega sistema. Če izgubiš vse ključe uredništva, vse še neprevzete oddaje postanejo neberljive: to je cena strežnika, ki ničesar ne more prebrati.',
+  'Redactiesleutel aanmaken': 'Ustvari ključ uredništva',
+  'Herstellen uit herstelsleutel…': 'Obnovi iz obnovitvenega ključa…',
+  'Vingerafdruk': 'Prstni odtis',
+  'Ontvanger (age)': 'Prejemnik (age)',
+  'Aangemaakt op {datum}.': 'Ustvarjeno {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Obnovitveni ključ je preverjen.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Obnovitveni ključ še ni preverjen: zapiši ga in ga ponovno vtipkaj.',
+  'Herstelsleutel tonen…': 'Pokaži obnovitveni ključ…',
+  'Vingerafdruk kopiëren': 'Kopiraj prstni odtis',
+  'Exporteren als age-sleutelbestand…': 'Izvozi kot datoteko ključa age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Zapiši ta obnovitveni ključ in ga shrani na varnem, zunaj te naprave. Kdor ga ima, lahko odpre vse oddaje in podpisuje pakete v vašem imenu. Če izgubiš to napravo, je to vse, kar ostane.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tukaj ponovno vtipkaj obnovitveni ključ',
+  'Later': 'Pozneje',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Vtipkaj ali prilepi obnovitveni ključ. Kar vneseš, se v obesek za ključe shrani kot ključ uredništva; nič se ne prepiše.',
+  'Herstelsleutel': 'Obnovitveni ključ',
+  'Redactiesleutel verwijderen': 'Izbriši ključ uredništva',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Ključ se izbriše iz obeska za ključe in se lahko vrne le iz obnovitvenega ključa. Če ga nimaš, oddaje, zapečatene samo za ta ključ, ostanejo neberljive za vedno.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Ključ, ki odpre zapečatene oddaje in podpiše pakete.',
+  'Redactiesleutel…': 'Ključ uredništva…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Delovna kopija je zavržena. Kar je prispelo, se ponovno ocenjuje.',
   'Er is geen werkkopie.': 'Delovne kopije ni.',

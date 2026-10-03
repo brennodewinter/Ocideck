@@ -1652,6 +1652,80 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Herstelsleutel controleren': 'Έλεγχος κλειδιού ανάκτησης',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Το κλειδί συντακτικής ομάδας δημιουργήθηκε. Γράψτε τώρα το κλειδί ανάκτησης.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Η κλειδοθήκη δεν δέχτηκε το κλειδί. Δεν δημιουργήθηκε τίποτα.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Υπάρχει ήδη κλειδί συντακτικής ομάδας. Δεν πειράχτηκε.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Η κλειδοθήκη δεν μπόρεσε να διαβαστεί. Δεν υποτέθηκε τίποτα και δεν δημιουργήθηκε τίποτα.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Στην κλειδοθήκη υπάρχει κάτι που δεν είναι κλειδί συντακτικής ομάδας. Δεν αντικαταστάθηκε.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Αυτή η πλατφόρμα δεν έχει κλειδοθήκη.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Σωστά: το κλειδί ανάκτησης ελέγχθηκε.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Αυτό είναι έγκυρο κλειδί ανάκτησης, αλλά όχι αυτού του κλειδιού συντακτικής ομάδας.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Το κλειδί ανάκτησης είναι σωστό, αλλά αυτό δεν μπόρεσε να αποθηκευτεί.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Δεν υπάρχει κλειδί συντακτικής ομάδας για σύγκριση.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Αυτό δεν είναι το κλειδί ανάκτησης ενός κλειδιού συντακτικής ομάδας.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Υπάρχει ένα τυπογραφικό λάθος: το άθροισμα ελέγχου δεν ταιριάζει.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Αυτό το κλειδί ανάκτησης προέρχεται από νεότερη έκδοση του OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Αυτό το κλειδί ανάκτησης φτιάχτηκε για κάτι άλλο.',
+  'Hersteld uit de herstelsleutel.': 'Έγινε επαναφορά από το κλειδί ανάκτησης.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Η κλειδοθήκη δεν δέχτηκε το κλειδί. Δεν έγινε επαναφορά τίποτα.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Αποθήκευση του κλειδιού συντακτικής ομάδας ως αρχείο κλειδιού age',
+  'Het bestand kon niet worden opgeslagen.':
+      'Το αρχείο δεν μπόρεσε να αποθηκευτεί.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Αποθηκεύτηκε ως {pad}. Όποιος έχει αυτό το αρχείο μπορεί να ανοίξει τα πάντα.',
+  'Redactiesleutel verwijderd.': 'Το κλειδί συντακτικής ομάδας διαγράφηκε.',
+  'Redactiesleutel': 'Κλειδί συντακτικής ομάδας',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Αυτή η πλατφόρμα δεν έχει κλειδοθήκη. Το κλειδί συντακτικής ομάδας δεν μπορεί να φυλαχτεί εδώ· χρησιμοποιήστε την εφαρμογή επιφάνειας εργασίας.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Η κλειδοθήκη δεν μπόρεσε να διαβαστεί (κλειδωμένη ή άρνηση πρόσβασης). Δεν υποτέθηκε τίποτα και δεν δημιουργήθηκε τίποτα.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Στην κλειδοθήκη υπάρχει κάτι που δεν είναι κλειδί συντακτικής ομάδας. Δεν αντικαταστάθηκε. Διαγράψτε το και επαναφέρετε το κλειδί από το κλειδί ανάκτησής σας.',
+  'Redactiesleutel verwijderen…': 'Διαγραφή κλειδιού συντακτικής ομάδας…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ένα κλειδί συντακτικής ομάδας ανοίγει τις σφραγισμένες υποβολές και υπογράφει τα πακέτα των φορμών σας. Βρίσκεται στην κλειδοθήκη αυτού του λειτουργικού συστήματος. Αν χάσετε όλα τα κλειδιά της συντακτικής ομάδας, όλες οι υποβολές που δεν έχουν ακόμη ληφθεί γίνονται ακατάγνωστες: αυτό είναι το τίμημα ενός διακομιστή που δεν μπορεί να διαβάσει τίποτα.',
+  'Redactiesleutel aanmaken': 'Δημιουργία κλειδιού συντακτικής ομάδας',
+  'Herstellen uit herstelsleutel…': 'Επαναφορά από κλειδί ανάκτησης…',
+  'Vingerafdruk': 'Δακτυλικό αποτύπωμα',
+  'Ontvanger (age)': 'Παραλήπτης (age)',
+  'Aangemaakt op {datum}.': 'Δημιουργήθηκε στις {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Το κλειδί ανάκτησης ελέγχθηκε.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Το κλειδί ανάκτησης δεν έχει ελεγχθεί ακόμη: γράψτε το και πληκτρολογήστε το ξανά.',
+  'Herstelsleutel tonen…': 'Εμφάνιση κλειδιού ανάκτησης…',
+  'Vingerafdruk kopiëren': 'Αντιγραφή δακτυλικού αποτυπώματος',
+  'Exporteren als age-sleutelbestand…': 'Εξαγωγή ως αρχείο κλειδιού age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Γράψτε αυτό το κλειδί ανάκτησης και φυλάξτε το σε ασφαλές μέρος, εκτός αυτής της συσκευής. Όποιος το έχει μπορεί να ανοίξει όλες τις υποβολές και να υπογράψει πακέτα εξ ονόματός σας. Αν χάσετε αυτή τη συσκευή, είναι το μόνο που μένει.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Πληκτρολογήστε ξανά εδώ το κλειδί ανάκτησης',
+  'Later': 'Αργότερα',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Πληκτρολογήστε ή επικολλήστε το κλειδί ανάκτησης. Ό,τι εισαγάγετε τοποθετείται στην κλειδοθήκη ως κλειδί συντακτικής ομάδας· δεν αντικαθίσταται τίποτα.',
+  'Herstelsleutel': 'Κλειδί ανάκτησης',
+  'Redactiesleutel verwijderen': 'Διαγραφή κλειδιού συντακτικής ομάδας',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Το κλειδί σβήνεται από την κλειδοθήκη και μπορεί να επιστρέψει μόνο από το κλειδί ανάκτησης. Αν δεν το έχετε, οι υποβολές που σφραγίστηκαν μόνο για αυτό το κλειδί παραμένουν ακατάγνωστες για πάντα.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Το κλειδί που ανοίγει τις σφραγισμένες υποβολές και υπογράφει τα πακέτα.',
+  'Redactiesleutel…': 'Κλειδί συντακτικής ομάδας…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Το αντίγραφο εργασίας απορρίφθηκε. Ό,τι είχε φτάσει κρίνεται ξανά.',
   'Er is geen werkkopie.': 'Δεν υπάρχει αντίγραφο εργασίας.',

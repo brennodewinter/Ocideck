@@ -2538,6 +2538,79 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Herstelsleutel controleren': 'Kurtarma anahtarını kontrol et',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Yayın kurulu anahtarı oluşturuldu. Şimdi kurtarma anahtarını yazın.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Anahtarlık anahtarı kabul etmedi. Hiçbir şey oluşturulmadı.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Zaten bir yayın kurulu anahtarı var. Dokunulmadı.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Anahtarlık okunamadı. Hiçbir şey varsayılmadı ve hiçbir şey oluşturulmadı.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Anahtarlıkta yayın kurulu anahtarı olmayan bir şey var. Üzerine yazılmadı.',
+  'Dit platform heeft geen sleutelhanger.': 'Bu platformda anahtarlık yok.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Doğru: kurtarma anahtarı kontrol edildi.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Bu geçerli bir kurtarma anahtarı, ancak bu yayın kurulu anahtarına ait değil.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Kurtarma anahtarı doğru, ancak kaydedilemedi.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Karşılaştırılacak bir yayın kurulu anahtarı yok.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Bu, bir yayın kurulu anahtarının kurtarma anahtarı değil.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Bir yazım hatası var: sağlama toplamı uyuşmuyor.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Bu kurtarma anahtarı OciDeck\'in daha yeni bir sürümünden geliyor.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Bu kurtarma anahtarı başka bir şey için yapılmış.',
+  'Hersteld uit de herstelsleutel.': 'Kurtarma anahtarından geri yüklendi.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Anahtarlık anahtarı kabul etmedi. Hiçbir şey geri yüklenmedi.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Yayın kurulu anahtarını age anahtar dosyası olarak kaydet',
+  'Het bestand kon niet worden opgeslagen.': 'Dosya kaydedilemedi.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      '{pad} olarak kaydedildi. Bu dosyaya sahip olan her şeyi açabilir.',
+  'Redactiesleutel verwijderd.': 'Yayın kurulu anahtarı silindi.',
+  'Redactiesleutel': 'Yayın kurulu anahtarı',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Bu platformda anahtarlık yok. Yayın kurulu anahtarı burada saklanamaz; masaüstü uygulamasını kullanın.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Anahtarlık okunamadı (kilitli ya da erişim reddedildi). Hiçbir şey varsayılmadı ve hiçbir şey oluşturulmadı.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Anahtarlıkta yayın kurulu anahtarı olmayan bir şey var. Üzerine yazılmadı. Onu silin ve anahtarı kurtarma anahtarınızdan geri yükleyin.',
+  'Redactiesleutel verwijderen…': 'Yayın kurulu anahtarını sil…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Yayın kurulu anahtarı, mühürlü gönderimleri açar ve formlarınızın paketlerini imzalar. Bu işletim sisteminin anahtarlığında durur. Yayın kurulunun tüm anahtarlarını kaybederseniz, henüz alınmamış tüm gönderimler okunamaz hale gelir: hiçbir şeyi okuyamayan bir sunucunun bedeli budur.',
+  'Redactiesleutel aanmaken': 'Yayın kurulu anahtarı oluştur',
+  'Herstellen uit herstelsleutel…': 'Kurtarma anahtarından geri yükle…',
+  'Vingerafdruk': 'Parmak izi',
+  'Ontvanger (age)': 'Alıcı (age)',
+  'Aangemaakt op {datum}.': '{datum} tarihinde oluşturuldu.',
+  'De herstelsleutel is gecontroleerd.': 'Kurtarma anahtarı kontrol edildi.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Kurtarma anahtarı henüz kontrol edilmedi: yazın ve yeniden girin.',
+  'Herstelsleutel tonen…': 'Kurtarma anahtarını göster…',
+  'Vingerafdruk kopiëren': 'Parmak izini kopyala',
+  'Exporteren als age-sleutelbestand…':
+      'age anahtar dosyası olarak dışa aktar…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Bu kurtarma anahtarını yazın ve bu cihazın dışında, güvenli bir yerde saklayın. Ona sahip olan tüm gönderimleri açabilir ve sizin adınıza paketleri imzalayabilir. Bu cihazı kaybederseniz, geriye kalan tek şey odur.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Kurtarma anahtarını buraya yeniden girin',
+  'Later': 'Daha sonra',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Kurtarma anahtarını yazın veya yapıştırın. Girdiğiniz, yayın kurulu anahtarı olarak anahtarlığa konur; hiçbir şeyin üzerine yazılmaz.',
+  'Herstelsleutel': 'Kurtarma anahtarı',
+  'Redactiesleutel verwijderen': 'Yayın kurulu anahtarını sil',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Anahtar anahtarlıktan silinir ve yalnızca kurtarma anahtarından geri gelebilir. Elinizde yoksa, yalnızca bu anahtar için mühürlenmiş gönderimler sonsuza dek okunamaz kalır.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Mühürlü gönderimleri açan ve paketleri imzalayan anahtar.',
+  'Redactiesleutel…': 'Yayın kurulu anahtarı…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Çalışma kopyası atıldı. Gelen yeniden değerlendirilir.',
   'Er is geen werkkopie.': 'Çalışma kopyası yok.',

@@ -1657,6 +1657,80 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Herstelsleutel controleren': 'Seiceáil an eochair athshlánaithe',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Cruthaíodh eochair na heagarthóireachta. Scríobh síos an eochair athshlánaithe anois.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Níor ghlac an slabhra eochrach leis an eochair. Níor cruthaíodh aon rud.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Tá eochair eagarthóireachta ann cheana. Níor baineadh léi.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Níorbh fhéidir an slabhra eochrach a léamh. Níor glacadh le haon rud mar a bheith ann agus níor cruthaíodh aon rud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Tá rud éigin sa slabhra eochrach nach eochair eagarthóireachta é. Níor forscríobhadh é.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Níl slabhra eochrach ag an ardán seo.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Ceart: seiceáladh an eochair athshlánaithe.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Is eochair athshlánaithe bhailí í seo, ach ní hí an ceann don eochair eagarthóireachta seo.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Tá an eochair athshlánaithe ceart, ach níorbh fhéidir é sin a shábháil.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Níl aon eochair eagarthóireachta ann le comparáid a dhéanamh léi.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Ní eochair athshlánaithe eochrach eagarthóireachta í seo.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Tá earráid chlóscríofa ann: ní hionann an suim seiceála.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tagann an eochair athshlánaithe seo ó leagan níos nuaí d\'OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Rinneadh an eochair athshlánaithe seo do rud éigin eile.',
+  'Hersteld uit de herstelsleutel.': 'Athshlánaithe ón eochair athshlánaithe.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Níor ghlac an slabhra eochrach leis an eochair. Níor athshlánaíodh aon rud.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Sábháil eochair na heagarthóireachta mar chomhad eochrach age',
+  'Het bestand kon niet worden opgeslagen.':
+      'Níorbh fhéidir an comhad a shábháil.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Sábháilte mar {pad}. Is féidir le duine ar bith a bhfuil an comhad seo aige gach rud a oscailt.',
+  'Redactiesleutel verwijderd.': 'Scriosadh eochair na heagarthóireachta.',
+  'Redactiesleutel': 'Eochair eagarthóireachta',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Níl slabhra eochrach ag an ardán seo. Ní féidir eochair na heagarthóireachta a choinneáil anseo; úsáid an aip deisce.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Níorbh fhéidir an slabhra eochrach a léamh (faoi ghlas, nó rochtain diúltaithe). Níor glacadh le haon rud mar a bheith ann agus níor cruthaíodh aon rud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Tá rud éigin sa slabhra eochrach nach eochair eagarthóireachta é. Níor forscríobhadh é. Scrios é agus athshlánaigh an eochair ó d\'eochair athshlánaithe.',
+  'Redactiesleutel verwijderen…': 'Scrios eochair na heagarthóireachta…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Osclaíonn eochair eagarthóireachta na haighneachtaí séalaithe agus sínigh sí pacáistí do fhoirmeacha. Tá sí i slabhra eochrach an chórais oibriúcháin seo. Má chailleann tú eochracha uile na heagarthóireachta, éiríonn gach aighneacht nár tógadh go fóill do-léite: sin é costas freastalaí nach féidir leis rud ar bith a léamh.',
+  'Redactiesleutel aanmaken': 'Cruthaigh eochair eagarthóireachta',
+  'Herstellen uit herstelsleutel…': 'Athshlánaigh ó eochair athshlánaithe…',
+  'Vingerafdruk': 'Méarlorg',
+  'Ontvanger (age)': 'Faighteoir (age)',
+  'Aangemaakt op {datum}.': 'Cruthaithe ar {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Seiceáladh an eochair athshlánaithe.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Níor seiceáladh an eochair athshlánaithe go fóill: scríobh síos í agus clóscríobh arís í.',
+  'Herstelsleutel tonen…': 'Taispeáin an eochair athshlánaithe…',
+  'Vingerafdruk kopiëren': 'Cóipeáil an mhéarlorg',
+  'Exporteren als age-sleutelbestand…': 'Easpórtáil mar chomhad eochrach age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Scríobh síos an eochair athshlánaithe seo agus coinnigh í in áit shábháilte, amach ón ngléas seo. Is féidir le duine ar bith a bhfuil sí aige gach aighneacht a oscailt agus pacáistí a shíniú in bhur n-ainm. Má chailleann tú an gléas seo, is é seo gach a mbeidh fágtha.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Clóscríobh an eochair athshlánaithe anseo arís',
+  'Later': 'Ar ball',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Clóscríobh nó greamaigh an eochair athshlánaithe. Cuirtear an méid a chuireann tú isteach sa slabhra eochrach mar eochair eagarthóireachta; ní fhorscríobhtar aon rud.',
+  'Herstelsleutel': 'Eochair athshlánaithe',
+  'Redactiesleutel verwijderen': 'Scrios eochair na heagarthóireachta',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Scriostar an eochair as an slabhra eochrach agus ní féidir í a fháil ar ais ach ón eochair athshlánaithe. Mura bhfuil sí agat, fanann aighneachtaí a séalaíodh don eochair seo amháin do-léite go deo.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'An eochair a osclaíonn aighneachtaí séalaithe agus a shíníonn pacáistí.',
+  'Redactiesleutel…': 'Eochair eagarthóireachta…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Caitheadh an cóip oibre amach. Déantar an rud a tháinig isteach a mheas arís.',
   'Er is geen werkkopie.': 'Níl aon chóip oibre ann.',

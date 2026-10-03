@@ -1620,6 +1620,78 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Herstelsleutel controleren': 'Kontrolli taastevõtit',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Toimetuse võti on loodud. Kirjuta nüüd taastevõti üles.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Võtmehoidja ei võtnud võtit vastu. Midagi ei loodud.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Toimetuse võti on juba olemas. Seda ei puudutatud.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Võtmehoidjat ei saanud lugeda. Midagi ei eeldatud ja midagi ei loodud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Võtmehoidjas on midagi, mis ei ole toimetuse võti. Seda ei kirjutatud üle.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Sellel platvormil ei ole võtmehoidjat.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Õige: taastevõti on kontrollitud.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'See on kehtiv taastevõti, kuid mitte selle toimetuse võtme oma.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Taastevõti on õige, kuid seda ei saanud salvestada.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Võrdlemiseks ei ole ühtegi toimetuse võtit.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'See ei ole toimetuse võtme taastevõti.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Selles on trükiviga: kontrollsumma ei klapi.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'See taastevõti pärineb OciDecki uuemast versioonist.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'See taastevõti on tehtud millekski muuks.',
+  'Hersteld uit de herstelsleutel.': 'Taastatud taastevõtmest.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Võtmehoidja ei võtnud võtit vastu. Midagi ei taastatud.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Salvesta toimetuse võti age\'i võtmefailina',
+  'Het bestand kon niet worden opgeslagen.': 'Faili ei saanud salvestada.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Salvestatud nimega {pad}. Kes seda faili omab, saab kõike avada.',
+  'Redactiesleutel verwijderd.': 'Toimetuse võti on kustutatud.',
+  'Redactiesleutel': 'Toimetuse võti',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Sellel platvormil ei ole võtmehoidjat. Toimetuse võtit ei saa siin hoida; kasuta töölauarakendust.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Võtmehoidjat ei saanud lugeda (lukus või juurdepääs keelatud). Midagi ei eeldatud ja midagi ei loodud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Võtmehoidjas on midagi, mis ei ole toimetuse võti. Seda ei kirjutatud üle. Kustuta see ja taasta võti oma taastevõtmest.',
+  'Redactiesleutel verwijderen…': 'Kustuta toimetuse võti…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Toimetuse võti avab pitseeritud esitused ja allkirjastab sinu vormide pakid. See asub selle operatsioonisüsteemi võtmehoidjas. Kui kaotad kõik toimetuse võtmed, muutuvad kõik veel kättesaamata esitused loetamatuks: see on hind serveri eest, mis ei oska midagi lugeda.',
+  'Redactiesleutel aanmaken': 'Loo toimetuse võti',
+  'Herstellen uit herstelsleutel…': 'Taasta taastevõtmest…',
+  'Vingerafdruk': 'Sõrmejälg',
+  'Ontvanger (age)': 'Vastuvõtja (age)',
+  'Aangemaakt op {datum}.': 'Loodud {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Taastevõti on kontrollitud.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Taastevõtit ei ole veel kontrollitud: kirjuta see üles ja sisesta uuesti.',
+  'Herstelsleutel tonen…': 'Näita taastevõtit…',
+  'Vingerafdruk kopiëren': 'Kopeeri sõrmejälg',
+  'Exporteren als age-sleutelbestand…': 'Ekspordi age\'i võtmefailina…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Kirjuta see taastevõti üles ja hoia seda turvalises kohas, sellest seadmest eemal. Kes seda omab, saab avada kõik esitused ja allkirjastada pakke teie nimel. Kui kaotad selle seadme, on see kõik, mis jääb.',
+  'Typ de herstelsleutel hier opnieuw in': 'Sisesta taastevõti siia uuesti',
+  'Later': 'Hiljem',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Sisesta või kleebi taastevõti. See, mida sisestad, pannakse võtmehoidjasse toimetuse võtmena; midagi ei kirjutata üle.',
+  'Herstelsleutel': 'Taastevõti',
+  'Redactiesleutel verwijderen': 'Kustuta toimetuse võti',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Võti kustutatakse võtmehoidjast ja see võib tagasi tulla ainult taastevõtmest. Kui sul seda ei ole, jäävad ainult selle võtme jaoks pitseeritud esitused igaveseks loetamatuks.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Võti, mis avab pitseeritud esitused ja allkirjastab pakke.',
+  'Redactiesleutel…': 'Toimetuse võti…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Töökoopia visati ära. Saabunut hinnatakse uuesti.',
   'Er is geen werkkopie.': 'Töökoopiat ei ole.',

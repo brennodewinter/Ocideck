@@ -1633,6 +1633,78 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Herstelsleutel controleren': 'Skontrolovať kľúč na obnovenie',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Kľúč redakcie bol vytvorený. Teraz si zapíšte kľúč na obnovenie.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Kľúčenka kľúč neprijala. Nič sa nevytvorilo.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Kľúč redakcie už existuje. Nebol dotknutý.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Kľúčenku sa nepodarilo prečítať. Nič sa nepredpokladalo a nič sa nevytvorilo.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'V kľúčenke je niečo, čo nie je kľúč redakcie. Nebolo to prepísané.',
+  'Dit platform heeft geen sleutelhanger.': 'Táto platforma nemá kľúčenku.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Správne: kľúč na obnovenie bol skontrolovaný.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Toto je platný kľúč na obnovenie, ale nie k tomuto kľúču redakcie.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Kľúč na obnovenie je správny, ale nepodarilo sa ho uložiť.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Neexistuje kľúč redakcie, s ktorým by sa dalo porovnať.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Toto nie je kľúč na obnovenie kľúča redakcie.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Je v ňom preklep: kontrolný súčet nesedí.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tento kľúč na obnovenie pochádza z novšej verzie OciDecku.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Tento kľúč na obnovenie bol vytvorený na niečo iné.',
+  'Hersteld uit de herstelsleutel.': 'Obnovené z kľúča na obnovenie.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Kľúčenka kľúč neprijala. Nič sa neobnovilo.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Uložiť kľúč redakcie ako súbor kľúča age',
+  'Het bestand kon niet worden opgeslagen.': 'Súbor sa nepodarilo uložiť.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Uložené ako {pad}. Kto má tento súbor, môže otvoriť všetko.',
+  'Redactiesleutel verwijderd.': 'Kľúč redakcie bol odstránený.',
+  'Redactiesleutel': 'Kľúč redakcie',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Táto platforma nemá kľúčenku. Kľúč redakcie sa tu nedá uchovať; použite desktopovú aplikáciu.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Kľúčenku sa nepodarilo prečítať (zamknutá alebo prístup zamietnutý). Nič sa nepredpokladalo a nič sa nevytvorilo.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'V kľúčenke je niečo, čo nie je kľúč redakcie. Nebolo to prepísané. Odstráňte to a obnovte kľúč zo svojho kľúča na obnovenie.',
+  'Redactiesleutel verwijderen…': 'Odstrániť kľúč redakcie…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Kľúč redakcie otvára zapečatené odoslania a podpisuje balíky vašich formulárov. Je v kľúčenke tohto operačného systému. Ak stratíte všetky kľúče redakcie, všetky zatiaľ nevyzdvihnuté odoslania sa stanú nečitateľnými: to je cena servera, ktorý nič neprečíta.',
+  'Redactiesleutel aanmaken': 'Vytvoriť kľúč redakcie',
+  'Herstellen uit herstelsleutel…': 'Obnoviť z kľúča na obnovenie…',
+  'Vingerafdruk': 'Odtlačok',
+  'Ontvanger (age)': 'Príjemca (age)',
+  'Aangemaakt op {datum}.': 'Vytvorené {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Kľúč na obnovenie bol skontrolovaný.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Kľúč na obnovenie ešte nebol skontrolovaný: zapíšte si ho a napíšte ho znova.',
+  'Herstelsleutel tonen…': 'Zobraziť kľúč na obnovenie…',
+  'Vingerafdruk kopiëren': 'Kopírovať odtlačok',
+  'Exporteren als age-sleutelbestand…': 'Exportovať ako súbor kľúča age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Zapíšte si tento kľúč na obnovenie a uschovajte ho na bezpečnom mieste mimo tohto zariadenia. Kto ho má, môže otvoriť všetky odoslania a podpisovať balíky vaším menom. Ak stratíte toto zariadenie, je to všetko, čo zostane.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Napíšte kľúč na obnovenie sem ešte raz',
+  'Later': 'Neskôr',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Napíšte alebo vložte kľúč na obnovenie. Čo zadáte, sa uloží do kľúčenky ako kľúč redakcie; nič sa neprepíše.',
+  'Herstelsleutel': 'Kľúč na obnovenie',
+  'Redactiesleutel verwijderen': 'Odstrániť kľúč redakcie',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Kľúč sa vymaže z kľúčenky a môže sa vrátiť len z kľúča na obnovenie. Ak ho nemáte, odoslania zapečatené len pre tento kľúč zostanú nečitateľné navždy.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Kľúč, ktorý otvára zapečatené odoslania a podpisuje balíky.',
+  'Redactiesleutel…': 'Kľúč redakcie…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Pracovná kópia bola zahodená. To, čo prišlo, sa posudzuje znova.',
   'Er is geen werkkopie.': 'Pracovná kópia neexistuje.',

@@ -1639,6 +1639,79 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Herstelsleutel controleren': 'Sprawdź klucz odzyskiwania',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Klucz redakcji utworzony. Zapisz teraz klucz odzyskiwania.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Pęk kluczy nie przyjął klucza. Nic nie zostało utworzone.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Klucz redakcji już istnieje. Nie został naruszony.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Nie udało się odczytać pęku kluczy. Niczego nie założono i nic nie utworzono.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'W pęku kluczy jest coś, co nie jest kluczem redakcji. Nie zostało nadpisane.',
+  'Dit platform heeft geen sleutelhanger.': 'Ta platforma nie ma pęku kluczy.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Zgadza się: klucz odzyskiwania został sprawdzony.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'To poprawny klucz odzyskiwania, ale nie tego klucza redakcji.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Klucz odzyskiwania jest poprawny, ale nie udało się tego zapisać.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nie ma klucza redakcji, z którym można porównać.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'To nie jest klucz odzyskiwania klucza redakcji.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Jest w nim literówka: suma kontrolna się nie zgadza.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ten klucz odzyskiwania pochodzi z nowszej wersji OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Ten klucz odzyskiwania został wykonany do czegoś innego.',
+  'Hersteld uit de herstelsleutel.': 'Przywrócono z klucza odzyskiwania.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Pęk kluczy nie przyjął klucza. Nic nie zostało przywrócone.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Zapisz klucz redakcji jako plik klucza age',
+  'Het bestand kon niet worden opgeslagen.': 'Nie udało się zapisać pliku.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Zapisano jako {pad}. Kto ma ten plik, może otworzyć wszystko.',
+  'Redactiesleutel verwijderd.': 'Klucz redakcji usunięty.',
+  'Redactiesleutel': 'Klucz redakcji',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ta platforma nie ma pęku kluczy. Klucza redakcji nie można tu przechowywać; użyj aplikacji na komputer.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Nie udało się odczytać pęku kluczy (zablokowany lub odmowa dostępu). Niczego nie założono i nic nie utworzono.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'W pęku kluczy jest coś, co nie jest kluczem redakcji. Nie zostało nadpisane. Usuń to i przywróć klucz z klucza odzyskiwania.',
+  'Redactiesleutel verwijderen…': 'Usuń klucz redakcji…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Klucz redakcji otwiera zapieczętowane zgłoszenia i podpisuje paczki Twoich formularzy. Znajduje się w pęku kluczy tego systemu. Jeśli utracisz wszystkie klucze redakcji, wszystkie jeszcze nie pobrane zgłoszenia staną się nieczytelne: taka jest cena serwera, który niczego nie może odczytać.',
+  'Redactiesleutel aanmaken': 'Utwórz klucz redakcji',
+  'Herstellen uit herstelsleutel…': 'Przywróć z klucza odzyskiwania…',
+  'Vingerafdruk': 'Odcisk palca',
+  'Ontvanger (age)': 'Odbiorca (age)',
+  'Aangemaakt op {datum}.': 'Utworzono {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Klucz odzyskiwania został sprawdzony.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Klucz odzyskiwania nie został jeszcze sprawdzony: zapisz go i wpisz ponownie.',
+  'Herstelsleutel tonen…': 'Pokaż klucz odzyskiwania…',
+  'Vingerafdruk kopiëren': 'Kopiuj odcisk palca',
+  'Exporteren als age-sleutelbestand…': 'Eksportuj jako plik klucza age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Zapisz ten klucz odzyskiwania i przechowuj go w bezpiecznym miejscu, poza tym urządzeniem. Kto go ma, może otworzyć wszystkie zgłoszenia i podpisywać paczki w Waszym imieniu. Jeśli stracisz to urządzenie, to wszystko, co zostanie.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Wpisz tutaj klucz odzyskiwania jeszcze raz',
+  'Later': 'Później',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Wpisz lub wklej klucz odzyskiwania. To, co wpiszesz, trafi do pęku kluczy jako klucz redakcji; nic nie jest nadpisywane.',
+  'Herstelsleutel': 'Klucz odzyskiwania',
+  'Redactiesleutel verwijderen': 'Usuń klucz redakcji',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Klucz zostanie wymazany z pęku kluczy i może wrócić tylko z klucza odzyskiwania. Jeśli go nie masz, zgłoszenia zapieczętowane tylko dla tego klucza pozostaną nieczytelne na zawsze.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Klucz, który otwiera zapieczętowane zgłoszenia i podpisuje paczki.',
+  'Redactiesleutel…': 'Klucz redakcji…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Kopia robocza została wyrzucona. To, co nadeszło, jest oceniane ponownie.',
   'Er is geen werkkopie.': 'Nie ma kopii roboczej.',

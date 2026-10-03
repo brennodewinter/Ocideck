@@ -374,6 +374,15 @@ keep its own copy in a plain settings file. Existing installations move the
 value over on first start. *Corrected 2026-07-22: it used to sit in plain
 preferences.*
 
+**The editorial key** — if you receive form submissions (the *Formulieren en
+inzendingen* extension) — lives in the keychain too: the `age` key that opens
+sealed submissions and the signing key for the form's bundle. It is not a
+password you can reset. It is created in a step you see, it is never overwritten,
+and it never leaves the keychain unless you ask: *Show recovery key…* shows the
+text to write down, *Export as age key file…* writes it to a file only you can
+read. Losing it means losing the submissions that were sealed to it and not yet
+fetched; OciDeck says so before it creates the key.
+
 Three boundaries of that sentence are worth naming, because "in the keychain" is
 easy to over-read:
 

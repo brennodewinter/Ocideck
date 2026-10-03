@@ -1645,6 +1645,80 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Herstelsleutel controleren': 'Ikkontrolla ċ-ċavetta tal-irkupru',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'L-ċavetta tar-redazzjoni ġiet maħluqa. Issa ikteb iċ-ċavetta tal-irkupru.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Il-keychain ma aċċettax iċ-ċavetta. Ma nħoloq xejn.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Diġà teżisti ċavetta tar-redazzjoni. Ma ntmessitx.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Il-keychain ma setax jinqara. Ma ġie preżunt xejn u ma nħoloq xejn.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Hemm xi ħaġa fil-keychain li mhijiex ċavetta tar-redazzjoni. Ma ġietx miktuba fuqha.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Din il-pjattaforma m\'għandhiex keychain.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Tajjeb: iċ-ċavetta tal-irkupru ġiet ikkontrollata.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Din hija ċavetta tal-irkupru valida, iżda mhux dik ta\' din iċ-ċavetta tar-redazzjoni.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Iċ-ċavetta tal-irkupru hija korretta, iżda ma setgħetx tinħażen.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'M\'hemm l-ebda ċavetta tar-redazzjoni biex tqabbel magħha.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Din mhijiex iċ-ċavetta tal-irkupru ta\' ċavetta tar-redazzjoni.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Hemm żball tat-tajpjar: is-somma ta\' kontroll ma taqbilx.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Din iċ-ċavetta tal-irkupru ġejja minn verżjoni aktar ġdida ta\' OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Din iċ-ċavetta tal-irkupru saret għal xi ħaġa oħra.',
+  'Hersteld uit de herstelsleutel.': 'Irkuprat miċ-ċavetta tal-irkupru.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Il-keychain ma aċċettax iċ-ċavetta. Ma ġie rkuprat xejn.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Aħżen iċ-ċavetta tar-redazzjoni bħala fajl taċ-ċavetta age',
+  'Het bestand kon niet worden opgeslagen.': 'Il-fajl ma setax jinħażen.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Maħżun bħala {pad}. Min għandu dan il-fajl jista\' jiftaħ kollox.',
+  'Redactiesleutel verwijderd.': 'Iċ-ċavetta tar-redazzjoni tħassret.',
+  'Redactiesleutel': 'Ċavetta tar-redazzjoni',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Din il-pjattaforma m\'għandhiex keychain. Iċ-ċavetta tar-redazzjoni ma tistax tinżamm hawn; uża l-app tad-desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Il-keychain ma setax jinqara (maqful, jew aċċess miċħud). Ma ġie preżunt xejn u ma nħoloq xejn.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Hemm xi ħaġa fil-keychain li mhijiex ċavetta tar-redazzjoni. Ma ġietx miktuba fuqha. Ħassarha u rkupra ċ-ċavetta miċ-ċavetta tal-irkupru tiegħek.',
+  'Redactiesleutel verwijderen…': 'Ħassar iċ-ċavetta tar-redazzjoni…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ċavetta tar-redazzjoni tiftaħ is-sottomissjonijiet issiġillati u tiffirma l-fuljetti tal-formoli tiegħek. Tinsab fil-keychain ta\' din is-sistema operattiva. Jekk titlef iċ-ċwievet kollha tar-redazzjoni, is-sottomissjonijiet kollha li għadhom ma ttellgħux isiru illeġibbli: dan huwa l-prezz ta\' server li ma jistax jaqra xejn.',
+  'Redactiesleutel aanmaken': 'Oħloq ċavetta tar-redazzjoni',
+  'Herstellen uit herstelsleutel…': 'Irkupra miċ-ċavetta tal-irkupru…',
+  'Vingerafdruk': 'Marka tas-swaba\'',
+  'Ontvanger (age)': 'Riċevitur (age)',
+  'Aangemaakt op {datum}.': 'Maħluqa fl-{datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Iċ-ċavetta tal-irkupru ġiet ikkontrollata.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Iċ-ċavetta tal-irkupru għadha ma ġietx ikkontrollata: ikteb u erġa\' ikteb.',
+  'Herstelsleutel tonen…': 'Uri ċ-ċavetta tal-irkupru…',
+  'Vingerafdruk kopiëren': 'Ikkopja l-marka tas-swaba\'',
+  'Exporteren als age-sleutelbestand…': 'Esporta bħala fajl taċ-ċavetta age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Ikteb din iċ-ċavetta tal-irkupru u żommha f\'post sikur, \'il bogħod minn dan l-apparat. Min għandha jista\' jiftaħ is-sottomissjonijiet kollha u jiffirma fuljetti f\'ismek. Jekk titlef dan l-apparat, din hija kulma jibqa\'.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Erġa\' ikteb iċ-ċavetta tal-irkupru hawn',
+  'Later': 'Aktar tard',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Ikteb jew waħħal iċ-ċavetta tal-irkupru. Dak li tidħol jitqiegħed fil-keychain bħala ċavetta tar-redazzjoni; xejn ma jinkiteb fuqu.',
+  'Herstelsleutel': 'Ċavetta tal-irkupru',
+  'Redactiesleutel verwijderen': 'Ħassar iċ-ċavetta tar-redazzjoni',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Iċ-ċavetta titħassar mill-keychain u tista\' terġa\' lura biss miċ-ċavetta tal-irkupru. Jekk m\'għandekx, is-sottomissjonijiet issiġillati għal din iċ-ċavetta biss jibqgħu illeġibbli għal dejjem.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Iċ-ċavetta li tiftaħ is-sottomissjonijiet issiġillati u tiffirma l-fuljetti.',
+  'Redactiesleutel…': 'Ċavetta tar-redazzjoni…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Il-kopja tax-xogħol tilfet. Dak li wasal jerġa\' jiġi vvalutat.',
   'Er is geen werkkopie.': 'M\'hemm l-ebda kopja tax-xogħol.',

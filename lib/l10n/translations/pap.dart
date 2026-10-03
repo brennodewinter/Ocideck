@@ -666,6 +666,79 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Herstelsleutel controleren': 'Verifiká e yave di rekuperashon',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Yave di redakshon krea. Skirbi awor e yave di rekuperashon.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'E yavero no a aseptá e yave. Nada no a krea.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Ya tin un yave di redakshon. No a mishi ku dje.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'No por a lesa e yavero. Nada no a asumí i nada no a krea.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Tin algu den e yavero ku no ta un yave di redakshon. No a skirbi riba dje.',
+  'Dit platform heeft geen sleutelhanger.': 'E plataforma akí no tin yavero.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Korekto: e yave di rekuperashon a wòrdu verifiká.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Esaki ta un yave di rekuperashon válido, pero no e un di e yave di redakshon akí.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'E yave di rekuperashon ta korekto, pero no por a gardu.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'No tin ningun yave di redakshon pa kompará ku dje.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Esaki no ta e yave di rekuperashon di un yave di redakshon.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Tin un eror di tipo: e suma di kontròl no ta kuadra.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'E yave di rekuperashon akí ta bin di un versho mas nobo di OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'E yave di rekuperashon akí a wòrdu hasi pa algu otro.',
+  'Hersteld uit de herstelsleutel.': 'Restourá for di e yave di rekuperashon.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'E yavero no a aseptá e yave. Nada no a wòrdu restourá.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Warda e yave di redakshon komo archivo di yave age',
+  'Het bestand kon niet worden opgeslagen.': 'No por a warda e archivo.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Wardá komo {pad}. Ken tin e archivo akí por habri tur kos.',
+  'Redactiesleutel verwijderd.': 'Yave di redakshon kita.',
+  'Redactiesleutel': 'Yave di redakshon',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'E plataforma akí no tin yavero. E yave di redakshon no por wòrdu wardá aki; usa e app di desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'No por a lesa e yavero (blokiá, of akseso nenegá). Nada no a asumí i nada no a krea.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Tin algu den e yavero ku no ta un yave di redakshon. No a skirbi riba dje. Kita e i restourá e yave for di bo yave di rekuperashon.',
+  'Redactiesleutel verwijderen…': 'Kita yave di redakshon…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Un yave di redakshon ta habri e envionan sellá i ta firma e pakete di bo formularionan. E ta den e yavero di e sistema operativo akí. Si bo perde tur yave di e redakshon, tur envio ku ainda no a bai buska ta bira ilegibel: esei ta e preis di un sirbidó ku no por lesa nada.',
+  'Redactiesleutel aanmaken': 'Krea yave di redakshon',
+  'Herstellen uit herstelsleutel…': 'Restourá for di yave di rekuperashon…',
+  'Vingerafdruk': 'Huella digital',
+  'Ontvanger (age)': 'Risibidó (age)',
+  'Aangemaakt op {datum}.': 'Krea riba {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'E yave di rekuperashon a wòrdu verifiká.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'E yave di rekuperashon ainda no a wòrdu verifiká: skirbi e i tipia di nobo.',
+  'Herstelsleutel tonen…': 'Mustra yave di rekuperashon…',
+  'Vingerafdruk kopiëren': 'Kopia huella digital',
+  'Exporteren als age-sleutelbestand…': 'Eksportá komo archivo di yave age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Skirbi e yave di rekuperashon akí i warda e na un lugá sigur, afó di e aparato akí. Ken tin dje por habri tur envio i firma pakete na bo nòmber. Si bo perde e aparato akí, esaki ta tur loke ta keda.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tipia e yave di rekuperashon aki di nobo',
+  'Later': 'Mas tarde',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Tipia of pega e yave di rekuperashon. Loke bo yena ta wòrdu pone den e yavero komo yave di redakshon; nada no ta wòrdu skirbi riba dje.',
+  'Herstelsleutel': 'Yave di rekuperashon',
+  'Redactiesleutel verwijderen': 'Kita yave di redakshon',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'E yave ta wòrdu kita for di e yavero i por bin bèk solamente for di e yave di rekuperashon. Si bo no tin dje, envionan ku a wòrdu sellá so pa e yave akí ta bira ilegibel pa semper.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'E yave ku ta habri envionan sellá i ta firma pakete.',
+  'Redactiesleutel…': 'Yave di redakshon…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'A tira e kopia di trabou. Loke a drenta ta wòrdu evaluá di nobo.',
   'Er is geen werkkopie.': 'No tin kopia di trabou.',

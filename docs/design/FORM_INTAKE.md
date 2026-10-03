@@ -1053,6 +1053,33 @@ library keeps private and which is a checksummed alphabet, not a primitive, so i
 decoder says apart: not this key (`format`), a typo (`checksum`), another build (`version`),
 made for something else (`purpose`). It forgives `I`/`L` for `1` and `O` for `0`.
 
+*As built — the keys in the app* (`lib/services/form/form_keys.dart`, `form_key_file.dart`,
+`lib/widgets/forms/form_keys_dialog.dart`; Inbox → **Editorial key…**): one JSON text in the keychain
+under `form_editorial_key` — `{v, identity, signing_seed (base32), created, recovery_verified}`.
+The creation step is visible and says what losing the key costs before it creates anything; the
+recovery key is shown straight after and the dialog asks for it to be **typed back** (*Check recovery
+key*), which sets `recovery_verified`. That flag is the one fact the publishing step (§7.6) asks for;
+the second half of the two-key rule — a team with at least two organiser keys — comes with the bundle
+editor. Four things the code insists on:
+
+- **A key is never overwritten.** A keychain that cannot be read answers *unreadable*, not *absent*
+  (`SecretStore.readFormEditorialKey` rethrows where every other getter swallows), and a stored text that
+  cannot be read as a key of this version answers *damaged*; neither offers to create a new one.
+- **Creating reads back.** After the write the key is read again and compared; a keychain that
+  accepted the call and kept nothing is reported as *not saved*, so the user is not shown a recovery
+  key for a key that does not exist.
+- **Restoring only fills an empty place**, and a collaboration recovery key is refused as such (§5.9
+  above). The typed text is never echoed in a message.
+- **Deleting is its own confirmation**, and says again that the submissions sealed to this key and not
+  yet fetched go with it.
+
+*Export as age key file…* writes the identity in age's own file format
+(`# created` / `# public key` / `AGE-SECRET-KEY-1…`) so a sealed file can be opened with the `age`
+command line without OciDeck; it is written next to the target — created exclusively and empty, `chmod 600`, and only then
+filled — and moved into place, so an existing file survives a failure and no half-written copy of
+the key is left behind. Where there is no keychain (the web build) the dialog says so and
+offers nothing: a web page has nowhere to keep this secret (§9).
+
 ---
 
 ## 6. Part C — The intake server and protocol
@@ -1849,9 +1876,11 @@ implementation — `check_packages` rule 10 keeps it so).
 `form_base32.dart`; `form_bundle.dart` is the second file `check_packages` lets touch the
 cryptographic primitives (Ed25519 from `package:cryptography`).
 `form_recovery_key.dart` and `form_bech32.dart` (the editorial recovery key, §5.9).
-**Still to build:** the organiser's keys in the app (§5.9: the keychain, the visible creation
-step, the two-key rule), publishing a bundle, importing and sending sealed files, and the dossier
-for the external review.
+**Built since, in the app:** the organiser's editorial key (§5.9: the keychain, the visible creation
+step, the recovery key typed back, restore, export as an age key file, delete) — Inbox → *Editorial
+key…*.
+**Still to build:** the team of organisers and the two-key rule, publishing a bundle, importing and
+sending sealed files, and the dossier for the external review.
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip

@@ -5911,6 +5911,30 @@ Under an opened submission are its **actions**:
   withdrawn or deleted submission, and **Check sent** only when the form has that status.
 Each action says how it went. A register that cannot be read is never written over.
 
+**The editorial key** (*Editorial key…*, at the bottom of the Inbox; it also opens without a workspace). An
+organiser has one key that opens sealed submissions and signs the bundles of their forms (FORM_INTAKE.md §5.9). It
+lives in the keychain of your operating system, so there is nothing to create on the web; there the window says that
+and offers nothing.
+
+- **Create editorial key** — a step you take on purpose, never silently. The window first says what the key is and
+  what losing it costs: every submission not yet fetched that was sealed only to it becomes unreadable. Straight
+  after, it shows the **recovery key** — 109 characters in groups of four. Write it down and keep it somewhere
+  other than this device.
+- **Show recovery key…** and **Check recovery key** — type the recovery key back in. When it is right, the key is
+  marked *checked*; that is what publishing a form will ask for. A key you did not check says so in the overview.
+  It forgives case, spaces and hyphens, and `I`/`L` for `1` and `O` for `0`; the recovery key of a *collaboration*
+  identity is refused as such.
+- **Restore from recovery key…** — only where there is no key yet. A restored key counts as checked: whoever typed
+  it has it.
+- **Copy fingerprint** — what you give a respondent through another channel than the bundle itself.
+- **Export as age key file…** — writes the key as an ordinary `age` key file (readable by the `age` command), made
+  so that only you can read it. With it a sealed file can be opened without OciDeck.
+- **Delete editorial key…** — after a confirmation that says again what goes with it.
+
+**A key is never overwritten.** When the keychain cannot be read, OciDeck says so and creates nothing — a keychain
+that does not answer is not an empty keychain — and the same when what is stored cannot be read as a key. Nothing
+you type is repeated in a message.
+
 A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it
 arrived plus its photos, in one step: a crash never leaves half a submission, and a submission that
 is already there is never overwritten. One with an error still lands, with the status `needs-fixing`,

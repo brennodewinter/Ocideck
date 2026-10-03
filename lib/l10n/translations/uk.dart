@@ -1642,6 +1642,79 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Herstelsleutel controleren': 'Перевірити ключ відновлення',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Ключ редакції створено. Тепер запишіть ключ відновлення.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Зв’язка ключів не прийняла ключ. Нічого не створено.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Ключ редакції вже є. Його не чіпали.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Зв’язку ключів не вдалося прочитати. Нічого не припущено й нічого не створено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'У зв’язці ключів є щось, що не є ключем редакції. Це не перезаписано.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ця платформа не має зв’язки ключів.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Правильно: ключ відновлення перевірено.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Це дійсний ключ відновлення, але не від цього ключа редакції.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Ключ відновлення правильний, але це не вдалося зберегти.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Немає ключа редакції, з яким можна порівняти.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Це не ключ відновлення ключа редакції.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'У ньому є помилка друку: контрольна сума не збігається.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Цей ключ відновлення походить із новішої версії OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Цей ключ відновлення зроблено для чогось іншого.',
+  'Hersteld uit de herstelsleutel.': 'Відновлено з ключа відновлення.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Зв’язка ключів не прийняла ключ. Нічого не відновлено.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Зберегти ключ редакції як файл ключа age',
+  'Het bestand kon niet worden opgeslagen.': 'Файл не вдалося зберегти.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Збережено як {pad}. Хто має цей файл, може відкрити все.',
+  'Redactiesleutel verwijderd.': 'Ключ редакції видалено.',
+  'Redactiesleutel': 'Ключ редакції',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ця платформа не має зв’язки ключів. Ключ редакції тут зберігати не можна; скористайтеся настільною програмою.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Зв’язку ключів не вдалося прочитати (заблокована або доступ відхилено). Нічого не припущено й нічого не створено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'У зв’язці ключів є щось, що не є ключем редакції. Це не перезаписано. Видаліть це та відновіть ключ зі свого ключа відновлення.',
+  'Redactiesleutel verwijderen…': 'Видалити ключ редакції…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ключ редакції відкриває запечатані надсилання та підписує пакети ваших форм. Він зберігається в зв’язці ключів цієї операційної системи. Якщо ви втратите всі ключі редакції, усі ще не отримані надсилання стануть нечитабельними: така ціна сервера, який нічого не може прочитати.',
+  'Redactiesleutel aanmaken': 'Створити ключ редакції',
+  'Herstellen uit herstelsleutel…': 'Відновити з ключа відновлення…',
+  'Vingerafdruk': 'Відбиток',
+  'Ontvanger (age)': 'Одержувач (age)',
+  'Aangemaakt op {datum}.': 'Створено {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Ключ відновлення перевірено.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Ключ відновлення ще не перевірено: запишіть його та введіть ще раз.',
+  'Herstelsleutel tonen…': 'Показати ключ відновлення…',
+  'Vingerafdruk kopiëren': 'Копіювати відбиток',
+  'Exporteren als age-sleutelbestand…': 'Експортувати як файл ключа age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Запишіть цей ключ відновлення та зберігайте його в безпечному місці, поза цим пристроєм. Хто його має, може відкрити всі надсилання та підписувати пакети від вашого імені. Якщо ви втратите цей пристрій, це все, що залишиться.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Введіть ключ відновлення тут ще раз',
+  'Later': 'Пізніше',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Введіть або вставте ключ відновлення. Те, що ви введете, буде поміщено в зв’язку ключів як ключ редакції; нічого не перезаписується.',
+  'Herstelsleutel': 'Ключ відновлення',
+  'Redactiesleutel verwijderen': 'Видалити ключ редакції',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Ключ буде стерто зі зв’язки ключів, і він може повернутися лише з ключа відновлення. Якщо у вас його немає, надсилання, запечатані лише для цього ключа, залишаться нечитабельними назавжди.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Ключ, який відкриває запечатані надсилання та підписує пакети.',
+  'Redactiesleutel…': 'Ключ редакції…',
   'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
       'Робочу копію викинуто. Те, що надійшло, оцінюється знову.',
   'Er is geen werkkopie.': 'Робочої копії немає.',
