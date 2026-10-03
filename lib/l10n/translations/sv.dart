@@ -1626,6 +1626,44 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bundel publiceren…': 'Publicera bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundlen är det en inlämnare tror om er redaktion: vilken nyckel den förseglar till och vilken text den hör till. Den sparas bredvid formuläret.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Det finns inget formulär i arbetsmappen att göra en bundle för.',
+  'Naam voor de invuller': 'Namn för inlämnaren',
+  'Geldig tot (jjjj-mm-dd)': 'Giltigt till (åååå-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Den sista dagen en inlämnare tror på den här bundlen. Inte före formulärets slutdag.',
+  'Bundel maken': 'Skapa bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle skapad (löpnummer {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Ge inlämnaren fingeravtrycket på ett annat sätt än bundle-filen, till exempel i inbjudan. Den som bara har bundle-filen kan inte kontrollera vem den kommer från.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Den här plattformen har ingen nyckelring för redaktionsnyckeln; en bundle kan inte signeras här.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Det finns ännu ingen redaktionsnyckel. Skapa en under Redaktionsnyckel… innan du publicerar en bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Nyckelringen går inte att läsa. Inget har signerats.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Den sparade redaktionsnyckeln går inte att läsa. Ta bort den under Redaktionsnyckel… och återställ den från din återställningsnyckel.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrollera först din återställningsnyckel under Redaktionsnyckel…. Utan väg tillbaka blir alla inlämningar oläsliga om den här enheten går sönder.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'En bundle för det här formuläret i arbetsmappen går inte att läsa eller hör inte ihop med de andra. Då går löpnumret inte att avgöra och inget signeras. Kontrollera: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Ange ett namn på högst 80 tecken.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Giltigt till måste vara ett existerande datum, som åååå-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Giltigt till får inte ligga före formulärets slutdag.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundlen kunde inte skapas ({veld}). Kontrollera att formuläret anger en giltig slutdag och lagringstid.',
+  'formulier': 'formulär',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundlen kunde inte sparas i arbetsmappen.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Skapa och signera den bundle som en inlämnare tror om er redaktion.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: förseglat paket öppnat och importerat.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

@@ -1647,6 +1647,44 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bundel publiceren…': 'Публикуване на комплект…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Комплектът е това, на което попълващият вярва за вашата редакция: за кой ключ запечатва и към кой текст принадлежи. Съхранява се до формуляра.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'В работната папка няма формуляр, за който да се създаде комплект.',
+  'Naam voor de invuller': 'Име за попълващия',
+  'Geldig tot (jjjj-mm-dd)': 'Валиден до (гггг-мм-дд)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Последният ден, в който попълващият вярва на този комплект. Не преди деня на затваряне на формуляра.',
+  'Bundel maken': 'Създаване на комплект',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Комплектът е създаден (пореден номер {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Дайте отпечатъка на попълващия по друг път, а не с файла на комплекта, например в поканата. Който има само файла на комплекта, не може да провери от кого е.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Тази платформа няма връзка с ключове за ключа на редакцията; комплект не може да се подпише тук.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Все още няма ключ на редакцията. Създайте такъв в Ключ на редакцията…, преди да публикувате комплект.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Връзката с ключове не може да се прочете. Нищо не е подписано.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Запазеният ключ на редакцията не може да се прочете. Изтрийте го в Ключ на редакцията… и го възстановете от ключа за възстановяване.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Първо проверете ключа за възстановяване в Ключ на редакцията…. Без път назад всички изпращания стават нечетими, ако това устройство се повреди.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Комплект на този формуляр в работната папка не може да се прочете или не принадлежи към другите. Тогава поредният номер не може да се определи и нищо не се подписва. Проверете: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Въведете име до 80 знака.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Валиден до трябва да е съществуваща дата във формат гггг-мм-дд.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Валиден до не може да е преди деня на затваряне на формуляра.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Комплектът не можа да бъде създаден ({veld}). Проверете дали формулярът посочва валиден ден на затваряне и срок на съхранение.',
+  'formulier': 'формуляр',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Комплектът не можа да бъде запазен в работната папка.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Създайте и подпишете комплекта, на който попълващият вярва за вашата редакция.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: запечатаният пакет е отворен и импортиран.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

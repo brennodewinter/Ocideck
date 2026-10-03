@@ -636,6 +636,32 @@ void main() {
     expect(find.byType(Dialog), findsNothing);
   });
 
+  group('bundel publiceren', () {
+    OutlinedButton button(WidgetTester tester) => tester.widget<OutlinedButton>(
+      find.ancestor(
+        of: text('Bundel publiceren…'),
+        matching: find.byType(OutlinedButton),
+      ),
+    );
+
+    testWidgets('zonder formulier kan het niet', (tester) async {
+      await open(tester, _Picks(), workspace: root);
+      expect(button(tester).onPressed, isNull);
+    });
+
+    testWidgets('met een formulier opent het het bundelvenster', (
+      tester,
+    ) async {
+      await tester.runAsync(() => FormWorkspace(root).publishForm(kook));
+      await open(tester, _Picks(), workspace: root);
+      await pumpUntil(tester, () => button(tester).onPressed != null);
+      await tester.tap(text('Bundel publiceren…'));
+      await tester.pumpAndSettle();
+      expect(text('Bundel maken'), findsOneWidget);
+      expect(text('kook · v1'), findsWidgets);
+    });
+  });
+
   group('boek samenstellen', () {
     testWidgets('zonder formulier kan het niet', (tester) async {
       await open(tester, _Picks(), workspace: root);

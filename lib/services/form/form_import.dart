@@ -78,27 +78,12 @@ class FormImportFailed extends FormImportOutcome {
   const FormImportFailed();
 }
 
-/// Waarom er geen redactiesleutel is om een verzegeld bestand mee te openen.
-enum FormImportKeyProblem {
-  /// Dit platform heeft geen sleutelhanger.
-  unavailable,
-
-  /// Er is nog geen redactiesleutel aangemaakt of hersteld.
-  absent,
-
-  /// De sleutelhanger gaf geen antwoord: wat erin staat is onbekend.
-  unreadable,
-
-  /// Er staat iets, maar het is geen redactiesleutel van deze versie.
-  damaged,
-}
-
 /// Het bestand is verzegeld en er is geen sleutel om het mee te openen. Er is niets
 /// geprobeerd en niets geland.
 class FormImportNeedsKey extends FormImportOutcome {
   const FormImportNeedsKey(this.problem);
 
-  final FormImportKeyProblem problem;
+  final FormKeyProblem problem;
 }
 
 /// Het bestand is verzegeld en ging niet open (of niet voor deze sleutel), zie [issue].
@@ -125,19 +110,10 @@ Future<FormImportOutcome> importFormFile(
   if (!looksLikeAge(bytes)) {
     return importFormPackage(workspace, bytes, now: now);
   }
-  final String identity;
-  switch (await keys.read()) {
-    case FormKeyPresent(:final key):
-      identity = key.ageIdentity;
-    case FormKeyUnavailable():
-      return const FormImportNeedsKey(FormImportKeyProblem.unavailable);
-    case FormKeyAbsent():
-      return const FormImportNeedsKey(FormImportKeyProblem.absent);
-    case FormKeyUnreadable():
-      return const FormImportNeedsKey(FormImportKeyProblem.unreadable);
-    case FormKeyDamaged():
-      return const FormImportNeedsKey(FormImportKeyProblem.damaged);
-  }
+  final state = await keys.read();
+  final problem = keyProblemOf(state);
+  if (problem != null) return FormImportNeedsKey(problem);
+  final identity = (state as FormKeyPresent).key.ageIdentity;
   final opened = await openSealedPackage(bytes, identities: [identity]);
   switch (opened) {
     case FormUnsealRefused(issue: FormUnsealIssue.notAPackage, :final problems):

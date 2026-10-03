@@ -5940,6 +5940,22 @@ and offers nothing.
 that does not answer is not an empty keychain — and the same when what is stored cannot be read as a key. Nothing
 you type is repeated in a message.
 
+**Publish bundle…** (under the forms in the Inbox). A respondent does not take a form on trust: the **bundle**
+says which key to seal to and which text it belongs to, and is signed with your editorial key. Pick the form —
+**every language is its own text and gets its own bundle** — the *name for the respondent* (the form's
+`controller`, else *Redactie*) and *valid until* (the form's closing day, else a year on; never before the
+closing day). **Create bundle** stores `template.<language>.bundle.json` beside the form and shows the
+**fingerprint** of your signing key. Give the fingerprint to the respondent **by another route than the bundle
+file** — in the invitation, say. The bundle alone cannot show who it comes from; the fingerprint can.
+Publishing again makes a bundle with the next sequence number, over the old one; the number runs on across the
+languages and versions of one form, because a respondent refuses a lower number than they have seen.
+
+Nothing is signed, and the window says why, when: there is no usable editorial key; the **recovery key has not been
+typed back** (without a way back, every submission is unreadable if this device breaks — *Editorial key…*); the name
+is empty or longer than 80 characters; *valid until* is not a date or lies before the closing day; or a bundle of
+this form in the workspace cannot be read, which makes the next sequence number impossible to know. Closing day and
+retention period are taken from the form itself.
+
 A submission lands in `submissions/<id>/` as `submission.md` and `manifest.json` byte for byte as it
 arrived plus its photos, in one step: a crash never leaves half a submission, and a submission that
 is already there is never overwritten. One with an error still lands, with the status `needs-fixing`,

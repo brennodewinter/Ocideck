@@ -664,6 +664,45 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bundel publiceren…': 'Publicar bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'El bundle es lo que cree quien rellena sobre vuestra redacción: con qué clave sellar y a qué texto pertenece. Se guarda junto al formulario.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'No hay ningún formulario en la carpeta de trabajo para el que crear un bundle.',
+  'Naam voor de invuller': 'Nombre para quien rellena',
+  'Geldig tot (jjjj-mm-dd)': 'Válido hasta (aaaa-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'El último día en que quien rellena cree en este bundle. No antes del día de cierre del formulario.',
+  'Bundel maken': 'Crear bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle creado (número de secuencia {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Da la huella digital a quien rellena por un camino distinto al del archivo del bundle, por ejemplo en la invitación. Quien solo tiene el archivo del bundle no puede comprobar de quién procede.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Esta plataforma no tiene llavero para la clave de la redacción; aquí no se puede firmar un bundle.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Todavía no hay una clave de la redacción. Crea una en Clave de la redacción… antes de publicar un bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'El llavero no se puede leer. No se ha firmado nada.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'La clave de la redacción guardada no se puede leer. Elimínala en Clave de la redacción… y restáurala desde tu clave de recuperación.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Comprueba primero tu clave de recuperación en Clave de la redacción…. Sin camino de vuelta, todos los envíos quedan ilegibles si este dispositivo se estropea.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Un bundle de este formulario en la carpeta de trabajo no se puede leer o no pertenece a los demás. Así no se puede determinar el número de secuencia y no se firma nada. Comprueba: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Introduce un nombre de 80 caracteres como máximo.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Válido hasta debe ser una fecha existente, con el formato aaaa-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Válido hasta no puede ser anterior al día de cierre del formulario.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'No se pudo crear el bundle ({veld}). Comprueba que el formulario indique un día de cierre y un plazo de conservación válidos.',
+  'formulier': 'formulario',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'No se pudo guardar el bundle en la carpeta de trabajo.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Crea y firma el bundle en el que cree quien rellena sobre vuestra redacción.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: paquete sellado abierto e importado.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

@@ -667,6 +667,45 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bundel publiceren…': 'Publier le bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Le bundle est ce que croit la personne qui remplit à propos de votre rédaction : vers quelle clé sceller et à quel texte il appartient. Il est enregistré à côté du formulaire.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Il n\'y a aucun formulaire dans le dossier de travail pour lequel créer un bundle.',
+  'Naam voor de invuller': 'Nom pour la personne qui remplit',
+  'Geldig tot (jjjj-mm-dd)': 'Valable jusqu\'au (aaaa-mm-jj)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Le dernier jour où la personne qui remplit croit à ce bundle. Pas avant le jour de clôture du formulaire.',
+  'Bundel maken': 'Créer le bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle créé (numéro de séquence {n}) : {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Donnez l\'empreinte à la personne qui remplit par une autre voie que le fichier du bundle, par exemple dans l\'invitation. Qui n\'a que le fichier du bundle ne peut pas vérifier d\'où il vient.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Cette plateforme n\'a pas de trousseau pour la clé de rédaction ; un bundle ne peut pas être signé ici.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Il n\'y a pas encore de clé de rédaction. Créez-en une sous Clé de rédaction… avant de publier un bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Le trousseau est illisible. Rien n\'a été signé.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'La clé de rédaction enregistrée est illisible. Supprimez-la sous Clé de rédaction… et restaurez-la depuis votre clé de récupération.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Vérifiez d\'abord votre clé de récupération sous Clé de rédaction…. Sans chemin de retour, tous les envois sont illisibles si cet appareil tombe en panne.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Un bundle de ce formulaire dans le dossier de travail est illisible ou n\'appartient pas aux autres. Le numéro de séquence est alors impossible à déterminer et rien n\'est signé. Vérifiez : {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Saisissez un nom de 80 caractères au plus.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Valable jusqu\'au doit être une date existante, au format aaaa-mm-jj.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Valable jusqu\'au ne peut pas précéder le jour de clôture du formulaire.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Le bundle n\'a pas pu être créé ({veld}). Vérifiez que le formulaire indique un jour de clôture et une durée de conservation valides.',
+  'formulier': 'formulaire',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Le bundle n\'a pas pu être enregistré dans le dossier de travail.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Créez et signez le bundle auquel croit la personne qui remplit à propos de votre rédaction.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam} : paquet scellé ouvert et importé.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

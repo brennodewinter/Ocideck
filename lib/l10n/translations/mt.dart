@@ -1645,6 +1645,45 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bundel publiceren…': 'Ippubblika bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Il-bundle huwa dak li min jimla l-formola jemmen dwar ir-redazzjoni tagħkom: għal liema ċavetta jissiġilla u lil liema test jappartjeni. Jinħażen ħdejn il-formola.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Ma hemm l-ebda formola fil-cartella tax-xogħol li għaliha jista\' jinħoloq bundle.',
+  'Naam voor de invuller': 'Isem għal min jimla l-formola',
+  'Geldig tot (jjjj-mm-dd)': 'Validu sa (jjjj-xx-jj)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'L-aħħar jum li fih min jimla l-formola jemmen dan il-bundle. Mhux qabel il-jum tal-għeluq tal-formola.',
+  'Bundel maken': 'Oħloq bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle maħluq (numru sekwenzjali {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Agħti l-marka tas-swaba\' lil min jimla l-formola b\'mod ieħor mhux permezz tal-fajl tal-bundle, pereżempju fl-istedina. Min għandu l-fajl tal-bundle biss ma jistax jivverifika minn ħa jiġi.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Din il-pjattaforma m\'għandhiex keychain taċ-ċavetta tar-redazzjoni; bundle ma jistax jiġi ffirmat hawn.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Għad m\'hemmx ċavetta tar-redazzjoni. Oħloq waħda taħt Ċavetta tar-redazzjoni… qabel tippubblika bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Il-keychain ma jistax jinqara. Ma ġie ffirmat xejn.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Iċ-ċavetta tar-redazzjoni maħżuna ma tistax tinqara. Neħħiha taħt Ċavetta tar-redazzjoni… u irkuprha miċ-ċavetta tal-irkupru tiegħek.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'L-ewwel iċċekkja ċ-ċavetta tal-irkupru tiegħek taħt Ċavetta tar-redazzjoni…. Mingħajr triq lura, is-sottomissjonijiet kollha jsiru illeġibbli jekk dan l-apparat jitkisser.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundle ta\' din il-formola fil-cartella tax-xogħol ma jistax jinqara jew ma jappartjenix mal-oħrajn. B\'hekk in-numru sekwenzjali ma jistax jiġi ddeterminat u ma jiġi ffirmat xejn. Iċċekkja: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Daħħal isem ta\' mhux aktar minn 80 karattru.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Validu sa jrid ikun data eżistenti, bħala jjjj-xx-jj.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Validu sa ma jistax ikun qabel il-jum tal-għeluq tal-formola.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Il-bundle ma setax jinħoloq ({veld}). Iċċekkja li l-formola ssemmi jum tal-għeluq u perjodu ta\' żamma validu.',
+  'formulier': 'formola',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Il-bundle ma setax jinħażen fil-cartella tax-xogħol.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Oħloq u ffirma l-bundle li min jimla l-formola jemmen dwar ir-redazzjoni tagħkom.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: pakkett issiġillat miftuħ u importat.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

@@ -1642,6 +1642,45 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bundel publiceren…': 'Fascem publicare…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Fascis est quod is qui implet de redactione vestra credit: ad quam clavem obsignet et ad quem textum pertineat. Iuxta formam servatur.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'In fasciculo operis nulla forma est cui fascis fieri possit.',
+  'Naam voor de invuller': 'Nomen pro eo qui implet',
+  'Geldig tot (jjjj-mm-dd)': 'Validus usque ad (aaaa-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Ultimus dies quo qui implet huic fasci credit. Non ante diem clausurae formae.',
+  'Bundel maken': 'Fascem creare',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Fascis creatus (numerus ordinis {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Vestigium digitale ei qui implet alia via da quam per fasciculum fascis, exempli gratia in invitatione. Qui solum fasciculum fascis habet, unde veniat explorare non potest.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Haec platea circulum clavium pro clave redactionis non habet; fascis hic subscribi non potest.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Nondum est clavis redactionis. Unam sub Clavis redactionis… crea antequam fascem publices.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Circulus clavium legi non potest. Nihil subscriptum est.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Clavis redactionis servata legi non potest. Eam sub Clavis redactionis… dele et ex clave recuperationis tua restitue.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Primum clavem recuperationis tuam sub Clavis redactionis… proba. Sine via reditus omnia missa illegibilia fiunt si hoc instrumentum frangitur.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Fascis huius formae in fasciculo operis legi non potest vel ad ceteros non pertinet. Ita numerus ordinis definiri non potest et nihil subscribitur. Proba: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Nomen inscribe ad summum octoginta litterarum.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Validus usque ad dies exstans esse debet, ut aaaa-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Validus usque ad non ante diem clausurae formae esse potest.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Fascis creari non potuit ({veld}). Vide num forma diem clausurae et tempus servandi validum nominet.',
+  'formulier': 'forma',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Fascis in fasciculo operis servari non potuit.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Crea et subscribe fascem cui qui implet de redactione vestra credit.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: fasciculus obsignatus apertus et importatus est.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

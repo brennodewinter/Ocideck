@@ -15,6 +15,9 @@ class FormKeyVault extends FlutterSecureStorage {
   bool failWrite = false;
   bool dropWrites = false;
 
+  /// Hoe vaak er is gelezen: wie wil weten of iets één keer of twee keer is gedaan.
+  int reads = 0;
+
   /// Houdt lezen of schrijven vast tot de test het loslaat: zo is te zien wat er gebeurt terwijl
   /// de sleutelhanger nog bezig is.
   Completer<void>? readGate;
@@ -30,6 +33,7 @@ class FormKeyVault extends FlutterSecureStorage {
     AppleOptions? mOptions,
     WindowsOptions? wOptions,
   }) async {
+    reads++;
     await readGate?.future;
     if (failRead) throw Exception('sleutelhanger vergrendeld');
     return data[key];

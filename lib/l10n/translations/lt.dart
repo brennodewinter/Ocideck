@@ -1634,6 +1634,45 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bundel publiceren…': 'Paskelbti bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle yra tai, kuo pildytojas tiki apie jūsų redakciją: kuriam raktui užplombuoti ir kuriam tekstui jis priklauso. Jis išsaugomas šalia formos.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Darbo aplanke nėra formos, kuriai būtų galima sukurti bundle.',
+  'Naam voor de invuller': 'Pildytojo vardas',
+  'Geldig tot (jjjj-mm-dd)': 'Galioja iki (mmmm-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Paskutinė diena, kai pildytojas tiki šiuo bundle. Ne anksčiau nei formos uždarymo diena.',
+  'Bundel maken': 'Sukurti bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle sukurtas (eilės numeris {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Perduokite kontrolinį kodą pildytojui kitu keliu nei bundle failą, pavyzdžiui, kvietime. Kas turi tik bundle failą, negali patikrinti, iš ko jis.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Šioje platformoje nėra raktų pakabuko redakcijos raktui; bundle čia pasirašyti negalima.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Redakcijos rakto dar nėra. Sukurkite jį skiltyje Redakcijos raktas…, prieš skelbdami bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Raktų pakabuko nepavyksta perskaityti. Nieko nepasirašyta.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Išsaugoto redakcijos rakto nepavyksta perskaityti. Ištrinkite jį skiltyje Redakcijos raktas… ir atkurkite iš atkūrimo rakto.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Pirmiausia patikrinkite atkūrimo raktą skiltyje Redakcijos raktas…. Be kelio atgal visi pateikimai taps neperskaitomi, jei šis įrenginys sugestų.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Šios formos bundle darbo aplanke nepavyksta perskaityti arba jis nepriklauso kitiems. Tada eilės numerio nustatyti neįmanoma ir nieko nepasirašoma. Patikrinkite: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Įveskite ne ilgesnį nei 80 simbolių vardą.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Galioja iki turi būti esama data, formatu mmmm-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Galioja iki negali būti anksčiau nei formos uždarymo diena.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle nepavyko sukurti ({veld}). Patikrinkite, ar formoje nurodyta galiojanti uždarymo diena ir saugojimo laikotarpis.',
+  'formulier': 'forma',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle nepavyko išsaugoti darbo aplanke.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Sukurkite ir pasirašykite bundle, kuriuo pildytojas tiki apie jūsų redakciją.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: užplombuotas paketas atidarytas ir importuotas.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

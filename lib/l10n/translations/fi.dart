@@ -1627,6 +1627,45 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bundel publiceren…': 'Julkaise bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle on se, mihin lomakkeen täyttäjä toimituksestanne luottaa: mille avaimelle hän sinetöi ja mihin tekstiin se kuuluu. Se tallennetaan lomakkeen viereen.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Työkansiossa ei ole lomaketta, jolle bundlen voisi tehdä.',
+  'Naam voor de invuller': 'Nimi täyttäjälle',
+  'Geldig tot (jjjj-mm-dd)': 'Voimassa (vvvv-kk-pp) asti',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Viimeinen päivä, jona täyttäjä luottaa tähän bundleen. Ei ennen lomakkeen sulkeutumispäivää.',
+  'Bundel maken': 'Luo bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle luotu (järjestysnumero {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Anna sormenjälki täyttäjälle muuta tietä kuin bundle-tiedoston mukana, esimerkiksi kutsussa. Se, jolla on vain bundle-tiedosto, ei voi tarkistaa, keneltä se tulee.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Tällä alustalla ei ole avainnippua toimituksen avaimelle; bundlea ei voi allekirjoittaa täällä.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Toimituksen avainta ei ole vielä. Luo sellainen kohdassa Toimituksen avain… ennen kuin julkaiset bundlen.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Avainnippua ei voi lukea. Mitään ei allekirjoitettu.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Tallennettua toimituksen avainta ei voi lukea. Poista se kohdassa Toimituksen avain… ja palauta se palautusavaimestasi.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Tarkista ensin palautusavaimesi kohdassa Toimituksen avain…. Ilman paluutietä kaikki lähetykset muuttuvat lukukelvottomiksi, jos tämä laite rikkoutuu.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Tämän lomakkeen bundlea työkansiossa ei voi lukea tai se ei kuulu muiden joukkoon. Silloin järjestysnumeroa ei voi määrittää, eikä mitään allekirjoiteta. Tarkista: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Anna nimi, jossa on enintään 80 merkkiä.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Voimassa asti -kentän on oltava olemassa oleva päivämäärä muodossa vvvv-kk-pp.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Voimassa asti -päivä ei saa olla ennen lomakkeen sulkeutumispäivää.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundlea ei voitu luoda ({veld}). Tarkista, että lomakkeessa on kelvollinen sulkeutumispäivä ja säilytysaika.',
+  'formulier': 'lomake',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundlea ei voitu tallentaa työkansioon.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Luo ja allekirjoita bundle, johon täyttäjä toimituksestanne luottaa.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: sinetöity paketti avattu ja tuotu.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

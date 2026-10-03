@@ -243,6 +243,58 @@ class FormWorkspace {
     return (forms: forms, unreadable: unreadable);
   }
 
+  // ── bundels ───────────────────────────────────────────────────────────────
+
+  /// Waar de bundel van [form] staat: naast zijn sjabloon, onder de naam die de kern geeft
+  /// (`template.nl.md` heeft `template.nl.bundle.json`). Een bundel bindt de hash van één tekst
+  /// en elke taal is een eigen tekst, dus elke taal heeft zijn eigen bundel.
+  String bundlePathOf(PublishedForm form) =>
+      p.join(p.dirname(form.path), bundleFileNameFor(p.basename(form.path)));
+
+  /// Alle bundelbestanden van formulier [formId], over alle versies en talen, en de paden van wat
+  /// er stond maar niet te lezen was (geen UTF-8).
+  Future<
+    ({List<({String path, String text})> bundles, List<String> unreadable})
+  >
+  bundlesOf(String formId) async {
+    final bundles = <({String path, String text})>[];
+    final unreadable = <String>[];
+    final formDir = Directory(p.join(_formsDir, formId));
+    if (!_formId.hasMatch(formId) || !await formDir.exists()) {
+      return (bundles: bundles, unreadable: unreadable);
+    }
+    await for (final versionDir in formDir.list(followLinks: false)) {
+      if (versionDir is! Directory ||
+          _versionDir.firstMatch(p.basename(versionDir.path)) == null) {
+        continue;
+      }
+      await for (final file in versionDir.list(followLinks: false)) {
+        if (file is! File || !p.basename(file.path).endsWith('.bundle.json')) {
+          continue;
+        }
+        final text = await _readText(file);
+        if (text == null) {
+          unreadable.add(file.path);
+        } else {
+          bundles.add((path: file.path, text: text));
+        }
+      }
+    }
+    bundles.sort((a, b) => a.path.compareTo(b.path));
+    return (bundles: bundles, unreadable: unreadable);
+  }
+
+  /// Bewaart [text] als de bundel van [form], over een eerdere heen: een nieuwe bundel heeft een
+  /// hoger volgnummer en vervangt de vorige. `false` als het niet lukt.
+  Future<bool> writeBundle(PublishedForm form, String text) async {
+    try {
+      await writeStringAtomic(File(bundlePathOf(form)), text);
+      return true;
+    } on FileSystemException {
+      return false;
+    }
+  }
+
   /// Bewaart [text] als gepubliceerd formulier onder `forms/<id>/v<versie>/`.
   Future<FormPublishOutcome> publishForm(String text) async {
     final spec = _specOf(text);

@@ -827,6 +827,45 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bundel publiceren…': 'Publish bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'The bundle is what a respondent believes about your editorial team: which key to seal to and which text it belongs to. It is saved next to the form.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'There is no form in the workspace to make a bundle for.',
+  'Naam voor de invuller': 'Name for the respondent',
+  'Geldig tot (jjjj-mm-dd)': 'Valid until (yyyy-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'The last day a respondent believes this bundle. Not before the form\'s closing day.',
+  'Bundel maken': 'Create bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle created (sequence number {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Give the fingerprint to the respondent by another route than the bundle file, for example in the invitation. Whoever has only the bundle file cannot tell who it comes from.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'This platform has no keychain for the editorial key; a bundle cannot be signed here.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'There is no editorial key yet. Create one under Editorial key… before you publish a bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'The keychain cannot be read. Nothing was signed.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'The stored editorial key cannot be read. Delete it under Editorial key… and restore it from your recovery key.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'First check your recovery key under Editorial key…. Without a way back, every submission is unreadable if this device breaks.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'A bundle of this form in the workspace cannot be read or does not belong with the others. That makes the sequence number impossible to determine, so nothing is signed. Check: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Enter a name of at most 80 characters.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Valid until must be an existing date, as yyyy-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Valid until must not be before the form\'s closing day.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'The bundle could not be made ({veld}). Check that the form names a valid closing day and retention period.',
+  'formulier': 'form',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'The bundle could not be saved in the workspace.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Create and sign the bundle that a respondent believes about your editorial team.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: sealed package opened and imported.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

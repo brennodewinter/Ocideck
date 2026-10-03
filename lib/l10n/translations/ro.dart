@@ -1643,6 +1643,45 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bundel publiceren…': 'Publică bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle-ul este ceea ce crede cel care completează despre redacția voastră: pentru ce cheie sigilează și cărui text îi aparține. Se salvează lângă formular.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'În folderul de lucru nu există niciun formular pentru care să se creeze un bundle.',
+  'Naam voor de invuller': 'Nume pentru cel care completează',
+  'Geldig tot (jjjj-mm-dd)': 'Valabil până la (aaaa-ll-zz)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Ultima zi în care cel care completează crede acest bundle. Nu înainte de ziua închiderii formularului.',
+  'Bundel maken': 'Creează bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle creat (număr de ordine {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Dă amprenta celui care completează pe altă cale decât fișierul bundle, de exemplu în invitație. Cine are doar fișierul bundle nu poate verifica de la cine provine.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Această platformă nu are un breloc de chei pentru cheia redacției; un bundle nu poate fi semnat aici.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Nu există încă o cheie a redacției. Creează una în Cheia redacției… înainte de a publica un bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Brelocul de chei nu poate fi citit. Nu s-a semnat nimic.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Cheia redacției salvată nu poate fi citită. Șterge-o în Cheia redacției… și restaureaz-o din cheia de recuperare.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Verifică mai întâi cheia de recuperare în Cheia redacției…. Fără drum înapoi, toate trimiterile devin ilizibile dacă acest dispozitiv se strică.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Un bundle al acestui formular din folderul de lucru nu poate fi citit sau nu aparține celorlalte. Atunci numărul de ordine nu poate fi stabilit și nu se semnează nimic. Verifică: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Introdu un nume de cel mult 80 de caractere.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Valabil până la trebuie să fie o dată existentă, în forma aaaa-ll-zz.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Valabil până la nu poate fi înainte de ziua închiderii formularului.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle-ul nu a putut fi creat ({veld}). Verifică dacă formularul indică o zi de închidere și o perioadă de păstrare valide.',
+  'formulier': 'formular',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle-ul nu a putut fi salvat în folderul de lucru.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Creează și semnează bundle-ul în care cel care completează crede despre redacția voastră.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: pachet sigilat deschis și importat.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

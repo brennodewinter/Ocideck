@@ -2538,6 +2538,45 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bundel publiceren…': 'Bundle yayımla…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle, formu dolduranın yayın kurulunuz hakkında inandığı şeydir: hangi anahtara mühürleyeceği ve hangi metne ait olduğu. Formun yanına kaydedilir.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Çalışma klasöründe bundle oluşturulabilecek bir form yok.',
+  'Naam voor de invuller': 'Formu dolduran için ad',
+  'Geldig tot (jjjj-mm-dd)': 'Geçerlilik bitişi (yyyy-aa-gg)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Formu dolduranın bu bundle\'a inandığı son gün. Formun kapanış gününden önce olmamalı.',
+  'Bundel maken': 'Bundle oluştur',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle oluşturuldu (sıra numarası {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Parmak izini formu dolduran kişiye bundle dosyasından farklı bir yoldan verin, örneğin davetiyede. Yalnızca bundle dosyasına sahip olan, onun kimden geldiğini doğrulayamaz.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Bu platformda yayın kurulu anahtarı için anahtarlık yok; burada bundle imzalanamaz.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Henüz yayın kurulu anahtarı yok. Bundle yayımlamadan önce Yayın kurulu anahtarı… altında bir tane oluşturun.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Anahtarlık okunamıyor. Hiçbir şey imzalanmadı.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Kayıtlı yayın kurulu anahtarı okunamıyor. Yayın kurulu anahtarı… altında silin ve kurtarma anahtarınızdan geri yükleyin.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Önce kurtarma anahtarınızı Yayın kurulu anahtarı… altında kontrol edin. Geri dönüş yolu olmadan, bu cihaz bozulursa tüm gönderimler okunamaz hale gelir.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Çalışma klasöründeki bu formun bir bundle\'ı okunamıyor ya da diğerlerine ait değil. Bu durumda sıra numarası belirlenemez ve hiçbir şey imzalanmaz. Kontrol edin: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'En fazla 80 karakterlik bir ad girin.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Geçerlilik bitişi, yyyy-aa-gg biçiminde var olan bir tarih olmalı.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Geçerlilik bitişi, formun kapanış gününden önce olamaz.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle oluşturulamadı ({veld}). Formun geçerli bir kapanış günü ve saklama süresi belirttiğinden emin olun.',
+  'formulier': 'form',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle çalışma klasörüne kaydedilemedi.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Formu dolduranın yayın kurulunuz hakkında inandığı bundle\'ı oluşturun ve imzalayın.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: mühürlü paket açıldı ve içe aktarıldı.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

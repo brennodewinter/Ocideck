@@ -1628,6 +1628,45 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bundel publiceren…': 'Zveřejnit bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle je to, čemu ten, kdo vyplňuje, věří o vaší redakci: ke kterému klíči pečetit a ke kterému textu patří. Ukládá se vedle formuláře.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'V pracovní složce není žádný formulář, pro který by šlo vytvořit bundle.',
+  'Naam voor de invuller': 'Jméno pro vyplňujícího',
+  'Geldig tot (jjjj-mm-dd)': 'Platný do (rrrr-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Poslední den, kdy vyplňující tomuto bundle věří. Ne dříve než v den uzavření formuláře.',
+  'Bundel maken': 'Vytvořit bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle vytvořen (pořadové číslo {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Předejte vyplňujícímu otisk jinou cestou než souborem bundle, například v pozvánce. Kdo má jen soubor bundle, nemůže ověřit, od koho pochází.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Tato platforma nemá klíčenku pro klíč redakce; bundle tu nelze podepsat.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Klíč redakce zatím neexistuje. Vytvořte ho v Klíč redakce…, než bundle zveřejníte.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Klíčenku nelze přečíst. Nic nebylo podepsáno.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Uložený klíč redakce nelze přečíst. Smažte ho v Klíč redakce… a obnovte ho ze svého klíče pro obnovení.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Nejdřív zkontrolujte klíč pro obnovení v Klíč redakce…. Bez cesty zpět budou všechna odeslání nečitelná, když se toto zařízení pokazí.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundle tohoto formuláře v pracovní složce nelze přečíst, nebo nepatří k ostatním. Pak nelze určit pořadové číslo a nic se nepodepíše. Zkontrolujte: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Zadejte jméno o nejvýše 80 znacích.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Platný do musí být existující datum ve tvaru rrrr-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Platný do nesmí být dříve než den uzavření formuláře.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle se nepodařilo vytvořit ({veld}). Zkontrolujte, zda formulář uvádí platný den uzavření a dobu uchování.',
+  'formulier': 'formulář',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle se nepodařilo uložit do pracovní složky.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Vytvořte a podepište bundle, kterému vyplňující věří o vaší redakci.',
   '{naam}: verzegeld pakket geopend en binnengehaald.':
       '{naam}: zapečetěný balíček otevřen a importován.',
   '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':

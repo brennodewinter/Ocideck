@@ -15,11 +15,13 @@ import 'package:ocideck_form_core/ocideck_form_core.dart' show FormUnsealIssue;
 import '../../l10n/app_localizations.dart';
 import '../../platform/platform_features.dart';
 import '../../services/form/form_import.dart';
+import '../../services/form/form_keys.dart' show FormKeyProblem;
 import '../../services/form/form_workspace.dart';
 import '../../state/form_keys_provider.dart';
 import '../../state/forms_provider.dart';
 import '../../state/tabs_provider.dart';
 import 'form_book_dialog.dart';
+import 'form_bundle_dialog.dart';
 import 'form_inbox_list.dart';
 import 'form_keys_dialog.dart';
 import 'form_text_helpers.dart' show formTextOf;
@@ -262,18 +264,18 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
 
   String _needsKey(
     AppLocalizations l10n,
-    FormImportKeyProblem problem,
+    FormKeyProblem problem,
   ) => switch (problem) {
-    FormImportKeyProblem.unavailable => l10n.d(
+    FormKeyProblem.unavailable => l10n.d(
       '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.',
     ),
-    FormImportKeyProblem.absent => l10n.d(
+    FormKeyProblem.absent => l10n.d(
       '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.',
     ),
-    FormImportKeyProblem.unreadable => l10n.d(
+    FormKeyProblem.unreadable => l10n.d(
       '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.',
     ),
-    FormImportKeyProblem.damaged => l10n.d(
+    FormKeyProblem.damaged => l10n.d(
       '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.',
     ),
   };
@@ -322,6 +324,18 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
     );
   }
 
+  Future<void> _publishBundle() async {
+    final workspace = _workspace;
+    if (workspace == null) return;
+    await showFormBundleDialog(
+      context,
+      workspace: workspace,
+      forms: _forms,
+      keys: ref.read(formKeyServiceProvider),
+      now: widget.now,
+    );
+  }
+
   Future<void> _openRegister() async {
     final workspace = _workspace;
     if (workspace != null) await _open(workspace.registerPath);
@@ -329,6 +343,27 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
 
   String _label(PublishedForm form) =>
       '${form.id} · v${form.version}${form.lang == null ? '' : ' · ${form.lang}'}';
+
+  /// Onder de lijst met formulieren: een formulier toevoegen, en een bundel voor wat er staat.
+  Widget _formButtons(AppLocalizations l10n) => Wrap(
+    spacing: 8,
+    runSpacing: 8,
+    children: [
+      OutlinedButton(
+        onPressed: _busy ? null : _addForm,
+        child: Text(l10n.d('Formulier toevoegen…')),
+      ),
+      Tooltip(
+        message: l10n.d(
+          'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.',
+        ),
+        child: OutlinedButton(
+          onPressed: _busy || _forms.isEmpty ? null : _publishBundle,
+          child: Text(l10n.d('Bundel publiceren…')),
+        ),
+      ),
+    ],
+  );
 
   /// Onderaan: de redactiesleutel (die ook zonder werkmap open moet kunnen) en Sluiten.
   Widget _bottomRow(AppLocalizations l10n) => Row(
@@ -397,10 +432,7 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
                   else
                     for (final form in _forms) Text(_label(form)),
                   const SizedBox(height: 8),
-                  OutlinedButton(
-                    onPressed: _busy ? null : _addForm,
-                    child: Text(l10n.d('Formulier toevoegen…')),
-                  ),
+                  _formButtons(l10n),
                   if (_formMessage != null) ...[
                     const SizedBox(height: 8),
                     Semantics(liveRegion: true, child: Text(_formMessage!)),
