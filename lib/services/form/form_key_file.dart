@@ -13,6 +13,8 @@ library;
 
 import 'dart:io';
 
+import '../../utils/chmod.dart';
+
 /// Schrijft [text] naar [path] in een bestand dat alleen de eigenaar mag lezen (op systemen
 /// met bestandsrechten). Een bestaand bestand wordt vervangen door een nieuw, niet
 /// overschreven: de rechten van het oude doen er niet toe en het oude blijft staan als het
@@ -24,14 +26,8 @@ Future<void> writeSecretFile(String path, String text) async {
   try {
     await temp.create(exclusive: true);
     if (!Platform.isWindows) {
-      // Dart heeft geen permissie-API; het alternatief is een FFI-binding naar libc,
-      // méér aanvalsoppervlak voor minder. Vaste argv, geen schil, `--` vóór de modus zodat het
-      // pad nooit een optie kan zijn, en het pad is dat van een bestand dat deze functie
-      // zojuist zelf maakte. De uitzondering staat bewust op déze regel en niet op dit
-      // bestand: een tweede subproces hier moet wél alarm geven (zie #521).
-      // nosemgrep: ocideck-subproces-buiten-de-gitlaag
-      final result = await Process.run('chmod', ['--', '600', temp.path]);
-      if (result.exitCode != 0) {
+      final restricted = await _restrict(temp.path);
+      if (!restricted) {
         throw FileSystemException('rechten niet te beperken', path);
       }
     }
@@ -58,5 +54,15 @@ Future<void> _replace(File temp, File target) async {
     if (!await target.exists()) rethrow;
     await target.delete();
     await temp.rename(target.path);
+  }
+}
+
+/// `chmod 600`; een systeem zonder `chmod` is een weigering, geen reden om het geheim dan maar
+/// met de standaardrechten te schrijven.
+Future<bool> _restrict(String path) async {
+  try {
+    return await chmodPath('600', path);
+  } on ProcessException {
+    return false;
   }
 }

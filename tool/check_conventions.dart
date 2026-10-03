@@ -1302,8 +1302,9 @@ _DelayScan _fixedDelayInRunAsync() {
 ///
 /// Eén `// nosemgrep:` is een afweging; tien is een gewoonte, en dan zegt een
 /// groene `make sast` niets meer. De enige vandaag staat op de `chmod` in
-/// `disk_traces.dart` (zie #521): de regel bewaakt netwerkverkeer buiten
-/// NetGuard om, en `chmod` is niet netwerkvaardig.
+/// `lib/utils/chmod.dart` (zie #521): de regel bewaakt netwerkverkeer buiten
+/// NetGuard om, en `chmod` is niet netwerkvaardig. Een tweede aanroeper van `chmod`
+/// gebruikt die helper in plaats van een tweede uitzondering te nemen.
 ///
 /// Dit telt bewust in `check_conventions` en niet in semgrep zelf. De reden
 /// dáárvoor is sinds #778 een andere dan er stond. Het argument was dat `make
