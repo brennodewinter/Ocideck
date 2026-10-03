@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked test-packages l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -47,6 +47,7 @@ ON_SUITE_FAILURE := || { dart run tool/explain_suite_failure.dart $(TEST_REPORT)
 
 help:
 	@echo "OciDeck quality targets:"
+	@echo "  make test-age-interop  Build the reference age (Go, network) and run the interoperability test (phase 3 gate)."
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
 	@echo "  make check-full      make check + secrets + SAST + licences, SBOM, deps, web hardening."
 	@echo "  make check-release   Ready-for-tagging pass: make check-full + an advisory ZAP/DAST scan of the live host. Run before 'git push origin v*'."
@@ -777,6 +778,27 @@ check-packages:
 PACKAGE_DIRS := $(patsubst %/pubspec.yaml,%,$(wildcard packages/*/pubspec.yaml))
 PACKAGE_COVERAGE_MIN ?= 90
 PACKAGE_PER_FILE_FLOOR ?= 60
+
+# The reference `age` the interoperability test runs against (FORM_INTAKE.md §5.6, §12). Built from
+# source into `.dart_tool/` (not tracked) at a pinned version. It needs Go and the network, so it is
+# not part of `make check`: without the binary the test reports "NOT RUN" rather than passing.
+AGE_VERSION ?= v1.3.2
+AGE_BIN_DIR = $(CURDIR)/.dart_tool/age-bin
+
+test-age-interop:
+	@echo "== OciDeck gate: interoperability with the reference age =="
+	@echo "Command: GOBIN=.dart_tool/age-bin go install filippo.io/age/cmd/age@$(AGE_VERSION), then"
+	@echo "         dart test test/form_seal_interop_test.dart in packages/ocideck_form_core with AGE_BIN set"
+	@echo "Covers: a package sealed here opens in the reference age and the other way round; several"
+	@echo "        recipients; a key that is not a recipient; a changed or cut-short file (refused by both);"
+	@echo "        plaintexts at every edge of a 64 KiB chunk."
+	@echo "Failure means: the two implementations disagree — read the failing case before anything else."
+	@command -v go >/dev/null 2>&1 || { echo "go not found — install it (macOS: brew install go)"; exit 2; }
+	@mkdir -p $(AGE_BIN_DIR)
+	GOBIN=$(AGE_BIN_DIR) go install filippo.io/age/cmd/age@$(AGE_VERSION)
+	@$(AGE_BIN_DIR)/age --version | grep -q "$(patsubst v%,%,$(AGE_VERSION))" \
+	  || { echo "the built age is not $(AGE_VERSION)"; exit 1; }
+	cd packages/ocideck_form_core && AGE_BIN=$(AGE_BIN_DIR)/age dart test test/form_seal_interop_test.dart
 
 test-packages:
 	@echo "== OciDeck check: package tests =="
