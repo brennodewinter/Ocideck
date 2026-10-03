@@ -252,9 +252,14 @@ void main() {
     // `chmod 700` op de datamappen, alleen op Linux: vaste argv, geen schil, en
     // het pad komt van path_provider. Dart heeft geen permissie-API.
     'lib/services/disk_traces.dart': 1,
+    // `chmod 600 --` op het tijdelijke bestand waarin een redactiesleutel wordt
+    // geëxporteerd (FORM_INTAKE.md §5.9), vóór er een byte geheim in staat: vaste
+    // argv, geen schil, het pad is dat van een bestand dat de functie zelf maakte.
+    // Niet op Windows. Dart heeft geen permissie-API.
+    'lib/services/form/form_key_file.dart': 1,
   };
 
-  test('een subproces blijft binnen de twee plekken die het mogen', () {
+  test('een subproces blijft binnen de drie plekken die het mogen', () {
     scan(
       sink: RegExp(r'\bProcess\.(start|run|runSync|startSync)\('),
       allowedFiles: subprocessCount.keys.toSet(),

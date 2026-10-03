@@ -24,7 +24,13 @@ Future<void> writeSecretFile(String path, String text) async {
   try {
     await temp.create(exclusive: true);
     if (!Platform.isWindows) {
-      final result = await Process.run('chmod', ['600', temp.path]);
+      // Dart heeft geen permissie-API; het alternatief is een FFI-binding naar libc,
+      // méér aanvalsoppervlak voor minder. Vaste argv, geen schil, `--` vóór de modus zodat het
+      // pad nooit een optie kan zijn, en het pad is dat van een bestand dat deze functie
+      // zojuist zelf maakte. De uitzondering staat bewust op déze regel en niet op dit
+      // bestand: een tweede subproces hier moet wél alarm geven (zie #521).
+      // nosemgrep: ocideck-subproces-buiten-de-gitlaag
+      final result = await Process.run('chmod', ['--', '600', temp.path]);
       if (result.exitCode != 0) {
         throw FileSystemException('rechten niet te beperken', path);
       }
