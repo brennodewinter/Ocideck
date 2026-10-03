@@ -7,6 +7,9 @@
 > that implements it stays EUPL-1.2. A third party may write a compatible server or client from this
 > document alone, without a copyleft question.
 >
+> **What the server must make true around this contract** — retention, limits, logging, deployment, the maintainer —
+> is in [`INTAKE_SERVER_REQUIREMENTS.md`](INTAKE_SERVER_REQUIREMENTS.md).
+>
 > **What exists today.** The pure half of the contract is in `packages/ocideck_form_core` and tested
 > (the first part also against the vectors): the invite link, the information document, the arrival
 > note, the withdrawal secret, the invite token, the error codes, **signed organiser requests**, the

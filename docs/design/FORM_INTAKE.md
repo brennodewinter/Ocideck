@@ -1119,7 +1119,8 @@ It reads only HTTP metadata — `sid`, `fid`, size, invite token, withdrawal has
 enforces what it can see: size, count, time window, rate, and who holds a valid invite.
 **The detailed server requirements (§6.5) are written here so the contract is reviewed
 with the format, and are to be carried over into the server repository's own design**
-(product review: a second product should own its own spec).
+(product review: a second product should own its own spec). They are now written out as numbered,
+testable requirements in [`INTAKE_SERVER_REQUIREMENTS.md`](INTAKE_SERVER_REQUIREMENTS.md).
 
 ### 6.2 Who sees what
 
@@ -1208,6 +1209,8 @@ https://forms.organiser.example/f/<fid>#api=intake.organiser.example&fp=<fingerp
   the Kookboek starts here) and *single-use tokens* (deferred, §15 D6).
 
 ### 6.5 Requirements on the reference server (the minimum bar)
+
+*The full, numbered list is [`INTAKE_SERVER_REQUIREMENTS.md`](INTAKE_SERVER_REQUIREMENTS.md); what follows is the bar in short.*
 
 - TLS only; HSTS; no plaintext listener beyond a health check.
 - **Streaming uploads with a hard byte ceiling**: the request is cut at the cap, not
