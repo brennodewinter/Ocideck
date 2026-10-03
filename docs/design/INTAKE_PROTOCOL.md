@@ -8,12 +8,13 @@
 > document alone, without a copyleft question.
 >
 > **What exists today.** The pure half of the contract is in `packages/ocideck_form_core` and tested
-> against the vectors: the invite link, the information document, the arrival note, the withdrawal
-> secret, the invite token, the error codes and **signed organiser requests** (§§3, 4.1, 4.3, 4.4, 6,
-> 7). The rest — the request and response *bodies* of the organiser operations, the reference
-> server, the client transport and the web respondent — is specified here and not yet built; each
-> paragraph says which it is. The server needs a **named maintainer** before it is run for anyone
-> (FORM_INTAKE.md §14, D3), and the web respondent needs a way to seal in a browser (§5.6 there).
+> (the first part also against the vectors): the invite link, the information document, the arrival
+> note, the withdrawal secret, the invite token, the error codes, **signed organiser requests**, the
+> **bodies** of every operation, and the **routes** — which method and path mean which operation, read
+> by one grammar for the client and the server (§§2–6). What is not built is the reference server, the
+> client transport and the web respondent; each paragraph says which it is. The server needs a **named
+> maintainer** before it is run for anyone (FORM_INTAKE.md §14, D3), and the web respondent needs a way
+> to seal in a browser (§5.6 there).
 
 ---
 
@@ -34,6 +35,14 @@ no cookies**: a respondent holds an invite token, an organiser signs each reques
 
 - **Transport.** HTTPS only. A client never follows a redirect to another host. The paths below are
   fixed by this document; the host is the one the invite link names (§3).
+- **Request targets.** A target is `path[?query]` exactly as it is sent, and as a signed request signs
+  it (§5.1). It is read **strictly**: letters, digits and `. _ ~ - / ? = &` only — no `%`, no `#`, no
+  blank, nothing beyond ASCII, no absolute address, no trailing slash, no empty segment, and a query only
+  where a route takes one (§5.5). There is one spelling of every request, so a cache, a proxy and a
+  signature cannot disagree about it. A request is decided in this order, stopping at the first failure:
+  the path has the shape of a route (`not-found`) → the route answers the method, upper case as received
+  (`method-not-allowed`) → its ids are ids (`bad-request`) → its query is the route's (`bad-request`).
+  *Built:* `matchIntakeRoute`, and the targets a client builds (`intakeFormTarget` and its siblings).
 - **Versioning.** Every path starts with `/v1/`. A client that meets a server whose
   `protocol` (§4.1) is outside the versions it speaks stops, and says so.
 - **Bodies.** JSON is UTF-8, `Content-Type: application/json; charset=utf-8`, **at most 64 KiB**
@@ -143,7 +152,8 @@ Anyone who knows the `fid`. The published form, in every language it is publishe
   `lang` (FORM_INTAKE.md §4.3) tells the client which variant is whose.
 - The body is at most 8 MiB; a template at most 1 MiB; a bundle at most 256 KiB.
 
-*Specified; the body is not built.*
+*Built:* `parseIntakeFormResponse` (lenient: unknown members ignored, `state` required) and the limits
+`kIntakeMaxVariants`, `kIntakeMaxTemplateBytes`, `kIntakeMaxFormBytes`.
 
 ### 4.3 `PUT /v1/submissions/{sid}`
 
@@ -188,6 +198,7 @@ anything, so it is not signed. The respondent sees the hash and can quote it (FO
 client compares `ciphertext_sha256` with the hash of what it sent; a different one is an error.
 
 *Built:* `IntakeArrivalNote`, `parseIntakeArrivalNote`, `newWithdrawalSecret`, `withdrawalSecretHash`.
+The upload itself — the headers and the streaming — belongs to the transport and the server.
 
 ### 4.4 `POST /v1/submissions/{sid}/withdraw`
 
@@ -212,6 +223,8 @@ the stored hash **without an early exit**.
 
 A withdrawal is a *signal to the controller*, not a deletion the server can guarantee (FORM_INTAKE.md
 §5.8, §9.3).
+
+*Built:* `IntakeWithdrawRequest`, `IntakeWithdrawResult`.
 
 ## 5. Organiser operations
 
@@ -295,7 +308,8 @@ any does not. Further:
 
 Answers `200 {"fid": "…", "variants": 2, "bundle_seq": 5}`.
 
-*Specified; the body is not built.*
+*Built:* `parseIntakePublication` (strict: `state` optional, an unknown member **refused**, in the body and
+in a variant), `IntakePublishResult`. *Not built:* the server's verification of each bundle.
 
 ### 5.4 `PUT /v1/forms/{fid}/token`
 
@@ -308,6 +322,9 @@ The organiser's client makes the token (`newInviteToken`), puts it in the invite
 its **hash**: the server never holds a token, it cannot leak one, and rotating it ends a link that spread
 into a forwarded group chat. A form has **one** open token at a time in v1; single-use tokens are deferred
 (FORM_INTAKE.md D6). Answers `200 {"token_set": true}` (`false` after a revoke).
+
+*Built:* `IntakeTokenRequest` (the member must be present — `null` is an answer, a missing member is not),
+`IntakeTokenResult`.
 
 ### 5.5 Listing, fetching, acknowledging, deleting
 
@@ -340,7 +357,9 @@ duplicate.
 `DELETE /v1/submissions/{sid}` — removes the server's copy **without fetching it** (spam). `204`; a
 repeat is `404`. It records no tombstone: it is not a withdrawal.
 
-*Specified; the bodies are not built.*
+*Built:* `IntakeSubmissionPage` and `IntakeListedSubmission` (one bad line spoils the whole page: a list that
+is silently shorter than the server's is worse than an error), `IntakeAckResult`, `isValidIntakeCursor`,
+`intakeSubmissionsTarget`.
 
 ## 6. Errors
 
@@ -356,7 +375,7 @@ the server's as detail.
 
 | Code | Status | Meaning |
 |---|---|---|
-| `bad-request` | 400 | a header, an id or a body outside its grammar |
+| `bad-request` | 400 | a header, an id, a target or a body outside its grammar |
 | `length-required` | 411 | no `Content-Length` on an upload |
 | `invite-invalid` | 401 | the invite token is missing, unknown or revoked |
 | `signature-invalid` | 401 | the signature of an organiser request does not hold, or the header is ill formed |
@@ -364,8 +383,10 @@ the server's as detail.
 | `request-replayed` | 401 | this `(key, nonce)` was seen |
 | `not-allowed` | 403 | the signature holds and the key may not do this |
 | `form-closed` | 403 | the form is closed for uploads |
+| `not-found` | 404 | no such path: nothing in this protocol answers there |
 | `form-unknown` | 404 | no such form |
 | `submission-unknown` | 404 | no such submission, or one already collected; also a wrong withdrawal secret |
+| `method-not-allowed` | 405 | the path exists and does not answer this method |
 | `submission-conflict` | 409 | another body under a `sid` that holds one |
 | `bundle-rollback` | 409 | a `bundle_seq` below the one the server holds |
 | `bundle-invalid` | 422 | a bundle that does not verify, or one for another form |
@@ -376,7 +397,7 @@ the server's as detail.
 | `unavailable` | 503 | the server cannot take it now |
 
 A response whose body is not ours — a proxy's page, a code from a newer server — still gives an error:
-the first code with that status (`502` is `server-error`, an unnamed `4xx` `bad-request`), with the body's
+the first code with that status (`404` is `not-found`, `502` is `server-error`, an unnamed `4xx` `bad-request`), with the body's
 sentence if it has one.
 
 *Built:* `IntakeErrorCode`, `IntakeError`, `parseIntakeError`.
