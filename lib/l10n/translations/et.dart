@@ -1620,6 +1620,46 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Team…': 'Meeskond…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Toimetajad peale sinu, kes on igas bundle’is, et ka nemad saaksid esitusi avada. Lisad kellegi tema toimetaja kaardiga ja sisestad selle kaardi sõrmejälje uuesti.',
+  'Er is nog niemand naast jou.': 'Peale sinu pole veel kedagi.',
+  'Plak de kaart van de redacteur': 'Kleebi toimetaja kaart',
+  'Kaart controleren': 'Kontrolli kaarti',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} kaart. Sisesta selle kaardi sõrmejälg, mille {naam} sulle muud teed andis, näiteks telefonis.',
+  'Redacteur verwijderen': 'Eemalda toimetaja',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Kas eemaldada {naam} meeskonnast? Bundle’id, mille oled juba avaldanud, jäävad samaks, kuni avaldad uuesti; mis on juba {naam} jaoks pitseeritud, jääb sellele inimesele loetavaks.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} on lisatud. Avalda bundle uuesti, et {naam} kaasata.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} on eemaldatud. Avalda bundle uuesti, et {naam} välja jätta.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Loo kõigepealt oma toimetuse võti jaotises Toimetuse võti….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Sinu toimetuse võtit ei saa kasutada. Vaata jaotist Toimetuse võti….',
+  'Dit is geen redacteurskaart.': 'See ei ole toimetaja kaart.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'See kaart on OciDecki uuemast versioonist. Uuenda OciDecki.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kaart sisaldab midagi lubamatut. Palu toimetajalt uut kaarti.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'See sõrmejälg ei sobi kaardiga: kaart on muudetud või ei ole sellelt, kelle arvad. Palu toimetajalt sõrmejälge ja kaarti uuesti.',
+  'Dit is je eigen kaart.': 'See on sinu enda kaart.',
+  'Deze redacteur staat er al.': 'See toimetaja on juba meeskonnas.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Meeskond on täis: bundle kannab kuni 64 korraldajat, sind kaasa arvatud.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Faili team.json töökaustas ei saa lugeda. Midagi ei muudetud; paranda see või kustuta.',
+  'Het team kon niet worden opgeslagen.': 'Meeskonda ei saanud salvestada.',
+  'Deze redacteur staat niet meer in het team.':
+      'Seda toimetajat ei ole enam meeskonnas.',
+  'Naast jou in de bundel: {namen}.': 'Peale sinu bundle’is: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrolli esmalt oma taastevõtit jaotises Toimetuse võti… või lisa teine toimetaja jaotises Meeskond…. Ilma tagasiteeta muutuvad kõik esitused loetamatuks, kui see seade läheb katki.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Faili team.json töökaustas ei saa lugeda. Midagi ei allkirjastata.',
   'Redacteurskaart maken…': 'Loo toimetaja kaart…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Toimetaja kaardiga lisab vormi omanik sind bundle’isse, et ka sina saaksid esitusi avada. Kaarti tohib saata e-postiga.',
@@ -1683,8 +1723,6 @@ const _dutchSourceAddEt = <String, String>{
       'Võtmehoidjat ei saa lugeda. Midagi ei allkirjastatud.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Salvestatud toimetuse võtit ei saa lugeda. Kustuta see jaotises Toimetuse võti… ja taasta oma taastevõtmest.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Kontrolli esmalt oma taastevõtit jaotises Toimetuse võti…. Ilma tagasiteeta muutuvad kõik esitused loetamatuks, kui see seade läheb katki.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Selle vormi bundle\'it töökaustas ei saa lugeda või see ei kuulu teiste juurde. Siis ei saa järjekorranumbrit määrata ja midagi ei allkirjastata. Kontrolli: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

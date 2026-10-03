@@ -1626,6 +1626,46 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktörerna förutom du som står i varje bundle, så att de också kan öppna inlämningarna. Du lägger till någon med deras redaktörskort och skriver in kortets fingeravtryck igen.',
+  'Er is nog niemand naast jou.': 'Det finns ingen förutom du ännu.',
+  'Plak de kaart van de redacteur': 'Klistra in redaktörens kort',
+  'Kaart controleren': 'Kontrollera kort',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kort från {naam}. Skriv in fingeravtrycket för det här kortet som {naam} gav dig på ett annat sätt, till exempel i telefon.',
+  'Redacteur verwijderen': 'Ta bort redaktör',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Ta bort {naam} från teamet? Bundles du redan har publicerat förblir som de är tills du publicerar igen; det som redan förseglats för {naam} förblir läsbart för den personen.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} har lagts till. Publicera bundlen igen för att ta med {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} har tagits bort. Publicera bundlen igen för att ta bort {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Skapa först din egen redaktionsnyckel under Redaktionsnyckel….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Din redaktionsnyckel går inte att använda. Titta under Redaktionsnyckel….',
+  'Dit is geen redacteurskaart.': 'Det här är inte ett redaktörskort.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Det här kortet är från en nyare version av OciDeck. Uppdatera OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kortet innehåller något som inte är tillåtet. Be redaktören om ett nytt kort.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Det här fingeravtrycket passar inte kortet: kortet har ändrats eller är inte från den du tror. Be redaktören om fingeravtrycket och kortet igen.',
+  'Dit is je eigen kaart.': 'Det här är ditt eget kort.',
+  'Deze redacteur staat er al.': 'Den här redaktören finns redan i teamet.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Teamet är fullt: en bundle bär högst 64 arrangörer, dig inräknad.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Filen team.json i arbetsmappen går inte att läsa. Inget har ändrats; reparera eller ta bort den.',
+  'Het team kon niet worden opgeslagen.': 'Teamet kunde inte sparas.',
+  'Deze redacteur staat niet meer in het team.':
+      'Den här redaktören finns inte längre i teamet.',
+  'Naast jou in de bundel: {namen}.': 'Förutom du i bundlen: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrollera först din återställningsnyckel under Redaktionsnyckel… eller lägg till en andra redaktör under Team…. Utan väg tillbaka blir alla inlämningar oläsliga om den här enheten går sönder.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Filen team.json i arbetsmappen går inte att läsa. Inget signeras.',
   'Redacteurskaart maken…': 'Skapa redaktörskort…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Med ett redaktörskort lägger ägaren av ett formulär till dig i bundlen, så att du också kan öppna inlämningarna. Kortet får skickas med e-post.',
@@ -1690,8 +1730,6 @@ const _dutchSourceAddSv = <String, String>{
       'Nyckelringen går inte att läsa. Inget har signerats.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Den sparade redaktionsnyckeln går inte att läsa. Ta bort den under Redaktionsnyckel… och återställ den från din återställningsnyckel.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Kontrollera först din återställningsnyckel under Redaktionsnyckel…. Utan väg tillbaka blir alla inlämningar oläsliga om den här enheten går sönder.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'En bundle för det här formuläret i arbetsmappen går inte att läsa eller hör inte ihop med de andra. Då går löpnumret inte att avgöra och inget signeras. Kontrollera: {pad}',
   'Vul een naam in van hooguit 80 tekens.': 'Ange ett namn på högst 80 tecken.',

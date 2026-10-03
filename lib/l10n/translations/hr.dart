@@ -1631,6 +1631,46 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Team…': 'Tim…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Urednici osim tebe koji su u svakom bundleu, da i oni mogu otvarati prijave. Dodaješ nekoga njegovom karticom urednika i ponovno upisuješ otisak prsta te kartice.',
+  'Er is nog niemand naast jou.': 'Osim tebe još nikoga nema.',
+  'Plak de kaart van de redacteur': 'Zalijepi karticu urednika',
+  'Kaart controleren': 'Provjeri karticu',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kartica: {naam}. Upiši otisak prsta ove kartice koji ti je {naam} dao drugim putem, na primjer telefonom.',
+  'Redacteur verwijderen': 'Ukloni urednika',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Ukloniti {naam} iz tima? Bundlei koje si već objavio ostaju kakvi jesu dok ponovno ne objaviš; ono što je već zapečaćeno za {naam} ostaje čitljivo toj osobi.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} je dodan. Ponovno objavi bundle da bi uključio {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} je uklonjen. Ponovno objavi bundle da bi izuzeo {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Prvo izradi vlastiti ključ redakcije u Ključ redakcije….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Tvoj ključ redakcije nije upotrebljiv. Pogledaj u Ključ redakcije….',
+  'Dit is geen redacteurskaart.': 'Ovo nije kartica urednika.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ova kartica je iz novije verzije OciDecka. Ažuriraj OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kartica sadrži nešto što nije dopušteno. Zatraži od urednika novu karticu.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ovaj otisak prsta ne odgovara kartici: kartica je promijenjena ili nije od onoga koga misliš. Ponovno zatraži od urednika otisak prsta i karticu.',
+  'Dit is je eigen kaart.': 'Ovo je tvoja vlastita kartica.',
+  'Deze redacteur staat er al.': 'Ovaj urednik već je u timu.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tim je pun: bundle nosi najviše 64 organizatora, računajući i tebe.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Datoteka team.json u radnoj mapi nije čitljiva. Ništa nije promijenjeno; popravi je ili izbriši.',
+  'Het team kon niet worden opgeslagen.': 'Tim nije bilo moguće spremiti.',
+  'Deze redacteur staat niet meer in het team.':
+      'Ovog urednika više nema u timu.',
+  'Naast jou in de bundel: {namen}.': 'Osim tebe u bundleu: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Najprije provjeri ključ za oporavak u Ključ redakcije… ili dodaj drugog urednika u Tim…. Bez puta natrag sve prijave postaju nečitljive ako se ovaj uređaj pokvari.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Datoteka team.json u radnoj mapi nije čitljiva. Ništa se ne potpisuje.',
   'Redacteurskaart maken…': 'Izradi karticu urednika…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Karticom urednika vlasnik obrasca dodaje te u bundle, tako da i ti možeš otvarati prijave. Karticu se smije poslati e-poštom.',
@@ -1696,8 +1736,6 @@ const _dutchSourceAddHr = <String, String>{
       'Privjesak ključeva nije čitljiv. Ništa nije potpisano.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Pohranjeni ključ redakcije nije čitljiv. Izbriši ga u Ključ redakcije… i vrati ga iz ključa za oporavak.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Najprije provjeri ključ za oporavak u Ključ redakcije…. Bez puta natrag sve prijave postaju nečitljive ako se ovaj uređaj pokvari.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Bundle ovog obrasca u radnoj mapi nije čitljiv ili ne pripada ostalima. Tada se redni broj ne može odrediti i ništa se ne potpisuje. Provjeri: {pad}',
   'Vul een naam in van hooguit 80 tekens.': 'Unesi ime od najviše 80 znakova.',

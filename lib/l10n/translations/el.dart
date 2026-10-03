@@ -1652,6 +1652,46 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Team…': 'Ομάδα…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Οι συντάκτες εκτός από εσάς που είναι σε κάθε δέσμη, ώστε να μπορούν κι αυτοί να ανοίγουν τις υποβολές. Προσθέτετε κάποιον με την κάρτα συντάκτη του και πληκτρολογείτε ξανά το δακτυλικό αποτύπωμα της κάρτας.',
+  'Er is nog niemand naast jou.': 'Δεν υπάρχει ακόμη κανείς εκτός από εσάς.',
+  'Plak de kaart van de redacteur': 'Επικολλήστε την κάρτα του συντάκτη',
+  'Kaart controleren': 'Έλεγχος κάρτας',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Κάρτα του/της {naam}. Πληκτρολογήστε το δακτυλικό αποτύπωμα αυτής της κάρτας που σας έδωσε ο/η {naam} με άλλον τρόπο, π.χ. τηλεφωνικά.',
+  'Redacteur verwijderen': 'Αφαίρεση συντάκτη',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Αφαίρεση του/της {naam} από την ομάδα; Οι δέσμες που έχετε ήδη δημοσιεύσει μένουν όπως είναι μέχρι να δημοσιεύσετε ξανά· ό,τι έχει ήδη σφραγιστεί για τον/την {naam} παραμένει αναγνώσιμο για το άτομο αυτό.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      'Ο/Η {naam} προστέθηκε. Δημοσιεύστε ξανά τη δέσμη για να συμπεριληφθεί ο/η {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      'Ο/Η {naam} αφαιρέθηκε. Δημοσιεύστε ξανά τη δέσμη για να αφαιρεθεί ο/η {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Δημιουργήστε πρώτα το δικό σας κλειδί συντακτικής ομάδας στο Κλειδί συντακτικής ομάδας….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Το κλειδί συντακτικής ομάδας σας δεν μπορεί να χρησιμοποιηθεί. Δείτε στο Κλειδί συντακτικής ομάδας….',
+  'Dit is geen redacteurskaart.': 'Αυτή δεν είναι κάρτα συντάκτη.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Αυτή η κάρτα είναι από νεότερη έκδοση του OciDeck. Ενημερώστε το OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Η κάρτα περιέχει κάτι που δεν επιτρέπεται. Ζητήστε από τον συντάκτη νέα κάρτα.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Αυτό το δακτυλικό αποτύπωμα δεν ταιριάζει με την κάρτα: η κάρτα έχει αλλάξει ή δεν είναι από αυτόν που νομίζετε. Ζητήστε ξανά από τον συντάκτη το δακτυλικό αποτύπωμα και την κάρτα.',
+  'Dit is je eigen kaart.': 'Αυτή είναι η δική σας κάρτα.',
+  'Deze redacteur staat er al.': 'Αυτός ο συντάκτης είναι ήδη στην ομάδα.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Η ομάδα είναι πλήρης: μια δέσμη φέρει το πολύ 64 διοργανωτές, μαζί με εσάς.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Το αρχείο team.json στον φάκελο εργασίας δεν μπορεί να διαβαστεί. Δεν άλλαξε τίποτα· επισκευάστε το ή διαγράψτε το.',
+  'Het team kon niet worden opgeslagen.': 'Η ομάδα δεν μπόρεσε να αποθηκευτεί.',
+  'Deze redacteur staat niet meer in het team.':
+      'Αυτός ο συντάκτης δεν είναι πια στην ομάδα.',
+  'Naast jou in de bundel: {namen}.': 'Εκτός από εσάς στη δέσμη: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Ελέγξτε πρώτα το κλειδί ανάκτησης στο Κλειδί συντακτικής ομάδας… ή προσθέστε δεύτερο συντάκτη στο Ομάδα…. Χωρίς δρόμο επιστροφής, όλες οι υποβολές γίνονται δυσανάγνωστες αν χαλάσει αυτή η συσκευή.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Το αρχείο team.json στον φάκελο εργασίας δεν μπορεί να διαβαστεί. Δεν υπογράφεται τίποτα.',
   'Redacteurskaart maken…': 'Δημιουργία κάρτας συντάκτη…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Με μια κάρτα συντάκτη, ο κάτοχος μιας φόρμας σας προσθέτει στη δέσμη, ώστε να μπορείτε κι εσείς να ανοίγετε τις υποβολές. Η κάρτα μπορεί να σταλεί με email.',
@@ -1717,8 +1757,6 @@ const _dutchSourceAddEl = <String, String>{
       'Η κλειδοθήκη δεν μπορεί να διαβαστεί. Δεν υπογράφηκε τίποτα.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Το αποθηκευμένο κλειδί συντακτικής ομάδας δεν μπορεί να διαβαστεί. Διαγράψτε το στο Κλειδί συντακτικής ομάδας… και επαναφέρετέ το από το κλειδί ανάκτησης.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Ελέγξτε πρώτα το κλειδί ανάκτησης στο Κλειδί συντακτικής ομάδας…. Χωρίς δρόμο επιστροφής, όλες οι υποβολές γίνονται δυσανάγνωστες αν χαλάσει αυτή η συσκευή.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Μια δέσμη αυτής της φόρμας στον φάκελο εργασίας δεν μπορεί να διαβαστεί ή δεν ανήκει στις υπόλοιπες. Έτσι ο σειριακός αριθμός δεν μπορεί να προσδιοριστεί και δεν υπογράφεται τίποτα. Ελέγξτε: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

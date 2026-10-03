@@ -1627,6 +1627,46 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Team…': 'Hold…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktørerne ud over dig, som står i hver bundle, så de også kan åbne indsendelserne. Du tilføjer nogen med deres redaktørkort og skriver kortets fingeraftryk igen.',
+  'Er is nog niemand naast jou.': 'Der er ikke nogen ud over dig endnu.',
+  'Plak de kaart van de redacteur': 'Indsæt redaktørens kort',
+  'Kaart controleren': 'Kontrollér kort',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kort fra {naam}. Skriv kortets fingeraftryk, som {naam} gav dig ad en anden vej, for eksempel i telefonen.',
+  'Redacteur verwijderen': 'Fjern redaktør',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Fjern {naam} fra holdet? Bundles, du allerede har udgivet, forbliver som de er, indtil du udgiver igen; det, der allerede er forseglet til {naam}, forbliver læsbart for vedkommende.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} er tilføjet. Udgiv bundlen igen for at medtage {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} er fjernet. Udgiv bundlen igen for at tage {naam} ud.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Opret først din egen redaktionsnøgle under Redaktionsnøgle….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Din redaktionsnøgle kan ikke bruges. Se under Redaktionsnøgle….',
+  'Dit is geen redacteurskaart.': 'Det er ikke et redaktørkort.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Dette kort er fra en nyere version af OciDeck. Opdater OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kortet indeholder noget, der ikke er tilladt. Bed redaktøren om et nyt kort.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Dette fingeraftryk passer ikke til kortet: Kortet er ændret eller ikke fra den, du tror. Bed redaktøren om fingeraftrykket og kortet igen.',
+  'Dit is je eigen kaart.': 'Det er dit eget kort.',
+  'Deze redacteur staat er al.': 'Denne redaktør er allerede på holdet.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Holdet er fuldt: En bundle bærer højst 64 arrangører, dig medregnet.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Filen team.json i arbejdsmappen kan ikke læses. Intet er ændret; reparér eller slet den.',
+  'Het team kon niet worden opgeslagen.': 'Holdet kunne ikke gemmes.',
+  'Deze redacteur staat niet meer in het team.':
+      'Denne redaktør er ikke længere på holdet.',
+  'Naast jou in de bundel: {namen}.': 'Ud over dig i bundlen: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrollér først din gendannelsesnøgle under Redaktionsnøgle…, eller tilføj en anden redaktør under Hold…. Uden en vej tilbage er alle indsendelser ulæselige, hvis denne enhed går i stykker.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Filen team.json i arbejdsmappen kan ikke læses. Intet underskrives.',
   'Redacteurskaart maken…': 'Opret redaktørkort…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Med et redaktørkort tilføjer ejeren af en formular dig til bundlen, så du også kan åbne indsendelserne. Kortet må sendes med mail.',
@@ -1691,8 +1731,6 @@ const _dutchSourceAddDa = <String, String>{
       'Nøgleringen kan ikke læses. Intet er underskrevet.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Den gemte redaktionsnøgle kan ikke læses. Slet den under Redaktionsnøgle… og gendan den fra din gendannelsesnøgle.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Kontrollér først din gendannelsesnøgle under Redaktionsnøgle…. Uden en vej tilbage er alle indsendelser ulæselige, hvis denne enhed går i stykker.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'En bundle til denne formular i arbejdsmappen kan ikke læses eller hører ikke sammen med de andre. Så kan løbenummeret ikke afgøres, og intet underskrives. Kontrollér: {pad}',
   'Vul een naam in van hooguit 80 tekens.': 'Skriv et navn på højst 80 tegn.',

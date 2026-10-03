@@ -1625,6 +1625,46 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Team…': 'Komanda…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktori bez jums, kas ir katrā bundle, lai arī viņi varētu atvērt iesūtījumus. Jūs pievienojat kādu ar viņa redaktora karti un vēlreiz ievadāt šīs kartes pirkstu nospiedumu.',
+  'Er is nog niemand naast jou.': 'Bez jums vēl neviena nav.',
+  'Plak de kaart van de redacteur': 'Ielīmējiet redaktora karti',
+  'Kaart controleren': 'Pārbaudīt karti',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} karte. Ievadiet šīs kartes pirkstu nospiedumu, ko {naam} jums iedeva citā ceļā, piemēram, pa tālruni.',
+  'Redacteur verwijderen': 'Noņemt redaktoru',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Noņemt {naam} no komandas? Bundle, ko jau esat publicējis, paliek tādi, kādi ir, līdz publicējat vēlreiz; tas, kas jau aizzīmogots {naam}, šai personai paliek lasāms.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} ir pievienots. Publicējiet bundle vēlreiz, lai iekļautu {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} ir noņemts. Publicējiet bundle vēlreiz, lai izņemtu {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Vispirms izveidojiet savu redakcijas atslēgu sadaļā Redakcijas atslēga….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Jūsu redakcijas atslēgu nevar izmantot. Skatiet sadaļā Redakcijas atslēga….',
+  'Dit is geen redacteurskaart.': 'Šī nav redaktora karte.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Šī karte ir no jaunākas OciDeck versijas. Atjauniniet OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Karte satur kaut ko nepieļaujamu. Lūdziet redaktoram jaunu karti.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Šis pirkstu nospiedums neatbilst kartei: karte ir mainīta vai nav no tā, kuru domājat. Vēlreiz lūdziet redaktoram pirkstu nospiedumu un karti.',
+  'Dit is je eigen kaart.': 'Šī ir jūsu pašu karte.',
+  'Deze redacteur staat er al.': 'Šis redaktors jau ir komandā.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Komanda ir pilna: bundle nes ne vairāk kā 64 organizatorus, ieskaitot jūs.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Faila team.json darba mapē nevar nolasīt. Nekas nav mainīts; salabojiet vai dzēsiet to.',
+  'Het team kon niet worden opgeslagen.': 'Komandu neizdevās saglabāt.',
+  'Deze redacteur staat niet meer in het team.':
+      'Šī redaktora komandā vairs nav.',
+  'Naast jou in de bundel: {namen}.': 'Bez jums bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Vispirms pārbaudiet atkopšanas atslēgu sadaļā Redakcijas atslēga… vai pievienojiet otru redaktoru sadaļā Komanda…. Bez ceļa atpakaļ visi iesūtījumi kļūs nelasāmi, ja šī ierīce salūzīs.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Faila team.json darba mapē nevar nolasīt. Nekas netiek parakstīts.',
   'Redacteurskaart maken…': 'Izveidot redaktora karti…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Ar redaktora karti veidlapas īpašnieks pievieno jūs bundle, lai arī jūs varētu atvērt iesūtījumus. Karti drīkst nosūtīt pa e-pastu.',
@@ -1689,8 +1729,6 @@ const _dutchSourceAddLv = <String, String>{
       'Atslēgu saišķi nevar nolasīt. Nekas netika parakstīts.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Saglabāto redakcijas atslēgu nevar nolasīt. Dzēsiet to sadaļā Redakcijas atslēga… un atjaunojiet no atkopšanas atslēgas.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Vispirms pārbaudiet atkopšanas atslēgu sadaļā Redakcijas atslēga…. Bez ceļa atpakaļ visi iesūtījumi kļūs nelasāmi, ja šī ierīce salūzīs.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Šīs veidlapas bundle darba mapē nevar nolasīt, vai arī tas nepieder pie pārējiem. Tad kārtas numuru nevar noteikt un nekas netiek parakstīts. Pārbaudiet: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

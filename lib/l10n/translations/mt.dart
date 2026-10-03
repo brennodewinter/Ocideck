@@ -1645,6 +1645,46 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Team…': 'Tim…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'L-edituri minbarra int li jinsabu f’kull bundle, biex huma wkoll ikunu jistgħu jiftħu s-sottomissjonijiet. Tżid lil xi ħadd bil-karta tal-editur tiegħu u terġa’ tittajpja l-marka tas-swaba’ ta’ dik il-karta.',
+  'Er is nog niemand naast jou.': 'Għad m’hemm ħadd minbarra int.',
+  'Plak de kaart van de redacteur': 'Waħħal il-karta tal-editur',
+  'Kaart controleren': 'Iċċekkja l-karta',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta ta’ {naam}. Ittajpja l-marka tas-swaba’ ta’ din il-karta li {naam} tak b’mod ieħor, pereżempju bit-telefon.',
+  'Redacteur verwijderen': 'Neħħi l-editur',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Tneħħi lil {naam} mit-tim? Bundles li diġà ppubblikajt jibqgħu kif inhuma sakemm terġa’ tippubblika; dak li diġà ġie ssiġillat għal {naam} jibqa’ jinqara minn dak il-persuna.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} ġie miżjud. Erġa’ ippubblika l-bundle biex jiddaħħal {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} ġie mneħħi. Erġa’ ippubblika l-bundle biex joħroġ {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'L-ewwel oħloq iċ-ċavetta tar-redazzjoni tiegħek stess taħt Ċavetta tar-redazzjoni….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Iċ-ċavetta tar-redazzjoni tiegħek ma tistax tintuża. Ara taħt Ċavetta tar-redazzjoni….',
+  'Dit is geen redacteurskaart.': 'Din mhijiex karta ta’ editur.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Din il-karta hija minn verżjoni aktar ġdida ta’ OciDeck. Aġġorna OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Il-karta fiha xi ħaġa li ma hijiex permessa. Itlob lill-editur karta ġdida.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Din il-marka tas-swaba’ ma taqbilx mal-karta: il-karta inbidlet jew mhijiex minn dak li taħseb. Itlob mill-ġdid lill-editur il-marka tas-swaba’ u l-karta.',
+  'Dit is je eigen kaart.': 'Din hija l-karta tiegħek stess.',
+  'Deze redacteur staat er al.': 'Dan l-editur diġà jinsab fit-tim.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'It-tim huwa mimli: bundle iġorr l-aktar 64 organizzatur, int inkluż.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Il-fajl team.json fil-cartella tax-xogħol ma jistax jinqara. Ma nbidel xejn; irranġah jew ħassru.',
+  'Het team kon niet worden opgeslagen.': 'It-tim ma setax jinħażen.',
+  'Deze redacteur staat niet meer in het team.':
+      'Dan l-editur m’għadux fit-tim.',
+  'Naast jou in de bundel: {namen}.': 'Minbarra int fil-bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'L-ewwel iċċekkja ċ-ċavetta tal-irkupru tiegħek taħt Ċavetta tar-redazzjoni…, jew żid it-tieni editur taħt Tim…. Mingħajr triq lura, is-sottomissjonijiet kollha jsiru illeġibbli jekk dan l-apparat jitkisser.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Il-fajl team.json fil-cartella tax-xogħol ma jistax jinqara. Ma jiġi ffirmat xejn.',
   'Redacteurskaart maken…': 'Oħloq karta tal-editur…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'B’karta tal-editur, is-sid ta’ formola jżiedek mal-bundle, biex int ukoll tkun tista’ tiftaħ is-sottomissjonijiet. Il-karta tista’ tintbagħat bl-email.',
@@ -1710,8 +1750,6 @@ const _dutchSourceAddMt = <String, String>{
       'Il-keychain ma jistax jinqara. Ma ġie ffirmat xejn.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Iċ-ċavetta tar-redazzjoni maħżuna ma tistax tinqara. Neħħiha taħt Ċavetta tar-redazzjoni… u irkuprha miċ-ċavetta tal-irkupru tiegħek.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'L-ewwel iċċekkja ċ-ċavetta tal-irkupru tiegħek taħt Ċavetta tar-redazzjoni…. Mingħajr triq lura, is-sottomissjonijiet kollha jsiru illeġibbli jekk dan l-apparat jitkisser.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Bundle ta\' din il-formola fil-cartella tax-xogħol ma jistax jinqara jew ma jappartjenix mal-oħrajn. B\'hekk in-numru sekwenzjali ma jistax jiġi ddeterminat u ma jiġi ffirmat xejn. Iċċekkja: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

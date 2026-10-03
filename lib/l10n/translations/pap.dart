@@ -666,6 +666,46 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'E redaktornan banda di bo ku ta den kada bundel, pa nan tambe por habri e envionan. Bo ta agregá un persona ku su karta di redaktor i bo ta tipa e huella digital di e karta atrás.',
+  'Er is nog niemand naast jou.': 'Ainda no tin ningun persona banda di bo.',
+  'Plak de kaart van de redacteur': 'Pega e karta di e redaktor',
+  'Kaart controleren': 'Kontrolá karta',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta di {naam}. Tipa e huella digital di e karta akí ku {naam} a duna bo via un otro kaminda, por ehèmpel pa telefòn.',
+  'Redacteur verwijderen': 'Kita redaktor',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Kita {naam} for di e team? Bundelnan ku bo a publiká kaba ta keda manera nan ta te ora bo publiká di nobo; loke kaba a wòrdu sellá pa {naam} ta keda lesibel pa e persona ei.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} a wòrdu agregá. Publiká e bundel di nobo pa inkluí {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} a wòrdu kitá. Publiká e bundel di nobo pa kita {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Krea promé bo propio yave di redakshon bou di Yave di redakshon….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Bo yave di redakshon no por wòrdu usá. Wak bou di Yave di redakshon….',
+  'Dit is geen redacteurskaart.': 'Esaki no ta un karta di redaktor.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'E karta akí ta di un vershon mas nobo di OciDeck. Aktualisá OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'E karta ta kontené algu ku no ta permití. Pidi e redaktor pa un karta nobo.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'E huella digital akí no ta bai ku e karta: e karta a wòrdu kambia of no ta di ken bo ta pensa. Pidi e redaktor di nobo pa e huella digital i e karta.',
+  'Dit is je eigen kaart.': 'Esaki ta bo propio karta.',
+  'Deze redacteur staat er al.': 'E redaktor akí ta den e team kaba.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'E team ta yen: un bundel ta karga máksimo 64 organisadó, bo inkluí.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'E archivo team.json den e mapa di trabou no por wòrdu lesá. Nada no a wòrdu kambia; repará of eliminá e.',
+  'Het team kon niet worden opgeslagen.': 'No por a warda e team.',
+  'Deze redacteur staat niet meer in het team.':
+      'E redaktor akí no ta den e team mas.',
+  'Naast jou in de bundel: {namen}.': 'Banda di bo den e bundel: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrolá promé bo yave di rekuperashon bou di Yave di redakshon…, òf agregá un di dos redaktor bou di Team…. Sin kaminda di bèk, tur envio ta bira ilegibel si e aparato akí kibra.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'E archivo team.json den e mapa di trabou no por wòrdu lesá. Nada no ta wòrdu firmá.',
   'Redacteurskaart maken…': 'Krea karta di redaktor…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Ku un karta di redaktor e dueño di un formulario ta agregá bo na e bundel, pa bo tambe por habri e envionan. E karta por wòrdu mandá pa e-mail.',
@@ -730,8 +770,6 @@ const _dutchSourceAddPap = {
       'E yavero no por wòrdu lesá. Nada no a wòrdu firmá.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'E yave di redakshon warda no por wòrdu lesá. Eliminá e bou di Yave di redakshon… i rekuperá e for di bo yave di rekuperashon.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Kontrolá promé bo yave di rekuperashon bou di Yave di redakshon…. Sin kaminda di bèk, tur envio ta bira ilegibel si e aparato akí kibra.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Un bundel di e formulario akí den e mapa di trabou no por wòrdu lesá of no ta pertenesé na e otronan. Ta ku esei no por determiná e number di sekuensia i no ta firma nada. Kontrolá: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

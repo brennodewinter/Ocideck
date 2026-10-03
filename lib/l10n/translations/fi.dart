@@ -1627,6 +1627,46 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Team…': 'Tiimi…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Toimittajat sinun lisäksesi, jotka ovat jokaisessa bundlessa, jotta hekin voivat avata lähetykset. Lisäät jonkun hänen toimittajakortillaan ja kirjoitat kortin sormenjäljen uudelleen.',
+  'Er is nog niemand naast jou.': 'Sinun lisäksesi ei ole vielä ketään.',
+  'Plak de kaart van de redacteur': 'Liitä toimittajan kortti',
+  'Kaart controleren': 'Tarkista kortti',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kortti: {naam}. Kirjoita tämän kortin sormenjälki, jonka {naam} antoi sinulle muuta tietä, esimerkiksi puhelimessa.',
+  'Redacteur verwijderen': 'Poista toimittaja',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Poistetaanko {naam} tiimistä? Jo julkaisemasi bundlet pysyvät sellaisina kuin ovat, kunnes julkaiset uudelleen; se, mikä on jo sinetöity henkilölle {naam}, pysyy hänelle luettavana.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} on lisätty. Julkaise bundle uudelleen, jotta {naam} tulee mukaan.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} on poistettu. Julkaise bundle uudelleen, jotta {naam} poistuu.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Luo ensin oma toimituksen avaimesi kohdassa Toimituksen avain….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Toimituksen avaintasi ei voi käyttää. Katso kohtaa Toimituksen avain….',
+  'Dit is geen redacteurskaart.': 'Tämä ei ole toimittajakortti.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Tämä kortti on OciDeckin uudemmasta versiosta. Päivitä OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kortti sisältää jotain, mikä ei ole sallittua. Pyydä toimittajalta uusi kortti.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Tämä sormenjälki ei sovi korttiin: kortti on muuttunut tai se ei ole keneltä luulet. Pyydä toimittajalta sormenjälki ja kortti uudelleen.',
+  'Dit is je eigen kaart.': 'Tämä on oma korttisi.',
+  'Deze redacteur staat er al.': 'Tämä toimittaja on jo tiimissä.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tiimi on täynnä: bundle kantaa enintään 64 järjestäjää, sinut mukaan lukien.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Työkansion tiedostoa team.json ei voi lukea. Mitään ei muutettu; korjaa tai poista se.',
+  'Het team kon niet worden opgeslagen.': 'Tiimiä ei voitu tallentaa.',
+  'Deze redacteur staat niet meer in het team.':
+      'Tämä toimittaja ei ole enää tiimissä.',
+  'Naast jou in de bundel: {namen}.': 'Sinun lisäksesi bundlessa: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Tarkista ensin palautusavaimesi kohdassa Toimituksen avain… tai lisää toinen toimittaja kohdassa Tiimi…. Ilman paluutietä kaikki lähetykset muuttuvat lukukelvottomiksi, jos tämä laite rikkoutuu.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Työkansion tiedostoa team.json ei voi lukea. Mitään ei allekirjoiteta.',
   'Redacteurskaart maken…': 'Luo toimittajakortti…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'Toimittajakortilla lomakkeen omistaja lisää sinut bundleen, jotta myös sinä voit avata lähetykset. Kortin voi lähettää sähköpostilla.',
@@ -1691,8 +1731,6 @@ const _dutchSourceAddFi = <String, String>{
       'Avainnippua ei voi lukea. Mitään ei allekirjoitettu.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'Tallennettua toimituksen avainta ei voi lukea. Poista se kohdassa Toimituksen avain… ja palauta se palautusavaimestasi.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'Tarkista ensin palautusavaimesi kohdassa Toimituksen avain…. Ilman paluutietä kaikki lähetykset muuttuvat lukukelvottomiksi, jos tämä laite rikkoutuu.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'Tämän lomakkeen bundlea työkansiossa ei voi lukea tai se ei kuulu muiden joukkoon. Silloin järjestysnumeroa ei voi määrittää, eikä mitään allekirjoiteta. Tarkista: {pad}',
   'Vul een naam in van hooguit 80 tekens.':

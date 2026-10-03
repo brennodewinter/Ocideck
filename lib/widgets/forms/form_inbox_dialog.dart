@@ -24,6 +24,7 @@ import 'form_book_dialog.dart';
 import 'form_bundle_dialog.dart';
 import 'form_inbox_list.dart';
 import 'form_keys_dialog.dart';
+import 'form_team_dialog.dart';
 import 'form_text_helpers.dart' show formTextOf;
 
 /// De kiezers van de Inbox: wat het systeem laat kiezen, als naad voor de test.
@@ -324,6 +325,16 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
     );
   }
 
+  Future<void> _openTeam() async {
+    final workspace = _workspace;
+    if (workspace == null) return;
+    await showFormTeamDialog(
+      context,
+      workspace: workspace,
+      keys: ref.read(formKeyServiceProvider),
+    );
+  }
+
   Future<void> _publishBundle() async {
     final workspace = _workspace;
     if (workspace == null) return;
@@ -376,6 +387,11 @@ class _FormInboxDialogState extends ConsumerState<FormInboxDialog> {
           onPressed: _busy ? null : () => showFormKeysDialog(context),
           child: Text(l10n.d('Redactiesleutel…')),
         ),
+      ),
+      const SizedBox(width: 8),
+      OutlinedButton(
+        onPressed: _busy || _workspace == null ? null : _openTeam,
+        child: Text(l10n.d('Team…')),
       ),
       const Spacer(),
       TextButton(

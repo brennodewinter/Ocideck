@@ -827,6 +827,46 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Team…': 'Team…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'The editors besides you who are in every bundle, so they can open the submissions too. You add someone with their editor card and type back the fingerprint of that card.',
+  'Er is nog niemand naast jou.': 'There is nobody besides you yet.',
+  'Plak de kaart van de redacteur': 'Paste the editor\'s card',
+  'Kaart controleren': 'Check card',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Card of {naam}. Type the fingerprint of this card that {naam} gave you by another route, for example over the phone.',
+  'Redacteur verwijderen': 'Remove editor',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Remove {naam} from the team? Bundles you have already published stay as they are until you publish again; what was already sealed for {naam} stays readable to that person.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} has been added. Publish the bundle again to include {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} has been removed. Publish the bundle again to take {naam} out.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'First create your own editorial key under Editorial key….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Your editorial key cannot be used. Look under Editorial key….',
+  'Dit is geen redacteurskaart.': 'This is not an editor card.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'This card is from a newer version of OciDeck. Update OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'The card contains something that is not allowed. Ask the editor for a new card.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'This fingerprint does not match the card: the card has been changed or is not from who you think. Ask the editor for the fingerprint and the card again.',
+  'Dit is je eigen kaart.': 'This is your own card.',
+  'Deze redacteur staat er al.': 'This editor is already in the team.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'The team is full: a bundle carries at most 64 organisers, you included.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'The file team.json in the workspace cannot be read. Nothing was changed; repair or delete it.',
+  'Het team kon niet worden opgeslagen.': 'The team could not be saved.',
+  'Deze redacteur staat niet meer in het team.':
+      'This editor is no longer in the team.',
+  'Naast jou in de bundel: {namen}.': 'Besides you in the bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'First check your recovery key under Editorial key…, or add a second editor under Team…. Without a way back, every submission is unreadable if this device breaks.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'The file team.json in the workspace cannot be read. Nothing is signed.',
   'Redacteurskaart maken…': 'Create editor card…',
   'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
       'With an editor card, the owner of a form adds you to the bundle, so you can open the submissions too. The card may be sent by email.',
@@ -892,8 +932,6 @@ const _dutchSourceAddEn = {
       'The keychain cannot be read. Nothing was signed.',
   'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
       'The stored editorial key cannot be read. Delete it under Editorial key… and restore it from your recovery key.',
-  'Controleer eerst je herstelsleutel onder Redactiesleutel…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
-      'First check your recovery key under Editorial key…. Without a way back, every submission is unreadable if this device breaks.',
   'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
       'A bundle of this form in the workspace cannot be read or does not belong with the others. That makes the sequence number impossible to determine, so nothing is signed. Check: {pad}',
   'Vul een naam in van hooguit 80 tekens.':
