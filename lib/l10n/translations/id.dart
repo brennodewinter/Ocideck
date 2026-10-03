@@ -1627,6 +1627,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Redacteurskaart maken…': 'Buat kartu redaktur…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Dengan kartu redaktur, pemilik formulir menambahkan Anda ke bundel, sehingga Anda juga dapat membuka kiriman. Kartu boleh dikirim lewat email.',
+  'Jouw naam op de kaart': 'Nama Anda di kartu',
+  'Kaart maken': 'Buat kartu',
+  'Kaart kopiëren': 'Salin kartu',
+  'Vingerafdruk van de kaart': 'Sidik jari kartu',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Berikan sidik jari ini kepada pemilik lewat jalur lain selain kartu, misalnya lewat telepon. Pemilik mengetiknya kembali sebelum menambahkan Anda.',
   'Verzegeld opslaan…': 'Simpan tersegel…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Berkas terenkripsi (.zip.age) yang hanya dapat dibuka penyelenggara. Untuk itu Anda memerlukan berkas bundel dan sidik jari dari undangan.',

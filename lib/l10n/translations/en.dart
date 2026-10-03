@@ -827,6 +827,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Redacteurskaart maken…': 'Create editor card…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'With an editor card, the owner of a form adds you to the bundle, so you can open the submissions too. The card may be sent by email.',
+  'Jouw naam op de kaart': 'Your name on the card',
+  'Kaart maken': 'Create card',
+  'Kaart kopiëren': 'Copy card',
+  'Vingerafdruk van de kaart': 'Fingerprint of the card',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Give the owner this fingerprint by another route than the card, for example over the phone. They type it back before adding you.',
   'Verzegeld opslaan…': 'Save sealed…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'An encrypted file (.zip.age) that only the organiser can open. For this you need the bundle file and the fingerprint from the invitation.',

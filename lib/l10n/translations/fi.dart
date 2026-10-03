@@ -1627,6 +1627,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Redacteurskaart maken…': 'Luo toimittajakortti…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Toimittajakortilla lomakkeen omistaja lisää sinut bundleen, jotta myös sinä voit avata lähetykset. Kortin voi lähettää sähköpostilla.',
+  'Jouw naam op de kaart': 'Nimesi kortissa',
+  'Kaart maken': 'Luo kortti',
+  'Kaart kopiëren': 'Kopioi kortti',
+  'Vingerafdruk van de kaart': 'Kortin sormenjälki',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Anna omistajalle tämä sormenjälki muuta tietä kuin kortin mukana, esimerkiksi puhelimessa. Hän kirjoittaa sen uudelleen ennen kuin lisää sinut.',
   'Verzegeld opslaan…': 'Tallenna sinetöitynä…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Salattu tiedosto (.zip.age), jonka vain järjestäjä voi avata. Tarvitset siihen bundle-tiedoston ja kutsun sormenjäljen.',

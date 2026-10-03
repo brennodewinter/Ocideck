@@ -664,6 +664,15 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Redacteurskaart maken…': 'Crea scheda del redattore…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Con una scheda del redattore il proprietario di un modulo ti aggiunge al bundle, così anche tu puoi aprire gli invii. La scheda può essere inviata per e-mail.',
+  'Jouw naam op de kaart': 'Il tuo nome sulla scheda',
+  'Kaart maken': 'Crea scheda',
+  'Kaart kopiëren': 'Copia scheda',
+  'Vingerafdruk van de kaart': 'Impronta digitale della scheda',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Dai al proprietario questa impronta digitale per una via diversa dalla scheda, per esempio al telefono. La digita di nuovo prima di aggiungerti.',
   'Verzegeld opslaan…': 'Salva sigillato…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Un file cifrato (.zip.age) che solo l’organizzatore può aprire. Per questo servono il file del bundle e l’impronta digitale dell’invito.',

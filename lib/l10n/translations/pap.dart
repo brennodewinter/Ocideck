@@ -666,6 +666,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Redacteurskaart maken…': 'Krea karta di redaktor…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Ku un karta di redaktor e dueño di un formulario ta agregá bo na e bundel, pa bo tambe por habri e envionan. E karta por wòrdu mandá pa e-mail.',
+  'Jouw naam op de kaart': 'Bo nòmber riba e karta',
+  'Kaart maken': 'Krea karta',
+  'Kaart kopiëren': 'Kopia karta',
+  'Vingerafdruk van de kaart': 'Huella digital di e karta',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Duna e dueño e huella digital akí via un otro kaminda ku e karta, por ehèmpel pa telefòn. E ta tipa e atrás promé ku e agregá bo.',
   'Verzegeld opslaan…': 'Warda sellá…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Un archivo kodifiká (.zip.age) ku solamente e organisadó por habri. Pa esei bo mester e archivo di e bundel i e huella digital di e invitashon.',

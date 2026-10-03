@@ -1634,6 +1634,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Redacteurskaart maken…': 'Sukurti redaktoriaus kortelę…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Redaktoriaus kortele formos savininkas prideda jus prie bundle, kad ir jūs galėtumėte atidaryti pateikimus. Kortelę galima siųsti el. paštu.',
+  'Jouw naam op de kaart': 'Jūsų vardas kortelėje',
+  'Kaart maken': 'Sukurti kortelę',
+  'Kaart kopiëren': 'Kopijuoti kortelę',
+  'Vingerafdruk van de kaart': 'Kortelės kontrolinis kodas',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Perduokite savininkui šį kontrolinį kodą kitu keliu nei kortelę, pavyzdžiui, telefonu. Jis įves jį dar kartą, prieš jus pridėdamas.',
   'Verzegeld opslaan…': 'Įrašyti užplombuotą…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Šifruotas failas (.zip.age), kurį gali atidaryti tik organizatorius. Tam reikia bundle failo ir kontrolinio kodo iš kvietimo.',

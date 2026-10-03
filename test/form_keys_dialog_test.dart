@@ -224,6 +224,166 @@ void main() {
     expect(find.text(recovery), findsNothing);
   });
 
+  group('de redacteurskaart', () {
+    Future<FormKeyPresent> present(WidgetTester tester) async =>
+        (await tester.runAsync(() async {
+          await service.create();
+          return await service.read() as FormKeyPresent;
+        }))!;
+
+    Future<void> openCard(WidgetTester tester) async {
+      await show(tester);
+      await waitFor(tester, 'Redacteurskaart maken…');
+      await tester.tap(text('Redacteurskaart maken…'));
+      await tester.pump();
+    }
+
+    testWidgets('zonder sleutel is er geen kaart te maken', (tester) async {
+      await show(tester);
+      await waitFor(tester, 'Redactiesleutel aanmaken');
+      expect(text('Redacteurskaart maken…'), findsNothing);
+    });
+
+    testWidgets('een kaart met de naam, de tekst en de vingerafdruk', (
+      tester,
+    ) async {
+      final key = await present(tester);
+      await openCard(tester);
+      expect(text('Kaart maken'), findsOneWidget);
+      expect(text('Vingerafdruk van de kaart'), findsNothing);
+      await tester.enterText(find.byType(TextField), '  Sari  ');
+      await tester.tap(text('Kaart maken'));
+      await tester.pump();
+      final shown = tester
+          .widgetList<SelectableText>(find.byType(SelectableText))
+          .map((w) => w.data!)
+          .toList();
+      final card =
+          (parseFormEditorCard(shown.firstWhere((t) => t.startsWith('{')))
+                  as FormEditorCardParsed)
+              .card;
+      expect(card.name, 'Sari');
+      expect(card.age, key.info.recipient);
+      expect(card.sign, key.info.signPublicKey);
+      expect(shown, contains(formatFingerprint(card.fingerprint)));
+      expect(text('Vingerafdruk van de kaart'), findsOneWidget);
+      expect(
+        find.textContaining('langs een andere weg dan de kaart'),
+        findsOneWidget,
+      );
+      expect(text('Kaart maken'), findsNothing);
+      final field = tester.widget<TextField>(find.byType(TextField));
+      expect(field.enabled, isFalse, reason: 'de naam staat op de kaart');
+    });
+
+    testWidgets('zonder naam komt er geen kaart', (tester) async {
+      await present(tester);
+      await openCard(tester);
+      for (final bad in ['', '   ', 'x' * 81]) {
+        await tester.enterText(find.byType(TextField), bad);
+        await tester.tap(text('Kaart maken'));
+        await tester.pump();
+        expect(text('Vul een naam in van hooguit 80 tekens.'), findsOneWidget);
+        expect(text('Vingerafdruk van de kaart'), findsNothing, reason: bad);
+      }
+    });
+
+    testWidgets('witruimte rond de naam telt niet mee voor de 80 tekens', (
+      tester,
+    ) async {
+      await present(tester);
+      await openCard(tester);
+      await tester.enterText(find.byType(TextField), ' ${'x' * 80} ');
+      await tester.tap(text('Kaart maken'));
+      await tester.pump();
+      expect(text('Vingerafdruk van de kaart'), findsOneWidget);
+    });
+
+    testWidgets('Enter in het naamveld maakt de kaart', (tester) async {
+      await present(tester);
+      await openCard(tester);
+      await tester.enterText(find.byType(TextField), 'Sari');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+      expect(text('Vingerafdruk van de kaart'), findsOneWidget);
+    });
+
+    testWidgets('Terug haalt de melding van de kaartstap weg', (tester) async {
+      await present(tester);
+      await openCard(tester);
+      await tester.tap(text('Kaart maken'));
+      await tester.pump();
+      expect(text('Vul een naam in van hooguit 80 tekens.'), findsOneWidget);
+      await tester.tap(text('Terug'));
+      await tester.pump();
+      expect(text('Vul een naam in van hooguit 80 tekens.'), findsNothing);
+    });
+
+    testWidgets('de kaart is te kopiëren', (tester) async {
+      final copied = <String>[];
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        SystemChannels.platform,
+        (call) async {
+          if (call.method == 'Clipboard.setData') {
+            copied.add((call.arguments as Map)['text'] as String);
+          }
+          return null;
+        },
+      );
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          null,
+        ),
+      );
+      await present(tester);
+      await openCard(tester);
+      await tester.enterText(find.byType(TextField), 'Sari');
+      await tester.tap(text('Kaart maken'));
+      await tester.pump();
+      await tester.tap(text('Kaart kopiëren'));
+      await tester.pump();
+      expect(copied, hasLength(1));
+      expect(parseFormEditorCard(copied.single), isA<FormEditorCardParsed>());
+    });
+
+    testWidgets('Terug vergeet de kaart en laat het overzicht zien', (
+      tester,
+    ) async {
+      await present(tester);
+      await openCard(tester);
+      await tester.enterText(find.byType(TextField), 'Sari');
+      await tester.tap(text('Kaart maken'));
+      await tester.pump();
+      await tester.tap(text('Terug'));
+      await tester.pump();
+      expect(text('Herstelsleutel tonen…'), findsOneWidget);
+      expect(text('Vingerafdruk van de kaart'), findsNothing);
+      await tester.tap(text('Redacteurskaart maken…'));
+      await tester.pump();
+      expect(text('Kaart maken'), findsOneWidget, reason: 'een lege kaartstap');
+      expect(
+        tester.widget<TextField>(find.byType(TextField)).controller!.text,
+        isEmpty,
+      );
+    });
+
+    testWidgets('de knoppen zeggen in het Engels wat ze doen', (tester) async {
+      await present(tester);
+      await show(tester, language: 'en');
+      await waitFor(tester, 'Create editor card…');
+      await tester.tap(text('Create editor card…'));
+      await tester.pump();
+      expect(text('Your name on the card'), findsOneWidget);
+      await tester.enterText(find.byType(TextField), 'Sari');
+      await tester.tap(text('Create card'));
+      await tester.pump();
+      expect(text('Fingerprint of the card'), findsOneWidget);
+      expect(text('Copy card'), findsOneWidget);
+      expect(text('Back'), findsOneWidget);
+    });
+  });
+
   testWidgets('de vingerafdruk is te kopiëren', (tester) async {
     final copied = <String>[];
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(

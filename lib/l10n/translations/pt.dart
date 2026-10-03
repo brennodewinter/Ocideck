@@ -1655,6 +1655,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Redacteurskaart maken…': 'Criar cartão de redator…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Com um cartão de redator, o proprietário de um formulário adiciona-o ao bundle, para que também possa abrir os envios. O cartão pode ser enviado por e-mail.',
+  'Jouw naam op de kaart': 'O seu nome no cartão',
+  'Kaart maken': 'Criar cartão',
+  'Kaart kopiëren': 'Copiar cartão',
+  'Vingerafdruk van de kaart': 'Impressão digital do cartão',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Dê ao proprietário esta impressão digital por outro caminho que não o cartão, por exemplo por telefone. Ele escreve-a de novo antes de o adicionar.',
   'Verzegeld opslaan…': 'Guardar selado…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Um ficheiro cifrado (.zip.age) que só o organizador pode abrir. Para isso precisa do ficheiro do bundle e da impressão digital do convite.',

@@ -1642,6 +1642,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Redacteurskaart maken…': 'Створити картку редактора…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'За допомогою картки редактора власник форми додає вас до комплекту, щоб і ви могли відкривати заявки. Картку можна надіслати електронною поштою.',
+  'Jouw naam op de kaart': 'Ваше ім’я на картці',
+  'Kaart maken': 'Створити картку',
+  'Kaart kopiëren': 'Скопіювати картку',
+  'Vingerafdruk van de kaart': 'Відбиток картки',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Передайте власнику цей відбиток іншим шляхом, ніж картку, наприклад телефоном. Він введе його ще раз, перш ніж додасть вас.',
   'Verzegeld opslaan…': 'Зберегти запечатаним…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Зашифрований файл (.zip.age), який може відкрити лише організатор. Для цього потрібні файл комплекту і відбиток із запрошення.',

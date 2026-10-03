@@ -1627,6 +1627,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Redacteurskaart maken…': 'Opret redaktørkort…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Med et redaktørkort tilføjer ejeren af en formular dig til bundlen, så du også kan åbne indsendelserne. Kortet må sendes med mail.',
+  'Jouw naam op de kaart': 'Dit navn på kortet',
+  'Kaart maken': 'Opret kort',
+  'Kaart kopiëren': 'Kopiér kort',
+  'Vingerafdruk van de kaart': 'Kortets fingeraftryk',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Giv ejeren dette fingeraftryk ad en anden vej end kortet, for eksempel i telefonen. Ejeren skriver det igen, før du bliver tilføjet.',
   'Verzegeld opslaan…': 'Gem forseglet…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'En krypteret fil (.zip.age), som kun arrangøren kan åbne. Til det skal du bruge bundle-filen og fingeraftrykket fra invitationen.',

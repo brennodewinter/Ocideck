@@ -1657,6 +1657,15 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Redacteurskaart maken…': 'Cruthaigh cárta eagarthóra…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Le cárta eagarthóra cuireann úinéir foirme thú leis an bundle, ionas gur féidir leatsa na haighneachtaí a oscailt freisin. Is féidir an chárta a sheoladh trí ríomhphost.',
+  'Jouw naam op de kaart': 'D’ainm ar an gcárta',
+  'Kaart maken': 'Cruthaigh cárta',
+  'Kaart kopiëren': 'Cóipeáil an chárta',
+  'Vingerafdruk van de kaart': 'Méarlorg na cárta',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Tabhair an méarlorg seo don úinéir ar bhealach eile seachas an chárta, mar shampla ar an teileafón. Clóscríobhann sé arís é sula gcuireann sé thú leis.',
   'Verzegeld opslaan…': 'Sábháil séalaithe…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Comhad criptithe (.zip.age) nach féidir ach leis an eagraí a oscailt. Chuige sin tá comhad an bundle agus an méarlorg ón gcuireadh de dhíth ort.',

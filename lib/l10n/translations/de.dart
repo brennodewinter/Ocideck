@@ -667,6 +667,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Redacteurskaart maken…': 'Redakteurskarte erstellen…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Mit einer Redakteurskarte fügt dich der Eigentümer eines Formulars zum Bundle hinzu, damit auch du die Einsendungen öffnen kannst. Die Karte darf per E-Mail verschickt werden.',
+  'Jouw naam op de kaart': 'Dein Name auf der Karte',
+  'Kaart maken': 'Karte erstellen',
+  'Kaart kopiëren': 'Karte kopieren',
+  'Vingerafdruk van de kaart': 'Fingerabdruck der Karte',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Gib dem Eigentümer diesen Fingerabdruck auf einem anderen Weg als die Karte, zum Beispiel am Telefon. Er tippt ihn zurück, bevor er dich hinzufügt.',
   'Verzegeld opslaan…': 'Verschlüsselt speichern…',
   'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
       'Eine verschlüsselte Datei (.zip.age), die nur der Organisator öffnen kann. Dafür brauchst du die Bundle-Datei und den Fingerabdruck aus der Einladung.',

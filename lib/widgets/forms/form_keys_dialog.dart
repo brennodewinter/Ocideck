@@ -63,10 +63,12 @@ class FormKeysDialog extends ConsumerStatefulWidget {
   ConsumerState<FormKeysDialog> createState() => _FormKeysDialogState();
 }
 
-enum _Step { overview, recovery, restore }
+enum _Step { overview, recovery, restore, card }
 
 class _FormKeysDialogState extends ConsumerState<FormKeysDialog> {
   final TextEditingController _typed = TextEditingController();
+  final TextEditingController _cardName = TextEditingController();
+  FormEditorCard? _card;
   FormKeyState? _state;
   _Step _step = _Step.overview;
   String? _recoveryText;
@@ -85,6 +87,7 @@ class _FormKeysDialogState extends ConsumerState<FormKeysDialog> {
   @override
   void dispose() {
     _typed.dispose();
+    _cardName.dispose();
     super.dispose();
   }
 
@@ -145,6 +148,29 @@ class _FormKeysDialogState extends ConsumerState<FormKeysDialog> {
     ),
     _ => l10n.d('Dit platform heeft geen sleutelhanger.'),
   };
+
+  /// Naar de kaartstap: een lege naam en nog geen kaart.
+  void _openCard() => setState(() {
+    _card = null;
+    _cardName.clear();
+    _message = null;
+    _step = _Step.card;
+  });
+
+  void _makeCard(FormKeyPresent present) {
+    final name = _cardName.text.trim();
+    if (!isValidEditorName(name)) {
+      setState(
+        () =>
+            _message = context.l10n.d('Vul een naam in van hooguit 80 tekens.'),
+      );
+      return;
+    }
+    setState(() {
+      _message = null;
+      _card = editorCardOf(present.info, name);
+    });
+  }
 
   Future<void> _showRecovery() async {
     final text = await _service.recoveryKey();
@@ -331,6 +357,10 @@ class _FormKeysDialogState extends ConsumerState<FormKeysDialog> {
     return switch (_step) {
       _Step.recovery => _recoveryStep(l10n, theme),
       _Step.restore => _restoreStep(l10n),
+      _Step.card =>
+        state is FormKeyPresent
+            ? _cardStep(l10n, theme, state)
+            : _overview(l10n, theme, state),
       _Step.overview => _overview(l10n, theme, state),
     };
   }
@@ -451,6 +481,10 @@ class _FormKeysDialogState extends ConsumerState<FormKeysDialog> {
             child: Text(l10n.d('Exporteren als age-sleutelbestand…')),
           ),
           OutlinedButton(
+            onPressed: _openCard,
+            child: Text(l10n.d('Redacteurskaart maken…')),
+          ),
+          OutlinedButton(
             style: OutlinedButton.styleFrom(
               foregroundColor: theme.colorScheme.error,
             ),
@@ -502,6 +536,76 @@ class _FormKeysDialogState extends ConsumerState<FormKeysDialog> {
       ],
     ),
   ];
+
+  List<Widget> _cardStep(
+    AppLocalizations l10n,
+    ThemeData theme,
+    FormKeyPresent present,
+  ) {
+    final card = _card;
+    return [
+      Text(
+        l10n.d(
+          'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.',
+        ),
+      ),
+      const SizedBox(height: 12),
+      TextField(
+        controller: _cardName,
+        enabled: card == null,
+        decoration: InputDecoration(labelText: l10n.d('Jouw naam op de kaart')),
+        onSubmitted: (_) => _makeCard(present),
+      ),
+      const SizedBox(height: 12),
+      if (card != null) ...[
+        SelectableText(
+          card.toText(),
+          style: const TextStyle(fontFamily: 'monospace'),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          l10n.d('Vingerafdruk van de kaart'),
+          style: theme.textTheme.titleSmall,
+        ),
+        SelectableText(
+          formatFingerprint(card.fingerprint),
+          style: const TextStyle(fontFamily: 'monospace'),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.d(
+            'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.',
+          ),
+          style: theme.textTheme.bodySmall,
+        ),
+        const SizedBox(height: 12),
+      ],
+      Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          if (card == null)
+            FilledButton(
+              onPressed: () => _makeCard(present),
+              child: Text(l10n.d('Kaart maken')),
+            )
+          else
+            OutlinedButton(
+              onPressed: () =>
+                  Clipboard.setData(ClipboardData(text: card.toText())),
+              child: Text(l10n.d('Kaart kopiëren')),
+            ),
+          TextButton(
+            onPressed: () => setState(() {
+              _step = _Step.overview;
+              _message = null;
+            }),
+            child: Text(l10n.d('Terug')),
+          ),
+        ],
+      ),
+    ];
+  }
 
   List<Widget> _restoreStep(AppLocalizations l10n) => [
     Text(
