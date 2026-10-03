@@ -811,6 +811,26 @@ beside the template (`<template-name>.bundle.json`, the existing sidecar naming)
     bundle, its canonical form and nine cases. Its signature was also verified independently,
     with Node's OpenSSL Ed25519, when it was made.
 
+*As built — the editor card* (`form_editor_card.dart`; added 2026-10-03). A bundle lists several
+organisers (§7.6) and only the owner signs it, so a new editor has to hand the owner their name, their
+`age` recipient and their Ed25519 public key. They do it as a **card**: `{v: 1, name, age, sign, kid}`,
+written as canonical JSON on one line (`FormEditorCard.toText`), with exactly those keys — a card with
+another key, or a `kid` that is not the key id of its `age` (§5.1), is not a card.
+
+**The card's fingerprint covers the whole card**: `base32(SHA-256("ocideck-editor-card-v1\n" +
+canonical JSON))`, 52 characters, the same shape as a signing key's fingerprint but taken over everything
+in it. That is the point. The owner checks it by another road — the new editor reads it out, says it on
+the phone — and types it back before listing them. A fingerprint over the signing key alone would leave a
+hole: whoever carried the card could swap the `age` recipient for their own, keep the key, and every
+submission would be sealed to the wrong person under a fingerprint that still matched. The card is **not
+signed**: it need not prove that its maker holds the keys (a card whose keys nobody holds costs the owner a
+recipient that opens nothing), and the fingerprint is what ties it to the person who read it out. The text
+is read strictly — a name is not trimmed on the way in (spaces round it are refused) because the fingerprint
+is taken over what is written and a card that reads one way and hashes another cannot be checked by ear;
+the signing key is lower-case base32 like every other encoding here. `test/fixtures/form_editor_card_vector.json`
+(CC0, D5) freezes one card and its fingerprint; both were verified independently with Python's `hashlib`
+when it was made.
+
 ### 5.2 The package
 
 A package is a **plain zip** (the `archive` dependency is already in the app) whose
@@ -1912,6 +1932,9 @@ checks it against the respondent's own template, its validity and the highest se
 web build offers no sealed export: `dartage` does not run under dart2js (a `wasm` build or an upstream fix is a
 precondition of the web respondent, phase 4). The respondent's side of the file route is done; the server
 route is phase 4.
+**Built since:** the editor card (§5.1): a new editor makes it in *Editorial key…* (their name, the card text
+to copy, the card's fingerprint to read out). Listing editors in the owner's workspace (the team) and the
+two-key rule, which need the card, are next.
 **Still to build:** the team of organisers (add an editor) and the two-key rule, and the dossier for the
 external review.
 

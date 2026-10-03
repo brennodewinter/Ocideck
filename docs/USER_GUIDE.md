@@ -5947,6 +5947,12 @@ and offers nothing.
 - **Copy fingerprint** — what you give a respondent through another channel than the bundle itself.
 - **Export as age key file…** — writes the key as an ordinary `age` key file (readable by the `age` command), made
   so that only you can read it. With it a sealed file can be opened without OciDeck.
+- **Create editor card…** — for an **editor who joins** a form's team: the owner of the form lists them in the
+  bundle so they can open the submissions too. Type your name, then **Create card**: the window shows the card (a line
+  of text to **copy** and send, by mail if you like) and the **fingerprint of the card**. Give that fingerprint to
+  the owner **by another route than the card** — over the phone, in person. The owner types it back before adding you.
+  The fingerprint covers the whole card, not only your signing key, so nobody who carries the card can swap in a
+  different address to open your submissions.
 - **Delete editorial key…** — after a confirmation that says again what goes with it.
 
 **A key is never overwritten.** When the keychain cannot be read, OciDeck says so and creates nothing — a keychain
