@@ -211,6 +211,70 @@ dev_dependencies:
     });
   });
 
+  group('cryptographic primitives', () {
+    for (final library in [
+      'dartage',
+      'cryptography',
+      'pointycastle',
+      'pqcrypto',
+    ]) {
+      test('package:$library outside the allowed files is refused', () {
+        writePackage(
+          'good_pkg',
+          lib: {'src/other.dart': "import 'package:$library/$library.dart';\n"},
+        );
+        final found = problems();
+        expect(found, hasLength(1));
+        expect(found.single, contains('lib/src/other.dart'));
+        expect(found.single, contains('cryptographic primitive'));
+      });
+    }
+
+    test('an export counts as an import', () {
+      writePackage(
+        'good_pkg',
+        lib: {'src/other.dart': "export 'package:dartage/dartage.dart';\n"},
+      );
+      expect(problems(), hasLength(1));
+    });
+
+    test('the files meant to touch them may', () {
+      writePackage(
+        'good_pkg',
+        lib: {
+          'src/form_seal.dart': "import 'package:dartage/dartage.dart';\n",
+          'src/form_bundle.dart':
+              "import 'package:cryptography/cryptography.dart';\n",
+        },
+      );
+      expect(problems(), isEmpty);
+    });
+
+    test('the same file name in another folder may not', () {
+      writePackage(
+        'good_pkg',
+        lib: {'form_seal.dart': "import 'package:dartage/dartage.dart';\n"},
+      );
+      expect(problems(), hasLength(1));
+    });
+
+    test('hashes are not primitives in this sense', () {
+      writePackage(
+        'good_pkg',
+        lib: {'src/hash.dart': "import 'package:crypto/crypto.dart';\n"},
+      );
+      expect(problems(), isEmpty);
+    });
+
+    test('a comment that mentions an import is not one', () {
+      writePackage(
+        'good_pkg',
+        lib: {'src/note.dart': "// import 'package:dartage/dartage.dart';\n"},
+      );
+      expect(problems(), isEmpty);
+    });
+  });
+
   test('the app must depend on every package, via the right path', () {
     writePackage('good_pkg');
     writePackage('orphan');

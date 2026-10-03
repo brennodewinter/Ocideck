@@ -24,6 +24,11 @@
 //      to the app, which does not look under packages/.
 //   9. No bare `catch (_)`: a pure engine that "never throws on bad input" must
 //      not swallow the failures it did not expect either.
+//  10. The cryptographic primitives — the age implementation (`dartage`) and the
+//      libraries under it — are imported only by the files that are *meant* to touch
+//      them ([primitiveFiles], FORM_INTAKE.md §5.6): sealing and, later, the signed
+//      bundle. A third file that "just needs a MAC" is how a second, unreviewed use of
+//      the primitives starts; the external review covers those files and no others.
 //
 // Not covered here, on purpose: print() (the `avoid_print` lint in
 // `package:lints/recommended` already fails analysis), method length (the files
@@ -50,6 +55,19 @@ final RegExp _bareCatch = RegExp(r'catch\s*\(\s*_\s*\)');
 final RegExp _forbiddenImport = RegExp(
   r'''^\s*(?:import|export)\s+['"](?:dart:(?:io|ui|html|js|js_util|js_interop|js_interop_unsafe)|package:flutter(?:_[a-z_]+)?/)''',
 );
+
+/// The cryptographic libraries only [primitiveFiles] may import. `package:crypto` (hashes)
+/// is not among them: a SHA-256 over a file is not a protocol.
+final RegExp _primitiveImport = RegExp(
+  r'''^\s*(?:import|export)\s+['"]package:(?:dartage|cryptography|pointycastle|pqcrypto)/''',
+);
+
+/// The files of a package's `lib/` that may import the cryptographic primitives, relative
+/// to the package. `form_bundle.dart` is the Ed25519 signing of the bundle (§5.1).
+const Set<String> primitiveFiles = {
+  'lib/src/form_seal.dart',
+  'lib/src/form_bundle.dart',
+};
 
 /// Every violation found under [packagesDir], one readable line each. Empty
 /// means clean. [rootPubspec] and [rootLicense] are the *contents* of the
@@ -152,6 +170,15 @@ List<String> packageProblems({
             problems.add(
               '$where/$rel: platform import (${line.trim()}) — the core must '
               'also run in a browser tab and on a Flutter-free server.',
+            );
+          }
+          // 10
+          if (_primitiveImport.hasMatch(line) &&
+              !primitiveFiles.contains(rel)) {
+            problems.add(
+              '$where/$rel: imports a cryptographic primitive '
+              '(${line.trim()}) — only ${primitiveFiles.join(', ')} may; '
+              'the external review covers those files and no others.',
             );
           }
           if (!line.trimLeft().startsWith('//') && _bareCatch.hasMatch(line)) {

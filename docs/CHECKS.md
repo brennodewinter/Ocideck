@@ -957,7 +957,10 @@ also declares them, but see the [CI note](#continuous-integration).)
   `dart:ui`, `dart:html`, `dart:js*` or `package:flutter`; the app depends on the
   package via `path: packages/<name>`; no `lib/` file above the repo-wide
   1000-line ceiling (`maxFileLines`, imported from `check_conventions.dart`); no
-  bare `catch (_)`.
+  bare `catch (_)`; and **the cryptographic primitives** — `package:dartage`,
+  `cryptography`, `pointycastle`, `pqcrypto` — are imported only by the files that are
+  meant to touch them (`primitiveFiles`: `form_seal.dart` and the later
+  `form_bundle.dart`, FORM_INTAKE.md §5.6). A hash (`package:crypto`) is not one.
 - **Why it exists:** a shared core is only shareable if that is *checked*. One
   `import 'dart:io'` and the web form shell stops compiling; one `sdk: flutter`
   and a standalone Dart server cannot resolve it. `flutter analyze` at the root
@@ -965,7 +968,9 @@ also declares them, but see the [CI note](#continuous-integration).)
   pubspec does not offer it), and `dart format .` already reaches `packages/`, so
   neither is repeated. The conventions that `check_conventions.dart` applies to
   the app's `lib/` do not look under `packages/`, so the two that matter for a
-  pure engine are repeated here.
+  pure engine are repeated here. The primitives rule is what makes "the external
+  review covers these files" true: a third file that "just needs a MAC" would be a
+  second, unreviewed use of the age library.
 - **Not covered, on purpose:** `print()` (the `avoid_print` lint in
   `package:lints/recommended` fails analysis), method length (files are small by
   design: one descriptor per field type) and user-visible text (the engine returns
