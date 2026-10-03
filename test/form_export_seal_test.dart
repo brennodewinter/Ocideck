@@ -12,6 +12,8 @@ import 'package:ocideck/widgets/forms/form_export_support.dart';
 import 'package:ocideck/widgets/forms/form_fill_view.dart';
 import 'package:ocideck_form_core/ocideck_form_core.dart';
 
+import 'support/pump_until.dart';
+
 const String frontMatter = '---\ntitle: Kookboek\n---\n';
 
 const String leeg = '''<!-- form id=kook version=2 -->
@@ -187,31 +189,16 @@ Future<void> fillAndSeal(
   }
 }
 
-/// Wacht op het echte werk (sleutels, versleuteling) dat in de test niet door de klok loopt.
-Future<void> settle(WidgetTester tester, Finder until) async {
-  for (var i = 0; i < 200 && until.evaluate().isEmpty; i++) {
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 20)),
-    );
-    await tester.pump();
-  }
-  expect(
-    until,
-    findsWidgets,
-    reason: 'wachtte op ${until.describeMatch(Plurality.one)}',
-  );
-}
+/// Wacht tot [until] er staat: sleutels en versleuteling zijn echt werk.
+Future<void> settle(WidgetTester tester, Finder until) => pumpUntil(
+  tester,
+  () => until.evaluate().isNotEmpty,
+  reason: 'wachtte op ${until.describeMatch(Plurality.one)}',
+);
 
-/// Wacht tot [done] waar is, met ruimte voor echt werk.
-Future<void> settleWhen(WidgetTester tester, bool Function() done) async {
-  for (var i = 0; i < 200 && !done(); i++) {
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 20)),
-    );
-    await tester.pump();
-  }
-  expect(done(), isTrue, reason: 'het werk is niet klaargekomen');
-}
+/// Wacht tot [done] waar is.
+Future<void> settleWhen(WidgetTester tester, bool Function() done) =>
+    pumpUntil(tester, done, reason: 'het werk is niet klaargekomen');
 
 void main() {
   setUpAll(() async {
@@ -335,10 +322,20 @@ void main() {
         await pump(tester, spy.support);
         await fillAndSeal(tester, fingerprint: fp());
         await settleWhen(tester, () => spy.saved.isNotEmpty);
-        await tester.runAsync(
-          () => Future<void>.delayed(const Duration(milliseconds: 100)),
+        // Het werk is klaar als de knoppen weer los zijn.
+        await settleWhen(
+          tester,
+          () =>
+              tester
+                  .widget<ButtonStyleButton>(
+                    find.ancestor(
+                      of: text('Verzegeld opslaan…'),
+                      matching: find.bySubtype<ButtonStyleButton>(),
+                    ),
+                  )
+                  .onPressed !=
+              null,
         );
-        await tester.pump();
         expect(spy.saved, hasLength(1));
         expect(
           spy.pinWrites,
