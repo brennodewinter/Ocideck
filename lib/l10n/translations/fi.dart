@@ -1627,6 +1627,594 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Team…': 'Tiimi…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Toimittajat sinun lisäksesi, jotka ovat jokaisessa bundlessa, jotta hekin voivat avata lähetykset. Lisäät jonkun hänen toimittajakortillaan ja kirjoitat kortin sormenjäljen uudelleen.',
+  'Er is nog niemand naast jou.': 'Sinun lisäksesi ei ole vielä ketään.',
+  'Plak de kaart van de redacteur': 'Liitä toimittajan kortti',
+  'Kaart controleren': 'Tarkista kortti',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kortti: {naam}. Kirjoita tämän kortin sormenjälki, jonka {naam} antoi sinulle muuta tietä, esimerkiksi puhelimessa.',
+  'Redacteur verwijderen': 'Poista toimittaja',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Poistetaanko {naam} tiimistä? Jo julkaisemasi bundlet pysyvät sellaisina kuin ovat, kunnes julkaiset uudelleen; se, mikä on jo sinetöity henkilölle {naam}, pysyy hänelle luettavana.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} on lisätty. Julkaise bundle uudelleen, jotta {naam} tulee mukaan.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} on poistettu. Julkaise bundle uudelleen, jotta {naam} poistuu.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Luo ensin oma toimituksen avaimesi kohdassa Toimituksen avain….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Toimituksen avaintasi ei voi käyttää. Katso kohtaa Toimituksen avain….',
+  'Dit is geen redacteurskaart.': 'Tämä ei ole toimittajakortti.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Tämä kortti on OciDeckin uudemmasta versiosta. Päivitä OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kortti sisältää jotain, mikä ei ole sallittua. Pyydä toimittajalta uusi kortti.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Tämä sormenjälki ei sovi korttiin: kortti on muuttunut tai se ei ole keneltä luulet. Pyydä toimittajalta sormenjälki ja kortti uudelleen.',
+  'Dit is je eigen kaart.': 'Tämä on oma korttisi.',
+  'Deze redacteur staat er al.': 'Tämä toimittaja on jo tiimissä.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tiimi on täynnä: bundle kantaa enintään 64 järjestäjää, sinut mukaan lukien.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Työkansion tiedostoa team.json ei voi lukea. Mitään ei muutettu; korjaa tai poista se.',
+  'Het team kon niet worden opgeslagen.': 'Tiimiä ei voitu tallentaa.',
+  'Deze redacteur staat niet meer in het team.':
+      'Tämä toimittaja ei ole enää tiimissä.',
+  'Naast jou in de bundel: {namen}.': 'Sinun lisäksesi bundlessa: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Tarkista ensin palautusavaimesi kohdassa Toimituksen avain… tai lisää toinen toimittaja kohdassa Tiimi…. Ilman paluutietä kaikki lähetykset muuttuvat lukukelvottomiksi, jos tämä laite rikkoutuu.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Työkansion tiedostoa team.json ei voi lukea. Mitään ei allekirjoiteta.',
+  'Redacteurskaart maken…': 'Luo toimittajakortti…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Toimittajakortilla lomakkeen omistaja lisää sinut bundleen, jotta myös sinä voit avata lähetykset. Kortin voi lähettää sähköpostilla.',
+  'Jouw naam op de kaart': 'Nimesi kortissa',
+  'Kaart maken': 'Luo kortti',
+  'Kaart kopiëren': 'Kopioi kortti',
+  'Vingerafdruk van de kaart': 'Kortin sormenjälki',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Anna omistajalle tämä sormenjälki muuta tietä kuin kortin mukana, esimerkiksi puhelimessa. Hän kirjoittaa sen uudelleen ennen kuin lisää sinut.',
+  'Verzegeld opslaan…': 'Tallenna sinetöitynä…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Salattu tiedosto (.zip.age), jonka vain järjestäjä voi avata. Tarvitset siihen bundle-tiedoston ja kutsun sormenjäljen.',
+  'Kies het bundelbestand van de organisator':
+      'Valitse järjestäjän bundle-tiedosto',
+  'Vingerafdruk van de organisator': 'Järjestäjän sormenjälki',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Kirjoita kutsun sormenjälki. Se ei ole tarkoituksella bundle-tiedostossa: näin voit tarkistaa, keneltä se tulee.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Tuo ei ole sormenjälki. Se on 52 merkkiä pitkä, yleensä neljän ryhmissä.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Tämä tiedosto ei ole bundle, jonka OciDeck osaa lukea.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Tämä lomake tai bundle on OciDeckin uudemmasta versiosta. Päivitä OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Sormenjälki ei sovi tähän bundleen: lomake ei tule siltä, jonka kutsu mainitsee. Tarkista sormenjälki ja bundle-tiedosto.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundlen allekirjoitus ei ole oikea: se on muuttunut tai se ei ole sormenjäljen mainitsemalta. Pyydä järjestäjältä uusi bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Tämä bundle ei kuulu tähän lomakkeeseen. Käytä bundle-tiedostoa, joka kuuluu juuri tähän lomakkeeseen.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Tämä bundle on vanhentunut. Pyydä järjestäjältä uusi.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Tämä bundle on vanhempi kuin bundle, jonka sait aiemmin tältä järjestäjältä. Pyydä järjestäjältä uusin.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle sisältää jotain, mikä ei ole sallittua. Pyydä järjestäjältä uusi bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Tämä lomake on suljettu: viimeinen päivä oli {datum}. Ota yhteyttä järjestäjään.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Lähetys on suurempi kuin järjestäjä sallii ({mb} Mt). Poista valokuva tai pienennä yhtä.',
+  'De inzending kon niet worden verzegeld.': 'Lähetystä ei voitu sinetöidä.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Tallennettu sinetöitynä nimellä {naam}, vain nämä voivat avata sen: {organisatoren}.',
+  'Bundel publiceren…': 'Julkaise bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle on se, mihin lomakkeen täyttäjä toimituksestanne luottaa: mille avaimelle hän sinetöi ja mihin tekstiin se kuuluu. Se tallennetaan lomakkeen viereen.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Työkansiossa ei ole lomaketta, jolle bundlen voisi tehdä.',
+  'Naam voor de invuller': 'Nimi täyttäjälle',
+  'Geldig tot (jjjj-mm-dd)': 'Voimassa (vvvv-kk-pp) asti',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Viimeinen päivä, jona täyttäjä luottaa tähän bundleen. Ei ennen lomakkeen sulkeutumispäivää.',
+  'Bundel maken': 'Luo bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle luotu (järjestysnumero {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Anna sormenjälki täyttäjälle muuta tietä kuin bundle-tiedoston mukana, esimerkiksi kutsussa. Se, jolla on vain bundle-tiedosto, ei voi tarkistaa, keneltä se tulee.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Tällä alustalla ei ole avainnippua toimituksen avaimelle; bundlea ei voi allekirjoittaa täällä.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Toimituksen avainta ei ole vielä. Luo sellainen kohdassa Toimituksen avain… ennen kuin julkaiset bundlen.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Avainnippua ei voi lukea. Mitään ei allekirjoitettu.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Tallennettua toimituksen avainta ei voi lukea. Poista se kohdassa Toimituksen avain… ja palauta se palautusavaimestasi.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Tämän lomakkeen bundlea työkansiossa ei voi lukea tai se ei kuulu muiden joukkoon. Silloin järjestysnumeroa ei voi määrittää, eikä mitään allekirjoiteta. Tarkista: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Anna nimi, jossa on enintään 80 merkkiä.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Voimassa asti -kentän on oltava olemassa oleva päivämäärä muodossa vvvv-kk-pp.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Voimassa asti -päivä ei saa olla ennen lomakkeen sulkeutumispäivää.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundlea ei voitu luoda ({veld}). Tarkista, että lomakkeessa on kelvollinen sulkeutumispäivä ja säilytysaika.',
+  'formulier': 'lomake',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundlea ei voitu tallentaa työkansioon.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Luo ja allekirjoita bundle, johon täyttäjä toimituksestanne luottaa.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: sinetöity paketti avattu ja tuotu.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: tämä paketti on sinetöity, eikä tällä alustalla ole avainnippua toimituksen avaimelle.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: tämä paketti on sinetöity, eikä toimituksen avainta sen avaamiseen ole vielä. Luo sellainen kohdassa Toimituksen avain… tai palauta se palautusavaimestasi.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: tämä paketti on sinetöity, eikä avainnippua voi lukea. Mitään ei yritetty.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: tämä paketti on sinetöity, eikä tallennettua toimituksen avainta voi lukea. Poista se kohdassa Toimituksen avain… ja palauta se palautusavaimestasi.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: tätä pakettia ei ole sinetöity toimituksen avaimellesi.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: tätä pakettia on muutettu tai se on katkennut, eikä sitä avata.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: tämä paketti on suurempi kuin lähetys voi olla.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: tallennettu toimituksen avain ei ole avain, jota OciDeck voi käyttää.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ei ole sinetöity paketti, jonka OciDeck osaa lukea.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Sinetöity tiedosto (.zip.age) avataan toimituksen avaimellasi.',
+  'Herstelsleutel controleren': 'Tarkista palautusavain',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Toimituksen avain luotu. Kirjoita nyt palautusavain muistiin.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Avainnippu ei hyväksynyt avainta. Mitään ei luotu.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Toimituksen avain on jo olemassa. Sitä ei koskettu.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Avainnippua ei voitu lukea. Mitään ei oletettu eikä mitään luotu.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Avainnipussa on jotain, mikä ei ole toimituksen avain. Sitä ei korvattu.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Tällä alustalla ei ole avainnippua.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Oikein: palautusavain on tarkistettu.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Tämä on kelvollinen palautusavain, mutta ei tämän toimituksen avaimen.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Palautusavain on oikea, mutta sitä ei voitu tallentaa.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Ei ole toimituksen avainta, johon verrata.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Tämä ei ole toimituksen avaimen palautusavain.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Siinä on kirjoitusvirhe: tarkistussumma ei täsmää.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tämä palautusavain on peräisin OciDeckin uudemmasta versiosta.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Tämä palautusavain on tehty johonkin muuhun.',
+  'Hersteld uit de herstelsleutel.': 'Palautettu palautusavaimesta.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Avainnippu ei hyväksynyt avainta. Mitään ei palautettu.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Tallenna toimituksen avain age-avaintiedostona',
+  'Het bestand kon niet worden opgeslagen.': 'Tiedostoa ei voitu tallentaa.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Tallennettu nimellä {pad}. Jokainen, jolla on tämä tiedosto, voi avata kaiken.',
+  'Redactiesleutel verwijderd.': 'Toimituksen avain poistettu.',
+  'Redactiesleutel': 'Toimituksen avain',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Tällä alustalla ei ole avainnippua. Toimituksen avainta ei voi säilyttää täällä; käytä työpöytäsovellusta.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Avainnippua ei voitu lukea (lukittu tai pääsy evätty). Mitään ei oletettu eikä mitään luotu.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Avainnipussa on jotain, mikä ei ole toimituksen avain. Sitä ei korvattu. Poista se ja palauta avain palautusavaimestasi.',
+  'Redactiesleutel verwijderen…': 'Poista toimituksen avain…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Toimituksen avain avaa sinetöidyt lähetykset ja allekirjoittaa lomakkeidesi paketit. Se on tämän käyttöjärjestelmän avainnipussa. Jos menetät kaikki toimituksen avaimet, kaikki vielä hakematta olevat lähetykset muuttuvat lukukelvottomiksi: se on hinta palvelimesta, joka ei voi lukea mitään.',
+  'Redactiesleutel aanmaken': 'Luo toimituksen avain',
+  'Herstellen uit herstelsleutel…': 'Palauta palautusavaimesta…',
+  'Vingerafdruk': 'Sormenjälki',
+  'Ontvanger (age)': 'Vastaanottaja (age)',
+  'Aangemaakt op {datum}.': 'Luotu {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Palautusavain on tarkistettu.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Palautusavainta ei ole vielä tarkistettu: kirjoita se muistiin ja kirjoita se uudelleen.',
+  'Herstelsleutel tonen…': 'Näytä palautusavain…',
+  'Vingerafdruk kopiëren': 'Kopioi sormenjälki',
+  'Exporteren als age-sleutelbestand…': 'Vie age-avaintiedostona…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Kirjoita tämä palautusavain muistiin ja säilytä se turvallisessa paikassa, pois tältä laitteelta. Jokainen, jolla se on, voi avata kaikki lähetykset ja allekirjoittaa paketteja teidän nimessänne. Jos menetät tämän laitteen, se on kaikki, mitä jää jäljelle.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Kirjoita palautusavain tähän uudelleen',
+  'Later': 'Myöhemmin',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Kirjoita tai liitä palautusavain. Se, minkä annat, asetetaan avainnippuun toimituksen avaimeksi; mitään ei korvata.',
+  'Herstelsleutel': 'Palautusavain',
+  'Redactiesleutel verwijderen': 'Poista toimituksen avain',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Avain poistetaan avainnipusta, ja se voi palata vain palautusavaimesta. Jos sinulla ei ole sitä, vain tälle avaimelle sinetöidyt lähetykset jäävät lukukelvottomiksi ikuisesti.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Avain, joka avaa sinetöidyt lähetykset ja allekirjoittaa paketit.',
+  'Redactiesleutel…': 'Toimituksen avain…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Työkopio heitettiin pois. Se, mikä saapui, arvioidaan uudelleen.',
+  'Er is geen werkkopie.': 'Työkopiota ei ole.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Työkopiota ei voitu heittää pois.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Poistaa työkopion. Se, mikä saapui, säilyy ja arvioidaan uudelleen.',
+  'Werkkopie weggooien…': 'Heitä työkopio pois…',
+  'Werkkopie weggooien': 'Heitä työkopio pois',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Työkopio parannuksineen poistetaan, eikä sitä voi palauttaa. Se, mikä saapui, säilyy ja arvioidaan uudelleen. Jos työkopio on vielä auki välilehdellä, sulje se ensin.',
+  'Weggooien': 'Heitä pois',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Tämä lähetys on peruttu, joten se ei päädy mihinkään lukuun.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Tätä lähetystä ei voi lukea tai lomaketta, johon se on tehty, ei ole työkansiossa.',
+  'Het controledocument kon niet worden geschreven.':
+      'Tarkistusasiakirjaa ei voitu kirjoittaa.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Panoksesi kirjaan: tarkista se, kiitos',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Tässä panoksesi sellaisena kuin se tulee kirjaan (katso liite). Onko kaikki oikein? Vastaa ‘hyväksyn’ tai korjauksineen ennen päivämäärää {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Viesti odottaa sähköpostiohjelmassasi. Liitä PDF ja lähetä se.',
+  'Controle door de maker…': 'Tekijän tarkistus…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Tarkistusasiakirja on tämän yhden lähetyksen luku. Vie se PDF-tiedostoksi (valitse täysi profiili), liitä PDF viestiin ja lähetä se. Jos tekijä vastaa ‘hyväksyn’, aseta tila itse arvoon maker-approved: vastaus vahvistaa myös, että panos todella on tältä henkilöltä.',
+  'Controledocument maken en openen': 'Luo tarkistusasiakirja ja avaa se',
+  'E-mailadres van de maker': 'Tekijän sähköpostiosoite',
+  'Antwoord vóór (jjjj-mm-dd)': 'Vastaa ennen (vvvv-kk-pp)',
+  'Mail schrijven': 'Kirjoita viesti',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Tämä lomake ei tunne tilaa maker-check-sent, joten sitä ei voi asettaa tässä.',
+  'Controle verstuurd': 'Tarkistus lähetetty',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Tekee tämän lähetyksen luvun ja valmistelee viestin, jolla tekijä tarkistaa sen.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Tämä lähetys ei ole rekisterissä. Korjaa overview.md ja yritä uudelleen.',
+  'Kies het hoofdstuksjabloon': 'Valitse lukumalli',
+  'Kies eerst een hoofdstuksjabloon.': 'Valitse ensin lukumalli.',
+  'Kies minstens één status.': 'Valitse vähintään yksi tila.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Kirja koottu. Lukuja: {n}. Valokuvia: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Peruutetut ja siksi jätetyt pois: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Ohitetut (toinen versio tai ei luettavissa): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Valokuvat, jotka puuttuivat työkansiosta: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Käytä nimessä vain kirjaimia, numeroita, yhdysmerkkejä ja alaviivoja (enintään 64 merkkiä).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Tämänniminen kirja on jo olemassa. Valitse toinen nimi.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Malli mainitsee kenttiä, joita lomakkeessa ei ole: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Kirjaan ei ole mitään laitettavaa: ei yhtään lähetystä, jolla on valittu tila. Peruutettu: {w}; ohitettu: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Rekisteriä ei voi lukea. Korjaa overview.md.',
+  'Het boek kon niet worden geschreven.': 'Kirjaa ei voitu kirjoittaa.',
+  'Boek samenstellen…': 'Kokoa kirja…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Kirja tulee työkansion book-kansioon ja pysyy tavallisena asiakirjana, jota voit sen jälkeen muokata itse.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Työkansiossa ei ole käyttökelpoista lomaketta.',
+  'Formulier': 'Lomake',
+  'Hoofdstuksjabloon': 'Lukumalli',
+  'Nog geen sjabloon gekozen.': 'Mallia ei ole vielä valittu.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Mallissa {veld-id} tarkoittaa vastausta siihen kenttään.',
+  'Hoofdstuksjabloon kiezen…': 'Valitse lukumalli…',
+  'Welke inzendingen?': 'Mitkä lähetykset?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Kirjaan tulevat vain lähetykset, joilla on jokin näistä tiloista. Peruutetut lähetykset jäävät aina pois.',
+  'Ordenen op': 'Lajittele',
+  'Groeperen op': 'Ryhmittele',
+  'Naam van het boek': 'Kirjan nimi',
+  'Boek openen': 'Avaa kirja',
+  'Samenstellen': 'Kokoa',
+  'De werkkopie kon niet worden aangemaakt.': 'Työkopiota ei voitu luoda.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Avaa lähetyksen kopion parannettavaksi. Saapunut pysyy muuttumattomana.',
+  'Werkkopie openen': 'Avaa työkopio',
+  'Status gewijzigd naar {status}.': 'Tilaksi vaihdettu {status}.',
+  'Intrekking opgeslagen.': 'Peruutus tallennettu.',
+  'Intrekking ongedaan gemaakt.': 'Peruutus kumottu.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Lähetys poistettu; tietue säilyy.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Lähetys poistettu, mutta rekisteriä ei voitu päivittää. Muokkaa overview.md käsin.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Lähetystä ei löytynyt työkansiosta.',
+  'De inzending kon niet worden verwijderd.': 'Lähetystä ei voitu poistaa.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Rekisteriä ei voi lukea. Korjaa overview.md; mitään ei muutettu.',
+  'Het register kon niet worden bijgewerkt.': 'Rekisteriä ei voitu päivittää.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Muutosta ei voitu tehdä: lähetys ei ole rekisterissä.',
+  'Status wijzigen': 'Vaihda tila',
+  'Intrekking ongedaan maken': 'Kumoa peruutus',
+  'Intrekken…': 'Peruuta…',
+  'Verwijderen…': 'Poista…',
+  'Inzending intrekken': 'Peruuta lähetys',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Anna päivä, jona lähettäjä peruutti lähetyksen. Peruutettu lähetys ei koskaan päädy kirjaan.',
+  'Dag (jjjj-mm-dd)': 'Päivä (vvvv-kk-pp)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Virheellinen päivä. Käytä muotoa vuosi-kuukausi-päivä, esimerkiksi {voorbeeld}.',
+  'Inzending verwijderen': 'Poista lähetys',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Tämän lähetyksen vastaukset, työkopio ja valokuvat poistetaan työkansiosta. Jäljelle jää vain minimaalinen tietue: numero, vastaanotto- ja suostumuspäivät sekä tila. Tätä ei voi kumota.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Myös se säilyy, minkä lomake ilmoitti etukäteen: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Tässä lähetyksessä on jotain vialla.',
+  'Verplicht, maar leeg gelaten.': 'Pakollinen, mutta jätetty tyhjäksi.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} sanaa; vähintään {min} tarvitaan.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} sanaa; enintään {max} sallittu.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} merkkiä; vähintään {min} tarvitaan.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} merkkiä; enintään {max} sallittu.',
+  '“{value}” staat niet in de lijst met opties.':
+      '”{value}” ei ole vaihtoehtojen luettelossa.',
+  '“{value}” is geen getal.': '”{value}” ei ole luku.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '”{value}” ei ole päivämäärä muodossa vuosi-kuukausi-päivä.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Kuva, jonka leveys on {actual} pikseliä; pyydettiin {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Kuvan tiedosto puuttuu lähetyksestä.',
+  'De beschrijving van de foto ontbreekt.': 'Kuvan kuvaus puuttuu.',
+  'De maker van de foto ontbreekt.': 'Kuvan tekijä puuttuu.',
+  'De foto is niet gecontroleerd.': 'Kuvaa ei tarkistettu.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-kuva: ei tarkistettu eikä puhdistettu; siinä voi olla sijainti.',
+  'Toestemming niet gegeven.': 'Suostumusta ei annettu.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Vastaus sisältää rivin, joka näyttää lomakkeen ohjauskoodilta.',
+  'Het antwoord bevat HTML.': 'Vastaus sisältää HTML:ää.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Vastaus sisältää sulkemattoman koodilohkon.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Vastaus viittaa kuvaan, joka ei kuulu tähän lähetykseen.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Vastaus sisältää linkin, jota ei sallita.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Tämä lomake tai tämä versio ei ole työkansiossa.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Lähettäjä työskenteli eri lomaketekstillä kuin julkaistulla.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Manifestin suostumus ei vastaa julkaistua lomaketta.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Lomakkeen tekstiä muutettiin vastausten ulkopuolella.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Lomakkeen tekstiä muutettiin tämän kentän kohdalla.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Tätä kenttää ei ole julkaistussa lomakkeessa.',
+  'Dit veld ontbreekt in de inzending.': 'Tämä kenttä puuttuu lähetyksestä.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Lähetys versiosta {submission}; julkaistu on versio {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Lomake vaatii uudemman OciDeckin version.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Julkaistu lomake työkansiossa ei ole käyttökelpoinen.',
+  'De inzending hoort bij een ander formulier.':
+      'Lähetys kuuluu toiseen lomakkeeseen.',
+  'De opbouw van de inzending is beschadigd.':
+      'Lähetyksen rakenne on vaurioitunut.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Rekisteriä ei voi lukea. Korjaa overview.md; lähetykset näytetään alla ilman rekisterin tietoja.',
+  'Nog geen inzendingen.': 'Ei vielä lähetyksiä.',
+  'Om na te lopen': 'Tarkistettava',
+  'Verwijderd': 'Poistettu',
+  'Zonder regel in het register': 'Ei riviä rekisterissä',
+  'Ontvangen {datum}': 'Vastaanotettu {datum}',
+  'Ingetrokken {datum}': 'Peruttu {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Tämän lähetyksen sisältö on poistettu; vain tietue on jäljellä.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Tätä lähetystä ei voi lukea. Tarkista työkansion tiedostot.',
+  'Beoordeeld tegen {formulier}.': 'Arvioitu suhteessa {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Arvio koskee työkopiota (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Ei tarkistettavia kohtia.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Kuvat, joita mikään vastaus ei mainitse: {n}.',
+  'Inzendingen': 'Lähetykset',
+  'Werkmap': 'Työkansio',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Työkansiota ei ole vielä valittu. Valitse kansio, johon lähetykset ja rekisteri tallennetaan.',
+  'Werkmap kiezen…': 'Valitse työkansio…',
+  'Kies de werkmap voor inzendingen': 'Valitse lähetysten työkansio',
+  'Formulieren': 'Lomakkeet',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Lomaketta ei ole vielä lisätty. Lisää lomake sellaisena kuin julkaisit sen: lähetystä verrataan siihen.',
+  'Formulier toevoegen…': 'Lisää lomake…',
+  'Kies het formulier om toe te voegen': 'Valitse lisättävä lomake',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Tämä tiedosto ei ole julkaistavissa oleva lomake.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Tämä lomake on jo olemassa eri tekstillä. Eri teksti on uusi versio: anna lomakkeelle korkeampi versionumero.',
+  'Formulier toegevoegd: {naam}.': 'Lomake lisätty: {naam}.',
+  'Dit formulier stond er al.': 'Tämä lomake oli jo olemassa.',
+  'Het formulier kon niet worden opgeslagen.': 'Lomaketta ei voitu tallentaa.',
+  'Inzendingen in de werkmap: {n}': 'Lähetyksiä työkansiossa: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Tavallista zipiä ei salata siirron aikana.',
+  'Pakketten binnenhalen…': 'Tuo paketteja…',
+  'Kies de pakketten om binnen te halen': 'Valitse tuotavat paketit',
+  'Register openen': 'Avaa rekisteri',
+  '{naam}: binnengehaald.': '{naam}: tuotu.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: tuotu, mutta tarkistettavia kohtia on.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: tuotu, mutta rekisteriä ei voitu päivittää. Tarkista overview.md.',
+  '{naam}: stond er al.': '{naam}: oli jo olemassa.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ei ole lähetyspaketti, jonka OciDeck osaa lukea.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: tätä lomaketta ei ole lisätty tai ei tässä versiossa. Lisää lomake ensin.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ei voitu tallentaa työkansioon.',
+  'Formulieren en inzendingen': 'Lomakkeet ja lähetykset',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Tuo lomakkeen lähetyksiä, vertaa niitä julkaistuun lomakkeeseen ja pidä niistä rekisteriä. Lomakkeen täyttäminen toimii myös silloin, kun tämä on pois päältä. Oletuksena pois päältä.',
+  'Inzending opslaan als zip…': 'Tallenna lähetys zip-tiedostona…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip-tiedosto, jossa ovat vastauksesi ja valokuvasi ja jonka lähetät sähköpostilla järjestäjälle.',
+  'Inzending opgeslagen als {naam}.': 'Lähetys tallennettiin nimellä {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Valitse lomake sellaisena kuin sait sen',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Tämä ei ole lomake, johon vastauksesi kuuluvat. Valitse tiedosto, jonka sait järjestäjältä.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Valokuvaa ei voitu lukea: {pad}. Lisää se uudelleen.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Lähetys ei mahdu yhteen pakettiin: liian monta valokuvaa tai liian suuri valokuva.',
+  'De inzending kon niet worden opgeslagen.': 'Lähetystä ei voitu tallentaa.',
+  'Inzending opslaan': 'Tallenna lähetys',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Sijaintitiedot on poistettu tästä valokuvasta.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Tätä valokuvaa ei voitu lisätä. Valitse valokuvan sisältävä JPEG-, PNG-, WebP- tai HEIC-tiedosto.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Tallenna asiakirja ensin lisätäksesi valokuvia.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck voi tuoda tämän tiedoston uudeksi asiakirjaksi.',
+  'Kies een datum': 'Valitse päivämäärä',
+  'Anders, namelijk:': 'Muu, nimittäin:',
+  'Punt {n}': 'Kohta {n}',
+  'Punt {n} verwijderen': 'Poista kohta {n}',
+  'Rij {n} verwijderen': 'Poista rivi {n}',
+  'Foto {n} verwijderen': 'Poista valokuva {n}',
+  'Wat is er te zien op de foto?': 'Mitä valokuvassa näkyy?',
+  'Van wie is de foto?': 'Kenen valokuva tämä on?',
+  'Foto toevoegen': 'Lisää valokuva',
+  'Verplicht': 'Pakollinen',
+  'Alles is ingevuld.': 'Kaikki on täytetty.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Vielä {n} tehtävää ennen kuin voit lähettää:',
+  'klaar': 'valmis',
+  '{n} open': '{n} avoinna',
+  'Dit formulier kan niet worden ingevuld.': 'Tätä lomaketta ei voi täyttää.',
+  'Naar de bron': 'Lähteeseen',
+  'Woorden': 'Sanat',
+  'Tekens': 'Merkit',
+  'Keuzes': 'Valinnat',
+  'Rijen': 'Rivit',
+  'Foto’s': 'Valokuvat',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (vähintään {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (enintään {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (vähintään {min}, enintään {max})',
+  'Invullen': 'Täytä',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Tässä lomakkeessa on jotain vialla. Ota yhteyttä sen tekijään.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Tämä kenttä on pakollinen. Täytä se, jotta voit lähettää.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Kirjoitit {actual} sanaa; vähintään {min} tarvitaan.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjoitit {actual} sanaa; enintään {max} sallitaan.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Kirjoitit {actual} merkkiä; vähintään {min} tarvitaan.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjoitit {actual} merkkiä; enintään {max} sallitaan.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '”{value}” ei ole luettelossa. Valitse jokin vaihtoehdoista.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '”{value}” ei ole luku. Käytä vain numeroita, tarvittaessa pilkulla tai pisteellä desimaaleille.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Tämä valokuva on {actual} pikseliä leveä; tässä vaaditaan {min}. Se on luultavasti pienentynyt, kun se lähetettiin viestisovelluksen kautta. Jos sinulla on vielä alkuperäinen, käytä sitä. Jos ei, lähetä se silti: järjestäjä ottaa yhteyttä.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Tämä valokuva on {actual} Mt; enimmäiskoko on {max} Mt.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Tämän tiedoston sisältö ei vastaa sen tiedostotyyppiä.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Tämä tiedostotyyppi ei ole sallittu täällä.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Tämän valokuvan tiedostoa ei enää löydy. Lisää valokuva uudelleen.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Kuvaile yhdellä lyhyellä lauseella, mitä valokuvassa näkyy.',
+  'Geef aan van wie de foto is.': 'Kerro, kenen valokuva on.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Tätä valokuvaa ei ole vielä tarkistettu. Odota hetki tai lisää se uudelleen.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Tämä valokuva on HEIC-tiedosto. OciDeck ei voi tarkistaa tai puhdistaa sitä täällä, joten se lähetetään sellaisenaan. Se voi sisältää tiedon siitä, missä valokuva on otettu. Jos et halua jakaa sitä, valitse kameran asetuksista ”Yhteensopivin” tai jaa valokuva JPEG-muodossa ja lisää se uudelleen.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Tässä valokuvassa näkyy {actual} kasvoa; odotettiin {expected}. Tämä on vain muistutus.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Rastita ruutu antaaksesi suostumuksen; ilman suostumusta et voi lähettää.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Tämä lomake vaatii OciDeckin uudemman version. Päivitä sovellus täyttääksesi sen.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Itse lomakkeessa on vahingossa muutettu jotain. Palauta lomake; vastauksesi säilyvät.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Tämä rivi näyttää lomakkeen ohjauskoodilta eikä saa olla vastauksessa. Muuta se.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML ei ole sallittu vastauksessa. Käytä tavallista tekstiä ja yksinkertaista muotoilua.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Koodilohkoa ei ole suljettu. Sulje se merkinnällä ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Vastaukseen voi liittää vain valokuvia, jotka lisäät tähän lomakkeeseen; kuva internetistä ei käy.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Vastauksessa sallitaan vain https://-alkuiset linkit ja sähköpostiosoitteet.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Tämä tiedosto on tehty lomakkeen toisella versiolla (versio {submission}; nyt on voimassa versio {published}). Tarkista vastauksesi.',
+  'Punt {item}: {bericht}': 'Kohta {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Määrä on nyt {actual}; sen pitää olla {min}–{max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Määrä on nyt {actual}; se saa olla enintään {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Määrä on nyt {actual}; sen pitää olla vähintään {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Luvun pitää olla luvun {step} monikerta.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Luvun pitää olla {min}–{max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Luku saa olla enintään {max}.',
+  'Het getal moet minstens {min} zijn.': 'Luvun pitää olla vähintään {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Päivämäärän pitää olla {min} tai sen jälkeen.',
+  'De datum moet op of vóór {max} liggen.':
+      'Päivämäärän pitää olla {max} tai sitä ennen.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '”{value}” ei ole päivämäärä. Kirjoita päivämäärä muodossa vuosi-kuukausi-päivä, esimerkiksi 2026-11-01.',
+  'Dit is geen geldig e-mailadres.':
+      'Tämä ei ole kelvollinen sähköpostiosoite.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Tämä ei ole kelvollinen verkko-osoite. Aloita merkinnällä https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Tämä ei ole kelvollinen puhelinnumero.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Tämä ei ole kelvollinen hollantilainen postinumero, esimerkiksi 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Tähän mahtuu vain yksi rivi. Poista rivinvaihdot.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Käytä vain tämän kysymyksen valintaruutuja: yksi ruutu vaihtoehtoa kohti.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Kirjoita jokainen kohta omalle rivilleen, viiva tai numero edessä.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Taulukko ei enää ole oikein: jätä otsikkorivi ennalleen ja anna jokaiselle riville yhtä monta saraketta.',
+  'Dezelfde foto staat hier twee keer.': 'Sama valokuva on tässä kahdesti.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Tähän kenttään kuuluvat vain valokuvat, ei irrallista tekstiä.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Suostumuksesi ruutu on vioittunut. Palauta lomake.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Tällä vastauksella ei ole sitä muotoa, joka kuuluu tähän kysymykseen.',
   'Downloaden…': 'Lataa…',
   'Afbeelding opgeslagen als': 'Kuva tallennettu nimellä',
   '{naam}: ingesteld': '{naam}: määritetty',

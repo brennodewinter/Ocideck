@@ -1642,6 +1642,590 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Team…': 'Команда…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Редактори, крім вас, які є в кожному комплекті, щоб і вони могли відкривати заявки. Ви додаєте когось за його карткою редактора й заново вводите відбиток цієї картки.',
+  'Er is nog niemand naast jou.': 'Крім вас, поки нікого немає.',
+  'Plak de kaart van de redacteur': 'Вставте картку редактора',
+  'Kaart controleren': 'Перевірити картку',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Картка {naam}. Введіть відбиток цієї картки, який {naam} передав вам іншим шляхом, наприклад телефоном.',
+  'Redacteur verwijderen': 'Видалити редактора',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Видалити {naam} з команди? Комплекти, які ви вже опублікували, залишаються як є, доки ви не опублікуєте знову; те, що вже запечатано для {naam}, залишається читабельним для цієї особи.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} додано. Опублікуйте комплект знову, щоб включити {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} видалено. Опублікуйте комплект знову, щоб прибрати {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Спершу створіть власний ключ редакції в розділі Ключ редакції….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Ваш ключ редакції не можна використати. Подивіться в розділі Ключ редакції….',
+  'Dit is geen redacteurskaart.': 'Це не картка редактора.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ця картка з новішої версії OciDeck. Оновіть OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Картка містить щось недозволене. Попросіть редактора про нову картку.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Цей відбиток не підходить до картки: картку змінили, або вона не від того, про кого ви думаєте. Знову попросіть редактора про відбиток і картку.',
+  'Dit is je eigen kaart.': 'Це ваша власна картка.',
+  'Deze redacteur staat er al.': 'Цей редактор уже в команді.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Команда заповнена: комплект несе щонайбільше 64 організатори, разом із вами.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Файл team.json у робочій папці не вдається прочитати. Нічого не змінено; полагодьте його або видаліть.',
+  'Het team kon niet worden opgeslagen.': 'Команду не вдалося зберегти.',
+  'Deze redacteur staat niet meer in het team.':
+      'Цього редактора вже немає в команді.',
+  'Naast jou in de bundel: {namen}.': 'Крім вас у комплекті: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Спершу перевірте ключ відновлення в розділі Ключ редакції… або додайте другого редактора в розділі Команда…. Без шляху назад усі надсилання стануть нечитабельними, якщо цей пристрій зламається.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Файл team.json у робочій папці не вдається прочитати. Нічого не підписано.',
+  'Redacteurskaart maken…': 'Створити картку редактора…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'За допомогою картки редактора власник форми додає вас до комплекту, щоб і ви могли відкривати заявки. Картку можна надіслати електронною поштою.',
+  'Jouw naam op de kaart': 'Ваше ім’я на картці',
+  'Kaart maken': 'Створити картку',
+  'Kaart kopiëren': 'Скопіювати картку',
+  'Vingerafdruk van de kaart': 'Відбиток картки',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Передайте власнику цей відбиток іншим шляхом, ніж картку, наприклад телефоном. Він введе його ще раз, перш ніж додасть вас.',
+  'Verzegeld opslaan…': 'Зберегти запечатаним…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Зашифрований файл (.zip.age), який може відкрити лише організатор. Для цього потрібні файл комплекту і відбиток із запрошення.',
+  'Kies het bundelbestand van de organisator':
+      'Виберіть файл комплекту організатора',
+  'Vingerafdruk van de organisator': 'Відбиток організатора',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Введіть відбиток із запрошення. Його навмисно немає у файлі комплекту: так ви можете перевірити, від кого він.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Це не відбиток. Він складається з 52 символів, зазвичай групами по чотири.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Цей файл — не комплект, який OciDeck може прочитати.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ця форма або цей комплект — із новішої версії OciDeck. Оновіть OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Відбиток не підходить до цього комплекту: форма не від того, кого називає запрошення. Перевірте відбиток і файл комплекту.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Підпис комплекту хибний: його змінили, або він не від того, кого називає відбиток. Попросіть організатора про новий комплект.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Цей комплект не належить до цієї форми. Використайте файл комплекту, що належить саме до цієї форми.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Термін дії цього комплекту минув. Попросіть в організатора новий.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Цей комплект старіший за той, який ви раніше отримали від цього організатора. Попросіть в організатора найновіший.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Комплект містить щось недозволене. Попросіть організатора про новий комплект.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Цю форму закрито: останній день був {datum}. Зверніться до організатора.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Заявка більша, ніж дозволяє організатор ({mb} МБ). Приберіть фото або зменште одне з них.',
+  'De inzending kon niet worden verzegeld.': 'Заявку не вдалося запечатати.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Збережено запечатаним як {naam}, відкрити може лише: {organisatoren}.',
+  'Bundel publiceren…': 'Опублікувати комплект…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Комплект — це те, чому той, хто заповнює, вірить щодо вашої редакції: до якого ключа запечатувати і до якого тексту він належить. Його зберігають поруч із формою.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'У робочій папці немає форми, для якої можна створити комплект.',
+  'Naam voor de invuller': 'Ім’я для того, хто заповнює',
+  'Geldig tot (jjjj-mm-dd)': 'Дійсний до (рррр-мм-дд)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Останній день, коли той, хто заповнює, вірить цьому комплекту. Не раніше дня закриття форми.',
+  'Bundel maken': 'Створити комплект',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Комплект створено (порядковий номер {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Передайте відбиток тому, хто заповнює, іншим шляхом, ніж файл комплекту, наприклад в запрошенні. Хто має лише файл комплекту, не може перевірити, від кого він.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ця платформа не має зв’язки ключів для ключа редакції; комплект тут не можна підписати.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Ключа редакції ще немає. Створіть його в розділі Ключ редакції…, перш ніж публікувати комплект.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Зв’язку ключів не вдається прочитати. Нічого не підписано.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Збережений ключ редакції не вдається прочитати. Видаліть його в розділі Ключ редакції… і відновіть із ключа відновлення.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Комплект цієї форми в робочій папці не вдається прочитати, або він не належить до інших. Тоді порядковий номер визначити неможливо, і нічого не підписано. Перевірте: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Введіть ім’я не довше за 80 символів.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Дійсний до має бути існуючою датою у форматі рррр-мм-дд.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Дійсний до не може бути раніше за день закриття форми.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Не вдалося створити комплект ({veld}). Перевірте, чи форма вказує дійсний день закриття і строк зберігання.',
+  'formulier': 'форма',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Не вдалося зберегти комплект у робочій папці.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Створіть і підпишіть комплект, якому той, хто заповнює, вірить щодо вашої редакції.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: запечатаний пакет відкрито й імпортовано.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: цей пакет запечатано, а ця платформа не має зв’язки ключів для ключа редакції.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: цей пакет запечатано, і ще немає ключа редакції, щоб його відкрити. Створіть його в розділі Ключ редакції… або відновіть із ключа відновлення.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: цей пакет запечатано, а зв’язку ключів не вдається прочитати. Нічого не пробували.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: цей пакет запечатано, а збережений ключ редакції не вдається прочитати. Видаліть його в розділі Ключ редакції… і відновіть із ключа відновлення.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: цей пакет запечатано не для вашого ключа редакції.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: цей пакет змінено або обірвано, тож його не буде відкрито.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: цей пакет більший, ніж може бути надсилання.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: збережений ключ редакції — не той ключ, яким може скористатися OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: це не запечатаний пакет, який OciDeck може прочитати.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Запечатаний файл (.zip.age) відкривається вашим ключем редакції.',
+  'Herstelsleutel controleren': 'Перевірити ключ відновлення',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Ключ редакції створено. Тепер запишіть ключ відновлення.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Зв’язка ключів не прийняла ключ. Нічого не створено.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Ключ редакції вже є. Його не чіпали.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Зв’язку ключів не вдалося прочитати. Нічого не припущено й нічого не створено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'У зв’язці ключів є щось, що не є ключем редакції. Це не перезаписано.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ця платформа не має зв’язки ключів.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Правильно: ключ відновлення перевірено.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Це дійсний ключ відновлення, але не від цього ключа редакції.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Ключ відновлення правильний, але це не вдалося зберегти.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Немає ключа редакції, з яким можна порівняти.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Це не ключ відновлення ключа редакції.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'У ньому є помилка друку: контрольна сума не збігається.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Цей ключ відновлення походить із новішої версії OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Цей ключ відновлення зроблено для чогось іншого.',
+  'Hersteld uit de herstelsleutel.': 'Відновлено з ключа відновлення.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Зв’язка ключів не прийняла ключ. Нічого не відновлено.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Зберегти ключ редакції як файл ключа age',
+  'Het bestand kon niet worden opgeslagen.': 'Файл не вдалося зберегти.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Збережено як {pad}. Хто має цей файл, може відкрити все.',
+  'Redactiesleutel verwijderd.': 'Ключ редакції видалено.',
+  'Redactiesleutel': 'Ключ редакції',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ця платформа не має зв’язки ключів. Ключ редакції тут зберігати не можна; скористайтеся настільною програмою.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Зв’язку ключів не вдалося прочитати (заблокована або доступ відхилено). Нічого не припущено й нічого не створено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'У зв’язці ключів є щось, що не є ключем редакції. Це не перезаписано. Видаліть це та відновіть ключ зі свого ключа відновлення.',
+  'Redactiesleutel verwijderen…': 'Видалити ключ редакції…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ключ редакції відкриває запечатані надсилання та підписує пакети ваших форм. Він зберігається в зв’язці ключів цієї операційної системи. Якщо ви втратите всі ключі редакції, усі ще не отримані надсилання стануть нечитабельними: така ціна сервера, який нічого не може прочитати.',
+  'Redactiesleutel aanmaken': 'Створити ключ редакції',
+  'Herstellen uit herstelsleutel…': 'Відновити з ключа відновлення…',
+  'Vingerafdruk': 'Відбиток',
+  'Ontvanger (age)': 'Одержувач (age)',
+  'Aangemaakt op {datum}.': 'Створено {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Ключ відновлення перевірено.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Ключ відновлення ще не перевірено: запишіть його та введіть ще раз.',
+  'Herstelsleutel tonen…': 'Показати ключ відновлення…',
+  'Vingerafdruk kopiëren': 'Копіювати відбиток',
+  'Exporteren als age-sleutelbestand…': 'Експортувати як файл ключа age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Запишіть цей ключ відновлення та зберігайте його в безпечному місці, поза цим пристроєм. Хто його має, може відкрити всі надсилання та підписувати пакети від вашого імені. Якщо ви втратите цей пристрій, це все, що залишиться.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Введіть ключ відновлення тут ще раз',
+  'Later': 'Пізніше',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Введіть або вставте ключ відновлення. Те, що ви введете, буде поміщено в зв’язку ключів як ключ редакції; нічого не перезаписується.',
+  'Herstelsleutel': 'Ключ відновлення',
+  'Redactiesleutel verwijderen': 'Видалити ключ редакції',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Ключ буде стерто зі зв’язки ключів, і він може повернутися лише з ключа відновлення. Якщо у вас його немає, надсилання, запечатані лише для цього ключа, залишаться нечитабельними назавжди.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Ключ, який відкриває запечатані надсилання та підписує пакети.',
+  'Redactiesleutel…': 'Ключ редакції…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Робочу копію викинуто. Те, що надійшло, оцінюється знову.',
+  'Er is geen werkkopie.': 'Робочої копії немає.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Не вдалося викинути робочу копію.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Видаляє робочу копію. Те, що надійшло, залишається й оцінюється знову.',
+  'Werkkopie weggooien…': 'Викинути робочу копію…',
+  'Werkkopie weggooien': 'Викинути робочу копію',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Робочу копію з виправленнями буде видалено, і її не можна буде повернути. Те, що надійшло, залишається й оцінюється знову. Якщо робоча копія ще відкрита у вкладці, спершу закрийте її.',
+  'Weggooien': 'Викинути',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Це надсилання відкликано, тому воно не потрапляє в жоден розділ.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Це надсилання неможливо прочитати, або форми, для якої його надіслано, немає в робочій папці.',
+  'Het controledocument kon niet worden geschreven.':
+      'Документ для перевірки не вдалося записати.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Ваш внесок до книги: просимо перевірити',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Ось ваш внесок у тому вигляді, в якому він з’явиться в книзі (див. вкладення). Усе правильно? Дайте відповідь ‘згоден’ або надішліть свої виправлення до {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Лист готовий у вашій поштовій програмі. Додайте PDF і надішліть його.',
+  'Controle door de maker…': 'Перевірка автором…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Документ для перевірки — це розділ цього одного надсилання. Експортуйте його як PDF (виберіть повний профіль), додайте PDF до листа й надішліть. Якщо автор відповість ‘згоден’, самі змініть статус на maker-approved: ця відповідь також підтверджує, що внесок справді від цієї особи.',
+  'Controledocument maken en openen':
+      'Створити документ для перевірки й відкрити',
+  'E-mailadres van de maker': 'Електронна адреса автора',
+  'Antwoord vóór (jjjj-mm-dd)': 'Відповісти до (рррр-мм-дд)',
+  'Mail schrijven': 'Написати лист',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ця форма не знає статусу maker-check-sent, тому його тут не можна встановити.',
+  'Controle verstuurd': 'Перевірку надіслано',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Створює розділ із цього надсилання та готує лист, яким автор його перевіряє.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Цього надсилання немає в реєстрі. Виправте overview.md і спробуйте ще раз.',
+  'Kies het hoofdstuksjabloon': 'Вибрати шаблон розділу',
+  'Kies eerst een hoofdstuksjabloon.': 'Спершу виберіть шаблон розділу.',
+  'Kies minstens één status.': 'Виберіть принаймні один статус.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Книгу складено. Розділів: {n}. Фото: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Відкликано, тому пропущено: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Пропущено (інша версія або неможливо прочитати): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Фото, яких не було в робочій папці: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'В імені використовуйте лише літери, цифри, дефіси та підкреслення (не більше 64 символів).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Книга з такою назвою вже існує. Виберіть іншу назву.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'У шаблоні згадано поля, яких немає у формі: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Нічого додавати до книги: немає надсилань із вибраним статусом. Відкликано: {w}; пропущено: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Реєстр неможливо прочитати. Виправте overview.md.',
+  'Het boek kon niet worden geschreven.': 'Книгу не вдалося записати.',
+  'Boek samenstellen…': 'Скласти книгу…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Книга потрапляє до папки book у робочій папці й лишається звичайним документом, який ви потім можете редагувати.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'У робочій папці немає придатної форми.',
+  'Formulier': 'Форма',
+  'Hoofdstuksjabloon': 'Шаблон розділу',
+  'Nog geen sjabloon gekozen.': 'Шаблон ще не вибрано.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'У шаблоні {veld-id} означає відповідь на це поле.',
+  'Hoofdstuksjabloon kiezen…': 'Вибрати шаблон розділу…',
+  'Welke inzendingen?': 'Які надсилання?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'До книги потрапляють лише надсилання з одним із цих статусів. Відкликані надсилання завжди залишаються поза нею.',
+  'Ordenen op': 'Сортувати за',
+  'Groeperen op': 'Групувати за',
+  'Naam van het boek': 'Назва книги',
+  'Boek openen': 'Відкрити книгу',
+  'Samenstellen': 'Скласти',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Не вдалося створити робочу копію.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Відкриває копію надсилання для виправлення. Те, що надійшло, залишається без змін.',
+  'Werkkopie openen': 'Відкрити робочу копію',
+  'Status gewijzigd naar {status}.': 'Статус змінено на {status}.',
+  'Intrekking opgeslagen.': 'Відкликання збережено.',
+  'Intrekking ongedaan gemaakt.': 'Відкликання скасовано.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Надсилання видалено; запис залишається.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Надсилання видалено, але реєстр не вдалося оновити. Змініть overview.md вручну.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Надсилання не знайдено в робочій папці.',
+  'De inzending kon niet worden verwijderd.': 'Не вдалося видалити надсилання.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Реєстр не вдається прочитати. Виправте overview.md; нічого не змінено.',
+  'Het register kon niet worden bijgewerkt.': 'Не вдалося оновити реєстр.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Не вдалося внести цю зміну: надсилання немає в реєстрі.',
+  'Status wijzigen': 'Змінити статус',
+  'Intrekking ongedaan maken': 'Скасувати відкликання',
+  'Intrekken…': 'Відкликати…',
+  'Verwijderen…': 'Видалити…',
+  'Inzending intrekken': 'Відкликати надсилання',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Введіть день, коли той, хто надіслав, відкликав надсилання. Відкликане надсилання ніколи не потрапляє до книги.',
+  'Dag (jjjj-mm-dd)': 'День (рррр-мм-дд)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Недійсний день. Використайте рік-місяць-день, наприклад {voorbeeld}.',
+  'Inzending verwijderen': 'Видалити надсилання',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Відповіді, робоча копія та фото цього надсилання буде стерто з робочої папки. Залишиться лише мінімальний запис: номер, дні отримання й згоди та статус. Це неможливо скасувати.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Також залишається те, що форма оголосила заздалегідь: {velden}.',
+  'Er klopt iets niet aan deze inzending.': 'З цим надсиланням щось не так.',
+  'Verplicht, maar leeg gelaten.': 'Обов’язково, але залишено порожнім.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} слів; потрібно щонайменше {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} слів; дозволено щонайбільше {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} символів; потрібно щонайменше {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} символів; дозволено щонайбільше {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '«{value}» немає у списку варіантів.',
+  '“{value}” is geen getal.': '«{value}» — не число.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '«{value}» — не дата у вигляді рік-місяць-день.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Фото шириною {actual} пікселів; потрібно {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'У надсиланні бракує файлу фото.',
+  'De beschrijving van de foto ontbreekt.': 'Бракує опису фото.',
+  'De maker van de foto ontbreekt.': 'Бракує автора фото.',
+  'De foto is niet gecontroleerd.': 'Фото не перевірено.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Фото HEIC: не перевірено й не очищено; може містити місце знімання.',
+  'Toestemming niet gegeven.': 'Згоду не надано.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Відповідь містить рядок, схожий на керівний код форми.',
+  'Het antwoord bevat HTML.': 'Відповідь містить HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Відповідь містить незакритий блок коду.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Відповідь посилається на зображення, яке не належить до цього надсилання.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Відповідь містить недозволене посилання.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Цієї форми або цієї версії немає в робочій папці.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Той, хто надіслав, працював з іншим текстом форми, ніж опублікований.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Згода в маніфесті не збігається з опублікованою формою.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Текст форми змінено поза відповідями.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Текст форми змінено біля цього поля.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Цього поля немає в опублікованій формі.',
+  'Dit veld ontbreekt in de inzending.': 'Цього поля бракує в надсиланні.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Надсилання версії {submission}; опублікована версія {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Форма потребує новішої версії OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Опублікована форма в робочій папці непридатна.',
+  'De inzending hoort bij een ander formulier.':
+      'Надсилання належить до іншої форми.',
+  'De opbouw van de inzending is beschadigd.':
+      'Структуру надсилання пошкоджено.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Реєстр не вдається прочитати. Виправте overview.md; надсилання показано нижче без даних із реєстру.',
+  'Nog geen inzendingen.': 'Надсилань ще немає.',
+  'Om na te lopen': 'Для перевірки',
+  'Verwijderd': 'Видалено',
+  'Zonder regel in het register': 'Без рядка в реєстрі',
+  'Ontvangen {datum}': 'Отримано {datum}',
+  'Ingetrokken {datum}': 'Відкликано {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Вміст цього надсилання видалено; залишився лише запис.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Це надсилання не вдається прочитати. Перевірте файли в робочій папці.',
+  'Beoordeeld tegen {formulier}.': 'Оцінено щодо {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Оцінка стосується робочої копії (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Немає пунктів для перевірки.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Фото, яких не згадує жодна відповідь: {n}.',
+  'Inzendingen': 'Надсилання',
+  'Werkmap': 'Робоча папка',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Робочу папку ще не вибрано. Виберіть папку, де зберігатимуться надсилання та реєстр.',
+  'Werkmap kiezen…': 'Вибрати робочу папку…',
+  'Kies de werkmap voor inzendingen': 'Виберіть робочу папку для надсилань',
+  'Formulieren': 'Форми',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Форму ще не додано. Додайте форму так, як ви її опублікували: надсилання перевіряється за нею.',
+  'Formulier toevoegen…': 'Додати форму…',
+  'Kies het formulier om toe te voegen': 'Виберіть форму для додавання',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Цей файл не є формою, яку можна опублікувати.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ця форма вже є з іншим текстом. Інший текст — це нова версія: дайте формі вищий номер версії.',
+  'Formulier toegevoegd: {naam}.': 'Форму додано: {naam}.',
+  'Dit formulier stond er al.': 'Ця форма вже була.',
+  'Het formulier kon niet worden opgeslagen.': 'Не вдалося зберегти форму.',
+  'Inzendingen in de werkmap: {n}': 'Надсилань у робочій папці: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Звичайний zip не шифрується в дорозі.',
+  'Pakketten binnenhalen…': 'Імпортувати пакети…',
+  'Kies de pakketten om binnen te halen': 'Виберіть пакети для імпорту',
+  'Register openen': 'Відкрити реєстр',
+  '{naam}: binnengehaald.': '{naam}: імпортовано.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: імпортовано, але є пункти для перевірки.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: імпортовано, але реєстр не вдалося оновити. Перевірте overview.md.',
+  '{naam}: stond er al.': '{naam}: уже було.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: це не пакет надсилання, який OciDeck може прочитати.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: цю форму не додано або не в цій версії. Спершу додайте форму.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: не вдалося зберегти в робочій папці.',
+  'Formulieren en inzendingen': 'Форми та надсилання',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Імпортуйте надсилання форми, перевіряйте їх за опублікованою формою та зберігайте з реєстром. Заповнювати форму можна й тоді, коли це вимкнено. За замовчуванням вимкнено.',
+  'Inzending opslaan als zip…': 'Зберегти заявку як zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Файл zip з вашими відповідями та фото, щоб надіслати організаторові електронною поштою.',
+  'Inzending opgeslagen als {naam}.': 'Заявку збережено як {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Виберіть форму такою, якою ви її отримали',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Це не та форма, до якої належать ваші відповіді. Виберіть файл, який ви отримали від організатора.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Не вдалося прочитати фото: {pad}. Додайте його ще раз.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Заявка не вміщується в один пакет: забагато фото або фото завелике.',
+  'De inzending kon niet worden opgeslagen.': 'Не вдалося зберегти заявку.',
+  'Inzending opslaan': 'Зберегти заявку',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Дані про місцезнаходження видалено з цієї фотографії.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Цю фотографію не вдалося додати. Виберіть файл фотографії у форматі JPEG, PNG, WebP або HEIC.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Спершу збережіть документ, щоб додавати фотографії.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck може імпортувати цей файл у новий документ.',
+  'Kies een datum': 'Обрати дату',
+  'Anders, namelijk:': 'Інше, а саме:',
+  'Punt {n}': 'Пункт {n}',
+  'Punt {n} verwijderen': 'Вилучити пункт {n}',
+  'Rij {n} verwijderen': 'Вилучити рядок {n}',
+  'Foto {n} verwijderen': 'Вилучити фотографію {n}',
+  'Wat is er te zien op de foto?': 'Що видно на фотографії?',
+  'Van wie is de foto?': 'Чия це фотографія?',
+  'Foto toevoegen': 'Додати фотографію',
+  'Verplicht': 'Обов’язково',
+  'Alles is ingevuld.': 'Усе заповнено.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Ще {n} до того, як можна буде надіслати:',
+  'klaar': 'готово',
+  '{n} open': '{n} відкрито',
+  'Dit formulier kan niet worden ingevuld.': 'Цю форму не можна заповнити.',
+  'Naar de bron': 'До джерела',
+  'Woorden': 'Слова',
+  'Tekens': 'Символи',
+  'Keuzes': 'Варіанти',
+  'Rijen': 'Рядки',
+  'Foto’s': 'Фотографії',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (щонайменше {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (щонайбільше {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (щонайменше {min}, щонайбільше {max})',
+  'Invullen': 'Заповнити',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Із цією формою щось не так. Зверніться до того, хто її створив.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Це поле обов’язкове. Заповніть його, щоб мати змогу надіслати.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Ви написали {actual} слів; потрібно щонайменше {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Ви написали {actual} слів; дозволено щонайбільше {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Ви написали {actual} символів; потрібно щонайменше {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Ви написали {actual} символів; дозволено щонайбільше {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '«{value}» немає в списку. Виберіть один із варіантів.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '«{value}» не є числом. Використовуйте лише цифри, за потреби з комою або крапкою для десяткових.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ця фотографія має ширину {actual} пікселів; тут потрібно {min}. Ймовірно, її зменшили під час надсилання через месенджер. Якщо оригінал у вас ще є, використайте його. Якщо ні, усе одно надішліть її: організація зв’яжеться з вами.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Ця фотографія важить {actual} МБ; максимум — {max} МБ.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Вміст цього файлу не відповідає його типу.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Цей тип файлу тут не дозволений.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Файл цієї фотографії більше не знайдено. Додайте фотографію знову.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Опишіть одним коротким реченням, що зображено на фотографії.',
+  'Geef aan van wie de foto is.': 'Вкажіть, чия це фотографія.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Цю фотографію ще не перевірено. Зачекайте трохи або додайте її знову.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ця фотографія — файл HEIC. OciDeck не може перевірити чи очистити його тут, тому його буде надіслано як є. У ньому може бути вказано, де зроблено фото. Якщо не хочете цим ділитися, виберіть у налаштуваннях камери «Максимальна сумісність» або поділіться фотографією у форматі JPEG і додайте її знову.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'На цій фотографії {actual} облич; очікувалося {expected}. Це лише нагадування.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Поставте позначку, щоб погодитися; без згоди надіслати не можна.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ця форма потребує новішої версії OciDeck. Оновіть застосунок, щоб її заповнити.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'У самій формі щось випадково змінено. Відновіть форму; ваші відповіді залишаться.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Цей рядок схожий на службовий код форми й не може бути у відповіді. Змініть його.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML у відповіді не дозволено. Використовуйте звичайний текст і просте форматування.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Блок коду не закрито. Закрийте його за допомогою ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'У відповіді можуть бути лише фотографії, які ви додали в цій формі; зображення з інтернету — ні.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'У відповіді дозволені лише посилання, що починаються з https://, та адреси електронної пошти.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Цей файл створено в іншій версії форми (версія {submission}; тепер діє версія {published}). Перевірте свої відповіді.',
+  'Punt {item}: {bericht}': 'Пункт {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Зараз їх {actual}; має бути від {min} до {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Зараз їх {actual}; може бути щонайбільше {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Зараз їх {actual}; має бути щонайменше {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Число має бути кратним {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Число має бути від {min} до {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Число може бути щонайбільше {max}.',
+  'Het getal moet minstens {min} zijn.': 'Число має бути щонайменше {min}.',
+  'De datum moet op of na {min} liggen.': 'Дата має бути {min} або пізніше.',
+  'De datum moet op of vóór {max} liggen.': 'Дата має бути {max} або раніше.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '«{value}» не є датою. Запишіть дату як рік-місяць-день, наприклад 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Це не дійсна адреса електронної пошти.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Це не дійсна веб-адреса. Почніть з https://.',
+  'Dit is geen geldig telefoonnummer.': 'Це не дійсний номер телефону.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Це не дійсний нідерландський поштовий індекс, наприклад 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Тут поміщається лише один рядок. Приберіть розриви рядків.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Використовуйте лише прапорці цього запитання: один прапорець на варіант.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Пишіть кожен пункт в окремому рядку, зі знаком «—» або номером попереду.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Таблиця вже не правильна: залиште рядок заголовка таким, яким він був, і зробіть в усіх рядках однакову кількість стовпців.',
+  'Dezelfde foto staat hier twee keer.': 'Та сама фотографія тут двічі.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'У це поле належать лише фотографії, без окремого тексту.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Прапорець вашої згоди пошкоджено. Відновіть форму.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ця відповідь не має форми, яка відповідає цьому запитанню.',
   'Downloaden…': 'Завантажити…',
   'Afbeelding opgeslagen als': 'Зображення збережено як',
   '{naam}: ingesteld': '{naam}: налаштовано',

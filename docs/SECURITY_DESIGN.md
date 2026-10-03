@@ -758,12 +758,16 @@ revocation or signer identity, and it never shows a trusted/valid badge.
 
 ## 13. Key management
 
-*Added 2026-07-22.* Four kinds of secret exist. None of them is a key OciDeck
-generates and keeps for itself; every one is either the user's, or the operating
-system's, or thrown away after a single use.
+*Added 2026-07-22.* Four kinds of secret existed. None of them was a key OciDeck
+generates and keeps for itself; every one was either the user's, or the operating
+system's, or thrown away after a single use. *Amended 2026-10-03:* there is now a
+fifth, the **editorial key** of a form organiser, and it is the one exception —
+OciDeck generates it, because a sealed submission can only be opened with a key
+that was made before anyone sealed to it.
 
 | Secret | Held by | Reachable by | If it is compromised |
 | --- | --- | --- | --- |
+| **Editorial key** — the `age` identity that opens sealed form submissions and the Ed25519 seed that signs form bundles (`docs/design/FORM_INTAKE.md` §5.9) | The OS keychain, via `SecretStore`, under `form_editorial_key`, as one JSON text (identity, seed, creation day, whether the recovery key was typed back). Created in a visible step, never silently. Never overwritten: a keychain that cannot be read is not an empty one, and an unreadable stored text is not room for a new key. The same two secrets exist once more as the **recovery key** the user is asked to write down — OciDeck does not keep that text anywhere, it is derived from the key on request | The app, and anything else running as that OS user with keychain access; the user, if they export the age key file (written `0600`) or show the recovery key | **Whoever holds it opens every submission sealed to it and can sign a bundle in the organisers' name.** There is no revocation list. What the format allows is a new bundle with other keys and a higher sequence number (FORM_INTAKE.md §5.1; publishing one is not built yet); a respondent who holds the old bundle keeps sealing to it until it expires or they fetch the new one. Submissions already sealed to a compromised key stay readable to whoever holds it. **Losing it** loses every submission not yet fetched — a blind server cannot help — which is why the recovery key exists and why publishing waits for it to have been typed back (§7.6) |
 | **Package passphrase** | Nobody but the user. It is never stored, never cached, and never written to preferences or the keychain — it exists in memory for the duration of one export or one open | The user, and whoever they give the package to | Every copy of that package that was ever handed out is readable. There is no revocation and no re-key: re-export with a new passphrase and treat the old package as public |
 | **Storage credentials** — WebDAV/Nextcloud app password, S3 **secret** access key, git personal-access token, AI API key | The OS keychain, via `SecretStore` (`flutter_secure_storage`), keyed per server plus identity: `webdav_pw::…`, `s3_secret::…`, `git_pat::…`, `ai_api_key::…` | The app, and anything else running as that OS user with keychain access | Revoke it at the server, not here. Removing the connection in OciDeck rewrites preferences and **does not** delete the git working copy, mirror or outbox — see `SECURITY.md`, *Crash-recovery snapshots*. The git token additionally leaves the keychain for the lifetime of each `git` subprocess (§10) |
 | **Pinned certificate fingerprint** (SHA-256) | Preferences, in the clear — `pinnedCertSha256` on `S3Settings` / `WebdavSettings` | Anyone who can read the preferences file | It is not a secret; publishing it costs nothing. The risk runs the other way: an attacker who can *write* preferences can pin their own certificate, so the integrity of that file is what matters, not its confidentiality |

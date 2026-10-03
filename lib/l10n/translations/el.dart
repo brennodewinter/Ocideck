@@ -1652,6 +1652,607 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Team…': 'Ομάδα…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Οι συντάκτες εκτός από εσάς που είναι σε κάθε δέσμη, ώστε να μπορούν κι αυτοί να ανοίγουν τις υποβολές. Προσθέτετε κάποιον με την κάρτα συντάκτη του και πληκτρολογείτε ξανά το δακτυλικό αποτύπωμα της κάρτας.',
+  'Er is nog niemand naast jou.': 'Δεν υπάρχει ακόμη κανείς εκτός από εσάς.',
+  'Plak de kaart van de redacteur': 'Επικολλήστε την κάρτα του συντάκτη',
+  'Kaart controleren': 'Έλεγχος κάρτας',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Κάρτα του/της {naam}. Πληκτρολογήστε το δακτυλικό αποτύπωμα αυτής της κάρτας που σας έδωσε ο/η {naam} με άλλον τρόπο, π.χ. τηλεφωνικά.',
+  'Redacteur verwijderen': 'Αφαίρεση συντάκτη',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Αφαίρεση του/της {naam} από την ομάδα; Οι δέσμες που έχετε ήδη δημοσιεύσει μένουν όπως είναι μέχρι να δημοσιεύσετε ξανά· ό,τι έχει ήδη σφραγιστεί για τον/την {naam} παραμένει αναγνώσιμο για το άτομο αυτό.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      'Ο/Η {naam} προστέθηκε. Δημοσιεύστε ξανά τη δέσμη για να συμπεριληφθεί ο/η {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      'Ο/Η {naam} αφαιρέθηκε. Δημοσιεύστε ξανά τη δέσμη για να αφαιρεθεί ο/η {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Δημιουργήστε πρώτα το δικό σας κλειδί συντακτικής ομάδας στο Κλειδί συντακτικής ομάδας….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Το κλειδί συντακτικής ομάδας σας δεν μπορεί να χρησιμοποιηθεί. Δείτε στο Κλειδί συντακτικής ομάδας….',
+  'Dit is geen redacteurskaart.': 'Αυτή δεν είναι κάρτα συντάκτη.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Αυτή η κάρτα είναι από νεότερη έκδοση του OciDeck. Ενημερώστε το OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Η κάρτα περιέχει κάτι που δεν επιτρέπεται. Ζητήστε από τον συντάκτη νέα κάρτα.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Αυτό το δακτυλικό αποτύπωμα δεν ταιριάζει με την κάρτα: η κάρτα έχει αλλάξει ή δεν είναι από αυτόν που νομίζετε. Ζητήστε ξανά από τον συντάκτη το δακτυλικό αποτύπωμα και την κάρτα.',
+  'Dit is je eigen kaart.': 'Αυτή είναι η δική σας κάρτα.',
+  'Deze redacteur staat er al.': 'Αυτός ο συντάκτης είναι ήδη στην ομάδα.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Η ομάδα είναι πλήρης: μια δέσμη φέρει το πολύ 64 διοργανωτές, μαζί με εσάς.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Το αρχείο team.json στον φάκελο εργασίας δεν μπορεί να διαβαστεί. Δεν άλλαξε τίποτα· επισκευάστε το ή διαγράψτε το.',
+  'Het team kon niet worden opgeslagen.': 'Η ομάδα δεν μπόρεσε να αποθηκευτεί.',
+  'Deze redacteur staat niet meer in het team.':
+      'Αυτός ο συντάκτης δεν είναι πια στην ομάδα.',
+  'Naast jou in de bundel: {namen}.': 'Εκτός από εσάς στη δέσμη: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Ελέγξτε πρώτα το κλειδί ανάκτησης στο Κλειδί συντακτικής ομάδας… ή προσθέστε δεύτερο συντάκτη στο Ομάδα…. Χωρίς δρόμο επιστροφής, όλες οι υποβολές γίνονται δυσανάγνωστες αν χαλάσει αυτή η συσκευή.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Το αρχείο team.json στον φάκελο εργασίας δεν μπορεί να διαβαστεί. Δεν υπογράφεται τίποτα.',
+  'Redacteurskaart maken…': 'Δημιουργία κάρτας συντάκτη…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Με μια κάρτα συντάκτη, ο κάτοχος μιας φόρμας σας προσθέτει στη δέσμη, ώστε να μπορείτε κι εσείς να ανοίγετε τις υποβολές. Η κάρτα μπορεί να σταλεί με email.',
+  'Jouw naam op de kaart': 'Το όνομά σας στην κάρτα',
+  'Kaart maken': 'Δημιουργία κάρτας',
+  'Kaart kopiëren': 'Αντιγραφή κάρτας',
+  'Vingerafdruk van de kaart': 'Δακτυλικό αποτύπωμα της κάρτας',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Δώστε στον κάτοχο αυτό το δακτυλικό αποτύπωμα με άλλον τρόπο από την κάρτα, π.χ. τηλεφωνικά. Το πληκτρολογεί ξανά πριν σας προσθέσει.',
+  'Verzegeld opslaan…': 'Αποθήκευση σφραγισμένου…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Ένα κρυπτογραφημένο αρχείο (.zip.age) που μπορεί να ανοίξει μόνο ο διοργανωτής. Για αυτό χρειάζεστε το αρχείο της δέσμης και το δακτυλικό αποτύπωμα από την πρόσκληση.',
+  'Kies het bundelbestand van de organisator':
+      'Επιλέξτε το αρχείο δέσμης του διοργανωτή',
+  'Vingerafdruk van de organisator': 'Δακτυλικό αποτύπωμα του διοργανωτή',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Πληκτρολογήστε το δακτυλικό αποτύπωμα από την πρόσκληση. Δεν υπάρχει σκόπιμα στο αρχείο της δέσμης: έτσι μπορείτε να ελέγξετε από ποιον προέρχεται.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Αυτό δεν είναι δακτυλικό αποτύπωμα. Αποτελείται από 52 χαρακτήρες, συνήθως σε ομάδες των τεσσάρων.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Αυτό το αρχείο δεν είναι δέσμη που μπορεί να διαβάσει το OciDeck.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Αυτή η φόρμα ή αυτή η δέσμη είναι από νεότερη έκδοση του OciDeck. Ενημερώστε το OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Το δακτυλικό αποτύπωμα δεν ταιριάζει με αυτή τη δέσμη: η φόρμα δεν προέρχεται από αυτόν που λέει η πρόσκληση. Ελέγξτε το δακτυλικό αποτύπωμα και το αρχείο της δέσμης.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Η υπογραφή της δέσμης δεν είναι σωστή: έχει αλλάξει ή δεν προέρχεται από αυτόν που λέει το δακτυλικό αποτύπωμα. Ζητήστε από τον διοργανωτή νέα δέσμη.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Αυτή η δέσμη δεν ανήκει σε αυτή τη φόρμα. Χρησιμοποιήστε το αρχείο δέσμης που ανήκει ακριβώς σε αυτή τη φόρμα.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Αυτή η δέσμη έχει λήξει. Ζητήστε από τον διοργανωτή μια νέα.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Αυτή η δέσμη είναι παλαιότερη από μια δέσμη που λάβατε νωρίτερα από αυτόν τον διοργανωτή. Ζητήστε από τον διοργανωτή την πιο πρόσφατη.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Η δέσμη περιέχει κάτι που δεν επιτρέπεται. Ζητήστε από τον διοργανωτή νέα δέσμη.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Αυτή η φόρμα έχει κλείσει: η τελευταία ημέρα ήταν η {datum}. Επικοινωνήστε με τον διοργανωτή.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Η υποβολή είναι μεγαλύτερη από όσο επιτρέπει ο διοργανωτής ({mb} MB). Αφαιρέστε μια φωτογραφία ή μικρύνετε μία.',
+  'De inzending kon niet worden verzegeld.':
+      'Η υποβολή δεν μπόρεσε να σφραγιστεί.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Αποθηκεύτηκε σφραγισμένη ως {naam}, ανοίγει μόνο από: {organisatoren}.',
+  'Bundel publiceren…': 'Δημοσίευση δέσμης…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Η δέσμη είναι ό,τι πιστεύει όποιος συμπληρώνει για τη συντακτική σας ομάδα: με ποιο κλειδί σφραγίζει και σε ποιο κείμενο ανήκει. Αποθηκεύεται δίπλα στη φόρμα.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Δεν υπάρχει φόρμα στον φάκελο εργασίας για την οποία να δημιουργηθεί δέσμη.',
+  'Naam voor de invuller': 'Όνομα για όποιον συμπληρώνει',
+  'Geldig tot (jjjj-mm-dd)': 'Ισχύει έως (εεεε-μμ-ηη)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Η τελευταία ημέρα που όποιος συμπληρώνει πιστεύει αυτή τη δέσμη. Όχι πριν από την ημέρα λήξης της φόρμας.',
+  'Bundel maken': 'Δημιουργία δέσμης',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Η δέσμη δημιουργήθηκε (σειριακός αριθμός {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Δώστε το δακτυλικό αποτύπωμα σε όποιον συμπληρώνει με άλλον τρόπο από το αρχείο της δέσμης, π.χ. στην πρόσκληση. Όποιος έχει μόνο το αρχείο της δέσμης δεν μπορεί να ελέγξει από ποιον προέρχεται.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Αυτή η πλατφόρμα δεν έχει κλειδοθήκη για το κλειδί συντακτικής ομάδας· η δέσμη δεν μπορεί να υπογραφεί εδώ.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Δεν υπάρχει ακόμη κλειδί συντακτικής ομάδας. Δημιουργήστε ένα στο Κλειδί συντακτικής ομάδας… πριν δημοσιεύσετε δέσμη.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Η κλειδοθήκη δεν μπορεί να διαβαστεί. Δεν υπογράφηκε τίποτα.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Το αποθηκευμένο κλειδί συντακτικής ομάδας δεν μπορεί να διαβαστεί. Διαγράψτε το στο Κλειδί συντακτικής ομάδας… και επαναφέρετέ το από το κλειδί ανάκτησης.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Μια δέσμη αυτής της φόρμας στον φάκελο εργασίας δεν μπορεί να διαβαστεί ή δεν ανήκει στις υπόλοιπες. Έτσι ο σειριακός αριθμός δεν μπορεί να προσδιοριστεί και δεν υπογράφεται τίποτα. Ελέγξτε: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Εισαγάγετε όνομα έως 80 χαρακτήρες.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Το Ισχύει έως πρέπει να είναι υπαρκτή ημερομηνία, ως εεεε-μμ-ηη.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Το Ισχύει έως δεν μπορεί να είναι πριν από την ημέρα λήξης της φόρμας.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Η δέσμη δεν μπόρεσε να δημιουργηθεί ({veld}). Ελέγξτε ότι η φόρμα αναφέρει έγκυρη ημέρα λήξης και περίοδο διατήρησης.',
+  'formulier': 'φόρμα',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Η δέσμη δεν μπόρεσε να αποθηκευτεί στον φάκελο εργασίας.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Δημιουργήστε και υπογράψτε τη δέσμη που πιστεύει όποιος συμπληρώνει για τη συντακτική σας ομάδα.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: το σφραγισμένο πακέτο ανοίχτηκε και εισήχθη.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και αυτή η πλατφόρμα δεν έχει κλειδοθήκη για το κλειδί συντακτικής ομάδας.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και δεν υπάρχει ακόμη κλειδί συντακτικής ομάδας για να ανοίξει. Δημιουργήστε ένα στο Κλειδί συντακτικής ομάδας… ή επαναφέρετέ το από το κλειδί ανάκτησης.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και η κλειδοθήκη δεν μπορεί να διαβαστεί. Δεν δοκιμάστηκε τίποτα.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: αυτό το πακέτο είναι σφραγισμένο και το αποθηκευμένο κλειδί συντακτικής ομάδας δεν μπορεί να διαβαστεί. Διαγράψτε το στο Κλειδί συντακτικής ομάδας… και επαναφέρετέ το από το κλειδί ανάκτησης.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: αυτό το πακέτο δεν σφραγίστηκε για το κλειδί συντακτικής ομάδας σας.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: αυτό το πακέτο έχει αλλάξει ή κοπεί και δεν θα ανοιχτεί.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: αυτό το πακέτο είναι μεγαλύτερο από όσο μπορεί να είναι μια υποβολή.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: το αποθηκευμένο κλειδί συντακτικής ομάδας δεν είναι κλειδί που μπορεί να χρησιμοποιήσει το OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: δεν είναι σφραγισμένο πακέτο που μπορεί να διαβάσει το OciDeck.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Ένα σφραγισμένο αρχείο (.zip.age) ανοίγει με το κλειδί συντακτικής ομάδας σας.',
+  'Herstelsleutel controleren': 'Έλεγχος κλειδιού ανάκτησης',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Το κλειδί συντακτικής ομάδας δημιουργήθηκε. Γράψτε τώρα το κλειδί ανάκτησης.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Η κλειδοθήκη δεν δέχτηκε το κλειδί. Δεν δημιουργήθηκε τίποτα.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Υπάρχει ήδη κλειδί συντακτικής ομάδας. Δεν πειράχτηκε.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Η κλειδοθήκη δεν μπόρεσε να διαβαστεί. Δεν υποτέθηκε τίποτα και δεν δημιουργήθηκε τίποτα.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Στην κλειδοθήκη υπάρχει κάτι που δεν είναι κλειδί συντακτικής ομάδας. Δεν αντικαταστάθηκε.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Αυτή η πλατφόρμα δεν έχει κλειδοθήκη.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Σωστά: το κλειδί ανάκτησης ελέγχθηκε.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Αυτό είναι έγκυρο κλειδί ανάκτησης, αλλά όχι αυτού του κλειδιού συντακτικής ομάδας.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Το κλειδί ανάκτησης είναι σωστό, αλλά αυτό δεν μπόρεσε να αποθηκευτεί.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Δεν υπάρχει κλειδί συντακτικής ομάδας για σύγκριση.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Αυτό δεν είναι το κλειδί ανάκτησης ενός κλειδιού συντακτικής ομάδας.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Υπάρχει ένα τυπογραφικό λάθος: το άθροισμα ελέγχου δεν ταιριάζει.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Αυτό το κλειδί ανάκτησης προέρχεται από νεότερη έκδοση του OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Αυτό το κλειδί ανάκτησης φτιάχτηκε για κάτι άλλο.',
+  'Hersteld uit de herstelsleutel.': 'Έγινε επαναφορά από το κλειδί ανάκτησης.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Η κλειδοθήκη δεν δέχτηκε το κλειδί. Δεν έγινε επαναφορά τίποτα.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Αποθήκευση του κλειδιού συντακτικής ομάδας ως αρχείο κλειδιού age',
+  'Het bestand kon niet worden opgeslagen.':
+      'Το αρχείο δεν μπόρεσε να αποθηκευτεί.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Αποθηκεύτηκε ως {pad}. Όποιος έχει αυτό το αρχείο μπορεί να ανοίξει τα πάντα.',
+  'Redactiesleutel verwijderd.': 'Το κλειδί συντακτικής ομάδας διαγράφηκε.',
+  'Redactiesleutel': 'Κλειδί συντακτικής ομάδας',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Αυτή η πλατφόρμα δεν έχει κλειδοθήκη. Το κλειδί συντακτικής ομάδας δεν μπορεί να φυλαχτεί εδώ· χρησιμοποιήστε την εφαρμογή επιφάνειας εργασίας.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Η κλειδοθήκη δεν μπόρεσε να διαβαστεί (κλειδωμένη ή άρνηση πρόσβασης). Δεν υποτέθηκε τίποτα και δεν δημιουργήθηκε τίποτα.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Στην κλειδοθήκη υπάρχει κάτι που δεν είναι κλειδί συντακτικής ομάδας. Δεν αντικαταστάθηκε. Διαγράψτε το και επαναφέρετε το κλειδί από το κλειδί ανάκτησής σας.',
+  'Redactiesleutel verwijderen…': 'Διαγραφή κλειδιού συντακτικής ομάδας…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ένα κλειδί συντακτικής ομάδας ανοίγει τις σφραγισμένες υποβολές και υπογράφει τα πακέτα των φορμών σας. Βρίσκεται στην κλειδοθήκη αυτού του λειτουργικού συστήματος. Αν χάσετε όλα τα κλειδιά της συντακτικής ομάδας, όλες οι υποβολές που δεν έχουν ακόμη ληφθεί γίνονται ακατάγνωστες: αυτό είναι το τίμημα ενός διακομιστή που δεν μπορεί να διαβάσει τίποτα.',
+  'Redactiesleutel aanmaken': 'Δημιουργία κλειδιού συντακτικής ομάδας',
+  'Herstellen uit herstelsleutel…': 'Επαναφορά από κλειδί ανάκτησης…',
+  'Vingerafdruk': 'Δακτυλικό αποτύπωμα',
+  'Ontvanger (age)': 'Παραλήπτης (age)',
+  'Aangemaakt op {datum}.': 'Δημιουργήθηκε στις {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Το κλειδί ανάκτησης ελέγχθηκε.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Το κλειδί ανάκτησης δεν έχει ελεγχθεί ακόμη: γράψτε το και πληκτρολογήστε το ξανά.',
+  'Herstelsleutel tonen…': 'Εμφάνιση κλειδιού ανάκτησης…',
+  'Vingerafdruk kopiëren': 'Αντιγραφή δακτυλικού αποτυπώματος',
+  'Exporteren als age-sleutelbestand…': 'Εξαγωγή ως αρχείο κλειδιού age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Γράψτε αυτό το κλειδί ανάκτησης και φυλάξτε το σε ασφαλές μέρος, εκτός αυτής της συσκευής. Όποιος το έχει μπορεί να ανοίξει όλες τις υποβολές και να υπογράψει πακέτα εξ ονόματός σας. Αν χάσετε αυτή τη συσκευή, είναι το μόνο που μένει.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Πληκτρολογήστε ξανά εδώ το κλειδί ανάκτησης',
+  'Later': 'Αργότερα',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Πληκτρολογήστε ή επικολλήστε το κλειδί ανάκτησης. Ό,τι εισαγάγετε τοποθετείται στην κλειδοθήκη ως κλειδί συντακτικής ομάδας· δεν αντικαθίσταται τίποτα.',
+  'Herstelsleutel': 'Κλειδί ανάκτησης',
+  'Redactiesleutel verwijderen': 'Διαγραφή κλειδιού συντακτικής ομάδας',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Το κλειδί σβήνεται από την κλειδοθήκη και μπορεί να επιστρέψει μόνο από το κλειδί ανάκτησης. Αν δεν το έχετε, οι υποβολές που σφραγίστηκαν μόνο για αυτό το κλειδί παραμένουν ακατάγνωστες για πάντα.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Το κλειδί που ανοίγει τις σφραγισμένες υποβολές και υπογράφει τα πακέτα.',
+  'Redactiesleutel…': 'Κλειδί συντακτικής ομάδας…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Το αντίγραφο εργασίας απορρίφθηκε. Ό,τι είχε φτάσει κρίνεται ξανά.',
+  'Er is geen werkkopie.': 'Δεν υπάρχει αντίγραφο εργασίας.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Το αντίγραφο εργασίας δεν μπόρεσε να απορριφθεί.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Διαγράφει το αντίγραφο εργασίας. Ό,τι είχε φτάσει μένει και κρίνεται ξανά.',
+  'Werkkopie weggooien…': 'Απόρριψη αντιγράφου εργασίας…',
+  'Werkkopie weggooien': 'Απόρριψη αντιγράφου εργασίας',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Το αντίγραφο εργασίας με τις βελτιώσεις διαγράφεται και δεν μπορεί να ανακτηθεί. Ό,τι είχε φτάσει μένει και κρίνεται ξανά. Αν το αντίγραφο εργασίας είναι ακόμη ανοιχτό σε καρτέλα, κλείστε την πρώτα.',
+  'Weggooien': 'Απόρριψη',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Αυτή η υποβολή έχει αποσυρθεί και επομένως δεν μπαίνει σε κανένα κεφάλαιο.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Αυτή η υποβολή δεν μπορεί να διαβαστεί ή η φόρμα για την οποία υποβλήθηκε δεν βρίσκεται στον φάκελο εργασίας.',
+  'Het controledocument kon niet worden geschreven.':
+      'Το έγγραφο ελέγχου δεν μπόρεσε να γραφτεί.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Η συμβολή σας στο βιβλίο: παρακαλούμε ελέγξτε την',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Ιδού η συμβολή σας όπως θα εμφανιστεί στο βιβλίο (δείτε το συνημμένο). Είναι όλα σωστά; Απαντήστε ‘συμφωνώ’ ή με τις διορθώσεις σας πριν από τις {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Το μήνυμα είναι έτοιμο στο πρόγραμμα αλληλογραφίας σας. Επισυνάψτε το PDF και στείλτε το.',
+  'Controle door de maker…': 'Έλεγχος από τον δημιουργό…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Το έγγραφο ελέγχου είναι το κεφάλαιο αυτής της μίας υποβολής. Εξαγάγετέ το ως PDF (επιλέξτε το πλήρες προφίλ), επισυνάψτε το PDF στο μήνυμα και στείλτε το. Αν ο δημιουργός απαντήσει ‘συμφωνώ’, ορίστε μόνοι σας την κατάσταση σε maker-approved: η απάντηση αυτή επιβεβαιώνει επίσης ότι η συμβολή προέρχεται πράγματι από αυτό το πρόσωπο.',
+  'Controledocument maken en openen': 'Δημιουργία εγγράφου ελέγχου και άνοιγμα',
+  'E-mailadres van de maker':
+      'Διεύθυνση ηλεκτρονικού ταχυδρομείου του δημιουργού',
+  'Antwoord vóór (jjjj-mm-dd)': 'Απάντηση πριν από (εεεε-μμ-ηη)',
+  'Mail schrijven': 'Σύνταξη μηνύματος',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Αυτή η φόρμα δεν γνωρίζει την κατάσταση maker-check-sent, επομένως δεν μπορεί να οριστεί εδώ.',
+  'Controle verstuurd': 'Ο έλεγχος στάλθηκε',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Δημιουργεί το κεφάλαιο αυτής της υποβολής και ετοιμάζει το μήνυμα με το οποίο ο δημιουργός το ελέγχει.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Αυτή η υποβολή δεν υπάρχει στο μητρώο. Επιδιορθώστε το overview.md και δοκιμάστε ξανά.',
+  'Kies het hoofdstuksjabloon': 'Επιλογή προτύπου κεφαλαίου',
+  'Kies eerst een hoofdstuksjabloon.': 'Επιλέξτε πρώτα ένα πρότυπο κεφαλαίου.',
+  'Kies minstens één status.': 'Επιλέξτε τουλάχιστον μία κατάσταση.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Το βιβλίο συντάχθηκε. Κεφάλαια: {n}. Φωτογραφίες: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Αποσύρθηκαν και επομένως παραλείφθηκαν: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Παραλείφθηκαν (άλλη έκδοση ή μη αναγνώσιμες): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Φωτογραφίες που έλειπαν από τον φάκελο εργασίας: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Στο όνομα χρησιμοποιήστε μόνο γράμματα, ψηφία, παύλες και κάτω παύλες (έως 64 χαρακτήρες).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Υπάρχει ήδη βιβλίο με αυτό το όνομα. Επιλέξτε άλλο όνομα.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Το πρότυπο αναφέρει πεδία που η φόρμα δεν έχει: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Δεν υπάρχει τίποτα να μπει στο βιβλίο: καμία υποβολή με επιλεγμένη κατάσταση. Αποσύρθηκαν: {w}· παραλείφθηκαν: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Το μητρώο δεν μπορεί να διαβαστεί. Επιδιορθώστε το overview.md.',
+  'Het boek kon niet worden geschreven.': 'Το βιβλίο δεν μπόρεσε να γραφτεί.',
+  'Boek samenstellen…': 'Σύνταξη βιβλίου…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Το βιβλίο μπαίνει στον φάκελο book του φακέλου εργασίας και παραμένει ένα συνηθισμένο έγγραφο που μπορείτε να επεξεργαστείτε στη συνέχεια.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Δεν υπάρχει χρησιμοποιήσιμη φόρμα στον φάκελο εργασίας.',
+  'Formulier': 'Φόρμα',
+  'Hoofdstuksjabloon': 'Πρότυπο κεφαλαίου',
+  'Nog geen sjabloon gekozen.': 'Δεν έχει επιλεγεί ακόμη πρότυπο.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Στο πρότυπο, το {veld-id} αντιπροσωπεύει την απάντηση σε εκείνο το πεδίο.',
+  'Hoofdstuksjabloon kiezen…': 'Επιλογή προτύπου κεφαλαίου…',
+  'Welke inzendingen?': 'Ποιες υποβολές;',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Στο βιβλίο μπαίνουν μόνο οι υποβολές με μία από αυτές τις καταστάσεις. Οι αποσυρμένες υποβολές μένουν πάντα έξω.',
+  'Ordenen op': 'Ταξινόμηση κατά',
+  'Groeperen op': 'Ομαδοποίηση κατά',
+  'Naam van het boek': 'Όνομα του βιβλίου',
+  'Boek openen': 'Άνοιγμα βιβλίου',
+  'Samenstellen': 'Σύνταξη',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Το αντίγραφο εργασίας δεν ήταν δυνατό να δημιουργηθεί.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Ανοίγει ένα αντίγραφο της υποβολής για βελτίωση. Ό,τι παραλήφθηκε μένει αναλλοίωτο.',
+  'Werkkopie openen': 'Άνοιγμα αντιγράφου εργασίας',
+  'Status gewijzigd naar {status}.': 'Η κατάσταση άλλαξε σε {status}.',
+  'Intrekking opgeslagen.': 'Η απόσυρση αποθηκεύτηκε.',
+  'Intrekking ongedaan gemaakt.': 'Η απόσυρση ακυρώθηκε.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Η υποβολή διαγράφηκε· η εγγραφή παραμένει.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Η υποβολή διαγράφηκε, αλλά το μητρώο δεν ήταν δυνατό να ενημερωθεί. Επεξεργαστείτε το overview.md με το χέρι.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Η υποβολή δεν βρέθηκε στον φάκελο εργασίας.',
+  'De inzending kon niet worden verwijderd.':
+      'Η υποβολή δεν ήταν δυνατό να διαγραφεί.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Το μητρώο δεν μπορεί να διαβαστεί. Διορθώστε το overview.md· δεν άλλαξε τίποτα.',
+  'Het register kon niet worden bijgewerkt.':
+      'Το μητρώο δεν ήταν δυνατό να ενημερωθεί.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Η αλλαγή δεν ήταν δυνατή: η υποβολή δεν υπάρχει στο μητρώο.',
+  'Status wijzigen': 'Αλλαγή κατάστασης',
+  'Intrekking ongedaan maken': 'Αναίρεση απόσυρσης',
+  'Intrekken…': 'Απόσυρση…',
+  'Verwijderen…': 'Διαγραφή…',
+  'Inzending intrekken': 'Απόσυρση υποβολής',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Εισαγάγετε την ημέρα που ο αποστολέας απέσυρε την υποβολή. Μια αποσυρμένη υποβολή δεν μπαίνει ποτέ στο βιβλίο.',
+  'Dag (jjjj-mm-dd)': 'Ημέρα (εεεε-μμ-ηη)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Μη έγκυρη ημέρα. Χρησιμοποιήστε έτος-μήνας-ημέρα, για παράδειγμα {voorbeeld}.',
+  'Inzending verwijderen': 'Διαγραφή υποβολής',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Οι απαντήσεις, το αντίγραφο εργασίας και οι φωτογραφίες αυτής της υποβολής σβήνονται από τον φάκελο εργασίας. Μένει μόνο μια ελάχιστη εγγραφή: ο αριθμός, οι ημέρες παραλαβής και συγκατάθεσης και η κατάσταση. Αυτό δεν αναιρείται.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Μένει επίσης ό,τι η φόρμα είχε ανακοινώσει εκ των προτέρων: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Κάτι δεν πάει καλά με αυτή την υποβολή.',
+  'Verplicht, maar leeg gelaten.': 'Υποχρεωτικό, αλλά αφέθηκε κενό.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} λέξεις· χρειάζονται τουλάχιστον {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} λέξεις· επιτρέπονται το πολύ {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} χαρακτήρες· χρειάζονται τουλάχιστον {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} χαρακτήρες· επιτρέπονται το πολύ {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      'Το «{value}» δεν υπάρχει στη λίστα επιλογών.',
+  '“{value}” is geen getal.': 'Το «{value}» δεν είναι αριθμός.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      'Το «{value}» δεν είναι ημερομηνία της μορφής έτος-μήνας-ημέρα.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Φωτογραφία πλάτους {actual} pixel· ζητήθηκαν {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Το αρχείο της φωτογραφίας λείπει από την υποβολή.',
+  'De beschrijving van de foto ontbreekt.':
+      'Λείπει η περιγραφή της φωτογραφίας.',
+  'De maker van de foto ontbreekt.': 'Λείπει ο δημιουργός της φωτογραφίας.',
+  'De foto is niet gecontroleerd.': 'Η φωτογραφία δεν ελέγχθηκε.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Φωτογραφία HEIC: δεν ελέγχθηκε ούτε καθαρίστηκε· μπορεί να περιέχει τοποθεσία.',
+  'Toestemming niet gegeven.': 'Δεν δόθηκε συγκατάθεση.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Η απάντηση περιέχει γραμμή που μοιάζει με κωδικό ελέγχου της φόρμας.',
+  'Het antwoord bevat HTML.': 'Η απάντηση περιέχει HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Η απάντηση περιέχει μη κλεισμένο μπλοκ κώδικα.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Η απάντηση παραπέμπει σε εικόνα που δεν ανήκει σε αυτή την υποβολή.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Η απάντηση περιέχει σύνδεσμο που δεν επιτρέπεται.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Αυτή η φόρμα ή αυτή η έκδοση δεν είναι στον φάκελο εργασίας.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Ο αποστολέας δούλεψε με διαφορετικό κείμενο της φόρμας από το δημοσιευμένο.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Η συγκατάθεση στο μανιφέστο δεν ταιριάζει με τη δημοσιευμένη φόρμα.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Το κείμενο της φόρμας άλλαξε εκτός των απαντήσεων.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Το κείμενο της φόρμας άλλαξε σε αυτό το πεδίο.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Αυτό το πεδίο δεν υπάρχει στη δημοσιευμένη φόρμα.',
+  'Dit veld ontbreekt in de inzending.':
+      'Αυτό το πεδίο λείπει από την υποβολή.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Υποβολή της έκδοσης {submission}· δημοσιευμένη είναι η έκδοση {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Η φόρμα χρειάζεται νεότερη έκδοση του OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Η δημοσιευμένη φόρμα στον φάκελο εργασίας δεν είναι χρησιμοποιήσιμη.',
+  'De inzending hoort bij een ander formulier.':
+      'Η υποβολή ανήκει σε άλλη φόρμα.',
+  'De opbouw van de inzending is beschadigd.':
+      'Η δομή της υποβολής είναι κατεστραμμένη.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Το μητρώο δεν μπορεί να διαβαστεί. Διορθώστε το overview.md· οι υποβολές εμφανίζονται παρακάτω χωρίς στοιχεία από το μητρώο.',
+  'Nog geen inzendingen.': 'Δεν υπάρχουν ακόμη υποβολές.',
+  'Om na te lopen': 'Προς έλεγχο',
+  'Verwijderd': 'Διαγράφηκε',
+  'Zonder regel in het register': 'Χωρίς γραμμή στο μητρώο',
+  'Ontvangen {datum}': 'Παραλήφθηκε {datum}',
+  'Ingetrokken {datum}': 'Αποσύρθηκε {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Το περιεχόμενο αυτής της υποβολής διαγράφηκε· μένει μόνο η εγγραφή.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Αυτή η υποβολή δεν μπορεί να διαβαστεί. Ελέγξτε τα αρχεία στον φάκελο εργασίας.',
+  'Beoordeeld tegen {formulier}.': 'Αξιολογήθηκε με βάση {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Η αξιολόγηση αφορά το αντίγραφο εργασίας (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Κανένα σημείο προς έλεγχο.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Φωτογραφίες που καμία απάντηση δεν αναφέρει: {n}.',
+  'Inzendingen': 'Υποβολές',
+  'Werkmap': 'Φάκελος εργασίας',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Δεν έχει επιλεγεί ακόμη φάκελος εργασίας. Επιλέξτε έναν φάκελο όπου θα φυλάσσονται οι υποβολές και το μητρώο.',
+  'Werkmap kiezen…': 'Επιλογή φακέλου εργασίας…',
+  'Kies de werkmap voor inzendingen':
+      'Επιλέξτε τον φάκελο εργασίας για τις υποβολές',
+  'Formulieren': 'Φόρμες',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Δεν έχει προστεθεί ακόμη φόρμα. Προσθέστε τη φόρμα όπως τη δημοσιεύσατε: μια υποβολή ελέγχεται σε σχέση με αυτήν.',
+  'Formulier toevoegen…': 'Προσθήκη φόρμας…',
+  'Kies het formulier om toe te voegen': 'Επιλέξτε τη φόρμα προς προσθήκη',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Αυτό το αρχείο δεν είναι φόρμα που μπορεί να δημοσιευθεί.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Αυτή η φόρμα υπάρχει ήδη με διαφορετικό κείμενο. Διαφορετικό κείμενο είναι νέα έκδοση: δώστε στη φόρμα υψηλότερο αριθμό έκδοσης.',
+  'Formulier toegevoegd: {naam}.': 'Η φόρμα προστέθηκε: {naam}.',
+  'Dit formulier stond er al.': 'Αυτή η φόρμα υπήρχε ήδη.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Η φόρμα δεν ήταν δυνατό να αποθηκευτεί.',
+  'Inzendingen in de werkmap: {n}': 'Υποβολές στον φάκελο εργασίας: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Ένα απλό zip δεν είναι κρυπτογραφημένο κατά τη μεταφορά.',
+  'Pakketten binnenhalen…': 'Εισαγωγή πακέτων…',
+  'Kies de pakketten om binnen te halen': 'Επιλέξτε τα πακέτα προς εισαγωγή',
+  'Register openen': 'Άνοιγμα μητρώου',
+  '{naam}: binnengehaald.': '{naam}: εισήχθη.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: εισήχθη, αλλά υπάρχουν σημεία προς έλεγχο.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: εισήχθη, αλλά το μητρώο δεν ήταν δυνατό να ενημερωθεί. Ελέγξτε το overview.md.',
+  '{naam}: stond er al.': '{naam}: υπήρχε ήδη.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: δεν είναι πακέτο υποβολής που μπορεί να διαβάσει το OciDeck.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: αυτή η φόρμα δεν έχει προστεθεί, ή όχι σε αυτή την έκδοση. Προσθέστε πρώτα τη φόρμα.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: δεν ήταν δυνατό να αποθηκευτεί στον φάκελο εργασίας.',
+  'Formulieren en inzendingen': 'Φόρμες και υποβολές',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Εισαγάγετε υποβολές μιας φόρμας, ελέγξτε τις σε σχέση με τη δημοσιευμένη φόρμα και κρατήστε τις με ένα μητρώο. Η συμπλήρωση φόρμας λειτουργεί και όταν αυτό είναι ανενεργό. Ανενεργό από προεπιλογή.',
+  'Inzending opslaan als zip…': 'Αποθήκευση της υποβολής ως zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Ένα αρχείο zip με τις απαντήσεις και τις φωτογραφίες σας, για να το στείλετε με email στον διοργανωτή.',
+  'Inzending opgeslagen als {naam}.': 'Η υποβολή αποθηκεύτηκε ως {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Επιλέξτε τη φόρμα όπως την παραλάβατε',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Αυτή δεν είναι η φόρμα στην οποία ανήκουν οι απαντήσεις σας. Επιλέξτε το αρχείο που λάβατε από τον διοργανωτή.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Μια φωτογραφία δεν ήταν δυνατό να διαβαστεί: {pad}. Προσθέστε την ξανά.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Η υποβολή δεν χωράει σε ένα πακέτο: πάρα πολλές φωτογραφίες ή μια φωτογραφία που είναι πολύ μεγάλη.',
+  'De inzending kon niet worden opgeslagen.':
+      'Η υποβολή δεν ήταν δυνατό να αποθηκευτεί.',
+  'Inzending opslaan': 'Αποθήκευση υποβολής',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Τα δεδομένα τοποθεσίας αφαιρέθηκαν από αυτή τη φωτογραφία.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Αυτή η φωτογραφία δεν μπόρεσε να προστεθεί. Επιλέξτε ένα αρχείο JPEG, PNG, WebP ή HEIC μιας φωτογραφίας.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Αποθηκεύστε πρώτα το έγγραφο για να προσθέσετε φωτογραφίες.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Το OciDeck μπορεί να εισαγάγει αυτό το αρχείο σε ένα νέο έγγραφο.',
+  'Kies een datum': 'Επιλογή ημερομηνίας',
+  'Anders, namelijk:': 'Άλλο, συγκεκριμένα:',
+  'Punt {n}': 'Σημείο {n}',
+  'Punt {n} verwijderen': 'Αφαίρεση σημείου {n}',
+  'Rij {n} verwijderen': 'Αφαίρεση γραμμής {n}',
+  'Foto {n} verwijderen': 'Αφαίρεση φωτογραφίας {n}',
+  'Wat is er te zien op de foto?': 'Τι φαίνεται στη φωτογραφία;',
+  'Van wie is de foto?': 'Ποιανού είναι η φωτογραφία;',
+  'Foto toevoegen': 'Προσθήκη φωτογραφίας',
+  'Verplicht': 'Υποχρεωτικό',
+  'Alles is ingevuld.': 'Όλα έχουν συμπληρωθεί.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Απομένουν {n} πριν μπορέσετε να στείλετε:',
+  'klaar': 'έτοιμο',
+  '{n} open': '{n} ανοιχτά',
+  'Dit formulier kan niet worden ingevuld.':
+      'Αυτή η φόρμα δεν μπορεί να συμπληρωθεί.',
+  'Naar de bron': 'Στην πηγή',
+  'Woorden': 'Λέξεις',
+  'Tekens': 'Χαρακτήρες',
+  'Keuzes': 'Επιλογές',
+  'Rijen': 'Γραμμές',
+  'Foto’s': 'Φωτογραφίες',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (τουλάχιστον {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (το πολύ {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (τουλάχιστον {min}, το πολύ {max})',
+  'Invullen': 'Συμπλήρωση',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Κάτι δεν πάει καλά με αυτή τη φόρμα. Επικοινωνήστε με όποιον την έφτιαξε.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Αυτό το πεδίο είναι υποχρεωτικό. Συμπληρώστε το για να μπορέσετε να στείλετε.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Γράψατε {actual} λέξεις· χρειάζονται τουλάχιστον {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Γράψατε {actual} λέξεις· επιτρέπονται το πολύ {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Γράψατε {actual} χαρακτήρες· χρειάζονται τουλάχιστον {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Γράψατε {actual} χαρακτήρες· επιτρέπονται το πολύ {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      'Το «{value}» δεν υπάρχει στη λίστα. Επιλέξτε μία από τις επιλογές.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      'Το «{value}» δεν είναι αριθμός. Χρησιμοποιήστε μόνο ψηφία, ενδεχομένως με κόμμα ή τελεία για τα δεκαδικά.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Αυτή η φωτογραφία έχει πλάτος {actual} pixel· εδώ ζητούνται {min}. Πιθανότατα μίκρυνε όταν στάλθηκε μέσω εφαρμογής μηνυμάτων. Αν έχετε ακόμη το πρωτότυπο, χρησιμοποιήστε το. Αν όχι, στείλτε την παρ\' όλα αυτά: ο διοργανωτής θα επικοινωνήσει μαζί σας.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Αυτή η φωτογραφία είναι {actual} MB· το μέγιστο είναι {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Το περιεχόμενο αυτού του αρχείου δεν ταιριάζει με τον τύπο του.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Αυτός ο τύπος αρχείου δεν επιτρέπεται εδώ.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Το αρχείο αυτής της φωτογραφίας δεν βρίσκεται πια. Προσθέστε ξανά τη φωτογραφία.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Περιγράψτε με μία σύντομη πρόταση τι φαίνεται στη φωτογραφία.',
+  'Geef aan van wie de foto is.': 'Δηλώστε ποιανού είναι η φωτογραφία.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Αυτή η φωτογραφία δεν έχει ελεγχθεί ακόμη. Περιμένετε λίγο ή προσθέστε την ξανά.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Αυτή η φωτογραφία είναι αρχείο HEIC. Το OciDeck δεν μπορεί να το ελέγξει ή να το καθαρίσει εδώ, οπότε αποστέλλεται ως έχει. Μπορεί να περιέχει πού τραβήχτηκε η φωτογραφία. Αν δεν θέλετε να το μοιραστείτε, επιλέξτε «Μέγιστη συμβατότητα» στις ρυθμίσεις της κάμερας ή μοιραστείτε τη φωτογραφία ως JPEG και προσθέστε την ξανά.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Σε αυτή τη φωτογραφία φαίνονται {actual} πρόσωπα· αναμένονταν {expected}. Είναι μόνο μια υπενθύμιση.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Τσεκάρετε το πλαίσιο για να συμφωνήσετε· χωρίς συναίνεση δεν μπορείτε να στείλετε.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Αυτή η φόρμα απαιτεί νεότερη έκδοση του OciDeck. Ενημερώστε την εφαρμογή για να τη συμπληρώσετε.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Κάτι στην ίδια τη φόρμα άλλαξε κατά λάθος. Επαναφέρετε τη φόρμα· οι απαντήσεις σας παραμένουν.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Αυτή η γραμμή μοιάζει με κωδικό ελέγχου της φόρμας και δεν επιτρέπεται σε απάντηση. Αλλάξτε την.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'Η HTML δεν επιτρέπεται σε μια απάντηση. Χρησιμοποιήστε απλό κείμενο και απλή μορφοποίηση.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Ένα μπλοκ κώδικα δεν έχει κλείσει. Κλείστε το με ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Σε μια απάντηση μπορούν να μπουν μόνο φωτογραφίες που προσθέτετε σε αυτή τη φόρμα· εικόνα από το διαδίκτυο όχι.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Σε μια απάντηση επιτρέπονται μόνο σύνδεσμοι που ξεκινούν με https:// και διευθύνσεις email.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Αυτό το αρχείο δημιουργήθηκε με άλλη έκδοση της φόρμας (έκδοση {submission}· τώρα ισχύει η έκδοση {published}). Ελέγξτε τις απαντήσεις σας.',
+  'Punt {item}: {bericht}': 'Σημείο {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Τώρα είναι {actual}· πρέπει να είναι από {min} έως {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Τώρα είναι {actual}· επιτρέπονται το πολύ {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Τώρα είναι {actual}· πρέπει να είναι τουλάχιστον {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Ο αριθμός πρέπει να είναι πολλαπλάσιο του {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Ο αριθμός πρέπει να είναι από {min} έως {max}.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Ο αριθμός μπορεί να είναι το πολύ {max}.',
+  'Het getal moet minstens {min} zijn.':
+      'Ο αριθμός πρέπει να είναι τουλάχιστον {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Η ημερομηνία πρέπει να είναι η {min} ή μεταγενέστερη.',
+  'De datum moet op of vóór {max} liggen.':
+      'Η ημερομηνία πρέπει να είναι η {max} ή προγενέστερη.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      'Το «{value}» δεν είναι ημερομηνία. Γράψτε την ημερομηνία ως έτος-μήνας-ημέρα, για παράδειγμα 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Αυτή δεν είναι έγκυρη διεύθυνση email.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Αυτή δεν είναι έγκυρη διεύθυνση ιστού. Ξεκινήστε με https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Αυτό δεν είναι έγκυρος αριθμός τηλεφώνου.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Αυτός δεν είναι έγκυρος ολλανδικός ταχυδρομικός κώδικας, όπως 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Εδώ χωράει μόνο μία γραμμή. Αφαιρέστε τις αλλαγές γραμμής.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Χρησιμοποιήστε μόνο τα πλαίσια αυτής της ερώτησης: ένα πλαίσιο ανά επιλογή.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Γράψτε κάθε σημείο σε δική του γραμμή, με παύλα ή αριθμό μπροστά.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Ο πίνακας δεν είναι πια σωστός: αφήστε τη γραμμή κεφαλίδας όπως ήταν και δώστε σε κάθε γραμμή τον ίδιο αριθμό στηλών.',
+  'Dezelfde foto staat hier twee keer.':
+      'Η ίδια φωτογραφία εμφανίζεται εδώ δύο φορές.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Σε αυτό το πεδίο ανήκουν μόνο φωτογραφίες, όχι ελεύθερο κείμενο.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Το πλαίσιο της συναίνεσής σας είναι κατεστραμμένο. Επαναφέρετε τη φόρμα.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Αυτή η απάντηση δεν έχει τη μορφή που ταιριάζει σε αυτή την ερώτηση.',
   'Downloaden…': 'Λήψη…',
   'Afbeelding opgeslagen als': 'Η εικόνα αποθηκεύτηκε ως',
   '{naam}: ingesteld': '{naam}: έχει ρυθμιστεί',

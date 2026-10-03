@@ -1643,6 +1643,605 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Team…': 'Echipă…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redactorii în afară de tine care sunt în fiecare bundle, ca să poată deschide și ei trimiterile. Adaugi pe cineva cu fișa lui de redactor și tastezi din nou amprenta acelei fișe.',
+  'Er is nog niemand naast jou.': 'Nu mai este nimeni în afară de tine.',
+  'Plak de kaart van de redacteur': 'Lipește fișa redactorului',
+  'Kaart controleren': 'Verifică fișa',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Fișa lui {naam}. Tastează amprenta acestei fișe pe care ți-a dat-o {naam} pe altă cale, de exemplu la telefon.',
+  'Redacteur verwijderen': 'Elimină redactorul',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Elimini pe {naam} din echipă? Bundle-urile pe care le-ai publicat deja rămân cum sunt până publici din nou; ce a fost deja sigilat pentru {naam} rămâne lizibil pentru acea persoană.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} a fost adăugat. Publică din nou bundle-ul ca să îl incluzi pe {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} a fost eliminat. Publică din nou bundle-ul ca să îl scoți pe {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Creează mai întâi propria cheie a redacției în Cheia redacției….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Cheia ta a redacției nu poate fi folosită. Uită-te în Cheia redacției….',
+  'Dit is geen redacteurskaart.': 'Aceasta nu este o fișă de redactor.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Această fișă este dintr-o versiune mai nouă de OciDeck. Actualizează OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Fișa conține ceva nepermis. Cere redactorului o fișă nouă.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Această amprentă nu se potrivește cu fișa: fișa a fost modificată sau nu este de la cine crezi. Cere din nou redactorului amprenta și fișa.',
+  'Dit is je eigen kaart.': 'Aceasta este propria ta fișă.',
+  'Deze redacteur staat er al.': 'Acest redactor este deja în echipă.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Echipa este plină: un bundle poartă cel mult 64 de organizatori, inclusiv tine.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Fișierul team.json din folderul de lucru nu poate fi citit. Nu s-a modificat nimic; repară-l sau șterge-l.',
+  'Het team kon niet worden opgeslagen.': 'Echipa nu a putut fi salvată.',
+  'Deze redacteur staat niet meer in het team.':
+      'Acest redactor nu mai este în echipă.',
+  'Naast jou in de bundel: {namen}.': 'Pe lângă tine în bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Verifică mai întâi cheia de recuperare în Cheia redacției… sau adaugă un al doilea redactor în Echipă…. Fără drum înapoi, toate trimiterile devin ilizibile dacă acest dispozitiv se strică.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Fișierul team.json din folderul de lucru nu poate fi citit. Nu se semnează nimic.',
+  'Redacteurskaart maken…': 'Creează fișa redactorului…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Cu o fișă a redactorului, proprietarul unui formular te adaugă la bundle, ca să poți deschide și tu trimiterile. Fișa poate fi trimisă prin e-mail.',
+  'Jouw naam op de kaart': 'Numele tău pe fișă',
+  'Kaart maken': 'Creează fișa',
+  'Kaart kopiëren': 'Copiază fișa',
+  'Vingerafdruk van de kaart': 'Amprenta fișei',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Dă proprietarului această amprentă pe altă cale decât fișa, de exemplu la telefon. El o scrie din nou înainte să te adauge.',
+  'Verzegeld opslaan…': 'Salvează sigilat…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Un fișier criptat (.zip.age) pe care îl poate deschide doar organizatorul. Pentru asta ai nevoie de fișierul bundle și de amprenta din invitație.',
+  'Kies het bundelbestand van de organisator':
+      'Alege fișierul bundle al organizatorului',
+  'Vingerafdruk van de organisator': 'Amprenta organizatorului',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Scrie amprenta din invitație. Nu se află intenționat în fișierul bundle: așa poți verifica de la cine provine.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Aceasta nu este o amprentă. Are 52 de caractere, de obicei în grupuri de patru.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Acest fișier nu este un bundle pe care OciDeck îl poate citi.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Acest formular sau acest bundle provine dintr-o versiune mai nouă de OciDeck. Actualizează OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Amprenta nu se potrivește cu acest bundle: formularul nu vine de la cine spune invitația. Verifică amprenta și fișierul bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Semnătura bundle-ului nu este corectă: a fost modificat sau nu este de la cine spune amprenta. Cere organizatorului un bundle nou.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Acest bundle nu aparține acestui formular. Folosește fișierul bundle care aparține exact acestui formular.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Acest bundle a expirat. Cere organizatorului unul nou.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Acest bundle este mai vechi decât un bundle primit mai devreme de la acest organizator. Cere organizatorului cel mai recent bundle.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle-ul conține ceva nepermis. Cere organizatorului un bundle nou.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Acest formular este închis: ultima zi a fost {datum}. Contactează organizatorul.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Trimiterea este mai mare decât permite organizatorul ({mb} MB). Elimină o fotografie sau micșorează una.',
+  'De inzending kon niet worden verzegeld.':
+      'Trimiterea nu a putut fi sigilată.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Salvat sigilat ca {naam}, poate fi deschis doar de: {organisatoren}.',
+  'Bundel publiceren…': 'Publică bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle-ul este ceea ce crede cel care completează despre redacția voastră: pentru ce cheie sigilează și cărui text îi aparține. Se salvează lângă formular.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'În folderul de lucru nu există niciun formular pentru care să se creeze un bundle.',
+  'Naam voor de invuller': 'Nume pentru cel care completează',
+  'Geldig tot (jjjj-mm-dd)': 'Valabil până la (aaaa-ll-zz)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Ultima zi în care cel care completează crede acest bundle. Nu înainte de ziua închiderii formularului.',
+  'Bundel maken': 'Creează bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle creat (număr de ordine {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Dă amprenta celui care completează pe altă cale decât fișierul bundle, de exemplu în invitație. Cine are doar fișierul bundle nu poate verifica de la cine provine.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Această platformă nu are un breloc de chei pentru cheia redacției; un bundle nu poate fi semnat aici.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Nu există încă o cheie a redacției. Creează una în Cheia redacției… înainte de a publica un bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Brelocul de chei nu poate fi citit. Nu s-a semnat nimic.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Cheia redacției salvată nu poate fi citită. Șterge-o în Cheia redacției… și restaureaz-o din cheia de recuperare.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Un bundle al acestui formular din folderul de lucru nu poate fi citit sau nu aparține celorlalte. Atunci numărul de ordine nu poate fi stabilit și nu se semnează nimic. Verifică: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Introdu un nume de cel mult 80 de caractere.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Valabil până la trebuie să fie o dată existentă, în forma aaaa-ll-zz.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Valabil până la nu poate fi înainte de ziua închiderii formularului.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle-ul nu a putut fi creat ({veld}). Verifică dacă formularul indică o zi de închidere și o perioadă de păstrare valide.',
+  'formulier': 'formular',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle-ul nu a putut fi salvat în folderul de lucru.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Creează și semnează bundle-ul în care cel care completează crede despre redacția voastră.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pachet sigilat deschis și importat.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: acest pachet este sigilat, iar această platformă nu are un breloc de chei pentru cheia redacției.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: acest pachet este sigilat și nu există încă o cheie a redacției cu care să fie deschis. Creează una în Cheia redacției… sau restaureaz-o din cheia de recuperare.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: acest pachet este sigilat, iar brelocul de chei nu poate fi citit. Nu s-a încercat nimic.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: acest pachet este sigilat, iar cheia redacției salvată nu poate fi citită. Șterge-o în Cheia redacției… și restaureaz-o din cheia de recuperare.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: acest pachet nu a fost sigilat pentru cheia ta a redacției.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: acest pachet a fost modificat sau întrerupt și nu va fi deschis.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: acest pachet este mai mare decât poate fi o trimitere.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: cheia redacției salvată nu este o cheie pe care OciDeck o poate folosi.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: nu este un pachet sigilat pe care OciDeck îl poate citi.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Un fișier sigilat (.zip.age) se deschide cu cheia ta a redacției.',
+  'Herstelsleutel controleren': 'Verifică cheia de recuperare',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Cheia redacției a fost creată. Notează acum cheia de recuperare.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Breloul de chei nu a acceptat cheia. Nu s-a creat nimic.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Există deja o cheie a redacției. Nu a fost atinsă.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Breloul de chei nu a putut fi citit. Nu s-a presupus nimic și nu s-a creat nimic.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'În breloul de chei este ceva ce nu este o cheie a redacției. Nu a fost suprascris.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Această platformă nu are un breloc de chei.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Corect: cheia de recuperare a fost verificată.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Aceasta este o cheie de recuperare validă, dar nu cea a acestei chei a redacției.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Cheia de recuperare este corectă, dar nu a putut fi salvată.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nu există nicio cheie a redacției cu care să se compare.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Aceasta nu este cheia de recuperare a unei chei a redacției.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Este o greșeală de tastare: suma de control nu se potrivește.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Această cheie de recuperare provine dintr-o versiune mai nouă a OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Această cheie de recuperare a fost făcută pentru altceva.',
+  'Hersteld uit de herstelsleutel.': 'Restaurată din cheia de recuperare.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Breloul de chei nu a acceptat cheia. Nu s-a restaurat nimic.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Salvează cheia redacției ca fișier de cheie age',
+  'Het bestand kon niet worden opgeslagen.': 'Fișierul nu a putut fi salvat.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Salvat ca {pad}. Cine are acest fișier poate deschide totul.',
+  'Redactiesleutel verwijderd.': 'Cheia redacției a fost ștearsă.',
+  'Redactiesleutel': 'Cheia redacției',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Această platformă nu are un breloc de chei. Cheia redacției nu poate fi păstrată aici; folosește aplicația desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Breloul de chei nu a putut fi citit (blocat sau acces refuzat). Nu s-a presupus nimic și nu s-a creat nimic.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'În breloul de chei este ceva ce nu este o cheie a redacției. Nu a fost suprascris. Șterge-l și restaurează cheia din cheia ta de recuperare.',
+  'Redactiesleutel verwijderen…': 'Șterge cheia redacției…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'O cheie a redacției deschide trimiterile sigilate și semnează pachetele formularelor tale. Se află în breloul de chei al acestui sistem de operare. Dacă pierzi toate cheile redacției, toate trimiterile încă neridicate devin ilizibile: acesta este prețul unui server care nu poate citi nimic.',
+  'Redactiesleutel aanmaken': 'Creează cheia redacției',
+  'Herstellen uit herstelsleutel…': 'Restaurează din cheia de recuperare…',
+  'Vingerafdruk': 'Amprentă',
+  'Ontvanger (age)': 'Destinatar (age)',
+  'Aangemaakt op {datum}.': 'Creată la {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Cheia de recuperare a fost verificată.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Cheia de recuperare nu a fost încă verificată: noteaz-o și tastează-o din nou.',
+  'Herstelsleutel tonen…': 'Arată cheia de recuperare…',
+  'Vingerafdruk kopiëren': 'Copiază amprenta',
+  'Exporteren als age-sleutelbestand…': 'Exportă ca fișier de cheie age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Notează această cheie de recuperare și păstreaz-o într-un loc sigur, în afara acestui dispozitiv. Cine o are poate deschide toate trimiterile și semna pachete în numele vostru. Dacă pierzi acest dispozitiv, este tot ce rămâne.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Tastează aici cheia de recuperare încă o dată',
+  'Later': 'Mai târziu',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Tastează sau lipește cheia de recuperare. Ce introduci este pus în breloul de chei ca cheie a redacției; nimic nu este suprascris.',
+  'Herstelsleutel': 'Cheie de recuperare',
+  'Redactiesleutel verwijderen': 'Șterge cheia redacției',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Cheia este ștearsă din breloul de chei și poate reveni doar din cheia de recuperare. Dacă nu o ai, trimiterile sigilate doar pentru această cheie rămân ilizibile pentru totdeauna.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Cheia care deschide trimiterile sigilate și semnează pachetele.',
+  'Redactiesleutel…': 'Cheia redacției…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Copia de lucru a fost aruncată. Ceea ce a sosit este evaluat din nou.',
+  'Er is geen werkkopie.': 'Nu există o copie de lucru.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Copia de lucru nu a putut fi aruncată.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Șterge copia de lucru. Ceea ce a sosit rămâne și este evaluat din nou.',
+  'Werkkopie weggooien…': 'Aruncă copia de lucru…',
+  'Werkkopie weggooien': 'Aruncă copia de lucru',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Copia de lucru cu îmbunătățirile este ștearsă și nu mai poate fi recuperată. Ceea ce a sosit rămâne și este evaluat din nou. Dacă copia de lucru este încă deschisă într-o filă, închide-o mai întâi.',
+  'Weggooien': 'Aruncă',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Această trimitere a fost retrasă și de aceea nu intră în niciun capitol.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Această trimitere nu poate fi citită sau formularul pentru care a fost făcută nu se află în folderul de lucru.',
+  'Het controledocument kon niet worden geschreven.':
+      'Documentul de verificare nu a putut fi scris.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Contribuția ta la carte: te rugăm să o verifici',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Iată contribuția ta așa cum va apărea în carte (vezi atașamentul). Este totul corect? Răspunde ‘de acord’ sau cu corecturile tale înainte de {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Mesajul este pregătit în programul tău de e-mail. Atașează PDF-ul și trimite-l.',
+  'Controle door de maker…': 'Verificare de către autor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Documentul de verificare este capitolul acestei singure trimiteri. Exportă-l ca PDF (alege profilul complet), atașează PDF-ul la mesaj și trimite-l. Dacă autorul răspunde ‘de acord’, setează tu însuți starea pe maker-approved: răspunsul acela confirmă și că aportul vine într-adevăr de la această persoană.',
+  'Controledocument maken en openen':
+      'Creează documentul de verificare și deschide-l',
+  'E-mailadres van de maker': 'Adresa de e-mail a autorului',
+  'Antwoord vóór (jjjj-mm-dd)': 'Răspunde înainte de (aaaa-ll-zz)',
+  'Mail schrijven': 'Scrie mesajul',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Acest formular nu cunoaște starea maker-check-sent, deci nu poate fi setată aici.',
+  'Controle verstuurd': 'Verificare trimisă',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Creează capitolul acestei trimiteri și pregătește mesajul cu care autorul îl verifică.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Această trimitere nu este în registru. Repară overview.md și încearcă din nou.',
+  'Kies het hoofdstuksjabloon': 'Alege șablonul de capitol',
+  'Kies eerst een hoofdstuksjabloon.': 'Alege mai întâi un șablon de capitol.',
+  'Kies minstens één status.': 'Alege cel puțin o stare.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Cartea a fost alcătuită. Capitole: {n}. Fotografii: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Retrase și de aceea omise: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Omise (altă versiune sau ilizibile): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotografii care lipseau din folderul de lucru: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'În nume folosește doar litere, cifre, cratime și liniuțe de subliniere (cel mult 64 de caractere).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Există deja o carte cu acest nume. Alege alt nume.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Șablonul menționează câmpuri pe care formularul nu le are: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nu e nimic de pus în carte: nicio trimitere cu o stare aleasă. Retrase: {w}; omise: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registrul nu poate fi citit. Repară overview.md.',
+  'Het boek kon niet worden geschreven.': 'Cartea nu a putut fi scrisă.',
+  'Boek samenstellen…': 'Alcătuiește cartea…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Cartea ajunge în folderul book din folderul de lucru și rămâne un document obișnuit pe care îl poți edita ulterior.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Nu există niciun formular utilizabil în folderul de lucru.',
+  'Formulier': 'Formular',
+  'Hoofdstuksjabloon': 'Șablon de capitol',
+  'Nog geen sjabloon gekozen.': 'Încă nu a fost ales niciun șablon.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'În șablon, {veld-id} reprezintă răspunsul la acel câmp.',
+  'Hoofdstuksjabloon kiezen…': 'Alege șablonul de capitol…',
+  'Welke inzendingen?': 'Care trimiteri?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'În carte intră doar trimiterile cu una dintre aceste stări. Trimiterile retrase rămân mereu pe dinafară.',
+  'Ordenen op': 'Sortează după',
+  'Groeperen op': 'Grupează după',
+  'Naam van het boek': 'Numele cărții',
+  'Boek openen': 'Deschide cartea',
+  'Samenstellen': 'Alcătuiește',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Copia de lucru nu a putut fi creată.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Deschide o copie a trimiterii pentru îmbunătățit. Ce a sosit rămâne neschimbat.',
+  'Werkkopie openen': 'Deschide copia de lucru',
+  'Status gewijzigd naar {status}.': 'Starea a fost schimbată în {status}.',
+  'Intrekking opgeslagen.': 'Retragerea a fost salvată.',
+  'Intrekking ongedaan gemaakt.': 'Retragerea a fost anulată.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Trimitere ștearsă; înregistrarea rămâne.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Trimitere ștearsă, dar registrul nu a putut fi actualizat. Editează overview.md manual.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Trimiterea nu a fost găsită în folderul de lucru.',
+  'De inzending kon niet worden verwijderd.':
+      'Trimiterea nu a putut fi ștearsă.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registrul nu poate fi citit. Repară overview.md; nu s-a modificat nimic.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registrul nu a putut fi actualizat.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Această modificare nu a putut fi făcută: trimiterea nu este în registru.',
+  'Status wijzigen': 'Schimbă starea',
+  'Intrekking ongedaan maken': 'Anulează retragerea',
+  'Intrekken…': 'Retrage…',
+  'Verwijderen…': 'Șterge…',
+  'Inzending intrekken': 'Retrage trimiterea',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Introdu ziua în care cel care a trimis a retras trimiterea. O trimitere retrasă nu ajunge niciodată în carte.',
+  'Dag (jjjj-mm-dd)': 'Zi (aaaa-ll-zz)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Zi nevalidă. Folosește an-lună-zi, de exemplu {voorbeeld}.',
+  'Inzending verwijderen': 'Șterge trimiterea',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Răspunsurile, copia de lucru și fotografiile acestei trimiteri sunt șterse din folderul de lucru. Rămâne doar o înregistrare minimă: numărul, zilele primirii și consimțământului și starea. Acest lucru nu poate fi anulat.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Rămâne și ceea ce formularul a anunțat dinainte: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Este ceva în neregulă cu această trimitere.',
+  'Verplicht, maar leeg gelaten.': 'Obligatoriu, dar lăsat gol.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} cuvinte; sunt necesare cel puțin {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} cuvinte; sunt permise cel mult {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} caractere; sunt necesare cel puțin {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} caractere; sunt permise cel mult {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}” nu se află în lista de opțiuni.',
+  '“{value}” is geen getal.': '„{value}” nu este un număr.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}” nu este o dată de forma an-lună-zi.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Fotografie lată de {actual} pixeli; s-au cerut {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fișierul fotografiei lipsește din trimitere.',
+  'De beschrijving van de foto ontbreekt.': 'Lipsește descrierea fotografiei.',
+  'De maker van de foto ontbreekt.': 'Lipsește autorul fotografiei.',
+  'De foto is niet gecontroleerd.': 'Fotografia nu a fost verificată.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Fotografie HEIC: neverificată și necurățată; poate conține o locație.',
+  'Toestemming niet gegeven.': 'Consimțământ nedat.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Răspunsul conține o linie care seamănă cu un cod de control al formularului.',
+  'Het antwoord bevat HTML.': 'Răspunsul conține HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Răspunsul conține un bloc de cod neînchis.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Răspunsul trimite la o imagine care nu aparține acestei trimiteri.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Răspunsul conține un link care nu este permis.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Acest formular sau această versiune nu se află în folderul de lucru.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Cel care a trimis a lucrat cu un alt text al formularului decât cel publicat.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Consimțământul din manifest nu corespunde formularului publicat.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Textul formularului a fost modificat în afara răspunsurilor.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Textul formularului a fost modificat la acest câmp.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Acest câmp nu există în formularul publicat.',
+  'Dit veld ontbreekt in de inzending.': 'Acest câmp lipsește din trimitere.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Trimitere din versiunea {submission}; cea publicată este versiunea {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formularul necesită o versiune mai nouă a OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Formularul publicat din folderul de lucru nu este utilizabil.',
+  'De inzending hoort bij een ander formulier.':
+      'Trimiterea aparține altui formular.',
+  'De opbouw van de inzending is beschadigd.':
+      'Structura trimiterii este deteriorată.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registrul nu poate fi citit. Repară overview.md; trimiterile sunt afișate mai jos fără datele din registru.',
+  'Nog geen inzendingen.': 'Încă nu există trimiteri.',
+  'Om na te lopen': 'De revizuit',
+  'Verwijderd': 'Șters',
+  'Zonder regel in het register': 'Fără rând în registru',
+  'Ontvangen {datum}': 'Primit {datum}',
+  'Ingetrokken {datum}': 'Retras {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Conținutul acestei trimiteri a fost șters; a rămas doar înregistrarea.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Această trimitere nu poate fi citită. Verifică fișierele din folderul de lucru.',
+  'Beoordeeld tegen {formulier}.': 'Evaluat față de {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Evaluarea se referă la copia de lucru (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Niciun punct de revizuit.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotografii pe care niciun răspuns nu le menționează: {n}.',
+  'Inzendingen': 'Trimiteri',
+  'Werkmap': 'Folder de lucru',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Nu a fost ales încă un folder de lucru. Alege un folder în care vor fi păstrate trimiterile și registrul.',
+  'Werkmap kiezen…': 'Alege folderul de lucru…',
+  'Kies de werkmap voor inzendingen':
+      'Alege folderul de lucru pentru trimiteri',
+  'Formulieren': 'Formulare',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Nu a fost adăugat încă niciun formular. Adaugă formularul așa cum l-ai publicat: o trimitere este verificată față de el.',
+  'Formulier toevoegen…': 'Adaugă formular…',
+  'Kies het formulier om toe te voegen': 'Alege formularul de adăugat',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Acest fișier nu este un formular care să poată fi publicat.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Acest formular există deja cu alt text. Un alt text este o versiune nouă: dă formularului un număr de versiune mai mare.',
+  'Formulier toegevoegd: {naam}.': 'Formular adăugat: {naam}.',
+  'Dit formulier stond er al.': 'Acest formular exista deja.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Formularul nu a putut fi salvat.',
+  'Inzendingen in de werkmap: {n}': 'Trimiteri în folderul de lucru: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Un zip simplu nu este criptat pe parcurs.',
+  'Pakketten binnenhalen…': 'Importă pachete…',
+  'Kies de pakketten om binnen te halen': 'Alege pachetele de importat',
+  'Register openen': 'Deschide registrul',
+  '{naam}: binnengehaald.': '{naam}: importat.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importat, dar există puncte de revizuit.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importat, dar registrul nu a putut fi actualizat. Verifică overview.md.',
+  '{naam}: stond er al.': '{naam}: exista deja.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nu este un pachet de trimitere pe care OciDeck îl poate citi.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: acest formular nu a fost adăugat, sau nu în această versiune. Adaugă mai întâi formularul.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nu a putut fi salvat în folderul de lucru.',
+  'Formulieren en inzendingen': 'Formulare și trimiteri',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importă trimiterile unui formular, verifică-le față de formularul publicat și păstrează-le cu un registru. Completarea unui formular funcționează și când aceasta este oprită. Oprit în mod implicit.',
+  'Inzending opslaan als zip…': 'Salvează trimiterea ca zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Un fișier zip cu răspunsurile și fotografiile tale, pe care îl trimiți prin e-mail organizatorului.',
+  'Inzending opgeslagen als {naam}.': 'Trimiterea a fost salvată ca {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Alege formularul așa cum l-ai primit',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Acesta nu este formularul căruia îi aparțin răspunsurile tale. Alege fișierul primit de la organizator.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'O fotografie nu a putut fi citită: {pad}. Adaug-o din nou.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Trimiterea nu încape într-un pachet: prea multe fotografii sau o fotografie prea mare.',
+  'De inzending kon niet worden opgeslagen.':
+      'Trimiterea nu a putut fi salvată.',
+  'Inzending opslaan': 'Salvează trimiterea',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Datele de locație au fost eliminate din această fotografie.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Această fotografie nu a putut fi adăugată. Alegeți un fișier JPEG, PNG, WebP sau HEIC cu o fotografie.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Salvați mai întâi documentul pentru a adăuga fotografii.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck poate importa acest fișier într-un document nou.',
+  'Kies een datum': 'Alege o dată',
+  'Anders, namelijk:': 'Altul, anume:',
+  'Punt {n}': 'Punctul {n}',
+  'Punt {n} verwijderen': 'Elimină punctul {n}',
+  'Rij {n} verwijderen': 'Elimină rândul {n}',
+  'Foto {n} verwijderen': 'Elimină fotografia {n}',
+  'Wat is er te zien op de foto?': 'Ce se vede în fotografie?',
+  'Van wie is de foto?': 'A cui este fotografia?',
+  'Foto toevoegen': 'Adaugă o fotografie',
+  'Verplicht': 'Obligatoriu',
+  'Alles is ingevuld.': 'Totul este completat.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Mai sunt {n} de făcut înainte de a putea trimite:',
+  'klaar': 'gata',
+  '{n} open': '{n} deschise',
+  'Dit formulier kan niet worden ingevuld.':
+      'Acest formular nu poate fi completat.',
+  'Naar de bron': 'La sursă',
+  'Woorden': 'Cuvinte',
+  'Tekens': 'Caractere',
+  'Keuzes': 'Alegeri',
+  'Rijen': 'Rânduri',
+  'Foto’s': 'Fotografii',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (cel puțin {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (cel mult {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (cel puțin {min}, cel mult {max})',
+  'Invullen': 'Completează',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Ceva nu este în regulă cu acest formular. Contactați persoana care l-a creat.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Acest câmp este obligatoriu. Completați-l pentru a putea trimite.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Ați scris {actual} cuvinte; sunt necesare cel puțin {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Ați scris {actual} cuvinte; sunt permise cel mult {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Ați scris {actual} caractere; sunt necesare cel puțin {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Ați scris {actual} caractere; sunt permise cel mult {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” nu se află în listă. Alegeți una dintre opțiuni.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” nu este un număr. Folosiți doar cifre, eventual cu virgulă sau punct pentru zecimale.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Această fotografie are {actual} pixeli lățime; aici se cer {min}. Probabil a fost micșorată când a fost trimisă printr-o aplicație de mesagerie. Dacă mai aveți originalul, folosiți-l. Dacă nu, trimiteți-o oricum: organizația vă va contacta.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Această fotografie are {actual} MB; maximul este {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Conținutul acestui fișier nu corespunde tipului său de fișier.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Acest tip de fișier nu este permis aici.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Fișierul acestei fotografii nu mai poate fi găsit. Adăugați din nou fotografia.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Descrieți într-o propoziție scurtă ce se vede în fotografie.',
+  'Geef aan van wie de foto is.': 'Indicați a cui este fotografia.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Această fotografie nu a fost încă verificată. Așteptați puțin sau adăugați-o din nou.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Această fotografie este un fișier HEIC. OciDeck nu îl poate verifica sau curăța aici, așa că este trimis așa cum este. Poate conține locul unde a fost făcută fotografia. Dacă nu doriți să partajați acest lucru, alegeți „Cel mai compatibil” în setările camerei sau partajați fotografia ca JPEG și adăugați-o din nou.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'În această fotografie se văd {actual} fețe; se așteptau {expected}. Este doar un memento.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Bifați căsuța pentru a fi de acord; fără consimțământ nu puteți trimite.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Acest formular necesită o versiune mai nouă a OciDeck. Actualizați aplicația pentru a-l completa.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Ceva din formularul însuși a fost schimbat din greșeală. Restaurați formularul; răspunsurile dvs. rămân.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Această linie seamănă cu un cod de control al formularului și nu poate apărea într-un răspuns. Modificați-o.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML nu este permis într-un răspuns. Folosiți text simplu și formatare simplă.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Un bloc de cod nu este închis. Închideți-l cu ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Într-un răspuns pot apărea doar fotografiile pe care le adăugați în acest formular; o imagine de pe internet nu.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Într-un răspuns sunt permise doar linkuri care încep cu https:// și adrese de e-mail.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Acest fișier a fost creat cu o altă versiune a formularului (versiunea {submission}; acum se aplică versiunea {published}). Verificați răspunsurile.',
+  'Punt {item}: {bericht}': 'Punctul {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Acum sunt {actual}; trebuie să fie între {min} și {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Acum sunt {actual}; pot fi cel mult {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Acum sunt {actual}; trebuie să fie cel puțin {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Numărul trebuie să fie un multiplu al lui {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Numărul trebuie să fie între {min} și {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Numărul poate fi cel mult {max}.',
+  'Het getal moet minstens {min} zijn.':
+      'Numărul trebuie să fie cel puțin {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Data trebuie să fie {min} sau ulterioară.',
+  'De datum moet op of vóór {max} liggen.':
+      'Data trebuie să fie {max} sau anterioară.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” nu este o dată. Scrieți data ca an-lună-zi, de exemplu 2026-11-01.',
+  'Dit is geen geldig e-mailadres.':
+      'Aceasta nu este o adresă de e-mail validă.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Aceasta nu este o adresă web validă. Începeți cu https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'Acesta nu este un număr de telefon valid.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Acesta nu este un cod poștal olandez valid, precum 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Aici încape doar un rând. Eliminați întreruperile de rând.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Folosiți doar casetele acestei întrebări: o casetă pentru fiecare opțiune.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Scrieți fiecare punct pe un rând separat, cu o liniuță sau un număr în față.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabelul nu mai este corect: lăsați rândul de antet așa cum era și dați fiecărui rând același număr de coloane.',
+  'Dezelfde foto staat hier twee keer.':
+      'Aceeași fotografie apare aici de două ori.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'În acest câmp se potrivesc doar fotografii, nu text izolat.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Caseta consimțământului dvs. este deteriorată. Restaurați formularul.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Acest răspuns nu are forma care se potrivește acestei întrebări.',
   'Downloaden…': 'Descarcă…',
   'Afbeelding opgeslagen als': 'Imagine salvată ca',
   '{naam}: ingesteld': '{naam}: configurat',

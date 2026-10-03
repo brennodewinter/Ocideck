@@ -1627,6 +1627,593 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Team…': 'Tim…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktur selain Anda yang ada di setiap bundel, agar mereka juga dapat membuka kiriman. Anda menambahkan seseorang dengan kartu redakturnya dan mengetik ulang sidik jari kartu itu.',
+  'Er is nog niemand naast jou.': 'Belum ada siapa pun selain Anda.',
+  'Plak de kaart van de redacteur': 'Tempel kartu redaktur',
+  'Kaart controleren': 'Periksa kartu',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Kartu {naam}. Ketik sidik jari kartu ini yang diberikan {naam} kepada Anda lewat jalur lain, misalnya lewat telepon.',
+  'Redacteur verwijderen': 'Hapus redaktur',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Hapus {naam} dari tim? Bundel yang sudah Anda terbitkan tetap seperti adanya sampai Anda menerbitkan lagi; yang sudah disegel untuk {naam} tetap dapat dibaca oleh orang itu.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} telah ditambahkan. Terbitkan bundel lagi untuk menyertakan {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} telah dihapus. Terbitkan bundel lagi untuk mengeluarkan {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Buat dulu kunci redaksi Anda sendiri di Kunci redaksi….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Kunci redaksi Anda tidak dapat dipakai. Lihat di Kunci redaksi….',
+  'Dit is geen redacteurskaart.': 'Ini bukan kartu redaktur.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Kartu ini berasal dari OciDeck versi yang lebih baru. Perbarui OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kartu berisi sesuatu yang tidak diizinkan. Minta redaktur membuat kartu baru.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Sidik jari ini tidak cocok dengan kartu: kartu telah diubah atau bukan dari orang yang Anda kira. Minta lagi sidik jari dan kartunya kepada redaktur.',
+  'Dit is je eigen kaart.': 'Ini kartu Anda sendiri.',
+  'Deze redacteur staat er al.': 'Redaktur ini sudah ada di tim.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tim sudah penuh: satu bundel membawa paling banyak 64 penyelenggara, termasuk Anda.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Berkas team.json di folder kerja tidak dapat dibaca. Tidak ada yang diubah; perbaiki atau hapus.',
+  'Het team kon niet worden opgeslagen.': 'Tim tidak dapat disimpan.',
+  'Deze redacteur staat niet meer in het team.':
+      'Redaktur ini tidak lagi ada di tim.',
+  'Naast jou in de bundel: {namen}.': 'Selain Anda di bundel: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Periksa dulu kunci pemulihan Anda di Kunci redaksi…, atau tambahkan redaktur kedua di Tim…. Tanpa jalan kembali, semua kiriman tidak dapat dibaca jika perangkat ini rusak.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Berkas team.json di folder kerja tidak dapat dibaca. Tidak ada yang ditandatangani.',
+  'Redacteurskaart maken…': 'Buat kartu redaktur…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Dengan kartu redaktur, pemilik formulir menambahkan Anda ke bundel, sehingga Anda juga dapat membuka kiriman. Kartu boleh dikirim lewat email.',
+  'Jouw naam op de kaart': 'Nama Anda di kartu',
+  'Kaart maken': 'Buat kartu',
+  'Kaart kopiëren': 'Salin kartu',
+  'Vingerafdruk van de kaart': 'Sidik jari kartu',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Berikan sidik jari ini kepada pemilik lewat jalur lain selain kartu, misalnya lewat telepon. Pemilik mengetiknya kembali sebelum menambahkan Anda.',
+  'Verzegeld opslaan…': 'Simpan tersegel…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Berkas terenkripsi (.zip.age) yang hanya dapat dibuka penyelenggara. Untuk itu Anda memerlukan berkas bundel dan sidik jari dari undangan.',
+  'Kies het bundelbestand van de organisator':
+      'Pilih berkas bundel penyelenggara',
+  'Vingerafdruk van de organisator': 'Sidik jari penyelenggara',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Ketik sidik jari dari undangan. Sidik jari sengaja tidak ada di berkas bundel: dengan begitu Anda dapat memeriksa dari siapa bundel itu berasal.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Itu bukan sidik jari. Panjangnya 52 karakter, biasanya dalam kelompok empat.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Berkas ini bukan bundel yang dapat dibaca OciDeck.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Formulir atau bundel ini berasal dari OciDeck versi yang lebih baru. Perbarui OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Sidik jari tidak cocok dengan bundel ini: formulir tidak berasal dari pihak yang disebut undangan. Periksa sidik jari dan berkas bundel.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Tanda tangan bundel tidak benar: bundel telah diubah atau bukan dari pihak yang disebut sidik jari. Minta penyelenggara membuat bundel baru.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Bundel ini tidak termasuk formulir ini. Gunakan berkas bundel yang tepat untuk formulir ini.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Bundel ini sudah kedaluwarsa. Minta yang baru kepada penyelenggara.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Bundel ini lebih lama daripada bundel yang sebelumnya Anda terima dari penyelenggara ini. Minta yang terbaru kepada penyelenggara.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundel berisi sesuatu yang tidak diizinkan. Minta penyelenggara membuat bundel baru.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Formulir ini sudah ditutup: hari terakhirnya adalah {datum}. Hubungi penyelenggara.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Kiriman lebih besar daripada yang diizinkan penyelenggara ({mb} MB). Hapus satu foto atau perkecil salah satunya.',
+  'De inzending kon niet worden verzegeld.': 'Kiriman tidak dapat disegel.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Disimpan tersegel sebagai {naam}, hanya dapat dibuka oleh: {organisatoren}.',
+  'Bundel publiceren…': 'Terbitkan bundel…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundel adalah apa yang dipercayai pengisi tentang redaksi Anda: ke kunci mana ia menyegel dan teks mana yang menjadi miliknya. Bundel disimpan di samping formulir.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Tidak ada formulir di folder kerja untuk dibuatkan bundel.',
+  'Naam voor de invuller': 'Nama untuk pengisi',
+  'Geldig tot (jjjj-mm-dd)': 'Berlaku hingga (tttt-bb-hh)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Hari terakhir pengisi mempercayai bundel ini. Tidak sebelum hari penutupan formulir.',
+  'Bundel maken': 'Buat bundel',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundel dibuat (nomor urut {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Berikan sidik jari kepada pengisi lewat jalur lain selain berkas bundel, misalnya dalam undangan. Siapa pun yang hanya memiliki berkas bundel tidak dapat memeriksa dari siapa bundel itu berasal.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Platform ini tidak punya gantungan kunci untuk kunci redaksi; bundel tidak dapat ditandatangani di sini.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Belum ada kunci redaksi. Buat satu di Kunci redaksi… sebelum Anda menerbitkan bundel.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Gantungan kunci tidak dapat dibaca. Tidak ada yang ditandatangani.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Kunci redaksi yang tersimpan tidak dapat dibaca. Hapus di Kunci redaksi… lalu pulihkan dari kunci pemulihan Anda.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Sebuah bundel formulir ini di folder kerja tidak dapat dibaca atau tidak termasuk dengan yang lain. Dengan begitu nomor urut tidak dapat ditentukan dan tidak ada yang ditandatangani. Periksa: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Masukkan nama paling banyak 80 karakter.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Berlaku hingga harus berupa tanggal yang ada, dengan format tttt-bb-hh.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Berlaku hingga tidak boleh sebelum hari penutupan formulir.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundel tidak dapat dibuat ({veld}). Periksa apakah formulir menyebut hari penutupan dan masa penyimpanan yang valid.',
+  'formulier': 'formulir',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundel tidak dapat disimpan di folder kerja.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Buat dan tandatangani bundel yang dipercayai pengisi tentang redaksi Anda.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: paket tersegel dibuka dan diimpor.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: paket ini tersegel dan platform ini tidak punya gantungan kunci untuk kunci redaksi.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: paket ini tersegel dan belum ada kunci redaksi untuk membukanya. Buat satu di Kunci redaksi… atau pulihkan dari kunci pemulihan Anda.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: paket ini tersegel dan gantungan kunci tidak dapat dibaca. Tidak ada yang dicoba.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: paket ini tersegel dan kunci redaksi yang tersimpan tidak dapat dibaca. Hapus di Kunci redaksi… lalu pulihkan dari kunci pemulihan Anda.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: paket ini tidak disegel untuk kunci redaksi Anda.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: paket ini telah diubah atau terpotong dan tidak akan dibuka.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: paket ini lebih besar daripada yang mungkin untuk sebuah kiriman.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: kunci redaksi yang tersimpan bukan kunci yang dapat dipakai OciDeck.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: bukan paket tersegel yang dapat dibaca OciDeck.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Berkas tersegel (.zip.age) dibuka dengan kunci redaksi Anda.',
+  'Herstelsleutel controleren': 'Periksa kunci pemulihan',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Kunci redaksi dibuat. Sekarang tuliskan kunci pemulihan.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Gantungan kunci tidak menerima kunci itu. Tidak ada yang dibuat.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Sudah ada kunci redaksi. Tidak disentuh.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Gantungan kunci tidak dapat dibaca. Tidak ada yang diasumsikan dan tidak ada yang dibuat.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Ada sesuatu di gantungan kunci yang bukan kunci redaksi. Tidak ditimpa.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Platform ini tidak punya gantungan kunci.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Benar: kunci pemulihan telah diperiksa.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Ini kunci pemulihan yang valid, tetapi bukan milik kunci redaksi ini.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Kunci pemulihan benar, tetapi itu tidak dapat disimpan.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Tidak ada kunci redaksi untuk dicocokkan.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Ini bukan kunci pemulihan dari sebuah kunci redaksi.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Ada salah ketik: checksum tidak cocok.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Kunci pemulihan ini berasal dari versi OciDeck yang lebih baru.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Kunci pemulihan ini dibuat untuk hal lain.',
+  'Hersteld uit de herstelsleutel.': 'Dipulihkan dari kunci pemulihan.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Gantungan kunci tidak menerima kunci itu. Tidak ada yang dipulihkan.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Simpan kunci redaksi sebagai berkas kunci age',
+  'Het bestand kon niet worden opgeslagen.': 'Berkas tidak dapat disimpan.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Disimpan sebagai {pad}. Siapa pun yang memiliki berkas ini dapat membuka semuanya.',
+  'Redactiesleutel verwijderd.': 'Kunci redaksi dihapus.',
+  'Redactiesleutel': 'Kunci redaksi',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Platform ini tidak punya gantungan kunci. Kunci redaksi tidak dapat disimpan di sini; gunakan aplikasi desktop.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Gantungan kunci tidak dapat dibaca (terkunci, atau akses ditolak). Tidak ada yang diasumsikan dan tidak ada yang dibuat.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Ada sesuatu di gantungan kunci yang bukan kunci redaksi. Tidak ditimpa. Hapus itu dan pulihkan kunci dari kunci pemulihan Anda.',
+  'Redactiesleutel verwijderen…': 'Hapus kunci redaksi…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Kunci redaksi membuka kiriman yang disegel dan menandatangani bundel formulir Anda. Kunci itu ada di gantungan kunci sistem operasi ini. Jika Anda kehilangan semua kunci redaksi, semua kiriman yang belum diambil tidak dapat dibaca lagi: itulah harga server yang tidak dapat membaca apa pun.',
+  'Redactiesleutel aanmaken': 'Buat kunci redaksi',
+  'Herstellen uit herstelsleutel…': 'Pulihkan dari kunci pemulihan…',
+  'Vingerafdruk': 'Sidik jari',
+  'Ontvanger (age)': 'Penerima (age)',
+  'Aangemaakt op {datum}.': 'Dibuat pada {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Kunci pemulihan telah diperiksa.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Kunci pemulihan belum diperiksa: tuliskan dan ketik ulang.',
+  'Herstelsleutel tonen…': 'Tampilkan kunci pemulihan…',
+  'Vingerafdruk kopiëren': 'Salin sidik jari',
+  'Exporteren als age-sleutelbestand…': 'Ekspor sebagai berkas kunci age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Tuliskan kunci pemulihan ini dan simpan di tempat aman, di luar perangkat ini. Siapa pun yang memilikinya dapat membuka semua kiriman dan menandatangani bundel atas nama Anda. Jika perangkat ini hilang, hanya ini yang tersisa.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Ketik kunci pemulihan di sini sekali lagi',
+  'Later': 'Nanti',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Ketik atau tempel kunci pemulihan. Yang Anda masukkan disimpan di gantungan kunci sebagai kunci redaksi; tidak ada yang ditimpa.',
+  'Herstelsleutel': 'Kunci pemulihan',
+  'Redactiesleutel verwijderen': 'Hapus kunci redaksi',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Kunci dihapus dari gantungan kunci dan hanya dapat kembali dari kunci pemulihan. Jika Anda tidak memilikinya, kiriman yang disegel hanya untuk kunci ini tidak akan pernah terbaca lagi.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Kunci yang membuka kiriman tersegel dan menandatangani bundel.',
+  'Redactiesleutel…': 'Kunci redaksi…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Salinan kerja dibuang. Apa yang masuk dinilai lagi.',
+  'Er is geen werkkopie.': 'Tidak ada salinan kerja.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Salinan kerja tidak dapat dibuang.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Menghapus salinan kerja. Apa yang masuk tetap ada dan dinilai lagi.',
+  'Werkkopie weggooien…': 'Buang salinan kerja…',
+  'Werkkopie weggooien': 'Buang salinan kerja',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Salinan kerja beserta perbaikannya dihapus dan tidak dapat dikembalikan. Apa yang masuk tetap ada dan dinilai lagi. Jika salinan kerja masih terbuka di sebuah tab, tutup dahulu tab itu.',
+  'Weggooien': 'Buang',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Kiriman ini telah ditarik kembali sehingga tidak masuk ke bab mana pun.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Kiriman ini tidak dapat dibaca, atau formulir yang dituju kiriman ini tidak ada di folder kerja.',
+  'Het controledocument kon niet worden geschreven.':
+      'Dokumen pemeriksaan tidak dapat ditulis.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Kontribusi Anda untuk buku: mohon diperiksa',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Berikut kontribusi Anda seperti yang akan tampil di buku (lihat lampiran). Apakah semuanya benar? Balas ‘setuju’ atau dengan koreksi Anda sebelum {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Surel sudah siap di program surel Anda. Lampirkan PDF dan kirimkan.',
+  'Controle door de maker…': 'Pemeriksaan oleh kontributor…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Dokumen pemeriksaan adalah bab dari satu kiriman ini. Ekspor sebagai PDF (pilih profil lengkap), lampirkan PDF pada surel lalu kirim. Jika kontributor membalas ‘setuju’, ubah sendiri statusnya menjadi maker-approved: balasan itu juga merupakan konfirmasi bahwa kontribusi tersebut memang berasal dari orang ini.',
+  'Controledocument maken en openen': 'Buat dokumen pemeriksaan dan buka',
+  'E-mailadres van de maker': 'Alamat surel kontributor',
+  'Antwoord vóór (jjjj-mm-dd)': 'Balas sebelum (tttt-bb-hh)',
+  'Mail schrijven': 'Tulis surel',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Formulir ini tidak mengenal status maker-check-sent, sehingga status itu tidak dapat diatur di sini.',
+  'Controle verstuurd': 'Pemeriksaan terkirim',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Membuat bab dari kiriman ini dan menyiapkan surel agar kontributor dapat memeriksanya.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Kiriman ini tidak ada di register. Perbaiki overview.md lalu coba lagi.',
+  'Kies het hoofdstuksjabloon': 'Pilih templat bab',
+  'Kies eerst een hoofdstuksjabloon.': 'Pilih templat bab terlebih dahulu.',
+  'Kies minstens één status.': 'Pilih setidaknya satu status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Buku disusun. Bab: {n}. Foto: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Ditarik kembali sehingga dilewatkan: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Dilewati (versi lain atau tidak terbaca): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Foto yang hilang dari folder kerja: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Pada nama gunakan hanya huruf, angka, tanda hubung, dan garis bawah (paling banyak 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Sudah ada buku dengan nama ini. Pilih nama lain.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Templat menyebut kolom yang tidak dimiliki formulir: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Tidak ada yang bisa dimasukkan ke dalam buku: tidak ada kiriman dengan status yang dipilih. Ditarik kembali: {w}; dilewati: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Register tidak dapat dibaca. Perbaiki overview.md.',
+  'Het boek kon niet worden geschreven.': 'Buku tidak dapat ditulis.',
+  'Boek samenstellen…': 'Susun buku…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Buku masuk ke folder book di dalam folder kerja dan tetap menjadi dokumen biasa yang dapat Anda sunting sesudahnya.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Tidak ada formulir yang dapat dipakai di folder kerja.',
+  'Formulier': 'Formulir',
+  'Hoofdstuksjabloon': 'Templat bab',
+  'Nog geen sjabloon gekozen.': 'Belum ada templat yang dipilih.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Dalam templat, {veld-id} berarti jawaban untuk kolom itu.',
+  'Hoofdstuksjabloon kiezen…': 'Pilih templat bab…',
+  'Welke inzendingen?': 'Kiriman yang mana?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Hanya kiriman dengan salah satu status ini yang masuk ke dalam buku. Kiriman yang ditarik kembali selalu dikecualikan.',
+  'Ordenen op': 'Urutkan menurut',
+  'Groeperen op': 'Kelompokkan menurut',
+  'Naam van het boek': 'Nama buku',
+  'Boek openen': 'Buka buku',
+  'Samenstellen': 'Susun',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Salinan kerja tidak dapat dibuat.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Membuka salinan kiriman untuk diperbaiki. Yang diterima tetap tidak berubah.',
+  'Werkkopie openen': 'Buka salinan kerja',
+  'Status gewijzigd naar {status}.': 'Status diubah menjadi {status}.',
+  'Intrekking opgeslagen.': 'Penarikan disimpan.',
+  'Intrekking ongedaan gemaakt.': 'Penarikan dibatalkan.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Kiriman dihapus; catatannya tetap ada.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Kiriman dihapus, tetapi register tidak dapat diperbarui. Ubah overview.md secara manual.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Kiriman tidak ditemukan di folder kerja.',
+  'De inzending kon niet worden verwijderd.': 'Kiriman tidak dapat dihapus.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Register tidak dapat dibaca. Perbaiki overview.md; tidak ada yang diubah.',
+  'Het register kon niet worden bijgewerkt.':
+      'Register tidak dapat diperbarui.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Perubahan ini tidak dapat dilakukan: kiriman tidak ada di register.',
+  'Status wijzigen': 'Ubah status',
+  'Intrekking ongedaan maken': 'Batalkan penarikan',
+  'Intrekken…': 'Tarik…',
+  'Verwijderen…': 'Hapus…',
+  'Inzending intrekken': 'Tarik kiriman',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Masukkan hari ketika pengirim menarik kiriman. Kiriman yang ditarik tidak pernah masuk ke buku.',
+  'Dag (jjjj-mm-dd)': 'Hari (tttt-bb-hh)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Hari tidak valid. Gunakan tahun-bulan-hari, misalnya {voorbeeld}.',
+  'Inzending verwijderen': 'Hapus kiriman',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Jawaban, salinan kerja, dan foto kiriman ini dihapus dari folder kerja. Hanya catatan minimal yang tersisa: nomor, hari penerimaan dan persetujuan, serta status. Ini tidak dapat dibatalkan.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Yang juga tetap ada, seperti diumumkan formulir sebelumnya: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Ada yang salah dengan kiriman ini.',
+  'Verplicht, maar leeg gelaten.': 'Wajib, tetapi dibiarkan kosong.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} kata; minimal {min} diperlukan.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} kata; maksimal {max} diizinkan.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakter; minimal {min} diperlukan.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakter; maksimal {max} diizinkan.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” tidak ada dalam daftar pilihan.',
+  '“{value}” is geen getal.': '“{value}” bukan angka.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” bukan tanggal dalam bentuk tahun-bulan-hari.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto selebar {actual} piksel; diminta {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Berkas foto tidak ada dalam kiriman.',
+  'De beschrijving van de foto ontbreekt.': 'Deskripsi foto tidak ada.',
+  'De maker van de foto ontbreekt.': 'Pembuat foto tidak ada.',
+  'De foto is niet gecontroleerd.': 'Foto belum diperiksa.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Foto HEIC: tidak diperiksa atau dibersihkan; mungkin berisi lokasi.',
+  'Toestemming niet gegeven.': 'Persetujuan tidak diberikan.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Jawaban berisi baris yang tampak seperti kode kontrol formulir.',
+  'Het antwoord bevat HTML.': 'Jawaban berisi HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Jawaban berisi blok kode yang tidak ditutup.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Jawaban merujuk ke gambar yang bukan bagian dari kiriman ini.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Jawaban berisi tautan yang tidak diizinkan.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Formulir atau versi ini tidak ada di folder kerja.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Pengirim bekerja dengan teks formulir yang berbeda dari yang diterbitkan.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Persetujuan dalam manifes tidak cocok dengan formulir yang diterbitkan.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Teks formulir diubah di luar jawaban.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Teks formulir diubah pada kolom ini.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Kolom ini tidak ada dalam formulir yang diterbitkan.',
+  'Dit veld ontbreekt in de inzending.': 'Kolom ini tidak ada dalam kiriman.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Kiriman versi {submission}; yang diterbitkan adalah versi {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formulir memerlukan OciDeck versi yang lebih baru.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Formulir yang diterbitkan di folder kerja tidak dapat digunakan.',
+  'De inzending hoort bij een ander formulier.':
+      'Kiriman ini milik formulir lain.',
+  'De opbouw van de inzending is beschadigd.': 'Struktur kiriman rusak.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Register tidak dapat dibaca. Perbaiki overview.md; kiriman ditampilkan di bawah tanpa data dari register.',
+  'Nog geen inzendingen.': 'Belum ada kiriman.',
+  'Om na te lopen': 'Perlu diperiksa',
+  'Verwijderd': 'Dihapus',
+  'Zonder regel in het register': 'Tanpa baris di register',
+  'Ontvangen {datum}': 'Diterima {datum}',
+  'Ingetrokken {datum}': 'Ditarik {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Isi kiriman ini telah dihapus; hanya catatannya yang tersisa.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Kiriman ini tidak dapat dibaca. Periksa berkas di folder kerja.',
+  'Beoordeeld tegen {formulier}.': 'Dinilai terhadap {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Penilaian ini tentang salinan kerja (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Tidak ada hal yang perlu diperiksa.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Foto yang tidak disebut jawaban mana pun: {n}.',
+  'Inzendingen': 'Kiriman',
+  'Werkmap': 'Folder kerja',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Belum ada folder kerja yang dipilih. Pilih folder untuk menyimpan kiriman dan register.',
+  'Werkmap kiezen…': 'Pilih folder kerja…',
+  'Kies de werkmap voor inzendingen': 'Pilih folder kerja untuk kiriman',
+  'Formulieren': 'Formulir',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Belum ada formulir yang ditambahkan. Tambahkan formulir seperti yang Anda terbitkan: kiriman diperiksa terhadapnya.',
+  'Formulier toevoegen…': 'Tambah formulir…',
+  'Kies het formulier om toe te voegen': 'Pilih formulir yang akan ditambahkan',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Berkas ini bukan formulir yang dapat diterbitkan.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Formulir ini sudah ada dengan teks yang berbeda. Teks yang berbeda adalah versi baru: beri formulir nomor versi yang lebih tinggi.',
+  'Formulier toegevoegd: {naam}.': 'Formulir ditambahkan: {naam}.',
+  'Dit formulier stond er al.': 'Formulir ini sudah ada.',
+  'Het formulier kon niet worden opgeslagen.': 'Formulir tidak dapat disimpan.',
+  'Inzendingen in de werkmap: {n}': 'Kiriman di folder kerja: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zip biasa tidak dienkripsi selama pengiriman.',
+  'Pakketten binnenhalen…': 'Impor paket…',
+  'Kies de pakketten om binnen te halen': 'Pilih paket yang akan diimpor',
+  'Register openen': 'Buka register',
+  '{naam}: binnengehaald.': '{naam}: diimpor.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: diimpor, tetapi ada hal yang perlu diperiksa.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: diimpor, tetapi register tidak dapat diperbarui. Periksa overview.md.',
+  '{naam}: stond er al.': '{naam}: sudah ada.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: bukan paket kiriman yang dapat dibaca OciDeck.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: formulir ini belum ditambahkan, atau tidak dalam versi ini. Tambahkan formulirnya terlebih dahulu.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: tidak dapat disimpan di folder kerja.',
+  'Formulieren en inzendingen': 'Formulir dan kiriman',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Impor kiriman dari sebuah formulir, periksa terhadap formulir yang diterbitkan, dan simpan dengan register. Mengisi formulir tetap bisa saat ini mati. Mati secara default.',
+  'Inzending opslaan als zip…': 'Simpan kiriman sebagai zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Berkas zip berisi jawaban dan foto Anda, untuk dikirim lewat email ke penyelenggara.',
+  'Inzending opgeslagen als {naam}.': 'Kiriman disimpan sebagai {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Pilih formulir seperti yang Anda terima',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Ini bukan formulir yang dimiliki jawaban Anda. Pilih berkas yang Anda terima dari penyelenggara.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Sebuah foto tidak dapat dibaca: {pad}. Tambahkan lagi.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Kiriman tidak muat dalam satu paket: terlalu banyak foto, atau ada foto yang terlalu besar.',
+  'De inzending kon niet worden opgeslagen.': 'Kiriman tidak dapat disimpan.',
+  'Inzending opslaan': 'Simpan kiriman',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Data lokasi telah dihapus dari foto ini.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Foto ini tidak dapat ditambahkan. Pilih berkas JPEG, PNG, WebP, atau HEIC berisi foto.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Simpan dokumen terlebih dahulu untuk menambahkan foto.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck dapat mengimpor berkas ini menjadi dokumen baru.',
+  'Kies een datum': 'Pilih tanggal',
+  'Anders, namelijk:': 'Lainnya, yaitu:',
+  'Punt {n}': 'Butir {n}',
+  'Punt {n} verwijderen': 'Hapus butir {n}',
+  'Rij {n} verwijderen': 'Hapus baris {n}',
+  'Foto {n} verwijderen': 'Hapus foto {n}',
+  'Wat is er te zien op de foto?': 'Apa yang terlihat di foto?',
+  'Van wie is de foto?': 'Foto ini milik siapa?',
+  'Foto toevoegen': 'Tambahkan foto',
+  'Verplicht': 'Wajib',
+  'Alles is ingevuld.': 'Semuanya sudah diisi.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Masih {n} lagi sebelum Anda dapat mengirim:',
+  'klaar': 'selesai',
+  '{n} open': '{n} terbuka',
+  'Dit formulier kan niet worden ingevuld.': 'Formulir ini tidak dapat diisi.',
+  'Naar de bron': 'Ke sumber',
+  'Woorden': 'Kata',
+  'Tekens': 'Karakter',
+  'Keuzes': 'Pilihan',
+  'Rijen': 'Baris',
+  'Foto’s': 'Foto',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minimal {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (maksimal {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minimal {min}, maksimal {max})',
+  'Invullen': 'Isi',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Ada yang salah pada formulir ini. Hubungi orang yang membuatnya.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Kolom ini wajib diisi. Isilah agar Anda dapat mengirim.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Anda menulis {actual} kata; dibutuhkan minimal {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Anda menulis {actual} kata; maksimal yang diizinkan {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Anda menulis {actual} karakter; dibutuhkan minimal {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Anda menulis {actual} karakter; maksimal yang diizinkan {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” tidak ada dalam daftar. Pilih salah satu opsi.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” bukan angka. Gunakan hanya angka, jika perlu dengan koma atau titik untuk desimal.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Foto ini lebarnya {actual} piksel; di sini diminta {min}. Kemungkinan foto mengecil saat dikirim lewat aplikasi pesan. Jika Anda masih punya aslinya, gunakan yang asli. Jika tidak, kirim saja: penyelenggara akan menghubungi Anda.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Foto ini berukuran {actual} MB; batas maksimalnya {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Isi berkas ini tidak sesuai dengan jenis berkasnya.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Jenis berkas ini tidak diizinkan di sini.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Berkas foto ini tidak ditemukan lagi. Tambahkan fotonya lagi.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Jelaskan dalam satu kalimat singkat apa yang terlihat di foto.',
+  'Geef aan van wie de foto is.': 'Sebutkan siapa pemilik foto ini.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Foto ini belum diperiksa. Tunggu sebentar atau tambahkan lagi.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Foto ini berkas HEIC. OciDeck tidak dapat memeriksa atau membersihkannya di sini, jadi dikirim apa adanya. Mungkin berisi lokasi pengambilan foto. Jika Anda tidak ingin membagikannya, pilih “Paling kompatibel” di pengaturan kamera atau bagikan foto sebagai JPEG, lalu tambahkan lagi.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Foto ini menampilkan {actual} wajah; yang diharapkan {expected}. Ini hanya pengingat.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Centang kotaknya untuk menyetujui; tanpa persetujuan Anda tidak dapat mengirim.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Formulir ini membutuhkan OciDeck versi yang lebih baru. Perbarui aplikasi untuk mengisinya.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Ada bagian dalam formulir itu sendiri yang berubah tanpa sengaja. Pulihkan formulir; jawaban Anda tetap ada.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Baris ini tampak seperti kode kontrol formulir dan tidak boleh ada dalam jawaban. Ubahlah.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML tidak diizinkan dalam jawaban. Gunakan teks biasa dan format sederhana.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kode belum ditutup. Tutup dengan ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Dalam jawaban hanya foto yang Anda tambahkan di formulir ini yang bisa dipakai; gambar dari internet tidak bisa.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Dalam jawaban hanya tautan yang diawali https:// dan alamat email yang diizinkan.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Berkas ini dibuat dengan versi formulir yang lain (versi {submission}; kini berlaku versi {published}). Periksa jawaban Anda.',
+  'Punt {item}: {bericht}': 'Butir {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Jumlahnya sekarang {actual}; harus antara {min} dan {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Jumlahnya sekarang {actual}; maksimal {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Jumlahnya sekarang {actual}; minimal {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Angka harus merupakan kelipatan {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Angka harus antara {min} dan {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Angka maksimal {max}.',
+  'Het getal moet minstens {min} zijn.': 'Angka minimal {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Tanggal harus pada atau setelah {min}.',
+  'De datum moet op of vóór {max} liggen.':
+      'Tanggal harus pada atau sebelum {max}.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” bukan tanggal. Tulis tanggal sebagai tahun-bulan-hari, misalnya 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Ini bukan alamat email yang valid.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Ini bukan alamat web yang valid. Awali dengan https://.',
+  'Dit is geen geldig telefoonnummer.': 'Ini bukan nomor telepon yang valid.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Ini bukan kode pos Belanda yang valid, seperti 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Di sini hanya muat satu baris. Hapus pemisah barisnya.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Gunakan hanya kotak centang pertanyaan ini: satu kotak per opsi.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Tulis setiap butir pada barisnya sendiri, diawali tanda hubung atau nomor.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabel tidak lagi benar: biarkan baris judul seperti semula dan beri setiap baris jumlah kolom yang sama.',
+  'Dezelfde foto staat hier twee keer.':
+      'Foto yang sama muncul dua kali di sini.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Kolom ini hanya untuk foto, bukan teks lepas.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Kotak persetujuan Anda rusak. Pulihkan formulir.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Jawaban ini tidak berbentuk seperti yang dibutuhkan pertanyaan ini.',
   'Downloaden…': 'Unduh…',
   'Afbeelding opgeslagen als': 'Gambar disimpan sebagai',
   '{naam}: ingesteld': '{naam}: terkonfigurasi',

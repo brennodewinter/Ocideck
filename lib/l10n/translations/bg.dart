@@ -1647,6 +1647,599 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Team…': 'Екип…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Редакторите освен вас, които са във всеки комплект, за да могат и те да отварят изпращанията. Добавяте някого с неговата карта на редактора и въвеждате отново отпечатъка на тази карта.',
+  'Er is nog niemand naast jou.': 'Освен вас засега няма никого.',
+  'Plak de kaart van de redacteur': 'Поставете картата на редактора',
+  'Kaart controleren': 'Проверка на картата',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Карта на {naam}. Въведете отпечатъка на тази карта, който {naam} ви даде по друг път, например по телефона.',
+  'Redacteur verwijderen': 'Премахване на редактор',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Да се премахне ли {naam} от екипа? Комплектите, които вече сте публикували, остават каквито са, докато не публикувате отново; каквото вече е запечатано за {naam}, остава четимо за този човек.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} е добавен. Публикувайте комплекта отново, за да включите {naam}.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} е премахнат. Публикувайте комплекта отново, за да изключите {naam}.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Първо създайте собствен ключ на редакцията в Ключ на редакцията….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Вашият ключ на редакцията не може да се използва. Вижте в Ключ на редакцията….',
+  'Dit is geen redacteurskaart.': 'Това не е карта на редактор.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Тази карта е от по-нова версия на OciDeck. Обновете OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Картата съдържа нещо недопустимо. Поискайте от редактора нова карта.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Този отпечатък не съответства на картата: картата е променена или не е от този, когото мислите. Поискайте отново от редактора отпечатъка и картата.',
+  'Dit is je eigen kaart.': 'Това е вашата собствена карта.',
+  'Deze redacteur staat er al.': 'Този редактор вече е в екипа.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Екипът е пълен: комплектът носи най-много 64 организатори, включително вас.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Файлът team.json в работната папка не може да се прочете. Нищо не е променено; поправете го или го изтрийте.',
+  'Het team kon niet worden opgeslagen.': 'Екипът не можа да бъде запазен.',
+  'Deze redacteur staat niet meer in het team.':
+      'Този редактор вече не е в екипа.',
+  'Naast jou in de bundel: {namen}.': 'Освен вас в комплекта: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Първо проверете ключа за възстановяване в Ключ на редакцията… или добавете втори редактор в Екип…. Без път назад всички изпращания стават нечетими, ако това устройство се повреди.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Файлът team.json в работната папка не може да се прочете. Нищо не се подписва.',
+  'Redacteurskaart maken…': 'Създаване на карта на редактора…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'С карта на редактора собственикът на формуляр ви добавя към комплекта, за да можете и вие да отваряте изпращанията. Картата може да се изпрати по имейл.',
+  'Jouw naam op de kaart': 'Вашето име на картата',
+  'Kaart maken': 'Създаване на карта',
+  'Kaart kopiëren': 'Копиране на картата',
+  'Vingerafdruk van de kaart': 'Отпечатък на картата',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Дайте на собственика този отпечатък по друг път, а не с картата, например по телефона. Той го въвежда отново, преди да ви добави.',
+  'Verzegeld opslaan…': 'Запазване запечатано…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Шифрован файл (.zip.age), който може да отвори само организаторът. За това са ви нужни файлът на комплекта и отпечатъкът от поканата.',
+  'Kies het bundelbestand van de organisator':
+      'Изберете файла на комплекта на организатора',
+  'Vingerafdruk van de organisator': 'Отпечатък на организатора',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Въведете отпечатъка от поканата. Нарочно го няма във файла на комплекта: така можете да проверите от кого е.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Това не е отпечатък. Състои се от 52 знака, обикновено на групи по четири.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Този файл не е комплект, който OciDeck може да прочете.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Този формуляр или комплект е от по-нова версия на OciDeck. Обновете OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Отпечатъкът не съответства на този комплект: формулярът не е от този, когото посочва поканата. Проверете отпечатъка и файла на комплекта.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Подписът на комплекта не е верен: променен е или не е от този, когото посочва отпечатъкът. Поискайте от организатора нов комплект.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Този комплект не принадлежи към този формуляр. Използвайте файла на комплекта, който принадлежи точно към този формуляр.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Този комплект е изтекъл. Поискайте от организатора нов.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Този комплект е по-стар от комплект, който сте получили по-рано от този организатор. Поискайте от организатора най-новия.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Комплектът съдържа нещо недопустимо. Поискайте от организатора нов комплект.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Този формуляр е затворен: последният ден беше {datum}. Свържете се с организатора.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Изпращането е по-голямо, отколкото организаторът позволява ({mb} МБ). Премахнете снимка или намалете една.',
+  'De inzending kon niet worden verzegeld.':
+      'Изпращането не можа да бъде запечатано.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Запазено запечатано като {naam}, може да се отвори само от: {organisatoren}.',
+  'Bundel publiceren…': 'Публикуване на комплект…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Комплектът е това, на което попълващият вярва за вашата редакция: за кой ключ запечатва и към кой текст принадлежи. Съхранява се до формуляра.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'В работната папка няма формуляр, за който да се създаде комплект.',
+  'Naam voor de invuller': 'Име за попълващия',
+  'Geldig tot (jjjj-mm-dd)': 'Валиден до (гггг-мм-дд)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Последният ден, в който попълващият вярва на този комплект. Не преди деня на затваряне на формуляра.',
+  'Bundel maken': 'Създаване на комплект',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Комплектът е създаден (пореден номер {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Дайте отпечатъка на попълващия по друг път, а не с файла на комплекта, например в поканата. Който има само файла на комплекта, не може да провери от кого е.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Тази платформа няма връзка с ключове за ключа на редакцията; комплект не може да се подпише тук.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Все още няма ключ на редакцията. Създайте такъв в Ключ на редакцията…, преди да публикувате комплект.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Връзката с ключове не може да се прочете. Нищо не е подписано.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Запазеният ключ на редакцията не може да се прочете. Изтрийте го в Ключ на редакцията… и го възстановете от ключа за възстановяване.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Комплект на този формуляр в работната папка не може да се прочете или не принадлежи към другите. Тогава поредният номер не може да се определи и нищо не се подписва. Проверете: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Въведете име до 80 знака.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Валиден до трябва да е съществуваща дата във формат гггг-мм-дд.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Валиден до не може да е преди деня на затваряне на формуляра.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Комплектът не можа да бъде създаден ({veld}). Проверете дали формулярът посочва валиден ден на затваряне и срок на съхранение.',
+  'formulier': 'формуляр',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Комплектът не можа да бъде запазен в работната папка.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Създайте и подпишете комплекта, на който попълващият вярва за вашата редакция.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: запечатаният пакет е отворен и импортиран.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: този пакет е запечатан, а тази платформа няма връзка с ключове за ключа на редакцията.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: този пакет е запечатан и още няма ключ на редакцията, с който да се отвори. Създайте такъв в Ключ на редакцията… или го възстановете от ключа за възстановяване.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: този пакет е запечатан, а връзката с ключове не може да се прочете. Нищо не е опитано.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: този пакет е запечатан, а запазеният ключ на редакцията не може да се прочете. Изтрийте го в Ключ на редакцията… и го възстановете от ключа за възстановяване.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: този пакет не е запечатан за вашия ключ на редакцията.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: този пакет е променен или прекъснат и няма да бъде отворен.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: този пакет е по-голям, отколкото може да бъде едно изпращане.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: запазеният ключ на редакцията не е ключ, който OciDeck може да използва.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: не е запечатан пакет, който OciDeck може да прочете.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Запечатан файл (.zip.age) се отваря с вашия ключ на редакцията.',
+  'Herstelsleutel controleren': 'Проверка на ключа за възстановяване',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Ключът на редакцията е създаден. Сега запишете ключа за възстановяване.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Връзката с ключове не прие ключа. Нищо не е създадено.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Вече има ключ на редакцията. Не е пипан.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Връзката с ключове не можа да бъде прочетена. Нищо не е предполагано и нищо не е създадено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Във връзката с ключове има нещо, което не е ключ на редакцията. Не е презаписано.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Тази платформа няма връзка с ключове.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Правилно: ключът за възстановяване е проверен.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Това е валиден ключ за възстановяване, но не на този ключ на редакцията.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Ключът за възстановяване е правилен, но това не можа да бъде запазено.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Няма ключ на редакцията, с който да се сравни.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Това не е ключ за възстановяване на ключ на редакцията.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Има правописна грешка: контролната сума не съвпада.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Този ключ за възстановяване е от по-нова версия на OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Този ключ за възстановяване е направен за нещо друго.',
+  'Hersteld uit de herstelsleutel.': 'Възстановено от ключа за възстановяване.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Връзката с ключове не прие ключа. Нищо не е възстановено.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Запазване на ключа на редакцията като файл с ключ age',
+  'Het bestand kon niet worden opgeslagen.': 'Файлът не можа да бъде запазен.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Запазено като {pad}. Който има този файл, може да отвори всичко.',
+  'Redactiesleutel verwijderd.': 'Ключът на редакцията е изтрит.',
+  'Redactiesleutel': 'Ключ на редакцията',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Тази платформа няма връзка с ключове. Ключът на редакцията не може да се съхранява тук; използвайте настолното приложение.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Връзката с ключове не можа да бъде прочетена (заключена или отказан достъп). Нищо не е предполагано и нищо не е създадено.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Във връзката с ключове има нещо, което не е ключ на редакцията. Не е презаписано. Изтрийте го и възстановете ключа от вашия ключ за възстановяване.',
+  'Redactiesleutel verwijderen…': 'Изтриване на ключа на редакцията…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Ключът на редакцията отваря запечатаните изпращания и подписва пакетите на вашите формуляри. Намира се във връзката с ключове на тази операционна система. Ако загубите всички ключове на редакцията, всички още непридобити изпращания стават нечетими: това е цената на сървър, който не може да чете нищо.',
+  'Redactiesleutel aanmaken': 'Създаване на ключ на редакцията',
+  'Herstellen uit herstelsleutel…': 'Възстановяване от ключ за възстановяване…',
+  'Vingerafdruk': 'Отпечатък',
+  'Ontvanger (age)': 'Получател (age)',
+  'Aangemaakt op {datum}.': 'Създаден на {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Ключът за възстановяване е проверен.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Ключът за възстановяване още не е проверен: запишете го и го въведете отново.',
+  'Herstelsleutel tonen…': 'Показване на ключа за възстановяване…',
+  'Vingerafdruk kopiëren': 'Копиране на отпечатъка',
+  'Exporteren als age-sleutelbestand…': 'Експортиране като файл с ключ age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Запишете този ключ за възстановяване и го пазете на сигурно място, извън това устройство. Който го има, може да отвори всички изпращания и да подписва пакети от ваше име. Ако загубите това устройство, това е всичко, което остава.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Въведете ключа за възстановяване тук още веднъж',
+  'Later': 'По-късно',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Въведете или поставете ключа за възстановяване. Каквото въведете, се поставя във връзката с ключове като ключ на редакцията; нищо не се презаписва.',
+  'Herstelsleutel': 'Ключ за възстановяване',
+  'Redactiesleutel verwijderen': 'Изтриване на ключа на редакцията',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Ключът се изтрива от връзката с ключове и може да се върне само от ключа за възстановяване. Ако го нямате, изпращанията, запечатани само за този ключ, остават нечетими завинаги.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Ключът, който отваря запечатаните изпращания и подписва пакетите.',
+  'Redactiesleutel…': 'Ключ на редакцията…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Работното копие е изхвърлено. Полученото се оценява отново.',
+  'Er is geen werkkopie.': 'Няма работно копие.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Работното копие не можа да бъде изхвърлено.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Изтрива работното копие. Полученото остава и се оценява отново.',
+  'Werkkopie weggooien…': 'Изхвърляне на работното копие…',
+  'Werkkopie weggooien': 'Изхвърляне на работното копие',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Работното копие с подобренията се изтрива и не може да бъде върнато. Полученото остава и се оценява отново. Ако работното копие е все още отворено в раздел, първо го затворете.',
+  'Weggooien': 'Изхвърляне',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Това изпращане е оттеглено и затова не влиза в никоя глава.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Това изпращане не може да бъде прочетено или формулярът, за който е изпратено, не е в работната папка.',
+  'Het controledocument kon niet worden geschreven.':
+      'Документът за проверка не можа да бъде записан.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Вашият принос към книгата: моля, проверете го',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Ето вашия принос във вида, в който ще се появи в книгата (вижте прикачения файл). Всичко ли е вярно? Отговорете ‘съгласен’ или с вашите корекции преди {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Съобщението е готово във вашата пощенска програма. Прикачете PDF и го изпратете.',
+  'Controle door de maker…': 'Проверка от автора…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Документът за проверка е главата на това едно изпращане. Експортирайте го като PDF (изберете пълния профил), прикачете PDF към съобщението и го изпратете. Ако авторът отговори ‘съгласен’, сами задайте статуса maker-approved: този отговор потвърждава и че приносът наистина идва от този човек.',
+  'Controledocument maken en openen':
+      'Създаване на документ за проверка и отваряне',
+  'E-mailadres van de maker': 'Имейл адрес на автора',
+  'Antwoord vóór (jjjj-mm-dd)': 'Отговор преди (гггг-мм-дд)',
+  'Mail schrijven': 'Писане на съобщение',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Този формуляр не познава статуса maker-check-sent, затова той не може да бъде зададен тук.',
+  'Controle verstuurd': 'Проверката е изпратена',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Създава главата от това изпращане и подготвя съобщението, с което авторът я проверява.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Това изпращане не е в регистъра. Поправете overview.md и опитайте отново.',
+  'Kies het hoofdstuksjabloon': 'Избор на шаблон за глава',
+  'Kies eerst een hoofdstuksjabloon.': 'Първо изберете шаблон за глава.',
+  'Kies minstens één status.': 'Изберете поне един статус.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Книгата е съставена. Глави: {n}. Снимки: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Оттеглени и затова пропуснати: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Пропуснати (друга версия или нечетими): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Снимки, които липсваха в работната папка: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'В името използвайте само букви, цифри, тирета и долни черти (най-много 64 знака).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Вече има книга с това име. Изберете друго име.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Шаблонът споменава полета, които формулярът няма: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Няма какво да се сложи в книгата: няма изпращане с избран статус. Оттеглени: {w}; пропуснати: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Регистърът не може да бъде прочетен. Поправете overview.md.',
+  'Het boek kon niet worden geschreven.': 'Книгата не можа да бъде записана.',
+  'Boek samenstellen…': 'Съставяне на книга…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Книгата отива в папката book на работната папка и остава обикновен документ, който можете да редактирате после.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'В работната папка няма използваем формуляр.',
+  'Formulier': 'Формуляр',
+  'Hoofdstuksjabloon': 'Шаблон за глава',
+  'Nog geen sjabloon gekozen.': 'Още не е избран шаблон.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'В шаблона {veld-id} означава отговора на това поле.',
+  'Hoofdstuksjabloon kiezen…': 'Избор на шаблон за глава…',
+  'Welke inzendingen?': 'Кои изпращания?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'В книгата влизат само изпращания с един от тези статуси. Оттеглените изпращания винаги остават извън нея.',
+  'Ordenen op': 'Подреждане по',
+  'Groeperen op': 'Групиране по',
+  'Naam van het boek': 'Име на книгата',
+  'Boek openen': 'Отваряне на книгата',
+  'Samenstellen': 'Съставяне',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Работното копие не можа да бъде създадено.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Отваря копие на изпращането за подобряване. Полученото остава непроменено.',
+  'Werkkopie openen': 'Отваряне на работното копие',
+  'Status gewijzigd naar {status}.': 'Статусът е променен на {status}.',
+  'Intrekking opgeslagen.': 'Оттеглянето е запазено.',
+  'Intrekking ongedaan gemaakt.': 'Оттеглянето е отменено.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Изпращането е изтрито; записът остава.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Изпращането е изтрито, но регистърът не можа да бъде обновен. Редактирайте overview.md ръчно.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Изпращането не е намерено в работната папка.',
+  'De inzending kon niet worden verwijderd.':
+      'Изпращането не можа да бъде изтрито.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Регистърът не може да бъде прочетен. Поправете overview.md; нищо не е променено.',
+  'Het register kon niet worden bijgewerkt.':
+      'Регистърът не можа да бъде обновен.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Тази промяна не можа да бъде направена: изпращането го няма в регистъра.',
+  'Status wijzigen': 'Промяна на статуса',
+  'Intrekking ongedaan maken': 'Отмяна на оттеглянето',
+  'Intrekken…': 'Оттегляне…',
+  'Verwijderen…': 'Изтриване…',
+  'Inzending intrekken': 'Оттегляне на изпращане',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Въведете деня, в който изпращащият е оттеглил изпращането. Оттеглено изпращане никога не влиза в книгата.',
+  'Dag (jjjj-mm-dd)': 'Ден (гггг-мм-дд)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Невалиден ден. Използвайте година-месец-ден, например {voorbeeld}.',
+  'Inzending verwijderen': 'Изтриване на изпращане',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Отговорите, работното копие и снимките на това изпращане се изтриват от работната папка. Остава само минимален запис: номерът, дните на получаване и съгласие и статусът. Това не може да бъде отменено.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Остава и това, което формулярът е обявил предварително: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Има нещо нередно с това изпращане.',
+  'Verplicht, maar leeg gelaten.': 'Задължително, но оставено празно.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} думи; необходими са поне {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} думи; позволени са най-много {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} знака; необходими са поне {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} знака; позволени са най-много {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ не е в списъка с опции.',
+  '“{value}” is geen getal.': '„{value}“ не е число.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ не е дата във вида година-месец-ден.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Снимка, широка {actual} пиксела; поискани са {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Във изпращането липсва файлът на снимката.',
+  'De beschrijving van de foto ontbreekt.': 'Липсва описанието на снимката.',
+  'De maker van de foto ontbreekt.': 'Липсва авторът на снимката.',
+  'De foto is niet gecontroleerd.': 'Снимката не е проверена.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC снимка: непроверена и неизчистена; може да съдържа местоположение.',
+  'Toestemming niet gegeven.': 'Съгласието не е дадено.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Отговорът съдържа ред, който прилича на управляващ код на формуляра.',
+  'Het antwoord bevat HTML.': 'Отговорът съдържа HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Отговорът съдържа незатворен блок с код.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Отговорът сочи изображение, което не принадлежи към това изпращане.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Отговорът съдържа връзка, която не е позволена.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Този формуляр или тази версия не е в работната папка.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Изпращащият е работил с друг текст на формуляра, различен от публикувания.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Съгласието в манифеста не съвпада с публикувания формуляр.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Текстът на формуляра е променен извън отговорите.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Текстът на формуляра е променен при това поле.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Това поле не съществува в публикувания формуляр.',
+  'Dit veld ontbreekt in de inzending.': 'Това поле липсва в изпращането.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Изпращане на версия {submission}; публикувана е версия {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Формулярът изисква по-нова версия на OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Публикуваният формуляр в работната папка не е използваем.',
+  'De inzending hoort bij een ander formulier.':
+      'Изпращането принадлежи към друг формуляр.',
+  'De opbouw van de inzending is beschadigd.':
+      'Структурата на изпращането е повредена.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Регистърът не може да бъде прочетен. Поправете overview.md; изпращанията са показани по-долу без данни от регистъра.',
+  'Nog geen inzendingen.': 'Още няма изпращания.',
+  'Om na te lopen': 'За проверка',
+  'Verwijderd': 'Изтрито',
+  'Zonder regel in het register': 'Без ред в регистъра',
+  'Ontvangen {datum}': 'Получено {datum}',
+  'Ingetrokken {datum}': 'Оттеглено {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Съдържанието на това изпращане е изтрито; остава само записът.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Това изпращане не може да бъде прочетено. Проверете файловете в работната папка.',
+  'Beoordeeld tegen {formulier}.': 'Оценено спрямо {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Оценката е за работното копие (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Няма точки за проверка.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Снимки, които никой отговор не споменава: {n}.',
+  'Inzendingen': 'Изпращания',
+  'Werkmap': 'Работна папка',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Все още не е избрана работна папка. Изберете папка, в която ще се съхраняват изпращанията и регистърът.',
+  'Werkmap kiezen…': 'Избор на работна папка…',
+  'Kies de werkmap voor inzendingen':
+      'Изберете работната папка за изпращанията',
+  'Formulieren': 'Формуляри',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Все още не е добавен формуляр. Добавете формуляра така, както сте го публикували: изпращането се проверява спрямо него.',
+  'Formulier toevoegen…': 'Добавяне на формуляр…',
+  'Kies het formulier om toe te voegen': 'Изберете формуляра за добавяне',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Този файл не е формуляр, който може да бъде публикуван.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Този формуляр вече съществува с различен текст. Различен текст е нова версия: дайте на формуляра по-висок номер на версията.',
+  'Formulier toegevoegd: {naam}.': 'Формулярът е добавен: {naam}.',
+  'Dit formulier stond er al.': 'Този формуляр вече беше тук.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Формулярът не можа да бъде запазен.',
+  'Inzendingen in de werkmap: {n}': 'Изпращания в работната папка: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Обикновеният zip не е шифрован по време на пренос.',
+  'Pakketten binnenhalen…': 'Импортиране на пакети…',
+  'Kies de pakketten om binnen te halen': 'Изберете пакетите за импортиране',
+  'Register openen': 'Отваряне на регистъра',
+  '{naam}: binnengehaald.': '{naam}: импортирано.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: импортирано, но има точки за преглед.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: импортирано, но регистърът не можа да бъде обновен. Проверете overview.md.',
+  '{naam}: stond er al.': '{naam}: вече беше тук.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: не е пакет с изпращане, който OciDeck може да прочете.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: този формуляр не е добавен или не е в тази версия. Първо добавете формуляра.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: не можа да бъде запазен в работната папка.',
+  'Formulieren en inzendingen': 'Формуляри и изпращания',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Импортирайте изпращания на формуляр, проверявайте ги спрямо публикувания формуляр и ги пазете с регистър. Попълването на формуляр работи и когато това е изключено. По подразбиране е изключено.',
+  'Inzending opslaan als zip…': 'Запази изпращането като zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip файл с вашите отговори и снимки, който да изпратите по имейл на организатора.',
+  'Inzending opgeslagen als {naam}.': 'Изпращането е запазено като {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Изберете формуляра така, както сте го получили',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Това не е формулярът, към който принадлежат вашите отговори. Изберете файла, който сте получили от организатора.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Снимка не можа да бъде прочетена: {pad}. Добавете я отново.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Изпращането не се побира в един пакет: твърде много снимки или твърде голяма снимка.',
+  'De inzending kon niet worden opgeslagen.':
+      'Изпращането не можа да бъде запазено.',
+  'Inzending opslaan': 'Запази изпращане',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Данните за местоположението са премахнати от тази снимка.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Тази снимка не можа да бъде добавена. Изберете JPEG, PNG, WebP или HEIC файл със снимка.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Първо запазете документа, за да добавяте снимки.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck може да импортира този файл в нов документ.',
+  'Kies een datum': 'Избор на дата',
+  'Anders, namelijk:': 'Друго, а именно:',
+  'Punt {n}': 'Точка {n}',
+  'Punt {n} verwijderen': 'Премахване на точка {n}',
+  'Rij {n} verwijderen': 'Премахване на ред {n}',
+  'Foto {n} verwijderen': 'Премахване на снимка {n}',
+  'Wat is er te zien op de foto?': 'Какво се вижда на снимката?',
+  'Van wie is de foto?': 'Чия е снимката?',
+  'Foto toevoegen': 'Добавяне на снимка',
+  'Verplicht': 'Задължително',
+  'Alles is ingevuld.': 'Всичко е попълнено.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Остават още {n}, преди да можете да изпратите:',
+  'klaar': 'готово',
+  '{n} open': '{n} отворени',
+  'Dit formulier kan niet worden ingevuld.':
+      'Този формуляр не може да бъде попълнен.',
+  'Naar de bron': 'Към източника',
+  'Woorden': 'Думи',
+  'Tekens': 'Знаци',
+  'Keuzes': 'Избори',
+  'Rijen': 'Редове',
+  'Foto’s': 'Снимки',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (поне {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (най-много {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (поне {min}, най-много {max})',
+  'Invullen': 'Попълване',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Нещо не е наред с този формуляр. Свържете се с този, който го е създал.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Това поле е задължително. Попълнете го, за да можете да изпратите.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Написахте {actual} думи; необходими са поне {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Написахте {actual} думи; разрешени са най-много {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Написахте {actual} знака; необходими са поне {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Написахте {actual} знака; разрешени са най-много {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}“ не е в списъка. Изберете една от опциите.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}“ не е число. Използвайте само цифри, при нужда със запетая или точка за десетични.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Тази снимка е широка {actual} пиксела; тук се изискват {min}. Вероятно е била намалена при изпращане през приложение за съобщения. Ако все още имате оригинала, използвайте него. Ако не, изпратете я все пак: организаторът ще се свърже с вас.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Тази снимка е {actual} MB; максимумът е {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Съдържанието на този файл не съответства на типа му.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Този тип файл не е разрешен тук.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Файлът на тази снимка вече не може да бъде намерен. Добавете снимката отново.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Опишете с едно кратко изречение какво се вижда на снимката.',
+  'Geef aan van wie de foto is.': 'Посочете чия е снимката.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Тази снимка още не е проверена. Изчакайте малко или я добавете отново.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Тази снимка е HEIC файл. OciDeck не може да го провери или почисти тук, затова се изпраща такъв, какъвто е. Може да съдържа къде е направена снимката. Ако не искате да споделяте това, изберете „Най-съвместим“ в настройките на камерата или споделете снимката като JPEG и я добавете отново.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'На тази снимка се виждат {actual} лица; очакваха се {expected}. Това е само напомняне.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Поставете отметка, за да се съгласите; без съгласие не можете да изпратите.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Този формуляр изисква по-нова версия на OciDeck. Обновете приложението, за да го попълните.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Нещо във самия формуляр е променено случайно. Възстановете формуляра; отговорите ви остават.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Този ред прилича на управляващ код на формуляра и не може да бъде в отговор. Променете го.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML не е разрешен в отговор. Използвайте обикновен текст и просто форматиране.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Кодов блок не е затворен. Затворете го с ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'В отговор могат да бъдат само снимки, които добавяте в този формуляр; изображение от интернет не може.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'В отговор са разрешени само връзки, започващи с https://, и имейл адреси.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Този файл е създаден с друга версия на формуляра (версия {submission}; сега важи версия {published}). Проверете отговорите си.',
+  'Punt {item}: {bericht}': 'Точка {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Сега са {actual}; трябва да са между {min} и {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Сега са {actual}; могат да са най-много {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Сега са {actual}; трябва да са поне {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Числото трябва да бъде кратно на {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Числото трябва да е между {min} и {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Числото може да е най-много {max}.',
+  'Het getal moet minstens {min} zijn.': 'Числото трябва да е поне {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Датата трябва да е {min} или по-късна.',
+  'De datum moet op of vóór {max} liggen.':
+      'Датата трябва да е {max} или по-ранна.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}“ не е дата. Запишете датата като година-месец-ден, например 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Това не е валиден имейл адрес.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Това не е валиден уеб адрес. Започнете с https://.',
+  'Dit is geen geldig telefoonnummer.': 'Това не е валиден телефонен номер.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Това не е валиден нидерландски пощенски код, например 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Тук се събира само един ред. Премахнете новите редове.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Използвайте само квадратчетата на този въпрос: по едно на опция.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Пишете всяка точка на отделен ред, с тире или номер отпред.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Таблицата вече не е правилна: оставете реда със заглавията такъв, какъвто беше, и дайте на всеки ред еднакъв брой колони.',
+  'Dezelfde foto staat hier twee keer.':
+      'Същата снимка се появява тук два пъти.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'В това поле са допустими само снимки, без самостоятелен текст.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Квадратчето за вашето съгласие е повредено. Възстановете формуляра.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Този отговор няма формата, която подхожда на този въпрос.',
   'Downloaden…': 'Изтегляне…',
   'Afbeelding opgeslagen als': 'Изображението е запазено като',
   '{naam}: ingesteld': '{naam}: настроен',

@@ -2538,6 +2538,588 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Team…': 'Ekip…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Sizin dışınızda her bundle’da bulunan editörler, böylece onlar da gönderileri açabilir. Birini editör kartıyla eklersiniz ve o kartın parmak izini yeniden yazarsınız.',
+  'Er is nog niemand naast jou.': 'Sizden başka henüz kimse yok.',
+  'Plak de kaart van de redacteur': 'Editörün kartını yapıştırın',
+  'Kaart controleren': 'Kartı kontrol et',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} kartı. {naam} adlı kişinin size başka bir yoldan, örneğin telefonla verdiği bu kartın parmak izini yazın.',
+  'Redacteur verwijderen': 'Editörü kaldır',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} ekipten kaldırılsın mı? Önceden yayımladığınız bundle’lar siz yeniden yayımlayana kadar olduğu gibi kalır; {naam} için zaten mühürlenmiş olan, o kişi için okunabilir kalır.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} eklendi. {naam} adlı kişiyi dahil etmek için bundle’ı yeniden yayımlayın.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} kaldırıldı. {naam} adlı kişiyi çıkarmak için bundle’ı yeniden yayımlayın.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Önce Yayın kurulu anahtarı… altında kendi yayın kurulu anahtarınızı oluşturun.',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Yayın kurulu anahtarınız kullanılamıyor. Yayın kurulu anahtarı… altına bakın.',
+  'Dit is geen redacteurskaart.': 'Bu bir editör kartı değil.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Bu kart OciDeck’in daha yeni bir sürümünden. OciDeck’i güncelleyin.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kart izin verilmeyen bir şey içeriyor. Editörden yeni bir kart isteyin.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Bu parmak izi karta uymuyor: kart değiştirilmiş ya da sandığınız kişiden değil. Editörden parmak izini ve kartı yeniden isteyin.',
+  'Dit is je eigen kaart.': 'Bu sizin kendi kartınız.',
+  'Deze redacteur staat er al.': 'Bu editör zaten ekipte.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Ekip dolu: bir bundle en fazla 64 organizatör taşır, siz dahil.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Çalışma klasöründeki team.json dosyası okunamıyor. Hiçbir şey değiştirilmedi; onarın ya da silin.',
+  'Het team kon niet worden opgeslagen.': 'Ekip kaydedilemedi.',
+  'Deze redacteur staat niet meer in het team.':
+      'Bu editör artık ekipte değil.',
+  'Naast jou in de bundel: {namen}.': 'Sizin dışınızda bundle’da: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Önce kurtarma anahtarınızı Yayın kurulu anahtarı… altında kontrol edin ya da Ekip… altında ikinci bir editör ekleyin. Geri dönüş yolu olmadan, bu cihaz bozulursa tüm gönderimler okunamaz hale gelir.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Çalışma klasöründeki team.json dosyası okunamıyor. Hiçbir şey imzalanmaz.',
+  'Redacteurskaart maken…': 'Editör kartı oluştur…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Editör kartıyla bir formun sahibi sizi bundle’a ekler, böylece siz de gönderileri açabilirsiniz. Kart e-postayla gönderilebilir.',
+  'Jouw naam op de kaart': 'Karttaki adınız',
+  'Kaart maken': 'Kart oluştur',
+  'Kaart kopiëren': 'Kartı kopyala',
+  'Vingerafdruk van de kaart': 'Kartın parmak izi',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Bu parmak izini sahibine kartın dışında başka bir yoldan verin, örneğin telefonla. Sizi eklemeden önce onu yeniden yazar.',
+  'Verzegeld opslaan…': 'Mühürlü kaydet…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Yalnızca organizatörün açabileceği şifreli bir dosya (.zip.age). Bunun için bundle dosyasına ve davetiyedeki parmak izine ihtiyacınız var.',
+  'Kies het bundelbestand van de organisator':
+      'Organizatörün bundle dosyasını seçin',
+  'Vingerafdruk van de organisator': 'Organizatörün parmak izi',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Davetiyedeki parmak izini yazın. Bilerek bundle dosyasında yok: böylece kimden geldiğini doğrulayabilirsiniz.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Bu bir parmak izi değil. 52 karakterden oluşur, genellikle dörderli gruplar halinde.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Bu dosya, OciDeck’in okuyabileceği bir bundle değil.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Bu form veya bundle, OciDeck’in daha yeni bir sürümünden. OciDeck’i güncelleyin.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Parmak izi bu bundle ile uyuşmuyor: form, davetiyenin söylediği kişiden gelmiyor. Parmak izini ve bundle dosyasını kontrol edin.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundle’ın imzası doğru değil: değiştirilmiş ya da parmak izinin söylediği kişiden değil. Organizatörden yeni bir bundle isteyin.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Bu bundle bu forma ait değil. Tam olarak bu forma ait bundle dosyasını kullanın.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Bu bundle’ın süresi dolmuş. Organizatörden yenisini isteyin.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Bu bundle, bu organizatörden daha önce aldığınız bir bundle’dan eski. Organizatörden en yenisini isteyin.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle izin verilmeyen bir şey içeriyor. Organizatörden yeni bir bundle isteyin.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Bu form kapandı: son gün {datum} idi. Organizatörle iletişime geçin.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Gönderi, organizatörün izin verdiğinden büyük ({mb} MB). Bir fotoğrafı kaldırın ya da birini küçültün.',
+  'De inzending kon niet worden verzegeld.': 'Gönderi mühürlenemedi.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      '{naam} olarak mühürlü kaydedildi, yalnızca şunlar açabilir: {organisatoren}.',
+  'Bundel publiceren…': 'Bundle yayımla…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle, formu dolduranın yayın kurulunuz hakkında inandığı şeydir: hangi anahtara mühürleyeceği ve hangi metne ait olduğu. Formun yanına kaydedilir.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Çalışma klasöründe bundle oluşturulabilecek bir form yok.',
+  'Naam voor de invuller': 'Formu dolduran için ad',
+  'Geldig tot (jjjj-mm-dd)': 'Geçerlilik bitişi (yyyy-aa-gg)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Formu dolduranın bu bundle\'a inandığı son gün. Formun kapanış gününden önce olmamalı.',
+  'Bundel maken': 'Bundle oluştur',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle oluşturuldu (sıra numarası {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Parmak izini formu dolduran kişiye bundle dosyasından farklı bir yoldan verin, örneğin davetiyede. Yalnızca bundle dosyasına sahip olan, onun kimden geldiğini doğrulayamaz.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Bu platformda yayın kurulu anahtarı için anahtarlık yok; burada bundle imzalanamaz.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Henüz yayın kurulu anahtarı yok. Bundle yayımlamadan önce Yayın kurulu anahtarı… altında bir tane oluşturun.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Anahtarlık okunamıyor. Hiçbir şey imzalanmadı.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Kayıtlı yayın kurulu anahtarı okunamıyor. Yayın kurulu anahtarı… altında silin ve kurtarma anahtarınızdan geri yükleyin.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Çalışma klasöründeki bu formun bir bundle\'ı okunamıyor ya da diğerlerine ait değil. Bu durumda sıra numarası belirlenemez ve hiçbir şey imzalanmaz. Kontrol edin: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'En fazla 80 karakterlik bir ad girin.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Geçerlilik bitişi, yyyy-aa-gg biçiminde var olan bir tarih olmalı.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Geçerlilik bitişi, formun kapanış gününden önce olamaz.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle oluşturulamadı ({veld}). Formun geçerli bir kapanış günü ve saklama süresi belirttiğinden emin olun.',
+  'formulier': 'form',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle çalışma klasörüne kaydedilemedi.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Formu dolduranın yayın kurulunuz hakkında inandığı bundle\'ı oluşturun ve imzalayın.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: mühürlü paket açıldı ve içe aktarıldı.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: bu paket mühürlü ve bu platformda yayın kurulu anahtarı için anahtarlık yok.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: bu paket mühürlü ve onu açacak bir yayın kurulu anahtarı henüz yok. Yayın kurulu anahtarı… altında bir tane oluşturun ya da kurtarma anahtarınızdan geri yükleyin.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: bu paket mühürlü ve anahtarlık okunamıyor. Hiçbir şey denenmedi.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: bu paket mühürlü ve kayıtlı yayın kurulu anahtarı okunamıyor. Yayın kurulu anahtarı… altında silin ve kurtarma anahtarınızdan geri yükleyin.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: bu paket sizin yayın kurulu anahtarınız için mühürlenmemiş.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: bu paket değiştirilmiş veya yarıda kesilmiş ve açılmayacak.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: bu paket bir gönderinin olabileceğinden daha büyük.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: kayıtlı yayın kurulu anahtarı, OciDeck’in kullanabileceği bir anahtar değil.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: OciDeck’in okuyabileceği mühürlü bir paket değil.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Mühürlü bir dosya (.zip.age) yayın kurulu anahtarınızla açılır.',
+  'Herstelsleutel controleren': 'Kurtarma anahtarını kontrol et',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Yayın kurulu anahtarı oluşturuldu. Şimdi kurtarma anahtarını yazın.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Anahtarlık anahtarı kabul etmedi. Hiçbir şey oluşturulmadı.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Zaten bir yayın kurulu anahtarı var. Dokunulmadı.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Anahtarlık okunamadı. Hiçbir şey varsayılmadı ve hiçbir şey oluşturulmadı.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Anahtarlıkta yayın kurulu anahtarı olmayan bir şey var. Üzerine yazılmadı.',
+  'Dit platform heeft geen sleutelhanger.': 'Bu platformda anahtarlık yok.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Doğru: kurtarma anahtarı kontrol edildi.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Bu geçerli bir kurtarma anahtarı, ancak bu yayın kurulu anahtarına ait değil.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Kurtarma anahtarı doğru, ancak kaydedilemedi.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Karşılaştırılacak bir yayın kurulu anahtarı yok.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Bu, bir yayın kurulu anahtarının kurtarma anahtarı değil.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Bir yazım hatası var: sağlama toplamı uyuşmuyor.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Bu kurtarma anahtarı OciDeck\'in daha yeni bir sürümünden geliyor.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Bu kurtarma anahtarı başka bir şey için yapılmış.',
+  'Hersteld uit de herstelsleutel.': 'Kurtarma anahtarından geri yüklendi.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Anahtarlık anahtarı kabul etmedi. Hiçbir şey geri yüklenmedi.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Yayın kurulu anahtarını age anahtar dosyası olarak kaydet',
+  'Het bestand kon niet worden opgeslagen.': 'Dosya kaydedilemedi.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      '{pad} olarak kaydedildi. Bu dosyaya sahip olan her şeyi açabilir.',
+  'Redactiesleutel verwijderd.': 'Yayın kurulu anahtarı silindi.',
+  'Redactiesleutel': 'Yayın kurulu anahtarı',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Bu platformda anahtarlık yok. Yayın kurulu anahtarı burada saklanamaz; masaüstü uygulamasını kullanın.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Anahtarlık okunamadı (kilitli ya da erişim reddedildi). Hiçbir şey varsayılmadı ve hiçbir şey oluşturulmadı.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Anahtarlıkta yayın kurulu anahtarı olmayan bir şey var. Üzerine yazılmadı. Onu silin ve anahtarı kurtarma anahtarınızdan geri yükleyin.',
+  'Redactiesleutel verwijderen…': 'Yayın kurulu anahtarını sil…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Yayın kurulu anahtarı, mühürlü gönderimleri açar ve formlarınızın paketlerini imzalar. Bu işletim sisteminin anahtarlığında durur. Yayın kurulunun tüm anahtarlarını kaybederseniz, henüz alınmamış tüm gönderimler okunamaz hale gelir: hiçbir şeyi okuyamayan bir sunucunun bedeli budur.',
+  'Redactiesleutel aanmaken': 'Yayın kurulu anahtarı oluştur',
+  'Herstellen uit herstelsleutel…': 'Kurtarma anahtarından geri yükle…',
+  'Vingerafdruk': 'Parmak izi',
+  'Ontvanger (age)': 'Alıcı (age)',
+  'Aangemaakt op {datum}.': '{datum} tarihinde oluşturuldu.',
+  'De herstelsleutel is gecontroleerd.': 'Kurtarma anahtarı kontrol edildi.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Kurtarma anahtarı henüz kontrol edilmedi: yazın ve yeniden girin.',
+  'Herstelsleutel tonen…': 'Kurtarma anahtarını göster…',
+  'Vingerafdruk kopiëren': 'Parmak izini kopyala',
+  'Exporteren als age-sleutelbestand…':
+      'age anahtar dosyası olarak dışa aktar…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Bu kurtarma anahtarını yazın ve bu cihazın dışında, güvenli bir yerde saklayın. Ona sahip olan tüm gönderimleri açabilir ve sizin adınıza paketleri imzalayabilir. Bu cihazı kaybederseniz, geriye kalan tek şey odur.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Kurtarma anahtarını buraya yeniden girin',
+  'Later': 'Daha sonra',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Kurtarma anahtarını yazın veya yapıştırın. Girdiğiniz, yayın kurulu anahtarı olarak anahtarlığa konur; hiçbir şeyin üzerine yazılmaz.',
+  'Herstelsleutel': 'Kurtarma anahtarı',
+  'Redactiesleutel verwijderen': 'Yayın kurulu anahtarını sil',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Anahtar anahtarlıktan silinir ve yalnızca kurtarma anahtarından geri gelebilir. Elinizde yoksa, yalnızca bu anahtar için mühürlenmiş gönderimler sonsuza dek okunamaz kalır.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Mühürlü gönderimleri açan ve paketleri imzalayan anahtar.',
+  'Redactiesleutel…': 'Yayın kurulu anahtarı…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Çalışma kopyası atıldı. Gelen yeniden değerlendirilir.',
+  'Er is geen werkkopie.': 'Çalışma kopyası yok.',
+  'De werkkopie kon niet worden weggegooid.': 'Çalışma kopyası atılamadı.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Çalışma kopyasını siler. Gelen olduğu gibi kalır ve yeniden değerlendirilir.',
+  'Werkkopie weggooien…': 'Çalışma kopyasını at…',
+  'Werkkopie weggooien': 'Çalışma kopyasını at',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'İyileştirmelerle birlikte çalışma kopyası silinir ve geri getirilemez. Gelen olduğu gibi kalır ve yeniden değerlendirilir. Çalışma kopyası hâlâ bir sekmede açıksa önce onu kapatın.',
+  'Weggooien': 'At',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Bu gönderi geri çekildi, bu yüzden hiçbir bölüme girmez.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Bu gönderi okunamıyor veya gönderildiği form çalışma klasöründe yok.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrol belgesi yazılamadı.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Kitaba katkınız: lütfen gözden geçirin',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'İşte katkınız, kitapta görüneceği şekliyle (eke bakın). Her şey doğru mu? ‘Onaylıyorum’ diye yanıtlayın ya da düzeltmelerinizi {datum} tarihinden önce iletin.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'E-posta posta programınızda hazır. PDF\'yi ekleyip gönderin.',
+  'Controle door de maker…': 'Katkıda bulunan kişi tarafından kontrol…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrol belgesi, bu tek gönderinin bölümüdür. Onu PDF olarak dışa aktarın (tam profili seçin), PDF\'yi e-postaya ekleyip gönderin. Katkıda bulunan kişi ‘onaylıyorum’ diye yanıtlarsa durumu kendiniz maker-approved yapın: bu yanıt aynı zamanda katkının gerçekten bu kişiden geldiğinin onayıdır.',
+  'Controledocument maken en openen': 'Kontrol belgesini oluştur ve aç',
+  'E-mailadres van de maker': 'Katkıda bulunan kişinin e-posta adresi',
+  'Antwoord vóór (jjjj-mm-dd)': 'Şu tarihten önce yanıtla (yyyy-aa-gg)',
+  'Mail schrijven': 'E-posta yaz',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Bu form maker-check-sent durumunu tanımıyor, bu yüzden burada ayarlanamaz.',
+  'Controle verstuurd': 'Kontrol gönderildi',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Bu gönderinin bölümünü oluşturur ve katkıda bulunan kişinin onu kontrol edeceği e-postayı hazırlar.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Bu gönderi kayıtta yok. overview.md dosyasını onarıp yeniden deneyin.',
+  'Kies het hoofdstuksjabloon': 'Bölüm şablonunu seç',
+  'Kies eerst een hoofdstuksjabloon.': 'Önce bir bölüm şablonu seçin.',
+  'Kies minstens één status.': 'En az bir durum seçin.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Kitap derlendi. Bölümler: {n}. Fotoğraflar: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Geri çekildi ve bu yüzden dışarıda bırakıldı: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Atlandı (başka sürüm veya okunamıyor): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Çalışma klasöründe eksik olan fotoğraflar: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Adda yalnızca harf, rakam, tire ve alt çizgi kullanın (en fazla 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Bu adda bir kitap zaten var. Başka bir ad seçin.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Şablon, formda bulunmayan alanlardan söz ediyor: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Kitaba konacak bir şey yok: seçilen durumda hiçbir gönderi yok. Geri çekilen: {w}; atlanan: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Kayıt okunamıyor. overview.md dosyasını onarın.',
+  'Het boek kon niet worden geschreven.': 'Kitap yazılamadı.',
+  'Boek samenstellen…': 'Kitabı derle…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Kitap, çalışma klasörünün book klasörüne gider ve sonradan kendiniz düzenleyebileceğiniz sıradan bir belge olarak kalır.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Çalışma klasöründe kullanılabilir bir form yok.',
+  'Formulier': 'Form',
+  'Hoofdstuksjabloon': 'Bölüm şablonu',
+  'Nog geen sjabloon gekozen.': 'Henüz şablon seçilmedi.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Şablonda {veld-id}, o alanın yanıtını temsil eder.',
+  'Hoofdstuksjabloon kiezen…': 'Bölüm şablonunu seç…',
+  'Welke inzendingen?': 'Hangi gönderiler?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Kitaba yalnızca bu durumlardan birine sahip gönderiler girer. Geri çekilen gönderiler her zaman dışarıda kalır.',
+  'Ordenen op': 'Şuna göre sırala',
+  'Groeperen op': 'Şuna göre grupla',
+  'Naam van het boek': 'Kitabın adı',
+  'Boek openen': 'Kitabı aç',
+  'Samenstellen': 'Derle',
+  'De werkkopie kon niet worden aangemaakt.': 'Çalışma kopyası oluşturulamadı.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'İyileştirmek için gönderinin bir kopyasını açar. Gelen olduğu gibi kalır.',
+  'Werkkopie openen': 'Çalışma kopyasını aç',
+  'Status gewijzigd naar {status}.': 'Durum {status} olarak değiştirildi.',
+  'Intrekking opgeslagen.': 'Geri çekme kaydedildi.',
+  'Intrekking ongedaan gemaakt.': 'Geri çekme geri alındı.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Gönderi silindi; kayıt duruyor.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Gönderi silindi, ancak kayıt güncellenemedi. overview.md dosyasını elle düzenleyin.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Gönderi çalışma klasöründe bulunamadı.',
+  'De inzending kon niet worden verwijderd.': 'Gönderi silinemedi.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Kayıt okunamıyor. overview.md dosyasını onarın; hiçbir şey değişmedi.',
+  'Het register kon niet worden bijgewerkt.': 'Kayıt güncellenemedi.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Bu değişiklik yapılamadı: gönderi kayıtta yok.',
+  'Status wijzigen': 'Durumu değiştir',
+  'Intrekking ongedaan maken': 'Geri çekmeyi geri al',
+  'Intrekken…': 'Geri çek…',
+  'Verwijderen…': 'Sil…',
+  'Inzending intrekken': 'Gönderiyi geri çek',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Gönderenin gönderiyi geri çektiği günü girin. Geri çekilen bir gönderi asla kitaba girmez.',
+  'Dag (jjjj-mm-dd)': 'Gün (yyyy-aa-gg)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Geçersiz gün. Yıl-ay-gün biçimini kullanın, örneğin {voorbeeld}.',
+  'Inzending verwijderen': 'Gönderiyi sil',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Bu gönderinin cevapları, çalışma kopyası ve fotoğrafları çalışma klasöründen silinir. Yalnızca asgari bir kayıt kalır: numara, alınma ve onay günleri ve durum. Bu geri alınamaz.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Formun önceden duyurduğu şey de kalır: {velden}.',
+  'Er klopt iets niet aan deze inzending.': 'Bu gönderide bir sorun var.',
+  'Verplicht, maar leeg gelaten.': 'Zorunlu, ama boş bırakılmış.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} sözcük; en az {min} gerekli.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} sözcük; en fazla {max} izinli.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakter; en az {min} gerekli.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakter; en fazla {max} izinli.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” seçenek listesinde yok.',
+  '“{value}” is geen getal.': '“{value}” bir sayı değil.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” yıl-ay-gün biçiminde bir tarih değil.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      '{actual} piksel genişliğinde fotoğraf; {min} istenmişti.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fotoğrafın dosyası gönderide eksik.',
+  'De beschrijving van de foto ontbreekt.': 'Fotoğrafın açıklaması eksik.',
+  'De maker van de foto ontbreekt.': 'Fotoğrafın yapımcısı eksik.',
+  'De foto is niet gecontroleerd.': 'Fotoğraf denetlenmedi.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC fotoğraf: denetlenmedi veya temizlenmedi; bir konum içerebilir.',
+  'Toestemming niet gegeven.': 'Onay verilmedi.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Cevap, formun bir denetim koduna benzeyen bir satır içeriyor.',
+  'Het antwoord bevat HTML.': 'Cevap HTML içeriyor.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Cevap kapatılmamış bir kod bloğu içeriyor.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Cevap, bu gönderiye ait olmayan bir görsele atıfta bulunuyor.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Cevap izin verilmeyen bir bağlantı içeriyor.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Bu form veya bu sürüm çalışma klasöründe yok.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Gönderen, formun yayımlanandan farklı bir metniyle çalıştı.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Manifestteki onay, yayımlanan formla uyuşmuyor.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Formun metni cevapların dışında değiştirilmiş.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Formun metni bu alanda değiştirilmiş.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Bu alan yayımlanan formda yok.',
+  'Dit veld ontbreekt in de inzending.': 'Bu alan gönderide eksik.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      '{submission} sürümünün gönderisi; yayımlanan sürüm {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Form, OciDeck’in daha yeni bir sürümünü gerektiriyor.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Çalışma klasöründeki yayımlanmış form kullanılamıyor.',
+  'De inzending hoort bij een ander formulier.': 'Gönderi başka bir forma ait.',
+  'De opbouw van de inzending is beschadigd.': 'Gönderinin yapısı hasarlı.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Kayıt okunamıyor. overview.md dosyasını onarın; gönderiler aşağıda kayıttaki bilgiler olmadan gösteriliyor.',
+  'Nog geen inzendingen.': 'Henüz gönderi yok.',
+  'Om na te lopen': 'İncelenecek',
+  'Verwijderd': 'Silindi',
+  'Zonder regel in het register': 'Kayıtta satırı yok',
+  'Ontvangen {datum}': 'Alındı {datum}',
+  'Ingetrokken {datum}': 'Geri çekildi {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Bu gönderinin içeriği silindi; yalnızca kayıt kaldı.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Bu gönderi okunamıyor. Çalışma klasöründeki dosyaları kontrol edin.',
+  'Beoordeeld tegen {formulier}.': '{formulier} karşısında değerlendirildi.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Değerlendirme çalışma kopyası (submission.edit.md) ile ilgili.',
+  'Geen punten om na te lopen.': 'İncelenecek nokta yok.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Hiçbir cevabın anmadığı fotoğraflar: {n}.',
+  'Inzendingen': 'Gönderiler',
+  'Werkmap': 'Çalışma klasörü',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Henüz bir çalışma klasörü seçilmedi. Gönderilerin ve kaydın tutulacağı bir klasör seçin.',
+  'Werkmap kiezen…': 'Çalışma klasörü seç…',
+  'Kies de werkmap voor inzendingen': 'Gönderiler için çalışma klasörünü seçin',
+  'Formulieren': 'Formlar',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Henüz form eklenmedi. Formu yayımladığınız haliyle ekleyin: bir gönderi ona karşı denetlenir.',
+  'Formulier toevoegen…': 'Form ekle…',
+  'Kies het formulier om toe te voegen': 'Eklenecek formu seçin',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Bu dosya yayımlanabilecek bir form değil.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Bu form zaten başka bir metinle var. Başka bir metin yeni bir sürümdür: forma daha yüksek bir sürüm numarası verin.',
+  'Formulier toegevoegd: {naam}.': 'Form eklendi: {naam}.',
+  'Dit formulier stond er al.': 'Bu form zaten vardı.',
+  'Het formulier kon niet worden opgeslagen.': 'Form kaydedilemedi.',
+  'Inzendingen in de werkmap: {n}': 'Çalışma klasöründeki gönderiler: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Düz bir zip yolda şifrelenmez.',
+  'Pakketten binnenhalen…': 'Paketleri içe aktar…',
+  'Kies de pakketten om binnen te halen': 'İçe aktarılacak paketleri seçin',
+  'Register openen': 'Kaydı aç',
+  '{naam}: binnengehaald.': '{naam}: içe aktarıldı.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: içe aktarıldı, ancak gözden geçirilecek noktalar var.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: içe aktarıldı, ancak kayıt güncellenemedi. overview.md dosyasını kontrol edin.',
+  '{naam}: stond er al.': '{naam}: zaten vardı.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: OciDeck’in okuyabileceği bir gönderi paketi değil.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: bu form eklenmemiş ya da bu sürümde değil. Önce formu ekleyin.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: çalışma klasörüne kaydedilemedi.',
+  'Formulieren en inzendingen': 'Formlar ve gönderiler',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Bir formun gönderilerini içe aktarın, yayımlanan forma karşı denetleyin ve bir kayıtla saklayın. Bu kapalıyken de form doldurulabilir. Varsayılan olarak kapalı.',
+  'Inzending opslaan als zip…': 'Gönderiyi zip olarak kaydet…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Cevaplarınızı ve fotoğraflarınızı içeren, organizatöre e-postayla göndereceğiniz bir zip dosyası.',
+  'Inzending opgeslagen als {naam}.': 'Gönderi {naam} olarak kaydedildi.',
+  'Kies het formulier zoals je het kreeg': 'Formu size ulaştığı haliyle seçin',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Bu, cevaplarınızın ait olduğu form değil. Organizatörden aldığınız dosyayı seçin.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Bir fotoğraf okunamadı: {pad}. Yeniden ekleyin.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Gönderi tek bir pakete sığmıyor: çok fazla fotoğraf ya da çok büyük bir fotoğraf var.',
+  'De inzending kon niet worden opgeslagen.': 'Gönderi kaydedilemedi.',
+  'Inzending opslaan': 'Gönderiyi kaydet',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Konum verileri bu fotoğraftan kaldırıldı.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Bu fotoğraf eklenemedi. Fotoğraf içeren bir JPEG, PNG, WebP veya HEIC dosyası seçin.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Fotoğraf eklemek için önce belgeyi kaydedin.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck bu dosyayı yeni bir belge olarak içe aktarabilir.',
+  'Kies een datum': 'Tarih seç',
+  'Anders, namelijk:': 'Diğer, yani:',
+  'Punt {n}': 'Madde {n}',
+  'Punt {n} verwijderen': '{n}. maddeyi kaldır',
+  'Rij {n} verwijderen': '{n}. satırı kaldır',
+  'Foto {n} verwijderen': '{n}. fotoğrafı kaldır',
+  'Wat is er te zien op de foto?': 'Fotoğrafta ne görünüyor?',
+  'Van wie is de foto?': 'Fotoğraf kime ait?',
+  'Foto toevoegen': 'Fotoğraf ekle',
+  'Verplicht': 'Zorunlu',
+  'Alles is ingevuld.': 'Her şey dolduruldu.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Göndermeden önce {n} şey daha yapılmalı:',
+  'klaar': 'tamam',
+  '{n} open': '{n} açık',
+  'Dit formulier kan niet worden ingevuld.': 'Bu form doldurulamaz.',
+  'Naar de bron': 'Kaynağa git',
+  'Woorden': 'Sözcükler',
+  'Tekens': 'Karakterler',
+  'Keuzes': 'Seçimler',
+  'Rijen': 'Satırlar',
+  'Foto’s': 'Fotoğraflar',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (en az {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (en fazla {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (en az {min}, en fazla {max})',
+  'Invullen': 'Doldur',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Bu formda bir sorun var. Formu hazırlayan kişiyle iletişime geçin.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Bu alan zorunludur. Gönderebilmek için doldurun.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      '{actual} sözcük yazdınız; en az {min} gerekiyor.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} sözcük yazdınız; en fazla {max} sözcüğe izin verilir.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      '{actual} karakter yazdınız; en az {min} gerekiyor.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} karakter yazdınız; en fazla {max} karaktere izin verilir.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '“{value}” listede yok. Seçeneklerden birini seçin.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '“{value}” bir sayı değil. Yalnızca rakam kullanın, gerekirse ondalık için virgül veya nokta ile.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Bu fotoğrafın genişliği {actual} piksel; burada {min} isteniyor. Büyük olasılıkla bir mesajlaşma uygulamasıyla gönderilirken küçüldü. Orijinali hâlâ elinizdeyse onu kullanın. Değilse yine de gönderin: organizasyon sizinle iletişime geçecektir.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Bu fotoğraf {actual} MB; en fazla {max} MB olabilir.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Bu dosyanın içeriği dosya türüyle uyuşmuyor.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Bu dosya türüne burada izin verilmiyor.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Bu fotoğrafın dosyası artık bulunamıyor. Fotoğrafı yeniden ekleyin.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Fotoğrafta ne göründüğünü kısa bir cümleyle anlatın.',
+  'Geef aan van wie de foto is.': 'Fotoğrafın kime ait olduğunu belirtin.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Bu fotoğraf henüz denetlenmedi. Biraz bekleyin ya da yeniden ekleyin.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Bu fotoğraf bir HEIC dosyası. OciDeck burada onu denetleyemez veya temizleyemez, bu yüzden olduğu gibi gönderilir. Fotoğrafın nerede çekildiği bilgisi içinde olabilir. Bunu paylaşmak istemiyorsanız kamera ayarlarında “En uyumlu” seçeneğini seçin ya da fotoğrafı JPEG olarak paylaşıp yeniden ekleyin.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Bu fotoğrafta {actual} yüz görünüyor; {expected} bekleniyordu. Bu yalnızca bir hatırlatmadır.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Onay vermek için kutuyu işaretleyin; onay olmadan gönderemezsiniz.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Bu form OciDeck’in daha yeni bir sürümünü gerektiriyor. Doldurmak için uygulamayı güncelleyin.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Formun kendisinde yanlışlıkla bir şey değiştirilmiş. Formu geri yükleyin; yanıtlarınız korunur.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Bu satır formun bir denetim koduna benziyor ve bir yanıtta bulunamaz. Değiştirin.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'Bir yanıtta HTML’ye izin verilmez. Düz metin ve basit biçimlendirme kullanın.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Bir kod bloğu kapatılmamış. ``` ile kapatın.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Bir yanıtta yalnızca bu forma eklediğiniz fotoğraflar yer alabilir; internetten bir görsel olmaz.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Bir yanıtta yalnızca https:// ile başlayan bağlantılara ve e-posta adreslerine izin verilir.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Bu dosya formun başka bir sürümüyle oluşturulmuş (sürüm {submission}; şu an geçerli olan sürüm {published}). Yanıtlarınızı kontrol edin.',
+  'Punt {item}: {bericht}': 'Madde {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Şu an {actual} var; {min} ile {max} arasında olmalı.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Şu an {actual} var; en fazla {max} olabilir.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Şu an {actual} var; en az {min} olmalı.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Sayı {step} sayısının katı olmalı.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Sayı {min} ile {max} arasında olmalı.',
+  'Het getal mag hoogstens {max} zijn.': 'Sayı en fazla {max} olabilir.',
+  'Het getal moet minstens {min} zijn.': 'Sayı en az {min} olmalı.',
+  'De datum moet op of na {min} liggen.':
+      'Tarih {min} veya daha sonrası olmalı.',
+  'De datum moet op of vóór {max} liggen.':
+      'Tarih {max} veya daha öncesi olmalı.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '“{value}” bir tarih değil. Tarihi yıl-ay-gün biçiminde yazın, örneğin 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Bu geçerli bir e-posta adresi değil.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Bu geçerli bir web adresi değil. https:// ile başlayın.',
+  'Dit is geen geldig telefoonnummer.':
+      'Bu geçerli bir telefon numarası değil.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Bu geçerli bir Hollanda posta kodu değil, örneğin 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Buraya yalnızca tek satır sığar. Satır sonlarını kaldırın.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Yalnızca bu sorunun onay kutularını kullanın: seçenek başına bir kutu.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Her maddeyi kendi satırına, başına bir çizgi ya da numara koyarak yazın.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tablo artık doğru değil: başlık satırını olduğu gibi bırakın ve her satıra aynı sayıda sütun verin.',
+  'Dezelfde foto staat hier twee keer.':
+      'Aynı fotoğraf burada iki kez yer alıyor.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Bu alana yalnızca fotoğraflar girer, serbest metin girmez.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Onay kutunuz hasar görmüş. Formu geri yükleyin.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Bu yanıt, bu soruya uygun biçimde değil.',
   'Downloaden…': 'İndir…',
   'Afbeelding opgeslagen als': 'Görsel şu adla kaydedildi:',
   '{naam}: ingesteld': '{naam}: ayarlandı',

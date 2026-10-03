@@ -16,6 +16,7 @@ import '../utils/markdown_blocks.dart';
 import 'document_chart_hydration.dart';
 import 'classification_enforcement_policy.dart';
 import 'document_deck_bridge.dart';
+import 'form_document_blocks.dart';
 import 'download_delivery.dart';
 import 'document_footnote_setup.dart';
 import 'document_page_setup.dart';
@@ -164,6 +165,16 @@ Future<ExportBundle> buildDocumentExportBundle(
 String projectedDocumentBody(ExportBundle bundle) =>
     DocumentDeckBridge.deckToDocumentMarkdown(bundle.audience.deck);
 
+/// [projectedDocumentBody] voor wie het document *rendert* (HTML, LaTeX, PDF,
+/// DOCX, ODT, EPUB): zonder de markers van een formulier. Die zijn bron, geen
+/// tekst — een `<!-- field … -->` hoort niet in een PDF of een Word-bestand te
+/// staan, terwijl label en antwoord er wél in horen (FORM_INTAKE.md §4.9, rij 10).
+///
+/// De `.md`-export gebruikt dit **niet**: daar zijn de markers bronbezit en
+/// reizen ze mee, onzichtbaar voor elke andere Markdown-lezer.
+String projectedDocumentBodyForRendering(ExportBundle bundle) =>
+    stripFormMarkers(projectedDocumentBody(bundle));
+
 /// True wanneer [markdown] verwijzingen bevat naar bestanden die naast het
 /// document horen — een relatief of absoluut mediapad, een `mem:`-asset, of
 /// grafiekdata achter een `source:`-sleutel in een ` ```chart `-blok. In een
@@ -257,7 +268,7 @@ Future<Uint8List> buildDocumentExportBytes(
     case DocumentExportFormat.html:
       // Feature 4: regenereer de TOC op de geprojecteerde body vóór renderen.
       // De marker blijft staan; marked rendert de GFM-lijst als klikbare nav.
-      final htmlBody = projectedDocumentBody(bundle);
+      final htmlBody = projectedDocumentBodyForRendering(bundle);
       final toc = generateTocMarkdown(htmlBody);
       final htmlBodyWithToc = hasTocMarker(htmlBody)
           ? replaceTocMarker(htmlBody, toc)
@@ -282,7 +293,7 @@ Future<Uint8List> buildDocumentExportBytes(
       final meta = exportMetadata;
       final body = markdownToLatex(
         _rebaseImagePaths(
-          projectedDocumentBody(bundle),
+          projectedDocumentBodyForRendering(bundle),
           sourcePath,
           outputPath ?? '',
         ),

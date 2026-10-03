@@ -1639,6 +1639,600 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Team…': 'Zespół…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redaktorzy poza Tobą, którzy są w każdym bundle, żeby oni też mogli otwierać zgłoszenia. Dodajesz kogoś jego kartą redaktora i ponownie wpisujesz odcisk palca tej karty.',
+  'Er is nog niemand naast jou.': 'Poza Tobą nie ma jeszcze nikogo.',
+  'Plak de kaart van de redacteur': 'Wklej kartę redaktora',
+  'Kaart controleren': 'Sprawdź kartę',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Karta: {naam}. Wpisz odcisk palca tej karty, który {naam} przekazał Ci inną drogą, na przykład przez telefon.',
+  'Redacteur verwijderen': 'Usuń redaktora',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Usunąć {naam} z zespołu? Bundle, które już opublikowałeś, zostają, jakie są, dopóki nie opublikujesz ponownie; to, co już zapieczętowano dla {naam}, pozostaje dla tej osoby czytelne.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      'Dodano: {naam}. Opublikuj bundle ponownie, żeby uwzględnić tę osobę.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      'Usunięto: {naam}. Opublikuj bundle ponownie, żeby wyłączyć tę osobę.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Najpierw utwórz własny klucz redakcji w Klucz redakcji….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Twojego klucza redakcji nie można użyć. Zajrzyj do Klucz redakcji….',
+  'Dit is geen redacteurskaart.': 'To nie jest karta redaktora.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ta karta pochodzi z nowszej wersji OciDeck. Zaktualizuj OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Karta zawiera coś niedozwolonego. Poproś redaktora o nową kartę.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ten odcisk palca nie pasuje do karty: karta została zmieniona albo nie pochodzi od osoby, o której myślisz. Poproś redaktora ponownie o odcisk palca i kartę.',
+  'Dit is je eigen kaart.': 'To Twoja własna karta.',
+  'Deze redacteur staat er al.': 'Ten redaktor jest już w zespole.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Zespół jest pełny: bundle niesie najwyżej 64 organizatorów, wliczając Ciebie.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Pliku team.json w folderze roboczym nie da się odczytać. Nic nie zmieniono; napraw go albo usuń.',
+  'Het team kon niet worden opgeslagen.': 'Nie udało się zapisać zespołu.',
+  'Deze redacteur staat niet meer in het team.':
+      'Tego redaktora nie ma już w zespole.',
+  'Naast jou in de bundel: {namen}.': 'Poza Tobą w bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Najpierw sprawdź klucz odzyskiwania w Klucz redakcji… albo dodaj drugiego redaktora w Zespół…. Bez drogi powrotnej wszystkie zgłoszenia będą nieczytelne, jeśli to urządzenie się zepsuje.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Pliku team.json w folderze roboczym nie da się odczytać. Niczego nie podpisano.',
+  'Redacteurskaart maken…': 'Utwórz kartę redaktora…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Dzięki karcie redaktora właściciel formularza dodaje Cię do bundle, żebyś Ty też mógł otwierać zgłoszenia. Kartę można wysłać e-mailem.',
+  'Jouw naam op de kaart': 'Twoje imię i nazwisko na karcie',
+  'Kaart maken': 'Utwórz kartę',
+  'Kaart kopiëren': 'Kopiuj kartę',
+  'Vingerafdruk van de kaart': 'Odcisk palca karty',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Przekaż właścicielowi ten odcisk palca inną drogą niż kartę, na przykład przez telefon. Wpisze go ponownie, zanim Cię doda.',
+  'Verzegeld opslaan…': 'Zapisz zapieczętowane…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Zaszyfrowany plik (.zip.age), który może otworzyć tylko organizator. Potrzebujesz do tego pliku bundle i odcisku palca z zaproszenia.',
+  'Kies het bundelbestand van de organisator':
+      'Wybierz plik bundle organizatora',
+  'Vingerafdruk van de organisator': 'Odcisk palca organizatora',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Wpisz odcisk palca z zaproszenia. Nie ma go celowo w pliku bundle: dzięki temu możesz sprawdzić, od kogo pochodzi.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'To nie jest odcisk palca. Ma 52 znaki, zwykle w grupach po cztery.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Ten plik nie jest bundle, który OciDeck potrafi odczytać.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ten formularz lub ten bundle pochodzi z nowszej wersji OciDeck. Zaktualizuj OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Odcisk palca nie pasuje do tego bundle: formularz nie pochodzi od tego, kogo wskazuje zaproszenie. Sprawdź odcisk palca i plik bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Podpis bundle jest nieprawidłowy: został zmieniony albo nie pochodzi od tego, kogo wskazuje odcisk palca. Poproś organizatora o nowy bundle.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Ten bundle nie należy do tego formularza. Użyj pliku bundle, który należy dokładnie do tego formularza.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Ten bundle wygasł. Poproś organizatora o nowy.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Ten bundle jest starszy niż bundle, który wcześniej dostałeś od tego organizatora. Poproś organizatora o najnowszy.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle zawiera coś niedozwolonego. Poproś organizatora o nowy bundle.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Ten formularz jest zamknięty: ostatni dzień to {datum}. Skontaktuj się z organizatorem.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Zgłoszenie jest większe, niż pozwala organizator ({mb} MB). Usuń zdjęcie albo zmniejsz jedno z nich.',
+  'De inzending kon niet worden verzegeld.':
+      'Nie udało się zapieczętować zgłoszenia.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Zapisano zapieczętowane jako {naam}, otworzy je tylko: {organisatoren}.',
+  'Bundel publiceren…': 'Opublikuj bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle to to, czemu wierzy osoba wypełniająca w sprawie waszej redakcji: do którego klucza zapieczętować i do jakiego tekstu należy. Zapisuje się obok formularza.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'W folderze roboczym nie ma formularza, dla którego można by utworzyć bundle.',
+  'Naam voor de invuller': 'Nazwa dla osoby wypełniającej',
+  'Geldig tot (jjjj-mm-dd)': 'Ważny do (rrrr-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Ostatni dzień, w którym osoba wypełniająca wierzy temu bundle. Nie przed dniem zamknięcia formularza.',
+  'Bundel maken': 'Utwórz bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle utworzony (numer kolejny {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Przekaż odcisk palca osobie wypełniającej inną drogą niż plik bundle, na przykład w zaproszeniu. Kto ma tylko plik bundle, nie może sprawdzić, od kogo pochodzi.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ta platforma nie ma pęku kluczy na klucz redakcji; bundle nie można tu podpisać.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Nie ma jeszcze klucza redakcji. Utwórz go w Klucz redakcji…, zanim opublikujesz bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Pęku kluczy nie da się odczytać. Niczego nie podpisano.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Zapisanego klucza redakcji nie da się odczytać. Usuń go w Klucz redakcji… i przywróć z klucza odzyskiwania.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Bundle tego formularza w folderze roboczym nie da się odczytać albo nie pasuje do pozostałych. Wtedy nie można ustalić numeru kolejnego i niczego nie podpisano. Sprawdź: {pad}',
+  'Vul een naam in van hooguit 80 tekens.': 'Wpisz nazwę do 80 znaków.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Ważny do musi być istniejącą datą w formacie rrrr-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Ważny do nie może być przed dniem zamknięcia formularza.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Nie udało się utworzyć bundle ({veld}). Sprawdź, czy formularz podaje prawidłowy dzień zamknięcia i okres przechowywania.',
+  'formulier': 'formularz',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Nie udało się zapisać bundle w folderze roboczym.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Utwórz i podpisz bundle, któremu wierzy osoba wypełniająca w sprawie waszej redakcji.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: zapieczętowana paczka otwarta i zaimportowana.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: ta paczka jest zapieczętowana, a ta platforma nie ma pęku kluczy na klucz redakcji.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: ta paczka jest zapieczętowana i nie ma jeszcze klucza redakcji, żeby ją otworzyć. Utwórz go w Klucz redakcji… albo przywróć z klucza odzyskiwania.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: ta paczka jest zapieczętowana, a pęku kluczy nie da się odczytać. Niczego nie próbowano.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: ta paczka jest zapieczętowana, a zapisanego klucza redakcji nie da się odczytać. Usuń go w Klucz redakcji… i przywróć z klucza odzyskiwania.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: ta paczka nie została zapieczętowana dla Twojego klucza redakcji.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: ta paczka została zmieniona lub urwana i nie zostanie otwarta.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: ta paczka jest większa, niż może być zgłoszenie.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: zapisany klucz redakcji nie jest kluczem, którego OciDeck może użyć.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: to nie jest zapieczętowana paczka, którą OciDeck potrafi odczytać.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Zapieczętowany plik (.zip.age) otwiera się Twoim kluczem redakcji.',
+  'Herstelsleutel controleren': 'Sprawdź klucz odzyskiwania',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Klucz redakcji utworzony. Zapisz teraz klucz odzyskiwania.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Pęk kluczy nie przyjął klucza. Nic nie zostało utworzone.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Klucz redakcji już istnieje. Nie został naruszony.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Nie udało się odczytać pęku kluczy. Niczego nie założono i nic nie utworzono.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'W pęku kluczy jest coś, co nie jest kluczem redakcji. Nie zostało nadpisane.',
+  'Dit platform heeft geen sleutelhanger.': 'Ta platforma nie ma pęku kluczy.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Zgadza się: klucz odzyskiwania został sprawdzony.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'To poprawny klucz odzyskiwania, ale nie tego klucza redakcji.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Klucz odzyskiwania jest poprawny, ale nie udało się tego zapisać.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nie ma klucza redakcji, z którym można porównać.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'To nie jest klucz odzyskiwania klucza redakcji.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Jest w nim literówka: suma kontrolna się nie zgadza.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ten klucz odzyskiwania pochodzi z nowszej wersji OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Ten klucz odzyskiwania został wykonany do czegoś innego.',
+  'Hersteld uit de herstelsleutel.': 'Przywrócono z klucza odzyskiwania.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Pęk kluczy nie przyjął klucza. Nic nie zostało przywrócone.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Zapisz klucz redakcji jako plik klucza age',
+  'Het bestand kon niet worden opgeslagen.': 'Nie udało się zapisać pliku.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Zapisano jako {pad}. Kto ma ten plik, może otworzyć wszystko.',
+  'Redactiesleutel verwijderd.': 'Klucz redakcji usunięty.',
+  'Redactiesleutel': 'Klucz redakcji',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ta platforma nie ma pęku kluczy. Klucza redakcji nie można tu przechowywać; użyj aplikacji na komputer.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Nie udało się odczytać pęku kluczy (zablokowany lub odmowa dostępu). Niczego nie założono i nic nie utworzono.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'W pęku kluczy jest coś, co nie jest kluczem redakcji. Nie zostało nadpisane. Usuń to i przywróć klucz z klucza odzyskiwania.',
+  'Redactiesleutel verwijderen…': 'Usuń klucz redakcji…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Klucz redakcji otwiera zapieczętowane zgłoszenia i podpisuje paczki Twoich formularzy. Znajduje się w pęku kluczy tego systemu. Jeśli utracisz wszystkie klucze redakcji, wszystkie jeszcze nie pobrane zgłoszenia staną się nieczytelne: taka jest cena serwera, który niczego nie może odczytać.',
+  'Redactiesleutel aanmaken': 'Utwórz klucz redakcji',
+  'Herstellen uit herstelsleutel…': 'Przywróć z klucza odzyskiwania…',
+  'Vingerafdruk': 'Odcisk palca',
+  'Ontvanger (age)': 'Odbiorca (age)',
+  'Aangemaakt op {datum}.': 'Utworzono {datum}.',
+  'De herstelsleutel is gecontroleerd.':
+      'Klucz odzyskiwania został sprawdzony.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Klucz odzyskiwania nie został jeszcze sprawdzony: zapisz go i wpisz ponownie.',
+  'Herstelsleutel tonen…': 'Pokaż klucz odzyskiwania…',
+  'Vingerafdruk kopiëren': 'Kopiuj odcisk palca',
+  'Exporteren als age-sleutelbestand…': 'Eksportuj jako plik klucza age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Zapisz ten klucz odzyskiwania i przechowuj go w bezpiecznym miejscu, poza tym urządzeniem. Kto go ma, może otworzyć wszystkie zgłoszenia i podpisywać paczki w Waszym imieniu. Jeśli stracisz to urządzenie, to wszystko, co zostanie.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Wpisz tutaj klucz odzyskiwania jeszcze raz',
+  'Later': 'Później',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Wpisz lub wklej klucz odzyskiwania. To, co wpiszesz, trafi do pęku kluczy jako klucz redakcji; nic nie jest nadpisywane.',
+  'Herstelsleutel': 'Klucz odzyskiwania',
+  'Redactiesleutel verwijderen': 'Usuń klucz redakcji',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Klucz zostanie wymazany z pęku kluczy i może wrócić tylko z klucza odzyskiwania. Jeśli go nie masz, zgłoszenia zapieczętowane tylko dla tego klucza pozostaną nieczytelne na zawsze.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Klucz, który otwiera zapieczętowane zgłoszenia i podpisuje paczki.',
+  'Redactiesleutel…': 'Klucz redakcji…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Kopia robocza została wyrzucona. To, co nadeszło, jest oceniane ponownie.',
+  'Er is geen werkkopie.': 'Nie ma kopii roboczej.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Nie udało się wyrzucić kopii roboczej.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Usuwa kopię roboczą. To, co nadeszło, zostaje i jest oceniane ponownie.',
+  'Werkkopie weggooien…': 'Wyrzuć kopię roboczą…',
+  'Werkkopie weggooien': 'Wyrzuć kopię roboczą',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Kopia robocza z poprawkami zostanie usunięta i nie da się jej przywrócić. To, co nadeszło, zostaje i jest oceniane ponownie. Jeśli kopia robocza jest jeszcze otwarta w karcie, najpierw ją zamknij.',
+  'Weggooien': 'Wyrzuć',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'To zgłoszenie zostało wycofane, więc nie trafia do żadnego rozdziału.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Tego zgłoszenia nie można odczytać albo formularza, którego dotyczy, nie ma w folderze roboczym.',
+  'Het controledocument kon niet worden geschreven.':
+      'Nie udało się zapisać dokumentu do sprawdzenia.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Twój wkład do książki: prosimy o sprawdzenie',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Oto Twój wkład w takiej postaci, w jakiej pojawi się w książce (zobacz załącznik). Czy wszystko się zgadza? Odpowiedz ‘zgoda’ albo prześlij poprawki przed {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Wiadomość czeka w Twoim programie pocztowym. Dołącz plik PDF i wyślij ją.',
+  'Controle door de maker…': 'Sprawdzenie przez autora wkładu…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Dokument do sprawdzenia to rozdział tego jednego zgłoszenia. Wyeksportuj go jako PDF (wybierz pełny profil), dołącz PDF do wiadomości i wyślij ją. Jeśli autor odpowie ‘zgoda’, sam ustaw status maker-approved: ta odpowiedź jest też potwierdzeniem, że wkład naprawdę pochodzi od tej osoby.',
+  'Controledocument maken en openen':
+      'Utwórz dokument do sprawdzenia i otwórz go',
+  'E-mailadres van de maker': 'Adres e-mail autora wkładu',
+  'Antwoord vóór (jjjj-mm-dd)': 'Odpowiedź przed (rrrr-mm-dd)',
+  'Mail schrijven': 'Napisz wiadomość',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ten formularz nie zna statusu maker-check-sent, więc nie można go tu ustawić.',
+  'Controle verstuurd': 'Sprawdzenie wysłane',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Tworzy rozdział z tego zgłoszenia i przygotowuje wiadomość, w której autor wkładu go sprawdza.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Tego zgłoszenia nie ma w rejestrze. Napraw overview.md i spróbuj ponownie.',
+  'Kies het hoofdstuksjabloon': 'Wybierz szablon rozdziału',
+  'Kies eerst een hoofdstuksjabloon.': 'Najpierw wybierz szablon rozdziału.',
+  'Kies minstens één status.': 'Wybierz co najmniej jeden status.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Książka złożona. Rozdziały: {n}. Zdjęcia: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Wycofane, więc pominięte: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Pominięte (inna wersja lub nieczytelne): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Zdjęcia brakujące w folderze roboczym: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'W nazwie używaj tylko liter, cyfr, myślników i podkreślników (najwyżej 64 znaki).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Książka o tej nazwie już istnieje. Wybierz inną nazwę.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Szablon wymienia pola, których formularz nie ma: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nie ma nic do umieszczenia w książce: żadnego zgłoszenia z wybranym statusem. Wycofane: {w}; pominięte: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Nie można odczytać rejestru. Napraw overview.md.',
+  'Het boek kon niet worden geschreven.': 'Nie udało się zapisać książki.',
+  'Boek samenstellen…': 'Złóż książkę…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Książka trafia do folderu book w folderze roboczym i pozostaje zwykłym dokumentem, który możesz potem edytować.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'W folderze roboczym nie ma żadnego użytecznego formularza.',
+  'Formulier': 'Formularz',
+  'Hoofdstuksjabloon': 'Szablon rozdziału',
+  'Nog geen sjabloon gekozen.': 'Nie wybrano jeszcze szablonu.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'W szablonie {veld-id} oznacza odpowiedź na to pole.',
+  'Hoofdstuksjabloon kiezen…': 'Wybierz szablon rozdziału…',
+  'Welke inzendingen?': 'Które zgłoszenia?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Do książki trafiają tylko zgłoszenia z jednym z tych statusów. Wycofane zgłoszenia zawsze zostają poza nią.',
+  'Ordenen op': 'Sortuj według',
+  'Groeperen op': 'Grupuj według',
+  'Naam van het boek': 'Nazwa książki',
+  'Boek openen': 'Otwórz książkę',
+  'Samenstellen': 'Złóż',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Nie udało się utworzyć kopii roboczej.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Otwiera kopię zgłoszenia do poprawienia. To, co przyszło, pozostaje bez zmian.',
+  'Werkkopie openen': 'Otwórz kopię roboczą',
+  'Status gewijzigd naar {status}.': 'Status zmieniono na {status}.',
+  'Intrekking opgeslagen.': 'Wycofanie zapisano.',
+  'Intrekking ongedaan gemaakt.': 'Wycofanie cofnięto.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Zgłoszenie usunięto; zapis pozostaje.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Zgłoszenie usunięto, ale nie udało się zaktualizować rejestru. Zmień overview.md ręcznie.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Nie znaleziono zgłoszenia w folderze roboczym.',
+  'De inzending kon niet worden verwijderd.':
+      'Nie udało się usunąć zgłoszenia.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Nie można odczytać rejestru. Napraw overview.md; nic nie zmieniono.',
+  'Het register kon niet worden bijgewerkt.':
+      'Nie udało się zaktualizować rejestru.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Nie udało się wprowadzić tej zmiany: zgłoszenia nie ma w rejestrze.',
+  'Status wijzigen': 'Zmień status',
+  'Intrekking ongedaan maken': 'Cofnij wycofanie',
+  'Intrekken…': 'Wycofaj…',
+  'Verwijderen…': 'Usuń…',
+  'Inzending intrekken': 'Wycofaj zgłoszenie',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Wpisz dzień, w którym zgłaszający wycofał zgłoszenie. Wycofane zgłoszenie nigdy nie trafia do książki.',
+  'Dag (jjjj-mm-dd)': 'Dzień (rrrr-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Nieprawidłowy dzień. Użyj formatu rok-miesiąc-dzień, na przykład {voorbeeld}.',
+  'Inzending verwijderen': 'Usuń zgłoszenie',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Odpowiedzi, kopia robocza i zdjęcia tego zgłoszenia zostaną usunięte z folderu roboczego. Zostanie tylko minimalny zapis: numer, dni otrzymania i zgody oraz status. Tego nie można cofnąć.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Pozostaje też to, co formularz zapowiedział wcześniej: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Coś jest nie tak z tym zgłoszeniem.',
+  'Verplicht, maar leeg gelaten.': 'Wymagane, ale pozostawione puste.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} słów; potrzeba co najmniej {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} słów; dozwolone co najwyżej {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} znaków; potrzeba co najmniej {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} znaków; dozwolone co najwyżej {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}” nie ma na liście opcji.',
+  '“{value}” is geen getal.': '„{value}” nie jest liczbą.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}” nie jest datą w postaci rok-miesiąc-dzień.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Zdjęcie o szerokości {actual} pikseli; wymagano {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'W zgłoszeniu brakuje pliku zdjęcia.',
+  'De beschrijving van de foto ontbreekt.': 'Brakuje opisu zdjęcia.',
+  'De maker van de foto ontbreekt.': 'Brakuje autora zdjęcia.',
+  'De foto is niet gecontroleerd.': 'Zdjęcie nie zostało sprawdzone.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Zdjęcie HEIC: niesprawdzone i nieoczyszczone; może zawierać lokalizację.',
+  'Toestemming niet gegeven.': 'Zgoda nie została udzielona.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Odpowiedź zawiera wiersz, który wygląda jak kod sterujący formularza.',
+  'Het antwoord bevat HTML.': 'Odpowiedź zawiera HTML.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Odpowiedź zawiera niezamknięty blok kodu.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Odpowiedź odwołuje się do obrazu, który nie należy do tego zgłoszenia.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Odpowiedź zawiera niedozwolony link.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Tego formularza lub tej wersji nie ma w folderze roboczym.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Zgłaszający pracował z innym tekstem formularza niż opublikowany.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Zgoda w manifeście nie zgadza się z opublikowanym formularzem.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Tekst formularza został zmieniony poza odpowiedziami.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Tekst formularza został zmieniony przy tym polu.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Tego pola nie ma w opublikowanym formularzu.',
+  'Dit veld ontbreekt in de inzending.': 'W zgłoszeniu brakuje tego pola.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Zgłoszenie w wersji {submission}; opublikowana jest wersja {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formularz wymaga nowszej wersji OciDeck.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Opublikowany formularz w folderze roboczym nie nadaje się do użycia.',
+  'De inzending hoort bij een ander formulier.':
+      'Zgłoszenie należy do innego formularza.',
+  'De opbouw van de inzending is beschadigd.':
+      'Struktura zgłoszenia jest uszkodzona.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Nie można odczytać rejestru. Napraw overview.md; zgłoszenia są poniżej pokazane bez danych z rejestru.',
+  'Nog geen inzendingen.': 'Brak zgłoszeń.',
+  'Om na te lopen': 'Do sprawdzenia',
+  'Verwijderd': 'Usunięto',
+  'Zonder regel in het register': 'Bez wiersza w rejestrze',
+  'Ontvangen {datum}': 'Otrzymano {datum}',
+  'Ingetrokken {datum}': 'Wycofano {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Treść tego zgłoszenia została usunięta; pozostał tylko zapis.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Tego zgłoszenia nie można odczytać. Sprawdź pliki w folderze roboczym.',
+  'Beoordeeld tegen {formulier}.': 'Oceniono względem {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Ocena dotyczy kopii roboczej (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Brak punktów do sprawdzenia.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Zdjęcia, których nie wymienia żadna odpowiedź: {n}.',
+  'Inzendingen': 'Zgłoszenia',
+  'Werkmap': 'Folder roboczy',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Nie wybrano jeszcze folderu roboczego. Wybierz folder, w którym będą przechowywane zgłoszenia i rejestr.',
+  'Werkmap kiezen…': 'Wybierz folder roboczy…',
+  'Kies de werkmap voor inzendingen': 'Wybierz folder roboczy dla zgłoszeń',
+  'Formulieren': 'Formularze',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Nie dodano jeszcze formularza. Dodaj formularz tak, jak go opublikowałeś: zgłoszenie jest z nim porównywane.',
+  'Formulier toevoegen…': 'Dodaj formularz…',
+  'Kies het formulier om toe te voegen': 'Wybierz formularz do dodania',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ten plik nie jest formularzem, który można opublikować.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ten formularz już istnieje z innym tekstem. Inny tekst to nowa wersja: nadaj formularzowi wyższy numer wersji.',
+  'Formulier toegevoegd: {naam}.': 'Dodano formularz: {naam}.',
+  'Dit formulier stond er al.': 'Ten formularz już tu był.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Nie udało się zapisać formularza.',
+  'Inzendingen in de werkmap: {n}': 'Zgłoszenia w folderze roboczym: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zwykły zip nie jest szyfrowany w drodze.',
+  'Pakketten binnenhalen…': 'Importuj paczki…',
+  'Kies de pakketten om binnen te halen': 'Wybierz paczki do zaimportowania',
+  'Register openen': 'Otwórz rejestr',
+  '{naam}: binnengehaald.': '{naam}: zaimportowano.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: zaimportowano, ale są punkty do sprawdzenia.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: zaimportowano, ale nie udało się zaktualizować rejestru. Sprawdź overview.md.',
+  '{naam}: stond er al.': '{naam}: już tu było.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: to nie jest paczka zgłoszenia, którą OciDeck potrafi odczytać.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ten formularz nie został dodany lub nie w tej wersji. Najpierw dodaj formularz.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nie udało się zapisać w folderze roboczym.',
+  'Formulieren en inzendingen': 'Formularze i zgłoszenia',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importuj zgłoszenia z formularza, sprawdzaj je z opublikowanym formularzem i prowadź rejestr. Wypełnianie formularza działa także, gdy to jest wyłączone. Domyślnie wyłączone.',
+  'Inzending opslaan als zip…': 'Zapisz zgłoszenie jako zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Plik zip z Twoimi odpowiedziami i zdjęciami, do wysłania e-mailem organizatorowi.',
+  'Inzending opgeslagen als {naam}.': 'Zgłoszenie zapisano jako {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Wybierz formularz taki, jaki go otrzymałeś',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'To nie jest formularz, do którego należą Twoje odpowiedzi. Wybierz plik, który otrzymałeś od organizatora.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Nie udało się odczytać zdjęcia: {pad}. Dodaj je ponownie.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Zgłoszenie nie mieści się w jednej paczce: za dużo zdjęć lub zbyt duże zdjęcie.',
+  'De inzending kon niet worden opgeslagen.':
+      'Nie udało się zapisać zgłoszenia.',
+  'Inzending opslaan': 'Zapisz zgłoszenie',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Dane lokalizacji zostały usunięte z tego zdjęcia.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Nie udało się dodać tego zdjęcia. Wybierz plik JPEG, PNG, WebP lub HEIC ze zdjęciem.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Najpierw zapisz dokument, aby dodać zdjęcia.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck może zaimportować ten plik do nowego dokumentu.',
+  'Kies een datum': 'Wybierz datę',
+  'Anders, namelijk:': 'Inne, mianowicie:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Usuń punkt {n}',
+  'Rij {n} verwijderen': 'Usuń wiersz {n}',
+  'Foto {n} verwijderen': 'Usuń zdjęcie {n}',
+  'Wat is er te zien op de foto?': 'Co widać na zdjęciu?',
+  'Van wie is de foto?': 'Czyje jest to zdjęcie?',
+  'Foto toevoegen': 'Dodaj zdjęcie',
+  'Verplicht': 'Wymagane',
+  'Alles is ingevuld.': 'Wszystko jest wypełnione.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Zostało jeszcze {n} do zrobienia, zanim będzie można wysłać:',
+  'klaar': 'gotowe',
+  '{n} open': '{n} otwartych',
+  'Dit formulier kan niet worden ingevuld.':
+      'Tego formularza nie można wypełnić.',
+  'Naar de bron': 'Do źródła',
+  'Woorden': 'Słowa',
+  'Tekens': 'Znaki',
+  'Keuzes': 'Wybory',
+  'Rijen': 'Wiersze',
+  'Foto’s': 'Zdjęcia',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minimum {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (maksimum {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minimum {min}, maksimum {max})',
+  'Invullen': 'Wypełnij',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Coś jest nie tak z tym formularzem. Skontaktuj się z osobą, która go przygotowała.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'To pole jest wymagane. Wypełnij je, aby móc wysłać.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Wpisano {actual} słów; potrzeba ich co najmniej {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Wpisano {actual} słów; dozwolone jest najwyżej {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Wpisano {actual} znaków; potrzeba ich co najmniej {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Wpisano {actual} znaków; dozwolone jest najwyżej {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” nie ma na liście. Wybierz jedną z opcji.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” nie jest liczbą. Używaj wyłącznie cyfr, ewentualnie z przecinkiem lub kropką dla części dziesiętnych.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'To zdjęcie ma {actual} pikseli szerokości; tutaj wymagane jest {min}. Prawdopodobnie zostało zmniejszone podczas wysyłania przez komunikator. Jeśli nadal masz oryginał, użyj go. Jeśli nie, mimo to je wyślij: organizator skontaktuje się z Tobą.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'To zdjęcie ma {actual} MB; maksimum to {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Zawartość tego pliku nie pasuje do jego typu.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ten typ pliku nie jest tu dozwolony.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Nie można już znaleźć pliku tego zdjęcia. Dodaj zdjęcie ponownie.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Opisz jednym krótkim zdaniem, co widać na zdjęciu.',
+  'Geef aan van wie de foto is.': 'Podaj, czyje jest to zdjęcie.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'To zdjęcie nie zostało jeszcze sprawdzone. Poczekaj chwilę lub dodaj je ponownie.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'To zdjęcie jest plikiem HEIC. OciDeck nie może go tu sprawdzić ani oczyścić, więc zostanie wysłane w takiej postaci, w jakiej jest. Może zawierać informację, gdzie zdjęcie zrobiono. Jeśli nie chcesz jej udostępniać, wybierz w ustawieniach aparatu „Najbardziej zgodne” albo udostępnij zdjęcie jako JPEG i dodaj je ponownie.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Na tym zdjęciu widać {actual} twarzy; oczekiwano {expected}. To tylko przypomnienie.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Zaznacz pole, aby wyrazić zgodę; bez zgody nie możesz wysłać.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ten formularz wymaga nowszej wersji OciDeck. Zaktualizuj aplikację, aby go wypełnić.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'W samym formularzu przypadkowo coś zmieniono. Przywróć formularz; Twoje odpowiedzi zostaną zachowane.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ten wiersz wygląda jak kod sterujący formularza i nie może znajdować się w odpowiedzi. Zmień go.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML nie jest dozwolony w odpowiedzi. Użyj zwykłego tekstu i prostego formatowania.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Blok kodu nie jest zamknięty. Zamknij go za pomocą ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'W odpowiedzi mogą być tylko zdjęcia dodane w tym formularzu; obrazu z internetu nie można użyć.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'W odpowiedzi dozwolone są tylko linki zaczynające się od https:// oraz adresy e-mail.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Ten plik utworzono w innej wersji formularza (wersja {submission}; obecnie obowiązuje wersja {published}). Sprawdź swoje odpowiedzi.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Obecnie jest ich {actual}; musi być od {min} do {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Obecnie jest ich {actual}; może być najwyżej {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Obecnie jest ich {actual}; musi być co najmniej {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Liczba musi być wielokrotnością {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Liczba musi mieścić się między {min} a {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Liczba może wynosić najwyżej {max}.',
+  'Het getal moet minstens {min} zijn.':
+      'Liczba musi wynosić co najmniej {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Data musi przypadać w dniu {min} lub później.',
+  'De datum moet op of vóór {max} liggen.':
+      'Data musi przypadać w dniu {max} lub wcześniej.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” nie jest datą. Zapisz datę jako rok-miesiąc-dzień, na przykład 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'To nie jest prawidłowy adres e-mail.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'To nie jest prawidłowy adres internetowy. Zacznij od https://.',
+  'Dit is geen geldig telefoonnummer.':
+      'To nie jest prawidłowy numer telefonu.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'To nie jest prawidłowy holenderski kod pocztowy, taki jak 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Zmieści się tu tylko jeden wiersz. Usuń podziały wierszy.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Używaj tylko pól wyboru tego pytania: jedno pole na opcję.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Zapisz każdy punkt w osobnym wierszu, z myślnikiem lub numerem na początku.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabela nie jest już poprawna: zostaw wiersz nagłówka bez zmian i daj każdemu wierszowi tyle samo kolumn.',
+  'Dezelfde foto staat hier twee keer.':
+      'To samo zdjęcie występuje tu dwa razy.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'W tym polu mogą być tylko zdjęcia, bez luźnego tekstu.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Pole Twojej zgody jest uszkodzone. Przywróć formularz.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ta odpowiedź nie ma formy właściwej dla tego pytania.',
   'Downloaden…': 'Pobierz…',
   'Afbeelding opgeslagen als': 'Obraz zapisano jako',
   '{naam}: ingesteld': '{naam}: skonfigurowany',

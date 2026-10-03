@@ -4300,3 +4300,66 @@ through the same allow-list sanitiser as every other drawing:
   platform implementation; macOS, Android, iOS and the web build (which draws
   through the bundled `mermaid.min.js` directly) all render. For the **PDF** the
   set is different again — see KNOWN_LIMITATIONS.md.
+
+### 14.14 Form — the `<!-- form -->`, `<!-- field -->` and `<!-- notice -->` markers *(added 2026-10-02)*
+
+A form is not a new file kind either. It is an ordinary document — plain `.md`,
+no front-matter key, no `kind:` marker — in which HTML comments carry the rules
+and the places where an answer goes:
+
+````markdown
+<!-- form id=kookboek version=1 -->
+# Inzending
+
+<!-- notice -->
+We bewaren je gegevens tot de oproep sluit.
+<!-- /notice -->
+
+<!-- field id=naam type=text required max-chars=60 -->
+**Naam**
+<!-- answer -->
+Sari
+<!-- /field id=naam -->
+````
+
+This is §14.10's position, and it is the honest one: the **syntax** (an HTML
+comment) is not OciDeck's, the **meaning** is, and **no key carries OciDeck's
+name** — the markers are unprefixed, as `<!-- toc -->` is. Any other Markdown
+reader shows the label, the guidance and the answer as ordinary text and never
+sees a marker; what it loses is *the checking*, never the text. §14.1's rule
+about vocabulary is not bent: nothing here is presented as interchangeable with
+Pandoc or Quarto.
+
+- **Marker names:** `form` (once, the first marker of the file), `field` with its
+  closing `/field id=…`, `answer` (starts the answer zone), `notice` with `/notice`.
+  Case-sensitive, no colon, one comment per line, at most three leading blanks.
+  A line that is *almost* a marker is reported by the checker rather than ignored —
+  a typo that turns a rule into a plain comment would quietly weaken the form.
+- **Field types and rules** (`text`, `prose`, `number`, `date`, `choice`,
+  `multichoice`, `list`, `table`, `image`, `consent`; `required`, word and
+  character limits, options, image rules) are attributes of the `field` marker.
+- **The answer zone** is what lies between `<!-- answer -->` and its
+  `<!-- /field id=… -->`; it is the only part a respondent changes. Everything
+  outside it — the introduction, the notice, every label, **the consent text** and
+  the markers themselves — belongs to the template and is compared byte for byte
+  against the published form when a submission is checked.
+- **A form that does not parse is not a form.** An unclosed field or a duplicate
+  id gives no form blocks at all: OciDeck then shows the raw markers and falls
+  back to source mode, so the author sees what is wrong instead of losing text.
+
+**In OciDeck's own surfaces** the comments would not vanish on their own — the
+reader would draw each `<!-- field … -->` as a paragraph and the visual editor
+would switch off (`rawHtml`). A valid form therefore travels the same chain as the
+pentest blocks: the reader and every export except `.md` drop the marker lines and
+keep label and answer; the visual editor carries the `form` line, a notice and a
+whole field as **one atomic embed each**, shown read-only, with their source
+byte-identical through a rich-text round trip (also for an answer that holds `##`,
+`1.` or a backslash — the output normalisation skips those lines); the `.md`
+export keeps the markers, being source. The visual editor does **not** preserve
+the blank lines around a block (it writes its own), so saving a form there counts
+as changing template text; the fill view, which writes only inside answer zones,
+is the way to answer one.
+
+Design, grammar, field types, rule semantics and the validation codes:
+`docs/design/FORM_INTAKE.md` §4. The reference parser is the standalone package
+`packages/ocideck_form_core`.

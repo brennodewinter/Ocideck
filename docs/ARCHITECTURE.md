@@ -1090,6 +1090,32 @@ If you bump either upstream, re-apply the local changes, update
 `MODIFICATIONS.md` and `_forkOrigins` in `tool/sbom_build.dart`, run `make sbom`,
 and re-test the dual-screen presenter.
 
+## First-party packages (`packages/`)
+
+Code that something other than the app must be able to share lives in its own
+package under `packages/`, consumed as a path dependency. Today there is one:
+
+- **`ocideck_form_core`** — the pure-Dart core of form documents (marker grammar,
+  rule engine, submission package; design `docs/design/FORM_INTAKE.md` §4.10). It
+  has **no dependency on Flutter and no `dart:io`/`dart:ui`/`dart:html`**, so the
+  desktop app, the web form shell and a standalone Dart server can use the same
+  code. The package starts small (the rule-semantics version) and grows with the
+  form feature's phase 1.
+
+How it differs from a vendored fork: a fork in `third_party/` is *someone else's*
+code, frozen at an upstream commit, with a `MODIFICATIONS.md`; a package in
+`packages/` is *ours* and changes with every commit. The SBOM therefore records it
+in its own **first-party** group, with our licence and no content hash (a tree hash
+would go stale at each edit and fail the freshness gate for no supply-chain reason).
+
+What guards it: `dart format .` and `flutter analyze` at the repository root reach
+`packages/` (a `package:flutter` import inside a package fails analysis because the
+package's pubspec does not offer it); `make check-packages` enforces the rules
+analysis cannot (no platform imports, the root's SDK constraint, a copy of the
+licence, file-size ceiling, no bare `catch (_)`, used by the app); `make
+test-packages` runs the package's own tests with a coverage floor. See
+[`CHECKS.md`](CHECKS.md#make-check-packages).
+
 ## Information-security module (optional, off by default)
 
 The MIAUW pentest-reporting module (design: `docs/design/PENTEST_MIAUW.md`) is

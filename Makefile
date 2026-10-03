@@ -1,4 +1,4 @@
-.PHONY: check-locked check-full-locked l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
+.PHONY: check-locked check-full-locked test-packages test-age-interop l10n-export l10n-import template-l10n-export template-l10n-import template-l10n-skeleton template-l10n-auto dast sast check-secrets check-marp check-owasp-catalog-sources refresh-catalogs translate-docs translate-docs-check setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter test-xmpp-integration deps-outdated deps-check deps-verify-offline trivy check-pins bump-scanner-pins catalogs-outdated refresh-lexicon licenses sbom sbom-verify prune-hook-cache check-conventions check-linux-impeller check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-toolchain check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-orphans check-l10n-parity check-l10n-passthrough coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-windows-installer winget-manifest build-linux package-linux build-all build-release release notarize-macos deploy-web check check-no-coverage check-static check-full check-release help servicenormen doorlooptijd ratchets clean-test-cache ci-image-publish ci-image-scans-publish
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -47,6 +47,7 @@ ON_SUITE_FAILURE := || { dart run tool/explain_suite_failure.dart $(TEST_REPORT)
 
 help:
 	@echo "OciDeck quality targets:"
+	@echo "  make test-age-interop  Build the reference age (Go, network) and run the interoperability test (phase 3 gate)."
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
 	@echo "  make check-full      make check + secrets + SAST + licences, SBOM, deps, web hardening."
 	@echo "  make check-release   Ready-for-tagging pass: make check-full + an advisory ZAP/DAST scan of the live host. Run before 'git push origin v*'."
@@ -757,6 +758,65 @@ sbom-verify: prune-hook-cache
 	@echo "        run 'make sbom' and commit sbom/ocideck.cdx.json + .spdx.json."
 	dart run tool/generate_sbom.dart --check
 
+# First-party packages under packages/ (docs/design/FORM_INTAKE.md §4.10). Two
+# targets, because the two halves belong to different gates: the static rules are
+# seconds and run in `check-static`; the package tests need `pub get` and a
+# compile, so they run next to the app's own suite in `check`.
+#
+# `dart format` and `flutter analyze` at the root already cover packages/ (a
+# `package:flutter` import inside a package fails analysis, because the
+# package's pubspec does not offer it), so neither is repeated here.
+check-packages:
+	@echo "== OciDeck check: packages/ =="
+	@echo "Command: dart run tool/check_packages.dart"
+	@echo "Covers: every package under packages/ is unpublished, named like its directory,"
+	@echo "        free of Flutter and of platform imports (dart:io/ui/html/js), on the root's"
+	@echo "        SDK constraint, carries a copy of LICENSE.md, and is used by the app."
+	@echo "Failure means: a shared core stopped being shareable — read the named rule."
+	dart run tool/check_packages.dart
+
+PACKAGE_DIRS := $(patsubst %/pubspec.yaml,%,$(wildcard packages/*/pubspec.yaml))
+PACKAGE_COVERAGE_MIN ?= 90
+PACKAGE_PER_FILE_FLOOR ?= 60
+
+# The reference `age` the interoperability test runs against (FORM_INTAKE.md §5.6, §12). Built from
+# source into `.dart_tool/` (not tracked) at a pinned version. It needs Go and the network, so it is
+# not part of `make check`: without the binary the test reports "NOT RUN" rather than passing.
+AGE_VERSION ?= v1.3.2
+AGE_BIN_DIR = $(CURDIR)/.dart_tool/age-bin
+
+test-age-interop:
+	@echo "== OciDeck gate: interoperability with the reference age =="
+	@echo "Command: GOBIN=.dart_tool/age-bin go install filippo.io/age/cmd/age@$(AGE_VERSION), then"
+	@echo "         dart test test/form_seal_interop_test.dart in packages/ocideck_form_core with AGE_BIN set"
+	@echo "Covers: a package sealed here opens in the reference age and the other way round; several"
+	@echo "        recipients; a key that is not a recipient; a changed or cut-short file (refused by both);"
+	@echo "        plaintexts at every edge of a 64 KiB chunk."
+	@echo "Failure means: the two implementations disagree — read the failing case before anything else."
+	@command -v go >/dev/null 2>&1 || { echo "go not found — install it (macOS: brew install go)"; exit 2; }
+	@mkdir -p $(AGE_BIN_DIR)
+	GOBIN=$(AGE_BIN_DIR) go install filippo.io/age/cmd/age@$(AGE_VERSION)
+	@$(AGE_BIN_DIR)/age --version | grep -q "$(patsubst v%,%,$(AGE_VERSION))" \
+	  || { echo "the built age is not $(AGE_VERSION)"; exit 1; }
+	cd packages/ocideck_form_core && AGE_BIN=$(AGE_BIN_DIR)/age dart test test/form_seal_interop_test.dart
+
+test-packages:
+	@echo "== OciDeck check: package tests =="
+	@echo "Command: dart pub get --enforce-lockfile && dart test --coverage in each packages/<name>,"
+	@echo "         then dart run tool/package_coverage.dart --min=$(PACKAGE_COVERAGE_MIN) --per-file-floor=$(PACKAGE_PER_FILE_FLOOR)"
+	@echo "Covers: the tests of every first-party package, in random order, plus its coverage floors:"
+	@echo "        the average, every lib/ file in a test, and a floor per file."
+	@echo "Failure means: a package test failed, its lock file drifted (run 'dart pub get' in the"
+	@echo "        package and commit pubspec.lock), or coverage fell below the floor."
+	@set -e; for p in $(PACKAGE_DIRS); do \
+	  echo "-- $$p"; \
+	  ( cd $$p && rm -rf coverage \
+	    && dart pub get --enforce-lockfile \
+	    && dart test --test-randomize-ordering-seed random --coverage=coverage \
+	    && dart run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib --check-ignore ); \
+	  dart run tool/package_coverage.dart --package=$$p --min=$(PACKAGE_COVERAGE_MIN) --per-file-floor=$(PACKAGE_PER_FILE_FLOOR); \
+	done
+
 # Project-convention guard: no print() (use the logger in lib/utils/log.dart) and
 # no NEW bare `catch (_)` (a downward-only ratchet; see the script's baseline).
 check-linux-deps:
@@ -1351,7 +1411,7 @@ sign-release:
 # De statische poorten die `check` en `check-no-coverage` allebei draaien. Eén
 # lijst en geen twee: een nieuwe poort die maar aan één van de twee doelen wordt
 # toegevoegd, is precies het soort stille afwijking waar niemand meer op let.
-STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-linux-impeller check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
+STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-linux-impeller check-conventions check-audience-boundary check-method-length check-dead-code check-hardcoded-text check-comment-language check-dated-claims check-improvement-templates check-version-bump check-sbom-version check-packages check-collab-field-parity check-translated-mermaid check-untranslated-templates check-l10n-parity check-l10n-passthrough translate-docs-check
 
 # De poort draait onder het poortslot (scripts/gate_lock.sh). Reden: elke
 # worktree laat `.dart_tool/hooks_runner/shared` naar dezelfde map wijzen, dus
@@ -1366,7 +1426,7 @@ STATIC_GATES := format-check analyze check-toolchain check-linux-deps check-linu
 check:
 	@scripts/gate_lock.sh $(MAKE) check-locked
 
-check-locked: $(STATIC_GATES) coverage coverage-per-file
+check-locked: $(STATIC_GATES) coverage coverage-per-file test-packages
 	@case "$$(uname -s)" in \
 	  Darwin) $(MAKE) test-golden ;; \
 	esac
@@ -1394,7 +1454,7 @@ check-locked: $(STATIC_GATES) coverage coverage-per-file
 # voor de uitbrengpoort in CI, waar de suite een tweede keer draait op andermans
 # hardware en de vraag "draait alles nog" is, niet "hoeveel raakt het".
 # Gebruik het niet als vervanging van `make check` in je eigen werkkopie.
-check-no-coverage: $(STATIC_GATES) test
+check-no-coverage: $(STATIC_GATES) test test-packages
 	@echo "== OciDeck check (zonder dekkingsmeting) complete =="
 	@echo "Validated: formatting, static analysis, conventions, the privacy projection boundary, method length, dead-code, hardcoded visible text, comment language, and the full Flutter test suite."
 	@echo "NOT validated here: the coverage floor and the per-file coverage floor — those run in 'make check'."

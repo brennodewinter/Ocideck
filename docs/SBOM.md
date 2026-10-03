@@ -83,6 +83,7 @@ mermaid" is the first question a reviewer asks.)*
 
 | Group | Source of truth | Per-component data |
 | --- | --- | --- |
+| **First-party packages** | `pubspec.lock` (`packages/`) | version, our licence (EUPL-1.2), supplier, **its own dependencies**; **no content hash** — it is our code and changes with every commit, so a hash would fail the freshness gate on each edit without telling anyone anything |
 | **Vendored plugin forks** | `pubspec.lock` (`third_party/`) | version, upstream VCS URL **pinned to the exact commit**, upstream revision, SHA-256 **tree hash** of the vendored directory, licence, supplier |
 | **Bundled fonts** | `pubspec.yaml` (`flutter.fonts`) + the OFL texts in `assets/fonts/` | file SHA-256, licence (OFL-1.1), supplier |
 | **Build SDKs** | `.tool-versions`, `pubspec.yaml` | Flutter version, Dart SDK constraint, supplier |

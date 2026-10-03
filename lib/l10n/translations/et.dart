@@ -1620,6 +1620,593 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Team…': 'Meeskond…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Toimetajad peale sinu, kes on igas bundle’is, et ka nemad saaksid esitusi avada. Lisad kellegi tema toimetaja kaardiga ja sisestad selle kaardi sõrmejälje uuesti.',
+  'Er is nog niemand naast jou.': 'Peale sinu pole veel kedagi.',
+  'Plak de kaart van de redacteur': 'Kleebi toimetaja kaart',
+  'Kaart controleren': 'Kontrolli kaarti',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} kaart. Sisesta selle kaardi sõrmejälg, mille {naam} sulle muud teed andis, näiteks telefonis.',
+  'Redacteur verwijderen': 'Eemalda toimetaja',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Kas eemaldada {naam} meeskonnast? Bundle’id, mille oled juba avaldanud, jäävad samaks, kuni avaldad uuesti; mis on juba {naam} jaoks pitseeritud, jääb sellele inimesele loetavaks.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} on lisatud. Avalda bundle uuesti, et {naam} kaasata.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} on eemaldatud. Avalda bundle uuesti, et {naam} välja jätta.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Loo kõigepealt oma toimetuse võti jaotises Toimetuse võti….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Sinu toimetuse võtit ei saa kasutada. Vaata jaotist Toimetuse võti….',
+  'Dit is geen redacteurskaart.': 'See ei ole toimetaja kaart.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'See kaart on OciDecki uuemast versioonist. Uuenda OciDecki.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Kaart sisaldab midagi lubamatut. Palu toimetajalt uut kaarti.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'See sõrmejälg ei sobi kaardiga: kaart on muudetud või ei ole sellelt, kelle arvad. Palu toimetajalt sõrmejälge ja kaarti uuesti.',
+  'Dit is je eigen kaart.': 'See on sinu enda kaart.',
+  'Deze redacteur staat er al.': 'See toimetaja on juba meeskonnas.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Meeskond on täis: bundle kannab kuni 64 korraldajat, sind kaasa arvatud.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Faili team.json töökaustas ei saa lugeda. Midagi ei muudetud; paranda see või kustuta.',
+  'Het team kon niet worden opgeslagen.': 'Meeskonda ei saanud salvestada.',
+  'Deze redacteur staat niet meer in het team.':
+      'Seda toimetajat ei ole enam meeskonnas.',
+  'Naast jou in de bundel: {namen}.': 'Peale sinu bundle’is: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Kontrolli esmalt oma taastevõtit jaotises Toimetuse võti… või lisa teine toimetaja jaotises Meeskond…. Ilma tagasiteeta muutuvad kõik esitused loetamatuks, kui see seade läheb katki.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Faili team.json töökaustas ei saa lugeda. Midagi ei allkirjastata.',
+  'Redacteurskaart maken…': 'Loo toimetaja kaart…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Toimetaja kaardiga lisab vormi omanik sind bundle’isse, et ka sina saaksid esitusi avada. Kaarti tohib saata e-postiga.',
+  'Jouw naam op de kaart': 'Sinu nimi kaardil',
+  'Kaart maken': 'Loo kaart',
+  'Kaart kopiëren': 'Kopeeri kaart',
+  'Vingerafdruk van de kaart': 'Kaardi sõrmejälg',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Anna omanikule see sõrmejälg muud teed kui kaardiga, näiteks telefonis. Ta sisestab selle uuesti, enne kui sind lisab.',
+  'Verzegeld opslaan…': 'Salvesta pitseeritult…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Krüpteeritud fail (.zip.age), mille saab avada ainult korraldaja. Selleks on vaja bundle’i faili ja kutse sõrmejälge.',
+  'Kies het bundelbestand van de organisator': 'Vali korraldaja bundle’i fail',
+  'Vingerafdruk van de organisator': 'Korraldaja sõrmejälg',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Sisesta kutse sõrmejälg. Seda ei ole bundle’i failis meelega: nii saad kontrollida, kellelt see pärineb.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'See ei ole sõrmejälg. See koosneb 52 märgist, tavaliselt neljaste rühmadena.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'See fail ei ole bundle, mida OciDeck suudab lugeda.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'See vorm või bundle on OciDecki uuemast versioonist. Uuenda OciDecki.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Sõrmejälg ei sobi selle bundle’iga: vorm ei pärine sellelt, keda kutse nimetab. Kontrolli sõrmejälge ja bundle’i faili.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Bundle’i allkiri ei ole õige: see on muudetud või ei ole sellelt, keda sõrmejälg nimetab. Palu korraldajalt uut bundle’it.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'See bundle ei kuulu sellele vormile. Kasuta bundle’i faili, mis kuulub täpselt sellele vormile.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'See bundle on aegunud. Palu korraldajalt uut.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'See bundle on vanem kui bundle, mille said varem sellelt korraldajalt. Palu korraldajalt uusimat.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Bundle sisaldab midagi lubamatut. Palu korraldajalt uut bundle’it.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'See vorm on suletud: viimane päev oli {datum}. Võta korraldajaga ühendust.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Saadetis on suurem, kui korraldaja lubab ({mb} MB). Eemalda foto või tee üks väiksemaks.',
+  'De inzending kon niet worden verzegeld.': 'Saadetist ei saanud pitseerida.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Salvestatud pitseeritult nimega {naam}, avada saab ainult: {organisatoren}.',
+  'Bundel publiceren…': 'Avalda bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Bundle on see, mida vormi täitja teie toimetuse kohta usub: millisele võtmele pitseerida ja millise tekstiga see kuulub kokku. See salvestatakse vormi kõrvale.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Töökaustas ei ole vormi, mille jaoks bundle\'it teha.',
+  'Naam voor de invuller': 'Nimi täitjale',
+  'Geldig tot (jjjj-mm-dd)': 'Kehtib kuni (aaaa-kk-pp)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Viimane päev, mil täitja seda bundle\'it usub. Mitte enne vormi sulgemispäeva.',
+  'Bundel maken': 'Loo bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle loodud (järjekorranumber {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Anna sõrmejälg täitjale muud teed kui bundle\'i failiga, näiteks kutses. Kellel on ainult bundle\'i fail, see ei saa kontrollida, kellelt see pärineb.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Sellel platvormil ei ole toimetuse võtme jaoks võtmehoidjat; bundle\'it ei saa siin allkirjastada.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Toimetuse võtit ei ole veel. Loo see jaotises Toimetuse võti…, enne kui bundle\'i avaldad.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Võtmehoidjat ei saa lugeda. Midagi ei allkirjastatud.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Salvestatud toimetuse võtit ei saa lugeda. Kustuta see jaotises Toimetuse võti… ja taasta oma taastevõtmest.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Selle vormi bundle\'it töökaustas ei saa lugeda või see ei kuulu teiste juurde. Siis ei saa järjekorranumbrit määrata ja midagi ei allkirjastata. Kontrolli: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Sisesta nimi, mis on kuni 80 märki pikk.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Kehtib kuni peab olema olemasolev kuupäev kujul aaaa-kk-pp.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Kehtib kuni ei tohi olla enne vormi sulgemispäeva.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Bundle\'it ei saanud luua ({veld}). Kontrolli, et vormis oleks kehtiv sulgemispäev ja säilitusaeg.',
+  'formulier': 'vorm',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Bundle\'it ei saanud töökausta salvestada.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Loo ja allkirjasta bundle, mida täitja teie toimetuse kohta usub.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: pitseeritud pakk avatud ja imporditud.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: see pakk on pitseeritud ja sellel platvormil ei ole toimetuse võtme jaoks võtmehoidjat.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: see pakk on pitseeritud ja selle avamiseks ei ole veel toimetuse võtit. Loo see jaotises Toimetuse võti… või taasta see oma taastevõtmest.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: see pakk on pitseeritud ja võtmehoidjat ei saa lugeda. Midagi ei proovitud.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: see pakk on pitseeritud ja salvestatud toimetuse võtit ei saa lugeda. Kustuta see jaotises Toimetuse võti… ja taasta oma taastevõtmest.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: seda pakki ei ole pitseeritud sinu toimetuse võtmele.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: seda pakki on muudetud või see on katkenud ning seda ei avata.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: see pakk on suurem, kui esitus olla saab.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: salvestatud toimetuse võti ei ole võti, mida OciDeck kasutada saab.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ei ole pitseeritud pakk, mida OciDeck suudab lugeda.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Pitseeritud faili (.zip.age) avatakse sinu toimetuse võtmega.',
+  'Herstelsleutel controleren': 'Kontrolli taastevõtit',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Toimetuse võti on loodud. Kirjuta nüüd taastevõti üles.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Võtmehoidja ei võtnud võtit vastu. Midagi ei loodud.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Toimetuse võti on juba olemas. Seda ei puudutatud.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Võtmehoidjat ei saanud lugeda. Midagi ei eeldatud ja midagi ei loodud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Võtmehoidjas on midagi, mis ei ole toimetuse võti. Seda ei kirjutatud üle.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Sellel platvormil ei ole võtmehoidjat.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Õige: taastevõti on kontrollitud.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'See on kehtiv taastevõti, kuid mitte selle toimetuse võtme oma.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Taastevõti on õige, kuid seda ei saanud salvestada.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Võrdlemiseks ei ole ühtegi toimetuse võtit.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'See ei ole toimetuse võtme taastevõti.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Selles on trükiviga: kontrollsumma ei klapi.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'See taastevõti pärineb OciDecki uuemast versioonist.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'See taastevõti on tehtud millekski muuks.',
+  'Hersteld uit de herstelsleutel.': 'Taastatud taastevõtmest.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Võtmehoidja ei võtnud võtit vastu. Midagi ei taastatud.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Salvesta toimetuse võti age\'i võtmefailina',
+  'Het bestand kon niet worden opgeslagen.': 'Faili ei saanud salvestada.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Salvestatud nimega {pad}. Kes seda faili omab, saab kõike avada.',
+  'Redactiesleutel verwijderd.': 'Toimetuse võti on kustutatud.',
+  'Redactiesleutel': 'Toimetuse võti',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Sellel platvormil ei ole võtmehoidjat. Toimetuse võtit ei saa siin hoida; kasuta töölauarakendust.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Võtmehoidjat ei saanud lugeda (lukus või juurdepääs keelatud). Midagi ei eeldatud ja midagi ei loodud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Võtmehoidjas on midagi, mis ei ole toimetuse võti. Seda ei kirjutatud üle. Kustuta see ja taasta võti oma taastevõtmest.',
+  'Redactiesleutel verwijderen…': 'Kustuta toimetuse võti…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Toimetuse võti avab pitseeritud esitused ja allkirjastab sinu vormide pakid. See asub selle operatsioonisüsteemi võtmehoidjas. Kui kaotad kõik toimetuse võtmed, muutuvad kõik veel kättesaamata esitused loetamatuks: see on hind serveri eest, mis ei oska midagi lugeda.',
+  'Redactiesleutel aanmaken': 'Loo toimetuse võti',
+  'Herstellen uit herstelsleutel…': 'Taasta taastevõtmest…',
+  'Vingerafdruk': 'Sõrmejälg',
+  'Ontvanger (age)': 'Vastuvõtja (age)',
+  'Aangemaakt op {datum}.': 'Loodud {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Taastevõti on kontrollitud.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Taastevõtit ei ole veel kontrollitud: kirjuta see üles ja sisesta uuesti.',
+  'Herstelsleutel tonen…': 'Näita taastevõtit…',
+  'Vingerafdruk kopiëren': 'Kopeeri sõrmejälg',
+  'Exporteren als age-sleutelbestand…': 'Ekspordi age\'i võtmefailina…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Kirjuta see taastevõti üles ja hoia seda turvalises kohas, sellest seadmest eemal. Kes seda omab, saab avada kõik esitused ja allkirjastada pakke teie nimel. Kui kaotad selle seadme, on see kõik, mis jääb.',
+  'Typ de herstelsleutel hier opnieuw in': 'Sisesta taastevõti siia uuesti',
+  'Later': 'Hiljem',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Sisesta või kleebi taastevõti. See, mida sisestad, pannakse võtmehoidjasse toimetuse võtmena; midagi ei kirjutata üle.',
+  'Herstelsleutel': 'Taastevõti',
+  'Redactiesleutel verwijderen': 'Kustuta toimetuse võti',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Võti kustutatakse võtmehoidjast ja see võib tagasi tulla ainult taastevõtmest. Kui sul seda ei ole, jäävad ainult selle võtme jaoks pitseeritud esitused igaveseks loetamatuks.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Võti, mis avab pitseeritud esitused ja allkirjastab pakke.',
+  'Redactiesleutel…': 'Toimetuse võti…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Töökoopia visati ära. Saabunut hinnatakse uuesti.',
+  'Er is geen werkkopie.': 'Töökoopiat ei ole.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Töökoopiat ei õnnestunud ära visata.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Kustutab töökoopia. Saabunu jääb alles ja seda hinnatakse uuesti.',
+  'Werkkopie weggooien…': 'Viska töökoopia ära…',
+  'Werkkopie weggooien': 'Viska töökoopia ära',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Töökoopia koos parandustega kustutatakse ja seda ei saa tagasi tuua. Saabunu jääb alles ja seda hinnatakse uuesti. Kui töökoopia on veel vahekaardil avatud, sulge see enne.',
+  'Weggooien': 'Viska ära',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'See esitus on tagasi võetud ja satub seetõttu ühtegi peatükki.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Seda esitust ei saa lugeda või vormi, mille jaoks see esitati, pole töökaustas.',
+  'Het controledocument kon niet worden geschreven.':
+      'Kontrolldokumenti ei õnnestunud kirjutada.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Sinu panus raamatusse: palun vaata see üle',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Siin on sinu panus sellisena, nagu see raamatus ilmub (vaata manust). Kas kõik on õige? Vasta ‘nõus’ või oma parandustega enne kuupäeva {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Kiri ootab sinu meiliprogrammis. Lisa PDF ja saada see ära.',
+  'Controle door de maker…': 'Autori kontroll…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Kontrolldokument on selle ühe esituse peatükk. Ekspordi see PDF-ina (vali täielik profiil), lisa PDF kirjale ja saada kiri ära. Kui autor vastab ‘nõus’, sea olek ise väärtusele maker-approved: see vastus kinnitab ka, et panus tõesti pärineb sellelt inimeselt.',
+  'Controledocument maken en openen': 'Loo kontrolldokument ja ava see',
+  'E-mailadres van de maker': 'Autori e-posti aadress',
+  'Antwoord vóór (jjjj-mm-dd)': 'Vasta enne (aaaa-kk-pp)',
+  'Mail schrijven': 'Kirjuta kiri',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'See vorm ei tunne olekut maker-check-sent, seega ei saa seda siin seada.',
+  'Controle verstuurd': 'Kontroll saadetud',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Teeb selle esituse peatüki ja valmistab ette kirja, millega autor selle üle vaatab.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Seda esitust pole registris. Paranda overview.md ja proovi uuesti.',
+  'Kies het hoofdstuksjabloon': 'Vali peatüki mall',
+  'Kies eerst een hoofdstuksjabloon.': 'Vali kõigepealt peatüki mall.',
+  'Kies minstens één status.': 'Vali vähemalt üks olek.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Raamat on koostatud. Peatükke: {n}. Fotosid: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Tagasi võetud ja seetõttu välja jäetud: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Vahele jäetud (muu versioon või loetamatu): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Fotod, mida töökaustas ei olnud: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'Kasuta nimes ainult tähti, numbreid, sidekriipse ja alakriipse (kuni 64 märki).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Selle nimega raamat on juba olemas. Vali mõni teine nimi.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Mall nimetab välju, mida vormil ei ole: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Raamatusse pole midagi panna: ühtegi esitust valitud olekuga pole. Tagasi võetud: {w}; vahele jäetud: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Registrit ei saa lugeda. Paranda overview.md.',
+  'Het boek kon niet worden geschreven.': 'Raamatut ei õnnestunud kirjutada.',
+  'Boek samenstellen…': 'Koosta raamat…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Raamat läheb töökausta kausta book ja jääb tavaliseks dokumendiks, mida saad hiljem ise muuta.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Töökaustas pole ühtegi kasutatavat vormi.',
+  'Formulier': 'Vorm',
+  'Hoofdstuksjabloon': 'Peatüki mall',
+  'Nog geen sjabloon gekozen.': 'Malli pole veel valitud.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Mallis tähendab {veld-id} vastust sellele väljale.',
+  'Hoofdstuksjabloon kiezen…': 'Vali peatüki mall…',
+  'Welke inzendingen?': 'Millised esitused?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Raamatusse jõuavad ainult esitused, millel on mõni neist olekutest. Tagasi võetud esitused jäävad alati välja.',
+  'Ordenen op': 'Sorteeri',
+  'Groeperen op': 'Rühmita',
+  'Naam van het boek': 'Raamatu nimi',
+  'Boek openen': 'Ava raamat',
+  'Samenstellen': 'Koosta',
+  'De werkkopie kon niet worden aangemaakt.': 'Töökoopiat ei õnnestunud luua.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Avab esituse koopia parandamiseks. Saabunu jääb muutmata.',
+  'Werkkopie openen': 'Ava töökoopia',
+  'Status gewijzigd naar {status}.': 'Olek muudetud: {status}.',
+  'Intrekking opgeslagen.': 'Tagasivõtmine salvestatud.',
+  'Intrekking ongedaan gemaakt.': 'Tagasivõtmine tühistatud.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Esitus kustutatud; kirje jääb alles.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Esitus kustutatud, kuid registrit ei õnnestunud uuendada. Muuda overview.md käsitsi.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Esitust ei leitud töökaustast.',
+  'De inzending kon niet worden verwijderd.':
+      'Esitust ei õnnestunud kustutada.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Registrit ei saa lugida. Paranda overview.md; midagi ei muudetud.',
+  'Het register kon niet worden bijgewerkt.':
+      'Registrit ei õnnestunud uuendada.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Seda muudatust ei saanud teha: esitust ei ole registris.',
+  'Status wijzigen': 'Muuda olekut',
+  'Intrekking ongedaan maken': 'Tühista tagasivõtmine',
+  'Intrekken…': 'Võta tagasi…',
+  'Verwijderen…': 'Kustuta…',
+  'Inzending intrekken': 'Võta esitus tagasi',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Sisesta päev, mil esitaja esituse tagasi võttis. Tagasi võetud esitus ei jõua kunagi raamatusse.',
+  'Dag (jjjj-mm-dd)': 'Päev (aaaa-kk-pp)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Kehtetu päev. Kasuta kujul aasta-kuu-päev, näiteks {voorbeeld}.',
+  'Inzending verwijderen': 'Kustuta esitus',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Selle esituse vastused, töökoopia ja fotod kustutatakse töökaustast. Alles jääb ainult minimaalne kirje: number, saabumise ja nõusoleku päevad ning olek. Seda ei saa tagasi võtta.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Alles jääb ka see, mida vorm ette teatas: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Selle esitusega on midagi valesti.',
+  'Verplicht, maar leeg gelaten.': 'Kohustuslik, kuid jäetud tühjaks.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} sõna; vaja vähemalt {min}.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} sõna; lubatud kuni {max}.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} tähemärki; vaja vähemalt {min}.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} tähemärki; lubatud kuni {max}.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}“ ei ole valikute loendis.',
+  '“{value}” is geen getal.': '„{value}“ ei ole arv.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}“ ei ole kuupäev kujul aasta-kuu-päev.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Foto laiusega {actual} pikslit; küsiti {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Esitusest puudub foto fail.',
+  'De beschrijving van de foto ontbreekt.': 'Foto kirjeldus puudub.',
+  'De maker van de foto ontbreekt.': 'Foto autor puudub.',
+  'De foto is niet gecontroleerd.': 'Fotot ei kontrollitud.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-foto: kontrollimata ja puhastamata; selles võib olla asukoht.',
+  'Toestemming niet gegeven.': 'Nõusolekut ei antud.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Vastus sisaldab rida, mis näeb välja nagu vormi juhtkood.',
+  'Het antwoord bevat HTML.': 'Vastus sisaldab HTML-i.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Vastus sisaldab sulgemata koodiplokki.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Vastus viitab pildile, mis ei kuulu sellesse esitusse.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Vastus sisaldab linki, mis ei ole lubatud.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Seda vormi või seda versiooni ei ole töökaustas.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Esitaja töötas vormi teistsuguse tekstiga kui avaldatud.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Manifesti nõusolek ei ühti avaldatud vormiga.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Vormi teksti muudeti väljaspool vastuseid.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Vormi teksti muudeti selle välja juures.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Seda välja avaldatud vormis ei ole.',
+  'Dit veld ontbreekt in de inzending.': 'Seda välja esituses ei ole.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Versiooni {submission} esitus; avaldatud on versioon {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Vorm vajab OciDecki uuemat versiooni.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Avaldatud vorm töökaustas ei ole kasutatav.',
+  'De inzending hoort bij een ander formulier.':
+      'Esitus kuulub teise vormi juurde.',
+  'De opbouw van de inzending is beschadigd.':
+      'Esituse ülesehitus on kahjustatud.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Registrit ei saa lugida. Paranda overview.md; esitused on allpool näidatud ilma registri andmeteta.',
+  'Nog geen inzendingen.': 'Esitusi veel ei ole.',
+  'Om na te lopen': 'Üle vaadata',
+  'Verwijderd': 'Kustutatud',
+  'Zonder regel in het register': 'Ilma reata registris',
+  'Ontvangen {datum}': 'Saadud {datum}',
+  'Ingetrokken {datum}': 'Tagasi võetud {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Selle esituse sisu on kustutatud; alles on ainult kirje.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Seda esitust ei saa lugida. Kontrolli töökausta faile.',
+  'Beoordeeld tegen {formulier}.': 'Hinnatud vastu {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Hinnang puudutab töökoopiat (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Pole punkte, mida üle vaadata.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotod, mida ükski vastus ei maini: {n}.',
+  'Inzendingen': 'Esitused',
+  'Werkmap': 'Töökaust',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Töökausta pole veel valitud. Vali kaust, kuhu esitused ja register salvestatakse.',
+  'Werkmap kiezen…': 'Vali töökaust…',
+  'Kies de werkmap voor inzendingen': 'Vali esituste töökaust',
+  'Formulieren': 'Vormid',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Vormi pole veel lisatud. Lisa vorm sellisena, nagu sa selle avaldasid: esitust kontrollitakse selle vastu.',
+  'Formulier toevoegen…': 'Lisa vorm…',
+  'Kies het formulier om toe te voegen': 'Vali lisatav vorm',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'See fail ei ole vorm, mida saaks avaldada.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'See vorm on juba olemas teistsuguse tekstiga. Teistsugune tekst on uus versioon: anna vormile suurem versiooninumber.',
+  'Formulier toegevoegd: {naam}.': 'Vorm lisatud: {naam}.',
+  'Dit formulier stond er al.': 'See vorm oli juba olemas.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Vormi ei õnnestunud salvestada.',
+  'Inzendingen in de werkmap: {n}': 'Esitusi töökaustas: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Tavalist zip-faili ei krüpteerita edastamise ajal.',
+  'Pakketten binnenhalen…': 'Impordi pakid…',
+  'Kies de pakketten om binnen te halen': 'Vali imporditavad pakid',
+  'Register openen': 'Ava register',
+  '{naam}: binnengehaald.': '{naam}: imporditud.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: imporditud, kuid on punkte, mida üle vaadata.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: imporditud, kuid registrit ei õnnestunud uuendada. Kontrolli overview.md.',
+  '{naam}: stond er al.': '{naam}: oli juba olemas.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ei ole esituspakk, mida OciDeck suudab lugeda.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: seda vormi ei ole lisatud või mitte selles versioonis. Lisa kõigepealt vorm.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: ei õnnestunud töökausta salvestada.',
+  'Formulieren en inzendingen': 'Vormid ja esitused',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Impordi vormi esitusi, kontrolli neid avaldatud vormi vastu ja hoia neid registriga. Vormi täitmine töötab ka siis, kui see on välja lülitatud. Vaikimisi väljas.',
+  'Inzending opslaan als zip…': 'Salvesta saadetis zip-failina…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Zip-fail sinu vastuste ja fotodega, mille saadad e-kirjaga korraldajale.',
+  'Inzending opgeslagen als {naam}.': 'Saadetis salvestati nimega {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Vali vorm sellisena, nagu sa selle said',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'See ei ole vorm, kuhu sinu vastused kuuluvad. Vali fail, mille said korraldajalt.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Fotot ei õnnestunud lugeda: {pad}. Lisa see uuesti.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Saadetis ei mahu ühte pakki: liiga palju fotosid või liiga suur foto.',
+  'De inzending kon niet worden opgeslagen.':
+      'Saadetist ei õnnestunud salvestada.',
+  'Inzending opslaan': 'Salvesta saadetis',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Asukohaandmed on sellelt fotolt eemaldatud.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Seda fotot ei õnnestunud lisada. Valige foto JPEG-, PNG-, WebP- või HEIC-fail.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Fotode lisamiseks salvestage dokument esmalt.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck saab selle faili uue dokumendina importida.',
+  'Kies een datum': 'Vali kuupäev',
+  'Anders, namelijk:': 'Muu, nimelt:',
+  'Punt {n}': 'Punkt {n}',
+  'Punt {n} verwijderen': 'Eemalda punkt {n}',
+  'Rij {n} verwijderen': 'Eemalda rida {n}',
+  'Foto {n} verwijderen': 'Eemalda foto {n}',
+  'Wat is er te zien op de foto?': 'Mis fotol on näha?',
+  'Van wie is de foto?': 'Kelle foto see on?',
+  'Foto toevoegen': 'Lisa foto',
+  'Verplicht': 'Kohustuslik',
+  'Alles is ingevuld.': 'Kõik on täidetud.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Veel {n} teha, enne kui saate saata:',
+  'klaar': 'valmis',
+  '{n} open': '{n} lahti',
+  'Dit formulier kan niet worden ingevuld.': 'Seda vormi ei saa täita.',
+  'Naar de bron': 'Allika juurde',
+  'Woorden': 'Sõnad',
+  'Tekens': 'Märgid',
+  'Keuzes': 'Valikud',
+  'Rijen': 'Read',
+  'Foto’s': 'Fotod',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (vähemalt {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (kuni {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (vähemalt {min}, kuni {max})',
+  'Invullen': 'Täida',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Selle vormiga on midagi valesti. Võtke ühendust selle koostajaga.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'See väli on kohustuslik. Täitke see, et saaksite saata.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Kirjutasite {actual} sõna; vaja on vähemalt {min}.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjutasite {actual} sõna; lubatud on kuni {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Kirjutasite {actual} märki; vaja on vähemalt {min}.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Kirjutasite {actual} märki; lubatud on kuni {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” ei ole loendis. Valige üks valikutest.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” ei ole arv. Kasutage ainult numbreid, vajaduse korral koma või punktiga kümnendmurru jaoks.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'See foto on {actual} pikslit lai; siin nõutakse {min}. Tõenäoliselt vähenes see sõnumirakenduse kaudu saatmisel. Kui teil on originaal alles, kasutage seda. Kui ei, saatke see siiski: korraldaja võtab teiega ühendust.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'See foto on {actual} MB; maksimum on {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Selle faili sisu ei vasta selle failitüübile.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'See failitüüp ei ole siin lubatud.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Selle foto faili ei leita enam. Lisage foto uuesti.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Kirjeldage ühe lühikese lausega, mis fotol on näha.',
+  'Geef aan van wie de foto is.': 'Märkige, kelle foto see on.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Seda fotot ei ole veel kontrollitud. Oodake hetk või lisage see uuesti.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'See foto on HEIC-fail. OciDeck ei saa seda siin kontrollida ega puhastada, mistõttu see saadetakse sellisena, nagu see on. See võib sisaldada teavet, kus foto tehti. Kui te ei soovi seda jagada, valige kaamera sätetes „Kõige ühilduvam” või jagage foto JPEG-vormingus ja lisage see uuesti.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Sellel fotol on näha {actual} nägu; oodati {expected}. See on ainult meeldetuletus.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Märkige ruut, et nõustuda; ilma nõusolekuta ei saa saata.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'See vorm nõuab OciDecki uuemat versiooni. Värskendage rakendust, et seda täita.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Vormis endas on kogemata midagi muudetud. Taastage vorm; teie vastused jäävad alles.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'See rida näeb välja nagu vormi juhtkood ega tohi vastuses olla. Muutke seda.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML ei ole vastuses lubatud. Kasutage tavalist teksti ja lihtsat vormindust.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Koodiplokk on sulgemata. Sulgege see märgendiga ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'Vastuses võivad olla ainult fotod, mille lisate sellesse vormi; pilti internetist ei saa kasutada.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'Vastuses on lubatud ainult lingid, mis algavad https://, ja e-posti aadressid.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'See fail on tehtud vormi teise versiooniga (versioon {submission}; nüüd kehtib versioon {published}). Kontrollige oma vastuseid.',
+  'Punt {item}: {bericht}': 'Punkt {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Praegu on neid {actual}; peab olema {min} kuni {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Praegu on neid {actual}; võib olla kuni {max}.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Praegu on neid {actual}; peab olema vähemalt {min}.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Arv peab olema arvu {step} kordne.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Arv peab olema {min} kuni {max}.',
+  'Het getal mag hoogstens {max} zijn.': 'Arv võib olla kuni {max}.',
+  'Het getal moet minstens {min} zijn.': 'Arv peab olema vähemalt {min}.',
+  'De datum moet op of na {min} liggen.':
+      'Kuupäev peab olema {min} või hilisem.',
+  'De datum moet op of vóór {max} liggen.':
+      'Kuupäev peab olema {max} või varasem.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” ei ole kuupäev. Kirjutage kuupäev kujul aasta-kuu-päev, näiteks 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'See ei ole kehtiv e-posti aadress.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'See ei ole kehtiv veebiaadress. Alustage https://.',
+  'Dit is geen geldig telefoonnummer.': 'See ei ole kehtiv telefoninumber.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'See ei ole kehtiv Hollandi sihtnumber, näiteks 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Siia mahub ainult üks rida. Eemaldage reavahetused.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Kasutage ainult selle küsimuse märkeruute: üks ruut valiku kohta.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Kirjutage iga punkt eraldi reale, ees kriips või number.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabel ei ole enam õige: jätke päisrida samaks ja andke igale reale sama palju veerge.',
+  'Dezelfde foto staat hier twee keer.': 'Sama foto on siin kaks korda.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Sellesse välja kuuluvad ainult fotod, mitte eraldiseisev tekst.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Teie nõusoleku ruut on kahjustatud. Taastage vorm.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Sellel vastusel ei ole vormi, mis sellele küsimusele sobib.',
   'Downloaden…': 'Laadi alla…',
   'Afbeelding opgeslagen als': 'Pilt salvestatud nimega',
   '{naam}: ingesteld': '{naam}: seadistatud',

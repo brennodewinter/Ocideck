@@ -23,7 +23,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 
 import '../../models/deck.dart' show TlpLevelX;
 import '../../models/settings.dart';
-import '../document_export_service.dart' show projectedDocumentBody;
+import '../document_export_service.dart' show projectedDocumentBodyForRendering;
 import '../document_footnote_setup.dart';
 import '../export_bundle.dart';
 import '../export_metadata.dart';
@@ -54,7 +54,7 @@ Future<Uint8List> buildDocumentExportOdt(
   String? sourcePath,
   String outputPath = '',
 }) async {
-  final body = projectedDocumentBody(bundle);
+  final body = projectedDocumentBodyForRendering(bundle);
   final meta = metadata ?? ExportDocumentMetadata.fromDeck(bundle.audience);
   final title = meta.displayTitle('Document');
 

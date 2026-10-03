@@ -1642,6 +1642,589 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Team…': 'Manus…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Redactores praeter te qui in omni fasce sunt, ut et ipsi missa aperire possint. Aliquem cum charta redactoris addis et vestigium digitale illius chartae rursus scribis.',
+  'Er is nog niemand naast jou.': 'Nondum quisquam praeter te est.',
+  'Plak de kaart van de redacteur': 'Chartam redactoris insere',
+  'Kaart controleren': 'Chartam probare',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Charta {naam}. Vestigium digitale huius chartae quod {naam} tibi alia via dedit scribe, exempli gratia telephono.',
+  'Redacteur verwijderen': 'Redactorem removere',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      '{naam} ex manu removere? Fasces iam publicati manent ut sunt donec iterum publices; quod iam pro {naam} obsignatum est, illi legibile manet.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} additus est. Fascem iterum publica ut {naam} includatur.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} remotus est. Fascem iterum publica ut {naam} eximatur.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Primum clavem redactionis tuam sub Clavis redactionis… crea.',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Clavis redactionis tua uti non potest. Vide sub Clavis redactionis….',
+  'Dit is geen redacteurskaart.': 'Haec non est charta redactoris.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Haec charta ex versione OciDeck recentiore est. OciDeck renova.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Charta aliquid continet quod non licet. Redactorem roga ut novam chartam det.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Hoc vestigium digitale cum charta non congruit: charta mutata est vel non ab eo est quem putas. Redactorem iterum roga ut vestigium digitale et chartam det.',
+  'Dit is je eigen kaart.': 'Haec est charta tua.',
+  'Deze redacteur staat er al.': 'Hic redactor iam in manu est.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Manus plena est: fascis ad summum sexaginta quattuor ordinatores portat, te incluso.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Fasciculus team.json in fasciculo operis legi non potest. Nihil mutatum est; eum repara vel dele.',
+  'Het team kon niet worden opgeslagen.': 'Manus servari non potuit.',
+  'Deze redacteur staat niet meer in het team.':
+      'Hic redactor iam in manu non est.',
+  'Naast jou in de bundel: {namen}.': 'Praeter te in fasce: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Primum clavem recuperationis tuam sub Clavis redactionis… proba, vel secundum redactorem sub Manus… adde. Sine via reditus omnia missa illegibilia fiunt si hoc instrumentum frangitur.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Fasciculus team.json in fasciculo operis legi non potest. Nihil subscribitur.',
+  'Redacteurskaart maken…': 'Chartam redactoris creare…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Charta redactoris dominus formae te ad fascem addit, ut et tu missa aperire possis. Charta per epistulam electronicam mitti potest.',
+  'Jouw naam op de kaart': 'Nomen tuum in charta',
+  'Kaart maken': 'Chartam creare',
+  'Kaart kopiëren': 'Chartam transcribere',
+  'Vingerafdruk van de kaart': 'Vestigium digitale chartae',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Hoc vestigium digitale domino alia via da quam per chartam, exempli gratia telephono. Id rursus scribit antequam te addat.',
+  'Verzegeld opslaan…': 'Obsignatum servare…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Fasciculus cryptatus (.zip.age) quem solus ordinator aperire potest. Ad hoc fasciculum fascis et vestigium digitale ex invitatione necesse est.',
+  'Kies het bundelbestand van de organisator':
+      'Fasciculum fascis ordinatoris elige',
+  'Vingerafdruk van de organisator': 'Vestigium digitale ordinatoris',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Vestigium digitale ex invitatione scribe. De industria in fasciculo fascis non est: sic explorare potes unde veniat.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Hoc vestigium digitale non est. Ex 52 signis constat, plerumque in quaternis.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Hic fasciculus non est fascis quem OciDeck legere possit.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Haec forma vel hic fascis ex versione OciDeck recentiore est. OciDeck renova.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Vestigium digitale cum hoc fasce non congruit: forma non ab eo venit quem invitatio nominat. Vestigium digitale et fasciculum fascis proba.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Subscriptio fascis recta non est: mutatus est vel non ab eo est quem vestigium digitale nominat. Ordinatorem roga ut novum fascem det.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Hic fascis ad hanc formam non pertinet. Fasciculum fascis utere qui ad hanc ipsam formam pertinet.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Hic fascis exspiravit. Ordinatorem roga ut novum det.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Hic fascis vetustior est quam fascis quem antea ab hoc ordinatore accepisti. Ordinatorem roga ut recentissimum det.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Fascis aliquid continet quod non licet. Ordinatorem roga ut novum fascem det.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Haec forma clausa est: ultimus dies erat {datum}. Ordinatorem conveni.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Missum maius est quam ordinator permittit ({mb} MB). Imaginem remove vel minorem fac.',
+  'De inzending kon niet worden verzegeld.': 'Missum obsignari non potuit.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Obsignatum servatum est ut {naam}, solus aperire potest: {organisatoren}.',
+  'Bundel publiceren…': 'Fascem publicare…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Fascis est quod is qui implet de redactione vestra credit: ad quam clavem obsignet et ad quem textum pertineat. Iuxta formam servatur.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'In fasciculo operis nulla forma est cui fascis fieri possit.',
+  'Naam voor de invuller': 'Nomen pro eo qui implet',
+  'Geldig tot (jjjj-mm-dd)': 'Validus usque ad (aaaa-mm-dd)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Ultimus dies quo qui implet huic fasci credit. Non ante diem clausurae formae.',
+  'Bundel maken': 'Fascem creare',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Fascis creatus (numerus ordinis {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Vestigium digitale ei qui implet alia via da quam per fasciculum fascis, exempli gratia in invitatione. Qui solum fasciculum fascis habet, unde veniat explorare non potest.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Haec platea circulum clavium pro clave redactionis non habet; fascis hic subscribi non potest.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Nondum est clavis redactionis. Unam sub Clavis redactionis… crea antequam fascem publices.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Circulus clavium legi non potest. Nihil subscriptum est.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Clavis redactionis servata legi non potest. Eam sub Clavis redactionis… dele et ex clave recuperationis tua restitue.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Fascis huius formae in fasciculo operis legi non potest vel ad ceteros non pertinet. Ita numerus ordinis definiri non potest et nihil subscribitur. Proba: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Nomen inscribe ad summum octoginta litterarum.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Validus usque ad dies exstans esse debet, ut aaaa-mm-dd.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Validus usque ad non ante diem clausurae formae esse potest.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Fascis creari non potuit ({veld}). Vide num forma diem clausurae et tempus servandi validum nominet.',
+  'formulier': 'forma',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Fascis in fasciculo operis servari non potuit.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Crea et subscribe fascem cui qui implet de redactione vestra credit.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: fasciculus obsignatus apertus et importatus est.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: hic fasciculus obsignatus est, et haec platea circulum clavium pro clave redactionis non habet.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: hic fasciculus obsignatus est, et nondum est clavis redactionis qua aperiatur. Unam sub Clavis redactionis… crea, vel ex clave recuperationis tua restitue.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: hic fasciculus obsignatus est, et circulus clavium legi non potest. Nihil temptatum est.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: hic fasciculus obsignatus est, et clavis redactionis servata legi non potest. Eam sub Clavis redactionis… dele et ex clave recuperationis tua restitue.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: hic fasciculus pro clave redactionis tua obsignatus non est.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: hic fasciculus mutatus vel abscissus est et non aperietur.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: hic fasciculus maior est quam missum esse potest.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: clavis redactionis servata non est clavis qua OciDeck uti possit.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: non est fasciculus obsignatus quem OciDeck legere possit.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Fasciculus obsignatus (.zip.age) clave redactionis tua aperitur.',
+  'Herstelsleutel controleren': 'Clavem recuperationis probare',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Clavis redactionis creata est. Nunc clavem recuperationis scribe.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Circulus clavium clavem non accepit. Nihil creatum est.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Iam est clavis redactionis. Non tacta est.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Circulus clavium legi non potuit. Nihil praesumptum et nihil creatum est.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'In circulo clavium est aliquid quod clavis redactionis non est. Non superscriptum est.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Haec platea circulum clavium non habet.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Recte: clavis recuperationis probata est.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Haec clavis recuperationis valida est, sed non huius clavis redactionis.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Clavis recuperationis recta est, sed id servari non potuit.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nulla clavis redactionis est cum qua comparetur.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Haec non est clavis recuperationis clavis redactionis.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Mendum scribendi est: summa probationis non congruit.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Haec clavis recuperationis ex versione recentiore OciDeck est.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Haec clavis recuperationis ad aliud facta est.',
+  'Hersteld uit de herstelsleutel.': 'Ex clave recuperationis restituta.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Circulus clavium clavem non accepit. Nihil restitutum est.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Clavem redactionis ut fasciculum clavis age servare',
+  'Het bestand kon niet worden opgeslagen.': 'Fasciculus servari non potuit.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Servatum ut {pad}. Quicumque hunc fasciculum habet, omnia aperire potest.',
+  'Redactiesleutel verwijderd.': 'Clavis redactionis deleta est.',
+  'Redactiesleutel': 'Clavis redactionis',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Haec platea circulum clavium non habet. Clavis redactionis hic servari non potest; applicatione scrinii utere.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Circulus clavium legi non potuit (clausus aut aditus negatus). Nihil praesumptum et nihil creatum est.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'In circulo clavium est aliquid quod clavis redactionis non est. Non superscriptum est. Dele id et clavem ex clave recuperationis tuae restitue.',
+  'Redactiesleutel verwijderen…': 'Clavem redactionis delere…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Clavis redactionis missa obsignata aperit et fasciculos formarum tuarum subscribit. In circulo clavium huius systematis operativi est. Si omnes claves redactionis amittis, omnia missa nondum recepta illegibilia fiunt: hoc est pretium servi qui nihil legere potest.',
+  'Redactiesleutel aanmaken': 'Clavem redactionis creare',
+  'Herstellen uit herstelsleutel…': 'Ex clave recuperationis restituere…',
+  'Vingerafdruk': 'Vestigium digitale',
+  'Ontvanger (age)': 'Receptor (age)',
+  'Aangemaakt op {datum}.': 'Creata die {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Clavis recuperationis probata est.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Clavis recuperationis nondum probata est: scribe eam et iterum inscribe.',
+  'Herstelsleutel tonen…': 'Clavem recuperationis ostendere…',
+  'Vingerafdruk kopiëren': 'Vestigium digitale exscribere',
+  'Exporteren als age-sleutelbestand…': 'Ut fasciculum clavis age exportare…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Hanc clavem recuperationis scribe et in loco tuto serva, extra hoc instrumentum. Quicumque eam habet, omnia missa aperire et fasciculos vestro nomine subscribere potest. Si hoc instrumentum amittis, id solum manet.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Clavem recuperationis hic iterum inscribe',
+  'Later': 'Postea',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Clavem recuperationis inscribe aut insere. Quod inseris in circulo clavium ut clavis redactionis ponitur; nihil superscribitur.',
+  'Herstelsleutel': 'Clavis recuperationis',
+  'Redactiesleutel verwijderen': 'Clavem redactionis delere',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Clavis ex circulo clavium delebitur et nisi ex clave recuperationis redire non potest. Si eam non habes, missa huic clavi soli obsignata in perpetuum illegibilia fiunt.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'Clavis quae missa obsignata aperit et fasciculos subscribit.',
+  'Redactiesleutel…': 'Clavis redactionis…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Exemplar operis abiectum est. Quod advenit iterum aestimatur.',
+  'Er is geen werkkopie.': 'Nullum exemplar operis est.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Exemplar operis abici non potuit.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Exemplar operis delet. Quod advenit manet et iterum aestimatur.',
+  'Werkkopie weggooien…': 'Exemplar operis abicere…',
+  'Werkkopie weggooien': 'Exemplar operis abicere',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Exemplar operis cum emendationibus deletur nec recuperari potest. Quod advenit manet et iterum aestimatur. Si exemplar operis adhuc in tabula apertum est, eam prius claude.',
+  'Weggooien': 'Abicere',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Haec missio revocata est et ideo in nullum caput venit.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Haec missio legi non potest, aut forma pro qua missa est in fasciculo operis non est.',
+  'Het controledocument kon niet worden geschreven.':
+      'Documentum recognitionis scribi non potuit.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Tuum munus pro libro: quaeso recognosce',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Hic est tuus contributus ut in libro apparebit (vide adiunctum). Estne omnia recta? Responde ‘convenit’ aut cum correctionibus ante {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Epistula parata est in programmate epistularum tuo. Adiunge PDF et mitte.',
+  'Controle door de maker…': 'Recognitio ab auctore…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Documentum recognitionis est caput huius unius missionis. Exporta id ut PDF (profilum plenum elige), adiunge PDF epistulae et mitte. Si auctor ‘convenit’ respondet, statum ipse in maker-approved muta: responsum illud etiam confirmat contributum vere ab hac persona venire.',
+  'Controledocument maken en openen':
+      'Documentum recognitionis creare et aperire',
+  'E-mailadres van de maker': 'Inscriptio epistularis auctoris',
+  'Antwoord vóór (jjjj-mm-dd)': 'Responde ante (aaaa-mm-dd)',
+  'Mail schrijven': 'Epistulam scribere',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Haec forma statum maker-check-sent non novit, itaque hic poni non potest.',
+  'Controle verstuurd': 'Recognitio missa',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Caput huius missionis creat et epistulam parat qua auctor id recognoscit.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Haec missio in indice non est. Overview.md repara et iterum conare.',
+  'Kies het hoofdstuksjabloon': 'Exemplar capitis eligere',
+  'Kies eerst een hoofdstuksjabloon.': 'Primum exemplar capitis elige.',
+  'Kies minstens één status.': 'Saltem unum statum elige.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Liber compositus. Capita: {n}. Imagines: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Revocata et ideo omissa: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Praetermissa (alia versio vel quae legi non possunt): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Imagines quae in fasciculo operis deerant: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'In nomine litteras, numeros, lineolas et lineolas infimas tantum adhibe (ad summum 64 signa).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Liber hoc nomine iam exstat. Aliud nomen elige.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Exemplar campos nominat quos forma non habet: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nihil est quod in librum ponatur: nulla missio cum statu electo. Revocata: {w}; praetermissa: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Index legi non potest. Overview.md repara.',
+  'Het boek kon niet worden geschreven.': 'Liber scribi non potuit.',
+  'Boek samenstellen…': 'Librum componere…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Liber in fasciculum book fasciculi operis ponitur et manet documentum commune quod postea ipse recensere potes.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'In fasciculo operis nulla forma utilis est.',
+  'Formulier': 'Forma',
+  'Hoofdstuksjabloon': 'Exemplar capitis',
+  'Nog geen sjabloon gekozen.': 'Nondum exemplar electum est.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'In exemplari {veld-id} responsum illius campi significat.',
+  'Hoofdstuksjabloon kiezen…': 'Exemplar capitis eligere…',
+  'Welke inzendingen?': 'Quae missa?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Solum missa cum uno ex his statibus in librum veniunt. Missa revocata semper excluduntur.',
+  'Ordenen op': 'Ordinare secundum',
+  'Groeperen op': 'Congregare secundum',
+  'Naam van het boek': 'Nomen libri',
+  'Boek openen': 'Librum aperire',
+  'Samenstellen': 'Componere',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Exemplar operis creari non potuit.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Exemplar missi aperit ad emendandum. Quod advenit immutatum manet.',
+  'Werkkopie openen': 'Exemplar operis aperire',
+  'Status gewijzigd naar {status}.': 'Status mutatus in {status}.',
+  'Intrekking opgeslagen.': 'Revocatio servata est.',
+  'Intrekking ongedaan gemaakt.': 'Revocatio infecta facta est.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Missum deletum; monumentum manet.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Missum deletum, sed index renovari non potuit. Overview.md manu muta.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Missum in fasciculo operis inventum non est.',
+  'De inzending kon niet worden verwijderd.': 'Missum deleri non potuit.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Index legi non potest. Repara overview.md; nihil mutatum est.',
+  'Het register kon niet worden bijgewerkt.': 'Index renovari non potuit.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Haec mutatio fieri non potuit: missum in indice non est.',
+  'Status wijzigen': 'Statum mutare',
+  'Intrekking ongedaan maken': 'Revocationem infectam facere',
+  'Intrekken…': 'Revocare…',
+  'Verwijderen…': 'Delere…',
+  'Inzending intrekken': 'Missum revocare',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Diem inscribe quo qui misit missum revocavit. Missum revocatum numquam in librum venit.',
+  'Dag (jjjj-mm-dd)': 'Dies (aaaa-mm-dd)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Dies invalidus. Utere annus-mensis-dies, exempli gratia {voorbeeld}.',
+  'Inzending verwijderen': 'Missum delere',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Responsa, exemplar operis et imagines huius missi ex fasciculo operis delentur. Tantum monumentum minimum manet: numerus, dies acceptionis et consensus, et status. Hoc infectum fieri non potest.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Manet etiam quod formula antea nuntiavit: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Aliquid in hoc missu non recte se habet.',
+  'Verplicht, maar leeg gelaten.': 'Necessarium, sed vacuum relictum.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} verba; minimum {min} necessaria.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} verba; maximum {max} permissa.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} litterae; minimum {min} necessariae.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} litterae; maximum {max} permissae.',
+  '“{value}” staat niet in de lijst met opties.':
+      '“{value}” in indice optionum non est.',
+  '“{value}” is geen getal.': '“{value}” numerus non est.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '“{value}” non est dies in forma annus-mensis-dies.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Imago {actual} pixelorum lata; {min} petita.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Fasciculus imaginis in missu deest.',
+  'De beschrijving van de foto ontbreekt.': 'Descriptio imaginis deest.',
+  'De maker van de foto ontbreekt.': 'Auctor imaginis deest.',
+  'De foto is niet gecontroleerd.': 'Imago non probata est.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Imago HEIC: non probata nec purgata; locum continere potest.',
+  'Toestemming niet gegeven.': 'Consensus non datus.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Responsum lineam continet quae signo regendi formulae similis est.',
+  'Het antwoord bevat HTML.': 'Responsum HTML continet.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Responsum truncum codicis non clausum continet.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Responsum imaginem nominat quae ad hoc missum non pertinet.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Responsum nexum continet qui non permittitur.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Haec formula aut haec versio in fasciculo operis non est.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'Qui misit cum alio formulae textu quam edito laboravit.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Consensus in manifesto cum formula edita non congruit.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Textus formulae extra responsa mutatus est.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Textus formulae ad hunc campum mutatus est.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Hic campus in formula edita non exstat.',
+  'Dit veld ontbreekt in de inzending.': 'Hic campus in missu deest.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Missum versionis {submission}; edita est versio {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Formula recentiorem versionem OciDeck requirit.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Formula edita in fasciculo operis usui non est.',
+  'De inzending hoort bij een ander formulier.':
+      'Missum ad aliam formulam pertinet.',
+  'De opbouw van de inzending is beschadigd.': 'Structura missi laesa est.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Index legi non potest. Repara overview.md; missa infra sine datis indicis ostenduntur.',
+  'Nog geen inzendingen.': 'Nondum ulla missa.',
+  'Om na te lopen': 'Recognoscendum',
+  'Verwijderd': 'Deletum',
+  'Zonder regel in het register': 'Sine linea in indice',
+  'Ontvangen {datum}': 'Acceptum {datum}',
+  'Ingetrokken {datum}': 'Revocatum {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Contentum huius missi deletum est; tantum monumentum manet.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Hoc missum legi non potest. Fasciculos in fasciculo operis inspice.',
+  'Beoordeeld tegen {formulier}.': 'Aestimatum contra {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Aestimatio de exemplari operis est (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nulla puncta recognoscenda.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Imagines quas nullum responsum nominat: {n}.',
+  'Inzendingen': 'Missa',
+  'Werkmap': 'Fasciculus operis',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Nondum fasciculus operis electus est. Fasciculum elige in quo missa et index servabuntur.',
+  'Werkmap kiezen…': 'Fasciculum operis eligere…',
+  'Kies de werkmap voor inzendingen': 'Fasciculum operis pro missis elige',
+  'Formulieren': 'Formulae',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Nondum ulla formula addita est. Formulam adde ut eam edidisti: missum contra eam probatur.',
+  'Formulier toevoegen…': 'Formulam addere…',
+  'Kies het formulier om toe te voegen': 'Formulam addendam elige',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Hic fasciculus non est formula quae edi possit.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Haec formula iam adest cum alio textu. Alius textus est nova versio: formulae numerum versionis altiorem da.',
+  'Formulier toegevoegd: {naam}.': 'Formula addita: {naam}.',
+  'Dit formulier stond er al.': 'Haec formula iam aderat.',
+  'Het formulier kon niet worden opgeslagen.': 'Formula servari non potuit.',
+  'Inzendingen in de werkmap: {n}': 'Missa in fasciculo operis: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Zip simplex in itinere non cryptatur.',
+  'Pakketten binnenhalen…': 'Fasciculos importare…',
+  'Kies de pakketten om binnen te halen': 'Fasciculos importandos elige',
+  'Register openen': 'Indicem aperire',
+  '{naam}: binnengehaald.': '{naam}: importatum.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importatum, sed sunt puncta recognoscenda.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importatum, sed index renovari non potuit. Inspice overview.md.',
+  '{naam}: stond er al.': '{naam}: iam aderat.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: non est fasciculus missi quem OciDeck legere possit.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: haec formula addita non est, aut non in hac versione. Formulam prius adde.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: in fasciculo operis servari non potuit.',
+  'Formulieren en inzendingen': 'Formulae et missa',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Missa formulae importa, contra formulam editam proba et cum indice serva. Formulam implere etiam licet cum hoc exstinctum est. Sponte exstinctum.',
+  'Inzending opslaan als zip…': 'Missum ut zip servare…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Fasciculus zip cum responsis et imaginibus tuis, ad ordinatorem epistula electronica mittendus.',
+  'Inzending opgeslagen als {naam}.': 'Missum servatum est ut {naam}.',
+  'Kies het formulier zoals je het kreeg': 'Formulam elige ut accepisti',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Haec non est formula ad quam responsa tua pertinent. Fasciculum elige quem ab ordinatore accepisti.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Imago legi non potuit: {pad}. Iterum adde.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Missum in fasciculum non capitur: nimis multae imagines, aut imago nimis magna.',
+  'De inzending kon niet worden opgeslagen.': 'Missum servari non potuit.',
+  'Inzending opslaan': 'Missum servare',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Data locorum ex hac imagine remota sunt.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Haec imago addi non potuit. Fasciculum JPEG, PNG, WebP vel HEIC imaginis elige.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Primum documentum serva ut imagines addas.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'OciDeck hanc limam in novum documentum inferre potest.',
+  'Kies een datum': 'Elige diem',
+  'Anders, namelijk:': 'Aliud, scilicet:',
+  'Punt {n}': 'Punctum {n}',
+  'Punt {n} verwijderen': 'Remove punctum {n}',
+  'Rij {n} verwijderen': 'Remove lineam {n}',
+  'Foto {n} verwijderen': 'Remove imaginem {n}',
+  'Wat is er te zien op de foto?': 'Quid in imagine videtur?',
+  'Van wie is de foto?': 'Cuius est imago?',
+  'Foto toevoegen': 'Imaginem adde',
+  'Verplicht': 'Necessarium',
+  'Alles is ingevuld.': 'Omnia completa sunt.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Adhuc {n} agenda sunt antequam mittere possis:',
+  'klaar': 'peractum',
+  '{n} open': '{n} aperta',
+  'Dit formulier kan niet worden ingevuld.': 'Haec forma impleri non potest.',
+  'Naar de bron': 'Ad fontem',
+  'Woorden': 'Verba',
+  'Tekens': 'Litterae',
+  'Keuzes': 'Optiones',
+  'Rijen': 'Lineae',
+  'Foto’s': 'Imagines',
+  '{eenheid}: {actual} (minimaal {min})': '{eenheid}: {actual} (minimum {min})',
+  '{eenheid}: {actual} (maximaal {max})': '{eenheid}: {actual} (maximum {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (minimum {min}, maximum {max})',
+  'Invullen': 'Imple',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Aliquid in hac forma non recte se habet. Cum eo qui eam fecit communica.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Hic ager necessarius est. Imple eum ut mittere possis.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      '{actual} verba scripsisti; saltem {min} necessaria sunt.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} verba scripsisti; non plus quam {max} permittuntur.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      '{actual} litteras scripsisti; saltem {min} necessariae sunt.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} litteras scripsisti; non plus quam {max} permittuntur.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '«{value}» in indice non est. Unam ex optionibus elige.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '«{value}» numerus non est. Numeris tantum utere, si opus est cum comma vel puncto pro decimalibus.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Haec imago {actual} pixela lata est; hic {min} petuntur. Verisimiliter minor facta est cum per applicationem nuntiorum missa est. Si adhuc exemplar originale habes, eo utere. Sin minus, nihilominus mitte: ordo tecum communicabit.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Haec imago {actual} MB est; maximum est {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Contentum huius fasciculi cum genere fasciculi non congruit.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Hoc genus fasciculi hic non permittitur.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Fasciculus huius imaginis iam inveniri non potest. Imaginem iterum adde.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Brevi sententia describe quid in imagine videatur.',
+  'Geef aan van wie de foto is.': 'Indica cuius sit imago.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Haec imago nondum examinata est. Paulisper exspecta vel iterum adde.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Haec imago fasciculus HEIC est. OciDeck eum hic neque examinare neque purgare potest; itaque sicut est mittitur. Fieri potest ut contineat ubi imago capta sit. Si id communicare non vis, in optionibus camerae «Maxime compatibile» elige vel imaginem ut JPEG communica et iterum adde.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'In hac imagine {actual} facies sunt; exspectabantur {expected}. Haec monitio tantum est.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Signum appone ut consentias; sine consensu mittere non potes.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Haec forma recentiorem OciDeck versionem requirit. Applicationem renova ut eam impleas.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Aliquid in ipsa forma casu mutatum est. Formam restitue; responsa tua manent.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Haec linea similis est codici regendi formae et in responso poni non potest. Muta eam.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'HTML in responso non permittitur. Textu simplici et forma simplici utere.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Truncus codicis non clausus est. Claude eum cum ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'In responso tantum imagines poni possunt quas in hac forma addis; imago ex interrete non potest.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'In responso tantum nexus qui cum https:// incipiunt et inscriptiones electronicae permittuntur.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Hic fasciculus alia versione formae factus est (versio {submission}; nunc valet versio {published}). Responsa tua inspice.',
+  'Punt {item}: {bericht}': 'Punctum {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Nunc sunt {actual}; inter {min} et {max} esse debent.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Nunc sunt {actual}; non plus quam {max} esse possunt.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Nunc sunt {actual}; saltem {min} esse debent.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Numerus multiplum numeri {step} esse debet.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Numerus inter {min} et {max} esse debet.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Numerus non plus quam {max} esse potest.',
+  'Het getal moet minstens {min} zijn.': 'Numerus saltem {min} esse debet.',
+  'De datum moet op of na {min} liggen.': 'Dies {min} vel post eum esse debet.',
+  'De datum moet op of vóór {max} liggen.':
+      'Dies {max} vel ante eum esse debet.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '«{value}» dies non est. Diem scribe ut annus-mensis-dies, exempli gratia 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Haec inscriptio electronica non valet.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Haec inscriptio interretialis non valet. Incipe cum https://.',
+  'Dit is geen geldig telefoonnummer.': 'Hic numerus telephonicus non valet.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Hic codex postalis Nederlandicus non valet, ut 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Hic una tantum linea capit. Remove fines linearum.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Utere tantum capsulis huius quaestionis: una capsula pro optione.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Scribe quodque punctum in sua linea, cum lineola vel numero ante.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Tabula iam recta non est: lineam capitis serva ut erat et cuique lineae eundem columnarum numerum da.',
+  'Dezelfde foto staat hier twee keer.': 'Eadem imago hic bis apparet.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'In hunc agrum imagines tantum pertinent, non textus solutus.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Capsula consensus tui laesa est. Formam restitue.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Hoc responsum formam quae ad hanc quaestionem pertinet non habet.',
   'Downloaden…': 'Deprome…',
   'Afbeelding opgeslagen als': 'Imago servata ut',
   '{naam}: ingesteld': '{naam}: institutus',

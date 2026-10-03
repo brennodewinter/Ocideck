@@ -1657,6 +1657,610 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Team…': 'Foireann…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'Na heagarthóirí seachas tú atá i ngach bundle, ionas gur féidir leo siúd na haighneachtaí a oscailt freisin. Cuireann tú duine leis lena chárta eagarthóra agus clóscríobhann tú méarlorg an chárta sin arís.',
+  'Er is nog niemand naast jou.': 'Níl aon duine ann fós seachas tú.',
+  'Plak de kaart van de redacteur': 'Greamaigh cárta an eagarthóra',
+  'Kaart controleren': 'Seiceáil an chárta',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      'Cárta {naam}. Clóscríobh méarlorg an chárta seo a thug {naam} duit ar bhealach eile, mar shampla ar an teileafón.',
+  'Redacteur verwijderen': 'Bain eagarthóir',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Bain {naam} den fhoireann? Fanann na bundles atá foilsithe agat cheana mar atá siad go dtí go bhfoilseoidh tú arís; fanann an méid atá séalaithe cheana do {naam} inléite don duine sin.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      'Cuireadh {naam} leis. Foilsigh an bundle arís chun {naam} a áireamh.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      'Baineadh {naam}. Foilsigh an bundle arís chun {naam} a fhágáil amach.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Cruthaigh d’eochair eagarthóireachta féin ar dtús faoi Eochair eagarthóireachta….',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'Ní féidir d’eochair eagarthóireachta a úsáid. Féach faoi Eochair eagarthóireachta….',
+  'Dit is geen redacteurskaart.': 'Ní cárta eagarthóra é seo.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Is ó leagan níos nuaí de OciDeck an chárta seo. Nuashonraigh OciDeck.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'Tá rud éigin sa chárta nach gceadaítear. Iarr cárta nua ar an eagarthóir.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ní oireann an méarlorg seo don chárta: athraíodh an chárta nó ní ón té a cheapann tú é. Iarr an méarlorg agus an chárta arís ar an eagarthóir.',
+  'Dit is je eigen kaart.': 'Is é seo do chárta féin.',
+  'Deze redacteur staat er al.': 'Tá an t-eagarthóir seo san fhoireann cheana.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'Tá an fhoireann lán: iompraíonn bundle 64 eagraí ar a mhéad, tusa san áireamh.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'Ní féidir an comhad team.json san fhillteán oibre a léamh. Níor athraíodh tada; deisigh nó scrios é.',
+  'Het team kon niet worden opgeslagen.':
+      'Níorbh fhéidir an fhoireann a shábháil.',
+  'Deze redacteur staat niet meer in het team.':
+      'Níl an t-eagarthóir seo san fhoireann a thuilleadh.',
+  'Naast jou in de bundel: {namen}.': 'Seachas tú sa bundle: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Seiceáil d’eochair athshlánaithe ar dtús faoi Eochair eagarthóireachta…, nó cuir an dara heagarthóir leis faoi Foireann…. Gan bealach ar ais, éiríonn gach aighneacht do-léite má bhriseann an gléas seo.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'Ní féidir an comhad team.json san fhillteán oibre a léamh. Ní shínítear tada.',
+  'Redacteurskaart maken…': 'Cruthaigh cárta eagarthóra…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'Le cárta eagarthóra cuireann úinéir foirme thú leis an bundle, ionas gur féidir leatsa na haighneachtaí a oscailt freisin. Is féidir an chárta a sheoladh trí ríomhphost.',
+  'Jouw naam op de kaart': 'D’ainm ar an gcárta',
+  'Kaart maken': 'Cruthaigh cárta',
+  'Kaart kopiëren': 'Cóipeáil an chárta',
+  'Vingerafdruk van de kaart': 'Méarlorg na cárta',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Tabhair an méarlorg seo don úinéir ar bhealach eile seachas an chárta, mar shampla ar an teileafón. Clóscríobhann sé arís é sula gcuireann sé thú leis.',
+  'Verzegeld opslaan…': 'Sábháil séalaithe…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Comhad criptithe (.zip.age) nach féidir ach leis an eagraí a oscailt. Chuige sin tá comhad an bundle agus an méarlorg ón gcuireadh de dhíth ort.',
+  'Kies het bundelbestand van de organisator':
+      'Roghnaigh comhad bundle an eagraí',
+  'Vingerafdruk van de organisator': 'Méarlorg an eagraí',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Clóscríobh an méarlorg ón gcuireadh. Níl sé i gcomhad an bundle d’aon turas: ar an mbealach sin is féidir leat a sheiceáil cé uaidh a thagann sé.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Ní méarlorg é sin. Tá 52 carachtar ann, i ngrúpaí de cheathair de ghnáth.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Ní bundle é an comhad seo is féidir le OciDeck a léamh.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Is ó leagan níos nuaí de OciDeck an fhoirm seo nó an bundle seo. Nuashonraigh OciDeck.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Ní oireann an méarlorg don bundle seo: ní ón té a ainmníonn an cuireadh an fhoirm. Seiceáil an méarlorg agus comhad an bundle.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'Níl síniú an bundle ceart: athraíodh é nó ní ón té a ainmníonn an méarlorg é. Iarr bundle nua ar an eagraí.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Ní bhaineann an bundle seo leis an bhfoirm seo. Úsáid comhad an bundle a bhaineann leis an bhfoirm seo go beacht.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Tá an bundle seo as feidhm. Iarr ceann nua ar an eagraí.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Tá an bundle seo níos sine ná bundle a fuair tú roimhe seo ón eagraí seo. Iarr an ceann is déanaí ar an eagraí.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'Tá rud éigin sa bundle nach gceadaítear. Iarr bundle nua ar an eagraí.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Tá an fhoirm seo dúnta: ba é {datum} an lá deireanach. Déan teagmháil leis an eagraí.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'Tá an aighneacht níos mó ná mar a cheadaíonn an t-eagraí ({mb} MB). Bain grianghraf amach nó laghdaigh ceann acu.',
+  'De inzending kon niet worden verzegeld.':
+      'Níorbh fhéidir an aighneacht a shéalú.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Sábháilte séalaithe mar {naam}, ní féidir ach le: {organisatoren} é a oscailt.',
+  'Bundel publiceren…': 'Foilsigh bundle…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'Is é an bundle an rud a chreideann an líontóir faoi bhur n-eagarthóireacht: cén eochair a shéalaíonn sé di agus cén téacs lena mbaineann sé. Stóráiltear é in aice leis an bhfoirm.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'Níl aon fhoirm san fhillteán oibre ar féidir bundle a dhéanamh di.',
+  'Naam voor de invuller': 'Ainm don líontóir',
+  'Geldig tot (jjjj-mm-dd)': 'Bailí go dtí (bbbb-mm-lll)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'An lá deireanach a chreideann an líontóir an bundle seo. Ní roimh lá deiridh na foirme.',
+  'Bundel maken': 'Cruthaigh bundle',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Cruthaíodh an bundle (sraithuimhir {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Tabhair an méarlorg don líontóir ar bhealach eile seachas comhad an bundle, mar shampla sa chuireadh. Ní féidir leis an té nach bhfuil aige ach comhad an bundle a sheiceáil cé uaidh a thagann sé.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Níl slabhra eochrach ag an ardán seo don eochair eagarthóireachta; ní féidir bundle a shíniú anseo.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Níl eochair eagarthóireachta ann fós. Cruthaigh ceann faoi Eochair eagarthóireachta… sula bhfoilsíonn tú bundle.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'Ní féidir an slabhra eochrach a léamh. Níor síníodh tada.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'Ní féidir an eochair eagarthóireachta stóráilte a léamh. Scrios faoi Eochair eagarthóireachta… í agus athchóirigh ó d’eochair athshlánaithe í.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Ní féidir bundle den fhoirm seo san fhillteán oibre a léamh nó ní bhaineann sé leis na cinn eile. Mar sin ní féidir an tsraithuimhir a chinneadh agus ní shínítear tada. Seiceáil: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Cuir isteach ainm nach faide ná 80 carachtar.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Caithfidh Bailí go dtí a bheith ina dháta atá ann, mar bbbb-mm-lll.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Ní fhéadfaidh Bailí go dtí a bheith roimh lá deiridh na foirme.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'Níorbh fhéidir an bundle a chruthú ({veld}). Seiceáil go n-ainmníonn an fhoirm lá deiridh agus tréimhse choinneála bhailí.',
+  'formulier': 'foirm',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'Níorbh fhéidir an bundle a stóráil san fhillteán oibre.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Cruthaigh agus sínigh an bundle a chreideann an líontóir faoi bhur n-eagarthóireacht.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: osclaíodh agus iompórtáladh an pacáiste séalaithe.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: tá an pacáiste seo séalaithe agus níl slabhra eochrach ag an ardán seo don eochair eagarthóireachta.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: tá an pacáiste seo séalaithe agus níl eochair eagarthóireachta ann fós chun é a oscailt. Cruthaigh ceann faoi Eochair eagarthóireachta… nó athchóirigh ó d’eochair athshlánaithe é.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: tá an pacáiste seo séalaithe agus ní féidir an slabhra eochrach a léamh. Níor triaileadh tada.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: tá an pacáiste seo séalaithe agus ní féidir an eochair eagarthóireachta stóráilte a léamh. Scrios faoi Eochair eagarthóireachta… í agus athchóirigh ó d’eochair athshlánaithe í.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: níor séalaíodh an pacáiste seo do d’eochair eagarthóireachta.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: athraíodh an pacáiste seo nó gearradh as é agus ní osclófar é.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: tá an pacáiste seo níos mó ná mar a féadfaidh aighneacht a bheith.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: ní eochair í an eochair eagarthóireachta stóráilte ar féidir le OciDeck úsáid a bhaint aisti.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: ní pacáiste séalaithe é a bhfuil OciDeck in ann a léamh.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'Osclaítear comhad séalaithe (.zip.age) le d’eochair eagarthóireachta.',
+  'Herstelsleutel controleren': 'Seiceáil an eochair athshlánaithe',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'Cruthaíodh eochair na heagarthóireachta. Scríobh síos an eochair athshlánaithe anois.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'Níor ghlac an slabhra eochrach leis an eochair. Níor cruthaíodh aon rud.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Tá eochair eagarthóireachta ann cheana. Níor baineadh léi.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'Níorbh fhéidir an slabhra eochrach a léamh. Níor glacadh le haon rud mar a bheith ann agus níor cruthaíodh aon rud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'Tá rud éigin sa slabhra eochrach nach eochair eagarthóireachta é. Níor forscríobhadh é.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Níl slabhra eochrach ag an ardán seo.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Ceart: seiceáladh an eochair athshlánaithe.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Is eochair athshlánaithe bhailí í seo, ach ní hí an ceann don eochair eagarthóireachta seo.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'Tá an eochair athshlánaithe ceart, ach níorbh fhéidir é sin a shábháil.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Níl aon eochair eagarthóireachta ann le comparáid a dhéanamh léi.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Ní eochair athshlánaithe eochrach eagarthóireachta í seo.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Tá earráid chlóscríofa ann: ní hionann an suim seiceála.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Tagann an eochair athshlánaithe seo ó leagan níos nuaí d\'OciDeck.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Rinneadh an eochair athshlánaithe seo do rud éigin eile.',
+  'Hersteld uit de herstelsleutel.': 'Athshlánaithe ón eochair athshlánaithe.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'Níor ghlac an slabhra eochrach leis an eochair. Níor athshlánaíodh aon rud.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'Sábháil eochair na heagarthóireachta mar chomhad eochrach age',
+  'Het bestand kon niet worden opgeslagen.':
+      'Níorbh fhéidir an comhad a shábháil.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Sábháilte mar {pad}. Is féidir le duine ar bith a bhfuil an comhad seo aige gach rud a oscailt.',
+  'Redactiesleutel verwijderd.': 'Scriosadh eochair na heagarthóireachta.',
+  'Redactiesleutel': 'Eochair eagarthóireachta',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Níl slabhra eochrach ag an ardán seo. Ní féidir eochair na heagarthóireachta a choinneáil anseo; úsáid an aip deisce.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'Níorbh fhéidir an slabhra eochrach a léamh (faoi ghlas, nó rochtain diúltaithe). Níor glacadh le haon rud mar a bheith ann agus níor cruthaíodh aon rud.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'Tá rud éigin sa slabhra eochrach nach eochair eagarthóireachta é. Níor forscríobhadh é. Scrios é agus athshlánaigh an eochair ó d\'eochair athshlánaithe.',
+  'Redactiesleutel verwijderen…': 'Scrios eochair na heagarthóireachta…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'Osclaíonn eochair eagarthóireachta na haighneachtaí séalaithe agus sínigh sí pacáistí do fhoirmeacha. Tá sí i slabhra eochrach an chórais oibriúcháin seo. Má chailleann tú eochracha uile na heagarthóireachta, éiríonn gach aighneacht nár tógadh go fóill do-léite: sin é costas freastalaí nach féidir leis rud ar bith a léamh.',
+  'Redactiesleutel aanmaken': 'Cruthaigh eochair eagarthóireachta',
+  'Herstellen uit herstelsleutel…': 'Athshlánaigh ó eochair athshlánaithe…',
+  'Vingerafdruk': 'Méarlorg',
+  'Ontvanger (age)': 'Faighteoir (age)',
+  'Aangemaakt op {datum}.': 'Cruthaithe ar {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'Seiceáladh an eochair athshlánaithe.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'Níor seiceáladh an eochair athshlánaithe go fóill: scríobh síos í agus clóscríobh arís í.',
+  'Herstelsleutel tonen…': 'Taispeáin an eochair athshlánaithe…',
+  'Vingerafdruk kopiëren': 'Cóipeáil an mhéarlorg',
+  'Exporteren als age-sleutelbestand…': 'Easpórtáil mar chomhad eochrach age…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Scríobh síos an eochair athshlánaithe seo agus coinnigh í in áit shábháilte, amach ón ngléas seo. Is féidir le duine ar bith a bhfuil sí aige gach aighneacht a oscailt agus pacáistí a shíniú in bhur n-ainm. Má chailleann tú an gléas seo, is é seo gach a mbeidh fágtha.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Clóscríobh an eochair athshlánaithe anseo arís',
+  'Later': 'Ar ball',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Clóscríobh nó greamaigh an eochair athshlánaithe. Cuirtear an méid a chuireann tú isteach sa slabhra eochrach mar eochair eagarthóireachta; ní fhorscríobhtar aon rud.',
+  'Herstelsleutel': 'Eochair athshlánaithe',
+  'Redactiesleutel verwijderen': 'Scrios eochair na heagarthóireachta',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'Scriostar an eochair as an slabhra eochrach agus ní féidir í a fháil ar ais ach ón eochair athshlánaithe. Mura bhfuil sí agat, fanann aighneachtaí a séalaíodh don eochair seo amháin do-léite go deo.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'An eochair a osclaíonn aighneachtaí séalaithe agus a shíníonn pacáistí.',
+  'Redactiesleutel…': 'Eochair eagarthóireachta…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'Caitheadh an cóip oibre amach. Déantar an rud a tháinig isteach a mheas arís.',
+  'Er is geen werkkopie.': 'Níl aon chóip oibre ann.',
+  'De werkkopie kon niet worden weggegooid.':
+      'Níorbh fhéidir an chóip oibre a chaitheamh amach.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Scriostar an chóip oibre. Fanann an rud a tháinig isteach agus déantar é a mheas arís.',
+  'Werkkopie weggooien…': 'Caith an chóip oibre amach…',
+  'Werkkopie weggooien': 'Caith an chóip oibre amach',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'Scriostar an chóip oibre leis na feabhsúcháin agus ní féidir í a fháil ar ais. Fanann an rud a tháinig isteach agus déantar é a mheas arís. Má tá an chóip oibre fós oscailte i gcluaisín, dún é sin ar dtús.',
+  'Weggooien': 'Caith amach',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Tarraingíodh siar an aighneacht seo agus dá bhrí sin ní théann sí isteach in aon chaibidil.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Ní féidir an aighneacht seo a léamh, nó níl an fhoirm ar cuireadh isteach uirthi sa bhfillteán oibre.',
+  'Het controledocument kon niet worden geschreven.':
+      'Níorbh fhéidir an doiciméad seiceála a scríobh.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'Do chuidiú leis an leabhar: seiceáil é, le do thoil',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Seo do chuidiú mar a bheidh sé sa leabhar (féach an ceangaltán). An bhfuil gach rud ceart? Freagair ‘aontaím’ nó le do cheartúcháin roimh {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'Tá an ríomhphost réidh i do chlár ríomhphoist. Ceangail an PDF leis agus seol é.',
+  'Controle door de maker…': 'Seiceáil ag an údar…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Is é an doiciméad seiceála caibidil na haighneachta amháin seo. Easpórtáil é mar PDF (roghnaigh an próifíl iomlán), ceangail an PDF leis an ríomhphost agus seol é. Má fhreagraíonn an t-údar ‘aontaím’, socraigh an stádas féin ar maker-approved: deimhníonn an freagra sin freisin gur ón duine seo a thagann an cuidiú i ndáiríre.',
+  'Controledocument maken en openen':
+      'Cruthaigh doiciméad seiceála agus oscail é',
+  'E-mailadres van de maker': 'Seoladh ríomhphoist an údair',
+  'Antwoord vóór (jjjj-mm-dd)': 'Freagair roimh (bbbb-mm-lll)',
+  'Mail schrijven': 'Scríobh ríomhphost',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ní aithníonn an fhoirm seo an stádas maker-check-sent, mar sin ní féidir é a shocrú anseo.',
+  'Controle verstuurd': 'Seiceáil seolta',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Cruthaíonn sé caibidil na haighneachta seo agus ullmhaíonn sé an ríomhphost lena seiceálann an t-údar í.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Níl an aighneacht seo sa chlár. Deisigh overview.md agus bain triail eile as.',
+  'Kies het hoofdstuksjabloon': 'Roghnaigh teimpléad an chaibidil',
+  'Kies eerst een hoofdstuksjabloon.': 'Roghnaigh teimpléad caibidil ar dtús.',
+  'Kies minstens één status.': 'Roghnaigh stádas amháin ar a laghad.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'Leabhar curtha le chéile. Caibidlí: {n}. Grianghraif: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.':
+      'Tarraingthe siar agus fágtha ar lár dá bhrí sin: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Scipeáilte (leagan eile nó dothuigthe): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'Grianghraif a bhí ar iarraidh ón bhfillteán oibre: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'San ainm, ná húsáid ach litreacha, digití, fleiscíní agus fo-línte (64 carachtar ar a mhéad).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Tá leabhar leis an ainm seo ann cheana. Roghnaigh ainm eile.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'Luann an teimpléad réimsí nach bhfuil ag an bhfoirm: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Níl aon rud le cur sa leabhar: níl aighneacht ar bith ann a bhfuil stádas roghnaithe aici. Tarraingthe siar: {w}; scipeáilte: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'Ní féidir an clár a léamh. Deisigh overview.md.',
+  'Het boek kon niet worden geschreven.':
+      'Níorbh fhéidir an leabhar a scríobh.',
+  'Boek samenstellen…': 'Cuir leabhar le chéile…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'Téann an leabhar isteach i bhfillteán book an fhillteáin oibre agus fanann sé ina ghnáthdoiciméad ar féidir leat a chur in eagar ina dhiaidh sin.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'Níl aon fhoirm inúsáidte sa bhfillteán oibre.',
+  'Formulier': 'Foirm',
+  'Hoofdstuksjabloon': 'Teimpléad caibidil',
+  'Nog geen sjabloon gekozen.': 'Níor roghnaíodh teimpléad go fóill.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'Sa teimpléad seasann {veld-id} don fhreagra ar an réimse sin.',
+  'Hoofdstuksjabloon kiezen…': 'Roghnaigh teimpléad caibidil…',
+  'Welke inzendingen?': 'Cé na haighneachtaí?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'Ní théann isteach sa leabhar ach aighneachtaí a bhfuil ceann de na stádais seo acu. Fanann aighneachtaí tarraingthe siar lasmuigh i gcónaí.',
+  'Ordenen op': 'Sórtáil de réir',
+  'Groeperen op': 'Grúpáil de réir',
+  'Naam van het boek': 'Ainm an leabhair',
+  'Boek openen': 'Oscail an leabhar',
+  'Samenstellen': 'Cuir le chéile',
+  'De werkkopie kon niet worden aangemaakt.':
+      'Níorbh fhéidir an chóip oibre a chruthú.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Osclaíonn sé cóip den aighneacht le feabhsú. Fanann an méid a tháinig gan athrú.',
+  'Werkkopie openen': 'Oscail an chóip oibre',
+  'Status gewijzigd naar {status}.': 'Athraíodh an stádas go {status}.',
+  'Intrekking opgeslagen.': 'Sábháladh an tarraingt siar.',
+  'Intrekking ongedaan gemaakt.': 'Cuireadh an tarraingt siar ar ceal.',
+  'Inzending verwijderd; het record blijft staan.':
+      'Scriosadh an aighneacht; fanann an taifead.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'Scriosadh an aighneacht, ach níorbh fhéidir an clár a nuashonrú. Cuir overview.md in eagar de láimh.',
+  'De inzending is niet gevonden in de werkmap.':
+      'Níor aimsíodh an aighneacht sa fhillteán oibre.',
+  'De inzending kon niet worden verwijderd.':
+      'Níorbh fhéidir an aighneacht a scriosadh.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'Ní féidir an clár a léamh. Deisigh overview.md; níor athraíodh aon rud.',
+  'Het register kon niet worden bijgewerkt.':
+      'Níorbh fhéidir an clár a nuashonrú.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Níorbh fhéidir an t-athrú seo a dhéanamh: níl an aighneacht sa chlár.',
+  'Status wijzigen': 'Athraigh an stádas',
+  'Intrekking ongedaan maken': 'Cealaigh an tarraingt siar',
+  'Intrekken…': 'Tarraing siar…',
+  'Verwijderen…': 'Scrios…',
+  'Inzending intrekken': 'Tarraing an aighneacht siar',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Cuir isteach an lá ar tharraing an seoltóir an aighneacht siar. Ní théann aighneacht tarraingthe siar isteach sa leabhar choíche.',
+  'Dag (jjjj-mm-dd)': 'Lá (bbbb-mm-ll)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Lá neamhbhailí. Úsáid bliain-mí-lá, mar shampla {voorbeeld}.',
+  'Inzending verwijderen': 'Scrios an aighneacht',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'Scriostar freagraí, cóip oibre agus grianghraif na haighneachta seo ón bhfillteán oibre. Ní fhanann ach taifead íosta: an uimhir, laethanta an fhaighte agus an toilithe, agus an stádas. Ní féidir é seo a chealú.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Fanann freisin an méid a d’fhógair an fhoirm roimh ré: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Tá rud éigin cearr leis an aighneacht seo.',
+  'Verplicht, maar leeg gelaten.': 'Riachtanach, ach fágadh folamh é.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} focal; ar a laghad {min} de dhíth.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} focal; ar a mhéad {max} ceadaithe.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} carachtar; ar a laghad {min} de dhíth.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} carachtar; ar a mhéad {max} ceadaithe.',
+  '“{value}” staat niet in de lijst met opties.':
+      'Níl “{value}” sa liosta roghanna.',
+  '“{value}” is geen getal.': 'Ní uimhir é “{value}”.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      'Ní dáta é “{value}” san fhoirm bliain-mí-lá.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      'Grianghraf {actual} picteilín ar leithead; iarradh {min}.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'Tá comhad an ghrianghraif ar iarraidh san aighneacht.',
+  'De beschrijving van de foto ontbreekt.':
+      'Tá cur síos an ghrianghraif ar iarraidh.',
+  'De maker van de foto ontbreekt.': 'Tá déantóir an ghrianghraif ar iarraidh.',
+  'De foto is niet gecontroleerd.': 'Níor seiceáladh an grianghraf.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'Grianghraf HEIC: gan seiceáil ná glanadh; d’fhéadfadh suíomh a bheith ann.',
+  'Toestemming niet gegeven.': 'Níor tugadh toiliú.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'Tá líne sa fhreagra a fhéachann cosúil le cód rialaithe na foirme.',
+  'Het antwoord bevat HTML.': 'Tá HTML sa fhreagra.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'Tá bloc cóid gan dúnadh sa fhreagra.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'Tagraíonn an freagra do íomhá nach mbaineann leis an aighneacht seo.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'Tá nasc sa fhreagra nach bhfuil ceadaithe.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Níl an fhoirm seo nó an leagan seo sa fhillteán oibre.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'D’oibrigh an seoltóir le téacs eile den fhoirm seachas an téacs foilsithe.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'Ní chomhoireann an toiliú sa léiriú leis an bhfoirm fhoilsithe.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Athraíodh téacs na foirme lasmuigh de na freagraí.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Athraíodh téacs na foirme ag an réimse seo.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Níl an réimse seo sa bhfoirm fhoilsithe.',
+  'Dit veld ontbreekt in de inzending.':
+      'Tá an réimse seo ar iarraidh san aighneacht.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'Aighneacht de leagan {submission}; is é leagan {published} atá foilsithe.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Teastaíonn leagan níos nuaí d’OciDeck ón bhfoirm.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'Níl an fhoirm fhoilsithe sa fhillteán oibre inúsáidte.',
+  'De inzending hoort bij een ander formulier.':
+      'Baineann an aighneacht le foirm eile.',
+  'De opbouw van de inzending is beschadigd.':
+      'Tá struchtúr na haighneachta damáistithe.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'Ní féidir an clár a léamh. Deisigh overview.md; léirítear na haighneachtaí thíos gan sonraí as an gclár.',
+  'Nog geen inzendingen.': 'Gan aighneachtaí fós.',
+  'Om na te lopen': 'Le hathbhreithniú',
+  'Verwijderd': 'Scriosta',
+  'Zonder regel in het register': 'Gan sraith sa chlár',
+  'Ontvangen {datum}': 'Faighte {datum}',
+  'Ingetrokken {datum}': 'Tarraingthe siar {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'Scriosadh ábhar na haighneachta seo; níl fágtha ach an taifead.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Ní féidir an aighneacht seo a léamh. Seiceáil na comhaid sa fhillteán oibre.',
+  'Beoordeeld tegen {formulier}.': 'Measúnaithe i gcomparáid le {formulier}.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Baineann an mheasúnacht leis an gcóip oibre (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Gan pointí le hathbhreithniú.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Grianghraif nach luann aon fhreagra: {n}.',
+  'Inzendingen': 'Aighneachtaí',
+  'Werkmap': 'Fillteán oibre',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Níor roghnaíodh fillteán oibre fós. Roghnaigh fillteán ina gccoimeádfar na haighneachtaí agus an clár.',
+  'Werkmap kiezen…': 'Roghnaigh fillteán oibre…',
+  'Kies de werkmap voor inzendingen':
+      'Roghnaigh an fillteán oibre le haghaidh aighneachtaí',
+  'Formulieren': 'Foirmeacha',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Níor cuireadh foirm leis fós. Cuir an fhoirm leis mar a d’fhoilsigh tú í: seiceáiltear aighneacht ina choinne.',
+  'Formulier toevoegen…': 'Cuir foirm leis…',
+  'Kies het formulier om toe te voegen': 'Roghnaigh an fhoirm le cur leis',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ní foirm é an comhad seo is féidir a fhoilsiú.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Tá an fhoirm seo ann cheana le téacs difriúil. Is leagan nua é téacs difriúil: tabhair uimhir leagain níos airde don fhoirm.',
+  'Formulier toegevoegd: {naam}.': 'Cuireadh foirm leis: {naam}.',
+  'Dit formulier stond er al.': 'Bhí an fhoirm seo ann cheana.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Níorbh fhéidir an fhoirm a shábháil.',
+  'Inzendingen in de werkmap: {n}': 'Aighneachtaí sa fhillteán oibre: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'Ní chriptítear zip simplí le linn aistrithe.',
+  'Pakketten binnenhalen…': 'Iompórtáil pacáistí…',
+  'Kies de pakketten om binnen te halen':
+      'Roghnaigh na pacáistí le hiompórtáil',
+  'Register openen': 'Oscail an clár',
+  '{naam}: binnengehaald.': '{naam}: iompórtáilte.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: iompórtáilte, ach tá pointí le hathbhreithniú.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: iompórtáilte, ach níorbh fhéidir an clár a nuashonrú. Seiceáil overview.md.',
+  '{naam}: stond er al.': '{naam}: bhí ann cheana.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: ní pacáiste aighneachta é a bhfuil OciDeck in ann a léamh.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: níor cuireadh an fhoirm seo leis, nó ní sa leagan seo. Cuir an fhoirm leis ar dtús.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: níorbh fhéidir a shábháil sa fhillteán oibre.',
+  'Formulieren en inzendingen': 'Foirmeacha agus aighneachtaí',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Iompórtáil aighneachtaí foirme, seiceáil iad i gcomparáid leis an bhfoirm fhoilsithe agus coimeád iad le clár. Oibríonn foirm a líonadh freisin nuair atá seo múchta. Múchta de réir réamhshocraithe.',
+  'Inzending opslaan als zip…': 'Sábháil an aighneacht mar zip…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Comhad zip le do chuid freagraí agus grianghraf, le seoladh trí ríomhphost chuig an eagraí.',
+  'Inzending opgeslagen als {naam}.': 'Sábháladh an aighneacht mar {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Roghnaigh an fhoirm mar a fuair tú í',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Ní hí seo an fhoirm lena mbaineann do chuid freagraí. Roghnaigh an comhad a fuair tú ón eagraí.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Níorbh fhéidir grianghraf a léamh: {pad}. Cuir arís é.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'Ní luíonn an aighneacht i bpacáiste amháin: an iomarca grianghraf, nó grianghraf atá rómhór.',
+  'De inzending kon niet worden opgeslagen.':
+      'Níorbh fhéidir an aighneacht a shábháil.',
+  'Inzending opslaan': 'Sábháil aighneacht',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'Baineadh na sonraí suímh den ghrianghraf seo.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Níorbh fhéidir an grianghraf seo a chur leis. Roghnaigh comhad JPEG, PNG, WebP nó HEIC de ghrianghraf.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Sábháil an doiciméad ar dtús chun grianghraif a chur leis.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Is féidir le OciDeck an comhad seo a allmhairiú mar dhoiciméad nua.',
+  'Kies een datum': 'Roghnaigh dáta',
+  'Anders, namelijk:': 'Eile, eadhon:',
+  'Punt {n}': 'Pointe {n}',
+  'Punt {n} verwijderen': 'Bain pointe {n}',
+  'Rij {n} verwijderen': 'Bain líne {n}',
+  'Foto {n} verwijderen': 'Bain grianghraf {n}',
+  'Wat is er te zien op de foto?': 'Cad atá le feiceáil sa ghrianghraf?',
+  'Van wie is de foto?': 'Cé leis an grianghraf?',
+  'Foto toevoegen': 'Cuir grianghraf leis',
+  'Verplicht': 'Riachtanach',
+  'Alles is ingevuld.': 'Tá gach rud líonta.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      '{n} le déanamh sula mbeidh tú in ann a sheoladh:',
+  'klaar': 'críochnaithe',
+  '{n} open': '{n} oscailte',
+  'Dit formulier kan niet worden ingevuld.':
+      'Ní féidir an fhoirm seo a líonadh.',
+  'Naar de bron': 'Chuig an bhfoinse',
+  'Woorden': 'Focail',
+  'Tekens': 'Carachtair',
+  'Keuzes': 'Roghanna',
+  'Rijen': 'Línte',
+  'Foto’s': 'Grianghraif',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} ({min} ar a laghad)',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} ({max} ar a mhéad)',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} ({min} ar a laghad, {max} ar a mhéad)',
+  'Invullen': 'Líon isteach',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Tá rud éigin cearr leis an bhfoirm seo. Téigh i dteagmháil leis an duine a rinne í.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Tá an réimse seo riachtanach. Líon isteach é chun a bheith in ann a sheoladh.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      'Scríobh tú {actual} focal; tá {min} ar a laghad ag teastáil.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      'Scríobh tú {actual} focal; ní cheadaítear níos mó ná {max}.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      'Scríobh tú {actual} carachtar; tá {min} ar a laghad ag teastáil.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      'Scríobh tú {actual} carachtar; ní cheadaítear níos mó ná {max}.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      'Níl “{value}” ar an liosta. Roghnaigh ceann de na roghanna.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      'Ní uimhir é “{value}”. Úsáid digití amháin, le camóg nó le pointe do na deachúlacha más gá.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Tá an grianghraf seo {actual} picteilín ar leithead; iarrtar {min} anseo. Is dócha gur laghdaíodh é nuair a seoladh trí aip teachtaireachtaí é. Má tá an bunleagan agat fós, úsáid sin. Mura bhfuil, seol mar sin féin é: déanfaidh an eagraíocht teagmháil leat.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Tá an grianghraf seo {actual} MB; is é {max} MB an uasmhéid.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'Ní chomhoireann ábhar an chomhaid seo lena chineál comhaid.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ní cheadaítear an cineál comhaid seo anseo.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'Ní féidir comhad an ghrianghraif seo a aimsiú a thuilleadh. Cuir an grianghraf leis arís.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Déan cur síos i bhfocal gearr ar a bhfuil le feiceáil sa ghrianghraf.',
+  'Geef aan van wie de foto is.': 'Luaigh cé leis an grianghraf.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Níor seiceáladh an grianghraf seo go fóill. Fan nóiméad nó cuir leis arís é.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Is comhad HEIC é an grianghraf seo. Ní féidir le OciDeck é a sheiceáil ná a ghlanadh anseo, mar sin seoltar mar atá sé é. D\'fhéadfadh sé a bheith ann cá ndearnadh an grianghraf. Mura mian leat é sin a roinnt, roghnaigh “Is comhoiriúnaí” i socruithe an cheamara nó roinn an grianghraf mar JPEG agus cuir leis arís é.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Tá {actual} aghaidh le feiceáil sa ghrianghraf seo; bhíothas ag súil le {expected}. Is meabhrúchán amháin é seo.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Cuir tic sa bhosca chun toiliú; gan toiliú ní féidir leat a sheoladh.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Teastaíonn leagan níos nuaí de OciDeck leis an bhfoirm seo. Nuashonraigh an aip chun í a líonadh.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Athraíodh rud éigin san fhoirm féin de thaisme. Athchóirigh an fhoirm; fanann do chuid freagraí.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Is cosúil leis an líne seo cód rialaithe na foirme agus ní cheadaítear í i bhfreagra. Athraigh í.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'Ní cheadaítear HTML i bhfreagra. Úsáid gnáth-théacs agus formáidiú simplí.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Níl bloc cóid dúnta. Dún é le ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'I bhfreagra, ní féidir ach grianghraif a chuireann tú leis san fhoirm seo a úsáid; ní féidir íomhá ón idirlíon.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'I bhfreagra, ní cheadaítear ach naisc a thosaíonn le https:// agus seoltaí r-phoist.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Rinneadh an comhad seo le leagan eile den fhoirm (leagan {submission}; is é leagan {published} atá i bhfeidhm anois). Seiceáil do chuid freagraí.',
+  'Punt {item}: {bericht}': 'Pointe {item}: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'Is é {actual} an líon anois; caithfidh sé a bheith idir {min} agus {max}.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'Is é {actual} an líon anois; féadfaidh sé a bheith {max} ar a mhéad.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'Is é {actual} an líon anois; caithfidh sé a bheith {min} ar a laghad.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'Caithfidh an uimhir a bheith ina iolraí de {step}.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'Caithfidh an uimhir a bheith idir {min} agus {max}.',
+  'Het getal mag hoogstens {max} zijn.':
+      'Féadfaidh an uimhir a bheith {max} ar a mhéad.',
+  'Het getal moet minstens {min} zijn.':
+      'Caithfidh an uimhir a bheith {min} ar a laghad.',
+  'De datum moet op of na {min} liggen.':
+      'Caithfidh an dáta a bheith {min} nó níos déanaí.',
+  'De datum moet op of vóór {max} liggen.':
+      'Caithfidh an dáta a bheith {max} nó níos luaithe.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      'Ní dáta é “{value}”. Scríobh an dáta mar bhliain-mí-lá, mar shampla 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Ní seoladh r-phoist bailí é seo.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Ní seoladh gréasáin bailí é seo. Tosaigh le https://.',
+  'Dit is geen geldig telefoonnummer.': 'Ní uimhir ghutháin bhailí í seo.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Ní cód poist bailí Ollannach é seo, mar 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Ní fhóireann ach líne amháin anseo. Bain na bristeacha líne.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Úsáid na boscaí ticéala den cheist seo amháin: bosca amháin in aghaidh an rogha.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Scríobh gach pointe ar a líne féin, le fleasc nó uimhir roimhe.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'Níl an tábla ceart a thuilleadh: fág an líne chinn mar a bhí agus tabhair an líon céanna colún do gach líne.',
+  'Dezelfde foto staat hier twee keer.':
+      'Tá an grianghraf céanna anseo faoi dhó.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Ní bhaineann ach grianghraif leis an réimse seo, gan téacs scaoilte.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'Tá bosca do thoilithe damáistithe. Athchóirigh an fhoirm.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Níl an cruth ag an bhfreagra seo a bhaineann leis an gceist seo.',
   'Downloaden…': 'Íoslódáil…',
   'Afbeelding opgeslagen als': 'Íomhá sábháilte mar',
   '{naam}: ingesteld': '{naam}: cumraithe',

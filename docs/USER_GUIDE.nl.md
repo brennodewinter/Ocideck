@@ -5408,9 +5408,20 @@ gewone Markdown.
 ### Een Word- of LibreOffice-document importeren
 
 **Document importeren…** (welkomstscherm, of de documentwerkbalk) opent een
-`.docx` of `.odt` als nieuw document: koppen, alinea's, lijsten, tabellen,
-vet/cursief en links worden Markdown. De import is best-effort en schrijft
-nooit naar het bronbestand. *(Toegevoegd 2026-09-18, #2101.)*
+`.docx`, `.odt`, `.xlsx`, `.ods` of `.csv` als nieuw document: koppen,
+alinea's, lijsten, tabellen, vet/cursief en links worden Markdown. De import
+is best-effort en schrijft nooit naar het bronbestand. *(Toegevoegd
+2026-09-18, #2101.)*
+
+**Spreadsheets.** Sinds 2026-10-02 (#2225) accepteert dezelfde actie ook
+`.xlsx`, `.ods` en `.csv`: elk werkblad wordt een kop met daaronder een
+GFM-tabel waarvan de eerste rij de kop is. Formules landen als de waarde die
+het blad het laatst berekende, datums als `yyyy-mm-dd`; afbeeldingen,
+grafieken, samengevoegde cellen en opmaak hebben geen Markdown-vorm en worden
+in de *niet overgenomen*-telling benoemd in plaats van stil weg te vallen.
+Een spreadsheet die op het venster valt neemt dezelfde route, en een
+spreadsheet die via **Openen** wordt gekozen krijgt een melding die de import
+aanbiedt in plaats van een doodlopende fout.
 
 **De huisstijl meenemen.** Sinds 2026-09-19 (#2119) leest de import ook wat het
 document aan huisstijl draagt, en als er iets te vinden is toont één dialoog —
@@ -5828,6 +5839,232 @@ aan een marker. **LaTeX** vertaalt de marker naar `\tableofcontents` en laat TeX
 de inhoudsopgave zelf opbouwen, mét paginanummers. De lijst wordt gemaakt ná de
 privacyprojectie, dus een kop die uit de geredigeerde kopie is gehaald, staat ook
 niet in de inhoudsopgave van die kopie.
+
+### Een formulier invullen
+
+Een document met een formulier erin (zie FILE_FORMAT §14.14) opent op het tabblad
+**Invullen** in plaats van in de bewerker. De pagina toont de titel, wat de auteur
+boven de vragen schreef, de notice over je gegevens en dan elke vraag met zijn eigen
+invoer: een regel voor een kort antwoord, een groter vak voor een verhaal,
+keuzerondjes voor één keuze, vinkjes voor meerdere, een lijst of tabel waaraan je
+rijen toevoegt, een datum met een kalender en een vakje dat je aanvinkt om
+toestemming te geven. Er zijn geen markers te zien.
+
+Onder elke vraag zegt de pagina wat er nog mis is, in gewone woorden en met wat je
+eraan kunt doen — "Je hebt 90 woorden geschreven; er zijn er minstens 150 nodig" —
+en telt ze mee terwijl je typt (**Woorden: 90 (minimaal 150, maximaal 300)**). Een
+verplichte vraag die je nog niet hebt aangeraakt is niet rood; dat wordt hij pas
+als je er geweest bent of er naartoe sprong. Bovenaan staat hoeveel er nog te doen
+is voor je kunt versturen, met per vraag een knop die je erheen brengt; elke
+sectiekop laat zien of hij klaar is.
+
+Een fotovraag heeft een knop **Foto toevoegen** zodra het document is opgeslagen. De foto
+wordt gezuiverd voor hij in het document komt — locatie, tijdstip en apparaat gaan eruit
+zonder de foto opnieuw te coderen, en de pagina zegt het wanneer locatiegegevens zijn
+verwijderd — en echt gecontroleerd, zodat een bestand dat alleen doet alsof het een foto
+is wordt geweigerd. Hij wordt bewaard als `images/<vraag>-<nummer>`, nooit onder zijn
+oorspronkelijke bestandsnaam. Waar het formulier erom vraagt geef je aan wat er op de foto
+staat en van wie hij is. Een HEIC-foto kan hier niet worden gecontroleerd of gezuiverd en
+wordt zoals hij is verstuurd; de pagina zegt dat.
+
+Alles wat je typt gaat direct in het document: alleen het stuk tussen de
+antwoordmarkers verandert, al het andere blijft byte voor byte zoals de auteur het
+schreef. **Ongedaan maken** draait per vraag een heel woord terug, en **Visueel** en
+**Bron** tonen hetzelfde document. Een formulier dat beschadigd is — een
+sluitmarker is weg — kan niet worden ingevuld; de pagina zegt waarom en biedt aan
+naar de bron te gaan.
+
+**Wil je het proberen?** In de repository staat een voorbeeldformulier in `examples/forms/`
+(`recept.nl.md`, `recept.en.md`): een receptinzending met elk soort vraag, ook foto's en een
+toestemmingsvakje. Kopieer het, open de kopie en hij opent op **Invullen**. Open eerst één keer het
+lege origineel (in dezelfde sessie), zodat OciDeck het gepubliceerde formulier onthoudt voor de
+volgende stap.
+
+**Je inzending opslaan.** Onderaan de pagina maakt **Inzending opslaan als zip…** één zipbestand
+met je antwoorden en foto's, dat je naar de organisator mailt. De knop is er altijd: staat er nog
+iets open, dan laat hij zien wat in plaats van op te slaan. In de zip zitten `submission.md` (je
+ingevulde formulier), de foto's en een klein `manifest.json` dat zegt bij welk formulier en welke
+versie de antwoorden horen en een controlegetal van elk bestand bevat, zodat de organisator het met
+`sha256sum` kan nalopen. Er staat niets over je apparaat in. De foto's worden onderweg nog een keer
+gezuiverd, ook als je zelf een bestand in de map `images` hebt gezet. De organisator heeft het
+formulier nodig zoals het gepubliceerd is: OciDeck onthoudt het vanaf het moment dat je het lege
+formulier opende; open je later een half ingevuld document opnieuw, dan vraagt het je het originele
+bestand te kiezen dat je kreeg. Een formulier waarvan de tekst buiten de antwoorden is veranderd
+wordt geweigerd.
+
+**Verzegeld opslaan.** Heeft de organisator je een **bundelbestand** gestuurd (`….bundle.json`, naast het
+formulier) en een **vingerafdruk** (in de uitnodiging, niet in het bundelbestand), dan maakt **Verzegeld opslaan…**
+een *versleuteld* bestand, `….zip.age`, dat alleen de organisator — iedereen die de bundel noemt — kan openen.
+OciDeck vraagt om het bundelbestand en dan om de vingerafdruk, en controleert dat de bundel echt van wie de
+uitnodiging zegt komt, precies voor dit formulier is, niet verlopen is en niet ouder is dan een bundel die je al van
+deze organisator kreeg. Pas dan wordt er iets verzegeld, en het bericht erna zegt wie het kan openen. OciDeck
+onthoudt de bundel en de vingerafdruk voor dit formulier tot je het sluit, zodat een tweede inzending niet opnieuw
+vraagt; het *hoogste volgnummer dat het zag* onthoudt het blijvend, zodat een organisator — of iemand ertussen — je
+geen oude bundel kan geven waarin nog iemand staat die is vertrokken. Het stopt, en zegt waarom, als: de
+vingerafdruk geen vingerafdruk is of niet bij de bundel past; de bundel is veranderd, bij een ander formulier of een
+andere tekst hoort, of is verlopen; het formulier is gesloten (de bundel noemt de laatste dag); of de inzending
+groter is dan de organisator toestaat. De gewone zip blijft ernaast bestaan. **Niet in de webversie:** de
+versleutelbibliotheek draait daar nog niet, dus daar wordt de knop niet getoond.
+
+### Inzendingen ontvangen (organisator)
+
+De andere kant van een formulier is ontvangen wat terugkomt. Dat is een optionele uitbreiding: zet
+**Instellingen → Uitbreidingen → Formulieren en inzendingen** aan (standaard uit; een formulier
+invullen heeft het nooit nodig). Het beginscherm heeft dan een knop **Inzendingen**.
+
+1. **Kies een werkmap** — een map waarin de inzendingen en het register komen te staan. OciDeck
+   onthoudt hem. Alles erin is een gewoon bestand dat je ook zonder OciDeck kunt lezen.
+2. **Voeg het formulier toe** zoals je het hebt gepubliceerd (*Formulier toevoegen…*, een `.md`).
+   Elke inzending wordt tegen *deze* tekst gehouden — nooit tegen de regels die de inzending zelf
+   meedraagt, dus een kopie van een invuller waarin een regel is verzwakt verandert niets. Een
+   gepubliceerde versie verandert niet meer: een andere tekst onder hetzelfde id en dezelfde versie
+   wordt geweigerd; verander je het formulier, verander dan het versienummer.
+3. **Haal pakketten binnen** (*Pakketten binnenhalen…*, de `.zip`- en `.zip.age`-bestanden die zijn aangekomen).
+   Een gewone zip is onderweg niet versleuteld; het venster zegt het. Een **verzegeld** bestand (`.zip.age`) wordt met je
+   redactiesleutel geopend (*Redactiesleutel…*, hieronder) en is daarna een gewoon pakket — de regel zegt *verzegeld
+   pakket geopend en binnengehaald*. Gaat het niet open, dan zegt de regel waarom en wordt er niets binnengehaald: er is
+   nog geen redactiesleutel (maak of herstel er een), de sleutelhanger is niet te lezen (er is niets geprobeerd), de
+   bewaarde sleutel is beschadigd, het pakket is voor andermans sleutel verzegeld, of het is veranderd of afgebroken.
+   Een bestand met een `age`-kop gaat nooit naar de zip-lezer, en een zip wordt de sleutel nooit voorgelegd. Elk bestand
+   krijgt een regel:
+   *binnengehaald*, *binnengehaald, maar er zijn punten om na te lopen*, *stond er al*, *geen
+   inzendpakket dat OciDeck kan lezen*, *formulier niet toegevoegd* (voeg het eerst toe) of *niet
+   opgeslagen*. Elke foto wordt opnieuw gezuiverd en echt gedecodeerd; een bestand dat zich alleen
+   als foto voordoet wordt aangemerkt.
+
+Onder de knoppen staat **elke inzending** in het venster, de nieuwste bovenaan: de kolommen die het
+formulier in `overview=` noemt (een naam, een gerecht) als titel, dan de status — *Om na te lopen* als er
+een fout in zit, *Verwijderd* als alleen het record er nog is, anders de status uit het formulier — de
+dag van ontvangst en, als die er is, de dag van intrekking. Klap een regel open om te zien **wat er mis
+mee is**, in gewone woorden over de inzender ("90 woorden; minstens 150 nodig"), elk punt onder de naam
+van zijn veld, met een pictogram voor de ernst, en tegen welk formulier en welke versie hij is beoordeeld.
+De punten worden elke keer opnieuw uitgerekend uit wat in de werkmap staat: verbeter de werkkopie
+(`submission.edit.md`) en het punt is weg, met de melding dat de beoordeling over de werkkopie gaat.
+
+Onder een opengeklapte inzending staan de **acties**:
+- **Status wijzigen** — een keuze uit de eigen lijst van het formulier (`received`, `edited`, …). Een status
+  die het formulier niet noemt kun je niet kiezen, en een verwijderde inzending heeft er geen.
+- **Intrekken…** — vul de dag in waarop de inzender hem introk (vandaag wordt voorgesteld). Een ingetrokken
+  inzending komt nooit in het boek. **Intrekking ongedaan maken** neemt het terug.
+- **Verwijderen…** — wist de antwoorden, de werkkopie en de foto's uit de werkmap. Eerst zegt een
+  bevestiging wat er wordt gewist en wat blijft: een **minimaal record** (het nummer, de dagen van ontvangst
+  en toestemming en de status — en de velden die het formulier vooraf in zijn notice aankondigde,
+  `keep-record`). Het kan niet ongedaan worden gemaakt. Is het register niet te lezen, dan wordt de inhoud
+  toch gewist en zegt OciDeck dat de rij met de hand moet worden aangepast.
+- **Werkkopie openen** — verbeter een inzending zonder aan te raken wat binnenkwam. OciDeck maakt
+  `submission.edit.md`, een letterlijke kopie, en opent *die* in een tabblad (de Inbox sluit). Herstel een
+  antwoord, laat een naam weg; het formulier opent op **Invullen** zoals elk formulier. Wat binnenkwam
+  (`submission.md`) wordt nooit geopend om te bewerken. Terug in de Inbox wordt de inzending opnieuw beoordeeld
+  op de werkkopie — een punt dat je herstelde is weg, en de regel zegt dat de beoordeling over de werkkopie
+  gaat — en kun je haar status verder zetten. Verander je in de werkkopie de eigen tekst van het formulier, dan
+  zegt de Inbox dat: dat is geen antwoord.
+- **Werkkopie weggooien…** (alleen als die er is) — terug naar wat binnenkwam. De bevestiging zegt wat gaat (de
+  werkkopie met haar verbeteringen, voorgoed) en wat blijft (wat binnenkwam, de foto's, het register), en vraagt de
+  werkkopie eerst te sluiten als ze nog in een tabblad openstaat, anders brengt opslaan haar terug. De inzending wordt
+  daarna weer beoordeeld op wat binnenkwam. Het werkt ook voor een werkkopie die niet te lezen is, en is daarmee de
+  uitweg eruit; nooit voor een verwijderde inzending.
+- **Boek samenstellen…** — maak van de goedgekeurde inzendingen één document. Kies het formulier, een
+  **hoofdstuksjabloon** (een gewoon `.md`-bestand waarin `{veld-id}` staat voor het antwoord op dat veld), welke
+  **statussen** erin komen (kent het formulier `maker-approved`, dan staat die al aan; anders staat er niets aan en
+  kies je zelf), eventueel één veld om op te **ordenen** en één om op te **groeperen**, en een naam. Het boek wordt
+  als **nieuw document** geschreven in de map `book` van de werkmap en nooit over een bestaand heen; de foto's worden
+  ernaast gekopieerd als `images/<id>-<veld>-<n>.<ext>`. Een antwoord gaat erin als de Markdown die het is, heel;
+  **een ingetrokken inzending komt er nooit in**; een sjabloon dat een veld noemt dat het formulier niet heeft wordt
+  geweigerd, met de naam van het veld. Waaruit het boek is gemaakt — welke inzendingen, onder welke toestemming, en per
+  foto haar vingerafdruk, haar maker en het bewijs waaronder ze er mag staan (de toestemming van de inzender, met de
+  hash van haar tekst) — staat ernaast in `<naam>.compile.json`, niet in de tekst. De rechtencontrole van afbeeldingen
+  kijkt nog niet naar de foto's van een document; dit legt het bewijs vast, zodat het er is als ze dat wel doet. De zin erna zegt hoeveel hoofdstukken
+  en foto's erin gingen en hoeveel inzendingen waren ingetrokken of overgeslagen (andere versie van het formulier, of
+  niet te lezen), en biedt aan het boek te openen.
+- **Controle door de maker…** — voordat een bijdrage verschijnt ziet de maker hoe ze eruit komt te zien en zegt of ze
+  klopt (FORM_INTAKE.md §7.4). Het is een **integriteitscontrole**: een anonieme inzender is niet te authenticeren,
+  dus alleen een antwoord vanaf het adres dat de inzending opgaf bevestigt dat de bijdrage van die persoon is. Drie
+  stappen, elk op zichzelf: **Controledocument maken en openen** maakt het hoofdstuk van *deze ene inzending* uit een
+  hoofdstuksjabloon — dezelfde maker als het boek, dus de maker ziet wat er gedrukt wordt — en opent het in een
+  tabblad (de Inbox sluit); je exporteert het met de gewone export als pdf (kies het **volledige** profiel: de inhoud
+  is die van de maker zelf). **Mail schrijven** opent een concept in je mailprogramma, aan het adres dat de maker in
+  het formulier opgaf (het eerste e-mailveld dat is ingevuld; je kunt een ander typen), met een korte tekst en de dag
+  waarop het antwoord er moet zijn (twee weken, aan te passen); de pdf voeg je zelf toe. **Controle verstuurd** zet
+  de status op `maker-check-sent`. Antwoordt de maker ‘akkoord’, zet de status dan zelf op `maker-approved` — het
+  samenstellen neemt standaard alleen die status. Het concept staat in de taal van je interface; pas het aan in je
+  mailprogramma. Niet voor een ingetrokken of verwijderde inzending, en **Controle verstuurd** alleen als het
+  formulier die status kent.
+Elke actie zegt hoe het ging. Een register dat niet te lezen is wordt nooit overschreven.
+
+**De redactiesleutel** (*Redactiesleutel…*, onderaan de Inbox; het opent ook zonder werkmap). Een redacteur heeft één
+sleutel die verzegelde inzendingen opent en de bundels van haar formulieren ondertekent (FORM_INTAKE.md §5.9). Hij
+staat in de sleutelhanger van je besturingssysteem; op het web is er dus niets aan te maken, en dan zegt het venster
+dat en biedt het niets aan.
+
+- **Redactiesleutel aanmaken** — een stap die je bewust zet, nooit stilletjes. Het venster zegt eerst wat de sleutel is
+  en wat verlies kost: elke nog niet binnengehaalde inzending die alleen voor hem was verzegeld is dan onleesbaar.
+  Direct daarna toont het de **herstelsleutel** — 109 tekens in groepjes van vier. Schrijf hem op en bewaar hem
+  ergens anders dan op dit apparaat.
+- **Herstelsleutel tonen…** en **Herstelsleutel controleren** — typ de herstelsleutel opnieuw in. Klopt hij, dan staat
+  de sleutel als *gecontroleerd*; dat is wat het publiceren van een formulier zal vragen. Een sleutel die je niet
+  controleerde zegt dat in het overzicht. Hoofdletters, spaties en streepjes maken niet uit, en `I`/`L` voor `1` en
+  `O` voor `0` worden vergeven; de herstelsleutel van een *samenwerkings*identiteit wordt als zodanig geweigerd.
+- **Herstellen uit herstelsleutel…** — alleen waar nog geen sleutel is. Een herstelde sleutel geldt als gecontroleerd:
+  wie hem intikt, heeft hem.
+- **Vingerafdruk kopiëren** — wat je een invuller langs een andere weg geeft dan het bundelbestand zelf.
+- **Exporteren als age-sleutelbestand…** — schrijft de sleutel als gewoon `age`-sleutelbestand (leesbaar voor het
+  commando `age`), zo gemaakt dat alleen jij het kunt lezen. Daarmee is een verzegeld bestand ook zonder OciDeck te
+  openen.
+- **Redacteurskaart maken…** — voor een **redacteur die erbij komt**: de eigenaar van het formulier zet je in de bundel,
+  zodat ook jij de inzendingen kunt openen. Typ je naam en kies **Kaart maken**: het venster toont de kaart (een
+  regel tekst om te **kopiëren** en te sturen, desnoods per mail) en de **vingerafdruk van de kaart**. Geef die
+  vingerafdruk de eigenaar **langs een andere weg dan de kaart** — aan de telefoon, in persoon. De eigenaar typt hem terug
+  voordat hij je toevoegt. De vingerafdruk dekt de hele kaart, niet alleen je ondertekeningssleutel: wie de kaart
+  draagt kan er dus geen ander adres in zetten om jouw inzendingen mee te openen.
+- **Redactiesleutel verwijderen…** — na een bevestiging die nog eens zegt wat er mee verdwijnt.
+
+**Een sleutel wordt nooit overschreven.** Als de sleutelhanger niet te lezen is zegt OciDeck dat en maakt niets aan —
+een sleutelhanger die niet antwoordt is geen lege sleutelhanger — en hetzelfde als wat er staat niet als sleutel te
+lezen is. Wat je intikt wordt in geen enkele melding herhaald.
+
+**Team…** (onderaan de Inbox; vraagt een werkmap). Het team van een formulier zijn de redacteurs **naast jou** die in elke
+bundel staan die jij ondertekent, zodat ook zij de inzendingen kunnen openen. Het staat in het bestand `team.json` in de
+werkmap, dus een gedeelde werkmap deelt zijn team. **Een redacteur toevoegen**: hij maakt een kaart (*Redacteurskaart
+maken…* in zijn venster *Redactiesleutel…*) en stuurt hem je. Plak hem en kies **Kaart controleren**: het venster toont
+alleen zijn naam. Typ dan **de vingerafdruk van de kaart** die hij je gaf *langs een andere weg dan de kaart* — aan de
+telefoon, in persoon — en kies **Toevoegen**. De vingerafdruk wordt je niet eerst getoond, met opzet: overtikken van het
+scherm controleert niets. Het stopt, en zegt waarom, als de vingerafdruk niet bij de kaart past (de kaart is veranderd of
+niet van wie je denkt), de kaart je eigen kaart is, de redacteur er al in staat, het team vol is (een bundel noemt hooguit
+64 organisatoren, jou meegeteld) of `team.json` niet te lezen is (het blijft met rust). **Verwijderen** vraagt eerst en zegt
+wat blijft: bundels die je eerder publiceerde blijven zoals ze zijn tot je opnieuw publiceert, en wat al voor die persoon
+is verzegeld blijft voor hem leesbaar. Publiceer na elke wijziging opnieuw: de bundel noemt jou eerst en daarna de
+redacteurs in de volgorde waarin ze zijn toegevoegd, en het venster zegt *Naast jou in de bundel: …*.
+
+**Publiceren vraagt een weg terug**: je herstelsleutel teruggetypt, *of* een tweede redacteur in het team.
+
+**Bundel publiceren…** (onder de formulieren in de Inbox). Een invuller neemt een formulier niet zomaar aan: de
+**bundel** zegt naar welke sleutel hij verzegelt en welke tekst erbij hoort, en is ondertekend met je
+redactiesleutel. Kies het formulier — **elke taal is een eigen tekst en krijgt een eigen bundel** —, de *naam voor de
+invuller* (de `controller` van het formulier, anders *Redactie*) en *geldig tot* (de sluitingsdag van het formulier,
+anders een jaar verder; nooit vóór de sluitingsdag). **Bundel maken** zet `template.<taal>.bundle.json` naast het
+formulier en toont de **vingerafdruk** van je ondertekeningssleutel. Geef die vingerafdruk de invuller **langs een
+andere weg dan het bundelbestand** — in de uitnodiging, bijvoorbeeld. De bundel alleen kan niet laten zien van wie hij
+komt; de vingerafdruk wel. Opnieuw publiceren geeft een bundel met het volgende volgnummer, over de oude heen; het
+nummer loopt door over de talen en versies van één formulier, want een invuller weigert een lager nummer dan hij zag.
+
+Er wordt niets ondertekend, en het venster zegt waarom, als: er geen bruikbare redactiesleutel is; er **geen weg terug
+is** — de herstelsleutel is niet teruggetypt en het team heeft geen tweede redacteur (zonder een van beide is elke inzending
+onleesbaar als dit apparaat stuk gaat — *Redactiesleutel…*, *Team…*); `team.json` niet te lezen is; de naam leeg is of langer dan 80 tekens; *geldig tot* geen datum is of vóór de sluitingsdag
+ligt; of een bundel van dit formulier in de werkmap niet te lezen is, waardoor het volgende volgnummer niet te weten
+is. Sluitingsdag en bewaartermijn komen uit het formulier zelf.
+
+Een inzending komt in `submissions/<id>/` te staan als `submission.md` en `manifest.json` byte voor
+byte zoals ze aankwamen plus de foto's, in één stap: een crash laat nooit een halve inzending achter,
+en een inzending die er al is wordt nooit overschreven. Eén met een fout komt er wel in, met de status
+`needs-fixing`, zodat je er in een kopie aan kunt werken; niets wordt stilzwijgend aangenomen of
+weggegooid.
+
+**Het register** (`overview.md`, *Register openen*) is één Markdown-tabel met een rij per inzending:
+het nummer, de kolommen die het formulier in `overview=` noemt, de dag van ontvangst, de status, de dag
+van toestemming, ingetrokken en bewaren-tot. Het is een gewoon document: bewerk het met de
+tabelbewerker, voeg eigen kolommen toe. Maak je het zo stuk dat het niet meer te lezen is, dan meldt
+OciDeck dat en laat het met rust in plaats van over jouw wijzigingen heen te schrijven. Antwoorden
+staan er als gewone tekst in, nooit als link of afbeelding.
 
 ### Omzetten tussen een presentatie en een document
 

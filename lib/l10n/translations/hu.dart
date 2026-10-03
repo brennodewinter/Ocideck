@@ -1629,6 +1629,599 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Team…': 'Csapat…',
+  'De redacteurs naast jou die in elke bundel staan, zodat ook zij de inzendingen kunnen openen. Je voegt iemand toe met zijn redacteurskaart en typt de vingerafdruk van die kaart terug.':
+      'A szerkesztők rajtad kívül, akik minden bundle-ben szerepelnek, hogy ők is megnyithassák a beküldéseket. Valakit a szerkesztői kártyájával adsz hozzá, és újra beírod a kártya ujjlenyomatát.',
+  'Er is nog niemand naast jou.': 'Rajtad kívül még senki nincs.',
+  'Plak de kaart van de redacteur': 'Illeszd be a szerkesztő kártyáját',
+  'Kaart controleren': 'Kártya ellenőrzése',
+  'Kaart van {naam}. Typ de vingerafdruk van deze kaart die {naam} je langs een andere weg gaf, bijvoorbeeld aan de telefoon.':
+      '{naam} kártyája. Írd be a kártya ujjlenyomatát, amelyet {naam} más úton adott neked, például telefonon.',
+  'Redacteur verwijderen': 'Szerkesztő eltávolítása',
+  'Verwijder {naam} uit het team? Bundels die je al hebt gepubliceerd blijven zoals ze zijn tot je opnieuw publiceert; wat al voor {naam} is verzegeld blijft voor die persoon leesbaar.':
+      'Eltávolítod {naam} nevű tagot a csapatból? A már közzétett bundle-ök változatlanok maradnak, amíg újra nem teszed közzé őket; ami már le van zárva {naam} számára, az számára olvasható marad.',
+  '{naam} is toegevoegd. Publiceer de bundel opnieuw om {naam} erin op te nemen.':
+      '{naam} hozzáadva. Tedd újra közzé a bundle-t, hogy {naam} is benne legyen.',
+  '{naam} is verwijderd. Publiceer de bundel opnieuw om {naam} eruit te halen.':
+      '{naam} eltávolítva. Tedd újra közzé a bundle-t, hogy {naam} kikerüljön belőle.',
+  'Maak eerst je eigen redactiesleutel aan onder Redactiesleutel….':
+      'Először hozd létre a saját szerkesztőségi kulcsodat a Szerkesztőségi kulcs… alatt.',
+  'Je redactiesleutel is niet te gebruiken. Kijk onder Redactiesleutel….':
+      'A szerkesztőségi kulcsod nem használható. Nézd meg a Szerkesztőségi kulcs… alatt.',
+  'Dit is geen redacteurskaart.': 'Ez nem szerkesztői kártya.',
+  'Deze kaart is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ez a kártya az OciDeck újabb verziójából való. Frissítsd az OciDeckot.',
+  'De kaart bevat iets wat niet kan. Vraag de redacteur om een nieuwe kaart.':
+      'A kártya valami meg nem engedettet tartalmaz. Kérj a szerkesztőtől új kártyát.',
+  'Deze vingerafdruk past niet bij de kaart: de kaart is veranderd of niet van wie je denkt. Vraag de redacteur om de vingerafdruk en de kaart opnieuw.':
+      'Ez az ujjlenyomat nem illik a kártyához: a kártyát megváltoztatták, vagy nem attól való, akire gondolsz. Kérd újra a szerkesztőtől az ujjlenyomatot és a kártyát.',
+  'Dit is je eigen kaart.': 'Ez a saját kártyád.',
+  'Deze redacteur staat er al.': 'Ez a szerkesztő már a csapatban van.',
+  'Het team is vol: een bundel draagt hooguit 64 organisatoren, jou meegeteld.':
+      'A csapat megtelt: egy bundle legfeljebb 64 szervezőt hordoz, téged is beleértve.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er is niets aangepast; herstel of verwijder het.':
+      'A munkamappában lévő team.json fájl nem olvasható. Semmi nem változott; javítsd vagy töröld.',
+  'Het team kon niet worden opgeslagen.': 'A csapatot nem sikerült elmenteni.',
+  'Deze redacteur staat niet meer in het team.':
+      'Ez a szerkesztő már nincs a csapatban.',
+  'Naast jou in de bundel: {namen}.': 'Rajtad kívül a bundle-ben: {namen}.',
+  'Controleer eerst je herstelsleutel onder Redactiesleutel…, of voeg een tweede redacteur toe onder Team…. Zonder herstelweg zijn alle inzendingen onleesbaar als dit apparaat stuk gaat.':
+      'Először ellenőrizd a helyreállító kulcsodat a Szerkesztőségi kulcs… alatt, vagy adj hozzá egy második szerkesztőt a Csapat… alatt. Visszaút nélkül minden beküldés olvashatatlanná válik, ha ez az eszköz tönkremegy.',
+  'Het bestand team.json in de werkmap is niet te lezen. Er wordt niets ondertekend.':
+      'A munkamappában lévő team.json fájl nem olvasható. Semmi nem lesz aláírva.',
+  'Redacteurskaart maken…': 'Szerkesztői kártya létrehozása…',
+  'Met een redacteurskaart voegt de eigenaar van een formulier jou toe aan de bundel, zodat ook jij de inzendingen kunt openen. De kaart mag per mail.':
+      'A szerkesztői kártyával az űrlap tulajdonosa hozzáad téged a bundle-höz, hogy te is megnyithasd a beküldéseket. A kártya elküldhető e-mailben.',
+  'Jouw naam op de kaart': 'A neved a kártyán',
+  'Kaart maken': 'Kártya létrehozása',
+  'Kaart kopiëren': 'Kártya másolása',
+  'Vingerafdruk van de kaart': 'A kártya ujjlenyomata',
+  'Geef de eigenaar deze vingerafdruk langs een andere weg dan de kaart, bijvoorbeeld aan de telefoon. Hij typt hem terug voordat hij je toevoegt.':
+      'Add át a tulajdonosnak ezt az ujjlenyomatot más úton, mint a kártyát, például telefonon. Ő újra beírja, mielőtt hozzáad téged.',
+  'Verzegeld opslaan…': 'Mentés lezártként…',
+  'Een versleuteld bestand (.zip.age) dat alleen de organisator kan openen. Daarvoor heb je het bundelbestand en de vingerafdruk uit de uitnodiging nodig.':
+      'Titkosított fájl (.zip.age), amelyet csak a szervező tud megnyitni. Ehhez szükséged van a bundle fájlra és a meghívóban lévő ujjlenyomatra.',
+  'Kies het bundelbestand van de organisator':
+      'Válaszd ki a szervező bundle fájlját',
+  'Vingerafdruk van de organisator': 'A szervező ujjlenyomata',
+  'Typ de vingerafdruk uit de uitnodiging. Hij staat bewust niet in het bundelbestand: zo kun je nagaan van wie het komt.':
+      'Írd be a meghívóban lévő ujjlenyomatot. A bundle fájlban szándékosan nincs benne: így ellenőrizheted, kitől származik.',
+  'Dat is geen vingerafdruk. Hij bestaat uit 52 tekens, meestal in groepjes van vier.':
+      'Ez nem ujjlenyomat. 52 karakterből áll, általában négyes csoportokban.',
+  'Dit bestand is geen bundel die OciDeck kan lezen.':
+      'Ez a fájl nem olyan bundle, amelyet az OciDeck el tud olvasni.',
+  'Dit formulier of deze bundel is van een nieuwere versie van OciDeck. Werk OciDeck bij.':
+      'Ez az űrlap vagy bundle az OciDeck újabb verziójából való. Frissítsd az OciDeckot.',
+  'De vingerafdruk past niet bij deze bundel: het formulier komt niet van wie de uitnodiging zegt. Controleer de vingerafdruk en het bundelbestand.':
+      'Az ujjlenyomat nem illik ehhez a bundle-hez: az űrlap nem attól jön, akit a meghívó megnevez. Ellenőrizd az ujjlenyomatot és a bundle fájlt.',
+  'De handtekening van de bundel klopt niet: hij is veranderd of niet van wie de vingerafdruk zegt. Vraag de organisator om een nieuwe bundel.':
+      'A bundle aláírása nem helyes: megváltoztatták, vagy nem attól való, akit az ujjlenyomat megnevez. Kérj a szervezőtől új bundle-t.',
+  'Deze bundel hoort niet bij dit formulier. Gebruik het bundelbestand dat bij precies dit formulier hoort.':
+      'Ez a bundle nem ehhez az űrlaphoz tartozik. Használd azt a bundle fájlt, amely pontosan ehhez az űrlaphoz tartozik.',
+  'Deze bundel is verlopen. Vraag de organisator om een nieuwe.':
+      'Ez a bundle lejárt. Kérj a szervezőtől újat.',
+  'Deze bundel is ouder dan een bundel die je eerder van deze organisator kreeg. Vraag de organisator om de nieuwste.':
+      'Ez a bundle régebbi annál, amelyet korábban kaptál ettől a szervezőtől. Kérd a szervezőtől a legújabbat.',
+  'De bundel bevat iets wat niet kan. Vraag de organisator om een nieuwe bundel.':
+      'A bundle valami meg nem engedettet tartalmaz. Kérj a szervezőtől új bundle-t.',
+  'Dit formulier is gesloten: de laatste dag was {datum}. Neem contact op met de organisator.':
+      'Ez az űrlap lezárult: az utolsó nap {datum} volt. Fordulj a szervezőhöz.',
+  'De inzending is groter dan de organisator toestaat ({mb} MB). Haal een foto weg of maak er een kleiner.':
+      'A beküldés nagyobb, mint amit a szervező megenged ({mb} MB). Távolíts el egy fotót, vagy kicsinyíts le egyet.',
+  'De inzending kon niet worden verzegeld.':
+      'A beküldést nem sikerült lezárni.',
+  'Verzegeld opgeslagen als {naam}, alleen te openen door: {organisatoren}.':
+      'Lezártként mentve {naam} néven, csak ők nyithatják meg: {organisatoren}.',
+  'Bundel publiceren…': 'Bundle közzététele…',
+  'De bundel is wat een invuller van jullie redactie gelooft: naar welke sleutel hij verzegelt en welke tekst erbij hoort. Hij komt naast het formulier te staan.':
+      'A bundle az, amiben a kitöltő hisz a szerkesztőségetekről: melyik kulcsra zár, és melyik szöveghez tartozik. Az űrlap mellett tárolódik.',
+  'Er is geen formulier in de werkmap om een bundel voor te maken.':
+      'A munkamappában nincs űrlap, amelyhez bundle-t lehetne készíteni.',
+  'Naam voor de invuller': 'Név a kitöltőnek',
+  'Geldig tot (jjjj-mm-dd)': 'Érvényes eddig (éééé-hh-nn)',
+  'De laatste dag waarop een invuller deze bundel gelooft. Niet vóór de sluitingsdag van het formulier.':
+      'Az utolsó nap, amikor a kitöltő hisz ennek a bundle-nek. Nem az űrlap zárónapja előtt.',
+  'Bundel maken': 'Bundle létrehozása',
+  'Bundel gemaakt (volgnummer {n}): {pad}':
+      'Bundle létrehozva (sorszám: {n}): {pad}',
+  'Geef de vingerafdruk de invuller langs een andere weg dan het bundelbestand, bijvoorbeeld in de uitnodiging. Wie alleen het bundelbestand heeft, kan niet nagaan van wie het komt.':
+      'Add át az ujjlenyomatot a kitöltőnek más úton, mint a bundle fájlt, például a meghívóban. Aki csak a bundle fájlt birtokolja, nem tudja ellenőrizni, kitől származik.',
+  'Dit platform heeft geen sleutelhanger voor de redactiesleutel; een bundel kan hier niet worden ondertekend.':
+      'Ennek a platformnak nincs kulcstartója a szerkesztőségi kulcshoz; bundle-t itt nem lehet aláírni.',
+  'Er is nog geen redactiesleutel. Maak er een aan onder Redactiesleutel… voordat je een bundel publiceert.':
+      'Még nincs szerkesztőségi kulcs. Hozz létre egyet a Szerkesztőségi kulcs… alatt, mielőtt bundle-t teszel közzé.',
+  'De sleutelhanger is niet te lezen. Er is niets ondertekend.':
+      'A kulcstartó nem olvasható. Semmi nem lett aláírva.',
+  'De bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      'A tárolt szerkesztőségi kulcs nem olvasható. Töröld a Szerkesztőségi kulcs… alatt, és állítsd helyre a helyreállító kulcsodból.',
+  'Een bundel van dit formulier in de werkmap is niet te lezen of hoort niet bij de andere. Daarmee is het volgnummer niet te bepalen en wordt er niets ondertekend. Controleer: {pad}':
+      'Az űrlap egyik bundle-je a munkamappában nem olvasható, vagy nem tartozik a többihez. Így a sorszám nem határozható meg, és semmi nem lesz aláírva. Ellenőrizd: {pad}',
+  'Vul een naam in van hooguit 80 tekens.':
+      'Adj meg legfeljebb 80 karakteres nevet.',
+  'Geldig tot moet een bestaande datum zijn, als jjjj-mm-dd.':
+      'Az Érvényes eddig létező dátum legyen, éééé-hh-nn formában.',
+  'Geldig tot mag niet vóór de sluitingsdag van het formulier liggen.':
+      'Az Érvényes eddig nem lehet az űrlap zárónapja előtt.',
+  'De bundel kon niet worden gemaakt ({veld}). Kijk of het formulier een geldige sluitingsdag en bewaartermijn noemt.':
+      'A bundle-t nem sikerült létrehozni ({veld}). Ellenőrizd, hogy az űrlap érvényes zárónapot és megőrzési időt ad meg.',
+  'formulier': 'űrlap',
+  'De bundel kon niet worden opgeslagen in de werkmap.':
+      'A bundle-t nem sikerült a munkamappában tárolni.',
+  'Maak en onderteken de bundel die een invuller van jullie redactie gelooft.':
+      'Hozd létre és írd alá a bundle-t, amelyben a kitöltő hisz a szerkesztőségetekről.',
+  '{naam}: verzegeld pakket geopend en binnengehaald.':
+      '{naam}: a lezárt csomag megnyitva és importálva.',
+  '{naam}: dit pakket is verzegeld en dit platform heeft geen sleutelhanger voor de redactiesleutel.':
+      '{naam}: ez a csomag le van zárva, és ennek a platformnak nincs kulcstartója a szerkesztőségi kulcshoz.',
+  '{naam}: dit pakket is verzegeld en er is nog geen redactiesleutel om het te openen. Maak er een aan onder Redactiesleutel… of herstel hem uit je herstelsleutel.':
+      '{naam}: ez a csomag le van zárva, és még nincs szerkesztőségi kulcs a megnyitásához. Hozz létre egyet a Szerkesztőségi kulcs… alatt, vagy állítsd helyre a helyreállító kulcsodból.',
+  '{naam}: dit pakket is verzegeld en de sleutelhanger is niet te lezen. Er is niets geprobeerd.':
+      '{naam}: ez a csomag le van zárva, és a kulcstartó nem olvasható. Semmit nem próbáltunk meg.',
+  '{naam}: dit pakket is verzegeld en de bewaarde redactiesleutel is niet te lezen. Verwijder hem onder Redactiesleutel… en herstel hem uit je herstelsleutel.':
+      '{naam}: ez a csomag le van zárva, és a tárolt szerkesztőségi kulcs nem olvasható. Töröld a Szerkesztőségi kulcs… alatt, és állítsd helyre a helyreállító kulcsodból.',
+  '{naam}: dit pakket is niet voor jouw redactiesleutel verzegeld.':
+      '{naam}: ezt a csomagot nem a te szerkesztőségi kulcsodra zárták le.',
+  '{naam}: dit pakket is veranderd of afgebroken en wordt niet geopend.':
+      '{naam}: ez a csomag megváltozott vagy megszakadt, ezért nem nyitjuk meg.',
+  '{naam}: dit pakket is groter dan een inzending kan zijn.':
+      '{naam}: ez a csomag nagyobb, mint amekkora egy beküldés lehet.',
+  '{naam}: de bewaarde redactiesleutel is geen sleutel die OciDeck kan gebruiken.':
+      '{naam}: a tárolt szerkesztőségi kulcs nem olyan kulcs, amelyet az OciDeck használni tud.',
+  '{naam}: geen verzegeld pakket dat OciDeck kan lezen.':
+      '{naam}: nem olyan lezárt csomag, amelyet az OciDeck el tud olvasni.',
+  'Een verzegeld bestand (.zip.age) opent met je redactiesleutel.':
+      'A lezárt fájlt (.zip.age) a szerkesztőségi kulcsoddal lehet megnyitni.',
+  'Herstelsleutel controleren': 'Helyreállító kulcs ellenőrzése',
+  'Redactiesleutel aangemaakt. Schrijf nu de herstelsleutel op.':
+      'A szerkesztőségi kulcs létrejött. Írd le most a helyreállító kulcsot.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets aangemaakt.':
+      'A kulcstartó nem fogadta el a kulcsot. Semmi nem jött létre.',
+  'Er is al een redactiesleutel. Die is niet aangeraakt.':
+      'Már van szerkesztőségi kulcs. Nem nyúltunk hozzá.',
+  'De sleutelhanger kon niet worden gelezen. Er is niets aangenomen en niets aangemaakt.':
+      'A kulcstartót nem sikerült beolvasni. Semmit nem feltételeztünk, és semmi nem jött létre.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven.':
+      'A kulcstartóban van valami, ami nem szerkesztőségi kulcs. Nem írtuk felül.',
+  'Dit platform heeft geen sleutelhanger.':
+      'Ennek a platformnak nincs kulcstartója.',
+  'Klopt: de herstelsleutel is gecontroleerd.':
+      'Helyes: a helyreállító kulcsot ellenőriztük.',
+  'Dit is een geldige herstelsleutel, maar niet die van deze redactiesleutel.':
+      'Ez érvényes helyreállító kulcs, de nem ennek a szerkesztőségi kulcsnak a kulcsa.',
+  'De herstelsleutel klopt, maar dat kon niet worden bewaard.':
+      'A helyreállító kulcs helyes, de ezt nem sikerült elmenteni.',
+  'Er is geen redactiesleutel om tegen te controleren.':
+      'Nincs szerkesztőségi kulcs, amellyel összehasonlíthatnánk.',
+  'Dit is geen herstelsleutel van een redactiesleutel.':
+      'Ez nem egy szerkesztőségi kulcs helyreállító kulcsa.',
+  'Er zit een typefout in: de controlesom klopt niet.':
+      'Gépelési hiba van benne: az ellenőrző összeg nem egyezik.',
+  'Deze herstelsleutel komt uit een nieuwere versie van OciDeck.':
+      'Ez a helyreállító kulcs az OciDeck újabb verziójából származik.',
+  'Deze herstelsleutel is voor iets anders gemaakt.':
+      'Ezt a helyreállító kulcsot valami másra készítették.',
+  'Hersteld uit de herstelsleutel.': 'Visszaállítva a helyreállító kulcsból.',
+  'De sleutelhanger nam de sleutel niet aan. Er is niets hersteld.':
+      'A kulcstartó nem fogadta el a kulcsot. Semmi nem lett visszaállítva.',
+  'Redactiesleutel opslaan als age-sleutelbestand':
+      'A szerkesztőségi kulcs mentése age kulcsfájlként',
+  'Het bestand kon niet worden opgeslagen.': 'A fájlt nem sikerült elmenteni.',
+  'Opgeslagen als {pad}. Wie dit bestand heeft, kan alles openen.':
+      'Elmentve {pad} néven. Aki ezt a fájlt birtokolja, mindent megnyithat.',
+  'Redactiesleutel verwijderd.': 'A szerkesztőségi kulcs törölve.',
+  'Redactiesleutel': 'Szerkesztőségi kulcs',
+  'Dit platform heeft geen sleutelhanger. De redactiesleutel kan hier niet worden bewaard; gebruik de desktopapp.':
+      'Ennek a platformnak nincs kulcstartója. A szerkesztőségi kulcs itt nem tárolható; használd az asztali alkalmazást.',
+  'De sleutelhanger kon niet worden gelezen (vergrendeld, of toegang geweigerd). Er is niets aangenomen en niets aangemaakt.':
+      'A kulcstartót nem sikerült beolvasni (zárolt, vagy a hozzáférés megtagadva). Semmit nem feltételeztünk, és semmi nem jött létre.',
+  'Er staat iets in de sleutelhanger dat geen redactiesleutel is. Het is niet overschreven. Verwijder het en herstel de sleutel uit je herstelsleutel.':
+      'A kulcstartóban van valami, ami nem szerkesztőségi kulcs. Nem írtuk felül. Töröld, és állítsd vissza a kulcsot a helyreállító kulcsodból.',
+  'Redactiesleutel verwijderen…': 'Szerkesztőségi kulcs törlése…',
+  'Een redactiesleutel opent de verzegelde inzendingen en ondertekent de bundels van je formulieren. Hij staat in de sleutelhanger van dit besturingssysteem. Verlies je alle sleutels van de redactie, dan zijn alle nog niet binnengehaalde inzendingen onleesbaar: dat is de prijs van een server die niets kan lezen.':
+      'A szerkesztőségi kulcs megnyitja a lezárt beküldéseket, és aláírja az űrlapjaid csomagjait. Az operációs rendszer kulcstartójában van. Ha elveszted a szerkesztőség összes kulcsát, az összes még le nem töltött beküldés olvashatatlanná válik: ez az ára egy olyan szervernek, amely semmit nem tud olvasni.',
+  'Redactiesleutel aanmaken': 'Szerkesztőségi kulcs létrehozása',
+  'Herstellen uit herstelsleutel…': 'Visszaállítás helyreállító kulcsból…',
+  'Vingerafdruk': 'Ujjlenyomat',
+  'Ontvanger (age)': 'Címzett (age)',
+  'Aangemaakt op {datum}.': 'Létrehozva: {datum}.',
+  'De herstelsleutel is gecontroleerd.': 'A helyreállító kulcsot ellenőriztük.',
+  'De herstelsleutel is nog niet gecontroleerd: schrijf hem op en typ hem terug.':
+      'A helyreállító kulcsot még nem ellenőriztük: írd le, és gépeld be újra.',
+  'Herstelsleutel tonen…': 'Helyreállító kulcs megjelenítése…',
+  'Vingerafdruk kopiëren': 'Ujjlenyomat másolása',
+  'Exporteren als age-sleutelbestand…': 'Exportálás age kulcsfájlként…',
+  'Schrijf deze herstelsleutel op en bewaar hem op een veilige plek, buiten dit apparaat. Wie hem heeft, kan alle inzendingen openen en in jullie naam bundels ondertekenen. Raak je dit apparaat kwijt, dan is hij alles wat overblijft.':
+      'Írd le ezt a helyreállító kulcsot, és tartsd biztos helyen, ettől az eszköztől távol. Aki birtokolja, megnyithatja az összes beküldést, és a ti nevetekben csomagokat írhat alá. Ha elveszted ezt az eszközt, ez marad meg mindenből.',
+  'Typ de herstelsleutel hier opnieuw in':
+      'Gépeld be ide újra a helyreállító kulcsot',
+  'Later': 'Később',
+  'Typ of plak de herstelsleutel. Wat je ingeeft wordt als redactiesleutel in de sleutelhanger gezet; er wordt niets overschreven.':
+      'Gépeld be vagy illeszd be a helyreállító kulcsot. Amit megadsz, szerkesztőségi kulcsként kerül a kulcstartóba; semmi nem íródik felül.',
+  'Herstelsleutel': 'Helyreállító kulcs',
+  'Redactiesleutel verwijderen': 'Szerkesztőségi kulcs törlése',
+  'De sleutel wordt uit de sleutelhanger gewist en kan alleen terugkomen uit de herstelsleutel. Heb je die niet, dan zijn inzendingen die alleen voor deze sleutel zijn verzegeld voorgoed onleesbaar.':
+      'A kulcs törlődik a kulcstartóból, és csak a helyreállító kulcsból kerülhet vissza. Ha nincs meg, a csak ehhez a kulcshoz lezárt beküldések örökre olvashatatlanok maradnak.',
+  'De sleutel waarmee verzegelde inzendingen worden geopend en bundels worden ondertekend.':
+      'A kulcs, amely megnyitja a lezárt beküldéseket, és aláírja a csomagokat.',
+  'Redactiesleutel…': 'Szerkesztőségi kulcs…',
+  'De werkkopie is weggegooid. Wat binnenkwam wordt weer beoordeeld.':
+      'A munkapéldányt eldobtuk. Ami beérkezett, azt újra elbíráljuk.',
+  'Er is geen werkkopie.': 'Nincs munkapéldány.',
+  'De werkkopie kon niet worden weggegooid.':
+      'A munkapéldányt nem sikerült eldobni.',
+  'Verwijdert de werkkopie. Wat binnenkwam blijft staan en wordt weer beoordeeld.':
+      'Törli a munkapéldányt. Ami beérkezett, az megmarad, és újra elbíráljuk.',
+  'Werkkopie weggooien…': 'Munkapéldány eldobása…',
+  'Werkkopie weggooien': 'Munkapéldány eldobása',
+  'De werkkopie met de verbeteringen wordt verwijderd en kan niet worden teruggehaald. Wat binnenkwam blijft staan en wordt weer beoordeeld. Staat de werkkopie nog open in een tabblad, sluit die dan eerst.':
+      'A munkapéldány a javításokkal együtt törlődik, és nem állítható vissza. Ami beérkezett, az megmarad, és újra elbíráljuk. Ha a munkapéldány még nyitva van egy lapon, előbb zárd be.',
+  'Weggooien': 'Eldobás',
+  'Deze inzending is ingetrokken en komt dus in geen enkel hoofdstuk.':
+      'Ezt a beküldést visszavonták, ezért egyik fejezetbe sem kerül be.',
+  'Deze inzending is niet te lezen, of het formulier waarvoor ze is ingediend staat niet in de werkmap.':
+      'Ez a beküldés nem olvasható, vagy az űrlap, amelyhez beküldték, nincs a munkamappában.',
+  'Het controledocument kon niet worden geschreven.':
+      'Az ellenőrző dokumentumot nem sikerült megírni.',
+  'Je bijdrage voor het boek: graag even controleren':
+      'A hozzájárulásod a könyvhöz: kérjük, nézd át',
+  'Hierbij je bijdrage zoals die in het boek komt (zie de bijlage). Klopt alles? Antwoord ‘akkoord’ of met je correcties vóór {datum}.':
+      'Itt a hozzájárulásod úgy, ahogy a könyvben meg fog jelenni (lásd a mellékletet). Minden rendben van? Válaszolj ‘egyetértek’ szöveggel, vagy a javításaiddal ennyi előtt: {datum}.',
+  'De mail staat klaar in je mailprogramma. Voeg de pdf toe en verstuur hem.':
+      'A levél kész a levelezőprogramodban. Csatold a PDF-et, és küldd el.',
+  'Controle door de maker…': 'Ellenőrzés a szerzővel…',
+  'Het controledocument is het hoofdstuk van deze ene inzending. Exporteer het als pdf (kies het volledige profiel), voeg de pdf toe aan de mail en verstuur die. Antwoordt de maker ‘akkoord’, zet de status dan zelf op maker-approved: dat antwoord is ook de bevestiging dat de bijdrage echt van deze persoon komt.':
+      'Az ellenőrző dokumentum ennek az egy beküldésnek a fejezete. Exportáld PDF-ként (válaszd a teljes profilt), csatold a PDF-et a levélhez, és küldd el. Ha a szerző azt válaszolja, hogy ‘egyetértek’, állítsd magad az állapotot maker-approved értékre: ez a válasz egyben megerősíti, hogy a hozzájárulás valóban ettől a személytől származik.',
+  'Controledocument maken en openen':
+      'Ellenőrző dokumentum létrehozása és megnyitása',
+  'E-mailadres van de maker': 'A szerző e-mail-címe',
+  'Antwoord vóór (jjjj-mm-dd)': 'Válasz ennyi előtt (éééé-hh-nn)',
+  'Mail schrijven': 'Levél írása',
+  'Dit formulier kent de status maker-check-sent niet; die kan hier dus niet worden gezet.':
+      'Ez az űrlap nem ismeri a maker-check-sent állapotot, ezért itt nem állítható be.',
+  'Controle verstuurd': 'Ellenőrzés elküldve',
+  'Maakt het hoofdstuk van deze inzending en bereidt de mail voor waarmee de maker het controleert.':
+      'Elkészíti ennek a beküldésnek a fejezetét, és előkészíti a levelet, amellyel a szerző ellenőrzi.',
+  'Deze inzending staat niet in het register. Herstel overview.md en probeer het opnieuw.':
+      'Ez a beküldés nincs a nyilvántartásban. Javítsd meg az overview.md fájlt, és próbáld újra.',
+  'Kies het hoofdstuksjabloon': 'Fejezetsablon kiválasztása',
+  'Kies eerst een hoofdstuksjabloon.': 'Először válassz fejezetsablont.',
+  'Kies minstens één status.': 'Válassz legalább egy állapotot.',
+  'Boek samengesteld. Hoofdstukken: {n}. Foto’s: {m}.':
+      'A könyv összeállítva. Fejezetek: {n}. Fényképek: {m}.',
+  'Ingetrokken en dus weggelaten: {n}.': 'Visszavont, ezért kihagyott: {n}.',
+  'Overgeslagen (andere versie of niet te lezen): {n}.':
+      'Kihagyva (másik verzió vagy olvashatatlan): {n}.',
+  'Foto’s die in de werkmap ontbraken: {n}.':
+      'A munkamappából hiányzó fényképek: {n}.',
+  'Gebruik voor de naam alleen letters, cijfers, streepjes en underscores (hoogstens 64 tekens).':
+      'A névben csak betűket, számjegyeket, kötőjeleket és aláhúzásjeleket használj (legfeljebb 64 karakter).',
+  'Er staat al een boek met deze naam. Kies een andere naam.':
+      'Ilyen nevű könyv már van. Válassz másik nevet.',
+  'Het sjabloon noemt velden die het formulier niet heeft: {velden}.':
+      'A sablon olyan mezőket említ, amelyek az űrlapon nincsenek: {velden}.',
+  'Er is niets om in het boek te zetten: geen inzending met een gekozen status. Ingetrokken: {w}; overgeslagen: {s}.':
+      'Nincs mit a könyvbe tenni: nincs kiválasztott állapotú beküldés. Visszavont: {w}; kihagyott: {s}.',
+  'Het register kan niet worden gelezen. Herstel overview.md.':
+      'A nyilvántartás nem olvasható. Javítsd meg az overview.md fájlt.',
+  'Het boek kon niet worden geschreven.': 'A könyvet nem sikerült megírni.',
+  'Boek samenstellen…': 'Könyv összeállítása…',
+  'Het boek komt in de map book van de werkmap en blijft een gewoon document dat je daarna zelf kunt bewerken.':
+      'A könyv a munkamappa book mappájába kerül, és közönséges dokumentum marad, amelyet utána magad szerkeszthetsz.',
+  'Er is geen bruikbaar formulier in de werkmap.':
+      'A munkamappában nincs használható űrlap.',
+  'Formulier': 'Űrlap',
+  'Hoofdstuksjabloon': 'Fejezetsablon',
+  'Nog geen sjabloon gekozen.': 'Még nincs sablon kiválasztva.',
+  'In het sjabloon staat {veld-id} voor het antwoord op dat veld.':
+      'A sablonban a {veld-id} az adott mezőre adott választ jelenti.',
+  'Hoofdstuksjabloon kiezen…': 'Fejezetsablon kiválasztása…',
+  'Welke inzendingen?': 'Mely beküldések?',
+  'Alleen inzendingen met een van deze statussen komen in het boek. Ingetrokken inzendingen blijven er altijd uit.':
+      'A könyvbe csak az ezen állapotok valamelyikével rendelkező beküldések kerülnek. A visszavont beküldések mindig kimaradnak.',
+  'Ordenen op': 'Rendezés',
+  'Groeperen op': 'Csoportosítás',
+  'Naam van het boek': 'A könyv neve',
+  'Boek openen': 'Könyv megnyitása',
+  'Samenstellen': 'Összeállítás',
+  'De werkkopie kon niet worden aangemaakt.':
+      'A munkapéldányt nem sikerült létrehozni.',
+  'Opent een kopie van de inzending om in te verbeteren. Wat binnenkwam blijft ongewijzigd.':
+      'Megnyitja a beküldés egy másolatát javításra. Ami beérkezett, változatlan marad.',
+  'Werkkopie openen': 'Munkapéldány megnyitása',
+  'Status gewijzigd naar {status}.': 'Az állapot módosítva: {status}.',
+  'Intrekking opgeslagen.': 'A visszavonás mentve.',
+  'Intrekking ongedaan gemaakt.': 'A visszavonás visszavonva.',
+  'Inzending verwijderd; het record blijft staan.':
+      'A beküldés törölve; a bejegyzés megmarad.',
+  'Inzending verwijderd, maar het register kon niet worden bijgewerkt. Pas overview.md met de hand aan.':
+      'A beküldés törölve, de a nyilvántartást nem sikerült frissíteni. Szerkeszd az overview.md fájlt kézzel.',
+  'De inzending is niet gevonden in de werkmap.':
+      'A beküldés nem található a munkamappában.',
+  'De inzending kon niet worden verwijderd.':
+      'A beküldést nem sikerült törölni.',
+  'Het register kan niet worden gelezen. Herstel overview.md; er is niets gewijzigd.':
+      'A nyilvántartás nem olvasható. Javítsd az overview.md fájlt; semmi sem változott.',
+  'Het register kon niet worden bijgewerkt.':
+      'A nyilvántartást nem sikerült frissíteni.',
+  'Deze wijziging kon niet worden doorgevoerd: de inzending staat niet in het register.':
+      'Ezt a módosítást nem sikerült végrehajtani: a beküldés nincs a nyilvántartásban.',
+  'Status wijzigen': 'Állapot módosítása',
+  'Intrekking ongedaan maken': 'Visszavonás visszavonása',
+  'Intrekken…': 'Visszavonás…',
+  'Verwijderen…': 'Törlés…',
+  'Inzending intrekken': 'Beküldés visszavonása',
+  'Vul de dag in waarop de inzender de inzending introk. Een ingetrokken inzending komt nooit in het boek.':
+      'Add meg a napot, amikor a beküldő visszavonta a beküldést. A visszavont beküldés soha nem kerül be a könyvbe.',
+  'Dag (jjjj-mm-dd)': 'Nap (éééé-hh-nn)',
+  'Ongeldige dag. Gebruik jaar-maand-dag, bijvoorbeeld {voorbeeld}.':
+      'Érvénytelen nap. Használd az év-hónap-nap alakot, például {voorbeeld}.',
+  'Inzending verwijderen': 'Beküldés törlése',
+  'De antwoorden, de werkkopie en de foto’s van deze inzending worden uit de werkmap gewist. Alleen een minimaal record blijft over: het nummer, de dagen van ontvangst en toestemming en de status. Dit kan niet ongedaan worden gemaakt.':
+      'A beküldés válaszai, munkapéldánya és fotói törlődnek a munkamappából. Csak egy minimális bejegyzés marad: a szám, a beérkezés és a hozzájárulás napja és az állapot. Ez nem vonható vissza.',
+  'Ook blijft staan wat het formulier vooraf aankondigde: {velden}.':
+      'Az is megmarad, amit az űrlap előre bejelentett: {velden}.',
+  'Er klopt iets niet aan deze inzending.':
+      'Valami nincs rendben ezzel a beküldéssel.',
+  'Verplicht, maar leeg gelaten.': 'Kötelező, de üresen hagyták.',
+  '{actual} woorden; minstens {min} nodig.':
+      '{actual} szó; legalább {min} szükséges.',
+  '{actual} woorden; hoogstens {max} toegestaan.':
+      '{actual} szó; legfeljebb {max} megengedett.',
+  '{actual} tekens; minstens {min} nodig.':
+      '{actual} karakter; legalább {min} szükséges.',
+  '{actual} tekens; hoogstens {max} toegestaan.':
+      '{actual} karakter; legfeljebb {max} megengedett.',
+  '“{value}” staat niet in de lijst met opties.':
+      '„{value}” nincs benne a lehetőségek listájában.',
+  '“{value}” is geen getal.': '„{value}” nem szám.',
+  '“{value}” is geen datum in de vorm jaar-maand-dag.':
+      '„{value}” nem dátum év-hónap-nap alakban.',
+  'Foto van {actual} pixels breed; er zijn {min} gevraagd.':
+      '{actual} pixel széles fotó; {min} volt kérve.',
+  'Het bestand van de foto ontbreekt in de inzending.':
+      'A fotó fájlja hiányzik a beküldésből.',
+  'De beschrijving van de foto ontbreekt.': 'A fotó leírása hiányzik.',
+  'De maker van de foto ontbreekt.': 'A fotó készítője hiányzik.',
+  'De foto is niet gecontroleerd.': 'A fotót nem ellenőrizték.',
+  'HEIC-foto: niet gecontroleerd of gezuiverd; er kan een locatie in staan.':
+      'HEIC-fotó: nem ellenőrizték és nem tisztították meg; helyadatot tartalmazhat.',
+  'Toestemming niet gegeven.': 'A hozzájárulás nem lett megadva.',
+  'Het antwoord bevat een regel die op een besturingscode van het formulier lijkt.':
+      'A válasz olyan sort tartalmaz, amely az űrlap vezérlőkódjára hasonlít.',
+  'Het antwoord bevat HTML.': 'A válasz HTML-t tartalmaz.',
+  'Het antwoord bevat een niet-afgesloten codeblok.':
+      'A válasz lezáratlan kódblokkot tartalmaz.',
+  'Het antwoord noemt een afbeelding die niet bij deze inzending hoort.':
+      'A válasz olyan képre hivatkozik, amely nem ehhez a beküldéshez tartozik.',
+  'Het antwoord bevat een link die niet is toegestaan.':
+      'A válasz nem megengedett hivatkozást tartalmaz.',
+  'Dit formulier of deze versie staat niet in de werkmap.':
+      'Ez az űrlap vagy ez a verzió nincs a munkamappában.',
+  'De inzender werkte met een andere tekst van het formulier dan de gepubliceerde.':
+      'A beküldő az űrlap más szövegével dolgozott, mint a közzétettel.',
+  'De toestemming in het manifest klopt niet met het gepubliceerde formulier.':
+      'A manifestben lévő hozzájárulás nem egyezik a közzétett űrlappal.',
+  'De tekst van het formulier is veranderd buiten de antwoorden.':
+      'Az űrlap szövegét a válaszokon kívül megváltoztatták.',
+  'De tekst van het formulier is veranderd bij dit veld.':
+      'Az űrlap szövegét ennél a mezőnél megváltoztatták.',
+  'Dit veld bestaat niet in het gepubliceerde formulier.':
+      'Ez a mező nem szerepel a közzétett űrlapon.',
+  'Dit veld ontbreekt in de inzending.': 'Ez a mező hiányzik a beküldésből.',
+  'Inzending van versie {submission}; gepubliceerd is versie {published}.':
+      'A(z) {submission}. verziójú beküldés; a közzétett verzió a(z) {published}.',
+  'Het formulier vraagt een nieuwere versie van OciDeck.':
+      'Az űrlaphoz az OciDeck újabb verziója kell.',
+  'Het gepubliceerde formulier in de werkmap is niet bruikbaar.':
+      'A munkamappában lévő közzétett űrlap nem használható.',
+  'De inzending hoort bij een ander formulier.':
+      'A beküldés másik űrlaphoz tartozik.',
+  'De opbouw van de inzending is beschadigd.': 'A beküldés felépítése sérült.',
+  'Het register kan niet worden gelezen. Herstel overview.md; de inzendingen staan hieronder zonder gegevens uit het register.':
+      'A nyilvántartás nem olvasható. Javítsd az overview.md fájlt; a beküldések alább a nyilvántartás adatai nélkül láthatók.',
+  'Nog geen inzendingen.': 'Még nincs beküldés.',
+  'Om na te lopen': 'Átnézendő',
+  'Verwijderd': 'Törölve',
+  'Zonder regel in het register': 'Sor nélkül a nyilvántartásban',
+  'Ontvangen {datum}': 'Megkapva {datum}',
+  'Ingetrokken {datum}': 'Visszavonva {datum}',
+  'De inhoud van deze inzending is verwijderd; alleen het record staat er nog.':
+      'A beküldés tartalmát törölték; csak a bejegyzés maradt.',
+  'Deze inzending kan niet worden gelezen. Controleer de bestanden in de werkmap.':
+      'Ez a beküldés nem olvasható. Ellenőrizd a munkamappa fájljait.',
+  'Beoordeeld tegen {formulier}.': 'Értékelve a(z) {formulier} alapján.',
+  'De beoordeling gaat over de werkkopie (submission.edit.md).':
+      'Az értékelés a munkapéldányra vonatkozik (submission.edit.md).',
+  'Geen punten om na te lopen.': 'Nincs átnézendő pont.',
+  'Foto’s die geen antwoord noemt: {n}.':
+      'Fotók, amelyeket egyik válasz sem említ: {n}.',
+  'Inzendingen': 'Beküldések',
+  'Werkmap': 'Munkamappa',
+  'Nog geen werkmap gekozen. Kies een map waarin de inzendingen en het register komen te staan.':
+      'Még nincs munkamappa kiválasztva. Válassz egy mappát, ahol a beküldések és a nyilvántartás lesznek.',
+  'Werkmap kiezen…': 'Munkamappa kiválasztása…',
+  'Kies de werkmap voor inzendingen': 'Válaszd ki a beküldések munkamappáját',
+  'Formulieren': 'Űrlapok',
+  'Nog geen formulier toegevoegd. Voeg het formulier toe zoals je het hebt gepubliceerd: een inzending wordt daartegen gehouden.':
+      'Még nincs űrlap hozzáadva. Add hozzá az űrlapot úgy, ahogy közzétetted: a beküldést ahhoz hasonlítjuk.',
+  'Formulier toevoegen…': 'Űrlap hozzáadása…',
+  'Kies het formulier om toe te voegen': 'Válaszd ki a hozzáadandó űrlapot',
+  'Dit bestand is geen formulier dat gepubliceerd kan worden.':
+      'Ez a fájl nem közzétehető űrlap.',
+  'Dit formulier staat er al met een andere tekst. Een andere tekst is een nieuwe versie: geef het formulier een hoger versienummer.':
+      'Ez az űrlap már létezik, más szöveggel. A más szöveg új verzió: adj az űrlapnak magasabb verziószámot.',
+  'Formulier toegevoegd: {naam}.': 'Űrlap hozzáadva: {naam}.',
+  'Dit formulier stond er al.': 'Ez az űrlap már megvolt.',
+  'Het formulier kon niet worden opgeslagen.':
+      'Az űrlapot nem sikerült elmenteni.',
+  'Inzendingen in de werkmap: {n}': 'Beküldések a munkamappában: {n}',
+  'Een gewone zip is onderweg niet versleuteld.':
+      'A sima zip átvitel közben nincs titkosítva.',
+  'Pakketten binnenhalen…': 'Csomagok importálása…',
+  'Kies de pakketten om binnen te halen':
+      'Válaszd ki az importálandó csomagokat',
+  'Register openen': 'Nyilvántartás megnyitása',
+  '{naam}: binnengehaald.': '{naam}: importálva.',
+  '{naam}: binnengehaald, maar er zijn punten om na te lopen.':
+      '{naam}: importálva, de vannak átnézendő pontok.',
+  '{naam}: binnengehaald, maar het register kon niet worden bijgewerkt. Controleer overview.md.':
+      '{naam}: importálva, de a nyilvántartást nem sikerült frissíteni. Ellenőrizd az overview.md fájlt.',
+  '{naam}: stond er al.': '{naam}: már megvolt.',
+  '{naam}: geen inzendpakket dat OciDeck kan lezen.':
+      '{naam}: nem olyan beküldési csomag, amelyet az OciDeck el tudna olvasni.',
+  '{naam}: dit formulier is niet toegevoegd, of niet in deze versie. Voeg het formulier eerst toe.':
+      '{naam}: ez az űrlap nincs hozzáadva, vagy nem ebben a verzióban. Először add hozzá az űrlapot.',
+  '{naam}: kon niet worden opgeslagen in de werkmap.':
+      '{naam}: nem sikerült elmenteni a munkamappába.',
+  'Formulieren en inzendingen': 'Űrlapok és beküldések',
+  'Haal inzendingen van een formulier binnen, houd ze tegen het gepubliceerde formulier en bewaar ze met een register. Een formulier invullen kan ook als dit uit staat. Standaard uit.':
+      'Importáld egy űrlap beküldéseit, ellenőrizd őket a közzétett űrlap alapján, és tartsd őket nyilvántartásban. Az űrlap kitöltése akkor is működik, ha ez ki van kapcsolva. Alapértelmezés szerint kikapcsolva.',
+  'Inzending opslaan als zip…': 'Beküldés mentése zipként…',
+  'Een zipbestand met je antwoorden en foto’s, om naar de organisator te mailen.':
+      'Egy zip-fájl a válaszaiddal és a fotóiddal, amelyet e-mailben elküldhetsz a szervezőnek.',
+  'Inzending opgeslagen als {naam}.': 'A beküldés mentve ezen a néven: {naam}.',
+  'Kies het formulier zoals je het kreeg':
+      'Válaszd ki az űrlapot úgy, ahogy megkaptad',
+  'Dit is niet het formulier waar je antwoorden bij horen. Kies het bestand dat je van de organisator kreeg.':
+      'Ez nem az az űrlap, amelyhez a válaszaid tartoznak. Válaszd ki a szervezőtől kapott fájlt.',
+  'Een foto kon niet worden gelezen: {pad}. Voeg hem opnieuw toe.':
+      'Egy fotót nem sikerült beolvasni: {pad}. Add hozzá újra.',
+  'De inzending past niet in een pakket: te veel foto’s, of een foto die te groot is.':
+      'A beküldés nem fér el egy csomagban: túl sok fotó, vagy egy túl nagy fotó.',
+  'De inzending kon niet worden opgeslagen.':
+      'A beküldést nem sikerült menteni.',
+  'Inzending opslaan': 'Beküldés mentése',
+  'Locatiegegevens zijn uit deze foto verwijderd.':
+      'A helyadatok el lettek távolítva erről a fotóról.',
+  'Deze foto kon niet worden toegevoegd. Kies een JPEG-, PNG-, WebP- of HEIC-bestand van een foto.':
+      'Ezt a fotót nem sikerült hozzáadni. Válasszon egy fotót tartalmazó JPEG-, PNG-, WebP- vagy HEIC-fájlt.',
+  'Sla het document eerst op om foto’s toe te voegen.':
+      'Fotók hozzáadásához először mentse a dokumentumot.',
+  'OciDeck kan dit bestand importeren naar een nieuw document.':
+      'Az OciDeck új dokumentumként tudja importálni ezt a fájlt.',
+  'Kies een datum': 'Dátum kiválasztása',
+  'Anders, namelijk:': 'Egyéb, nevezetesen:',
+  'Punt {n}': '{n}. pont',
+  'Punt {n} verwijderen': 'A(z) {n}. pont eltávolítása',
+  'Rij {n} verwijderen': 'A(z) {n}. sor eltávolítása',
+  'Foto {n} verwijderen': 'A(z) {n}. fotó eltávolítása',
+  'Wat is er te zien op de foto?': 'Mi látható a fotón?',
+  'Van wie is de foto?': 'Kié a fotó?',
+  'Foto toevoegen': 'Fotó hozzáadása',
+  'Verplicht': 'Kötelező',
+  'Alles is ingevuld.': 'Minden ki van töltve.',
+  'Nog {n} te doen voordat je kunt versturen:':
+      'Még {n} teendő van, mielőtt küldhetne:',
+  'klaar': 'kész',
+  '{n} open': '{n} nyitott',
+  'Dit formulier kan niet worden ingevuld.': 'Ez az űrlap nem tölthető ki.',
+  'Naar de bron': 'A forráshoz',
+  'Woorden': 'Szavak',
+  'Tekens': 'Karakterek',
+  'Keuzes': 'Választások',
+  'Rijen': 'Sorok',
+  'Foto’s': 'Fotók',
+  '{eenheid}: {actual} (minimaal {min})':
+      '{eenheid}: {actual} (legalább {min})',
+  '{eenheid}: {actual} (maximaal {max})':
+      '{eenheid}: {actual} (legfeljebb {max})',
+  '{eenheid}: {actual} (minimaal {min}, maximaal {max})':
+      '{eenheid}: {actual} (legalább {min}, legfeljebb {max})',
+  'Invullen': 'Kitöltés',
+  'Er klopt iets niet aan dit formulier. Neem contact op met degene die het heeft gemaakt.':
+      'Valami nincs rendben ezzel az űrlappal. Vegye fel a kapcsolatot azzal, aki készítette.',
+  'Dit veld is verplicht. Vul het in om te kunnen versturen.':
+      'Ez a mező kötelező. Töltse ki, hogy küldeni tudjon.',
+  'Je hebt {actual} woorden geschreven; er zijn er minstens {min} nodig.':
+      '{actual} szót írt; legalább {min} szükséges.',
+  'Je hebt {actual} woorden geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} szót írt; legfeljebb {max} megengedett.',
+  'Je hebt {actual} tekens geschreven; er zijn er minstens {min} nodig.':
+      '{actual} karaktert írt; legalább {min} szükséges.',
+  'Je hebt {actual} tekens geschreven; er mogen er hoogstens {max} zijn.':
+      '{actual} karaktert írt; legfeljebb {max} megengedett.',
+  '“{value}” staat niet in de lijst. Kies een van de opties.':
+      '„{value}” nincs a listán. Válasszon az opciók közül.',
+  '“{value}” is geen getal. Gebruik alleen cijfers, eventueel met een komma of punt voor de decimalen.':
+      '„{value}” nem szám. Csak számjegyeket használjon, szükség esetén vesszővel vagy ponttal a tizedesekhez.',
+  'Deze foto is {actual} pixels breed; hier zijn er {min} gevraagd. Waarschijnlijk is hij kleiner geworden doordat hij via een berichtenapp is verstuurd. Heb je het origineel nog, gebruik dan dat. Zo niet, stuur hem dan toch mee: de organisatie neemt contact met je op.':
+      'Ez a fotó {actual} képpont széles; itt {min} szükséges. Valószínűleg lekicsinyítették, amikor üzenetküldő alkalmazáson keresztül küldték. Ha még megvan az eredeti, azt használja. Ha nem, küldje el így is: a szervező felveszi Önnel a kapcsolatot.',
+  'Deze foto is {actual} MB; het maximum is {max} MB.':
+      'Ez a fotó {actual} MB; a maximum {max} MB.',
+  'De inhoud van dit bestand past niet bij het bestandstype dat erachter staat.':
+      'A fájl tartalma nem egyezik a fájltípusával.',
+  'Dit bestandstype is hier niet toegestaan.':
+      'Ez a fájltípus itt nem engedélyezett.',
+  'Het bestand van deze foto is niet meer te vinden. Voeg de foto opnieuw toe.':
+      'A fotó fájlja már nem található. Adja hozzá újra a fotót.',
+  'Beschrijf in een korte zin wat er op de foto te zien is.':
+      'Írja le egyetlen rövid mondatban, mi látható a fotón.',
+  'Geef aan van wie de foto is.': 'Adja meg, kié a fotó.',
+  'Deze foto is nog niet gecontroleerd. Wacht even of voeg hem opnieuw toe.':
+      'Ezt a fotót még nem ellenőrizték. Várjon egy pillanatot, vagy adja hozzá újra.',
+  'Deze foto is een HEIC-bestand. OciDeck kan dat hier niet controleren of schoonmaken, dus het wordt verstuurd zoals het is. Er kan in staan waar de foto is genomen. Wil je dat niet delen, kies dan in de camera-instellingen “Meest compatibel” of deel de foto als JPEG en voeg hem opnieuw toe.':
+      'Ez a fotó HEIC-fájl. Az OciDeck itt nem tudja ellenőrizni vagy megtisztítani, ezért úgy küldi el, ahogy van. Tartalmazhatja, hol készült a fotó. Ha ezt nem szeretné megosztani, válassza a kamera beállításaiban a „Legkompatibilisebb” lehetőséget, vagy ossza meg a fotót JPEG-ként, és adja hozzá újra.',
+  'Op deze foto staan {actual} gezichten; verwacht werd {expected}. Dit is alleen een herinnering.':
+      'Ezen a fotón {actual} arc látható; {expected} volt várható. Ez csak emlékeztető.',
+  'Zet het vinkje om akkoord te gaan; zonder toestemming kun je niet versturen.':
+      'Jelölje be a négyzetet a hozzájáruláshoz; hozzájárulás nélkül nem küldhet.',
+  'Dit formulier vraagt een nieuwere versie van OciDeck. Werk de app bij om het in te vullen.':
+      'Ehhez az űrlaphoz az OciDeck újabb verziója szükséges. Frissítse az alkalmazást a kitöltéséhez.',
+  'Er is per ongeluk iets in het formulier zelf veranderd. Herstel het formulier; je antwoorden blijven staan.':
+      'Magán az űrlapon véletlenül módosítottak valamit. Állítsa vissza az űrlapot; a válaszai megmaradnak.',
+  'Deze regel lijkt op een besturingscode van het formulier en mag niet in een antwoord staan. Pas hem aan.':
+      'Ez a sor az űrlap vezérlőkódjára hasonlít, és nem szerepelhet válaszban. Módosítsa.',
+  'HTML mag niet in een antwoord. Gebruik gewone tekst en eenvoudige opmaak.':
+      'A HTML nem engedélyezett a válaszban. Használjon egyszerű szöveget és egyszerű formázást.',
+  'Een codeblok is niet afgesloten. Sluit het af met ```.':
+      'Egy kódblokk nincs lezárva. Zárja le ezzel: ```.',
+  'Alleen foto’s die je in dit formulier toevoegt kunnen in een antwoord; een afbeelding van het internet kan niet.':
+      'A válaszban csak az ebben az űrlapban hozzáadott fotók szerepelhetnek; az internetről származó kép nem.',
+  'Alleen links die met https:// beginnen en e-mailadressen mogen in een antwoord.':
+      'A válaszban csak a https://-sel kezdődő hivatkozások és az e-mail-címek engedélyezettek.',
+  'Dit bestand is gemaakt met een andere versie van het formulier (versie {submission}; nu geldt versie {published}). Controleer je antwoorden.':
+      'Ez a fájl az űrlap egy másik verziójával készült ({submission}. verzió; most a(z) {published}. verzió érvényes). Ellenőrizze a válaszait.',
+  'Punt {item}: {bericht}': '{item}. pont: {bericht}',
+  'Het aantal is nu {actual}; het moet tussen {min} en {max} liggen.':
+      'A darabszám most {actual}; {min} és {max} között kell lennie.',
+  'Het aantal is nu {actual}; het mag hoogstens {max} zijn.':
+      'A darabszám most {actual}; legfeljebb {max} lehet.',
+  'Het aantal is nu {actual}; het moet minstens {min} zijn.':
+      'A darabszám most {actual}; legalább {min} kell legyen.',
+  'Het getal moet een veelvoud zijn van {step}.':
+      'A számnak a(z) {step} többszörösének kell lennie.',
+  'Het getal moet tussen {min} en {max} liggen.':
+      'A számnak {min} és {max} között kell lennie.',
+  'Het getal mag hoogstens {max} zijn.': 'A szám legfeljebb {max} lehet.',
+  'Het getal moet minstens {min} zijn.':
+      'A számnak legalább {min} kell lennie.',
+  'De datum moet op of na {min} liggen.':
+      'A dátumnak {min} vagy későbbinek kell lennie.',
+  'De datum moet op of vóór {max} liggen.':
+      'A dátumnak {max} vagy korábbinak kell lennie.',
+  '“{value}” is geen datum. Schrijf de datum als jaar-maand-dag, bijvoorbeeld 2026-11-01.':
+      '„{value}” nem dátum. A dátumot év-hónap-nap formában írja, például 2026-11-01.',
+  'Dit is geen geldig e-mailadres.': 'Ez nem érvényes e-mail-cím.',
+  'Dit is geen geldig webadres. Begin met https://.':
+      'Ez nem érvényes webcím. Kezdje így: https://.',
+  'Dit is geen geldig telefoonnummer.': 'Ez nem érvényes telefonszám.',
+  'Dit is geen geldige Nederlandse postcode, zoals 1234 AB.':
+      'Ez nem érvényes holland irányítószám, például 1234 AB.',
+  'Hier past één regel. Haal de regeleinden weg.':
+      'Ide csak egy sor fér. Távolítsa el a sortöréseket.',
+  'Gebruik alleen de keuzevakjes van deze vraag: één vakje per optie.':
+      'Csak a kérdés jelölőnégyzeteit használja: opciónként egy négyzetet.',
+  'Schrijf elk punt op een eigen regel, met een streepje of een nummer ervoor.':
+      'Minden pontot külön sorba írjon, elöl kötőjellel vagy számmal.',
+  'De tabel klopt niet meer: laat de kopregel zoals hij was en geef elke rij evenveel kolommen.':
+      'A táblázat már nem helyes: hagyja a fejlécsort úgy, ahogy volt, és minden sorban ugyanannyi oszlop legyen.',
+  'Dezelfde foto staat hier twee keer.': 'Ugyanaz a fotó kétszer szerepel itt.',
+  'In dit veld horen alleen foto’s, geen losse tekst.':
+      'Ebbe a mezőbe csak fotók valók, önálló szöveg nem.',
+  'Het vakje voor je toestemming is beschadigd. Herstel het formulier.':
+      'A hozzájárulásának négyzete megsérült. Állítsa vissza az űrlapot.',
+  'Dit antwoord heeft niet de vorm die bij deze vraag hoort.':
+      'Ez a válasz nem olyan alakú, mint amilyen ehhez a kérdéshez tartozik.',
   'Downloaden…': 'Letöltés…',
   'Afbeelding opgeslagen als': 'Kép elmentve mint',
   '{naam}: ingesteld': '{naam}: beállítva',
