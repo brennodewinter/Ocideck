@@ -43,6 +43,7 @@ export 'src/form_validator.dart';
 export 'src/form_words.dart';
 export 'src/intake_bodies.dart';
 export 'src/intake_protocol.dart';
+export 'src/intake_receipt.dart';
 export 'src/intake_request.dart';
 export 'src/intake_routes.dart';
 export 'src/rules_version.dart';
