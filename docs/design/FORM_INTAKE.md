@@ -1982,8 +1982,9 @@ and the web respondent.
 **signed organiser requests** (`intake_protocol.dart`, `intake_request.dart`, tested against
 `test/fixtures/intake_protocol_vectors.json`). The bodies and routes followed (`intake_bodies.dart`, `intake_routes.dart`). **The respondent's first step is in the app:**
 *Open invitation…* (`IntakeClient.openInvitation`, `PinnedIntakeHttp`) fetches and verifies a form from an invitation link.
-Sending, the outbox, the organiser's side of the server, the server itself and the web respondent are not built; the server
-still waits for a named maintainer (D3), and the owner chose to build the client first (2026-10-03).
+**Sending is in too** (`IntakeClient.submit`, *Send…*, the receipt). The outbox, withdrawing, the organiser's side of the
+server, the server itself and the web respondent are not built; the server still waits for a named maintainer (D3), and the
+owner chose to build the client first (2026-10-03).
 
 *New (app, `lib/`):*
 `lib/utils/form_block_embed_syntax.dart`; `lib/services/form/` — image probe/strip
